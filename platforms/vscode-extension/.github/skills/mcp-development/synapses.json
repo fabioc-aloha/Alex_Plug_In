@@ -1,7 +1,6 @@
 {
   "skill": "mcp-development",
   "version": "1.1.0",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/ai-agent-design/SKILL.md",

@@ -3,7 +3,6 @@
   "schemaVersion": "2.0.0",
   "skillId": "socratic-questioning",
   "version": "1.1.0",
-  "inheritance": "inheritable",
   "created": "2026-02-01",
   "description": "Guide thinking, help users discover answers themselves",
   "connections": [

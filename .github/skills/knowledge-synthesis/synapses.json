@@ -1,6 +1,5 @@
 {
   "skill": "knowledge-synthesis",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/meditation/SKILL.md",

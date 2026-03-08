@@ -3,7 +3,6 @@
   "schemaVersion": "1.0",
   "skill": "persona-detection",
   "version": "1.0.0",
-  "inheritance": "heir:vscode",
   "connections": [
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",

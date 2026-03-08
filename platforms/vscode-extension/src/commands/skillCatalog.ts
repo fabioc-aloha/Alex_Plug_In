@@ -23,7 +23,6 @@ interface SkillInfo {
 interface SynapsesJson {
     skillId?: string;
     skill?: string;
-    inheritance?: string;
     temporary?: boolean;
     removeAfter?: string;
     connections?: Record<string, { weight?: number; relationship?: string; bidirectional?: boolean; weak?: boolean }> | Connection[];
@@ -45,6 +44,20 @@ const CATEGORIES: Record<string, { emoji: string; skills: string[] }> = {
 
 // Staleness-prone skills
 const STALE_PRONE = ['vscode-extension-patterns', 'chat-participant-patterns', 'm365-agent-debugging', 'teams-app-patterns', 'llm-model-selection', 'git-workflow', 'privacy-responsible-ai', 'microsoft-sfi'];
+
+// Centralized exclusions — mirrors SKILL_EXCLUSIONS in sync-architecture.cjs
+const SKILL_EXCLUSIONS: Record<string, string> = {
+    'heir-sync-management': 'master-only',
+    'm365-agent-debugging': 'heir:m365',
+    'teams-app-patterns': 'heir:m365',
+    'azure-devops-automation': 'heir:vscode',
+    'chat-participant-patterns': 'heir:vscode',
+    'vscode-configuration-validation': 'heir:vscode',
+    'vscode-extension-patterns': 'heir:vscode',
+    'azure-architecture-patterns': 'heir:vscode',
+    'enterprise-integration': 'heir:vscode',
+    'persona-detection': 'heir:vscode',
+};
 
 /**
  * Generate a skill catalog with network diagram
@@ -121,7 +134,7 @@ async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
             
             skills.push({
                 name: folder,
-                inheritance: synapses.inheritance || 'inheritable',
+                inheritance: SKILL_EXCLUSIONS[folder] || 'inheritable',
                 temporary: synapses.temporary || false,
                 removeAfter: synapses.removeAfter,
                 connectionCount: connections.length,

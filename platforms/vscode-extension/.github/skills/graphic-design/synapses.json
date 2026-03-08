@@ -55,7 +55,6 @@
       "bidirectional": true
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "design",
     "visual",

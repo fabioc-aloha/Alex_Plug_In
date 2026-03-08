@@ -1,7 +1,6 @@
 {
   "skill": "architecture-audit",
   "version": "1.0.0",
-  "inheritance": "inheritable",
   "description": "Comprehensive project consistency review across code, documentation, diagrams, and configuration",
   "triggers": [
     "audit",

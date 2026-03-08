@@ -1,6 +1,5 @@
 {
   "skill": "vscode-environment",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/project-scaffolding/SKILL.md",

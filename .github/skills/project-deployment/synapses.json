@@ -1,6 +1,5 @@
 {
   "skill": "project-deployment",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/git-workflow/SKILL.md",

@@ -4,7 +4,6 @@
   "skillId": "fabric-notebook-publish",
   "version": "2.1.0",
   "lastUpdated": "2026-02-06",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/git-workflow/SKILL.md",

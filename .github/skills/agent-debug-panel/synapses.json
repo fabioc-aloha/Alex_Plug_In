@@ -1,56 +1,55 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "skillId": "agent-debug-panel",
-    "version": "1.0.0",
-    "lastValidated": "2026-03-04",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/root-cause-analysis/SKILL.md",
-            "type": "uses",
-            "strength": 0.75,
-            "reason": "Debug panel provides evidence for systematic root cause analysis"
-        },
-        {
-            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-            "type": "complements",
-            "strength": 0.80,
-            "reason": "Extension development frequently needs debug panel for skill/hook troubleshooting"
-        },
-        {
-            "target": ".github/skills/debugging-patterns/SKILL.md",
-            "type": "extends",
-            "strength": 0.70,
-            "reason": "Specialized debugging for agent/skill/hook loading"
-        },
-        {
-            "target": ".github/instructions/vscode-configuration-validation.instructions.md",
-            "type": "uses",
-            "strength": 0.75,
-            "reason": "Settings checklist is prerequisite for debug panel effectiveness"
-        }
-    ],
-    "activationPatterns": [
-        "debug panel",
-        "agent debug",
-        "skill not loading",
-        "instruction not working",
-        "hook not firing",
-        "agent not appearing",
-        "why didn't my skill",
-        "why didn't my instruction",
-        "system prompt assembly",
-        "tool call trace",
-        "Developer: Open Agent Debug Panel"
-    ],
-    "triggers": [
-        "debug panel",
-        "skill loading",
-        "hook debug",
-        "instruction matching",
-        "agent routing",
-        "system prompt",
-        "tool trace"
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "skillId": "agent-debug-panel",
+  "version": "1.0.0",
+  "lastValidated": "2026-03-04",
+  "connections": [
+    {
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "type": "uses",
+      "strength": 0.75,
+      "reason": "Debug panel provides evidence for systematic root cause analysis"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "reason": "Extension development frequently needs debug panel for skill/hook troubleshooting"
+    },
+    {
+      "target": ".github/skills/debugging-patterns/SKILL.md",
+      "type": "extends",
+      "strength": 0.7,
+      "reason": "Specialized debugging for agent/skill/hook loading"
+    },
+    {
+      "target": ".github/instructions/vscode-configuration-validation.instructions.md",
+      "type": "uses",
+      "strength": 0.75,
+      "reason": "Settings checklist is prerequisite for debug panel effectiveness"
+    }
+  ],
+  "activationPatterns": [
+    "debug panel",
+    "agent debug",
+    "skill not loading",
+    "instruction not working",
+    "hook not firing",
+    "agent not appearing",
+    "why didn't my skill",
+    "why didn't my instruction",
+    "system prompt assembly",
+    "tool call trace",
+    "Developer: Open Agent Debug Panel"
+  ],
+  "triggers": [
+    "debug panel",
+    "skill loading",
+    "hook debug",
+    "instruction matching",
+    "agent routing",
+    "system prompt",
+    "tool trace"
+  ]
 }

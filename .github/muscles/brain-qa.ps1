@@ -208,23 +208,23 @@ if (1 -in $runPhases) {
 }
 
 # ============================================================
-# PHASE 2: Inheritance Field Validation
+# PHASE 2: Inheritance Centralization Check
 # ============================================================
 if (2 -in $runPhases) {
-    Write-Phase 2 "Inheritance Field Validation"
-    $missing = @()
+    Write-Phase 2 "Inheritance Centralization Check"
+    $stale = @()
     Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
         $synapse = Join-Path $_.FullName "synapses.json"
         if (Test-Path $synapse) {
             $json = Get-Content $synapse -Raw | ConvertFrom-Json
-            if (-not $json.inheritance) { $missing += $_.Name }
+            if ($json.PSObject.Properties['inheritance']) { $stale += $_.Name }
         }
     }
-    if ($missing.Count -eq 0) { 
-        Write-Pass "All skills have inheritance field" 
+    if ($stale.Count -eq 0) { 
+        Write-Pass "No skills have stale inheritance field (centralized in sync-architecture.cjs)" 
     }
     else { 
-        Write-Fail "Missing inheritance: $($missing -join ', ')"
+        Write-Fail "Stale inheritance field in synapses.json (should be removed): $($stale -join ', ')"
     }
 }
 
@@ -1472,13 +1472,15 @@ if (33 -in $runPhases) {
     }
     
     # 5. Master-only files should not be referenced by inheritable skills
+    # Inheritance is centralized in sync-architecture.cjs SKILL_EXCLUSIONS
+    $exclusions = @('heir-sync-management', 'm365-agent-debugging', 'teams-app-patterns', 'azure-devops-automation', 'chat-participant-patterns', 'vscode-configuration-validation', 'vscode-extension-patterns', 'azure-architecture-patterns', 'enterprise-integration', 'persona-detection')
     $contaminated = @()
     Get-ChildItem "$ghPath\skills" -Directory | ForEach-Object {
         $synPath = Join-Path $_.FullName "synapses.json"
         if (Test-Path $synPath) {
             $syn = Get-Content $synPath -Raw | ConvertFrom-Json
-            # Only check inheritable skills
-            if ($syn.inheritance -in @('inheritable', 'universal')) {
+            # Only check inheritable skills (those NOT in the exclusion list)
+            if ($_.Name -notin $exclusions) {
                 foreach ($conn in $syn.connections) {
                     $target = $conn.target
                     # Check for master-only paths

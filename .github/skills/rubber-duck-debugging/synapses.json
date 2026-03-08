@@ -3,7 +3,6 @@
   "schemaVersion": "2.0.0",
   "skillId": "rubber-duck-debugging",
   "version": "1.1.0",
-  "inheritance": "inheritable",
   "created": "2026-02-01",
   "description": "Be a thinking partner, help users debug through explanation",
   "connections": [

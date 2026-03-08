@@ -1,7 +1,6 @@
 {
   "skill": "ai-agent-design",
   "version": "1.1.0",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",

@@ -39,7 +39,6 @@
       "target": ".github/skills/incident-response/SKILL.md"
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "project",
     "timeline",

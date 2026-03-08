@@ -35,7 +35,6 @@
     "generate catalog",
     "/skills"
   ],
-  "inheritance": "inheritable",
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0"
 }

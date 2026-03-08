@@ -1,6 +1,5 @@
 {
   "skill": "work-life-balance",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/cognitive-load/SKILL.md",

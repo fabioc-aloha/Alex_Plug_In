@@ -1,6 +1,5 @@
 {
   "skill": "bootstrap-learning",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",

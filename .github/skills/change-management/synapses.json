@@ -33,7 +33,6 @@
       "target": ".github/skills/cognitive-load/SKILL.md"
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "change",
     "adoption",

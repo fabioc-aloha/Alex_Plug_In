@@ -158,7 +158,7 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 | Issue                    | Fix                                                        |
 | ------------------------ | ---------------------------------------------------------- |
 | Broken synapse target    | Update path in synapses.json                               |
-| Missing inheritance      | Add `"inheritance": "inheritable"` to synapses.json        |
+| Missing from heir        | Check `SKILL_EXCLUSIONS` in sync-architecture.cjs          |
 | Out of sync              | Run with `-Fix` or use `build-extension-package.ps1`       |
 | Boilerplate description  | Write meaningful description in SKILL.md frontmatter       |
 | Master-only leak         | Remove protected files from heir                           |
@@ -239,7 +239,7 @@ After running the script, Alex should check:
 | Version drift | package.json ≠ copilot-instructions.md | Sync via release-preflight |
 | Terminology drift | Old terms in active files | Grep + replace |
 | Count drift | Hardcoded numbers stale | Replace with references |
-| Inheritance drift | Catalog vs synapses.json mismatch | Trust synapses.json |
+| Inheritance drift | Catalog vs sync exclusions mismatch | Trust SKILL_EXCLUSIONS in sync-architecture.cjs |
 
 ### Health Report Template
 

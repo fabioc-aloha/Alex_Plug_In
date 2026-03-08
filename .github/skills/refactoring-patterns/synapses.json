@@ -1,6 +1,5 @@
 {
   "skill": "refactoring-patterns",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/testing-strategies/SKILL.md",

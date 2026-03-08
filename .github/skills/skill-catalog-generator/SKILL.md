@@ -81,7 +81,7 @@ This skill enables Alex to:
 interface SkillInfo {
   name: string;
   category: string;
-  inheritance: 'inheritable' | 'master-only' | 'heir:vscode' | 'heir:m365' | 'user';
+  inheritance: 'inheritable' | 'master-only' | 'heir:vscode' | 'heir:m365' | 'user'; // From SKILL_EXCLUSIONS in sync-architecture.cjs (default: inheritable)
   purpose: string;
   hasSynapses: boolean;
   connectionCount: number;
@@ -111,7 +111,7 @@ async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
     skills.push({
       name: folder,
       category: extractCategory(content),
-      inheritance: extractInheritance(content, synapses),
+      inheritance: extractInheritance(content, folder), // From SKILL_EXCLUSIONS map, not synapses.json
       purpose: extractPurpose(content),
       hasSynapses: !!synapses,
       connectionCount: synapses ? Object.keys(synapses.connections || {}).length : 0,

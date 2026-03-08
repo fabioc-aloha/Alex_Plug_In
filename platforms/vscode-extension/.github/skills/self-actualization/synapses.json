@@ -1,6 +1,5 @@
 {
   "skill": "self-actualization",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/brain-qa/SKILL.md",

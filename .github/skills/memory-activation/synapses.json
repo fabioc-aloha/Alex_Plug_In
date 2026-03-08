@@ -1,7 +1,6 @@
 {
   "skill": "memory-activation",
   "version": "1.0.0",
-  "inheritance": "inheritable",
   "description": "Auto-triggering metacognitive skill for capability discovery before response formation",
   "category": "cognitive",
   "autoTrigger": true,
@@ -22,7 +21,7 @@
     {
       "target": ".github/copilot-instructions.md",
       "type": "referenced-by",
-      "strength": 1.0,
+      "strength": 1,
       "when": "self-correction protocol triggers",
       "yields": "Pointer to this file for action-keyword index lookup"
     },

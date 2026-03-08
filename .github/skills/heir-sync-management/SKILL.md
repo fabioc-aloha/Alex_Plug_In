@@ -13,23 +13,23 @@ metadata:
 
 ## Core Principle
 
-**The `inheritance` field in each skill's `synapses.json` determines whether it ships to heirs.**
+**Inheritance is centralized in `sync-architecture.cjs` via the `SKILL_EXCLUSIONS` map.**
 
-No hardcoded lists. No manual tracking. The brain knows what belongs where.
+All skills are inheritable by default. Only exceptions are listed in the exclusion map.
 
 ---
 
 ## Inheritance Model
 
-Each skill's `synapses.json` has an `inheritance` field with one of these values:
+The `SKILL_EXCLUSIONS` map in `.github/muscles/sync-architecture.cjs` lists skills that are NOT synced to all heirs:
 
-| Value | Meaning |
-|-------|---------|
-| `inheritable` | Ships to ALL heirs |
+| Exclusion Value | Meaning |
+|-----------------|----------|
 | `master-only` | Stays in Master Alex only |
-| `universal` | Ships everywhere (core infrastructure) |
-| `heir:vscode` | VS Code extension heir only |
-| `heir:m365` | M365 Copilot heir only |
+| `heir:vscode` | VS Code extension heir only (not synced to that heir) |
+| `heir:m365` | M365 Copilot heir only (not synced to that heir) |
+
+All other skills are inheritable by default — no per-skill annotation needed.
 
 ---
 
@@ -234,7 +234,7 @@ Run these validations before every release:
 |-------|--------|---------------|
 | Skill count match | Count Master inheritable vs Heir skills | Mismatch |
 | File hash comparison | SHA256 of synced files | Divergence without override |
-| Inheritance field validation | All skills have `inheritance` in synapses | Missing field |
+| Exclusion map validation | `SKILL_EXCLUSIONS` in sync-architecture.cjs is accurate | Stale entries |
 | Orphan reference detection | Grep for files referenced but not present | Broken references |
 | Config drift | Compare heir config against Master template | Unexpected values |
 
@@ -371,11 +371,11 @@ The release script must enforce sync before packaging:
 
 | Scenario | Action |
 |----------|--------|
-| New skill created | Set `inheritance` in synapses.json (default: `inheritable`) |
-| Skill becomes Master-specific | Change to `master-only` |
-| Skill should be heir-specific | Change to `heir:vscode` or `heir:m365` |
-| Heirs missing a skill they need | Verify `inheritance` is not `master-only` |
-| Heirs behaving differently | Check if cognitive skills have correct inheritance |
+| New skill created | No action needed — inheritable by default |
+| Skill becomes Master-specific | Add to `SKILL_EXCLUSIONS` in sync-architecture.cjs as `master-only` |
+| Skill should be heir-specific | Add to `SKILL_EXCLUSIONS` as `heir:vscode` or `heir:m365` |
+| Heirs missing a skill they need | Check `SKILL_EXCLUSIONS` for accidental exclusion |
+| Heirs behaving differently | Review `SKILL_EXCLUSIONS` map in sync-architecture.cjs |
 
 ---
 

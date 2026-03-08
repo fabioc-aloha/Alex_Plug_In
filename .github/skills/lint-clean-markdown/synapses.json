@@ -1,6 +1,5 @@
 {
   "skill": "lint-clean-markdown",
-  "inheritance": "inheritable",
   "description": "Write markdown that passes linting on first attempt",
   "connections": [
     {

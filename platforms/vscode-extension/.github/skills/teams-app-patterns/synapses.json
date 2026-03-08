@@ -1,6 +1,5 @@
 {
   "skill": "teams-app-patterns",
-  "inheritance": "heir:m365",
   "connections": [
     {
       "target": ".github/skills/m365-agent-debugging/SKILL.md",

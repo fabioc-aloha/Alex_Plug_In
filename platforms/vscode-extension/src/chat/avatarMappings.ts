@@ -720,10 +720,13 @@ export function getAvatarAssetRelativePath(result: AvatarResult, extension: stri
         let svgPath: string | undefined;
         if (result.source === 'state' || result.source === 'skill-state') {
             svgPath = ROCKET_STATE_SVGS[key];
+            console.log(`[Alex][SVG Debug] State lookup: ${key} → ${svgPath || 'not found'}`);
         } else if (result.source === 'agent') {
             svgPath = ROCKET_AGENT_SVGS[key];
+            console.log(`[Alex][SVG Debug] Agent lookup: ${key} → ${svgPath || 'not found'}`);
         } else if (result.source === 'persona' || result.source === 'skill-persona') {
             svgPath = ROCKET_PERSONA_SVGS[key];
+            console.log(`[Alex][SVG Debug] Persona lookup: ${key} → ${svgPath || 'not found'}`);
         }
         if (svgPath) {
             return `avatars/${svgPath}.svg`;

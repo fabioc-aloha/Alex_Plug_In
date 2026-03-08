@@ -1,6 +1,5 @@
 {
   "skill": "global-knowledge",
-  "inheritance": "inheritable",
   "externalRepository": "fabioc-aloha/Alex-Global-Knowledge",
   "connections": [
     {

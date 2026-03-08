@@ -4,7 +4,7 @@
 **Date**: March 5, 2026
 **Purpose**: Review and approve the active Command Center UI artifacts before implementation
 **Scope**: Active v2 tab mockups and their implementation-readiness notes
-**Status**: Mockups approved; artifact review in progress
+**Status**: Mockups approved — execution decisions in [COMMAND-CENTER-MASTER-PLAN-2026-03-05.md](COMMAND-CENTER-MASTER-PLAN-2026-03-05.md)
 
 ---
 

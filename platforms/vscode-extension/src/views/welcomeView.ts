@@ -26,6 +26,9 @@ import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedba
 import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
 import {
   Nudge,
+  MindTabData,
+  AgentInfo,
+  SkillInfo,
   getLoadingHtml,
   getErrorHtml,
   getWelcomeHtmlContent,
@@ -229,6 +232,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           this.setCognitiveState('meditation');
           vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
           break;
+        case "openSkill": {
+          const skillId = message.skill || "";
+          const skillDisplayName = message.skillName || skillId;
+          console.log('[Alex] Opening skill:', { skillId, skillDisplayName });
+          const skillPrompt = `I'd like to use the ${skillDisplayName} skill. Read the skill and help me with it.`;
+          await openChatPanel(skillPrompt);
+          break;
+        }
         case "tabSwitch":
           // Spike 1B: Track active tab (no-op beyond logging for now)
           console.log(`[Alex][TAB SPIKE] Tab switched to: ${message.tabId}`);
@@ -389,6 +400,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         workspaceName,
       );
 
+      // Collect tab data — agents/skills first so Mind can reuse counts
+      const agents = this._collectAgents(wsRoot);
+      const skills = this._collectSkills(wsRoot);
+      const mindData = await this._collectMindData(wsRoot, lastDreamDate, health, agents.length, skills.length);
+
+      console.log(`[Alex][WelcomeView] Tab data: agents=${agents.length}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
+
       this._view.webview.html = getWelcomeHtmlContent(
         this._view.webview,
         health,
@@ -405,12 +423,141 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         this._cognitiveState,
         workspaceName,
         skillRecommendations,
+        mindData,
+        agents,
+        skills,
       );
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
       console.error("[Alex][WelcomeView] Error stack:", err instanceof Error ? err.stack : String(err));
       this._view.webview.html = getErrorHtml(err);
     }
+  }
+
+  /**
+   * Collect Mind tab data from workspace.
+   * Accepts pre-collected agent/skill counts to avoid redundant disk reads.
+   */
+  private async _collectMindData(wsRoot: string | undefined, lastDreamDate: Date | null, health: HealthCheckResult, agentCount: number, skillCount: number): Promise<MindTabData> {
+    const data: MindTabData = {
+      skillCount,
+      instructionCount: 0,
+      promptCount: 0,
+      agentCount,
+      episodicCount: 0,
+      synapseHealthPct: health.totalSynapses > 0 ? Math.round(((health.totalSynapses - health.brokenSynapses) / health.totalSynapses) * 100) : 0,
+      lastDreamDate: lastDreamDate ? lastDreamDate.toISOString().slice(0, 10) : null,
+      lastMeditationDate: null,
+      cognitiveAge: 26,
+    };
+
+    if (!wsRoot) { return data; }
+
+    const githubPath = path.join(wsRoot, '.github');
+    try {
+      // Only count modalities not already provided
+      const instDir = path.join(githubPath, 'instructions');
+      if (fs.existsSync(instDir)) {
+        data.instructionCount = fs.readdirSync(instDir).filter(f => f.endsWith('.instructions.md')).length;
+      }
+      const promptDir = path.join(githubPath, 'prompts');
+      if (fs.existsSync(promptDir)) {
+        data.promptCount = fs.readdirSync(promptDir).filter(f => f.endsWith('.prompt.md')).length;
+      }
+      const episodicDir = path.join(githubPath, 'episodic');
+      if (fs.existsSync(episodicDir)) {
+        const episodicFiles = fs.readdirSync(episodicDir).filter(f => f.endsWith('.md'));
+        data.episodicCount = episodicFiles.length;
+        // Find last meditation date from episodic
+        const medFiles = episodicFiles
+          .filter(f => f.startsWith('meditation-'))
+          .sort().reverse();
+        if (medFiles.length > 0) {
+          const match = medFiles[0].match(/meditation-(\d{4}-\d{2}-\d{2})/);
+          if (match) {
+            data.lastMeditationDate = match[1];
+          }
+        }
+      }
+    } catch (err) {
+      console.error("[Alex][WelcomeView] _collectMindData failed (non-fatal):", err);
+    }
+    return data;
+  }
+
+  /**
+   * Collect agent registry info from disk
+   */
+  private _collectAgents(wsRoot: string | undefined): AgentInfo[] {
+    const agents: AgentInfo[] = [
+      { id: 'alex', name: 'Alex', icon: '🧠', description: 'Orchestrator — routes to specialists', role: 'orchestrator', installed: false },
+      { id: 'researcher', name: 'Researcher', icon: '🔬', description: 'Deep domain research and knowledge discovery', role: 'specialist', installed: false },
+      { id: 'builder', name: 'Builder', icon: '🔨', description: 'Constructive implementation with optimistic problem-solving', role: 'specialist', installed: false },
+      { id: 'validator', name: 'Validator', icon: '🛡️', description: 'Adversarial quality assurance with skeptical analysis', role: 'specialist', installed: false },
+      { id: 'documentarian', name: 'Documentarian', icon: '📝', description: 'Documentation accuracy and drift prevention', role: 'specialist', installed: false },
+      { id: 'azure', name: 'Azure', icon: '☁️', description: 'Azure development guidance with MCP tools', role: 'specialist', installed: false },
+      { id: 'm365', name: 'M365', icon: '📊', description: 'Microsoft 365 and Teams development', role: 'specialist', installed: false },
+    ];
+
+    // Check which agents exist on disk
+    if (wsRoot) {
+      const agentDir = path.join(wsRoot, '.github', 'agents');
+      if (fs.existsSync(agentDir)) {
+        const diskAgents = new Set(fs.readdirSync(agentDir).filter(f => f.endsWith('.agent.md')).map(f => f.replace('alex-', '').replace('.agent.md', '')));
+        // Also check for the main alex.agent.md
+        if (fs.existsSync(path.join(agentDir, 'alex.agent.md'))) {
+          diskAgents.add('alex');
+        }
+        for (const agent of agents) {
+          agent.installed = diskAgents.has(agent.id);
+        }
+      }
+    }
+    return agents;
+  }
+
+  /**
+   * Collect installed skill summaries
+   */
+  private _collectSkills(wsRoot: string | undefined): SkillInfo[] {
+    const skills: SkillInfo[] = [];
+    if (!wsRoot) { return skills; }
+
+    const skillsDir = path.join(wsRoot, '.github', 'skills');
+    if (!fs.existsSync(skillsDir)) { return skills; }
+
+    try {
+      const dirs = fs.readdirSync(skillsDir).filter(d => {
+        const fullPath = path.join(skillsDir, d);
+        return fs.statSync(fullPath).isDirectory() && fs.existsSync(path.join(fullPath, 'SKILL.md'));
+      });
+
+      for (const dir of dirs) {
+        const synapsePath = path.join(skillsDir, dir, 'synapses.json');
+        let description = '';
+        let category = 'general';
+
+        // Read description from synapses.json if available
+        if (fs.existsSync(synapsePath)) {
+          try {
+            const synapses = JSON.parse(fs.readFileSync(synapsePath, 'utf8'));
+            description = synapses.description || '';
+            category = synapses.category || 'general';
+          } catch { /* skip */ }
+        }
+
+        skills.push({
+          id: dir,
+          displayName: dir.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+          description,
+          category,
+          hasSynapses: fs.existsSync(synapsePath),
+        });
+      }
+    } catch (err) {
+      console.error("[Alex][WelcomeView] _collectSkills failed (non-fatal):", err);
+    }
+    return skills.sort((a, b) => a.displayName.localeCompare(b.displayName));
   }
 
   /**

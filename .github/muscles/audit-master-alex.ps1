@@ -101,11 +101,20 @@ if (2 -in $runSections) {
 # === SECTION 3: Skill Inheritance ===
 if (3 -in $runSections) {
     Write-Section 3 "Skill Inheritance"
-    $inheritance = Get-ChildItem ".github/skills/*/synapses.json" | ForEach-Object {
-        $s = Get-Content $_ | ConvertFrom-Json
-        [PSCustomObject]@{Skill = $_.Directory.Name; Inheritance = $s.inheritance }
-    } | Group-Object Inheritance
-    $inheritance | ForEach-Object { Write-Host "  $($_.Name): $($_.Count)" }
+    # Inheritance is now centralized in sync-architecture.cjs SKILL_EXCLUSIONS map.
+    # Read the sync script to extract the map, then compare against disk.
+    $syncScript = Get-Content ".github/muscles/sync-architecture.cjs" -Raw
+    $totalSkills = (Get-ChildItem ".github/skills" -Directory).Count
+    if ($syncScript -match 'SKILL_EXCLUSIONS') {
+        # Count exclusion entries from the script
+        $exclusionLines = ($syncScript | Select-String "'[a-z-]+':" -AllMatches).Matches.Count
+        Write-Host "  Total skills: $totalSkills"
+        Write-Host "  Exclusions in SKILL_EXCLUSIONS: $exclusionLines"
+        Write-Host "  Inheritable (default): $($totalSkills - $exclusionLines)"
+    }
+    else {
+        Write-Host "  ⚠️ SKILL_EXCLUSIONS not found in sync-architecture.cjs" -ForegroundColor Yellow
+    }
     Write-Host "✅ Inheritance checked" -ForegroundColor Green
 }
 

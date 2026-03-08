@@ -1,6 +1,5 @@
 {
   "skill": "m365-agent-debugging",
-  "inheritance": "heir:m365",
   "connections": [
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",

@@ -1,6 +1,5 @@
 {
   "skill": "markdown-mermaid",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/academic-research/SKILL.md",

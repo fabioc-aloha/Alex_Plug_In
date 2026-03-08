@@ -38,7 +38,6 @@
       "target": ".github/skills/academic-research/SKILL.md"
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "requirements",
     "stakeholder",

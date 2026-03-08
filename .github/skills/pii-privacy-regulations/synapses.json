@@ -1,6 +1,5 @@
 {
   "skill": "pii-privacy-regulations",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",

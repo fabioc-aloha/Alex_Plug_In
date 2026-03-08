@@ -1,6 +1,5 @@
 {
   "skill": "ascii-art-alignment",
-  "inheritance": "inheritable",
   "description": "Create perfectly aligned ASCII diagrams",
   "connections": [
     {

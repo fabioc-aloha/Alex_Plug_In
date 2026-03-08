@@ -12,6 +12,24 @@ const STALE_PRONE = [
   'privacy-responsible-ai', 'microsoft-sfi'
 ];
 
+// Centralized exclusions — mirrors SKILL_EXCLUSIONS in sync-architecture.cjs
+const SKILL_EXCLUSIONS = {
+  'heir-sync-management': 'master-only',
+  'm365-agent-debugging': 'heir:m365',
+  'teams-app-patterns': 'heir:m365',
+  'azure-devops-automation': 'heir:vscode',
+  'chat-participant-patterns': 'heir:vscode',
+  'vscode-configuration-validation': 'heir:vscode',
+  'vscode-extension-patterns': 'heir:vscode',
+  'azure-architecture-patterns': 'heir:vscode',
+  'enterprise-integration': 'heir:vscode',
+  'persona-detection': 'heir:vscode',
+};
+
+function getInheritance(skillName) {
+  return SKILL_EXCLUSIONS[skillName] || 'inheritable';
+}
+
 function toAbbrev(name) {
   return name.split('-').map(w => (w[0] || '').toUpperCase()).join('');
 }
@@ -36,7 +54,7 @@ for (const folder of fs.readdirSync(skillsPath).sort()) {
     }
     skills.push({
       name: folder,
-      inheritance: s.inheritance || 'inheritable',
+      inheritance: getInheritance(folder),
       temporary: s.temporary || false,
       removeAfter: s.removeAfter,
       connectionCount: conns.length,

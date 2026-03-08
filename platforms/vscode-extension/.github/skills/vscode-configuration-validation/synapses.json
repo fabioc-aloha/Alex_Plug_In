@@ -3,7 +3,6 @@
   "schemaVersion": "2.0.0",
   "skillId": "vscode-configuration-validation",
   "version": "1.0.0",
-  "inheritance": "heir:vscode",
   "triggers": {
     "problemContext": [
       "VS Code extension configuration errors",

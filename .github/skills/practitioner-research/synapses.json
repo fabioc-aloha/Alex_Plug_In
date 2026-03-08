@@ -51,7 +51,6 @@
       "reason": "Global insights become research evidence"
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "research",
     "methodology",

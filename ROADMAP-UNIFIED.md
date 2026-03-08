@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 5, 2026
+**Last Updated**: March 7, 2026
 
 ---
 
@@ -52,14 +52,22 @@ Four platforms. Focused, not scattered.
 
 **Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Tests and refactoring — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-05): Trust scored 5/10. 6 test files for 42K lines of code. 73 NASA R4 violations (functions >60 lines). 37/130 trifectas complete. Quality enforced via hooks + manual compile. This release closes the test and refactoring gaps.
+**North Star Assessment** (2026-03-07): Trust scored 5/10. 6 test files for 48K lines of code. 73 NASA R4 violations (functions >60 lines). 37/120 trifectas complete (31%). Architecture cleaned: 11 skills consolidated, 96+ stale refs fixed, brain-qa 35/35 phases passing. Command Center Waves 0–5 shipped (39/53 steps). This release closes the test, refactoring, and UI consolidation gaps.
 
 ### Core Trust Foundation
 
 | Task | Effort | Description |
 | --- | :---: | --- |
 | **Test the core services** | 3w | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files |
-| **Break down the monoliths** | 3w | 62% reduction achieved on original 6 monoliths. Remaining: extension.ts (1,292), globalKnowledge.ts (916) + globalKnowledgeOps.ts (1,234) + globalKnowledgeContent.ts (982), participant.ts (973), welcomeView.ts (517) + welcomeViewHtml.ts (1,448), personaDetection.ts (1,062), tools.ts decomposed ✅. **New monoliths discovered**: contextMenu.ts (1,278), upgrade.ts (1,209), pptxGenerator.ts (1,035), commandsPresentation.ts (1,024). **73 functions >60 lines**: 11 critical (>200L), 22 major (100–200L), 40 minor (61–100L). Top offenders: `registerPresentationCommands` (1,148L), `activateInternal` (1,069L), `registerDeveloperCommands` (963L). See [alex_docs/audits/MONOLITH-ASSESSMENT.md](alex_docs/audits/MONOLITH-ASSESSMENT.md) |
+| **Break down the monoliths** | 3w | 95 TS files, 48K lines. **1 file >1,500 lines**: welcomeViewHtml.ts (1,830 — Command Center refactor in progress). **13 files >1K lines**: contextMenu.ts (1,431), extension.ts (1,397), upgrade.ts (1,389), globalKnowledgeOps.ts (1,346), globalKnowledgeContent.ts (1,213), commandsPresentation.ts (1,159), pptxGenerator.ts (1,144), setupEnvironment.ts (1,107), personaDetection.ts (1,105), workflowHandlers.ts (1,082), participant.ts (1,060), healthDashboard.ts (1,008). tools.ts decomposed ✅. **73 functions >60 lines**: 11 critical (>200L), 22 major (100–200L), 40 minor (61–100L). See [alex_docs/audits/MONOLITH-ASSESSMENT.md](alex_docs/audits/MONOLITH-ASSESSMENT.md) |
+
+### Command Center (Active)
+
+| Task | Effort | Description |
+| --- | :---: | --- |
+| **Command Center — Waves 0–5** | — | ✅ Done. 5-tab sidebar shell (Mission Ctrl \| Agents \| Skill Store \| Mind \| Docs), full Docs tab, Mission Command dashboard, controlled consolidation. 39/53 steps complete. See [COMMAND-CENTER-MASTER-PLAN](alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md) |
+| **Command Center — Wave 6 (Advanced Tabs)** | 2w | Agents status contract, Skill Store catalog model, Mind tab runtime model. Blocked on runtime data contracts |
+| **SVG avatar spike gates** | 2h | 3 manual vsix test gates from Wave 1 still outstanding (ChatParticipant SVG, webview SVG, strategy decision) |
 
 ### VS Code Platform Polish
 
@@ -80,10 +88,11 @@ Four platforms. Focused, not scattered.
 
 ### Definition of Done (v6.5.0)
 
-1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
+1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files (currently 6 test files)
 2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file (currently 73 violations)
-3. **No source file >1,500 lines** — 8 files currently exceed this (8 files >1K lines including new splits)
-4. **North Star Trust score ≥7/10** — re-assessed at ship time
+3. **No source file >1,500 lines** — 1 file exceeds this (welcomeViewHtml.ts 1,830 — Command Center refactor in progress). 13 files >1K lines
+4. **Command Center Waves 0–6 complete** — all tabs functional with real data contracts
+5. **North Star Trust score ≥7/10** — re-assessed at ship time
 
 > **Principle**: Don't add features. Prove the existing ones deserve trust.
 
@@ -97,7 +106,7 @@ Four platforms. Focused, not scattered.
 | --- | :---: | --- |
 | Agentic browser testing | 1w | Enable `workbench.browser.enableChatTools` for agent-driven browser verification |
 | Office Add-in Phase 2 | 2w | Word templates, Excel trackers, PowerPoint gen |
-| Cognitive Dashboard | 3d | Full unified webview — synapse health renderer is first tile |
+| Cognitive Dashboard | 3d | Full unified webview — synapse health renderer is first tile. *(Partially addressed by Command Center Mind tab — Wave 6)* |
 | Academic paper finalization | 2d | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
 
 ### Conditional (Trigger-Dependent)
@@ -196,22 +205,29 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | -------------------------- | ---------------------------------------------- |
 | **Current Master Version** | 6.2.0                                          |
 | **Current Heirs**          | VS Code (6.2.0), M365 (6.2.0), Plugin (6.2.0) |
+| **Architecture**           | 120 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
+| **Codebase**               | 95 TS files, 48K lines, 6 test files           |
+| **Command Center**         | Waves 0–5 complete (39/53 steps), Wave 6 pending |
 | **Next Target**            | v6.5.0 — The Trust Release                     |
-| **Updated**                | 2026-03-05                                     |
+| **Updated**                | 2026-03-07                                     |
 
 ---
 
 ## 📖 Appendix: Completed Versions
 
-### Current State Summary (v6.2.0)
+### Current State Summary (v6.2.0+)
 
 Alex now has:
-- **130 Skills** (127 inheritable to heirs, fully synced)
+- **120 Skills** (consolidated from 130 — 11 merged, 96+ stale refs cleaned, brain-qa 35/35 passing)
 - **37 Complete Trifectas** — comprehensive domain coverage including north-star and flux-brand-finetune
+- **64 Instructions** — auto-loaded rules across all domains
+- **45 Prompts** — user-invoked `/` commands (4 redundant removed during consolidation)
+- **7 Agents** — specialist modes for Builder, Researcher, Validator, Documentarian, Azure, M365
 - **90 Registered Commands** — full command surface including 10 v6.0.0 partnership commands
 - **3 Platform Heirs** — VS Code Extension, M365 Copilot Agent, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
+- **Command Center** — 5-tab sidebar (Mission Ctrl, Agents, Skill Store, Mind, Docs) with Waves 0–5 complete
+- **95 TypeScript source files** — 48K lines across the VS Code extension
 - **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces
-- **Agent Plugin** — 85 plugin-ready skills, 7 agents, 22 instructions, 11 prompts
 - **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall
 - **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring across 500 records
 - **Autonomous Task Detection** — 30-minute interval surveying stalled work and TODO hotspots
@@ -225,6 +241,16 @@ Alex now has:
 - **The Forgetting Curve** — usage-weighted knowledge decay
 - **Copilot Memory** — cross-session context persistence
 - **Avatar State System** — 9 cognitive states + 6 agent modes
+
+### Post-v6.2.0 — In-Progress Work (March 5–7, 2026)
+
+| Task | Description |
+| --- | --- |
+| Command Center Waves 0–5 | 5-tab sidebar: Mission Ctrl, Agents, Skill Store, Mind, Docs. 39/53 steps complete. Shell, Docs tab, Mission Command dashboard all functional. Wave 6 (Advanced Tabs) deferred pending runtime contracts |
+| Skill consolidation | 11 skills merged into 7 targets (130→120). 4 redundant prompts removed. 96+ stale refs fixed across synapses, instructions, prompts, muscles, templates |
+| Icon design system | Phase 0A: 90 SVG icon options generated via Recraft v4 SVG. Rocket-character system (33 final SVGs across 4 categories) |
+| Brain QA clean | 35/35 phases passing, 0 issues after consolidation + meditation pass |
+| Codex competitive analysis | Market positioning research vs OpenAI Codex for Command Center differentiation |
 
 ### v6.2.0 — On-Brand Partnership Release (Shipped 2026-03-05)
 

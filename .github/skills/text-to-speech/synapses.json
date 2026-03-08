@@ -4,7 +4,6 @@
   "skillId": "text-to-speech",
   "version": "2.5.0",
   "lastUpdated": "2026-02-09",
-  "inheritance": "inheritable",
   "promotionReady": true,
   "promotionNotes": "v2.5.0: speakPrompt command, voice mode summarization, keyboard shortcuts, CSP-compliant webview, 35 unit tests",
   "connections": [

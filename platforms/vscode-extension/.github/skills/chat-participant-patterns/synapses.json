@@ -1,6 +1,5 @@
 {
   "skill": "chat-participant-patterns",
-  "inheritance": "heir:vscode",
   "connections": [
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",

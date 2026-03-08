@@ -1,7 +1,6 @@
 {
   "skill": "gamma-presentations",
   "version": "1.0.0",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",

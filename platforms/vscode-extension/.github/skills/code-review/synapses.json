@@ -1,6 +1,5 @@
 {
   "skill": "code-review",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/testing-strategies/SKILL.md",

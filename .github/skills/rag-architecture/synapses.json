@@ -1,6 +1,5 @@
 {
   "skill": "rag-architecture",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",

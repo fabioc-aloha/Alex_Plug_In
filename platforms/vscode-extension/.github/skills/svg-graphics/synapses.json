@@ -1,6 +1,5 @@
 {
   "skill": "svg-graphics",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/project-scaffolding/SKILL.md",

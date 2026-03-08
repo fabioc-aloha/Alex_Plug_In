@@ -803,10 +803,10 @@
     ],
     "chatSkills": [
       {
-        "path": "./.github/skills/academic-paper-drafting/SKILL.md"
+        "path": "./.github/skills/academic-research/SKILL.md"
       },
       {
-        "path": "./.github/skills/academic-research/SKILL.md"
+        "path": "./.github/skills/agent-debug-panel/SKILL.md"
       },
       {
         "path": "./.github/skills/ai-agent-design/SKILL.md"
@@ -818,13 +818,16 @@
         "path": "./.github/skills/ai-generated-readme-banners/SKILL.md"
       },
       {
+        "path": "./.github/skills/ai-writing-avoidance/SKILL.md"
+      },
+      {
         "path": "./.github/skills/airs-appropriate-reliance/SKILL.md"
       },
       {
-        "path": "./.github/skills/airs-integration/SKILL.md"
+        "path": "./.github/skills/alex-effort-estimation/SKILL.md"
       },
       {
-        "path": "./.github/skills/alex-effort-estimation/SKILL.md"
+        "path": "./.github/skills/anti-hallucination/SKILL.md"
       },
       {
         "path": "./.github/skills/api-design/SKILL.md"
@@ -839,13 +842,13 @@
         "path": "./.github/skills/architecture-audit/SKILL.md"
       },
       {
-        "path": "./.github/skills/architecture-health/SKILL.md"
-      },
-      {
         "path": "./.github/skills/architecture-refinement/SKILL.md"
       },
       {
         "path": "./.github/skills/ascii-art-alignment/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/awareness/SKILL.md"
       },
       {
         "path": "./.github/skills/azure-architecture-patterns/SKILL.md"
@@ -893,7 +896,13 @@
         "path": "./.github/skills/code-review/SKILL.md"
       },
       {
+        "path": "./.github/skills/cognitive-load/SKILL.md"
+      },
+      {
         "path": "./.github/skills/cognitive-symbiosis/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/correax-brand/SKILL.md"
       },
       {
         "path": "./.github/skills/creative-writing/SKILL.md"
@@ -917,9 +926,6 @@
         "path": "./.github/skills/distribution-security/SKILL.md"
       },
       {
-        "path": "./.github/skills/doc-hygiene/SKILL.md"
-      },
-      {
         "path": "./.github/skills/documentation-quality-assurance/SKILL.md"
       },
       {
@@ -941,7 +947,13 @@
         "path": "./.github/skills/fabric-notebook-publish/SKILL.md"
       },
       {
+        "path": "./.github/skills/flux-brand-finetune/SKILL.md"
+      },
+      {
         "path": "./.github/skills/foundry-agent-platform/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/frustration-recognition/SKILL.md"
       },
       {
         "path": "./.github/skills/gamma-presentations/SKILL.md"
@@ -951,9 +963,6 @@
       },
       {
         "path": "./.github/skills/global-knowledge/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/global-knowledge-sync/SKILL.md"
       },
       {
         "path": "./.github/skills/grant-writing/SKILL.md"
@@ -1007,7 +1016,7 @@
         "path": "./.github/skills/meditation/SKILL.md"
       },
       {
-        "path": "./.github/skills/meditation-facilitation/SKILL.md"
+        "path": "./.github/skills/memory-activation/SKILL.md"
       },
       {
         "path": "./.github/skills/microsoft-fabric/SKILL.md"
@@ -1020,6 +1029,9 @@
       },
       {
         "path": "./.github/skills/muscle-memory-recognition/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/north-star/SKILL.md"
       },
       {
         "path": "./.github/skills/observability-monitoring/SKILL.md"
@@ -1047,6 +1059,9 @@
       },
       {
         "path": "./.github/skills/privacy-responsible-ai/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/proactive-assistance/SKILL.md"
       },
       {
         "path": "./.github/skills/project-deployment/SKILL.md"
@@ -1121,6 +1136,9 @@
         "path": "./.github/skills/teams-app-patterns/SKILL.md"
       },
       {
+        "path": "./.github/skills/terminal-image-rendering/SKILL.md"
+      },
+      {
         "path": "./.github/skills/testing-strategies/SKILL.md"
       },
       {
@@ -1128,6 +1146,9 @@
       },
       {
         "path": "./.github/skills/ui-ux-design/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/visual-memory/SKILL.md"
       },
       {
         "path": "./.github/skills/vscode-configuration-validation/SKILL.md"
@@ -1140,9 +1161,6 @@
       },
       {
         "path": "./.github/skills/work-life-balance/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/writing-publication/SKILL.md"
       }
     ],
     "configuration": {

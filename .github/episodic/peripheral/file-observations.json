@@ -4,38 +4,23 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/ALEX-INTEGRATION.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "alex_docs/research/CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
-    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
+    "github/config/user-profile.json",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/audits/COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md",
     "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md",
-    "alex_docs/research/mockups/command-center-home.svg",
-    "alex_docs/research/mockups/command-center-more.svg",
-    "alex_docs/research/mockups/command-center-skills.svg",
-    "alex_docs/research/mockups/command-center-status.svg"
+    "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/src/chat/avatarMappings.ts",
+    "platforms/vscode-extension/src/commands/skillCatalog.ts",
+    "platforms/vscode-extension/src/commands/upgrade.ts",
+    "platforms/vscode-extension/src/views/welcomeView.ts"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.2.0.vsix",
-      "todoCount": 16,
-      "scannedAt": 1772919315362
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1772919315362
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1772919315362
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1772919315362
+      "scannedAt": 1772942657124
     }
   ],
-  "lastUpdated": 1772919315362
+  "lastUpdated": 1772942657124
 }

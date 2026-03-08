@@ -3,7 +3,6 @@
   "schemaVersion": "2.0.0",
   "skillId": "anti-hallucination",
   "version": "1.1.0",
-  "inheritance": "inheritable",
   "connections": [
     {
       "id": "confidence-calibration",

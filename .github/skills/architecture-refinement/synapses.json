@@ -1,6 +1,5 @@
 {
   "skill": "architecture-refinement",
-  "inheritance": "inheritable",
   "description": "Meta-skill for maintaining and evolving Alex's cognitive architecture",
   "connections": [
     {

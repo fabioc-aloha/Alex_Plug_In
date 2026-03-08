@@ -4,7 +4,6 @@
   "skillId": "root-cause-analysis",
   "version": "1.1.0",
   "lastValidated": "2026-02-14",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
@@ -27,7 +26,7 @@
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "informs",
-      "strength": 0.70,
+      "strength": 0.7,
       "reason": "Systematic debugging techniques for production build issues"
     }
   ],

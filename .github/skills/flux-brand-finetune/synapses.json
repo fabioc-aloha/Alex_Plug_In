@@ -1,95 +1,94 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "skill": "flux-brand-finetune",
-    "version": "1.0.0",
-    "lastValidated": "2026-03-05",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/image-handling/SKILL.md",
-            "type": "extends",
-            "strength": 0.95,
-            "when": "using trained LoRA weights with Flux Schnell/Dev/Pro for image generation",
-            "yields": "Model selection guide, LoRA support patterns, aspect ratio reference",
-            "note": "Fine-tuned LoRA plugs into existing Flux model generation pipeline"
-        },
-        {
-            "target": ".github/skills/visual-memory/SKILL.md",
-            "type": "consumes",
-            "strength": 0.85,
-            "when": "extracting reference photos from visual-memory.json as training data",
-            "yields": "Base64 image extraction, subject photo inventory",
-            "note": "Visual memory photos can bootstrap LoRA training data"
-        },
-        {
-            "target": ".github/skills/ai-character-reference-generation/SKILL.md",
-            "type": "complements",
-            "strength": 0.9,
-            "when": "generating character reference sets with trained LoRA instead of reference images",
-            "yields": "Scenario templates, prompt engineering patterns, batch generation workflow",
-            "note": "LoRA replaces reference-image approach for high-volume character generation"
-        },
-        {
-            "target": ".github/skills/brand-asset-management/SKILL.md",
-            "type": "supports",
-            "strength": 0.8,
-            "when": "generating brand-consistent imagery across marketing, docs, presentations",
-            "yields": "Brand hierarchy, visual identity guidelines, asset deployment patterns",
-            "note": "Trained LoRA enforces brand visual identity automatically"
-        },
-        {
-            "target": ".github/skills/character-aging-progression/SKILL.md",
-            "type": "complements",
-            "strength": 0.7,
-            "when": "using age-specific LoRAs or combining LoRA with age progression prompts",
-            "yields": "Life-stage accuracy, age prompt patterns"
-        },
-        {
-            "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
-            "type": "supports",
-            "strength": 0.75,
-            "when": "generating banners featuring the brand character with LoRA consistency",
-            "yields": "Banner composition, ultra-wide ratios, typography integration"
-        },
-        {
-            "target": ".github/skills/distribution-security/SKILL.md",
-            "type": "requires",
-            "strength": 0.8,
-            "when": "training data contains photos of real people — PII considerations",
-            "yields": "Private model settings, data handling, secrets management"
-        },
-        {
-            "target": ".github/skills/secrets-management/SKILL.md",
-            "type": "requires",
-            "strength": 0.75,
-            "when": "storing REPLICATE_API_TOKEN for training and inference API calls",
-            "yields": "VS Code SecretStorage API, .env detection patterns"
-        }
-    ],
-    "activationBoost": [
-        "flux fine-tune",
-        "flux finetune",
-        "lora training",
-        "train lora",
-        "custom lora",
-        "brand fine-tune",
-        "brand finetune",
-        "train image model",
-        "fine-tune image",
-        "custom image model",
-        "trigger word",
-        "consistent brand imagery",
-        "train flux",
-        "flux brand",
-        "replicate training"
-    ],
-    "apiKeys": [
-        {
-            "envVar": "REPLICATE_API_TOKEN",
-            "purpose": "Creates and monitors FLUX LoRA trainings, runs inference on trained models",
-            "required": true,
-            "getUrl": "https://replicate.com/account/api-tokens"
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "skill": "flux-brand-finetune",
+  "version": "1.0.0",
+  "lastValidated": "2026-03-05",
+  "connections": [
+    {
+      "target": ".github/skills/image-handling/SKILL.md",
+      "type": "extends",
+      "strength": 0.95,
+      "when": "using trained LoRA weights with Flux Schnell/Dev/Pro for image generation",
+      "yields": "Model selection guide, LoRA support patterns, aspect ratio reference",
+      "note": "Fine-tuned LoRA plugs into existing Flux model generation pipeline"
+    },
+    {
+      "target": ".github/skills/visual-memory/SKILL.md",
+      "type": "consumes",
+      "strength": 0.85,
+      "when": "extracting reference photos from visual-memory.json as training data",
+      "yields": "Base64 image extraction, subject photo inventory",
+      "note": "Visual memory photos can bootstrap LoRA training data"
+    },
+    {
+      "target": ".github/skills/ai-character-reference-generation/SKILL.md",
+      "type": "complements",
+      "strength": 0.9,
+      "when": "generating character reference sets with trained LoRA instead of reference images",
+      "yields": "Scenario templates, prompt engineering patterns, batch generation workflow",
+      "note": "LoRA replaces reference-image approach for high-volume character generation"
+    },
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "supports",
+      "strength": 0.8,
+      "when": "generating brand-consistent imagery across marketing, docs, presentations",
+      "yields": "Brand hierarchy, visual identity guidelines, asset deployment patterns",
+      "note": "Trained LoRA enforces brand visual identity automatically"
+    },
+    {
+      "target": ".github/skills/character-aging-progression/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "when": "using age-specific LoRAs or combining LoRA with age progression prompts",
+      "yields": "Life-stage accuracy, age prompt patterns"
+    },
+    {
+      "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
+      "type": "supports",
+      "strength": 0.75,
+      "when": "generating banners featuring the brand character with LoRA consistency",
+      "yields": "Banner composition, ultra-wide ratios, typography integration"
+    },
+    {
+      "target": ".github/skills/distribution-security/SKILL.md",
+      "type": "requires",
+      "strength": 0.8,
+      "when": "training data contains photos of real people — PII considerations",
+      "yields": "Private model settings, data handling, secrets management"
+    },
+    {
+      "target": ".github/skills/secrets-management/SKILL.md",
+      "type": "requires",
+      "strength": 0.75,
+      "when": "storing REPLICATE_API_TOKEN for training and inference API calls",
+      "yields": "VS Code SecretStorage API, .env detection patterns"
+    }
+  ],
+  "activationBoost": [
+    "flux fine-tune",
+    "flux finetune",
+    "lora training",
+    "train lora",
+    "custom lora",
+    "brand fine-tune",
+    "brand finetune",
+    "train image model",
+    "fine-tune image",
+    "custom image model",
+    "trigger word",
+    "consistent brand imagery",
+    "train flux",
+    "flux brand",
+    "replicate training"
+  ],
+  "apiKeys": [
+    {
+      "envVar": "REPLICATE_API_TOKEN",
+      "purpose": "Creates and monitors FLUX LoRA trainings, runs inference on trained models",
+      "required": true,
+      "getUrl": "https://replicate.com/account/api-tokens"
+    }
+  ]
 }

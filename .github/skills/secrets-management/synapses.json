@@ -4,7 +4,6 @@
   "skill": "secrets-management",
   "version": "1.2.0",
   "lastValidated": "2026-02-20",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",

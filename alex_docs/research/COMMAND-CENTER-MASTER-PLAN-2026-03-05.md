@@ -1,56 +1,92 @@
 # Command Center Master Plan
 
-**Author**: Alex Finch + GitHub Copilot (GPT-5.4 second-opinion synthesis)
+**Author**: Alex Finch + GitHub Copilot
 **Created**: March 5, 2026
-**Revised**: March 7, 2026 — Waves 0–5 complete
+**Revised**: March 7, 2026 — Consolidated as single self-contained execution doc
 **Classification**: Internal — UI-first implementation plan
 **Status**: Waves 0–5 ✔️ · Wave 6 (Advanced Tabs) deferred until runtime contracts defined
-**Based on**:
-- [COMMAND-CENTER-FEASIBILITY-2026-03-05.md](COMMAND-CENTER-FEASIBILITY-2026-03-05.md)
-- [COMMAND-CENTER-DESIGN-PRINCIPLES.md](COMMAND-CENTER-DESIGN-PRINCIPLES.md)
-- [CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md](CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md)
-- [COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md](../audits/COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md)
+
+> **This is the single source of truth for Command Center work.** All context from the feasibility study, design principles, competitive analysis, and second-opinion audit has been consolidated here. Background research docs are archived for reference only.
+
+### Background Docs (archived — do not use as active checklists)
+
+| Document | Role | Location |
+|----------|------|----------|
+| Feasibility Study | Original vision, tab architecture, UI direction | [COMMAND-CENTER-FEASIBILITY-2026-03-05.md](COMMAND-CENTER-FEASIBILITY-2026-03-05.md) |
+| Design Principles | 9 guiding principles for UX decisions | [COMMAND-CENTER-DESIGN-PRINCIPLES.md](COMMAND-CENTER-DESIGN-PRINCIPLES.md) |
+| Codex Competitive Analysis | Market validation, standalone UI assessment | [CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md](CODEX-COMPETITIVE-ANALYSIS-2026-03-05.md) |
+| Second-Opinion Audit | GPT-5.4 code-to-doc fact check, risk findings | [COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md](../audits/COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md) |
+| UI Artifact Approval | Mockup approval sheet with thumbnails | [COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md](COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md) |
 
 ---
 
 ## Purpose
 
-This document replaces the feasibility plan as the **execution guide** for the Command Center.
+The Command Center is a **staged UI refactor** of the welcome view sidebar into a 5-tab operational surface.
 
-The feasibility plan established the vision, tab architecture, and UI direction. The second-opinion audit found that the implementation sequence needed tightening: too many assumptions were embedded into early phases, and too much behind-the-scenes work was being treated as presentation-only.
+### Execution Strategy
 
-This master plan keeps the approved UI direction but changes the execution strategy:
+1. **UI first** — visible structure before advanced telemetry
+2. **Prove critical assumptions early** — spikes before architecture
+3. **Preserve existing runtime behavior** — no speculative cleanup
+4. **Separate visual from data-contract work** — classify every element
+5. **Ship useful slices** — don't attempt total consolidation in one pass
 
-1. **UI first**
-2. **Prove critical assumptions early**
-3. **Preserve existing runtime behavior until replacements are real**
-4. **Separate visual work from new telemetry/data-contract work**
-5. **Ship a useful Command Center slice before attempting total consolidation**
+### Strategic Validation
+
+OpenAI Codex (Windows app launched March 5, 2026) validates Alex's architectural vision — skills, agents, personality, background work, cognitive states are exactly the playbook a $157B company is now executing. The Command Center is Alex's answer: a single unified sidebar surface that no other AI assistant offers, with the **Mind tab as the key differentiator** ("the tab no other AI has").
 
 ---
 
 ## Executive Decision
 
-The Command Center will be built as a **staged UI refactor**, not as a single full replacement of the existing sidebar stack.
+The Command Center is a **staged UI refactor**, not a single full replacement.
 
 ### What changes from the feasibility plan
 
-- The first implementation milestone is **not** a full gut-and-replace.
-- SVG avatar migration is treated as a **blocking technical spike**, not an assumed foundation.
-- The first real milestone focuses on **Mission Command + Docs** because they are highest value and lowest architectural risk.
-- The Agents, Skill Store, and Mind tabs remain part of the design target, but their richer behavior is deferred until their data contracts are explicit.
-- The Docs tab is framed as **the bridge to LearnAlex as a companion surface**, using curated AlexLearn alignment rather than a full mirror of the website.
+- First milestone is **not** a gut-and-replace — it's a proof-of-capability slice
+- SVG avatar migration is a **blocking technical spike**, not an assumed foundation
+- First real milestone: **Mission Command + Docs** (highest value, lowest risk)
+- Agents, Skill Store, Mind tabs deferred until data contracts are explicit
+- Docs tab: **curated AlexLearn alignment**, not a full website mirror
 
-### What stays the same
+### Final Tab Architecture
 
-- Final tab architecture remains:
-  - Mission Command
-  - Agents
-  - Skill Store
-  - Mind
-  - Docs
-- The design system, approved mockups, and icon workflow remain valid. Icons now use the rocket-character system (33 final SVGs).
-- The long-term goal remains a single Command Center sidebar surface.
+| # | Tab | Purpose | Wave |
+|---|-----|---------|------|
+| 1 | **Mission Command** | Operational dashboard — status, commands, nudges, settings | Wave 4 ✅ |
+| 2 | **Agents** | Agent management — state, registry, threads | Wave 6 (deferred) |
+| 3 | **Skill Store** | Skill catalog — browse, toggle, search | Wave 6 (deferred) |
+| 4 | **Mind** | Cognitive introspection — health, memory, age, uncertainty | Wave 6 (deferred) |
+| 5 | **Docs** | Documentation hub + LearnAlex bridge | Wave 3 ✅ |
+
+### Design Principles (consolidated from design doc)
+
+1. **Scarcity Forces Clarity** — 300px sidebar is an advantage. Every element justifies its space. No decorative-only elements on Mission Command.
+2. **Data Layer Leads** — Prefer existing data first, surface derived data carefully, never present new telemetry until its contract is explicit.
+3. **Mind Tab = Differentiator** — The tab no other AI has: brain health, 5 memory modalities, cognitive age, honest uncertainty. Trust through transparency.
+4. **State Over Identity** — Avatar shows *what Alex is doing*, not what Alex looks like. Color/shape encode cognitive state first, persona second.
+5. **Progressive Disclosure** — Skills: name → body → resources. Navigation: tab → sidebar → full panel. Actions: Quick → Agents → palette.
+6. **Context-Adaptive** — Quick Actions change when persona/cognitive state changes. Static equals stale.
+7. **Keyboard-First** — Arrow keys between tabs, focus trap within active content, all actions reachable by keyboard.
+8. **Empty States Are Coaching** — "Ready when you are" language, single action CTA, designed for first use.
+9. **Recently Used Is Foundation** — Usage tracking enables adaptive Quick Actions, recent threads, usage analytics. Implement before features that depend on it.
+
+### Audit-Driven Guardrails (from second-opinion audit)
+
+These were identified by the GPT-5.4 code-to-doc fact check and are now embedded in the execution plan:
+
+| # | Guardrail | Applied In |
+|---|-----------|------------|
+| G1 | Build proof-of-capability slice before gut-and-replace | Wave 2–4 sequence |
+| G2 | SVG avatar is a hard go/no-go spike, not an assumption | Spike 1A |
+| G3 | Use current implementation model for Mind tab first — don't force richer conceptual model | Contract C scope |
+| G4 | Use built-in `getState()/setState()` before `globalState` | Wave 2 implementation |
+| G5 | Docs tab is curated alignment, not full site mirror | Wave 3 scope |
+| G6 | Classify every card as existing/derived/new — defer new | Wave 4 data classification |
+| G7 | Don't remove views before replacements are running | Wave 5 gating |
+| G8 | Agent status, context budget, five-modality mind are hypotheses until contracts defined | Wave 6 gating |
+| G9 | Narrow first milestone, validate layout/density/ergonomics before expanding | Waves 2–4 before 6 |
 
 ---
 
@@ -202,25 +238,30 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 
 ## Validated Baseline
 
-These facts are treated as fixed planning inputs because they were verified against the current repo and AlexLearn source.
+These facts are verified against the current repo (March 7, 2026) and treated as fixed planning inputs.
 
-### Extension baseline
+### Extension Baseline
 
 | Fact | Verified Value |
 |------|----------------|
-| Sidebar views currently registered | 3 |
-| `welcomeView.ts` line count | 588 (was 571 at plan start) |
-| `welcomeViewHtml.ts` line count | 1830 (was 1488 at plan start) |
-| `avatarMappings.ts` line count | 748 (was 612 at plan start; in `src/chat/`) |
-| `memoryTreeProvider.ts` line count | 319 |
-| `cognitiveDashboard.ts` line count | 621 |
-| Avatar asset files | 145 (was 112; +33 rocket SVGs) |
-| Avatar asset size | ~26.7 MB |
-| Welcome view currently uses retained context | Yes |
+| Sidebar views registered | 3: `alex.welcomeView`, `alex.cognitiveDashboard`, `alex.memoryTree` |
+| `welcomeView.ts` | 588 lines |
+| `welcomeViewHtml.ts` | 1,830 lines (Command Center shell + tabs implemented) |
+| `avatarMappings.ts` | 748 lines (SVG format parameter added in Spike 1A) |
+| `memoryTreeProvider.ts` | 319 lines |
+| `cognitiveDashboard.ts` | 621 lines |
+| `participant.ts` | 1,060 lines |
+| `healthDashboard.ts` | 1,008 lines |
+| Avatar asset files | 145 (112 PNG/WebP + 33 rocket SVGs) |
+| Welcome view uses retained context | Yes (`retainContextWhenHidden: true`) |
 | Chat participant avatar path | SVG-first (rocket-icons) with PNG fallback |
 | Extension compile state | Clean |
+| Total TS source files | 95 |
+| Total lines of code | 48K |
+| Skills | 120 (consolidated from 130) |
+| Trifectas | 37 complete |
 
-### AlexLearn baseline
+### AlexLearn Baseline
 
 | Fact | Verified Value |
 |------|----------------|
@@ -228,7 +269,7 @@ These facts are treated as fixed planning inputs because they were verified agai
 | Workshop guide source path | `website/src/content/workshops/` |
 | Self-study page exists | Yes |
 | Exercises page exists | Yes |
-| Facilitator materials exist | Yes |
+| Facilitator materials exist | Yes (Session Plan, Slides, Demo Scripts, Handout, Pre-Read, GitHub Guide) |
 
 ---
 
@@ -262,9 +303,9 @@ All files under `alex_docs/research/mockups/`. Only v2 mockups are active design
 
 | View ID | Type | State | File |
 |---------|------|-------|------|
-| `alex.welcomeView` | webview | Active | `welcomeView.ts` (571 lines) + `welcomeViewHtml.ts` (1488 lines) |
-| `alex.cognitiveDashboard` | webview | Collapsed | `cognitiveDashboard.ts` (621 lines) |
-| `alex.memoryTree` | tree | Collapsed | `memoryTreeProvider.ts` (319 lines) |
+| `alex.welcomeView` | webview | Active — **is now the Command Center** (5-tab shell) | `welcomeView.ts` (588) + `welcomeViewHtml.ts` (1,830) |
+| `alex.cognitiveDashboard` | webview | Collapsed — editor-panel dashboard | `cognitiveDashboard.ts` (621) |
+| `alex.memoryTree` | tree | Collapsed — tree view | `memoryTreeProvider.ts` (319) |
 
 All registered under `alex-sidebar` container in `package.json`.
 
@@ -345,13 +386,15 @@ The Docs tab links into these LearnAlex companion paths:
 
 ## Planning Principles
 
-1. **UI first means UI first.** Early waves focus on visible structure, navigation, and content hierarchy. Do not block UI progress on advanced telemetry or dynamic status systems.
+> Design principles are in the [Executive Decision](#executive-decision) section. These are execution rules.
 
-2. **Preserve working runtime paths until replacements exist.** The current welcome view, PNG avatar path, and 3 sidebar registrations coexist with new work until replacements are proven. No speculative cleanup.
+1. **UI first means UI first.** Early waves focus on visible structure. Do not block UI on advanced telemetry.
 
-3. **Resolve blocking spikes before they become architecture.** The SVG chat avatar path is a real unknown (Spike 1A). It must be proven before the plan assumes it.
+2. **Preserve working runtime paths.** Current welcome view, PNG avatar path, and 3 sidebar registrations coexist until replacements are proven. No speculative cleanup. (Guardrail G7)
 
-4. **Classify every data source.** Every proposed UI element must be tagged:
+3. **Resolve blocking spikes.** SVG chat avatar is a real unknown. Prove before assuming. (Guardrail G2)
+
+4. **Classify every data source.** (Guardrail G6)
 
    | Class | Meaning | Gate |
    |-------|---------|------|
@@ -359,31 +402,34 @@ The Docs tab links into these LearnAlex companion paths:
    | Derived | Computable from current structures with modest glue code | Build when glue is written |
    | New | Requires new instrumentation, tracking, or contracts | Defer until contract documented |
 
-5. **Curate, don't mirror.** The Docs tab surfaces the strongest LearnAlex pathways — not a full website clone.
+5. **Curate, don't mirror.** Docs tab surfaces strongest AlexLearn pathways, not a full clone. (Guardrail G5)
 
 ---
 
 ## Scope Boundary
 
-### In Scope (Waves 0–5)
+### Completed (Waves 0–5)
 
-- Tabbed Command Center shell inside `alex.welcomeView`
-- Mission Command tab with existing runtime data
-- Docs tab with curated AlexLearn alignment
-- Approved rocket-icon system as design input
-- Keyboard-first tab navigation (ARIA tablist pattern)
-- Empty-state design for every tab
-- Migration path from 3 sidebar views → 1 Command Center surface
-- SVG avatar spike and decision
+- ✅ Tabbed Command Center shell inside `alex.welcomeView` (5 tabs, ARIA tablist, keyboard nav)
+- ✅ Mission Command tab with existing runtime data (status, nudges, context, commands, goals)
+- ✅ Docs tab with curated AlexLearn alignment (7 content groups, 33-persona grid)
+- ✅ Empty-state design for Agents, Skill Store, Mind tabs
+- ✅ Tab state persistence via `getState()/setState()`
+- ✅ Per-tab scroll-position restoration
+- ✅ Responsive at 300px sidebar width
+- ✅ Journey audit: Command Center covers all intended user journeys
+- ✅ Both legacy views preserved (cognitiveDashboard + memoryTree)
 
-### Explicitly Deferred (Wave 6+)
+### Remaining (Wave 1 gates + Wave 6)
 
-- Real-time agent state model (Contracts A) — no lifecycle API exists
-- Context-budget percentage bar (Contract B) — `countTokens()` is proposed API
+- 3 manual vsix test gates from Spike 1A/1B outstanding (SVG chat, webview SVG, shell refresh)
+- SVG avatar strategy decision pending spike results
+- Real-time agent state model (Contract A)
+- Context-budget percentage bar (Contract B — `countTokens()` is proposed API)
 - Full five-modality memory model as live UI (Contract C)
-- Full SVG replacement if spike fails
-- Command redirection cleanup before replacement is stable
 - Recently-used adaptive UX (Contract D)
+- Command redirection cleanup (Wave 5.2 — deferred until Mind tab exists)
+- Redundant sidebar view removal (Wave 5.3 — deferred until safe)
 
 ---
 
@@ -876,12 +922,11 @@ Decision needed: workspace-scoped (different projects = different frequent comma
 
 ## Versioning Strategy
 
-| Release | Scope | Gate |
-|---------|-------|------|
-| v6.x patch | Master plan locked, spikes running | Plan approved |
-| v6.x minor | Tab shell + Docs tab + Mission Command tab | Spikes pass, smoke test clean |
-| v6.x minor+1 | Sidebar consolidation (remove 2 redundant views) | Replacement covers all journeys |
-| v7.0 | Agents, Skill Store, Mind with runtime contracts | Contracts B–D documented and implemented |
+| Release | Scope | Status |
+|---------|-------|--------|
+| v6.2.0+ (current) | Waves 0–5: tab shell + Docs + Mission Command + consolidation audit | ✅ In-tree |
+| v6.5.0 (Trust Release) | SVG spike gates + Wave 6 advanced tabs + test/refactoring work | 🎯 Next |
+| v7.0+ | Full sidebar consolidation, remove 2 legacy views, organizational cognition | Backlogged |
 
 Do not tie the full vision to a single major release. Ship useful increments.
 
@@ -891,11 +936,13 @@ Do not tie the full vision to a single major release. Ship useful increments.
 
 The Command Center is a **UI-first, proof-driven evolution** of the welcome view.
 
-**Build now**: Tab shell, Docs tab, Mission Command tab, keyboard-first navigation, empty states, curated AlexLearn integration.
-**Prove first**: SVG chat avatar viability, status badge model, context budget contract, memory-modality mapping.
-**Delay until stable**: Full sidebar consolidation, legacy command redirection, fully dynamic Agents / Skill Store / Mind.
+**Done**: Tab shell, Docs tab, Mission Command tab, keyboard-first navigation, empty states, curated AlexLearn integration, journey audit, scroll restoration. 39/53 steps complete.
 
-The first win is a stable shell plus two genuinely useful tabs, built on existing runtime data.
+**Next**: 3 manual vsix test gates (SVG avatar chat, webview SVG, shell refresh preservation). Then Wave 6 advanced tabs.
+
+**Blocked on**: Runtime data contracts for Agents (A), Context Budget (B), Mind (C), Recently Used (D). These must be documented and implemented before their dependent tabs move beyond placeholders.
+
+**This document is self-contained.** All design principles, audit guardrails, competitive context, baselines, API feasibility, data contracts, and implementation specs are here. No need to reference external docs for day-to-day execution.
 
 ---
 

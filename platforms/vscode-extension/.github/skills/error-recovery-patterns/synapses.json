@@ -1,6 +1,5 @@
 {
   "skill": "error-recovery-patterns",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",

@@ -4,7 +4,6 @@
   "skill": "brand-asset-management",
   "version": "1.0.0",
   "lastValidated": "2026-02-28",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/correax-brand/SKILL.md",

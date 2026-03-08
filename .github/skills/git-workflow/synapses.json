@@ -1,6 +1,5 @@
 {
   "skill": "git-workflow",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/release-preflight/SKILL.md",

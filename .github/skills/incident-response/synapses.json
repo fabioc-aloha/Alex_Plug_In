@@ -1,6 +1,5 @@
 {
   "skill": "incident-response",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",

@@ -3,7 +3,6 @@
     "schemaVersion": "2.0.0",
     "skillId": "skill-name",
     "version": "1.0.0",
-    "inheritance": "inheritable",
     "connections": [
         {
             "id": "connection-id",

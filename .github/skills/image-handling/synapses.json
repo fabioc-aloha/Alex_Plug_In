@@ -1,6 +1,5 @@
 {
   "skill": "image-handling",
-  "inheritance": "inheritable",
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
   "connections": [

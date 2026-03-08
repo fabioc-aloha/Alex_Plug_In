@@ -240,7 +240,7 @@ on:
 |---|---------|----------------|
 | 1 | Version Alignment | package.json ↔ CHANGELOG ↔ copilot-instructions |
 | 2 | Heir Folder Sync | Master → heir file counts |
-| 3 | Skill Inheritance | synapses.json inheritance values |
+| 3 | Skill Inheritance | SKILL_EXCLUSIONS in sync-architecture.cjs |
 | 4 | Safety Imperatives | Kill switch, protection markers |
 | 5 | Build Artifacts | dist/extension.js exists and recent |
 | 6 | Documentation Cross-Refs | Required links between docs |

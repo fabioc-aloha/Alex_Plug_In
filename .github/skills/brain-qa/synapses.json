@@ -1,7 +1,6 @@
 {
   "skill": "brain-qa",
   "version": "1.2.0",
-  "inheritance": "inheritable",
   "lastValidated": "2026-02-15",
   "connections": [
     {

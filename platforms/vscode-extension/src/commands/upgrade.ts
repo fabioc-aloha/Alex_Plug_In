@@ -615,9 +615,9 @@ async function normalizeSynapseFile(synapsePath: string): Promise<boolean> {
       modified = true;
     }
 
-    // 3. Add inheritance if missing
-    if (!json.inheritance) {
-      json.inheritance = 'inheritable';
+    // 3. inheritance field is now centralized in sync-architecture.cjs — remove if present
+    if (json.inheritance) {
+      delete json.inheritance;
       modified = true;
     }
 

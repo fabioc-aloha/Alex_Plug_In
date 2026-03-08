@@ -4,7 +4,6 @@
   "skillId": "microsoft-fabric",
   "version": "1.1.0",
   "lastUpdated": "2026-02-06",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/api-design/SKILL.md",

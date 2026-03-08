@@ -27,6 +27,38 @@ import { SkillRecommendation } from '../chat/skillRecommendations';
 import { getSkillDisplayName } from '../shared/skillConstants';
 import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
 
+/** Data contract for the Mind tab */
+export interface MindTabData {
+  skillCount: number;
+  instructionCount: number;
+  promptCount: number;
+  agentCount: number;
+  episodicCount: number;
+  synapseHealthPct: number;
+  lastDreamDate: string | null;
+  lastMeditationDate: string | null;
+  cognitiveAge: number;
+}
+
+/** Data contract for the Agents tab */
+export interface AgentInfo {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  role: string;
+  installed: boolean;
+}
+
+/** Data contract for the Skill Store tab */
+export interface SkillInfo {
+  id: string;
+  displayName: string;
+  description: string;
+  category: string;
+  hasSynapses: boolean;
+}
+
 /**
  * Resolve a webview-safe URI for an asset in the extension's assets/ folder.
  */
@@ -152,6 +184,9 @@ export function getWelcomeHtmlContent(
   cognitiveState: string | null,
   workspaceName?: string,
   skillRecommendations?: SkillRecommendation[],
+  mindData?: MindTabData,
+  agents?: AgentInfo[],
+  skills?: SkillInfo[],
 ): string {
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, '_getHtmlContent: webview must be defined');
@@ -209,17 +244,18 @@ export function getWelcomeHtmlContent(
   let avatarSvgPath: string | null = null;
   
   if (easterEgg) {
-    // Easter eggs use legacy flat structure (bypass unified resolution)
-    avatarPath = easterEgg.avatarBase;
     avatarSource = 'easter-egg';
-  } else {
-    // Use unified avatar resolution for everything else
+  }
+  
+  // Always use unified avatar resolution (easter eggs only affect the badge overlay)
+  {
     const avatarResult = resolveAvatar(avatarContext);
         avatarPath = getAvatarAssetRelativePath(avatarResult, 'png').replace(/\.png$/, '');
-    avatarSource = avatarResult.source;
+    if (!easterEgg) { avatarSource = avatarResult.source; }
     // Spike 1A: Check for SVG rocket-icon override
     const svgPath = getAvatarAssetRelativePath(avatarResult, 'svg');
     avatarUseSvg = svgPath.includes('rocket-icons');
+    console.log(`[Alex][Avatar Debug] PersonaID: ${avatarContext.personaId}, Source: ${avatarResult.source}, Label: ${avatarResult.label}, SVG: ${svgPath}, UseSVG: ${avatarUseSvg}`);
     if (avatarUseSvg) {
       avatarSvgPath = svgPath.replace(/\.svg$/, '');
     }
@@ -1217,6 +1253,205 @@ export function getWelcomeHtmlContent(
           opacity: 0.7;
           margin-bottom: 6px;
       }
+
+      /* ── Tab Section Title ── */
+      .tab-section-title {
+          font-size: 13px;
+          font-weight: 600;
+          margin: 8px 0 10px;
+      }
+      .tab-footer-hint {
+          font-size: 11px;
+          opacity: 0.5;
+          margin-top: 12px;
+          padding: 8px 0;
+          border-top: 1px solid var(--vscode-panel-border);
+      }
+      .tab-footer-hint code {
+          background: var(--vscode-textCodeBlock-background);
+          padding: 1px 4px;
+          border-radius: 3px;
+          font-size: 11px;
+      }
+
+      /* ── Agents Tab ── */
+      .agent-list {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+      }
+      .agent-card {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 8px 10px;
+      }
+      .agent-card.agent-missing { opacity: 0.5; }
+      .agent-card-header {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          margin-bottom: 4px;
+      }
+      .agent-icon { font-size: 16px; }
+      .agent-name { font-weight: 600; font-size: 12px; flex: 1; }
+      .agent-badge {
+          font-size: 10px;
+          padding: 1px 5px;
+          border-radius: 8px;
+          font-weight: 600;
+      }
+      .badge-ok { background: #2ea04333; color: #3fb950; }
+      .badge-missing { background: #f8514933; color: #f85149; }
+      .agent-role {
+          font-size: 10px;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.6;
+          margin-bottom: 2px;
+      }
+      .agent-desc {
+          font-size: 11px;
+          line-height: 1.4;
+          opacity: 0.8;
+      }
+
+      /* ── Skill Store Tab ── */
+      .skill-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 6px;
+      }
+      .skill-card {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 8px 10px;
+          cursor: pointer;
+          transition: border-color 0.15s;
+      }
+      .skill-card:hover {
+          border-color: var(--persona-accent, #6366f1);
+      }
+      .skill-header {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          margin-bottom: 2px;
+      }
+      .skill-name { font-weight: 600; font-size: 12px; flex: 1; }
+      .skill-synapse-dot { font-size: 10px; opacity: 0.7; }
+      .skill-category {
+          font-size: 10px;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.5;
+          margin-bottom: 2px;
+      }
+      .skill-desc {
+          font-size: 11px;
+          line-height: 1.4;
+          opacity: 0.8;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+      }
+
+      /* ── Mind Tab ── */
+      .mind-stats-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+          margin-bottom: 10px;
+      }
+      .mind-stat-card {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 12px;
+          text-align: center;
+      }
+      .mind-stat-value {
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 1;
+          margin-bottom: 4px;
+      }
+      .mind-stat-label {
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.6;
+      }
+      .stat-good { color: #3fb950; }
+      .stat-warn { color: #d29922; }
+      .stat-bad { color: #f85149; }
+
+      .memory-modality {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 6px;
+      }
+      .modality-label {
+          font-size: 11px;
+          width: 72px;
+          flex-shrink: 0;
+          opacity: 0.8;
+      }
+      .modality-bar {
+          flex: 1;
+          height: 6px;
+          background: var(--vscode-progressBar-background, #333);
+          border-radius: 3px;
+          overflow: hidden;
+      }
+      .modality-fill {
+          height: 100%;
+          background: var(--persona-accent, #6366f1);
+          border-radius: 3px;
+          transition: width 0.3s ease;
+      }
+      .modality-count {
+          font-size: 11px;
+          font-weight: 600;
+          width: 28px;
+          text-align: right;
+          flex-shrink: 0;
+      }
+
+      .mind-maintenance-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px;
+      }
+      .maintenance-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 8px;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: background 0.15s;
+      }
+      .maintenance-item:hover {
+          background: var(--vscode-list-hoverBackground);
+      }
+      .maintenance-icon { font-size: 20px; margin-bottom: 4px; }
+      .maintenance-label {
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.6;
+          margin-bottom: 2px;
+      }
+      .maintenance-value {
+          font-size: 11px;
+          font-weight: 500;
+      }
   </style>
 </head>
 <body>
@@ -1236,7 +1471,7 @@ export function getWelcomeHtmlContent(
       </div>
 
       <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills" tabindex="0" role="button">
-          <img src="${avatarSvgUri || avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" />
+          <img src="${avatarSvgUri || avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" data-fallback="${avatarPngUri}" />
           ${easterEggBadge}
       </div>
 
@@ -1354,31 +1589,121 @@ export function getWelcomeHtmlContent(
 
       </div><!-- /panel-mission -->
 
-      <!-- Tab Panel: Agents (empty state) -->
+      <!-- Tab Panel: Agents -->
       <div class="tab-panel" id="panel-agents" role="tabpanel" aria-labelledby="tab-agents">
-          <div class="empty-state">
-              <div class="empty-state-icon">🤖</div>
-              <div class="empty-state-title">Agents</div>
-              <div class="empty-state-desc">Agent registry, state, and threads will appear here once the runtime contracts are defined.</div>
+          <div class="tab-section-title">Agent Registry</div>
+          <div class="agent-list">
+              ${(agents ?? []).map(a => `
+              <div class="agent-card${!a.installed ? ' agent-missing' : ''}" title="${escapeHtml(a.description)}">
+                  <div class="agent-card-header">
+                      <span class="agent-icon">${escapeHtml(a.icon)}</span>
+                      <span class="agent-name">${escapeHtml(a.name)}</span>
+                      <span class="agent-badge ${a.installed ? 'badge-ok' : 'badge-missing'}">${a.installed ? '✓' : '✗'}</span>
+                  </div>
+                  <div class="agent-role">${escapeHtml(a.role)}</div>
+                  <div class="agent-desc">${escapeHtml(a.description)}</div>
+              </div>`).join('')}
           </div>
+          <div class="tab-footer-hint">Agents are specialist modes — invoke with <code>@alex</code> or via the agent picker.</div>
       </div>
 
-      <!-- Tab Panel: Skill Store (empty state) -->
+      <!-- Tab Panel: Skill Store -->
       <div class="tab-panel" id="panel-skills" role="tabpanel" aria-labelledby="tab-skills">
+          <div class="tab-section-title">Skills (${(skills ?? []).length})</div>
+          ${(skills ?? []).length === 0 ? `
           <div class="empty-state">
               <div class="empty-state-icon">📦</div>
-              <div class="empty-state-title">Skill Store</div>
-              <div class="empty-state-desc">Browse, search, and toggle skills. Coming after data contracts are finalized.</div>
+              <div class="empty-state-title">No Skills Found</div>
+              <div class="empty-state-desc">Initialize Alex architecture to install skills.</div>
+          </div>` : ''}
+          <div class="skill-grid">
+              ${(skills ?? []).map(s => `
+              <div class="skill-card" data-cmd="openSkill" data-skill="${escapeHtml(s.id)}" data-skill-name="${escapeHtml(s.displayName)}" title="${escapeHtml(s.description)}" tabindex="0" role="button">
+                  <div class="skill-header">
+                      <span class="skill-name">${escapeHtml(s.displayName)}</span>
+                      ${s.hasSynapses ? '<span class="skill-synapse-dot" title="Has synapses">⚡</span>' : ''}
+                  </div>
+                  <div class="skill-category">${escapeHtml(s.category)}</div>
+                  <div class="skill-desc">${escapeHtml(s.description)}</div>
+              </div>`).join('')}
           </div>
       </div>
 
-      <!-- Tab Panel: Mind (empty state) -->
+      <!-- Tab Panel: Mind -->
       <div class="tab-panel" id="panel-mind" role="tabpanel" aria-labelledby="tab-mind">
+          ${mindData ? `
+          <div class="tab-section-title">Cognitive Dashboard</div>
+
+          <div class="mind-stats-row">
+              <div class="mind-stat-card">
+                  <div class="mind-stat-value">${mindData.cognitiveAge}</div>
+                  <div class="mind-stat-label">Cognitive Age</div>
+              </div>
+              <div class="mind-stat-card">
+                  <div class="mind-stat-value ${mindData.synapseHealthPct >= 90 ? 'stat-good' : mindData.synapseHealthPct >= 70 ? 'stat-warn' : 'stat-bad'}">${mindData.synapseHealthPct}%</div>
+                  <div class="mind-stat-label">Synapse Health</div>
+              </div>
+          </div>
+
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Memory Modalities</div>
+              <div class="memory-modality">
+                  <span class="modality-label">Skills</span>
+                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.skillCount, 150) / 150 * 100}%"></div></div>
+                  <span class="modality-count">${mindData.skillCount}</span>
+              </div>
+              <div class="memory-modality">
+                  <span class="modality-label">Instructions</span>
+                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.instructionCount, 80) / 80 * 100}%"></div></div>
+                  <span class="modality-count">${mindData.instructionCount}</span>
+              </div>
+              <div class="memory-modality">
+                  <span class="modality-label">Prompts</span>
+                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.promptCount, 40) / 40 * 100}%"></div></div>
+                  <span class="modality-count">${mindData.promptCount}</span>
+              </div>
+              <div class="memory-modality">
+                  <span class="modality-label">Agents</span>
+                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.agentCount, 15) / 15 * 100}%"></div></div>
+                  <span class="modality-count">${mindData.agentCount}</span>
+              </div>
+              <div class="memory-modality">
+                  <span class="modality-label">Episodic</span>
+                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.episodicCount, 50) / 50 * 100}%"></div></div>
+                  <span class="modality-count">${mindData.episodicCount}</span>
+              </div>
+          </div>
+
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Maintenance</div>
+              <div class="mind-maintenance-row">
+                  <div class="maintenance-item" data-cmd="dream" tabindex="0" role="button" title="Run Dream maintenance">
+                      <span class="maintenance-icon">💭</span>
+                      <span class="maintenance-label">Last Dream</span>
+                      <span class="maintenance-value">${mindData.lastDreamDate ?? 'Never'}</span>
+                  </div>
+                  <div class="maintenance-item" data-cmd="selfActualize" tabindex="0" role="button" title="Run Self-Actualization">
+                      <span class="maintenance-icon">✨</span>
+                      <span class="maintenance-label">Last Meditation</span>
+                      <span class="maintenance-value">${mindData.lastMeditationDate ?? 'Never'}</span>
+                  </div>
+              </div>
+          </div>
+
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Quick Actions</div>
+              ${actionButton('healthDashboard', '📊', 'Health Dashboard', 'Full synapse and architecture health report')}
+              ${actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'Explore all memory systems')}
+              ${actionButton('dream', '💭', 'Dream', 'Neural maintenance')}
+              ${actionButton('selfActualize', '✨', 'Self-Actualize', 'Deep self-assessment')}
+          </div>
+          ` : `
           <div class="empty-state">
               <div class="empty-state-icon">🧠</div>
               <div class="empty-state-title">Mind</div>
-              <div class="empty-state-desc">Memory modalities, cognitive health, and honest uncertainty — the tab no other AI has. Coming in Wave 6.</div>
+              <div class="empty-state-desc">Initialize Alex architecture to see cognitive dashboard.</div>
           </div>
+          `}
       </div>
 
       <!-- Tab Panel: Docs -->
@@ -1530,6 +1855,19 @@ export function getWelcomeHtmlContent(
           }
       });
       
+      // Avatar SVG error fallback — if SVG fails to load, fall back to PNG
+      const avatarImg = document.querySelector('.alex-avatar');
+      if (avatarImg) {
+          avatarImg.addEventListener('error', function() {
+              const fallback = this.getAttribute('data-fallback');
+              console.log('[Alex][Avatar] SVG failed to load. src:', this.src, 'Falling back to:', fallback);
+              if (fallback && this.src !== fallback) {
+                  this.src = fallback;
+              }
+          });
+          console.log('[Alex][Avatar] Current src:', avatarImg.src);
+      }
+
       // Auto-refresh interval (30 seconds)
       const AUTO_REFRESH_MS = 30000;
       setInterval(refresh, AUTO_REFRESH_MS);

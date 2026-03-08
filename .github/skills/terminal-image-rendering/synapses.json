@@ -1,44 +1,43 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "skillId": "terminal-image-rendering",
-    "version": "1.0.0",
-    "lastValidated": "2026-03-04",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/brand-asset-management/SKILL.md",
-            "type": "complements",
-            "strength": 0.70,
-            "reason": "Preview brand assets inline in terminal"
-        },
-        {
-            "target": ".github/skills/image-handling/SKILL.md",
-            "type": "complements",
-            "strength": 0.65,
-            "reason": "Terminal preview after image generation"
-        },
-        {
-            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-            "type": "uses",
-            "strength": 0.60,
-            "reason": "VS Code terminal settings configuration"
-        }
-    ],
-    "activationPatterns": [
-        "terminal image",
-        "display image in terminal",
-        "kitty graphics",
-        "imgcat",
-        "preview banner",
-        "terminal.integrated.enableImages",
-        "render image inline"
-    ],
-    "triggers": [
-        "terminal image",
-        "kitty",
-        "imgcat",
-        "inline image",
-        "terminal preview"
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "skillId": "terminal-image-rendering",
+  "version": "1.0.0",
+  "lastValidated": "2026-03-04",
+  "connections": [
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "reason": "Preview brand assets inline in terminal"
+    },
+    {
+      "target": ".github/skills/image-handling/SKILL.md",
+      "type": "complements",
+      "strength": 0.65,
+      "reason": "Terminal preview after image generation"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "uses",
+      "strength": 0.6,
+      "reason": "VS Code terminal settings configuration"
+    }
+  ],
+  "activationPatterns": [
+    "terminal image",
+    "display image in terminal",
+    "kitty graphics",
+    "imgcat",
+    "preview banner",
+    "terminal.integrated.enableImages",
+    "render image inline"
+  ],
+  "triggers": [
+    "terminal image",
+    "kitty",
+    "imgcat",
+    "inline image",
+    "terminal preview"
+  ]
 }

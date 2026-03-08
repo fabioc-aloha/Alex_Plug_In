@@ -27,7 +27,6 @@
       "target": ".github/skills/cognitive-load/SKILL.md"
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "academic",
     "research",

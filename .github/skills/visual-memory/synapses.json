@@ -4,7 +4,6 @@
   "skill": "visual-memory",
   "version": "1.0.0",
   "lastValidated": "2026-03-02",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/ai-character-reference-generation/SKILL.md",

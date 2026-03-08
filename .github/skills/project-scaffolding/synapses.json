@@ -1,6 +1,5 @@
 {
   "skill": "project-scaffolding",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",

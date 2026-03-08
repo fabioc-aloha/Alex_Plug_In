@@ -1,6 +1,5 @@
 {
   "skill": "airs-appropriate-reliance",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",

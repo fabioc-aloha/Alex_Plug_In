@@ -1,7 +1,6 @@
 {
   "skill": "research-project-scaffold",
   "version": "1.0.0",
-  "inheritance": "inheritable",
   "description": "Scaffolding new and refactoring existing academic research projects for Alex-assisted workflows",
   "connections": [
     {

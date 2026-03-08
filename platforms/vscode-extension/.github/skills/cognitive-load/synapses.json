@@ -1,6 +1,5 @@
 {
   "skill": "cognitive-load",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
