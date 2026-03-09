@@ -729,11 +729,12 @@ export const PERSONAS: Persona[] = [
         name: 'CX Leader',
         bannerNoun: 'CUSTOMER EXPERIENCE',
         hook: 'Journey maps that drive action',
-        skill: 'business-analysis',
+        skill: 'frustration-recognition',
         icon: '💬',
         accentColor: '#2dd4bf',
         signals: [
             { category: 'identity',   pattern: 'customer.?experience|cx|journey.?map|voice.?of.?customer|service.?design', weight: 2.5 },
+            { category: 'technology', pattern: 'zendesk|intercom|medallia|qualtrics|hotjar|freshdesk',                     weight: 2.0 },
             { category: 'structure',  pattern: 'journeys/|cx/|personas/|surveys/|feedback/',                               weight: 1.5 },
             { category: 'content',    pattern: 'nps|csat|customer.?journey|touchpoint|pain.?point|service.?blueprint',      weight: 1.0 },
         ]
@@ -773,11 +774,12 @@ export const PERSONAS: Persona[] = [
         name: 'Entrepreneur',
         bannerNoun: 'BUILDING A STARTUP',
         hook: 'From idea to traction, fast',
-        skill: 'business-analysis',
+        skill: 'financial-analysis',
         icon: '🚀',
         accentColor: '#fb923c',
         signals: [
             { category: 'identity',   pattern: 'entrepreneur|startup|founder|co.?founder|bootstrapp|mvp|venture',          weight: 2.5 },
+            { category: 'technology', pattern: 'stripe|shopify|vercel|firebase|supabase|heroku',                           weight: 2.0 },
             { category: 'structure',  pattern: 'pitch/|business-plan/|mvp/|investors/|fundraising/',                       weight: 2.0 },
             { category: 'content',    pattern: 'pitch.?deck|runway|market.?fit|investor|fundrais|valuation|traction',       weight: 1.0 },
         ]
@@ -787,11 +789,12 @@ export const PERSONAS: Persona[] = [
         name: 'Executive (CxO)',
         bannerNoun: 'LEADING',
         hook: 'Strategic clarity, on demand',
-        skill: 'business-analysis',
+        skill: 'executive-storytelling',
         icon: '👔',
         accentColor: '#6366f1',
         signals: [
             { category: 'identity',   pattern: 'executive|ceo|cto|cfo|cio|coo|vp|director|c.?suite|chief',                weight: 2.5 },
+            { category: 'technology', pattern: 'power.?bi|tableau|jira|confluence|slack|teams',                            weight: 1.5 },
             { category: 'structure',  pattern: 'strategy/|board/|governance/|executive/',                                  weight: 2.0 },
             { category: 'content',    pattern: 'board.?meeting|strategic.?plan|quarterly|organizational|shareholder',       weight: 1.0 },
         ]
@@ -801,7 +804,7 @@ export const PERSONAS: Persona[] = [
         name: 'Finance Professional',
         bannerNoun: 'FINANCIAL ANALYSIS',
         hook: 'Numbers tell stories — tell them well',
-        skill: 'business-analysis',
+        skill: 'financial-analysis',
         icon: '💹',
         accentColor: '#2dd4bf',
         signals: [
@@ -816,7 +819,7 @@ export const PERSONAS: Persona[] = [
         name: 'Healthcare Professional',
         bannerNoun: 'HEALTHCARE',
         hook: 'Clinical documentation, simplified',
-        skill: 'creative-writing',
+        skill: 'healthcare-informatics',
         icon: '🏥',
         accentColor: '#f43f5e',
         signals: [
@@ -830,11 +833,12 @@ export const PERSONAS: Persona[] = [
         name: 'HR & People Ops',
         bannerNoun: 'PEOPLE OPERATIONS',
         hook: 'People programs that scale',
-        skill: 'business-analysis',
+        skill: 'hr-people-operations',
         icon: '👥',
         accentColor: '#fb7185',
         signals: [
             { category: 'identity',   pattern: 'hr|human.?resource|people.?ops|talent|recruiting|onboarding',              weight: 2.5 },
+            { category: 'technology', pattern: 'workday|bamboohr|greenhouse|lever|lattice|rippling',                       weight: 2.0 },
             { category: 'structure',  pattern: 'policies/|onboarding/|hiring/|people/|hr/',                                weight: 2.0 },
             { category: 'content',    pattern: 'job.?description|onboarding|performance.?review|compensation|benefits',     weight: 1.0 },
         ]
@@ -844,11 +848,12 @@ export const PERSONAS: Persona[] = [
         name: 'Journalist',
         bannerNoun: 'JOURNALISM',
         hook: 'Research deep, write fast',
-        skill: 'creative-writing',
+        skill: 'journalism',
         icon: '📰',
         accentColor: '#f97316',
         signals: [
             { category: 'identity',   pattern: 'journalist|reporter|editor|newsroom|investigat|press',                     weight: 2.5 },
+            { category: 'technology', pattern: 'wordpress|substack|medium|google.?docs|ap.?style|reuters',                 weight: 1.5 },
             { category: 'structure',  pattern: 'stories/|articles/|drafts/|sources/|investigations/',                      weight: 1.5 },
             { category: 'content',    pattern: 'byline|source|deadline|editorial|fact.?check|interview|headline',           weight: 1.0 },
         ]
@@ -873,7 +878,7 @@ export const PERSONAS: Persona[] = [
         name: 'Lawyer',
         bannerNoun: 'LEGAL WORK',
         hook: 'Research, draft, argue — faster',
-        skill: 'creative-writing',
+        skill: 'legal-compliance',
         icon: '⚖️',
         accentColor: '#6366f1',
         signals: [
@@ -887,11 +892,12 @@ export const PERSONAS: Persona[] = [
         name: 'Nonprofit Leader',
         bannerNoun: 'NONPROFIT LEADERSHIP',
         hook: 'Mission-driven, donor-funded',
-        skill: 'business-analysis',
+        skill: 'grant-writing',
         icon: '💚',
         accentColor: '#2dd4bf',
         signals: [
             { category: 'identity',   pattern: 'nonprofit|ngo|charity|fundrais|donor|foundation|advocacy|social.?impact',  weight: 2.5 },
+            { category: 'technology', pattern: 'salesforce|bloomerang|classy|neon|donorbox|givebutter',                    weight: 2.0 },
             { category: 'structure',  pattern: 'grants/|fundraising/|donors/|programs/|impact/',                           weight: 2.0 },
             { category: 'content',    pattern: 'donor|grant|impact.?report|annual.?report|program|advocacy|mission',        weight: 1.0 },
         ]
@@ -916,11 +922,12 @@ export const PERSONAS: Persona[] = [
         name: 'Psychology Counselor',
         bannerNoun: 'COUNSELING',
         hook: 'Documentation that serves the client',
-        skill: 'creative-writing',
+        skill: 'counseling-psychology',
         icon: '🧠',
         accentColor: '#818cf8',
         signals: [
             { category: 'identity',   pattern: 'counselor|therapist|psycholog|mental.?health|clinical|psychotherapy',      weight: 2.5 },
+            { category: 'technology', pattern: 'simplepractice|theranest|doxy|therapynotes|wiley',                         weight: 2.0 },
             { category: 'structure',  pattern: 'cases/|assessments/|treatment-plans/|notes/|intake/',                      weight: 2.0 },
             { category: 'content',    pattern: 'treatment.?plan|case.?conceptual|intake|assessment|psychoeducat|dsm',       weight: 1.0 },
         ]
@@ -930,11 +937,12 @@ export const PERSONAS: Persona[] = [
         name: 'Real Estate Professional',
         bannerNoun: 'REAL ESTATE',
         hook: 'Listings that sell, offers that close',
-        skill: 'creative-writing',
+        skill: 'sales-enablement',
         icon: '🏠',
         accentColor: '#fb923c',
         signals: [
             { category: 'identity',   pattern: 'real.?estate|realtor|broker|property|listing|mls',                         weight: 2.5 },
+            { category: 'technology', pattern: 'zillow|mls|dotloop|docusign|canva|kvcore',                                weight: 2.0 },
             { category: 'structure',  pattern: 'listings/|properties/|offers/|comps/|market-analysis/',                    weight: 2.0 },
             { category: 'content',    pattern: 'listing|property|offer|closing|commission|buyer|seller|comp|appraisal',     weight: 1.0 },
         ]
@@ -944,7 +952,7 @@ export const PERSONAS: Persona[] = [
         name: 'Sales Professional',
         bannerNoun: 'SELLING',
         hook: 'Pipeline to closed-won, systematically',
-        skill: 'business-analysis',
+        skill: 'sales-enablement',
         icon: '🤑',
         accentColor: '#f43f5e',
         signals: [
@@ -974,7 +982,7 @@ export const PERSONAS: Persona[] = [
         name: 'Standup Comic',
         bannerNoun: 'COMEDY WRITING',
         hook: 'Premises that punch, tags that land',
-        skill: 'creative-writing',
+        skill: 'comedy-writing',
         icon: '🎤',
         accentColor: '#fb7185',
         signals: [

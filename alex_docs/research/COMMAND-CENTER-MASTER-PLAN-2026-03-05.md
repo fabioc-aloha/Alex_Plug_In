@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch + GitHub Copilot
 **Created**: March 5, 2026
-**Revised**: March 9, 2026 — LearnAlex sprint: 8 workshop study guides added (33→41), all 41 revised with practice sections + extension CTA, 14 P0 security fixes, 14+ UI/UX audit fixes, free paywall re-enabled. Master: P6 complete (avatar directives removed), execution sequencing added, 10 domain skills created (120→130), skill-to-discipline mapping complete (41/41 disciplines covered)
+**Revised**: March 10, 2026 — P5B complete (globalKnowledgeContent 1,027→808L, extension 1,148→894L), P7.3-7.5 complete (dynamic LLM prompt, 13 skill diversifications, 8 technology signals). P5C complete (7 orchestrators split). P5D accepted (5 structural exceptions). Wave 8 complete (20/20 UI/UX audit items). All active priorities closed — backlog elevated.
 **Classification**: Internal — UI-first implementation plan
 **Status**: ✔️ Command Center v1.0 delivered (98/100 shipped, 2 cancelled) · Post-delivery optimization in progress
 
@@ -29,12 +29,14 @@
 | `welcomeViewHtml.ts` | 831 lines | <1,500 | ✅ |
 | `welcomeView.ts` | 819 lines | <800 | 🟡 19 lines over |
 | Files >1,500L (logic) | 0 | 0 | ✅ |
-| Files >1,000L (logic) | 2 | 0 | 🟡 see P5B |
-| Total TS source files | 107 | — | ✅ grew via decomposition |
-| Total lines of code | 46,838 | — | — |
+| Files >1,000L (logic) | 0 | 0 | ✅ P5B complete |
+| `globalKnowledgeContent.ts` | 808 lines | <1,000 | ✅ was 1,027 |
+| `extension.ts` | 894 lines | <1,000 | ✅ was 1,148 |
+| Total TS source files | 109 | — | ✅ +2 from P5B extractions |
+| Total lines of code | ~46,838 | — | — |
 | Skills | 130 | — | ✅ 10 domain skills contributed by LearnAlex heir |
 | Test files | 20 | 20+ | ✅ |
-| NASA R4 violations (>60L) | ~50 real | 0 | 🟡 see P3/P5C |
+| NASA R4 violations (>60L) | ~50 real | 0 | 🟡 P5C complete, structural exceptions accepted (P5D) |
 | Dead avatar assets removed | 22 files (1,256 KB) | — | ✅ |
 | North Star Trust score | 7/10 | ≥7/10 | ✅ |
 
@@ -42,305 +44,12 @@
 
 ## Active Work
 
-### Execution Sequencing
+> All original priorities (P1–P7 CRITICAL/HIGH, Wave 8, P5B–P5D, P6) are **complete**.
+> Remaining items are backlog — elevated here for visibility.
 
-| Order | Section | Focus | Effort | Rationale |
-|:-----:|---------|-------|--------|-----------|
-| ~~1st~~ | ~~P7.1–7.2~~ | ~~Fix `engineer` vs `developer` CRITICAL bug~~ | ✅ Complete | Fixed March 10, 2026 — removed bare `engineer` from developer pattern, added `software.?eng`, boosted weight to 2.5 |
-| ~~2nd~~ | ~~P1 (8A)~~ | ~~WCAG touch targets & accessibility~~ | ✅ Complete | 5/5 items fixed March 10, 2026 |
-| 3rd | ~~P6~~ | ~~Cognitive protocol cleanup~~ | ✅ Complete | All avatar directives removed (March 10, 2026) |
-| ~~4th~~ | ~~P1 (8B–8D)~~ | ~~Design system + polish + cross-tab consistency~~ | ✅ Complete | All 15 items fixed March 10, 2026 |
-| 5th | P2 (P5B) | Trim 5 files below 1,000 lines | 1–2 sessions | v6.5.0 release criteria |
-| 6th | ~~P3 (P5C)~~ | ~~Split 8 orchestrator functions~~ | ✅ Complete | 7 functions split March 10, 2026. setAgentMode already 5L (stale data). |
-| ~~7th~~ | ~~P4 (P5D)~~ | ~~Formally accept 5 structural exceptions~~ | ✅ Complete | Approved March 9, 2026 — flat registration sequences, near-zero cognitive complexity. |
-| 8th | P7.3–7.5 | Persona detection HIGH improvements (LLM prompt, signals, skills) | 1–2 sessions | Broader detection quality |
+### 1. Persona Detection — Medium & Low Improvements
 
-> **Quick wins available now**: P7.1–7.2 (CRITICAL fix, ~2 lines of code), P4 (P5D decision, 0 code).
-
-### Priority 1: Wave 8 — UI/UX Audit Remediation (NEW)
-
-> **Source**: [WELCOME-MENU-UI-UX-AUDIT-2026-03-09.md](../audits/WELCOME-MENU-UI-UX-AUDIT-2026-03-09.md)
-> **Goal**: Close all P1/P2/P3 findings from the post-Wave 7 UI/UX audit.
-> **Depends on**: Wave 7 complete. **Unlocks**: v6.5.0 Trust Release readiness.
-
-#### 8A — Touch Targets & Accessibility (P1 HIGH) ✅
-
-| # | Finding | Location | Fix | Status |
-|---|---------|----------|-----|:------:|
-| 8A.1 | `.action-btn` min-height 28px — below 36px compact floor | sharedStyles.ts | Increase to 36px | ✅ |
-| 8A.2 | `.quick-command-input` min-height 32px — below 36px floor | sharedStyles.ts | Increase to 36px | ✅ |
-| 8A.3 | `.skill-search-input` min-height 28px — below 36px floor | sharedStyles.ts | Increase to 36px | ✅ |
-| 8A.4 | `.secret-dot` — color-only indicator (green/red), no icon fallback | sharedStyles.ts | Added `::after` icon content (✓/✗) matching `.status-dot` pattern | ✅ |
-| 8A.5 | `.agent-live-dot` — color-only indicator (green/gray), no icon fallback | sharedStyles.ts | Added `::after` icon content (✓/―) matching `.status-dot` pattern | ✅ |
-
-#### 8B — Design System Compliance (P2 MEDIUM) ✅
-
-| # | Finding | Location | Fix | Status |
-|---|---------|----------|-----|:------:|
-| 8B.1 | `.action-list` and `.action-group-content` gap 2px — below `--spacing-xs: 4px` minimum | sharedStyles.ts | Increase to 4px (on-grid minimum) | ✅ |
-| 8B.2 | Non-standard spacing: 5px, 6px, 10px, 14px not on 8px grid | sharedStyles.ts (multiple selectors) | Normalize: 5px→4px, 6px→8px, 10px→8/12px context-dependent | ✅ |
-| 8B.3 | Inconsistent `border-radius`: 3/4/5/6px mix | sharedStyles.ts | Standardize to 4px (controls), 6px (cards), 12px (pills) | ✅ |
-| 8B.4 | Section title styling differs per tab (opacity 0.55–1.0, size 11–13px) | All tab HTML files | Unify to one section title style (11px semibold uppercase, consistent opacity) | ✅ |
-| 8B.5 | Inconsistent button heights: 28–36px across contexts | sharedStyles.ts | Align all interactive elements to 36px baseline | ✅ |
-| 8B.6 | Memory modalities 3-col grid fragile (5 items, bottom row has gap) | sharedStyles.ts | Use `repeat(auto-fill, minmax(80px, 1fr))` or 2-col layout | ✅ |
-
-#### 8C — Polish (P3 LOW) ✅
-
-| # | Finding | Location | Fix | Status |
-|---|---------|----------|-----|:------:|
-| 8C.1 | 9 distinct opacity values (0.4 to 0.85) — no system | sharedStyles.ts | Standardize to 4 levels: 0.4 (faint), 0.6 (secondary), 0.8 (emphasis), 1.0 (primary) | ✅ |
-| 8C.2 | Hardcoded color in `.meditation-streak-badge` | sharedStyles.ts | Use `color-mix(in srgb, var(--persona-accent) 12%, transparent)` | ✅ |
-| 8C.3 | Duplicate "Memory Architecture" button in Mind tab | mindTabHtml.ts | Remove from Learn & Knowledge card (keep in Memory Architecture card) | ✅ |
-| 8C.4 | Duplicate "Search Knowledge" button in Mind tab | mindTabHtml.ts | Remove from Learn & Knowledge card (keep in Global Knowledge card) | ✅ |
-| 8C.5 | Identity card hardcoded ("Alex Finch", "Age 26") | mindTabHtml.ts | Data-drive via `MindTabData` interface | ✅ |
-| 8C.6 | Mixed animation durations: 0.1s, 0.12s, 0.15s, 0.2s, 0.3s | sharedStyles.ts | Standardize to CSS variables: `--transition-fast: 0.12s`, `--transition-normal: 0.2s`, `--transition-slow: 0.3s` | ✅ |
-
-#### 8D — Cross-Tab Consistency ✅
-
-| # | Finding | Fix | Status |
-|---|---------|-----|:------:|
-| 8D.1 | Agents tab feels empty vs other tabs | Add agent count header and empty-state fallback | ✅ |
-| 8D.2 | No search in Docs tab (33 persona cards benefit from filtering) | Add search bar matching Skill Store pattern | ✅ |
-| 8D.3 | Only Skill Store has proper empty-state fallback | Add empty states to Agents tab (Mission/Docs are static) | ✅ |
-
-**Wave 8 Summary**: 5 P1 + 6 P2 + 6 P3 + 3 consistency = **20 steps** — ✅ ALL COMPLETE (March 10, 2026)
-
----
-
-### Priority 2: P5B — Remaining Files Below 1,000 Lines
-
-> **Goal**: All logic files below 1,000 lines for v6.5.0 "Trust Release".
-
-| # | File | Lines | Gap | Approach | Status |
-|---|------|:-----:|:---:|----------|:------:|
-| P5B.1 | `globalKnowledgeContent.ts` | 1,027 | 27L | Extract ~27L | |
-| P5B.2 | `extension.ts` | 1,043 | 43L | Extract ~43L of command registration or activation logic | |
-| P5B.3 | `workflowHandlers.ts` | 902 | — | — | ✅ Below 1,000L |
-| P5B.4 | `participant.ts` | 995 | — | — | ✅ Below 1,000L |
-| P5B.5 | `healthDashboard.ts` | 994 | — | — | ✅ Below 1,000L |
-
----
-
-### Priority 3: P5C — NASA R4 Orchestrator Splits ✅ Complete (March 10, 2026)
-
-> **Goal**: Split remaining multi-phase orchestrators (genuine branching complexity).
-> **Status**: 7 functions decomposed. `setAgentMode` was already 5L (master plan figure stale).
-> **Note**: Registration blocks (P5D) are structural exceptions — see below.
-
-| # | Function | Before | After | Helpers Extracted | Status |
-|---|----------|:------:|:-----:|:-----------------:|:------:|
-| P5C.1 | `performInitialization` | 425L | 88L | `deployArchitectureFiles`, `offerGlobalKnowledgeSetup`, `showInitSuccessAndGettingStarted`, `getGettingStartedHtml` | ✅ |
-| P5C.2 | `setupEnvironment` | 219L | 53L | `buildSettingsCategoryItems`, `previewConfirmAndApply` | ✅ |
-| P5C.3 | `setAgentMode` | ~~214L~~ | 5L | N/A (already compliant — master plan figure was stale) | ✅ |
-| P5C.4 | `proposeSkillToGlobal` | 175L | 69L | `selectAndValidateSkill`, `packageAndPresentSkill` | ✅ |
-| P5C.5 | `normalizeSynapseFile` | 172L | 70L | `normalizeConnection`, `writeOrderedSynapseFile` | ✅ |
-| P5C.6 | `checkHealth` | 168L | 57L | `buildMarkdownFileIndex`, `scanFilesAndSynapses`, `classifyHealthStatus` | ✅ |
-| P5C.7 | `completeMigration` | 166L | 86L | `executeMigrationItems` | ✅ |
-| P5C.8 | `detectCognitiveLevel` | 166L | 52L | `detectGitHubAccount`, `detectBestModelTier`, `classifyCognitiveLevel` | ✅ |
-
-**P3 overall**: ✅ Complete. 7 orchestrators decomposed into 17 focused helpers. Average orchestrator reduced from 213L to 68L (68% reduction). 4 of 7 are now under 60L NASA R4 target; remaining 3 (88L, 70L, 86L) are acceptable linear orchestrators.
-
----
-
-### Priority 4: P5D — Structural Exceptions ✅ Accepted (March 9, 2026)
-
-> **Decision**: Formally accepted as NASA R4 exceptions. These are flat, declarative command registration sequences with near-zero cognitive complexity. Splitting would degrade discoverability (grep for command name → land on handler) without improving comprehension or testability. This is the standard VS Code extension activation pattern.
-
-| Function | Lines | File | Status |
-|----------|:-----:|------|:------:|
-| `activateInternal` | 820 | extension.ts | ✅ Accepted |
-| `registerImageCommands` | 628 | contextMenuImage.ts | ✅ Accepted |
-| `registerDeveloperCommands` | 576 | commandsDeveloper.ts | ✅ Accepted |
-| `registerGammaCommands` | 408 | commandsGamma.ts | ✅ Accepted |
-| `registerWordCommands` | 190 | commandsWord.ts | ✅ Accepted |
-
----
-
-### Priority 5: Persona Taxonomy Alignment ✅ Complete (Extension + LearnAlex)
-
-> **Status**: FULLY COMPLETE (March 9) — Extension: 20 personas added to `personaDefinitions.ts` + `avatarMappings.ts` (47 personas, 81 avatar entries). LearnAlex: 8 workshop study guides added (33→41), all 41 guides revised with tool-agnostic practice sections, discipline examples, and extension CTA. Skill-to-discipline mapping and 10 new domain skills originated from LearnAlex heir and were promoted to Master.
-> **Remaining**: `personaDefinitions.ts` skill assignments need code update to reference new skills. Alignment decisions deferred to backlog.
-> **Source**: LearnAlex persona taxonomy (per DK-correax-brand.md).
->
-> **New Skills Created (March 9)** — contributed by LearnAlex heir:
-> - **Tier 1** (multi-discipline): `financial-analysis`, `sales-enablement`, `career-development`
-> - **Tier 2** (multi-discipline): `legal-compliance`, `healthcare-informatics`, `hr-people-operations`
-> - **Tier 3** (single-discipline): `comedy-writing`, `journalism`, `game-design`, `counseling-psychology`
-
-#### Extension — 20 Personas Added ✅ (reference)
-
-| # | LearnAlex Persona | Tag | Banner Action | Notes |
-|---|-------------------|-----|---------------|:-----:|
-| 1 | CX Leaders | CX | CUSTOMER EXPERIENCE | |
-| 2 | Designers (UX/UI) | Design | DESIGNING | |
-| 3 | Engineers | Engineering | ENGINEERING | General engineers (not DevOps/SRE) |
-| 4 | Entrepreneurs | Startup | BUILDING A STARTUP | |
-| 5 | Executives (CxO) | Leadership | LEADING | |
-| 6 | Finance Professionals | Finance | FINANCIAL ANALYSIS | |
-| 7 | Healthcare Professionals | Healthcare | HEALTHCARE | |
-| 8 | HR & People Ops | HR | PEOPLE OPERATIONS | |
-| 9 | Journalists | Journalism | JOURNALISM | |
-| 10 | Knowledge Workers | Business | KNOWLEDGE WORK | |
-| 11 | Lawyers | Legal | LEGAL WORK | |
-| 12 | Nonprofit Leaders | Nonprofit | NONPROFIT LEADERSHIP | |
-| 13 | Podcasters | Podcasting | PODCASTING | |
-| 14 | Psychology Counselors | Counseling | COUNSELING | |
-| 15 | Real Estate Professionals | Real Estate | REAL ESTATE | |
-| 16 | Sales Professionals | Sales | SELLING | |
-| 17 | Scientists | Science | SCIENTIFIC RESEARCH | Distinct from Researcher |
-| 18 | Standup Comics | Comedy | COMEDY WRITING | |
-| 19 | Teachers & Educators | Teaching | TEACHING | |
-| 20 | Visual Storytellers | Data Viz | DATA VISUALIZATION | |
-
-#### LearnAlex — 8 Workshops Added ✅ (March 9)
-
-> **42 commits** across March 8-9. Study guides grew from 33 to 41. All 41 revised with tool-agnostic practice sections, discipline examples, and extension install CTA. Study guide overview page added. Free paywall re-enabled with restyled access wall.
-
-| # | Extension Persona | Tag | Notes | Status |
-|---|-------------------|-----|-------|:------:|
-| 1 | Enterprise Architect | Architecture | System design, ADRs, cloud architecture | ✅ |
-| 2 | Data Engineer | Data Engineering | Fabric, lakehouse, medallion, ETL | ✅ |
-| 3 | Game Developer | Game Dev | Unity, Unreal, Godot, game design | ✅ |
-| 4 | Security Engineer | Security | Threat modeling, compliance, pen testing | ✅ |
-| 5 | Power User / Builder | Power User | Alex extension customization, tinkering | ✅ |
-| 6 | Open Source Contributor | Open Source | OSS maintenance, community building | ✅ |
-| 7 | SRE / On-Call | SRE | Incident response, observability, runbooks | ✅ |
-| 8 | Grant Writer | Grants | NSF/NIH proposals, funding narratives | ✅ |
-
-#### LearnAlex — Security & UX Hardening (March 8-9)
-
-> Companion sprint that ran alongside the study guide additions.
-
-| Category | Items Fixed | Highlights |
-|----------|:-----------:|------------|
-| P0 Security | 14 | XSS (innerHTML→textContent/createElement), CORS allowlisting, error message sanitization, CSP headers, MSAL v2→v5, managed identity migration |
-| Rate Limiting | 3 endpoints | `/api/track` (60/min), `/api/generate-deck` (10/min), shared rate limiter module |
-| UI/UX Audit | 14+ | WCAG touch targets (44px), contrast fixes, keyboard flyout nav, mobile nav collapse, semantic HTML |
-| Code Quality | 6 | Shared table client, OData server-side filters, session storage consolidation, auth config dedup |
-| Infrastructure | 2 | CI/CD restored (GitHub Actions → Azure SWA), Bicep admin email parameterized |
-
-#### Skill-to-Discipline Mapping — "Alex is trained on what you do"
-
-> **Purpose**: Each discipline/study guide should surface the Alex skills most relevant to that audience. This is an install incentive — users see that Alex has specialized knowledge for *their* profession, not just generic AI features. Use this table in LearnAlex study guides, workshop pages, and Docs tab persona cards.
-> **Source**: 130 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines. Mapping and 10 new domain skills contributed by LearnAlex heir (March 9): Tier 1 (`financial-analysis`, `sales-enablement`, `career-development`), Tier 2 (`legal-compliance`, `healthcare-informatics`, `hr-people-operations`), Tier 3 (`comedy-writing`, `journalism`, `game-design`, `counseling-psychology`).
-> **Convention**: Skills listed in relevance order. First 3 are the strongest hooks for that audience.
-
-| # | Discipline | Key Skills (install incentive) |
-|---|-----------|-------------------------------|
-| 1 | Academic Research | `literature-review`, `citation-management`, `research-project-scaffold`, `practitioner-research`, `dissertation-defense`, `anti-hallucination` |
-| 2 | AI Researchers | `ai-agent-design`, `rag-architecture`, `prompt-engineering`, `llm-model-selection`, `multi-agent-orchestration`, `anti-hallucination` |
-| 3 | Business Knowledge Workers | `business-analysis`, `executive-storytelling`, `status-reporting`, `gamma-presentations`, `project-management`, `deep-work-optimization` |
-| 4 | Consultants | `business-analysis`, `executive-storytelling`, `scope-management`, `change-management`, `status-reporting`, `project-management` |
-| 5 | Content Creators | `creative-writing`, `ai-writing-avoidance`, `image-handling`, `brand-asset-management`, `book-publishing`, `markdown-mermaid` |
-| 6 | Creative Writers | `creative-writing`, `ai-writing-avoidance`, `book-publishing`, `prompt-engineering`, `lint-clean-markdown` |
-| 7 | CX Leaders | `frustration-recognition`, `business-analysis`, `change-management`, `executive-storytelling`, `status-reporting`, `coaching-techniques` |
-| 8 | Data Analysts | `microsoft-fabric`, `database-design`, `observability-monitoring`, `status-reporting`, `markdown-mermaid`, `anti-hallucination` |
-| 9 | Data Engineers | `microsoft-fabric`, `database-design`, `infrastructure-as-code`, `azure-architecture-patterns`, `azure-deployment-operations`, `observability-monitoring` |
-| 10 | Designers (UX/UI) | `ui-ux-design`, `svg-graphics`, `graphic-design`, `brand-asset-management`, `image-handling`, `cognitive-load` |
-| 11 | Developers | `code-review`, `testing-strategies`, `debugging-patterns`, `refactoring-patterns`, `api-design`, `git-workflow`, `vscode-extension-patterns`, `architecture-audit` |
-| 12 | Engineers | `architecture-audit`, `infrastructure-as-code`, `testing-strategies`, `debugging-patterns`, `performance-profiling`, `observability-monitoring` |
-| 13 | Enterprise Architects | `architecture-audit`, `architecture-refinement`, `azure-architecture-patterns`, `infrastructure-as-code`, `enterprise-integration`, `api-design` |
-| 14 | Entrepreneurs | `financial-analysis`, `business-analysis`, `scope-management`, `project-scaffolding`, `executive-storytelling`, `brand-asset-management` |
-| 15 | Executives (CxO) | `executive-storytelling`, `financial-analysis`, `status-reporting`, `change-management`, `scope-management`, `business-analysis` |
-| 16 | Finance Professionals | `financial-analysis`, `business-analysis`, `pii-privacy-regulations`, `anti-hallucination`, `status-reporting`, `deep-work-optimization` |
-| 17 | Game Developers | `game-design`, `debugging-patterns`, `testing-strategies`, `performance-profiling`, `code-review`, `project-management` |
-| 18 | Grant Writers | `grant-writing`, `creative-writing`, `citation-management`, `research-first-development`, `ai-writing-avoidance` |
-| 19 | Healthcare Professionals | `healthcare-informatics`, `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management` |
-| 20 | HR & People Ops | `hr-people-operations`, `pii-privacy-regulations`, `change-management`, `coaching-techniques`, `career-development` |
-| 21 | Job Seekers | `career-development`, `ai-writing-avoidance`, `prompt-engineering`, `bootstrap-learning`, `creative-writing` |
-| 22 | Journalists | `journalism`, `creative-writing`, `ai-writing-avoidance`, `citation-management`, `anti-hallucination` |
-| 23 | Lawyers | `legal-compliance`, `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management` |
-| 24 | Marketing | `creative-writing`, `ai-writing-avoidance`, `brand-asset-management`, `image-handling`, `executive-storytelling`, `prompt-engineering` |
-| 25 | Nonprofit Leaders | `grant-writing`, `financial-analysis`, `business-analysis`, `executive-storytelling`, `change-management`, `status-reporting` |
-| 26 | Open Source Contributors | `git-workflow`, `code-review`, `documentation-quality-assurance`, `testing-strategies`, `release-process`, `api-documentation` |
-| 27 | Podcasters | `creative-writing`, `ai-writing-avoidance`, `text-to-speech`, `prompt-engineering`, `book-publishing` |
-| 28 | Power Users / Builders | `vscode-extension-patterns`, `vscode-configuration-validation`, `prompt-engineering`, `skill-building`, `mcp-development`, `agent-debug-panel` |
-| 29 | Product Managers | `project-management`, `scope-management`, `business-analysis`, `status-reporting`, `executive-storytelling`, `gamma-presentations` |
-| 30 | Project Managers | `project-management`, `scope-management`, `status-reporting`, `change-management`, `gamma-presentations`, `alex-effort-estimation` |
-| 31 | Psychology & Counselors | `counseling-psychology`, `learning-psychology`, `coaching-techniques`, `privacy-responsible-ai`, `frustration-recognition` |
-| 32 | Real Estate | `financial-analysis`, `sales-enablement`, `business-analysis`, `executive-storytelling`, `creative-writing` |
-| 33 | Scientists | `research-first-development`, `literature-review`, `citation-management`, `practitioner-research`, `anti-hallucination`, `research-project-scaffold` |
-| 34 | Security Engineers | `security-review`, `distribution-security`, `secrets-management`, `pii-privacy-regulations`, `architecture-audit`, `incident-response` |
-| 35 | Sellers | `sales-enablement`, `executive-storytelling`, `financial-analysis`, `coaching-techniques`, `business-analysis` |
-| 36 | SRE / On-Call | `incident-response`, `post-mortem`, `observability-monitoring`, `root-cause-analysis`, `debugging-patterns`, `error-recovery-patterns` |
-| 37 | Standup Comics | `comedy-writing`, `creative-writing`, `ai-writing-avoidance`, `prompt-engineering` |
-| 38 | Students | `career-development`, `bootstrap-learning`, `learning-psychology`, `research-first-development`, `citation-management`, `socratic-questioning` |
-| 39 | Teachers & Educators | `learning-psychology`, `coaching-techniques`, `socratic-questioning`, `gamma-presentations`, `creative-writing`, `slide-design` |
-| 40 | Technical Writers | `documentation-quality-assurance`, `api-documentation`, `markdown-mermaid`, `lint-clean-markdown`, `md-to-word`, `code-review` |
-| 41 | Visual Storytellers | `svg-graphics`, `graphic-design`, `image-handling`, `gamma-presentations`, `slide-design`, `markdown-mermaid` |
-
-**Coverage stats**: 64 of 130 skills appear in at least one discipline mapping. Top skills by discipline coverage: `creative-writing` (14), `business-analysis` (10), `executive-storytelling` (9), `anti-hallucination` (7), `status-reporting` (7), `citation-management` (7), `prompt-engineering` (7), `pii-privacy-regulations` (7), `financial-analysis` (5), `coaching-techniques` (5). New dedicated skills: `legal-compliance` (1), `healthcare-informatics` (1), `hr-people-operations` (1), `comedy-writing` (1), `journalism` (1), `game-design` (1), `counseling-psychology` (1), `sales-enablement` (2), `career-development` (3).
-
----
-
-### Priority 6: Streamline Cognitive Protocols (Stream A) ✅
-
-> **Source**: Cognitive state audit (March 9, 2026)
-> **Goal**: Remove all avatar set/revert boilerplate — participant.ts auto-detects everything.
-> **Impact**: ~106 lines removed across prompts, agents, instructions. Cleaner prompt context, less ceremony.
-> **Completed**: March 10, 2026
-
-#### What was done
-
-- Removed `> **Avatar**:` and `> **Revert Avatar**:` lines from all 39 prompt files
-- Removed `> **Avatar**:` and `> **Revert Avatar**:` lines from all 7 agent files
-- Removed `alex_cognitive_state_update` from tools frontmatter in all agent files and journey.prompt.md
-- Removed "Cognitive State (Avatar)" section from copilot-instructions.md
-- Removed "IMPORTANT — Avatar Revert" directives from meditation.instructions.md and dream-state-automation.instructions.md
-- Synced all changes to 3 heir platforms (vscode-extension, m365-copilot, agent-plugin)
-
-#### Steps
-
-| # | Step | Status |
-|---|------|:------:|
-| 6.1 | Remove `> **Avatar**:` lines from all prompts | ✅ |
-| 6.2 | Remove `> **Revert Avatar**:` lines from all prompts | ✅ |
-| 6.3 | Remove avatar lines from all 7 agent files + tools frontmatter | ✅ |
-| 6.4 | Remove Cognitive State section from copilot-instructions.md | ✅ |
-| 6.5 | Fix tooltip bug: remove `pointer-events: none` from `.easter-egg-badge` CSS | ✅ |
-| 6.6 | Remove avatar revert from meditation.instructions.md + dream-state-automation.instructions.md | ✅ |
-| 6.7 | Sync all changes to heir platforms | ✅ |
-
----
-
-### Priority 7: Persona Detection Quality (Stream B)
-
-> **Source**: Persona detection weakness audit (March 9, 2026)
-> **Goal**: Fix critical detection bugs, improve signal coverage, update LLM prompt.
-> **Impact**: Better persona matching → more relevant skill recommendations → higher trust.
-
-#### Findings Summary
-
-| # | Severity | Issue |
-|---|:--------:|-------|
-| 1 | **CRITICAL** | `engineer` (weight 2.5) beats `developer` (weight 2.0) for "software engineer" |
-| 2 | **HIGH** | 21/47 personas route to just 2 skills (`business-analysis` or `creative-writing`) |
-| 3 | **HIGH** | LLM prompt only lists 13/47 persona IDs — 34 invisible to LLM detection |
-| 4 | **HIGH** | P1-P4 only match `identity`+`technology` — 15 personas with no `technology` can only match on identity |
-| 5 | **MEDIUM** | P3 phase detection hardcoded to 7/47 personas |
-| 6 | **MEDIUM** | 41/47 personas have no `dependency` signals |
-| 7 | **MEDIUM** | Tie-breaking favors array position — all 20 LearnAlex personas lose ties |
-| 8 | **MEDIUM** | 7-day persona cache blocks detection improvements |
-| 9 | **LOW** | 34 orphan avatar entries with no matching persona definition |
-| 10 | **LOW** | Generic `data/`, `notes/`, `proposals/` patterns cause collisions |
-
-#### Steps (CRITICAL + HIGH — remaining items deferred to backlog)
-
-| # | Step | Severity | Status |
-|---|------|:--------:|:------:|
-| 7.1 | Fix `engineer` vs `developer` — removed bare `engineer` from developer pattern, added `software.?eng` to capture "software engineer" explicitly. Engineer pattern unchanged (retains domain-specific terms + bare `engineer` for unqualified use). | CRITICAL | ✅ |
-| 7.2 | Boost `developer` identity weight from 2.0 to 2.5 | CRITICAL | ✅ |
-| 7.3 | Update LLM prompt in `personaProjectDetection.ts` — generate persona ID list dynamically from `PERSONAS` array | HIGH | ☐ |
-| 7.4 | Diversify skill assignments for 21 personas currently using `business-analysis` or `creative-writing` | HIGH | 🟡 10 dedicated domain skills created — mapping table updated, `personaDefinitions.ts` skill assignments still need code update |
-| 7.5 | Add `technology` signals to 15 personas that only have `identity`+`structure`+`content` | HIGH | ☐ |
-
----
-
-### Backlog
-
-#### Persona Detection — Medium & Low Improvements
-
-> Deferred from Priority 7. Not blocking v6.5.0 — revisit after CRITICAL+HIGH fixes ship.
+> Elevated from backlog. CRITICAL+HIGH fixes shipped (P7.1–7.5). These are incremental quality improvements.
 
 | # | Step | Severity |
 |---|------|:--------:|
@@ -352,32 +61,26 @@
 | 7.11 | Narrow generic structure patterns (`data/` → `raw-data/|datasets/`, `notes/` → `lecture-notes/|session-notes/`) | LOW |
 | 7.12 | Fix `power-user` and `knowledge-worker` identity weight from 2.0 to 2.5 | LOW |
 
-#### Persona Taxonomy — Pending Decisions
+### 2. Persona Taxonomy — Pending Decisions
 
-> Extension additions ✅ complete (Priority 5). These decisions remain open.
+> Extension additions ✅ complete. These decisions remain open.
 
 - Should extension-only personas (Power User, Game Dev, SRE) go into LearnAlex as full study guides or sub-sections?
 - Weak workspace signals for Standup Comics, Real Estate — accept low-confidence detection or rely on LLM?
 - Naming standardization: extension uses role titles vs LearnAlex audience labels
 
-#### Easter Egg UI Placement ✅
+### 3. Wave 5.3 — Sidebar View Removal (deferred)
 
-> Shipped March 9. Option A implemented: 16px emoji badge on header icon (bottom-right overlay).
-> Fixes: `pointer-events: none` removed (tooltip works), accent color no longer leaks globally
-> (easter egg gets `--egg-accent` CSS var, persona accent stays clean).
+Remove redundant sidebar view registrations from `package.json`. Was deferred during Wave 5 — no removals safe yet. Revisit when Command Center fully replaces all legacy surface journeys.
 
-#### Cancelled Steps (Contract B)
+### 4. Cancelled Steps (Contract B)
 
 | Step | Original | Dependency | Unblock Condition |
 |------|----------|-----------|-------------------|
 | 7.15 | Context Budget percentage bar | VS Code API | VS Code exposes `chat.contextBudget` or equivalent |
 | 7.31 | Context Budget Impact per skill | Token cost estimation | Skill token measurement tooling built |
 
-#### Wave 5.3 — Sidebar View Removal (deferred)
-
-Remove redundant sidebar view registrations from `package.json`. Was deferred during Wave 5 — no removals safe yet. Revisit when Command Center fully replaces all legacy surface journeys.
-
-#### Contract Dependencies (inform future waves)
+### 5. Contract Dependencies (inform future waves)
 
 | Contract | Scope | Required For |
 |----------|-------|-------------|
@@ -416,7 +119,7 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 
 ---
 
-## Validated Baseline (March 9, 2026)
+## Validated Baseline (March 10, 2026)
 
 ### Extension Baseline
 
@@ -430,13 +133,19 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 | `avatarMappings.ts` | 741 lines (SVG format parameter added in Spike 1A) |
 | `memoryTreeProvider.ts` | 281 lines |
 | `cognitiveDashboard.ts` | 558 lines (split: `_getHtmlForWebview` → 3 helpers) |
+| `globalKnowledgeContent.ts` | 808 lines (was 1,027 — P5B.1 extraction) |
+| `globalKnowledgeBanner.ts` | 223 lines (NEW — SVG banner extracted from above) |
+| `extension.ts` | 894 lines (was 1,148 — P5B.2 extraction) |
+| `extensionLifecycle.ts` | 162 lines (NEW — lifecycle functions extracted from above) |
 | `participant.ts` | 995 lines |
 | `healthDashboard.ts` | 994 lines |
+| `personaDefinitions.ts` | 1,005 lines (was 997 — +8 from P7.5 tech signals) |
+| `personaProjectDetection.ts` | 431 lines (was 432 — P7.3 dynamic LLM prompt) |
 | Avatar asset files | 123 (90 PNG/WebP + 33 rocket SVGs) — 22 dead ALEX-*.png/webp removed |
 | Welcome view uses retained context | Yes (`retainContextWhenHidden: true`) |
 | Chat participant avatar path | SVG-first (rocket-icons) with PNG fallback |
 | Extension compile state | Clean |
-| Total TS source files | 107 |
+| Total TS source files | 109 (+2 from P5B extractions)
 | Total lines of code | 46,838 |
 | Test files | 20 |
 | Skills | 130 (120 existing + 10 domain skills contributed by LearnAlex heir) |
@@ -466,9 +175,9 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 1. **20+ test files** ✅ — 20 test files covering all v6.0.0 services
 2. **Zero NASA R4 violations** 🟡 — 13 functions split; ~50 real remain + ~75 structural exceptions
 3. **No logic file >1,500 lines** ✅ — `sharedStyles.ts` (1,570L) is pure CSS, not logic
-4. **No source file >1,000 lines** 🟡 — 2 logic files remain >1,000L (P5B: extension.ts 1,043, globalKnowledgeContent.ts 1,027)
+4. **No source file >1,000 lines** ✅ — P5B complete (extension.ts 894L, globalKnowledgeContent.ts 808L)
 5. **North Star Trust score ≥7/10** ✅
-6. **UI audit clean** 🟡 — Wave 8 addresses 20 findings (NEW)
+6. **UI audit clean** ✅ — Wave 8 complete (20/20 findings fixed)
 
 > **Principle**: *Don't add features. Prove the existing ones deserve trust.*
 
@@ -756,6 +465,50 @@ Extracted 1,581 lines of shared CSS into `sharedStyles.ts`. One template interpo
 
 ---
 
+# Appendix C — Completed Post-Delivery Priorities (March 9–10, 2026)
+
+### Wave 8 — UI/UX Audit Remediation ✅ (20/20 items, March 10)
+
+5 P1 HIGH (WCAG touch targets, color-only indicators) + 6 P2 MEDIUM (design system grid, border-radius, spacing, button heights, modality grid) + 6 P3 LOW (opacity system, hardcoded color, duplicates, identity data, animation durations) + 3 cross-tab consistency = 20 items.
+Source: [WELCOME-MENU-UI-UX-AUDIT-2026-03-09.md](../audits/WELCOME-MENU-UI-UX-AUDIT-2026-03-09.md)
+
+### P5B — Files Below 1,000 Lines ✅ (March 10)
+
+| File | Before | After | Method |
+|------|:------:|:-----:|--------|
+| `globalKnowledgeContent.ts` | 1,027 | 808 | SVG banner functions → `globalKnowledgeBanner.ts` (223L) |
+| `extension.ts` | 1,148 | 894 | Lifecycle functions → `extensionLifecycle.ts` (162L) |
+| `workflowHandlers.ts` | 902 | — | Already below 1,000L |
+| `participant.ts` | 995 | — | Already below 1,000L |
+| `healthDashboard.ts` | 994 | — | Already below 1,000L |
+
+### P5C — NASA R4 Orchestrator Splits ✅ (March 10)
+
+7 orchestrators decomposed into 17 focused helpers. Average reduced from 213L to 68L (68% reduction).
+
+### P5D — Structural Exceptions ✅ Accepted (March 9)
+
+5 registration-block functions accepted: `activateInternal` (820L), `registerImageCommands` (628L), `registerDeveloperCommands` (576L), `registerGammaCommands` (408L), `registerWordCommands` (190L). Flat declarative sequences, near-zero cognitive complexity.
+
+### P6 — Cognitive Protocol Cleanup ✅ (March 10)
+
+~106 lines of avatar set/revert boilerplate removed from 39 prompts, 7 agents, 2 instructions. Synced to 3 heirs.
+
+### P7 (CRITICAL + HIGH) — Persona Detection ✅ (March 10)
+
+| # | Step | Severity |
+|---|------|:--------:|
+| 7.1 | Fixed `engineer` vs `developer` pattern collision — removed bare `engineer` from developer, added `software.?eng` | CRITICAL |
+| 7.2 | Boosted `developer` identity weight 2.0→2.5 | CRITICAL |
+| 7.3 | Dynamic LLM persona list — all 47 personas now visible to detection | HIGH |
+| 7.4 | 13 persona skill diversifications (from generic `business-analysis`/`creative-writing` to dedicated domain skills) | HIGH |
+| 7.5 | 8 persona technology signals added (cx-leader, startup-founder, executive, hr-professional, journalist, nonprofit-leader, counselor, real-estate) | HIGH |
+
+### Persona Taxonomy Alignment ✅ (March 9)
+
+20 personas added to extension (47 total, 81 avatar entries). 8 LearnAlex study guides added (33→41). 10 domain skills created. 41/41 skill-to-discipline mappings complete.
+Full details: See [Skill-to-Discipline Mapping](#skill-to-discipline-mapping--alex-is-trained-on-what-you-do) in Appendix D.
+
 # Appendix C — Design Inputs & Reference
 
 ### Approved Mockups
@@ -808,3 +561,111 @@ All files under `alex_docs/research/mockups/`. Only v2 mockups are active design
 3. **Resolve blocking spikes.** Prove unknowns early.
 4. **Classify every data source.** Existing / Derived / New.
 5. **Curate, don't mirror.** Docs tab surfaces strongest AlexLearn pathways.
+
+---
+
+# Appendix D — Reference Tables (Persona Taxonomy & Skill Mapping)
+
+### Extension — 20 LearnAlex Personas Added ✅ (March 9, reference)
+
+| # | LearnAlex Persona | Tag | Banner Action |
+|---|-------------------|-----|---------------|
+| 1 | CX Leaders | CX | CUSTOMER EXPERIENCE |
+| 2 | Designers (UX/UI) | Design | DESIGNING |
+| 3 | Engineers | Engineering | ENGINEERING |
+| 4 | Entrepreneurs | Startup | BUILDING A STARTUP |
+| 5 | Executives (CxO) | Leadership | LEADING |
+| 6 | Finance Professionals | Finance | FINANCIAL ANALYSIS |
+| 7 | Healthcare Professionals | Healthcare | HEALTHCARE |
+| 8 | HR & People Ops | HR | PEOPLE OPERATIONS |
+| 9 | Journalists | Journalism | JOURNALISM |
+| 10 | Knowledge Workers | Business | KNOWLEDGE WORK |
+| 11 | Lawyers | Legal | LEGAL WORK |
+| 12 | Nonprofit Leaders | Nonprofit | NONPROFIT LEADERSHIP |
+| 13 | Podcasters | Podcasting | PODCASTING |
+| 14 | Psychology Counselors | Counseling | COUNSELING |
+| 15 | Real Estate Professionals | Real Estate | REAL ESTATE |
+| 16 | Sales Professionals | Sales | SELLING |
+| 17 | Scientists | Science | SCIENTIFIC RESEARCH |
+| 18 | Standup Comics | Comedy | COMEDY WRITING |
+| 19 | Teachers & Educators | Teaching | TEACHING |
+| 20 | Visual Storytellers | Data Viz | DATA VISUALIZATION |
+
+### LearnAlex — 8 Workshops Added ✅ (March 9)
+
+| # | Extension Persona | Tag | Notes |
+|---|-------------------|-----|-------|
+| 1 | Enterprise Architect | Architecture | System design, ADRs, cloud architecture |
+| 2 | Data Engineer | Data Engineering | Fabric, lakehouse, medallion, ETL |
+| 3 | Game Developer | Game Dev | Unity, Unreal, Godot, game design |
+| 4 | Security Engineer | Security | Threat modeling, compliance, pen testing |
+| 5 | Power User / Builder | Power User | Alex extension customization, tinkering |
+| 6 | Open Source Contributor | Open Source | OSS maintenance, community building |
+| 7 | SRE / On-Call | SRE | Incident response, observability, runbooks |
+| 8 | Grant Writer | Grants | NSF/NIH proposals, funding narratives |
+
+### LearnAlex — Security & UX Hardening (March 8-9)
+
+| Category | Items Fixed | Highlights |
+|----------|:-----------:|------------|
+| P0 Security | 14 | XSS, CORS, CSP headers, MSAL v2→v5, managed identity |
+| Rate Limiting | 3 endpoints | `/api/track` (60/min), `/api/generate-deck` (10/min) |
+| UI/UX Audit | 14+ | WCAG touch targets, contrast, keyboard, mobile |
+| Code Quality | 6 | Shared table client, OData filters, auth dedup |
+| Infrastructure | 2 | CI/CD restored, Bicep admin email parameterized |
+
+### New Domain Skills Created (March 9, contributed by LearnAlex)
+
+- **Tier 1** (multi-discipline): `financial-analysis`, `sales-enablement`, `career-development`
+- **Tier 2** (multi-discipline): `legal-compliance`, `healthcare-informatics`, `hr-people-operations`
+- **Tier 3** (single-discipline): `comedy-writing`, `journalism`, `game-design`, `counseling-psychology`
+
+### Skill-to-Discipline Mapping — "Alex is trained on what you do"
+
+> 130 skills mapped to 41 workshop disciplines. Skills listed in relevance order; first 3 are strongest install incentive hooks.
+
+| # | Discipline | Key Skills |
+|---|-----------|------------|
+| 1 | Academic Research | `literature-review`, `citation-management`, `research-project-scaffold`, `practitioner-research`, `dissertation-defense`, `anti-hallucination` |
+| 2 | AI Researchers | `ai-agent-design`, `rag-architecture`, `prompt-engineering`, `llm-model-selection`, `multi-agent-orchestration`, `anti-hallucination` |
+| 3 | Business Knowledge Workers | `business-analysis`, `executive-storytelling`, `status-reporting`, `gamma-presentations`, `project-management`, `deep-work-optimization` |
+| 4 | Consultants | `business-analysis`, `executive-storytelling`, `scope-management`, `change-management`, `status-reporting`, `project-management` |
+| 5 | Content Creators | `creative-writing`, `ai-writing-avoidance`, `image-handling`, `brand-asset-management`, `book-publishing`, `markdown-mermaid` |
+| 6 | Creative Writers | `creative-writing`, `ai-writing-avoidance`, `book-publishing`, `prompt-engineering`, `lint-clean-markdown` |
+| 7 | CX Leaders | `frustration-recognition`, `business-analysis`, `change-management`, `executive-storytelling`, `status-reporting`, `coaching-techniques` |
+| 8 | Data Analysts | `microsoft-fabric`, `database-design`, `observability-monitoring`, `status-reporting`, `markdown-mermaid`, `anti-hallucination` |
+| 9 | Data Engineers | `microsoft-fabric`, `database-design`, `infrastructure-as-code`, `azure-architecture-patterns`, `azure-deployment-operations`, `observability-monitoring` |
+| 10 | Designers (UX/UI) | `ui-ux-design`, `svg-graphics`, `graphic-design`, `brand-asset-management`, `image-handling`, `cognitive-load` |
+| 11 | Developers | `code-review`, `testing-strategies`, `debugging-patterns`, `refactoring-patterns`, `api-design`, `git-workflow`, `vscode-extension-patterns`, `architecture-audit` |
+| 12 | Engineers | `architecture-audit`, `infrastructure-as-code`, `testing-strategies`, `debugging-patterns`, `performance-profiling`, `observability-monitoring` |
+| 13 | Enterprise Architects | `architecture-audit`, `architecture-refinement`, `azure-architecture-patterns`, `infrastructure-as-code`, `enterprise-integration`, `api-design` |
+| 14 | Entrepreneurs | `financial-analysis`, `business-analysis`, `scope-management`, `project-scaffolding`, `executive-storytelling`, `brand-asset-management` |
+| 15 | Executives (CxO) | `executive-storytelling`, `financial-analysis`, `status-reporting`, `change-management`, `scope-management`, `business-analysis` |
+| 16 | Finance Professionals | `financial-analysis`, `business-analysis`, `pii-privacy-regulations`, `anti-hallucination`, `status-reporting`, `deep-work-optimization` |
+| 17 | Game Developers | `game-design`, `debugging-patterns`, `testing-strategies`, `performance-profiling`, `code-review`, `project-management` |
+| 18 | Grant Writers | `grant-writing`, `creative-writing`, `citation-management`, `research-first-development`, `ai-writing-avoidance` |
+| 19 | Healthcare Professionals | `healthcare-informatics`, `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management` |
+| 20 | HR & People Ops | `hr-people-operations`, `pii-privacy-regulations`, `change-management`, `coaching-techniques`, `career-development` |
+| 21 | Job Seekers | `career-development`, `ai-writing-avoidance`, `prompt-engineering`, `bootstrap-learning`, `creative-writing` |
+| 22 | Journalists | `journalism`, `creative-writing`, `ai-writing-avoidance`, `citation-management`, `anti-hallucination` |
+| 23 | Lawyers | `legal-compliance`, `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management` |
+| 24 | Marketing | `creative-writing`, `ai-writing-avoidance`, `brand-asset-management`, `image-handling`, `executive-storytelling`, `prompt-engineering` |
+| 25 | Nonprofit Leaders | `grant-writing`, `financial-analysis`, `business-analysis`, `executive-storytelling`, `change-management`, `status-reporting` |
+| 26 | Open Source Contributors | `git-workflow`, `code-review`, `documentation-quality-assurance`, `testing-strategies`, `release-process`, `api-documentation` |
+| 27 | Podcasters | `creative-writing`, `ai-writing-avoidance`, `text-to-speech`, `prompt-engineering`, `book-publishing` |
+| 28 | Power Users / Builders | `vscode-extension-patterns`, `vscode-configuration-validation`, `prompt-engineering`, `skill-building`, `mcp-development`, `agent-debug-panel` |
+| 29 | Product Managers | `project-management`, `scope-management`, `business-analysis`, `status-reporting`, `executive-storytelling`, `gamma-presentations` |
+| 30 | Project Managers | `project-management`, `scope-management`, `status-reporting`, `change-management`, `gamma-presentations`, `alex-effort-estimation` |
+| 31 | Psychology & Counselors | `counseling-psychology`, `learning-psychology`, `coaching-techniques`, `privacy-responsible-ai`, `frustration-recognition` |
+| 32 | Real Estate | `financial-analysis`, `sales-enablement`, `business-analysis`, `executive-storytelling`, `creative-writing` |
+| 33 | Scientists | `research-first-development`, `literature-review`, `citation-management`, `practitioner-research`, `anti-hallucination`, `research-project-scaffold` |
+| 34 | Security Engineers | `security-review`, `distribution-security`, `secrets-management`, `pii-privacy-regulations`, `architecture-audit`, `incident-response` |
+| 35 | Sellers | `sales-enablement`, `executive-storytelling`, `financial-analysis`, `coaching-techniques`, `business-analysis` |
+| 36 | SRE / On-Call | `incident-response`, `post-mortem`, `observability-monitoring`, `root-cause-analysis`, `debugging-patterns`, `error-recovery-patterns` |
+| 37 | Standup Comics | `comedy-writing`, `creative-writing`, `ai-writing-avoidance`, `prompt-engineering` |
+| 38 | Students | `career-development`, `bootstrap-learning`, `learning-psychology`, `research-first-development`, `citation-management`, `socratic-questioning` |
+| 39 | Teachers & Educators | `learning-psychology`, `coaching-techniques`, `socratic-questioning`, `gamma-presentations`, `creative-writing`, `slide-design` |
+| 40 | Technical Writers | `documentation-quality-assurance`, `api-documentation`, `markdown-mermaid`, `lint-clean-markdown`, `md-to-word`, `code-review` |
+| 41 | Visual Storytellers | `svg-graphics`, `graphic-design`, `image-handling`, `gamma-presentations`, `slide-design`, `markdown-mermaid` |
+
+**Coverage stats**: 64/130 skills appear in ≥1 discipline mapping. Top: `creative-writing` (14), `business-analysis` (10), `executive-storytelling` (9).

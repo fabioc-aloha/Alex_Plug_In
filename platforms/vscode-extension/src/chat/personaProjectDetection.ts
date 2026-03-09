@@ -327,6 +327,14 @@ async function detectPersonaWithLLM(
     
     const projectContext = await gatherProjectContext(workspaceRoot);
     
+    // Build dynamic persona and skill lists from PERSONAS registry
+    const personaIds = PERSONAS.map(p => p.id).join('|');
+    const uniqueSkills = [...new Set(PERSONAS.map(p => p.skill))];
+    const skillList = uniqueSkills.map(s => {
+        const persona = PERSONAS.find(p => p.skill === s);
+        return `- ${s}: For ${persona?.name || 'various users'}`;
+    }).join('\n');
+    
     const prompt = `Analyze this project and identify the most appropriate user persona.
 
 ${projectContext}
@@ -340,22 +348,13 @@ Based on the project structure and content, determine:
 2. What persona would the user working on this project likely have?
 3. What skill would be most relevant for this persona?
 
-## Available Skills (examples)
-- code-review: For software developers
-- creative-writing: For fiction writers, content creators
-- research-project-scaffold: For researchers, academics
-- api-documentation: For technical writers
-- microsoft-fabric: For data engineers
-- gamma-presentations: For presenters, speakers
-- project-management: For project managers
-- infrastructure-as-code: For DevOps engineers
-- architecture-health: For enterprise architects
-- game-design: For game developers
+## Available Skills
+${skillList}
 
 ## Response Format (JSON only)
 \`\`\`json
 {
-  "personaId": "developer|fiction-writer|game-developer|researcher|technical-writer|data-engineer|presenter|project-manager|devops|architect|student|content-creator|academic",
+  "personaId": "${personaIds}",
   "personaName": "Human-readable name",
   "skill": "most-relevant-skill-id",
   "confidence": 0.85,

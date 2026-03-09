@@ -25,9 +25,8 @@ import {
   togglePauseSession,
   showSessionActions,
   disposeSession,
-  getCurrentSession,
 } from "./commands/session";
-import { registerGoalsCommands, getGoalsSummary } from "./commands/goals";
+import { registerGoalsCommands } from "./commands/goals";
 import { generateSkillCatalog } from "./commands/skillCatalog";
 import { inheritSkillFromGlobal } from "./commands/inheritSkill";
 import { proposeSkillToGlobal } from "./commands/proposeSkill";
@@ -42,7 +41,6 @@ import {
   registerGlobalKnowledgeTools,
   ensureGlobalKnowledgeDirectories,
   registerCurrentProject,
-  detectGlobalKnowledgeRepo,
   initGlobalKnowledgeSecrets,
 } from "./chat/globalKnowledge";
 import {
@@ -55,14 +53,12 @@ import { initExpertiseModel, showExpertiseModelCommand } from "./services/expert
 import { flushEpisodicDraft, recallSessionCommand, showSessionHistoryCommand } from "./services/episodicMemory";
 import { runWorkflowCommand, listWorkflowsCommand } from "./services/workflowEngine";
 import {
-  checkHealth,
-  getStatusBarDisplay,
   clearHealthCache,
   HealthStatus,
   registerSessionProvider,
   registerStreakProvider,
 } from "./shared/healthCheck";
-import { isWorkspaceProtected, getLanguageIdFromPath, openChatPanel } from "./shared/utils";
+import { getLanguageIdFromPath, openChatPanel } from "./shared/utils";
 import { requireCognitiveLevel, detectCognitiveLevel, invalidateCognitiveLevelCache } from "./shared/cognitiveTier";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
@@ -77,6 +73,7 @@ import {
 import { registerPresentationCommands } from "./commandsPresentation";
 import { registerDeveloperCommands } from "./commandsDeveloper";
 import { showStatusQuickPick } from "./commands/statusQuickPick";
+import { setCommandContextKeys, updateStatusBar, startPeriodicHealthCheck, checkVersionUpgrade } from "./services/extensionLifecycle";
 
 // Re-export for backward compatibility (other modules may import from extension.ts)
 export { isOperationInProgress };
@@ -243,7 +240,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
           await initializeArchitecture(context);
           // Refresh status bar after initialization
           clearHealthCache();
-          await updateStatusBar(context, true);
+          await updateStatusBar(statusBarItem, true);
           // Refresh context keys (memory files now exist)
           await setCommandContextKeys();
           done(true);
@@ -264,7 +261,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
           await resetArchitecture(context);
           // Refresh status bar after reset
           clearHealthCache();
-          await updateStatusBar(context, true);
+          await updateStatusBar(statusBarItem, true);
           // Refresh context keys (memory files may have changed)
           await setCommandContextKeys();
           done(true);
@@ -286,7 +283,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
           await runDreamProtocol(context);
           // Refresh status bar after dream (synapses may have been repaired)
           clearHealthCache();
-          await updateStatusBar(context, true);
+          await updateStatusBar(statusBarItem, true);
           
           // Auto-sync to OneDrive if enabled
           const config = vscode.workspace.getConfiguration('alex');
@@ -328,7 +325,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
               // Phase 2: Final health check
               progress.report({ message: "Phase 2/2: Final health validation..." });
               clearHealthCache();
-              await updateStatusBar(context, true);
+              await updateStatusBar(statusBarItem, true);
               
               // Build result message
               const results: string[] = [];
@@ -376,7 +373,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
           await upgradeArchitecture(context);
           // Refresh status bar after upgrade
           clearHealthCache();
-          await updateStatusBar(context, true);
+          await updateStatusBar(statusBarItem, true);
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));
@@ -394,7 +391,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
         try {
           await completeMigration(context);
           clearHealthCache();
-          await updateStatusBar(context, true);
+          await updateStatusBar(statusBarItem, true);
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));
@@ -422,7 +419,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
           await runSelfActualization(context);
           // Refresh status bar after self-actualization
           clearHealthCache();
-          await updateStatusBar(context, true);
+          await updateStatusBar(statusBarItem, true);
           
           // Auto-sync to OneDrive if enabled
           const config = vscode.workspace.getConfiguration('alex');
@@ -761,16 +758,16 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     "Alex Cognitive Architecture - Click for quick actions";
 
   // Update status bar based on workspace health (replaces loading state)
-  updateStatusBar(context);
+  updateStatusBar(statusBarItem);
 
   // Start periodic health checks (every 5 minutes)
-  startPeriodicHealthCheck(context);
+  startPeriodicHealthCheck(context, statusBarItem);
 
   // Re-check status when workspace folders change
   context.subscriptions.push(
     vscode.workspace.onDidChangeWorkspaceFolders(() => {
       clearHealthCache();
-      updateStatusBar(context, true);
+      updateStatusBar(statusBarItem, true);
     }),
   );
 
@@ -780,15 +777,15 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   );
   memoryWatcher.onDidChange(() => {
     clearHealthCache();
-    updateStatusBar(context, true);
+    updateStatusBar(statusBarItem, true);
   });
   memoryWatcher.onDidCreate(() => {
     clearHealthCache();
-    updateStatusBar(context, true);
+    updateStatusBar(statusBarItem, true);
   });
   memoryWatcher.onDidDelete(() => {
     clearHealthCache();
-    updateStatusBar(context, true);
+    updateStatusBar(statusBarItem, true);
   });
   context.subscriptions.push(memoryWatcher);
 
@@ -797,7 +794,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     // Refresh status bar if workspace protection settings change
     if (e.affectsConfiguration('alex.workspace')) {
       clearHealthCache();
-      updateStatusBar(context, true);
+      updateStatusBar(statusBarItem, true);
     }
     // Re-check M365 sync settings
     if (e.affectsConfiguration('alex.m365')) {
@@ -953,172 +950,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
     vscode.commands.registerCommand("alex.listWorkflows", listWorkflowsCommand),
     vscode.commands.registerCommand("alex.showExpertiseModel", showExpertiseModelCommand),
   );
-}
-
-/**
- * Set VS Code context keys for when-clause filtering on slash commands.
- * These keys control visibility of commands like /sync, /m365, /forget.
- * Called at activation and after initialize/reset.
- */
-async function setCommandContextKeys(): Promise<void> {
-  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-
-  // alex.globalKnowledgeConfigured — true if GK repo detected
-  const gkRepo = await detectGlobalKnowledgeRepo();
-  await vscode.commands.executeCommand(
-    "setContext",
-    "alex.globalKnowledgeConfigured",
-    gkRepo !== null,
-  );
-
-  // alex.hasMemoryFiles — true if .github/copilot-instructions.md exists
-  let hasMemory = false;
-  if (workspaceFolder) {
-    const markerFile = path.join(
-      workspaceFolder.uri.fsPath,
-      ".github",
-      "copilot-instructions.md",
-    );
-    hasMemory = await fs.pathExists(markerFile);
-  }
-  await vscode.commands.executeCommand(
-    "setContext",
-    "alex.hasMemoryFiles",
-    hasMemory,
-  );
-}
-
-/**
- * Update the status bar item based on workspace health
- */
-async function updateStatusBar(
-  context: vscode.ExtensionContext,
-  forceRefresh: boolean = false,
-): Promise<void> {
-  try {
-    const health = await checkHealth(forceRefresh);
-    
-    // Get session info
-    const session = getCurrentSession();
-    const sessionInfo = session ? {
-      active: true,
-      remaining: session.remaining,
-      isBreak: session.isBreak
-    } : null;
-    
-    // Get streak info
-    let streakDays = 0;
-    try {
-      const goalsSummary = await getGoalsSummary();
-      streakDays = goalsSummary.streakDays;
-    } catch { /* ignore */ }
-    
-    // Check protection status
-    let isProtected = false;
-    try {
-      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-      if (workspaceFolder) {
-        const protectionResult = await isWorkspaceProtected(workspaceFolder.uri.fsPath);
-        isProtected = protectionResult.isProtected;
-      }
-    } catch { /* ignore */ }
-    
-    const display = getStatusBarDisplay(health, sessionInfo, streakDays, isProtected);
-
-    statusBarItem.text = display.text;
-    statusBarItem.tooltip = display.tooltip;
-    statusBarItem.backgroundColor = display.backgroundColor;
-    statusBarItem.show();
-  } catch (err) {
-    // Fallback if health check fails
-    statusBarItem.text = "$(rocket) Alex";
-    statusBarItem.tooltip =
-      "Alex Cognitive Architecture - Click for quick actions";
-    statusBarItem.backgroundColor = undefined;
-    statusBarItem.show();
-  }
-}
-
-/**
- * Start periodic health checks (every 5 minutes)
- */
-function startPeriodicHealthCheck(context: vscode.ExtensionContext): void {
-  const HEALTH_CHECK_INTERVAL = 5 * 60 * 1000; // 5 minutes
-
-  const intervalId = setInterval(async () => {
-    await updateStatusBar(context, true);
-  }, HEALTH_CHECK_INTERVAL);
-
-  // Clean up interval on deactivation
-  context.subscriptions.push({
-    dispose: () => clearInterval(intervalId),
-  });
-}
-
-/**
- * Check if the extension was upgraded and notify the user
- */
-async function checkVersionUpgrade(
-  context: vscode.ExtensionContext,
-): Promise<void> {
-  const LAST_VERSION_KEY = "alex.lastKnownVersion";
-
-  // Get current version from package.json
-  const extension = vscode.extensions.getExtension(
-    "fabioc-aloha.alex-cognitive-architecture",
-  );
-  if (!extension) {
-    return;
-  }
-
-  const currentVersion = extension.packageJSON.version as string;
-  const lastVersion = context.globalState.get<string>(LAST_VERSION_KEY);
-
-  // Store current version for next time
-  await context.globalState.update(LAST_VERSION_KEY, currentVersion);
-
-  // First install - no notification needed (they'll run initialize)
-  if (!lastVersion) {
-    return;
-  }
-
-  // Same version - no action needed
-  if (lastVersion === currentVersion) {
-    return;
-  }
-
-  // Version changed - check if it's a major upgrade
-  const [lastMajor] = lastVersion.split(".").map(Number);
-  const [currentMajor] = currentVersion.split(".").map(Number);
-
-  const isMajorUpgrade = currentMajor > lastMajor;
-
-  // Show upgrade notification
-  const upgradeButton = "Run Upgrade";
-  const changelogButton = "View Changelog";
-  const dismissButton = "Dismiss";
-
-  const message = isMajorUpgrade
-    ? `🎉 Alex upgraded to v${currentVersion}! This is a major release with new features. Run the upgrade to update your workspace files.`
-    : `✨ Alex updated to v${currentVersion}. Run the upgrade to sync your workspace with the latest improvements.`;
-
-  const selection = await vscode.window.showInformationMessage(
-    message,
-    upgradeButton,
-    changelogButton,
-    dismissButton,
-  );
-
-  if (selection === upgradeButton) {
-    vscode.commands.executeCommand("alex.upgrade");
-  } else if (selection === changelogButton) {
-    // Open changelog in browser or show in editor
-    const changelogUri = vscode.Uri.joinPath(
-      extension.extensionUri,
-      "CHANGELOG.md",
-    );
-    vscode.commands.executeCommand("markdown.showPreview", changelogUri);
-  }
 }
 
 /**
