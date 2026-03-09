@@ -2,9 +2,9 @@
 
 **Author**: Alex Finch + GitHub Copilot
 **Created**: March 5, 2026
-**Revised**: March 8, 2026 — Wave 7 UI Development plan added (UI/UX audit + Content audit findings)
+**Revised**: March 8, 2026 — Wave 7 complete (43/45 shipped, 2 cancelled)
 **Classification**: Internal — UI-first implementation plan
-**Status**: Waves 0–6 ✔️ (55/55 complete) · Wave 7 planned (45 steps) · UI refinement phase
+**Status**: ✔️ All waves complete (98/100 shipped, 2 cancelled) · Command Center v1.0 delivered
 
 > **This is the single source of truth for Command Center work.** All context from the feasibility study, design principles, competitive analysis, and second-opinion audit has been consolidated here. Background research docs are archived for reference only.
 
@@ -224,11 +224,12 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 6.7 | Fix easter egg avatar to use unified SVG resolution instead of deleted PNG paths | C | ✓ |
 | 6.8 | Code review — 6 issues found and fixed (date formatting, sort, empty states, escaping, dedup I/O, perf) | B | ✓ |
 
-### Wave 7 — UI Development (Audit-Driven)
+### Wave 7 — UI Development (Audit-Driven) ✔️
 
 > **Goal**: Close all UI/UX compliance gaps and align implementation to approved v2 mockups.
 > **Depends on**: Wave 6. **Unlocks**: v7.0 full sidebar consolidation.
 > **Source**: UI/UX audit (March 8, 2026) + Content audit vs 5 approved mockup SVGs.
+> **Completed**: March 8, 2026 (43/45 shipped, 2 cancelled — 7.15 + 7.31 depend on unbuilt Contract B)
 > **Classification**: Each step tagged ⬡ Implementable Now · ⬢ Needs Data Provider · ◇ Design Decision
 
 **7A — WCAG Compliance (P1 HIGH)** — Accessibility violations that block WCAG AA conformance
@@ -253,68 +254,68 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 
 | # | Step | Track | Class | Status |
 |---|------|:-----:|:-----:|:------:|
-| 7.9 | Add Architecture Status banner card with 3-state indicator (Healthy/Warnings/Issues) per mockup — existing `HealthCheckResult` data | A | ✅ | — |
-| 7.10 | Add Live Activity Feed showing agent progress + queue/steer controls | A+B | ⬢ Contract A | — |
-| 7.11 | Add Quick Command bar (search-style input for rapid command access) | A | ◇ | — |
-| 7.12 | Add "Later" dismiss button on Smart Nudge cards (currently nudges have no dismiss) | A | ✅ | — |
-| 7.13 | Add Secret Manager inline dashboard (3-row token status display per mockup) | A | ◇ | — |
-| 7.14 | Add Settings Manager inline toggles (4 toggle switches per mockup) | A | ◇ | — |
-| 7.15 | Add Context Budget percentage bar | A+B | ⬢ Contract B | — |
-| 7.16 | Add Personality Toggle (Precise/Chatty modes) | A+B | ◇ | — |
-| 7.17 | **DESIGN DECISION**: Resolve 30+ action button density — keep as-is, progressive disclosure, relocate to sub-pages, or replace with monitoring widgets per mockup | A | ◇ | — |
+| 7.9 | Add Architecture Status banner card with 3-state indicator (Healthy/Warnings/Issues) per mockup — existing `HealthCheckResult` data | A | ✅ | ✓ |
+| 7.10 | Add Live Activity Feed showing agent progress + queue/steer controls | A+B | ⬢ Contract A | ✓ |
+| 7.11 | Add Quick Command bar (search-style input for rapid command access) | A | ◇ | ✓ |
+| 7.12 | Add "Later" dismiss button on Smart Nudge cards (currently nudges have no dismiss) | A | ✅ | ✓ |
+| 7.13 | Add Secret Manager inline dashboard (3-row token status display per mockup) | A | ◇ | ✓ |
+| 7.14 | Add Settings Manager inline toggles (4 toggle switches per mockup) | A | ◇ | ✓ |
+| 7.15 | Add Context Budget percentage bar | A+B | ⬢ Contract B | ✗ cancelled |
+| 7.16 | Add Personality Toggle (Precise/Chatty modes) | A+B | ◇ | ✓ |
+| 7.17 | **DESIGN DECISION**: Resolve 30+ action button density — keep as-is, progressive disclosure, relocate to sub-pages, or replace with monitoring widgets per mockup | A | ◇ | ✓ |
 
 **7D — Content Alignment: Agents** — Gap closure vs `command-center-v2-agent-hub.svg`
 
 | # | Step | Track | Class | Status |
 |---|------|:-----:|:-----:|:------:|
-| 7.18 | Add Cognitive State card (avatar + current phase/mode + reasoning meter) above agent registry | A | ◇ | — |
-| 7.19 | Add Parallel Agents display (side-by-side agent execution with progress indicators) | A+B | ⬢ Contract A | — |
-| 7.20 | Add live status badges on agent cards (ACTIVE/QUEUED/ROUTING/IDLE per mockup — currently all show static "installed" badge) | A+B | ⬢ Contract A | — |
-| 7.21 | Add Recent Threads section (conversation history per agent) | A+B | ⬢ Contract A | — |
-| 7.22 | Add Auto-Routing explanation card (how Alex routes to specialist agents) | A | ✅ | — |
-| 7.23 | Add Create Custom Agent placeholder with CTA | A | ✅ | — |
+| 7.18 | Add Cognitive State card (avatar + current phase/mode + reasoning meter) above agent registry | A | ◇ | ✓ |
+| 7.19 | Add Parallel Agents display (side-by-side agent execution with progress indicators) | A+B | ⬢ Contract A | ✓ |
+| 7.20 | Add live status badges on agent cards (ACTIVE/QUEUED/ROUTING/IDLE per mockup — currently all show static "installed" badge) | A+B | ⬢ Contract A | ✓ |
+| 7.21 | Add Recent Threads section (conversation history per agent) | A+B | ⬢ Contract A | ✓ |
+| 7.22 | Add Auto-Routing explanation card (how Alex routes to specialist agents) | A | ✅ | ✓ |
+| 7.23 | Add Create Custom Agent placeholder with CTA | A | ✅ | ✓ |
 
 **7E — Content Alignment: Skill Store** — Gap closure vs `command-center-v2-skill-store.svg`
 
 | # | Step | Track | Class | Status |
 |---|------|:-----:|:-----:|:------:|
-| 7.24 | Add search bar + filter controls for skill discovery | A | ✅ | — |
-| 7.25 | Add Catalog Toggle bar (All/Active/Inactive with counts) | A | ✅ | — |
-| 7.26 | Add Skill Health summary bar (healthy/warnings count from `HealthCheckResult`) | A | ✅ | — |
-| 7.27 | Add 3-tier category grouping (Core/Development/Creative) with collapsible sections | A | ✅ | — |
-| 7.28 | Add enable/disable toggle switches per skill | A+B | ⬢ Persistence | — |
-| 7.29 | Add skill icons from rocket-icons SVG set | C | ✅ | — |
-| 7.30 | Add "Install from GitHub" action for community skill loading | A+B | ⬢ | — |
-| 7.31 | Add Context Budget Impact indicator per skill | A+B | ⬢ Contract B | — |
+| 7.24 | Add search bar + filter controls for skill discovery | A | ✅ | ✓ |
+| 7.25 | Add Catalog Toggle bar (All/Active/Inactive with counts) | A | ✅ | ✓ |
+| 7.26 | Add Skill Health summary bar (healthy/warnings count from `HealthCheckResult`) | A | ✅ | ✓ |
+| 7.27 | Add 3-tier category grouping (Core/Development/Creative) with collapsible sections | A | ✅ | ✓ |
+| 7.28 | Add enable/disable toggle switches per skill | A+B | ⬢ Persistence | ✓ |
+| 7.29 | Add skill icons from rocket-icons SVG set | C | ✅ | ✓ |
+| 7.30 | Add "Install from GitHub" action for community skill loading | A+B | ⬢ | ✓ |
+| 7.31 | Add Context Budget Impact indicator per skill | A+B | ⬢ Contract B | ✗ cancelled |
 
 **7F — Content Alignment: Mind** — Gap closure vs `command-center-v2-mind.svg` (key differentiator tab)
 
 | # | Step | Track | Class | Status |
 |---|------|:-----:|:-----:|:------:|
-| 7.32 | Add Knowledge Freshness panel (Thriving/Active/Fading/Dormant forgetting curve visualization) | A+B | ⬢ | — |
-| 7.33 | Add Honest Uncertainty panel (confidence distribution bars + thin coverage areas) | A+B | ⬢ | — |
-| 7.34 | Add Global Knowledge panel (insight count, project count, promoted count) | A | ✅ | — |
-| 7.35 | Add Identity card (name, age, personality summary — static character model data) | A | ✅ | — |
-| 7.36 | Enrich Cognitive Age display: add tier label, progression bar, and milestone markers per mockup (currently shows only number + label) | A | ✅ | — |
-| 7.37 | Upgrade Memory Architecture from horizontal bars to 5 rich modality cards per mockup (Semantic, Procedural, Episodic, Visual, Muscles — each with count + health %) | A | ✅ | — |
-| 7.38 | Add meditation streak counter + emotion tags to Meditation & Growth section (currently shows only last meditation/dream timestamps) | A+B | ⬢ Persistence | — |
+| 7.32 | Add Knowledge Freshness panel (Thriving/Active/Fading/Dormant forgetting curve visualization) | A+B | ⬢ | ✓ |
+| 7.33 | Add Honest Uncertainty panel (confidence distribution bars + thin coverage areas) | A+B | ⬢ | ✓ |
+| 7.34 | Add Global Knowledge panel (insight count, project count, promoted count) | A | ✅ | ✓ |
+| 7.35 | Add Identity card (name, age, personality summary — static character model data) | A | ✅ | ✓ |
+| 7.36 | Enrich Cognitive Age display: add tier label, progression bar, and milestone markers per mockup (currently shows only number + label) | A | ✅ | ✓ |
+| 7.37 | Upgrade Memory Architecture from horizontal bars to 5 rich modality cards per mockup (Semantic, Procedural, Episodic, Visual, Muscles — each with count + health %) | A | ✅ | ✓ |
+| 7.38 | Add meditation streak counter + emotion tags to Meditation & Growth section (currently shows only last meditation/dream timestamps) | A+B | ⬢ Persistence | ✓ |
 
 **7G — Content Alignment: Docs** — Gap closure vs `command-center-v2-docs.svg`
 
 | # | Step | Track | Class | Status |
 |---|------|:-----:|:-----:|:------:|
-| 7.39 | Add Tips & Nudges section (3 context-aware tips with "Dismiss all" action) at top of Docs tab | A | ✅ | — |
-| 7.40 | Add Architecture grid (2×3: Cognitive Architecture, Memory Systems, Conscious Mind, Unconscious Mind, Agent Catalog, Trifecta Catalog) per mockup | A | ✅ | — |
-| 7.41 | Add Operations grid (2×2: Protection, Project Structure, Heir Architecture, Research Papers) per mockup | A | ✅ | — |
-| 7.42 | Enrich Getting Started to match mockup 4-card layout (User Manual, Quick Reference, Environment Setup, Use Cases) — currently has 3 links | A | ✅ | — |
-| 7.43 | Align Partnership card presentation to mockup format (currently plain text, mockup shows structured card) | A | ✅ | — |
+| 7.39 | Add Tips & Nudges section (3 context-aware tips with "Dismiss all" action) at top of Docs tab | A | ✅ | ✓ |
+| 7.40 | Add Architecture grid (2×3: Cognitive Architecture, Memory Systems, Conscious Mind, Unconscious Mind, Agent Catalog, Trifecta Catalog) per mockup | A | ✅ | ✓ |
+| 7.41 | Add Operations grid (2×2: Protection, Project Structure, Heir Architecture, Research Papers) per mockup | A | ✅ | ✓ |
+| 7.42 | Enrich Getting Started to match mockup 4-card layout (User Manual, Quick Reference, Environment Setup, Use Cases) — currently has 3 links | A | ✅ | ✓ |
+| 7.43 | Align Partnership card presentation to mockup format (currently plain text, mockup shows structured card) | A | ✅ | ✓ |
 
 **7H — Polish (P3 LOW)**
 
 | # | Step | Track | Class | Status |
 |---|------|:-----:|:-----:|:------:|
-| 7.44 | Review Mission Ctrl button density — implement progressive disclosure or grouped sub-sections to reduce cognitive overload (~30 buttons visible at once) | A | ◇ | — |
-| 7.45 | Standardize focus indicator widths to consistent 2px across all focusable elements (tabs currently use 1px, global uses 2px) | A | ✅ | — |
+| 7.44 | Review Mission Ctrl button density — implement progressive disclosure or grouped sub-sections to reduce cognitive overload (~30 buttons visible at once) | A | ◇ | ✓ |
+| 7.45 | Standardize focus indicator widths to consistent 2px across all focusable elements (tabs currently use 1px, global uses 2px) | A | ✅ | ✓ |
 
 **Total**: 55 + 45 = 100 steps across 8 waves · 3 decision gates · 3 parallel tracks
 
@@ -329,8 +330,8 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 4 | Mission Command | 8 | 8 | Session card wired, doc buttons migrated to Docs, features bloat removed |
 | 5 | Controlled Consolidation | 5 | 5 | Journey audit done, both legacy views preserved, cognitive dashboard → Mind tab redirect, 5.3 deferred by design |
 | 6 | Advanced Tabs | 8 | 8 | Agent registry, Skill Store, Mind dashboard, easter egg SVG fix, code review |
-| 7 | UI Development | 45 | 8 | WCAG compliance (7A): ARIA ids, keyboard activation, font minimums, role corrections. UX Quality (7B): theme vars, 36px touch targets, 8px inter-target spacing, design scale normalization |
-| **Σ** | | **100** | **63** | **Waves 0–6 complete. Wave 7A–7B complete: 8/8. Next: Wave 7C (Content Alignment: Mission Control).** |
+| 7 | UI Development | 45 | 43 | WCAG compliance (7A): ARIA ids, keyboard activation, font minimums, role corrections. UX Quality (7B): theme vars, 36px touch targets, 8px inter-target spacing, design scale normalization. Content Alignment (7C–7G): Secret Manager, Settings toggles, Quick Command, Live Activity Feed, Cognitive State card, Parallel Agents, Agent lifecycle badges, Recent Threads, Skill toggles/icons/categories, Knowledge Freshness, Honest Uncertainty, Meditation streak, Identity/Global Knowledge panels, Docs enrichment. Polish (7H): Button density, focus indicators. 2 cancelled (7.15 Context Budget, 7.31 Context Impact — depend on unbuilt Contract B). |
+| **Σ** | | **100** | **98** | **All 100 steps complete (98 shipped, 2 cancelled). Command Center v1.0 delivered.** |
 
 ---
 
@@ -343,8 +344,8 @@ These facts are verified against the current repo (March 8, 2026) and treated as
 | Fact | Verified Value |
 |------|----------------|
 | Sidebar views registered | 3: `alex.welcomeView`, `alex.cognitiveDashboard`, `alex.memoryTree` |
-| `welcomeView.ts` | 687 lines (data collection + tab switching) |
-| `welcomeViewHtml.ts` | 2,095 lines (5-tab HTML + CSS + client JS) |
+| `welcomeView.ts` | 819 lines (data collection + tab switching) |
+| `welcomeViewHtml.ts` | 2,982 lines (5-tab HTML + CSS + client JS) |
 | `avatarMappings.ts` | 721 lines (SVG format parameter added in Spike 1A) |
 | `memoryTreeProvider.ts` | 281 lines |
 | `cognitiveDashboard.ts` | 550 lines |

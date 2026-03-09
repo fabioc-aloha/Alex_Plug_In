@@ -30,16 +30,21 @@ import {
   MindTabData,
   AgentInfo,
   SkillInfo,
+  TokenStatusInfo,
+  SettingsToggle,
   getLoadingHtml,
   getErrorHtml,
   getWelcomeHtmlContent,
 } from "./welcomeViewHtml";
+import { getTokenStatuses, TOKEN_CONFIGS } from '../services/secretsManager';
+import { getCalibrationSummary } from '../chat/honestUncertainty';
 
 export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "alex.welcomeView";
 
   private _view?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
+  private _context?: vscode.ExtensionContext;
   private _cognitiveState: string | null = null;
   private _agentMode: string | null = null;
   private _currentPersonaId: string | null = null;
@@ -47,6 +52,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
   constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
     this._extensionUri = extensionUri;
+    this._context = context;
   }
 
   /**
@@ -251,6 +257,32 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           const mode = ['auto', 'precise', 'chatty'].includes(message.mode) ? message.mode : 'auto';
           await vscode.workspace.getConfiguration('alex').update('personalityMode', mode, vscode.ConfigurationTarget.Global);
           console.log(`[Alex] Personality mode set to: ${mode}`);
+          break;
+        }
+
+        case "toggleSetting": {
+          // 7.14: Inline settings toggle
+          const settingKey = typeof message.key === 'string' ? message.key : '';
+          const allowedSettings = ['alex.autoInsights.enabled', 'alex.dailyBriefing.enabled', 'alex.voice.enabled', 'alex.globalKnowledge.enabled'];
+          if (allowedSettings.includes(settingKey)) {
+            const [section, ...rest] = settingKey.split('.');
+            const configKey = rest.join('.');
+            await vscode.workspace.getConfiguration(section).update(configKey, !!message.value, vscode.ConfigurationTarget.Global);
+            console.log(`[Alex] Setting ${settingKey} toggled to: ${message.value}`);
+          }
+          break;
+        }
+
+        case "toggleSkill": {
+          // 7.28: Skill enable/disable toggle — persisted in globalState
+          if (this._context && typeof message.skillId === 'string') {
+            const disabled = this._context.globalState.get<string[]>('alex.disabledSkills', []);
+            const updated = message.enabled
+              ? disabled.filter((id: string) => id !== message.skillId)
+              : [...disabled, message.skillId];
+            await this._context.globalState.update('alex.disabledSkills', updated);
+            console.log(`[Alex] Skill ${message.skillId} ${message.enabled ? 'enabled' : 'disabled'}`);
+          }
           break;
         }
 
@@ -462,6 +494,30 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const personalityMode = vscode.workspace.getConfiguration('alex').get<string>('personalityMode', 'auto');
       const mindData = await this._collectMindData(wsRoot, lastDreamDate, health, agents.length, skills.length);
 
+      // 7.13: Token statuses for Secret Manager inline dashboard
+      const tokenStatuses: TokenStatusInfo[] = (() => {
+        try {
+          const statuses = getTokenStatuses();
+          return Object.entries(TOKEN_CONFIGS).map(([name, config]) => ({
+            name,
+            displayName: config.displayName,
+            isSet: !!statuses[name],
+          }));
+        } catch { return []; }
+      })();
+
+      // 7.14: Settings snapshot for inline toggles
+      const alexCfg = vscode.workspace.getConfiguration('alex');
+      const settingsToggles: SettingsToggle[] = [
+        { key: 'alex.autoInsights.enabled', label: 'Auto Insights', enabled: alexCfg.get<boolean>('autoInsights.enabled', true) },
+        { key: 'alex.dailyBriefing.enabled', label: 'Daily Briefing', enabled: alexCfg.get<boolean>('dailyBriefing.enabled', true) },
+        { key: 'alex.voice.enabled', label: 'Voice Mode', enabled: alexCfg.get<boolean>('voice.enabled', false) },
+        { key: 'alex.globalKnowledge.enabled', label: 'Global Knowledge', enabled: alexCfg.get<boolean>('globalKnowledge.enabled', true) },
+      ];
+
+      // 7.28: Disabled skills from globalState
+      const disabledSkills = this._context?.globalState.get<string[]>('alex.disabledSkills', []) ?? [];
+
       console.log(`[Alex][WelcomeView] Tab data: agents=${agents.length}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
 
       this._view.webview.html = getWelcomeHtmlContent(
@@ -485,6 +541,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         skills,
         recentActivity,
         personalityMode,
+        tokenStatuses,
+        settingsToggles,
+        disabledSkills,
       );
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
@@ -508,6 +567,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       lastDreamDate: lastDreamDate ? lastDreamDate.toISOString().slice(0, 10) : null,
       lastMeditationDate: null,
       cognitiveAge: 26,
+      meditationCount: 0,
+      freshness: { thriving: 0, active: 0, fading: 0, dormant: 0 },
+      calibration: { high: 0, medium: 0, low: 0, uncertain: 0, total: 0 },
     };
 
     if (!wsRoot) { return data; }
@@ -531,13 +593,40 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         const medFiles = episodicFiles
           .filter(f => f.startsWith('meditation-'))
           .sort().reverse();
+        data.meditationCount = medFiles.length;
         if (medFiles.length > 0) {
           const match = medFiles[0].match(/meditation-(\d{4}-\d{2}-\d{2})/);
           if (match) {
             data.lastMeditationDate = match[1];
           }
         }
+
+        // 7.32: Knowledge freshness — bucket episodic files by age
+        const now = Date.now();
+        const dayMs = 24 * 60 * 60 * 1000;
+        for (const f of episodicFiles) {
+          const dateMatch = f.match(/(\d{4}-\d{2}-\d{2})/);
+          if (dateMatch) {
+            const age = (now - new Date(dateMatch[1]).getTime()) / dayMs;
+            if (age <= 7) { data.freshness.thriving++; }
+            else if (age <= 30) { data.freshness.active++; }
+            else if (age <= 90) { data.freshness.fading++; }
+            else { data.freshness.dormant++; }
+          }
+        }
       }
+
+      // 7.33: Honest Uncertainty — get calibration summary
+      try {
+        const calibSummary = await getCalibrationSummary(wsRoot);
+        if (calibSummary) {
+          data.calibration.total = calibSummary.totalResponses;
+          data.calibration.high = calibSummary.byLevel.high ?? 0;
+          data.calibration.medium = calibSummary.byLevel.medium ?? 0;
+          data.calibration.low = calibSummary.byLevel.low ?? 0;
+          data.calibration.uncertain = calibSummary.byLevel.uncertain ?? 0;
+        }
+      } catch { /* silent — calibration is optional enhancement */ }
     } catch (err) {
       console.error("[Alex][WelcomeView] _collectMindData failed (non-fatal):", err);
     }

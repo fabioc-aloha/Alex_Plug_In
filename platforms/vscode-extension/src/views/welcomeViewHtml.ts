@@ -35,6 +35,26 @@ export interface MindTabData {
   lastDreamDate: string | null;
   lastMeditationDate: string | null;
   cognitiveAge: number;
+  /** 7.38: Meditation session count for streak tracking */
+  meditationCount: number;
+  /** 7.32: Knowledge freshness buckets */
+  freshness: { thriving: number; active: number; fading: number; dormant: number };
+  /** 7.33: Calibration distribution snapshot */
+  calibration: { high: number; medium: number; low: number; uncertain: number; total: number };
+}
+
+/** 7.13: Token status for Secret Manager inline dashboard */
+export interface TokenStatusInfo {
+  name: string;
+  displayName: string;
+  isSet: boolean;
+}
+
+/** 7.14: Settings snapshot for inline toggles */
+export interface SettingsToggle {
+  key: string;
+  label: string;
+  enabled: boolean;
 }
 
 /** Data contract for the Agents tab */
@@ -186,6 +206,9 @@ export function getWelcomeHtmlContent(
   skills?: SkillInfo[],
   recentActivity?: AgentActivity[],
   personalityMode?: string,
+  tokenStatuses?: TokenStatusInfo[],
+  settingsToggles?: SettingsToggle[],
+  disabledSkills?: string[],
 ): string {
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, '_getHtmlContent: webview must be defined');
@@ -342,6 +365,24 @@ export function getWelcomeHtmlContent(
     const cat = classifySkill(s.id, s.description);
     if (!skillCategories[cat]) { skillCategories[cat] = []; }
     skillCategories[cat].push(s);
+  }
+
+  // 7.28: Build disabled skill set for efficient lookup
+  const disabledSet = new Set(disabledSkills ?? []);
+
+  // 7.29: Map skill IDs to category-based icons
+  const SKILL_ICONS: Record<string, string> = {
+    'meditation': '🧘', 'dream-state': '💭', 'self-actualization': '✨', 'north-star': '⭐',
+    'code-review': '👀', 'debugging-patterns': '🐛', 'testing-strategies': '🧪', 'root-cause-analysis': '🔍',
+    'refactoring-patterns': '🔧', 'security-review': '🛡️', 'secrets-management': '🔑',
+    'research-first-development': '📚', 'bootstrap-learning': '📖', 'knowledge-synthesis': '🔗',
+    'global-knowledge': '🌐', 'brand-asset-management': '🎨', 'image-handling': '🖼️',
+    'ai-generated-readme-banners': '🏞️', 'flux-brand-finetune': '🎯', 'vscode-extension-patterns': '💻',
+    'mcp-development': '🔌', 'release-process': '🚀', 'markdown-mermaid': '📊',
+    'skill-building': '🧩', 'visual-memory': '👁️', 'brain-qa': '🩺',
+  };
+  function getSkillIcon(id: string, category: string): string {
+    return SKILL_ICONS[id] || CATEGORY_ICONS[category] || '📦';
   }
 
 
@@ -1835,6 +1876,126 @@ export function getWelcomeHtmlContent(
           margin-left: auto;
       }
       .doc-tip-dismiss:hover { opacity: 1; }
+
+      /* ── 7.13 Secret Manager Inline ── */
+      .secret-status-panel { margin-bottom: 8px; }
+      .secret-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 5px 8px;
+          font-size: 11px;
+          border-bottom: 1px solid var(--vscode-widget-border, #303030);
+      }
+      .secret-row:last-child { border-bottom: none; }
+      .secret-dot {
+          width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      }
+      .secret-dot.set { background: var(--vscode-testing-iconPassed, #73c991); }
+      .secret-dot.unset { background: var(--vscode-errorForeground, #f14c4c); }
+      .secret-name { flex: 1; }
+      .secret-badge {
+          font-size: 10px; padding: 1px 6px; border-radius: 3px;
+      }
+      .secret-badge.set { background: rgba(115,201,145,0.1); color: var(--vscode-testing-iconPassed, #73c991); }
+      .secret-badge.unset { background: rgba(241,76,76,0.1); color: var(--vscode-errorForeground, #f14c4c); }
+
+      /* ── 7.14 Settings Toggles ── */
+      .settings-toggles { margin-bottom: 8px; }
+      .setting-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 5px 8px;
+          font-size: 11px;
+          border-bottom: 1px solid var(--vscode-widget-border, #303030);
+      }
+      .setting-row:last-child { border-bottom: none; }
+      .toggle-switch {
+          position: relative; width: 32px; height: 18px;
+          background: var(--vscode-input-background, #3c3c3c);
+          border-radius: 9px; cursor: pointer; transition: background 0.2s;
+          border: 1px solid var(--vscode-widget-border, #303030);
+          flex-shrink: 0;
+      }
+      .toggle-switch.on { background: var(--persona-accent, #6366f1); }
+      .toggle-switch::after {
+          content: ''; position: absolute; top: 2px; left: 2px;
+          width: 12px; height: 12px; border-radius: 50%;
+          background: var(--vscode-foreground); transition: transform 0.2s;
+      }
+      .toggle-switch.on::after { transform: translateX(14px); }
+
+      /* ── 7.28 Skill Toggle ── */
+      .skill-toggle {
+          width: 24px; height: 14px; border-radius: 7px; cursor: pointer;
+          background: var(--vscode-input-background, #3c3c3c);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          position: relative; flex-shrink: 0; transition: background 0.2s;
+      }
+      .skill-toggle.on { background: var(--persona-accent, #6366f1); }
+      .skill-toggle::after {
+          content: ''; position: absolute; top: 1px; left: 1px;
+          width: 10px; height: 10px; border-radius: 50%;
+          background: var(--vscode-foreground); transition: transform 0.15s;
+      }
+      .skill-toggle.on::after { transform: translateX(10px); }
+      .skill-card.disabled { opacity: 0.5; }
+
+      /* ── 7.29 Skill Icon ── */
+      .skill-icon { font-size: 14px; flex-shrink: 0; }
+
+      /* ── 7.30 Install from GitHub ── */
+      .install-github-card {
+          border: 1px dashed var(--vscode-widget-border, #303030);
+          border-radius: 6px; padding: 10px; text-align: center;
+          opacity: 0.7; margin-top: 8px;
+      }
+      .install-github-card:hover { opacity: 1; border-color: var(--persona-accent, #6366f1); }
+
+      /* ── 7.32 Knowledge Freshness ── */
+      .freshness-panel { display: flex; gap: 6px; margin-bottom: 8px; }
+      .freshness-bucket {
+          flex: 1; text-align: center; padding: 6px 4px;
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px; font-size: 10px;
+      }
+      .freshness-count { font-size: 16px; font-weight: 700; }
+      .freshness-label { opacity: 0.7; margin-top: 2px; }
+      .freshness-bucket.thriving { border-bottom: 2px solid var(--vscode-testing-iconPassed, #73c991); }
+      .freshness-bucket.active { border-bottom: 2px solid var(--persona-accent, #6366f1); }
+      .freshness-bucket.fading { border-bottom: 2px solid var(--vscode-editorWarning-foreground, #cca700); }
+      .freshness-bucket.dormant { border-bottom: 2px solid var(--vscode-errorForeground, #f14c4c); }
+
+      /* ── 7.33 Honest Uncertainty ── */
+      .calibration-panel { margin-bottom: 8px; }
+      .calibration-bar-row {
+          display: flex; align-items: center; gap: 6px;
+          font-size: 11px; margin-bottom: 4px;
+      }
+      .calibration-label { width: 60px; text-align: right; opacity: 0.7; flex-shrink: 0; }
+      .calibration-bar-track {
+          flex: 1; height: 8px; background: var(--vscode-input-background, #3c3c3c);
+          border-radius: 4px; overflow: hidden;
+      }
+      .calibration-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+      .calibration-bar-fill.high { background: var(--vscode-testing-iconPassed, #73c991); }
+      .calibration-bar-fill.medium { background: var(--persona-accent, #6366f1); }
+      .calibration-bar-fill.low { background: var(--vscode-editorWarning-foreground, #cca700); }
+      .calibration-bar-fill.uncertain { background: var(--vscode-errorForeground, #f14c4c); }
+      .calibration-pct { width: 30px; font-size: 10px; opacity: 0.6; }
+
+      /* ── 7.38 Meditation Streak ── */
+      .meditation-streak-row {
+          display: flex; align-items: center; gap: 8px;
+          margin-top: 4px; font-size: 11px;
+      }
+      .meditation-streak-badge {
+          display: inline-flex; align-items: center; gap: 4px;
+          padding: 2px 8px; border-radius: 10px;
+          background: rgba(99,102,241,0.12); font-weight: 600;
+      }
   </style>
 </head>
 <body>
@@ -1937,6 +2098,31 @@ export function getWelcomeHtmlContent(
               ${actionButton('editImageAI', '✏️', 'Edit Image (AI)', 'Edit images with AI using nano-banana-pro model')}
               </div>
           </nav>
+
+      ${(tokenStatuses ?? []).length > 0 ? `
+      <div class="section">
+          <div class="section-title">API Keys</div>
+          <div class="secret-status-panel" data-cmd="manageSecrets" tabindex="0" role="button" title="Click to manage API keys">
+              ${(tokenStatuses ?? []).map(t => `
+              <div class="secret-row">
+                  <span class="secret-dot ${t.isSet ? 'set' : 'unset'}"></span>
+                  <span class="secret-name">${escapeHtml(t.displayName)}</span>
+                  <span class="secret-badge ${t.isSet ? 'set' : 'unset'}">${t.isSet ? 'Set' : 'Missing'}</span>
+              </div>`).join('')}
+          </div>
+      </div>` : ''}
+
+      ${(settingsToggles ?? []).length > 0 ? `
+      <div class="section">
+          <div class="section-title">Quick Settings</div>
+          <div class="settings-toggles">
+              ${(settingsToggles ?? []).map(s => `
+              <div class="setting-row">
+                  <span>${escapeHtml(s.label)}</span>
+                  <div class="toggle-switch ${s.enabled ? 'on' : ''}" data-setting="${escapeHtml(s.key)}" tabindex="0" role="switch" aria-checked="${s.enabled}" aria-label="Toggle ${escapeHtml(s.label)}"></div>
+              </div>`).join('')}
+          </div>
+      </div>` : ''}
       
       ${getGoalsHtml(goals)}
 
@@ -2032,22 +2218,31 @@ export function getWelcomeHtmlContent(
                       <span>${catIcon} ${cat} (${catSkills.length})</span>
                   </div>
                   <div class="skill-category-group-content">
-                      ${catSkills.map(s => `
-                      <div class="skill-card" data-cmd="openSkill" data-skill="${escapeHtml(s.id)}" data-skill-name="${escapeHtml(s.displayName)}" title="${escapeHtml(s.description)}" tabindex="0" role="button">
+                      ${catSkills.map(s => {
+                      const isDisabled = disabledSet.has(s.id);
+                      const skillIcon = getSkillIcon(s.id, cat);
+                      return `
+                      <div class="skill-card${isDisabled ? ' disabled' : ''}" data-cmd="openSkill" data-skill="${escapeHtml(s.id)}" data-skill-name="${escapeHtml(s.displayName)}" title="${escapeHtml(s.description)}" tabindex="0" role="button">
                           <div class="skill-header">
+                              <span class="skill-icon" aria-hidden="true">${skillIcon}</span>
                               <span class="skill-name">${escapeHtml(s.displayName)}</span>
-                              ${s.hasSynapses ? '<span class="skill-synapse-dot" title="Has synapses">⚡</span>' : ''}
+                              ${s.hasSynapses ? '<span class="skill-synapse-dot" title="Has synapses">\u26A1</span>' : ''}
+                              <div class="skill-toggle ${isDisabled ? '' : 'on'}" data-skill-toggle="${escapeHtml(s.id)}" tabindex="0" role="switch" aria-checked="${!isDisabled}" aria-label="Toggle ${escapeHtml(s.displayName)}" title="${isDisabled ? 'Enable' : 'Disable'} skill"></div>
                           </div>
                           <div class="skill-desc">${escapeHtml(s.description)}</div>
-                      </div>`).join('')}
+                      </div>`;}).join('')}
                   </div>
               </div>`;
           }).join('')}
           </div>
+
+          <div class="install-github-card" data-cmd="openChat" tabindex="0" role="button" title="Install skills from GitHub repositories">
+              <div style="font-size: 20px; margin-bottom: 4px;">📥</div>
+              <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Install from GitHub</div>
+              <div style="font-size: 11px; opacity: 0.7;">Ask Alex to install community skills from GitHub repositories</div>
+          </div>
           `}
       </div>
-
-      <!-- Tab Panel: Mind -->
       <div class="tab-panel" id="panel-mind" role="tabpanel" aria-labelledby="tab-mind">
           ${mindData ? `
           <div class="identity-card">
@@ -2148,7 +2343,50 @@ export function getWelcomeHtmlContent(
                       <span class="maintenance-value">${mindData.lastMeditationDate ?? 'Never'}</span>
                   </div>
               </div>
+              ${mindData.meditationCount > 0 ? `
+              <div class="meditation-streak-row">
+                  <span class="meditation-streak-badge">🧘 ${mindData.meditationCount} session${mindData.meditationCount !== 1 ? 's' : ''}</span>
+              </div>` : ''}
           </div>
+
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Knowledge Freshness</div>
+              <div class="freshness-panel">
+                  <div class="freshness-bucket thriving">
+                      <div class="freshness-count">${mindData.freshness.thriving}</div>
+                      <div class="freshness-label">Thriving</div>
+                  </div>
+                  <div class="freshness-bucket active">
+                      <div class="freshness-count">${mindData.freshness.active}</div>
+                      <div class="freshness-label">Active</div>
+                  </div>
+                  <div class="freshness-bucket fading">
+                      <div class="freshness-count">${mindData.freshness.fading}</div>
+                      <div class="freshness-label">Fading</div>
+                  </div>
+                  <div class="freshness-bucket dormant">
+                      <div class="freshness-count">${mindData.freshness.dormant}</div>
+                      <div class="freshness-label">Dormant</div>
+                  </div>
+              </div>
+          </div>
+
+          ${mindData.calibration.total > 0 ? `
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Honest Uncertainty</div>
+              <div class="calibration-panel">
+                  ${(['high', 'medium', 'low', 'uncertain'] as const).map(level => {
+                      const count = mindData.calibration[level];
+                      const pct = mindData.calibration.total > 0 ? Math.round((count / mindData.calibration.total) * 100) : 0;
+                      const emoji = level === 'high' ? '🟢' : level === 'medium' ? '🟡' : level === 'low' ? '🟠' : '🔴';
+                      return `
+                  <div class="calibration-bar-row">
+                      <span class="calibration-label">${emoji} ${level.charAt(0).toUpperCase() + level.slice(1)}</span>
+                      <div class="calibration-bar-track"><div class="calibration-bar-fill ${level}" style="width: ${pct}%"></div></div>
+                      <span class="calibration-pct">${pct}%</span>
+                  </div>`;}).join('')}
+              </div>
+          </div>` : ''}
 
           <div class="dashboard-card">
               <div class="dashboard-card-title">Learn & Knowledge</div>
@@ -2558,6 +2796,31 @@ export function getWelcomeHtmlContent(
               this.classList.add('active');
               this.setAttribute('aria-checked', 'true');
               vscode.postMessage({ command: 'setPersonalityMode', mode: mode });
+          });
+      });
+
+      // ── Settings Toggles (7.14) ──
+      document.querySelectorAll('.toggle-switch[data-setting]').forEach(function(sw) {
+          sw.addEventListener('click', function(e) {
+              e.stopPropagation();
+              const key = this.getAttribute('data-setting');
+              const isOn = this.classList.toggle('on');
+              this.setAttribute('aria-checked', String(isOn));
+              vscode.postMessage({ command: 'toggleSetting', key: key, value: isOn });
+          });
+      });
+
+      // ── Skill Enable/Disable (7.28) ──
+      document.querySelectorAll('.skill-toggle[data-skill-toggle]').forEach(function(sw) {
+          sw.addEventListener('click', function(e) {
+              e.stopPropagation();
+              e.preventDefault();
+              const skillId = this.getAttribute('data-skill-toggle');
+              const isOn = this.classList.toggle('on');
+              this.setAttribute('aria-checked', String(isOn));
+              const card = this.closest('.skill-card');
+              if (card) card.classList.toggle('disabled', !isOn);
+              vscode.postMessage({ command: 'toggleSkill', skillId: skillId, enabled: isOn });
           });
       });
   </script>
