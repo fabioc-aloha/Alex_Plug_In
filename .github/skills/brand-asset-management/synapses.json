@@ -74,6 +74,13 @@
       "strength": 0.65,
       "when": "AI image API rejects structured code in prompts",
       "yields": "Parse syntax to natural language to bypass content filters"
+    },
+    {
+      "target": ".github/skills/persona-detection/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "when": "persona detection drives avatar selection, easter egg rendering, and bannerNoun display",
+      "yields": "Persona-specific brand expression in the sidebar UI"
     }
   ],
   "triggers": [

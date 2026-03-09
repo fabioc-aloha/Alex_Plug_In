@@ -138,15 +138,20 @@ export function getSharedStyles(personaAccent: string): string {
           font-style: italic;
           opacity: 0.85;
       }
+      .header-icon-wrapper {
+          position: relative;
+          flex-shrink: 0;
+      }
       .easter-egg-badge {
           position: absolute;
-          top: -2px;
-          right: 8px;
-          font-size: 28px;
+          bottom: -4px;
+          right: -6px;
+          font-size: 16px;
           line-height: 1;
           filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
           animation: egg-bounce 2s ease-in-out infinite;
-          pointer-events: none;
+          cursor: default;
+          z-index: 1;
       }
       @keyframes egg-bounce {
           0%, 100% { transform: translateY(0); }
@@ -424,13 +429,13 @@ export function getSharedStyles(personaAccent: string): string {
       .action-list {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 2px;
       }
       .action-group-label {
           font-size: 11px;
           font-weight: 600;
           color: var(--vscode-descriptionForeground);
-          margin-top: 10px;
+          margin-top: 8px;
           margin-bottom: 2px;
           padding-left: 2px;
           opacity: 0.55;
@@ -456,7 +461,7 @@ export function getSharedStyles(personaAccent: string): string {
       .action-group-content {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 2px;
           overflow: hidden;
           transition: max-height 0.2s ease;
       }
@@ -553,8 +558,8 @@ export function getSharedStyles(personaAccent: string): string {
           display: flex;
           align-items: center;
           gap: 8px;
-          padding: 4px 8px;
-          min-height: 36px; /* WCAG 2.5.8 compact touch target */
+          padding: 2px 8px;
+          min-height: 28px;
           background: var(--vscode-button-secondaryBackground);
           color: var(--vscode-button-secondaryForeground);
           border: none;
@@ -1593,4 +1598,3 @@ export function getSharedStyles(personaAccent: string): string {
       }
   `;
 }
-

@@ -18,6 +18,12 @@
       "type": "supports",
       "strength": 0.7,
       "reason": "Refactoring suggestions common in reviews"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "reason": "Webview decomposition patterns (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization"
     }
   ],
   "triggers": [

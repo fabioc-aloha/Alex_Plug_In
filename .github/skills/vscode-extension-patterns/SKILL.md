@@ -18,7 +18,7 @@ VS Code APIs evolve with each monthly release. Patterns may become outdated or b
 - Extension API deprecations
 - Webview security policy changes
 
-**Last validated:** February 2026 (VS Code 1.109+)
+**Last validated:** March 2026 (VS Code 1.111+)
 
 **Check current state:** [VS Code API](https://code.visualstudio.com/api), [Release Notes](https://code.visualstudio.com/updates)
 
@@ -627,6 +627,45 @@ Users trigger with `/hooks` command in chat. Same format as Claude Code hooks â€
 # Hook output can block the tool call if exit code > 0
 ```
 
+### Agent-Scoped Hooks (Preview, 1.111+)
+
+**Setting**: `chat.useCustomAgentHooks: true`
+
+Hooks can be defined in `.agent.md` YAML frontmatter. They fire **only** when that specific agent is active or invoked via `runSubagent`. Global hooks still fire alongside scoped hooks.
+
+```yaml
+# In .agent.md frontmatter
+hooks:
+  PreToolUse:
+    command: "node .github/muscles/hooks/validator-pre-tool.js"
+    description: "Read-only validation mode"
+    timeout: 2000
+  SessionStart:
+    command: "node .github/muscles/hooks/agent-session-start.js"
+    description: "Load agent-specific context"
+    timeout: 3000
+```
+
+Use cases: read-only mode for validator agents, auto-compile for builder agents, specialized context loading per agent.
+
+### Autopilot and Agent Permissions (Preview, 1.111+)
+
+**Setting**: `chat.autopilot.enabled: true`
+
+Three permission tiers (session-scoped, changeable any time):
+
+| Level | Behavior |
+|-------|----------|
+| Default Approvals | Normal tool confirmation dialogs |
+| Bypass Approvals | Auto-approves all tool calls, retries on errors |
+| Autopilot | Auto-approves + auto-responds + continues until `task_complete` |
+
+**Warning**: Bypass and Autopilot skip ALL manual approvals including destructive operations. PreToolUse hooks still fire but user doesn't see interactive confirmations.
+
+### Debug Events Snapshot (1.111+)
+
+Attach `#debugEventsSnapshot` in chat to inspect loaded customizations, token consumption, and agent behavior. Sparkle icon in Agent Debug panel attaches automatically.
+
 ### Claude Compatibility (1.109.3+)
 
 VS Code now reads Claude configuration files directly:
@@ -732,15 +771,17 @@ VS Code 1.109+ supports Model Context Protocol servers:
 
 MCP servers extend AI capabilities with external tools (Azure, GitHub, databases).
 
-### Key 1.109 Settings Summary
+### Key Settings Summary (1.111+)
 
-| Setting | Value | Purpose |
-|---------|-------|---------|
-| `chat.agent.enabled` | `true` | Enable custom agents |
-| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills |
-| `chat.useAgentsMdFile` | `true` | Use AGENTS.md |
-| `chat.mcp.gallery.enabled` | `true` | MCP tool access |
-| `chat.hooks.enabled` | `true` | Lifecycle hooks (Preview) |
+| Setting | Value | Purpose | Since |
+|---------|-------|---------|-------|
+| `chat.agent.enabled` | `true` | Enable custom agents | 1.109 |
+| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills | 1.109 |
+| `chat.useAgentsMdFile` | `true` | Use AGENTS.md | 1.109 |
+| `chat.mcp.gallery.enabled` | `true` | MCP tool access | 1.109 |
+| `chat.hooks.enabled` | `true` | Lifecycle hooks (Preview) | 1.109 |
+| `chat.useCustomAgentHooks` | `true` | Agent-scoped hooks (Preview) | 1.111 |
+| `chat.autopilot.enabled` | `true` | Autopilot mode (Preview) | 1.111 |
 
 ## Integration Audit Checklist
 

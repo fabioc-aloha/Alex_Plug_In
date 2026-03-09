@@ -160,6 +160,26 @@ export const PERSONA_AVATAR_MAP: Record<string, string> = {
     'questionnaire-developer': 'personas/PERSONA-QUESTIONNAIRE-DEVELOPER',
     'gcx-team':            'personas/PERSONA-GCX-TEAM',
     
+    // LearnAlex workshop alignment (v6.3.0)
+    'cx-leader':           'personas/PERSONA-CX-LEADER',
+    'designer':            'personas/PERSONA-DESIGNER',
+    'engineer':            'personas/PERSONA-ENGINEER',
+    'executive':           'personas/PERSONA-EXECUTIVE',
+    'finance-professional':'personas/PERSONA-FINANCE-PROFESSIONAL',
+    'healthcare-professional':'personas/PERSONA-HEALTHCARE-PROFESSIONAL',
+    'hr-professional':     'personas/PERSONA-HR-PROFESSIONAL',
+    'journalist':          'personas/PERSONA-JOURNALIST',
+    'lawyer':              'personas/PERSONA-LAWYER',
+    'nonprofit-leader':    'personas/PERSONA-NONPROFIT-LEADER',
+    'podcaster':           'personas/PERSONA-PODCASTER',
+    'counselor':           'personas/PERSONA-COUNSELOR',
+    'real-estate':         'personas/PERSONA-REAL-ESTATE',
+    'sales-professional':  'personas/PERSONA-SALES-PROFESSIONAL',
+    'scientist':           'personas/PERSONA-SCIENTIST',
+    'standup-comic':       'personas/PERSONA-STANDUP-COMIC',
+    'teacher':             'personas/PERSONA-TEACHER',
+    'visual-storyteller':  'personas/PERSONA-VISUAL-STORYTELLER',
+    
     // Fun/Easter egg personas
     'hacker':              'personas/PERSONA-HACKER',
     'night-owl':           'personas/PERSONA-NIGHT-OWL',
@@ -299,7 +319,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'developer',
         name: 'Developer',
-        bannerNoun: 'CODE',
+        bannerNoun: 'CODING',
         hook: 'Ship faster, debug less',
         skill: 'code-review',
         icon: '💻',
@@ -315,7 +335,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'academic',
         name: 'Academic / Grad Student',
-        bannerNoun: 'THESIS',
+        bannerNoun: 'YOUR THESIS',
         hook: 'Literature review on autopilot',
         skill: 'research-project-scaffold',
         icon: '🎓',
@@ -346,7 +366,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'technical-writer',
         name: 'Technical Writer',
-        bannerNoun: 'DOCUMENTATION',
+        bannerNoun: 'DOCUMENTING',
         hook: 'Docs that write themselves',
         skill: 'api-documentation',
         icon: '📝',
@@ -361,7 +381,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'architect',
         name: 'Enterprise Architect',
-        bannerNoun: 'ARCHITECTURE',
+        bannerNoun: 'ARCHITECTING',
         hook: 'Self-documenting cognitive architecture',
         skill: 'architecture-health',
         icon: '🏗️',
@@ -376,7 +396,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'data-engineer',
         name: 'Data Engineer',
-        bannerNoun: 'DATA',
+        bannerNoun: 'DATA ENGINEERING',
         hook: 'Governance on autopilot',
         skill: 'microsoft-fabric',
         icon: '📊',
@@ -392,7 +412,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'devops',
         name: 'DevOps Engineer',
-        bannerNoun: 'INFRASTRUCTURE',
+        bannerNoun: 'BUILDING INFRASTRUCTURE',
         hook: 'Same infra, every time. Automated.',
         skill: 'infrastructure-as-code',
         icon: '⚙️',
@@ -407,7 +427,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'content-creator',
         name: 'Content Creator',
-        bannerNoun: 'CONTENT',
+        bannerNoun: 'CREATING CONTENT',
         hook: 'Ideas to posts in minutes',
         skill: 'creative-writing',
         icon: '✍️',
@@ -437,7 +457,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'game-developer',
         name: 'Game Developer',
-        bannerNoun: 'GAMES',
+        bannerNoun: 'BUILDING GAMES',
         hook: 'Design, build, play — iterate',
         skill: 'game-design',
         icon: '🎮',
@@ -453,7 +473,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'project-manager',
         name: 'Project Manager',
-        bannerNoun: 'PROJECTS',
+        bannerNoun: 'MANAGING PROJECTS',
         hook: '4-6× faster than human estimates',
         skill: 'project-management',
         icon: '📋',
@@ -468,7 +488,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'security',
         name: 'Security Engineer',
-        bannerNoun: 'SECURITY',
+        bannerNoun: 'SECURING CODE',
         hook: 'Threat-aware by default',
         skill: 'incident-response',
         icon: '🔐',
@@ -498,7 +518,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'job-seeker',
         name: 'Job Seeker',
-        bannerNoun: 'CAREER',
+        bannerNoun: 'YOUR CAREER',
         hook: 'Stand out, get hired',
         skill: 'creative-writing',
         icon: '💼',
@@ -513,7 +533,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'presenter',
         name: 'Speaker / Presenter',
-        bannerNoun: 'PRESENTATIONS',
+        bannerNoun: 'PRESENTING',
         hook: 'Notes → polished slides in minutes',
         skill: 'gamma-presentations',
         icon: '🎤',
@@ -528,7 +548,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'power-user',
         name: 'Power User / Builder',
-        bannerNoun: 'PROJECTS',
+        bannerNoun: 'BUILDING',
         hook: 'Your rocket. Your trajectory.',
         skill: 'git-workflow',
         icon: '🚀',
@@ -544,7 +564,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'cognitive-scientist',
         name: 'Cognitive Scientist',
-        bannerNoun: 'RESEARCH',
+        bannerNoun: 'AI RESEARCH',
         hook: 'Prefrontal cortex for your IDE',
         skill: 'ai-agent-design',
         icon: '🧠',
@@ -560,7 +580,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'oss-contributor',
         name: 'Open Source Contributor',
-        bannerNoun: 'PROJECTS',
+        bannerNoun: 'OPEN SOURCE',
         hook: 'Your rocket. Your trajectory.',
         skill: 'git-workflow',
         icon: '🌐',
@@ -575,7 +595,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'grant-writer',
         name: 'Grant Writer',
-        bannerNoun: 'GRANTS',
+        bannerNoun: 'GRANT WRITING',
         hook: 'Research vision → funded reality',
         skill: 'research-project-scaffold',
         icon: '💰',
@@ -589,7 +609,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'copywriter',
         name: 'Copywriter',
-        bannerNoun: 'COPY',
+        bannerNoun: 'COPYWRITING',
         hook: 'Headlines that convert',
         skill: 'creative-writing',
         icon: '✏️',
@@ -603,7 +623,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'business-analyst',
         name: 'Business Analyst',
-        bannerNoun: 'ANALYSIS',
+        bannerNoun: 'BUSINESS ANALYSIS',
         hook: 'Stakeholder alignment accelerator',
         skill: 'business-analysis',
         icon: '📊',
@@ -617,7 +637,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'sre',
         name: 'SRE / On-Call',
-        bannerNoun: 'INCIDENTS',
+        bannerNoun: 'INCIDENT RESPONSE',
         hook: 'Calm. Systematic. Crisis handled.',
         skill: 'incident-response',
         icon: '🚨',
@@ -632,7 +652,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'product-manager',
         name: 'Product Manager',
-        bannerNoun: 'ROADMAPS',
+        bannerNoun: 'PRODUCT PLANNING',
         hook: 'User needs → shipped features',
         skill: 'project-management',
         icon: '🗺️',
@@ -646,7 +666,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'bi-analyst',
         name: 'BI Analyst',
-        bannerNoun: 'INSIGHTS',
+        bannerNoun: 'DATA ANALYSIS',
         hook: 'Raw data → executive insights',
         skill: 'microsoft-fabric',
         icon: '📈',
@@ -661,7 +681,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'consultant',
         name: 'Consultant',
-        bannerNoun: 'PROPOSALS',
+        bannerNoun: 'CONSULTING',
         hook: 'Win more deals, faster',
         skill: 'business-analysis',
         icon: '🤝',
@@ -675,7 +695,7 @@ export const PERSONAS: Persona[] = [
     buildPersona({
         id: 'qa-engineer',
         name: 'QA Engineer',
-        bannerNoun: 'TESTS',
+        bannerNoun: 'TESTING',
         hook: 'Coverage without the tedium',
         skill: 'code-quality',
         icon: '🧪',
@@ -701,6 +721,296 @@ export const PERSONAS: Persona[] = [
             { category: 'technology', pattern: 'google.?analytics|hubspot|mailchimp|segment|mixpanel',                  weight: 2.0 },
             { category: 'structure',  pattern: 'campaigns/|marketing/|email-templates/|landing-pages/',                 weight: 1.5 },
             { category: 'content',    pattern: 'campaign|funnel|conversion|lead|segment|attribution',                   weight: 1.0 },
+        ]
+    }),
+    // ── v6.3.0 — 20 new personas from LearnAlex workshop alignment ──────
+    buildPersona({
+        id: 'cx-leader',
+        name: 'CX Leader',
+        bannerNoun: 'CUSTOMER EXPERIENCE',
+        hook: 'Journey maps that drive action',
+        skill: 'business-analysis',
+        icon: '💬',
+        accentColor: '#2dd4bf',
+        signals: [
+            { category: 'identity',   pattern: 'customer.?experience|cx|journey.?map|voice.?of.?customer|service.?design', weight: 2.5 },
+            { category: 'structure',  pattern: 'journeys/|cx/|personas/|surveys/|feedback/',                               weight: 1.5 },
+            { category: 'content',    pattern: 'nps|csat|customer.?journey|touchpoint|pain.?point|service.?blueprint',      weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'designer',
+        name: 'Designer (UX/UI)',
+        bannerNoun: 'DESIGNING',
+        hook: 'Research to pixels, systematically',
+        skill: 'ui-ux-design',
+        icon: '🎨',
+        accentColor: '#8B5CF6',
+        signals: [
+            { category: 'identity',   pattern: 'designer|ux|ui|user.?experience|user.?interface|interaction.?design',      weight: 2.5 },
+            { category: 'technology', pattern: 'figma|sketch|adobe.?xd|storybook|tailwind|css',                            weight: 2.0 },
+            { category: 'structure',  pattern: 'design/|mockups/|wireframes/|prototypes/|design-system/|components/',      weight: 1.5 },
+            { category: 'content',    pattern: 'wireframe|prototype|usability|design.?system|component|accessibility',      weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'engineer',
+        name: 'Engineer',
+        bannerNoun: 'ENGINEERING',
+        hook: 'Specs that build confidence',
+        skill: 'architecture-health',
+        icon: '⚙️',
+        accentColor: '#0078D4',
+        signals: [
+            { category: 'identity',   pattern: 'engineer|mechanical|electrical|civil|structural|systems.?eng',             weight: 2.5 },
+            { category: 'technology', pattern: 'matlab|simulink|autocad|solidworks|ansys|labview',                         weight: 2.0 },
+            { category: 'structure',  pattern: 'specs/|drawings/|calculations/|simulations/|requirements/',                weight: 1.5 },
+            { category: 'content',    pattern: 'specification|tolerance|failure.?analysis|design.?review|bom|technical.?report', weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'startup-founder',
+        name: 'Entrepreneur',
+        bannerNoun: 'BUILDING A STARTUP',
+        hook: 'From idea to traction, fast',
+        skill: 'business-analysis',
+        icon: '🚀',
+        accentColor: '#fb923c',
+        signals: [
+            { category: 'identity',   pattern: 'entrepreneur|startup|founder|co.?founder|bootstrapp|mvp|venture',          weight: 2.5 },
+            { category: 'structure',  pattern: 'pitch/|business-plan/|mvp/|investors/|fundraising/',                       weight: 2.0 },
+            { category: 'content',    pattern: 'pitch.?deck|runway|market.?fit|investor|fundrais|valuation|traction',       weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'executive',
+        name: 'Executive (CxO)',
+        bannerNoun: 'LEADING',
+        hook: 'Strategic clarity, on demand',
+        skill: 'business-analysis',
+        icon: '👔',
+        accentColor: '#6366f1',
+        signals: [
+            { category: 'identity',   pattern: 'executive|ceo|cto|cfo|cio|coo|vp|director|c.?suite|chief',                weight: 2.5 },
+            { category: 'structure',  pattern: 'strategy/|board/|governance/|executive/',                                  weight: 2.0 },
+            { category: 'content',    pattern: 'board.?meeting|strategic.?plan|quarterly|organizational|shareholder',       weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'finance-professional',
+        name: 'Finance Professional',
+        bannerNoun: 'FINANCIAL ANALYSIS',
+        hook: 'Numbers tell stories — tell them well',
+        skill: 'business-analysis',
+        icon: '💹',
+        accentColor: '#2dd4bf',
+        signals: [
+            { category: 'identity',   pattern: 'finance|financial|accounting|cpa|cfa|investment|analyst',                  weight: 2.5 },
+            { category: 'technology', pattern: 'excel|power.?bi|bloomberg|quickbooks|sap',                                weight: 2.0 },
+            { category: 'structure',  pattern: 'financials/|budgets/|forecasts/|reports/|audit/',                          weight: 1.5 },
+            { category: 'content',    pattern: 'revenue|margin|forecast|balance.?sheet|p&l|roi|irr|dcf',                   weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'healthcare-professional',
+        name: 'Healthcare Professional',
+        bannerNoun: 'HEALTHCARE',
+        hook: 'Clinical documentation, simplified',
+        skill: 'creative-writing',
+        icon: '🏥',
+        accentColor: '#f43f5e',
+        signals: [
+            { category: 'identity',   pattern: 'healthcare|medical|clinical|physician|nurse|pharmacist|health',            weight: 2.5 },
+            { category: 'structure',  pattern: 'clinical/|patient/|protocols/|ehr/',                                       weight: 2.0 },
+            { category: 'content',    pattern: 'patient|diagnosis|treatment|clinical.?trial|ehr|hipaa|soap.?note',          weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'hr-professional',
+        name: 'HR & People Ops',
+        bannerNoun: 'PEOPLE OPERATIONS',
+        hook: 'People programs that scale',
+        skill: 'business-analysis',
+        icon: '👥',
+        accentColor: '#fb7185',
+        signals: [
+            { category: 'identity',   pattern: 'hr|human.?resource|people.?ops|talent|recruiting|onboarding',              weight: 2.5 },
+            { category: 'structure',  pattern: 'policies/|onboarding/|hiring/|people/|hr/',                                weight: 2.0 },
+            { category: 'content',    pattern: 'job.?description|onboarding|performance.?review|compensation|benefits',     weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'journalist',
+        name: 'Journalist',
+        bannerNoun: 'JOURNALISM',
+        hook: 'Research deep, write fast',
+        skill: 'creative-writing',
+        icon: '📰',
+        accentColor: '#f97316',
+        signals: [
+            { category: 'identity',   pattern: 'journalist|reporter|editor|newsroom|investigat|press',                     weight: 2.5 },
+            { category: 'structure',  pattern: 'stories/|articles/|drafts/|sources/|investigations/',                      weight: 1.5 },
+            { category: 'content',    pattern: 'byline|source|deadline|editorial|fact.?check|interview|headline',           weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'knowledge-worker',
+        name: 'Knowledge Worker',
+        bannerNoun: 'KNOWLEDGE WORK',
+        hook: 'Turn information into decisions',
+        skill: 'business-analysis',
+        icon: '🧩',
+        accentColor: '#2dd4bf',
+        signals: [
+            { category: 'identity',   pattern: 'knowledge.?worker|information|briefing|executive.?summary|memo',           weight: 2.0 },
+            { category: 'technology', pattern: 'notion|obsidian|confluence|sharepoint|onenote',                            weight: 1.5 },
+            { category: 'structure',  pattern: 'notes/|wiki/|knowledge-base/|memos/|briefings/',                           weight: 1.5 },
+            { category: 'content',    pattern: 'briefing|executive.?summary|talking.?points|scenario|synthesis',            weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'lawyer',
+        name: 'Lawyer',
+        bannerNoun: 'LEGAL WORK',
+        hook: 'Research, draft, argue — faster',
+        skill: 'creative-writing',
+        icon: '⚖️',
+        accentColor: '#6366f1',
+        signals: [
+            { category: 'identity',   pattern: 'lawyer|attorney|legal|paralegal|counsel|litigat|contract',                 weight: 2.5 },
+            { category: 'structure',  pattern: 'contracts/|briefs/|legal/|compliance/|discovery/',                         weight: 2.0 },
+            { category: 'content',    pattern: 'contract|clause|brief|motion|statute|regulation|compliance|precedent',      weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'nonprofit-leader',
+        name: 'Nonprofit Leader',
+        bannerNoun: 'NONPROFIT LEADERSHIP',
+        hook: 'Mission-driven, donor-funded',
+        skill: 'business-analysis',
+        icon: '💚',
+        accentColor: '#2dd4bf',
+        signals: [
+            { category: 'identity',   pattern: 'nonprofit|ngo|charity|fundrais|donor|foundation|advocacy|social.?impact',  weight: 2.5 },
+            { category: 'structure',  pattern: 'grants/|fundraising/|donors/|programs/|impact/',                           weight: 2.0 },
+            { category: 'content',    pattern: 'donor|grant|impact.?report|annual.?report|program|advocacy|mission',        weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'podcaster',
+        name: 'Podcaster',
+        bannerNoun: 'PODCASTING',
+        hook: 'Plan, record, publish — repeat',
+        skill: 'creative-writing',
+        icon: '🎙️',
+        accentColor: '#fb7185',
+        signals: [
+            { category: 'identity',   pattern: 'podcast|audio|episode|show.?notes|interview|hosting',                     weight: 2.5 },
+            { category: 'technology', pattern: 'audacity|descript|anchor|spotify|apple.?podcast|rss',                      weight: 2.0 },
+            { category: 'structure',  pattern: 'episodes/|show-notes/|transcripts/|audio/',                                weight: 1.5 },
+            { category: 'content',    pattern: 'episode|guest|show.?notes|transcript|listener|audience',                    weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'counselor',
+        name: 'Psychology Counselor',
+        bannerNoun: 'COUNSELING',
+        hook: 'Documentation that serves the client',
+        skill: 'creative-writing',
+        icon: '🧠',
+        accentColor: '#818cf8',
+        signals: [
+            { category: 'identity',   pattern: 'counselor|therapist|psycholog|mental.?health|clinical|psychotherapy',      weight: 2.5 },
+            { category: 'structure',  pattern: 'cases/|assessments/|treatment-plans/|notes/|intake/',                      weight: 2.0 },
+            { category: 'content',    pattern: 'treatment.?plan|case.?conceptual|intake|assessment|psychoeducat|dsm',       weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'real-estate',
+        name: 'Real Estate Professional',
+        bannerNoun: 'REAL ESTATE',
+        hook: 'Listings that sell, offers that close',
+        skill: 'creative-writing',
+        icon: '🏠',
+        accentColor: '#fb923c',
+        signals: [
+            { category: 'identity',   pattern: 'real.?estate|realtor|broker|property|listing|mls',                         weight: 2.5 },
+            { category: 'structure',  pattern: 'listings/|properties/|offers/|comps/|market-analysis/',                    weight: 2.0 },
+            { category: 'content',    pattern: 'listing|property|offer|closing|commission|buyer|seller|comp|appraisal',     weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'sales-professional',
+        name: 'Sales Professional',
+        bannerNoun: 'SELLING',
+        hook: 'Pipeline to closed-won, systematically',
+        skill: 'business-analysis',
+        icon: '🤑',
+        accentColor: '#f43f5e',
+        signals: [
+            { category: 'identity',   pattern: 'sales|account.?exec|business.?develop|pipeline|quota|prospecting',         weight: 2.5 },
+            { category: 'technology', pattern: 'salesforce|hubspot|outreach|gong|zoominfo',                                weight: 2.0 },
+            { category: 'structure',  pattern: 'pipeline/|leads/|proposals/|accounts/|territories/',                       weight: 1.5 },
+            { category: 'content',    pattern: 'prospect|discovery.?call|proposal|objection|close|quota|pipeline',          weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'scientist',
+        name: 'Scientist',
+        bannerNoun: 'SCIENTIFIC RESEARCH',
+        hook: 'Hypothesis to manuscript, accelerated',
+        skill: 'research-project-scaffold',
+        icon: '🔭',
+        accentColor: '#0d9488',
+        signals: [
+            { category: 'identity',   pattern: 'scientist|biolog|chemist|physicist|geolog|ecolog|neurosci',                weight: 2.5 },
+            { category: 'technology', pattern: 'python|r\b|matlab|spss|prism|imagej|blast',                               weight: 1.5 },
+            { category: 'structure',  pattern: 'lab-notebooks/|protocols/|data/|manuscripts/|figures/',                    weight: 1.5 },
+            { category: 'content',    pattern: 'hypothesis|protocol|specimen|reagent|method|result|manuscript|peer.?review', weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'standup-comic',
+        name: 'Standup Comic',
+        bannerNoun: 'COMEDY WRITING',
+        hook: 'Premises that punch, tags that land',
+        skill: 'creative-writing',
+        icon: '🎤',
+        accentColor: '#fb7185',
+        signals: [
+            { category: 'identity',   pattern: 'standup|comedian|comic|comedy|humor|funny|improv',                         weight: 2.5 },
+            { category: 'structure',  pattern: 'sets/|bits/|jokes/|premises/|material/',                                   weight: 2.0 },
+            { category: 'content',    pattern: 'premise|punchline|tag|callback|set.?list|bit|crowd.?work|tight.?five',      weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'teacher',
+        name: 'Teacher / Educator',
+        bannerNoun: 'TEACHING',
+        hook: 'Lessons that engage, assessments that reveal',
+        skill: 'learning-psychology',
+        icon: '👩‍🏫',
+        accentColor: '#2dd4bf',
+        signals: [
+            { category: 'identity',   pattern: 'teacher|educator|instructor|professor|curriculum|lesson.?plan',            weight: 2.5 },
+            { category: 'technology', pattern: 'canvas|moodle|blackboard|google.?classroom',                               weight: 2.0 },
+            { category: 'structure',  pattern: 'lessons/|curriculum/|assessments/|rubrics/|syllabi/',                       weight: 1.5 },
+            { category: 'content',    pattern: 'lesson.?plan|rubric|differentiat|assessment|learning.?objective|bloom',     weight: 1.0 },
+        ]
+    }),
+    buildPersona({
+        id: 'visual-storyteller',
+        name: 'Visual Storyteller',
+        bannerNoun: 'DATA VISUALIZATION',
+        hook: 'Charts that persuade, dashboards that inspire',
+        skill: 'microsoft-fabric',
+        icon: '📊',
+        accentColor: '#2dd4bf',
+        signals: [
+            { category: 'identity',   pattern: 'visual.?story|data.?viz|infograph|chart|dashboard.?design|presentation',   weight: 2.5 },
+            { category: 'technology', pattern: 'power.?bi|d3|tableau|plotly|matplotlib|seaborn|vega',                      weight: 2.0 },
+            { category: 'structure',  pattern: 'charts/|visualizations/|dashboards/|infographics/',                        weight: 1.5 },
+            { category: 'content',    pattern: 'chart|visualiz|infographic|dashboard|data.?story|annotation',               weight: 1.0 },
         ]
     }),
 ];

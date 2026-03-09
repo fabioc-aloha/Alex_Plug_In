@@ -13,7 +13,7 @@
 - [.github/instructions/release-management.instructions.md] (High, Coordinates, Bidirectional) - "UI refinements are part of release workflow"
 - [.github/skills/vscode-extension-patterns/SKILL.md] (High, Implements, Bidirectional) - "Extension UI patterns this standard enforces"
 - [.github/instructions/code-review-guidelines.instructions.md] (High, Validates, Bidirectional) - "Code review validates UI/UX compliance"
-- [alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md] (Critical, Implements, Bidirectional) - "Command Center master plan Wave 7 uses these standards for audit-driven UI development"
+- [alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md] (Critical, Implements, Bidirectional) - "Command Center master plan Waves 7-8 use these standards for audit-driven UI development"
 - [alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md] (High, Informs, Forward) - "Meditation-derived design principles for sidebar refactor"
 
 ---
@@ -620,7 +620,7 @@ margin: 7px 13px 21px;
 
 **When to use**: Requested UI/UX audit, pre-release quality gate, mockup alignment check.
 
-### Two-Pass Audit
+### Three-Pass Audit
 
 **Pass 1: UI/UX Compliance** — Assess against this instruction file
 1. Read entire UI file (HTML generation + CSS)
@@ -635,10 +635,18 @@ margin: 7px 13px 21px;
 3. Classify each section: MISSING / PARTIAL / MATCH / EXTRA
 4. Further classify gaps: ⬡ Implementable Now / ⬢ Needs Data Provider / ◇ Design Decision
 
+**Pass 3: Cross-Tab Consistency** — For multi-tab/multi-view surfaces
+1. Content density analysis: count sections and interactive elements per tab
+2. Feature parity: check search/filter, empty states, collapsible sections, footer hints across all tabs
+3. Navigation pattern consistency: verify each tab uses an appropriate pattern for its content type
+4. JavaScript quality: CSP compliance, event delegation, state persistence, security (XSS, injection)
+5. Classify gaps as cross-tab consistency findings
+
 ### Output Format
 - Per-finding: severity, specific CSS selectors, current vs target values, file + line reference
 - Summary table: total findings by severity and classification
 - Positives section: what's already correct (anchor for future audits)
+- For multi-tab: content density table + feature parity matrix
 
 ---
 
@@ -664,6 +672,6 @@ margin: 7px 13px 21px;
 
 ---
 
-**Version**: 1.1.0 (2026-03-08)  
-**Based On**: Alex v6.2.0 Command Center audit session (UI/UX + Content audit)  
-**Validated Against**: welcomeViewHtml.ts (2,095 lines, 5-tab Command Center)
+**Version**: 1.2.0 (2026-03-09)  
+**Based On**: Alex v6.2.0 Command Center audit sessions (UI/UX + Content + Cross-Tab Consistency)  
+**Validated Against**: sharedStyles.ts + 5 tab modules (missionTabHtml, agentsTabHtml, skillStoreTabHtml, mindTabHtml, docsTabHtml)

@@ -24,7 +24,7 @@ Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.2.0 — On-Brand Partnership Release. FLUX brand fine-tune trifecta added (37th). SVG-first banner strategy via Recraft v4 SVG. GH Copilot Web heir discontinued (Agent Plugin covers use case better). v6.1.8 Doc alignment hotfix. v6.1.7 Stable marketplace release. v6.1.5 Thinking phrases, Agent Plugin audit (4 fixes), M365 audit (4 fixes), heir version alignment. v6.1.4 cognitive tier fix + GPT-5.3. v6.1.0 Environment & Cognitive Tier Hardening.
+Recent: v6.2.0 — On-Brand Partnership Release. VS Code 1.111 evaluation (agent-scoped hooks, autopilot adopted). UI/UX audit (17 findings → Wave 8). Master plan reorganized (1,296→456L, completed waves archived). UI audit procedure upgraded to 3-pass (v1.2.0). Command Center P5A CSS extraction (welcomeViewHtml 2,379→895L). FLUX brand fine-tune trifecta added (37th).
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: never
@@ -105,11 +105,12 @@ Efficient (Claude Haiku, GPT-4o mini): fast, lightweight, best for simple edits
 Meditation/self-actualization/architecture → Frontier. Code review → Capable. Simple edits → Efficient.
 Warning on mismatch: "This cognitive task works best with a Frontier model."
 
-## VS Code Settings (1.110+)
+## VS Code Settings (1.111+)
 
 chat.agent.enabled=true, chat.agentSkillsLocations=[".github/skills"], chat.useAgentsMdFile=true
 claude-opus-4-\*.extendedThinkingEnabled=true, thinkingBudget=16384, chat.mcp.gallery.enabled=true
-chat.hooks.enabled=true, github.copilot.chat.copilotMemory.enabled=true
+chat.hooks.enabled=true, chat.useCustomAgentHooks=true, github.copilot.chat.copilotMemory.enabled=true
+chat.autopilot.enabled=true
 github.copilot.chat.searchSubagent.enabled=true, chat.customAgentInSubagent.enabled=true
 chat.exploreAgent.defaultModel=claude-sonnet-4
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true

@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.2.0 — On-Brand Partnership Release. Command Center P5A CSS extraction (welcomeViewHtml 2,379→895L). Master plan updated with P5B/P5C/P5D roadmap. Refactoring-patterns enriched with webview decomposition. FLUX brand fine-tune trifecta added (37th). SVG-first banner strategy via Recraft v4 SVG.
+Recent: v6.2.0 — On-Brand Partnership Release. VS Code 1.111 evaluation (agent-scoped hooks, autopilot adopted). UI/UX audit (17 findings → Wave 8). Master plan reorganized (1,296→456L, completed waves archived). UI audit procedure upgraded to 3-pass (v1.2.0). Command Center P5A CSS extraction (welcomeViewHtml 2,379→895L). FLUX brand fine-tune trifecta added (37th). BannerNoun→action phrasing (23 personas). LearnAlex persona alignment (27→47 personas, 20 added). Master plan re-prioritized (execution sequencing, severity triage, P5 marked complete). Easter egg badge relocated to header icon overlay (3 bugs fixed). Cognitive protocol audit (53 redundant → 19 mandatory calls). Persona detection audit (14 findings, CRITICAL→LOW).
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: 2026-03-09
@@ -123,11 +123,12 @@ Efficient (Claude Haiku, GPT-4o mini): fast, lightweight, best for simple edits
 Meditation/self-actualization/architecture → Frontier. Code review → Capable. Simple edits → Efficient.
 Warning on mismatch: "This cognitive task works best with a Frontier model."
 
-## VS Code Settings (1.110+)
+## VS Code Settings (1.111+)
 
 chat.agent.enabled=true, chat.agentSkillsLocations=[".github/skills"], chat.useAgentsMdFile=true
 claude-opus-4-\*.extendedThinkingEnabled=true, thinkingBudget=16384, chat.mcp.gallery.enabled=true
-chat.hooks.enabled=true, github.copilot.chat.copilotMemory.enabled=true
+chat.hooks.enabled=true, chat.useCustomAgentHooks=true, github.copilot.chat.copilotMemory.enabled=true
+chat.autopilot.enabled=true
 github.copilot.chat.searchSubagent.enabled=true, chat.customAgentInSubagent.enabled=true
 chat.exploreAgent.defaultModel=claude-sonnet-4
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true

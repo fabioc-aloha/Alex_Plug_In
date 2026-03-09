@@ -42,7 +42,7 @@
       "type": "implements",
       "strength": 0.95,
       "bidirectional": true,
-      "reason": "Instruction file contains proven UI Audit Procedure (two-pass: compliance + content) and design system enforcement rules"
+      "reason": "Instruction file contains proven UI Audit Procedure (three-pass: compliance + content + cross-tab consistency) and design system enforcement rules"
     }
   ],
   "triggers": [

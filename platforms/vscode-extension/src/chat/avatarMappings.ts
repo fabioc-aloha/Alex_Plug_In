@@ -2,7 +2,7 @@
  * Avatar Mappings Module
  * 
  * Comprehensive mappings for Alex's visual identity system:
- * - Persona avatars: 63 role-specific images
+ * - Persona avatars: 81 role-specific images
  * - Age progression: 13 age-specific images (fallback when no activity)
  * - Agent modes: 6 specialized agent banners
  * - Cognitive states: 8 task-specific state portraits
@@ -110,6 +110,26 @@ export const PERSONA_AVATAR_MAP: Record<string, string> = {
     'knowledge-worker':    'PERSONA-KNOWLEDGE-WORKER',
     'questionnaire-developer': 'PERSONA-QUESTIONNAIRE-DEVELOPER',
     'gcx-team':            'PERSONA-GCX-TEAM',
+    
+    // LearnAlex workshop alignment (v6.3.0)
+    'cx-leader':           'PERSONA-CX-LEADER',
+    'designer':            'PERSONA-DESIGNER',
+    'engineer':            'PERSONA-ENGINEER',
+    'executive':           'PERSONA-EXECUTIVE',
+    'finance-professional':'PERSONA-FINANCE-PROFESSIONAL',
+    'healthcare-professional':'PERSONA-HEALTHCARE-PROFESSIONAL',
+    'hr-professional':     'PERSONA-HR-PROFESSIONAL',
+    'journalist':          'PERSONA-JOURNALIST',
+    'lawyer':              'PERSONA-LAWYER',
+    'nonprofit-leader':    'PERSONA-NONPROFIT-LEADER',
+    'podcaster':           'PERSONA-PODCASTER',
+    'counselor':           'PERSONA-COUNSELOR',
+    'real-estate':         'PERSONA-REAL-ESTATE',
+    'sales-professional':  'PERSONA-SALES-PROFESSIONAL',
+    'scientist':           'PERSONA-SCIENTIST',
+    'standup-comic':       'PERSONA-STANDUP-COMIC',
+    'teacher':             'PERSONA-TEACHER',
+    'visual-storyteller':  'PERSONA-VISUAL-STORYTELLER',
     
     // Fun/Easter egg personas
     'hacker':              'PERSONA-HACKER',

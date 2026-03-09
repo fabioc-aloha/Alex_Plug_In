@@ -21,6 +21,12 @@
       "type": "validates",
       "strength": 0.7,
       "note": "Persona detection tested during pre-publish"
+    },
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "note": "BannerNoun action phrasing and persona avatar mappings are brand decisions"
     }
   ],
   "activationBoost": [

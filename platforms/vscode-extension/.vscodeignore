@@ -33,11 +33,18 @@ publish.ps1
 build-extension-package.ps1
 scripts/**
 
+# Stray development files (should not be in VSIX)
+*.py
+
 # Claude Code config (not needed by extension users)
 .claude/**
 
 # Skill example media (heavy, not needed at runtime)
 **/*.mp3
+
+# Development-only muscle scripts (exclude PS1/PY from package)
+.github/muscles/*.ps1
+.github/muscles/*.py
 
 # External docs (not part of heir)
 alex_docs/**

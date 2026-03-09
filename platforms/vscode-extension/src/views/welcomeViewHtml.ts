@@ -255,17 +255,19 @@ export function getWelcomeHtmlContent(
   const easterEgg: EasterEgg | null =
     getEasterEggOverride(workspaceFolderName);
   
-  const easterEggBadge = easterEgg
-    ? `<span class="easter-egg-badge" title="${easterEgg.label}">${easterEgg.emoji}</span>`
-    : "";
   const personaHook = persona?.hook || "Take Your Code to New Heights";
   const personaIcon = persona?.icon || "💻";
   const personaName = persona?.name || "Developer";
   const personaSkill = persona?.skill || "code-review";
   const bannerNoun = persona?.bannerNoun || "CODE";
 
-  // Use easter egg accent color if present, fallback to persona color, then CorreaX indigo primary
-  const personaAccent = easterEgg?.accentColor || persona?.accentColor || "#6366f1";
+  // Use persona accent color (easter eggs no longer override global accent — they get a badge-local color instead)
+  const personaAccent = persona?.accentColor || "#6366f1";
+  const easterEggBadgeColor = easterEgg?.accentColor || personaAccent;
+
+  const easterEggBadge = easterEgg
+    ? `<span class="easter-egg-badge" title="${easterEgg.label}" style="--egg-accent: ${easterEggBadgeColor}">${easterEgg.emoji}</span>`
+    : "";
 
   // Active Context — live state from copilot-instructions.md
   const confidenceLabel =
@@ -377,7 +379,10 @@ export function getWelcomeHtmlContent(
           <div class="header-watermark">ALEX</div>
           <div class="header-series">COGNITIVE ARCHITECTURE</div>
           <div class="header-main">
-              <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex v${version} — Click to learn how to work with Alex" tabindex="0" role="button" />
+              <div class="header-icon-wrapper">
+                  <img src="${logoUri}" alt="Alex v${version}" class="header-icon" data-cmd="workingWithAlex" title="Alex v${version} — Click to learn how to work with Alex" tabindex="0" role="button" />
+                  ${easterEggBadge}
+              </div>
               <div class="header-text">
                   <span class="header-title">Alex Cognitive</span>
                   <span class="header-persona" data-cmd="skillReview" title="${personaName} — Click to explore skills" tabindex="0" role="button">${personaIcon} ${personaName}</span>
@@ -387,7 +392,6 @@ export function getWelcomeHtmlContent(
       </div>
 
       <div class="hero-text-box">
-          ${easterEggBadge}
           <div class="hero-hook">Your Trusted Partner for <strong>${bannerNoun}</strong></div>
           ${activeContext?.northStar ? `<div class="hero-north-star" data-cmd="northStar" title="North Star — Click to review" tabindex="0" role="button">⭐ ${escapeHtml(activeContext.northStar)}</div>` : ''}
           ${hasObjective ? `<div class="hero-objective">${escapeHtml(rawObjective!)}</div>` : ''}
