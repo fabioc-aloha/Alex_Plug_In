@@ -82,7 +82,7 @@ const QUICK_COMMANDS: QuickCommand[] = [
   { label: '$(pulse) Dream', description: 'Neural maintenance', command: 'alex.dream', icon: '$(pulse)' },
   { label: '$(sync) Sync Knowledge', description: 'Sync with Global Knowledge', command: 'alex.syncKnowledge', icon: '$(sync)' },
   { label: '$(calendar) Daily Briefing', description: 'Get your daily summary', command: 'alex.dailyBriefing', icon: '$(calendar)' },
-  { label: '$(dashboard) Cognitive Dashboard', description: 'View architecture health', command: 'alex.showCognitiveDashboard', icon: '$(dashboard)' },
+  { label: '$(dashboard) Mind Dashboard', description: 'View cognitive health & memory', command: 'alex.showCognitiveDashboard', icon: '$(dashboard)' },
   { label: '$(unmute) Toggle Voice', description: 'Enable/disable voice mode (Ctrl+Alt+V)', command: 'alex.toggleVoice', icon: '$(unmute)' },
   { label: '$(target) Show Goals', description: 'View learning goals', command: 'alex.showGoals', icon: '$(target)' },
   { label: '$(book) Read Aloud', description: 'Read current selection (Ctrl+Alt+R)', command: 'alex.readAloud', icon: '$(book)' },
@@ -560,11 +560,11 @@ export function registerUXCommands(context: vscode.ExtensionContext): void {
     vscode.commands.registerCommand('alex.dailyBriefing', () => showDailyBriefing(context))
   );
 
-  // Show Cognitive Dashboard command (opens the sidebar view)
+  // Show Cognitive Dashboard command — redirected to Mind tab in Command Center (Wave 5.2)
   context.subscriptions.push(
     vscode.commands.registerCommand('alex.showCognitiveDashboard', async () => {
-      // Focus the cognitive dashboard view in sidebar
-      await vscode.commands.executeCommand('alex.cognitiveDashboard.focus');
+      // Redirect to Mind tab in the Command Center welcome view
+      await vscode.commands.executeCommand('alex.switchToTab', 'mind');
     })
   );
 }

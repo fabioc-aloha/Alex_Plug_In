@@ -24,6 +24,7 @@ import { isOperationInProgress } from "../shared/operationLock";
 import { updateChatAvatar, ChatAvatarContext } from "../shared/chatAvatarBridge";
 import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
 import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
+import { agentActivity, AgentActivity } from "../services/agentActivity";
 import {
   Nudge,
   MindTabData,
@@ -44,7 +45,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private _currentPersonaId: string | null = null;
   private _userBirthday: string | null = null;
 
-  constructor(extensionUri: vscode.Uri) {
+  constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
     this._extensionUri = extensionUri;
   }
 
@@ -174,6 +175,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         skillReview: "alex.skillReview",
         workingWithAlex: "alex.workingWithAlex",
         cognitiveLevels: "alex.cognitiveLevels",
+        quickReference: "alex.cognitiveLevels",
         // meditate handled as special case below to set cognitive state
       };
 
@@ -236,7 +238,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           const skillId = message.skill || "";
           const skillDisplayName = message.skillName || skillId;
           console.log('[Alex] Opening skill:', { skillId, skillDisplayName });
-          const skillPrompt = `I'd like to use the ${skillDisplayName} skill. Read the skill and help me with it.`;
+          const skillPrompt = `Explain how to use the ${skillDisplayName} skill. Read the skill file and summarize what it does, when to use it, and give me examples.`;
           await openChatPanel(skillPrompt);
           break;
         }
@@ -244,9 +246,44 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           // Spike 1B: Track active tab (no-op beyond logging for now)
           console.log(`[Alex][TAB SPIKE] Tab switched to: ${message.tabId}`);
           break;
+
+        case "setPersonalityMode": {
+          const mode = ['auto', 'precise', 'chatty'].includes(message.mode) ? message.mode : 'auto';
+          await vscode.workspace.getConfiguration('alex').update('personalityMode', mode, vscode.ConfigurationTarget.Global);
+          console.log(`[Alex] Personality mode set to: ${mode}`);
+          break;
+        }
+
         case "refresh":
           this.refresh();
           break;
+        default: {
+          // Handle openDoc:<NAME> commands — open architecture docs by name
+          if (message.command?.startsWith('openDoc:')) {
+            const docName = message.command.slice('openDoc:'.length);
+            const docMap: Record<string, string> = {
+              'COGNITIVE-ARCHITECTURE': 'alex_docs/architecture/COGNITIVE-ARCHITECTURE.md',
+              'MEMORY-SYSTEMS': 'alex_docs/architecture/MEMORY-SYSTEMS.md',
+              'CONSCIOUS-MIND': 'alex_docs/architecture/CONSCIOUS-MIND.md',
+              'AGENT-CATALOG': 'alex_docs/architecture/AGENT-CATALOG.md',
+              'TRIFECTA-CATALOG': 'alex_docs/architecture/TRIFECTA-CATALOG.md',
+              'MASTER-ALEX-PROTECTED': '.github/config/MASTER-ALEX-PROTECTED.json',
+              'HEIR-ARCHITECTURE': 'alex_docs/platforms/HEIR-ARCHITECTURE.md',
+              'RESEARCH-FIRST': 'alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md',
+            };
+            const relPath = docMap[docName];
+            if (relPath) {
+              const folders = vscode.workspace.workspaceFolders;
+              if (folders?.[0]) {
+                const docUri = vscode.Uri.joinPath(folders[0].uri, relPath);
+                vscode.commands.executeCommand('markdown.showPreview', docUri);
+              }
+            } else {
+              console.warn(`[Alex] Unknown doc: ${docName}`);
+            }
+          }
+          break;
+        }
       }
     });
 
@@ -301,6 +338,24 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // Fallback to workspace folder name
     return workspaceFolder.name;
+  }
+
+  private static readonly VALID_TABS = ['mission', 'agents', 'skills', 'mind', 'docs'] as const;
+
+  /**
+   * Programmatically switch the active tab in the Command Center.
+   * Sends a message to the webview client to invoke switchTab().
+   * @param tabId - Tab identifier: 'mission' | 'agents' | 'skills' | 'mind' | 'docs'
+   */
+  public switchToTab(tabId: string): void {
+    if (!this._view) {
+      return;
+    }
+    if (!(WelcomeViewProvider.VALID_TABS as readonly string[]).includes(tabId)) {
+      console.warn(`[Alex][WelcomeView] Invalid tab ID: ${tabId}`);
+      return;
+    }
+    this._view.webview.postMessage({ command: 'switchToTab', tabId });
   }
 
   /**
@@ -403,6 +458,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       // Collect tab data — agents/skills first so Mind can reuse counts
       const agents = this._collectAgents(wsRoot);
       const skills = this._collectSkills(wsRoot);
+      const recentActivity = [...agentActivity.recentThreads];
+      const personalityMode = vscode.workspace.getConfiguration('alex').get<string>('personalityMode', 'auto');
       const mindData = await this._collectMindData(wsRoot, lastDreamDate, health, agents.length, skills.length);
 
       console.log(`[Alex][WelcomeView] Tab data: agents=${agents.length}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
@@ -426,6 +483,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         mindData,
         agents,
         skills,
+        recentActivity,
+        personalityMode,
       );
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
@@ -686,7 +745,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 export function registerWelcomeView(
   context: vscode.ExtensionContext,
 ): WelcomeViewProvider {
-  const provider = new WelcomeViewProvider(context.extensionUri);
+  const provider = new WelcomeViewProvider(context.extensionUri, context);
 
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
@@ -700,10 +759,26 @@ export function registerWelcomeView(
     ),
   );
 
+  // Subscribe to agent activity changes (Contract A — 7.10/7.20)
+  context.subscriptions.push(
+    agentActivity.onDidChange(() => {
+      provider.refresh();
+    }),
+  );
+
   // Register refresh command
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.refreshWelcomeView", () => {
       provider.refresh();
+    }),
+  );
+
+  // Register tab switch command - allows other commands to navigate to a specific tab
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.switchToTab", async (tabId: string) => {
+      // Focus the welcome view first, then switch to the requested tab
+      await vscode.commands.executeCommand('alex.welcomeView.focus');
+      provider.switchToTab(tabId);
     }),
   );
 

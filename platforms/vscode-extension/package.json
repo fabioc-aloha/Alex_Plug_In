@@ -205,6 +205,11 @@
         "icon": "$(refresh)"
       },
       {
+        "command": "alex.switchToTab",
+        "title": "Alex: Switch Command Center Tab",
+        "icon": "$(layout-sidebar-left)"
+      },
+      {
         "command": "alex.setCognitiveState",
         "title": "Alex: Set Cognitive State",
         "icon": "$(symbol-color)"
@@ -541,17 +546,6 @@
           "type": "webview",
           "id": "alex.welcomeView",
           "name": "Welcome"
-        },
-        {
-          "type": "webview",
-          "id": "alex.cognitiveDashboard",
-          "name": "Cognitive Dashboard",
-          "visibility": "collapsed"
-        },
-        {
-          "id": "alex.memoryTree",
-          "name": "Memory Architecture",
-          "visibility": "collapsed"
         }
       ]
     },
@@ -1333,6 +1327,22 @@
           "default": true,
           "scope": "machine",
           "description": "Include streak information in daily briefing."
+        },
+        "alex.personalityMode": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "precise",
+            "chatty"
+          ],
+          "enumDescriptions": [
+            "Auto — let persona detection choose communication style",
+            "Precise — concise, code-first, minimal explanation",
+            "Chatty — explanatory, conversational, teaching-oriented"
+          ],
+          "scope": "machine",
+          "description": "Control Alex's communication style. Auto adapts to the detected project persona."
         }
       }
     },

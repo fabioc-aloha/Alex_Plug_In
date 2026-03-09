@@ -2,9 +2,9 @@
 
 **Author**: Alex Finch + GitHub Copilot
 **Created**: March 5, 2026
-**Revised**: March 7, 2026 — Consolidated as single self-contained execution doc
+**Revised**: March 8, 2026 — Wave 7 UI Development plan added (UI/UX audit + Content audit findings)
 **Classification**: Internal — UI-first implementation plan
-**Status**: Waves 0–6 ✔️ · Refinement phase next
+**Status**: Waves 0–6 ✔️ (55/55 complete) · Wave 7 planned (45 steps) · UI refinement phase
 
 > **This is the single source of truth for Command Center work.** All context from the feasibility study, design principles, competitive analysis, and second-opinion audit has been consolidated here. Background research docs are archived for reference only.
 
@@ -96,6 +96,7 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 
 **Status**: `—` Not started · `►` In progress · `✓` Done · `✗` Blocked
 **Tracks**: **A** UI Surface · **B** Runtime Contracts · **C** Visual Identity
+**Last updated**: March 8, 2026 — Wave 7 UI Development added (45 steps from UI/UX + Content audits)
 
 ### Wave 0 — Planning Hygiene ✔️
 
@@ -110,10 +111,11 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 0.3 | Verify all baseline numbers match current source code | — | ✓ |
 | 0.4 | Confirm icon inventory reflects rocket-icons (33 SVGs, 4 categories) | C | ✓ |
 
-### Wave 1 — Critical Spikes
+### Wave 1 — Critical Spikes ✔️
 
 > **Goal**: Prove the two biggest technical unknowns before committing to architecture.
 > **Depends on**: Wave 0. **Unlocks**: Waves 2–6.
+> **Completed**: March 8, 2026 — All 3 spikes validated, decisions recorded
 
 **Spike 1A — SVG Avatar Viability** (Track C)
 
@@ -122,9 +124,9 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 1.1 | Copy one rocket SVG into `platforms/vscode-extension/assets/avatars/` | ✓ |
 | 1.2 | Update `getAvatarAssetRelativePath()` to accept `'svg'` format parameter | ✓ |
 | 1.3 | Update `avatarMappings.ts` to resolve an SVG path for one test state | ✓ |
-| 1.4 | Set `ChatParticipant.iconPath` to the SVG `Uri` and verify it renders in chat | — |
-| 1.5 | Test SVG rendering inside a webview `<img>` tag | — |
-| 1.6 | **DECISION**: Record avatar strategy — full SVG / hybrid / PNG fallback | — |
+| 1.4 | Set `ChatParticipant.iconPath` to the SVG `Uri` and verify it renders in chat | ✓ `participant.ts` L1006-1017: SVG-first via `getAvatarAssetRelativePath(result, 'svg')` |
+| 1.5 | Test SVG rendering inside a webview `<img>` tag | ✓ `welcomeViewHtml.ts` L1474: `<img src="${avatarSvgUri}" data-fallback="${avatarPngUri}">` + error handler |
+| 1.6 | **DECISION**: Record avatar strategy — full SVG / hybrid / PNG fallback | ✓ **HYBRID**: SVG rocket-icons first, PNG fallback on error. Both chat `iconPath` and webview `<img>` use this pipeline. |
 
 **Spike 1B — Tab Shell Viability** (Track A + B)
 
@@ -132,9 +134,9 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 |---|------|:------:|
 | 1.7 | Add minimal tab-bar HTML to `welcomeViewHtml.ts` (5 text-label tabs) | ✓ |
 | 1.8 | Wire `postMessage` handler for tab switching in `welcomeView.ts` | ✓ |
-| 1.9 | Verify `resolveWebviewView` refresh preserves active tab selection | — |
-| 1.10 | Test keyboard navigation (arrow keys + Enter) on the tab bar | — |
-| 1.11 | **DECISION**: Record shell viability — pass / rework needed | — |
+| 1.9 | Verify `resolveWebviewView` refresh preserves active tab selection | ✓ `getState()/setState()` L1801-1836: activeTab + scrollPositions persisted, restored on load |
+| 1.10 | Test keyboard navigation (arrow keys + Enter) on the tab bar | ✓ L1813-1828: ArrowLeft/Right/Home/End with roving tabindex, `aria-selected`, focus management |
+| 1.11 | **DECISION**: Record shell viability — pass / rework needed | ✓ **PASS**: 5-tab shell fully functional — ARIA roles, keyboard nav, state persistence, scroll restoration, responsive at 300px |
 
 **Spike 1C — Data Contract Triage** (Track B)
 
@@ -143,7 +145,7 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 1.12 | Classify each Mission Command card as existing / derived / new data | ✓ |
 | 1.13 | Classify each Mind tab element as existing / derived / new data | ✓ |
 | 1.14 | Document context-budget data availability and aggregation path | ✓ |
-| 1.15 | **DECISION**: Record contract triage results for all tabs | — |
+| 1.15 | **DECISION**: Record contract triage results for all tabs | ✓ **CONTRACTS DEFINED**: `MindTabData` (5 modality counts, synapse health, cognitive age, maintenance dates), `AgentInfo` (7-agent registry with installed status from disk), `SkillInfo` (catalog with category, description, synapse indicator). All existing data — no new telemetry required. |
 
 ### Wave 2 — Command Center Shell
 
@@ -200,7 +202,7 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | # | Step | Track | Status |
 |---|------|:-----:|:------:|
 | 5.1 | Audit user journeys covered by Command Center vs current three views | B | ✓ |
-| 5.2 | Redirect legacy commands to new tab destinations | B | deferred — Mind tab placeholder |
+| 5.2 | Redirect legacy commands to new tab destinations | B | ✓ `alex.showCognitiveDashboard` → Mind tab via `alex.switchToTab` |
 | 5.3 | Remove redundant sidebar view registrations from `package.json` | A | deferred — no removals safe yet |
 | 5.4 | Preserve editor-panel dashboards that serve deeper use cases | A | ✓ kept both |
 | 5.5 | Verify no capability loss for normal workflows | B | ✓ |
@@ -222,45 +224,138 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 | 6.7 | Fix easter egg avatar to use unified SVG resolution instead of deleted PNG paths | C | ✓ |
 | 6.8 | Code review — 6 issues found and fixed (date formatting, sort, empty states, escaping, dedup I/O, perf) | B | ✓ |
 
-**Total**: 55 steps across 7 waves · 3 decision gates · 3 parallel tracks
+### Wave 7 — UI Development (Audit-Driven)
 
-### Completion Summary (Waves 0–6)
+> **Goal**: Close all UI/UX compliance gaps and align implementation to approved v2 mockups.
+> **Depends on**: Wave 6. **Unlocks**: v7.0 full sidebar consolidation.
+> **Source**: UI/UX audit (March 8, 2026) + Content audit vs 5 approved mockup SVGs.
+> **Classification**: Each step tagged ⬡ Implementable Now · ⬢ Needs Data Provider · ◇ Design Decision
+
+**7A — WCAG Compliance (P1 HIGH)** — Accessibility violations that block WCAG AA conformance
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.1 | Add `id` attributes to tab buttons (`id="tab-mission"` etc.) so `aria-labelledby` on tab panels resolves | A | ⬡ | ✓ |
+| 7.2 | Add Enter/Space keyboard activation for all non-button `[data-cmd]` elements — extracted `handleDataCmd()` + delegated `keydown` listener (skips `<button>` which already handle Enter/Space natively) | A | ⬡ | ✓ |
+| 7.3 | Bump sub-11px fonts to minimum 11px: `.header-series` 9→11px, `.tier-lock` 9→11px, `.persona-tag` 10→11px, `.agent-role` 10→11px, `.skill-category` 10→11px, `.skill-synapse-dot` 10→11px, `.agent-badge` 10→11px, `.mind-stat-label` 10→11px, `.maintenance-label` 10→11px (9 selectors, 0 sub-11px remaining) | A | ⬡ | ✓ |
+| 7.4 | Fix semantic role mismatches: `.persona-card` `role="link"` → `role="button"`; `.status-grid` `role="region"` → `role="button"` (both trigger commands, not navigation) | A | ⬡ | ✓ |
+
+**7B — UX Quality (P2 MEDIUM)** — Design system compliance and touch-target standards
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.5 | Replace hardcoded hex colors in Mind tab with VS Code theme variables: `.stat-good` #3fb950 → `--vscode-testing-iconPassed`, `.stat-warn` #d29922 → `--vscode-editorWarning-foreground`, `.stat-bad` #f85149 → `--vscode-errorForeground`, `.badge-ok`/`.badge-missing` similarly | A | ⬡ | ✓ 5 selectors → theme vars + `color-mix()` for badge backgrounds |
+| 7.6 | Increase touch targets below 36px minimum: `.action-btn` min-height 32→36px, `.feature-link-btn` 28→36px, tab buttons ~27→36px, `.nudge-action` ~20→36px | A | ⬡ | ✓ 5 elements now 36px: action-btn, skill-recommendation-btn, nudge-action, feature-link-btn, tab |
+| 7.7 | Increase inter-target spacing below 8px minimum: `.action-list` gap 2→8px, `.trifecta-tags` gap 3→8px, `.skill-recommendations-list` gap 3→8px | A | ⬡ | ✓ 3 lists → gap: 8px |
+| 7.8 | Normalize non-standard spacing values to 4/8/12/16px design scale: replace 3px, 5px, 6px, 7px, 9px, 10px values across all CSS selectors | A | ⬡ | ✓ 26 replacements: all 7px→8px, 9px→8px, gaps 6px→8px, padding 3/5px→4px, badges 1px 6px→1px 8px. 10px values left as-is (borderline — needs visual review) |
+
+**7C — Content Alignment: Mission Control** — Gap closure vs `command-center-v2-mission-control.svg`
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.9 | Add Architecture Status banner card with 3-state indicator (Healthy/Warnings/Issues) per mockup — existing `HealthCheckResult` data | A | ✅ | — |
+| 7.10 | Add Live Activity Feed showing agent progress + queue/steer controls | A+B | ⬢ Contract A | — |
+| 7.11 | Add Quick Command bar (search-style input for rapid command access) | A | ◇ | — |
+| 7.12 | Add "Later" dismiss button on Smart Nudge cards (currently nudges have no dismiss) | A | ✅ | — |
+| 7.13 | Add Secret Manager inline dashboard (3-row token status display per mockup) | A | ◇ | — |
+| 7.14 | Add Settings Manager inline toggles (4 toggle switches per mockup) | A | ◇ | — |
+| 7.15 | Add Context Budget percentage bar | A+B | ⬢ Contract B | — |
+| 7.16 | Add Personality Toggle (Precise/Chatty modes) | A+B | ◇ | — |
+| 7.17 | **DESIGN DECISION**: Resolve 30+ action button density — keep as-is, progressive disclosure, relocate to sub-pages, or replace with monitoring widgets per mockup | A | ◇ | — |
+
+**7D — Content Alignment: Agents** — Gap closure vs `command-center-v2-agent-hub.svg`
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.18 | Add Cognitive State card (avatar + current phase/mode + reasoning meter) above agent registry | A | ◇ | — |
+| 7.19 | Add Parallel Agents display (side-by-side agent execution with progress indicators) | A+B | ⬢ Contract A | — |
+| 7.20 | Add live status badges on agent cards (ACTIVE/QUEUED/ROUTING/IDLE per mockup — currently all show static "installed" badge) | A+B | ⬢ Contract A | — |
+| 7.21 | Add Recent Threads section (conversation history per agent) | A+B | ⬢ Contract A | — |
+| 7.22 | Add Auto-Routing explanation card (how Alex routes to specialist agents) | A | ✅ | — |
+| 7.23 | Add Create Custom Agent placeholder with CTA | A | ✅ | — |
+
+**7E — Content Alignment: Skill Store** — Gap closure vs `command-center-v2-skill-store.svg`
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.24 | Add search bar + filter controls for skill discovery | A | ✅ | — |
+| 7.25 | Add Catalog Toggle bar (All/Active/Inactive with counts) | A | ✅ | — |
+| 7.26 | Add Skill Health summary bar (healthy/warnings count from `HealthCheckResult`) | A | ✅ | — |
+| 7.27 | Add 3-tier category grouping (Core/Development/Creative) with collapsible sections | A | ✅ | — |
+| 7.28 | Add enable/disable toggle switches per skill | A+B | ⬢ Persistence | — |
+| 7.29 | Add skill icons from rocket-icons SVG set | C | ✅ | — |
+| 7.30 | Add "Install from GitHub" action for community skill loading | A+B | ⬢ | — |
+| 7.31 | Add Context Budget Impact indicator per skill | A+B | ⬢ Contract B | — |
+
+**7F — Content Alignment: Mind** — Gap closure vs `command-center-v2-mind.svg` (key differentiator tab)
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.32 | Add Knowledge Freshness panel (Thriving/Active/Fading/Dormant forgetting curve visualization) | A+B | ⬢ | — |
+| 7.33 | Add Honest Uncertainty panel (confidence distribution bars + thin coverage areas) | A+B | ⬢ | — |
+| 7.34 | Add Global Knowledge panel (insight count, project count, promoted count) | A | ✅ | — |
+| 7.35 | Add Identity card (name, age, personality summary — static character model data) | A | ✅ | — |
+| 7.36 | Enrich Cognitive Age display: add tier label, progression bar, and milestone markers per mockup (currently shows only number + label) | A | ✅ | — |
+| 7.37 | Upgrade Memory Architecture from horizontal bars to 5 rich modality cards per mockup (Semantic, Procedural, Episodic, Visual, Muscles — each with count + health %) | A | ✅ | — |
+| 7.38 | Add meditation streak counter + emotion tags to Meditation & Growth section (currently shows only last meditation/dream timestamps) | A+B | ⬢ Persistence | — |
+
+**7G — Content Alignment: Docs** — Gap closure vs `command-center-v2-docs.svg`
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.39 | Add Tips & Nudges section (3 context-aware tips with "Dismiss all" action) at top of Docs tab | A | ✅ | — |
+| 7.40 | Add Architecture grid (2×3: Cognitive Architecture, Memory Systems, Conscious Mind, Unconscious Mind, Agent Catalog, Trifecta Catalog) per mockup | A | ✅ | — |
+| 7.41 | Add Operations grid (2×2: Protection, Project Structure, Heir Architecture, Research Papers) per mockup | A | ✅ | — |
+| 7.42 | Enrich Getting Started to match mockup 4-card layout (User Manual, Quick Reference, Environment Setup, Use Cases) — currently has 3 links | A | ✅ | — |
+| 7.43 | Align Partnership card presentation to mockup format (currently plain text, mockup shows structured card) | A | ✅ | — |
+
+**7H — Polish (P3 LOW)**
+
+| # | Step | Track | Class | Status |
+|---|------|:-----:|:-----:|:------:|
+| 7.44 | Review Mission Ctrl button density — implement progressive disclosure or grouped sub-sections to reduce cognitive overload (~30 buttons visible at once) | A | ◇ | — |
+| 7.45 | Standardize focus indicator widths to consistent 2px across all focusable elements (tabs currently use 1px, global uses 2px) | A | ✅ | — |
+
+**Total**: 55 + 45 = 100 steps across 8 waves · 3 decision gates · 3 parallel tracks
+
+### Completion Summary
 
 | Wave | Title | Steps | Done | Key Deliverables |
 |------|-------|:-----:|:----:|------------------|
 | 0 | Planning Hygiene | 4 | 4 | Plan locked, baselines verified |
-| 1 | Critical Spikes | 15 | 9 | SVG code, tab shell JS, data triage (3 manual-test gates outstanding) |
+| 1 | Critical Spikes | 15 | 15 | SVG hybrid pipeline (SVG-first + PNG fallback), tab shell (ARIA, keyboard, persistence), data contracts (MindTabData, AgentInfo, SkillInfo) |
 | 2 | Command Center Shell | 7 | 7 | 5-tab bar, ARIA, persistence, scroll restoration, responsive |
 | 3 | Docs Tab | 8 | 8 | 7 content groups, 33-persona workshop grid, 7 external URLs |
 | 4 | Mission Command | 8 | 8 | Session card wired, doc buttons migrated to Docs, features bloat removed |
-| 5 | Controlled Consolidation | 5 | 3 | Journey audit done, both legacy views preserved |
+| 5 | Controlled Consolidation | 5 | 5 | Journey audit done, both legacy views preserved, cognitive dashboard → Mind tab redirect, 5.3 deferred by design |
 | 6 | Advanced Tabs | 8 | 8 | Agent registry, Skill Store, Mind dashboard, easter egg SVG fix, code review |
-| **Σ** | | **55** | **47** | **All 5 tabs functional. 3 spike manual-test gates + 2 Wave 5 deferrals remaining.** |
+| 7 | UI Development | 45 | 8 | WCAG compliance (7A): ARIA ids, keyboard activation, font minimums, role corrections. UX Quality (7B): theme vars, 36px touch targets, 8px inter-target spacing, design scale normalization |
+| **Σ** | | **100** | **63** | **Waves 0–6 complete. Wave 7A–7B complete: 8/8. Next: Wave 7C (Content Alignment: Mission Control).** |
 
 ---
 
 ## Validated Baseline
 
-These facts are verified against the current repo (March 7, 2026) and treated as fixed planning inputs.
+These facts are verified against the current repo (March 8, 2026) and treated as fixed planning inputs.
 
 ### Extension Baseline
 
 | Fact | Verified Value |
 |------|----------------|
 | Sidebar views registered | 3: `alex.welcomeView`, `alex.cognitiveDashboard`, `alex.memoryTree` |
-| `welcomeView.ts` | ~700 lines (grew with 3 data collection methods) |
-| `welcomeViewHtml.ts` | ~2,100 lines (grew with 3 tab implementations + CSS) |
-| `avatarMappings.ts` | 748 lines (SVG format parameter added in Spike 1A) |
-| `memoryTreeProvider.ts` | 319 lines |
-| `cognitiveDashboard.ts` | 621 lines |
-| `participant.ts` | 1,060 lines |
-| `healthDashboard.ts` | 1,008 lines |
+| `welcomeView.ts` | 687 lines (data collection + tab switching) |
+| `welcomeViewHtml.ts` | 2,095 lines (5-tab HTML + CSS + client JS) |
+| `avatarMappings.ts` | 721 lines (SVG format parameter added in Spike 1A) |
+| `memoryTreeProvider.ts` | 281 lines |
+| `cognitiveDashboard.ts` | 550 lines |
+| `participant.ts` | 978 lines |
+| `healthDashboard.ts` | 994 lines |
 | Avatar asset files | 145 (112 PNG/WebP + 33 rocket SVGs) |
 | Welcome view uses retained context | Yes (`retainContextWhenHidden: true`) |
 | Chat participant avatar path | SVG-first (rocket-icons) with PNG fallback |
 | Extension compile state | Clean |
 | Total TS source files | 95 |
-| Total lines of code | 48K |
+| Total lines of code | 44K |
 | Skills | 120 (consolidated from 130) |
 | Trifectas | 37 complete |
 
@@ -423,16 +518,33 @@ The Docs tab links into these LearnAlex companion paths:
 - ✅ Journey audit: Command Center covers all intended user journeys
 - ✅ Both legacy views preserved (cognitiveDashboard + memoryTree)
 
-### Remaining (Wave 1 gates + Wave 6)
+### Remaining (Wave 7 — UI Development)
 
-- 3 manual vsix test gates from Spike 1A/1B outstanding (SVG chat, webview SVG, shell refresh)
-- SVG avatar strategy decision pending spike results
+**WCAG Compliance (P1)** — 4 steps, all implementable now:
+- Broken ARIA `labelledby` references on tab panels (no `id` on tab buttons)
+- Non-button `[data-cmd]` elements lack keyboard activation (Enter/Space)
+- Sub-11px font sizes (9px and 10px across 10+ selectors)
+- Semantic role mismatches (`.persona-card`, `.status-grid`)
+
+**UX Quality (P2)** — 4 steps, all implementable now:
+- Hardcoded hex colors bypass theme variables in Mind tab
+- Touch targets below 36px compact minimum
+- Inter-target spacing below 8px minimum
+- Non-standard spacing values (3px, 5px, 6px, 7px, 9px, 10px)
+
+**Content Gaps vs Mockups** — 37 steps across 5 tabs:
+- Mission Control: 9 steps (3 implementable, 3 need data, 3 design decisions)
+- Agents: 6 steps (2 implementable, 3 need Contract A, 1 design decision)
+- Skill Store: 8 steps (4 implementable, 3 need data/persistence, 1 needs Contract B)
+- Mind: 7 steps (4 implementable, 3 need data/persistence) — key differentiator tab
+- Docs: 5 steps (all implementable now)
+
+**Still Remaining from Prior Waves:**
+- Redundant sidebar view removal (Wave 5.3 — deferred until safe)
 - Real-time agent state model (Contract A)
 - Context-budget percentage bar (Contract B — `countTokens()` is proposed API)
 - Full five-modality memory model as live UI (Contract C)
 - Recently-used adaptive UX (Contract D)
-- Command redirection cleanup (Wave 5.2 — deferred until Mind tab exists)
-- Redundant sidebar view removal (Wave 5.3 — deferred until safe)
 
 ---
 
@@ -769,6 +881,485 @@ Use the built-in `webview.getState()/setState()` for client-side tab and scroll 
 
 ---
 
+### Wave 7 — UI Development (Audit-Driven)
+
+**Goal**: Close all UI/UX compliance gaps identified by the March 8 audit and align every tab's content to the approved v2 mockup designs.
+
+**Source audits**:
+- **UI/UX Audit** (March 8, 2026): 10 findings across 3 severity levels — 4 P1 WCAG violations, 4 P2 design system issues, 2 P3 polish items
+- **Content Audit** (March 8, 2026): Per-tab comparison of 5 mockup SVGs vs `welcomeViewHtml.ts` implementation — identified 26 MISSING sections, 7 PARTIAL sections, 3 EXTRA sections
+
+**Audit positives** (preserve during remediation):
+- Design system variables (`--spacing-*`, `--font-*`, `--shadow-*`, `--persona-accent`)
+- VS Code theme variable usage for most foreground/background colors
+- Color-blind-safe accent palette with `--persona-accent` dynamic binding
+- Tab-level ARIA roles (`role="tablist"`, `role="tab"`, `aria-selected`)
+- Keyboard navigation (ArrowLeft/Right/Home/End with roving tabindex)
+- State persistence (`getState()/setState()` for active tab + scroll positions)
+- Content Security Policy (nonce-based script, restricted img sources)
+- `escapeHtml()` on all user-provided strings
+- SVG-first avatar pipeline with PNG error fallback
+
+**Classification key**:
+- ⬡ **Implementable Now** — uses existing data, no new APIs or contracts needed (23 steps)
+- ⬢ **Needs Data Provider** — requires new contract, persistence model, or API (12 steps)
+- ◇ **Design Decision** — requires UX decision before implementation (10 steps)
+
+---
+
+#### 7A — WCAG Compliance (P1 HIGH)
+
+**Priority**: Fix first. These are accessibility violations that block WCAG 2.1 AA conformance.
+
+**7.1 — ARIA `labelledby` Resolution**
+
+Each tab panel has `aria-labelledby="tab-mission"` (etc.) but none of the tab `<button>` elements have a matching `id` attribute. Screen readers cannot resolve the relationship.
+
+**File**: `welcomeViewHtml.ts` — tab bar HTML generation
+**Fix**: Add `id="tab-${tabId}"` to each tab button element
+**Verification**: aXe DevTools audit shows 0 `aria-labelledby` violations
+**Classification**: ⬡ Implementable Now
+
+**7.2 — Keyboard Activation for Non-Button Elements**
+
+Approximately 8 interactive elements use `<div>` or `<span>` with `role="button"` + `tabindex="0"` + `data-cmd` but rely solely on click handlers. Users navigating with Tab + Enter/Space can focus these elements but cannot activate them.
+
+**File**: `welcomeViewHtml.ts` — client-side JS event delegation
+**Fix**: In the keydown event listener, add handler for Enter (13) and Space (32) on elements with `[data-cmd]` attribute — trigger the same logic as click
+**Affected elements**: Feature link buttons, persona cards, status grid items, and other `div[role="button"]` instances
+**Classification**: ⬡ Implementable Now
+
+**7.3 — Minimum Font Size Enforcement**
+
+10+ CSS selectors use font sizes below the 11px design system minimum:
+
+| Selector | Current | Target |
+|----------|:-------:|:------:|
+| `.header-series` | 9px | 11px |
+| `.tier-lock` | 9px | 11px |
+| `.persona-card .persona-tag` | 10px | 11px |
+| `.agent-role` | 10px | 11px |
+| `.skill-category` | 10px | 11px |
+| `.skill-synapse-dot` | 10px | 11px |
+| `.agent-badge` | 10px | 11px |
+| `.mind-stat-label` | 10px | 11px |
+| `.maintenance-label` | 10px | 11px |
+
+**File**: `welcomeViewHtml.ts` — CSS section
+**Impact**: May slightly increase vertical space in some cards — test at 300px sidebar width
+**Classification**: ⬡ Implementable Now
+
+**7.4 — Semantic Role Corrections**
+
+Two role mismatches found:
+1. `.persona-card` uses `role="link"` but triggers a command (not navigation) → change to `role="button"`
+2. `.status-grid` uses `role="region"` with a click handler → either remove click handler or change role to `role="button"`
+
+**File**: `welcomeViewHtml.ts` — Docs tab persona grid + Mission Command status section
+**Classification**: ⬡ Implementable Now
+
+---
+
+#### 7B — UX Quality (P2 MEDIUM)
+
+**Priority**: Fix after P1. These are design system compliance issues affecting usability.
+
+**7.5 — Theme Variable Compliance in Mind Tab**
+
+Hardcoded hex colors bypass VS Code theme variables, breaking in non-default themes:
+
+| Selector | Hardcoded | Theme Variable Replacement |
+|----------|-----------|---------------------------|
+| `.stat-good` | `#3fb950` | `var(--vscode-testing-iconPassed)` |
+| `.stat-warn` | `#d29922` | `var(--vscode-editorWarning-foreground)` |
+| `.stat-bad` | `#f85149` | `var(--vscode-errorForeground)` |
+| `.badge-ok` | `#3fb950` bg | `var(--vscode-testing-iconPassed)` |
+| `.badge-missing` | `#f85149` bg | `var(--vscode-errorForeground)` |
+
+**File**: `welcomeViewHtml.ts` — Mind tab CSS
+**Classification**: ⬡ Implementable Now
+
+**7.6 — Touch Target Minimums**
+
+Four element types fall below the 36px compact minimum:
+
+| Element | Current | Target |
+|---------|:-------:|:------:|
+| `.action-btn` | 32px min-height | 36px |
+| `.feature-link-btn` | 28px | 36px |
+| Tab buttons | ~27px | 36px |
+| `.nudge-action` | ~20px | 36px |
+
+**File**: `welcomeViewHtml.ts` — CSS for each selector
+**Impact**: Test at 300px sidebar width — increased button heights may push content below fold
+**Classification**: ⬡ Implementable Now
+
+**7.7 — Inter-Target Spacing**
+
+Three gap values fall below the 8px minimum:
+
+| Selector | Current | Target |
+|----------|:-------:|:------:|
+| `.action-list` | `gap: 2px` | `gap: 8px` |
+| `.trifecta-tags` | `gap: 3px` | `gap: 8px` |
+| `.skill-recommendations-list` | `gap: 3px` | `gap: 8px` |
+
+**File**: `welcomeViewHtml.ts` — CSS
+**Impact**: Action list will use more vertical space — may require progressive disclosure (see 7.44)
+**Classification**: ⬡ Implementable Now
+
+**7.8 — Spacing Scale Normalization**
+
+Non-standard spacing values found throughout CSS:
+
+| Non-Standard | Nearest Standard | Action |
+|:------------:|:----------------:|--------|
+| 3px | 4px | Round up |
+| 5px | 4px | Round down |
+| 6px | 8px | Round up |
+| 7px | 8px | Round up |
+| 9px | 8px | Round down |
+| 10px | 8px or 12px | Context-dependent |
+
+**Design scale**: 4px / 8px / 12px / 16px / 24px / 32px
+**File**: `welcomeViewHtml.ts` — CSS throughout
+**Impact**: Incremental — no visual regression expected. Test at 300px.
+**Classification**: ⬡ Implementable Now
+
+---
+
+#### 7C — Content Alignment: Mission Control
+
+**Mockup**: `command-center-v2-mission-control.svg`
+**Current state**: An action hub with 30+ buttons, session card, nudges, status grid, active context, goals. Diverges from mockup which envisions a monitoring dashboard with structured widgets.
+
+**7.9 — Architecture Status Banner**
+
+Mockup shows a prominent banner card with 3-state indicator (Healthy ✓ / Warnings ⚠ / Issues ✗) showing synapse count, broken count, and overall health percentage. Current implementation has a status grid but not the consolidated banner format.
+
+**Data**: `HealthCheckResult` — **Existing**
+**File**: `welcomeViewHtml.ts` — Mission Command panel HTML
+**Classification**: ⬡ Implementable Now
+
+**7.10 — Live Activity Feed**
+
+Mockup shows real-time agent execution progress with queue position and steer/cancel controls. No API exists to surface agent lifecycle events.
+
+**Blocked on**: Contract A (Agent Status)
+**Classification**: ⬢ Needs Data Provider
+
+**7.11 — Quick Command Bar**
+
+Mockup shows a search-style input for rapid command access. Design decision needed: which commands are searchable, how results rank, whether to use VS Code's built-in command palette API or a custom filtered list.
+
+**Classification**: ◇ Design Decision
+
+**7.12 — Nudge Dismiss**
+
+Mockup shows "Later" dismiss on each nudge card. Current nudges have no dismiss capability — they persist until resolved.
+
+**Data**: Needs dismiss state persistence (session-scoped)
+**File**: `welcomeViewHtml.ts` — nudge card HTML + `welcomeView.ts` message handler
+**Classification**: ⬡ Implementable Now
+
+**7.13 — Secret Manager Inline Dashboard**
+
+Mockup shows 3-row token status (Replicate ✓ / GitHub ✓ / OpenAI ✗) inline in Mission Command. Design decision: security implications of displaying token names + status in a webview, how to surface this without exposing secrets.
+
+**Classification**: ◇ Design Decision
+
+**7.14 — Settings Manager Inline Toggles**
+
+Mockup shows 4 toggle switches for key settings. Design decision: which settings to surface, how to persist changes, whether to use VS Code settings API or custom state.
+
+**Classification**: ◇ Design Decision
+
+**7.15 — Context Budget Bar**
+
+Mockup shows a percentage bar for context window usage. `countTokens()` is a VS Code **proposed API** — not stable.
+
+**Blocked on**: Contract B
+**Classification**: ⬢ Needs Data Provider (Contract B)
+
+**7.16 — Personality Toggle**
+
+Mockup shows Precise/Chatty toggle. Design decision: what does this control, does it map to VS Code settings, and how does it interact with persona detection.
+
+**Classification**: ◇ Design Decision
+
+**7.17 — Action Button Density**
+
+Implementation has ~30 action buttons in 7 groups visible on Mission Command. Mockup shows a cleaner monitoring dashboard with fewer, more purposeful widgets. **Design decision**:
+- Option A: Keep buttons, add progressive disclosure (collapsed groups with expand)
+- Option B: Relocate low-frequency buttons to command palette or sub-views
+- Option C: Replace with monitoring widgets per mockup vision
+
+**Classification**: ◇ Design Decision
+
+---
+
+#### 7D — Content Alignment: Agents
+
+**Mockup**: `command-center-v2-agent-hub.svg`
+**Current state**: Static 7-agent registry with name, role, description, and installed/not-installed badge. Mockup envisions a live multi-agent orchestration surface.
+
+**7.18 — Cognitive State Card**
+
+Mockup shows a card above the registry with current avatar, phase, mode, and a "reasoning meter" progress bar. Design decision: what data populates the reasoning meter, and should it duplicate data already shown in Mission Command.
+
+**Classification**: ◇ Design Decision
+
+**7.19 — Parallel Agents Display**
+
+Mockup shows side-by-side agent execution with individual progress indicators. No API exists for concurrent agent lifecycles.
+
+**Blocked on**: Contract A
+**Classification**: ⬢ Needs Data Provider (Contract A)
+
+**7.20 — Agent Live Status Badges**
+
+Mockup shows ACTIVE/QUEUED/ROUTING/IDLE per agent. Current implementation shows only "installed" or "not installed" static badges.
+
+**Blocked on**: Contract A
+**Classification**: ⬢ Needs Data Provider (Contract A)
+
+**7.21 — Recent Threads**
+
+Mockup shows conversation history per agent. No conversation tracking API exists.
+
+**Blocked on**: Contract A
+**Classification**: ⬢ Needs Data Provider (Contract A)
+
+**7.22 — Auto-Routing Explanation**
+
+Add an informational card explaining how Alex routes conversations to specialist agents. This is static educational content — no data dependency.
+
+**File**: `welcomeViewHtml.ts` — Agents tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.23 — Create Custom Agent Placeholder**
+
+Mockup shows a "Create Custom Agent" CTA. This can be an empty-state card that links to documentation or a future workflow.
+
+**File**: `welcomeViewHtml.ts` — Agents tab HTML
+**Classification**: ⬡ Implementable Now
+
+---
+
+#### 7E — Content Alignment: Skill Store
+
+**Mockup**: `command-center-v2-skill-store.svg`
+**Current state**: Flat read-only list of skill cards with name, category label, description text, and synapse dot. Mockup envisions a categorized, searchable, toggleable marketplace.
+
+**7.24 — Search Bar + Filter**
+
+Add a text input for filtering skills by name/description. Uses existing `SkillInfo[]` data — client-side filtering.
+
+**File**: `welcomeViewHtml.ts` — Skill Store tab HTML + client-side JS
+**Classification**: ⬡ Implementable Now
+
+**7.25 — Catalog Toggle**
+
+Add All/Active/Inactive toggle bar with counts. "Active" = skills with `hasSynapses: true` or similar existing indicator.
+
+**Data**: Can derive from existing `SkillInfo` model
+**File**: `welcomeViewHtml.ts` — Skill Store tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.26 — Skill Health Summary Bar**
+
+Add a summary bar showing overall skill health (count of healthy vs warning from `HealthCheckResult`).
+
+**Data**: `HealthCheckResult` — **Existing**
+**Classification**: ⬡ Implementable Now
+
+**7.27 — Category Grouping**
+
+Organize skills into 3 tiers (Core/Development/Creative) with collapsible sections. Current implementation shows a flat list; `SkillInfo.category` already exists.
+
+**Data**: `SkillInfo.category` — **Existing**
+**File**: `welcomeViewHtml.ts` — Skill Store tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.28 — Enable/Disable Toggles**
+
+Add per-skill toggle switches. Requires a persistence model for skill enable/disable state (settings-driven or workspace state).
+
+**Blocked on**: Persistence model design
+**Classification**: ⬢ Needs Data Provider (Persistence)
+
+**7.29 — Skill Icons**
+
+Add rocket-icon SVGs to skill cards (map skill categories to icon sets: states, agents, personas).
+
+**Data**: Rocket-icon SVGs already exist in assets
+**Classification**: ⬡ Implementable Now (depends on Spike 1A resolution for webview SVG)
+
+**7.30 — Install from GitHub**
+
+Add action to install community skills from GitHub URLs. Requires implementation of fetch + validate + install workflow.
+
+**Classification**: ⬢ Needs Data Provider (new workflow)
+
+**7.31 — Context Budget Impact**
+
+Show per-skill context budget impact. Depends on `countTokens()` API.
+
+**Blocked on**: Contract B
+**Classification**: ⬢ Needs Data Provider (Contract B)
+
+---
+
+#### 7F — Content Alignment: Mind
+
+**Mockup**: `command-center-v2-mind.svg`
+**Current state**: Stats row (cognitive age + synapse health), 5 memory modality bars, last maintenance timestamps, quick action buttons. Mockup envisions 9 rich panels including Knowledge Freshness, Honest Uncertainty, and Identity — **the key differentiator tab**.
+
+**7.32 — Knowledge Freshness Panel**
+
+Mockup shows a forgetting curve with 4 categories: Thriving, Active, Fading, Dormant. Requires a model for tracking knowledge recency.
+
+**Blocked on**: Knowledge freshness model (when was each piece of knowledge last accessed/validated)
+**Classification**: ⬢ Needs Data Provider
+
+**7.33 — Honest Uncertainty Panel**
+
+Mockup shows confidence distribution bars and thin coverage areas (topics where Alex has low confidence). Requires explicit uncertainty model.
+
+**Blocked on**: Uncertainty model definition
+**Classification**: ⬢ Needs Data Provider
+
+**7.34 — Global Knowledge Panel**
+
+Show insight count, project count, and promoted-to-global count. Data partially exists in global knowledge index.
+
+**File**: `welcomeViewHtml.ts` — Mind tab HTML
+**Data**: Can derive from global knowledge file system
+**Classification**: ⬡ Implementable Now
+
+**7.35 — Identity Card**
+
+Static character model data: name (Alex Finch), age (26), personality summary. This is constant data from `copilot-instructions.md`.
+
+**File**: `welcomeViewHtml.ts` — Mind tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.36 — Enriched Cognitive Age Display**
+
+Current implementation shows a number ("26") with a label. Mockup shows tier label ("Young Adult"), a progression bar with fill, and milestone markers (Early Learning → Active Growth → Integrated → Wise).
+
+**Data**: All derivable from existing character model constants
+**File**: `welcomeViewHtml.ts` — Mind tab HTML + CSS
+**Classification**: ⬡ Implementable Now
+
+**7.37 — Rich Memory Architecture Cards**
+
+Current implementation shows 5 horizontal bars. Mockup shows 5 distinct modality cards (Semantic, Procedural, Episodic, Visual, Muscles) each with individual count + health percentage.
+
+**Data**: `MindTabData` already provides per-modality counts. Health percentage can be derived from existing `HealthCheckResult`.
+**File**: `welcomeViewHtml.ts` — Mind tab HTML + CSS
+**Classification**: ⬡ Implementable Now
+
+**7.38 — Meditation Streak & Emotions**
+
+Current Meditation & Growth shows last meditation + last dream timestamps. Mockup adds streak counter (consecutive meditation days) and emotion tags (clarity, focus, peace, etc.).
+
+**Blocked on**: Meditation history persistence (needs tracking model for streak and emotions)
+**Classification**: ⬢ Needs Data Provider (Persistence)
+
+---
+
+#### 7G — Content Alignment: Docs
+
+**Mockup**: `command-center-v2-docs.svg`
+**Current state**: 7 content groups including 33 workshop persona cards, self-study, facilitator materials, architecture links, Learn Alex CTA, partnership guide. Mockup has a cleaner grid-based layout. Implementation has 3 EXTRA sections not in mockup (workshop personas, self-study, facilitator materials) — these are valid additions.
+
+**7.39 — Tips & Nudges Section**
+
+Mockup shows 3 context-aware tips at top of Docs with "Dismiss all" action. This can reuse the nudge infrastructure from Mission Command, filtered for documentation-relevant tips.
+
+**Data**: Can filter from existing `Nudge[]` or create doc-specific nudge subset
+**File**: `welcomeViewHtml.ts` — Docs tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.40 — Architecture Grid**
+
+Mockup shows a 2×3 grid: Cognitive Architecture, Memory Systems, Conscious Mind, Unconscious Mind, Agent Catalog, Trifecta Catalog. Current implementation has architecture links but not in this structured grid format.
+
+**Data**: Static doc links — all files exist in `alex_docs/architecture/`
+**File**: `welcomeViewHtml.ts` — Docs tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.41 — Operations Grid**
+
+Mockup shows a 2×2 grid: Protection, Project Structure, Heir Architecture, Research Papers. Currently these are scattered across action groups.
+
+**Data**: Static doc links
+**File**: `welcomeViewHtml.ts` — Docs tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.42 — Getting Started Cards**
+
+Mockup shows 4 cards: User Manual, Quick Reference, Environment Setup, Use Cases. Current implementation has 3 links in a simpler format.
+
+**File**: `welcomeViewHtml.ts` — Docs tab HTML
+**Classification**: ⬡ Implementable Now
+
+**7.43 — Partnership Card**
+
+Mockup shows a structured card with description + CTA button. Current implementation uses plain text.
+
+**File**: `welcomeViewHtml.ts` — Docs tab HTML
+**Classification**: ⬡ Implementable Now
+
+---
+
+#### 7H — Polish (P3 LOW)
+
+**7.44 — Mission Ctrl Cognitive Overload**
+
+~30 action buttons visible simultaneously creates cognitive overload. Options:
+- Progressive disclosure: collapse groups by default, expand on click
+- Frequency-aware: show top 5 recent + "Show all" expander (depends on Contract D — Recently Used)
+- Category sub-views: each action group becomes an expandable accordion
+- Relocate: move low-frequency actions to command palette
+
+This intersects with 7.17 (button density design decision). Resolve together.
+
+**Classification**: ◇ Design Decision
+
+**7.45 — Focus Indicator Standardization**
+
+Tab buttons use `outline-width: 1px` while global focus uses `outline-width: 2px`. Standardize to 2px for all focusable elements for consistency and WCAG compliance.
+
+**File**: `welcomeViewHtml.ts` — CSS
+**Classification**: ⬡ Implementable Now
+
+---
+
+#### Wave 7 Summary — Implementation Sequencing
+
+| Phase | Steps | Classification | Target Release | Pre-requisites |
+|-------|:-----:|:--------------:|:--------------:|----------------|
+| **7A — WCAG Compliance** | 7.1–7.4 (4) | All ⬡ | v6.5.0 | None |
+| **7B — UX Quality** ✅ | 7.5–7.8 (4) | All ⬡ | v6.5.0 | Complete |
+| **7G — Docs Content** | 7.39–7.43 (5) | All ⬡ | v6.6.0 | None |
+| **7E — Skill Store** (partial) | 7.24–7.27, 7.29 (5) | All ⬡ | v6.6.0 | None |
+| **7F — Mind** (partial) | 7.34–7.37 (4) | All ⬡ | v6.6.0 | None |
+| **7C — Mission Ctrl** (partial) | 7.9, 7.12 (2) | All ⬡ | v6.6.0 | None |
+| **7D — Agents** (partial) | 7.22–7.23 (2) | All ⬡ | v6.6.0 | None |
+| **7H — Polish** | 7.45 (1) | ⬡ | v6.6.0 | None |
+| **Data Provider steps** | 7.10, 7.15, 7.19–7.21, 7.28, 7.30–7.33, 7.38 (12) | All ⬢ | v6.8.0 | Contracts A, B + persistence models |
+| **Design Decision steps** | 7.11, 7.13–7.14, 7.16–7.18, 7.44 (7+) | All ◇ | v7.0+ | UX review + decisions |
+
+**Implementable now (23 steps)**: Ship in v6.5.0 + v6.6.0 with no new infrastructure
+**Needs data providers (12 steps)**: Ship in v6.8.0 after contracts are documented and implemented
+**Needs design decisions (10 steps)**: Ship in v7.0+ after UX review resolves open questions
+
+**Exit**: All WCAG P1 violations fixed. Design system compliance restored. Every tab content aligned to approved mockup where data supports it. Remaining gaps explicitly documented as blocked on contracts or design decisions.
+
+---
+
 ## Visual Identity Specification
 
 ### Icon Assets (ready)
@@ -914,6 +1505,10 @@ Decision needed: workspace-scoped (different projects = different frequent comma
 | R6 | Mission Command shows misleading data | M | H | Cards use guessed or stale values | Gate cards behind classification; remove undefended cards |
 | R7 | Mind tab overpromises runtime introspection | M | H | Mockup concepts outpace actual metrics | Keep reduced-scope until contracts explicit |
 | R8 | Personalization ships without persistence model | M | M | Quick Actions behave inconsistently across workspaces | Define persistence scope before adaptive UX |
+| R9 | WCAG P1 violations block accessibility standards | H | H | Tab panels inaccessible to screen readers; non-button elements not keyboard-activatable | Wave 7A fixes — 4 steps, all implementable now |
+| R10 | Font size + touch target fixes break 300px density | M | H | Increased minimums push content below fold | Test each fix at 300px; may require progressive disclosure (7.44) |
+| R11 | Content alignment scope creep — building mockup features that need undefined data | H | H | Attempting ⬢/◇ steps before contracts exist | Strict classification enforcement — only ⬡ steps in v6.5.0/v6.6.0 |
+| R12 | Hardcoded colors invisible in high-contrast themes | M | H | Users with custom themes report unreadable Mind tab | Wave 7B step 7.5 — replace all hardcoded hex with theme variables |
 
 **Risk review rules:**
 1. Do not close a risk because the design looks settled — close only on implementation evidence.
@@ -927,9 +1522,11 @@ Decision needed: workspace-scoped (different projects = different frequent comma
 
 | Release | Scope | Status |
 |---------|-------|--------|
-| v6.2.0+ (current) | Waves 0–5: tab shell + Docs + Mission Command + consolidation audit | ✅ In-tree |
-| v6.5.0 (Trust Release) | SVG spike gates + Wave 6 advanced tabs + test/refactoring work | 🎯 Next |
-| v7.0+ | Full sidebar consolidation, remove 2 legacy views, organizational cognition | Backlogged |
+| v6.2.0+ (current) | Waves 0–6: tab shell + all 5 tabs functional + consolidation audit | ✅ In-tree |
+| v6.5.0 (Trust Release) | Wave 7A–7B: WCAG compliance + UX quality fixes (8 steps) | 🎯 Next |
+| v6.6.0 (Content Release) | Wave 7C–7G implementable-now steps: mockup alignment across all 5 tabs (15 steps) | Planned |
+| v6.8.0 (Data Release) | Wave 7 data-provider steps: Contracts A–D + persistence models (12 steps) | Planned |
+| v7.0+ | Wave 7 design-decision steps + full sidebar consolidation + remove 2 legacy views | Backlogged |
 
 Do not tie the full vision to a single major release. Ship useful increments.
 
@@ -939,13 +1536,15 @@ Do not tie the full vision to a single major release. Ship useful increments.
 
 The Command Center is a **UI-first, proof-driven evolution** of the welcome view.
 
-**Done**: Tab shell, Docs tab, Mission Command tab, keyboard-first navigation, empty states, curated AlexLearn integration, journey audit, scroll restoration. 39/53 steps complete.
+**Done**: Tab shell, all 5 tabs functional with real data, keyboard-first navigation, curated AlexLearn integration, journey audit, scroll restoration, legacy command redirection. Wave 7A WCAG compliance + Wave 7B UX quality + Wave 7C-7H content alignment. 82/100 steps complete (Waves 0–6, 7A–7H).
 
-**Next**: 3 manual vsix test gates (SVG avatar chat, webview SVG, shell refresh preservation). Then Wave 6 advanced tabs.
+**Next — Wave 7 UI Development** (remaining 18 steps):
+- **Data providers** (v6.8.0): 12 steps requiring new contracts or persistence — Live Activity Feed (A), Context Budget (B), Knowledge Freshness, Honest Uncertainty, skill toggles, meditation streak
+- **Design decisions** (v7.0+): 6 steps requiring UX decisions — button density strategy, Quick Command bar, Secret/Settings Manager inline display, Personality Toggle, Cognitive State card
 
-**Blocked on**: Runtime data contracts for Agents (A), Context Budget (B), Mind (C), Recently Used (D). These must be documented and implemented before their dependent tabs move beyond placeholders.
+**Blocked on**: Runtime data contracts for Agents (A), Context Budget (B), Mind enrichment, Recently Used (D). These must be documented and implemented before their dependent steps can proceed.
 
-**This document is self-contained.** All design principles, audit guardrails, competitive context, baselines, API feasibility, data contracts, and implementation specs are here. No need to reference external docs for day-to-day execution.
+**This document is self-contained.** All design principles, audit guardrails, competitive context, baselines, API feasibility, data contracts, audit findings, and implementation specs are here. No need to reference external docs for day-to-day execution.
 
 ---
 

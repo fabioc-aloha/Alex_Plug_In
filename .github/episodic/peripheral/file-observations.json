@@ -5,14 +5,42 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md"
+    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/src/chat/participant.ts",
+    "platforms/vscode-extension/src/chat/promptEngine.ts",
+    "platforms/vscode-extension/src/extension.ts",
+    "platforms/vscode-extension/src/shared/activeContextManager.ts",
+    "platforms/vscode-extension/src/ux/uxFeatures.ts",
+    "platforms/vscode-extension/src/views/welcomeView.ts",
+    "platforms/vscode-extension/src/views/welcomeViewHtml.ts"
   ],
   "todoHotspots": [
     {
-      "file": "ROADMAP-UNIFIED.md",
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.2.0.vsix",
+      "todoCount": 17,
+      "scannedAt": 1773024351736
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1772944880922
+      "scannedAt": 1773024351736
+    },
+    {
+      "file": "platforms/vscode-extension/src/extension.ts",
+      "todoCount": 1,
+      "scannedAt": 1773024351736
+    },
+    {
+      "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
+      "todoCount": 1,
+      "scannedAt": 1773024351736
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1773024351736
     }
   ],
-  "lastUpdated": 1772944880922
+  "lastUpdated": 1773024351736
 }

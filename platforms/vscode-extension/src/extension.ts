@@ -65,9 +65,7 @@ import { isWorkspaceProtected, getLanguageIdFromPath, openChatPanel } from "./sh
 import { requireCognitiveLevel, detectCognitiveLevel, invalidateCognitiveLevelCache } from "./shared/cognitiveTier";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
-import { registerMemoryDashboard } from "./views/memoryDashboard";
-import { registerMemoryTreeView } from "./views/memoryTreeProvider";
-import { registerCognitiveDashboard } from "./views/cognitiveDashboard";
+
 import { CognitiveTaskProvider } from "./tasks/cognitiveTaskProvider";
 import { registerUXCommands } from "./ux/uxFeatures";
 import * as telemetry from "./shared/telemetry";
@@ -206,11 +204,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   // Register health dashboard webview
   registerHealthDashboard(context);
 
-  // Register memory architecture dashboard (premium)
-  registerMemoryDashboard(context);
 
-  // Register memory tree view in Activity Bar sidebar
-  const memoryTreeProvider = registerMemoryTreeView(context);
 
   // Background cloud sync deprecated in v5.0.1 - use Git instead
   // startBackgroundSync(context);
@@ -493,8 +487,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   // Register v5.2.0 UX Excellence features (voice toggle, quick commands, daily briefing)
   registerUXCommands(context);
 
-  // Register Cognitive Dashboard webview
-  registerCognitiveDashboard(context);
+
 
   // Register heir validation command (developer tool for release validation)
   registerHeirValidationCommand(context);

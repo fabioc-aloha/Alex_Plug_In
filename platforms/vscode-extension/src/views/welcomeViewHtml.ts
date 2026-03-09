@@ -14,11 +14,7 @@ import {
   getEasterEggOverride,
   EasterEgg,
 } from '../chat/personaDetection';
-import {
-  resolveAvatar,
-  AvatarContext,
-    getAvatarAssetRelativePath,
-} from '../chat/avatarMappings';
+
 import { ActiveContext } from '../shared/activeContextManager';
 import { LearningGoal } from '../commands/goals';
 import { escapeHtml, getNonce } from '../shared/sanitize';
@@ -26,6 +22,7 @@ import { getCachedCognitiveLevel, getFeatureRequirement, CognitiveLevel } from '
 import { SkillRecommendation } from '../chat/skillRecommendations';
 import { getSkillDisplayName } from '../shared/skillConstants';
 import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
+import { AgentActivity } from '../services/agentActivity';
 
 /** Data contract for the Mind tab */
 export interface MindTabData {
@@ -50,7 +47,7 @@ export interface AgentInfo {
   installed: boolean;
 }
 
-/** Data contract for the Skill Store tab */
+/** Data contract for the Skills tab */
 export interface SkillInfo {
   id: string;
   displayName: string;
@@ -187,6 +184,8 @@ export function getWelcomeHtmlContent(
   mindData?: MindTabData,
   agents?: AgentInfo[],
   skills?: SkillInfo[],
+  recentActivity?: AgentActivity[],
+  personalityMode?: string,
 ): string {
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, '_getHtmlContent: webview must be defined');
@@ -220,61 +219,13 @@ export function getWelcomeHtmlContent(
         .filter(Boolean)
     : []; // Empty when no live trifectas (user hasn't started working yet)
 
-  // Avatar URIs — v5.9.2 Enhanced with unified resolveAvatar() 
+  // Easter egg and persona display
   // Priority: Easter egg > Agent > Cognitive State > Skill State > Skill Persona > Persona > Age > Default
   // Uses organized subdirectories: personas/, ages/, agents/, states/
   const workspaceFolderName = vscode.workspace.workspaceFolders?.[0]?.name;
   const easterEgg: EasterEgg | null =
     getEasterEggOverride(workspaceFolderName);
   
-  // Build avatar context for unified resolution
-  const avatarContext: AvatarContext = {
-    agentMode: agentMode,
-    cognitiveState: cognitiveState,
-    activeSkill: trifectaIds.length > 0 ? trifectaIds[0] : null,
-    personaId: persona?.id || null,
-    birthday: userProfile?.birthday || null,
-  };
-  
-  // Resolve avatar using unified priority chain
-  let avatarPath: string;
-  let avatarSource: string = 'default';
-  // Spike 1A: SVG override tracking
-  let avatarUseSvg = false;
-  let avatarSvgPath: string | null = null;
-  
-  if (easterEgg) {
-    avatarSource = 'easter-egg';
-  }
-  
-  // Always use unified avatar resolution (easter eggs only affect the badge overlay)
-  {
-    const avatarResult = resolveAvatar(avatarContext);
-        avatarPath = getAvatarAssetRelativePath(avatarResult, 'png').replace(/\.png$/, '');
-    if (!easterEgg) { avatarSource = avatarResult.source; }
-    // Spike 1A: Check for SVG rocket-icon override
-    const svgPath = getAvatarAssetRelativePath(avatarResult, 'svg');
-    avatarUseSvg = svgPath.includes('rocket-icons');
-    console.log(`[Alex][Avatar Debug] PersonaID: ${avatarContext.personaId}, Source: ${avatarResult.source}, Label: ${avatarResult.label}, SVG: ${svgPath}, UseSVG: ${avatarUseSvg}`);
-    if (avatarUseSvg) {
-      avatarSvgPath = svgPath.replace(/\.svg$/, '');
-    }
-  }
-  
-  // Spike 1A: Build SVG URI if available
-  const avatarSvgUri = avatarUseSvg && avatarSvgPath
-    ? getAssetUri(webview, extensionUri, `${avatarSvgPath}.svg`)
-    : null;
-  const avatarWebpUri = getAssetUri(
-    webview,
-    extensionUri,
-        `${avatarPath}.webp`,
-  );
-  const avatarPngUri = getAssetUri(
-    webview,
-    extensionUri,
-        `${avatarPath}.png`,
-  );
   const easterEggBadge = easterEgg
     ? `<span class="easter-egg-badge" title="${easterEgg.label}">${easterEgg.emoji}</span>`
     : "";
@@ -312,7 +263,7 @@ export function getWelcomeHtmlContent(
   // Objective from Active Context (hidden when session card is showing)
   const rawObjective = activeContext?.objective;
   const hasObjective =
-    rawObjective && !rawObjective.includes("*(session-objective") && !session;
+    rawObjective && !rawObjective.includes("session-objective") && !session;
 
   // Last Assessed from Active Context
   const rawAssessed = activeContext?.lastAssessed || "never";
@@ -350,6 +301,54 @@ export function getWelcomeHtmlContent(
 
   // Streak days for status display
   const streakDays = goals.streakDays;
+
+  // Architecture status banner (7.9)
+  const healthPct = health.totalSynapses > 0
+    ? Math.round((1 - health.brokenSynapses / health.totalSynapses) * 100)
+    : 100;
+  const healthBannerClass = isHealthy ? 'status-healthy' : health.brokenSynapses > 5 ? 'status-error' : 'status-warning';
+  const healthBannerIcon = isHealthy ? '✓' : health.brokenSynapses > 5 ? '✗' : '⚠';
+  const healthBannerLabel = isHealthy ? 'Healthy' : health.brokenSynapses > 5 ? 'Issues' : 'Warnings';
+
+  // Dynamic skill category detection via keyword patterns (no hardcoded map)
+  const CATEGORY_RULES: Array<{ category: string; pattern: RegExp }> = [
+    { category: 'Azure & Cloud', pattern: /azure|bicep|fabric|foundry|cloud|infrastructure-as-code/ },
+    { category: 'Creative & Media', pattern: /image|banner|character-|brand|svg|graphic|ascii|ui-ux|mermaid|gamma|slide|pptx|presentation|terminal-image|text-to-speech|correax|aging/ },
+    { category: 'Collaboration', pattern: /teams-app|microsoft-graph|m365|enterprise|project-management|scope-management|change-management|business-analysis|cross-cultural|pii-privacy|work-life/ },
+    { category: 'VS Code', pattern: /vscode|extension|chat-participant|mcp-|agent-debug-panel|heir-sync/ },
+    { category: 'AI & ML', pattern: /\bai[- ]|prompt|llm|rag-|hallucination|flux|finetune|fine-tune|reliance|responsible-ai|agent-design|orchestration|frustration|coaching|socratic|learning-psychology/ },
+    { category: 'Research & Writing', pattern: /research|academic|literature|dissertation|grant|citation|book-publish|creative-writing|documentation-quality|md-to-word|storytelling|status-report|effort-estimation/ },
+    { category: 'Cognitive', pattern: /meditat|dream|actuali[sz]|memory-activ|brain-qa|cognitive|north-star|bootstrap|knowledge-synth|global-knowledge|awareness|persona-detect|skill-build|skill-develop|skill-catalog|visual-memory|deep-work|muscle-memory|proactive|architecture-refin/ },
+    { category: 'Development', pattern: /code-review|debug|refactor|root-cause|testing|api-|database|error-recov|architecture-audit|git-|lint-|performance|observability|security|distribution-security|secrets|incident|post-mortem|rubber-duck|project-scaffold|project-deploy|release|localization/ },
+  ];
+
+  function classifySkill(id: string, description: string): string {
+    const text = `${id} ${description}`.toLowerCase();
+    for (const rule of CATEGORY_RULES) {
+      if (rule.pattern.test(text)) { return rule.category; }
+    }
+    return 'Other';
+  }
+
+  const CATEGORY_ICONS: Record<string, string> = {
+    'Cognitive': '🧠', 'Development': '⚙️', 'AI & ML': '🤖', 'Research & Writing': '📝',
+    'Creative & Media': '🎨', 'Azure & Cloud': '☁️', 'VS Code': '💻', 'Collaboration': '🤝', 'Other': '📦',
+  };
+  const CATEGORY_ORDER = ['Cognitive', 'Development', 'AI & ML', 'Research & Writing', 'Creative & Media', 'Azure & Cloud', 'VS Code', 'Collaboration', 'Other'];
+
+  const skillCategories: Record<string, SkillInfo[]> = {};
+  for (const cat of CATEGORY_ORDER) { skillCategories[cat] = []; }
+  for (const s of skills ?? []) {
+    const cat = classifySkill(s.id, s.description);
+    if (!skillCategories[cat]) { skillCategories[cat] = []; }
+    skillCategories[cat].push(s);
+  }
+
+
+  // Cognitive age tier (7.36)
+  const cogAge = mindData?.cognitiveAge ?? 0;
+  const cogTier = cogAge <= 5 ? 'Early Learning' : cogAge <= 15 ? 'Active Growth' : cogAge <= 25 ? 'Integrated' : 'Wise';
+  const cogProgress = Math.min(cogAge / 40 * 100, 100);
 
   // Session status
   const sessionHtml = session
@@ -443,7 +442,7 @@ export function getWelcomeHtmlContent(
           line-height: 1;
       }
       .header-series {
-          font-size: 9px;
+          font-size: 11px;
           font-weight: 600;
           letter-spacing: 4px;
           text-transform: uppercase;
@@ -454,7 +453,7 @@ export function getWelcomeHtmlContent(
       .header-main {
           display: flex;
           align-items: center;
-          gap: 7px;
+          gap: 8px;
       }
       .header-icon {
           width: 36px;
@@ -467,32 +466,47 @@ export function getWelcomeHtmlContent(
       .header-icon:hover {
           transform: scale(1.08);
       }
-      .persona-avatar-box {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 7px;
+      .hero-text-box {
+          text-align: center;
+          padding: 12px 14px;
+          margin-bottom: 8px;
           position: relative;
-          width: 100%;
-      }
-      .alex-avatar {
-          width: 100%;
-          height: auto;
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 6px;
-          object-fit: cover;
-          border: 1px solid color-mix(in srgb, var(--persona-accent) 40%, transparent);
-          cursor: pointer;
-          transition: transform 0.2s ease, border-color 0.2s ease;
       }
-      .alex-avatar:hover {
-          transform: scale(1.01);
-          border-color: var(--persona-accent);
+      .hero-hook {
+          font-size: 15px;
+          font-weight: 600;
+          color: var(--vscode-foreground);
+          margin-bottom: 6px;
+      }
+      .hero-hook strong {
+          color: var(--persona-accent);
+      }
+      .hero-north-star {
+          font-size: 12px;
+          color: var(--vscode-descriptionForeground);
+          cursor: pointer;
+          padding: 3px 6px;
+          border-radius: 4px;
+          transition: background 0.15s ease;
+      }
+      .hero-north-star:hover {
+          background: var(--vscode-list-hoverBackground);
+      }
+      .hero-objective {
+          font-size: 11px;
+          color: var(--vscode-descriptionForeground);
+          margin-top: 4px;
+          font-style: italic;
+          opacity: 0.85;
       }
       .easter-egg-badge {
           position: absolute;
-          top: 8px;
-          left: 8px;
-          font-size: 38px;
+          top: -2px;
+          right: 8px;
+          font-size: 28px;
           line-height: 1;
           filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
           animation: egg-bounce 2s ease-in-out infinite;
@@ -512,7 +526,7 @@ export function getWelcomeHtmlContent(
           color: var(--vscode-foreground);
           background: color-mix(in srgb, var(--persona-accent) 15%, transparent);
           border: 1px solid color-mix(in srgb, var(--persona-accent) 30%, transparent);
-          padding: 3px 8px;
+          padding: 4px 8px;
           border-radius: 12px;
           display: inline-flex;
           align-items: center;
@@ -535,36 +549,9 @@ export function getWelcomeHtmlContent(
           font-size: var(--font-sm);
           font-weight: 500;
           color: var(--vscode-descriptionForeground);
-          margin: 4px 0 6px;
-          padding: 3px 9px;
+          margin: 4px 0 8px;
+          padding: 4px 8px;
           opacity: 0.85;
-      }
-      .partnership-bar {
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-sm);
-          padding: var(--spacing-xs) var(--spacing-sm);
-          margin-bottom: 8px;
-          border-radius: 4px;
-          font-size: var(--font-xs);
-          letter-spacing: 0.2px;
-          color: var(--vscode-descriptionForeground);
-          background: color-mix(in srgb, var(--persona-accent) 6%, transparent);
-          border: 1px solid color-mix(in srgb, var(--persona-accent) 15%, transparent);
-          cursor: pointer;
-          transition: all 0.15s ease;
-      }
-      .partnership-bar:hover {
-          background: color-mix(in srgb, var(--persona-accent) 12%, transparent);
-          color: var(--vscode-foreground);
-      }
-      .partnership-bar .partner-icon {
-          font-size: var(--font-sm);
-          flex-shrink: 0;
-      }
-      .partnership-bar strong {
-          color: var(--persona-accent);
-          font-weight: 600;
       }
       .refresh-btn {
           margin-left: auto;
@@ -592,7 +579,7 @@ export function getWelcomeHtmlContent(
           text-transform: uppercase;
           letter-spacing: 0.8px;
           color: var(--vscode-descriptionForeground);
-          margin-bottom: 5px;
+          margin-bottom: 4px;
           opacity: 0.65;
       }
       
@@ -603,8 +590,8 @@ export function getWelcomeHtmlContent(
       }
       .status-item {
           background: var(--vscode-editor-background);
-          border-radius: 5px;
-          padding: 6px 8px;
+          border-radius: 4px;
+          padding: 8px;
           border-left: 2px solid transparent;
           transition: all 0.12s ease;
       }
@@ -630,7 +617,7 @@ export function getWelcomeHtmlContent(
           font-weight: 500;
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 4px;
       }
       .status-dot {
           width: 10px;
@@ -680,7 +667,7 @@ export function getWelcomeHtmlContent(
       .context-objective {
           font-size: var(--font-sm);
           font-weight: 500;
-          margin-bottom: 5px;
+          margin-bottom: 4px;
           padding: 4px 8px;
           background: color-mix(in srgb, var(--persona-accent) 8%, transparent);
           border-radius: 4px;
@@ -688,7 +675,7 @@ export function getWelcomeHtmlContent(
           transition: background 0.12s ease;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
       }
       .context-objective:hover {
           background: color-mix(in srgb, var(--persona-accent) 15%, transparent);
@@ -700,7 +687,7 @@ export function getWelcomeHtmlContent(
       .trifecta-tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 3px;
+          gap: 8px;
       }
       .trifecta-tag {
           font-size: var(--font-xs);
@@ -720,12 +707,12 @@ export function getWelcomeHtmlContent(
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          gap: 5px;
-          margin-top: 5px;
+          gap: 4px;
+          margin-top: 4px;
       }
       .context-badge {
           font-size: var(--font-xs);
-          padding: 1px 6px;
+          padding: 1px 8px;
           border-radius: 8px;
           background: var(--vscode-badge-background);
           color: var(--vscode-badge-foreground);
@@ -759,7 +746,7 @@ export function getWelcomeHtmlContent(
       .session-header {
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 4px;
           margin-bottom: 2px;
       }
       .session-icon {
@@ -782,7 +769,7 @@ export function getWelcomeHtmlContent(
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-top: 3px;
+          margin-top: 4px;
       }
       .session-status {
           font-size: var(--font-xs);
@@ -801,7 +788,7 @@ export function getWelcomeHtmlContent(
       .action-list {
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 8px;
       }
       .action-group-label {
           font-size: 11px;
@@ -813,16 +800,125 @@ export function getWelcomeHtmlContent(
           opacity: 0.55;
           letter-spacing: 0.8px;
           text-transform: uppercase;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          user-select: none;
       }
       .action-group-label:first-child {
           margin-top: 0;
       }
+      .action-group-label .collapse-chevron {
+          font-size: 9px;
+          transition: transform 0.15s ease;
+          display: inline-block;
+      }
+      .action-group-label.collapsed .collapse-chevron {
+          transform: rotate(-90deg);
+      }
+      .action-group-content {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          overflow: hidden;
+          transition: max-height 0.2s ease;
+      }
+      .action-group-content.collapsed {
+          display: none;
+      }
+      /* Quick Command Bar (7.11) */
+      .quick-command-input {
+          width: 100%;
+          padding: 4px 8px;
+          min-height: 32px;
+          border: 1px solid var(--vscode-input-border, var(--vscode-widget-border));
+          border-radius: 4px;
+          background: var(--vscode-input-background);
+          color: var(--vscode-input-foreground);
+          font-size: 12px;
+          box-sizing: border-box;
+          margin-bottom: 8px;
+      }
+      .quick-command-input:focus {
+          border-color: var(--vscode-focusBorder);
+          outline: none;
+      }
+      .quick-command-input::placeholder {
+          color: var(--vscode-input-placeholderForeground);
+      }
+      /* Cognitive State Card (7.18) */
+      .cognitive-state-card {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 8px 12px;
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          margin-bottom: 8px;
+      }
+      .cognitive-state-icon { font-size: 24px; flex-shrink: 0; }
+      .cognitive-state-detail { flex: 1; }
+      .cognitive-state-label { font-size: 12px; font-weight: 600; }
+      .cognitive-state-mode { font-size: 11px; opacity: 0.7; }
+      /* Personality Toggle (7.16) */
+      .personality-toggle {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          margin-bottom: 8px;
+          overflow: hidden;
+      }
+      .personality-toggle-btn {
+          flex: 1;
+          padding: 6px 8px;
+          font-size: 11px;
+          font-weight: 500;
+          text-align: center;
+          cursor: pointer;
+          border: none;
+          background: transparent;
+          color: var(--vscode-foreground);
+          opacity: 0.6;
+          transition: opacity 0.15s, background 0.15s;
+      }
+      .personality-toggle-btn:hover { opacity: 0.85; }
+      .personality-toggle-btn.active {
+          opacity: 1;
+          background: var(--vscode-button-background);
+          color: var(--vscode-button-foreground);
+          font-weight: 600;
+      }
+      .personality-toggle-btn + .personality-toggle-btn {
+          border-left: 1px solid var(--vscode-widget-border, #303030);
+      }
+      /* Memory Modality Cards (7.37) */
+      .memory-modalities {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+          margin-bottom: 8px;
+      }
+      .memory-modality-card {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 8px;
+          text-align: center;
+      }
+      .memory-modality-icon { font-size: 18px; margin-bottom: 4px; }
+      .memory-modality-count { font-size: 16px; font-weight: 600; color: var(--vscode-foreground); }
+      .memory-modality-label { font-size: 11px; color: var(--vscode-descriptionForeground); }
       .action-btn {
           display: flex;
           align-items: center;
-          gap: 6px;
-          padding: 5px 8px;
-          min-height: 32px; /* WCAG touch target */
+          gap: 8px;
+          padding: 4px 8px;
+          min-height: 36px; /* WCAG 2.5.8 compact touch target */
           background: var(--vscode-button-secondaryBackground);
           color: var(--vscode-button-secondaryForeground);
           border: none;
@@ -864,7 +960,7 @@ export function getWelcomeHtmlContent(
           flex: 1;
       }
       .tier-lock {
-          font-size: 9px;
+          font-size: 11px;
           margin-left: auto;
           opacity: 0.55;
           white-space: nowrap;
@@ -889,8 +985,8 @@ export function getWelcomeHtmlContent(
       
       /* Skill Recommendations Styles */
       .skill-recommendations-section {
-          margin: 7px 0;
-          padding: 7px;
+          margin: 8px 0;
+          padding: 8px;
           background: var(--vscode-editor-background);
           border-radius: 6px;
           border: 1px solid var(--vscode-widget-border);
@@ -906,14 +1002,14 @@ export function getWelcomeHtmlContent(
       .skill-recommendations-list {
           display: flex;
           flex-direction: column;
-          gap: 3px;
+          gap: 8px;
       }
       .skill-recommendation-btn {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          padding: 5px 8px;
-          min-height: 32px;
+          padding: 4px 8px;
+          min-height: 36px;
           background: var(--vscode-button-secondaryBackground);
           color: var(--vscode-button-secondaryForeground);
           border: none;
@@ -996,11 +1092,11 @@ export function getWelcomeHtmlContent(
       .nudge-card {
           display: flex;
           align-items: center;
-          gap: 6px;
-          padding: 5px 8px;
+          gap: 8px;
+          padding: 4px 8px;
           background: var(--vscode-editor-background);
           border-radius: 4px;
-          margin-bottom: 3px;
+          margin-bottom: 4px;
           border-left: 2px solid var(--vscode-charts-yellow);
           font-size: var(--font-xs);
           transition: all 0.12s ease;
@@ -1038,8 +1134,9 @@ export function getWelcomeHtmlContent(
           background: none;
           border: none;
           cursor: pointer;
-          padding: 3px 6px;
-          border-radius: 3px;
+          padding: 4px 8px;
+          min-height: 36px;
+          border-radius: 4px;
           transition: background 0.1s ease;
           white-space: nowrap;
       }
@@ -1103,7 +1200,7 @@ export function getWelcomeHtmlContent(
           color: var(--vscode-descriptionForeground);
       }
       .feature-list li {
-          margin-bottom: 3px;
+          margin-bottom: 4px;
       }
       .feature-list strong {
           color: var(--vscode-foreground);
@@ -1112,9 +1209,9 @@ export function getWelcomeHtmlContent(
       .feature-links {
           display: flex;
           flex-wrap: wrap;
-          gap: 3px;
-          margin-top: 7px;
-          padding-top: 7px;
+          gap: 8px;
+          margin-top: 8px;
+          padding-top: 8px;
           border-top: 1px solid var(--vscode-widget-border);
       }
       .feature-link-btn {
@@ -1122,8 +1219,8 @@ export function getWelcomeHtmlContent(
           color: var(--vscode-button-secondaryForeground);
           border: none;
           border-radius: 4px;
-          padding: 4px 6px;
-          min-height: 28px;
+          padding: 4px 8px;
+          min-height: 36px;
           font-size: var(--font-xs);
           cursor: pointer;
           display: flex;
@@ -1146,6 +1243,7 @@ export function getWelcomeHtmlContent(
       .tab-bar .tab {
           flex: 1;
           padding: 8px 4px;
+          min-height: 36px;
           background: none;
           border: none;
           border-bottom: 2px solid transparent;
@@ -1165,8 +1263,8 @@ export function getWelcomeHtmlContent(
           background: var(--vscode-list-hoverBackground);
       }
       .tab-bar .tab:focus-visible {
-          outline: 1px solid var(--vscode-focusBorder);
-          outline-offset: -1px;
+          outline: 2px solid var(--vscode-focusBorder);
+          outline-offset: 2px;
       }
       .tab-bar .tab.active {
           opacity: 1;
@@ -1209,7 +1307,7 @@ export function getWelcomeHtmlContent(
           background: var(--vscode-list-hoverBackground);
       }
       .persona-card .persona-tag {
-          font-size: 10px;
+          font-size: 11px;
           opacity: 0.6;
       }
       .persona-card .persona-name {
@@ -1296,15 +1394,15 @@ export function getWelcomeHtmlContent(
       .agent-icon { font-size: 16px; }
       .agent-name { font-weight: 600; font-size: 12px; flex: 1; }
       .agent-badge {
-          font-size: 10px;
+          font-size: 11px;
           padding: 1px 5px;
           border-radius: 8px;
           font-weight: 600;
       }
-      .badge-ok { background: #2ea04333; color: #3fb950; }
-      .badge-missing { background: #f8514933; color: #f85149; }
+      .badge-ok { background: color-mix(in srgb, var(--vscode-testing-iconPassed) 20%, transparent); color: var(--vscode-testing-iconPassed); }
+      .badge-missing { background: color-mix(in srgb, var(--vscode-errorForeground) 20%, transparent); color: var(--vscode-errorForeground); }
       .agent-role {
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 0.5px;
@@ -1316,6 +1414,33 @@ export function getWelcomeHtmlContent(
           line-height: 1.4;
           opacity: 0.8;
       }
+      /* Live agent status dot (7.20) */
+      .agent-live-dot {
+          width: 8px; height: 8px;
+          border-radius: 50%;
+          display: inline-block;
+          margin-left: 4px;
+      }
+      .agent-live-dot.active { background: var(--vscode-testing-iconPassed); animation: pulse-dot 1.5s infinite; }
+      .agent-live-dot.idle { background: var(--vscode-disabledForeground); opacity: 0.4; }
+      @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+      /* Activity feed (7.10/7.21) */
+      .activity-feed { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+      .activity-item {
+          display: flex; align-items: center; gap: 8px;
+          padding: 5px 8px;
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 4px;
+          font-size: 11px;
+      }
+      .activity-status { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+      .activity-status.active { background: var(--vscode-testing-iconPassed); animation: pulse-dot 1.5s infinite; }
+      .activity-status.complete { background: var(--vscode-disabledForeground); opacity: 0.5; }
+      .activity-status.error { background: var(--vscode-errorForeground); }
+      .activity-agent { font-weight: 600; flex-shrink: 0; }
+      .activity-prompt { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.75; }
+      .activity-time { font-size: 10px; opacity: 0.5; flex-shrink: 0; }
 
       /* ── Skill Store Tab ── */
       .skill-grid {
@@ -1341,9 +1466,9 @@ export function getWelcomeHtmlContent(
           margin-bottom: 2px;
       }
       .skill-name { font-weight: 600; font-size: 12px; flex: 1; }
-      .skill-synapse-dot { font-size: 10px; opacity: 0.7; }
+      .skill-synapse-dot { font-size: 11px; opacity: 0.7; }
       .skill-category {
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 0.5px;
@@ -1381,14 +1506,14 @@ export function getWelcomeHtmlContent(
           margin-bottom: 4px;
       }
       .mind-stat-label {
-          font-size: 10px;
+          font-size: 11px;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           opacity: 0.6;
       }
-      .stat-good { color: #3fb950; }
-      .stat-warn { color: #d29922; }
-      .stat-bad { color: #f85149; }
+      .stat-good { color: var(--vscode-testing-iconPassed); }
+      .stat-warn { color: var(--vscode-editorWarning-foreground); }
+      .stat-bad { color: var(--vscode-errorForeground); }
 
       .memory-modality {
           display: flex;
@@ -1442,7 +1567,7 @@ export function getWelcomeHtmlContent(
       }
       .maintenance-icon { font-size: 20px; margin-bottom: 4px; }
       .maintenance-label {
-          font-size: 10px;
+          font-size: 11px;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           opacity: 0.6;
@@ -1452,6 +1577,264 @@ export function getWelcomeHtmlContent(
           font-size: 11px;
           font-weight: 500;
       }
+
+      /* ── Architecture Status Banner (7.9) ── */
+      .arch-status-banner {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 12px;
+          border-radius: 6px;
+          margin-bottom: 8px;
+          cursor: pointer;
+          border: 1px solid var(--vscode-widget-border, #303030);
+      }
+      .arch-status-banner.status-healthy {
+          background: color-mix(in srgb, var(--vscode-testing-iconPassed) 8%, transparent);
+          border-color: color-mix(in srgb, var(--vscode-testing-iconPassed) 25%, transparent);
+      }
+      .arch-status-banner.status-warning {
+          background: color-mix(in srgb, var(--vscode-editorWarning-foreground) 8%, transparent);
+          border-color: color-mix(in srgb, var(--vscode-editorWarning-foreground) 25%, transparent);
+      }
+      .arch-status-banner.status-error {
+          background: color-mix(in srgb, var(--vscode-errorForeground) 8%, transparent);
+          border-color: color-mix(in srgb, var(--vscode-errorForeground) 25%, transparent);
+      }
+      .arch-status-icon { font-size: 20px; flex-shrink: 0; }
+      .arch-status-detail { flex: 1; }
+      .arch-status-title { font-weight: 600; font-size: 12px; }
+      .arch-status-meta { font-size: 11px; opacity: 0.7; }
+
+      /* ── Nudge Dismiss (7.12) ── */
+      .nudge-dismiss {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 11px;
+          opacity: 0.4;
+          padding: 4px;
+          color: var(--vscode-foreground);
+          flex-shrink: 0;
+          align-self: flex-start;
+      }
+      .nudge-dismiss:hover { opacity: 1; }
+
+      /* ── Info Card (7.22, 7.23) ── */
+      .info-card {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 10px 12px;
+          margin: 8px 0;
+      }
+      .info-card-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+      .info-card-desc { font-size: 11px; opacity: 0.8; line-height: 1.5; }
+
+      /* ── Skill Search & Filter (7.24, 7.25) ── */
+      .skill-search-input {
+          width: 100%;
+          padding: 4px 8px;
+          min-height: 28px;
+          border: 1px solid var(--vscode-input-border, var(--vscode-widget-border));
+          border-radius: 4px;
+          background: var(--vscode-input-background);
+          color: var(--vscode-input-foreground);
+          font-size: 12px;
+          outline: none;
+          margin-bottom: 8px;
+      }
+      .skill-search-input:focus { border-color: var(--vscode-focusBorder); }
+      .skill-search-input::placeholder { color: var(--vscode-input-placeholderForeground); }
+      .catalog-toggle {
+          display: flex;
+          gap: 0;
+          margin-bottom: 8px;
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 4px;
+          overflow: hidden;
+      }
+      .catalog-toggle-btn {
+          flex: 1;
+          padding: 4px 8px;
+          min-height: 28px;
+          background: var(--vscode-editor-background);
+          color: var(--vscode-foreground);
+          border: none;
+          font-size: 11px;
+          cursor: pointer;
+          opacity: 0.7;
+          transition: all 0.15s;
+      }
+      .catalog-toggle-btn:not(:last-child) {
+          border-right: 1px solid var(--vscode-widget-border, #303030);
+      }
+      .catalog-toggle-btn.active {
+          background: var(--persona-accent, #6366f1);
+          color: #fff;
+          opacity: 1;
+          font-weight: 600;
+      }
+
+      /* ── Skill Health Summary (7.26) ── */
+      .skill-health-bar {
+          display: flex;
+          gap: 12px;
+          padding: 4px 0;
+          margin-bottom: 8px;
+          font-size: 11px;
+          opacity: 0.7;
+      }
+      .skill-health-item { display: flex; align-items: center; gap: 4px; }
+
+      /* ── Skill Category Groups (7.27) ── */
+      .skill-category-group { margin-bottom: 8px; }
+      .skill-category-header {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 4px 0;
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.6;
+          cursor: pointer;
+          user-select: none;
+      }
+      .skill-category-header .collapse-icon {
+          transition: transform 0.15s;
+          font-size: 11px;
+      }
+      .skill-category-header.collapsed .collapse-icon { transform: rotate(-90deg); }
+      .skill-category-group-content {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+      }
+      .skill-category-header.collapsed + .skill-category-group-content { display: none; }
+
+      /* ── Identity Card (7.35) ── */
+      .identity-card {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 12px;
+          margin-bottom: 8px;
+          text-align: center;
+      }
+      .identity-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+      .identity-meta { font-size: 11px; opacity: 0.7; }
+
+      /* ── Cognitive Age Enriched (7.36) ── */
+      .cognitive-tier-label {
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          opacity: 0.6;
+          margin-top: 4px;
+      }
+      .cognitive-progress-bar {
+          width: 100%;
+          height: 6px;
+          background: var(--vscode-progressBar-background, #333);
+          border-radius: 3px;
+          overflow: hidden;
+          margin: 8px 0 4px;
+      }
+      .cognitive-progress-fill {
+          height: 100%;
+          background: var(--persona-accent, #6366f1);
+          border-radius: 3px;
+          transition: width 0.3s ease;
+      }
+      .cognitive-milestones {
+          display: flex;
+          justify-content: space-between;
+          font-size: 11px;
+          opacity: 0.4;
+      }
+
+      /* ── Global Knowledge Panel (7.34) ── */
+      .gk-panel {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+          margin-bottom: 8px;
+      }
+      .gk-stat {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 8px;
+          text-align: center;
+      }
+      .gk-stat-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+      .gk-stat-label { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.3px; }
+
+      /* ── Doc Grid Cards (7.40, 7.41, 7.42) ── */
+      .doc-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+          margin-bottom: 8px;
+      }
+      .doc-grid-card {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 6px;
+          padding: 8px;
+          cursor: pointer;
+          transition: border-color 0.15s;
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          min-height: 36px;
+      }
+      .doc-grid-card:hover { border-color: var(--persona-accent, #6366f1); }
+      .doc-grid-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+      .doc-grid-text { flex: 1; }
+      .doc-grid-title { font-size: 12px; font-weight: 600; }
+      .doc-grid-desc { font-size: 11px; opacity: 0.7; }
+
+      /* ── Partnership Card (7.43) ── */
+      .partnership-structured {
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--persona-accent, #6366f1);
+          border-radius: 6px;
+          padding: 12px;
+          margin-bottom: 8px;
+      }
+      .partnership-structured-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+      .partnership-structured-desc { font-size: 11px; opacity: 0.8; line-height: 1.5; margin-bottom: 8px; }
+
+      /* ── Doc Tips (7.39) ── */
+      .doc-tips { margin-bottom: 8px; }
+      .doc-tip {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          padding: 8px;
+          background: var(--vscode-editor-background);
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 4px;
+          margin-bottom: 4px;
+          font-size: 11px;
+          line-height: 1.4;
+      }
+      .doc-tip-icon { font-size: 14px; flex-shrink: 0; }
+      .doc-tip-dismiss {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          opacity: 0.4;
+          padding: 4px;
+          color: var(--vscode-foreground);
+          flex-shrink: 0;
+          margin-left: auto;
+      }
+      .doc-tip-dismiss:hover { opacity: 1; }
   </style>
 </head>
 <body>
@@ -1470,73 +1853,68 @@ export function getWelcomeHtmlContent(
           </div>
       </div>
 
-      <div class="persona-avatar-box" data-cmd="skillReview" title="Alex as ${personaName} — Click to explore skills" tabindex="0" role="button">
-          <img src="${avatarSvgUri || avatarPngUri}" alt="Alex ${personaName}" class="alex-avatar" data-fallback="${avatarPngUri}" />
+      <div class="hero-text-box">
           ${easterEggBadge}
+          <div class="hero-hook">Your Trusted Partner for <strong>${bannerNoun}</strong></div>
+          ${activeContext?.northStar ? `<div class="hero-north-star" data-cmd="northStar" title="North Star — Click to review" tabindex="0" role="button">⭐ ${escapeHtml(activeContext.northStar)}</div>` : ''}
+          ${hasObjective ? `<div class="hero-objective">${escapeHtml(rawObjective!)}</div>` : ''}
       </div>
-
-      ${workspaceName ? `<div class="project-name" title="Current workspace">${escapeHtml(workspaceName)}</div>` : ""}
 
       <!-- Spike 1B: Tab Bar -->
       <div class="tab-bar" role="tablist" aria-label="Command Center">
-          <button role="tab" class="tab active" data-tab="mission" aria-selected="true" aria-controls="panel-mission" tabindex="0">Mission Ctrl</button>
-          <button role="tab" class="tab" data-tab="agents" aria-selected="false" aria-controls="panel-agents" tabindex="-1">Agents</button>
-          <button role="tab" class="tab" data-tab="skills" aria-selected="false" aria-controls="panel-skills" tabindex="-1">Skill Store</button>
-          <button role="tab" class="tab" data-tab="mind" aria-selected="false" aria-controls="panel-mind" tabindex="-1">Mind</button>
-          <button role="tab" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
+          <button role="tab" id="tab-mission" class="tab active" data-tab="mission" aria-selected="true" aria-controls="panel-mission" tabindex="0">Mission</button>
+          <button role="tab" id="tab-agents" class="tab" data-tab="agents" aria-selected="false" aria-controls="panel-agents" tabindex="-1">Agents</button>
+          <button role="tab" id="tab-skills" class="tab" data-tab="skills" aria-selected="false" aria-controls="panel-skills" tabindex="-1">Skills</button>
+          <button role="tab" id="tab-mind" class="tab" data-tab="mind" aria-selected="false" aria-controls="panel-mind" tabindex="-1">Mind</button>
+          <button role="tab" id="tab-docs" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
       </div>
 
       <!-- Tab Panel: Mission Command -->
       <div class="tab-panel active" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
 
-      <div class="partnership-bar" data-cmd="openChat" title="Your trusted AI partner — Click to start chatting" tabindex="0" role="button">
-          <span class="partner-icon">🤝</span>
-          <span>Your Trusted Partner for <strong>${bannerNoun}</strong></span>
-      </div>
-
       ${sessionHtml}
       
       ${getNudgesHtml(nudges)}
       
-      <div class="section">
-          <div class="section-title clickable" data-cmd="healthDashboard" title="Click to open Health Dashboard" tabindex="0" role="button">Status</div>
-          <div class="status-grid" data-cmd="healthDashboard" style="cursor: pointer;" title="Click to open Health Dashboard" tabindex="0" role="region" aria-label="Architecture health status">
-              <div class="status-item ${isHealthy ? "status-good" : "status-warn"}">
-                  <div class="status-label">Health</div>
-                  <div class="status-value"><span class="status-dot ${isHealthy ? "dot-green" : health.brokenSynapses > 5 ? "dot-red" : "dot-yellow"}" aria-label="${isHealthy ? "Healthy" : health.brokenSynapses > 5 ? "Critical" : "Warning"}"></span>${healthText}</div>
-              </div>
-              <div class="status-item ${streakDays > 0 ? "status-good" : ""}">
-                  <div class="status-label">Streak</div>
-                  <div class="status-value"><span class="status-dot ${streakDays > 0 ? "dot-green" : "dot-yellow"}" aria-label="${streakDays > 0 ? "Active streak" : "No streak"}"></span>${streakDays > 0 ? streakDays + " days" : "Start today!"}</div>
-              </div>
-          </div>
-      </div>
-      
-      <div class="section">
-          <div class="section-title">Active Context</div>
-          <div class="context-card">
-              <div class="trifecta-tags">
-                  ${trifectaTagsHtml}
-              </div>
-              <div class="context-meta">
-                  ${confidenceLabel ? `<span class="context-badge accent">${personaIcon} ${confidenceLabel} ${sourceLabel}</span>` : ""}
-                  <span class="context-badge ${isNeverAssessed ? "stale" : ""}" data-cmd="selfActualize" title="${isNeverAssessed ? "Run self-actualization" : "Last self-actualization"}" tabindex="0" role="button">${isNeverAssessed ? "⚡ Assess" : "✓ " + assessedLabel}</span>
-                  <span class="context-badge">${principlesText}</span>
-              </div>
-          </div>
-      </div>
-      
-      <nav class="action-list" aria-label="Actions" role="navigation">
+      <input type="text" class="quick-command-input" id="mission-command-search" placeholder="Search commands\u2026" aria-label="Search commands" />
+
+      <nav class="action-list" aria-label="Actions" role="navigation" id="mission-action-list">
               
-              <div class="action-group-label">PARTNERSHIP</div>
+              <div class="action-group-label" data-group="partnership"><span class="collapse-chevron" aria-hidden="true">▾</span>PARTNERSHIP</div>
+              <div class="action-group-content" data-group="partnership">
               <button class="action-btn primary" data-cmd="openChat" tabindex="0" role="button" aria-label="Start a conversation with Alex">
                   <span class="action-icon" aria-hidden="true">💬</span>
                   <span class="action-text">Chat with Alex</span>
               </button>
               ${actionButton('northStar', '⭐', 'North Star', 'Define or review project vision and quality standards')}
               ${actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
+              </div>
               
-              <div class="action-group-label">BUILD TOGETHER</div>
+              <div class="action-group-label" data-group="system"><span class="collapse-chevron" aria-hidden="true">▾</span>SYSTEM</div>
+              <div class="action-group-content" data-group="system">
+              <button class="action-btn" data-cmd="upgrade" tabindex="0" role="button" aria-label="Initialize or Update Alex architecture">
+                  <span class="action-icon" aria-hidden="true">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
+                  <span class="action-text">Initialize / Update</span>
+              </button>
+              ${actionButton('setupEnvironment', '⚙️', 'Environment Setup', 'Configure VS Code settings')}
+              ${actionButton('manageSecrets', '🔑', 'API Keys & Secrets', 'Manage tokens for Gamma, Replicate, OpenAI')}
+              ${actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
+              ${actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
+              ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
+              ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
+              </div>
+              
+              <div class="action-group-label" data-group="trust"><span class="collapse-chevron" aria-hidden="true">▾</span>TRUST & GROWTH</div>
+              <div class="action-group-content" data-group="trust">
+              ${actionButton('dream', '💭', 'Dream', 'Neural maintenance — keeps me reliable')}
+              ${actionButton('selfActualize', '✨', 'Self-Actualize', 'Deep self-assessment — honest about my capabilities')}
+              ${actionButton('openBrainAnatomy', '🧠', 'How I Think', 'Explore my cognitive architecture')}
+              ${actionButton('startSession', '🍅', 'Focus Session', 'Pomodoro-style work sessions')}
+              ${actionButton('showGoals', '🎯', 'Goals', 'Track learning progress')}
+              </div>
+              
+              <div class="action-group-label" data-group="build"><span class="collapse-chevron" aria-hidden="true">▾</span>BUILD TOGETHER</div>
+              <div class="action-group-content" data-group="build">
               ${actionButton('codeReview', '👀', 'Code Review', 'Review for correctness and growth')}
               ${actionButton('debugThis', '🐛', 'Debug This', 'Find the issue together')}
               ${actionButton('generateTests', '🧪', 'Generate Tests', 'Build confidence in your code')}
@@ -1544,45 +1922,20 @@ export function getWelcomeHtmlContent(
               ${actionButton('releasePreflight', '🚀', 'Release Preflight')}
               ${actionButton('importGitHubIssues', '📋', 'Import Issues', 'Import GitHub issues as goals')}
               ${actionButton('reviewPR', '👁️', 'Review PR', 'AI-powered pull request review')}
+              </div>
               
-              <div class="action-group-label">LEARN & KNOWLEDGE</div>
-              ${actionButton('askAboutSelection', '💬', 'Ask About Selection', 'Ask about code or concepts')}
-              ${actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
-              ${hasGlobalKnowledge
-                  ? actionButton('knowledgeQuickPick', '🔎', 'Search Knowledge', 'Find patterns from past work')
-                  : actionButton('searchRelatedKnowledge', '🔍', 'Search Knowledge', 'Find patterns from past work')
-              }
-              ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
-              ${actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
-              
-              <div class="action-group-label">PRESENT & SHARE</div>
+              <div class="action-group-label" data-group="present"><span class="collapse-chevron" aria-hidden="true">▾</span>PRESENT & SHARE</div>
+              <div class="action-group-content" data-group="present">
               ${actionButton('generatePptx', '📄', 'Marp PPTX (Local)', 'Generate PowerPoint locally with Marp - free, offline')}
               ${actionButton('generateGammaPresentation', '🎨', 'Gamma (Cloud)', 'Generate beautiful AI presentations via Gamma API')}
               ${actionButton('generateGammaAdvanced', '⚙️', 'Gamma Advanced', 'Gamma with style, model, and image options')}
+              </div>
               
-              <div class="action-group-label">VISUALIZE</div>
+              <div class="action-group-label" data-group="visualize"><span class="collapse-chevron" aria-hidden="true">▾</span>VISUALIZE</div>
+              <div class="action-group-content" data-group="visualize">
               ${actionButton('generateAIImage', '🖼️', 'Generate Image', 'Generate AI images from text prompts via Replicate')}
               ${actionButton('editImageAI', '✏️', 'Edit Image (AI)', 'Edit images with AI using nano-banana-pro model')}
-              
-              <div class="action-group-label">TRUST & GROWTH</div>
-              ${actionButton('dream', '💭', 'Dream', 'Neural maintenance — keeps me reliable')}
-              ${actionButton('selfActualize', '✨', 'Self-Actualize', 'Deep self-assessment — honest about my capabilities')}
-              ${actionButton('openBrainAnatomy', '🧠', 'How I Think', 'Explore my cognitive architecture')}
-              ${actionButton('startSession', '🍅', 'Focus Session', 'Pomodoro-style work sessions')}
-              ${actionButton('showGoals', '🎯', 'Goals', 'Track learning progress')}
-              
-              <div class="action-group-label">SYSTEM</div>
-              <button class="action-btn" data-cmd="upgrade" tabindex="0" role="button" aria-label="Initialize or Update Alex architecture">
-                  <span class="action-icon" aria-hidden="true">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
-                  <span class="action-text">Initialize / Update</span>
-              </button>
-              ${actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'View memory systems')}
-              ${actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
-              ${actionButton('setupEnvironment', '⚙️', 'Environment Setup', 'Configure VS Code settings')}
-              ${actionButton('manageSecrets', '🔑', 'API Keys & Secrets', 'Manage tokens for Gamma, Replicate, OpenAI')}
-              ${actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
-              ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
-              ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
+              </div>
           </nav>
       
       ${getGoalsHtml(goals)}
@@ -1591,23 +1944,66 @@ export function getWelcomeHtmlContent(
 
       <!-- Tab Panel: Agents -->
       <div class="tab-panel" id="panel-agents" role="tabpanel" aria-labelledby="tab-agents">
+          <div class="cognitive-state-card">
+              <span class="cognitive-state-icon">${cognitiveState === 'debugging' ? '🔍' : cognitiveState === 'building' ? '🔨' : cognitiveState === 'reviewing' ? '👀' : cognitiveState === 'planning' ? '📐' : cognitiveState === 'learning' ? '📖' : cognitiveState === 'teaching' ? '🎓' : cognitiveState === 'meditation' ? '🧘' : cognitiveState === 'dream' ? '💭' : cognitiveState === 'discovery' ? '💡' : '🧠'}</span>
+              <div class="cognitive-state-detail">
+                  <div class="cognitive-state-label">${cognitiveState ? cognitiveState.charAt(0).toUpperCase() + cognitiveState.slice(1) : 'Ready'}</div>
+                  <div class="cognitive-state-mode">${agentMode ? 'Agent: ' + agentMode : 'Awaiting task'}</div>
+              </div>
+          </div>
+
+          <div class="personality-toggle" role="radiogroup" aria-label="Personality mode">
+              <button class="personality-toggle-btn${(personalityMode ?? 'auto') === 'auto' ? ' active' : ''}" data-mode="auto" role="radio" aria-checked="${(personalityMode ?? 'auto') === 'auto'}">🤖 Auto</button>
+              <button class="personality-toggle-btn${personalityMode === 'precise' ? ' active' : ''}" data-mode="precise" role="radio" aria-checked="${personalityMode === 'precise'}">🎯 Precise</button>
+              <button class="personality-toggle-btn${personalityMode === 'chatty' ? ' active' : ''}" data-mode="chatty" role="radio" aria-checked="${personalityMode === 'chatty'}">💬 Chatty</button>
+          </div>
+
           <div class="tab-section-title">Agent Registry</div>
           <div class="agent-list">
-              ${(agents ?? []).map(a => `
+              ${(agents ?? []).map(a => {
+              const isActive = (recentActivity ?? []).some(act => act.agent === a.name && act.status === 'active');
+              return `
               <div class="agent-card${!a.installed ? ' agent-missing' : ''}" title="${escapeHtml(a.description)}">
                   <div class="agent-card-header">
                       <span class="agent-icon">${escapeHtml(a.icon)}</span>
                       <span class="agent-name">${escapeHtml(a.name)}</span>
+                      <span class="agent-live-dot ${isActive ? 'active' : 'idle'}" title="${isActive ? 'Active' : 'Idle'}"></span>
                       <span class="agent-badge ${a.installed ? 'badge-ok' : 'badge-missing'}">${a.installed ? '✓' : '✗'}</span>
                   </div>
                   <div class="agent-role">${escapeHtml(a.role)}</div>
                   <div class="agent-desc">${escapeHtml(a.description)}</div>
-              </div>`).join('')}
+              </div>`;}).join('')}
           </div>
           <div class="tab-footer-hint">Agents are specialist modes — invoke with <code>@alex</code> or via the agent picker.</div>
+
+          ${(recentActivity ?? []).length > 0 ? `
+          <div class="tab-section-title">Recent Activity</div>
+          <div class="activity-feed">
+              ${(recentActivity ?? []).map(act => {
+              const elapsed = act.completedAt ? Math.round((act.completedAt - act.startedAt) / 1000) : Math.round((Date.now() - act.startedAt) / 1000);
+              const timeLabel = elapsed < 60 ? elapsed + 's' : Math.round(elapsed / 60) + 'm';
+              return `
+              <div class="activity-item">
+                  <span class="activity-status ${act.status}"></span>
+                  <span class="activity-agent">${escapeHtml(act.agent)}</span>
+                  <span class="activity-prompt">${escapeHtml(act.prompt)}</span>
+                  <span class="activity-time">${act.status === 'active' ? '\u23f1 ' : ''}${timeLabel}</span>
+              </div>`;}).join('')}
+          </div>` : ''}
+
+          <div class="info-card">
+              <div class="info-card-title">🔀 Auto-Routing</div>
+              <div class="info-card-desc">Alex automatically routes conversations to the best specialist agent based on your task. Complex multi-step work triggers skill selection optimization. Domain pivots are detected and handed off seamlessly.</div>
+          </div>
+
+          <div class="info-card" style="border-style: dashed; opacity: 0.7;">
+              <div class="info-card-title">➕ Create Custom Agent</div>
+              <div class="info-card-desc">Define your own specialist agent with custom instructions, tool access, and routing rules.</div>
+              ${actionButton('openDocs', '📄', 'Agent Authoring Guide', 'Learn how to create custom agents')}
+          </div>
       </div>
 
-      <!-- Tab Panel: Skill Store -->
+      <!-- Tab Panel: Skills -->
       <div class="tab-panel" id="panel-skills" role="tabpanel" aria-labelledby="tab-skills">
           <div class="tab-section-title">Skills (${(skills ?? []).length})</div>
           ${(skills ?? []).length === 0 ? `
@@ -1615,63 +2011,127 @@ export function getWelcomeHtmlContent(
               <div class="empty-state-icon">📦</div>
               <div class="empty-state-title">No Skills Found</div>
               <div class="empty-state-desc">Initialize Alex architecture to install skills.</div>
-          </div>` : ''}
-          <div class="skill-grid">
-              ${(skills ?? []).map(s => `
-              <div class="skill-card" data-cmd="openSkill" data-skill="${escapeHtml(s.id)}" data-skill-name="${escapeHtml(s.displayName)}" title="${escapeHtml(s.description)}" tabindex="0" role="button">
-                  <div class="skill-header">
-                      <span class="skill-name">${escapeHtml(s.displayName)}</span>
-                      ${s.hasSynapses ? '<span class="skill-synapse-dot" title="Has synapses">⚡</span>' : ''}
-                  </div>
-                  <div class="skill-category">${escapeHtml(s.category)}</div>
-                  <div class="skill-desc">${escapeHtml(s.description)}</div>
-              </div>`).join('')}
+          </div>` : `
+
+          <input type="text" class="skill-search-input" id="skill-search" placeholder="Search skills\u2026" aria-label="Search skills" />
+
+          <div class="skill-health-bar">
+              <span class="skill-health-item"><span class="status-dot dot-green" aria-hidden="true"></span> ${health.totalSynapses} synapses</span>
+              <span class="skill-health-item"><span class="status-dot ${health.brokenSynapses === 0 ? 'dot-green' : 'dot-yellow'}" aria-hidden="true"></span> ${health.brokenSynapses} broken</span>
           </div>
+
+          <div id="skill-list">
+          ${CATEGORY_ORDER.map(cat => {
+              const catSkills = skillCategories[cat];
+              if (!catSkills || catSkills.length === 0) return '';
+              const catIcon = CATEGORY_ICONS[cat] || '📦';
+              return `
+              <div class="skill-category-group" data-tier="${cat}">
+                  <div class="skill-category-header" role="button" tabindex="0" aria-expanded="true" aria-label="Toggle ${cat} skills">
+                      <span class="collapse-icon" aria-hidden="true">▾</span>
+                      <span>${catIcon} ${cat} (${catSkills.length})</span>
+                  </div>
+                  <div class="skill-category-group-content">
+                      ${catSkills.map(s => `
+                      <div class="skill-card" data-cmd="openSkill" data-skill="${escapeHtml(s.id)}" data-skill-name="${escapeHtml(s.displayName)}" title="${escapeHtml(s.description)}" tabindex="0" role="button">
+                          <div class="skill-header">
+                              <span class="skill-name">${escapeHtml(s.displayName)}</span>
+                              ${s.hasSynapses ? '<span class="skill-synapse-dot" title="Has synapses">⚡</span>' : ''}
+                          </div>
+                          <div class="skill-desc">${escapeHtml(s.description)}</div>
+                      </div>`).join('')}
+                  </div>
+              </div>`;
+          }).join('')}
+          </div>
+          `}
       </div>
 
       <!-- Tab Panel: Mind -->
       <div class="tab-panel" id="panel-mind" role="tabpanel" aria-labelledby="tab-mind">
           ${mindData ? `
-          <div class="tab-section-title">Cognitive Dashboard</div>
+          <div class="identity-card">
+              <div class="identity-name">Alex Finch</div>
+              <div class="identity-meta">Age 26 · Curious · Ethical · Grows through reflection</div>
+          </div>
+
+          <div class="arch-status-banner ${healthBannerClass}" data-cmd="healthDashboard" title="Click to open Health Dashboard" tabindex="0" role="button" aria-label="Architecture health: ${healthBannerLabel}">
+              <span class="arch-status-icon" aria-hidden="true">${healthBannerIcon}</span>
+              <div class="arch-status-detail">
+                  <div class="arch-status-title">Architecture ${healthBannerLabel}</div>
+                  <div class="arch-status-meta">${health.totalSynapses} synapses${health.brokenSynapses > 0 ? ` · ${health.brokenSynapses} broken` : ''} · ${healthPct}%</div>
+              </div>
+          </div>
 
           <div class="mind-stats-row">
               <div class="mind-stat-card">
                   <div class="mind-stat-value">${mindData.cognitiveAge}</div>
                   <div class="mind-stat-label">Cognitive Age</div>
+                  <div class="cognitive-tier-label">${cogTier}</div>
+                  <div class="cognitive-progress-bar"><div class="cognitive-progress-fill" style="width: ${cogProgress}%"></div></div>
+                  <div class="cognitive-milestones">
+                      <span>Learning</span><span>Growth</span><span>Integrated</span><span>Wise</span>
+                  </div>
               </div>
               <div class="mind-stat-card">
-                  <div class="mind-stat-value ${mindData.synapseHealthPct >= 90 ? 'stat-good' : mindData.synapseHealthPct >= 70 ? 'stat-warn' : 'stat-bad'}">${mindData.synapseHealthPct}%</div>
-                  <div class="mind-stat-label">Synapse Health</div>
+                  <div class="mind-stat-value">${streakDays > 0 ? streakDays : '0'}</div>
+                  <div class="mind-stat-label">Day Streak</div>
               </div>
           </div>
 
+          ${hasGlobalKnowledge ? `
           <div class="dashboard-card">
-              <div class="dashboard-card-title">Memory Modalities</div>
-              <div class="memory-modality">
-                  <span class="modality-label">Skills</span>
-                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.skillCount, 150) / 150 * 100}%"></div></div>
-                  <span class="modality-count">${mindData.skillCount}</span>
+              <div class="dashboard-card-title">Global Knowledge</div>
+              <div class="gk-panel">
+                  <div class="gk-stat">
+                      <span class="gk-stat-icon">📚</span>
+                      <div class="gk-stat-label">Insights</div>
+                  </div>
+                  <div class="gk-stat">
+                      <span class="gk-stat-icon">🔗</span>
+                      <div class="gk-stat-label">Cross-Project</div>
+                  </div>
+                  <div class="gk-stat">
+                      <span class="gk-stat-icon">⭐</span>
+                      <div class="gk-stat-label">Promoted</div>
+                  </div>
               </div>
-              <div class="memory-modality">
-                  <span class="modality-label">Instructions</span>
-                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.instructionCount, 80) / 80 * 100}%"></div></div>
-                  <span class="modality-count">${mindData.instructionCount}</span>
+              ${actionButton('knowledgeQuickPick', '🔎', 'Search Knowledge', 'Find patterns from past work')}
+          </div>
+          ` : ''}
+
+
+
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Memory Architecture</div>
+              <div class="memory-modalities">
+                  <div class="memory-modality-card">
+                      <div class="memory-modality-icon">📚</div>
+                      <div class="memory-modality-count">${mindData.skillCount}</div>
+                      <div class="memory-modality-label">Skills</div>
+                  </div>
+                  <div class="memory-modality-card">
+                      <div class="memory-modality-icon">📋</div>
+                      <div class="memory-modality-count">${mindData.instructionCount}</div>
+                      <div class="memory-modality-label">Instructions</div>
+                  </div>
+                  <div class="memory-modality-card">
+                      <div class="memory-modality-icon">💬</div>
+                      <div class="memory-modality-count">${mindData.promptCount}</div>
+                      <div class="memory-modality-label">Prompts</div>
+                  </div>
+                  <div class="memory-modality-card">
+                      <div class="memory-modality-icon">🤖</div>
+                      <div class="memory-modality-count">${mindData.agentCount}</div>
+                      <div class="memory-modality-label">Agents</div>
+                  </div>
+                  <div class="memory-modality-card">
+                      <div class="memory-modality-icon">🧠</div>
+                      <div class="memory-modality-count">${mindData.episodicCount}</div>
+                      <div class="memory-modality-label">Episodic</div>
+                  </div>
               </div>
-              <div class="memory-modality">
-                  <span class="modality-label">Prompts</span>
-                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.promptCount, 40) / 40 * 100}%"></div></div>
-                  <span class="modality-count">${mindData.promptCount}</span>
-              </div>
-              <div class="memory-modality">
-                  <span class="modality-label">Agents</span>
-                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.agentCount, 15) / 15 * 100}%"></div></div>
-                  <span class="modality-count">${mindData.agentCount}</span>
-              </div>
-              <div class="memory-modality">
-                  <span class="modality-label">Episodic</span>
-                  <div class="modality-bar"><div class="modality-fill" style="width: ${Math.min(mindData.episodicCount, 50) / 50 * 100}%"></div></div>
-                  <span class="modality-count">${mindData.episodicCount}</span>
-              </div>
+              ${actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'Explore all memory systems')}
           </div>
 
           <div class="dashboard-card">
@@ -1691,11 +2151,16 @@ export function getWelcomeHtmlContent(
           </div>
 
           <div class="dashboard-card">
-              <div class="dashboard-card-title">Quick Actions</div>
-              ${actionButton('healthDashboard', '📊', 'Health Dashboard', 'Full synapse and architecture health report')}
+              <div class="dashboard-card-title">Learn & Knowledge</div>
+              ${actionButton('askAboutSelection', '💬', 'Ask About Selection', 'Ask about code or concepts')}
+              ${actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
+              ${hasGlobalKnowledge
+                  ? actionButton('knowledgeQuickPick', '🔎', 'Search Knowledge', 'Find patterns from past work')
+                  : actionButton('searchRelatedKnowledge', '🔍', 'Search Knowledge', 'Find patterns from past work')
+              }
+              ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
+              ${actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
               ${actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'Explore all memory systems')}
-              ${actionButton('dream', '💭', 'Dream', 'Neural maintenance')}
-              ${actionButton('selfActualize', '✨', 'Self-Actualize', 'Deep self-assessment')}
           </div>
           ` : `
           <div class="empty-state">
@@ -1709,11 +2174,138 @@ export function getWelcomeHtmlContent(
       <!-- Tab Panel: Docs -->
       <div class="tab-panel" id="panel-docs" role="tabpanel" aria-labelledby="tab-docs">
 
+          <div class="doc-tips" id="doc-tips">
+              <div class="doc-tip">
+                  <span class="doc-tip-icon">💡</span>
+                  <span>Use <strong>/meditate</strong> to consolidate learning across sessions</span>
+                  <button class="doc-tip-dismiss" aria-label="Dismiss tip">×</button>
+              </div>
+              <div class="doc-tip">
+                  <span class="doc-tip-icon">💡</span>
+                  <span>Skills auto-load by file type — open a .ts file and coding skills activate</span>
+                  <button class="doc-tip-dismiss" aria-label="Dismiss tip">×</button>
+              </div>
+              <div class="doc-tip">
+                  <span class="doc-tip-icon">💡</span>
+                  <span>Run <strong>/dream</strong> after big changes to validate synapses</span>
+                  <button class="doc-tip-dismiss" aria-label="Dismiss tip">×</button>
+              </div>
+          </div>
+
           <div class="docs-section">
               <div class="docs-section-title">Getting Started</div>
-              ${actionButton('setupEnvironment', '⚙️', 'Setup Guide', 'Configure VS Code for Alex')}
-              ${actionButton('workingWithAlex', '🎓', 'How We Work', 'Learn how to collaborate effectively')}
-              ${actionButton('cognitiveLevels', '🧬', 'Cognitive Levels', 'What unlocks at each tier')}
+              <div class="doc-grid">
+                  <div class="doc-grid-card" data-cmd="setupEnvironment" tabindex="0" role="button">
+                      <span class="doc-grid-icon">⚙️</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Setup Guide</div>
+                          <div class="doc-grid-desc">Configure VS Code for Alex</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="workingWithAlex" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🎓</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">How We Work</div>
+                          <div class="doc-grid-desc">Collaboration patterns</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="cognitiveLevels" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🧬</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Cognitive Levels</div>
+                          <div class="doc-grid-desc">Unlocks at each tier</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="quickReference" tabindex="0" role="button">
+                      <span class="doc-grid-icon">⚡</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Quick Reference</div>
+                          <div class="doc-grid-desc">Commands and shortcuts</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="docs-section">
+              <div class="docs-section-title">Architecture</div>
+              <div class="doc-grid">
+                  <div class="doc-grid-card" data-cmd="openBrainAnatomy" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🧠</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Brain Anatomy</div>
+                          <div class="doc-grid-desc">Interactive 3D visualization</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDoc:COGNITIVE-ARCHITECTURE" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🏗️</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Cognitive Architecture</div>
+                          <div class="doc-grid-desc">Full system design</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDoc:MEMORY-SYSTEMS" tabindex="0" role="button">
+                      <span class="doc-grid-icon">💾</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Memory Systems</div>
+                          <div class="doc-grid-desc">5 modality architecture</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDoc:CONSCIOUS-MIND" tabindex="0" role="button">
+                      <span class="doc-grid-icon">💡</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Conscious Mind</div>
+                          <div class="doc-grid-desc">Skills, agents, prompts</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDoc:AGENT-CATALOG" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🤖</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Agent Catalog</div>
+                          <div class="doc-grid-desc">All specialist agents</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDoc:TRIFECTA-CATALOG" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🔺</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Trifecta Catalog</div>
+                          <div class="doc-grid-desc">Skill + Instruction + Prompt</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="docs-section">
+              <div class="docs-section-title">Operations</div>
+              <div class="doc-grid">
+                  <div class="doc-grid-card" data-cmd="openDoc:MASTER-ALEX-PROTECTED" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🛡️</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Protection</div>
+                          <div class="doc-grid-desc">Safety imperatives</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDocs" tabindex="0" role="button">
+                      <span class="doc-grid-icon">📁</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Project Structure</div>
+                          <div class="doc-grid-desc">Files and directories</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDoc:HEIR-ARCHITECTURE" tabindex="0" role="button">
+                      <span class="doc-grid-icon">👑</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Heir Architecture</div>
+                          <div class="doc-grid-desc">Master-Heir sync</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="openDoc:RESEARCH-FIRST" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🔬</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Research Papers</div>
+                          <div class="doc-grid-desc">Foundation research</div>
+                      </div>
+                  </div>
+              </div>
           </div>
 
           <div class="docs-section">
@@ -1739,14 +2331,12 @@ export function getWelcomeHtmlContent(
           </div>
 
           <div class="docs-section">
-              <div class="docs-section-title">Architecture & Ops</div>
-              ${actionButton('openBrainAnatomy', '🧠', 'Brain Anatomy', 'Interactive 3D brain visualization')}
-              ${actionButton('openDocs', '📁', 'Architecture Docs', 'Open local architecture documentation')}
-          </div>
-
-          <div class="docs-section">
               <div class="docs-section-title">Partnership</div>
-              ${actionButton('workingWithAlex', '🤝', 'Working with Alex', 'Deep-dive into our partnership model')}
+              <div class="partnership-structured">
+                  <div class="partnership-structured-title">🤝 Working with Alex</div>
+                  <div class="partnership-structured-desc">Alex is a cognitive partner, not a tool. Learn about the autonomous partnership model — how Alex grows, remembers, and collaborates across sessions.</div>
+                  <button class="action-btn primary" data-cmd="workingWithAlex" tabindex="0">Explore Partnership</button>
+              </div>
           </div>
 
           <div class="docs-cta">
@@ -1837,40 +2427,139 @@ export function getWelcomeHtmlContent(
       }
       
       // Event delegation for all data-cmd clicks (CSP-compliant)
+      function handleDataCmd(el) {
+          const command = el.getAttribute('data-cmd');
+          const skill = el.getAttribute('data-skill');
+          const skillName = el.getAttribute('data-skill-name');
+          const workshop = el.getAttribute('data-workshop');
+          if (skill) {
+              cmd(command, { skill, skillName });
+          } else if (workshop) {
+              cmd(command, { workshop });
+          } else {
+              cmd(command);
+          }
+      }
       document.addEventListener('click', function(e) {
           const el = e.target.closest('[data-cmd]');
           if (el) {
               e.preventDefault();
-              const command = el.getAttribute('data-cmd');
-              const skill = el.getAttribute('data-skill');
-              const skillName = el.getAttribute('data-skill-name');
-              const workshop = el.getAttribute('data-workshop');
-              if (skill) {
-                  cmd(command, { skill, skillName });
-              } else if (workshop) {
-                  cmd(command, { workshop });
-              } else {
-                  cmd(command);
-              }
+              handleDataCmd(el);
           }
       });
+      // Keyboard activation for non-button [data-cmd] elements (Enter/Space)
+      document.addEventListener('keydown', function(e) {
+          if (e.key !== 'Enter' && e.key !== ' ') return;
+          const el = e.target.closest('[data-cmd]');
+          if (!el || el.tagName === 'BUTTON') return;
+          e.preventDefault();
+          handleDataCmd(el);
+      });
       
-      // Avatar SVG error fallback — if SVG fails to load, fall back to PNG
-      const avatarImg = document.querySelector('.alex-avatar');
-      if (avatarImg) {
-          avatarImg.addEventListener('error', function() {
-              const fallback = this.getAttribute('data-fallback');
-              console.log('[Alex][Avatar] SVG failed to load. src:', this.src, 'Falling back to:', fallback);
-              if (fallback && this.src !== fallback) {
-                  this.src = fallback;
-              }
-          });
-          console.log('[Alex][Avatar] Current src:', avatarImg.src);
-      }
+      // Listen for messages from the extension (e.g. programmatic tab switch)
+      const validTabs = ['mission', 'agents', 'skills', 'mind', 'docs'];
+      window.addEventListener('message', (event) => {
+          const message = event.data;
+          if (message.command === 'switchToTab' && validTabs.includes(message.tabId)) {
+              switchTab(message.tabId, false);
+          }
+      });
 
       // Auto-refresh interval (30 seconds)
       const AUTO_REFRESH_MS = 30000;
       setInterval(refresh, AUTO_REFRESH_MS);
+
+      // ── Nudge dismiss (7.12) ──
+      document.addEventListener('click', function(e) {
+          const btn = e.target.closest('.nudge-dismiss');
+          if (btn) {
+              const card = btn.closest('.nudge-card');
+              if (card) { card.style.display = 'none'; }
+          }
+      });
+
+      // ── Skill search filter ──
+      function applySkillSearch() {
+          const searchEl = document.getElementById('skill-search');
+          const q = (searchEl ? searchEl.value : '').toLowerCase();
+          document.querySelectorAll('.skill-card').forEach(function(card) {
+              card.style.display = (!q || (card.textContent || '').toLowerCase().includes(q)) ? '' : 'none';
+          });
+          // Hide category groups where all cards are hidden
+          document.querySelectorAll('.skill-category-group').forEach(function(group) {
+              const visibleCards = group.querySelectorAll('.skill-card:not([style*="display: none"])');
+              group.style.display = visibleCards.length === 0 ? 'none' : '';
+          });
+      }
+
+      const skillSearch = document.getElementById('skill-search');
+      if (skillSearch) {
+          skillSearch.addEventListener('input', applySkillSearch);
+      }
+
+      // ── Category collapse (7.27) ──
+      document.querySelectorAll('.skill-category-header').forEach(function(hdr) {
+          hdr.addEventListener('click', function() {
+              const isCollapsed = this.classList.toggle('collapsed');
+              this.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+          });
+      });
+
+      // ── Doc tip dismiss (7.39) ──
+      document.addEventListener('click', function(e) {
+          const btn = e.target.closest('.doc-tip-dismiss');
+          if (btn) {
+              const tip = btn.closest('.doc-tip');
+              if (tip) { tip.style.display = 'none'; }
+          }
+      });
+
+      // ── Quick Command search (7.11) ──
+      const missionSearch = document.getElementById('mission-command-search');
+      if (missionSearch) {
+          missionSearch.addEventListener('input', function() {
+              const q = this.value.toLowerCase();
+              const nav = document.getElementById('mission-action-list');
+              if (!nav) return;
+              nav.querySelectorAll('.action-btn').forEach(function(btn) {
+                  btn.style.display = (!q || (btn.textContent || '').toLowerCase().includes(q)) ? '' : 'none';
+              });
+              // Show/hide group labels based on visible children
+              nav.querySelectorAll('.action-group-content').forEach(function(group) {
+                  const visible = group.querySelectorAll('.action-btn:not([style*="display: none"])');
+                  const gName = group.getAttribute('data-group');
+                  group.style.display = visible.length === 0 ? 'none' : '';
+                  const label = nav.querySelector('.action-group-label[data-group="' + gName + '"]');
+                  if (label) label.style.display = visible.length === 0 ? 'none' : '';
+              });
+          });
+      }
+
+      // ── Collapsible action groups (7.17/7.44) ──
+      document.querySelectorAll('.action-group-label[data-group]').forEach(function(label) {
+          label.addEventListener('click', function() {
+              const gName = this.getAttribute('data-group');
+              const content = document.querySelector('.action-group-content[data-group="' + gName + '"]');
+              if (!content) return;
+              const isCollapsed = this.classList.toggle('collapsed');
+              content.classList.toggle('collapsed', isCollapsed);
+              this.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+          });
+      });
+
+      // ── Personality Toggle (7.16) ──
+      document.querySelectorAll('.personality-toggle-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+              const mode = this.getAttribute('data-mode');
+              document.querySelectorAll('.personality-toggle-btn').forEach(function(b) {
+                  b.classList.remove('active');
+                  b.setAttribute('aria-checked', 'false');
+              });
+              this.classList.add('active');
+              this.setAttribute('aria-checked', 'true');
+              vscode.postMessage({ command: 'setPersonalityMode', mode: mode });
+          });
+      });
   </script>
 </body>
 </html>`;
@@ -1929,7 +2618,7 @@ const WORKSHOP_PERSONAS: Array<{ id: string; tag: string; name: string }> = [
  */
 export function getPersonaGridHtml(): string {
   return WORKSHOP_PERSONAS.map(p =>
-    `<div class="persona-card" data-cmd="learnAlexWorkshop" data-workshop="${escapeHtml(p.id)}" tabindex="0" role="link" title="${escapeHtml(p.name)} study guide">
+    `<div class="persona-card" data-cmd="learnAlexWorkshop" data-workshop="${escapeHtml(p.id)}" tabindex="0" role="button" title="${escapeHtml(p.name)} study guide">
         <span class="persona-tag">${escapeHtml(p.tag)}</span>
         <span class="persona-name">${escapeHtml(p.name)}</span>
     </div>`
@@ -2040,6 +2729,7 @@ export function getNudgesHtml(nudges: Nudge[]): string {
               <span class="nudge-message">${escapeHtml(nudge.message)}</span>
           </div>
           ${actionHtml}
+          <button class="nudge-dismiss" title="Dismiss" aria-label="Dismiss nudge">×</button>
       </div>`;
     })
     .join("");

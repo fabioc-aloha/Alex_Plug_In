@@ -217,6 +217,7 @@ async function buildActiveContextLayer(ctx: PromptContext): Promise<string> {
 /**
  * Get persona-specific tone guidance.
  * Maps persona characteristics to communication style.
+ * v7.16: Personality mode overlay (precise/chatty) modifies base tone.
  */
 function getPersonaTone(persona: Persona): string {
     const toneMap: Record<string, string> = {
@@ -237,7 +238,16 @@ function getPersonaTone(persona: Persona): string {
         'presenter': 'Audience-aware, clarity-focused, impact-driven',
         'power-user': 'Efficiency-minded, shortcut-aware, productivity-focused',
     };
-    return toneMap[persona.id] || 'Professional, helpful, context-aware';
+    const baseTone = toneMap[persona.id] || 'Professional, helpful, context-aware';
+
+    // v7.16: Apply personality mode overlay
+    const mode = vscode.workspace.getConfiguration('alex').get<string>('personalityMode', 'auto');
+    if (mode === 'precise') {
+        return 'Concise, code-first, minimal explanation. ' + baseTone;
+    } else if (mode === 'chatty') {
+        return 'Explanatory, conversational, teaching-oriented. ' + baseTone;
+    }
+    return baseTone;
 }
 
 // ============================================================================

@@ -33,9 +33,10 @@ export interface ActiveContext {
     focusTrifectas?: string; // e.g. "master-heir-management, brand-asset-management"
     principles?: string;    // e.g. "KISS, DRY, Optimize-for-AI"
     lastAssessed?: string;  // e.g. "2026-02-14 — v5.7.0"
+    northStar?: string;     // e.g. "Create the most advanced and trusted AI partner for any job"
 }
 
-type ActiveContextField = keyof ActiveContext;
+type ActiveContextField = Exclude<keyof ActiveContext, 'northStar'>;
 
 // ============================================================================
 // Constants
@@ -189,7 +190,11 @@ export async function readActiveContext(workspaceRoot: string): Promise<ActiveCo
         const content = await workspaceFs.readFile(filePath);
         const parts = splitActiveContextSection(content);
         if (!parts) { return null; }
-        return parseSection(parts.section);
+        const ctx = parseSection(parts.section);
+        // North Star lives outside Active Context — parse from full file
+        const nsMatch = content.match(/^North Star:\s*(.+)$/m);
+        if (nsMatch) { ctx.northStar = nsMatch[1].trim(); }
+        return ctx;
     } catch (err) {
         console.warn('[ActiveContext] Failed to read:', err);
         return null;

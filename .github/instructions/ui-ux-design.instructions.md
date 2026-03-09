@@ -13,7 +13,7 @@
 - [.github/instructions/release-management.instructions.md] (High, Coordinates, Bidirectional) - "UI refinements are part of release workflow"
 - [.github/skills/vscode-extension-patterns/SKILL.md] (High, Implements, Bidirectional) - "Extension UI patterns this standard enforces"
 - [.github/instructions/code-review-guidelines.instructions.md] (High, Validates, Bidirectional) - "Code review validates UI/UX compliance"
-- [alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md] (Critical, Implements, Bidirectional) - "Command Center tabbed UI design uses these standards"
+- [alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md] (Critical, Implements, Bidirectional) - "Command Center master plan Wave 7 uses these standards for audit-driven UI development"
 - [alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md] (High, Informs, Forward) - "Meditation-derived design principles for sidebar refactor"
 
 ---
@@ -616,6 +616,32 @@ margin: 7px 13px 21px;
 
 ---
 
+## UI Audit Procedure (Proven March 2026)
+
+**When to use**: Requested UI/UX audit, pre-release quality gate, mockup alignment check.
+
+### Two-Pass Audit
+
+**Pass 1: UI/UX Compliance** — Assess against this instruction file
+1. Read entire UI file (HTML generation + CSS)
+2. Check each design system standard: typography (min 11px), spacing (8px scale), touch targets (36px compact min), color (theme variables), focus indicators (2px consistent)
+3. Check accessibility: ARIA roles, `aria-labelledby`/`aria-describedby` resolution, keyboard activation for all interactive elements, semantic HTML
+4. Classify findings: P1 HIGH (WCAG violations), P2 MEDIUM (design system deviations), P3 LOW (polish)
+5. Note positives — what's already correct (prevents regression)
+
+**Pass 2: Content Audit** — Assess against approved mockups
+1. Read all mockup SVGs (design inputs)
+2. Cross-reference every mockup section against implementation
+3. Classify each section: MISSING / PARTIAL / MATCH / EXTRA
+4. Further classify gaps: ⬡ Implementable Now / ⬢ Needs Data Provider / ◇ Design Decision
+
+### Output Format
+- Per-finding: severity, specific CSS selectors, current vs target values, file + line reference
+- Summary table: total findings by severity and classification
+- Positives section: what's already correct (anchor for future audits)
+
+---
+
 ## Auto-Application Rules
 
 **When to Apply**
@@ -638,6 +664,6 @@ margin: 7px 13px 21px;
 
 ---
 
-**Version**: 1.0.0 (2026-02-15)  
-**Based On**: Alex v5.8.0 accessibility implementation session  
-**Validated Against**: welcomeView.ts production refactoring (1876 lines, WCAG AA compliant)
+**Version**: 1.1.0 (2026-03-08)  
+**Based On**: Alex v6.2.0 Command Center audit session (UI/UX + Content audit)  
+**Validated Against**: welcomeViewHtml.ts (2,095 lines, 5-tab Command Center)

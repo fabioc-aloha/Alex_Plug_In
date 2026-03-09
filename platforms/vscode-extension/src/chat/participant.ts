@@ -23,6 +23,7 @@ import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 import { assertDefined } from '../shared/assertions';
 import { appendToEpisodicDraft } from '../services/episodicMemory';
 import { classifyDomain, getSystemPromptHint, recordInteraction } from '../services/expertiseModel';
+import { agentActivity } from '../services/agentActivity';
 
 // Handler imports — extracted from this file for DoD monolith breakup
 import { IAlexChatResult } from './participantTypes';
@@ -357,7 +358,17 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
         // Also notify welcomeView so it stays in sync (fire-and-forget)
         vscode.commands.executeCommand('alex.setCognitiveState', messageState);
     }
+
+    // v6.2.0: Track agent activity for live feed (Contract A)
+    const commandAgentMap: Record<string, string> = {
+        'azure': 'Azure', 'm365': 'M365', 'dream': 'Alex',
+        'meditate': 'Alex', 'selfactualize': 'Alex', 'brainqa': 'Validator',
+        'learn': 'Researcher', 'creative': 'Alex', 'verify': 'Validator',
+    };
+    const activityAgent = request.command ? (commandAgentMap[request.command] || 'Alex') : 'Alex';
+    const activityId = agentActivity.start(activityAgent, request.command || 'general', request.prompt);
     
+    try {
     // Handle slash commands
     if (request.command === 'meditate') {
         return await handleMeditateCommand(request, context, stream, token);
@@ -476,6 +487,13 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
 
     // Default: Use the language model with Alex's personality
     return await handleGeneralQuery(request, context, stream, token);
+    } catch (err) {
+        agentActivity.complete(activityId, true);
+        throw err;
+    } finally {
+        // Mark complete if not already (error case handles above)
+        agentActivity.complete(activityId);
+    }
 };
 
 // === HELPER FUNCTIONS FOR handleGeneralQuery (NASA R4 extraction) ===

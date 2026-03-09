@@ -36,6 +36,13 @@
       "type": "validates",
       "strength": 0.5,
       "reason": "Diagram accessibility (alt text, semantic structure)"
+    },
+    {
+      "target": ".github/instructions/ui-ux-design.instructions.md",
+      "type": "implements",
+      "strength": 0.95,
+      "bidirectional": true,
+      "reason": "Instruction file contains proven UI Audit Procedure (two-pass: compliance + content) and design system enforcement rules"
     }
   ],
   "triggers": [
