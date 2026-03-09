@@ -202,7 +202,7 @@
 #### Skill-to-Discipline Mapping — "Alex is trained on what you do"
 
 > **Purpose**: Each discipline/study guide should surface the Alex skills most relevant to that audience. This is an install incentive — users see that Alex has specialized knowledge for *their* profession, not just generic AI features. Use this table in LearnAlex study guides, workshop pages, and Docs tab persona cards.
-> **Source**: 120 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines.
+> **Source**: 123 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines. New skills added March 9: `financial-analysis`, `sales-enablement`, `career-development`.
 > **Convention**: Skills listed in relevance order. First 3 are the strongest hooks for that audience.
 
 | # | Discipline | Key Skills (install incentive) |
@@ -220,36 +220,36 @@
 | 11 | Developers | `code-review`, `testing-strategies`, `debugging-patterns`, `refactoring-patterns`, `api-design`, `git-workflow`, `vscode-extension-patterns`, `architecture-audit` |
 | 12 | Engineers | `architecture-audit`, `infrastructure-as-code`, `testing-strategies`, `debugging-patterns`, `performance-profiling`, `observability-monitoring` |
 | 13 | Enterprise Architects | `architecture-audit`, `architecture-refinement`, `azure-architecture-patterns`, `infrastructure-as-code`, `enterprise-integration`, `api-design` |
-| 14 | Entrepreneurs | `business-analysis`, `scope-management`, `project-scaffolding`, `executive-storytelling`, `brand-asset-management`, `status-reporting` |
-| 15 | Executives (CxO) | `executive-storytelling`, `status-reporting`, `change-management`, `scope-management`, `business-analysis`, `gamma-presentations` |
-| 16 | Finance Professionals | `business-analysis`, `pii-privacy-regulations`, `anti-hallucination`, `status-reporting`, `deep-work-optimization` |
+| 14 | Entrepreneurs | `financial-analysis`, `business-analysis`, `scope-management`, `project-scaffolding`, `executive-storytelling`, `brand-asset-management` |
+| 15 | Executives (CxO) | `executive-storytelling`, `financial-analysis`, `status-reporting`, `change-management`, `scope-management`, `business-analysis` |
+| 16 | Finance Professionals | `financial-analysis`, `business-analysis`, `pii-privacy-regulations`, `anti-hallucination`, `status-reporting`, `deep-work-optimization` |
 | 17 | Game Developers | `debugging-patterns`, `testing-strategies`, `performance-profiling`, `code-review`, `project-management`, `refactoring-patterns` |
 | 18 | Grant Writers | `grant-writing`, `creative-writing`, `citation-management`, `research-first-development`, `ai-writing-avoidance` |
 | 19 | Healthcare Professionals | `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management`, `research-first-development` |
 | 20 | HR & People Ops | `pii-privacy-regulations`, `change-management`, `coaching-techniques`, `business-analysis`, `creative-writing` |
-| 21 | Job Seekers | `creative-writing`, `ai-writing-avoidance`, `prompt-engineering`, `bootstrap-learning`, `status-reporting` |
+| 21 | Job Seekers | `career-development`, `ai-writing-avoidance`, `prompt-engineering`, `bootstrap-learning`, `creative-writing` |
 | 22 | Journalists | `creative-writing`, `ai-writing-avoidance`, `citation-management`, `anti-hallucination`, `research-first-development` |
 | 23 | Lawyers | `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management`, `research-first-development`, `creative-writing` |
 | 24 | Marketing | `creative-writing`, `ai-writing-avoidance`, `brand-asset-management`, `image-handling`, `executive-storytelling`, `prompt-engineering` |
-| 25 | Nonprofit Leaders | `grant-writing`, `business-analysis`, `executive-storytelling`, `change-management`, `status-reporting`, `creative-writing` |
+| 25 | Nonprofit Leaders | `grant-writing`, `financial-analysis`, `business-analysis`, `executive-storytelling`, `change-management`, `status-reporting` |
 | 26 | Open Source Contributors | `git-workflow`, `code-review`, `documentation-quality-assurance`, `testing-strategies`, `release-process`, `api-documentation` |
 | 27 | Podcasters | `creative-writing`, `ai-writing-avoidance`, `text-to-speech`, `prompt-engineering`, `book-publishing` |
 | 28 | Power Users / Builders | `vscode-extension-patterns`, `vscode-configuration-validation`, `prompt-engineering`, `skill-building`, `mcp-development`, `agent-debug-panel` |
 | 29 | Product Managers | `project-management`, `scope-management`, `business-analysis`, `status-reporting`, `executive-storytelling`, `gamma-presentations` |
 | 30 | Project Managers | `project-management`, `scope-management`, `status-reporting`, `change-management`, `gamma-presentations`, `alex-effort-estimation` |
 | 31 | Psychology & Counselors | `learning-psychology`, `coaching-techniques`, `privacy-responsible-ai`, `creative-writing`, `frustration-recognition` |
-| 32 | Real Estate | `business-analysis`, `creative-writing`, `executive-storytelling`, `prompt-engineering`, `image-handling` |
+| 32 | Real Estate | `financial-analysis`, `sales-enablement`, `business-analysis`, `executive-storytelling`, `creative-writing` |
 | 33 | Scientists | `research-first-development`, `literature-review`, `citation-management`, `practitioner-research`, `anti-hallucination`, `research-project-scaffold` |
 | 34 | Security Engineers | `security-review`, `distribution-security`, `secrets-management`, `pii-privacy-regulations`, `architecture-audit`, `incident-response` |
-| 35 | Sellers | `business-analysis`, `executive-storytelling`, `creative-writing`, `prompt-engineering`, `coaching-techniques` |
+| 35 | Sellers | `sales-enablement`, `executive-storytelling`, `financial-analysis`, `coaching-techniques`, `business-analysis` |
 | 36 | SRE / On-Call | `incident-response`, `post-mortem`, `observability-monitoring`, `root-cause-analysis`, `debugging-patterns`, `error-recovery-patterns` |
 | 37 | Standup Comics | `creative-writing`, `ai-writing-avoidance`, `prompt-engineering`, `rubber-duck-debugging` |
-| 38 | Students | `bootstrap-learning`, `learning-psychology`, `research-first-development`, `citation-management`, `socratic-questioning`, `deep-work-optimization` |
+| 38 | Students | `career-development`, `bootstrap-learning`, `learning-psychology`, `research-first-development`, `citation-management`, `socratic-questioning` |
 | 39 | Teachers & Educators | `learning-psychology`, `coaching-techniques`, `socratic-questioning`, `gamma-presentations`, `creative-writing`, `slide-design` |
 | 40 | Technical Writers | `documentation-quality-assurance`, `api-documentation`, `markdown-mermaid`, `lint-clean-markdown`, `md-to-word`, `code-review` |
 | 41 | Visual Storytellers | `svg-graphics`, `graphic-design`, `image-handling`, `gamma-presentations`, `slide-design`, `markdown-mermaid` |
 
-**Coverage stats**: 54 of 120 skills appear in at least one discipline mapping. Top skills by discipline coverage: `creative-writing` (14), `business-analysis` (10), `executive-storytelling` (9), `anti-hallucination` (7), `status-reporting` (7), `citation-management` (7), `prompt-engineering` (7).
+**Coverage stats**: 57 of 123 skills appear in at least one discipline mapping. Top skills by discipline coverage: `creative-writing` (14), `business-analysis` (10), `executive-storytelling` (9), `financial-analysis` (5), `anti-hallucination` (7), `status-reporting` (7), `citation-management` (7), `prompt-engineering` (7), `sales-enablement` (2), `career-development` (2).
 
 ---
 
