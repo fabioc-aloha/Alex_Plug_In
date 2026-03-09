@@ -29,6 +29,10 @@ export function getSharedStyles(personaAccent: string): string {
           --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
           --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.12);
           --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15);
+          /* Transition Durations (3-tier system) */
+          --transition-fast: 0.12s;
+          --transition-normal: 0.2s;
+          --transition-slow: 0.3s;
       }
       body {
           font-family: var(--vscode-font-family);
@@ -46,7 +50,7 @@ export function getSharedStyles(personaAccent: string): string {
           outline-offset: 2px;
       }
       .container {
-          padding: 6px 10px;
+          padding: 8px 12px;
       }
       /* CorreaX banner-style header — accent bar + ghost watermark + series label */
       .header {
@@ -54,7 +58,7 @@ export function getSharedStyles(personaAccent: string): string {
           overflow: hidden;
           background: var(--vscode-editor-widget-background, var(--vscode-sideBar-background));
           border-bottom: 1px solid var(--vscode-panel-border, var(--vscode-widget-border));
-          padding: 10px 10px 10px 14px;
+          padding: 12px 12px 12px 16px;
           margin-bottom: 8px;
       }
       .header-accent-bar {
@@ -83,7 +87,7 @@ export function getSharedStyles(personaAccent: string): string {
           letter-spacing: 4px;
           text-transform: uppercase;
           color: var(--persona-accent, var(--vscode-charts-blue));
-          opacity: 0.65;
+          opacity: 0.6;
           margin-bottom: 2px;
       }
       .header-main {
@@ -97,14 +101,14 @@ export function getSharedStyles(personaAccent: string): string {
           flex-shrink: 0;
           filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
           cursor: pointer;
-          transition: transform 0.15s ease;
+          transition: transform 0.12s ease;
       }
       .header-icon:hover {
           transform: scale(1.08);
       }
       .hero-text-box {
           text-align: center;
-          padding: 12px 14px;
+          padding: 12px 16px;
           margin-bottom: 8px;
           position: relative;
           background: var(--vscode-editor-background);
@@ -115,7 +119,7 @@ export function getSharedStyles(personaAccent: string): string {
           font-size: 15px;
           font-weight: 600;
           color: var(--vscode-foreground);
-          margin-bottom: 6px;
+          margin-bottom: 8px;
       }
       .hero-hook strong {
           color: var(--persona-accent);
@@ -124,9 +128,9 @@ export function getSharedStyles(personaAccent: string): string {
           font-size: 12px;
           color: var(--vscode-descriptionForeground);
           cursor: pointer;
-          padding: 3px 6px;
+          padding: 4px 8px;
           border-radius: 4px;
-          transition: background 0.15s ease;
+          transition: background 0.12s ease;
       }
       .hero-north-star:hover {
           background: var(--vscode-list-hoverBackground);
@@ -136,7 +140,7 @@ export function getSharedStyles(personaAccent: string): string {
           color: var(--vscode-descriptionForeground);
           margin-top: 4px;
           font-style: italic;
-          opacity: 0.85;
+          opacity: 0.8;
       }
       .header-icon-wrapper {
           position: relative;
@@ -173,7 +177,7 @@ export function getSharedStyles(personaAccent: string): string {
           align-items: center;
           gap: 4px;
           cursor: pointer;
-          transition: all 0.15s ease;
+          transition: all 0.12s ease;
       }
       .header-persona:hover {
           background: color-mix(in srgb, var(--persona-accent) 25%, transparent);
@@ -192,7 +196,7 @@ export function getSharedStyles(personaAccent: string): string {
           color: var(--vscode-descriptionForeground);
           margin: 4px 0 8px;
           padding: 4px 8px;
-          opacity: 0.85;
+          opacity: 0.8;
       }
       .refresh-btn {
           margin-left: auto;
@@ -200,11 +204,11 @@ export function getSharedStyles(personaAccent: string): string {
           border: none;
           color: var(--vscode-foreground);
           cursor: pointer;
-          opacity: 0.5;
+          opacity: 0.4;
           font-size: 16px;
           padding: 4px;
           border-radius: 4px;
-          transition: all 0.15s ease;
+          transition: all 0.12s ease;
       }
       .refresh-btn:hover {
           opacity: 1;
@@ -218,10 +222,10 @@ export function getSharedStyles(personaAccent: string): string {
           font-size: 11px;
           font-weight: 600;
           text-transform: uppercase;
-          letter-spacing: 0.8px;
+          letter-spacing: 0.5px;
           color: var(--vscode-descriptionForeground);
           margin-bottom: 4px;
-          opacity: 0.65;
+          opacity: 0.6;
       }
       
       .status-grid {
@@ -301,7 +305,7 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .context-card {
           background: var(--vscode-editor-background);
-          border-radius: 5px;
+          border-radius: 6px;
           padding: 8px;
           border-left: 2px solid var(--persona-accent);
       }
@@ -333,7 +337,7 @@ export function getSharedStyles(personaAccent: string): string {
       .trifecta-tag {
           font-size: var(--font-xs);
           padding: 2px var(--spacing-sm);
-          border-radius: 10px;
+          border-radius: 12px;
           background: color-mix(in srgb, var(--persona-accent) 12%, var(--vscode-badge-background));
           color: var(--vscode-foreground);
           cursor: pointer;
@@ -379,7 +383,7 @@ export function getSharedStyles(personaAccent: string): string {
       
       .session-card {
           background: var(--vscode-editor-background);
-          border-radius: 5px;
+          border-radius: 6px;
           padding: 8px;
           margin-bottom: 8px;
           border-left: 2px solid var(--vscode-charts-blue);
@@ -429,7 +433,7 @@ export function getSharedStyles(personaAccent: string): string {
       .action-list {
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 4px;
       }
       .action-group-label {
           font-size: 11px;
@@ -438,8 +442,8 @@ export function getSharedStyles(personaAccent: string): string {
           margin-top: 8px;
           margin-bottom: 2px;
           padding-left: 2px;
-          opacity: 0.55;
-          letter-spacing: 0.8px;
+          opacity: 0.6;
+          letter-spacing: 0.5px;
           text-transform: uppercase;
           cursor: pointer;
           display: flex;
@@ -452,7 +456,7 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .action-group-label .collapse-chevron {
           font-size: 9px;
-          transition: transform 0.15s ease;
+          transition: transform 0.12s ease;
           display: inline-block;
       }
       .action-group-label.collapsed .collapse-chevron {
@@ -461,7 +465,7 @@ export function getSharedStyles(personaAccent: string): string {
       .action-group-content {
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 4px;
           overflow: hidden;
           transition: max-height 0.2s ease;
       }
@@ -472,7 +476,7 @@ export function getSharedStyles(personaAccent: string): string {
       .quick-command-input {
           width: 100%;
           padding: 4px 8px;
-          min-height: 32px;
+          min-height: 36px;
           border: 1px solid var(--vscode-input-border, var(--vscode-widget-border));
           border-radius: 4px;
           background: var(--vscode-input-background);
@@ -502,7 +506,7 @@ export function getSharedStyles(personaAccent: string): string {
       .cognitive-state-icon { font-size: 24px; flex-shrink: 0; }
       .cognitive-state-detail { flex: 1; }
       .cognitive-state-label { font-size: 12px; font-weight: 600; }
-      .cognitive-state-mode { font-size: 11px; opacity: 0.7; }
+      .cognitive-state-mode { font-size: 11px; opacity: 0.6; }
       /* Personality Toggle (7.16) */
       .personality-toggle {
           display: flex;
@@ -516,7 +520,7 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .personality-toggle-btn {
           flex: 1;
-          padding: 6px 8px;
+          padding: 8px 8px;
           font-size: 11px;
           font-weight: 500;
           text-align: center;
@@ -525,9 +529,9 @@ export function getSharedStyles(personaAccent: string): string {
           background: transparent;
           color: var(--vscode-foreground);
           opacity: 0.6;
-          transition: opacity 0.15s, background 0.15s;
+          transition: opacity 0.12s, background 0.12s;
       }
-      .personality-toggle-btn:hover { opacity: 0.85; }
+      .personality-toggle-btn:hover { opacity: 0.8; }
       .personality-toggle-btn.active {
           opacity: 1;
           background: var(--vscode-button-background);
@@ -540,7 +544,7 @@ export function getSharedStyles(personaAccent: string): string {
       /* Memory Modality Cards (7.37) */
       .memory-modalities {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
           gap: 8px;
           margin-bottom: 8px;
       }
@@ -559,7 +563,7 @@ export function getSharedStyles(personaAccent: string): string {
           align-items: center;
           gap: 8px;
           padding: 2px 8px;
-          min-height: 28px;
+          min-height: 36px;
           background: var(--vscode-button-secondaryBackground);
           color: var(--vscode-button-secondaryForeground);
           border: none;
@@ -591,7 +595,7 @@ export function getSharedStyles(personaAccent: string): string {
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          opacity: 0.9;
+          opacity: 0.8;
       }
       .action-icon svg {
           width: 17px;
@@ -603,10 +607,10 @@ export function getSharedStyles(personaAccent: string): string {
       .tier-lock {
           font-size: 11px;
           margin-left: auto;
-          opacity: 0.55;
+          opacity: 0.6;
           white-space: nowrap;
           padding: 1px 4px;
-          border-radius: 3px;
+          border-radius: 4px;
           background: color-mix(in srgb, var(--vscode-charts-yellow) 15%, transparent);
           color: var(--vscode-descriptionForeground);
       }
@@ -672,7 +676,7 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .skill-rec-reason {
           font-size: var(--font-xs);
-          opacity: 0.7;
+          opacity: 0.6;
           font-style: italic;
       }
       
@@ -682,14 +686,14 @@ export function getSharedStyles(personaAccent: string): string {
           font-size: var(--font-xs);
           color: var(--vscode-descriptionForeground);
           margin-bottom: 8px;
-          opacity: 0.85;
+          opacity: 0.8;
       }
       .goal-item {
           background: var(--vscode-editor-background);
-          border-radius: 5px;
-          padding: 8px 10px;
-          margin-bottom: 5px;
-          transition: transform 0.1s ease;
+          border-radius: 4px;
+          padding: 8px 12px;
+          margin-bottom: 4px;
+          transition: transform 0.12s ease;
       }
       .goal-item:hover {
           transform: translateX(1px);
@@ -728,7 +732,7 @@ export function getSharedStyles(personaAccent: string): string {
       
       /* Nudges Section Styles */
       .nudges-section {
-          margin-bottom: 10px;
+          margin-bottom: 12px;
       }
       .nudge-card {
           display: flex;
@@ -759,7 +763,7 @@ export function getSharedStyles(personaAccent: string): string {
       .nudge-icon {
           font-size: 16px;
           flex-shrink: 0;
-          opacity: 0.9;
+          opacity: 0.8;
       }
       .nudge-content {
           flex: 1;
@@ -778,7 +782,7 @@ export function getSharedStyles(personaAccent: string): string {
           padding: 4px 8px;
           min-height: 36px;
           border-radius: 4px;
-          transition: background 0.1s ease;
+          transition: background 0.12s ease;
           white-space: nowrap;
       }
       .nudge-action:hover {
@@ -793,9 +797,9 @@ export function getSharedStyles(personaAccent: string): string {
           cursor: pointer;
           list-style: none;
           user-select: none;
-          padding: 3px 0;
-          border-radius: 3px;
-          transition: color 0.1s ease;
+          padding: 4px 0;
+          border-radius: 4px;
+          transition: color 0.12s ease;
       }
       .features-section summary:hover {
           color: var(--vscode-textLink-foreground);
@@ -809,7 +813,7 @@ export function getSharedStyles(personaAccent: string): string {
           margin-right: 4px;
           transition: transform 0.12s ease;
           display: inline-block;
-          opacity: 0.7;
+          opacity: 0.6;
       }
       .features-section details[open] summary::before {
           content: '▾ ';
@@ -821,11 +825,11 @@ export function getSharedStyles(personaAccent: string): string {
           color: var(--vscode-textLink-foreground);
       }
       .features-content {
-          margin-top: 10px;
+          margin-top: 12px;
           padding: 0 2px;
       }
       .feature-category {
-          margin-bottom: 10px;
+          margin-bottom: 12px;
       }
       .feature-category-title {
           font-size: var(--font-xs);
@@ -894,13 +898,13 @@ export function getSharedStyles(personaAccent: string): string {
           font-size: 11px;
           font-weight: 500;
           text-align: center;
-          transition: all 0.15s ease;
+          transition: all 0.12s ease;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
       }
       .tab-bar .tab:hover {
-          opacity: 0.85;
+          opacity: 0.8;
           background: var(--vscode-list-hoverBackground);
       }
       .tab-bar .tab:focus-visible {
@@ -917,7 +921,7 @@ export function getSharedStyles(personaAccent: string): string {
       .empty-state {
           text-align: center;
           padding: 32px 16px;
-          opacity: 0.7;
+          opacity: 0.6;
       }
       .empty-state-icon { font-size: 32px; margin-bottom: 8px; }
       .empty-state-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
@@ -927,21 +931,21 @@ export function getSharedStyles(personaAccent: string): string {
       .persona-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-          gap: 6px;
+          gap: 8px;
           margin: 8px 0;
       }
       .persona-card {
           display: flex;
           align-items: center;
-          gap: 6px;
-          padding: 6px 8px;
+          gap: 8px;
+          padding: 8px 8px;
           background: var(--vscode-editor-widget-background, var(--vscode-sideBar-background));
           border: 1px solid var(--vscode-panel-border, var(--vscode-widget-border));
           border-radius: 4px;
           cursor: pointer;
           font-size: 11px;
           line-height: 1.3;
-          transition: background 0.15s;
+          transition: background 0.12s;
           border-left: 3px solid var(--persona-accent, #6366f1);
       }
       .persona-card:hover {
@@ -961,7 +965,7 @@ export function getSharedStyles(personaAccent: string): string {
           text-transform: uppercase;
           letter-spacing: 0.5px;
           opacity: 0.6;
-          margin: 12px 0 6px;
+          margin: 12px 0 8px;
           padding-bottom: 4px;
           border-bottom: 1px solid var(--vscode-panel-border, var(--vscode-widget-border));
       }
@@ -974,14 +978,14 @@ export function getSharedStyles(personaAccent: string): string {
           border-radius: 6px;
       }
       .docs-cta-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-      .docs-cta-desc { font-size: 11px; opacity: 0.7; margin-bottom: 8px; }
+      .docs-cta-desc { font-size: 11px; opacity: 0.6; margin-bottom: 8px; }
 
       /* Dashboard card styling for Mission Command */
       .dashboard-card {
           background: var(--vscode-editor-background, #1e1e1e);
           border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 6px;
-          padding: 10px 12px;
+          padding: 12px 12px;
           margin-bottom: 8px;
       }
       .dashboard-card-title {
@@ -989,19 +993,19 @@ export function getSharedStyles(personaAccent: string): string {
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-          opacity: 0.7;
-          margin-bottom: 6px;
+          opacity: 0.6;
+          margin-bottom: 8px;
       }
 
       /* ── Tab Section Title ── */
       .tab-section-title {
           font-size: 13px;
           font-weight: 600;
-          margin: 8px 0 10px;
+          margin: 8px 0 12px;
       }
       .tab-footer-hint {
           font-size: 11px;
-          opacity: 0.5;
+          opacity: 0.4;
           margin-top: 12px;
           padding: 8px 0;
           border-top: 1px solid var(--vscode-panel-border);
@@ -1009,7 +1013,7 @@ export function getSharedStyles(personaAccent: string): string {
       .tab-footer-hint code {
           background: var(--vscode-textCodeBlock-background);
           padding: 1px 4px;
-          border-radius: 3px;
+          border-radius: 4px;
           font-size: 11px;
       }
 
@@ -1017,26 +1021,26 @@ export function getSharedStyles(personaAccent: string): string {
       .agent-list {
           display: flex;
           flex-direction: column;
-          gap: 6px;
+          gap: 8px;
       }
       .agent-card {
           background: var(--vscode-editor-background);
           border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 6px;
-          padding: 8px 10px;
+          padding: 8px 12px;
       }
-      .agent-card.agent-missing { opacity: 0.5; }
+      .agent-card.agent-missing { opacity: 0.4; }
       .agent-card-header {
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
           margin-bottom: 4px;
       }
       .agent-icon { font-size: 16px; }
       .agent-name { font-weight: 600; font-size: 12px; flex: 1; }
       .agent-badge {
           font-size: 11px;
-          padding: 1px 5px;
+          padding: 2px 4px;
           border-radius: 8px;
           font-weight: 600;
       }
@@ -1061,15 +1065,22 @@ export function getSharedStyles(personaAccent: string): string {
           border-radius: 50%;
           display: inline-block;
           margin-left: 4px;
+          position: relative;
+      }
+      .agent-live-dot::after {
+          position: absolute; font-size: 8px; line-height: 8px;
+          left: 50%; top: 50%; transform: translate(-50%, -50%);
       }
       .agent-live-dot.active { background: var(--vscode-testing-iconPassed); animation: pulse-dot 1.5s infinite; }
+      .agent-live-dot.active::after { content: '\\2713'; color: white; }
       .agent-live-dot.idle { background: var(--vscode-disabledForeground); opacity: 0.4; }
+      .agent-live-dot.idle::after { content: '\\2015'; color: white; }
       @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
       /* Activity feed (7.10/7.21) */
       .activity-feed { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
       .activity-item {
           display: flex; align-items: center; gap: 8px;
-          padding: 5px 8px;
+          padding: 4px 8px;
           background: var(--vscode-editor-background);
           border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 4px;
@@ -1077,25 +1088,25 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .activity-status { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
       .activity-status.active { background: var(--vscode-testing-iconPassed); animation: pulse-dot 1.5s infinite; }
-      .activity-status.complete { background: var(--vscode-disabledForeground); opacity: 0.5; }
+      .activity-status.complete { background: var(--vscode-disabledForeground); opacity: 0.4; }
       .activity-status.error { background: var(--vscode-errorForeground); }
       .activity-agent { font-weight: 600; flex-shrink: 0; }
-      .activity-prompt { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.75; }
-      .activity-time { font-size: 10px; opacity: 0.5; flex-shrink: 0; }
+      .activity-prompt { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.8; }
+      .activity-time { font-size: 10px; opacity: 0.6; flex-shrink: 0; }
 
       /* ── Skill Store Tab ── */
       .skill-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 6px;
+          gap: 8px;
       }
       .skill-card {
           background: var(--vscode-editor-background);
           border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 6px;
-          padding: 8px 10px;
+          padding: 8px 12px;
           cursor: pointer;
-          transition: border-color 0.15s;
+          transition: border-color 0.12s;
       }
       .skill-card:hover {
           border-color: var(--persona-accent, #6366f1);
@@ -1107,13 +1118,13 @@ export function getSharedStyles(personaAccent: string): string {
           margin-bottom: 2px;
       }
       .skill-name { font-weight: 600; font-size: 12px; flex: 1; }
-      .skill-synapse-dot { font-size: 11px; opacity: 0.7; }
+      .skill-synapse-dot { font-size: 11px; opacity: 0.6; }
       .skill-category {
           font-size: 11px;
           font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-          opacity: 0.5;
+          opacity: 0.6;
           margin-bottom: 2px;
       }
       .skill-desc {
@@ -1131,7 +1142,7 @@ export function getSharedStyles(personaAccent: string): string {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 8px;
-          margin-bottom: 10px;
+          margin-bottom: 12px;
       }
       .mind-stat-card {
           background: var(--vscode-editor-background);
@@ -1160,7 +1171,7 @@ export function getSharedStyles(personaAccent: string): string {
           display: flex;
           align-items: center;
           gap: 8px;
-          margin-bottom: 6px;
+          margin-bottom: 8px;
       }
       .modality-label {
           font-size: 11px;
@@ -1192,7 +1203,7 @@ export function getSharedStyles(personaAccent: string): string {
       .mind-maintenance-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 6px;
+          gap: 8px;
       }
       .maintenance-item {
           display: flex;
@@ -1201,7 +1212,7 @@ export function getSharedStyles(personaAccent: string): string {
           padding: 8px;
           cursor: pointer;
           border-radius: 4px;
-          transition: background 0.15s;
+          transition: background 0.12s;
       }
       .maintenance-item:hover {
           background: var(--vscode-list-hoverBackground);
@@ -1245,7 +1256,7 @@ export function getSharedStyles(personaAccent: string): string {
       .arch-status-icon { font-size: 20px; flex-shrink: 0; }
       .arch-status-detail { flex: 1; }
       .arch-status-title { font-weight: 600; font-size: 12px; }
-      .arch-status-meta { font-size: 11px; opacity: 0.7; }
+      .arch-status-meta { font-size: 11px; opacity: 0.6; }
 
       /* ── Nudge Dismiss (7.12) ── */
       .nudge-dismiss {
@@ -1266,7 +1277,7 @@ export function getSharedStyles(personaAccent: string): string {
           background: var(--vscode-editor-background);
           border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 6px;
-          padding: 10px 12px;
+          padding: 12px 12px;
           margin: 8px 0;
       }
       .info-card-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
@@ -1276,7 +1287,7 @@ export function getSharedStyles(personaAccent: string): string {
       .skill-search-input {
           width: 100%;
           padding: 4px 8px;
-          min-height: 28px;
+          min-height: 36px;
           border: 1px solid var(--vscode-input-border, var(--vscode-widget-border));
           border-radius: 4px;
           background: var(--vscode-input-background);
@@ -1298,14 +1309,14 @@ export function getSharedStyles(personaAccent: string): string {
       .catalog-toggle-btn {
           flex: 1;
           padding: 4px 8px;
-          min-height: 28px;
+          min-height: 36px;
           background: var(--vscode-editor-background);
           color: var(--vscode-foreground);
           border: none;
           font-size: 11px;
           cursor: pointer;
-          opacity: 0.7;
-          transition: all 0.15s;
+          opacity: 0.6;
+          transition: all 0.12s;
       }
       .catalog-toggle-btn:not(:last-child) {
           border-right: 1px solid var(--vscode-widget-border, #303030);
@@ -1324,7 +1335,7 @@ export function getSharedStyles(personaAccent: string): string {
           padding: 4px 0;
           margin-bottom: 8px;
           font-size: 11px;
-          opacity: 0.7;
+          opacity: 0.6;
       }
       .skill-health-item { display: flex; align-items: center; gap: 4px; }
 
@@ -1344,7 +1355,7 @@ export function getSharedStyles(personaAccent: string): string {
           user-select: none;
       }
       .skill-category-header .collapse-icon {
-          transition: transform 0.15s;
+          transition: transform 0.12s;
           font-size: 11px;
       }
       .skill-category-header.collapsed .collapse-icon { transform: rotate(-90deg); }
@@ -1365,7 +1376,7 @@ export function getSharedStyles(personaAccent: string): string {
           text-align: center;
       }
       .identity-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
-      .identity-meta { font-size: 11px; opacity: 0.7; }
+      .identity-meta { font-size: 11px; opacity: 0.6; }
 
       /* ── Cognitive Age Enriched (7.36) ── */
       .cognitive-tier-label {
@@ -1426,7 +1437,7 @@ export function getSharedStyles(personaAccent: string): string {
           border-radius: 6px;
           padding: 8px;
           cursor: pointer;
-          transition: border-color 0.15s;
+          transition: border-color 0.12s;
           display: flex;
           align-items: flex-start;
           gap: 8px;
@@ -1436,7 +1447,7 @@ export function getSharedStyles(personaAccent: string): string {
       .doc-grid-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
       .doc-grid-text { flex: 1; }
       .doc-grid-title { font-size: 12px; font-weight: 600; }
-      .doc-grid-desc { font-size: 11px; opacity: 0.7; }
+      .doc-grid-desc { font-size: 11px; opacity: 0.6; }
 
       /* ── Partnership Card (7.43) ── */
       .partnership-structured {
@@ -1483,19 +1494,25 @@ export function getSharedStyles(personaAccent: string): string {
           display: flex;
           align-items: center;
           gap: 8px;
-          padding: 5px 8px;
+          padding: 4px 8px;
           font-size: 11px;
           border-bottom: 1px solid var(--vscode-widget-border, #303030);
       }
       .secret-row:last-child { border-bottom: none; }
       .secret-dot {
-          width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+          width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; position: relative;
+      }
+      .secret-dot::after {
+          position: absolute; font-size: 8px; line-height: 8px;
+          left: 50%; top: 50%; transform: translate(-50%, -50%);
       }
       .secret-dot.set { background: var(--vscode-testing-iconPassed, #73c991); }
+      .secret-dot.set::after { content: '\\2713'; color: white; }
       .secret-dot.unset { background: var(--vscode-errorForeground, #f14c4c); }
+      .secret-dot.unset::after { content: '\\2717'; color: white; }
       .secret-name { flex: 1; }
       .secret-badge {
-          font-size: 10px; padding: 1px 6px; border-radius: 3px;
+          font-size: 10px; padding: 2px 8px; border-radius: 4px;
       }
       .secret-badge.set { background: rgba(115,201,145,0.1); color: var(--vscode-testing-iconPassed, #73c991); }
       .secret-badge.unset { background: rgba(241,76,76,0.1); color: var(--vscode-errorForeground, #f14c4c); }
@@ -1506,7 +1523,7 @@ export function getSharedStyles(personaAccent: string): string {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 5px 8px;
+          padding: 4px 8px;
           font-size: 11px;
           border-bottom: 1px solid var(--vscode-widget-border, #303030);
       }
@@ -1537,7 +1554,7 @@ export function getSharedStyles(personaAccent: string): string {
       .skill-toggle::after {
           content: ''; position: absolute; top: 1px; left: 1px;
           width: 10px; height: 10px; border-radius: 50%;
-          background: var(--vscode-foreground); transition: transform 0.15s;
+          background: var(--vscode-foreground); transition: transform 0.12s;
       }
       .skill-toggle.on::after { transform: translateX(10px); }
       .skill-card.disabled { opacity: 0.5; }
@@ -1548,15 +1565,15 @@ export function getSharedStyles(personaAccent: string): string {
       /* ── 7.30 Install from GitHub ── */
       .install-github-card {
           border: 1px dashed var(--vscode-widget-border, #303030);
-          border-radius: 6px; padding: 10px; text-align: center;
+          border-radius: 6px; padding: 12px; text-align: center;
           opacity: 0.7; margin-top: 8px;
       }
       .install-github-card:hover { opacity: 1; border-color: var(--persona-accent, #6366f1); }
 
       /* ── 7.32 Knowledge Freshness ── */
-      .freshness-panel { display: flex; gap: 6px; margin-bottom: 8px; }
+      .freshness-panel { display: flex; gap: 8px; margin-bottom: 8px; }
       .freshness-bucket {
-          flex: 1; text-align: center; padding: 6px 4px;
+          flex: 1; text-align: center; padding: 8px 4px;
           background: var(--vscode-editor-background);
           border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 6px; font-size: 10px;
@@ -1571,7 +1588,7 @@ export function getSharedStyles(personaAccent: string): string {
       /* ── 7.33 Honest Uncertainty ── */
       .calibration-panel { margin-bottom: 8px; }
       .calibration-bar-row {
-          display: flex; align-items: center; gap: 6px;
+          display: flex; align-items: center; gap: 8px;
           font-size: 11px; margin-bottom: 4px;
       }
       .calibration-label { width: 60px; text-align: right; opacity: 0.7; flex-shrink: 0; }
@@ -1593,8 +1610,8 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .meditation-streak-badge {
           display: inline-flex; align-items: center; gap: 4px;
-          padding: 2px 8px; border-radius: 10px;
-          background: rgba(99,102,241,0.12); font-weight: 600;
+          padding: 2px 8px; border-radius: 12px;
+          background: color-mix(in srgb, var(--persona-accent) 12%, transparent); font-weight: 600;
       }
   `;
 }

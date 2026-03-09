@@ -32,8 +32,8 @@ export function getMindTabHtml(ctx: MindTabContext): string {
       <div class="tab-panel" id="panel-mind" role="tabpanel" aria-labelledby="tab-mind">
           ${mindData ? `
           <div class="identity-card">
-              <div class="identity-name">Alex Finch</div>
-              <div class="identity-meta">Age 26 · Curious · Ethical · Grows through reflection</div>
+              <div class="identity-name">${mindData.identityName}</div>
+              <div class="identity-meta">${mindData.identityMeta}</div>
           </div>
 
           <div class="arch-status-banner ${healthBannerClass}" data-cmd="healthDashboard" title="Click to open Health Dashboard" tabindex="0" role="button" aria-label="Architecture health: ${healthBannerLabel}">
@@ -178,13 +178,8 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               <div class="dashboard-card-title">Learn & Knowledge</div>
               ${actionButton('askAboutSelection', '💬', 'Ask About Selection', 'Ask about code or concepts')}
               ${actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
-              ${hasGlobalKnowledge
-                  ? actionButton('knowledgeQuickPick', '🔎', 'Search Knowledge', 'Find patterns from past work')
-                  : actionButton('searchRelatedKnowledge', '🔍', 'Search Knowledge', 'Find patterns from past work')
-              }
               ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
               ${actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
-              ${actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'Explore all memory systems')}
           </div>
           ` : `
           <div class="empty-state">

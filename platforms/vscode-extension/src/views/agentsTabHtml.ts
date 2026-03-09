@@ -36,8 +36,8 @@ export function getAgentsTabHtml(ctx: AgentsTabContext): string {
               <button class="personality-toggle-btn${personalityMode === 'chatty' ? ' active' : ''}" data-mode="chatty" role="radio" aria-checked="${personalityMode === 'chatty'}">💬 Chatty</button>
           </div>
 
-          <div class="tab-section-title">Agent Registry</div>
-          <div class="agent-list">
+          <div class="tab-section-title">Agent Registry <span style="opacity: 0.6">(${(agents ?? []).length})</span></div>
+          ${(agents ?? []).length > 0 ? `<div class="agent-list">
               ${(agents ?? []).map(a => {
               const isActive = (recentActivity ?? []).some(act => act.agent === a.name && act.status === 'active');
               return `
@@ -51,7 +51,11 @@ export function getAgentsTabHtml(ctx: AgentsTabContext): string {
                   <div class="agent-role">${escapeHtml(a.role)}</div>
                   <div class="agent-desc">${escapeHtml(a.description)}</div>
               </div>`;}).join('')}
-          </div>
+          </div>` : `<div class="empty-state">
+              <div class="empty-state-icon">🤖</div>
+              <div class="empty-state-title">No Agents Found</div>
+              <div class="empty-state-desc">Initialize Alex architecture to install specialist agents.</div>
+          </div>`}
           <div class="tab-footer-hint">Agents are specialist modes — invoke with <code>@alex</code> or via the agent picker.</div>
 
           ${(recentActivity ?? []).length > 0 ? `

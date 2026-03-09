@@ -325,7 +325,7 @@ export const PERSONAS: Persona[] = [
         icon: '💻',
         accentColor: '#0078D4',
         signals: [
-            { category: 'identity',   pattern: 'developer|engineer|programmer|coder|software',                  weight: 2.0 },
+            { category: 'identity',   pattern: 'developer|software.?eng|programmer|coder|software',             weight: 2.5 },
             { category: 'technology', pattern: 'typescript|javascript|python|java|c#|go|rust|react|angular|vue|node', weight: 2.0 },
             { category: 'structure',  pattern: 'src/',                                                           weight: 1.0 },
             { category: 'dependency', pattern: 'typescript|eslint|jest|mocha|webpack|vite|esbuild',               weight: 1.5 },

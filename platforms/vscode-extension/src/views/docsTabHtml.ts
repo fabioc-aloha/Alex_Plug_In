@@ -198,6 +198,7 @@ export function getDocsTabHtml(): string {
 
           <div class="docs-section">
               <div class="docs-section-title">Workshop Study Guides</div>
+              <input type="text" class="skill-search-input" id="persona-search" placeholder="Search workshops\u2026" aria-label="Search workshop study guides" />
               <div class="persona-grid">
                   ${getPersonaGridHtml()}
               </div>

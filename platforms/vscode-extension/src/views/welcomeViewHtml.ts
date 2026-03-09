@@ -32,6 +32,8 @@ import { getSharedStyles } from './sharedStyles';
 
 /** Data contract for the Mind tab */
 export interface MindTabData {
+  identityName: string;
+  identityMeta: string;
   skillCount: number;
   instructionCount: number;
   promptCount: number;
@@ -563,6 +565,17 @@ export function getWelcomeHtmlContent(
       const skillSearch = document.getElementById('skill-search');
       if (skillSearch) {
           skillSearch.addEventListener('input', applySkillSearch);
+      }
+
+      // ── Persona/workshop search filter (8D.2) ──
+      const personaSearch = document.getElementById('persona-search');
+      if (personaSearch) {
+          personaSearch.addEventListener('input', function() {
+              const q = this.value.toLowerCase();
+              document.querySelectorAll('.persona-card').forEach(function(card) {
+                  card.style.display = (!q || (card.textContent || '').toLowerCase().includes(q)) ? '' : 'none';
+              });
+          });
       }
 
       // ── Category collapse (7.27) ──

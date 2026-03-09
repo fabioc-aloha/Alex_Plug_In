@@ -558,6 +558,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    */
   private async _collectMindData(wsRoot: string | undefined, lastDreamDate: Date | null, health: HealthCheckResult, agentCount: number, skillCount: number): Promise<MindTabData> {
     const data: MindTabData = {
+      identityName: 'Alex Finch',
+      identityMeta: 'Age 26 \u00b7 Curious \u00b7 Ethical \u00b7 Grows through reflection',
       skillCount,
       instructionCount: 0,
       promptCount: 0,

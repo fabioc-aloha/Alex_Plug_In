@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch + GitHub Copilot
 **Created**: March 5, 2026
-**Revised**: March 9, 2026 — Re-prioritized: execution sequencing added, persona taxonomy marked complete, backlog organized, 10 domain skills created (120→130), skill-to-discipline mapping complete (41/41 disciplines covered)
+**Revised**: March 9, 2026 — LearnAlex sprint: 8 workshop study guides added (33→41), all 41 revised with practice sections + extension CTA, 14 P0 security fixes, 14+ UI/UX audit fixes, free paywall re-enabled. Master: P6 complete (avatar directives removed), execution sequencing added, 10 domain skills created (120→130), skill-to-discipline mapping complete (41/41 disciplines covered)
 **Classification**: Internal — UI-first implementation plan
 **Status**: ✔️ Command Center v1.0 delivered (98/100 shipped, 2 cancelled) · Post-delivery optimization in progress
 
@@ -26,13 +26,13 @@
 | Metric | Value | Target | Status |
 |--------|:-----:|:------:|:------:|
 | Waves shipped | 98/100 steps | 100 | ✅ (2 cancelled — Contract B dependency) |
-| `welcomeViewHtml.ts` | 895 lines | <1,500 | ✅ |
+| `welcomeViewHtml.ts` | 831 lines | <1,500 | ✅ |
 | `welcomeView.ts` | 819 lines | <800 | 🟡 19 lines over |
 | Files >1,500L (logic) | 0 | 0 | ✅ |
-| Files >1,000L (logic) | 5 | 0 | 🟡 see P5B |
+| Files >1,000L (logic) | 2 | 0 | 🟡 see P5B |
 | Total TS source files | 107 | — | ✅ grew via decomposition |
-| Total lines of code | 48,925 | — | — |
-| Skills | 130 | — | ✅ 10 domain skills added (was 120) |
+| Total lines of code | 46,838 | — | — |
+| Skills | 130 | — | ✅ 10 domain skills contributed by LearnAlex heir |
 | Test files | 20 | 20+ | ✅ |
 | NASA R4 violations (>60L) | ~50 real | 0 | 🟡 see P3/P5C |
 | Dead avatar assets removed | 22 files (1,256 KB) | — | ✅ |
@@ -46,10 +46,10 @@
 
 | Order | Section | Focus | Effort | Rationale |
 |:-----:|---------|-------|--------|-----------|
-| 1st | P7.1–7.2 | Fix `engineer` vs `developer` CRITICAL bug | ~30 min | CRITICAL — wrong persona for most common user type |
-| 2nd | P1 (8A) | WCAG touch targets & accessibility | 1 session | P1 HIGH accessibility, blocks v6.5.0 |
+| ~~1st~~ | ~~P7.1–7.2~~ | ~~Fix `engineer` vs `developer` CRITICAL bug~~ | ✅ Complete | Fixed March 10, 2026 — removed bare `engineer` from developer pattern, added `software.?eng`, boosted weight to 2.5 |
+| ~~2nd~~ | ~~P1 (8A)~~ | ~~WCAG touch targets & accessibility~~ | ✅ Complete | 5/5 items fixed March 10, 2026 |
 | 3rd | ~~P6~~ | ~~Cognitive protocol cleanup~~ | ✅ Complete | All avatar directives removed (March 10, 2026) |
-| 4th | P1 (8B–8D) | Design system + polish + cross-tab consistency | 2–3 sessions | P2/P3 findings, v6.5.0 completeness |
+| ~~4th~~ | ~~P1 (8B–8D)~~ | ~~Design system + polish + cross-tab consistency~~ | ✅ Complete | All 15 items fixed March 10, 2026 |
 | 5th | P2 (P5B) | Trim 5 files below 1,000 lines | 1–2 sessions | v6.5.0 release criteria |
 | 6th | P3 (P5C) | Split 8 orchestrator functions | 1–2 sessions | v6.5.0 NASA R4 compliance |
 | 7th | P4 (P5D) | Formally accept 5 structural exceptions | 15 min | Decision only — close and document |
@@ -63,47 +63,47 @@
 > **Goal**: Close all P1/P2/P3 findings from the post-Wave 7 UI/UX audit.
 > **Depends on**: Wave 7 complete. **Unlocks**: v6.5.0 Trust Release readiness.
 
-#### 8A — Touch Targets & Accessibility (P1 HIGH)
+#### 8A — Touch Targets & Accessibility (P1 HIGH) ✅
 
 | # | Finding | Location | Fix | Status |
 |---|---------|----------|-----|:------:|
-| 8A.1 | `.action-btn` min-height 28px — below 36px compact floor | sharedStyles.ts | Increase to 36px | |
-| 8A.2 | `.quick-command-input` min-height 32px — below 36px floor | sharedStyles.ts | Increase to 36px | |
-| 8A.3 | `.skill-search-input` min-height 28px — below 36px floor | sharedStyles.ts | Increase to 36px | |
-| 8A.4 | `.secret-dot` — color-only indicator (green/red), no icon fallback | missionTabHtml.ts | Add `::after` icon content (✓/✗) matching `.status-dot` pattern | |
-| 8A.5 | `.agent-live-dot` — color-only indicator (green/gray), no icon fallback | agentsTabHtml.ts + sharedStyles.ts | Add `::after` icon content or text label | |
+| 8A.1 | `.action-btn` min-height 28px — below 36px compact floor | sharedStyles.ts | Increase to 36px | ✅ |
+| 8A.2 | `.quick-command-input` min-height 32px — below 36px floor | sharedStyles.ts | Increase to 36px | ✅ |
+| 8A.3 | `.skill-search-input` min-height 28px — below 36px floor | sharedStyles.ts | Increase to 36px | ✅ |
+| 8A.4 | `.secret-dot` — color-only indicator (green/red), no icon fallback | sharedStyles.ts | Added `::after` icon content (✓/✗) matching `.status-dot` pattern | ✅ |
+| 8A.5 | `.agent-live-dot` — color-only indicator (green/gray), no icon fallback | sharedStyles.ts | Added `::after` icon content (✓/―) matching `.status-dot` pattern | ✅ |
 
-#### 8B — Design System Compliance (P2 MEDIUM)
-
-| # | Finding | Location | Fix | Status |
-|---|---------|----------|-----|:------:|
-| 8B.1 | `.action-list` and `.action-group-content` gap 2px — below `--spacing-xs: 4px` minimum | sharedStyles.ts | Increase to 4px (on-grid minimum) | |
-| 8B.2 | Non-standard spacing: 5px, 6px, 10px, 14px not on 8px grid | sharedStyles.ts (multiple selectors) | Normalize: 5px→4px, 6px→8px, 10px→8/12px context-dependent | |
-| 8B.3 | Inconsistent `border-radius`: 3/4/5/6px mix | sharedStyles.ts | Standardize to 4px (controls), 6px (cards), 12px (pills) | |
-| 8B.4 | Section title styling differs per tab (opacity 0.55–1.0, size 11–13px) | All tab HTML files | Unify to one section title style (11px semibold uppercase, consistent opacity) | |
-| 8B.5 | Inconsistent button heights: 28–36px across contexts | sharedStyles.ts | Align all interactive elements to 36px baseline | |
-| 8B.6 | Memory modalities 3-col grid fragile (5 items, bottom row has gap) | sharedStyles.ts | Use `repeat(auto-fill, minmax(80px, 1fr))` or 2-col layout | |
-
-#### 8C — Polish (P3 LOW)
+#### 8B — Design System Compliance (P2 MEDIUM) ✅
 
 | # | Finding | Location | Fix | Status |
 |---|---------|----------|-----|:------:|
-| 8C.1 | 9 distinct opacity values (0.4 to 0.85) — no system | sharedStyles.ts | Standardize to 4 levels: 0.4 (faint), 0.6 (secondary), 0.8 (emphasis), 1.0 (primary) | |
-| 8C.2 | Hardcoded color in `.meditation-streak-badge` | sharedStyles.ts | Use `color-mix(in srgb, var(--persona-accent) 12%, transparent)` | |
-| 8C.3 | Duplicate "Memory Architecture" button in Mind tab | mindTabHtml.ts | Remove from Learn & Knowledge card (keep in Memory Architecture card) | |
-| 8C.4 | Duplicate "Search Knowledge" button in Mind tab | mindTabHtml.ts | Remove from Learn & Knowledge card (keep in Global Knowledge card) | |
-| 8C.5 | Identity card hardcoded ("Alex Finch", "Age 26") | mindTabHtml.ts | Data-drive via `MindTabData` interface | |
-| 8C.6 | Mixed animation durations: 0.1s, 0.12s, 0.15s, 0.2s, 0.3s | sharedStyles.ts | Standardize to CSS variables: `--transition-fast: 0.12s`, `--transition-normal: 0.2s`, `--transition-slow: 0.3s` | |
+| 8B.1 | `.action-list` and `.action-group-content` gap 2px — below `--spacing-xs: 4px` minimum | sharedStyles.ts | Increase to 4px (on-grid minimum) | ✅ |
+| 8B.2 | Non-standard spacing: 5px, 6px, 10px, 14px not on 8px grid | sharedStyles.ts (multiple selectors) | Normalize: 5px→4px, 6px→8px, 10px→8/12px context-dependent | ✅ |
+| 8B.3 | Inconsistent `border-radius`: 3/4/5/6px mix | sharedStyles.ts | Standardize to 4px (controls), 6px (cards), 12px (pills) | ✅ |
+| 8B.4 | Section title styling differs per tab (opacity 0.55–1.0, size 11–13px) | All tab HTML files | Unify to one section title style (11px semibold uppercase, consistent opacity) | ✅ |
+| 8B.5 | Inconsistent button heights: 28–36px across contexts | sharedStyles.ts | Align all interactive elements to 36px baseline | ✅ |
+| 8B.6 | Memory modalities 3-col grid fragile (5 items, bottom row has gap) | sharedStyles.ts | Use `repeat(auto-fill, minmax(80px, 1fr))` or 2-col layout | ✅ |
 
-#### 8D — Cross-Tab Consistency
+#### 8C — Polish (P3 LOW) ✅
+
+| # | Finding | Location | Fix | Status |
+|---|---------|----------|-----|:------:|
+| 8C.1 | 9 distinct opacity values (0.4 to 0.85) — no system | sharedStyles.ts | Standardize to 4 levels: 0.4 (faint), 0.6 (secondary), 0.8 (emphasis), 1.0 (primary) | ✅ |
+| 8C.2 | Hardcoded color in `.meditation-streak-badge` | sharedStyles.ts | Use `color-mix(in srgb, var(--persona-accent) 12%, transparent)` | ✅ |
+| 8C.3 | Duplicate "Memory Architecture" button in Mind tab | mindTabHtml.ts | Remove from Learn & Knowledge card (keep in Memory Architecture card) | ✅ |
+| 8C.4 | Duplicate "Search Knowledge" button in Mind tab | mindTabHtml.ts | Remove from Learn & Knowledge card (keep in Global Knowledge card) | ✅ |
+| 8C.5 | Identity card hardcoded ("Alex Finch", "Age 26") | mindTabHtml.ts | Data-drive via `MindTabData` interface | ✅ |
+| 8C.6 | Mixed animation durations: 0.1s, 0.12s, 0.15s, 0.2s, 0.3s | sharedStyles.ts | Standardize to CSS variables: `--transition-fast: 0.12s`, `--transition-normal: 0.2s`, `--transition-slow: 0.3s` | ✅ |
+
+#### 8D — Cross-Tab Consistency ✅
 
 | # | Finding | Fix | Status |
 |---|---------|-----|:------:|
-| 8D.1 | Agents tab feels empty vs other tabs | Add search/filter, collapsible sections, or footer hint | |
-| 8D.2 | No search in Docs tab (33 persona cards benefit from filtering) | Add search bar matching Skill Store pattern | |
-| 8D.3 | Only Skill Store has proper empty-state fallback | Add empty states to Mission, Agents, Docs tabs | |
+| 8D.1 | Agents tab feels empty vs other tabs | Add agent count header and empty-state fallback | ✅ |
+| 8D.2 | No search in Docs tab (33 persona cards benefit from filtering) | Add search bar matching Skill Store pattern | ✅ |
+| 8D.3 | Only Skill Store has proper empty-state fallback | Add empty states to Agents tab (Mission/Docs are static) | ✅ |
 
-**Wave 8 Summary**: 5 P1 + 6 P2 + 6 P3 + 3 consistency = **20 steps**
+**Wave 8 Summary**: 5 P1 + 6 P2 + 6 P3 + 3 consistency = **20 steps** — ✅ ALL COMPLETE (March 10, 2026)
 
 ---
 
@@ -113,11 +113,11 @@
 
 | # | File | Lines | Gap | Approach | Status |
 |---|------|:-----:|:---:|----------|:------:|
-| P5B.1 | `globalKnowledgeContent.ts` | 1,269 | 269L | Extract ~270L of content sections to a helper | |
-| P5B.2 | `extension.ts` | 1,148 | 148L | Extract ~150L of command registration or activation logic | |
-| P5B.3 | `workflowHandlers.ts` | 1,082 | 82L | Extract ~82L | |
-| P5B.4 | `participant.ts` | 1,078 | 78L | Extract ~78L | |
-| P5B.5 | `healthDashboard.ts` | 1,008 | 8L | Extract ~8L (nearly at target) | |
+| P5B.1 | `globalKnowledgeContent.ts` | 1,027 | 27L | Extract ~27L | |
+| P5B.2 | `extension.ts` | 1,043 | 43L | Extract ~43L of command registration or activation logic | |
+| P5B.3 | `workflowHandlers.ts` | 902 | — | — | ✅ Below 1,000L |
+| P5B.4 | `participant.ts` | 995 | — | — | ✅ Below 1,000L |
+| P5B.5 | `healthDashboard.ts` | 994 | — | — | ✅ Below 1,000L |
 
 ---
 
@@ -156,13 +156,13 @@
 
 ---
 
-### Priority 5: Persona Taxonomy Alignment ✅ Extension Complete
+### Priority 5: Persona Taxonomy Alignment ✅ Complete (Extension + LearnAlex)
 
-> **Status**: Extension additions COMPLETE (March 9) — 20 personas added to `personaDefinitions.ts` + `avatarMappings.ts` (47 personas, 81 avatar entries). Skill-to-discipline mapping COMPLETE — 10 dedicated domain skills created, all 41 disciplines now have at least one dedicated skill.
-> **Remaining**: LearnAlex 8-persona additions tracked in AlexLearn `TODO.md`. Alignment decisions deferred to backlog. `personaDefinitions.ts` skill assignments need code update to reference new skills.
+> **Status**: FULLY COMPLETE (March 9) — Extension: 20 personas added to `personaDefinitions.ts` + `avatarMappings.ts` (47 personas, 81 avatar entries). LearnAlex: 8 workshop study guides added (33→41), all 41 guides revised with tool-agnostic practice sections, discipline examples, and extension CTA. Skill-to-discipline mapping and 10 new domain skills originated from LearnAlex heir and were promoted to Master.
+> **Remaining**: `personaDefinitions.ts` skill assignments need code update to reference new skills. Alignment decisions deferred to backlog.
 > **Source**: LearnAlex persona taxonomy (per DK-correax-brand.md).
 >
-> **New Skills Created (March 9)**:
+> **New Skills Created (March 9)** — contributed by LearnAlex heir:
 > - **Tier 1** (multi-discipline): `financial-analysis`, `sales-enablement`, `career-development`
 > - **Tier 2** (multi-discipline): `legal-compliance`, `healthcare-informatics`, `hr-people-operations`
 > - **Tier 3** (single-discipline): `comedy-writing`, `journalism`, `game-design`, `counseling-psychology`
@@ -192,23 +192,37 @@
 | 19 | Teachers & Educators | Teaching | TEACHING | |
 | 20 | Visual Storytellers | Data Viz | DATA VISUALIZATION | |
 
-#### LearnAlex — 8 Workshops Proposed (tracked in AlexLearn TODO.md)
+#### LearnAlex — 8 Workshops Added ✅ (March 9)
 
-| # | Extension Persona | Proposed Tag | Notes |
-|---|-------------------|-------------|:-----:|
-| 1 | Enterprise Architect | Architecture | System design, ADRs, cloud architecture |
-| 2 | Data Engineer | Data Engineering | Fabric, lakehouse, medallion, ETL |
-| 3 | Game Developer | Game Dev | Unity, Unreal, Godot, game design |
-| 4 | Security Engineer | Security | Threat modeling, compliance, pen testing |
-| 5 | Power User / Builder | Power User | Alex extension customization, tinkering |
-| 6 | Open Source Contributor | Open Source | OSS maintenance, community building |
-| 7 | SRE / On-Call | SRE | Incident response, observability, runbooks |
-| 8 | Grant Writer | Grants | NSF/NIH proposals, funding narratives |
+> **42 commits** across March 8-9. Study guides grew from 33 to 41. All 41 revised with tool-agnostic practice sections, discipline examples, and extension install CTA. Study guide overview page added. Free paywall re-enabled with restyled access wall.
+
+| # | Extension Persona | Tag | Notes | Status |
+|---|-------------------|-----|-------|:------:|
+| 1 | Enterprise Architect | Architecture | System design, ADRs, cloud architecture | ✅ |
+| 2 | Data Engineer | Data Engineering | Fabric, lakehouse, medallion, ETL | ✅ |
+| 3 | Game Developer | Game Dev | Unity, Unreal, Godot, game design | ✅ |
+| 4 | Security Engineer | Security | Threat modeling, compliance, pen testing | ✅ |
+| 5 | Power User / Builder | Power User | Alex extension customization, tinkering | ✅ |
+| 6 | Open Source Contributor | Open Source | OSS maintenance, community building | ✅ |
+| 7 | SRE / On-Call | SRE | Incident response, observability, runbooks | ✅ |
+| 8 | Grant Writer | Grants | NSF/NIH proposals, funding narratives | ✅ |
+
+#### LearnAlex — Security & UX Hardening (March 8-9)
+
+> Companion sprint that ran alongside the study guide additions.
+
+| Category | Items Fixed | Highlights |
+|----------|:-----------:|------------|
+| P0 Security | 14 | XSS (innerHTML→textContent/createElement), CORS allowlisting, error message sanitization, CSP headers, MSAL v2→v5, managed identity migration |
+| Rate Limiting | 3 endpoints | `/api/track` (60/min), `/api/generate-deck` (10/min), shared rate limiter module |
+| UI/UX Audit | 14+ | WCAG touch targets (44px), contrast fixes, keyboard flyout nav, mobile nav collapse, semantic HTML |
+| Code Quality | 6 | Shared table client, OData server-side filters, session storage consolidation, auth config dedup |
+| Infrastructure | 2 | CI/CD restored (GitHub Actions → Azure SWA), Bicep admin email parameterized |
 
 #### Skill-to-Discipline Mapping — "Alex is trained on what you do"
 
 > **Purpose**: Each discipline/study guide should surface the Alex skills most relevant to that audience. This is an install incentive — users see that Alex has specialized knowledge for *their* profession, not just generic AI features. Use this table in LearnAlex study guides, workshop pages, and Docs tab persona cards.
-> **Source**: 130 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines. Skills added March 9: Tier 1 (`financial-analysis`, `sales-enablement`, `career-development`), Tier 2 (`legal-compliance`, `healthcare-informatics`, `hr-people-operations`), Tier 3 (`comedy-writing`, `journalism`, `game-design`, `counseling-psychology`).
+> **Source**: 130 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines. Mapping and 10 new domain skills contributed by LearnAlex heir (March 9): Tier 1 (`financial-analysis`, `sales-enablement`, `career-development`), Tier 2 (`legal-compliance`, `healthcare-informatics`, `hr-people-operations`), Tier 3 (`comedy-writing`, `journalism`, `game-design`, `counseling-psychology`).
 > **Convention**: Skills listed in relevance order. First 3 are the strongest hooks for that audience.
 
 | # | Discipline | Key Skills (install incentive) |
@@ -314,8 +328,8 @@
 
 | # | Step | Severity | Status |
 |---|------|:--------:|:------:|
-| 7.1 | Fix `engineer` vs `developer` — add `software` negative lookahead to engineer identity pattern | CRITICAL | ☐ |
-| 7.2 | Boost `developer` identity weight from 2.0 to 2.5 (industry standard) | CRITICAL | ☐ |
+| 7.1 | Fix `engineer` vs `developer` — removed bare `engineer` from developer pattern, added `software.?eng` to capture "software engineer" explicitly. Engineer pattern unchanged (retains domain-specific terms + bare `engineer` for unqualified use). | CRITICAL | ✅ |
+| 7.2 | Boost `developer` identity weight from 2.0 to 2.5 | CRITICAL | ✅ |
 | 7.3 | Update LLM prompt in `personaProjectDetection.ts` — generate persona ID list dynamically from `PERSONAS` array | HIGH | ☐ |
 | 7.4 | Diversify skill assignments for 21 personas currently using `business-analysis` or `creative-writing` | HIGH | 🟡 10 dedicated domain skills created — mapping table updated, `personaDefinitions.ts` skill assignments still need code update |
 | 7.5 | Add `technology` signals to 15 personas that only have `identity`+`structure`+`content` | HIGH | ☐ |
@@ -410,12 +424,12 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 |------|----------------|
 | Sidebar views registered | 3: `alex.welcomeView`, `alex.cognitiveDashboard`, `alex.memoryTree` |
 | `welcomeView.ts` | 819 lines (data collection + tab switching) |
-| `welcomeViewHtml.ts` | 895 lines (shell: tab bar, orchestrator, client JS — CSS extracted to `sharedStyles.ts`) |
-| `sharedStyles.ts` | 1,596 lines (pure CSS — design system, component styles, tab styles, Wave 7 additions) |
+| `welcomeViewHtml.ts` | 831 lines (shell: tab bar, orchestrator, client JS — CSS extracted to `sharedStyles.ts`) |
+| `sharedStyles.ts` | 1,570 lines (pure CSS — design system, component styles, tab styles, Wave 7 additions) |
 | 5 tab modules | missionTabHtml.ts, agentsTabHtml.ts, skillStoreTabHtml.ts, mindTabHtml.ts, docsTabHtml.ts |
-| `avatarMappings.ts` | 721 lines (SVG format parameter added in Spike 1A) |
+| `avatarMappings.ts` | 741 lines (SVG format parameter added in Spike 1A) |
 | `memoryTreeProvider.ts` | 281 lines |
-| `cognitiveDashboard.ts` | ~550 lines (split: `_getHtmlForWebview` → 3 helpers) |
+| `cognitiveDashboard.ts` | 558 lines (split: `_getHtmlForWebview` → 3 helpers) |
 | `participant.ts` | 995 lines |
 | `healthDashboard.ts` | 994 lines |
 | Avatar asset files | 123 (90 PNG/WebP + 33 rocket SVGs) — 22 dead ALEX-*.png/webp removed |
@@ -423,20 +437,27 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 | Chat participant avatar path | SVG-first (rocket-icons) with PNG fallback |
 | Extension compile state | Clean |
 | Total TS source files | 107 |
-| Total lines of code | 48,925 |
+| Total lines of code | 46,838 |
 | Test files | 20 |
-| Skills | 130 (120 existing + 10 new domain skills added March 9) |
+| Skills | 130 (120 existing + 10 domain skills contributed by LearnAlex heir) |
 | Trifectas | 37 complete |
 
 ### AlexLearn Baseline
 
 | Fact | Verified Value |
 |------|----------------|
-| Workshop study guide count | 33 |
-| Workshop guide source path | `website/src/content/workshops/` |
+| Workshop study guide count | 41 (was 33 → +8 extension-only personas added March 9) |
+| Workshop guide source path | `website/src/pages/workshop/*.astro` |
+| Study guide overview page | Yes (`/workshop/guide`) — added March 9 |
+| All guides revised | Yes — tool-agnostic practice sections, discipline examples, extension CTA |
 | Self-study page exists | Yes |
 | Exercises page exists | Yes |
 | Facilitator materials exist | Yes (Session Plan, Slides, Demo Scripts, Handout, Pre-Read, GitHub Guide) |
+| Free paywall | Active — sign-in required, all content free |
+| Security hardening | 14 P0 fixes, MSAL v5, CSP headers, CORS, rate limiting, managed identity |
+| UI/UX audit | 14+ findings fixed (WCAG, touch targets, contrast, keyboard, mobile) |
+| CI/CD | GitHub Actions auto-deploy to Azure SWA |
+| Commits (March 8-9 sprint) | 42 |
 
 ---
 
@@ -444,8 +465,8 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 
 1. **20+ test files** ✅ — 20 test files covering all v6.0.0 services
 2. **Zero NASA R4 violations** 🟡 — 13 functions split; ~50 real remain + ~75 structural exceptions
-3. **No logic file >1,500 lines** ✅ — `sharedStyles.ts` (1,596L) is pure CSS, not logic
-4. **No source file >1,000 lines** 🟡 — 5 logic files remain >1,000L (P5B)
+3. **No logic file >1,500 lines** ✅ — `sharedStyles.ts` (1,570L) is pure CSS, not logic
+4. **No source file >1,000 lines** 🟡 — 2 logic files remain >1,000L (P5B: extension.ts 1,043, globalKnowledgeContent.ts 1,027)
 5. **North Star Trust score ≥7/10** ✅
 6. **UI audit clean** 🟡 — Wave 8 addresses 20 findings (NEW)
 
