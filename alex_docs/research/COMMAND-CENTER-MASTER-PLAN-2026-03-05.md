@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch + GitHub Copilot
 **Created**: March 5, 2026
-**Revised**: March 9, 2026 — Re-prioritized: execution sequencing added, persona taxonomy marked complete, backlog organized
+**Revised**: March 9, 2026 — Re-prioritized: execution sequencing added, persona taxonomy marked complete, backlog organized, 10 domain skills created (120→130), skill-to-discipline mapping complete (41/41 disciplines covered)
 **Classification**: Internal — UI-first implementation plan
 **Status**: ✔️ Command Center v1.0 delivered (98/100 shipped, 2 cancelled) · Post-delivery optimization in progress
 
@@ -32,6 +32,7 @@
 | Files >1,000L (logic) | 5 | 0 | 🟡 see P5B |
 | Total TS source files | 107 | — | ✅ grew via decomposition |
 | Total lines of code | 48,925 | — | — |
+| Skills | 130 | — | ✅ 10 domain skills added (was 120) |
 | Test files | 20 | 20+ | ✅ |
 | NASA R4 violations (>60L) | ~50 real | 0 | 🟡 see P3/P5C |
 | Dead avatar assets removed | 22 files (1,256 KB) | — | ✅ |
@@ -157,9 +158,14 @@
 
 ### Priority 5: Persona Taxonomy Alignment ✅ Extension Complete
 
-> **Status**: Extension additions COMPLETE (March 9) — 20 personas added to `personaDefinitions.ts` + `avatarMappings.ts` (47 personas, 81 avatar entries).
-> **Remaining**: LearnAlex 8-persona additions tracked in AlexLearn `TODO.md`. Alignment decisions deferred to backlog.
+> **Status**: Extension additions COMPLETE (March 9) — 20 personas added to `personaDefinitions.ts` + `avatarMappings.ts` (47 personas, 81 avatar entries). Skill-to-discipline mapping COMPLETE — 10 dedicated domain skills created, all 41 disciplines now have at least one dedicated skill.
+> **Remaining**: LearnAlex 8-persona additions tracked in AlexLearn `TODO.md`. Alignment decisions deferred to backlog. `personaDefinitions.ts` skill assignments need code update to reference new skills.
 > **Source**: LearnAlex persona taxonomy (per DK-correax-brand.md).
+>
+> **New Skills Created (March 9)**:
+> - **Tier 1** (multi-discipline): `financial-analysis`, `sales-enablement`, `career-development`
+> - **Tier 2** (multi-discipline): `legal-compliance`, `healthcare-informatics`, `hr-people-operations`
+> - **Tier 3** (single-discipline): `comedy-writing`, `journalism`, `game-design`, `counseling-psychology`
 
 #### Extension — 20 Personas Added ✅ (reference)
 
@@ -311,7 +317,7 @@
 | 7.1 | Fix `engineer` vs `developer` — add `software` negative lookahead to engineer identity pattern | CRITICAL | ☐ |
 | 7.2 | Boost `developer` identity weight from 2.0 to 2.5 (industry standard) | CRITICAL | ☐ |
 | 7.3 | Update LLM prompt in `personaProjectDetection.ts` — generate persona ID list dynamically from `PERSONAS` array | HIGH | ☐ |
-| 7.4 | Diversify skill assignments for 21 personas currently using `business-analysis` or `creative-writing` | HIGH | ☐ |
+| 7.4 | Diversify skill assignments for 21 personas currently using `business-analysis` or `creative-writing` | HIGH | 🟡 10 dedicated domain skills created — mapping table updated, `personaDefinitions.ts` skill assignments still need code update |
 | 7.5 | Add `technology` signals to 15 personas that only have `identity`+`structure`+`content` | HIGH | ☐ |
 
 ---
@@ -419,7 +425,7 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 | Total TS source files | 107 |
 | Total lines of code | 48,925 |
 | Test files | 20 |
-| Skills | 120 (consolidated from 130) |
+| Skills | 130 (120 existing + 10 new domain skills added March 9) |
 | Trifectas | 37 complete |
 
 ### AlexLearn Baseline
