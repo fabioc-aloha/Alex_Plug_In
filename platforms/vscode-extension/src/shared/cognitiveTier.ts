@@ -295,6 +295,108 @@ let lastDetectionTime = 0;
 const CACHE_TTL_MS = 30_000;
 
 // ============================================================================
+// DETECTION HELPERS
+// ============================================================================
+
+/**
+ * Detect active GitHub account(s) via authentication API
+ */
+async function detectGitHubAccount(): Promise<GitHubAccountInfo> {
+    const account: GitHubAccountInfo = {
+        label: '',
+        signedIn: false,
+        sessionCount: 0,
+        accountHint: 'unknown',
+    };
+
+    try {
+        const session = await vscode.authentication.getSession('github', ['user:email'], { createIfNone: false });
+        if (session) {
+            account.label = session.account.label;
+            account.signedIn = true;
+            account.sessionCount = 1;
+        }
+
+        try {
+            const enterpriseSession = await vscode.authentication.getSession('github-enterprise', [], { createIfNone: false });
+            if (enterpriseSession) {
+                account.sessionCount++;
+                if (!account.signedIn) {
+                    account.label = enterpriseSession.account.label;
+                    account.signedIn = true;
+                }
+            }
+        } catch {
+            // github-enterprise provider may not exist
+        }
+    } catch {
+        // Authentication API unavailable
+    }
+
+    return account;
+}
+
+/**
+ * Detect available language models and classify the best tier
+ */
+async function detectBestModelTier(): Promise<{ hasModels: boolean; bestModelTier: string }> {
+    try {
+        const models = await vscode.lm.selectChatModels();
+        if (models.length === 0) { return { hasModels: false, bestModelTier: 'unknown' }; }
+
+        let bestModelTier = 'unknown';
+        for (const model of models) {
+            const id = `${model.family} ${model.name} ${model.id}`.toLowerCase();
+
+            if (/opus|gpt-5\.[2-9]|gpt-5-turbo|o1-pro|o3/.test(id)) {
+                bestModelTier = 'frontier';
+                break;
+            } else if (/sonnet|gpt-4o|gpt-5|gemini.*pro|o1/.test(id) && bestModelTier !== 'frontier') {
+                bestModelTier = 'capable';
+            } else if (/haiku|mini|gpt-4\.1|flash/.test(id) && bestModelTier === 'unknown') {
+                bestModelTier = 'efficient';
+            }
+        }
+        return { hasModels: true, bestModelTier };
+    } catch {
+        return { hasModels: false, bestModelTier: 'unknown' };
+    }
+}
+
+/**
+ * Determine cognitive level and reason from detected capabilities
+ */
+function classifyCognitiveLevel(
+    hasModels: boolean, agentModeEnabled: boolean, extendedThinkingEnabled: boolean,
+    bestModelTier: string, copilotInstalled: boolean, copilotChatInstalled: boolean,
+    gitHubAccount: GitHubAccountInfo
+): { level: CognitiveLevel; reason: string } {
+    const accountLabel = gitHubAccount.signedIn ? ` (signed in as ${gitHubAccount.label})` : '';
+    const multiAccountHint = gitHubAccount.sessionCount > 1
+        ? ' You have multiple GitHub accounts — try switching accounts if your current plan lacks frontier models.'
+        : '';
+
+    if (!hasModels) {
+        const reason = !copilotInstalled
+            ? 'GitHub Copilot extension is not installed. Install it from the Extensions panel to unlock AI features.'
+            : !copilotChatInstalled
+                ? 'GitHub Copilot Chat extension is not installed. Install it to enable chat and agent mode.'
+                : gitHubAccount.signedIn
+                    ? `No language models detected${accountLabel}. Your account may not have an active Copilot subscription. Check your GitHub Copilot settings.${multiAccountHint}`
+                    : 'No language models detected. Sign in to GitHub Copilot to activate AI capabilities.';
+        return { level: 1, reason };
+    } else if (!agentModeEnabled) {
+        return { level: 2, reason: `Copilot Chat available${accountLabel} but agent mode is disabled. Enable "chat.agent.enabled" for full tool access.` };
+    } else if (bestModelTier !== 'frontier' || !extendedThinkingEnabled) {
+        const reason = bestModelTier !== 'frontier'
+            ? `Agent mode active with ${bestModelTier} model${accountLabel}. Frontier models (Claude Opus, GPT-5.2) require Copilot Pro or Business.${multiAccountHint}`
+            : `Agent mode active${accountLabel} but extended thinking is not enabled. Enable for maximum cognitive capability.`;
+        return { level: 3, reason };
+    }
+    return { level: 4, reason: `Advanced capability${accountLabel}: Frontier model + agent mode + extended thinking.` };
+}
+
+// ============================================================================
 // DETECTION
 // ============================================================================
 
@@ -309,83 +411,16 @@ export async function detectCognitiveLevel(forceRefresh = false): Promise<Cognit
         return cachedLevel;
     }
 
-    // ── Step 0: Check for Copilot extensions ────────────────────────
+    // Detect capabilities
     const copilotInstalled = !!vscode.extensions.getExtension('github.copilot');
     const copilotChatInstalled = !!vscode.extensions.getExtension('github.copilot-chat');
+    const gitHubAccount = await detectGitHubAccount();
+    const { hasModels, bestModelTier } = await detectBestModelTier();
 
-    // ── Step 0b: Detect active GitHub account ───────────────────────
-    let gitHubAccount: GitHubAccountInfo = {
-        label: '',
-        signedIn: false,
-        sessionCount: 0,
-        accountHint: 'unknown',
-    };
-
-    try {
-        // Silent check — don't prompt for sign-in
-        const session = await vscode.authentication.getSession('github', ['user:email'], { createIfNone: false });
-        if (session) {
-            gitHubAccount.label = session.account.label;
-            gitHubAccount.signedIn = true;
-            gitHubAccount.sessionCount = 1;
-        }
-
-        // Check for multiple accounts (Enterprise users often have both)
-        // The 'github-enterprise' provider indicates a corporate account
-        try {
-            const enterpriseSession = await vscode.authentication.getSession('github-enterprise', [], { createIfNone: false });
-            if (enterpriseSession) {
-                gitHubAccount.sessionCount++;
-                // If we didn't have a personal session, use enterprise info
-                if (!gitHubAccount.signedIn) {
-                    gitHubAccount.label = enterpriseSession.account.label;
-                    gitHubAccount.signedIn = true;
-                }
-            }
-        } catch {
-            // github-enterprise provider may not exist — that's fine
-        }
-    } catch {
-        // Authentication API unavailable — proceed without account info
-    }
-
-    // ── Step 1: Check for available language models ─────────────────
-    let hasModels = false;
-    let bestModelTier = 'unknown';
-
-    try {
-        const models = await vscode.lm.selectChatModels();
-        hasModels = models.length > 0;
-
-        if (hasModels) {
-            // Classify the best available model
-            for (const model of models) {
-                const id = `${model.family} ${model.name} ${model.id}`.toLowerCase();
-
-                if (/opus|gpt-5\.[2-9]|gpt-5-turbo|o1-pro|o3/.test(id)) {
-                    bestModelTier = 'frontier';
-                    break; // Can't do better than frontier
-                } else if (/sonnet|gpt-4o|gpt-5|gemini.*pro|o1/.test(id) && bestModelTier !== 'frontier') {
-                    bestModelTier = 'capable';
-                } else if (/haiku|mini|gpt-4\.1|flash/.test(id) && bestModelTier === 'unknown') {
-                    bestModelTier = 'efficient';
-                }
-            }
-        }
-    } catch {
-        // vscode.lm may not be available — Level 1
-        hasModels = false;
-    }
-
-    // ── Step 2: Check agent mode setting ────────────────────────────
+    // Check settings
     const chatConfig = vscode.workspace.getConfiguration('chat');
     const agentModeEnabled = chatConfig.get<boolean>('agent.enabled', false);
 
-    // ── Step 3: Check extended thinking ─────────────────────────────
-    // VS Code has used multiple setting paths across versions:
-    //   - github.copilot.chat.agent.thinkingTool (current, 1.109+)
-    //   - chat.extendedThinking.enabled (older)
-    //   - github.copilot.chat.models.anthropic.claude-opus-4-*.extendedThinkingEnabled (per-model)
     const copilotAgentConfig = vscode.workspace.getConfiguration('github.copilot.chat.agent');
     const copilotModelsConfig = vscode.workspace.getConfiguration('github.copilot.chat.models.anthropic');
     const extendedThinkingEnabled =
@@ -394,73 +429,26 @@ export async function detectCognitiveLevel(forceRefresh = false): Promise<Cognit
         copilotModelsConfig.get<boolean>('claude-opus-4-6.extendedThinkingEnabled', false) ||
         copilotModelsConfig.get<boolean>('claude-opus-4-5.extendedThinkingEnabled', false);
 
-    // ── Step 4: Check MCP gallery ───────────────────────────────────
     const mcpGalleryEnabled = chatConfig.get<boolean>('mcp.gallery.enabled', false);
-
-    // ── Step 5: Check Copilot Memory ────────────────────────────────
     const copilotMemoryEnabled =
         vscode.workspace.getConfiguration('github.copilot.chat').get<boolean>('copilotMemory.enabled', false);
 
-    // ── Step 6: Classify account type from model availability ─────
-    // Note: We can't reliably distinguish Pro from Business by model tier alone,
-    // so we use broad categories: 'pro' (frontier), 'paid' (capable), 'free' (efficient).
-    if (gitHubAccount.signedIn) {
-        if (bestModelTier === 'frontier') {
-            gitHubAccount.accountHint = 'pro'; // Pro/Business/Enterprise with frontier access
-        } else if (hasModels && (bestModelTier === 'capable' || bestModelTier === 'efficient')) {
-            // Both Pro and Business can have capable models; free tier may have efficient
-            // We can't distinguish further without subscription API access
-            gitHubAccount.accountHint = 'unknown';
-        }
+    // Classify account type from model availability
+    if (gitHubAccount.signedIn && bestModelTier === 'frontier') {
+        gitHubAccount.accountHint = 'pro';
     }
 
-    // ── Step 7: Determine cognitive level ───────────────────────────
-    let level: CognitiveLevel;
-    let reason: string;
-
-    const accountLabel = gitHubAccount.signedIn ? ` (signed in as ${gitHubAccount.label})` : '';
-    const multiAccountHint = gitHubAccount.sessionCount > 1
-        ? ' You have multiple GitHub accounts — try switching accounts if your current plan lacks frontier models.'
-        : '';
-
-    if (!hasModels) {
-        level = 1;
-        reason = !copilotInstalled
-            ? 'GitHub Copilot extension is not installed. Install it from the Extensions panel to unlock AI features.'
-            : !copilotChatInstalled
-                ? 'GitHub Copilot Chat extension is not installed. Install it to enable chat and agent mode.'
-                : gitHubAccount.signedIn
-                    ? `No language models detected${accountLabel}. Your account may not have an active Copilot subscription. Check your GitHub Copilot settings.${multiAccountHint}`
-                    : 'No language models detected. Sign in to GitHub Copilot to activate AI capabilities.';
-    } else if (!agentModeEnabled) {
-        level = 2;
-        reason = `Copilot Chat available${accountLabel} but agent mode is disabled. Enable "chat.agent.enabled" for full tool access.`;
-    } else if (bestModelTier !== 'frontier' || !extendedThinkingEnabled) {
-        level = 3;
-        if (agentModeEnabled && bestModelTier !== 'frontier') {
-            reason = `Agent mode active with ${bestModelTier} model${accountLabel}. ` +
-                `Frontier models (Claude Opus, GPT-5.2) require Copilot Pro or Business.${multiAccountHint}`;
-        } else {
-            reason = `Agent mode active${accountLabel} but extended thinking is not enabled. Enable for maximum cognitive capability.`;
-        }
-    } else {
-        level = 4;
-        reason = `Advanced capability${accountLabel}: Frontier model + agent mode + extended thinking.`;
-    }
+    // Determine level
+    const { level, reason } = classifyCognitiveLevel(
+        hasModels, agentModeEnabled, extendedThinkingEnabled,
+        bestModelTier, copilotInstalled, copilotChatInstalled, gitHubAccount
+    );
 
     const result: CognitiveLevelResult = {
-        level,
-        tierInfo: COGNITIVE_TIERS[level],
-        hasModels,
-        agentModeEnabled,
-        extendedThinkingEnabled,
-        mcpGalleryEnabled,
-        copilotMemoryEnabled,
-        bestModelTier,
-        reason,
-        copilotInstalled,
-        copilotChatInstalled,
-        gitHubAccount,
+        level, tierInfo: COGNITIVE_TIERS[level],
+        hasModels, agentModeEnabled, extendedThinkingEnabled,
+        mcpGalleryEnabled, copilotMemoryEnabled, bestModelTier, reason,
+        copilotInstalled, copilotChatInstalled, gitHubAccount,
     };
 
     cachedLevel = result;

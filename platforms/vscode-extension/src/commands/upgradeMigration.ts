@@ -144,6 +144,80 @@ Ask Alex: "Help me migrate my previous settings"
 }
 
 /**
+ * Execute migration for each checked item from backup to workspace
+ */
+async function executeMigrationItems(
+  checkedItems: string[],
+  backupPath: string,
+  rootPath: string,
+  progress: vscode.Progress<{ message?: string }>
+): Promise<{ migrated: string[]; errors: string[] }> {
+  const migrated: string[] = [];
+  const errors: string[] = [];
+
+  for (const item of checkedItems) {
+    progress.report({ message: path.basename(item) });
+
+    try {
+      const arrowMatch = item.match(/^(.+?)\s*→\s*(.+)$/);
+      let src: string;
+      let dest: string;
+
+      if (arrowMatch) {
+        src = path.join(backupPath, arrowMatch[1].trim());
+        dest = path.join(rootPath, arrowMatch[2].trim());
+      } else {
+        src = path.join(backupPath, item);
+        dest = path.join(rootPath, item);
+      }
+
+      if (await fs.pathExists(src)) {
+        await fs.ensureDir(path.dirname(dest));
+        await fs.copy(src, dest, { overwrite: true });
+        
+        // For DK → skill migration, create a minimal synapses.json if it doesn't exist
+        if (arrowMatch && dest.endsWith('SKILL.md') && dest.includes('.github/skills/')) {
+          const skillDir = path.dirname(dest);
+          const synapsesPath = path.join(skillDir, 'synapses.json');
+          if (!await fs.pathExists(synapsesPath)) {
+            const skillName = path.basename(skillDir);
+            const minimalSynapses = {
+              $schema: '../SYNAPSE-SCHEMA.json',
+              skillId: skillName,
+              version: '1.0.0',
+              lastUpdated: new Date().toISOString().split('T')[0],
+              inheritance: 'inheritable',
+              connections: [],
+              activationContexts: [],
+              notes: `Migrated from DK file: ${path.basename(arrowMatch[1].trim())}`
+            };
+            await fs.writeJson(synapsesPath, minimalSynapses, { spaces: 2 });
+          }
+        }
+        
+        migrated.push(item);
+      } else {
+        errors.push(`Not found: ${item}`);
+      }
+    } catch (err: unknown) {
+      errors.push(`${item}: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+
+  // Normalize synapses for all migrated skills
+  progress.report({ message: "Normalizing synapses..." });
+  const skillsDir = path.join(rootPath, '.github', 'skills');
+  if (await fs.pathExists(skillsDir)) {
+    const synapseResult = await normalizeAllSynapses(skillsDir);
+    if (synapseResult.normalized > 0) {
+      migrated.push(`(${synapseResult.normalized} synapse files normalized)`);
+    }
+  }
+
+  return { migrated, errors };
+}
+
+/**
  * Process checked items from MIGRATION-CANDIDATES.md
  */
 export async function completeMigration(context: vscode.ExtensionContext): Promise<void> {
@@ -170,7 +244,6 @@ export async function completeMigration(context: vscode.ExtensionContext): Promi
   const checkedPattern = /- \[x\] `([^`]+)`/gi;
   const checkedItems: string[] = [];
   let match;
-  
   while ((match = checkedPattern.exec(content)) !== null) {
     checkedItems.push(match[1]);
   }
@@ -183,7 +256,6 @@ export async function completeMigration(context: vscode.ExtensionContext): Promi
       "Delete Migration Guide",
       "Cancel"
     );
-
     if (result === "Open Migration Guide") {
       const doc = await vscode.workspace.openTextDocument(candidatesPath);
       await vscode.window.showTextDocument(doc);
@@ -207,107 +279,29 @@ export async function completeMigration(context: vscode.ExtensionContext): Promi
     return;
   }
 
-  // Confirm migration
   const confirm = await vscode.window.showInformationMessage(
     `Migrate ${checkedItems.length} item(s)?`,
     { modal: true },
     "Yes, Migrate",
     "Cancel"
   );
-
-  if (confirm !== "Yes, Migrate") {return;}
+  if (confirm !== "Yes, Migrate") { return; }
 
   // Execute migration
-  const migrated: string[] = [];
-  const errors: string[] = [];
-
-  await vscode.window.withProgress(
-    {
-      location: vscode.ProgressLocation.Notification,
-      title: "Migrating...",
-      cancellable: false,
-    },
-    async (progress) => {
-      for (const item of checkedItems) {
-        progress.report({ message: path.basename(item) });
-
-        try {
-          // Handle the → syntax for DK to skill conversion
-          const arrowMatch = item.match(/^(.+?)\s*→\s*(.+)$/);
-          let src: string;
-          let dest: string;
-
-          if (arrowMatch) {
-            src = path.join(backupPath, arrowMatch[1].trim());
-            dest = path.join(rootPath, arrowMatch[2].trim());
-          } else {
-            src = path.join(backupPath, item);
-            dest = path.join(rootPath, item);
-          }
-
-          if (await fs.pathExists(src)) {
-            await fs.ensureDir(path.dirname(dest));
-            await fs.copy(src, dest, { overwrite: true });
-            
-            // For DK → skill migration, create a minimal synapses.json if it doesn't exist
-            if (arrowMatch && dest.endsWith('SKILL.md') && dest.includes('.github/skills/')) {
-              const skillDir = path.dirname(dest);
-              const synapsesPath = path.join(skillDir, 'synapses.json');
-              if (!await fs.pathExists(synapsesPath)) {
-                // Extract skill name from directory path
-                const skillName = path.basename(skillDir);
-                const minimalSynapses = {
-                  $schema: '../SYNAPSE-SCHEMA.json',
-                  skillId: skillName,
-                  version: '1.0.0',
-                  lastUpdated: new Date().toISOString().split('T')[0],
-                  inheritance: 'inheritable',
-                  connections: [],
-                  activationContexts: [],
-                  notes: `Migrated from DK file: ${path.basename(arrowMatch[1].trim())}`
-                };
-                await fs.writeJson(synapsesPath, minimalSynapses, { spaces: 2 });
-              }
-            }
-            
-            migrated.push(item);
-          } else {
-            errors.push(`Not found: ${item}`);
-          }
-        } catch (err: unknown) {
-          errors.push(`${item}: ${err instanceof Error ? err.message : String(err)}`);
-        }
-      }
-
-      // Normalize synapses for all migrated skills (upgrade to current schema)
-      progress.report({ message: "Normalizing synapses..." });
-      const skillsDir = path.join(rootPath, '.github', 'skills');
-      if (await fs.pathExists(skillsDir)) {
-        const synapseResult = await normalizeAllSynapses(skillsDir);
-        if (synapseResult.normalized > 0) {
-          migrated.push(`(${synapseResult.normalized} synapse files normalized)`);
-        }
-      }
-    }
+  const { migrated, errors } = await vscode.window.withProgress(
+    { location: vscode.ProgressLocation.Notification, title: "Migrating...", cancellable: false },
+    async (progress) => executeMigrationItems(checkedItems, backupPath, rootPath, progress)
   );
 
-  // Delete migration candidates file
   await fs.remove(candidatesPath);
 
   // Show results
-  let message = `✅ Migration complete!\n\n` +
-    `Migrated: ${migrated.length} item(s)`;
-
+  let message = `✅ Migration complete!\n\nMigrated: ${migrated.length} item(s)`;
   if (errors.length > 0) {
     message += `\n⚠️ Errors: ${errors.length}`;
   }
 
-  const result = await vscode.window.showInformationMessage(
-    message,
-    "Run Dream Check",
-    "OK"
-  );
-
+  const result = await vscode.window.showInformationMessage(message, "Run Dream Check", "OK");
   if (result === "Run Dream Check") {
     await vscode.commands.executeCommand("alex.dream");
   }

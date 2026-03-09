@@ -21,6 +21,84 @@ const STRENGTH_MAP: Record<string, number> = {
 };
 
 /**
+ * Normalize a single connection object to current schema
+ * Returns true if any modification was made
+ */
+function normalizeConnection(conn: Record<string, any>): boolean {
+  let modified = false;
+
+  // Convert string strength to numeric
+  if (typeof conn.strength === 'string') {
+    const key = conn.strength.toLowerCase();
+    if (STRENGTH_MAP[key] !== undefined) {
+      conn.strength = STRENGTH_MAP[key];
+      modified = true;
+    }
+  }
+
+  // Convert relationship → type
+  if (conn.relationship && !conn.type) {
+    conn.type = conn.relationship.toUpperCase();
+    delete conn.relationship;
+    modified = true;
+  }
+
+  // Convert context → when + yields
+  if (conn.context && !conn.when && !conn.yields) {
+    conn.when = conn.context;
+    conn.yields = 'See target skill';
+    delete conn.context;
+    modified = true;
+  }
+
+  // Remove deprecated direction field
+  if (conn.direction) {
+    if (conn.direction.toLowerCase() === 'bidirectional' && !conn.bidirectional) {
+      conn.bidirectional = true;
+    }
+    delete conn.direction;
+    modified = true;
+  }
+
+  // Fix relative paths to absolute from .github
+  if (conn.target && conn.target.startsWith('../')) {
+    conn.target = '.github/skills/' + conn.target.replace(/^\.\.\//, '');
+    modified = true;
+  }
+
+  // Remove activation field (deprecated)
+  if (conn.activation) {
+    if (!conn.when) {
+      conn.when = conn.activation;
+      conn.yields = 'See target skill';
+    }
+    delete conn.activation;
+    modified = true;
+  }
+
+  return modified;
+}
+
+/**
+ * Write synapse JSON with consistent key ordering
+ */
+async function writeOrderedSynapseFile(synapsePath: string, json: Record<string, any>): Promise<void> {
+  const orderedJson: Record<string, any> = {};
+  const keyOrder = ['$schema', 'skillId', 'version', 'lastUpdated', 'inheritance', 'connections', 'activationContexts', 'notes'];
+  for (const key of keyOrder) {
+    if (json[key] !== undefined) {
+      orderedJson[key] = json[key];
+    }
+  }
+  for (const key of Object.keys(json)) {
+    if (!keyOrder.includes(key)) {
+      orderedJson[key] = json[key];
+    }
+  }
+  await fs.writeFile(synapsePath, JSON.stringify(orderedJson, null, 2) + '\n', 'utf8');
+}
+
+/**
  * Normalize a synapse file to current schema format
  * Handles: string→numeric strengths, synapses→connections, context→when+yields, 
  * activationKeywords→activationContexts, missing $schema/skillId/inheritance
@@ -31,132 +109,47 @@ async function normalizeSynapseFile(synapsePath: string): Promise<boolean> {
     const json = JSON.parse(content);
     let modified = false;
 
-    // Extract skill name from path
     const skillDir = path.dirname(synapsePath);
     const skillName = path.basename(skillDir);
 
     // 1. Add $schema if missing
-    if (!json.$schema) {
-      json.$schema = '../SYNAPSE-SCHEMA.json';
-      modified = true;
-    }
+    if (!json.$schema) { json.$schema = '../SYNAPSE-SCHEMA.json'; modified = true; }
 
     // 2. Normalize skill identifier (name → skillId)
-    if (json.name && !json.skillId) {
-      json.skillId = json.name;
-      delete json.name;
-      modified = true;
-    }
-    if (json.skill && !json.skillId) {
-      json.skillId = json.skill;
-      delete json.skill;
-      modified = true;
-    }
-    if (!json.skillId) {
-      json.skillId = skillName;
-      modified = true;
-    }
+    if (json.name && !json.skillId) { json.skillId = json.name; delete json.name; modified = true; }
+    if (json.skill && !json.skillId) { json.skillId = json.skill; delete json.skill; modified = true; }
+    if (!json.skillId) { json.skillId = skillName; modified = true; }
 
-    // 3. inheritance field is now centralized in sync-architecture.cjs — remove if present
-    if (json.inheritance) {
-      delete json.inheritance;
-      modified = true;
-    }
+    // 3. Remove inheritance (centralized in sync-architecture.cjs)
+    if (json.inheritance) { delete json.inheritance; modified = true; }
 
     // 4. Add lastUpdated if missing
-    if (!json.lastUpdated) {
-      json.lastUpdated = new Date().toISOString().split('T')[0];
-      modified = true;
-    }
+    if (!json.lastUpdated) { json.lastUpdated = new Date().toISOString().split('T')[0]; modified = true; }
 
-    // 5. Rename synapses → connections (legacy array name)
-    if (json.synapses && !json.connections) {
-      json.connections = json.synapses;
-      delete json.synapses;
-      modified = true;
-    }
+    // 5. Rename synapses → connections
+    if (json.synapses && !json.connections) { json.connections = json.synapses; delete json.synapses; modified = true; }
 
     // 6. Normalize connections array
     if (json.connections && Array.isArray(json.connections)) {
       for (const conn of json.connections) {
-        // Convert string strength to numeric
-        if (typeof conn.strength === 'string') {
-          const key = conn.strength.toLowerCase();
-          if (STRENGTH_MAP[key] !== undefined) {
-            conn.strength = STRENGTH_MAP[key];
-            modified = true;
-          }
-        }
-
-        // Convert relationship → type
-        if (conn.relationship && !conn.type) {
-          conn.type = conn.relationship.toUpperCase();
-          delete conn.relationship;
-          modified = true;
-        }
-
-        // Convert context → when + yields (if not already present)
-        if (conn.context && !conn.when && !conn.yields) {
-          // Best effort: use context as 'when', leave yields empty
-          conn.when = conn.context;
-          conn.yields = 'See target skill';
-          delete conn.context;
-          modified = true;
-        }
-
-        // Remove deprecated direction field
-        if (conn.direction) {
-          // Convert direction to bidirectional flag if needed
-          if (conn.direction.toLowerCase() === 'bidirectional' && !conn.bidirectional) {
-            conn.bidirectional = true;
-          }
-          delete conn.direction;
-          modified = true;
-        }
-
-        // Fix relative paths to absolute from .github
-        if (conn.target && conn.target.startsWith('../')) {
-          conn.target = '.github/skills/' + conn.target.replace(/^\.\.\//, '');
-          modified = true;
-        }
-
-        // Remove activation field (deprecated)
-        if (conn.activation) {
-          if (!conn.when) {
-            conn.when = conn.activation;
-            conn.yields = 'See target skill';
-          }
-          delete conn.activation;
-          modified = true;
-        }
+        if (normalizeConnection(conn)) { modified = true; }
       }
     }
 
-    // 7. Rename activationKeywords/activationTriggers/activationPatterns → activationContexts
-    if (json.activationKeywords && !json.activationContexts) {
-      json.activationContexts = json.activationKeywords;
-      delete json.activationKeywords;
-      modified = true;
-    }
-    if (json.activationTriggers && !json.activationContexts) {
-      json.activationContexts = json.activationTriggers;
-      delete json.activationTriggers;
-      modified = true;
-    }
-    if (json.activationPatterns && !json.activationContexts) {
-      json.activationContexts = json.activationPatterns;
-      delete json.activationPatterns;
-      modified = true;
+    // 7. Rename activation keywords/triggers/patterns → activationContexts
+    for (const legacy of ['activationKeywords', 'activationTriggers', 'activationPatterns']) {
+      if (json[legacy] && !json.activationContexts) {
+        json.activationContexts = json[legacy];
+        delete json[legacy];
+        modified = true;
+      }
     }
 
     // 8. Remove deprecated fields
     const deprecatedFields = ['actionKeywords', 'relatedSkills', 'knowledgeDomains', 'sourceFile', 'description', 'domain', 'status', 'created', 'updated'];
     for (const field of deprecatedFields) {
       if (json[field]) {
-        // Move useful info to notes if not already there
-        if (field === 'description' && !json.notes) {
-          json.notes = json[field];
-        }
+        if (field === 'description' && !json.notes) { json.notes = json[field]; }
         delete json[field];
         modified = true;
       }
@@ -166,29 +159,12 @@ async function normalizeSynapseFile(synapsePath: string): Promise<boolean> {
     if (modified && json.version) {
       const vParts = json.version.split('.');
       if (vParts.length >= 2) {
-        const minor = parseInt(vParts[1], 10) + 1;
-        json.version = `${vParts[0]}.${minor}.0`;
+        json.version = `${vParts[0]}.${parseInt(vParts[1], 10) + 1}.0`;
       }
     }
 
-    // Write back if modified
     if (modified) {
-      // Reorder keys for consistency
-      const orderedJson: Record<string, any> = {};
-      const keyOrder = ['$schema', 'skillId', 'version', 'lastUpdated', 'inheritance', 'connections', 'activationContexts', 'notes'];
-      for (const key of keyOrder) {
-        if (json[key] !== undefined) {
-          orderedJson[key] = json[key];
-        }
-      }
-      // Add any remaining keys
-      for (const key of Object.keys(json)) {
-        if (!keyOrder.includes(key)) {
-          orderedJson[key] = json[key];
-        }
-      }
-
-      await fs.writeFile(synapsePath, JSON.stringify(orderedJson, null, 2) + '\n', 'utf8');
+      await writeOrderedSynapseFile(synapsePath, json);
     }
 
     return modified;

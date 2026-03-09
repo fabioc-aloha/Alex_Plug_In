@@ -208,9 +208,7 @@ async function performInitialization(
     telemetry.logError(
       "initialize_corrupted_extension",
       new Error("Missing core files"),
-      {
-        requiredSource,
-      },
+      { requiredSource },
     );
     vscode.window.showErrorMessage(
       "Extension installation appears corrupted - missing core files.\n\n" +
@@ -225,262 +223,249 @@ async function performInitialization(
     extensionPath: path.basename(extensionPath),
   });
 
-  // Define source and destination paths
-  // Note: domain-knowledge is deprecated - DK files are now migrated to skills
-  // Note: episodic/ is created empty (populated at runtime by meditation/dream sessions)
-  const sources = [
-    {
-      src: path.join(extensionPath, ".github", "copilot-instructions.md"),
-      dest: path.join(rootPath, ".github", "copilot-instructions.md"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "instructions"),
-      dest: path.join(rootPath, ".github", "instructions"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "prompts"),
-      dest: path.join(rootPath, ".github", "prompts"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "config"),
-      dest: path.join(rootPath, ".github", "config"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "agents"),
-      dest: path.join(rootPath, ".github", "agents"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "skills"),
-      dest: path.join(rootPath, ".github", "skills"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "muscles"),
-      dest: path.join(rootPath, ".github", "muscles"),
-    },
-    {
-      src: path.join(extensionPath, ".github", "assets"),
-      dest: path.join(rootPath, ".github", "assets"),
-    },
-    // Note: markdown-light.css is now in .github/config/ and gets copied with config folder
-    // applyMarkdownStyles() will copy it to .vscode/ for markdown.styles to work
-  ];
-
-  // Folders to create empty (populated at runtime, not shipped in VSIX)
-  const emptyFolders = [
-    path.join(rootPath, ".github", "episodic"),
-  ];
-
   try {
-    // Test write permissions first
-    telemetry.log("command", "initialize_testing_permissions");
-    const testDir = path.join(rootPath, ".github");
-    await fs.ensureDir(testDir);
-    const testFile = path.join(testDir, ".write-test");
-    try {
-      await fs.writeFile(testFile, "test");
-      await fs.remove(testFile);
-      telemetry.log("command", "initialize_permissions_ok");
-    } catch (permError: any) {
-      const permErrorMessage =
-        permError instanceof Error ? permError.message : String(permError);
-      telemetry.logError("initialize_permission_denied", permError);
-      throw new Error(
-        `Cannot write to workspace - check folder permissions: ${permErrorMessage || "Permission denied"}`,
-      );
-    }
-
-    let copiedCount = 0;
-    let skippedCount = 0;
-
-    await vscode.window.withProgress(
-      {
-        location: vscode.ProgressLocation.Notification,
-        title: "Initializing Alex Cognitive Architecture...",
-        cancellable: false,
-      },
-      async (progress) => {
-        for (const item of sources) {
-          progress.report({
-            message: `Copying ${path.basename(item.dest)}...`,
-          });
-          if (await fs.pathExists(item.src)) {
-            try {
-              await fs.copy(item.src, item.dest, { overwrite: overwrite });
-              copiedCount++;
-              telemetry.log("command", "initialize_copied", {
-                item: path.basename(item.dest),
-              });
-            } catch (copyErr) {
-              telemetry.logError("initialize_copy_failed", copyErr, {
-                item: path.basename(item.dest),
-              });
-              throw copyErr;
-            }
-          } else {
-            skippedCount++;
-            telemetry.log("command", "initialize_source_missing", {
-              item: path.basename(item.src),
-            });
-            console.warn(`Source not found: ${item.src}`);
-          }
-        }
-
-        // Create empty runtime folders
-        for (const folder of emptyFolders) {
-          await fs.ensureDir(folder);
-        }
-
-        // Create manifest with checksums of all deployed files
-        progress.report({ message: "Creating manifest..." });
-        try {
-          await createInitialManifest(context, rootPath);
-          telemetry.log("command", "initialize_manifest_created");
-        } catch (manifestErr) {
-          telemetry.logError("initialize_manifest_failed", manifestErr);
-          throw manifestErr;
-        }
-      },
+    // Deploy architecture files (sources + permissions + copy + manifest)
+    const { copiedCount, skippedCount } = await deployArchitectureFiles(
+      context, extensionPath, rootPath, overwrite,
     );
 
-    telemetry.log("command", "initialize_copy_complete", {
-      copiedCount,
-      skippedCount,
-    });
+    telemetry.log("command", "initialize_copy_complete", { copiedCount, skippedCount });
 
-    // Apply markdown preview CSS (always, regardless of settings choice)
-    // This ensures proper markdown rendering even if user skips settings wizard
+    // Apply markdown preview CSS
     await applyMarkdownStyles();
 
     // Detect persona early - reused for GK offer
     // Don't update Active Context during init — deploy clean architecture with placeholder state.
-    // The chat participant will update persona and focus trifectas on first conversation.
-    let personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
+    const personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
     const persona = personaResult?.persona ?? PERSONAS.find(p => p.id === 'developer')!;
-    
+
     if (personaResult) {
       telemetry.log("command", "initialize_persona_detected", {
         persona: personaResult.persona.id,
         skill: personaResult.persona.skill,
-        confidence: personaResult.confidence
+        confidence: personaResult.confidence,
       });
     }
 
-    // Check for Global Knowledge repository (GitHub repo as sibling folder)
-    try {
-      const existingGkRepo = await detectGlobalKnowledgeRepo();
-      if (existingGkRepo) {
-        
-        // Offer to create or connect to a GK repository with premium features teaser
-        const parentDir = path.dirname(rootPath);
-        const gkRepoName = "Alex-Global-Knowledge";
-        const gkRepoPath = path.join(parentDir, gkRepoName);
-        
-        // Build personalized message
-        const personalizedHook = `${persona.icon} ${persona.hook}`;
-        const premiumFeatures = [
-          "⭐ Search Knowledge — Find patterns instantly",
-          "💡 Save Insights — Capture debugging discoveries",
-          "📈 Promote Patterns — Share solutions globally",
-          "👥 Team Sharing — GitHub collaboration built-in"
-        ].join("\n");
-        
-        const gkChoice = await vscode.window.showInformationMessage(
-          `📚 Global Knowledge Repository\n\n${personalizedHook}\n\nUnlock ⭐ Premium Features:\n${premiumFeatures}\n\nHow would you like to set up Global Knowledge?`,
-          { modal: true },
-          "Create New",
-          "Connect GitHub",
-          "Skip for Now"
-        );
-        
-        if (gkChoice === "Create New") {
-          telemetry.log("command", "initialize_global_knowledge_create", {
-            persona: persona.id,
-            confidence: personaResult?.confidence ?? 0
-          });
-          
-          // Scaffold the repository structure
-          await scaffoldGlobalKnowledgeRepo(gkRepoPath);
-          
-          vscode.window.showInformationMessage(
-            `✅ Global Knowledge repository created at ${gkRepoPath}\n\n🚀 Next steps:\n1. cd "${gkRepoPath}"\n2. git init && git add -A && git commit -m "feat: initialize global knowledge"\n3. gh repo create ${gkRepoName} --private --source=. --push\n\nYour ⭐ premium features are now unlocked!`,
-            { modal: false }
-          );
-          
-          telemetry.log("command", "initialize_global_knowledge_created", {
-            repoPath: gkRepoPath,
-            persona: persona.id
-          });
-        } else if (gkChoice === "Connect GitHub") {
-          // Prompt for GitHub owner (repo name is standardized)
-          const ownerInput = await vscode.window.showInputBox({
-            title: "Connect to GitHub Global Knowledge",
-            prompt: "Enter the GitHub owner/org name (repo is standardized as 'Alex-Global-Knowledge')",
-            placeHolder: "fabioc-aloha",
-            validateInput: (value) => {
-              if (!value) {
-                return "Owner name is required";
-              }
-              if (value.includes(' ')) {
-                return "Owner name cannot contain spaces";
-              }
-              return undefined;
-            }
-          });
-          
-          if (ownerInput) {
-            // Save just the owner - code will auto-append standard repo name
-            await vscode.workspace.getConfiguration('alex.globalKnowledge').update(
-              'remoteRepo', 
-              ownerInput.trim(), 
-              vscode.ConfigurationTarget.Global
-            );
-            
-            const fullRepo = ownerInput.includes('/') ? ownerInput : `${ownerInput}/Alex-Global-Knowledge`;
-            vscode.window.showInformationMessage(
-              `✅ Connected to GitHub: ${fullRepo}\n\nAlex can now read your Global Knowledge directly from GitHub. No local clone required!`,
-              { modal: false }
-            );
-            
-            telemetry.log("command", "initialize_global_knowledge_remote", {
-              persona: persona.id,
-              repo: ownerInput
-            });
-          }
-        } else {
-          telemetry.log("command", "initialize_global_knowledge_skipped", {
-            persona: persona.id
-          });
-        }
-      }
-    } catch (globalErr) {
-      // Non-fatal - log but continue
-      telemetry.logError("initialize_global_knowledge_failed", globalErr);
-      console.warn("[Alex] Failed to setup global knowledge:", globalErr);
-    }
+    // Offer Global Knowledge setup
+    await offerGlobalKnowledgeSetup(rootPath, persona, personaResult);
 
     // Offer environment setup (non-blocking)
     telemetry.log("command", "initialize_offering_setup");
     await offerEnvironmentSetup();
 
-    // Persona already detected and persisted above - just extract name for welcome
-    const detectedPersonaName = personaResult?.persona.name ?? '';
+    // Show success and offer next steps
+    await showInitSuccessAndGettingStarted(personaResult);
 
-    const result = await vscode.window.showInformationMessage(
-      '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Use @alex /status to check your setup\n3. Run "Alex: Dream" periodically for health checks',
-      "Getting Started",
-      "Open Chat",
+    // Migrate environment variables to secure storage
+    try {
+      await migrateSecretsFromEnvironment();
+    } catch (migrationErr) {
+      console.warn("[Alex] Failed to migrate secrets:", migrationErr);
+    }
+
+    done(true, { copiedCount, skippedCount });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error("Initialize failed:", error);
+    telemetry.logError("initialize_failed", error);
+    done(false, error instanceof Error ? error : new Error(errorMessage));
+    vscode.window.showErrorMessage(
+      `Failed to initialize Alex: ${errorMessage || "Unknown error"}\n\nTry closing VS Code, deleting the .github folder, and running initialize again.`,
+      { modal: true },
+    );
+  }
+}
+
+/**
+ * Deploy architecture files: define sources, test permissions, copy with progress, create manifest.
+ */
+async function deployArchitectureFiles(
+  context: vscode.ExtensionContext,
+  extensionPath: string,
+  rootPath: string,
+  overwrite: boolean,
+): Promise<{ copiedCount: number; skippedCount: number }> {
+  const sources = [
+    { src: path.join(extensionPath, ".github", "copilot-instructions.md"), dest: path.join(rootPath, ".github", "copilot-instructions.md") },
+    { src: path.join(extensionPath, ".github", "instructions"), dest: path.join(rootPath, ".github", "instructions") },
+    { src: path.join(extensionPath, ".github", "prompts"), dest: path.join(rootPath, ".github", "prompts") },
+    { src: path.join(extensionPath, ".github", "config"), dest: path.join(rootPath, ".github", "config") },
+    { src: path.join(extensionPath, ".github", "agents"), dest: path.join(rootPath, ".github", "agents") },
+    { src: path.join(extensionPath, ".github", "skills"), dest: path.join(rootPath, ".github", "skills") },
+    { src: path.join(extensionPath, ".github", "muscles"), dest: path.join(rootPath, ".github", "muscles") },
+    { src: path.join(extensionPath, ".github", "assets"), dest: path.join(rootPath, ".github", "assets") },
+  ];
+
+  const emptyFolders = [path.join(rootPath, ".github", "episodic")];
+
+  // Test write permissions
+  telemetry.log("command", "initialize_testing_permissions");
+  const testDir = path.join(rootPath, ".github");
+  await fs.ensureDir(testDir);
+  const testFile = path.join(testDir, ".write-test");
+  try {
+    await fs.writeFile(testFile, "test");
+    await fs.remove(testFile);
+    telemetry.log("command", "initialize_permissions_ok");
+  } catch (permError: any) {
+    const permErrorMessage = permError instanceof Error ? permError.message : String(permError);
+    telemetry.logError("initialize_permission_denied", permError);
+    throw new Error(`Cannot write to workspace - check folder permissions: ${permErrorMessage || "Permission denied"}`);
+  }
+
+  let copiedCount = 0;
+  let skippedCount = 0;
+
+  await vscode.window.withProgress(
+    { location: vscode.ProgressLocation.Notification, title: "Initializing Alex Cognitive Architecture...", cancellable: false },
+    async (progress) => {
+      for (const item of sources) {
+        progress.report({ message: `Copying ${path.basename(item.dest)}...` });
+        if (await fs.pathExists(item.src)) {
+          try {
+            await fs.copy(item.src, item.dest, { overwrite });
+            copiedCount++;
+            telemetry.log("command", "initialize_copied", { item: path.basename(item.dest) });
+          } catch (copyErr) {
+            telemetry.logError("initialize_copy_failed", copyErr, { item: path.basename(item.dest) });
+            throw copyErr;
+          }
+        } else {
+          skippedCount++;
+          telemetry.log("command", "initialize_source_missing", { item: path.basename(item.src) });
+          console.warn(`Source not found: ${item.src}`);
+        }
+      }
+
+      for (const folder of emptyFolders) {
+        await fs.ensureDir(folder);
+      }
+
+      progress.report({ message: "Creating manifest..." });
+      try {
+        await createInitialManifest(context, rootPath);
+        telemetry.log("command", "initialize_manifest_created");
+      } catch (manifestErr) {
+        telemetry.logError("initialize_manifest_failed", manifestErr);
+        throw manifestErr;
+      }
+    },
+  );
+
+  return { copiedCount, skippedCount };
+}
+
+/**
+ * Offer Global Knowledge repository setup (create new, connect GitHub, or skip).
+ */
+async function offerGlobalKnowledgeSetup(
+  rootPath: string,
+  persona: { id: string; icon: string; hook: string },
+  personaResult: { confidence: number } | null,
+): Promise<void> {
+  try {
+    const existingGkRepo = await detectGlobalKnowledgeRepo();
+    if (!existingGkRepo) { return; }
+
+    const parentDir = path.dirname(rootPath);
+    const gkRepoName = "Alex-Global-Knowledge";
+    const gkRepoPath = path.join(parentDir, gkRepoName);
+
+    const personalizedHook = `${persona.icon} ${persona.hook}`;
+    const premiumFeatures = [
+      "⭐ Search Knowledge — Find patterns instantly",
+      "💡 Save Insights — Capture debugging discoveries",
+      "📈 Promote Patterns — Share solutions globally",
+      "👥 Team Sharing — GitHub collaboration built-in",
+    ].join("\n");
+
+    const gkChoice = await vscode.window.showInformationMessage(
+      `📚 Global Knowledge Repository\n\n${personalizedHook}\n\nUnlock ⭐ Premium Features:\n${premiumFeatures}\n\nHow would you like to set up Global Knowledge?`,
+      { modal: true },
+      "Create New",
+      "Connect GitHub",
+      "Skip for Now",
     );
 
-    if (result === "Getting Started") {
-      // Show detailed getting started panel
-      const panel = vscode.window.createWebviewPanel(
-        "alexGettingStarted",
-        "Alex - Getting Started",
-        vscode.ViewColumn.One,
-        { enableScripts: false },
+    if (gkChoice === "Create New") {
+      telemetry.log("command", "initialize_global_knowledge_create", {
+        persona: persona.id, confidence: personaResult?.confidence ?? 0,
+      });
+      await scaffoldGlobalKnowledgeRepo(gkRepoPath);
+      vscode.window.showInformationMessage(
+        `✅ Global Knowledge repository created at ${gkRepoPath}\n\n🚀 Next steps:\n1. cd "${gkRepoPath}"\n2. git init && git add -A && git commit -m "feat: initialize global knowledge"\n3. gh repo create ${gkRepoName} --private --source=. --push\n\nYour ⭐ premium features are now unlocked!`,
+        { modal: false },
       );
+      telemetry.log("command", "initialize_global_knowledge_created", {
+        repoPath: gkRepoPath, persona: persona.id,
+      });
+    } else if (gkChoice === "Connect GitHub") {
+      const ownerInput = await vscode.window.showInputBox({
+        title: "Connect to GitHub Global Knowledge",
+        prompt: "Enter the GitHub owner/org name (repo is standardized as 'Alex-Global-Knowledge')",
+        placeHolder: "fabioc-aloha",
+        validateInput: (value) => {
+          if (!value) { return "Owner name is required"; }
+          if (value.includes(' ')) { return "Owner name cannot contain spaces"; }
+          return undefined;
+        },
+      });
+      if (ownerInput) {
+        await vscode.workspace.getConfiguration('alex.globalKnowledge').update(
+          'remoteRepo', ownerInput.trim(), vscode.ConfigurationTarget.Global,
+        );
+        const fullRepo = ownerInput.includes('/') ? ownerInput : `${ownerInput}/Alex-Global-Knowledge`;
+        vscode.window.showInformationMessage(
+          `✅ Connected to GitHub: ${fullRepo}\n\nAlex can now read your Global Knowledge directly from GitHub. No local clone required!`,
+          { modal: false },
+        );
+        telemetry.log("command", "initialize_global_knowledge_remote", { persona: persona.id, repo: ownerInput });
+      }
+    } else {
+      telemetry.log("command", "initialize_global_knowledge_skipped", { persona: persona.id });
+    }
+  } catch (globalErr) {
+    telemetry.logError("initialize_global_knowledge_failed", globalErr);
+    console.warn("[Alex] Failed to setup global knowledge:", globalErr);
+  }
+}
 
-      panel.webview.html = `<!DOCTYPE html>
+/**
+ * Show initialization success message and optionally the Getting Started webview panel.
+ */
+async function showInitSuccessAndGettingStarted(
+  personaResult: { persona: { name: string } } | null,
+): Promise<void> {
+  const result = await vscode.window.showInformationMessage(
+    '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Use @alex /status to check your setup\n3. Run "Alex: Dream" periodically for health checks',
+    "Getting Started",
+    "Open Chat",
+  );
+
+  if (result === "Getting Started") {
+    const panel = vscode.window.createWebviewPanel(
+      "alexGettingStarted",
+      "Alex - Getting Started",
+      vscode.ViewColumn.One,
+      { enableScripts: false },
+    );
+    panel.webview.html = getGettingStartedHtml();
+  } else if (result === "Open Chat") {
+    vscode.commands.executeCommand('workbench.action.chat.open', {
+      query: '@alex /status',
+      isPartialQuery: false,
+    });
+  }
+
+  telemetry.log("command", "initialize_user_choice", { choice: result || "dismissed" });
+}
+
+/**
+ * HTML content for the Getting Started webview panel.
+ */
+function getGettingStartedHtml(): string {
+  return `<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline';">
@@ -503,67 +488,22 @@ async function performInitialization(
 <body>
     <h1>🧠 Welcome to Alex Cognitive Architecture!</h1>
     <p>Alex is now installed and ready to be your cognitive learning partner.</p>
-    
     <h2>🚀 Two Ways to Use Alex</h2>
-    
     <div class="important">
         <strong>Key Concept:</strong> Alex works in two modes - both are valid, choose based on your needs!
     </div>
-    
     <table>
-        <tr>
-            <th>Feature</th>
-            <th>Agent (default)</th>
-            <th>@alex</th>
-        </tr>
-        <tr>
-            <td>Alex personality & memory</td>
-            <td>✅ Automatic</td>
-            <td>✅ Automatic</td>
-        </tr>
-        <tr>
-            <td>Alex tools (synapse health, etc.)</td>
-            <td>✅ Available</td>
-            <td>✅ Available</td>
-        </tr>
-        <tr>
-            <td>Slash commands (/meditate, /dream)</td>
-            <td>❌</td>
-            <td>✅</td>
-        </tr>
-        <tr>
-            <td>Sticky conversation mode</td>
-            <td>❌</td>
-            <td>✅</td>
-        </tr>
+        <tr><th>Feature</th><th>Agent (default)</th><th>@alex</th></tr>
+        <tr><td>Alex personality & memory</td><td>✅ Automatic</td><td>✅ Automatic</td></tr>
+        <tr><td>Alex tools (synapse health, etc.)</td><td>✅ Available</td><td>✅ Available</td></tr>
+        <tr><td>Slash commands (/meditate, /dream)</td><td>❌</td><td>✅</td></tr>
+        <tr><td>Sticky conversation mode</td><td>❌</td><td>✅</td></tr>
     </table>
-    
     <h2>📋 Getting Started</h2>
-    
-    <div class="step">
-        <span class="step-number">1</span>
-        <strong>Open Copilot Chat</strong>
-        <p>Press <code>Ctrl+Alt+I</code> (or <code>Cmd+Alt+I</code> on Mac) to open GitHub Copilot Chat.</p>
-    </div>
-    
-    <div class="step">
-        <span class="step-number">2</span>
-        <strong>Just Start Chatting!</strong>
-        <p>With <strong>Agent (default)</strong> mode, Alex's personality and capabilities are already active. Just type your question!</p>
-    </div>
-    
-    <div class="step">
-        <span class="step-number">3</span>
-        <strong>Or Use @alex for Commands</strong>
-        <p>Type <code>@alex</code> to access slash commands like <code>/meditate</code>, <code>/dream</code>, <code>/knowledge</code>, etc.</p>
-    </div>
-    
-    <div class="step">
-        <span class="step-number">4</span>
-        <strong>Introduce Yourself</strong>
-        <p>Tell Alex your name and preferences! Say <em>"My name is [your name]"</em> to enable personalized interactions.</p>
-    </div>
-    
+    <div class="step"><span class="step-number">1</span><strong>Open Copilot Chat</strong><p>Press <code>Ctrl+Alt+I</code> (or <code>Cmd+Alt+I</code> on Mac) to open GitHub Copilot Chat.</p></div>
+    <div class="step"><span class="step-number">2</span><strong>Just Start Chatting!</strong><p>With <strong>Agent (default)</strong> mode, Alex's personality and capabilities are already active. Just type your question!</p></div>
+    <div class="step"><span class="step-number">3</span><strong>Or Use @alex for Commands</strong><p>Type <code>@alex</code> to access slash commands like <code>/meditate</code>, <code>/dream</code>, <code>/knowledge</code>, etc.</p></div>
+    <div class="step"><span class="step-number">4</span><strong>Introduce Yourself</strong><p>Tell Alex your name and preferences! Say <em>"My name is [your name]"</em> to enable personalized interactions.</p></div>
     <h2>🔧 Essential Commands</h2>
     <ul>
         <li><code>@alex /meditate</code> - Consolidate knowledge after learning sessions</li>
@@ -572,46 +512,10 @@ async function performInitialization(
         <li><code>@alex /saveinsight</code> - Save learnings for future projects</li>
         <li><code>@alex /status</code> - Check architecture status</li>
     </ul>
-    
-    <div class="tip">
-        <strong>💡 Pro Tip:</strong> Run <code>Alex: Dream (Neural Maintenance)</code> from the Command Palette periodically to keep your cognitive architecture healthy!
-    </div>
-    
-    <p style="margin-top: 24px; color: var(--vscode-descriptionForeground);">
-        <em>Questions? Just ask in Copilot Chat - Alex is ready to help!</em>
-    </p>
+    <div class="tip"><strong>💡 Pro Tip:</strong> Run <code>Alex: Dream (Neural Maintenance)</code> from the Command Palette periodically to keep your cognitive architecture healthy!</div>
+    <p style="margin-top: 24px; color: var(--vscode-descriptionForeground);"><em>Questions? Just ask in Copilot Chat - Alex is ready to help!</em></p>
 </body>
 </html>`;
-    } else if (result === "Open Chat") {
-      vscode.commands.executeCommand('workbench.action.chat.open', {
-        query: '@alex /status',
-        isPartialQuery: false
-      });
-    }
-
-    telemetry.log("command", "initialize_user_choice", {
-      choice: result || "dismissed",
-    });
-
-    // Migrate environment variables to secure storage
-    try {
-      await migrateSecretsFromEnvironment();
-    } catch (migrationErr) {
-      // Non-fatal - log but continue
-      console.warn("[Alex] Failed to migrate secrets:", migrationErr);
-    }
-
-    done(true, { copiedCount, skippedCount });
-  } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error("Initialize failed:", error);
-    telemetry.logError("initialize_failed", error);
-    done(false, error instanceof Error ? error : new Error(errorMessage));
-    vscode.window.showErrorMessage(
-      `Failed to initialize Alex: ${errorMessage || "Unknown error"}\n\nTry closing VS Code, deleting the .github folder, and running initialize again.`,
-      { modal: true },
-    );
-  }
 }
 
 /**

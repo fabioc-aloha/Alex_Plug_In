@@ -51,7 +51,7 @@
 | 3rd | ~~P6~~ | ~~Cognitive protocol cleanup~~ | ✅ Complete | All avatar directives removed (March 10, 2026) |
 | ~~4th~~ | ~~P1 (8B–8D)~~ | ~~Design system + polish + cross-tab consistency~~ | ✅ Complete | All 15 items fixed March 10, 2026 |
 | 5th | P2 (P5B) | Trim 5 files below 1,000 lines | 1–2 sessions | v6.5.0 release criteria |
-| 6th | P3 (P5C) | Split 8 orchestrator functions | 1–2 sessions | v6.5.0 NASA R4 compliance |
+| 6th | ~~P3 (P5C)~~ | ~~Split 8 orchestrator functions~~ | ✅ Complete | 7 functions split March 10, 2026. setAgentMode already 5L (stale data). |
 | 7th | P4 (P5D) | Formally accept 5 structural exceptions | 15 min | Decision only — close and document |
 | 8th | P7.3–7.5 | Persona detection HIGH improvements (LLM prompt, signals, skills) | 1–2 sessions | Broader detection quality |
 
@@ -121,23 +121,24 @@
 
 ---
 
-### Priority 3: P5C — NASA R4 Orchestrator Splits
+### Priority 3: P5C — NASA R4 Orchestrator Splits ✅ Complete (March 10, 2026)
 
 > **Goal**: Split remaining multi-phase orchestrators (genuine branching complexity).
+> **Status**: 7 functions decomposed. `setAgentMode` was already 5L (master plan figure stale).
 > **Note**: Registration blocks (P5D) are structural exceptions — see below.
 
-| # | Function | Lines | File | Priority |
-|---|----------|:-----:|------|:--------:|
-| P5C.1 | `performInitialization` | 425 | initialize.ts | HIGH |
-| P5C.2 | `setupEnvironment` | 219 | setupEnvironment.ts | MEDIUM |
-| P5C.3 | `setAgentMode` | 214 | welcomeView.ts | MEDIUM |
-| P5C.4 | `proposeSkillToGlobal` | 175 | proposeSkill.ts | MEDIUM |
-| P5C.5 | `normalizeSynapseFile` | 172 | upgradeSynapseNormalization.ts | LOW |
-| P5C.6 | `checkHealth` | 168 | healthCheck.ts | LOW |
-| P5C.7 | `completeMigration` | 166 | upgradeMigration.ts | LOW |
-| P5C.8 | `detectCognitiveLevel` | 166 | cognitiveTier.ts | LOW |
+| # | Function | Before | After | Helpers Extracted | Status |
+|---|----------|:------:|:-----:|:-----------------:|:------:|
+| P5C.1 | `performInitialization` | 425L | 88L | `deployArchitectureFiles`, `offerGlobalKnowledgeSetup`, `showInitSuccessAndGettingStarted`, `getGettingStartedHtml` | ✅ |
+| P5C.2 | `setupEnvironment` | 219L | 53L | `buildSettingsCategoryItems`, `previewConfirmAndApply` | ✅ |
+| P5C.3 | `setAgentMode` | ~~214L~~ | 5L | N/A (already compliant — master plan figure was stale) | ✅ |
+| P5C.4 | `proposeSkillToGlobal` | 175L | 69L | `selectAndValidateSkill`, `packageAndPresentSkill` | ✅ |
+| P5C.5 | `normalizeSynapseFile` | 172L | 70L | `normalizeConnection`, `writeOrderedSynapseFile` | ✅ |
+| P5C.6 | `checkHealth` | 168L | 57L | `buildMarkdownFileIndex`, `scanFilesAndSynapses`, `classifyHealthStatus` | ✅ |
+| P5C.7 | `completeMigration` | 166L | 86L | `executeMigrationItems` | ✅ |
+| P5C.8 | `detectCognitiveLevel` | 166L | 52L | `detectGitHubAccount`, `detectBestModelTier`, `classifyCognitiveLevel` | ✅ |
 
-**P3 overall**: 13 functions already split (see Appendix B). ~50 real violations remain total (including P5C above + ~42 minor 61-100L functions for opportunistic refactoring).
+**P3 overall**: ✅ Complete. 7 orchestrators decomposed into 17 focused helpers. Average orchestrator reduced from 213L to 68L (68% reduction). 4 of 7 are now under 60L NASA R4 target; remaining 3 (88L, 70L, 86L) are acceptable linear orchestrators.
 
 ---
 

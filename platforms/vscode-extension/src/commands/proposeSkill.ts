@@ -43,6 +43,104 @@ const VALID_CATEGORIES = [
 ];
 
 /**
+ * Select a proposable skill via QuickPick with validation
+ */
+async function selectAndValidateSkill(
+    projectSkillsPath: string,
+    proposableSkills: HeirSkill[],
+    outputChannel: vscode.OutputChannel,
+    progress: vscode.Progress<{ message?: string; increment?: number }>
+): Promise<{ skill: HeirSkill; validation: ValidationResult } | undefined> {
+    progress.report({ message: 'Preparing selection...', increment: 20 });
+
+    const skillMap = new Map<string, HeirSkill>();
+    const items: vscode.QuickPickItem[] = proposableSkills.map(skill => {
+        const label = `$(package) ${skill.name}`;
+        skillMap.set(label, skill);
+        return {
+            label,
+            description: skill.metadata?.description || skill.folder,
+            detail: `Category: ${skill.category || 'uncategorized'} · Score: ${skill.validationScore}/12`,
+            picked: false
+        };
+    });
+
+    const selected = await vscode.window.showQuickPick(items, {
+        placeHolder: `Select skill to propose (${proposableSkills.length} available)`,
+        title: 'Propose Skill to Global Knowledge',
+        matchOnDescription: true,
+        matchOnDetail: true
+    });
+
+    if (!selected) { return undefined; }
+    const skill = skillMap.get(selected.label);
+    if (!skill) { return undefined; }
+
+    progress.report({ message: `Validating ${skill.name}...`, increment: 20 });
+    const validation = await validateSkill(skill, outputChannel);
+
+    if (!validation.valid) {
+        const proceed = await vscode.window.showWarningMessage(
+            `Skill "${skill.name}" has validation issues:\n\n${validation.errors.join('\n')}\n\nProceed anyway?`,
+            'Fix Issues', 'Proceed', 'Cancel'
+        );
+        if (proceed !== 'Proceed') {
+            if (proceed === 'Fix Issues') {
+                const skillPath = path.join(projectSkillsPath, skill.folder, 'SKILL.md');
+                vscode.window.showTextDocument(vscode.Uri.file(skillPath));
+            }
+            return undefined;
+        }
+    }
+
+    return { skill, validation };
+}
+
+/**
+ * Package selected skill and present results to user
+ */
+async function packageAndPresentSkill(
+    skill: HeirSkill,
+    projectSkillsPath: string,
+    validation: ValidationResult,
+    workspacePath: string,
+    outputChannel: vscode.OutputChannel,
+    progress: vscode.Progress<{ message?: string; increment?: number }>
+): Promise<void> {
+    progress.report({ message: 'Collecting metadata...', increment: 20 });
+    const metadata = await collectProposalMetadata(skill, workspacePath);
+    if (!metadata) { return; }
+
+    progress.report({ message: 'Preparing skill package...', increment: 20 });
+    const packagePath = await packageSkillForProposal(skill, projectSkillsPath, metadata, outputChannel);
+
+    progress.report({ message: 'Generating PR description...', increment: 10 });
+    const prDescription = generatePRDescription(skill, metadata, validation);
+    await vscode.env.clipboard.writeText(prDescription);
+
+    const action = await vscode.window.showInformationMessage(
+        `✅ Skill "${skill.name}" packaged for proposal!\n\n` +
+        `📦 Location: ${packagePath}\n` +
+        `📋 PR description copied to clipboard\n\n` +
+        `Next steps:\n` +
+        `1. Copy skill folder to Global Knowledge patterns/\n` +
+        `2. Create PR on GitHub\n` +
+        `3. Paste PR description from clipboard`,
+        'Open Package', 'Show Output', 'Open GK Repo'
+    );
+
+    if (action === 'Open Package') {
+        vscode.commands.executeCommand('revealFileInOS', vscode.Uri.file(packagePath));
+    } else if (action === 'Show Output') {
+        outputChannel.show();
+    } else if (action === 'Open GK Repo') {
+        vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(GLOBAL_KNOWLEDGE_PATH), true);
+    }
+
+    outputChannel.show();
+}
+
+/**
  * Command: Alex: Propose Skill to Global Knowledge
  * Lightweight workflow for heirs to contribute skills back to Global Knowledge
  */
@@ -50,9 +148,7 @@ export async function proposeSkillToGlobal(): Promise<void> {
     const outputChannel = vscode.window.createOutputChannel('Alex Skill Proposal');
     
     try {
-        // Get workspace
         const workspaceResult = await getAlexWorkspaceFolder(true);
-        
         if (!workspaceResult.found || !workspaceResult.workspaceFolder) {
             vscode.window.showErrorMessage('No workspace with Alex installed found.');
             return;
@@ -61,7 +157,6 @@ export async function proposeSkillToGlobal(): Promise<void> {
         const workspacePath = workspaceResult.workspaceFolder.uri.fsPath;
         const projectSkillsPath = path.join(workspacePath, '.github', 'skills');
 
-        // Check for Master Alex protection
         const masterProtectedPath = path.join(workspacePath, '.github', 'config', 'MASTER-ALEX-PROTECTED.json');
         if (await fs.pathExists(masterProtectedPath)) {
             vscode.window.showWarningMessage(
@@ -70,7 +165,6 @@ export async function proposeSkillToGlobal(): Promise<void> {
             return;
         }
 
-        // Check Global Knowledge exists
         if (!await fs.pathExists(GLOBAL_KNOWLEDGE_PATH)) {
             const setup = await vscode.window.showErrorMessage(
                 'Global Knowledge not found. Set it up first?',
@@ -87,132 +181,30 @@ export async function proposeSkillToGlobal(): Promise<void> {
             title: 'Preparing Skill Proposal',
             cancellable: true
         }, async (progress, token) => {
-            
             progress.report({ message: 'Scanning project skills...' });
-            
-            // Get heir skills
             const heirSkills = await getHeirSkills(projectSkillsPath);
             outputChannel.appendLine(`📁 Found ${heirSkills.length} skills in project`);
-            
+
             if (heirSkills.length === 0) {
                 vscode.window.showInformationMessage('No skills found in this project to propose.');
                 return;
             }
-            
             if (token.isCancellationRequested) { return; }
-            
+
             progress.report({ message: 'Filtering proposable skills...', increment: 20 });
-            
-            // Filter out skills inherited from GK
             const proposableSkills = heirSkills.filter(skill => !skill.inheritedFromGK);
-            
             if (proposableSkills.length === 0) {
                 vscode.window.showInformationMessage(
                     'All skills in this project were inherited from Global Knowledge. Only heir-created skills can be proposed.'
                 );
                 return;
             }
-            
             outputChannel.appendLine(`✅ ${proposableSkills.length} skills available for proposal`);
-            
-            progress.report({ message: 'Preparing selection...', increment: 20 });
-            
-            // Create QuickPick items with type-safe data association
-            const skillMap = new Map<string, HeirSkill>();
-            const items: vscode.QuickPickItem[] = proposableSkills.map(skill => {
-                const label = `$(package) ${skill.name}`;
-                skillMap.set(label, skill);
-                return {
-                    label,
-                    description: skill.metadata?.description || skill.folder,
-                    detail: `Category: ${skill.category || 'uncategorized'} · Score: ${skill.validationScore}/12`,
-                    picked: false
-                };
-            });
 
-            // Show single-select QuickPick
-            const selected = await vscode.window.showQuickPick(items, {
-                placeHolder: `Select skill to propose (${proposableSkills.length} available)`,
-                title: 'Propose Skill to Global Knowledge',
-                matchOnDescription: true,
-                matchOnDetail: true
-            });
+            const result = await selectAndValidateSkill(projectSkillsPath, proposableSkills, outputChannel, progress);
+            if (!result) { return; }
 
-            if (!selected) {
-                return;
-            }
-
-            const skill = skillMap.get(selected.label);
-            if (!skill) {
-                return;
-            }
-            
-            progress.report({ message: `Validating ${skill.name}...`, increment: 20 });
-
-            // Validate skill
-            const validation = await validateSkill(skill, outputChannel);
-            
-            if (!validation.valid) {
-                const proceed = await vscode.window.showWarningMessage(
-                    `Skill "${skill.name}" has validation issues:\n\n${validation.errors.join('\n')}\n\nProceed anyway?`,
-                    'Fix Issues', 'Proceed', 'Cancel'
-                );
-                if (proceed !== 'Proceed') {
-                    if (proceed === 'Fix Issues') {
-                        const skillPath = path.join(projectSkillsPath, skill.folder, 'SKILL.md');
-                        vscode.window.showTextDocument(vscode.Uri.file(skillPath));
-                    }
-                    return;
-                }
-            }
-            
-            progress.report({ message: 'Collecting metadata...', increment: 20 });
-
-            // Get proposal metadata from user
-            const metadata = await collectProposalMetadata(skill, workspacePath);
-            if (!metadata) {
-                return; // User cancelled
-            }
-
-            progress.report({ message: 'Preparing skill package...', increment: 20 });
-
-            // Package skill with GK metadata
-            const packagePath = await packageSkillForProposal(
-                skill,
-                projectSkillsPath,
-                metadata,
-                outputChannel
-            );
-
-            progress.report({ message: 'Generating PR description...', increment: 10 });
-
-            // Generate GitHub PR workflow
-            const prDescription = generatePRDescription(skill, metadata, validation);
-            
-            // Copy PR description to clipboard
-            await vscode.env.clipboard.writeText(prDescription);
-
-            // Show success with next steps
-            const action = await vscode.window.showInformationMessage(
-                `✅ Skill "${skill.name}" packaged for proposal!\n\n` +
-                `📦 Location: ${packagePath}\n` +
-                `📋 PR description copied to clipboard\n\n` +
-                `Next steps:\n` +
-                `1. Copy skill folder to Global Knowledge patterns/\n` +
-                `2. Create PR on GitHub\n` +
-                `3. Paste PR description from clipboard`,
-                'Open Package', 'Show Output', 'Open GK Repo'
-            );
-
-            if (action === 'Open Package') {
-                vscode.commands.executeCommand('revealFileInOS', vscode.Uri.file(packagePath));
-            } else if (action === 'Show Output') {
-                outputChannel.show();
-            } else if (action === 'Open GK Repo') {
-                vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(GLOBAL_KNOWLEDGE_PATH), true);
-            }
-
-            outputChannel.show();
+            await packageAndPresentSkill(result.skill, projectSkillsPath, result.validation, workspacePath, outputChannel, progress);
         });
 
     } catch (error) {

@@ -61,81 +61,14 @@ export function getCachedHealth(): HealthCheckResult | null {
 }
 
 /**
- * Run a quick health check on Alex architecture
+ * Build a set of known markdown file basenames for fast synapse target lookup
  */
-export async function checkHealth(forceRefresh: boolean = false): Promise<HealthCheckResult> {
-    // Return cached result if valid and not forcing refresh
-    if (!forceRefresh && cachedResult && (Date.now() - lastCheckTime) < CACHE_DURATION_MS) {
-        return cachedResult;
-    }
-
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    
-    if (!workspaceFolders) {
-        return {
-            status: HealthStatus.NotInitialized,
-            initialized: false,
-            totalFiles: 0,
-            totalSynapses: 0,
-            brokenSynapses: 0,
-            issues: ['No workspace folder open'],
-            lastChecked: new Date(),
-            summary: 'No workspace open'
-        };
-    }
-
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    const alexPath = path.join(rootPath, '.github', 'copilot-instructions.md');
-    
-    // Check if Alex is initialized
-    let initialized = false;
-    try {
-        await vscode.workspace.fs.stat(vscode.Uri.file(alexPath));
-        initialized = true;
-    } catch {
-        initialized = false;
-    }
-    
-    if (!initialized) {
-        cachedResult = {
-            status: HealthStatus.NotInitialized,
-            initialized: false,
-            totalFiles: 0,
-            totalSynapses: 0,
-            brokenSynapses: 0,
-            issues: ['Alex architecture not initialized'],
-            lastChecked: new Date(),
-            summary: 'Not initialized - run Alex: Initialize'
-        };
-        lastCheckTime = Date.now();
-        return cachedResult;
-    }
-
-    // Quick scan for memory files and synapses
-    const patterns = [
-        '.github/copilot-instructions.md',
-        '.github/instructions/*.md',
-        '.github/prompts/*.md',
-        '.github/skills/*/SKILL.md',
-        '.github/domain-knowledge/*.md'  // Legacy - kept for backward compatibility
-    ];
-
-    let totalFiles = 0;
-    let totalSynapses = 0;
-    let brokenSynapses = 0;
-    const issues: string[] = [];
-
-    // Synapse pattern
-    const synapseRegex = createSynapseRegex();
-
-    // Pre-build a set of all known markdown files for fast lookup
-    // This avoids calling findFiles for each synapse (major performance fix)
-    // Use targeted patterns to avoid hitting limits on large workspaces (2000+ files)
+async function buildMarkdownFileIndex(workspaceFolders: readonly vscode.WorkspaceFolder[]): Promise<Set<string>> {
     const targetPatterns = [
-        '.github/**/*.md',           // Memory files, config
-        'alex_docs/**/*.md',         // Documentation
-        'platforms/**/.github/**/*.md', // Heir memory files
-        '*.md'                        // Root-level files
+        '.github/**/*.md',
+        'alex_docs/**/*.md',
+        'platforms/**/.github/**/*.md',
+        '*.md'
     ];
     
     const allMdFiles: vscode.Uri[] = [];
@@ -143,11 +76,26 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
         const files = await vscode.workspace.findFiles(
             new vscode.RelativePattern(workspaceFolders[0], targetPattern),
             '**/node_modules/**',
-            1000  // Per-pattern limit
+            1000
         );
         allMdFiles.push(...files);
     }
-    const knownFileBasenames = new Set(allMdFiles.map(f => path.basename(f.fsPath).toLowerCase()));
+    return new Set(allMdFiles.map(f => path.basename(f.fsPath).toLowerCase()));
+}
+
+/**
+ * Scan architecture files for synapse references and check for broken links
+ */
+async function scanFilesAndSynapses(
+    workspaceFolders: readonly vscode.WorkspaceFolder[],
+    patterns: string[],
+    knownFileBasenames: Set<string>
+): Promise<{ totalFiles: number; totalSynapses: number; brokenSynapses: number; issues: string[] }> {
+    let totalFiles = 0;
+    let totalSynapses = 0;
+    let brokenSynapses = 0;
+    const issues: string[] = [];
+    const synapseRegex = createSynapseRegex();
 
     for (const pattern of patterns) {
         try {
@@ -158,19 +106,13 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
                 totalFiles++;
                 try {
                     const content = new TextDecoder().decode(await vscode.workspace.fs.readFile(file));
-                    
-                    // Skip code blocks
                     let inCodeBlock = false;
                     const lines = content.split('\n');
                     
                     for (const line of lines) {
-                        if (line.trim().startsWith('```')) {
-                            inCodeBlock = !inCodeBlock;
-                            continue;
-                        }
-                        if (inCodeBlock) {continue;}
+                        if (line.trim().startsWith('```')) { inCodeBlock = !inCodeBlock; continue; }
+                        if (inCodeBlock) { continue; }
                         
-                        // Reset regex state
                         synapseRegex.lastIndex = 0;
                         let match;
                         while ((match = synapseRegex.exec(line)) !== null) {
@@ -178,7 +120,6 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
                             const targetName = match[1].trim();
                             const targetBasename = path.basename(targetName).toLowerCase();
                             
-                            // Fast lookup in pre-built file index instead of findFiles per synapse
                             if (!knownFileBasenames.has(targetBasename)) {
                                 brokenSynapses++;
                                 if (issues.length < 5) {
@@ -196,37 +137,79 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
         }
     }
 
-    // Determine status
-    let status: HealthStatus;
-    let summary: string;
+    return { totalFiles, totalSynapses, brokenSynapses, issues };
+}
 
+/**
+ * Classify health status from scan results
+ */
+function classifyHealthStatus(totalFiles: number, totalSynapses: number, brokenSynapses: number): { status: HealthStatus; summary: string } {
     if (brokenSynapses === 0 && totalFiles > 0) {
-        status = HealthStatus.Healthy;
-        summary = `${totalFiles} files, ${totalSynapses} synapses - all healthy`;
+        return { status: HealthStatus.Healthy, summary: `${totalFiles} files, ${totalSynapses} synapses - all healthy` };
     } else if (brokenSynapses > 0 && brokenSynapses < totalSynapses * 0.1) {
-        status = HealthStatus.Warning;
-        summary = `${brokenSynapses} broken synapses of ${totalSynapses}`;
+        return { status: HealthStatus.Warning, summary: `${brokenSynapses} broken synapses of ${totalSynapses}` };
     } else if (brokenSynapses > 0) {
-        status = HealthStatus.Error;
-        summary = `${brokenSynapses} broken synapses - run Dream to repair`;
-    } else {
-        status = HealthStatus.Healthy;
-        summary = `${totalFiles} files ready`;
+        return { status: HealthStatus.Error, summary: `${brokenSynapses} broken synapses - run Dream to repair` };
+    }
+    return { status: HealthStatus.Healthy, summary: `${totalFiles} files ready` };
+}
+
+/**
+ * Run a quick health check on Alex architecture
+ */
+export async function checkHealth(forceRefresh: boolean = false): Promise<HealthCheckResult> {
+    if (!forceRefresh && cachedResult && (Date.now() - lastCheckTime) < CACHE_DURATION_MS) {
+        return cachedResult;
     }
 
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    
+    if (!workspaceFolders) {
+        return {
+            status: HealthStatus.NotInitialized, initialized: false,
+            totalFiles: 0, totalSynapses: 0, brokenSynapses: 0,
+            issues: ['No workspace folder open'], lastChecked: new Date(),
+            summary: 'No workspace open'
+        };
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const alexPath = path.join(rootPath, '.github', 'copilot-instructions.md');
+    
+    let initialized = false;
+    try { await vscode.workspace.fs.stat(vscode.Uri.file(alexPath)); initialized = true; } catch { initialized = false; }
+    
+    if (!initialized) {
+        cachedResult = {
+            status: HealthStatus.NotInitialized, initialized: false,
+            totalFiles: 0, totalSynapses: 0, brokenSynapses: 0,
+            issues: ['Alex architecture not initialized'], lastChecked: new Date(),
+            summary: 'Not initialized - run Alex: Initialize'
+        };
+        lastCheckTime = Date.now();
+        return cachedResult;
+    }
+
+    const patterns = [
+        '.github/copilot-instructions.md',
+        '.github/instructions/*.md',
+        '.github/prompts/*.md',
+        '.github/skills/*/SKILL.md',
+        '.github/domain-knowledge/*.md'
+    ];
+
+    const knownFileBasenames = await buildMarkdownFileIndex(workspaceFolders);
+    const scanResult = await scanFilesAndSynapses(workspaceFolders, patterns, knownFileBasenames);
+    const { status, summary } = classifyHealthStatus(scanResult.totalFiles, scanResult.totalSynapses, scanResult.brokenSynapses);
+
     cachedResult = {
-        status,
-        initialized,
-        totalFiles,
-        totalSynapses,
-        brokenSynapses,
-        issues,
-        lastChecked: new Date(),
-        summary
+        status, initialized,
+        totalFiles: scanResult.totalFiles, totalSynapses: scanResult.totalSynapses,
+        brokenSynapses: scanResult.brokenSynapses, issues: scanResult.issues,
+        lastChecked: new Date(), summary
     };
     lastCheckTime = Date.now();
     
-    // Update telemetry with Alex installation status
     updateAlexInstalledStatus(initialized);
     
     return cachedResult;

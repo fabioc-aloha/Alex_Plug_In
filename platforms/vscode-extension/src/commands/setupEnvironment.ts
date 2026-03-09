@@ -624,6 +624,114 @@ function formatSettingsPreview(settings: Record<string, unknown>): string {
   return JSON.stringify(settings, null, 2);
 }
 
+interface CategoryQuickPickItem extends vscode.QuickPickItem {
+  category: SettingCategory;
+  needed: number;
+  existing: number;
+}
+
+/**
+ * Build QuickPick items for all setting categories with current status
+ */
+function buildSettingsCategoryItems(): CategoryQuickPickItem[] {
+  const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
+  const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
+  const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
+  const extendedThinkingExisting = getExistingSettings(EXTENDED_THINKING_SETTINGS);
+  const enterpriseExisting = getExistingSettings(ENTERPRISE_SETTINGS);
+
+  const essentialNeeded = Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
+  const recommendedNeeded = Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
+  const autoApprovalNeeded = Object.keys(AUTO_APPROVAL_SETTINGS).length - autoApprovalExisting.length;
+  const extendedThinkingNeeded = Object.keys(EXTENDED_THINKING_SETTINGS).length - extendedThinkingExisting.length;
+  const enterpriseNeeded = Object.keys(ENTERPRISE_SETTINGS).length - enterpriseExisting.length;
+
+  const enterpriseCurrentlyEnabled = vscode.workspace.getConfiguration().get<boolean>("alex.enterprise.enabled", false);
+
+  const statusText = (needed: number) => needed === 0 ? "✓ all configured" : `${needed} to add`;
+
+  const enterpriseStatus = enterpriseCurrentlyEnabled
+    ? "✓ enabled (uncheck to disable)"
+    : statusText(enterpriseNeeded);
+
+  return [
+    { label: `${SETTING_CATEGORIES[0].icon} Essential Settings`, description: statusText(essentialNeeded), detail: SETTING_CATEGORIES[0].description, category: SETTING_CATEGORIES[0], needed: essentialNeeded, existing: essentialExisting.length, picked: true },
+    { label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`, description: statusText(recommendedNeeded), detail: SETTING_CATEGORIES[1].description, category: SETTING_CATEGORIES[1], needed: recommendedNeeded, existing: recommendedExisting.length, picked: true },
+    { label: `${SETTING_CATEGORIES[2].icon} Auto-Approval Settings`, description: statusText(autoApprovalNeeded), detail: SETTING_CATEGORIES[2].description, category: SETTING_CATEGORIES[2], needed: autoApprovalNeeded, existing: autoApprovalExisting.length, picked: true },
+    { label: `${SETTING_CATEGORIES[3].icon} Extended Thinking`, description: statusText(extendedThinkingNeeded), detail: SETTING_CATEGORIES[3].description, category: SETTING_CATEGORIES[3], needed: extendedThinkingNeeded, existing: extendedThinkingExisting.length, picked: false },
+    { label: `${SETTING_CATEGORIES[4].icon} Enterprise (MS Graph)`, description: enterpriseStatus, detail: SETTING_CATEGORIES[4].description + " - enables MS Graph integration", category: SETTING_CATEGORIES[4], needed: enterpriseNeeded, existing: enterpriseExisting.length, picked: enterpriseCurrentlyEnabled },
+  ];
+}
+
+/**
+ * Show preview, confirm, and apply the collected settings
+ */
+async function previewConfirmAndApply(settingsToApply: Record<string, unknown>, categoryNames: string): Promise<void> {
+  const preview = formatSettingsPreview(settingsToApply);
+
+  const confirm = await vscode.window.showInformationMessage(
+    `Apply ${Object.keys(settingsToApply).length} settings (${categoryNames})?\n\n⚠️ This will OVERWRITE existing values for these settings.\n\n• Essential: Required for Alex to read instruction files\n• Recommended: Improves agent capabilities\n• Nice-to-Have: Quality of life`,
+    { modal: true, detail: `Settings to apply:\n${preview}` },
+    "Apply Settings",
+    "Show Preview",
+    "Cancel",
+  );
+
+  if (confirm === "Show Preview") {
+    const doc = await vscode.workspace.openTextDocument({
+      content: `// Settings that will be APPLIED to your VS Code configuration\n// ⚠️ Existing values for these settings will be OVERWRITTEN\n\n${preview}`,
+      language: "jsonc",
+    });
+    await vscode.window.showTextDocument(doc, { preview: true });
+
+    const confirmAfterPreview = await vscode.window.showInformationMessage(
+      "Apply these settings to your VS Code configuration?",
+      "Apply Settings",
+      "Cancel",
+    );
+
+    if (confirmAfterPreview !== "Apply Settings") {
+      return;
+    }
+  } else if (confirm !== "Apply Settings") {
+    return;
+  }
+
+  const result = await vscode.window.withProgress(
+    {
+      location: vscode.ProgressLocation.Notification,
+      title: "Setting up Alex environment...",
+      cancellable: false,
+    },
+    async () => {
+      const settingsResult = await applySettings(settingsToApply, true);
+      await applyMarkdownStyles();
+      return settingsResult;
+    },
+  );
+
+  if (result.applied.length > 0) {
+    let message = `✅ Applied ${result.applied.length} settings`;
+    if (result.failed.length > 0) {
+      message += ` (${result.failed.length} failed)`;
+    }
+    vscode.window
+      .showInformationMessage(message, "View Settings")
+      .then((choice) => {
+        if (choice === "View Settings") {
+          vscode.commands.executeCommand("workbench.action.openSettingsJson");
+        }
+      });
+    if (result.failed.length > 0) {
+      console.error("[Alex] Failed to apply settings:", result.failed);
+    }
+  } else if (result.failed.length > 0) {
+    vscode.window.showErrorMessage(
+      `Failed to apply ${result.failed.length} settings. Check Output > Extension Host for details.`,
+    );
+  }
+}
+
 /**
  * Main command: Setup Alex Environment
  */
@@ -650,102 +758,11 @@ export async function setupEnvironment(): Promise<void> {
     }
   }
 
-  // Phase 2: Check what settings are already configured
-  const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
-  const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
-  const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
-  const extendedThinkingExisting = getExistingSettings(EXTENDED_THINKING_SETTINGS);
-  const enterpriseExisting = getExistingSettings(ENTERPRISE_SETTINGS);
-
-  const essentialTotal = Object.keys(ESSENTIAL_SETTINGS).length;
-  const recommendedTotal = Object.keys(RECOMMENDED_SETTINGS).length;
-  const autoApprovalTotal = Object.keys(AUTO_APPROVAL_SETTINGS).length;
-  const extendedThinkingTotal = Object.keys(EXTENDED_THINKING_SETTINGS).length;
-  const enterpriseTotal = Object.keys(ENTERPRISE_SETTINGS).length;
-
-  const essentialNeeded = essentialTotal - essentialExisting.length;
-  const recommendedNeeded = recommendedTotal - recommendedExisting.length;
-  const autoApprovalNeeded = autoApprovalTotal - autoApprovalExisting.length;
-  const extendedThinkingNeeded = extendedThinkingTotal - extendedThinkingExisting.length;
-  const enterpriseNeeded = enterpriseTotal - enterpriseExisting.length;
-
-  // Build quick pick items - always show all categories
-  interface CategoryQuickPickItem extends vscode.QuickPickItem {
-    category: SettingCategory;
-    needed: number;
-    existing: number;
-  }
-
-  const items: CategoryQuickPickItem[] = [];
-
-  // Essential Settings - always show, pre-checked
-  const essentialStatus = essentialNeeded === 0 ? "✓ all configured" : `${essentialNeeded} to add`;
-  items.push({
-    label: `${SETTING_CATEGORIES[0].icon} Essential Settings`,
-    description: essentialStatus,
-    detail: SETTING_CATEGORIES[0].description,
-    category: SETTING_CATEGORIES[0],
-    needed: essentialNeeded,
-    existing: essentialExisting.length,
-    picked: true,
-  });
-
-  // Recommended Settings - always show, pre-checked
-  const recommendedStatus = recommendedNeeded === 0 ? "✓ all configured" : `${recommendedNeeded} to add`;
-  items.push({
-    label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`,
-    description: recommendedStatus,
-    detail: SETTING_CATEGORIES[1].description,
-    category: SETTING_CATEGORIES[1],
-    needed: recommendedNeeded,
-    existing: recommendedExisting.length,
-    picked: true,
-  });
-
-  // Auto-Approval Settings - always show, pre-checked
-  const autoApprovalStatus = autoApprovalNeeded === 0 ? "✓ all configured" : `${autoApprovalNeeded} to add`;
-  items.push({
-    label: `${SETTING_CATEGORIES[2].icon} Auto-Approval Settings`,
-    description: autoApprovalStatus,
-    detail: SETTING_CATEGORIES[2].description,
-    category: SETTING_CATEGORIES[2],
-    needed: autoApprovalNeeded,
-    existing: autoApprovalExisting.length,
-    picked: true,
-  });
-
-  // Extended Thinking Settings - show but not pre-checked
-  const extendedThinkingStatus = extendedThinkingNeeded === 0 ? "✓ all configured" : `${extendedThinkingNeeded} to add`;
-  items.push({
-    label: `${SETTING_CATEGORIES[3].icon} Extended Thinking`,
-    description: extendedThinkingStatus,
-    detail: SETTING_CATEGORIES[3].description,
-    category: SETTING_CATEGORIES[3],
-    needed: extendedThinkingNeeded,
-    existing: extendedThinkingExisting.length,
-    picked: false,
-  });
-
-  // Enterprise Settings - pre-check if already enabled (toggle behavior)
-  const enterpriseCurrentlyEnabled = vscode.workspace.getConfiguration().get<boolean>("alex.enterprise.enabled", false);
-  const enterpriseStatus = enterpriseCurrentlyEnabled 
-    ? "✓ enabled (uncheck to disable)" 
-    : (enterpriseNeeded === 0 ? "✓ all configured" : `${enterpriseNeeded} to add`);
-  items.push({
-    label: `${SETTING_CATEGORIES[4].icon} Enterprise (MS Graph)`,
-    description: enterpriseStatus,
-    detail: SETTING_CATEGORIES[4].description + " - enables MS Graph integration",
-    category: SETTING_CATEGORIES[4],
-    needed: enterpriseNeeded,
-    existing: enterpriseExisting.length,
-    picked: enterpriseCurrentlyEnabled, // Pre-check if already enabled
-  });
-
-  // Show multi-select quick pick
+  // Phase 2: Build category items and show selection
+  const items = buildSettingsCategoryItems();
   const selected = await vscode.window.showQuickPick(items, {
     canPickMany: true,
-    placeHolder:
-      "Select categories to apply (will re-apply even if already configured)",
+    placeHolder: "Select categories to apply (will re-apply even if already configured)",
     title: "Alex Environment Setup",
   });
 
@@ -753,98 +770,23 @@ export async function setupEnvironment(): Promise<void> {
     return;
   }
 
-  // Collect all settings to apply
+  // Phase 3: Collect settings and handle enterprise toggle
   const settingsToApply: Record<string, unknown> = {};
   for (const item of selected) {
     Object.assign(settingsToApply, item.category.settings);
   }
 
-  // Check if Enterprise was explicitly NOT selected but is currently enabled
-  // If so, disable enterprise settings (toggle behavior)
+  const enterpriseCurrentlyEnabled = vscode.workspace.getConfiguration().get<boolean>("alex.enterprise.enabled", false);
   const enterpriseSelected = selected.some(s => s.category.name === "Enterprise (Experimental)");
-  
   if (!enterpriseSelected && enterpriseCurrentlyEnabled) {
-    // User unchecked enterprise while it was enabled - disable it
     for (const key of Object.keys(ENTERPRISE_SETTINGS)) {
       settingsToApply[key] = false;
     }
   }
-  
-  const totalKeys = Object.keys(settingsToApply).length;
 
-  // Show preview and ask for confirmation
-  const preview = formatSettingsPreview(settingsToApply);
+  // Phase 4: Preview, confirm, and apply
   const categoryNames = selected.map((s) => s.category.name).join(", ");
-
-  const confirm = await vscode.window.showInformationMessage(
-    `Apply ${Object.keys(settingsToApply).length} settings (${categoryNames})?\n\n⚠️ This will OVERWRITE existing values for these settings.\n\n• Essential: Required for Alex to read instruction files\n• Recommended: Improves agent capabilities\n• Nice-to-Have: Quality of life`,
-    { modal: true, detail: `Settings to apply:\n${preview}` },
-    "Apply Settings",
-    "Show Preview",
-    "Cancel",
-  );
-
-  if (confirm === "Show Preview") {
-    // Open a preview document
-    const doc = await vscode.workspace.openTextDocument({
-      content: `// Settings that will be APPLIED to your VS Code configuration\n// ⚠️ Existing values for these settings will be OVERWRITTEN\n\n${preview}`,
-      language: "jsonc",
-    });
-    await vscode.window.showTextDocument(doc, { preview: true });
-
-    // Ask again after preview
-    const confirmAfterPreview = await vscode.window.showInformationMessage(
-      "Apply these settings to your VS Code configuration?",
-      "Apply Settings",
-      "Cancel",
-    );
-
-    if (confirmAfterPreview !== "Apply Settings") {
-      return;
-    }
-  } else if (confirm !== "Apply Settings") {
-    return;
-  }
-
-  // Apply settings (force = true to ensure all selected settings are applied)
-  const result = await vscode.window.withProgress(
-    {
-      location: vscode.ProgressLocation.Notification,
-      title: "Setting up Alex environment...",
-      cancellable: false,
-    },
-    async () => {
-      const settingsResult = await applySettings(settingsToApply, true);
-      // Also apply markdown styles as workspace setting
-      await applyMarkdownStyles();
-      return settingsResult;
-    },
-  );
-
-  // Show result
-  if (result.applied.length > 0) {
-    let message = `✅ Applied ${result.applied.length} settings`;
-    if (result.failed.length > 0) {
-      message += ` (${result.failed.length} failed)`;
-    }
-
-    vscode.window
-      .showInformationMessage(message, "View Settings")
-      .then((choice) => {
-        if (choice === "View Settings") {
-          vscode.commands.executeCommand("workbench.action.openSettingsJson");
-        }
-      });
-    
-    // Log failed settings if any
-    if (result.failed.length > 0) {
-      console.error("[Alex] Failed to apply settings:", result.failed);
-    }
-  } else if (result.failed.length > 0) {
-    vscode.window.showErrorMessage(
-      `Failed to apply ${result.failed.length} settings. Check Output > Extension Host for details.`,
-    );
-  }
+  await previewConfirmAndApply(settingsToApply, categoryNames);
 }
 
 /**
