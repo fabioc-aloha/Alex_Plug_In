@@ -202,7 +202,7 @@
 #### Skill-to-Discipline Mapping — "Alex is trained on what you do"
 
 > **Purpose**: Each discipline/study guide should surface the Alex skills most relevant to that audience. This is an install incentive — users see that Alex has specialized knowledge for *their* profession, not just generic AI features. Use this table in LearnAlex study guides, workshop pages, and Docs tab persona cards.
-> **Source**: 123 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines. New skills added March 9: `financial-analysis`, `sales-enablement`, `career-development`.
+> **Source**: 130 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines. Skills added March 9: Tier 1 (`financial-analysis`, `sales-enablement`, `career-development`), Tier 2 (`legal-compliance`, `healthcare-informatics`, `hr-people-operations`), Tier 3 (`comedy-writing`, `journalism`, `game-design`, `counseling-psychology`).
 > **Convention**: Skills listed in relevance order. First 3 are the strongest hooks for that audience.
 
 | # | Discipline | Key Skills (install incentive) |
@@ -223,13 +223,13 @@
 | 14 | Entrepreneurs | `financial-analysis`, `business-analysis`, `scope-management`, `project-scaffolding`, `executive-storytelling`, `brand-asset-management` |
 | 15 | Executives (CxO) | `executive-storytelling`, `financial-analysis`, `status-reporting`, `change-management`, `scope-management`, `business-analysis` |
 | 16 | Finance Professionals | `financial-analysis`, `business-analysis`, `pii-privacy-regulations`, `anti-hallucination`, `status-reporting`, `deep-work-optimization` |
-| 17 | Game Developers | `debugging-patterns`, `testing-strategies`, `performance-profiling`, `code-review`, `project-management`, `refactoring-patterns` |
+| 17 | Game Developers | `game-design`, `debugging-patterns`, `testing-strategies`, `performance-profiling`, `code-review`, `project-management` |
 | 18 | Grant Writers | `grant-writing`, `creative-writing`, `citation-management`, `research-first-development`, `ai-writing-avoidance` |
-| 19 | Healthcare Professionals | `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management`, `research-first-development` |
-| 20 | HR & People Ops | `pii-privacy-regulations`, `change-management`, `coaching-techniques`, `business-analysis`, `creative-writing` |
+| 19 | Healthcare Professionals | `healthcare-informatics`, `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management` |
+| 20 | HR & People Ops | `hr-people-operations`, `pii-privacy-regulations`, `change-management`, `coaching-techniques`, `career-development` |
 | 21 | Job Seekers | `career-development`, `ai-writing-avoidance`, `prompt-engineering`, `bootstrap-learning`, `creative-writing` |
-| 22 | Journalists | `creative-writing`, `ai-writing-avoidance`, `citation-management`, `anti-hallucination`, `research-first-development` |
-| 23 | Lawyers | `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management`, `research-first-development`, `creative-writing` |
+| 22 | Journalists | `journalism`, `creative-writing`, `ai-writing-avoidance`, `citation-management`, `anti-hallucination` |
+| 23 | Lawyers | `legal-compliance`, `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management` |
 | 24 | Marketing | `creative-writing`, `ai-writing-avoidance`, `brand-asset-management`, `image-handling`, `executive-storytelling`, `prompt-engineering` |
 | 25 | Nonprofit Leaders | `grant-writing`, `financial-analysis`, `business-analysis`, `executive-storytelling`, `change-management`, `status-reporting` |
 | 26 | Open Source Contributors | `git-workflow`, `code-review`, `documentation-quality-assurance`, `testing-strategies`, `release-process`, `api-documentation` |
@@ -237,19 +237,19 @@
 | 28 | Power Users / Builders | `vscode-extension-patterns`, `vscode-configuration-validation`, `prompt-engineering`, `skill-building`, `mcp-development`, `agent-debug-panel` |
 | 29 | Product Managers | `project-management`, `scope-management`, `business-analysis`, `status-reporting`, `executive-storytelling`, `gamma-presentations` |
 | 30 | Project Managers | `project-management`, `scope-management`, `status-reporting`, `change-management`, `gamma-presentations`, `alex-effort-estimation` |
-| 31 | Psychology & Counselors | `learning-psychology`, `coaching-techniques`, `privacy-responsible-ai`, `creative-writing`, `frustration-recognition` |
+| 31 | Psychology & Counselors | `counseling-psychology`, `learning-psychology`, `coaching-techniques`, `privacy-responsible-ai`, `frustration-recognition` |
 | 32 | Real Estate | `financial-analysis`, `sales-enablement`, `business-analysis`, `executive-storytelling`, `creative-writing` |
 | 33 | Scientists | `research-first-development`, `literature-review`, `citation-management`, `practitioner-research`, `anti-hallucination`, `research-project-scaffold` |
 | 34 | Security Engineers | `security-review`, `distribution-security`, `secrets-management`, `pii-privacy-regulations`, `architecture-audit`, `incident-response` |
 | 35 | Sellers | `sales-enablement`, `executive-storytelling`, `financial-analysis`, `coaching-techniques`, `business-analysis` |
 | 36 | SRE / On-Call | `incident-response`, `post-mortem`, `observability-monitoring`, `root-cause-analysis`, `debugging-patterns`, `error-recovery-patterns` |
-| 37 | Standup Comics | `creative-writing`, `ai-writing-avoidance`, `prompt-engineering`, `rubber-duck-debugging` |
+| 37 | Standup Comics | `comedy-writing`, `creative-writing`, `ai-writing-avoidance`, `prompt-engineering` |
 | 38 | Students | `career-development`, `bootstrap-learning`, `learning-psychology`, `research-first-development`, `citation-management`, `socratic-questioning` |
 | 39 | Teachers & Educators | `learning-psychology`, `coaching-techniques`, `socratic-questioning`, `gamma-presentations`, `creative-writing`, `slide-design` |
 | 40 | Technical Writers | `documentation-quality-assurance`, `api-documentation`, `markdown-mermaid`, `lint-clean-markdown`, `md-to-word`, `code-review` |
 | 41 | Visual Storytellers | `svg-graphics`, `graphic-design`, `image-handling`, `gamma-presentations`, `slide-design`, `markdown-mermaid` |
 
-**Coverage stats**: 57 of 123 skills appear in at least one discipline mapping. Top skills by discipline coverage: `creative-writing` (14), `business-analysis` (10), `executive-storytelling` (9), `financial-analysis` (5), `anti-hallucination` (7), `status-reporting` (7), `citation-management` (7), `prompt-engineering` (7), `sales-enablement` (2), `career-development` (2).
+**Coverage stats**: 64 of 130 skills appear in at least one discipline mapping. Top skills by discipline coverage: `creative-writing` (14), `business-analysis` (10), `executive-storytelling` (9), `anti-hallucination` (7), `status-reporting` (7), `citation-management` (7), `prompt-engineering` (7), `pii-privacy-regulations` (7), `financial-analysis` (5), `coaching-techniques` (5). New dedicated skills: `legal-compliance` (1), `healthcare-informatics` (1), `hr-people-operations` (1), `comedy-writing` (1), `journalism` (1), `game-design` (1), `counseling-psychology` (1), `sales-enablement` (2), `career-development` (3).
 
 ---
 

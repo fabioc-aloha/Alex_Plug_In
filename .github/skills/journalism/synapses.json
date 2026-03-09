@@ -1,0 +1,56 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "journalism",
+    "version": "1.0.0",
+    "created": "2026-03-09",
+    "inheritance": "inheritable",
+    "description": "News writing, investigative reporting, source verification, editorial standards, fact-checking",
+    "connections": [
+        {
+            "target": ".github/skills/creative-writing/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.7,
+            "description": "Journalism applies narrative craft to fact-based storytelling"
+        },
+        {
+            "target": ".github/skills/ai-writing-avoidance/SKILL.md",
+            "type": "Requires",
+            "strength": 0.8,
+            "description": "Journalistic writing must sound authentically human and attributed to real sources"
+        },
+        {
+            "target": ".github/skills/citation-management/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.7,
+            "description": "Source attribution and verification are core journalistic practices"
+        },
+        {
+            "target": ".github/skills/anti-hallucination/SKILL.md",
+            "type": "Requires",
+            "strength": 0.9,
+            "description": "Fabricated quotes, sources, or facts violate journalism's foundational principle"
+        },
+        {
+            "target": ".github/skills/research-first-development/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Investigative journalism follows systematic research methodology"
+        }
+    ],
+    "activationTriggers": [
+        "news",
+        "journalist",
+        "reporting",
+        "investigative",
+        "editorial",
+        "AP style",
+        "fact-check",
+        "source verification",
+        "press",
+        "media",
+        "newsroom",
+        "breaking news",
+        "correspondent"
+    ]
+}

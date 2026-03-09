@@ -1,0 +1,57 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "game-design",
+    "version": "1.0.0",
+    "created": "2026-03-09",
+    "inheritance": "inheritable",
+    "description": "Game mechanics, level design, player psychology, balancing, narrative design",
+    "connections": [
+        {
+            "target": ".github/skills/ui-ux-design/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.8,
+            "description": "Game UI/UX requires specialized interaction design for real-time systems"
+        },
+        {
+            "target": ".github/skills/testing-strategies/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Game testing includes playtesting methodology beyond unit/integration testing"
+        },
+        {
+            "target": ".github/skills/performance-profiling/SKILL.md",
+            "type": "Relates",
+            "strength": 0.7,
+            "description": "Games have strict performance budgets (16ms frame time) requiring deep profiling"
+        },
+        {
+            "target": ".github/skills/creative-writing/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Narrative design and quest writing employ creative writing techniques"
+        },
+        {
+            "target": ".github/skills/debugging-patterns/SKILL.md",
+            "type": "Relates",
+            "strength": 0.5,
+            "description": "Game bugs are notoriously complex (state machines, physics, multiplayer sync)"
+        }
+    ],
+    "activationTriggers": [
+        "game design",
+        "game mechanic",
+        "level design",
+        "gameplay",
+        "game loop",
+        "player",
+        "NPC",
+        "quest",
+        "game balance",
+        "game dev",
+        "Unity",
+        "Unreal",
+        "Godot",
+        "monetization"
+    ]
+}

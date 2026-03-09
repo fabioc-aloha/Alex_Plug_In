@@ -1,0 +1,59 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "hr-people-operations",
+    "version": "1.0.0",
+    "created": "2026-03-09",
+    "inheritance": "inheritable",
+    "description": "Talent acquisition, employee lifecycle, compensation, labor law, organizational development",
+    "connections": [
+        {
+            "target": ".github/skills/coaching-techniques/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.8,
+            "description": "HR uses coaching frameworks for performance management and employee development"
+        },
+        {
+            "target": ".github/skills/change-management/SKILL.md",
+            "type": "Relates",
+            "strength": 0.7,
+            "description": "Organizational changes flow through HR processes"
+        },
+        {
+            "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+            "type": "Requires",
+            "strength": 0.8,
+            "description": "Employee data is PII — strict privacy and retention rules apply"
+        },
+        {
+            "target": ".github/skills/career-development/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.7,
+            "description": "HR manages career pathing, internal mobility, and professional development programs"
+        },
+        {
+            "target": ".github/skills/business-analysis/SKILL.md",
+            "type": "Relates",
+            "strength": 0.5,
+            "description": "HR analytics and workforce planning require business analysis skills"
+        }
+    ],
+    "activationTriggers": [
+        "hiring",
+        "recruiting",
+        "onboarding",
+        "performance review",
+        "compensation",
+        "employee",
+        "workforce",
+        "talent acquisition",
+        "HR",
+        "human resources",
+        "people operations",
+        "termination",
+        "offboarding",
+        "labor law",
+        "FMLA",
+        "ADA"
+    ]
+}
