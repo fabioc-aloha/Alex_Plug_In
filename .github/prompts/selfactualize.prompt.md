@@ -5,7 +5,6 @@ agent: Alex
 
 # /selfactualize - Deep Self-Assessment
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "meditation"`. This updates the welcome sidebar avatar.
 
 Comprehensive architecture evaluation and optimization.
 
@@ -35,4 +34,3 @@ Use `alex_self_actualization` for assessment, `alex_architecture_status` for hea
 Beginning deep self-assessment. I'll analyze my cognitive architecture, implement improvements, and save learnings.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

@@ -1,12 +1,10 @@
 ---
 description: Start a curated learning journey for your role
 mode: agent
-tools: alex_cognitive_state_update
 ---
 
 # /journey - Curated Learning Progressions
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "learning"`.
 
 Guide users through curated skill progressions tailored to their role.
 
@@ -230,4 +228,3 @@ You'll master 8 skills across 4 phases over 2-3 weeks:
 Ready to begin with **ui-ux-design**? I'll assess what you already know.
 ```
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` when journey paused/completed.

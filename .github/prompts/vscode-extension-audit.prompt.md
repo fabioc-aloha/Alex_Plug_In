@@ -4,7 +4,6 @@ description: Systematic VS Code extension review for API correctness, security, 
 
 # VS Code Extension Audit
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
 
 **Purpose**: Systematic review of a VS Code extension for API correctness, security, resource management, and 1.109+ platform readiness
 **Domain**: VS Code extension development, API patterns
@@ -161,4 +160,3 @@ Alex:
 **Cross-reference**: `.github/instructions/vscode-extension-patterns.instructions.md`
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

@@ -5,7 +5,6 @@ agent: Alex
 
 # /skill-building - Create a New Skill
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
 
 Build a high-quality skill from validated experience — not theory.
 
@@ -29,4 +28,3 @@ Before creating a skill, confirm:
 
 What domain knowledge would you like to capture? Describe the experience that prompted this.
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

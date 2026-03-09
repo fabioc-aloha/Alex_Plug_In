@@ -5,7 +5,6 @@ agent: Alex
 
 # /dream - Neural Maintenance
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "dream"`. This updates the welcome sidebar avatar.
 
 Run unconscious processing and architecture health checks.
 
@@ -35,4 +34,3 @@ Dream is automatic maintenance. Fix problems silently; report only what you cann
 Begin neural maintenance now. Run diagnostics, fix all issues, and report only blockers.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

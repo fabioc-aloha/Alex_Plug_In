@@ -5,7 +5,6 @@ agent: Alex
 
 # /knowledge - Global Knowledge Management
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "learning"`. This updates the welcome sidebar avatar.
 
 Search, curate, and manage cross-project knowledge — patterns (GK-*) and insights (GI-*).
 
@@ -32,4 +31,3 @@ Search, curate, and manage cross-project knowledge — patterns (GK-*) and insig
 
 What would you like to do? Search for knowledge, save an insight, or curate existing entries?
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

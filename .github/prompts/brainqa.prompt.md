@@ -5,7 +5,6 @@ agent: Alex
 
 # /brainqa - Cognitive Architecture QA
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
 
 Run a full brain QA session: automated structural validation + manual semantic review.
 
@@ -43,4 +42,3 @@ Present findings as a structured table with severity ratings (CRITICAL/WARNING/I
 I'll run a full brain QA session. Which mode would you like?
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

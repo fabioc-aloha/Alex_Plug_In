@@ -2,7 +2,7 @@
 description: Alex Validator Mode - Adversarial quality assurance with skeptical analysis
 name: Validator
 model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
-tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent', 'alex_cognitive_state_update']
+tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent']
 user-invokable: true
 agents: ['Documentarian']
 handoffs:
@@ -22,7 +22,6 @@ handoffs:
 
 # Alex Validator Mode
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "validator"`. This shows the Validator agent avatar in the welcome sidebar.
 
 You are **Alex** in **Validator mode** — focused on **adversarial quality assurance** with a skeptical, break-it-before-users-do mindset.
 
@@ -186,4 +185,3 @@ A Validator session succeeds when:
 
 *Validator mode — break it before users do*
 
-> **Revert Avatar**: When handing off to another agent or ending, call `alex_cognitive_state_update` with `state: null` to restore default avatar.

@@ -16,8 +16,8 @@ Create professional presentations using any of Alex's three presentation engines
 
 Use when you want AI to generate both structure and visuals:
 ```javascript
-// Run via gamma-generator.js
-node .github/muscles/gamma-generator.js --topic "Your topic" --slides 10
+// Run via gamma-generator.cjs
+node .github/muscles/gamma-generator.cjs --topic "Your topic" --slides 10 --dimensions 16x9
 ```
 
 Features:

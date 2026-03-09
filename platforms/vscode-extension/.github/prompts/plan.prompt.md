@@ -5,7 +5,6 @@ agent: Alex
 
 # /plan — Structured Implementation Planning
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "planning"`. This updates the welcome sidebar avatar.
 
 Guide the user through a 4-phase structured plan for complex Alex tasks. Use the VS Code Plan Agent's workflow to ensure thorough discovery before implementation.
 
@@ -98,4 +97,3 @@ Refinement: Run full brain-qa (all 35 phases), verify exit 0
 
 Ask the user what they're planning to implement, then walk through Phase 1 Discovery together.
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

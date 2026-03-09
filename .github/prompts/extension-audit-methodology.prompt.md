@@ -4,7 +4,6 @@ description: Systematic 5-dimension quality audit for VS Code extensions: debug 
 
 # Extension Audit Workflow
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "reviewing"`. This updates the welcome sidebar avatar.
 
 **Invoke with**: `/extension-audit-methodology` or "audit extension quality"
 **Domain**: Systematic 5-dimension quality assurance for VS Code extensions
@@ -482,4 +481,3 @@ alex_docs/audits/
 - Dependency hygiene → smaller package size, fewer vulnerabilities
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

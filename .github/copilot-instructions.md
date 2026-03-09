@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.2.0 — On-Brand Partnership Release. VS Code 1.111 evaluation (agent-scoped hooks, autopilot adopted). UI/UX audit (17 findings → Wave 8). Master plan reorganized (1,296→456L, completed waves archived). UI audit procedure upgraded to 3-pass (v1.2.0). Command Center P5A CSS extraction (welcomeViewHtml 2,379→895L). FLUX brand fine-tune trifecta added (37th). BannerNoun→action phrasing (23 personas). LearnAlex persona alignment (27→47 personas, 20 added). Master plan re-prioritized (execution sequencing, severity triage, P5 marked complete). Easter egg badge relocated to header icon overlay (3 bugs fixed). Cognitive protocol audit (53 redundant → 19 mandatory calls). Persona detection audit (14 findings, CRITICAL→LOW).
+Recent: v6.2.0 — On-Brand Partnership Release. VS Code 1.111 evaluation (agent-scoped hooks, autopilot adopted). UI/UX audit (17 findings → Wave 8). Master plan reorganized (1,296→456L, completed waves archived). UI audit procedure upgraded to 3-pass (v1.2.0). Command Center P5A CSS extraction (welcomeViewHtml 2,379→895L). FLUX brand fine-tune trifecta added (37th). BannerNoun→action phrasing (23 personas). LearnAlex persona alignment (27→47 personas, 20 added). Master plan re-prioritized (execution sequencing, severity triage, P5 marked complete). Easter egg badge relocated to header icon overlay (3 bugs fixed). P6 complete: all avatar set/revert directives removed (39 prompts, 7 agents, 2 instructions, copilot-instructions, journey frontmatter). Auto-detection via detectCognitiveState() handles all cognitive state transitions.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: 2026-03-09
@@ -84,14 +84,6 @@ Meta-routing:
 
 Self-correction: About to suggest manual work → check skills index first.
 Multi-step workflow → check prompts index first.
-
-## Cognitive State (Avatar)
-
-When the conversation context shifts, call `alex_cognitive_state_update` with the appropriate state:
-debugging (fixing errors), planning (architecture/design), building (implementing), reviewing (code review/audit),
-learning (understanding/exploring), teaching (explaining), meditation (reflection), dream (maintenance), discovery (insights).
-This updates the welcome sidebar avatar. Call it once when context shifts, not on every message.
-**IMPORTANT**: After completing any dream or meditate session, ALWAYS call `alex_cognitive_state_update` with `state: "persona"` as the FINAL step to reset the avatar. Without this call the dream/meditate avatar persists in the welcome sidebar indefinitely.
 
 ## Heirs
 

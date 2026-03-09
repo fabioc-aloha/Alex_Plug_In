@@ -4,7 +4,6 @@ description: Generate AI-powered presentations using the Gamma API with Duarte m
 
 # Generate Gamma Presentation
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
 
 **Command**: `/gamma [topic or file path]`
 
@@ -207,4 +206,3 @@ For markdown-driven decks, set `--slides` explicitly to match the number of sect
 Monitor credits at: https://gamma.app/settings
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

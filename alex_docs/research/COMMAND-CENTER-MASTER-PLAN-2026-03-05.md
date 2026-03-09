@@ -47,14 +47,14 @@
 |:-----:|---------|-------|--------|-----------|
 | 1st | P7.1–7.2 | Fix `engineer` vs `developer` CRITICAL bug | ~30 min | CRITICAL — wrong persona for most common user type |
 | 2nd | P1 (8A) | WCAG touch targets & accessibility | 1 session | P1 HIGH accessibility, blocks v6.5.0 |
-| 3rd | P6 | Cognitive protocol cleanup (~106 lines of ceremony) | 1 session | Quick win, cleaner prompt context |
+| 3rd | ~~P6~~ | ~~Cognitive protocol cleanup~~ | ✅ Complete | All avatar directives removed (March 10, 2026) |
 | 4th | P1 (8B–8D) | Design system + polish + cross-tab consistency | 2–3 sessions | P2/P3 findings, v6.5.0 completeness |
 | 5th | P2 (P5B) | Trim 5 files below 1,000 lines | 1–2 sessions | v6.5.0 release criteria |
 | 6th | P3 (P5C) | Split 8 orchestrator functions | 1–2 sessions | v6.5.0 NASA R4 compliance |
 | 7th | P4 (P5D) | Formally accept 5 structural exceptions | 15 min | Decision only — close and document |
 | 8th | P7.3–7.5 | Persona detection HIGH improvements (LLM prompt, signals, skills) | 1–2 sessions | Broader detection quality |
 
-> **Quick wins available now**: P7.1–7.2 (CRITICAL fix, ~2 lines of code), P4 (P5D decision, 0 code), P6.5 (tooltip bug, 1 CSS line).
+> **Quick wins available now**: P7.1–7.2 (CRITICAL fix, ~2 lines of code), P4 (P5D decision, 0 code).
 
 ### Priority 1: Wave 8 — UI/UX Audit Remediation (NEW)
 
@@ -199,37 +199,87 @@
 | 7 | SRE / On-Call | SRE | Incident response, observability, runbooks |
 | 8 | Grant Writer | Grants | NSF/NIH proposals, funding narratives |
 
+#### Skill-to-Discipline Mapping — "Alex is trained on what you do"
+
+> **Purpose**: Each discipline/study guide should surface the Alex skills most relevant to that audience. This is an install incentive — users see that Alex has specialized knowledge for *their* profession, not just generic AI features. Use this table in LearnAlex study guides, workshop pages, and Docs tab persona cards.
+> **Source**: 120 skills in `.github/skills/` mapped to 41 LearnAlex workshop disciplines.
+> **Convention**: Skills listed in relevance order. First 3 are the strongest hooks for that audience.
+
+| # | Discipline | Key Skills (install incentive) |
+|---|-----------|-------------------------------|
+| 1 | Academic Research | `literature-review`, `citation-management`, `research-project-scaffold`, `practitioner-research`, `dissertation-defense`, `anti-hallucination` |
+| 2 | AI Researchers | `ai-agent-design`, `rag-architecture`, `prompt-engineering`, `llm-model-selection`, `multi-agent-orchestration`, `anti-hallucination` |
+| 3 | Business Knowledge Workers | `business-analysis`, `executive-storytelling`, `status-reporting`, `gamma-presentations`, `project-management`, `deep-work-optimization` |
+| 4 | Consultants | `business-analysis`, `executive-storytelling`, `scope-management`, `change-management`, `status-reporting`, `project-management` |
+| 5 | Content Creators | `creative-writing`, `ai-writing-avoidance`, `image-handling`, `brand-asset-management`, `book-publishing`, `markdown-mermaid` |
+| 6 | Creative Writers | `creative-writing`, `ai-writing-avoidance`, `book-publishing`, `prompt-engineering`, `lint-clean-markdown` |
+| 7 | CX Leaders | `frustration-recognition`, `business-analysis`, `change-management`, `executive-storytelling`, `status-reporting`, `coaching-techniques` |
+| 8 | Data Analysts | `microsoft-fabric`, `database-design`, `observability-monitoring`, `status-reporting`, `markdown-mermaid`, `anti-hallucination` |
+| 9 | Data Engineers | `microsoft-fabric`, `database-design`, `infrastructure-as-code`, `azure-architecture-patterns`, `azure-deployment-operations`, `observability-monitoring` |
+| 10 | Designers (UX/UI) | `ui-ux-design`, `svg-graphics`, `graphic-design`, `brand-asset-management`, `image-handling`, `cognitive-load` |
+| 11 | Developers | `code-review`, `testing-strategies`, `debugging-patterns`, `refactoring-patterns`, `api-design`, `git-workflow`, `vscode-extension-patterns`, `architecture-audit` |
+| 12 | Engineers | `architecture-audit`, `infrastructure-as-code`, `testing-strategies`, `debugging-patterns`, `performance-profiling`, `observability-monitoring` |
+| 13 | Enterprise Architects | `architecture-audit`, `architecture-refinement`, `azure-architecture-patterns`, `infrastructure-as-code`, `enterprise-integration`, `api-design` |
+| 14 | Entrepreneurs | `business-analysis`, `scope-management`, `project-scaffolding`, `executive-storytelling`, `brand-asset-management`, `status-reporting` |
+| 15 | Executives (CxO) | `executive-storytelling`, `status-reporting`, `change-management`, `scope-management`, `business-analysis`, `gamma-presentations` |
+| 16 | Finance Professionals | `business-analysis`, `pii-privacy-regulations`, `anti-hallucination`, `status-reporting`, `deep-work-optimization` |
+| 17 | Game Developers | `debugging-patterns`, `testing-strategies`, `performance-profiling`, `code-review`, `project-management`, `refactoring-patterns` |
+| 18 | Grant Writers | `grant-writing`, `creative-writing`, `citation-management`, `research-first-development`, `ai-writing-avoidance` |
+| 19 | Healthcare Professionals | `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management`, `research-first-development` |
+| 20 | HR & People Ops | `pii-privacy-regulations`, `change-management`, `coaching-techniques`, `business-analysis`, `creative-writing` |
+| 21 | Job Seekers | `creative-writing`, `ai-writing-avoidance`, `prompt-engineering`, `bootstrap-learning`, `status-reporting` |
+| 22 | Journalists | `creative-writing`, `ai-writing-avoidance`, `citation-management`, `anti-hallucination`, `research-first-development` |
+| 23 | Lawyers | `pii-privacy-regulations`, `privacy-responsible-ai`, `anti-hallucination`, `citation-management`, `research-first-development`, `creative-writing` |
+| 24 | Marketing | `creative-writing`, `ai-writing-avoidance`, `brand-asset-management`, `image-handling`, `executive-storytelling`, `prompt-engineering` |
+| 25 | Nonprofit Leaders | `grant-writing`, `business-analysis`, `executive-storytelling`, `change-management`, `status-reporting`, `creative-writing` |
+| 26 | Open Source Contributors | `git-workflow`, `code-review`, `documentation-quality-assurance`, `testing-strategies`, `release-process`, `api-documentation` |
+| 27 | Podcasters | `creative-writing`, `ai-writing-avoidance`, `text-to-speech`, `prompt-engineering`, `book-publishing` |
+| 28 | Power Users / Builders | `vscode-extension-patterns`, `vscode-configuration-validation`, `prompt-engineering`, `skill-building`, `mcp-development`, `agent-debug-panel` |
+| 29 | Product Managers | `project-management`, `scope-management`, `business-analysis`, `status-reporting`, `executive-storytelling`, `gamma-presentations` |
+| 30 | Project Managers | `project-management`, `scope-management`, `status-reporting`, `change-management`, `gamma-presentations`, `alex-effort-estimation` |
+| 31 | Psychology & Counselors | `learning-psychology`, `coaching-techniques`, `privacy-responsible-ai`, `creative-writing`, `frustration-recognition` |
+| 32 | Real Estate | `business-analysis`, `creative-writing`, `executive-storytelling`, `prompt-engineering`, `image-handling` |
+| 33 | Scientists | `research-first-development`, `literature-review`, `citation-management`, `practitioner-research`, `anti-hallucination`, `research-project-scaffold` |
+| 34 | Security Engineers | `security-review`, `distribution-security`, `secrets-management`, `pii-privacy-regulations`, `architecture-audit`, `incident-response` |
+| 35 | Sellers | `business-analysis`, `executive-storytelling`, `creative-writing`, `prompt-engineering`, `coaching-techniques` |
+| 36 | SRE / On-Call | `incident-response`, `post-mortem`, `observability-monitoring`, `root-cause-analysis`, `debugging-patterns`, `error-recovery-patterns` |
+| 37 | Standup Comics | `creative-writing`, `ai-writing-avoidance`, `prompt-engineering`, `rubber-duck-debugging` |
+| 38 | Students | `bootstrap-learning`, `learning-psychology`, `research-first-development`, `citation-management`, `socratic-questioning`, `deep-work-optimization` |
+| 39 | Teachers & Educators | `learning-psychology`, `coaching-techniques`, `socratic-questioning`, `gamma-presentations`, `creative-writing`, `slide-design` |
+| 40 | Technical Writers | `documentation-quality-assurance`, `api-documentation`, `markdown-mermaid`, `lint-clean-markdown`, `md-to-word`, `code-review` |
+| 41 | Visual Storytellers | `svg-graphics`, `graphic-design`, `image-handling`, `gamma-presentations`, `slide-design`, `markdown-mermaid` |
+
+**Coverage stats**: 54 of 120 skills appear in at least one discipline mapping. Top skills by discipline coverage: `creative-writing` (14), `business-analysis` (10), `executive-storytelling` (9), `anti-hallucination` (7), `status-reporting` (7), `citation-management` (7), `prompt-engineering` (7).
+
 ---
 
-### Priority 6: Streamline Cognitive Protocols (Stream A)
+### Priority 6: Streamline Cognitive Protocols (Stream A) ✅
 
 > **Source**: Cognitive state audit (March 9, 2026)
-> **Goal**: Remove ~106 lines of redundant avatar set/revert boilerplate from prompt files.
-> **Impact**: ~40 token savings per prompt invocation, cleaner prompt context, less ceremony.
+> **Goal**: Remove all avatar set/revert boilerplate — participant.ts auto-detects everything.
+> **Impact**: ~106 lines removed across prompts, agents, instructions. Cleaner prompt context, less ceremony.
+> **Completed**: March 10, 2026
 
-#### Context
+#### What was done
 
-`participant.ts` already auto-detects cognitive state from every `@alex` chat message via `detectCognitiveState()` and pushes it to both the chat avatar and the welcome sidebar. This makes manual avatar set/revert calls in prompt files redundant — except for sticky states (dream/meditation) and agent modes (no auto-detect path).
-
-**19 calls are necessary:**
-- 12 agent mode set/clear in 6 agent files (only mechanism — no auto-detect path)
-- 7 dream/meditation reverts in: dream, meditate, selfactualize, alex-initialization, performance-assessment
-
-**~53 calls are ceremony:**
-- ~26 non-dream/meditation prompt "Avatar set" calls (auto-detected by participant.ts)
-- ~26 non-dream/meditation prompt "Revert Avatar" calls (next message naturally shifts state)
+- Removed `> **Avatar**:` and `> **Revert Avatar**:` lines from all 39 prompt files
+- Removed `> **Avatar**:` and `> **Revert Avatar**:` lines from all 7 agent files
+- Removed `alex_cognitive_state_update` from tools frontmatter in all agent files and journey.prompt.md
+- Removed "Cognitive State (Avatar)" section from copilot-instructions.md
+- Removed "IMPORTANT — Avatar Revert" directives from meditation.instructions.md and dream-state-automation.instructions.md
+- Synced all changes to 3 heir platforms (vscode-extension, m365-copilot, agent-plugin)
 
 #### Steps
 
 | # | Step | Status |
 |---|------|:------:|
-| 6.1 | Remove `> **Avatar**:` lines from ~26 non-dream/meditation prompts | ☐ |
-| 6.2 | Remove `> **Revert Avatar**:` lines from same ~26 prompts | ☐ |
-| 6.3 | Keep reverts in: dream, meditate, selfactualize, alex-initialization, performance-assessment | — |
-| 6.4 | Keep agent mode set/clear in all 6 agent files | — |
+| 6.1 | Remove `> **Avatar**:` lines from all prompts | ✅ |
+| 6.2 | Remove `> **Revert Avatar**:` lines from all prompts | ✅ |
+| 6.3 | Remove avatar lines from all 7 agent files + tools frontmatter | ✅ |
+| 6.4 | Remove Cognitive State section from copilot-instructions.md | ✅ |
 | 6.5 | Fix tooltip bug: remove `pointer-events: none` from `.easter-egg-badge` CSS | ✅ |
-| 6.6 | Verify `detectCognitiveState()` keyword triggers cover all 9 cognitive states | ☐ |
-| 6.7 | Compile + test that sidebar avatar still updates on `/debug`, `/review`, etc. | ☐ |
+| 6.6 | Remove avatar revert from meditation.instructions.md + dream-state-automation.instructions.md | ✅ |
+| 6.7 | Sync all changes to heir platforms | ✅ |
 
 ---
 

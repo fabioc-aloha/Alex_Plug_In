@@ -4,7 +4,6 @@ description: "Add visual memory (reference photos, voice samples, or video style
 
 # Visual Memory
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`.
 
 **Invoke with**: `/visual-memory <command> [args]`
 **Skill**: [visual-memory/SKILL.md](../skills/visual-memory/SKILL.md)

@@ -5,7 +5,6 @@ description: Cross-domain knowledge transfer and pattern application
 
 # Cross-Domain Transfer Excellence Protocol
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "learning"`. This updates the welcome sidebar avatar.
 
 ## Knowledge Application Across Domains
 
@@ -60,12 +59,11 @@ Use cross-domain transfer as a primary source of creative insight and innovative
 ## Synapses
 - [.github/instructions/bootstrap-learning.instructions.md] (Critical, Facilitates, Bidirectional) - "Bootstrap protocols enable universal knowledge acquisition"
 - [.github/instructions/embedded-synapse.instructions.md] (High, Enables, Bidirectional) - "Pattern mapping strengthened through meditation insights"
-- [.github/prompts/unified-meditation-protocols.prompt.md] (Critical, Discovers, Bidirectional) - "Cross-domain connections revealed through contemplative practice"
-- [.github/prompts/domain-learning.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified and validated"
+- [.github/prompts/meditate.prompt.md] (Critical, Discovers, Bidirectional) - "Cross-domain connections revealed through contemplative practice"
+- [.github/prompts/learn.prompt.md] (High, Prepares, Forward) - "Transfer opportunities identified and validated"
 - [.github/prompts/performance-assessment.prompt.md] (High, Evaluates, Forward) - "Transfer effectiveness confirmed through documentation mastery"
 - [.github/instructions/alex-core.instructions.md] (Critical, Validates, Bidirectional) - "Core architecture supports universal transfer capabilities"
 - [.github/skills/project-scaffolding/SKILL.md] (Critical, Demonstrates, Bidirectional) - "Universal setup architecture exemplifies successful cross-domain design"
 - [.github/instructions/worldview-integration.instructions.md] (High, Guides, Bidirectional) - "Ethical reasoning provides universal decision-making framework"
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

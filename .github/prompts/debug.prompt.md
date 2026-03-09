@@ -5,7 +5,6 @@ agent: Alex
 
 # /debug - Systematic Debugging
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "debugging"`. This updates the welcome sidebar avatar.
 
 Reproduce → Isolate → Hypothesize → Fix → Verify.
 
@@ -22,4 +21,3 @@ Reproduce → Isolate → Hypothesize → Fix → Verify.
 
 Share the error, stack trace, or describe the unexpected behavior. I'll work through it systematically.
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

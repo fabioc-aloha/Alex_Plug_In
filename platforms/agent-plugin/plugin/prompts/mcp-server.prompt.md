@@ -4,7 +4,6 @@ description: Scaffold a complete MCP server with tools, resources, error handlin
 
 # Create MCP Server
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
 
 **Purpose**: Scaffold a complete, production-ready MCP server with tools, resources, error handling, and VS Code integration
 **Domain**: AI infrastructure, Model Context Protocol
@@ -190,4 +189,3 @@ Alex:
 **Cross-reference**: `.github/instructions/mcp-development.instructions.md`
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

@@ -5,7 +5,6 @@ agent: Alex
 
 # /rca - Root Cause Analysis
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "debugging"`. This updates the welcome sidebar avatar.
 
 Find the true source, not symptoms — systematic investigation from observation to permanent fix.
 
@@ -25,4 +24,3 @@ Describe the bug, error, or failure you're investigating. Include:
 - When it started (context)
 - What you've already tried
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

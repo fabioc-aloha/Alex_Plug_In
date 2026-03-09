@@ -5,7 +5,6 @@ agent: Alex
 
 # /plan — Structured Implementation Planning
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "planning"`. This updates the welcome sidebar avatar.
 
 Guide the user through a 4-phase structured plan for complex Alex tasks. Use the VS Code Plan Agent's workflow to ensure thorough discovery before implementation.
 
@@ -24,7 +23,7 @@ Invoke `/plan` for tasks that involve:
 
 Survey the available landscape before acting:
 
-1. **Skill discovery**: Are there existing skills relevant to this task? Check `.github/skills/` and the skill-activation index.
+1. **Skill discovery**: Are there existing skills relevant to this task? Check `.github/skills/` and the memory-activation index.
 2. **File archeology**: What files will be affected? Read them before touching them.
 3. **Dependency check**: What does this change depend on? What depends on it?
 4. **Constraint detection**: Are there safety imperatives or locked files involved?
@@ -80,7 +79,7 @@ Refinement: Identify brain-qa phases impacted, changelog entry needed
 ```
 Discovery:  Check SKILLS-CATALOG for existing coverage; read skill-building trifecta
 Alignment:  Confirm trifecta scope (SKILL.md + instructions + prompt + synapses)
-Design:     Create files in order → add to skill-activation index → run brain-qa
+Design:     Create files in order → add to memory-activation index → run brain-qa
 Refinement: Verify synapse schema compliance, heir sync, catalog count update
 ```
 
@@ -98,4 +97,3 @@ Refinement: Run full brain-qa (all 35 phases), verify exit 0
 
 Ask the user what they're planning to implement, then walk through Phase 1 Discovery together.
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

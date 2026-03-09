@@ -5,7 +5,6 @@ agent: Alex
 
 # /meditate - Knowledge Consolidation
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "meditation"`. This updates the welcome sidebar avatar.
 
 Guide the user through conscious knowledge consolidation using Alex's meditation protocols.
 
@@ -34,4 +33,3 @@ Meditation is incomplete without actual file changes. Every meditation must prod
 Begin the meditation session now. Review the current conversation for learnings, save them to Global Knowledge, and fix any issues discovered.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

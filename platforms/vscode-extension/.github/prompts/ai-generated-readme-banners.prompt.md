@@ -4,7 +4,6 @@ description: Generate ultra-wide 3:1 README banners with professional typography
 
 # AI-Generated README Banner Workflow
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
 
 **Invoke with**: `/ai-generated-readme-banners` or "generate README banner"
 **Domain**: Professional ultra-wide banner generation for GitHub repositories and documentation
@@ -500,4 +499,3 @@ if (typeof output.url === 'function') {
 **You now have a professional README banner for your project!**
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

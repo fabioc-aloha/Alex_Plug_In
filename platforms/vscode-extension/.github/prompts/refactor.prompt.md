@@ -5,7 +5,6 @@ agent: Alex
 
 # /refactor - Guided Refactoring
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`. This updates the welcome sidebar avatar.
 
 Safe transformations — same behavior, better structure.
 
@@ -30,4 +29,3 @@ Safe transformations — same behavior, better structure.
 
 Share the code you'd like to refactor, or point me to a file. I'll identify the smells and propose a safe refactoring plan.
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

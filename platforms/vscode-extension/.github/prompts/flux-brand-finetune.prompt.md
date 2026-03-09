@@ -4,7 +4,6 @@ description: "Train a custom FLUX LoRA fine-tune for consistent brand character 
 
 # FLUX Brand Fine-Tune
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "building"`.
 
 **Invoke with**: `/flux-brand-finetune <command>` or "train a FLUX LoRA" / "fine-tune brand model"
 **Skill**: [flux-brand-finetune/SKILL.md](../skills/flux-brand-finetune/SKILL.md)

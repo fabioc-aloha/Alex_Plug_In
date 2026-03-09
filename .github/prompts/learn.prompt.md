@@ -5,7 +5,6 @@ agent: Alex
 
 # /learn - Bootstrap Learning
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "learning"`. This updates the welcome sidebar avatar.
 
 Guide structured knowledge acquisition using the Socratic method.
 
@@ -26,4 +25,3 @@ Use the Socratic method—ask questions rather than lecture. Guide discovery thr
 What would you like to learn? I'll assess your current knowledge and create a learning plan.
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.

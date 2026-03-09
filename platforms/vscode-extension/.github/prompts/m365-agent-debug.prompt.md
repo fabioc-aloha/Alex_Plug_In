@@ -4,7 +4,6 @@ description: Systematically diagnose and fix a non-functional M365 Copilot decla
 
 # Debug M365 Declarative Agent
 
-> **Avatar**: Call `alex_cognitive_state_update` with `state: "debugging"`. This updates the welcome sidebar avatar.
 
 **Purpose**: Systematically diagnose and fix a non-functional M365 Copilot declarative agent
 **Domain**: M365 Copilot, declarative agents, Teams platform
@@ -182,4 +181,3 @@ Alex:
 **Cross-reference**: `.github/instructions/m365-agent-debugging.instructions.md`
 
 
-> **Revert Avatar**: Call `alex_cognitive_state_update` with `state: "persona"` to reset to project-appropriate avatar.
