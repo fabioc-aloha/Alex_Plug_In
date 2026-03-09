@@ -335,6 +335,117 @@ This is the step-by-step execution checklist. Each step is small enough to compl
 
 ---
 
+## Post-Implementation Optimization
+
+> **Context**: Command Center v1.0 is delivered. The 100-step build plan is complete. What follows is the technical debt incurred during rapid feature delivery — primarily file size growth and missing test coverage. These items feed directly into the v6.5.0 "Trust Release" Definition of Done in [ROADMAP-UNIFIED.md](../../ROADMAP-UNIFIED.md).
+
+### Current State (March 8, 2026)
+
+| Metric | Value | v6.5.0 Target |
+|--------|:-----:|:-------------:|
+| `welcomeViewHtml.ts` | **2,982 lines** | <1,500 |
+| `welcomeView.ts` | **819 lines** | <800 |
+| Files >1,500 lines | 1 | 0 |
+| Files >1,000 lines | 8 | 0 |
+| Total TS source files | 90 | — |
+| Total lines of code | 44,517 | — |
+| Test files | 6 | 20+ |
+| NASA R4 violations (functions >60L) | ~73 | 0 |
+| North Star Trust score | 5/10 | ≥7/10 |
+
+### P0 — Break Down welcomeViewHtml.ts (2,982 → ~600 + 5 modules)
+
+The Command Center's main rendering file nearly tripled during Waves 1–7 (was 1,830 pre-Wave-7, now 2,982). It's the single largest file in the codebase and the primary blocker for the v6.5.0 "<1,500 lines" criterion.
+
+**Extraction plan** (one module per tab):
+
+| Module | Extracts | Est. Lines |
+|--------|----------|:----------:|
+| `missionTabHtml.ts` | Mission Command tab HTML + CSS + client JS | ~500 |
+| `agentsTabHtml.ts` | Agents tab HTML + CSS | ~300 |
+| `skillStoreTabHtml.ts` | Skill Store tab HTML + CSS + icon map + toggle handlers | ~450 |
+| `mindTabHtml.ts` | Mind tab HTML + CSS (cognitive age, memory modalities, freshness, uncertainty, meditation) | ~500 |
+| `docsTabHtml.ts` | Docs tab HTML + CSS (architecture grid, operations, getting started, partnership) | ~400 |
+| `welcomeViewHtml.ts` (residual) | Shell: tab bar, shared CSS, shared utilities, `getWelcomeHtmlContent()` orchestrator | ~600 |
+
+**Approach**: Each tab module exports a single function (e.g., `getMissionTabHtml(data)`) called by the orchestrator. Shared CSS stays in the shell. Tab-specific CSS moves with the tab. Client-side JS handlers for each tab move into the module.
+
+**Risk**: CSS class collisions after split. Mitigated by tab-prefixed class naming convention (already partially in place: `.skill-*`, `.agent-*`, `.mind-*`).
+
+### P1 — Break Down Other >1,000-Line Files
+
+8 files exceed 1,000 lines. Priority order by size and coupling:
+
+| File | Lines | Decomposition Strategy |
+|------|:-----:|------------------------|
+| `extension.ts` | 1,283 | Extract command registration into `commandRegistry.ts`, activation into `activation.ts` |
+| `contextMenu.ts` | 1,278 | Group by menu category (file ops, cognitive ops, workflow ops) |
+| `globalKnowledgeOps.ts` | 1,234 | Split CRUD operations from search/query operations |
+| `upgrade.ts` | 1,209 | Extract per-version migration functions into `migrations/` directory |
+| `personaDetection.ts` | 1,062 | Separate detection logic from persona definitions |
+| `pptxGenerator.ts` | 1,035 | Extract slide builders per template type |
+| `commandsPresentation.ts` | 1,024 | Split by presentation format (PPTX, Marp, Gamma) |
+| `setupEnvironment.ts` | 997 | Extract validation, file generation, and configuration into separate modules |
+
+### P2 — Test Coverage (6 → 20+ test files)
+
+Current test files cover only basic infrastructure. The Command Center's new data providers and UI logic are untested.
+
+**Priority test targets** (ordered by risk × complexity):
+
+| Test File | Tests For | Why |
+|-----------|-----------|-----|
+| `welcomeView.test.ts` | `_collectMindData`, `_collectAgents`, `_collectSkills`, toggle handlers | Core data pipeline — feeds all 5 tabs |
+| `secretsManager.test.ts` | `getTokenStatuses`, token CRUD | Security-sensitive — tokens must never leak |
+| `honestUncertainty.test.ts` | `getCalibrationSummary`, coverage scoring | Integrity feature — wrong numbers erode trust |
+| `episodicMemory.test.ts` | File-based memory CRUD, freshness calculation | Persistence layer — data loss is catastrophic |
+| `outcomeTracker.test.ts` | Prediction tracking, accuracy calculation | Calibration data feeds Mind tab |
+| `taskDetector.test.ts` | Task classification, domain detection | Routing accuracy affects all agent dispatching |
+| `workflowEngine.test.ts` | State machine transitions, phase detection | Controls session lifecycle |
+| `expertiseModel.test.ts` | Expertise scoring, tier progression | Cognitive age calculation |
+| `personaDetection.test.ts` | Persona matching, priority resolution | Wrong persona → wrong agent → wrong output |
+| `globalKnowledge.test.ts` | Cross-project knowledge search, promotion | Knowledge integrity across repos |
+| `avatarMappings.test.ts` | SVG resolution, fallback chain | Visual regression protection |
+| `contextMenu.test.ts` | Menu item generation, command routing | User interaction entry points |
+| `healthCheck.test.ts` | Architecture validation, status aggregation | Feeds Mission Command health banner |
+| `upgrade.test.ts` | Version migration, data transformation | Data corruption prevention during updates |
+
+### P3 — NASA R4 Violations (73 → 0)
+
+73 functions exceed the 60-line limit. Breakdown:
+
+| Severity | Count | Threshold | Approach |
+|----------|:-----:|:---------:|----------|
+| Critical | 11 | >200 lines | Extract helper functions, apply strategy pattern |
+| Major | 22 | 100–200 lines | Inline decomposition, extract conditionals |
+| Minor | 40 | 61–100 lines | Lightweight refactor, often just extracting a nested loop or switch |
+
+These refactors should piggyback on the P0/P1 decomposition — when splitting a file, also split its long functions. Don't refactor functions in isolation without the file-level context.
+
+### P4 — Cancelled Steps (Deferred, Not Abandoned)
+
+Two steps were cancelled due to missing Contract B (context budget API):
+
+| Step | Dependency | Unblock Condition |
+|------|-----------|-------------------|
+| 7.15 — Context Budget percentage bar | VS Code API for context window usage | VS Code exposes `chat.contextBudget` or equivalent API |
+| 7.31 — Context Budget Impact per skill | Per-skill token cost estimation | Skill token measurement tooling built |
+
+These can be revisited when VS Code adds context budget visibility APIs or when a token-counting utility is built into the extension.
+
+### Success Criteria
+
+All optimization work is gated by the v6.5.0 Definition of Done:
+
+1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files
+2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file
+3. **No source file >1,500 lines** — `welcomeViewHtml.ts` must be decomposed
+4. **North Star Trust score ≥7/10** — re-assessed at ship time
+
+> **Principle**: *Don't add features. Prove the existing ones deserve trust.*
+
+---
+
 ## Validated Baseline
 
 These facts are verified against the current repo (March 8, 2026) and treated as fixed planning inputs.
