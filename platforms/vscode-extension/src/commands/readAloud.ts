@@ -150,16 +150,11 @@ function hideTTSStatus(): void {
  * @param voicePreset Voice preset to use
  * @param uri Optional file URI (from explorer context menu)
  */
-export async function readAloud(
-    context: vscode.ExtensionContext,
-    voicePreset: VoicePreset = 'default',
-    uri?: vscode.Uri
-): Promise<void> {
+async function acquireTextForSpeech(uri?: vscode.Uri): Promise<{ rawText: string; isMarkdown: boolean } | undefined> {
     const editor = vscode.window.activeTextEditor;
     let rawText: string;
     let isMarkdown = false;
     
-    // If URI provided (from explorer context menu), read from file
     if (uri) {
         try {
             const content = await vscode.workspace.fs.readFile(uri);
@@ -167,10 +162,9 @@ export async function readAloud(
             isMarkdown = uri.fsPath.endsWith('.md');
         } catch (error) {
             vscode.window.showErrorMessage(`❌ Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
-            return;
+            return undefined;
         }
     } else if (!editor) {
-        // No active editor - offer options to get text or use other voice commands
         const choice = await vscode.window.showQuickPick([
             { label: '$(clippy) Paste from Clipboard', value: 'clipboard', description: 'Read text from clipboard' },
             { label: '$(edit) Type Text', value: 'type', description: 'Enter custom text' },
@@ -183,27 +177,17 @@ export async function readAloud(
             placeHolder: 'No document open. How would you like to provide text?'
         });
         
-        if (!choice || !choice.value) {
-            return; // User cancelled or separator
-        }
+        if (!choice || !choice.value) { return undefined; }
         
-        // Handle command shortcuts
-        if (choice.value === 'speakPrompt') {
-            await vscode.commands.executeCommand('alex.speakPrompt');
-            return;
-        } else if (choice.value === 'saveAsAudio') {
-            await vscode.commands.executeCommand('alex.saveAsAudio');
-            return;
-        } else if (choice.value === 'toggleVoice') {
-            await vscode.commands.executeCommand('alex.toggleVoice');
-            return;
-        }
+        if (choice.value === 'speakPrompt') { await vscode.commands.executeCommand('alex.speakPrompt'); return undefined; }
+        if (choice.value === 'saveAsAudio') { await vscode.commands.executeCommand('alex.saveAsAudio'); return undefined; }
+        if (choice.value === 'toggleVoice') { await vscode.commands.executeCommand('alex.toggleVoice'); return undefined; }
         
         if (choice.value === 'clipboard') {
             rawText = await vscode.env.clipboard.readText();
             if (!rawText.trim()) {
                 vscode.window.showWarningMessage('📋 Clipboard is empty. Copy some text first.');
-                return;
+                return undefined;
             }
         } else {
             const input = await vscode.window.showInputBox({
@@ -212,83 +196,44 @@ export async function readAloud(
                 placeHolder: 'Type text here...',
                 ignoreFocusOut: true
             });
-            
-            if (!input?.trim()) {
-                return; // User cancelled or empty input
-            }
+            if (!input?.trim()) { return undefined; }
             rawText = input;
         }
     } else {
-        // Get text from editor (selection or full document)
         rawText = getTextToRead(editor);
         isMarkdown = editor.document.languageId === 'markdown';
     }
     
     if (!rawText.trim()) {
         vscode.window.showWarningMessage('📝 No text to read. Select text or open a document with content.');
-        return;
+        return undefined;
     }
     
     // Detect markdown in pasted/typed text (heuristics)
     if (!isMarkdown) {
         const markdownPatterns = /^#+\s|^\|.*\|$|\*\*.*\*\*|__.*__|```|\[.*\]\(.*\)|^[-*]\s/m;
-        if (markdownPatterns.test(rawText)) {
-            isMarkdown = true;
-        }
+        if (markdownPatterns.test(rawText)) { isMarkdown = true; }
     }
     
-    // Prepare text for speech (strip markdown, etc.)
-    let textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
-    
-    // Check length and offer summarization for long documents
-    const wordCount = textToSpeak.split(/\s+/).length;
-    const duration = estimateDuration(wordCount);
-    
-    if (wordCount > LONG_CONTENT_WORD_THRESHOLD) {
-        const summaryDuration = estimateDuration(WORDS_PER_MINUTE * 3); // ~3 minute summary
-        
-        const choice = await vscode.window.showWarningMessage(
-            `This content is ${duration.formatted} long (~${wordCount} words). Would you like a summary instead?`,
-            { modal: false },
-            'Read Summary (~3 min)',
-            'Read Full Content',
-            'Cancel'
-        );
-        
-        if (choice === 'Cancel' || !choice) {
-            return;
-        }
-        
-        if (choice === 'Read Summary (~3 min)') {
-            showTTSStatus('Summarizing...', true);
-            
-            const summary = await summarizeForSpeech(rawText, 3);
-            if (summary) {
-                textToSpeak = summary;
-                vscode.window.showInformationMessage(
-                    `📖 Reading summarized version (${estimateDuration(summary.split(/\s+/).length).formatted})`
-                );
-            }
-            // If summarization fails, we continue with full text
-        }
-    }
-    
-    // Detect language
+    return { rawText, isMarkdown };
+}
+
+async function selectVoiceForText(
+    textToSpeak: string,
+    voicePreset: VoicePreset
+): Promise<{ voice: string; lang: string } | undefined> {
     const detected = detectLanguage(textToSpeak);
     let selectedVoice: string;
     let selectedLang: string;
     
     if (detected.confidence >= LANGUAGE_CONFIDENCE_THRESHOLD) {
-        // High confidence - use detected language
         selectedVoice = getVoiceForLanguage(detected.lang);
         selectedLang = detected.lang;
         
-        // For non-English, show brief notification
         if (!detected.lang.startsWith('en-')) {
             vscode.window.showInformationMessage(`🌍 Detected ${detected.name} - using ${selectedVoice.split('-')[2]}`);
         }
     } else {
-        // Low confidence - ask user
         const languageItems = Object.entries(LANGUAGE_VOICES).map(([code, info]) => ({
             label: info.name,
             description: code,
@@ -296,7 +241,6 @@ export async function readAloud(
             code
         }));
         
-        // Put detected language first, then English
         languageItems.sort((a, b) => {
             if (a.code === detected.lang) {return -1;}
             if (b.code === detected.lang) {return 1;}
@@ -311,78 +255,128 @@ export async function readAloud(
             matchOnDescription: true
         });
         
-        if (!selected) {
-            return; // User cancelled
-        }
+        if (!selected) { return undefined; }
         
         selectedVoice = LANGUAGE_VOICES[selected.code].voice;
         selectedLang = selected.code;
     }
     
-    // Override with English preset if user explicitly selected one and text is English
     if (voicePreset !== 'default' && selectedLang.startsWith('en-')) {
         selectedVoice = VOICE_PRESETS[voicePreset];
     }
     
-    try {
-        showTTSStatus('Synthesizing...', true);
-        
-        // Synthesize audio
-        const voice = selectedVoice;
-        const audioBuffer = await synthesize(
-            textToSpeak,
-            { voice, lang: selectedLang },
-            (progress: TTSChunkedProgress) => {
-                // Build chunk indicator for long documents
-                const chunkInfo = progress.totalChunks && progress.totalChunks > 1
-                    ? ` [${progress.currentChunk}/${progress.totalChunks}]`
-                    : '';
-                
-                switch (progress.state) {
-                    case 'connecting':
-                        showTTSStatus(`Connecting...${chunkInfo}`, true);
-                        break;
-                    case 'synthesizing':
-                        showTTSStatus(`Synthesizing...${chunkInfo}`, true);
-                        break;
-                    case 'streaming':
-                        const kb = Math.round((progress.totalBytesReceived || progress.bytesReceived || 0) / 1024);
-                        showTTSStatus(`Receiving... ${kb}KB${chunkInfo}`, true);
-                        break;
-                    case 'complete':
-                        showTTSStatus('Preparing playback...', true);
-                        break;
-                    case 'error':
-                        showTTSStatus('Error', false);
-                        vscode.window.showErrorMessage(`❌ TTS Error: ${progress.error}`);
-                        break;
+    return { voice: selectedVoice, lang: selectedLang };
+}
+
+async function synthesizeAndPlayAudio(
+    textToSpeak: string,
+    voice: string,
+    lang: string,
+    context: vscode.ExtensionContext
+): Promise<void> {
+    showTTSStatus('Synthesizing...', true);
+    
+    const audioBuffer = await synthesize(
+        textToSpeak,
+        { voice, lang },
+        (progress: TTSChunkedProgress) => {
+            const chunkInfo = progress.totalChunks && progress.totalChunks > 1
+                ? ` [${progress.currentChunk}/${progress.totalChunks}]`
+                : '';
+            
+            switch (progress.state) {
+                case 'connecting':
+                    showTTSStatus(`Connecting...${chunkInfo}`, true);
+                    break;
+                case 'synthesizing':
+                    showTTSStatus(`Synthesizing...${chunkInfo}`, true);
+                    break;
+                case 'streaming': {
+                    const kb = Math.round((progress.totalBytesReceived || progress.bytesReceived || 0) / 1024);
+                    showTTSStatus(`Receiving... ${kb}KB${chunkInfo}`, true);
+                    break;
                 }
-            }
-        );
-        
-        showTTSStatus('Playing', false);
-        
-        // Play audio in webview
-        await playWithWebview(audioBuffer, context, (state) => {
-            switch (state.state) {
-                case 'playing':
-                    const percent = state.progress ? Math.round(state.progress) : 0;
-                    showTTSStatus(`Playing ${percent}%`, false);
-                    break;
-                case 'paused':
-                    showTTSStatus('Paused', false);
-                    break;
-                case 'ended':
-                case 'stopped':
-                    hideTTSStatus();
+                case 'complete':
+                    showTTSStatus('Preparing playback...', true);
                     break;
                 case 'error':
-                    hideTTSStatus();
-                    vscode.window.showErrorMessage(`❌ Playback error: ${state.error}`);
+                    showTTSStatus('Error', false);
+                    vscode.window.showErrorMessage(`❌ TTS Error: ${progress.error}`);
                     break;
             }
-        }, voice);
+        }
+    );
+    
+    showTTSStatus('Playing', false);
+    
+    await playWithWebview(audioBuffer, context, (state) => {
+        switch (state.state) {
+            case 'playing': {
+                const percent = state.progress ? Math.round(state.progress) : 0;
+                showTTSStatus(`Playing ${percent}%`, false);
+                break;
+            }
+            case 'paused':
+                showTTSStatus('Paused', false);
+                break;
+            case 'ended':
+            case 'stopped':
+                hideTTSStatus();
+                break;
+            case 'error':
+                hideTTSStatus();
+                vscode.window.showErrorMessage(`❌ Playback error: ${state.error}`);
+                break;
+        }
+    }, voice);
+}
+
+/**
+ * Main command: Read current document/selection aloud
+ */
+export async function readAloud(
+    context: vscode.ExtensionContext,
+    voicePreset: VoicePreset = 'default',
+    uri?: vscode.Uri
+): Promise<void> {
+    const acquired = await acquireTextForSpeech(uri);
+    if (!acquired) { return; }
+    
+    const { rawText, isMarkdown } = acquired;
+    let textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
+    
+    // Check length and offer summarization for long documents
+    const wordCount = textToSpeak.split(/\s+/).length;
+    const duration = estimateDuration(wordCount);
+    
+    if (wordCount > LONG_CONTENT_WORD_THRESHOLD) {
+        const choice = await vscode.window.showWarningMessage(
+            `This content is ${duration.formatted} long (~${wordCount} words). Would you like a summary instead?`,
+            { modal: false },
+            'Read Summary (~3 min)',
+            'Read Full Content',
+            'Cancel'
+        );
         
+        if (choice === 'Cancel' || !choice) { return; }
+        
+        if (choice === 'Read Summary (~3 min)') {
+            showTTSStatus('Summarizing...', true);
+            const summary = await summarizeForSpeech(rawText, 3);
+            if (summary) {
+                textToSpeak = summary;
+                vscode.window.showInformationMessage(
+                    `📖 Reading summarized version (${estimateDuration(summary.split(/\s+/).length).formatted})`
+                );
+            }
+        }
+    }
+    
+    const voiceResult = await selectVoiceForText(textToSpeak, voicePreset);
+    if (!voiceResult) { return; }
+    
+    try {
+        await synthesizeAndPlayAudio(textToSpeak, voiceResult.voice, voiceResult.lang, context);
     } catch (error) {
         hideTTSStatus();
         const message = error instanceof Error ? error.message : String(error);
@@ -396,17 +390,12 @@ export async function readAloud(
  * @param voicePreset Voice preset to use
  * @param uri Optional file URI (from explorer context menu)
  */
-export async function saveAsAudio(
-    context: vscode.ExtensionContext,
-    voicePreset: VoicePreset = 'default',
-    uri?: vscode.Uri
-): Promise<void> {
+async function acquireTextForSave(uri?: vscode.Uri): Promise<{ rawText: string; isMarkdown: boolean; defaultName: string } | undefined> {
     const editor = vscode.window.activeTextEditor;
     let rawText: string;
     let defaultName: string;
     let isMarkdown = false;
     
-    // If URI provided (from explorer context menu), read from file
     if (uri) {
         try {
             const content = await vscode.workspace.fs.readFile(uri);
@@ -415,10 +404,9 @@ export async function saveAsAudio(
             isMarkdown = uri.fsPath.endsWith('.md');
         } catch (error) {
             vscode.window.showErrorMessage(`❌ Failed to read file: ${error instanceof Error ? error.message : String(error)}`);
-            return;
+            return undefined;
         }
     } else if (!editor) {
-        // No active editor - offer options to get text or use other voice commands
         const choice = await vscode.window.showQuickPick([
             { label: '$(clippy) Paste from Clipboard', value: 'clipboard', description: 'Save clipboard text as audio' },
             { label: '$(edit) Type Text', value: 'type', description: 'Enter custom text' },
@@ -431,27 +419,17 @@ export async function saveAsAudio(
             placeHolder: 'No document open. How would you like to provide text?'
         });
         
-        if (!choice || !choice.value) {
-            return; // User cancelled or separator
-        }
+        if (!choice || !choice.value) { return undefined; }
         
-        // Handle command shortcuts
-        if (choice.value === 'readAloud') {
-            await vscode.commands.executeCommand('alex.readAloud');
-            return;
-        } else if (choice.value === 'speakPrompt') {
-            await vscode.commands.executeCommand('alex.speakPrompt');
-            return;
-        } else if (choice.value === 'toggleVoice') {
-            await vscode.commands.executeCommand('alex.toggleVoice');
-            return;
-        }
+        if (choice.value === 'readAloud') { await vscode.commands.executeCommand('alex.readAloud'); return undefined; }
+        if (choice.value === 'speakPrompt') { await vscode.commands.executeCommand('alex.speakPrompt'); return undefined; }
+        if (choice.value === 'toggleVoice') { await vscode.commands.executeCommand('alex.toggleVoice'); return undefined; }
         
         if (choice.value === 'clipboard') {
             rawText = await vscode.env.clipboard.readText();
             if (!rawText.trim()) {
                 vscode.window.showWarningMessage('📋 Clipboard is empty. Copy some text first.');
-                return;
+                return undefined;
             }
         } else {
             const input = await vscode.window.showInputBox({
@@ -460,166 +438,94 @@ export async function saveAsAudio(
                 placeHolder: 'Type text here...',
                 ignoreFocusOut: true
             });
-            
-            if (!input?.trim()) {
-                return; // User cancelled or empty input
-            }
+            if (!input?.trim()) { return undefined; }
             rawText = input;
         }
         defaultName = 'audio.mp3';
     } else {
-        // Get text to save from editor
         rawText = getTextToRead(editor);
-        defaultName = path.basename(
-            editor.document.fileName,
-            path.extname(editor.document.fileName)
-        ) + '.mp3';
+        defaultName = path.basename(editor.document.fileName, path.extname(editor.document.fileName)) + '.mp3';
         isMarkdown = editor.document.languageId === 'markdown';
     }
     
     if (!rawText.trim()) {
         vscode.window.showWarningMessage('📝 No text to convert. Select text or open a document with content.');
-        return;
+        return undefined;
     }
+    
+    return { rawText, isMarkdown, defaultName };
+}
+
+/**
+ * Save current document/selection as MP3
+ */
+export async function saveAsAudio(
+    context: vscode.ExtensionContext,
+    voicePreset: VoicePreset = 'default',
+    uri?: vscode.Uri
+): Promise<void> {
+    const acquired = await acquireTextForSave(uri);
+    if (!acquired) { return; }
+    
+    const { rawText, isMarkdown, defaultName } = acquired;
     
     const saveUri = await vscode.window.showSaveDialog({
         defaultUri: vscode.Uri.file(
-            path.join(
-                vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '',
-                defaultName
-            )
+            path.join(vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '', defaultName)
         ),
-        filters: {
-            'MP3 Audio': ['mp3']
-        },
+        filters: { 'MP3 Audio': ['mp3'] },
         title: 'Save Speech as MP3'
     });
+    if (!saveUri) { return; }
     
-    if (!saveUri) {
-        return; // User cancelled
-    }
-    
-    // Prepare text for speech
     let textToSpeak = isMarkdown ? prepareTextForSpeech(rawText) : rawText;
     
-    // Check length and offer summarization for long documents
     const wordCount = textToSpeak.split(/\s+/).length;
-    const duration = estimateDuration(wordCount);
-    
     if (wordCount > LONG_CONTENT_WORD_THRESHOLD) {
+        const duration = estimateDuration(wordCount);
         const choice = await vscode.window.showWarningMessage(
             `This content is ${duration.formatted} long (~${wordCount} words). Would you like a summary instead?`,
-            { modal: false },
-            'Save Summary (~3 min)',
-            'Save Full Content',
-            'Cancel'
+            { modal: false }, 'Save Summary (~3 min)', 'Save Full Content', 'Cancel'
         );
-        
-        if (choice === 'Cancel' || !choice) {
-            return;
-        }
-        
+        if (choice === 'Cancel' || !choice) { return; }
         if (choice === 'Save Summary (~3 min)') {
             await vscode.window.withProgress(
-                {
-                    location: vscode.ProgressLocation.Notification,
-                    title: 'Summarizing content...',
-                    cancellable: false
-                },
-                async () => {
-                    const summary = await summarizeForSpeech(rawText, 3);
-                    if (summary) {
-                        textToSpeak = summary;
-                    }
-                }
+                { location: vscode.ProgressLocation.Notification, title: 'Summarizing content...', cancellable: false },
+                async () => { const summary = await summarizeForSpeech(rawText, 3); if (summary) { textToSpeak = summary; } }
             );
         }
     }
     
-    // Detect language
-    const detected = detectLanguage(textToSpeak);
-    let selectedVoice: string;
-    let selectedLang: string;
-    
-    if (detected.confidence >= LANGUAGE_CONFIDENCE_THRESHOLD) {
-        selectedVoice = getVoiceForLanguage(detected.lang);
-        selectedLang = detected.lang;
-    } else {
-        // Ask user for language for save operation
-        const languageItems = Object.entries(LANGUAGE_VOICES).map(([code, info]) => ({
-            label: info.name,
-            description: code,
-            code
-        }));
-        
-        languageItems.sort((a, b) => {
-            if (a.code === detected.lang) {return -1;}
-            if (b.code === detected.lang) {return 1;}
-            if (a.code === 'en-US') {return -1;}
-            if (b.code === 'en-US') {return 1;}
-            return a.label.localeCompare(b.label);
-        });
-        
-        const selected = await vscode.window.showQuickPick(languageItems, {
-            title: 'Select Language for Audio',
-            placeHolder: `Best guess: ${detected.name}. Please confirm:`,
-            matchOnDescription: true
-        });
-        
-        if (!selected) {
-            return; // User cancelled
-        }
-        
-        selectedVoice = LANGUAGE_VOICES[selected.code].voice;
-        selectedLang = selected.code;
-    }
-    
-    // Override with English preset if user explicitly selected one
-    if (voicePreset !== 'default' && selectedLang.startsWith('en-')) {
-        selectedVoice = VOICE_PRESETS[voicePreset];
-    }
+    const voiceResult = await selectVoiceForText(textToSpeak, voicePreset);
+    if (!voiceResult) { return; }
     
     try {
         await vscode.window.withProgress(
-            {
-                location: vscode.ProgressLocation.Notification,
-                title: 'Generating audio...',
-                cancellable: false
-            },
+            { location: vscode.ProgressLocation.Notification, title: 'Generating audio...', cancellable: false },
             async (progress) => {
                 progress.report({ message: 'Connecting to TTS service...' });
-                
                 const audioBuffer = await synthesize(
                     textToSpeak,
-                    { voice: selectedVoice, lang: selectedLang },
+                    { voice: voiceResult.voice, lang: voiceResult.lang },
                     (ttsProgress: TTSChunkedProgress) => {
                         if (ttsProgress.state === 'streaming') {
                             const kb = Math.round((ttsProgress.totalBytesReceived || ttsProgress.bytesReceived || 0) / 1024);
                             const chunkInfo = ttsProgress.totalChunks && ttsProgress.totalChunks > 1
-                                ? ` [${ttsProgress.currentChunk}/${ttsProgress.totalChunks}]`
-                                : '';
+                                ? ` [${ttsProgress.currentChunk}/${ttsProgress.totalChunks}]` : '';
                             progress.report({ message: `Receiving audio... ${kb}KB${chunkInfo}` });
                         }
                     }
                 );
-                
                 progress.report({ message: 'Saving file...' });
                 await saveAudioToFile(audioBuffer, saveUri.fsPath);
             }
         );
         
         const openFile = await vscode.window.showInformationMessage(
-            `💾 Audio saved to ${path.basename(saveUri.fsPath)}`,
-            'Open File',
-            'Open Folder'
+            `💾 Audio saved to ${path.basename(saveUri.fsPath)}`, 'Open File', 'Open Folder'
         );
-        
-        if (openFile === 'Open File') {
-            vscode.env.openExternal(saveUri);
-        } else if (openFile === 'Open Folder') {
-            vscode.env.openExternal(vscode.Uri.file(path.dirname(saveUri.fsPath)));
-        }
-        
+        if (openFile === 'Open File') { vscode.env.openExternal(saveUri); }
+        else if (openFile === 'Open Folder') { vscode.env.openExternal(vscode.Uri.file(path.dirname(saveUri.fsPath))); }
     } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         vscode.window.showErrorMessage(`❌ Failed to save audio: ${message}`);

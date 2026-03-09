@@ -956,9 +956,13 @@ export {
     evaluateDKFile,
     autoPromoteDuringMeditation,
     getGlobalKnowledgeSummary,
+} from './globalKnowledgeOps';
+export {
     IMigrationResult,
     normalizeGlobalKnowledge,
     needsMigration,
+} from './globalKnowledgeMigration';
+export {
     IGlobalKnowledgeSearchParams,
     GlobalKnowledgeSearchTool,
     ISaveInsightParams,
@@ -967,4 +971,4 @@ export {
     PromoteKnowledgeTool,
     GlobalKnowledgeStatusTool,
     registerGlobalKnowledgeTools,
-} from './globalKnowledgeOps';
+} from './globalKnowledgeTools';

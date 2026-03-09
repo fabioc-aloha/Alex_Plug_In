@@ -6,12 +6,11 @@
  * document, simplify, AI image generation, test generation, skill review, diagnostics.
  */
 import * as vscode from 'vscode';
-import * as path from 'path';
-import { openChatPanel, getLanguageIdFromPath } from './shared/utils';
+import { openChatPanel } from './shared/utils';
 import { requireCognitiveLevel } from './shared/cognitiveTier';
-import { getNonce } from './shared/sanitize';
-import { checkHealth, clearHealthCache } from './shared/healthCheck';
+import { checkHealth } from './shared/healthCheck';
 import * as telemetry from './shared/telemetry';
+import { getCodeContext, buildTelemetryPanelHtml, handleTelemetryMessage, TelemetryData } from './commandsDeveloperHandlers';
 
 export function registerDeveloperCommands(context: vscode.ExtensionContext, extensionVersion: string): void {
   const codeReviewDisposable = vscode.commands.registerCommand(
@@ -20,43 +19,16 @@ export function registerDeveloperCommands(context: vscode.ExtensionContext, exte
       if (!(await requireCognitiveLevel('alex.codeReview'))) { return; }
       const endLog = telemetry.logTimed("command", "code_review");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        // If URI provided (from explorer context menu), read file content
-        if (uri) {
-          try {
-            const content = await vscode.workspace.fs.readFile(uri);
-            selectedText = new TextDecoder().decode(content);
-            fileName = path.basename(uri.fsPath);
-            languageId = getLanguageIdFromPath(uri.fsPath);
-          } catch (err) {
-            vscode.window.showErrorMessage(`Failed to read file: ${err}`);
-            endLog(false);
-            return;
-          }
-        } else {
-          // Try active editor
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        // If no text, open Agent chat with a general code review prompt
-        if (!selectedText) {
+        if (!ctx.text) {
           const prompt = `Review the code in the current workspace for issues, improvements, and best practices. Focus on:\n1. Code quality and readability\n2. Potential bugs or edge cases\n3. Performance considerations\n4. Security concerns\n5. Adherence to project conventions`;
           await openChatPanel(prompt);
           endLog(true);
           return;
         }
         
-        // Send prompt with selected code directly to Agent chat
-        const prompt = `Review this code from ${fileName} for issues, improvements, and best practices:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Review this code from ${ctx.fileName} for issues, improvements, and best practices:\n\n\`\`\`${ctx.languageId}\n${ctx.text}\n\`\`\``;
         await openChatPanel(prompt);
         
         endLog(true);
@@ -73,51 +45,19 @@ export function registerDeveloperCommands(context: vscode.ExtensionContext, exte
       if (!(await requireCognitiveLevel('alex.debugThis'))) { return; }
       const endLog = telemetry.logTimed("command", "debug_this");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        // If URI provided (from explorer context menu), read file content
-        if (uri) {
-          try {
-            const content = await vscode.workspace.fs.readFile(uri);
-            selectedText = new TextDecoder().decode(content);
-            fileName = path.basename(uri.fsPath);
-            languageId = getLanguageIdFromPath(uri.fsPath);
-          } catch (err) {
-            vscode.window.showErrorMessage(`Failed to read file: ${err}`);
-            endLog(false);
-            return;
-          }
-        } else {
-          // Try active editor
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        // If no text, fall back to input prompt
-        if (!selectedText) {
+        if (!ctx.text) {
           const userInput = await vscode.window.showInputBox({
             prompt: 'Paste the code or error message you want to debug',
             placeHolder: 'Error: Cannot read property x of undefined...',
             ignoreFocusOut: true
           });
-          
-          if (!userInput) {
-            endLog(true);
-            return;
-          }
-          selectedText = userInput;
-          fileName = 'input';
-          languageId = 'text';
+          if (!userInput) { endLog(true); return; }
+          ctx.text = userInput;
         }
         
-        const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${ctx.languageId}\n${ctx.text}\n\`\`\``;
         await openChatPanel(prompt);
         
         endLog(true);
@@ -172,26 +112,9 @@ You are my rubber duck. I need to explain my problem to you.
     async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "explain_this");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        if (uri) {
-          const content = await vscode.workspace.fs.readFile(uri);
-          selectedText = new TextDecoder().decode(content);
-          fileName = path.basename(uri.fsPath);
-          languageId = getLanguageIdFromPath(uri.fsPath);
-        } else {
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        if (!selectedText) {
+        if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to explain");
           endLog(true);
           return;
@@ -216,8 +139,8 @@ You are my rubber duck. I need to explain my problem to you.
 
         const prompt = `Explain this code like I'm a ${level.value} developer. ${level.description}:
 
-\`\`\`${languageId}
-${selectedText}
+\`\`\`${ctx.languageId}
+${ctx.text}
 \`\`\`
 
 Focus on: purpose, data flow, key design decisions, and any non-obvious behavior.`;
@@ -237,26 +160,9 @@ Focus on: purpose, data flow, key design decisions, and any non-obvious behavior
     async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "refactor_this");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        if (uri) {
-          const content = await vscode.workspace.fs.readFile(uri);
-          selectedText = new TextDecoder().decode(content);
-          fileName = path.basename(uri.fsPath);
-          languageId = getLanguageIdFromPath(uri.fsPath);
-        } else {
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        if (!selectedText) {
+        if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to refactor");
           endLog(true);
           return;
@@ -282,8 +188,8 @@ Focus on: purpose, data flow, key design decisions, and any non-obvious behavior
 
         const prompt = `Refactor this code for ${goal.value}. ${goal.description}.
 
-\`\`\`${languageId}
-${selectedText}
+\`\`\`${ctx.languageId}
+${ctx.text}
 \`\`\`
 
 Show:
@@ -307,26 +213,9 @@ Show:
     async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "security_review");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        if (uri) {
-          const content = await vscode.workspace.fs.readFile(uri);
-          selectedText = new TextDecoder().decode(content);
-          fileName = path.basename(uri.fsPath);
-          languageId = getLanguageIdFromPath(uri.fsPath);
-        } else {
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        if (!selectedText) {
+        if (!ctx.text) {
           vscode.window.showWarningMessage("Select code for security review");
           endLog(true);
           return;
@@ -334,8 +223,8 @@ Show:
 
         const prompt = `Security audit this code. Check for OWASP Top 10 vulnerabilities:
 
-\`\`\`${languageId}
-${selectedText}
+\`\`\`${ctx.languageId}
+${ctx.text}
 \`\`\`
 
 Analyze for:
@@ -368,26 +257,9 @@ For each finding:
     async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "document_this");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        if (uri) {
-          const content = await vscode.workspace.fs.readFile(uri);
-          selectedText = new TextDecoder().decode(content);
-          fileName = path.basename(uri.fsPath);
-          languageId = getLanguageIdFromPath(uri.fsPath);
-        } else {
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        if (!selectedText) {
+        if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to document");
           endLog(true);
           return;
@@ -395,16 +267,16 @@ For each finding:
 
         // Detect doc format based on language
         let docFormat = "JSDoc";
-        if (languageId === "python") {docFormat = "docstrings (Google style)";}
-        else if (languageId === "csharp" || languageId === "fsharp") {docFormat = "XML documentation comments";}
-        else if (languageId === "rust") {docFormat = "rustdoc";}
-        else if (languageId === "go") {docFormat = "Go doc comments";}
-        else if (languageId === "java") {docFormat = "Javadoc";}
+        if (ctx.languageId === "python") {docFormat = "docstrings (Google style)";}
+        else if (ctx.languageId === "csharp" || ctx.languageId === "fsharp") {docFormat = "XML documentation comments";}
+        else if (ctx.languageId === "rust") {docFormat = "rustdoc";}
+        else if (ctx.languageId === "go") {docFormat = "Go doc comments";}
+        else if (ctx.languageId === "java") {docFormat = "Javadoc";}
 
         const prompt = `Generate comprehensive ${docFormat} documentation for this code:
 
-\`\`\`${languageId}
-${selectedText}
+\`\`\`${ctx.languageId}
+${ctx.text}
 \`\`\`
 
 Include:
@@ -431,26 +303,9 @@ Output ONLY the documented code, ready to paste.`;
     async (uri?: vscode.Uri) => {
       const endLog = telemetry.logTimed("command", "simplify_this");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        if (uri) {
-          const content = await vscode.workspace.fs.readFile(uri);
-          selectedText = new TextDecoder().decode(content);
-          fileName = path.basename(uri.fsPath);
-          languageId = getLanguageIdFromPath(uri.fsPath);
-        } else {
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        if (!selectedText) {
+        if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to simplify");
           endLog(true);
           return;
@@ -458,8 +313,8 @@ Output ONLY the documented code, ready to paste.`;
 
         const prompt = `Simplify this code while preserving behavior:
 
-\`\`\`${languageId}
-${selectedText}
+\`\`\`${ctx.languageId}
+${ctx.text}
 \`\`\`
 
 Apply these clean code principles:
@@ -510,48 +365,16 @@ For each change:
       if (!(await requireCognitiveLevel('alex.generateTests'))) { return; }
       const endLog = telemetry.logTimed("command", "generate_tests");
       try {
-        let selectedText = '';
-        let fileName = 'input';
-        let languageId = 'text';
+        const ctx = await getCodeContext(uri);
 
-        // If URI provided (from explorer context menu), read file content
-        if (uri) {
-          try {
-            const content = await vscode.workspace.fs.readFile(uri);
-            selectedText = new TextDecoder().decode(content);
-            fileName = path.basename(uri.fsPath);
-            languageId = getLanguageIdFromPath(uri.fsPath);
-          } catch (err) {
-            vscode.window.showErrorMessage(`Failed to read file: ${err}`);
-            endLog(false);
-            return;
-          }
-        } else {
-          // Try active editor
-          const editor = vscode.window.activeTextEditor;
-          if (editor) {
-            const selection = editor.selection;
-            selectedText = !selection.isEmpty ? editor.document.getText(selection) : '';
-            fileName = path.basename(editor.document.fileName);
-            languageId = editor.document.languageId;
-          }
-        }
-
-        // If no text, fall back to input prompt
-        if (!selectedText) {
+        if (!ctx.text) {
           const userInput = await vscode.window.showInputBox({
             prompt: 'Paste the code you want to generate tests for',
             placeHolder: 'function add(a, b) { return a + b; }',
             ignoreFocusOut: true
           });
-          
-          if (!userInput) {
-            endLog(true);
-            return;
-          }
-          selectedText = userInput;
-          fileName = 'input';
-          languageId = 'text';
+          if (!userInput) { endLog(true); return; }
+          ctx.text = userInput;
         }
 
         const testFrameworks = [
@@ -575,7 +398,7 @@ For each change:
 
         const frameworkName = framework.label.replace(/\$\([^)]+\)\s*/, '');
         
-        const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
+        const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${ctx.languageId}\n${ctx.text}\n\`\`\``;
         await openChatPanel(prompt);
         
         endLog(true);
@@ -729,7 +552,7 @@ Reference: .github/skills/git-workflow/SKILL.md`;
       const aggregate = await telemetry.getAllSessionsAggregate();
       const alexSettings = telemetry.getAlexSettings();
       const health = await checkHealth();
-      const extensionVersion =
+      const extVersion =
         context.extension.packageJSON.version || "unknown";
 
       const panel = vscode.window.createWebviewPanel(
@@ -739,225 +562,14 @@ Reference: .github/skills/git-workflow/SKILL.md`;
         { enableScripts: true },
       );
 
-      const nonce = getNonce();
-      panel.webview.html = `<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';">
-    <style>
-        body { font-family: var(--vscode-font-family); padding: 20px; color: var(--vscode-foreground); background: var(--vscode-editor-background); max-width: 900px; margin: 0 auto; }
-        h1 { color: var(--vscode-textLink-foreground); }
-        h2 { margin-top: 24px; border-bottom: 1px solid var(--vscode-textSeparator-foreground); padding-bottom: 8px; }
-        h3 { margin-top: 16px; margin-bottom: 8px; font-size: 14px; }
-        .summary { background: var(--vscode-textBlockQuote-background); padding: 16px; border-radius: 8px; margin: 16px 0; }
-        .stat { display: inline-block; margin-right: 24px; margin-bottom: 8px; }
-        .stat-value { font-size: 24px; font-weight: bold; color: var(--vscode-textLink-foreground); }
-        .stat-label { font-size: 12px; color: var(--vscode-descriptionForeground); }
-        pre { background: var(--vscode-textCodeBlock-background); padding: 12px; border-radius: 4px; overflow-x: auto; font-size: 11px; max-height: 300px; overflow-y: auto; }
-        button { background: var(--vscode-button-background); color: var(--vscode-button-foreground); border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 8px; margin-bottom: 8px; font-size: 13px; }
-        button:hover { background: var(--vscode-button-hoverBackground); }
-        button.primary { background: var(--vscode-button-prominentBackground, #0066b8); }
-        button.secondary { background: var(--vscode-button-secondaryBackground); color: var(--vscode-button-secondaryForeground); }
-        .privacy-box { background: var(--vscode-inputValidation-infoBackground); border: 1px solid var(--vscode-inputValidation-infoBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
-        .privacy-box h3 { margin-top: 0; color: var(--vscode-textLink-foreground); }
-        .privacy-list { margin: 8px 0; padding-left: 20px; }
-        .privacy-list li { margin: 4px 0; }
-        .bug-report-box { background: var(--vscode-inputValidation-warningBackground); border: 1px solid var(--vscode-inputValidation-warningBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
-        .bug-report-box h3 { margin-top: 0; }
-        .check { color: #4caf50; }
-        .info-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 12px 0; }
-        .info-label { font-weight: bold; color: var(--vscode-descriptionForeground); }
-        .health-box { background: var(--vscode-textBlockQuote-background); padding: 12px 16px; border-radius: 8px; margin: 12px 0; border-left: 4px solid ${health.status === 'healthy' ? '#4caf50' : health.status === 'warning' ? '#ff9800' : health.status === 'error' ? '#f44336' : '#9e9e9e'}; }
-        .settings-box { background: var(--vscode-textBlockQuote-background); padding: 12px 16px; border-radius: 8px; margin: 12px 0; }
-        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 12px; }
-        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        @media (max-width: 600px) { .two-column { grid-template-columns: 1fr; } }
-        h2 { margin-top: 24px; border-bottom: 1px solid var(--vscode-textSeparator-foreground); padding-bottom: 8px; }
-        .summary { background: var(--vscode-textBlockQuote-background); padding: 16px; border-radius: 8px; margin: 16px 0; }
-        .stat { display: inline-block; margin-right: 24px; margin-bottom: 8px; }
-        .stat-value { font-size: 24px; font-weight: bold; color: var(--vscode-textLink-foreground); }
-        .stat-label { font-size: 12px; color: var(--vscode-descriptionForeground); }
-        pre { background: var(--vscode-textCodeBlock-background); padding: 12px; border-radius: 4px; overflow-x: auto; font-size: 11px; max-height: 300px; overflow-y: auto; }
-        button { background: var(--vscode-button-background); color: var(--vscode-button-foreground); border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-right: 8px; margin-bottom: 8px; font-size: 13px; }
-        button:hover { background: var(--vscode-button-hoverBackground); }
-        button.primary { background: var(--vscode-button-prominentBackground, #0066b8); }
-        button.secondary { background: var(--vscode-button-secondaryBackground); color: var(--vscode-button-secondaryForeground); }
-        .privacy-box { background: var(--vscode-inputValidation-infoBackground); border: 1px solid var(--vscode-inputValidation-infoBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
-        .privacy-box h3 { margin-top: 0; color: var(--vscode-textLink-foreground); }
-        .privacy-list { margin: 8px 0; padding-left: 20px; }
-        .privacy-list li { margin: 4px 0; }
-        .bug-report-box { background: var(--vscode-inputValidation-warningBackground); border: 1px solid var(--vscode-inputValidation-warningBorder); padding: 16px; border-radius: 8px; margin: 16px 0; }
-        .bug-report-box h3 { margin-top: 0; }
-        .check { color: #4caf50; }
-        .info-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 12px 0; }
-        .info-label { font-weight: bold; color: var(--vscode-descriptionForeground); }
-    </style>
-</head>
-<body>
-    <h1>🔬 Alex Diagnostics & Bug Report</h1>
-    
-    <div class="privacy-box">
-        <h3>🔒 Privacy Guarantee</h3>
-        <p><strong>Your data NEVER leaves your machine.</strong> This diagnostic data is:</p>
-        <ul class="privacy-list">
-            <li><span class="check">✓</span> Stored <strong>only</strong> in VS Code's local extension storage</li>
-            <li><span class="check">✓</span> <strong>Never</strong> transmitted over any network</li>
-            <li><span class="check">✓</span> <strong>Never</strong> sent to Microsoft, GitHub, or any third party</li>
-            <li><span class="check">✓</span> Automatically redacts sensitive data (tokens, passwords, full paths)</li>
-            <li><span class="check">✓</span> Completely under your control - export or delete at any time</li>
-        </ul>
-        <p style="margin-bottom: 0; font-style: italic;">To file a bug report, export the data below and attach it to your GitHub issue.</p>
-    </div>
-    
-    <h2>📊 Session Summary</h2>
-    <div class="summary">
-        <div class="stat"><div class="stat-value">${summary.totalEvents || 0}</div><div class="stat-label">Events This Session</div></div>
-        <div class="stat"><div class="stat-value">${summary.errorCount || 0}</div><div class="stat-label">Errors</div></div>
-        <div class="stat"><div class="stat-value">${summary.avgDuration || 0}ms</div><div class="stat-label">Avg Duration</div></div>
-        <div class="stat"><div class="stat-value">${sessions.length}</div><div class="stat-label">Total Sessions</div></div>
-    </div>
-    
-    <div class="info-grid">
-        <span class="info-label">Extension Version:</span><span>${extensionVersion}</span>
-        <span class="info-label">VS Code Version:</span><span>${vscode.version}</span>
-        <span class="info-label">Session ID:</span><span>${summary.sessionId || "unknown"}</span>
-        <span class="info-label">Started:</span><span>${summary.startedAt || "unknown"}</span>
-    </div>
-    
-    <div class="bug-report-box">
-        <h3>🐛 Filing a Bug Report?</h3>
-        <p>To help us fix your issue quickly:</p>
-        <ol>
-            <li>Click <strong>"Export for Bug Report"</strong> below to save the diagnostic data</li>
-            <li>Go to <a href="https://github.com/fabioc-aloha/Alex_Plug_In/issues/new" style="color: var(--vscode-textLink-foreground);">GitHub Issues</a></li>
-            <li>Describe what happened and what you expected</li>
-            <li>Attach the exported JSON file</li>
-        </ol>
-        <button class="primary" onclick="exportData()">📤 Export for Bug Report</button>
-        <button class="secondary" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
-    </div>
-    
-    <h2>🔧 Actions</h2>
-    <button onclick="showLog()">📜 Show Live Log</button>
-    <button onclick="refreshData()">🔄 Refresh</button>
-    <button class="secondary" onclick="clearData()">🗑️ Clear All Data</button>
-    
-    <h2>🏥 Architecture Health</h2>
-    <div class="health-box">
-        <div class="info-grid">
-            <span class="info-label">Status:</span><span>${health.status === 'healthy' ? '✅ Healthy' : health.status === 'warning' ? '⚠️ Warning' : health.status === 'error' ? '❌ Error' : '⚫ Not Initialized'}</span>
-            <span class="info-label">Initialized:</span><span>${health.initialized ? 'Yes' : 'No'}</span>
-            <span class="info-label">Total Files:</span><span>${health.totalFiles}</span>
-            <span class="info-label">Total Synapses:</span><span>${health.totalSynapses}</span>
-            <span class="info-label">Broken Synapses:</span><span>${health.brokenSynapses}</span>
-            <span class="info-label">Summary:</span><span>${health.summary}</span>
-        </div>
-        ${health.issues.length > 0 ? `<p style="margin-top: 8px; margin-bottom: 0; font-size: 12px;"><strong>Issues:</strong> ${health.issues.slice(0, 5).join(', ')}${health.issues.length > 5 ? ` (+${health.issues.length - 5} more)` : ''}</p>` : ''}
-    </div>
-    
-    <div class="two-column">
-        <div>
-            <h2>📈 This Session</h2>
-            <pre>${((summary.topEvents as string[]) || []).join("\\n") || "No events yet"}</pre>
-        </div>
-        <div>
-            <h2>📊 All Sessions (${aggregate.totalSessions})</h2>
-            <pre>${((aggregate.topEventsAllTime as string[]) || []).join("\\n") || "No events yet"}</pre>
-        </div>
-    </div>
-    
-    <h2>⚙️ Settings</h2>
-    <div class="settings-box">
-        <div class="settings-grid">
-            <span><strong>workspace.protectedMode:</strong> ${alexSettings['workspace.protectedMode'] ?? 'undefined'}</span>
-            <span><strong>m365.enabled:</strong> ${alexSettings['m365.enabled'] ?? 'undefined'}</span>
-            <span><strong>globalKnowledge.enabled:</strong> ${alexSettings['globalKnowledge.enabled'] ?? 'undefined'}</span>
-        </div>
-    </div>
-    
-    <h2>📁 Raw Session Data</h2>
-    <p style="color: var(--vscode-descriptionForeground); font-size: 12px;">This is the complete diagnostic data that would be included in a bug report:</p>
-    <pre id="sessionData">${JSON.stringify(sessions, null, 2)}</pre>
-    
-    <script nonce="${nonce}">
-        const vscode = acquireVsCodeApi();
-        function showLog() { vscode.postMessage({ command: 'showLog' }); }
-        function exportData() { vscode.postMessage({ command: 'export' }); }
-        function clearData() { vscode.postMessage({ command: 'clear' }); }
-        function refreshData() { vscode.postMessage({ command: 'refresh' }); }
-        function copyToClipboard() { 
-            const data = document.getElementById('sessionData').textContent;
-            navigator.clipboard.writeText(data).then(() => {
-                vscode.postMessage({ command: 'copied' });
-            });
-        }
-    </script>
-</body>
-</html>`;
+      const telemetryData: TelemetryData = {
+        sessions, summary, aggregate, alexSettings, health, extensionVersion: extVersion
+      };
+      panel.webview.html = buildTelemetryPanelHtml(telemetryData);
 
-      panel.webview.onDidReceiveMessage(async (message) => {
-        if (message.command === "showLog") {
-          telemetry.showTelemetryLog();
-        } else if (message.command === "export") {
-          const data = await telemetry.getAllTelemetryData();
-          const currentHealth = await checkHealth();
-          const currentSettings = telemetry.getAlexSettings();
-          const timestamp = new Date()
-            .toISOString()
-            .replace(/[:.]/g, "-")
-            .slice(0, 19);
-          const uri = await vscode.window.showSaveDialog({
-            defaultUri: vscode.Uri.file(`alex-bug-report-${timestamp}.json`),
-            filters: { JSON: ["json"] },
-          });
-          if (uri) {
-            const exportData = {
-              exportedAt: new Date().toISOString(),
-              extensionVersion,
-              vscodeVersion: vscode.version,
-              platform: process.platform,
-              arch: process.arch,
-              health: {
-                status: currentHealth.status,
-                initialized: currentHealth.initialized,
-                totalFiles: currentHealth.totalFiles,
-                totalSynapses: currentHealth.totalSynapses,
-                brokenSynapses: currentHealth.brokenSynapses,
-                summary: currentHealth.summary,
-                issues: currentHealth.issues.slice(0, 10), // Limit issues
-              },
-              settings: currentSettings,
-              sessions: data,
-            };
-            const content = new TextEncoder().encode(
-              JSON.stringify(exportData, null, 2),
-            );
-            await vscode.workspace.fs.writeFile(uri, content);
-            vscode.window.showInformationMessage(
-              "Diagnostics exported! Attach this file to your GitHub issue.",
-            );
-          }
-        } else if (message.command === "clear") {
-          const confirm = await vscode.window.showWarningMessage(
-            "Clear all diagnostic data?",
-            { modal: true },
-            "Yes, Clear",
-          );
-          if (confirm === "Yes, Clear") {
-            await telemetry.clearTelemetryData();
-            vscode.window.showInformationMessage("Diagnostic data cleared!");
-            panel.dispose();
-          }
-        } else if (message.command === "copied") {
-          vscode.window.showInformationMessage(
-            "Diagnostic data copied to clipboard!",
-          );
-        } else if (message.command === "refresh") {
-          // Re-run the command to refresh the panel
-          panel.dispose();
-          vscode.commands.executeCommand("alex.viewBetaTelemetry");
-        }
-      });
+      panel.webview.onDidReceiveMessage(
+        (msg) => handleTelemetryMessage(msg, panel, extVersion)
+      );
     },
   );
 

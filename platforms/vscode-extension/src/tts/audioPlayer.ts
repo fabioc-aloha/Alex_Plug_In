@@ -89,8 +89,6 @@ async function cleanupMediaFiles(): Promise<void> {
  */
 function getAudioPlayerHtml(audioUri: string, playbackId: string, voiceName: string = 'en-US-GuyNeural'): string {
     const nonce = getNonce();
-    // VS Code webview URIs use https://*.vscode-resource.vscode-cdn.net or vscode-webview-resource:
-    // CSP must allow these schemes for audio playback
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,7 +96,18 @@ function getAudioPlayerHtml(audioUri: string, playbackId: string, voiceName: str
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}'; media-src https: vscode-resource: vscode-webview-resource:;">
     <title>Alex TTS Player</title>
-    <style>
+    <style>${getAudioPlayerStyles()}</style>
+</head>
+<body>
+    ${getAudioPlayerBody(voiceName)}
+    <audio id="audio" preload="auto"></audio>
+    <script nonce="${nonce}">${getAudioPlayerScript(audioUri, playbackId)}</script>
+</body>
+</html>`;
+}
+
+function getAudioPlayerStyles(): string {
+    return `
         body {
             font-family: var(--vscode-font-family);
             background-color: var(--vscode-editor-background);
@@ -188,9 +197,11 @@ function getAudioPlayerHtml(audioUri: string, playbackId: string, voiceName: str
         .icon {
             font-size: 16px;
         }
-    </style>
-</head>
-<body>
+    `;
+}
+
+function getAudioPlayerBody(voiceName: string): string {
+    return `
     <div class="player-container">
         <div class="title">
             <span class="icon">🔊</span>
@@ -219,11 +230,11 @@ function getAudioPlayerHtml(audioUri: string, playbackId: string, voiceName: str
         
         <p class="status" id="status">Playing...</p>
         <p class="voice-info">Voice: ${voiceName}</p>
-    </div>
+    </div>`;
+}
 
-    <audio id="audio" preload="auto"></audio>
-
-    <script nonce="${nonce}">
+function getAudioPlayerScript(audioUri: string, playbackId: string): string {
+    return `
         const vscode = acquireVsCodeApi();
         const audio = document.getElementById('audio');
         const progress = document.getElementById('progress');
@@ -386,9 +397,7 @@ function getAudioPlayerHtml(audioUri: string, playbackId: string, voiceName: str
         log('Script loaded, initializing...');
         sendState('loading');
         initAudio();
-    </script>
-</body>
-</html>`;
+    `;
 }
 
 /**

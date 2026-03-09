@@ -59,6 +59,13 @@
       "type": "coordinates-with",
       "strength": 0.7,
       "reason": "SecretStorage API, VSCE secret scanner avoidance during packaging"
+    },
+    {
+      "target": ".github/skills/refactoring-patterns/SKILL.md",
+      "type": "uses",
+      "strength": 0.8,
+      "bidirectional": true,
+      "reason": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization"
     }
   ],
   "activationPatterns": [

@@ -683,9 +683,15 @@ function tableToSpeech(tableMatch: string): string {
  */
 export function prepareTextForSpeech(markdown: string): string {
     let text = markdown;
-    
-    // === BLOCK ELEMENTS (process first) ===
-    
+    text = stripBlockElements(text);
+    text = processInlineElements(text);
+    text = processHeadersAndStructure(text);
+    text = expandEmojiAndSymbols(text);
+    text = cleanupSpeechText(text);
+    return text.trim();
+}
+
+function stripBlockElements(text: string): string {
     // Mermaid diagrams - summarize
     text = text.replace(/```mermaid[\s\S]*?```/g, ' diagram shown here ');
     
@@ -702,8 +708,6 @@ export function prepareTextForSpeech(markdown: string): string {
     
     // Tables - convert to spoken format
     text = text.replace(/^\|.+\|[\r\n]+\|[-:\s|]+\|[\r\n]+((?:\|.+\|[\r\n]?)+)/gm, tableToSpeech);
-    
-    // Also catch simple info tables (key-value style)
     text = text.replace(/^\|[^|]+\|[^|]+\|[\r\n]+\|[-:\s|]+\|[\r\n]*((?:\|[^|]+\|[^|]+\|[\r\n]?)*)/gm, tableToSpeech);
     
     // HTML comments
@@ -713,12 +717,14 @@ export function prepareTextForSpeech(markdown: string): string {
     text = text.replace(/<details>[\s\S]*?<summary>(.*?)<\/summary>[\s\S]*?<\/details>/g, 
         'Collapsed section: $1. ');
     
-    // === TASK LISTS ===
+    // Task lists
     text = text.replace(/^[-*]\s*\[x\]\s+(.+)$/gim, 'Completed: $1. ');
     text = text.replace(/^[-*]\s*\[\s\]\s+(.+)$/gim, 'To do: $1. ');
     
-    // === INLINE ELEMENTS ===
-    
+    return text;
+}
+
+function processInlineElements(text: string): string {
     // Inline code
     text = text.replace(/`([^`]+)`/g, '$1');
     
@@ -730,9 +736,9 @@ export function prepareTextForSpeech(markdown: string): string {
     text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
     
     // Bold/italic (order matters - bold first)
-    text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '$1');  // Bold italic
-    text = text.replace(/\*\*([^*]+)\*\*/g, '$1');       // Bold
-    text = text.replace(/\*([^*]+)\*/g, '$1');           // Italic
+    text = text.replace(/\*\*\*([^*]+)\*\*\*/g, '$1');
+    text = text.replace(/\*\*([^*]+)\*\*/g, '$1');
+    text = text.replace(/\*([^*]+)\*/g, '$1');
     text = text.replace(/___([^_]+)___/g, '$1');
     text = text.replace(/__([^_]+)__/g, '$1');
     text = text.replace(/_([^_]+)_/g, '$1');
@@ -740,8 +746,10 @@ export function prepareTextForSpeech(markdown: string): string {
     // Strikethrough
     text = text.replace(/~~([^~]+)~~/g, '$1');
     
-    // === HEADERS & STRUCTURE ===
-    
+    return text;
+}
+
+function processHeadersAndStructure(text: string): string {
     // Headers - announce level for navigation
     text = text.replace(/^######\s+(.+)$/gm, 'Sub-section: $1. ');
     text = text.replace(/^#####\s+(.+)$/gm, 'Sub-section: $1. ');
@@ -760,6 +768,10 @@ export function prepareTextForSpeech(markdown: string): string {
     text = text.replace(/^[-*+]\s+/gm, '');
     text = text.replace(/^\d+\.\s+/gm, '');
     
+    return text;
+}
+
+function expandEmojiAndSymbols(text: string): string {
     // === EMOJI + REDUNDANT TEXT COMBOS (process BEFORE generic emoji) ===
     // Prevents "completed Complete", "planned Planned", etc.
     text = text.replace(/✅\s*\**Completed?\**/gi, 'completed');
@@ -868,8 +880,10 @@ export function prepareTextForSpeech(markdown: string): string {
     text = text.replace(/\s+<\s+/g, ' less than ');
     text = text.replace(/\s+>\s+/g, ' greater than ');
     
-    // === CLEANUP ===
-    
+    return text;
+}
+
+function cleanupSpeechText(text: string): string {
     // Multiple newlines to pause
     text = text.replace(/\n\n+/g, '. ');
     
@@ -889,5 +903,5 @@ export function prepareTextForSpeech(markdown: string): string {
     // Colon followed by comma
     text = text.replace(/:\s*,/g, ': ');
     
-    return text.trim();
+    return text;
 }

@@ -190,8 +190,6 @@ export function getAvatarForPersona(personaId: string): string {
 // Returns null when no Easter egg applies — caller uses normal persona avatar.
 
 export interface EasterEgg {
-    /** Avatar base name (no extension) in assets/avatars/ */
-    avatarBase: string;
     /** Short label for tooltip/display */
     label: string;
     /** Emoji indicator */
@@ -202,35 +200,35 @@ export interface EasterEgg {
 
 /** Seasonal Easter eggs — checked by month/day */
 const SEASONAL_EGGS: Array<{ month: number; day: number; egg: EasterEgg }> = [
-    { month: 1,  day: 1,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy New Year!',        emoji: '🎉', accentColor: '#FFD700' } },
-    { month: 2,  day: 14, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy Valentine\'s Day!', emoji: '💝', accentColor: '#FF69B4' } },
-    { month: 3,  day: 7,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy Birthday, Fabio!', emoji: '🎂', accentColor: '#FF1493' } },
-    { month: 3,  day: 14, egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy Pi Day!',          emoji: '🥧', accentColor: '#D2691E' } },
-    { month: 3,  day: 17, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy St. Patrick\'s Day!', emoji: '🍀', accentColor: '#00A86B' } },
+    { month: 1,  day: 1,  egg: { label: 'Happy New Year!',          emoji: '🎉', accentColor: '#FFD700' } },
+    { month: 2,  day: 14, egg: { label: 'Happy Valentine\'s Day!',  emoji: '💝', accentColor: '#FF69B4' } },
+    { month: 3,  day: 7,  egg: { label: 'Happy Birthday, Fabio!',   emoji: '🎂', accentColor: '#FF1493' } },
+    { month: 3,  day: 14, egg: { label: 'Happy Pi Day!',            emoji: '🥧', accentColor: '#D2691E' } },
+    { month: 3,  day: 17, egg: { label: 'Happy St. Patrick\'s Day!', emoji: '🍀', accentColor: '#00A86B' } },
     // Easter is calculated dynamically (March 22 - April 25), using April 20, 2025 as placeholder
-    { month: 4,  day: 20, egg: { avatarBase: 'ALEX-CREATIVE',   label: 'Happy Easter!',          emoji: '🐰', accentColor: '#E6B0E6' } },
-    { month: 7,  day: 4,  egg: { avatarBase: 'ALEX-EUREKA',    label: 'Happy Independence Day!', emoji: '🎆', accentColor: '#DC143C' } },
-    { month: 10, day: 31, egg: { avatarBase: 'ALEX-COMEDY',     label: 'Happy Halloween!',       emoji: '🎃', accentColor: '#FF8C00' } },
-    { month: 11, day: 27, egg: { avatarBase: 'ALEX-COOKING',    label: 'Happy Thanksgiving!',    emoji: '🦃', accentColor: '#D2691E' } },
-    { month: 12, day: 24, egg: { avatarBase: 'ALEX-COOKING',    label: 'Happy Holidays!',        emoji: '🎄', accentColor: '#228B22' } },
-    { month: 12, day: 25, egg: { avatarBase: 'ALEX-COOKING',    label: 'Merry Christmas!',       emoji: '🎄', accentColor: '#228B22' } },
-    { month: 12, day: 31, egg: { avatarBase: 'ALEX-EUREKA',    label: 'New Year\'s Eve!',        emoji: '🎊', accentColor: '#FFD700' } },
+    { month: 4,  day: 20, egg: { label: 'Happy Easter!',            emoji: '🐰', accentColor: '#E6B0E6' } },
+    { month: 7,  day: 4,  egg: { label: 'Happy Independence Day!',  emoji: '🎆', accentColor: '#DC143C' } },
+    { month: 10, day: 31, egg: { label: 'Happy Halloween!',         emoji: '🎃', accentColor: '#FF8C00' } },
+    { month: 11, day: 27, egg: { label: 'Happy Thanksgiving!',      emoji: '🦃', accentColor: '#D2691E' } },
+    { month: 12, day: 24, egg: { label: 'Happy Holidays!',          emoji: '🎄', accentColor: '#228B22' } },
+    { month: 12, day: 25, egg: { label: 'Merry Christmas!',         emoji: '🎄', accentColor: '#228B22' } },
+    { month: 12, day: 31, egg: { label: 'New Year\'s Eve!',         emoji: '🎊', accentColor: '#FFD700' } },
 ];
 
 /** Project-name Easter eggs — regex matched against workspace folder name (case-insensitive) */
 const PROJECT_NAME_EGGS: Array<{ pattern: RegExp; egg: EasterEgg }> = [
-    { pattern: /\b(cook|recipe|chef|food|kitchen|bak(e|ing))\b/i,         egg: { avatarBase: 'ALEX-COOKING',               label: 'Cooking project!',    emoji: '🍳', accentColor: '#FF6347' } },
-    { pattern: /\b(dog|pet|puppy|animal|vet(erinary)?|cat)\b/i,           egg: { avatarBase: 'ALEX-DOG-TRAINER',            label: 'Pet project!',        emoji: '🐕', accentColor: '#8B4513' } },
-    { pattern: /\b(wine|sommelier|vineyard|brewery|beer|cocktail)\b/i,    egg: { avatarBase: 'ALEX-WINE-TASTING',           label: 'Wine country!',       emoji: '🍷', accentColor: '#722F37' } },
-    { pattern: /\b(comedy|joke|humor|roast|funny|meme|standup)\b/i,       egg: { avatarBase: 'ALEX-COMEDY',                 label: 'Comedy mode!',        emoji: '😂', accentColor: '#FFD700' } },
-    { pattern: /\b(podcast|audio|radio|episode)\b/i,                      egg: { avatarBase: 'ALEX-PODCAST',                label: 'Podcast studio!',     emoji: '🎙️', accentColor: '#FF4500' } },
-    { pattern: /\b(invest|financ|trading|stock|portfolio|crypto)\b/i,     egg: { avatarBase: 'ALEX-INVESTMENT',              label: 'Finance mode!',       emoji: '📈', accentColor: '#228B22' } },
-    { pattern: /\b(legal|patent|copyright|trademark|compliance)\b/i,      egg: { avatarBase: 'ALEX-INTELLECTUAL-PROPERTY',   label: 'Legal eagle!',        emoji: '⚖️', accentColor: '#2F4F4F' } },
-    { pattern: /\b(survey|questionnaire|poll|census)\b/i,                 egg: { avatarBase: 'ALEX-SURVEY-DESIGN',           label: 'Survey time!',        emoji: '📋', accentColor: '#4169E1' } },
-    { pattern: /\b(mentor|onboard|coach|tutor)\b/i,                       egg: { avatarBase: 'ALEX-MENTORING',               label: 'Mentor mode!',        emoji: '🧑‍🏫', accentColor: '#FF8C00' } },
+    { pattern: /\b(cook|recipe|chef|food|kitchen|bak(e|ing))\b/i,         egg: { label: 'Cooking project!',    emoji: '🍳', accentColor: '#FF6347' } },
+    { pattern: /\b(dog|pet|puppy|animal|vet(erinary)?|cat)\b/i,           egg: { label: 'Pet project!',        emoji: '🐕', accentColor: '#8B4513' } },
+    { pattern: /\b(wine|sommelier|vineyard|brewery|beer|cocktail)\b/i,    egg: { label: 'Wine country!',       emoji: '🍷', accentColor: '#722F37' } },
+    { pattern: /\b(comedy|joke|humor|roast|funny|meme|standup)\b/i,       egg: { label: 'Comedy mode!',        emoji: '😂', accentColor: '#FFD700' } },
+    { pattern: /\b(podcast|audio|radio|episode)\b/i,                      egg: { label: 'Podcast studio!',     emoji: '🎙️', accentColor: '#FF4500' } },
+    { pattern: /\b(invest|financ|trading|stock|portfolio|crypto)\b/i,     egg: { label: 'Finance mode!',       emoji: '📈', accentColor: '#228B22' } },
+    { pattern: /\b(legal|patent|copyright|trademark|compliance)\b/i,      egg: { label: 'Legal eagle!',        emoji: '⚖️', accentColor: '#2F4F4F' } },
+    { pattern: /\b(survey|questionnaire|poll|census)\b/i,                 egg: { label: 'Survey time!',        emoji: '📋', accentColor: '#4169E1' } },
+    { pattern: /\b(mentor|onboard|coach|tutor)\b/i,                       egg: { label: 'Mentor mode!',        emoji: '🧑‍🏫', accentColor: '#FF8C00' } },
     // Milestone/Achievement patterns
-    { pattern: /\b(milestone|achievement|release|launch|v?1\.0|shipped)\b/i, egg: { avatarBase: 'ALEX-EUREKA',               label: 'Milestone achieved!', emoji: '🏆', accentColor: '#FFD700' } },
-    { pattern: /\b(celebrate|celebration|success|victory|win)\b/i,        egg: { avatarBase: 'ALEX-EUREKA',                 label: 'Celebrating!',        emoji: '🎉', accentColor: '#FF69B4' } },
+    { pattern: /\b(milestone|achievement|release|launch|v?1\.0|shipped)\b/i, egg: { label: 'Milestone achieved!', emoji: '🏆', accentColor: '#FFD700' } },
+    { pattern: /\b(celebrate|celebration|success|victory|win)\b/i,        egg: { label: 'Celebrating!',        emoji: '🎉', accentColor: '#FF69B4' } },
 ];
 
 /**

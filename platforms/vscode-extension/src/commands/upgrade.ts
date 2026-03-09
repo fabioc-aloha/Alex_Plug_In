@@ -28,6 +28,8 @@ import { offerEnvironmentSetup } from "./setupEnvironment";
 import { initializeArchitecture } from "./initialize";
 import { detectAndUpdateProjectPersona } from "../chat/personaDetection";
 import { migrateSecretsFromEnvironment } from "../services/secretsManager";
+import { normalizeAllSynapses } from "./upgradeSynapseNormalization";
+import { generateMigrationCandidates } from "./upgradeMigration";
 
 // ============================================================================
 // TYPES
@@ -35,7 +37,7 @@ import { migrateSecretsFromEnvironment } from "../services/secretsManager";
 
 type LegacyVersion = 'legacy' | 'transitional' | 'current' | 'unknown';
 
-interface LegacyDetection {
+export interface LegacyDetection {
   version: LegacyVersion;
   dkLocations: string[];  // All places where DK files were found
   hasSkills: boolean;
@@ -43,7 +45,7 @@ interface LegacyDetection {
   installedVersion: string | null;
 }
 
-interface MigrationCandidate {
+export interface MigrationCandidate {
   type: 'legacy-dk' | 'user-dk' | 'user-skill' | 'modified-system' | 'profile' | 'episodic';
   sourcePath: string;       // Path in backup
   targetPath: string;       // Path in new install
@@ -562,421 +564,12 @@ async function getFolderSize(folderPath: string): Promise<number> {
 }
 
 // ============================================================================
-// SYNAPSE NORMALIZATION
-// ============================================================================
-
-/**
- * Map of string strengths to numeric values
- */
-const STRENGTH_MAP: Record<string, number> = {
-  'critical': 1.0,
-  'strong': 0.9,
-  'high': 0.9,
-  'moderate': 0.7,
-  'medium': 0.7,
-  'low': 0.5,
-  'weak': 0.3,
-};
-
-/**
- * Normalize a synapse file to current schema format
- * Handles: string→numeric strengths, synapses→connections, context→when+yields, 
- * activationKeywords→activationContexts, missing $schema/skillId/inheritance
- */
-async function normalizeSynapseFile(synapsePath: string): Promise<boolean> {
-  try {
-    const content = await fs.readFile(synapsePath, 'utf8');
-    const json = JSON.parse(content);
-    let modified = false;
-
-    // Extract skill name from path
-    const skillDir = path.dirname(synapsePath);
-    const skillName = path.basename(skillDir);
-
-    // 1. Add $schema if missing
-    if (!json.$schema) {
-      json.$schema = '../SYNAPSE-SCHEMA.json';
-      modified = true;
-    }
-
-    // 2. Normalize skill identifier (name → skillId)
-    if (json.name && !json.skillId) {
-      json.skillId = json.name;
-      delete json.name;
-      modified = true;
-    }
-    if (json.skill && !json.skillId) {
-      json.skillId = json.skill;
-      delete json.skill;
-      modified = true;
-    }
-    if (!json.skillId) {
-      json.skillId = skillName;
-      modified = true;
-    }
-
-    // 3. inheritance field is now centralized in sync-architecture.cjs — remove if present
-    if (json.inheritance) {
-      delete json.inheritance;
-      modified = true;
-    }
-
-    // 4. Add lastUpdated if missing
-    if (!json.lastUpdated) {
-      json.lastUpdated = new Date().toISOString().split('T')[0];
-      modified = true;
-    }
-
-    // 5. Rename synapses → connections (legacy array name)
-    if (json.synapses && !json.connections) {
-      json.connections = json.synapses;
-      delete json.synapses;
-      modified = true;
-    }
-
-    // 6. Normalize connections array
-    if (json.connections && Array.isArray(json.connections)) {
-      for (const conn of json.connections) {
-        // Convert string strength to numeric
-        if (typeof conn.strength === 'string') {
-          const key = conn.strength.toLowerCase();
-          if (STRENGTH_MAP[key] !== undefined) {
-            conn.strength = STRENGTH_MAP[key];
-            modified = true;
-          }
-        }
-
-        // Convert relationship → type
-        if (conn.relationship && !conn.type) {
-          conn.type = conn.relationship.toUpperCase();
-          delete conn.relationship;
-          modified = true;
-        }
-
-        // Convert context → when + yields (if not already present)
-        if (conn.context && !conn.when && !conn.yields) {
-          // Best effort: use context as 'when', leave yields empty
-          conn.when = conn.context;
-          conn.yields = 'See target skill';
-          delete conn.context;
-          modified = true;
-        }
-
-        // Remove deprecated direction field
-        if (conn.direction) {
-          // Convert direction to bidirectional flag if needed
-          if (conn.direction.toLowerCase() === 'bidirectional' && !conn.bidirectional) {
-            conn.bidirectional = true;
-          }
-          delete conn.direction;
-          modified = true;
-        }
-
-        // Fix relative paths to absolute from .github
-        if (conn.target && conn.target.startsWith('../')) {
-          conn.target = '.github/skills/' + conn.target.replace(/^\.\.\//, '');
-          modified = true;
-        }
-
-        // Remove activation field (deprecated)
-        if (conn.activation) {
-          if (!conn.when) {
-            conn.when = conn.activation;
-            conn.yields = 'See target skill';
-          }
-          delete conn.activation;
-          modified = true;
-        }
-      }
-    }
-
-    // 7. Rename activationKeywords/activationTriggers/activationPatterns → activationContexts
-    if (json.activationKeywords && !json.activationContexts) {
-      json.activationContexts = json.activationKeywords;
-      delete json.activationKeywords;
-      modified = true;
-    }
-    if (json.activationTriggers && !json.activationContexts) {
-      json.activationContexts = json.activationTriggers;
-      delete json.activationTriggers;
-      modified = true;
-    }
-    if (json.activationPatterns && !json.activationContexts) {
-      json.activationContexts = json.activationPatterns;
-      delete json.activationPatterns;
-      modified = true;
-    }
-
-    // 8. Remove deprecated fields
-    const deprecatedFields = ['actionKeywords', 'relatedSkills', 'knowledgeDomains', 'sourceFile', 'description', 'domain', 'status', 'created', 'updated'];
-    for (const field of deprecatedFields) {
-      if (json[field]) {
-        // Move useful info to notes if not already there
-        if (field === 'description' && !json.notes) {
-          json.notes = json[field];
-        }
-        delete json[field];
-        modified = true;
-      }
-    }
-
-    // 9. Bump version if modified
-    if (modified && json.version) {
-      const vParts = json.version.split('.');
-      if (vParts.length >= 2) {
-        const minor = parseInt(vParts[1], 10) + 1;
-        json.version = `${vParts[0]}.${minor}.0`;
-      }
-    }
-
-    // Write back if modified
-    if (modified) {
-      // Reorder keys for consistency
-      const orderedJson: Record<string, any> = {};
-      const keyOrder = ['$schema', 'skillId', 'version', 'lastUpdated', 'inheritance', 'connections', 'activationContexts', 'notes'];
-      for (const key of keyOrder) {
-        if (json[key] !== undefined) {
-          orderedJson[key] = json[key];
-        }
-      }
-      // Add any remaining keys
-      for (const key of Object.keys(json)) {
-        if (!keyOrder.includes(key)) {
-          orderedJson[key] = json[key];
-        }
-      }
-
-      await fs.writeFile(synapsePath, JSON.stringify(orderedJson, null, 2) + '\n', 'utf8');
-    }
-
-    return modified;
-  } catch (error) {
-    console.error(`Failed to normalize ${synapsePath}:`, error);
-    return false;
-  }
-}
-
-/**
- * Normalize all synapse files in a directory (typically .github/skills)
- */
-async function normalizeAllSynapses(skillsDir: string): Promise<{ normalized: number; total: number }> {
-  let normalized = 0;
-  let total = 0;
-
-  try {
-    const skillDirs = await fs.readdir(skillsDir, { withFileTypes: true });
-    
-    for (const entry of skillDirs) {
-      if (!entry.isDirectory()) {continue;}
-      
-      const synapsePath = path.join(skillsDir, entry.name, 'synapses.json');
-      if (await fs.pathExists(synapsePath)) {
-        total++;
-        const wasNormalized = await normalizeSynapseFile(synapsePath);
-        if (wasNormalized) {
-          normalized++;
-        }
-      }
-    }
-  } catch (error) {
-    console.error('Failed to normalize synapses:', error);
-  }
-
-  return { normalized, total };
-}
-
-// ============================================================================
-// MIGRATION CANDIDATES DOCUMENT
-// ============================================================================
-
-/**
- * Generate the MIGRATION-CANDIDATES.md document
- */
-async function generateMigrationCandidates(
-  rootPath: string,
-  backupPath: string,
-  candidates: MigrationCandidate[],
-  detection: LegacyDetection,
-  newVersion: string
-): Promise<string> {
-  const timestamp = new Date().toISOString().split('T')[0];
-  const relativeBackupPath = path.relative(rootPath, backupPath).replace(/\\/g, '/');
-
-  let content = `# Migration Candidates
-
-> Generated by Alex Upgrade on ${timestamp}
-> Review and check items you want to migrate from your previous installation.
->
-> **Previous version:** ${detection.installedVersion || 'unknown'} (${detection.version} structure)
-> **New version:** ${newVersion}
-
-## Instructions
-
-1. Review each section below
-2. Check the boxes \`[x]\` for items you want to keep
-3. Run **"Alex: Complete Migration"** when ready
-4. Or manually copy files from \`${relativeBackupPath}/\`
-
----
-
-`;
-
-  // Group candidates by type
-  const legacyDK = candidates.filter(c => c.type === 'legacy-dk');
-  const userDK = candidates.filter(c => c.type === 'user-dk');
-  const userSkills = candidates.filter(c => c.type === 'user-skill');
-  const profiles = candidates.filter(c => c.type === 'profile');
-  const episodic = candidates.filter(c => c.type === 'episodic');
-
-  // Legacy DK section
-  if (legacyDK.length > 0) {
-    content += `## 🏛️ Legacy Domain Knowledge (from project root)
-
-These DK files were in your project root. They can be converted to skills:
-
-`;
-    for (const c of legacyDK) {
-      const staleWarning = c.stale ? ' ⚠️ Stale (>90 days)' : '';
-      const checked = c.recommended && !c.stale ? 'x' : ' ';
-      content += `- [${checked}] \`${c.sourcePath}\` → \`${c.targetPath}\`${staleWarning}\n`;
-      content += `  - ${c.description} (${c.sizeKB} KB)\n\n`;
-    }
-  }
-
-  // User DK section
-  if (userDK.length > 0) {
-    content += `## 📚 Domain Knowledge Files
-
-These DK files can be converted to skills:
-
-`;
-    for (const c of userDK) {
-      const staleWarning = c.stale ? ' ⚠️ Stale (>90 days)' : '';
-      const checked = c.recommended && !c.stale ? 'x' : ' ';
-      content += `- [${checked}] \`${c.sourcePath}\` → \`${c.targetPath}\`${staleWarning}\n`;
-      content += `  - ${c.description} (${c.sizeKB} KB)\n\n`;
-    }
-  }
-
-  // User Skills section
-  if (userSkills.length > 0) {
-    content += `## 🎓 User-Created Skills
-
-These skills were created by you and don't exist in the new version:
-
-`;
-    for (const c of userSkills) {
-      const staleWarning = c.stale ? ' ⚠️ Stale (>90 days)' : '';
-      const checked = c.recommended && !c.stale ? 'x' : ' ';
-      content += `- [${checked}] \`${c.sourcePath}/\`${staleWarning}\n`;
-      content += `  - ${c.description} (${c.sizeKB} KB)\n\n`;
-    }
-  }
-
-  // Profile section
-  if (profiles.length > 0) {
-    content += `## 👤 User Profile
-
-Your personal settings and preferences:
-
-`;
-    for (const c of profiles) {
-      content += `- [x] \`${c.sourcePath}\` — ${c.description}\n`;
-    }
-    content += '\n';
-  }
-
-  // Episodic section
-  if (episodic.length > 0) {
-    content += `## 📜 Session History
-
-Your meditation sessions, dream reports, and other episodic records:
-
-`;
-    for (const c of episodic) {
-      content += `- [x] \`${c.sourcePath}/\` — ${c.description} (${c.sizeKB} KB)\n`;
-    }
-    content += '\n';
-  }
-
-  // Backup location
-  content += `---
-
-## Backup Location
-
-All original files available at:
-\`${relativeBackupPath}/\`
-
-You can manually copy any files from this location.
-
-## Need Help?
-
-Ask Alex: "Help me migrate my previous settings"
-`;
-
-  const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
-  await fs.writeFile(candidatesPath, content, 'utf8');
-
-  return candidatesPath;
-}
-
-// ============================================================================
 // MAIN UPGRADE COMMAND
 // ============================================================================
 
-/**
- * Main upgrade function - follows the plan
- */
-export async function upgradeArchitecture(context: vscode.ExtensionContext): Promise<void> {
-  // Get workspace
-  const workspaceResult = await getAlexWorkspaceFolder(true);
-
-  if (!workspaceResult.found) {
-    if (workspaceResult.cancelled) {return;}
-
-    const result = await vscode.window.showWarningMessage(
-      workspaceResult.error || "Alex is not installed in this workspace.",
-      "Initialize Alex Now",
-      "Cancel"
-    );
-
-    if (result === "Initialize Alex Now") {
-      // Call function directly instead of command to avoid lock conflict
-      // (upgradeArchitecture already holds the operation lock)
-      await initializeArchitecture(context);
-    }
-    return;
-  }
-
-  const rootPath = workspaceResult.rootPath!;
-  const extensionPath = context.extensionPath;
-
-  // Kill switch check
-  const canProceed = await checkProtectionAndWarn(rootPath, "Alex: Upgrade", true);
-  if (!canProceed) {return;}
-
-  // Get versions
-  const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
-  const extensionVersion = packageJson.version || '0.0.0';
-
-  // Detect legacy structure
-  const detection = await detectLegacyStructure(rootPath);
-
-  // Check if already at latest version
-  if (detection.installedVersion === extensionVersion) {
-    await vscode.window.showInformationMessage(
-      `✅ Alex is already at the latest version (v${extensionVersion}).\n\n` +
-      'No upgrade needed. Your cognitive architecture is up to date!',
-      { modal: true },
-      'OK'
-    );
-    return;
-  }
-
-  // Confirm upgrade (loop to allow viewing What's New and returning to dialog)
-  // NASA R2: Bounded loop with max iterations (user interaction loop, very unlikely to hit limit)
+async function confirmUpgradeDialog(detection: LegacyDetection, extensionVersion: string, extensionPath: string): Promise<boolean> {
   const MAX_DIALOG_ITERATIONS = 100;
-  const versionInfo = detection.installedVersion 
+  const versionInfo = detection.installedVersion
     ? `v${detection.installedVersion} → v${extensionVersion}`
     : `${detection.version} structure → v${extensionVersion}`;
 
@@ -1003,387 +596,174 @@ export async function upgradeArchitecture(context: vscode.ExtensionContext): Pro
         const doc = await vscode.workspace.openTextDocument(changelogPath);
         await vscode.window.showTextDocument(doc);
       }
-      // Continue loop to show dialog again
       continue;
     }
-    
-    // Exit loop for Start Upgrade or Cancel
     break;
   }
 
-  if (confirm !== "Start Upgrade") {return;}
+  return confirm === "Start Upgrade";
+}
 
-  // Execute upgrade
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+async function executeUpgradePhases(
+  rootPath: string, extensionPath: string, detection: LegacyDetection,
+  timestamp: string, extensionVersion: string
+): Promise<UpgradeStats> {
+  let stats: UpgradeStats = { restoredCount: 0, normalizedCount: 0, staleCount: 0 };
 
-  // Variables to capture from progress callback
-  let upgradeBackupPath = '';
-  let upgradeCandidates: MigrationCandidate[] = [];
-  let upgradeStats: UpgradeStats = { restoredCount: 0, normalizedCount: 0, staleCount: 0 };
+  await vscode.window.withProgress(
+    { location: vscode.ProgressLocation.Notification, title: "Upgrading Alex...", cancellable: false },
+    async (progress) => {
+      progress.report({ message: "Creating backup...", increment: 20 });
+      const backupPath = await createVersionAwareBackup(rootPath, detection, timestamp);
 
+      progress.report({ message: "Cleaning old installation...", increment: 20 });
+      await cleanOldStructure(rootPath, detection);
+
+      progress.report({ message: "Installing new version...", increment: 20 });
+      await freshInstall(extensionPath, rootPath);
+
+      progress.report({ message: "Analyzing migration candidates...", increment: 20 });
+      const candidates = await runGapAnalysis(backupPath, rootPath, detection);
+
+      progress.report({ message: "Restoring your skills and settings...", increment: 15 });
+
+      if (candidates.length > 0) {
+        const autoRestore = candidates.filter(c => c.recommended && !c.stale);
+        const restoredItems: string[] = [];
+        for (const item of autoRestore) {
+          const src = path.join(backupPath, item.sourcePath);
+          const dest = path.join(rootPath, item.targetPath);
+          if (await fs.pathExists(src)) {
+            await fs.ensureDir(path.dirname(dest));
+            await fs.copy(src, dest, { overwrite: true });
+            restoredItems.push(item.description);
+          }
+        }
+
+        progress.report({ message: "Normalizing synapses to current schema...", increment: 5 });
+        const skillsDir = path.join(rootPath, '.github', 'skills');
+        let synapseNormalized = 0;
+        if (await fs.pathExists(skillsDir)) {
+          const synapseResult = await normalizeAllSynapses(skillsDir);
+          synapseNormalized = synapseResult.normalized;
+        }
+
+        const staleItems = candidates.filter(c => c.stale);
+        if (staleItems.length > 0) {
+          await generateMigrationCandidates(rootPath, backupPath, staleItems, detection, extensionVersion);
+        }
+
+        stats = { restoredCount: restoredItems.length, normalizedCount: synapseNormalized, staleCount: staleItems.length };
+      } else {
+        const skillsDir = path.join(rootPath, '.github', 'skills');
+        if (await fs.pathExists(skillsDir)) { await normalizeAllSynapses(skillsDir); }
+      }
+    }
+  );
+
+  return stats;
+}
+
+async function runPostUpgradeTasks(context: vscode.ExtensionContext, rootPath: string): Promise<boolean> {
+  let dreamSuccess = false;
   try {
-    await vscode.window.withProgress(
-      {
-        location: vscode.ProgressLocation.Notification,
-        title: "Upgrading Alex...",
-        cancellable: false,
-      },
-      async (progress) => {
-        // Step 1: Backup
-        progress.report({ message: "Creating backup...", increment: 20 });
-        const backupPath = await createVersionAwareBackup(rootPath, detection, timestamp);
-        upgradeBackupPath = backupPath; // Capture for use after callback
+    const dreamResult = await runDreamProtocol(context, { silent: true });
+    dreamSuccess = dreamResult?.success ?? false;
+  } catch { /* Dream validation is optional */ }
 
-        // Step 2: Clean old structure
-        progress.report({ message: "Cleaning old installation...", increment: 20 });
-        await cleanOldStructure(rootPath, detection);
+  await offerEnvironmentSetup();
 
-        // Step 3: Fresh install
-        progress.report({ message: "Installing new version...", increment: 20 });
-        await freshInstall(extensionPath, rootPath);
+  try { await detectAndUpdateProjectPersona(rootPath, { updateSlots: false }); }
+  catch { /* Persona detection is optional */ }
 
-        // Step 4: Gap analysis
-        progress.report({ message: "Analyzing migration candidates...", increment: 20 });
-        const candidates = await runGapAnalysis(backupPath, rootPath, detection);
-        upgradeCandidates = candidates; // Capture for use after callback
+  try { await migrateSecretsFromEnvironment(); }
+  catch (migrationErr) { console.warn("[Alex] Failed to migrate secrets:", migrationErr); }
 
-        // Step 5: Auto-restore user content and normalize synapses
-        progress.report({ message: "Restoring your skills and settings...", increment: 15 });
-        
-        if (candidates.length > 0) {
-          // Auto-restore everything recommended (profile, episodic, AND user-created skills)
-          // Philosophy: Never lose heir-created work, normalize automatically
-          const autoRestore = candidates.filter(c => c.recommended && !c.stale);
-          const restoredItems: string[] = [];
+  return dreamSuccess;
+}
 
-          for (const item of autoRestore) {
-            const src = path.join(backupPath, item.sourcePath);
-            const dest = path.join(rootPath, item.targetPath);
-            if (await fs.pathExists(src)) {
-              await fs.ensureDir(path.dirname(dest));
-              await fs.copy(src, dest, { overwrite: true });
-              restoredItems.push(item.description);
-            }
-          }
+async function showUpgradeCompletion(
+  rootPath: string, detection: LegacyDetection, extensionVersion: string,
+  stats: UpgradeStats, dreamSuccess: boolean
+): Promise<void> {
+  const { restoredCount, normalizedCount, staleCount } = stats;
+  const healthIcon = dreamSuccess ? '💚' : '⚠️';
+  const healthText = dreamSuccess ? 'healthy' : 'needs attention';
 
-          // Normalize all synapse files (upgrades heir-created skills to current schema)
-          progress.report({ message: "Normalizing synapses to current schema...", increment: 5 });
-          const skillsDir = path.join(rootPath, '.github', 'skills');
-          let synapseNormalized = 0;
-          if (await fs.pathExists(skillsDir)) {
-            const synapseResult = await normalizeAllSynapses(skillsDir);
-            synapseNormalized = synapseResult.normalized;
-          }
+  const summaryParts: string[] = [];
+  if (restoredCount > 0) { summaryParts.push(`📦 ${restoredCount} item(s) restored`); }
+  if (normalizedCount > 0) { summaryParts.push(`🔧 ${normalizedCount} synapse(s) normalized`); }
+  const summaryLine = summaryParts.length > 0 ? summaryParts.join(' • ') : 'Fresh install';
 
-          // Only generate migration candidates for stale items that weren't auto-restored
-          const staleItems = candidates.filter(c => c.stale);
-          if (staleItems.length > 0) {
-            await generateMigrationCandidates(
-              rootPath,
-              backupPath,
-              staleItems,
-              detection,
-              extensionVersion
-            );
-          }
+  const base = `✅ Upgrade Complete! v${detection.installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
+    `${healthIcon} Health: ${healthText}\n${summaryLine}\n`;
 
-          // Capture stats for completion message
-          upgradeStats = {
-            restoredCount: restoredItems.length,
-            normalizedCount: synapseNormalized,
-            staleCount: staleItems.length
-          };
-        } else {
-          // No candidates - still normalize any existing skills
-          const skillsDir = path.join(rootPath, '.github', 'skills');
-          if (await fs.pathExists(skillsDir)) {
-            await normalizeAllSynapses(skillsDir);
-          }
-        }
-      }
+  if (staleCount > 0) {
+    const result = await vscode.window.showInformationMessage(
+      base + `⏰ ${staleCount} stale item(s) (>90 days) available for optional review`,
+      "Review Stale Items", "OK"
     );
-
-    // Run Dream to validate
-    let dreamSuccess = false;
-    try {
-      const dreamResult = await runDreamProtocol(context, { silent: true });
-      dreamSuccess = dreamResult?.success ?? false;
-    } catch (err) {
-      // Dream validation is optional
-    }
-
-    // Offer environment setup
-    await offerEnvironmentSetup();
-
-    // Detect and update project persona
-    // This helps identify the right context for users with multiple personas across projects
-    let personaDetected = false;
-    try {
-      const personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
-      if (personaResult) {
-        personaDetected = true;
+    if (result === "Review Stale Items") {
+      const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
+      if (await fs.pathExists(candidatesPath)) {
+        const doc = await vscode.workspace.openTextDocument(candidatesPath);
+        await vscode.window.showTextDocument(doc);
       }
-    } catch (err) {
-      // Persona detection is optional
     }
-
-    // Migrate environment variables to secure storage
-    try {
-      await migrateSecretsFromEnvironment();
-    } catch (migrationErr) {
-      // Non-fatal - log but continue
-      console.warn("[Alex] Failed to migrate secrets:", migrationErr);
-    }
-
-    // Extract stats from captured stats object
-    const { restoredCount, normalizedCount, staleCount } = upgradeStats;
-
-    // Show completion message
-    const healthIcon = dreamSuccess ? '💚' : '⚠️';
-    const healthText = dreamSuccess ? 'healthy' : 'needs attention';
-    
-    // Build summary parts
-    const summaryParts: string[] = [];
-    if (restoredCount > 0) {
-      summaryParts.push(`📦 ${restoredCount} item(s) restored`);
-    }
-    if (normalizedCount > 0) {
-      summaryParts.push(`🔧 ${normalizedCount} synapse(s) normalized`);
-    }
-    const summaryLine = summaryParts.length > 0 ? summaryParts.join(' • ') : 'Fresh install';
-    
-    if (staleCount > 0) {
-      // Only stale items need review - everything else was auto-restored
-      const result = await vscode.window.showInformationMessage(
-        `✅ Upgrade Complete! v${detection.installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
-        `${healthIcon} Health: ${healthText}\n` +
-        `${summaryLine}\n` +
-        `⏰ ${staleCount} stale item(s) (>90 days) available for optional review`,
-        "Review Stale Items",
-        "OK"
-      );
-
-      if (result === "Review Stale Items") {
-        const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
-        if (await fs.pathExists(candidatesPath)) {
-          const doc = await vscode.workspace.openTextDocument(candidatesPath);
-          await vscode.window.showTextDocument(doc);
-        }
-      }
-    } else {
-      // All done - fully automatic!
-      await vscode.window.showInformationMessage(
-        `✅ Upgrade Complete! v${detection.installedVersion || 'unknown'} → v${extensionVersion}\n\n` +
-        `${healthIcon} Health: ${healthText}\n` +
-        `${summaryLine}\n` +
-        `All your work preserved automatically!`,
-        "OK"
-      );
-    }
-
-  } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    vscode.window.showErrorMessage(
-      `Upgrade failed: ${errorMessage}\n\n` +
-      "Your backup is safe in archive/upgrades/",
-      { modal: true }
-    );
+  } else {
+    await vscode.window.showInformationMessage(base + 'All your work preserved automatically!', "OK");
   }
 }
 
-// ============================================================================
-// COMPLETE MIGRATION COMMAND
-// ============================================================================
-
 /**
- * Process checked items from MIGRATION-CANDIDATES.md
+ * Main upgrade function - follows the plan
  */
-export async function completeMigration(context: vscode.ExtensionContext): Promise<void> {
+export async function upgradeArchitecture(context: vscode.ExtensionContext): Promise<void> {
   const workspaceResult = await getAlexWorkspaceFolder(true);
+
   if (!workspaceResult.found) {
-    vscode.window.showErrorMessage("No workspace with Alex found.");
+    if (workspaceResult.cancelled) { return; }
+    const result = await vscode.window.showWarningMessage(
+      workspaceResult.error || "Alex is not installed in this workspace.",
+      "Initialize Alex Now", "Cancel"
+    );
+    if (result === "Initialize Alex Now") { await initializeArchitecture(context); }
     return;
   }
 
   const rootPath = workspaceResult.rootPath!;
-  const candidatesPath = path.join(rootPath, '.github', 'MIGRATION-CANDIDATES.md');
+  const extensionPath = context.extensionPath;
 
-  if (!await fs.pathExists(candidatesPath)) {
-    vscode.window.showInformationMessage(
-      "No migration candidates found. Run 'Alex: Upgrade' first if you need to migrate.",
-      "OK"
+  const canProceed = await checkProtectionAndWarn(rootPath, "Alex: Upgrade", true);
+  if (!canProceed) { return; }
+
+  const packageJson = await fs.readJson(path.join(extensionPath, 'package.json'));
+  const extensionVersion = packageJson.version || '0.0.0';
+  const detection = await detectLegacyStructure(rootPath);
+
+  if (detection.installedVersion === extensionVersion) {
+    await vscode.window.showInformationMessage(
+      `✅ Alex is already at the latest version (v${extensionVersion}).\n\n` +
+      'No upgrade needed. Your cognitive architecture is up to date!',
+      { modal: true }, 'OK'
     );
     return;
   }
 
-  const content = await fs.readFile(candidatesPath, 'utf8');
-  
-  // Parse checked items: - [x] `path`
-  const checkedPattern = /- \[x\] `([^`]+)`/gi;
-  const checkedItems: string[] = [];
-  let match;
-  
-  while ((match = checkedPattern.exec(content)) !== null) {
-    checkedItems.push(match[1]);
-  }
+  const confirmed = await confirmUpgradeDialog(detection, extensionVersion, extensionPath);
+  if (!confirmed) { return; }
 
-  if (checkedItems.length === 0) {
-    const result = await vscode.window.showInformationMessage(
-      "No items are checked for migration.\n\n" +
-      "Edit MIGRATION-CANDIDATES.md and check [x] the items you want to keep, then run this command again.",
-      "Open Migration Guide",
-      "Delete Migration Guide",
-      "Cancel"
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+
+  try {
+    const stats = await executeUpgradePhases(rootPath, extensionPath, detection, timestamp, extensionVersion);
+    const dreamSuccess = await runPostUpgradeTasks(context, rootPath);
+    await showUpgradeCompletion(rootPath, detection, extensionVersion, stats, dreamSuccess);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    vscode.window.showErrorMessage(
+      `Upgrade failed: ${errorMessage}\n\nYour backup is safe in archive/upgrades/`,
+      { modal: true }
     );
-
-    if (result === "Open Migration Guide") {
-      const doc = await vscode.workspace.openTextDocument(candidatesPath);
-      await vscode.window.showTextDocument(doc);
-    } else if (result === "Delete Migration Guide") {
-      await fs.remove(candidatesPath);
-      vscode.window.showInformationMessage("Migration guide deleted.");
-    }
-    return;
   }
-
-  // Find backup path from the document
-  const backupMatch = content.match(/`(archive\/upgrades\/backup-[^`]+)`/);
-  if (!backupMatch) {
-    vscode.window.showErrorMessage("Could not find backup path in migration document.");
-    return;
-  }
-
-  const backupPath = path.join(rootPath, backupMatch[1]);
-  if (!await fs.pathExists(backupPath)) {
-    vscode.window.showErrorMessage(`Backup not found: ${backupMatch[1]}`);
-    return;
-  }
-
-  // Confirm migration
-  const confirm = await vscode.window.showInformationMessage(
-    `Migrate ${checkedItems.length} item(s)?`,
-    { modal: true },
-    "Yes, Migrate",
-    "Cancel"
-  );
-
-  if (confirm !== "Yes, Migrate") {return;}
-
-  // Execute migration
-  const migrated: string[] = [];
-  const errors: string[] = [];
-
-  await vscode.window.withProgress(
-    {
-      location: vscode.ProgressLocation.Notification,
-      title: "Migrating...",
-      cancellable: false,
-    },
-    async (progress) => {
-      for (const item of checkedItems) {
-        progress.report({ message: path.basename(item) });
-
-        try {
-          // Handle the → syntax for DK to skill conversion
-          const arrowMatch = item.match(/^(.+?)\s*→\s*(.+)$/);
-          let src: string;
-          let dest: string;
-
-          if (arrowMatch) {
-            src = path.join(backupPath, arrowMatch[1].trim());
-            dest = path.join(rootPath, arrowMatch[2].trim());
-          } else {
-            src = path.join(backupPath, item);
-            dest = path.join(rootPath, item);
-          }
-
-          if (await fs.pathExists(src)) {
-            await fs.ensureDir(path.dirname(dest));
-            await fs.copy(src, dest, { overwrite: true });
-            
-            // For DK → skill migration, create a minimal synapses.json if it doesn't exist
-            if (arrowMatch && dest.endsWith('SKILL.md') && dest.includes('.github/skills/')) {
-              const skillDir = path.dirname(dest);
-              const synapsesPath = path.join(skillDir, 'synapses.json');
-              if (!await fs.pathExists(synapsesPath)) {
-                // Extract skill name from directory path
-                const skillName = path.basename(skillDir);
-                const minimalSynapses = {
-                  $schema: '../SYNAPSE-SCHEMA.json',
-                  skillId: skillName,
-                  version: '1.0.0',
-                  lastUpdated: new Date().toISOString().split('T')[0],
-                  inheritance: 'inheritable',
-                  connections: [],
-                  activationContexts: [],
-                  notes: `Migrated from DK file: ${path.basename(arrowMatch[1].trim())}`
-                };
-                await fs.writeJson(synapsesPath, minimalSynapses, { spaces: 2 });
-              }
-            }
-            
-            migrated.push(item);
-          } else {
-            errors.push(`Not found: ${item}`);
-          }
-        } catch (err: unknown) {
-          errors.push(`${item}: ${err instanceof Error ? err.message : String(err)}`);
-        }
-      }
-
-      // Normalize synapses for all migrated skills (upgrade to current schema)
-      progress.report({ message: "Normalizing synapses..." });
-      const skillsDir = path.join(rootPath, '.github', 'skills');
-      if (await fs.pathExists(skillsDir)) {
-        const synapseResult = await normalizeAllSynapses(skillsDir);
-        if (synapseResult.normalized > 0) {
-          migrated.push(`(${synapseResult.normalized} synapse files normalized)`);
-        }
-      }
-    }
-  );
-
-  // Delete migration candidates file
-  await fs.remove(candidatesPath);
-
-  // Show results
-  let message = `✅ Migration complete!\n\n` +
-    `Migrated: ${migrated.length} item(s)`;
-
-  if (errors.length > 0) {
-    message += `\n⚠️ Errors: ${errors.length}`;
-  }
-
-  const result = await vscode.window.showInformationMessage(
-    message,
-    "Run Dream Check",
-    "OK"
-  );
-
-  if (result === "Run Dream Check") {
-    await vscode.commands.executeCommand("alex.dream");
-  }
-}
-
-/**
- * Show migration candidates document
- */
-export async function showMigrationCandidates(): Promise<void> {
-  const workspaceResult = await getAlexWorkspaceFolder(true);
-  if (!workspaceResult.found) {
-    vscode.window.showErrorMessage("No workspace with Alex found.");
-    return;
-  }
-
-  const candidatesPath = path.join(workspaceResult.rootPath!, '.github', 'MIGRATION-CANDIDATES.md');
-
-  if (!await fs.pathExists(candidatesPath)) {
-    vscode.window.showInformationMessage(
-      "No migration candidates found. Run 'Alex: Upgrade' first if you need to migrate."
-    );
-    return;
-  }
-
-  const doc = await vscode.workspace.openTextDocument(candidatesPath);
-  await vscode.window.showTextDocument(doc);
 }

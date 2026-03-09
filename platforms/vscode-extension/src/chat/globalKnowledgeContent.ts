@@ -100,9 +100,16 @@ sync-metadata.json
  * Professional design with animated knowledge categories.
  */
 function getAnimatedBannerSvg(): string {
-    // Knowledge Graph concept - "Your Mission Control for Cross-Project Wisdom"
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
-  <defs>
+  ${getBannerSvgDefs()}
+  ${getBannerSvgBackground()}
+  ${getBannerSvgStation()}
+  ${getBannerSvgText()}
+</svg>`;
+}
+
+function getBannerSvgDefs(): string {
+    return `<defs>
     <!-- Deep space gradient (on-brand) -->
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#080810"/>
@@ -140,8 +147,11 @@ function getAnimatedBannerSvg(): string {
       <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.8"/>
       <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
     </radialGradient>
-  </defs>
-  
+  </defs>`;
+}
+
+function getBannerSvgBackground(): string {
+    return `
   <!-- Background -->
   <rect width="1200" height="300" fill="url(#bg)"/>
   
@@ -165,8 +175,11 @@ function getAnimatedBannerSvg(): string {
   <circle cx="1150" cy="350" r="180" fill="none" stroke="#0d9488" stroke-width="1" opacity="0.2"/>
   
   <!-- Main glow behind station -->
-  <ellipse cx="320" cy="150" rx="200" ry="120" fill="url(#glow)"/>
-  
+  <ellipse cx="320" cy="150" rx="200" ry="120" fill="url(#glow)"/>`;
+}
+
+function getBannerSvgStation(): string {
+    return `
   <!-- SPACE STATION (ISS-inspired modular design) -->
   <g transform="translate(100, 80)">
     
@@ -249,8 +262,11 @@ function getAnimatedBannerSvg(): string {
       </g>
     </g>
     
-  </g>
-  
+  </g>`;
+}
+
+function getBannerSvgText(): string {
+    return `
   <!-- Main title -->
   <text x="530" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700" fill="white" letter-spacing="-0.5">
     Global Knowledge
@@ -302,23 +318,33 @@ function getAnimatedBannerSvg(): string {
     <path d="M15 7.5l-3 4.5 3 4.5h3l-3-4.5 3-4.5h-3z" fill="#0d9488"/>
     <path d="M18 7.5l3 4.5-3 4.5h3l3-4.5-3-4.5h-3z" fill="#0d9488" opacity="0.5"/>
   </g>
-  <text x="1116" y="278" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">CorreaX</text>
-</svg>`;
+  <text x="1116" y="278" font-family="Segoe UI, sans-serif" font-size="11" fill="#888888" text-anchor="middle">CorreaX</text>`;
 }/**
  * Get starter patterns to include in new GK repos
  */
-function getStarterPatterns(createdAt: string): Array<{
+type StarterPattern = {
     id: string;
     filename: string;
     title: string;
     category: string;
     tags: string[];
     content: string;
-}> {
+};
+
+function getStarterPatterns(createdAt: string): StarterPattern[] {
     return [
-        {
-            id: 'GK-starter-code-quality-principles',
-            filename: 'GK-starter-code-quality-principles.md',
+        ...getCodeQualityPattern(createdAt),
+        ...getDocumentationPattern(createdAt),
+        ...getErrorHandlingPattern(createdAt),
+        ...getProblemSolvingPattern(createdAt),
+        ...getCommunicationPattern(createdAt),
+    ];
+}
+
+function getCodeQualityPattern(createdAt: string): StarterPattern[] {
+    return [{
+        id: 'GK-starter-code-quality-principles',
+        filename: 'GK-starter-code-quality-principles.md',
             title: 'Code Quality Principles',
             category: 'patterns',
             tags: ['dry', 'kiss', 'code-quality', 'refactoring', 'starter'],
@@ -377,13 +403,16 @@ One responsibility per abstraction:
 
 > 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
 `
-        },
-        {
-            id: 'GK-starter-documentation-structure',
-            filename: 'GK-starter-documentation-structure.md',
-            title: 'Documentation Structure Pattern',
-            category: 'documentation',
-            tags: ['documentation', 'readme', 'structure', 'templates', 'starter'],
+    }];
+}
+
+function getDocumentationPattern(createdAt: string): StarterPattern[] {
+    return [{
+        id: 'GK-starter-documentation-structure',
+        filename: 'GK-starter-documentation-structure.md',
+        title: 'Documentation Structure Pattern',
+        category: 'documentation',
+        tags: ['documentation', 'readme', 'structure', 'templates', 'starter'],
             content: `# Documentation Structure Pattern
 
 **ID**: GK-starter-documentation-structure
@@ -454,14 +483,17 @@ How to deploy to production.
 
 > 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
 `
-        },
-        {
-            id: 'GK-starter-error-handling',
-            filename: 'GK-starter-error-handling.md',
-            title: 'Error Handling Patterns',
-            category: 'error-handling',
-            tags: ['error-handling', 'try-catch', 'async', 'typescript', 'starter'],
-            content: `# Error Handling Patterns
+    }];
+}
+
+function getErrorHandlingPattern(createdAt: string): StarterPattern[] {
+    return [{
+        id: 'GK-starter-error-handling',
+        filename: 'GK-starter-error-handling.md',
+        title: 'Error Handling Patterns',
+        category: 'error-handling',
+        tags: ['error-handling', 'try-catch', 'async', 'typescript', 'starter'],
+        content: `# Error Handling Patterns
 
 **ID**: GK-starter-error-handling
 **Category**: error-handling
@@ -535,14 +567,17 @@ return res.status(404).json({
 
 > 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
 `
-        },
-        {
-            id: 'GK-starter-problem-solving',
-            filename: 'GK-starter-problem-solving.md',
-            title: 'Problem Solving Framework',
-            category: 'debugging',
-            tags: ['debugging', 'problem-solving', '5-whys', 'rubber-duck', 'root-cause', 'starter'],
-            content: `# Problem Solving Framework
+    }];
+}
+
+function getProblemSolvingPattern(createdAt: string): StarterPattern[] {
+    return [{
+        id: 'GK-starter-problem-solving',
+        filename: 'GK-starter-problem-solving.md',
+        title: 'Problem Solving Framework',
+        category: 'debugging',
+        tags: ['debugging', 'problem-solving', '5-whys', 'rubber-duck', 'root-cause', 'starter'],
+        content: `# Problem Solving Framework
 
 **ID**: GK-starter-problem-solving
 **Category**: debugging
@@ -604,14 +639,17 @@ Keep asking "Why?" until you reach the systemic issue:
 
 > 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
 `
-        },
-        {
-            id: 'GK-starter-cognitive-communication',
-            filename: 'GK-starter-cognitive-communication.md',
-            title: 'Cognitive Communication',
-            category: 'communication',
-            tags: ['cognitive-load', 'communication', 'summarize', 'chunking', 'teaching', 'starter'],
-            content: `# Cognitive Communication
+    }];
+}
+
+function getCommunicationPattern(createdAt: string): StarterPattern[] {
+    return [{
+        id: 'GK-starter-cognitive-communication',
+        filename: 'GK-starter-cognitive-communication.md',
+        title: 'Cognitive Communication',
+        category: 'communication',
+        tags: ['cognitive-load', 'communication', 'summarize', 'chunking', 'teaching', 'starter'],
+        content: `# Cognitive Communication
 
 **ID**: GK-starter-cognitive-communication
 **Category**: communication
@@ -688,8 +726,7 @@ Break large responses into digestible pieces:
 
 > 💡 This is a **starter pattern** from Alex. Customize it based on your team's practices.
 `
-        }
-    ];
+    }];
 }
 
 /**
@@ -818,6 +855,13 @@ Feel free to customize, delete, or build upon these.
  * Generate USER-GUIDE content for new GK repos
  */
 function getUserGuideContent(): string {
+    return getUserGuideIntro()
+        + getUserGuideCommands()
+        + getUserGuideIndex()
+        + getUserGuideBestPractices();
+}
+
+function getUserGuideIntro(): string {
     return `# Global Knowledge User Guide
 
 > Complete guide to managing your cross-project knowledge
@@ -921,7 +965,11 @@ useEffect(() => {
 \`\`\`
 
 ---
+`;
+}
 
+function getUserGuideCommands(): string {
+    return `
 ## Commands Reference
 
 | Command | Description |
@@ -1012,7 +1060,11 @@ Add entry to \`index.json\`:
 \`\`\`
 
 ---
+`;
+}
 
+function getUserGuideIndex(): string {
+    return `
 ## Index Management
 
 ### Alex-Managed Approach
@@ -1100,7 +1152,11 @@ When multiple people contribute:
 - Consider a CODEOWNERS file
 
 ---
+`;
+}
 
+function getUserGuideBestPractices(): string {
+    return `
 ## Best Practices
 
 ### Naming

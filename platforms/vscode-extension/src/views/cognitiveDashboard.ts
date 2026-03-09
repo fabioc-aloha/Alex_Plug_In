@@ -279,7 +279,18 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';">
   <title>Alex Cognitive Dashboard</title>
-  <style>
+  <style>${getDashboardStyles()}</style>
+</head>
+<body>
+  ${getDashboardBodyHtml()}
+  <script nonce="${nonce}">${getDashboardScript()}</script>
+</body>
+</html>`;
+  }
+}
+
+function getDashboardStyles(): string {
+  return `
     :root {
       --bg-primary: var(--vscode-editor-background);
       --bg-secondary: var(--vscode-sideBar-background);
@@ -446,10 +457,11 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
       color: var(--text-secondary);
       text-align: center;
       margin-top: 16px;
-    }
-  </style>
-</head>
-<body>
+    }`;
+}
+
+function getDashboardBodyHtml(): string {
+  return `
   <div class="dashboard-header">
     <div class="dashboard-title">
       🧠 Cognitive Dashboard
@@ -534,9 +546,11 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
 
   <div class="version-info" id="version-info">
     Alex v5.2.0
-  </div>
+  </div>`;
+}
 
-  <script nonce="${nonce}">
+function getDashboardScript(): string {
+  return `
     const vscode = acquireVsCodeApi();
 
     // Event delegation for all data-cmd clicks (CSP-compliant)
@@ -597,11 +611,7 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
 
       // Version
       document.getElementById('version-info').textContent = 'Alex v' + data.version;
-    }
-  </script>
-</body>
-</html>`;
-  }
+    }`;
 }
 
 /**
