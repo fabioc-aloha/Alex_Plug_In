@@ -52,7 +52,7 @@
 | ~~4th~~ | ~~P1 (8B–8D)~~ | ~~Design system + polish + cross-tab consistency~~ | ✅ Complete | All 15 items fixed March 10, 2026 |
 | 5th | P2 (P5B) | Trim 5 files below 1,000 lines | 1–2 sessions | v6.5.0 release criteria |
 | 6th | ~~P3 (P5C)~~ | ~~Split 8 orchestrator functions~~ | ✅ Complete | 7 functions split March 10, 2026. setAgentMode already 5L (stale data). |
-| 7th | P4 (P5D) | Formally accept 5 structural exceptions | 15 min | Decision only — close and document |
+| ~~7th~~ | ~~P4 (P5D)~~ | ~~Formally accept 5 structural exceptions~~ | ✅ Complete | Approved March 9, 2026 — flat registration sequences, near-zero cognitive complexity. |
 | 8th | P7.3–7.5 | Persona detection HIGH improvements (LLM prompt, signals, skills) | 1–2 sessions | Broader detection quality |
 
 > **Quick wins available now**: P7.1–7.2 (CRITICAL fix, ~2 lines of code), P4 (P5D decision, 0 code).
@@ -142,18 +142,17 @@
 
 ---
 
-### Priority 4: P5D — Structural Exceptions (Formally Accept)
+### Priority 4: P5D — Structural Exceptions ✅ Accepted (March 9, 2026)
 
-> **Decision needed**: Accept command registration functions as structural exceptions to NASA R4.
-> These are long but linear/declarative — splitting adds indirection without improving comprehension.
+> **Decision**: Formally accepted as NASA R4 exceptions. These are flat, declarative command registration sequences with near-zero cognitive complexity. Splitting would degrade discoverability (grep for command name → land on handler) without improving comprehension or testability. This is the standard VS Code extension activation pattern.
 
-| Function | Lines | File | Recommendation |
-|----------|:-----:|------|:--------------:|
-| `activateInternal` | 820 | extension.ts | Accept |
-| `registerImageCommands` | 628 | contextMenuImage.ts | Accept |
-| `registerDeveloperCommands` | 576 | commandsDeveloper.ts | Accept |
-| `registerGammaCommands` | 408 | commandsGamma.ts | Accept |
-| `registerWordCommands` | 190 | commandsWord.ts | Accept |
+| Function | Lines | File | Status |
+|----------|:-----:|------|:------:|
+| `activateInternal` | 820 | extension.ts | ✅ Accepted |
+| `registerImageCommands` | 628 | contextMenuImage.ts | ✅ Accepted |
+| `registerDeveloperCommands` | 576 | commandsDeveloper.ts | ✅ Accepted |
+| `registerGammaCommands` | 408 | commandsGamma.ts | ✅ Accepted |
+| `registerWordCommands` | 190 | commandsWord.ts | ✅ Accepted |
 
 ---
 

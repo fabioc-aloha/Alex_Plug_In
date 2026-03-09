@@ -5,21 +5,14 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md",
-    "platforms/vscode-extension/src/commands/initialize.ts",
-    "platforms/vscode-extension/src/commands/proposeSkill.ts",
-    "platforms/vscode-extension/src/commands/setupEnvironment.ts",
-    "platforms/vscode-extension/src/commands/upgradeMigration.ts",
-    "platforms/vscode-extension/src/commands/upgradeSynapseNormalization.ts",
-    "platforms/vscode-extension/src/shared/cognitiveTier.ts",
-    "platforms/vscode-extension/src/shared/healthCheck.ts"
+    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1773098373818
+      "scannedAt": 1773098597301
     }
   ],
-  "lastUpdated": 1773098373818
+  "lastUpdated": 1773098597301
 }
