@@ -5,16 +5,35 @@
   "version": "1.0.0",
   "connections": [
     {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "integrates",
+      "strength": 0.85,
+      "note": "Persona detection ships to heir via inheritance model"
+    },
+    {
       "target": ".github/instructions/alex-core.instructions.md",
       "type": "references",
       "strength": 0.7,
-      "note": "P5-P7 working memory slots updated by persona detection"
+      "note": "Active Context persona field updated by detection chain"
     },
     {
       "target": ".github/skills/release-process/SKILL.md",
       "type": "validates",
       "strength": 0.7,
       "note": "Persona detection tested during pre-publish"
+    },
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "note": "BannerNoun action phrasing and persona avatar mappings are brand decisions"
+    },
+    {
+      "target": ".github/skills/north-star/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.8,
+      "bidirectional": true,
+      "note": "North Star /northstar define sets Persona: field; detection reads it as P5"
     }
   ],
   "activationBoost": [

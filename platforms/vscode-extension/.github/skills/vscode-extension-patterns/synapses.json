@@ -2,8 +2,8 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "1.0",
   "skillId": "vscode-extension-patterns",
-  "version": "1.4.0",
-  "lastValidated": "2026-03-04",
+  "version": "1.5.0",
+  "lastValidated": "2026-03-09",
   "connections": [
     {
       "target": ".github/instructions/release-management.instructions.md",
@@ -16,6 +16,12 @@
       "type": "implements",
       "strength": 0.9,
       "reason": "Marketplace publishing deployment patterns"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "implements",
+      "strength": 0.85,
+      "reason": "VS Code heir patterns"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
@@ -53,6 +59,19 @@
       "type": "coordinates-with",
       "strength": 0.7,
       "reason": "SecretStorage API, VSCE secret scanner avoidance during packaging"
+    },
+    {
+      "target": ".github/skills/refactoring-patterns/SKILL.md",
+      "type": "uses",
+      "strength": 0.8,
+      "bidirectional": true,
+      "reason": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization"
+    },
+    {
+      "target": "alex_docs/research/VSCODE-1.111-RELEASE-EVALUATION-2026-03-09.md",
+      "type": "references",
+      "strength": 0.8,
+      "reason": "1.111 feature evaluation: agent-scoped hooks, autopilot, debug events. Template for future release evaluations."
     }
   ],
   "activationPatterns": [
@@ -69,6 +88,11 @@
     "telemetry opt-out compliance",
     "onDidChangeConfiguration listener",
     "VS Code 1.110+ chat settings",
+    "VS Code 1.111 agent-scoped hooks",
+    "autopilot permissions",
+    "debug events snapshot",
+    "chat.useCustomAgentHooks",
+    "chat.autopilot.enabled",
     "thinking phrases configuration",
     "setupEnvironment setting tiers",
     "initialize/upgrade automation",
@@ -141,6 +165,11 @@
     "extension manifest",
     "package.json contributes",
     "VS Code 1.109",
+    "VS Code 1.111",
+    "agent-scoped hooks",
+    "autopilot",
+    "task_complete",
+    "debugEventsSnapshot",
     "chat settings",
     "Copilot extension",
     "rebuild extension",

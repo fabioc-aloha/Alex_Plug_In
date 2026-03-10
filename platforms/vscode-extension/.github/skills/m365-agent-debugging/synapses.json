@@ -2,6 +2,12 @@
   "skill": "m365-agent-debugging",
   "connections": [
     {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "implements",
+      "strength": 0.85,
+      "context": "M365 heir debugging"
+    },
+    {
       "target": ".github/skills/teams-app-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.85,

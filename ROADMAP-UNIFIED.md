@@ -38,6 +38,7 @@ Four platforms. Focused, not scattered.
 
 | Version | Theme | Shipped |
 | --- | --- | --- |
+| **v6.4.0** | Agent Hooks Release — VS Code 1.111 settings adoption, autopilot, hooks, sandbox, debug docs | 2026-03-09 |
 | **v6.3.0** | Accessibility & Workshop Alignment — WCAG keyboard fixes, 10 domain skills, 41 workshops, I8 cardinal rule | 2026-03-09 |
 | **v6.2.0** | On-Brand Partnership — FLUX fine-tune trifecta, SVG-first banners, GH Web heir discontinued | 2026-03-05 |
 | **v6.1.5** | M365 Schema + Agent Plugin — manifest v1.25, Agent Plugin heir, MCP standalone bundle | 2026-03-04 |
@@ -66,6 +67,10 @@ See [Appendix](#-appendix-completed-work) for completed items.
 | 2 | **Audit PreToolUse hooks under Autopilot** | 2d | Verify safety warnings (I1–I7, MASTER-ALEX-PROTECTED) are effective in non-interactive Autopilot mode |
 | 5 | **Design Validator agent-scoped hooks** | 2d | Read-only enforcement during QA — block code modifications in review mode. Add hooks frontmatter to `alex-validator.agent.md` |
 | 6 | **Design Builder agent-scoped hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop. Add hooks frontmatter to `alex-builder.agent.md` |
+| 30 | **Fix 7 failing globalKnowledge tests** | 30m | Update test expectations for new ID prefix format (GK-/GI- vs GKP-/GKI-) |
+| 31 | **Reindex 10 LearnAlex skills** | 1h | Regenerate SKILLS-CATALOG.md, remove stale `inheritance` field from synapses.json |
+| 32 | **Fix stale versions + synapse** | 15m | cognitive-config.json → 6.4.0, fix vscode-extension-patterns broken synapse, archive 2 legacy episodic files |
+| 33 | **Mocha 13 upgrade** | 2h | Resolves all 4 npm audit vulnerabilities (serialize-javascript via mocha) |
 
 ---
 
@@ -75,7 +80,7 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 **Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Platform polish, documentation, and remaining optimization — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-09): Trust scored 7/10. 20 test files for 47K lines of code. Command Center v1.0 delivered (98/100 steps shipped, 2 cancelled). P5B–P5D optimization complete. 130 skills, 37 trifectas. Persona detection P7.1–7.12 all shipped. UI/UX accessibility audit clean (Wave 8 — 20/20 findings fixed). Remaining: ~50 NASA R4 function-length violations (structural exceptions accepted), Contract A–D dependencies blocked on VS Code API.
+**North Star Assessment** (2026-03-09): Trust scored 8.1/10 (comprehensive audit). 20 test files, 109 source files, 44,751 lines. 261 tests passing (7 failing — test drift, not bugs). Command Center v1.0 delivered (98/100 steps shipped). VSIX 27 MB (93% PNG assets — compression opportunity). 4 npm vulns (dev-only mocha dep). 10 skills unindexed. 77 hardcoded colors, 36 console.logs, 45 TODOs. Full audit: [COMPREHENSIVE-AUDIT-2026-03-09](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md).
 
 ### Short-Term
 
@@ -88,6 +93,12 @@ See [Appendix](#-appendix-completed-work) for completed items.
 | ~~11~~ | ~~**Terminal sandbox trust domains**~~ | ~~1h~~ | ✅ Done — configured `chat.tools.terminal.sandbox.network` in `.vscode/settings.json` |
 | ~~12~~ | ~~**OS notifications for confirmations**~~ | ~~1h~~ | ✅ Done — set `chat.notifyWindowOnConfirmation` to `always` in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
 | ~~13~~ | ~~**VS Code Insiders pre-publish testing**~~ | ~~1h~~ | ✅ Done — added Insiders testing section to PRE-PUBLISH-CHECKLIST.md |
+| 34 | **PNG asset compression** | 4h | 94 PNGs = 25.37 MB (93% of VSIX). Convert to WebP or resize — target <10 MB |
+| 35 | **console.log → OutputChannel** | 2h | Replace 36 console.log calls with proper VS Code logging |
+| 36 | **TODO/FIXME triage** | 2h | Triage 45 TODO/FIXME/HACK comments — roadmap or resolve |
+| 37 | **Theme variable migration** | 4h | Audit 77 hardcoded hex colors — migrate generic UI colors to `--vscode-*` vars |
+| 38 | **Fix 4 sub-11px font sizes** | 30m | WCAG AA minimum font size compliance |
+| 39 | **Heir version alignment** | 2h | Sync M365 + Plugin heirs from 6.2.0 → current |
 
 ### Medium-Term
 
@@ -230,10 +241,11 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | **Current Master Version** | 6.4.0                                          |
 | **Current Heirs**          | VS Code (6.4.0), M365 (6.2.0), Plugin (6.2.0) |
 | **Architecture**           | 130 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
-| **Codebase**               | 95 TS files, 47K lines, 20 test files          |
+| **Codebase**               | 109 TS files, 44,751 lines, 20 test files (261 passing, 7 failing) |
+| **Audit Score**            | 8.1/10 (B+) — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
-| **Next Target**            | v6.4.5 — Agent Hook Design                      |
-| **Open Items**             | 22 total (3 in v6.4.5, 10+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
+| **Next Target**            | v6.4.5 — Agent Hook Design + Audit Hygiene       |
+| **Open Items**             | 26 total (7 in v6.4.5, 10+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
 | **Updated**                | 2026-03-09                                     |
 
 ---

@@ -1,5 +1,5 @@
 
-# Alex v6.2.0
+# Alex v6.4.0
 
 ## Identity
 
@@ -24,7 +24,7 @@ Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.3.0 published. VS Code 1.111 evaluation complete — agent-scoped hooks + autopilot adopted. Roadmap reorganized by priority: v6.4.0 (Agent Hooks Release, 6 items) → v6.5.0 (Trust Release, 23 items). Completed tasks moved to collapsible appendix. Skill-to-Discipline Mapping doc (41 disciplines × 130 skills) added to Docs tab + copied to AlexLearn heir.
+Recent: v6.4.0 published (Agent Hooks Release). 7 low-hanging fruit from 1.111 evaluation shipped: hooks, autopilot, sandbox, notifications, debug docs, Insiders checklist. 3 hook-design items deferred to v6.4.5. Quality gate pipeline hardened (walkthrough file sync lesson). Next: v6.4.5 Agent Hook Design (3 items).
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: never
