@@ -4,43 +4,34 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/agents/alex-documentarian.agent.md",
-    "CHANGELOG.md",
-    "README.md",
-    "ROADMAP-UNIFIED.md",
-    "SECURITY.md",
-    "TEST-GUIDE.md",
-    "alex_docs/WORKING-WITH-ALEX.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "alex_docs/research/UNIFIED-IMPLEMENTATION-PLAN-2026-03-10.md",
-    "packages/mcp-cognitive-tools/src/index.ts"
+    "latforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1773183657079
+      "scannedAt": 1773184067858
     },
     {
       "file": "platforms/vscode-extension/alex-cognitive-architecture-6.4.6.vsix",
       "todoCount": 2,
-      "scannedAt": 1773183657079
+      "scannedAt": 1773184067858
     },
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1773183657079
+      "scannedAt": 1773184067858
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1773183657079
+      "scannedAt": 1773184067858
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1773183657079
+      "scannedAt": 1773184067858
     }
   ],
-  "lastUpdated": 1773183657079
+  "lastUpdated": 1773184067858
 }
