@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "1.0",
-  "skill": "correax-brand",
+  "skillId": "correax-brand",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "lastValidated": "2026-02-28",
   "description": "CorreaX visual design system — colors, typography, components, WCAG compliance",

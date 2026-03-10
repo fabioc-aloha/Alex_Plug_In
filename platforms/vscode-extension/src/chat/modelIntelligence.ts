@@ -400,9 +400,9 @@ export function getModelRecommendation(taskKey: string): string {
     
     switch (task.minimumTier) {
         case 'frontier':
-            return 'Recommended: Claude Opus 4.5/4.6 or GPT-5.2 for best results.';
+            return 'Recommended: Claude Opus 4.6, GPT-5.2, or o3 for best results.';
         case 'capable':
-            return 'Recommended: Claude Sonnet 4+ or GPT-5.1/GPT-4o for reliable results.';
+            return 'Recommended: Claude Sonnet 4.6, GPT-5.1-Codex, or GPT-4.1 for reliable results.';
         case 'efficient':
             return 'Any model works well for this task.';
     }
@@ -429,22 +429,24 @@ export interface ModelRecommendation {
  */
 const TIER_MODEL_SUGGESTIONS: Record<ModelTier, string[]> = {
     frontier: [
-        'Claude Opus 4.5',
         'Claude Opus 4.6',
+        'Claude Opus 4.5',
         'GPT-5.2',
-        'GPT-5.2-Codex'
+        'GPT-5.2-Codex',
+        'o3'
     ],
     capable: [
+        'Claude Sonnet 4.6',
         'Claude Sonnet 4.5',
-        'Claude Sonnet 4',
         'GPT-5.1-Codex',
+        'GPT-4.1',
         'GPT-4o',
         'Gemini 2.5 Pro'
     ],
     efficient: [
         'Claude Haiku 4.5',
         'GPT-5 mini',
-        'GPT-4.1',
+        'GPT-4o mini',
         'Gemini 3 Flash'
     ],
     unknown: []

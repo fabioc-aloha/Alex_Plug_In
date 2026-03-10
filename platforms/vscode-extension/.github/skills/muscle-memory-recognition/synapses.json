@@ -1,5 +1,6 @@
 {
-  "skill": "muscle-memory-recognition",
+  "schemaVersion": "2.0.0",
+  "skillId": "muscle-memory-recognition",
   "connections": [
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
@@ -30,12 +31,6 @@
       "type": "uses",
       "strength": 0.6,
       "reason": "Complex automation decisions benefit from deep analysis"
-    },
-    {
-      "target": ".github/skills/brain-qa/SKILL.md",
-      "type": "related",
-      "strength": 0.6,
-      "reason": "Brain HTML Motor Cortex annotation must match muscle inventory"
     }
   ],
   "triggers": [
@@ -49,6 +44,5 @@
     "error prone",
     "every time"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

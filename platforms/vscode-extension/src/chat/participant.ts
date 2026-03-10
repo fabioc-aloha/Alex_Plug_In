@@ -12,8 +12,6 @@ import { gatherPeripheralContext } from './peripheralVision';
 import { scoreKnowledgeCoverage, recordCalibrationFeedback, recordModelUsage, getModelUsageSummary } from './honestUncertainty';
 import { validateWorkspace } from '../shared/utils';
 import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
-// Cloud sync deprecated in v5.0.1 - Gist sync removed
-// import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, triggerPostModificationSync } from './cloudSync';
 import { GlobalKnowledgeCategory } from '../shared/constants';
 import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
@@ -36,8 +34,7 @@ import {
 import {
     isGreeting, isStartOfSession, handleGreetingWithSelfActualization,
     handleSelfActualizeCommand, handleKnowledgeCommand, handleSaveInsightCommand,
-    handlePromoteCommand, handleKnowledgeStatusCommand, handleSyncCommand,
-    handlePushCommand, handlePullCommand, handleDocsCommand, handleGoalsCommand,
+    handlePromoteCommand, handleKnowledgeStatusCommand, handleDocsCommand, handleGoalsCommand,
     handleHelpCommand, handleForgetCommand, handleConfidenceCommand,
     handleCreativeCommand, handleVerifyCommand, handleSessionCommand,
 } from './handlers/workflowHandlers';
@@ -141,9 +138,6 @@ async function autoSaveInsight(
             'Auto-detected from conversation',
             content
         );
-        
-        // Cloud sync deprecated - insights saved locally only
-        // triggerPostModificationSync();
         
         logInfo(`[Unconscious] Auto-saved insight: ${title}`);
     } catch (err) {
@@ -424,19 +418,6 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
 
     if (request.command === 'knowledgestatus') {
         return await handleKnowledgeStatusCommand(request, context, stream, token);
-    }
-
-    // Cloud Sync commands
-    if (request.command === 'sync') {
-        return await handleSyncCommand(request, context, stream, token);
-    }
-
-    if (request.command === 'push') {
-        return await handlePushCommand(request, context, stream, token);
-    }
-
-    if (request.command === 'pull') {
-        return await handlePullCommand(request, context, stream, token);
     }
 
     // Documentation command

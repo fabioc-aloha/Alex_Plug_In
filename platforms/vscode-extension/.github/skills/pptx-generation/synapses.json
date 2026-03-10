@@ -1,8 +1,8 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
+  "skillId": "pptx-generation",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
-  "skill": "pptx-generation",
   "description": "Programmatic PowerPoint generation via PptxGenJS",
   "connections": [
     {

@@ -4,43 +4,43 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/agents/alex-builder.agent.md",
+    "github/agents/alex-documentarian.agent.md",
+    "CHANGELOG.md",
+    "README.md",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/DK-correax-brand.md",
+    "SECURITY.md",
+    "TEST-GUIDE.md",
     "alex_docs/WORKING-WITH-ALEX.md",
-    "alex_docs/architecture/ALEX-IDENTITY.md",
-    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
-    "alex_docs/architecture/CONSCIOUS-MIND.md",
-    "alex_docs/architecture/MEMORY-SYSTEMS.md",
-    "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md",
-    "alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md"
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "alex_docs/research/UNIFIED-IMPLEMENTATION-PLAN-2026-03-10.md",
+    "packages/mcp-cognitive-tools/src/index.ts"
   ],
   "todoHotspots": [
     {
-      "file": "alex_docs/research/SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md",
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1773183657079
+    },
+    {
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.4.6.vsix",
       "todoCount": 2,
-      "scannedAt": 1773157004465
+      "scannedAt": 1773183657079
     },
     {
-      "file": "alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1773157004465
+      "file": "ROADMAP-UNIFIED.md",
+      "todoCount": 2,
+      "scannedAt": 1773183657079
     },
     {
-      "file": "platforms/agent-plugin/plugin/skills/mcp-development/SKILL.md",
-      "todoCount": 1,
-      "scannedAt": 1773157004465
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1773183657079
     },
     {
-      "file": "platforms/agent-plugin/plugin/agents/alex-builder.agent.md",
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1773157004465
-    },
-    {
-      "file": "platforms/agent-plugin/plugin/instructions/adversarial-oversight.instructions.md",
-      "todoCount": 1,
-      "scannedAt": 1773157004465
+      "scannedAt": 1773183657079
     }
   ],
-  "lastUpdated": 1773157004465
+  "lastUpdated": 1773183657079
 }

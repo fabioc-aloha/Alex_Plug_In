@@ -141,6 +141,40 @@ export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealt
             }
         }
 
+        // Phase 2: Scan structured JSON synapses (synapses.json)
+        const synapseJsonFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/skills/*/synapses.json'),
+            null, 500
+        );
+        for (const sjFile of synapseJsonFiles) {
+            if (token.isCancellationRequested) {
+                return new vscode.LanguageModelToolResult([
+                    new vscode.LanguageModelTextPart('Operation cancelled.')
+                ]);
+            }
+            try {
+                const sjContent = await workspaceFs.readFile(sjFile.fsPath);
+                const sjData = JSON.parse(sjContent);
+                if (Array.isArray(sjData.connections)) {
+                    for (const conn of sjData.connections) {
+                        if (!conn.target) { continue; }
+                        // Skip URI-scheme targets (cross-system references)
+                        if (/^(global-knowledge:\/\/|external:)/.test(conn.target)) { continue; }
+                        totalSynapses++;
+                        const targetFullPath = path.join(rootPath, conn.target);
+                        if (!await workspaceFs.pathExists(targetFullPath)) {
+                            brokenSynapses++;
+                            if (options.input.detailed) {
+                                issues.push(`- ${path.basename(sjFile.fsPath)} → ${conn.target} (not found)`);
+                            }
+                        }
+                    }
+                }
+            } catch {
+                // Invalid JSON — skip
+            }
+        }
+
         const healthStatus = brokenSynapses === 0 ? 'EXCELLENT' : 
                             brokenSynapses < 5 ? 'GOOD' : 
                             brokenSynapses < 10 ? 'NEEDS ATTENTION' : 'CRITICAL';

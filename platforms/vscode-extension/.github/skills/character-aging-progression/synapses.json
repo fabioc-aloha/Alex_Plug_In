@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "skill": "character-aging-progression",
+  "skillId": "character-aging-progression",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "lastValidated": "2026-02-20",
   "connections": [

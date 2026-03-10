@@ -1,5 +1,6 @@
 {
-  "skill": "global-knowledge",
+  "schemaVersion": "1.0",
+  "skillId": "global-knowledge",
   "externalRepository": "fabioc-aloha/Alex-Global-Knowledge",
   "connections": [
     {
@@ -92,6 +93,5 @@
     "organizational knowledge",
     "team knowledge"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "1.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

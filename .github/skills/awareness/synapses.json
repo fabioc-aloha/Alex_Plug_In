@@ -10,48 +10,42 @@
       "strength": 1,
       "type": "extends",
       "when": "Calibrating confidence levels",
-      "yields": "Confidence frameworks, user trust patterns",
-      "bidirectional": false
+      "yields": "Confidence frameworks, user trust patterns"
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
       "strength": 1,
       "type": "complements",
       "when": "Detecting or preventing hallucinations",
-      "yields": "Detection heuristics, prevention strategies",
-      "bidirectional": true
+      "yields": "Detection heuristics, prevention strategies"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "strength": 0.9,
       "type": "enables",
       "when": "Learning from corrections",
-      "yields": "Error integration patterns, learning protocols",
-      "bidirectional": false
+      "yields": "Error integration patterns, learning protocols"
     },
     {
       "target": ".github/skills/self-actualization/SKILL.md",
       "strength": 0.9,
       "type": "informs",
       "when": "Running self-assessment",
-      "yields": "Awareness metrics, calibration data",
-      "bidirectional": false
+      "yields": "Awareness metrics, calibration data"
     },
     {
       "target": ".github/instructions/alex-core.instructions.md",
       "strength": 1,
       "type": "implements",
       "when": "Executing graceful correction",
-      "yields": "Correction protocols, epistemic humility patterns",
-      "bidirectional": true
+      "yields": "Correction protocols, epistemic humility patterns"
     },
     {
       "target": ".github/instructions/protocol-triggers.instructions.md",
       "strength": 0.9,
       "type": "triggers",
       "when": "Detection heuristics fire",
-      "yields": "Protocol activation rules",
-      "bidirectional": false
+      "yields": "Protocol activation rules"
     }
   ],
   "activationContexts": [

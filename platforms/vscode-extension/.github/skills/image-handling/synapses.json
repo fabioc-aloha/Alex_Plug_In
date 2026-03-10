@@ -1,15 +1,14 @@
 {
-  "skill": "image-handling",
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
+  "skillId": "image-handling",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "connections": [
     {
       "target": ".github/skills/svg-graphics/SKILL.md",
       "type": "input-source",
       "strength": 0.85,
       "when": "converting FROM svg format",
-      "yields": "SVG creation patterns, viewBox, dark mode CSS",
-      "bidirectional": true
+      "yields": "SVG creation patterns, viewBox, dark mode CSS"
     },
     {
       "target": ".github/skills/project-scaffolding/SKILL.md",
@@ -30,8 +29,7 @@
       "type": "complements",
       "strength": 0.85,
       "when": "storing face reference photos as base64 for cross-session consistency",
-      "yields": "visual-memory.json storage, reference photo encoding patterns",
-      "bidirectional": true
+      "yields": "visual-memory.json storage, reference photo encoding patterns"
     },
     {
       "target": ".github/skills/ai-character-reference-generation/SKILL.md",
@@ -52,8 +50,7 @@
       "type": "complements",
       "strength": 0.7,
       "when": "generating illustrations for documents or books",
-      "yields": "Illustration principles, contextual placement, width guidelines",
-      "bidirectional": true
+      "yields": "Illustration principles, contextual placement, width guidelines"
     },
     {
       "target": ".github/skills/flux-brand-finetune/SKILL.md",

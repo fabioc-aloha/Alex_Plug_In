@@ -1,18 +1,12 @@
 {
-  "skill": "practitioner-research",
+  "schemaVersion": "2.0.0",
+  "skillId": "practitioner-research",
   "connections": [
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "extends",
       "strength": 0.9,
-      "reason": "Practitioner-specific extension of academic research methods",
-      "bidirectional": true
-    },
-    {
-      "target": ".github/skills/academic-research/SKILL.md",
-      "type": "enables",
-      "strength": 0.85,
-      "reason": "Research methodology produces publication-ready documents"
+      "reason": "Practitioner-specific extension of academic research methods"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
@@ -66,6 +60,5 @@
     "practitioner research",
     "ship document promote"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

@@ -1,5 +1,6 @@
 {
-  "skill": "project-deployment",
+  "schemaVersion": "2.0.0",
+  "skillId": "project-deployment",
   "connections": [
     {
       "target": ".github/skills/git-workflow/SKILL.md",
@@ -34,6 +35,5 @@
     "cargo publish",
     "dotnet publish"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

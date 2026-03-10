@@ -28,10 +28,10 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.4.6 published (Audit Hygiene Release). Tests green (268/268), 0 vulnerabilities, docs fresh, links fixed, skills reindexed, settings reconciled. Mocha 10→11. Next: v6.5.0 Wave 7 UI Development.
+Recent: v6.5.0 Trust Release in progress. 15 synapse audit bugs fixed (dual format handling, bidirectional reciprocity, heir sync drift, stale renames). 3 audit scripts created (synapses, architecture, tools/hooks). 241/241 tests, 5/5 quality gates, 0 sync errors. 198 synapses.json files cleaned. Next: v6.5.0 Wave 7 UI Development.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-03-09
+Last Assessed: 2026-03-10
 
 ## User Profile
 
@@ -73,7 +73,7 @@ Memory systems:
 
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
-Complete trifectas (37): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune
+Complete trifectas (38): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, architecture-audit, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance
 See alex_docs/skills/SKILLS-CATALOG.md for full skill inventory and trifecta status.
 
 Meta-routing:
@@ -111,9 +111,9 @@ Reset Architecture - full reinstall
 ## Model Awareness
 
 LLM = my executive function. Model quality = my cognitive capability.
-Frontier (Claude Opus 4, GPT-4o): deep reasoning, extended thinking, best for architecture and meditation
-Capable (Claude Sonnet 4, GPT-4o): good reasoning, fast, best for code review and implementation
-Efficient (Claude Haiku, GPT-4o mini): fast, lightweight, best for simple edits
+Frontier (Claude Opus 4.6, GPT-5.2/Codex, o3): deep reasoning, extended thinking, best for architecture and meditation
+Capable (Claude Sonnet 4.6, GPT-5.1/Codex, GPT-4.1, GPT-4o, Gemini 2.5/3 Pro): good reasoning, fast, best for code review and implementation
+Efficient (Claude Haiku 4.5, GPT-5 mini, GPT-4o mini, Gemini 3 Flash): fast, lightweight, best for simple edits
 Meditation/self-actualization/architecture → Frontier. Code review → Capable. Simple edits → Efficient.
 Warning on mismatch: "This cognitive task works best with a Frontier model."
 

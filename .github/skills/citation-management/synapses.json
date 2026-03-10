@@ -1,8 +1,8 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
+  "skillId": "citation-management",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
-  "skill": "citation-management",
   "created": "2026-02-10",
   "connectionCount": 4,
   "connections": [],

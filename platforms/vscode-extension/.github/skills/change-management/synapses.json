@@ -1,8 +1,8 @@
 {
-  "skill": "change-management",
+  "schemaVersion": "2.0.0",
+  "skillId": "change-management",
   "connections": [
     {
-      "bidirectional": true,
       "reason": "Change management within project delivery",
       "type": "complements",
       "strength": 0.85,
@@ -43,6 +43,5 @@
     "transition",
     "rollout"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

@@ -1,5 +1,6 @@
 {
-  "skill": "knowledge-synthesis",
+  "schemaVersion": "2.0.0",
+  "skillId": "knowledge-synthesis",
   "connections": [
     {
       "target": ".github/skills/meditation/SKILL.md",
@@ -67,6 +68,5 @@
     "encode insight",
     "formalize learning"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

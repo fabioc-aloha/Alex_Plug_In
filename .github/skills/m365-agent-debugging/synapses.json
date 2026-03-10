@@ -1,5 +1,6 @@
 {
-  "skill": "m365-agent-debugging",
+  "schemaVersion": "1.0",
+  "skillId": "m365-agent-debugging",
   "connections": [
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",
@@ -68,6 +69,5 @@
     "Teams development",
     "agent development"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "1.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

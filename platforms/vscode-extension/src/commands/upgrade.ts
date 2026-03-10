@@ -75,6 +75,19 @@ interface UpgradeStats {
 // CONSTANTS
 // ============================================================================
 
+/**
+ * Single source of truth for architecture deploy sources.
+ * Used by: initialize.ts (deployArchitectureFiles, createInitialManifest),
+ *          upgrade.ts (freshInstall, createFreshManifest).
+ * Root files are individual files; directories are copied recursively.
+ */
+export const ARCHITECTURE_ROOT_FILES = ['copilot-instructions.md', 'hooks.json'];
+export const ARCHITECTURE_DIRECTORIES = ['instructions', 'prompts', 'config', 'agents', 'skills', 'muscles', 'assets'];
+export const ARCHITECTURE_EMPTY_FOLDERS = ['episodic'];
+
+/** File extensions tracked in manifests */
+export const MANIFEST_EXTENSIONS = ['.md', '.json', '.cjs'];
+
 /** Stale threshold: items not modified in >90 days need manual review */
 const STALE_THRESHOLD_MS = 90 * 24 * 60 * 60 * 1000;
 
@@ -153,8 +166,9 @@ async function detectLegacyStructure(rootPath: string): Promise<LegacyDetection>
       const content = await fs.readFile(instructionsPath, 'utf8');
       // Try multiple patterns for version detection
       const patterns = [
-        /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/,           // Standard: **Version**: 3.7.6
-        /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)-[\w-]+/,    // With suffix: **Version**: 3.5.3-PENT-TRI
+        /^# Alex v(\d+\.\d+\.\d+)/m,                    // v6+ ADR-010: # Alex v6.4.6
+        /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/,           // Legacy: **Version**: 3.7.6
+        /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)-[\w-]+/,    // Legacy suffix: **Version**: 3.5.3-PENT-TRI
         /Version:\s*(\d+\.\d+\.\d+)/i,                  // Plain: Version: 3.7.6
       ];
       for (const pattern of patterns) {
@@ -297,18 +311,9 @@ async function cleanOldStructure(rootPath: string, detection: LegacyDetection): 
  */
 async function freshInstall(extensionPath: string, rootPath: string): Promise<void> {
   const sources = [
-    { src: 'copilot-instructions.md', dest: 'copilot-instructions.md' },
-    { src: 'instructions', dest: 'instructions' },
-    { src: 'prompts', dest: 'prompts' },
-    { src: 'config', dest: 'config' },
-    { src: 'agents', dest: 'agents' },
-    { src: 'skills', dest: 'skills' },
-    { src: 'muscles', dest: 'muscles' },
-    { src: 'assets', dest: 'assets' },
+    ...ARCHITECTURE_ROOT_FILES.map(f => ({ src: f, dest: f })),
+    ...ARCHITECTURE_DIRECTORIES.map(d => ({ src: d, dest: d })),
   ];
-
-  // Folders created empty (populated at runtime, not shipped in VSIX)
-  const emptyFolders = ['episodic'];
 
   const extGithub = path.join(extensionPath, '.github');
   const destGithub = path.join(rootPath, '.github');
@@ -325,7 +330,7 @@ async function freshInstall(extensionPath: string, rootPath: string): Promise<vo
   }
 
   // Create empty runtime folders
-  for (const folder of emptyFolders) {
+  for (const folder of ARCHITECTURE_EMPTY_FOLDERS) {
     await fs.ensureDir(path.join(destGithub, folder));
   }
 
@@ -343,7 +348,7 @@ async function createFreshManifest(extensionPath: string, rootPath: string): Pro
   const manifest = {
     version,
     installedAt: new Date().toISOString(),
-    files: {} as Record<string, { type: string; checksum: string }>,
+    files: {} as Record<string, { type: string; originalChecksum: string }>,
   };
 
   // Calculate checksums for system files
@@ -355,7 +360,7 @@ async function createFreshManifest(extensionPath: string, rootPath: string): Pro
     const relativePath = path.relative(rootPath, file).replace(/\\/g, '/');
     manifest.files[relativePath] = {
       type: 'system',
-      checksum: crypto.createHash('md5').update(content.replace(/\r\n/g, '\n')).digest('hex'),
+      originalChecksum: crypto.createHash('md5').update(content.replace(/\r\n/g, '\n')).digest('hex'),
     };
   }
 
@@ -385,7 +390,7 @@ async function collectSystemFiles(dir: string): Promise<string[]> {
       const fullPath = path.join(currentDir, entry.name);
       if (entry.isDirectory()) {
         await walk(fullPath, depth + 1);
-      } else if (entry.name.endsWith('.md') || entry.name.endsWith('.json')) {
+      } else if (MANIFEST_EXTENSIONS.some(ext => entry.name.endsWith(ext))) {
         files.push(fullPath);
       }
     }
@@ -512,18 +517,25 @@ async function runGapAnalysis(
   }
 
   // 5. Episodic records (always recommend)
+  // Includes top-level .md session records AND subdirectories:
+  //   peripheral/file-observations.json, calibration/calibration-log.json, etc.
   const episodicBackupPath = path.join(backupPath, '.github', 'episodic');
   if (await fs.pathExists(episodicBackupPath)) {
-    const files = await fs.readdir(episodicBackupPath);
-    const mdFiles = files.filter(f => f.endsWith('.md'));
-    
-    if (mdFiles.length > 0) {
+    const entries = await fs.readdir(episodicBackupPath, { withFileTypes: true });
+    const mdFiles = entries.filter(e => e.isFile() && e.name.endsWith('.md'));
+    const subdirs = entries.filter(e => e.isDirectory());
+
+    if (mdFiles.length > 0 || subdirs.length > 0) {
       const stats = await fs.stat(episodicBackupPath);
+      const parts: string[] = [];
+      if (mdFiles.length > 0) { parts.push(`${mdFiles.length} session record(s)`); }
+      if (subdirs.length > 0) { parts.push(`${subdirs.length} subsystem(s)`); }
+
       candidates.push({
         type: 'episodic',
         sourcePath: '.github/episodic',
         targetPath: '.github/episodic',
-        description: `${mdFiles.length} session records (meditation, dreams)`,
+        description: parts.join(', '),
         sizeKB: await getFolderSize(episodicBackupPath),
         lastModified: stats.mtime,
         recommended: true,

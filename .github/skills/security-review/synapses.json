@@ -54,6 +54,11 @@
       "type": "Documents",
       "strength": 0.8,
       "description": "CSP event delegation pattern for VS Code webviews"
+    },
+    {
+      "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+      "type": "complements",
+      "strength": 0.75
     }
   ],
   "activationTriggers": [

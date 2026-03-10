@@ -48,6 +48,11 @@
       "type": "Implements",
       "strength": 0.9,
       "description": "Dependency security practices and vulnerability scanning"
+    },
+    {
+      "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+      "type": "complements",
+      "strength": 0.75
     }
   ],
   "activationTriggers": [

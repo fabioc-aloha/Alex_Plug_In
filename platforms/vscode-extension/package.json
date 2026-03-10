@@ -34,7 +34,7 @@
     "productivity"
   ],
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.110.0"
   },
   "extensionDependencies": [],
   "extensionPack": [
@@ -830,6 +830,9 @@
         "path": "./.github/skills/architecture-audit/SKILL.md"
       },
       {
+        "path": "./.github/skills/architecture-health/SKILL.md"
+      },
+      {
         "path": "./.github/skills/architecture-refinement/SKILL.md"
       },
       {
@@ -923,6 +926,9 @@
         "path": "./.github/skills/distribution-security/SKILL.md"
       },
       {
+        "path": "./.github/skills/doc-hygiene/SKILL.md"
+      },
+      {
         "path": "./.github/skills/documentation-quality-assurance/SKILL.md"
       },
       {
@@ -966,6 +972,9 @@
       },
       {
         "path": "./.github/skills/global-knowledge/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/global-knowledge-sync/SKILL.md"
       },
       {
         "path": "./.github/skills/grant-writing/SKILL.md"
@@ -1235,12 +1244,6 @@
           "scope": "machine",
           "description": "Enable Global Knowledge features for cross-project learning and memory."
         },
-        "alex.globalKnowledge.cloudSync.enabled": {
-          "type": "boolean",
-          "default": false,
-          "scope": "machine",
-          "description": "Enable cloud synchronization for Global Knowledge via GitHub repository."
-        },
         "alex.globalKnowledge.repoPath": {
           "type": "string",
           "default": "",
@@ -1502,24 +1505,6 @@
             "name": "knowledgestatus",
             "description": "View the status of your global knowledge base: patterns, insights, and known projects",
             "sampleRequest": "Show my global knowledge stats"
-          },
-          {
-            "name": "sync",
-            "description": "Sync your global knowledge base with GitHub (bidirectional merge)",
-            "when": "alex.globalKnowledgeConfigured",
-            "sampleRequest": "Sync my global knowledge with GitHub"
-          },
-          {
-            "name": "push",
-            "description": "Push local global knowledge to GitHub Gist",
-            "when": "alex.globalKnowledgeConfigured",
-            "sampleRequest": "Upload local knowledge to GitHub"
-          },
-          {
-            "name": "pull",
-            "description": "Pull global knowledge from GitHub Gist to local",
-            "when": "alex.globalKnowledgeConfigured",
-            "sampleRequest": "Download knowledge from GitHub"
           },
           {
             "name": "docs",

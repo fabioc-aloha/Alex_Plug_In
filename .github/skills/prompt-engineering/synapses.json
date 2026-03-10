@@ -1,11 +1,11 @@
 {
-  "skill": "prompt-engineering",
+  "schemaVersion": "2.0.0",
+  "skillId": "prompt-engineering",
   "connections": [
     {
       "target": ".github/skills/rag-architecture/SKILL.md",
       "type": "complements",
-      "strength": 0.9,
-      "bidirectional": true
+      "strength": 0.9
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
@@ -55,6 +55,5 @@
     "AI agent",
     "copilot"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

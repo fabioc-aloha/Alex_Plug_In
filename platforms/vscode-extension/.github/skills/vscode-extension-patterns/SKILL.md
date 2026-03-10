@@ -1,7 +1,6 @@
 ---
 name: "vscode-extension-patterns"
 description: "Reusable patterns for VS Code extension development."
-user-invokable: false
 ---
 
 # VS Code Extension Patterns Skill
@@ -19,7 +18,7 @@ VS Code APIs evolve with each monthly release. Patterns may become outdated or b
 - Extension API deprecations
 - Webview security policy changes
 
-**Last validated:** February 2026 (VS Code 1.109+)
+**Last validated:** March 2026 (VS Code 1.111+)
 
 **Check current state:** [VS Code API](https://code.visualstudio.com/api), [Release Notes](https://code.visualstudio.com/updates)
 
@@ -90,6 +89,94 @@ document.addEventListener('click', (e) => {
 - Single event listener (better performance)
 - Easy to add new commands
 - Consistent pattern across webviews
+
+## Agent Hooks (VS Code 1.111+)
+
+Hooks are shell scripts that run at defined points in the agent lifecycle. Configured in `.github/hooks.json`.
+
+### Hook Events
+
+| Event | When It Fires | Use Cases |
+| --- | --- | --- |
+| `SessionStart` | Chat session begins | Load context, set persona, inject goals |
+| `UserPromptSubmit` | User sends a message | Secret scanning, safety gates |
+| `PreToolUse` | Before any tool call | Safety blocks (deny), input sanitization |
+| `PostToolUse` | After tool completes | Logging, compile reminders, test suggestions |
+| `SubagentStart` | Subagent spawned | Inject Active Context for subagents |
+| `Stop` | Session ends | Metrics, commit reminders, decision journal |
+| `PreCompact` | Before context compaction | Save session state |
+
+### Config Format (3-Level Nesting)
+
+```json
+{
+  "hooks": {
+    "SessionStart": [{
+      "steps": [{
+        "hooks": [{
+          "type": "command",
+          "command": ".github/muscles/hooks/session-start.cjs",
+          "timeout": 10
+        }]
+      }]
+    }]
+  }
+}
+```
+
+**Key rules**:
+- Timeout in **seconds** (not milliseconds)
+- Scripts read structured **JSON from stdin** (`tool_name`, `tool_input`, `session_id`, `cwd`, `hook_event_name`)
+- Scripts output structured **JSON to stdout** (`hookSpecificOutput`, `decision`, `additionalContext`)
+- Exit code **2** = blocking error (denies tool call or prevents stopping). Non-zero (not 2) = warning
+- Use `.cjs` extension for CommonJS compatibility with ESM workspaces
+
+### PreToolUse Decisions
+
+```javascript
+// Allow (default)
+process.stdout.write(JSON.stringify({ hookSpecificOutput: { permissionDecision: 'allow' } }));
+
+// Deny — blocks the tool call
+process.stdout.write(JSON.stringify({
+  hookSpecificOutput: { permissionDecision: 'deny' },
+  additionalContext: 'Safety: This operation is blocked because...'
+}));
+process.exit(2);
+
+// Modify input — rewrite tool parameters
+process.stdout.write(JSON.stringify({
+  hookSpecificOutput: { permissionDecision: 'allow', updatedInput: { /* modified params */ } }
+}));
+```
+
+### Agent-Scoped Hooks
+
+Declare hooks in `.agent.md` YAML frontmatter:
+
+```yaml
+---
+agent: Validator
+hooks:
+  PreToolUse:
+    - type: command
+      command: .github/muscles/hooks/validator-pre-tool-use.cjs
+      timeout: 5
+---
+```
+
+### Autopilot Mode
+
+`chat.autopilot.enabled` allows the agent to execute tool calls without manual approval. Safety hooks using `deny` decisions remain active — they block dangerous operations even in non-interactive mode.
+
+Recommended for: Dream, Meditation, Brain QA, routine maintenance.
+Requires supervision: Code generation, file deletion, publishing.
+
+### Debug Events Snapshot
+
+Type `#debugEventsSnapshot` in chat to attach a snapshot of agent debug events. Shows loaded customizations, token consumption, hook execution, and agent behavior. Use with the Agent Debug Panel (`Developer: Open Agent Debug Panel`) for full visibility.
+
+---
 
 ## Safe Configuration Pattern
 
@@ -239,6 +326,69 @@ vsce publish
 
 **Version collision**: Increment patch → update package.json, README badge, CHANGELOG → retry.
 
+## Testing Extension Changes: Debug vs Rebuild
+
+**Key difference**: F5 debug mode vs installed extension workflow
+
+| Change Type | F5 Debug | Rebuild + Reinstall | Why |
+|------------|----------|---------------------|-----|
+| Code logic | ✅ Works | ✅ Works | Hot reload or restart debug session |
+| Webview HTML/CSS | ❌ Cached | ✅ Works | Installed extensions cache webview assets |
+| package.json changes | ❌ Ignored | ✅ Works | Debug uses launch.json config, not package.json |
+| New commands | ❌ Not registered | ✅ Works | Command palette populated from installed version |
+
+**Full rebuild workflow** (for UI/config changes):
+
+```powershell
+# 1. Build production bundle
+npm run package
+
+# 2. Create VSIX
+npx @vscode/vsce package
+
+# 3. Reinstall (--force replaces existing)
+code --install-extension path/to/extension.vsix --force
+
+# 4. Reload window (Ctrl+R or Developer: Reload Window)
+```
+
+**Quick test cycle**: For webview styling changes, use Developer Tools to live-edit CSS first, then apply changes to source and rebuild.
+
+**Best practice**: Always test production builds before releasing — minification can expose issues (TDZ violations, missing imports) that don't appear in development.
+
+## Asset Optimization for Extension Size
+
+**Problem**: Large image assets dominate extension package size. Avatar/icon images generated at 2048×2048 can bloat extensions to 500+ MB.
+
+**Solution**: Resize images to display-appropriate dimensions:
+
+| Display Context | Recommended Size | Rationale |
+|-----------------|------------------|-----------|
+| Sidebar views | 768×768 | 300px display × 2 (retina) + headroom |
+| Status bar icons | 32×32 | 16px display × 2 (retina) |
+| Activity bar | 48×48 | 24px display × 2 (retina) |
+| Marketplace icon | 256×256 | 128px min + retina |
+
+**Bulk resize with sharp**:
+
+```javascript
+const sharp = require('sharp');
+const fs = require('fs');
+
+async function optimizeImages(dir, targetSize = 768) {
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.png'));
+    for (const file of files) {
+        const buffer = await sharp(`${dir}/${file}`)
+            .resize(targetSize, targetSize, { fit: 'cover' })
+            .png({ compressionLevel: 9 })
+            .toBuffer();
+        fs.writeFileSync(`${dir}/${file}`, buffer);
+    }
+}
+```
+
+**Real impact**: Alex extension 553 MB → 33 MB (94% reduction) by resizing avatars from 2048×2048 to 768×768.
+
 ## Goals with Streak Tracking
 
 ```typescript
@@ -300,6 +450,7 @@ function getToken(): string | null {
 - Cache at module level for sync access
 - Migrate existing settings tokens on first run
 - Mark old setting as deprecated in package.json
+- **External tool access**: SecretStorage is inaccessible to CLI/scripts — provide export-to-.env command for bridging (see `secrets-management` skill)
 
 ## Webview CSP Security
 
@@ -441,9 +592,61 @@ export function activate(context: vscode.ExtensionContext) {
 - Push listener to `context.subscriptions` for cleanup
 - Re-read config values, don't cache indefinitely
 
+## Temporal Dead Zone (TDZ) in Production Builds
+
+**Problem**: Code works in development but crashes in production with "Cannot access 'X' before initialization" — the minifier exposes variable hoisting issues.
+
+**Root Cause**: Using `const`/`let` variables before they're declared in the same scope. Development transpilation may mask this; production minifiers reveal it.
+
+**Example Bug** (from real debugging session, Feb 14, 2026):
+
+```typescript
+// ❌ WRONG: TDZ violation (hidden until minified)
+const trifectaTagsHtml = trifectaTags.map(tag => {
+    return `<span class="tag">${skillNameMap[tag] || tag}</span>`;
+}).join('');
+
+// ... 30+ lines of other code ...
+
+const skillNameMap: Record<string, string> = {
+    'meditation': 'Meditation',
+    'brain-qa': 'Brain QA',
+    // ... more mappings
+};
+```
+
+**Error at runtime**: `ReferenceError: Cannot access 'ft' before initialization` (where `ft` is minified name for `skillNameMap`).
+
+**Why development didn't catch it**:
+- TypeScript compiles successfully (no compiler error)
+- esbuild development mode didn't reveal the issue
+- Production minification changed evaluation order
+
+**Solution**: Move variable declarations before first use:
+
+```typescript
+// ✅ CORRECT: Declare before use
+const skillNameMap: Record<string, string> = {
+    'meditation': 'Meditation',
+    'brain-qa': 'Brain QA',
+};
+
+const trifectaTagsHtml = trifectaTagsArray.map(tag => {
+    return `<span class="tag">${skillNameMap[tag] || tag}</span>`;
+}).join('');
+```
+
+**Prevention strategies**:
+1. **Test production builds locally** — always install packaged VSIX before releasing
+2. **Declare dependencies at top of scope** — don't scatter `const` declarations
+3. **Watch for callback references** — `.map()`, `.filter()` callbacks can't see later declarations
+4. **ESLint rule**: Enable `no-use-before-define` to catch in development
+
+**Debugging tip**: If production error shows "Cannot access 'X'" where X is a 2-letter variable like `ft`, `ab`, `xr` — look for TDZ issues with object literals or complex constants referenced in callbacks.
+
 ## VS Code 1.109+ Agent Platform Capabilities
 
-VS Code 1.109 introduces a native agent platform that extensions can leverage:
+VS Code 1.109 (January 2026) introduces a native agent platform that extensions can leverage:
 
 ### Agent Files (`AGENTS.md`)
 
@@ -454,6 +657,9 @@ Extensions can ship agent definitions that VS Code auto-discovers:
 ---
 name: "MyAgent"
 description: "Specialized agent for domain X"
+user-invokable: true         # Show in agents dropdown (default: true)
+disable-model-invocation: false  # Allow model to invoke as subagent
+agents: ['Validator', 'Builder'] # Limit which subagents this agent can use
 ---
 
 # MyAgent Instructions
@@ -462,14 +668,105 @@ Agent-specific instructions and knowledge go here.
 ```
 
 **Setting**: `chat.useAgentsMdFile: true` enables automatic loading.
+**Custom locations**: `chat.agentFilesLocations: { "~/.vscode/agents": true }`.
 
-### Skills Loading
+### Skills Loading (GA in 1.109)
 
 Extensions can define skills in `.github/skills/` that are auto-loaded into chat:
 
 **Setting**: `chat.agentSkillsLocations: [".github/skills"]`
 
 Each skill folder contains a `SKILL.md` (knowledge) and optional `synapses.json` (connections).
+
+**Distribute skills with your extension** (new in 1.109):
+
+```json
+// package.json
+{
+  "contributes": {
+    "chatSkills": [
+      { "path": "./skills/my-skill" }
+    ]
+  }
+}
+```
+
+The `path` must point to a directory containing a `SKILL.md` with `name:` in its frontmatter matching the parent directory name.
+
+**Skills as slash commands**: Users can type `/` in chat to see and invoke skills directly.
+
+### Agent Hooks (Preview, 1.109.3+)
+
+Run custom shell commands at key lifecycle points in agent sessions:
+
+```json
+// .vscode/settings.json — configure hooks
+{
+  "chat.hooks.enabled": true
+}
+```
+
+Hook events: `PreToolUse`, `PostToolUse`, `SessionStart`, `Stop`, `SubagentStart`, `SubagentStop`.
+
+Users trigger with `/hooks` command in chat. Same format as Claude Code hooks — reuse configurations.
+
+```bash
+# Example: Run linter on every file edit (PreToolUse hook)
+# Hook output can block the tool call if exit code > 0
+```
+
+### Agent-Scoped Hooks (Preview, 1.111+)
+
+**Setting**: `chat.useCustomAgentHooks: true`
+
+Hooks can be defined in `.agent.md` YAML frontmatter. They fire **only** when that specific agent is active or invoked via `runSubagent`. Global hooks still fire alongside scoped hooks.
+
+```yaml
+# In .agent.md frontmatter
+hooks:
+  PreToolUse:
+    command: "node .github/muscles/hooks/validator-pre-tool.js"
+    description: "Read-only validation mode"
+    timeout: 2000
+  SessionStart:
+    command: "node .github/muscles/hooks/agent-session-start.js"
+    description: "Load agent-specific context"
+    timeout: 3000
+```
+
+Use cases: read-only mode for validator agents, auto-compile for builder agents, specialized context loading per agent.
+
+### Autopilot and Agent Permissions (Preview, 1.111+)
+
+**Setting**: `chat.autopilot.enabled: true`
+
+Three permission tiers (session-scoped, changeable any time):
+
+| Level | Behavior |
+|-------|----------|
+| Default Approvals | Normal tool confirmation dialogs |
+| Bypass Approvals | Auto-approves all tool calls, retries on errors |
+| Autopilot | Auto-approves + auto-responds + continues until `task_complete` |
+
+**Warning**: Bypass and Autopilot skip ALL manual approvals including destructive operations. PreToolUse hooks still fire but user doesn't see interactive confirmations.
+
+### Debug Events Snapshot (1.111+)
+
+Attach `#debugEventsSnapshot` in chat to inspect loaded customizations, token consumption, and agent behavior. Sparkle icon in Agent Debug panel attaches automatically.
+
+### Claude Compatibility (1.109.3+)
+
+VS Code now reads Claude configuration files directly:
+
+| File | Purpose |
+| ---- | ------- |
+| `CLAUDE.md`, `.claude/CLAUDE.md`, `~/.claude/CLAUDE.md` | Instructions |
+| `.claude/rules/*.md` | Additional instruction files |
+| `.claude/agents/*.md` | Agent definitions |
+| `.claude/skills/` | Skill definitions |
+| `.claude/settings.json`, `~/.claude/settings.json` | Hook configurations |
+
+Teams using both VS Code + Claude Code can share a single configuration tree.
 
 ### Chat Participant API
 
@@ -524,6 +821,25 @@ context.subscriptions.push(tool);
 }
 ```
 
+### QuickInput Button Finalized APIs (1.109)
+
+Two new finalized APIs for `QuickPick` and `InputBox`:
+
+```typescript
+// Button location control
+buttons: [{
+  iconPath: new vscode.ThemeIcon('gear'),
+  tooltip: 'Settings',
+  location: vscode.QuickInputButtonLocation.Inline  // or .Title, .Input
+}]
+
+// Toggle button (on/off state)
+buttons: [{
+  iconPath: new vscode.ThemeIcon('eye'),
+  toggle: { checked: false }  // tracks state
+}]
+```
+
 ### Extended Thinking
 
 Models supporting extended thinking can be configured per-model:
@@ -543,14 +859,17 @@ VS Code 1.109+ supports Model Context Protocol servers:
 
 MCP servers extend AI capabilities with external tools (Azure, GitHub, databases).
 
-### Key 1.109 Settings Summary
+### Key Settings Summary (1.111+)
 
-| Setting | Value | Purpose |
-|---------|-------|---------|
-| `chat.agent.enabled` | `true` | Enable custom agents |
-| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills |
-| `chat.useAgentsMdFile` | `true` | Use AGENTS.md |
-| `chat.mcp.gallery.enabled` | `true` | MCP tool access |
+| Setting | Value | Purpose | Since |
+|---------|-------|---------|-------|
+| `chat.agent.enabled` | `true` | Enable custom agents | 1.109 |
+| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills | 1.109 |
+| `chat.useAgentsMdFile` | `true` | Use AGENTS.md | 1.109 |
+| `chat.mcp.gallery.enabled` | `true` | MCP tool access | 1.109 |
+| `chat.hooks.enabled` | `true` | Lifecycle hooks (Preview) | 1.109 |
+| `chat.useCustomAgentHooks` | `true` | Agent-scoped hooks (Preview) | 1.111 |
+| `chat.autopilot.enabled` | `true` | Autopilot mode (Preview) | 1.111 |
 
 ## Integration Audit Checklist
 

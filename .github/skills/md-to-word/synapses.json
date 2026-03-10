@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "skill": "md-to-word",
+  "skillId": "md-to-word",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "2.1.0",
   "muscle": ".github/muscles/md-to-word.py",
   "connections": [

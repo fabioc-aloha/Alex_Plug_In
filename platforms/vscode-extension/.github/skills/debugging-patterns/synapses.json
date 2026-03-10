@@ -1,5 +1,6 @@
 {
-  "skill": "debugging-patterns",
+  "schemaVersion": "2.0.0",
+  "skillId": "debugging-patterns",
   "connections": [
     {
       "target": ".github/skills/git-workflow/SKILL.md",
@@ -10,6 +11,11 @@
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "applies-to",
       "strength": 0.75
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "complements",
+      "strength": 0.7
     }
   ],
   "activationBoost": [
@@ -32,6 +38,5 @@
     "reproduce",
     "isolate bug"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

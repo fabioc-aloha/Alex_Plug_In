@@ -1,0 +1,256 @@
+#!/usr/bin/env node
+/**
+ * Cognitive Architecture Consistency Audit
+ * Validates instructions, agents, prompts, skills, and cross-references.
+ */
+const fs = require('fs');
+const path = require('path');
+
+const base = process.cwd();
+const issues = [];
+
+// ── Instruction Files ──────────────────────────────────────────
+console.log('=== INSTRUCTION FILES AUDIT ===');
+const instrDir = path.join(base, '.github/instructions');
+const instrFiles = fs.readdirSync(instrDir).filter(f => f.endsWith('.md'));
+console.log('Total instruction files: ' + instrFiles.length);
+
+const instrNames = new Set();
+for (const file of instrFiles) {
+  const content = fs.readFileSync(path.join(instrDir, file), 'utf8');
+  const name = file.replace('.instructions.md', '');
+  instrNames.add(name);
+
+  if (!content.startsWith('---')) {
+    issues.push('WARN: ' + file + ': no YAML frontmatter');
+  } else {
+    const frontEnd = content.indexOf('---', 3);
+    if (frontEnd === -1) {
+      issues.push('BUG: ' + file + ': unclosed frontmatter');
+    } else {
+      const fm = content.substring(3, frontEnd);
+      if (!fm.includes('description:')) {
+        issues.push('WARN: ' + file + ': no description in frontmatter');
+      }
+    }
+  }
+
+  const body = content.replace(/---[\s\S]*?---/, '').trim();
+  if (body.length < 50) {
+    issues.push('WARN: ' + file + ': very short body (' + body.length + ' chars)');
+  }
+}
+
+// ── Copilot-Instructions Cross-Reference ───────────────────────
+const ci = fs.readFileSync(path.join(base, '.github/copilot-instructions.md'), 'utf8');
+const trifectaMatch = ci.match(/Complete trifectas \((\d+)\): ([^\n]+)/);
+let trifectas = [];
+if (trifectaMatch) {
+  trifectas = trifectaMatch[2].split(', ').map(t => t.trim());
+  const claimedCount = parseInt(trifectaMatch[1], 10);
+  console.log('Trifectas listed: ' + trifectas.length + ' (claimed: ' + claimedCount + ')');
+  if (trifectas.length !== claimedCount) {
+    issues.push('BUG: copilot-instructions.md claims ' + claimedCount + ' trifectas but lists ' + trifectas.length);
+  }
+
+  for (const t of trifectas) {
+    if (!instrNames.has(t)) {
+      issues.push('WARN: trifecta "' + t + '" has no matching instruction file');
+    }
+  }
+}
+
+// Instructions that exist but aren't in trifecta list
+const trifectaSet = new Set(trifectas);
+const instrOnly = [...instrNames].filter(n => !trifectaSet.has(n));
+console.log('Instruction files not in trifecta list: ' + instrOnly.length);
+if (instrOnly.length > 0 && instrOnly.length <= 30) {
+  console.log('  -> ' + instrOnly.join(', '));
+}
+
+// ── Agent Files ────────────────────────────────────────────────
+console.log('\n=== AGENT FILES AUDIT ===');
+const agentDir = path.join(base, '.github/agents');
+const agentFiles = fs.existsSync(agentDir)
+  ? fs.readdirSync(agentDir).filter(f => f.endsWith('.md'))
+  : [];
+console.log('Total agent files: ' + agentFiles.length);
+
+const agentListMatch = ci.match(/Alex \(orchestrator\)[^\n]*/);
+if (agentListMatch) {
+  const agentNames = agentListMatch[0]
+    .split(', ')
+    .map(a => a.replace(/\(.*?\)/g, '').trim().toLowerCase());
+  console.log('Agents listed in copilot-instructions.md: ' + agentNames.length);
+
+  const agentFileNames = agentFiles.map(f =>
+    f.replace('.agent.md', '').toLowerCase()
+  );
+
+  for (const a of agentNames) {
+    if (!agentFileNames.includes(a)) {
+      issues.push('WARN: agent "' + a + '" listed in CI but no .agent.md file');
+    }
+  }
+  for (const af of agentFileNames) {
+    if (!agentNames.includes(af)) {
+      issues.push('WARN: agent file "' + af + '.agent.md" exists but not listed in CI');
+    }
+  }
+}
+
+for (const file of agentFiles) {
+  const content = fs.readFileSync(path.join(agentDir, file), 'utf8');
+  if (!content.startsWith('---')) {
+    issues.push('WARN: ' + file + ': no YAML frontmatter');
+  } else {
+    const frontEnd = content.indexOf('---', 3);
+    if (frontEnd > 0) {
+      const fm = content.substring(3, frontEnd);
+      if (!fm.includes('description:')) {
+        issues.push('WARN: ' + file + ': no description in frontmatter');
+      }
+    }
+  }
+}
+
+// ── Prompt Files ───────────────────────────────────────────────
+console.log('\n=== PROMPT FILES AUDIT ===');
+const promptDir = path.join(base, '.github/prompts');
+const promptFiles = fs.existsSync(promptDir)
+  ? fs.readdirSync(promptDir).filter(f => f.endsWith('.md'))
+  : [];
+console.log('Total prompt files: ' + promptFiles.length);
+
+for (const file of promptFiles) {
+  const content = fs.readFileSync(path.join(promptDir, file), 'utf8');
+  if (!content.startsWith('---')) {
+    issues.push('WARN: ' + file + ': no YAML frontmatter');
+  } else {
+    const frontEnd = content.indexOf('---', 3);
+    if (frontEnd > 0) {
+      const fm = content.substring(3, frontEnd);
+      if (!fm.includes('description:')) {
+        issues.push('WARN: ' + file + ': no description in frontmatter');
+      }
+    }
+  }
+}
+
+// ── Skill Directory Completeness ───────────────────────────────
+console.log('\n=== SKILL DIRECTORY AUDIT ===');
+const skillDir = path.join(base, '.github/skills');
+const skillDirs = fs
+  .readdirSync(skillDir, { withFileTypes: true })
+  .filter(d => d.isDirectory())
+  .map(d => d.name);
+console.log('Total skill directories: ' + skillDirs.length);
+
+let missingSkillMd = 0;
+let missingSynapses = 0;
+for (const dir of skillDirs) {
+  if (!fs.existsSync(path.join(skillDir, dir, 'SKILL.md'))) {
+    issues.push('BUG: skill "' + dir + '" missing SKILL.md');
+    missingSkillMd++;
+  }
+  if (!fs.existsSync(path.join(skillDir, dir, 'synapses.json'))) {
+    issues.push('BUG: skill "' + dir + '" missing synapses.json');
+    missingSynapses++;
+  }
+}
+console.log('Missing SKILL.md: ' + missingSkillMd);
+console.log('Missing synapses.json: ' + missingSynapses);
+
+// Skills not in trifecta list
+const nonTrifecta = skillDirs.filter(d => !trifectaSet.has(d));
+console.log('Skill dirs not in trifecta list: ' + nonTrifecta.length);
+if (nonTrifecta.length > 0 && nonTrifecta.length <= 80) {
+  console.log('  -> ' + nonTrifecta.join(', '));
+}
+
+// Trifectas without skill directories
+for (const t of trifectas) {
+  if (!skillDirs.includes(t)) {
+    issues.push('BUG: trifecta "' + t + '" has no skill directory');
+  }
+}
+
+// ── Trifecta Completeness (Skill + Instruction + Prompt) ──────
+console.log('\n=== TRIFECTA COMPLETENESS ===');
+let completeCount = 0;
+let incompleteDetails = [];
+for (const t of trifectas) {
+  const hasSkill = skillDirs.includes(t);
+  const hasInstr = instrNames.has(t);
+  const hasPrompt = promptFiles.some(f => f.startsWith(t));
+  const missing = [];
+  if (!hasSkill) missing.push('skill');
+  if (!hasInstr) missing.push('instruction');
+  if (!hasPrompt) missing.push('prompt');
+  if (missing.length === 0) {
+    completeCount++;
+  } else {
+    incompleteDetails.push(t + ' (missing: ' + missing.join(', ') + ')');
+  }
+}
+console.log('Fully complete trifectas: ' + completeCount + '/' + trifectas.length);
+if (incompleteDetails.length > 0) {
+  console.log('Incomplete:');
+  incompleteDetails.forEach(d => console.log('  - ' + d));
+}
+
+// ── Config Files ───────────────────────────────────────────────
+console.log('\n=== CONFIG FILES AUDIT ===');
+const configDir = path.join(base, '.github/config');
+if (fs.existsSync(configDir)) {
+  const configFiles = fs.readdirSync(configDir);
+  console.log('Config files: ' + configFiles.join(', '));
+  
+  // Validate JSON config files
+  for (const cf of configFiles.filter(f => f.endsWith('.json'))) {
+    try {
+      JSON.parse(fs.readFileSync(path.join(configDir, cf), 'utf8'));
+    } catch (e) {
+      issues.push('BUG: config/' + cf + ': invalid JSON - ' + e.message);
+    }
+  }
+} else {
+  console.log('No config directory found');
+}
+
+// ── Hooks ──────────────────────────────────────────────────────
+console.log('\n=== HOOKS AUDIT ===');
+const hooksFile = path.join(base, '.github/hooks.json');
+if (fs.existsSync(hooksFile)) {
+  try {
+    const hooks = JSON.parse(fs.readFileSync(hooksFile, 'utf8'));
+    const hookEntries = Array.isArray(hooks) ? hooks : (hooks.hooks || []);
+    console.log('Hooks defined: ' + hookEntries.length);
+    
+    // Check each hook references valid muscle files
+    for (const hook of hookEntries) {
+      if (hook.command) {
+        // Extract script path from command
+        const scriptMatch = hook.command.match(/(?:node|pwsh|tsx)\s+([^\s]+)/);
+        if (scriptMatch) {
+          const scriptPath = path.join(base, scriptMatch[1]);
+          if (!fs.existsSync(scriptPath)) {
+            issues.push('BUG: hook references missing script: ' + scriptMatch[1]);
+          }
+        }
+      }
+    }
+  } catch (e) {
+    issues.push('BUG: hooks.json invalid JSON - ' + e.message);
+  }
+} else {
+  console.log('No hooks.json found');
+}
+
+// ── Summary ────────────────────────────────────────────────────
+const bugs = issues.filter(i => i.startsWith('BUG:'));
+const warns = issues.filter(i => i.startsWith('WARN:'));
+console.log('\n=== ISSUES (' + issues.length + ': ' + bugs.length + ' bugs, ' + warns.length + ' warnings) ===');
+issues.forEach(i => console.log('  ' + i));
+
+process.exit(bugs.length > 0 ? 1 : 0);

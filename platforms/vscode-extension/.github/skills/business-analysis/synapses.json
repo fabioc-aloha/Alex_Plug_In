@@ -1,5 +1,6 @@
 {
-  "skill": "business-analysis",
+  "schemaVersion": "2.0.0",
+  "skillId": "business-analysis",
   "connections": [
     {
       "reason": "Requirements feed project scope and planning",
@@ -48,6 +49,5 @@
     "gap analysis",
     "scope"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

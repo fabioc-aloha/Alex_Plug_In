@@ -1,12 +1,12 @@
 {
-  "skill": "ascii-art-alignment",
+  "schemaVersion": "2.0.0",
+  "skillId": "ascii-art-alignment",
   "description": "Create perfectly aligned ASCII diagrams",
   "connections": [
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "bidirectional": true,
       "context": "ASCII for precise control, Mermaid for auto-layout"
     },
     {
@@ -20,6 +20,11 @@
       "type": "supports",
       "strength": 0.7,
       "context": "Visual diagrams enhance documentation quality"
+    },
+    {
+      "target": ".github/skills/graphic-design/SKILL.md",
+      "type": "complements",
+      "strength": 0.65
     }
   ],
   "triggers": [
@@ -29,6 +34,5 @@
     "lines don't match up",
     "right border jagged"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

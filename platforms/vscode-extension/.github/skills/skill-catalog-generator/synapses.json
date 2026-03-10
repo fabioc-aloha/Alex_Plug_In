@@ -1,5 +1,6 @@
 {
-  "skill": "skill-catalog-generator",
+  "schemaVersion": "2.0.0",
+  "skillId": "skill-catalog-generator",
   "connections": [
     {
       "reason": "Generates Mermaid network diagrams",
@@ -35,6 +36,5 @@
     "generate catalog",
     "/skills"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

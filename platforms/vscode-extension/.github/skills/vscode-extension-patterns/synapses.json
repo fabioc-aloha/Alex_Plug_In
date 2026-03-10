@@ -39,7 +39,6 @@
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "implements",
       "strength": 0.75,
-      "bidirectional": true,
       "reason": "Webview UI patterns must follow accessibility standards"
     },
     {
@@ -58,8 +57,12 @@
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "bidirectional": true,
       "reason": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization"
+    },
+    {
+      "target": ".github/skills/localization/SKILL.md",
+      "type": "applied-by",
+      "strength": 0.7
     }
   ],
   "activationPatterns": [

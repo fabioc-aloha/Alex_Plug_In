@@ -6,6 +6,10 @@ tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'age
 user-invokable: true
 agents: ['Documentarian']
 hooks:
+  SessionStart:
+    command: "node .github/muscles/hooks/validator-session-start.cjs"
+    description: "Load adversarial checklist + recent changes for faster QA startup"
+    timeout: 5000
   PreToolUse:
     command: "node .github/muscles/hooks/validator-pre-tool-use.cjs"
     description: "Read-only enforcement — blocks write tools during QA review"

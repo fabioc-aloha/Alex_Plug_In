@@ -249,7 +249,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         case "toggleSetting": {
           // 7.14: Inline settings toggle
           const settingKey = typeof message.key === 'string' ? message.key : '';
-          const allowedSettings = ['alex.autoInsights.enabled', 'alex.dailyBriefing.enabled', 'alex.voice.enabled', 'alex.globalKnowledge.enabled'];
+          const allowedSettings = [
+            'alex.autoInsights.enabled', 'alex.dailyBriefing.enabled', 'alex.voice.enabled',
+            'alex.globalKnowledge.enabled',
+            'chat.autopilot.enabled', 'github.copilot.chat.copilotMemory.enabled',
+            'chat.mcp.gallery.enabled', 'github.copilot.chat.searchSubagent.enabled',
+            'chat.requestQueuing.enabled', 'github.copilot.chat.agent.thinkingTool',
+            'chat.customAgentInSubagent.enabled',
+            'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled',
+            'chat.tools.autoRun', 'chat.tools.fileSystem.autoApprove',
+            'chat.hooks.enabled', 'chat.useCustomAgentHooks', 'chat.restoreLastPanelSession',
+          ];
           if (allowedSettings.includes(settingKey)) {
             const [section, ...rest] = settingKey.split('.');
             const configKey = rest.join('.');
@@ -481,11 +491,30 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
       // 7.14: Settings snapshot for inline toggles
       const alexCfg = vscode.workspace.getConfiguration('alex');
+      const chatCfg = vscode.workspace.getConfiguration('chat');
+      const copilotChatCfg = vscode.workspace.getConfiguration('github.copilot.chat');
+      const opusCfg = vscode.workspace.getConfiguration('github.copilot.chat.models.anthropic.claude-opus-4-5');
       const settingsToggles: SettingsToggle[] = [
-        { key: 'alex.autoInsights.enabled', label: 'Auto Insights', enabled: alexCfg.get<boolean>('autoInsights.enabled', true) },
-        { key: 'alex.dailyBriefing.enabled', label: 'Daily Briefing', enabled: alexCfg.get<boolean>('dailyBriefing.enabled', true) },
-        { key: 'alex.voice.enabled', label: 'Voice Mode', enabled: alexCfg.get<boolean>('voice.enabled', false) },
-        { key: 'alex.globalKnowledge.enabled', label: 'Global Knowledge', enabled: alexCfg.get<boolean>('globalKnowledge.enabled', true) },
+        // Alex Features
+        { key: 'alex.autoInsights.enabled', label: 'Auto Insights', enabled: alexCfg.get<boolean>('autoInsights.enabled', true), group: 'Alex Features' },
+        { key: 'alex.dailyBriefing.enabled', label: 'Daily Briefing', enabled: alexCfg.get<boolean>('dailyBriefing.enabled', true), group: 'Alex Features' },
+        { key: 'alex.voice.enabled', label: 'Voice Mode', enabled: alexCfg.get<boolean>('voice.enabled', false), group: 'Alex Features' },
+        { key: 'alex.globalKnowledge.enabled', label: 'Global Knowledge', enabled: alexCfg.get<boolean>('globalKnowledge.enabled', true), group: 'Alex Features' },
+        // Copilot Power Settings
+        { key: 'chat.autopilot.enabled', label: 'Autopilot Mode', enabled: chatCfg.get<boolean>('autopilot.enabled', false), group: 'Copilot Power' },
+        { key: 'github.copilot.chat.copilotMemory.enabled', label: 'Copilot Memory', enabled: copilotChatCfg.get<boolean>('copilotMemory.enabled', false), group: 'Copilot Power' },
+        { key: 'chat.mcp.gallery.enabled', label: 'MCP Gallery', enabled: chatCfg.get<boolean>('mcp.gallery.enabled', false), group: 'Copilot Power' },
+        { key: 'github.copilot.chat.searchSubagent.enabled', label: 'Search Subagent', enabled: copilotChatCfg.get<boolean>('searchSubagent.enabled', false), group: 'Copilot Power' },
+        { key: 'chat.requestQueuing.enabled', label: 'Request Queuing', enabled: chatCfg.get<boolean>('requestQueuing.enabled', false), group: 'Copilot Power' },
+        { key: 'github.copilot.chat.agent.thinkingTool', label: 'Thinking Tool', enabled: copilotChatCfg.get<boolean>('agent.thinkingTool', false), group: 'Copilot Power' },
+        { key: 'chat.customAgentInSubagent.enabled', label: 'Agents in Subagents', enabled: chatCfg.get<boolean>('customAgentInSubagent.enabled', false), group: 'Copilot Power' },
+        // Agent Capabilities
+        { key: 'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled', label: 'Extended Thinking', enabled: opusCfg.get<boolean>('extendedThinkingEnabled', false), group: 'Agent Capabilities' },
+        { key: 'chat.tools.autoRun', label: 'Auto-Run Tools', enabled: chatCfg.get<boolean>('tools.autoRun', false), group: 'Agent Capabilities' },
+        { key: 'chat.tools.fileSystem.autoApprove', label: 'Auto-Approve Files', enabled: chatCfg.get<boolean>('tools.fileSystem.autoApprove', false), group: 'Agent Capabilities' },
+        { key: 'chat.hooks.enabled', label: 'Agent Hooks', enabled: chatCfg.get<boolean>('hooks.enabled', false), group: 'Agent Capabilities' },
+        { key: 'chat.useCustomAgentHooks', label: 'Agent-Scoped Hooks', enabled: chatCfg.get<boolean>('useCustomAgentHooks', false), group: 'Agent Capabilities' },
+        { key: 'chat.restoreLastPanelSession', label: 'Restore Last Session', enabled: chatCfg.get<boolean>('restoreLastPanelSession', false), group: 'Agent Capabilities' },
       ];
 
 

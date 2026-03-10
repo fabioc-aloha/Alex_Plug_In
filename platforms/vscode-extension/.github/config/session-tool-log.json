@@ -1,0 +1,12 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-03-10T15:26:12.735Z",
+      "tool": "read_file",
+      "success": true
+    }
+  ],
+  "toolCounts": {
+    "read_file": 1
+  }
+}

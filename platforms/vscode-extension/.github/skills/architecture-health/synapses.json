@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "2.0.0",
+  "skillId": "architecture-health",
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "version": "1.0.0",
+  "inheritance": "inheritable",
+  "connections": [
+    {
+      "target": ".github/skills/self-actualization/SKILL.md",
+      "type": "enables",
+      "strength": 0.9,
+      "reason": "Health checks feed self-actualization"
+    },
+    {
+      "target": ".github/skills/meditation/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "reason": "Health status during meditation sessions"
+    },
+    {
+      "target": ".github/instructions/cognitive-health-validation.instructions.md",
+      "type": "sibling",
+      "strength": 0.85,
+      "reason": "Instruction enforces; skill interprets results"
+    },
+    {
+      "target": ".github/skills/brain-qa/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "reason": "Architecture health assesses runtime dimensions; brain-qa audits trifecta completeness"
+    }
+  ],
+  "when": [
+    "User asks about synapse health or architecture status",
+    "Dream report contains warnings",
+    "Pre-meditation health assessment needed",
+    "User wants to validate architecture integrity"
+  ],
+  "yields": [
+    "Architecture health report with scored dimensions",
+    "Actionable fix recommendations for broken synapses",
+    "Memory balance assessment"
+  ]
+}

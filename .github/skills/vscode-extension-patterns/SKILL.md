@@ -90,6 +90,94 @@ document.addEventListener('click', (e) => {
 - Easy to add new commands
 - Consistent pattern across webviews
 
+## Agent Hooks (VS Code 1.111+)
+
+Hooks are shell scripts that run at defined points in the agent lifecycle. Configured in `.github/hooks.json`.
+
+### Hook Events
+
+| Event | When It Fires | Use Cases |
+| --- | --- | --- |
+| `SessionStart` | Chat session begins | Load context, set persona, inject goals |
+| `UserPromptSubmit` | User sends a message | Secret scanning, safety gates |
+| `PreToolUse` | Before any tool call | Safety blocks (deny), input sanitization |
+| `PostToolUse` | After tool completes | Logging, compile reminders, test suggestions |
+| `SubagentStart` | Subagent spawned | Inject Active Context for subagents |
+| `Stop` | Session ends | Metrics, commit reminders, decision journal |
+| `PreCompact` | Before context compaction | Save session state |
+
+### Config Format (3-Level Nesting)
+
+```json
+{
+  "hooks": {
+    "SessionStart": [{
+      "steps": [{
+        "hooks": [{
+          "type": "command",
+          "command": ".github/muscles/hooks/session-start.cjs",
+          "timeout": 10
+        }]
+      }]
+    }]
+  }
+}
+```
+
+**Key rules**:
+- Timeout in **seconds** (not milliseconds)
+- Scripts read structured **JSON from stdin** (`tool_name`, `tool_input`, `session_id`, `cwd`, `hook_event_name`)
+- Scripts output structured **JSON to stdout** (`hookSpecificOutput`, `decision`, `additionalContext`)
+- Exit code **2** = blocking error (denies tool call or prevents stopping). Non-zero (not 2) = warning
+- Use `.cjs` extension for CommonJS compatibility with ESM workspaces
+
+### PreToolUse Decisions
+
+```javascript
+// Allow (default)
+process.stdout.write(JSON.stringify({ hookSpecificOutput: { permissionDecision: 'allow' } }));
+
+// Deny — blocks the tool call
+process.stdout.write(JSON.stringify({
+  hookSpecificOutput: { permissionDecision: 'deny' },
+  additionalContext: 'Safety: This operation is blocked because...'
+}));
+process.exit(2);
+
+// Modify input — rewrite tool parameters
+process.stdout.write(JSON.stringify({
+  hookSpecificOutput: { permissionDecision: 'allow', updatedInput: { /* modified params */ } }
+}));
+```
+
+### Agent-Scoped Hooks
+
+Declare hooks in `.agent.md` YAML frontmatter:
+
+```yaml
+---
+agent: Validator
+hooks:
+  PreToolUse:
+    - type: command
+      command: .github/muscles/hooks/validator-pre-tool-use.cjs
+      timeout: 5
+---
+```
+
+### Autopilot Mode
+
+`chat.autopilot.enabled` allows the agent to execute tool calls without manual approval. Safety hooks using `deny` decisions remain active — they block dangerous operations even in non-interactive mode.
+
+Recommended for: Dream, Meditation, Brain QA, routine maintenance.
+Requires supervision: Code generation, file deletion, publishing.
+
+### Debug Events Snapshot
+
+Type `#debugEventsSnapshot` in chat to attach a snapshot of agent debug events. Shows loaded customizations, token consumption, hook execution, and agent behavior. Use with the Agent Debug Panel (`Developer: Open Agent Debug Panel`) for full visibility.
+
+---
+
 ## Safe Configuration Pattern
 
 **Tiered settings**: Essential (🔴) → Recommended (🟡) → Auto-Approval (🟠) → Extended Thinking (🧠) → Enterprise (🔵)

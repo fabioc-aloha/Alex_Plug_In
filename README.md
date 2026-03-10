@@ -39,10 +39,10 @@
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 29 slash commands
+- 26 slash commands
 - 13 Language Model tools
 - Dream/meditation protocols
-- Global knowledge base with GitHub sharing
+- Global knowledge base
 - **v6.0.0** Episodic memory, outcome learning, workflows, expertise model
 
 See [Quick Start](#-quick-start-vs-code) for installation.
@@ -101,7 +101,7 @@ Open Copilot Chat and type **`@alex`** to begin!
 
 ### Base Requirements
 
-- **VS Code** ≥ 1.109
+- **VS Code** ≥ 1.110
 - **Alex Cognitive Architecture** extension installed
 
 **The Alex extension is always free.** The tiers below reflect the GitHub Copilot subscription powering Alex's AI capabilities — not the cost of Alex itself. Alex adapts to whatever plan you have, including none at all.
@@ -196,38 +196,51 @@ Already have Alex installed? **You'll be notified automatically!**
 
 When the extension updates, Alex detects the version change and shows a notification:
 
-- 🎉 **Major upgrades** (e.g., 2.x → 3.x) - Highlighted as significant releases
-- ✨ **Minor updates** - Quick sync prompt
+- 🎉 **Major upgrades** (e.g., 5.x → 6.x) — Highlighted as significant releases
+- ✨ **Minor updates** — Quick sync prompt
 
 **Options in the notification:**
 
-- **Run Upgrade** - Updates your workspace files to the latest version
-- **View Changelog** - See what's new in markdown preview
-- **Dismiss** - Skip for now
+- **Run Upgrade** — Updates your workspace files to the latest version
+- **View Changelog** — See what's new in markdown preview
+- **Dismiss** — Skip for now
 
 ### Manual Upgrade Steps
 
-1. Update the extension in VS Code (it will auto-update or use Extensions panel)
-2. Run **`Alex: Upgrade Architecture`** from Command Palette
-3. ✅ Done! The upgrade completes automatically
+1. Update the extension in VS Code (auto-updates, or use Extensions panel)
+2. Open Command Palette (`Ctrl+Shift+P`) → **`Alex: Upgrade Architecture`**
+3. ✅ Done! The upgrade backs up everything, installs fresh, and auto-restores your work
 
-Your learned domains, custom synapses, and memory files are preserved automatically.
+The upgrade preserves:
+- ✅ User-created skills and domain knowledge
+- ✅ User profile and preferences
+- ✅ Episodic records (meditation sessions, dreams)
+- ✅ Synapse connections (normalized to current schema automatically)
+- ✅ Agent hooks (`.github/hooks.json` and custom hook scripts)
 
-### What's New (v6.2.0 — On-Brand Partnership Release)
+> **Stale items** (not modified in >90 days) are flagged for manual review via MIGRATION-CANDIDATES.md.
 
-| Category           | Highlights                                                                                    |
-| ------------------ | --------------------------------------------------------------------------------------------- |
-| **M365 Branding**  | Store description, README, manifest rewritten to partnership voice — zero rocket metaphors     |
-| **M365 RAG**       | EmbeddedKnowledge capability added — 6 knowledge files now active for retrieval               |
-| **M365 Optimize**  | Instructions slimmed 58% (6,679 → 2,773 chars), workflows delegated to knowledge files        |
-| **Version Align**  | All heirs bumped to 6.2.0: VS Code, M365, Agent Plugin                                                    |
+### What's New (v6.5.0 — The Trust Release)
+
+| Category             | Highlights                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
+| **Safety Hooks**     | 16 hooks shipped (10 global + 6 agent-scoped) across all 7 VS Code hook events                   |
+| **Security Hardening** | Autopilot safety gates (deny for heir contamination + architecture independence), prompt scanning |
+| **Agent Intelligence** | Session context injection, subagent context loader, decision journal, targeted test runner        |
+| **Agent-Scoped**     | Validator read-only enforcement, Builder compile reminder, Researcher continuity                  |
+| **Skill Promotions** | 4 skills promoted to Global Knowledge + heirs; 3 evaluated with documented verdicts              |
+| **Quick Settings**   | 17 sidebar toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities)                |
+| **Cloud Sync Removed** | Deprecated Gist-based cloud sync fully removed (3 slash commands, setting, handler code)        |
+| **Theme Compliance** | 17 hex colors → CSS variables; sub-11px fonts fixed; avatar system removed (25 MB savings)       |
 
 ### Migration Notes
 
-- **Synapse format**: Already standardized in v1.5.0, no changes needed
-- **Memory files**: Fully compatible, no migration required
-- **Config files**: New `user-profile.json` added (optional)
-- **Custom agents**: New `.github/agents/` folder created
+- **From v6.x**: Fully automatic — upgrade detects `# Alex vX.Y.Z` format and preserves all content
+- **From v5.x**: Automatic with synapse normalization (string→numeric strengths, schema updates)
+- **From v3.x–v4.x**: Legacy DK files auto-detected in root or `.github/domain-knowledge/` and offered as migration candidates
+- **Hooks**: New in v6.4.0+ — `.github/hooks.json` and `.github/muscles/hooks/` are deployed automatically
+- **Config files**: `user-profile.json` preserved; `alex-manifest.json` refreshed with checksums
+- **Custom agents**: `.github/agents/` folder preserved (user-created agents survive upgrade)
 
 ---
 
@@ -299,7 +312,7 @@ Alex is built **local-first**. Your data stays on your machine:
 | ---------------------------------- | ---------------------------------------------------- |
 | ❌ Collect usage telemetry          | ✅ Store all memory in local `.github/` files you own |
 | ❌ Track your code or conversations | ✅ Send text to Edge TTS (transient, not stored)      |
-| ❌ Share data with third parties    | ✅ Sync to YOUR GitHub repo (opt-in only)             |
+| ❌ Share data with third parties    | ✅ All memory in local files you own                   |
 | ❌ Require an account or login      | ✅ Encrypt API keys via VS Code SecretStorage         |
 
 See the full [Privacy Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md).
@@ -320,7 +333,7 @@ Alex implements Microsoft's Responsible AI principles:
 | Principle         | Implementation                                                  |
 | ----------------- | --------------------------------------------------------------- |
 | Secure by Design  | Minimal dependencies; VS Code sandbox; no `eval()`              |
-| Secure by Default | Cloud sync off by default; secrets via VS Code SecretStorage    |
+| Secure by Default | No cloud sync; secrets via VS Code SecretStorage                |
 | Secure Operations | No PII in logs; signed Marketplace packages; public SECURITY.md |
 
 See the full [Compliance Audit](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/audits/COMPLIANCE-AUDIT.md) and [Security Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md).

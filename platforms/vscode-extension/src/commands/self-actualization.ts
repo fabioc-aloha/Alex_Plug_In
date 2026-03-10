@@ -305,11 +305,12 @@ async function checkVersionConsistency(
     }
 
     // Check for outdated version references
+    // NOTE: No /g flag — .test() doesn't need it and /g causes lastIndex state leakage across iterations
     const outdatedPatterns = [
-        /1\.5\.0\s+UNPENTNILIUM/g,
-        /1\.1\.0\s+UNUNUNNILIUM/g,
-        /1\.0\.\d+\s+UNNL/g,
-        /0\.\d+\.\d+\s+NIL/g
+        /1\.5\.0\s+UNPENTNILIUM/,
+        /1\.1\.0\s+UNUNUNNILIUM/,
+        /1\.0\.\d+\s+UNNL/,
+        /0\.\d+\.\d+\s+NIL/
     ];
 
     const patterns = [
@@ -470,11 +471,12 @@ function generateRecommendations(report: SelfActualizationReport): void {
     // Memory balance recommendations
     const totalMemory = report.memoryConsolidation.proceduralFiles + 
                        report.memoryConsolidation.episodicFiles + 
+                       report.memoryConsolidation.skillCount +
                        report.memoryConsolidation.domainFiles;
     
-    if (report.memoryConsolidation.domainFiles < 3) {
+    if (report.memoryConsolidation.skillCount < 3) {
         report.recommendations.push(
-            `📚 Consider acquiring more domain knowledge - only ${report.memoryConsolidation.domainFiles} DK file(s) present`
+            `📚 Consider building more skills - only ${report.memoryConsolidation.skillCount} skill(s) present`
         );
     }
 

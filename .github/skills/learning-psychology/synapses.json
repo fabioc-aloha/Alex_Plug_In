@@ -1,5 +1,6 @@
 {
-  "skill": "learning-psychology",
+  "schemaVersion": "2.0.0",
+  "skillId": "learning-psychology",
   "connections": [
     {
       "target": ".github/instructions/bootstrap-learning.instructions.md",
@@ -34,6 +35,5 @@
     "scaffolding",
     "zone of proximal"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

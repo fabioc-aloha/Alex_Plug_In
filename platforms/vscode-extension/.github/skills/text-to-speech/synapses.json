@@ -29,13 +29,6 @@
       "yields": "Summarization option for long documents"
     },
     {
-      "target": ".github/skills/academic-research/SKILL.md",
-      "type": "complements",
-      "strength": 0.7,
-      "when": "Proofreading written content",
-      "yields": "Listening catches errors eyes miss"
-    },
-    {
       "target": ".github/skills/meditation/SKILL.md",
       "type": "enables",
       "strength": 0.3,

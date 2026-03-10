@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
-  "skill": "dream-state",
+  "skillId": "dream-state",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "connections": [
     {
       "target": ".github/skills/meditation/SKILL.md",
@@ -16,13 +16,6 @@
       "strength": 0.9,
       "when": "health check or synapse validation requested",
       "yields": "Network health metrics, broken connection detection"
-    },
-    {
-      "target": ".github/skills/brain-qa/SKILL.md",
-      "type": "extends",
-      "strength": 0.85,
-      "when": "comprehensive 6-phase cognitive QA needed",
-      "yields": "Deep architecture validation, Master-Heir sync"
     },
     {
       "target": ".github/skills/global-knowledge/SKILL.md",

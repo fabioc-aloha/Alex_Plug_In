@@ -85,7 +85,8 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
             memoryArchitecture: {
                 proceduralFiles: 0,
                 episodicFiles: 0,
-                domainFiles: 0
+                domainFiles: 0,
+                skillCount: 0
             },
             recommendations: [] as string[]
         };
@@ -96,7 +97,8 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
             '.github/instructions/*.md',
             '.github/prompts/*.md',
             '.github/episodic/*.md',
-            '.github/domain-knowledge/*.md'
+            '.github/skills/*/SKILL.md',
+            '.github/domain-knowledge/*.md'  // Legacy
         ];
 
         // Create fresh regex instance to avoid state leakage
@@ -159,6 +161,39 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
             report.synapseHealth.brokenConnections < 5 ? 'GOOD' :
             report.synapseHealth.brokenConnections < 10 ? 'NEEDS ATTENTION' : 'CRITICAL';
 
+        // Phase 1b: Validate synapses.json connection targets
+        const synapseJsonFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/skills/*/synapses.json'),
+            null, 500
+        );
+        for (const sjFile of synapseJsonFiles) {
+            if (token.isCancellationRequested) { break; }
+            try {
+                const sjContent = await workspaceFs.readFile(sjFile.fsPath);
+                const sjData = JSON.parse(sjContent);
+                if (Array.isArray(sjData.connections)) {
+                    for (const conn of sjData.connections) {
+                        if (!conn.target) { continue; }
+                        // Skip URI-scheme targets (cross-system references)
+                        if (/^(global-knowledge:\/\/|external:)/.test(conn.target)) { continue; }
+                        report.synapseHealth.totalSynapses++;
+                        const targetFullPath = path.join(rootPath, conn.target);
+                        if (!await workspaceFs.pathExists(targetFullPath)) {
+                            report.synapseHealth.brokenConnections++;
+                        }
+                    }
+                }
+            } catch {
+                // Invalid JSON — already counted by other checks
+            }
+        }
+
+        // Re-evaluate health after JSON synapse scan
+        report.synapseHealth.healthStatus = 
+            report.synapseHealth.brokenConnections === 0 ? 'EXCELLENT' :
+            report.synapseHealth.brokenConnections < 5 ? 'GOOD' :
+            report.synapseHealth.brokenConnections < 10 ? 'NEEDS ATTENTION' : 'CRITICAL';
+
         // Phase 2: Count memory files
         const instructionFiles = await vscode.workspace.findFiles(
             new vscode.RelativePattern(workspaceFolders[0], '.github/instructions/*.md')
@@ -172,10 +207,14 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
         const domainFiles = await vscode.workspace.findFiles(
             new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/*.md')
         );
+        const skillFiles = await vscode.workspace.findFiles(
+            new vscode.RelativePattern(workspaceFolders[0], '.github/skills/*/SKILL.md')
+        );
 
         report.memoryArchitecture.proceduralFiles = instructionFiles.length;
         report.memoryArchitecture.episodicFiles = promptFiles.length + episodicFiles.length;
         report.memoryArchitecture.domainFiles = domainFiles.length;
+        report.memoryArchitecture.skillCount = skillFiles.length;
 
         // Phase 3: Generate recommendations
         if (report.synapseHealth.brokenConnections > 0) {
@@ -184,9 +223,9 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
             );
         }
 
-        if (report.memoryArchitecture.domainFiles < 3) {
+        if (report.memoryArchitecture.skillCount < 3) {
             report.recommendations.push(
-                `Consider acquiring more domain knowledge - only ${report.memoryArchitecture.domainFiles} DK file(s) present`
+                `Consider building more skills - only ${report.memoryArchitecture.skillCount} skill(s) present`
             );
         }
 
@@ -234,7 +273,8 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
 |------|-------|
 | Procedural | ${report.memoryArchitecture.proceduralFiles} |
 | Episodic | ${report.memoryArchitecture.episodicFiles} |
-| Domain Knowledge | ${report.memoryArchitecture.domainFiles} |
+| Skills | ${report.memoryArchitecture.skillCount} |
+| Domain Knowledge (legacy) | ${report.memoryArchitecture.domainFiles} |
 
 ## 💡 Recommendations
 
@@ -269,8 +309,9 @@ ${report.recommendations.length > 0 ? report.recommendations.map(r => `- ${r}`).
 |------|-------|
 | Procedural Memory | ${report.memoryArchitecture.proceduralFiles} |
 | Episodic Memory | ${report.memoryArchitecture.episodicFiles} |
-| Domain Knowledge | ${report.memoryArchitecture.domainFiles} |
-| **Total** | **${report.memoryArchitecture.proceduralFiles + report.memoryArchitecture.episodicFiles + report.memoryArchitecture.domainFiles}** |
+| Skills | ${report.memoryArchitecture.skillCount} |
+| Domain Knowledge (legacy) | ${report.memoryArchitecture.domainFiles} |
+| **Total** | **${report.memoryArchitecture.proceduralFiles + report.memoryArchitecture.episodicFiles + report.memoryArchitecture.skillCount + report.memoryArchitecture.domainFiles}** |
 
 ### Recommendations
 

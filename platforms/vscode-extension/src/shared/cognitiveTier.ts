@@ -351,9 +351,9 @@ async function detectBestModelTier(): Promise<{ hasModels: boolean; bestModelTie
             if (/opus|gpt-5\.[2-9]|gpt-5-turbo|o1-pro|o3/.test(id)) {
                 bestModelTier = 'frontier';
                 break;
-            } else if (/sonnet|gpt-4o|gpt-5|gemini.*pro|o1/.test(id) && bestModelTier !== 'frontier') {
+            } else if (/sonnet|gpt-4o(?!-mini)|gpt-4\.1|gpt-5|gemini.*pro|o1/.test(id) && bestModelTier !== 'frontier') {
                 bestModelTier = 'capable';
-            } else if (/haiku|mini|gpt-4\.1|flash/.test(id) && bestModelTier === 'unknown') {
+            } else if (/haiku|mini|flash/.test(id) && bestModelTier === 'unknown') {
                 bestModelTier = 'efficient';
             }
         }

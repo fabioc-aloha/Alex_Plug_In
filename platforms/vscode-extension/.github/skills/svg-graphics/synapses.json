@@ -1,5 +1,6 @@
 {
-  "skill": "svg-graphics",
+  "schemaVersion": "2.0.0",
+  "skillId": "svg-graphics",
   "connections": [
     {
       "target": ".github/skills/project-scaffolding/SKILL.md",
@@ -101,6 +102,5 @@
     "minify SVG",
     "svgo"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

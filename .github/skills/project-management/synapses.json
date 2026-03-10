@@ -1,8 +1,8 @@
 {
-  "skill": "project-management",
+  "schemaVersion": "2.0.0",
+  "skillId": "project-management",
   "connections": [
     {
-      "bidirectional": true,
       "reason": "Projects drive organizational change",
       "type": "complements",
       "strength": 0.85,
@@ -37,6 +37,11 @@
       "type": "escalates",
       "strength": 0.4,
       "target": ".github/skills/incident-response/SKILL.md"
+    },
+    {
+      "target": ".github/skills/cross-cultural-collaboration/SKILL.md",
+      "type": "related",
+      "strength": 0.85
     }
   ],
   "triggers": [
@@ -50,6 +55,5 @@
     "backlog",
     "estimation"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

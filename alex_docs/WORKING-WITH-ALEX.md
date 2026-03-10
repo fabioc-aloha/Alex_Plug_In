@@ -605,6 +605,45 @@ The best prompt engineers share these traits:
 
 ---
 
+## 🛠️ Creating Trifectas from Chat (`/create-*` Commands)
+
+VS Code 1.111+ includes built-in slash commands for creating agent customization files directly from chat. These are the fastest way to build Alex trifectas:
+
+| Command | Creates | Alex Use |
+| --- | --- | --- |
+| `/create-skill` | `.github/skills/{name}/SKILL.md` | Domain knowledge with tables, thresholds, examples |
+| `/create-instruction` | `.github/instructions/{name}.instructions.md` | Auto-loaded rules matched by `applyTo` file patterns |
+| `/create-prompt` | `.github/prompts/{name}.prompt.md` | Interactive `/` commands for guided workflows |
+| `/create-agent` | `.github/agents/{name}.agent.md` | Specialist agent modes with tool restrictions |
+| `/create-hook` | `.github/hooks.json` entry + script | Event-driven automation (SessionStart, PreToolUse, etc.) |
+
+### Quick Trifecta Workflow
+
+1. **Start with the skill**: `/create-skill` — describe the domain. Alex will generate a SKILL.md with the depth rubric applied
+2. **Add an instruction** (if procedural): `/create-instruction` — describe when it should auto-load. Set `applyTo` globs
+3. **Add a prompt** (if interactive): `/create-prompt` — describe the guided workflow steps
+4. **Wire synapses**: Add `synapses.json` to the skill folder with 2–5 connections to related skills
+5. **Register**: Add action keywords to `.github/skills/memory-activation/SKILL.md`
+6. **Validate**: Run `/brainqa` to confirm trifecta completeness
+
+### Tips
+
+- These commands are **conversational** — describe what you want in plain language and the LLM generates the file
+- The generated files land in your workspace `.github/` directory — review before committing
+- For existing trifectas, use `/skill-building` instead (Alex's guided 6-phase workflow with quality gates)
+- Pair with the **Agent Debug Panel** (`Developer: Open Agent Debug Panel`) to verify loading
+
+### Trifecta Decision Matrix
+
+| Need | Just SKILL.md | + Instruction | + Prompt |
+| --- | :---: | :---: | :---: |
+| Reference knowledge ("how does X work?") | ✅ | | |
+| Auto-loaded rules ("always do X when editing .ts files") | ✅ | ✅ | |
+| Multi-step guided workflow ("walk me through X") | ✅ | | ✅ |
+| Full procedure with auto-enforcement | ✅ | ✅ | ✅ |
+
+---
+
 ## 🆘 Getting Help
 
 - **Documentation**: `Alex: Documentation` command

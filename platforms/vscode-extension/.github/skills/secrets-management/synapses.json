@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "1.0",
-  "skill": "secrets-management",
+  "skillId": "secrets-management",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.2.0",
   "lastValidated": "2026-02-20",
   "connections": [

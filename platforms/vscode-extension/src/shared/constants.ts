@@ -229,8 +229,6 @@ export interface IGlobalKnowledgeEntry {
 export interface IGlobalKnowledgeIndex {
     version: string;
     lastUpdated: string;
-    cloudGistId?: string;  // Stored in gist so other machines can find it
-    cloudGistUrl?: string; // Human-readable URL for reference
     entries: IGlobalKnowledgeEntry[];
 }
 

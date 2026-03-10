@@ -1,5 +1,6 @@
 {
-  "skill": "project-scaffolding",
+  "schemaVersion": "2.0.0",
+  "skillId": "project-scaffolding",
   "connections": [
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
@@ -30,6 +31,16 @@
       "type": "extends",
       "strength": 0.85,
       "reason": "Research-first adds knowledge layer before file scaffolding"
+    },
+    {
+      "target": ".github/skills/api-documentation/SKILL.md",
+      "type": "extended-by",
+      "strength": 0.85
+    },
+    {
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "type": "extended-by",
+      "strength": 0.75
     }
   ],
   "triggers": [
@@ -40,6 +51,5 @@
     "project template",
     "README"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

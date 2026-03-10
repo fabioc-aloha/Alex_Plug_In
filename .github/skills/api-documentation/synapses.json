@@ -1,15 +1,14 @@
 {
-  "skill": "api-documentation",
+  "schemaVersion": "2.0.0",
+  "skillId": "api-documentation",
   "connections": [
     {
-      "bidirectional": true,
       "reason": "Documentation project structure and templates",
       "type": "extends",
       "strength": 0.85,
       "target": ".github/skills/project-scaffolding/SKILL.md"
     },
     {
-      "bidirectional": true,
       "reason": "Documented code is quality code",
       "type": "complements",
       "strength": 0.8,
@@ -46,6 +45,5 @@
     "openapi",
     "swagger"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

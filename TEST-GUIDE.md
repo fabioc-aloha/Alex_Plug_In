@@ -1,6 +1,6 @@
-# Alex v6.1.7 — Test Guide
+# Alex v6.5.0 — Test Guide
 
-**Date**: 2026-03-05
+**Date**: 2026-03-10
 **Installation**: Run `npm run package` from `platforms/vscode-extension/`, then install the generated `.vsix` locally before testing.
 
 > ⚠️ **Safety**: Never test in this Master Alex workspace. Use a sandbox folder or the `Extensions` workspace.
@@ -12,8 +12,8 @@
 ```sh
 cd platforms/vscode-extension
 npm run compile        # verify 0 errors first
-npm run package        # generates alex-cognitive-architecture-6.1.5.vsix
-code --install-extension alex-cognitive-architecture-6.1.5.vsix
+npm run package        # generates alex-cognitive-architecture-<version>.vsix
+code --install-extension alex-cognitive-architecture-*.vsix
 ```
 
 ---
@@ -26,7 +26,7 @@ code --install-extension alex-cognitive-architecture-6.1.5.vsix
 | --- | -------------------------------------------------------- | ------------------------------------------------------------------- | ---- |
 | 1.1 | Open any workspace with the extension installed          | Welcome sidebar appears in Activity Bar with Alex avatar            | ✅    |
 | 1.2 | Click the Alex icon in Activity Bar                      | Welcome panel renders: version number, status, quick-action buttons | ✅    |
-| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows v6.1.7, active workspace path             | ✅    |
+| 1.3 | Run `Alex: Status` from Command Palette (`Ctrl+Shift+P`) | Status notification shows current version, active workspace path    | ✅    |
 
 ---
 
@@ -74,15 +74,18 @@ Open Copilot Chat agent picker and test each specialist:
 
 ---
 
-### 5. Quality Gate Hooks — `pre-tool-use.js` (v5.9.12)
+### 5. Agent Hooks System (v6.5.0)
 
-These test the new Q1/Q2 gates. Run in the **Master Alex workspace** (`c:\Development\Alex_Plug_In`).
+Test the hooks system defined in `.github/hooks.json` with 16 hook scripts in `.github/muscles/hooks/`.
 
-| #   | Test                                                                                                                            | Expected                                                                                     | Pass |
-| --- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---- |
-| 5.1 | In a Copilot agent session, edit any `.ts` file                                                                                 | Console/output shows: `[Alex PreToolUse] 💡 TypeScript file modified — run 'npm run compile'` | ✅    |
-| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v6.1.7` | 👤    |
-| 5.3 | Revert package.json version to `6.0.3`                                                                                          | No drift warning on next publish attempt                                                     | 👤    |
+| #   | Test                                                                                                                            | Expected                                                                                          | Pass |
+| --- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ---- |
+| 5.1 | In a Copilot agent session, edit any `.ts` file                                                                                 | Console/output shows: `[Alex PreToolUse] 💡 TypeScript file modified — run 'npm run compile'`      | ✅    |
+| 5.2 | Temporarily change `platforms/vscode-extension/package.json` version to `5.9.0`, then attempt `vsce publish` via agent terminal | Hook warns: `VERSION DRIFT DETECTED — package.json: v5.9.0, copilot-instructions.md: v6.5.0`      | 👤    |
+| 5.3 | Revert package.json version to correct value                                                                                    | No drift warning on next publish attempt                                                          | 👤    |
+| 5.4 | Verify `.github/hooks.json` links are valid                                                                                     | Every `command` path in hooks.json points to an existing `.cjs` file in `.github/muscles/hooks/`  | 👤    |
+| 5.5 | Run `Alex: Initialize Architecture` in a sandbox workspace                                                                      | `hooks.json` deployed alongside copilot-instructions.md; muscles/hooks/ directory contains scripts | 👤    |
+| 5.6 | Attempt an autopilot action that triggers `deny()` safety hook (H8/H9)                                                          | Agent escalates to user confirmation instead of silently proceeding                               | 👤    |
 
 ---
 
@@ -131,7 +134,7 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 | #     | Command                                              | Expected                                             | Pass |
 | ----- | ---------------------------------------------------- | ---------------------------------------------------- | ---- |
-| 10.1  | `Alex: Status`                                       | Shows active workspace, version 6.0.3                | 👤    |
+| 10.1  | `Alex: Status`                                       | Shows active workspace, current version              | 👤    |
 | 10.2  | `Alex: Dream`                                        | Opens chat with dream prompt pre-filled              | 👤    |
 | 10.3  | `Alex: Self-Actualize`                               | Opens chat with self-actualization prompt            | 👤    |
 | 10.4  | `Alex: Deep Brain QA`                                | Runs architecture validation                         | 👤    |
@@ -144,7 +147,7 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 ---
 
-### 11. Secrets & Environment Setup (v6.0.3)
+### 11. Secrets & Environment Setup
 
 | #    | Test                                                         | Expected                                                                                 | Pass |
 | ---- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ---- |
@@ -166,7 +169,7 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 ---
 
-### 13. Multi-Account GitHub Detection (v6.0.3)
+### 13. Multi-Account GitHub Detection
 
 | #    | Test                                          | Expected                                                             | Pass |
 | ---- | --------------------------------------------- | -------------------------------------------------------------------- | ---- |
@@ -177,7 +180,7 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 ---
 
-### 14. Cognitive Tier Real-Time Refresh (v6.0.3)
+### 14. Cognitive Tier Real-Time Refresh
 
 | #    | Test                                                                                  | Expected                                                                   | Pass |
 | ---- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ---- |
@@ -188,7 +191,7 @@ Open Command Palette (`Ctrl+Shift+P`) and run each:
 
 ---
 
-### 15. Extended Thinking Detection (v6.0.3 — Critical Fix)
+### 15. Extended Thinking Detection
 
 | #    | Test                                                 | Expected                                                                                                               | Pass |
 | ---- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---- |
@@ -205,11 +208,11 @@ npm run compile           # TypeScript → dist/ (must exit 0)
 npm run package           # builds .vsix
 ```
 
-**Expected output**: `alex-cognitive-architecture-6.0.3.vsix` in `platforms/vscode-extension/`
+**Expected output**: `alex-cognitive-architecture-<version>.vsix` in `platforms/vscode-extension/`
 
 ```sh
 # Install locally
-code --install-extension platforms/vscode-extension/alex-cognitive-architecture-6.0.3.vsix
+code --install-extension platforms/vscode-extension/alex-cognitive-architecture-*.vsix
 # Reload VS Code window after install (Ctrl+Shift+P → "Developer: Reload Window")
 ```
 
@@ -226,8 +229,9 @@ code --install-extension platforms/vscode-extension/alex-cognitive-architecture-
 
 ---
 
-## Known Gaps (Not in 6.0.3 scope)
+## Known Gaps
 
-- MCP Apps synapse health renderer → deferred to v6.x
-- M365 Retrieval API → deferred to v6.x
+- MCP Apps synapse health renderer → deferred to future release
+- M365 Retrieval API → deferred to future release
 - Proposed API adoption (chatPromptFiles, lmConfiguration, chatOutputRenderer) → gated on VS Code promoting to stable
+- Wave 7 UI Development → v6.5.0+ scope

@@ -1,5 +1,6 @@
 {
-  "skill": "teams-app-patterns",
+  "schemaVersion": "2.0.0",
+  "skillId": "teams-app-patterns",
   "connections": [
     {
       "target": ".github/skills/m365-agent-debugging/SKILL.md",
@@ -76,6 +77,5 @@
     "Bot registration",
     "messaging endpoint"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

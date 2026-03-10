@@ -1,7 +1,7 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
     "schemaVersion": "2.0.0",
-    "skill": "architecture-health",
+    "skillId": "architecture-health",
+    "$schema": "../SYNAPSE-SCHEMA.json",
     "version": "1.0.0",
     "inheritance": "inheritable",
     "connections": [
@@ -22,6 +22,18 @@
             "type": "sibling",
             "strength": 0.85,
             "reason": "Instruction enforces; skill interprets results"
+        },
+        {
+            "target": ".github/skills/brain-qa/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "reason": "Architecture health assesses runtime dimensions; brain-qa audits trifecta completeness"
+        },
+        {
+            "target": ".github/skills/heir-sync-management/SKILL.md",
+            "type": "informs",
+            "strength": 0.65,
+            "reason": "Health checks surface heir sync drift for excluded skills"
         }
     ],
     "when": [

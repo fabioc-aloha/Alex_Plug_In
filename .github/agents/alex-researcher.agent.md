@@ -5,6 +5,15 @@ model: ['Claude Opus 4', 'GPT-4o', 'Claude Sonnet 4']
 tools: ['search', 'codebase', 'fetch', 'runSubagent', 'agent', 'alex_knowledge_search', 'alex_save_insight']
 user-invokable: true
 agents: ['Builder', 'Validator']
+hooks:
+  SessionStart:
+    command: "node .github/muscles/hooks/researcher-session-start.cjs"
+    description: "Load knowledge gaps + research context for continuity"
+    timeout: 5000
+  Stop:
+    command: "node .github/muscles/hooks/researcher-stop.cjs"
+    description: "Remind to save unanswered questions and partial findings"
+    timeout: 3000
 handoffs:
   - label: 🔨 Ready to Build
     agent: Builder
@@ -198,4 +207,3 @@ And save new insights for cross-project reuse:
 ---
 
 *Researcher mode — understand deeply before building*
-

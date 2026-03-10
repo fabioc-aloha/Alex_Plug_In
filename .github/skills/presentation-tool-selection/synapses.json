@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
-  "skill": "presentation-tool-selection",
+  "skillId": "presentation-tool-selection",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "connections": [
     {
       "target": ".github/skills/gamma-presentations/SKILL.md",

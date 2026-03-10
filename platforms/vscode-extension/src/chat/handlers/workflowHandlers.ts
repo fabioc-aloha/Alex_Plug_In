@@ -406,88 +406,6 @@ export async function handleKnowledgeStatusCommand(
 }
 
 /**
- * Handle /sync command - DEPRECATED (Gist sync removed)
- */
-export async function handleSyncCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## ⚠️ Cloud Sync Deprecated
-
-**Gist-based cloud sync has been deprecated.**
-
-Your global knowledge is stored locally at:
-- **Windows**: \`%USERPROFILE%\\.alex\\global-knowledge\\\`
-- **macOS/Linux**: \`~/.alex/global-knowledge/\`
-
-### Git-Based Sync (Recommended)
-To sync knowledge across machines, initialize the global knowledge folder as a Git repository:
-
-\`\`\`bash
-cd ~/.alex/global-knowledge
-git init
-git remote add origin <your-repo-url>
-git push -u origin main
-\`\`\`
-
-This gives you full control over versioning and privacy.
-`);
-
-    return { metadata: { command: 'sync' } };
-}
-
-/**
- * Handle /push command - DEPRECATED (Gist sync removed)
- */
-export async function handlePushCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## ⚠️ Cloud Push Deprecated
-
-**Gist-based cloud sync has been deprecated.**
-
-Use Git to push your knowledge:
-\`\`\`bash
-cd ~/.alex/global-knowledge
-git add . && git commit -m "Knowledge update" && git push
-\`\`\`
-`);
-
-    return { metadata: { command: 'push' } };
-}
-
-/**
- * Handle /pull command - DEPRECATED (Gist sync removed)
- */
-export async function handlePullCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## ⚠️ Cloud Pull Deprecated
-
-**Gist-based cloud sync has been deprecated.**
-
-Use Git to pull your knowledge:
-\`\`\`bash
-cd ~/.alex/global-knowledge
-git pull
-\`\`\`
-`);
-
-    return { metadata: { command: 'pull' } };
-}
-
-/**
  * Handle /docs command - Open documentation
  */
 export async function handleDocsCommand(
@@ -512,7 +430,6 @@ Opening the documentation index...
 | **Memory Systems** | How Alex stores and retrieves knowledge |
 | **Project Structure** | .github folder files and functions |
 | **Global Knowledge** | Cross-project learning system |
-| **Cloud Sync** | Private GitHub repo backup and sharing |
 | **Quick Reference** | Commands, tools, and shortcuts |
 
 `);

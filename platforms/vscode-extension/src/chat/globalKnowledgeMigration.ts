@@ -143,7 +143,7 @@ function normalizeEntry(entry: IGlobalKnowledgeEntry, details: string[]): boolea
 
 /**
  * Normalize all global knowledge entries.
- * Called during cloud sync to ensure data quality.
+ * Ensures data quality and backward compatibility.
  * Backward compatible - older versions can still read the format.
  */
 export async function normalizeGlobalKnowledge(): Promise<IMigrationResult> {

@@ -1,6 +1,7 @@
 {
+  "schemaVersion": "2.0.0",
+  "skillId": "north-star",
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "skill": "north-star",
   "version": "1.0.0",
   "description": "Ambitious project vision definition and alignment",
   "activationTriggers": [
@@ -68,7 +69,6 @@
       "target": ".github/skills/persona-detection/SKILL.md",
       "strength": 0.8,
       "relationship": "coordinates-with",
-      "bidirectional": true,
       "context": "/northstar define sets Persona: field in copilot-instructions.md; persona detection reads it as Priority 5"
     }
   ],
@@ -88,6 +88,5 @@
     "author": "Alex Finch",
     "category": "project-management",
     "maturity": "stable"
-  },
-  "schemaVersion": "2.0.0"
+  }
 }

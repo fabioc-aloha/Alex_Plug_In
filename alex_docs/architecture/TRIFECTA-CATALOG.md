@@ -1,6 +1,6 @@
 # Trifecta Catalog
 
-> **Last Audited**: 2026-03-04
+> **Last Audited**: 2026-03-10
 > **Protocol**: `.github/instructions/trifecta-audit.instructions.md`
 > **Principle**: Completeness with purpose, not completeness for its own sake.
 
@@ -60,7 +60,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (36)
+## Complete Trifectas (38)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -196,14 +196,15 @@ Capabilities with all three memory system components — each justified by the "
 
 **Inheritance**: `heir:vscode` — VS Code heir-specific capability (no universal promotion)
 
-### Heir Curation
+### Heir Sync Management
 
 | Component   | File                                                        | Why It Exists                                                                   |
 | ----------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/heir-curation/SKILL.md`                     | Domain knowledge: quality gates, promotion criteria, master→heir sync patterns  |
+| Skill       | `.github/skills/heir-sync-management/SKILL.md`              | Domain knowledge: quality gates, promotion criteria, master→heir sync patterns  |
 | Instruction | `.github/instructions/heir-skill-promotion.instructions.md` | Auto-loaded procedure: validation scoring, YAML frontmatter, promotion workflow |
-| Prompt      | `.github/prompts/promotetomaster.prompt.md`                 | `/promotetomaster` — user invokes skill promotion from heir to Master Alex      |
+| ~~Prompt~~  | ~~`promotetomaster.prompt.md`~~ — **MISSING** (needs creation) | `/promotetomaster` — skill promotion from heir to Master Alex                |
 
+**Status**: Skill+Instruction only — prompt does not exist yet.
 **Muscle**: `sync-architecture.js` — automated master→heir synchronization with PII protection
 **Inheritance**: `inheritable` — all heirs can promote skills back to Master
 
@@ -222,7 +223,7 @@ Capabilities with all three memory system components — each justified by the "
 
 | Component   | File                                                      | Why It Exists                                                                   |
 | ----------- | --------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/gamma-presentation/SKILL.md`              | Domain knowledge: Gamma.app API patterns, presentation structure, card types    |
+| Skill       | `.github/skills/gamma-presentations/SKILL.md`             | Domain knowledge: Gamma.app API patterns, presentation structure, card types    |
 | Instruction | `.github/instructions/gamma-presentation.instructions.md` | Auto-loaded procedure: API authentication, content generation, export workflows |
 | Prompt      | `.github/prompts/gamma.prompt.md`                         | `/gamma` — user invokes Gamma presentation generation from markdown             |
 
@@ -309,8 +310,9 @@ Capabilities with all three memory system components — each justified by the "
 | ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Skill       | `.github/skills/markdown-mermaid/SKILL.md`                 | Domain knowledge: Mermaid diagram types, syntax, VS Code rendering, diagram selection heuristics |
 | Instruction | `.github/instructions/markdown-mermaid.instructions.md`    | Auto-loaded procedure: diagram type selection, syntax patterns, troubleshooting rendering        |
-| Prompt      | `.github/prompts/diagramming-mastery-meditation.prompt.md` | `/diagramming` — user invokes Mermaid mastery integration meditation session                     |
+| ~~Prompt~~  | ~~`diagramming-mastery-meditation.prompt.md`~~ — **MISSING** (needs creation) | `/diagramming` — Mermaid mastery integration meditation session |
 
+**Status**: Skill+Instruction only — prompt does not exist yet.
 **Inheritance**: `inheritable` — documentation visualization across all heirs
 
 ### Testing Strategies
@@ -444,6 +446,27 @@ Capabilities with all three memory system components — each justified by the "
 
 **Inheritance**: `inheritable` — cross-project knowledge management universal
 
+### Flux Brand Finetune
+
+| Component   | File                                                        | Why It Exists                                                                           |
+| ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/flux-brand-finetune/SKILL.md`               | Domain knowledge: FLUX LoRA fine-tuning on Replicate, training data prep, trigger words |
+| Instruction | `.github/instructions/flux-brand-finetune.instructions.md`  | Auto-loaded procedure: training data requirements, model creation, inference parameters |
+| Prompt      | `.github/prompts/flux-brand-finetune.prompt.md`             | `/flux-brand-finetune` — user invokes LoRA training or image generation workflow        |
+
+**Synapse connections**: ai-character-reference-generation (0.95), visual-memory (0.9), brand-asset-management (0.85)
+**Inheritance**: `inheritable` — brand character fine-tuning applicable across all heirs
+
+### AI Writing Avoidance
+
+| Component   | File                                                          | Why It Exists                                                                            |
+| ----------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/ai-writing-avoidance/SKILL.md`                | Domain knowledge: AI writing tells, authentic voice patterns, detection-avoidance tactics |
+| Instruction | `.github/instructions/ai-writing-avoidance.instructions.md`   | Auto-loaded procedure: writing quality rules, pattern detection, authentic voice guidance |
+| Prompt      | `.github/prompts/audit-writing.prompt.md`                     | `/audit-writing` — user invokes document audit for AI writing tells                      |
+
+**Inheritance**: `inheritable` — authentic writing relevant across all content-producing heirs
+
 ---
 
 ## Justified Non-Trifectas
@@ -462,7 +485,7 @@ These instructions intentionally lack one or more components. The "Why?" test de
 | `dependency-management`         | Procedural rules only (pin versions, audit)           | No interactive workflow needed                    |
 | `embedded-synapse`              | Format spec for connection syntax                     | Always auto-loaded when editing synapses          |
 | `empirical-validation`          | Research principles, auto-applied                     | No user-facing workflow                           |
-| `heir-skill-promotion`          | Has `heir-curation` skill (different scope)           | Promotion is a meditation-triggered process       |
+| `heir-skill-promotion`          | Has `heir-sync-management` skill (different scope)    | Promotion is a meditation-triggered process       |
 | `language-detection-patterns`   | Pattern matching rules, not teachable                 | Always auto-loaded, no user command               |
 | `lucid-dream-integration`       | Extension of dream protocol, not standalone           | Dream prompt covers invocation                    |
 | `protocol-triggers`             | Reference table, not a procedure                      | Always auto-loaded, never invoked                 |
@@ -478,12 +501,8 @@ These instructions intentionally lack one or more components. The "Why?" test de
 | Prompt                           | Why No Instruction?                                             | Why No Skill?                                    |
 | -------------------------------- | --------------------------------------------------------------- | ------------------------------------------------ |
 | `alex-initialization`            | One-time setup, not a repeated procedure                        | No domain knowledge to teach                     |
-| `cross-domain-transfer`          | Guided exploration, not a fixed procedure                       | Discovery-based, not domain-specific             |
-| `diagramming-mastery-meditation` | Specialized meditation variant, not a standalone procedure      | Subsumed by meditation + markdown-mermaid skills |
 | `domain-learning`                | Guided session, bootstrap-learning instruction covers procedure | Bootstrap-learning skill covers domain           |
 | `performance-assessment`         | Post-session evaluation, ad hoc                                 | No persistent domain to teach                    |
-| `quantified-enhancement-session` | Specialized meditation variant                                  | Subsumed by meditation skill                     |
-| `tdd`                            | Guided workflow for TDD                                         | Testing-strategies skill covers domain           |
 
 ### Skill-Only (No instruction or prompt, just domain expertise)
 
@@ -500,18 +519,20 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:   36 justified candidates
+Complete Trifectas:   38 (36 verified + 2 pending prompt creation)
 Procedural-Only:      17 (all justified)
-Prompt-Only:           8 (all justified)
+Prompt-Only:           3 (all justified)
 Skill-Only:          ~90 (standard — passive expertise)
 ```
+
+**Pending**: `markdown-mermaid` and `heir-sync-management` need prompts created to reach full completeness.
 
 ### Network Diagram
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (36)"]
+    subgraph COMPLETE["✅ Complete Trifectas (38)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]
@@ -526,7 +547,7 @@ flowchart LR
         MAA["Master Alex Audit"]
         UIUX["UI/UX Design"]
         VSCC["VS Code Configuration Validation"]
-        HC["Heir Curation"]
+        HSM["Heir Sync Management"]
         MD2W["Markdown to Word"]
         GAMMA["Gamma Presentation"]
         SEC["Secrets Management"]
@@ -550,6 +571,8 @@ flowchart LR
         SR["Security Review"]
         SB["Skill Building"]
         GKN["Global Knowledge"]
+        FBF["Flux Brand Finetune"]
+        AWA["AI Writing Avoidance"]
     end
 
     subgraph LAYERS["Memory System Coverage"]
@@ -574,7 +597,7 @@ flowchart LR
     MAA --- SK & INS & PR
     UIUX --- SK & INS & PR
     VSCC --- SK & INS & PR
-    HC --- SK & INS & PR
+    HSM --- SK & INS & PR
     MD2W --- SK & INS & PR
     SEC --- SK & INS & PR
     CPP --- SK & INS & PR
@@ -597,6 +620,8 @@ flowchart LR
     SR --- SK & INS & PR
     SB --- SK & INS & PR
     GKN --- SK & INS & PR
+    FBF --- SK & INS & PR
+    AWA --- SK & INS & PR
 
     style COMPLETE fill:#d4edda,stroke:#28a745
     style LAYERS fill:#e8f4f8,stroke:#0969da

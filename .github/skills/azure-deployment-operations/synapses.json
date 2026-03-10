@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "skill": "azure-deployment-operations",
+  "skillId": "azure-deployment-operations",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "connections": [
     {

@@ -1,32 +1,29 @@
 {
-  "skill": "localization",
+  "schemaVersion": "2.0.0",
+  "skillId": "localization",
   "connections": [
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "requires",
       "strength": 0.9,
-      "bidirectional": true,
       "reason": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
       "type": "impacts",
       "strength": 0.85,
-      "bidirectional": true,
       "reason": "i18n architecture impacts entire application structure: middleware, routing, data models"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "applies",
       "strength": 0.7,
-      "bidirectional": true,
       "reason": "VS Code extensions use package.nls.json for localization"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "bidirectional": true,
       "reason": "Multilingual content strategy, translation workflows, terminology management"
     },
     {
@@ -39,7 +36,6 @@
       "target": ".github/skills/graphic-design/SKILL.md",
       "type": "complements",
       "strength": 0.5,
-      "bidirectional": true,
       "reason": "RTL layout considerations, typography for different scripts"
     },
     {
@@ -58,14 +54,12 @@
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "type": "mirrors",
       "strength": 0.75,
-      "bidirectional": true,
       "reason": "Dialect inheritance mirrors OOP inheritance: base dialect → derived variant with overrides"
     },
     {
-      "target": ".github/skills/academic-research/SKILL.md",
-      "type": "enriches",
-      "strength": 0.6,
-      "reason": "Historical linguistics (migration patterns) informs dialect architecture decisions"
+      "target": ".github/skills/cross-cultural-collaboration/SKILL.md",
+      "type": "complements",
+      "strength": 0.9
     }
   ],
   "triggers": [
@@ -104,6 +98,5 @@
     "language genealogy",
     "dialect fallback"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

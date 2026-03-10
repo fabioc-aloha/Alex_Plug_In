@@ -140,7 +140,7 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 
 ### Base Requirements
 
-- **VS Code** ≥ 1.109
+- **VS Code** ≥ 1.110
 - **Alex Cognitive Architecture** extension installed (free)
 
 **The Alex extension is always free.** The tiers below reflect the GitHub Copilot subscription powering Alex's AI capabilities — not the cost of Alex itself.
@@ -267,6 +267,19 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
+### What's New (v6.5.0 — The Trust Release)
+
+| Category          | Highlights                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Hooks**         | 16 agent hooks (hooks.json + muscles/hooks/) — quality gates, safety enforcement, autopilot deny() for H8/H9 |
+| **Skills**        | 37 complete trifectas — 4 new promotions from heir projects                                                  |
+| **Agents**        | 7 custom agents with handoff buttons and specialist workflows                                                |
+| **Quality**       | Automated quality gates, NASA-grade audit methodology, pre-publish pipeline                                  |
+| **Upgrade**       | v3→v6 automatic preservation — backup, clean install, gap analysis, auto-restore, synapse normalization      |
+| **Infrastructure**| Extended thinking, MCP tools, Copilot Memory, global knowledge, 47 personas                                  |
+
+<details><summary>Previous releases</summary>
+
 ### What's New (v6.0.0 — The Partnership Release)
 
 | Category          | Highlights                                                                                                   |
@@ -292,10 +305,14 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### Migration Notes
 
-- **Synapse format**: Already standardized in v1.5.0, no changes needed
-- **Memory files**: Fully compatible, no migration required
-- **Config files**: New `user-profile.json` added (optional)
-- **Custom agents**: New `.github/agents/` folder created
+- **From v6.x**: Run `Alex: Upgrade Architecture` — automatic, preserves all customizations
+- **From v5.x**: Upgrade detects legacy structure, backs up, then performs clean install with gap analysis
+- **From v3–4.x**: Full automatic migration with synapse normalization and format upgrade
+- **hooks.json**: New in v6.5.0 — deployed automatically on initialize or upgrade
+- **Config files**: `user-profile.json`, `MASTER-ALEX-PROTECTED.json` preserved across upgrades
+- **Custom agents**: `.github/agents/` folder maintained with 7 specialist agents
+
+</details>
 
 ---
 
@@ -527,7 +544,7 @@ These tools are automatically available to Copilot in Agent mode. Reference with
 | `#heir_validation`     | Validate heir architecture health    | "Check heir integrity"                |
 | `#cognitive_state`     | Update Alex's avatar to current mode | "Switch to debugging mode"            |
 
-### 🎭 Custom Agents (VS Code 1.109+)
+### 🎭 Custom Agents (VS Code 1.110+)
 
 Alex installs **7 custom agents** to `.github/agents/` for specialized workflows:
 

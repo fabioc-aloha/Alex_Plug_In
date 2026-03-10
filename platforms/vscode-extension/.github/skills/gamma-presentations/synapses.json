@@ -1,5 +1,6 @@
 {
-  "skill": "gamma-presentations",
+  "schemaVersion": "2.0.0",
+  "skillId": "gamma-presentations",
   "version": "1.0.0",
   "connections": [
     {
@@ -12,7 +13,6 @@
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "bidirectional": true,
       "note": "Diagrams can enhance presentations"
     },
     {
@@ -70,6 +70,5 @@
     "mcpAvailable": true,
     "mcpConnector": "Gamma"
   },
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

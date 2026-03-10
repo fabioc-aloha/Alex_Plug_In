@@ -1,7 +1,7 @@
 /**
  * Alex Prompt Engine - v5.8.2
  * 
- * Modular 10-layer prompt builder that transforms @alex from a passthrough
+ * Modular 12-layer prompt builder that transforms @alex from a passthrough
  * into a purpose-built cognitive assistant with full identity awareness.
  * 
  * Architecture:
@@ -10,11 +10,13 @@
  *   Layer 3: Conversation History (last 4 exchanges)
  *   Layer 4: User Profile (personalization)
  *   Layer 5: Focus Session (Pomodoro state)
- *   Layer 6: Emotional Intelligence
- *   Layer 7: Model-Adaptive Rules
- *   Layer 8: File Context
+ *   Layer 6: Emotional Intelligence (mood-aware context from emotional memory)
+ *   Layer 7: Model-Adaptive Rules (tier-specific prompt guidance)
+ *   Layer 8: Peripheral Vision (workspace + peer project ambient awareness)
  *   Layer 9: Knowledge Context (pre-seeded from global knowledge)
- *   Layer 10: Response Guidelines + Confidence signaling
+ *   Layer 10: User Expertise Calibration (domain-calibrated response depth)
+ *   Layer 11: Response Guidelines + Confidence signaling
+ *   Layer 12: Honest Uncertainty (epistemic calibration signal)
  * 
  * @see alex_docs/features/ALEX-PARTICIPANT-ENHANCEMENT-PLAN.md
  */

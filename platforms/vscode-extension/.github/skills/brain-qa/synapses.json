@@ -1,5 +1,6 @@
 {
-  "skill": "brain-qa",
+  "schemaVersion": "1.0",
+  "skillId": "brain-qa",
   "version": "1.2.0",
   "lastValidated": "2026-02-15",
   "connections": [
@@ -8,12 +9,6 @@
       "type": "validates",
       "strength": 0.95,
       "note": "Phase 9 detects mermaid diagrams (LLM-unfriendly), Phase 10 detects boilerplate"
-    },
-    {
-      "target": ".github/skills/brain-qa/SKILL.md",
-      "type": "extends",
-      "strength": 0.9,
-      "note": "Deeper analysis beyond basic synapse validation"
     },
     {
       "target": ".github/skills/memory-activation/SKILL.md",
@@ -25,7 +20,6 @@
       "target": ".github/skills/architecture-audit/SKILL.md",
       "type": "complements",
       "strength": 0.8,
-      "bidirectional": true,
       "note": "Brain QA for cognitive architecture, architecture-audit for code/project"
     },
     {
@@ -103,6 +97,5 @@
     "iterative validation",
     "schema compliance"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "1.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

@@ -18,6 +18,16 @@
                         "type": "command",
                         "command": "node .github/muscles/hooks/stop.cjs",
                         "timeout": 10
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/auto-commit-suggest.cjs",
+                        "timeout": 5
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/decision-journal.cjs",
+                        "timeout": 3
                     }
                 ]
             }
@@ -39,6 +49,11 @@
                     {
                         "type": "command",
                         "command": "node .github/muscles/hooks/post-tool-use.cjs",
+                        "timeout": 2
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/targeted-test-runner.cjs",
                         "timeout": 2
                     }
                 ]
@@ -62,6 +77,17 @@
                         "type": "command",
                         "command": "node .github/muscles/hooks/subagent-context.cjs",
                         "timeout": 3
+                    }
+                ]
+            }
+        ],
+        "PreCompact": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/pre-compact.cjs",
+                        "timeout": 5
                     }
                 ]
             }

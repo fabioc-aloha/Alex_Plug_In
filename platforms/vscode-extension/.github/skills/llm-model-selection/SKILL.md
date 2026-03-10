@@ -19,7 +19,7 @@ This skill depends on rapidly evolving technology. Model capabilities, pricing, 
 - Context window expansions
 - New capability tiers
 
-**Last validated:** February 2026 (Claude 4.6 generation)
+**Last validated:** March 2026 (Claude 4.6 generation)
 
 **Check current state:** [Anthropic Models](https://platform.claude.com/docs/en/docs/about-claude/models), [OpenAI Models](https://platform.openai.com/docs/models)
 
@@ -56,9 +56,9 @@ This skill depends on rapidly evolving technology. Model capabilities, pricing, 
 
 | Tier | Models | Best For | Relative Cost |
 | ---- | ------ | -------- | ------------- |
-| **Frontier** | Claude Opus 4.6, GPT-5, Gemini 2.5 Ultra | Complex reasoning, architecture, novel problems | $$$$$ |
-| **Capable** | Claude Sonnet 4.6, GPT-4.1, Gemini 2.5 Pro | Most coding tasks, refactoring, debugging | $$$ |
-| **Fast** | Claude Haiku 4.5, GPT-4.1-mini, Gemini 2.5 Flash | Simple edits, formatting, boilerplate | $ |
+| **Frontier** | Claude Opus 4.6, GPT-5.2/Codex, o3 | Complex reasoning, architecture, novel problems | $$$$$ |
+| **Capable** | Claude Sonnet 4.6, GPT-5.1/Codex, GPT-4.1, GPT-4o, Gemini 2.5/3 Pro | Most coding tasks, refactoring, debugging | $$$ |
+| **Efficient** | Claude Haiku 4.5, GPT-5 mini, GPT-4o mini, Gemini 3 Flash | Simple edits, formatting, boilerplate | $ |
 
 ## When Opus 4.6 IS Worth It
 

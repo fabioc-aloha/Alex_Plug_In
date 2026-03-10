@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "skill": "ai-character-reference-generation",
+  "skillId": "ai-character-reference-generation",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.1.0",
   "lastValidated": "2026-02-20",
   "connections": [

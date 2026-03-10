@@ -206,9 +206,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
 
 
 
-  // Background cloud sync deprecated in v5.0.1 - use Git instead
-  // startBackgroundSync(context);
-
   // Initialize global knowledge base directories
   ensureGlobalKnowledgeDirectories()
     .then(() => {

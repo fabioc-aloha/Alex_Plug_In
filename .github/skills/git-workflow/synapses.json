@@ -1,5 +1,6 @@
 {
-  "skill": "git-workflow",
+  "schemaVersion": "2.0.0",
+  "skillId": "git-workflow",
   "connections": [
     {
       "target": ".github/skills/release-preflight/SKILL.md",
@@ -32,6 +33,5 @@
     "cherry-pick",
     "conflict"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

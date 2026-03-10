@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "skill": "flux-brand-finetune",
+  "skillId": "flux-brand-finetune",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "lastValidated": "2026-03-05",
   "connections": [

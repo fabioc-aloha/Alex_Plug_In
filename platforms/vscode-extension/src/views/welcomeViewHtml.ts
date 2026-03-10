@@ -63,6 +63,7 @@ export interface SettingsToggle {
   key: string;
   label: string;
   enabled: boolean;
+  group?: string;
 }
 
 /** Data contract for the Agents tab */

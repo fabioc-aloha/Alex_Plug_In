@@ -1,5 +1,6 @@
 {
-  "skill": "architecture-refinement",
+  "schemaVersion": "2.0.0",
+  "skillId": "architecture-refinement",
   "description": "Meta-skill for maintaining and evolving Alex's cognitive architecture",
   "connections": [
     {
@@ -25,6 +26,11 @@
       "type": "requires",
       "strength": 0.9,
       "context": "All documentation must be lint-clean"
+    },
+    {
+      "target": ".github/skills/localization/SKILL.md",
+      "type": "related",
+      "strength": 0.85
     }
   ],
   "triggers": [
@@ -33,6 +39,5 @@
     "human feedback corrected AI judgment",
     "new workflow pattern emerged"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

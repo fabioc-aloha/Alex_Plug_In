@@ -1,5 +1,6 @@
 {
-  "skill": "llm-model-selection",
+  "schemaVersion": "2.0.0",
+  "skillId": "llm-model-selection",
   "connections": [
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
@@ -50,6 +51,5 @@
     "wrong model",
     "model warning"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

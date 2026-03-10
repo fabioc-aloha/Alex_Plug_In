@@ -1,6 +1,7 @@
 {
-  "$schema": "../schemas/synapses.schema.json",
   "schemaVersion": "1.0.0",
+  "skillId": "ai-writing-avoidance",
+  "$schema": "../schemas/synapses.schema.json",
   "skillName": "ai-writing-avoidance",
   "description": "Connections for authentic writing and AI pattern detection",
   "lastValidated": "2026-03-05",
@@ -25,13 +26,6 @@
       "strength": 0.7,
       "when": "Teaching writing skills",
       "yields": "Framework for explaining AI tells to learners"
-    },
-    {
-      "target": ".github/skills/documentation-quality-assurance/SKILL.md",
-      "relationship": "pairs-with",
-      "strength": 0.85,
-      "when": "Running document audits",
-      "yields": "Combined quality and authenticity checking"
     }
   ],
   "activationContext": {

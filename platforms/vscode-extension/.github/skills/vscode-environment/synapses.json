@@ -1,5 +1,6 @@
 {
-  "skill": "vscode-environment",
+  "schemaVersion": "2.0.0",
+  "skillId": "vscode-environment",
   "connections": [
     {
       "target": ".github/skills/project-scaffolding/SKILL.md",
@@ -34,6 +35,5 @@
     "tasks.json",
     "dev environment"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

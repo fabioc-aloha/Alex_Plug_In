@@ -1,5 +1,6 @@
 {
-  "skill": "error-recovery-patterns",
+  "schemaVersion": "2.0.0",
+  "skillId": "error-recovery-patterns",
   "connections": [
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
@@ -28,6 +29,5 @@
     "graceful degradation",
     "error handling"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

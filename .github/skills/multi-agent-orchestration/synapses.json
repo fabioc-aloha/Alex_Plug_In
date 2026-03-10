@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "skill": "multi-agent-orchestration",
+  "skillId": "multi-agent-orchestration",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "lastValidated": "2026-02-11",
   "connections": [
@@ -45,8 +45,7 @@
       "target": ".github/skills/foundry-agent-platform/SKILL.md",
       "type": "implements",
       "strength": 0.9,
-      "note": "Foundry provides cloud-native multi-agent orchestration with A2A and Agent Service",
-      "bidirectional": true
+      "note": "Foundry provides cloud-native multi-agent orchestration with A2A and Agent Service"
     }
   ],
   "activationBoost": [

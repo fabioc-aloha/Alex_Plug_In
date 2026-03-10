@@ -28,6 +28,8 @@ Self-actualization is Alex's highest-order cognitive function, performing compre
 
 ## Protocol Phases
 
+Self-actualization follows a 6-phase protocol (Phase 0-5). The **self-actualization SKILL.md** defines the canonical 8-step session flow (Inventory → Structural audit → Depth sampling → Balance calculation → Network analysis → Growth review → Priority list → Action plan). The phases below implement that flow:
+
 ### Phase 0: Pre-Assessment Resource Planning
 
 Self-actualization is Alex's most complex cognitive operation (5+ phases). Skill Selection Optimization auto-activates:
@@ -153,7 +155,9 @@ Or natural language:
 
 ## Quality Metrics
 
-### Health Status Thresholds
+Health thresholds and scoring are defined canonically in the **self-actualization SKILL.md**. Use the skill's 6-dimension assessment (Structural Integrity, Memory Balance, Knowledge Depth, Connection Density, Trifecta Completeness, Growth Trajectory) with weighted scoring.
+
+### Quick Reference Thresholds
 
 | Status | Broken Synapses | Action |
 |--------|-----------------|--------|
@@ -162,21 +166,7 @@ Or natural language:
 | NEEDS ATTENTION | 5-9 | Run Dream Protocol soon |
 | CRITICAL | 10+ | Immediate Dream Protocol required |
 
-### Memory Balance Guidelines
-
-| Memory Type | Minimum | Optimal | Purpose |
-|-------------|---------|---------|---------|
-| Procedural | 5 | 10-15 | Core cognitive processes |
-| Episodic | 5 | 10-20 | Session history and context |
-| Domain | 3 | 5-10 | Specialized expertise |
-
-### Synapse Density Targets
-
-| Density | Status | Action |
-|---------|--------|--------|
-| < 2.0 | Low | Add more cross-file connections |
-| 2.0 - 5.0 | Optimal | Maintain current level |
-| > 5.0 | High | Consider consolidation |
+For full scoring guide, memory balance ratios, synapse density targets, and knowledge depth levels, see the [self-actualization SKILL.md](.github/skills/self-actualization/SKILL.md#scoring-guide).
 
 ## Synapses
 

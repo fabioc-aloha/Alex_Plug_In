@@ -1,5 +1,6 @@
 {
-  "skill": "architecture-audit",
+  "schemaVersion": "2.0.0",
+  "skillId": "architecture-audit",
   "version": "1.0.0",
   "description": "Comprehensive project consistency review across code, documentation, diagrams, and configuration",
   "triggers": [
@@ -62,6 +63,5 @@
       "description": "Verification mindset"
     }
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

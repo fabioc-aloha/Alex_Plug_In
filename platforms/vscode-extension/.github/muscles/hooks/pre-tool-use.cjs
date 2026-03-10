@@ -10,6 +10,8 @@
  * Safety Imperatives:
  *   I3: NEVER run Initialize on Master Alex   → exit 2 (hard block)
  *   I4: NEVER run Reset on Master Alex        → exit 2 (hard block)
+ *   H8: Heir contamination — deny edits to synced heir paths
+ *   H9: I8 architecture guard — deny src/ importing .github/
  *
  * Quality Gates:
  *   Q1: Version drift — deny publish if version mismatch
@@ -40,13 +42,19 @@ const toolInputStr = JSON.stringify(toolInput);
 
 // ── Helper: emit structured JSON and exit ─────────────────────────────────
 
-function allow(context) {
-  if (context) {
+const contextMessages = [];
+
+function addContext(message) {
+  contextMessages.push(message);
+}
+
+function emitAndExit() {
+  if (contextMessages.length > 0) {
     console.log(JSON.stringify({
       hookSpecificOutput: {
         hookEventName: 'PreToolUse',
         permissionDecision: 'allow',
-        additionalContext: context
+        additionalContext: contextMessages.join('\n\n')
       }
     }));
   }
@@ -122,12 +130,56 @@ const filePath = toolInput.file_path || toolInput.filePath || '';
 const isTsEdit = isEditTool && (filePath.endsWith('.ts') || filePath.endsWith('.tsx'));
 
 if (isTsEdit) {
-  allow(
+  addContext(
     `TypeScript file modified — run 'npm run compile' to verify no errors.\n` +
     `Q2: Compile after every .ts edit. Errors surface early, not at publish time.`
   );
 }
 
-// ── Default: allow silently ────────────────────────────────────────────────
+// ── H8: Heir contamination guard ─────────────────────────────────────────
+// Warn when editing synced files inside platforms/ that master sync overwrites.
 
-process.exit(0);
+if (isEditTool && filePath) {
+  const normalizedPath = filePath.replace(/\\/g, '/');
+  const heirSyncedPaths = ['platforms/vscode-extension/.github/', 'platforms/m365-copilot/.github/', 'platforms/agent-plugin/plugin/'];
+  const isHeirSyncedFile = heirSyncedPaths.some(p => normalizedPath.includes(p));
+
+  if (isHeirSyncedFile) {
+    deny(
+      `HEIR CONTAMINATION BLOCKED: This file is inside a synced heir directory.\n` +
+      `H8: Files under platforms/*/.github/ are overwritten by master sync.\n` +
+      `Edit the source in root .github/ instead, then run sync.\n` +
+      `File: ${filePath}`
+    );
+  }
+}
+
+// ── H9: I8 architecture guard ────────────────────────────────────────────
+// Warn when src/ code imports from .github/ paths (architecture independence).
+
+if (isEditTool && filePath) {
+  const normalizedPath = filePath.replace(/\\/g, '/');
+  const isSrcFile = normalizedPath.includes('/src/') && (filePath.endsWith('.ts') || filePath.endsWith('.js'));
+  const content = toolInput.content || toolInput.newString || toolInput.new_str || '';
+
+  if (isSrcFile && content) {
+    const architecturePaths = ['.github/', '/.github/', 'copilot-instructions'];
+    const importsArchitecture = architecturePaths.some(p => {
+      const importPattern = new RegExp(`(?:import|require|readFile|readFileSync).*${p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`);
+      return importPattern.test(content);
+    });
+
+    if (importsArchitecture) {
+      deny(
+        `I8 ARCHITECTURE GUARD: Extension code must NOT import from .github/ paths.\n` +
+        `H9: Architecture NEVER depends on the Extension — the dependency arrow is Extension → Architecture.\n` +
+        `The .github/ directory is read by the LLM, not by extension TypeScript code.\n` +
+        `File: ${filePath}`
+      );
+    }
+  }
+}
+
+// ── Default: emit collected context and allow ──────────────────────────────
+
+emitAndExit();

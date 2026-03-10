@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased] - v6.5.0
+
+> **The Trust Release** — Safety hooks, security hardening, avatar removal, theme compliance, heir alignment, skill promotions.
+
+### Added
+- **16 hooks shipped** — 10 global + 6 agent-scoped across all 7 VS Code hook events (SessionStart, PreToolUse, PostToolUse, UserPromptSubmit, SubagentStart, Stop, PreCompact). All `.cjs` CommonJS scripts with stdin JSON / structured JSON output / exit 2 safety blocks
+- **Safety gates** — H8 heir contamination guard (deny), H9 I8 architecture independence guard (deny), prompt safety gate (secret + I1 scanning), autopilot H8/H9 escalated warn → deny
+- **Session intelligence** — session-start context injection, subagent context loader, pre-compact state preservation, decision journal, auto-commit suggestion, targeted test runner
+- **Agent-scoped hooks** — Validator read-only enforcement + adversarial checklist, Builder compile reminder, Researcher session start + research continuity, Documentarian doc tracker
+- **4 skill promotions** — `doc-hygiene` (GK + 3 heirs), `architecture-health` (AlexLearn), `global-knowledge-sync` (AlexLearn), `domain-learning` prompt (AlexLearn)
+- **Centralized logger** — `src/shared/logger.ts` with OutputChannel 'Alex', `logInfo()`, `disposeLog()`
+- **`/create-*` trifecta guide** — documented `/create-skill`, `/create-instruction`, `/create-prompt`, `/create-agent`, `/create-hook` workflow in WORKING-WITH-ALEX.md with decision matrix
+- **Autopilot safety documentation** — recommended workflows, supervision requirements, and safety hook coverage in SECURITY.md
+- **Hooks + Autopilot patterns** — VS Code 1.111 agent hooks API (config format, stdin JSON protocol, PreToolUse decisions, agent-scoped hooks) added to vscode-extension-patterns SKILL.md
+- **Skill promotion evaluations** — meditation-facilitation (already merged), prompt/skill-activation (keep in heir), writing-publication (keep in heir)
+- **3 audit scripts** — `audit-synapses.cjs` (synapse reciprocity + format validation), `audit-architecture.cjs` (consistency checks), `audit-tools-hooks.cjs` (tool registration + hook orphan detection)
+- **Quick Settings sidebar** — 17 toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities) with one-click enable/disable for key settings including `chat.useCustomAgentHooks`
+- **Environment Setup** — relocated into Quick Settings section as compact button
+- **Trifecta quality (T1-T7)** — `/review` prompt enriched with 3-Pass Review methodology; `/tdd` broadened to cover full testing skill (pyramid, mocking, coverage, flaky triage); self-actualization thresholds canonicalized (instruction references skill); code-review instruction deduplicated (references skill tables); `diagramming.prompt.md` created for markdown-mermaid trifecta; `promotetomaster.prompt.md` created for heir-sync-management trifecta; trifecta sibling synapses added to code-review, testing-strategies, self-actualization
+
+### Removed
+- **Gist-based Cloud Sync** — fully removed deprecated code (since v5.0.1): 3 slash commands (`/sync`, `/push`, `/pull`), `alex.globalKnowledge.cloudSync.enabled` setting, handler functions, Gist interface fields across 7 files
+
+### Changed
+- **Avatar system removed** — Deleted 122 files (25.3 MB), gutted avatarMappings.ts (771→68 lines), removed PERSONA_AVATAR_MAP + getAvatarForPersona + avatarFile
+- **console.log → OutputChannel** — 31 calls across 9 files migrated to centralized logger
+- **UI theme compliance** — 17 hex colors → `--vscode-charts-*` CSS variables with fallbacks; 3 sub-11px fonts fixed
+- **Heir alignment** — agent-plugin v6.1.5/v6.1.7/v6.2.0 → v6.4.6 across 4 files; M365 build artifacts gitignored; visual-memory trifecta removed from M365
+- **MCP SDK bump** — `@modelcontextprotocol/sdk` ^1.0.0 → ^1.27.1
+- **Dependency bumps** — `@types/vscode`, `ws` security update
+
+### Fixed
+- **F1–F6 hook API corrections** — Config format (3-level nesting, seconds timeouts), input protocol (env vars → stdin JSON), output protocol (plain text → structured JSON), event rename (SessionStop → Stop), exit codes (always 0 → exit 2 for safety blocks)
+- **BUG 1-9 synapse activation semantics** — 23 asymmetric bidirectional claims resolved, 40+ false `bidirectional` flags removed from synapses.json files, embedded markdown synapse format blindspot fixed
+- **BUG 10-11 runtime tool blindspots** — `synapseHealthTool.ts` Phase 2 and `selfActualizationTool.ts` Phase 1b now scan JSON synapses; `vscode-configuration-validation` synapses.json rewritten from legacy object to array format
+- **BUG 12 heir sync drift** — 6 `heir:vscode` excluded skill synapses.json manually propagated after bulk changes
+- **BUG 13-14 audit-tools-hooks gaps** — Agent-scoped hook scanning from `.agent.md` frontmatter, `tool.id` → `tool.name` fix, recursive tool registration discovery
+- **BUG 15 sync-architecture stale reference** — 4 `skill-activation` → `memory-activation` references in sync validation function, plus 1 in `architecture-health/SKILL.md`
+
+---
+
 ## [6.4.6] - 2026-03-10
 
 > **The Audit Hygiene Release** — Tests green, docs fresh, links fixed, vulnerabilities eliminated, skills reindexed, settings reconciled.

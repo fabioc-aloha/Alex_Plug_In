@@ -1,5 +1,6 @@
 {
-  "skill": "bootstrap-learning",
+  "schemaVersion": "2.0.0",
+  "skillId": "bootstrap-learning",
   "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
@@ -79,6 +80,5 @@
     "domain learning",
     "skill learning"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

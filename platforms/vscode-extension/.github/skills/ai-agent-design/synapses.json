@@ -1,5 +1,6 @@
 {
-  "skill": "ai-agent-design",
+  "schemaVersion": "2.0.0",
+  "skillId": "ai-agent-design",
   "version": "1.1.0",
   "connections": [
     {
@@ -54,8 +55,7 @@
       "target": ".github/skills/foundry-agent-platform/SKILL.md",
       "relationship": "implements",
       "strength": 0.9,
-      "context": "Foundry Agent Service is the cloud runtime for agent design patterns",
-      "bidirectional": true
+      "context": "Foundry Agent Service is the cloud runtime for agent design patterns"
     }
   ],
   "activationTriggers": [
@@ -81,6 +81,5 @@
       "api-design"
     ]
   },
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

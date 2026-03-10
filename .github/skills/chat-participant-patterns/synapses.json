@@ -1,5 +1,6 @@
 {
-  "skill": "chat-participant-patterns",
+  "schemaVersion": "2.0.0",
+  "skillId": "chat-participant-patterns",
   "connections": [
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
@@ -61,6 +62,5 @@
     "GitHub Copilot extension",
     "chat extension"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

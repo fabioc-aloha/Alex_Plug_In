@@ -1,27 +1,24 @@
 {
-  "skill": "cross-cultural-collaboration",
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
+  "skillId": "cross-cultural-collaboration",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "connections": [
     {
       "target": ".github/skills/localization/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "bidirectional": true,
       "reason": "Cultural awareness directly informs localization strategies and vice versa"
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
       "type": "impacts",
       "strength": 0.85,
-      "bidirectional": true,
       "reason": "Cross-cultural dynamics affect standup formats, escalation paths, and deadline management"
     },
     {
       "target": ".github/skills/work-life-balance/SKILL.md",
       "type": "applies",
       "strength": 0.8,
-      "bidirectional": true,
       "reason": "Time zone respect and preventing offshore burnout are cultural wellness issues"
     },
     {

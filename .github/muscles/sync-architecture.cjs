@@ -430,6 +430,17 @@ function syncArchitectureFiles() {
         console.log(`✅ ${file}`);
     }
 
+    // Sync non-md root files that are part of the architecture
+    const rootJsonFiles = ['hooks.json'];
+    for (const file of rootJsonFiles) {
+        const masterPath = path.join(MASTER_GITHUB, file);
+        const heirPath = path.join(HEIR_GITHUB, file);
+        if (fs.existsSync(masterPath)) {
+            fs.copyFileSync(masterPath, heirPath);
+            console.log(`✅ ${file}`);
+        }
+    }
+
     // Sync walkthrough media files (referenced by package.json walkthroughs)
     // NOTE: alex_docs/README.md is NOT synced — the heir maintains its own
     // self-contained mono document (all content inline with anchor navigation)
@@ -897,19 +908,19 @@ function validateSynapseTargets() {
 // ============================================================
 
 function validateSkillActivationIndex() {
-    console.log('\n📇 Validating skill-activation skill...\n');
+    console.log('\n📇 Validating memory-activation skill...\n');
     
     const errors = [];
     const warnings = [];
     
-    // Check that skill-activation skill exists
-    const skillPath = path.join(HEIR_GITHUB, 'skills', 'skill-activation', 'SKILL.md');
+    // Check that memory-activation skill exists
+    const skillPath = path.join(HEIR_GITHUB, 'skills', 'memory-activation', 'SKILL.md');
     if (!fs.existsSync(skillPath)) {
-        errors.push('skill-activation/SKILL.md does not exist (core metacognitive skill)');
+        errors.push('memory-activation/SKILL.md does not exist (core metacognitive skill)');
         return { errors, warnings };
     }
     
-    console.log('✅ skill-activation skill exists\n');
+    console.log('✅ memory-activation skill exists\n');
     
     // Note: The skill activation index is embedded within SKILL.md itself,
     // not a separate file. Manual review is needed to ensure all skills are discoverable.

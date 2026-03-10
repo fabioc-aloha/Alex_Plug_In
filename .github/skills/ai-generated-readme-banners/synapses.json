@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "skill": "ai-generated-readme-banners",
+  "skillId": "ai-generated-readme-banners",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "lastValidated": "2026-02-15",
   "connections": [

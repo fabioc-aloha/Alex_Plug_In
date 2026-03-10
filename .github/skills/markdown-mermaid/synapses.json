@@ -1,5 +1,6 @@
 {
-  "skill": "markdown-mermaid",
+  "schemaVersion": "2.0.0",
+  "skillId": "markdown-mermaid",
   "connections": [
     {
       "target": ".github/skills/academic-research/SKILL.md",
@@ -30,6 +31,16 @@
       "type": "validates",
       "strength": 0.6,
       "reason": "RCA methodology systematically identifies parser-specific pitfalls across diagram types"
+    },
+    {
+      "target": ".github/skills/ascii-art-alignment/SKILL.md",
+      "type": "complements",
+      "strength": 0.9
+    },
+    {
+      "target": ".github/skills/gamma-presentations/SKILL.md",
+      "type": "complements",
+      "strength": 0.7
     }
   ],
   "activationBoost": [
@@ -114,6 +125,5 @@
     "pie chart",
     "block diagram"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

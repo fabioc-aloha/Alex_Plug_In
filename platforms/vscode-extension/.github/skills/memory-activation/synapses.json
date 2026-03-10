@@ -1,5 +1,6 @@
 {
-  "skill": "memory-activation",
+  "schemaVersion": "2.0.0",
+  "skillId": "memory-activation",
   "version": "1.0.0",
   "description": "Auto-triggering metacognitive skill for capability discovery before response formation",
   "category": "cognitive",
@@ -47,6 +48,5 @@
       "yields": "Chunking strategies, decision simplification"
     }
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

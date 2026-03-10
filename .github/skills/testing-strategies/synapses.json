@@ -1,11 +1,23 @@
 {
-  "skill": "testing-strategies",
+  "schemaVersion": "2.0.0",
+  "skillId": "testing-strategies",
   "connections": [
+    {
+      "target": ".github/instructions/testing-strategies.instructions.md",
+      "type": "implements",
+      "strength": 0.95,
+      "reason": "Trifecta sibling: procedural testing guidelines"
+    },
+    {
+      "target": ".github/prompts/tdd.prompt.md",
+      "type": "activates",
+      "strength": 0.95,
+      "reason": "Trifecta sibling: /tdd interactive testing workflow"
+    },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "bidirectional": true,
       "reason": "Tests prevent bugs, debugging finds them"
     },
     {
@@ -32,17 +44,20 @@
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "validates",
       "strength": 0.8,
-      "bidirectional": true,
       "reason": "Automated accessibility testing validates WCAG compliance"
     },
     {
       "target": ".github/instructions/automated-quality-gates.instructions.md",
       "type": "implements",
       "strength": 0.9,
-      "bidirectional": true,
       "reason": "Quality gates are static analysis tests wired into the build pipeline",
       "when": "Adding new quality gates or reviewing test coverage",
       "yields": "Automated regression prevention through build-time validation"
+    },
+    {
+      "target": ".github/skills/localization/SKILL.md",
+      "type": "related",
+      "strength": 0.9
     }
   ],
   "triggers": [
@@ -103,6 +118,5 @@
     "test first",
     "red green refactor"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

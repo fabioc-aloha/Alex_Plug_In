@@ -1358,6 +1358,69 @@ if (32 -in $runPhases) {
             else {
                 Write-Pass "All $listedCount listed trifectas have skill directories"
             }
+
+            # 3b. Verify each listed trifecta has at least one matching instruction and prompt
+            # Trifecta components use intentional aliases (prompts use short names, instructions may differ)
+            $instrDir = Join-Path $ghPath "instructions"
+            $promptDir = Join-Path $ghPath "prompts"
+            $instrFiles = if (Test-Path $instrDir) { Get-ChildItem $instrDir -Filter "*.instructions.md" | ForEach-Object { $_.Name -replace '\.instructions\.md$', '' } } else { @() }
+            $promptFiles = if (Test-Path $promptDir) { Get-ChildItem $promptDir -Filter "*.prompt.md" | ForEach-Object { $_.Name -replace '\.prompt\.md$', '' } } else { @() }
+
+            # Known instruction aliases (skill-name → instruction-name when different)
+            $instrAliases = @{
+                'dream-state'                = 'dream-state-automation'
+                'release-process'            = 'release-management'
+                'research-first-development' = 'research-first-workflow'
+                'brain-qa'                   = 'semantic-audit'
+                'architecture-audit'         = 'semantic-audit'
+                'code-review'                = 'code-review-guidelines'
+                'global-knowledge'           = 'global-knowledge-curation'
+                'gamma-presentations'        = 'gamma-presentation'
+            }
+            # Known prompt aliases (skill-name → prompt-name when different)
+            $promptAliases = @{
+                'meditation'                      = 'meditate'
+                'dream-state'                     = 'dream'
+                'self-actualization'              = 'selfactualize'
+                'release-process'                 = 'release'
+                'brand-asset-management'          = 'brand'
+                'research-first-development'      = 'gapanalysis'
+                'brain-qa'                        = 'brainqa'
+                'architecture-audit'              = 'masteraudit'
+                'bootstrap-learning'              = 'learn'
+                'vscode-configuration-validation' = 'validate-config'
+                'ui-ux-design'                    = 'ui-ux-audit'
+                'gamma-presentations'             = 'gamma'
+                'secrets-management'              = 'secrets'
+                'chat-participant-patterns'       = 'chat-participant'
+                'vscode-extension-patterns'       = 'vscode-extension-audit'
+                'mcp-development'                 = 'mcp-server'
+                'microsoft-graph-api'             = 'graph-api'
+                'teams-app-patterns'              = 'teams-app'
+                'm365-agent-debugging'            = 'm365-agent-debug'
+                'testing-strategies'              = 'tdd'
+                'knowledge-synthesis'             = 'cross-domain-transfer'
+                'north-star'                      = 'northstar'
+                'md-to-word'                      = 'word'
+                'debugging-patterns'              = 'debug'
+                'refactoring-patterns'            = 'refactor'
+                'code-review'                     = 'review'
+                'global-knowledge'                = 'knowledge'
+                'ai-writing-avoidance'            = 'audit-writing'
+            }
+
+            $noInstr = @()
+            $noPrompt = @()
+            foreach ($name in $listedNames) {
+                $hasInstr = ($instrFiles -contains $name) -or ($instrAliases.ContainsKey($name) -and ($instrFiles -contains $instrAliases[$name]))
+                if (-not $hasInstr) { $noInstr += $name }
+                $hasPrompt = ($promptFiles -contains $name) -or ($promptAliases.ContainsKey($name) -and ($promptFiles -contains $promptAliases[$name]))
+                if (-not $hasPrompt) { $noPrompt += $name }
+            }
+            if ($noInstr.Count -gt 0) { Write-Warn "Listed trifectas with no matching instruction: $($noInstr -join ', ')" }
+            else { Write-Pass "All listed trifectas have matching instructions" }
+            if ($noPrompt.Count -gt 0) { Write-Warn "Listed trifectas with no matching prompt: $($noPrompt -join ', ')" }
+            else { Write-Pass "All listed trifectas have matching prompts" }
         }
         else { Write-Warn "Could not parse trifecta list from copilot-instructions.md" }
 

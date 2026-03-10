@@ -1,8 +1,8 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
+  "skillId": "bicep-avm-mastery",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
-  "skill": "bicep-avm-mastery",
   "created": "2026-02-11",
   "connectionCount": 3,
   "connections": [],

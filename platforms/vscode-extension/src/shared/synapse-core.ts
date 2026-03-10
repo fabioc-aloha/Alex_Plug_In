@@ -133,9 +133,9 @@ export interface DocCountConfig {
  * Updated manually when architecture changes
  */
 export const defaultDocCounts: DocCountConfig[] = [
-    { name: 'Procedural', path: '.github/instructions/', pattern: '*.instructions.md', documentedCount: 31 },
-    { name: 'Episodic', path: '.github/prompts/', pattern: '*.prompt.md', documentedCount: 19 },
-    { name: 'Skills', path: '.github/skills/', pattern: '*/SKILL.md', documentedCount: 114 }
+    { name: 'Procedural', path: '.github/instructions/', pattern: '*.instructions.md', documentedCount: 64 },
+    { name: 'Episodic', path: '.github/prompts/', pattern: '*.prompt.md', documentedCount: 46 },
+    { name: 'Skills', path: '.github/skills/', pattern: '*/SKILL.md', documentedCount: 133 }
 ];
 
 /**

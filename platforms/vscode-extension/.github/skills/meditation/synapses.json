@@ -1,13 +1,7 @@
 {
-  "skill": "meditation",
+  "schemaVersion": "2.0.0",
+  "skillId": "meditation",
   "connections": [
-    {
-      "target": ".github/skills/meditation/SKILL.md",
-      "type": "guided-by",
-      "strength": 0.75,
-      "when": "user explicitly requests guided meditation",
-      "yields": "Four R's protocol, structured reflection prompts"
-    },
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
       "type": "triggers",
@@ -25,16 +19,9 @@
     {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "uses",
-      "strength": 0.8,
-      "when": "validating synapses during meditation",
-      "yields": "Health check commands, validation patterns"
-    },
-    {
-      "target": ".github/skills/brain-qa/SKILL.md",
-      "type": "extends",
       "strength": 0.85,
-      "when": "deep architecture validation needed",
-      "yields": "6-phase cognitive QA, Master-Heir sync validation"
+      "when": "validating synapses during meditation or deep architecture validation",
+      "yields": "Health check commands, 6-phase cognitive QA, Master-Heir sync validation"
     },
     {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
@@ -94,6 +81,5 @@
     "skill reflection",
     "growth review"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

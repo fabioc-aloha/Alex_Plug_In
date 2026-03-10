@@ -1,5 +1,6 @@
 {
-  "skill": "ui-ux-design",
+  "schemaVersion": "2.0.0",
+  "skillId": "ui-ux-design",
   "connections": [
     {
       "target": ".github/skills/correax-brand/SKILL.md",
@@ -41,7 +42,6 @@
       "target": ".github/instructions/ui-ux-design.instructions.md",
       "type": "implements",
       "strength": 0.95,
-      "bidirectional": true,
       "reason": "Instruction file contains proven UI Audit Procedure (three-pass: compliance + content + cross-tab consistency) and design system enforcement rules"
     }
   ],
@@ -115,6 +115,5 @@
     "theme",
     "color scheme"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

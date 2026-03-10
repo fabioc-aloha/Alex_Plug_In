@@ -1,5 +1,6 @@
 {
-  "skill": "refactoring-patterns",
+  "schemaVersion": "2.0.0",
+  "skillId": "refactoring-patterns",
   "connections": [
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
@@ -24,6 +25,11 @@
       "type": "complements",
       "strength": 0.8,
       "reason": "Webview decomposition patterns (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization"
+    },
+    {
+      "target": ".github/skills/localization/SKILL.md",
+      "type": "related",
+      "strength": 0.75
     }
   ],
   "triggers": [
@@ -35,6 +41,5 @@
     "code smell",
     "clean up"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

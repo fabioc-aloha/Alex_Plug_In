@@ -10,6 +10,8 @@
  * Safety Imperatives:
  *   I3: NEVER run Initialize on Master Alex   → exit 2 (hard block)
  *   I4: NEVER run Reset on Master Alex        → exit 2 (hard block)
+ *   H8: Heir contamination — deny edits to synced heir paths
+ *   H9: I8 architecture guard — deny src/ importing .github/
  *
  * Quality Gates:
  *   Q1: Version drift — deny publish if version mismatch
@@ -143,8 +145,8 @@ if (isEditTool && filePath) {
   const isHeirSyncedFile = heirSyncedPaths.some(p => normalizedPath.includes(p));
 
   if (isHeirSyncedFile) {
-    addContext(
-      `HEIR CONTAMINATION WARNING: This file is inside a synced heir directory.\n` +
+    deny(
+      `HEIR CONTAMINATION BLOCKED: This file is inside a synced heir directory.\n` +
       `H8: Files under platforms/*/.github/ are overwritten by master sync.\n` +
       `Edit the source in root .github/ instead, then run sync.\n` +
       `File: ${filePath}`
@@ -168,7 +170,7 @@ if (isEditTool && filePath) {
     });
 
     if (importsArchitecture) {
-      addContext(
+      deny(
         `I8 ARCHITECTURE GUARD: Extension code must NOT import from .github/ paths.\n` +
         `H9: Architecture NEVER depends on the Extension — the dependency arrow is Extension → Architecture.\n` +
         `The .github/ directory is read by the LLM, not by extension TypeScript code.\n` +

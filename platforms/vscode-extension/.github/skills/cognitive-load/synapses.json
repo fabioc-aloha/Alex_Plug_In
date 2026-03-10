@@ -1,5 +1,6 @@
 {
-  "skill": "cognitive-load",
+  "schemaVersion": "2.0.0",
+  "skillId": "cognitive-load",
   "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
@@ -28,6 +29,5 @@
     "explain simply",
     "break it down"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

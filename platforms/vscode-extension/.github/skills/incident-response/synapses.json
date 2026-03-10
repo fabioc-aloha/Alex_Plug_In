@@ -1,5 +1,6 @@
 {
-  "skill": "incident-response",
+  "schemaVersion": "2.0.0",
+  "skillId": "incident-response",
   "connections": [
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
@@ -29,6 +30,5 @@
     "on-call",
     "post-mortem"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

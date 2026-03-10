@@ -1,12 +1,12 @@
 {
-  "skill": "lint-clean-markdown",
+  "schemaVersion": "2.0.0",
+  "skillId": "lint-clean-markdown",
   "description": "Write markdown that passes linting on first attempt",
   "connections": [
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "bidirectional": true,
       "context": "Mermaid diagrams must also follow lint rules"
     },
     {
@@ -36,6 +36,5 @@
     "MD009": "No trailing whitespace",
     "MD047": "Single newline at file end"
   },
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

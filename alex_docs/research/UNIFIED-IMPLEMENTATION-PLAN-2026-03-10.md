@@ -28,7 +28,7 @@ Items that address known vulnerabilities or safety gaps. Non-negotiable for a "T
 | 1.1 | **Update MCP SDK `^1.0.0` → `^1.27.1`** | API Review | DONE | Low | Bumped to ^1.27.1, resolves to 1.27.1. 0 vulnerabilities. Clean compile |
 | 1.2 | **Verify MCP server after SDK bump** | API Review | DONE | Medium | `npm run build` — clean compile, no API changes needed |
 | 1.3 | **Run `npm audit` on MCP package** | API Review | DONE | Low | 3 transitive HIGH vulns fixed via `npm audit fix`. 0 vulnerabilities |
-| 1.4 | **Autopilot safety audit (H1)** | 1.111 Eval | READY | 2d | Verify I1–I7 warnings are effective in non-interactive Autopilot mode. PreToolUse hook outputs warnings via stdout — confirm agent respects `permissionDecision: "deny"` under Autopilot. May need warn → block escalation |
+| 1.4 | **Autopilot safety audit (H1)** | 1.111 Eval | DONE | 2d | H8 (heir contamination) and H9 (I8 architecture) escalated from addContext/allow to deny() — Autopilot can't auto-approve these. I3/I4=exit 2 (safe), Q1=deny (safe), Q2=advisory (OK). H21 UserPromptSubmit has no deny mechanism (API limitation, advisory only) |
 
 ---
 
@@ -80,14 +80,14 @@ Hooks that improve workflow efficiency. Good candidates for iterative implementa
 
 | # | Item | Source | Status | Effort | Description |
 |---|------|--------|--------|--------|-------------|
-| 5.1 | **Validator session start (H3)** | 1.111 Eval | READY | 0.5d | Load adversarial checklist + recent changes summary on Validator agent start |
-| 5.2 | **Researcher session start (H5)** | 1.111 Eval | READY | 0.5d | Load knowledge gaps + research trifecta context on Researcher agent start |
-| 5.3 | **Documentarian post-tool (H6)** | 1.111 Eval | READY | 1d | Track file changes for auto-CHANGELOG suggestions |
-| 5.4 | **Targeted test runner (H12)** | 1.111 Eval | READY | 1d | After `.ts` edits to files with `.test.ts` siblings, auto-run the affected test file |
-| 5.5 | **Auto-commit suggestion (H14)** | 1.111 Eval | READY | 0.5d | If >5 files modified and no commit in session, use `decision: "block"` on Stop to suggest commit |
-| 5.6 | **Decision journal (H18)** | 1.111 Eval | READY | 1d | On long sessions (>30 min), extract key decisions to `session-decisions.json` |
-| 5.7 | **Research continuity (H20)** | 1.111 Eval | READY | 0.5d | Save unanswered questions and partial findings on Researcher Stop |
-| 5.8 | **PreCompact state preservation (H22)** | 1.111 Eval | READY | 0.5d | Before context compaction, save active decisions and progress to prevent knowledge loss |
+| 5.1 | **Validator session start (H3)** | 1.111 Eval | DONE | 0.5d | Agent-scoped SessionStart hook: adversarial checklist + git log summary. validator-session-start.cjs |
+| 5.2 | **Researcher session start (H5)** | 1.111 Eval | DONE | 0.5d | Agent-scoped SessionStart hook: research docs index + research-first protocol. researcher-session-start.cjs |
+| 5.3 | **Documentarian post-tool (H6)** | 1.111 Eval | DONE | 1d | Agent-scoped PostToolUse hook: tracks doc/skill/agent edits, suggests CHANGELOG updates. documentarian-post-tool-use.cjs |
+| 5.4 | **Targeted test runner (H12)** | 1.111 Eval | DONE | 1d | Global PostToolUse hook: detects .test.ts companion files after .ts edits. targeted-test-runner.cjs |
+| 5.5 | **Auto-commit suggestion (H14)** | 1.111 Eval | DONE | 0.5d | Global Stop hook: warns when >5 uncommitted files at session end. auto-commit-suggest.cjs |
+| 5.6 | **Decision journal (H18)** | 1.111 Eval | DONE | 1d | Global Stop hook: prompts decision documentation on long sessions (>30 min or >50 tool calls). decision-journal.cjs |
+| 5.7 | **Research continuity (H20)** | 1.111 Eval | DONE | 0.5d | Agent-scoped Researcher Stop hook: checks for modified research files, prompts to save findings. researcher-stop.cjs |
+| 5.8 | **PreCompact state preservation (H22)** | 1.111 Eval | DONE | 0.5d | Global PreCompact hook: saves session state (uncommitted files, goals, tool counts) to session-compact-state.json. pre-compact.cjs |
 
 ---
 

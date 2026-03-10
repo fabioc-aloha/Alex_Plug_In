@@ -1523,6 +1523,26 @@ export function getSharedStyles(personaAccent: string): string {
 
       /* ── 7.14 Settings Toggles ── */
       .settings-toggles { margin-bottom: 8px; }
+      .action-btn.compact {
+          padding: 4px 8px;
+          font-size: 11px;
+          margin: 0 0 6px 0;
+          min-height: unset;
+          opacity: 0.8;
+      }
+      .action-btn.compact:hover { opacity: 1; }
+      .action-btn.compact .action-icon { font-size: 12px; }
+      .action-btn.compact .action-text { font-size: 11px; }
+      .settings-group-header {
+          font-size: 9px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: var(--vscode-descriptionForeground, #888);
+          padding: 6px 8px 2px;
+          border-top: 1px solid var(--vscode-widget-border, #303030);
+      }
+      .settings-group-header:first-child { border-top: none; }
       .setting-row {
           display: flex;
           align-items: center;

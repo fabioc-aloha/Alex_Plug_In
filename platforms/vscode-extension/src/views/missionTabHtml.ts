@@ -53,7 +53,6 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                   <span class="action-icon" aria-hidden="true">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
                   <span class="action-text">Initialize / Update</span>
               </button>
-              ${actionButton('setupEnvironment', '⚙️', 'Environment Setup', 'Configure VS Code settings')}
               ${actionButton('manageSecrets', '🔑', 'API Keys & Secrets', 'Manage tokens for Gamma, Replicate, OpenAI')}
               ${actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
               ${actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
@@ -111,12 +110,25 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
       ${(settingsToggles ?? []).length > 0 ? `
       <div class="section">
           <div class="section-title">Quick Settings</div>
+          <button class="action-btn compact" data-cmd="setupEnvironment" tabindex="0" title="Open full environment setup wizard">
+              <span class="action-icon" aria-hidden="true">⚙️</span>
+              <span class="action-text">Full Environment Setup…</span>
+          </button>
           <div class="settings-toggles">
-              ${(settingsToggles ?? []).map(s => `
+              ${(() => {
+                let lastGroup = '';
+                return (settingsToggles ?? []).map(s => {
+                  const groupHeader = s.group && s.group !== lastGroup
+                    ? `<div class="settings-group-header">${escapeHtml(s.group)}</div>`
+                    : '';
+                  if (s.group) lastGroup = s.group;
+                  return `${groupHeader}
               <div class="setting-row">
                   <span>${escapeHtml(s.label)}</span>
                   <div class="toggle-switch ${s.enabled ? 'on' : ''}" data-setting="${escapeHtml(s.key)}" tabindex="0" role="switch" aria-checked="${s.enabled}" aria-label="Toggle ${escapeHtml(s.label)}"></div>
-              </div>`).join('')}
+              </div>`;
+                }).join('');
+              })()}
           </div>
       </div>` : ''}
       

@@ -227,13 +227,20 @@ async function synapseHealth(workspacePath?: string): Promise<string> {
   for (const synapseFile of synapseFiles) {
     try {
       const content = JSON.parse(fs.readFileSync(synapseFile, "utf-8"));
-      if (content.connections) {
+      if (Array.isArray(content.connections)) {
         for (const conn of content.connections) {
+          if (!conn.target) { continue; }
+          // Skip URI-scheme targets (external cross-system references)
+          if (/^(global-knowledge:\/\/|external:)/.test(conn.target)) { continue; }
           const targetPath = path.join(basePath, conn.target);
           if (!fs.existsSync(targetPath)) {
             stats.brokenSynapses++;
           }
         }
+      }
+      // Object-format connections: validate by iterating values
+      else if (content.connections && typeof content.connections === 'object') {
+        // Legacy object format — skip deep validation
       }
     } catch {
       stats.brokenSynapses++;

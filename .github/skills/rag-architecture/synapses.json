@@ -1,11 +1,11 @@
 {
-  "skill": "rag-architecture",
+  "schemaVersion": "2.0.0",
+  "skillId": "rag-architecture",
   "connections": [
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
       "type": "complements",
-      "strength": 0.9,
-      "bidirectional": true
+      "strength": 0.9
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
@@ -36,6 +36,13 @@
       "type": "informs",
       "strength": 0.65,
       "note": "Embedding and generation model choices"
+    },
+    {
+      "target": ".github/skills/foundry-agent-platform/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "when": "Using File Search or Foundry IQ for knowledge grounding",
+      "yields": "RAG patterns, chunking strategies, retrieval optimization"
     }
   ],
   "activationBoost": [
@@ -62,6 +69,5 @@
     "reranking",
     "hybrid search"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

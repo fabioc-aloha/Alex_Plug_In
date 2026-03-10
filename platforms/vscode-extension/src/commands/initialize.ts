@@ -8,6 +8,7 @@ import { detectGlobalKnowledgeRepo, scaffoldGlobalKnowledgeRepo } from "../chat/
 import { detectAndUpdateProjectPersona, PERSONAS } from "../chat/personaDetection";
 import * as telemetry from "../shared/telemetry";
 import { migrateSecretsFromEnvironment } from "../services/secretsManager";
+import { ARCHITECTURE_ROOT_FILES, ARCHITECTURE_DIRECTORIES, ARCHITECTURE_EMPTY_FOLDERS, MANIFEST_EXTENSIONS } from "./upgrade";
 
 interface FileManifestEntry {
   type: "system" | "hybrid" | "user-created";
@@ -147,9 +148,10 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
     return;
   }
 
-  // Delete existing folders
+  // Delete existing folders and files
   const pathsToDelete = [
     path.join(rootPath, ".github", "copilot-instructions.md"),
+    path.join(rootPath, ".github", "hooks.json"),
     path.join(rootPath, ".github", "instructions"),
     path.join(rootPath, ".github", "prompts"),
     path.join(rootPath, ".github", "episodic"),
@@ -157,7 +159,7 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
     path.join(rootPath, ".github", "config"), // Includes alex-manifest.json
     path.join(rootPath, ".github", "agents"),
     path.join(rootPath, ".github", "skills"),
-    path.join(rootPath, ".github", "muscles"),
+    path.join(rootPath, ".github", "muscles"), // Includes muscles/hooks/
     path.join(rootPath, ".github", "assets"),
     path.join(rootPath, ".alex-manifest.json"), // Clean up legacy manifest location too
   ];
@@ -287,17 +289,11 @@ async function deployArchitectureFiles(
   overwrite: boolean,
 ): Promise<{ copiedCount: number; skippedCount: number }> {
   const sources = [
-    { src: path.join(extensionPath, ".github", "copilot-instructions.md"), dest: path.join(rootPath, ".github", "copilot-instructions.md") },
-    { src: path.join(extensionPath, ".github", "instructions"), dest: path.join(rootPath, ".github", "instructions") },
-    { src: path.join(extensionPath, ".github", "prompts"), dest: path.join(rootPath, ".github", "prompts") },
-    { src: path.join(extensionPath, ".github", "config"), dest: path.join(rootPath, ".github", "config") },
-    { src: path.join(extensionPath, ".github", "agents"), dest: path.join(rootPath, ".github", "agents") },
-    { src: path.join(extensionPath, ".github", "skills"), dest: path.join(rootPath, ".github", "skills") },
-    { src: path.join(extensionPath, ".github", "muscles"), dest: path.join(rootPath, ".github", "muscles") },
-    { src: path.join(extensionPath, ".github", "assets"), dest: path.join(rootPath, ".github", "assets") },
+    ...ARCHITECTURE_ROOT_FILES.map(f => ({ src: path.join(extensionPath, ".github", f), dest: path.join(rootPath, ".github", f) })),
+    ...ARCHITECTURE_DIRECTORIES.map(d => ({ src: path.join(extensionPath, ".github", d), dest: path.join(rootPath, ".github", d) })),
   ];
 
-  const emptyFolders = [path.join(rootPath, ".github", "episodic")];
+  const emptyFolders = ARCHITECTURE_EMPTY_FOLDERS.map(f => path.join(rootPath, ".github", f));
 
   // Test write permissions
   telemetry.log("command", "initialize_testing_permissions");
@@ -526,7 +522,9 @@ function getLegacyManifestPath(rootPath: string): string {
 }
 
 /**
- * Create initial manifest with checksums of all deployed files
+ * Create initial manifest with checksums of all deployed files.
+ * Uses recursive scan to capture .md, .json, and .cjs files at all depths —
+ * consistent with upgrade.ts createFreshManifest.
  */
 async function createInitialManifest(
   context: vscode.ExtensionContext,
@@ -557,46 +555,33 @@ async function createInitialManifest(
     files: {},
   };
 
-  // Directories to scan for manifest entries
-  const dirsToScan = [
-    {
-      dir: path.join(rootPath, ".github", "instructions"),
-      prefix: ".github/instructions",
-    },
-    {
-      dir: path.join(rootPath, ".github", "prompts"),
-      prefix: ".github/prompts",
-    },
-    // Note: domain-knowledge deprecated in v5.0 - DK files migrated to skills
-    { dir: path.join(rootPath, ".github", "agents"), prefix: ".github/agents" },
-    { dir: path.join(rootPath, ".github", "config"), prefix: ".github/config" },
-    { dir: path.join(rootPath, ".github", "muscles"), prefix: ".github/muscles" },
-    { dir: path.join(rootPath, ".github", "assets"), prefix: ".github/assets" },
-  ];
-
-  // Add copilot-instructions.md
-  const brainFile = path.join(rootPath, ".github", "copilot-instructions.md");
-  if (await fs.pathExists(brainFile)) {
-    const content = await fs.readFile(brainFile, "utf8");
-    manifest.files[".github/copilot-instructions.md"] = {
-      type: "system",
-      originalChecksum: calculateChecksum(content),
-    };
+  // Add root-level .github files (copilot-instructions.md, hooks.json)
+  const githubRoot = path.join(rootPath, ".github");
+  const rootFiles = ARCHITECTURE_ROOT_FILES;
+  for (const fileName of rootFiles) {
+    const filePath = path.join(githubRoot, fileName);
+    if (await fs.pathExists(filePath)) {
+      const content = await fs.readFile(filePath, "utf8");
+      manifest.files[`.github/${fileName}`] = {
+        type: "system",
+        originalChecksum: calculateChecksum(content),
+      };
+    }
   }
 
-  // Scan directories
-  for (const { dir, prefix } of dirsToScan) {
-    if (await fs.pathExists(dir)) {
-      const files = await fs.readdir(dir);
+  // Recursively scan all deployed directories for .md, .json, and .cjs files
+  const dirsToScan = ARCHITECTURE_DIRECTORIES;
+  for (const dir of dirsToScan) {
+    const dirPath = path.join(githubRoot, dir);
+    if (await fs.pathExists(dirPath)) {
+      const files = await collectDeployedFiles(dirPath);
       for (const file of files) {
-        if (file.endsWith(".md")) {
-          const filePath = path.join(dir, file);
-          const content = await fs.readFile(filePath, "utf8");
-          manifest.files[`${prefix}/${file}`] = {
-            type: "system",
-            originalChecksum: calculateChecksum(content),
-          };
-        }
+        const content = await fs.readFile(file, "utf8");
+        const relativePath = path.relative(rootPath, file).replace(/\\/g, "/");
+        manifest.files[relativePath] = {
+          type: "system",
+          originalChecksum: calculateChecksum(content),
+        };
       }
     }
   }
@@ -605,4 +590,32 @@ async function createInitialManifest(
   const manifestPath = getManifestPath(rootPath);
   await fs.ensureDir(path.dirname(manifestPath));
   await fs.writeJson(manifestPath, manifest, { spaces: 2 });
+}
+
+/**
+ * Recursively collect deployed files (.md, .json, .cjs) for manifest checksumming.
+ * NASA R1: Bounded recursion with maxDepth.
+ */
+const MAX_MANIFEST_WALK_DEPTH = 10;
+
+async function collectDeployedFiles(dir: string, depth: number = 0): Promise<string[]> {
+  if (depth >= MAX_MANIFEST_WALK_DEPTH) {
+    console.warn(`[NASA] Max manifest walk depth reached at: ${dir}`);
+    return [];
+  }
+
+  const files: string[] = [];
+  if (!await fs.pathExists(dir)) { return files; }
+
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...await collectDeployedFiles(fullPath, depth + 1));
+    } else if (MANIFEST_EXTENSIONS.some(ext => entry.name.endsWith(ext))) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
 }

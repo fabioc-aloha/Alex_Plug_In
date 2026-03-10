@@ -13,12 +13,6 @@
       "description": "Grant writing requires research expertise"
     },
     {
-      "target": ".github/skills/academic-research/SKILL.md",
-      "type": "Relates",
-      "strength": 0.9,
-      "description": "Both require clear academic writing"
-    },
-    {
       "target": ".github/skills/project-management/SKILL.md",
       "type": "Relates",
       "strength": 0.7,

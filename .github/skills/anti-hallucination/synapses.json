@@ -38,6 +38,13 @@
       "relationship": "Implements",
       "strength": 0.9,
       "description": "Empirical validation prevents fabricated claims"
+    },
+    {
+      "target": ".github/skills/awareness/SKILL.md",
+      "type": "complements",
+      "strength": 1,
+      "when": "Detecting or preventing hallucinations",
+      "yields": "Detection heuristics, prevention strategies"
     }
   ],
   "activationTriggers": [

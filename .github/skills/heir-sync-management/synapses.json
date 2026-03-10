@@ -1,12 +1,12 @@
 {
-  "skill": "heir-sync-management",
+  "schemaVersion": "2.0.0",
+  "skillId": "heir-sync-management",
   "version": "1.1.0",
   "connections": [
     {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "coordinates",
       "strength": 0.9,
-      "bidirectional": true,
       "note": "brain-qa-heir.ps1 synced via rename pattern; Phase 7 -Fix strips master-only connections before writing heir; Phase 1 detects rename cascade breaks"
     },
     {
@@ -26,6 +26,12 @@
       "type": "enables",
       "strength": 0.8,
       "note": "Sync must complete cleanly before release preflight can proceed"
+    },
+    {
+      "target": ".github/skills/architecture-health/SKILL.md",
+      "type": "informs",
+      "strength": 0.65,
+      "note": "Sync exclusion drift surfaces through architecture health checks"
     }
   ],
   "activationBoost": [
@@ -44,6 +50,5 @@
     "stale synapse",
     "rename skill"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

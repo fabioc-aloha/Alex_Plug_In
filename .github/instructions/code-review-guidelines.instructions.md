@@ -57,63 +57,15 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 ### Review Checklist
 
-#### Correctness
-- [ ] Does the code do what the PR claims?
-- [ ] Are edge cases handled?
-- [ ] Are error cases handled gracefully?
-- [ ] Does it work with existing functionality?
-
-#### Security
-- [ ] Is user input validated/sanitized?
-- [ ] Are secrets properly handled (not hardcoded)?
-- [ ] Are permissions checked appropriately?
-- [ ] Is sensitive data logged or exposed?
-
-#### Architecture
-- [ ] Does it follow existing patterns in codebase?
-- [ ] Is the right level of abstraction used?
-- [ ] Are dependencies appropriate?
-- [ ] Will this be easy to modify later?
-
-#### Performance
-- [ ] Any obvious performance issues?
-- [ ] Are there unnecessary loops or queries?
-- [ ] Is caching used appropriately?
-- [ ] Any blocking operations that should be async?
-
-#### Maintainability
-- [ ] Is the code self-documenting?
-- [ ] Are complex parts commented?
-- [ ] Are names descriptive and consistent?
-- [ ] Is there duplicated code that should be extracted?
-
-#### Testing
-- [ ] Are there tests for new functionality?
-- [ ] Do tests cover edge cases?
-- [ ] Are tests readable and maintainable?
-- [ ] Do existing tests still pass?
-
-#### Documentation
-- [ ] Is README updated if needed?
-- [ ] Are public APIs documented?
-- [ ] Is CHANGELOG updated for user-facing changes?
-- [ ] Does complex logic have explanatory comments?
+Use the comprehensive checklist from the [code-review SKILL.md](.github/skills/code-review/SKILL.md#review-checklist) covering Security, Logic, Quality, and Architecture dimensions. The skill also defines the 3-Pass Review methodology (Orientation → Logic → Polish).
 
 ---
 
 ## How to Give Feedback
 
-### Comment Types
+### Comment Prefixes
 
-Use prefixes to clarify intent:
-
-| Prefix | Meaning | Blocking? |
-|--------|---------|-----------|
-| `[blocking]` | Must fix before approval | Yes |
-| `[suggestion]` | Consider this improvement | No |
-| `[question]` | I don't understand, please explain | Maybe |
-| `[nit]` | Trivial style issue | No |
-| `[praise]` | This is great! | No |
+Use the comment prefix system defined in the [code-review SKILL.md](.github/skills/code-review/SKILL.md#comment-prefixes): `[blocking]`, `[suggestion]`, `[question]`, `[nit]`, `[praise]`.
 
 ### Examples
 

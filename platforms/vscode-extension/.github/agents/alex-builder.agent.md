@@ -5,6 +5,11 @@ model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent']
 user-invokable: true
 agents: ['Validator']
+hooks:
+  PostToolUse:
+    command: "node .github/muscles/hooks/builder-post-tool-use.cjs"
+    description: "Auto-compile reminder after TypeScript edits"
+    timeout: 2000
 handoffs:
   - label: 🔍 Request QA Review
     agent: Validator

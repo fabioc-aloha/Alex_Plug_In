@@ -1,7 +1,7 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "1.0",
-  "skill": "persona-detection",
+  "skillId": "persona-detection",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "connections": [
     {
@@ -32,7 +32,6 @@
       "target": ".github/skills/north-star/SKILL.md",
       "type": "coordinates-with",
       "strength": 0.8,
-      "bidirectional": true,
       "note": "North Star /northstar define sets Persona: field; detection reads it as P5"
     }
   ],

@@ -1,6 +1,19 @@
 {
-  "skill": "self-actualization",
+  "schemaVersion": "2.0.0",
+  "skillId": "self-actualization",
   "connections": [
+    {
+      "target": ".github/instructions/self-actualization.instructions.md",
+      "type": "implements",
+      "strength": 0.95,
+      "reason": "Trifecta sibling: procedural self-actualization protocol"
+    },
+    {
+      "target": ".github/prompts/selfactualize.prompt.md",
+      "type": "activates",
+      "strength": 0.95,
+      "reason": "Trifecta sibling: /selfactualize interactive workflow"
+    },
     {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "requires",
@@ -68,6 +81,5 @@
     "learning progress",
     "capability growth"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

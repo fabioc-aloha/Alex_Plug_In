@@ -1,18 +1,17 @@
 {
-  "skill": "pii-privacy-regulations",
+  "schemaVersion": "2.0.0",
+  "skillId": "pii-privacy-regulations",
   "connections": [
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",
       "type": "extends",
       "strength": 0.9,
-      "bidirectional": true,
       "reason": "Deep dive into regulatory compliance aspects"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "complements",
       "strength": 0.75,
-      "bidirectional": true,
       "reason": "Security enables privacy compliance"
     },
     {
@@ -63,6 +62,5 @@
     "DPO",
     "DPIA"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }

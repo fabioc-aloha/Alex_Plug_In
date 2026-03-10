@@ -1,5 +1,6 @@
 {
-  "skill": "airs-appropriate-reliance",
+  "schemaVersion": "2.0.0",
+  "skillId": "airs-appropriate-reliance",
   "connections": [
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
@@ -46,6 +47,5 @@
     "under-reliance",
     "behavioral intention"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "$schema": "../SYNAPSE-SCHEMA.json"
 }
