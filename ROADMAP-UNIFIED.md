@@ -47,18 +47,23 @@ Four platforms. Focused, not scattered.
 
 ---
 
-## 🚀 v6.4.0 — The Agent Hooks Release
+## ✅ v6.4.0 — The Agent Hooks Release (Shipped 2026-03-09)
 
-**Theme**: VS Code 1.111 Adoption — Agent-scoped hooks, Autopilot enablement, and platform settings alignment.
+**Theme**: VS Code 1.111 Adoption — Autopilot enablement, platform settings alignment, documentation.
 
 > Source: [VSCODE-1.111-RELEASE-EVALUATION](alex_docs/research/VSCODE-1.111-RELEASE-EVALUATION-2026-03-09.md)
 
+See [Appendix](#-appendix-completed-work) for completed items.
+
+---
+
+## 🚀 v6.4.5 — Agent Hook Design
+
+**Theme**: Agent-scoped hook implementation — the design work deferred from v6.4.0.
+
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| ~~1~~ | ~~**Enable `chat.useCustomAgentHooks`**~~ | ~~1h~~ | ✅ Done — enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
 | 2 | **Audit PreToolUse hooks under Autopilot** | 2d | Verify safety warnings (I1–I7, MASTER-ALEX-PROTECTED) are effective in non-interactive Autopilot mode |
-| ~~3~~ | ~~**Enable `chat.autopilot.enabled`**~~ | ~~1h~~ | ✅ Done — enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
-| ~~4~~ | ~~**Update copilot-instructions.md settings header**~~ | ~~1h~~ | ✅ Done — header updated to `(1.111+)`, settings documented |
 | 5 | **Design Validator agent-scoped hooks** | 2d | Read-only enforcement during QA — block code modifications in review mode. Add hooks frontmatter to `alex-validator.agent.md` |
 | 6 | **Design Builder agent-scoped hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop. Add hooks frontmatter to `alex-builder.agent.md` |
 
@@ -213,7 +218,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.1.8     | Doc Alignment Hotfix       | ✅ Shipped  |
 | v6.2.0     | On-Brand Partnership       | ✅ Shipped  |
 | v6.3.0     | Accessibility & Workshop  | ✅ Shipped  |
-| **v6.4.0** | **Agent Hooks Release**    | **🎯 Current** |
+| v6.4.0     | Agent Hooks Release        | ✅ Shipped  |
+| **v6.4.5** | **Agent Hook Design**      | **🎯 Next** |
 | v6.5.0     | The Trust Release          | Planned    |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -226,8 +232,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | **Architecture**           | 130 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
 | **Codebase**               | 95 TS files, 47K lines, 20 test files          |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
-| **Next Target**            | v6.4.0 — The Agent Hooks Release               |
-| **Open Items**             | 22 total (3 in v6.4.0, 10+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
+| **Next Target**            | v6.4.5 — Agent Hook Design                      |
+| **Open Items**             | 22 total (3 in v6.4.5, 10+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
 | **Updated**                | 2026-03-09                                     |
 
 ---

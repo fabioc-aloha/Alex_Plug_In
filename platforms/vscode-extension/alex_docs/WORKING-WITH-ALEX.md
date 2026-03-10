@@ -611,6 +611,7 @@ The best prompt engineers share these traits:
 - **Health Check**: `Alex: Health Dashboard` for system status
 - **Memory View**: `Alex: Memory Dashboard` for architecture visualization
 - **Agent Debug Panel**: `Developer: Open Agent Debug Panel` — real-time visibility into skill loading, instruction matching, hook execution, and tool calls. Use when a skill isn't activating or a hook isn't firing.
+- **Debug Events Snapshot**: Type `#debugEventsSnapshot` in chat to attach a snapshot of agent debug events as context. Shows loaded customizations, token consumption, and agent behavior. Useful for diagnosing why skills or instructions aren't loading.
 - **Report Issues**: `Alex: Report Issue / View Diagnostics`
 
 ---

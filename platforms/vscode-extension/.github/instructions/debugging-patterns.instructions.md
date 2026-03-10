@@ -49,6 +49,12 @@ Stack trace reading pattern:
 - Add a regression test if one didn't exist
 - Write a clear commit message: what was wrong, why, and what fixed it
 
+## VS Code Agent Debugging
+
+- Use `#debugEventsSnapshot` in chat to attach a snapshot of loaded customizations, token consumption, and agent behavior as context.
+- Use `Developer: Open Agent Debug Panel` for real-time skill loading, instruction matching, and hook execution visibility.
+- These tools complement brain-qa by showing runtime loading state vs. disk state.
+
 ## Agent Tooling Pitfall
 
 - Avoid large parallel file-creation bursts when generating many text-heavy artifacts in VS Code.
