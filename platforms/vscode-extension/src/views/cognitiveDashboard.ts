@@ -297,10 +297,10 @@ function getDashboardStyles(): string {
       --text-primary: var(--vscode-editor-foreground);
       --text-secondary: var(--vscode-descriptionForeground);
       --border-color: var(--vscode-panel-border);
-      --accent-green: #22c55e;
-      --accent-yellow: #eab308;
-      --accent-red: #ef4444;
-      --accent-blue: #3b82f6;
+      --accent-green: var(--vscode-charts-green, #22c55e);
+      --accent-yellow: var(--vscode-charts-yellow, #eab308);
+      --accent-red: var(--vscode-charts-red, #ef4444);
+      --accent-blue: var(--vscode-charts-blue, #3b82f6);
     }
 
     body {
@@ -445,7 +445,7 @@ function getDashboardStyles(): string {
     }
 
     .streak-badge {
-      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      background: linear-gradient(135deg, var(--vscode-charts-yellow, #f59e0b), var(--vscode-charts-red, #ef4444));
       color: white;
       padding: 4px 12px;
       border-radius: 20px;

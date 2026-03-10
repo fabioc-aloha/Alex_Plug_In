@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { logInfo } from '../../shared/logger';
 
 // Re-export types
 export type {
@@ -87,5 +88,5 @@ export function registerLanguageModelTools(context: vscode.ExtensionContext): vo
         vscode.lm.registerTool('alex_cognitive_state_update', new CognitiveStateUpdateTool())
     );
     
-    console.log('Alex Language Model Tools registered');
+    logInfo('Alex Language Model Tools registered');
 }

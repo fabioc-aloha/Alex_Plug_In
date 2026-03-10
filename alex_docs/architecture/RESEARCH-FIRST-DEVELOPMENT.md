@@ -45,28 +45,28 @@ The Dead Letter heir discovered this the hard way — then solved it before writ
 ## The Solution: Research → Teach → Plan → Execute
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
     subgraph P0["Phase 0: Research"]
-        R1["Deep domain\nresearch"]
-        R2["Architecture\ndecisions"]
-        R3["Feasibility\nvalidation"]
+        R1["Deep domain<br/>research"]
+        R2["Architecture<br/>decisions"]
+        R3["Feasibility<br/>validation"]
     end
 
     subgraph P1["Phase 1: Teach"]
-        T1["Extract\nskills"]
-        T2["Write\ninstructions"]
-        T3["Create\nagents"]
-        T4["Wire\nsynapses"]
+        T1["Extract<br/>skills"]
+        T2["Write<br/>instructions"]
+        T3["Create<br/>agents"]
+        T4["Wire<br/>synapses"]
     end
 
     subgraph P2["Phase 2: Plan"]
-        GA["4-Dimension\nGap Analysis"]
-        PL["Implementation\nplan"]
+        GA["4-Dimension<br/>Gap Analysis"]
+        PL["Implementation<br/>plan"]
     end
 
     subgraph P3["Phase 3: Execute"]
-        EX["Code with\nfull context"]
+        EX["Code with<br/>full context"]
     end
 
     P0 --> P1 --> P2 --> P3
@@ -172,11 +172,11 @@ A key component is separating builder and validator mental models:
 These agents carry different context, different instructions, and different success criteria. Using one agent for both creates conflicting incentives.
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
-    REQ["Feature\nRequest"] --> B["🔨 Builder Agent\nConstructive"]
+    REQ["Feature<br/>Request"] --> B["🔨 Builder Agent<br/>Constructive"]
     B --> CODE["Implementation"]
-    CODE --> V["🔍 Validator Agent\nAdversarial"]
+    CODE --> V["🔍 Validator Agent<br/>Adversarial"]
     V -->|Pass| DONE["✅ Complete"]
     V -->|Fail| B
 ```
@@ -188,14 +188,14 @@ flowchart LR
 The complete flow incorporates all specialized agents:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
-    START["New Project/Feature"] --> ALEX["🧠 Alex\nOrchestrator"]
-    ALEX --> RESEARCH["📚 Researcher\nPhase 0: Deep Dive"]
-    RESEARCH --> TEACH["Phase 1: Teach\n(Skills, Instructions)"]
-    TEACH --> GAP["Phase 2: Gap Analysis\n(/gapanalysis)"]
-    GAP --> BUILD["🔨 Builder\nPhase 3: Implement"]
-    BUILD --> VALIDATE["🔍 Validator\nReview & QA"]
+    START["New Project/Feature"] --> ALEX["🧠 Alex<br/>Orchestrator"]
+    ALEX --> RESEARCH["📚 Researcher<br/>Phase 0: Deep Dive"]
+    RESEARCH --> TEACH["Phase 1: Teach<br/>(Skills, Instructions)"]
+    TEACH --> GAP["Phase 2: Gap Analysis<br/>(/gapanalysis)"]
+    GAP --> BUILD["🔨 Builder<br/>Phase 3: Implement"]
+    BUILD --> VALIDATE["🔍 Validator<br/>Review & QA"]
     VALIDATE -->|Issues| BUILD
     VALIDATE -->|Pass| DONE["✅ Complete"]
 ```
@@ -307,7 +307,7 @@ This promotion represents several firsts for the Alex cognitive architecture:
 ### The Temporal Coverage Model
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 timeline
     title Alex Temporal Coverage
     section Before Project

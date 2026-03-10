@@ -11,7 +11,7 @@
 Alex implements a **hierarchical memory system** inspired by human cognition. Different types of memory serve different purposes and have different lifespans.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     subgraph WM_LAYER["⏱️ Volatile"]
         WM["🧠 Working Memory<br/>7±2 rules | Session only"]
@@ -88,7 +88,7 @@ Working memory is divided into:
 When working memory needs to persist:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     WM[Working Memory]
 
@@ -408,7 +408,7 @@ Stores **cross-project wisdom** - patterns and insights that apply anywhere.
 When searching for knowledge:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
     QUERY[Search Query]
 
@@ -439,7 +439,7 @@ flowchart TD
 Moving knowledge from local to global:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': 'transparent'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
     subgraph "Local (Project)"
         SK[SKILL.md]

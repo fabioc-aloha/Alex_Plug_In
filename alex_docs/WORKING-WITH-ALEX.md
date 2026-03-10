@@ -612,6 +612,7 @@ The best prompt engineers share these traits:
 - **Memory View**: `Alex: Memory Dashboard` for architecture visualization
 - **Agent Debug Panel**: `Developer: Open Agent Debug Panel` — real-time visibility into skill loading, instruction matching, hook execution, and tool calls. Use when a skill isn't activating or a hook isn't firing.
 - **Debug Events Snapshot**: Type `#debugEventsSnapshot` in chat to attach a snapshot of agent debug events as context. Shows loaded customizations, token consumption, and agent behavior. Useful for diagnosing why skills or instructions aren't loading.
+- **Fork Conversation**: Type `/fork` in chat to branch the current conversation. Useful for research sessions — explore alternative approaches without losing your original context. If the branch doesn't pan out, return to the original thread.
 - **Report Issues**: `Alex: Report Issue / View Diagnostics`
 
 ---

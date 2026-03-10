@@ -11,7 +11,7 @@
 This document captures the collaborative learning process of developing the **markdown-mermaid** skill. It demonstrates Alex's bootstrap learning methodology: starting with a problem, iterating through solutions, documenting patterns, and applying knowledge at scale.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     P[🔍 Problem<br/>Encountered] --> H[💡 Hypothesis<br/>Formed]
     H --> E[🧪 Experiment<br/>& Test]
@@ -48,7 +48,8 @@ Subgraph titles were being **truncated** in VS Code's Mermaid preview - text was
   'primaryColor': '#f6f8fa',      /* GitHub's gray-100 */
   'primaryTextColor': '#1f2328',   /* GitHub's gray-900 */
   'primaryBorderColor': '#d1d9e0', /* GitHub's gray-300 */
-  'lineColor': '#656d76'           /* GitHub's gray-500 */
+  'lineColor': '#656d76',          /* GitHub's gray-500 */
+  'edgeLabelBackground': '#ffffff'
 }}}%%
 ```
 

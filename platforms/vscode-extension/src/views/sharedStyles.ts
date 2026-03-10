@@ -1072,7 +1072,7 @@ export function getSharedStyles(personaAccent: string): string {
           position: relative;
       }
       .agent-live-dot::after {
-          position: absolute; font-size: 8px; line-height: 8px;
+          position: absolute; font-size: 9px; line-height: 9px;
           left: 50%; top: 50%; transform: translate(-50%, -50%);
       }
       .agent-live-dot.active { background: var(--vscode-testing-iconPassed); animation: pulse-dot 1.5s infinite; }

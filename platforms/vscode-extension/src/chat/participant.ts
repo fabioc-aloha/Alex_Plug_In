@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import { logInfo } from '../shared/logger';
 import { runDreamProtocol } from '../commands/dream';
 import { runSelfActualization } from '../commands/self-actualization';
 import { startSession, getCurrentSession, isSessionActive, endSession } from '../commands/session';
@@ -14,11 +15,10 @@ import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry
 // Cloud sync deprecated in v5.0.1 - Gist sync removed
 // import { syncWithCloud, pushToCloud, pullFromCloud, getCloudUrl, triggerPostModificationSync } from './cloudSync';
 import { GlobalKnowledgeCategory } from '../shared/constants';
-import { detectAndUpdateProjectPersona, PERSONAS, getAvatarForPersona } from './personaDetection';
+import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
 import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch, detectModelTier, getTierInfo } from './modelIntelligence';
-import { registerAvatarUpdater, ChatAvatarContext } from '../shared/chatAvatarBridge';
-import { resolveAvatar, getAvatarAssetRelativePath, detectCognitiveState } from './avatarMappings';
+import { detectCognitiveState } from './avatarMappings';
 import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 import { assertDefined } from '../shared/assertions';
 import { appendToEpisodicDraft } from '../services/episodicMemory';
@@ -145,7 +145,7 @@ async function autoSaveInsight(
         // Cloud sync deprecated - insights saved locally only
         // triggerPostModificationSync();
         
-        console.log(`[Unconscious] Auto-saved insight: ${title}`);
+        logInfo(`[Unconscious] Auto-saved insight: ${title}`);
     } catch (err) {
         console.warn('[Unconscious] Failed to auto-save insight:', err);
     }
@@ -354,8 +354,7 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
     const messageState = commandState ?? detectCognitiveState(request.prompt);
     
     if (messageState) {
-        updateChatAvatar({ cognitiveState: messageState });
-        // Also notify welcomeView so it stays in sync (fire-and-forget)
+        // Notify welcomeView so sidebar cognitive state stays in sync
         vscode.commands.executeCommand('alex.setCognitiveState', messageState);
     }
 
@@ -989,53 +988,8 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
 
 /**
  * Module-level reference to the chat participant.
- * v5.9.1: Dynamic avatar functionality enabled — updates based on cognitive state and persona.
  */
 let _alexParticipant: vscode.ChatParticipant | null = null;
-let _extensionUri: vscode.Uri | null = null;
-
-/**
- * Update the @alex chat participant icon based on context.
- * Uses resolveAvatar for consistent priority resolution:
- * agentMode > cognitiveState > persona > age > default
- * 
- * v5.9.1: Dynamic avatar feature enabled.
- */
-export function updateChatAvatar(context?: ChatAvatarContext): void {
-    if (!_alexParticipant || !_extensionUri) {
-        console.log('[Alex][Avatar] Participant not registered yet, skipping avatar update');
-        return;
-    }
-
-    // Build context for avatar resolution
-    const avatarContext = {
-        agentMode: context?.agentMode ?? null,
-        cognitiveState: context?.cognitiveState ?? null,
-        personaId: context?.personaId ?? null,
-        birthday: context?.birthday ?? null,
-    };
-
-    // Resolve the best avatar for current context
-    const result = resolveAvatar(avatarContext);
-    
-    // Resolve SVG rocket-icon path with PNG fallback
-    const svgRelPath = getAvatarAssetRelativePath(result, 'svg');
-    const pngRelPath = getAvatarAssetRelativePath(result, 'png');
-    const useSvg = svgRelPath.includes('rocket-icons');
-    const chosenRelPath = useSvg ? svgRelPath : pngRelPath;
-    
-    // Build full path to avatar image
-    const avatarPath = vscode.Uri.joinPath(
-        _extensionUri,
-        'assets',
-        ...chosenRelPath.split('/')
-    );
-
-    // Update the chat participant icon
-    _alexParticipant.iconPath = avatarPath;
-    
-    console.log(`[Alex][Avatar] Updated to ${result.filename} (source: ${result.source}${result.label ? `, ${result.label}` : ''})${useSvg ? ' [SVG]' : ''}`);
-}
 
 /**
  * Register the Alex chat participant with dynamic avatar support.
@@ -1044,23 +998,19 @@ export function updateChatAvatar(context?: ChatAvatarContext): void {
 export function registerChatParticipant(context: vscode.ExtensionContext): vscode.ChatParticipant {
     const alex = vscode.chat.createChatParticipant('alex.cognitive', alexChatHandler);
     
-    // Store references for dynamic avatar updates
     _alexParticipant = alex;
-    _extensionUri = context.extensionUri;
     
-    // Register avatar updater with the bridge
-    registerAvatarUpdater(updateChatAvatar);
-    
-    // Initial avatar — will be updated by welcomeView on persona detection
-    // Start with the default Alex rocket logo when no context is available
-    updateChatAvatar({});
+    // Set static default rocket icon (avatar system removed in v6.5.0)
+    alex.iconPath = vscode.Uri.joinPath(
+        context.extensionUri, 'assets', 'avatars', 'rocket-icons', 'default', 'default.svg'
+    );
     
     alex.followupProvider = alexFollowupProvider;
     
     // Handle feedback for telemetry + calibration correlation
     alex.onDidReceiveFeedback((feedback: vscode.ChatResultFeedback) => {
         const helpful = feedback.kind === vscode.ChatResultFeedbackKind.Helpful;
-        console.log('Alex received feedback:', helpful ? 'helpful' : 'unhelpful');
+        logInfo('Alex received feedback: ' + (helpful ? 'helpful' : 'unhelpful'));
 
         // v5.9.7: Correlate 👍/👎 with epistemic accuracy
         const meta = (feedback.result as IAlexChatResult).metadata;

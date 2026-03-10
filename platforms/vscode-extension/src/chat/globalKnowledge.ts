@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as os from 'os';
 import * as https from 'https';
 import * as lockfile from 'proper-lockfile';
+import { logInfo } from '../shared/logger';
 import {
     ALEX_GLOBAL_HOME,
     GLOBAL_KNOWLEDGE_PATHS,
@@ -210,7 +211,7 @@ async function getGitHubAuthToken(): Promise<{ token: string | null; method: 'vs
                 return { token: session.accessToken, method: 'vscode-sso' };
             }
         } catch (err) {
-            console.log('[Alex] VS Code GitHub auth not available:', err);
+            logInfo('[Alex] VS Code GitHub auth not available: ' + String(err));
         }
     }
     

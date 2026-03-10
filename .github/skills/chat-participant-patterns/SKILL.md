@@ -11,7 +11,7 @@ applyTo: "**/*participant*,**/*chat*,**/*copilot*,**/lm/**"
 
 ## ⚠️ Staleness Warning
 
-Chat APIs evolve with VS Code releases. **Last validated:** February 2026 (VS Code 1.109+)
+Chat APIs evolve with VS Code releases. **Last validated:** March 2026 (VS Code 1.111+)
 
 **Check:** [Chat API](https://code.visualstudio.com/api/extension-guides/ai/chat), [LM API](https://code.visualstudio.com/api/extension-guides/ai/language-model), [Tools API](https://code.visualstudio.com/api/extension-guides/ai/tools), [AI Extensibility Overview](https://code.visualstudio.com/api/extension-guides/ai/ai-extensibility-overview)
 

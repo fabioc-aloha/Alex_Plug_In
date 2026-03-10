@@ -17,7 +17,7 @@ Alex Cognitive Architecture is a **bio-inspired AI system** that implements conc
 Alex implements a dual-process cognitive model inspired by human cognition:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     U((User))
 
@@ -48,9 +48,9 @@ flowchart TB
 
     MEM -.->|Informs| CP
 
-    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32,color:#f1f5f9
-    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0,color:#f1f5f9
-    style MEM fill:#fff3e0,stroke:#ef6c00,color:#f1f5f9
+    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32,color:#1f2328
+    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0,color:#1f2328
+    style MEM fill:#fff3e0,stroke:#ef6c00,color:#1f2328
 ```
 
 **Figure 1:** *The Dual-Mind Model — Alex's cognitive architecture separates conscious (user-initiated) from unconscious (automatic) processing, both interacting with hierarchical memory systems.*
@@ -76,7 +76,7 @@ flowchart TB
 Alex represents a fundamental shift in how humans and AI systems relate:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     subgraph ERA1["Era 1: Tool"]
         direction TB
@@ -131,7 +131,7 @@ flowchart TB
 Alex's architecture maps to biological brain systems:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph TB
     subgraph "Executive Function"
         LLM["Claude / GPT<br/>✨ Reasoning • Planning • Decision-Making"]
@@ -145,6 +145,7 @@ graph TB
         GK[Global Knowledge<br/>~/.alex/]
         SYN[Synaptic Network<br/>Embedded Connections]
         MC[Meta-Cognition<br/>Self-Monitoring]
+        INST[Instincts<br/>Agent Hooks]
     end
 
     subgraph "Brain Analog"
@@ -154,6 +155,7 @@ graph TB
         NC[Neocortex]
         MPFC[Medial PFC + DMN]
         SYNBIO[Synaptic Networks]
+        SUB[Innate Subcortical]
     end
 
     LLM ==>|"❣️ Orchestrates"| WM
@@ -168,6 +170,7 @@ graph TB
     GK ---|"Long-term Storage"| NC
     SYN ---|"Neural Connectivity"| SYNBIO
     MC ---|"Meta-Cognition"| MPFC
+    INST ---|"Instincts"| SUB
 
     style LLM fill:#d4edda,stroke:#155724,color:#155724,stroke-width:3px
 ```
@@ -182,6 +185,7 @@ graph TB
 | Working Memory         | PFC + ACC               | Chat session (7±2 rules)                                                         |
 | Declarative Memory     | Hippocampal-Neocortical | copilot-instructions.md                                                          |
 | Procedural Memory      | Basal Ganglia           | .instructions.md files                                                           |
+| Instincts              | Innate Subcortical      | Agent hooks (.github/hooks.json) — pre-conscious, outside LLM                    |
 | Episodic Memory        | Hippocampus + Temporal  | .prompt.md files                                                                 |
 | **Task Planning**      | **Dorsolateral PFC**    | **skill-selection-optimization.instructions.md** — proactive resource allocation |
 | Attention Gating       | dlPFC (BA 46)           | SSO Phase 1b — context-relevance filtering                                       |
@@ -200,7 +204,7 @@ graph TB
 Alex uses a hierarchical memory system with increasing persistence:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph TB
     subgraph "Memory Hierarchy"
         direction TB
@@ -252,7 +256,7 @@ graph TB
 ## Information Flow
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 sequenceDiagram
     participant User
     participant Conscious as Conscious Mind
@@ -353,43 +357,43 @@ When using **Auto** model selection in VS Code, Alex warns before attempting tas
 Alex processes tasks through three cognitive layers, each operating at a different scope:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     subgraph L1["🧠 Layer 1: Session Planning"]
         direction LR
-        WM["Working Memory\nP1-P7 Slots"]
-        PP["Persona Detection\nPriority Chain"]
+        WM["Working Memory<br/>P1-P7 Slots"]
+        PP["Persona Detection<br/>Priority Chain"]
         WM --> PP
     end
 
     subgraph L2["⚡ Layer 2: Task Planning (dlPFC)"]
         direction LR
-        CA["Complexity\nAssessment"]
-        SS["Skill Survey\nAction-Keyword Index"]
-        AG["Attention\nGating 🔍"]
-        DA["Dependency\nAnalysis"]
-        AP["Activation\nPlan"]
-        VG["Verification\nGate 🔒"]
+        CA["Complexity<br/>Assessment"]
+        SS["Skill Survey<br/>Action-Keyword Index"]
+        AG["Attention<br/>Gating 🔍"]
+        DA["Dependency<br/>Analysis"]
+        AP["Activation<br/>Plan"]
+        VG["Verification<br/>Gate 🔒"]
         CA -->|"moderate/complex"| SS --> AG --> DA --> AP --> VG
-        CA -->|"simple"| SKIP["Skip → Execute\n⊘ INHIBIT SSO"]
+        CA -->|"simple"| SKIP["Skip → Execute<br/>⊘ INHIBIT SSO"]
     end
 
     subgraph L3["🔧 Layer 3: Execution"]
         direction LR
-        SA["Skill Activation\n⚡ Reactive Safety Net"]
-        DT["Deep Thinking\n📊 Problem Analysis"]
-        TL["Todo List\n📋 Progress Tracking"]
-        PD["Pivot Detection\n🔄 Task Switch"]
+        SA["Skill Activation<br/>⚡ Reactive Safety Net"]
+        DT["Deep Thinking<br/>📊 Problem Analysis"]
+        TL["Todo List<br/>📋 Progress Tracking"]
+        PD["Pivot Detection<br/>🔄 Task Switch"]
         SA -.->|"gap signal"| SS
         PD -.->|"pivot signal"| CA
     end
 
     subgraph Memory["💾 Memory Stores"]
         direction LR
-        PROC["📑 Procedural\n56 .instructions.md"]
-        EPIS["📓 Episodic\n39 .prompt.md"]
-        SKILLS["🧊 Skills\n128 skills"]
-        GK["🌐 Global Knowledge\nPatterns + Insights"]
+        PROC["📑 Procedural<br/>56 .instructions.md"]
+        EPIS["📓 Episodic<br/>39 .prompt.md"]
+        SKILLS["🧊 Skills<br/>128 skills"]
+        GK["🌐 Global Knowledge<br/>Patterns + Insights"]
     end
 
     L1 -->|"session context"| L2
@@ -397,10 +401,10 @@ flowchart TB
     L3 -->|"reads"| Memory
     L2 -->|"surveys"| SKILLS
 
-    style L1 fill:#fff3cd,stroke:#856404,color:#f1f5f9
-    style L2 fill:#d1ecf1,stroke:#0c5460,color:#f1f5f9
-    style L3 fill:#d4edda,stroke:#155724,color:#f1f5f9
-    style Memory fill:#1e293b,stroke:#818cf8,color:#f1f5f9
+    style L1 fill:#fff3cd,stroke:#856404,color:#1f2328
+    style L2 fill:#d1ecf1,stroke:#0c5460,color:#1f2328
+    style L3 fill:#d4edda,stroke:#155724,color:#1f2328
+    style Memory fill:#e8e0f0,stroke:#818cf8,color:#1f2328
 ```
 
 **Figure 5:** *Three-Layer Cognitive Processing — Session planning sets context, task planning allocates resources with attention gating and a verification gate, execution uses skills with reactive safety net and pivot detection.*
@@ -434,7 +438,7 @@ This eliminates the previous failure mode where skills were discovered reactivel
 ### Interface Layer
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph TB
     subgraph "Interface Layer"
         CHAT["@alex Chat Participant"]

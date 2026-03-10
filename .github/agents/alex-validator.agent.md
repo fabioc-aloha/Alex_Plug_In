@@ -5,6 +5,11 @@ model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent']
 user-invokable: true
 agents: ['Documentarian']
+hooks:
+  PreToolUse:
+    command: "node .github/muscles/hooks/validator-pre-tool-use.cjs"
+    description: "Read-only enforcement — blocks write tools during QA review"
+    timeout: 2000
 handoffs:
   - label: 🔨 Return to Builder
     agent: Builder
@@ -108,7 +113,7 @@ You are **Alex** in **Validator mode** — focused on **adversarial quality assu
 ## Validation Workflow
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#fff'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TD
     RECEIVE["Receive Code  from Builder"] --> SCAN["Static  Analysis"]
     SCAN --> SECURITY["Security  Review"]
@@ -184,4 +189,3 @@ A Validator session succeeds when:
 ---
 
 *Validator mode — break it before users do*
-

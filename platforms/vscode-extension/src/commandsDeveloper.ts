@@ -340,24 +340,6 @@ For each change:
 
   // Generate Diagram command
 
-  // Generate Persona Images command - Runs image generation scripts with secure token
-  const generatePersonaImagesDisposable = vscode.commands.registerCommand(
-    "alex.generatePersonaImages",
-    async () => {
-      const endLog = telemetry.logTimed("command", "generate_persona_images");
-      try {
-        const { showGenerationPicker } = await import("./commands/generatePersonaImages");
-        await showGenerationPicker();
-        endLog(true);
-      } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
-        vscode.window.showErrorMessage(
-          `Image generation failed: ${error instanceof Error ? error.message : String(error)}`
-        );
-      }
-    }
-  );
-
   // Generate Tests command
   const generateTestsDisposable = vscode.commands.registerCommand(
     "alex.generateTests",
@@ -582,7 +564,6 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     securityReviewDisposable,
     documentThisDisposable,
     simplifyThisDisposable,
-    generatePersonaImagesDisposable,
     generateTestsDisposable,
     skillReviewDisposable,
     viewTelemetryDisposable,

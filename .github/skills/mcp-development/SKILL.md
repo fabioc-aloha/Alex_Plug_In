@@ -8,10 +8,10 @@ user-invokable: false
 
 > **Domain**: AI Infrastructure
 > **Inheritance**: inheritable
-> **Version**: 1.1.0
-> **Last Updated**: 2026-02-19
+> **Version**: 1.2.0
+> **Last Updated**: 2026-03-10
 
-> ⚠️ **Staleness Watch**: MCP spec is actively versioned. Streamable HTTP replaced HTTP+SSE for remote servers (spec 2025-03-26). Check [MCP Changelog](https://modelcontextprotocol.io/changelog) when advising on transport selection.
+> ⚠️ **Staleness Watch**: MCP spec and SDK are actively versioned. **SDK moved from 1.0.0 → 1.27.1** with 3 security fixes: cross-client data leak in shared instances (GHSA-345p-7cg4-v4c7), ReDoS (v1.25.2), command injection prevention (v1.27.1). New SDK features: task types, elicitation streaming, OAuth discovery/caching, fetch transport, conformance testing, framework-agnostic server refactoring. Streamable HTTP replaced HTTP+SSE for remote servers (spec 2025-03-26). Check [MCP Changelog](https://modelcontextprotocol.io/changelog) and [SDK Releases](https://github.com/modelcontextprotocol/typescript-sdk/releases) when advising on transport or SDK usage.
 
 ---
 
@@ -100,15 +100,12 @@ Functions the AI can execute:
 // Tool definition
 {
   name: "search_issues",
-  description: "Search GitHub issues in a repository"
-user-invokable: false,
+  description: "Search GitHub issues in a repository",
   inputSchema: {
     type: "object",
     properties: {
-      repo: { type: "string", description: "owner/repo format"
-user-invokable: false },
-      query: { type: "string", description: "Search query"
-user-invokable: false },
+      repo: { type: "string", description: "owner/repo format" },
+      query: { type: "string", description: "Search query" },
       state: {
         type: "string",
         enum: ["open", "closed", "all"],
@@ -136,8 +133,7 @@ Data the AI can read:
 {
   uri: "github://repo/owner/repo-name/issues",
   name: "Repository Issues",
-  description: "All issues in the repository"
-user-invokable: false,
+  description: "All issues in the repository",
   mimeType: "application/json"
 }
 
@@ -145,8 +141,7 @@ user-invokable: false,
 {
   uriTemplate: "github://repo/{owner}/{repo}/issues/{id}",
   name: "GitHub Issue",
-  description: "A specific GitHub issue"
-user-invokable: false,
+  description: "A specific GitHub issue",
   mimeType: "application/json"
 }
 ```
@@ -163,19 +158,16 @@ Reusable prompt templates:
 ```typescript
 {
   name: "code_review",
-  description: "Generate a code review for changes"
-user-invokable: false,
+  description: "Generate a code review for changes",
   arguments: [
     {
       name: "diff",
-      description: "The code diff to review"
-user-invokable: false,
+      description: "The code diff to review",
       required: true
     },
     {
       name: "focus",
-      description: "Areas to focus on (security, performance, style)"
-user-invokable: false,
+      description: "Areas to focus on (security, performance, style)",
       required: false
     }
   ]
@@ -205,7 +197,6 @@ server.tool(
     location: {
       type: "string",
       description: "City name or coordinates"
-user-invokable: false
     }
   },
   async ({ location }) => {

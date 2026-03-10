@@ -13,6 +13,7 @@
 
 import * as crypto from 'crypto';
 import WebSocket from 'ws';
+import { logInfo } from '../shared/logger';
 import * as vscode from 'vscode';
 
 // Edge TTS constants (from edge-tts Python library)
@@ -503,7 +504,7 @@ async function synthesizeChunkWithRetry(
             // Don't retry on the last attempt
             if (attempt < MAX_RETRIES - 1) {
                 const backoffMs = calculateBackoff(attempt);
-                console.log(`TTS retry ${attempt + 1}/${MAX_RETRIES} after ${Math.round(backoffMs)}ms: ${lastError.message}`);
+                logInfo(`TTS retry ${attempt + 1}/${MAX_RETRIES} after ${Math.round(backoffMs)}ms: ${lastError.message}`);
                 await sleep(backoffMs);
             }
         }
@@ -548,7 +549,7 @@ export async function synthesize(
     const audioBuffers: Buffer[] = [];
     let totalBytesReceived = 0;
     
-    console.log(`TTS: Processing ${chunks.length} chunks for long document`);
+    logInfo(`TTS: Processing ${chunks.length} chunks for long document`);
     
     for (let i = 0; i < chunks.length; i++) {
         const chunkProgress: ChunkedProgressCallback = (progress) => {

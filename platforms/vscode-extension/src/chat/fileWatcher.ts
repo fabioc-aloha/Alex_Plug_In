@@ -22,6 +22,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { readFileSync } from 'fs';
 import { execSync } from 'child_process';
+import { logInfo } from '../shared/logger';
 
 // ============================================================================
 // Types
@@ -319,7 +320,7 @@ export function registerFileWatcher(
         onEditorChanged(vscode.window.activeTextEditor);
     }
 
-    console.log('[FileWatcher] Background file observer registered');
+    logInfo('[FileWatcher] Background file observer registered');
 
     return vscode.Disposable.from(...disposables);
 }

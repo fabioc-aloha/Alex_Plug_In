@@ -23,7 +23,7 @@
   "author": "Alex Cognitive Architecture",
   "license": "Apache-2.0",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0"
+    "@modelcontextprotocol/sdk": "^1.27.1"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

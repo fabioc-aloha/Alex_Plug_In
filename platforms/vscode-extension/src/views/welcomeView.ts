@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
+import { logInfo } from '../shared/logger';
 import {
   checkHealth,
   HealthCheckResult,
@@ -21,7 +22,6 @@ import { getCurrentSession, Session } from "../commands/session";
 import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { openChatPanel } from "../shared/utils";
 import { isOperationInProgress } from "../shared/operationLock";
-import { updateChatAvatar, ChatAvatarContext } from "../shared/chatAvatarBridge";
 import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
 import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
 import { agentActivity, AgentActivity } from "../services/agentActivity";
@@ -56,26 +56,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
-   * Build context for chat avatar updates.
-   * Combines current state with cached persona/profile info.
-   */
-  private _buildAvatarContext(): ChatAvatarContext {
-    return {
-      agentMode: this._agentMode,
-      cognitiveState: this._cognitiveState,
-      personaId: this._currentPersonaId,
-      birthday: this._userBirthday,
-    };
-  }
-
-  /**
    * Set the current cognitive state and refresh the view.
-   * v5.9.1: Also updates chat avatar to match cognitive state.
    * @param state - Cognitive state name (meditation, debugging, etc.) or null to clear
    */
   public setCognitiveState(state: string | null): void {
     this._cognitiveState = state;
-    updateChatAvatar(this._buildAvatarContext());
     this.refresh();
   }
 
@@ -93,7 +78,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    */
   public setAgentMode(agent: string | null): void {
     this._agentMode = agent;
-    updateChatAvatar(this._buildAvatarContext());
     this.refresh();
   }
 
@@ -224,13 +208,13 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           break;
         }
         case "openChat":
-          console.log('[Alex] Opening chat panel');
+          logInfo('[Alex] Opening chat panel');
           openChatPanel();
           break;
         case "launchRecommendedSkill": {
           const skill = message.skill || "code-quality";
           const skillName = message.skillName || skill;
-          console.log('[Alex] Launching recommended skill:', { skill, skillName });
+          logInfo('[Alex] Launching recommended skill: ' + JSON.stringify({ skill, skillName }));
           const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
           await trackRecommendationFeedback(skill, true);
           await openChatPanel(prompt);
@@ -238,27 +222,27 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
         case "meditate":
           // Set cognitive state to meditation and open chat panel
-          console.log('[Alex] Entering meditation state');
+          logInfo('[Alex] Entering meditation state');
           this.setCognitiveState('meditation');
           vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
           break;
         case "openSkill": {
           const skillId = message.skill || "";
           const skillDisplayName = message.skillName || skillId;
-          console.log('[Alex] Opening skill:', { skillId, skillDisplayName });
+          logInfo('[Alex] Opening skill: ' + JSON.stringify({ skillId, skillDisplayName }));
           const skillPrompt = `Explain how to use the ${skillDisplayName} skill. Read the skill file and summarize what it does, when to use it, and give me examples.`;
           await openChatPanel(skillPrompt);
           break;
         }
         case "tabSwitch":
           // Spike 1B: Track active tab (no-op beyond logging for now)
-          console.log(`[Alex][TAB SPIKE] Tab switched to: ${message.tabId}`);
+          logInfo(`[Alex][TAB SPIKE] Tab switched to: ${message.tabId}`);
           break;
 
         case "setPersonalityMode": {
           const mode = ['auto', 'precise', 'chatty'].includes(message.mode) ? message.mode : 'auto';
           await vscode.workspace.getConfiguration('alex').update('personalityMode', mode, vscode.ConfigurationTarget.Global);
-          console.log(`[Alex] Personality mode set to: ${mode}`);
+          logInfo(`[Alex] Personality mode set to: ${mode}`);
           break;
         }
 
@@ -270,7 +254,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             const [section, ...rest] = settingKey.split('.');
             const configKey = rest.join('.');
             await vscode.workspace.getConfiguration(section).update(configKey, !!message.value, vscode.ConfigurationTarget.Global);
-            console.log(`[Alex] Setting ${settingKey} toggled to: ${message.value}`);
+            logInfo(`[Alex] Setting ${settingKey} toggled to: ${message.value}`);
           }
           break;
         }
@@ -450,7 +434,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       // v5.9.1: Now uses full context including cognitive state and agent mode
       if (wsRoot) {
         try {
-          updateChatAvatar(this._buildAvatarContext());
           // Save persona to Active Context if detected
           if (personaResult?.persona) {
             await updatePersona(
@@ -458,10 +441,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
               personaResult.persona.name,
               personaResult.confidence
             );
-            console.log(`[Alex][WelcomeView] Persona detected and saved: ${personaResult.persona.name} (${Math.round(personaResult.confidence * 100)}%)`);
+            logInfo(`[Alex][WelcomeView] Persona detected and saved: ${personaResult.persona.name} (${Math.round(personaResult.confidence * 100)}%)`);
           }
-        } catch (avatarErr) {
-          console.error("[Alex][WelcomeView] updateChatAvatar/updatePersona failed (non-fatal):", avatarErr);
+        } catch (personaErr) {
+          console.error("[Alex][WelcomeView] updatePersona failed (non-fatal):", personaErr);
         }
       }
 
@@ -507,7 +490,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
 
 
-      console.log(`[Alex][WelcomeView] Tab data: agents=${agents.length}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
+      logInfo(`[Alex][WelcomeView] Tab data: agents=${agents.length}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
 
       this._view.webview.html = getWelcomeHtmlContent(
         this._view.webview,
@@ -866,9 +849,9 @@ export function registerWelcomeView(
     vscode.commands.registerCommand("alex.setCognitiveState", (state: string | null) => {
       provider.setCognitiveState(state);
       if (state) {
-        console.log(`[Alex] Cognitive state set to: ${state}`);
+        logInfo(`[Alex] Cognitive state set to: ${state}`);
       } else {
-        console.log('[Alex] Cognitive state cleared');
+        logInfo('[Alex] Cognitive state cleared');
       }
     }),
   );
@@ -878,9 +861,9 @@ export function registerWelcomeView(
     vscode.commands.registerCommand("alex.setAgentMode", (agent: string | null) => {
       provider.setAgentMode(agent);
       if (agent) {
-        console.log(`[Alex] Agent mode set to: ${agent}`);
+        logInfo(`[Alex] Agent mode set to: ${agent}`);
       } else {
-        console.log('[Alex] Agent mode cleared');
+        logInfo('[Alex] Agent mode cleared');
       }
     }),
   );

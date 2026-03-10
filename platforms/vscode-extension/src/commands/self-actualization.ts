@@ -673,9 +673,9 @@ function showReportInPanel(report: SelfActualizationReport): void {
         { enableScripts: false }
     );
 
-    const healthColor = report.synapseHealth.healthStatus === 'EXCELLENT' ? '#22c55e' :
-                       report.synapseHealth.healthStatus === 'GOOD' ? '#84cc16' :
-                       report.synapseHealth.healthStatus === 'NEEDS ATTENTION' ? '#eab308' : '#ef4444';
+    const healthColor = report.synapseHealth.healthStatus === 'EXCELLENT' ? 'var(--vscode-charts-green, #22c55e)' :
+                       report.synapseHealth.healthStatus === 'GOOD' ? 'var(--vscode-charts-green, #84cc16)' :
+                       report.synapseHealth.healthStatus === 'NEEDS ATTENTION' ? 'var(--vscode-charts-yellow, #eab308)' : 'var(--vscode-charts-red, #ef4444)';
 
     panel.webview.html = `<!DOCTYPE html>
 <html>
@@ -733,11 +733,11 @@ function showReportInPanel(report: SelfActualizationReport): void {
         <div class="metric-label">Evaluated</div>
     </div>
     <div class="metric">
-        <div class="metric-value" style="color: #22c55e">${report.globalKnowledgePromotion.promoted.length}</div>
+        <div class="metric-value" style="color: var(--vscode-charts-green, #22c55e)">${report.globalKnowledgePromotion.promoted.length}</div>
         <div class="metric-label">Promoted</div>
     </div>
     <div class="metric">
-        <div class="metric-value" style="color: #3b82f6">${report.globalKnowledgePromotion.updated.length}</div>
+        <div class="metric-value" style="color: var(--vscode-charts-blue, #3b82f6)">${report.globalKnowledgePromotion.updated.length}</div>
         <div class="metric-label">Updated</div>
     </div>
     <div class="metric">

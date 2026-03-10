@@ -493,16 +493,18 @@ Personas have custom avatar images in subdirectories:
 Used in Markdown documentation:
 ```javascript
 %%{init: {
-  'theme': 'dark',
+  'theme': 'base',
   'themeVariables': {
-    'background': '#0f172a',
-    'primaryColor': '#1e293b',
-    'primaryTextColor': '#f1f5f9',
-    'primaryBorderColor': '#818cf8',
-    'lineColor': '#475569',
-    'secondaryColor': '#1e293b',
-    'secondaryBorderColor': '#2dd4bf',
-    'tertiaryColor': '#1e293b',
+    'background': '#f8f9fa',
+    'primaryColor': '#dbe9f6',
+    'primaryTextColor': '#1f2328',
+    'primaryBorderColor': '#6ea8d9',
+    'lineColor': '#6b7280',
+    'secondaryColor': '#d1f5ef',
+    'secondaryBorderColor': '#5ab5a0',
+    'tertiaryColor': '#ede7f6',
+    'tertiaryBorderColor': '#b39ddb',
+    'edgeLabelBackground': '#ffffff',
     'fontFamily': 'Segoe UI, system-ui, sans-serif'
   }
 }}%%

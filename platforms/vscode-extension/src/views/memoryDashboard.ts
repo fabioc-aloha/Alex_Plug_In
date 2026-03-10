@@ -296,7 +296,7 @@ async function getWebviewContent(
 
     const logoUri = webview.asWebviewUri(vscode.Uri.joinPath(extUri, 'assets', 'logo.svg'));
     const isHealthy = health.status === HealthStatus.Healthy;
-    const healthColor = isHealthy ? '#4CAF50' : '#FF9800';
+    const healthColor = isHealthy ? 'var(--vscode-charts-green, #4CAF50)' : 'var(--vscode-charts-yellow, #FF9800)';
     
     // Get persona accent color (from shared constants)
     const persona = personaResult?.persona;
@@ -324,9 +324,9 @@ async function getWebviewContent(
             --text-secondary: var(--vscode-descriptionForeground);
             --border: var(--vscode-widget-border);
             --accent: var(--vscode-textLink-foreground);
-            --success: #4CAF50;
-            --warning: #FF9800;
-            --error: #F44336;
+            --success: var(--vscode-charts-green, #4CAF50);
+            --warning: var(--vscode-charts-yellow, #FF9800);
+            --error: var(--vscode-charts-red, #F44336);
             --premium: ${personaAccent};
             --persona-accent: ${personaAccent};
         }
@@ -370,7 +370,7 @@ async function getWebviewContent(
         }
         
         .premium-badge {
-            font-size: 10px;
+            font-size: 11px;
             background: var(--premium);
             color: white;
             padding: 2px 6px;
@@ -556,7 +556,7 @@ async function getWebviewContent(
         }
         
         .wm-type {
-            font-size: 10px;
+            font-size: 11px;
             padding: 2px 6px;
             border-radius: 4px;
             background: var(--bg-secondary);

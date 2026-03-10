@@ -1,10 +1,7 @@
 import * as assert from 'assert';
 import {
     PERSONAS,
-    getAvatarForPersona,
-    DEFAULT_AVATAR,
     getEasterEggOverride,
-    PERSONA_AVATAR_MAP,
 } from '../../chat/personaDefinitions';
 
 suite('Persona Detection Test Suite', () => {
@@ -32,22 +29,6 @@ suite('Persona Detection Test Suite', () => {
         test('should include developer persona', () => {
             const dev = PERSONAS.find(p => p.id === 'developer');
             assert.ok(dev, 'Developer persona should exist');
-        });
-    });
-
-    suite('getAvatarForPersona', () => {
-        test('should return avatar for known persona', () => {
-            const avatar = getAvatarForPersona('developer');
-            assert.ok(avatar !== DEFAULT_AVATAR, 'Should return specific avatar');
-        });
-
-        test('should return default for unknown persona', () => {
-            const avatar = getAvatarForPersona('nonexistent-persona');
-            assert.strictEqual(avatar, DEFAULT_AVATAR);
-        });
-
-        test('should return default for empty string', () => {
-            assert.strictEqual(getAvatarForPersona(''), DEFAULT_AVATAR);
         });
     });
 
@@ -97,18 +78,6 @@ suite('Persona Detection Test Suite', () => {
         test('should return null for no project name on regular day', () => {
             const egg = getEasterEggOverride(undefined, new Date(2026, 5, 15));
             assert.strictEqual(egg, null);
-        });
-    });
-
-    suite('PERSONA_AVATAR_MAP', () => {
-        test('should have matching entries for all PERSONAS', () => {
-            for (const persona of PERSONAS) {
-                const avatar = PERSONA_AVATAR_MAP[persona.id];
-                // Not all personas need avatar map entries — some use default
-                if (avatar) {
-                    assert.ok(avatar.length > 0, `Avatar for ${persona.id} should not be empty`);
-                }
-            }
         });
     });
 });

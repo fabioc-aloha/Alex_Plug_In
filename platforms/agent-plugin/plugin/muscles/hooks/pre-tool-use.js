@@ -3,13 +3,14 @@
  * Alex Agent Plugin — PreToolUse Hook
  * Safety gate before destructive tool operations.
  *
+ * Input:  JSON via stdin (tool_name, tool_input, session_id, cwd, hook_event_name)
+ * Output: Exit 2 + stderr for hard safety blocks, exit 0 otherwise
+ *
  * Checks:
- *   I1: NEVER modify Master Alex .github/ from external session
  *   I3: NEVER run Initialize on Master Alex
  *   I4: NEVER run Reset on Master Alex
  *
- * If MASTER-ALEX-PROTECTED.json is present, warns on dangerous operations.
- * Does NOT block — final authority rests with the user.
+ * Part of: v6.5.0 — API-Compliant Hooks (F1–F6)
  */
 
 'use strict';
@@ -17,31 +18,39 @@
 const fs = require('fs');
 const path = require('path');
 
-const workspaceRoot = process.env.VSCODE_WORKSPACE_FOLDER || path.resolve(__dirname, '../../..');
-const protectedMarker = path.join(workspaceRoot, '.github', 'config', 'MASTER-ALEX-PROTECTED.json');
+// ── Read stdin JSON ────────────────────────────────────────────────────────
 
-const toolName = process.env.VSCODE_TOOL_NAME || '';
-const toolInput = process.env.VSCODE_TOOL_INPUT || '';
+let input = {};
+try {
+  input = JSON.parse(fs.readFileSync(0, 'utf8'));
+} catch { /* No stdin or invalid JSON — use defaults */ }
+
+const toolName = input.tool_name || '';
+const toolInput = input.tool_input || {};
+const workspaceRoot = input.cwd || path.resolve(__dirname, '../../..');
+const protectedMarker = path.join(workspaceRoot, '.github', 'config', 'MASTER-ALEX-PROTECTED.json');
 
 // Only enforce on Master Alex workspaces
 if (!fs.existsSync(protectedMarker)) {
   process.exit(0);
 }
 
+const toolInputStr = JSON.stringify(toolInput);
 const dangerousTools = ['initialize_architecture', 'reset_architecture'];
 const dangerousKeywords = ['Initialize Architecture', 'Reset Architecture'];
 
 const isDangerousCommand =
   dangerousTools.some(t => toolName.toLowerCase().includes(t)) ||
-  dangerousKeywords.some(k => toolInput.includes(k));
+  dangerousKeywords.some(k => toolInputStr.includes(k));
 
 if (isDangerousCommand) {
-  console.warn(
-    `[Alex Plugin] SAFETY GATE: "${toolName}" is restricted on Master Alex.\n` +
-    `  I3: NEVER run Initialize on Master Alex\n` +
-    `  I4: NEVER run Reset on Master Alex\n` +
-    `  Use a test workspace instead.`
+  process.stderr.write(
+    `SAFETY GATE: "${toolName}" is BLOCKED on Master Alex.\n` +
+    `I3: NEVER run Initialize on Master Alex — overwrites living mind\n` +
+    `I4: NEVER run Reset on Master Alex — deletes architecture\n` +
+    `Use a test workspace instead. This cannot be overridden.`
   );
+  process.exit(2);
 }
 
 process.exit(0);

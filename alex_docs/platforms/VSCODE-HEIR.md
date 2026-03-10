@@ -44,7 +44,7 @@ The VS Code heir is Alex's most feature-rich deployment, leveraging GitHub Copil
 ### How VS Code Features Map to Alex
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph VSCode["VS Code Copilot Native Features"]
         CI[copilot-instructions.md] -->|maps to| DM[Declarative Memory]

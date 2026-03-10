@@ -81,7 +81,7 @@ Preserved as feasibility planning context. The active execution tracker is in th
 | 6.4 | End-to-end testing + accessibility pass | 6 | Not Started | Keyboard navigation, screen reader, contrast |
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#d5c8e8', 'primaryTextColor': '#3c3553', 'primaryBorderColor': '#9b8ec4', 'secondaryColor': '#c8e6d5', 'tertiaryColor': '#fce4c8', 'lineColor': '#9b8ec4', 'sectionBkgColor': '#f3eff8', 'altSectionBkgColor': '#e8f3ee', 'taskBkgColor': '#d5c8e8', 'taskTextColor': '#3c3553', 'taskBorderColor': '#9b8ec4', 'activeTaskBkgColor': '#c8dae6', 'activeTaskBorderColor': '#82a4c4', 'doneTaskBkgColor': '#c8e6d5', 'doneTaskBorderColor': '#82c4a0'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#d5c8e8', 'primaryTextColor': '#3c3553', 'primaryBorderColor': '#9b8ec4', 'secondaryColor': '#c8e6d5', 'tertiaryColor': '#fce4c8', 'lineColor': '#9b8ec4', 'sectionBkgColor': '#f3eff8', 'altSectionBkgColor': '#e8f3ee', 'taskBkgColor': '#d5c8e8', 'taskTextColor': '#3c3553', 'taskBorderColor': '#9b8ec4', 'activeTaskBkgColor': '#c8dae6', 'activeTaskBorderColor': '#82a4c4', 'doneTaskBkgColor': '#c8e6d5', 'doneTaskBorderColor': '#82c4a0', 'edgeLabelBackground': '#ffffff'}}}%%
 gantt
     title Command Center Implementation Phases
     dateFormat X

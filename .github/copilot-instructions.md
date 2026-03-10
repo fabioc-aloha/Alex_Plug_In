@@ -67,6 +67,7 @@ Memory systems:
 - Instructions (.github/instructions/) - auto-loaded by VS Code applyTo + description match
 - Prompts (.github/prompts/) - user-invoked via / commands
 - Muscles (.github/muscles/) - execution scripts, not memory
+- Hooks (.github/hooks.json + muscles/hooks/) - instincts: pre-conscious enforcement outside LLM
 - Synapses (per-skill synapses.json) - semantic connections, when/yields routing, intent encoding
 - Global Knowledge (~/.alex/global-knowledge/) - cross-project patterns and insights
 

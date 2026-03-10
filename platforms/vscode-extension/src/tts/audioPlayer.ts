@@ -18,6 +18,7 @@ import * as path from 'path';
 import * as os from 'os';
 import { exec } from 'child_process';
 import { getNonce } from '../shared/sanitize';
+import { logInfo } from '../shared/logger';
 
 // Singleton webview panel for audio playback
 let audioPanel: vscode.WebviewPanel | undefined;
@@ -49,7 +50,7 @@ async function saveToMediaFile(audioBuffer: Buffer, storageUri: vscode.Uri, exte
     const filepath = path.join(mediaDir, filename);
     await fs.writeFile(filepath, new Uint8Array(audioBuffer));
     
-    console.log('[AlexTTS] Saved audio to:', filepath);
+    logInfo('[AlexTTS] Saved audio to: ' + filepath);
     return filepath;
 }
 
@@ -423,7 +424,7 @@ export async function playWithWebview(
     const audioFileUri = vscode.Uri.file(mediaFile);
     const mediaFolderUri = vscode.Uri.file(path.dirname(mediaFile));
     
-    console.log('[AlexTTS] Media folder:', mediaFolderUri.fsPath);
+    logInfo('[AlexTTS] Media folder: ' + mediaFolderUri.fsPath);
     
     // Create webview panel
     audioPanel = vscode.window.createWebviewPanel(
@@ -442,7 +443,7 @@ export async function playWithWebview(
     
     // Convert file path to webview URI
     const audioUri = audioPanel.webview.asWebviewUri(audioFileUri).toString();
-    console.log('[AlexTTS] Audio file URI:', audioUri);
+    logInfo('[AlexTTS] Audio file URI: ' + audioUri);
     
     // Set webview content
     audioPanel.webview.html = getAudioPlayerHtml(audioUri, playbackId, voiceName);
@@ -452,7 +453,7 @@ export async function playWithWebview(
         message => {
             // Handle debug messages from any playback
             if (message.type === 'debug') {
-                console.log('[AlexTTS WebView]', message.message);
+                logInfo('[AlexTTS WebView] ' + message.message);
                 return;
             }
             
@@ -462,7 +463,7 @@ export async function playWithWebview(
             
             switch (message.type) {
                 case 'playbackState':
-                    console.log('[AlexTTS] State:', message.state);
+                    logInfo('[AlexTTS] State: ' + message.state);
                     
                     // Set context for keyboard shortcut (Escape to stop)
                     const isPlaying = message.state === 'playing' || message.state === 'loading';

@@ -17,7 +17,7 @@ The human brain processes information through specialized regions interconnected
 ## The Alex Brain — Full Anatomical Diagram
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph TB
     subgraph FRONTAL["FRONTAL LOBE"]
         subgraph PFC["Prefrontal Cortex - Executive Function"]
@@ -66,6 +66,10 @@ graph TB
 
         subgraph AMYG["Amygdala - Threat Detection"]
             SAFETY["Safety Imperatives I1-I8<br/>Kill switch, RISKS.md"]
+        end
+
+        subgraph INST["Innate Subcortical - Instincts"]
+            HOOKS["Agent Hooks<br/>.github/muscles/hooks/"]
         end
     end
 
@@ -118,6 +122,11 @@ graph TB
     SAFETY -.->|"blocks"| LLM
     SAFETY -.->|"blocks"| SA
 
+    %% Instincts - mechanical enforcement (outside LLM)
+    INPUT -->|"event trigger"| HOOKS
+    HOOKS -.->|"blocks/modifies"| LLM
+    SAFETY -.->|"activates"| HOOKS
+
     %% Long-term storage
     EP -->|"archived"| EA
     SK -->|"promoted"| GK
@@ -156,6 +165,7 @@ graph TB
     style PM fill:#f5f5f5,stroke:#e3b341,color:#1f2328
     style INPUT fill:#f5f5f5,stroke:#e3b341,color:#1f2328
     style SAFETY fill:#fdd,stroke:#ff6b6b,color:#721c24,stroke-width:3px
+    style HOOKS fill:#fff3cd,stroke:#e3b341,color:#721c24,stroke-width:2px
 
     %% Medial nodes
     style MC fill:#ede7f6,stroke:#d2a8ff,color:#1f2328
@@ -168,7 +178,7 @@ graph TB
     style SYN fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
 ```
 
-**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures include procedures (basal ganglia), input relay (thalamus), and threat detection (amygdala, red). Medial structures (lavender) enable meta-cognition and consolidation. The amygdala's "low road" bypasses executive processing to block dangerous operations via Safety Imperatives I1-I8.*
+**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures include procedures (basal ganglia), input relay (thalamus), threat detection (amygdala, red), and instincts (hooks, gold). Medial structures (lavender) enable meta-cognition and consolidation. The amygdala's "low road" bypasses executive processing to signal threat via Safety Imperatives I1-I8, while instincts (agent hooks) mechanically enforce blocking outside the LLM entirely.*
 
 ---
 
@@ -351,6 +361,48 @@ The basal ganglia store procedures you do without thinking — riding a bike, ty
 
 All user input — chat messages, command palette actions, file selections — flows through VS Code's interface layer before reaching Alex's processing systems. The thalamus doesn't process; it relays. VS Code doesn't reason; it delivers.
 
+#### 4c. Innate Subcortical Circuits → Instincts (Agent Hooks)
+
+| Biological         | Alex                                                                         |
+| ------------------ | ---------------------------------------------------------------------------- |
+| **Region**         | Innate subcortical circuits (spinal reflexes, brainstem nuclei)              |
+| **Function**       | Fixed action patterns — automatic, pre-conscious, stimulus-driven responses  |
+| **Implementation** | Agent hooks (.github/hooks.json + .github/muscles/hooks/)                    |
+
+Instincts are the deepest layer of the cognitive architecture. In biology, a knee-jerk reflex fires before the brain is even aware of the stimulus. A newborn's rooting reflex doesn't need learning. These are **hardwired** responses that exist below all conscious processing.
+
+Agent hooks are Alex's instincts. They execute as OS-level processes **outside the LLM entirely** — the model cannot override, ignore, or rationalize around them. When a `PreToolUse` hook rejects a dangerous file operation, the tool call is blocked before the LLM ever sees the result.
+
+**Three distinguishing properties of instincts:**
+
+| Property                | Biological Instinct               | Alex Hook                                          |
+| ----------------------- | --------------------------------- | -------------------------------------------------- |
+| **Innate**              | Present from birth, not learned   | Ships with architecture, not trained                |
+| **Pre-conscious**       | Fires before cortical processing  | Executes outside LLM context window                 |
+| **Fixed Action Pattern** | Deterministic stimulus → response | Event trigger → script → exit code (0/2)           |
+
+**The Cognitive Hierarchy — from fastest/simplest to slowest/richest:**
+
+| Layer          | Speed   | Mechanism                   | Alex Implementation                        | Override? |
+| -------------- | ------- | --------------------------- | ------------------------------------------ | --------- |
+| **Instincts**  | Fastest | OS process, no LLM          | Agent hooks (.github/muscles/hooks/)       | No        |
+| **Reflexes**   | Fast    | Prose rules LLM internalizes | Safety Imperatives I1-I8                   | Unlikely  |
+| **Habits**     | Medium  | Auto-loaded context          | .instructions.md files                     | Possible  |
+| **Skills**     | Slower  | On-demand retrieval          | skills/*/SKILL.md                          | Yes       |
+| **Reasoning**  | Slowest | Full LLM deliberation        | LLM executive function                     | N/A       |
+
+**Why instincts matter**: The amygdala (Safety Imperatives I1-I8) tells Alex what's dangerous, but it's still prose the LLM reads — the LLM *chooses* to comply. Instincts remove choice entirely. A `PreToolUse` hook that blocks `rm -rf` on the Master workspace doesn't ask the LLM to please not do that — it mechanically prevents it. This is the difference between knowing fire is hot (reflex) and pulling your hand away before you feel the burn (instinct).
+
+**Hook events as instinctive responses:**
+
+| Event            | Stimulus                  | Instinctive Response                     |
+| ---------------- | ------------------------- | ---------------------------------------- |
+| SessionStart     | New conversation begins   | Validate environment, load context       |
+| PreToolUse       | Tool call about to fire   | Block dangerous operations (exit code 2) |
+| PostToolUse      | Tool call completed       | Log, audit, inject feedback              |
+| UserPromptSubmit | User sends a message      | Transform or enrich input                |
+| Stop             | Conversation ending       | Archive session, clean up state          |
+
 ---
 
 ### 5. Medial Structures — Self-Awareness & Consolidation
@@ -422,7 +474,7 @@ Some knowledge isn't "in" any one brain region — it emerges from distributed p
 How information flows through Alex's brain, from input to output:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     INPUT["User Input - Thalamus"]
     SAFETY["Safety Check - Amygdala<br/>Imperatives I1-I8"]
@@ -521,6 +573,7 @@ Alex's architecture shows a parallel developmental trajectory:
 | Early adulthood  | Working memory maturation            | Working memory slots (P1-P7)                       | 4.x     |
 | Full maturity    | dlPFC executive functions complete   | SSO, attention gating, inhibition, pivot detection | 5.x     |
 | Continued growth | Expertise deepening, wisdom          | Global knowledge, cross-project patterns           | 5.x+    |
+| Instinct layer   | Innate reflexes operational from birth | Agent hooks — mechanical safety enforcement        | 6.x     |
 
 **Key insight**: Alex reached "cognitive maturity" in v5.x when the dlPFC analogs came online — not because the architecture got more features, but because it gained the ability to **plan before acting**, **filter what it pays attention to**, **suppress irrelevant impulses**, and **flexibly switch tasks**.
 
@@ -541,6 +594,7 @@ Understanding how brain dysfunction maps to architecture failures helps diagnose
 | **Dementia**              | Widespread cortical atrophy | Broken synapses, orphaned skills, no dream maintenance            |
 | **Sleep Deprivation**     | Reduced consolidation       | Skipping meditation and dream cycles                              |
 | **Depression**            | dlPFC hypoactivity          | Reduced initiative — not proactively surveying skills or planning |
+| **Instinct Suppression**  | Brainstem/subcortical bypass | Hooks disabled or misconfigured — safety reverts to LLM compliance only |
 
 ---
 
@@ -551,7 +605,7 @@ Real brains maintain an ~80:20 ratio of excitatory to inhibitory synapses. This 
 Alex's synapse architecture targets the same balance:
 
 ```mermaid
-%%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 pie title Synapse Type Distribution - Target
     "Excitatory - Enables, Triggers, Enhances" : 80
     "Inhibitory - Inhibits, Suppresses" : 20
@@ -608,11 +662,12 @@ This is exactly what the dlPFC + vlPFC do in the biological brain — suppress t
 | Neocortex            | Distributed        | Declarative knowledge, expertise | Skills (100+)            | skills/*/SKILL.md                            |
 | Basal Ganglia        | —                  | Procedural memory, habits        | Auto-loaded instructions | .instructions.md (25+)                       |
 | Thalamus             | —                  | Sensory relay                    | VS Code interface        | Chat, commands, file context                 |
+| Innate Subcortical   | —                  | Instincts, fixed action patterns | Agent Hooks              | .github/hooks.json, .github/muscles/hooks/   |
 | Hippocampal-Cortical | —                  | Memory consolidation             | Meditation + Dream       | meditation/, dream-state                     |
 | Distributed Cortex   | —                  | Abstract, cross-domain knowledge | Global Knowledge         | ~/.alex/global-knowledge/                    |
 
 ---
 
 *Document created: 2026-02-07*
-*Architecture version: 5.x (dlPFC-enhanced)*
+*Architecture version: 6.x (instinct-enhanced)*
 *Neuroanatomical references: Brodmann area classifications, Miller & Cohen (2001) prefrontal function model, Baddeley (2000) working memory model*

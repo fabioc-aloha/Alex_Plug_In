@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import { logInfo } from '../shared/logger';
 
 /**
  * Centralized secrets management for Alex extension
@@ -122,7 +123,7 @@ async function migrateEnvironmentVariables(): Promise<void> {
             try {
                 await secretStorage.store(config.key, envValue);
                 tokenCache.set(config.key, envValue);
-                console.log(`[Alex][SecretsManager] Migrated ${config.envVar} to secure storage`);
+                logInfo(`[Alex][SecretsManager] Migrated ${config.envVar} to secure storage`);
             } catch (error) {
                 console.error(`[Alex][SecretsManager] Failed to migrate ${config.envVar}:`, error);
             }
@@ -296,7 +297,7 @@ export async function exportSecretsToEnv(targetFolder?: string): Promise<{ expor
 
     try {
         fs.writeFileSync(envPath, newContent, 'utf8');
-        console.log(`[Alex][SecretsManager] Exported ${exportedCount} secrets to ${envPath}`);
+        logInfo(`[Alex][SecretsManager] Exported ${exportedCount} secrets to ${envPath}`);
         return { exported: exportedCount, filePath: envPath };
     } catch (error) {
         vscode.window.showErrorMessage(`Failed to write .env file: ${error}`);

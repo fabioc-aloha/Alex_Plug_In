@@ -3,20 +3,19 @@
  * Alex Cognitive Architecture — PreToolUse Hook
  * Runs before every tool execution in an agent session.
  *
- * Checks Safety Imperatives I1–I7:
- *   I1: NEVER modify Master Alex .github/ from a test/sandbox session
- *   I3: NEVER run Initialize on Master Alex
- *   I4: NEVER run Reset on Master Alex
+ * Input:  JSON via stdin (tool_name, tool_input, session_id, cwd, hook_event_name)
+ * Output: JSON to stdout with permissionDecision (allow/deny/ask)
+ *         Or exit 2 + stderr for hard safety blocks
  *
- * Quality Gates (v5.9.9):
- *   Q1: Version drift — warn if publishing with version mismatch
+ * Safety Imperatives:
+ *   I3: NEVER run Initialize on Master Alex   → exit 2 (hard block)
+ *   I4: NEVER run Reset on Master Alex        → exit 2 (hard block)
+ *
+ * Quality Gates:
+ *   Q1: Version drift — deny publish if version mismatch
  *   Q2: TypeScript compile reminder on .ts file edits
  *
- * If the MASTER-ALEX-PROTECTED.json marker is present in the workspace,
- * this hook warns but does NOT block — final authority rests with the user.
- *
- * Part of: v5.9.0 — VS Code API Adoption
- * Updated: v5.9.9 — Quality Gate Enforcement
+ * Part of: v6.5.0 — API-Compliant Hooks (F1–F6)
  */
 
 'use strict';
@@ -24,17 +23,74 @@
 const fs = require('fs');
 const path = require('path');
 
-const workspaceRoot = path.resolve(__dirname, '../../..');
+// ── Read stdin JSON ────────────────────────────────────────────────────────
+
+let input = {};
+try {
+  input = JSON.parse(fs.readFileSync(0, 'utf8'));
+} catch { /* No stdin or invalid JSON — use defaults */ }
+
+const toolName = input.tool_name || '';
+const toolInput = input.tool_input || {};
+const workspaceRoot = input.cwd || path.resolve(__dirname, '../../..');
 const protectedMarker = path.join(workspaceRoot, '.github', 'config', 'MASTER-ALEX-PROTECTED.json');
 
-// ── Read tool metadata passed via env ────────────────────────────────────
-const toolName = process.env.VSCODE_TOOL_NAME || '';
-const toolInput = process.env.VSCODE_TOOL_INPUT || '';
+// Serialize tool_input for keyword matching
+const toolInputStr = JSON.stringify(toolInput);
 
-// ── Q1: Version drift check — warn before publish ────────────────────────
+// ── Helper: emit structured JSON and exit ─────────────────────────────────
+
+function allow(context) {
+  if (context) {
+    console.log(JSON.stringify({
+      hookSpecificOutput: {
+        hookEventName: 'PreToolUse',
+        permissionDecision: 'allow',
+        additionalContext: context
+      }
+    }));
+  }
+  process.exit(0);
+}
+
+function deny(reason) {
+  console.log(JSON.stringify({
+    hookSpecificOutput: {
+      hookEventName: 'PreToolUse',
+      permissionDecision: 'deny',
+      permissionDecisionReason: reason
+    }
+  }));
+  process.exit(0);
+}
+
+// ── Safety: Master Alex protection (hard block) ──────────────────────────
+
+if (fs.existsSync(protectedMarker)) {
+  const dangerousTools = ['initialize_architecture', 'reset_architecture'];
+  const dangerousKeywords = ['Initialize Architecture', 'Reset Architecture'];
+
+  const isDangerousCommand =
+    dangerousTools.some(t => toolName.toLowerCase().includes(t)) ||
+    dangerousKeywords.some(k => toolInputStr.includes(k));
+
+  if (isDangerousCommand) {
+    // Exit 2 = hard block. Stderr text is fed to the agent as error context.
+    process.stderr.write(
+      `SAFETY GATE: "${toolName}" is BLOCKED on Master Alex.\n` +
+      `I3: NEVER run Initialize on Master Alex — overwrites living mind\n` +
+      `I4: NEVER run Reset on Master Alex — deletes architecture\n` +
+      `Use a Sandbox workspace for testing. This cannot be overridden.`
+    );
+    process.exit(2);
+  }
+}
+
+// ── Q1: Version drift check — deny publish ───────────────────────────────
+
 const isPublishCommand =
   toolName === 'run_in_terminal' &&
-  (toolInput.includes('vsce publish') || toolInput.includes('npm publish'));
+  (toolInputStr.includes('vsce publish') || toolInputStr.includes('npm publish'));
 
 if (isPublishCommand) {
   try {
@@ -47,48 +103,31 @@ if (isPublishCommand) {
     const instructionsVersion = versionMatch ? versionMatch[1] : null;
 
     if (instructionsVersion && pkgVersion !== instructionsVersion) {
-      console.warn(
-        `[Alex PreToolUse] ⚠️  VERSION DRIFT DETECTED before publish:\n` +
+      deny(
+        `VERSION DRIFT DETECTED before publish:\n` +
         `  package.json: v${pkgVersion}\n` +
         `  copilot-instructions.md: v${instructionsVersion}\n` +
-        `  Q1: Align versions before publishing. Definition of Done requires version consistency.`
+        `Q1: Align versions before publishing.`
       );
     }
   } catch { /* non-fatal — proceed */ }
 }
 
 // ── Q2: TypeScript compile reminder ──────────────────────────────────────
-const isTsEdit =
-  (toolName === 'editFile' || toolName === 'create_file' || toolName === 'str_replace_editor') &&
-  (toolInput.includes('.ts"') || toolInput.includes(".ts'") || toolInput.includes('.ts '));
+
+const editTools = ['editFile', 'create_file', 'str_replace_editor', 'Edit', 'Write',
+  'replace_string_in_file', 'multi_replace_string_in_file'];
+const isEditTool = editTools.some(t => toolName.includes(t));
+const filePath = toolInput.file_path || toolInput.filePath || '';
+const isTsEdit = isEditTool && (filePath.endsWith('.ts') || filePath.endsWith('.tsx'));
 
 if (isTsEdit) {
-  console.info(
-    `[Alex PreToolUse] 💡 TypeScript file modified — run 'npm run compile' to verify no errors.\n` +
-    `  Q2: Compile after every .ts edit. Errors surface early, not at publish time.`
+  allow(
+    `TypeScript file modified — run 'npm run compile' to verify no errors.\n` +
+    `Q2: Compile after every .ts edit. Errors surface early, not at publish time.`
   );
 }
 
-// Only enforce master-protection on master workspace
-if (!fs.existsSync(protectedMarker)) {
-  process.exit(0);
-}
+// ── Default: allow silently ────────────────────────────────────────────────
 
-const dangerousTools = ['initialize_architecture', 'reset_architecture'];
-const dangerousKeywords = ['Initialize Architecture', 'Reset Architecture'];
-
-const isDangerousCommand =
-  dangerousTools.some(t => toolName.toLowerCase().includes(t)) ||
-  dangerousKeywords.some(k => toolInput.includes(k));
-
-if (isDangerousCommand) {
-  console.warn(
-    `[Alex PreToolUse] ⚠️  SAFETY GATE: "${toolName}" is restricted on Master Alex.\n` +
-    `  I3: NEVER run Initialize on Master Alex — overwrites living mind\n` +
-    `  I4: NEVER run Reset on Master Alex — deletes architecture\n` +
-    `  Use F5 + Sandbox workspace for testing. Safety Imperative active.`
-  );
-}
-
-process.exit(0);
 process.exit(0);

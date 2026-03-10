@@ -4,43 +4,43 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "alex_docs/NORTH-STAR.md",
+    "github/agents/alex-builder.agent.md",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/DK-correax-brand.md",
     "alex_docs/WORKING-WITH-ALEX.md",
-    "alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md",
-    "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/chat/personaDefinitions.ts",
-    "platforms/vscode-extension/src/chat/personaDetection.ts",
-    "platforms/vscode-extension/src/views/docsTabHtml.ts"
+    "alex_docs/architecture/ALEX-IDENTITY.md",
+    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+    "alex_docs/architecture/CONSCIOUS-MIND.md",
+    "alex_docs/architecture/MEMORY-SYSTEMS.md",
+    "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md",
+    "alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.3.0.vsix",
-      "todoCount": 16,
-      "scannedAt": 1773106029017
-    },
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1773106029017
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "file": "alex_docs/research/SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md",
       "todoCount": 2,
-      "scannedAt": 1773106029017
+      "scannedAt": 1773157004465
     },
     {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "file": "alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1773106029017
+      "scannedAt": 1773157004465
     },
     {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "file": "platforms/agent-plugin/plugin/skills/mcp-development/SKILL.md",
       "todoCount": 1,
-      "scannedAt": 1773106029017
+      "scannedAt": 1773157004465
+    },
+    {
+      "file": "platforms/agent-plugin/plugin/agents/alex-builder.agent.md",
+      "todoCount": 1,
+      "scannedAt": 1773157004465
+    },
+    {
+      "file": "platforms/agent-plugin/plugin/instructions/adversarial-oversight.instructions.md",
+      "todoCount": 1,
+      "scannedAt": 1773157004465
     }
   ],
-  "lastUpdated": 1773106029017
+  "lastUpdated": 1773157004465
 }

@@ -2,5 +2,7 @@ node_modules/
 .env
 *.env.local
 appPackage/build/
+api/dist/
+env/.env.dev.user
 *.zip
 temp-check/

@@ -9,6 +9,10 @@ src/**
 .gitignore
 .env
 
+# Deprecated avatar system — only default rocket kept
+assets/avatars/**
+!assets/avatars/rocket-icons/default/default.svg
+
 # Build artifacts - exclude source maps and old out folder
 **/*.map
 out/**

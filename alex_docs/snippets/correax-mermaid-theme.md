@@ -10,16 +10,18 @@
 ````markdown
 ```mermaid
 %%{init: {
-  'theme': 'dark',
+  'theme': 'base',
   'themeVariables': {
-    'background': '#0f172a',
-    'primaryColor': '#1e293b',
-    'primaryTextColor': '#f1f5f9',
-    'primaryBorderColor': '#818cf8',
-    'lineColor': '#475569',
-    'secondaryColor': '#1e293b',
-    'secondaryBorderColor': '#2dd4bf',
-    'tertiaryColor': '#1e293b',
+    'background': '#f8f9fa',
+    'primaryColor': '#dbe9f6',
+    'primaryTextColor': '#1f2328',
+    'primaryBorderColor': '#6ea8d9',
+    'lineColor': '#6b7280',
+    'secondaryColor': '#d1f5ef',
+    'secondaryBorderColor': '#5ab5a0',
+    'tertiaryColor': '#ede7f6',
+    'tertiaryBorderColor': '#b39ddb',
+    'edgeLabelBackground': '#ffffff',
     'fontFamily': 'Segoe UI, system-ui, sans-serif'
   }
 }}%%
@@ -34,14 +36,16 @@ graph TD
 
 | Variable | Value | Role |
 |----------|-------|------|
-| `background` | `#0f172a` | Diagram canvas (CorreaX dark bg) |
-| `primaryColor` | `#1e293b` | Node fill |
-| `primaryTextColor` | `#f1f5f9` | Node label text |
-| `primaryBorderColor` | `#818cf8` | Node border (indigo) |
-| `lineColor` | `#475569` | Edge / connector color |
-| `secondaryColor` | `#1e293b` | Secondary node fill |
-| `secondaryBorderColor` | `#2dd4bf` | Secondary node border (teal) |
-| `tertiaryColor` | `#1e293b` | Tertiary node fill |
+| `background` | `#f8f9fa` | Diagram canvas (light pastel) |
+| `primaryColor` | `#dbe9f6` | Node fill (soft blue) |
+| `primaryTextColor` | `#1f2328` | Node label text (dark) |
+| `primaryBorderColor` | `#6ea8d9` | Node border (medium blue) |
+| `lineColor` | `#6b7280` | Edge / connector color (gray) |
+| `secondaryColor` | `#d1f5ef` | Secondary node fill (soft teal) |
+| `secondaryBorderColor` | `#5ab5a0` | Secondary node border (teal) |
+| `tertiaryColor` | `#ede7f6` | Tertiary node fill (soft purple) |
+| `tertiaryBorderColor` | `#b39ddb` | Tertiary node border (purple) |
+| `edgeLabelBackground` | `#ffffff` | Arrow label background (white) |
 | `fontFamily` | `Segoe UI, system-ui, sans-serif` | Diagram text font |
 
 ---
@@ -49,5 +53,5 @@ graph TD
 ## Compact One-Liner (for tight spaces)
 
 ```
-%%{init:{'theme':'dark','themeVariables':{'background':'#0f172a','primaryColor':'#1e293b','primaryTextColor':'#f1f5f9','primaryBorderColor':'#818cf8','lineColor':'#475569','secondaryColor':'#1e293b','secondaryBorderColor':'#2dd4bf','tertiaryColor':'#1e293b','fontFamily':'Segoe UI, system-ui, sans-serif'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 ```

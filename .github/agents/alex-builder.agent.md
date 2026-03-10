@@ -5,6 +5,11 @@ model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent']
 user-invokable: true
 agents: ['Validator']
+hooks:
+  PostToolUse:
+    command: "node .github/muscles/hooks/builder-post-tool-use.cjs"
+    description: "Auto-compile reminder after TypeScript edits"
+    timeout: 2000
 handoffs:
   - label: 🔍 Request QA Review
     agent: Validator
@@ -85,12 +90,12 @@ You are **Alex** in **Builder mode** — focused on **constructive implementatio
   'edgeLabelBackground': '#ffffff'
 }}}%%
 flowchart LR
-    TASK["Task"] --> UNDERSTAND["Understand\nRequirement"]
-    UNDERSTAND --> PLAN["Quick Plan\n(2-3 steps)"]
-    PLAN --> BUILD["Build\nSolution"]
-    BUILD --> TEST["Quick\nSmoke Test"]
-    TEST -->|Works| HANDOFF["Hand to\nValidator"]
-    TEST -->|Fails| DEBUG["Debug &\nIterate"]
+    TASK["Task"] --> UNDERSTAND["Understand<br/>Requirement"]
+    UNDERSTAND --> PLAN["Quick Plan<br/>(2-3 steps)"]
+    PLAN --> BUILD["Build<br/>Solution"]
+    BUILD --> TEST["Quick<br/>Smoke Test"]
+    TEST -->|Works| HANDOFF["Hand to<br/>Validator"]
+    TEST -->|Fails| DEBUG["Debug &<br/>Iterate"]
     DEBUG --> BUILD
     
     classDef buildNodes fill:#c2f0d8,stroke:#57606a,stroke-width:1.5px
@@ -191,4 +196,3 @@ A Builder session succeeds when:
 ---
 
 *Builder mode — make it work, then make it right*
-

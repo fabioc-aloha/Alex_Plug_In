@@ -11,7 +11,7 @@
 Alex exists as a **family**: one protected Master and multiple platform-specific heirs. This architecture ensures stability while enabling controlled evolution across the AI coding assistant landscape.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '14px', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TD
     M["🛡️ MASTER ALEX<br/><i>Source of Truth</i><br/>Root .github/ is canonical<br/>Protected by 5-layer kill switch"]
     M --> VS["💻 VS CODE HEIR<br/>✅ Production"]

@@ -179,7 +179,7 @@ async function getWebviewContent(
     nasaAssertBounded(health.totalSynapses, 0, 100000, 'health.totalSynapses');
 
     const isHealthy = health.status === HealthStatus.Healthy;
-    const healthColor = isHealthy ? '#4CAF50' : (health.brokenSynapses > 5 ? '#F44336' : '#FF9800');
+    const healthColor = isHealthy ? 'var(--vscode-charts-green, #4CAF50)' : (health.brokenSynapses > 5 ? 'var(--vscode-charts-red, #F44336)' : 'var(--vscode-charts-yellow, #FF9800)');
     
     // Get persona accent color (from shared constants)
     const persona = personaResult?.persona;
@@ -214,9 +214,9 @@ async function getWebviewContent(
             --text-secondary: var(--vscode-descriptionForeground);
             --border: var(--vscode-widget-border);
             --accent: var(--vscode-button-background);
-            --success: #4CAF50;
-            --warning: #FF9800;
-            --error: #F44336;
+            --success: var(--vscode-charts-green, #4CAF50);
+            --warning: var(--vscode-charts-yellow, #FF9800);
+            --error: var(--vscode-charts-red, #F44336);
             --premium: ${personaAccent};
             --persona-accent: ${personaAccent};
         }
@@ -594,7 +594,7 @@ async function getWebviewContent(
         
         .session-active {
             background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.05));
-            border-color: #2196F3;
+            border-color: var(--vscode-textLink-foreground, #2196F3);
         }
         
         .session-timer {
@@ -602,7 +602,7 @@ async function getWebviewContent(
             font-weight: 600;
             font-family: monospace;
             text-align: center;
-            color: #2196F3;
+            color: var(--vscode-textLink-foreground, #2196F3);
             margin: 16px 0;
         }
         

@@ -46,8 +46,6 @@ export interface Persona {
     skill: string;
     icon: string;
     accentColor: string;  // Hex color for badges/pills
-    /** Avatar image filename in assets/avatars/ (e.g., 'ALEX-CODING.png'). Auto-derived from PERSONA_AVATAR_MAP by buildPersona. */
-    avatarFile?: string;
     /** Weighted semantic signals that drive detection scoring */
     signals: PersonaSignal[];
     // --- Derived accessors (backward compat) ---
@@ -65,146 +63,6 @@ export interface LLMPersona {
     skill: string;
     confidence: number;
     reasons: string[];
-}
-
-// ============================================================================
-// AVATAR MAPPING
-// ============================================================================
-
-/**
- * Persona-to-avatar image mapping.
- * Each persona ID maps to an avatar path (no extension) relative to assets/avatars/.
- * v5.9.1: Now uses organized subdirectories:
- *   - personas/PERSONA-* for role-based avatars
- *   - ages/Alex-* for age-based fallback
- * Both .webp (primary) and .png (fallback) are shipped.
- * Fallback: logo (rocket brand mark).
- * 
- * NOTE: This map intentionally contains entries beyond the PERSONAS array.
- * Extra entries (sub-specialties, platform-specific, fun) serve LLM-detected
- * personas that return IDs not in the hardcoded signal list.
- */
-export const PERSONA_AVATAR_MAP: Record<string, string> = {
-    // Core developer personas
-    'developer':           'personas/PERSONA-DEVELOPER',
-    'fullstack-developer': 'personas/PERSONA-FULLSTACK-DEVELOPER',
-    'mobile-developer':    'personas/PERSONA-MOBILE-DEVELOPER',
-    'game-developer':      'personas/PERSONA-GAME-DEVELOPER',
-    'code-reviewer':       'personas/PERSONA-CODE-REVIEWER',
-    'debugger':            'personas/PERSONA-DEBUGGER',
-    
-    // Cloud & Infrastructure
-    'architect':           'personas/PERSONA-ARCHITECT',
-    'solutions-architect': 'personas/PERSONA-SOLUTIONS-ARCHITECT',
-    'cloud-architect':     'personas/PERSONA-CLOUD-ARCHITECT',
-    'devops':              'personas/PERSONA-DEVOPS',
-    'sre':                 'personas/PERSONA-SRE',
-    'dba':                 'personas/PERSONA-DBA',
-    'database-developer':  'personas/PERSONA-DATABASE-DEVELOPER',
-    
-    // Platform-specific
-    'microsoft-developer': 'personas/PERSONA-MICROSOFT-DEVELOPER',
-    'aws-developer':       'personas/PERSONA-AWS-DEVELOPER',
-    'fabric-developer':    'personas/PERSONA-FABRIC-DEVELOPER',
-    'openai-developer':    'personas/PERSONA-OPENAI-DEVELOPER',
-    'oracle-developer':    'personas/PERSONA-ORACLE-DEVELOPER',
-    
-    // AI & ML
-    'ai-engineer':         'personas/PERSONA-AI-ENGINEER',
-    'ml-ops':              'personas/PERSONA-ML-OPS',
-    'cognitive-scientist': 'personas/PERSONA-COGNITIVE-SCIENTIST',
-    
-    // Data
-    'data-engineer':       'personas/PERSONA-DATA-ENGINEER',
-    'bi-analyst':          'personas/PERSONA-BI-ANALYST',
-    
-    // Research & Academic
-    'academic':            'personas/PERSONA-ACADEMIC',
-    'researcher':          'personas/PERSONA-RESEARCHER',
-    'cx-researcher':       'personas/PERSONA-CX-RESEARCHER',
-    'ux-researcher':       'personas/PERSONA-UX-RESEARCHER',
-    
-    // Writing & Documentation
-    'technical-writer':    'personas/PERSONA-TECHNICAL-WRITER',
-    'documentarian':       'personas/PERSONA-DOCUMENTARIAN',
-    'content-creator':     'personas/PERSONA-CONTENT-CREATOR',
-    'copywriter':          'personas/PERSONA-COPYWRITER',
-    'fiction-writer':      'personas/PERSONA-FICTION-WRITER',
-    'grant-writer':        'personas/PERSONA-GRANT-WRITER',
-    'book-author':         'personas/PERSONA-BOOK-AUTHOR',
-    
-    // Business & Management
-    'business-analyst':    'personas/PERSONA-BUSINESS-ANALYST',
-    'product-manager':     'personas/PERSONA-PRODUCT-MANAGER',
-    'project-manager':     'personas/PERSONA-PROJECT-MANAGER',
-    'consultant':          'personas/PERSONA-CONSULTANT',
-    'marketer':            'personas/PERSONA-MARKETER',
-    'startup-founder':     'personas/PERSONA-STARTUP-FOUNDER',
-    'tech-lead':           'personas/PERSONA-TECH-LEAD',
-    
-    // Quality & Security
-    'qa-engineer':         'personas/PERSONA-QA-ENGINEER',
-    'security':            'personas/PERSONA-SECURITY',
-    'auditor':             'personas/PERSONA-AUDITOR',
-    'red-team':            'personas/PERSONA-RED-TEAM',
-    
-    // Teaching & Learning
-    'student':             'personas/PERSONA-STUDENT',
-    'bootcamp-grad':       'personas/PERSONA-BOOTCAMP-GRAD',
-    'teaching-assistant':  'personas/PERSONA-TEACHING-ASSISTANT',
-    'presenter':           'personas/PERSONA-PRESENTER',
-    
-    // Career
-    'job-seeker':          'personas/PERSONA-JOB-SEEKER',
-    'oss-contributor':     'personas/PERSONA-OSS-CONTRIBUTOR',
-    
-    // Special & Fun
-    'power-user':          'personas/PERSONA-POWER-USER',
-    'knowledge-worker':    'personas/PERSONA-KNOWLEDGE-WORKER',
-    'questionnaire-developer': 'personas/PERSONA-QUESTIONNAIRE-DEVELOPER',
-    'gcx-team':            'personas/PERSONA-GCX-TEAM',
-    
-    // LearnAlex workshop alignment (v6.3.0)
-    'cx-leader':           'personas/PERSONA-CX-LEADER',
-    'designer':            'personas/PERSONA-DESIGNER',
-    'engineer':            'personas/PERSONA-ENGINEER',
-    'executive':           'personas/PERSONA-EXECUTIVE',
-    'finance-professional':'personas/PERSONA-FINANCE-PROFESSIONAL',
-    'healthcare-professional':'personas/PERSONA-HEALTHCARE-PROFESSIONAL',
-    'hr-professional':     'personas/PERSONA-HR-PROFESSIONAL',
-    'journalist':          'personas/PERSONA-JOURNALIST',
-    'lawyer':              'personas/PERSONA-LAWYER',
-    'nonprofit-leader':    'personas/PERSONA-NONPROFIT-LEADER',
-    'podcaster':           'personas/PERSONA-PODCASTER',
-    'counselor':           'personas/PERSONA-COUNSELOR',
-    'real-estate':         'personas/PERSONA-REAL-ESTATE',
-    'sales-professional':  'personas/PERSONA-SALES-PROFESSIONAL',
-    'scientist':           'personas/PERSONA-SCIENTIST',
-    'standup-comic':       'personas/PERSONA-STANDUP-COMIC',
-    'teacher':             'personas/PERSONA-TEACHER',
-    'visual-storyteller':  'personas/PERSONA-VISUAL-STORYTELLER',
-    
-    // Fun/Easter egg personas
-    'hacker':              'personas/PERSONA-HACKER',
-    'night-owl':           'personas/PERSONA-NIGHT-OWL',
-    'coffee-coder':        'personas/PERSONA-COFFEE-CODER',
-    'rubber-duck':         'personas/PERSONA-RUBBER-DUCK',
-    'stack-overflow':      'personas/PERSONA-STACK-OVERFLOW',
-    'imposter':            'personas/PERSONA-IMPOSTER',
-    'mad-scientist':       'personas/PERSONA-MAD-SCIENTIST',
-    'fabio-special':       'personas/PERSONA-FABIO-SPECIAL',
-};
-
-/** Default avatar path (no extension) when no persona match - rocket logo */
-export const DEFAULT_AVATAR = 'logo';
-
-/**
- * Get avatar base name (no extension) for a persona ID.
- * Use with .webp/.png in assets/avatars/ for persona entries, or assets/ for the rocket-logo fallback.
- * @returns Base name (e.g., 'ALEX-CODING') or DEFAULT_AVATAR
- */
-export function getAvatarForPersona(personaId: string): string {
-    return PERSONA_AVATAR_MAP[personaId] || DEFAULT_AVATAR;
 }
 
 // ============================================================================
@@ -292,7 +150,7 @@ export function getEasterEggOverride(workspaceFolderName?: string, now: Date = n
  * Build a Persona object from signals, auto-deriving keywords/techStack/projectPatterns
  * for backward compatibility with code that reads those arrays.
  */
-function buildPersona(base: Omit<Persona, 'keywords' | 'techStack' | 'projectPatterns'> & { signals: PersonaSignal[]; avatarFile?: string }): Persona {
+function buildPersona(base: Omit<Persona, 'keywords' | 'techStack' | 'projectPatterns'> & { signals: PersonaSignal[] }): Persona {
     const keywords: string[] = [];
     const techStack: string[] = [];
     const projectPatterns: string[] = [];
@@ -303,9 +161,7 @@ function buildPersona(base: Omit<Persona, 'keywords' | 'techStack' | 'projectPat
         else if (s.category === 'technology') { techStack.push(...tokens); }
         else if (s.category === 'structure') { projectPatterns.push(...tokens); }
     }
-    // Auto-derive avatarFile from PERSONA_AVATAR_MAP if not explicitly provided
-    const avatarFile = base.avatarFile || getAvatarForPersona(base.id);
-    return { ...base, avatarFile, keywords, techStack, projectPatterns };
+    return { ...base, keywords, techStack, projectPatterns };
 }
 
 // ============================================================================

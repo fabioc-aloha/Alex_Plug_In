@@ -1,0 +1,50 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skill": "global-knowledge-sync",
+    "version": "1.0.0",
+    "inheritance": "inheritable",
+    "connections": [
+        {
+            "target": ".github/skills/global-knowledge/SKILL.md",
+            "type": "extends",
+            "strength": 0.95,
+            "reason": "Sync operations extend core GK search capability"
+        },
+        {
+            "target": ".github/skills/meditation/SKILL.md",
+            "type": "integrates",
+            "strength": 0.85,
+            "reason": "Dream protocol includes GK sync step"
+        },
+        {
+            "target": ".github/skills/bootstrap-learning/SKILL.md",
+            "type": "accelerates",
+            "strength": 0.7,
+            "reason": "GK provides prior knowledge for new learning"
+        },
+        {
+            "target": ".github/instructions/dream-state-automation.instructions.md",
+            "type": "modifies",
+            "strength": 0.75,
+            "reason": "Adds GK sync to dream checklist"
+        },
+        {
+            "target": ".github/skills/skill-development/SKILL.md",
+            "type": "enables",
+            "strength": 0.85,
+            "reason": "Skill pull-sync enables heir wishlist fulfillment"
+        }
+    ],
+    "when": [
+        "User wants to save an insight to global knowledge",
+        "User searches for cross-project patterns",
+        "Dream protocol reaches GK sync step",
+        "User wants to promote a local skill to GK"
+    ],
+    "yields": [
+        "Insights saved to global knowledge",
+        "Cross-project pattern matches",
+        "Skill sync status reports"
+    ]
+}

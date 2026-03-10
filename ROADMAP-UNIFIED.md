@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 9, 2026
+**Last Updated**: March 10, 2026
 
 ---
 
@@ -85,22 +85,135 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| 1 | **PNG asset compression** | 4h | 94 PNGs = 25.37 MB (93% of VSIX). Convert to WebP or resize — target <10 MB |
-| 2 | **console.log → OutputChannel** | 2h | Replace 36 console.log calls with proper VS Code logging |
-| 3 | **UI theme + font compliance** | 4.5h | Migrate 82 hardcoded hex colors to `--vscode-*` vars. Fix 2 sub-11px font sizes for WCAG AA |
-| 4 | **Heir version alignment** | 2h | Sync M365 + Plugin heirs from 6.2.0 → current |
-| 5 | **Audit Autopilot hook safety** | 2d | Verify I1–I7 + MASTER-ALEX-PROTECTED warnings are effective in non-interactive Autopilot mode |
-| 6 | **Validator agent hooks** | 2d | Read-only enforcement during QA — block code modifications in review mode |
-| 7 | **Builder agent hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop |
-| 8 | **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
+| 1 | ~~**Remove deprecated avatar system**~~ | ~~4h~~ | ✅ Done — deleted 122 avatar files (25.3 MB), gutted avatarMappings.ts (771→68), removed PERSONA_AVATAR_MAP + getAvatarForPersona + avatarFile from persona system. 241 tests passing. See [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) |
+| 2 | ~~**console.log → OutputChannel**~~ | ~~2h~~ | ✅ Done — created `src/shared/logger.ts` (centralized OutputChannel 'Alex'), migrated 31 console.log calls across 9 files to `logInfo()`, added `disposeLog()` to deactivate. 1 webview-internal console.log correctly preserved. 241 tests passing |
+| 3 | ~~**UI theme + font compliance**~~ | ~~4.5h~~ | ✅ Done — migrated 17 dashboard hex colors to `--vscode-charts-*` / `--vscode-textLink-foreground` with fallbacks (healthDashboard, memoryDashboard, cognitiveDashboard, self-actualization). Fixed 3 sub-11px fonts (2×10px→11px, 1×8px→9px). SVG art + persona brand colors + Mermaid themes correctly preserved as hex. 241 tests passing |
+| 4 | ~~**Heir version alignment**~~ | ~~2h~~ | ✅ Done — agent-plugin updated (v6.1.5/v6.1.7/v6.2.0→v6.4.6 across 4 files), M365 build artifacts gitignored, visual-memory trifecta removed from M365 |
+| 5 | **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
+
+### Hooks Evaluation (consolidated from #5–7, #9)
+
+**Status**: 4 global hooks shipped and **API-compliant** (F1–F6 applied 2026-03-10). 0 agent-scoped hooks implemented. Agent-scoped hooks require VS Code 1.111+ YAML frontmatter in `.agent.md` files.
+
+**Shipped global hooks** (`.github/hooks.json` → `.github/muscles/hooks/`):
+
+| Hook | Script | What It Does |
+| --- | --- | --- |
+| SessionStart | `session-start.js` | Reads stdin JSON for `cwd`/`session_id`. Loads user profile, active goals, meditation recency. Outputs structured JSON with `additionalContext` injected into agent context |
+| Stop | `stop.js` | Reads stdin JSON. Records session end + `session_id` to `session-metrics.json`. Keeps last 100. Exit 0 (never blocks stopping) |
+| PreToolUse | `pre-tool-use.js` | Reads `tool_name`/`tool_input` from stdin JSON. Safety gates (I3/I4): **exit 2 hard block** on Master Alex. Q1: JSON `deny` on version drift. Q2: JSON `allow` + compile reminder on `.ts` edits |
+| PostToolUse | `post-tool-use.js` | Reads `tool_name`/`tool_response` from stdin JSON. Logs to `session-tool-log.json` with `toolCounts`. Local-only. Keeps last 500. Silent exit 0 |
+
+Also shipped: agent-plugin PreToolUse, Claude Code bridge PreToolUse, Git pre-commit (YAML/synapse/contamination validation).
+
+#### ~~API Corrections Required~~ ✅ Applied 2026-03-10
+
+All 6 discrepancies fixed. Config format corrected (3-level nesting, seconds timeouts), scripts rewritten (stdin JSON input, structured JSON output, exit 2 for safety blocks), event renamed (SessionStop→Stop, session-stop.js→stop.js). Synced to vscode-extension + agent-plugin heirs. 241 tests passing.
+
+<details><summary>Original F1–F6 analysis (for reference)</summary>
+
+| # | Issue | Current (Wrong) | Correct | Effort |
+| --- | --- | --- | --- | :---: |
+| F1 | **Config format** | Object-per-event, no `type` field | 3-level nesting: event → matcher group array → `{type: "command", command, timeout}` handler array | 0.5d |
+| F2 | **Timeout units** | Milliseconds (5000, 10000, 2000) | **Seconds** (5, 10, 2). Our values would be interpreted as ~83 min / ~167 min / ~33 min | F1 |
+| F3 | **Input protocol** | `process.env.VSCODE_TOOL_NAME` / `VSCODE_TOOL_INPUT` | Structured **JSON via stdin** with `tool_name`, `tool_input` (object), `session_id`, `cwd`, `hook_event_name` | 1d |
+| F4 | **Output protocol** | Plain text via `console.log()` (informational only in verbose mode) | Structured **JSON via stdout** with `hookSpecificOutput`, `decision`, `additionalContext` for actual decision control | F3 |
+| F5 | **Event name** | `SessionStop` | **`Stop`** (VS Code) / `SessionEnd` (Claude Code). `Stop` can block agent from stopping | 0.5d |
+| F6 | **Exit codes** | Always `process.exit(0)` | Exit **2** = blocking error (blocks tool call / prevents stopping). Non-zero (not 2) = warning | F3 |
+
+</details>
+
+#### New API Capabilities Discovered
+
+| Capability | Description | Opportunity |
+| --- | --- | --- |
+| **`permissionDecision: "deny"`** | PreToolUse can return allow/deny/ask via `hookSpecificOutput` | H1 can truly block dangerous ops in Autopilot, not just warn |
+| **`updatedInput`** | PreToolUse can modify tool parameters before execution | Auto-fix paths, sanitize input, redirect operations |
+| **`async: true`** | Non-blocking hooks — runs in background, feeds results on next turn | H4 (compile) and H12 (test runner) should use this |
+| **Prompt hooks** (`type: "prompt"`) | Single-turn LLM evaluation instead of shell script | Stop hooks can ask "Are all tasks complete?" without scripts |
+| **Agent hooks** (`type: "agent"`) | Spawns subagent with Read/Grep/Glob for verification | TaskCompleted hooks can verify test passage via agent |
+| **`additionalContext` injection** | SessionStart, SubagentStart, UserPromptSubmit can inject context | Confirmed: H16 (SubagentStart context) is fully supported |
+| **`Stop` blocking** | `decision: "block"` prevents agent from finishing | "Run tests before you stop" pattern — enforces completion criteria |
+
+#### Platform Comparison: VS Code vs Claude Code Hooks
+
+| | VS Code 1.111 | Claude Code |
+| --- | --- | --- |
+| **Events** | 8 (SessionStart, UserPromptSubmit, PreToolUse, PostToolUse, PreCompact, SubagentStart, SubagentStop, Stop) | 19 (adds PermissionRequest, PostToolUseFailure, Notification, TeammateIdle, TaskCompleted, ConfigChange, WorktreeCreate/Remove, SessionEnd, InstructionsLoaded) |
+| **Hook types** | `command` only | `command`, `http`, `prompt`, `agent` |
+| **Matchers** | Parsed but ignored (all hooks fire on all occurrences) | Regex matchers filter by tool name, agent type, etc. |
+| **Config location** | `.github/hooks/*.json` folder, `chat.hookFilesLocations` setting | `.claude/settings.json`, `~/.claude/settings.json`, plugin `hooks/hooks.json` |
+| **Agent-scoped** | YAML frontmatter in `.agent.md` (Preview) | YAML frontmatter in skills + agents |
+
+**Planned agent-scoped hooks** (for evaluation):
+
+| # | Agent | Event | Effort | What It Would Do | Value |
+| --- | --- | --- | :---: | --- | --- |
+| H1 | **Autopilot safety audit** | PreToolUse | 2d | Verify I1–I7 warnings effective in non-interactive Autopilot mode. May need warn → block escalation | Safety-critical |
+| H2 | **Validator** | PreToolUse | 2d | Block/warn on code modification tools during QA review mode — enforce read-only analysis | High — prevents accidental edits during review |
+| H3 | **Validator** | SessionStart | 0.5d | Load adversarial checklist + recent changes summary | Medium — faster QA startup |
+| H4 | **Builder** | PostToolUse | 2d | Auto-compile after `.ts` edits for immediate error feedback | High — catch errors early |
+| H5 | **Researcher** | SessionStart | 0.5d | Load knowledge gaps + research trifecta context | Medium — better research continuity |
+| H6 | **Documentarian** | PostToolUse | 1d | Track file changes for auto-CHANGELOG suggestions | Medium — reduces manual changelog work |
+| H7 | **Dream** | SessionStart | 0.5d | Load synapse health baseline + recent tool usage patterns | Low — dream sessions are infrequent |
+
+**Additional hook candidates** (for evaluation):
+
+_Safety & Governance:_
+
+| # | Scope | Event | Effort | What It Would Do | Value |
+| --- | --- | --- | :---: | --- | --- |
+| H8 | **Global** | PreToolUse | 1d | Heir contamination guard — warn when editing `platforms/*/` synced files that get overwritten by master sync | High — prevents known pain point |
+| H9 | **Global** | PreToolUse | 1d | I8 architecture independence — warn when `src/` code imports `.github/` paths, catching architecture→extension dependency violations | High — enforces cardinal rule |
+| H10 | **Global** | PostToolUse | 1d | Secret leak scan — scan tool output for API key/token patterns before they propagate into chat context | Medium — defense-in-depth |
+| H11 | **Global** | PreToolUse | 0.5d | Runaway guard — track rapid consecutive destructive tool calls; warn after threshold (e.g., 5 deletes in 60s) | Low — edge case, H1 covers core risk |
+
+_Quality & Workflow:_
+
+| # | Scope | Event | Effort | What It Would Do | Value |
+| --- | --- | --- | :---: | --- | --- |
+| H12 | **Builder** | PostToolUse | 1d | Targeted test runner — after `.ts` edits to files with `.test.ts` siblings, auto-run the affected test file | High — more targeted than full `npm test` |
+| H13 | **Builder** | PreToolUse | 1d | Breaking change detector — warn when editing exported API surfaces (`extension.ts` activate, public types) | Medium — flags downstream impact |
+| H14 | **Global** | Stop | 0.5d | Auto-commit suggestion — if >5 files modified and no commit in session, suggest `git add` + commit with summary. Use `decision: "block"` to keep agent alive for the commit | Medium — practical DX improvement |
+| H15 | **Builder** | PostToolUse | 1d | Package size check — after file creation/edit under `src/` or assets, estimate VSIX size and warn if approaching 5 MB ceiling | Medium — prevents size regression |
+
+_Subagent Hooks (unused event types):_
+
+| # | Scope | Event | Effort | What It Would Do | Value |
+| --- | --- | --- | :---: | --- | --- |
+| H16 | **Global** | SubagentStart | 1d | Context injection — inject parent session context (active goal, persona, recent decisions) so subagents don't start cold | High — subagents currently lose context |
+| H17 | **Global** | SubagentStop | 0.5d | Result capture — log subagent invocation, duration, success for delegation pattern analysis during meditation | Low — analytics only |
+
+_Context & Memory:_
+
+| # | Scope | Event | Effort | What It Would Do | Value |
+| --- | --- | --- | :---: | --- | --- |
+| H18 | **Global** | Stop | 1d | Decision journal — on long sessions (>30 min), extract key decisions/trade-offs to `session-decisions.json` for next-session continuity | Medium — improves session handoff |
+| H19 | **Global** | PostToolUse | 0.5d | Synapse weight update — increment skill connection weights in real-time on heavy activation rather than waiting for meditation | Low — adds write contention, meditation handles this |
+| H20 | **Researcher** | Stop | 0.5d | Research continuity — save unanswered questions and partial findings so next research session picks up where it left off | Medium — better research flow |
+
+#### New Event Hooks (from API validation)
+
+| # | Scope | Event | Effort | What It Would Do | Value |
+| --- | --- | --- | :---: | --- | --- |
+| H21 | **Global** | UserPromptSubmit | 1d | Prompt safety gate — scan user prompts for accidental secret pasting, I1 violation patterns, or dangerous intent before agent processes. Can inject `additionalContext` into every prompt | High — defense-in-depth, secrets never reach agent context |
+| H22 | **Global** | PreCompact | 0.5d | Session state preservation — before context compaction, save active decisions, partial progress, and key findings to `session-compact-state.json` so compacted context retains critical info | Medium — prevents knowledge loss on long sessions |
+
+**Bugs** (from validation):
+- ~~`pre-tool-use.js` duplicate `process.exit(0)` at EOF~~ — Fixed (master + heir)
+- ~~`hooks.json` wrong config format~~ — Fixed: F1+F2 (3-level nesting, seconds timeouts)
+- ~~`session-stop.js` references wrong event name `SessionStop`~~ — Fixed: F5 (renamed to `stop.js`, event → `Stop`)
+- ~~All 4 scripts read env vars instead of stdin JSON~~ — Fixed: F3 (all scripts read stdin JSON)
+- ~~All 4 scripts output plain text instead of structured JSON~~ — Fixed: F4+F6 (structured JSON output, exit 2 for safety blocks)
+
+**Evaluation criteria**: F1–F6 fixes complete → H1 (safety) → H2+H4+H8+H9+H16+H21 (high value) → H3+H5+H6+H12+H14+H18+H20+H22 (medium) → H7+H10+H11+H13+H15+H17+H19 (low/defer).
 
 ### Stretch (ship if time allows)
 
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| 9 | **Remaining agent hooks** | 2d | Hooks for Researcher (load knowledge gaps), Documentarian (auto-CHANGELOG), Dream (synapse health baseline) |
-| 10 | **Document Autopilot workflows** | 1d | Recommend Autopilot for dream/meditation/routine maintenance. Safety implications in SECURITY.md |
-| 11 | **Update extension-patterns SKILL** | 1d | Add 1.111 capabilities (hooks, autopilot, debug events snapshot) to vscode-extension-patterns SKILL.md |
+| 6 | **Document Autopilot workflows** | 1d | Recommend Autopilot for dream/meditation/routine maintenance. Safety implications in SECURITY.md |
+| 7 | **Update extension-patterns SKILL** | 1d | Add 1.111 capabilities (hooks, autopilot, debug events snapshot) to vscode-extension-patterns SKILL.md |
 
 ### Blocked (VS Code API Dependencies)
 
@@ -128,12 +241,13 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 ### Definition of Done (v6.5.0)
 
-1. **All tests passing** — 268/268 (achieved in v6.4.5)
+1. **All tests passing** — 241/241 (4 dead avatar tests removed)
 2. **No npm audit vulnerabilities** — 0 (achieved in v6.4.5, Mocha 11 + overrides)
-3. **VSIX < 15 MB** — PNG compression brings size under control
+3. **VSIX < 5 MB** — deprecated avatar PNGs removed (25.3 MB eliminated), 433 files in VSIX
 4. **UI WCAG AA compliant** — no sub-11px fonts, theme-aware colors
-5. **Agent hooks shipped** — Autopilot, Validator, Builder hooks live
-6. **North Star Trust score ≥ 8/10** — up from 7.2 baseline
+5. **Shipped hooks API-compliant** — F1–F6 fixes applied: correct config format, stdin JSON protocol, structured output, proper exit codes, event name corrected. Synced to heirs
+6. **Agent hooks evaluated** — H1–H7 assessed, priority hooks (H1, H2, H4) implemented or deferred with rationale
+7. **North Star Trust score ≥ 8/10** — up from 7.2 baseline
 
 > **Principle**: Don't add features. Prove the existing ones deserve trust.
 
@@ -211,23 +325,24 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.2.0     | On-Brand Partnership       | ✅ Shipped  |
 | v6.3.0     | Accessibility & Workshop  | ✅ Shipped  |
 | v6.4.0     | Agent Hooks Release        | ✅ Shipped  |
-| **v6.4.5** | **Audit Hygiene**          | **🎯 Next** |
-| v6.5.0     | The Trust Release          | Planned    |
+| v6.4.5 | Audit Hygiene | ✅ Shipped |
+| v6.4.6 | Audit Hygiene (published) | ✅ Shipped |
+| **v6.5.0** | **The Trust Release** | **🎯 Next** |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
 ---
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.4.0                                          |
-| **Current Heirs**          | VS Code (6.4.0), M365 (6.2.0), Plugin (6.2.0) |
+| **Current Master Version** | 6.4.6                                          |
+| **Current Heirs**          | VS Code (6.4.6), M365 (6.2.0), Plugin (6.4.6) |
 | **Architecture**           | 130 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
-| **Codebase**               | 109 TS files, 44,751 lines, 20 test files (261 passing, 7 failing) |
-| **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) |
+| **Codebase**               | ~103 TS files, ~43k lines, 20 test files (241 passing, 0 failing) |
+| **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
-| **Next Target**            | v6.4.5 — Audit Hygiene (~8h)                     |
-| **Open Items**             | 27 total (6 in v6.4.5, 8+3 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
-| **Updated**                | 2026-03-09                                     |
+| **Next Target**            | v6.5.0 — The Trust Release                      |
+| **Open Items**             | 15 total (4+3 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
+| **Updated**                | 2026-03-10                                     |
 
 ---
 

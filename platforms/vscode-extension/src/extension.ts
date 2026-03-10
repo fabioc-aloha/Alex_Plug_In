@@ -62,6 +62,7 @@ import { getLanguageIdFromPath, openChatPanel } from "./shared/utils";
 import { requireCognitiveLevel, detectCognitiveLevel, invalidateCognitiveLevelCache } from "./shared/cognitiveTier";
 import { registerWelcomeView } from "./views/welcomeView";
 import { registerHealthDashboard } from "./views/healthDashboard";
+import { logInfo, disposeLog } from './shared/logger';
 
 import { CognitiveTaskProvider } from "./tasks/cognitiveTaskProvider";
 import { registerUXCommands } from "./ux/uxFeatures";
@@ -171,7 +172,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   // Initialize centralized secrets manager for API tokens
   try {
     await initSecretsManager(context);
-    console.log('[Alex] Secrets manager initialized');
+    logInfo('[Alex] Secrets manager initialized');
   } catch (err) {
     console.warn('[Alex] Failed to initialize secrets manager:', err);
   }
@@ -588,7 +589,7 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
       try {
         await vscode.commands.executeCommand("markdown.showPreview", guidePath);
       } catch (err) {
-        console.log('[Alex] Markdown preview failed, opening as text:', err);
+        logInfo('[Alex] Markdown preview failed, opening as text: ' + String(err));
         const doc = await vscode.workspace.openTextDocument(guidePath);
         await vscode.window.showTextDocument(doc);
       }
@@ -975,5 +976,6 @@ export function deactivate() {
   resetSessionState();
   // Clean up session timer
   disposeSession();
-  console.log("Alex Cognitive Architecture deactivated");
+  logInfo('Alex Cognitive Architecture deactivated');
+  disposeLog();
 }

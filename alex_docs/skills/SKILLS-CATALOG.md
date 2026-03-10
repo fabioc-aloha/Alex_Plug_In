@@ -279,7 +279,7 @@ Master Alex
 ## Memory Architecture Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph EXEC["🧠 Executive Function (LLM)"]
         LLM["Claude / GPT<br/>Reasoning • Planning • Decisions"]
@@ -386,7 +386,7 @@ Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
 ## Skill Network Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#e8f4f8', 'primaryBorderColor': '#0969da'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#e8f4f8', 'primaryBorderColor': '#0969da', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph Cognitive["🧠 Cognitive & Learning"]
         BL[bootstrap-learning]
@@ -739,7 +739,7 @@ flowchart LR
 ## Cognitive Lifecycle Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph Lifecycle["🔄 Cognitive Lifecycle"]
         WORK["💻 Work Session"]
@@ -783,7 +783,7 @@ flowchart LR
 ## Knowledge Flow Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph Flow["📚 Knowledge Consolidation Flow"]
         SESSION["💬 Session Context<br/><small>Chat conversation</small>"]
@@ -826,7 +826,7 @@ flowchart LR
 ## Brain Health Status Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Structural["🏗️ Structural Integrity (P1-P7)"]
         P1["P1 Synapse Targets"]
@@ -886,7 +886,7 @@ flowchart TB
 ## Inheritance Cascade Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Master["👑 Master Alex (116 total)"]
         M_INH["98 Inheritable"]
