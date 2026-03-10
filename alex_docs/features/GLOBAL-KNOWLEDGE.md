@@ -21,17 +21,13 @@ flowchart LR
 
     GK[("🧠 Global Knowledge<br/>~/.alex/")]
 
-    GIST[("☁️ GitHub Gist")]
-
     PROJECTS <-->|"Promote & Search"| GK
-    GK <-->|"Sync"| GIST
 
     style PROJECTS fill:#e8f5e9,stroke:#2e7d32
     style GK fill:#e3f2fd,stroke:#1565c0
-    style GIST fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-**Figure 1:** *Global Knowledge Architecture - Cross-project memory with cloud synchronization*
+**Figure 1:** *Global Knowledge Architecture - Cross-project memory*
 
 ---
 
@@ -49,8 +45,7 @@ flowchart LR
 │       ├── GI-react-hooks-gotcha-2026-01-24.md
 │       ├── GI-typescript-generics-tip-2026-01-20.md
 │       └── ...
-├── project-registry.json       # List of known projects
-└── sync-metadata.json          # Cloud sync state
+└── project-registry.json       # List of known projects
 ```
 
 ---
@@ -173,8 +168,6 @@ The `index.json` maintains metadata for all knowledge:
 {
   "version": "1.0.0",
   "lastUpdated": "2026-01-24T10:30:00.000Z",
-  "cloudGistId": "abc123def456...",
-  "cloudGistUrl": "https://gist.github.com/abc123...",
   "entries": [
     {
       "id": "GK-error-handling-patterns",
@@ -281,7 +274,7 @@ Shows:
 - Top tags
 - Recent entries
 - Known projects
-- Cloud sync status
+- Storage statistics
 
 ---
 
@@ -366,23 +359,6 @@ flowchart TD
 
 **Figure 4:** *Auto-Insight Detection - Confidence-based automatic knowledge capture*
 
-### Auto-Sync
-
-Changes are automatically synced to cloud:
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
-flowchart TD
-    CHANGE[Save/Promote]
-    SYNC[Background Sync<br/>Unconscious]
-    CLOUD[GitHub Gist]
-
-    CHANGE --> SYNC
-    SYNC --> CLOUD
-```
-
-**Figure 5:** *Auto-Sync Flow - Automatic cloud backup after knowledge modifications*
-
 ---
 
 ## Best Practices
@@ -426,20 +402,12 @@ flowchart TD
 3. Try broader search terms
 4. Check category/tag filters
 
-### Sync Issues
-
-1. Check GitHub authentication in VS Code
-2. View "Alex Unconscious Mind" output channel
-3. Try manual sync: `@alex /sync`
-4. Check internet connection
-
 ### Duplicate Entries
 
 The system uses unique IDs to prevent duplicates. If you see duplicates:
 
 1. Check `index.json` for duplicate IDs
 2. Remove duplicate files manually
-3. Run sync to update cloud
 
 ---
 
