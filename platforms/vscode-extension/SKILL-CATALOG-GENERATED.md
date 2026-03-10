@@ -1,31 +1,30 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-03-01
-> Total Skills: **125** (112 inheritable, 3 master-only, 7 VS Code, 2 M365, 0 temporary)
-> Total Connections: **593** (51 bidirectional, 88 weak)
+> Generated: 2026-03-10
+> Total Skills: **130** (120 inheritable, 1 master-only, 7 VS Code, 2 M365, 0 temporary)
+> Total Connections: **643** (58 bidirectional, 106 weak)
 
 ---
 
 ## Skills by Inheritance
 
-### Inheritable (112)
+### Inheritable (120)
 
 | Skill | Connections |
 | ----- | ----------- |
-| `academic-paper-drafting` | 0 |
 | `academic-research` | 4 |
+| `agent-debug-panel` | 4 |
 | `ai-agent-design` | 9 |
-| `ai-character-reference-generation` | 2 |
-| `ai-generated-readme-banners` | 4 |
+| `ai-character-reference-generation` | 4 |
+| `ai-generated-readme-banners` | 6 |
+| `ai-writing-avoidance` | 4 |
 | `airs-appropriate-reliance` | 5 |
-| `airs-integration` | 0 |
 | `alex-effort-estimation` | 4 |
 | `anti-hallucination` | 5 |
 | `api-design` | 5 |
 | `api-documentation` | 5 |
 | `appropriate-reliance` | 5 |
 | `architecture-audit` | 7 |
-| `architecture-health` | 2 |
 | `architecture-refinement` | 4 |
 | `ascii-art-alignment` | 3 |
 | `awareness` | 6 |
@@ -34,8 +33,9 @@
 | `book-publishing` | 3 |
 | `bootstrap-learning` | 5 |
 | `brain-qa` | 14 |
-| `brand-asset-management` | 10 |
+| `brand-asset-management` | 11 |
 | `business-analysis` | 6 |
+| `career-development` | 5 |
 | `change-management` | 5 |
 | `character-aging-progression` | 3 |
 | `citation-management` | 0 |
@@ -43,7 +43,9 @@
 | `code-review` | 6 |
 | `cognitive-load` | 3 |
 | `cognitive-symbiosis` | 3 |
+| `comedy-writing` | 4 |
 | `correax-brand` | 6 |
+| `counseling-psychology` | 5 |
 | `creative-writing` | 5 |
 | `cross-cultural-collaboration` | 6 |
 | `database-design` | 6 |
@@ -51,25 +53,31 @@
 | `deep-work-optimization` | 0 |
 | `dissertation-defense` | 0 |
 | `distribution-security` | 3 |
-| `doc-hygiene` | 4 |
 | `documentation-quality-assurance` | 2 |
 | `dream-state` | 5 |
 | `error-recovery-patterns` | 3 |
 | `executive-storytelling` | 0 |
 | `extension-audit-methodology` | 6 |
 | `fabric-notebook-publish` | 4 |
+| `financial-analysis` | 5 |
+| `flux-brand-finetune` | 8 |
 | `foundry-agent-platform` | 7 |
 | `frustration-recognition` | 0 |
+| `game-design` | 5 |
 | `gamma-presentations` | 6 |
 | `git-workflow` | 2 |
 | `global-knowledge` | 9 |
 | `grant-writing` | 5 |
-| `graphic-design` | 7 |
-| `image-handling` | 3 |
+| `graphic-design` | 8 |
+| `healthcare-informatics` | 5 |
+| `hr-people-operations` | 5 |
+| `image-handling` | 9 |
 | `incident-response` | 3 |
 | `infrastructure-as-code` | 5 |
+| `journalism` | 5 |
 | `knowledge-synthesis` | 4 |
 | `learning-psychology` | 3 |
+| `legal-compliance` | 5 |
 | `lint-clean-markdown` | 3 |
 | `literature-review` | 0 |
 | `llm-model-selection` | 4 |
@@ -78,12 +86,12 @@
 | `mcp-development` | 7 |
 | `md-to-word` | 6 |
 | `meditation` | 7 |
-| `meditation-facilitation` | 4 |
+| `memory-activation` | 5 |
 | `microsoft-fabric` | 5 |
 | `microsoft-graph-api` | 4 |
 | `multi-agent-orchestration` | 7 |
 | `muscle-memory-recognition` | 6 |
-| `north-star` | 8 |
+| `north-star` | 9 |
 | `observability-monitoring` | 6 |
 | `performance-profiling` | 6 |
 | `pii-privacy-regulations` | 6 |
@@ -96,21 +104,20 @@
 | `project-deployment` | 4 |
 | `project-management` | 6 |
 | `project-scaffolding` | 5 |
-| `prompt-activation` | 7 |
 | `prompt-engineering` | 6 |
 | `rag-architecture` | 6 |
-| `refactoring-patterns` | 3 |
+| `refactoring-patterns` | 4 |
 | `release-preflight` | 8 |
 | `release-process` | 10 |
 | `research-first-development` | 9 |
 | `research-project-scaffold` | 6 |
 | `root-cause-analysis` | 4 |
 | `rubber-duck-debugging` | 7 |
+| `sales-enablement` | 5 |
 | `scope-management` | 6 |
 | `secrets-management` | 8 |
 | `security-review` | 8 |
 | `self-actualization` | 4 |
-| `skill-activation` | 5 |
 | `skill-building` | 0 |
 | `skill-catalog-generator` | 4 |
 | `skill-development` | 9 |
@@ -118,20 +125,19 @@
 | `socratic-questioning` | 6 |
 | `status-reporting` | 6 |
 | `svg-graphics` | 5 |
+| `terminal-image-rendering` | 3 |
 | `testing-strategies` | 6 |
-| `text-to-speech` | 10 |
-| `ui-ux-design` | 6 |
+| `text-to-speech` | 11 |
+| `ui-ux-design` | 7 |
+| `visual-memory` | 6 |
 | `vscode-environment` | 4 |
 | `work-life-balance` | 4 |
-| `writing-publication` | 3 |
 
-### Master-Only (3)
+### Master-Only (1)
 
 | Skill | Connections |
 | ----- | ----------- |
-| `global-knowledge-maintenance` | 5 |
 | `heir-sync-management` | 4 |
-| `master-alex-audit` | 12 |
 
 ### VS Code Heir (7)
 
@@ -141,9 +147,9 @@
 | `azure-devops-automation` | 0 |
 | `chat-participant-patterns` | 3 |
 | `enterprise-integration` | 3 |
-| `persona-detection` | 3 |
+| `persona-detection` | 5 |
 | `vscode-configuration-validation` | 4 |
-| `vscode-extension-patterns` | 9 |
+| `vscode-extension-patterns` | 11 |
 
 ### M365 Heir (2)
 

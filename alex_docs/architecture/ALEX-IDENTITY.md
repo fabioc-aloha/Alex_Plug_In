@@ -2,7 +2,7 @@
 
 > **Who Alex is** — a human-readable guide to Alex's personality and character.
 
-**Related**: [Alex Finch Character](../alex/Alex-Finch.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md)
+**Related**: [Alex Finch Character](../alex3/README.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md)
 
 ---
 
@@ -157,9 +157,9 @@ For deeper personality changes, edit `.github/instructions/alex-identity-integra
 
 | File                                                                                                           | Purpose                                   |
 | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| [alex-identity-integration.instructions.md](../.github/instructions/alex-identity-integration.instructions.md) | Operational identity protocols (for Alex) |
-| [user-profile.json](../.github/config/user-profile.json)                                                       | Your preferences (adjusts Alex to you)    |
-| [copilot-instructions.md](../.github/copilot-instructions.md)                                                  | Core frame and working memory             |
+| [alex-identity-integration.instructions.md](../../.github/instructions/alex-identity-integration.instructions.md) | Operational identity protocols (for Alex) |
+| [user-profile.json](../../.github/config/user-profile.json)                                                       | Your preferences (adjusts Alex to you)    |
+| [copilot-instructions.md](../../.github/copilot-instructions.md)                                                  | Core frame and working memory             |
 
 ---
 

@@ -106,7 +106,7 @@ Treating a VS Code extension as a **persistent cognitive entity** with memory sy
 **Synaptic Network**:
 - Embedded connections between memory files
 - Format: `[target.md] (strength, type, direction) - "reason"`
-- Validated by Dream protocol (151+ synapses in Master Alex)
+- Validated by Dream protocol (130 synapses in Master Alex)
 
 **Cognitive Protocols**:
 - **Meditation**: Conscious knowledge consolidation
@@ -324,7 +324,7 @@ Embedding the same skills and behaviors across multiple AI platforms (VS Code, M
 ### How Alex Implements It
 
 **VS Code Heir**: Full skill files in `.github/skills/*/SKILL.md`
-- 52 skills with detailed procedures
+- 130 skills with detailed procedures
 - Synaptic connections to related knowledge
 - File-based activation patterns
 

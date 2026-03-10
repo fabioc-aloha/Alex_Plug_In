@@ -4,7 +4,6 @@
     "skillId": "game-design",
     "version": "1.0.0",
     "created": "2026-03-09",
-    "inheritance": "inheritable",
     "description": "Game mechanics, level design, player psychology, balancing, narrative design",
     "connections": [
         {

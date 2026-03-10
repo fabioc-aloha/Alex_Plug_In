@@ -2262,6 +2262,12 @@
     "dream": "tsx ../../.github/muscles/dream-cli.ts",
     "vscode:prepublish": "npm run sync-architecture && npm run clean && npm run quality-gate && npm run package"
   },
+  "overrides": {
+    "mocha": {
+      "serialize-javascript": "^7.0.4",
+      "diff": "^8.0.3"
+    }
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
     "@types/glob": "^8.1.0",
@@ -2275,7 +2281,7 @@
     "esbuild": "^0.27.2",
     "eslint": "^8.41.0",
     "glob": "^8.1.0",
-    "mocha": "^10.2.0",
+    "mocha": "^11.7.5",
     "sharp": "^0.34.5",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",

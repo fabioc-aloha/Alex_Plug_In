@@ -18,8 +18,6 @@
 | **Design**       | *"Design a banner"*, *"What's the best icon grid?"*              |
 | **Localization** | *"Set up i18n"*, *"Handle RTL languages"*, *"ICU pluralization"* |
 
-**See [PROJECT-TYPE-TEMPLATES.md](../.github/PROJECT-TYPE-TEMPLATES.md) for full templates.**
-
 ---
 
 ## Chat Commands

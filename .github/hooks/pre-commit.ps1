@@ -77,8 +77,8 @@ if ($changedSynapses) {
         if (Test-Path $file) {
             try {
                 $syn = Get-Content $file -Raw | ConvertFrom-Json
-                if (-not $syn.inheritance) {
-                    $errors += "${file}: Missing 'inheritance' field"
+                if ($syn.PSObject.Properties['inheritance']) {
+                    $warnings += "${file}: Stale 'inheritance' field (centralized in sync-architecture.cjs)"
                 }
                 if (-not $syn.skillId) {
                     $errors += "${file}: Missing 'skillId' field"
@@ -130,7 +130,7 @@ if ($changedSynapses -or $changedInstructions) {
             if ($file -match 'synapses\.json$') {
                 try {
                     $syn = Get-Content $file -Raw | ConvertFrom-Json
-                    if ($syn.inheritance -in @('inheritable', 'universal')) {
+                    if (($syn.inheritance ?? 'inheritable') -in @('inheritable', 'universal')) {
                         foreach ($conn in $syn.connections) {
                             $target = $conn.target
                             if ($target -match '(ROADMAP-UNIFIED|alex_docs/|platforms/(?!vscode-extension)|MASTER-ALEX-PROTECTED)') {

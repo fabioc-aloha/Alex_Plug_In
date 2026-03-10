@@ -4,7 +4,6 @@
     "skillId": "financial-analysis",
     "version": "1.0.0",
     "created": "2026-03-09",
-    "inheritance": "inheritable",
     "description": "Financial modeling, analysis frameworks, regulatory awareness",
     "connections": [
         {

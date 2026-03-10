@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch
 **Date**: February 26, 2026
-**Version**: 1.0 — Alex v5.9.10 (NASA Edition)
+**Version**: 2.0 — Alex v6.4.0
 **North Star**: *Create the most advanced and trusted AI partner for any job*
 
 **Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md)
@@ -702,5 +702,5 @@ See the [GitHub Copilot Subscription Guide](#github-copilot-subscription-guide) 
 
 ---
 
-*Alex Cognitive Architecture v5.9.10 — NASA Edition*
+*Alex Cognitive Architecture v6.4.0*
 *"Your Trusted AI Partner for Any Job"*

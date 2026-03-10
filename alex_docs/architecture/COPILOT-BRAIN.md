@@ -3,7 +3,7 @@
 > **Audience**: Human developers working on Alex
 > **Machine counterpart**: `.github/copilot-instructions.md` (the actual file read by VS Code)
 
-**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [VS Code Brain Integration](../guides/VSCODE-BRAIN-INTEGRATION.md) · [Alex Identity](./ALEX-IDENTITY.md)
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [VS Code Brain Integration](./VSCODE-BRAIN-INTEGRATION.md) · [Alex Identity](./ALEX-IDENTITY.md)
 
 ## What Is It?
 
@@ -51,7 +51,7 @@ Persona: Developer (85% confidence)
 Objective: *(session-objective — set by user or focus timer)*
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Principles: KISS, DRY, Optimize-for-AI
-Last Assessed: 2026-02-14 — v5.7.0
+Last Assessed: 2026-03-09 — v6.4.0
 ```
 
 ### Who Writes What

@@ -70,12 +70,12 @@ The extension copies these from itself to your workspace:
 | Source                    | Destination                       | Purpose                               |
 | ------------------------- | --------------------------------- | ------------------------------------- |
 | `copilot-instructions.md` | `.github/copilot-instructions.md` | Main brain file (core personality)    |
-| `instructions/`           | `.github/instructions/`           | Procedural memory (20+ files)         |
+| `instructions/`           | `.github/instructions/`           | Procedural memory (64 files)          |
 | `prompts/`                | `.github/prompts/`                | Episodic workflows (meditation, etc.) |
 | `episodic/`               | `.github/episodic/`               | Session records                       |
 | `config/`                 | `.github/config/`                 | Configuration + CSS styling           |
 | `agents/`                 | `.github/agents/`                 | Agent definitions                     |
-| `skills/`                 | `.github/skills/`                 | Domain expertise (73+ skills)         |
+| `skills/`                 | `.github/skills/`                 | Domain expertise (130 skills)         |
 
 **Note:** `markdown-light.css` is included in the `config/` folder and gets copied to `.vscode/` during the markdown styles step (Step 7).
 
@@ -216,17 +216,17 @@ your-project/
 │   ├── instructions/               # Procedural memory
 │   │   ├── alex-core.instructions.md
 │   │   ├── bootstrap-learning.instructions.md
-│   │   └── ... (20+ files)
+│   │   └── ... (64 files)
 │   ├── prompts/                    # Episodic workflows
 │   │   ├── unified-meditation-protocols.prompt.md
-│   │   └── ... (14+ files)
+│   │   └── ... (45 files)
 │   ├── episodic/                   # Session records
 │   ├── config/
 │   │   ├── alex-manifest.json      # Installation manifest
 │   │   ├── markdown-light.css      # Source CSS for preview
 │   │   └── user-profile.json       # Your preferences
 │   ├── agents/                     # Agent definitions
-│   └── skills/                     # Domain expertise (73+ skills)
+│   └── skills/                     # Domain expertise (130 skills)
 ├── .vscode/
 │   └── markdown-light.css          # Copied from config/ for VS Code
 └── (your project files)

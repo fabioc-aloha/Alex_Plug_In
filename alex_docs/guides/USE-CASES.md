@@ -520,9 +520,8 @@ Run maintenance periodically:
 
 ## 📚 Related Documentation
 
-- [PROJECT-TYPE-TEMPLATES.md](../.github/PROJECT-TYPE-TEMPLATES.md) — Complete folder structures for all domains
 - [User Manual](./USER-MANUAL.md) — Complete guide to Alex features
-- [Memory Systems](./MEMORY-SYSTEMS.md) — How Alex stores and retrieves knowledge
+- [Memory Systems](../architecture/MEMORY-SYSTEMS.md) — How Alex stores and retrieves knowledge
 - [Quick Reference](./QUICK-REFERENCE.md) — Commands and shortcuts
 
 ---

@@ -4,7 +4,6 @@
     "skillId": "healthcare-informatics",
     "version": "1.0.0",
     "created": "2026-03-09",
-    "inheritance": "inheritable",
     "description": "Clinical terminology, HIPAA/HITECH compliance, EHR patterns, health data management",
     "connections": [
         {

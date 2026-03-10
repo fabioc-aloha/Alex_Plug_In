@@ -56,11 +56,11 @@ const THRESHOLDS: Record<ExpertiseLevel, number> = {
 
 const DOMAIN_PATTERNS: Record<KnownDomain, RegExp> = {
     coding: /\b(function|class|method|variable|syntax|implement|refactor|code|typescript|javascript|python|rust|go|java|c#|vue|react|angular|npm|package)\b/i,
-    debugging: /\b(bug|error|exception|crash|fix|broken|issue|problem|debug|stack\s*trace|null|undefined|fail|failing|not\s*working|unexpected)\b/i,
-    architecture: /\b(architecture|design|pattern|system|scalab|microservice|monolith|module|layer|dependency|abstraction|interface|service|api\s*design|separation)\b/i,
+    debugging: /\b(bug|error|exception|crash\w*|fix|broken|issue|problem|debug|stack\s*trace|null|undefined|fail|failing|not\s*working|unexpected)\b/i,
+    architecture: /\b(architecture|design|pattern|system|scalab|microservice|monolith|module|layer\w*|dependency|abstraction|interface|service|api\s*design|separation)\b/i,
     documentation: /\b(document|readme|changelog|comment|jsdoc|typedoc|spec|guide|tutorial|wiki|annotation|explain|clarify|write\s*up)\b/i,
     testing: /\b(test|spec|unit\s*test|integration\s*test|e2e|coverage|assert|mock|stub|spy|jest|mocha|vitest|playwright|cypress|tdd)\b/i,
-    devops: /\b(deploy|ci\/cd|pipeline|docker|kubernetes|k8s|helm|terraform|bicep|github\s*action|workflow|release|publish|infrastructure)\b/i,
+    devops: /\b(deploy|ci\/cd|pipeline|docker\w*|kubernetes|k8s|helm|terraform|bicep|github\s*action|workflow|release|publish|infrastructure)\b/i,
     data: /\b(database|sql|nosql|query|schema|migration|cosmos|postgres|mongo|redis|datamodel|orm|prisma|entity|table|index|shard)\b/i,
     security: /\b(security|auth|token|jwt|secret|credential|permission|rbac|cve|inject|xss|csrf|encrypt|hash|sanitize|vulnerability)\b/i,
     'ai-ml': /\b(ai|llm|prompt|embedding|vector|model|inference|fine.?tun|openai|copilot|azure\s*ai|foundry|rag|neural|machine\s*learning)\b/i,

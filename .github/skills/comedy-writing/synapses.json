@@ -4,7 +4,6 @@
     "skillId": "comedy-writing",
     "version": "1.0.0",
     "created": "2026-03-09",
-    "inheritance": "inheritable",
     "description": "Joke structure, comedic timing, set construction, callback patterns, audience engagement",
     "connections": [
         {

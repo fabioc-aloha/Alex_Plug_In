@@ -15,15 +15,15 @@ graph TB
         CI[copilot-instructions.md<br/>Main Configuration]
 
         subgraph "instructions/"
-            PROC[Procedural Memory<br/>19 files]
+            PROC[Procedural Memory<br/>64 files]
         end
 
         subgraph "prompts/"
-            EPIS[Episodic Memory<br/>7 files]
+            EPIS[Episodic Memory<br/>45 files]
         end
 
         subgraph "skills/"
-            SK[Skills<br/>52 folders]
+            SK[Skills<br/>130 folders]
         end
 
         subgraph "config/"
@@ -31,7 +31,7 @@ graph TB
         end
 
         subgraph "agents/"
-            AGT[Custom Agents<br/>5 files]
+            AGT[Custom Agents<br/>7 files]
         end
 
         subgraph "episodic/"
@@ -157,9 +157,9 @@ graph TB
 
 **Specialized expertise** - deep knowledge in specific areas. Each skill is a folder with `SKILL.md` and optional `synapses.json`.
 
-### Core Skills (52 folders)
+### Core Skills (130 folders)
 
-Master Alex includes 52 skills covering areas like:
+Master Alex includes 130 skills covering areas like:
 
 **Table 8:** *Example Skill Categories*
 
@@ -182,7 +182,7 @@ skills/
 ├── debugging-patterns/
 │   ├── SKILL.md
 │   └── synapses.json
-└── ... (49 total)
+└── ... (127 total)
 ```
 
 **When to edit**: Add project-specific skills by creating new folders with `SKILL.md`.

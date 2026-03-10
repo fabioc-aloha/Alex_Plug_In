@@ -58,20 +58,18 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 ---
 
-## 🚀 v6.4.5 — Audit Hygiene
+## ✅ v6.4.5 — Audit Hygiene (Shipped 2026-03-10)
 
-**Theme**: Fix what's broken — tests, docs, links, security. No new features. Ship fast.
+**Theme**: Fix what's broken — tests, docs, links, security. No new features.
 
-**Effort**: ~8 hours total
-
-| # | Task | Effort | Description |
-| --- | --- | :---: | --- |
-| 1 | **Fix 7 failing tests** | 30m | Update globalKnowledge test expectations for new ID prefix format (GK-/GI- vs GKP-/GKI-) |
-| 2 | **Fix doc freshness** | 2h | cognitive-config.json → 6.4.0, NEUROANATOMICAL-MAPPING.md (76→130 skills, 24→64 instructions), VSCODE-BRAIN-INTEGRATION.md (v5.9.10→v6.4.0), INITIALIZATION-PROCESS.md, PROJECT-STRUCTURE.md, ALEX-FIRSTS.md counts, fix broken synapse, archive 2 legacy episodic files |
-| 3 | **Fix broken links + ghost references** | 1.5h | 14 broken links across architecture + user guides. Update AGENT-VS-CHAT-COMPARISON.md (v5.8.2→v6.4.0). Resolve 3× ghost reference to non-existent PROJECT-TYPE-TEMPLATES.md |
-| 4 | **Mocha 13 upgrade** | 2h | Resolves all 4 npm audit vulnerabilities (serialize-javascript via mocha) |
-| 5 | **Reindex skills** | 1h | Regenerate SKILLS-CATALOG.md, remove stale `inheritance` field from synapses.json |
-| 6 | **Reconcile settings docs** | 30m | USER-MANUAL.md and ENVIRONMENT-SETUP.md have divergent settings sections — designate one as canonical |
+| # | Task | Result |
+| --- | --- | --- |
+| 1 | **Fix 7 failing tests** | ✅ 268 passing, 0 failing. Fixed GK-/GI- prefix expectations + 3 regex patterns in expertiseModel |
+| 2 | **Fix doc freshness** | ✅ cognitive-config→6.4.0, NEUROANATOMICAL-MAPPING (130 skills, 64 instructions, I1-I8), VSCODE-BRAIN-INTEGRATION→v6.4.0, counts in 4 more docs, broken synapse fixed, 2 legacy episodic files archived |
+| 3 | **Fix broken links + ghosts** | ✅ 14 broken links fixed across 7 docs. AGENT-VS-CHAT-COMPARISON→v6.4.0. 3 ghost PROJECT-TYPE-TEMPLATES refs removed. Heir copy synced |
+| 4 | **Mocha 11 upgrade** | ✅ 10.8.2→11.7.5 + npm overrides for serialize-javascript and diff. 0 audit vulnerabilities |
+| 5 | **Reindex skills** | ✅ 130 skills, 643 connections. Removed stale `inheritance` from 10 synapses.json. Updated pre-commit hook + new-skill.ps1 |
+| 6 | **Reconcile settings docs** | ✅ ENVIRONMENT-SETUP.md designated canonical (21 SoT settings added). USER-MANUAL.md now points there |
 
 ---
 
@@ -130,8 +128,8 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 ### Definition of Done (v6.5.0)
 
-1. **All tests passing** — 0 failures after v6.4.5 fixes
-2. **No npm audit vulnerabilities** — Mocha 13 upgrade in v6.4.5
+1. **All tests passing** — 268/268 (achieved in v6.4.5)
+2. **No npm audit vulnerabilities** — 0 (achieved in v6.4.5, Mocha 11 + overrides)
 3. **VSIX < 15 MB** — PNG compression brings size under control
 4. **UI WCAG AA compliant** — no sub-11px fonts, theme-aware colors
 5. **Agent hooks shipped** — Autopilot, Validator, Builder hooks live

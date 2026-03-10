@@ -1,8 +1,8 @@
 # Deep Audit — Architecture Docs, User Documentation & UI (March 9, 2026)
 
-**Auditor**: Alex Finch (Validator Mode)  
-**Scope**: Architecture documents accuracy, user documentation completeness, UI deep dive  
-**Baseline**: v6.4.0  
+**Auditor**: Alex Finch (Validator Mode)
+**Scope**: Architecture documents accuracy, user documentation completeness, UI deep dive
+**Baseline**: v6.4.0
 **Companion**: [Comprehensive Audit](./COMPREHENSIVE-AUDIT-2026-03-09.md)
 
 ---

@@ -5,14 +5,14 @@ suite('Global Knowledge Test Suite', () => {
 
     suite('generateKnowledgeId', () => {
 
-        test('should generate pattern ID with GKP prefix', () => {
+        test('should generate pattern ID with GK prefix', () => {
             const id = generateKnowledgeId('pattern', 'My Test Pattern');
-            assert.ok(id.startsWith('GKP-'), `Expected GKP- prefix, got: ${id}`);
+            assert.ok(id.startsWith('GK-'), `Expected GK- prefix, got: ${id}`);
         });
 
-        test('should generate insight ID with GKI prefix', () => {
+        test('should generate insight ID with GI prefix', () => {
             const id = generateKnowledgeId('insight', 'My Test Insight');
-            assert.ok(id.startsWith('GKI-'), `Expected GKI- prefix, got: ${id}`);
+            assert.ok(id.startsWith('GI-'), `Expected GI- prefix, got: ${id}`);
         });
 
         test('should slugify title', () => {
@@ -30,14 +30,14 @@ suite('Global Knowledge Test Suite', () => {
         test('should truncate long titles to 40 chars in slug', () => {
             const longTitle = 'A'.repeat(100);
             const id = generateKnowledgeId('pattern', longTitle);
-            // GKP- prefix (4) + slug (max 40) = max 44 for patterns
-            const slug = id.replace(/^GKP-/, '');
+            // GK- prefix (3) + slug (max 40) = max 43 for patterns
+            const slug = id.replace(/^GK-/, '');
             assert.ok(slug.length <= 40, `Slug should be <= 40 chars: ${slug.length}`);
         });
 
         test('should add date suffix for insights', () => {
             const id = generateKnowledgeId('insight', 'Test');
-            // Insight IDs include date: GKI-test-YYYY-MM-DD
+            // Insight IDs include date: GI-test-YYYY-MM-DD
             const datePattern = /\d{4}-\d{2}-\d{2}$/;
             assert.ok(datePattern.test(id), `Should end with date: ${id}`);
         });
@@ -50,7 +50,7 @@ suite('Global Knowledge Test Suite', () => {
 
         test('should handle empty title', () => {
             const id = generateKnowledgeId('pattern', '');
-            assert.ok(id.startsWith('GKP-'), 'Should still have prefix');
+            assert.ok(id.startsWith('GK-'), 'Should still have prefix');
         });
     });
 });

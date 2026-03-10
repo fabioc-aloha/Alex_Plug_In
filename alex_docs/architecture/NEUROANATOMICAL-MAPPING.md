@@ -50,14 +50,14 @@ graph TB
 
     subgraph PARIETAL["PARIETAL LOBE"]
         subgraph NC["Neocortex - Declarative Knowledge"]
-            SK["Skills x76<br/>skills SKILL.md"]
+            SK["Skills x130<br/>skills SKILL.md"]
             DM["Declarative Memory<br/>copilot-instructions.md"]
         end
     end
 
     subgraph BASAL["SUBCORTICAL STRUCTURES"]
         subgraph BG["Basal Ganglia - Procedural Memory"]
-            PM[".instructions.md x24<br/>Automated procedures"]
+            PM[".instructions.md x64<br/>Automated procedures"]
         end
 
         subgraph THAL["Thalamus - Sensory Relay"]
@@ -65,7 +65,7 @@ graph TB
         end
 
         subgraph AMYG["Amygdala - Threat Detection"]
-            SAFETY["Safety Imperatives I1-I7<br/>Kill switch, RISKS.md"]
+            SAFETY["Safety Imperatives I1-I8<br/>Kill switch, RISKS.md"]
         end
     end
 
@@ -168,7 +168,7 @@ graph TB
     style SYN fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
 ```
 
-**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures include procedures (basal ganglia), input relay (thalamus), and threat detection (amygdala, red). Medial structures (lavender) enable meta-cognition and consolidation. The amygdala's "low road" bypasses executive processing to block dangerous operations via Safety Imperatives I1-I7.*
+**Figure 1:** *Complete neuroanatomical mapping of Alex's cognitive architecture. Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC monitors conflict. Temporal (teal) stores episodic memory. Parietal (green) holds declarative knowledge. Subcortical structures include procedures (basal ganglia), input relay (thalamus), and threat detection (amygdala, red). Medial structures (lavender) enable meta-cognition and consolidation. The amygdala's "low road" bypasses executive processing to block dangerous operations via Safety Imperatives I1-I8.*
 
 ---
 
@@ -425,7 +425,7 @@ How information flows through Alex's brain, from input to output:
 %%{init: {'theme': 'dark', 'themeVariables': {'background': '#0f172a', 'primaryColor': '#1e293b', 'primaryTextColor': '#f1f5f9', 'primaryBorderColor': '#818cf8', 'lineColor': '#475569', 'secondaryColor': '#1e293b', 'secondaryBorderColor': '#2dd4bf', 'tertiaryColor': '#1e293b', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TB
     INPUT["User Input - Thalamus"]
-    SAFETY["Safety Check - Amygdala<br/>Imperatives I1-I7"]
+    SAFETY["Safety Check - Amygdala<br/>Imperatives I1-I8"]
 
     subgraph EXEC["Executive Processing - PFC"]
         LLM["LLM<br/>Parse intent"]
@@ -503,7 +503,7 @@ flowchart TB
     style GLOB fill:#e8e0f0,stroke:#bc8cff,color:#1f2328
 ```
 
-**Figure 2:** *Information flow through Alex's brain — from user input (thalamus relay) through the amygdala safety check (fast threat detection), executive parsing (PFC), task planning with attention gating (dlPFC), conflict monitoring (ACC), inhibition checking, and response generation. The amygdala can short-circuit the entire pipeline, halting output immediately when Safety Imperatives I1-I7 are triggered.*
+**Figure 2:** *Information flow through Alex's brain — from user input (thalamus relay) through the amygdala safety check (fast threat detection), executive parsing (PFC), task planning with attention gating (dlPFC), conflict monitoring (ACC), inhibition checking, and response generation. The amygdala can short-circuit the entire pipeline, halting output immediately when Safety Imperatives I1-I8 are triggered.*
 
 ---
 

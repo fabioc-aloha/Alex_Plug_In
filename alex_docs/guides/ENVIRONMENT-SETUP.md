@@ -1,30 +1,49 @@
 # Alex Environment Setup
 
 > **VS Code settings for optimal Alex functionality.**
+> Source of truth: `.github/copilot-instructions.md` § VS Code Settings (1.111+)
 
 ---
 
 ## 🔴 Essential Settings (Required)
 
-These settings are **required** for Alex to function:
+These settings are **required** for Alex architecture features to function:
 
 ```json
 {
+  "chat.agent.enabled": true,
+  "chat.agentSkillsLocations": [".github/skills"],
+  "chat.useAgentsMdFile": true,
   "chat.instructionsFilesLocations": {
     ".github/instructions": true
   },
-  "chat.useAgentSkills": true,
-  "chat.useNestedAgentsMdFiles": true,
-  "github.copilot.chat.tools.memory.enabled": true
+  "chat.hooks.enabled": true,
+  "chat.useCustomAgentHooks": true,
+  "github.copilot.chat.copilotMemory.enabled": true,
+  "chat.autopilot.enabled": true,
+  "github.copilot.chat.searchSubagent.enabled": true,
+  "chat.customAgentInSubagent.enabled": true,
+  "chat.mcp.gallery.enabled": true,
+  "chat.agentsControl.enabled": true,
+  "chat.requestQueuing.enabled": true,
+  "chat.plugins.enabled": true
 }
 ```
 
 | Setting | Purpose |
 | ------- | ------- |
+| `agent.enabled` | Enables agent mode (custom agents, tools) |
+| `agentSkillsLocations` | Auto-loads Alex skills from `.github/skills/` |
+| `useAgentsMdFile` | Enables `.github/AGENTS.md` agent registry |
 | `instructionsFilesLocations` | Enables procedural memory (.instructions.md) |
-| `useAgentSkills` | Activates SKILL.md capabilities |
-| `useNestedAgentsMdFiles` | Enables .agent.md hierarchies |
-| `memory.enabled` | Persistent memory across sessions |
+| `hooks.enabled` + `useCustomAgentHooks` | Agent hooks (pre-commit, post-task) |
+| `copilotMemory.enabled` | Persistent memory across sessions |
+| `autopilot.enabled` | Autonomous multi-step execution |
+| `searchSubagent.enabled` + `customAgentInSubagent` | Codebase search with custom agents |
+| `mcp.gallery.enabled` | MCP tool gallery access |
+| `agentsControl.enabled` | Agent status in command center |
+| `requestQueuing.enabled` | Queue parallel requests |
+| `plugins.enabled` | Extension-contributed chat tools |
 
 ---
 
@@ -32,10 +51,14 @@ These settings are **required** for Alex to function:
 
 ```json
 {
+  "github.copilot.chat.models.anthropic.claude-opus-4-*.extendedThinkingEnabled": true,
+  "github.copilot.chat.models.anthropic.claude-opus-4-*.thinkingBudget": 16384,
   "github.copilot.chat.agent.thinkingTool": true,
   "chat.agent.maxRequests": 50,
   "chat.experimental.detectParticipant.enabled": true,
   "github.copilot.chat.followUps": "always",
+  "chat.tips.enabled": true,
+  "chat.exploreAgent.defaultModel": "claude-sonnet-4",
   "chat.agent.todoList": {
     "position": "panel"
   },
@@ -62,14 +85,16 @@ These settings are **required** for Alex to function:
 
 | Setting | Benefit |
 | ------- | ------- |
+| `extendedThinkingEnabled` | Extended thinking for Opus 4 models (meditation, architecture) |
+| `thinkingBudget: 16384` | 16K token budget for deep reasoning |
 | `thinkingTool` | Deep reasoning for complex tasks |
 | `maxRequests: 50` | Allows multi-step operations |
 | `detectParticipant` | Auto-routes to @alex |
 | `followUps: always` | Better conversational flow |
+| `tips.enabled` | Context tips in chat panel |
+| `exploreAgent.defaultModel` | Faster model for Explore subagent codebase research |
 | `todoList: panel` | Better visibility |
 | `thinking.phrases` | Alex-personality progress messages (replaces generic "Thinking...") |
-| `enableImages` | Render images inline in terminal via Kitty graphics protocol |
-| `exploreAgent.defaultModel` | Faster model for Explore subagent codebase research |
 
 ---
 
@@ -160,4 +185,4 @@ Your existing settings will NOT be modified or removed.
 
 ## Related
 
-- [vscode-extension-patterns skill](../.github/skills/vscode-extension-patterns/SKILL.md) — Safe configuration pattern (for Alex)
+- [vscode-extension-patterns skill](../../.github/skills/vscode-extension-patterns/SKILL.md) — Safe configuration pattern (for Alex)
