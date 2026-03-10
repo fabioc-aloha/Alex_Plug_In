@@ -69,11 +69,9 @@ See [Appendix](#-appendix-completed-work) for completed items.
 | 6 | **Design Builder agent-scoped hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop. Add hooks frontmatter to `alex-builder.agent.md` |
 | 30 | **Fix 7 failing globalKnowledge tests** | 30m | Update test expectations for new ID prefix format (GK-/GI- vs GKP-/GKI-) |
 | 31 | **Reindex 10 LearnAlex skills** | 1h | Regenerate SKILLS-CATALOG.md, remove stale `inheritance` field from synapses.json |
-| 32 | **Fix stale versions + synapse** | 15m | cognitive-config.json → 6.4.0, fix vscode-extension-patterns broken synapse, archive 2 legacy episodic files |
+| 32 | **Fix doc freshness — stale versions + counts** | 2h | cognitive-config.json → 6.4.0, fix broken synapse, archive 2 legacy episodic files, update NEUROANATOMICAL-MAPPING.md (76→130 skills, 24→64 instructions), VSCODE-BRAIN-INTEGRATION.md (v5.9.10→v6.4.0), INITIALIZATION-PROCESS.md, PROJECT-STRUCTURE.md, ALEX-FIRSTS.md counts |
 | 33 | **Mocha 13 upgrade** | 2h | Resolves all 4 npm audit vulnerabilities (serialize-javascript via mocha) |
-| 40 | **Fix NEUROANATOMICAL-MAPPING.md stale counts** | 10m | Mermaid diagram says 76 skills/24 instructions — actual: 130/64. Deep audit finding A-1 |
-| 41 | **Update VSCODE-BRAIN-INTEGRATION.md version** | 5m | Header frozen at v5.9.10 — update to v6.4.0. Deep audit finding A-2 |
-| 42 | **Update AGENT-VS-CHAT-COMPARISON.md** | 30m | Frozen at v5.8.2 with 4 broken links — update version, content, links. Deep audit finding D-1 |
+| 34 | **Fix broken links + ghost references** | 1.5h | 4 broken links in ALEX-IDENTITY.md, 1 in COPILOT-BRAIN.md, 9 in user guides (AGENT-VS-CHAT-COMPARISON, ENVIRONMENT-SETUP, USE-CASES, USER-MANUAL, QUICK-REFERENCE). Update AGENT-VS-CHAT-COMPARISON.md (v5.8.2→v6.4.0). Resolve 3× ghost reference to non-existent PROJECT-TYPE-TEMPLATES.md |
 
 ---
 
@@ -83,7 +81,7 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 **Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Platform polish, documentation, and remaining optimization — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-09): Trust scored 8.1/10 (comprehensive audit), documentation accuracy 7.2/10 (deep audit). 20 test files, 109 source files, 44,751 lines. 261 tests passing (7 failing — test drift, not bugs). Command Center v1.0 delivered (98/100 steps shipped). VSIX 27 MB (93% PNG assets — compression opportunity). 4 npm vulns (dev-only mocha dep). 14 broken doc links, 7 stale count references, 4 version-frozen docs. Full audits: [Comprehensive](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Docs/UI](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md).
+**North Star Assessment** (2026-03-09): Composite 8.1/10 (B+), docs/UI accuracy 7.2/10 (B-). 109 TS files, 44,751 lines, 20 test files (261 passing, 7 failing — test drift). VSIX 27 MB (93% PNG assets). 4 npm vulns (dev-only). 14 broken doc links, 7 stale count references, 4 version-frozen docs, 82 hardcoded hex colors. Full audits: [Comprehensive](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Docs/UI](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md).
 
 ### Short-Term
 
@@ -96,16 +94,12 @@ See [Appendix](#-appendix-completed-work) for completed items.
 | ~~11~~ | ~~**Terminal sandbox trust domains**~~ | ~~1h~~ | ✅ Done — configured `chat.tools.terminal.sandbox.network` in `.vscode/settings.json` |
 | ~~12~~ | ~~**OS notifications for confirmations**~~ | ~~1h~~ | ✅ Done — set `chat.notifyWindowOnConfirmation` to `always` in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
 | ~~13~~ | ~~**VS Code Insiders pre-publish testing**~~ | ~~1h~~ | ✅ Done — added Insiders testing section to PRE-PUBLISH-CHECKLIST.md |
-| 34 | **PNG asset compression** | 4h | 94 PNGs = 25.37 MB (93% of VSIX). Convert to WebP or resize — target <10 MB |
-| 35 | **console.log → OutputChannel** | 2h | Replace 36 console.log calls with proper VS Code logging |
-| 36 | **TODO/FIXME triage** | 2h | Triage 45 TODO/FIXME/HACK comments — roadmap or resolve |
-| 37 | **Theme variable migration** | 4h | Audit 77 hardcoded hex colors — migrate generic UI colors to `--vscode-*` vars |
-| 38 | **Fix 4 sub-11px font sizes** | 30m | WCAG AA minimum font size compliance |
+| 35 | **PNG asset compression** | 4h | 94 PNGs = 25.37 MB (93% of VSIX). Convert to WebP or resize — target <10 MB |
+| 36 | **console.log → OutputChannel** | 2h | Replace 36 console.log calls with proper VS Code logging |
+| 37 | **TODO/FIXME triage** | 2h | Triage 45 TODO/FIXME/HACK comments — roadmap or resolve |
+| 38 | **UI theme + font compliance** | 4.5h | Audit 82 hardcoded hex colors — migrate generic UI colors to `--vscode-*` vars. Fix 2 sub-11px font sizes for WCAG AA |
 | 39 | **Heir version alignment** | 2h | Sync M365 + Plugin heirs from 6.2.0 → current |
-| 43 | **Fix 14 broken links in docs** | 1h | 5 in architecture docs (A-3, A-4), 9 in user guides. Deep audit finding |
-| 44 | **Fix stale counts in user docs** | 1h | INITIALIZATION-PROCESS.md (73+→130 skills, 20+→64 instructions), PROJECT-STRUCTURE.md (52→130, 19→64), ALEX-FIRSTS.md (52→130) |
-| 45 | **Resolve PROJECT-TYPE-TEMPLATES.md ghost** | 30m | 3 docs link to non-existent file — create it or remove references |
-| 46 | **Reconcile settings docs** | 30m | USER-MANUAL.md and ENVIRONMENT-SETUP.md have divergent settings sections — designate one as canonical |
+| 40 | **Reconcile settings docs** | 30m | USER-MANUAL.md and ENVIRONMENT-SETUP.md have divergent settings sections — designate one as canonical |
 
 ### Medium-Term
 
@@ -249,10 +243,10 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | **Current Heirs**          | VS Code (6.4.0), M365 (6.2.0), Plugin (6.2.0) |
 | **Architecture**           | 130 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
 | **Codebase**               | 109 TS files, 44,751 lines, 20 test files (261 passing, 7 failing) |
-| **Audit Score**            | 8.1/10 (B+) — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) |
+| **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v6.4.5 — Agent Hook Design + Audit Hygiene       |
-| **Open Items**             | 26 total (7 in v6.4.5, 10+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
+| **Open Items**             | 37 total (8 in v6.4.5, 9+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
 | **Updated**                | 2026-03-09                                     |
 
 ---
