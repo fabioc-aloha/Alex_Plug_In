@@ -58,20 +58,20 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 ---
 
-## 🚀 v6.4.5 — Agent Hook Design
+## 🚀 v6.4.5 — Audit Hygiene
 
-**Theme**: Agent-scoped hook implementation — the design work deferred from v6.4.0.
+**Theme**: Fix what's broken — tests, docs, links, security. No new features. Ship fast.
+
+**Effort**: ~8 hours total
 
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| 2 | **Audit PreToolUse hooks under Autopilot** | 2d | Verify safety warnings (I1–I7, MASTER-ALEX-PROTECTED) are effective in non-interactive Autopilot mode |
-| 5 | **Design Validator agent-scoped hooks** | 2d | Read-only enforcement during QA — block code modifications in review mode. Add hooks frontmatter to `alex-validator.agent.md` |
-| 6 | **Design Builder agent-scoped hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop. Add hooks frontmatter to `alex-builder.agent.md` |
-| 30 | **Fix 7 failing globalKnowledge tests** | 30m | Update test expectations for new ID prefix format (GK-/GI- vs GKP-/GKI-) |
-| 31 | **Reindex 10 LearnAlex skills** | 1h | Regenerate SKILLS-CATALOG.md, remove stale `inheritance` field from synapses.json |
-| 32 | **Fix doc freshness — stale versions + counts** | 2h | cognitive-config.json → 6.4.0, fix broken synapse, archive 2 legacy episodic files, update NEUROANATOMICAL-MAPPING.md (76→130 skills, 24→64 instructions), VSCODE-BRAIN-INTEGRATION.md (v5.9.10→v6.4.0), INITIALIZATION-PROCESS.md, PROJECT-STRUCTURE.md, ALEX-FIRSTS.md counts |
-| 33 | **Mocha 13 upgrade** | 2h | Resolves all 4 npm audit vulnerabilities (serialize-javascript via mocha) |
-| 34 | **Fix broken links + ghost references** | 1.5h | 4 broken links in ALEX-IDENTITY.md, 1 in COPILOT-BRAIN.md, 9 in user guides (AGENT-VS-CHAT-COMPARISON, ENVIRONMENT-SETUP, USE-CASES, USER-MANUAL, QUICK-REFERENCE). Update AGENT-VS-CHAT-COMPARISON.md (v5.8.2→v6.4.0). Resolve 3× ghost reference to non-existent PROJECT-TYPE-TEMPLATES.md |
+| 1 | **Fix 7 failing tests** | 30m | Update globalKnowledge test expectations for new ID prefix format (GK-/GI- vs GKP-/GKI-) |
+| 2 | **Fix doc freshness** | 2h | cognitive-config.json → 6.4.0, NEUROANATOMICAL-MAPPING.md (76→130 skills, 24→64 instructions), VSCODE-BRAIN-INTEGRATION.md (v5.9.10→v6.4.0), INITIALIZATION-PROCESS.md, PROJECT-STRUCTURE.md, ALEX-FIRSTS.md counts, fix broken synapse, archive 2 legacy episodic files |
+| 3 | **Fix broken links + ghost references** | 1.5h | 14 broken links across architecture + user guides. Update AGENT-VS-CHAT-COMPARISON.md (v5.8.2→v6.4.0). Resolve 3× ghost reference to non-existent PROJECT-TYPE-TEMPLATES.md |
+| 4 | **Mocha 13 upgrade** | 2h | Resolves all 4 npm audit vulnerabilities (serialize-javascript via mocha) |
+| 5 | **Reindex skills** | 1h | Regenerate SKILLS-CATALOG.md, remove stale `inheritance` field from synapses.json |
+| 6 | **Reconcile settings docs** | 30m | USER-MANUAL.md and ENVIRONMENT-SETUP.md have divergent settings sections — designate one as canonical |
 
 ---
 
@@ -79,81 +79,63 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 **Target**: Q2 2026
 
-**Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Platform polish, documentation, and remaining optimization — the foundation that makes "trusted" a fact, not a promise.
+**Paradigm**: Earn It — platform polish, safety hooks, and code quality that makes "trusted" a fact.
 
-**North Star Assessment** (2026-03-09): Composite 8.1/10 (B+), docs/UI accuracy 7.2/10 (B-). 109 TS files, 44,751 lines, 20 test files (261 passing, 7 failing — test drift). VSIX 27 MB (93% PNG assets). 4 npm vulns (dev-only). 14 broken doc links, 7 stale count references, 4 version-frozen docs, 82 hardcoded hex colors. Full audits: [Comprehensive](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Docs/UI](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md).
+**North Star Assessment** (2026-03-09): 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI. Full audits: [Comprehensive](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Docs/UI](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md).
 
-### Short-Term
+### Core (must-ship)
 
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| ~~7~~ | ~~**Document `#debugEventsSnapshot`**~~ | ~~1h~~ | ✅ Done — added to WORKING-WITH-ALEX.md and debugging-patterns.instructions.md |
+| 1 | **PNG asset compression** | 4h | 94 PNGs = 25.37 MB (93% of VSIX). Convert to WebP or resize — target <10 MB |
+| 2 | **console.log → OutputChannel** | 2h | Replace 36 console.log calls with proper VS Code logging |
+| 3 | **UI theme + font compliance** | 4.5h | Migrate 82 hardcoded hex colors to `--vscode-*` vars. Fix 2 sub-11px font sizes for WCAG AA |
+| 4 | **Heir version alignment** | 2h | Sync M365 + Plugin heirs from 6.2.0 → current |
+| 5 | **Audit Autopilot hook safety** | 2d | Verify I1–I7 + MASTER-ALEX-PROTECTED warnings are effective in non-interactive Autopilot mode |
+| 6 | **Validator agent hooks** | 2d | Read-only enforcement during QA — block code modifications in review mode |
+| 7 | **Builder agent hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop |
 | 8 | **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
-| 9 | **Session fork workflows** | 1d | Document `/fork` and checkpoint-based session forking |
-| 10 | **Portable mode detection** | 2h | Use stable `env.isAppPortable` for USB-portable deployments |
-| ~~11~~ | ~~**Terminal sandbox trust domains**~~ | ~~1h~~ | ✅ Done — configured `chat.tools.terminal.sandbox.network` in `.vscode/settings.json` |
-| ~~12~~ | ~~**OS notifications for confirmations**~~ | ~~1h~~ | ✅ Done — set `chat.notifyWindowOnConfirmation` to `always` in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
-| ~~13~~ | ~~**VS Code Insiders pre-publish testing**~~ | ~~1h~~ | ✅ Done — added Insiders testing section to PRE-PUBLISH-CHECKLIST.md |
-| 35 | **PNG asset compression** | 4h | 94 PNGs = 25.37 MB (93% of VSIX). Convert to WebP or resize — target <10 MB |
-| 36 | **console.log → OutputChannel** | 2h | Replace 36 console.log calls with proper VS Code logging |
-| 37 | **TODO/FIXME triage** | 2h | Triage 45 TODO/FIXME/HACK comments — roadmap or resolve |
-| 38 | **UI theme + font compliance** | 4.5h | Audit 82 hardcoded hex colors — migrate generic UI colors to `--vscode-*` vars. Fix 2 sub-11px font sizes for WCAG AA |
-| 39 | **Heir version alignment** | 2h | Sync M365 + Plugin heirs from 6.2.0 → current |
-| 40 | **Reconcile settings docs** | 30m | USER-MANUAL.md and ENVIRONMENT-SETUP.md have divergent settings sections — designate one as canonical |
 
-### Medium-Term
+### Stretch (ship if time allows)
 
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| 14 | **Agent-scoped hooks for all agents** | 2d | Add hooks to Researcher (load knowledge gaps), Documentarian (auto-CHANGELOG), Dream (synapse health baseline) |
-| 15 | **Document Autopilot workflows** | 1d | Recommend Autopilot for dream/meditation/routine maintenance. Document safety implications in SECURITY.md |
-| 16 | **Update extension-patterns SKILL** | 1d | Add 1.111 capabilities (agent-scoped hooks, autopilot, debug events snapshot) to vscode-extension-patterns SKILL.md |
-| 17 | **`usages` + `rename` tool adoption** | 2d | Instruction patterns for LSP-powered refactoring (critical for monolith breakup) |
-| 18 | **Wave 5.3 — Sidebar view removal** | 1d | Remove redundant sidebar view registrations from `package.json`. Deferred — revisit when Command Center fully replaces all legacy surface journeys |
-| 19 | **Persona taxonomy decisions** | 1d | (1) Should extension-only personas become LearnAlex study guides? (2) Accept low-confidence detection for Standup Comics/Real Estate or rely on LLM? (3) Naming: role titles vs audience labels |
-
-### Backlog
-
-| # | Task | Effort | Description |
-| --- | --- | :---: | --- |
-| 20 | **Agentic browser testing** | 1w | Enable `workbench.browser.enableChatTools` for agent-driven browser verification |
-| 21 | **Office Add-in Phase 2** | 2w | Word templates, Excel trackers, PowerPoint gen |
-| 22 | **Cognitive Dashboard** | 3d | Full unified webview — synapse health renderer is first tile. *(Partially addressed by Command Center Mind tab — Wave 6)* |
-| 23 | **Academic paper finalization** | 2d | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
-| 24 | **M365 sensitivity_label support** | 2h | Gated — v1.6 schema does not yet support this field |
+| 9 | **Remaining agent hooks** | 2d | Hooks for Researcher (load knowledge gaps), Documentarian (auto-CHANGELOG), Dream (synapse health baseline) |
+| 10 | **Document Autopilot workflows** | 1d | Recommend Autopilot for dream/meditation/routine maintenance. Safety implications in SECURITY.md |
+| 11 | **Update extension-patterns SKILL** | 1d | Add 1.111 capabilities (hooks, autopilot, debug events snapshot) to vscode-extension-patterns SKILL.md |
 
 ### Blocked (VS Code API Dependencies)
 
 | Contract | Scope | Unblock Condition | Enables |
 | --- | --- | --- | --- |
-| **Contract A** | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API | Real-time agent status in Agents tab |
-| **Contract B** | Context budget API (`countTokens()`) | VS Code exposes `chat.contextBudget` | Context Budget bar + per-skill impact (cancelled steps 7.15, 7.31) |
-| **Contract C** | Full five-modality memory model | Memory persistence API | Mind tab live data |
-| **Contract D** | Recently-used command tracking | Command history API | Adaptive UX (command history) |
+| **A** | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API | Real-time agent status in Agents tab |
+| **B** | Context budget API (`countTokens()`) | VS Code exposes `chat.contextBudget` | Context Budget bar + per-skill impact |
+| **C** | Full five-modality memory model | Memory persistence API | Mind tab live data |
+| **D** | Recently-used command tracking | Command history API | Adaptive UX (command history) |
 
 ### Gated (External Dependencies)
 
 | # | Task | Gate | Effort | Description |
 | --- | --- | --- | :---: | --- |
-| 25 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings |
-| 26 | **EmbeddedKnowledge adoption** | Microsoft makes it GA | 2h | Enable capability. knowledge/ folder already prepared |
-| 27 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target |
+| 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings |
+| 13 | **EmbeddedKnowledge adoption** | Microsoft makes it GA | 2h | Enable capability. knowledge/ folder already prepared |
+| 14 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target |
 
 ### Conditional (Trigger-Dependent)
 
 | # | Task | Trigger | Effort | Description |
 | --- | --- | --- | :---: | --- |
-| 28 | **Foundry POC** | Real user/team requests Alex in Teams | 1w | Foundry project + Alex orchestrator + Teams publish |
-| 29 | **Teams Deep Integration** | Active M365 users | 12w | Bot Framework + Message Extensions + Meeting Integration |
+| 15 | **Foundry POC** | Real user/team requests Alex in Teams | 1w | Foundry project + Alex orchestrator + Teams publish |
+| 16 | **Teams Deep Integration** | Active M365 users | 12w | Bot Framework + Message Extensions + Meeting Integration |
 
 ### Definition of Done (v6.5.0)
 
-1. **20+ test files** ✅ — 20 test files covering all v6.0.0 services
-2. **Zero NASA R4 violations** 🟡 — ~50 real remain + structural exceptions accepted (P5D)
-3. **No source file >1,500 lines** ✅ — `sharedStyles.ts` (1,570L) is pure CSS, not logic
-4. **No source file >1,000 lines** ✅ — P5B complete
-5. **Command Center v1.0 delivered** ✅ — 98/100 steps shipped
-6. **North Star Trust score ≥7/10** ✅ — scored 7/10 at March 9 assessment
+1. **All tests passing** — 0 failures after v6.4.5 fixes
+2. **No npm audit vulnerabilities** — Mocha 13 upgrade in v6.4.5
+3. **VSIX < 15 MB** — PNG compression brings size under control
+4. **UI WCAG AA compliant** — no sub-11px fonts, theme-aware colors
+5. **Agent hooks shipped** — Autopilot, Validator, Builder hooks live
+6. **North Star Trust score ≥ 8/10** — up from 7.2 baseline
 
 > **Principle**: Don't add features. Prove the existing ones deserve trust.
 
@@ -231,7 +213,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.2.0     | On-Brand Partnership       | ✅ Shipped  |
 | v6.3.0     | Accessibility & Workshop  | ✅ Shipped  |
 | v6.4.0     | Agent Hooks Release        | ✅ Shipped  |
-| **v6.4.5** | **Agent Hook Design**      | **🎯 Next** |
+| **v6.4.5** | **Audit Hygiene**          | **🎯 Next** |
 | v6.5.0     | The Trust Release          | Planned    |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -245,8 +227,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | **Codebase**               | 109 TS files, 44,751 lines, 20 test files (261 passing, 7 failing) |
 | **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
-| **Next Target**            | v6.4.5 — Agent Hook Design + Audit Hygiene       |
-| **Open Items**             | 37 total (8 in v6.4.5, 9+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
+| **Next Target**            | v6.4.5 — Audit Hygiene (~8h)                     |
+| **Open Items**             | 27 total (6 in v6.4.5, 8+3 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
 | **Updated**                | 2026-03-09                                     |
 
 ---
