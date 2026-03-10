@@ -258,6 +258,7 @@ function checkMarkdownTables() {
     'alex_docs/WORKING-WITH-ALEX.md',
     'alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md',
     'alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md',
+    'alex_docs/guides/SKILL-DISCIPLINE-MAP.md',
   ];
 
   let brokenTables = 0;

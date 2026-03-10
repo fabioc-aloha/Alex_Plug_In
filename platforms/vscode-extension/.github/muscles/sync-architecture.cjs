@@ -437,7 +437,8 @@ function syncArchitectureFiles() {
     const walkthroughFiles = [
         { src: path.join(MASTER_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'WORKING-WITH-ALEX.md') },
         { src: path.join(MASTER_ROOT, 'alex_docs', 'architecture', 'VSCODE-BRAIN-INTEGRATION.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'architecture', 'VSCODE-BRAIN-INTEGRATION.md') },
-        { src: path.join(MASTER_ROOT, 'alex_docs', 'guides', 'AGENT-VS-CHAT-COMPARISON.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'guides', 'AGENT-VS-CHAT-COMPARISON.md') }
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'guides', 'AGENT-VS-CHAT-COMPARISON.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'guides', 'AGENT-VS-CHAT-COMPARISON.md') },
+        { src: path.join(MASTER_ROOT, 'alex_docs', 'guides', 'SKILL-DISCIPLINE-MAP.md'), dest: path.join(HEIR_ROOT, 'alex_docs', 'guides', 'SKILL-DISCIPLINE-MAP.md') }
     ];
     for (const { src, dest } of walkthroughFiles) {
         if (fs.existsSync(src)) {

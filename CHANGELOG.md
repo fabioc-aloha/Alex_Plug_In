@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.3.1] - 2026-03-09
+
+> **The Documentation Maturity Release** — Roadmap restructured with v6.4.0 split, Skill-to-Discipline Map (41 disciplines × 130 skills), VS Code 1.111 evaluation integrated.
+
+### Added
+- **Skill-to-Discipline Map** — new `alex_docs/guides/SKILL-DISCIPLINE-MAP.md` mapping 41 professional disciplines to 130 skills, wired to Command Center Docs tab
+- **VS Code 1.111 evaluation** — 11 actionable items extracted and integrated into roadmap (3 ADOPT, 2 MONITOR, 3 SKIP)
+- **vscode-extension-patterns synapse** — new reference to 1.111 evaluation document (strength 0.8)
+
+### Changed
+- **ROADMAP-UNIFIED.md restructured** — priority-ordered P1–P5 stack, v6.4.0 Agent Hooks Release (6 items) split from v6.5.0 Trust Release (23 items)
+- **Roadmap appendix** — completed tasks moved to collapsible `<details>` section
+- **Active Context** — updated for post-v6.3.0 session (1.111 evaluation, roadmap restructure, skill-discipline mapping)
+
+---
+
 ## [6.3.0] - 2026-03-09
 
 > **The Accessibility & Workshop Alignment Release** — WCAG keyboard accessibility, 10 domain skills from LearnAlex, docs tab sync with 41 workshops, Architecture Independence cardinal rule.
