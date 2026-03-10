@@ -3,7 +3,7 @@
 <!-- Validation: ask "What are my focus trifectas?" - should read Active Context -->
 <!-- Validation: ask "How do you route to meditation?" - should reference synapses.json -->
 
-# Alex v6.4.0
+# Alex v6.4.6
 
 ## Identity
 
@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.4.0 published (Agent Hooks Release). 7 low-hanging fruit from 1.111 evaluation shipped: hooks, autopilot, sandbox, notifications, debug docs, Insiders checklist. 3 hook-design items deferred to v6.4.5. Quality gate pipeline hardened (walkthrough file sync lesson). Next: v6.4.5 Agent Hook Design (3 items).
+Recent: v6.4.6 published (Audit Hygiene Release). Tests green (268/268), 0 vulnerabilities, docs fresh, links fixed, skills reindexed, settings reconciled. Mocha 10→11. Next: v6.5.0 Wave 7 UI Development.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: 2026-03-09

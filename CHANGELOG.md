@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.4.6] - 2026-03-10
+
+> **The Audit Hygiene Release** — Tests green, docs fresh, links fixed, vulnerabilities eliminated, skills reindexed, settings reconciled.
+
+### Fixed
+- **7 failing tests resolved** — `globalKnowledge.test.ts`: GKP-/GKI- → GK-/GI- prefix alignment; `expertiseModel.ts`: 3 regex patterns (crash/docker/layer) now match inflected forms
+- **14 broken links repaired** across 7 docs — wrong relative paths in COPILOT-BRAIN.md, ALEX-IDENTITY.md, AGENT-VS-CHAT-COMPARISON.md, ENVIRONMENT-SETUP.md, QUICK-REFERENCE.md, USER-MANUAL.md, USE-CASES.md
+- **3 ghost references removed** — non-existent PROJECT-TYPE-TEMPLATES.md links eliminated
+- **Broken synapse path** — vscode-extension-patterns/synapses.json external path corrected
+
+### Changed
+- **Mocha 10.8.2 → 11.7.5** — npm overrides for serialize-javascript (^7.0.4) and diff (^8.0.3); **0 audit vulnerabilities** (was 5)
+- **Doc freshness** — cognitive-config.json → v6.4.0, NEUROANATOMICAL-MAPPING (130 skills, 64 instructions, I1-I8), VSCODE-BRAIN-INTEGRATION → v6.4.0, 4 additional docs with corrected counts
+- **AGENT-VS-CHAT-COMPARISON.md** — updated from v5.8.2 to v6.4.0
+- **Skills reindexed** — 130 skills / 643 connections; stale `inheritance` field removed from 10 synapses.json files; pre-commit hook + new-skill.ps1 updated for centralized inheritance
+- **Settings docs reconciled** — ENVIRONMENT-SETUP.md designated canonical (21 SoT settings in tiered Essential/Recommended/Nice-to-Have); USER-MANUAL.md now points there
+- **2 legacy episodic files archived** — self-actualization .prompt.md files moved to archive/upgrades/
+
+---
+
 ## [6.4.0] - 2026-03-09
 
 > **The Agent Hooks Release (Partial)** — VS Code 1.111 settings adoption, agent debugging documentation, platform settings alignment.

@@ -1,7 +1,7 @@
 {
-  "sourceCommit": "ed04f54",
-  "filesCopied": 400,
+  "filesCopied": 424,
+  "sourceCommit": "581a85a",
   "syncEngine": "sync-architecture.js",
-  "generatedAt": "2026-03-05 16:12:16",
-  "sourceVersion": "6.2.0"
+  "sourceVersion": "6.4.0",
+  "generatedAt": "2026-03-10 00:21:24"
 }

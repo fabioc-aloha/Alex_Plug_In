@@ -76,12 +76,11 @@ Set-Content $skillMdPath $content -NoNewline
 $synapsePath = Join-Path $newSkillPath "synapses.json"
 $synapseContent = Get-Content $synapsePath -Raw
 $synapseContent = $synapseContent -replace '"skillId": "skill-name"', "`"skillId`": `"$skillName`""
-$synapseContent = $synapseContent -replace '"inheritance": "inheritable"', "`"inheritance`": `"$Inheritance`""
 Set-Content $synapsePath $synapseContent -NoNewline
 
 Write-Host "✅ Created skill: $skillName" -ForegroundColor Green
 Write-Host "   Location: .github/skills/$skillName/" -ForegroundColor Gray
-Write-Host "   Inheritance: $Inheritance" -ForegroundColor Gray
+Write-Host "   Note: Inheritance is centralized in sync-architecture.cjs SKILL_EXCLUSIONS" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "  1. Edit .github/skills/$skillName/SKILL.md" -ForegroundColor Gray

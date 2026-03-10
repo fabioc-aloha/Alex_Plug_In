@@ -4,7 +4,6 @@
     "skillId": "legal-compliance",
     "version": "1.0.0",
     "created": "2026-03-09",
-    "inheritance": "inheritable",
     "description": "Legal research, contract analysis, regulatory compliance, case law citation",
     "connections": [
         {

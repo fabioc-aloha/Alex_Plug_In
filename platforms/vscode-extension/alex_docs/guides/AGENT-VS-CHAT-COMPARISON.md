@@ -1,7 +1,7 @@
 # Agent vs @alex Chat Mode: Feature Comparison
 
-**Last Updated**: February 16, 2026
-**Version**: 5.8.2
+**Last Updated**: March 9, 2026
+**Version**: 6.4.0
 
 ## Overview
 
@@ -278,7 +278,7 @@ Both modes adapt to your current model, but differently:
 ## Configuration
 
 ### @alex Chat Mode Settings
-Located in [User Profile](../.github/config/user-profile.json):
+Located in [User Profile](../../.github/config/user-profile.json):
 ```json
 {
   "name": "Fabio",
@@ -334,9 +334,9 @@ Agents are auto-selected based on task type, or you can request explicitly:
 
 ## Related Documentation
 
-- [Working with Alex](../alex_docs/WORKING-WITH-ALEX.md) - General collaboration guide
-- [Alex Brain Anatomy](../docs/alex-brain-anatomy.html) - Cognitive architecture visualization
-- [Agents Configuration](../.github/agents/) - Agent persona definitions
+- [Working with Alex](../WORKING-WITH-ALEX.md) - General collaboration guide
+- [Alex Brain Anatomy](../../docs/alex-brain-anatomy.html) - Cognitive architecture visualization
+- [Agents Configuration](../../.github/agents/) - Agent persona definitions
 - [v5.8.x Features](../../CHANGELOG.md#582---2026-02-16) - Latest chat mode enhancements
 
 ---
