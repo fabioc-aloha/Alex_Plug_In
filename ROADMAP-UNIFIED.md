@@ -55,10 +55,10 @@ Four platforms. Focused, not scattered.
 
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| 1 | **Enable `chat.useCustomAgentHooks`** | 1h | Enable in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Highest-value 1.111 feature — enables per-agent hook specialization |
+| ~~1~~ | ~~**Enable `chat.useCustomAgentHooks`**~~ | ~~1h~~ | ✅ Done — enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
 | 2 | **Audit PreToolUse hooks under Autopilot** | 2d | Verify safety warnings (I1–I7, MASTER-ALEX-PROTECTED) are effective in non-interactive Autopilot mode |
-| 3 | **Enable `chat.autopilot.enabled`** | 1h | Enable in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Do NOT default to Autopilot for all sessions |
-| 4 | **Update copilot-instructions.md settings header** | 1h | Change `## VS Code Settings (1.110+)` → `(1.111+)`, add `chat.autopilot.enabled`, `chat.useCustomAgentHooks` |
+| ~~3~~ | ~~**Enable `chat.autopilot.enabled`**~~ | ~~1h~~ | ✅ Done — enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
+| ~~4~~ | ~~**Update copilot-instructions.md settings header**~~ | ~~1h~~ | ✅ Done — header updated to `(1.111+)`, settings documented |
 | 5 | **Design Validator agent-scoped hooks** | 2d | Read-only enforcement during QA — block code modifications in review mode. Add hooks frontmatter to `alex-validator.agent.md` |
 | 6 | **Design Builder agent-scoped hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop. Add hooks frontmatter to `alex-builder.agent.md` |
 
@@ -76,13 +76,13 @@ Four platforms. Focused, not scattered.
 
 | # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| 7 | **Document `#debugEventsSnapshot`** | 1h | Add to WORKING-WITH-ALEX.md troubleshooting section and reference in debugging-patterns.instructions.md |
+| ~~7~~ | ~~**Document `#debugEventsSnapshot`**~~ | ~~1h~~ | ✅ Done — added to WORKING-WITH-ALEX.md and debugging-patterns.instructions.md |
 | 8 | **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
 | 9 | **Session fork workflows** | 1d | Document `/fork` and checkpoint-based session forking |
 | 10 | **Portable mode detection** | 2h | Use stable `env.isAppPortable` for USB-portable deployments |
-| 11 | **Terminal sandbox trust domains** | 1h | Configure `chat.tools.terminal.sandbox.network` trusted domains |
-| 12 | **OS notifications for confirmations** | 1h | Set `chat.notifyWindowOnConfirmation` to `always` |
-| 13 | **VS Code Insiders pre-publish testing** | 1h | Add "test against VS Code Insiders" to PRE-PUBLISH-CHECKLIST.md — weekly Stable cadence increases breakage risk |
+| ~~11~~ | ~~**Terminal sandbox trust domains**~~ | ~~1h~~ | ✅ Done — configured `chat.tools.terminal.sandbox.network` in `.vscode/settings.json` |
+| ~~12~~ | ~~**OS notifications for confirmations**~~ | ~~1h~~ | ✅ Done — set `chat.notifyWindowOnConfirmation` to `always` in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
+| ~~13~~ | ~~**VS Code Insiders pre-publish testing**~~ | ~~1h~~ | ✅ Done — added Insiders testing section to PRE-PUBLISH-CHECKLIST.md |
 
 ### Medium-Term
 
@@ -213,7 +213,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.1.8     | Doc Alignment Hotfix       | ✅ Shipped  |
 | v6.2.0     | On-Brand Partnership       | ✅ Shipped  |
 | v6.3.0     | Accessibility & Workshop  | ✅ Shipped  |
-| **v6.4.0** | **Agent Hooks Release**    | **🎯 Next** |
+| **v6.4.0** | **Agent Hooks Release**    | **🎯 Current** |
 | v6.5.0     | The Trust Release          | Planned    |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -221,19 +221,31 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.3.1                                          |
-| **Current Heirs**          | VS Code (6.3.1), M365 (6.2.0), Plugin (6.2.0) |
+| **Current Master Version** | 6.4.0                                          |
+| **Current Heirs**          | VS Code (6.4.0), M365 (6.2.0), Plugin (6.2.0) |
 | **Architecture**           | 130 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
 | **Codebase**               | 95 TS files, 47K lines, 20 test files          |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v6.4.0 — The Agent Hooks Release               |
-| **Open Items**             | 29 total (6 in v6.4.0, 13+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
+| **Open Items**             | 22 total (3 in v6.4.0, 10+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
 | **Updated**                | 2026-03-09                                     |
 
 ---
 
 <details>
 <summary><h2>📖 Appendix: Completed Work</h2></summary>
+
+### v6.3.1 → v6.4.0 — Completed Low-Hanging Fruit
+
+| # | Task | Status | Description |
+| --- | --- | :---: | --- |
+| 1 | **Enable `chat.useCustomAgentHooks`** | ✅ Done | Enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
+| 3 | **Enable `chat.autopilot.enabled`** | ✅ Done | Enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json` |
+| 4 | **Update copilot-instructions.md settings header** | ✅ Done | Header updated to `(1.111+)`, all new settings documented |
+| 7 | **Document `#debugEventsSnapshot`** | ✅ Done | Added to WORKING-WITH-ALEX.md and debugging-patterns.instructions.md |
+| 11 | **Terminal sandbox trust domains** | ✅ Done | `chat.tools.terminal.sandbox.network` configured in `.vscode/settings.json` |
+| 12 | **OS notifications for confirmations** | ✅ Done | `chat.notifyWindowOnConfirmation` set to `always` |
+| 13 | **VS Code Insiders pre-publish testing** | ✅ Done | Insiders testing section added to PRE-PUBLISH-CHECKLIST.md |
 
 ### v6.3.0 — Completed Trust Release Items
 

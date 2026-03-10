@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.4.0] - 2026-03-09
+
+> **The Agent Hooks Release (Partial)** — VS Code 1.111 settings adoption, agent debugging documentation, platform settings alignment.
+
+### Added
+- **Agent-scoped hooks enabled** — `chat.useCustomAgentHooks` in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Highest-value 1.111 feature for per-agent hook specialization
+- **Autopilot mode enabled** — `chat.autopilot.enabled` in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Recommended for dream/meditation workflows
+- **Terminal sandbox trust domains** — `chat.tools.terminal.sandbox.network` configured for marketplace, npm, Azure DevOps, and Replicate
+- **OS notifications for confirmations** — `chat.notifyWindowOnConfirmation` set to `always`
+- **`#debugEventsSnapshot` documented** — Added to WORKING-WITH-ALEX.md troubleshooting and debugging-patterns.instructions.md
+- **VS Code Insiders pre-publish testing** — New section in PRE-PUBLISH-CHECKLIST.md for weekly Stable cadence risk mitigation
+
+### Changed
+- **copilot-instructions.md settings header** — Updated to `(1.111+)` with `chat.autopilot.enabled` and `chat.useCustomAgentHooks` documented
+- **Skill-to-Discipline Map** — Wired into sync pipeline and quality gates
+
+---
+
 ## [6.3.1] - 2026-03-09
 
 > **The Documentation Maturity Release** — Roadmap restructured with v6.4.0 split, Skill-to-Discipline Map (41 disciplines × 130 skills), VS Code 1.111 evaluation integrated.

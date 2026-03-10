@@ -89,6 +89,13 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 - [ ] README.md footer - should have NO version number
 - [ ] README.md badges - should NOT contain version numbers
 
+## 🧪 VS Code Insiders Testing
+
+- [ ] **Test against VS Code Insiders** before major releases — weekly Stable cadence (1.111+) increases breakage risk
+  - Install Insiders: [code.visualstudio.com/insiders](https://code.visualstudio.com/insiders/)
+  - Install VSIX: `code-insiders --install-extension alex-cognitive-architecture-*.vsix`
+  - Verify: skills load, hooks fire, Command Center renders
+
 ## 🔧 Code Quality
 
 - [ ] `npm run compile` succeeds with no errors
