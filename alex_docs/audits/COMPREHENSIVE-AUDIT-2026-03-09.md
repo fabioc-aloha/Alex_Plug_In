@@ -1,8 +1,8 @@
 # Comprehensive Audit — v6.4.0 (March 9, 2026)
 
-**Auditor**: Alex Finch (Validator Mode)  
-**Scope**: Code, Documentation, UI, UX, Project Overall  
-**Baseline**: v6.4.0 (published 2026-03-09)  
+**Auditor**: Alex Finch (Validator Mode)
+**Scope**: Code, Documentation, UI, UX, Project Overall
+**Baseline**: v6.4.0 (published 2026-03-09)
 **Method**: Automated scans + manual review against instruction standards
 
 ---

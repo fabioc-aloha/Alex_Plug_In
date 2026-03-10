@@ -71,6 +71,9 @@ See [Appendix](#-appendix-completed-work) for completed items.
 | 31 | **Reindex 10 LearnAlex skills** | 1h | Regenerate SKILLS-CATALOG.md, remove stale `inheritance` field from synapses.json |
 | 32 | **Fix stale versions + synapse** | 15m | cognitive-config.json → 6.4.0, fix vscode-extension-patterns broken synapse, archive 2 legacy episodic files |
 | 33 | **Mocha 13 upgrade** | 2h | Resolves all 4 npm audit vulnerabilities (serialize-javascript via mocha) |
+| 40 | **Fix NEUROANATOMICAL-MAPPING.md stale counts** | 10m | Mermaid diagram says 76 skills/24 instructions — actual: 130/64. Deep audit finding A-1 |
+| 41 | **Update VSCODE-BRAIN-INTEGRATION.md version** | 5m | Header frozen at v5.9.10 — update to v6.4.0. Deep audit finding A-2 |
+| 42 | **Update AGENT-VS-CHAT-COMPARISON.md** | 30m | Frozen at v5.8.2 with 4 broken links — update version, content, links. Deep audit finding D-1 |
 
 ---
 
@@ -80,7 +83,7 @@ See [Appendix](#-appendix-completed-work) for completed items.
 
 **Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Platform polish, documentation, and remaining optimization — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-09): Trust scored 8.1/10 (comprehensive audit). 20 test files, 109 source files, 44,751 lines. 261 tests passing (7 failing — test drift, not bugs). Command Center v1.0 delivered (98/100 steps shipped). VSIX 27 MB (93% PNG assets — compression opportunity). 4 npm vulns (dev-only mocha dep). 10 skills unindexed. 77 hardcoded colors, 36 console.logs, 45 TODOs. Full audit: [COMPREHENSIVE-AUDIT-2026-03-09](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md).
+**North Star Assessment** (2026-03-09): Trust scored 8.1/10 (comprehensive audit), documentation accuracy 7.2/10 (deep audit). 20 test files, 109 source files, 44,751 lines. 261 tests passing (7 failing — test drift, not bugs). Command Center v1.0 delivered (98/100 steps shipped). VSIX 27 MB (93% PNG assets — compression opportunity). 4 npm vulns (dev-only mocha dep). 14 broken doc links, 7 stale count references, 4 version-frozen docs. Full audits: [Comprehensive](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Docs/UI](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md).
 
 ### Short-Term
 
@@ -99,6 +102,10 @@ See [Appendix](#-appendix-completed-work) for completed items.
 | 37 | **Theme variable migration** | 4h | Audit 77 hardcoded hex colors — migrate generic UI colors to `--vscode-*` vars |
 | 38 | **Fix 4 sub-11px font sizes** | 30m | WCAG AA minimum font size compliance |
 | 39 | **Heir version alignment** | 2h | Sync M365 + Plugin heirs from 6.2.0 → current |
+| 43 | **Fix 14 broken links in docs** | 1h | 5 in architecture docs (A-3, A-4), 9 in user guides. Deep audit finding |
+| 44 | **Fix stale counts in user docs** | 1h | INITIALIZATION-PROCESS.md (73+→130 skills, 20+→64 instructions), PROJECT-STRUCTURE.md (52→130, 19→64), ALEX-FIRSTS.md (52→130) |
+| 45 | **Resolve PROJECT-TYPE-TEMPLATES.md ghost** | 30m | 3 docs link to non-existent file — create it or remove references |
+| 46 | **Reconcile settings docs** | 30m | USER-MANUAL.md and ENVIRONMENT-SETUP.md have divergent settings sections — designate one as canonical |
 
 ### Medium-Term
 
