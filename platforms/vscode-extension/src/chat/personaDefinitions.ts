@@ -79,6 +79,10 @@ export interface LLMPersona {
  *   - ages/Alex-* for age-based fallback
  * Both .webp (primary) and .png (fallback) are shipped.
  * Fallback: logo (rocket brand mark).
+ * 
+ * NOTE: This map intentionally contains entries beyond the PERSONAS array.
+ * Extra entries (sub-specialties, platform-specific, fun) serve LLM-detected
+ * personas that return IDs not in the hardcoded signal list.
  */
 export const PERSONA_AVATAR_MAP: Record<string, string> = {
     // Core developer personas
@@ -358,7 +362,7 @@ export const PERSONAS: Persona[] = [
         signals: [
             { category: 'identity',   pattern: 'researcher|scientist|lab|experiment|hypothesis',                  weight: 2.5 },
             { category: 'technology', pattern: 'python|r\\b|julia|matlab|jupyter|pandas|numpy|scipy',             weight: 2.0 },
-            { category: 'structure',  pattern: 'data/|analysis/|experiments/|notebooks/|.ipynb',                  weight: 1.5 },
+            { category: 'structure',  pattern: 'raw-data/|datasets/|analysis/|experiments/|notebooks/|.ipynb',    weight: 1.5 },
             { category: 'dependency', pattern: 'pandas|numpy|scipy|matplotlib|seaborn|scikit-learn',              weight: 1.5 },
             { category: 'content',    pattern: 'dataset|experiment|finding|analysis|result',                      weight: 0.5 },
         ]
@@ -511,7 +515,7 @@ export const PERSONAS: Persona[] = [
         signals: [
             { category: 'identity',   pattern: 'student|learning|study|course|class|homework|tutorial',            weight: 2.5 },
             { category: 'technology', pattern: 'notion|obsidian',                                                  weight: 1.0 },
-            { category: 'structure',  pattern: 'notes/|study/|courses/|assignments/',                               weight: 1.5 },
+            { category: 'structure',  pattern: 'lecture-notes/|study/|courses/|assignments/',                        weight: 1.5 },
             { category: 'content',    pattern: 'lesson|assignment|quiz|exam|lecture|tutorial',                       weight: 1.0 },
         ]
     }),
@@ -554,7 +558,7 @@ export const PERSONAS: Persona[] = [
         icon: '🚀',
         accentColor: '#fb923c',
         signals: [
-            { category: 'identity',   pattern: 'power.?user|builder|maker|hacker|tinkerer|contributor',            weight: 2.0 },
+            { category: 'identity',   pattern: 'power.?user|builder|maker|hacker|tinkerer|contributor',            weight: 2.5 },
             { category: 'technology', pattern: 'typescript|python|bash|powershell|git',                             weight: 1.0 },
             { category: 'structure',  pattern: 'skills/|extensions/|plugins/',                                      weight: 1.5 },
             { category: 'content',    pattern: 'extensi|plugin|customiz|automat|contribut',                         weight: 0.5 },
@@ -751,6 +755,7 @@ export const PERSONAS: Persona[] = [
             { category: 'identity',   pattern: 'designer|ux|ui|user.?experience|user.?interface|interaction.?design',      weight: 2.5 },
             { category: 'technology', pattern: 'figma|sketch|adobe.?xd|storybook|tailwind|css',                            weight: 2.0 },
             { category: 'structure',  pattern: 'design/|mockups/|wireframes/|prototypes/|design-system/|components/',      weight: 1.5 },
+            { category: 'dependency', pattern: 'tailwindcss|storybook|@radix-ui|@headlessui|styled-components|@emotion|@chakra-ui|@mui', weight: 1.5 },
             { category: 'content',    pattern: 'wireframe|prototype|usability|design.?system|component|accessibility',      weight: 1.0 },
         ]
     }),
@@ -811,6 +816,7 @@ export const PERSONAS: Persona[] = [
             { category: 'identity',   pattern: 'finance|financial|accounting|cpa|cfa|investment|analyst',                  weight: 2.5 },
             { category: 'technology', pattern: 'excel|power.?bi|bloomberg|quickbooks|sap',                                weight: 2.0 },
             { category: 'structure',  pattern: 'financials/|budgets/|forecasts/|reports/|audit/',                          weight: 1.5 },
+            { category: 'dependency', pattern: 'openpyxl|pandas|plotly|chart\\.js|d3|financial|quantlib',                  weight: 1.5 },
             { category: 'content',    pattern: 'revenue|margin|forecast|balance.?sheet|p&l|roi|irr|dcf',                   weight: 1.0 },
         ]
     }),
@@ -867,9 +873,9 @@ export const PERSONAS: Persona[] = [
         icon: '🧩',
         accentColor: '#2dd4bf',
         signals: [
-            { category: 'identity',   pattern: 'knowledge.?worker|information|briefing|executive.?summary|memo',           weight: 2.0 },
+            { category: 'identity',   pattern: 'knowledge.?worker|information|briefing|executive.?summary|memo',           weight: 2.5 },
             { category: 'technology', pattern: 'notion|obsidian|confluence|sharepoint|onenote',                            weight: 1.5 },
-            { category: 'structure',  pattern: 'notes/|wiki/|knowledge-base/|memos/|briefings/',                           weight: 1.5 },
+            { category: 'structure',  pattern: 'wiki/|knowledge-base/|memos/|briefings/|meeting-notes/',                   weight: 1.5 },
             { category: 'content',    pattern: 'briefing|executive.?summary|talking.?points|scenario|synthesis',            weight: 1.0 },
         ]
     }),
@@ -914,6 +920,7 @@ export const PERSONAS: Persona[] = [
             { category: 'identity',   pattern: 'podcast|audio|episode|show.?notes|interview|hosting',                     weight: 2.5 },
             { category: 'technology', pattern: 'audacity|descript|anchor|spotify|apple.?podcast|rss',                      weight: 2.0 },
             { category: 'structure',  pattern: 'episodes/|show-notes/|transcripts/|audio/',                                weight: 1.5 },
+            { category: 'dependency', pattern: 'ffmpeg-static|fluent-ffmpeg|rss-parser|podcast-feed-parser',               weight: 1.5 },
             { category: 'content',    pattern: 'episode|guest|show.?notes|transcript|listener|audience',                    weight: 1.0 },
         ]
     }),
@@ -928,7 +935,7 @@ export const PERSONAS: Persona[] = [
         signals: [
             { category: 'identity',   pattern: 'counselor|therapist|psycholog|mental.?health|clinical|psychotherapy',      weight: 2.5 },
             { category: 'technology', pattern: 'simplepractice|theranest|doxy|therapynotes|wiley',                         weight: 2.0 },
-            { category: 'structure',  pattern: 'cases/|assessments/|treatment-plans/|notes/|intake/',                      weight: 2.0 },
+            { category: 'structure',  pattern: 'cases/|assessments/|treatment-plans/|session-notes/|intake/',              weight: 2.0 },
             { category: 'content',    pattern: 'treatment.?plan|case.?conceptual|intake|assessment|psychoeducat|dsm',       weight: 1.0 },
         ]
     }),
@@ -974,6 +981,7 @@ export const PERSONAS: Persona[] = [
             { category: 'identity',   pattern: 'scientist|biolog|chemist|physicist|geolog|ecolog|neurosci',                weight: 2.5 },
             { category: 'technology', pattern: 'python|r\b|matlab|spss|prism|imagej|blast',                               weight: 1.5 },
             { category: 'structure',  pattern: 'lab-notebooks/|protocols/|data/|manuscripts/|figures/',                    weight: 1.5 },
+            { category: 'dependency', pattern: 'scipy|numpy|pandas|matplotlib|biopython|astropy|rdkit|statsmodels',        weight: 1.5 },
             { category: 'content',    pattern: 'hypothesis|protocol|specimen|reagent|method|result|manuscript|peer.?review', weight: 1.0 },
         ]
     }),
@@ -1003,6 +1011,7 @@ export const PERSONAS: Persona[] = [
             { category: 'identity',   pattern: 'teacher|educator|instructor|professor|curriculum|lesson.?plan',            weight: 2.5 },
             { category: 'technology', pattern: 'canvas|moodle|blackboard|google.?classroom',                               weight: 2.0 },
             { category: 'structure',  pattern: 'lessons/|curriculum/|assessments/|rubrics/|syllabi/',                       weight: 1.5 },
+            { category: 'dependency', pattern: 'reveal\\.js|@marp-team|marked|remark|katex|mathjax',                      weight: 1.5 },
             { category: 'content',    pattern: 'lesson.?plan|rubric|differentiat|assessment|learning.?objective|bloom',     weight: 1.0 },
         ]
     }),

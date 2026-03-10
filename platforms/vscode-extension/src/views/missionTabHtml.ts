@@ -37,7 +37,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
 
       <nav class="action-list" aria-label="Actions" role="navigation" id="mission-action-list">
               
-              <div class="action-group-label" data-group="partnership"><span class="collapse-chevron" aria-hidden="true">▾</span>PARTNERSHIP</div>
+              <div class="action-group-label" data-group="partnership" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>PARTNERSHIP</div>
               <div class="action-group-content" data-group="partnership">
               <button class="action-btn primary" data-cmd="openChat" tabindex="0" role="button" aria-label="Start a conversation with Alex">
                   <span class="action-icon" aria-hidden="true">💬</span>
@@ -47,7 +47,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               ${actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
               </div>
               
-              <div class="action-group-label" data-group="system"><span class="collapse-chevron" aria-hidden="true">▾</span>SYSTEM</div>
+              <div class="action-group-label" data-group="system" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>SYSTEM</div>
               <div class="action-group-content" data-group="system">
               <button class="action-btn" data-cmd="upgrade" tabindex="0" role="button" aria-label="Initialize or Update Alex architecture">
                   <span class="action-icon" aria-hidden="true">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
@@ -61,7 +61,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
               </div>
               
-              <div class="action-group-label" data-group="trust"><span class="collapse-chevron" aria-hidden="true">▾</span>TRUST & GROWTH</div>
+              <div class="action-group-label" data-group="trust" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>TRUST & GROWTH</div>
               <div class="action-group-content" data-group="trust">
               ${actionButton('dream', '💭', 'Dream', 'Neural maintenance — keeps me reliable')}
               ${actionButton('selfActualize', '✨', 'Self-Actualize', 'Deep self-assessment — honest about my capabilities')}
@@ -70,7 +70,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               ${actionButton('showGoals', '🎯', 'Goals', 'Track learning progress')}
               </div>
               
-              <div class="action-group-label" data-group="build"><span class="collapse-chevron" aria-hidden="true">▾</span>BUILD TOGETHER</div>
+              <div class="action-group-label" data-group="build" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>BUILD TOGETHER</div>
               <div class="action-group-content" data-group="build">
               ${actionButton('codeReview', '👀', 'Code Review', 'Review for correctness and growth')}
               ${actionButton('debugThis', '🐛', 'Debug This', 'Find the issue together')}
@@ -81,14 +81,14 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               ${actionButton('reviewPR', '👁️', 'Review PR', 'AI-powered pull request review')}
               </div>
               
-              <div class="action-group-label" data-group="present"><span class="collapse-chevron" aria-hidden="true">▾</span>PRESENT & SHARE</div>
+              <div class="action-group-label" data-group="present" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>PRESENT & SHARE</div>
               <div class="action-group-content" data-group="present">
               ${actionButton('generatePptx', '📄', 'Marp PPTX (Local)', 'Generate PowerPoint locally with Marp - free, offline')}
               ${actionButton('generateGammaPresentation', '🎨', 'Gamma (Cloud)', 'Generate beautiful AI presentations via Gamma API')}
               ${actionButton('generateGammaAdvanced', '⚙️', 'Gamma Advanced', 'Gamma with style, model, and image options')}
               </div>
               
-              <div class="action-group-label" data-group="visualize"><span class="collapse-chevron" aria-hidden="true">▾</span>VISUALIZE</div>
+              <div class="action-group-label" data-group="visualize" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>VISUALIZE</div>
               <div class="action-group-content" data-group="visualize">
               ${actionButton('generateAIImage', '🖼️', 'Generate Image', 'Generate AI images from text prompts via Replicate')}
               ${actionButton('editImageAI', '✏️', 'Edit Image (AI)', 'Edit images with AI using nano-banana-pro model')}

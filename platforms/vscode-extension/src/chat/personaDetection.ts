@@ -227,6 +227,10 @@ async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDe
             { pattern: /research phase|literature review|data collection|experiment/i,       personaId: 'researcher' },
             { pattern: /presentation|demo prep|conference|talk prep/i,                       personaId: 'presenter' },
             { pattern: /security audit|compliance review|pen.?test|threat model/i,           personaId: 'security' },
+            { pattern: /data pipeline|etl|data migration|lakehouse|medallion/i,              personaId: 'data-engineer' },
+            { pattern: /game design|level design|game jam|game prototype|playtest/i,         personaId: 'game-developer' },
+            { pattern: /learning phase|study|exam prep|course.?work|tutorial/i,              personaId: 'student' },
+            { pattern: /content phase|blog writing|content calendar|editorial/i,             personaId: 'content-creator' },
         ];
         
         for (const roadmapPath of roadmapPaths) {
@@ -535,7 +539,8 @@ function selectBestPersona(scores: Map<string, PersonaScoreEntry>): PersonaDetec
     
     for (const persona of PERSONAS) {
         const entry = scores.get(persona.id)!;
-        if (entry.score > bestScore) {
+        // Tie-breaking: on equal scores, prefer the persona with more distinct signal matches (specificity)
+        if (entry.score > bestScore || (entry.score === bestScore && entry.reasons.length > bestReasons.length)) {
             bestScore = entry.score;
             bestPersona = persona;
             bestReasons = entry.reasons;
@@ -632,7 +637,7 @@ export async function detectPersona(
         return { ...copilotResult, source: 'detected' };
     }
     
-    // PRIORITY 6: Use saved projectPersona if available and recent (within 7 days)
+    // PRIORITY 6: Use saved projectPersona if available and recent (within 1 day)
     const extendedProfile = userProfile as ExtendedUserProfile | undefined;
     if (extendedProfile?.projectPersona) {
         const savedPersona = extendedProfile.projectPersona;
@@ -643,7 +648,7 @@ export async function detectPersona(
                 ageInDays = (Date.now() - detectedAt.getTime()) / (1000 * 60 * 60 * 24);
             }
         }
-        if (ageInDays < 7) {
+        if (ageInDays < 1) {
             const matchedPersona = PERSONAS.find(p => p.id === savedPersona.id);
             if (matchedPersona) {
                 return {
@@ -656,7 +661,7 @@ export async function detectPersona(
         }
     }
     
-    // PRIORITY 6: Signal-based scoring across all evidence sources
+    // PRIORITY 7: Signal-based scoring across all evidence sources
     const scores = new Map<string, PersonaScoreEntry>();
     for (const persona of PERSONAS) {
         scores.set(persona.id, { score: 0, reasons: [] });

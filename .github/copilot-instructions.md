@@ -28,9 +28,9 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.2.0 — All Command Center Master Plan active priorities COMPLETE. P7.6 copilot-instructions.md Persona: field now Priority 5 in detection chain — bridges documentation and runtime, fixes heir misdetection (e.g., LearnAlex DevOps). North Star setting protocol updated to include Persona: during /northstar define. 8-level priority chain: Focus → Goal → Phase → Project Goals → Copilot Instructions Persona → Profile Cache → Workspace Scoring → Default.
+Recent: v6.3.0 published. VS Code 1.111 evaluation complete — agent-scoped hooks + autopilot adopted. Roadmap reorganized by priority: v6.4.0 (Agent Hooks Release, 6 items) → v6.5.0 (Trust Release, 23 items). Completed tasks moved to collapsible appendix. Skill-to-Discipline Mapping doc (41 disciplines × 130 skills) added to Docs tab + copied to AlexLearn heir.
 North Star: Create the most advanced and trusted AI partner for any job
-Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
+Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: 2026-03-09
 
 ## User Profile
@@ -50,6 +50,7 @@ I4: NEVER run Reset on Master Alex (deletes architecture)
 I5: COMMIT before risky operations
 I6: One platform, one roadmap
 I7: Root .github/ is source of truth, extension .github/ is generated
+I8: Architecture NEVER depends on the Extension — dependency arrow is Extension → Architecture, never reverse
 Recovery: git checkout HEAD -- .github/
 
 ## Routing

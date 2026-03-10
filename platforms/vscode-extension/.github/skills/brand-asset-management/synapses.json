@@ -46,6 +46,13 @@
       "strength": 0.7,
       "when": "verifying brand assets before release",
       "yields": "Asset completeness check during release preflight"
+    },
+    {
+      "target": ".github/skills/persona-detection/SKILL.md",
+      "type": "coordinates-with",
+      "strength": 0.7,
+      "when": "persona detection drives avatar selection, easter egg rendering, and bannerNoun display",
+      "yields": "Persona-specific brand expression in the sidebar UI"
     }
   ],
   "triggers": [

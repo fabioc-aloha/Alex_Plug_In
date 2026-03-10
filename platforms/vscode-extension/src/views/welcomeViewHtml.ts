@@ -216,7 +216,6 @@ export function getWelcomeHtmlContent(
   personalityMode?: string,
   tokenStatuses?: TokenStatusInfo[],
   settingsToggles?: SettingsToggle[],
-  disabledSkills?: string[],
 ): string {
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, '_getHtmlContent: webview must be defined');
@@ -288,7 +287,7 @@ export function getWelcomeHtmlContent(
   const trifectaTagsHtml = trifectaIds.length > 0
     ? trifectaIds.map((id) => {
       const name = getSkillDisplayName(id);
-      return `<span class="trifecta-tag" data-cmd="launchRecommendedSkill" data-skill="${id}" data-skill-name="${name}" title="Launch ${name}">${name}</span>`;
+      return `<span class="trifecta-tag" data-cmd="launchRecommendedSkill" data-skill="${id}" data-skill-name="${name}" title="Launch ${name}" tabindex="0" role="button">${name}</span>`;
     })
     .join("\n                ")
     : `<span class="trifecta-placeholder" style="opacity: 0.6; font-style: italic;">Focus trifectas will appear here when you start working</span>`;
@@ -412,7 +411,7 @@ export function getWelcomeHtmlContent(
 
       ${getAgentsTabHtml({ agents, recentActivity, cognitiveState, agentMode, personalityMode })}
 
-      ${getSkillStoreTabHtml({ skills, health, disabledSkills })}
+      ${getSkillStoreTabHtml({ skills, health })}
       ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, streakDays, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, cogTier, cogProgress })}
 
       ${getDocsTabHtml()}
@@ -584,6 +583,12 @@ export function getWelcomeHtmlContent(
               const isCollapsed = this.classList.toggle('collapsed');
               this.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
           });
+          hdr.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  this.click();
+              }
+          });
       });
 
       // ── Doc tip dismiss (7.39) ──
@@ -625,8 +630,12 @@ export function getWelcomeHtmlContent(
               const isCollapsed = this.classList.toggle('collapsed');
               content.classList.toggle('collapsed', isCollapsed);
               this.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-          });
-      });
+          });          label.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  this.click();
+              }
+          });      });
 
       // ── Personality Toggle (7.16) ──
       document.querySelectorAll('.personality-toggle-btn').forEach(function(btn) {
@@ -651,20 +660,18 @@ export function getWelcomeHtmlContent(
               this.setAttribute('aria-checked', String(isOn));
               vscode.postMessage({ command: 'toggleSetting', key: key, value: isOn });
           });
+          sw.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  this.click();
+              }
+          });
       });
 
-      // ── Skill Enable/Disable (7.28) ──
-      document.querySelectorAll('.skill-toggle[data-skill-toggle]').forEach(function(sw) {
-          sw.addEventListener('click', function(e) {
-              e.stopPropagation();
-              e.preventDefault();
-              const skillId = this.getAttribute('data-skill-toggle');
-              const isOn = this.classList.toggle('on');
-              this.setAttribute('aria-checked', String(isOn));
-              const card = this.closest('.skill-card');
-              if (card) card.classList.toggle('disabled', !isOn);
-              vscode.postMessage({ command: 'toggleSkill', skillId: skillId, enabled: isOn });
-          });
+      // ── Auto-populate aria-label on doc-grid-cards from title text ──
+      document.querySelectorAll('.doc-grid-card:not([aria-label])').forEach(function(card) {
+          var title = card.querySelector('.doc-grid-title');
+          if (title) card.setAttribute('aria-label', title.textContent);
       });
   </script>
 </body>

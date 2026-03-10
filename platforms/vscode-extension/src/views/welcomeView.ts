@@ -199,6 +199,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         learnAlexDemoScripts: "https://learnalex.correax.com/demo-scripts",
         learnAlexHandout: "https://learnalex.correax.com/handout",
         learnAlexPreRead: "https://learnalex.correax.com/pre-read",
+        learnAlexGitHubGuide: "https://learnalex.correax.com/github-guide",
+        learnAlexResponsibleAI: "https://learnalex.correax.com/responsible-ai",
       };
 
       // Handle simple command execution
@@ -273,19 +275,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           break;
         }
 
-        case "toggleSkill": {
-          // 7.28: Skill enable/disable toggle — persisted in globalState
-          if (this._context && typeof message.skillId === 'string') {
-            const disabled = this._context.globalState.get<string[]>('alex.disabledSkills', []);
-            const updated = message.enabled
-              ? disabled.filter((id: string) => id !== message.skillId)
-              : [...disabled, message.skillId];
-            await this._context.globalState.update('alex.disabledSkills', updated);
-            console.log(`[Alex] Skill ${message.skillId} ${message.enabled ? 'enabled' : 'disabled'}`);
-          }
-          break;
-        }
-
         case "refresh":
           this.refresh();
           break;
@@ -302,6 +291,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
               'MASTER-ALEX-PROTECTED': '.github/config/MASTER-ALEX-PROTECTED.json',
               'HEIR-ARCHITECTURE': 'alex_docs/platforms/HEIR-ARCHITECTURE.md',
               'RESEARCH-FIRST': 'alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md',
+              'SKILL-DISCIPLINE-MAP': 'alex_docs/guides/SKILL-DISCIPLINE-MAP.md',
             };
             const relPath = docMap[docName];
             if (relPath) {
@@ -515,8 +505,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         { key: 'alex.globalKnowledge.enabled', label: 'Global Knowledge', enabled: alexCfg.get<boolean>('globalKnowledge.enabled', true) },
       ];
 
-      // 7.28: Disabled skills from globalState
-      const disabledSkills = this._context?.globalState.get<string[]>('alex.disabledSkills', []) ?? [];
+
 
       console.log(`[Alex][WelcomeView] Tab data: agents=${agents.length}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
 
@@ -543,7 +532,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         personalityMode,
         tokenStatuses,
         settingsToggles,
-        disabledSkills,
       );
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);

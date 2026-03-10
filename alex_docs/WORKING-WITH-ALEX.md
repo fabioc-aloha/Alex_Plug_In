@@ -619,7 +619,7 @@ The best prompt engineers share these traits:
 
 For deeper exploration of dialog engineering and AI partnership concepts:
 
-- **[Fabio Correa on Medium](https://medium.com/@fabioc)** — Articles on Dialog Engineering, AI ethics, cognitive architecture, and the future of human-AI collaboration
+- **[CorreaX on Medium](https://medium.com/@fabioc)** — Articles on Dialog Engineering, AI ethics, cognitive architecture, and the future of human-AI collaboration
   - *Dialog Engineering: AI as Your Research Assistant*
   - *What is Dialog Engineering?*
   - *The Human Element in AI: Why We Need More Than Just Engineers*

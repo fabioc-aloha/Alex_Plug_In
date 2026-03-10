@@ -1,0 +1,57 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "counseling-psychology",
+    "version": "1.0.0",
+    "created": "2026-03-09",
+    "inheritance": "inheritable",
+    "description": "Therapeutic frameworks, clinical assessment, ethical practice, client documentation",
+    "connections": [
+        {
+            "target": ".github/skills/coaching-techniques/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.8,
+            "description": "Counseling extends coaching with clinical frameworks and therapeutic depth"
+        },
+        {
+            "target": ".github/skills/learning-psychology/SKILL.md",
+            "type": "Relates",
+            "strength": 0.7,
+            "description": "Therapeutic change processes overlap with learning and behavior change models"
+        },
+        {
+            "target": ".github/skills/privacy-responsible-ai/SKILL.md",
+            "type": "Requires",
+            "strength": 0.8,
+            "description": "Mental health data requires the highest level of privacy and responsible AI use"
+        },
+        {
+            "target": ".github/skills/frustration-recognition/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.7,
+            "description": "Recognizing emotional distress is core to therapeutic assessment"
+        },
+        {
+            "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+            "type": "Requires",
+            "strength": 0.7,
+            "description": "Client records are PHI/PII and subject to HIPAA and state mental health laws"
+        }
+    ],
+    "activationTriggers": [
+        "counseling",
+        "therapy",
+        "therapist",
+        "CBT",
+        "DBT",
+        "motivational interviewing",
+        "mental health",
+        "clinical assessment",
+        "treatment plan",
+        "psychotherapy",
+        "counselor",
+        "psychology",
+        "wellbeing",
+        "wellness program"
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "financial-analysis",
+    "version": "1.0.0",
+    "created": "2026-03-09",
+    "inheritance": "inheritable",
+    "description": "Financial modeling, analysis frameworks, regulatory awareness",
+    "connections": [
+        {
+            "target": ".github/skills/business-analysis/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.8,
+            "description": "Financial analysis extends business analysis with quantitative rigor"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "Relates",
+            "strength": 0.7,
+            "description": "Financial insights require executive-level communication"
+        },
+        {
+            "target": ".github/skills/status-reporting/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Financial metrics are core to status reporting"
+        },
+        {
+            "target": ".github/skills/anti-hallucination/SKILL.md",
+            "type": "Requires",
+            "strength": 0.8,
+            "description": "Financial figures must be accurate — hallucinated numbers are dangerous"
+        },
+        {
+            "target": ".github/skills/scope-management/SKILL.md",
+            "type": "Relates",
+            "strength": 0.5,
+            "description": "Budget constraints inform scope decisions"
+        }
+    ],
+    "activationTriggers": [
+        "financial model",
+        "DCF",
+        "valuation",
+        "revenue forecast",
+        "budget",
+        "financial statement",
+        "balance sheet",
+        "income statement",
+        "cash flow",
+        "ROI",
+        "cap rate",
+        "EBITDA",
+        "margin",
+        "P&L",
+        "accounting",
+        "SOX",
+        "financial analysis"
+    ]
+}

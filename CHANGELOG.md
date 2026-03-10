@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.3.0] - 2026-03-09
+
+> **The Accessibility & Workshop Alignment Release** — WCAG keyboard accessibility, 10 domain skills from LearnAlex, docs tab sync with 41 workshops, Architecture Independence cardinal rule.
+
+### Added
+- **10 domain skills from LearnAlex** — career-development, comedy-writing, counseling-psychology, financial-analysis, game-design, healthcare-informatics, hr-people-operations, journalism, legal-compliance, sales-enablement
+- **8 new workshop study guides** in Docs tab (Responsible AI Ethics, Accessibility Engineering, Cross-Cultural Design, Cloud Architecture, Data Storytelling, Green Software, Open-Source Governance, Product Management)
+- **GitHub Guide + Responsible AI facilitator buttons** in Docs tab
+- **Architecture Independence cardinal rule (I8)** — Architecture MUST NOT depend on the Extension; dependency arrow is Extension → Architecture, never reverse
+
+### Changed
+- **Persona detection backlog P7.7–7.12** — dependency signals for designer/scientist/finance/teacher/podcaster, narrowed patterns, identity weight 2.0→2.5, tie-break by signal count, cache TTL 7d→1d, P3 phase rules expanded to 11 personas
+- **Workshop persona IDs fixed** (7 broken IDs now match live learnalex.correax.com)
+- **Docs tab workshop grid** grouped by domain with accurate workshop count (41)
+
+### Fixed
+- **WCAG keyboard accessibility** — Enter/Space keydown handlers for 4 interactive controls (persona cards, tabs, trifecta tags, doc cards)
+- **Touch target sizes** — toggles increased to 36×20px (desktop) and 30×18px (compact)
+- **Font sizes** — 5 elements bumped to minimum 11px for readability
+- **Focus outline** — `:focus-visible` rule replaces suppressed outlines
+- **Aria labels** — 14 doc-grid-cards + 6 action-group-labels now have proper ARIA attributes
+- **PII sanitized** in WORKING-WITH-ALEX.md (personal name → brand name)
+
+### Removed
+- **Skill toggle switches** — non-functional feature removed from Skill Store tab, sharedStyles, and data provider
+
+---
+
 ## [6.2.0] - 2026-03-05
 
 > **The On-Brand Partnership Release** — M365 heir rebranded to partnership voice, EmbeddedKnowledge RAG, store description overhaul, full version alignment.

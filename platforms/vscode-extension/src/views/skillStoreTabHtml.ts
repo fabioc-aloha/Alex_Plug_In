@@ -53,14 +53,11 @@ function getSkillIcon(id: string, category: string): string {
 export interface SkillStoreTabContext {
     skills?: SkillInfo[];
     health: HealthCheckResult;
-    disabledSkills?: string[];
 }
 
 /** Generate the Skill Store tab panel HTML. */
 export function getSkillStoreTabHtml(ctx: SkillStoreTabContext): string {
-    const { skills, health, disabledSkills } = ctx;
-
-    const disabledSet = new Set(disabledSkills ?? []);
+    const { skills, health } = ctx;
 
     const skillCategories: Record<string, SkillInfo[]> = {};
     for (const cat of CATEGORY_ORDER) { skillCategories[cat] = []; }
@@ -100,15 +97,13 @@ export function getSkillStoreTabHtml(ctx: SkillStoreTabContext): string {
                   </div>
                   <div class="skill-category-group-content">
                       ${catSkills.map(s => {
-                      const isDisabled = disabledSet.has(s.id);
                       const skillIcon = getSkillIcon(s.id, cat);
                       return `
-                      <div class="skill-card${isDisabled ? ' disabled' : ''}" data-cmd="openSkill" data-skill="${escapeHtml(s.id)}" data-skill-name="${escapeHtml(s.displayName)}" title="${escapeHtml(s.description)}" tabindex="0" role="button">
+                      <div class="skill-card" data-cmd="openSkill" data-skill="${escapeHtml(s.id)}" data-skill-name="${escapeHtml(s.displayName)}" title="${escapeHtml(s.description)}" tabindex="0" role="button">
                           <div class="skill-header">
                               <span class="skill-icon" aria-hidden="true">${skillIcon}</span>
                               <span class="skill-name">${escapeHtml(s.displayName)}</span>
                               ${s.hasSynapses ? '<span class="skill-synapse-dot" title="Has synapses">\u26A1</span>' : ''}
-                              <div class="skill-toggle ${isDisabled ? '' : 'on'}" data-skill-toggle="${escapeHtml(s.id)}" tabindex="0" role="switch" aria-checked="${!isDisabled}" aria-label="Toggle ${escapeHtml(s.displayName)}" title="${isDisabled ? 'Enable' : 'Disable'} skill"></div>
                           </div>
                           <div class="skill-desc">${escapeHtml(s.description)}</div>
                       </div>`;}).join('')}

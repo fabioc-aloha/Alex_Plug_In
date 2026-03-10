@@ -227,4 +227,3 @@ You'll master 8 skills across 4 phases over 2-3 weeks:
 
 Ready to begin with **ui-ux-design**? I'll assess what you already know.
 ```
-

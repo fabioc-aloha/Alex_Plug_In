@@ -1,0 +1,61 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "sales-enablement",
+    "version": "1.0.0",
+    "created": "2026-03-09",
+    "inheritance": "inheritable",
+    "description": "Sales methodology, pipeline management, negotiation, customer engagement",
+    "connections": [
+        {
+            "target": ".github/skills/business-analysis/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Sales requires understanding business requirements and ROI"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.8,
+            "description": "Sales presentations require executive-level storytelling"
+        },
+        {
+            "target": ".github/skills/coaching-techniques/SKILL.md",
+            "type": "Relates",
+            "strength": 0.7,
+            "description": "Sales coaching uses the same feedback and growth frameworks"
+        },
+        {
+            "target": ".github/skills/financial-analysis/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Deal qualification requires understanding customer financials"
+        },
+        {
+            "target": ".github/skills/frustration-recognition/SKILL.md",
+            "type": "Relates",
+            "strength": 0.5,
+            "description": "Recognizing customer frustration is key to consultative selling"
+        }
+    ],
+    "activationTriggers": [
+        "sales pipeline",
+        "CRM",
+        "prospect",
+        "deal",
+        "close",
+        "quota",
+        "commission",
+        "MEDDPICC",
+        "SPIN selling",
+        "negotiation",
+        "cold outreach",
+        "win rate",
+        "forecast",
+        "lead generation",
+        "objection handling",
+        "sales methodology",
+        "discount",
+        "proposal"
+    ]
+}

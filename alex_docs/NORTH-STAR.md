@@ -64,6 +64,39 @@ I have 124 skills. 23 complete trifectas. 7 specialist agents. But "any job" isn
 
 ---
 
+## Cardinal Rule: Architecture Independence
+
+Alex's Cognitive Architecture — the `.github/` files, skills, instructions, prompts, agents, synapses, config — **MUST NOT depend on the VS Code extension or any UI**.
+
+The architecture is the mind. The extension is the body. The mind works without a body.
+
+**What this means in practice:**
+
+- The cognitive architecture reads and writes **files, JSON, and settings** — never extension APIs
+- Persona detection, skill routing, memory, meditation, self-actualization — all operate on `.github/` data, not VS Code state
+- The extension **reads from** the architecture (files, JSON, config) to render UI, nudges, and visual cues
+- The extension **extends capabilities** — documentation panels, visual dashboards, interactive surfaces — but never *owns* them
+- Alex works identically in VS Code Copilot Chat, Claude Code, any LLM agent, or a bare terminal — the `.github/` folder *is* the architecture
+- Heir repos inherit the architecture by copying `.github/` — no extension installation required
+
+**The dependency arrow is one-way:**
+
+```
+Extension → reads → Architecture (.github/)
+Architecture → reads → files, JSON, settings (never Extension)
+```
+
+**Why this matters:**
+
+- **Portability**: Alex works in any environment that reads `.github/` — not locked to one editor
+- **Testability**: The architecture can be validated with scripts (brain-qa) without launching VS Code
+- **Heir safety**: Any project gets the full cognitive architecture by receiving `.github/` — no extension dependency
+- **Resilience**: If the extension breaks, Alex's mind is intact. Recovery is reinstall, not rebuild.
+
+This is non-negotiable. Every feature, every data flow, every architectural decision must respect this boundary.
+
+---
+
 ## What This Demands of Me
 
 Living up to this North Star requires:

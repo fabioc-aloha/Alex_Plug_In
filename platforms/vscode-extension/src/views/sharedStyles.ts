@@ -455,7 +455,7 @@ export function getSharedStyles(personaAccent: string): string {
           margin-top: 0;
       }
       .action-group-label .collapse-chevron {
-          font-size: 9px;
+          font-size: 11px;
           transition: transform 0.12s ease;
           display: inline-block;
       }
@@ -488,6 +488,10 @@ export function getSharedStyles(personaAccent: string): string {
       .quick-command-input:focus {
           border-color: var(--vscode-focusBorder);
           outline: none;
+      }
+      .quick-command-input:focus-visible {
+          outline: 2px solid var(--vscode-focusBorder);
+          outline-offset: -1px;
       }
       .quick-command-input::placeholder {
           color: var(--vscode-input-placeholderForeground);
@@ -1092,7 +1096,7 @@ export function getSharedStyles(personaAccent: string): string {
       .activity-status.error { background: var(--vscode-errorForeground); }
       .activity-agent { font-weight: 600; flex-shrink: 0; }
       .activity-prompt { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.8; }
-      .activity-time { font-size: 10px; opacity: 0.6; flex-shrink: 0; }
+      .activity-time { font-size: 11px; opacity: 0.6; flex-shrink: 0; }
 
       /* ── Skill Store Tab ── */
       .skill-grid {
@@ -1323,7 +1327,7 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .catalog-toggle-btn.active {
           background: var(--persona-accent, #6366f1);
-          color: #fff;
+          color: var(--vscode-button-foreground, #fff);
           opacity: 1;
           font-weight: 600;
       }
@@ -1512,7 +1516,7 @@ export function getSharedStyles(personaAccent: string): string {
       .secret-dot.unset::after { content: '\\2717'; color: white; }
       .secret-name { flex: 1; }
       .secret-badge {
-          font-size: 10px; padding: 2px 8px; border-radius: 4px;
+          font-size: 11px; padding: 2px 8px; border-radius: 4px;
       }
       .secret-badge.set { background: rgba(115,201,145,0.1); color: var(--vscode-testing-iconPassed, #73c991); }
       .secret-badge.unset { background: rgba(241,76,76,0.1); color: var(--vscode-errorForeground, #f14c4c); }
@@ -1529,35 +1533,21 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .setting-row:last-child { border-bottom: none; }
       .toggle-switch {
-          position: relative; width: 32px; height: 18px;
+          position: relative; width: 36px; height: 20px;
           background: var(--vscode-input-background, #3c3c3c);
-          border-radius: 9px; cursor: pointer; transition: background 0.2s;
+          border-radius: 10px; cursor: pointer; transition: background 0.2s;
           border: 1px solid var(--vscode-widget-border, #303030);
           flex-shrink: 0;
       }
       .toggle-switch.on { background: var(--persona-accent, #6366f1); }
       .toggle-switch::after {
           content: ''; position: absolute; top: 2px; left: 2px;
-          width: 12px; height: 12px; border-radius: 50%;
+          width: 14px; height: 14px; border-radius: 50%;
           background: var(--vscode-foreground); transition: transform 0.2s;
       }
-      .toggle-switch.on::after { transform: translateX(14px); }
+      .toggle-switch.on::after { transform: translateX(18px); }
 
-      /* ── 7.28 Skill Toggle ── */
-      .skill-toggle {
-          width: 24px; height: 14px; border-radius: 7px; cursor: pointer;
-          background: var(--vscode-input-background, #3c3c3c);
-          border: 1px solid var(--vscode-widget-border, #303030);
-          position: relative; flex-shrink: 0; transition: background 0.2s;
-      }
-      .skill-toggle.on { background: var(--persona-accent, #6366f1); }
-      .skill-toggle::after {
-          content: ''; position: absolute; top: 1px; left: 1px;
-          width: 10px; height: 10px; border-radius: 50%;
-          background: var(--vscode-foreground); transition: transform 0.12s;
-      }
-      .skill-toggle.on::after { transform: translateX(10px); }
-      .skill-card.disabled { opacity: 0.5; }
+      /* ── 7.29 Skill Icon ── (7.28 Skill Toggle removed — no longer supported) ──
 
       /* ── 7.29 Skill Icon ── */
       .skill-icon { font-size: 14px; flex-shrink: 0; }
@@ -1576,7 +1566,7 @@ export function getSharedStyles(personaAccent: string): string {
           flex: 1; text-align: center; padding: 8px 4px;
           background: var(--vscode-editor-background);
           border: 1px solid var(--vscode-widget-border, #303030);
-          border-radius: 6px; font-size: 10px;
+          border-radius: 6px; font-size: 11px;
       }
       .freshness-count { font-size: 16px; font-weight: 700; }
       .freshness-label { opacity: 0.7; margin-top: 2px; }
@@ -1601,7 +1591,7 @@ export function getSharedStyles(personaAccent: string): string {
       .calibration-bar-fill.medium { background: var(--persona-accent, #6366f1); }
       .calibration-bar-fill.low { background: var(--vscode-editorWarning-foreground, #cca700); }
       .calibration-bar-fill.uncertain { background: var(--vscode-errorForeground, #f14c4c); }
-      .calibration-pct { width: 30px; font-size: 10px; opacity: 0.6; }
+      .calibration-pct { width: 30px; font-size: 11px; opacity: 0.6; }
 
       /* ── 7.38 Meditation Streak ── */
       .meditation-streak-row {

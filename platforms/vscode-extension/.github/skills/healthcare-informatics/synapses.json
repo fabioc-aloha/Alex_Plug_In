@@ -1,0 +1,58 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "healthcare-informatics",
+    "version": "1.0.0",
+    "created": "2026-03-09",
+    "inheritance": "inheritable",
+    "description": "Clinical terminology, HIPAA/HITECH compliance, EHR patterns, health data management",
+    "connections": [
+        {
+            "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.9,
+            "description": "Healthcare has the strictest PII/PHI regulations (HIPAA, HITECH)"
+        },
+        {
+            "target": ".github/skills/anti-hallucination/SKILL.md",
+            "type": "Requires",
+            "strength": 0.9,
+            "description": "Hallucinated medical information can cause patient harm"
+        },
+        {
+            "target": ".github/skills/citation-management/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Clinical evidence requires proper citation of guidelines and studies"
+        },
+        {
+            "target": ".github/skills/research-first-development/SKILL.md",
+            "type": "Relates",
+            "strength": 0.6,
+            "description": "Clinical research methodology aligns with research-first principles"
+        },
+        {
+            "target": ".github/skills/privacy-responsible-ai/SKILL.md",
+            "type": "Enhances",
+            "strength": 0.8,
+            "description": "Healthcare AI requires the highest standard of responsible AI practices"
+        }
+    ],
+    "activationTriggers": [
+        "HIPAA",
+        "clinical",
+        "patient",
+        "medical",
+        "healthcare",
+        "EHR",
+        "electronic health record",
+        "PHI",
+        "protected health information",
+        "HL7",
+        "FHIR",
+        "ICD-10",
+        "CPT code",
+        "clinical trial",
+        "IRB"
+    ]
+}

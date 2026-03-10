@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch + GitHub Copilot
 **Created**: March 5, 2026
-**Revised**: March 10, 2026 — P5B complete (globalKnowledgeContent 1,027→808L, extension 1,148→894L), P7.3-7.5 complete (dynamic LLM prompt, 13 skill diversifications, 8 technology signals). P5C complete (7 orchestrators split). P5D accepted (5 structural exceptions). Wave 8 complete (20/20 UI/UX audit items). All active priorities closed — backlog elevated.
+**Revised**: March 10, 2026 — All active priorities closed, backlog elevated. UI/UX accessibility audit complete: P1 keyboard/ARIA fixes (4 controls), P2 font-size/color/label fixes, P3 toggle sizes and focus indicators. See Section 6.
 **Classification**: Internal — UI-first implementation plan
 **Status**: ✔️ Command Center v1.0 delivered (98/100 shipped, 2 cancelled) · Post-delivery optimization in progress
 
@@ -47,19 +47,19 @@
 > All original priorities (P1–P7 CRITICAL/HIGH, Wave 8, P5B–P5D, P6) are **complete**.
 > Remaining items are backlog — elevated here for visibility.
 
-### 1. Persona Detection — Medium & Low Improvements
+### 1. Persona Detection — Medium & Low Improvements ✅
 
-> Elevated from backlog. CRITICAL+HIGH fixes shipped (P7.1–7.5). These are incremental quality improvements.
+> All 7 items shipped. CRITICAL+HIGH fixes shipped (P7.1–7.5), P7.6 copilot-instructions Persona: field shipped prior session.
 
-| # | Step | Severity |
-|---|------|:--------:|
-| 7.6 | Add `dependency` signals to high-value personas (designer, scientist, finance-professional, teacher, podcaster) | MEDIUM |
-| 7.7 | Expand P3 phase rules beyond 7 personas — add data-engineer, game-developer, student, content-creator | MEDIUM |
-| 7.8 | Fix tie-breaking: use `>=` or secondary sort (signal count, specificity) instead of positional first-wins | MEDIUM |
-| 7.9 | Reduce persona cache TTL from 7 days to 1 day, or invalidate on workspace change | MEDIUM |
-| 7.10 | Clean up 34 orphan avatar map entries (or add matching persona definitions) | LOW |
-| 7.11 | Narrow generic structure patterns (`data/` → `raw-data/|datasets/`, `notes/` → `lecture-notes/|session-notes/`) | LOW |
-| 7.12 | Fix `power-user` and `knowledge-worker` identity weight from 2.0 to 2.5 | LOW |
+| # | Step | Severity | Status |
+|---|------|:--------:|:------:|
+| 7.6 | Add `dependency` signals to high-value personas (designer, scientist, finance-professional, teacher, podcaster) | MEDIUM | ✅ |
+| 7.7 | Expand P3 phase rules beyond 7→11 personas — add data-engineer, game-developer, student, content-creator | MEDIUM | ✅ |
+| 7.8 | Fix tie-breaking: secondary sort by signal count (specificity) instead of positional first-wins | MEDIUM | ✅ |
+| 7.9 | Reduce persona cache TTL from 7 days to 1 day | MEDIUM | ✅ |
+| 7.10 | Document orphan avatar map entries as intentional for LLM-detected personas | LOW | ✅ |
+| 7.11 | Narrow generic structure patterns (`data/` → `raw-data/|datasets/`, `notes/` → `lecture-notes/|session-notes/`) | LOW | ✅ |
+| 7.12 | Fix `power-user` and `knowledge-worker` identity weight from 2.0 to 2.5 | LOW | ✅ |
 
 ### 2. Persona Taxonomy — Pending Decisions
 
@@ -88,6 +88,27 @@ Remove redundant sidebar view registrations from `package.json`. Was deferred du
 | Contract B | Context budget API (`countTokens()`) | Context Budget bar + per-skill impact |
 | Contract C | Full five-modality memory model | Mind tab live data |
 | Contract D | Recently-used command tracking | Adaptive UX (command history) |
+
+### 6. UI/UX Accessibility Audit ✅
+
+> Two-pass audit against `.github/instructions/ui-ux-design.instructions.md` and WCAG AA standards. All P1/P2/P3 fixes shipped.
+
+**Pass 1 — Compliance Audit (13 findings, all fixed)**
+
+| Priority | Finding | Fix | Files |
+|:--------:|---------|-----|-------|
+| P1 | 4 interactive controls (toggle-switch, skill-toggle, action-group-label, skill-category-header) had no keyboard access | Added Enter/Space keydown handlers | welcomeViewHtml.ts |
+| P1 | `.trifecta-tag` clickable span missing role/tabindex | Added `tabindex="0" role="button"` | welcomeViewHtml.ts |
+| P1 | `.skill-toggle` 14px and `.toggle-switch` 18px touch targets | Increased to 30×18 and 36×20 respectively | sharedStyles.ts |
+| P2 | 5 readable text elements below 11px minimum (9px chevron, 10px time/badge/bucket/pct) | Bumped all to 11px | sharedStyles.ts |
+| P2 | `.catalog-toggle-btn.active` hardcoded `#fff` text color | Changed to `var(--vscode-button-foreground, #fff)` | sharedStyles.ts |
+| P2 | 14 `.doc-grid-card` elements missing `aria-label` | Auto-populated from `.doc-grid-title` via JS | welcomeViewHtml.ts |
+| P2 | 6 `.action-group-label` divs missing all a11y attributes | Added `tabindex="0" role="button" aria-expanded="true"` | missionTabHtml.ts |
+| P3 | `.quick-command-input:focus` removes outline for keyboard users | Added `:focus-visible` rule with outline | sharedStyles.ts |
+
+**Accepted — not modified (decorative, not WCAG text):**
+- 8px `::after` pseudo-element font sizes on status dots (`.agent-live-dot`, `.secret-dot`) — symbols inside colored indicator dots, not readable text
+- `color: white`/`color: black` on status dot `::after` — contrasts against colored dot background (green/red/yellow), not page background. Theme-correct by design.
 
 ---
 

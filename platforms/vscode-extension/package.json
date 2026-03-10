@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -872,6 +872,9 @@
         "path": "./.github/skills/business-analysis/SKILL.md"
       },
       {
+        "path": "./.github/skills/career-development/SKILL.md"
+      },
+      {
         "path": "./.github/skills/change-management/SKILL.md"
       },
       {
@@ -896,7 +899,13 @@
         "path": "./.github/skills/cognitive-symbiosis/SKILL.md"
       },
       {
+        "path": "./.github/skills/comedy-writing/SKILL.md"
+      },
+      {
         "path": "./.github/skills/correax-brand/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/counseling-psychology/SKILL.md"
       },
       {
         "path": "./.github/skills/creative-writing/SKILL.md"
@@ -941,6 +950,9 @@
         "path": "./.github/skills/fabric-notebook-publish/SKILL.md"
       },
       {
+        "path": "./.github/skills/financial-analysis/SKILL.md"
+      },
+      {
         "path": "./.github/skills/flux-brand-finetune/SKILL.md"
       },
       {
@@ -948,6 +960,9 @@
       },
       {
         "path": "./.github/skills/frustration-recognition/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/game-design/SKILL.md"
       },
       {
         "path": "./.github/skills/gamma-presentations/SKILL.md"
@@ -965,7 +980,13 @@
         "path": "./.github/skills/graphic-design/SKILL.md"
       },
       {
+        "path": "./.github/skills/healthcare-informatics/SKILL.md"
+      },
+      {
         "path": "./.github/skills/heir-sync-management/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/hr-people-operations/SKILL.md"
       },
       {
         "path": "./.github/skills/image-handling/SKILL.md"
@@ -977,10 +998,16 @@
         "path": "./.github/skills/infrastructure-as-code/SKILL.md"
       },
       {
+        "path": "./.github/skills/journalism/SKILL.md"
+      },
+      {
         "path": "./.github/skills/knowledge-synthesis/SKILL.md"
       },
       {
         "path": "./.github/skills/learning-psychology/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/legal-compliance/SKILL.md"
       },
       {
         "path": "./.github/skills/lint-clean-markdown/SKILL.md"
@@ -1092,6 +1119,9 @@
       },
       {
         "path": "./.github/skills/rubber-duck-debugging/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/sales-enablement/SKILL.md"
       },
       {
         "path": "./.github/skills/scope-management/SKILL.md"

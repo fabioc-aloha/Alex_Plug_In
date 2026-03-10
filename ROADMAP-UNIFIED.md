@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 7, 2026
+**Last Updated**: March 9, 2026
 
 ---
 
@@ -38,6 +38,7 @@ Four platforms. Focused, not scattered.
 
 | Version | Theme | Shipped |
 | --- | --- | --- |
+| **v6.3.0** | Accessibility & Workshop Alignment — WCAG keyboard fixes, 10 domain skills, 41 workshops, I8 cardinal rule | 2026-03-09 |
 | **v6.2.0** | On-Brand Partnership — FLUX fine-tune trifecta, SVG-first banners, GH Web heir discontinued | 2026-03-05 |
 | **v6.1.5** | M365 Schema + Agent Plugin — manifest v1.25, Agent Plugin heir, MCP standalone bundle | 2026-03-04 |
 | **v6.0.0** | The Partnership Release — episodic memory, outcome tracking, autonomous tasks, workflow engine | 2026-02-28 |
@@ -46,83 +47,98 @@ Four platforms. Focused, not scattered.
 
 ---
 
+## 🚀 v6.4.0 — The Agent Hooks Release
+
+**Theme**: VS Code 1.111 Adoption — Agent-scoped hooks, Autopilot enablement, and platform settings alignment.
+
+> Source: [VSCODE-1.111-RELEASE-EVALUATION](alex_docs/research/VSCODE-1.111-RELEASE-EVALUATION-2026-03-09.md)
+
+| # | Task | Effort | Description |
+| --- | --- | :---: | --- |
+| 1 | **Enable `chat.useCustomAgentHooks`** | 1h | Enable in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Highest-value 1.111 feature — enables per-agent hook specialization |
+| 2 | **Audit PreToolUse hooks under Autopilot** | 2d | Verify safety warnings (I1–I7, MASTER-ALEX-PROTECTED) are effective in non-interactive Autopilot mode |
+| 3 | **Enable `chat.autopilot.enabled`** | 1h | Enable in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Do NOT default to Autopilot for all sessions |
+| 4 | **Update copilot-instructions.md settings header** | 1h | Change `## VS Code Settings (1.110+)` → `(1.111+)`, add `chat.autopilot.enabled`, `chat.useCustomAgentHooks` |
+| 5 | **Design Validator agent-scoped hooks** | 2d | Read-only enforcement during QA — block code modifications in review mode. Add hooks frontmatter to `alex-validator.agent.md` |
+| 6 | **Design Builder agent-scoped hooks** | 2d | Auto-compile check after `.ts` file edits for faster feedback loop. Add hooks frontmatter to `alex-builder.agent.md` |
+
+---
+
 ## 🛡️ v6.5.0 — The Trust Release
 
 **Target**: Q2 2026
 
-**Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Tests and refactoring — the foundation that makes "trusted" a fact, not a promise.
+**Paradigm**: Earn It — v6.0.0 shipped the partnership architecture. v6.5.0 proves it works. Platform polish, documentation, and remaining optimization — the foundation that makes "trusted" a fact, not a promise.
 
-**North Star Assessment** (2026-03-07): Trust scored 5/10. 6 test files for 48K lines of code. 73 NASA R4 violations (functions >60 lines). 37/120 trifectas complete (31%). Architecture cleaned: 11 skills consolidated, 96+ stale refs fixed, brain-qa 35/35 phases passing. Command Center Waves 0–5 shipped (39/53 steps). This release closes the test, refactoring, and UI consolidation gaps.
+**North Star Assessment** (2026-03-09): Trust scored 7/10. 20 test files for 47K lines of code. Command Center v1.0 delivered (98/100 steps shipped, 2 cancelled). P5B–P5D optimization complete. 130 skills, 37 trifectas. Persona detection P7.1–7.12 all shipped. UI/UX accessibility audit clean (Wave 8 — 20/20 findings fixed). Remaining: ~50 NASA R4 function-length violations (structural exceptions accepted), Contract A–D dependencies blocked on VS Code API.
 
-### Core Trust Foundation
+### Short-Term
 
-| Task | Effort | Description |
-| --- | :---: | --- |
-| **Test the core services** | 3w | Integration tests for episodicMemory, outcomeTracker, taskDetector, workflowEngine, expertiseModel. Target: 20 test files |
-| **Break down the monoliths** | 3w | 95 TS files, 48K lines. **1 file >1,500 lines**: welcomeViewHtml.ts (1,830 — Command Center refactor in progress). **13 files >1K lines**: contextMenu.ts (1,431), extension.ts (1,397), upgrade.ts (1,389), globalKnowledgeOps.ts (1,346), globalKnowledgeContent.ts (1,213), commandsPresentation.ts (1,159), pptxGenerator.ts (1,144), setupEnvironment.ts (1,107), personaDetection.ts (1,105), workflowHandlers.ts (1,082), participant.ts (1,060), healthDashboard.ts (1,008). tools.ts decomposed ✅. **73 functions >60 lines**: 11 critical (>200L), 22 major (100–200L), 40 minor (61–100L). See [alex_docs/audits/MONOLITH-ASSESSMENT.md](alex_docs/audits/MONOLITH-ASSESSMENT.md) |
-
-### Command Center (Active)
-
-| Task | Effort | Description |
-| --- | :---: | --- |
-| **Command Center — Waves 0–5** | — | ✅ Done. 5-tab sidebar shell (Mission Ctrl \| Agents \| Skill Store \| Mind \| Docs), full Docs tab, Mission Command dashboard, controlled consolidation. 39/53 steps complete. See [COMMAND-CENTER-MASTER-PLAN](alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md) |
-| **Command Center — Wave 6 (Advanced Tabs)** | 2w | Agents status contract, Skill Store catalog model, Mind tab runtime model. Blocked on runtime data contracts |
-| **SVG avatar spike gates** | 2h | 3 manual vsix test gates from Wave 1 still outstanding (ChatParticipant SVG, webview SVG, strategy decision) |
-
-### VS Code Platform Polish
-
-| Task | Effort | Description |
-| --- | :---: | --- |
-| **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
-| **`usages` + `rename` tool adoption** | 2d | Instruction patterns for LSP-powered refactoring (critical for monolith breakup) |
-| **Session fork workflows** | 1d | Document `/fork` and checkpoint-based session forking |
-| **Portable mode detection** | 2h | Use stable `env.isAppPortable` for USB-portable deployments |
-| **Terminal sandbox trust domains** | 1h | Configure `chat.tools.terminal.sandbox.network` trusted domains |
-| **OS notifications for confirmations** | 1h | Set `chat.notifyWindowOnConfirmation` to `always` |
-
-### M365 Platform
-
-| Task | Effort | Description |
-| --- | :---: | --- |
-| **sensitivity_label support** | 2h | Gated — v1.6 schema does not yet support this field |
-
-### Definition of Done (v6.5.0)
-
-1. **20+ test files** — covering all v6.0.0 services and the top 3 largest source files (currently 6 test files)
-2. **Zero NASA R4 violations** — no function exceeds 60 lines in any source file (currently 73 violations)
-3. **No source file >1,500 lines** — 1 file exceeds this (welcomeViewHtml.ts 1,830 — Command Center refactor in progress). 13 files >1K lines
-4. **Command Center Waves 0–6 complete** — all tabs functional with real data contracts
-5. **North Star Trust score ≥7/10** — re-assessed at ship time
-
-> **Principle**: Don't add features. Prove the existing ones deserve trust.
-
----
-
-## 📋 Backlog
-
-### Larger Items (As Capacity Allows)
-
-| Task | Effort | Description |
-| --- | :---: | --- |
-| Agentic browser testing | 1w | Enable `workbench.browser.enableChatTools` for agent-driven browser verification |
-| Office Add-in Phase 2 | 2w | Word templates, Excel trackers, PowerPoint gen |
-| Cognitive Dashboard | 3d | Full unified webview — synapse health renderer is first tile. *(Partially addressed by Command Center Mind tab — Wave 6)* |
-| Academic paper finalization | 2d | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
-
-### Conditional (Trigger-Dependent)
-
-| Task | Trigger | Effort | Description |
+| # | Task | Effort | Description |
 | --- | --- | :---: | --- |
-| Foundry POC | Real user/team requests Alex in Teams | 1w | Foundry project + Alex orchestrator + Teams publish |
-| Teams Deep Integration | Active M365 users | 12w | Bot Framework + Message Extensions + Meeting Integration |
+| 7 | **Document `#debugEventsSnapshot`** | 1h | Add to WORKING-WITH-ALEX.md troubleshooting section and reference in debugging-patterns.instructions.md |
+| 8 | **`/create-*` skill generation guide** | 1d | Document `/create-skill`, `/create-instruction`, etc. for trifecta generation from chat |
+| 9 | **Session fork workflows** | 1d | Document `/fork` and checkpoint-based session forking |
+| 10 | **Portable mode detection** | 2h | Use stable `env.isAppPortable` for USB-portable deployments |
+| 11 | **Terminal sandbox trust domains** | 1h | Configure `chat.tools.terminal.sandbox.network` trusted domains |
+| 12 | **OS notifications for confirmations** | 1h | Set `chat.notifyWindowOnConfirmation` to `always` |
+| 13 | **VS Code Insiders pre-publish testing** | 1h | Add "test against VS Code Insiders" to PRE-PUBLISH-CHECKLIST.md — weekly Stable cadence increases breakage risk |
+
+### Medium-Term
+
+| # | Task | Effort | Description |
+| --- | --- | :---: | --- |
+| 14 | **Agent-scoped hooks for all agents** | 2d | Add hooks to Researcher (load knowledge gaps), Documentarian (auto-CHANGELOG), Dream (synapse health baseline) |
+| 15 | **Document Autopilot workflows** | 1d | Recommend Autopilot for dream/meditation/routine maintenance. Document safety implications in SECURITY.md |
+| 16 | **Update extension-patterns SKILL** | 1d | Add 1.111 capabilities (agent-scoped hooks, autopilot, debug events snapshot) to vscode-extension-patterns SKILL.md |
+| 17 | **`usages` + `rename` tool adoption** | 2d | Instruction patterns for LSP-powered refactoring (critical for monolith breakup) |
+| 18 | **Wave 5.3 — Sidebar view removal** | 1d | Remove redundant sidebar view registrations from `package.json`. Deferred — revisit when Command Center fully replaces all legacy surface journeys |
+| 19 | **Persona taxonomy decisions** | 1d | (1) Should extension-only personas become LearnAlex study guides? (2) Accept low-confidence detection for Standup Comics/Real Estate or rely on LLM? (3) Naming: role titles vs audience labels |
+
+### Backlog
+
+| # | Task | Effort | Description |
+| --- | --- | :---: | --- |
+| 20 | **Agentic browser testing** | 1w | Enable `workbench.browser.enableChatTools` for agent-driven browser verification |
+| 21 | **Office Add-in Phase 2** | 2w | Word templates, Excel trackers, PowerPoint gen |
+| 22 | **Cognitive Dashboard** | 3d | Full unified webview — synapse health renderer is first tile. *(Partially addressed by Command Center Mind tab — Wave 6)* |
+| 23 | **Academic paper finalization** | 2d | AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md needs peer review prep |
+| 24 | **M365 sensitivity_label support** | 2h | Gated — v1.6 schema does not yet support this field |
+
+### Blocked (VS Code API Dependencies)
+
+| Contract | Scope | Unblock Condition | Enables |
+| --- | --- | --- | --- |
+| **Contract A** | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API | Real-time agent status in Agents tab |
+| **Contract B** | Context budget API (`countTokens()`) | VS Code exposes `chat.contextBudget` | Context Budget bar + per-skill impact (cancelled steps 7.15, 7.31) |
+| **Contract C** | Full five-modality memory model | Memory persistence API | Mind tab live data |
+| **Contract D** | Recently-used command tracking | Command history API | Adaptive UX (command history) |
 
 ### Gated (External Dependencies)
 
-| Task | Gate | Effort | Description |
-| --- | --- | :---: | --- |
-| Semantic Skill Graph | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings |
-| EmbeddedKnowledge adoption | Microsoft makes it GA | 2h | Enable capability. knowledge/ folder already prepared |
-| Worker agent orchestration | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target |
+| # | Task | Gate | Effort | Description |
+| --- | --- | --- | :---: | --- |
+| 25 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings |
+| 26 | **EmbeddedKnowledge adoption** | Microsoft makes it GA | 2h | Enable capability. knowledge/ folder already prepared |
+| 27 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target |
+
+### Conditional (Trigger-Dependent)
+
+| # | Task | Trigger | Effort | Description |
+| --- | --- | --- | :---: | --- |
+| 28 | **Foundry POC** | Real user/team requests Alex in Teams | 1w | Foundry project + Alex orchestrator + Teams publish |
+| 29 | **Teams Deep Integration** | Active M365 users | 12w | Bot Framework + Message Extensions + Meeting Integration |
+
+### Definition of Done (v6.5.0)
+
+1. **20+ test files** ✅ — 20 test files covering all v6.0.0 services
+2. **Zero NASA R4 violations** 🟡 — ~50 real remain + structural exceptions accepted (P5D)
+3. **No source file >1,500 lines** ✅ — `sharedStyles.ts` (1,570L) is pure CSS, not logic
+4. **No source file >1,000 lines** ✅ — P5B complete
+5. **Command Center v1.0 delivered** ✅ — 98/100 steps shipped
+6. **North Star Trust score ≥7/10** ✅ — scored 7/10 at March 9 assessment
+
+> **Principle**: Don't add features. Prove the existing ones deserve trust.
 
 ---
 
@@ -196,24 +212,38 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.1.7     | Stable Marketplace Release | ✅ Shipped  |
 | v6.1.8     | Doc Alignment Hotfix       | ✅ Shipped  |
 | v6.2.0     | On-Brand Partnership       | ✅ Shipped  |
-| **v6.5.0** | **The Trust Release**      | **🎯 Next** |
+| v6.3.0     | Accessibility & Workshop  | ✅ Shipped  |
+| **v6.4.0** | **Agent Hooks Release**    | **🎯 Next** |
+| v6.5.0     | The Trust Release          | Planned    |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
 ---
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.2.0                                          |
-| **Current Heirs**          | VS Code (6.2.0), M365 (6.2.0), Plugin (6.2.0) |
-| **Architecture**           | 120 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
-| **Codebase**               | 95 TS files, 48K lines, 6 test files           |
-| **Command Center**         | Waves 0–5 complete (39/53 steps), Wave 6 pending |
-| **Next Target**            | v6.5.0 — The Trust Release                     |
-| **Updated**                | 2026-03-07                                     |
+| **Current Master Version** | 6.3.0                                          |
+| **Current Heirs**          | VS Code (6.3.0), M365 (6.2.0), Plugin (6.2.0) |
+| **Architecture**           | 130 skills, 37 trifectas, 64 instructions, 45 prompts, 7 agents |
+| **Codebase**               | 95 TS files, 47K lines, 20 test files          |
+| **Command Center**         | Delivered — 98/100 steps shipped                |
+| **Next Target**            | v6.4.0 — The Agent Hooks Release               |
+| **Open Items**             | 29 total (6 in v6.4.0, 13+6+5 in v6.5.0, 4 blocked, 3 gated, 2 conditional) |
+| **Updated**                | 2026-03-09                                     |
 
 ---
 
-## 📖 Appendix: Completed Versions
+<details>
+<summary><h2>📖 Appendix: Completed Work</h2></summary>
+
+### v6.3.0 — Completed Trust Release Items
+
+| Task | Status | Description |
+| --- | :---: | --- |
+| **Test the core services** | ✅ Done | 20 test files covering all v6.0.0 services |
+| **Break down the monoliths** | ✅ Done | 0 logic files >1,500L. P5B: extension.ts 894L, globalKnowledgeContent.ts 808L. P5C: 7 orchestrators split. P5D: structural exceptions accepted |
+| **Command Center — Waves 0–7** | ✅ Done | 98/100 steps shipped. 5-tab sidebar, full UI/UX audit, WCAG keyboard accessibility, 41 workshop study guides |
+| **Wave 8 — UI/UX Audit** | ✅ Done | 20/20 findings fixed (5 P1 + 6 P2 + 6 P3 + 3 cross-tab) |
+| **Persona Detection P7** | ✅ Done | 12/12 items shipped (CRITICAL through LOW). 47 personas, 81 avatar entries |
 
 ### Current State Summary (v6.2.0+)
 
@@ -363,6 +393,8 @@ Alex now has:
 | v3.6.0-v3.9.0 | Dawn → Awareness               | Jan 2026     |
 
 **Full History**: See `archive/roadmaps/ROADMAP-UNIFIED-V3.5-V5.3-COMPLETED.md`
+
+</details>
 
 ---
 

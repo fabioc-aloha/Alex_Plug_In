@@ -10,41 +10,55 @@ import { actionButton } from './welcomeViewHtml';
 /**
  * AlexLearn workshop persona data for the Docs tab persona grid.
  * Each entry maps to learnalex.correax.com/workshop/{id}
+ * 41 workshops grouped by domain — synced with learnalex.correax.com/workshop/guide
  */
 const WORKSHOP_PERSONAS: Array<{ id: string; tag: string; name: string }> = [
-    { id: 'job-seekers', tag: 'Career', name: 'Job Seekers' },
+    // Technology & Engineering
     { id: 'ai-researchers', tag: 'AI Research', name: 'AI Researchers' },
-    { id: 'consultants', tag: 'Consulting', name: 'Consultants' },
-    { id: 'content-creators', tag: 'Content', name: 'Content Creators' },
-    { id: 'creative-writers', tag: 'Creative', name: 'Creative Writers' },
-    { id: 'cx-leaders', tag: 'CX', name: 'CX Leaders' },
     { id: 'data-analysts', tag: 'Data', name: 'Data Analysts' },
-    { id: 'designers', tag: 'Design', name: 'Designers' },
+    { id: 'data-engineers', tag: 'Data Engineering', name: 'Data Engineers' },
+    { id: 'developers', tag: 'Software', name: 'Developers' },
     { id: 'engineers', tag: 'Engineering', name: 'Engineers' },
+    { id: 'enterprise-architects', tag: 'Architecture', name: 'Enterprise Architects' },
+    { id: 'game-developers', tag: 'Game Dev', name: 'Game Developers' },
+    { id: 'open-source-contributors', tag: 'Open Source', name: 'Open Source' },
+    { id: 'power-users', tag: 'Power User', name: 'Power Users' },
+    { id: 'security-engineers', tag: 'Security', name: 'Security Engineers' },
+    { id: 'sre-oncall', tag: 'SRE', name: 'SRE & On-Call' },
+    { id: 'technical-writers', tag: 'Docs', name: 'Technical Writers' },
+    // Business & Professional Services
+    { id: 'consultants', tag: 'Consulting', name: 'Consultants' },
     { id: 'entrepreneurs', tag: 'Startup', name: 'Entrepreneurs' },
     { id: 'executives', tag: 'Leadership', name: 'Executives' },
     { id: 'finance-professionals', tag: 'Finance', name: 'Finance Pros' },
-    { id: 'healthcare-professionals', tag: 'Healthcare', name: 'Healthcare Pros' },
-    { id: 'hr-people-ops', tag: 'HR', name: 'HR & People Ops' },
-    { id: 'journalists', tag: 'Journalism', name: 'Journalists' },
-    { id: 'knowledge-workers', tag: 'Business', name: 'Knowledge Workers' },
-    { id: 'lawyers', tag: 'Legal', name: 'Lawyers' },
-    { id: 'marketing-professionals', tag: 'Marketing', name: 'Marketing Pros' },
-    { id: 'nonprofit-leaders', tag: 'Nonprofit', name: 'Nonprofit Leaders' },
-    { id: 'podcasters', tag: 'Podcasting', name: 'Podcasters' },
+    { id: 'job-seekers', tag: 'Career', name: 'Job Seekers' },
+    { id: 'business-knowledge-workers', tag: 'Business', name: 'Knowledge Workers' },
+    { id: 'marketing', tag: 'Marketing', name: 'Marketing Pros' },
     { id: 'product-managers', tag: 'Product', name: 'Product Managers' },
     { id: 'project-managers', tag: 'PM', name: 'Project Managers' },
-    { id: 'psychology-counselors', tag: 'Counseling', name: 'Counselors' },
     { id: 'real-estate', tag: 'Real Estate', name: 'Real Estate Pros' },
-    { id: 'researchers-professors', tag: 'Academic', name: 'Researchers' },
-    { id: 'sales-professionals', tag: 'Sales', name: 'Sales Pros' },
-    { id: 'scientists', tag: 'Science', name: 'Scientists' },
-    { id: 'software-developers', tag: 'Software', name: 'Developers' },
+    { id: 'sellers', tag: 'Sales', name: 'Sales Pros' },
+    // Creative & Media
+    { id: 'content-creators', tag: 'Content', name: 'Content Creators' },
+    { id: 'creative-writers', tag: 'Creative', name: 'Creative Writers' },
+    { id: 'designers', tag: 'Design', name: 'Designers' },
+    { id: 'journalists', tag: 'Journalism', name: 'Journalists' },
+    { id: 'podcasters', tag: 'Podcasting', name: 'Podcasters' },
     { id: 'standup-comics', tag: 'Comedy', name: 'Standup Comics' },
-    { id: 'students', tag: 'Learning', name: 'Students' },
-    { id: 'teachers-educators', tag: 'Teaching', name: 'Teachers' },
-    { id: 'technical-writers', tag: 'Docs', name: 'Technical Writers' },
     { id: 'visual-storytellers', tag: 'Data Viz', name: 'Visual Storytellers' },
+    // Education & Research
+    { id: 'academic-research', tag: 'Academic', name: 'Researchers' },
+    { id: 'grant-writers', tag: 'Grants', name: 'Grant Writers' },
+    { id: 'scientists', tag: 'Science', name: 'Scientists' },
+    { id: 'students', tag: 'Learning', name: 'Students' },
+    { id: 'teachers', tag: 'Teaching', name: 'Teachers' },
+    // Health, Law & Human Services
+    { id: 'cx-leaders', tag: 'CX', name: 'CX Leaders' },
+    { id: 'healthcare', tag: 'Healthcare', name: 'Healthcare Pros' },
+    { id: 'hr-people-ops', tag: 'HR', name: 'HR & People Ops' },
+    { id: 'lawyers', tag: 'Legal', name: 'Lawyers' },
+    { id: 'nonprofit-leaders', tag: 'Nonprofit', name: 'Nonprofit Leaders' },
+    { id: 'psychology-counselors', tag: 'Counseling', name: 'Counselors' },
 ];
 
 /** Generate the persona grid HTML for the Docs tab. */
@@ -197,6 +211,18 @@ export function getDocsTabHtml(): string {
           </div>
 
           <div class="docs-section">
+              <div class="doc-grid">
+                  <div class="doc-grid-card" data-cmd="openDoc:SKILL-DISCIPLINE-MAP" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🎯</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Skill-to-Discipline Map</div>
+                          <div class="doc-grid-desc">130 skills mapped to 41 disciplines</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="docs-section">
               <div class="docs-section-title">Workshop Study Guides</div>
               <input type="text" class="skill-search-input" id="persona-search" placeholder="Search workshops\u2026" aria-label="Search workshop study guides" />
               <div class="persona-grid">
@@ -217,6 +243,8 @@ export function getDocsTabHtml(): string {
               ${actionButton('learnAlexDemoScripts', '🎬', 'Demo Scripts', 'Live demo walkthroughs')}
               ${actionButton('learnAlexHandout', '📄', 'Handout', 'Printable workshop handout')}
               ${actionButton('learnAlexPreRead', '📖', 'Pre-Read', 'Pre-workshop reading material')}
+              ${actionButton('learnAlexGitHubGuide', '📐', 'GitHub Guide', 'Repo setup and contribution guide')}
+              ${actionButton('learnAlexResponsibleAI', '🤖', 'Responsible AI', 'Ethical usage guidelines')}
           </div>
 
           <div class="docs-section">
