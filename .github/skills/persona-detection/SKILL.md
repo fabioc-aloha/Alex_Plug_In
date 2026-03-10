@@ -25,9 +25,10 @@ Detect the most appropriate user persona for a workspace to personalize the Alex
 | 2 | Goal | Stated session objective from goals.json | 0.85 |
 | 3 | Phase | Current ROADMAP phase keywords | 0.75 |
 | 4 | Project Goals | Learning goals from user-profile.json | 0.70 |
-| 5 | Profile Cache | Saved projectPersona (< 7 days old) | cached |
-| 6 | Profile + Workspace | Tech stack, expertise, file structure scoring | variable |
-| 7 | Default | Developer fallback | 0.50 |
+| 5 | Copilot Instructions | `Persona:` field in copilot-instructions.md Active Context | 0.85 |
+| 6 | Profile Cache | Saved projectPersona (< 7 days old) | cached |
+| 7 | Profile + Workspace | Tech stack, expertise, file structure scoring | variable |
+| 8 | Default | Developer fallback | 0.50 |
 
 Detection stops at the first confident match. Lower priorities only run if higher ones return null.
 

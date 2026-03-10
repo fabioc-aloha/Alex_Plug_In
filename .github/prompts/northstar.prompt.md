@@ -55,7 +55,8 @@ Using user answers:
 **Step 4: Active Context Integration**
 
 1. Add `North Star:` and `Guidelines:` to copilot-instructions.md
-2. Confirm integration complete
+2. Set `Persona:` field to the best-fit persona for the project (e.g., content-creator, researcher, developer). This is Priority 5 in the detection chain and overrides workspace file-structure heuristics.
+3. Confirm integration complete
 
 ### Check Mode
 

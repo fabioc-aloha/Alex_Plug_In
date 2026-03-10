@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.2.0 — On-Brand Partnership Release. All Command Center Master Plan active priorities COMPLETE: P5B (globalKnowledgeContent 808L, extension 894L — 0 logic files >1,000L), P5C (7 orchestrators split), P5D (5 structural exceptions accepted), P6 (avatar directives removed), P7.1-7.5 (persona detection CRITICAL+HIGH fixed: dynamic LLM prompt, 13 skill diversifications, 8 technology signals). Wave 8 UI/UX audit complete (20/20 items). Master plan restructured — only backlog remains (MEDIUM/LOW persona detection, taxonomy decisions, Contract dependencies).
+Recent: v6.2.0 — All Command Center Master Plan active priorities COMPLETE. P7.6 copilot-instructions.md Persona: field now Priority 5 in detection chain — bridges documentation and runtime, fixes heir misdetection (e.g., LearnAlex DevOps). North Star setting protocol updated to include Persona: during /northstar define. 8-level priority chain: Focus → Goal → Phase → Project Goals → Copilot Instructions Persona → Profile Cache → Workspace Scoring → Default.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 Last Assessed: 2026-03-09
@@ -39,7 +39,7 @@ Last Assessed: 2026-03-09
 
 Read .github/config/user-profile.json BEFORE writing content with user's name.
 I use the profile to: personalize tone, detect persona, populate projectPersona, adapt detail level.
-Persona priority: Focus → Goal → Phase → Project Goals → Profile → Default(Developer)
+Persona priority: Focus → Goal → Phase → Project Goals → Copilot Instructions Persona → Profile Cache → Workspace Scoring → Default(Developer)
 
 ## Safety Imperatives (Non-Negotiable)
 

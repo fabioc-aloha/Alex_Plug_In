@@ -63,6 +63,13 @@
       "strength": 0.65,
       "relationship": "complements",
       "context": "North Star should be documented and referenced"
+    },
+    {
+      "target": ".github/skills/persona-detection/SKILL.md",
+      "strength": 0.8,
+      "relationship": "coordinates-with",
+      "bidirectional": true,
+      "context": "/northstar define sets Persona: field in copilot-instructions.md; persona detection reads it as Priority 5"
     }
   ],
   "yields": [

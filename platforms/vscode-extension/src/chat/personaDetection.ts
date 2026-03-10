@@ -26,8 +26,10 @@
  * 2. Goal - Stated session objective
  * 3. Project Phase - Current phase from project config
  * 4. Project Goals - From learning goals
- * 5. Profile - User profile credentials/expertise
- * 6. Developer - Default fallback
+ * 5. Copilot Instructions - Persona: field from Active Context in copilot-instructions.md
+ * 6. Profile - User profile credentials/expertise
+ * 7. Workspace Scoring - File structure heuristic
+ * 8. Developer - Default fallback
  */
 
 import * as fs from 'fs-extra';
@@ -51,11 +53,14 @@ const CONFIDENCE_GOAL = 0.85;
 const CONFIDENCE_PHASE = 0.75;
 /** Confidence threshold for Learning goals detection (P4) */
 const CONFIDENCE_LEARNING_GOALS = 0.7;
+/** Confidence threshold for copilot-instructions.md Persona: field (P5) */
+const CONFIDENCE_COPILOT_PERSONA = 0.85;
 /** Minimum threshold to use priority chain result */
 const THRESHOLD_PRIORITY_1 = 0.8;
 const THRESHOLD_PRIORITY_2 = 0.7;
 const THRESHOLD_PRIORITY_3 = 0.7;
 const THRESHOLD_PRIORITY_4 = 0.6;
+const THRESHOLD_PRIORITY_5 = 0.7;
 /** Default confidence for fallback detection */
 const CONFIDENCE_FALLBACK = 0.5;
 
@@ -277,6 +282,47 @@ async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDe
         }
     } catch (err) {
         // Ignore - not all projects have learning goals
+    }
+    return null;
+}
+
+/**
+ * PRIORITY 5: Detect persona from copilot-instructions.md Active Context
+ * Reads the Persona: field from the project's copilot-instructions.md.
+ * This is an explicit project-level declaration that overrides heuristic scoring.
+ */
+async function detectFromCopilotInstructions(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
+    if (!rootPath) { return null; }
+
+    try {
+        const instructionsPath = path.join(rootPath, '.github', 'copilot-instructions.md');
+        if (!await workspaceFs.pathExists(instructionsPath)) {
+            return null;
+        }
+
+        const content = await workspaceFs.readFile(instructionsPath);
+        // Match "Persona: <value>" in the Active Context section
+        const personaMatch = content.match(/^Persona:\s*(.+)$/m);
+        if (!personaMatch) {
+            return null;
+        }
+
+        const declaredPersona = personaMatch[1].trim().toLowerCase();
+        if (!declaredPersona || declaredPersona.startsWith('_') || declaredPersona.startsWith('(')) {
+            // Skip placeholder values like "_(session-objective)_"
+            return null;
+        }
+
+        const matchedPersona = PERSONAS.find(p => p.id === declaredPersona || p.name.toLowerCase() === declaredPersona);
+        if (matchedPersona) {
+            return {
+                persona: matchedPersona,
+                confidence: CONFIDENCE_COPILOT_PERSONA,
+                reasons: [`Persona declared in copilot-instructions.md: "${personaMatch[1].trim()}"`]
+            };
+        }
+    } catch {
+        // Ignore — not all projects have copilot-instructions.md
     }
     return null;
 }
@@ -541,8 +587,10 @@ function collectProfileEvidence(userProfile?: UserProfile): ProfileEvidence[] {
  * 2. Goal - Stated session objective
  * 3. Project Phase - Current phase from project config
  * 4. Project Goals - From learning goals
- * 5. Profile - User profile credentials/expertise
- * 6. Developer - Default fallback (lowest priority)
+ * 5. Copilot Instructions - Persona: field from Active Context
+ * 6. Profile - Cached projectPersona from user-profile.json
+ * 7. Workspace Scoring - File structure heuristic
+ * 8. Developer - Default fallback (lowest priority)
  * 
  * @param userProfile - User profile from user-profile.json
  * @param workspaceFolders - Current workspace folders
@@ -578,7 +626,13 @@ export async function detectPersona(
         return { ...projectGoalsResult, source: 'detected' };
     }
     
-    // PRIORITY 5: Use saved projectPersona if available and recent (within 7 days)
+    // PRIORITY 5: Check copilot-instructions.md Persona: field
+    const copilotResult = await detectFromCopilotInstructions(rootPath);
+    if (copilotResult && copilotResult.confidence >= THRESHOLD_PRIORITY_5) {
+        return { ...copilotResult, source: 'detected' };
+    }
+    
+    // PRIORITY 6: Use saved projectPersona if available and recent (within 7 days)
     const extendedProfile = userProfile as ExtendedUserProfile | undefined;
     if (extendedProfile?.projectPersona) {
         const savedPersona = extendedProfile.projectPersona;

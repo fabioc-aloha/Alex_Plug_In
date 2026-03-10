@@ -3,23 +3,26 @@
     "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
-  "stalledFiles": [],
+  "stalledFiles": [
+    "github/episodic/peripheral/file-observations.json",
+    "platforms/vscode-extension/src/chat/personaDetection.ts"
+  ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/src/chat/globalKnowledgeContent.ts",
       "todoCount": 2,
-      "scannedAt": 1773100255395
+      "scannedAt": 1773100924100
     },
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1773100255395
+      "scannedAt": 1773100924100
     },
     {
       "file": "platforms/vscode-extension/src/extension.ts",
       "todoCount": 1,
-      "scannedAt": 1773100255395
+      "scannedAt": 1773100924100
     }
   ],
-  "lastUpdated": 1773100255395
+  "lastUpdated": 1773100924100
 }

@@ -35,13 +35,19 @@ Add these fields to your project's `.github/copilot-instructions.md` Active Cont
 
 ```markdown
 ## Active Context
+Persona: [best-fit persona for this project]
 ...existing fields...
 North Star: [Your ambitious vision statement]
 Guidelines: Read [path/to/NORTH-STAR.md] — defines what "[key phrase]" means in practice
 ```
 
+The `Persona:` field is read by the extension's persona detection system (Priority 5). Setting it explicitly overrides workspace file-structure heuristics, so a marketing project with Bicep files won't be misdetected as DevOps.
+
+Available personas: developer, academic, researcher, technical-writer, architect, data-engineer, devops, content-creator, fiction-writer, game-developer, project-manager, security, student, job-seeker, presenter, power-user (and 30+ more — see personaDefinitions.ts).
+
 **Example** (Alex Master):
 ```markdown
+Persona: Developer
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
 ```

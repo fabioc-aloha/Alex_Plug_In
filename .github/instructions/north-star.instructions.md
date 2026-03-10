@@ -29,6 +29,8 @@ Guidelines: Read [path/to/NORTH-STAR.md] — defines what "[key phrase]" means i
 
 **Guidelines**: Path to the detailed document that breaks down what the North Star means in practice. Format: `Read [path] — [one-sentence explanation]`
 
+**Persona**: Set the `Persona:` field to the best-fit persona for the project (e.g., content-creator, researcher, developer). This is Priority 5 in the persona detection chain and overrides workspace file-structure heuristics — so a marketing project with infrastructure files won't be misdetected as DevOps.
+
 ---
 
 ## Default Template: NASA-Quality Standard
@@ -72,7 +74,7 @@ This default invokes NASA/JPL Power of 10 principles:
 2. **Break down words**: What does each key term mean specifically?
 3. **Daily implications**: How does this affect small decisions?
 4. **Document**: Create `NORTH-STAR.md` with full breakdown
-5. **Integrate**: Add fields to Active Context
+5. **Integrate**: Add `North Star:`, `Guidelines:`, and `Persona:` fields to Active Context
 
 ---
 
