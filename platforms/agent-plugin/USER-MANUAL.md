@@ -488,7 +488,7 @@ If installed via the plugin marketplace:
 The current plugin version is shown in `plugin/copilot-instructions.md`:
 
 ```text
-# Alex v6.4.6 — Agent Plugin
+# Alex v6.5.0 — Agent Plugin
 ```
 
 ---

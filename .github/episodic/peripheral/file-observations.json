@@ -4,43 +4,42 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "alex_docs/audits/COMMAND-CENTER-SECOND-OPINION-AUDIT-2026-03-05.md",
-    "alex_docs/audits/COMPLIANCE-AUDIT.md",
-    "alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md",
-    "alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md",
-    "alex_docs/audits/HEIR-PARITY-COMPARISON.md",
-    "alex_docs/features/GLOBAL-KNOWLEDGE.md",
-    "alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
-    "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md",
-    "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md"
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "ROADMAP-UNIFIED.md",
+    "platforms/agent-plugin/README.md",
+    "platforms/agent-plugin/USER-MANUAL.md",
+    "platforms/agent-plugin/marketplace.json",
+    "platforms/agent-plugin/plugin/copilot-instructions.md",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1773184726144
+      "scannedAt": 1773185309518
+    },
+    {
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.5.0.vsix",
+      "todoCount": 2,
+      "scannedAt": 1773185309518
     },
     {
       "file": "platforms/vscode-extension/alex-cognitive-architecture-6.4.6.vsix",
       "todoCount": 2,
-      "scannedAt": 1773184726144
+      "scannedAt": 1773185309518
     },
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1773184726144
+      "scannedAt": 1773185309518
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1773184726144
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1773184726144
+      "scannedAt": 1773185309518
     }
   ],
-  "lastUpdated": 1773184726144
+  "lastUpdated": 1773185309518
 }

@@ -1,4 +1,4 @@
-# Alex v6.4.6 — Agent Plugin
+# Alex v6.5.0 — Agent Plugin
 
 ## Identity
 

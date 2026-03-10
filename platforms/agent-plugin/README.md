@@ -110,7 +110,7 @@ Add to a plugin marketplace's `marketplace.json`:
     "name": "alex-cognitive-architecture",
     "source": "platforms/agent-plugin/plugin",
     "description": "Alex Cognitive Architecture — AI partner with skills, agents, and cognitive tools.",
-    "version": "6.4.6",
+    "version": "6.5.0",
     "skills": ["./skills/*"]
 }
 ```

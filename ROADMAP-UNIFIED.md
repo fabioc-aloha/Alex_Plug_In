@@ -249,20 +249,20 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.4.0     | Agent Hooks Release        | ✅ Shipped  |
 | v6.4.5 | Audit Hygiene | ✅ Shipped |
 | v6.4.6 | Audit Hygiene (published) | ✅ Shipped |
-| **v6.5.0** | **The Trust Release** | **🎯 Next** |
+| v6.5.0 | The Trust Release | ✅ Shipped |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
 ---
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.4.6                                          |
-| **Current Heirs**          | VS Code (6.4.6), M365 (6.2.0), Plugin (6.4.6) |
+| **Current Master Version** | 6.5.0                                          |
+| **Current Heirs**          | VS Code (6.5.0), M365 (6.2.0), Plugin (6.5.0) |
 | **Architecture**           | 133 skills, 38 trifectas, 64 instructions, 47 prompts, 7 agents |
 | **Codebase**               | ~103 TS files, ~43k lines, 20 test files (241 passing, 0 failing) |
 | **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
-| **Next Target**            | v6.5.0 — The Trust Release                      |
+| **Next Target**            | v7.0.0 — Collaborative Intelligence              |
 | **Open Items**             | 10 total: 1 trifecta quality + 0 core + 0 stretch + 0 skill promos, 4 blocked, 3 gated, 2 conditional |
 | **Updated**                | 2026-03-10                                     |
 
