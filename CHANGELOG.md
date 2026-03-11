@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.5.3] - 2026-03-11
+
+### Changed
+- **Learn & Knowledge** group moved back to Mission tab as collapsible action group
+- **Initialize / Update** command added to Mission → Partnership group for quick access
+- **Calibration label** CSS widened (60px → 76px) with `white-space: nowrap` to prevent "Uncertain" wrapping
+
+---
+
 ## [6.5.2] - 2026-03-11
 
 ### Changed
