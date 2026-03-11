@@ -267,6 +267,14 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
+### What's New (v6.5.1)
+
+| Category           | Highlights                                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------ |
+| **Presentations**  | PPTX engine rewritten — Calibri typography, modern slide masters, paragraph bullets, zebra tables             |
+| **Model Tiers**    | GPT-5.3, o4-mini, GPT-4.1 capable/mini/nano, Gemini 2.5 Flash — improved pattern matching accuracy          |
+| **UI**             | API Keys sidebar section, cleaner command labels, Marp → PPTX terminology                                    |
+
 ### What's New (v6.5.0 — The Trust Release)
 
 | Category          | Highlights                                                                                                   |

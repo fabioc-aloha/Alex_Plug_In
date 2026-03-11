@@ -141,8 +141,8 @@ function getQuickPickItems(): vscode.QuickPickItem[] {
     { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
       label: "$(file-media) Generate Presentation",
-      description: "Create PowerPoint from Markdown or selection",
-      detail: "📊 Native PPTX export",
+      description: "Create polished PowerPoint from Markdown or selection",
+      detail: "📊 Local PPTX generation",
     },
     {
       label: "$(unmute) Read Aloud",

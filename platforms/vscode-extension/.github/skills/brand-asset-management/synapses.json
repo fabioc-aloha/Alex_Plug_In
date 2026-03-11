@@ -48,6 +48,13 @@
       "yields": "Asset completeness check during release preflight"
     },
     {
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "uses",
+      "strength": 0.7,
+      "when": "retrieving cross-project image generation patterns and content filter insights",
+      "yields": "Template-based AI generation patterns, limitation awareness, content filter guidance"
+    },
+    {
       "target": ".github/skills/persona-detection/SKILL.md",
       "type": "coordinates-with",
       "strength": 0.7,

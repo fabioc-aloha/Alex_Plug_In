@@ -138,6 +138,12 @@ export const ALEX_COLORS = {
 // Chart colors for series
 export const CHART_COLORS = ['0550ae', '1a7f37', '9a6700', '6639ba', '953800', 'cf222e'];
 
+// Typography
+export const FONT = {
+    heading: 'Calibri Light',
+    body: 'Calibri',
+} as const;
+
 // Layout name mapping
 const DEFAULT_LAYOUT = '16x9';
 const LAYOUT_MAP: Record<string, string> = {
@@ -151,81 +157,46 @@ const LAYOUT_MAP: Record<string, string> = {
 // =============================================================================
 
 function defineAlexSlideMasters(pres: pptxgen): void {
-    // Title Slide
+    // Title Slide — clean white with left brand accent bar
     pres.defineSlideMaster({
         title: 'ALEX_TITLE',
-        background: { color: ALEX_COLORS.blue.text },
+        background: { color: 'FFFFFF' },
         objects: [
-            {
-                text: {
-                    text: 'ALEX',
-                    options: {
-                        x: 0.5, y: 0.4, w: 3, h: 0.4,
-                        color: 'FFFFFF', fontSize: 12, fontFace: 'Arial', bold: true
-                    }
-                }
-            },
-            {
-                rect: { x: 0, y: 6.3, w: '100%', h: 0.7, fill: { color: ALEX_COLORS.green.text } }
-            }
-        ],
-        slideNumber: { x: 9.25, y: 6.45, color: 'FFFFFF', fontSize: 10 }
+            { rect: { x: 0, y: 0, w: 0.3, h: '100%', fill: { color: ALEX_COLORS.blue.text } } },
+            { rect: { x: 0.3, y: 5.3, w: 9.7, h: 0.03, fill: { color: ALEX_COLORS.green.text } } },
+        ]
     });
 
-    // Content Slide
+    // Content Slide — minimal white with thin top accent
     pres.defineSlideMaster({
         title: 'ALEX_CONTENT',
         background: { color: 'FFFFFF' },
         objects: [
-            {
-                rect: { x: 0, y: 0, w: '100%', h: 0.7, fill: { color: ALEX_COLORS.blue.text } }
-            },
-            {
-                text: {
-                    text: 'Alex Cognitive Architecture',
-                    options: {
-                        x: 0.5, y: 0.18, w: 5, h: 0.35,
-                        color: 'FFFFFF', fontSize: 10, fontFace: 'Arial'
-                    }
-                }
-            },
-            {
-                rect: { x: 0, y: 6.7, w: '100%', h: 0.3, fill: { color: ALEX_COLORS.gray.fill } }
-            }
+            { rect: { x: 0, y: 0, w: '100%', h: 0.04, fill: { color: ALEX_COLORS.blue.text } } },
+            { rect: { x: 0.6, y: 5.35, w: 8.8, h: 0.008, fill: { color: ALEX_COLORS.gray.border } } },
         ],
-        slideNumber: { x: 9.25, y: 6.75, color: ALEX_COLORS.gray.text, fontSize: 9 }
+        slideNumber: { x: 9.2, y: 5.38, color: ALEX_COLORS.gray.border, fontSize: 9, fontFace: FONT.body }
     });
 
-    // Section Divider
+    // Section Divider — bold blue with geometric accent
     pres.defineSlideMaster({
         title: 'ALEX_SECTION',
-        background: { color: ALEX_COLORS.purple.fill },
+        background: { color: ALEX_COLORS.blue.text },
         objects: [
-            {
-                rect: { x: 0, y: 3.35, w: '100%', h: 0.04, fill: { color: ALEX_COLORS.purple.text } }
-            }
+            { rect: { x: 7.5, y: 0, w: 2.5, h: '100%', fill: { color: '1a6bc4' } } },
+            { rect: { x: 1.2, y: 3.5, w: 4.5, h: 0.025, fill: { color: ALEX_COLORS.gold.border } } },
         ]
     });
 
-    // Chart Slide
+    // Chart Slide — same as content
     pres.defineSlideMaster({
         title: 'ALEX_CHART',
         background: { color: 'FFFFFF' },
         objects: [
-            {
-                rect: { x: 0, y: 0, w: '100%', h: 0.7, fill: { color: ALEX_COLORS.blue.text } }
-            },
-            {
-                text: {
-                    text: 'Data & Analytics',
-                    options: {
-                        x: 0.5, y: 0.18, w: 5, h: 0.35,
-                        color: 'FFFFFF', fontSize: 10, fontFace: 'Arial'
-                    }
-                }
-            }
+            { rect: { x: 0, y: 0, w: '100%', h: 0.04, fill: { color: ALEX_COLORS.blue.text } } },
+            { rect: { x: 0.6, y: 5.35, w: 8.8, h: 0.008, fill: { color: ALEX_COLORS.gray.border } } },
         ],
-        slideNumber: { x: 9.25, y: 6.75, color: ALEX_COLORS.gray.text, fontSize: 9 }
+        slideNumber: { x: 9.2, y: 5.38, color: ALEX_COLORS.gray.border, fontSize: 9, fontFace: FONT.body }
     });
 }
 

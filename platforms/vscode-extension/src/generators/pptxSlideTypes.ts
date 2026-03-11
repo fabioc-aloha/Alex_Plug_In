@@ -16,24 +16,30 @@ import {
     parseIconifyValue
 } from '../services/illustrationService';
 import type { SlideContent, ChartData, TableData, ImageData, IllustrationData, IllustrationSlideData, TwoColumnData } from './pptxGenerator';
-import { ALEX_COLORS, CHART_COLORS } from './pptxGenerator';
+import { ALEX_COLORS, CHART_COLORS, FONT } from './pptxGenerator';
 
 export function addTitleSlide(pres: pptxgen, content: SlideContent): void {
     const slide = pres.addSlide({ masterName: 'ALEX_TITLE' });
 
     // Main title
     slide.addText(content.title || 'Untitled Presentation', {
-        x: 0.5, y: 2.5, w: 9, h: 1,
-        fontSize: 40, fontFace: 'Arial', bold: true,
-        color: 'FFFFFF', align: 'center'
+        x: 0.5, y: 1.2, w: 9, h: 1.2,
+        fontSize: 40, fontFace: FONT.heading, bold: true,
+        color: ALEX_COLORS.blue.text, align: 'center', valign: 'bottom'
+    });
+
+    // Centered accent underline
+    slide.addText('', {
+        x: 4.0, y: 2.5, w: 2.0, h: 0.035,
+        fill: { color: ALEX_COLORS.gold.border }
     });
 
     // Subtitle
     if (content.subtitle) {
         slide.addText(content.subtitle, {
-            x: 0.5, y: 3.6, w: 9, h: 0.6,
-            fontSize: 18, fontFace: 'Arial',
-            color: ALEX_COLORS.blue.border, align: 'center'
+            x: 0.5, y: 2.75, w: 9, h: 0.6,
+            fontSize: 20, fontFace: FONT.body,
+            color: '57606a', align: 'center'
         });
     }
 
@@ -45,27 +51,39 @@ export function addTitleSlide(pres: pptxgen, content: SlideContent): void {
 
 export function addContentSlide(pres: pptxgen, content: SlideContent): void {
     const slide = pres.addSlide({ masterName: 'ALEX_CONTENT' });
+    const hasTitle = !!content.title;
 
     // Title
-    if (content.title) {
-        slide.addText(content.title, {
-            x: 0.5, y: 0.9, w: 9, h: 0.6,
-            fontSize: 28, fontFace: 'Arial', bold: true,
-            color: ALEX_COLORS.gray.text
+    if (hasTitle) {
+        slide.addText(content.title!, {
+            x: 0.6, y: 0.2, w: 8.8, h: 0.55,
+            fontSize: 26, fontFace: FONT.heading, bold: true,
+            color: ALEX_COLORS.blue.text
+        });
+        // Accent underline
+        slide.addText('', {
+            x: 0.6, y: 0.8, w: 1.5, h: 0.025,
+            fill: { color: ALEX_COLORS.blue.border }
         });
     }
 
-    // Bullets
+    // Bullets as paragraph group
     if (content.bullets && content.bullets.length > 0) {
-        const yStart = content.title ? 1.7 : 1.0;
-        content.bullets.forEach((bullet, i) => {
-            slide.addText(bullet, {
-                x: 0.8, y: yStart + i * 0.6, w: 8.2, h: 0.5,
-                fontSize: 16, fontFace: 'Arial',
-                color: ALEX_COLORS.gray.text,
-                bullet: { type: 'bullet' }
-            });
-        });
+        const yStart = hasTitle ? 1.05 : 0.25;
+        slide.addText(
+            content.bullets.map(bullet => ({
+                text: bullet,
+                options: {
+                    fontSize: 18,
+                    fontFace: FONT.body,
+                    color: ALEX_COLORS.gray.text,
+                    bullet: { type: 'bullet' as const },
+                    paraSpaceBefore: 4,
+                    paraSpaceAfter: 6,
+                }
+            })),
+            { x: 0.8, y: yStart, w: 8.4, h: 5.1 - yStart, valign: 'top' }
+        );
     }
 
     // Speaker notes
@@ -79,17 +97,17 @@ export function addSectionSlide(pres: pptxgen, content: SlideContent): void {
 
     // Section title
     slide.addText(content.title || 'Section', {
-        x: 0.5, y: 2.8, w: 9, h: 0.8,
-        fontSize: 36, fontFace: 'Arial', bold: true,
-        color: ALEX_COLORS.purple.text, align: 'center'
+        x: 0.8, y: 1.6, w: 6.5, h: 1.0,
+        fontSize: 38, fontFace: FONT.heading, bold: true,
+        color: 'FFFFFF', align: 'left', valign: 'bottom'
     });
 
     // Subtitle
     if (content.subtitle) {
         slide.addText(content.subtitle, {
-            x: 0.5, y: 3.7, w: 9, h: 0.5,
-            fontSize: 16, fontFace: 'Arial',
-            color: ALEX_COLORS.purple.text, align: 'center'
+            x: 0.8, y: 3.8, w: 6.5, h: 0.5,
+            fontSize: 18, fontFace: FONT.body,
+            color: 'c0d0e8', align: 'left'
         });
     }
 }
@@ -101,9 +119,9 @@ export function addChartSlide(pres: pptxgen, content: SlideContent): void {
     // Title
     if (content.title) {
         slide.addText(content.title, {
-            x: 0.5, y: 0.9, w: 9, h: 0.5,
-            fontSize: 24, fontFace: 'Arial', bold: true,
-            color: ALEX_COLORS.gray.text
+            x: 0.6, y: 0.2, w: 8.8, h: 0.55,
+            fontSize: 24, fontFace: FONT.heading, bold: true,
+            color: ALEX_COLORS.blue.text
         });
     }
 
@@ -124,7 +142,7 @@ export function addChartSlide(pres: pptxgen, content: SlideContent): void {
     const chartType = chartTypeMap[chartData.chartType] || pres.ChartType.bar;
 
     slide.addChart(chartType, chartData.series, {
-        x: 0.5, y: 1.5, w: 9, h: 4.8,
+        x: 0.5, y: 1.0, w: 9, h: 4.0,
         chartColors: CHART_COLORS,
         showTitle: !!chartData.title,
         title: chartData.title,
@@ -146,9 +164,9 @@ export function addTableSlide(pres: pptxgen, content: SlideContent): void {
     // Title
     if (content.title) {
         slide.addText(content.title, {
-            x: 0.5, y: 0.9, w: 9, h: 0.5,
-            fontSize: 24, fontFace: 'Arial', bold: true,
-            color: ALEX_COLORS.gray.text
+            x: 0.6, y: 0.2, w: 8.8, h: 0.55,
+            fontSize: 24, fontFace: FONT.heading, bold: true,
+            color: ALEX_COLORS.blue.text
         });
     }
 
@@ -162,20 +180,21 @@ export function addTableSlide(pres: pptxgen, content: SlideContent): void {
     // Header row
     rows.push(tableData.headers.map(h => ({
         text: h,
-        options: { bold: true, fill: { color: ALEX_COLORS.blue.text }, color: 'FFFFFF', fontSize: 12 }
+        options: { bold: true, fill: { color: ALEX_COLORS.blue.text }, color: 'FFFFFF', fontSize: 13, fontFace: FONT.body }
     })));
 
-    // Data rows
+    // Data rows with zebra striping
     tableData.rows.forEach((row, rowIdx) => {
         const isLastRow = rowIdx === tableData.rows.length - 1;
         const shouldHighlight = isLastRow && tableData.highlightLastRow;
+        const zebraColor = rowIdx % 2 === 0 ? 'FFFFFF' : 'f6f8fa';
 
         rows.push(row.map(cell => ({
             text: cell,
             options: {
-                fill: { color: shouldHighlight ? ALEX_COLORS.gray.fill : 'FFFFFF' },
+                fill: { color: shouldHighlight ? ALEX_COLORS.gray.fill : zebraColor },
                 bold: shouldHighlight,
-                fontSize: 11,
+                fontSize: 12,
                 color: ALEX_COLORS.gray.text
             }
         })));
@@ -187,10 +206,10 @@ export function addTableSlide(pres: pptxgen, content: SlideContent): void {
     const colW = Array(colCount).fill(tableWidth / colCount);
 
     slide.addTable(rows, {
-        x: 0.5, y: 1.6, w: tableWidth,
+        x: 0.5, y: 1.0, w: tableWidth,
         colW,
         border: { type: 'solid', pt: 0.5, color: ALEX_COLORS.gray.border },
-        fontFace: 'Arial',
+        fontFace: FONT.body,
         autoPage: true,
         autoPageRepeatHeader: true
     });
@@ -207,9 +226,9 @@ export function addImageSlide(pres: pptxgen, content: SlideContent): void {
     // Title
     if (content.title) {
         slide.addText(content.title, {
-            x: 0.5, y: 0.9, w: 9, h: 0.5,
-            fontSize: 24, fontFace: 'Arial', bold: true,
-            color: ALEX_COLORS.gray.text
+            x: 0.6, y: 0.2, w: 8.8, h: 0.55,
+            fontSize: 24, fontFace: FONT.heading, bold: true,
+            color: ALEX_COLORS.blue.text
         });
     }
 
@@ -218,9 +237,9 @@ export function addImageSlide(pres: pptxgen, content: SlideContent): void {
     }
 
     const imgOpts: pptxgen.ImageProps = {
-        x: 1, y: 1.6,
+        x: 1, y: 1.0,
         w: imageData.width || 8,
-        h: imageData.height || 4.5
+        h: imageData.height || 3.8
     };
 
     if (imageData.base64) {
@@ -234,9 +253,9 @@ export function addImageSlide(pres: pptxgen, content: SlideContent): void {
     // Caption
     if (imageData.caption) {
         slide.addText(imageData.caption, {
-            x: 0.5, y: 6.2, w: 9, h: 0.4,
-            fontSize: 10, fontFace: 'Arial', italic: true,
-            color: ALEX_COLORS.gray.text, align: 'center'
+            x: 0.5, y: 5.0, w: 9, h: 0.3,
+            fontSize: 10, fontFace: FONT.body, italic: true,
+            color: '57606a', align: 'center'
         });
     }
 
@@ -255,9 +274,9 @@ export function addIllustrationSlide(pres: pptxgen, content: SlideContent, works
     // Title
     if (content.title) {
         slide.addText(content.title, {
-            x: 0.5, y: 0.9, w: 9, h: 0.5,
-            fontSize: 24, fontFace: 'Arial', bold: true,
-            color: ALEX_COLORS.gray.text
+            x: 0.6, y: 0.2, w: 8.8, h: 0.55,
+            fontSize: 24, fontFace: FONT.heading, bold: true,
+            color: ALEX_COLORS.blue.text
         });
     }
 
@@ -268,9 +287,9 @@ export function addIllustrationSlide(pres: pptxgen, content: SlideContent, works
     const illustration = illustrationData.illustration;
     const imgOpts: pptxgen.ImageProps = {
         x: illustration.position === 'left' ? 0.5 : illustration.position === 'right' ? 6.5 : 2.5,
-        y: 1.8,
+        y: 1.0,
         w: illustration.width || 5,
-        h: illustration.height || 4
+        h: illustration.height || 3.5
     };
 
     // Resolve illustration to image data
@@ -365,8 +384,8 @@ export function addIllustrationSlide(pres: pptxgen, content: SlideContent, works
     // Description below illustration
     if (illustrationData.description) {
         slide.addText(illustrationData.description, {
-            x: 0.5, y: 5.5, w: 9, h: 0.8,
-            fontSize: 14, fontFace: 'Arial',
+            x: 0.5, y: 4.5, w: 9, h: 0.6,
+            fontSize: 14, fontFace: FONT.body,
             color: ALEX_COLORS.gray.text, align: 'center'
         });
     }
@@ -374,9 +393,9 @@ export function addIllustrationSlide(pres: pptxgen, content: SlideContent, works
     // Caption
     if (illustration.caption) {
         slide.addText(illustration.caption, {
-            x: 0.5, y: 6.2, w: 9, h: 0.4,
-            fontSize: 10, fontFace: 'Arial', italic: true,
-            color: ALEX_COLORS.gray.text, align: 'center'
+            x: 0.5, y: 5.1, w: 9, h: 0.3,
+            fontSize: 10, fontFace: FONT.body, italic: true,
+            color: '57606a', align: 'center'
         });
     }
 
@@ -438,9 +457,9 @@ export function addTwoColumnSlide(pres: pptxgen, content: SlideContent): void {
     // Main title
     if (content.title) {
         slide.addText(content.title, {
-            x: 0.5, y: 0.9, w: 9, h: 0.5,
-            fontSize: 24, fontFace: 'Arial', bold: true,
-            color: ALEX_COLORS.gray.text
+            x: 0.6, y: 0.2, w: 8.8, h: 0.55,
+            fontSize: 24, fontFace: FONT.heading, bold: true,
+            color: ALEX_COLORS.blue.text
         });
     }
 
@@ -452,41 +471,59 @@ export function addTwoColumnSlide(pres: pptxgen, content: SlideContent): void {
     if (colData.left) {
         if (colData.left.title) {
             slide.addText(colData.left.title, {
-                x: 0.5, y: 1.6, w: 4.3, h: 0.4,
-                fontSize: 16, fontFace: 'Arial', bold: true,
+                x: 0.5, y: 1.0, w: 4.3, h: 0.4,
+                fontSize: 16, fontFace: FONT.heading, bold: true,
                 color: ALEX_COLORS.blue.text
             });
         }
-        if (colData.left.bullets) {
-            colData.left.bullets.forEach((bullet, i) => {
-                slide.addText(bullet, {
-                    x: 0.7, y: 2.1 + i * 0.55, w: 4.1, h: 0.5,
-                    fontSize: 13, fontFace: 'Arial',
-                    color: ALEX_COLORS.gray.text,
-                    bullet: { type: 'bullet' }
-                });
-            });
+        if (colData.left.bullets && colData.left.bullets.length > 0) {
+            slide.addText(
+                colData.left.bullets.map(bullet => ({
+                    text: bullet,
+                    options: {
+                        fontSize: 14,
+                        fontFace: FONT.body,
+                        color: ALEX_COLORS.gray.text,
+                        bullet: { type: 'bullet' as const },
+                        paraSpaceBefore: 2,
+                        paraSpaceAfter: 4,
+                    }
+                })),
+                { x: 0.6, y: 1.5, w: 4.1, h: 3.5, valign: 'top' }
+            );
         }
     }
+
+    // Column divider
+    slide.addText('', {
+        x: 4.95, y: 1.0, w: 0.01, h: 4.0,
+        fill: { color: ALEX_COLORS.gray.border }
+    });
 
     // Right column
     if (colData.right) {
         if (colData.right.title) {
             slide.addText(colData.right.title, {
-                x: 5.2, y: 1.6, w: 4.3, h: 0.4,
-                fontSize: 16, fontFace: 'Arial', bold: true,
+                x: 5.2, y: 1.0, w: 4.3, h: 0.4,
+                fontSize: 16, fontFace: FONT.heading, bold: true,
                 color: ALEX_COLORS.green.text
             });
         }
-        if (colData.right.bullets) {
-            colData.right.bullets.forEach((bullet, i) => {
-                slide.addText(bullet, {
-                    x: 5.4, y: 2.1 + i * 0.55, w: 4.1, h: 0.5,
-                    fontSize: 13, fontFace: 'Arial',
-                    color: ALEX_COLORS.gray.text,
-                    bullet: { type: 'bullet' }
-                });
-            });
+        if (colData.right.bullets && colData.right.bullets.length > 0) {
+            slide.addText(
+                colData.right.bullets.map(bullet => ({
+                    text: bullet,
+                    options: {
+                        fontSize: 14,
+                        fontFace: FONT.body,
+                        color: ALEX_COLORS.gray.text,
+                        bullet: { type: 'bullet' as const },
+                        paraSpaceBefore: 2,
+                        paraSpaceAfter: 4,
+                    }
+                })),
+                { x: 5.3, y: 1.5, w: 4.1, h: 3.5, valign: 'top' }
+            );
         }
     }
 

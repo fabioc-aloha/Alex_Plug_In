@@ -475,7 +475,7 @@ try {
 
 **Integrates with**:
 - [release-management](release-management.instructions.md) — Pre-publish quality gate
-- [code-review](code-review.instructions.md) — Code quality assessment criteria
+- [code-review](code-review-guidelines.instructions.md) — Code quality assessment criteria
 - [technical-debt-tracking](technical-debt-tracking.instructions.md) — Audit findings become debt items
 - [semantic-audit](semantic-audit.instructions.md) — Higher-level architectural consistency check
 

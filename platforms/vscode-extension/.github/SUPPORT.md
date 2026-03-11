@@ -6,10 +6,8 @@ Looking for help with Alex Cognitive Architecture? Here's how to get support:
 
 Start with our comprehensive documentation:
 
-- **[User Manual](../alex_docs/guides/USER-MANUAL.md)** - Complete getting started guide
-- **[Quick Reference](../alex_docs/guides/QUICK-REFERENCE.md)** - Commands and shortcuts cheat sheet
-- **[FAQ](../alex_docs/guides/FAQ.md)** - Frequently asked questions
-- **[Troubleshooting Guide](../alex_docs/guides/TROUBLESHOOTING.md)** - Common issues and solutions
+- **[User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)** - Complete getting started guide
+- **[Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/QUICK-REFERENCE.md)** - Commands and shortcuts cheat sheet
 
 ## 💬 Community Support
 
@@ -39,13 +37,13 @@ Found a bug? Have a feature request?
 
 Please use [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new) to privately report security vulnerabilities.
 
-See our [Security Policy](../SECURITY.md) for details on our response process.
+See our [Security Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md) for details on our response process.
 
 ## 🤝 Contributing
 
 Want to contribute? We welcome pull requests!
 
-See our [Contributing Guide](../CONTRIBUTING.md) for:
+See our [Contributing Guide](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for:
 
 - Code standards and conventions
 - Development setup instructions

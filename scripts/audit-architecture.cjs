@@ -88,12 +88,17 @@ if (agentListMatch) {
   );
 
   for (const a of agentNames) {
-    if (!agentFileNames.includes(a)) {
+    // Match either exact name or alex-{name} prefix convention
+    const found = agentFileNames.includes(a) || agentFileNames.includes('alex-' + a);
+    if (!found) {
       issues.push('WARN: agent "' + a + '" listed in CI but no .agent.md file');
     }
   }
   for (const af of agentFileNames) {
-    if (!agentNames.includes(af)) {
+    // Match either exact name or strip alex- prefix
+    const stripped = af.startsWith('alex-') ? af.slice(5) : af;
+    const found = agentNames.includes(af) || agentNames.includes(stripped);
+    if (!found) {
       issues.push('WARN: agent file "' + af + '.agent.md" exists but not listed in CI');
     }
   }
@@ -223,8 +228,25 @@ console.log('\n=== HOOKS AUDIT ===');
 const hooksFile = path.join(base, '.github/hooks.json');
 if (fs.existsSync(hooksFile)) {
   try {
-    const hooks = JSON.parse(fs.readFileSync(hooksFile, 'utf8'));
-    const hookEntries = Array.isArray(hooks) ? hooks : (hooks.hooks || []);
+    const hooksData = JSON.parse(fs.readFileSync(hooksFile, 'utf8'));
+    // hooks.json maps event names -> arrays of hook groups -> hooks[]
+    const hookMap = hooksData.hooks || hooksData;
+    const hookEntries = [];
+    if (typeof hookMap === 'object' && !Array.isArray(hookMap)) {
+      for (const [event, groups] of Object.entries(hookMap)) {
+        if (Array.isArray(groups)) {
+          for (const group of groups) {
+            if (group.hooks && Array.isArray(group.hooks)) {
+              for (const h of group.hooks) {
+                hookEntries.push({ ...h, event });
+              }
+            }
+          }
+        }
+      }
+    } else if (Array.isArray(hookMap)) {
+      hookEntries.push(...hookMap);
+    }
     console.log('Hooks defined: ' + hookEntries.length);
     
     // Check each hook references valid muscle files

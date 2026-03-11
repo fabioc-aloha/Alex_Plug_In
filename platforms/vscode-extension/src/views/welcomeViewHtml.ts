@@ -858,7 +858,7 @@ export function getFeaturesHtml(): string {
                       <ul class="feature-list" role="list">
                           <li><strong>AI Image Generation</strong> - Generate images from text prompts via Replicate (Flux, SDXL)</li>
                           <li><strong>AI Image Editing</strong> - Edit existing images with nano-banana-pro for consistent results</li>
-                          <li><strong>Marp Presentations</strong> - Generate PPTX locally with Marp CLI (free, offline)</li>
+                          <li><strong>PPTX Presentations</strong> - Generate polished PowerPoint locally (free, offline)</li>
                           <li><strong>Gamma Presentations</strong> - Cloud-based AI presentations with rich styling and image models</li>
                           <li><strong>Mermaid Diagrams</strong> - Generate flowcharts, sequence diagrams from code or text</li>
                       </ul>

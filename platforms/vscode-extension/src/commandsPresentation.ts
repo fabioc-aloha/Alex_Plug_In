@@ -2,7 +2,7 @@
  * commandsPresentation.ts - Presentation and content creation commands
  *
  * Extracted from extension.ts to keep the main activation file focused.
- * Contains: diagram generation, PPTX/Marp, Word conversion, Gamma presentations.
+ * Contains: diagram generation, PPTX generation, Word conversion, Gamma presentations.
  */
 import * as vscode from 'vscode';
 import * as path from 'path';
@@ -109,7 +109,7 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
 
         const selected = await vscode.window.showQuickPick(sourceOptions, {
           placeHolder: "Select presentation source",
-          title: "📰 Generate PowerPoint Presentation",
+          title: "Generate PowerPoint Presentation",
         });
 
         if (!selected) {

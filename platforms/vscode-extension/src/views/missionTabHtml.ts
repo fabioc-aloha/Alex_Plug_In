@@ -47,14 +47,18 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               ${actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
               </div>
               
+              <div class="action-group-label" data-group="apikeys" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>API KEYS</div>
+              <div class="action-group-content" data-group="apikeys">
+              ${actionButton('manageSecrets', '🔑', 'API Keys & Secrets', 'Manage tokens for Gamma, Replicate, OpenAI')}
+              ${actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
+              </div>
+              
               <div class="action-group-label" data-group="system" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>SYSTEM</div>
               <div class="action-group-content" data-group="system">
               <button class="action-btn" data-cmd="upgrade" tabindex="0" role="button" aria-label="Initialize or Update Alex architecture">
                   <span class="action-icon" aria-hidden="true">${hasGlobalKnowledge ? "🌐" : "⬆️"}</span>
                   <span class="action-text">Initialize / Update</span>
               </button>
-              ${actionButton('manageSecrets', '🔑', 'API Keys & Secrets', 'Manage tokens for Gamma, Replicate, OpenAI')}
-              ${actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
               ${actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
               ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
               ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
@@ -82,7 +86,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               
               <div class="action-group-label" data-group="present" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>PRESENT & SHARE</div>
               <div class="action-group-content" data-group="present">
-              ${actionButton('generatePptx', '📄', 'Marp PPTX (Local)', 'Generate PowerPoint locally with Marp - free, offline')}
+              ${actionButton('generatePptx', '📝', 'Generate PPTX', 'Create polished PowerPoint presentations locally — free, offline')}
               ${actionButton('generateGammaPresentation', '🎨', 'Gamma (Cloud)', 'Generate beautiful AI presentations via Gamma API')}
               ${actionButton('generateGammaAdvanced', '⚙️', 'Gamma Advanced', 'Gamma with style, model, and image options')}
               </div>

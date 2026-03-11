@@ -168,10 +168,10 @@ git checkout -b FishBowl --track fabric/FishBowl
 
 ## Synapses
 
-- [fabric-notebook-push.instructions.md](../../instructions/fabric-notebook-push.instructions.md) → Core procedural memory
-- [git-workflow/SKILL.md](.github/skills/git-workflow/SKILL.md) → Git worktree management
-- [microsoft-fabric/SKILL.md](.github/skills/microsoft-fabric/SKILL.md) → Fabric platform knowledge
-- [api-design/SKILL.md](.github/skills/api-design/SKILL.md) → REST API token handling
+- fabric-notebook-push.instructions.md → Core procedural memory (not yet created)
+- [git-workflow/SKILL.md](..\git-workflow/SKILL.md) → Git worktree management
+- [microsoft-fabric/SKILL.md](..\microsoft-fabric/SKILL.md) → Fabric platform knowledge
+- [api-design/SKILL.md](..\api-design/SKILL.md) → REST API token handling
 
 ## Related Files
 

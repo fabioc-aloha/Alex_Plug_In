@@ -57,7 +57,7 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 ### Review Checklist
 
-Use the comprehensive checklist from the [code-review SKILL.md](.github/skills/code-review/SKILL.md#review-checklist) covering Security, Logic, Quality, and Architecture dimensions. The skill also defines the 3-Pass Review methodology (Orientation → Logic → Polish).
+Use the comprehensive checklist from the [code-review SKILL.md](..\skills\code-review/SKILL.md#review-checklist) covering Security, Logic, Quality, and Architecture dimensions. The skill also defines the 3-Pass Review methodology (Orientation → Logic → Polish).
 
 ---
 
@@ -65,7 +65,7 @@ Use the comprehensive checklist from the [code-review SKILL.md](.github/skills/c
 
 ### Comment Prefixes
 
-Use the comment prefix system defined in the [code-review SKILL.md](.github/skills/code-review/SKILL.md#comment-prefixes): `[blocking]`, `[suggestion]`, `[question]`, `[nit]`, `[praise]`.
+Use the comment prefix system defined in the [code-review SKILL.md](..\skills\code-review/SKILL.md#comment-prefixes): `[blocking]`, `[suggestion]`, `[question]`, `[nit]`, `[praise]`.
 
 ### Examples
 

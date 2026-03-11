@@ -3,33 +3,44 @@
     "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
-  "stalledFiles": [],
+  "stalledFiles": [
+    "github/SUPPORT.md",
+    "CHANGELOG.md",
+    "platforms/agent-plugin/plugin/skills/llm-model-selection/SKILL.md",
+    "platforms/vscode-extension/README.md",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/src/chat/modelIntelligence.ts",
+    "platforms/vscode-extension/src/commands/statusQuickPick.ts",
+    "platforms/vscode-extension/src/commandsPresentation.ts",
+    "platforms/vscode-extension/src/generators/pptxGenerator.ts",
+    "platforms/vscode-extension/src/generators/pptxSlideTypes.ts"
+  ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1773185458150
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.5.0.vsix",
-      "todoCount": 2,
-      "scannedAt": 1773185458150
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.4.6.vsix",
-      "todoCount": 2,
-      "scannedAt": 1773185458150
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1773185458150
+      "scannedAt": 1773247103155
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1773185458150
+      "scannedAt": 1773247103155
+    },
+    {
+      "file": "platforms/vscode-extension/README.md",
+      "todoCount": 1,
+      "scannedAt": 1773247103155
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1773247103155
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1773247103155
     }
   ],
-  "lastUpdated": 1773185458150
+  "lastUpdated": 1773247103155
 }

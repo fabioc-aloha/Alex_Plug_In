@@ -26,7 +26,7 @@
 ## Issues Found & Repaired
 
 ### Broken Synapse Connection
-**Location**: [vscode-marketplace-publishing.instructions.md](c:\Development\Alex_Plug_In\.github\instructions\vscode-marketplace-publishing.instructions.md:17)
+**Location**: [vscode-marketplace-publishing.instructions.md](../instructions/vscode-marketplace-publishing.instructions.md)
 **Issue**: Referenced non-existent file `.github/instructions/quality-assurance.instructions.md`
 **Root Cause**: File was likely merged/renamed during architecture evolution
 **Repair**: Removed obsolete synapse reference (general QA concept doesn't need specific connection)
@@ -37,7 +37,7 @@
 ## Meditation Integration Validation
 
 ### Recent Meditation Session
-**File**: [meditation-2026-02-15-roadmap-reorganization.md](c:\Development\Alex_Plug_In\.github\episodic\meditation-2026-02-15-roadmap-reorganization.md)
+**File**: [meditation-2026-02-15-roadmap-reorganization.md](meditation-2026-02-15-roadmap-reorganization.md)
 **Synapse Added**: documentation-quality-assurance skill now learns from progressive disclosure pattern discovered during roadmap reorganization
 **Connection Status**: ✅ Valid (target file exists, bidirectional relationship documented)
 

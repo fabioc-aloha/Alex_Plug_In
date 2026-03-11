@@ -2,7 +2,7 @@
   "skill": "m365-agent-debugging",
   "connections": [
     {
-      "target": ".github/skills/teams-app-patterns/SKILL.md",
+      "target": "..\\teams-app-patterns\\SKILL.md",
       "type": "extends",
       "strength": 0.85,
       "context": "Shared MCP tools and @m365agents participant"

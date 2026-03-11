@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "6.5.0",
+  "version": "6.5.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -331,12 +331,12 @@
       },
       {
         "command": "alex.generatePptx",
-        "title": "Alex: Presentation Options...",
+        "title": "Alex: Generate Presentation (PPTX)",
         "icon": "$(file-media)"
       },
       {
         "command": "alex.generatePptxFromFile",
-        "title": "Alex: Quick Convert to PPTX",
+        "title": "Alex: Convert Markdown to PPTX",
         "icon": "$(file-media)"
       },
       {
@@ -1560,12 +1560,12 @@
           },
           {
             "name": "marp",
-            "description": "Create a Marp markdown presentation with Alex branding, ready for PDF/PPTX export",
+            "description": "Create a Marp markdown presentation with Alex branding, ready for PDF/PPTX/HTML export",
             "sampleRequest": "Create a presentation about our architecture"
           },
           {
             "name": "presentation",
-            "description": "Generate a professional presentation — routes to Gamma, Marp, or PptxGenJS based on your needs",
+            "description": "Generate a professional presentation — routes to Gamma (cloud AI) or local PPTX generation based on your needs",
             "sampleRequest": "Build a pitch deck for investors"
           }
         ]

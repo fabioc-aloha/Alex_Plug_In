@@ -503,7 +503,7 @@ Add your skill to the action-keyword index:
 - [.github/instructions/heir-skill-promotion.instructions.md] (Critical, Implements, Forward) - "Skill ready for promotion"
 - [.github/skills/memory-activation/SKILL.md] (High, Integrates, Forward) - "Register for discovery"
 - [.github/skills/skill-catalog-generator/SKILL.md] (Medium, Triggers, Forward) - "Regenerate catalog after creation"
-- [SYNAPSE-SCHEMA.md](../SYNAPSE-SCHEMA.md) (High, References, Backward) - "Canonical synapse architecture reference"
+- [SYNAPSE-SCHEMA.md](../../instructions/SYNAPSE-SCHEMA.md) (High, References, Backward) - "Canonical synapse architecture reference"
 
 ---
 

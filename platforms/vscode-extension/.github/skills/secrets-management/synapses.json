@@ -34,6 +34,13 @@
       "yields": "Secure token retrieval for Gamma integration"
     },
     {
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "uses",
+      "strength": 0.75,
+      "when": "retrieving environment variable migration and async-sync bridge patterns",
+      "yields": "Non-destructive migration patterns, cache-based sync access strategy"
+    },
+    {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "enables",
       "strength": 0.7,

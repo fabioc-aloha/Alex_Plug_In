@@ -2,25 +2,25 @@
   "skill": "teams-app-patterns",
   "connections": [
     {
-      "target": ".github/skills/m365-agent-debugging/SKILL.md",
+      "target": "..\\m365-agent-debugging\\SKILL.md",
       "type": "extends",
       "strength": 0.8,
       "reason": "Covers more than just declarative agents"
     },
     {
-      "target": ".github/skills/release-preflight/SKILL.md",
+      "target": "..\\release-preflight\\SKILL.md",
       "type": "uses",
       "strength": 0.8,
       "reason": "Teams apps need release process"
     },
     {
-      "target": ".github/instructions/brand-asset-management.instructions.md",
+      "target": "..\\..\\instructions\\brand-asset-management.instructions.md",
       "type": "references",
       "strength": 0.75,
       "reason": "Icon generation workflow ensures brand consistency across platforms"
     },
     {
-      "target": ".github/skills/release-process/SKILL.md",
+      "target": "..\\release-process\\SKILL.md",
       "type": "coordinates",
       "strength": 0.7,
       "reason": "Multi-heir release triggers M365 packaging after VS Code publish"

@@ -50,6 +50,12 @@
       "description": "Dependency security practices and vulnerability scanning"
     },
     {
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "uses",
+      "strength": 0.7,
+      "description": "Cross-project security patterns including CSP event delegation for VS Code webviews"
+    },
+    {
       "target": ".github/skills/pii-privacy-regulations/SKILL.md",
       "type": "complements",
       "strength": 0.75

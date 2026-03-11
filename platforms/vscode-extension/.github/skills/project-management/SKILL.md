@@ -111,7 +111,7 @@ Always use dual-column effort estimates:
 - 📦 Session (1-2h)
 - 🗓️ Multi-session (2h+)
 
-See [alex-effort-estimation skill](.github/skills/alex-effort-estimation/SKILL.md) for methodology.
+See [alex-effort-estimation skill](..\alex-effort-estimation/SKILL.md) for methodology.
 
 ---
 

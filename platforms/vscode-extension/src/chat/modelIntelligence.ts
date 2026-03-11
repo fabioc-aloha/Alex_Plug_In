@@ -129,12 +129,12 @@ const MODEL_FAMILY_PATTERNS: Array<{ pattern: RegExp; tier: ModelTier }> = [
     // Claude Opus variants
     { pattern: /claude.*opus/i, tier: 'frontier' },
     { pattern: /claude-opus/i, tier: 'frontier' },
-    // GPT-5.2 variants (including Codex)
-    { pattern: /gpt-5\.2/i, tier: 'frontier' },
+    // GPT-5.2/5.3 variants (including Codex)
+    { pattern: /gpt-5\.[23]/i, tier: 'frontier' },
     // Reasoning models
     { pattern: /o1-preview/i, tier: 'frontier' },
     { pattern: /o1-pro/i, tier: 'frontier' },
-    { pattern: /o3/i, tier: 'frontier' },
+    { pattern: /o3(?!.*mini)/i, tier: 'frontier' },
     
     // ========== CAPABLE (Good reasoning, 200K-400K context) ==========
     // Claude Sonnet variants
@@ -142,17 +142,20 @@ const MODEL_FAMILY_PATTERNS: Array<{ pattern: RegExp; tier: ModelTier }> = [
     { pattern: /claude-sonnet/i, tier: 'capable' },
     // GPT-5.1 variants (all Codex flavors: Max, Mini, base)
     { pattern: /gpt-5\.1/i, tier: 'capable' },
-    // GPT-5 base and Codex (not 5.2, not 5-mini)
+    // GPT-5 base and Codex (not 5.2/5.3, not 5-mini)
     { pattern: /gpt-5-codex/i, tier: 'capable' },
     { pattern: /gpt-5(?![\.\-])/i, tier: 'capable' },  // GPT-5 alone
-    // GPT-4o
-    { pattern: /gpt-4o/i, tier: 'capable' },
+    // GPT-4.1 (1M context, smartest non-reasoning model)
+    { pattern: /gpt-4\.1(?!.*mini|.*nano)/i, tier: 'capable' },
+    // GPT-4o (not 4o-mini)
+    { pattern: /gpt-4o(?!.*mini)/i, tier: 'capable' },
     { pattern: /gpt-4-turbo/i, tier: 'capable' },
     // Gemini Pro variants
     { pattern: /gemini.*3.*pro/i, tier: 'capable' },
     { pattern: /gemini.*2\.5.*pro/i, tier: 'capable' },
     { pattern: /gemini-pro/i, tier: 'capable' },
-    // o1-mini
+    // Reasoning-efficient models
+    { pattern: /o4-mini/i, tier: 'capable' },
     { pattern: /o1-mini/i, tier: 'capable' },
     
     // ========== EFFICIENT (Fast, cost-effective) ==========
@@ -161,8 +164,11 @@ const MODEL_FAMILY_PATTERNS: Array<{ pattern: RegExp; tier: ModelTier }> = [
     { pattern: /claude-haiku/i, tier: 'efficient' },
     // GPT-5 mini
     { pattern: /gpt-5.*mini/i, tier: 'efficient' },
-    // GPT-4.1
-    { pattern: /gpt-4\.1/i, tier: 'efficient' },
+    // GPT-4.1 mini/nano
+    { pattern: /gpt-4\.1.*mini/i, tier: 'efficient' },
+    { pattern: /gpt-4\.1.*nano/i, tier: 'efficient' },
+    // GPT-4o mini
+    { pattern: /gpt-4o.*mini/i, tier: 'efficient' },
     { pattern: /gpt-4-mini/i, tier: 'efficient' },
     // Gemini Flash
     { pattern: /gemini.*flash/i, tier: 'efficient' },

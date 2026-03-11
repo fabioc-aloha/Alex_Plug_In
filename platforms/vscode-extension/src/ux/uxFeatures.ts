@@ -60,13 +60,17 @@ const MODEL_TIER_MAP: Record<string, ModelTier> = {
   'gpt-4o': 'capable',
   'gemini-3-pro': 'capable',
   'gemini-2.5-pro': 'capable',
+  'o4-mini': 'capable',
   'o1-mini': 'capable',
   // Efficient tier
   'claude-haiku-4': 'efficient',
   'claude-haiku-4.5': 'efficient',
   'gpt-5-mini': 'efficient',
   'gpt-5.1-codex-mini': 'efficient',
+  'gpt-4.1-mini': 'efficient',
+  'gpt-4.1-nano': 'efficient',
   'gpt-4o-mini': 'efficient',
+  'gemini-2.5-flash': 'efficient',
   'gemini-3-flash': 'efficient',
 };
 

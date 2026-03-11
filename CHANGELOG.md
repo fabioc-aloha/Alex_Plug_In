@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.5.1] - 2026-03-11
+
+### Changed
+- **PPTX engine rewrite** — Calibri typography, modern slide masters with accent lines, paragraph-based bullets, zebra-striped tables, proper 16:9 coordinates
+- **UI labels** updated across commands, sidebar, and context menus (Marp → PPTX terminology)
+- **API KEYS section** added to Mission Control sidebar for key and secret management
+- **Model tier updates** — GPT-5.3, o4-mini (capable), GPT-4.1 (capable with mini/nano as efficient), Gemini 2.5 Flash (efficient), o1-pro (frontier). Fixed GPT-4o/4o-mini and o3/o3-mini tier overlap in pattern matching
+
+### Fixed
+- Corrupted emoji encoding (U+FFFD) in presentation command and sidebar
+
+---
+
 ## [6.5.0] - 2026-03-10
 
 > **The Trust Release** — Safety hooks, security hardening, avatar removal, theme compliance, heir alignment, skill promotions.

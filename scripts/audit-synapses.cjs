@@ -140,6 +140,9 @@ for (const dir of dirs) {
                     issues.push(`${dir}: broken prompt target -> ${conn.target}`);
                 }
             }
+        } else if (targetPath.startsWith('global-knowledge://') || targetPath.startsWith('external:')) {
+            // Cross-project URI references — cannot validate on disk
+            stats.externalRefs = (stats.externalRefs || 0) + 1;
         } else {
             // Generic path check
             const fullPath = path.join(ROOT, targetPath);
@@ -221,6 +224,7 @@ console.log(`No activationContexts: ${stats.noActivationContexts}`);
 console.log('');
 console.log('--- Connection Issues ---');
 console.log(`Broken targets: ${stats.brokenTargets}`);
+console.log(`External refs (not validated): ${stats.externalRefs || 0}`);
 console.log(`Missing target field: ${stats.missingTarget}`);
 console.log(`Self-references: ${stats.selfReferences}`);
 console.log(`Duplicate targets: ${stats.duplicateTargets}`);

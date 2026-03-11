@@ -315,7 +315,7 @@ Run this checklist on any document to audit for AI tells:
 
 ## Resources
 
-- [AI-WRITING-TELLS.md](../../alex_docs/research/AI-WRITING-TELLS.md) — Background research on AI detection
+- AI-WRITING-TELLS.md — Background research on AI detection (see `alex_docs/research/` in repo root)
 - [Plain Language Guidelines](https://www.plainlanguage.gov/) — Federal guidelines for clear writing
 - Style guides: Strunk & White, AP Style, Chicago Manual
 

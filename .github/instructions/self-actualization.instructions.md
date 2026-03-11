@@ -166,7 +166,7 @@ Health thresholds and scoring are defined canonically in the **self-actualizatio
 | NEEDS ATTENTION | 5-9 | Run Dream Protocol soon |
 | CRITICAL | 10+ | Immediate Dream Protocol required |
 
-For full scoring guide, memory balance ratios, synapse density targets, and knowledge depth levels, see the [self-actualization SKILL.md](.github/skills/self-actualization/SKILL.md#scoring-guide).
+For full scoring guide, memory balance ratios, synapse density targets, and knowledge depth levels, see the [self-actualization SKILL.md](..\skills\self-actualization/SKILL.md#scoring-guide).
 
 ## Synapses
 

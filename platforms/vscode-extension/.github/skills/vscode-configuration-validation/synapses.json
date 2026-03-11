@@ -4,42 +4,42 @@
   "skillId": "vscode-configuration-validation",
   "connections": [
     {
-      "target": ".github/skills/extension-audit-methodology/SKILL.md",
+      "target": "..\\extension-audit-methodology\\SKILL.md",
       "type": "child-of",
       "strength": 0.9,
       "when": "Performing dimension 6 of the audit framework",
       "yields": "Configuration validation as part of comprehensive extension audit"
     },
     {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "target": "..\\vscode-extension-patterns\\SKILL.md",
       "type": "related",
       "strength": 0.8,
       "when": "Reviewing extension development best practices",
       "yields": "Pattern-validated configuration usage"
     },
     {
-      "target": ".github/skills/code-review/SKILL.md",
+      "target": "..\\code-review\\SKILL.md",
       "type": "related",
       "strength": 0.7,
       "when": "Reviewing configuration API usage",
       "yields": "Configuration correctness verification"
     },
     {
-      "target": ".github/skills/release-process/SKILL.md",
+      "target": "..\\release-process\\SKILL.md",
       "type": "related",
       "strength": 0.75,
       "when": "Version badge synchronization and multi-file configuration validation during release",
       "yields": "Pre-release configuration quality gate"
     },
     {
-      "target": ".github/instructions/vscode-configuration-validation.instructions.md",
+      "target": "..\\..\\instructions\\vscode-configuration-validation.instructions.md",
       "type": "implements",
       "strength": 0.95,
       "when": "Auto-loads for configuration API usage",
       "yields": "Configuration validation rules and patterns"
     },
     {
-      "target": ".github/instructions/extension-audit-methodology.instructions.md",
+      "target": "..\\..\\instructions\\extension-audit-methodology.instructions.md",
       "type": "integrates",
       "strength": 0.8,
       "when": "Part of 6-dimension audit framework",

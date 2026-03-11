@@ -32,13 +32,13 @@ Following a successful debugging session that resolved a Temporal Dead Zone (TDZ
 
 ## Memory Files Modified
 
-### [vscode-extension-patterns/SKILL.md](.github/skills/vscode-extension-patterns/SKILL.md)
+### [vscode-extension-patterns/SKILL.md](..\skills\vscode-extension-patterns/SKILL.md)
 - **Action**: Added new section "Temporal Dead Zone (TDZ) in Production Builds"
 - **Content**: 46 lines covering problem, root cause, example bug, solution, prevention strategies
 - **Location**: After "Configuration Change Listeners", before "VS Code 1.109+ Agent Platform"
 - **Timestamp**: 2026-02-14 17:08
 
-### [vscode-extension-patterns/synapses.json](.github/skills/vscode-extension-patterns/synapses.json)
+### [vscode-extension-patterns/synapses.json](../skills/vscode-extension-patterns/synapses.json)
 - **Action**: Added connection to root-cause-analysis skill
 - **Details**:
   - Connection: "uses" relationship, strength 0.70
@@ -47,7 +47,7 @@ Following a successful debugging session that resolved a Temporal Dead Zone (TDZ
 - **Version**: 1.1.0 → 1.2.0
 - **Timestamp**: 2026-02-14 17:10
 
-### [root-cause-analysis/synapses.json](.github/skills/root-cause-analysis/synapses.json)
+### [root-cause-analysis/synapses.json](../skills/root-cause-analysis/synapses.json)
 - **Action**: Created reciprocal connection + schema upgrade
 - **Details**:
   - Connection: "informs" relationship, strength 0.70 (bidirectional)

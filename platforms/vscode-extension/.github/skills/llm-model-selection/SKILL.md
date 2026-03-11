@@ -56,9 +56,9 @@ This skill depends on rapidly evolving technology. Model capabilities, pricing, 
 
 | Tier | Models | Best For | Relative Cost |
 | ---- | ------ | -------- | ------------- |
-| **Frontier** | Claude Opus 4.6, GPT-5.2/Codex, o3 | Complex reasoning, architecture, novel problems | $$$$$ |
-| **Capable** | Claude Sonnet 4.6, GPT-5.1/Codex, GPT-4.1, GPT-4o, Gemini 2.5/3 Pro | Most coding tasks, refactoring, debugging | $$$ |
-| **Efficient** | Claude Haiku 4.5, GPT-5 mini, GPT-4o mini, Gemini 3 Flash | Simple edits, formatting, boilerplate | $ |
+| **Frontier** | Claude Opus 4.6, GPT-5.2/5.3/Codex, o3, o1-pro | Complex reasoning, architecture, novel problems | $$$$$ |
+| **Capable** | Claude Sonnet 4.6, GPT-5.1/Codex, GPT-4.1, GPT-4o, Gemini 2.5/3 Pro, o4-mini | Most coding tasks, refactoring, debugging | $$$ |
+| **Efficient** | Claude Haiku 4.5, GPT-5 mini, GPT-4.1 mini/nano, GPT-4o mini, Gemini 2.5 Flash, Gemini 3 Flash | Simple edits, formatting, boilerplate | $ |
 
 ## When Opus 4.6 IS Worth It
 

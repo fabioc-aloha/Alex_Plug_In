@@ -6,61 +6,61 @@
   "lastValidated": "2026-03-09",
   "connections": [
     {
-      "target": ".github/instructions/release-management.instructions.md",
+      "target": "..\\..\\instructions\\release-management.instructions.md",
       "type": "enables",
       "strength": 0.85,
       "reason": "Publishing workflow"
     },
     {
-      "target": ".github/instructions/vscode-marketplace-publishing.instructions.md",
+      "target": "..\\..\\instructions\\vscode-marketplace-publishing.instructions.md",
       "type": "implements",
       "strength": 0.9,
       "reason": "Marketplace publishing deployment patterns"
     },
     {
-      "target": ".github/skills/security-review/SKILL.md",
+      "target": "..\\security-review\\SKILL.md",
       "type": "implements",
       "strength": 0.8,
       "reason": "CSP, SecretStorage, telemetry compliance"
     },
     {
-      "target": ".github/skills/enterprise-integration/SKILL.md",
+      "target": "..\\enterprise-integration\\SKILL.md",
       "type": "extends",
       "strength": 0.75,
       "reason": "Enterprise patterns for Graph, Azure AD auth"
     },
     {
-      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "target": "..\\root-cause-analysis\\SKILL.md",
       "type": "uses",
       "strength": 0.7,
       "reason": "TDZ debugging and production build troubleshooting"
     },
     {
-      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "target": "..\\ui-ux-design\\SKILL.md",
       "type": "implements",
       "strength": 0.75,
       "reason": "Webview UI patterns must follow accessibility standards"
     },
     {
-      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "target": "..\\brand-asset-management\\SKILL.md",
       "type": "coordinates-with",
       "strength": 0.7,
       "reason": "Avatar system uses brand assets (90 images across personas, ages, agents, states)"
     },
     {
-      "target": ".github/skills/secrets-management/SKILL.md",
+      "target": "..\\secrets-management\\SKILL.md",
       "type": "coordinates-with",
       "strength": 0.7,
       "reason": "SecretStorage API, VSCE secret scanner avoidance during packaging"
     },
     {
-      "target": ".github/skills/refactoring-patterns/SKILL.md",
+      "target": "..\\refactoring-patterns\\SKILL.md",
       "type": "uses",
       "strength": 0.8,
       "reason": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization"
     },
     {
-      "target": ".github/skills/localization/SKILL.md",
+      "target": "..\\localization\\SKILL.md",
       "type": "applied-by",
       "strength": 0.7
     }

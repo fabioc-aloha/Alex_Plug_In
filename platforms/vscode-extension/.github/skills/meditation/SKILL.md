@@ -162,6 +162,6 @@ What this session was about.
 
 ## Related Skills
 
-- [Brain QA](.github/skills/brain-qa/SKILL.md) - Check neural network health
-- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Acquire new domain knowledge
-- [Global Knowledge](.github/skills/global-knowledge/SKILL.md) - Search cross-project patterns
+- [Brain QA](..\brain-qa/SKILL.md) - Check neural network health
+- [Bootstrap Learning](..\bootstrap-learning/SKILL.md) - Acquire new domain knowledge
+- [Global Knowledge](..\global-knowledge/SKILL.md) - Search cross-project patterns

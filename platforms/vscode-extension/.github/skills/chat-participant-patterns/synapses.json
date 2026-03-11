@@ -3,19 +3,19 @@
   "skillId": "chat-participant-patterns",
   "connections": [
     {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "target": "..\\vscode-extension-patterns\\SKILL.md",
       "type": "specializes",
       "strength": 0.75,
       "reason": "Chat is a subset of extension APIs"
     },
     {
-      "target": ".github/skills/llm-model-selection/SKILL.md",
+      "target": "..\\llm-model-selection\\SKILL.md",
       "type": "uses",
       "strength": 0.8,
       "reason": "Chat uses language models"
     },
     {
-      "target": ".github/skills/cognitive-load/SKILL.md",
+      "target": "..\\cognitive-load\\SKILL.md",
       "type": "applies",
       "strength": 0.8,
       "reason": "Chat responses should manage load"

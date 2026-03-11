@@ -67,7 +67,7 @@ VS Code compilation: ✓ Passes
 ```
 
 ## Roadmap Updated
-[ROADMAP-UNIFIED.md](../../ROADMAP-UNIFIED.md) Infrastructure & Polish table now shows all 4 items as ✅ Done.
+ROADMAP-UNIFIED.md Infrastructure & Polish table now shows all 4 items as ✅ Done.
 
 ## Insights for Global Knowledge
 
