@@ -408,12 +408,12 @@ export function getWelcomeHtmlContent(
           <button role="tab" id="tab-docs" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
       </div>
 
-      ${getMissionTabHtml({ sessionHtml, nudges, hasGlobalKnowledge, tokenStatuses, settingsToggles, goals })}
+      ${getMissionTabHtml({ sessionHtml, nudges, goals })}
 
       ${getAgentsTabHtml({ agents, recentActivity, cognitiveState, agentMode, personalityMode })}
 
       ${getSkillStoreTabHtml({ skills, health })}
-      ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, streakDays, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, cogTier, cogProgress })}
+      ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, streakDays, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, cogTier, cogProgress, tokenStatuses, settingsToggles })}
 
       ${getDocsTabHtml()}
 
@@ -567,7 +567,7 @@ export function getWelcomeHtmlContent(
           skillSearch.addEventListener('input', applySkillSearch);
       }
 
-      // ── Persona/workshop search filter (8D.2) ──
+      // ── Persona/study-guide search filter (8D.2) ──
       const personaSearch = document.getElementById('persona-search');
       if (personaSearch) {
           personaSearch.addEventListener('input', function() {

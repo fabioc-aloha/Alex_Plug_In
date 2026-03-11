@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.5.2] - 2026-03-11
+
+### Changed
+- **Tab reorganization** — Mission slimmed to 3 groups (Partnership, Build, Create); system commands, API Keys, and Quick Settings moved to Mind tab; Docs "Workshops" renamed to "Study Guides"
+- **Mind tab expanded** — Maintenance card with Dream/Self-Actualize stats + Focus/Goals actions, System card (Initialize, Export M365, Feedback, Diagnostics), API Keys panel, Quick Settings panel
+- **Docs tab updates** — 3 missing website links added (Quiz, AIRS Assessment, Books), Partnership section removed (redundant), "Reference" section title for Skill-to-Discipline Map
+- **UI polish** — Consistent `.dashboard-card` styling across all Mind tab sections, normalized Mission tab indentation, removed duplicate action buttons, CSS spacing rules for buttons/panels inside cards
+
+### Fixed
+- Duplicate Dream and Self-Actualize buttons in Mind tab (already shown as clickable maintenance items)
+- Raw `<button>` for Initialize/Update replaced with `actionButton()` helper for consistency
+- Orphaned Skill-to-Discipline Map section now has "Reference" title
+- API Keys and Quick Settings sections had inconsistent styling (`.section` → `.dashboard-card`)
+
+---
+
 ## [6.5.1] - 2026-03-11
 
 ### Changed

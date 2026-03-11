@@ -185,6 +185,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         learnAlexPreRead: "https://learnalex.correax.com/pre-read",
         learnAlexGitHubGuide: "https://learnalex.correax.com/github-guide",
         learnAlexResponsibleAI: "https://learnalex.correax.com/responsible-ai",
+        learnAlexAirs: "https://learnalex.correax.com/airs",
+        learnAlexQuiz: "https://learnalex.correax.com/quiz",
+        learnAlexBooks: "https://learnalex.correax.com/books",
       };
 
       // Handle simple command execution

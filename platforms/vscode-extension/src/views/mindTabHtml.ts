@@ -3,9 +3,11 @@
  *
  * Extracted from welcomeViewHtml.ts during Post-Implementation Optimization (P0).
  * Exports a single function called by the orchestrator.
+ * Contains: identity, health, cognitive maintenance, system config, API keys, settings.
  */
 import { HealthCheckResult } from '../shared/healthCheck';
-import { MindTabData, actionButton } from './welcomeViewHtml';
+import { escapeHtml } from '../shared/sanitize';
+import { MindTabData, TokenStatusInfo, SettingsToggle, actionButton } from './welcomeViewHtml';
 
 export interface MindTabContext {
     mindData?: MindTabData;
@@ -18,6 +20,8 @@ export interface MindTabContext {
     healthPct: number;
     cogTier: string;
     cogProgress: number;
+    tokenStatuses?: TokenStatusInfo[];
+    settingsToggles?: SettingsToggle[];
 }
 
 /** Generate the Mind tab panel HTML. */
@@ -25,7 +29,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
     const {
         mindData, health, hasGlobalKnowledge, streakDays,
         healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct,
-        cogTier, cogProgress,
+        cogTier, cogProgress, tokenStatuses, settingsToggles,
     } = ctx;
 
     return `
@@ -81,8 +85,6 @@ export function getMindTabHtml(ctx: MindTabContext): string {
           </div>
           ` : ''}
 
-
-
           <div class="dashboard-card">
               <div class="dashboard-card-title">Memory Architecture</div>
               <div class="memory-modalities">
@@ -133,6 +135,16 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               <div class="meditation-streak-row">
                   <span class="meditation-streak-badge">🧘 ${mindData.meditationCount} session${mindData.meditationCount !== 1 ? 's' : ''}</span>
               </div>` : ''}
+              ${actionButton('startSession', '🍅', 'Focus Session', 'Pomodoro-style work sessions')}
+              ${actionButton('showGoals', '🎯', 'Goals', 'Track learning progress')}
+          </div>
+
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">System</div>
+              ${actionButton('upgrade', hasGlobalKnowledge ? '🌐' : '⬆️', 'Initialize / Update', 'Deploy or refresh Alex architecture')}
+              ${actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
+              ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
+              ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
           </div>
 
           <div class="dashboard-card">
@@ -181,6 +193,43 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
               ${actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
           </div>
+
+          ${(tokenStatuses ?? []).length > 0 ? `
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">API Keys</div>
+              <div class="secret-status-panel" data-cmd="manageSecrets" tabindex="0" role="button" title="Click to manage API keys">
+                  ${(tokenStatuses ?? []).map(t => `
+                  <div class="secret-row">
+                      <span class="secret-dot ${t.isSet ? 'set' : 'unset'}"></span>
+                      <span class="secret-name">${escapeHtml(t.displayName)}</span>
+                      <span class="secret-badge ${t.isSet ? 'set' : 'unset'}">${t.isSet ? 'Set' : 'Missing'}</span>
+                  </div>`).join('')}
+              </div>
+              ${actionButton('manageSecrets', '🔑', 'Manage Keys', 'Manage tokens for Gamma, Replicate, OpenAI')}
+              ${actionButton('detectEnvSecrets', '🔍', 'Detect .env Secrets', 'Scan .env files and migrate to secure storage')}
+          </div>` : ''}
+
+          ${(settingsToggles ?? []).length > 0 ? `
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Quick Settings</div>
+              ${actionButton('setupEnvironment', '⚙️', 'Full Environment Setup…', 'Open the environment setup wizard')}
+              <div class="settings-toggles">
+                  ${(() => {
+                    let lastGroup = '';
+                    return (settingsToggles ?? []).map(s => {
+                      const groupHeader = s.group && s.group !== lastGroup
+                        ? `<div class="settings-group-header">${escapeHtml(s.group)}</div>`
+                        : '';
+                      if (s.group) lastGroup = s.group;
+                      return `${groupHeader}
+                  <div class="setting-row">
+                      <span>${escapeHtml(s.label)}</span>
+                      <div class="toggle-switch ${s.enabled ? 'on' : ''}" data-setting="${escapeHtml(s.key)}" tabindex="0" role="switch" aria-checked="${s.enabled}" aria-label="Toggle ${escapeHtml(s.label)}"></div>
+                  </div>`;
+                    }).join('');
+                  })()}
+              </div>
+          </div>` : ''}
           ` : `
           <div class="empty-state">
               <div class="empty-state-icon">🧠</div>

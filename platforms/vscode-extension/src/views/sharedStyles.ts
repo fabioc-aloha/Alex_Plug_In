@@ -1001,6 +1001,16 @@ export function getSharedStyles(personaAccent: string): string {
           margin-bottom: 8px;
       }
 
+      /* Action buttons inside dashboard cards get proper vertical rhythm */
+      .dashboard-card .action-btn { margin-top: 4px; }
+      .dashboard-card .action-btn:first-of-type { margin-top: 0; }
+
+      /* Secret panel inside dashboard card needs breathing room before buttons */
+      .dashboard-card .secret-status-panel { margin-bottom: 8px; }
+
+      /* Settings toggles inside dashboard card */
+      .dashboard-card .settings-toggles { margin-top: 8px; }
+
       /* ── Tab Section Title ── */
       .tab-section-title {
           font-size: 13px;
@@ -1208,6 +1218,7 @@ export function getSharedStyles(personaAccent: string): string {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 8px;
+          margin-bottom: 8px;
       }
       .maintenance-item {
           display: flex;
@@ -1616,7 +1627,7 @@ export function getSharedStyles(personaAccent: string): string {
       /* ── 7.38 Meditation Streak ── */
       .meditation-streak-row {
           display: flex; align-items: center; gap: 8px;
-          margin-top: 4px; font-size: 11px;
+          margin: 4px 0 8px; font-size: 11px;
       }
       .meditation-streak-badge {
           display: inline-flex; align-items: center; gap: 4px;

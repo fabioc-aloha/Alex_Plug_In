@@ -8,11 +8,11 @@ import { escapeHtml } from '../shared/sanitize';
 import { actionButton } from './welcomeViewHtml';
 
 /**
- * AlexLearn workshop persona data for the Docs tab persona grid.
+ * AlexLearn study guide persona data for the Docs tab persona grid.
  * Each entry maps to learnalex.correax.com/workshop/{id}
- * 41 workshops grouped by domain — synced with learnalex.correax.com/workshop/guide
+ * 41 study guides grouped by domain — synced with learnalex.correax.com/workshop/guide
  */
-const WORKSHOP_PERSONAS: Array<{ id: string; tag: string; name: string }> = [
+const STUDY_GUIDE_PERSONAS: Array<{ id: string; tag: string; name: string }> = [
     // Technology & Engineering
     { id: 'ai-researchers', tag: 'AI Research', name: 'AI Researchers' },
     { id: 'data-analysts', tag: 'Data', name: 'Data Analysts' },
@@ -63,7 +63,7 @@ const WORKSHOP_PERSONAS: Array<{ id: string; tag: string; name: string }> = [
 
 /** Generate the persona grid HTML for the Docs tab. */
 export function getPersonaGridHtml(): string {
-    return WORKSHOP_PERSONAS.map(p =>
+    return STUDY_GUIDE_PERSONAS.map(p =>
         `<div class="persona-card" data-cmd="learnAlexWorkshop" data-workshop="${escapeHtml(p.id)}" tabindex="0" role="button" title="${escapeHtml(p.name)} study guide">
         <span class="persona-tag">${escapeHtml(p.tag)}</span>
         <span class="persona-name">${escapeHtml(p.name)}</span>
@@ -211,6 +211,7 @@ export function getDocsTabHtml(): string {
           </div>
 
           <div class="docs-section">
+              <div class="docs-section-title">Reference</div>
               <div class="doc-grid">
                   <div class="doc-grid-card" data-cmd="openDoc:SKILL-DISCIPLINE-MAP" tabindex="0" role="button">
                       <span class="doc-grid-icon">🎯</span>
@@ -223,42 +224,40 @@ export function getDocsTabHtml(): string {
           </div>
 
           <div class="docs-section">
-              <div class="docs-section-title">Workshop Study Guides</div>
-              <input type="text" class="skill-search-input" id="persona-search" placeholder="Search workshops\u2026" aria-label="Search workshop study guides" />
+              <div class="docs-section-title">Study Guides</div>
+              <input type="text" class="skill-search-input" id="persona-search" placeholder="Search study guides\u2026" aria-label="Search study guides" />
               <div class="persona-grid">
                   ${getPersonaGridHtml()}
               </div>
           </div>
 
           <div class="docs-section">
-              <div class="docs-section-title">Self-Study & Exercises</div>
+              <div class="docs-section-title">Practice</div>
               ${actionButton('learnAlexSelfStudy', '📝', 'Self-Study Path', 'Self-paced learning at your own speed')}
               ${actionButton('learnAlexExercises', '🏋️', 'Exercises', 'Hands-on practice exercises')}
+              ${actionButton('learnAlexQuiz', '❓', 'Quiz', 'Test your knowledge')}
+              ${actionButton('learnAlexAirs', '📊', 'AIRS Assessment', 'AI Readiness Score — discover where you stand')}
           </div>
 
           <div class="docs-section">
-              <div class="docs-section-title">Facilitator Materials</div>
-              ${actionButton('learnAlexSessionPlan', '📋', 'Session Plan', 'Workshop session planning guide')}
-              ${actionButton('learnAlexSlides', '📊', 'Slides', 'Presentation slides for workshops')}
+              <div class="docs-section-title">For Facilitators</div>
+              ${actionButton('learnAlexSessionPlan', '📋', 'Session Plan', 'Session planning guide')}
+              ${actionButton('learnAlexSlides', '📊', 'Slides', 'Presentation slides for study guides')}
               ${actionButton('learnAlexDemoScripts', '🎬', 'Demo Scripts', 'Live demo walkthroughs')}
-              ${actionButton('learnAlexHandout', '📄', 'Handout', 'Printable workshop handout')}
-              ${actionButton('learnAlexPreRead', '📖', 'Pre-Read', 'Pre-workshop reading material')}
+              ${actionButton('learnAlexHandout', '📄', 'Handout', 'Printable study guide handout')}
+              ${actionButton('learnAlexPreRead', '📖', 'Pre-Read', 'Pre-read material')}
               ${actionButton('learnAlexGitHubGuide', '📐', 'GitHub Guide', 'Repo setup and contribution guide')}
               ${actionButton('learnAlexResponsibleAI', '🤖', 'Responsible AI', 'Ethical usage guidelines')}
           </div>
 
           <div class="docs-section">
-              <div class="docs-section-title">Partnership</div>
-              <div class="partnership-structured">
-                  <div class="partnership-structured-title">🤝 Working with Alex</div>
-                  <div class="partnership-structured-desc">Alex is a cognitive partner, not a tool. Learn about the autonomous partnership model — how Alex grows, remembers, and collaborates across sessions.</div>
-                  <button class="action-btn primary" data-cmd="workingWithAlex" tabindex="0">Explore Partnership</button>
-              </div>
+              <div class="docs-section-title">Books</div>
+              ${actionButton('learnAlexBooks', '📚', 'The Alex Finch Library', 'Biography, fiction, and companion content')}
           </div>
 
           <div class="docs-cta">
               <div class="docs-cta-title">📚 Learn Alex Online</div>
-              <div class="docs-cta-desc">Comprehensive guides, workshops, and training at the companion site.</div>
+              <div class="docs-cta-desc">Comprehensive study guides, exercises, and training at the companion site.</div>
               <button class="action-btn primary" data-cmd="learnAlex" tabindex="0" style="display: inline-flex;">Visit learnalex.correax.com</button>
           </div>
 
