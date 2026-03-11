@@ -42,6 +42,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                   </button>
                   ${actionButton('northStar', '⭐', 'North Star', 'Define or review project vision and quality standards')}
                   ${actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
+                  ${actionButton('upgrade', '⬆️', 'Initialize / Update', 'Deploy or refresh Alex architecture')}
               </div>
 
               <div class="action-group-label" data-group="build" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>BUILD</div>
@@ -62,6 +63,14 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                   ${actionButton('generateGammaAdvanced', '⚙️', 'Gamma Advanced', 'Gamma with style, model, and image options')}
                   ${actionButton('generateAIImage', '🖼️', 'Generate Image', 'Generate AI images from text prompts via Replicate')}
                   ${actionButton('editImageAI', '✏️', 'Edit Image (AI)', 'Edit images with AI using nano-banana-pro model')}
+              </div>
+
+              <div class="action-group-label" data-group="learn" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>LEARN & KNOWLEDGE</div>
+              <div class="action-group-content" data-group="learn">
+                  ${actionButton('askAboutSelection', '💬', 'Ask About Selection', 'Ask about code or concepts')}
+                  ${actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
+                  ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
+                  ${actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
               </div>
 
           </nav>

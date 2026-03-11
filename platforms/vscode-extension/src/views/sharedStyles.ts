@@ -1612,7 +1612,7 @@ export function getSharedStyles(personaAccent: string): string {
           display: flex; align-items: center; gap: 8px;
           font-size: 11px; margin-bottom: 4px;
       }
-      .calibration-label { width: 60px; text-align: right; opacity: 0.7; flex-shrink: 0; }
+      .calibration-label { width: 76px; text-align: right; opacity: 0.7; flex-shrink: 0; white-space: nowrap; }
       .calibration-bar-track {
           flex: 1; height: 8px; background: var(--vscode-input-background, #3c3c3c);
           border-radius: 4px; overflow: hidden;

@@ -186,14 +186,6 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               </div>
           </div>` : ''}
 
-          <div class="dashboard-card">
-              <div class="dashboard-card-title">Learn & Knowledge</div>
-              ${actionButton('askAboutSelection', '💬', 'Ask About Selection', 'Ask about code or concepts')}
-              ${actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
-              ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
-              ${actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
-          </div>
-
           ${(tokenStatuses ?? []).length > 0 ? `
           <div class="dashboard-card">
               <div class="dashboard-card-title">API Keys</div>

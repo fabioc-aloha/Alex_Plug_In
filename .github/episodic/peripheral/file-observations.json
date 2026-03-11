@@ -5,21 +5,10 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/views/docsTabHtml.ts",
     "platforms/vscode-extension/src/views/mindTabHtml.ts",
     "platforms/vscode-extension/src/views/missionTabHtml.ts",
-    "platforms/vscode-extension/src/views/sharedStyles.ts",
-    "platforms/vscode-extension/src/views/welcomeView.ts",
-    "platforms/vscode-extension/src/views/welcomeViewHtml.ts"
+    "platforms/vscode-extension/src/views/sharedStyles.ts"
   ],
-  "todoHotspots": [
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1773250564789
-    }
-  ],
-  "lastUpdated": 1773250564789
+  "todoHotspots": [],
+  "lastUpdated": 1773255787259
 }
