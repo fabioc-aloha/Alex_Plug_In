@@ -4,32 +4,29 @@
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-    "platforms/vscode-extension/package.json"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1773256164155
+      "scannedAt": 1773256319638
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1773256164155
+      "scannedAt": 1773256319638
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1773256164155
+      "scannedAt": 1773256319638
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1773256164155
+      "scannedAt": 1773256319638
     }
   ],
-  "lastUpdated": 1773256164155
+  "lastUpdated": 1773256319638
 }
