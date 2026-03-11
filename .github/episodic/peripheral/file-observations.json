@@ -5,10 +5,14 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/src/views/mindTabHtml.ts",
-    "platforms/vscode-extension/src/views/missionTabHtml.ts",
-    "platforms/vscode-extension/src/views/sharedStyles.ts"
+    "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1773255787259
+  "todoHotspots": [
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1773255940229
+    }
+  ],
+  "lastUpdated": 1773255940229
 }

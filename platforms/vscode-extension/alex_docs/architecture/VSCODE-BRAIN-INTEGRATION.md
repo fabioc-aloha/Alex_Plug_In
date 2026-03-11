@@ -44,8 +44,8 @@ This document maps every integration point between the two, inventories all plat
 │  │  Disambiguation│  │ Model API │  │  Memory Tree   │  │
 │  │  Agent routing │  │ Streaming │  │  Status Bar    │  │
 │  └───────┬────────┘  └─────┬─────┘  └───────┬────────┘  │
-│          │                │                 │           │
-│  ┌───────┴────────────────┴─────────────────┴────────┐  │
+│          │                 │                │           │
+│  ┌───────┴─────────────────┴────────────────┴────────┐  │
 │  │              Extension Runtime (TypeScript)       │  │
 │  │  participant.ts → tools.ts → promptEngine.ts      │  │
 │  │  modelIntelligence.ts → honestUncertainty.ts      │  │
