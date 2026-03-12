@@ -6,41 +6,55 @@
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "README diagrams"
+      "reason": "README diagrams",
+      "when": "README diagrams",
+      "yields": "markdown mermaid patterns and guidance"
     },
     {
       "target": ".github/skills/svg-graphics/SKILL.md",
       "type": "uses",
       "strength": 0.9,
-      "reason": "Hero banners"
+      "reason": "Hero banners",
+      "when": "Hero banners",
+      "yields": "SVG graphics patterns and guidance"
     },
     {
       "target": ".github/skills/lint-clean-markdown/SKILL.md",
       "type": "requires",
       "strength": 0.9,
-      "reason": "All docs lint-clean"
+      "reason": "All docs lint-clean",
+      "when": "All docs lint-clean",
+      "yields": "lint clean markdown required patterns and guidance"
     },
     {
       "target": ".github/skills/git-workflow/SKILL.md",
       "type": "enables",
       "strength": 0.85,
-      "reason": "Proper gitignore and structure"
+      "reason": "Proper gitignore and structure",
+      "when": "Proper gitignore and structure",
+      "yields": "git workflow capabilities and setup"
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
       "type": "extends",
       "strength": 0.85,
-      "reason": "Research-first adds knowledge layer before file scaffolding"
+      "reason": "Research-first adds knowledge layer before file scaffolding",
+      "when": "Research-first adds knowledge layer before file scaffolding",
+      "yields": "research first development extended capabilities"
     },
     {
       "target": ".github/skills/api-documentation/SKILL.md",
       "type": "extended-by",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "API documentation extends project scaffolding",
+      "yields": "API documentation extension patterns"
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
       "type": "extended-by",
-      "strength": 0.75
+      "strength": 0.75,
+      "when": "creative writing extends project scaffolding",
+      "yields": "creative writing extension patterns"
     }
   ],
   "triggers": [
@@ -51,5 +65,13 @@
     "project template",
     "README"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "new project",
+    "scaffold",
+    "initialize",
+    "create repo",
+    "project template",
+    "README"
+  ]
 }

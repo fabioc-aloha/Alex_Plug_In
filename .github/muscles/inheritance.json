@@ -53,6 +53,32 @@
                 "gamma-presentations"
             ]
         },
+        "gamma-generator.cjs": {
+            "inheritance": "inheritable",
+            "description": "CommonJS variant of Gamma API CLI",
+            "referencedBy": [
+                "gamma-presentations"
+            ]
+        },
+        "install-hooks.ps1": {
+            "inheritance": "inheritable",
+            "description": "Install chat hooks configuration for workspace",
+            "referencedBy": []
+        },
+        "md-to-word.py": {
+            "inheritance": "inheritable",
+            "description": "Convert Markdown with Mermaid diagrams to professional Word documents",
+            "referencedBy": [
+                "md-to-word"
+            ]
+        },
+        "new-skill.ps1": {
+            "inheritance": "inheritable",
+            "description": "Scaffold a new skill trifecta (SKILL.md + instructions + prompt + synapses)",
+            "referencedBy": [
+                "skill-building"
+            ]
+        },
         "normalize-paths.ps1": {
             "inheritance": "inheritable",
             "description": "Normalize memory file paths to canonical .github/ format",
@@ -69,7 +95,15 @@
         },
         "sync-architecture.js": {
             "inheritance": "master-only",
-            "description": "Syncs master architecture to heir (meta-script)",
+            "description": "Syncs master architecture to heir (meta-script, legacy .js reference)",
+            "referencedBy": [
+                "heir-curation",
+                "build-extension-package.ps1"
+            ]
+        },
+        "sync-architecture.cjs": {
+            "inheritance": "master-only",
+            "description": "Syncs master architecture to heir (CommonJS variant)",
             "referencedBy": [
                 "heir-curation",
                 "build-extension-package.ps1"

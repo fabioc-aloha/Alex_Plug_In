@@ -22,5 +22,19 @@
     "cherry-pick",
     "conflict"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "commit",
+    "git",
+    "branch",
+    "merge",
+    "recovery",
+    "undo",
+    "reset",
+    "rebase",
+    "pull request",
+    "PR",
+    "cherry-pick",
+    "conflict"
+  ]
 }

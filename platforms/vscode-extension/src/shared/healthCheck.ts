@@ -71,15 +71,16 @@ async function buildMarkdownFileIndex(workspaceFolders: readonly vscode.Workspac
         '*.md'
     ];
     
-    const allMdFiles: vscode.Uri[] = [];
-    for (const targetPattern of targetPatterns) {
-        const files = await vscode.workspace.findFiles(
-            new vscode.RelativePattern(workspaceFolders[0], targetPattern),
-            '**/node_modules/**',
-            1000
-        );
-        allMdFiles.push(...files);
-    }
+    const allResults = await Promise.all(
+        targetPatterns.map(targetPattern =>
+            vscode.workspace.findFiles(
+                new vscode.RelativePattern(workspaceFolders[0], targetPattern),
+                '**/node_modules/**',
+                1000
+            )
+        )
+    );
+    const allMdFiles = allResults.flat();
     return new Set(allMdFiles.map(f => path.basename(f.fsPath).toLowerCase()));
 }
 

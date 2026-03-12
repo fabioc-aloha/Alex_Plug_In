@@ -9,25 +9,33 @@
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "uses",
       "strength": 0.75,
-      "reason": "Debug panel provides evidence for systematic root cause analysis"
+      "reason": "Debug panel provides evidence for systematic root cause analysis",
+      "when": "Debug panel provides evidence for systematic root cause analysis",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "complements",
       "strength": 0.8,
-      "reason": "Extension development frequently needs debug panel for skill/hook troubleshooting"
+      "reason": "Extension development frequently needs debug panel for skill/hook troubleshooting",
+      "when": "Extension development frequently needs debug panel for skill/hook troubleshooting",
+      "yields": "VS Code extension patterns complementary techniques"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.7,
-      "reason": "Specialized debugging for agent/skill/hook loading"
+      "reason": "Specialized debugging for agent/skill/hook loading",
+      "when": "Specialized debugging for agent/skill/hook loading",
+      "yields": "debugging patterns extended capabilities"
     },
     {
       "target": ".github/instructions/vscode-configuration-validation.instructions.md",
       "type": "uses",
       "strength": 0.75,
-      "reason": "Settings checklist is prerequisite for debug panel effectiveness"
+      "reason": "Settings checklist is prerequisite for debug panel effectiveness",
+      "when": "Settings checklist is prerequisite for debug panel effectiveness",
+      "yields": "VS Code configuration validation rules and guidelines"
     }
   ],
   "activationPatterns": [
@@ -44,6 +52,15 @@
     "Developer: Open Agent Debug Panel"
   ],
   "triggers": [
+    "debug panel",
+    "skill loading",
+    "hook debug",
+    "instruction matching",
+    "agent routing",
+    "system prompt",
+    "tool trace"
+  ],
+  "activationContexts": [
     "debug panel",
     "skill loading",
     "hook debug",

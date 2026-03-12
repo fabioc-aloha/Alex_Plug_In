@@ -70,17 +70,15 @@ export function registerDeveloperCommands(context: vscode.ExtensionContext, exte
   // Rubber Duck Debugging command
   const rubberDuckDisposable = vscode.commands.registerCommand(
     "alex.rubberDuck",
-    async () => {
+    async (uri?: vscode.Uri) => {
       if (!(await requireCognitiveLevel('alex.rubberDuck'))) { return; }
       const endLog = telemetry.logTimed("command", "rubber_duck");
       try {
-        // Get optional context from selection
+        // Get optional context from URI (explorer) or editor selection
         let context = '';
-        const editor = vscode.window.activeTextEditor;
-        if (editor && !editor.selection.isEmpty) {
-          const selectedText = editor.document.getText(editor.selection);
-          const languageId = editor.document.languageId;
-          context = `\n\nHere's the code I'm looking at:\n\`\`\`${languageId}\n${selectedText}\n\`\`\``;
+        const ctx = await getCodeContext(uri);
+        if (ctx.text) {
+          context = `\n\nHere's the code I'm looking at:\n\`\`\`${ctx.languageId}\n${ctx.text}\n\`\`\``;
         }
 
         const prompt = `🦆 **Rubber Duck Debug Session**

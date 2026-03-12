@@ -1,3 +1,7 @@
+---
+description: "VS Code extension development patterns — activation, commands, webviews, configuration, TreeView, Agent Platform"
+---
+
 # VS Code Extension Patterns Instructions
 
 **Auto-loaded when**: Writing VS Code extension code — activation, commands, webviews, configuration, TreeView, or Agent Platform features

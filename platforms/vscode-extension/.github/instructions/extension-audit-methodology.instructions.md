@@ -1,3 +1,7 @@
+---
+description: "VS Code extension audit methodology for code quality reviews and technical debt cleanup"
+---
+
 # Extension Audit Methodology Instructions
 
 **Auto-loaded when**: Working with VS Code extension development, code quality reviews, technical debt cleanup

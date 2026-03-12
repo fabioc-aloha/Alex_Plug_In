@@ -6,60 +6,80 @@
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "requires",
       "strength": 0.9,
-      "reason": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation"
+      "reason": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation",
+      "when": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation",
+      "yields": "testing strategies required patterns and guidance"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
       "type": "impacts",
       "strength": 0.85,
-      "reason": "i18n architecture impacts entire application structure: middleware, routing, data models"
+      "reason": "i18n architecture impacts entire application structure: middleware, routing, data models",
+      "when": "i18n architecture impacts entire application structure: middleware, routing, data models",
+      "yields": "architecture refinement impact assessment"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "applies",
       "strength": 0.7,
-      "reason": "VS Code extensions use package.nls.json for localization"
+      "reason": "VS Code extensions use package.nls.json for localization",
+      "when": "VS Code extensions use package.nls.json for localization",
+      "yields": "VS Code extension patterns patterns and guidance"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "Multilingual content strategy, translation workflows, terminology management"
+      "reason": "Multilingual content strategy, translation workflows, terminology management",
+      "when": "Multilingual content strategy, translation workflows, terminology management",
+      "yields": "academic research complementary techniques"
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
       "type": "requires",
       "strength": 0.65,
-      "reason": "Localization projects require phased rollouts, translation vendor coordination"
+      "reason": "Localization projects require phased rollouts, translation vendor coordination",
+      "when": "Localization projects require phased rollouts, translation vendor coordination",
+      "yields": "project management required patterns and guidance"
     },
     {
       "target": ".github/skills/graphic-design/SKILL.md",
       "type": "complements",
       "strength": 0.5,
-      "reason": "RTL layout considerations, typography for different scripts"
+      "reason": "RTL layout considerations, typography for different scripts",
+      "when": "RTL layout considerations, typography for different scripts",
+      "yields": "graphic design complementary techniques"
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
       "type": "applies",
       "strength": 0.5,
-      "reason": "Language switching adds cognitive overhead; minimize friction"
+      "reason": "Language switching adds cognitive overhead; minimize friction",
+      "when": "Language switching adds cognitive overhead; minimize friction",
+      "yields": "cognitive load patterns and guidance"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
       "type": "supports",
       "strength": 0.5,
-      "reason": "Review for i18n issues: hardcoded strings, concatenation, date formats"
+      "reason": "Review for i18n issues: hardcoded strings, concatenation, date formats",
+      "when": "Review for i18n issues: hardcoded strings, concatenation, date formats",
+      "yields": "code review supporting context"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "type": "mirrors",
       "strength": 0.75,
-      "reason": "Dialect inheritance mirrors OOP inheritance: base dialect → derived variant with overrides"
+      "reason": "Dialect inheritance mirrors OOP inheritance: base dialect → derived variant with overrides",
+      "when": "Dialect inheritance mirrors OOP inheritance: base dialect → derived variant with overrides",
+      "yields": "refactoring patterns mirrored patterns"
     },
     {
       "target": ".github/skills/cross-cultural-collaboration/SKILL.md",
       "type": "complements",
-      "strength": 0.9
+      "strength": 0.9,
+      "when": "Combining localization with cross cultural collaboration",
+      "yields": "cross cultural collaboration complementary techniques"
     }
   ],
   "triggers": [
@@ -98,5 +118,41 @@
     "language genealogy",
     "dialect fallback"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "localization",
+    "internationalization",
+    "i18n",
+    "l10n",
+    "translate",
+    "translation",
+    "multilingual",
+    "language detection",
+    "Accept-Language",
+    "locale",
+    "RTL",
+    "right-to-left",
+    "Arabic",
+    "Hebrew",
+    "ICU MessageFormat",
+    "pluralization",
+    "font loading",
+    "CJK",
+    "Unicode",
+    "translation quality",
+    "LQA",
+    "BCP 47",
+    "next-intl",
+    "dialect",
+    "dialect inheritance",
+    "regional variant",
+    "Açoriano",
+    "Azores Portuguese",
+    "Manezinho",
+    "Florianópolis",
+    "Portuguese dialects",
+    "pt-BR variant",
+    "language genealogy",
+    "dialect fallback"
+  ]
 }

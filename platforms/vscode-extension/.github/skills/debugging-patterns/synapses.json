@@ -5,17 +5,23 @@
     {
       "target": ".github/skills/git-workflow/SKILL.md",
       "type": "uses",
-      "strength": 0.8
+      "strength": 0.8,
+      "when": "debugging patterns leverages git workflow patterns",
+      "yields": "git workflow patterns and guidance"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "applies-to",
-      "strength": 0.75
+      "strength": 0.75,
+      "when": "Applying debugging patterns to VS Code extension patterns domain",
+      "yields": "VS Code extension patterns domain-specific context"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "complements",
-      "strength": 0.7
+      "strength": 0.7,
+      "when": "Combining debugging patterns with testing strategies",
+      "yields": "testing strategies complementary techniques"
     }
   ],
   "activationBoost": [
@@ -38,5 +44,21 @@
     "reproduce",
     "isolate bug"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "debug",
+    "error",
+    "bug",
+    "fix",
+    "broken",
+    "not working",
+    "fails",
+    "crash",
+    "breakpoint",
+    "stack trace",
+    "exception",
+    "investigate",
+    "reproduce",
+    "isolate bug"
+  ]
 }

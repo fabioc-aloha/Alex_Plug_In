@@ -1,3 +1,7 @@
+---
+description: "M365 Copilot declarative agent debugging — manifest validation, capability diagnosis, sideloading issues"
+---
+
 # M365 Declarative Agent Debugging Instructions
 
 **Auto-loaded when**: An M365 Copilot declarative agent is not working, manifests fail validation, capabilities are silent, or sideloading is blocked

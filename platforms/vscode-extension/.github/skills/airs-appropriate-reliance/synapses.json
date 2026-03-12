@@ -5,28 +5,38 @@
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "extends",
-      "strength": 0.95
+      "strength": 0.95,
+      "when": "Extending appropriate reliance with airs appropriate reliance",
+      "yields": "appropriate reliance extended capabilities"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "enhances",
-      "strength": 0.7
+      "strength": 0.7,
+      "when": "airs appropriate reliance enhances bootstrap learning",
+      "yields": "bootstrap learning enhanced capabilities"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
       "type": "requires",
-      "strength": 0.8
+      "strength": 0.8,
+      "when": "airs appropriate reliance depends on learning psychology",
+      "yields": "learning psychology required patterns and guidance"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "enables",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "airs appropriate reliance requires academic research capabilities",
+      "yields": "academic research capabilities and setup"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "enhances",
       "strength": 0.5,
-      "note": "Hypothesis testing via behavioral measurement"
+      "note": "Hypothesis testing via behavioral measurement",
+      "when": "airs appropriate reliance enhances testing strategies",
+      "yields": "testing strategies enhanced capabilities"
     }
   ],
   "activationBoost": [
@@ -47,5 +57,23 @@
     "under-reliance",
     "behavioral intention"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "AIRS",
+    "AIRS-16",
+    "AIRS-18",
+    "appropriate reliance",
+    "trust calibration",
+    "AI adoption",
+    "UTAUT",
+    "UTAUT2",
+    "psychometric",
+    "instrument",
+    "scale validation",
+    "CAIR",
+    "CSR",
+    "over-reliance",
+    "under-reliance",
+    "behavioral intention"
+  ]
 }

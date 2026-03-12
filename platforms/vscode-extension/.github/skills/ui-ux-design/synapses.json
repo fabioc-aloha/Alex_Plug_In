@@ -6,43 +6,57 @@
       "target": ".github/skills/correax-brand/SKILL.md",
       "type": "coordinates-with",
       "strength": 0.8,
-      "reason": "CorreaX design tokens provide the color system, typography, and component patterns for all UI decisions"
+      "reason": "CorreaX design tokens provide the color system, typography, and component patterns for all UI decisions",
+      "when": "CorreaX design tokens provide the color system, typography, and component patterns for all UI decisions",
+      "yields": "correax brand coordination protocols"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
       "type": "integrates",
       "strength": 0.85,
-      "reason": "Accessibility audits are part of code review quality gates"
+      "reason": "Accessibility audits are part of code review quality gates",
+      "when": "Accessibility audits are part of code review quality gates",
+      "yields": "code review integration patterns"
     },
     {
       "target": ".github/skills/graphic-design/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "Visual identity consistent with accessibility standards"
+      "reason": "Visual identity consistent with accessibility standards",
+      "when": "Visual identity consistent with accessibility standards",
+      "yields": "graphic design complementary techniques"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "validates",
       "strength": 0.8,
-      "reason": "Automated accessibility testing validates WCAG compliance"
+      "reason": "Automated accessibility testing validates WCAG compliance",
+      "when": "Automated accessibility testing validates WCAG compliance",
+      "yields": "testing strategies quality checks and validation"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "applies-to",
       "strength": 0.75,
-      "reason": "Webview UI patterns must follow accessibility standards"
+      "reason": "Webview UI patterns must follow accessibility standards",
+      "when": "Webview UI patterns must follow accessibility standards",
+      "yields": "VS Code extension patterns domain-specific context"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "validates",
       "strength": 0.5,
-      "reason": "Diagram accessibility (alt text, semantic structure)"
+      "reason": "Diagram accessibility (alt text, semantic structure)",
+      "when": "Diagram accessibility (alt text, semantic structure)",
+      "yields": "markdown mermaid quality checks and validation"
     },
     {
       "target": ".github/instructions/ui-ux-design.instructions.md",
       "type": "implements",
       "strength": 0.95,
-      "reason": "Instruction file contains proven UI Audit Procedure (three-pass: compliance + content + cross-tab consistency) and design system enforcement rules"
+      "reason": "Instruction file contains proven UI Audit Procedure (three-pass: compliance + content + cross-tab consistency) and design system enforcement rules",
+      "when": "Instruction file contains proven UI Audit Procedure (three-pass: compliance + content + cross-tab consistency) and design system enforcement rules",
+      "yields": "UI UX design implementation steps"
     }
   ],
   "triggers": [
@@ -115,5 +129,57 @@
     "theme",
     "color scheme"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "UI",
+    "UX",
+    "UI/UX",
+    "user interface",
+    "user experience",
+    "accessibility",
+    "a11y",
+    "WCAG",
+    "accessible",
+    "design system",
+    "component library",
+    "style guide",
+    "typography",
+    "spacing",
+    "layout",
+    "grid",
+    "contrast ratio",
+    "color contrast",
+    "readable",
+    "touch target",
+    "tap target",
+    "clickable area",
+    "keyboard navigation",
+    "keyboard accessible",
+    "focus trap",
+    "screen reader",
+    "voiceover",
+    "NVDA",
+    "JAWS",
+    "ARIA",
+    "aria-label",
+    "aria-describedby",
+    "role",
+    "focus indicator",
+    "focus ring",
+    "focus visible",
+    "user feedback",
+    "error messages",
+    "validation",
+    "responsive design",
+    "mobile-first",
+    "breakpoints",
+    "dark mode",
+    "light mode",
+    "theme",
+    "color scheme",
+    "contrast",
+    "iterative design",
+    "CSS variables",
+    "font sizing"
+  ]
 }

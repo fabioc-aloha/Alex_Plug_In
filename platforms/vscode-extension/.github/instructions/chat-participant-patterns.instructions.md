@@ -1,3 +1,8 @@
+---
+description: "VS Code Chat API patterns for registering participants, routing LLM requests, and handling chat commands"
+applyTo: "**/chat/**/*.ts,**/*participant*.ts"
+---
+
 # Chat Participant Patterns Instructions
 
 **Auto-loaded when**: Writing VS Code extension code that uses Chat API, registers a chat participant, or routes requests to an LLM

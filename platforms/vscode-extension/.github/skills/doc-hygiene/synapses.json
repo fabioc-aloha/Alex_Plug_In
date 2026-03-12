@@ -9,13 +9,17 @@
       "target": ".github/skills/documentation-quality-assurance/SKILL.md",
       "type": "sibling",
       "strength": 0.9,
-      "reason": "Doc hygiene and QA are complementary — hygiene prevents, QA detects"
+      "reason": "Doc hygiene and QA are complementary — hygiene prevents, QA detects",
+      "when": "Doc hygiene and QA are complementary — hygiene prevents, QA detects",
+      "yields": "documentation quality assurance trifecta patterns and guidance"
     },
     {
       "target": ".github/instructions/semantic-audit.instructions.md",
       "type": "supports",
       "strength": 0.8,
-      "reason": "Semantic audits enforce doc hygiene standards"
+      "reason": "Semantic audits enforce doc hygiene standards",
+      "when": "Semantic audits enforce doc hygiene standards",
+      "yields": "semantic audit supporting context"
     }
   ],
   "when": [
@@ -23,9 +27,10 @@
     "User encounters stale counts or hardcoded values in docs",
     "User maintains living documents"
   ],
-  "yields": [
-    "Anti-drift documentation rules",
-    "Count elimination patterns",
-    "Living document maintenance guidelines"
+  "activationContexts": [
+    "doc-hygiene",
+    "doc hygiene",
+    "doc",
+    "hygiene"
   ]
 }

@@ -1,58 +1,86 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.0.0",
-    "skillId": "legal-compliance",
-    "version": "1.0.0",
-    "created": "2026-03-09",
-    "description": "Legal research, contract analysis, regulatory compliance, case law citation",
-    "connections": [
-        {
-            "target": ".github/skills/pii-privacy-regulations/SKILL.md",
-            "type": "Enhances",
-            "strength": 0.8,
-            "description": "Legal compliance provides the regulatory framework behind privacy regulations"
-        },
-        {
-            "target": ".github/skills/citation-management/SKILL.md",
-            "type": "Requires",
-            "strength": 0.8,
-            "description": "Legal writing demands precise Bluebook-style citation"
-        },
-        {
-            "target": ".github/skills/anti-hallucination/SKILL.md",
-            "type": "Requires",
-            "strength": 0.9,
-            "description": "Fabricated case law or statutes cause real-world harm"
-        },
-        {
-            "target": ".github/skills/research-first-development/SKILL.md",
-            "type": "Relates",
-            "strength": 0.6,
-            "description": "Legal research follows systematic investigation methodology"
-        },
-        {
-            "target": ".github/skills/creative-writing/SKILL.md",
-            "type": "Relates",
-            "strength": 0.4,
-            "description": "Legal briefs and memoranda require persuasive writing craft"
-        }
-    ],
-    "activationTriggers": [
-        "legal research",
-        "contract",
-        "compliance",
-        "regulation",
-        "statute",
-        "case law",
-        "HIPAA",
-        "GDPR",
-        "CCPA",
-        "litigation",
-        "intellectual property",
-        "patent",
-        "trademark",
-        "copyright",
-        "attorney",
-        "legal memorandum"
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "legal-compliance",
+  "version": "1.0.0",
+  "created": "2026-03-09",
+  "description": "Legal research, contract analysis, regulatory compliance, case law citation",
+  "connections": [
+    {
+      "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+      "type": "Enhances",
+      "strength": 0.8,
+      "description": "Legal compliance provides the regulatory framework behind privacy regulations",
+      "when": "legal compliance enhances PII privacy regulations",
+      "yields": "PII privacy regulations enhanced capabilities"
+    },
+    {
+      "target": ".github/skills/citation-management/SKILL.md",
+      "type": "Requires",
+      "strength": 0.8,
+      "description": "Legal writing demands precise Bluebook-style citation",
+      "when": "legal compliance depends on citation management",
+      "yields": "citation management required patterns and guidance"
+    },
+    {
+      "target": ".github/skills/anti-hallucination/SKILL.md",
+      "type": "Requires",
+      "strength": 0.9,
+      "description": "Fabricated case law or statutes cause real-world harm",
+      "when": "legal compliance depends on anti hallucination",
+      "yields": "anti hallucination required patterns and guidance"
+    },
+    {
+      "target": ".github/skills/research-first-development/SKILL.md",
+      "type": "Relates",
+      "strength": 0.6,
+      "description": "Legal research follows systematic investigation methodology",
+      "when": "legal compliance connects to research first development",
+      "yields": "research first development patterns and guidance"
+    },
+    {
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "type": "Relates",
+      "strength": 0.4,
+      "description": "Legal briefs and memoranda require persuasive writing craft",
+      "when": "legal compliance connects to creative writing",
+      "yields": "creative writing patterns and guidance"
+    }
+  ],
+  "activationTriggers": [
+    "legal research",
+    "contract",
+    "compliance",
+    "regulation",
+    "statute",
+    "case law",
+    "HIPAA",
+    "GDPR",
+    "CCPA",
+    "litigation",
+    "intellectual property",
+    "patent",
+    "trademark",
+    "copyright",
+    "attorney",
+    "legal memorandum"
+  ],
+  "activationContexts": [
+    "legal research",
+    "contract",
+    "compliance",
+    "regulation",
+    "statute",
+    "case law",
+    "HIPAA",
+    "GDPR",
+    "CCPA",
+    "litigation",
+    "intellectual property",
+    "patent",
+    "trademark",
+    "copyright",
+    "attorney",
+    "legal memorandum"
+  ]
 }

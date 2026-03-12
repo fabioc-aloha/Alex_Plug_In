@@ -7,37 +7,49 @@
       "target": ".github/skills/prompt-engineering/SKILL.md",
       "type": "requires",
       "strength": 0.85,
-      "note": "Effective inputText crafting"
+      "note": "Effective inputText crafting",
+      "when": "gamma presentations depends on prompt engineering",
+      "yields": "prompt engineering required patterns and guidance"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "note": "Diagrams can enhance presentations"
+      "note": "Diagrams can enhance presentations",
+      "when": "Combining gamma presentations with markdown mermaid",
+      "yields": "markdown mermaid complementary techniques"
     },
     {
       "target": ".github/skills/image-handling/SKILL.md",
       "type": "complements",
       "strength": 0.75,
-      "note": "Working with AI-generated images"
+      "note": "Working with AI-generated images",
+      "when": "Combining gamma presentations with image handling",
+      "yields": "image handling complementary techniques"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
       "type": "implements",
       "strength": 0.6,
-      "note": "REST API integration patterns"
+      "note": "REST API integration patterns",
+      "when": "Applying API design procedures",
+      "yields": "API design implementation steps"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "enhances",
       "strength": 0.7,
-      "note": "Creating documentation presentations"
+      "note": "Creating documentation presentations",
+      "when": "gamma presentations enhances academic research",
+      "yields": "academic research enhanced capabilities"
     },
     {
       "target": ".github/skills/presentation-tool-selection/SKILL.md",
       "type": "coordinated-by",
       "strength": 0.9,
-      "note": "Tool selection decision matrix routes AI presentation requests here"
+      "note": "Tool selection decision matrix routes AI presentation requests here",
+      "when": "presentation tool selection orchestrates gamma presentations",
+      "yields": "presentation tool selection orchestration guidance"
     }
   ],
   "activationBoost": [
@@ -70,5 +82,26 @@
     "mcpAvailable": true,
     "mcpConnector": "Gamma"
   },
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "presentation",
+    "slide",
+    "slides",
+    "deck",
+    "pitch deck",
+    "gamma",
+    "powerpoint",
+    "pptx",
+    "keynote",
+    "document",
+    "social media",
+    "carousel",
+    "instagram",
+    "linkedin",
+    "create slides",
+    "make presentation",
+    "generate presentation",
+    "pitch",
+    "investor deck"
+  ]
 }

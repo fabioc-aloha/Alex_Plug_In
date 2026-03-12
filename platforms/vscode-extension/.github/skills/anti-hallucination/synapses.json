@@ -7,37 +7,38 @@
     {
       "id": "confidence-calibration",
       "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "relationship": "Complement",
       "strength": 0.9,
-      "description": "Appropriate reliance provides confidence calibration framework"
+      "description": "Appropriate reliance provides confidence calibration framework",
+      "type": "Complement",
+      "when": "Combining anti hallucination with appropriate reliance",
+      "yields": "appropriate reliance complementary techniques"
     },
     {
       "id": "honest-uncertainty",
       "target": ".github/instructions/alex-core.instructions.md",
-      "relationship": "Implements",
       "strength": 0.9,
-      "description": "Core identity principle: empirical honesty"
-    },
-    {
-      "id": "capability-boundaries",
-      "target": ".github/skills/m365-agent-debugging/SKILL.md",
-      "relationship": "Extends",
-      "strength": 0.7,
-      "description": "M365 debugging includes platform limitation awareness"
+      "description": "Core identity principle: empirical honesty",
+      "type": "Implements",
+      "when": "Applying alex core procedures",
+      "yields": "alex core implementation steps"
     },
     {
       "id": "error-recovery",
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
-      "relationship": "Collaborates",
       "strength": 0.7,
-      "description": "Error recovery when hallucination is caught"
+      "description": "Error recovery when hallucination is caught",
+      "type": "Collaborates",
+      "when": "anti hallucination collaborates with error recovery patterns",
+      "yields": "error recovery patterns collaborative workflows"
     },
     {
       "id": "grounded-factual",
       "target": ".github/instructions/empirical-validation.instructions.md",
-      "relationship": "Implements",
       "strength": 0.9,
-      "description": "Empirical validation prevents fabricated claims"
+      "description": "Empirical validation prevents fabricated claims",
+      "type": "Implements",
+      "when": "Applying empirical validation procedures",
+      "yields": "empirical validation implementation steps"
     },
     {
       "target": ".github/skills/awareness/SKILL.md",
@@ -48,6 +49,16 @@
     }
   ],
   "activationTriggers": [
+    "hallucination",
+    "made up",
+    "invented",
+    "confabulation",
+    "doesn't exist",
+    "that's not real",
+    "you're wrong",
+    "that doesn't work"
+  ],
+  "activationContexts": [
     "hallucination",
     "made up",
     "invented",

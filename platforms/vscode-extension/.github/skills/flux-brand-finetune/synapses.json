@@ -90,5 +90,22 @@
       "required": true,
       "getUrl": "https://replicate.com/account/api-tokens"
     }
+  ],
+  "activationContexts": [
+    "flux fine-tune",
+    "flux finetune",
+    "lora training",
+    "train lora",
+    "custom lora",
+    "brand fine-tune",
+    "brand finetune",
+    "train image model",
+    "fine-tune image",
+    "custom image model",
+    "trigger word",
+    "consistent brand imagery",
+    "train flux",
+    "flux brand",
+    "replicate training"
   ]
 }

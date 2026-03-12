@@ -6,31 +6,41 @@
       "reason": "Change management within project delivery",
       "type": "complements",
       "strength": 0.85,
-      "target": ".github/skills/project-management/SKILL.md"
+      "target": ".github/skills/project-management/SKILL.md",
+      "when": "Change management within project delivery",
+      "yields": "project management complementary techniques"
     },
     {
       "reason": "Requirements include change impact assessment",
       "type": "informs",
       "strength": 0.85,
-      "target": ".github/skills/business-analysis/SKILL.md"
+      "target": ".github/skills/business-analysis/SKILL.md",
+      "when": "Requirements include change impact assessment",
+      "yields": "business analysis contextual assessment"
     },
     {
       "reason": "Analyzing resistance causes and stakeholder concerns",
       "type": "uses",
       "strength": 0.65,
-      "target": ".github/skills/root-cause-analysis/SKILL.md"
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "when": "Analyzing resistance causes and stakeholder concerns",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "reason": "Trust building in change leadership",
       "type": "applies",
       "strength": 0.65,
-      "target": ".github/skills/appropriate-reliance/SKILL.md"
+      "target": ".github/skills/appropriate-reliance/SKILL.md",
+      "when": "Trust building in change leadership",
+      "yields": "appropriate reliance patterns and guidance"
     },
     {
       "reason": "Change capacity limits and saturation",
       "type": "considers",
       "strength": 0.4,
-      "target": ".github/skills/cognitive-load/SKILL.md"
+      "target": ".github/skills/cognitive-load/SKILL.md",
+      "when": "Change capacity limits and saturation",
+      "yields": "cognitive load considerations"
     }
   ],
   "triggers": [
@@ -43,5 +53,15 @@
     "transition",
     "rollout"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "change",
+    "adoption",
+    "resistance",
+    "stakeholder buy-in",
+    "communication plan",
+    "training",
+    "transition",
+    "rollout"
+  ]
 }

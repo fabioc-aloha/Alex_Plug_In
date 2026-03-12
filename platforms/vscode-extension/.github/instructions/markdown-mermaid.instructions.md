@@ -1,3 +1,7 @@
+---
+description: "Mermaid diagram creation, technical documentation visuals, diagram type selection, and rendering troubleshooting"
+---
+
 # Markdown & Mermaid Diagram Instructions
 
 **Auto-loaded when**: Creating Mermaid diagrams, writing technical documentation with visuals, choosing diagram types, or troubleshooting rendering issues

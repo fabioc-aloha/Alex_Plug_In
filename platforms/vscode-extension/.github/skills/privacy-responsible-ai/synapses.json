@@ -6,31 +6,41 @@
       "target": ".github/skills/security-review/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "Privacy is part of security"
+      "reason": "Privacy is part of security",
+      "when": "Privacy is part of security",
+      "yields": "security review complementary techniques"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
       "type": "informs",
       "strength": 0.65,
-      "reason": "Privacy checks in review"
+      "reason": "Privacy checks in review",
+      "when": "Privacy checks in review",
+      "yields": "code review contextual assessment"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "Privacy incidents need response"
+      "reason": "Privacy incidents need response",
+      "when": "Privacy incidents need response",
+      "yields": "incident response extended capabilities"
     },
     {
       "target": ".github/skills/pii-privacy-regulations/SKILL.md",
       "type": "extends",
       "strength": 0.9,
-      "reason": "Detailed regulatory compliance for PII"
+      "reason": "Detailed regulatory compliance for PII",
+      "when": "Detailed regulatory compliance for PII",
+      "yields": "PII privacy regulations extended capabilities"
     },
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "complements",
       "strength": 0.75,
-      "reason": "Human-AI trust calibration is core to responsible AI"
+      "reason": "Human-AI trust calibration is core to responsible AI",
+      "when": "Human-AI trust calibration is core to responsible AI",
+      "yields": "appropriate reliance complementary techniques"
     }
   ],
   "triggers": [
@@ -50,5 +60,22 @@
     "HAX",
     "human oversight"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "privacy",
+    "PII",
+    "GDPR",
+    "consent",
+    "data protection",
+    "responsible AI",
+    "bias",
+    "fairness",
+    "ethical AI",
+    "RAI",
+    "transparency",
+    "accountability",
+    "model card",
+    "HAX",
+    "human oversight"
+  ]
 }

@@ -57,7 +57,18 @@ export async function updateStatusBar(
     forceRefresh: boolean = false,
 ): Promise<void> {
     try {
-        const health = await checkHealth(forceRefresh);
+        // Run all async queries in parallel
+        const [health, goalsSummary, protectionResult] = await Promise.all([
+            checkHealth(forceRefresh),
+            getGoalsSummary().catch(() => ({ streakDays: 0 })),
+            (async () => {
+                const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+                if (workspaceFolder) {
+                    return isWorkspaceProtected(workspaceFolder.uri.fsPath).catch(() => ({ isProtected: false }));
+                }
+                return { isProtected: false };
+            })(),
+        ]);
 
         // Get session info
         const session = getCurrentSession();
@@ -67,24 +78,7 @@ export async function updateStatusBar(
             isBreak: session.isBreak
         } : null;
 
-        // Get streak info
-        let streakDays = 0;
-        try {
-            const goalsSummary = await getGoalsSummary();
-            streakDays = goalsSummary.streakDays;
-        } catch { /* ignore */ }
-
-        // Check protection status
-        let isProtected = false;
-        try {
-            const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-            if (workspaceFolder) {
-                const protectionResult = await isWorkspaceProtected(workspaceFolder.uri.fsPath);
-                isProtected = protectionResult.isProtected;
-            }
-        } catch { /* ignore */ }
-
-        const display = getStatusBarDisplay(health, sessionInfo, streakDays, isProtected);
+        const display = getStatusBarDisplay(health, sessionInfo, goalsSummary.streakDays, protectionResult.isProtected);
 
         statusBarItem.text = display.text;
         statusBarItem.tooltip = display.tooltip;

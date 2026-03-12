@@ -7,30 +7,40 @@
       "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "implements",
       "strength": 0.9,
-      "context": "Operationalizes the extract-and-document phase of bootstrap learning"
+      "reason": "Operationalizes the extract-and-document phase of bootstrap learning",
+      "when": "Operationalizes the extract-and-document phase of bootstrap learning",
+      "yields": "bootstrap learning implementation steps"
     },
     {
       "target": ".github/prompts/meditate.prompt.md",
       "type": "feeds",
       "strength": 0.7,
-      "context": "Documented patterns become consolidation fodder during meditation"
+      "reason": "Documented patterns become consolidation fodder during meditation",
+      "when": "Documented patterns become consolidation fodder during meditation",
+      "yields": "meditate downstream processing"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "uses",
       "strength": 0.7,
-      "context": "Documentation often includes diagrams"
+      "reason": "Documentation often includes diagrams",
+      "when": "Documentation often includes diagrams",
+      "yields": "markdown mermaid patterns and guidance"
     },
     {
       "target": ".github/skills/lint-clean-markdown/SKILL.md",
       "type": "requires",
       "strength": 0.9,
-      "context": "All documentation must be lint-clean"
+      "reason": "All documentation must be lint-clean",
+      "when": "All documentation must be lint-clean",
+      "yields": "lint clean markdown required patterns and guidance"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
       "type": "related",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "architecture refinement relates to localization",
+      "yields": "localization related patterns and guidance"
     }
   ],
   "triggers": [
@@ -39,5 +49,11 @@
     "human feedback corrected AI judgment",
     "new workflow pattern emerged"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "session produced architecture-worthy insight",
+    "file migration or consolidation completed",
+    "human feedback corrected AI judgment",
+    "new workflow pattern emerged"
+  ]
 }

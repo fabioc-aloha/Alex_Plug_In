@@ -1,5 +1,5 @@
 
-# Alex v6.5.1
+# Alex v6.5.3
 
 ## Identity
 
@@ -24,7 +24,7 @@ Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.5.1 hotfix. PPTX engine rewrite (Calibri, modern slide masters, paragraph bullets). Model tier updates (GPT-5.3, o4-mini, GPT-4.1 capable/mini/nano, Gemini 2.5 Flash). UI label cleanup (Marp → PPTX). API KEYS sidebar section.
+Recent: v6.5.3 audit release. Master→heir sync cleanup (instruction/prompt exclusions, leakage remediation). PPTX engine rewrite (Calibri, modern slide masters, paragraph bullets). Model tier updates (GPT-5.3, o4-mini, GPT-4.1 capable/mini/nano, Gemini 2.5 Flash). UI label cleanup (Marp → PPTX). API KEYS sidebar section.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: never

@@ -9,19 +9,25 @@
       "target": ".github/skills/ai-character-reference-generation/SKILL.md",
       "type": "extends",
       "strength": 0.95,
-      "note": "Builds on character reference generation with age-specific prompts"
+      "note": "Builds on character reference generation with age-specific prompts",
+      "when": "Extending AI character reference generation with character aging progression",
+      "yields": "AI character reference generation extended capabilities"
     },
     {
       "target": ".github/skills/persona-detection/SKILL.md",
       "type": "complements",
       "strength": 0.8,
-      "note": "Age progression avatars used in persona fallback system"
+      "note": "Age progression avatars used in persona fallback system",
+      "when": "Combining character aging progression with persona detection",
+      "yields": "persona detection complementary techniques"
     },
     {
       "target": ".github/skills/brand-asset-management/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "note": "Age avatars are part of visual brand identity"
+      "note": "Age avatars are part of visual brand identity",
+      "when": "Combining character aging progression with brand asset management",
+      "yields": "brand asset management complementary techniques"
     }
   ],
   "apiKeys": [
@@ -67,20 +73,6 @@
     "generate age",
     "create age progression"
   ],
-  "when": {
-    "userIntent": [
-      "generate age progression images",
-      "create character at different ages",
-      "aging avatar set",
-      "life stage illustrations",
-      "age-based character variants"
-    ],
-    "projectContext": [
-      "visual identity system",
-      "avatar generation",
-      "character design project"
-    ]
-  },
   "yields": {
     "artifacts": [
       "age progression image set (13 images)",
@@ -92,5 +84,40 @@
       "face consistency across ages",
       "visual identity preservation"
     ]
-  }
+  },
+  "activationContexts": [
+    "age progression",
+    "aging process",
+    "character ages",
+    "life stages",
+    "age avatars",
+    "nano-banana",
+    "nano-banana-pro",
+    "birthday fallback",
+    "age-appropriate",
+    "childhood to elderhood",
+    "senior avatar",
+    "child avatar",
+    "make me older",
+    "make me younger",
+    "age me",
+    "younger version",
+    "older version",
+    "what will I look like",
+    "future me",
+    "past me",
+    "at age",
+    "years old",
+    "aging trifecta",
+    "age transformation",
+    "face aging",
+    "age filter",
+    "de-age",
+    "re-age",
+    "age reference",
+    "life stage image",
+    "replicate aging",
+    "generate age",
+    "create age progression"
+  ]
 }

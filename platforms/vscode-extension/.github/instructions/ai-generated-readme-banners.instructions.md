@@ -1,3 +1,7 @@
+---
+description: "AI-generated README banner creation for project branding and marketing assets"
+---
+
 # AI-Generated README Banners Instructions
 
 **Auto-loaded when**: Working with README files, project branding, marketing assets

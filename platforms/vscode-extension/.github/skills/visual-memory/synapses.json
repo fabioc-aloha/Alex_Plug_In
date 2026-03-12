@@ -9,37 +9,49 @@
       "target": ".github/skills/ai-character-reference-generation/SKILL.md",
       "type": "extends",
       "strength": 0.95,
-      "note": "Visual memory enables self-sufficient face-consistent generation without external photo folders"
+      "note": "Visual memory enables self-sufficient face-consistent generation without external photo folders",
+      "when": "Extending AI character reference generation with visual memory",
+      "yields": "AI character reference generation extended capabilities"
     },
     {
       "target": ".github/skills/character-aging-progression/SKILL.md",
       "type": "extends",
       "strength": 0.85,
-      "note": "Age progression requires consistent reference — visual memory provides portable self-contained refs"
+      "note": "Age progression requires consistent reference — visual memory provides portable self-contained refs",
+      "when": "Extending character aging progression with visual memory",
+      "yields": "character aging progression extended capabilities"
     },
     {
       "target": ".github/skills/image-handling/SKILL.md",
       "type": "requires",
       "strength": 0.8,
-      "note": "Photo preparation (resize, optimize, convert) depends on image manipulation tools"
+      "note": "Photo preparation (resize, optimize, convert) depends on image manipulation tools",
+      "when": "visual memory depends on image handling",
+      "yields": "image handling required patterns and guidance"
     },
     {
       "target": ".github/skills/text-to-speech/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "note": "Audio memory pattern stores voice samples for TTS cloning alongside visual references"
+      "note": "Audio memory pattern stores voice samples for TTS cloning alongside visual references",
+      "when": "Combining visual memory with text to speech",
+      "yields": "text to speech complementary techniques"
     },
     {
       "target": ".github/skills/brand-asset-management/SKILL.md",
       "type": "complements",
       "strength": 0.65,
-      "note": "Brand visual identity can be captured as visual memory for consistent generation across projects"
+      "note": "Brand visual identity can be captured as visual memory for consistent generation across projects",
+      "when": "Combining visual memory with brand asset management",
+      "yields": "brand asset management complementary techniques"
     },
     {
       "target": ".github/skills/distribution-security/SKILL.md",
       "type": "requires",
       "strength": 0.75,
-      "note": "Reference photos of real people are PII — visual-memory.json must be excluded from public distribution and scanned before publishing"
+      "note": "Reference photos of real people are PII — visual-memory.json must be excluded from public distribution and scanned before publishing",
+      "when": "visual memory depends on distribution security",
+      "yields": "distribution security required patterns and guidance"
     }
   ],
   "activationBoost": [
@@ -71,5 +83,30 @@
     "generic image generation without likeness requirement",
     "diagram or infographic generation",
     "SVG or vector generation"
+  ],
+  "activationContexts": [
+    "visual memory",
+    "reference photos",
+    "add to visual memory",
+    "add reference photos",
+    "face consistent",
+    "face consistency",
+    "embed photos",
+    "base64 photos",
+    "base64 reference",
+    "self-sufficient skill",
+    "portable skill",
+    "voice cloning",
+    "add voice sample",
+    "add to audio memory",
+    "convert to base64",
+    "resize photos",
+    "new subject",
+    "add person to memory",
+    "add subject",
+    "visual-memory.json",
+    "reference-portrait",
+    "nano-banana-pro",
+    "image_input"
   ]
 }

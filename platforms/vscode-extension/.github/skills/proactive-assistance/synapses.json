@@ -47,5 +47,11 @@
       "when": "user starting new task",
       "yields": "proactive time estimates before asked"
     }
+  ],
+  "activationContexts": [
+    "proactive-assistance",
+    "proactive assistance",
+    "proactive",
+    "assistance"
   ]
 }

@@ -6,43 +6,57 @@
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "extends",
       "strength": 0.9,
-      "reason": "Practitioner-specific extension of academic research methods"
+      "reason": "Practitioner-specific extension of academic research methods",
+      "when": "Practitioner-specific extension of academic research methods",
+      "yields": "academic research extended capabilities"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Practice-first approach is core bootstrap learning pattern"
+      "reason": "Practice-first approach is core bootstrap learning pattern",
+      "when": "Practice-first approach is core bootstrap learning pattern",
+      "yields": "bootstrap learning patterns and guidance"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "requires",
       "strength": 0.85,
-      "reason": "Visual research requires Mermaid diagramming excellence"
+      "reason": "Visual research requires Mermaid diagramming excellence",
+      "when": "Visual research requires Mermaid diagramming excellence",
+      "yields": "markdown mermaid required patterns and guidance"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "applies",
       "strength": 0.75,
-      "reason": "Pattern analysis across projects uses RCA techniques"
+      "reason": "Pattern analysis across projects uses RCA techniques",
+      "when": "Pattern analysis across projects uses RCA techniques",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "target": ".github/skills/post-mortem/SKILL.md",
       "type": "uses",
       "strength": 0.6,
-      "reason": "Chronicle pattern for documenting research incidents"
+      "reason": "Chronicle pattern for documenting research incidents",
+      "when": "Chronicle pattern for documenting research incidents",
+      "yields": "post mortem patterns and guidance"
     },
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
       "type": "enhances",
       "strength": 0.7,
-      "reason": "Cross-project pattern recognition is knowledge synthesis"
+      "reason": "Cross-project pattern recognition is knowledge synthesis",
+      "when": "Cross-project pattern recognition is knowledge synthesis",
+      "yields": "knowledge synthesis enhanced capabilities"
     },
     {
       "target": ".github/skills/global-knowledge/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Global insights become research evidence"
+      "reason": "Global insights become research evidence",
+      "when": "Global insights become research evidence",
+      "yields": "global knowledge patterns and guidance"
     }
   ],
   "triggers": [
@@ -60,5 +74,20 @@
     "practitioner research",
     "ship document promote"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "research",
+    "methodology",
+    "case study",
+    "longitudinal",
+    "publication",
+    "evidence",
+    "prior art",
+    "literature review",
+    "academic paper",
+    "fact-check",
+    "structured abstract",
+    "practitioner research",
+    "ship document promote"
+  ]
 }

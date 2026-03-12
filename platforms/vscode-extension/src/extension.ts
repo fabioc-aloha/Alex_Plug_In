@@ -102,18 +102,17 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
 
   registerLanguageModelTools(context);
 
-  try {
-    await initGlobalKnowledgeSecrets(context);
-  } catch (err) {
-    console.warn('[Alex] Failed to initialize GK secrets:', err);
-  }
-  
-  try {
-    await initSecretsManager(context);
-    logInfo('[Alex] Secrets manager initialized');
-  } catch (err) {
-    console.warn('[Alex] Failed to initialize secrets manager:', err);
-  }
+  // Initialize secrets in parallel (GK secrets + secrets manager are independent)
+  await Promise.all([
+    initGlobalKnowledgeSecrets(context).catch(err =>
+      console.warn('[Alex] Failed to initialize GK secrets:', err)
+    ),
+    initSecretsManager(context).then(() =>
+      logInfo('[Alex] Secrets manager initialized')
+    ).catch(err =>
+      console.warn('[Alex] Failed to initialize secrets manager:', err)
+    ),
+  ]);
 
   initOutcomeTracker(context);
   initExpertiseModel(context);
@@ -162,7 +161,10 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   statusBarItem.tooltip =
     "Alex Cognitive Architecture - Click for quick actions";
 
-  updateStatusBar(statusBarItem);
+  // Defer heavy status bar update (checkHealth does file I/O scans)
+  // Show a ready indicator immediately, then update asynchronously
+  statusBarItem.text = "$(rocket) Alex";
+  setTimeout(() => updateStatusBar(statusBarItem), 200);
   startPeriodicHealthCheck(context, statusBarItem);
 
   context.subscriptions.push(

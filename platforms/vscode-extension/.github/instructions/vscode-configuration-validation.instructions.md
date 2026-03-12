@@ -1,3 +1,7 @@
+---
+description: "VS Code extension configuration validation — package.json manifest and runtime config error diagnosis"
+---
+
 # VS Code Configuration Validation Instructions
 
 **Auto-loaded when**: Working with VS Code extension configuration, package.json manifest, or experiencing runtime configuration errors

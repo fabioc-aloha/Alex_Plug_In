@@ -1,3 +1,8 @@
+---
+description: "UI/UX accessibility compliance and design system consistency for UI code"
+applyTo: "**/*.{html,jsx,tsx,vue,svelte,css,scss}"
+---
+
 # UI/UX Design Quality Standards
 
 **Purpose**: Enforce accessibility compliance and design system consistency when working with UI code  

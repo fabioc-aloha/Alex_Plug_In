@@ -1,3 +1,7 @@
+---
+description: "Gamma presentation generation for AI slides and visual storytelling"
+---
+
 # Gamma Presentation Generation
 
 **Auto-Activation**: When users mention presentation generation, AI slides, or visual storytelling.

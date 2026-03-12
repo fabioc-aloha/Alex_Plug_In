@@ -9,19 +9,25 @@
       "target": ".github/skills/brand-asset-management/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "Preview brand assets inline in terminal"
+      "reason": "Preview brand assets inline in terminal",
+      "when": "Preview brand assets inline in terminal",
+      "yields": "brand asset management complementary techniques"
     },
     {
       "target": ".github/skills/image-handling/SKILL.md",
       "type": "complements",
       "strength": 0.65,
-      "reason": "Terminal preview after image generation"
+      "reason": "Terminal preview after image generation",
+      "when": "Terminal preview after image generation",
+      "yields": "image handling complementary techniques"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "uses",
       "strength": 0.6,
-      "reason": "VS Code terminal settings configuration"
+      "reason": "VS Code terminal settings configuration",
+      "when": "VS Code terminal settings configuration",
+      "yields": "VS Code extension patterns patterns and guidance"
     }
   ],
   "activationPatterns": [
@@ -34,6 +40,13 @@
     "render image inline"
   ],
   "triggers": [
+    "terminal image",
+    "kitty",
+    "imgcat",
+    "inline image",
+    "terminal preview"
+  ],
+  "activationContexts": [
     "terminal image",
     "kitty",
     "imgcat",

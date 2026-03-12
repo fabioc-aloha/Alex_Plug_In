@@ -9,25 +9,33 @@
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "RCA goes deeper than debugging"
+      "reason": "RCA goes deeper than debugging",
+      "when": "RCA goes deeper than debugging",
+      "yields": "debugging patterns extended capabilities"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "RCA follows incident resolution"
+      "reason": "RCA follows incident resolution",
+      "when": "RCA follows incident resolution",
+      "yields": "incident response complementary techniques"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
       "type": "informs",
       "strength": 0.65,
-      "reason": "RCA reveals what recovery is needed"
+      "reason": "RCA reveals what recovery is needed",
+      "when": "RCA reveals what recovery is needed",
+      "yields": "error recovery patterns contextual assessment"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "informs",
       "strength": 0.7,
-      "reason": "Systematic debugging techniques for production build issues"
+      "reason": "Systematic debugging techniques for production build issues",
+      "when": "Systematic debugging techniques for production build issues",
+      "yields": "VS Code extension patterns contextual assessment"
     }
   ],
   "activationPatterns": [
@@ -38,6 +46,15 @@
     "investigate production errors"
   ],
   "triggers": [
+    "root cause",
+    "5 whys",
+    "post-mortem",
+    "why did this happen",
+    "how do we prevent",
+    "TDZ error",
+    "production failure"
+  ],
+  "activationContexts": [
     "root cause",
     "5 whys",
     "post-mortem",

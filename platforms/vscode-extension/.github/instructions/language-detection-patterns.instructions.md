@@ -1,3 +1,7 @@
+---
+description: "Reusable strategies for detecting natural language in text content"
+---
+
 # Language Detection Patterns
 
 **Purpose**: Reusable strategies for detecting natural language in text content

@@ -8,24 +8,24 @@
   "connections": [
     {
       "target": ".github/skills/documentation-quality-assurance/SKILL.md",
-      "relationship": "enhances",
       "strength": 0.9,
       "when": "Reviewing documents for quality",
-      "yields": "Comprehensive quality check including AI pattern detection"
+      "yields": "Comprehensive quality check including AI pattern detection",
+      "type": "enhances"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "relationship": "complements",
       "strength": 0.6,
       "when": "Reviewing documentation in code reviews",
-      "yields": "Apply systematic review patterns to prose"
+      "yields": "Apply systematic review patterns to prose",
+      "type": "complements"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "relationship": "supports",
       "strength": 0.7,
       "when": "Teaching writing skills",
-      "yields": "Framework for explaining AI tells to learners"
+      "yields": "Framework for explaining AI tells to learners",
+      "type": "supports"
     }
   ],
   "activationContext": {
@@ -42,5 +42,11 @@
       "technical documentation",
       "API references"
     ]
-  }
+  },
+  "activationContexts": [
+    "ai-writing-avoidance",
+    "ai writing avoidance",
+    "writing",
+    "avoidance"
+  ]
 }

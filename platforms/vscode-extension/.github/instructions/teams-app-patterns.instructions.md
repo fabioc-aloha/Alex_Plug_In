@@ -1,3 +1,7 @@
+---
+description: "Microsoft Teams app patterns — bots, tabs, M365 Copilot agents, and Teams manifest management"
+---
+
 # Teams App Patterns Instructions
 
 **Auto-loaded when**: Building Microsoft Teams apps, M365 Copilot declarative agents, bots, tabs, or managing Teams app manifests

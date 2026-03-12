@@ -87,14 +87,15 @@ export const TOKEN_CONFIGS: Record<string, TokenConfig> = {
 export async function initSecretsManager(context: vscode.ExtensionContext): Promise<void> {
     secretStorage = context.secrets;
 
-    // Load all tokens into cache
-    for (const config of Object.values(TOKEN_CONFIGS)) {
-        try {
-            const token = await secretStorage.get(config.key);
-            tokenCache.set(config.key, token || null);
-        } catch {
-            tokenCache.set(config.key, null);
-        }
+    // Load all tokens into cache in parallel
+    const configs = Object.values(TOKEN_CONFIGS);
+    const results = await Promise.all(
+        configs.map(config =>
+            Promise.resolve(secretStorage!.get(config.key)).catch(() => null)
+        )
+    );
+    for (let i = 0; i < configs.length; i++) {
+        tokenCache.set(configs[i].key, results[i] || null);
     }
 
     // Migrate environment variables to SecretStorage (one-time, non-destructive)

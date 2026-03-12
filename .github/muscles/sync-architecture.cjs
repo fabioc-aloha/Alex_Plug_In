@@ -164,7 +164,7 @@ function getExcludedMuscles() {
     const inheritancePath = path.join(MASTER_GITHUB, 'muscles', 'inheritance.json');
     if (!fs.existsSync(inheritancePath)) {
         console.warn('  ⚠️ muscles/inheritance.json not found, using defaults');
-        return ['sync-architecture.js', 'build-extension-package.ps1', 'audit-master-alex.ps1', 'inheritance.json'];
+        return ['sync-architecture.cjs', 'build-extension-package.ps1', 'audit-master-alex.ps1', 'inheritance.json'];
     }
     try {
         const inheritance = JSON.parse(fs.readFileSync(inheritancePath, 'utf8'));
@@ -177,7 +177,7 @@ function getExcludedMuscles() {
         return excluded;
     } catch (e) {
         console.warn(`  ⚠️ Could not read inheritance.json: ${e.message}`);
-        return ['sync-architecture.js', 'build-extension-package.ps1', 'audit-master-alex.ps1', 'inheritance.json'];
+        return ['sync-architecture.cjs', 'build-extension-package.ps1', 'audit-master-alex.ps1', 'inheritance.json'];
     }
 }
 
@@ -297,8 +297,28 @@ function syncSkills() {
         }
     }
     
+    // Cleanup: remove heir skills that are now excluded (master-only or heir:m365)
+    const heirSkillDirs = fs.existsSync(HEIR_SKILLS)
+        ? fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
+            .filter(d => d.isDirectory())
+            .map(d => d.name)
+        : [];
+    const cleaned = [];
+    for (const heirSkill of heirSkillDirs) {
+        const inheritance = getInheritance(heirSkill);
+        if (inheritance === 'master-only' || inheritance === 'heir:m365') {
+            const heirSkillPath = path.join(HEIR_SKILLS, heirSkill);
+            fs.rmSync(heirSkillPath, { recursive: true });
+            cleaned.push(heirSkill);
+        }
+    }
+
     // Report
     console.log(`✅ Copied: ${stats.copied.length} skills`);
+    if (cleaned.length > 0) {
+        console.log(`🗑️  Cleaned stale heir skills: ${cleaned.length}`);
+        cleaned.forEach(s => console.log(`   - ${s} (${getInheritance(s)})`));
+    }
     if (stats.skippedMasterOnly.length > 0) {
         console.log(`⏭️  Skipped (master-only): ${stats.skippedMasterOnly.length}`);
         stats.skippedMasterOnly.forEach(s => console.log(`   - ${s}`));

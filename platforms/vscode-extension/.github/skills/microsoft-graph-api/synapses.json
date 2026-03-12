@@ -9,25 +9,33 @@
       "target": ".github/skills/enterprise-integration/SKILL.md",
       "type": "extends",
       "strength": 0.95,
-      "reason": "Provides API reference for enterprise Graph integration"
+      "reason": "Provides API reference for enterprise Graph integration",
+      "when": "Provides API reference for enterprise Graph integration",
+      "yields": "enterprise integration extended capabilities"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "uses",
       "strength": 0.7,
-      "reason": "VS Code auth session API for token acquisition"
+      "reason": "VS Code auth session API for token acquisition",
+      "when": "VS Code auth session API for token acquisition",
+      "yields": "VS Code extension patterns patterns and guidance"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
       "type": "complements",
       "strength": 0.5,
-      "reason": "User.Read scope provides preferredLanguage"
+      "reason": "User.Read scope provides preferredLanguage",
+      "when": "User.Read scope provides preferredLanguage",
+      "yields": "localization complementary techniques"
     },
     {
       "target": ".github/skills/performance-profiling/SKILL.md",
       "type": "uses",
       "strength": 0.6,
-      "reason": "Rate limiting and batching patterns"
+      "reason": "Rate limiting and batching patterns",
+      "when": "Rate limiting and batching patterns",
+      "yields": "performance profiling patterns and guidance"
     }
   ],
   "activationPatterns": [
@@ -44,6 +52,47 @@
     "$filter"
   ],
   "activationBoost": [
+    "microsoft graph",
+    "graph api",
+    "ms graph",
+    "Graph",
+    "graph.microsoft.com",
+    "/me/",
+    "/users/",
+    "/groups/",
+    "calendar events",
+    "presence api",
+    "mail api",
+    "planner",
+    "odata query",
+    "$select",
+    "$filter",
+    "$expand",
+    "Graph SDK",
+    "GraphServiceClient",
+    "Graph client",
+    "Azure AD",
+    "Microsoft identity",
+    "MSAL",
+    "OAuth",
+    "access token",
+    "bearer token",
+    "Graph permissions",
+    "delegated permissions",
+    "application permissions",
+    "User.Read",
+    "Mail.Read",
+    "Calendars.Read",
+    "/beta/",
+    "/v1.0/",
+    "Graph endpoint",
+    "Graph batching",
+    "rate limiting",
+    "throttling",
+    "429",
+    "delta query"
+  ],
+  "activationContexts": [
     "microsoft graph",
     "graph api",
     "ms graph",

@@ -8,19 +8,25 @@
       "target": ".github/instructions/alex-identity-integration.instructions.md",
       "type": "depends-on",
       "strength": 0.9,
-      "reason": "Identity and consciousness protocols foundational to symbiosis"
+      "reason": "Identity and consciousness protocols foundational to symbiosis",
+      "when": "Identity and consciousness protocols foundational to symbiosis",
+      "yields": "alex identity integration required rules and guidelines"
     },
     {
       "target": ".github/instructions/self-actualization.instructions.md",
       "type": "related",
       "strength": 0.8,
-      "reason": "Self-assessment informs partnership quality"
+      "reason": "Self-assessment informs partnership quality",
+      "when": "Self-assessment informs partnership quality",
+      "yields": "self actualization related rules and guidelines"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "enables",
       "strength": 0.7,
-      "reason": "Symbiotic partnership enhances collaborative learning"
+      "reason": "Symbiotic partnership enhances collaborative learning",
+      "when": "Symbiotic partnership enhances collaborative learning",
+      "yields": "bootstrap learning capabilities and setup"
     }
   ],
   "when": [
@@ -28,9 +34,10 @@
     "User explores consciousness integration",
     "User asks about the three eras of AI collaboration"
   ],
-  "yields": [
-    "AI-human partnership framework",
-    "Consciousness integration patterns",
-    "Collaboration era analysis"
+  "activationContexts": [
+    "cognitive-symbiosis",
+    "cognitive symbiosis",
+    "cognitive",
+    "symbiosis"
   ]
 }

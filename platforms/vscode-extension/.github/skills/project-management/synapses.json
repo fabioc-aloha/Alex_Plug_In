@@ -6,36 +6,48 @@
       "reason": "Projects drive organizational change",
       "type": "complements",
       "strength": 0.85,
-      "target": ".github/skills/change-management/SKILL.md"
+      "target": ".github/skills/change-management/SKILL.md",
+      "when": "Projects drive organizational change",
+      "yields": "change management complementary techniques"
     },
     {
       "reason": "Requirements drive project scope",
       "type": "receives",
       "strength": 0.85,
-      "target": ".github/skills/business-analysis/SKILL.md"
+      "target": ".github/skills/business-analysis/SKILL.md",
+      "when": "Requirements drive project scope",
+      "yields": "business analysis input data"
     },
     {
       "reason": "Risk management is core to project management",
       "type": "contains",
       "strength": 0.85,
-      "target": ".github/skills/root-cause-analysis/SKILL.md"
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "when": "Risk management is core to project management",
+      "yields": "root cause analysis component details"
     },
     {
       "reason": "Testing activities in project schedule",
       "type": "plans",
       "strength": 0.65,
-      "target": ".github/skills/testing-strategies/SKILL.md"
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "when": "Testing activities in project schedule",
+      "yields": "testing strategies planning framework"
     },
     {
       "reason": "Project issues may become incidents",
       "type": "escalates",
       "strength": 0.4,
-      "target": ".github/skills/incident-response/SKILL.md"
+      "target": ".github/skills/incident-response/SKILL.md",
+      "when": "Project issues may become incidents",
+      "yields": "incident response escalation procedures"
     },
     {
       "target": ".github/skills/cross-cultural-collaboration/SKILL.md",
       "type": "related",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "project management relates to cross cultural collaboration",
+      "yields": "cross cultural collaboration related patterns and guidance"
     }
   ],
   "triggers": [
@@ -49,5 +61,16 @@
     "backlog",
     "estimation"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "project",
+    "timeline",
+    "milestone",
+    "deliverable",
+    "risk",
+    "RACI",
+    "sprint",
+    "backlog",
+    "estimation"
+  ]
 }

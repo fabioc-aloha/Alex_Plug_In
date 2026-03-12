@@ -7,19 +7,25 @@
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "context": "Mermaid diagrams must also follow lint rules"
+      "reason": "Mermaid diagrams must also follow lint rules",
+      "when": "Mermaid diagrams must also follow lint rules",
+      "yields": "markdown mermaid complementary techniques"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
       "type": "enables",
       "strength": 0.9,
-      "context": "All architecture documentation must be lint-clean"
+      "reason": "All architecture documentation must be lint-clean",
+      "when": "All architecture documentation must be lint-clean",
+      "yields": "architecture refinement capabilities and setup"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "context": "Lint-clean is baseline for documentation excellence"
+      "reason": "Lint-clean is baseline for documentation excellence",
+      "when": "Lint-clean is baseline for documentation excellence",
+      "yields": "academic research supporting context"
     }
   ],
   "triggers": [
@@ -36,5 +42,11 @@
     "MD009": "No trailing whitespace",
     "MD047": "Single newline at file end"
   },
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "creating markdown file",
+    "editing documentation",
+    "writing lists or tables",
+    "adding code blocks"
+  ]
 }

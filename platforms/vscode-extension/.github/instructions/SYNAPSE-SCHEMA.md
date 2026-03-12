@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*synapse*,**/*schema*,**/*connection*"
+applyTo: "**/*synapse*"
 description: "Single source of truth for synapse notation format"
 ---
 

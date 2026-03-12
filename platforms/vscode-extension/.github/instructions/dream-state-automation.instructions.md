@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*dream*,**/*maintenance*,**/*synapse*"
+applyTo: "**/*dream*,**/*synapse*"
 description: "Automated neural maintenance and dream state processing protocols"
 ---
 

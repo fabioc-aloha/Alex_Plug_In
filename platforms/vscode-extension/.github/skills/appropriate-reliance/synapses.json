@@ -7,31 +7,41 @@
       "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "enables",
       "strength": 0.9,
-      "context": "Appropriate reliance is prerequisite for effective bootstrap learning"
+      "reason": "Appropriate reliance is prerequisite for effective bootstrap learning",
+      "when": "Appropriate reliance is prerequisite for effective bootstrap learning",
+      "yields": "bootstrap learning capabilities and setup"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
       "type": "enhances",
       "strength": 0.7,
-      "context": "Mutual challenge improves architecture documentation quality"
+      "reason": "Mutual challenge improves architecture documentation quality",
+      "when": "Mutual challenge improves architecture documentation quality",
+      "yields": "architecture refinement enhanced capabilities"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
       "type": "related",
       "strength": 0.7,
-      "context": "Grounded in learning science and trust calibration research"
+      "reason": "Grounded in learning science and trust calibration research",
+      "when": "Grounded in learning science and trust calibration research",
+      "yields": "learning psychology related patterns and guidance"
     },
     {
       "target": ".github/instructions/alex-identity-integration.instructions.md",
       "type": "implements",
       "strength": 0.9,
-      "context": "Proactive collaboration is core to Alex personality"
+      "reason": "Proactive collaboration is core to Alex personality",
+      "when": "Proactive collaboration is core to Alex personality",
+      "yields": "alex identity integration implementation steps"
     },
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",
       "type": "complements",
       "strength": 0.75,
-      "context": "Trust calibration is core to responsible AI deployment"
+      "reason": "Trust calibration is core to responsible AI deployment",
+      "when": "Trust calibration is core to responsible AI deployment",
+      "yields": "privacy responsible AI complementary techniques"
     }
   ],
   "triggers": [
@@ -46,5 +56,17 @@
     "under-reliance",
     "appropriate reliance"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "collaboration feels one-sided",
+    "user accepts without reviewing",
+    "user rejects without reasoning",
+    "AI should challenge assumption",
+    "trust calibration needed",
+    "CAIR",
+    "CSR",
+    "over-reliance",
+    "under-reliance",
+    "appropriate reliance"
+  ]
 }

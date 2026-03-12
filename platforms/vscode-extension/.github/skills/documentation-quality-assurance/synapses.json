@@ -16,20 +16,6 @@
     "operational documentation",
     "document headers"
   ],
-  "yields": [
-    {
-      "concept": "5-pass quality pipeline",
-      "whenNeeded": "reviewing large documentation suites systematically"
-    },
-    {
-      "concept": "count elimination rules",
-      "whenNeeded": "hardcoded numbers in docs drift from reality"
-    },
-    {
-      "concept": "comprehensive header pattern",
-      "whenNeeded": "operational docs lack at-a-glance context (regression checklists, deployment guides)"
-    }
-  ],
   "lastUpdated": "2026-02-20T07:45:33.299Z",
   "changelog": [
     {

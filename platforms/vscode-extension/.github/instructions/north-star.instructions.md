@@ -1,3 +1,7 @@
+---
+description: "Project vision definition and Active Context integration for ambitious goals"
+---
+
 # North Star Integration
 
 **Description**: Project vision definition and Active Context integration for ambitious goals
