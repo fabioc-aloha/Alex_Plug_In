@@ -38,6 +38,7 @@ Four platforms. Focused, not scattered.
 
 | Version | Theme | Shipped |
 | --- | --- | --- |
+| **v6.5.5** | Performance — parallel activation, right-click menu audit, startup optimization | 2026-03-12 |
 | **v6.5.4** | Roadmap hygiene — shipped content to appendix, Open Backlog consolidation, T8 closure | 2026-03-11 |
 | **v6.5.3** | Trust Release — synapse audit, master→heir sync hardening, leakage remediation, quality gates | 2026-03-11 |
 | **v6.4.0** | Agent Hooks Release — VS Code 1.111 settings adoption, autopilot, hooks, sandbox, debug docs | 2026-03-09 |
@@ -172,6 +173,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.4.6 | Audit Hygiene (published) | ✅ Shipped |
 | v6.5.0 | The Trust Release | ✅ Shipped |
 | v6.5.3 | Trust Release — audit cleanup, tech debt, synapse metadata | ✅ Shipped |
+| v6.5.5 | Performance — parallel activation, startup optimization | ✅ Shipped |
 | v6.5.4 | Roadmap hygiene — appendix restructuring, T8 closure | ✅ Shipped |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
@@ -179,15 +181,15 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.5.4                                          |
-| **Current Heirs**          | VS Code (6.5.4), M365 (6.2.0), Plugin (6.5.3) |
+| **Current Master Version** | 6.5.5                                          |
+| **Current Heirs**          | VS Code (6.5.5), M365 (6.2.0), Plugin (6.5.3) |
 | **Architecture**           | 133 skills, 38 trifectas, 65 instructions, 48 prompts, 7 agents |
 | **Codebase**               | 128 TS files, 20 test files (268 passing, 0 failing) |
 | **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) · [v6.5.3 Audit](alex_docs/audits/AUDIT-2026-03-11.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence              |
 | **Open Items**             | 9 total: 4 blocked, 3 gated, 2 conditional |
-| **Updated**                | 2026-03-11                                     |
+| **Updated**                | 2026-03-12                                     |
 
 ---
 

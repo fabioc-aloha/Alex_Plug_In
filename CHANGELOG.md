@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.5.5] - 2026-03-12
+
+### Changed
+- **Performance: parallel activation** — Secret loading, status bar update, and health check I/O parallelized for faster extension startup
+- **Right-click menu audit** — Fixed duplicate sort key collision, added missing URI parameter to rubberDuck command
+
+---
+
 ## [6.5.4] - 2026-03-11
 
 ### Changed
