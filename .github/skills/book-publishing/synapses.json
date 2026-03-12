@@ -8,19 +8,25 @@
       "target": ".github/skills/md-to-word/SKILL.md",
       "type": "sibling",
       "strength": 0.8,
-      "reason": "Similar document export pipeline but for KDP/print-ready output"
+      "reason": "Similar document export pipeline but for KDP/print-ready output",
+      "when": "Similar document export pipeline but for KDP/print-ready output",
+      "yields": "Markdown to word trifecta patterns and guidance"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "depends-on",
       "strength": 0.85,
-      "reason": "Diagrams in books must follow ATACCU quality standards"
+      "reason": "Diagrams in books must follow ATACCU quality standards",
+      "when": "Diagrams in books must follow ATACCU quality standards",
+      "yields": "markdown mermaid required patterns and guidance"
     },
     {
       "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
       "type": "related",
       "strength": 0.5,
-      "reason": "Cover art and visual assets for book publishing"
+      "reason": "Cover art and visual assets for book publishing",
+      "when": "Cover art and visual assets for book publishing",
+      "yields": "AI generated readme banners related patterns and guidance"
     }
   ],
   "when": [
@@ -28,15 +34,16 @@
     "User needs Markdown-to-PDF via Pandoc and LuaLaTeX",
     "User needs print-ready formatting with emoji rendering"
   ],
-  "yields": [
-    "Print-ready PDF via LuaLaTeX",
-    "KDP-compatible book formatting",
-    "Emoji-rendered documents"
-  ],
   "tools": {
     "required": [
       "pandoc",
       "lualatex"
     ]
-  }
+  },
+  "activationContexts": [
+    "book-publishing",
+    "book publishing",
+    "book",
+    "publishing"
+  ]
 }

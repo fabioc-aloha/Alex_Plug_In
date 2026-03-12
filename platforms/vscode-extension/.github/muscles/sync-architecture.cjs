@@ -62,7 +62,11 @@ const EXCLUDED_ROOT_FILES = [
 // This replaces per-skill synapses.json 'inheritance' field.
 const SKILL_EXCLUSIONS = {
     // master-only: skill only makes sense in master Alex, never synced
-    'heir-sync-management': 'master-only',
+    'heir-sync-management':        'master-only',
+    'release-process':             'master-only',  // PAT handling, marketplace credentials, platforms/ paths
+    'release-preflight':           'master-only',  // platforms/vscode-extension paths, ROADMAP-UNIFIED
+    'extension-audit-methodology': 'master-only',  // master audit methodology, alex_docs/audits
+    'skill-catalog-generator':     'master-only',  // master catalog generation
 
     // heir:m365: skill targets the M365 Copilot heir, not VS Code extension
     'm365-agent-debugging': 'heir:m365',
@@ -77,6 +81,25 @@ const SKILL_EXCLUSIONS = {
     'vscode-configuration-validation':'heir:vscode',
     'vscode-extension-patterns':      'heir:vscode',
 };
+
+// ============================================================
+// INSTRUCTION & PROMPT EXCLUSIONS: Master-only files not synced to heirs
+// ============================================================
+const EXCLUDED_INSTRUCTIONS = [
+    'global-knowledge-curation.instructions.md',    // Master Alex curation workflow
+    'heir-skill-promotion.instructions.md',         // Master-side promotion workflow
+    'cognitive-health-validation.instructions.md',  // Master remediation with platforms/ paths
+    'roadmap-maintenance.instructions.md',          // ROADMAP-UNIFIED is master-only
+    'trifecta-audit.instructions.md',               // References alex_docs/architecture/
+    'vscode-marketplace-publishing.instructions.md',// platforms/vscode-extension paths throughout
+    'release-management.instructions.md',          // 20+ platforms/ refs throughout multi-platform workflow
+];
+
+const EXCLUDED_PROMPTS = [
+    'masteraudit.prompt.md',                        // Master Alex audit
+    'promotetomaster.prompt.md',                    // Promote to Master Alex
+    'extension-audit-methodology.prompt.md',        // alex_docs/audits/ paths
+];
 
 // ============================================================
 // HEIR PROTECTION: Files that must NEVER be copied to heir
@@ -167,9 +190,24 @@ const HEIR_SYNAPSE_REMOVALS = [
         reason: 'ROADMAP-UNIFIED.md does not exist in heir'
     },
     {
+        file: 'release-management.instructions.md',
+        pattern: /^.*\[platforms\/m365-copilot\/.*\].*\r?\n/gm,
+        reason: 'platforms/ does not exist in heir'
+    },
+    {
         file: 'trifecta-audit.instructions.md',
         pattern: /^.*\[alex_docs\/architecture\/TRIFECTA-CATALOG\.md\].*\r?\n/m,
         reason: 'alex_docs/architecture/ not deployed to heir'
+    },
+    {
+        file: 'roadmap-maintenance.instructions.md',
+        pattern: /^.*\[ROADMAP-UNIFIED\.md\].*\r?\n/m,
+        reason: 'ROADMAP-UNIFIED.md does not exist in heir'
+    },
+    {
+        file: 'ui-ux-design.instructions.md',
+        pattern: /^.*\[alex_docs\/research\/COMMAND-CENTER.*\].*\r?\n/gm,
+        reason: 'alex_docs/research/ not deployed to heir'
     },
 ];
 
@@ -371,6 +409,8 @@ function syncArchitectureFolders() {
             let exclusions = [];
             if (folder === 'config') exclusions = EXCLUDED_CONFIG_FILES;
             if (folder === 'muscles') exclusions = getExcludedMuscles();
+            if (folder === 'instructions') exclusions = EXCLUDED_INSTRUCTIONS;
+            if (folder === 'prompts') exclusions = EXCLUDED_PROMPTS;
             copyDirRecursive(masterPath, heirPath, exclusions);
             
             const count = fs.readdirSync(masterPath).length;

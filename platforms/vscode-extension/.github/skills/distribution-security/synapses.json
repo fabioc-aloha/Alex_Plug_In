@@ -11,12 +11,6 @@
       "reason": "Secrets scanning is core to distribution security"
     },
     {
-      "target": ".github/instructions/release-management.instructions.md",
-      "type": "related",
-      "strength": 0.85,
-      "reason": "Security checks are part of the release workflow"
-    },
-    {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "supports",
       "strength": 0.7,

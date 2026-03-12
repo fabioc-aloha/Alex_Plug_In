@@ -18,12 +18,6 @@
       "reason": "Health status during meditation sessions"
     },
     {
-      "target": ".github/instructions/cognitive-health-validation.instructions.md",
-      "type": "sibling",
-      "strength": 0.85,
-      "reason": "Instruction enforces; skill interprets results"
-    },
-    {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "complements",
       "strength": 0.8,

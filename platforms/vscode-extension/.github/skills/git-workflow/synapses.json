@@ -1,18 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "skillId": "git-workflow",
-  "connections": [
-    {
-      "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "enables",
-      "strength": 0.9
-    },
-    {
-      "target": ".github/instructions/release-management.instructions.md",
-      "type": "supports",
-      "strength": 0.85
-    }
-  ],
+  "connections": [],
   "activationBoost": [
     "commit",
     "git",

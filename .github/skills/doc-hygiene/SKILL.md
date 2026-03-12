@@ -42,7 +42,6 @@ Counts are **tolerated** (not encouraged) in these specific locations because th
 | File | Purpose | Update Cadence |
 |------|---------|----------------|
 | `copilot-instructions.md` Memory Stores table | AI working context | Per release |
-| `ROADMAP-UNIFIED.md` Current State | Release tracking | Per release |
 | `README.md` architecture tree | User-facing overview | Per release |
 
 All other files should use **descriptive references** instead of counts.

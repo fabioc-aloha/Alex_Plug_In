@@ -4,15 +4,7 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.1.0",
   "description": "Systematic documentation audit, drift detection, preflight validation, and multi-pass quality pipelines",
-  "connections": [
-    {
-      "target": ".github/skills/release-process/SKILL.md",
-      "strength": 0.85,
-      "type": "operational",
-      "direction": "bidirectional",
-      "context": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles"
-    }
-  ],
+  "connections": [],
   "activationContexts": [
     "documentation audit",
     "doc quality",

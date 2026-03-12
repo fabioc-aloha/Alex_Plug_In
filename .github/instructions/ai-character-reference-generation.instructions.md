@@ -1,3 +1,7 @@
+---
+description: "AI character reference generation for consistent visual development and fiction writing"
+---
+
 # AI Character Reference Generation Instructions
 
 **Auto-loaded when**: Working with character development, fiction writing, visual reference generation

@@ -27,12 +27,6 @@
       "target": ".github/skills/testing-strategies/SKILL.md"
     },
     {
-      "reason": "Release planning within project delivery",
-      "type": "uses",
-      "strength": 0.65,
-      "target": ".github/skills/release-preflight/SKILL.md"
-    },
-    {
       "reason": "Project issues may become incidents",
       "type": "escalates",
       "strength": 0.4,

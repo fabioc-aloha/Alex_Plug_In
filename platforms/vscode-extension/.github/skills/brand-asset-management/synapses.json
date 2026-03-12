@@ -41,13 +41,6 @@
       "yields": "Marketing copy following store description pattern"
     },
     {
-      "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "validates",
-      "strength": 0.7,
-      "when": "verifying brand assets before release",
-      "yields": "Asset completeness check during release preflight"
-    },
-    {
       "target": ".github/skills/global-knowledge/SKILL.md",
       "type": "uses",
       "strength": 0.7,

@@ -21,7 +21,7 @@ You are reviewing a VS Code extension for configuration and manifest consistency
 
 1. **Run automated validation**:
    ```powershell
-   cd platforms/vscode-extension
+   # Navigate to extension directory if in multi-platform workspace
    .\scripts\validate-manifest.ps1
    ```
 
@@ -66,5 +66,3 @@ Alex:
    - [Specific fix for each issue]
 5. [Applies fixes if approved]
 6. Re-running validation... ✅ All checks pass
-
-

@@ -90,7 +90,7 @@ node -e "const sharp = require('sharp'); sharp('vscode-extension/assets/logo.svg
 node -e "const sharp = require('sharp'); sharp('vscode-extension/assets/logo-mono.svg').resize(32, 32).png().toFile('appPackage/outline.png')"
 ```
 
-**Source of truth**: `platforms/vscode-extension/assets/logo.svg` and `logo-mono.svg`
+**Source of truth**: `assets/logo.svg` and `logo-mono.svg`
 
 ---
 

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.5.4] - 2026-03-11
+
+### Changed
+- **Roadmap restructured** — Shipped version details (v6.4.0, v6.4.5, v6.5.0) moved to appendix; main body now flows North Star → Shipped Releases → Open Backlog → Future Vision
+- **Open Backlog section** — Consolidated deferred hooks, blocked/gated/conditional items into one forward-looking section
+- **T8 orphan prompts resolved** — 1 misidentified (`presentation` has 2 skills), 4 justified standalone workflows (`improve`, `journey`, `plan`, `marp`). Open items 10 → 9
+
+---
+
 ## [6.5.3] - 2026-03-11
 
 ### Changed

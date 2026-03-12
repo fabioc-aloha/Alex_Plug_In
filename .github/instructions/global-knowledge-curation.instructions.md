@@ -1,3 +1,7 @@
+---
+description: "Global knowledge curation, review cycles, and cross-project insight management"
+---
+
 # Global Knowledge Curation Protocol
 
 > Master Alex periodically reviews global knowledge, implements for heirs when appropriate, and cleans up to maintain a curated knowledge base.

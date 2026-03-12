@@ -1,3 +1,7 @@
+---
+description: "Project vision definition and Active Context integration for ambitious goals"
+---
+
 # North Star Integration
 
 **Description**: Project vision definition and Active Context integration for ambitious goals
@@ -103,7 +107,7 @@ When evaluating any proposed change:
 
 ## Hierarchy
 
-- Master Alex: North Star defined in `alex_docs/NORTH-STAR.md`
+- North Star defined in the project's North Star document (NORTH-STAR.md)
 - Heir projects: Inherit NASA-Quality default OR define custom
 - Sub-projects: May have local North Stars that serve parent's vision
 

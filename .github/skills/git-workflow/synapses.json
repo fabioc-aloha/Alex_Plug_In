@@ -5,12 +5,16 @@
     {
       "target": ".github/skills/release-preflight/SKILL.md",
       "type": "enables",
-      "strength": 0.9
+      "strength": 0.9,
+      "when": "git workflow requires release preflight capabilities",
+      "yields": "release preflight capabilities and setup"
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
       "type": "supports",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "git workflow needs release management context",
+      "yields": "release management supporting context"
     }
   ],
   "activationBoost": [
@@ -33,5 +37,19 @@
     "cherry-pick",
     "conflict"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "commit",
+    "git",
+    "branch",
+    "merge",
+    "recovery",
+    "undo",
+    "reset",
+    "rebase",
+    "pull request",
+    "PR",
+    "cherry-pick",
+    "conflict"
+  ]
 }

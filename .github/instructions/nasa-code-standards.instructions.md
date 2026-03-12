@@ -1,6 +1,5 @@
 ---
-applyTo: "**/*.{ts,js,tsx,jsx,py,cs,java,go,rs,c,cpp,h}"
-description: NASA/JPL Power of 10 code quality standards adapted for mission-critical software development
+description: "NASA/JPL Power of 10 code quality standards adapted for mission-critical software development"
 ---
 
 # NASA Code Standards — Mission-Critical Development

@@ -5,33 +5,43 @@
   "connections": [
     {
       "target": ".github/skills/security-review/SKILL.md",
-      "relationship": "requires",
       "strength": 0.9,
-      "context": "IaC needs security scanning (tfsec, checkov)"
+      "type": "requires",
+      "reason": "IaC needs security scanning (tfsec, checkov)",
+      "when": "IaC needs security scanning (tfsec, checkov)",
+      "yields": "security review required patterns and guidance"
     },
     {
       "target": ".github/skills/git-workflow/SKILL.md",
-      "relationship": "requires",
       "strength": 0.9,
-      "context": "IaC follows GitOps patterns with PRs and reviews"
+      "type": "requires",
+      "reason": "IaC follows GitOps patterns with PRs and reviews",
+      "when": "IaC follows GitOps patterns with PRs and reviews",
+      "yields": "git workflow required patterns and guidance"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "relationship": "complements",
       "strength": 0.7,
-      "context": "IaC needs unit and integration testing"
+      "type": "complements",
+      "reason": "IaC needs unit and integration testing",
+      "when": "IaC needs unit and integration testing",
+      "yields": "testing strategies complementary techniques"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "relationship": "complements",
       "strength": 0.3,
-      "context": "IaC provisions infrastructure for APIs"
+      "type": "complements",
+      "reason": "IaC provisions infrastructure for APIs",
+      "when": "IaC provisions infrastructure for APIs",
+      "yields": "API design complementary techniques"
     },
     {
       "target": ".github/skills/mcp-development/SKILL.md",
-      "relationship": "complements",
       "strength": 0.3,
-      "context": "MCP servers may need cloud infrastructure"
+      "type": "complements",
+      "reason": "MCP servers may need cloud infrastructure",
+      "when": "MCP servers may need cloud infrastructure",
+      "yields": "MCP development complementary techniques"
     }
   ],
   "activationTriggers": [
@@ -55,5 +65,19 @@
       "git-workflow"
     ]
   },
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "infrastructure as code",
+    "IaC",
+    "Terraform",
+    "Bicep",
+    "Pulumi",
+    "CloudFormation",
+    "ARM template",
+    "CDK",
+    "tfvars",
+    "terraform.tfstate",
+    "GitOps",
+    "provision infrastructure"
+  ]
 }

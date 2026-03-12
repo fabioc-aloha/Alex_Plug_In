@@ -6,31 +6,41 @@
       "target": ".github/instructions/testing-strategies.instructions.md",
       "type": "implements",
       "strength": 0.95,
-      "reason": "Trifecta sibling: procedural testing guidelines"
+      "reason": "Trifecta sibling: procedural testing guidelines",
+      "when": "Trifecta sibling: procedural testing guidelines",
+      "yields": "testing strategies implementation steps"
     },
     {
       "target": ".github/prompts/tdd.prompt.md",
       "type": "activates",
       "strength": 0.95,
-      "reason": "Trifecta sibling: /tdd interactive testing workflow"
+      "reason": "Trifecta sibling: /tdd interactive testing workflow",
+      "when": "Trifecta sibling: /tdd interactive testing workflow",
+      "yields": "tdd interactive workflow"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "Tests prevent bugs, debugging finds them"
+      "reason": "Tests prevent bugs, debugging finds them",
+      "when": "Tests prevent bugs, debugging finds them",
+      "yields": "debugging patterns complementary techniques"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "type": "enables",
       "strength": 0.9,
-      "reason": "Tests enable safe refactoring"
+      "reason": "Tests enable safe refactoring",
+      "when": "Tests enable safe refactoring",
+      "yields": "refactoring patterns capabilities and setup"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "reason": "Test coverage is part of review"
+      "reason": "Test coverage is part of review",
+      "when": "Test coverage is part of review",
+      "yields": "code review supporting context"
     },
     {
       "target": ".github/skills/release-process/SKILL.md",
@@ -44,7 +54,9 @@
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "validates",
       "strength": 0.8,
-      "reason": "Automated accessibility testing validates WCAG compliance"
+      "reason": "Automated accessibility testing validates WCAG compliance",
+      "when": "Automated accessibility testing validates WCAG compliance",
+      "yields": "UI UX design quality checks and validation"
     },
     {
       "target": ".github/instructions/automated-quality-gates.instructions.md",
@@ -57,7 +69,9 @@
     {
       "target": ".github/skills/localization/SKILL.md",
       "type": "related",
-      "strength": 0.9
+      "strength": 0.9,
+      "when": "testing strategies relates to localization",
+      "yields": "localization related patterns and guidance"
     }
   ],
   "triggers": [
@@ -118,5 +132,53 @@
     "test first",
     "red green refactor"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "test",
+    "testing",
+    "spec",
+    "coverage",
+    "mock",
+    "TDD",
+    "unit test",
+    "integration test",
+    "E2E",
+    "end-to-end",
+    "test strategy",
+    "test pyramid",
+    "test automation",
+    "write tests",
+    "add tests",
+    "test this",
+    "how to test",
+    "mocha",
+    "jest",
+    "vitest",
+    "chai",
+    "sinon",
+    "test coverage",
+    "code coverage",
+    "coverage report",
+    "fixture",
+    "stub",
+    "spy",
+    "fake",
+    "test double",
+    "snapshot test",
+    "regression test",
+    "smoke test",
+    "BDD",
+    "behavior-driven",
+    "given when then",
+    "test runner",
+    "test framework",
+    "test suite",
+    "assertion",
+    "expect",
+    "assert",
+    "should",
+    "test driven",
+    "test first",
+    "red green refactor"
+  ]
 }

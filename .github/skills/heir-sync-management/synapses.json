@@ -7,31 +7,41 @@
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "coordinates",
       "strength": 0.9,
-      "note": "brain-qa-heir.ps1 synced via rename pattern; Phase 7 -Fix strips master-only connections before writing heir; Phase 1 detects rename cascade breaks"
+      "note": "brain-qa-heir.ps1 synced via rename pattern; Phase 7 -Fix strips master-only connections before writing heir; Phase 1 detects rename cascade breaks",
+      "when": "Coordinating heir sync management with brain QA",
+      "yields": "brain QA coordination protocols"
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
       "type": "enables",
       "strength": 0.85,
-      "note": "Sync runs as prepublish step before packaging"
+      "note": "Sync runs as prepublish step before packaging",
+      "when": "heir sync management requires release management capabilities",
+      "yields": "release management capabilities and setup"
     },
     {
       "target": ".github/copilot-instructions.md",
       "type": "implements",
       "strength": 0.8,
-      "note": "Implements Heir Evolution Principle and Safety Imperative I7"
+      "note": "Implements Heir Evolution Principle and Safety Imperative I7",
+      "when": "Applying copilot-instructions procedures",
+      "yields": "copilot-instructions implementation steps"
     },
     {
       "target": ".github/skills/release-preflight/SKILL.md",
       "type": "enables",
       "strength": 0.8,
-      "note": "Sync must complete cleanly before release preflight can proceed"
+      "note": "Sync must complete cleanly before release preflight can proceed",
+      "when": "heir sync management requires release preflight capabilities",
+      "yields": "release preflight capabilities and setup"
     },
     {
       "target": ".github/skills/architecture-health/SKILL.md",
       "type": "informs",
       "strength": 0.65,
-      "note": "Sync exclusion drift surfaces through architecture health checks"
+      "note": "Sync exclusion drift surfaces through architecture health checks",
+      "when": "heir sync management provides context to architecture health",
+      "yields": "architecture health contextual assessment"
     }
   ],
   "activationBoost": [
@@ -50,5 +60,21 @@
     "stale synapse",
     "rename skill"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "heir sync",
+    "sync architecture",
+    "master heir",
+    "contamination",
+    "drift detection",
+    "sync-architecture.js",
+    "inheritance.json",
+    "heir rename",
+    "muscle sync",
+    "skill rename",
+    "rename cascade",
+    "cascade repair",
+    "stale synapse",
+    "rename skill"
+  ]
 }

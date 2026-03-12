@@ -55,5 +55,15 @@
     "getConfiguration",
     "registerCommand",
     "version badge sync"
+  ],
+  "activationContexts": [
+    "configuration validation",
+    "manifest validation",
+    "package.json validation",
+    "command registration",
+    "settings registration",
+    "getConfiguration",
+    "registerCommand",
+    "version badge sync"
   ]
 }

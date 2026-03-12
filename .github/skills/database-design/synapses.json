@@ -9,37 +9,49 @@
       "target": ".github/skills/api-design/SKILL.md",
       "type": "informs",
       "strength": 0.85,
-      "note": "Database schema shapes API data contracts"
+      "note": "Database schema shapes API data contracts",
+      "when": "database design provides context to API design",
+      "yields": "API design contextual assessment"
     },
     {
       "target": ".github/skills/performance-profiling/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "note": "Query profiling is database-specific performance work"
+      "note": "Query profiling is database-specific performance work",
+      "when": "Combining database design with performance profiling",
+      "yields": "performance profiling complementary techniques"
     },
     {
       "target": ".github/skills/infrastructure-as-code/SKILL.md",
       "type": "supports",
       "strength": 0.75,
-      "note": "Database provisioning often via IaC"
+      "note": "Database provisioning often via IaC",
+      "when": "database design needs infrastructure as code context",
+      "yields": "infrastructure as code supporting context"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "supports",
       "strength": 0.8,
-      "note": "Database access control, encryption, PII handling"
+      "note": "Database access control, encryption, PII handling",
+      "when": "database design needs security review context",
+      "yields": "security review supporting context"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "type": "analogousDomain",
       "strength": 0.7,
-      "note": "Schema migrations parallel code refactoring"
+      "note": "Schema migrations parallel code refactoring",
+      "when": "database design applies analogous patterns from refactoring patterns",
+      "yields": "refactoring patterns analogous domain patterns"
     },
     {
       "target": ".github/skills/azure-architecture-patterns/SKILL.md",
       "type": "supports",
       "strength": 0.75,
-      "note": "Azure SQL, Cosmos DB patterns"
+      "note": "Azure SQL, Cosmos DB patterns",
+      "when": "database design needs azure architecture patterns context",
+      "yields": "azure architecture patterns supporting context"
     }
   ],
   "activationBoost": [
@@ -72,5 +84,28 @@
   "inhibitors": [
     "in-memory only",
     "no persistence needed"
+  ],
+  "activationContexts": [
+    "database",
+    "schema",
+    "SQL",
+    "PostgreSQL",
+    "MySQL",
+    "MongoDB",
+    "Prisma",
+    "Drizzle",
+    "ORM",
+    "migration",
+    "normalization",
+    "index",
+    "query optimization",
+    "Cosmos DB",
+    "DynamoDB",
+    "database design",
+    "schema design",
+    "data modeling",
+    "database migration",
+    "SQL query",
+    "index strategy"
   ]
 }

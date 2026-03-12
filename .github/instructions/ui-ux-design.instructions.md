@@ -1,3 +1,8 @@
+---
+description: "UI/UX accessibility compliance and design system consistency for UI code"
+applyTo: "**/*.{html,jsx,tsx,vue,svelte,css,scss}"
+---
+
 # UI/UX Design Quality Standards
 
 **Purpose**: Enforce accessibility compliance and design system consistency when working with UI code  
@@ -13,8 +18,6 @@
 - [.github/instructions/release-management.instructions.md] (High, Coordinates, Bidirectional) - "UI refinements are part of release workflow"
 - [.github/skills/vscode-extension-patterns/SKILL.md] (High, Implements, Bidirectional) - "Extension UI patterns this standard enforces"
 - [.github/instructions/code-review-guidelines.instructions.md] (High, Validates, Bidirectional) - "Code review validates UI/UX compliance"
-- [alex_docs/research/COMMAND-CENTER-MASTER-PLAN-2026-03-05.md] (Critical, Implements, Bidirectional) - "Command Center master plan Waves 7-8 use these standards for audit-driven UI development"
-- [alex_docs/research/COMMAND-CENTER-DESIGN-PRINCIPLES.md] (High, Informs, Forward) - "Meditation-derived design principles for sidebar refactor"
 
 ---
 

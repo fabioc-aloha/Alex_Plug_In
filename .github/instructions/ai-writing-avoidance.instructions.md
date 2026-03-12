@@ -1,3 +1,7 @@
+---
+description: "Rules for producing authentically human writing by avoiding telltale AI-generated text patterns"
+---
+
 # AI Writing Avoidance Instructions
 
 Apply these rules when writing or reviewing any document that needs to sound authentically human.

@@ -197,10 +197,10 @@ If you're doing:
 
 ## The Alex Recommendation
 
-For **Master Alex** (source of truth, architecture evolution):
+For **architecture evolution and complex cognitive tasks**:
 → **Always use Opus 4.6** — The cognitive architecture demands full capability
 
-For **Heirs** (production deployment, user-facing):
+For **production deployment, user-facing work**:
 → **Default to Sonnet 4.6** — Best balance of capability and cost
 → **Allow Opus for complex tasks** — User can request escalation
 

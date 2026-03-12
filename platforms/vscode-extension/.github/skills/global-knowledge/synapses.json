@@ -22,18 +22,6 @@
       "reason": "Prior knowledge speeds learning"
     },
     {
-      "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "informs",
-      "strength": 0.9,
-      "reason": "Promotion candidate patterns guide heir skill evolution"
-    },
-    {
-      "target": ".github/instructions/global-knowledge-curation.instructions.md",
-      "type": "informs",
-      "strength": 0.85,
-      "reason": "Curation protocol uses promotion patterns"
-    },
-    {
       "target": ".github/prompts/meditate.prompt.md",
       "type": "triggers",
       "strength": 0.8,

@@ -6,25 +6,33 @@
       "reason": "Generates Mermaid network diagrams",
       "type": "enables",
       "strength": 0.9,
-      "target": ".github/skills/markdown-mermaid/SKILL.md"
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "when": "Generates Mermaid network diagrams",
+      "yields": "markdown mermaid capabilities and setup"
     },
     {
       "reason": "Validates skill structure during catalog generation",
       "type": "validates",
       "strength": 0.8,
-      "target": ".github/skills/brain-qa/SKILL.md"
+      "target": ".github/skills/brain-qa/SKILL.md",
+      "when": "Validates skill structure during catalog generation",
+      "yields": "brain QA quality checks and validation"
     },
     {
       "reason": "Tracks learning progress for users",
       "type": "enables",
       "strength": 0.6,
-      "target": ".github/skills/learning-psychology/SKILL.md"
+      "target": ".github/skills/learning-psychology/SKILL.md",
+      "when": "Tracks learning progress for users",
+      "yields": "learning psychology capabilities and setup"
     },
     {
       "reason": "Documents project structure and capabilities",
       "type": "documents",
       "strength": 0.5,
-      "target": ".github/skills/project-scaffolding/SKILL.md"
+      "target": ".github/skills/project-scaffolding/SKILL.md",
+      "when": "Documents project structure and capabilities",
+      "yields": "project scaffolding documentation"
     }
   ],
   "triggers": [
@@ -36,5 +44,14 @@
     "generate catalog",
     "/skills"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "show skills",
+    "skill catalog",
+    "skill network",
+    "learning progress",
+    "what skills",
+    "generate catalog",
+    "/skills"
+  ]
 }

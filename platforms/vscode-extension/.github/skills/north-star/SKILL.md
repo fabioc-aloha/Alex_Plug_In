@@ -49,7 +49,7 @@ Available personas: developer, academic, researcher, technical-writer, architect
 ```markdown
 Persona: Developer
 North Star: Create the most advanced and trusted AI partner for any job
-Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
+Guidelines: Read the North Star document — defines what "most advanced and trusted AI partner" means in practice
 ```
 
 ---
@@ -306,8 +306,6 @@ Where's the ambition? What makes this project worth doing? Reach further.
 ## Resources
 
 - [NASA/JPL Power of 10 Rules](https://en.wikipedia.org/wiki/The_Power_of_10:_Rules_for_Developing_Safety-Critical_Code)
-- [Alex's North Star document](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/NORTH-STAR.md) — Alex's North Star in practice
-- [NASA Code Standards Analysis](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/research/NASA-CODE-STANDARDS-ANALYSIS.md) — How Alex implements NASA standards
 
 ---
 

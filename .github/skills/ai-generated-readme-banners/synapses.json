@@ -95,28 +95,6 @@
     "ai banner",
     "generate header"
   ],
-  "when": {
-    "userIntent": [
-      "generate README banner",
-      "create project banner",
-      "visual branding for GitHub",
-      "replace ASCII art",
-      "professional README header",
-      "add typography to banner"
-    ],
-    "projectContext": [
-      "GitHub repository",
-      "project documentation",
-      "marketing materials",
-      "landing page",
-      "visual identity needs"
-    ],
-    "filePatterns": [
-      "README.md",
-      "**/generate-banner*.js",
-      "**/assets/banner*"
-    ]
-  },
   "yields": {
     "artifacts": [
       "photorealistic 3:1 banner images (1536x512)",
@@ -143,5 +121,44 @@
       "add rate limiting (2s delay) for batch generation",
       "save generation report with costs and URLs"
     ]
-  }
+  },
+  "activationContexts": [
+    "readme banner",
+    "github banner",
+    "project branding",
+    "ideogram",
+    "ideogram v2",
+    "ultra-wide",
+    "cinematic banner",
+    "typography banner",
+    "photorealistic banner",
+    "visual branding",
+    "banner generation",
+    "replicate api",
+    "replicate",
+    "recraft",
+    "recraft svg",
+    "svg banner",
+    "vector banner",
+    "3:1 aspect ratio",
+    "layout variations",
+    "audience targeting",
+    "professional banner",
+    "rocket banner",
+    "brand colors",
+    "generate banner",
+    "create banner",
+    "make banner",
+    "header image",
+    "hero image",
+    "cover image",
+    "social banner",
+    "twitter banner",
+    "linkedin banner",
+    "og image",
+    "open graph",
+    "flux banner",
+    "ai banner",
+    "generate header"
+  ]
 }

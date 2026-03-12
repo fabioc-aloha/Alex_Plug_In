@@ -6,31 +6,41 @@
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "extends",
       "strength": 0.9,
-      "reason": "Muscle recognition is learning output - identifying what to automate"
+      "reason": "Muscle recognition is learning output - identifying what to automate",
+      "when": "Muscle recognition is learning output - identifying what to automate",
+      "yields": "bootstrap learning extended capabilities"
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
       "type": "applies",
       "strength": 0.75,
-      "reason": "Research patterns before building muscles"
+      "reason": "Research patterns before building muscles",
+      "when": "Research patterns before building muscles",
+      "yields": "research first development patterns and guidance"
     },
     {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "enables",
       "strength": 0.7,
-      "reason": "Muscles improve architecture maintainability"
+      "reason": "Muscles improve architecture maintainability",
+      "when": "Muscles improve architecture maintainability",
+      "yields": "brain QA capabilities and setup"
     },
     {
       "target": ".github/instructions/heir-project-improvement.instructions.md",
       "type": "informs",
       "strength": 0.8,
-      "reason": "Muscles are part of project improvement trifectas"
+      "reason": "Muscles are part of project improvement trifectas",
+      "when": "Muscles are part of project improvement trifectas",
+      "yields": "heir project improvement contextual assessment"
     },
     {
       "target": ".github/instructions/deep-thinking.instructions.md",
       "type": "uses",
       "strength": 0.6,
-      "reason": "Complex automation decisions benefit from deep analysis"
+      "reason": "Complex automation decisions benefit from deep analysis",
+      "when": "Complex automation decisions benefit from deep analysis",
+      "yields": "deep thinking rules and guidelines"
     }
   ],
   "triggers": [
@@ -44,5 +54,16 @@
     "error prone",
     "every time"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "repetitive task",
+    "automate this",
+    "script this",
+    "we did this before",
+    "muscle",
+    "heavy lifting",
+    "takes forever",
+    "error prone",
+    "every time"
+  ]
 }

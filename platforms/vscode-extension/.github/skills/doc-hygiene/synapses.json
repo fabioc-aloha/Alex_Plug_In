@@ -12,12 +12,6 @@
       "reason": "Doc hygiene and QA are complementary — hygiene prevents, QA detects"
     },
     {
-      "target": ".github/instructions/roadmap-maintenance.instructions.md",
-      "type": "related",
-      "strength": 0.75,
-      "reason": "Roadmap hygiene follows doc-hygiene anti-drift rules"
-    },
-    {
       "target": ".github/instructions/semantic-audit.instructions.md",
       "type": "supports",
       "strength": 0.8,

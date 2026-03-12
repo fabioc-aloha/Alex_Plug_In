@@ -37,7 +37,7 @@ ERR Unable to write to User Settings because <key> is not a registered configura
 
 **Run the validation script**:
 ```powershell
-cd platforms/vscode-extension
+# Navigate to extension directory if in multi-platform workspace
 .\scripts\validate-manifest.ps1
 ```
 
@@ -243,7 +243,7 @@ Add to build pipeline:
 ```yaml
 - name: Validate Extension Manifest
   run: |
-    cd platforms/vscode-extension
+    # Navigate to extension directory if in multi-platform workspace
     pwsh -File scripts/validate-manifest.ps1
   shell: pwsh
 ```

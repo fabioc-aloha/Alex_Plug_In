@@ -6,25 +6,33 @@
       "target": ".github/skills/meditation/SKILL.md",
       "type": "follows",
       "strength": 0.7,
-      "reason": "Synthesis often happens during meditation"
+      "reason": "Synthesis often happens during meditation",
+      "when": "Synthesis often happens during meditation",
+      "yields": "meditation prerequisite steps"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
       "type": "applies",
       "strength": 0.8,
-      "reason": "Synthesis is elaborative encoding"
+      "reason": "Synthesis is elaborative encoding",
+      "when": "Synthesis is elaborative encoding",
+      "yields": "learning psychology patterns and guidance"
     },
     {
       "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "Goes beyond learning to integration"
+      "reason": "Goes beyond learning to integration",
+      "when": "Goes beyond learning to integration",
+      "yields": "bootstrap learning extended capabilities"
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
       "type": "integrates",
       "strength": 0.85,
-      "reason": "Research generates pre-project knowledge that synthesis organizes"
+      "reason": "Research generates pre-project knowledge that synthesis organizes",
+      "when": "Research generates pre-project knowledge that synthesis organizes",
+      "yields": "research first development integration patterns"
     }
   ],
   "triggers": [
@@ -68,5 +76,38 @@
     "encode insight",
     "formalize learning"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "promote knowledge",
+    "save insight",
+    "cross-project",
+    "pattern",
+    "we learned",
+    "reusable",
+    "knowledge synthesis",
+    "synthesize",
+    "abstract pattern",
+    "extract pattern",
+    "generalize learning",
+    "this could be reused",
+    "other projects could use",
+    "save to global",
+    "promote to global",
+    "global pattern",
+    "knowledge abstraction",
+    "pattern extraction",
+    "insight capture",
+    "cross-cutting concern",
+    "universal pattern",
+    "shareable knowledge",
+    "distill learning",
+    "crystallize knowledge",
+    "pattern recognition",
+    "meta-pattern",
+    "higher-order pattern",
+    "transferable knowledge",
+    "knowledge encoding",
+    "encode insight",
+    "formalize learning"
+  ]
 }

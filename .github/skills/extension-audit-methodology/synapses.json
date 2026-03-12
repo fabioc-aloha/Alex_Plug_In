@@ -9,37 +9,49 @@
       "target": ".github/skills/code-review/SKILL.md",
       "type": "complements",
       "strength": 0.85,
-      "note": "Standard code review + specialized audit = comprehensive quality"
+      "note": "Standard code review + specialized audit = comprehensive quality",
+      "when": "Combining extension audit methodology with code review",
+      "yields": "code review complementary techniques"
     },
     {
       "target": ".github/skills/performance-profiling/SKILL.md",
       "type": "requires",
       "strength": 0.9,
-      "note": "Audit identifies performance candidates, profiling investigates deeply"
+      "note": "Audit identifies performance candidates, profiling investigates deeply",
+      "when": "extension audit methodology depends on performance profiling",
+      "yields": "performance profiling required patterns and guidance"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "supports",
       "strength": 0.95,
-      "note": "Extension-specific audit methodology"
+      "note": "Extension-specific audit methodology",
+      "when": "extension audit methodology needs VS Code extension patterns context",
+      "yields": "VS Code extension patterns supporting context"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "type": "supports",
       "strength": 0.8,
-      "note": "Audit findings drive refactoring priorities"
+      "note": "Audit findings drive refactoring priorities",
+      "when": "extension audit methodology needs refactoring patterns context",
+      "yields": "refactoring patterns supporting context"
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
       "type": "supports",
       "strength": 0.9,
-      "note": "Pre-release audit is part of release workflow"
+      "note": "Pre-release audit is part of release workflow",
+      "when": "extension audit methodology needs release management context",
+      "yields": "release management supporting context"
     },
     {
       "target": ".github/instructions/technical-debt-tracking.instructions.md",
       "type": "supports",
       "strength": 0.85,
-      "note": "Audit findings feed into debt backlog"
+      "note": "Audit findings feed into debt backlog",
+      "when": "extension audit methodology needs technical debt tracking context",
+      "yields": "technical debt tracking supporting context"
     }
   ],
   "activationBoost": [
@@ -53,28 +65,6 @@
     "dependency hygiene",
     "code quality grade"
   ],
-  "when": {
-    "userIntent": [
-      "audit extension quality",
-      "find dead code",
-      "clean up console statements",
-      "prepare for release",
-      "identify performance issues",
-      "verify commands working"
-    ],
-    "projectContext": [
-      "VS Code extension project",
-      "before major release",
-      "after refactoring",
-      "performance concerns"
-    ],
-    "filePatterns": [
-      "package.json",
-      "src/extension.ts",
-      "**/dashboard.ts",
-      "**/views/**"
-    ]
-  },
   "yields": {
     "artifacts": [
       "audit-report.md with executive summary and recommendations",
@@ -96,5 +86,16 @@
       "smoke test all command palette items",
       "update CHANGELOG with quality improvements"
     ]
-  }
+  },
+  "activationContexts": [
+    "audit",
+    "extension quality",
+    "pre-release",
+    "dead code",
+    "console cleanup",
+    "blocking I/O",
+    "menu validation",
+    "dependency hygiene",
+    "code quality grade"
+  ]
 }

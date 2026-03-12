@@ -6,34 +6,46 @@
       "reason": "Knowledge acquisition methodology for literature reviews",
       "type": "uses",
       "strength": 0.85,
-      "target": ".github/skills/bootstrap-learning/SKILL.md"
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "when": "Knowledge acquisition methodology for literature reviews",
+      "yields": "bootstrap learning patterns and guidance"
     },
     {
       "reason": "Research problem analysis and gap identification",
       "type": "applies",
       "strength": 0.65,
-      "target": ".github/skills/root-cause-analysis/SKILL.md"
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "when": "Research problem analysis and gap identification",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "reason": "Information chunking in academic writing",
       "type": "considers",
       "strength": 0.4,
-      "target": ".github/skills/cognitive-load/SKILL.md"
+      "target": ".github/skills/cognitive-load/SKILL.md",
+      "when": "Information chunking in academic writing",
+      "yields": "cognitive load considerations"
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
       "type": "extended-by",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "creative writing extends academic research",
+      "yields": "creative writing extension patterns"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
       "type": "complements",
-      "strength": 0.7
+      "strength": 0.7,
+      "when": "Combining academic research with localization",
+      "yields": "localization complementary techniques"
     },
     {
       "target": ".github/skills/practitioner-research/SKILL.md",
       "type": "extended-by",
-      "strength": 0.9
+      "strength": 0.9,
+      "when": "practitioner research extends academic research",
+      "yields": "practitioner research extension patterns"
     }
   ],
   "triggers": [
@@ -47,5 +59,16 @@
     "dissertation",
     "scholarly"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "academic",
+    "research",
+    "literature review",
+    "citation",
+    "peer review",
+    "methodology",
+    "thesis",
+    "dissertation",
+    "scholarly"
+  ]
 }

@@ -47,5 +47,11 @@
       "when": "gathering accomplishment data",
       "yields": "commit history and PR summaries"
     }
+  ],
+  "activationContexts": [
+    "status-reporting",
+    "status reporting",
+    "status",
+    "reporting"
   ]
 }

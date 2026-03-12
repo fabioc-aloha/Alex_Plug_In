@@ -5,17 +5,23 @@
     {
       "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "enhances",
-      "strength": 0.95
+      "strength": 0.95,
+      "when": "learning psychology enhances bootstrap learning",
+      "yields": "bootstrap learning enhanced capabilities"
     },
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "informs",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "learning psychology provides context to appropriate reliance",
+      "yields": "appropriate reliance contextual assessment"
     },
     {
       "target": ".github/instructions/alex-identity-integration.instructions.md",
       "type": "embodies",
-      "strength": 0.8
+      "strength": 0.8,
+      "when": "learning psychology embodies alex identity integration principles",
+      "yields": "alex identity integration foundational principles"
     }
   ],
   "activationBoost": [
@@ -35,5 +41,20 @@
     "scaffolding",
     "zone of proximal"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "teach",
+    "learn",
+    "explain",
+    "tutor",
+    "help understand",
+    "walk me through",
+    "learning",
+    "memory",
+    "cognition",
+    "spaced repetition",
+    "retrieval practice",
+    "scaffolding",
+    "zone of proximal"
+  ]
 }

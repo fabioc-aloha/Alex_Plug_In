@@ -1,3 +1,7 @@
+---
+description: "Microsoft Graph API integration — endpoint calls, MSAL/OAuth authentication, and M365 service patterns"
+---
+
 # Microsoft Graph API Instructions
 
 **Auto-loaded when**: Calling Microsoft Graph API endpoints, handling Graph authentication (MSAL/OAuth), or building M365 service integrations

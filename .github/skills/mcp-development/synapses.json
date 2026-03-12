@@ -5,45 +5,59 @@
   "connections": [
     {
       "target": ".github/skills/ai-agent-design/SKILL.md",
-      "relationship": "enables",
       "strength": 0.9,
-      "context": "MCP provides standardized tool interface for AI agents"
+      "type": "enables",
+      "reason": "MCP provides standardized tool interface for AI agents",
+      "when": "MCP provides standardized tool interface for AI agents",
+      "yields": "AI agent design capabilities and setup"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "relationship": "requires",
       "strength": 0.9,
-      "context": "MCP tools are essentially APIs for AI consumption"
+      "type": "requires",
+      "reason": "MCP tools are essentially APIs for AI consumption",
+      "when": "MCP tools are essentially APIs for AI consumption",
+      "yields": "API design required patterns and guidance"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "relationship": "complements",
       "strength": 0.9,
-      "context": "VS Code integrates MCP servers for Copilot"
+      "type": "complements",
+      "reason": "VS Code integrates MCP servers for Copilot",
+      "when": "VS Code integrates MCP servers for Copilot",
+      "yields": "VS Code extension patterns complementary techniques"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
-      "relationship": "requires",
       "strength": 0.7,
-      "context": "MCP servers need security hardening"
+      "type": "requires",
+      "reason": "MCP servers need security hardening",
+      "when": "MCP servers need security hardening",
+      "yields": "security review required patterns and guidance"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "relationship": "complements",
       "strength": 0.7,
-      "context": "MCP servers need unit and integration testing"
+      "type": "complements",
+      "reason": "MCP servers need unit and integration testing",
+      "when": "MCP servers need unit and integration testing",
+      "yields": "testing strategies complementary techniques"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
-      "relationship": "complements",
       "strength": 0.7,
-      "context": "MCP tools need graceful error handling"
+      "type": "complements",
+      "reason": "MCP tools need graceful error handling",
+      "when": "MCP tools need graceful error handling",
+      "yields": "error recovery patterns complementary techniques"
     },
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
-      "relationship": "informs",
       "strength": 0.3,
-      "context": "Tool descriptions are prompts for AI understanding"
+      "type": "informs",
+      "reason": "Tool descriptions are prompts for AI understanding",
+      "when": "Tool descriptions are prompts for AI understanding",
+      "yields": "prompt engineering contextual assessment"
     },
     {
       "target": ".github/skills/foundry-agent-platform/SKILL.md",
@@ -116,5 +130,49 @@
       "api-design"
     ]
   },
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "MCP",
+    "Model Context Protocol",
+    "MCP server",
+    "MCP client",
+    "tool server",
+    "resource server",
+    "Claude Desktop",
+    "mcp.json",
+    "@modelcontextprotocol",
+    "stdio transport",
+    "create MCP",
+    "build MCP",
+    "implement MCP",
+    "develop MCP",
+    "MCP tool",
+    "MCP resource",
+    "MCP prompt",
+    "MCP sampling",
+    "AI tool interface",
+    "tool protocol",
+    "agent tools",
+    "copilot tools",
+    "VS Code MCP",
+    "MCP integration",
+    "Azure MCP",
+    "MCP Azure",
+    "MCP best practices",
+    "MCP architecture",
+    "MCP patterns",
+    "MCP stdio",
+    "MCP HTTP",
+    "MCP SSE",
+    "server-sent events",
+    "tool exposure",
+    "expose tools",
+    "AI-callable tools",
+    "JSON-RPC",
+    "tool schema",
+    "tool definition",
+    "replicate mcp",
+    "replicate server",
+    "pre-built mcp"
+  ]
 }

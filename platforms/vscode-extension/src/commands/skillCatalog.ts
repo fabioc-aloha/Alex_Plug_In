@@ -140,8 +140,8 @@ async function scanSkills(skillsPath: string): Promise<SkillInfo[]> {
                 connectionCount: connections.length,
                 connections
             });
-        } catch {
-            // Skip invalid synapses files
+        } catch (err) {
+            console.warn('[Alex Catalog] Skipping invalid synapses:', folder, err instanceof Error ? err.message : String(err));
         }
     }
 

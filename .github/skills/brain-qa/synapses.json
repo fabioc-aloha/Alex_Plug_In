@@ -8,79 +8,105 @@
       "target": ".github/copilot-instructions.md",
       "type": "validates",
       "strength": 0.95,
-      "note": "Phase 9 detects mermaid diagrams (LLM-unfriendly), Phase 10 detects boilerplate"
+      "note": "Phase 9 detects mermaid diagrams (LLM-unfriendly), Phase 10 detects boilerplate",
+      "when": "Verifying copilot-instructions quality or compliance",
+      "yields": "copilot-instructions quality checks and validation"
     },
     {
       "target": ".github/skills/memory-activation/SKILL.md",
       "type": "validates",
       "strength": 0.85,
-      "note": "Checks trigger index coverage and semantic coherence"
+      "note": "Checks trigger index coverage and semantic coherence",
+      "when": "Verifying memory activation quality or compliance",
+      "yields": "memory activation quality checks and validation"
     },
     {
       "target": ".github/skills/architecture-audit/SKILL.md",
       "type": "complements",
       "strength": 0.8,
-      "note": "Brain QA for cognitive architecture, architecture-audit for code/project"
+      "note": "Brain QA for cognitive architecture, architecture-audit for code/project",
+      "when": "Combining brain QA with architecture audit",
+      "yields": "architecture audit complementary techniques"
     },
     {
       "target": ".github/instructions/dream-state-automation.instructions.md",
       "type": "extends",
       "strength": 0.7,
-      "note": "Can be triggered as deep dream phase"
+      "note": "Can be triggered as deep dream phase",
+      "when": "Extending dream state automation with brain QA",
+      "yields": "dream state automation extended capabilities"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
       "type": "related",
       "strength": 0.65,
-      "note": "Meditative practice for brain maintenance"
+      "note": "Meditative practice for brain maintenance",
+      "when": "brain QA relates to meditation",
+      "yields": "meditation related patterns and guidance"
     },
     {
       "target": ".github/skills/release-preflight/SKILL.md",
       "type": "informs",
       "strength": 0.9,
-      "note": "Brain QA is step 0 of release preflight checklist"
+      "note": "Brain QA is step 0 of release preflight checklist",
+      "when": "brain QA provides context to release preflight",
+      "yields": "release preflight contextual assessment"
     },
     {
       "target": ".github/instructions/heir-skill-promotion.instructions.md",
       "type": "validates",
       "strength": 0.8,
-      "note": "Phase 5 validates synapse normalization during heir upgrades"
+      "note": "Phase 5 validates synapse normalization during heir upgrades",
+      "when": "Verifying heir skill promotion quality or compliance",
+      "yields": "heir skill promotion quality checks and validation"
     },
     {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
       "type": "enables",
       "strength": 0.75,
-      "note": "Brain QA validates skill index and synapses that SSO depends on for proactive planning"
+      "note": "Brain QA validates skill index and synapses that SSO depends on for proactive planning",
+      "when": "brain QA requires skill selection optimization capabilities",
+      "yields": "skill selection optimization capabilities and setup"
     },
     {
       "target": ".github/instructions/alex-core.instructions.md",
       "type": "implements",
       "strength": 0.9,
-      "note": "Phase 20 validates LLM-First Content Principles defined in core architecture"
+      "note": "Phase 20 validates LLM-First Content Principles defined in core architecture",
+      "when": "Applying alex core procedures",
+      "yields": "alex core implementation steps"
     },
     {
       "target": ".github/skills/muscle-memory-recognition/SKILL.md",
       "type": "validates",
       "strength": 0.6,
-      "note": "Future Phase 23 validates motor cortex mapping matches muscle inventory"
+      "note": "Future Phase 23 validates motor cortex mapping matches muscle inventory",
+      "when": "Verifying muscle memory recognition quality or compliance",
+      "yields": "muscle memory recognition quality checks and validation"
     },
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",
       "type": "coordinates",
       "strength": 0.85,
-      "note": "brain-qa-heir.ps1 is synced via heir-sync rename pattern; Phase 30 validates muscles per context"
+      "note": "brain-qa-heir.ps1 is synced via heir-sync rename pattern; Phase 30 validates muscles per context",
+      "when": "Coordinating brain QA with heir sync management",
+      "yields": "heir sync management coordination protocols"
     },
     {
       "target": ".github/instructions/semantic-audit.instructions.md",
       "type": "implements",
       "strength": 0.95,
-      "note": "Trifecta: skill teaches what to check, instruction defines the 4-dimension procedure"
+      "note": "Trifecta: skill teaches what to check, instruction defines the 4-dimension procedure",
+      "when": "Applying semantic audit procedures",
+      "yields": "semantic audit implementation steps"
     },
     {
       "target": ".github/prompts/brainqa.prompt.md",
       "type": "implements",
       "strength": 0.95,
-      "note": "Trifecta: prompt provides interactive /brainqa workflow combining script + semantic review"
+      "note": "Trifecta: prompt provides interactive /brainqa workflow combining script + semantic review",
+      "when": "Applying brainqa procedures",
+      "yields": "brainqa implementation steps"
     }
   ],
   "activationBoost": [
@@ -103,5 +129,25 @@
     "iterative validation",
     "schema compliance"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "brain qa",
+    "brain audit",
+    "validate brain",
+    "synapse audit",
+    "deep synapse",
+    "trigger audit",
+    "skill index",
+    "master heir sync",
+    "heir sync",
+    "cognitive qa",
+    "architecture validation",
+    "semantic audit",
+    "logic check",
+    "meaning consistency",
+    "code docs alignment",
+    "synapse repair",
+    "iterative validation",
+    "schema compliance"
+  ]
 }

@@ -9,43 +9,57 @@
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "requires",
       "strength": 0.9,
-      "note": "Must calibrate trust in delegated agent outputs"
+      "note": "Must calibrate trust in delegated agent outputs",
+      "when": "multi agent orchestration depends on appropriate reliance",
+      "yields": "appropriate reliance required patterns and guidance"
     },
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
       "type": "requires",
       "strength": 0.85,
-      "note": "Effective delegation requires well-crafted prompts"
+      "note": "Effective delegation requires well-crafted prompts",
+      "when": "multi agent orchestration depends on prompt engineering",
+      "yields": "prompt engineering required patterns and guidance"
     },
     {
       "target": ".github/skills/memory-activation/SKILL.md",
       "type": "supports",
       "strength": 0.8,
-      "note": "SSO is a form of self-orchestration"
+      "note": "SSO is a form of self-orchestration",
+      "when": "multi agent orchestration needs memory activation context",
+      "yields": "memory activation supporting context"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "supports",
       "strength": 0.75,
-      "note": "Debugging multi-agent failures requires systematic analysis"
+      "note": "Debugging multi-agent failures requires systematic analysis",
+      "when": "multi agent orchestration needs root cause analysis context",
+      "yields": "root cause analysis supporting context"
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
       "type": "informs",
       "strength": 0.85,
-      "note": "Different agents may need different model tiers"
+      "note": "Different agents may need different model tiers",
+      "when": "multi agent orchestration provides context to LLM model selection",
+      "yields": "LLM model selection contextual assessment"
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
       "type": "analogousDomain",
       "strength": 0.7,
-      "note": "Task decomposition parallels project planning"
+      "note": "Task decomposition parallels project planning",
+      "when": "multi agent orchestration applies analogous patterns from project management",
+      "yields": "project management analogous domain patterns"
     },
     {
       "target": ".github/skills/foundry-agent-platform/SKILL.md",
       "type": "implements",
       "strength": 0.9,
-      "note": "Foundry provides cloud-native multi-agent orchestration with A2A and Agent Service"
+      "note": "Foundry provides cloud-native multi-agent orchestration with A2A and Agent Service",
+      "when": "Applying foundry agent platform procedures",
+      "yields": "foundry agent platform implementation steps"
     }
   ],
   "activationBoost": [
@@ -72,5 +86,21 @@
   "inhibitors": [
     "simple edit",
     "single file change"
+  ],
+  "activationContexts": [
+    "agent",
+    "multi-agent",
+    "orchestration",
+    "subagent",
+    "runSubagent",
+    "decompose",
+    "delegate",
+    "parallel",
+    "workflow",
+    "coordinate",
+    "agent coordination",
+    "task decomposition",
+    "parallel execution",
+    "agent delegation"
   ]
 }

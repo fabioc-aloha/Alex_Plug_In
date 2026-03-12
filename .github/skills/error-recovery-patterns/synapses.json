@@ -6,19 +6,25 @@
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "follows",
       "strength": 0.7,
-      "reason": "Recovery happens after finding the error"
+      "reason": "Recovery happens after finding the error",
+      "when": "Recovery happens after finding the error",
+      "yields": "debugging patterns prerequisite steps"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "reason": "Recovery is part of incident handling"
+      "reason": "Recovery is part of incident handling",
+      "when": "Recovery is part of incident handling",
+      "yields": "incident response supporting context"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "enables",
       "strength": 0.9,
-      "reason": "Recovery paths need testing"
+      "reason": "Recovery paths need testing",
+      "when": "Recovery paths need testing",
+      "yields": "testing strategies capabilities and setup"
     }
   ],
   "triggers": [
@@ -29,5 +35,13 @@
     "graceful degradation",
     "error handling"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "retry",
+    "fallback",
+    "rollback",
+    "circuit breaker",
+    "graceful degradation",
+    "error handling"
+  ]
 }

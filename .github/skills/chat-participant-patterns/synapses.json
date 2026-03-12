@@ -6,19 +6,25 @@
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "specializes",
       "strength": 0.75,
-      "reason": "Chat is a subset of extension APIs"
+      "reason": "Chat is a subset of extension APIs",
+      "when": "Chat is a subset of extension APIs",
+      "yields": "VS Code extension patterns specialized patterns"
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Chat uses language models"
+      "reason": "Chat uses language models",
+      "when": "Chat uses language models",
+      "yields": "LLM model selection patterns and guidance"
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
       "type": "applies",
       "strength": 0.8,
-      "reason": "Chat responses should manage load"
+      "reason": "Chat responses should manage load",
+      "when": "Chat responses should manage load",
+      "yields": "cognitive load patterns and guidance"
     }
   ],
   "triggers": [
@@ -62,5 +68,39 @@
     "GitHub Copilot extension",
     "chat extension"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "chat participant",
+    "copilot extension",
+    "language model",
+    "chat API",
+    "streaming response",
+    "@participant",
+    "chat handler",
+    "chat request",
+    "chat response",
+    "language model API",
+    "sendRequest",
+    "lm API",
+    "vscode.chat",
+    "chat.registerChatParticipant",
+    "ChatParticipant",
+    "ChatRequestHandler",
+    "ChatResponseStream",
+    "copilot chat",
+    "build chat participant",
+    "create participant",
+    "tool calling",
+    "chat tools",
+    "participant tools",
+    "stream response",
+    "streaming chat",
+    "async response",
+    "chat context",
+    "chat history",
+    "conversation context",
+    "copilot API",
+    "GitHub Copilot extension",
+    "chat extension"
+  ]
 }

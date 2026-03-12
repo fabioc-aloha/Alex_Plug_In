@@ -6,13 +6,17 @@
       "target": ".github/skills/heir-sync-management/SKILL.md",
       "type": "implements",
       "strength": 0.85,
-      "context": "M365 heir debugging"
+      "reason": "M365 heir debugging",
+      "when": "M365 heir debugging",
+      "yields": "heir sync management implementation steps"
     },
     {
       "target": ".github/skills/teams-app-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.85,
-      "context": "Shared MCP tools and @m365agents participant"
+      "reason": "Shared MCP tools and @m365agents participant",
+      "when": "Shared MCP tools and @m365agents participant",
+      "yields": "teams app patterns extended capabilities"
     }
   ],
   "activationPatterns": [
@@ -69,5 +73,38 @@
     "Teams development",
     "agent development"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "M365",
+    "Microsoft 365",
+    "Teams",
+    "Copilot agent",
+    "declarative agent",
+    "@m365agents",
+    "mcp_m365agentstoo",
+    "M365 Agents Toolkit",
+    "SharePoint",
+    "Graph API",
+    "adaptive card",
+    "agent debugging",
+    "agent not working",
+    "agent not responding",
+    "schema version",
+    "icon not transparent",
+    "validation failed",
+    "conversation starters",
+    "agent manifest",
+    "M365 debugging",
+    "Teams debugging",
+    "Copilot debugging",
+    "declarativeAgent.json",
+    "appPackage",
+    "manifest.json",
+    "agent error",
+    "agent validation",
+    "agent schema",
+    "M365 development",
+    "Teams development",
+    "agent development"
+  ]
 }

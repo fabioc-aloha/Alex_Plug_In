@@ -6,37 +6,49 @@
       "reason": "Requirements feed project scope and planning",
       "type": "informs",
       "strength": 0.85,
-      "target": ".github/skills/project-management/SKILL.md"
+      "target": ".github/skills/project-management/SKILL.md",
+      "when": "Requirements feed project scope and planning",
+      "yields": "project management contextual assessment"
     },
     {
       "reason": "Change impact on requirements and processes",
       "type": "receives",
       "strength": 0.85,
-      "target": ".github/skills/change-management/SKILL.md"
+      "target": ".github/skills/change-management/SKILL.md",
+      "when": "Change impact on requirements and processes",
+      "yields": "change management input data"
     },
     {
       "reason": "Problem analysis for requirements elicitation",
       "type": "uses",
       "strength": 0.65,
-      "target": ".github/skills/root-cause-analysis/SKILL.md"
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "when": "Problem analysis for requirements elicitation",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "reason": "Requirements enable test case design",
       "type": "enables",
       "strength": 0.65,
-      "target": ".github/skills/testing-strategies/SKILL.md"
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "when": "Requirements enable test case design",
+      "yields": "testing strategies capabilities and setup"
     },
     {
       "reason": "Requirements shape solution architecture",
       "type": "informs",
       "strength": 0.4,
-      "target": ".github/skills/architecture-refinement/SKILL.md"
+      "target": ".github/skills/architecture-refinement/SKILL.md",
+      "when": "Requirements shape solution architecture",
+      "yields": "architecture refinement contextual assessment"
     },
     {
       "reason": "Clear documentation and requirements writing",
       "type": "uses",
       "strength": 0.4,
-      "target": ".github/skills/academic-research/SKILL.md"
+      "target": ".github/skills/academic-research/SKILL.md",
+      "when": "Clear documentation and requirements writing",
+      "yields": "academic research patterns and guidance"
     }
   ],
   "triggers": [
@@ -49,5 +61,15 @@
     "gap analysis",
     "scope"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "requirements",
+    "stakeholder",
+    "user story",
+    "use case",
+    "acceptance criteria",
+    "process mapping",
+    "gap analysis",
+    "scope"
+  ]
 }

@@ -33,14 +33,6 @@
       "reason": "Test coverage is part of review"
     },
     {
-      "target": ".github/skills/release-process/SKILL.md",
-      "type": "validates",
-      "strength": 0.9,
-      "reason": "Automated tests provide quality gate for shipping",
-      "when": "Verifying release readiness (DoD criterion #4)",
-      "yields": "Test pass count as confidence metric"
-    },
-    {
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "validates",
       "strength": 0.8,

@@ -7,42 +7,61 @@
       "target": ".github/skills/localization/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "reason": "Cultural awareness directly informs localization strategies and vice versa"
+      "reason": "Cultural awareness directly informs localization strategies and vice versa",
+      "when": "Cultural awareness directly informs localization strategies and vice versa",
+      "yields": "localization complementary techniques"
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
       "type": "impacts",
       "strength": 0.85,
-      "reason": "Cross-cultural dynamics affect standup formats, escalation paths, and deadline management"
+      "reason": "Cross-cultural dynamics affect standup formats, escalation paths, and deadline management",
+      "when": "Cross-cultural dynamics affect standup formats, escalation paths, and deadline management",
+      "yields": "project management impact assessment"
     },
     {
       "target": ".github/skills/work-life-balance/SKILL.md",
       "type": "applies",
       "strength": 0.8,
-      "reason": "Time zone respect and preventing offshore burnout are cultural wellness issues"
+      "reason": "Time zone respect and preventing offshore burnout are cultural wellness issues",
+      "when": "Time zone respect and preventing offshore burnout are cultural wellness issues",
+      "yields": "work life balance patterns and guidance"
     },
     {
       "target": ".github/skills/socratic-questioning/SKILL.md",
       "type": "applies",
       "strength": 0.75,
-      "reason": "Open-ended questioning techniques are essential for high-context cultures"
+      "reason": "Open-ended questioning techniques are essential for high-context cultures",
+      "when": "Open-ended questioning techniques are essential for high-context cultures",
+      "yields": "socratic questioning patterns and guidance"
     },
     {
       "target": ".github/skills/post-mortem/SKILL.md",
       "type": "impacts",
       "strength": 0.7,
-      "reason": "Retrospective and blame-free post-mortem formats must adapt for face-saving cultures"
+      "reason": "Retrospective and blame-free post-mortem formats must adapt for face-saving cultures",
+      "when": "Retrospective and blame-free post-mortem formats must adapt for face-saving cultures",
+      "yields": "post mortem impact assessment"
     },
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "complements",
       "strength": 0.65,
-      "reason": "Trust calibration in AI extends to trust calibration across cultures"
+      "reason": "Trust calibration in AI extends to trust calibration across cultures",
+      "when": "Trust calibration in AI extends to trust calibration across cultures",
+      "yields": "appropriate reliance complementary techniques"
     }
   ],
   "metadata": {
     "lastUpdated": "2026-02-08",
     "synapseCount": 6,
     "avgStrength": 0.78
-  }
+  },
+  "activationContexts": [
+    "cross-cultural-collaboration",
+    "cross cultural collaboration",
+    "cross",
+    "cultural",
+    "collaboration"
+  ]
 }

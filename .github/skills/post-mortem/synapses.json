@@ -10,40 +10,63 @@
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "FollowsFrom",
       "strength": 0.9,
-      "description": "Post-mortem follows incident response"
+      "description": "Post-mortem follows incident response",
+      "when": "post mortem follows from incident response",
+      "yields": "incident response preceding context"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "Requires",
       "strength": 0.9,
-      "description": "Post-mortems require root cause analysis"
+      "description": "Post-mortems require root cause analysis",
+      "when": "post mortem depends on root cause analysis",
+      "yields": "root cause analysis required patterns and guidance"
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
       "type": "Relates",
       "strength": 0.7,
-      "description": "Action items become project work"
+      "description": "Action items become project work",
+      "when": "post mortem connects to project management",
+      "yields": "project management patterns and guidance"
     },
     {
       "target": ".github/skills/change-management/SKILL.md",
       "type": "Triggers",
       "strength": 0.7,
-      "description": "Post-mortems often trigger process changes"
+      "description": "Post-mortems often trigger process changes",
+      "when": "post mortem initiates change management",
+      "yields": "change management activation and procedures"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
       "type": "Implements",
       "strength": 0.7,
-      "description": "Blameless culture enables learning"
+      "description": "Blameless culture enables learning",
+      "when": "Applying learning psychology procedures",
+      "yields": "learning psychology implementation steps"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "Informs",
       "strength": 0.7,
-      "description": "Post-mortems inform better testing"
+      "description": "Post-mortems inform better testing",
+      "when": "post mortem provides context to testing strategies",
+      "yields": "testing strategies contextual assessment"
     }
   ],
   "activationTriggers": [
+    "post-mortem",
+    "postmortem",
+    "retrospective",
+    "incident review",
+    "what went wrong",
+    "lessons learned",
+    "blameless",
+    "after action",
+    "RCA meeting"
+  ],
+  "activationContexts": [
     "post-mortem",
     "postmortem",
     "retrospective",

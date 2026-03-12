@@ -97,5 +97,11 @@
     }
   ],
   "when": "User asks about brand colors, design tokens, CSS variables, typography choices, component patterns, visual identity, or WCAG compliance for any CorreaX product",
-  "yields": "Authoritative color values, typography specs, component CSS, VS Code token mappings, and accessibility compliance guidance"
+  "yields": "Authoritative color values, typography specs, component CSS, VS Code token mappings, and accessibility compliance guidance",
+  "activationContexts": [
+    "correax-brand",
+    "correax brand",
+    "correax",
+    "brand"
+  ]
 }

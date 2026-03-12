@@ -9,37 +9,49 @@
       "target": ".github/skills/performance-profiling/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "note": "Observability identifies issues, profiling digs deeper"
+      "note": "Observability identifies issues, profiling digs deeper",
+      "when": "Combining observability monitoring with performance profiling",
+      "yields": "performance profiling complementary techniques"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "supports",
       "strength": 0.95,
-      "note": "Observability data is critical during incident investigation"
+      "note": "Observability data is critical during incident investigation",
+      "when": "observability monitoring needs incident response context",
+      "yields": "incident response supporting context"
     },
     {
       "target": ".github/skills/infrastructure-as-code/SKILL.md",
       "type": "supports",
       "strength": 0.8,
-      "note": "Monitoring stack often deployed via IaC"
+      "note": "Monitoring stack often deployed via IaC",
+      "when": "observability monitoring needs infrastructure as code context",
+      "yields": "infrastructure as code supporting context"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "supports",
       "strength": 0.75,
-      "note": "Audit logging is part of observability"
+      "note": "Audit logging is part of observability",
+      "when": "observability monitoring needs security review context",
+      "yields": "security review supporting context"
     },
     {
       "target": ".github/skills/azure-architecture-patterns/SKILL.md",
       "type": "informs",
       "strength": 0.8,
-      "note": "Azure Monitor, App Insights integration"
+      "note": "Azure Monitor, App Insights integration",
+      "when": "observability monitoring provides context to azure architecture patterns",
+      "yields": "azure architecture patterns contextual assessment"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "complements",
       "strength": 0.85,
-      "note": "Distributed tracing enables production debugging"
+      "note": "Distributed tracing enables production debugging",
+      "when": "Combining observability monitoring with debugging patterns",
+      "yields": "debugging patterns complementary techniques"
     }
   ],
   "activationBoost": [
@@ -70,5 +82,23 @@
   "inhibitors": [
     "local development only",
     "prototype"
+  ],
+  "activationContexts": [
+    "observability",
+    "monitoring",
+    "logging",
+    "metrics",
+    "traces",
+    "telemetry",
+    "OpenTelemetry",
+    "Prometheus",
+    "Grafana",
+    "Application Insights",
+    "CloudWatch",
+    "alerting",
+    "dashboard",
+    "logging strategy",
+    "distributed tracing",
+    "production debugging"
   ]
 }

@@ -6,37 +6,49 @@
       "target": ".github/instructions/self-actualization.instructions.md",
       "type": "implements",
       "strength": 0.95,
-      "reason": "Trifecta sibling: procedural self-actualization protocol"
+      "reason": "Trifecta sibling: procedural self-actualization protocol",
+      "when": "Trifecta sibling: procedural self-actualization protocol",
+      "yields": "self actualization implementation steps"
     },
     {
       "target": ".github/prompts/selfactualize.prompt.md",
       "type": "activates",
       "strength": 0.95,
-      "reason": "Trifecta sibling: /selfactualize interactive workflow"
+      "reason": "Trifecta sibling: /selfactualize interactive workflow",
+      "when": "Trifecta sibling: /selfactualize interactive workflow",
+      "yields": "selfactualize interactive workflow"
     },
     {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "requires",
       "strength": 0.9,
-      "reason": "Health check first"
+      "reason": "Health check first",
+      "when": "Health check first",
+      "yields": "brain QA required patterns and guidance"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "Deeper than meditation"
+      "reason": "Deeper than meditation",
+      "when": "Deeper than meditation",
+      "yields": "meditation extended capabilities"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
       "type": "triggers",
       "strength": 0.65,
-      "reason": "Actualization leads to refinement"
+      "reason": "Actualization leads to refinement",
+      "when": "Actualization leads to refinement",
+      "yields": "architecture refinement activation and procedures"
     },
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
       "type": "produces",
       "strength": 0.75,
-      "reason": "Deep insights synthesized"
+      "reason": "Deep insights synthesized",
+      "when": "Deep insights synthesized",
+      "yields": "knowledge synthesis output artifacts"
     }
   ],
   "triggers": [
@@ -81,5 +93,41 @@
     "learning progress",
     "capability growth"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "self-actualize",
+    "self actualize",
+    "self-actualization",
+    "deep meditation",
+    "comprehensive assessment",
+    "architecture review",
+    "full system scan",
+    "architecture health",
+    "deep assessment",
+    "cognitive health",
+    "brain health",
+    "synapse health",
+    "memory balance",
+    "knowledge gaps",
+    "skill coverage",
+    "growth assessment",
+    "maturity check",
+    "capability audit",
+    "how healthy is my architecture",
+    "architecture check",
+    "comprehensive review",
+    "deep dive review",
+    "full analysis",
+    "system health",
+    "cognitive audit",
+    "brain audit",
+    "skill inventory",
+    "knowledge inventory",
+    "trifecta coverage",
+    "architecture optimization",
+    "performance assessment",
+    "growth metrics",
+    "learning progress",
+    "capability growth"
+  ]
 }

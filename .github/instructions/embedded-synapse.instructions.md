@@ -1,6 +1,6 @@
 ---
-applyTo: "**/*synapse*,**/*connection*,**/*pattern*,**/*network*"
-description: "Embedded connection discovery and relationship mapping protocols"
+applyTo: "**/*synapse*"
+description: "Embedded synapse connection discovery and relationship mapping protocols"
 ---
 
 # Embedded Synapse Network Excellence

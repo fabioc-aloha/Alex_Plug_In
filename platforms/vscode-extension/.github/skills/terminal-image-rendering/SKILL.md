@@ -50,7 +50,7 @@ Render diagram visualizations inline during development:
 
 ```bash
 node scripts/generate-diagram-visualizations.js
-imgcat alex_docs/diagram-visualization/cognitive-architecture.png
+imgcat diagram-visualization/cognitive-architecture.png
 ```
 
 ### Visual QA for Brand Assets

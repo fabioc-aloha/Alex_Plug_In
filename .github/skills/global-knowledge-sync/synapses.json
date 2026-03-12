@@ -9,31 +9,41 @@
       "target": ".github/skills/global-knowledge/SKILL.md",
       "type": "extends",
       "strength": 0.95,
-      "reason": "Sync operations extend core GK search capability"
+      "reason": "Sync operations extend core GK search capability",
+      "when": "Sync operations extend core GK search capability",
+      "yields": "global knowledge extended capabilities"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
       "type": "integrates",
       "strength": 0.85,
-      "reason": "Dream protocol includes GK sync step"
+      "reason": "Dream protocol includes GK sync step",
+      "when": "Dream protocol includes GK sync step",
+      "yields": "meditation integration patterns"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "accelerates",
       "strength": 0.7,
-      "reason": "GK provides prior knowledge for new learning"
+      "reason": "GK provides prior knowledge for new learning",
+      "when": "GK provides prior knowledge for new learning",
+      "yields": "bootstrap learning acceleration techniques"
     },
     {
       "target": ".github/instructions/dream-state-automation.instructions.md",
       "type": "modifies",
       "strength": 0.75,
-      "reason": "Adds GK sync to dream checklist"
+      "reason": "Adds GK sync to dream checklist",
+      "when": "Adds GK sync to dream checklist",
+      "yields": "dream state automation modification interface"
     },
     {
       "target": ".github/skills/skill-development/SKILL.md",
       "type": "enables",
       "strength": 0.85,
-      "reason": "Skill pull-sync enables heir wishlist fulfillment"
+      "reason": "Skill pull-sync enables heir wishlist fulfillment",
+      "when": "Skill pull-sync enables heir wishlist fulfillment",
+      "yields": "skill development capabilities and setup"
     }
   ],
   "when": [
@@ -42,9 +52,11 @@
     "Dream protocol reaches GK sync step",
     "User wants to promote a local skill to GK"
   ],
-  "yields": [
-    "Insights saved to global knowledge",
-    "Cross-project pattern matches",
-    "Skill sync status reports"
+  "activationContexts": [
+    "global-knowledge-sync",
+    "global knowledge sync",
+    "global",
+    "knowledge",
+    "sync"
   ]
 }

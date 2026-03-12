@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "6.5.3",
+  "version": "6.5.4",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -944,9 +944,6 @@
         "path": "./.github/skills/executive-storytelling/SKILL.md"
       },
       {
-        "path": "./.github/skills/extension-audit-methodology/SKILL.md"
-      },
-      {
         "path": "./.github/skills/fabric-notebook-publish/SKILL.md"
       },
       {
@@ -1106,12 +1103,6 @@
         "path": "./.github/skills/refactoring-patterns/SKILL.md"
       },
       {
-        "path": "./.github/skills/release-preflight/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/release-process/SKILL.md"
-      },
-      {
         "path": "./.github/skills/research-first-development/SKILL.md"
       },
       {
@@ -1140,9 +1131,6 @@
       },
       {
         "path": "./.github/skills/skill-building/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/skill-catalog-generator/SKILL.md"
       },
       {
         "path": "./.github/skills/skill-development/SKILL.md"

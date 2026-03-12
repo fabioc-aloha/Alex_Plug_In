@@ -10,19 +10,31 @@
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.85,
-      "reason": "Enterprise patterns build on core VS Code extension patterns"
+      "reason": "Enterprise patterns build on core VS Code extension patterns",
+      "when": "Enterprise patterns build on core VS Code extension patterns",
+      "yields": "VS Code extension patterns extended capabilities"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
       "type": "uses",
       "strength": 0.7,
-      "reason": "Graph API client follows API design patterns"
+      "reason": "Graph API client follows API design patterns",
+      "when": "Graph API client follows API design patterns",
+      "yields": "API design patterns and guidance"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "requires",
       "strength": 0.8,
-      "reason": "Enterprise auth requires security review"
+      "reason": "Enterprise auth requires security review",
+      "when": "Enterprise auth requires security review",
+      "yields": "security review required patterns and guidance"
     }
+  ],
+  "activationContexts": [
+    "enterprise-integration",
+    "enterprise integration",
+    "enterprise",
+    "integration"
   ]
 }

@@ -68,5 +68,11 @@
       "when": "heirs checking for new skills or pull-syncing",
       "yields": "skill-registry.json access via GK repo"
     }
+  ],
+  "activationContexts": [
+    "skill-development",
+    "skill development",
+    "skill",
+    "development"
   ]
 }

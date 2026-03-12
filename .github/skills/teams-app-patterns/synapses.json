@@ -6,25 +6,33 @@
       "target": ".github/skills/m365-agent-debugging/SKILL.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "Covers more than just declarative agents"
+      "reason": "Covers more than just declarative agents",
+      "when": "Covers more than just declarative agents",
+      "yields": "M365 agent debugging extended capabilities"
     },
     {
       "target": ".github/skills/release-preflight/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Teams apps need release process"
+      "reason": "Teams apps need release process",
+      "when": "Teams apps need release process",
+      "yields": "release preflight patterns and guidance"
     },
     {
       "target": ".github/instructions/brand-asset-management.instructions.md",
       "type": "references",
       "strength": 0.75,
-      "reason": "Icon generation workflow ensures brand consistency across platforms"
+      "reason": "Icon generation workflow ensures brand consistency across platforms",
+      "when": "Icon generation workflow ensures brand consistency across platforms",
+      "yields": "brand asset management reference material"
     },
     {
       "target": ".github/skills/release-process/SKILL.md",
       "type": "coordinates",
       "strength": 0.7,
-      "reason": "Multi-heir release triggers M365 packaging after VS Code publish"
+      "reason": "Multi-heir release triggers M365 packaging after VS Code publish",
+      "when": "Multi-heir release triggers M365 packaging after VS Code publish",
+      "yields": "release process coordination protocols"
     }
   ],
   "triggers": [
@@ -77,5 +85,41 @@
     "Bot registration",
     "messaging endpoint"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "Teams app",
+    "Teams bot",
+    "Teams",
+    "Microsoft Teams",
+    "adaptive card",
+    "message extension",
+    "Teams tab",
+    "M365 Agents Toolkit",
+    "@m365agents",
+    "mcp_m365agentstoo",
+    "declarativeAgent",
+    "M365 Copilot agent",
+    "teamsapp package",
+    "manifest validation",
+    "Teams manifest",
+    "appPackage",
+    "Teams development",
+    "build Teams app",
+    "create Teams app",
+    "Bot Framework",
+    "activity handler",
+    "turn context",
+    "conversation bot",
+    "command bot",
+    "notification bot",
+    "Teams SSO",
+    "Teams authentication",
+    "on-behalf-of",
+    "Graph connector",
+    "Teams API",
+    "Teams SDK",
+    "Azure Bot Service",
+    "Bot registration",
+    "messaging endpoint"
+  ]
 }

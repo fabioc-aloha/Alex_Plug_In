@@ -40,7 +40,48 @@ for (const file of instrFiles) {
     issues.push('WARN: ' + file + ': very short body (' + body.length + ' chars)');
   }
 }
-
+// ── Trifecta Name Aliases ───────────────────────────────────────
+// Alias map: trifecta name → known instruction/prompt file stems (when names don't match)
+const TRIFECTA_INSTR_ALIASES = {
+  'dream-state': 'dream-state-automation',
+  'release-process': 'release-management',
+  'research-first-development': 'research-first-workflow',
+  'brain-qa': 'cognitive-health-validation',
+  'architecture-audit': 'semantic-audit',
+  'gamma-presentations': 'gamma-presentation',
+  'code-review': 'code-review-guidelines',
+  'global-knowledge': 'global-knowledge-curation',
+};
+const TRIFECTA_PROMPT_ALIASES = {
+  'meditation': 'meditate',
+  'dream-state': 'dream',
+  'self-actualization': 'selfactualize',
+  'release-process': 'release',
+  'brand-asset-management': 'brand',
+  'research-first-development': 'gapanalysis',
+  'brain-qa': 'brainqa',
+  'architecture-audit': 'masteraudit',
+  'bootstrap-learning': 'learn',
+  'vscode-configuration-validation': 'validate-config',
+  'ui-ux-design': 'ui-ux-audit',
+  'md-to-word': 'word',
+  'gamma-presentations': 'gamma',
+  'secrets-management': 'secrets',
+  'chat-participant-patterns': 'chat-participant',
+  'vscode-extension-patterns': 'vscode-extension-audit',
+  'mcp-development': 'mcp-server',
+  'microsoft-graph-api': 'graph-api',
+  'teams-app-patterns': 'teams-app',
+  'm365-agent-debugging': 'm365-agent-debug',
+  'testing-strategies': 'tdd',
+  'knowledge-synthesis': 'knowledge',
+  'north-star': 'northstar',
+  'code-review': 'review',
+  'refactoring-patterns': 'refactor',
+  'debugging-patterns': 'debug',
+  'global-knowledge': 'knowledge',
+  'ai-writing-avoidance': 'audit-writing',
+};
 // ── Copilot-Instructions Cross-Reference ───────────────────────
 const ci = fs.readFileSync(path.join(base, '.github/copilot-instructions.md'), 'utf8');
 const trifectaMatch = ci.match(/Complete trifectas \((\d+)\): ([^\n]+)/);
@@ -54,7 +95,8 @@ if (trifectaMatch) {
   }
 
   for (const t of trifectas) {
-    if (!instrNames.has(t)) {
+    const alias = TRIFECTA_INSTR_ALIASES[t];
+    if (!instrNames.has(t) && !(alias && instrNames.has(alias))) {
       issues.push('WARN: trifecta "' + t + '" has no matching instruction file');
     }
   }
@@ -186,8 +228,10 @@ let completeCount = 0;
 let incompleteDetails = [];
 for (const t of trifectas) {
   const hasSkill = skillDirs.includes(t);
-  const hasInstr = instrNames.has(t);
-  const hasPrompt = promptFiles.some(f => f.startsWith(t));
+  const instrAlias = TRIFECTA_INSTR_ALIASES[t];
+  const hasInstr = instrNames.has(t) || (instrAlias && instrNames.has(instrAlias));
+  const promptAlias = TRIFECTA_PROMPT_ALIASES[t];
+  const hasPrompt = promptFiles.some(f => f.startsWith(t)) || (promptAlias && promptFiles.some(f => f.startsWith(promptAlias)));
   const missing = [];
   if (!hasSkill) missing.push('skill');
   if (!hasInstr) missing.push('instruction');

@@ -7,24 +7,32 @@
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "context": "ASCII for precise control, Mermaid for auto-layout"
+      "reason": "ASCII for precise control, Mermaid for auto-layout",
+      "when": "ASCII for precise control, Mermaid for auto-layout",
+      "yields": "markdown mermaid complementary techniques"
     },
     {
       "target": ".github/skills/lint-clean-markdown/SKILL.md",
       "type": "related",
       "strength": 0.7,
-      "context": "Both require attention to character-level detail"
+      "reason": "Both require attention to character-level detail",
+      "when": "Both require attention to character-level detail",
+      "yields": "lint clean markdown related patterns and guidance"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "context": "Visual diagrams enhance documentation quality"
+      "reason": "Visual diagrams enhance documentation quality",
+      "when": "Visual diagrams enhance documentation quality",
+      "yields": "academic research supporting context"
     },
     {
       "target": ".github/skills/graphic-design/SKILL.md",
       "type": "complements",
-      "strength": 0.65
+      "strength": 0.65,
+      "when": "Combining ascii art alignment with graphic design",
+      "yields": "graphic design complementary techniques"
     }
   ],
   "triggers": [
@@ -34,5 +42,12 @@
     "lines don't match up",
     "right border jagged"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "ASCII diagram misaligned",
+    "box drawing characters",
+    "text-based UI mockup",
+    "lines don't match up",
+    "right border jagged"
+  ]
 }

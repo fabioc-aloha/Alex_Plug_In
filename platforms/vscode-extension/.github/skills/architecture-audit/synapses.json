@@ -14,13 +14,6 @@
   ],
   "connections": [
     {
-      "target": ".github/skills/release-preflight/SKILL.md",
-      "strength": 0.85,
-      "type": "enables",
-      "direction": "forward",
-      "description": "Pre-release audit trigger"
-    },
-    {
       "target": ".github/skills/brain-qa/SKILL.md",
       "strength": 0.8,
       "type": "complements",

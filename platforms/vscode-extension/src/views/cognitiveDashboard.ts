@@ -202,8 +202,8 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
             data.goals.completed = goals.goals.filter((g) => g.status === 'completed').length;
           }
           data.goals.streak = typeof goals.streak === 'number' ? goals.streak : 0;
-        } catch {
-          // JSON parse error
+        } catch (err) {
+          console.warn('[Alex Dashboard] Failed to parse goals.json:', err instanceof Error ? err.message : String(err));
         }
       }
 
@@ -224,7 +224,8 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
               const content = await workspaceFs.readFile(synapsePath);
               JSON.parse(content); // Validates JSON
               healthySynapses++;
-            } catch {
+            } catch (err) {
+              console.warn('[Alex Dashboard] Broken synapse:', dirName, err instanceof Error ? err.message : String(err));
               brokenSynapses++;
             }
           }

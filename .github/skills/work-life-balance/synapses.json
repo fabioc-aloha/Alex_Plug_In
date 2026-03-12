@@ -6,30 +6,40 @@
       "target": ".github/skills/cognitive-load/SKILL.md",
       "type": "applies",
       "strength": 0.9,
-      "reason": "Mental exhaustion is cognitive overload"
+      "reason": "Mental exhaustion is cognitive overload",
+      "when": "Mental exhaustion is cognitive overload",
+      "yields": "cognitive load patterns and guidance"
     },
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "supports",
       "strength": 0.8,
-      "reason": "Trust includes caring for user wellbeing"
+      "reason": "Trust includes caring for user wellbeing",
+      "when": "Trust includes caring for user wellbeing",
+      "yields": "appropriate reliance supporting context"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "Rest and reflection support balance"
+      "reason": "Rest and reflection support balance",
+      "when": "Rest and reflection support balance",
+      "yields": "meditation complementary techniques"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
       "type": "applies",
       "strength": 0.7,
-      "reason": "Sustainable learning requires rest"
+      "reason": "Sustainable learning requires rest",
+      "when": "Sustainable learning requires rest",
+      "yields": "learning psychology patterns and guidance"
     },
     {
       "target": ".github/skills/cross-cultural-collaboration/SKILL.md",
       "type": "applied-by",
-      "strength": 0.8
+      "strength": 0.8,
+      "when": "cross cultural collaboration applies work life balance",
+      "yields": "cross cultural collaboration application context"
     }
   ],
   "triggers": [
@@ -48,5 +58,21 @@
     "streak",
     "goal"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "tired",
+    "exhausted",
+    "burned out",
+    "burnout",
+    "late night",
+    "weekend",
+    "no breaks",
+    "hours",
+    "one more thing",
+    "can't stop",
+    "need to finish",
+    "focus session",
+    "streak",
+    "goal"
+  ]
 }

@@ -1,49 +1,72 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.0.0",
-    "skillId": "comedy-writing",
-    "version": "1.0.0",
-    "created": "2026-03-09",
-    "description": "Joke structure, comedic timing, set construction, callback patterns, audience engagement",
-    "connections": [
-        {
-            "target": ".github/skills/creative-writing/SKILL.md",
-            "type": "Enhances",
-            "strength": 0.8,
-            "description": "Comedy writing is a specialized form of creative writing with structure and timing"
-        },
-        {
-            "target": ".github/skills/ai-writing-avoidance/SKILL.md",
-            "type": "Requires",
-            "strength": 0.7,
-            "description": "Comedy demands authentic voice — AI-generated humor lacks genuine perspective"
-        },
-        {
-            "target": ".github/skills/prompt-engineering/SKILL.md",
-            "type": "Relates",
-            "strength": 0.5,
-            "description": "Prompt engineering helps mine AI for premise angles and word alternatives"
-        },
-        {
-            "target": ".github/skills/proactive-assistance/SKILL.md",
-            "type": "Relates",
-            "strength": 0.4,
-            "description": "Anticipating audience reactions mirrors proactive user assistance"
-        }
-    ],
-    "activationTriggers": [
-        "standup",
-        "comedy",
-        "joke",
-        "punchline",
-        "callback",
-        "humor",
-        "sketch",
-        "set list",
-        "open mic",
-        "funny",
-        "satire",
-        "comedic",
-        "bit"
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "comedy-writing",
+  "version": "1.0.0",
+  "created": "2026-03-09",
+  "description": "Joke structure, comedic timing, set construction, callback patterns, audience engagement",
+  "connections": [
+    {
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "type": "Enhances",
+      "strength": 0.8,
+      "description": "Comedy writing is a specialized form of creative writing with structure and timing",
+      "when": "comedy writing enhances creative writing",
+      "yields": "creative writing enhanced capabilities"
+    },
+    {
+      "target": ".github/skills/ai-writing-avoidance/SKILL.md",
+      "type": "Requires",
+      "strength": 0.7,
+      "description": "Comedy demands authentic voice — AI-generated humor lacks genuine perspective",
+      "when": "comedy writing depends on AI writing avoidance",
+      "yields": "AI writing avoidance required patterns and guidance"
+    },
+    {
+      "target": ".github/skills/prompt-engineering/SKILL.md",
+      "type": "Relates",
+      "strength": 0.5,
+      "description": "Prompt engineering helps mine AI for premise angles and word alternatives",
+      "when": "comedy writing connects to prompt engineering",
+      "yields": "prompt engineering patterns and guidance"
+    },
+    {
+      "target": ".github/skills/proactive-assistance/SKILL.md",
+      "type": "Relates",
+      "strength": 0.4,
+      "description": "Anticipating audience reactions mirrors proactive user assistance",
+      "when": "comedy writing connects to proactive assistance",
+      "yields": "proactive assistance patterns and guidance"
+    }
+  ],
+  "activationTriggers": [
+    "standup",
+    "comedy",
+    "joke",
+    "punchline",
+    "callback",
+    "humor",
+    "sketch",
+    "set list",
+    "open mic",
+    "funny",
+    "satire",
+    "comedic",
+    "bit"
+  ],
+  "activationContexts": [
+    "standup",
+    "comedy",
+    "joke",
+    "punchline",
+    "callback",
+    "humor",
+    "sketch",
+    "set list",
+    "open mic",
+    "funny",
+    "satire",
+    "comedic",
+    "bit"
+  ]
 }

@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*lucid*,**/*hybrid*,**/*bridge*,**/*dual-mode*"
+applyTo: "**/*lucid*,**/*dual-mode*"
 description: "Lucid dream hybrid processing and unconscious-conscious bridge protocols"
 ---
 

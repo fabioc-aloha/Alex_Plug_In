@@ -6,54 +6,72 @@
       "reason": "Visual storytelling and narrative design",
       "type": "complements",
       "strength": 0.85,
-      "target": ".github/skills/creative-writing/SKILL.md"
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "when": "Visual storytelling and narrative design",
+      "yields": "creative writing complementary techniques"
     },
     {
       "reason": "Extension branding, icons, and UI design",
       "type": "applies",
       "strength": 0.85,
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md"
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "when": "Extension branding, icons, and UI design",
+      "yields": "VS Code extension patterns patterns and guidance"
     },
     {
       "reason": "Color theory, GitHub Pastel Palette v2, WCAG contrast, and semantic color mapping for Mermaid diagram styling",
       "type": "extends",
       "strength": 0.9,
-      "target": ".github/skills/markdown-mermaid/SKILL.md"
+      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "when": "Color theory, GitHub Pastel Palette v2, WCAG contrast, and semantic color mapping for Mermaid diagram styling",
+      "yields": "markdown mermaid extended capabilities"
     },
     {
       "reason": "Visual information processing and hierarchy",
       "type": "applies",
       "strength": 0.65,
-      "target": ".github/skills/cognitive-load/SKILL.md"
+      "target": ".github/skills/cognitive-load/SKILL.md",
+      "when": "Visual information processing and hierarchy",
+      "yields": "cognitive load patterns and guidance"
     },
     {
       "reason": "Text-based visual design and alignment",
       "type": "complements",
       "strength": 0.65,
-      "target": ".github/skills/ascii-art-alignment/SKILL.md"
+      "target": ".github/skills/ascii-art-alignment/SKILL.md",
+      "when": "Text-based visual design and alignment",
+      "yields": "ascii art alignment complementary techniques"
     },
     {
       "reason": "Visual identity consistent with accessibility standards and WCAG compliance",
       "type": "complements",
       "strength": 0.7,
-      "target": ".github/skills/ui-ux-design/SKILL.md"
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "when": "Visual identity consistent with accessibility standards and WCAG compliance",
+      "yields": "UI UX design complementary techniques"
     },
     {
       "reason": "Document visual design and layout",
       "type": "supports",
       "strength": 0.4,
-      "target": ".github/skills/academic-research/SKILL.md"
+      "target": ".github/skills/academic-research/SKILL.md",
+      "when": "Document visual design and layout",
+      "yields": "academic research supporting context"
     },
     {
       "reason": "AI-generated illustrations, model selection, and image format handling",
       "type": "complements",
       "strength": 0.75,
-      "target": ".github/skills/image-handling/SKILL.md"
+      "target": ".github/skills/image-handling/SKILL.md",
+      "when": "AI-generated illustrations, model selection, and image format handling",
+      "yields": "image handling complementary techniques"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
       "type": "complements",
-      "strength": 0.5
+      "strength": 0.5,
+      "when": "Combining graphic design with localization",
+      "yields": "localization complementary techniques"
     }
   ],
   "triggers": [
@@ -77,5 +95,26 @@
     "book illustration",
     "visual variety"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "design",
+    "visual",
+    "layout",
+    "typography",
+    "color",
+    "logo",
+    "branding",
+    "UI design",
+    "mockup",
+    "color palette",
+    "contrast ratio",
+    "WCAG",
+    "pastel colors",
+    "diagram colors",
+    "mermaid colors",
+    "illustration",
+    "illustrate",
+    "book illustration",
+    "visual variety"
+  ]
 }

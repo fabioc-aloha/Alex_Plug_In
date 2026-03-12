@@ -48,5 +48,11 @@
       "yields": "Chunking strategies, decision simplification"
     }
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "memory-activation",
+    "memory activation",
+    "memory",
+    "activation"
+  ]
 }

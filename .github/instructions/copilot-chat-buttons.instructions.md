@@ -1,3 +1,8 @@
+---
+description: "Copilot Chat action button patterns for interactive follow-up actions in chat responses"
+applyTo: "**/chat/**/*.ts,**/*participant*.ts"
+---
+
 # Copilot Chat Action Buttons Pattern
 
 **Discovery Date**: February 4, 2026  

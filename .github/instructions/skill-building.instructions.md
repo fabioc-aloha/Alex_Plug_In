@@ -1,3 +1,7 @@
+---
+description: "Step-by-step skill creation, assessment, and completion procedure"
+---
+
 # Skill Building Procedure
 
 Step-by-step process for creating, assessing, and completing skills.

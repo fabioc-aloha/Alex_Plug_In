@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 10, 2026
+**Last Updated**: March 11, 2026
 
 ---
 
@@ -38,58 +38,27 @@ Four platforms. Focused, not scattered.
 
 | Version | Theme | Shipped |
 | --- | --- | --- |
+| **v6.5.4** | Roadmap hygiene — shipped content to appendix, Open Backlog consolidation, T8 closure | 2026-03-11 |
+| **v6.5.3** | Trust Release — synapse audit, master→heir sync hardening, leakage remediation, quality gates | 2026-03-11 |
 | **v6.4.0** | Agent Hooks Release — VS Code 1.111 settings adoption, autopilot, hooks, sandbox, debug docs | 2026-03-09 |
 | **v6.3.0** | Accessibility & Workshop Alignment — WCAG keyboard fixes, 10 domain skills, 41 workshops, I8 cardinal rule | 2026-03-09 |
 | **v6.2.0** | On-Brand Partnership — FLUX fine-tune trifecta, SVG-first banners, GH Web heir discontinued | 2026-03-05 |
 | **v6.1.5** | M365 Schema + Agent Plugin — manifest v1.25, Agent Plugin heir, MCP standalone bundle | 2026-03-04 |
 | **v6.0.0** | The Partnership Release — episodic memory, outcome tracking, autonomous tasks, workflow engine | 2026-02-28 |
 
-> Full details in the [Appendix: Completed Versions](#-appendix-completed-versions).
+> Full details in the [Appendix](#-appendix-completed-work).
 
 ---
 
-## ✅ v6.4.0 — The Agent Hooks Release (Shipped 2026-03-09)
+## 📋 Open Backlog
 
-**Theme**: VS Code 1.111 Adoption — Autopilot enablement, platform settings alignment, documentation.
+Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by external dependencies, or deferred.
 
-> Source: [VSCODE-1.111-RELEASE-EVALUATION](alex_docs/research/VSCODE-1.111-RELEASE-EVALUATION-2026-03-09.md)
+> All completed v6.4.0, v6.4.5, and v6.5.0 work is in the [Appendix](#-appendix-completed-work).
 
-See [Appendix](#-appendix-completed-work) for completed items.
+### Deferred Hooks (Low Priority)
 
----
-
-## ✅ v6.4.5 — Audit Hygiene (Shipped 2026-03-10)
-
-**Theme**: Fix what's broken — tests, docs, links, security. No new features.
-
-| # | Task | Result |
-| --- | --- | --- |
-| 1 | **Fix 7 failing tests** | ✅ 268 passing, 0 failing. Fixed GK-/GI- prefix expectations + 3 regex patterns in expertiseModel |
-| 2 | **Fix doc freshness** | ✅ cognitive-config→6.4.0, NEUROANATOMICAL-MAPPING (130 skills, 64 instructions, I1-I8), VSCODE-BRAIN-INTEGRATION→v6.4.0, counts in 4 more docs, broken synapse fixed, 2 legacy episodic files archived |
-| 3 | **Fix broken links + ghosts** | ✅ 14 broken links fixed across 7 docs. AGENT-VS-CHAT-COMPARISON→v6.4.0. 3 ghost PROJECT-TYPE-TEMPLATES refs removed. Heir copy synced |
-| 4 | **Mocha 11 upgrade** | ✅ 10.8.2→11.7.5 + npm overrides for serialize-javascript and diff. 0 audit vulnerabilities |
-| 5 | **Reindex skills** | ✅ 130 skills, 643 connections. Removed stale `inheritance` from 10 synapses.json. Updated pre-commit hook + new-skill.ps1 |
-| 6 | **Reconcile settings docs** | ✅ ENVIRONMENT-SETUP.md designated canonical (21 SoT settings added). USER-MANUAL.md now points there |
-
----
-
-## 🛡️ v6.5.0 — The Trust Release
-
-**Target**: Q2 2026
-
-**Paradigm**: Earn It — platform polish, safety hooks, and code quality that makes "trusted" a fact.
-
-**North Star Assessment** (2026-03-09): 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI. Full audits: [Comprehensive](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Docs/UI](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md).
-
-### Core (must-ship)
-
-All 7 core items completed. See [Appendix](#v650--completed-trust-release-work).
-
-### Hooks
-
-**16 hooks shipped** (10 global + 6 agent-scoped) across all 7 VS Code hook events. See [Appendix](#v650--completed-trust-release-work) for full shipped catalog.
-
-**Not yet implemented** (low priority / deferred):
+**16 hooks shipped** (10 global + 6 agent-scoped). These 7 were evaluated and deferred:
 
 | # | Scope | Event | What It Would Do | Rationale for Deferral |
 | --- | --- | --- | --- | --- |
@@ -100,20 +69,6 @@ All 7 core items completed. See [Appendix](#v650--completed-trust-release-work).
 | H15 | Builder | PostToolUse | Package size check — estimate VSIX size after src/assets edits, warn if approaching 5 MB ceiling | Medium value; quality-gate.cjs already catches this at publish time |
 | H17 | Global | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis | Analytics only; no immediate workflow benefit |
 | H19 | Global | PostToolUse | Synapse weight update — increment skill connection weights in real-time on heavy activation | Adds write contention to synapses.json; meditation already handles weight consolidation |
-
-### Skill Promotions
-
-4 of 7 candidates promoted. See [Appendix](#v650--completed-trust-release-work) for full scan results.
-
-| # | Asset | Source | Status |
-| --- | --- | --- | --- |
-| 5 | `meditation-facilitation` skill | 3 heirs | ✅ Already merged — 4 R's framework, facilitation techniques, session types in master `meditation` SKILL.md |
-| 6 | `prompt-activation` / `skill-activation` | 3 heirs | Keep in heir — master `memory-activation` already covers both; unified design superior |
-| 7 | `writing-publication` skill | 3 heirs | Keep in heir — academic/research-specific, not general-purpose enough for master |
-
-### Stretch (ship if time allows)
-
-All stretch items completed. See [Appendix](#v650--completed-trust-release-work).
 
 ### Blocked (VS Code API Dependencies)
 
@@ -132,46 +87,12 @@ All stretch items completed. See [Appendix](#v650--completed-trust-release-work)
 | 13 | **EmbeddedKnowledge adoption** | Microsoft makes it GA | 2h | Enable capability. knowledge/ folder already prepared |
 | 14 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target |
 
-### Trifecta Quality (audit findings — 2026-03-10)
-
-From the comprehensive trifecta audit: 38 complete trifectas verified, 7 bugs fixed. T1-T7 completed. One assessment item remains.
-
-**Completed** (T1–T7):
-
-| # | What | Result |
-| --- | --- | --- |
-| T1 | **Code Review** `/review` prompt enriched | 3-Pass Review, comment prefixes, review priority from skill. Epistemic confidence kept as additive layer |
-| T2 | **Testing Strategies** `/tdd` prompt broadened | Now covers pyramid, mocking, coverage philosophy, flaky test triage — not just TDD cycle |
-| T3 | **Self-Actualization** thresholds canonicalized | Instruction now references skill's 6-dimension scoring; duplicate memory balance + density tables removed |
-| T4 | **Code Review** deduplication | Instruction's comment prefix table + review checklist replaced with references to skill's canonical tables |
-| T5 | **Markdown & Mermaid** `diagramming.prompt.md` created | ATACCU methodology, diagram types, quality rules |
-| T6 | **Heir Sync Management** `promotetomaster.prompt.md` created | Promotion criteria, workflow, Validator gate |
-| T7 | **Trifecta sibling synapses** added | Code Review, Testing Strategies, Self-Actualization synapses.json now connect to own instruction + prompt |
-
-**Remaining** (assessment only):
-
-| # | Issue | Scope | Effort | Fix |
-| --- | --- | --- | :---: | --- |
-| T8 | **Orphan prompts with no skill** — `improve`, `journey`, `plan`, `presentation`, `marp` exist as prompts with no matching skill | 5 prompts | — | Assess: do they need skills, or are they justified standalone workflows? |
-
 ### Conditional (Trigger-Dependent)
 
 | # | Task | Trigger | Effort | Description |
 | --- | --- | --- | :---: | --- |
 | 15 | **Foundry POC** | Real user/team requests Alex in Teams | 1w | Foundry project + Alex orchestrator + Teams publish |
 | 16 | **Teams Deep Integration** | Active M365 users | 12w | Bot Framework + Message Extensions + Meeting Integration |
-
-### Definition of Done (v6.5.0)
-
-1. **All tests passing** — 241/241 (4 dead avatar tests removed)
-2. **No npm audit vulnerabilities** — 0 (achieved in v6.4.5, Mocha 11 + overrides)
-3. **VSIX < 5 MB** — deprecated avatar PNGs removed (25.3 MB eliminated), 433 files in VSIX
-4. **UI WCAG AA compliant** — no sub-11px fonts, theme-aware colors
-5. **Shipped hooks API-compliant** — F1–F6 fixes applied: correct config format, stdin JSON protocol, structured output, proper exit codes, event name corrected. Synced to heirs
-6. **Agent hooks evaluated** — H1–H22 assessed: 16 implemented (10 global, 6 agent-scoped), 7 deferred with rationale
-7. **North Star Trust score ≥ 8/10** — up from 7.2 baseline
-
-> **Principle**: Don't add features. Prove the existing ones deserve trust.
 
 ---
 
@@ -250,21 +171,23 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.4.5 | Audit Hygiene | ✅ Shipped |
 | v6.4.6 | Audit Hygiene (published) | ✅ Shipped |
 | v6.5.0 | The Trust Release | ✅ Shipped |
+| v6.5.3 | Trust Release — audit cleanup, tech debt, synapse metadata | ✅ Shipped |
+| v6.5.4 | Roadmap hygiene — appendix restructuring, T8 closure | ✅ Shipped |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
 ---
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.5.0                                          |
-| **Current Heirs**          | VS Code (6.5.0), M365 (6.2.0), Plugin (6.5.0) |
-| **Architecture**           | 133 skills, 38 trifectas, 64 instructions, 47 prompts, 7 agents |
-| **Codebase**               | ~103 TS files, ~43k lines, 20 test files (241 passing, 0 failing) |
-| **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) |
+| **Current Master Version** | 6.5.4                                          |
+| **Current Heirs**          | VS Code (6.5.4), M365 (6.2.0), Plugin (6.5.3) |
+| **Architecture**           | 133 skills, 38 trifectas, 65 instructions, 48 prompts, 7 agents |
+| **Codebase**               | 128 TS files, 20 test files (268 passing, 0 failing) |
+| **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) · [v6.5.3 Audit](alex_docs/audits/AUDIT-2026-03-11.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence              |
-| **Open Items**             | 10 total: 1 trifecta quality + 0 core + 0 stretch + 0 skill promos, 4 blocked, 3 gated, 2 conditional |
-| **Updated**                | 2026-03-10                                     |
+| **Open Items**             | 9 total: 4 blocked, 3 gated, 2 conditional |
+| **Updated**                | 2026-03-11                                     |
 
 ---
 
@@ -353,6 +276,42 @@ Full scan: [SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md](alex_docs/research/SKILL-SCA
 | 6 | `prompt-activation` / `skill-activation` | Keep in heir — master `memory-activation` unified design covers both |
 | 7 | `writing-publication` | Keep in heir — academic/research-specific, not general-purpose |
 
+#### Trifecta Quality (T1–T7 Completed)
+
+From the comprehensive trifecta audit: 38 complete trifectas verified, 7 bugs fixed.
+
+| # | What | Result |
+| --- | --- | --- |
+| T1 | **Code Review** `/review` prompt enriched | 3-Pass Review, comment prefixes, review priority from skill. Epistemic confidence kept as additive layer |
+| T2 | **Testing Strategies** `/tdd` prompt broadened | Now covers pyramid, mocking, coverage philosophy, flaky test triage — not just TDD cycle |
+| T3 | **Self-Actualization** thresholds canonicalized | Instruction now references skill's 6-dimension scoring; duplicate memory balance + density tables removed |
+| T4 | **Code Review** deduplication | Instruction's comment prefix table + review checklist replaced with references to skill's canonical tables |
+| T5 | **Markdown & Mermaid** `diagramming.prompt.md` created | ATACCU methodology, diagram types, quality rules |
+| T6 | **Heir Sync Management** `promotetomaster.prompt.md` created | Promotion criteria, workflow, Validator gate |
+| T7 | **Trifecta sibling synapses** added | Code Review, Testing Strategies, Self-Actualization synapses.json now connect to own instruction + prompt |
+| T8 | **Orphan prompts assessed** | `presentation` has 2 matching skills (not orphaned). `improve`, `journey`, `plan`, `marp` are justified standalone workflow/orchestration prompts — no new skills needed |
+
+#### Definition of Done (v6.5.0)
+
+1. **All tests passing** — 268/268 (4 dead avatar tests removed, 27 new tests added in v6.4.5)
+2. **No npm audit vulnerabilities** — 0 (achieved in v6.4.5, Mocha 11 + overrides)
+3. **VSIX < 5 MB** — deprecated avatar PNGs removed (25.3 MB eliminated), 433 files in VSIX
+4. **UI WCAG AA compliant** — no sub-11px fonts, theme-aware colors
+5. **Shipped hooks API-compliant** — F1–F6 fixes applied: correct config format, stdin JSON protocol, structured output, proper exit codes, event name corrected. Synced to heirs
+6. **Agent hooks evaluated** — H1–H22 assessed: 16 implemented (10 global, 6 agent-scoped), 7 deferred with rationale
+7. **North Star Trust score ≥ 8/10** — up from 7.2 baseline
+
+### v6.4.5 — Audit Hygiene (Shipped 2026-03-10)
+
+| # | Task | Result |
+| --- | --- | --- |
+| 1 | **Fix 7 failing tests** | ✅ 268 passing, 0 failing. Fixed GK-/GI- prefix expectations + 3 regex patterns in expertiseModel |
+| 2 | **Fix doc freshness** | ✅ cognitive-config→6.4.0, NEUROANATOMICAL-MAPPING (130 skills, 64 instructions, I1-I8), VSCODE-BRAIN-INTEGRATION→v6.4.0, counts in 4 more docs, broken synapse fixed, 2 legacy episodic files archived |
+| 3 | **Fix broken links + ghosts** | ✅ 14 broken links fixed across 7 docs. AGENT-VS-CHAT-COMPARISON→v6.4.0. 3 ghost PROJECT-TYPE-TEMPLATES refs removed. Heir copy synced |
+| 4 | **Mocha 11 upgrade** | ✅ 10.8.2→11.7.5 + npm overrides for serialize-javascript and diff. 0 audit vulnerabilities |
+| 5 | **Reindex skills** | ✅ 130 skills, 643 connections. Removed stale `inheritance` from 10 synapses.json. Updated pre-commit hook + new-skill.ps1 |
+| 6 | **Reconcile settings docs** | ✅ ENVIRONMENT-SETUP.md designated canonical (21 SoT settings added). USER-MANUAL.md now points there |
+
 ### v6.3.1 → v6.4.0 — Completed Low-Hanging Fruit
 
 | # | Task | Status | Description |
@@ -375,18 +334,18 @@ Full scan: [SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md](alex_docs/research/SKILL-SCA
 | **Wave 8 — UI/UX Audit** | ✅ Done | 20/20 findings fixed (5 P1 + 6 P2 + 6 P3 + 3 cross-tab) |
 | **Persona Detection P7** | ✅ Done | 12/12 items shipped (CRITICAL through LOW). 47 personas, 81 avatar entries |
 
-### Current State Summary (v6.2.0+)
+### Current State Summary (v6.5.3)
 
 Alex now has:
-- **120 Skills** (consolidated from 130 — 11 merged, 96+ stale refs cleaned, brain-qa 35/35 passing)
-- **37 Complete Trifectas** — comprehensive domain coverage including north-star and flux-brand-finetune
-- **64 Instructions** — auto-loaded rules across all domains
-- **47 Prompts** — user-invoked `/` commands (4 redundant removed during consolidation)
+- **133 Skills** — 38 complete trifectas, 668 synapse connections with full `when`/`yields`/`type` metadata
+- **65 Instructions** — auto-loaded rules across all domains (YAML frontmatter on all files)
+- **48 Prompts** — user-invoked `/` commands
 - **7 Agents** — specialist modes for Builder, Researcher, Validator, Documentarian, Azure, M365
 - **90 Registered Commands** — full command surface including 10 v6.0.0 partnership commands
 - **3 Platform Heirs** — VS Code Extension, M365 Copilot Agent, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
-- **Command Center** — 5-tab sidebar (Mission Ctrl, Agents, Skill Store, Mind, Docs) with Waves 0–5 complete
-- **95 TypeScript source files** — 48K lines across the VS Code extension
+- **Command Center** — 5-tab sidebar (Mission Ctrl, Agents, Skill Store, Mind, Docs) with 98/100 steps shipped
+- **128 TypeScript source files** — modular architecture (extension.ts 248L orchestrator + commandsCore/Presentation/Developer)
+- **16 Agent hooks** — 10 global + 6 agent-scoped across all 7 VS Code hook events
 - **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces
 - **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall
 - **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring across 500 records
@@ -402,15 +361,15 @@ Alex now has:
 - **Copilot Memory** — cross-session context persistence
 - **Avatar State System** — 9 cognitive states + 6 agent modes
 
-### Post-v6.2.0 — In-Progress Work (March 5–7, 2026)
+### Post-v6.2.0 — Completed Work (March 5–7, 2026)
 
-| Task | Description |
-| --- | --- |
-| Command Center Waves 0–5 | 5-tab sidebar: Mission Ctrl, Agents, Skill Store, Mind, Docs. 39/53 steps complete. Shell, Docs tab, Mission Command dashboard all functional. Wave 6 (Advanced Tabs) deferred pending runtime contracts |
-| Skill consolidation | 11 skills merged into 7 targets (130→120). 4 redundant prompts removed. 96+ stale refs fixed across synapses, instructions, prompts, muscles, templates |
-| Icon design system | Phase 0A: 90 SVG icon options generated via Recraft v4 SVG. Rocket-character system (33 final SVGs across 4 categories) |
-| Brain QA clean | 35/35 phases passing, 0 issues after consolidation + meditation pass |
-| Codex competitive analysis | Market positioning research vs OpenAI Codex for Command Center differentiation |
+| Task | Status | Description |
+| --- | :---: | --- |
+| Command Center Waves 0–5 | ✅ Done | 5-tab sidebar: Mission Ctrl, Agents, Skill Store, Mind, Docs. 98/100 steps shipped. Wave 6 (Advanced Tabs) deferred pending runtime contracts |
+| Skill consolidation | ✅ Done | 11 skills merged into 7 targets (130→120→133 with new skills). 4 redundant prompts removed. 96+ stale refs fixed |
+| Icon design system | ✅ Done | Rocket-character system (33 final SVGs across 4 categories) via Recraft v4 SVG |
+| Brain QA clean | ✅ Done | 35/35 phases passing, 0 issues after consolidation + meditation pass |
+| Codex competitive analysis | ✅ Done | Market positioning research vs OpenAI Codex for Command Center differentiation |
 
 ### v6.2.0 — On-Brand Partnership Release (Shipped 2026-03-05)
 

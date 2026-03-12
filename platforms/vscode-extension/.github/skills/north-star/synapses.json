@@ -42,12 +42,6 @@
       "context": "Architecture health includes vision alignment metrics"
     },
     {
-      "target": ".github/skills/release-process/SKILL.md",
-      "strength": 0.7,
-      "relationship": "guides",
-      "context": "Release decisions filtered through North Star commitment"
-    },
-    {
       "target": ".github/skills/scope-management/SKILL.md",
       "strength": 0.85,
       "relationship": "enables",

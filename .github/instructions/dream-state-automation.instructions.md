@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*dream*,**/*maintenance*,**/*synapse*"
+applyTo: "**/*dream*,**/*synapse*"
 description: "Automated neural maintenance and dream state processing protocols"
 ---
 
@@ -105,11 +105,11 @@ Synchronizes with the Global Knowledge repository (if available):
 
 #### **Phase 4.5: Brand Compliance Scan**
 Runs a lightweight deprecated-color check across TypeScript source and deployed SVG assets:
-- Scans `platforms/vscode-extension/src/**/*.ts` and `platforms/vscode-extension/assets/**/*.svg` for deprecated colors: `#0078d4`, `#005a9e`, `#ff6b35`, `#ff8c42`, `#ffc857`, `#00ff88`
+- Scans `src/**/*.ts` and `assets/**/*.svg` for deprecated colors: `#0078d4`, `#005a9e`, `#ff6b35`, `#ff8c42`, `#ffc857`, `#00ff88`
 - Exceptions: `#0078D4` in `personaDetection.ts` is **intentional** (Developer persona per DK §13) — do not flag
 - Reports count of violations; 0 expected in source and deployed assets
 - If violations found: list file paths + line numbers in dream report under `## Brand Compliance`
-- Does **not** scan `alex_docs/marketing/` or `archive/` (design drafts, not deployed)
+- Does **not** scan `marketing/` or `archive/` directories (design drafts, not deployed)
 
 **Pass criteria**: 0 violations outside intentional exceptions.
 

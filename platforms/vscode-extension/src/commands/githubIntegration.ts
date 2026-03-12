@@ -99,7 +99,8 @@ export async function detectGitHubRepo(): Promise<GitHubRepo | null> {
         }
 
         return null;
-    } catch {
+    } catch (err) {
+        console.warn('[Alex GitHub] Failed to detect repo:', err instanceof Error ? err.message : String(err));
         return null;
     }
 }

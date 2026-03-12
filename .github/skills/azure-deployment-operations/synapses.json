@@ -8,13 +8,17 @@
       "target": ".github/instructions/azure-enterprise-deployment.instructions.md",
       "type": "depends-on",
       "strength": 0.95,
-      "reason": "Enterprise deployment patterns and pre-deployment validation"
+      "reason": "Enterprise deployment patterns and pre-deployment validation",
+      "when": "Enterprise deployment patterns and pre-deployment validation",
+      "yields": "azure enterprise deployment required rules and guidelines"
     },
     {
       "target": ".github/skills/secrets-management/SKILL.md",
       "type": "related",
       "strength": 0.7,
-      "reason": "Azure deployments require secure credential handling"
+      "reason": "Azure deployments require secure credential handling",
+      "when": "Azure deployments require secure credential handling",
+      "yields": "secrets management related patterns and guidance"
     }
   ],
   "when": [
@@ -22,9 +26,11 @@
     "User needs phased rollout or pre-deployment validation",
     "User asks about Azure infrastructure patterns"
   ],
-  "yields": [
-    "Production deployment configurations",
-    "Pre-deployment validation checklists",
-    "Phased rollout strategies"
+  "activationContexts": [
+    "azure-deployment-operations",
+    "azure deployment operations",
+    "azure",
+    "deployment",
+    "operations"
   ]
 }

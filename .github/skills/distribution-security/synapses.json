@@ -8,19 +8,25 @@
       "target": ".github/skills/secrets-management/SKILL.md",
       "type": "depends-on",
       "strength": 0.9,
-      "reason": "Secrets scanning is core to distribution security"
+      "reason": "Secrets scanning is core to distribution security",
+      "when": "Secrets scanning is core to distribution security",
+      "yields": "secrets management required patterns and guidance"
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
       "type": "related",
       "strength": 0.85,
-      "reason": "Security checks are part of the release workflow"
+      "reason": "Security checks are part of the release workflow",
+      "when": "Security checks are part of the release workflow",
+      "yields": "release management related rules and guidelines"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "reason": "Extension packaging must follow defense-in-depth patterns"
+      "reason": "Extension packaging must follow defense-in-depth patterns",
+      "when": "Extension packaging must follow defense-in-depth patterns",
+      "yields": "VS Code extension patterns supporting context"
     }
   ],
   "when": [
@@ -28,9 +34,10 @@
     "User needs PII protection or secrets scanning",
     "User prepares extension for marketplace publishing"
   ],
-  "yields": [
-    "Defense-in-depth security assessment",
-    "PII protection validation",
-    "Secure packaging configuration"
+  "activationContexts": [
+    "distribution-security",
+    "distribution security",
+    "distribution",
+    "security"
   ]
 }

@@ -42,7 +42,7 @@ applyTo: "**/assets/**,**/*.svg,**/*.png,**/*.ico"
 
 The Alex logo system and marketplace/banner branding are **not** the default style for Command Center UI micro-assets.
 
-- For extension-local tab icons, state avatars, persona icons, agent icons, and badges, use the CorreaX UI asset rules in `alex_docs/DK-correax-brand.md`.
+- For extension-local tab icons, state avatars, persona icons, agent icons, and badges, use the CorreaX UI asset rules in `DK-correax-brand.md`.
 - Treat company marks as company-brand assets and Alex hero marks as product-brand assets, not the everyday visual language for sidebar micro-icons.
 - In-product assets must optimize for semantic clarity at 16px to 24px, with state and function taking priority over logo resemblance.
 
@@ -71,10 +71,8 @@ The brain anatomy page (`docs/alex-brain-anatomy.html`) uses GitHub's dark palet
 | Location | File | Type | Purpose |
 |----------|------|------|---------|
 | `.github/assets/banner.svg` | Animated | 8.62 KB | GitHub READMEs |
-| `platforms/vscode-extension/.github/assets/banner.svg` | Animated | 8.62 KB | Extension GitHub README |
-| `platforms/vscode-extension/assets/banner.svg` | Static | 3.42 KB | Marketplace (compatibility) |
-| `platforms/vscode-extension/assets/banner.png` | Static | 204 KB | Fallback PNG |
-| `assets/banner.png` | Static | 204 KB | Legacy/external references |
+| `assets/banner.svg` | Static | 3.42 KB | Marketplace (compatibility) |
+| `assets/banner.png` | Static | 204 KB | Fallback PNG |
 
 ### Logos
 
@@ -82,11 +80,9 @@ All logos use 30° rotation for dynamic launch angle.
 
 | Location | File | Size | Purpose |
 |----------|------|------|---------|
-| `platforms/vscode-extension/assets/logo.svg` | 32x32 | 1.04 KB | Extension icon source (30° rotation) |
-| `platforms/vscode-extension/assets/logo-mono.svg` | 24x24 | 0.64 KB | Activity bar (currentColor, 30° rotation) |
-| `platforms/vscode-extension/assets/icon.png` | 128x128 | 3.58 KB | Marketplace icon |
-| `platforms/m365-copilot/appPackage/color.png` | 192x192 | 10.61 KB | Teams color icon |
-| `platforms/m365-copilot/appPackage/outline.png` | 32x32 | 1.20 KB | Teams outline icon |
+| `assets/logo.svg` | 32x32 | 1.04 KB | Extension icon source (30° rotation) |
+| `assets/logo-mono.svg` | 24x24 | 0.64 KB | Activity bar (currentColor, 30° rotation) |
+| `assets/icon.png` | 128x128 | 3.58 KB | Marketplace icon |
 
 ## GK Premium Branding (v5.0)
 
@@ -192,7 +188,7 @@ The `--density 150` flag ensures crisp text rendering.
 
 **Purpose**: Branded visual assets for persona-specific welcome experiences  
 **Tool**: Ideogram v2 via Replicate API  
-**Location**: `alex_docs/alex2/` (8 persona images at 1024x1024)  
+**Location**: `.github/assets/` (persona images at 1024x1024)  
 **Cost**: $0.08 per image ($0.64 total for full set)
 
 ### Template-Based Generation Pattern

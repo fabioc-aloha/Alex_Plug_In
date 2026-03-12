@@ -9,66 +9,88 @@
       "target": ".github/instructions/release-management.instructions.md",
       "type": "enables",
       "strength": 0.85,
-      "reason": "Publishing workflow"
+      "reason": "Publishing workflow",
+      "when": "Publishing workflow",
+      "yields": "release management capabilities and setup"
     },
     {
       "target": ".github/instructions/vscode-marketplace-publishing.instructions.md",
       "type": "implements",
       "strength": 0.9,
-      "reason": "Marketplace publishing deployment patterns"
+      "reason": "Marketplace publishing deployment patterns",
+      "when": "Marketplace publishing deployment patterns",
+      "yields": "VS Code marketplace publishing implementation steps"
     },
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",
       "type": "implements",
       "strength": 0.85,
-      "reason": "VS Code heir patterns"
+      "reason": "VS Code heir patterns",
+      "when": "VS Code heir patterns",
+      "yields": "heir sync management implementation steps"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "implements",
       "strength": 0.8,
-      "reason": "CSP, SecretStorage, telemetry compliance"
+      "reason": "CSP, SecretStorage, telemetry compliance",
+      "when": "CSP, SecretStorage, telemetry compliance",
+      "yields": "security review implementation steps"
     },
     {
       "target": ".github/skills/enterprise-integration/SKILL.md",
       "type": "extends",
       "strength": 0.75,
-      "reason": "Enterprise patterns for Graph, Azure AD auth"
+      "reason": "Enterprise patterns for Graph, Azure AD auth",
+      "when": "Enterprise patterns for Graph, Azure AD auth",
+      "yields": "enterprise integration extended capabilities"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "type": "uses",
       "strength": 0.7,
-      "reason": "TDZ debugging and production build troubleshooting"
+      "reason": "TDZ debugging and production build troubleshooting",
+      "when": "TDZ debugging and production build troubleshooting",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "implements",
       "strength": 0.75,
-      "reason": "Webview UI patterns must follow accessibility standards"
+      "reason": "Webview UI patterns must follow accessibility standards",
+      "when": "Webview UI patterns must follow accessibility standards",
+      "yields": "UI UX design implementation steps"
     },
     {
       "target": ".github/skills/brand-asset-management/SKILL.md",
       "type": "coordinates-with",
       "strength": 0.7,
-      "reason": "Avatar system uses brand assets (90 images across personas, ages, agents, states)"
+      "reason": "Avatar system uses brand assets (90 images across personas, ages, agents, states)",
+      "when": "Avatar system uses brand assets (90 images across personas, ages, agents, states)",
+      "yields": "brand asset management coordination protocols"
     },
     {
       "target": ".github/skills/secrets-management/SKILL.md",
       "type": "coordinates-with",
       "strength": 0.7,
-      "reason": "SecretStorage API, VSCE secret scanner avoidance during packaging"
+      "reason": "SecretStorage API, VSCE secret scanner avoidance during packaging",
+      "when": "SecretStorage API, VSCE secret scanner avoidance during packaging",
+      "yields": "secrets management coordination protocols"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization"
+      "reason": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization",
+      "when": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization",
+      "yields": "refactoring patterns patterns and guidance"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
       "type": "applied-by",
-      "strength": 0.7
+      "strength": 0.7,
+      "when": "localization applies VS Code extension patterns",
+      "yields": "localization application context"
     }
   ],
   "activationPatterns": [
@@ -172,5 +194,63 @@
     "rebuild extension",
     "reinstall extension",
     "extension debugging"
+  ],
+  "activationContexts": [
+    "VS Code extension",
+    "extension development",
+    "vscode extension",
+    "VS Code API",
+    "vscode API",
+    "extension API",
+    "webview",
+    "tree view",
+    "custom view",
+    "sidebar view",
+    "command registration",
+    "registerCommand",
+    "contribution point",
+    "SecretStorage",
+    "CSP",
+    "Content-Security-Policy",
+    "telemetry",
+    "extension activation",
+    "onStartup",
+    "activation events",
+    "VSIX",
+    "package extension",
+    "publish extension",
+    "vsce",
+    "TDZ",
+    "temporal dead zone",
+    "minification",
+    "production build",
+    "webview messaging",
+    "postMessage",
+    "acquireVsCodeApi",
+    "extension settings",
+    "getConfiguration",
+    "workspace.update",
+    "extension manifest",
+    "package.json contributes",
+    "VS Code 1.109",
+    "VS Code 1.111",
+    "agent-scoped hooks",
+    "autopilot",
+    "task_complete",
+    "debugEventsSnapshot",
+    "chat settings",
+    "Copilot extension",
+    "rebuild extension",
+    "reinstall extension",
+    "extension debugging",
+    "extension",
+    "command",
+    "activation",
+    "settings management",
+    "documentation pattern",
+    "PowerShell automation",
+    "minifier",
+    "rebuild",
+    "reinstall"
   ]
 }

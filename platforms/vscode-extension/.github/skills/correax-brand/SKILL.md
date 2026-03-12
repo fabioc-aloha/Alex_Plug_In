@@ -27,7 +27,7 @@ heirs: [vscode, m365, web]
 
 The CorreaX design language defines the visual identity for all CorreaX products — LearnAlex website, Alex VS Code extension, AIRS platform, books, and marketing materials.
 
-**Authoritative reference**: `alex_docs/DK-correax-brand.md` — the full design language with CSS implementations.
+**Authoritative reference**: `DK-correax-brand.md` — the full design language with CSS implementations.
 
 ### Core Palette (from memory)
 
@@ -107,12 +107,12 @@ All 27 Alex personas use CorreaX tokens. Three intentional exceptions preserve p
 
 **Fallback** (no persona detected): `#6366f1` (CorreaX indigo primary — never `var(--vscode-charts-blue)`)
 
-Full table with line references: `platforms/vscode-extension/src/chat/personaDetection.ts` · DK §13.
+Full table with line references: `src/chat/personaDetection.ts` · DK §13.
 
 ## Resources
 
 For full CSS implementations, component anatomy, and the complete design checklist:
-→ Read `alex_docs/DK-correax-brand.md`
+→ Read `DK-correax-brand.md`
 
 For brand asset deployment, marketplace descriptions, and store listing patterns:
 → Use the `brand-asset-management` skill

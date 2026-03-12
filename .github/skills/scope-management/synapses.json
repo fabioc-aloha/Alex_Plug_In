@@ -47,5 +47,11 @@
       "when": "helping stakeholders accept scope cuts",
       "yields": "diplomatic communication approaches"
     }
+  ],
+  "activationContexts": [
+    "scope-management",
+    "scope management",
+    "scope",
+    "management"
   ]
 }

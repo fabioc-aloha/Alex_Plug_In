@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*trigger*,**/*protocol*,**/*consolidation*"
+applyTo: "**/*dream*,**/*meditation*,**/*consolidation*"
 description: "Detailed protocol triggers for dream, meditation, and synaptic enhancement"
 ---
 

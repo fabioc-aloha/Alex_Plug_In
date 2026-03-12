@@ -1,3 +1,8 @@
+---
+description: "Testing strategy selection, test coverage review, and test failure triage"
+applyTo: "**/*.test.*,**/*.spec.*,**/test/**,**/__tests__/**"
+---
+
 # Testing Strategies Instructions
 
 **Auto-loaded when**: Writing tests, reviewing test coverage, choosing test types, or triaging failing tests

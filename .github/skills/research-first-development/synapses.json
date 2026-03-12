@@ -6,55 +6,73 @@
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "extends",
       "strength": 0.85,
-      "reason": "Research-first uses bootstrap learning for unknown domains"
+      "reason": "Research-first uses bootstrap learning for unknown domains",
+      "when": "Research-first uses bootstrap learning for unknown domains",
+      "yields": "bootstrap learning extended capabilities"
     },
     {
       "target": ".github/skills/project-scaffolding/SKILL.md",
       "type": "extends",
       "strength": 0.85,
-      "reason": "Adds knowledge layer before file scaffolding"
+      "reason": "Adds knowledge layer before file scaffolding",
+      "when": "Adds knowledge layer before file scaffolding",
+      "yields": "project scaffolding extended capabilities"
     },
     {
       "target": ".github/skills/skill-building/SKILL.md",
       "type": "requires",
       "strength": 0.95,
-      "reason": "Skills extracted from research follow skill-building quality gates"
+      "reason": "Skills extracted from research follow skill-building quality gates",
+      "when": "Skills extracted from research follow skill-building quality gates",
+      "yields": "skill building required patterns and guidance"
     },
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
       "type": "integrates",
       "strength": 0.85,
-      "reason": "Research generates knowledge that synthesis organizes cross-project"
+      "reason": "Research generates knowledge that synthesis organizes cross-project",
+      "when": "Research generates knowledge that synthesis organizes cross-project",
+      "yields": "knowledge synthesis integration patterns"
     },
     {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
       "type": "feeds",
       "strength": 0.8,
-      "reason": "Gap analysis creates skills that SSO selects from during execution"
+      "reason": "Gap analysis creates skills that SSO selects from during execution",
+      "when": "Gap analysis creates skills that SSO selects from during execution",
+      "yields": "skill selection optimization downstream processing"
     },
     {
       "target": ".github/instructions/research-first-workflow.instructions.md",
       "type": "implements",
       "strength": 0.95,
-      "reason": "Procedural memory encoding of the research-first methodology"
+      "reason": "Procedural memory encoding of the research-first methodology",
+      "when": "Procedural memory encoding of the research-first methodology",
+      "yields": "research first workflow implementation steps"
     },
     {
       "target": ".github/prompts/gapanalysis.prompt.md",
       "type": "activates",
       "strength": 0.9,
-      "reason": "Interactive /gapanalysis command implements 4D gap analysis"
+      "reason": "Interactive /gapanalysis command implements 4D gap analysis",
+      "when": "Interactive /gapanalysis command implements 4D gap analysis",
+      "yields": "gapanalysis interactive workflow"
     },
     {
       "target": ".github/instructions/heir-skill-promotion.instructions.md",
       "type": "extends",
       "strength": 0.75,
-      "reason": "Research-first patterns flow through heir promotion pipeline"
+      "reason": "Research-first patterns flow through heir promotion pipeline",
+      "when": "Research-first patterns flow through heir promotion pipeline",
+      "yields": "heir skill promotion extended capabilities"
     },
     {
       "target": ".github/skills/north-star/SKILL.md",
       "type": "aligns",
       "strength": 0.85,
-      "reason": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping"
+      "reason": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping",
+      "when": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping",
+      "yields": "north star alignment criteria"
     }
   ],
   "triggers": [
@@ -104,5 +122,41 @@
     "preparation",
     "groundwork"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "new project",
+    "gap analysis",
+    "research first",
+    "before coding",
+    "knowledge encoding",
+    "two-agent pattern",
+    "synapse hygiene",
+    "pre-implementation",
+    "project setup",
+    "start new project",
+    "research before code",
+    "learn before build",
+    "skill gap",
+    "knowledge gap",
+    "4D gap analysis",
+    "four dimension gap",
+    "what do I need to know",
+    "domain knowledge",
+    "domain expertise",
+    "unfamiliar technology",
+    "new framework",
+    "new platform",
+    "research phase",
+    "discovery phase",
+    "exploration phase",
+    "create skill",
+    "build skill",
+    "skill creation",
+    "encode knowledge",
+    "capture expertise",
+    "document learning",
+    "pre-project research",
+    "preparation",
+    "groundwork"
+  ]
 }

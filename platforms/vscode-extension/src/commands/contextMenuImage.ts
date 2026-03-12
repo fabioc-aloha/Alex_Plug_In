@@ -51,7 +51,8 @@ async function resizeImageIfNeeded(
       .toBuffer();
 
     return resized;
-  } catch {
+  } catch (err) {
+    console.warn('[Alex Image] Resize failed, using original:', err instanceof Error ? err.message : String(err));
     return inputBuffer;
   }
 }

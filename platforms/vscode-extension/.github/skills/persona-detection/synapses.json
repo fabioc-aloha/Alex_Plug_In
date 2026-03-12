@@ -11,12 +11,6 @@
       "note": "Active Context persona field updated by detection chain"
     },
     {
-      "target": "..\\release-process\\SKILL.md",
-      "type": "validates",
-      "strength": 0.7,
-      "note": "Persona detection tested during pre-publish"
-    },
-    {
       "target": "..\\brand-asset-management\\SKILL.md",
       "type": "coordinates-with",
       "strength": 0.7,

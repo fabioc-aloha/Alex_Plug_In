@@ -7,37 +7,49 @@
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
       "type": "stores",
       "strength": 0.75,
-      "reason": "Synthesis outputs go to global KB"
+      "reason": "Synthesis outputs go to global KB",
+      "when": "Synthesis outputs go to global KB",
+      "yields": "knowledge synthesis storage interface"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
       "type": "informs",
       "strength": 0.65,
-      "reason": "Meditation creates global insights"
+      "reason": "Meditation creates global insights",
+      "when": "Meditation creates global insights",
+      "yields": "meditation contextual assessment"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "accelerates",
       "strength": 0.8,
-      "reason": "Prior knowledge speeds learning"
+      "reason": "Prior knowledge speeds learning",
+      "when": "Prior knowledge speeds learning",
+      "yields": "bootstrap learning acceleration techniques"
     },
     {
       "target": ".github/instructions/heir-skill-promotion.instructions.md",
       "type": "informs",
       "strength": 0.9,
-      "reason": "Promotion candidate patterns guide heir skill evolution"
+      "reason": "Promotion candidate patterns guide heir skill evolution",
+      "when": "Promotion candidate patterns guide heir skill evolution",
+      "yields": "heir skill promotion contextual assessment"
     },
     {
       "target": ".github/instructions/global-knowledge-curation.instructions.md",
       "type": "informs",
       "strength": 0.85,
-      "reason": "Curation protocol uses promotion patterns"
+      "reason": "Curation protocol uses promotion patterns",
+      "when": "Curation protocol uses promotion patterns",
+      "yields": "global knowledge curation contextual assessment"
     },
     {
       "target": ".github/prompts/meditate.prompt.md",
       "type": "triggers",
       "strength": 0.8,
-      "reason": "Auto-promotion during meditation sessions"
+      "reason": "Auto-promotion during meditation sessions",
+      "when": "Auto-promotion during meditation sessions",
+      "yields": "meditate activation and procedures"
     }
   ],
   "triggers": [
@@ -93,5 +105,47 @@
     "organizational knowledge",
     "team knowledge"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "knowledge",
+    "insight",
+    "pattern",
+    "cross-project",
+    "global",
+    "reusable",
+    "promotion",
+    "promote",
+    "candidate",
+    "global knowledge",
+    "cross-project knowledge",
+    "shared knowledge",
+    "knowledge base",
+    "knowledge repository",
+    "knowledge index",
+    "save insight",
+    "capture pattern",
+    "store knowledge",
+    "promote to global",
+    "share across projects",
+    "reusable pattern",
+    "GK-",
+    "GI-",
+    "knowledge search",
+    "search knowledge",
+    "find pattern",
+    "lookup insight",
+    "knowledge query",
+    "knowledge sync",
+    "sync knowledge",
+    "knowledge status",
+    "Alex-Global-Knowledge",
+    "global repo",
+    "knowledge repo",
+    "what patterns exist",
+    "existing patterns",
+    "prior art",
+    "cross-project learning",
+    "organizational knowledge",
+    "team knowledge"
+  ]
 }

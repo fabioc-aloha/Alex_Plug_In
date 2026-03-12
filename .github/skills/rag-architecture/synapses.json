@@ -5,37 +5,49 @@
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
       "type": "complements",
-      "strength": 0.9
+      "strength": 0.9,
+      "when": "Combining RAG architecture with prompt engineering",
+      "yields": "prompt engineering complementary techniques"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
       "type": "applies",
       "strength": 0.7,
-      "note": "RAG systems expose APIs"
+      "note": "RAG systems expose APIs",
+      "when": "RAG architecture connects to API design",
+      "yields": "API design patterns and guidance"
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
       "type": "implements",
       "strength": 0.85,
-      "note": "RAG is a key anti-hallucination technique"
+      "note": "RAG is a key anti-hallucination technique",
+      "when": "Applying anti hallucination procedures",
+      "yields": "anti hallucination implementation steps"
     },
     {
       "target": ".github/skills/global-knowledge/SKILL.md",
       "type": "related",
       "strength": 0.75,
-      "note": "Global knowledge is a form of RAG for Alex"
+      "note": "Global knowledge is a form of RAG for Alex",
+      "when": "RAG architecture relates to global knowledge",
+      "yields": "global knowledge related patterns and guidance"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "requires",
       "strength": 0.7,
-      "note": "RAG evaluation and testing"
+      "note": "RAG evaluation and testing",
+      "when": "RAG architecture depends on testing strategies",
+      "yields": "testing strategies required patterns and guidance"
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
       "type": "informs",
       "strength": 0.65,
-      "note": "Embedding and generation model choices"
+      "note": "Embedding and generation model choices",
+      "when": "RAG architecture provides context to LLM model selection",
+      "yields": "LLM model selection contextual assessment"
     },
     {
       "target": ".github/skills/foundry-agent-platform/SKILL.md",
@@ -69,5 +81,29 @@
     "reranking",
     "hybrid search"
   ],
-  "$schema": "../SYNAPSE-SCHEMA.json"
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "RAG",
+    "retrieval",
+    "retrieval-augmented",
+    "embedding",
+    "embeddings",
+    "vector",
+    "vector database",
+    "vector store",
+    "semantic search",
+    "similarity search",
+    "chunking",
+    "chunk",
+    "knowledge base",
+    "document retrieval",
+    "Pinecone",
+    "Weaviate",
+    "Chroma",
+    "FAISS",
+    "pgvector",
+    "Azure AI Search",
+    "reranking",
+    "hybrid search"
+  ]
 }

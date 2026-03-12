@@ -1,6 +1,5 @@
 ---
-description: Markdown to Word document conversion with diagram support
-applyTo: "**/*.md"
+description: "Markdown to Word document conversion with diagram support"
 ---
 
 # Markdown to Word Conversion Instructions

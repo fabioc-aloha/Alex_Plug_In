@@ -35,18 +35,6 @@
       "note": "Meditative practice for brain maintenance"
     },
     {
-      "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "informs",
-      "strength": 0.9,
-      "note": "Brain QA is step 0 of release preflight checklist"
-    },
-    {
-      "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "validates",
-      "strength": 0.8,
-      "note": "Phase 5 validates synapse normalization during heir upgrades"
-    },
-    {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
       "type": "enables",
       "strength": 0.75,

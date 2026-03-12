@@ -58,10 +58,8 @@ Expert in Alex brand hierarchy, visual identity systems, asset deployment, and p
 |-------|------|---------|
 | Animated Banner | `.github/assets/banner.svg` | GitHub READMEs |
 | Static Banner | `assets/banner.png` | Marketplace fallback |
-| Extension Icon | `platforms/vscode-extension/assets/icon.png` | Marketplace icon |
-| Mono Logo | `platforms/vscode-extension/assets/logo-mono.svg` | Activity bar |
-| M365 Color | `platforms/m365-copilot/appPackage/color.png` | Teams color icon |
-| M365 Outline | `platforms/m365-copilot/appPackage/outline.png` | Teams outline icon |
+| Extension Icon | `assets/icon.png` | Marketplace icon |
+| Mono Logo | `assets/logo-mono.svg` | Activity bar |
 
 ### Platform Guidelines
 
