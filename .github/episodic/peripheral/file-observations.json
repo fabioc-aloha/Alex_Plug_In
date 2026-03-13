@@ -3,38 +3,23 @@
     "alex_docs/research/COMMAND-CENTER-UI-ARTIFACT-APPROVAL-2026-03-05.md",
     "alex_docs/research/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
-  "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
-    "platforms/vscode-extension/package.json"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [
-    {
-      "file": "alex_archive/doc-audit-2026-03-03/exports/How-to-Use-Alex-Gamma-Skill.pptx",
-      "todoCount": 11,
-      "scannedAt": 1773358389572
-    },
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1773358389572
-    },
-    {
-      "file": "alex_archive/doc-audit-2026-03-03/exports/How-to-Use-the-Gamma-Generator-Script.pptx",
-      "todoCount": 4,
-      "scannedAt": 1773358389572
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1773358389572
-    },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1773358389572
+      "scannedAt": 1773360776464
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1773360776464
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1773360776464
     }
   ],
-  "lastUpdated": 1773358389572
+  "lastUpdated": 1773360776464
 }
