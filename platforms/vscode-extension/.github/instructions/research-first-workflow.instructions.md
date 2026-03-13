@@ -9,7 +9,6 @@ description: "Research-first development workflow — pre-project knowledge enco
 **Synapse**: [.github/skills/research-first-development/SKILL.md] (Critical, Implements, Bidirectional) - "skill provides patterns; instruction provides procedures"
 **Synapse**: [.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "gap analysis creates skills that SSO selects from"
 **Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (High, Extends, Forward) - "research phase uses bootstrap learning for unknown domains"
-**Synapse**: [.github/instructions/heir-skill-promotion.instructions.md] (High, Integrates, Forward) - "heir projects use this workflow, then promote skills"
 **Synapse**: [.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement teaches heirs to apply research-first"
 **Synapse**: [.github/instructions/azure-enterprise-deployment.instructions.md] (High, Applies, Bidirectional) - "pre-deployment validation is research phase for infrastructure work"
 

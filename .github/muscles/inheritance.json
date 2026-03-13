@@ -30,7 +30,7 @@
             "inheritance": "master-only",
             "description": "Orchestrates master→heir build process",
             "referencedBy": [
-                "heir-curation",
+                "heir-sync-management",
                 "release-management"
             ]
         },
@@ -93,19 +93,11 @@
                 "pptx-generation"
             ]
         },
-        "sync-architecture.js": {
-            "inheritance": "master-only",
-            "description": "Syncs master architecture to heir (meta-script, legacy .js reference)",
-            "referencedBy": [
-                "heir-curation",
-                "build-extension-package.ps1"
-            ]
-        },
         "sync-architecture.cjs": {
             "inheritance": "master-only",
             "description": "Syncs master architecture to heir (CommonJS variant)",
             "referencedBy": [
-                "heir-curation",
+                "heir-sync-management",
                 "build-extension-package.ps1"
             ]
         },

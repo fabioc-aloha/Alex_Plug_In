@@ -40,7 +40,6 @@ suite('Welcome View Test Suite', () => {
                     muscles: 8,
                     synapses: 37,
                 },
-                cognitiveAge: '26 years',
                 lastMaintenance: '2026-03-05',
             };
             assert.ok(data.synapseHealth >= 0 && data.synapseHealth <= 100);

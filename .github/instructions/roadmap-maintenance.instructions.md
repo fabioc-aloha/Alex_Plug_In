@@ -1,6 +1,7 @@
 ---
 description: "Roadmap hygiene, backlog curation, and Research Findings deduplication protocols"
 applyTo: "**/ROADMAP*.md"
+inheritance: master-only
 ---
 
 # Roadmap Maintenance Procedural Memory

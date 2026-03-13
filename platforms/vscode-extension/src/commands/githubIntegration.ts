@@ -1,12 +1,11 @@
 /**
  * GitHub Integration
  * 
- * Import GitHub issues as Alex learning goals.
+ * GitHub repository detection, issue fetching, and PR review.
  * Uses VS Code's built-in GitHub authentication.
  */
 
 import * as vscode from 'vscode';
-import { createGoal, LearningGoal } from './goals';
 import { openChatPanel } from '../shared/utils';
 
 // Rate limit tracking
@@ -157,114 +156,6 @@ export async function fetchGitHubIssues(
         vscode.window.showErrorMessage(`Failed to fetch issues: ${error instanceof Error ? error.message : String(error)}`);
         return [];
     }
-}
-
-/**
- * Convert GitHub issue to learning goal
- */
-function issueToGoal(issue: GitHubIssue, repo: GitHubRepo): Partial<LearningGoal> {
-    // Infer target type from labels
-    let targetType: 'daily' | 'weekly' | 'custom' = 'custom';
-    if (issue.labels.some(l => l.name.toLowerCase().includes('quick') || l.name.toLowerCase().includes('small'))) {
-        targetType = 'daily';
-    } else if (issue.labels.some(l => l.name.toLowerCase().includes('medium') || l.name.toLowerCase().includes('feature'))) {
-        targetType = 'weekly';
-    }
-
-    // Extract tags from labels
-    const tags = issue.labels
-        .map(l => l.name)
-        .filter(name => !['quick', 'small', 'medium', 'large', 'feature'].includes(name.toLowerCase()));
-
-    return {
-        title: `#${issue.number}: ${issue.title}`,
-        description: issue.body 
-            ? issue.body.substring(0, 500) + (issue.body.length > 500 ? '...' : '')
-            : `GitHub issue from ${repo.owner}/${repo.repo}`,
-        targetType,
-        targetCount: 1,
-        unit: 'completion',
-        tags: [`github:${repo.owner}/${repo.repo}`, ...tags],
-    };
-}
-
-/**
- * Show issue picker and import selected issues as goals
- */
-export async function importGitHubIssuesAsGoals(): Promise<LearningGoal[]> {
-    // Detect repo
-    const repo = await detectGitHubRepo();
-    if (!repo) {
-        // Ask user to enter repo
-        const repoInput = await vscode.window.showInputBox({
-            prompt: 'Enter GitHub repository (owner/repo)',
-            placeHolder: 'e.g., microsoft/vscode',
-            validateInput: (value) => {
-                if (!value.includes('/')) {
-                    return 'Format: owner/repo';
-                }
-                return null;
-            }
-        });
-
-        if (!repoInput) {
-            return [];
-        }
-
-        const [owner, repoName] = repoInput.split('/');
-        return importFromRepo({ owner, repo: repoName });
-    }
-
-    return importFromRepo(repo);
-}
-
-async function importFromRepo(repo: GitHubRepo): Promise<LearningGoal[]> {
-    const issues = await fetchGitHubIssues(repo, { state: 'open', limit: 50 });
-
-    if (issues.length === 0) {
-        vscode.window.showInformationMessage(`No open issues found in ${repo.owner}/${repo.repo}`);
-        return [];
-    }
-
-    // Show quick pick with issues
-    interface IssueQuickPickItem extends vscode.QuickPickItem {
-        issue: GitHubIssue;
-    }
-
-    const items: IssueQuickPickItem[] = issues.map(issue => ({
-        label: `#${issue.number}: ${issue.title}`,
-        description: issue.labels.map(l => l.name).join(', '),
-        detail: issue.body?.substring(0, 100) || undefined,
-        issue,
-    }));
-
-    const selected = await vscode.window.showQuickPick(items, {
-        title: `📋 Import Issues from ${repo.owner}/${repo.repo}`,
-        placeHolder: 'Select issues to import as learning goals',
-        canPickMany: true,
-    });
-
-    if (!selected || selected.length === 0) {
-        return [];
-    }
-
-    // Create goals from selected issues
-    const createdGoals: LearningGoal[] = [];
-    for (const item of selected) {
-        const goalData = issueToGoal(item.issue, repo);
-        const goal = await createGoal(
-            goalData.title!,
-            goalData.targetType!,
-            goalData.targetCount!,
-            goalData.unit!,
-            goalData.description,
-            goalData.tags
-        );
-        createdGoals.push(goal);
-    }
-
-    vscode.window.showInformationMessage(`📋 Imported ${createdGoals.length} issue(s) as learning goals`);
-    return createdGoals;
 }
 
 /**

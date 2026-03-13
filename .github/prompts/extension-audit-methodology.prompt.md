@@ -1,5 +1,6 @@
 ---
 description: Systematic 5-dimension quality audit for VS Code extensions: debug cleanliness, dead code, performance, menus, and dependencies
+inheritance: master-only
 ---
 
 # Extension Audit Workflow
@@ -479,5 +480,3 @@ alex_docs/audits/
 - Better performance → improved user experience
 - No dead code → reduced confusion for contributors
 - Dependency hygiene → smaller package size, fewer vulnerabilities
-
-

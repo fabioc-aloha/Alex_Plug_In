@@ -5,9 +5,10 @@
 .DESCRIPTION
     Checks all synapses.json files for:
     - Valid JSON syntax
-    - Required fields (skill/skillId, inheritance, connections)
+    - Required fields (skill/skillId, connections)
     - schemaVersion presence
     - Valid connection targets (files exist)
+    Note: Inheritance is centralized in sync-architecture.cjs SKILL_EXCLUSIONS, NOT in synapses.json.
 
 .EXAMPLE
     .\validate-synapses.ps1
@@ -31,7 +32,6 @@ $results = @{
     InvalidJSON        = @()
     MissingSchema      = @()
     MissingSkillId     = @()
-    MissingInheritance = @()
     MissingConnections = @()
     BrokenTargets      = @()
 }
@@ -66,11 +66,6 @@ foreach ($file in $synapseFiles) {
     if (-not $content.schemaVersion) {
         $results.MissingSchema += $skillName
         # Not a failure, just a warning
-    }
-    
-    if (-not $content.inheritance) {
-        $results.MissingInheritance += $skillName
-        $isValid = $false
     }
     
     if (-not $content.connections -or $content.connections.Count -eq 0) {
@@ -112,11 +107,6 @@ if (-not $Quiet) {
         $results.MissingSkillId | ForEach-Object { Write-Host "  - $_" }
     }
     
-    if ($results.MissingInheritance.Count -gt 0) {
-        Write-Host "`nMissing inheritance ($($results.MissingInheritance.Count)):" -ForegroundColor Red
-        $results.MissingInheritance | ForEach-Object { Write-Host "  - $_" }
-    }
-    
     if ($results.MissingConnections.Count -gt 0) {
         Write-Host "`nMissing/empty connections ($($results.MissingConnections.Count)):" -ForegroundColor Yellow
         $results.MissingConnections | ForEach-Object { Write-Host "  - $_" }
@@ -134,7 +124,7 @@ if (-not $Quiet) {
 }
 
 # Exit with error if issues found
-$criticalErrors = $results.InvalidJSON.Count + $results.MissingSkillId.Count + $results.MissingInheritance.Count
+$criticalErrors = $results.InvalidJSON.Count + $results.MissingSkillId.Count
 if ($Strict) {
     $criticalErrors += $results.BrokenTargets.Count
 }

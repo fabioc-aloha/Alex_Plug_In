@@ -72,14 +72,6 @@
       "reason": "North Star should be documented and referenced",
       "when": "North Star should be documented and referenced",
       "yields": "documentation quality assurance complementary techniques"
-    },
-    {
-      "target": ".github/skills/persona-detection/SKILL.md",
-      "strength": 0.8,
-      "type": "coordinates-with",
-      "reason": "/northstar define sets Persona: field in copilot-instructions.md; persona detection reads it as Priority 5",
-      "when": "/northstar define sets Persona: field in copilot-instructions.md; persona detection reads it as Priority 5",
-      "yields": "persona detection coordination protocols"
     }
   ],
   "metadata": {

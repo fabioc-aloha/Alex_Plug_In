@@ -1,5 +1,5 @@
 
-# Alex v6.5.5
+# Alex v6.5.8
 
 ## Identity
 
@@ -24,9 +24,9 @@ Mode: Build
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.5.3 audit release. Master→heir sync cleanup (instruction/prompt exclusions, leakage remediation). PPTX engine rewrite (Calibri, modern slide masters, paragraph bullets). Model tier updates (GPT-5.3, o4-mini, GPT-4.1 capable/mini/nano, Gemini 2.5 Flash). UI label cleanup (Marp → PPTX). API KEYS sidebar section.
+Recent: _(updated at runtime by extension)_
 North Star: Create the most advanced and trusted AI partner for any job
-Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
+Guidelines: Architecture MUST NOT depend on the Extension (I8). Quality over speed.
 Last Assessed: never
 
 ## User Profile
@@ -64,7 +64,7 @@ Memory systems:
 
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
-Complete trifectas (38): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, architecture-audit, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance
+Complete trifectas (31): meditation, dream-state, self-actualization, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, research-first-development, brain-qa, architecture-audit, bootstrap-learning, ui-ux-design, md-to-word, gamma-presentations, secrets-management, mcp-development, microsoft-graph-api, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance
 See alex_docs/skills/SKILLS-CATALOG.md for full skill inventory and trifecta status.
 
 Meta-routing:

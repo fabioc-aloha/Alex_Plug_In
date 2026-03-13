@@ -1,6 +1,3 @@
-import { PersistedSessionState } from '../../commands/session';
-import { LearningGoal } from '../../commands/goals';
-
 /**
  * Tool input parameters interfaces
  */
@@ -26,10 +23,6 @@ export interface IUserProfileParams {
     action: 'get' | 'update' | 'exists';
     field?: string;
     value?: string;
-}
-
-export interface IFocusContextParams {
-    includeGoals?: boolean;
 }
 
 export interface IHeirValidationParams {
@@ -79,18 +72,4 @@ export interface IUserProfile {
 export interface ISelfActualizationParams {
     createReport?: boolean;
     autoFix?: boolean;
-}
-
-/**
- * Focus Context Response Interface
- */
-export interface IFocusContextResponse {
-    session: PersistedSessionState;
-    goals?: {
-        activeGoals: LearningGoal[];
-        completedToday: number;
-        streakDays: number;
-        totalCompleted: number;
-    };
-    summary: string;
 }

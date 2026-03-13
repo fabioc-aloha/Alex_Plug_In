@@ -182,85 +182,8 @@ export async function buildEpisodicContext(n = 5): Promise<string> {
 }
 
 // ============================================================================
-// Commands
-// ============================================================================
-
-/** alex.recallSession — search session history by keyword */
-export async function recallSessionCommand(): Promise<void> {
-    const query = await vscode.window.showInputBox({
-        prompt: 'What were you working on?',
-        placeHolder: 'e.g. "brand alignment", "episodic memory", "last Tuesday"',
-        title: 'Alex: Search Session Memory',
-    });
-    if (!query) { return; }
-
-    const matches = await queryEpisodicMemory(query);
-    if (matches.length === 0) {
-        vscode.window.showInformationMessage(
-            `No sessions found matching "${query}". Sessions are recorded after 2+ message exchanges with @alex.`
-        );
-        return;
-    }
-
-    const items = matches.slice(0, 15).map(s => ({
-        label: `$(history) ${s.topic}`,
-        description: new Date(s.date).toLocaleDateString('en-US', {
-            weekday: 'short', month: 'short', day: 'numeric',
-            hour: '2-digit', minute: '2-digit',
-        }),
-        detail: s.summary.slice(0, 120) + (s.summary.length > 120 ? '…' : ''),
-        session: s,
-    }));
-
-    const chosen = await vscode.window.showQuickPick(items, {
-        placeHolder: `${matches.length} session(s) matching "${query}"`,
-        title: 'Alex Episodic Memory',
-    });
-    if (!chosen) { return; }
-
-    openChatWithRecall(chosen.session);
-}
-
-/** alex.showSessionHistory — browse recent sessions */
-export async function showSessionHistoryCommand(): Promise<void> {
-    const sessions = await getRecentSessions(20);
-    if (sessions.length === 0) {
-        vscode.window.showInformationMessage(
-            'No session history yet. Have a 2+ message conversation with @alex to record your first session.'
-        );
-        return;
-    }
-
-    const items = sessions.map(s => ({
-        label: `$(history) ${s.topic}`,
-        description: new Date(s.date).toLocaleDateString('en-US', {
-            weekday: 'short', month: 'short', day: 'numeric',
-        }),
-        detail: `${s.tags.join(', ')} · ${s.messageCount ?? '?'} messages · ${s.workspace ?? 'unknown workspace'}`,
-        session: s,
-    }));
-
-    const chosen = await vscode.window.showQuickPick(items, {
-        placeHolder: 'Select a session to continue',
-        title: `Alex Session History — ${sessions.length} recorded sessions`,
-    });
-    if (!chosen) { return; }
-
-    openChatWithRecall(chosen.session);
-}
-
-// ============================================================================
 // Helpers
 // ============================================================================
-
-function openChatWithRecall(session: EpisodicRecord): void {
-    const dateStr = new Date(session.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-    const q = `@alex I want to continue working on what we were doing on ${dateStr}: "${session.topic}". Here's what I remember from that session: ${session.summary}`;
-    vscode.commands.executeCommand('workbench.action.chat.open', { query: q })
-        .then(undefined, () => {
-            vscode.commands.executeCommand('workbench.panel.chat.view.copilot.focus');
-        });
-}
 
 function buildSummary(prompts: string[]): string {
     if (prompts.length === 0) { return ''; }

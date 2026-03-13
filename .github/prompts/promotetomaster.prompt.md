@@ -1,6 +1,7 @@
 ---
 description: Promote a skill or pattern from an heir project to Master Alex
 agent: Alex
+inheritance: master-only
 ---
 
 # /promotetomaster - Heir Skill Promotion

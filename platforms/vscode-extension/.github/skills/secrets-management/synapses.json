@@ -6,13 +6,6 @@
   "lastValidated": "2026-02-20",
   "connections": [
     {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "uses",
-      "strength": 0.85,
-      "when": "implementing VS Code extension APIs and patterns",
-      "yields": "Extension context access, command registration, activation lifecycle"
-    },
-    {
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "coordinates-with",
       "strength": 0.75,

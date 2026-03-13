@@ -44,14 +44,6 @@
       "note": "Performance optimization often involves refactoring",
       "when": "performance profiling needs refactoring patterns context",
       "yields": "refactoring patterns supporting context"
-    },
-    {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "supports",
-      "strength": 0.8,
-      "note": "Extension-specific profiling patterns",
-      "when": "performance profiling needs VS Code extension patterns context",
-      "yields": "VS Code extension patterns supporting context"
     }
   ],
   "activationBoost": [

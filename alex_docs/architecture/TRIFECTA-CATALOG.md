@@ -48,12 +48,12 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 | --------------------------------------------- | ------------------------------------------- |
 | `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, architecture-audit  |
 | `.github/muscles/brain-qa.ps1`                | brain-qa (31-phase validation)              |
-| `.github/muscles/build-extension-package.ps1` | heir-curation, release-management           |
+| `.github/muscles/build-extension-package.ps1` | heir-sync-management, release-management           |
 | `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)    |
 | `.github/muscles/gamma-generator.js`          | gamma-presentations (CLI generation)        |
 | `.github/muscles/normalize-paths.ps1`         | dream-state-automation (path normalization) |
 | `.github/muscles/pptxgen-cli.ts`              | pptx-generation (offline PPTX)              |
-| `.github/muscles/sync-architecture.js`        | heir-curation, build-extension-package.ps1  |
+| `.github/muscles/sync-architecture.cjs`        | heir-sync-management, build-extension-package.ps1  |
 | `.github/muscles/validate-skills.ps1`         | brain-qa, dream-state-automation            |
 | `.github/muscles/validate-synapses.ps1`       | brain-qa, dream-state-automation            |
 | `scripts/release-preflight.ps1`               | release-management, release-preflight       |
@@ -205,8 +205,8 @@ Capabilities with all three memory system components — each justified by the "
 | ~~Prompt~~  | ~~`promotetomaster.prompt.md`~~ — **MISSING** (needs creation) | `/promotetomaster` — skill promotion from heir to Master Alex                |
 
 **Status**: Skill+Instruction only — prompt does not exist yet.
-**Muscle**: `sync-architecture.js` — automated master→heir synchronization with PII protection
-**Inheritance**: `inheritable` — all heirs can promote skills back to Master
+**Muscle**: `sync-architecture.cjs` — automated master→heir synchronization with PII protection
+**Inheritance**: `master-only` — heir-sync-management is a master-only skill
 
 ### Markdown to Word Conversion
 

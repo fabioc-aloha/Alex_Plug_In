@@ -78,15 +78,48 @@ $synapseContent = Get-Content $synapsePath -Raw
 $synapseContent = $synapseContent -replace '"skillId": "skill-name"', "`"skillId`": `"$skillName`""
 Set-Content $synapsePath $synapseContent -NoNewline
 
+# Register non-inheritable skills in SKILL_EXCLUSIONS
+$syncArchPath = Join-Path $rootPath ".github\muscles\sync-architecture.cjs"
+if ($Inheritance -ne "inheritable" -and $Inheritance -ne "universal") {
+    if (Test-Path $syncArchPath) {
+        $syncContent = Get-Content $syncArchPath -Raw
+        # Find insertion point: last entry before closing brace of SKILL_EXCLUSIONS
+        $pattern = "(const SKILL_EXCLUSIONS = \{[\s\S]*?)(\n\};)"
+        if ($syncContent -match $pattern) {
+            $categoryComment = switch ($Inheritance) {
+                'master-only' { 'master-only' }
+                'heir:m365'   { 'heir:m365' }
+                'heir:vscode' { 'heir:vscode' }
+            }
+            $newEntry = "`n    '$skillName':$(' ' * [Math]::Max(1, 33 - $skillName.Length))'$Inheritance',"
+            $syncContent = $syncContent -replace $pattern, "`$1$newEntry`$2"
+            Set-Content $syncArchPath $syncContent -NoNewline
+            Write-Host "📋 Registered in SKILL_EXCLUSIONS as '$Inheritance'" -ForegroundColor Cyan
+        } else {
+            Write-Host "⚠️  Could not find SKILL_EXCLUSIONS in sync-architecture.cjs" -ForegroundColor Yellow
+            Write-Host "   Manually add: '$skillName': '$Inheritance'" -ForegroundColor Yellow
+        }
+    }
+}
+
 Write-Host "✅ Created skill: $skillName" -ForegroundColor Green
 Write-Host "   Location: .github/skills/$skillName/" -ForegroundColor Gray
-Write-Host "   Note: Inheritance is centralized in sync-architecture.cjs SKILL_EXCLUSIONS" -ForegroundColor Gray
+if ($Inheritance -eq "inheritable" -or $Inheritance -eq "universal") {
+    Write-Host "   Inheritance: $Inheritance (syncs to all heirs automatically)" -ForegroundColor Gray
+} else {
+    Write-Host "   Inheritance: $Inheritance (registered in SKILL_EXCLUSIONS)" -ForegroundColor Gray
+}
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "  1. Edit .github/skills/$skillName/SKILL.md" -ForegroundColor Gray
 Write-Host "  2. Update synapses.json with connections" -ForegroundColor Gray
 Write-Host "  3. Run: .\.github\muscles\brain-qa.ps1 -Mode schema" -ForegroundColor Gray
-Write-Host "  4. Add to skill-activation index if user-facing" -ForegroundColor Gray
+Write-Host "  4. Add to memory-activation index if user-facing" -ForegroundColor Gray
+if ($Inheritance -ne "inheritable" -and $Inheritance -ne "universal") {
+    Write-Host "  5. If creating trifecta siblings (.instructions.md, .prompt.md):" -ForegroundColor Yellow
+    Write-Host "     Add 'inheritance: $Inheritance' to their YAML frontmatter" -ForegroundColor Yellow
+    Write-Host "     to keep them excluded from the same heirs as the skill." -ForegroundColor Yellow
+}
 
 # Open in VS Code if available
 if (Get-Command code -ErrorAction SilentlyContinue) {

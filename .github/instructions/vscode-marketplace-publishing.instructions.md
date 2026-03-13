@@ -1,5 +1,6 @@
 ---
 description: "VS Code Marketplace publishing workflow, constraints, and best practices for extension deployment"
+inheritance: master-only
 ---
 
 # VS Code Marketplace Publishing Protocol

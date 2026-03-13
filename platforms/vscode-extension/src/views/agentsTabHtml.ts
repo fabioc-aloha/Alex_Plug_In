@@ -45,7 +45,7 @@ export function getAgentsTabHtml(ctx: AgentsTabContext): string {
                   <div class="agent-card-header">
                       <span class="agent-icon">${escapeHtml(a.icon)}</span>
                       <span class="agent-name">${escapeHtml(a.name)}</span>
-                      <span class="agent-live-dot ${isActive ? 'active' : 'idle'}" title="${isActive ? 'Active' : 'Idle'}"></span>
+                      <span class="agent-live-dot ${isActive ? 'active' : 'idle'}" title="${isActive ? 'Active' : 'Idle'}" aria-label="${isActive ? 'Active' : 'Idle'}"></span>
                       <span class="agent-badge ${a.installed ? 'badge-ok' : 'badge-missing'}">${a.installed ? '✓' : '✗'}</span>
                   </div>
                   <div class="agent-role">${escapeHtml(a.role)}</div>

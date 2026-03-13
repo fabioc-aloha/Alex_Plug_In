@@ -20,13 +20,6 @@
       "yields": "Orchestration patterns, role decomposition, A2A communication strategies"
     },
     {
-      "target": ".github/skills/azure-architecture-patterns/SKILL.md",
-      "type": "extends",
-      "strength": 0.85,
-      "when": "Applying Azure WAF principles to Foundry deployments",
-      "yields": "Well-Architected Framework pillars, RBAC patterns, cost optimization"
-    },
-    {
       "target": ".github/skills/mcp-development/SKILL.md",
       "type": "complements",
       "strength": 0.85,
@@ -46,13 +39,6 @@
       "strength": 0.7,
       "when": "Deploying Foundry resources via Bicep/Terraform",
       "yields": "IaC templates, deployment automation, resource provisioning"
-    },
-    {
-      "target": ".github/skills/enterprise-integration/SKILL.md",
-      "type": "enables",
-      "strength": 0.75,
-      "when": "Publishing agents to enterprise channels (Teams, M365)",
-      "yields": "Enterprise auth, SSO, compliance, multi-tenant patterns"
     }
   ],
   "activationContexts": [

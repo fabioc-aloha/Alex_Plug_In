@@ -14,8 +14,6 @@ applyTo: "**/*.{html,jsx,tsx,vue,svelte,css,scss}"
 
 ## Synapses
 
-- [.github/instructions/vscode-marketplace-publishing.instructions.md] (Medium, Precedes, Forward) - "UI polish often precedes marketplace publishing"
-- [.github/instructions/release-management.instructions.md] (High, Coordinates, Bidirectional) - "UI refinements are part of release workflow"
 - [.github/skills/vscode-extension-patterns/SKILL.md] (High, Implements, Bidirectional) - "Extension UI patterns this standard enforces"
 - [.github/instructions/code-review-guidelines.instructions.md] (High, Validates, Bidirectional) - "Code review validates UI/UX compliance"
 

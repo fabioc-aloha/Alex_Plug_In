@@ -11,14 +11,6 @@
       "yields": "creative writing complementary techniques"
     },
     {
-      "reason": "Extension branding, icons, and UI design",
-      "type": "applies",
-      "strength": 0.85,
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "when": "Extension branding, icons, and UI design",
-      "yields": "VS Code extension patterns patterns and guidance"
-    },
-    {
       "reason": "Color theory, GitHub Pastel Palette v2, WCAG contrast, and semantic color mapping for Mermaid diagram styling",
       "type": "extends",
       "strength": 0.9,

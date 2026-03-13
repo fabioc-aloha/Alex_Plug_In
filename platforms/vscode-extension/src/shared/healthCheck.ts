@@ -3,24 +3,6 @@ import * as path from 'path';
 import { updateAlexInstalledStatus } from './telemetry';
 import { createSynapseRegex } from './utils';
 
-// Import session info (lazy to avoid circular deps)
-let getSessionInfo: (() => { active: boolean; remaining: number; isBreak: boolean } | null) | null = null;
-let getStreakInfo: (() => Promise<number>) | null = null;
-
-/**
- * Register session provider for status bar (called from extension.ts)
- */
-export function registerSessionProvider(provider: () => { active: boolean; remaining: number; isBreak: boolean } | null): void {
-    getSessionInfo = provider;
-}
-
-/**
- * Register streak provider for status bar (called from extension.ts)
- */
-export function registerStreakProvider(provider: () => Promise<number>): void {
-    getStreakInfo = provider;
-}
-
 /**
  * Health status levels
  */
@@ -219,14 +201,12 @@ export async function checkHealth(forceRefresh: boolean = false): Promise<Health
 /**
  * Get status bar text and icon based on health
  */
-export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { active: boolean; remaining: number; isBreak: boolean } | null, streakDays?: number, isProtected?: boolean): { text: string; tooltip: string; backgroundColor?: vscode.ThemeColor } {
+export function getStatusBarDisplay(health: HealthCheckResult, isProtected?: boolean): { text: string; tooltip: string; backgroundColor?: vscode.ThemeColor } {
     // Special case: Not initialized - show enticing preview
     if (health.status === HealthStatus.NotInitialized) {
         return {
-            text: '$(rocket) Alex ⚫ | 🍅 Focus | 🔥 Streaks | 💡 Knowledge',
+            text: '$(rocket) Alex ⚫ | 💡 Knowledge',
             tooltip: `🚀 Initialize Alex to unlock:\n\n` +
-                `🍅 Focus Sessions - Pomodoro timer for deep work\n` +
-                `🔥 Learning Streaks - Build daily learning habits\n` +
                 `💡 Knowledge Base - Save insights across projects\n` +
                 `🧠 Dream Protocol - Cognitive maintenance\n` +
                 `✨ Self-Actualization - Deep reflection\n\n` +
@@ -256,20 +236,6 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
     if (isProtected) {
         parts.push('🔒');
     }
-    
-    // Add session if active
-    if (sessionInfo?.active) {
-        const mins = Math.floor(sessionInfo.remaining / 60);
-        const secs = sessionInfo.remaining % 60;
-        const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
-        const icon = sessionInfo.isBreak ? '☕' : '🍅';
-        parts.push(`${icon} ${timeStr}`);
-    }
-    
-    // Add streak if > 0
-    if (streakDays && streakDays > 0) {
-        parts.push(`🔥${streakDays}`);
-    }
 
     const text = parts.join(' | ');
     
@@ -285,14 +251,6 @@ export function getStatusBarDisplay(health: HealthCheckResult, sessionInfo?: { a
         case HealthStatus.Error:
             tooltip = `❌ Alex Error\n${health.summary}\n${health.issues.join('\n')}`;
             break;
-    }
-    
-    if (sessionInfo?.active) {
-        tooltip += `\n\n${sessionInfo.isBreak ? '☕ Break' : '🍅 Focus'} session active`;
-    }
-    
-    if (streakDays && streakDays > 0) {
-        tooltip += `\n🔥 ${streakDays} day streak!`;
     }
     
     if (isProtected) {

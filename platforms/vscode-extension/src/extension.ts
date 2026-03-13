@@ -18,7 +18,6 @@ import {
   initSecretsManager,
 } from "./services/secretsManager";
 import { initOutcomeTracker } from "./services/outcomeTracker";
-import { initTaskDetector } from "./services/taskDetector";
 import { initExpertiseModel } from "./services/expertiseModel";
 import { flushEpisodicDraft } from "./services/episodicMemory";
 import { ensureGlobalKnowledgeSetup } from "./commands/setupGlobalKnowledge";
@@ -39,7 +38,6 @@ import { registerPresentationCommands } from "./commandsPresentation";
 import { registerDeveloperCommands } from "./commandsDeveloper";
 import { registerCoreCommands } from "./commandsCore";
 import { setCommandContextKeys, updateStatusBar, startPeriodicHealthCheck, checkVersionUpgrade } from "./services/extensionLifecycle";
-import { disposeSession } from "./commands/session";
 
 // Re-export for backward compatibility (other modules may import from extension.ts)
 export { isOperationInProgress };
@@ -116,7 +114,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
 
   initOutcomeTracker(context);
   initExpertiseModel(context);
-  initTaskDetector(context, vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? '');
   context.subscriptions.push({ dispose: () => { flushEpisodicDraft().catch(() => {}); } });
   
   ensureGlobalKnowledgeSetup().catch(err => {
@@ -235,8 +232,6 @@ export function deactivate() {
 
   // Reset chat participant session state to prevent state bleeding
   resetSessionState();
-  // Clean up session timer
-  disposeSession();
   logInfo('Alex Cognitive Architecture deactivated');
   disposeLog();
 }

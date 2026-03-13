@@ -17,9 +17,6 @@ import {
   readActiveContext,
   updatePersona,
 } from "../shared/activeContextManager";
-// Knowledge summary moved to Health Dashboard - see globalKnowledge.ts
-import { getCurrentSession, Session } from "../commands/session";
-import { getGoalsSummary, LearningGoal } from "../commands/goals";
 import { openChatPanel } from "../shared/utils";
 import { isOperationInProgress } from "../shared/operationLock";
 import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
@@ -124,8 +121,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
       // Command map for simple vscode.commands.executeCommand calls
       const commandMap: Record<string, string> = {
-        startSession: "alex.startSession",
-        sessionActions: "alex.sessionActions",
         dream: "alex.dream",
         selfActualize: "alex.selfActualize",
         northStar: "alex.northStar",
@@ -134,8 +129,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         agentVsChat: "alex.agentVsChat",
         upgrade: "alex.upgrade",
         showStatus: "alex.showStatus",
-        showGoals: "alex.showGoals",
-        createGoal: "alex.createGoal",
         setupEnvironment: "alex.setupEnvironment",
         manageSecrets: "alex.manageSecrets",
         detectEnvSecrets: "alex.detectEnvSecrets",
@@ -156,7 +149,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         generateGammaAdvanced: "alex.generateGammaWithOptions",
         generateAIImage: "alex.generateAIImage",
         editImageAI: "alex.editImageWithPrompt",
-        importGitHubIssues: "alex.importGitHubIssues",
         reviewPR: "alex.reviewPR",
         readAloud: "alex.readAloud",
         askAboutSelection: "alex.askAboutSelection",
@@ -397,7 +389,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       // Parallelize all async operations for faster loading
       const [
         health,
-        goalsSummary,
         lastDreamDate,
         gkRepoPath,
         activeContext,
@@ -405,7 +396,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         workspaceName,
       ] = await Promise.all([
         checkHealth(false),
-        getGoalsSummary(),
         this._getLastDreamDate(),
         detectGlobalKnowledgeRepo(),
         wsRoot ? readActiveContext(wsRoot) : Promise.resolve(null),
@@ -416,7 +406,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       // Get skill recommendations based on context (after persona detection)
       let skillRecommendations: SkillRecommendation[] = [];
 
-      const session = getCurrentSession();
       const hasGlobalKnowledge = gkRepoPath !== null;
 
       // Cache user birthday for avatar age fallback
@@ -467,9 +456,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const version = extension?.packageJSON?.version || "0.0.0";
       const nudges = this._generateNudges(
         health,
-        goalsSummary,
         lastDreamDate,
-        session,
         workspaceName,
       );
 
@@ -527,8 +514,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       this._view.webview.html = getWelcomeHtmlContent(
         this._view.webview,
         health,
-        session,
-        goalsSummary,
         version,
         nudges,
         hasGlobalKnowledge,
@@ -571,7 +556,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       synapseHealthPct: health.totalSynapses > 0 ? Math.round(((health.totalSynapses - health.brokenSynapses) / health.totalSynapses) * 100) : 0,
       lastDreamDate: lastDreamDate ? lastDreamDate.toISOString().slice(0, 10) : null,
       lastMeditationDate: null,
-      cognitiveAge: 26,
       meditationCount: 0,
       freshness: { thriving: 0, active: 0, fading: 0, dormant: 0 },
       calibration: { high: 0, medium: 0, low: 0, uncertain: 0, total: 0 },
@@ -759,23 +743,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    */
   private _generateNudges(
     health: HealthCheckResult,
-    goals: {
-      activeGoals: LearningGoal[];
-      streakDays: number;
-      completedToday: number;
-    },
     lastDreamDate: Date | null,
-    session: Session | null,
     workspaceName?: string,
   ): Nudge[] {
     const nudges: Nudge[] = [];
     const now = new Date();
     const dayMs = 24 * 60 * 60 * 1000;
-
-    // Mission statement removed — duplicates rocket bar which now shows project name
-    // The rocket bar "Take Your {PROJECT} to New Heights" serves this purpose
-
-    // Note: Focus session is already shown in the timer card, so no nudge needed here
 
     // Check health issues (high priority)
     if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {
@@ -786,18 +759,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         action: "dream",
         actionLabel: "Run Dream",
         priority: 2,
-      });
-    }
-
-    // Check streak at risk (medium-high priority)
-    if (goals.streakDays > 0 && goals.completedToday === 0) {
-      nudges.push({
-        type: "streak",
-        icon: "🔥",
-        message: `${goals.streakDays}-day streak at risk! Complete a goal today.`,
-        action: "showGoals",
-        actionLabel: "View Goals",
-        priority: 3,
       });
     }
 

@@ -8,13 +8,6 @@
   "promotionNotes": "v2.5.0: speakPrompt command, voice mode summarization, keyboard shortcuts, CSP-compliant webview, 35 unit tests",
   "connections": [
     {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "implements",
-      "strength": 0.9,
-      "when": "Using native TypeScript WebSocket",
-      "yields": "Webview audio player, status bar feedback, chunked synthesis"
-    },
-    {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "consumes",
       "strength": 0.9,

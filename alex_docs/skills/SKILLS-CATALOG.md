@@ -13,11 +13,10 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 107   |
-| Master-Only | 1     |
+| Inheritable | 100   |
+| Master-Only | 5     |
 | Heir:vscode | 7     |
 | Heir:m365   | 2     |
-| Heir:plugin | 1     |
 
 > 🆕 **+2 skills** (2026-03-04): `agent-debug-panel` (VS Code Agent Debug Panel usage), `terminal-image-rendering` (Kitty graphics protocol for inline terminal images)
 >
@@ -83,8 +82,8 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 | Skill                                                                                    | Inheritance | Purpose                                               |
 | ---------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------------- |
-| [azure-architecture-patterns](../../.github/skills/azure-architecture-patterns/SKILL.md) | inheritable | 🆕 Well-Architected Framework, reference architectures |
-| [azure-devops-automation](../../.github/skills/azure-devops-automation/SKILL.md)         | inheritable | 🆕 CI/CD pipelines, Azure DevOps patterns              |
+| [azure-architecture-patterns](../../.github/skills/azure-architecture-patterns/SKILL.md) | heir:vscode | 🆕 Well-Architected Framework, reference architectures |
+| [azure-devops-automation](../../.github/skills/azure-devops-automation/SKILL.md)         | heir:vscode | 🆕 CI/CD pipelines, Azure DevOps patterns              |
 | [azure-deployment-operations](../../.github/skills/azure-deployment-operations/SKILL.md) | inheritable | 🆕 SWA, Container Apps, App Service deploy patterns    |
 
 ### 🚨 Operations & Reliability
@@ -173,20 +172,20 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [architecture-refinement](../../.github/skills/architecture-refinement/SKILL.md)           | inheritable | Architecture evolution decisions                                                   |
 | [architecture-audit](../../.github/skills/architecture-audit/SKILL.md)                     | inheritable | Comprehensive consistency review + Master audit                                    |
 
-| [release-process](../../.github/skills/release-process/SKILL.md)                           | inheritable | VS Code marketplace publishing workflow                                            |
-| [release-preflight](../../.github/skills/release-preflight/SKILL.md)                       | inheritable | Pre-release checks, version sync                                                   |
+| [release-process](../../.github/skills/release-process/SKILL.md)                           | master-only | VS Code marketplace publishing workflow                                            |
+| [release-preflight](../../.github/skills/release-preflight/SKILL.md)                       | master-only | Pre-release checks, version sync                                                   |
 | [llm-model-selection](../../.github/skills/llm-model-selection/SKILL.md)                   | inheritable | Model choice for cost/capability                                                   |
 | [self-actualization](../../.github/skills/self-actualization/SKILL.md)                     | inheritable | Deep self-assessment protocols                                                     |
 
 | [correax-brand](../../.github/skills/correax-brand/SKILL.md)                               | inheritable | CorreaX design system — color tokens, typography, banner patterns, WCAG compliance |
-| [skill-catalog-generator](../../.github/skills/skill-catalog-generator/SKILL.md)           | inheritable | Generate skill catalogs with network diagrams                                      |
+| [skill-catalog-generator](../../.github/skills/skill-catalog-generator/SKILL.md)           | master-only | Generate skill catalogs with network diagrams                                      |
 | [skill-building](../../.github/skills/skill-building/SKILL.md)                             | inheritable | 🆕 Create effective skills, promotion workflow, quality gates                       |
 | [skill-development](../../.github/skills/skill-development/SKILL.md)                       | inheritable | 🆕 Track desired skills, contextual acquisition, growth mindset                     |
 | [brain-qa](../../.github/skills/brain-qa/SKILL.md)                                         | inheritable | Deep cognitive architecture QA, synapse semantics                                  |
 | [memory-activation](../../.github/skills/memory-activation/SKILL.md)                       | inheritable | Auto-triggering capability + prompt discovery, action-keyword index                |
 | [dream-state](../../.github/skills/dream-state/SKILL.md)                                   | inheritable | 🆕 Neural maintenance, synapse validation, health diagnostics                       |
 | [brand-asset-management](../../.github/skills/brand-asset-management/SKILL.md)             | inheritable | 🆕 Brand hierarchy, visual identity, asset deployment                               |
-| [heir-sync-management](../../.github/skills/heir-sync-management/SKILL.md)                 | inheritable | 🆕 Master-Heir sync, contamination prevention, promotion                            |
+| [heir-sync-management](../../.github/skills/heir-sync-management/SKILL.md)                 | master-only | 🆕 Master-Heir sync, contamination prevention, promotion                            |
 
 | [muscle-memory-recognition](../../.github/skills/muscle-memory-recognition/SKILL.md)       | inheritable | 🆕 Identify automation opportunities from repetitive tasks                          |
 
@@ -216,7 +215,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [vscode-extension-patterns](../../.github/skills/vscode-extension-patterns/SKILL.md)             | heir:vscode | Extension API patterns                                           |
 | [vscode-configuration-validation](../../.github/skills/vscode-configuration-validation/SKILL.md) | heir:vscode | 🆕 Manifest validation, config consistency                        |
 | [chat-participant-patterns](../../.github/skills/chat-participant-patterns/SKILL.md)             | heir:vscode | Chat API, streaming, tools                                       |
-| [extension-audit-methodology](../../.github/skills/extension-audit-methodology/SKILL.md)         | heir:vscode | 5-dimension extension audit: debug, dead code, perf, menus, deps |
+| [extension-audit-methodology](../../.github/skills/extension-audit-methodology/SKILL.md)         | master-only | 5-dimension extension audit: debug, dead code, perf, menus, deps |
 
 #### GitHub Copilot Web (DISCONTINUED)
 
@@ -888,27 +887,25 @@ flowchart TB
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
-    subgraph Master["👑 Master Alex (116 total)"]
-        M_INH["98 Inheritable"]
-        M_UNI["1 Universal"]
-        M_ONLY["2 Master-Only"]
-        M_HV["6 heir:vscode"]
+    subgraph Master["👑 Master Alex (114 total)"]
+        M_INH["100 Inheritable"]
+        M_ONLY["5 Master-Only"]
+        M_HV["7 heir:vscode"]
         M_HM["2 heir:m365"]
-        M_NOSYN["7 No Synapses"]
     end
 
-    subgraph VSCode["💻 VS Code Heir (114)"]
-        V_INH["99 Inherited"]
-        V_OWN["6 VS Code Specific"]
+    subgraph VSCode["💻 VS Code Heir (107)"]
+        V_INH["100 Inherited"]
+        V_OWN["7 VS Code Specific"]
     end
 
     subgraph M365["☁️ M365 Heir"]
-        M365_INH["99 Inherited"]
+        M365_INH["100 Inherited"]
         M365_OWN["2 M365 Specific"]
     end
 
-    M_INH & M_UNI -->|"sync"| V_INH
-    M_INH & M_UNI -->|"sync"| M365_INH
+    M_INH -->|"sync"| V_INH
+    M_INH -->|"sync"| M365_INH
     M_HV -->|"vscode only"| V_OWN
     M_HM -->|"m365 only"| M365_OWN
     M_ONLY -.->|"blocked"| VSCode
@@ -919,15 +916,13 @@ flowchart TB
     style M365 fill:#e6f4ea,stroke:#1a7f37
 ```
 
-**Inheritance values:**
+**Inheritance values** (source of truth: `SKILL_EXCLUSIONS` in `sync-architecture.cjs`):
 | Value          | Count | Meaning                  | Sync Behavior      |
 | -------------- | ----- | ------------------------ | ------------------ |
-| `inheritable`  | 98    | All heirs receive        | Master → All Heirs |
-| `universal`    | 1     | Always everywhere        | Master → All Heirs |
-| `master-only`  | 2     | Master keeps exclusively | Not synced         |
-| `heir:vscode`  | 6     | VS Code heir only        | Master → VS Code   |
+| `inheritable`  | 100   | All heirs receive        | Master → All Heirs |
+| `master-only`  | 5     | Master keeps exclusively | Not synced         |
+| `heir:vscode`  | 7     | VS Code heir only        | Master → VS Code   |
 | `heir:m365`    | 2     | M365 heir only           | Master → M365      |
-| *(no synapse)* | 7     | Missing synapses.json    | Synced by default  |
 
 ---
 
@@ -941,11 +936,13 @@ flowchart TB
    - Synapses reference
 3. Add `synapses.json` with:
    - skill name
-   - inheritance value
    - connections to other skills
    - trigger keywords
-4. Update this catalog
-5. Update `copilot-instructions.md` skills list
+4. If non-inheritable: register in `SKILL_EXCLUSIONS` in `.github/muscles/sync-architecture.cjs`
+   - Or use: `new-skill.ps1 -Inheritance master-only` (auto-registers)
+   - Add matching `inheritance:` frontmatter to trifecta siblings (.instructions.md, .prompt.md)
+5. Update this catalog
+6. Update `copilot-instructions.md` skills list
 
 ---
 

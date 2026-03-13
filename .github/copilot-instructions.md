@@ -3,7 +3,7 @@
 <!-- Validation: ask "What are my focus trifectas?" - should read Active Context -->
 <!-- Validation: ask "How do you route to meditation?" - should reference synapses.json -->
 
-# Alex v6.5.5
+# Alex v6.5.7
 
 ## Identity
 
@@ -28,10 +28,10 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.5.5 publish. Performance parallelization (activation, secrets, status bar, health check). Right-click menu audit (sort key collision fix, URI gap). Version bump pipeline (6.5.4→6.5.5). Synapse audit consolidation (15 bugs, 241 tests green).
+Recent: v6.5.6 heir sync fixes. Broken embedded synapse cleanup (38 refs to 3 excluded instructions removed). Backslash path normalization (42 paths in 5 heir:vscode synapses). All 20 ambiguous target warnings eliminated.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-03-12
+Last Assessed: 2026-03-13
 
 ## User Profile
 

@@ -276,6 +276,70 @@ async function createVersionAwareBackup(
 }
 
 // ============================================================================
+// ACTIVE CONTEXT MIGRATION
+// ============================================================================
+
+/**
+ * Active Context fields that are heir-specific runtime state.
+ * These are written by the extension during the heir's sessions
+ * and should be preserved across upgrades.
+ */
+const ACTIVE_CONTEXT_FIELDS = [
+  'Persona', 'Objective', 'Phase', 'Mode',
+  'Focus Trifectas', 'Priorities', 'Principles', 'Recent',
+  'North Star', 'Guidelines', 'Last Assessed',
+];
+
+/**
+ * Placeholder patterns that indicate the field was never set by the user.
+ * Fields still at their default/placeholder value are NOT migrated.
+ */
+const PLACEHOLDER_PATTERNS = [
+  /^\(.*\)$/,           // (placeholder)
+  /^\*\(.*\)\*$/,       // *(placeholder)*
+  /^_\(.*\)_$/,         // _(placeholder)_
+  /^never$/i,           // never
+];
+
+function isPlaceholder(value: string): boolean {
+  return PLACEHOLDER_PATTERNS.some(p => p.test(value.trim()));
+}
+
+/**
+ * Migrate heir's runtime Active Context values from backup to fresh install.
+ * 
+ * The fresh install deploys the extension's template copilot-instructions.md
+ * (already decontaminated of Master values by sync). This function reads the
+ * heir's old Active Context fields — which may have been customized at runtime —
+ * and applies non-placeholder values to the fresh file.
+ */
+async function migrateActiveContext(backupPath: string, rootPath: string): Promise<void> {
+  const backupFile = path.join(backupPath, '.github', 'copilot-instructions.md');
+  const freshFile = path.join(rootPath, '.github', 'copilot-instructions.md');
+
+  if (!await fs.pathExists(backupFile) || !await fs.pathExists(freshFile)) {
+    return;
+  }
+
+  const backupContent = await fs.readFile(backupFile, 'utf8');
+  let freshContent = await fs.readFile(freshFile, 'utf8');
+
+  for (const field of ACTIVE_CONTEXT_FIELDS) {
+    const fieldRegex = new RegExp(`^(${field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:) (.+)$`, 'm');
+    const backupMatch = backupContent.match(fieldRegex);
+    if (!backupMatch) { continue; }
+
+    const backupValue = backupMatch[2].trim();
+    if (isPlaceholder(backupValue)) { continue; }
+
+    // Replace the field value in the fresh file with the heir's runtime value
+    freshContent = freshContent.replace(fieldRegex, `$1 ${backupValue}`);
+  }
+
+  await fs.writeFile(freshFile, freshContent, 'utf8');
+}
+
+// ============================================================================
 // CLEAN + FRESH INSTALL
 // ============================================================================
 
@@ -468,10 +532,12 @@ async function runGapAnalysis(
   const skillsNewPath = path.join(rootPath, '.github', 'skills');
   
   if (await fs.pathExists(skillsBackupPath)) {
-    const backupSkills = await fs.readdir(skillsBackupPath);
-    const newSkills = await fs.pathExists(skillsNewPath) 
-      ? await fs.readdir(skillsNewPath) 
+    const backupEntries = await fs.readdir(skillsBackupPath, { withFileTypes: true });
+    const backupSkills = backupEntries.filter(e => e.isDirectory()).map(e => e.name);
+    const newEntries = await fs.pathExists(skillsNewPath) 
+      ? await fs.readdir(skillsNewPath, { withFileTypes: true }) 
       : [];
+    const newSkills = newEntries.filter(e => e.isDirectory()).map(e => e.name);
 
     for (const skill of backupSkills) {
       if (!newSkills.includes(skill)) {
@@ -559,6 +625,11 @@ async function getFolderSize(folderPath: string): Promise<number> {
       console.warn(`[NASA] Max walk depth reached at: ${dir}`);
       return;
     }
+    const stat = await fs.stat(dir);
+    if (!stat.isDirectory()) {
+      totalSize += stat.size;
+      return;
+    }
     const entries = await fs.readdir(dir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(dir, entry.name);
@@ -634,7 +705,10 @@ async function executeUpgradePhases(
       progress.report({ message: "Installing new version...", increment: 20 });
       await freshInstall(extensionPath, rootPath);
 
-      progress.report({ message: "Analyzing migration candidates...", increment: 20 });
+      progress.report({ message: "Preserving your session context...", increment: 5 });
+      await migrateActiveContext(backupPath, rootPath);
+
+      progress.report({ message: "Analyzing migration candidates...", increment: 15 });
       const candidates = await runGapAnalysis(backupPath, rootPath, detection);
 
       progress.report({ message: "Restoring your skills and settings...", increment: 15 });

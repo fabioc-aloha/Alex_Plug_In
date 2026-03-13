@@ -9,8 +9,7 @@
  *   Layer 2: Active Context (persona, objective, focus trifectas) + Persona-driven tone
  *   Layer 3: Conversation History (last 4 exchanges)
  *   Layer 4: User Profile (personalization)
- *   Layer 5: Focus Session (Pomodoro state)
- *   Layer 6: Emotional Intelligence (mood-aware context from emotional memory)
+ *   Layer 5: Emotional Intelligence (mood-aware context from emotional memory)
  *   Layer 7: Model-Adaptive Rules (tier-specific prompt guidance)
  *   Layer 8: Peripheral Vision (workspace + peer project ambient awareness)
  *   Layer 9: Knowledge Context (pre-seeded from global knowledge)
@@ -27,8 +26,6 @@ import * as workspaceFs from '../shared/workspaceFs';
 import { readActiveContext, ActiveContext } from '../shared/activeContextManager';
 import { IUserProfile } from './tools';
 import { DetectedModel, ModelTier, getTierInfo } from './modelIntelligence';
-import { getCurrentSession } from '../commands/session';
-import { getGoalsSummary } from '../commands/goals';
 import { searchGlobalKnowledge } from './globalKnowledge';
 import { loadMoodContext } from './emotionalMemory';
 import { PeripheralContext } from './peripheralVision';
@@ -80,8 +77,7 @@ export async function buildAlexSystemPrompt(ctx: PromptContext): Promise<string>
         buildActiveContextLayer(ctx),      // Layer 2: Current state + persona-driven tone
         buildConversationHistoryLayer(ctx), // Layer 3: Recent exchanges
         buildUserProfileLayer(ctx),        // Layer 4: Personalization
-        buildFocusSessionLayer(ctx),       // Layer 5: Pomodoro/goals
-        buildEmotionalMemoryLayer(ctx),    // Layer 6: Mood-aware context from emotional memory
+        buildEmotionalMemoryLayer(ctx),    // Layer 5: Mood-aware context from emotional memory
         buildPeripheralVisionLayer(ctx),   // Layer 8: Workspace + peer project ambient awareness
         buildKnowledgeContextLayer(ctx),   // Layer 9: Pre-seeded knowledge
         buildModelAdaptiveLayer(ctx),      // Layer 7: Tier-specific rules
@@ -357,58 +353,7 @@ No profile exists yet. You can proactively ask for their name and preferences to
 }
 
 // ============================================================================
-// Layer 5: Focus Session
-// ============================================================================
-
-/**
- * Include active Pomodoro session and goals.
- * 
- * Token budget: ~120 tokens
- */
-async function buildFocusSessionLayer(ctx: PromptContext): Promise<string> {
-    const session = getCurrentSession();
-    const goals = await getGoalsSummary();
-
-    const parts: string[] = [];
-
-    if (session) {
-        const remainingMins = Math.floor(session.remaining / 60);
-        const sessionType = session.isBreak ? 'break' : 'focus session';
-        
-        parts.push(`## Active Focus Context`);
-        parts.push(`- **Current ${sessionType}**: "${session.topic}"`);
-        parts.push(`- **Time remaining**: ${remainingMins} minutes`);
-        
-        if (session.pomodoroCount > 0) {
-            parts.push(`- **Pomodoro #${session.pomodoroCount}**`);
-        }
-
-        parts.push('');
-        parts.push('**Keep responses focused and actionable** to respect their Pomodoro time.');
-    }
-
-    if (goals.activeGoals.length > 0) {
-        if (parts.length === 0) {
-            parts.push('## Active Goals');
-        } else {
-            parts.push('');
-            parts.push('**Active Goals**:');
-        }
-        
-        goals.activeGoals.slice(0, 3).forEach(g => {
-            parts.push(`- ${g.title}: ${g.currentCount}/${g.targetCount} ${g.unit}`);
-        });
-
-        if (goals.streakDays > 0) {
-            parts.push(`- 🔥 **${goals.streakDays}-day streak** — help them keep it going!`);
-        }
-    }
-
-    return parts.length > 0 ? parts.join('\n') : '';
-}
-
-// ============================================================================
-// Layer 6: Emotional Memory
+// Layer 5: Emotional Memory
 // ============================================================================
 
 /**

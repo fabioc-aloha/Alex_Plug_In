@@ -356,6 +356,7 @@ if (14 -in $runPhases) {
 if (15 -in $runPhases) {
     Write-Phase 15 "Config Files Validation"
     $required = @("user-profile.template.json", "cognitive-config-template.json")
+    # Must match EXCLUDED_CONFIG_FILES in sync-architecture.cjs
     $masterOnlyCfg = @("MASTER-ALEX-PROTECTED.json", "cognitive-config.json", "user-profile.json")
     $configIssues = @()
     
@@ -758,14 +759,16 @@ if (32 -in $runPhases) {
             $agentLine = $Matches[1].Trim()
             $listedAgents = ($agentLine -split ',') | ForEach-Object { ($_ -split '\(')[0].Trim() } | Sort-Object
             
-            $diskAgentNames = $diskAgents | Sort-Object
-            $missing = $diskAgentNames | Where-Object { $_ -notin $listedAgents }
-            $extra = $listedAgents | Where-Object { $_ -notin $diskAgentNames }
+            # Normalize both lists to lowercase for case-insensitive comparison
+            $diskAgentNamesLower = $diskAgents | ForEach-Object { $_.ToLower() } | Sort-Object
+            $listedAgentsLower = $listedAgents | ForEach-Object { $_.ToLower() } | Sort-Object
+            $missing = $diskAgents | Where-Object { $_.ToLower() -notin $listedAgentsLower }
+            $extra = $listedAgents | Where-Object { $_.ToLower() -notin $diskAgentNamesLower }
             
             if ($missing.Count -gt 0) { Write-Warn "Agents on disk but NOT in copilot-instructions: $($missing -join ', ')" }
             if ($extra.Count -gt 0) { Write-Warn "Agents in copilot-instructions but NOT on disk: $($extra -join ', ')" }
             if ($missing.Count -eq 0 -and $extra.Count -eq 0) {
-                Write-Pass "Agent list matches disk ($($diskAgentNames.Count) agents)"
+                Write-Pass "Agent list matches disk ($($diskAgents.Count) agents)"
             }
         }
         else { Write-Warn "Could not parse Agents section from copilot-instructions.md" }

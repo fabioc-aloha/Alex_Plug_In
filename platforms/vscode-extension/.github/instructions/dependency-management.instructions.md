@@ -13,7 +13,6 @@ applyTo: "**/*package*.json,**/requirements*.txt,**/Cargo.toml,**/go.mod,**/pom.
 
 ## Synapses
 
-- [.github/instructions/release-management.instructions.md] → (High, Coordinates, Bidirectional) - "Dependency updates are releases"
 - [.github/instructions/technical-debt-tracking.instructions.md] → (Medium, Feeds, Forward) - "Outdated deps are technical debt"
 - [CHANGELOG.md] → (Medium, Documents, Forward) - "Dependency changes should be logged"
 

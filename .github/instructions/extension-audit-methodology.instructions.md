@@ -1,5 +1,6 @@
 ---
 description: "VS Code extension audit methodology for code quality reviews and technical debt cleanup"
+inheritance: master-only
 ---
 
 # Extension Audit Methodology Instructions

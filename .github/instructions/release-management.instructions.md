@@ -1,6 +1,7 @@
 ---
 description: "Release and publish workflows for versioning, changelogs, and marketplace deployment"
 applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
+inheritance: master-only
 ---
 
 # Release Management Procedural Memory
@@ -191,7 +192,7 @@ These MUST be verified before releasing:
 | 3 | **Counts match reality** | Slash commands, tools, skills, trifectas in docs match actual code | 🟡 Review |
 | 4 | **F5 smoke test passes** | Extension activates in sandbox, welcome view renders, 3 random commands work | 🟠 Recommended |
 | 5 | **Version aligned** | package.json, CHANGELOG, copilot-instructions.md all show the same version | 🔴 YES |
-| 6 | **Heir sync clean** | `sync-architecture.js` runs with 0 errors, heir activates independently | 🔴 YES |
+| 6 | **Heir sync clean** | `sync-architecture.cjs` runs with 0 errors, heir activates independently | 🔴 YES |
 | 7 | **No non-functional features** | If it's in the UI or command palette, it works. If it doesn't work, it's removed | 🟠 Recommended |
 | 8 | **CHANGELOG documents the delta** | Every user-visible change has a line item | 🔴 YES |
 
@@ -750,7 +751,7 @@ git push origin vX.Y.Z
 
 ### Heir Architecture Sync Verification
 
-During VS Code packaging, the `sync-architecture.js` script runs automatically:
+During VS Code packaging, the `sync-architecture.cjs` script runs automatically:
 
 **Expected Output:**
 ```

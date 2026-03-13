@@ -12,18 +12,26 @@ const STALE_PRONE = [
   'privacy-responsible-ai', 'microsoft-sfi'
 ];
 
-// Centralized exclusions — mirrors SKILL_EXCLUSIONS in sync-architecture.cjs
+// Centralized exclusions — MUST match SKILL_EXCLUSIONS in .github/muscles/sync-architecture.cjs
+// When updating sync-architecture.cjs SKILL_EXCLUSIONS, update this map too.
 const SKILL_EXCLUSIONS = {
+  // master-only
   'heir-sync-management': 'master-only',
+  'release-process': 'master-only',
+  'release-preflight': 'master-only',
+  'extension-audit-methodology': 'master-only',
+  'skill-catalog-generator': 'master-only',
+  // heir:m365
   'm365-agent-debugging': 'heir:m365',
   'teams-app-patterns': 'heir:m365',
+  // heir:vscode
+  'azure-architecture-patterns': 'heir:vscode',
   'azure-devops-automation': 'heir:vscode',
   'chat-participant-patterns': 'heir:vscode',
-  'vscode-configuration-validation': 'heir:vscode',
-  'vscode-extension-patterns': 'heir:vscode',
-  'azure-architecture-patterns': 'heir:vscode',
   'enterprise-integration': 'heir:vscode',
   'persona-detection': 'heir:vscode',
+  'vscode-configuration-validation': 'heir:vscode',
+  'vscode-extension-patterns': 'heir:vscode',
 };
 
 function getInheritance(skillName) {

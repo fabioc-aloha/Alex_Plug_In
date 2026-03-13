@@ -1,8 +1,6 @@
 ---
 name: "distribution-security"
 description: "Defense-in-depth, PII protection, secrets scanning, and secure packaging for distributed software"
-metadata:
-  inheritance: inheritable
 ---
 
 # Distribution Security

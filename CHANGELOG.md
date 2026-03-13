@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.5.7] - 2026-03-13
+
+### Removed
+- **Pomodoro/Focus Session feature** — Removed session timer, status bar countdown, and all related commands (`startSession`, `endSession`, `togglePauseSession`, `sessionActions`)
+- **Learning Goals & Streaks feature** — Removed goal tracking, streak counting, daily progress, and related commands (`createGoal`, `showGoals`, `incrementGoal`)
+- **Import GitHub Issues as Goals** — Removed `importGitHubIssues` command and goal-conversion logic
+- **Focus Context tool** — Removed `alex_cognitive_focus_context` language model tool
+- **Session/Goals UI** — Cleaned sidebar (Mission tab, Mind tab), Health Dashboard, Cognitive Dashboard, status bar, daily briefing, and quick commands
+- **Dead code cleanup** — Removed `recallSession`, `showSessionHistory` commands and unused auto-increment goal hooks
+
+### Changed
+- **Simplified North Star focus** — Extension now centers on North Star vision, Active Context, and cognitive architecture without productivity-tracker features
+
+---
+
+## [6.5.6] - 2026-03-13
+
+### Fixed
+- **Heir sync broken synapse cleanup** — Fixed embedded markdown synapse references to master-only instructions (`cognitive-health-validation.instructions.md`, `release-management.instructions.md`, `roadmap-maintenance.instructions.md`) now cleaned during sync (38 broken reference lines removed)
+- **Backslash path normalization** — Windows backslash paths in heir:vscode synapses.json files now normalized to forward slashes during sync (42 paths fixed in 5 files)
+- **Synapse validation warnings eliminated** — All 20 "ambiguous target" warnings resolved after path normalization
+
+---
+
 ## [6.5.5] - 2026-03-12
 
 ### Changed

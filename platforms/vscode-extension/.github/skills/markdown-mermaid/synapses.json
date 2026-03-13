@@ -19,14 +19,6 @@
       "yields": "lint clean markdown required patterns and guidance"
     },
     {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "integrates",
-      "strength": 0.75,
-      "reason": "Native VS Code rendering since 1.109",
-      "when": "Native VS Code rendering since 1.109",
-      "yields": "VS Code extension patterns integration patterns"
-    },
-    {
       "target": ".github/skills/graphic-design/SKILL.md",
       "type": "requires",
       "strength": 0.9,

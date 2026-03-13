@@ -5,8 +5,6 @@ import { validateWorkspace } from '../../shared/utils';
 import { detectAndUpdateProjectPersona } from '../personaDetection';
 import { getModelInfo, formatModelWarning } from '../modelIntelligence';
 import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath } from '../globalKnowledge';
-import { getGoalsSummary } from '../../commands/goals';
-import { getCurrentSession } from '../../commands/session';
 
 /**
  * Check if the user's prompt is a greeting
@@ -443,65 +441,6 @@ Opening the documentation index...
 }
 
 /**
- * Handle /goals command - Learning goals tracking
- */
-export async function handleGoalsCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    const summary = await getGoalsSummary();
-    
-    stream.markdown(`## 🎯 Learning Goals\n\n`);
-    
-    // Show streak and stats
-    stream.markdown(`| Stat | Value |\n|------|-------|\n`);
-    stream.markdown(`| 🔥 **Streak** | ${summary.streakDays} days |\n`);
-    stream.markdown(`| ✅ **Completed Today** | ${summary.completedToday} |\n`);
-    stream.markdown(`| 🏆 **Total Achieved** | ${summary.totalCompleted} |\n\n`);
-    
-    if (summary.activeGoals.length === 0) {
-        stream.markdown(`### No Active Goals\n\n`);
-        stream.markdown(`Set learning goals to track your progress and build consistency!\n\n`);
-        stream.markdown(`**Examples:**\n`);
-        stream.markdown(`- Complete 3 learning sessions daily\n`);
-        stream.markdown(`- Save 5 insights per week\n`);
-        stream.markdown(`- Spend 60 minutes learning today\n\n`);
-    } else {
-        stream.markdown(`### Active Goals (${summary.activeGoals.length})\n\n`);
-        
-        for (const goal of summary.activeGoals) {
-            const progress = Math.round((goal.currentCount / goal.targetCount) * 100);
-            const filled = Math.round(progress / 10);
-            const progressBar = '█'.repeat(filled) + '░'.repeat(10 - filled);
-            
-            stream.markdown(`**${goal.title}**\n`);
-            stream.markdown(`\`${progressBar}\` ${goal.currentCount}/${goal.targetCount} ${goal.unit} (${progress}%)\n\n`);
-        }
-    }
-    
-    stream.markdown(`### Actions\n\n`);
-    
-    stream.button({
-        command: 'alex.createGoal',
-        title: '➕ Create New Goal',
-        arguments: []
-    });
-    
-    stream.button({
-        command: 'alex.showGoals',
-        title: '📋 Manage Goals',
-        arguments: []
-    });
-    
-    stream.markdown(`\n\n---\n\n*Goals auto-track when you complete sessions (\`/session\`) or save insights (\`/saveinsight\`).*`);
-    
-    return { metadata: { command: 'goals' } };
-}
-
-/**
  * Handle /help command - Discoverability for all Alex capabilities
  */
 export async function handleHelpCommand(
@@ -531,14 +470,7 @@ export async function handleHelpCommand(
 | \`/selfactualize\` | Deep self-assessment with full report |
 | \`/learn\` | Start a guided domain learning session |
 
-### 🎯 Productivity
-
-| Command | Description |
-|---------|-------------|
-| \`/session\` | Start a focused learning session (Pomodoro) |
-| \`/goals\` | View and manage learning goals |
-
-### 🌐 Global Knowledge
+###  Global Knowledge
 
 | Command | Description |
 |---------|-------------|
@@ -574,7 +506,6 @@ Alex provides tools that the AI can use automatically:
 - **\`alex_cognitive_memory_search\`** - Search memory files
 - **\`alex_cognitive_architecture_status\`** - Get version and status
 - **\`alex_cognitive_user_profile\`** - Manage your profile
-- **\`alex_cognitive_focus_context\`** - Get current focus session and goals
 - **\`alex_knowledge_search\`** - Search cross-project knowledge
 - **\`alex_knowledge_save_insight\`** - Save insights automatically
 - **\`alex_platform_mcp_recommendations\`** - Get MCP tool guidance
@@ -904,96 +835,4 @@ Consider testing:
 `);
 
     return { metadata: { command: 'verify', topic, action: 'walkthrough' } };
-}
-
-/**
- * Handle /session command - Learning session timer
- */
-export async function handleSessionCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
-): Promise<IAlexChatResult> {
-    
-    // Check if session is already active
-    const currentSession = getCurrentSession();
-    if (currentSession) {
-        const remaining = Math.floor(currentSession.remaining / 60);
-        const status = currentSession.isPaused ? '⏸️ Paused' : '▶️ Active';
-        const type = currentSession.isBreak ? '☕ Break' : '🎯 Focus';
-        
-        stream.markdown(`## 🎯 Session In Progress\n\n`);
-        stream.markdown(`| Property | Value |\n|----------|-------|\n`);
-        stream.markdown(`| **Topic** | ${currentSession.topic} |\n`);
-        stream.markdown(`| **Status** | ${status} |\n`);
-        stream.markdown(`| **Type** | ${type} |\n`);
-        stream.markdown(`| **Remaining** | ${remaining} minutes |\n`);
-        if (currentSession.pomodoroCount > 0) {
-            stream.markdown(`| **Pomodoros** | 🍅 × ${currentSession.pomodoroCount} |\n`);
-        }
-        
-        stream.markdown(`\n### Actions\n`);
-        
-        stream.button({
-            command: 'alex.togglePauseSession',
-            title: currentSession.isPaused ? '▶️ Resume Session' : '⏸️ Pause Session',
-            arguments: []
-        });
-        
-        stream.button({
-            command: 'alex.endSession',
-            title: '🛑 End Session',
-            arguments: []
-        });
-        
-        return { metadata: { command: 'session', action: 'status' } };
-    }
-    
-    // Parse the request for topic and duration
-    const prompt = request.prompt?.trim();
-    
-    stream.markdown(`## 🎯 Start Learning Session\n\n`);
-    
-    if (prompt) {
-        // User provided a topic, start session directly
-        stream.markdown(`Starting a focused learning session on: **${prompt}**\n\n`);
-        stream.markdown(`Select your session duration:\n\n`);
-        
-        stream.button({
-            command: 'alex.startSession',
-            title: '🍅 25 min (Pomodoro)',
-            arguments: []
-        });
-        
-        stream.button({
-            command: 'alex.startSession',
-            title: '⏱️ Custom Duration',
-            arguments: []
-        });
-        
-        stream.markdown(`\n---\n\n*Or click the Start Session button in the status bar (Ctrl+Alt+P)*`);
-    } else {
-        // No topic provided, show instructions
-        stream.markdown(`Start a focused learning session with optional Pomodoro timing.\n\n`);
-        stream.markdown(`### How to Use\n\n`);
-        stream.markdown(`- \`@alex /session React hooks\` - Start session with topic\n`);
-        stream.markdown(`- \`Ctrl+Alt+P\` - Quick start from anywhere\n`);
-        stream.markdown(`- \`Ctrl+Alt+Space\` - Pause/resume active session\n\n`);
-        
-        stream.markdown(`### Features\n\n`);
-        stream.markdown(`| Feature | Description |\n|---------|-------------|\n`);
-        stream.markdown(`| 🍅 **Pomodoro Mode** | 25min work + 5min break cycles |\n`);
-        stream.markdown(`| ⏱️ **Custom Timer** | Set your own duration (15-60 min) |\n`);
-        stream.markdown(`| ⏸️ **Pause/Resume** | Take breaks without losing progress |\n`);
-        stream.markdown(`| 💡 **Auto-Consolidate** | Prompt to save insights when done |\n\n`);
-        
-        stream.button({
-            command: 'alex.startSession',
-            title: '🎯 Start a Session',
-            arguments: []
-        });
-    }
-    
-    return { metadata: { command: 'session' } };
 }

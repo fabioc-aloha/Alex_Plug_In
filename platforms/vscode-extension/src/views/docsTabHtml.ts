@@ -111,18 +111,18 @@ export function getDocsTabHtml(): string {
                           <div class="doc-grid-desc">Collaboration patterns</div>
                       </div>
                   </div>
-                  <div class="doc-grid-card" data-cmd="cognitiveLevels" tabindex="0" role="button">
-                      <span class="doc-grid-icon">🧬</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Cognitive Levels</div>
-                          <div class="doc-grid-desc">Unlocks at each tier</div>
-                      </div>
-                  </div>
                   <div class="doc-grid-card" data-cmd="quickReference" tabindex="0" role="button">
                       <span class="doc-grid-icon">⚡</span>
                       <div class="doc-grid-text">
                           <div class="doc-grid-title">Quick Reference</div>
                           <div class="doc-grid-desc">Commands and shortcuts</div>
+                      </div>
+                  </div>
+                  <div class="doc-grid-card" data-cmd="learnAlexResponsibleAI" tabindex="0" role="button">
+                      <span class="doc-grid-icon">🤖</span>
+                      <div class="doc-grid-text">
+                          <div class="doc-grid-title">Responsible AI</div>
+                          <div class="doc-grid-desc">Ethical usage guidelines</div>
                       </div>
                   </div>
               </div>
@@ -177,40 +177,6 @@ export function getDocsTabHtml(): string {
           </div>
 
           <div class="docs-section">
-              <div class="docs-section-title">Operations</div>
-              <div class="doc-grid">
-                  <div class="doc-grid-card" data-cmd="openDoc:MASTER-ALEX-PROTECTED" tabindex="0" role="button">
-                      <span class="doc-grid-icon">🛡️</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Protection</div>
-                          <div class="doc-grid-desc">Safety imperatives</div>
-                      </div>
-                  </div>
-                  <div class="doc-grid-card" data-cmd="openDocs" tabindex="0" role="button">
-                      <span class="doc-grid-icon">📁</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Project Structure</div>
-                          <div class="doc-grid-desc">Files and directories</div>
-                      </div>
-                  </div>
-                  <div class="doc-grid-card" data-cmd="openDoc:HEIR-ARCHITECTURE" tabindex="0" role="button">
-                      <span class="doc-grid-icon">👑</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Heir Architecture</div>
-                          <div class="doc-grid-desc">Master-Heir sync</div>
-                      </div>
-                  </div>
-                  <div class="doc-grid-card" data-cmd="openDoc:RESEARCH-FIRST" tabindex="0" role="button">
-                      <span class="doc-grid-icon">🔬</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Research Papers</div>
-                          <div class="doc-grid-desc">Foundation research</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="docs-section">
               <div class="docs-section-title">Reference</div>
               <div class="doc-grid">
                   <div class="doc-grid-card" data-cmd="openDoc:SKILL-DISCIPLINE-MAP" tabindex="0" role="button">
@@ -237,17 +203,6 @@ export function getDocsTabHtml(): string {
               ${actionButton('learnAlexExercises', '🏋️', 'Exercises', 'Hands-on practice exercises')}
               ${actionButton('learnAlexQuiz', '❓', 'Quiz', 'Test your knowledge')}
               ${actionButton('learnAlexAirs', '📊', 'AIRS Assessment', 'AI Readiness Score — discover where you stand')}
-          </div>
-
-          <div class="docs-section">
-              <div class="docs-section-title">For Facilitators</div>
-              ${actionButton('learnAlexSessionPlan', '📋', 'Session Plan', 'Session planning guide')}
-              ${actionButton('learnAlexSlides', '📊', 'Slides', 'Presentation slides for study guides')}
-              ${actionButton('learnAlexDemoScripts', '🎬', 'Demo Scripts', 'Live demo walkthroughs')}
-              ${actionButton('learnAlexHandout', '📄', 'Handout', 'Printable study guide handout')}
-              ${actionButton('learnAlexPreRead', '📖', 'Pre-Read', 'Pre-read material')}
-              ${actionButton('learnAlexGitHubGuide', '📐', 'GitHub Guide', 'Repo setup and contribution guide')}
-              ${actionButton('learnAlexResponsibleAI', '🤖', 'Responsible AI', 'Ethical usage guidelines')}
           </div>
 
           <div class="docs-section">

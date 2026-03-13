@@ -398,7 +398,6 @@ The meta-insight: **You're not just building software — you're building a know
 - [.github/skills/knowledge-synthesis/SKILL.md] (High, Integrates, Bidirectional) - "Research generates knowledge that synthesis organizes"
 - [.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "Gap analysis creates skills that SSO selects from"
 - [.github/instructions/research-first-workflow.instructions.md] (Critical, Implements, Bidirectional) - "Instruction provides step-by-step procedures for this skill"
-- [.github/instructions/heir-skill-promotion.instructions.md] (High, Integrates, Forward) - "Heir projects use this methodology, then promote skills back"
 - [.github/prompts/gapanalysis.prompt.md] (High, Implements, Forward) - "Interactive prompt for 4-dimension gap analysis"
 
 *Skill created: 2026-02-13 | Category: Architecture | Status: Active*

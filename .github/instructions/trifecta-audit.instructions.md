@@ -1,5 +1,6 @@
 ---
 description: "Trifecta audit protocol — systematic assessment of capability completeness across all three memory systems"
+inheritance: master-only
 ---
 
 # Trifecta Audit Protocol

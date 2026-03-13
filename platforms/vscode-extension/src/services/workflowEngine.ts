@@ -89,11 +89,6 @@ const DEFAULT_WORKFLOWS: WorkflowDefinition[] = [
                 prompt: 'Help me diagnose this bug. What are the likely root causes and how should I investigate systematically?',
             },
             {
-                label: 'Search session history',
-                type: 'command',
-                commandId: 'alex.recallSession',
-            },
-            {
                 label: 'Write a regression test',
                 type: 'chat',
                 prompt: 'Help me write a test case that would catch this bug and prevent future regressions.',

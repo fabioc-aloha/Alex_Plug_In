@@ -20,11 +20,15 @@ Memory files define *what* and *how*; muscles *do*.
 | `brain-qa-heir.ps1`           | PowerShell | 840   | 25-phase heir validation     | inheritable |
 | `build-extension-package.ps1` | PowerShell | 295   | VSIX packaging               | master-only |
 | `dream-cli.ts`                | TypeScript | 116   | Neural maintenance CLI       | inheritable |
-| `fix-fence-bug.ps1`           | PowerShell | 189   | Detect/fix VS Code fence bug | master-only |
+| `fix-fence-bug.ps1`           | PowerShell | 189   | Detect/fix VS Code fence bug | inheritable |
 | `gamma-generator.cjs`         | JavaScript | 777   | Markdown → Gamma slides      | inheritable |
 | `normalize-paths.ps1`         | PowerShell | 194   | Path consistency fixes       | inheritable |
 | `pptxgen-cli.ts`              | TypeScript | 136   | PowerPoint generation        | inheritable |
-| `sync-architecture.js`        | JavaScript | 771   | Master → Heir sync           | master-only |
+| `sync-architecture.cjs`       | JavaScript | 771   | Master → Heir sync           | master-only |
+| `gamma-generator.js`          | JavaScript | —     | Gamma slides (ESM variant)   | inheritable |
+| `install-hooks.ps1`           | PowerShell | —     | Install hooks config         | inheritable |
+| `md-to-word.py`               | Python     | —     | Markdown → Word conversion   | inheritable |
+| `new-skill.ps1`               | PowerShell | —     | Scaffold new skill trifecta  | inheritable |
 | `validate-skills.ps1`         | PowerShell | 113   | Skill file validation        | inheritable |
 | `validate-synapses.ps1`       | PowerShell | 154   | Synapse target validation    | inheritable |
 
@@ -35,7 +39,7 @@ Memory files define *what* and *how*; muscles *do*.
 | Language         | Best For                                        | Example Muscles                                 |
 | ---------------- | ----------------------------------------------- | ----------------------------------------------- |
 | **PowerShell**   | File scanning, validation, audits, reporting    | `validate-*.ps1`, `brain-qa.ps1`, `audit-*.ps1` |
-| **Node.js (JS)** | Complex transforms, JSON manipulation, npm libs | `sync-architecture.js`, `gamma-generator.cjs`   |
+| **Node.js (JS)** | Complex transforms, JSON manipulation, npm libs | `sync-architecture.cjs`, `gamma-generator.cjs`   |
 | **TypeScript**   | CLI tools with nice UX, type-safe APIs          | `dream-cli.ts`, `pptxgen-cli.ts`                |
 
 ### Quick Decision Guide
@@ -51,12 +55,20 @@ Cross-platform critical   → Node.js
 
 ## Inheritance Model
 
-Controlled by `inheritance.json`:
+Controlled by `inheritance.json` — each muscle declares its own inheritance:
 
 ```json
 {
-  "master-only": ["audit-master-alex.ps1", "brain-qa.ps1", "build-extension-package.ps1", "sync-architecture.js"],
-  "inheritable": ["brain-qa-heir.ps1", "dream-cli.ts", "gamma-generator.cjs", ...]
+  "brain-qa.ps1": {
+    "inheritance": "master-only",
+    "description": "32-phase brain QA validation (master-only, full phases)",
+    "referencedBy": ["brain-qa"]
+  },
+  "dream-cli.ts": {
+    "inheritance": "inheritable",
+    "description": "CLI wrapper for dream/neural maintenance outside VS Code",
+    "referencedBy": ["dream-state-automation"]
+  }
 }
 ```
 
@@ -79,7 +91,7 @@ Controlled by `inheritance.json`:
 
 Examples:
 - validate-skills.ps1    → Validates skill files
-- sync-architecture.js   → Syncs architecture to heirs
+- sync-architecture.cjs   → Syncs architecture to heirs
 - dream-cli.ts           → CLI for dream protocol
 - gamma-generator.cjs    → Generates Gamma slides
 ```
@@ -92,7 +104,7 @@ From Master Alex root:
 pwsh -File .github/muscles/validate-skills.ps1
 
 # Node.js muscles
-node .github/muscles/sync-architecture.js
+node .github/muscles/sync-architecture.cjs
 
 # TypeScript muscles (via tsx)
 npx tsx .github/muscles/dream-cli.ts
@@ -110,7 +122,7 @@ npm run validate-skills
 | Muscle                 | Requirement                                                                |
 | ---------------------- | -------------------------------------------------------------------------- |
 | `pptxgen-cli.ts`       | **Must run from heir directory** — needs heir's node_modules for pptxgenjs |
-| `sync-architecture.js` | Must run from repo root (uses `npm run sync-architecture`)                 |
+| `sync-architecture.cjs` | Must run from repo root (uses `npm run sync-architecture`)                 |
 | `gamma-generator.cjs`  | Requires Playwright (`npm install playwright` in heir)                     |
 
 ```powershell

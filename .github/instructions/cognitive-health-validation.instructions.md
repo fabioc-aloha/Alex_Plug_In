@@ -1,6 +1,7 @@
 ---
 description: "Comprehensive cognitive architecture health validation using brain-qa integration with meditation and release workflows"
 applyTo: "**/*brain-qa*,**/*audit*,**/*health*"
+inheritance: master-only
 ---
 
 # Cognitive Health Validation Protocols

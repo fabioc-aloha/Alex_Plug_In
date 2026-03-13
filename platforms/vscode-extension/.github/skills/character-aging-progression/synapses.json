@@ -14,14 +14,6 @@
       "yields": "AI character reference generation extended capabilities"
     },
     {
-      "target": ".github/skills/persona-detection/SKILL.md",
-      "type": "complements",
-      "strength": 0.8,
-      "note": "Age progression avatars used in persona fallback system",
-      "when": "Combining character aging progression with persona detection",
-      "yields": "persona detection complementary techniques"
-    },
-    {
       "target": ".github/skills/brand-asset-management/SKILL.md",
       "type": "complements",
       "strength": 0.7,

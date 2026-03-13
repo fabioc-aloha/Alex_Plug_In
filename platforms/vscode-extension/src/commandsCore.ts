@@ -1,8 +1,8 @@
 /**
- * commandsCore.ts - Core Alex commands (operations, session, docs, audit, global knowledge)
+ * commandsCore.ts - Core Alex commands (operations, docs, audit, global knowledge)
  *
  * Extracted from extension.ts to keep the main activation file focused.
- * Contains: architecture operations (init/reset/dream/upgrade), session management,
+ * Contains: architecture operations (init/reset/dream/upgrade),
  * document-opening commands, audit/preflight, secrets, GK, GitHub integration,
  * and v6.0 partnership commands.
  */
@@ -18,25 +18,15 @@ import { upgradeArchitecture } from './commands/upgrade';
 import { completeMigration, showMigrationCandidates } from './commands/upgradeMigration';
 import { runSelfActualization } from './commands/self-actualization';
 import { runExportForM365, exportForM365 } from './commands/exportForM365';
-import {
-  initializeSessionStatusBar,
-  startSession,
-  endSession,
-  togglePauseSession,
-  showSessionActions,
-} from './commands/session';
-import { registerGoalsCommands } from './commands/goals';
 import { generateSkillCatalog } from './commands/skillCatalog';
 import { inheritSkillFromGlobal } from './commands/inheritSkill';
 import { proposeSkillToGlobal } from './commands/proposeSkill';
 import { setupGlobalKnowledgeCommand } from './commands/setupGlobalKnowledge';
-import { importGitHubIssuesAsGoals, reviewPullRequest } from './commands/githubIntegration';
+import { reviewPullRequest } from './commands/githubIntegration';
 import { registerTTSCommands } from './commands/readAloud';
 import { showTokenManagementPalette } from './services/secretsManager';
 import { recordPositiveOutcomeCommand, recordNegativeOutcomeCommand, showOutcomeStatsCommand } from './services/outcomeTracker';
-import { showPendingTasksCommand, forceCheckTasksCommand } from './services/taskDetector';
 import { showExpertiseModelCommand } from './services/expertiseModel';
-import { recallSessionCommand, showSessionHistoryCommand } from './services/episodicMemory';
 import { runWorkflowCommand, listWorkflowsCommand } from './services/workflowEngine';
 import { clearHealthCache } from './shared/healthCheck';
 import { openChatPanel } from './shared/utils';
@@ -308,41 +298,11 @@ export function registerCoreCommands(
     },
   ));
 
-  // --- Session & Delegation ---
+  // --- Registration ---
 
-  initializeSessionStatusBar(context);
-  registerGoalsCommands(context);
   registerTTSCommands(context);
   registerUXCommands(context);
   registerHeirValidationCommand(context);
-
-  context.subscriptions.push(vscode.commands.registerCommand(
-    "alex.startSession",
-    async () => {
-      await startSession();
-    },
-  ));
-
-  context.subscriptions.push(vscode.commands.registerCommand(
-    "alex.endSession",
-    async () => {
-      await endSession(true);
-    },
-  ));
-
-  context.subscriptions.push(vscode.commands.registerCommand(
-    "alex.togglePauseSession",
-    async () => {
-      await togglePauseSession();
-    },
-  ));
-
-  context.subscriptions.push(vscode.commands.registerCommand(
-    "alex.sessionActions",
-    async () => {
-      await showSessionActions();
-    },
-  ));
 
   // --- Document Opening Commands ---
 
@@ -626,19 +586,6 @@ export function registerCoreCommands(
   // --- GitHub Integration ---
 
   context.subscriptions.push(vscode.commands.registerCommand(
-    "alex.importGitHubIssues",
-    async () => {
-      const endLog = telemetry.logTimed("command", "import_github_issues");
-      try {
-        await importGitHubIssuesAsGoals();
-        endLog(true);
-      } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
-      }
-    },
-  ));
-
-  context.subscriptions.push(vscode.commands.registerCommand(
     "alex.reviewPR",
     async () => {
       if (!(await requireCognitiveLevel('alex.reviewPR'))) { return; }
@@ -655,13 +602,9 @@ export function registerCoreCommands(
   // --- v6.0 Partnership Commands ---
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("alex.recallSession", recallSessionCommand),
-    vscode.commands.registerCommand("alex.showSessionHistory", showSessionHistoryCommand),
     vscode.commands.registerCommand("alex.recordPositiveOutcome", recordPositiveOutcomeCommand),
     vscode.commands.registerCommand("alex.recordNegativeOutcome", recordNegativeOutcomeCommand),
     vscode.commands.registerCommand("alex.showOutcomeStats", showOutcomeStatsCommand),
-    vscode.commands.registerCommand("alex.showPendingTasks", showPendingTasksCommand),
-    vscode.commands.registerCommand("alex.forceCheckTasks", forceCheckTasksCommand),
     vscode.commands.registerCommand("alex.runWorkflow", runWorkflowCommand),
     vscode.commands.registerCommand("alex.listWorkflows", listWorkflowsCommand),
     vscode.commands.registerCommand("alex.showExpertiseModel", showExpertiseModelCommand),

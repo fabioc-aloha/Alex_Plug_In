@@ -150,7 +150,6 @@ Our roadmap is a **living document**, not a frozen spec.
 | Changelog | Entry for this version | Visual review |
 | Committed | No uncommitted changes | `git status` |
 
-See [release-management.instructions.md](../../instructions/release-management.instructions.md) for full protocol.
 
 ### If User Says "Just Publish"
 
@@ -250,7 +249,6 @@ For enterprise contexts requiring formal PM:
 ### High-Strength Connections
 
 - [alex-effort-estimation/SKILL.md] (Critical, Uses, Forward) — "Effort estimation methodology"
-- [release-management.instructions.md] (Critical, Gates, Forward) — "Release process"
 - [meditation/SKILL.md] (High, Complements, Bidirectional) — "Consolidation as retrospective"
 
 ### Medium-Strength Connections

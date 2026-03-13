@@ -13,13 +13,10 @@ export interface MindTabContext {
     mindData?: MindTabData;
     health: HealthCheckResult;
     hasGlobalKnowledge: boolean;
-    streakDays: number;
     healthBannerClass: string;
     healthBannerIcon: string;
     healthBannerLabel: string;
     healthPct: number;
-    cogTier: string;
-    cogProgress: number;
     tokenStatuses?: TokenStatusInfo[];
     settingsToggles?: SettingsToggle[];
 }
@@ -27,9 +24,9 @@ export interface MindTabContext {
 /** Generate the Mind tab panel HTML. */
 export function getMindTabHtml(ctx: MindTabContext): string {
     const {
-        mindData, health, hasGlobalKnowledge, streakDays,
+        mindData, health, hasGlobalKnowledge,
         healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct,
-        cogTier, cogProgress, tokenStatuses, settingsToggles,
+        tokenStatuses, settingsToggles,
     } = ctx;
 
     return `
@@ -45,22 +42,6 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               <div class="arch-status-detail">
                   <div class="arch-status-title">Architecture ${healthBannerLabel}</div>
                   <div class="arch-status-meta">${health.totalSynapses} synapses${health.brokenSynapses > 0 ? ` · ${health.brokenSynapses} broken` : ''} · ${healthPct}%</div>
-              </div>
-          </div>
-
-          <div class="mind-stats-row">
-              <div class="mind-stat-card">
-                  <div class="mind-stat-value">${mindData.cognitiveAge}</div>
-                  <div class="mind-stat-label">Cognitive Age</div>
-                  <div class="cognitive-tier-label">${cogTier}</div>
-                  <div class="cognitive-progress-bar"><div class="cognitive-progress-fill" style="width: ${cogProgress}%"></div></div>
-                  <div class="cognitive-milestones">
-                      <span>Learning</span><span>Growth</span><span>Integrated</span><span>Wise</span>
-                  </div>
-              </div>
-              <div class="mind-stat-card">
-                  <div class="mind-stat-value">${streakDays > 0 ? streakDays : '0'}</div>
-                  <div class="mind-stat-label">Day Streak</div>
               </div>
           </div>
 
@@ -135,8 +116,6 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               <div class="meditation-streak-row">
                   <span class="meditation-streak-badge">🧘 ${mindData.meditationCount} session${mindData.meditationCount !== 1 ? 's' : ''}</span>
               </div>` : ''}
-              ${actionButton('startSession', '🍅', 'Focus Session', 'Pomodoro-style work sessions')}
-              ${actionButton('showGoals', '🎯', 'Goals', 'Track learning progress')}
           </div>
 
           <div class="dashboard-card">

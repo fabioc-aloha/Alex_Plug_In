@@ -3,8 +3,6 @@ import * as path from 'path';
 import { logInfo } from '../shared/logger';
 import { runDreamProtocol } from '../commands/dream';
 import { runSelfActualization } from '../commands/self-actualization';
-import { startSession, getCurrentSession, isSessionActive, endSession } from '../commands/session';
-import { getGoalsSummary, showGoalsQuickPick, showCreateGoalDialog, autoIncrementGoals } from '../commands/goals';
 import { processForInsights, detectInsights, getAutoInsightsConfig } from '../commands/autoInsights';
 import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
 import { recordEmotionalSignal, resetEmotionalState, assessRiverOfIntegration, assessWindowOfTolerance, isLidFlipped as checkLidFlipped } from './emotionalMemory';
@@ -34,9 +32,9 @@ import {
 import {
     isGreeting, isStartOfSession, handleGreetingWithSelfActualization,
     handleSelfActualizeCommand, handleKnowledgeCommand, handleSaveInsightCommand,
-    handlePromoteCommand, handleKnowledgeStatusCommand, handleDocsCommand, handleGoalsCommand,
+    handlePromoteCommand, handleKnowledgeStatusCommand, handleDocsCommand,
     handleHelpCommand, handleForgetCommand, handleConfidenceCommand,
-    handleCreativeCommand, handleVerifyCommand, handleSessionCommand,
+    handleCreativeCommand, handleVerifyCommand,
 } from './handlers/workflowHandlers';
 
 // ============================================================================
@@ -425,16 +423,6 @@ export const alexChatHandler: vscode.ChatRequestHandler = async (
         return await handleDocsCommand(request, context, stream, token);
     }
 
-    // Session timer command
-    if (request.command === 'session') {
-        return await handleSessionCommand(request, context, stream, token);
-    }
-
-    // Learning goals command
-    if (request.command === 'goals') {
-        return await handleGoalsCommand(request, context, stream, token);
-    }
-
     // Help command - discoverability
     if (request.command === 'help') {
         return await handleHelpCommand(request, context, stream, token);
@@ -584,7 +572,6 @@ function getAlexCognitiveTools(): vscode.LanguageModelChatTool[] {
         'alex_cognitive_architecture_status',
         'alex_platform_mcp_recommendations',
         'alex_cognitive_user_profile',
-        'alex_cognitive_focus_context',
         'alex_cognitive_self_actualization',
         'alex_quality_heir_validation',
         'alex_knowledge_search',
@@ -876,8 +863,7 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
                 );
             } else {
                 followups.push(
-                    { prompt: 'Update my communication preferences', label: '✏️ Edit preferences' },
-                    { prompt: 'Add new learning goals', label: '🎯 Set goals' }
+                    { prompt: 'Update my communication preferences', label: '✏️ Edit preferences' }
                 );
             }
         }

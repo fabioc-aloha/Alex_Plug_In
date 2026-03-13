@@ -51,14 +51,6 @@
       "yields": "performance profiling quality checks and validation"
     },
     {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "validates",
-      "strength": 0.8,
-      "reason": "Extension audit methodology validates VS Code patterns",
-      "when": "Extension audit methodology validates VS Code patterns",
-      "yields": "VS Code extension patterns quality checks and validation"
-    },
-    {
       "target": ".github/skills/ui-ux-design/SKILL.md",
       "type": "integrates",
       "strength": 0.85,

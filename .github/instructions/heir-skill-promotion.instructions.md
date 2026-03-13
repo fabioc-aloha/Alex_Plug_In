@@ -1,6 +1,7 @@
 ---
 description: "Skill promotion workflow from heir projects to Master Alex"
 excludeAgent: "coding-agent"
+inheritance: master-only
 ---
 
 # Heir Skill Promotion Protocol

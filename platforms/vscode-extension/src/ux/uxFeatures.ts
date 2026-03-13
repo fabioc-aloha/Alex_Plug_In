@@ -3,7 +3,6 @@
  * 
  * Implements the v5.2.0 UX Excellence roadmap items:
  * - Voice Mode Toggle (status bar + auto-read)
- * - Model Tier Status Bar
  * - Quick Command Palette
  * - Daily Briefing
  */
@@ -11,7 +10,6 @@
 import * as vscode from 'vscode';
 import { synthesize, prepareTextForSpeech, playWithWebview, detectLanguage, getVoiceForLanguage } from '../tts';
 import { summarizeForSpeech, LONG_CONTENT_WORD_THRESHOLD } from '../commands/readAloud';
-import { WorkspaceGoalsData } from '../shared/constants';
 import { detectCognitiveLevel } from '../shared/cognitiveTier';
 
 // Extension context for TTS playback
@@ -19,67 +17,9 @@ let extensionContext: vscode.ExtensionContext | undefined;
 
 // Voice Mode Status Bar
 let voiceModeStatusBar: vscode.StatusBarItem | undefined;
-let modelTierStatusBar: vscode.StatusBarItem | undefined;
 
 // Voice mode state
 let voiceModeEnabled = false;
-
-/**
- * Model tier definitions
- */
-export type ModelTier = 'frontier' | 'capable' | 'efficient' | 'unknown';
-
-export interface ModelTierInfo {
-  tier: ModelTier;
-  name: string;
-  icon: string;
-  color?: vscode.ThemeColor;
-}
-
-const MODEL_TIER_MAP: Record<string, ModelTier> = {
-  // Frontier tier
-  'claude-opus-4': 'frontier',
-  'claude-opus-4.5': 'frontier',
-  'claude-opus-4.6': 'frontier',
-  'gpt-5.2': 'frontier',
-  'gpt-5.2-codex': 'frontier',
-  'gpt-5.3': 'frontier',
-  'gpt-5-turbo': 'frontier',
-  'o3': 'frontier',
-  'o1-pro': 'frontier',
-  // Capable tier
-  'claude-sonnet-4': 'capable',
-  'claude-sonnet-4.5': 'capable',
-  'claude-sonnet-4.6': 'capable',
-  'gpt-5.1': 'capable',
-  'gpt-5.1-codex': 'capable',
-  'gpt-5.1-codex-max': 'capable',
-  'gpt-5': 'capable',
-  'gpt-5-codex': 'capable',
-  'gpt-4.1': 'capable',
-  'gpt-4o': 'capable',
-  'gemini-3-pro': 'capable',
-  'gemini-2.5-pro': 'capable',
-  'o4-mini': 'capable',
-  'o1-mini': 'capable',
-  // Efficient tier
-  'claude-haiku-4': 'efficient',
-  'claude-haiku-4.5': 'efficient',
-  'gpt-5-mini': 'efficient',
-  'gpt-5.1-codex-mini': 'efficient',
-  'gpt-4.1-mini': 'efficient',
-  'gpt-4.1-nano': 'efficient',
-  'gpt-4o-mini': 'efficient',
-  'gemini-2.5-flash': 'efficient',
-  'gemini-3-flash': 'efficient',
-};
-
-const TIER_INFO: Record<ModelTier, Omit<ModelTierInfo, 'tier' | 'name'>> = {
-  frontier: { icon: '$(rocket)', color: new vscode.ThemeColor('charts.green') },
-  capable: { icon: '$(symbol-class)', color: new vscode.ThemeColor('charts.blue') },
-  efficient: { icon: '$(zap)', color: new vscode.ThemeColor('charts.yellow') },
-  unknown: { icon: '$(question)', color: undefined },
-};
 
 /**
  * Quick command definitions
@@ -93,14 +33,12 @@ interface QuickCommand {
 }
 
 const QUICK_COMMANDS: QuickCommand[] = [
-  { label: '$(play) Start Session', description: 'Start a focus session', command: 'alex.startSession', icon: '$(play)' },
   { label: '$(sparkle) Self-Actualize', description: 'Deep architecture assessment', command: 'alex.selfActualize', icon: '$(sparkle)' },
   { label: '$(pulse) Dream', description: 'Neural maintenance', command: 'alex.dream', icon: '$(pulse)' },
   { label: '$(sync) Sync Knowledge', description: 'Sync with Global Knowledge', command: 'alex.syncKnowledge', icon: '$(sync)' },
   { label: '$(calendar) Daily Briefing', description: 'Get your daily summary', command: 'alex.dailyBriefing', icon: '$(calendar)' },
   { label: '$(dashboard) Mind Dashboard', description: 'View cognitive health & memory', command: 'alex.showCognitiveDashboard', icon: '$(dashboard)' },
   { label: '$(unmute) Toggle Voice', description: 'Enable/disable voice mode (Ctrl+Alt+V)', command: 'alex.toggleVoice', icon: '$(unmute)' },
-  { label: '$(target) Show Goals', description: 'View learning goals', command: 'alex.showGoals', icon: '$(target)' },
   { label: '$(book) Read Aloud', description: 'Read current selection (Ctrl+Alt+R)', command: 'alex.readAloud', icon: '$(book)' },
   { label: '$(comment-discussion) Speak Prompt', description: 'Generate & speak content (Ctrl+Alt+P)', command: 'alex.speakPrompt', icon: '$(comment-discussion)' },
   { label: '$(gear) Setup Environment', description: 'Configure workspace', command: 'alex.setupEnvironment', icon: '$(gear)' },
@@ -120,9 +58,6 @@ export function initializeUXFeatures(context: vscode.ExtensionContext): void {
   // Create voice mode status bar
   createVoiceModeStatusBar(context);
 
-  // Create model tier status bar
-  createModelTierStatusBar(context);
-
   // Listen for configuration changes
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration(e => {
@@ -130,18 +65,8 @@ export function initializeUXFeatures(context: vscode.ExtensionContext): void {
         voiceModeEnabled = vscode.workspace.getConfiguration('alex.voice').get('enabled', false);
         updateVoiceModeStatusBar();
       }
-      // Re-detect model tier when Copilot or chat settings change
-      if (e.affectsConfiguration('github.copilot') ||
-          e.affectsConfiguration('chat.agent') ||
-          e.affectsConfiguration('chat.mcp') ||
-          e.affectsConfiguration('claude-opus')) {
-        detectAndUpdateModelTier();
-      }
     })
   );
-
-  // Detect model on activation and periodically
-  detectAndUpdateModelTier();
 
   // Detect cognitive level on activation (populates cache for welcome view badges)
   detectCognitiveLevel().then(() => {
@@ -195,80 +120,6 @@ function updateVoiceModeStatusBar(): void {
     );
     voiceModeStatusBar.backgroundColor = undefined;
   }
-}
-
-/**
- * Create model tier status bar item
- */
-function createModelTierStatusBar(context: vscode.ExtensionContext): void {
-  modelTierStatusBar = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Right,
-    97 // Lower priority than voice mode (98)
-  );
-  modelTierStatusBar.tooltip = 'Current AI Model Tier';
-  context.subscriptions.push(modelTierStatusBar);
-}
-
-/**
- * Detect the current model tier from available chat models
- */
-async function detectAndUpdateModelTier(): Promise<void> {
-  try {
-    // Try to select available chat models
-    const models = await vscode.lm.selectChatModels();
-    
-    if (models.length === 0) {
-      updateModelTierStatusBar('unknown', 'No model');
-      return;
-    }
-
-    // Get the first (preferred) model
-    const model = models[0];
-    const modelId = model.id.toLowerCase();
-    const modelFamily = model.family?.toLowerCase() || '';
-
-    // Determine tier from model ID or family
-    let detectedTier: ModelTier = 'unknown';
-    let modelName = model.name || model.id;
-
-    for (const [pattern, tier] of Object.entries(MODEL_TIER_MAP)) {
-      if (modelId.includes(pattern) || modelFamily.includes(pattern)) {
-        detectedTier = tier;
-        break;
-      }
-    }
-
-    // Fallback tier detection based on common patterns
-    if (detectedTier === 'unknown') {
-      if (modelId.includes('opus') || modelId.includes('gpt-5.2')) {
-        detectedTier = 'frontier';
-      } else if (modelId.includes('sonnet') || modelId.includes('gpt-4o') || modelId.includes('gpt-5')) {
-        detectedTier = 'capable';
-      } else if (modelId.includes('haiku') || modelId.includes('mini') || modelId.includes('gpt-4.1')) {
-        detectedTier = 'efficient';
-      }
-    }
-
-    updateModelTierStatusBar(detectedTier, modelName);
-  } catch (error) {
-    console.warn('[Alex UX] Failed to detect model tier:', error);
-    updateModelTierStatusBar('unknown', 'Unknown');
-  }
-}
-
-/**
- * Update model tier status bar display
- */
-function updateModelTierStatusBar(tier: ModelTier, modelName: string): void {
-  if (!modelTierStatusBar) {return;}
-
-  const tierInfo = TIER_INFO[tier];
-  const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
-
-  modelTierStatusBar.text = `${tierInfo.icon} ${tierLabel}`;
-  modelTierStatusBar.tooltip = `Model: ${modelName}\nTier: ${tierLabel}\n\nFrontier = Deep reasoning, complex tasks\nCapable = Good reasoning, standard tasks\nEfficient = Fast, simple tasks`;
-  modelTierStatusBar.backgroundColor = tierInfo.color ? new vscode.ThemeColor('statusBarItem.prominentBackground') : undefined;
-  modelTierStatusBar.show();
 }
 
 /**
@@ -378,13 +229,9 @@ export async function showQuickCommands(): Promise<void> {
  */
 interface DailyBriefingData {
   date: string;
-  streak: number;
-  goalsInProgress: number;
-  goalsCompleted: number;
   recentMeditation: string | null;
   synapseHealth: string;
   skillCount: number;
-  focusMinutesToday: number;
 }
 
 /**
@@ -411,18 +258,6 @@ export async function generateDailyBriefing(context: vscode.ExtensionContext): P
   let briefing = `## ${greeting}\n\n`;
   briefing += `**${dateStr}**\n\n`;
 
-  // Streak info
-  if (data.streak > 0) {
-    briefing += `🔥 **${data.streak}-day streak!** Keep the momentum going.\n\n`;
-  }
-
-  // Goals summary
-  if (data.goalsInProgress > 0 || data.goalsCompleted > 0) {
-    briefing += `### Goals\n`;
-    briefing += `- 🎯 ${data.goalsInProgress} goals in progress\n`;
-    briefing += `- ✅ ${data.goalsCompleted} goals completed\n\n`;
-  }
-
   // Architecture health
   briefing += `### Architecture\n`;
   briefing += `- 🧠 ${data.skillCount} skills available\n`;
@@ -432,13 +267,7 @@ export async function generateDailyBriefing(context: vscode.ExtensionContext): P
     briefing += `- 🧘 Last meditation: ${data.recentMeditation}\n`;
   }
 
-  // Focus time
-  if (data.focusMinutesToday > 0) {
-    briefing += `\n### Focus Today\n`;
-    briefing += `- ⏱️ ${data.focusMinutesToday} minutes in focus sessions\n`;
-  }
-
-  briefing += `\n---\n*Ready to learn? Start with "/learn [topic]" or "/session [topic]"*`;
+  briefing += `\n---\n*Ready to work? Start a conversation with @alex*`;
 
   return briefing;
 }
@@ -449,32 +278,12 @@ export async function generateDailyBriefing(context: vscode.ExtensionContext): P
 async function collectBriefingData(workspaceUri: vscode.Uri): Promise<DailyBriefingData> {
   const data: DailyBriefingData = {
     date: new Date().toISOString().split('T')[0],
-    streak: 0,
-    goalsInProgress: 0,
-    goalsCompleted: 0,
     recentMeditation: null,
     synapseHealth: '💚 Healthy',
     skillCount: 0,
-    focusMinutesToday: 0,
   };
 
   try {
-    // Check goals file
-    const goalsUri = vscode.Uri.joinPath(workspaceUri, '.github', 'config', 'goals.json');
-    try {
-      const goalsContent = await vscode.workspace.fs.readFile(goalsUri);
-      const goals: WorkspaceGoalsData = JSON.parse(Buffer.from(goalsContent).toString());
-      if (Array.isArray(goals.goals)) {
-        data.goalsInProgress = goals.goals.filter((g) => g.status === 'in-progress').length;
-        data.goalsCompleted = goals.goals.filter((g) => g.status === 'completed').length;
-      }
-      if (typeof goals.streak === 'number') {
-        data.streak = goals.streak;
-      }
-    } catch {
-      // Goals file doesn't exist
-    }
-
     // Count skills
     const skillsUri = vscode.Uri.joinPath(workspaceUri, '.github', 'skills');
     try {

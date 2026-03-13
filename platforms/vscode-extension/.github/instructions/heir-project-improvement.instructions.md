@@ -6,9 +6,7 @@ description: "Practical guide for heirs to create project trifectas and apply re
 
 > How heirs build trifectas for their own projects and apply research-first development to raise quality
 
-**Synapse**: [.github/instructions/trifecta-audit.instructions.md] (Critical, Implements, Bidirectional) - "trifecta audit defines the model; this instruction teaches heirs to apply it"
 **Synapse**: [.github/instructions/research-first-workflow.instructions.md] (Critical, Extends, Bidirectional) - "research-first provides methodology; this instruction teaches heirs to run it"
-**Synapse**: [.github/instructions/heir-skill-promotion.instructions.md] (High, Feeds, Forward) - "discoveries from heir improvement may promote to Master"
 **Synapse**: [.github/skills/research-first-development/SKILL.md] (High, Uses, Forward) - "4D gap analysis model and research-first patterns"
 **Synapse**: [AlexLearn heir] (Medium, Exemplifies, Forward) - "content-domain heir with teaching trifecta, persona overlays, and independent content source of truth"
 
@@ -345,7 +343,6 @@ For **safety-critical**, **mission-critical**, or **high-reliability** heir proj
 |--------|--------|
 | Capability is platform-specific (only this heir uses it) | Keep in heir's `.github/` |
 | The *pattern* is generalizable (other projects could use the approach) | Promote as `GK-*` pattern to Global Knowledge |
-| Capability is useful to ALL Alexes | Full promotion via `heir-skill-promotion.instructions.md` |
 | 2+ heirs develop similar capabilities independently | Strong signal for Master promotion |
 
 ---

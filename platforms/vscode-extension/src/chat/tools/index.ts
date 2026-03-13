@@ -8,12 +8,10 @@ export type {
     IArchitectureStatusParams,
     IMcpRecommendationParams,
     IUserProfileParams,
-    IFocusContextParams,
     IHeirValidationParams,
     ICognitiveStateParams,
     IUserProfile,
     ISelfActualizationParams,
-    IFocusContextResponse,
 } from './types';
 
 // Re-export tool classes
@@ -22,7 +20,6 @@ export { MemorySearchTool } from './memorySearchTool';
 export { ArchitectureStatusTool } from './architectureStatusTool';
 export { McpRecommendationTool } from './mcpRecommendationTool';
 export { UserProfileTool, getUserProfile, formatPersonalizedGreeting } from './userProfileTool';
-export { FocusContextTool } from './focusContextTool';
 export { SelfActualizationTool } from './selfActualizationTool';
 export { HeirValidationTool } from './heirValidationTool';
 export { CognitiveStateUpdateTool } from './cognitiveStateUpdateTool';
@@ -33,7 +30,6 @@ import { MemorySearchTool } from './memorySearchTool';
 import { ArchitectureStatusTool } from './architectureStatusTool';
 import { McpRecommendationTool } from './mcpRecommendationTool';
 import { UserProfileTool } from './userProfileTool';
-import { FocusContextTool } from './focusContextTool';
 import { SelfActualizationTool } from './selfActualizationTool';
 import { HeirValidationTool } from './heirValidationTool';
 import { CognitiveStateUpdateTool } from './cognitiveStateUpdateTool';
@@ -66,11 +62,6 @@ export function registerLanguageModelTools(context: vscode.ExtensionContext): vo
     // Register User Profile Tool
     context.subscriptions.push(
         vscode.lm.registerTool('alex_cognitive_user_profile', new UserProfileTool())
-    );
-    
-    // Register Focus Context Tool
-    context.subscriptions.push(
-        vscode.lm.registerTool('alex_cognitive_focus_context', new FocusContextTool())
     );
     
     // Register Self-Actualization Tool

@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "6.5.5",
+  "version": "6.5.8",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -180,26 +180,6 @@
         "icon": "$(search)"
       },
       {
-        "command": "alex.startSession",
-        "title": "Alex: Start Learning Session",
-        "icon": "$(play)"
-      },
-      {
-        "command": "alex.endSession",
-        "title": "Alex: End Session",
-        "icon": "$(debug-stop)"
-      },
-      {
-        "command": "alex.togglePauseSession",
-        "title": "Alex: Pause/Resume Session",
-        "icon": "$(debug-pause)"
-      },
-      {
-        "command": "alex.sessionActions",
-        "title": "Alex: Session Actions",
-        "icon": "$(clock)"
-      },
-      {
         "command": "alex.refreshWelcomeView",
         "title": "Alex: Refresh Welcome View",
         "icon": "$(refresh)"
@@ -218,16 +198,6 @@
         "command": "alex.setAgentMode",
         "title": "Alex: Set Agent Mode",
         "icon": "$(person)"
-      },
-      {
-        "command": "alex.createGoal",
-        "title": "Alex: Create Learning Goal",
-        "icon": "$(target)"
-      },
-      {
-        "command": "alex.showGoals",
-        "title": "Alex: Show Learning Goals",
-        "icon": "$(checklist)"
       },
       {
         "command": "alex.readAloud",
@@ -253,11 +223,6 @@
         "command": "alex.speakPrompt",
         "title": "Alex: Speak Prompt",
         "icon": "$(comment-discussion)"
-      },
-      {
-        "command": "alex.incrementGoal",
-        "title": "Alex: Increment Goal Progress",
-        "icon": "$(add)"
       },
       {
         "command": "alex.openHealthDashboard",
@@ -420,24 +385,9 @@
         "icon": "$(cloud)"
       },
       {
-        "command": "alex.importGitHubIssues",
-        "title": "Alex: Import GitHub Issues as Goals",
-        "icon": "$(github)"
-      },
-      {
         "command": "alex.reviewPR",
         "title": "Alex: Review Pull Request",
         "icon": "$(git-pull-request)"
-      },
-      {
-        "command": "alex.recallSession",
-        "title": "Alex: Recall Past Sessions",
-        "icon": "$(history)"
-      },
-      {
-        "command": "alex.showSessionHistory",
-        "title": "Alex: Show Session History",
-        "icon": "$(list-unordered)"
       },
       {
         "command": "alex.recordPositiveOutcome",
@@ -453,16 +403,6 @@
         "command": "alex.showOutcomeStats",
         "title": "Alex: Show Outcome Statistics",
         "icon": "$(graph)"
-      },
-      {
-        "command": "alex.showPendingTasks",
-        "title": "Alex: Show Pending Tasks",
-        "icon": "$(tasklist)"
-      },
-      {
-        "command": "alex.forceCheckTasks",
-        "title": "Alex: Force Check Pending Tasks",
-        "icon": "$(refresh)"
       },
       {
         "command": "alex.runWorkflow",
@@ -498,10 +438,6 @@
         "command": "alex.quickCommands",
         "title": "Alex: Quick Commands",
         "icon": "$(zap)"
-      },
-      {
-        "command": "alex.acknowledgeTangent",
-        "title": "Alex: Acknowledge Focus Tangent"
       },
       {
         "command": "alex.refreshMemoryTree",
@@ -682,10 +618,6 @@
           "group": "4_voice@3"
         },
         {
-          "command": "alex.importGitHubIssues",
-          "group": "5_github@1"
-        },
-        {
           "command": "alex.reviewPR",
           "group": "5_github@2"
         }
@@ -842,13 +774,7 @@
         "path": "./.github/skills/awareness/SKILL.md"
       },
       {
-        "path": "./.github/skills/azure-architecture-patterns/SKILL.md"
-      },
-      {
         "path": "./.github/skills/azure-deployment-operations/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/azure-devops-automation/SKILL.md"
       },
       {
         "path": "./.github/skills/bicep-avm-mastery/SKILL.md"
@@ -876,9 +802,6 @@
       },
       {
         "path": "./.github/skills/character-aging-progression/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/chat-participant-patterns/SKILL.md"
       },
       {
         "path": "./.github/skills/citation-management/SKILL.md"
@@ -933,9 +856,6 @@
       },
       {
         "path": "./.github/skills/dream-state/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/enterprise-integration/SKILL.md"
       },
       {
         "path": "./.github/skills/error-recovery-patterns/SKILL.md"
@@ -1055,9 +975,6 @@
         "path": "./.github/skills/performance-profiling/SKILL.md"
       },
       {
-        "path": "./.github/skills/persona-detection/SKILL.md"
-      },
-      {
         "path": "./.github/skills/pii-privacy-regulations/SKILL.md"
       },
       {
@@ -1157,13 +1074,7 @@
         "path": "./.github/skills/visual-memory/SKILL.md"
       },
       {
-        "path": "./.github/skills/vscode-configuration-validation/SKILL.md"
-      },
-      {
         "path": "./.github/skills/vscode-environment/SKILL.md"
-      },
-      {
-        "path": "./.github/skills/vscode-extension-patterns/SKILL.md"
       },
       {
         "path": "./.github/skills/work-life-balance/SKILL.md"
@@ -1322,18 +1233,6 @@
           "scope": "machine",
           "description": "Show daily briefing on first chat of the day."
         },
-        "alex.dailyBriefing.includeGoals": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Include learning goals progress in daily briefing."
-        },
-        "alex.dailyBriefing.includeStreak": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Include streak information in daily briefing."
-        },
         "alex.personalityMode": {
           "type": "string",
           "default": "auto",
@@ -1489,16 +1388,6 @@
             "name": "docs",
             "description": "Open Alex cognitive architecture documentation",
             "sampleRequest": "Open architecture documentation"
-          },
-          {
-            "name": "session",
-            "description": "Start or manage a focused learning session with optional Pomodoro timing",
-            "sampleRequest": "Start a 25-minute focus session on API design"
-          },
-          {
-            "name": "goals",
-            "description": "View and manage learning goals with streak tracking and progress visualization",
-            "sampleRequest": "Show my learning goals and streaks"
           },
           {
             "name": "exportm365",
@@ -1938,33 +1827,6 @@
         "inputSchema": {
           "type": "object",
           "properties": {}
-        }
-      },
-      {
-        "name": "alex_cognitive_focus_context",
-        "displayName": "Alex Focus Context",
-        "toolReferenceName": "focus_context",
-        "modelDescription": "Returns the user's current focus session and goals including Pomodoro timer status, active goals with progress, and streak tracking. Use when needing context about what the user is currently working on.",
-        "icon": "$(target)",
-        "canBeReferencedInPrompt": true,
-        "userDescription": "Get your current focus session status and goals",
-        "tags": [
-          "productivity",
-          "session",
-          "goals"
-        ],
-        "annotations": {
-          "readOnlyHint": true
-        },
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "includeGoals": {
-              "type": "boolean",
-              "description": "Include goal tracking data (active goals, streaks, completion)",
-              "default": true
-            }
-          }
         }
       },
       {

@@ -113,21 +113,18 @@ $env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { 
 
 ### For Stable Releases (`X.Y.Z` or even minor like 3.6.x)
 
-- [ ] Run check for temporary skills:
+- [ ] Verify no temporary/experimental skills are in the heir:
 
 ```powershell
-Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
-  $json = Get-Content $_ | ConvertFrom-Json
-  if ($json.temporary -eq $true) {
-    Write-Warning "EXCLUDE: $($_.Directory.Name)"
-  }
-}
+# Check SKILL_EXCLUSIONS in sync-architecture.cjs for current exclusion list
+node -e "const s = require('./.github/muscles/sync-architecture.cjs'); console.log('Exclusions:', JSON.stringify(s.SKILL_EXCLUSIONS, null, 2))" 2>$null
+# Or manually inspect the SKILL_EXCLUSIONS map in .github/muscles/sync-architecture.cjs
 ```
 
-- [ ] Verify temporary skills are **excluded** from package
+- [ ] Verify excluded skills are **not** in heir `.github/skills/`
 - [ ] Or confirm all temporary skills have been removed/graduated
 
-**Current Temporary Skills:** None (beta-tester removed for v4.0.7+ stable release)
+**Current Temporary Skills:** None
 
 ## 🧠 Architecture Sync
 
@@ -157,31 +154,30 @@ npm run sync-architecture
 # Quick count check
 $master = (Get-ChildItem "../../.github/skills" -Directory).Count
 $heir = (Get-ChildItem ".github/skills" -Directory).Count
-Write-Host "Master: $master, Heir: $heir"
+Write-Host "Master: $master, Heir: $heir, Excluded: $($master - $heir)"
 
-# Detailed check (shows what's excluded)
+# Show which skills are excluded and why (reads SKILL_EXCLUSIONS from sync-architecture.cjs)
 $missing = (Get-ChildItem "../../.github/skills" -Directory).Name |
   Where-Object { $_ -notin (Get-ChildItem ".github/skills" -Directory).Name }
-$missing | ForEach-Object {
-  $inh = (Get-Content "../../.github/skills/$_/synapses.json" | ConvertFrom-Json).inheritance
-  Write-Host "  $_ : $inh"
-}
+$missing | ForEach-Object { Write-Host "  Excluded: $_" }
 ```
 
-**Expected exclusions** (should NOT be in heir):
-- `master-only`: heir-curation, master-alex-audit, release-preflight, release-process
+**Expected exclusions** (defined in `SKILL_EXCLUSIONS` in `sync-architecture.cjs`):
+- `master-only`: heir-sync-management, release-process, release-preflight, extension-audit-methodology, skill-catalog-generator
 - `heir:m365`: m365-agent-debugging, teams-app-patterns
+- `heir:vscode`: (heir maintains own version) azure-architecture-patterns, azure-devops-automation, chat-participant-patterns, enterprise-integration, persona-detection, vscode-configuration-validation, vscode-extension-patterns
 
 ### What Gets Synced
 
-| Source                                 | Destination                  | Rule                                 |
-| -------------------------------------- | ---------------------------- | ------------------------------------ |
-| Root `.github/skills/*`                | Heir `.github/skills/`       | Copy if `inheritable` or `universal` |
-| Root `.github/instructions/`           | Heir `.github/instructions/` | Always copy                          |
-| Root `.github/prompts/`                | Heir `.github/prompts/`      | Always copy                          |
-| Root `.github/config/`                 | Heir `.github/config/`       | Always copy                          |
-| Root `.github/agents/`                 | Heir `.github/agents/`       | Always copy                          |
-| Root `.github/copilot-instructions.md` | Heir                         | Always copy                          |
+| Source | Destination | Rule |
+| --- | --- | --- |
+| Root `.github/skills/*` | Heir `.github/skills/` | Copy unless in `SKILL_EXCLUSIONS` |
+| Root `.github/instructions/` | Heir `.github/instructions/` | Skip files with `inheritance: master-only` or `heir:m365` frontmatter |
+| Root `.github/prompts/` | Heir `.github/prompts/` | Skip files with `inheritance: master-only` or `heir:m365` frontmatter |
+| Root `.github/muscles/` | Heir `.github/muscles/` | Skip files with `master-only` in `inheritance.json` |
+| Root `.github/config/` | Heir `.github/config/` | Skip PII files (`user-profile.json`, `MASTER-ALEX-PROTECTED.json`, `cognitive-config.json`) |
+| Root `.github/agents/` | Heir `.github/agents/` | Always copy |
+| Root `.github/copilot-instructions.md` | Heir | Always copy (with heir decontamination transforms) |
 
 ## 📖 Documentation
 

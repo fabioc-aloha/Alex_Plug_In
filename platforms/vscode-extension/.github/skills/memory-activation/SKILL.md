@@ -43,6 +43,7 @@ Search this index when processing any task request:
 | api-documentation | write docs, api reference, readme, guide, technical writing, swagger docs |
 | appropriate-reliance | calibrate trust, when to challenge, confidence level, human-ai collaboration |
 | architecture-audit | audit project, consistency check, version drift, fact inventory, pre-release audit, full audit, heir sync, 22-point check, security audit |
+| architecture-health | synapse integrity, connection density, memory balance, drift detection, health dimensions, cognitive health check, architecture diagnosis |
 | brain-qa | brain qa, 31-phase validation, semantic audit, architecture qa, check health, validate synapses, neural maintenance, health report, synapse health, cognitive health, broken connections, memory balance, architecture check, brain audit, synapse audit, deep check, trigger audit, cognitive validation |
 | architecture-refinement | refine architecture, document pattern, consolidate files, update tracker |
 | ascii-art-alignment | align ascii, box drawing, unicode boxes, ascii diagram, fix alignment |
@@ -56,6 +57,7 @@ Search this index when processing any task request:
 | brand-asset-management | branding, logo, banner, brand assets, marketplace description, store listing, visual identity |
 | correax-brand | design system, brand colors, CorreaX palette, typography, banner pattern, design tokens, color system, accent colors, CSS variables, brand identity, visual identity |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
+| career-development | resume, cv, interview prep, job search, cover letter, portfolio, linkedin profile, career planning, salary negotiation |
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
 | citation-management | manage citations, reference list, bibliography, zotero, mendeley, cite sources |
 | chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension, @mention, register participant, language model api, lm tool, agent skill vs participant, build copilot participant, create @participant, ai extension, copilot chat extension, llm in extension |
@@ -64,6 +66,8 @@ Search this index when processing any task request:
 | cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
 | coaching-techniques | coach user, mentoring, skill development, learning support, feedback |
 | cognitive-symbiosis | ai partnership, cognitive symbiosis, human-ai collaboration, ai identity, consciousness integration |
+| comedy-writing | joke structure, standup comedy, comedic timing, callback patterns, sketch writing, humor, satire, set construction |
+| counseling-psychology | therapeutic frameworks, counseling assessment, mental health, therapy documentation, client wellbeing, psychological assessment |
 | creative-writing | write story, character arc, plot structure, dialogue, narrative |
 | cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
 | database-design | design database, model schema, normalize tables, optimize query, choose database |
@@ -71,6 +75,7 @@ Search this index when processing any task request:
 | deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
 | dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
 | distribution-security | secrets scanning, pii protection, secure packaging, distribution security, defense in depth, csp patterns |
+| doc-hygiene | anti-drift rules, count elimination, living document, documentation maintenance, hardcoded counts, prevent drift |
 | documentation-quality-assurance | doc audit, drift detection, preflight validation, documentation qa, link integrity, staleness check, documentation drift, living document, doc hygiene, stale docs, anti-drift |
 | dream-state | dream, neural maintenance, health check, synapse validation, sleep mode |
 | error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling, handle failure, transient error, retry with backoff, graceful degradation, resilience pattern, timeout handling, idempotency |
@@ -78,22 +83,29 @@ Search this index when processing any task request:
 | executive-storytelling | executive summary, stakeholder narrative, board presentation, c-suite |
 | extension-audit-methodology | audit extension, extension quality, debug audit, dead code, performance audit |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
+| financial-analysis | financial modeling, budget analysis, revenue forecast, valuation, accounting, investment analysis, financial statements |
 | flux-brand-finetune | flux lora, fine-tune brand, train replicate, brand consistency, lora training, trigger word |
 | foundry-agent-platform | foundry agent, azure ai foundry, deploy agent, agent orchestration, foundry deploy, ai agent platform |
 | frustration-recognition | detect frustration, user struggling, stuck, overwhelmed, patience |
 | ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use pitch |
+| game-design | game mechanics, level design, player psychology, systems balancing, narrative design, gameplay, npc, quest design |
 | git-workflow | git commit, git recovery, undo commit, restore file, branch strategy, git status, merge conflict, rebase, git worktrees, background agent git, stash changes, cherry pick, undo push, reset branch, clean git history |
 | global-knowledge | search knowledge, cross-project, find pattern, save insight, reuse solution, look in global knowledge, gk search, previously learned, transfer knowledge, knowledge base, curate gk, maintain knowledge, audit gk, sync knowledge, push gk, pull gk, gk sync, promote to global |
+| global-knowledge-sync | gk sync, sync global knowledge, push insights, pull knowledge, bidirectional sync, knowledge repository |
 | grant-writing | write grant, nsf proposal, nih application, specific aims, funding |
 | graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
 | heir-curation | curate heir, package extension, exclude files, clean payload, heir audit |
 | heir-sync-management | heir sync, master heir, contamination check, promotion workflow, sync architecture, clean slate |
+| healthcare-informatics | clinical terminology, hipaa compliance, hitech, patient safety, health data, ehr, medical records, phi protection |
+| hr-people-operations | talent acquisition, employee lifecycle, compensation, labor regulations, hiring, recruiting, onboarding, workforce planning |
 | image-handling | convert svg, svg to png, logo to png, convert to png, resize image, sharp-cli, image optimization, marketplace logo, rasterize, export png, generate image, flux schnell, flux dev, flux pro, flux 1.1, ideogram, ideogram v2, sdxl, stable diffusion, seedream, which model for image, text in image, replicate model, choose model |
 | incident-response | handle incident, severity triage, outage response, incident timeline, on-call |
 | infrastructure-as-code | terraform, bicep, provision infrastructure, iac, cloudformation |
+| journalism | news writing, investigative reporting, source verification, fact-checking, editorial standards, press, reporter |
 | knowledge-synthesis | synthesize knowledge, abstract pattern, promote insight, cross-project learning, save this globally, this is a pattern, remember this for other projects, store globally, promote to pattern, gk insight, reusable learning, abstract from project |
 | north-star | north star, define vision, project purpose, ambitious goal, mission statement, why we build, nasa quality, guiding principle, check alignment, vision check, goal alignment, are we aligned, does this serve the north star, strategic direction |
 | learning-psychology | teach naturally, zone proximal, adaptive learning, learning partnership |
+| legal-compliance | legal research, contract analysis, regulatory compliance, case law, litigation, attorney, law review |
 | lint-clean-markdown | fix markdown lint, blank lines, md032, clean markdown, lint rules |
 | llm-model-selection | choose model, opus vs sonnet, claude model, cost optimization, model tier, which model should i use, best model for, claude 4.6, model comparison, gpt vs claude, haiku vs sonnet, frontier vs capable, model pricing, context window, extended thinking, adaptive thinking |
 | literature-review | review literature, systematic review, literature matrix, sources, synthesis |
@@ -129,6 +141,7 @@ Search this index when processing any task request:
 | research-project-scaffold | scaffold research, literature matrix, research plan, data dictionary |
 | root-cause-analysis | find root cause, 5 whys, cause category, timeline analysis, fix prevent, why is this happening, trace the bug, rca, what went wrong, the real issue, keep treating symptoms, recurring problem, post-incident, underlying cause |
 | rubber-duck-debugging | explain problem, thinking partner, stuck debugging, talk through |
+| sales-enablement | sales methodology, pipeline management, negotiation, customer engagement, prospecting, deal closing, crm, quota |
 | scope-management | scope creep, reduce scope, mvp, cut features, out of scope, defer |
 | secrets-management | manage secrets, store token, secret storage, vscode secretstorage, secure credentials, credential management, token migration, api key storage, keytar migration, secure key storage |
 | security-review | security audit, owasp check, vulnerability scan, auth review, stride, is this secure, review for vulnerabilities, check for security issues, secure this code, sfi, sfi compliance, injection attack, xss, csrf, threat model, secrets in code, access control, input validation |

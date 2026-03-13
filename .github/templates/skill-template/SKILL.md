@@ -105,3 +105,9 @@ Links to research papers, case studies, or empirical validation.
 **Version**: 1.0.0  
 **Confidence**: High | Medium | Bootstrap  
 **Source**: Where this knowledge came from
+
+<!-- Inheritance: This skill defaults to 'inheritable' (syncs to all heirs).
+     If this skill should NOT sync, register it in SKILL_EXCLUSIONS in sync-architecture.cjs.
+     Use: new-skill.ps1 -Inheritance master-only  (auto-registers)
+     If creating trifecta siblings (.instructions.md, .prompt.md), add matching
+     'inheritance: <type>' to their YAML frontmatter. See skill-building SKILL for details. -->

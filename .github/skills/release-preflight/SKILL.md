@@ -90,7 +90,7 @@ git add -A; git commit -m "release: v$v"; git tag "v$v"; git push --tags
 | `scripts/release-vscode.ps1` | Full VS Code release |
 | `scripts/release-m365.ps1` | M365 agent packaging |
 | `.github/muscles/build-extension-package.ps1` | Full build (sync + compile + PII scan) |
-| `.github/muscles/sync-architecture.js` | Canonical Master → Heir sync |
+| `.github/muscles/sync-architecture.cjs` | Canonical Master → Heir sync |
 
 ## Triggers
 

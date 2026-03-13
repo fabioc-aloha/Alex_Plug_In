@@ -3,14 +3,14 @@
 #
 # This script orchestrates a full extension build:
 #   1. Version synchronization check
-#   2. Architecture sync via sync-architecture.js (canonical sync logic)
+#   2. Architecture sync via sync-architecture.cjs (canonical sync logic)
 #   3. Manifest generation
 #   4. TypeScript compilation
 #   5. Version verification
-#   6. Personal data scan (defense-in-depth beyond sync-architecture.js)
+#   6. Personal data scan (defense-in-depth beyond sync-architecture.cjs)
 #
 # The actual file copy, inheritance, exclusions, and heir decontamination
-# are handled by sync-architecture.js (DRY — single source of truth).
+# are handled by sync-architecture.cjs (DRY — single source of truth).
 #
 # Usage: .\scripts\build-extension-package.ps1 [-SkipCompile] [-DryRun]
 
@@ -36,7 +36,7 @@ Write-Host "Target: $TargetGithub"
 Write-Host ""
 
 # PERSONAL DATA PATTERNS - Fail build if found in heir
-# Defense-in-depth: sync-architecture.js validates PII in user-profile.json,
+# Defense-in-depth: sync-architecture.cjs validates PII in user-profile.json,
 # but this catches PII that may have leaked into markdown/json content files.
 $ForbiddenPatterns = @(
     @{ 
@@ -116,7 +116,7 @@ else {
 }
 
 # ------------------------------------------------------------
-# Step 2: Sync Architecture (delegates to sync-architecture.js)
+# Step 2: Sync Architecture (delegates to sync-architecture.cjs)
 # ------------------------------------------------------------
 Write-Host "[2/6] Syncing architecture (via sync-architecture.cjs)..." -ForegroundColor Yellow
 if (-not $DryRun) {
@@ -130,7 +130,7 @@ if (-not $DryRun) {
     try {
         node $syncScript 2>&1 | ForEach-Object { Write-Host "    $_" }
         if ($LASTEXITCODE -ne 0) {
-            Write-Error "sync-architecture.js failed with exit code $LASTEXITCODE"
+            Write-Error "sync-architecture.cjs failed with exit code $LASTEXITCODE"
             exit 1
         }
         Write-Host "  ✅ Architecture sync complete" -ForegroundColor Green
@@ -159,7 +159,7 @@ $manifest = @{
     sourceCommit  = (git -C $RootPath rev-parse --short HEAD 2>$null) ?? "unknown"
     sourceVersion = $pkgVersion
     filesCopied   = $copiedCount
-    syncEngine    = "sync-architecture.js"
+    syncEngine    = "sync-architecture.cjs"
 }
 
 $manifestPath = Join-Path $TargetGithub "BUILD-MANIFEST.json"

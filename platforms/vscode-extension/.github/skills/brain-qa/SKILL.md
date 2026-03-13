@@ -14,10 +14,8 @@ applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 *Format: See `SYNAPSE-SCHEMA.md` for notation reference*
 
 - [.github/instructions/semantic-audit.instructions.md] (High, Coordinates, Bidirectional) - "Procedural memory for manual semantic review that complements automated brain-qa"
-- [.github/instructions/cognitive-health-validation.instructions.md] (Critical, Coordinates, Bidirectional) - "Comprehensive brain-qa integration with meditation and release workflows"
 - [.github/skills/architecture-audit/SKILL.md] (Medium, Related, Bidirectional) - "Full repository/project audit including brain-qa execution"
 - [.github/instructions/dream-state-automation.instructions.md] (Medium, Complements, Forward) - "Dream validates synapses, brain-qa validates structure"
-- [.github/instructions/release-management.instructions.md] (High, Gates, Forward) - "Pre-release validation requires brain-qa passing"
 
 ## Philosophy
 
@@ -197,7 +195,6 @@ After running the script, Alex should check:
 - [ ] **Working memory model**: Does the 4+3 slot claim match the actual P1-P7 table? Are sub-slots (P4a-d) accounted for?
 - [ ] **Legacy terminology**: Any surviving references to deprecated concepts (DK files, domain-knowledge folders)?
 - [ ] **Trigger-to-code alignment**: Do synapse trigger keywords in .md files match actual activation paths in TypeScript?
-- [ ] **Heir evolution logic**: Does the documented 4-step heir cycle match what heir-skill-promotion.instructions.md actually describes?
 - [ ] **Version source of truth**: Is `package.json` the single source, or are versions hardcoded in prose that will drift?
 - [ ] **Neuroanatomical consistency**: Do brain-analog mappings in copilot-instructions match descriptions in alex-core?
 

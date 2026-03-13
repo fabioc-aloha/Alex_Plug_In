@@ -56,7 +56,7 @@ Use the pre-made scripts in `scripts/` folder:
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
-| `sync-architecture.js` | Canonical Master→Heir sync (inheritance + decontamination) | `cd platforms/vscode-extension && npm run sync-architecture` |
+| `sync-architecture.cjs` | Canonical Master→Heir sync (inheritance + decontamination) | `npm run sync-architecture` |
 | `build-extension-package.ps1` | Full build (sync + compile + PII scan) | `.\scripts\build-extension-package.ps1` |
 | `validate-synapses.ps1` | Validate all synapses.json files | `.\scripts\validate-synapses.ps1` |
 | `validate-skills.ps1` | Validate SKILL.md frontmatter | `.\scripts\validate-skills.ps1` |
@@ -88,29 +88,23 @@ npm run sync-architecture
 For ad-hoc inheritance queries:
 
 ```powershell
-# Count by inheritance type
-Get-ChildItem ".github/skills" -Directory | ForEach-Object {
-    $synapse = Join-Path $_.FullName "synapses.json"
-    if (Test-Path $synapse) {
-        (Get-Content $synapse -Raw | ConvertFrom-Json).inheritance
-    }
-} | Group-Object | Select-Object Name, Count | Sort-Object Count -Descending
+# Skills: Read SKILL_EXCLUSIONS from sync-architecture.cjs (central source of truth)
+# List excluded skills by grepping the exclusion map
+Select-String -Path ".github/muscles/sync-architecture.cjs" -Pattern "^\s+'[\w-]+':\s+'(master-only|heir:m365|heir:vscode)'" | ForEach-Object { $_.Line.Trim() }
 
-# Find master-only skills
-Get-ChildItem ".github/skills" -Directory | ForEach-Object {
-    $synapse = Join-Path $_.FullName "synapses.json"
-    if (Test-Path $synapse) {
-        $json = Get-Content $synapse -Raw | ConvertFrom-Json
-        if ($json.inheritance -eq "master-only") { $_.Name }
-    }
+# Instructions/Prompts: Find files excluded by frontmatter
+Get-ChildItem ".github/instructions/*.md" | ForEach-Object {
+    $head = Get-Content $_.FullName -Head 10
+    if ($head -match 'inheritance:\s*(master-only|heir:m365)') { $_.Name + " -> " + $Matches[1] }
 }
 
-# Change a skill's inheritance
-$skill = "skill-name"; $newValue = "inheritable"
-$path = ".github/skills/$skill/synapses.json"
-$json = Get-Content $path -Raw | ConvertFrom-Json
-$json.inheritance = $newValue
-$json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
+# Muscles: Read inheritance.json
+$json = Get-Content ".github/muscles/inheritance.json" -Raw | ConvertFrom-Json
+$json.muscles.PSObject.Properties | Where-Object { $_.Value.inheritance -eq 'master-only' } | ForEach-Object { $_.Name }
+
+# Change a skill's inheritance: edit SKILL_EXCLUSIONS in sync-architecture.cjs
+# Change an instruction's inheritance: edit its YAML frontmatter (inheritance: field)
+# Change a muscle's inheritance: edit .github/muscles/inheritance.json
 ```
 
 ---
@@ -119,7 +113,7 @@ $json | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
 
 ### What Gets Synced
 
-The sync script (`sync-architecture.js`) copies these folders from Master `.github/` to Heir `.github/`:
+The sync script (`sync-architecture.cjs`) copies these folders from Master `.github/` to Heir `.github/`:
 
 | Folder | Content |
 |--------|---------|
@@ -141,7 +135,7 @@ Muscles use a two-step sync process:
 |-------------|-----------|-----|
 | `brain-qa-heir.ps1` | `brain-qa.ps1` | Heir-specific phases only; renamed so extension finds it at expected path |
 
-The rename is handled by `sync-architecture.js` via the `heirRenames` map, applied after the initial copy.
+The rename is handled by `sync-architecture.cjs` via the `heirRenames` map, applied after the initial copy.
 
 **Pattern**: When master and heir need fundamentally different scripts for the same purpose, create a `*-heir.*` variant in master (inheritable), and configure the sync to rename it in the heir. This avoids runtime detection branching while maintaining a single source of truth in master.
 
@@ -167,9 +161,9 @@ Files that are never copied, period:
 
 ```javascript
 const EXCLUDED_CONFIG_FILES = [
-  'user-profile.json',      // Personal data
-  'MASTER-ALEX-PROTECTED.json', // Kill switch marker
-  'goals.json',             // Session-specific
+  'user-profile.json',           // PII: contains user's real name, email, social profiles
+  'MASTER-ALEX-PROTECTED.json',  // Master kill-switch marker
+  'cognitive-config.json',       // Master-specific cognitive state
 ];
 ```
 
@@ -211,7 +205,7 @@ Simply excluding personal files leaves heirs without expected file structure. Ge
 |------|---------------|--------------|
 | `user-profile.json` | Real user data | Empty with defaults + setup instructions |
 | `copilot-instructions.md` | Populated P5-P7 | P5-P7 set to `*(available)*` |
-| `goals.json` | Active session goals | Empty goals array |
+| `cognitive-config.json` | Master-specific cognitive state | Not generated (heir starts without it) |
 
 ### Post-Sync Reset Sequence
 
@@ -296,7 +290,7 @@ Ask: "Is this skill ONLY useful for managing the Alex repo itself?"
 
 | Answer | Classification | Example |
 |--------|---------------|---------|
-| Yes, master-repo only | `master-only` | release-preflight, heir-curation, heir-sync-management |
+| Yes, master-repo only | `master-only` | release-preflight, heir-sync-management |
 | No, any developer benefits | `inheritable` | deep-thinking, meditation, security-review |
 
 ### Truly Master-Only Skills (small list)
@@ -304,9 +298,10 @@ Ask: "Is this skill ONLY useful for managing the Alex repo itself?"
 Only a few skills are genuinely master-only:
 
 - `heir-sync-management` — This skill
-- `architecture-audit` — Master workspace auditing
-- `release-preflight` — Marketplace publishing
 - `release-process` — Release pipeline
+- `release-preflight` — Marketplace publishing
+- `extension-audit-methodology` — Master audit methodology
+- `skill-catalog-generator` — Master catalog generation
 
 Everything else should be inheritable unless it references Master-specific file paths or workflows.
 
@@ -339,7 +334,7 @@ Store descriptions, README headers, and comparison tables must use platform-spec
 
 The release script must enforce sync before packaging:
 
-1. Run `sync-architecture.js` (copies Master → Heir)
+1. Run `sync-architecture.cjs` (copies Master → Heir)
 2. Apply post-sync transformations (clean slate)
 3. Run PII validation gate (blocks on contamination)
 4. Check `BUILD-MANIFEST.json` timestamp (prevents stale packaging)

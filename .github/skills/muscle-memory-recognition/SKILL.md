@@ -121,7 +121,7 @@ IF (cross-platform required OR heir-critical):
 
 Examples:
 - validate-skills.ps1
-- sync-architecture.js
+- sync-architecture.cjs
 - normalize-paths.ps1
 - gamma-generator.js
 - brain-qa.ps1

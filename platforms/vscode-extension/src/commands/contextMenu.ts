@@ -6,7 +6,6 @@ import {
   getGlobalKnowledgeSummary,
 } from "../chat/globalKnowledge";
 import { GlobalKnowledgeCategory } from "../shared/constants";
-import { autoIncrementGoals } from "./goals";
 import { getLanguageIdFromPath, openChatPanel } from "../shared/utils";
 import { registerImageCommands } from "./contextMenuImage";
 
@@ -183,12 +182,6 @@ Project: ${workspaceFolders[0].name}
                 }
               });
 
-            // Auto-increment insight goals
-            try {
-              await autoIncrementGoals("insight");
-            } catch (err) {
-              console.warn("Failed to auto-increment goals:", err);
-            }
           } catch (err) {
             vscode.window.showErrorMessage(`Failed to save insight: ${err}`);
           }
@@ -248,13 +241,6 @@ Project: ${workspaceFolders[0].name}
           fileName ? `Captured from ${fileName}` : "Captured from selection",
           "Code pattern for reference",
         );
-
-        // Auto-increment insight goals
-        try {
-          await autoIncrementGoals("insight");
-        } catch (err) {
-          console.warn("Failed to auto-increment goals:", err);
-        }
 
         vscode.window.showInformationMessage(`✅ Saved insight: "${title}"`);
       } catch (err) {

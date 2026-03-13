@@ -33,13 +33,6 @@
       "strength": 0.8,
       "when": "making UI/UX decisions that reference the CorreaX component library",
       "yields": "Accessible, consistent interface designs following the design system"
-    },
-    {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "informs",
-      "strength": 0.65,
-      "when": "building webview components with CorreaX design tokens and VS Code fallbacks",
-      "yields": "Extension webviews that match the CorreaX visual identity"
     }
   ],
   "triggers": {

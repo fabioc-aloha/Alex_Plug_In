@@ -5,7 +5,6 @@
  * - Brain Health (synapse status)
  * - Memory Architecture (skills, instructions, prompts)
  * - Goal Progress
- * - Focus Session Stats
  * - Recent Activity
  */
 
@@ -13,7 +12,6 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as workspaceFs from '../shared/workspaceFs';
 import { getNonce } from '../shared/sanitize';
-import { WorkspaceGoalsData } from '../shared/constants';
 
 /**
  * Dashboard data structure
@@ -32,16 +30,6 @@ interface DashboardData {
     instructionCount: number;
     promptCount: number;
     episodicCount: number;
-  };
-  goals: {
-    active: number;
-    completed: number;
-    streak: number;
-  };
-  focus: {
-    todayMinutes: number;
-    weekMinutes: number;
-    sessionsToday: number;
   };
   recentActivity: Array<{
     type: string;
@@ -93,9 +81,6 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
         case 'syncKnowledge':
           await vscode.commands.executeCommand('alex.syncKnowledge');
           break;
-        case 'startSession':
-          await vscode.commands.executeCommand('alex.startSession');
-          break;
       }
     });
 
@@ -144,16 +129,6 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
         promptCount: 0,
         episodicCount: 0,
       },
-      goals: {
-        active: 0,
-        completed: 0,
-        streak: 0,
-      },
-      focus: {
-        todayMinutes: 0,
-        weekMinutes: 0,
-        sessionsToday: 0,
-      },
       recentActivity: [],
     };
 
@@ -189,22 +164,6 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
       if (await workspaceFs.pathExists(episodicPath)) {
         const files = await workspaceFs.readDirectory(episodicPath);
         data.memory.episodicCount = files.filter(([name, _]) => name.endsWith('.md')).length;
-      }
-
-      // Read goals (async)
-      const goalsPath = path.join(githubPath, 'config', 'goals.json');
-      if (await workspaceFs.pathExists(goalsPath)) {
-        try {
-          const goalsContent = await workspaceFs.readFile(goalsPath);
-          const goals: WorkspaceGoalsData = JSON.parse(goalsContent);
-          if (Array.isArray(goals.goals)) {
-            data.goals.active = goals.goals.filter((g) => g.status === 'in-progress').length;
-            data.goals.completed = goals.goals.filter((g) => g.status === 'completed').length;
-          }
-          data.goals.streak = typeof goals.streak === 'number' ? goals.streak : 0;
-        } catch (err) {
-          console.warn('[Alex Dashboard] Failed to parse goals.json:', err instanceof Error ? err.message : String(err));
-        }
       }
 
       // Check synapse health by scanning skill directories (async)
@@ -510,29 +469,11 @@ function getDashboardBodyHtml(): string {
   </div>
 
   <div class="card">
-    <div class="card-title">
-      🎯 Goals
-      <span class="streak-badge" id="streak-badge" style="display:none">🔥 0 days</span>
-    </div>
-    <div class="stat-grid">
-      <div class="stat-item">
-        <div class="stat-value" id="goals-active">0</div>
-        <div class="stat-label">Active</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="goals-completed">0</div>
-        <div class="stat-label">Completed</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
     <div class="card-title">⚡ Quick Actions</div>
     <div class="quick-actions">
       <button class="quick-action" data-cmd="dream">🌙 Dream</button>
       <button class="quick-action" data-cmd="selfActualize">✨ Self-Actualize</button>
       <button class="quick-action" data-cmd="syncKnowledge">🔄 Sync</button>
-      <button class="quick-action" data-cmd="startSession">▶️ Session</button>
     </div>
   </div>
 
@@ -584,18 +525,6 @@ function getDashboardScript(): string {
       document.getElementById('instruction-count').textContent = data.memory.instructionCount;
       document.getElementById('prompt-count').textContent = data.memory.promptCount;
       document.getElementById('episodic-count').textContent = data.memory.episodicCount;
-
-      // Goals
-      document.getElementById('goals-active').textContent = data.goals.active;
-      document.getElementById('goals-completed').textContent = data.goals.completed;
-      
-      const streakBadge = document.getElementById('streak-badge');
-      if (data.goals.streak > 0) {
-        streakBadge.textContent = '🔥 ' + data.goals.streak + ' days';
-        streakBadge.style.display = 'inline-block';
-      } else {
-        streakBadge.style.display = 'none';
-      }
 
       // Activity
       const activityList = document.getElementById('activity-list');

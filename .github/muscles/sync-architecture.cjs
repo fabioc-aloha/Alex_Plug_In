@@ -82,24 +82,55 @@ const SKILL_EXCLUSIONS = {
     'vscode-extension-patterns':      'heir:vscode',
 };
 
-// ============================================================
-// INSTRUCTION & PROMPT EXCLUSIONS: Master-only files not synced to heirs
-// ============================================================
-const EXCLUDED_INSTRUCTIONS = [
-    'global-knowledge-curation.instructions.md',    // Master Alex curation workflow
-    'heir-skill-promotion.instructions.md',         // Master-side promotion workflow
-    'cognitive-health-validation.instructions.md',  // Master remediation with platforms/ paths
-    'roadmap-maintenance.instructions.md',          // ROADMAP-UNIFIED is master-only
-    'trifecta-audit.instructions.md',               // References alex_docs/architecture/
-    'vscode-marketplace-publishing.instructions.md',// platforms/vscode-extension paths throughout
-    'release-management.instructions.md',          // 20+ platforms/ refs throughout multi-platform workflow
-];
+function getMarkdownFrontmatter(filePath) {
+    if (!fs.existsSync(filePath)) {
+        return '';
+    }
 
-const EXCLUDED_PROMPTS = [
-    'masteraudit.prompt.md',                        // Master Alex audit
-    'promotetomaster.prompt.md',                    // Promote to Master Alex
-    'extension-audit-methodology.prompt.md',        // alex_docs/audits/ paths
-];
+    const content = fs.readFileSync(filePath, 'utf8');
+    const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    return match ? match[1] : '';
+}
+
+function getMarkdownInheritance(filePath) {
+    const frontmatter = getMarkdownFrontmatter(filePath);
+    if (!frontmatter) {
+        return null;
+    }
+
+    const match = frontmatter.match(/^inheritance:\s*["']?([^"'\r\n]+)["']?\s*$/m);
+    return match ? match[1].trim() : null;
+}
+
+function getFrontmatterExcludedMarkdownFiles(dirPath, excludedInheritance = ['master-only']) {
+    if (!fs.existsSync(dirPath)) {
+        return [];
+    }
+
+    return fs.readdirSync(dirPath)
+        .filter(file => file.endsWith('.md'))
+        .filter(file => {
+            const inheritance = getMarkdownInheritance(path.join(dirPath, file));
+            return inheritance && excludedInheritance.includes(inheritance);
+        });
+}
+
+// ============================================================
+// INSTRUCTION & PROMPT EXCLUSIONS: Frontmatter-driven exclusions
+// ============================================================
+// Exclude files with inheritance: master-only OR heir:m365 from the vscode heir.
+// heir:m365 files target the M365 Copilot heir, not the VS Code extension.
+const EXCLUDED_INHERITANCE_TYPES = ['master-only', 'heir:m365'];
+
+const EXCLUDED_INSTRUCTIONS = getFrontmatterExcludedMarkdownFiles(
+    path.join(MASTER_GITHUB, 'instructions'),
+    EXCLUDED_INHERITANCE_TYPES
+);
+
+const EXCLUDED_PROMPTS = getFrontmatterExcludedMarkdownFiles(
+    path.join(MASTER_GITHUB, 'prompts'),
+    EXCLUDED_INHERITANCE_TYPES
+);
 
 // ============================================================
 // HEIR PROTECTION: Files that must NEVER be copied to heir
@@ -181,29 +212,11 @@ function getExcludedMuscles() {
     }
 }
 
-// Synapses in instruction files that reference master-only files
-// Format: { file: 'filename.md', pattern: /regex/, reason: 'why' }
+// Synapses in instruction files that reference master-only files.
+// Only list files that ARE synced to heir but contain references to master-only paths.
+// Files with `inheritance: master-only` or `heir:m365` frontmatter are already excluded
+// from heir and do NOT need entries here.
 const HEIR_SYNAPSE_REMOVALS = [
-    {
-        file: 'release-management.instructions.md',
-        pattern: /^.*\[ROADMAP-UNIFIED\.md\].*\r?\n/m,
-        reason: 'ROADMAP-UNIFIED.md does not exist in heir'
-    },
-    {
-        file: 'release-management.instructions.md',
-        pattern: /^.*\[platforms\/m365-copilot\/.*\].*\r?\n/gm,
-        reason: 'platforms/ does not exist in heir'
-    },
-    {
-        file: 'trifecta-audit.instructions.md',
-        pattern: /^.*\[alex_docs\/architecture\/TRIFECTA-CATALOG\.md\].*\r?\n/m,
-        reason: 'alex_docs/architecture/ not deployed to heir'
-    },
-    {
-        file: 'roadmap-maintenance.instructions.md',
-        pattern: /^.*\[ROADMAP-UNIFIED\.md\].*\r?\n/m,
-        reason: 'ROADMAP-UNIFIED.md does not exist in heir'
-    },
     {
         file: 'ui-ux-design.instructions.md',
         pattern: /^.*\[alex_docs\/research\/COMMAND-CENTER.*\].*\r?\n/gm,
@@ -346,6 +359,7 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
         '.github/episodic/',             // Episodic memory is empty in heir
         'external:',                     // External repo references (Global Knowledge)
         'global-knowledge://',           // Global Knowledge URIs
+        ...EXCLUDED_INSTRUCTIONS,        // Instruction files not synced to heir
     ];
     
     let cleanedCount = 0;
@@ -364,7 +378,7 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
             
             const original = synapse.connections.length;
             synapse.connections = synapse.connections.filter(conn => {
-                const target = conn.target || '';
+                const target = (conn.target || '').replace(/\\/g, '/');
                 
                 // Filter master-only skills (from inheritance classification)
                 if (skippedMasterOnly.some(removed => target.includes(removed))) {
@@ -410,6 +424,57 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
         console.log(`\n✅ Cleaned ${cleanedCount} synapse files (${totalRemoved} references removed)`);
     } else {
         console.log('✅ No broken references found');
+    }
+}
+
+/**
+ * Normalize backslash paths in heir synapses.json files.
+ * Windows-style paths (e.g., "..\\security-review\\SKILL.md") break cross-platform
+ * compatibility and confuse validation logic. This pass converts all backslash
+ * paths to forward slashes.
+ * 
+ * Targets: ALL heir synapses.json files (including heir:vscode maintained skills)
+ */
+function normalizeBackslashPaths() {
+    console.log('\n🔧 Normalizing backslash paths in heir synapses...\n');
+
+    let normalizedCount = 0;
+    let pathsFixed = 0;
+
+    if (!fs.existsSync(HEIR_SKILLS)) return;
+
+    const skillDirs = fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => d.name);
+
+    for (const skillName of skillDirs) {
+        const synapsePath = path.join(HEIR_SKILLS, skillName, 'synapses.json');
+        if (!fs.existsSync(synapsePath)) continue;
+
+        try {
+            let content = fs.readFileSync(synapsePath, 'utf8');
+            
+            // Count backslash occurrences before normalization
+            const backslashCount = (content.match(/\\\\/g) || []).length;
+            if (backslashCount === 0) continue;
+
+            // Replace all Windows backslashes with forward slashes in target paths
+            // This regex captures escaped backslashes in JSON strings
+            content = content.replace(/\\\\/g, '/');
+
+            fs.writeFileSync(synapsePath, content, 'utf8');
+            normalizedCount++;
+            pathsFixed += backslashCount;
+            console.log(`   Normalized: ${skillName} (${backslashCount} paths)`);
+        } catch (e) {
+            console.warn(`   ⚠️ Could not normalize ${synapsePath}: ${e.message}`);
+        }
+    }
+
+    if (normalizedCount > 0) {
+        console.log(`\n✅ Normalized ${normalizedCount} synapse file(s) (${pathsFixed} backslash path(s) fixed)`);
+    } else {
+        console.log('✅ No backslash paths found');
     }
 }
 
@@ -619,6 +684,22 @@ function applyHeirTransformations() {
         
         //    Principles: keep as-is (KISS, DRY, Optimize-for-AI is universal)
         
+        //    Recent: master session history → placeholder
+        const beforeRecent = content;
+        content = content.replace(
+            /^(Recent:) .+$/m,
+            '$1 _(updated at runtime by extension)_'
+        );
+        if (content !== beforeRecent) diffs.push('recent reset');
+        
+        //    Guidelines: master-specific path → generic
+        const beforeGuidelines = content;
+        content = content.replace(
+            /^(Guidelines:) .+$/m,
+            '$1 Architecture MUST NOT depend on the Extension (I8). Quality over speed.'
+        );
+        if (content !== beforeGuidelines) diffs.push('guidelines reset');
+        
         //    Last Assessed: master date → never
         const beforeAssessed = content;
         content = content.replace(
@@ -645,13 +726,18 @@ function applyHeirTransformations() {
         content = content.replace(/^I7:.*\r?\n/m, '');
         if (content !== beforeImperatives) diffs.push('stripped I1-I4,I7 imperatives');
         
-        // 5. Remove heir-curation from complete trifectas list (master-only skill)
+        // 5. Filter complete trifectas list to only include heir-available skills
         const beforeTrifectas = content;
+        const excludedSkillNames = Object.keys(SKILL_EXCLUSIONS);
         content = content.replace(
-            /^(Complete trifectas \()11(\): .+), heir-curation,( .+)$/m,
-            '$1' + '10' + '$2,' + '$3'
+            /^Complete trifectas \((\d+)\): (.+)$/m,
+            (match, count, skillList) => {
+                const skills = skillList.split(', ').map(s => s.trim());
+                const filtered = skills.filter(s => !excludedSkillNames.includes(s));
+                return `Complete trifectas (${filtered.length}): ${filtered.join(', ')}`;
+            }
         );
-        if (content !== beforeTrifectas) diffs.push('removed heir-curation from trifectas');
+        if (content !== beforeTrifectas) diffs.push('filtered trifectas to heir-available');
         
         if (content !== original) {
             fs.writeFileSync(copilotPath, content, 'utf8');
@@ -692,6 +778,77 @@ function applyHeirTransformations() {
     
     console.log(`\n   Applied ${transformCount} transformation${transformCount !== 1 ? 's' : ''}`);
     return transformCount;
+}
+
+// ============================================================
+// EMBEDDED SYNAPSE CLEANUP: Strip markdown refs to excluded files
+// ============================================================
+
+function cleanBrokenEmbeddedSynapses() {
+    console.log('\n🧹 Cleaning broken embedded synapse references in heir...\n');
+
+    let cleanedFiles = 0;
+    let removedLines = 0;
+
+    // Build a single regex matching any line that contains a reference to an
+    // excluded instruction filename (e.g., release-management.instructions.md).
+    // This covers synapse list items, cross-skill links, "From [...]:", and "See Also" refs.
+    const escapedNames = EXCLUDED_INSTRUCTIONS.map(f =>
+        f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    );
+    const linePattern = new RegExp(
+        `^.*(?:${escapedNames.join('|')}).*\\r?\\n`,
+        'gm'
+    );
+
+    // Helper: strip matching lines from all .md files in a directory
+    function cleanDir(dir, label) {
+        if (!fs.existsSync(dir)) return;
+        const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
+        for (const file of files) {
+            const filePath = path.join(dir, file);
+            const content = fs.readFileSync(filePath, 'utf8');
+            const cleaned = content.replace(linePattern, (match) => {
+                removedLines++;
+                return '';
+            });
+            if (cleaned !== content) {
+                fs.writeFileSync(filePath, cleaned, 'utf8');
+                cleanedFiles++;
+                console.log(`   Cleaned: ${label}/${file}`);
+            }
+        }
+    }
+
+    // 1. Heir instruction files
+    cleanDir(path.join(HEIR_GITHUB, 'instructions'), 'instructions');
+
+    // 2. Heir SKILL.md files (one level deep in skill dirs)
+    if (fs.existsSync(HEIR_SKILLS)) {
+        const skillDirs = fs.readdirSync(HEIR_SKILLS, { withFileTypes: true })
+            .filter(d => d.isDirectory())
+            .map(d => d.name);
+        for (const skillName of skillDirs) {
+            const skillMd = path.join(HEIR_SKILLS, skillName, 'SKILL.md');
+            if (!fs.existsSync(skillMd)) continue;
+            const content = fs.readFileSync(skillMd, 'utf8');
+            const cleaned = content.replace(linePattern, (match) => {
+                removedLines++;
+                return '';
+            });
+            if (cleaned !== content) {
+                fs.writeFileSync(skillMd, cleaned, 'utf8');
+                cleanedFiles++;
+                console.log(`   Cleaned: skills/${skillName}/SKILL.md`);
+            }
+        }
+    }
+
+    if (cleanedFiles > 0) {
+        console.log(`\n✅ Cleaned ${cleanedFiles} file(s) (${removedLines} broken reference line(s) removed)`);
+    } else {
+        console.log('✅ No broken embedded synapse references found');
+    }
 }
 
 // ============================================================
@@ -1192,7 +1349,9 @@ syncArchitectureFolders();
 syncArchitectureFiles();
 const skillStats = syncSkills();
 cleanBrokenSynapseReferences(skillStats.skippedMasterOnly);
+normalizeBackslashPaths();
 applyHeirTransformations();
+cleanBrokenEmbeddedSynapses();
 updatePackageJsonChatSkills();
 verifyCounts();
 

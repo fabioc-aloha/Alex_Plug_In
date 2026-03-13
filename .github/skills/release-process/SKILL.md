@@ -184,7 +184,7 @@ The `release-vscode.ps1` script handles all of these automatically.
 | 3 | Counts match reality | Slash commands, tools, skills, trifectas in docs = actual code |
 | 4 | F5 smoke test passes | Extension activates, welcome view renders, 3 random commands work |
 | 5 | Version aligned | package.json = CHANGELOG = copilot-instructions |
-| 6 | Heir sync clean | `sync-architecture.js` runs with 0 errors, no contamination |
+| 6 | Heir sync clean | `sync-architecture.cjs` runs with 0 errors, no contamination |
 | 7 | No non-functional features | If in UI/command palette, it works. If broken, removed. |
 | 8 | CHANGELOG documents delta | Every user-visible change has a line item |
 

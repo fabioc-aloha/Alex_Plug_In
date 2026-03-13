@@ -188,7 +188,6 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 2. Exclude those skill folders from the package
 3. Warn if any temporary skills would be included
 
-See [.github/instructions/release-management.instructions.md] for release checklist.
 
 ---
 

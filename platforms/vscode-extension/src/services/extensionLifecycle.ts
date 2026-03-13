@@ -11,8 +11,6 @@ import {
     checkHealth,
     getStatusBarDisplay,
 } from '../shared/healthCheck';
-import { getCurrentSession } from '../commands/session';
-import { getGoalsSummary } from '../commands/goals';
 import { isWorkspaceProtected } from '../shared/utils';
 import { detectGlobalKnowledgeRepo } from '../chat/globalKnowledge';
 
@@ -58,9 +56,8 @@ export async function updateStatusBar(
 ): Promise<void> {
     try {
         // Run all async queries in parallel
-        const [health, goalsSummary, protectionResult] = await Promise.all([
+        const [health, protectionResult] = await Promise.all([
             checkHealth(forceRefresh),
-            getGoalsSummary().catch(() => ({ streakDays: 0 })),
             (async () => {
                 const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
                 if (workspaceFolder) {
@@ -70,15 +67,7 @@ export async function updateStatusBar(
             })(),
         ]);
 
-        // Get session info
-        const session = getCurrentSession();
-        const sessionInfo = session ? {
-            active: true,
-            remaining: session.remaining,
-            isBreak: session.isBreak
-        } : null;
-
-        const display = getStatusBarDisplay(health, sessionInfo, goalsSummary.streakDays, protectionResult.isProtected);
+        const display = getStatusBarDisplay(health, protectionResult.isProtected);
 
         statusBarItem.text = display.text;
         statusBarItem.tooltip = display.tooltip;

@@ -1,5 +1,6 @@
 ---
 description: "Global knowledge curation, review cycles, and cross-project insight management"
+inheritance: master-only
 ---
 
 # Global Knowledge Curation Protocol

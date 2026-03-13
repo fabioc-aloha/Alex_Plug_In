@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import { createGlobalInsight, searchGlobalKnowledge } from '../chat/globalKnowledge';
 import { GlobalKnowledgeCategory } from '../shared/constants';
-import { autoIncrementGoals } from './goals';
 
 /**
  * Auto-Insights Detection - Automatically detect and offer to save valuable learnings
@@ -341,13 +340,6 @@ async function saveInsightDirectly(insight: DetectedInsight): Promise<void> {
             insight.codeBlocks.length > 0 ? `Code pattern:\n\`\`\`\n${insight.codeBlocks[0]}\n\`\`\`` : undefined
         );
         
-        // Auto-increment insight goals
-        try {
-            await autoIncrementGoals('insight');
-        } catch (err) {
-            console.warn('Failed to auto-increment goals:', err);
-        }
-        
         vscode.window.showInformationMessage(
             `✅ Saved insight: "${title}"`,
             'View Knowledge'
@@ -402,13 +394,6 @@ async function saveInsightWithDialog(insight: DetectedInsight): Promise<void> {
             `Captured ${insight.type}`,
             insight.codeBlocks.length > 0 ? `Code pattern:\n\`\`\`\n${insight.codeBlocks[0]}\n\`\`\`` : undefined
         );
-        
-        // Auto-increment insight goals
-        try {
-            await autoIncrementGoals('insight');
-        } catch (err) {
-            console.warn('Failed to auto-increment goals:', err);
-        }
         
         vscode.window.showInformationMessage(`✅ Saved insight: "${title}"`);
     } catch (err) {

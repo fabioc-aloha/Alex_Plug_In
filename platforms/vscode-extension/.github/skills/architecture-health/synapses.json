@@ -3,7 +3,6 @@
   "skillId": "architecture-health",
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/self-actualization/SKILL.md",

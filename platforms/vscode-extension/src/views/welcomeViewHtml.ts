@@ -16,7 +16,6 @@ import {
 } from '../chat/personaDetection';
 
 import { ActiveContext } from '../shared/activeContextManager';
-import { LearningGoal } from '../commands/goals';
 import { escapeHtml, getNonce } from '../shared/sanitize';
 import { getCachedCognitiveLevel, getFeatureRequirement, CognitiveLevel } from '../shared/cognitiveTier';
 import { SkillRecommendation } from '../chat/skillRecommendations';
@@ -42,7 +41,6 @@ export interface MindTabData {
   synapseHealthPct: number;
   lastDreamDate: string | null;
   lastMeditationDate: string | null;
-  cognitiveAge: number;
   /** 7.38: Meditation session count for streak tracking */
   meditationCount: number;
   /** 7.32: Knowledge freshness buckets */
@@ -192,13 +190,6 @@ export function getErrorHtml(err: unknown): string {
 export function getWelcomeHtmlContent(
   webview: vscode.Webview,
   health: HealthCheckResult,
-  session: { topic: string; remaining: number; isPaused: boolean; isBreak: boolean; pomodoroCount: number } | null,
-  goals: {
-    activeGoals: LearningGoal[];
-    completedToday: number;
-    streakDays: number;
-    totalCompleted: number;
-  },
   version: string,
   nudges: Nudge[],
   hasGlobalKnowledge: boolean,
@@ -221,7 +212,6 @@ export function getWelcomeHtmlContent(
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, '_getHtmlContent: webview must be defined');
   nasaAssertBounded(health.brokenSynapses, 0, 10000, 'health.brokenSynapses');
-  nasaAssertBounded(goals.streakDays, 0, 9999, 'goals.streakDays');
   nasaAssertBounded(nudges.length, 0, 10, 'nudges.length');
 
   // Security: Generate nonce for CSP
@@ -265,7 +255,9 @@ export function getWelcomeHtmlContent(
 
   // Use persona accent color (easter eggs no longer override global accent — they get a badge-local color instead)
   const personaAccent = persona?.accentColor || "#6366f1";
-  const easterEggBadgeColor = easterEgg?.accentColor || personaAccent;
+  const rawEggColor = easterEgg?.accentColor || '';
+  const safeEggColor = /^#[0-9a-fA-F]{3,8}$/.test(rawEggColor) ? rawEggColor : personaAccent;
+  const easterEggBadgeColor = easterEgg?.accentColor ? safeEggColor : personaAccent;
 
   const easterEggBadge = easterEgg
     ? `<span class="easter-egg-badge" title="${easterEgg.label}" style="--egg-accent: ${easterEggBadgeColor}">${easterEgg.emoji}</span>`
@@ -296,7 +288,7 @@ export function getWelcomeHtmlContent(
   // Objective from Active Context (hidden when session card is showing)
   const rawObjective = activeContext?.objective;
   const hasObjective =
-    rawObjective && !rawObjective.includes("session-objective") && !session;
+    rawObjective && !rawObjective.includes("session-objective");
 
   // Last Assessed from Active Context
   const rawAssessed = activeContext?.lastAssessed || "never";
@@ -332,9 +324,6 @@ export function getWelcomeHtmlContent(
     ? "Healthy"
     : `${health.brokenSynapses} issues`;
 
-  // Streak days for status display
-  const streakDays = goals.streakDays;
-
   // Architecture status banner (7.9)
   const healthPct = health.totalSynapses > 0
     ? Math.round((1 - health.brokenSynapses / health.totalSynapses) * 100)
@@ -342,28 +331,6 @@ export function getWelcomeHtmlContent(
   const healthBannerClass = isHealthy ? 'status-healthy' : health.brokenSynapses > 5 ? 'status-error' : 'status-warning';
   const healthBannerIcon = isHealthy ? '✓' : health.brokenSynapses > 5 ? '✗' : '⚠';
   const healthBannerLabel = isHealthy ? 'Healthy' : health.brokenSynapses > 5 ? 'Issues' : 'Warnings';
-
-  // Cognitive age tier (7.36)
-  const cogAge = mindData?.cognitiveAge ?? 0;
-  const cogTier = cogAge <= 5 ? 'Early Learning' : cogAge <= 15 ? 'Active Growth' : cogAge <= 25 ? 'Integrated' : 'Wise';
-  const cogProgress = Math.min(cogAge / 40 * 100, 100);
-
-  // Session status
-  const sessionHtml = session
-    ? `
-          <div class="session-card">
-              <div class="session-header">
-                  <span class="session-icon">${session.isBreak ? "☕" : "🎯"}</span>
-                  <span class="session-title">${escapeHtml(session.topic)}</span>
-              </div>
-              <div class="session-timer">${formatTime(session.remaining)}</div>
-              <div class="session-footer">
-                  <span class="session-status">${session.isPaused ? "⏸️ Paused" : "▶️ Active"}${session.pomodoroCount > 0 ? ` • 🍅×${session.pomodoroCount}` : ""}</span>
-                  <a href="#" class="session-actions-link" data-cmd="sessionActions">Actions</a>
-              </div>
-          </div>
-      `
-    : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -408,12 +375,12 @@ export function getWelcomeHtmlContent(
           <button role="tab" id="tab-docs" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
       </div>
 
-      ${getMissionTabHtml({ sessionHtml, nudges, goals })}
+      ${getMissionTabHtml({ nudges })}
 
       ${getAgentsTabHtml({ agents, recentActivity, cognitiveState, agentMode, personalityMode })}
 
       ${getSkillStoreTabHtml({ skills, health })}
-      ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, streakDays, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, cogTier, cogProgress, tokenStatuses, settingsToggles })}
+      ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, tokenStatuses, settingsToggles })}
 
       ${getDocsTabHtml()}
 
@@ -535,9 +502,18 @@ export function getWelcomeHtmlContent(
           }
       });
 
-      // Auto-refresh interval (30 seconds)
+      // Auto-refresh interval (30 seconds) — preserve active tab
       const AUTO_REFRESH_MS = 30000;
-      setInterval(refresh, AUTO_REFRESH_MS);
+      setInterval(() => {
+          // Save active tab before refresh so it restores after HTML replacement
+          const activeTab = document.querySelector('.tab.active');
+          if (activeTab) {
+              const state = vscode.getState() || {};
+              state.activeTab = activeTab.getAttribute('data-tab');
+              vscode.setState(state);
+          }
+          refresh();
+      }, AUTO_REFRESH_MS);
 
       // ── Nudge dismiss (7.12) ──
       document.addEventListener('click', function(e) {
@@ -681,12 +657,6 @@ export function getWelcomeHtmlContent(
 
 
 
-export function formatTime(seconds: number): string {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
-}
-
 /**
  * Generate action button HTML with accessibility attributes
  */
@@ -711,61 +681,6 @@ export function actionButton(cmd: string, icon: string, label: string, title?: s
                   <span class="action-icon" aria-hidden="true">${icon}</span>
                   <span class="action-text">${label}${tierBadge}</span>
               </button>`;
-}
-
-export function getGoalsHtml(goals: {
-  activeGoals: LearningGoal[];
-  completedToday: number;
-  streakDays: number;
-  totalCompleted: number;
-}): string {
-  if (goals.activeGoals.length === 0 && goals.streakDays === 0) {
-    // No goals yet - show prompt to create one
-    return `
-      <div class="section">
-          <div class="section-title">Learning Goals</div>
-          <div style="text-align: center; padding: 12px; opacity: 0.7;" role="region" aria-label="Create learning goals">
-              <p style="margin: 0 0 8px 0;">Set goals to track your progress</p>
-              <button class="action-btn primary" data-cmd="createGoal" style="display: inline-flex; width: auto;" tabindex="0" role="button" aria-label="Create your first learning goal">
-                  <span class="action-icon" aria-hidden="true">➕</span>
-                  <span class="action-text">Create Goal</span>
-              </button>
-          </div>
-      </div>`;
-  }
-
-  // Build goals list
-  const goalsListHtml = goals.activeGoals
-    .slice(0, 3)
-    .map((goal) => {
-      const progress = Math.round(
-        (goal.currentCount / goal.targetCount) * 100,
-      );
-      const progressWidth = Math.min(progress, 100);
-      return `
-          <div class="goal-item" role="article" aria-label="Goal: ${escapeHtml(goal.title)}">
-              <div class="goal-header">
-                  <span class="goal-title">${escapeHtml(goal.title)}</span>
-                  <span class="goal-progress-text" aria-label="Progress: ${goal.currentCount} of ${goal.targetCount}">${goal.currentCount}/${goal.targetCount}</span>
-              </div>
-              <div class="goal-bar" role="progressbar" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100" aria-label="${progress}% complete">
-                  <div class="goal-bar-fill" style="width: ${progressWidth}%;"></div>
-              </div>
-          </div>`;
-    })
-    .join("");
-
-  return `
-      <div class="section">
-          <div class="section-title">Learning Goals ${goals.streakDays > 0 ? `<span style="float: right;">🔥 ${goals.streakDays} day streak</span>` : ""}</div>
-          <div class="goals-stats" role="status" aria-label="${goals.completedToday} completed today, ${goals.totalCompleted} total">
-              <span>✅ ${goals.completedToday} today</span>
-              <span>🏆 ${goals.totalCompleted} total</span>
-          </div>
-          <div role="list" aria-label="Active learning goals">
-              ${goalsListHtml || '<div style="text-align: center; padding: 8px; opacity: 0.6;" role="status">No active goals</div>'}
-          </div>
-      </div>`;
 }
 
 /**
@@ -799,122 +714,5 @@ export function getNudgesHtml(nudges: Nudge[]): string {
   return `
       <div class="nudges-section">
           ${nudgesHtml}
-      </div>`;
-}
-
-/**
- * Generate the Features/Documentation section HTML
- */
-export function getFeaturesHtml(): string {
-  return `
-      <div class="section features-section">
-          <details>
-              <summary class="section-title clickable">📖 Features & Documentation</summary>
-              <div class="features-content">
-                  <div class="feature-category" role="article" aria-labelledby="cognitive-core-title">
-                      <div class="feature-category-title" id="cognitive-core-title">🧠 Cognitive Core</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>Dream Protocol</strong> - Automated neural maintenance, synapse validation, and architecture health checks</li>
-                          <li><strong>Self-Actualization</strong> - Deep meditation with comprehensive architecture assessment and knowledge promotion</li>
-                          <li><strong>Meditation</strong> - Conscious knowledge consolidation via chat (@alex /meditate)</li>
-                          <li><strong>Brain QA</strong> - 31-phase health validation covering structure, indexes, content, and format</li>
-                          <li><strong>Muscle Scripts</strong> - Execution scripts for audit, build, sync, and validation tasks</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="knowledge-mgmt-title">
-                      <div class="feature-category-title" id="knowledge-mgmt-title">📚 Knowledge Management</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>Global Knowledge</strong> - Cross-project patterns and insights with GitHub remote access</li>
-                          <li><strong>Team Sharing</strong> - Git-based knowledge repository accessible across machines</li>
-                          <li><strong>Skill Library</strong> - Portable skills with triggers and synaptic connections</li>
-                          <li><strong>Domain Learning</strong> - Bootstrap new domains through conversational acquisition</li>
-                          <li><strong>Trifecta Model</strong> - Core capabilities encoded across all 3 memory systems (Skill+Instruction+Prompt)</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="balance-title">
-                      <div class="feature-category-title" id="balance-title">⚖️ Work-Life Balance</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>Focus Sessions</strong> - Pomodoro-style work sessions with breaks and automatic tracking</li>
-                          <li><strong>Learning Goals</strong> - Track progress with targets, streaks, and achievements</li>
-                          <li><strong>Health Dashboard</strong> - Visual architecture status and cognitive metrics</li>
-                          <li><strong>Streak Protection</strong> - Stay motivated with daily progress indicators</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="chat-title">
-                      <div class="feature-category-title" id="chat-title">💬 Chat Integration</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>@alex Chat Participant</strong> - Personality-driven conversations with memory</li>
-                          <li><strong>12 Language Model Tools</strong> - Status, memory search, knowledge management</li>
-                          <li><strong>Custom Agents</strong> - Specialized handoffs for meditation, dreams, Azure</li>
-                          <li><strong>Slash Commands</strong> - /meditate, /status, /knowledge, /saveinsight, and more</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="content-creation-title">
-                      <div class="feature-category-title" id="content-creation-title">🎨 Content Creation</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>AI Image Generation</strong> - Generate images from text prompts via Replicate (Flux, SDXL)</li>
-                          <li><strong>AI Image Editing</strong> - Edit existing images with nano-banana-pro for consistent results</li>
-                          <li><strong>PPTX Presentations</strong> - Generate polished PowerPoint locally (free, offline)</li>
-                          <li><strong>Gamma Presentations</strong> - Cloud-based AI presentations with rich styling and image models</li>
-                          <li><strong>Mermaid Diagrams</strong> - Generate flowcharts, sequence diagrams from code or text</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="cross-platform-title">
-                      <div class="feature-category-title" id="cross-platform-title">🌐 Cross-Platform</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>M365 Export</strong> - Package knowledge for Microsoft 365 Copilot integration</li>
-                          <li><strong>Architecture Upgrade</strong> - Seamless migration between versions with backup</li>
-                          <li><strong>User Profile</strong> - Personalized communication style and preferences</li>
-                          <li><strong>Text-to-Speech</strong> - Voice synthesis for reading documents and content aloud</li>
-                          <li><strong>Research-First Dev</strong> - Pre-project knowledge encoding with 4-dimension gap analysis</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="env-setup-title">
-                      <div class="feature-category-title" id="env-setup-title">⚙️ Environment Setup</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>Essential Settings</strong> (7) - instruction/prompt file locations, agent mode, skill loading</li>
-                          <li><strong>Recommended Settings</strong> (24) - thinking tool, memory, subagents, MCP gallery, request queueing, UI</li>
-                          <li><strong>Auto-Approval Settings</strong> (5) - auto-run tools, file operations, terminal automation</li>
-                          <li><strong>Extended Thinking</strong> (2) - Opus 4.5/4.6 deep reasoning (16K token budget)</li>
-                          <li><strong>Persona Detection</strong> - ⭐ Auto-detect project type, adapt Focus Trifectas (GK premium)</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="config-title">
-                      <div class="feature-category-title" id="config-title">📁 Configuration Locations</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>.github/config/</strong> - All Alex configuration files</li>
-                          <li><strong>user-profile.json</strong> - Communication preferences and project persona</li>
-                          <li><strong>markdown-light.css</strong> - GitHub-style markdown preview theme</li>
-                          <li><strong>cognitive-config.json</strong> - Dream/meditation state tracking</li>
-                      </ul>
-                  </div>
-                  
-                  <div class="feature-category" role="article" aria-labelledby="docs-title">
-                      <div class="feature-category-title" id="docs-title">📖 Documentation Guides</div>
-                      <ul class="feature-list" role="list">
-                          <li><strong>Work-Life Balance</strong> - Focus sessions, goals, streaks, and sustainable productivity</li>
-                          <li><strong>M365 Export</strong> - Bridge your knowledge to Microsoft 365 Copilot</li>
-                          <li><strong>Global Knowledge</strong> - Cross-project patterns and insights</li>
-                          <li><strong>User Manual</strong> - Complete feature reference and tutorials</li>
-                      </ul>
-                  </div>
-                  
-                  <nav class="feature-links" role="navigation" aria-label="Feature documentation links">
-                      <button class="feature-link-btn" data-cmd="workingWithAlex" tabindex="0" role="button" aria-label="Learn about working with Alex">🎓 Working with Alex</button>
-                      <button class="feature-link-btn" data-cmd="agentVsChat" tabindex="0" role="button" aria-label="Compare agents and @alex chat mode">🤖 Agent vs @alex</button>
-                      <button class="feature-link-btn" data-cmd="openDocs" tabindex="0" role="button" aria-label="Open full documentation">📚 Full Documentation</button>
-                      <button class="feature-link-btn" data-cmd="openBrainAnatomy" tabindex="0" role="button" aria-label="Explore brain anatomy">🧠 Brain Anatomy</button>
-                      <button class="feature-link-btn" data-cmd="openMarketplace" tabindex="0" role="button" aria-label="View on VS Code Marketplace">🏪 Marketplace</button>
-                      <button class="feature-link-btn" data-cmd="openGitHub" tabindex="0" role="button" aria-label="View on GitHub">🐙 GitHub</button>
-                  </nav>
-              </div>
-          </details>
       </div>`;
 }

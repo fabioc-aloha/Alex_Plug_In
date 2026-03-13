@@ -1,5 +1,6 @@
 ---
 description: Systematically diagnose and fix a non-functional M365 Copilot declarative agent across 6 diagnostic layers
+inheritance: heir:m365
 ---
 
 # Debug M365 Declarative Agent
@@ -179,5 +180,3 @@ Alex:
 6. Reports findings in structured format
 
 **Cross-reference**: `.github/instructions/m365-agent-debugging.instructions.md`
-
-

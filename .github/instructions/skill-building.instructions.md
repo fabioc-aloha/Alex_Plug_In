@@ -102,12 +102,41 @@ If any check fails, rewrite the section before continuing.
 18. **Create script**: `.github/muscles/{verb}-{noun}.ps1` or `.js`
 19. **Reference from .instructions.md**: "Step N: Run `muscles/{script}`"
 20. **Test in sandbox**: Never test in Master Alex workspace
+21. **Register in inheritance.json**: Add entry with `inheritance`, `description`, `referencedBy`
 
-## Phase 7: Finalize
+## Phase 7: Declare Inheritance
 
-21. **Update catalogs**: SKILLS-CATALOG.md, TRIFECTA-CATALOG.md (if trifecta built)
-22. **Run sync-architecture**: Ensure heir gets the new files
-23. **Rebuild and install**: Compile, package, install VSIX
+All memory files have a native inheritance mechanism that controls sync to heirs.
+Default is `inheritable` (syncs to all heirs). Only declare if the skill should NOT sync.
+
+22. **Skill**: If not `inheritable`, run `new-skill.ps1 -Inheritance <type>` (auto-registers in `SKILL_EXCLUSIONS`)
+    - Or manually add to `SKILL_EXCLUSIONS` in `.github/muscles/sync-architecture.cjs`
+23. **Trifecta siblings**: If the skill is non-inheritable, add matching `inheritance:` frontmatter:
+    - `.instructions.md`: Add `inheritance: master-only` (or `heir:m365`) to YAML frontmatter
+    - `.prompt.md`: Add `inheritance: master-only` (or `heir:m365`) to YAML frontmatter
+24. **Muscle**: Add entry to `.github/muscles/inheritance.json` with `inheritance`, `description`, `referencedBy`
+
+### Inheritance Types
+
+| Type | Meaning | Example |
+|------|---------|---------|
+| `inheritable` | Syncs to all heirs (default) | Most skills |
+| `universal` | Same as inheritable | Alias |
+| `master-only` | Stays in Master Alex only | `release-process`, `heir-sync-management` |
+| `heir:vscode` | Heir maintains its own version | `vscode-extension-patterns` |
+| `heir:m365` | Targets M365 heir, not VS Code | `m365-agent-debugging` |
+
+### Trifecta Consistency Rule
+
+> If a skill is excluded, its trifecta siblings (instruction + prompt) must have matching
+> `inheritance:` frontmatter. Otherwise the instruction/prompt syncs as an orphan to heirs
+> where its paired skill doesn't exist.
+
+## Phase 8: Finalize
+
+25. **Update catalogs**: SKILLS-CATALOG.md, TRIFECTA-CATALOG.md (if trifecta built)
+26. **Run sync-architecture**: Ensure heir gets the new files
+27. **Rebuild and install**: Compile, package, install VSIX
 
 ## Quick Reference: What You Need
 

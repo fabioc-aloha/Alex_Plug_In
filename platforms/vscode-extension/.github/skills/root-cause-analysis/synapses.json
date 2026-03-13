@@ -28,14 +28,6 @@
       "reason": "RCA reveals what recovery is needed",
       "when": "RCA reveals what recovery is needed",
       "yields": "error recovery patterns contextual assessment"
-    },
-    {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "informs",
-      "strength": 0.7,
-      "reason": "Systematic debugging techniques for production build issues",
-      "when": "Systematic debugging techniques for production build issues",
-      "yields": "VS Code extension patterns contextual assessment"
     }
   ],
   "activationPatterns": [

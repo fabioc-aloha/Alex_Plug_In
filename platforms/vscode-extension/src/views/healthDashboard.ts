@@ -7,8 +7,6 @@ import {
     HealthStatus
 } from '../shared/healthCheck';
 import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
-import { getGoalsSummary, LearningGoal } from '../commands/goals';
-import { getCurrentSession } from '../commands/session';
 import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
 import { escapeHtml, getNonce } from '../shared/sanitize';
 import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
@@ -127,10 +125,9 @@ async function refreshDashboard(): Promise<void> {
         const rootPath = workspaceFolders?.[0]?.uri.fsPath || '';
         
         // Gather all data in parallel
-        const [health, knowledgeSummary, goalsSummary, version] = await Promise.all([
+        const [health, knowledgeSummary, version] = await Promise.all([
             checkHealth(true), // Force fresh health check
             getGlobalKnowledgeSummary(),
-            getGoalsSummary(),
             rootPath ? getInstalledAlexVersion(rootPath) : Promise.resolve(null)
         ]);
         
@@ -141,15 +138,11 @@ async function refreshDashboard(): Promise<void> {
             personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
         }
         
-        const session = getCurrentSession();
-        
         currentPanel.webview.html = await getWebviewContent(
             currentPanel.webview,
             extensionUri,
             health,
             knowledgeSummary,
-            goalsSummary,
-            session,
             version,
             personaResult
         );
@@ -168,8 +161,6 @@ async function getWebviewContent(
     extUri: vscode.Uri,
     health: HealthCheckResult,
     knowledge: { totalPatterns: number; totalInsights: number } | null,
-    goals: { activeGoals: LearningGoal[]; completedToday: number; streakDays: number; totalCompleted: number },
-    session: ReturnType<typeof getCurrentSession>,
     version: string | null,
     personaResult: PersonaDetectionResult | null
 ): Promise<string> {
@@ -592,50 +583,6 @@ async function getWebviewContent(
             border-radius: 10px;
         }
         
-        .session-active {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.05));
-            border-color: var(--vscode-textLink-foreground, #2196F3);
-        }
-        
-        .session-timer {
-            font-size: 36px;
-            font-weight: 600;
-            font-family: monospace;
-            text-align: center;
-            color: var(--vscode-textLink-foreground, #2196F3);
-            margin: 16px 0;
-        }
-        
-        .session-info {
-            text-align: center;
-            color: var(--text-secondary);
-        }
-        
-        .goal-progress {
-            margin-bottom: 12px;
-        }
-        
-        .goal-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-            font-size: 12px;
-        }
-        
-        .goal-bar {
-            height: 6px;
-            background: var(--bg-primary);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .goal-fill {
-            height: 100%;
-            background: var(--success);
-            border-radius: 3px;
-            transition: width 0.3s;
-        }
-        
         .footer {
             margin-top: 24px;
             padding-top: 16px;
@@ -729,50 +676,6 @@ async function getWebviewContent(
                 </div>
             </div>
             
-            ${session ? `
-            <!-- Active Session Card -->
-            <div class="card session-active">
-                <div class="card-header">
-                    <span class="card-title">🎯 Active Session</span>
-                    <span class="card-badge badge-success">${session.isPaused ? 'Paused' : 'Active'}</span>
-                </div>
-                <div class="session-timer">${formatTime(session.remaining)}</div>
-                <div class="session-info">
-                    <p><strong>${escapeHtml(session.topic)}</strong></p>
-                    <p>${session.isBreak ? '☕ Break Time' : '🎯 Focus Time'}${session.pomodoroCount > 0 ? ` • 🍅×${session.pomodoroCount}` : ''}</p>
-                </div>
-            </div>
-            ` : ''}
-            
-            <!-- Learning Goals Card -->
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title">🎯 Learning Goals</span>
-                    <span class="card-badge badge-success">🔥 ${goals.streakDays} day streak</span>
-                </div>
-                <div class="stat-grid" style="margin-bottom: 12px;">
-                    <div class="stat-item">
-                        <div class="stat-value">✅ ${goals.completedToday}</div>
-                        <div class="stat-label">Today</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">🏆 ${goals.totalCompleted}</div>
-                        <div class="stat-label">Total</div>
-                    </div>
-                </div>
-                ${goals.activeGoals.slice(0, 3).map(goal => `
-                <div class="goal-progress">
-                    <div class="goal-header">
-                        <span>${escapeHtml(goal.title)}</span>
-                        <span>${goal.currentCount}/${goal.targetCount}</span>
-                    </div>
-                    <div class="goal-bar">
-                        <div class="goal-fill" style="width: ${Math.min(Math.round((goal.currentCount / goal.targetCount) * 100), 100)}%;"></div>
-                    </div>
-                </div>
-                `).join('')}
-                ${goals.activeGoals.length === 0 ? '<p style="text-align: center; color: var(--text-secondary); padding: 12px;">No active goals</p>' : ''}
-            </div>
         </div>
         
         <!-- Synapse Network -->
@@ -935,15 +838,6 @@ function buildMemoryBreakdown(categories: { icon: string; name: string; count: n
         </li>
         `).join('')}
     </ul>`;
-}
-
-/**
- * Format seconds as MM:SS
- */
-function formatTime(seconds: number): string {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 /**

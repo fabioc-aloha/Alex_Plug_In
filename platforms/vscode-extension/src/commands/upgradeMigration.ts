@@ -186,7 +186,6 @@ async function executeMigrationItems(
               skillId: skillName,
               version: '1.0.0',
               lastUpdated: new Date().toISOString().split('T')[0],
-              inheritance: 'inheritable',
               connections: [],
               activationContexts: [],
               notes: `Migrated from DK file: ${path.basename(arrowMatch[1].trim())}`

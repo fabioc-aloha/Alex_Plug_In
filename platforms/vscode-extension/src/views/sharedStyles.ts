@@ -10,10 +10,12 @@
  * @param personaAccent - The persona accent color (e.g., '#6366f1')
  */
 export function getSharedStyles(personaAccent: string): string {
+  // Validate color to prevent CSS injection
+  const safeAccent = /^#[0-9a-fA-F]{3,8}$/.test(personaAccent) ? personaAccent : '#6366f1';
   return `
       * {
           box-sizing: border-box;
-          --persona-accent: ${personaAccent};
+          --persona-accent: ${safeAccent};
           /* Design System - Spacing Scale (8px base) */
           --spacing-xs: 4px;
           --spacing-sm: 8px;
@@ -381,54 +383,6 @@ export function getSharedStyles(personaAccent: string): string {
           opacity: 1;
       }
       
-      .session-card {
-          background: var(--vscode-editor-background);
-          border-radius: 6px;
-          padding: 8px;
-          margin-bottom: 8px;
-          border-left: 2px solid var(--vscode-charts-blue);
-      }
-      .session-header {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          margin-bottom: 2px;
-      }
-      .session-icon {
-          font-size: 16px;
-      }
-      .session-title {
-          font-size: 15px;
-          font-weight: 500;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-      }
-      .session-timer {
-          font-size: 21px;
-          font-weight: 600;
-          font-family: monospace;
-          color: var(--vscode-charts-blue);
-      }
-      .session-footer {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-top: 4px;
-      }
-      .session-status {
-          font-size: var(--font-xs);
-          color: var(--vscode-descriptionForeground);
-      }
-      .session-actions-link {
-          font-size: var(--font-xs);
-          color: var(--vscode-textLink-foreground);
-          text-decoration: none;
-          cursor: pointer;
-      }
-      .session-actions-link:hover {
-          text-decoration: underline;
-      }
       
       .action-list {
           display: flex;
@@ -684,55 +638,6 @@ export function getSharedStyles(personaAccent: string): string {
           font-style: italic;
       }
       
-      .goals-stats {
-          display: flex;
-          gap: 12px;
-          font-size: var(--font-xs);
-          color: var(--vscode-descriptionForeground);
-          margin-bottom: 8px;
-          opacity: 0.8;
-      }
-      .goal-item {
-          background: var(--vscode-editor-background);
-          border-radius: 4px;
-          padding: 8px 12px;
-          margin-bottom: 4px;
-          transition: transform 0.12s ease;
-      }
-      .goal-item:hover {
-          transform: translateX(1px);
-      }
-      .goal-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 4px;
-      }
-      .goal-title {
-          font-size: var(--font-xs);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          flex: 1;
-      }
-      .goal-progress-text {
-          font-size: var(--font-xs);
-          color: var(--vscode-descriptionForeground);
-          margin-left: 8px;
-          opacity: 0.8;
-      }
-      .goal-bar {
-          height: 3px;
-          background: var(--vscode-progressBar-background);
-          border-radius: 2px;
-          overflow: hidden;
-      }
-      .goal-bar-fill {
-          height: 100%;
-          background: var(--persona-accent);
-          border-radius: 2px;
-          transition: width 0.3s ease;
-      }
       
       /* Nudges Section Styles */
       .nudges-section {
@@ -1152,31 +1057,6 @@ export function getSharedStyles(personaAccent: string): string {
       }
 
       /* ── Mind Tab ── */
-      .mind-stats-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 8px;
-          margin-bottom: 12px;
-      }
-      .mind-stat-card {
-          background: var(--vscode-editor-background);
-          border: 1px solid var(--vscode-widget-border, #303030);
-          border-radius: 6px;
-          padding: 12px;
-          text-align: center;
-      }
-      .mind-stat-value {
-          font-size: 24px;
-          font-weight: 700;
-          line-height: 1;
-          margin-bottom: 4px;
-      }
-      .mind-stat-label {
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          opacity: 0.6;
-      }
       .stat-good { color: var(--vscode-testing-iconPassed); }
       .stat-warn { color: var(--vscode-editorWarning-foreground); }
       .stat-bad { color: var(--vscode-errorForeground); }
@@ -1392,35 +1272,6 @@ export function getSharedStyles(personaAccent: string): string {
       }
       .identity-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
       .identity-meta { font-size: 11px; opacity: 0.6; }
-
-      /* ── Cognitive Age Enriched (7.36) ── */
-      .cognitive-tier-label {
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          opacity: 0.6;
-          margin-top: 4px;
-      }
-      .cognitive-progress-bar {
-          width: 100%;
-          height: 6px;
-          background: var(--vscode-progressBar-background, #333);
-          border-radius: 3px;
-          overflow: hidden;
-          margin: 8px 0 4px;
-      }
-      .cognitive-progress-fill {
-          height: 100%;
-          background: var(--persona-accent, #6366f1);
-          border-radius: 3px;
-          transition: width 0.3s ease;
-      }
-      .cognitive-milestones {
-          display: flex;
-          justify-content: space-between;
-          font-size: 11px;
-          opacity: 0.4;
-      }
 
       /* ── Global Knowledge Panel (7.34) ── */
       .gk-panel {

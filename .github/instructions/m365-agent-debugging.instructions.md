@@ -1,5 +1,6 @@
 ---
 description: "M365 Copilot declarative agent debugging — manifest validation, capability diagnosis, sideloading issues"
+inheritance: heir:m365
 ---
 
 # M365 Declarative Agent Debugging Instructions

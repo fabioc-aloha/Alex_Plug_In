@@ -46,13 +46,6 @@
       "strength": 0.7,
       "when": "retrieving cross-project image generation patterns and content filter insights",
       "yields": "Template-based AI generation patterns, limitation awareness, content filter guidance"
-    },
-    {
-      "target": ".github/skills/persona-detection/SKILL.md",
-      "type": "coordinates-with",
-      "strength": 0.7,
-      "when": "persona detection drives avatar selection, easter egg rendering, and bannerNoun display",
-      "yields": "Persona-specific brand expression in the sidebar UI"
     }
   ],
   "triggers": [

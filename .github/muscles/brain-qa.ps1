@@ -574,13 +574,39 @@ if (12 -in $runPhases) {
 # ============================================================
 if (13 -in $runPhases) {
     Write-Phase 13 "Instructions/Prompts Sync"
-    $masterOnly = @("brand-asset-management.instructions.md")
+    # Dynamically read frontmatter inheritance field from each .md file.
+    # Exclude files with inheritance: master-only or heir:m365 (same logic as sync-architecture.cjs).
+    $excludedTypes = @("master-only", "heir:m365")
+    
+    function Get-ExcludedByFrontmatter {
+        param([string]$Dir)
+        $excluded = @()
+        foreach ($file in (Get-ChildItem "$Dir\*.md" -ErrorAction SilentlyContinue)) {
+            $head = Get-Content $file.FullName -Head 10 -ErrorAction SilentlyContinue
+            if ($head -and $head[0] -eq "---") {
+                foreach ($line in $head[1..9]) {
+                    if ($line -eq "---") { break }
+                    if ($line -match '^\s*inheritance:\s*[''"]?([^''"]+)[''"]?\s*$') {
+                        if ($Matches[1].Trim() -in $excludedTypes) {
+                            $excluded += $file.Name
+                        }
+                        break
+                    }
+                }
+            }
+        }
+        return $excluded
+    }
+    
+    $masterOnlyInstructions = Get-ExcludedByFrontmatter -Dir "$ghPath\instructions"
+    $masterOnlyPrompts = Get-ExcludedByFrontmatter -Dir "$ghPath\prompts"
+    
     if (Test-Path "$heirBase\.github\instructions") {
-        $mi = (Get-ChildItem "$ghPath\instructions\*.md").Name | Where-Object { $_ -notin $masterOnly } | Sort-Object
+        $mi = (Get-ChildItem "$ghPath\instructions\*.md").Name | Where-Object { $_ -notin $masterOnlyInstructions } | Sort-Object
         $hi = (Get-ChildItem "$heirBase\.github\instructions\*.md").Name | Sort-Object
         $diffI = Compare-Object $mi $hi -ErrorAction SilentlyContinue
         
-        $mp = (Get-ChildItem "$ghPath\prompts\*.md").Name | Sort-Object
+        $mp = (Get-ChildItem "$ghPath\prompts\*.md").Name | Where-Object { $_ -notin $masterOnlyPrompts } | Sort-Object
         $hp = (Get-ChildItem "$heirBase\.github\prompts\*.md").Name | Sort-Object
         $diffP = Compare-Object $mp $hp -ErrorAction SilentlyContinue
         

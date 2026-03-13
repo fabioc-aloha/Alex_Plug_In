@@ -5,28 +5,18 @@
  * Exports a single function called by the orchestrator.
  * Focused on project work: partnership, build, create.
  */
-import { LearningGoal } from '../commands/goals';
-import { Nudge, actionButton, getNudgesHtml, getGoalsHtml } from './welcomeViewHtml';
+import { Nudge, actionButton, getNudgesHtml } from './welcomeViewHtml';
 
 export interface MissionTabContext {
-    sessionHtml: string;
     nudges: Nudge[];
-    goals: {
-        activeGoals: LearningGoal[];
-        completedToday: number;
-        streakDays: number;
-        totalCompleted: number;
-    };
 }
 
 /** Generate the Mission Command tab panel HTML. */
 export function getMissionTabHtml(ctx: MissionTabContext): string {
-    const { sessionHtml, nudges, goals } = ctx;
+    const { nudges } = ctx;
 
     return `
       <div class="tab-panel active" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
-
-          ${sessionHtml}
 
           ${getNudgesHtml(nudges)}
 
@@ -52,7 +42,6 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                   ${actionButton('generateTests', '🧪', 'Generate Tests', 'Build confidence in your code')}
                   ${actionButton('runAudit', '🔍', 'Project Audit', 'Comprehensive quality check')}
                   ${actionButton('releasePreflight', '🚀', 'Release Preflight')}
-                  ${actionButton('importGitHubIssues', '📋', 'Import Issues', 'Import GitHub issues as goals')}
                   ${actionButton('reviewPR', '👁️', 'Review PR', 'AI-powered pull request review')}
               </div>
 
@@ -74,8 +63,6 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               </div>
 
           </nav>
-
-          ${getGoalsHtml(goals)}
 
       </div>`;
 }

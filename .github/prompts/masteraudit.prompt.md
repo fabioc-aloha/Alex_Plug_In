@@ -1,6 +1,7 @@
 ---
 description: "Run Master Alex audit — 22 automated sections + semantic/logic/code/architectural review"
 agent: Alex
+inheritance: master-only
 ---
 
 # /masteraudit - Master Alex Project Audit
@@ -39,5 +40,3 @@ Present findings as a structured table with severity ratings (CRITICAL/WARNING/I
 ## Start
 
 I'll run a comprehensive Master Alex audit. Which mode would you like?
-
-
