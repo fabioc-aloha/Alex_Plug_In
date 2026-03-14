@@ -9,8 +9,8 @@ import { IArchitectureStatusParams } from './types';
 export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchitectureStatusParams> {
     
     async prepareInvocation(
-        options: vscode.LanguageModelToolInvocationPrepareOptions<IArchitectureStatusParams>,
-        token: vscode.CancellationToken
+        _options: vscode.LanguageModelToolInvocationPrepareOptions<IArchitectureStatusParams>,
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: 'Checking Alex architecture status...',
@@ -18,8 +18,8 @@ export class ArchitectureStatusTool implements vscode.LanguageModelTool<IArchite
     }
 
     async invoke(
-        options: vscode.LanguageModelToolInvocationOptions<IArchitectureStatusParams>,
-        token: vscode.CancellationToken
+        _options: vscode.LanguageModelToolInvocationOptions<IArchitectureStatusParams>,
+        _token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
         // Update welcome view avatar — architecture status = planning state

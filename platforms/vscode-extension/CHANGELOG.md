@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Welcome View safety & telemetry** — Message routing guarded with `_isWelcomeMessage`, operation lock covers long-running commands (dream, setupEnvironment, releasePreflight, runAudit, generate* flows), `_executeCommandSafely` wraps commands with progress + toasts, tab persistence via memento, `toggleSetting` guards invalid keys and logs external links.
+- **Testing & docs** — Added `handleMessageForTest` helper and unit tests for routing, tab persistence, toggle guard, and openDoc preview; `TEST-GUIDE.md` updated with welcome message routing test instructions.
+
 ---
 
 ## [6.1.7] - 2026-03-05

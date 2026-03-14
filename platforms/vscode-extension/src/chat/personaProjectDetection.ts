@@ -18,7 +18,6 @@ import {
 import type {
     PersonaDetectionResult,
     ExtendedUserProfile,
-    ProjectPersona,
 } from './personaDetection';
 import { loadUserProfile, detectPersona } from './personaDetection';
 

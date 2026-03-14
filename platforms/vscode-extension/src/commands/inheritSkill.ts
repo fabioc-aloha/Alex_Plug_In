@@ -282,6 +282,6 @@ async function inheritSkill(
 /**
  * Register the command
  */
-export function registerInheritSkillCommand(context: vscode.ExtensionContext): vscode.Disposable {
+export function registerInheritSkillCommand(_context: vscode.ExtensionContext): vscode.Disposable {
     return vscode.commands.registerCommand('alex.inheritSkillFromGlobal', inheritSkillFromGlobal);
 }

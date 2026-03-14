@@ -1,6 +1,6 @@
 ---
-name: "Architecture Audit"
-description: "Comprehensive **project** consistency review across code, documentation, diagrams, and configuration"
+name: architecture-audit
+description: Comprehensive **project** consistency review across code, documentation, diagrams, and configuration
 ---
 
 # Architecture Audit

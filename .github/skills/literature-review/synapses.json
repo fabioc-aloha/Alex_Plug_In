@@ -4,8 +4,21 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-10",
-  "connectionCount": 5,
-  "connections": [],
+  "connectionCount": 6,
+  "connections": [
+    {
+      "type": "when",
+      "when": "literature review|lit review|research gap|systematic search",
+      "target": ".github/skills/citation-management/SKILL.md",
+      "yields": [
+        "citation-management",
+        "academic-research",
+        "practitioner-research"
+      ],
+      "weight": 0.88,
+      "notes": "Surface citation and research-method helpers when lit review triggers are detected"
+    }
+  ],
   "synapses": [
     {
       "id": "LIT-001",

@@ -286,7 +286,7 @@ async function loadOpenLogFromDisk(): Promise<void> {
  * Call once from `activate()`. Returns a Disposable.
  */
 export function registerFileWatcher(
-    context: vscode.ExtensionContext,
+    _context: vscode.ExtensionContext,
     workspaceRoot: string
 ): vscode.Disposable {
     if (!workspaceRoot) {

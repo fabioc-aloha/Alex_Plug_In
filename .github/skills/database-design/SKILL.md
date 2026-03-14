@@ -1,7 +1,7 @@
 ---
-name: "Database Design"
-description: "Schema design, normalization, query optimization, and data modeling patterns"
-applyTo: "**/*database*,**/*schema*,**/*sql*,**/*postgres*,**/*mongo*,**/*prisma*,**/*drizzle*"
+name: database-design
+description: Schema design, normalization, query optimization, and data modeling patterns
+applyTo: '**/*database*,**/*schema*,**/*sql*,**/*postgres*,**/*mongo*,**/*prisma*,**/*drizzle*'
 ---
 
 # Database Design Skill

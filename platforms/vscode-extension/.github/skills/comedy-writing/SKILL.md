@@ -1,7 +1,7 @@
 ---
-name: "Comedy Writing Skill"
-description: "Joke structure, comedic timing, set construction, callback patterns, and audience engagement for comedy writers."
-applyTo: "**/*comedy*,**/*standup*,**/*joke*,**/*humor*,**/*sketch*,**/*funny*,**/*satire*"
+name: comedy-writing
+description: Joke structure, comedic timing, set construction, callback patterns, and audience engagement for comedy writers.
+applyTo: '**/*comedy*,**/*standup*,**/*joke*,**/*humor*,**/*sketch*,**/*funny*,**/*satire*'
 ---
 
 # Comedy Writing Skill

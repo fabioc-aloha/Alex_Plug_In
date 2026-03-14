@@ -1,6 +1,6 @@
 ---
-name: "Creative Writing Skill"
-description: "Patterns for fiction, narrative structure, character development, dialogue, and storytelling craft."
+name: creative-writing
+description: Patterns for fiction, narrative structure, character development, dialogue, and storytelling craft.
 ---
 
 # Creative Writing Skill

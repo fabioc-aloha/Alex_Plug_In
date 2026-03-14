@@ -207,7 +207,7 @@ function inferCategory(text: string): GlobalKnowledgeCategory {
 /**
  * Generate relevant tags from content
  */
-function generateTags(text: string, codeBlocks: string[]): string[] {
+function generateTags(text: string, _codeBlocks: string[]): string[] {
     const tags: Set<string> = new Set();
     const lowerText = text.toLowerCase();
     

@@ -4,8 +4,21 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-10",
-  "connectionCount": 6,
-  "connections": [],
+  "connectionCount": 7,
+  "connections": [
+    {
+      "type": "when",
+      "when": "deep work|focus|flow|time block",
+      "target": ".github/skills/frustration-recognition/SKILL.md",
+      "yields": [
+        "frustration-recognition",
+        "meeting-efficiency",
+        "skill-building"
+      ],
+      "weight": 0.8,
+      "notes": "Route deep work requests to adjacent skills that protect focus and build habits"
+    }
+  ],
   "synapses": [
     {
       "id": "DEEP-001",

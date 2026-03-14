@@ -1,7 +1,7 @@
 ---
-name: "Performance Profiling"
-description: "CPU, memory, network bottleneck analysis — systematic performance investigation"
-applyTo: "**/*profile*,**/*performance*,**/*benchmark*,**/*bottleneck*,**/*optimize*"
+name: performance-profiling
+description: CPU, memory, network bottleneck analysis — systematic performance investigation
+applyTo: '**/*profile*,**/*performance*,**/*benchmark*,**/*bottleneck*,**/*optimize*'
 ---
 
 # Performance Profiling Skill

@@ -1114,11 +1114,11 @@ After analyzing the [OpenAI Codex Competitive Analysis](CODEX-COMPETITIVE-ANALYS
 | **Tools** | **🤖 Agent Hub** | Specialist agent cards with color-coded personalities, thread detail control (Verbose/Standard/Terse), custom agent creation, agent thread history |
 | **Skills** | **🏪 Skill Store** | Toggle on/off switches per skill, 3-tier catalog (Installed/Curated/Experimental), install from GitHub, branded icons with usage stats |
 | **Status** | **🧠 Mind** | Cognitive architecture health, 5 memory modalities, cognitive age, knowledge freshness, meditation & growth, honest uncertainty, global knowledge |
-| **More** | **� Docs** | Tips & nudges, local documentation hub (Getting Started, Architecture, Operations), learnalex.correax.com portal, partnership guide |
+| **More** | **📚 Docs** | Tips & nudges, local documentation hub (Getting Started, Architecture, Operations), learnalex.correax.com portal, partnership guide |
 
 ### Navigation: Text Tabs → Icon Bar
 
-The reimagined design replaces 5 text tab labels with 5 icon tabs (🎛️ 🤖 🏪 🧠 �), saving horizontal space and enabling notification badges per tab — a pattern proven by Codex's compact navigation.
+The reimagined design replaces 5 text tab labels with 5 icon tabs (🎛️ 🤖 🏪 🧠 📚), saving horizontal space and enabling notification badges per tab — a pattern proven by Codex's compact navigation.
 
 ### Approved Tab Mockups
 

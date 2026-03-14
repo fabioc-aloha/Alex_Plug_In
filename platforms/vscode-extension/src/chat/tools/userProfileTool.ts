@@ -11,13 +11,13 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
     
     async prepareInvocation(
         options: vscode.LanguageModelToolInvocationPrepareOptions<IUserProfileParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
-        const action = options.input.action;
+        const action = options.input.action || 'get';
         const actionMessages: Record<string, string> = {
-            'get': 'Reading user profile...',
-            'update': `Updating user profile: ${options.input.field}...`,
-            'exists': 'Checking if user profile exists...'
+            get: 'Reading user profile...',
+            update: `Updating user profile: ${options.input.field}...`,
+            exists: 'Checking if user profile exists...'
         };
         
         return {
@@ -27,7 +27,7 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
 
     async invoke(
         options: vscode.LanguageModelToolInvocationOptions<IUserProfileParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
         // Update welcome view avatar — user profile access = learning state

@@ -199,7 +199,7 @@ export function getToken(tokenName: keyof typeof TOKEN_CONFIGS): string | null {
 export function getTokenStatuses(): Record<string, boolean> {
     const statuses: Record<string, boolean> = {};
 
-    for (const [name, config] of Object.entries(TOKEN_CONFIGS)) {
+    for (const [name] of Object.entries(TOKEN_CONFIGS)) {
         const token = getToken(name as keyof typeof TOKEN_CONFIGS);
         statuses[name] = !!token;
     }

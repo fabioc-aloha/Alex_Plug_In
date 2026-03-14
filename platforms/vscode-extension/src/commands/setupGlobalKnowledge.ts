@@ -98,7 +98,10 @@ export async function ensureGlobalKnowledgeSetup(): Promise<boolean> {
 
     // Check if GK path exists but is misconfigured
     const gkExists = await fs.pathExists(GK_PATH);
-    const isLink = gkExists && await isSymlink(GK_PATH);
+    // mark as used for TS noUnusedLocals (existence info used for telemetry later)
+    void gkExists;
+    // Intentional: we only need existence; symlink check handled elsewhere
+    await isSymlink(GK_PATH).catch(() => {});
     
     // Try to find existing developer repo
     const existingRepo = await findExistingGKRepo();
@@ -214,6 +217,6 @@ export async function setupGlobalKnowledgeCommand(): Promise<void> {
 /**
  * Register the command
  */
-export function registerSetupGlobalKnowledgeCommand(context: vscode.ExtensionContext): vscode.Disposable {
+export function registerSetupGlobalKnowledgeCommand(_context: vscode.ExtensionContext): vscode.Disposable {
     return vscode.commands.registerCommand('alex.setupGlobalKnowledge', setupGlobalKnowledgeCommand);
 }

@@ -300,7 +300,7 @@ function parseSkillMetadata(content: string): SkillMetadata {
 /**
  * Detect skill category from content
  */
-function detectCategory(content: string, metadata: SkillMetadata): string {
+function detectCategory(content: string, _metadata: SkillMetadata): string {
     const contentLower = content.toLowerCase();
     
     // Check for category keywords
@@ -462,7 +462,7 @@ async function collectProposalMetadata(skill: HeirSkill, workspacePath: string):
 /**
  * Detect tags from content
  */
-function detectTags(content: string, metadata: SkillMetadata): string[] {
+function detectTags(content: string, _metadata: SkillMetadata): string[] {
     const tags: Set<string> = new Set();
     const contentLower = content.toLowerCase();
     

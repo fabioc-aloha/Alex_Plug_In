@@ -1,8 +1,10 @@
 ---
-name: "Alex Meditation Skill"
-description: "Knowledge consolidation, memory integration, and guided meditation — the interactive counterpart to automated dream processing"
+name: meditation
+description: >-
+  Knowledge consolidation, memory integration, and guided meditation — the interactive counterpart to automated dream
+  processing
 disable-model-invocation: true
-applyTo: "**/*meditat*,**/*reflect*,**/*consolidat*"
+applyTo: '**/*meditat*,**/*reflect*,**/*consolidat*'
 ---
 
 # Alex Meditation Skill

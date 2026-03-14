@@ -11,9 +11,9 @@ import { getUserProfile } from '../tools';
  */
 export async function handleMeditateCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     // Model Intelligence: Check if current model is suitable for meditation
@@ -96,9 +96,9 @@ Consider contributing reusable insights to your global knowledge base:
  */
 export async function handleDreamCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     // Model Intelligence: Check if current model is suitable for dream
@@ -136,9 +136,9 @@ Initiating automated neural maintenance:
  */
 export async function handleBrainQACommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
 
     const modelInfo = getModelInfo(request);
@@ -176,9 +176,9 @@ Runs structural + semantic + logic + architectural review:
  */
 export async function handleLearnCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     // Model Intelligence: Check if current model is suitable for bootstrap learning
@@ -222,9 +222,9 @@ I'll acquire domain expertise through conversational interaction:
  */
 export async function handleStatusCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.progress('📊 Gathering cognitive architecture status...');
@@ -280,9 +280,9 @@ ${modelStatus}
  */
 export async function handleModelCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.progress('🧠 Analyzing model capabilities...');
@@ -332,9 +332,9 @@ ${formatModelAdvice(advice)}
  */
 export async function handleAzureCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.progress('☁️ Activating Azure development mode...');
@@ -380,9 +380,9 @@ When in **Agent Mode**, these tools are automatically available:
  */
 export async function handleM365Command(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.progress('📱 Activating Microsoft 365 development mode...');
@@ -425,9 +425,9 @@ I can help with M365 development using available MCP tools and knowledge bases.
  */
 export async function handleProfileCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.progress('👤 Accessing user profile...');

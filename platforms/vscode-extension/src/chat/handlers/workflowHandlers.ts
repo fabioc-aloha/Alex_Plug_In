@@ -42,10 +42,10 @@ export function isStartOfSession(context: vscode.ChatContext): boolean {
  * Handle greeting with automatic self-actualization
  */
 export async function handleGreetingWithSelfActualization(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _request: vscode.ChatRequest,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     // Get user profile for personalized greeting
@@ -109,9 +109,9 @@ export async function handleGreetingWithSelfActualization(
  */
 export async function handleSelfActualizeCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     // Model Intelligence: Check if current model is suitable for self-actualization
@@ -159,9 +159,9 @@ I'm running a comprehensive self-assessment of my cognitive architecture.
  */
 export async function handleKnowledgeCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     if (!request.prompt) {
@@ -208,7 +208,7 @@ No results found for "**${request.prompt}**".
 Found **${results.length}** results for "**${request.prompt}**":
 
 `);
-            for (const { entry, relevance } of results) {
+            for (const { entry /*, relevance*/ } of results) {
                 const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
                 stream.markdown(`### ${typeEmoji} ${entry.title}
 - **Type**: ${entry.type} | **Category**: ${entry.category}
@@ -232,9 +232,9 @@ ${entry.sourceProject ? `- **From**: ${entry.sourceProject}` : ''}
  */
 export async function handleSaveInsightCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.markdown(`## 💡 Save Insight to Global Knowledge
@@ -274,10 +274,10 @@ I'll use the **alex_knowledge_save_insight** tool to save this. The tool will:
  * Handle /promote command - Promote project knowledge to global
  */
 export async function handlePromoteCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _request: vscode.ChatRequest,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.markdown(`## ⬆️ Promote Knowledge to Global
@@ -339,10 +339,10 @@ Promote a project-local knowledge file (DK-*.md or skill) to make it available a
  * Handle /knowledgestatus command - Show global knowledge status
  */
 export async function handleKnowledgeStatusCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _request: vscode.ChatRequest,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.progress('📊 Gathering global knowledge status...');
@@ -407,10 +407,10 @@ export async function handleKnowledgeStatusCommand(
  * Handle /docs command - Open documentation
  */
 export async function handleDocsCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _request: vscode.ChatRequest,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.markdown(`## 📚 Alex Documentation
@@ -444,10 +444,10 @@ Opening the documentation index...
  * Handle /help command - Discoverability for all Alex capabilities
  */
 export async function handleHelpCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _request: vscode.ChatRequest,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.markdown(`## 🚀 Alex Cognitive Architecture - Commands & Capabilities
@@ -523,9 +523,9 @@ Alex provides tools that the AI can use automatically:
  */
 export async function handleForgetCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     const topic = request.prompt?.trim();
@@ -564,7 +564,7 @@ The \`/forget\` command helps you remove outdated or unwanted information from A
     // Search for matches in global knowledge
     stream.progress(`🔍 Searching for "${topic}" in memory...`);
     
-    const globalPath = getAlexGlobalPath();
+    // global path available via getAlexGlobalPath() if needed
     const searchResults = await searchGlobalKnowledge(topic);
     
     if (searchResults.length === 0) {
@@ -620,10 +620,10 @@ Automatic deletion with confirmation is planned for a future version.
  * Handle /confidence command - Epistemic integrity education
  */
 export async function handleConfidenceCommand(
-    request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _request: vscode.ChatRequest,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     stream.markdown(`## 🎯 Understanding AI Confidence Levels
@@ -692,9 +692,9 @@ Watch out for these red flags in AI responses:
  */
 export async function handleCreativeCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     const topic = request.prompt.trim() || 'general brainstorming';
@@ -744,9 +744,9 @@ Ready to brainstorm! What's your first question or challenge?
  */
 export async function handleVerifyCommand(
     request: vscode.ChatRequest,
-    context: vscode.ChatContext,
+    _context: vscode.ChatContext,
     stream: vscode.ChatResponseStream,
-    token: vscode.CancellationToken
+    _token: vscode.CancellationToken
 ): Promise<IAlexChatResult> {
     
     const topic = request.prompt.trim();

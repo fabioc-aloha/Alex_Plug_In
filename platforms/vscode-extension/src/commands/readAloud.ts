@@ -20,13 +20,11 @@ import {
     playWithWebview,
     saveAudioToFile,
     stopPlayback,
-    isPlaying,
     detectLanguage,
     getVoiceForLanguage,
     VOICE_PRESETS,
     LANGUAGE_VOICES,
     type VoicePreset,
-    type TTSProgress,
     type TTSChunkedProgress
 } from '../tts';
 
@@ -335,7 +333,7 @@ async function synthesizeAndPlayAudio(
  * Main command: Read current document/selection aloud
  */
 export async function readAloud(
-    context: vscode.ExtensionContext,
+    extContext: vscode.ExtensionContext,
     voicePreset: VoicePreset = 'default',
     uri?: vscode.Uri
 ): Promise<void> {
@@ -376,7 +374,7 @@ export async function readAloud(
     if (!voiceResult) { return; }
     
     try {
-        await synthesizeAndPlayAudio(textToSpeak, voiceResult.voice, voiceResult.lang, context);
+        await synthesizeAndPlayAudio(textToSpeak, voiceResult.voice, voiceResult.lang, extContext);
     } catch (error) {
         hideTTSStatus();
         const message = error instanceof Error ? error.message : String(error);
@@ -460,7 +458,7 @@ async function acquireTextForSave(uri?: vscode.Uri): Promise<{ rawText: string; 
  * Save current document/selection as MP3
  */
 export async function saveAsAudio(
-    context: vscode.ExtensionContext,
+    _context: vscode.ExtensionContext,
     voicePreset: VoicePreset = 'default',
     uri?: vscode.Uri
 ): Promise<void> {
@@ -564,7 +562,7 @@ export async function readWithVoice(context: vscode.ExtensionContext): Promise<v
  * Speak a prompt - generate content with LLM then read aloud
  * Use cases: "read me a poem", "tell me a story", "explain quantum physics"
  */
-export async function speakPrompt(context: vscode.ExtensionContext): Promise<void> {
+export async function speakPrompt(extContext: vscode.ExtensionContext): Promise<void> {
     // Get the prompt from user
     const prompt = await vscode.window.showInputBox({
         title: 'Alex: Speak Prompt',
@@ -647,7 +645,7 @@ Generate the spoken content now:`)
         showTTSStatus('Playing', false);
         
         // Play the audio
-        await playWithWebview(audioBuffer, context, (state) => {
+        await playWithWebview(audioBuffer, extContext, (state) => {
             switch (state.state) {
                 case 'playing':
                     const percent = state.progress ? Math.round(state.progress) : 0;

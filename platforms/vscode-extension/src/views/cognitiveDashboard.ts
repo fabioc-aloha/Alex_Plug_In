@@ -229,7 +229,7 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
   /**
    * Generate HTML for webview
    */
-  private _getHtmlForWebview(webview: vscode.Webview): string {
+  private _getHtmlForWebview(_webview: vscode.Webview): string {
     const nonce = getNonce();
 
     return `<!DOCTYPE html>

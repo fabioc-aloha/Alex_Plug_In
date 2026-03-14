@@ -1,7 +1,7 @@
 ---
-name: "Sales Enablement Skill"
-description: "Sales methodology, pipeline management, negotiation frameworks, and customer engagement patterns."
-applyTo: "**/*sales*,**/*pipeline*,**/*prospect*,**/*deal*,**/*crm*,**/*quota*,**/*commission*,**/*lead*"
+name: sales-enablement
+description: Sales methodology, pipeline management, negotiation frameworks, and customer engagement patterns.
+applyTo: '**/*sales*,**/*pipeline*,**/*prospect*,**/*deal*,**/*crm*,**/*quota*,**/*commission*,**/*lead*'
 ---
 
 # Sales Enablement Skill

@@ -285,7 +285,7 @@ async function getWebviewContent(
     stats: MemoryStats,
     workingMemory: WorkingMemorySlot[],
     gkRepo: string | null,
-    gkSummary: { totalPatterns: number; totalInsights: number } | null,
+    _gkSummary: { totalPatterns: number; totalInsights: number } | null,
     personaResult: PersonaDetectionResult | null
 ): Promise<string> {
     // NASA R5: Entry point assertions

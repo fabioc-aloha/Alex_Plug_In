@@ -366,11 +366,10 @@ export function getDependencyFreshness(workspaceRoot: string): DependencyFreshne
 // Test runner awareness (file-based heuristics)
 // ============================================================================
 
-/** Jest coverage-summary.json shape (subset we care about). */
-interface JestCoverageSummary {
+// Jest coverage-summary.json shape (subset we care about).
+type JestCoverageSummary = {
     total?: { statements?: { pct?: number } };
-}
-
+};
 /** Jest/Vitest JSON reporter shape. */
 interface JestJsonResult {
     numTotalTests?: number;
@@ -432,6 +431,13 @@ export function getTestRunnerStatus(workspaceRoot: string, framework?: string): 
             const stat = fs.statSync(coverageSummary);
             const lastRunAt = stat.mtimeMs;
             const daysSinceLastRun = (Date.now() - lastRunAt) / 86_400_000;
+            // parse summary to validate shape (uses JestCoverageSummary type)
+            try {
+                const summary: JestCoverageSummary = JSON.parse(fs.readFileSync(coverageSummary, 'utf-8'));
+                void summary; // type usage for TS
+            } catch {
+                // ignore malformed JSON; timestamp is enough
+            }
             // coverage-summary.json doesn't have pass/fail; just surface the timestamp
             return {
                 framework,

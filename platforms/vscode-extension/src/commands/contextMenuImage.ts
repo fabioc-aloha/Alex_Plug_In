@@ -223,6 +223,7 @@ function wrapIconAsIllustration(
   description: string,
 ): string {
   const innerContent = iconSvg.replace(/<svg[^>]*>/, "").replace(/<\/svg>/, "");
+  const iconLabel = iconName.replace(/[-_]/g, " ");
 
   const label =
     description.length > 30
@@ -230,6 +231,7 @@ function wrapIconAsIllustration(
       : description;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <title>${iconLabel}</title>
   <!-- Background -->
   <rect width="400" height="300" rx="16" fill="#f6f8fa" stroke="#d0d7de" stroke-width="2"/>
   

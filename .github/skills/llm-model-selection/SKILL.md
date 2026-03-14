@@ -1,7 +1,7 @@
 ---
-name: "LLM Model Selection Skill"
-description: "Choosing the right model for the task — power vs. cost vs. speed."
-applyTo: "**/*model*,**/*llm*,**/*copilot*,**/*claude*,**/*gpt*"
+name: llm-model-selection
+description: Choosing the right model for the task — power vs. cost vs. speed.
+applyTo: '**/*model*,**/*llm*,**/*copilot*,**/*claude*,**/*gpt*'
 ---
 
 # LLM Model Selection Skill

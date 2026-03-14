@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import { classifyDomain } from '../../services/expertiseModel';
-import type { KnownDomain } from '../../services/expertiseModel';
+// import type { KnownDomain } from '../../services/expertiseModel';
 
 suite('Expertise Model Test Suite', () => {
 

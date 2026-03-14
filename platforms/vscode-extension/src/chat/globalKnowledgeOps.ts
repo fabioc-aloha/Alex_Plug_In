@@ -8,27 +8,18 @@ import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import {
-    GLOBAL_KNOWLEDGE_CATEGORIES,
     GLOBAL_KNOWLEDGE_PREFIXES,
     GlobalKnowledgeCategory,
     IGlobalKnowledgeEntry,
-    IGlobalKnowledgeIndex,
-    IProjectRegistry,
-    IProjectRegistryEntry,
 } from '../shared/constants';
 import { queueReferenceTouch } from './forgettingCurve';
 import {
     ensureGlobalKnowledgeIndex,
-    saveGlobalKnowledgeIndex,
-    ensureProjectRegistry,
-    saveProjectRegistry,
     readKnowledgeFileContent,
-    getAlexGlobalPath,
     getGlobalKnowledgePath,
     ensureGlobalKnowledgeDirectories,
     updateGlobalKnowledgeIndex,
     isRemoteOnly,
-    getRemoteRepoConfig,
 } from './globalKnowledge';
 export function generateKnowledgeId(type: 'pattern' | 'insight', title: string): string {
     const prefix = type === 'pattern' ? GLOBAL_KNOWLEDGE_PREFIXES.pattern : GLOBAL_KNOWLEDGE_PREFIXES.insight;
@@ -793,4 +784,3 @@ export async function getGlobalKnowledgeSummary(): Promise<{
 // ============================================================================
 // GLOBAL KNOWLEDGE MIGRATION & NORMALIZATION
 // ============================================================================
-

@@ -12,7 +12,7 @@ import { checkHealth } from './shared/healthCheck';
 import * as telemetry from './shared/telemetry';
 import { getCodeContext, buildTelemetryPanelHtml, handleTelemetryMessage, TelemetryData } from './commandsDeveloperHandlers';
 
-export function registerDeveloperCommands(context: vscode.ExtensionContext, extensionVersion: string): void {
+export function registerDeveloperCommands(context: vscode.ExtensionContext, _extensionVersion: string): void {
   const codeReviewDisposable = vscode.commands.registerCommand(
     "alex.codeReview",
     async (uri?: vscode.Uri) => {

@@ -1,6 +1,6 @@
 ---
-name: "Cross-Cultural Collaboration"
-description: "**Domain**: Multicultural team communication, cultural intelligence, global collaboration"
+name: cross-cultural-collaboration
+description: '**Domain**: Multicultural team communication, cultural intelligence, global collaboration'
 disableModelInvocation: true
 ---
 

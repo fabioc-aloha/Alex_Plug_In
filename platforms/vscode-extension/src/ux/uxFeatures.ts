@@ -237,7 +237,7 @@ interface DailyBriefingData {
 /**
  * Generate daily briefing
  */
-export async function generateDailyBriefing(context: vscode.ExtensionContext): Promise<string> {
+export async function generateDailyBriefing(_context: vscode.ExtensionContext): Promise<string> {
   const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
   if (!workspaceFolder) {
     return "Good morning! Open a workspace with Alex architecture to get your personalized briefing.";
@@ -358,7 +358,7 @@ export async function showDailyBriefing(context: vscode.ExtensionContext): Promi
 /**
  * Open chat panel helper
  */
-async function openChatPanel(message: string): Promise<void> {
+async function openChatPanel(_message: string): Promise<void> {
   // This is a placeholder - actual implementation would use VS Code Chat API
   // For now, we show the briefing in a document
 }

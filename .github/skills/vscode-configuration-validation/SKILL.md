@@ -1,6 +1,6 @@
 ---
-name: "VS Code Configuration Validation"
-description: "Validate VS Code extension manifest against runtime code usage"
+name: vscode-configuration-validation
+description: Validate VS Code extension manifest against runtime code usage
 ---
 
 # VS Code Extension Configuration Validation

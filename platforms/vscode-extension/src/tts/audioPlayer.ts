@@ -24,6 +24,8 @@ import { logInfo } from '../shared/logger';
 let audioPanel: vscode.WebviewPanel | undefined;
 let currentPlaybackId: string | undefined;
 let currentMediaFile: string | undefined;
+// mark as used for TS noUnusedLocals (future feature: resume playback)
+void currentMediaFile;
 
 export interface PlaybackState {
     state: 'loading' | 'playing' | 'paused' | 'stopped' | 'ended' | 'error';

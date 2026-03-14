@@ -1,7 +1,7 @@
 ---
-name: "Work-Life Balance Skill"
-description: "Detect burnout signals and proactively support sustainable productivity."
-applyTo: "**/*focus*,**/*session*,**/*goal*,**/*streak*,**/*break*,**/*health*"
+name: work-life-balance
+description: Detect burnout signals and proactively support sustainable productivity.
+applyTo: '**/*focus*,**/*session*,**/*goal*,**/*streak*,**/*break*,**/*health*'
 ---
 
 # Work-Life Balance Skill

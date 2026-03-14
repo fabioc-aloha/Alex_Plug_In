@@ -1,6 +1,8 @@
 ---
-name: "Project Management Skill"
-description: "Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work, and safety-first release gates."
+name: project-management
+description: >-
+  Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work,
+  and safety-first release gates.
 ---
 
 # Project Management Skill

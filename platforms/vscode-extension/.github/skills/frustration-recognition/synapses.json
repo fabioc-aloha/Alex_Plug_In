@@ -4,7 +4,20 @@
   "skillId": "frustration-recognition",
   "version": "1.0.0",
   "lastUpdated": "2026-02-10",
-  "connections": [],
+  "connections": [
+    {
+      "type": "when",
+      "when": "frustrated|stuck|nothing works|wtf",
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "yields": [
+        "root-cause-analysis",
+        "debugging-patterns",
+        "coaching-techniques"
+      ],
+      "weight": 0.9,
+      "notes": "When frustration keywords appear, pivot to RCA/debug patterns and supportive coaching"
+    }
+  ],
   "synapses": [
     {
       "target": ".github/skills/rubber-duck-debugging/SKILL.md",

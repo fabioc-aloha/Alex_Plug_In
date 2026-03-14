@@ -1,6 +1,6 @@
 ---
-name: "Lint-Clean Markdown Skill"
-description: "Write markdown that passes linting on first attempt by internalizing common rules."
+name: lint-clean-markdown
+description: Write markdown that passes linting on first attempt by internalizing common rules.
 ---
 
 # Lint-Clean Markdown Skill

@@ -4,7 +4,20 @@
   "skillId": "skill-building",
   "version": "1.0.0",
   "lastUpdated": "2026-02-10",
-  "connections": [],
+  "connections": [
+    {
+      "type": "when",
+      "when": "add skill|new skill|skill idea|skill request",
+      "target": ".github/skills/skill-catalog-generator/SKILL.md",
+      "yields": [
+        "skill-catalog-generator",
+        "research-first-development",
+        "brain-qa"
+      ],
+      "weight": 0.85,
+      "notes": "When user mentions creating skills, route to catalog, research-first workflow, and brain QA"
+    }
+  ],
   "synapses": [
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",

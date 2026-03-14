@@ -8,7 +8,7 @@
  * Each record: id, date, topic, summary, filesChanged, tags, workspace
  */
 
-import * as vscode from 'vscode';
+// import * as vscode from 'vscode';
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs-extra';

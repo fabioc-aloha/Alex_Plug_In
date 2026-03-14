@@ -40,7 +40,7 @@ export class GlobalKnowledgeSearchTool implements vscode.LanguageModelTool<IGlob
     
     async prepareInvocation(
         options: vscode.LanguageModelToolInvocationPrepareOptions<IGlobalKnowledgeSearchParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: `Searching global knowledge for: ${options.input.query}`,
@@ -56,7 +56,7 @@ export class GlobalKnowledgeSearchTool implements vscode.LanguageModelTool<IGlob
 
     async invoke(
         options: vscode.LanguageModelToolInvocationOptions<IGlobalKnowledgeSearchParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
         await ensureGlobalKnowledgeDirectories();
@@ -84,7 +84,7 @@ export class GlobalKnowledgeSearchTool implements vscode.LanguageModelTool<IGlob
         let result = `## Global Knowledge Search Results\n\n`;
         result += `Found **${results.length}** relevant entries for "${query}":\n\n`;
 
-        for (const { entry, relevance } of results) {
+        for (const { entry /*, relevance*/ } of results) {
             const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
             result += `### ${typeEmoji} ${entry.title}\n`;
             result += `- **Type**: ${entry.type} | **Category**: ${entry.category}\n`;
@@ -121,7 +121,7 @@ export class SaveInsightTool implements vscode.LanguageModelTool<ISaveInsightPar
     
     async prepareInvocation(
         options: vscode.LanguageModelToolInvocationPrepareOptions<ISaveInsightParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: `Saving insight: ${options.input.title}`,
@@ -138,7 +138,7 @@ export class SaveInsightTool implements vscode.LanguageModelTool<ISaveInsightPar
 
     async invoke(
         options: vscode.LanguageModelToolInvocationOptions<ISaveInsightParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
         await ensureGlobalKnowledgeDirectories();
@@ -196,7 +196,7 @@ export class PromoteKnowledgeTool implements vscode.LanguageModelTool<IPromoteKn
     
     async prepareInvocation(
         options: vscode.LanguageModelToolInvocationPrepareOptions<IPromoteKnowledgeParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: `Promoting ${path.basename(options.input.filePath)} to global knowledge`,
@@ -213,7 +213,7 @@ export class PromoteKnowledgeTool implements vscode.LanguageModelTool<IPromoteKn
 
     async invoke(
         options: vscode.LanguageModelToolInvocationOptions<IPromoteKnowledgeParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
         const { filePath, category, additionalTags } = options.input;
@@ -261,8 +261,8 @@ This knowledge is now available across all your projects!
 export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Record<string, never>> {
     
     async prepareInvocation(
-        options: vscode.LanguageModelToolInvocationPrepareOptions<Record<string, never>>,
-        token: vscode.CancellationToken
+        _options: vscode.LanguageModelToolInvocationPrepareOptions<Record<string, never>>,
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: 'Retrieving global knowledge status...'
@@ -270,8 +270,8 @@ export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Recor
     }
 
     async invoke(
-        options: vscode.LanguageModelToolInvocationOptions<Record<string, never>>,
-        token: vscode.CancellationToken
+        _options: vscode.LanguageModelToolInvocationOptions<Record<string, never>>,
+        _token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
         await ensureGlobalKnowledgeDirectories();

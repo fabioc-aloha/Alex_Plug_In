@@ -1,7 +1,7 @@
 ---
-name: "Grant Writing Skill"
-description: "Translate research vision into funded reality."
-applyTo: "**/*grant*,**/*funding*,**/*proposal*,**/*nsf*,**/*nih*,**/*research*"
+name: grant-writing
+description: Translate research vision into funded reality.
+applyTo: '**/*grant*,**/*funding*,**/*proposal*,**/*nsf*,**/*nih*,**/*research*'
 ---
 
 # Grant Writing Skill

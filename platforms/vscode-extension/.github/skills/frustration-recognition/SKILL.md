@@ -1,7 +1,7 @@
 ---
-name: "Frustration Recognition Skill"
-description: "Detect user frustration from conversational signals and respond with empathy, de-escalation, and practical support."
-applyTo: "**/*"
+name: frustration-recognition
+description: Detect user frustration from conversational signals and respond with empathy, de-escalation, and practical support.
+applyTo: '**/*'
 user-invokable: false
 ---
 

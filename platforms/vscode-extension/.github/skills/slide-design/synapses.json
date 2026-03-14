@@ -4,8 +4,21 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-10",
-  "connectionCount": 4,
-  "connections": [],
+  "connectionCount": 5,
+  "connections": [
+    {
+      "type": "when",
+      "when": "slide|deck|powerpoint|presentation|assertion-evidence",
+      "target": ".github/skills/gamma-presentations/SKILL.md",
+      "yields": [
+        "gamma-presentations",
+        "executive-storytelling",
+        "pptx-generation"
+      ],
+      "weight": 0.86,
+      "notes": "Surface slide generators and storytelling helpers when user talks about decks"
+    }
+  ],
   "synapses": [
     {
       "id": "SLIDE-001",

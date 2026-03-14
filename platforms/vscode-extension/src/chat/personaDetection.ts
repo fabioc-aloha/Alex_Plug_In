@@ -37,7 +37,6 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as os from 'os';
 import * as workspaceFs from '../shared/workspaceFs';
-import { assertBounded, assertDefined, assertNonEmpty } from '../shared/assertions';
 
 // ============================================================================
 // CONFIDENCE THRESHOLDS & LIMITS
@@ -45,8 +44,7 @@ import { assertBounded, assertDefined, assertNonEmpty } from '../shared/assertio
 
 /** Confidence threshold for Focus session detection (P1) */
 const CONFIDENCE_FOCUS = 0.95;
-/** Confidence threshold for Focus session tech match */
-const CONFIDENCE_FOCUS_TECH = 0.9;
+// const CONFIDENCE_FOCUS_TECH = 0.9; // reserved for future focus tech matching
 /** Confidence threshold for Session goal detection (P2) */
 const CONFIDENCE_GOAL = 0.85;
 /** Confidence threshold for Project phase detection (P3) */
@@ -64,10 +62,9 @@ const THRESHOLD_PRIORITY_5 = 0.7;
 /** Default confidence for fallback detection */
 const CONFIDENCE_FALLBACK = 0.5;
 
-/** Max directory entries to scan */
-const MAX_DIR_ENTRIES = 50;
-/** Max subdirectory entries to scan */
-const MAX_SUBDIR_ENTRIES = 10;
+// Reserved for future filesystem heuristics (currently unused)
+// const MAX_DIR_ENTRIES = 50;
+// const MAX_SUBDIR_ENTRIES = 10;
 
 
 // ============================================================================
@@ -76,9 +73,6 @@ const MAX_SUBDIR_ENTRIES = 10;
 import {
     PersonaSignal,
     Persona,
-    LLMPersona,
-    EasterEgg,
-    getEasterEggOverride,
     PERSONAS,
 } from './personaDefinitions';
 
@@ -86,10 +80,10 @@ import {
 export {
     PersonaSignal,
     Persona,
-    LLMPersona,
-    EasterEgg,
-    getEasterEggOverride,
     PERSONAS,
+    getEasterEggOverride,
+    EasterEgg,
+    LLMPersona,
 } from './personaDefinitions';
 
 // ============================================================================

@@ -4,7 +4,7 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-11",
-  "connectionCount": 3,
+  "connectionCount": 4,
   "connections": [],
   "synapses": [
     {

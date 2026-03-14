@@ -8,16 +8,11 @@ import { logInfo } from '../shared/logger';
 import {
     ALEX_GLOBAL_HOME,
     GLOBAL_KNOWLEDGE_PATHS,
-    GLOBAL_KNOWLEDGE_PREFIXES,
-    GLOBAL_KNOWLEDGE_CATEGORIES,
-    GlobalKnowledgeCategory,
     IGlobalKnowledgeEntry,
     IGlobalKnowledgeIndex,
     IProjectRegistry,
     IProjectRegistryEntry
 } from '../shared/constants';
-// v5.9.6: Forgetting Curve reference counting (lazy import to avoid circular dependency checks)
-import { queueReferenceTouch } from './forgettingCurve';
 
 // ============================================================================
 // GLOBAL KNOWLEDGE BASE UTILITIES
@@ -877,7 +872,6 @@ export async function saveGlobalKnowledgeIndex(index: IGlobalKnowledgeIndex): Pr
  * Get or initialize the project registry (with locking)
  */
 export async function ensureProjectRegistry(): Promise<IProjectRegistry> {
-    const registryPath = getGlobalKnowledgePath('projectRegistry');
     await ensureGlobalKnowledgeDirectories();
     
     return await updateProjectRegistry((registry) => registry);

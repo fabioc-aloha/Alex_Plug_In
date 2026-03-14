@@ -1,7 +1,7 @@
 ---
-name: "Game Design Skill"
-description: "Game mechanics, level design, player psychology, systems balancing, and narrative design for game developers."
-applyTo: "**/*game*,**/*gameplay*,**/*level-design*,**/*player*,**/*npc*,**/*quest*,**/*gamedev*"
+name: game-design
+description: Game mechanics, level design, player psychology, systems balancing, and narrative design for game developers.
+applyTo: '**/*game*,**/*gameplay*,**/*level-design*,**/*player*,**/*npc*,**/*quest*,**/*gamedev*'
 ---
 
 # Game Design Skill

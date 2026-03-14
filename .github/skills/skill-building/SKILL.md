@@ -1,7 +1,7 @@
 ---
-name: "Skill Building"
-description: "Create effective, reusable skills from real-world experience for promotion to Master Alex"
-applyTo: "**/*skill*,**/*SKILL*,**/skills/**"
+name: skill-building
+description: Create effective, reusable skills from real-world experience for promotion to Master Alex
+applyTo: '**/*skill*,**/*SKILL*,**/skills/**'
 ---
 
 # Skill Building

@@ -11,8 +11,8 @@ import { ISynapseHealthParams } from './types';
 export class SynapseHealthTool implements vscode.LanguageModelTool<ISynapseHealthParams> {
     
     async prepareInvocation(
-        options: vscode.LanguageModelToolInvocationPrepareOptions<ISynapseHealthParams>,
-        token: vscode.CancellationToken
+        _options: vscode.LanguageModelToolInvocationPrepareOptions<ISynapseHealthParams>,
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: 'Scanning synaptic connections...',

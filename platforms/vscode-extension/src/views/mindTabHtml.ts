@@ -191,7 +191,9 @@ export function getMindTabHtml(ctx: MindTabContext): string {
                       const groupHeader = s.group && s.group !== lastGroup
                         ? `<div class="settings-group-header">${escapeHtml(s.group)}</div>`
                         : '';
-                      if (s.group) lastGroup = s.group;
+                      if (s.group) {
+                        lastGroup = s.group;
+                      }
                       return `${groupHeader}
                   <div class="setting-row">
                       <span>${escapeHtml(s.label)}</span>

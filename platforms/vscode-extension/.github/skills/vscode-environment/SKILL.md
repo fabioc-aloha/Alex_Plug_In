@@ -1,7 +1,7 @@
 ---
-name: "VS Code Environment Skill"
-description: "Optimal workspace setup for productivity."
-applyTo: "**/.vscode/**,**/settings.json,**/launch.json,**/tasks.json,**/extensions.json"
+name: vscode-environment
+description: Optimal workspace setup for productivity.
+applyTo: '**/.vscode/**,**/settings.json,**/launch.json,**/tasks.json,**/extensions.json'
 ---
 
 # VS Code Environment Skill

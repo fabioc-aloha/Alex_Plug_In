@@ -9,7 +9,8 @@ import { detectCognitiveLevel } from "../shared/cognitiveTier";
 function getGlobalAlexDir(): string {
   return path.join(os.homedir(), ".alex");
 }
-
+// mark as used (future feature hooks)
+void getGlobalAlexDir;
 // ============================================================================
 // RECOMMENDED EXTENSIONS
 // ============================================================================

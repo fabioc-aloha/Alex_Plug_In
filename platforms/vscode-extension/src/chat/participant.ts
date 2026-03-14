@@ -1,19 +1,16 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { logInfo } from '../shared/logger';
-import { runDreamProtocol } from '../commands/dream';
-import { runSelfActualization } from '../commands/self-actualization';
-import { processForInsights, detectInsights, getAutoInsightsConfig } from '../commands/autoInsights';
-import { getUserProfile, formatPersonalizedGreeting, IUserProfile } from './tools';
+import { processForInsights, getAutoInsightsConfig } from '../commands/autoInsights';
+import { getUserProfile, formatPersonalizedGreeting } from './tools';
 import { recordEmotionalSignal, resetEmotionalState, assessRiverOfIntegration, assessWindowOfTolerance, isLidFlipped as checkLidFlipped } from './emotionalMemory';
 import { gatherPeripheralContext } from './peripheralVision';
-import { scoreKnowledgeCoverage, recordCalibrationFeedback, recordModelUsage, getModelUsageSummary } from './honestUncertainty';
-import { validateWorkspace } from '../shared/utils';
-import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath, createGlobalInsight } from './globalKnowledge';
+import { scoreKnowledgeCoverage, recordCalibrationFeedback, recordModelUsage } from './honestUncertainty';
+import { createGlobalInsight } from './globalKnowledge';
 import { GlobalKnowledgeCategory } from '../shared/constants';
-import { detectAndUpdateProjectPersona, PERSONAS } from './personaDetection';
+// persona detection handled elsewhere (runtime); import removed
 import { speakIfVoiceModeEnabled } from '../ux/uxFeatures';
-import { getModelInfo, formatModelWarning, formatModelStatus, formatModelDashboard, getModelAdvice, formatModelAdvice, checkTaskModelMatch, detectModelTier, getTierInfo } from './modelIntelligence';
+import { getModelInfo, detectModelTier, getTierInfo } from './modelIntelligence';
 import { detectCognitiveState } from './avatarMappings';
 import { buildAlexSystemPrompt, PromptContext } from './promptEngine';
 import { assertDefined } from '../shared/assertions';
@@ -813,8 +810,8 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
 export const alexFollowupProvider: vscode.ChatFollowupProvider = {
     provideFollowups(
         result: IAlexChatResult,
-        context: vscode.ChatContext,
-        token: vscode.CancellationToken
+        _context: vscode.ChatContext,
+        _token: vscode.CancellationToken
     ): vscode.ChatFollowup[] {
         
         const followups: vscode.ChatFollowup[] = [];
@@ -931,10 +928,6 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
         
         // Context-aware followups based on response content
         if (!result.metadata.command || result.metadata.command === 'chat') {
-            // Analyze last response for relevant followups
-            const history = context.history;
-            const lastResponse = history.length > 0 ? history[history.length - 1] : null;
-            
             // Add contextual followups based on what was discussed
             followups.push(
                 { prompt: 'Can you explain that in more detail?', label: '🔍 More detail' },
@@ -956,7 +949,8 @@ export const alexFollowupProvider: vscode.ChatFollowupProvider = {
 /**
  * Module-level reference to the chat participant.
  */
-let _alexParticipant: vscode.ChatParticipant | null = null;
+// intentionally kept for future reuse; eslint-disable-next-line @typescript-eslint/no-unused-vars
+// Participant lifecycle caching handled internally; no static cache required at this time.
 
 /**
  * Register the Alex chat participant with dynamic avatar support.
@@ -965,7 +959,7 @@ let _alexParticipant: vscode.ChatParticipant | null = null;
 export function registerChatParticipant(context: vscode.ExtensionContext): vscode.ChatParticipant {
     const alex = vscode.chat.createChatParticipant('alex.cognitive', alexChatHandler);
     
-    _alexParticipant = alex;
+    // Participant cached via VS Code chat participant registry; no static cache needed
     
     // Set static default rocket icon (avatar system removed in v6.5.0)
     alex.iconPath = vscode.Uri.joinPath(

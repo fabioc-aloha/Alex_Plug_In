@@ -256,7 +256,7 @@ export async function updateActiveContext(
             }
 
             // Rebuild and write
-            const newSection = rebuildSection(ctx);
+            rebuildSection(ctx);
 
             return true;
         } catch (err) {

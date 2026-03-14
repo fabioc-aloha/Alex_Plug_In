@@ -1,6 +1,6 @@
 ---
-name: "Awareness Skill"
-description: "Proactive detection, self-correction, and epistemic vigilance"
+name: awareness
+description: Proactive detection, self-correction, and epistemic vigilance
 user-invokable: false
 ---
 

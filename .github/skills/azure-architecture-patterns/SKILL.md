@@ -1,6 +1,6 @@
 ---
-name: "Azure Architecture Patterns"
-description: "Well-Architected Framework principles, reference architectures, and best practices for cloud-native solutions"
+name: azure-architecture-patterns
+description: Well-Architected Framework principles, reference architectures, and best practices for cloud-native solutions
 user-invokable: false
 ---
 

@@ -1,7 +1,7 @@
 ---
-name: "Healthcare Informatics Skill"
-description: "Clinical terminology, healthcare compliance (HIPAA/HITECH), patient safety, and health data management."
-applyTo: "**/*health*,**/*clinical*,**/*medical*,**/*patient*,**/*hipaa*,**/*ehr*,**/*pharma*"
+name: healthcare-informatics
+description: Clinical terminology, healthcare compliance (HIPAA/HITECH), patient safety, and health data management.
+applyTo: '**/*health*,**/*clinical*,**/*medical*,**/*patient*,**/*hipaa*,**/*ehr*,**/*pharma*'
 ---
 
 # Healthcare Informatics Skill

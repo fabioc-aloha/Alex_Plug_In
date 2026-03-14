@@ -7,7 +7,7 @@ import {
     HealthStatus
 } from '../shared/healthCheck';
 import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
-import { validateWorkspace, getInstalledAlexVersion } from '../shared/utils';
+import { getInstalledAlexVersion } from '../shared/utils';
 import { escapeHtml, getNonce } from '../shared/sanitize';
 import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
 import { getPersonaAccent } from '../shared/skillConstants';

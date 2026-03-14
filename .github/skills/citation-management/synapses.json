@@ -4,8 +4,21 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-10",
-  "connectionCount": 4,
-  "connections": [],
+  "connectionCount": 5,
+  "connections": [
+    {
+      "type": "when",
+      "when": "citation|apa|mla|reference|bibliography",
+      "target": ".github/skills/literature-review/SKILL.md",
+      "yields": [
+        "literature-review",
+        "academic-research",
+        "dissertation-defense"
+      ],
+      "weight": 0.9,
+      "notes": "Route citation tasks to research/dissertation helpers"
+    }
+  ],
   "synapses": [
     {
       "id": "CITE-001",

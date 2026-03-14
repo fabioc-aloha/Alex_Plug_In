@@ -1,7 +1,10 @@
 ---
-name: "Academic Research Skill"
-description: "Patterns for thesis writing, dissertations, research papers, literature reviews, scholarly work, and venue-specific publication drafting"
-applyTo: "**/*paper*,**/*manuscript*,**/*journal*,**/*conference*,**/*CHI*,**/*HBR*,**/*publication*,**/*thesis*,**/*dissertation*"
+name: academic-research
+description: >-
+  Patterns for thesis writing, dissertations, research papers, literature reviews, scholarly work, and venue-specific
+  publication drafting
+applyTo: >-
+  **/*paper*,**/*manuscript*,**/*journal*,**/*conference*,**/*CHI*,**/*HBR*,**/*publication*,**/*thesis*,**/*dissertation*
 ---
 
 # Academic Research Skill

@@ -1,6 +1,6 @@
 ---
-name: "Muscle Memory Recognition"
-description: "Identify opportunities to build automation scripts (muscles) from repetitive or heavy-lifting tasks"
+name: muscle-memory-recognition
+description: Identify opportunities to build automation scripts (muscles) from repetitive or heavy-lifting tasks
 ---
 
 # Muscle Memory Recognition

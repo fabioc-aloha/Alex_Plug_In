@@ -1,7 +1,7 @@
 ---
-name: "Legal Compliance Skill"
-description: "Legal research, contract analysis, regulatory compliance, and case law citation for legal professionals."
-applyTo: "**/*legal*,**/*compliance*,**/*contract*,**/*regulation*,**/*law*,**/*attorney*,**/*litigation*"
+name: legal-compliance
+description: Legal research, contract analysis, regulatory compliance, and case law citation for legal professionals.
+applyTo: '**/*legal*,**/*compliance*,**/*contract*,**/*regulation*,**/*law*,**/*attorney*,**/*litigation*'
 ---
 
 # Legal Compliance Skill

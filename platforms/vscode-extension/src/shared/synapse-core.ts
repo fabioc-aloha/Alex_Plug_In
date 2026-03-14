@@ -11,7 +11,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as workspaceFs from './workspaceFs';
 import { SYNAPSE_REGEX } from './constants';
-import { assertDefined, assertNonEmpty, assertBounded, assertAbsolutePath } from './assertions';
+import { assertDefined, assertBounded, assertAbsolutePath } from './assertions';
 
 export interface Synapse {
     sourceFile: string;

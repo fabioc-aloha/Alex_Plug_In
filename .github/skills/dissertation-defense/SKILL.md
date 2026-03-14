@@ -1,7 +1,9 @@
 ---
-name: "Dissertation Defense Skill"
-description: "Comprehensive preparation for doctoral dissertation defense including timeline management, presentation design, Q&A practice, mock sessions, and committee dynamics."
-applyTo: "**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*,**/*mock*,**/*q&a*"
+name: dissertation-defense
+description: >-
+  Comprehensive preparation for doctoral dissertation defense including timeline management, presentation design, Q&A
+  practice, mock sessions, and committee dynamics.
+applyTo: '**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*,**/*mock*,**/*q&a*'
 ---
 
 # Dissertation Defense Skill

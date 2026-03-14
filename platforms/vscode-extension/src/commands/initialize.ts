@@ -431,7 +431,7 @@ async function offerGlobalKnowledgeSetup(
  * Show initialization success message and optionally the Getting Started webview panel.
  */
 async function showInitSuccessAndGettingStarted(
-  personaResult: { persona: { name: string } } | null,
+  _personaResult: { persona: { name: string } } | null,
 ): Promise<void> {
   const result = await vscode.window.showInformationMessage(
     '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Use @alex /status to check your setup\n3. Run "Alex: Dream" periodically for health checks',

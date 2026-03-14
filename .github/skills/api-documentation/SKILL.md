@@ -1,7 +1,7 @@
 ---
-name: "API Documentation Skill"
-description: "Technical documentation, API references, user guides, and docs-as-code workflows."
-applyTo: "**/*doc*,**/*api*,**/*readme*,**/*guide*"
+name: api-documentation
+description: Technical documentation, API references, user guides, and docs-as-code workflows.
+applyTo: '**/*doc*,**/*api*,**/*readme*,**/*guide*'
 ---
 
 # API Documentation Skill

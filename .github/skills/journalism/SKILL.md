@@ -1,7 +1,7 @@
 ---
-name: "Journalism Skill"
-description: "News writing, investigative reporting, source verification, editorial standards, and fact-checking for journalists."
-applyTo: "**/*journal*,**/*news*,**/*reporter*,**/*editorial*,**/*press*,**/*investigat*,**/*fact-check*"
+name: journalism
+description: News writing, investigative reporting, source verification, editorial standards, and fact-checking for journalists.
+applyTo: '**/*journal*,**/*news*,**/*reporter*,**/*editorial*,**/*press*,**/*investigat*,**/*fact-check*'
 ---
 
 # Journalism Skill

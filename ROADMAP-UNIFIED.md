@@ -57,6 +57,45 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 
 > All completed v6.4.0, v6.4.5, and v6.5.0 work is in the [Appendix](#-appendix-completed-work).
 
+### 🚨 Pressing Issues (v6.6 Target)
+| Priority | Item | Action | Owner | Status |
+| --- | --- | --- | --- | --- |
+| P0 | Large-file refactors | Split `participant.ts`, `sharedStyles.ts`, `globalKnowledge*.ts`, `setupEnvironment.ts`, `ttsService.ts` into modules; add lint rule to flag >800L | Dev | 🚧 max-lines lint added (sharedStyles warns); refactor pending |
+| P0 | Audit-architecture gate | Add `node scripts/audit-architecture.cjs` to CI and fail on schema/trifecta drift | DevOps | ✅ in CI |
+| P0 | Skill activation index | Validate `memory-activation/SKILL.md` covers all skills; add check to audit script | Arch | ✅ audit script + CI |
+| P1 | Heir sync drift check | Add gate to detect excluded heir skills drifting on bulk synapse updates | Arch | ✅ script + CI |
+| P1 | VSIX size budget | Add size threshold (<5 MB) to quality-gate; warn at 4.5 MB | Build | 🚧 Gate 7 added (vsce missing warns) |
+| P1 | Doc drift / Mermaid lint | Integrate `markdownlint` + Mermaid init lint into CI; enforce pastel init template | Docs | 🚧 lint-docs script added (non-blocking warnings) |
+| P2 | Model + tool matrices | Auto-generate model/tool capability tables from code; ensure README alignment | Docs | ⏳ |
+| P2 | Worker/Teams readiness | Track VS Code `worker_agents` GA + Teams triggers; prep skeleton | Platform | ⏳ |
+| P2 | Agent Plugin distribution | 1.112 adds `Chat: Install Plugin from Source` + plugin-specific component paths (#300945). Prep Agent Plugin heir for direct install. | Platform | ⏳ new (1.112) |
+
+### `view_image` Adoption (1.112, Backlog)
+
+VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPEG/GIF/WEBP/BMP from disk with automatic resizing (OpenAI vision algo: max 2048px → 768px min side). No extension API needed. Merged, verified, shipping in 1.112 Stable.
+
+| Item | Description | Effort | Status |
+| --- | --- | :---: | --- |
+| Character reference validation | Agent uses `view_image` on `alex_docs/alex3/` images to verify visual consistency after generation | Low | ⏳ |
+| Banner/brand asset review | During `/generate-readme-banners` or brand workflows, agent views output PNG and assesses quality | Low | ⏳ |
+| Diagram verification | After Mermaid → image export, agent views rendered diagram to verify correctness | Low | ⏳ |
+| Subagent vision handoff | Builder generates image → Validator views it via `runSubagent` for visual QA | Medium | ⏳ |
+| Visual memory simplification | Replace base64-encoded reference portraits in skill files with disk paths; agent reads via `view_image` | Medium | ⏳ |
+
+### Quality Gates & Audits
+| Item | Status | Notes |
+| --- | --- | --- |
+| Enforce `lint:unused` | ✅ done | `scripts/lint-unused.cjs` fails on unallowlisted exports; allowlist via `ts-unused-exports.json` |
+| Synapse audit in CI | ✅ done | `.github/workflows/ci.yml` runs `node scripts/audit-synapses.cjs`; audit now clean |
+| Large-file refactors | 🚧 planned | max-lines lint added; refactor pending |
+| Audit-architecture cjs | ✅ in CI | `node scripts/audit-architecture.cjs` step added |
+| Skill activation index | ✅ in CI | `scripts/audit-skill-activation-index.cjs` added to CI and quality gate |
+| Heir sync drift check | ✅ in CI | `scripts/audit-heir-sync-drift.cjs` added to CI |
+| VSIX size budget | 🚧 Gate 7 added | `quality-gate.cjs` warns if >4.5 MB (vsce ls fallback) |
+| Doc drift / Mermaid lint | 🚧 script added | `scripts/lint-docs.cjs` (non-blocking; archives ignored) |
+| VSIX size budget | ⏳ automate | See pressing issues P1 |
+| Doc drift monitor | ⏳ backlog | See pressing issues P1 |
+
 ### Deferred Hooks (Low Priority)
 
 **16 hooks shipped** (10 global + 6 agent-scoped). These 7 were evaluated and deferred:
@@ -71,22 +110,36 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 | H17 | Global | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis | Analytics only; no immediate workflow benefit |
 | H19 | Global | PostToolUse | Synapse weight update — increment skill connection weights in real-time on heavy activation | Adds write contention to synapses.json; meditation already handles weight consolidation |
 
+### Global Knowledge v2 (Backlog)
+
+Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-instance sharing. Design doc: `alex_docs/research/CROSS-INSTANCE-EMPATHY-DESIGN-2026-03-14.md`.
+
+| Phase | What It Adds | Status |
+| --- | --- | --- |
+| 1 — Auto Capture | Emit `InsightCandidate` from session events; schema validation; auto-promote to `GK-*` patterns when threshold met | ⏳ backlog |
+| 2 — Shared Registry | Opt-in anonymized pattern sharing across Alex instances; differential privacy; cohort thresholds | ⏳ backlog |
+| 3 — Consumption | Routing weight adjustment from accumulated patterns; chat hints; skill pairing recommendations | ⏳ backlog |
+
 ### Blocked (VS Code API Dependencies)
 
-| Contract | Scope | Unblock Condition | Enables |
-| --- | --- | --- | --- |
-| **A** | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API | Real-time agent status in Agents tab |
-| **B** | Context budget API (`countTokens()`) | VS Code exposes `chat.contextBudget` | Context Budget bar + per-skill impact |
-| **C** | Full five-modality memory model | Memory persistence API | Mind tab live data |
-| **D** | Recently-used command tracking | Command history API | Adaptive UX (command history) |
+> **Last reviewed**: 2026-03-14 against VS Code 1.111 (stable) + 1.112 (insiders)
+
+| Contract | Scope | Unblock Condition | Enables | Status (1.112) |
+| --- | --- | --- | --- | --- |
+| **A** | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API | Real-time agent status in Agents tab | ❌ Still blocked — no agent state API. 1.111 added agent-scoped hooks (`chat.useCustomAgentHooks`) and 1.112 adds `~/.copilot/hooks` global path, but neither exposes active/queued/idle state. |
+| **B** | Context budget API | VS Code exposes `chat.contextBudget` (denominator) | Context Budget bar + per-skill impact | 🟡 Partial — `countTokens()` is stable on `LanguageModelChat` (numerator exists). 1.112 adds reserved-context visual treatment in the context usage indicator (#295110). Still no API to read the total budget denominator programmatically. |
+| **C** | Full five-modality memory model | Memory persistence API | Mind tab live data | ❌ Still blocked — Copilot Memory is cloud/conversational only. No structured persistence API for extensions. `~/.alex/` file-based workaround remains. |
+| **D** | Recently-used command tracking | Command history API | Adaptive UX (command history) | ❌ Still blocked — no change in 1.111 or 1.112. |
 
 ### Gated (External Dependencies)
 
-| # | Task | Gate | Effort | Description |
-| --- | --- | --- | :---: | --- |
-| 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings |
-| 13 | **EmbeddedKnowledge adoption** | Microsoft makes it GA | 2h | Enable capability. knowledge/ folder already prepared |
-| 14 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target |
+> **Last reviewed**: 2026-03-14
+
+| # | Task | Gate | Effort | Description | Status |
+| --- | --- | --- | :---: | --- | --- |
+| 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings | ⏳ Gate approaching — 133 skills currently (audit-skill-activation-index); need Azure OpenAI key |
+| 13 | ~~**EmbeddedKnowledge adoption**~~ | ~~Microsoft makes it GA~~ | ~~2h~~ | ~~Enable capability~~ | ✅ **Done** — `declarativeAgent.json` declares `EmbeddedKnowledge` with 6 `.txt` knowledge files. Shipped in v6.2.0. Remove from gated list. |
+| 14 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. |
 
 ### Conditional (Trigger-Dependent)
 
@@ -101,11 +154,11 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 
 | Task | Description |
 | --- | --- |
-| **Team knowledge mesh** | Federated knowledge across team Alex instances |
+| **Team knowledge mesh** | Federated knowledge across team Alex instances (see GK v2 backlog above for Phase 2) |
 | **Collaborative code review** | Alex instances exchange insights across PRs |
 | **Organizational learning** | Team patterns from individual sessions |
 | **Expertise routing** | Cross-instance queries ("Ask Sarah's Alex about K8s") |
-| **Privacy-preserving learning** | Differential privacy for team aggregation |
+| **Privacy-preserving learning** | Differential privacy for team aggregation (see GK v2 Phase 2 design doc) |
 
 > **Note**: v7.0.0 represents a *different* North Star — organizational cognition rather than personal partnership. Deferred until the individual partnership is exceptional.
 

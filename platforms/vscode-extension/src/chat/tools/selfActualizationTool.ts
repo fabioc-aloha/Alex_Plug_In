@@ -17,8 +17,8 @@ import { ISelfActualizationParams } from './types';
 export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActualizationParams> {
     
     async prepareInvocation(
-        options: vscode.LanguageModelToolInvocationPrepareOptions<ISelfActualizationParams>,
-        token: vscode.CancellationToken
+        _options: vscode.LanguageModelToolInvocationPrepareOptions<ISelfActualizationParams>,
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: 'Running self-actualization protocol...',

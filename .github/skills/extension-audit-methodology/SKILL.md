@@ -1,7 +1,9 @@
 ---
-name: "Extension Audit Methodology"
-description: "Systematic 5-dimension audit framework for VS Code extensions — debug hygiene, dead code, performance, menu validation, dependency cleanup"
-applyTo: "**/*extension*,**/*audit*,**/package.json,**/tsconfig.json"
+name: extension-audit-methodology
+description: >-
+  Systematic 5-dimension audit framework for VS Code extensions — debug hygiene, dead code, performance, menu
+  validation, dependency cleanup
+applyTo: '**/*extension*,**/*audit*,**/package.json,**/tsconfig.json'
 ---
 
 # Extension Audit Methodology

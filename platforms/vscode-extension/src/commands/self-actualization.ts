@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { autoPromoteDuringMeditation, AutoPromotionResult } from '../chat/globalKnowledge';
+import { autoPromoteDuringMeditation } from '../chat/globalKnowledge';
 import { getMeditationEmotionalReview, saveSessionEmotion } from '../chat/emotionalMemory';
 import { getCalibrationSummary } from '../chat/honestUncertainty';
 import { getDecayReport } from '../chat/forgettingCurve';
@@ -56,7 +56,7 @@ interface SelfActualizationReport {
  * 4. Automated consolidation
  * 5. Meditation session documentation
  */
-export async function runSelfActualization(context: vscode.ExtensionContext): Promise<SelfActualizationReport | undefined> {
+export async function runSelfActualization(_context: vscode.ExtensionContext): Promise<SelfActualizationReport | undefined> {
     // Use smart workspace folder detection for multi-folder workspaces
     const workspaceResult = await getAlexWorkspaceFolder(true); // true = require Alex installed
     
@@ -189,6 +189,13 @@ export async function runSelfActualization(context: vscode.ExtensionContext): Pr
     } else {
         // All good - simple confirmation
         await vscode.window.showInformationMessage(message, 'OK');
+    }
+
+    // Optional UI panel (behind env flag to avoid surprise pop-ups)
+    if (process.env.ALEX_SHOW_SELF_ACT_PANEL === '1') {
+        showReportInPanel(report);
+    } else {
+        void showReportInPanel; // mark used for TS
     }
 
     return report;
@@ -667,7 +674,7 @@ ${report.globalKnowledgePromotion.updated.map(title => `- 🔄 **${title}**`).jo
 /**
  * Show report in a webview panel
  */
-function showReportInPanel(report: SelfActualizationReport): void {
+export function showReportInPanel(report: SelfActualizationReport): void {
     const panel = vscode.window.createWebviewPanel(
         'alexSelfActualization',
         'Self-Actualization Report',

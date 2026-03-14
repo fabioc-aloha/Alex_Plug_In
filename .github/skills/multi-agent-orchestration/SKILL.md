@@ -1,8 +1,8 @@
 ---
-name: "Multi-Agent Orchestration"
-description: "Coordinate multiple AI agents for complex tasks — decomposition, delegation, and synthesis"
+name: multi-agent-orchestration
+description: Coordinate multiple AI agents for complex tasks — decomposition, delegation, and synthesis
 user-invokable: false
-applyTo: "**/*agent*,**/*orchestrat*,**/*multi*,**/*workflow*,**/*subagent*"
+applyTo: '**/*agent*,**/*orchestrat*,**/*multi*,**/*workflow*,**/*subagent*'
 ---
 
 # Multi-Agent Orchestration Skill

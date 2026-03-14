@@ -4,8 +4,21 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-10",
-  "connectionCount": 5,
-  "connections": [],
+  "connectionCount": 6,
+  "connections": [
+    {
+      "type": "when",
+      "when": "executive|c-suite|vp|scqa|pyramid|minto",
+      "target": ".github/skills/slide-design/SKILL.md",
+      "yields": [
+        "slide-design",
+        "gamma-presentations",
+        "coaching-techniques"
+      ],
+      "weight": 0.87,
+      "notes": "Surface slide tooling and coaching prompts for exec storytelling requests"
+    }
+  ],
   "synapses": [
     {
       "id": "EXEC-001",

@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
 
 // ─── Configuration ────────────────────────────────────────────────────────────
 
@@ -355,6 +356,133 @@ function checkWalkthroughSync() {
   }
 }
 
+// ─── Gate 6: Skill Frontmatter Integrity ─────────────────────────────────────
+
+function parseFrontmatter(content) {
+  // Minimal frontmatter parser: expects leading --- block
+  const fmMatch = content.match(/^---\s*([\s\S]*?)\n---/);
+  if (!fmMatch) return {};
+  const body = fmMatch[1];
+  const result = {};
+  for (const line of body.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const idx = trimmed.indexOf(':');
+    if (idx === -1) continue;
+    const key = trimmed.slice(0, idx).trim();
+    const val = trimmed.slice(idx + 1).trim().replace(/^['"]|['"]$/g, '');
+    result[key] = val;
+  }
+  return result;
+}
+
+function collectSkillDirs(baseDir) {
+  if (!fs.existsSync(baseDir)) return [];
+  return fs.readdirSync(baseDir, { withFileTypes: true })
+    .filter(d => d.isDirectory())
+    .map(d => path.join(baseDir, d.name));
+}
+
+function checkSkillFrontmatterIntegrity() {
+  header('Gate 6: Skill Frontmatter Integrity');
+
+  const skillRoots = [
+    path.resolve(ROOT, '..', '..', '.github', 'skills'),
+    path.resolve(ROOT, '.github', 'skills'),
+  ];
+
+  let errors = 0;
+  let checked = 0;
+
+  for (const rootDir of skillRoots) {
+    const skillDirs = collectSkillDirs(rootDir);
+    for (const skillDir of skillDirs) {
+      const folder = path.basename(skillDir);
+      const skillMd = path.join(skillDir, 'SKILL.md');
+      if (!fs.existsSync(skillMd)) {
+        warn(`SKILL.md missing for ${folder} (${path.relative(ROOT, skillDir)})`);
+        continue;
+      }
+      const content = fs.readFileSync(skillMd, 'utf8');
+      const fm = parseFrontmatter(content);
+      checked++;
+      const fmName = fm.name || fm.Name || fm.title;
+      if (!fmName) {
+        fail(`Frontmatter name missing in ${path.relative(ROOT, skillMd)}`);
+        errors++;
+        continue;
+      }
+      const normA = String(fmName).trim().toLowerCase();
+      const normB = folder.trim().toLowerCase();
+      if (normA !== normB) {
+        fail(`Frontmatter name mismatch: ${folder} → '${fmName}' (${path.relative(ROOT, skillMd)})`);
+        errors++;
+      }
+    }
+  }
+
+  if (errors === 0) {
+    pass(`${checked} skills validated — frontmatter names match folder names`);
+  }
+}
+
+// ─── Gate 7: VSIX Size Budget ──────────────────────────────────────────────
+
+function checkVsixSizeBudget() {
+  header('Gate 7: VSIX Size Budget');
+  try {
+    const result = spawnSync('npx', ['vsce', 'ls'], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: 'pipe',
+    });
+    if (result.status !== 0) {
+      warn('vsce ls failed; skipping size check');
+      return;
+    }
+    const files = result.stdout.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+    let totalBytes = 0;
+    for (const rel of files) {
+      const full = path.join(ROOT, rel);
+      if (fs.existsSync(full)) {
+        totalBytes += fs.statSync(full).size;
+      }
+    }
+    const mb = totalBytes / (1024 * 1024);
+    if (mb > 5) {
+      fail(`VSIX size ${mb.toFixed(2)} MB exceeds 5 MB budget`);
+    } else if (mb > 4.5) {
+      warn(`VSIX size ${mb.toFixed(2)} MB approaching limit`);
+    } else {
+      pass(`VSIX size ${mb.toFixed(2)} MB within budget`);
+    }
+  } catch (err) {
+    warn(`VSIX size check skipped: ${err.message}`);
+  }
+}
+
+// ─── Gate 8: Skill Activation Index ────────────────────────────────────────
+
+function checkSkillActivationIndex() {
+  header('Gate 8: Skill Activation Index');
+  try {
+    const result = spawnSync('node', [path.resolve(ROOT, '..', '..', 'scripts', 'audit-skill-activation-index.cjs')], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: 'pipe',
+    });
+    if (result.status !== 0) {
+      process.stderr.write(result.stdout || '');
+      process.stderr.write(result.stderr || '');
+      fail('Skill activation index audit failed');
+    } else {
+      pass('Skill activation index audit passed');
+    }
+  } catch (err) {
+    warn(`Skill activation audit skipped: ${err.message}`);
+  }
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 function main() {
@@ -367,6 +495,9 @@ function main() {
   checkDocFileInclusion();
   checkMarkdownTables();
   checkWalkthroughSync();
+  checkSkillFrontmatterIntegrity();
+  checkVsixSizeBudget();
+  checkSkillActivationIndex();
 
   // ─── Summary ──────────────────────────────────────────────────────────────
 

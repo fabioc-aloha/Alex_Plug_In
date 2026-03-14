@@ -1,7 +1,7 @@
 ---
-name: "Enterprise Integration Skill"
-description: "Patterns for Microsoft Graph, Azure AD, and enterprise feature integration in VS Code extensions"
-applyTo: "**/enterprise/**,**/graph/**,**/auth/**"
+name: enterprise-integration
+description: Patterns for Microsoft Graph, Azure AD, and enterprise feature integration in VS Code extensions
+applyTo: '**/enterprise/**,**/graph/**,**/auth/**'
 ---
 
 # Enterprise Integration Skill

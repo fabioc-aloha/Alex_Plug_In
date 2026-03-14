@@ -3,7 +3,6 @@ import { getAlexWorkspaceFolder } from '../shared/utils';
 import {
     DreamResult,
     runDreamCore,
-    generateReportMarkdown,
     saveReport
 } from '../shared/synapse-core';
 
@@ -18,7 +17,7 @@ export interface DreamOptions {
     silent?: boolean;
 }
 
-export async function runDreamProtocol(context: vscode.ExtensionContext, options?: DreamOptions): Promise<DreamResult | undefined> {
+export async function runDreamProtocol(_context: vscode.ExtensionContext, options?: DreamOptions): Promise<DreamResult | undefined> {
     const silent = options?.silent ?? false;
     
     // Use smart workspace folder detection for multi-folder workspaces

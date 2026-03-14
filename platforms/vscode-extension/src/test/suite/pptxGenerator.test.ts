@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { parseMarkdownToSlides, SlideContent } from '../../generators/pptxGenerator';
+import { parseMarkdownToSlides } from '../../generators/pptxGenerator';
 
 suite('PPTX Generator Test Suite', () => {
 

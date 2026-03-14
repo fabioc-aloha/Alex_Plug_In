@@ -1,0 +1,442 @@
+{
+    "ignoreFiles": [
+        "src/extension.ts",
+        "src/commands/**",
+        "src/chat/**",
+        "src/tts/**",
+        "src/views/**",
+        "src/ux/**",
+        "src/services/**",
+        "src/shared/**",
+        "src/generators/**",
+        "src/test/**",
+        "src/commandsDeveloperHandlers.ts"
+    ],
+    "ignoreExports": {
+        "src/extension.ts": [
+            "isOperationInProgress",
+            "activate",
+            "deactivate"
+        ],
+        "src/commandsDeveloperHandlers.ts": [
+            "CodeContext",
+            "promptForCode",
+            "handleSkillReview"
+        ],
+        "src/commands/self-actualization.ts": [
+            "showReportInPanel"
+        ],
+        "src/commands/exportForM365.ts": [
+            "silentSyncToOneDrive"
+        ],
+        "src/commands/readAloud.ts": [
+            "readAloud",
+            "saveAsAudio",
+            "stopReading",
+            "readWithVoice",
+            "speakPrompt",
+            "estimateDuration"
+        ],
+        "src/commands/setupEnvironment.ts": [
+            "checkRecommendedExtensions",
+            "offerExtensionInstall"
+        ],
+        "src/commands/autoInsights.ts": [
+            "DetectedInsight",
+            "detectInsights",
+            "isDuplicateInsight",
+            "promptToSaveInsight",
+            "AutoInsightsConfig"
+        ],
+        "src/commands/dream.ts": [
+            "DreamResult",
+            "DreamOptions"
+        ],
+        "src/commands/exportForM365.ts": [
+            "silentSyncToOneDrive"
+        ],
+        "src/commands/githubIntegration.ts": [
+            "GitHubIssue",
+            "GitHubRepo",
+            "detectGitHubRepo",
+            "fetchGitHubIssues",
+            "openIssueInBrowser",
+            "GitHubPullRequest",
+            "fetchGitHubPRs",
+            "fetchPRDiff"
+        ],
+        "src/commands/heirValidation.ts": [
+            "HeirValidationResult",
+            "runHeirValidation"
+        ],
+        "src/commands/inheritSkill.ts": [
+            "registerInheritSkillCommand"
+        ],
+        "src/commands/readAloud.ts": [
+            "readAloud",
+            "saveAsAudio",
+            "stopReading",
+            "readWithVoice",
+            "speakPrompt",
+            "estimateDuration"
+        ],
+        "src/commands/setupEnvironment.ts": [
+            "checkRecommendedExtensions",
+            "offerExtensionInstall"
+        ],
+        "src/commands/setupGlobalKnowledge.ts": [
+            "isGlobalKnowledgeSetup",
+            "registerSetupGlobalKnowledgeCommand"
+        ],
+        "src/chat/tools/index.ts": [
+            "registerLanguageModelTools",
+            "SynapseHealthTool",
+            "MemorySearchTool",
+            "ArchitectureStatusTool",
+            "McpRecommendationTool",
+            "UserProfileTool",
+            "SelfActualizationTool",
+            "HeirValidationTool",
+            "CognitiveStateUpdateTool"
+        ],
+        "src/shared/utils.ts": [
+            "scanSynapseHealth",
+            "findAllMemoryFiles",
+            "countMemoryFiles",
+            "getExtensionVersion",
+            "isAlexInstalled"
+        ],
+        "src/shared/synapse-core.ts": [
+            "parseSynapsesFromFile",
+            "buildFileIndex",
+            "generateReportMarkdown"
+        ],
+        "src/shared/logger.ts": [
+            "logWarn",
+            "logError",
+            "showLog"
+        ],
+        "src/chat/emotionalMemory.ts": [
+            "EmotionalSignal",
+            "SessionEmotionalArc",
+            "MoodContext",
+            "computeSessionArc",
+            "getCurrentSignalCount",
+            "RiverZone",
+            "WindowZone",
+            "RiverAssessment",
+            "WindowAssessment"
+        ],
+        "src/chat/fileWatcher.ts": [
+            "FileOpenRecord",
+            "TodoHotspot"
+        ],
+        "src/chat/forgettingCurve.ts": [
+            "DecayProfile",
+            "FreshnessScore",
+            "DecayEntry",
+            "DecayReport",
+            "ForgettingCeremonyResult",
+            "flushReferenceQueue",
+            "FreshnessFields",
+            "getDefaultDecayProfile",
+            "computeFreshnessScore",
+            "runForgettingCeremony"
+        ],
+        "src/chat/globalKnowledge.ts": [
+            "getRemoteAccessStatus",
+            "setGitHubToken",
+            "requestGitHubAuth",
+            "showRemoteAccessError",
+            "isRemoteGlobalKnowledgeAvailable",
+            "clearRemoteCache",
+            "getGlobalKnowledgeRepoPath",
+            "updateProjectRegistry",
+            "saveGlobalKnowledgeIndex",
+            "saveProjectRegistry",
+            "generateKnowledgeId",
+            "createGlobalPattern",
+            "updateGlobalPattern",
+            "promoteToGlobalKnowledge",
+            "findRelevantKnowledge",
+            "DKFileEvaluation",
+            "AutoPromotionResult",
+            "evaluateDKFile",
+            "IMigrationResult",
+            "normalizeGlobalKnowledge",
+            "needsMigration",
+            "IGlobalKnowledgeSearchParams",
+            "GlobalKnowledgeSearchTool",
+            "ISaveInsightParams",
+            "SaveInsightTool",
+            "IPromoteKnowledgeParams",
+            "PromoteKnowledgeTool",
+            "GlobalKnowledgeStatusTool"
+        ],
+        "src/chat/honestUncertainty.ts": [
+            "ConfidenceLevel",
+            "CalibrationEntry",
+            "ModelUsageEntry",
+            "ModelUsageSummary",
+            "CalibrationSummary",
+            "FeedbackEntry"
+        ],
+        "src/chat/modelIntelligence.ts": [
+            "ModelTier",
+            "ModelTierInfo",
+            "TaskComplexity",
+            "CognitiveTask",
+            "isTierSufficient",
+            "getTask",
+            "getTasksForTier",
+            "getModelRecommendation",
+            "ModelRecommendation",
+            "detectTaskFromPrompt",
+            "MODEL_TIERS",
+            "COGNITIVE_TASKS",
+            "TIER_MODEL_SUGGESTIONS"
+        ],
+        "src/chat/participant.ts": [
+            "IAlexChatResult",
+            "EmotionalState",
+            "detectEmotionalState",
+            "generateEncouragement",
+            "alexChatHandler",
+            "alexFollowupProvider"
+        ],
+        "src/chat/peripheralVision.ts": [
+            "PeerProject",
+            "GitSummary",
+            "RecentChange",
+            "OutdatedPackage",
+            "DependencyFreshnessResult",
+            "TestRunnerStatus",
+            "getDependencyFreshness",
+            "getTestRunnerStatus",
+            "invalidatePeripheralCache"
+        ],
+        "src/chat/personaDetection.ts": [
+            "PersonaSignal",
+            "LLMPersona",
+            "ProjectPersona",
+            "updateWorkingMemorySlots"
+        ],
+        "src/chat/skillRecommendations.ts": [
+            "SkillLoadingContext",
+            "getSkillLoadingContext",
+            "wasRecommendationDismissed"
+        ],
+        "src/shared/constants.ts": [
+            "EXTENSION_SOURCE_PATHS",
+            "CONSOLIDATED_FILE_MAPPINGS",
+            "GLOBAL_KNOWLEDGE_CATEGORIES"
+        ],
+        "src/views/welcomeView.ts": [
+            "WelcomeViewProvider"
+        ],
+        "src/views/healthDashboard.ts": [
+            "openHealthDashboard"
+        ],
+        "src/views/memoryDashboard.ts": [
+            "openMemoryDashboard",
+            "registerMemoryDashboard"
+        ],
+        "src/views/cognitiveDashboard.ts": [
+            "registerCognitiveDashboard"
+        ],
+        "src/views/memoryTreeProvider.ts": [
+            "registerMemoryTreeView"
+        ],
+        "src/generators/illustrationIcons.ts": [
+            "ICON_CATEGORIES",
+            "STOCK_CATEGORIES"
+        ],
+        "src/generators/pptxGenerator.ts": [
+            "IllustrationType",
+            "PresentationOptions",
+            "GenerateResult",
+            "hasSlideStructure",
+            "analyzeSlideContent",
+            "generatePresentation",
+            "generateAndSavePresentation",
+            "generateFromMarkdown"
+        ],
+        "src/generators/pptxSlideTypes.ts": [
+            "addInlineIllustrations"
+        ],
+        "src/services/episodicMemory.ts": [
+            "EpisodicRecord",
+            "saveEpisodicRecord",
+            "queryEpisodicMemory",
+            "getRecentSessions",
+            "getSessionsByDateRange",
+            "buildEpisodicContext"
+        ],
+        "src/services/expertiseModel.ts": [
+            "ExpertiseLevel",
+            "KnownDomain",
+            "getExpertiseLevel",
+            "getAllExpertise"
+        ],
+        "src/services/illustrationService.ts": [
+            "IconifyOptions",
+            "DiceBearOptions",
+            "ICONIFY_PREFIXES",
+            "DICEBEAR_STYLES",
+            "DiceBearStyle",
+            "parseAvatarValue",
+            "svgToBase64DataUri",
+            "isUrlReachable"
+        ],
+        "src/services/logoService.ts": [
+            "findLocalLogo",
+            "listLocalLogos",
+            "fetchTickerLogoAsBase64",
+            "ResolvedLogo",
+            "resolveLogo",
+            "TICKER_DOMAINS",
+            "getTickerDomain"
+        ],
+        "src/services/outcomeTracker.ts": [
+            "AdviceRecord",
+            "DomainStats",
+            "trackAdvice",
+            "recordPositiveOutcome",
+            "recordNegativeOutcome"
+        ],
+        "src/services/replicateService.ts": [
+            "ReplicatePrediction",
+            "ReplicateModel",
+            "GenerateImageOptions",
+            "REPLICATE_MODELS",
+            "UpscalingModel",
+            "REPLICATE_MODEL_QUICK_PICK_ORDER",
+            "getPrediction",
+            "cancelPrediction",
+            "ModelQuickPickItem",
+            "UpscaleImageOptions",
+            "UpscalingQuickPickItem"
+        ],
+        "src/services/secretsManager.ts": [
+            "TokenConfig",
+            "setToken",
+            "clearAllTokens",
+            "exportSecretsToEnv",
+            "showExportSecretsUI",
+            "promptForToken",
+            "detectEnvSecrets",
+            "showEnvSecretsMigrationUI"
+        ],
+        "src/services/workflowEngine.ts": [
+            "WorkflowStep",
+            "WorkflowDefinition",
+            "listWorkflows"
+        ],
+        "src/shared/activeContextManager.ts": [
+            "updateActiveContext",
+            "updateObjective",
+            "updateFocusTrifectas",
+            "updateLastAssessed",
+            "updatePrinciples"
+        ],
+        "src/shared/assertions.ts": [
+            "AssertionError",
+            "assert",
+            "assertOneOf",
+            "assertHasProperty",
+            "assertPositiveInteger",
+            "assertNonNegativeInteger",
+            "PromptInvariants",
+            "assertPromptInvariants"
+        ],
+        "src/shared/cognitiveTier.ts": [
+            "CognitiveTierInfo",
+            "GitHubAccountInfo",
+            "CognitiveLevelResult",
+            "FeatureRequirement",
+            "isFeatureAvailable",
+            "getAllTiers",
+            "formatCognitiveLevelSummary",
+            "getAllFeatureRequirements"
+        ],
+        "src/shared/logger.ts": [
+            "logWarn",
+            "logError",
+            "showLog"
+        ],
+        "src/shared/nasaAssert.ts": [
+            "nasaAssertDefined",
+            "nasaAssertNonEmpty",
+            "nasaAssertPattern"
+        ],
+        "src/shared/sanitize.ts": [
+            "sanitizeAttribute",
+            "sanitizeUrl",
+            "sanitizeFilePath",
+            "UserProfileSchema",
+            "ProfileValidationResult",
+            "KnowledgeIndexEntry",
+            "validateKnowledgeIndex",
+            "SafeJsonResult"
+        ],
+        "src/shared/skillConstants.ts": [
+            "SKILL_DISPLAY_NAMES",
+            "PERSONA_ACCENT_COLORS",
+            "PERSONA_HEX_COLORS"
+        ],
+        "src/shared/synapse-core.ts": [
+            "Synapse",
+            "DreamReport",
+            "InheritanceLineage",
+            "InheritedSkillInfo",
+            "VersionDriftWarning",
+            "DocCountValidation",
+            "DocCountCheck",
+            "ProgressCallback",
+            "consolidatedMappings",
+            "memoryFilePatterns",
+            "DocCountConfig",
+            "defaultDocCounts",
+            "ignoredTargetFiles",
+            "synapseRegex",
+            "findMemoryFiles",
+            "buildFileIndex",
+            "validateDocCounts",
+            "scanInheritanceLineage",
+            "validateSynapseTarget",
+            "parseSynapsesFromFile",
+            "repairSynapse",
+            "generateReportMarkdown"
+        ],
+        "src/shared/utils.ts": [
+            "WorkspaceValidation",
+            "AlexWorkspaceFolderResult",
+            "getExtensionVersion",
+            "isAlexInstalled",
+            "SynapseScanResult",
+            "scanSynapseHealth",
+            "MemoryFileCounts",
+            "countMemoryFiles",
+            "findAllMemoryFiles",
+            "WorkspaceProtectionResult"
+        ],
+        "src/test/suite/index.ts": [
+            "run"
+        ],
+        "src/tts/index.ts": [
+            "synthesize",
+            "prepareTextForSpeech",
+            "detectLanguage",
+            "getVoiceForLanguage",
+            "playWithWebview",
+            "stopPlayback",
+            "isPlaying",
+            "saveAudioToFile",
+            "VOICE_PRESETS",
+            "LANGUAGE_VOICES",
+            "VoicePreset",
+            "TTSProgress",
+            "TTSChunkedProgress"
+        ]
+    }
+}

@@ -87,7 +87,9 @@ export function getSkillStoreTabHtml(ctx: SkillStoreTabContext): string {
           <div id="skill-list">
           ${CATEGORY_ORDER.map(cat => {
               const catSkills = skillCategories[cat];
-              if (!catSkills || catSkills.length === 0) return '';
+              if (!catSkills || catSkills.length === 0) {
+                return '';
+              }
               const catIcon = CATEGORY_ICONS[cat] || '📦';
               return `
               <div class="skill-category-group" data-tier="${cat}">

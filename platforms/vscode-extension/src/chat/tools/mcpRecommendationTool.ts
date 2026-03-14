@@ -8,7 +8,7 @@ export class McpRecommendationTool implements vscode.LanguageModelTool<IMcpRecom
     
     async prepareInvocation(
         options: vscode.LanguageModelToolInvocationPrepareOptions<IMcpRecommendationParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: `Finding MCP tools for: ${options.input.scenario}`,
@@ -17,13 +17,12 @@ export class McpRecommendationTool implements vscode.LanguageModelTool<IMcpRecom
 
     async invoke(
         options: vscode.LanguageModelToolInvocationOptions<IMcpRecommendationParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.LanguageModelToolResult> {
         
         // Update welcome view avatar — MCP recommendations = planning state
         vscode.commands.executeCommand('alex.setCognitiveState', 'planning');
 
-        const scenario = options.input.scenario.toLowerCase();
         const platform = options.input.platform || 'both';
         
         const recommendations: string[] = [];

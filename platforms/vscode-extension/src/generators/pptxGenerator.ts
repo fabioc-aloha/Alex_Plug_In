@@ -10,13 +10,11 @@
 import pptxgen from 'pptxgenjs';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { getIcon, getStockIllustration, svgToDataUri, listIconNames, listStockIllustrationNames } from './illustrationIcons';
-import { fileToBase64DataUri, getTickerLogoUrl, LogoServiceConfig } from '../services/logoService';
-import {
-    getIconifyUrl, 
-    getDiceBearUrl, 
-    parseIconifyValue
-} from '../services/illustrationService';
+import { getIcon, getStockIllustration, listIconNames, listStockIllustrationNames } from './illustrationIcons';
+// Unused services for now (reserved for future enhancements)
+// import { fileToBase64DataUri, getTickerLogoUrl, LogoServiceConfig } from '../services/logoService';
+// import { getIconifyUrl, getDiceBearUrl } from '../services/illustrationService';
+import { parseIconifyValue } from '../services/illustrationService';
 import {
     addTitleSlide,
     addContentSlide,

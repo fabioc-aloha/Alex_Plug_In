@@ -1,8 +1,8 @@
 ---
-name: "Chat Participant Patterns Skill"
-description: "VS Code Chat API patterns."
+name: chat-participant-patterns
+description: VS Code Chat API patterns.
 user-invokable: false
-applyTo: "**/*participant*,**/*chat*,**/*copilot*,**/lm/**"
+applyTo: '**/*participant*,**/*chat*,**/*copilot*,**/lm/**'
 ---
 
 # Chat Participant Patterns Skill

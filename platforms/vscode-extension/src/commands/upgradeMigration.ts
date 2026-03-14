@@ -219,7 +219,7 @@ async function executeMigrationItems(
 /**
  * Process checked items from MIGRATION-CANDIDATES.md
  */
-export async function completeMigration(context: vscode.ExtensionContext): Promise<void> {
+export async function completeMigration(_context: vscode.ExtensionContext): Promise<void> {
   const workspaceResult = await getAlexWorkspaceFolder(true);
   if (!workspaceResult.found) {
     vscode.window.showErrorMessage("No workspace with Alex found.");

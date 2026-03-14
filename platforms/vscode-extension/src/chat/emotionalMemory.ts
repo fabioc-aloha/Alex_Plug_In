@@ -16,7 +16,7 @@
  * @see ROADMAP-UNIFIED.md — Emotional Memory sub-section in v5.9.3
  */
 
-import * as vscode from 'vscode';
+// vscode import removed (unused)
 import * as workspaceFs from '../shared/workspaceFs';
 import * as path from 'path';
 
@@ -631,7 +631,7 @@ function findPeakMoments(signals: EmotionalSignal[]): SessionEmotionalArc['peaks
 function generateArcSummary(
     mood: SessionEmotionalArc['dominantMood'],
     trajectory: SessionEmotionalArc['trajectory'],
-    scores: SessionEmotionalArc['scores'],
+    _scores: SessionEmotionalArc['scores'],
     exchangeCount: number
 ): string {
     const parts: string[] = [];
@@ -680,7 +680,7 @@ function generateArcSummary(
 function generateToneGuidance(
     recentMood: MoodContext['recentMood'],
     streak: number,
-    sessions: SessionEmotionalArc[]
+    _sessions: SessionEmotionalArc[]
 ): string {
     if (recentMood === 'negative' && streak >= 3) {
         return 'User has had multiple frustrating sessions. Lead with patience and encouragement. Acknowledge difficulty before diving into solutions. Suggest smaller, achievable wins.';

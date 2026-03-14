@@ -2,7 +2,20 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
   "skillId": "coaching-techniques",
-  "connections": [],
+  "connections": [
+    {
+      "type": "when",
+      "when": "coach|coaching|mentoring|1:1",
+      "target": ".github/skills/frustration-recognition/SKILL.md",
+      "yields": [
+        "frustration-recognition",
+        "executive-storytelling",
+        "skill-building"
+      ],
+      "weight": 0.8,
+      "notes": "When user asks for coaching, surface emotional cues and narrative framing"
+    }
+  ],
   "synapses": [
     {
       "id": "coaching-stakeholder-001",

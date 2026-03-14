@@ -1,7 +1,7 @@
 ---
-name: "Career Development Skill"
-description: "Resume crafting, interview preparation, job search strategy, and professional growth planning."
-applyTo: "**/*resume*,**/*cv*,**/*interview*,**/*job*,**/*career*,**/*cover-letter*,**/*portfolio*,**/*linkedin*"
+name: career-development
+description: Resume crafting, interview preparation, job search strategy, and professional growth planning.
+applyTo: '**/*resume*,**/*cv*,**/*interview*,**/*job*,**/*career*,**/*cover-letter*,**/*portfolio*,**/*linkedin*'
 ---
 
 # Career Development Skill

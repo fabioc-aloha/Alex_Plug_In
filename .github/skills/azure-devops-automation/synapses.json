@@ -4,8 +4,20 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-10",
-  "connectionCount": 4,
-  "connections": [],
+  "connectionCount": 5,
+  "connections": [
+    {
+      "type": "when",
+      "when": "devops|pipeline|ci/cd|github actions|azure pipelines",
+      "target": ".github/skills/azure-architecture-patterns/SKILL.md",
+      "yields": [
+        "azure-architecture-patterns",
+        "bicep-avm-mastery"
+      ],
+      "weight": 0.85,
+      "notes": "Surface Azure architecture + IaC helpers when pipelines are discussed"
+    }
+  ],
   "synapses": [
     {
       "id": "DEVOPS-001",

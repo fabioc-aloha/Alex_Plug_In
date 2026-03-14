@@ -11,7 +11,7 @@ export class MemorySearchTool implements vscode.LanguageModelTool<IMemorySearchP
     
     async prepareInvocation(
         options: vscode.LanguageModelToolInvocationPrepareOptions<IMemorySearchParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
         return {
             invocationMessage: `Searching Alex memory for: ${options.input.query}`,

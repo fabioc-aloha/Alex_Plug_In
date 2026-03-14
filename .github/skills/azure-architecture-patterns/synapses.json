@@ -4,8 +4,21 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
   "created": "2026-02-10",
-  "connectionCount": 5,
-  "connections": [],
+  "connectionCount": 6,
+  "connections": [
+    {
+      "type": "when",
+      "when": "azure|cloud|bicep|terraform|well-architected",
+      "target": ".github/skills/azure-deployment-operations/SKILL.md",
+      "yields": [
+        "azure-deployment-operations",
+        "bicep-avm-mastery",
+        "azure-devops-automation"
+      ],
+      "weight": 0.9,
+      "notes": "Activate deployment and IaC helpers when Azure architecture patterns are referenced"
+    }
+  ],
   "synapses": [
     {
       "id": "AZURE-001",

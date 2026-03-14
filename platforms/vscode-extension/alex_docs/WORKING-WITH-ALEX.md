@@ -631,6 +631,23 @@ VS Code 1.111+ includes built-in slash commands for creating agent customization
 - These commands are **conversational** — describe what you want in plain language and the LLM generates the file
 - The generated files land in your workspace `.github/` directory — review before committing
 - For existing trifectas, use `/skill-building` instead (Alex's guided 6-phase workflow with quality gates)
+
+---
+
+## 🔧 Build & Quality Commands (Local)
+
+| Task | Command | Notes |
+|------|---------|-------|
+| TypeScript compile (no emit) | `npm run check-types` | Uses `tsc --noEmit` |
+| Strict unused check | `npx tsc --noEmit --noUnusedLocals --noUnusedParameters` | ✅ Passing as of 2026‑03‑13 |
+| ESLint | `npm run lint` | TS 5.4.x pinned; @typescript-eslint v7.6.0 |
+| Unused exports audit | `npm run lint:unused` | Wrapper script (`scripts/lint-unused.cjs`) uses `ts-unused-exports` + allowlist |
+| Quality gates | `npm run quality-gate` | Adds Gate 6: SKILL frontmatter name matches folder |
+| Tests | `npm test` | Runs VS Code test harness (227 tests) |
+| Welcome View routing tests | `npm test -- --grep "Welcome command routing"` | Uses `handleMessageForTest()` helper; covers message guard, tab persistence, toggle guard, `openDoc` routing |
+| Skill frontmatter fix | `node scripts/fix-skill-frontmatter.cjs` | Normalizes `name` in `SKILL.md` to folder name |
+
+> **CI recommendation**: Add `npm run check-types`, `npx tsc --noUnused*`, `npm run lint`, `npm run lint:unused`, and `npm run quality-gate` to the pipeline once allowlist is finalized.
 - Pair with the **Agent Debug Panel** (`Developer: Open Agent Debug Panel`) to verify loading
 
 ### Trifecta Decision Matrix

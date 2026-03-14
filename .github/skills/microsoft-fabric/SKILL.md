@@ -1,6 +1,6 @@
 ---
-name: "Microsoft Fabric"
-description: "Microsoft Fabric workspace management, governance, REST API patterns, and medallion architecture implementation"
+name: microsoft-fabric
+description: Microsoft Fabric workspace management, governance, REST API patterns, and medallion architecture implementation
 user-invokable: false
 ---
 

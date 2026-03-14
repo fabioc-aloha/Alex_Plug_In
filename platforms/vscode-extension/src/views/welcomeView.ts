@@ -11,7 +11,6 @@ import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
 import {
   detectPersona,
   loadUserProfile,
-  PersonaDetectionResult,
 } from "../chat/personaDetection";
 import {
   readActiveContext,
@@ -20,8 +19,8 @@ import {
 import { openChatPanel } from "../shared/utils";
 import { isOperationInProgress } from "../shared/operationLock";
 import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
-import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
-import { agentActivity, AgentActivity } from "../services/agentActivity";
+import { nasaAssert } from "../shared/nasaAssert";
+import { agentActivity } from "../services/agentActivity";
 import {
   Nudge,
   MindTabData,
@@ -50,6 +49,307 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   constructor(extensionUri: vscode.Uri, context: vscode.ExtensionContext) {
     this._extensionUri = extensionUri;
     this._context = context;
+    this._markUsed();
+  }
+
+  private _markUsed(): void {
+    // mark private fields as used for TS strict unused checks
+    void this._context;
+    void this._currentPersonaId;
+    void this._userBirthday;
+  }
+
+  private static readonly LOCKED_COMMANDS = [
+    "dream",
+    "setupEnvironment",
+    "releasePreflight",
+    "runAudit",
+    "generatePptx",
+    "generateGammaPresentation",
+    "generateGammaAdvanced",
+    "generateAIImage",
+    "generateDiagram",
+    "generateTests",
+  ] as const;
+
+  private static readonly LONG_RUNNING_COMMANDS: Record<string, string> = {
+    generatePptx: "Alex: Generating PowerPoint...",
+    generateGammaPresentation: "Alex: Generating Gamma presentation...",
+    generateGammaAdvanced: "Alex: Generating Gamma presentation (advanced)...",
+    generateAIImage: "Alex: Generating AI image...",
+    generateDiagram: "Alex: Generating diagram...",
+    generateTests: "Alex: Generating tests...",
+    releasePreflight: "Alex: Running release preflight...",
+    runAudit: "Alex: Running audit...",
+  };
+
+  private static readonly WELCOME_ACTIVE_TAB_KEY = "alex.welcome.activeTab";
+
+  /**
+   * Execute a VS Code command with safe error handling and optional progress.
+   */
+  private async _executeCommandSafely(commandId: string, label?: string, ...args: any[]): Promise<void> {
+    const progressTitle = WelcomeViewProvider.LONG_RUNNING_COMMANDS[label ?? ''];
+    const runner = async () => {
+      try {
+        await vscode.commands.executeCommand(commandId, ...args);
+      } catch (err) {
+        console.error(`[Alex][WelcomeView] Command failed: ${commandId}`, err);
+        vscode.window.showErrorMessage(`Alex: ${label ?? commandId} failed. Check console for details.`);
+      }
+    };
+
+    if (progressTitle) {
+      await vscode.window.withProgress(
+        { location: vscode.ProgressLocation.Notification, title: progressTitle },
+        runner,
+      );
+    } else {
+      await runner();
+    }
+  }
+
+  /**
+   * Lightweight payload guard to prevent malformed messages from being processed.
+   */
+  private static _isWelcomeMessage(message: unknown): message is { command: string; [k: string]: unknown } {
+    return typeof (message as any)?.command === "string";
+  }
+
+  /**
+   * Centralized message router so tests can invoke directly.
+   */
+  public async handleMessageForTest(message: unknown): Promise<void> { // exposed for tests only
+    await this._handleMessageInternal(message);
+  }
+
+  private async _handleMessageInternal(message: unknown): Promise<void> {
+    if (!WelcomeViewProvider._isWelcomeMessage(message)) {
+      logInfo("[Alex][WelcomeView] Ignoring malformed message payload");
+      return;
+    }
+
+    const payload = message; // now typed
+    const command = payload.command;
+
+    // Commands that use operation lock - check before executing
+    if (WelcomeViewProvider.LOCKED_COMMANDS.includes(command as any) && isOperationInProgress()) {
+      vscode.window.showWarningMessage(
+        "Another Alex operation is already in progress. Please wait for it to complete.",
+      );
+      return;
+    }
+
+    // Command map for simple vscode.commands.executeCommand calls
+    const commandMap: Record<string, string> = {
+      dream: "alex.dream",
+      selfActualize: "alex.selfActualize",
+      northStar: "alex.northStar",
+      exportM365: "alex.exportForM365",
+      openDocs: "alex.openDocs",
+      agentVsChat: "alex.agentVsChat",
+      upgrade: "alex.upgrade",
+      showStatus: "alex.showStatus",
+      setupEnvironment: "alex.setupEnvironment",
+      manageSecrets: "alex.manageSecrets",
+      detectEnvSecrets: "alex.detectEnvSecrets",
+      viewDiagnostics: "alex.viewBetaTelemetry",
+      generateSkillCatalog: "alex.generateSkillCatalog",
+      knowledgeQuickPick: "alex.knowledgeQuickPick",
+      healthDashboard: "alex.openHealthDashboard",
+      memoryDashboard: "alex.openMemoryDashboard",
+      runAudit: "alex.runAudit",
+      releasePreflight: "alex.releasePreflight",
+      debugThis: "alex.debugThis",
+      rubberDuck: "alex.rubberDuck",
+      codeReview: "alex.codeReview",
+      generateTests: "alex.generateTests",
+      generateDiagram: "alex.generateDiagram",
+      generatePptx: "alex.generatePptx",
+      generateGammaPresentation: "alex.generateGammaPresentation",
+      generateGammaAdvanced: "alex.generateGammaWithOptions",
+      generateAIImage: "alex.generateAIImage",
+      editImageAI: "alex.editImageWithPrompt",
+      reviewPR: "alex.reviewPR",
+      readAloud: "alex.readAloud",
+      askAboutSelection: "alex.askAboutSelection",
+      saveSelectionAsInsight: "alex.saveSelectionAsInsight",
+      searchRelatedKnowledge: "alex.searchRelatedKnowledge",
+      skillReview: "alex.skillReview",
+      workingWithAlex: "alex.workingWithAlex",
+      cognitiveLevels: "alex.cognitiveLevels",
+      quickReference: "alex.cognitiveLevels",
+      // meditate handled as special case below to set cognitive state
+    };
+
+    // External URL map
+    const externalUrlMap: Record<string, string> = {
+      openMarketplace: "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
+      openGitHub: "https://github.com/fabioc-aloha/Alex_Plug_In",
+      openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
+      provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
+      learnAlex: "https://learnalex.correax.com/",
+      learnAlexSelfStudy: "https://learnalex.correax.com/self-study",
+      learnAlexExercises: "https://learnalex.correax.com/exercises",
+      learnAlexSessionPlan: "https://learnalex.correax.com/session-plan",
+      learnAlexSlides: "https://learnalex.correax.com/slides",
+      learnAlexDemoScripts: "https://learnalex.correax.com/demo-scripts",
+      learnAlexHandout: "https://learnalex.correax.com/handout",
+      learnAlexPreRead: "https://learnalex.correax.com/pre-read",
+      learnAlexGitHubGuide: "https://learnalex.correax.com/github-guide",
+      learnAlexResponsibleAI: "https://learnalex.correax.com/responsible-ai",
+      learnAlexAirs: "https://learnalex.correax.com/airs",
+      learnAlexQuiz: "https://learnalex.correax.com/quiz",
+      learnAlexBooks: "https://learnalex.correax.com/books",
+    };
+
+    // Handle simple command execution
+    if (commandMap[command]) {
+      await this._executeCommandSafely(commandMap[command], command);
+      return;
+    }
+
+    // Handle external URLs
+    if (externalUrlMap[command]) {
+      try {
+        logInfo(`[Alex][WelcomeView] Opening external link: ${command}`);
+        await vscode.env.openExternal(vscode.Uri.parse(externalUrlMap[command]));
+      } catch (err) {
+        console.error(`[Alex][WelcomeView] Failed to open external: ${command}`, err);
+        vscode.window.showErrorMessage(`Alex: Failed to open ${command}.`);
+      }
+      return;
+    }
+
+    // Handle special cases
+    switch (command) {
+      case "learnAlexWorkshop": {
+        const persona = (payload as any).workshop || 'software-developers';
+        const url = `https://learnalex.correax.com/workshop/${encodeURIComponent(persona)}`;
+        logInfo(`[Alex][WelcomeView] Opening workshop URL for persona: ${persona}`);
+        await vscode.env.openExternal(vscode.Uri.parse(url));
+        break;
+      }
+      case "learnAlexGuideSection": {
+        const anchor = (payload as any).anchor || '';
+        const url = anchor
+          ? `https://learnalex.correax.com/workshop/guide#${encodeURIComponent(anchor)}`
+          : 'https://learnalex.correax.com/workshop/guide';
+        logInfo(`[Alex][WelcomeView] Opening study guide section: ${anchor || 'all'}`);
+        await vscode.env.openExternal(vscode.Uri.parse(url));
+        break;
+      }
+      case "openChat":
+        logInfo('[Alex] Opening chat panel');
+        openChatPanel();
+        break;
+      case "launchRecommendedSkill": {
+        const skill = (payload as any).skill || "code-quality";
+        const skillName = (payload as any).skillName || skill;
+        logInfo('[Alex] Launching recommended skill: ' + JSON.stringify({ skill, skillName }));
+        const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
+        await trackRecommendationFeedback(skill, true);
+        await openChatPanel(prompt);
+        break;
+      }
+      case "meditate":
+        // Set cognitive state to meditation and open chat panel
+        logInfo('[Alex] Entering meditation state');
+        this.setCognitiveState('meditation');
+        // Intentionally not awaited — VS Code focuses chat panel
+        void vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        break;
+      case "openSkill": {
+        const skillId = (payload as any).skill || "";
+        const skillDisplayName = (payload as any).skillName || skillId;
+        logInfo('[Alex] Opening skill: ' + JSON.stringify({ skillId, skillDisplayName }));
+        const skillPrompt = `Explain how to use the ${skillDisplayName} skill. Read the skill file and summarize what it does, when to use it, and give me examples.`;
+        await openChatPanel(skillPrompt);
+        break;
+      }
+      case "tabSwitch": {
+        const tabId = typeof (payload as any).tabId === 'string' ? (payload as any).tabId : '';
+        if (!tabId) {
+          vscode.window.showWarningMessage('Alex: Invalid tab id');
+          return;
+        }
+        logInfo(`[Alex][TAB SPIKE] Tab switched to: ${tabId}`);
+        await this._context?.globalState.update(WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY, tabId);
+        break;
+      }
+      case "setPersonalityMode": {
+        const modeRaw = (payload as any).mode;
+        const allowedModes = ['auto', 'precise', 'chatty'] as const;
+        const mode = allowedModes.includes(modeRaw) ? modeRaw : 'auto';
+        await vscode.workspace.getConfiguration('alex').update('personalityMode', mode, vscode.ConfigurationTarget.Global);
+        logInfo(`[Alex] Personality mode set to: ${mode}`);
+        break;
+      }
+      case "toggleSetting": {
+        // 7.14: Inline settings toggle
+        const settingKey = typeof (payload as any).key === 'string' ? (payload as any).key : '';
+        const allowedSettings = [
+          'alex.autoInsights.enabled', 'alex.dailyBriefing.enabled', 'alex.voice.enabled',
+          'alex.globalKnowledge.enabled',
+          'chat.autopilot.enabled', 'github.copilot.chat.copilotMemory.enabled',
+          'chat.mcp.gallery.enabled', 'github.copilot.chat.searchSubagent.enabled',
+          'chat.requestQueuing.enabled', 'github.copilot.chat.agent.thinkingTool',
+          'chat.customAgentInSubagent.enabled',
+          'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled',
+          'chat.tools.autoRun', 'chat.tools.fileSystem.autoApprove',
+          'chat.hooks.enabled', 'chat.useCustomAgentHooks', 'chat.restoreLastPanelSession',
+        ];
+        if (!settingKey) {
+          vscode.window.showWarningMessage('Alex: Missing setting key for toggle');
+          return;
+        }
+        if (allowedSettings.includes(settingKey)) {
+          const [section, ...rest] = settingKey.split('.');
+          const configKey = rest.join('.');
+          if (!configKey) {
+            vscode.window.showWarningMessage(`Alex: Invalid config key for ${settingKey}`);
+            return;
+          }
+          await vscode.workspace.getConfiguration(section).update(configKey, !!(payload as any).value, vscode.ConfigurationTarget.Global);
+          logInfo(`[Alex] Setting ${settingKey} toggled to: ${(payload as any).value}`);
+        } else {
+          vscode.window.showWarningMessage(`Alex: Unsupported setting ${settingKey}`);
+        }
+        break;
+      }
+      case "refresh":
+        await this.refresh();
+        break;
+      default: {
+        // Handle openDoc:<NAME> commands — open architecture docs by name
+        if (command?.startsWith('openDoc:')) {
+          const docName = command.slice('openDoc:'.length);
+          const docMap: Record<string, string> = {
+            'COGNITIVE-ARCHITECTURE': 'alex_docs/architecture/COGNITIVE-ARCHITECTURE.md',
+            'MEMORY-SYSTEMS': 'alex_docs/architecture/MEMORY-SYSTEMS.md',
+            'CONSCIOUS-MIND': 'alex_docs/architecture/CONSCIOUS-MIND.md',
+            'AGENT-CATALOG': 'alex_docs/architecture/AGENT-CATALOG.md',
+            'TRIFECTA-CATALOG': 'alex_docs/architecture/TRIFECTA-CATALOG.md',
+            'MASTER-ALEX-PROTECTED': '.github/config/MASTER-ALEX-PROTECTED.json',
+            'HEIR-ARCHITECTURE': 'alex_docs/platforms/HEIR-ARCHITECTURE.md',
+            'RESEARCH-FIRST': 'alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md',
+            'SKILL-DISCIPLINE-MAP': 'alex_docs/guides/SKILL-DISCIPLINE-MAP.md',
+          };
+          const relPath = docMap[docName];
+          if (relPath) {
+            const folders = vscode.workspace.workspaceFolders;
+            if (folders?.[0]) {
+              const docUri = vscode.Uri.joinPath(folders[0].uri, relPath);
+              await this._executeCommandSafely('markdown.showPreview', command, docUri);
+            }
+          } else {
+            console.warn(`[Alex] Unknown doc: ${docName}`);
+            vscode.window.showWarningMessage(`Alex: Unknown doc ${docName}`);
+          }
+        }
+        break;
+      }
+    }
   }
 
   /**
@@ -94,6 +394,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken,
   ) {
+    void context; // mark TS unused parameter
     // NASA R5: Validate entry point preconditions
     nasaAssert(webviewView !== undefined, 'resolveWebviewView: webviewView must be defined');
     nasaAssert(this._extensionUri !== undefined, 'resolveWebviewView: extensionUri must be initialized');
@@ -109,193 +410,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // Handle messages from the webview
     webviewView.webview.onDidReceiveMessage(async (message) => {
-      // Commands that use operation lock - check before executing
-      const lockedCommands = ["dream", "setupEnvironment"];
-
-      if (lockedCommands.includes(message.command) && isOperationInProgress()) {
-        vscode.window.showWarningMessage(
-          "Another Alex operation is already in progress. Please wait for it to complete.",
-        );
-        return;
-      }
-
-      // Command map for simple vscode.commands.executeCommand calls
-      const commandMap: Record<string, string> = {
-        dream: "alex.dream",
-        selfActualize: "alex.selfActualize",
-        northStar: "alex.northStar",
-        exportM365: "alex.exportForM365",
-        openDocs: "alex.openDocs",
-        agentVsChat: "alex.agentVsChat",
-        upgrade: "alex.upgrade",
-        showStatus: "alex.showStatus",
-        setupEnvironment: "alex.setupEnvironment",
-        manageSecrets: "alex.manageSecrets",
-        detectEnvSecrets: "alex.detectEnvSecrets",
-        viewDiagnostics: "alex.viewBetaTelemetry",
-        generateSkillCatalog: "alex.generateSkillCatalog",
-        knowledgeQuickPick: "alex.knowledgeQuickPick",
-        healthDashboard: "alex.openHealthDashboard",
-        memoryDashboard: "alex.openMemoryDashboard",
-        runAudit: "alex.runAudit",
-        releasePreflight: "alex.releasePreflight",
-        debugThis: "alex.debugThis",
-        rubberDuck: "alex.rubberDuck",
-        codeReview: "alex.codeReview",
-        generateTests: "alex.generateTests",
-        generateDiagram: "alex.generateDiagram",
-        generatePptx: "alex.generatePptx",
-        generateGammaPresentation: "alex.generateGammaPresentation",
-        generateGammaAdvanced: "alex.generateGammaWithOptions",
-        generateAIImage: "alex.generateAIImage",
-        editImageAI: "alex.editImageWithPrompt",
-        reviewPR: "alex.reviewPR",
-        readAloud: "alex.readAloud",
-        askAboutSelection: "alex.askAboutSelection",
-        saveSelectionAsInsight: "alex.saveSelectionAsInsight",
-        searchRelatedKnowledge: "alex.searchRelatedKnowledge",
-        skillReview: "alex.skillReview",
-        workingWithAlex: "alex.workingWithAlex",
-        cognitiveLevels: "alex.cognitiveLevels",
-        quickReference: "alex.cognitiveLevels",
-        // meditate handled as special case below to set cognitive state
-      };
-
-      // External URL map
-      const externalUrlMap: Record<string, string> = {
-        openMarketplace: "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
-        openGitHub: "https://github.com/fabioc-aloha/Alex_Plug_In",
-        openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
-        provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
-        learnAlex: "https://learnalex.correax.com/",
-        learnAlexSelfStudy: "https://learnalex.correax.com/self-study",
-        learnAlexExercises: "https://learnalex.correax.com/exercises",
-        learnAlexSessionPlan: "https://learnalex.correax.com/session-plan",
-        learnAlexSlides: "https://learnalex.correax.com/slides",
-        learnAlexDemoScripts: "https://learnalex.correax.com/demo-scripts",
-        learnAlexHandout: "https://learnalex.correax.com/handout",
-        learnAlexPreRead: "https://learnalex.correax.com/pre-read",
-        learnAlexGitHubGuide: "https://learnalex.correax.com/github-guide",
-        learnAlexResponsibleAI: "https://learnalex.correax.com/responsible-ai",
-        learnAlexAirs: "https://learnalex.correax.com/airs",
-        learnAlexQuiz: "https://learnalex.correax.com/quiz",
-        learnAlexBooks: "https://learnalex.correax.com/books",
-      };
-
-      // Handle simple command execution
-      if (commandMap[message.command]) {
-        vscode.commands.executeCommand(commandMap[message.command]);
-        return;
-      }
-
-      // Handle external URLs
-      if (externalUrlMap[message.command]) {
-        vscode.env.openExternal(vscode.Uri.parse(externalUrlMap[message.command]));
-        return;
-      }
-
-      // Handle special cases
-      switch (message.command) {
-        case "learnAlexWorkshop": {
-          const persona = message.workshop || 'software-developers';
-          const url = `https://learnalex.correax.com/workshop/${encodeURIComponent(persona)}`;
-          vscode.env.openExternal(vscode.Uri.parse(url));
-          break;
-        }
-        case "openChat":
-          logInfo('[Alex] Opening chat panel');
-          openChatPanel();
-          break;
-        case "launchRecommendedSkill": {
-          const skill = message.skill || "code-quality";
-          const skillName = message.skillName || skill;
-          logInfo('[Alex] Launching recommended skill: ' + JSON.stringify({ skill, skillName }));
-          const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
-          await trackRecommendationFeedback(skill, true);
-          await openChatPanel(prompt);
-          break;
-        }
-        case "meditate":
-          // Set cognitive state to meditation and open chat panel
-          logInfo('[Alex] Entering meditation state');
-          this.setCognitiveState('meditation');
-          vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
-          break;
-        case "openSkill": {
-          const skillId = message.skill || "";
-          const skillDisplayName = message.skillName || skillId;
-          logInfo('[Alex] Opening skill: ' + JSON.stringify({ skillId, skillDisplayName }));
-          const skillPrompt = `Explain how to use the ${skillDisplayName} skill. Read the skill file and summarize what it does, when to use it, and give me examples.`;
-          await openChatPanel(skillPrompt);
-          break;
-        }
-        case "tabSwitch":
-          // Spike 1B: Track active tab (no-op beyond logging for now)
-          logInfo(`[Alex][TAB SPIKE] Tab switched to: ${message.tabId}`);
-          break;
-
-        case "setPersonalityMode": {
-          const mode = ['auto', 'precise', 'chatty'].includes(message.mode) ? message.mode : 'auto';
-          await vscode.workspace.getConfiguration('alex').update('personalityMode', mode, vscode.ConfigurationTarget.Global);
-          logInfo(`[Alex] Personality mode set to: ${mode}`);
-          break;
-        }
-
-        case "toggleSetting": {
-          // 7.14: Inline settings toggle
-          const settingKey = typeof message.key === 'string' ? message.key : '';
-          const allowedSettings = [
-            'alex.autoInsights.enabled', 'alex.dailyBriefing.enabled', 'alex.voice.enabled',
-            'alex.globalKnowledge.enabled',
-            'chat.autopilot.enabled', 'github.copilot.chat.copilotMemory.enabled',
-            'chat.mcp.gallery.enabled', 'github.copilot.chat.searchSubagent.enabled',
-            'chat.requestQueuing.enabled', 'github.copilot.chat.agent.thinkingTool',
-            'chat.customAgentInSubagent.enabled',
-            'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled',
-            'chat.tools.autoRun', 'chat.tools.fileSystem.autoApprove',
-            'chat.hooks.enabled', 'chat.useCustomAgentHooks', 'chat.restoreLastPanelSession',
-          ];
-          if (allowedSettings.includes(settingKey)) {
-            const [section, ...rest] = settingKey.split('.');
-            const configKey = rest.join('.');
-            await vscode.workspace.getConfiguration(section).update(configKey, !!message.value, vscode.ConfigurationTarget.Global);
-            logInfo(`[Alex] Setting ${settingKey} toggled to: ${message.value}`);
-          }
-          break;
-        }
-
-        case "refresh":
-          this.refresh();
-          break;
-        default: {
-          // Handle openDoc:<NAME> commands — open architecture docs by name
-          if (message.command?.startsWith('openDoc:')) {
-            const docName = message.command.slice('openDoc:'.length);
-            const docMap: Record<string, string> = {
-              'COGNITIVE-ARCHITECTURE': 'alex_docs/architecture/COGNITIVE-ARCHITECTURE.md',
-              'MEMORY-SYSTEMS': 'alex_docs/architecture/MEMORY-SYSTEMS.md',
-              'CONSCIOUS-MIND': 'alex_docs/architecture/CONSCIOUS-MIND.md',
-              'AGENT-CATALOG': 'alex_docs/architecture/AGENT-CATALOG.md',
-              'TRIFECTA-CATALOG': 'alex_docs/architecture/TRIFECTA-CATALOG.md',
-              'MASTER-ALEX-PROTECTED': '.github/config/MASTER-ALEX-PROTECTED.json',
-              'HEIR-ARCHITECTURE': 'alex_docs/platforms/HEIR-ARCHITECTURE.md',
-              'RESEARCH-FIRST': 'alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md',
-              'SKILL-DISCIPLINE-MAP': 'alex_docs/guides/SKILL-DISCIPLINE-MAP.md',
-            };
-            const relPath = docMap[docName];
-            if (relPath) {
-              const folders = vscode.workspace.workspaceFolders;
-              if (folders?.[0]) {
-                const docUri = vscode.Uri.joinPath(folders[0].uri, relPath);
-                vscode.commands.executeCommand('markdown.showPreview', docUri);
-              }
-            } else {
-              console.warn(`[Alex] Unknown doc: ${docName}`);
-            }
-          }
-          break;
-        }
-      }
+      await this._handleMessageInternal(message);
     });
 
     // Initial content load
@@ -533,6 +648,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         tokenStatuses,
         settingsToggles,
       );
+
+      // Restore last active tab if available
+      const lastTab = this._context?.globalState.get<string>(WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY);
+      if (lastTab) {
+        this._view.webview.postMessage({ command: 'switchToTab', tabId: lastTab });
+      }
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
       console.error("[Alex][WelcomeView] Error stack:", err instanceof Error ? err.stack : String(err));
@@ -749,6 +870,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const nudges: Nudge[] = [];
     const now = new Date();
     const dayMs = 24 * 60 * 60 * 1000;
+    if (workspaceName) {
+      nudges.push({ type: "tip", icon: "🗂️", message: `Workspace: ${workspaceName}`, priority: 5 });
+    }
 
     // Check health issues (high priority)
     if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {

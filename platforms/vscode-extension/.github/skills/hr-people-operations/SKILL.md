@@ -1,7 +1,7 @@
 ---
-name: "HR & People Operations Skill"
-description: "Talent acquisition, employee lifecycle, compensation, labor regulations, and organizational development."
-applyTo: "**/*hr*,**/*hiring*,**/*recruit*,**/*onboard*,**/*compensation*,**/*employee*,**/*talent*,**/*workforce*"
+name: hr-people-operations
+description: Talent acquisition, employee lifecycle, compensation, labor regulations, and organizational development.
+applyTo: '**/*hr*,**/*hiring*,**/*recruit*,**/*onboard*,**/*compensation*,**/*employee*,**/*talent*,**/*workforce*'
 ---
 
 # HR & People Operations Skill

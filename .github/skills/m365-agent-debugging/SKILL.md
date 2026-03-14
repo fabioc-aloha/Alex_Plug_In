@@ -1,6 +1,6 @@
 ---
-name: "M365 Declarative Agent Debugging Skill"
-description: "Debug non-functional M365 Copilot declarative agents."
+name: m365-agent-debugging
+description: Debug non-functional M365 Copilot declarative agents.
 user-invokable: false
 ---
 

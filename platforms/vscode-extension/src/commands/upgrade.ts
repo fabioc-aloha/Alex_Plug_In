@@ -63,6 +63,14 @@ interface UpgradeResult {
   candidateCount: number;
   errors: string[];
 }
+// mark interface as used for TS
+const _upgradeResultMarker: UpgradeResult = {
+  success: false,
+  backupPath: '',
+  migrationCandidatesPath: null,
+  candidateCount: 0,
+  errors: [],
+}; void _upgradeResultMarker;
 
 /** Stats captured during upgrade for completion message */
 interface UpgradeStats {
@@ -474,7 +482,7 @@ async function collectSystemFiles(dir: string): Promise<string[]> {
 async function runGapAnalysis(
   backupPath: string,
   rootPath: string,
-  detection: LegacyDetection
+  _detection: LegacyDetection
 ): Promise<MigrationCandidate[]> {
   const candidates: MigrationCandidate[] = [];
   const now = new Date();

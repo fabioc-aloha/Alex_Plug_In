@@ -1,6 +1,6 @@
 ---
-name: "Infrastructure as Code Skill"
-description: "**Domain**: DevOps & Cloud Engineering"
+name: infrastructure-as-code
+description: '**Domain**: DevOps & Cloud Engineering'
 ---
 
 # Infrastructure as Code Skill

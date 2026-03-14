@@ -4,7 +4,20 @@
   "skillId": "dissertation-defense",
   "version": "1.0.0",
   "lastUpdated": "2026-02-10",
-  "connections": [],
+  "connections": [
+    {
+      "type": "when",
+      "when": "dissertation|defense|thesis|viva",
+      "target": ".github/skills/literature-review/SKILL.md",
+      "yields": [
+        "literature-review",
+        "citation-management",
+        "gamma-presentations"
+      ],
+      "weight": 0.88,
+      "notes": "When user mentions defense prep, recommend literature and citation helpers plus slide tooling"
+    }
+  ],
   "synapses": [
     {
       "target": ".github/skills/defense-qa-practice/SKILL.md",

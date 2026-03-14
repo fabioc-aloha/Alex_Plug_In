@@ -23,9 +23,9 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as workspaceFs from '../shared/workspaceFs';
-import { readActiveContext, ActiveContext } from '../shared/activeContextManager';
+import { readActiveContext } from '../shared/activeContextManager';
 import { IUserProfile } from './tools';
-import { DetectedModel, ModelTier, getTierInfo } from './modelIntelligence';
+import { DetectedModel, getTierInfo } from './modelIntelligence';
 import { searchGlobalKnowledge } from './globalKnowledge';
 import { loadMoodContext } from './emotionalMemory';
 import { PeripheralContext } from './peripheralVision';
@@ -179,7 +179,6 @@ async function buildActiveContextLayer(ctx: PromptContext): Promise<string> {
         const parts: string[] = ['## Current Session State'];
 
         // v5.8.2: Persona-driven prompt enhancement
-        let personaTone = '';
         if (activeCtx.persona) {
             const persona = PERSONAS.find(p => p.id === activeCtx.persona || p.name === activeCtx.persona);
             if (persona) {
@@ -662,7 +661,7 @@ Focus on:
  * 
  * Token budget: ~250 tokens (was ~200)
  */
-async function buildResponseGuidelinesLayer(ctx: PromptContext): Promise<string> {
+async function buildResponseGuidelinesLayer(_ctx: PromptContext): Promise<string> {
     return `## Response Guidelines
 
 **Your Capabilities**:

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { checkHealth, getCachedHealth, HealthCheckResult } from '../shared/healthCheck';
-import { getAlexGlobalPath, getGlobalKnowledgePath } from '../chat/globalKnowledge';
+import { checkHealth, getCachedHealth } from '../shared/healthCheck';
+import { getGlobalKnowledgePath } from '../chat/globalKnowledge';
 import * as workspaceFs from '../shared/workspaceFs';
 
 /**

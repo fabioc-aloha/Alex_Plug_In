@@ -1,7 +1,7 @@
 ---
-name: "Financial Analysis Skill"
-description: "Financial modeling, analysis frameworks, and regulatory awareness for business-minded professionals."
-applyTo: "**/*financ*,**/*budget*,**/*revenue*,**/*forecast*,**/*valuation*,**/*accounting*,**/*investment*"
+name: financial-analysis
+description: Financial modeling, analysis frameworks, and regulatory awareness for business-minded professionals.
+applyTo: '**/*financ*,**/*budget*,**/*revenue*,**/*forecast*,**/*valuation*,**/*accounting*,**/*investment*'
 ---
 
 # Financial Analysis Skill

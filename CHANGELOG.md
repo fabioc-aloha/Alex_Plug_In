@@ -7,9 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.6.0] - 2026-03-14
+
+> **The Quality Infrastructure Release** — CI pipeline hardened with 6 new audit gates, lint enforcement, 12 synapse fixes, and roadmap overhaul. All audits green, 232 tests passing.
+
+### Added
+
+- **CI pipeline: 6 new audit steps** — `audit-architecture`, `audit-synapses`, `audit-skill-activation-index`, `audit-heir-sync-drift`, `lint-docs`, and `lint:unused` enforcement all added to `.github/workflows/ci.yml`
+- **Quality gate: Gate 7 (VSIX size budget)** — Warns if package exceeds 4.5 MB; fails at 5 MB
+- **Quality gate: Gate 8 (skill activation index)** — Validates `memory-activation/SKILL.md` covers all skills
+- **Script: `audit-skill-activation-index.cjs`** — Ensures all 133 skills appear in the activation index
+- **Script: `audit-heir-sync-drift.cjs`** — Detects drift between master and heir for excluded skills
+- **Script: `lint-docs.cjs`** — Markdownlint + Mermaid init validation (non-blocking warnings)
+- **Script: `lint-unused.cjs`** — Enforced unused exports checking with regex-based allowlist from `ts-unused-exports.json`
+- **ESLint: `max-lines` rule** — Warns on files exceeding 800 lines (sharedStyles.ts flagged at 1438L)
+- **Roadmap: Global Knowledge v2 backlog** — Design doc + phased plan for auto-capture and cross-instance patterns
+- **Roadmap: `view_image` adoption plan** — 5 items for VS Code 1.112's built-in image analysis tool
+- **Roadmap: Agent Plugin distribution** — Prep for 1.112's `Chat: Install Plugin from Source` flow
+- **Design doc: GK v2** — `alex_docs/research/CROSS-INSTANCE-EMPATHY-DESIGN-2026-03-14.md`
+
+### Fixed
+
+- **12 broken synapse targets** — Missing or incorrect `target` fields across skill `synapses.json` files now point to `.github/skills/*/SKILL.md` paths
+- **Test: `workspaceFolders` getter compatibility** — `welcomeView.test.ts` uses `Object.defineProperty` instead of direct assignment (VS Code engine update compatibility)
+- **Duplicate `ts-unused-exports.json` entries** — Deduped allowlist
+- **Broken emojis** — Fixed U+FFFD corruption in `COMMAND-CENTER-FEASIBILITY` and `CROSS-INSTANCE-EMPATHY-DESIGN` docs
+
+### Changed
+
+- **Roadmap: blocked items fact-checked** — Contract B upgraded to "Partial" (`countTokens()` stable, 1.112 reserved-context visual); Gated #13 (EmbeddedKnowledge) marked Done (shipped v6.2.0)
+- **Roadmap: pressing issues tracked** — P0/P1/P2 items with live status for v6.6 target
+- **VS Code engine**: `^1.110.0` (unchanged — compatible with 1.111 + 1.112)
+
+---
+
+## [6.5.8] - 2026-03-13
+
+### Changed
+
+- **Architecture: instruction inheritance frontmatter** — Added `inheritance:` YAML frontmatter to 11 master-only and heir-scoped instructions for automated sync exclusion
+- **Architecture: skill-building instruction overhaul** — Restructured skill-building.instructions.md with streamlined workflow and updated cross-references
+- **Architecture: sync-architecture improvements** — Enhanced embedded synapse cleanup, backslash path normalization, broken reference removal, and heir integrity validation
+- **Architecture: muscles infrastructure** — Updated brain-qa, new-skill, build-extension-package, and validate-synapses scripts; added inheritance.json mapping
+- **Architecture: skill catalog generator** — Updated gen-skill-catalog.cjs output format
+- **Welcome View safety & tests** — Webview message routing now guarded (`_isWelcomeMessage`), operation lock covers long-running commands (dream, setup, releasePreflight, runAudit, generate* flows), `_executeCommandSafely` adds progress + toasts, tab memento persists active tab, `toggleSetting` guarded. Tests added via `handleMessageForTest`; `TEST-GUIDE.md` updated.
+
+---
+
 ## [6.5.7] - 2026-03-13
 
 ### Removed
+
 - **Pomodoro/Focus Session feature** — Removed session timer, status bar countdown, and all related commands (`startSession`, `endSession`, `togglePauseSession`, `sessionActions`)
 - **Learning Goals & Streaks feature** — Removed goal tracking, streak counting, daily progress, and related commands (`createGoal`, `showGoals`, `incrementGoal`)
 - **Import GitHub Issues as Goals** — Removed `importGitHubIssues` command and goal-conversion logic
@@ -18,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Dead code cleanup** — Removed `recallSession`, `showSessionHistory` commands and unused auto-increment goal hooks
 
 ### Changed
+
 - **Simplified North Star focus** — Extension now centers on North Star vision, Active Context, and cognitive architecture without productivity-tracker features
 
 ---
@@ -25,6 +74,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.5.6] - 2026-03-13
 
 ### Fixed
+
 - **Heir sync broken synapse cleanup** — Fixed embedded markdown synapse references to master-only instructions (`cognitive-health-validation.instructions.md`, `release-management.instructions.md`, `roadmap-maintenance.instructions.md`) now cleaned during sync (38 broken reference lines removed)
 - **Backslash path normalization** — Windows backslash paths in heir:vscode synapses.json files now normalized to forward slashes during sync (42 paths fixed in 5 files)
 - **Synapse validation warnings eliminated** — All 20 "ambiguous target" warnings resolved after path normalization
@@ -34,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.5.5] - 2026-03-12
 
 ### Changed
+
 - **Performance: parallel activation** — Secret loading, status bar update, and health check I/O parallelized for faster extension startup
 - **Right-click menu audit** — Fixed duplicate sort key collision, added missing URI parameter to rubberDuck command
 
@@ -42,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.5.4] - 2026-03-11
 
 ### Changed
+
 - **Roadmap restructured** — Shipped version details (v6.4.0, v6.4.5, v6.5.0) moved to appendix; main body now flows North Star → Shipped Releases → Open Backlog → Future Vision
 - **Open Backlog section** — Consolidated deferred hooks, blocked/gated/conditional items into one forward-looking section
 - **T8 orphan prompts resolved** — 1 misidentified (`presentation` has 2 skills), 4 justified standalone workflows (`improve`, `journey`, `plan`, `marp`). Open items 10 → 9
@@ -51,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.5.3] - 2026-03-11
 
 ### Changed
+
 - **Learn & Knowledge** group moved back to Mission tab as collapsible action group
 - **Initialize / Update** command added to Mission → Partnership group for quick access
 - **Calibration label** CSS widened (60px → 76px) with `white-space: nowrap` to prevent "Uncertain" wrapping
@@ -60,12 +113,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.5.2] - 2026-03-11
 
 ### Changed
+
 - **Tab reorganization** — Mission slimmed to 3 groups (Partnership, Build, Create); system commands, API Keys, and Quick Settings moved to Mind tab; Docs "Workshops" renamed to "Study Guides"
 - **Mind tab expanded** — Maintenance card with Dream/Self-Actualize stats + Focus/Goals actions, System card (Initialize, Export M365, Feedback, Diagnostics), API Keys panel, Quick Settings panel
 - **Docs tab updates** — 3 missing website links added (Quiz, AIRS Assessment, Books), Partnership section removed (redundant), "Reference" section title for Skill-to-Discipline Map
 - **UI polish** — Consistent `.dashboard-card` styling across all Mind tab sections, normalized Mission tab indentation, removed duplicate action buttons, CSS spacing rules for buttons/panels inside cards
 
 ### Fixed
+
 - Duplicate Dream and Self-Actualize buttons in Mind tab (already shown as clickable maintenance items)
 - Raw `<button>` for Initialize/Update replaced with `actionButton()` helper for consistency
 - Orphaned Skill-to-Discipline Map section now has "Reference" title
@@ -76,12 +131,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.5.1] - 2026-03-11
 
 ### Changed
+
 - **PPTX engine rewrite** — Calibri typography, modern slide masters with accent lines, paragraph-based bullets, zebra-striped tables, proper 16:9 coordinates
 - **UI labels** updated across commands, sidebar, and context menus (Marp → PPTX terminology)
 - **API KEYS section** added to Mission Control sidebar for key and secret management
 - **Model tier updates** — GPT-5.3, o4-mini (capable), GPT-4.1 (capable with mini/nano as efficient), Gemini 2.5 Flash (efficient), o1-pro (frontier). Fixed GPT-4o/4o-mini and o3/o3-mini tier overlap in pattern matching
 
 ### Fixed
+
 - Corrupted emoji encoding (U+FFFD) in presentation command and sidebar
 
 ---
@@ -91,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **The Trust Release** — Safety hooks, security hardening, avatar removal, theme compliance, heir alignment, skill promotions.
 
 ### Added
+
 - **16 hooks shipped** — 10 global + 6 agent-scoped across all 7 VS Code hook events (SessionStart, PreToolUse, PostToolUse, UserPromptSubmit, SubagentStart, Stop, PreCompact). All `.cjs` CommonJS scripts with stdin JSON / structured JSON output / exit 2 safety blocks
 - **Safety gates** — H8 heir contamination guard (deny), H9 I8 architecture independence guard (deny), prompt safety gate (secret + I1 scanning), autopilot H8/H9 escalated warn → deny
 - **Session intelligence** — session-start context injection, subagent context loader, pre-compact state preservation, decision journal, auto-commit suggestion, targeted test runner
@@ -107,9 +165,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Trifecta quality (T1-T7)** — `/review` prompt enriched with 3-Pass Review methodology; `/tdd` broadened to cover full testing skill (pyramid, mocking, coverage, flaky triage); self-actualization thresholds canonicalized (instruction references skill); code-review instruction deduplicated (references skill tables); `diagramming.prompt.md` created for markdown-mermaid trifecta; `promotetomaster.prompt.md` created for heir-sync-management trifecta; trifecta sibling synapses added to code-review, testing-strategies, self-actualization
 
 ### Removed
+
 - **Gist-based Cloud Sync** — fully removed deprecated code (since v5.0.1): 3 slash commands (`/sync`, `/push`, `/pull`), `alex.globalKnowledge.cloudSync.enabled` setting, handler functions, Gist interface fields across 7 files
 
 ### Changed
+
 - **Avatar system removed** — Deleted 122 files (25.3 MB), gutted avatarMappings.ts (771→68 lines), removed PERSONA_AVATAR_MAP + getAvatarForPersona + avatarFile
 - **console.log → OutputChannel** — 31 calls across 9 files migrated to centralized logger
 - **UI theme compliance** — 17 hex colors → `--vscode-charts-*` CSS variables with fallbacks; 3 sub-11px fonts fixed
@@ -118,6 +178,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Dependency bumps** — `@types/vscode`, `ws` security update
 
 ### Fixed
+
 - **F1–F6 hook API corrections** — Config format (3-level nesting, seconds timeouts), input protocol (env vars → stdin JSON), output protocol (plain text → structured JSON), event rename (SessionStop → Stop), exit codes (always 0 → exit 2 for safety blocks)
 - **BUG 1-9 synapse activation semantics** — 23 asymmetric bidirectional claims resolved, 40+ false `bidirectional` flags removed from synapses.json files, embedded markdown synapse format blindspot fixed
 - **BUG 10-11 runtime tool blindspots** — `synapseHealthTool.ts` Phase 2 and `selfActualizationTool.ts` Phase 1b now scan JSON synapses; `vscode-configuration-validation` synapses.json rewritten from legacy object to array format
@@ -132,12 +193,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **The Audit Hygiene Release** — Tests green, docs fresh, links fixed, vulnerabilities eliminated, skills reindexed, settings reconciled.
 
 ### Fixed
+
 - **7 failing tests resolved** — `globalKnowledge.test.ts`: GKP-/GKI- → GK-/GI- prefix alignment; `expertiseModel.ts`: 3 regex patterns (crash/docker/layer) now match inflected forms
 - **14 broken links repaired** across 7 docs — wrong relative paths in COPILOT-BRAIN.md, ALEX-IDENTITY.md, AGENT-VS-CHAT-COMPARISON.md, ENVIRONMENT-SETUP.md, QUICK-REFERENCE.md, USER-MANUAL.md, USE-CASES.md
 - **3 ghost references removed** — non-existent PROJECT-TYPE-TEMPLATES.md links eliminated
 - **Broken synapse path** — vscode-extension-patterns/synapses.json external path corrected
 
 ### Changed
+
 - **Mocha 10.8.2 → 11.7.5** — npm overrides for serialize-javascript (^7.0.4) and diff (^8.0.3); **0 audit vulnerabilities** (was 5)
 - **Doc freshness** — cognitive-config.json → v6.4.0, NEUROANATOMICAL-MAPPING (130 skills, 64 instructions, I1-I8), VSCODE-BRAIN-INTEGRATION → v6.4.0, 4 additional docs with corrected counts
 - **AGENT-VS-CHAT-COMPARISON.md** — updated from v5.8.2 to v6.4.0
@@ -152,6 +215,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **The Agent Hooks Release (Partial)** — VS Code 1.111 settings adoption, agent debugging documentation, platform settings alignment.
 
 ### Added
+
 - **Agent-scoped hooks enabled** — `chat.useCustomAgentHooks` in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Highest-value 1.111 feature for per-agent hook specialization
 - **Autopilot mode enabled** — `chat.autopilot.enabled` in `.vscode/settings.json` and `.devcontainer/devcontainer.json`. Recommended for dream/meditation workflows
 - **Terminal sandbox trust domains** — `chat.tools.terminal.sandbox.network` configured for marketplace, npm, Azure DevOps, and Replicate
@@ -160,6 +224,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **VS Code Insiders pre-publish testing** — New section in PRE-PUBLISH-CHECKLIST.md for weekly Stable cadence risk mitigation
 
 ### Changed
+
 - **copilot-instructions.md settings header** — Updated to `(1.111+)` with `chat.autopilot.enabled` and `chat.useCustomAgentHooks` documented
 - **Skill-to-Discipline Map** — Wired into sync pipeline and quality gates
 
@@ -170,11 +235,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **The Documentation Maturity Release** — Roadmap restructured with v6.4.0 split, Skill-to-Discipline Map (41 disciplines × 130 skills), VS Code 1.111 evaluation integrated.
 
 ### Added
+
 - **Skill-to-Discipline Map** — new `alex_docs/guides/SKILL-DISCIPLINE-MAP.md` mapping 41 professional disciplines to 130 skills, wired to Command Center Docs tab
 - **VS Code 1.111 evaluation** — 11 actionable items extracted and integrated into roadmap (3 ADOPT, 2 MONITOR, 3 SKIP)
 - **vscode-extension-patterns synapse** — new reference to 1.111 evaluation document (strength 0.8)
 
 ### Changed
+
 - **ROADMAP-UNIFIED.md restructured** — priority-ordered P1–P5 stack, v6.4.0 Agent Hooks Release (6 items) split from v6.5.0 Trust Release (23 items)
 - **Roadmap appendix** — completed tasks moved to collapsible `<details>` section
 - **Active Context** — updated for post-v6.3.0 session (1.111 evaluation, roadmap restructure, skill-discipline mapping)
@@ -186,17 +253,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **The Accessibility & Workshop Alignment Release** — WCAG keyboard accessibility, 10 domain skills from LearnAlex, docs tab sync with 41 workshops, Architecture Independence cardinal rule.
 
 ### Added
+
 - **10 domain skills from LearnAlex** — career-development, comedy-writing, counseling-psychology, financial-analysis, game-design, healthcare-informatics, hr-people-operations, journalism, legal-compliance, sales-enablement
 - **8 new workshop study guides** in Docs tab (Responsible AI Ethics, Accessibility Engineering, Cross-Cultural Design, Cloud Architecture, Data Storytelling, Green Software, Open-Source Governance, Product Management)
 - **GitHub Guide + Responsible AI facilitator buttons** in Docs tab
 - **Architecture Independence cardinal rule (I8)** — Architecture MUST NOT depend on the Extension; dependency arrow is Extension → Architecture, never reverse
 
 ### Changed
+
 - **Persona detection backlog P7.7–7.12** — dependency signals for designer/scientist/finance/teacher/podcaster, narrowed patterns, identity weight 2.0→2.5, tie-break by signal count, cache TTL 7d→1d, P3 phase rules expanded to 11 personas
 - **Workshop persona IDs fixed** (7 broken IDs now match live learnalex.correax.com)
 - **Docs tab workshop grid** grouped by domain with accurate workshop count (41)
 
 ### Fixed
+
 - **WCAG keyboard accessibility** — Enter/Space keydown handlers for 4 interactive controls (persona cards, tabs, trifecta tags, doc cards)
 - **Touch target sizes** — toggles increased to 36×20px (desktop) and 30×18px (compact)
 - **Font sizes** — 5 elements bumped to minimum 11px for readability
@@ -205,6 +275,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **PII sanitized** in WORKING-WITH-ALEX.md (personal name → brand name)
 
 ### Removed
+
 - **Skill toggle switches** — non-functional feature removed from Skill Store tab, sharedStyles, and data provider
 
 ---
@@ -214,15 +285,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **The On-Brand Partnership Release** — M365 heir rebranded to partnership voice, EmbeddedKnowledge RAG, store description overhaul, full version alignment.
 
 ### Added
+
 - **M365 EmbeddedKnowledge RAG** — 6 knowledge files now declared as embedded capabilities (were orphaned on disk)
 - **M365 Meditate workflow** — cognitive consolidation added to conversation starters and store description
 - **FLUX brand fine-tune trifecta** (37th) — Complete LoRA training workflow skill + instruction + prompt. Two trainers: `replicate/fast-flux-trainer` (~$1.50/2min), `ostris/flux-dev-lora-trainer` (~$0.98/10min). Trigger word discipline, training data requirements, visual-memory integration
 - **SVG-first banner strategy** — Recraft v4 SVG (`recraft-ai/recraft-v4-svg`) promoted to default banner format. Scalable, theme-aware, lightweight, VCS-friendly. Raster (Ideogram/Flux) demoted to explicit fallbacks
 
 ### Removed
+
 - **GitHub Copilot Web heir discontinued** — `platforms/github-copilot-web/` removed; not worth the effort at ~1.5% parity. Agent Plugin covers the same use case better.
 
 ### Changed
+
 - **M365 store description rewritten** — rocket/thrust metaphor replaced with partnership voice aligned to North Star and CorreaX brand
 - **M365 manifest `name.full`** — "Strap a Rocket to Your Back" → "Your Trusted AI Partner for M365"
 - **M365 `description.short`** — partnership-first messaging (71/80 chars)
@@ -234,6 +308,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Agent Plugin marketplace.json** — version 6.2.0, skill count updated to 85+
 
 ### Fixed
+
 - M365 knowledge files orphaned (existed on disk but no EmbeddedKnowledge capability declared)
 - M365 instructions overloaded (duplicate content between inline instructions and knowledge files)
 - Version alignment across all heirs: VS Code, M365, Agent Plugin
@@ -246,6 +321,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **Doc Alignment Hotfix + AI Writing + AlexAgent Distribution** — Version consistency fix, new skill trifecta, and standalone plugin distribution repo.
 
 ### Added
+
 - **AI Writing Avoidance trifecta**: skill, instruction, prompt (`/audit-writing`), synapses — detect and fix AI writing tells
 - **AI Writing Tells research document** (`alex_docs/research/AI-WRITING-TELLS.md`) — comprehensive catalog of AI writing patterns
 - **AlexAgent standalone distribution repo** — `github.com/fabioc-aloha/AlexAgent` for plugin-only installation without the full extension
@@ -253,10 +329,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `sync-plugin.ps1` `-DistroRepo` parameter — publish plugin bundle to AlexAgent repo in one command
 
 ### Changed
+
 - AlexAgent README: VS Code UI clone as primary install, one-liner scripts as secondary, CLI in appendix
 - AlexAgent banner: on-brand CorreaX design (flat `#0f172a`, left-aligned, ring nodes, ghost watermark)
 
 ### Fixed
+
 - `copilot-instructions.md` version header aligned to 6.1.8
 - `cognitive-config.json` version field updated
 - Heir CHANGELOG entry for stable release added
@@ -270,6 +348,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **Stable Release** — Promoted to stable on VS Code Marketplace.
 
 ### Changed
+
 - Published as stable release (previously pre-release)
 - Version alignment across all documentation
 
@@ -280,6 +359,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **Heir Protection Fix + Trifecta Gap Closure + M365 Polish** — Removed false positive from Master auto-detection, closed trifecta gap from 26→36, M365 orphan cleanup and mobile docs.
 
 ### Added
+
 - 10 new complete trifectas (26→36): `image-handling`, `character-aging-progression`, `visual-memory`, `code-review`, `root-cause-analysis`, `refactoring-patterns`, `debugging-patterns`, `security-review`, `skill-building`, `global-knowledge`
 - 6 new prompts: `/rca`, `/refactor`, `/debug`, `/security-review`, `/skill-building`, `/knowledge`
 - 4 new instructions: `root-cause-analysis`, `refactoring-patterns`, `debugging-patterns`, `security-review`
@@ -287,14 +367,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MCP standalone distribution: 704KB esbuild bundle at `plugin/mcp/index.js`
 
 ### Changed
+
 - TRIFECTA-CATALOG.md: full audit — 10 new entries, Mermaid diagram, health summary updated
 - M365 USER-MANUAL.md: mobile support FAQ updated (declarative agent works in Teams mobile)
 - Skill and trifecta counts updated across all documentation (128 skills, 36 trifectas)
 
 ### Removed
+
 - 4 orphan M365 plugin files: `alex-knowledge-plugin.json`, `graph-api-plugin.json`, `openapi.yaml`, `graph-openapi.yaml`
 
 ### Fixed
+
 - `alex_docs/` removed from Master Alex auto-detection indicators — heirs with `alex_docs/NORTH-STAR.md` were falsely identified as Master Alex, blocking `Alex: Upgrade` (reported by AlexLearn)
 
 ---
@@ -304,16 +387,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **Cognitive Tier Fix + Model Updates** — Fixed L4 detection for current extended thinking settings, added GPT-5.3, collapsed sidebar sections by default.
 
 ### Added
+
 - GPT-5.3 added to frontier tier model maps
 - Frontier regex now auto-catches future GPT-5.x models (`gpt-5\.[2-9]`)
 
 ### Changed
+
 - Cognitive Dashboard and Memory Architecture sidebar sections collapsed by default for cleaner first-run experience
 - Removed deprecated `github.copilot` from `extensionPack` — now only `github.copilot-chat`
 - Brain QA output compacted (phases + warnings/summary only, use `-Detail` for verbose)
 - Brain QA agent cross-reference regex fixed for Windows CRLF line endings
 
 ### Fixed
+
 - **Critical**: Cognitive tier detection now reads `github.copilot.chat.agent.thinkingTool` (current setting path) — was only checking deprecated paths, causing L4 users to show as L3
 - Visual memory heir sync template updated with voices/videoStyles sections
 - `cognitive-config.json` version synced to 6.1.3
@@ -325,15 +411,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **Replicate Trifecta Updates + Documentation Hygiene** — Model landscape refresh across 5 skills, 2 new trifectas completed, doc archive pass 2.
 
 ### Added
+
 - `image-handling` trifecta completed — instruction + prompt files created
 - `character-aging-progression` trifecta completed — instruction + prompt files created
 
 ### Changed
+
 - Updated Replicate model landscape across 5 skills: Ideogram v3 (turbo/balanced/quality), `nano-banana-2`, `flux-kontext-pro/max`, `flux-2-pro/max`, `recraft-v4`, `veo-3.1-fast`, `sora-2`, `qwen/qwen3-tts`, `minimax/speech-2.8-turbo`
 - `ideogram-v3-turbo` ($0.03) is now the default typography recommendation (63% cheaper than v2)
 - Archived 6 outdated docs to `alex_archive/`: 3 point-in-time audit reports, `REPLICATE-EVALUATION.md` (superseded by skills), Ideogram v2 gallery, stale `brain-qa-output.txt`
 
 ### Fixed
+
 - `character-aging-progression/SKILL.md`: `image_input` must be an array `[dataURI]`, not a single string — was silently breaking face consistency
 - Audio model reference updated: `qwen-tts` → `qwen/qwen3-tts` across all skills
 - Skill frontmatter: removed unsupported `applyTo`/`triggers` attributes, fixed `name` to kebab-case in 3 SKILL.md files
@@ -345,18 +434,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > **Environment & Cognitive Tier Hardening** — Extended thinking detection fix (critical), extension dependency checking, multi-account GitHub detection, cognitive tier real-time refresh.
 
 ### Added
+
 - Extension dependency checking with one-click install for GitHub Copilot, Copilot Chat, Mermaid Preview
 - Multi-account GitHub detection (personal + enterprise) in cognitive tier
 - Account-aware setup guidance with upgrade tips for Frontier model access
 - Real-time cognitive tier refresh on Copilot settings changes
 
 ### Fixed
+
 - **CRITICAL**: Extended thinking detection was reading wrong config keys — Level 4 (Advanced) was unreachable for all users
 - L4 badge race condition causing welcome view to default to Level 1
 - Misleading account classification (business → unknown)
 - Markdown in plain text dialogs, unsafe sign-in command
 
 ### Changed
+
 - Package size reduced: 534 → 525 files (~3.4 MB lighter)
 
 ---
@@ -364,9 +456,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.0.3] - 2026-03-02
 
 ### Fixed
+
 - Extension README: resolved 4 Marketplace compliance issues — self-referential link (line 125), broken `article/versions/13-ALEX-MANIFESTO-PERSONAL.md` links (lines 300 & 358), broken `replicate-api` skill path (line 671)
 
 ### Changed
+
 - Root README: DRY refactor — removed 700-line duplicate of extension README; replaced with compact Features table linking to learnalex.correax.com
 - Both READMEs: removed "Chat with Alex" section (superseded by learnalex.correax.com website)
 - Docs: replaced all GitHub Gist references with private GitHub repo throughout
@@ -376,10 +470,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.0.2] - 2026-02-28
 
 ### Fixed
+
 - Brand doc (`DK-correax-brand.md`): updated ghost watermark canonical opacity spec 0.03→0.15 (CSS + HTML example)
 - `correax-brand` skill: encoded `rgba(255,255,255,0.15)` as the authoritative design token to prevent regression
 
 ### Changed
+
 - Catalogs regenerated: 23 complete trifectas (was 14), 125 skills, 593 connections
 - `vscode-configuration-validation` synapses.json inheritance field repaired (malformed object → `"heir:vscode"`)
 - Active Context updated to reflect v6.0.1 release state
@@ -389,6 +485,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.0.1] - 2026-02-28
 
 ### Fixed
+
 - Banner: increased ALEX watermark visibility (opacity 0.03→0.15)
 
 ---

@@ -7,6 +7,34 @@
 
 ---
 
+## Build & Quality Commands (local)
+
+| Task | Command | Notes |
+|------|---------|-------|
+| TypeScript check (no emit) | `npm run check-types` | Uses `tsc --noEmit` |
+| Strict unused check | `npx tsc --noEmit --noUnusedLocals --noUnusedParameters` | ✅ Passing as of 2026‑03‑13 |
+| ESLint | `npm run lint` | TS pinned to 5.4.5, @typescript-eslint 7.6.0; `max-lines` warns at >800L |
+| Unused exports audit | `npm run lint:unused` | **Enforced**. Wrapper (`scripts/lint-unused.cjs`) fails on unallowlisted exports; allowlist via `ts-unused-exports.json` |
+| Synapse audit | `node scripts/audit-synapses.cjs` | Checks for empty/missing connections across skills |
+| Audit architecture | `node scripts/audit-architecture.cjs` | Detect trifecta/schema drift |
+| Skill activation index | `node scripts/audit-skill-activation-index.cjs` | Ensures `memory-activation/SKILL.md` covers all skills |
+| Heir sync drift | `node scripts/audit-heir-sync-drift.cjs` | Flags drift for excluded skills between master/heir |
+| Docs lint (non-blocking) | `node scripts/lint-docs.cjs` | markdownlint + Mermaid init check (archives ignored; warnings only) |
+| Quality gate | `npm run quality-gate` | Gates 1‑8; Gate 7 checks VSIX size (<5 MB warns), Gate 8 checks activation index |
+| Tests | `npm test` | VS Code test harness (227 tests) |
+
+> 🔁 CI: `.github/workflows/ci.yml` now runs `check-types`, strict `tsc --noUnused*`, `lint`, **`lint:unused` (enforced)**, `node scripts/audit-synapses.cjs`, and `quality-gate`.
+> ⚠️ Windows note: ts-unused-exports may emit regex errors if `--ignoreFiles` pattern is invalid; wrapper currently ignores all until allowlist is curated.
+
+### Welcome View Message Routing (v6.5.0)
+- ✅ New tests cover `onDidReceiveMessage` routing via `handleMessageForTest()` helper.
+- 🔐 Guards malformed messages and operation-lock commands.
+- 🧪 Run:
+  ```sh
+  npm test -- --grep "Welcome command routing"
+  ```
+- Scenarios covered: command map routing (awaited), tab memento persistence, toggle setting guards, openDoc preview routing.
+
 ## Quick Install
 
 ```sh

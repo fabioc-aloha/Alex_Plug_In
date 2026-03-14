@@ -12,7 +12,7 @@
  */
 
 import * as crypto from 'crypto';
-import WebSocket from 'ws';
+import wsClient, { RawData as WsRawData } from 'ws';
 import { logInfo } from '../shared/logger';
 import * as vscode from 'vscode';
 
@@ -251,7 +251,7 @@ function buildSSML(text: string, options: TTSOptions = {}): string {
 /**
  * Build the configuration message for Edge TTS
  */
-function buildConfigMessage(requestId: string): string {
+function buildConfigMessage(_requestId: string): string {
     const timestamp = generateTimestamp();
     return `X-Timestamp:${timestamp}\r\n` +
         'Content-Type:application/json; charset=utf-8\r\n' +
@@ -414,7 +414,7 @@ function synthesizeChunk(
         const muid = generateMuid();
         const url = `${EDGE_TTS_ENDPOINT}&ConnectionId=${connectionId}&Sec-MS-GEC=${secMsGec}&Sec-MS-GEC-Version=${SEC_MS_GEC_VERSION}`;
 
-        const ws = new WebSocket(url, {
+        const ws = new wsClient(url, {
             headers: {
                 'Pragma': 'no-cache',
                 'Cache-Control': 'no-cache',
@@ -438,7 +438,7 @@ function synthesizeChunk(
             ws.send(buildSSMLMessage(requestId, ssml));
         });
 
-        ws.on('message', (data: WebSocket.RawData) => {
+        ws.on('message', (data: WsRawData) => {
             // Handle Buffer data
             const buffer = Buffer.isBuffer(data) ? data : Buffer.from(data as ArrayBuffer);
             
@@ -702,7 +702,7 @@ function stripBlockElements(text: string): string {
         'csharp': 'C#', 'cpp': 'C++', 'html': 'HTML', 'css': 'CSS', 'json': 'JSON',
         'yaml': 'YAML', 'xml': 'XML', 'sql': 'SQL', 'bash': 'Bash', 'powershell': 'PowerShell'
     };
-    text = text.replace(/```(\w+)?[\s\S]*?```/g, (match, lang) => {
+    text = text.replace(/```(\w+)?[\s\S]*?```/g, (_match, lang) => {
         const displayLang = lang ? (langNames[lang.toLowerCase()] || lang.charAt(0).toUpperCase() + lang.slice(1)) : '';
         return displayLang ? ` ${displayLang} code block omitted ` : ' code block omitted ';
     });

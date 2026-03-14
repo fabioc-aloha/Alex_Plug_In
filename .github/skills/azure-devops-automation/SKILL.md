@@ -1,6 +1,6 @@
 ---
-name: "Azure DevOps Automation"
-description: "CI/CD pipelines, infrastructure as code, and deployment automation for Azure workloads"
+name: azure-devops-automation
+description: CI/CD pipelines, infrastructure as code, and deployment automation for Azure workloads
 user-invokable: false
 ---
 

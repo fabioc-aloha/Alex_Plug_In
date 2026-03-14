@@ -1,7 +1,7 @@
 ---
-name: "Presentation Tool Selection"
-description: "Best practice decision matrix for choosing between Marp, Gamma, and PptxGenJS based on use case requirements."
-applyTo: "**/*presentation*,**/*slides*,**/*deck*,**/*pptx*"
+name: presentation-tool-selection
+description: Best practice decision matrix for choosing between Marp, Gamma, and PptxGenJS based on use case requirements.
+applyTo: '**/*presentation*,**/*slides*,**/*deck*,**/*pptx*'
 ---
 
 # Presentation Tool Selection Skill

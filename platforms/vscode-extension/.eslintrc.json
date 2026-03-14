@@ -9,6 +9,14 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "max-lines": [
+            "warn",
+            {
+                "max": 800,
+                "skipBlankLines": true,
+                "skipComments": true
+            }
+        ],
         "@typescript-eslint/naming-convention": [
             "warn",
             {

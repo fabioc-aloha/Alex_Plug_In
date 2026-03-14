@@ -24,13 +24,7 @@ interface ExportResult {
     message: string;
 }
 
-interface GlobalKnowledgeEntry {
-    id: string;
-    title: string;
-    content: string;
-    category?: string;
-    tags?: string[];
-}
+
 
 /**
  * Detect the user's OneDrive folder path
@@ -103,7 +97,7 @@ async function syncToOneDrive(exportDir: string): Promise<{ success: boolean; pa
 /**
  * Export Alex global knowledge for M365 Copilot
  */
-export async function exportForM365(context: vscode.ExtensionContext): Promise<ExportResult> {
+export async function exportForM365(_context: vscode.ExtensionContext): Promise<ExportResult> {
     const homeDir = os.homedir();
     const globalKnowledgePath = path.join(homeDir, '.alex', 'global-knowledge');
     const exportFiles: string[] = [];

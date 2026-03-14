@@ -13,10 +13,11 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
     
     async prepareInvocation(
         options: vscode.LanguageModelToolInvocationPrepareOptions<IHeirValidationParams>,
-        token: vscode.CancellationToken
+        _token: vscode.CancellationToken
     ): Promise<vscode.PreparedToolInvocation | undefined> {
+        const scope = options.input.scope || 'all';
         return {
-            invocationMessage: 'Scanning heir content for validation...',
+            invocationMessage: `Scanning heir content for validation (scope: ${scope})...`,
             confirmationMessages: {
                 title: 'Heir Content Validation',
                 message: new vscode.MarkdownString(

@@ -1,6 +1,6 @@
 ---
-name: "Change Management Skill"
-description: "Patterns for organizational change, ADKAR methodology, stakeholder engagement, and adoption strategies."
+name: change-management
+description: Patterns for organizational change, ADKAR methodology, stakeholder engagement, and adoption strategies.
 ---
 
 # Change Management Skill

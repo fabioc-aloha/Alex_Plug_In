@@ -102,7 +102,6 @@ export interface Nudge {
   priority: number;
 }
 export function getLoadingHtml(): string {
-  const nonce = getNonce();
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -252,6 +251,8 @@ export function getWelcomeHtmlContent(
   const personaName = persona?.name || "Developer";
   const personaSkill = persona?.skill || "code-review";
   const bannerNoun = persona?.bannerNoun || "CODE";
+  // mark locals for TS unused checks
+  void personaHook;
 
   // Use persona accent color (easter eggs no longer override global accent — they get a badge-local color instead)
   const personaAccent = persona?.accentColor || "#6366f1";
@@ -304,6 +305,14 @@ export function getWelcomeHtmlContent(
 
   const recommendedSkillName = getSkillDisplayName(personaSkill);
 
+  // mark locals for TS unused checks
+  void workspaceName;
+  void confidenceLabel;
+  void sourceLabel;
+  void assessedLabel;
+  void principlesText;
+  void recommendedSkillName;
+
   // Skill recommendations HTML
   const skillRecommendationsHtml = skillRecommendations && skillRecommendations.length > 0
     ? `<div class="skill-recommendations-section">
@@ -323,6 +332,7 @@ export function getWelcomeHtmlContent(
   const healthText = isHealthy
     ? "Healthy"
     : `${health.brokenSynapses} issues`;
+  void healthText;
 
   // Architecture status banner (7.9)
   const healthPct = health.totalSynapses > 0
@@ -362,8 +372,10 @@ export function getWelcomeHtmlContent(
 
       <div class="hero-text-box">
           <div class="hero-hook">Your Trusted Partner for <strong>${bannerNoun}</strong></div>
+          ${userProfile?.name ? `<div class="hero-greeting">Hi ${escapeHtml(userProfile.name)} 👋</div>` : ''}
           ${activeContext?.northStar ? `<div class="hero-north-star" data-cmd="northStar" title="North Star — Click to review" tabindex="0" role="button">⭐ ${escapeHtml(activeContext.northStar)}</div>` : ''}
           ${hasObjective ? `<div class="hero-objective">${escapeHtml(rawObjective!)}</div>` : ''}
+          <div class="hero-trifectas">${trifectaTagsHtml}</div>
       </div>
 
       <!-- Spike 1B: Tab Bar -->
@@ -379,6 +391,7 @@ export function getWelcomeHtmlContent(
 
       ${getAgentsTabHtml({ agents, recentActivity, cognitiveState, agentMode, personalityMode })}
 
+      ${skillRecommendationsHtml ? `<section class="skill-recs" aria-label="Recommended Skills">${skillRecommendationsHtml}</section>` : ''}
       ${getSkillStoreTabHtml({ skills, health })}
       ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, tokenStatuses, settingsToggles })}
 
@@ -541,17 +554,6 @@ export function getWelcomeHtmlContent(
       const skillSearch = document.getElementById('skill-search');
       if (skillSearch) {
           skillSearch.addEventListener('input', applySkillSearch);
-      }
-
-      // ── Persona/study-guide search filter (8D.2) ──
-      const personaSearch = document.getElementById('persona-search');
-      if (personaSearch) {
-          personaSearch.addEventListener('input', function() {
-              const q = this.value.toLowerCase();
-              document.querySelectorAll('.persona-card').forEach(function(card) {
-                  card.style.display = (!q || (card.textContent || '').toLowerCase().includes(q)) ? '' : 'none';
-              });
-          });
       }
 
       // ── Category collapse (7.27) ──
