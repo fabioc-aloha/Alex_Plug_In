@@ -1,37 +1,27 @@
 {
   "hotFiles": [],
-  "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/commandsGamma.ts",
-    "platforms/vscode-extension/src/commandsWord.ts",
-    "platforms/vscode-extension/src/services/secretsManager.ts",
-    "alex_docs/audits/HEIR-SKILL-PORT-AUDIT-2026-03-14.md"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/alex-cognitive-architecture-6.7.0.vsix",
       "todoCount": 2,
-      "scannedAt": 1773598729658
+      "scannedAt": 1773599335336
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1773598729658
+      "scannedAt": 1773599335336
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1773598729658
+      "scannedAt": 1773599335336
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1773598729658
+      "scannedAt": 1773599335336
     }
   ],
-  "lastUpdated": 1773598729658
+  "lastUpdated": 1773599335336
 }
