@@ -5,23 +5,23 @@
     {
       "file": "platforms/vscode-extension/alex-cognitive-architecture-6.7.0.vsix",
       "todoCount": 2,
-      "scannedAt": 1773599335336
+      "scannedAt": 1773599927776
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1773599335336
+      "scannedAt": 1773599927776
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1773599335336
+      "scannedAt": 1773599927776
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1773599335336
+      "scannedAt": 1773599927776
     }
   ],
-  "lastUpdated": 1773599335336
+  "lastUpdated": 1773599927776
 }
