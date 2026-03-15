@@ -3,7 +3,7 @@
   "skillId": "md-to-word",
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "2.1.0",
-  "muscle": ".github/muscles/md-to-word.py",
+  "muscle": ".github/muscles/md-to-word.cjs",
   "connections": [
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
@@ -67,7 +67,7 @@
     "required": [
       "pandoc",
       "mermaid-cli (mmdc)",
-      "python-docx"
+      "jszip"
     ],
     "optional": [
       "svgexport"
@@ -76,9 +76,9 @@
   "heir-adoption": {
     "priority": "high",
     "copy-files": [
-      ".github/muscles/md-to-word.py"
+      ".github/muscles/md-to-word.cjs"
     ],
-    "install": "winget install pandoc; npm i -g @mermaid-js/mermaid-cli; pip install python-docx"
+    "install": "winget install pandoc; npm i -g @mermaid-js/mermaid-cli"
   },
   "triggers": [
     "convert to word",
@@ -108,7 +108,7 @@
     "professional document",
     "formatted document",
     "pandoc",
-    "python-docx",
+    "jszip",
     "mermaid to png",
     "export for sharing",
     "shareable document",
@@ -137,7 +137,7 @@
     "professional document",
     "formatted document",
     "pandoc",
-    "python-docx",
+    "jszip",
     "mermaid to png",
     "export for sharing",
     "shareable document",

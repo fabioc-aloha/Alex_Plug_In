@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.7.0] - 2026-03-15
+
+> **The Heir Harvest Release** — 10 new skills ported from heir projects, 7 knowledge merges into existing capabilities, 3 new instruction files, stale heir cleanup across 33 projects, and Gamma reliability hardened.
+
+### Added
+
+- **10 new skills** ported from heir projects to Master Alex:
+  - `meeting-efficiency` — agenda design, time boxing, decision capture, async alternatives
+  - `stakeholder-management` — influence mapping, communication strategies, expectation management
+  - `content-safety-implementation` — 7-layer defense model, kill switch, prompt injection defense
+  - `azure-openai-patterns` — rate limiting, token optimization, managed identity, content filters
+  - `msal-authentication` — MSAL.js, Entra ID, token cache, PKCE, on-behalf-of flows
+  - `sse-streaming` — POST-based SSE, Azure Functions streaming, reconnection patterns
+  - `prompt-evolution-system` — A/B testing, metrics-driven prompt iteration, regression detection
+  - `service-worker-offline-first` — SW lifecycle, caching strategies, background sync, PWA
+  - `react-vite-performance` — code splitting, React 19 compiler, TanStack Query, Web Vitals
+  - `data-quality-monitoring` — Z-score anomaly detection, schema drift, freshness checks
+- **3 new instruction files**:
+  - `content-safety-implementation.instructions.md` — generalized 7-layer defense from Mystery's Dead Letter
+  - `service-worker-offline-first.instructions.md` — critical rules with strategy selection table
+  - `synapse-notebook-patterns.instructions.md` — Synapse JSON format, pool selection, anti-patterns
+- **Gamma generator: HTTP retries with exponential backoff** — 3 attempts, 120s per-request timeout, 1s→2s→4s backoff (capped at 8s)
+- **Gamma generator: extended default timeout** — `DEFAULT_TIMEOUT_MS` raised to 420000ms (7 min) for large decks
+
+### Changed
+
+- **7 knowledge merges** into existing skills/instructions:
+  - `academic-research` SKILL.md — added CARS model, Heilmeier catechism, audience adaptation, CHI/HBR templates, 5-phase drafting, citation weaving
+  - `vscode-marketplace-publishing` instruction — added icon rules, .vscodeignore template, pre-release convention
+  - `testing-strategies` instruction — added @vscode/test-electron boilerplate, VS Code API mock patterns
+  - `vscode-extension-patterns` instruction — added singleton panel pattern, bidirectional message passing, theme CSS
+- **Skill activation index** — added 10 new skills to `memory-activation/SKILL.md`
+- **Skill frontmatter** — added YAML frontmatter to `meeting-efficiency` and `stakeholder-management`
+
+### Removed
+
+- **5 stale skills cleaned from all heirs** — `skill-activation` (27 heirs), `prompt-activation` (22), `microsoft-sfi` (21), `writing-publication` (29), `meditation-facilitation` (28) deleted from every active `.github/skills/` directory across 33 projects
+
+---
+
 ## [6.6.0] - 2026-03-14
 
 > **The Quality Infrastructure Release** — CI pipeline hardened with 6 new audit gates, lint enforcement, 12 synapse fixes, and roadmap overhaul. All audits green, 232 tests passing.

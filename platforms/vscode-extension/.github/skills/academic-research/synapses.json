@@ -46,6 +46,20 @@
       "strength": 0.9,
       "when": "practitioner research extends academic research",
       "yields": "practitioner research extension patterns"
+    },
+    {
+      "target": ".github/skills/citation-management/SKILL.md",
+      "type": "uses",
+      "strength": 0.75,
+      "when": "formatting citations, weaving references into prose, managing bibliographies",
+      "yields": "APA 7 formatting, citation integration patterns, reference validation"
+    },
+    {
+      "target": ".github/skills/dissertation-defense/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "when": "preparing thesis or dissertation for committee defense",
+      "yields": "defense preparation strategies, committee navigation, Q&A practice"
     }
   ],
   "triggers": [

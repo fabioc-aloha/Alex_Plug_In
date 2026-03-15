@@ -94,6 +94,98 @@ const html = `<!DOCTYPE html>
 
 **Rule**: Never use `'unsafe-eval'` or wildcard `*` in CSP.
 
+### Singleton Webview Panel Pattern
+
+```typescript
+export class MyPanel {
+    public static currentPanel: MyPanel | undefined;
+    private readonly panel: vscode.WebviewPanel;
+    private disposables: vscode.Disposable[] = [];
+
+    static createOrShow(extensionUri: vscode.Uri): void {
+        if (MyPanel.currentPanel) {
+            MyPanel.currentPanel.panel.reveal();
+            return;
+        }
+        const panel = vscode.window.createWebviewPanel(
+            'myPanel', 'My Panel', vscode.ViewColumn.One,
+            { enableScripts: true, localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'media')] }
+        );
+        MyPanel.currentPanel = new MyPanel(panel, extensionUri);
+    }
+
+    dispose(): void {
+        MyPanel.currentPanel = undefined;
+        this.panel.dispose();
+        this.disposables.forEach(d => d.dispose());
+    }
+}
+```
+
+### Webview Message Passing (Both Directions)
+
+**Extension → Webview**:
+```typescript
+panel.webview.postMessage({ type: 'updateData', payload: data });
+```
+
+**Webview → Extension**:
+```javascript
+const vscode = acquireVsCodeApi();
+vscode.postMessage({ type: 'save', data: getFormData() });
+
+window.addEventListener('message', event => {
+    const msg = event.data;
+    switch (msg.type) {
+        case 'updateData': renderData(msg.payload); break;
+    }
+});
+```
+
+**Extension handler**:
+```typescript
+panel.webview.onDidReceiveMessage(msg => {
+    switch (msg.type) {
+        case 'save': this.handleSave(msg.data); break;
+        case 'ready': this.postMessage({ type: 'init', data: this.loadData() }); break;
+    }
+}, null, this.disposables);
+```
+
+### Webview State Persistence
+
+```javascript
+// Save state before unload
+const vscode = acquireVsCodeApi();
+vscode.setState({ activeTab: getActiveTab(), formData: getFormData() });
+
+// Restore on reload
+const prev = vscode.getState();
+if (prev) { restoreTab(prev.activeTab); restoreForm(prev.formData); }
+```
+
+Use `retainContextWhenHidden: true` for complex interactive panels (higher memory cost).
+
+### Theme-Aware Webview CSS
+
+```css
+body {
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+    font-family: var(--vscode-font-family);
+}
+button {
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border: none;
+}
+input, textarea {
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+}
+```
+
 ---
 
 ## VS Code 1.109+ Agent Platform

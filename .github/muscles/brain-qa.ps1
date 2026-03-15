@@ -1225,7 +1225,7 @@ if (30 -in $runPhases) {
     $expectedMuscles = @(
         "audit-master-alex.ps1", "brain-qa.ps1", "brain-qa-heir.ps1",
         "build-extension-package.ps1",
-        "dream-cli.ts", "fix-fence-bug.ps1", "gamma-generator.js", "normalize-paths.ps1",
+        "dream-cli.ts", "fix-fence-bug.ps1", "gamma-generator.cjs", "normalize-paths.ps1",
         "pptxgen-cli.ts", "sync-architecture.cjs", "validate-skills.ps1", "validate-synapses.ps1"
     )
     $missingMuscles = @()

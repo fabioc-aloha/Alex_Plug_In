@@ -30,6 +30,16 @@ inheritance: master-only
 | **File Size** | Package should be < 50 MB | Check .vscodeignore for exclusions |
 | **Authentication** | PAT token required for publishing | Manage at marketplace.visualstudio.com |
 
+**Icon Rules**:
+- Must be 128x128 pixels, PNG format
+- Located at `assets/icon.png` (or as declared in `icon` field)
+- Must be included in package (not in .vscodeignore)
+
+**Pre-Release Channel Convention**:
+- Stable uses even minor (`0.2.0`, `0.4.0`)
+- Pre-release uses odd minor (`0.1.0`, `0.3.0`)
+- Use `npx vsce publish --pre-release` flag regardless of version number
+
 **Common Failures**:
 ```
 ERROR: "SVGs are restricted in README.md; please use other file image formats, such as PNG"
@@ -278,6 +288,45 @@ Applied 10 heir transformations
 2. **Use PNG for all images** - SVG not supported by marketplace
 3. **Keep emoji in headings** - inline HTML images don't render reliably
 4. **Validate architecture sync** - check contamination and skill counts
+
+---
+
+## .vscodeignore Template
+
+Expected exclusions:
+```
+.vscode/**
+.vscode-test/**
+src/**
+test/**
+out/test/**
+scripts/**
+*.map
+*.ts
+!dist/**
+tsconfig*.json
+.eslintrc*
+.prettierrc*
+.gitignore
+*.vsix
+node_modules/**
+```
+
+Always verify with `npx vsce ls` before publish. Expected: `dist/`, `package.json`, `README.md`, `CHANGELOG.md`, `LICENSE`, `assets/icon.png`. Should NOT see: `src/`, `node_modules/`, `.env`, `*.key`.
+
+---
+
+## Unpublishing (Use with Caution)
+
+```powershell
+# Remove specific version
+npx vsce unpublish publisher.extension-name@0.0.1
+
+# Remove entire extension (IRREVERSIBLE — name reserved for 6 months)
+npx vsce unpublish publisher.extension-name
+```
+
+**Prefer deprecating over unpublishing** — existing users lose the extension if you unpublish.
 5. **Version everything together** - package.json, READMEs, CHANGELOG in one commit
 6. **Test installation** from marketplace after publish to verify propagation
 7. **Document in CHANGELOG** - users rely on clear release notes

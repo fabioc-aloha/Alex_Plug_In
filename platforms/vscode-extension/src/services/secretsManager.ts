@@ -904,7 +904,7 @@ const apiKey = secrets.API_KEY;
     <h2>For Scripts Called by Alex</h2>
     <p>Scripts called by the Alex extension can access secrets via SecretStorage:</p>
     <pre>
-// In your muscle script (e.g., gamma-generator.js)
+// In your muscle script (e.g., gamma-generator.cjs)
 // Alex extension will pass secrets as arguments instead of env vars
 
 // Before (insecure):

@@ -1,0 +1,47 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "prompt-evolution-system",
+    "connections": [
+        {
+            "target": ".github/skills/prompt-engineering/SKILL.md",
+            "type": "integrates",
+            "strength": 0.9,
+            "reason": "General prompt patterns underlie the evolution system",
+            "when": "Crafting initial prompt templates for evolution",
+            "yields": "well-designed base prompts for evolution"
+        },
+        {
+            "target": ".github/skills/content-safety-implementation/SKILL.md",
+            "type": "validates",
+            "strength": 0.8,
+            "reason": "Safety guards prevent evolution from weakening safety layers",
+            "when": "Evolving prompts that include safety constraints",
+            "yields": "safety-preserved prompt evolution"
+        },
+        {
+            "target": ".github/skills/testing-strategies/SKILL.md",
+            "type": "integrates",
+            "strength": 0.7,
+            "reason": "A/B testing is a form of experimentation requiring statistical rigor",
+            "when": "Evaluating A/B test results for statistical significance",
+            "yields": "statistically valid evolution decisions"
+        },
+        {
+            "target": ".github/skills/azure-openai-patterns/SKILL.md",
+            "type": "integrates",
+            "strength": 0.7,
+            "reason": "Prompt evolution targets primarily LLM-backed prompts",
+            "when": "Evolving prompts for Azure OpenAI-powered features",
+            "yields": "model-aware prompt optimization"
+        },
+        {
+            "target": ".github/skills/observability-monitoring/SKILL.md",
+            "type": "suggests",
+            "strength": 0.6,
+            "reason": "Evolution metrics need observability infrastructure",
+            "when": "Building dashboards and alerts for prompt performance",
+            "yields": "observable prompt evolution pipeline"
+        }
+    ]
+}

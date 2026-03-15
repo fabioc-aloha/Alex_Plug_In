@@ -8,6 +8,25 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as telemetry from './shared/telemetry';
 
+/**
+ * Resolve md-to-word.cjs: workspace first, then extension bundle fallback.
+ */
+async function resolveMdToWordScript(workspacePath: string, extensionPath: string): Promise<string | undefined> {
+  const candidates = [
+    path.join(workspacePath, ".github", "muscles", "md-to-word.cjs"),
+    path.join(extensionPath, ".github", "muscles", "md-to-word.cjs"),
+  ];
+  for (const candidate of candidates) {
+    try {
+      await vscode.workspace.fs.stat(vscode.Uri.file(candidate));
+      return candidate;
+    } catch {
+      // try next
+    }
+  }
+  return undefined;
+}
+
 export function registerWordCommands(context: vscode.ExtensionContext): void {
   const convertToWordDisposable = vscode.commands.registerCommand(
     "alex.convertToWord",
@@ -28,14 +47,11 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         }
 
         const outputPath = uri.fsPath.replace(/\.md$/, ".docx");
-        const pythonScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "md-to-word.py");
+        const nodeScript = await resolveMdToWordScript(workspaceFolder.uri.fsPath, context.extensionPath);
         
-        // Check if script exists
-        try {
-          await vscode.workspace.fs.stat(vscode.Uri.file(pythonScript));
-        } catch {
+        if (!nodeScript) {
           vscode.window.showErrorMessage(
-            "md-to-word.py not found. Please ensure Alex architecture is initialized."
+            "md-to-word.cjs not found. Please ensure Alex architecture is initialized."
           );
           endLog(false);
           return;
@@ -43,13 +59,13 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
 
         vscode.window.showInformationMessage("📄 Converting to Word...");
 
-        // Execute the Python script
         const terminal = vscode.window.createTerminal({
           name: "Alex: Word Conversion",
           cwd: path.dirname(uri.fsPath),
+          env: { NODE_PATH: path.join(context.extensionPath, 'node_modules') }
         });
         terminal.show();
-        terminal.sendText(`python "${pythonScript}" "${uri.fsPath}" "${outputPath}"`);
+        terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" "${outputPath}"`);
 
         // Wait a bit then notify - in real implementation we'd monitor the process
         setTimeout(() => {
@@ -87,14 +103,11 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const pythonScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "md-to-word.py");
+        const nodeScript = await resolveMdToWordScript(workspaceFolder.uri.fsPath, context.extensionPath);
         
-        // Check if script exists
-        try {
-          await vscode.workspace.fs.stat(vscode.Uri.file(pythonScript));
-        } catch {
+        if (!nodeScript) {
           vscode.window.showErrorMessage(
-            "md-to-word.py not found. Please ensure Alex architecture is initialized."
+            "md-to-word.cjs not found. Please ensure Alex architecture is initialized."
           );
           endLog(false);
           return;
@@ -171,10 +184,11 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         const terminal = vscode.window.createTerminal({
           name: "Alex: Word Conversion",
           cwd: path.dirname(uri.fsPath),
+          env: { NODE_PATH: path.join(context.extensionPath, 'node_modules') }
         });
         terminal.show();
         
-        const command = `python "${pythonScript}" "${uri.fsPath}" "${outputPath}" ${flags}`.trim();
+        const command = `node "${nodeScript}" "${uri.fsPath}" "${outputPath}" ${flags}`.trim();
         terminal.sendText(command);
 
         setTimeout(() => {

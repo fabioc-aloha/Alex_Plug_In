@@ -8,10 +8,10 @@ description: "Markdown to Word document conversion with diagram support"
 
 When user requests Word export (`/word`, "convert to word", "export docx", "create word document"):
 
-1. **Use the muscle script**: `.github/muscles/md-to-word.py`
+1. **Use the muscle script**: `.github/muscles/md-to-word.cjs`
 2. **Do NOT manually run pandoc** — the script handles everything
 
-## Key Features (v2.1.0)
+## Key Features (v3.0.0)
 
 - **90% page coverage** — images fit both horizontally AND vertically
 - **Centered images** — all diagrams centered on page
@@ -23,7 +23,7 @@ When user requests Word export (`/word`, "convert to word", "export docx", "crea
 ## Command
 
 ```powershell
-python .github/muscles/md-to-word.py SOURCE.md [OUTPUT.docx]
+node .github/muscles/md-to-word.cjs SOURCE.md [OUTPUT.docx]
 ```
 
 ## Sizing Algorithm
@@ -64,6 +64,6 @@ After conversion, verify:
 | Issue | Solution |
 |-------|----------|
 | mmdc not found | `npm install -g @mermaid-js/mermaid-cli` |
-| python-docx missing | `pip install python-docx` |
+| jszip not found | Ensure NODE_PATH includes extension node_modules |
 | Diagrams distorted | Update to v2.0.0 (aspect ratio fix) |
 | Lists merged | Update to v2.0.0 (markdown preprocessing) |

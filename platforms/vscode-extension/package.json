@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "6.6.0",
+  "version": "6.7.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -777,6 +777,9 @@
         "path": "./.github/skills/azure-deployment-operations/SKILL.md"
       },
       {
+        "path": "./.github/skills/azure-openai-patterns/SKILL.md"
+      },
+      {
         "path": "./.github/skills/bicep-avm-mastery/SKILL.md"
       },
       {
@@ -822,6 +825,9 @@
         "path": "./.github/skills/comedy-writing/SKILL.md"
       },
       {
+        "path": "./.github/skills/content-safety-implementation/SKILL.md"
+      },
+      {
         "path": "./.github/skills/correax-brand/SKILL.md"
       },
       {
@@ -832,6 +838,9 @@
       },
       {
         "path": "./.github/skills/cross-cultural-collaboration/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/data-quality-monitoring/SKILL.md"
       },
       {
         "path": "./.github/skills/database-design/SKILL.md"
@@ -951,6 +960,9 @@
         "path": "./.github/skills/meditation/SKILL.md"
       },
       {
+        "path": "./.github/skills/meeting-efficiency/SKILL.md"
+      },
+      {
         "path": "./.github/skills/memory-activation/SKILL.md"
       },
       {
@@ -958,6 +970,9 @@
       },
       {
         "path": "./.github/skills/microsoft-graph-api/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/msal-authentication/SKILL.md"
       },
       {
         "path": "./.github/skills/multi-agent-orchestration/SKILL.md"
@@ -1008,7 +1023,13 @@
         "path": "./.github/skills/prompt-engineering/SKILL.md"
       },
       {
+        "path": "./.github/skills/prompt-evolution-system/SKILL.md"
+      },
+      {
         "path": "./.github/skills/rag-architecture/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/react-vite-performance/SKILL.md"
       },
       {
         "path": "./.github/skills/refactoring-patterns/SKILL.md"
@@ -1041,6 +1062,9 @@
         "path": "./.github/skills/self-actualization/SKILL.md"
       },
       {
+        "path": "./.github/skills/service-worker-offline-first/SKILL.md"
+      },
+      {
         "path": "./.github/skills/skill-building/SKILL.md"
       },
       {
@@ -1051,6 +1075,12 @@
       },
       {
         "path": "./.github/skills/socratic-questioning/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/sse-streaming/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/stakeholder-management/SKILL.md"
       },
       {
         "path": "./.github/skills/status-reporting/SKILL.md"
@@ -2104,13 +2134,14 @@
     "glob": "^8.1.0",
     "mocha": "^11.7.5",
     "sharp": "^0.34.5",
-    "ts-unused-exports": "^9.0.0",
     "ts-node": "^10.9.2",
+    "ts-unused-exports": "^9.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.4.5"
   },
   "dependencies": {
     "fs-extra": "^11.3.3",
+    "jszip": "^3.10.1",
     "pptxgenjs": "^4.0.1",
     "proper-lockfile": "^4.1.2",
     "ws": "^8.19.0"

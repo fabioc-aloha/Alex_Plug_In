@@ -123,7 +123,7 @@ Examples:
 - validate-skills.ps1
 - sync-architecture.cjs
 - normalize-paths.ps1
-- gamma-generator.js
+- gamma-generator.cjs
 - brain-qa.ps1
 ```
 

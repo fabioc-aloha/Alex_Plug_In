@@ -50,7 +50,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 | `.github/muscles/brain-qa.ps1`                | brain-qa (31-phase validation)              |
 | `.github/muscles/build-extension-package.ps1` | heir-sync-management, release-management           |
 | `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)    |
-| `.github/muscles/gamma-generator.js`          | gamma-presentations (CLI generation)        |
+| `.github/muscles/gamma-generator.cjs`         | gamma-presentations (CLI generation)        |
 | `.github/muscles/normalize-paths.ps1`         | dream-state-automation (path normalization) |
 | `.github/muscles/pptxgen-cli.ts`              | pptx-generation (offline PPTX)              |
 | `.github/muscles/sync-architecture.cjs`        | heir-sync-management, build-extension-package.ps1  |
@@ -213,10 +213,10 @@ Capabilities with all three memory system components — each justified by the "
 | Component   | File                                              | Why It Exists                                                                              |
 | ----------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Skill       | `.github/skills/md-to-word/SKILL.md`              | Domain knowledge: markdown→docx conversion patterns, diagram embedding, style preservation |
-| Instruction | `.github/instructions/md-to-word.instructions.md` | Auto-loaded procedure: pandoc workflow, python-docx integration, mermaid→image conversion  |
+| Instruction | `.github/instructions/md-to-word.instructions.md` | Auto-loaded procedure: pandoc workflow, OOXML post-processing, mermaid→image conversion  |
 | Prompt      | `.github/prompts/word.prompt.md`                  | `/word` — user invokes markdown to Word document conversion with diagrams                  |
 
-**Muscle**: `md-to-word.py` — Python script for conversion with diagram support
+**Muscle**: `md-to-word.cjs` — Node.js script for conversion with diagram support
 **Inheritance**: `inheritable` — useful for academic and professional documentation across all heirs
 
 ### Gamma Presentation Generation
@@ -227,7 +227,7 @@ Capabilities with all three memory system components — each justified by the "
 | Instruction | `.github/instructions/gamma-presentation.instructions.md` | Auto-loaded procedure: API authentication, content generation, export workflows |
 | Prompt      | `.github/prompts/gamma.prompt.md`                         | `/gamma` — user invokes Gamma presentation generation from markdown             |
 
-**Muscle**: `gamma-generator.js` — Node.js CLI for Gamma API integration
+**Muscle**: `gamma-generator.cjs` — Node.js CLI for Gamma API integration
 **Inheritance**: `inheritable` — presentation generation valuable across academic and business heirs
 **Integration**: Uses secrets-management trifecta for GAMMA_API_KEY storage
 

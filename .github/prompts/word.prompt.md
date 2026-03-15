@@ -54,7 +54,4 @@ The script reads actual PNG dimensions and applies the most constraining limit w
 ```powershell
 winget install pandoc
 npm install -g @mermaid-js/mermaid-cli
-pip install python-docx
-
-
 ```

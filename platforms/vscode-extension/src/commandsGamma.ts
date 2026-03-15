@@ -8,6 +8,25 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as telemetry from './shared/telemetry';
 
+/**
+ * Resolve gamma-generator.cjs: workspace first, then extension bundle fallback.
+ */
+async function resolveGammaScript(workspacePath: string, extensionPath: string): Promise<string | undefined> {
+  const candidates = [
+    path.join(workspacePath, ".github", "muscles", "gamma-generator.cjs"),
+    path.join(extensionPath, ".github", "muscles", "gamma-generator.cjs"),
+  ];
+  for (const candidate of candidates) {
+    try {
+      await vscode.workspace.fs.stat(vscode.Uri.file(candidate));
+      return candidate;
+    } catch {
+      // try next
+    }
+  }
+  return undefined;
+}
+
 export function registerGammaCommands(context: vscode.ExtensionContext): void {
   const generateGammaPresentationDisposable = vscode.commands.registerCommand(
     "alex.generateGammaPresentation",
@@ -43,12 +62,9 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.cjs");
+        const gammaScript = await resolveGammaScript(workspaceFolder.uri.fsPath, context.extensionPath);
         
-        // Check if script exists
-        try {
-          await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
-        } catch {
+        if (!gammaScript) {
           vscode.window.showErrorMessage(
             "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
@@ -150,12 +166,9 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.cjs");
+        const gammaScript = await resolveGammaScript(workspaceFolder.uri.fsPath, context.extensionPath);
         
-        // Check if script exists
-        try {
-          await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
-        } catch {
+        if (!gammaScript) {
           vscode.window.showErrorMessage(
             "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
@@ -240,12 +253,9 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const gammaScript = path.join(workspaceFolder.uri.fsPath, ".github", "muscles", "gamma-generator.cjs");
+        const gammaScript = await resolveGammaScript(workspaceFolder.uri.fsPath, context.extensionPath);
         
-        // Check if script exists
-        try {
-          await vscode.workspace.fs.stat(vscode.Uri.file(gammaScript));
-        } catch {
+        if (!gammaScript) {
           vscode.window.showErrorMessage(
             "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );

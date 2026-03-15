@@ -680,7 +680,7 @@ if (30 -in $runPhases) {
     $musclesPath = Join-Path $ghPath "muscles"
     $expectedMuscles = @(
         "brain-qa.ps1", "dream-cli.ts", "fix-fence-bug.ps1",
-        "gamma-generator.js", "normalize-paths.ps1",
+        "gamma-generator.cjs", "normalize-paths.ps1",
         "pptxgen-cli.ts", "validate-skills.ps1", "validate-synapses.ps1"
     )
     $missingMuscles = @()

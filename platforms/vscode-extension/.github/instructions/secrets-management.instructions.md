@@ -441,7 +441,7 @@ const apiKey = process.env.GAMMA_API_KEY;  // Populated by deployment platform
 **Scripts/Commands**:
 ```bash
 # Pass secrets as arguments, don't read from .env
-node gamma-generator.js --api-key="${GAMMA_API_KEY}"
+node gamma-generator.cjs --api-key="${GAMMA_API_KEY}"
 ```
 
 ### Integration Points

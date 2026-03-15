@@ -25,9 +25,8 @@ Memory files define *what* and *how*; muscles *do*.
 | `normalize-paths.ps1`         | PowerShell | 194   | Path consistency fixes       | inheritable |
 | `pptxgen-cli.ts`              | TypeScript | 136   | PowerPoint generation        | inheritable |
 | `sync-architecture.cjs`       | JavaScript | 771   | Master → Heir sync           | master-only |
-| `gamma-generator.js`          | JavaScript | —     | Gamma slides (ESM variant)   | inheritable |
 | `install-hooks.ps1`           | PowerShell | —     | Install hooks config         | inheritable |
-| `md-to-word.py`               | Python     | —     | Markdown → Word conversion   | inheritable |
+| `md-to-word.cjs`              | JavaScript | —     | Markdown → Word conversion   | inheritable |
 | `new-skill.ps1`               | PowerShell | —     | Scaffold new skill trifecta  | inheritable |
 | `validate-skills.ps1`         | PowerShell | 113   | Skill file validation        | inheritable |
 | `validate-synapses.ps1`       | PowerShell | 154   | Synapse target validation    | inheritable |

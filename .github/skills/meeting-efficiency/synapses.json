@@ -1,0 +1,47 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "meeting-efficiency",
+    "connections": [
+        {
+            "target": ".github/skills/stakeholder-management/SKILL.md",
+            "type": "integrates",
+            "strength": 0.8,
+            "reason": "Meeting effectiveness depends on stakeholder awareness",
+            "when": "Planning meetings with cross-functional stakeholders",
+            "yields": "stakeholder-aware meeting design"
+        },
+        {
+            "target": ".github/skills/coaching-techniques/SKILL.md",
+            "type": "suggests",
+            "strength": 0.6,
+            "reason": "1:1 meetings benefit from coaching techniques",
+            "when": "Running 1:1 or development meetings",
+            "yields": "coaching-informed facilitation"
+        },
+        {
+            "target": ".github/skills/deep-work-optimization/SKILL.md",
+            "type": "validates",
+            "strength": 0.7,
+            "reason": "Meeting reduction protects deep work time",
+            "when": "Auditing calendar for meeting bloat",
+            "yields": "deep work protection strategies"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "suggests",
+            "strength": 0.5,
+            "reason": "Executive meetings need narrative clarity",
+            "when": "Preparing for strategic or executive meetings",
+            "yields": "executive-ready meeting structure"
+        },
+        {
+            "target": ".github/skills/project-management/SKILL.md",
+            "type": "integrates",
+            "strength": 0.7,
+            "reason": "Meetings are a core project coordination tool",
+            "when": "Running project coordination meetings",
+            "yields": "project-aligned meeting cadence"
+        }
+    ]
+}

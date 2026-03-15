@@ -1,0 +1,39 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "sse-streaming",
+    "connections": [
+        {
+            "target": ".github/skills/azure-openai-patterns/SKILL.md",
+            "type": "integrates",
+            "strength": 0.8,
+            "reason": "SSE is the delivery mechanism for streamed Azure OpenAI responses",
+            "when": "Streaming AI responses to client in real-time",
+            "yields": "streamed Azure OpenAI responses via SSE"
+        },
+        {
+            "target": ".github/skills/azure-deployment-operations/SKILL.md",
+            "type": "validates",
+            "strength": 0.6,
+            "reason": "Streaming functions have deployment considerations (host.json, SWA proxy)",
+            "when": "Deploying streaming Azure Functions behind SWA",
+            "yields": "deployment-validated streaming configuration"
+        },
+        {
+            "target": ".github/skills/error-recovery-patterns/SKILL.md",
+            "type": "suggests",
+            "strength": 0.6,
+            "reason": "Stream failures need retry and reconnection patterns",
+            "when": "Handling stream connection failures",
+            "yields": "resilient streaming with error recovery"
+        },
+        {
+            "target": ".github/skills/ui-ux-design/SKILL.md",
+            "type": "suggests",
+            "strength": 0.5,
+            "reason": "Streaming UX needs loading states, progress indicators",
+            "when": "Designing UI for streaming responses",
+            "yields": "user-friendly streaming experience"
+        }
+    ]
+}

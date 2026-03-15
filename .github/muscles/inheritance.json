@@ -46,16 +46,9 @@
             "description": "Detect and fix VS Code create_file wrapping fence bug",
             "referencedBy": []
         },
-        "gamma-generator.js": {
-            "inheritance": "inheritable",
-            "description": "Gamma API CLI for presentation generation",
-            "referencedBy": [
-                "gamma-presentations"
-            ]
-        },
         "gamma-generator.cjs": {
             "inheritance": "inheritable",
-            "description": "CommonJS variant of Gamma API CLI",
+            "description": "Gamma API CLI for presentation generation (CommonJS)",
             "referencedBy": [
                 "gamma-presentations"
             ]
@@ -65,9 +58,9 @@
             "description": "Install chat hooks configuration for workspace",
             "referencedBy": []
         },
-        "md-to-word.py": {
+        "md-to-word.cjs": {
             "inheritance": "inheritable",
-            "description": "Convert Markdown with Mermaid diagrams to professional Word documents",
+            "description": "Convert Markdown with Mermaid diagrams to professional Word documents (Node.js)",
             "referencedBy": [
                 "md-to-word"
             ]

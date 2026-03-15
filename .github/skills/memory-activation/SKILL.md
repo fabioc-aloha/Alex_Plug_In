@@ -145,6 +145,16 @@ Search this index when processing any task request:
 | sales-enablement | sales methodology, pipeline management, negotiation, customer engagement, prospecting, deal closing, crm, quota |
 | scope-management | scope creep, reduce scope, mvp, cut features, out of scope, defer |
 | secrets-management | manage secrets, store token, secret storage, vscode secretstorage, secure credentials, credential management, token migration, api key storage, keytar migration, secure key storage |
+| azure-openai-patterns | azure openai, gpt deployment, token budget, rate limiting, openai retry, embedding, fine-tune azure, content filter, managed identity openai |
+| content-safety-implementation | content safety, guardrails, kill switch, prompt injection defense, input sanitization, output validation, self-harm detection, abuse prevention |
+| data-quality-monitoring | data quality, anomaly detection, schema drift, null ratio, freshness check, z-score, data validation, baseline, safe write |
+| meeting-efficiency | meeting agenda, time box, decision capture, async standup, meeting facilitation, reduce meetings, action items, meeting notes |
+| msal-authentication | msal, entra id, oauth, token cache, silent auth, interactive login, azure ad, client credentials, on-behalf-of, pkce |
+| prompt-evolution-system | prompt versioning, a/b test prompts, prompt metrics, prompt regression, prompt template, system prompt iteration, prompt evaluation |
+| react-vite-performance | vite config, code splitting, lazy route, react compiler, use hook, useTransition, tanstack query, web vitals, bundle analysis |
+| service-worker-offline-first | service worker, offline first, cache strategy, sw lifecycle, skipWaiting, background sync, workbox, pwa |
+| sse-streaming | server-sent events, sse, event stream, streaming response, post sse, azure function stream, real-time updates |
+| stakeholder-management | stakeholder map, influence grid, communication plan, expectation management, power-interest matrix, sponsor engagement |
 | security-review | security audit, owasp check, vulnerability scan, auth review, stride, is this secure, review for vulnerabilities, check for security issues, secure this code, sfi, sfi compliance, injection attack, xss, csrf, threat model, secrets in code, access control, input validation |
 | self-actualization | self-actualize, deep assessment, architecture review, comprehensive check |
 | skill-building | create skill, build skill, skill template, promotion ready, skill creation, new skill |
