@@ -1,27 +1,22 @@
 {
   "hotFiles": [],
-  "stalledFiles": [],
+  "stalledFiles": [
+    "github/episodic/peripheral/file-observations.json",
+    "TRIP-REVIEW-APPLICATION-DESCRIPTION.docx",
+    "TRIP-REVIEW-APPLICATION-DESCRIPTION.md",
+    "images/"
+  ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.7.0.vsix",
-      "todoCount": 2,
-      "scannedAt": 1773599927776
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1773599927776
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "file": "images/diagram-1.png",
       "todoCount": 1,
-      "scannedAt": 1773599927776
+      "scannedAt": 1773764104916
     },
     {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "file": "TRIP-REVIEW-APPLICATION-DESCRIPTION.docx",
       "todoCount": 1,
-      "scannedAt": 1773599927776
+      "scannedAt": 1773764104916
     }
   ],
-  "lastUpdated": 1773599927776
+  "lastUpdated": 1773764104916
 }
