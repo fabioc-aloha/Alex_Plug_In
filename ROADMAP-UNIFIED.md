@@ -62,14 +62,14 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 ### 🚨 Pressing Issues
 | Priority | Item | Action | Owner | Status |
 | --- | --- | --- | --- | --- |
-| P0 | Large-file refactors | Split `participant.ts`, `sharedStyles.ts`, `globalKnowledge*.ts`, `setupEnvironment.ts`, `ttsService.ts` into modules; add lint rule to flag >800L | Dev | ✅ Done — all files split into modules, 0 ESLint max-lines warnings |
 | P2 | Worker/Teams readiness | Track VS Code `worker_agents` GA + Teams triggers; prep skeleton | Platform | ⏳ |
 
 <details>
-<summary>Completed Pressing Issues (9 resolved in v6.7.0 sprint)</summary>
+<summary>Completed Pressing Issues (10 resolved)</summary>
 
 | Priority | Item | Status |
 | --- | --- | --- |
+| P0 | Large-file refactors | ✅ sharedStyles (3 modules), globalKnowledgePatterns, speechTextProcessor, setupMarkdownCss extracted; 0 max-lines warnings |
 | P0 | Audit-architecture gate | ✅ in CI |
 | P0 | Skill activation index | ✅ audit script + CI |
 | P1 | Heir sync drift check | ✅ script + CI |
@@ -82,25 +82,25 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 
 </details>
 
-### `view_image` Adoption (1.112, Backlog)
+<details>
+<summary>view_image Adoption (1.112) — ✅ All 6 items done</summary>
 
-VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPEG/GIF/WEBP/BMP from disk with automatic resizing (OpenAI vision algo: max 2048px → 768px min side). No extension API needed. Merged, verified, shipping in 1.112 Stable.
+VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPEG/GIF/WEBP/BMP from disk with automatic resizing (OpenAI vision algo: max 2048px → 768px min side). No extension API needed.
 
-| Item | Description | Effort | Status |
-| --- | --- | :---: | --- |
-| Character reference validation | Agent uses `view_image` on `alex_docs/alex3/` images to verify visual consistency after generation | Low | ✅ Done |
-| Banner/brand asset review | During `/generate-readme-banners` or brand workflows, agent views output PNG and assesses quality | Low | ✅ Done |
-| Diagram verification | After Mermaid → image export, agent views rendered diagram to verify correctness | Low | ✅ Done |
-| Subagent vision handoff | Builder generates image → Validator views it via `runSubagent` for visual QA | Medium | ✅ Done |
-| Visual memory simplification | Replace base64-encoded reference portraits in skill files with disk paths; agent reads via `view_image` | Medium | ✅ Done |
-| Image carousel output | 1.112 ships image carousel view (#301606) — agents can display multiple images in a carousel. Leverage for brand asset comparison, before/after visual QA | Low | ✅ Done |
+| Item | Status |
+| --- | --- |
+| Character reference validation | ✅ Done |
+| Banner/brand asset review | ✅ Done |
+| Diagram verification | ✅ Done |
+| Subagent vision handoff | ✅ Done |
+| Visual memory simplification | ✅ Done |
+| Image carousel output | ✅ Done |
+
+</details>
 
 ### Quality Gates & Audits (8 Gates)
-| Item | Status | Notes |
-| --- | --- | --- |
-| Large-file refactors | ✅ Done | sharedStyles split (3 modules), globalKnowledgePatterns extracted, speechTextProcessor extracted, setupMarkdownCss extracted; 0 max-lines warnings |
 
-All other quality gates are complete and enforced in CI. See [automated-quality-gates.instructions.md](.github/instructions/automated-quality-gates.instructions.md) for the full 8-gate architecture.
+✅ All quality gates complete and enforced in CI — including large-file refactors (sharedStyles 3-way split, globalKnowledgePatterns, speechTextProcessor, setupMarkdownCss extracted; 0 max-lines warnings). See [automated-quality-gates.instructions.md](.github/instructions/automated-quality-gates.instructions.md) for the full 8-gate architecture.
 
 ### Deferred Hooks (Low Priority)
 
