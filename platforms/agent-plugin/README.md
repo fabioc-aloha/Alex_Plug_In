@@ -40,7 +40,7 @@ VS Code 1.110+ supports [agent plugins](https://code.visualstudio.com/docs/copil
 | Install | Extensions sidebar | `@agentPlugins` in Extensions sidebar |
 | Commands | 90 registered commands | Slash commands via prompts |
 | Agents | 7 specialist agents | 7 specialist agents |
-| Skills | 128 skills | 84 plugin-ready skills |
+| Skills | 143 skills | 84 plugin-ready skills |
 | Hooks | 4 lifecycle hooks | 1 lifecycle hook (PreToolUse) |
 | MCP | Via extension activation | `.mcp.json` standalone |
 | Memory | SecretStorage + file + episodic | File memory only |
@@ -101,6 +101,15 @@ Once published to a plugin marketplace:
 
 3. Restart VS Code — Alex's skills, agents, and instructions will load into chat
 
+### From Source Directory (VS Code 1.112+)
+
+1. Open Command Palette (`Ctrl+Shift+P`)
+2. Run **Chat: Install Plugin from Source**
+3. Browse to the `plugin/` directory inside this agent-plugin folder
+4. Alex's skills, agents, and instructions load immediately — no restart needed
+
+> VS Code 1.112 also supports per-workspace and global plugin enable/disable via the Extensions sidebar (`@agentPlugins` filter).
+
 ### From Git Repository (marketplace config)
 
 Add to a plugin marketplace's `marketplace.json`:
@@ -110,7 +119,7 @@ Add to a plugin marketplace's `marketplace.json`:
     "name": "alex-cognitive-architecture",
     "source": "platforms/agent-plugin/plugin",
     "description": "Alex Cognitive Architecture — AI partner with skills, agents, and cognitive tools.",
-    "version": "6.5.0",
+    "version": "6.7.0",
     "skills": ["./skills/*"]
 }
 ```
@@ -127,7 +136,7 @@ This heir is synced from Master Alex during release. To deploy:
 
 ---
 
-## Skill Selection — Complete Inventory (128 Skills)
+## Skill Selection — Complete Inventory (84 Plugin-Ready Skills)
 
 Every Alex skill listed below with its trifecta status, inheritance, dependencies, and plugin readiness. Use this to decide what to include.
 

@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.7.0 Heir Harvest Release. VS Code 1.112 stable evaluated — 6 new features tracked, ROADMAP fully updated, Future Watch section introduced. All quality gates pass, 232 tests, 143 skills, 38 trifectas.
+Recent: P1/P2 implementation sprint complete — 6 pressing issues resolved (VSIX budget hardened, lint-docs blocking, parent-repo customization, agent plugin v6.7.0, MCP workspace, model-tool matrices). Roadmap cleaned (4 hygiene fixes). All quality gates pass, 232 tests, 143 skills, 38 trifectas.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: 2026-03-17
@@ -128,7 +128,7 @@ chat.exploreAgent.defaultModel=claude-sonnet-4
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
 chat.plugins.enabled=true, chat.tips.enabled=true
 chat.agent.thinking.phrases=[Alex-personality phrases]
-1.112: chat.useCustomizationsInParentRepositories (evaluate for heir inheritance)
+1.112: chat.useCustomizationsInParentRepositories=true (enabled — co-located heirs inherit Master .github/ customizations)
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
 **macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 

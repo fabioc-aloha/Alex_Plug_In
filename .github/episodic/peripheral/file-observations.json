@@ -2,22 +2,16 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/copilot-instructions.md",
-    "CONTRIBUTING.md",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/alex3/generation-report.json",
-    "alex_docs/diagram-visualization/generation-report.json",
-    "platforms/m365-copilot/DEPLOYMENT-SUMMARY.md",
-    "platforms/m365-copilot/GRAPH-API-INTEGRATION.md",
-    "platforms/m365-copilot/QUICK-DEPLOY.md",
-    "platforms/vscode-extension/src/shared/utils.ts",
-    "scripts/check-self-contained.ps1"
+    "platforms/agent-plugin/README.md",
+    "platforms/agent-plugin/marketplace.json",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/scripts/quality-gate.cjs",
+    "scripts/lint-docs.cjs",
+    "alex_docs/MODEL-TOOL-MATRIX.md",
+    "scripts/gen-model-tool-matrix.cjs"
   ],
-  "todoHotspots": [
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1773795470613
-    }
-  ],
-  "lastUpdated": 1773795470613
+  "todoHotspots": [],
+  "lastUpdated": 1773802207116
 }

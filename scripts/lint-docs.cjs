@@ -22,7 +22,16 @@ function runMarkdownlint() {
   const markdownlint = require('markdownlint');
   const formatter = markdownlint && markdownlint.formatters && markdownlint.formatters.default;
   const files = walkDocs();
-  const options = { files };
+
+  // Load config from .markdownlint.jsonc if present
+  const configPath = path.join(ROOT, '.markdownlint.jsonc');
+  let config = {};
+  if (fs.existsSync(configPath)) {
+    const raw = fs.readFileSync(configPath, 'utf8').replace(/\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '');
+    try { config = JSON.parse(raw); } catch (_) { /* ignore parse error */ }
+  }
+
+  const options = { files, config };
   const result = markdownlint.sync(options);
   const errorEntries = Object.entries(result || {}).filter(([_, val]) => (val && val.length));
 
@@ -33,9 +42,8 @@ function runMarkdownlint() {
     const formatted = formatter ? formatter(result, options) : JSON.stringify(result, null, 2);
     console.error(formatted);
     if (nonArchivedErrors.length > 0) {
-      console.warn('[lint-docs] ⚠️ markdownlint warnings (non-archive)');
-      // For now, do not fail CI; treat as backlog. Set exit code 0.
-      return;
+      console.error('[lint-docs] ❌ markdownlint errors (non-archive) — fix before publishing');
+      process.exit(1);
     } else {
       console.warn('[lint-docs] ⚠️ markdownlint warnings (archives only)');
     }

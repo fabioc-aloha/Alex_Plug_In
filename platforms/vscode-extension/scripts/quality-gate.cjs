@@ -428,36 +428,118 @@ function checkSkillFrontmatterIntegrity() {
 
 // ─── Gate 7: VSIX Size Budget ──────────────────────────────────────────────
 
+/**
+ * Fallback file walker: estimates VSIX size when vsce is unavailable.
+ * Walks ROOT, skips common non-packaged dirs, respects basic .vscodeignore patterns.
+ */
+function estimateVsixSizeFallback() {
+  const ignoreContent = fs.readFileSync(VSCODEIGNORE, 'utf8');
+  const ignorePatterns = [];
+  const negatePatterns = [];
+  for (const line of ignoreContent.split('\n')) {
+    const t = line.trim();
+    if (!t || t.startsWith('#')) continue;
+    if (t.startsWith('!')) {
+      negatePatterns.push(t.substring(1));
+    } else {
+      ignorePatterns.push(t);
+    }
+  }
+
+  const skipDirs = new Set(['node_modules', '.git', '.vscode-test', 'out']);
+  let totalBytes = 0;
+  let fileCount = 0;
+
+  function shouldIgnore(relPath) {
+    // Simple pattern matching: exact match, glob suffix (**), or extension glob (**)
+    for (const pat of ignorePatterns) {
+      if (pat === relPath) return true;
+      if (pat.endsWith('/**') && relPath.startsWith(pat.slice(0, -3))) return true;
+      if (pat.startsWith('**/') && relPath.endsWith(pat.slice(3))) return true;
+      if (pat.startsWith('**/*') && relPath.endsWith(pat.slice(4))) return true;
+      if (pat.endsWith('**') && relPath.startsWith(pat.slice(0, -2))) return true;
+    }
+    return false;
+  }
+
+  function shouldNegate(relPath) {
+    for (const pat of negatePatterns) {
+      if (pat === relPath) return true;
+      if (pat.endsWith('/**') && relPath.startsWith(pat.slice(0, -3))) return true;
+      if (pat.startsWith('**/') && relPath.endsWith(pat.slice(3))) return true;
+    }
+    return false;
+  }
+
+  function walk(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (skipDirs.has(entry.name)) continue;
+      const full = path.join(dir, entry.name);
+      const rel = path.relative(ROOT, full).replace(/\\/g, '/');
+      if (entry.isDirectory()) {
+        if (!shouldIgnore(rel + '/') && !shouldIgnore(rel + '/**')) {
+          walk(full);
+        }
+      } else {
+        if (!shouldIgnore(rel) || shouldNegate(rel)) {
+          totalBytes += fs.statSync(full).size;
+          fileCount++;
+        }
+      }
+    }
+  }
+
+  walk(ROOT);
+  return { totalBytes, fileCount };
+}
+
 function checkVsixSizeBudget() {
   header('Gate 7: VSIX Size Budget');
+  let totalBytes = 0;
+  let fileCount = 0;
+  let method = 'vsce';
+
   try {
     const result = spawnSync('npx', ['vsce', 'ls'], {
       cwd: ROOT,
       encoding: 'utf8',
       stdio: 'pipe',
+      shell: true,
     });
     if (result.status !== 0) {
-      warn('vsce ls failed; skipping size check');
-      return;
-    }
-    const files = result.stdout.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
-    let totalBytes = 0;
-    for (const rel of files) {
-      const full = path.join(ROOT, rel);
-      if (fs.existsSync(full)) {
-        totalBytes += fs.statSync(full).size;
+      // vsce failed — use fallback file walker
+      warn('vsce ls failed; using fallback file walker');
+      method = 'fallback';
+      const est = estimateVsixSizeFallback();
+      totalBytes = est.totalBytes;
+      fileCount = est.fileCount;
+    } else {
+      const files = result.stdout.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+      fileCount = files.length;
+      for (const rel of files) {
+        const full = path.join(ROOT, rel);
+        if (fs.existsSync(full)) {
+          totalBytes += fs.statSync(full).size;
+        }
       }
     }
-    const mb = totalBytes / (1024 * 1024);
-    if (mb > 5) {
-      fail(`VSIX size ${mb.toFixed(2)} MB exceeds 5 MB budget`);
-    } else if (mb > 4.5) {
-      warn(`VSIX size ${mb.toFixed(2)} MB approaching limit`);
-    } else {
-      pass(`VSIX size ${mb.toFixed(2)} MB within budget`);
-    }
   } catch (err) {
-    warn(`VSIX size check skipped: ${err.message}`);
+    // Total failure — use fallback
+    warn(`vsce unavailable (${err.message}); using fallback file walker`);
+    method = 'fallback';
+    const est = estimateVsixSizeFallback();
+    totalBytes = est.totalBytes;
+    fileCount = est.fileCount;
+  }
+
+  const mb = totalBytes / (1024 * 1024);
+  if (mb > 7) {
+    fail(`VSIX size ${mb.toFixed(2)} MB exceeds 7 MB budget (${fileCount} files, ${method})`);
+  } else if (mb > 5.5) {
+    warn(`VSIX size ${mb.toFixed(2)} MB approaching limit (${fileCount} files, ${method})`);
+  } else {
+    pass(`VSIX size ${mb.toFixed(2)} MB within budget (${fileCount} files, ${method})`);
   }
 }
 

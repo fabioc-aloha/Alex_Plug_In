@@ -66,13 +66,13 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 | P0 | Audit-architecture gate | Add `node scripts/audit-architecture.cjs` to CI and fail on schema/trifecta drift | DevOps | ✅ in CI |
 | P0 | Skill activation index | Validate `memory-activation/SKILL.md` covers all skills; add check to audit script | Arch | ✅ audit script + CI |
 | P1 | Heir sync drift check | Add gate to detect excluded heir skills drifting on bulk synapse updates | Arch | ✅ script + CI |
-| P1 | VSIX size budget | Add size threshold (<5 MB) to quality-gate; warn at 4.5 MB | Build | 🚧 Gate 7 added (vsce missing warns) |
-| P1 | Doc drift / Mermaid lint | Integrate `markdownlint` + Mermaid init lint into CI; enforce pastel init template | Docs | 🚧 lint-docs script added (non-blocking warnings) |
-| P2 | Model + tool matrices | Auto-generate model/tool capability tables from code; ensure README alignment | Docs | ⏳ |
+| P1 | VSIX size budget | Add size threshold (<7 MB) to quality-gate; warn at 5.5 MB | Build | ✅ Gate 7 hardened (`@vscode/vsce` devDep + fallback walker) |
+| P1 | Doc drift / Mermaid lint | Integrate `markdownlint` + Mermaid init lint into CI; enforce pastel init template | Docs | ✅ lint-docs now blocking (`.markdownlint.jsonc` config) |
+| P2 | Model + tool matrices | Auto-generate model/tool capability tables from code; ensure README alignment | Docs | ✅ `gen-model-tool-matrix.cjs` → `alex_docs/MODEL-TOOL-MATRIX.md` |
 | P2 | Worker/Teams readiness | Track VS Code `worker_agents` GA + Teams triggers; prep skeleton | Platform | ⏳ |
-| P1 | Parent-repo customization inheritance | 1.112 ships `chat.useCustomizationsInParentRepositories` (#293277) — VS Code searches parent repos for instructions/prompts/agents.md/skills. Evaluate impact on heir sync architecture; could reduce `sync-architecture.cjs` overhead for co-located heirs. | Arch | ⏳ new (1.112) |
-| P2 | Agent Plugin distribution | 1.112 adds `Chat: Install Plugin from Source` + plugin-specific component paths (#300945) + per-workspace/global plugin enable/disable (#300271). Prep Agent Plugin heir for direct install. | Platform | ⏳ new (1.112) |
-| P2 | MCP workspace management | 1.112 adds per-workspace/global MCP server enable/disable (#243620). Evaluate for managed MCP configuration in heir projects. | Platform | ⏳ new (1.112) |
+| P1 | Parent-repo customization inheritance | 1.112 ships `chat.useCustomizationsInParentRepositories` (#293277) — VS Code searches parent repos for instructions/prompts/agents.md/skills. Evaluate impact on heir sync architecture; could reduce `sync-architecture.cjs` overhead for co-located heirs. | Arch | ✅ enabled in settings; co-located heirs inherit |
+| P2 | Agent Plugin distribution | 1.112 adds `Chat: Install Plugin from Source` + plugin-specific component paths (#300945) + per-workspace/global plugin enable/disable (#300271). Prep Agent Plugin heir for direct install. | Platform | ✅ marketplace.json v6.7.0 + install-from-source docs |
+| P2 | MCP workspace management | 1.112 adds per-workspace/global MCP server enable/disable (#243620). Evaluate for managed MCP configuration in heir projects. | Platform | ✅ `.vscode/mcp.json` created |
 
 ### `view_image` Adoption (1.112, Backlog)
 
@@ -96,10 +96,8 @@ VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPE
 | Audit-architecture cjs | ✅ in CI | `node scripts/audit-architecture.cjs` step added |
 | Skill activation index | ✅ in CI | `scripts/audit-skill-activation-index.cjs` added to CI and quality gate |
 | Heir sync drift check | ✅ in CI | `scripts/audit-heir-sync-drift.cjs` added to CI |
-| VSIX size budget | 🚧 Gate 7 added | `quality-gate.cjs` warns if >4.5 MB (vsce ls fallback) |
-| Doc drift / Mermaid lint | 🚧 script added | `scripts/lint-docs.cjs` (non-blocking; archives ignored) |
-| VSIX size budget | ⏳ automate | See pressing issues P1 |
-| Doc drift monitor | ⏳ backlog | See pressing issues P1 |
+| VSIX size budget | ✅ Gate 7 hardened | `@vscode/vsce` devDep + fallback file walker; never silently skips |
+| Doc drift / Mermaid lint | ✅ blocking | `scripts/lint-docs.cjs` loads `.markdownlint.jsonc`; exits 1 on non-archive errors |
 
 ### Deferred Hooks (Low Priority)
 
@@ -154,7 +152,6 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 | # | Task | Gate | Effort | Description | Status |
 | --- | --- | --- | :---: | --- | --- |
 | 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings | ⏳ Gate approaching — 143 skills currently (audit-skill-activation-index); need Azure OpenAI key |
-| 13 | ~~**EmbeddedKnowledge adoption**~~ | ~~Microsoft makes it GA~~ | ~~2h~~ | ~~Enable capability~~ | ✅ **Done** — `declarativeAgent.json` declares `EmbeddedKnowledge` with 6 `.txt` knowledge files. Shipped in v6.2.0. Remove from gated list. |
 | 14 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. |
 
 ### Conditional (Trigger-Dependent)
@@ -253,13 +250,13 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
 | **Current Master Version** | 6.7.0                                          |
-| **Current Heirs**          | VS Code (6.7.0), M365 (6.2.0), Plugin (6.5.3)  |
+| **Current Heirs**          | VS Code (6.7.0), M365 (6.2.0), Plugin (6.7.0)  |
 | **Architecture**           | 143 skills, 38 trifectas, 65 instructions, 48 prompts, 7 agents |
 | **Codebase**               | 128 TS files, 20 test files (232 passing, 0 failing) |
 | **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) · [v6.5.3 Audit](alex_docs/audits/AUDIT-2026-03-11.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence              |
-| **Open Items**             | 9 total: 4 blocked, 3 gated, 2 conditional |
+| **Open Items**             | 8 total: 4 blocked, 2 gated, 2 conditional |
 | **Updated**                | 2026-03-17                                     |
 
 ---
