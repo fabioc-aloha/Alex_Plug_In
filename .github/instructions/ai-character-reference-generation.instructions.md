@@ -260,6 +260,19 @@ for (const scenario of SCENARIOS) {
 
 ---
 
+## Visual Verification (VS Code 1.112+)
+
+After generating a character reference set, use the built-in `view_image` tool to verify visual consistency without leaving the chat:
+
+1. **Identity check**: `view_image` each generated image — confirm the character is recognizable across all poses/environments
+2. **Drift detection**: Compare first and last images in the set — flag if hair, eye color, build, or distinctive features have shifted
+3. **Pose diversity**: Scan the full set for duplicate body positions or repetitive compositions
+4. **Style coherence**: Verify lighting, color grading, and aesthetic remain consistent with the generation prompt
+
+When comparing multiple outputs, VS Code 1.112+'s image carousel displays them side-by-side for efficient visual QA.
+
+---
+
 ## Troubleshooting
 
 ### Pose Repetition

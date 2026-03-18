@@ -372,6 +372,19 @@ const output = await replicate.run('black-forest-labs/flux-schnell', {
 
 ---
 
+## Banner Quality Review (VS Code 1.112+)
+
+After generating banners, use the built-in `view_image` tool to assess output quality before committing:
+
+- **Typography legibility**: Verify text is sharp, properly spelled, and readable at README scale
+- **Brand color accuracy**: Confirm palette matches project branding guidelines
+- **Composition balance**: Check visual weight distribution and element placement
+- **Artifact detection**: Look for AI artifacts — smeared text, misshapen objects, inconsistent edges
+
+For multi-variant generation, VS Code 1.112+'s image carousel enables side-by-side comparison without file switching.
+
+---
+
 ## Common Pitfalls
 
 ### Ideogram Parameter Casing

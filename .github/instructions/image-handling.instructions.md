@@ -69,3 +69,14 @@ For compact UI icons, do not assume SVG generation is the best fit. `recraft-ai/
 - Use exponential backoff retry for 429 errors (2s, 4s, 8s)
 - Prefer the model's `retry_after` hint when Replicate includes it in a 429 response
 - Store generation reports as JSON alongside output files
+
+## Post-Generation Verification (VS Code 1.112+)
+
+After generating or converting images, use the built-in `view_image` tool to verify output quality:
+
+- **SVG → PNG conversion**: Confirm text renders crisply, no missing elements
+- **AI-generated images**: Check for artifacts, spelling errors in text, character drift
+- **Optimized images**: Verify compression didn't introduce visible quality loss
+- **Face-reference generation**: Confirm likeness matches reference photos
+
+For batch operations, use VS Code 1.112+'s image carousel to compare multiple outputs side-by-side.

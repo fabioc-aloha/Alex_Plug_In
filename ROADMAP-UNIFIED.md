@@ -88,12 +88,12 @@ VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPE
 
 | Item | Description | Effort | Status |
 | --- | --- | :---: | --- |
-| Character reference validation | Agent uses `view_image` on `alex_docs/alex3/` images to verify visual consistency after generation | Low | ⏳ |
-| Banner/brand asset review | During `/generate-readme-banners` or brand workflows, agent views output PNG and assesses quality | Low | ⏳ |
-| Diagram verification | After Mermaid → image export, agent views rendered diagram to verify correctness | Low | ⏳ |
-| Subagent vision handoff | Builder generates image → Validator views it via `runSubagent` for visual QA | Medium | ⏳ |
-| Visual memory simplification | Replace base64-encoded reference portraits in skill files with disk paths; agent reads via `view_image` | Medium | ⏳ |
-| Image carousel output | 1.112 ships image carousel view (#301606) — agents can display multiple images in a carousel. Leverage for brand asset comparison, before/after visual QA | Low | ⏳ |
+| Character reference validation | Agent uses `view_image` on `alex_docs/alex3/` images to verify visual consistency after generation | Low | ✅ Done |
+| Banner/brand asset review | During `/generate-readme-banners` or brand workflows, agent views output PNG and assesses quality | Low | ✅ Done |
+| Diagram verification | After Mermaid → image export, agent views rendered diagram to verify correctness | Low | ✅ Done |
+| Subagent vision handoff | Builder generates image → Validator views it via `runSubagent` for visual QA | Medium | ✅ Done |
+| Visual memory simplification | Replace base64-encoded reference portraits in skill files with disk paths; agent reads via `view_image` | Medium | ✅ Done |
+| Image carousel output | 1.112 ships image carousel view (#301606) — agents can display multiple images in a carousel. Leverage for brand asset comparison, before/after visual QA | Low | ✅ Done |
 
 ### Quality Gates & Audits (8 Gates)
 | Item | Status | Notes |

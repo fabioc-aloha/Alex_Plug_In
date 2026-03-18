@@ -100,6 +100,39 @@ Generate a photo of EXACTLY the person shown in the reference images.
 
 ---
 
+## Simplified Path with `view_image` (VS Code 1.112+)
+
+VS Code 1.112+ ships a built-in `view_image` tool that reads images directly from disk (PNG, JPEG, GIF, WebP, BMP) with automatic resizing. This offers an alternative to the base64 encoding workflow:
+
+| Approach | Pros | Cons |
+| --- | --- | --- |
+| Base64 in JSON | Fully portable, works offline, self-contained skill | Large files, manual encoding step, PII in JSON |
+| Disk path + `view_image` | No encoding needed, smaller repo, photos stay as files | Requires VS Code 1.112+, paths must resolve at runtime |
+
+### Using Disk Paths Instead of Base64
+
+Store original photos in the skill's `visual-memory/` directory and reference them by path:
+
+```json
+{
+  "subjects": {
+    "alex": {
+      "images": [
+        { "path": ".github/skills/visual-memory/visual-memory/alex-1.jpg" },
+        { "path": ".github/skills/visual-memory/visual-memory/alex-2.jpg" }
+      ]
+    }
+  }
+}
+```
+
+The agent reads each photo via `view_image` at generation time instead of loading base64 data URIs. This eliminates the resize-encode-embed pipeline for new subjects.
+
+**When to use base64**: Heir projects that may not have disk access to Master's photo files.  
+**When to use `view_image`**: Master workspace and local development where photos are on disk.
+
+---
+
 ## Security
 
 `visual-memory.json` may contain PII (photos of real people). Before publishing or syncing:
