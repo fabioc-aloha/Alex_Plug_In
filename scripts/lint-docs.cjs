@@ -53,7 +53,7 @@ function runMarkdownlint() {
 
 function checkMermaidInit(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
-  const mermaidBlocks = [...content.matchAll(/```mermaid([\s\S]*?)```/g)];
+  const mermaidBlocks = [...content.matchAll(/^```mermaid\s*\r?\n([\s\S]*?)^```\s*$/gm)];
   const violations = [];
   for (const block of mermaidBlocks) {
     const code = block[1];
@@ -81,7 +81,7 @@ function walkDocs() {
       const full = path.join(dir, entry.name);
       if (entry.isDirectory()) {
         // Skip archive folders to avoid failing on legacy docs
-        if (full.includes(`${path.sep}archive${path.sep}`)) continue;
+        if (entry.name === 'archive') continue;
         walker(full);
       } else if (entry.name.endsWith('.md')) {
         files.push(full);
