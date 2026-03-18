@@ -32,7 +32,7 @@ This project adheres to the Contributor Covenant Code of Conduct. By participati
 ### Repository Structure
 
 ```
-Alex_Plug_In/
+AlexMaster/
 ├── platforms/vscode-extension/          # VS Code extension project
 │   ├── src/                             # Extension source code
 │   │   ├── commands/                    # Extension commands (Initialize, Dream)
@@ -58,8 +58,8 @@ Alex_Plug_In/
 
 ```powershell
 # Fork the repository via GitHub UI, then:
-git clone https://github.com/YOUR-USERNAME/Alex_Plug_In.git
-cd Alex_Plug_In
+git clone https://github.com/YOUR-USERNAME/AlexMaster.git
+cd AlexMaster
 npm install
 ```
 

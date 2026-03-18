@@ -418,7 +418,7 @@ export interface WorkspaceProtectionResult {
  * Check if workspace is protected (Master Alex kill switch)
  * 
  * Protection layers:
- * 0. HARDCODED FAILSAFE: Block Alex_Plug_In path (cannot be bypassed)
+ * 0. HARDCODED FAILSAFE: Block AlexMaster / Alex_Plug_In path (cannot be bypassed)
  * 1. Explicit setting: alex.workspace.protectedMode = true
  * 2. Auto-detect: workspace contains platforms/vscode-extension/ (Master Alex source)
  * 
@@ -430,10 +430,11 @@ export async function isWorkspaceProtected(rootPath: string): Promise<WorkspaceP
     const outputChannel = getKillSwitchOutputChannel();
     outputChannel.info(`🛡️ Protection check for: ${rootPath}`);
     
-    // Layer 0: HARDCODED FAILSAFE - Check for Alex_Plug_In in path
+    // Layer 0: HARDCODED FAILSAFE - Check for AlexMaster / Alex_Plug_In in path
     // This cannot be overridden by any setting and protects against all bypass attempts
     const normalizedPath = rootPath.replace(/\\/g, '/').toLowerCase();
     const masterAlexPatterns = [
+        'alexmaster',
         'alex_plug_in',
         'alex-plug-in', 
         'alexplug'

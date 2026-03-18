@@ -172,7 +172,7 @@ Your deployment package is **ready to go**:
 **Steps**:
 ```powershell
 # 1. Open project in VS Code
-cd c:\Development\Alex_Plug_In\platforms\m365-copilot
+cd c:\Development\AlexMaster\platforms\m365-copilot
 code .
 
 # 2. In VS Code:
@@ -316,7 +316,7 @@ Create `notes.md`:
 
 **Rebuild Package**:
 ```powershell
-cd c:\Development\Alex_Plug_In\platforms\m365-copilot
+cd c:\Development\AlexMaster\platforms\m365-copilot
 npm run package:dev
 ```
 
@@ -431,7 +431,7 @@ If you edit code or configuration:
 
 ```powershell
 # Navigate to project
-cd c:\Development\Alex_Plug_In\platforms\m365-copilot
+cd c:\Development\AlexMaster\platforms\m365-copilot
 
 # Rebuild package
 npm run package:dev

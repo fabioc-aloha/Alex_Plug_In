@@ -1,6 +1,6 @@
 # Check that all references in .github/ are self-contained
 param(
-    [string]$Root = "c:\Development\Alex_Plug_In\.github"
+    [string]$Root = "c:\Development\AlexMaster\.github"
 )
 
 $issues = @()
@@ -91,9 +91,9 @@ Write-Host "Files scanned: $($jsonFiles.Count)"
 foreach ($f in $jsonFiles) {
     $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
     if (-not $content) { continue }
-    if ($content -match 'Alex_Plug_In\\\\' -or $content -match 'Alex_Plug_In/') {
+    if ($content -match 'Alex_Plug_In\\\\' -or $content -match 'Alex_Plug_In/' -or $content -match 'AlexMaster\\\\' -or $content -match 'AlexMaster/') {
         $short = $f.FullName -replace [regex]::Escape($Root + "\"), ""
-        $issues += [pscustomobject]@{ Type = "HARDCODED_PATH"; File = $short; Value = "Contains hardcoded Alex_Plug_In path" }
+        $issues += [pscustomobject]@{ Type = "HARDCODED_PATH"; File = $short; Value = "Contains hardcoded project path" }
     }
     if ($content -match 'Alex-Global-Knowledge') {
         $short = $f.FullName -replace [regex]::Escape($Root + "\"), ""

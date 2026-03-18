@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 11, 2026
+**Last Updated**: March 17, 2026
 
 ---
 
@@ -38,6 +38,8 @@ Four platforms. Focused, not scattered.
 
 | Version | Theme | Shipped |
 | --- | --- | --- |
+| **v6.7.0** | Heir Harvest Release — 10 skills ported from heirs, 7 knowledge merges, stale heir cleanup across 33 projects, Gamma reliability hardened | 2026-03-15 |
+| **v6.6.0** | Quality & Audit Hardening — lint-unused enforcement, quality gates 7-8, audit-heir-sync-drift, max-lines ESLint rule | 2026-03-14 |
 | **v6.5.5** | Performance — parallel activation, right-click menu audit, startup optimization | 2026-03-12 |
 | **v6.5.4** | Roadmap hygiene — shipped content to appendix, Open Backlog consolidation, T8 closure | 2026-03-11 |
 | **v6.5.3** | Trust Release — synapse audit, master→heir sync hardening, leakage remediation, quality gates | 2026-03-11 |
@@ -68,7 +70,9 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 | P1 | Doc drift / Mermaid lint | Integrate `markdownlint` + Mermaid init lint into CI; enforce pastel init template | Docs | 🚧 lint-docs script added (non-blocking warnings) |
 | P2 | Model + tool matrices | Auto-generate model/tool capability tables from code; ensure README alignment | Docs | ⏳ |
 | P2 | Worker/Teams readiness | Track VS Code `worker_agents` GA + Teams triggers; prep skeleton | Platform | ⏳ |
-| P2 | Agent Plugin distribution | 1.112 adds `Chat: Install Plugin from Source` + plugin-specific component paths (#300945). Prep Agent Plugin heir for direct install. | Platform | ⏳ new (1.112) |
+| P1 | Parent-repo customization inheritance | 1.112 ships `chat.useCustomizationsInParentRepositories` (#293277) — VS Code searches parent repos for instructions/prompts/agents.md/skills. Evaluate impact on heir sync architecture; could reduce `sync-architecture.cjs` overhead for co-located heirs. | Arch | ⏳ new (1.112) |
+| P2 | Agent Plugin distribution | 1.112 adds `Chat: Install Plugin from Source` + plugin-specific component paths (#300945) + per-workspace/global plugin enable/disable (#300271). Prep Agent Plugin heir for direct install. | Platform | ⏳ new (1.112) |
+| P2 | MCP workspace management | 1.112 adds per-workspace/global MCP server enable/disable (#243620). Evaluate for managed MCP configuration in heir projects. | Platform | ⏳ new (1.112) |
 
 ### `view_image` Adoption (1.112, Backlog)
 
@@ -81,6 +85,7 @@ VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPE
 | Diagram verification | After Mermaid → image export, agent views rendered diagram to verify correctness | Low | ⏳ |
 | Subagent vision handoff | Builder generates image → Validator views it via `runSubagent` for visual QA | Medium | ⏳ |
 | Visual memory simplification | Replace base64-encoded reference portraits in skill files with disk paths; agent reads via `view_image` | Medium | ⏳ |
+| Image carousel output | 1.112 ships image carousel view (#301606) — agents can display multiple images in a carousel. Leverage for brand asset comparison, before/after visual QA | Low | ⏳ |
 
 ### Quality Gates & Audits
 | Item | Status | Notes |
@@ -122,7 +127,7 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 
 ### Blocked (VS Code API Dependencies)
 
-> **Last reviewed**: 2026-03-14 against VS Code 1.111 (stable) + 1.112 (insiders)
+> **Last reviewed**: 2026-03-17 against VS Code 1.112 (stable)
 
 | Contract | Scope | Unblock Condition | Enables | Status (1.112) |
 | --- | --- | --- | --- | --- |
@@ -131,13 +136,24 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 | **C** | Full five-modality memory model | Memory persistence API | Mind tab live data | ❌ Still blocked — Copilot Memory is cloud/conversational only. No structured persistence API for extensions. `~/.alex/` file-based workaround remains. |
 | **D** | Recently-used command tracking | Command history API | Adaptive UX (command history) | ❌ Still blocked — no change in 1.111 or 1.112. |
 
+**1.112 Stable — Notable Shipped Capabilities** (not blocked, for awareness):
+- **Claude agent mode GA** (#290048): Claude is now generally available in agent mode — no longer preview. Alex's model awareness already tracks Claude tiers.
+- **Freeform text in agent questions** (#300922): Agents can now accept freeform text input in addition to button choices. Consider for richer interactive workflows.
+- **`~/.copilot/hooks`** global path (#296793): Already tracked in Contract A notes. Global hooks directory now active.
+
+### 🔭 Future Watch
+
+**Parent-repo customization inheritance** (`chat.useCustomizationsInParentRepositories`, #293277): VS Code 1.112 ships a setting that searches parent repositories for `.github/` customizations (instructions, prompts, agents.md, skills). Today this has limited impact because internal heirs (`platforms/vscode-extension/`) are in the same repo (handled by `sync-architecture.cjs`) and external heirs are separate repos, not nested.
+
+**Future opportunity**: If heirs were reorganized as git submodules or nested repos under a parent containing `.github/`, this setting could reduce or eliminate the need for file sync. Worth monitoring as architecture evolves. This could fundamentally simplify the heir inheritance model — VS Code would natively resolve customizations from the parent, making `sync-architecture.cjs` a fallback rather than the primary mechanism.
+
 ### Gated (External Dependencies)
 
 > **Last reviewed**: 2026-03-14
 
 | # | Task | Gate | Effort | Description | Status |
 | --- | --- | --- | :---: | --- | --- |
-| 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings | ⏳ Gate approaching — 133 skills currently (audit-skill-activation-index); need Azure OpenAI key |
+| 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings | ⏳ Gate approaching — 143 skills currently (audit-skill-activation-index); need Azure OpenAI key |
 | 13 | ~~**EmbeddedKnowledge adoption**~~ | ~~Microsoft makes it GA~~ | ~~2h~~ | ~~Enable capability~~ | ✅ **Done** — `declarativeAgent.json` declares `EmbeddedKnowledge` with 6 `.txt` knowledge files. Shipped in v6.2.0. Remove from gated list. |
 | 14 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. |
 
@@ -228,21 +244,23 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | v6.5.3 | Trust Release — audit cleanup, tech debt, synapse metadata | ✅ Shipped |
 | v6.5.5 | Performance — parallel activation, startup optimization | ✅ Shipped |
 | v6.5.4 | Roadmap hygiene — appendix restructuring, T8 closure | ✅ Shipped |
+| v6.6.0 | Quality & Audit Hardening | ✅ Shipped |
+| v6.7.0 | Heir Harvest Release | ✅ Shipped |
 | v7.0.0+    | Collaborative Intelligence | Backlogged |
 
 ---
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.5.5                                          |
-| **Current Heirs**          | VS Code (6.5.5), M365 (6.2.0), Plugin (6.5.3) |
-| **Architecture**           | 133 skills, 38 trifectas, 65 instructions, 48 prompts, 7 agents |
-| **Codebase**               | 128 TS files, 20 test files (268 passing, 0 failing) |
+| **Current Master Version** | 6.7.0                                          |
+| **Current Heirs**          | VS Code (6.7.0), M365 (6.2.0), Plugin (6.5.3)  |
+| **Architecture**           | 143 skills, 38 trifectas, 65 instructions, 48 prompts, 7 agents |
+| **Codebase**               | 128 TS files, 20 test files (232 passing, 0 failing) |
 | **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) · [v6.5.3 Audit](alex_docs/audits/AUDIT-2026-03-11.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence              |
 | **Open Items**             | 9 total: 4 blocked, 3 gated, 2 conditional |
-| **Updated**                | 2026-03-12                                     |
+| **Updated**                | 2026-03-17                                     |
 
 ---
 

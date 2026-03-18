@@ -43,6 +43,25 @@ The roadmap is a **living document** that requires active curation to prevent:
 | New feature added | Check if already in backlog/research before adding | Before roadmap edit |
 | Backlog item proposed | Verify not already scheduled in Version Details | Before adding to backlog |
 | Similar features found | Combine into single entry with comprehensive scope | During backlog audit |
+| VS Code stable released | Run VS Code Version Evaluation procedure (see below) | Each stable release |
+
+---
+
+## VS Code Version Evaluation Procedure
+
+**When**: Each VS Code stable release. **Touches 5+ sections simultaneously — use batch edits.**
+
+1. Check `engines.vscode` in package.json — bump only if new minimum needed
+2. Check `@types/vscode` — bump only if new API features consumed
+3. Fetch release notes (Insiders page if stable docs not yet published)
+4. Compare tracked vs untracked features against ROADMAP sections:
+   - **Pressing Issues**: Add new P1/P2 items for high-impact features
+   - **Blocked Contracts**: Refresh status of each contract against new release
+   - **Future Watch**: Add architectural opportunities worth monitoring
+   - **Gated**: Update gate conditions if thresholds shift
+5. Update `copilot-instructions.md` settings header version and add notable new settings
+6. Update Version Status table and footer (current version, skill count, test count, date)
+7. Log which issue numbers map to each tracked feature for traceability
 
 ---
 

@@ -67,7 +67,7 @@ docs/platforms/m365-copilot/
 
 ```powershell
 # Navigate to project root
-cd c:\Development\Alex_Plug_In
+cd c:\Development\AlexMaster
 
 # Add GitHub Pages files
 git add docs/platforms/m365-copilot/

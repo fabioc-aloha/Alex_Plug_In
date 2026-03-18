@@ -16,8 +16,8 @@
   },
   "totalCost": "$0.03",
   "outputDirs": {
-    "agents": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex3\\agents",
-    "states": "C:\\Development\\Alex_Plug_In\\alex_docs\\alex3\\states"
+    "agents": "C:\\Development\\AlexMaster\\alex_docs\\alex3\\agents",
+    "states": "C:\\Development\\AlexMaster\\alex_docs\\alex3\\states"
   },
   "results": [
     {

@@ -1,22 +1,23 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "TRIP-REVIEW-APPLICATION-DESCRIPTION.docx",
-    "TRIP-REVIEW-APPLICATION-DESCRIPTION.md",
-    "images/"
+    "github/copilot-instructions.md",
+    "CONTRIBUTING.md",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/alex3/generation-report.json",
+    "alex_docs/diagram-visualization/generation-report.json",
+    "platforms/m365-copilot/DEPLOYMENT-SUMMARY.md",
+    "platforms/m365-copilot/GRAPH-API-INTEGRATION.md",
+    "platforms/m365-copilot/QUICK-DEPLOY.md",
+    "platforms/vscode-extension/src/shared/utils.ts",
+    "scripts/check-self-contained.ps1"
   ],
   "todoHotspots": [
     {
-      "file": "images/diagram-1.png",
-      "todoCount": 1,
-      "scannedAt": 1773764104916
-    },
-    {
-      "file": "TRIP-REVIEW-APPLICATION-DESCRIPTION.docx",
-      "todoCount": 1,
-      "scannedAt": 1773764104916
+      "file": "ROADMAP-UNIFIED.md",
+      "todoCount": 2,
+      "scannedAt": 1773795470613
     }
   ],
-  "lastUpdated": 1773764104916
+  "lastUpdated": 1773795470613
 }

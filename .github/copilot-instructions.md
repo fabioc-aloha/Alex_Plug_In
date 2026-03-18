@@ -28,10 +28,10 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.7.0 Heir Harvest Release. 10 new skills ported from heirs, 7 knowledge merges, 3 new instructions, stale heir cleanup across 33 projects, Gamma reliability hardened. All quality gates pass, 232 tests, 143 skills, 38 trifectas.
+Recent: v6.7.0 Heir Harvest Release. VS Code 1.112 stable evaluated — 6 new features tracked, ROADMAP fully updated, Future Watch section introduced. All quality gates pass, 232 tests, 143 skills, 38 trifectas.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-03-15
+Last Assessed: 2026-03-17
 
 ## User Profile
 
@@ -117,7 +117,7 @@ Efficient (Claude Haiku 4.5, GPT-5 mini, GPT-4.1 mini/nano, GPT-4o mini, Gemini 
 Meditation/self-actualization/architecture → Frontier. Code review → Capable. Simple edits → Efficient.
 Warning on mismatch: "This cognitive task works best with a Frontier model."
 
-## VS Code Settings (1.111+)
+## VS Code Settings (1.112+)
 
 chat.agent.enabled=true, chat.agentSkillsLocations=[".github/skills"], chat.useAgentsMdFile=true
 claude-opus-4-\*.extendedThinkingEnabled=true, thinkingBudget=16384, chat.mcp.gallery.enabled=true
@@ -128,6 +128,7 @@ chat.exploreAgent.defaultModel=claude-sonnet-4
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
 chat.plugins.enabled=true, chat.tips.enabled=true
 chat.agent.thinking.phrases=[Alex-personality phrases]
+1.112: chat.useCustomizationsInParentRepositories (evaluate for heir inheritance)
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
 **macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 

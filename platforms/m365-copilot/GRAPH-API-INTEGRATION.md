@@ -78,7 +78,7 @@ The base `manifest.json` remains unchanged. API plugins are added as extensions 
 
 1. **Build the package**:
    ```powershell
-   cd C:\Development\Alex_Plug_In\platforms\m365-copilot
+   cd C:\Development\AlexMaster\platforms\m365-copilot
    npm run package:dev
    ```
 
