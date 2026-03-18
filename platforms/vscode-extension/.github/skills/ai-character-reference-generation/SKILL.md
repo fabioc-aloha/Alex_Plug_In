@@ -172,6 +172,19 @@ async function generateScene(scenario) {
 
 ---
 
+## Visual Verification (VS Code 1.112+)
+
+After generating a character set, use `view_image` to review outputs without leaving chat:
+
+1. **Identity check** — View each image to confirm the character is recognizable across all poses
+2. **Drift detection** — Compare first and last images in the set for hair, eye color, or feature shifts
+3. **Pose diversity** — Scan full set for duplicate body positions or repetitive compositions
+4. **Artifact scan** — Look for AI artifacts: extra fingers, smeared textures, inconsistent edges
+
+For batch sets, VS Code's image carousel displays them side-by-side for efficient visual QA.
+
+---
+
 ## Troubleshooting
 
 ### Safety Filter False Positives

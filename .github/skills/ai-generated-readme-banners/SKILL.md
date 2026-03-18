@@ -557,6 +557,19 @@ await new Promise(resolve => setTimeout(resolve, 2000));
 
 ---
 
+## Visual Verification (VS Code 1.112+)
+
+After generation, use `view_image` to assess banner quality before committing:
+
+- **Typography legibility** — Text is sharp, correctly spelled, readable at README scale
+- **Brand color accuracy** — Palette matches project branding guidelines
+- **Composition balance** — Visual weight distributed evenly, no awkward cropping
+- **Artifact detection** — No smeared text, misshapen objects, or inconsistent edges
+
+For multi-variant generation, the image carousel enables side-by-side comparison.
+
+---
+
 ## Cross-Project Applicability
 
 ✅ **Ideal use cases**:

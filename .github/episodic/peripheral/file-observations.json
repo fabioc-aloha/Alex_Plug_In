@@ -1,28 +1,41 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "ROADMAP-UNIFIED.md",
-    "platforms/vscode-extension/src/chat/globalKnowledgeContent.ts",
-    "platforms/vscode-extension/src/commands/setupEnvironment.ts",
-    "platforms/vscode-extension/src/tts/index.ts",
-    "platforms/vscode-extension/src/tts/ttsService.ts",
-    "platforms/vscode-extension/src/views/sharedStyles.ts",
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "platforms/agent-plugin/README.md",
+    "platforms/agent-plugin/marketplace.json",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json",
     "platforms/vscode-extension/src/chat/globalKnowledgePatterns.ts",
-    "platforms/vscode-extension/src/commands/setupMarkdownCss.ts",
-    "platforms/vscode-extension/src/tts/speechTextProcessor.ts"
+    "ext_list.txt"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/src/chat/globalKnowledgeContent.ts",
-      "todoCount": 2,
-      "scannedAt": 1773805027072
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1773808072504
     },
     {
-      "file": "platforms/vscode-extension/src/tts/ttsService.ts",
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.7.1.vsix",
+      "todoCount": 2,
+      "scannedAt": 1773808072504
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1773808072504
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1773805027072
+      "scannedAt": 1773808072504
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1773808072504
     }
   ],
-  "lastUpdated": 1773805027072
+  "lastUpdated": 1773808072504
 }

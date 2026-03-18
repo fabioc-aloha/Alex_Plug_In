@@ -123,6 +123,7 @@ flowchart LR
 | Implementation complete, need review | Validator |
 | Complex architectural decision | Alex (main) |
 | Need to validate edge cases | Validator |
+| Image generation complete, need visual QA | Validator (use `view_image`) |
 
 ## Code Generation Guidelines
 

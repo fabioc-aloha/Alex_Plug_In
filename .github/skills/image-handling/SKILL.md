@@ -82,6 +82,21 @@ jpegoptim --max=85 input.jpg
 npx svgo input.svg -o output.svg
 ```
 
+## Visual Verification (VS Code 1.112+)
+
+After generating or converting images, use `view_image` to verify output quality:
+
+| Check | What to Look For |
+|-------|------------------|
+| SVG → PNG conversion | Crisp text, no missing elements |
+| AI-generated images | Artifacts, spelling errors in text, character drift |
+| Optimized images | No visible quality loss from compression |
+| Face-reference generation | Likeness matches reference photos |
+
+For batch operations, use VS Code's image carousel to compare multiple outputs side-by-side.
+
+---
+
 ## Batch Processing
 
 ```powershell

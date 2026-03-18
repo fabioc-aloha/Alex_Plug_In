@@ -311,6 +311,19 @@ ALEXFNCH in a cozy library, reading a leather-bound book, warm lamplight, bokeh 
 
 ---
 
+## Visual Verification (VS Code 1.112+)
+
+After generating with your LoRA, use `view_image` to evaluate output quality:
+
+1. **Identity fidelity** — Does the character match the training data?
+2. **Prompt adherence** — Does the scene match the prompt, or is the LoRA overfitting?
+3. **LoRA scale tuning** — Compare outputs at 0.6, 0.8, 1.0 to find the sweet spot
+4. **Artifact scan** — Check for training artifacts: repeated backgrounds, frozen expressions, texture smearing
+
+When iterating on LoRA scale or prompt structure, compare outputs side-by-side via the image carousel.
+
+---
+
 ## Retraining and Iteration
 
 ### When to Retrain

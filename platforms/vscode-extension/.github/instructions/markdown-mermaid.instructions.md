@@ -117,3 +117,4 @@ Red (error/risk):        fill:#ffebe9,stroke:#cf222e,color:#a40e26
 - [ ] Node labels use `<br/>` for line breaks (NOT `\n`)
 - [ ] `**Figure N:** *description*` caption below the code block
 - [ ] Rendered and visually verified (not just syntax-checked)
+- [ ] For exported PNG/SVG: verified via `view_image` — readable labels, correct palette, no clipped nodes (VS Code 1.112+)

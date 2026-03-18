@@ -15,7 +15,7 @@
             "name": "alex-cognitive-architecture",
             "source": "plugin",
             "description": "AI partner with 84 plugin-ready skills, 7 specialist agents, 22 auto-loaded instructions, 11 prompt workflows, lifecycle hooks, and MCP cognitive tools.",
-            "version": "6.7.0",
+            "version": "6.7.1",
             "skills": [
                 "./skills/*"
             ],

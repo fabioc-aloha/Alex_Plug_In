@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.7.1] - 2026-03-18
+
+> **Vision-Enhanced Skills** — 5 image generation skills gain `view_image` visual verification workflows, lint-docs hardened.
+
+### Added
+
+- **`view_image` visual verification** in 5 image generation skills:
+  - `ai-character-reference-generation` — identity check, drift detection, pose diversity, artifact scan
+  - `ai-generated-readme-banners` — typography legibility, brand color accuracy, composition balance
+  - `character-aging-progression` — sequential scan, extremes comparison, feature tracking
+  - `flux-brand-finetune` — identity fidelity, prompt adherence, LoRA scale tuning
+  - `image-handling` — format conversion QA, AI artifact detection, compression verification
+
+### Fixed
+
+- **lint-docs archive skip bug** — `walkDocs()` now uses `entry.name === 'archive'` instead of `path.sep` check that missed end-of-path archive directories
+- **lint-docs Mermaid regex false positive** — anchored regex to line start/end (`^```mermaid...$`) to prevent matching inline code references in prose
+- **GLOBAL-KNOWLEDGE-SHARING.md** — second Mermaid block (sequenceDiagram) now includes full pastel theme with `edgeLabelBackground`
+
+---
+
 ## [6.7.0] - 2026-03-15
 
 > **The Heir Harvest Release** — 10 new skills ported from heir projects, 7 knowledge merges into existing capabilities, 3 new instruction files, stale heir cleanup across 33 projects, and Gamma reliability hardened.

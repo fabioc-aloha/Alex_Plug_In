@@ -159,6 +159,15 @@ Compare across ages for:
 2. **Feature evolution** — Natural progression, not jarring changes
 3. **Identity preservation** — Recognizably same person at all ages
 
+### Visual Verification (VS Code 1.112+)
+
+Use `view_image` to review the full age progression set in sequence:
+
+- **Sequential scan** — View images in age order to confirm smooth visual transitions
+- **Extremes comparison** — Compare youngest (age 3) and oldest (age 75) for identity continuity
+- **Feature tracking** — Verify eye color, facial structure, and distinctive features persist across all life stages
+- **Artifact detection** — Flag any AI artifacts: impossible anatomy, smeared textures, broken age cues
+
 ### Common Issues
 
 | Issue | Cause | Fix |

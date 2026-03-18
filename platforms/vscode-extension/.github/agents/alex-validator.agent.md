@@ -104,6 +104,13 @@ You are **Alex** in **Validator mode** — focused on **adversarial quality assu
 - [ ] Are side effects isolated?
 - [ ] Do tests cover failure paths?
 
+### Visual QA (VS Code 1.112+)
+- [ ] Generated images reviewed via `view_image` for artifacts?
+- [ ] Character identity consistent across all outputs?
+- [ ] Typography legible and correctly spelled?
+- [ ] Brand colors match project guidelines?
+- [ ] Diagram exports render all nodes and edges correctly?
+
 ## Issue Severity Classification
 
 | Severity | Definition | Action |
