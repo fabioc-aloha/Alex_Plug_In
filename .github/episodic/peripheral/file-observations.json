@@ -1,17 +1,9 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "ROADMAP-UNIFIED.md",
-    "platforms/agent-plugin/README.md",
-    "platforms/agent-plugin/marketplace.json",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/scripts/quality-gate.cjs",
-    "scripts/lint-docs.cjs",
-    "alex_docs/MODEL-TOOL-MATRIX.md",
-    "scripts/gen-model-tool-matrix.cjs"
+    "github/episodic/peripheral/file-observations.json",
+    "ROADMAP-UNIFIED.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1773802207116
+  "lastUpdated": 1773802763049
 }

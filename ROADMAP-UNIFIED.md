@@ -59,20 +59,28 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 
 > All completed v6.4.0, v6.4.5, and v6.5.0 work is in the [Appendix](#-appendix-completed-work).
 
-### 🚨 Pressing Issues (v6.6 Target)
+### 🚨 Pressing Issues
 | Priority | Item | Action | Owner | Status |
 | --- | --- | --- | --- | --- |
 | P0 | Large-file refactors | Split `participant.ts`, `sharedStyles.ts`, `globalKnowledge*.ts`, `setupEnvironment.ts`, `ttsService.ts` into modules; add lint rule to flag >800L | Dev | 🚧 max-lines lint added (sharedStyles warns); refactor pending |
-| P0 | Audit-architecture gate | Add `node scripts/audit-architecture.cjs` to CI and fail on schema/trifecta drift | DevOps | ✅ in CI |
-| P0 | Skill activation index | Validate `memory-activation/SKILL.md` covers all skills; add check to audit script | Arch | ✅ audit script + CI |
-| P1 | Heir sync drift check | Add gate to detect excluded heir skills drifting on bulk synapse updates | Arch | ✅ script + CI |
-| P1 | VSIX size budget | Add size threshold (<7 MB) to quality-gate; warn at 5.5 MB | Build | ✅ Gate 7 hardened (`@vscode/vsce` devDep + fallback walker) |
-| P1 | Doc drift / Mermaid lint | Integrate `markdownlint` + Mermaid init lint into CI; enforce pastel init template | Docs | ✅ lint-docs now blocking (`.markdownlint.jsonc` config) |
-| P2 | Model + tool matrices | Auto-generate model/tool capability tables from code; ensure README alignment | Docs | ✅ `gen-model-tool-matrix.cjs` → `alex_docs/MODEL-TOOL-MATRIX.md` |
 | P2 | Worker/Teams readiness | Track VS Code `worker_agents` GA + Teams triggers; prep skeleton | Platform | ⏳ |
-| P1 | Parent-repo customization inheritance | 1.112 ships `chat.useCustomizationsInParentRepositories` (#293277) — VS Code searches parent repos for instructions/prompts/agents.md/skills. Evaluate impact on heir sync architecture; could reduce `sync-architecture.cjs` overhead for co-located heirs. | Arch | ✅ enabled in settings; co-located heirs inherit |
-| P2 | Agent Plugin distribution | 1.112 adds `Chat: Install Plugin from Source` + plugin-specific component paths (#300945) + per-workspace/global plugin enable/disable (#300271). Prep Agent Plugin heir for direct install. | Platform | ✅ marketplace.json v6.7.0 + install-from-source docs |
-| P2 | MCP workspace management | 1.112 adds per-workspace/global MCP server enable/disable (#243620). Evaluate for managed MCP configuration in heir projects. | Platform | ✅ `.vscode/mcp.json` created |
+
+<details>
+<summary>Completed Pressing Issues (9 resolved in v6.7.0 sprint)</summary>
+
+| Priority | Item | Status |
+| --- | --- | --- |
+| P0 | Audit-architecture gate | ✅ in CI |
+| P0 | Skill activation index | ✅ audit script + CI |
+| P1 | Heir sync drift check | ✅ script + CI |
+| P1 | VSIX size budget | ✅ Gate 7 hardened (`@vscode/vsce` devDep + fallback walker) |
+| P1 | Doc drift / Mermaid lint | ✅ lint-docs now blocking (`.markdownlint.jsonc` config) |
+| P1 | Parent-repo customization inheritance | ✅ enabled in settings; co-located heirs inherit |
+| P2 | Model + tool matrices | ✅ `gen-model-tool-matrix.cjs` → `alex_docs/MODEL-TOOL-MATRIX.md` |
+| P2 | Agent Plugin distribution | ✅ marketplace.json v6.7.0 + install-from-source docs |
+| P2 | MCP workspace management | ✅ `.vscode/mcp.json` created |
+
+</details>
 
 ### `view_image` Adoption (1.112, Backlog)
 
@@ -87,17 +95,12 @@ VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPE
 | Visual memory simplification | Replace base64-encoded reference portraits in skill files with disk paths; agent reads via `view_image` | Medium | ⏳ |
 | Image carousel output | 1.112 ships image carousel view (#301606) — agents can display multiple images in a carousel. Leverage for brand asset comparison, before/after visual QA | Low | ⏳ |
 
-### Quality Gates & Audits
+### Quality Gates & Audits (8 Gates)
 | Item | Status | Notes |
 | --- | --- | --- |
-| Enforce `lint:unused` | ✅ done | `scripts/lint-unused.cjs` fails on unallowlisted exports; allowlist via `ts-unused-exports.json` |
-| Synapse audit in CI | ✅ done | `.github/workflows/ci.yml` runs `node scripts/audit-synapses.cjs`; audit now clean |
 | Large-file refactors | 🚧 planned | max-lines lint added; refactor pending |
-| Audit-architecture cjs | ✅ in CI | `node scripts/audit-architecture.cjs` step added |
-| Skill activation index | ✅ in CI | `scripts/audit-skill-activation-index.cjs` added to CI and quality gate |
-| Heir sync drift check | ✅ in CI | `scripts/audit-heir-sync-drift.cjs` added to CI |
-| VSIX size budget | ✅ Gate 7 hardened | `@vscode/vsce` devDep + fallback file walker; never silently skips |
-| Doc drift / Mermaid lint | ✅ blocking | `scripts/lint-docs.cjs` loads `.markdownlint.jsonc`; exits 1 on non-archive errors |
+
+All other quality gates are complete and enforced in CI. See [automated-quality-gates.instructions.md](.github/instructions/automated-quality-gates.instructions.md) for the full 8-gate architecture.
 
 ### Deferred Hooks (Low Priority)
 
@@ -251,12 +254,12 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | -------------------------- | ---------------------------------------------- |
 | **Current Master Version** | 6.7.0                                          |
 | **Current Heirs**          | VS Code (6.7.0), M365 (6.2.0), Plugin (6.7.0)  |
-| **Architecture**           | 143 skills, 38 trifectas, 65 instructions, 48 prompts, 7 agents |
+| **Architecture**           | 143 skills, 38 trifectas, 68 instructions, 48 prompts, 7 agents |
 | **Codebase**               | 128 TS files, 20 test files (232 passing, 0 failing) |
 | **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) · [v6.5.3 Audit](alex_docs/audits/AUDIT-2026-03-11.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence              |
-| **Open Items**             | 8 total: 4 blocked, 2 gated, 2 conditional |
+| **Open Items**             | 10 total: 2 pressing, 4 blocked, 2 gated, 2 conditional |
 | **Updated**                | 2026-03-17                                     |
 
 ---
