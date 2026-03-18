@@ -7,7 +7,6 @@
 export {
     synthesize,
     listVoices,
-    prepareTextForSpeech,
     detectLanguage,
     getVoiceForLanguage,
     VOICE_PRESETS,
@@ -17,6 +16,8 @@ export {
     type TTSProgress,
     type TTSChunkedProgress
 } from './ttsService';
+
+export { prepareTextForSpeech } from './speechTextProcessor';
 
 export {
     playWithWebview,

@@ -62,7 +62,7 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 ### 🚨 Pressing Issues
 | Priority | Item | Action | Owner | Status |
 | --- | --- | --- | --- | --- |
-| P0 | Large-file refactors | Split `participant.ts`, `sharedStyles.ts`, `globalKnowledge*.ts`, `setupEnvironment.ts`, `ttsService.ts` into modules; add lint rule to flag >800L | Dev | 🚧 max-lines lint added (sharedStyles warns); refactor pending |
+| P0 | Large-file refactors | Split `participant.ts`, `sharedStyles.ts`, `globalKnowledge*.ts`, `setupEnvironment.ts`, `ttsService.ts` into modules; add lint rule to flag >800L | Dev | ✅ Done — all files split into modules, 0 ESLint max-lines warnings |
 | P2 | Worker/Teams readiness | Track VS Code `worker_agents` GA + Teams triggers; prep skeleton | Platform | ⏳ |
 
 <details>
@@ -98,7 +98,7 @@ VS Code 1.112 ships a built-in `view_image` tool — LLM agents can read PNG/JPE
 ### Quality Gates & Audits (8 Gates)
 | Item | Status | Notes |
 | --- | --- | --- |
-| Large-file refactors | 🚧 planned | max-lines lint added; refactor pending |
+| Large-file refactors | ✅ Done | sharedStyles split (3 modules), globalKnowledgePatterns extracted, speechTextProcessor extracted, setupMarkdownCss extracted; 0 max-lines warnings |
 
 All other quality gates are complete and enforced in CI. See [automated-quality-gates.instructions.md](.github/instructions/automated-quality-gates.instructions.md) for the full 8-gate architecture.
 
