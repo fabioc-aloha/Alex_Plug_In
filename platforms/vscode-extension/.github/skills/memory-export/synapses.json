@@ -1,0 +1,74 @@
+{
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "memory-export",
+    "connections": [
+        {
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
+            "type": "applies",
+            "strength": 0.7,
+            "reason": "Export requires synthesizing knowledge from multiple memory layers",
+            "when": "Collecting and organizing memories from diverse sources",
+            "yields": "structured knowledge organization patterns"
+        },
+        {
+            "target": ".github/skills/global-knowledge/SKILL.md",
+            "type": "reads",
+            "strength": 0.8,
+            "reason": "Global knowledge is one of the memory sources to export",
+            "when": "Gathering cross-project insights for the export",
+            "yields": "cross-project patterns and insights"
+        },
+        {
+            "target": ".github/skills/doc-hygiene/SKILL.md",
+            "type": "applies",
+            "strength": 0.6,
+            "reason": "Export must be clean, deduplicated, and well-structured",
+            "when": "Formatting the final export document",
+            "yields": "anti-drift and deduplication rules"
+        },
+        {
+            "target": ".github/skills/distribution-security/SKILL.md",
+            "type": "guards",
+            "strength": 0.9,
+            "reason": "Export must never include secrets, tokens, or sensitive PII beyond what the user consents to",
+            "when": "Scanning memory sources for sensitive content",
+            "yields": "security filtering rules"
+        }
+    ],
+    "triggers": [
+        "export memory",
+        "export context",
+        "port Alex",
+        "move to Claude",
+        "move to ChatGPT",
+        "portable memory",
+        "dump what you know",
+        "seed another AI",
+        "transfer context"
+    ],
+    "activationBoost": [
+        "export all memories",
+        "export my context",
+        "port alex to claude",
+        "move alex to another surface",
+        "portable file of everything you know",
+        "dump everything you know about me",
+        "seed claude code with my preferences",
+        "transfer to chatgpt",
+        "copy my profile to another ai",
+        "what do you know about me export"
+    ],
+    "activationContexts": [
+        "export all memories",
+        "export my context",
+        "port alex to claude",
+        "move alex to another surface",
+        "portable file of everything you know",
+        "dump everything you know about me",
+        "seed claude code with my preferences",
+        "transfer to chatgpt",
+        "copy my profile to another ai",
+        "what do you know about me export"
+    ]
+}

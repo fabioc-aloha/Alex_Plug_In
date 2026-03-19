@@ -87,6 +87,7 @@ Every meditation session MUST complete ALL three before concluding:
 3. Verify newly added synapses are valid (target files exist)
 4. Confirm bidirectional connections have reciprocal entries
 5. If issues found → repair before concluding
+6. **Runtime check**: If new skills/instructions were created, type `/troubleshoot` in chat to verify they loaded correctly — catches name mismatches, invalid frontmatter, or `applyTo` patterns that VS Code's loader silently skipped
 
 ---
 

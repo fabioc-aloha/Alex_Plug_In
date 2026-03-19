@@ -259,6 +259,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         // Intentionally not awaited — VS Code focuses chat panel
         void vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
         break;
+      case "exportMemory": {
+        logInfo('[Alex] Launching memory export');
+        const exportPrompt = 'Use the memory-export skill. Export all of my stored memories, user profile, preferences, and context to a single portable file I can paste into another AI surface like Claude Code or ChatGPT. Follow the /export-memory prompt format.';
+        await openChatPanel(exportPrompt);
+        break;
+      }
       case "openSkill": {
         const skillId = (payload as any).skill || "";
         const skillDisplayName = (payload as any).skillName || skillId;

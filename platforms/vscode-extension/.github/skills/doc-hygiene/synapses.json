@@ -13,6 +13,14 @@
       "yields": "documentation quality assurance trifecta patterns and guidance"
     },
     {
+      "target": ".github/instructions/roadmap-maintenance.instructions.md",
+      "type": "related",
+      "strength": 0.75,
+      "reason": "Roadmap hygiene follows doc-hygiene anti-drift rules",
+      "when": "Roadmap hygiene follows doc-hygiene anti-drift rules",
+      "yields": "roadmap maintenance related rules and guidelines"
+    },
+    {
       "target": ".github/instructions/semantic-audit.instructions.md",
       "type": "supports",
       "strength": 0.8,

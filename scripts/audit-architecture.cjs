@@ -81,6 +81,7 @@ const TRIFECTA_PROMPT_ALIASES = {
   'debugging-patterns': 'debug',
   'global-knowledge': 'knowledge',
   'ai-writing-avoidance': 'audit-writing',
+  'memory-export': 'export-memory',
 };
 // ── Copilot-Instructions Cross-Reference ───────────────────────
 const ci = fs.readFileSync(path.join(base, '.github/copilot-instructions.md'), 'utf8');

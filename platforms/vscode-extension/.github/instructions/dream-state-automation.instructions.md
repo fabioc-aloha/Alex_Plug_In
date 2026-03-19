@@ -275,6 +275,16 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 
 ## 📝 **Troubleshooting**
 
+### **VS Code `/troubleshoot` Skill (Preview)**
+
+When dream reports are clean but agent behavior doesn't match expectations, use the built-in `/troubleshoot` skill in chat. It analyzes JSONL debug logs to reveal:
+- Why skills or instructions didn't load (name mismatches, invalid frontmatter, `applyTo` pattern failures)
+- Why tools were called or skipped
+- Why requests were slow (latency breakdown by span)
+- Network or authentication failures
+
+Requires `github.copilot.chat.agentDebugLog.enabled` and `github.copilot.chat.agentDebugLog.fileLogging.enabled` (both enabled in `.vscode/settings.json`).
+
 ### **Common Issues and Solutions**
 
 **Issue**: Dream protocol shows broken synapse

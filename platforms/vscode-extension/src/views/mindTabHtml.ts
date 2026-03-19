@@ -121,6 +121,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
           <div class="dashboard-card">
               <div class="dashboard-card-title">System</div>
               ${actionButton('upgrade', hasGlobalKnowledge ? '🌐' : '⬆️', 'Initialize / Update', 'Deploy or refresh Alex architecture')}
+              ${actionButton('exportMemory', '📤', 'Export Memory', 'Export all memory to a portable file for other AI surfaces')}
               ${actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
               ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
               ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}

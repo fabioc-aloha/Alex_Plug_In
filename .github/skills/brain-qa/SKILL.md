@@ -97,6 +97,7 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 - To validate LLM-friendly content formats
 - **After any documentation refactor** — check that meaning didn't drift when words changed
 - **When code and docs diverge** — documented feature doesn't match TypeScript implementation
+- **When skills/instructions don't load at runtime** — use `/troubleshoot` in chat to analyze agent debug logs (requires `github.copilot.chat.agentDebugLog.enabled`)
 
 ## Audit Phases
 

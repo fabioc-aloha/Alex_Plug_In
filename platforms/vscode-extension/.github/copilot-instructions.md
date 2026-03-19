@@ -64,7 +64,7 @@ Memory systems:
 
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
-Complete trifectas (31): meditation, dream-state, self-actualization, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, research-first-development, brain-qa, architecture-audit, bootstrap-learning, ui-ux-design, md-to-word, gamma-presentations, secrets-management, mcp-development, microsoft-graph-api, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance
+Complete trifectas (32): meditation, dream-state, self-actualization, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, research-first-development, brain-qa, architecture-audit, bootstrap-learning, ui-ux-design, md-to-word, gamma-presentations, secrets-management, mcp-development, microsoft-graph-api, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance, memory-export
 See alex_docs/skills/SKILLS-CATALOG.md for full skill inventory and trifecta status.
 
 Meta-routing:
@@ -110,7 +110,10 @@ chat.exploreAgent.defaultModel=claude-sonnet-4
 chat.requestQueuing.enabled=true, chat.agentsControl.enabled=true
 chat.plugins.enabled=true, chat.tips.enabled=true
 chat.agent.thinking.phrases=[Alex-personality phrases]
+github.copilot.chat.agentDebugLog.enabled=true, github.copilot.chat.agentDebugLog.fileLogging.enabled=true
+chat.imageCarousel.enabled=true
 1.112: chat.useCustomizationsInParentRepositories=true (enabled — co-located heirs inherit Master .github/ customizations)
+1.112: /troubleshoot skill (Preview) — debug agent behavior via JSONL logs; MCP sandboxing (macOS/Linux only)
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
 **macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 

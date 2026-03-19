@@ -163,6 +163,13 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
    ✓ brain-qa Phase 13: [instruction sync status]
    ```
 
+4. **Phase 5.4: Runtime Behavior Verification (Optional)**
+   - Type `/troubleshoot` in chat to analyze agent debug logs
+   - Confirms newly created skills/instructions/agents actually loaded
+   - Detects silent failures: name mismatches, invalid frontmatter, broken `applyTo` patterns
+   - Requires `github.copilot.chat.agentDebugLog.enabled` and `fileLogging.enabled`
+   - Use when Phase 5.1-5.3 pass but runtime behavior doesn't match expectations
+
 **When to Fix:**
 - Dream finds broken synapses → Fix before concluding meditation
 - brain-qa Phase 7/13 fail → Copy missing files to heir immediately

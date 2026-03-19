@@ -149,6 +149,7 @@ Search this index when processing any task request:
 | content-safety-implementation | content safety, guardrails, kill switch, prompt injection defense, input sanitization, output validation, self-harm detection, abuse prevention |
 | data-quality-monitoring | data quality, anomaly detection, schema drift, null ratio, freshness check, z-score, data validation, baseline, safe write |
 | meeting-efficiency | meeting agenda, time box, decision capture, async standup, meeting facilitation, reduce meetings, action items, meeting notes |
+| memory-export | export memory, export context, port alex, move to claude, move to chatgpt, portable memory, dump what you know, seed another ai, transfer context, export all memories, what do you know about me |
 | msal-authentication | msal, entra id, oauth, token cache, silent auth, interactive login, azure ad, client credentials, on-behalf-of, pkce |
 | prompt-evolution-system | prompt versioning, a/b test prompts, prompt metrics, prompt regression, prompt template, system prompt iteration, prompt evaluation |
 | react-vite-performance | vite config, code splitting, lazy route, react compiler, use hook, useTransition, tanstack query, web vitals, bundle analysis |
@@ -259,6 +260,7 @@ Prompts (`.prompt.md`) contain complex workflows — episodic memory requiring a
 | `/selfactualize` | deep assessment, self-analysis | Comprehensive self-evaluation |
 | `/tdd` | red green refactor, test first | Test-driven development |
 | `/uiuxaudit` | accessibility audit, wcag check, ui review | UI/UX accessibility audit |
+| `/export-memory` | export memory, port alex, move to claude, portable export | Portable memory export for other AI surfaces |
 
 ### Workflow Categories
 

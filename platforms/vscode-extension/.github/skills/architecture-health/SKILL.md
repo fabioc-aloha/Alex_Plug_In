@@ -61,6 +61,7 @@ leaf   = skill with 1 connection (normal for specialized skills)
 | Terminology drift | Old terms ("DK files") in active files | Grep + replace |
 | Count drift | Hardcoded numbers stale by next session | Replace with references |
 | Inheritance drift | Catalog says "master-only" but synapses.json says "inheritable" | Trust synapses.json |
+| Runtime loading drift | Skill/instruction exists on disk but doesn't load in agent | Use `/troubleshoot` to analyze JSONL debug logs — reveals name mismatches, invalid frontmatter, or silent loader skips |
 
 ## Health Report Template
 

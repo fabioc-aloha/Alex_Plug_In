@@ -28,6 +28,22 @@
       "yields": "bootstrap learning acceleration techniques"
     },
     {
+      "target": ".github/instructions/heir-skill-promotion.instructions.md",
+      "type": "informs",
+      "strength": 0.9,
+      "reason": "Promotion candidate patterns guide heir skill evolution",
+      "when": "Promotion candidate patterns guide heir skill evolution",
+      "yields": "heir skill promotion contextual assessment"
+    },
+    {
+      "target": ".github/instructions/global-knowledge-curation.instructions.md",
+      "type": "informs",
+      "strength": 0.85,
+      "reason": "Curation protocol uses promotion patterns",
+      "when": "Curation protocol uses promotion patterns",
+      "yields": "global knowledge curation contextual assessment"
+    },
+    {
       "target": ".github/prompts/meditate.prompt.md",
       "type": "triggers",
       "strength": 0.8,

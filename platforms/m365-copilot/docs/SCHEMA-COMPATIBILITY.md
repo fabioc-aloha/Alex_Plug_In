@@ -2,7 +2,7 @@
 
 > **SINGLE SOURCE OF TRUTH** for what works in M365 Copilot Declarative Agents
 >
-> Last Updated: 2026-01-29
+> Last Updated: 2026-03-19
 > Based on: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/declarative-agent-manifest
 
 ---
@@ -92,41 +92,12 @@ This means:
 
 ---
 
-## Current Alex Configuration (v4.4.0)
+## Current Alex Configuration (v6.7.0)
+
+Alex uses the **v1.6 schema** with 8 capabilities + v1.6 features:
 
 ```json
 // declarativeAgent.json
-{
-  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.2/schema.json",
-  "version": "v1.2",
-  "capabilities": [
-    { "name": "OneDriveAndSharePoint" },
-    { "name": "WebSearch" },
-    { "name": "GraphicArt" },
-    { "name": "CodeInterpreter" }
-  ]
-}
-
-// manifest.json
-{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.19/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.19"
-}
-```
-
----
-
-## Upgrading to v1.6 (Future)
-
-When upgrading to schema v1.6 to get People, Email, TeamsMessages, Meetings:
-
-1. Change `$schema` to v1.6 URL
-2. Change `version` to `"v1.6"`
-3. Add new capabilities
-4. Reduce conversation_starters to max 6
-5. Test thoroughly - may have portal compatibility issues
-
-```json
 {
   "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.6/schema.json",
   "version": "v1.6",
@@ -135,13 +106,52 @@ When upgrading to schema v1.6 to get People, Email, TeamsMessages, Meetings:
     { "name": "WebSearch" },
     { "name": "GraphicArt" },
     { "name": "CodeInterpreter" },
-    { "name": "TeamsMessages" },
     { "name": "Email" },
-    { "name": "People" },
-    { "name": "Meetings" }
+    { "name": "TeamsMessages" },
+    { "name": "People", "include_related_content": true },
+    { "name": "Meetings" },
+    { "name": "EmbeddedKnowledge", "files": ["...6 knowledge files"] }
+  ],
+  "behavior_overrides": { "suggestions": { "disabled": false } },
+  "disclaimer": { "text": "..." },
+  "user_overrides": ["...capability toggles..."]
+}
+
+// manifest.json — v1.19
+```
+
+### v1.6 Feature Adoption Status
+
+| v1.6 Feature | Status | Notes |
+| --- | --- | --- |
+| 8 capabilities | ✅ Using | OneDrive, Web, GraphicArt, Code, Email, Teams, People, Meetings |
+| `EmbeddedKnowledge` | ✅ Configured | 6 knowledge files; feature not yet GA at Microsoft |
+| `include_related_content` (People) | ✅ Enabled | Gets shared docs/emails/Teams with person lookup |
+| `behavior_overrides` | ✅ Configured | Suggestions enabled |
+| `disclaimer` | ✅ Configured | Trust signal with open-source attribution |
+| `user_overrides` | ✅ Configured | Users can toggle data source capabilities |
+| `worker_agents` | ⏳ Preview | Not added — waiting for GA. See readiness doc. |
+| `sensitivity_label` | N/A | Only needed with EmbeddedKnowledge GA |
+
+---
+
+## Worker Agents (Preview — Not Production-Ready)
+
+The v1.6 schema supports `worker_agents` for multi-agent orchestration:
+
+```json
+{
+  "worker_agents": [
+    { "id": "P_<title-id-of-worker-agent>" }
   ]
 }
 ```
+
+**Alex as Manager**: Delegate to specialized sub-agents (research, data, compliance).
+**Alex as Worker**: Enterprise Copilot delegates cognitive tasks to Alex.
+
+**Status**: Preview. Do not add to production manifest until GA.
+**Tracking**: See `alex_docs/platforms/WORKER-AGENT-READINESS.md` for full assessment.
 
 ---
 

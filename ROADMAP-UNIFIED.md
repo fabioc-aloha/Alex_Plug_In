@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 17, 2026
+**Last Updated**: March 19, 2026
 
 ---
 
@@ -60,12 +60,11 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 > All completed v6.4.0, v6.4.5, and v6.5.0 work is in the [Appendix](#-appendix-completed-work).
 
 ### 🚨 Pressing Issues
-| Priority | Item | Action | Owner | Status |
-| --- | --- | --- | --- | --- |
-| P2 | Worker/Teams readiness | Track VS Code `worker_agents` GA + Teams triggers; prep skeleton | Platform | ⏳ |
+
+✅ **All pressing issues resolved** (13 total). See completed list below.
 
 <details>
-<summary>Completed Pressing Issues (10 resolved)</summary>
+<summary>Completed Pressing Issues (13 resolved)</summary>
 
 | Priority | Item | Status |
 | --- | --- | --- |
@@ -76,9 +75,12 @@ Items from v6.5.0 that remain open — blocked on VS Code APIs, gated by externa
 | P1 | VSIX size budget | ✅ Gate 7 hardened (`@vscode/vsce` devDep + fallback walker) |
 | P1 | Doc drift / Mermaid lint | ✅ lint-docs now blocking (`.markdownlint.jsonc` config) |
 | P1 | Parent-repo customization inheritance | ✅ enabled in settings; co-located heirs inherit |
+| P1 | `/troubleshoot` + brain-qa integration | ✅ Wired VS Code `/troubleshoot` (Preview) into brain-qa, meditation, cognitive-health-validation, architecture-health, dream-state — runtime behavior debugging complements structural audits |
+| P1 | Memory export trifecta | ✅ `memory-export` skill + instruction + prompt (`/export-memory`) — portable memory dump for Claude Code, ChatGPT, other AI surfaces |
 | P2 | Model + tool matrices | ✅ `gen-model-tool-matrix.cjs` → `alex_docs/MODEL-TOOL-MATRIX.md` |
 | P2 | Agent Plugin distribution | ✅ marketplace.json v6.7.0 + install-from-source docs |
 | P2 | MCP workspace management | ✅ `.vscode/mcp.json` created |
+| P2 | Worker/Teams readiness | ✅ Assessed both paths: VS Code cloud agents (`target: github-copilot`, handoffs, org sharing) and M365 `worker_agents` (v1.6 preview). Readiness doc + schema-compat updated. Gate #14 tracks GA. |
 
 </details>
 
@@ -128,7 +130,7 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 
 ### Blocked (VS Code API Dependencies)
 
-> **Last reviewed**: 2026-03-17 against VS Code 1.112 (stable)
+> **Last reviewed**: 2026-03-19 against VS Code 1.112.0 stable (re-release March 18, 2026)
 
 | Contract | Scope | Unblock Condition | Enables | Status (1.112) |
 | --- | --- | --- | --- | --- |
@@ -141,6 +143,14 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 - **Claude agent mode GA** (#290048): Claude is now generally available in agent mode — no longer preview. Alex's model awareness already tracks Claude tiers.
 - **Freeform text in agent questions** (#300922): Agents can now accept freeform text input in addition to button choices. Consider for richer interactive workflows.
 - **`~/.copilot/hooks`** global path (#296793): Already tracked in Contract A notes. Global hooks directory now active.
+- **`/troubleshoot` skill (Preview)**: Analyzes JSONL agent debug logs in-conversation — reveals why tools/subagents were used or skipped, why instructions/skills didn't load, slow response causes, network issues. Enable via `github.copilot.chat.agentDebugLog.enabled` + `github.copilot.chat.agentDebugLog.fileLogging.enabled`. High value for Alex skill debugging.
+- **Agent debug log export/import (Preview)**: Export/import JSONL debug logs for offline analysis and sharing (50 MB warning threshold).
+- **Automatic symbol references**: Pasting a copied symbol into chat auto-converts to `#sym:Name` with full context. Ctrl+Shift+V to paste as plain text.
+- **MCP server sandboxing**: `"sandboxEnabled": true` in `mcp.json` restricts file/network access for stdio servers. macOS/Linux only — not available on Windows yet.
+- **Plugin enable/disable**: Plugins and MCP servers can now be enabled/disabled globally or per-workspace without uninstalling. Auto-updates via `extensions.autoCheckUpdates`.
+- **Copilot CLI permissions**: Autopilot, Bypass Approvals, and Default Permissions levels now available for CLI sessions — extends `chat.autopilot.enabled` to CLI.
+- **Integrated browser debugging**: New `editor-browser` debug type — debug web apps end-to-end inside VS Code. Migration from `msedge`/`chrome` configs is simple type change.
+- **Image carousel** (`chat.imageCarousel.enabled`): Agent-generated images (screenshots, diagrams) are selectable in responses and viewable in a dedicated carousel. Explorer right-click via `imageCarousel.explorerContextMenu.enabled`.
 
 ### 🔭 Future Watch
 
@@ -154,7 +164,7 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 
 | # | Task | Gate | Effort | Description | Status |
 | --- | --- | --- | :---: | --- | --- |
-| 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings | ⏳ Gate approaching — 143 skills currently (audit-skill-activation-index); need Azure OpenAI key |
+| 12 | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | 4w | Replace keyword matching with vector embeddings | ⏳ Gate approaching — 144 skills currently (audit-skill-activation-index); need Azure OpenAI key |
 | 14 | **Worker agent orchestration** | v1.6 worker_agents exits preview | 1w | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. |
 
 ### Conditional (Trigger-Dependent)
@@ -254,13 +264,13 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | -------------------------- | ---------------------------------------------- |
 | **Current Master Version** | 6.7.0                                          |
 | **Current Heirs**          | VS Code (6.7.0), M365 (6.2.0), Plugin (6.7.0)  |
-| **Architecture**           | 143 skills, 38 trifectas, 68 instructions, 48 prompts, 7 agents |
+| **Architecture**           | 144 skills, 39 trifectas, 69 instructions, 49 prompts, 7 agents |
 | **Codebase**               | 128 TS files, 20 test files (232 passing, 0 failing) |
 | **Audit Score**            | 8.1/10 (B+) comprehensive, 7.2/10 (B-) docs/UI — [Full Audit](alex_docs/audits/COMPREHENSIVE-AUDIT-2026-03-09.md) · [Deep Audit](alex_docs/audits/DEEP-AUDIT-DOCS-UI-2026-03-09.md) · [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) · [v6.5.3 Audit](alex_docs/audits/AUDIT-2026-03-11.md) |
 | **Command Center**         | Delivered — 98/100 steps shipped                |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence              |
-| **Open Items**             | 10 total: 2 pressing, 4 blocked, 2 gated, 2 conditional |
-| **Updated**                | 2026-03-17                                     |
+| **Open Items**             | 8 total: 0 pressing, 4 blocked, 2 gated, 2 conditional |
+| **Updated**                | 2026-03-19                                     |
 
 ---
 
