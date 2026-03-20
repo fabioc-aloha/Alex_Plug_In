@@ -4,7 +4,7 @@
 >
 > **Codename**: Alex in Disguise | **Distribution**: Internal Microsoft (GitHub Template)
 >
-> **Master Repo**: `C:\Development\GCX_Agent` → [github.com/fabioc-aloha/GCX_Agent](https://github.com/fabioc-aloha/GCX_Agent)
+> **Master Repo**: `C:\Development\GCX_Copilot` → [github.com/fabioc-aloha/GCX_Copilot](https://github.com/fabioc-aloha/GCX_Copilot)
 
 ---
 
@@ -613,7 +613,7 @@ When a skill is updated in Master Alex:
 
 | Task | Deliverable | Status |
 |------|-------------|--------|
-| **Create master repo** | `C:\Development\GCX_Agent` → GitHub | ✅ Done |
+| **Create master repo** | `C:\Development\GCX_Copilot` → GitHub | ✅ Done |
 | **Create copilot-instructions.md** | GCX Copilot identity, it/its pronouns | ✅ Done |
 | **Create README + banner** | Quick start guide, gcx-banner.svg | ✅ Done |
 | **Build initial agents** | 4 agents (base, azure, data, documentation) | ✅ Done |
@@ -621,7 +621,7 @@ When a skill is updated in Master Alex:
 | **Build initial prompts** | 7 prompts (/adr, /explain, /fix, /review, /runbook, /spec, /tests) | ✅ Done |
 | **Build auto-load instructions** | 3 instructions (coding, docs, security) | ✅ Done |
 | **Create gcx_docs folder** | User manual, training, integration guides | ✅ Done |
-| **Init git + push** | github.com/fabioc-aloha/GCX_Agent (private, template) | ✅ Done |
+| **Init git + push** | github.com/fabioc-aloha/GCX_Copilot (private, template) | ✅ Done |
 
 **Foundation Architecture:**
 
@@ -752,7 +752,7 @@ When a skill is updated in Master Alex:
 1. **Naming**: Template is "GCX Copilot" but self-references as "GCX Copilot" with it/its pronouns
    - Confirmed: Impersonal, corporate-appropriate identity
 
-2. **Repo location**: Currently `fabioc-aloha/GCX_Agent` (private personal); will transfer to `microsoft/gcx-ai-agent-template` for distribution
+2. **Repo location**: Currently `fabioc-aloha/GCX_Copilot` (private personal); will transfer to `microsoft/gcx-ai-agent-template` for distribution
 
 3. **Open source**: Can this template be published externally after sanitization?
 
