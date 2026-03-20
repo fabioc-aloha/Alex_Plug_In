@@ -52,17 +52,17 @@
   </g>
   
   <!-- Main title -->
-  <text x="250" y="130" font-family="Segoe UI, system-ui, sans-serif" font-size="64" font-weight="600" fill="white" filter="url(#textShadow)">
+  <text x="250" y="140" font-family="Segoe UI, system-ui, sans-serif" font-size="80" font-weight="700" fill="white" filter="url(#textShadow)">
     GCX Copilot
   </text>
   
   <!-- Subtitle -->
-  <text x="250" y="175" font-family="Segoe UI, system-ui, sans-serif" font-size="24" fill="rgba(255,255,255,0.85)">
+  <text x="250" y="195" font-family="Segoe UI, system-ui, sans-serif" font-size="28" fill="rgba(255,255,255,0.9)">
     Your AI Partner for Code, Docs &amp; Integrations
   </text>
   
   <!-- Tagline -->
-  <text x="250" y="220" font-family="Segoe UI, system-ui, sans-serif" font-size="16" fill="rgba(255,255,255,0.6)" font-style="italic">
+  <text x="250" y="240" font-family="Segoe UI, system-ui, sans-serif" font-size="18" fill="rgba(255,255,255,0.7)" font-style="italic">
     Skills • Instructions • Prompts • Agents
   </text>
   
@@ -72,6 +72,16 @@
     <text x="40" y="19" font-family="Segoe UI, system-ui, sans-serif" font-size="12" fill="white" text-anchor="middle">
       v1.0
     </text>
+  </g>
+  
+  <!-- GCX Logo - Bottom Right -->
+  <g transform="translate(1080, 200)">
+    <!-- GCX text logo -->
+    <text x="0" y="50" font-family="Segoe UI, system-ui, sans-serif" font-size="48" font-weight="800" fill="rgba(255,255,255,0.25)" letter-spacing="4">
+      GCX
+    </text>
+    <!-- Accent underline -->
+    <rect x="0" y="58" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
   </g>
   
   <!-- Bottom accent line -->
