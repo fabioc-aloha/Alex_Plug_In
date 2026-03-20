@@ -11,14 +11,6 @@
       "reason": "Secrets scanning is core to distribution security",
       "when": "Secrets scanning is core to distribution security",
       "yields": "secrets management required patterns and guidance"
-    },
-    {
-      "target": ".github/instructions/release-management.instructions.md",
-      "type": "related",
-      "strength": 0.85,
-      "reason": "Security checks are part of the release workflow",
-      "when": "Security checks are part of the release workflow",
-      "yields": "release management related rules and guidelines"
     }
   ],
   "when": [

@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.7.2] - 2026-03-19
+
+> **Memory Export & Platform Readiness** — New memory-export trifecta for portable context dumps, /troubleshoot protocol integration, Worker/Teams readiness assessment complete.
+
+### Added
+
+- **Memory Export Trifecta** (39th complete trifecta):
+  - `memory-export` skill — 7 memory sources, 6 export sections, Claude Code/ChatGPT/AI surface portability
+  - `memory-export.instructions.md` — auto-loaded rules for export workflows
+  - `/export-memory` prompt — one-command portable memory dump
+  - Export Memory button (📤) in Mind tab System section
+- **`/troubleshoot` Protocol Integration** — VS Code Preview skill wired into:
+  - `brain-qa` skill — runtime debugging reference
+  - `meditation.instructions.md` — Phase 3 Synapse Health addition
+  - `cognitive-health-validation.instructions.md` — Runtime Diagnostics section
+  - `architecture-health` skill — troubleshooting guidance
+  - `dream-state-automation.instructions.md` — diagnostic tool reference
+- **Worker/Teams Readiness Assessment** (`alex_docs/platforms/WORKER-AGENT-READINESS.md`):
+  - Dual-path analysis: VS Code cloud agents (`target: github-copilot`) + M365 `worker_agents` (v1.6 preview)
+  - Risk register, tracking cadence, convergence diagram
+- **VS Code 1.112 Settings** — `agentDebugLog.enabled`, `agentDebugLog.fileLogging.enabled`, `imageCarousel.enabled`
+
+### Changed
+
+- **SCHEMA-COMPATIBILITY.md** updated from stale v4.4.0 to actual v6.7.0 config (v1.6 schema, 8 capabilities, worker_agents tracking)
+- **ROADMAP notable capabilities** expanded from 3 to 12 items for 1.112 tracking
+- **All pressing issues resolved** — P2 Worker/Teams moved to completed (13/13 total)
+- **Open items** reduced from 9 to 8 (0 pressing, 4 blocked, 2 gated, 2 conditional)
+
+---
+
 ## [6.7.1] - 2026-03-18
 
 > **Vision-Enhanced Skills** — 5 image generation skills gain `view_image` visual verification workflows, lint-docs hardened.

@@ -59,14 +59,6 @@
       "yields": "gapanalysis interactive workflow"
     },
     {
-      "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "extends",
-      "strength": 0.75,
-      "reason": "Research-first patterns flow through heir promotion pipeline",
-      "when": "Research-first patterns flow through heir promotion pipeline",
-      "yields": "heir skill promotion extended capabilities"
-    },
-    {
       "target": ".github/skills/north-star/SKILL.md",
       "type": "aligns",
       "strength": 0.85,
