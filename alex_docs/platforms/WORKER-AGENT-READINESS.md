@@ -44,7 +44,6 @@ VS Code 1.112 custom agents support:
 - [x] 7 `.agent.md` files with full frontmatter (model tiers, tools, handoffs, hooks)
 - [x] Handoff chains configured (Alex ↔ Researcher ↔ Builder ↔ Validator ↔ Documentarian)
 - [x] Agent-scoped hooks (Researcher session-start, Builder post-tool-use, Validator pre-tool-use)
-- [x] `agents.md` includes all 7 agents
 - [x] Subagent delegation via `agents` field in frontmatter
 
 ### When to Act

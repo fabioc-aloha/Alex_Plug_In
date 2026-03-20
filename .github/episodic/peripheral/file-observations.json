@@ -1,34 +1,17 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "github/episodic/peripheral/file-observations.json",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/platforms/WORKER-AGENT-READINESS.md",
+    "alex_docs/platforms/CLAUDE-HEIR-PLAN.md"
   ],
   "todoHotspots": [
     {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1773965072893
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.7.2.vsix",
-      "todoCount": 2,
-      "scannedAt": 1773965072893
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1773965072893
-    },
-    {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1773965072893
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1773965072893
+      "scannedAt": 1773971034556
     }
   ],
-  "lastUpdated": 1773965072893
+  "lastUpdated": 1773971034556
 }
