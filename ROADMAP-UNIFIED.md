@@ -40,10 +40,11 @@ Six platforms. Four active, two planned.
 
 | Version | Theme | Shipped |
 | --- | --- | --- |
+| **v6.7.2** | Memory Export & Platform Readiness — memory-export trifecta, /troubleshoot integration, Worker/Teams assessment | 2026-03-19 |
+| **v6.7.1** | Vision-Enhanced Skills — view_image verification in 5 image skills, lint-docs hardening | 2026-03-18 |
 | **v6.7.0** | Heir Harvest Release — 10 skills ported from heirs, 7 knowledge merges, stale heir cleanup across 33 projects, Gamma reliability hardened | 2026-03-15 |
 | **v6.6.0** | Quality & Audit Hardening — lint-unused enforcement, quality gates 7-8, audit-heir-sync-drift, max-lines ESLint rule | 2026-03-14 |
 | **v6.5.5** | Performance — parallel activation, right-click menu audit, startup optimization | 2026-03-12 |
-| **v6.5.4** | Roadmap hygiene — shipped content to appendix, Open Backlog consolidation, T8 closure | 2026-03-11 |
 | **v6.5.3** | Trust Release — synapse audit, master→heir sync hardening, leakage remediation, quality gates | 2026-03-11 |
 | **v6.4.0** | Agent Hooks Release — VS Code 1.111 settings adoption, autopilot, hooks, sandbox, debug docs | 2026-03-09 |
 | **v6.3.0** | Accessibility & Workshop Alignment — WCAG keyboard fixes, 10 domain skills, 41 workshops, I8 cardinal rule | 2026-03-09 |
@@ -200,8 +201,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                |
 | -------------------------- | ---------------------------------------------- |
-| **Current Master Version** | 6.7.0                                          |
-| **Current Heirs**          | VS Code (6.7.0), M365 (6.2.0), Plugin (6.7.0)  |
+| **Current Master Version** | 6.7.2                                          |
+| **Current Heirs**          | VS Code (6.7.2), M365 (6.2.0), Plugin (6.7.0)  |
 | **Architecture**           | 144 skills, 39 trifectas, 69 instructions, 49 prompts, 7 agents |
 | **Platforms**              | 6 total (4 active, 2 planned)                  |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence            |
