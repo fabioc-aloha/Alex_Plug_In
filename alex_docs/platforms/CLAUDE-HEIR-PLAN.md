@@ -1,12 +1,69 @@
 # Claude Heir Plan
 
-> **Status**: Research Complete | **Created**: 2026-03-19 | **Platform**: Claude (Chat + Cowork) | **Roadmap**: Conditional #17, #18
+> **Status**: Research Complete + Fact-Checked | **Created**: 2026-03-19 | **Updated**: 2026-03-20 | **Platform**: Claude (Chat + Cowork + Code) | **Roadmap**: Conditional #17, #18
+>
+> **Research Sources**: Official Claude docs + Ruben Hassid practitioner guides
+>
+> **Fact-Checked Against**: Official Anthropic documentation (platform.claude.com, support.claude.com, code.claude.com) — verified 2026-03-20
 
 ## Executive Summary
 
-Claude Cowork is Anthropic's new agentic desktop application (Windows/macOS) that brings Claude Code's agentic capabilities to knowledge work beyond coding. The platform uses a **Skills + Connectors + Sub-agents** architecture that maps remarkably well to Alex's existing **Trifecta (Skill + Instruction + Prompt)** pattern.
+Claude has **three interaction modes**: Code (developer-focused, runs in browser/desktop/VS Code), Cowork (knowledge worker desktop app with file access), and Projects (saved workspaces for recurring tasks). All three use the same underlying Opus 4.6 model with Extended Thinking.
 
-This document defines **two new Claude-based heirs**, creating complementary platforms alongside VS Code Extension, M365 Copilot, and Agent Plugin.
+The platform uses a **Skills + Connectors + Sub-agents** architecture that maps remarkably well to Alex's existing **Trifecta (Skill + Instruction + Prompt)** pattern.
+
+This document defines **two new Claude-based heirs**, creating complementary platforms alongside VS Code Extension, M365 Copilot, and Agent Plugin. The VS Code Extension already covers the "Code" use case, so the new heirs target Cowork (power users) and Projects (casual/mobile).
+
+---
+
+## ✅ Fact-Check Validation (Official Docs)
+
+> **Date**: 2026-03-20 | **Sources**: platform.claude.com, support.claude.com, code.claude.com
+
+### Confirmed Claims
+
+| Claim | Source | Status |
+|-------|--------|--------|
+| 3-level progressive disclosure (Metadata ~100 tokens, Instructions ≤5k, Resources unlimited) | Agent Skills docs | ✅ Exact match |
+| SKILL.md name ≤64 chars, lowercase-letters-numbers-hyphens only | Agent Skills docs | ✅ Confirmed |
+| SKILL.md description ≤1024 chars | Agent Skills docs | ✅ Confirmed |
+| Cowork is Research Preview | Cowork Getting Started | ✅ Confirmed |
+| Available to Pro/Max/Team/Enterprise | Cowork Getting Started | ✅ Confirmed |
+| Windows x64 and macOS only | Cowork Getting Started | ✅ Confirmed |
+| Desktop app required for Cowork | Cowork Getting Started | ✅ Confirmed |
+| Cowork runs in isolated VM on user's computer | Cowork Getting Started | ✅ Confirmed |
+| Direct local file access with permissions | Cowork Getting Started | ✅ Confirmed |
+| Sub-agent coordination (parallel workstreams) | Cowork Getting Started | ✅ Confirmed |
+| Scheduled tasks via `/schedule` | Cowork Getting Started | ✅ Confirmed |
+| Global Instructions (Settings > Cowork) | Cowork Getting Started | ✅ Confirmed |
+| Folder Instructions (project-specific) | Cowork Getting Started | ✅ Confirmed |
+| Conversation history stored locally (not on Anthropic servers) | Cowork Getting Started | ✅ Confirmed |
+| Desktop app must remain open during tasks | Cowork Getting Started | ✅ Confirmed |
+| Cowork plugins bundle skills, connectors, sub-agents | Cowork Getting Started | ✅ Confirmed |
+| Mobile access for Pro/Max (iOS app messages desktop) | Cowork Getting Started | ✅ Confirmed |
+| Network egress permissions respected | Cowork Getting Started | ✅ Confirmed |
+| Computer Use tool on Claude Opus 4.6 (computer_20251124) | Computer Use docs | ✅ Confirmed |
+| Claude Code same CLAUDE.md works across all surfaces | Claude Code docs | ✅ Confirmed |
+| Pre-built Skills: PowerPoint, Excel, Word, PDF | Agent Skills docs | ✅ Confirmed |
+
+### Corrections Applied
+
+| Original Claim | Correction | Source |
+|----------------|------------|--------|
+| "Windows (x64)" | Added explicit note: **arm64 not supported** | Cowork Getting Started |
+| Missing compliance caveat | Added: **Do not use Cowork for regulated workloads** | Cowork Getting Started |
+| Missing cross-surface limitation | Skills don't sync across surfaces (Claude.ai, API, Claude Code) | Agent Skills docs |
+| Missing deletion protection | Claude requires explicit permission before permanently deleting files | Cowork Getting Started |
+
+### Important Limitations from Official Docs
+
+| Limitation | Impact on Alex Heir |
+|------------|---------------------|
+| **Custom Skills don't sync across surfaces** | Must upload separately to Claude.ai, API, Claude Code |
+| **Cowork not captured in Audit Logs/Compliance API** | Enterprise compliance gap — document in heir README |
+| **Cowork data not subject to standard retention** | Local storage only — privacy feature but backup risk |
+| **API surface has NO network access; Claude Code has FULL** | Skill behavior differs by surface — test each |
+| **Scheduled tasks require desktop awake + app open** | Limits autonomous meditation cycles |
 
 ---
 
@@ -100,9 +157,23 @@ platforms/
 ### What is Claude Cowork?
 
 - **Release Status**: Research Preview (March 2026)
-- **Availability**: Windows (x64) and macOS — all paid Claude plans (Pro, Max, Team, Enterprise)
+- **Availability**: Windows x64 (arm64 **not supported**) and macOS — all paid Claude plans (Pro, Max, Team, Enterprise)
 - **Architecture**: Runs locally in an isolated VM on user's computer
 - **Model**: Claude Opus 4.6 / Sonnet 4.6 / Haiku 4.5 (same models as Alex uses)
+- **Compliance Note**: ⚠️ Do not use Cowork for regulated workloads — not captured in Audit Logs, Compliance API, or Data Exports
+
+### Claude Product Line (Complete)
+
+Claude is not one tool — it's six products ranked by importance for knowledge work:
+
+| Product | Description | Alex Relevance |
+|---------|-------------|----------------|
+| **1. Cowork** | Desktop app that works on actual files — the game changer | Primary target for `claude-cowork` heir |
+| **2. Model Selection** | Opus 4.6 + Extended Thinking = always use this | Same models Alex uses |
+| **3. Excel Add-in** | AI inside spreadsheets, reads formulas, edits cells | New capability for Alex |
+| **4. Plugins** | 11 official skill packs (Sales, Marketing, Legal, Finance, Data, PM, Support) | Alex plugin competes here |
+| **5. Artifacts** | Interactive outputs (calculators, dashboards, SVGs) inside chat | Maps to Gamma/PPTX generation |
+| **6. Projects** | Persistent context folders with memory | Target for `claude-chat` heir |
 
 ### Key Capabilities
 
@@ -125,6 +196,72 @@ platforms/
 | Max 5x | $100/mo | Everyday long-running tasks |
 | Max 20x | $200/mo | Power users, all-day handoffs |
 | Team/Enterprise | Custom | Admin-controlled toggle |
+
+---
+
+## Product Comparison (User Perspective)
+
+> Source: Ruben Hassid infographic "Claude: Code vs Cowork vs Projects" (March 2026)
+
+### The "Vibe" Metaphor (Key Insight)
+
+| Product | Vibe | Skill You Need | Output Quality |
+|---------|------|----------------|----------------|
+| **Code** | Having a developer who builds what you describe | Describe clearly what you want built | Extremely high — sees whole project, runs things itself |
+| **Cowork** | Working with an assistant who reads every brief | Clear context files (your style, rules, examples) | Sounds like you — reads your files |
+| **Projects** | Team member who knows your playbook | Pick the right files and clear instructions | Sounds like you — has your guides |
+
+### Access & Setup
+
+| Aspect | Code | Cowork | Projects |
+|--------|------|--------|----------|
+| **What it is** | "Like a technical assistant on your team" | Sits on your desktop, reads/creates files | Saved workspace, upload once, Claude remembers |
+| **Access** | **Terminal CLI, VS Code, JetBrains, Desktop App, Web** | **Desktop app only** (click Cowork tab) | Browser, phone, or desktop |
+| **Setup Time** | ~5 min | ~10 min (download, pick folder, add files) | ~5 min (create project, upload files) |
+
+> **Note**: Claude Code is available everywhere: Terminal (native CLI), VS Code extension, JetBrains IDEs, Desktop app, and Web. Same CLAUDE.md files work across all surfaces.
+
+### Feature Matrix (Detailed)
+
+| Capability | Code | Cowork | Projects |
+|------------|------|--------|----------|
+| Answer questions | ✅ Yes | ✅ Yes | ✅ Yes |
+| Create real files (Excel, Word, Slides, PDF) | ✅ Saves directly into project folder | ✅ Files appear in your folders | ✅ Can be saved/downloaded |
+| Build interactive things (calculators, trackers, charts) | ✅ Builds **real apps** you can run | ⚠️ Via Artifacts | ⚠️ Via Artifacts |
+| Use plugins (extra skills for sales, marketing, data) | ✅ Yes | ✅ Connect any tool with add-ons | ❌ No |
+| Connect to tools (Slack, Drive, Notion) | ✅ Connects to Jira, GitHub, Slack, more | ✅ Yes | ✅ Yes |
+| Search the internet | ✅ Yes | ✅ Yes | ✅ Yes |
+| Extended thinking | ✅ **On by default** | ✅ On by default | ⚠️ Yes, turn on manually |
+
+### Identity & Context Persistence
+
+| Aspect | Code | Cowork | Projects |
+|--------|------|--------|----------|
+| **Your Identity** | Write a short instructions file — Claude reads every time | Put info in text files inside folder | From files/instructions added to project |
+| **Context Input** | Instructions file + entire project — reads all automatically | Write .md/.txt files, drop in folder, point Claude | Upload files, write instructions once — they stick |
+| **Context Between Chats** | ✅ Project instructions stay, can resume | ✅ As long as in same folder | ✅ Every new chat inside project has it |
+
+### When to Use Which
+
+| Use Code when... | Use Cowork when... | Set up a Project when... |
+|------------------|-------------------|-------------------------|
+| Building software or website | Doing real work (analysis, spreadsheets) | Same task every week (newsletter, reports) |
+| Want Claude to write and save code | Want Claude to create actual files | Tired of repeating yourself |
+| Need changes across many files at once | Want it to sound like you | Want context forever, not just one session |
+| Need help publishing project updates | Need long, deep sessions that don't break | |
+| Need long, hands-free building sessions | | |
+
+### Bottom Line
+
+> **All three need Pro Plan ($20/mo). Cowork is desktop only. Extended thinking works everywhere — always turn it on. Use Opus 4.6 Extended.**
+
+### Alex Heir Mapping
+
+| Claude Product | Alex Heir | Primary Use Case |
+|----------------|-----------|------------------|
+| **Code** | VS Code Extension | Developers building software |
+| **Cowork** | `platforms/claude-cowork/` (NEW) | Knowledge workers, deep sessions |
+| **Projects** | `platforms/claude-chat/` (NEW) | Recurring tasks, mobile access |
 
 ---
 
@@ -323,6 +460,172 @@ These provide templates for plugin structure and best practices.
 
 ---
 
+## User Workflow Patterns
+
+> Source: Ruben Hassid's practical guides on Claude Code, Cowork, and productivity workflows (March 2026)
+
+### Cowork Folder Structure (Recommended)
+
+Users should organize their Cowork folder with this structure:
+
+```
+CLAUDE COWORK/
+├── ABOUT ME/              # Identity files (read-only for Claude)
+│   ├── about-me.md        # Who you are, what you do, priorities
+│   └── anti-ai-writing.md # Writing style rules, voice
+├── PROJECTS/              # Live work organized by project (read-only)
+│   └── project-x/
+│       ├── brief.md
+│       └── references/
+├── TEMPLATES/             # Proven structures to reuse (read-only)
+│   └── deliverable-template.md
+└── CLAUDE OUTPUTS/        # Where Claude writes (write folder)
+    └── project-x/
+```
+
+**Key Principle**: Claude has read-only access to context folders, write access only to outputs folder. This contains damage if something goes wrong.
+
+**Alex Mapping**: This mirrors Alex's architecture:
+- `ABOUT ME/` = `copilot-instructions.md` + user profile
+- `PROJECTS/` = workspace-specific context
+- `TEMPLATES/` = `.github/prompts/` reusable patterns
+- `CLAUDE OUTPUTS/` = generated artifacts
+
+### CLAUDE.md Memory File Pattern (For Code)
+
+Claude Code doesn't remember project context between sessions. The fix: create a `CLAUDE.md` file in project root.
+
+**Prompt to generate it** (after first session):
+
+```
+Create a CLAUDE.md file in the root of this project. Inside it, write down
+everything you've learned about this project so far: the folder structure,
+what each file does, the design choices I made (fonts, colors, layout), my
+preferences, and what pages or sections exist.
+```
+
+Next session, Claude reads `CLAUDE.md` first and maintains continuity.
+
+**Alex Mapping**: This is exactly what `copilot-instructions.md` does for VS Code — Alex heirs should auto-generate `CLAUDE.md` from `copilot-instructions.md` content.
+
+### Global Instructions Template
+
+Cowork's Global Instructions (Settings > Cowork > Edit Global Instructions) persist across all sessions. Recommended template:
+
+```markdown
+# GLOBAL INSTRUCTIONS
+
+## BEFORE EVERY TASK
+
+1. Read `ABOUT ME/`. No task starts without reading both files.
+2. If the task relates to a project, read everything in the matching `PROJECTS/` subfolder.
+3. If the task involves a content type with a matching pattern in `TEMPLATES/`, study that template's structure first.
+
+## FOLDER PROTOCOL
+
+### Read-only — never create, edit, or delete:
+- `ABOUT ME/` → Identity and writing rules
+- `TEMPLATES/` → Proven structures to reuse
+- `PROJECTS/` → Briefs, references, finished work
+
+### Write folder — the only place you deliver:
+- `CLAUDE OUTPUTS/` → Everything you create goes here. One subfolder per project.
+
+## NAMING CONVENTION
+
+All files you create: `project_content-type_v1.ext`
+Examples: `How-To-AI_Newsletter_v1.md`, `ClientX_Deck_v2.pptx`
+
+## OPERATING RULES
+
+- If the brief is unclear, use the `AskUserQuestion` tool. Don't fill gaps with filler.
+- Don't over-explain. Deliver the work. Save commentary unless asked.
+- Never delete files anywhere.
+```
+
+**Alex Mapping**: Port identity section from `copilot-instructions.md` + safety imperatives + folder protocol.
+
+### AskUserQuestion Tool Pattern
+
+The paradigm shift: **Don't prompt Claude. Let Claude prompt you.**
+
+Adding this to any prompt generates an interactive form with clickable options:
+
+```
+Start by using the AskUserQuestion tool before answering to gather enough context.
+```
+
+Claude generates buttons, multi-select choices, and rankings instead of requiring you to write a perfect prompt upfront.
+
+### Master Prompt Templates
+
+**The Universal Prompt** (80% of Cowork sessions):
+
+```
+I want to [TASK] to [SUCCESS CRITERIA].
+
+First, explore my CLAUDE COWORK folder. Then, ask me questions using the
+AskUserQuestion tool. I want to refine the approach with you before you execute.
+```
+
+**For Claude Code** (with GitHub connector):
+
+```
+Create a GitHub repo named "[name]".
+
+I do not know how to code and don't want to learn. Code everything for me.
+Do not ask for permissions (or as little as possible).
+
+Follow these instructions:
+1. I want to [goal] for [success criteria].
+2. Here's an example [attached screenshot].
+3. [Steps to follow].
+```
+
+**For Vibecoding** (VS Code with bypass permissions):
+
+```
+[Attach screenshot of desired result]
+Build me something that looks like this, but for [your project].
+```
+
+### Connectors (Free Integrations)
+
+50+ native connectors available at Settings > Connectors:
+- Slack, Google Drive, Notion, Figma, GitHub, Jira, Linear, Box, Gamma
+- No code required — click "Add" and authenticate
+- Claude can search/read/write inside connected tools mid-conversation
+
+**Alex Potential**: Gamma connector enables Claude → Gamma presentation generation directly.
+
+### Scheduled Tasks
+
+Cowork can run without you via `/schedule`:
+
+```
+Every Monday at 7am, research [competitors] for news and updates.
+Save a summary to /weekly-briefings/ as a markdown file.
+Only include items from the past 7 days.
+```
+
+**Requirements**: Computer awake, Claude Desktop app open.
+
+**Alex Mapping**: Maps to `/dream` and `/meditate` scheduled cycles.
+
+### VS Code + Claude Code (100x Faster)
+
+For non-coders who want full vibecoding speed:
+
+1. Install VS Code (code.visualstudio.com)
+2. Install "Claude" extension by Anthropic
+3. Settings > find "Skip Permissions" → turn ON
+4. New session > "Bypass permissions" enabled
+5. Use Opus 4.6 + auto-accept mode
+
+This bypasses the constant "Allow?" popups that kill flow.
+
+---
+
 ## Technical Considerations
 
 ### Skill Name Constraints
@@ -361,11 +664,20 @@ description: >-
 | Platform | Network Access |
 |----------|---------------|
 | Claude.ai | Varies by settings |
-| Claude API | None (sandboxed) |
-| Claude Code | Full (user machine) |
-| Claude Cowork | Respects network egress permissions + web search |
+| Claude API | **None** (sandboxed) |
+| Claude Code | **Full** (user machine) |
+| Claude Cowork | Respects network egress permissions + web search tool (always available) |
 
 Alex skills that need network (AI image generation, fetch) work in Cowork with user permission.
+
+### Cross-Surface Limitations (Official)
+
+> ⚠️ **Important**: Custom Skills do not sync across surfaces. You must upload them separately to each:
+> - Claude.ai (individual user only)
+> - Claude API (workspace-wide)
+> - Claude Code (filesystem-based: `.claude/skills/` or `~/.claude/skills/`)
+
+This means the `claude-cowork` heir plugin can't automatically sync to claude.ai Projects — manual export required.
 
 ### Local Storage Architecture
 
@@ -397,10 +709,34 @@ Alex skills that need network (AI image generation, fetch) work in Cowork with u
 
 - Cowork runs in isolated VM
 - Local files only accessible with explicit permission
-- Conversation history stored locally (not on Anthropic servers)
+- **Deletion protection**: Claude requires explicit user permission ("Allow" prompt) before permanently deleting any files
+- Conversation history stored locally (not on Anthropic servers, not subject to standard data retention)
 - Enterprise features (audit logs, compliance) don't capture Cowork activity yet
 
 **Alex-specific**: Safety Imperatives (I1-I8) remain enforced via skill documentation.
+
+### Computer Use Capability (Official)
+
+Claude can interact with desktop environments via the Computer Use tool (beta):
+
+| Model | Tool Version | Beta Header |
+|-------|--------------|-------------|
+| Claude Opus 4.6, Sonnet 4.6, Opus 4.5 | `computer_20251124` | `computer-use-2025-11-24` |
+| Sonnet 4.5, Haiku 4.5, Opus 4.1, Sonnet 4 | `computer_20250124` | `computer-use-2025-01-24` |
+
+**Capabilities**:
+- Screenshot capture (see current display)
+- Mouse control (click, drag, move)
+- Keyboard input (type, shortcuts)
+- Enhanced actions: scroll, zoom (Opus 4.6), hold_key, wait
+
+**Security Requirements**:
+1. Use dedicated VM/container with minimal privileges
+2. Avoid access to sensitive data or credentials
+3. Limit internet access to allowlist of domains
+4. Human confirmation for real-world consequences
+
+**Alex Heir Relevance**: Computer Use enables screen-vision skills for UI automation, form filling, and visual verification tasks.
 
 ---
 
@@ -492,6 +828,21 @@ const SKILL_EXCLUSIONS = {
 | Different model availability | Consistency issues | Document model requirements per skill |
 | **No cloud backup (unlike GitHub)** | Config loss, no version control | Manual backup strategy required |
 | **User customizations not portable** | Global Instructions lost on reinstall | Document export procedure |
+
+### Practitioner-Reported Limitations
+
+> Source: Ruben Hassid's honest assessments from daily usage (March 2026)
+
+| Limitation | Details | Workaround |
+|------------|---------|------------|
+| **Burns usage fast** | One Cowork session = 20+ regular Claude chats. Pro plan ($20/mo) runs out within a week of daily use. | Budget for Max plan ($100/mo) for serious use |
+| **No image generation** | Claude cannot generate photos, illustrations, or visual art | Use Gemini for images, Seedance 2.0 for video |
+| **Average real-time search** | Claude can browse web but isn't best at current events | Use Grok for real-time/X-connected search |
+| **Needs app open** | Scheduled tasks only run while Claude Desktop is open and computer is awake | No true background automation |
+| **Agents can spiral** | 10% of complex tasks, one sub-agent goes in wrong direction, final output has inconsistent sections | Watch for same error appearing twice; prompt "Stop. Explain what's going wrong. Give me 2 different approaches." |
+| **Can't review code** | Non-coders can't verify what Claude Code writes | Test actual website: click every button, check on phone — eyes are your code review |
+| **Design taste is average** | Default visual choices look generic | Always provide reference screenshots; specify fonts, spacing, colors |
+| **Claude Code loops** | Sometimes hits bug → tries to fix → creates new bug → spirals | Break the cycle: "Stop. Explain what's going wrong. Give me 2 different approaches." |
 
 ### No Cloud Backup Architecture (Critical Difference)
 
@@ -665,14 +1016,26 @@ const HEIRS = {
 
 ## References
 
-### Authoritative Sources
+### Official Anthropic Documentation (Fact-Checked 2026-03-20)
 
-- [Claude Cowork Product Page](https://claude.com/product/cowork)
-- [Getting Started with Cowork (Support)](https://support.claude.com/en/articles/13345190-getting-started-with-cowork)
-- [Claude Skills Overview](https://claude.com/skills)
-- [Agent Skills Developer Docs](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
-- [Cowork Plugins Blog Post](https://claude.com/blog/cowork-plugins)
-- [Knowledge Work Plugins (GitHub)](https://github.com/anthropics/knowledge-work-plugins)
+| Source | URL | Key Information |
+|--------|-----|-----------------|
+| **Cowork Getting Started** | [support.claude.com](https://support.claude.com/en/articles/13345190-getting-started-with-cowork) | Availability, capabilities, limitations, security |
+| **Agent Skills Overview** | [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | SKILL.md format, 3-level progressive disclosure |
+| **Claude Code Overview** | [code.claude.com](https://code.claude.com/docs/en/overview) | Multi-surface availability, CLAUDE.md memory |
+| **Computer Use Tool** | [platform.claude.com](https://platform.claude.com/docs/en/docs/build-with-claude/computer-use) | Screen vision, mouse/keyboard control, security |
+| **Cowork Plugins** | [claude.com/blog](https://claude.com/blog/cowork-plugins) | Plugin architecture announcement |
+| **Knowledge Work Plugins** | [github.com/anthropics](https://github.com/anthropics/knowledge-work-plugins) | 11 reference plugin implementations |
+
+### Practitioner Guides (Ruben Hassid / How to AI)
+
+| Article | URL | Key Patterns |
+|---------|-----|--------------|
+| **Product Comparison Infographic** | [how-to-ai.guide](https://how-to-ai.guide) | Code vs Cowork vs Projects matrix |
+| **Claude Code Setup** | [ruben.substack.com](https://ruben.substack.com/p/claude-code) | CLAUDE.md memory file pattern |
+| **Claude Cowork Setup** | [ruben.substack.com](https://ruben.substack.com/p/claude-cowork) | Folder structure, Global Instructions |
+| **Claude Setup Guide** | [ruben.substack.com](https://ruben.substack.com/p/claude) | AskUserQuestion tool, master prompts |
+| **AI Slides Guide** | [ruben.substack.com](https://ruben.substack.com/p/powerpoint) | Gamma connector pattern |
 
 ### User Testimonials (From Official Site)
 
