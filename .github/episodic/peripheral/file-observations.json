@@ -2,16 +2,14 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "ROADMAP-UNIFIED.md",
-    "alex_docs/platforms/WORKER-AGENT-READINESS.md",
-    "alex_docs/platforms/CLAUDE-HEIR-PLAN.md"
+    "ROADMAP-UNIFIED.md"
   ],
   "todoHotspots": [
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1773971034556
+      "scannedAt": 1773971322116
     }
   ],
-  "lastUpdated": 1773971034556
+  "lastUpdated": 1773971322116
 }
