@@ -1,16 +1,10 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "alex_docs/platforms/gcx-copilot/README.md",
-    "alex_docs/platforms/gcx-copilot/USER-MANUAL.md",
-    "alex_docs/platforms/gcx-copilot/gcx_docs/README.md",
-    "alex_docs/platforms/gcx-copilot/gcx_docs/integrations/README.md",
-    "alex_docs/platforms/gcx-copilot/gcx_docs/integrations/cpm.md",
-    "alex_docs/platforms/gcx-copilot/gcx_docs/integrations/everest.md",
-    "alex_docs/platforms/gcx-copilot/gcx_docs/integrations/ms-graph.md",
-    "alex_docs/platforms/gcx-copilot/gcx_docs/quick-start.md",
-    "alex_docs/platforms/gcx-copilot/gcx_docs/training/README.md"
+    "github/episodic/peripheral/file-observations.json",
+    "TRIP-REVIEW-APPLICATION-DESCRIPTION.docx",
+    "TRIP-REVIEW-APPLICATION-DESCRIPTION.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1774021834439
+  "lastUpdated": 1774033024821
 }
