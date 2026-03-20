@@ -74,14 +74,16 @@
     </text>
   </g>
   
-  <!-- GCX Logo - Bottom Right -->
-  <g transform="translate(1080, 200)">
-    <!-- GCX text logo -->
-    <text x="0" y="50" font-family="Segoe UI, system-ui, sans-serif" font-size="48" font-weight="800" fill="rgba(255,255,255,0.25)" letter-spacing="4">
+  <!-- GCX Logo - Bottom Right (Official style with rounded border) -->
+  <g transform="translate(1020, 215)">
+    <!-- Rounded rectangle border -->
+    <rect x="0" y="0" width="140" height="55" rx="8" ry="8" 
+          fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+    <!-- GCX text -->
+    <text x="70" y="40" font-family="Segoe UI, system-ui, sans-serif" font-size="36" font-weight="700" 
+          fill="white" text-anchor="middle" letter-spacing="2">
       GCX
     </text>
-    <!-- Accent underline -->
-    <rect x="0" y="58" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
   </g>
   
   <!-- Bottom accent line -->
