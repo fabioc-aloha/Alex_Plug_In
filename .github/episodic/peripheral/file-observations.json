@@ -1,8 +1,9 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "lex_docs/platforms/GCX-AI-HEIR-PLAN.md"
+    "lex_docs/platforms/gcx-copilot/assets/gcx-banner.svg",
+    "alex_docs/platforms/gcx-copilot/README.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1774020777297
+  "lastUpdated": 1774020806512
 }
