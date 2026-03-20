@@ -74,15 +74,24 @@
     </text>
   </g>
   
-  <!-- GCX Logo - Bottom Right (Official style with rounded border) -->
-  <g transform="translate(1020, 215)">
-    <!-- Rounded rectangle border -->
-    <rect x="0" y="0" width="140" height="55" rx="8" ry="8" 
-          fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-    <!-- GCX text -->
-    <text x="70" y="40" font-family="Segoe UI, system-ui, sans-serif" font-size="36" font-weight="700" 
-          fill="white" text-anchor="middle" letter-spacing="2">
+  <!-- GCX Logo - Bottom Right (Official style) -->
+  <g transform="translate(920, 220)">
+    <!-- GCX box with rounded corners -->
+    <rect x="0" y="0" width="85" height="50" rx="6" ry="6" 
+          fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
+    <!-- GCX text inside box -->
+    <text x="42" y="36" font-family="Segoe UI, system-ui, sans-serif" font-size="28" font-weight="700" 
+          fill="white" text-anchor="middle" letter-spacing="1">
       GCX
+    </text>
+    <!-- Vertical divider -->
+    <line x1="100" y1="8" x2="100" y2="42" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <!-- Full text -->
+    <text x="115" y="22" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="400" fill="rgba(255,255,255,0.85)">
+      Global Customer
+    </text>
+    <text x="115" y="40" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="400" fill="rgba(255,255,255,0.85)">
+      Experience
     </text>
   </g>
   
