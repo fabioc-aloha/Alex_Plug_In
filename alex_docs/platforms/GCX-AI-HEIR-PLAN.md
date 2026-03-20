@@ -672,7 +672,7 @@ When a skill is updated in Master Alex:
 | **LLM sanitization pass** | Process ~100 skill files through LLM | 8h |
 | **Human review of LLM output** | Approve/edit sanitized files | 8h |
 | **Create SANITIZATION-LOG.md** | Track reviewed files with timestamps | 2h |
-| Create `copilot-instructions.md` | GCX identity and routing | 4h |
+| ~~Create `copilot-instructions.md`~~ | ~~GCX identity and routing~~ | ~~4h~~ ✅ Phase 0 |
 | Test in sample repo | Verify Copilot loads `.github/` correctly | 2h |
 
 ### Phase 2: Microsoft Skills (Week 3-4)
@@ -689,9 +689,9 @@ When a skill is updated in Master Alex:
 
 | Task | Deliverable | Effort |
 |------|-------------|--------|
-| **Create GitHub template repo** | `microsoft/gcx-ai-agent-template` | 2h |
+| **Create GitHub template repo** | `microsoft/gcx-copilot-template` | 2h |
 | **Populate template** | Sanitized `.github/` content | 2h |
-| **README.md** | User onboarding guide | 4h |
+| ~~**README.md**~~ | ~~User onboarding guide~~ | ~~4h~~ ✅ Phase 0 |
 | **CUSTOMIZING.md** | How to add team-specific skills | 4h |
 | **CONTRIBUTING.md** | How to propose new skills | 2h |
 | Test "Use this template" flow | Full user journey validation | 2h |
@@ -749,10 +749,9 @@ When a skill is updated in Master Alex:
 
 ## Open Questions
 
-1. **Naming**: Template is "GCX Copilot" but self-references as "GCX Copilot" with it/its pronouns
-   - Confirmed: Impersonal, corporate-appropriate identity
+1. ~~**Naming**: Template is "GCX Copilot" but self-references as "GCX Copilot" with it/its pronouns~~ ✅ Resolved: "GCX Copilot" confirmed
 
-2. **Repo location**: Currently `fabioc-aloha/GCX_Copilot` (private personal); will transfer to `microsoft/gcx-ai-agent-template` for distribution
+2. **Repo location**: Currently `fabioc-aloha/GCX_Copilot` (private personal); will transfer to `microsoft/gcx-copilot-template` for distribution
 
 3. **Open source**: Can this template be published externally after sanitization?
 
@@ -780,12 +779,13 @@ When a skill is updated in Master Alex:
 
 ## Next Steps
 
-1. ~~**Immediate**: Validate naming ("GCX Copilot" / "GCX Copilot") with stakeholders~~ ✅ Done
+1. ~~**Immediate**: Validate naming ("GCX Copilot")~~ ✅ Done — renamed to GCX Copilot
 2. ~~**This Week**: Skill audit - identify which skills to include~~ ✅ Initial 14 skills complete
-3. **Next**: LLM sanitization pass on Alex skills for Microsoft context
-4. **Next**: Add Microsoft-specific skills (Kusto, Geneva, SDL)
-5. **Decision Required**: Transfer to microsoft org when ready for distribution
-6. **Research Needed**: Legal review timeline for template publication
+3. ~~**Create master repo**~~ ✅ Done — `C:\Development\GCX_Copilot` → github.com/fabioc-aloha/GCX_Copilot
+4. **Next**: LLM sanitization pass on Alex skills for Microsoft context
+5. **Next**: Add Microsoft-specific skills (Kusto, Geneva, SDL)
+6. **Decision Required**: Transfer to microsoft org when ready for distribution
+7. **Research Needed**: Legal review timeline for template publication
 
 ---
 
