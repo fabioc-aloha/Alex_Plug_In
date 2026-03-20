@@ -1,7 +1,7 @@
 ---
 name: knowledge-synthesis
 description: Search, summarize, and synthesize information across documentation and code. Use when user asks to find information, summarize docs, or understand patterns across the codebase.
----
+
 
 # Knowledge Synthesis
 

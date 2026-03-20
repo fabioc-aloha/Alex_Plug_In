@@ -1,7 +1,7 @@
 ---
 name: documentation-standards
 description: Create technical documentation following Microsoft standards. Use when user asks about documentation, needs to write docs, or asks about documentation best practices.
----
+
 
 # Documentation Standards
 

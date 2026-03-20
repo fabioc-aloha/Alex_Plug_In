@@ -1,7 +1,7 @@
 ---
 name: ms-graph-integration
 description: Work with Microsoft Graph API for users, calendar, mail, Teams, SharePoint, and OneDrive. Use when user asks about MS Graph, Microsoft 365 data, or needs to integrate with M365 services.
----
+
 
 # Microsoft Graph Integration
 

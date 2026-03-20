@@ -2,7 +2,7 @@
 
 > Hands-on workshops and exercises for mastering the GCX Copilot.
 
----
+
 
 ## Training Tracks
 
@@ -14,7 +14,7 @@
 | [Documentation Wizard](doc-wizard.md) | 2 hours | Doc owners | Quality audits and maintenance |
 | [Integration Hub](integration-hub.md) | 4 hours | Developers | Platform integrations deep dive |
 
----
+
 
 ## Workshop Format
 
@@ -26,7 +26,7 @@ Each workshop includes:
 4. **Challenge** — Real-world scenario
 5. **Reference** — Quick lookup card
 
----
+
 
 ## Fundamentals Track (2 hours)
 
@@ -54,7 +54,7 @@ Each workshop includes:
 - Choosing the right pillar
 - Trust but verify
 
----
+
 
 ## Certification Path
 
@@ -64,7 +64,7 @@ Each workshop includes:
 | **GCX Agent Developer** | Complete Code Assistant + Integration Hub | 🥈 |
 | **GCX Agent Expert** | All tracks + contribute 1 skill | 🥇 |
 
----
+
 
 ## Self-Paced Resources
 
@@ -72,7 +72,7 @@ Each workshop includes:
 - [Exercise Repository](exercises/README.md) — Hands-on labs
 - [Cheat Sheets](cheatsheets/README.md) — Quick reference cards
 
----
+
 
 ## Schedule a Workshop
 

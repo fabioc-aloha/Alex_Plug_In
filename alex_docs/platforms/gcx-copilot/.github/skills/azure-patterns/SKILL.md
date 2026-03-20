@@ -1,7 +1,7 @@
 ---
 name: azure-patterns
 description: Azure architecture patterns and best practices. Use when user asks about Azure services, cloud architecture, or needs Azure guidance.
----
+
 
 # Azure Architecture Patterns
 

@@ -2,7 +2,7 @@
 
 > Platform-specific setup and usage guides for the GCX Copilot Integration Hub.
 
----
+
 
 ## Available Integrations
 
@@ -16,7 +16,7 @@
 | [Qualtrics](qualtrics.md) | Surveys | ✅ Ready | Survey Data Integration |
 | [Azure](azure.md) | Cloud | ✅ Core | Architecture, Bicep, Deployment |
 
----
+
 
 ## Integration Setup Matrix
 
@@ -30,7 +30,7 @@
 | Qualtrics | API Token | API credentials | `qualtrics-integration` |
 | Azure | Subscription | Contributor role | `azure-architecture-patterns` |
 
----
+
 
 ## Quick Setup Checklist
 
@@ -65,7 +65,7 @@
 - [ ] Configure survey project access
 - [ ] Test data export permissions
 
----
+
 
 ## Common Patterns
 
@@ -91,7 +91,7 @@ All integrations use secure credential management:
 @workspace How do I handle rate limits for MS Graph batch requests?
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -102,7 +102,7 @@ All integrations use secure credential management:
 | Rate limited | Implement exponential backoff |
 | Data not syncing | Check network access, endpoint URLs |
 
----
+
 
 ## Adding New Integrations
 

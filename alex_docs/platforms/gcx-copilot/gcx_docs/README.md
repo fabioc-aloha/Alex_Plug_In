@@ -2,7 +2,7 @@
 
 > **Version**: 1.0 | **Last Updated**: 2026-03-20
 
----
+
 
 ## Documentation Index
 
@@ -15,7 +15,7 @@
 | [Administration](admin/README.md) | Maintenance and ops | Admins |
 | [FAQ](faq.md) | Common questions | All users |
 
----
+
 
 ## Quick Links
 
@@ -46,7 +46,7 @@
 | Qualtrics | ✅ Ready | [Qualtrics Guide](integrations/qualtrics.md) |
 | Azure | ✅ Ready | [Azure Guide](integrations/azure.md) |
 
----
+
 
 ## Support
 
@@ -54,7 +54,7 @@
 - **Issue Tracker**: [Template repo issues]
 - **Email**: gcx-ai-agent@microsoft.com
 
----
+
 
 ## Contributing
 

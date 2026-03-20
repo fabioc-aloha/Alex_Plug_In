@@ -1,7 +1,7 @@
 ---
 name: ado-integration
 description: Work with Azure DevOps for work items, repos, pipelines, and boards. Use when user asks about ADO, work items, builds, or pipelines.
----
+
 
 # Azure DevOps Integration
 

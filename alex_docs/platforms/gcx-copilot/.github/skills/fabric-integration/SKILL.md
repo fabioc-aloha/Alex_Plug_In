@@ -1,7 +1,7 @@
 ---
 name: fabric-integration
 description: Work with Microsoft Fabric for data engineering, warehousing, and analytics. Use when user asks about Fabric, lakehouses, notebooks, or data pipelines.
----
+
 
 # Microsoft Fabric Integration
 

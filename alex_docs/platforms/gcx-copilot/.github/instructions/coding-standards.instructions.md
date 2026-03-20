@@ -1,6 +1,6 @@
 ---
 applyTo: "**/*.{ts,js,py,cs}"
----
+
 
 # Microsoft Coding Standards
 

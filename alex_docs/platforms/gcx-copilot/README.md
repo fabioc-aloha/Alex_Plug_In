@@ -4,7 +4,7 @@
 
 > Your AI partner for code, documentation, and enterprise integrations.
 
----
+
 
 ## What is GCX Copilot?
 
@@ -15,7 +15,7 @@ GCX Copilot is a customized GitHub Copilot experience that helps you:
 - **Manage knowledge** — Search, organize, synthesize information
 - **Connect systems** — MS Graph, ADO, Fabric, CPM, Everest
 
----
+
 
 ## Quick Start
 
@@ -41,7 +41,7 @@ Press `Ctrl+Shift+I` (Windows) or `Cmd+Shift+I` (Mac) to open Copilot Chat.
 @workspace Write an ADR for our caching strategy
 ```
 
----
+
 
 ## Core Capabilities
 
@@ -53,7 +53,7 @@ Press `Ctrl+Shift+I` (Windows) or `Cmd+Shift+I` (Mac) to open Copilot Chat.
 | **Testing** | Test generation, coverage analysis |
 | **Refactoring** | Code improvements, pattern application |
 
----
+
 
 ## Slash Commands
 
@@ -65,7 +65,7 @@ Press `Ctrl+Shift+I` (Windows) or `Cmd+Shift+I` (Mac) to open Copilot Chat.
 | `/explain` | Explain code |
 | `/fix` | Fix issues |
 
----
+
 
 ## Specialist Agents
 
@@ -75,7 +75,7 @@ Press `Ctrl+Shift+I` (Windows) or `Cmd+Shift+I` (Mac) to open Copilot Chat.
 | `@azure` | Azure resources |
 | `@m365` | Microsoft 365 |
 
----
+
 
 ## Learn More
 
@@ -84,12 +84,12 @@ Press `Ctrl+Shift+I` (Windows) or `Cmd+Shift+I` (Mac) to open Copilot Chat.
 - [Training](gcx_docs/training/README.md) — Workshops and tracks
 - [Integrations](gcx_docs/integrations/README.md) — Platform connections
 
----
+
 
 ## Support
 
 Contact your team's AI Champion or the GCX Copilot team for assistance.
 
----
+
 
 *GCX Copilot — Code smarter, document faster, integrate everything.*

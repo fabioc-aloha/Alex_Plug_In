@@ -6,7 +6,7 @@
 
 > **Version**: 1.0 | **Platform**: VS Code + GitHub Copilot | **Distribution**: GitHub Template Repository
 
----
+
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@
 15. [FAQ](#faq)
 16. [Support](#support)
 
----
+
 
 ## Introduction
 
@@ -47,7 +47,7 @@ flowchart TD
     E --> E1["MS Graph • ADO • Fabric<br/>CPM • Everest • Qualtrics"]
 ```
 
----
+
 
 ## The Four Pillars
 
@@ -78,7 +78,7 @@ flowchart TD
 | **Quality-First** | Research before code, documentation before shipping |
 | **Team Consistency** | Shared skills and standards across your organization |
 
----
+
 
 ## Quick Start
 
@@ -103,7 +103,7 @@ git commit -m "feat: add GCX Copilot"
 
 **That's it!** Open VS Code, start a Copilot chat, and Copilot is active.
 
----
+
 
 ## What is the GCX Copilot?
 
@@ -142,7 +142,7 @@ flowchart TD
 | **Agents** | `.github/agents/` | Specialist personas (@builder, @documentarian, etc.) |
 | **Config** | `.github/config/` | Settings and feature flags |
 
----
+
 
 ## Requirements
 
@@ -173,7 +173,7 @@ flowchart TD
 - Microsoft Graph API endpoints (if using Graph skills)
 - Azure DevOps endpoints (if using ADO skills)
 
----
+
 
 ## Installation
 
@@ -196,7 +196,7 @@ Ensure these settings are enabled (recommended):
 3. Type: `What skills do you have?`
 4. Copilot should list its available skills
 
----
+
 
 ## Features by Pillar
 
@@ -241,7 +241,7 @@ Your intelligent pair programmer for all development tasks.
 - Coverage analysis
 - Edge case identification
 
----
+
 
 ### 📝 Pillar 2: Technical Writer
 
@@ -283,7 +283,7 @@ Your documentation partner for clear, accurate technical content.
 - Configuration reference
 - Troubleshooting guides
 
----
+
 
 ### 📚 Pillar 3: Documentation Wizard
 
@@ -314,7 +314,7 @@ Your quality guardian for living documentation.
 - Version mismatches
 - Contradictions between files
 
----
+
 
 ### 🔗 Pillar 4: Integration Hub
 
@@ -462,7 +462,7 @@ Copilot has **deep expertise** in Microsoft Graph — the unified API for Micros
 - Permission scoping best practices
 - Error handling and retry logic
 
----
+
 
 ## Working with Copilot
 
@@ -494,7 +494,7 @@ Copilot follows a research-first methodology:
 4. **Implement** — Writes quality code with tests
 5. **Validate** — Verifies the solution works
 
----
+
 
 ## Available Skills
 
@@ -550,7 +550,7 @@ Copilot follows a research-first methodology:
 | `legal-compliance` | Regulatory requirements | Compliance checks |
 | `observability-monitoring` | Metrics, logging, tracing | Operational excellence |
 
----
+
 
 ## Slash Commands
 
@@ -609,7 +609,7 @@ Access frequently used workflows with slash commands:
 /audit docs/ --semantic
 ```
 
----
+
 
 ## Specialist Agents
 
@@ -663,7 +663,7 @@ Expert in Microsoft Fabric and data platforms (🔗 Integration Hub):
 @fabric Design a medallion architecture with proper governance
 ```
 
----
+
 
 ## Customization
 
@@ -681,10 +681,10 @@ Create custom skills for your team:
 **SKILL.md Template:**
 
 ```markdown
----
+
 name: your-skill
 description: Brief description of what this skill does
----
+
 
 # Your Skill Name
 
@@ -709,9 +709,9 @@ Detailed instructions for Copilot...
 Edit `.github/instructions/*.instructions.md` to customize behavior for specific file types:
 
 ```yaml
----
+
 applyTo: "**/*.tsx"
----
+
 
 When working with React components:
 - Always use functional components with hooks
@@ -736,7 +736,7 @@ Edit `.github/config/settings.json` to adjust Agent behavior:
 }
 ```
 
----
+
 
 ## Best Practices
 
@@ -790,7 +790,7 @@ git merge gcx-template/main --no-commit
 git commit -m "chore: update GCX Copilot"
 ```
 
----
+
 
 ## Troubleshooting
 
@@ -830,7 +830,7 @@ git commit -m "chore: update GCX Copilot"
 2. Review `copilot-instructions.md` for conflicting directives
 3. Clear Copilot chat history and retry
 
----
+
 
 ## FAQ
 
@@ -862,7 +862,7 @@ git merge gcx-template/main
 
 **A:** Copilot uses your existing GitHub Copilot subscription. Code handling follows Microsoft's standard Copilot privacy policies.
 
----
+
 
 ## Support
 
@@ -887,7 +887,7 @@ Submit feature requests through:
 2. Template repo pull requests
 3. Email to the GCX team
 
----
+
 
 <div align="center">
 

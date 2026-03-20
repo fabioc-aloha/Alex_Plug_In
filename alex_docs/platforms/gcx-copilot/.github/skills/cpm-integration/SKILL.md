@@ -1,7 +1,7 @@
 ---
 name: cpm-integration
 description: Work with CPM for compliance tracking, SLA monitoring, and audit readiness. Use when user asks about compliance, SLAs, CPM, or regulatory requirements.
----
+
 
 # CPM Integration
 

@@ -1,7 +1,7 @@
 ---
 name: api-design
 description: API design patterns and best practices. Use when user asks about API design, REST endpoints, or API documentation.
----
+
 
 # API Design
 

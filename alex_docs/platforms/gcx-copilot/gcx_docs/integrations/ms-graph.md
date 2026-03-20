@@ -2,13 +2,13 @@
 
 > Deep integration with Microsoft 365 — users, groups, calendar, mail, Teams, SharePoint, OneDrive.
 
----
+
 
 ## Overview
 
 Microsoft Graph is the unified API gateway to Microsoft 365 data and intelligence. The GCX Copilot has **deep expertise** in Graph patterns, making it your go-to assistant for M365 integrations.
 
----
+
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ Microsoft Graph is the unified API gateway to Microsoft 365 data and intelligenc
 | API Permissions | Data access |
 | Azure Key Vault | Credential storage |
 
----
+
 
 ## Setup
 
@@ -56,7 +56,7 @@ Group.Read.All
 @workspace Set up Key Vault for MS Graph credentials
 ```
 
----
+
 
 ## Common Operations
 
@@ -144,7 +144,7 @@ Group.Read.All
 @workspace Share a file with specific users
 ```
 
----
+
 
 ## Advanced Patterns
 
@@ -180,7 +180,7 @@ Least privilege patterns:
 @workspace What's the minimum permission for reading user calendars?
 ```
 
----
+
 
 ## Error Handling
 
@@ -195,7 +195,7 @@ Least privilege patterns:
 @workspace Add Graph API error handling with retry logic
 ```
 
----
+
 
 ## Best Practices
 
@@ -205,7 +205,7 @@ Least privilege patterns:
 4. **Handle throttling** — Implement proper backoff
 5. **Use delta queries** — Sync changes efficiently
 
----
+
 
 ## Related Skills
 

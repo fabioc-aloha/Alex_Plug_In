@@ -2,13 +2,13 @@
 
 > SLA tracking, compliance reporting, and customer commitment workflows.
 
----
+
 
 ## Overview
 
 CPM (Customer Promise Management) is the enterprise platform for tracking customer commitments, SLAs, and compliance. The GCX Copilot helps you query CPM data, build reports, and integrate with your development workflows.
 
----
+
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ CPM (Customer Promise Management) is the enterprise platform for tracking custom
 | API Credentials | Authentication |
 | Azure Key Vault | Credential storage |
 
----
+
 
 ## Setup
 
@@ -35,7 +35,7 @@ Contact your CPM administrator to obtain:
 @workspace Set up Key Vault for CPM credentials
 ```
 
----
+
 
 ## Common Operations
 
@@ -95,7 +95,7 @@ Contact your CPM administrator to obtain:
 @workspace Sync CPM deadlines with ADO sprint planning
 ```
 
----
+
 
 ## Data Model
 
@@ -106,7 +106,7 @@ Contact your CPM administrator to obtain:
 | **Milestone** | Key delivery checkpoints |
 | **Compliance Record** | Audit trail of fulfillment |
 
----
+
 
 ## Best Practices
 
@@ -115,7 +115,7 @@ Contact your CPM administrator to obtain:
 3. **Regular sync** — Keep CPM and project data aligned
 4. **Audit trail** — Document all compliance decisions
 
----
+
 
 ## Related Skills
 

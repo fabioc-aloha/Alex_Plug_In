@@ -1,7 +1,7 @@
 ---
 name: everest-integration
 description: Work with Everest for survey data, sentiment analysis, and feedback insights. Use when user asks about surveys, Everest, sentiment analysis, or customer feedback.
----
+
 
 # Everest Integration
 

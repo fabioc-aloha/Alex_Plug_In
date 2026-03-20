@@ -1,7 +1,7 @@
 ---
 name: refactoring-patterns
 description: Improve code structure and apply design patterns. Use when user wants to refactor, improve code quality, reduce complexity, or apply patterns.
----
+
 
 # Refactoring Patterns
 

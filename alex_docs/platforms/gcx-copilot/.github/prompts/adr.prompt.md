@@ -1,6 +1,6 @@
 ---
 description: Generate an Architecture Decision Record (ADR) for a technical decision
----
+
 
 # Generate ADR
 

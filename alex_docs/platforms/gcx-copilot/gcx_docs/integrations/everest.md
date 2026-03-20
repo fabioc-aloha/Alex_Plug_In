@@ -2,13 +2,13 @@
 
 > Enterprise survey platform — feedback loops, sentiment analysis, and survey data integration.
 
----
+
 
 ## Overview
 
 Everest is the enterprise survey and feedback platform. The GCX Copilot helps you ingest Everest data, analyze sentiment trends, and integrate survey insights into your data pipelines and dashboards.
 
----
+
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Everest is the enterprise survey and feedback platform. The GCX Copilot helps yo
 | Survey Project Access | Data permissions |
 | Azure Key Vault | Credential storage |
 
----
+
 
 ## Setup
 
@@ -36,7 +36,7 @@ Contact your Everest administrator to obtain:
 @workspace Set up Key Vault for Everest credentials
 ```
 
----
+
 
 ## Common Operations
 
@@ -110,7 +110,7 @@ Contact your Everest administrator to obtain:
 @workspace Set up scheduled refresh for Everest reports
 ```
 
----
+
 
 ## Data Model
 
@@ -121,7 +121,7 @@ Contact your Everest administrator to obtain:
 | **Question** | Survey questions and types |
 | **Score** | Calculated metrics (NPS, CSAT, etc.) |
 
----
+
 
 ## Common Metrics
 
@@ -132,7 +132,7 @@ Contact your Everest administrator to obtain:
 | **CES** | Customer Effort Score | Ease of interaction |
 | **Response Rate** | Participation | Responses / Invitations |
 
----
+
 
 ## Best Practices
 
@@ -142,7 +142,7 @@ Contact your Everest administrator to obtain:
 4. **Close the loop** — Connect feedback to action items
 5. **Privacy compliance** — Handle PII appropriately
 
----
+
 
 ## Integration with Fabric
 
@@ -155,7 +155,7 @@ flowchart LR
     D --> E["Power BI<br/>Dashboards"]
 ```
 
----
+
 
 ## Related Skills
 

@@ -1,7 +1,7 @@
 ---
 name: debugging
 description: Debug code issues and identify root causes. Use when user has errors, exceptions, unexpected behavior, or needs help troubleshooting.
----
+
 
 # Debugging
 

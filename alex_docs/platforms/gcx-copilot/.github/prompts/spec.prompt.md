@@ -1,6 +1,6 @@
 ---
 description: Generate a technical specification for a feature
----
+
 
 # Technical Specification
 

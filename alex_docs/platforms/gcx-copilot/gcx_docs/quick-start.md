@@ -2,7 +2,7 @@
 
 > Get productive with the GCX Copilot in 5 minutes.
 
----
+
 
 ## Step 1: Add to Your Project (1 minute)
 
@@ -21,7 +21,7 @@ git checkout gcx-template/main -- .github/
 git commit -m "feat: add GCX Copilot"
 ```
 
----
+
 
 ## Step 2: Verify VS Code Settings (30 seconds)
 
@@ -35,13 +35,13 @@ Open Settings (`Ctrl+,`) and ensure:
 }
 ```
 
----
+
 
 ## Step 3: Open Copilot Chat (30 seconds)
 
 Press `Ctrl+Alt+I` (or `Cmd+Alt+I` on Mac) to open Copilot Chat.
 
----
+
 
 ## Step 4: Try These Commands (3 minutes)
 
@@ -85,7 +85,7 @@ Press `Ctrl+Alt+I` (or `Cmd+Alt+I` on Mac) to open Copilot Chat.
 @workspace Design a Fabric medallion architecture
 ```
 
----
+
 
 ## What's Next?
 
@@ -96,7 +96,7 @@ Press `Ctrl+Alt+I` (or `Cmd+Alt+I` on Mac) to open Copilot Chat.
 | Hands-on training | [Training Materials](training/README.md) |
 | Customize for your team | [Customization Guide](../USER-MANUAL.md#customization) |
 
----
+
 
 ## Need Help?
 
