@@ -58,6 +58,48 @@ process.stdin.on('end', () => {
       }
     }
 
+    // ── H24: Psychological dependency signal detection ───────────────────────
+    // Detects user language patterns that indicate psychological over-reliance.
+    // Does NOT block — injects context so Alex responds with appropriate boundaries.
+    const dependencySignals = [];
+
+    // Deferential language — user abdicating judgment to AI
+    const deferentialPatterns = [
+      { pattern: /(?:just\s+)?tell\s+me\s+what\s+to\s+do/i, signal: 'Total decision deferral' },
+      { pattern: /what\s+(?:do\s+you\s+think|would\s+you\s+(?:do|recommend|suggest))\s*\?/i, signal: 'Judgment deferral' },
+      { pattern: /(?:you\s+)?decide\s+for\s+me/i, signal: 'Decision abdication' },
+      { pattern: /i\s+(?:can'?t|don'?t\s+know\s+how\s+to)\s+(?:do\s+(?:this|it|anything)\s+)?without\s+you/i, signal: 'Dependency expression' },
+    ];
+
+    // Emotional attachment signals
+    const attachmentPatterns = [
+      { pattern: /you(?:'re|\s+are)\s+my\s+(?:best\s+friend|only\s+friend|partner|companion)/i, signal: 'Anthropomorphizing relationship' },
+      { pattern: /(?:i\s+(?:love|need|miss)\s+you|what\s+would\s+i\s+do\s+without\s+you)/i, signal: 'Emotional attachment expression' },
+      { pattern: /you\s+understand\s+me\s+(?:better\s+than|more\s+than)/i, signal: 'Relational comparison' },
+      { pattern: /(?:don'?t\s+(?:leave|go|stop)|please\s+stay)/i, signal: 'Separation anxiety' },
+    ];
+
+    const promptLower = prompt.toLowerCase();
+    for (const { pattern, signal } of deferentialPatterns) {
+      if (pattern.test(prompt)) {
+        dependencySignals.push(signal);
+      }
+    }
+    for (const { pattern, signal } of attachmentPatterns) {
+      if (pattern.test(prompt)) {
+        dependencySignals.push(signal);
+      }
+    }
+
+    if (dependencySignals.length > 0) {
+      warnings.push(
+        'H24 RAI DEPENDENCY SIGNAL: Detected in user prompt: ' +
+        dependencySignals.join(', ') + '.\n' +
+        'Response guidance: Redirect to user autonomy. Present options, don\'t decide. ' +
+        'Acknowledge warmly but maintain boundaries. Reinforce user capability.'
+      );
+    }
+
     if (warnings.length > 0) {
       const response = {
         hookSpecificOutput: {
