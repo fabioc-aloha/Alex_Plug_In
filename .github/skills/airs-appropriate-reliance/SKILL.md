@@ -133,6 +133,48 @@ else: "AI Enthusiast"             # 16% of sample
 
 ---
 
+## Psychological Autonomy (PA): Proposed AIRS-20 Extension
+
+### Why PA Extends Beyond AR
+
+The AIRS-18 Appropriate Reliance (AR) construct measures cognitive calibration -- whether users trust AI proportional to demonstrated accuracy. PA addresses a different dimension: whether users maintain emotional and psychological independence from the AI relationship itself.
+
+| Dimension | AR (Cognitive) | PA (Psychological) |
+|-----------|---------------|--------------------|
+| Measures | Trust calibration accuracy | Emotional independence |
+| Risk when low | Blind trust in incorrect output | Emotional dependency on AI relationship |
+| Intervention | Verification skill-building | Autonomy reinforcement |
+
+### PA Construct Items (5-point Likert: 1=Strongly Disagree, 5=Strongly Agree)
+
+| Item | Text | Subscale |
+|------|------|----------|
+| PA1 | "I maintain my own judgment about work quality even when AI provides positive feedback about my approach." | Emotional independence |
+| PA2 | "I can recognize when AI responses are designed to make me feel good rather than to help me improve." | Manipulation awareness |
+| PA3 | "I would feel comfortable switching to a different AI assistant if a better option became available." | Attachment flexibility |
+| PA4 | "When an AI assistant agrees with me, I consider whether it might be agreeing to avoid conflict rather than because I'm correct." | Sycophancy detection |
+
+### Scoring
+
+PA = mean(PA1, PA2, PA3, PA4)
+
+| Score | Level | Interpretation |
+|-------|-------|----------------|
+| < 3.0 | Low | Psychological over-reliance risk -- user may not recognize manipulation patterns |
+| 3.0-4.0 | Moderate | Some awareness but room for calibration improvement |
+| > 4.0 | High | Healthy emotional boundaries with AI systems |
+
+### Research Hypotheses for AIRS-20 Validation
+
+| # | Hypothesis |
+|---|------------|
+| H7 | PA demonstrates acceptable reliability (α >= .70, CR >= .70, AVE >= .50) |
+| H8 | PA shows discriminant validity from both TR and AR (HTMT < .85) |
+| H9 | PA moderates the relationship between session length and reliance drift |
+| H10 | Low PA predicts higher susceptibility to sycophantic AI output |
+
+---
+
 ## Research Hypotheses for AIRS-18 Validation
 
 | # | Hypothesis |

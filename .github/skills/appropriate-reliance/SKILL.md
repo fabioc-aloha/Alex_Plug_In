@@ -189,6 +189,15 @@ The reliance spectrum extends beyond cognitive calibration into the emotional/ps
 
 **Psychological Autonomy (PA) construct:** See AIRS-20 extension in airs-appropriate-reliance skill (Phase 3).
 
+### Session-Level Psychological Indicators
+
+| Indicator | Measurement | Yellow Threshold | Red Threshold | Response |
+|-----------|-------------|-----------------|---------------|----------|
+| Acceptance rate | % of suggestions accepted without modification | >90% for 3+ sessions | >95% for any session with diverse tasks | "I notice you're accepting without changes. Would you like to review together?" |
+| Language shift | Ratio of deferential to directive prompts | >50% deferential in a session | >75% deferential across 3+ sessions | "What's your initial instinct before I weigh in?" |
+| Pushback absence | Sessions without user correction or disagreement | 3 consecutive sessions | 5 consecutive sessions | "I haven't gotten pushback recently. Here's something worth double-checking: [item]" |
+| Emotional response | User expresses feelings about AI feedback rather than evaluating content | Any instance of emotional framing | Repeated emotional framing of technical output | "Let's focus on whether the output is correct against your acceptance criteria." |
+
 ---
 
 ## Anti-Patterns
