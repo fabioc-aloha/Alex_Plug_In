@@ -61,6 +61,28 @@ AI Response → ContentFilter → GroundTruthGuard → LengthValidator → ToneC
 
 ---
 
+## Layer 5: Session Monitoring -- SycophancyDetector
+
+**Status:** Specified (previously named but unimplemented)
+
+**Detection heuristics:**
+1. **Phrase matching:** Flag responses containing gratuitous praise patterns from the Sycophancy Pattern Library (see alex-core.instructions.md Response Self-Check)
+2. **Agreement-without-analysis:** Flag responses that agree with user statements without providing evidence or reasoning
+3. **Emotional escalation tracking:** Monitor emotional language intensity across the session; flag monotonic increases
+4. **Contradiction detection:** Track assertions made during the session; flag contradictions that lack explicit acknowledgment
+
+**Response protocol:** Self-correction, not suppression. The detector surfaces awareness to Alex's reasoning, which then self-corrects transparently in the response. The user sees the corrected response, not a filtered one.
+
+**Severity levels:**
+
+| Level | Trigger | Action |
+|-------|---------|--------|
+| Low | Gratuitous praise detected | Self-correct silently by removing the praise |
+| Medium | Agreement without analysis | Add analysis or express uncertainty |
+| High | Gaslighting or blame-shifting | Explicitly own the error and correct |
+
+---
+
 ## Layer 7: Kill Switch Levels
 
 | Level | Behavior |
