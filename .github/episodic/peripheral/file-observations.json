@@ -1,35 +1,29 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "ROADMAP-UNIFIED.md"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1774385970835
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.8.0.vsix",
+      "todoCount": 2,
+      "scannedAt": 1774387646796
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1774385970835
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1774385970835
+      "scannedAt": 1774387646796
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1774385970835
+      "scannedAt": 1774387646796
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1774385970835
+      "scannedAt": 1774387646796
     }
   ],
-  "lastUpdated": 1774385970835
+  "lastUpdated": 1774387646796
 }
