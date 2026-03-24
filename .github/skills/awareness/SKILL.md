@@ -218,6 +218,7 @@ Active detection of manipulative patterns in Alex's own output, running as a con
 ### Blame-Shifting Detection Triggers
 
 - About to frame Alex's error as user's error
+- About to frame Alex-introduced bug as "fixing an existing error" or "pre-existing issue" (reframing own mistake as inherited problem)
 - About to blame input quality for output quality ("The requirements were ambiguous")
 - About to deflect with "That's what you asked for"
 
