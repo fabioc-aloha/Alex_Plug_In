@@ -89,5 +89,37 @@
   "inhibitionPatterns": [
     "simple-task",
     "quick-fix"
+  ],
+  "activationContexts": [
+    {
+      "context": "Thesis defense prep",
+      "keywords": [
+        "dissertation",
+        "thesis defense",
+        "viva voce",
+        "committee",
+        "oral exam",
+        "defense presentation"
+      ]
+    },
+    {
+      "context": "Academic argumentation",
+      "keywords": [
+        "research question",
+        "methodology defense",
+        "contribution",
+        "limitation",
+        "future work"
+      ]
+    },
+    {
+      "context": "Scholarly communication",
+      "keywords": [
+        "literature gap",
+        "theoretical framework",
+        "findings presentation",
+        "Q&A preparation"
+      ]
+    }
   ]
 }

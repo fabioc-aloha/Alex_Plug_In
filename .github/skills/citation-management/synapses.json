@@ -70,5 +70,40 @@
       "trigger": "DOI|in-text|reference list",
       "confidence": 0.85
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Reference management",
+      "keywords": [
+        "citation",
+        "bibliography",
+        "reference",
+        "footnote",
+        "endnote",
+        "citation style"
+      ]
+    },
+    {
+      "context": "Academic standards",
+      "keywords": [
+        "APA",
+        "MLA",
+        "Chicago",
+        "IEEE",
+        "Harvard",
+        "DOI",
+        "cross-reference"
+      ]
+    },
+    {
+      "context": "Source tracking",
+      "keywords": [
+        "source attribution",
+        "plagiarism",
+        "quotation",
+        "paraphrase",
+        "citation graph"
+      ]
+    }
   ]
 }

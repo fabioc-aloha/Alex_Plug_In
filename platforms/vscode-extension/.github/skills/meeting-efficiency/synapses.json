@@ -43,5 +43,39 @@
       "when": "Running project coordination meetings",
       "yields": "project-aligned meeting cadence"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Meeting optimization",
+      "keywords": [
+        "meeting agenda",
+        "meeting notes",
+        "action items",
+        "meeting efficiency",
+        "standup",
+        "retrospective"
+      ]
+    },
+    {
+      "context": "Facilitation",
+      "keywords": [
+        "facilitation",
+        "timeboxing",
+        "decision making",
+        "consensus",
+        "parking lot",
+        "meeting cadence"
+      ]
+    },
+    {
+      "context": "Async alternatives",
+      "keywords": [
+        "async communication",
+        "meeting-free",
+        "written update",
+        "status report",
+        "decision log"
+      ]
+    }
   ]
 }

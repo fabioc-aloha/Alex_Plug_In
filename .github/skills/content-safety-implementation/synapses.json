@@ -43,5 +43,38 @@
       "when": "Running prompt evolution with safety constraints",
       "yields": "evolution-safe prompt management"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Content moderation",
+      "keywords": [
+        "content safety",
+        "content filter",
+        "moderation",
+        "toxicity detection",
+        "PII detection",
+        "harmful content"
+      ]
+    },
+    {
+      "context": "Safety guardrails",
+      "keywords": [
+        "guardrail",
+        "safety layer",
+        "input validation",
+        "output filtering",
+        "jailbreak prevention"
+      ]
+    },
+    {
+      "context": "Responsible AI implementation",
+      "keywords": [
+        "responsible AI",
+        "red teaming",
+        "harm mitigation",
+        "transparency",
+        "fairness"
+      ]
+    }
   ]
 }

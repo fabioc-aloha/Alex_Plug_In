@@ -35,5 +35,38 @@
       "when": "Designing UI for streaming responses",
       "yields": "user-friendly streaming experience"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Server-sent events",
+      "keywords": [
+        "SSE",
+        "server-sent events",
+        "EventSource",
+        "streaming",
+        "real-time",
+        "event stream"
+      ]
+    },
+    {
+      "context": "Streaming architecture",
+      "keywords": [
+        "chunked response",
+        "stream processing",
+        "backpressure",
+        "reconnection",
+        "retry"
+      ]
+    },
+    {
+      "context": "Real-time patterns",
+      "keywords": [
+        "live update",
+        "push notification",
+        "WebSocket alternative",
+        "long polling",
+        "streaming API"
+      ]
+    }
   ]
 }

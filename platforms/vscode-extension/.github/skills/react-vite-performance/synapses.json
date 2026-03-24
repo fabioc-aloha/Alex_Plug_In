@@ -31,5 +31,41 @@
       "when": "verifying performance regressions in CI or testing lazy-loaded components",
       "yields": "performance regression testing, bundle size CI gates"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "React optimization",
+      "keywords": [
+        "React.memo",
+        "useMemo",
+        "useCallback",
+        "lazy loading",
+        "code splitting",
+        "virtual DOM"
+      ]
+    },
+    {
+      "context": "Vite configuration",
+      "keywords": [
+        "vite.config",
+        "HMR",
+        "build optimization",
+        "chunk splitting",
+        "tree shaking",
+        "rollup"
+      ]
+    },
+    {
+      "context": "Web performance",
+      "keywords": [
+        "bundle size",
+        "lighthouse",
+        "core web vitals",
+        "LCP",
+        "FID",
+        "CLS",
+        "performance profiling"
+      ]
+    }
   ]
 }

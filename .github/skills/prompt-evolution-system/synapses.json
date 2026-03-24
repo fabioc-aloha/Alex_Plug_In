@@ -43,5 +43,37 @@
       "when": "Building dashboards and alerts for prompt performance",
       "yields": "observable prompt evolution pipeline"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Prompt engineering",
+      "keywords": [
+        "prompt engineering",
+        "prompt optimization",
+        "few-shot",
+        "chain-of-thought",
+        "system prompt",
+        "prompt template"
+      ]
+    },
+    {
+      "context": "Prompt versioning",
+      "keywords": [
+        "prompt version",
+        "A/B testing",
+        "prompt iteration",
+        "evaluation",
+        "prompt registry"
+      ]
+    },
+    {
+      "context": "LLM interaction",
+      "keywords": [
+        "token optimization",
+        "context window",
+        "prompt injection prevention",
+        "output parsing"
+      ]
+    }
   ]
 }

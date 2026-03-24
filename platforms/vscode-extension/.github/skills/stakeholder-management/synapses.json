@@ -51,5 +51,38 @@
       "when": "Managing stakeholder expectations around scope trade-offs",
       "yields": "stakeholder-aligned scope boundaries"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Stakeholder engagement",
+      "keywords": [
+        "stakeholder",
+        "sponsor",
+        "RACI",
+        "stakeholder map",
+        "influence",
+        "alignment"
+      ]
+    },
+    {
+      "context": "Communication planning",
+      "keywords": [
+        "communication plan",
+        "status update",
+        "escalation",
+        "executive briefing",
+        "change management"
+      ]
+    },
+    {
+      "context": "Relationship management",
+      "keywords": [
+        "trust building",
+        "expectation management",
+        "feedback loop",
+        "stakeholder buy-in",
+        "consensus"
+      ]
+    }
   ]
 }

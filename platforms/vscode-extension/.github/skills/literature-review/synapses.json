@@ -86,5 +86,36 @@
       "module": "5",
       "confidence": 0.9
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Literature review process",
+      "keywords": [
+        "literature review",
+        "systematic review",
+        "meta-analysis",
+        "scoping review",
+        "search strategy"
+      ]
+    },
+    {
+      "context": "Source analysis",
+      "keywords": [
+        "critical analysis",
+        "thematic synthesis",
+        "gap identification",
+        "research landscape",
+        "seminal work"
+      ]
+    },
+    {
+      "context": "Review writing",
+      "keywords": [
+        "review structure",
+        "synthesis matrix",
+        "annotated bibliography",
+        "research question refinement"
+      ]
+    }
   ]
 }

@@ -96,5 +96,39 @@
       "module": "5",
       "confidence": 0.9
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Azure infrastructure design",
+      "keywords": [
+        "well-architected",
+        "landing zone",
+        "hub-spoke",
+        "availability zone",
+        "disaster recovery",
+        "Azure architecture"
+      ]
+    },
+    {
+      "context": "Cloud patterns",
+      "keywords": [
+        "microservices",
+        "event-driven",
+        "CQRS",
+        "saga pattern",
+        "circuit breaker",
+        "retry policy"
+      ]
+    },
+    {
+      "context": "Azure governance",
+      "keywords": [
+        "management group",
+        "policy",
+        "blueprint",
+        "cost management",
+        "tagging strategy"
+      ]
+    }
   ]
 }

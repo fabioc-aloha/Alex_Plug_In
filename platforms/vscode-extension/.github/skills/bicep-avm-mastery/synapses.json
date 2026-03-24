@@ -34,5 +34,38 @@
       "description": "CI/CD pipelines deploy Bicep code",
       "bidirectional": false
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Bicep authoring",
+      "keywords": [
+        "Bicep",
+        "ARM template",
+        "module",
+        "parameter",
+        "output",
+        "resource declaration"
+      ]
+    },
+    {
+      "context": "Azure Verified Modules",
+      "keywords": [
+        "AVM",
+        "verified module",
+        "module registry",
+        "bicep registry",
+        "module composition"
+      ]
+    },
+    {
+      "context": "Infrastructure as code",
+      "keywords": [
+        "deployment",
+        "what-if",
+        "template spec",
+        "deployment stack",
+        "modular IaC"
+      ]
+    }
   ]
 }

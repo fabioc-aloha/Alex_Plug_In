@@ -31,5 +31,39 @@
       "when": "designing offline indicators, update notifications, and sync status UI",
       "yields": "offline UX patterns, connectivity state indicators"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Service worker",
+      "keywords": [
+        "service worker",
+        "cache API",
+        "workbox",
+        "precache",
+        "runtime cache",
+        "cache strategy"
+      ]
+    },
+    {
+      "context": "Offline capability",
+      "keywords": [
+        "offline-first",
+        "background sync",
+        "IndexedDB",
+        "offline storage",
+        "network-first",
+        "cache-first"
+      ]
+    },
+    {
+      "context": "PWA",
+      "keywords": [
+        "progressive web app",
+        "manifest",
+        "installable",
+        "push notification",
+        "app shell"
+      ]
+    }
   ]
 }

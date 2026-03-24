@@ -35,5 +35,40 @@
       "when": "Reviewing authentication implementation for vulnerabilities",
       "yields": "security-validated authentication patterns"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Microsoft identity",
+      "keywords": [
+        "MSAL",
+        "Microsoft identity",
+        "OAuth",
+        "OpenID Connect",
+        "access token",
+        "Entra ID"
+      ]
+    },
+    {
+      "context": "Authentication flows",
+      "keywords": [
+        "auth code flow",
+        "client credentials",
+        "device code",
+        "silent auth",
+        "token cache",
+        "refresh token"
+      ]
+    },
+    {
+      "context": "App registration",
+      "keywords": [
+        "app registration",
+        "API permission",
+        "scope",
+        "consent",
+        "redirect URI",
+        "tenant"
+      ]
+    }
   ]
 }

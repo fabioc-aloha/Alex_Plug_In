@@ -43,5 +43,40 @@
       "when": "Configuring Azure OpenAI credentials",
       "yields": "secure credential management for AI services"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Azure OpenAI usage",
+      "keywords": [
+        "Azure OpenAI",
+        "GPT deployment",
+        "embedding",
+        "prompt engineering",
+        "content filter",
+        "token limit"
+      ]
+    },
+    {
+      "context": "RAG and grounding",
+      "keywords": [
+        "RAG",
+        "retrieval augmented",
+        "semantic search",
+        "vector store",
+        "AI Search",
+        "grounding"
+      ]
+    },
+    {
+      "context": "Responsible AI",
+      "keywords": [
+        "content safety",
+        "rate limiting",
+        "quota",
+        "PTU",
+        "model deployment",
+        "fine-tuning"
+      ]
+    }
   ]
 }

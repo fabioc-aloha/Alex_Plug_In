@@ -31,5 +31,38 @@
       "when": "data quality checks serve as pipeline integration tests",
       "yields": "data pipeline test patterns, quality assertion frameworks"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Data validation",
+      "keywords": [
+        "data quality",
+        "validation rules",
+        "data integrity",
+        "schema validation",
+        "anomaly detection"
+      ]
+    },
+    {
+      "context": "Monitoring and alerting",
+      "keywords": [
+        "data pipeline",
+        "freshness",
+        "completeness",
+        "accuracy",
+        "drift detection",
+        "data observability"
+      ]
+    },
+    {
+      "context": "Data governance",
+      "keywords": [
+        "data lineage",
+        "metadata",
+        "data catalog",
+        "data steward",
+        "compliance"
+      ]
+    }
   ]
 }

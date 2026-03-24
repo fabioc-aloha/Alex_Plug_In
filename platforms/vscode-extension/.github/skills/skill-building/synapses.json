@@ -76,5 +76,38 @@
       "direction": "outgoing",
       "context": "Step-by-step procedure for creating, assessing, and completing skills"
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Skill creation",
+      "keywords": [
+        "new skill",
+        "create skill",
+        "skill template",
+        "trifecta",
+        "SKILL.md",
+        "synapses.json"
+      ]
+    },
+    {
+      "context": "Architecture extension",
+      "keywords": [
+        "add capability",
+        "extend architecture",
+        "skill authoring",
+        "instruction file",
+        "prompt file"
+      ]
+    },
+    {
+      "context": "Quality assurance",
+      "keywords": [
+        "skill validation",
+        "activation index",
+        "frontmatter",
+        "memory-activation",
+        "brain-qa"
+      ]
+    }
   ]
 }

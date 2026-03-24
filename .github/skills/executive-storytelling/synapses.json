@@ -83,5 +83,37 @@
       "trigger": "data storytelling|present findings|business case",
       "confidence": 0.85
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Executive communication",
+      "keywords": [
+        "executive summary",
+        "elevator pitch",
+        "stakeholder narrative",
+        "business case",
+        "ROI story"
+      ]
+    },
+    {
+      "context": "Presentation narrative",
+      "keywords": [
+        "storytelling",
+        "narrative arc",
+        "data storytelling",
+        "persuasion",
+        "audience engagement"
+      ]
+    },
+    {
+      "context": "Strategic messaging",
+      "keywords": [
+        "key message",
+        "talking points",
+        "value proposition",
+        "strategic narrative",
+        "boardroom"
+      ]
+    }
   ]
 }

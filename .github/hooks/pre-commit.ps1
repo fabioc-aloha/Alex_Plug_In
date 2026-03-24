@@ -69,8 +69,9 @@ if ($changedTriFiles) {
 }
 
 # ============================================================
-# CHECK 2: synapses.json structure
+# CHECK 2: synapses.json structure + connection type validation
 # ============================================================
+$validTypes = @('implements','extends','activates','complements','uses','feeds','consumes','relates','supports','requires')
 if ($changedSynapses) {
     Write-Host "  Validating synapses.json..." -ForegroundColor Gray
     foreach ($file in $changedSynapses) {
@@ -82,6 +83,14 @@ if ($changedSynapses) {
                 }
                 if (-not $syn.skillId) {
                     $errors += "${file}: Missing 'skillId' field"
+                }
+                foreach ($conn in $syn.connections) {
+                    if ($conn.type -and $conn.type -notin $validTypes) {
+                        $errors += "${file}: Invalid connection type '$($conn.type)' -> $($conn.target). Valid: $($validTypes -join ', ')"
+                    }
+                    if ($conn.when -and $conn.reason -and $conn.when -eq $conn.reason) {
+                        $warnings += "${file}: when==reason duplication for target '$($conn.target)' -- when should be a trigger, reason should explain why"
+                    }
                 }
             }
             catch {

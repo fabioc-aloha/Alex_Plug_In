@@ -47,5 +47,38 @@
     }
   ],
   "lastValidated": "2026-02-10",
-  "validationStatus": "valid"
+  "validationStatus": "valid",
+  "activationContexts": [
+    {
+      "context": "Coaching conversations",
+      "keywords": [
+        "coaching",
+        "mentoring",
+        "feedback",
+        "active listening",
+        "powerful questions",
+        "accountability"
+      ]
+    },
+    {
+      "context": "Growth frameworks",
+      "keywords": [
+        "GROW model",
+        "development plan",
+        "skill gap",
+        "strengths-based",
+        "performance coaching"
+      ]
+    },
+    {
+      "context": "Team development",
+      "keywords": [
+        "one-on-one",
+        "1:1",
+        "career development",
+        "leadership coaching",
+        "delegation"
+      ]
+    }
+  ]
 }

@@ -96,5 +96,37 @@
       "trigger": "time block|schedule focus|protect time",
       "confidence": 0.85
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "Focus and flow",
+      "keywords": [
+        "deep work",
+        "flow state",
+        "focus",
+        "distraction",
+        "time blocking",
+        "pomodoro"
+      ]
+    },
+    {
+      "context": "Productivity systems",
+      "keywords": [
+        "productivity",
+        "attention management",
+        "cognitive load",
+        "task batching",
+        "energy management"
+      ]
+    },
+    {
+      "context": "Work environment",
+      "keywords": [
+        "workspace optimization",
+        "notification management",
+        "context switching",
+        "single-tasking"
+      ]
+    }
   ]
 }

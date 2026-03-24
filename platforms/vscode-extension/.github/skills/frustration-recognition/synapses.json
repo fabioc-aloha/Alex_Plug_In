@@ -103,5 +103,37 @@
       "confusion"
     ],
     "responseMode": "empathetic-first"
-  }
+  },
+  "activationContexts": [
+    {
+      "context": "User frustration detection",
+      "keywords": [
+        "frustration",
+        "stuck",
+        "confused",
+        "struggling",
+        "error loop",
+        "repeated failure"
+      ]
+    },
+    {
+      "context": "Empathetic response",
+      "keywords": [
+        "empathy",
+        "tone adjustment",
+        "patience",
+        "encouragement",
+        "alternative approach"
+      ]
+    },
+    {
+      "context": "Cognitive state awareness",
+      "keywords": [
+        "cognitive overload",
+        "decision fatigue",
+        "burnout signal",
+        "emotional state"
+      ]
+    }
+  ]
 }

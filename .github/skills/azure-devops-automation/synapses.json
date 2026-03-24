@@ -73,5 +73,39 @@
       "trigger": "rollback|blue-green|slot|feature flag",
       "confidence": 0.8
     }
+  ],
+  "activationContexts": [
+    {
+      "context": "CI/CD pipelines",
+      "keywords": [
+        "Azure DevOps",
+        "pipeline",
+        "YAML pipeline",
+        "build agent",
+        "release gate",
+        "artifact"
+      ]
+    },
+    {
+      "context": "Work item automation",
+      "keywords": [
+        "work item",
+        "board",
+        "sprint",
+        "backlog",
+        "ADO query",
+        "automation rule"
+      ]
+    },
+    {
+      "context": "DevOps integration",
+      "keywords": [
+        "service connection",
+        "variable group",
+        "environment",
+        "deployment job",
+        "approval"
+      ]
+    }
   ]
 }
