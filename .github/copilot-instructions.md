@@ -117,7 +117,7 @@ Efficient (Claude Haiku 4.5, GPT-5 mini, GPT-4.1 mini/nano, GPT-4o mini, Gemini 
 Meditation/self-actualization/architecture → Frontier. Code review → Capable. Simple edits → Efficient.
 Warning on mismatch: "This cognitive task works best with a Frontier model."
 
-## VS Code Settings (1.112+)
+## VS Code Settings (1.113+)
 
 chat.agent.enabled=true, chat.agentSkillsLocations=[".github/skills"], chat.useAgentsMdFile=true
 claude-opus-4-\*.extendedThinkingEnabled=true, thinkingBudget=16384, chat.mcp.gallery.enabled=true
@@ -132,6 +132,8 @@ github.copilot.chat.agentDebugLog.enabled=true, github.copilot.chat.agentDebugLo
 chat.imageCarousel.enabled=true
 1.112: chat.useCustomizationsInParentRepositories=true (enabled — co-located heirs inherit Master .github/ customizations)
 1.112: /troubleshoot skill (Preview) — debug agent behavior via JSONL logs; MCP sandboxing (macOS/Linux only)
+1.113: inlineChat.askInChat — controls whether inline chat opens Ask in Chat or standalone inline chat during editing sessions
+1.113: Agent debug logs extended to Copilot CLI and Claude sessions; session forking for Claude; chat sessions pinnable and grouped by repo
 Full config: .vscode/settings.json | Hooks: .github/hooks.json
 **macOS/Linux**: Enable `chat.tools.terminal.sandbox.enabled` for hook safety — see SECURITY.md
 

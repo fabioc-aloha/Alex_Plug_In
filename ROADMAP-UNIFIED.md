@@ -87,20 +87,26 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 
 ### Blocked (VS Code API Dependencies)
 
-> **Last reviewed**: 2026-03-19 against VS Code 1.112.0 stable (re-release March 18, 2026)
+> **Last reviewed**: 2026-03-24 against VS Code 1.113.0 stable (March 21, 2026)
 
-| Contract | Scope                                      | Unblock Condition                                  | Enables                               | Status (1.112)                                                                                                                                                                                                                              |
-| -------- | ------------------------------------------ | -------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A**    | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API                    | Real-time agent status in Agents tab  | ❌ Still blocked — no agent state API. 1.111 added agent-scoped hooks (`chat.useCustomAgentHooks`) and 1.112 adds `~/.copilot/hooks` global path, but neither exposes active/queued/idle state.                                              |
-| **B**    | Context budget API                         | VS Code exposes `chat.contextBudget` (denominator) | Context Budget bar + per-skill impact | 🟡 Partial — `countTokens()` is stable on `LanguageModelChat` (numerator exists). 1.112 adds reserved-context visual treatment in the context usage indicator (#295110). Still no API to read the total budget denominator programmatically. |
-| **C**    | Full five-modality memory model            | Memory persistence API                             | Mind tab live data                    | ❌ Still blocked — Copilot Memory is cloud/conversational only. No structured persistence API for extensions. `~/.alex/` file-based workaround remains.                                                                                      |
-| **D**    | Recently-used command tracking             | Command history API                                | Adaptive UX (command history)         | ❌ Still blocked — no change in 1.111 or 1.112.                                                                                                                                                                                              |
+| Contract | Scope                                      | Unblock Condition                                  | Enables                               | Status (1.113)                                                                                                                                                                                                                    |
+| -------- | ------------------------------------------ | -------------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **A**    | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API                    | Real-time agent status in Agents tab  | ❌ Still blocked — no agent state API. 1.113 extends debug logs to CLI/Claude sessions (#301245) and shows hooks in debug panel graph (#299551), but neither exposes active/queued/idle state programmatically.                    |
+| **B**    | Context budget API                         | VS Code exposes `chat.contextBudget` (denominator) | Context Budget bar + per-skill impact | 🟡 Partial — `countTokens()` is stable on `LanguageModelChat` (numerator exists). 1.112 added reserved-context visual treatment (#295110). No change in 1.113. Still no API to read the total budget denominator programmatically. |
+| **C**    | Full five-modality memory model            | Memory persistence API                             | Mind tab live data                    | ❌ Still blocked — Copilot Memory is cloud/conversational only. No structured persistence API for extensions. `~/.alex/` file-based workaround remains. No change in 1.113.                                                        |
+| **D**    | Recently-used command tracking             | Command history API                                | Adaptive UX (command history)         | ❌ Still blocked — no change in 1.111–1.113.                                                                                                                                                                                       |
 
 ### 🔭 Future Watch
 
 **Parent-repo customization inheritance** (`chat.useCustomizationsInParentRepositories`, #293277): VS Code 1.112 ships a setting that searches parent repositories for `.github/` customizations (instructions, prompts, agents.md, skills). Today this has limited impact because internal heirs (`platforms/vscode-extension/`) are in the same repo (handled by `sync-architecture.cjs`) and external heirs are separate repos, not nested.
 
 **Future opportunity**: If heirs were reorganized as git submodules or nested repos under a parent containing `.github/`, this setting could reduce or eliminate the need for file sync. Worth monitoring as architecture evolves. This could fundamentally simplify the heir inheritance model — VS Code would natively resolve customizations from the parent, making `sync-architecture.cjs` a fallback rather than the primary mechanism.
+
+**Plugin attribution in Customizations view** (#302514, 1.113): The Customizations view now shows a "Show Plugin" action indicating which plugin contributed each customization. Relevant for the agent-plugin heir — once published, users can verify which skills/instructions came from Alex vs other plugins.
+
+**Session forking for Claude Agent sessions** (#300501, 1.113): Claude sessions can now be forked (branched). Combined with `/fork` for Copilot CLI (#302655), this pattern may inform multi-agent workflows where conversations diverge for exploration then reconverge.
+
+**Reasoning effort from model picker** (#300235, 1.113): Users can configure reasoning effort directly from the model picker UI. This may interact with the existing `thinkingBudget` setting — worth monitoring whether a programmatic API emerges that would let Alex auto-tune reasoning per-task.
 
 ### Gated (External Dependencies)
 
