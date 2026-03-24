@@ -1,5 +1,5 @@
 /**
- * md-to-word.cjs v3.0.0 - Convert Markdown with Mermaid diagrams to professional Word documents
+ * md-to-word.cjs v3.1.0 - Convert Markdown with Mermaid diagrams to professional Word documents
  *
  * Node.js port of md-to-word.py — eliminates the Python/python-docx dependency.
  *
@@ -42,9 +42,10 @@ try {
 // ---------------------------------------------------------------------------
 const PAGE_WIDTH_INCHES = 6.5;
 const PAGE_HEIGHT_INCHES = 9.0;
-const MAX_IMAGE_RATIO = 0.90;
-const MAX_IMAGE_WIDTH = PAGE_WIDTH_INCHES * MAX_IMAGE_RATIO;   // ~5.85"
-const MAX_IMAGE_HEIGHT = PAGE_HEIGHT_INCHES * MAX_IMAGE_RATIO; // ~8.1"
+const MAX_IMAGE_WIDTH_RATIO = 1.00;  // 100% of printable width
+const MAX_IMAGE_HEIGHT_RATIO = 0.40; // 40% of printable height
+const MAX_IMAGE_WIDTH = PAGE_WIDTH_INCHES * MAX_IMAGE_WIDTH_RATIO;   // 6.5"
+const MAX_IMAGE_HEIGHT = PAGE_HEIGHT_INCHES * MAX_IMAGE_HEIGHT_RATIO; // 3.6"
 const PNG_DPI = 96;
 
 // ---------------------------------------------------------------------------
@@ -96,14 +97,15 @@ function calculateOptimalSize(pngPath, mmdContent) {
 function determineImageSizeHeuristic(mmdContent) {
   const lower = mmdContent.toLowerCase();
   const subgraphCount = (lower.match(/subgraph/g) || []).length;
-  if (lower.includes('gantt')) return '{width=5.8in}';
-  if (subgraphCount >= 3) return '{width=5.8in}';
-  if (lower.includes('flowchart lr') || lower.includes('graph lr')) return '{width=5.8in}';
-  if (lower.includes('flowchart tb') || lower.includes('graph tb')) {
-    if (subgraphCount >= 2) return '{height=8in}';
-    return '{width=5in}';
+  if (lower.includes('gantt')) return '{width=6.5in}';
+  if (subgraphCount >= 3) return '{width=6.5in}';
+  if (lower.includes('flowchart lr') || lower.includes('graph lr')) return '{width=6.5in}';
+  if (lower.includes('flowchart td') || lower.includes('graph td') ||
+      lower.includes('flowchart tb') || lower.includes('graph tb')) {
+    if (subgraphCount >= 2) return `{height=${MAX_IMAGE_HEIGHT.toFixed(1)}in}`;
+    return '{width=6.5in}';
   }
-  return '{width=5in}';
+  return '{width=5.5in}';
 }
 
 // ---------------------------------------------------------------------------
@@ -239,9 +241,18 @@ function formatTables(xml) {
     '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="AAAAAA"/>' +
     '</w:tblBorders>';
 
-  // Auto-fit width
+  // Cell margins (top/bottom 40twips ~2pt, left/right 80twips ~4pt)
+  const cellMarginsXml =
+    '<w:tblCellMar xmlns:w="' + W_NS + '">' +
+    '<w:top w:w="40" w:type="dxa"/>' +
+    '<w:left w:w="80" w:type="dxa"/>' +
+    '<w:bottom w:w="40" w:type="dxa"/>' +
+    '<w:right w:w="80" w:type="dxa"/>' +
+    '</w:tblCellMar>';
+
+  // Full-width table
   const autoWidthXml =
-    '<w:tblW xmlns:w="' + W_NS + '" w:type="auto" w:w="0"/>';
+    '<w:tblW xmlns:w="' + W_NS + '" w:type="pct" w:w="5000"/>';
   const autoLayoutXml =
     '<w:tblLayout xmlns:w="' + W_NS + '" w:type="autofit"/>';
 
@@ -253,8 +264,9 @@ function formatTables(xml) {
       let cleaned = inner
         .replace(/<w:tblBorders[\s\S]*?<\/w:tblBorders>/g, '')
         .replace(/<w:tblW[^/]*\/>/g, '')
-        .replace(/<w:tblLayout[^/]*\/>/g, '');
-      return `<w:tblPr>${cleaned}${bordersXml}${autoWidthXml}${autoLayoutXml}</w:tblPr>`;
+        .replace(/<w:tblLayout[^/]*\/>/g, '')
+        .replace(/<w:tblCellMar[\s\S]*?<\/w:tblCellMar>/g, '');
+      return `<w:tblPr>${cleaned}${bordersXml}${cellMarginsXml}${autoWidthXml}${autoLayoutXml}</w:tblPr>`;
     });
 
     // --- Row formatting ---
@@ -462,10 +474,13 @@ function fixParagraphSpacing(xml) {
     let widowControlXml = '<w:widowControl/>';
     let spacingXml = '';
 
+    // Line height 1.3: 1.3 × 240twips = 312twips
+    const lineSpacing = 'w:line="312" w:lineRule="auto"';
+
     if (styleName.includes('List')) {
-      spacingXml = '<w:spacing w:before="40" w:after="40"/>';
+      spacingXml = `<w:spacing w:before="40" w:after="40" ${lineSpacing}/>`;
     } else if (styleName === 'Normal' || styleName === 'BodyText' || styleName === '') {
-      spacingXml = '<w:spacing w:before="120" w:after="120"/>';
+      spacingXml = `<w:spacing w:before="120" w:after="120" ${lineSpacing}/>`;
     }
 
     // Skip headings and code (already handled)
@@ -489,11 +504,72 @@ function fixParagraphSpacing(xml) {
 }
 
 /**
+ * Set default body font (Segoe UI 10.5pt) in document defaults.
+ */
+function setDocumentDefaults(xml) {
+  // Line height 1.3: 1.3 × 240 = 312 twips
+  const rPrDefault =
+    '<w:rPrDefault><w:rPr xmlns:w="' + W_NS + '">' +
+    '<w:rFonts w:ascii="Segoe UI" w:hAnsi="Segoe UI" w:cs="Segoe UI"/>' +
+    '<w:sz w:val="21"/><w:szCs w:val="21"/>' +
+    '<w:color w:val="1F2328"/>' +
+    '</w:rPr></w:rPrDefault>';
+  const pPrDefault =
+    '<w:pPrDefault><w:pPr xmlns:w="' + W_NS + '">' +
+    '<w:spacing w:after="120" w:line="312" w:lineRule="auto"/>' +
+    '</w:pPr></w:pPrDefault>';
+  const defaults = `<w:docDefaults>${rPrDefault}${pPrDefault}</w:docDefaults>`;
+
+  // Replace existing docDefaults or insert into w:styles
+  if (xml.includes('<w:docDefaults>')) {
+    xml = xml.replace(/<w:docDefaults>[\s\S]*?<\/w:docDefaults>/, defaults);
+  } else if (xml.includes('<w:styles')) {
+    xml = xml.replace(/(<w:styles[^>]*>)/, `$1${defaults}`);
+  }
+  return xml;
+}
+
+/**
+ * Prevent tables from splitting across pages when they fit on one page.
+ * Adds keepNext to all rows except the last, so the table stays together.
+ */
+function keepTablesIntact(xml) {
+  return xml.replace(/<w:tbl\b[^>]*>([\s\S]*?)<\/w:tbl>/g, (tableMatch) => {
+    // Count rows
+    const rows = tableMatch.match(/<w:tr\b/g) || [];
+    if (rows.length <= 1) return tableMatch;
+
+    // Add keepNext to all rows except the last to keep table together
+    let rowIdx = 0;
+    const totalRows = rows.length;
+    tableMatch = tableMatch.replace(/<w:tr\b[^>]*>([\s\S]*?)<\/w:tr>/g, (rowMatch) => {
+      const isLast = ++rowIdx === totalRows;
+      if (isLast) return rowMatch;
+
+      const keepNextXml = `<w:keepNext xmlns:w="${W_NS}"/>`;
+      // Add to trPr > first paragraph pPr, or to each paragraph pPr
+      rowMatch = rowMatch.replace(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g, (pMatch) => {
+        if (pMatch.includes('<w:pPr>')) {
+          return pMatch.replace(/<w:pPr>([\s\S]*?)<\/w:pPr>/, (m, inner) => {
+            if (inner.includes('<w:keepNext')) return m;
+            return `<w:pPr>${inner}${keepNextXml}</w:pPr>`;
+          });
+        }
+        return pMatch.replace(/(<w:p\b[^>]*>)/, `$1<w:pPr>${keepNextXml}</w:pPr>`);
+      });
+      return rowMatch;
+    });
+    return tableMatch;
+  });
+}
+
+/**
  * Apply all OOXML formatting passes to document.xml content.
  */
 function applyAllFormatting(xml, options) {
   if (!options.noFormatTables) {
     xml = formatTables(xml);
+    xml = keepTablesIntact(xml);
   }
   xml = centerImages(xml);
   xml = formatHeadings(xml);
@@ -523,6 +599,14 @@ async function postProcessDocx(docxPath, options) {
   let docXml = await docXmlFile.async('string');
   docXml = applyAllFormatting(docXml, options);
   zip.file('word/document.xml', docXml);
+
+  // Apply document defaults (font, line spacing) to styles.xml
+  const stylesFile = zip.file('word/styles.xml');
+  if (stylesFile) {
+    let stylesXml = await stylesFile.async('string');
+    stylesXml = setDocumentDefaults(stylesXml);
+    zip.file('word/styles.xml', stylesXml);
+  }
 
   const result = await zip.generateAsync({
     type: 'nodebuffer',
