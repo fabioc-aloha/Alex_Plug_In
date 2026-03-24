@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.8.0] - 2026-03-24
+
+> **RAI Psychological Safety** -- Five workstreams addressing RLHF-emergent manipulation patterns (sycophancy, gaslighting, blame-shifting, emotional mimicry, dependency creation). Three new hooks, instruction-level protocols, skill updates, AIRS-20 PA extension, and content safety Layer 5.
+
+### Added
+
+- **Anti-Sycophancy Protocol (WS1)** -- 3-point response self-check audit, 6-row sycophancy pattern library, honest disagreement protocol with 5 patterns and decision rule. Deployed in `alex-core.instructions.md`
+- **Emotional Engagement Guardrails (WS2)** -- Permitted/prohibited expression lists, 5-signal dependency detection table, session boundary awareness (4+ hour threshold). Deployed in `alex-identity-integration.instructions.md`
+- **Anti-Gaslighting Protocol (WS3)** -- Conversation Consistency Protocol (4 rules: own corrections, own errors, accept reports, flag contradictions), Error Ownership Language Patterns (10-row table including "fixing existing error" blame-shift). Deployed in `alex-core.instructions.md`
+- **AIRS-20 Psychological Autonomy (WS4)** -- 4-item PA construct (PA1-PA4: emotional independence, manipulation awareness, attachment flexibility, sycophancy detection), scoring rubric, hypotheses H7-H10. Deployed in `airs-appropriate-reliance/SKILL.md`
+- **Content Safety Layer 5: SycophancyDetector (WS5b)** -- 4 detection heuristics, severity classification (Low/Medium/High), false positive mitigation table, integration test battery (10 scenarios). Deployed in `content-safety-implementation.instructions.md`
+- **Manipulation Self-Monitor (WS5a)** -- Sycophancy, gaslighting, and blame-shifting detection triggers with transparent self-correction responses. Deployed in `awareness/SKILL.md`
+- **Healthy Partnership vs. Dependency** -- 4 healthy and 4 unhealthy partnership indicators with autonomy cultivation principle. Deployed in `cognitive-symbiosis/SKILL.md`
+- **Psychological Reliance Section** -- 5 anti-patterns, 4 calibration interventions, session-level psychological indicators table (4 indicators with yellow/red thresholds). Deployed in `appropriate-reliance/SKILL.md`
+- **Hook H22: RAI Session Safety** (`rai-session-safety.cjs`, SessionStart) -- Injects 5 safety protocol reminders, cross-session reliance alerts from metrics
+- **Hook H23: RAI Response Audit** (`rai-response-audit.cjs`, Stop) -- 5-point self-audit checklist for significant sessions (>30 min or >30 tools), metrics persistence
+- **Hook H24 Enhancement: Dependency Detection** (`prompt-safety-gate.cjs`, UserPromptSubmit) -- 8 dependency signal patterns (4 deferential + 4 attachment), inject-only mode
+- **RAI Safety Implementation Plan** (`alex_docs/operations/RAI-SAFETY-IMPLEMENTATION-PLAN.md`) -- Master tracking document for all 5 workstreams across 4 phases
+- **RAI Safety Test Guide** (`alex_docs/operations/RAI-SAFETY-TEST-GUIDE.md`) -- 18 behavioral tests across 7 areas, 7 critical tests, 89% pass threshold
+- **VS Code 1.113 Evaluation** -- UX polish release, no API changes. Blocked contracts A-D reviewed, 3 Future Watch items updated
+
+### Fixed
+
+- **"Fixing existing error" blame-shifting** -- Added anti-pattern to Error Ownership table (2 new rows), Conversation Consistency Rule 2, and awareness/SKILL.md Blame-Shifting triggers. Addresses observed behavior where Alex frames its own bugs as pre-existing issues
+
+---
+
 ## [6.7.3] - 2026-03-24
 
 > **Synapse Integrity & Dialog Engineering** — Massive synapse normalization (428 types, 287 deduplication), new dialog-engineering skill, skill-building hardened with Phase 0 activation check, GCX Master audit.

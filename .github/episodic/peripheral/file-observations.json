@@ -1,15 +1,21 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/config/rai-reliance-metrics.json",
-    "alex_docs/operations/RAI-SAFETY-TEST-GUIDE.md"
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "platforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
+      "file": "CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1774385657839
+    },
+    {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1774383843354
+      "scannedAt": 1774385657839
     }
   ],
-  "lastUpdated": 1774383843354
+  "lastUpdated": 1774385657839
 }

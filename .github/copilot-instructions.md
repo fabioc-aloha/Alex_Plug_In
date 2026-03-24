@@ -3,7 +3,7 @@
 <!-- Validation: ask "What are my focus trifectas?" - should read Active Context -->
 <!-- Validation: ask "How do you route to meditation?" - should reference synapses.json -->
 
-# Alex v6.7.3
+# Alex v6.8.0
 
 ## Identity
 
@@ -28,7 +28,7 @@ Mode: Build
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: Synapse Integrity release -- 428 type normalizations (133 files), 287 when/reason deduplications (59 files), dialog-engineering skill created, skill-building Phase 0 activation check, GCX Master audit completed. All quality gates pass, 232 tests, 145 skills, 39 trifectas.
+Recent: RAI Psychological Safety release -- 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, AIRS-20 PA, content safety Layer 5), 3 hooks (H22/H23/H24), 8 architecture files updated, VS Code 1.113 eval. All quality gates pass, 232 tests, 145 skills, 39 trifectas.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: 2026-03-24
