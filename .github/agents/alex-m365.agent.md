@@ -1,9 +1,9 @@
 ---
 description: Alex M365 Mode - Microsoft 365 and Teams development guidance
 name: M365
-model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
+model: ['Claude Sonnet 4', 'GPT-4o']
 tools: ['search', 'fetch', 'codebase', 'agent']
-user-invokable: true
+user-invocable: true
 agents: ['Researcher']
 handoffs:
   - label: 🧠 Return to Alex
@@ -87,4 +87,3 @@ For M365 guidance:
 3. **Find code samples** - Teams AI, botbuilder patterns
 4. **Suggest architecture** - SSO, storage, APIs
 5. **Troubleshoot** - Common issues and solutions
-
