@@ -71,7 +71,7 @@ if ($changedTriFiles) {
 # ============================================================
 # CHECK 2: synapses.json structure + connection type validation
 # ============================================================
-$validTypes = @('implements','extends','activates','complements','uses','feeds','consumes','relates','supports','requires')
+$validTypes = @('implements', 'extends', 'activates', 'complements', 'uses', 'feeds', 'consumes', 'relates', 'supports', 'requires')
 if ($changedSynapses) {
     Write-Host "  Validating synapses.json..." -ForegroundColor Gray
     foreach ($file in $changedSynapses) {
