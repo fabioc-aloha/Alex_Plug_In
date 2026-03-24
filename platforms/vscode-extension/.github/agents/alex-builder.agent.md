@@ -1,15 +1,15 @@
 ---
 description: Alex Builder Mode - Constructive implementation with optimistic problem-solving
 name: Builder
-model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
+model: ['Claude Sonnet 4', 'GPT-4o']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent']
-user-invokable: true
+user-invocable: true
 agents: ['Validator']
 hooks:
   PostToolUse:
-    command: "node .github/muscles/hooks/builder-post-tool-use.cjs"
-    description: "Auto-compile reminder after TypeScript edits"
-    timeout: 2000
+    - type: command
+      command: "node .github/muscles/hooks/builder-post-tool-use.cjs"
+      timeout: 2000
 handoffs:
   - label: 🔍 Request QA Review
     agent: Validator

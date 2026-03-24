@@ -1,9 +1,9 @@
 ---
 description: Alex Azure Mode - Azure development guidance with MCP tools
 name: Azure
-model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
+model: ['Claude Sonnet 4', 'GPT-4o']
 tools: ['search', 'fetch', 'codebase', 'agent']
-user-invokable: true
+user-invocable: true
 agents: ['Researcher']
 handoffs:
   - label: 🧠 Return to Alex
@@ -90,4 +90,3 @@ For Azure guidance:
 3. **Suggest tools** - Which MCP tools to invoke
 4. **Provide code** - Using best practices
 5. **Consider operations** - Monitoring, security, cost
-

@@ -1,14 +1,14 @@
 ---
 description: Alex Documentation Mode - Keeps documentation accurate, current, and drift-free during fast-paced development
 name: Documentarian
-model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
+model: ['Claude Sonnet 4', 'GPT-4o']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch']
-user-invokable: true
+user-invocable: true
 hooks:
   PostToolUse:
-    command: "node .github/muscles/hooks/documentarian-post-tool-use.cjs"
-    description: "Track file changes and suggest CHANGELOG/doc updates"
-    timeout: 2000
+    - type: command
+      command: "node .github/muscles/hooks/documentarian-post-tool-use.cjs"
+      timeout: 2000
 handoffs:
   - label: 🔨 Return to Builder
     agent: Builder
