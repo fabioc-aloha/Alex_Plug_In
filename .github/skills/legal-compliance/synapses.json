@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/pii-privacy-regulations/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.8,
       "description": "Legal compliance provides the regulatory framework behind privacy regulations",
       "when": "legal compliance enhances PII privacy regulations",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/citation-management/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.8,
       "description": "Legal writing demands precise Bluebook-style citation",
       "when": "legal compliance depends on citation management",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.9,
       "description": "Fabricated case law or statutes cause real-world harm",
       "when": "legal compliance depends on anti hallucination",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.6,
       "description": "Legal research follows systematic investigation methodology",
       "when": "legal compliance connects to research first development",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.4,
       "description": "Legal briefs and memoranda require persuasive writing craft",
       "when": "legal compliance connects to creative writing",

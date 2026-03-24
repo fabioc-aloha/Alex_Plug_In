@@ -7,7 +7,7 @@
   "connectionCount": 6,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "executive|c-suite|vp|scqa|pyramid|minto",
       "target": ".github/skills/slide-design/SKILL.md",
       "yields": [

@@ -7,7 +7,7 @@
   "connections": [
     {
       "target": ".github/skills/correax-brand/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.9,
       "when": "referencing the CorreaX design language for color tokens, typography, and component patterns",
       "yields": "Brand assets aligned with the authoritative CorreaX design system"
@@ -21,7 +21,7 @@
     },
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.75,
       "when": "deploying brand assets to heir platforms",
       "yields": "Consistent branding across VS Code, M365 heirs"
@@ -42,14 +42,14 @@
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
-      "type": "triggers",
+      "type": "activates",
       "strength": 0.65,
       "when": "generating persona copy or store descriptions",
       "yields": "Marketing copy following store description pattern"
     },
     {
       "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.7,
       "when": "verifying brand assets before release",
       "yields": "Asset completeness check during release preflight"
@@ -63,7 +63,7 @@
     },
     {
       "target": ".github/skills/persona-detection/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.7,
       "when": "persona detection drives avatar selection, easter egg rendering, and bannerNoun display",
       "yields": "Persona-specific brand expression in the sidebar UI"

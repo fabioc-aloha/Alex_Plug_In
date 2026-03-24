@@ -7,6 +7,34 @@ description: "Cross-project knowledge search, pattern recognition, and insight m
 
 > Your past solved problems, searchable from any project.
 
+## Check Before You Create
+
+**Always search global knowledge before creating new skills, instructions, or prompts.** This prevents duplicate work and ensures institutional knowledge is reused.
+
+### Lookup Process
+
+1. **Search** `~/.alex/global-knowledge/` for existing content:
+   - `patterns/` for reusable solutions (GK-*)
+   - `insights/` for timestamped learnings (GI-*)
+   - `skills/` for promoted skill files
+2. **Also search** local `.github/skills/` -- the answer may already be a skill
+3. **Evaluate** the result:
+
+| Result | Action |
+|--------|--------|
+| Exact match | Adopt directly -- don't recreate |
+| Similar match | Adapt as starting point |
+| No match | Create new, then consider promoting to GK |
+
+4. **Report** the lookup before proceeding:
+   ```
+   GK Lookup: {topic}
+     Status: Found / Similar / Not Found
+     Action: Adopting / Adapting / Creating new
+   ```
+
+This check is mandatory before skill creation (Phase 1 of skill-building procedure).
+
 ## Knowledge Types
 
 | Type | Prefix | Purpose | Lifespan | Example |

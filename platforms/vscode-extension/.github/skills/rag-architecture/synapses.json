@@ -11,7 +11,7 @@
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.7,
       "note": "RAG systems expose APIs",
       "when": "RAG architecture connects to API design",
@@ -27,7 +27,7 @@
     },
     {
       "target": ".github/skills/global-knowledge/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.75,
       "note": "Global knowledge is a form of RAG for Alex",
       "when": "RAG architecture relates to global knowledge",
@@ -43,7 +43,7 @@
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
       "note": "Embedding and generation model choices",
       "when": "RAG architecture provides context to LLM model selection",

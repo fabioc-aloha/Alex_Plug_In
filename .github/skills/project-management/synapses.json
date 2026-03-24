@@ -7,31 +7,31 @@
       "type": "complements",
       "strength": 0.85,
       "target": ".github/skills/change-management/SKILL.md",
-      "when": "Projects drive organizational change",
+      "when": "When task involves .github/skills/change management/SKILL.md",
       "yields": "change management complementary techniques"
     },
     {
       "reason": "Requirements drive project scope",
-      "type": "receives",
+      "type": "consumes",
       "strength": 0.85,
       "target": ".github/skills/business-analysis/SKILL.md",
-      "when": "Requirements drive project scope",
+      "when": "When task involves .github/skills/business analysis/SKILL.md",
       "yields": "business analysis input data"
     },
     {
       "reason": "Risk management is core to project management",
-      "type": "contains",
+      "type": "uses",
       "strength": 0.85,
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "when": "Risk management is core to project management",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
       "yields": "root cause analysis component details"
     },
     {
       "reason": "Testing activities in project schedule",
-      "type": "plans",
+      "type": "supports",
       "strength": 0.65,
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "when": "Testing activities in project schedule",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies planning framework"
     },
     {
@@ -39,20 +39,20 @@
       "type": "uses",
       "strength": 0.65,
       "target": ".github/skills/release-preflight/SKILL.md",
-      "when": "Release planning within project delivery",
+      "when": "When task involves .github/skills/release preflight/SKILL.md",
       "yields": "release preflight patterns and guidance"
     },
     {
       "reason": "Project issues may become incidents",
-      "type": "escalates",
+      "type": "feeds",
       "strength": 0.4,
       "target": ".github/skills/incident-response/SKILL.md",
-      "when": "Project issues may become incidents",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
       "yields": "incident response escalation procedures"
     },
     {
       "target": ".github/skills/cross-cultural-collaboration/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.85,
       "when": "project management relates to cross cultural collaboration",
       "yields": "cross cultural collaboration related patterns and guidance"

@@ -22,14 +22,14 @@
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "strength": 0.9,
-      "type": "enables",
+      "type": "supports",
       "when": "Learning from corrections",
       "yields": "Error integration patterns, learning protocols"
     },
     {
       "target": ".github/skills/self-actualization/SKILL.md",
       "strength": 0.9,
-      "type": "informs",
+      "type": "feeds",
       "when": "Running self-assessment",
       "yields": "Awareness metrics, calibration data"
     },
@@ -43,7 +43,7 @@
     {
       "target": ".github/instructions/protocol-triggers.instructions.md",
       "strength": 0.9,
-      "type": "triggers",
+      "type": "activates",
       "when": "Detection heuristics fire",
       "yields": "Protocol activation rules"
     }

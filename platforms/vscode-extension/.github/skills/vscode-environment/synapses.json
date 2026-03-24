@@ -7,15 +7,15 @@
       "type": "supports",
       "strength": 0.85,
       "reason": "Environment is part of scaffolding",
-      "when": "Environment is part of scaffolding",
+      "when": "When task involves .github/skills/project scaffolding/SKILL.md",
       "yields": "project scaffolding supporting context"
     },
     {
       "target": ".github/skills/git-workflow/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.75,
       "reason": "Git extensions improve workflow",
-      "when": "Git extensions improve workflow",
+      "when": "When task involves .github/skills/git workflow/SKILL.md",
       "yields": "git workflow capabilities and setup"
     },
     {
@@ -23,7 +23,7 @@
       "type": "supports",
       "strength": 0.8,
       "reason": "launch.json enables debugging",
-      "when": "launch.json enables debugging",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
       "yields": "debugging patterns supporting context"
     }
   ],

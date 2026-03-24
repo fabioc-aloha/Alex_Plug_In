@@ -4,10 +4,10 @@
   "connections": [
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "follows",
+      "type": "uses",
       "strength": 0.7,
       "reason": "Recovery happens after finding the error",
-      "when": "Recovery happens after finding the error",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
       "yields": "debugging patterns prerequisite steps"
     },
     {
@@ -15,15 +15,15 @@
       "type": "supports",
       "strength": 0.7,
       "reason": "Recovery is part of incident handling",
-      "when": "Recovery is part of incident handling",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
       "yields": "incident response supporting context"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "reason": "Recovery paths need testing",
-      "when": "Recovery paths need testing",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies capabilities and setup"
     }
   ],

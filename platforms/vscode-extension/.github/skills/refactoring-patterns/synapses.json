@@ -7,7 +7,7 @@
       "type": "requires",
       "strength": 0.9,
       "reason": "Safe refactoring needs test coverage",
-      "when": "Safe refactoring needs test coverage",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies required patterns and guidance"
     },
     {
@@ -15,7 +15,7 @@
       "type": "complements",
       "strength": 0.7,
       "reason": "Refactoring often follows debugging",
-      "when": "Refactoring often follows debugging",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
       "yields": "debugging patterns complementary techniques"
     },
     {
@@ -23,12 +23,12 @@
       "type": "supports",
       "strength": 0.7,
       "reason": "Refactoring suggestions common in reviews",
-      "when": "Refactoring suggestions common in reviews",
+      "when": "When task involves .github/skills/code review/SKILL.md",
       "yields": "code review supporting context"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.75,
       "when": "refactoring patterns relates to localization",
       "yields": "localization related patterns and guidance"

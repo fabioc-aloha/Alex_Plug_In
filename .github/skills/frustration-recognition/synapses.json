@@ -6,7 +6,7 @@
   "lastUpdated": "2026-02-10",
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "frustrated|stuck|nothing works|wtf",
       "target": ".github/skills/root-cause-analysis/SKILL.md",
       "yields": [

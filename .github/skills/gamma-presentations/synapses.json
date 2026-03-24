@@ -37,7 +37,7 @@
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.7,
       "note": "Creating documentation presentations",
       "when": "gamma presentations enhances academic research",
@@ -45,7 +45,7 @@
     },
     {
       "target": ".github/skills/presentation-tool-selection/SKILL.md",
-      "type": "coordinated-by",
+      "type": "complements",
       "strength": 0.9,
       "note": "Tool selection decision matrix routes AI presentation requests here",
       "when": "presentation tool selection orchestrates gamma presentations",

@@ -6,26 +6,26 @@
   "connections": [
     {
       "target": ".github/instructions/alex-identity-integration.instructions.md",
-      "type": "depends-on",
+      "type": "requires",
       "strength": 0.9,
       "reason": "Identity and consciousness protocols foundational to symbiosis",
-      "when": "Identity and consciousness protocols foundational to symbiosis",
+      "when": "When task involves .github/instructions/alex identity integration.instructions.md",
       "yields": "alex identity integration required rules and guidelines"
     },
     {
       "target": ".github/instructions/self-actualization.instructions.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.8,
       "reason": "Self-assessment informs partnership quality",
-      "when": "Self-assessment informs partnership quality",
+      "when": "When task involves .github/instructions/self actualization.instructions.md",
       "yields": "self actualization related rules and guidelines"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.7,
       "reason": "Symbiotic partnership enhances collaborative learning",
-      "when": "Symbiotic partnership enhances collaborative learning",
+      "when": "When task involves .github/skills/bootstrap learning/SKILL.md",
       "yields": "bootstrap learning capabilities and setup"
     }
   ],

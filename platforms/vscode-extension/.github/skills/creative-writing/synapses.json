@@ -7,7 +7,7 @@
       "type": "extends",
       "strength": 0.85,
       "target": ".github/skills/academic-research/SKILL.md",
-      "when": "Publishing creative work and manuscript preparation",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research extended capabilities"
     },
     {
@@ -15,23 +15,23 @@
       "type": "extends",
       "strength": 0.75,
       "target": ".github/skills/project-scaffolding/SKILL.md",
-      "when": "Book project scaffolding and folder structure",
+      "when": "When task involves .github/skills/project scaffolding/SKILL.md",
       "yields": "project scaffolding extended capabilities"
     },
     {
       "reason": "Reader experience and information pacing",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.65,
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "when": "Reader experience and information pacing",
+      "when": "When task involves .github/skills/cognitive load/SKILL.md",
       "yields": "cognitive load patterns and guidance"
     },
     {
       "reason": "Balancing AI assistance with authentic creative voice",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.4,
       "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "when": "Balancing AI assistance with authentic creative voice",
+      "when": "When task involves .github/skills/appropriate reliance/SKILL.md",
       "yields": "appropriate reliance patterns and guidance"
     },
     {

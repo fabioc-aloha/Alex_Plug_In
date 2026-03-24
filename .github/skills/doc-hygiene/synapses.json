@@ -6,18 +6,18 @@
   "connections": [
     {
       "target": ".github/skills/documentation-quality-assurance/SKILL.md",
-      "type": "sibling",
+      "type": "complements",
       "strength": 0.9,
       "reason": "Doc hygiene and QA are complementary — hygiene prevents, QA detects",
-      "when": "Doc hygiene and QA are complementary — hygiene prevents, QA detects",
+      "when": "When task involves .github/skills/documentation quality assurance/SKILL.md",
       "yields": "documentation quality assurance trifecta patterns and guidance"
     },
     {
       "target": ".github/instructions/roadmap-maintenance.instructions.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.75,
       "reason": "Roadmap hygiene follows doc-hygiene anti-drift rules",
-      "when": "Roadmap hygiene follows doc-hygiene anti-drift rules",
+      "when": "When task involves .github/instructions/roadmap maintenance.instructions.md",
       "yields": "roadmap maintenance related rules and guidelines"
     },
     {
@@ -25,7 +25,7 @@
       "type": "supports",
       "strength": 0.8,
       "reason": "Semantic audits enforce doc hygiene standards",
-      "when": "Semantic audits enforce doc hygiene standards",
+      "when": "When task involves .github/instructions/semantic audit.instructions.md",
       "yields": "semantic audit supporting context"
     }
   ],

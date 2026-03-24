@@ -4,7 +4,7 @@
   "skillId": "coaching-techniques",
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "coach|coaching|mentoring|1:1",
       "target": ".github/skills/frustration-recognition/SKILL.md",
       "yields": [

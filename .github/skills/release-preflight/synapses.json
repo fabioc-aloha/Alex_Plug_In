@@ -26,21 +26,21 @@
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "applies-to",
+      "type": "implements",
       "strength": 0.85,
       "when": "Applying release preflight to VS Code extension patterns domain",
       "yields": "VS Code extension patterns domain-specific context"
     },
     {
       "target": ".github/skills/m365-agent-debugging/SKILL.md",
-      "type": "applies-to",
+      "type": "implements",
       "strength": 0.8,
       "when": "Applying release preflight to M365 agent debugging domain",
       "yields": "M365 agent debugging domain-specific context"
     },
     {
       "target": ".github/skills/release-process/SKILL.md",
-      "type": "coordinates",
+      "type": "complements",
       "strength": 0.95,
       "note": "Preflight validates; release-process publishes. Always use together.",
       "when": "Coordinating release preflight with release process",
@@ -56,7 +56,7 @@
     },
     {
       "target": ".github/instructions/automated-quality-gates.instructions.md",
-      "type": "automates",
+      "type": "implements",
       "strength": 0.95,
       "note": "quality-gate.cjs automates 5 preflight checks in the build pipeline (v5.9.10 RCA)",
       "when": "Packaging, publishing, or running npm run quality-gate",

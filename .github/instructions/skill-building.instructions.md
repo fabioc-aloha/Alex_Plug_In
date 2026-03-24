@@ -11,6 +11,38 @@ Step-by-step process for creating, assessing, and completing skills.
 - Real-world experience with the domain (not theory)
 - Pattern used 3+ times or gotcha encountered
 - Checked skill catalog — skill doesn't already exist
+- **Searched global knowledge** (`~/.alex/global-knowledge/`) — no existing pattern or insight covers this
+- **Passed the activation check** (see below) — confirmed this isn't a missing activation on an existing skill
+
+## Phase 0: Activation Check (Before Creating Anything)
+
+Before creating a new skill, determine whether the real problem is that an existing skill is not being activated for the use case.
+
+### Step 1: Search existing skills
+
+Search `.github/skills/` for any skill whose **content** covers the topic, even if its name or description doesn't match. Check:
+- Skill names and descriptions (frontmatter)
+- `activationContexts` arrays in `synapses.json` files
+- Skill body content (tables, patterns, code examples)
+
+### Step 2: Diagnose
+
+| Finding | Root Cause | Action |
+|---------|-----------|--------|
+| Existing skill covers the topic and activates correctly | No gap | **Stop** -- nothing to create |
+| Existing skill covers the topic but doesn't activate for this use case | Missing activation keywords | **Add keywords** to existing skill's `synapses.json` `activationContexts` and `description` |
+| Existing skill partially covers it | Needs enrichment, not a new skill | **Expand** the existing SKILL.md with the missing content |
+| No existing skill covers this topic | Genuine gap | **Proceed** to Phase 1 |
+
+### Step 3: Fix Activation (if applicable)
+
+If the fix is adding activation keywords:
+
+1. Open the existing skill's `synapses.json`
+2. Add the missing terms to `activationContexts` (keep under 15 total)
+3. If the description doesn't hint at this use case, update the `description` in SKILL.md frontmatter
+4. If the skill is missing a synapse connection to a related skill that would help routing, add the connection
+5. **Done** -- no new skill needed
 
 ## Phase 1: Create the SKILL.md
 
@@ -32,6 +64,34 @@ Before proceeding, assess the SKILL.md against the depth rubric:
 | Litmus test  | Would an LLM produce equally useful content without this skill? Must be **no** |
 
 If any check fails, rewrite the section before continuing.
+
+### Staleness Warning (Required for API/Platform Skills)
+
+If the skill depends on external APIs, platforms, or specifications that change, add a staleness warning block immediately after the opening description:
+
+```markdown
+## ⚠️ Staleness Warning
+
+{Technology/API name} evolves frequently. {Specific what changes.}
+
+**Refresh triggers:**
+- {Trigger 1: e.g., API version updates}
+- {Trigger 2: e.g., SDK major releases}
+- {Trigger 3: e.g., Spec changes or deprecations}
+
+**Last validated:** {Month Year} ({Specific versions/state})
+
+**Check current state:** [{Link text}]({URL to official docs})
+```
+
+| Skill Type | Needs Staleness Warning? |
+|------------|:-----------------------:|
+| External API (Graph, MCP, REST) | **Yes** |
+| Platform SDK (MSAL, VS Code, Azure) | **Yes** |
+| Evolving spec (MCP, OpenAI) | **Yes** |
+| Internal architecture patterns | No |
+| Stable domain knowledge | No |
+| Soft skills / process | No |
 
 ## Phase 2: Register the Skill
 

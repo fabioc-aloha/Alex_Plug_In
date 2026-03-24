@@ -7,15 +7,15 @@
       "type": "complements",
       "strength": 0.85,
       "target": ".github/skills/project-management/SKILL.md",
-      "when": "Change management within project delivery",
+      "when": "When task involves .github/skills/project management/SKILL.md",
       "yields": "project management complementary techniques"
     },
     {
       "reason": "Requirements include change impact assessment",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.85,
       "target": ".github/skills/business-analysis/SKILL.md",
-      "when": "Requirements include change impact assessment",
+      "when": "When task involves .github/skills/business analysis/SKILL.md",
       "yields": "business analysis contextual assessment"
     },
     {
@@ -23,23 +23,23 @@
       "type": "uses",
       "strength": 0.65,
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "when": "Analyzing resistance causes and stakeholder concerns",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
       "yields": "root cause analysis patterns and guidance"
     },
     {
       "reason": "Trust building in change leadership",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.65,
       "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "when": "Trust building in change leadership",
+      "when": "When task involves .github/skills/appropriate reliance/SKILL.md",
       "yields": "appropriate reliance patterns and guidance"
     },
     {
       "reason": "Change capacity limits and saturation",
-      "type": "considers",
+      "type": "relates",
       "strength": 0.4,
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "when": "Change capacity limits and saturation",
+      "when": "When task involves .github/skills/cognitive load/SKILL.md",
       "yields": "cognitive load considerations"
     }
   ],

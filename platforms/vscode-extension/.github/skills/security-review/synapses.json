@@ -9,7 +9,7 @@
   "connections": [
     {
       "target": ".github/skills/incident-response/SKILL.md",
-      "type": "Triggers",
+      "type": "activates",
       "strength": 0.9,
       "description": "Vulnerability found triggers incident response",
       "when": "security review initiates incident response",
@@ -17,7 +17,7 @@
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.9,
       "description": "Security lens enhances standard code review",
       "when": "security review enhances code review",
@@ -25,7 +25,7 @@
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Security incidents need root cause analysis",
       "when": "security review connects to root cause analysis",
@@ -33,7 +33,7 @@
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Security bugs need systematic debugging",
       "when": "security review connects to debugging patterns",
@@ -41,7 +41,7 @@
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Security testing is specialized testing",
       "when": "security review connects to testing strategies",
@@ -49,7 +49,7 @@
     },
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",
-      "type": "Complements",
+      "type": "complements",
       "strength": 0.7,
       "description": "Security enables privacy protection",
       "when": "Combining security review with privacy responsible AI",
@@ -57,7 +57,7 @@
     },
     {
       "target": ".github/instructions/dependency-management.instructions.md",
-      "type": "Implements",
+      "type": "implements",
       "strength": 0.9,
       "description": "Dependency security practices and vulnerability scanning",
       "when": "Applying dependency management procedures",

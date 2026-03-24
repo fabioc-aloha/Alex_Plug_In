@@ -35,7 +35,7 @@
     },
     {
       "target": ".github/skills/infrastructure-as-code/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.7,
       "when": "Deploying Foundry resources via Bicep/Terraform",
       "yields": "IaC templates, deployment automation, resource provisioning"

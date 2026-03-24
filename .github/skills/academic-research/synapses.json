@@ -7,28 +7,28 @@
       "type": "uses",
       "strength": 0.85,
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "when": "Knowledge acquisition methodology for literature reviews",
+      "when": "When task involves .github/skills/bootstrap learning/SKILL.md",
       "yields": "bootstrap learning patterns and guidance"
     },
     {
       "reason": "Research problem analysis and gap identification",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.65,
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "when": "Research problem analysis and gap identification",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
       "yields": "root cause analysis patterns and guidance"
     },
     {
       "reason": "Information chunking in academic writing",
-      "type": "considers",
+      "type": "relates",
       "strength": 0.4,
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "when": "Information chunking in academic writing",
+      "when": "When task involves .github/skills/cognitive load/SKILL.md",
       "yields": "cognitive load considerations"
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
-      "type": "extended-by",
+      "type": "extends",
       "strength": 0.85,
       "when": "creative writing extends academic research",
       "yields": "creative writing extension patterns"
@@ -42,7 +42,7 @@
     },
     {
       "target": ".github/skills/practitioner-research/SKILL.md",
-      "type": "extended-by",
+      "type": "extends",
       "strength": 0.9,
       "when": "practitioner research extends academic research",
       "yields": "practitioner research extension patterns"

@@ -14,21 +14,21 @@
   "connections": [
     {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
-      "type": "relates-to",
+      "type": "relates",
       "strength": 0.9,
       "when": "complex task detected requiring 3+ operations",
       "yields": "Proactive skill survey, dependency analysis, activation plan"
     },
     {
       "target": ".github/copilot-instructions.md",
-      "type": "referenced-by",
+      "type": "uses",
       "strength": 1,
       "when": "self-correction protocol triggers",
       "yields": "Pointer to this file for action-keyword index lookup"
     },
     {
       "target": ".github/skills/awareness/SKILL.md",
-      "type": "relates-to",
+      "type": "relates",
       "strength": 0.8,
       "when": "detecting own uncertainty or errors",
       "yields": "Self-monitoring patterns, red flag phrases"

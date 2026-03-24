@@ -39,7 +39,7 @@
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.85,
       "note": "Different agents may need different model tiers",
       "when": "multi agent orchestration provides context to LLM model selection",
@@ -47,7 +47,7 @@
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
-      "type": "analogousDomain",
+      "type": "relates",
       "strength": 0.7,
       "note": "Task decomposition parallels project planning",
       "when": "multi agent orchestration applies analogous patterns from project management",

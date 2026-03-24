@@ -7,15 +7,15 @@
       "type": "complements",
       "strength": 0.7,
       "reason": "Privacy is part of security",
-      "when": "Privacy is part of security",
+      "when": "When task involves .github/skills/security review/SKILL.md",
       "yields": "security review complementary techniques"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
       "reason": "Privacy checks in review",
-      "when": "Privacy checks in review",
+      "when": "When task involves .github/skills/code review/SKILL.md",
       "yields": "code review contextual assessment"
     },
     {
@@ -23,7 +23,7 @@
       "type": "extends",
       "strength": 0.8,
       "reason": "Privacy incidents need response",
-      "when": "Privacy incidents need response",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
       "yields": "incident response extended capabilities"
     },
     {
@@ -31,7 +31,7 @@
       "type": "extends",
       "strength": 0.9,
       "reason": "Detailed regulatory compliance for PII",
-      "when": "Detailed regulatory compliance for PII",
+      "when": "When task involves .github/skills/pii privacy regulations/SKILL.md",
       "yields": "PII privacy regulations extended capabilities"
     },
     {
@@ -39,7 +39,7 @@
       "type": "complements",
       "strength": 0.75,
       "reason": "Human-AI trust calibration is core to responsible AI",
-      "when": "Human-AI trust calibration is core to responsible AI",
+      "when": "When task involves .github/skills/appropriate reliance/SKILL.md",
       "yields": "appropriate reliance complementary techniques"
     }
   ],

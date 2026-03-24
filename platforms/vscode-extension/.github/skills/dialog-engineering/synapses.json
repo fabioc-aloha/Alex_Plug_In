@@ -1,0 +1,55 @@
+{
+    "schemaVersion": "2.0.0",
+    "skillId": "dialog-engineering",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "version": "1.0.0",
+    "lastValidated": "2026-03-24",
+    "connections": [
+        {
+            "target": ".github/skills/meditation/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "reason": "CSAR Reflect phase maps to meditation's what-did-I-learn step",
+            "when": "End-of-session reflection or significant decisions made",
+            "yields": "Meditation protocol for consolidating session insights"
+        },
+        {
+            "target": ".github/skills/research-first-development/SKILL.md",
+            "type": "complements",
+            "strength": 0.75,
+            "reason": "CSAR Clarify phase aligns with research-first principle of understanding before acting",
+            "when": "Starting a complex task that requires domain understanding",
+            "yields": "Research methodology for the Clarify phase"
+        },
+        {
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
+            "type": "feeds",
+            "strength": 0.7,
+            "reason": "Reflect phases produce insights that feed knowledge synthesis",
+            "when": "End-of-session Reflect captures reusable learnings",
+            "yields": "Knowledge capture and organization patterns"
+        },
+        {
+            "target": ".github/skills/code-review/SKILL.md",
+            "type": "supports",
+            "strength": 0.65,
+            "reason": "Reflect phase should invoke adversarial review patterns",
+            "when": "Code review requested after implementation dialog",
+            "yields": "Structured code review checklist for the Reflect phase"
+        }
+    ],
+    "activationContexts": [
+        "dialog",
+        "conversation",
+        "CSAR",
+        "clarify",
+        "summarize",
+        "reflect",
+        "prompt engineering",
+        "structured conversation",
+        "dialog engineering",
+        "iterative",
+        "multi-turn",
+        "steering"
+    ]
+}

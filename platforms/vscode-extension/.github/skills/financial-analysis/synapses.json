@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/business-analysis/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.8,
       "description": "Financial analysis extends business analysis with quantitative rigor",
       "when": "financial analysis enhances business analysis",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/executive-storytelling/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Financial insights require executive-level communication",
       "when": "financial analysis connects to executive storytelling",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/status-reporting/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.6,
       "description": "Financial metrics are core to status reporting",
       "when": "financial analysis connects to status reporting",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.8,
       "description": "Financial figures must be accurate — hallucinated numbers are dangerous",
       "when": "financial analysis depends on anti hallucination",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/scope-management/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.5,
       "description": "Budget constraints inform scope decisions",
       "when": "financial analysis connects to scope management",

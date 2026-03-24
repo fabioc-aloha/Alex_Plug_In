@@ -7,7 +7,7 @@
   "connectionCount": 6,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "literature review|lit review|research gap|systematic search",
       "target": ".github/skills/citation-management/SKILL.md",
       "yields": [

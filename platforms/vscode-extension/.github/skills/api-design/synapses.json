@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/security-review/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.9,
       "description": "APIs need security review",
       "when": "API design depends on security review",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.9,
       "description": "APIs need contract testing",
       "when": "API design connects to testing strategies",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "API changes need careful review",
       "when": "API design connects to code review",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/architecture-audit/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "API design is architectural decision",
       "when": "API design connects to architecture audit",

@@ -9,39 +9,39 @@
       "type": "extends",
       "strength": 0.95,
       "reason": "Sync operations extend core GK search capability",
-      "when": "Sync operations extend core GK search capability",
+      "when": "When task involves .github/skills/global knowledge/SKILL.md",
       "yields": "global knowledge extended capabilities"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.85,
       "reason": "Dream protocol includes GK sync step",
-      "when": "Dream protocol includes GK sync step",
+      "when": "When task involves .github/skills/meditation/SKILL.md",
       "yields": "meditation integration patterns"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "type": "accelerates",
+      "type": "supports",
       "strength": 0.7,
       "reason": "GK provides prior knowledge for new learning",
-      "when": "GK provides prior knowledge for new learning",
+      "when": "When task involves .github/skills/bootstrap learning/SKILL.md",
       "yields": "bootstrap learning acceleration techniques"
     },
     {
       "target": ".github/instructions/dream-state-automation.instructions.md",
-      "type": "modifies",
+      "type": "extends",
       "strength": 0.75,
       "reason": "Adds GK sync to dream checklist",
-      "when": "Adds GK sync to dream checklist",
+      "when": "When task involves .github/instructions/dream state automation.instructions.md",
       "yields": "dream state automation modification interface"
     },
     {
       "target": ".github/skills/skill-development/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "reason": "Skill pull-sync enables heir wishlist fulfillment",
-      "when": "Skill pull-sync enables heir wishlist fulfillment",
+      "when": "When task involves .github/skills/skill development/SKILL.md",
       "yields": "skill development capabilities and setup"
     }
   ],

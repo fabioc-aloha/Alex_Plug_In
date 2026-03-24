@@ -7,7 +7,7 @@
       "type": "implements",
       "strength": 0.95,
       "reason": "Trifecta sibling: procedural testing guidelines",
-      "when": "Trifecta sibling: procedural testing guidelines",
+      "when": "When task involves .github/instructions/testing strategies.instructions.md",
       "yields": "testing strategies implementation steps"
     },
     {
@@ -15,7 +15,7 @@
       "type": "activates",
       "strength": 0.95,
       "reason": "Trifecta sibling: /tdd interactive testing workflow",
-      "when": "Trifecta sibling: /tdd interactive testing workflow",
+      "when": "When task involves .github/prompts/tdd.prompt.md",
       "yields": "tdd interactive workflow"
     },
     {
@@ -23,15 +23,15 @@
       "type": "complements",
       "strength": 0.7,
       "reason": "Tests prevent bugs, debugging finds them",
-      "when": "Tests prevent bugs, debugging finds them",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
       "yields": "debugging patterns complementary techniques"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "reason": "Tests enable safe refactoring",
-      "when": "Tests enable safe refactoring",
+      "when": "When task involves .github/skills/refactoring patterns/SKILL.md",
       "yields": "refactoring patterns capabilities and setup"
     },
     {
@@ -39,12 +39,12 @@
       "type": "supports",
       "strength": 0.7,
       "reason": "Test coverage is part of review",
-      "when": "Test coverage is part of review",
+      "when": "When task involves .github/skills/code review/SKILL.md",
       "yields": "code review supporting context"
     },
     {
       "target": ".github/skills/release-process/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.9,
       "reason": "Automated tests provide quality gate for shipping",
       "when": "Verifying release readiness (DoD criterion #4)",
@@ -52,10 +52,10 @@
     },
     {
       "target": ".github/skills/ui-ux-design/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.8,
       "reason": "Automated accessibility testing validates WCAG compliance",
-      "when": "Automated accessibility testing validates WCAG compliance",
+      "when": "When task involves .github/skills/ui ux design/SKILL.md",
       "yields": "UI UX design quality checks and validation"
     },
     {
@@ -68,7 +68,7 @@
     },
     {
       "target": ".github/skills/localization/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.9,
       "when": "testing strategies relates to localization",
       "yields": "localization related patterns and guidance"

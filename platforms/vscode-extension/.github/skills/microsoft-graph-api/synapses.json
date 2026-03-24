@@ -10,7 +10,7 @@
       "type": "complements",
       "strength": 0.5,
       "reason": "User.Read scope provides preferredLanguage",
-      "when": "User.Read scope provides preferredLanguage",
+      "when": "When task involves .github/skills/localization/SKILL.md",
       "yields": "localization complementary techniques"
     },
     {
@@ -18,7 +18,7 @@
       "type": "uses",
       "strength": 0.6,
       "reason": "Rate limiting and batching patterns",
-      "when": "Rate limiting and batching patterns",
+      "when": "When task involves .github/skills/performance profiling/SKILL.md",
       "yields": "performance profiling patterns and guidance"
     }
   ],

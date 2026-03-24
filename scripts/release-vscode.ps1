@@ -42,7 +42,7 @@ try {
     Write-Host "   Extension: $extensionPath" -ForegroundColor Gray
 
     # 0. Load PAT from .env if not in environment
-    $envFile = Join-Path $extensionPath ".env"
+    $envFile = Join-Path $repoRoot ".env"
     if (-not $env:VSCE_PAT -and (Test-Path $envFile)) {
         $patLine = Get-Content $envFile | Where-Object { $_ -match '^VSCE_PAT=' }
         if ($patLine) {
@@ -51,7 +51,7 @@ try {
         }
     }
     if (-not $env:VSCE_PAT) {
-        throw "VSCE_PAT not set. Set environment variable or add to platforms/vscode-extension/.env"
+        throw "VSCE_PAT not set. Set environment variable or add VSCE_PAT to root .env"
     }
 
     # 1a. Sync Master Alex to extension (ensures .github/ is fresh)

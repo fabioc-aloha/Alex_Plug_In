@@ -4,7 +4,7 @@
   "connections": [
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.9,
       "note": "Model awareness enables appropriate reliance through task-model matching",
       "when": "LLM model selection provides context to appropriate reliance",

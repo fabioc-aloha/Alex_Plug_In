@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/coaching-techniques/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.8,
       "description": "HR uses coaching frameworks for performance management and employee development",
       "when": "HR people operations enhances coaching techniques",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/change-management/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Organizational changes flow through HR processes",
       "when": "HR people operations connects to change management",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/pii-privacy-regulations/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.8,
       "description": "Employee data is PII — strict privacy and retention rules apply",
       "when": "HR people operations depends on PII privacy regulations",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/career-development/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.7,
       "description": "HR manages career pathing, internal mobility, and professional development programs",
       "when": "HR people operations enhances career development",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/business-analysis/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.5,
       "description": "HR analytics and workforce planning require business analysis skills",
       "when": "HR people operations connects to business analysis",

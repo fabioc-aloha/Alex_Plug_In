@@ -7,7 +7,7 @@
   "connectionCount": 5,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "slide|deck|powerpoint|presentation|assertion-evidence",
       "target": ".github/skills/gamma-presentations/SKILL.md",
       "yields": [

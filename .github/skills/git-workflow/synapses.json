@@ -4,7 +4,7 @@
   "connections": [
     {
       "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "when": "git workflow requires release preflight capabilities",
       "yields": "release preflight capabilities and setup"

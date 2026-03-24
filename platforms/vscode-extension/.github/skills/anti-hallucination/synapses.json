@@ -9,7 +9,7 @@
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "strength": 0.9,
       "description": "Appropriate reliance provides confidence calibration framework",
-      "type": "Complement",
+      "type": "complements",
       "when": "Combining anti hallucination with appropriate reliance",
       "yields": "appropriate reliance complementary techniques"
     },
@@ -18,7 +18,7 @@
       "target": ".github/instructions/alex-core.instructions.md",
       "strength": 0.9,
       "description": "Core identity principle: empirical honesty",
-      "type": "Implements",
+      "type": "implements",
       "when": "Applying alex core procedures",
       "yields": "alex core implementation steps"
     },
@@ -27,7 +27,7 @@
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
       "strength": 0.7,
       "description": "Error recovery when hallucination is caught",
-      "type": "Collaborates",
+      "type": "complements",
       "when": "anti hallucination collaborates with error recovery patterns",
       "yields": "error recovery patterns collaborative workflows"
     },
@@ -36,7 +36,7 @@
       "target": ".github/instructions/empirical-validation.instructions.md",
       "strength": 0.9,
       "description": "Empirical validation prevents fabricated claims",
-      "type": "Implements",
+      "type": "implements",
       "when": "Applying empirical validation procedures",
       "yields": "empirical validation implementation steps"
     },

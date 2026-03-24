@@ -8,7 +8,7 @@
       "type": "implements",
       "strength": 0.9,
       "reason": "Operationalizes the extract-and-document phase of bootstrap learning",
-      "when": "Operationalizes the extract-and-document phase of bootstrap learning",
+      "when": "When task involves .github/instructions/bootstrap learning.instructions.md",
       "yields": "bootstrap learning implementation steps"
     },
     {
@@ -16,7 +16,7 @@
       "type": "feeds",
       "strength": 0.7,
       "reason": "Documented patterns become consolidation fodder during meditation",
-      "when": "Documented patterns become consolidation fodder during meditation",
+      "when": "When task involves .github/prompts/meditate.prompt.md",
       "yields": "meditate downstream processing"
     },
     {
@@ -24,7 +24,7 @@
       "type": "uses",
       "strength": 0.7,
       "reason": "Documentation often includes diagrams",
-      "when": "Documentation often includes diagrams",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid patterns and guidance"
     },
     {
@@ -32,12 +32,12 @@
       "type": "requires",
       "strength": 0.9,
       "reason": "All documentation must be lint-clean",
-      "when": "All documentation must be lint-clean",
+      "when": "When task involves .github/skills/lint clean markdown/SKILL.md",
       "yields": "lint clean markdown required patterns and guidance"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.85,
       "when": "architecture refinement relates to localization",
       "yields": "localization related patterns and guidance"

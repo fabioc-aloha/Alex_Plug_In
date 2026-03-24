@@ -11,7 +11,7 @@
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.7,
       "when": "airs appropriate reliance enhances bootstrap learning",
       "yields": "bootstrap learning enhanced capabilities"
@@ -25,14 +25,14 @@
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "when": "airs appropriate reliance requires academic research capabilities",
       "yields": "academic research capabilities and setup"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.5,
       "note": "Hypothesis testing via behavioral measurement",
       "when": "airs appropriate reliance enhances testing strategies",

@@ -4,18 +4,18 @@
   "connections": [
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "type": "follows",
+      "type": "uses",
       "strength": 0.7,
       "reason": "Synthesis often happens during meditation",
-      "when": "Synthesis often happens during meditation",
+      "when": "When task involves .github/skills/meditation/SKILL.md",
       "yields": "meditation prerequisite steps"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.8,
       "reason": "Synthesis is elaborative encoding",
-      "when": "Synthesis is elaborative encoding",
+      "when": "When task involves .github/skills/learning psychology/SKILL.md",
       "yields": "learning psychology patterns and guidance"
     },
     {
@@ -23,15 +23,15 @@
       "type": "extends",
       "strength": 0.8,
       "reason": "Goes beyond learning to integration",
-      "when": "Goes beyond learning to integration",
+      "when": "When task involves .github/instructions/bootstrap learning.instructions.md",
       "yields": "bootstrap learning extended capabilities"
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.85,
       "reason": "Research generates pre-project knowledge that synthesis organizes",
-      "when": "Research generates pre-project knowledge that synthesis organizes",
+      "when": "When task involves .github/skills/research first development/SKILL.md",
       "yields": "research first development integration patterns"
     }
   ],

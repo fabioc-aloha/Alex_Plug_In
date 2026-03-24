@@ -11,7 +11,7 @@
       "strength": 0.9,
       "when": "Reviewing documents for quality",
       "yields": "Comprehensive quality check including AI pattern detection",
-      "type": "enhances"
+      "type": "extends"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",

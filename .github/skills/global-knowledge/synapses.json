@@ -5,50 +5,50 @@
   "connections": [
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
-      "type": "stores",
+      "type": "consumes",
       "strength": 0.75,
       "reason": "Synthesis outputs go to global KB",
-      "when": "Synthesis outputs go to global KB",
+      "when": "When task involves .github/skills/knowledge synthesis/SKILL.md",
       "yields": "knowledge synthesis storage interface"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
       "reason": "Meditation creates global insights",
-      "when": "Meditation creates global insights",
+      "when": "When task involves .github/skills/meditation/SKILL.md",
       "yields": "meditation contextual assessment"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "type": "accelerates",
+      "type": "supports",
       "strength": 0.8,
       "reason": "Prior knowledge speeds learning",
-      "when": "Prior knowledge speeds learning",
+      "when": "When task involves .github/skills/bootstrap learning/SKILL.md",
       "yields": "bootstrap learning acceleration techniques"
     },
     {
       "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.9,
       "reason": "Promotion candidate patterns guide heir skill evolution",
-      "when": "Promotion candidate patterns guide heir skill evolution",
+      "when": "When task involves .github/instructions/heir skill promotion.instructions.md",
       "yields": "heir skill promotion contextual assessment"
     },
     {
       "target": ".github/instructions/global-knowledge-curation.instructions.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.85,
       "reason": "Curation protocol uses promotion patterns",
-      "when": "Curation protocol uses promotion patterns",
+      "when": "When task involves .github/instructions/global knowledge curation.instructions.md",
       "yields": "global knowledge curation contextual assessment"
     },
     {
       "target": ".github/prompts/meditate.prompt.md",
-      "type": "triggers",
+      "type": "activates",
       "strength": 0.8,
       "reason": "Auto-promotion during meditation sessions",
-      "when": "Auto-promotion during meditation sessions",
+      "when": "When task involves .github/prompts/meditate.prompt.md",
       "yields": "meditate activation and procedures"
     }
   ],

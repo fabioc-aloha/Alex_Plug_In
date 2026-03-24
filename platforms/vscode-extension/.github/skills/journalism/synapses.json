@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/creative-writing/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.7,
       "description": "Journalism applies narrative craft to fact-based storytelling",
       "when": "journalism enhances creative writing",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/ai-writing-avoidance/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.8,
       "description": "Journalistic writing must sound authentically human and attributed to real sources",
       "when": "journalism depends on AI writing avoidance",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/citation-management/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.7,
       "description": "Source attribution and verification are core journalistic practices",
       "when": "journalism enhances citation management",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.9,
       "description": "Fabricated quotes, sources, or facts violate journalism's foundational principle",
       "when": "journalism depends on anti hallucination",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.6,
       "description": "Investigative journalism follows systematic research methodology",
       "when": "journalism connects to research first development",

@@ -7,7 +7,7 @@
       "type": "implements",
       "strength": 0.95,
       "reason": "Trifecta sibling: procedural guidelines for code review",
-      "when": "Trifecta sibling: procedural guidelines for code review",
+      "when": "When task involves .github/instructions/code review guidelines.instructions.md",
       "yields": "code review guidelines implementation steps"
     },
     {
@@ -15,55 +15,55 @@
       "type": "activates",
       "strength": 0.95,
       "reason": "Trifecta sibling: /review interactive workflow",
-      "when": "Trifecta sibling: /review interactive workflow",
+      "when": "When task involves .github/prompts/review.prompt.md",
       "yields": "review interactive workflow"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.75,
       "reason": "Review checks test coverage",
-      "when": "Review checks test coverage",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies quality checks and validation"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
-      "type": "suggests",
+      "type": "supports",
       "strength": 0.6,
       "reason": "Reviews often suggest refactoring",
-      "when": "Reviews often suggest refactoring",
+      "when": "When task involves .github/skills/refactoring patterns/SKILL.md",
       "yields": "refactoring patterns improvement recommendations"
     },
     {
       "target": ".github/skills/git-workflow/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.75,
       "reason": "Review is part of PR workflow",
-      "when": "Review is part of PR workflow",
+      "when": "When task involves .github/skills/git workflow/SKILL.md",
       "yields": "git workflow integration patterns"
     },
     {
       "target": ".github/skills/performance-profiling/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.7,
       "reason": "Extension audits identify performance bottlenecks",
-      "when": "Extension audits identify performance bottlenecks",
+      "when": "When task involves .github/skills/performance profiling/SKILL.md",
       "yields": "performance profiling quality checks and validation"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.8,
       "reason": "Extension audit methodology validates VS Code patterns",
-      "when": "Extension audit methodology validates VS Code patterns",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
       "yields": "VS Code extension patterns quality checks and validation"
     },
     {
       "target": ".github/skills/ui-ux-design/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.85,
       "reason": "Accessibility audits are part of code review quality gates",
-      "when": "Accessibility audits are part of code review quality gates",
+      "when": "When task involves .github/skills/ui ux design/SKILL.md",
       "yields": "UI UX design integration patterns"
     },
     {

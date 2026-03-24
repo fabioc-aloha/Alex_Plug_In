@@ -8,15 +8,15 @@
       "type": "complements",
       "strength": 0.9,
       "reason": "ASCII for precise control, Mermaid for auto-layout",
-      "when": "ASCII for precise control, Mermaid for auto-layout",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid complementary techniques"
     },
     {
       "target": ".github/skills/lint-clean-markdown/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.7,
       "reason": "Both require attention to character-level detail",
-      "when": "Both require attention to character-level detail",
+      "when": "When working with .github/skills/lint clean markdown/SKILL.md patterns",
       "yields": "lint clean markdown related patterns and guidance"
     },
     {
@@ -24,7 +24,7 @@
       "type": "supports",
       "strength": 0.7,
       "reason": "Visual diagrams enhance documentation quality",
-      "when": "Visual diagrams enhance documentation quality",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research supporting context"
     },
     {

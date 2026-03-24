@@ -4,14 +4,14 @@
   "connections": [
     {
       "target": ".github/skills/project-scaffolding/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "when": "creating hero banner for README",
       "yields": "README structure, banner placement, sizing guidelines"
     },
     {
       "target": ".github/skills/image-handling/SKILL.md",
-      "type": "output-to",
+      "type": "feeds",
       "strength": 0.85,
       "when": "SVG needs conversion to PNG/JPEG",
       "yields": "sharp-cli commands, optimization flags"

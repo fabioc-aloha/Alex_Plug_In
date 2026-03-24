@@ -8,28 +8,28 @@
   "connections": [
     {
       "target": ".github/skills/brand-asset-management/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.9,
       "when": "deploying or referencing brand assets that must follow the CorreaX design language",
       "yields": "Consistent asset deployment aligned with design tokens and visual identity"
     },
     {
       "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.75,
       "when": "generating banner images that must use CorreaX palette and typography",
       "yields": "AI-generated banners with correct brand colors and composition"
     },
     {
       "target": ".github/skills/svg-graphics/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.7,
       "when": "creating SVG graphics that follow CorreaX visual identity",
       "yields": "SVG assets using CorreaX color tokens and design patterns"
     },
     {
       "target": ".github/skills/ui-ux-design/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.8,
       "when": "making UI/UX decisions that reference the CorreaX component library",
       "yields": "Accessible, consistent interface designs following the design system"

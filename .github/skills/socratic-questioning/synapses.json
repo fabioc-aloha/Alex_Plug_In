@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "Implements",
+      "type": "implements",
       "strength": 0.9,
       "description": "Applies learning psychology principles",
       "when": "Applying learning psychology procedures",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/rubber-duck-debugging/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.9,
       "description": "Both are thinking partnership approaches",
       "when": "socratic questioning connects to rubber duck debugging",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.9,
       "description": "Socratic method enhances learning acquisition",
       "when": "socratic questioning enhances bootstrap learning",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Must balance questioning with cognitive load",
       "when": "socratic questioning connects to cognitive load",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Both guide self-discovery",
       "when": "socratic questioning connects to meditation",
@@ -48,7 +48,7 @@
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.7,
       "description": "Socratic questioning helps find root causes",
       "when": "socratic questioning enhances root cause analysis",

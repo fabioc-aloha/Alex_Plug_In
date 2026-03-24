@@ -8,15 +8,15 @@
       "type": "complements",
       "strength": 0.9,
       "reason": "Mermaid diagrams must also follow lint rules",
-      "when": "Mermaid diagrams must also follow lint rules",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid complementary techniques"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "reason": "All architecture documentation must be lint-clean",
-      "when": "All architecture documentation must be lint-clean",
+      "when": "When task involves .github/skills/architecture refinement/SKILL.md",
       "yields": "architecture refinement capabilities and setup"
     },
     {
@@ -24,7 +24,7 @@
       "type": "supports",
       "strength": 0.7,
       "reason": "Lint-clean is baseline for documentation excellence",
-      "when": "Lint-clean is baseline for documentation excellence",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research supporting context"
     }
   ],

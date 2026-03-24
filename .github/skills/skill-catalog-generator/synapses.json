@@ -4,34 +4,34 @@
   "connections": [
     {
       "reason": "Generates Mermaid network diagrams",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "target": ".github/skills/markdown-mermaid/SKILL.md",
-      "when": "Generates Mermaid network diagrams",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid capabilities and setup"
     },
     {
       "reason": "Validates skill structure during catalog generation",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.8,
       "target": ".github/skills/brain-qa/SKILL.md",
-      "when": "Validates skill structure during catalog generation",
+      "when": "When task involves .github/skills/brain qa/SKILL.md",
       "yields": "brain QA quality checks and validation"
     },
     {
       "reason": "Tracks learning progress for users",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.6,
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "when": "Tracks learning progress for users",
+      "when": "When task involves .github/skills/learning psychology/SKILL.md",
       "yields": "learning psychology capabilities and setup"
     },
     {
       "reason": "Documents project structure and capabilities",
-      "type": "documents",
+      "type": "supports",
       "strength": 0.5,
       "target": ".github/skills/project-scaffolding/SKILL.md",
-      "when": "Documents project structure and capabilities",
+      "when": "When task involves .github/skills/project scaffolding/SKILL.md",
       "yields": "project scaffolding documentation"
     }
   ],

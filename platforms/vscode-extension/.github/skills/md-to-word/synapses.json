@@ -7,26 +7,26 @@
   "connections": [
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
-      "type": "depends-on",
+      "type": "requires",
       "strength": 0.95,
       "reason": "Mermaid diagrams must follow ATACCU before export to ensure quality",
-      "when": "Mermaid diagrams must follow ATACCU before export to ensure quality",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid required patterns and guidance"
     },
     {
       "target": ".github/skills/brand-asset-management/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.7,
       "reason": "SVG banners and visual assets should follow brand guidelines",
-      "when": "SVG banners and visual assets should follow brand guidelines",
+      "when": "When task involves .github/skills/brand asset management/SKILL.md",
       "yields": "brand asset management related patterns and guidance"
     },
     {
       "target": ".github/skills/pptx-generation/SKILL.md",
-      "type": "sibling",
+      "type": "complements",
       "strength": 0.85,
       "reason": "Similar document export workflow for PowerPoint presentations",
-      "when": "Similar document export workflow for PowerPoint presentations",
+      "when": "When task involves .github/skills/pptx generation/SKILL.md",
       "yields": "PPTX generation trifecta patterns and guidance"
     },
     {
@@ -34,23 +34,23 @@
       "type": "supports",
       "strength": 0.6,
       "reason": "SVG to PNG conversion enables Word compatibility",
-      "when": "SVG to PNG conversion enables Word compatibility",
+      "when": "When task involves .github/skills/svg graphics/SKILL.md",
       "yields": "SVG graphics supporting context"
     },
     {
       "target": ".github/skills/documentation-quality-assurance/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.8,
       "reason": "Enables professional document distribution to stakeholders",
-      "when": "Enables professional document distribution to stakeholders",
+      "when": "When .github/skills/documentation quality assurance/SKILL.md capabilities are needed",
       "yields": "documentation quality assurance capabilities and setup"
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
-      "type": "depends-on",
+      "type": "requires",
       "strength": 0.85,
       "reason": "Research documents must follow Word-Compatible Research Writing Style before conversion",
-      "when": "Research documents must follow Word-Compatible Research Writing Style before conversion",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research required patterns and guidance"
     }
   ],

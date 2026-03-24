@@ -74,6 +74,7 @@ Search this index when processing any task request:
 | database-design | design database, model schema, normalize tables, optimize query, choose database |
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug, can't find bug, it's not working, fix exception, error keeps happening, trace the issue, reproduce bug, narrow down, systematic debug |
 | deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
+| dialog-engineering | CSAR loop, dialog engineering, structured conversation, clarify summarize act reflect, multi-turn, prompt engineering, conversation design, steering moves, iterative dialog |
 | dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
 | distribution-security | secrets scanning, pii protection, secure packaging, distribution security, defense in depth, csp patterns |
 | doc-hygiene | anti-drift rules, count elimination, living document, documentation maintenance, hardcoded counts, prevent drift |

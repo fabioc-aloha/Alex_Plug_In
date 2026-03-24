@@ -6,7 +6,7 @@
   "connections": [
     {
       "target": ".github/copilot-instructions.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.95,
       "note": "Phase 9 detects mermaid diagrams (LLM-unfriendly), Phase 10 detects boilerplate",
       "when": "Verifying copilot-instructions quality or compliance",
@@ -14,7 +14,7 @@
     },
     {
       "target": ".github/skills/memory-activation/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.85,
       "note": "Checks trigger index coverage and semantic coherence",
       "when": "Verifying memory activation quality or compliance",
@@ -38,7 +38,7 @@
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.65,
       "note": "Meditative practice for brain maintenance",
       "when": "brain QA relates to meditation",
@@ -46,7 +46,7 @@
     },
     {
       "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.9,
       "note": "Brain QA is step 0 of release preflight checklist",
       "when": "brain QA provides context to release preflight",
@@ -54,7 +54,7 @@
     },
     {
       "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.8,
       "note": "Phase 5 validates synapse normalization during heir upgrades",
       "when": "Verifying heir skill promotion quality or compliance",
@@ -62,7 +62,7 @@
     },
     {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.75,
       "note": "Brain QA validates skill index and synapses that SSO depends on for proactive planning",
       "when": "brain QA requires skill selection optimization capabilities",
@@ -78,7 +78,7 @@
     },
     {
       "target": ".github/skills/muscle-memory-recognition/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.6,
       "note": "Future Phase 23 validates motor cortex mapping matches muscle inventory",
       "when": "Verifying muscle memory recognition quality or compliance",
@@ -86,7 +86,7 @@
     },
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "coordinates",
+      "type": "complements",
       "strength": 0.85,
       "note": "brain-qa-heir.ps1 is synced via heir-sync rename pattern; Phase 30 validates muscles per context",
       "when": "Coordinating brain QA with heir sync management",

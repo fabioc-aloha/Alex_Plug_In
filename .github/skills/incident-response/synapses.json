@@ -4,10 +4,10 @@
   "connections": [
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "triggers",
+      "type": "activates",
       "strength": 0.65,
       "reason": "Post-mortem requires RCA",
-      "when": "Post-mortem requires RCA",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
       "yields": "root cause analysis activation and procedures"
     },
     {
@@ -15,15 +15,15 @@
       "type": "uses",
       "strength": 0.8,
       "reason": "Recovery patterns during resolution",
-      "when": "Recovery patterns during resolution",
+      "when": "When task involves .github/skills/error recovery patterns/SKILL.md",
       "yields": "error recovery patterns patterns and guidance"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.8,
       "reason": "Debug during investigation phase",
-      "when": "Debug during investigation phase",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
       "yields": "debugging patterns patterns and guidance"
     }
   ],

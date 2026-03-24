@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.7.3] - 2026-03-24
+
+> **Synapse Integrity & Dialog Engineering** — Massive synapse normalization (428 types, 287 deduplication), new dialog-engineering skill, skill-building hardened with Phase 0 activation check, GCX Master audit.
+
+### Added
+
+- **Dialog Engineering Skill** — CSAR Loop (Clarify, Summarize, Act, Reflect) framework with turn design patterns, anti-patterns, complexity-calibrated guidance. Adopted from GCX Master audit findings
+- **Skill-Building Phase 0 Activation Check** — Before creating a new skill, check if the issue is simply a missing activation entry for an existing skill. Added to `skill-building.instructions.md`
+- **Staleness Warning Template** — skill-building Phase 1 now includes a staleness warning template for outdated content detection
+- **Global Knowledge Prerequisite** — skill-building now requires `/knowledge` search before creating any new skill
+- **GCX Master Audit** (`alex_docs/audits/GCX-MASTER-AUDIT-2026-03-24.md`) — Comprehensive audit of GCX_Master heir with pattern adoption recommendations
+
+### Fixed
+
+- **428 invalid synapse connection types** normalized across 133 files — mapped non-standard types (enables, triggers, validates, integrates, coordinates, capitalized variants, etc.) to the canonical 10 (implements, extends, activates, complements, uses, feeds, consumes, relates, supports, requires)
+- **287 when==reason duplications** fixed across 59 files — `when` fields rewritten to be proper trigger phrases instead of copies of `reason`
+- **dialog-engineering** registered in memory-activation index with activation keywords
+
+---
+
 ## [6.7.2] - 2026-03-19
 
 > **Memory Export & Platform Readiness** — New memory-export trifecta for portable context dumps, /troubleshoot protocol integration, Worker/Teams readiness assessment complete.

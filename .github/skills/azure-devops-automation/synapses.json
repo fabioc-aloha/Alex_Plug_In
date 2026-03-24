@@ -7,7 +7,7 @@
   "connectionCount": 5,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "devops|pipeline|ci/cd|github actions|azure pipelines",
       "target": ".github/skills/azure-architecture-patterns/SKILL.md",
       "yields": [

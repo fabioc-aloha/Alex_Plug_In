@@ -5,7 +5,7 @@
   "connections": [
     {
       "target": ".github/skills/brain-qa/SKILL.md",
-      "type": "coordinates",
+      "type": "complements",
       "strength": 0.9,
       "note": "brain-qa-heir.ps1 synced via rename pattern; Phase 7 -Fix strips master-only connections before writing heir; Phase 1 detects rename cascade breaks",
       "when": "Coordinating heir sync management with brain QA",
@@ -13,7 +13,7 @@
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "note": "Sync runs as prepublish step before packaging",
       "when": "heir sync management requires release management capabilities",
@@ -29,7 +29,7 @@
     },
     {
       "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.8,
       "note": "Sync must complete cleanly before release preflight can proceed",
       "when": "heir sync management requires release preflight capabilities",
@@ -37,7 +37,7 @@
     },
     {
       "target": ".github/skills/architecture-health/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
       "note": "Sync exclusion drift surfaces through architecture health checks",
       "when": "heir sync management provides context to architecture health",

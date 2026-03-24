@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/creative-writing/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.8,
       "description": "Comedy writing is a specialized form of creative writing with structure and timing",
       "when": "comedy writing enhances creative writing",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/ai-writing-avoidance/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.7,
       "description": "Comedy demands authentic voice — AI-generated humor lacks genuine perspective",
       "when": "comedy writing depends on AI writing avoidance",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.5,
       "description": "Prompt engineering helps mine AI for premise angles and word alternatives",
       "when": "comedy writing connects to prompt engineering",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/proactive-assistance/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.4,
       "description": "Anticipating audience reactions mirrors proactive user assistance",
       "when": "comedy writing connects to proactive assistance",

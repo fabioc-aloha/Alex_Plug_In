@@ -6,18 +6,18 @@
   "connections": [
     {
       "target": ".github/skills/self-actualization/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "reason": "Health checks feed self-actualization",
-      "when": "Health checks feed self-actualization",
+      "when": "When task involves .github/skills/self actualization/SKILL.md",
       "yields": "self actualization capabilities and setup"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
       "reason": "Health status during meditation sessions",
-      "when": "Health status during meditation sessions",
+      "when": "When task involves .github/skills/meditation/SKILL.md",
       "yields": "meditation contextual assessment"
     },
     {
@@ -25,7 +25,7 @@
       "type": "complements",
       "strength": 0.8,
       "reason": "Architecture health assesses runtime dimensions; brain-qa audits trifecta completeness",
-      "when": "Architecture health assesses runtime dimensions; brain-qa audits trifecta completeness",
+      "when": "When task involves .github/skills/brain qa/SKILL.md",
       "yields": "brain QA complementary techniques"
     }
   ],

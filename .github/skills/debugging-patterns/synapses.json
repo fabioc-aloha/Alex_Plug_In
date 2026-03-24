@@ -11,7 +11,7 @@
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "applies-to",
+      "type": "implements",
       "strength": 0.75,
       "when": "Applying debugging patterns to VS Code extension patterns domain",
       "yields": "VS Code extension patterns domain-specific context"

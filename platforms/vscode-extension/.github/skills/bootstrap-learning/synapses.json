@@ -4,42 +4,42 @@
   "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.8,
       "reason": "Bootstrap uses learning science",
-      "when": "Bootstrap uses learning science",
+      "when": "When task involves .github/skills/learning psychology/SKILL.md",
       "yields": "learning psychology patterns and guidance"
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.8,
       "reason": "Scaffolded learning manages load",
-      "when": "Scaffolded learning manages load",
+      "when": "When task involves .github/skills/cognitive load/SKILL.md",
       "yields": "cognitive load patterns and guidance"
     },
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "reason": "Learning builds trust",
-      "when": "Learning builds trust",
+      "when": "When task involves .github/skills/appropriate reliance/SKILL.md",
       "yields": "appropriate reliance capabilities and setup"
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "reason": "Bootstrap learning feeds research-first knowledge acquisition",
-      "when": "Bootstrap learning feeds research-first knowledge acquisition",
+      "when": "When task involves .github/skills/research first development/SKILL.md",
       "yields": "research first development capabilities and setup"
     },
     {
       "target": ".github/skills/muscle-memory-recognition/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "reason": "Learning identifies repetitive patterns that become automation",
-      "when": "Learning identifies repetitive patterns that become automation",
+      "when": "When task involves .github/skills/muscle memory recognition/SKILL.md",
       "yields": "muscle memory recognition capabilities and setup"
     }
   ],

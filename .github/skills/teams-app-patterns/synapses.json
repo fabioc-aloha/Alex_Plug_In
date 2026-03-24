@@ -7,7 +7,7 @@
       "type": "extends",
       "strength": 0.8,
       "reason": "Covers more than just declarative agents",
-      "when": "Covers more than just declarative agents",
+      "when": "When task involves .github/skills/m365 agent debugging/SKILL.md",
       "yields": "M365 agent debugging extended capabilities"
     },
     {
@@ -15,23 +15,23 @@
       "type": "uses",
       "strength": 0.8,
       "reason": "Teams apps need release process",
-      "when": "Teams apps need release process",
+      "when": "When task involves .github/skills/release preflight/SKILL.md",
       "yields": "release preflight patterns and guidance"
     },
     {
       "target": ".github/instructions/brand-asset-management.instructions.md",
-      "type": "references",
+      "type": "uses",
       "strength": 0.75,
       "reason": "Icon generation workflow ensures brand consistency across platforms",
-      "when": "Icon generation workflow ensures brand consistency across platforms",
+      "when": "When task involves .github/instructions/brand asset management.instructions.md",
       "yields": "brand asset management reference material"
     },
     {
       "target": ".github/skills/release-process/SKILL.md",
-      "type": "coordinates",
+      "type": "complements",
       "strength": 0.7,
       "reason": "Multi-heir release triggers M365 packaging after VS Code publish",
-      "when": "Multi-heir release triggers M365 packaging after VS Code publish",
+      "when": "When task involves .github/skills/release process/SKILL.md",
       "yields": "release process coordination protocols"
     }
   ],

@@ -7,7 +7,7 @@
   "connectionCount": 7,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "deep work|focus|flow|time block",
       "target": ".github/skills/frustration-recognition/SKILL.md",
       "yields": [

@@ -1,35 +1,35 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.0.0",
-    "skillId": "data-quality-monitoring",
-    "connections": [
-        {
-            "target": ".github/skills/observability-monitoring/SKILL.md",
-            "type": "extends",
-            "strength": 0.8,
-            "when": "data quality metrics feed into observability dashboards and alerting",
-            "yields": "quality metrics as observability signals, alerting integration"
-        },
-        {
-            "target": ".github/skills/incident-response/SKILL.md",
-            "type": "triggers",
-            "strength": 0.7,
-            "when": "CRITICAL anomalies detected that require immediate investigation",
-            "yields": "incident triage for data quality failures"
-        },
-        {
-            "target": ".github/skills/database-design/SKILL.md",
-            "type": "supports",
-            "strength": 0.65,
-            "when": "schema drift detection validates database evolution and migration safety",
-            "yields": "schema validation patterns, migration safety checks"
-        },
-        {
-            "target": ".github/skills/testing-strategies/SKILL.md",
-            "type": "complements",
-            "strength": 0.6,
-            "when": "data quality checks serve as pipeline integration tests",
-            "yields": "data pipeline test patterns, quality assertion frameworks"
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "data-quality-monitoring",
+  "connections": [
+    {
+      "target": ".github/skills/observability-monitoring/SKILL.md",
+      "type": "extends",
+      "strength": 0.8,
+      "when": "data quality metrics feed into observability dashboards and alerting",
+      "yields": "quality metrics as observability signals, alerting integration"
+    },
+    {
+      "target": ".github/skills/incident-response/SKILL.md",
+      "type": "activates",
+      "strength": 0.7,
+      "when": "CRITICAL anomalies detected that require immediate investigation",
+      "yields": "incident triage for data quality failures"
+    },
+    {
+      "target": ".github/skills/database-design/SKILL.md",
+      "type": "supports",
+      "strength": 0.65,
+      "when": "schema drift detection validates database evolution and migration safety",
+      "yields": "schema validation patterns, migration safety checks"
+    },
+    {
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "type": "complements",
+      "strength": 0.6,
+      "when": "data quality checks serve as pipeline integration tests",
+      "yields": "data pipeline test patterns, quality assertion frameworks"
+    }
+  ]
 }

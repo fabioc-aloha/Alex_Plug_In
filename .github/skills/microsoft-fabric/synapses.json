@@ -7,14 +7,14 @@
   "connections": [
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "type": "follows",
+      "type": "uses",
       "strength": 0.9,
       "when": "Working with Fabric APIs",
       "yields": "Long-running operation patterns, polling strategies"
     },
     {
       "target": ".github/skills/infrastructure-as-code/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.7,
       "when": "Automating Fabric deployment",
       "yields": "IaC templates, automation patterns"
@@ -35,7 +35,7 @@
     },
     {
       "target": ".github/skills/architecture-audit/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "when": "Auditing Fabric workspaces",
       "yields": "Scanner API patterns, inventory tools"

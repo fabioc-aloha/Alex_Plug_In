@@ -8,7 +8,7 @@
       "strength": 0.9,
       "type": "requires",
       "reason": "IaC needs security scanning (tfsec, checkov)",
-      "when": "IaC needs security scanning (tfsec, checkov)",
+      "when": "When task involves .github/skills/security review/SKILL.md",
       "yields": "security review required patterns and guidance"
     },
     {
@@ -16,7 +16,7 @@
       "strength": 0.9,
       "type": "requires",
       "reason": "IaC follows GitOps patterns with PRs and reviews",
-      "when": "IaC follows GitOps patterns with PRs and reviews",
+      "when": "When task involves .github/skills/git workflow/SKILL.md",
       "yields": "git workflow required patterns and guidance"
     },
     {
@@ -24,7 +24,7 @@
       "strength": 0.7,
       "type": "complements",
       "reason": "IaC needs unit and integration testing",
-      "when": "IaC needs unit and integration testing",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies complementary techniques"
     },
     {
@@ -32,7 +32,7 @@
       "strength": 0.3,
       "type": "complements",
       "reason": "IaC provisions infrastructure for APIs",
-      "when": "IaC provisions infrastructure for APIs",
+      "when": "When task involves .github/skills/api design/SKILL.md",
       "yields": "API design complementary techniques"
     },
     {
@@ -40,7 +40,7 @@
       "strength": 0.3,
       "type": "complements",
       "reason": "MCP servers may need cloud infrastructure",
-      "when": "MCP servers may need cloud infrastructure",
+      "when": "When task involves .github/skills/mcp development/SKILL.md",
       "yields": "MCP development complementary techniques"
     }
   ],

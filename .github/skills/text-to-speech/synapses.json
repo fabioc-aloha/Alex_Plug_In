@@ -23,14 +23,14 @@
     },
     {
       "target": ".github/skills/academic-research/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "when": "Audio reading research papers",
       "yields": "Summarization option for long documents"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.3,
       "when": "Reading meditation summaries aloud",
       "yields": "Audio reflection support"
@@ -44,7 +44,7 @@
     },
     {
       "target": ".github/skills/gamma-presentations/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "when": "Rehearsing pitch content",
       "yields": "Audio playback for delivery practice"
@@ -65,7 +65,7 @@
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
-      "type": "informed-by",
+      "type": "consumes",
       "strength": 0.3,
       "when": "TTS hotfix release",
       "yields": "PAT-based publishing protocol"

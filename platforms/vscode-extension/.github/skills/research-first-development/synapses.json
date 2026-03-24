@@ -7,7 +7,7 @@
       "type": "extends",
       "strength": 0.85,
       "reason": "Research-first uses bootstrap learning for unknown domains",
-      "when": "Research-first uses bootstrap learning for unknown domains",
+      "when": "When task involves .github/skills/bootstrap learning/SKILL.md",
       "yields": "bootstrap learning extended capabilities"
     },
     {
@@ -15,7 +15,7 @@
       "type": "extends",
       "strength": 0.85,
       "reason": "Adds knowledge layer before file scaffolding",
-      "when": "Adds knowledge layer before file scaffolding",
+      "when": "When task involves .github/skills/project scaffolding/SKILL.md",
       "yields": "project scaffolding extended capabilities"
     },
     {
@@ -23,15 +23,15 @@
       "type": "requires",
       "strength": 0.95,
       "reason": "Skills extracted from research follow skill-building quality gates",
-      "when": "Skills extracted from research follow skill-building quality gates",
+      "when": "When task involves .github/skills/skill building/SKILL.md",
       "yields": "skill building required patterns and guidance"
     },
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.85,
       "reason": "Research generates knowledge that synthesis organizes cross-project",
-      "when": "Research generates knowledge that synthesis organizes cross-project",
+      "when": "When task involves .github/skills/knowledge synthesis/SKILL.md",
       "yields": "knowledge synthesis integration patterns"
     },
     {
@@ -39,7 +39,7 @@
       "type": "feeds",
       "strength": 0.8,
       "reason": "Gap analysis creates skills that SSO selects from during execution",
-      "when": "Gap analysis creates skills that SSO selects from during execution",
+      "when": "When task involves .github/instructions/skill selection optimization.instructions.md",
       "yields": "skill selection optimization downstream processing"
     },
     {
@@ -47,7 +47,7 @@
       "type": "implements",
       "strength": 0.95,
       "reason": "Procedural memory encoding of the research-first methodology",
-      "when": "Procedural memory encoding of the research-first methodology",
+      "when": "When task involves .github/instructions/research first workflow.instructions.md",
       "yields": "research first workflow implementation steps"
     },
     {
@@ -55,15 +55,15 @@
       "type": "activates",
       "strength": 0.9,
       "reason": "Interactive /gapanalysis command implements 4D gap analysis",
-      "when": "Interactive /gapanalysis command implements 4D gap analysis",
+      "when": "When task involves .github/prompts/gapanalysis.prompt.md",
       "yields": "gapanalysis interactive workflow"
     },
     {
       "target": ".github/skills/north-star/SKILL.md",
-      "type": "aligns",
+      "type": "complements",
       "strength": 0.85,
       "reason": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping",
-      "when": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping",
+      "when": "When task involves .github/skills/north star/SKILL.md",
       "yields": "north star alignment criteria"
     }
   ],

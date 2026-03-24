@@ -4,18 +4,18 @@
   "connections": [
     {
       "target": ".github/skills/correax-brand/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.8,
       "reason": "CorreaX design tokens provide the color system, typography, and component patterns for all UI decisions",
-      "when": "CorreaX design tokens provide the color system, typography, and component patterns for all UI decisions",
+      "when": "When task involves .github/skills/correax brand/SKILL.md",
       "yields": "correax brand coordination protocols"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.85,
       "reason": "Accessibility audits are part of code review quality gates",
-      "when": "Accessibility audits are part of code review quality gates",
+      "when": "When task involves .github/skills/code review/SKILL.md",
       "yields": "code review integration patterns"
     },
     {
@@ -23,31 +23,31 @@
       "type": "complements",
       "strength": 0.7,
       "reason": "Visual identity consistent with accessibility standards",
-      "when": "Visual identity consistent with accessibility standards",
+      "when": "When task involves .github/skills/graphic design/SKILL.md",
       "yields": "graphic design complementary techniques"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.8,
       "reason": "Automated accessibility testing validates WCAG compliance",
-      "when": "Automated accessibility testing validates WCAG compliance",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies quality checks and validation"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "applies-to",
+      "type": "implements",
       "strength": 0.75,
       "reason": "Webview UI patterns must follow accessibility standards",
-      "when": "Webview UI patterns must follow accessibility standards",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
       "yields": "VS Code extension patterns domain-specific context"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.5,
       "reason": "Diagram accessibility (alt text, semantic structure)",
-      "when": "Diagram accessibility (alt text, semantic structure)",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid quality checks and validation"
     },
     {
@@ -55,7 +55,7 @@
       "type": "implements",
       "strength": 0.95,
       "reason": "Instruction file contains proven UI Audit Procedure (three-pass: compliance + content + cross-tab consistency) and design system enforcement rules",
-      "when": "Instruction file contains proven UI Audit Procedure (three-pass: compliance + content + cross-tab consistency) and design system enforcement rules",
+      "when": "When task involves .github/instructions/ui ux design.instructions.md",
       "yields": "UI UX design implementation steps"
     }
   ],

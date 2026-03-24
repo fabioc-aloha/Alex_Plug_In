@@ -10,7 +10,7 @@
       "type": "extends",
       "strength": 0.8,
       "reason": "RCA goes deeper than debugging",
-      "when": "RCA goes deeper than debugging",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
       "yields": "debugging patterns extended capabilities"
     },
     {
@@ -18,15 +18,15 @@
       "type": "complements",
       "strength": 0.7,
       "reason": "RCA follows incident resolution",
-      "when": "RCA follows incident resolution",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
       "yields": "incident response complementary techniques"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
       "reason": "RCA reveals what recovery is needed",
-      "when": "RCA reveals what recovery is needed",
+      "when": "When task involves .github/skills/error recovery patterns/SKILL.md",
       "yields": "error recovery patterns contextual assessment"
     }
   ],

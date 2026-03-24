@@ -7,7 +7,7 @@
   "connectionCount": 6,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "azure|cloud|bicep|terraform|well-architected",
       "target": ".github/skills/azure-deployment-operations/SKILL.md",
       "yields": [

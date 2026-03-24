@@ -18,7 +18,7 @@
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.8,
       "when": "prompt engineering enhances anti hallucination",
       "yields": "anti hallucination enhanced capabilities"
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.6,
       "note": "API design principles apply to prompt interfaces",
       "when": "prompt engineering provides context to API design",

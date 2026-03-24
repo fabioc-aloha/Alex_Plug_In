@@ -7,7 +7,7 @@
       "type": "supports",
       "strength": 0.85,
       "reason": "Diagrams enhance publications",
-      "when": "Diagrams enhance publications",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research supporting context"
     },
     {
@@ -15,15 +15,15 @@
       "type": "requires",
       "strength": 0.8,
       "reason": "Mermaid must be in valid markdown",
-      "when": "Mermaid must be in valid markdown",
+      "when": "When task involves .github/skills/lint clean markdown/SKILL.md",
       "yields": "lint clean markdown required patterns and guidance"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.75,
       "reason": "Native VS Code rendering since 1.109",
-      "when": "Native VS Code rendering since 1.109",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
       "yields": "VS Code extension patterns integration patterns"
     },
     {
@@ -31,15 +31,15 @@
       "type": "requires",
       "strength": 0.9,
       "reason": "Color theory, accessibility, contrast principles for diagram styling",
-      "when": "Color theory, accessibility, contrast principles for diagram styling",
+      "when": "When task involves .github/skills/graphic design/SKILL.md",
       "yields": "graphic design required patterns and guidance"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.6,
       "reason": "RCA methodology systematically identifies parser-specific pitfalls across diagram types",
-      "when": "RCA methodology systematically identifies parser-specific pitfalls across diagram types",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
       "yields": "root cause analysis quality checks and validation"
     },
     {

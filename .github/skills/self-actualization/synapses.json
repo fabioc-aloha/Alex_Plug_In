@@ -7,7 +7,7 @@
       "type": "implements",
       "strength": 0.95,
       "reason": "Trifecta sibling: procedural self-actualization protocol",
-      "when": "Trifecta sibling: procedural self-actualization protocol",
+      "when": "When task involves .github/instructions/self actualization.instructions.md",
       "yields": "self actualization implementation steps"
     },
     {
@@ -15,7 +15,7 @@
       "type": "activates",
       "strength": 0.95,
       "reason": "Trifecta sibling: /selfactualize interactive workflow",
-      "when": "Trifecta sibling: /selfactualize interactive workflow",
+      "when": "When task involves .github/prompts/selfactualize.prompt.md",
       "yields": "selfactualize interactive workflow"
     },
     {
@@ -23,7 +23,7 @@
       "type": "requires",
       "strength": 0.9,
       "reason": "Health check first",
-      "when": "Health check first",
+      "when": "When task involves .github/skills/brain qa/SKILL.md",
       "yields": "brain QA required patterns and guidance"
     },
     {
@@ -31,23 +31,23 @@
       "type": "extends",
       "strength": 0.8,
       "reason": "Deeper than meditation",
-      "when": "Deeper than meditation",
+      "when": "When task involves .github/skills/meditation/SKILL.md",
       "yields": "meditation extended capabilities"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
-      "type": "triggers",
+      "type": "activates",
       "strength": 0.65,
       "reason": "Actualization leads to refinement",
-      "when": "Actualization leads to refinement",
+      "when": "When task involves .github/skills/architecture refinement/SKILL.md",
       "yields": "architecture refinement activation and procedures"
     },
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
-      "type": "produces",
+      "type": "feeds",
       "strength": 0.75,
       "reason": "Deep insights synthesized",
-      "when": "Deep insights synthesized",
+      "when": "When task involves .github/skills/knowledge synthesis/SKILL.md",
       "yields": "knowledge synthesis output artifacts"
     }
   ],

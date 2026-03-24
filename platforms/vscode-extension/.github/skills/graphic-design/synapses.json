@@ -7,7 +7,7 @@
       "type": "complements",
       "strength": 0.85,
       "target": ".github/skills/creative-writing/SKILL.md",
-      "when": "Visual storytelling and narrative design",
+      "when": "When task involves .github/skills/creative writing/SKILL.md",
       "yields": "creative writing complementary techniques"
     },
     {
@@ -15,15 +15,15 @@
       "type": "extends",
       "strength": 0.9,
       "target": ".github/skills/markdown-mermaid/SKILL.md",
-      "when": "Color theory, GitHub Pastel Palette v2, WCAG contrast, and semantic color mapping for Mermaid diagram styling",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid extended capabilities"
     },
     {
       "reason": "Visual information processing and hierarchy",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.65,
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "when": "Visual information processing and hierarchy",
+      "when": "When task involves .github/skills/cognitive load/SKILL.md",
       "yields": "cognitive load patterns and guidance"
     },
     {
@@ -31,7 +31,7 @@
       "type": "complements",
       "strength": 0.65,
       "target": ".github/skills/ascii-art-alignment/SKILL.md",
-      "when": "Text-based visual design and alignment",
+      "when": "When task involves .github/skills/ascii art alignment/SKILL.md",
       "yields": "ascii art alignment complementary techniques"
     },
     {
@@ -39,7 +39,7 @@
       "type": "complements",
       "strength": 0.7,
       "target": ".github/skills/ui-ux-design/SKILL.md",
-      "when": "Visual identity consistent with accessibility standards and WCAG compliance",
+      "when": "When task involves .github/skills/ui ux design/SKILL.md",
       "yields": "UI UX design complementary techniques"
     },
     {
@@ -47,7 +47,7 @@
       "type": "supports",
       "strength": 0.4,
       "target": ".github/skills/academic-research/SKILL.md",
-      "when": "Document visual design and layout",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research supporting context"
     },
     {
@@ -55,7 +55,7 @@
       "type": "complements",
       "strength": 0.75,
       "target": ".github/skills/image-handling/SKILL.md",
-      "when": "AI-generated illustrations, model selection, and image format handling",
+      "when": "When task involves .github/skills/image handling/SKILL.md",
       "yields": "image handling complementary techniques"
     },
     {

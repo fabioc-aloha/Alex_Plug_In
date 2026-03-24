@@ -10,7 +10,7 @@
       "type": "complements",
       "strength": 0.7,
       "reason": "Preview brand assets inline in terminal",
-      "when": "Preview brand assets inline in terminal",
+      "when": "When task involves .github/skills/brand asset management/SKILL.md",
       "yields": "brand asset management complementary techniques"
     },
     {
@@ -18,7 +18,7 @@
       "type": "complements",
       "strength": 0.65,
       "reason": "Terminal preview after image generation",
-      "when": "Terminal preview after image generation",
+      "when": "When task involves .github/skills/image handling/SKILL.md",
       "yields": "image handling complementary techniques"
     },
     {
@@ -26,7 +26,7 @@
       "type": "uses",
       "strength": 0.6,
       "reason": "VS Code terminal settings configuration",
-      "when": "VS Code terminal settings configuration",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
       "yields": "VS Code extension patterns patterns and guidance"
     }
   ],

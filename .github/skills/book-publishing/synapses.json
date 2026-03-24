@@ -6,26 +6,26 @@
   "connections": [
     {
       "target": ".github/skills/md-to-word/SKILL.md",
-      "type": "sibling",
+      "type": "complements",
       "strength": 0.8,
       "reason": "Similar document export pipeline but for KDP/print-ready output",
-      "when": "Similar document export pipeline but for KDP/print-ready output",
+      "when": "When task involves .github/skills/md to word/SKILL.md",
       "yields": "Markdown to word trifecta patterns and guidance"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
-      "type": "depends-on",
+      "type": "requires",
       "strength": 0.85,
       "reason": "Diagrams in books must follow ATACCU quality standards",
-      "when": "Diagrams in books must follow ATACCU quality standards",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
       "yields": "markdown mermaid required patterns and guidance"
     },
     {
       "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.5,
       "reason": "Cover art and visual assets for book publishing",
-      "when": "Cover art and visual assets for book publishing",
+      "when": "When task involves .github/skills/ai generated readme banners/SKILL.md",
       "yields": "AI generated readme banners related patterns and guidance"
     }
   ],

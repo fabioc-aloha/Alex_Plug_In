@@ -8,21 +8,21 @@
     {
       "target": ".github/skills/git-workflow/SKILL.md",
       "strength": 0.9,
-      "type": "enables",
+      "type": "supports",
       "when": "Setting up Git remote or worktree for Fabric sync",
       "yields": "Worktree creation, remote management commands"
     },
     {
       "target": ".github/skills/microsoft-fabric/SKILL.md",
       "strength": 0.9,
-      "type": "integrates",
+      "type": "complements",
       "when": "Working with Fabric workspace APIs or configuration",
       "yields": "Workspace patterns, API endpoints, authentication"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
       "strength": 0.7,
-      "type": "enables",
+      "type": "supports",
       "when": "Handling Fabric REST API tokens or verification",
       "yields": "Token refresh patterns, error handling"
     },

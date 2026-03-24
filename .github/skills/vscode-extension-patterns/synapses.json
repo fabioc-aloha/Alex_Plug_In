@@ -7,10 +7,10 @@
   "connections": [
     {
       "target": ".github/instructions/release-management.instructions.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "reason": "Publishing workflow",
-      "when": "Publishing workflow",
+      "when": "When task involves .github/instructions/release management.instructions.md",
       "yields": "release management capabilities and setup"
     },
     {
@@ -18,7 +18,7 @@
       "type": "implements",
       "strength": 0.9,
       "reason": "Marketplace publishing deployment patterns",
-      "when": "Marketplace publishing deployment patterns",
+      "when": "When task involves .github/instructions/vscode marketplace publishing.instructions.md",
       "yields": "VS Code marketplace publishing implementation steps"
     },
     {
@@ -26,7 +26,7 @@
       "type": "implements",
       "strength": 0.85,
       "reason": "VS Code heir patterns",
-      "when": "VS Code heir patterns",
+      "when": "When task involves .github/skills/heir sync management/SKILL.md",
       "yields": "heir sync management implementation steps"
     },
     {
@@ -34,7 +34,7 @@
       "type": "implements",
       "strength": 0.8,
       "reason": "CSP, SecretStorage, telemetry compliance",
-      "when": "CSP, SecretStorage, telemetry compliance",
+      "when": "When task involves .github/skills/security review/SKILL.md",
       "yields": "security review implementation steps"
     },
     {
@@ -42,7 +42,7 @@
       "type": "extends",
       "strength": 0.75,
       "reason": "Enterprise patterns for Graph, Azure AD auth",
-      "when": "Enterprise patterns for Graph, Azure AD auth",
+      "when": "When task involves .github/skills/enterprise integration/SKILL.md",
       "yields": "enterprise integration extended capabilities"
     },
     {
@@ -50,7 +50,7 @@
       "type": "uses",
       "strength": 0.7,
       "reason": "TDZ debugging and production build troubleshooting",
-      "when": "TDZ debugging and production build troubleshooting",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
       "yields": "root cause analysis patterns and guidance"
     },
     {
@@ -58,23 +58,23 @@
       "type": "implements",
       "strength": 0.75,
       "reason": "Webview UI patterns must follow accessibility standards",
-      "when": "Webview UI patterns must follow accessibility standards",
+      "when": "When task involves .github/skills/ui ux design/SKILL.md",
       "yields": "UI UX design implementation steps"
     },
     {
       "target": ".github/skills/brand-asset-management/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.7,
       "reason": "Avatar system uses brand assets (90 images across personas, ages, agents, states)",
-      "when": "Avatar system uses brand assets (90 images across personas, ages, agents, states)",
+      "when": "When task involves .github/skills/brand asset management/SKILL.md",
       "yields": "brand asset management coordination protocols"
     },
     {
       "target": ".github/skills/secrets-management/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.7,
       "reason": "SecretStorage API, VSCE secret scanner avoidance during packaging",
-      "when": "SecretStorage API, VSCE secret scanner avoidance during packaging",
+      "when": "When task involves .github/skills/secrets management/SKILL.md",
       "yields": "secrets management coordination protocols"
     },
     {
@@ -82,12 +82,12 @@
       "type": "uses",
       "strength": 0.8,
       "reason": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization",
-      "when": "Webview decomposition (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization",
+      "when": "When task involves .github/skills/refactoring patterns/SKILL.md",
       "yields": "refactoring patterns patterns and guidance"
     },
     {
       "target": ".github/skills/localization/SKILL.md",
-      "type": "applied-by",
+      "type": "implements",
       "strength": 0.7,
       "when": "localization applies VS Code extension patterns",
       "yields": "localization application context"

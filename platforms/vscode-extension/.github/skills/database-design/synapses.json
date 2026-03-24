@@ -7,7 +7,7 @@
   "connections": [
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.85,
       "note": "Database schema shapes API data contracts",
       "when": "database design provides context to API design",
@@ -39,7 +39,7 @@
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
-      "type": "analogousDomain",
+      "type": "relates",
       "strength": 0.7,
       "note": "Schema migrations parallel code refactoring",
       "when": "database design applies analogous patterns from refactoring patterns",

@@ -7,15 +7,15 @@
       "type": "requires",
       "strength": 0.9,
       "reason": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation",
-      "when": "Localization requires comprehensive testing: pseudo-localization, encoding tests, layout tests, LQA automation",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies required patterns and guidance"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
-      "type": "impacts",
+      "type": "relates",
       "strength": 0.85,
       "reason": "i18n architecture impacts entire application structure: middleware, routing, data models",
-      "when": "i18n architecture impacts entire application structure: middleware, routing, data models",
+      "when": "When task involves .github/skills/architecture refinement/SKILL.md",
       "yields": "architecture refinement impact assessment"
     },
     {
@@ -23,7 +23,7 @@
       "type": "complements",
       "strength": 0.7,
       "reason": "Multilingual content strategy, translation workflows, terminology management",
-      "when": "Multilingual content strategy, translation workflows, terminology management",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research complementary techniques"
     },
     {
@@ -31,7 +31,7 @@
       "type": "requires",
       "strength": 0.65,
       "reason": "Localization projects require phased rollouts, translation vendor coordination",
-      "when": "Localization projects require phased rollouts, translation vendor coordination",
+      "when": "When task involves .github/skills/project management/SKILL.md",
       "yields": "project management required patterns and guidance"
     },
     {
@@ -39,15 +39,15 @@
       "type": "complements",
       "strength": 0.5,
       "reason": "RTL layout considerations, typography for different scripts",
-      "when": "RTL layout considerations, typography for different scripts",
+      "when": "When task involves .github/skills/graphic design/SKILL.md",
       "yields": "graphic design complementary techniques"
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.5,
       "reason": "Language switching adds cognitive overhead; minimize friction",
-      "when": "Language switching adds cognitive overhead; minimize friction",
+      "when": "When task involves .github/skills/cognitive load/SKILL.md",
       "yields": "cognitive load patterns and guidance"
     },
     {
@@ -55,15 +55,15 @@
       "type": "supports",
       "strength": 0.5,
       "reason": "Review for i18n issues: hardcoded strings, concatenation, date formats",
-      "when": "Review for i18n issues: hardcoded strings, concatenation, date formats",
+      "when": "When task involves .github/skills/code review/SKILL.md",
       "yields": "code review supporting context"
     },
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
-      "type": "mirrors",
+      "type": "relates",
       "strength": 0.75,
       "reason": "Dialect inheritance mirrors OOP inheritance: base dialect → derived variant with overrides",
-      "when": "Dialect inheritance mirrors OOP inheritance: base dialect → derived variant with overrides",
+      "when": "When task involves .github/skills/refactoring patterns/SKILL.md",
       "yields": "refactoring patterns mirrored patterns"
     },
     {

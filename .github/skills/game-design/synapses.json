@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/ui-ux-design/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.8,
       "description": "Game UI/UX requires specialized interaction design for real-time systems",
       "when": "game design enhances UI UX design",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.6,
       "description": "Game testing includes playtesting methodology beyond unit/integration testing",
       "when": "game design connects to testing strategies",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/performance-profiling/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Games have strict performance budgets (16ms frame time) requiring deep profiling",
       "when": "game design connects to performance profiling",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.6,
       "description": "Narrative design and quest writing employ creative writing techniques",
       "when": "game design connects to creative writing",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.5,
       "description": "Game bugs are notoriously complex (state machines, physics, multiplayer sync)",
       "when": "game design connects to debugging patterns",

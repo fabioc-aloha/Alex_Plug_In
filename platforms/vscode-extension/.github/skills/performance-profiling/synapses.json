@@ -23,7 +23,7 @@
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "analogousDomain",
+      "type": "relates",
       "strength": 0.8,
       "note": "Performance debugging uses similar systematic approaches",
       "when": "performance profiling applies analogous patterns from debugging patterns",

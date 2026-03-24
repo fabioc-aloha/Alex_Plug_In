@@ -7,7 +7,7 @@
       "type": "implements",
       "strength": 0.85,
       "reason": "M365 heir debugging",
-      "when": "M365 heir debugging",
+      "when": "When task involves .github/skills/heir sync management/SKILL.md",
       "yields": "heir sync management implementation steps"
     },
     {
@@ -15,7 +15,7 @@
       "type": "extends",
       "strength": 0.85,
       "reason": "Shared MCP tools and @m365agents participant",
-      "when": "Shared MCP tools and @m365agents participant",
+      "when": "When working with .github/skills/teams app patterns/SKILL.md patterns",
       "yields": "teams app patterns extended capabilities"
     }
   ],

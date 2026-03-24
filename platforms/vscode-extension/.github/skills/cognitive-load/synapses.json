@@ -4,10 +4,10 @@
   "connections": [
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.8,
       "reason": "CLT is core learning psychology",
-      "when": "CLT is core learning psychology",
+      "when": "When task involves .github/skills/learning psychology/SKILL.md",
       "yields": "learning psychology patterns and guidance"
     },
     {
@@ -15,7 +15,7 @@
       "type": "supports",
       "strength": 0.7,
       "reason": "Managing load builds trust",
-      "when": "Managing load builds trust",
+      "when": "When task involves .github/skills/appropriate reliance/SKILL.md",
       "yields": "appropriate reliance supporting context"
     },
     {
@@ -23,7 +23,7 @@
       "type": "implements",
       "strength": 0.9,
       "reason": "Scaffolding is bootstrap learning",
-      "when": "Scaffolding is bootstrap learning",
+      "when": "When task involves .github/instructions/bootstrap learning.instructions.md",
       "yields": "bootstrap learning implementation steps"
     }
   ],

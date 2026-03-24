@@ -1,47 +1,47 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.0.0",
-    "skillId": "azure-openai-patterns",
-    "connections": [
-        {
-            "target": ".github/skills/content-safety-implementation/SKILL.md",
-            "type": "integrates",
-            "strength": 0.8,
-            "reason": "Azure OpenAI content filters are a layer in the safety pipeline",
-            "when": "Implementing content safety for Azure OpenAI-powered apps",
-            "yields": "safety-integrated Azure OpenAI implementation"
-        },
-        {
-            "target": ".github/skills/prompt-engineering/SKILL.md",
-            "type": "suggests",
-            "strength": 0.7,
-            "reason": "Prompt quality directly impacts token efficiency and output quality",
-            "when": "Optimizing prompts for Azure OpenAI function calling",
-            "yields": "token-efficient prompt design"
-        },
-        {
-            "target": ".github/skills/mcp-development/SKILL.md",
-            "type": "integrates",
-            "strength": 0.6,
-            "reason": "MCP servers may call Azure OpenAI as a backend",
-            "when": "Building MCP tools that use Azure OpenAI",
-            "yields": "MCP-integrated Azure OpenAI patterns"
-        },
-        {
-            "target": ".github/skills/sse-streaming/SKILL.md",
-            "type": "integrates",
-            "strength": 0.75,
-            "reason": "Streaming Azure OpenAI responses via SSE",
-            "when": "Building real-time streaming from Azure OpenAI to client",
-            "yields": "streamed Azure OpenAI responses"
-        },
-        {
-            "target": ".github/skills/secrets-management/SKILL.md",
-            "type": "validates",
-            "strength": 0.65,
-            "reason": "API keys and endpoints must be securely managed",
-            "when": "Configuring Azure OpenAI credentials",
-            "yields": "secure credential management for AI services"
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "azure-openai-patterns",
+  "connections": [
+    {
+      "target": ".github/skills/content-safety-implementation/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "reason": "Azure OpenAI content filters are a layer in the safety pipeline",
+      "when": "Implementing content safety for Azure OpenAI-powered apps",
+      "yields": "safety-integrated Azure OpenAI implementation"
+    },
+    {
+      "target": ".github/skills/prompt-engineering/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "reason": "Prompt quality directly impacts token efficiency and output quality",
+      "when": "Optimizing prompts for Azure OpenAI function calling",
+      "yields": "token-efficient prompt design"
+    },
+    {
+      "target": ".github/skills/mcp-development/SKILL.md",
+      "type": "complements",
+      "strength": 0.6,
+      "reason": "MCP servers may call Azure OpenAI as a backend",
+      "when": "Building MCP tools that use Azure OpenAI",
+      "yields": "MCP-integrated Azure OpenAI patterns"
+    },
+    {
+      "target": ".github/skills/sse-streaming/SKILL.md",
+      "type": "complements",
+      "strength": 0.75,
+      "reason": "Streaming Azure OpenAI responses via SSE",
+      "when": "Building real-time streaming from Azure OpenAI to client",
+      "yields": "streamed Azure OpenAI responses"
+    },
+    {
+      "target": ".github/skills/secrets-management/SKILL.md",
+      "type": "supports",
+      "strength": 0.65,
+      "reason": "API keys and endpoints must be securely managed",
+      "when": "Configuring Azure OpenAI credentials",
+      "yields": "secure credential management for AI services"
+    }
+  ]
 }

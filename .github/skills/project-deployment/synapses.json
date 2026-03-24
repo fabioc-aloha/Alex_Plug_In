@@ -11,7 +11,7 @@
     },
     {
       "target": ".github/skills/infrastructure-as-code/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.7,
       "when": "project deployment enhances infrastructure as code",
       "yields": "infrastructure as code enhanced capabilities"

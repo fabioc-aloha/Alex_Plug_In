@@ -6,7 +6,7 @@
   "lastUpdated": "2026-02-10",
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "dissertation|defense|thesis|viva",
       "target": ".github/skills/literature-review/SKILL.md",
       "yields": [

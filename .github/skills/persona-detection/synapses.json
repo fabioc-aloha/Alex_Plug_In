@@ -6,7 +6,7 @@
   "connections": [
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.85,
       "note": "Persona detection ships to heir via inheritance model",
       "when": "Integrating heir sync management into persona detection workflow",
@@ -14,7 +14,7 @@
     },
     {
       "target": ".github/instructions/alex-core.instructions.md",
-      "type": "references",
+      "type": "uses",
       "strength": 0.7,
       "note": "Active Context persona field updated by detection chain",
       "when": "persona detection references alex core",
@@ -22,7 +22,7 @@
     },
     {
       "target": ".github/skills/release-process/SKILL.md",
-      "type": "validates",
+      "type": "supports",
       "strength": 0.7,
       "note": "Persona detection tested during pre-publish",
       "when": "Verifying release process quality or compliance",
@@ -30,7 +30,7 @@
     },
     {
       "target": ".github/skills/brand-asset-management/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.7,
       "note": "BannerNoun action phrasing and persona avatar mappings are brand decisions",
       "when": "Coordinating with brand asset management",
@@ -38,7 +38,7 @@
     },
     {
       "target": ".github/skills/north-star/SKILL.md",
-      "type": "coordinates-with",
+      "type": "complements",
       "strength": 0.8,
       "note": "North Star /northstar define sets Persona: field; detection reads it as P5",
       "when": "Coordinating with north star",

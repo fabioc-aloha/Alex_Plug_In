@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/pii-privacy-regulations/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.9,
       "description": "Healthcare has the strictest PII/PHI regulations (HIPAA, HITECH)",
       "when": "healthcare informatics enhances PII privacy regulations",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.9,
       "description": "Hallucinated medical information can cause patient harm",
       "when": "healthcare informatics depends on anti hallucination",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/citation-management/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.6,
       "description": "Clinical evidence requires proper citation of guidelines and studies",
       "when": "healthcare informatics connects to citation management",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.6,
       "description": "Clinical research methodology aligns with research-first principles",
       "when": "healthcare informatics connects to research first development",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.8,
       "description": "Healthcare AI requires the highest standard of responsible AI practices",
       "when": "healthcare informatics enhances privacy responsible AI",

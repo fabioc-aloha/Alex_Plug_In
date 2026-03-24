@@ -6,18 +6,18 @@
   "connections": [
     {
       "target": ".github/instructions/azure-enterprise-deployment.instructions.md",
-      "type": "depends-on",
+      "type": "requires",
       "strength": 0.95,
       "reason": "Enterprise deployment patterns and pre-deployment validation",
-      "when": "Enterprise deployment patterns and pre-deployment validation",
+      "when": "When task involves .github/instructions/azure enterprise deployment.instructions.md",
       "yields": "azure enterprise deployment required rules and guidelines"
     },
     {
       "target": ".github/skills/secrets-management/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.7,
       "reason": "Azure deployments require secure credential handling",
-      "when": "Azure deployments require secure credential handling",
+      "when": "When task involves .github/skills/secrets management/SKILL.md",
       "yields": "secrets management related patterns and guidance"
     }
   ],

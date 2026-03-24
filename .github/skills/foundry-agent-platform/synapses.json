@@ -42,14 +42,14 @@
     },
     {
       "target": ".github/skills/infrastructure-as-code/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.7,
       "when": "Deploying Foundry resources via Bicep/Terraform",
       "yields": "IaC templates, deployment automation, resource provisioning"
     },
     {
       "target": ".github/skills/enterprise-integration/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.75,
       "when": "Publishing agents to enterprise channels (Teams, M365)",
       "yields": "Enterprise auth, SSO, compliance, multi-tenant patterns"

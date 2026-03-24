@@ -7,7 +7,7 @@
       "type": "extends",
       "strength": 0.9,
       "reason": "Deep dive into regulatory compliance aspects",
-      "when": "Deep dive into regulatory compliance aspects",
+      "when": "When task involves .github/skills/privacy responsible ai/SKILL.md",
       "yields": "privacy responsible AI extended capabilities"
     },
     {
@@ -15,39 +15,39 @@
       "type": "complements",
       "strength": 0.75,
       "reason": "Security enables privacy compliance",
-      "when": "Security enables privacy compliance",
+      "when": "When task involves .github/skills/security review/SKILL.md",
       "yields": "security review complementary techniques"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.7,
       "reason": "Privacy review checklist for code reviews",
-      "when": "Privacy review checklist for code reviews",
+      "when": "When task involves .github/skills/code review/SKILL.md",
       "yields": "code review contextual assessment"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.8,
       "reason": "Data breach notification requirements",
-      "when": "Data breach notification requirements",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
       "yields": "incident response contextual assessment"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.6,
       "reason": "Privacy testing and PII detection in test data",
-      "when": "Privacy testing and PII detection in test data",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies contextual assessment"
     },
     {
       "target": ".github/skills/architecture-audit/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.75,
       "reason": "Privacy by design architectural patterns",
-      "when": "Privacy by design architectural patterns",
+      "when": "When task involves .github/skills/architecture audit/SKILL.md",
       "yields": "architecture audit contextual assessment"
     }
   ],

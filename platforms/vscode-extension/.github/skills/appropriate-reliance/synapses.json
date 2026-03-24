@@ -5,26 +5,26 @@
   "connections": [
     {
       "target": ".github/instructions/bootstrap-learning.instructions.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
       "reason": "Appropriate reliance is prerequisite for effective bootstrap learning",
-      "when": "Appropriate reliance is prerequisite for effective bootstrap learning",
+      "when": "When task involves .github/instructions/bootstrap learning.instructions.md",
       "yields": "bootstrap learning capabilities and setup"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.7,
       "reason": "Mutual challenge improves architecture documentation quality",
-      "when": "Mutual challenge improves architecture documentation quality",
+      "when": "When task involves .github/skills/architecture refinement/SKILL.md",
       "yields": "architecture refinement enhanced capabilities"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.7,
       "reason": "Grounded in learning science and trust calibration research",
-      "when": "Grounded in learning science and trust calibration research",
+      "when": "When task involves .github/skills/learning psychology/SKILL.md",
       "yields": "learning psychology related patterns and guidance"
     },
     {
@@ -32,7 +32,7 @@
       "type": "implements",
       "strength": 0.9,
       "reason": "Proactive collaboration is core to Alex personality",
-      "when": "Proactive collaboration is core to Alex personality",
+      "when": "When task involves .github/instructions/alex identity integration.instructions.md",
       "yields": "alex identity integration implementation steps"
     },
     {
@@ -40,7 +40,7 @@
       "type": "complements",
       "strength": 0.75,
       "reason": "Trust calibration is core to responsible AI deployment",
-      "when": "Trust calibration is core to responsible AI deployment",
+      "when": "When task involves .github/skills/privacy responsible ai/SKILL.md",
       "yields": "privacy responsible AI complementary techniques"
     }
   ],

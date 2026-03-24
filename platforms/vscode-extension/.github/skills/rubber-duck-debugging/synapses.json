@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/socratic-questioning/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.9,
       "description": "Both are thinking partnership approaches",
       "when": "rubber duck debugging connects to socratic questioning",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.9,
       "description": "Rubber duck enhances systematic debugging",
       "when": "rubber duck debugging enhances debugging patterns",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "Supports",
+      "type": "supports",
       "strength": 0.7,
       "description": "Talking through helps find root cause",
       "when": "rubber duck debugging needs root cause analysis context",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/cognitive-load/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Verbalizing reduces cognitive load",
       "when": "rubber duck debugging connects to cognitive load",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "Implements",
+      "type": "implements",
       "strength": 0.7,
       "description": "Learning by explaining is effective",
       "when": "Applying learning psychology procedures",
@@ -48,7 +48,7 @@
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
-      "type": "Supports",
+      "type": "supports",
       "strength": 0.7,
       "description": "Helps recover from error states",
       "when": "rubber duck debugging needs error recovery patterns context",
@@ -56,7 +56,7 @@
     },
     {
       "target": ".github/instructions/alex-identity-integration.instructions.md",
-      "type": "Implements",
+      "type": "implements",
       "strength": 0.85,
       "description": "Rubber duck symbiosis embodies cognitive symbiosis — AI as articulation partner",
       "when": "Applying alex identity integration procedures",

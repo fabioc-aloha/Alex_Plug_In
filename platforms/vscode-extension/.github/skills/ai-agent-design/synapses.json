@@ -8,7 +8,7 @@
       "strength": 0.9,
       "type": "requires",
       "reason": "Agent prompts require sophisticated prompt engineering",
-      "when": "Agent prompts require sophisticated prompt engineering",
+      "when": "When task involves .github/skills/prompt engineering/SKILL.md",
       "yields": "prompt engineering required patterns and guidance"
     },
     {
@@ -16,7 +16,7 @@
       "strength": 0.9,
       "type": "complements",
       "reason": "Agents often use RAG for knowledge retrieval",
-      "when": "Agents often use RAG for knowledge retrieval",
+      "when": "When task involves .github/skills/rag architecture/SKILL.md",
       "yields": "RAG architecture complementary techniques"
     },
     {
@@ -24,15 +24,15 @@
       "strength": 0.9,
       "type": "complements",
       "reason": "MCP provides standardized tool interface for agents",
-      "when": "MCP provides standardized tool interface for agents",
+      "when": "When task involves .github/skills/mcp development/SKILL.md",
       "yields": "MCP development complementary techniques"
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
       "strength": 0.7,
-      "type": "informs",
+      "type": "feeds",
       "reason": "Agent design requires model selection for different components",
-      "when": "Agent design requires model selection for different components",
+      "when": "When task involves .github/skills/llm model selection/SKILL.md",
       "yields": "LLM model selection contextual assessment"
     },
     {
@@ -40,7 +40,7 @@
       "strength": 0.7,
       "type": "complements",
       "reason": "Tool APIs must be well-designed for agent consumption",
-      "when": "Tool APIs must be well-designed for agent consumption",
+      "when": "When task involves .github/skills/api design/SKILL.md",
       "yields": "API design complementary techniques"
     },
     {
@@ -48,7 +48,7 @@
       "strength": 0.9,
       "type": "requires",
       "reason": "Agents must detect and handle hallucinated tool calls",
-      "when": "Agents must detect and handle hallucinated tool calls",
+      "when": "When task involves .github/skills/anti hallucination/SKILL.md",
       "yields": "anti hallucination required patterns and guidance"
     },
     {
@@ -56,7 +56,7 @@
       "strength": 0.9,
       "type": "requires",
       "reason": "Agents need robust error handling and recovery",
-      "when": "Agents need robust error handling and recovery",
+      "when": "When task involves .github/skills/error recovery patterns/SKILL.md",
       "yields": "error recovery patterns required patterns and guidance"
     },
     {
@@ -64,7 +64,7 @@
       "strength": 0.7,
       "type": "complements",
       "reason": "Agent testing requires specialized evaluation approaches",
-      "when": "Agent testing requires specialized evaluation approaches",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
       "yields": "testing strategies complementary techniques"
     },
     {
@@ -72,7 +72,7 @@
       "strength": 0.9,
       "type": "implements",
       "reason": "Foundry Agent Service is the cloud runtime for agent design patterns",
-      "when": "Foundry Agent Service is the cloud runtime for agent design patterns",
+      "when": "When task involves .github/skills/foundry agent platform/SKILL.md",
       "yields": "foundry agent platform implementation steps"
     }
   ],

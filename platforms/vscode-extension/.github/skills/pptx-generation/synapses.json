@@ -10,7 +10,7 @@
       "target": ".github/instructions/brand-asset-management.instructions.md",
       "strength": 0.9,
       "reason": "Uses Alex brand colors and visual identity in Slide Masters",
-      "when": "Uses Alex brand colors and visual identity in Slide Masters",
+      "when": "When task involves .github/instructions/brand asset management.instructions.md",
       "yields": "brand asset management rules and guidelines"
     },
     {
@@ -18,7 +18,7 @@
       "target": ".github/skills/lint-clean-markdown/SKILL.md",
       "strength": 0.85,
       "reason": "Converts markdown documents to structured slides",
-      "when": "Converts markdown documents to structured slides",
+      "when": "When task involves .github/skills/lint clean markdown/SKILL.md",
       "yields": "lint clean markdown input data"
     },
     {
@@ -26,15 +26,15 @@
       "target": ".github/skills/gamma-presentations/SKILL.md",
       "strength": 0.6,
       "reason": "Offline alternative to Gamma for PPTX generation",
-      "when": "Offline alternative to Gamma for PPTX generation",
+      "when": "When task involves .github/skills/gamma presentations/SKILL.md",
       "yields": "gamma presentations extended capabilities"
     },
     {
-      "type": "coordinated-by",
+      "type": "complements",
       "target": ".github/skills/presentation-tool-selection/SKILL.md",
       "strength": 0.9,
       "reason": "Tool selection decision matrix routes programmatic requests here",
-      "when": "Tool selection decision matrix routes programmatic requests here",
+      "when": "When task involves .github/skills/presentation tool selection/SKILL.md",
       "yields": "presentation tool selection orchestration guidance"
     }
   ],

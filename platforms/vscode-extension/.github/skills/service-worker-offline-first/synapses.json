@@ -1,35 +1,35 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.0.0",
-    "skillId": "service-worker-offline-first",
-    "connections": [
-        {
-            "target": ".github/skills/performance-profiling/SKILL.md",
-            "type": "supports",
-            "strength": 0.7,
-            "when": "analyzing cache hit rates, network timing, and offline performance",
-            "yields": "performance measurement and caching effectiveness analysis"
-        },
-        {
-            "target": ".github/skills/error-recovery-patterns/SKILL.md",
-            "type": "uses",
-            "strength": 0.75,
-            "when": "handling network failures, retry logic, and offline fallbacks",
-            "yields": "resilient error handling and graceful degradation patterns"
-        },
-        {
-            "target": ".github/skills/security-review/SKILL.md",
-            "type": "considers",
-            "strength": 0.6,
-            "when": "caching sensitive data, managing cached credentials, or serving offline content",
-            "yields": "cache security audit, credential handling guidelines"
-        },
-        {
-            "target": ".github/skills/ui-ux-design/SKILL.md",
-            "type": "supports",
-            "strength": 0.65,
-            "when": "designing offline indicators, update notifications, and sync status UI",
-            "yields": "offline UX patterns, connectivity state indicators"
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "service-worker-offline-first",
+  "connections": [
+    {
+      "target": ".github/skills/performance-profiling/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "when": "analyzing cache hit rates, network timing, and offline performance",
+      "yields": "performance measurement and caching effectiveness analysis"
+    },
+    {
+      "target": ".github/skills/error-recovery-patterns/SKILL.md",
+      "type": "uses",
+      "strength": 0.75,
+      "when": "handling network failures, retry logic, and offline fallbacks",
+      "yields": "resilient error handling and graceful degradation patterns"
+    },
+    {
+      "target": ".github/skills/security-review/SKILL.md",
+      "type": "relates",
+      "strength": 0.6,
+      "when": "caching sensitive data, managing cached credentials, or serving offline content",
+      "yields": "cache security audit, credential handling guidelines"
+    },
+    {
+      "target": ".github/skills/ui-ux-design/SKILL.md",
+      "type": "supports",
+      "strength": 0.65,
+      "when": "designing offline indicators, update notifications, and sync status UI",
+      "yields": "offline UX patterns, connectivity state indicators"
+    }
+  ]
 }

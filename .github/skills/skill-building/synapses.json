@@ -6,7 +6,7 @@
   "lastUpdated": "2026-02-10",
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "add skill|new skill|skill idea|skill request",
       "target": ".github/skills/skill-catalog-generator/SKILL.md",
       "yields": [

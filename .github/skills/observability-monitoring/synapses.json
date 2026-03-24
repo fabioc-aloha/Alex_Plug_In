@@ -39,7 +39,7 @@
     },
     {
       "target": ".github/skills/azure-architecture-patterns/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.8,
       "note": "Azure Monitor, App Insights integration",
       "when": "observability monitoring provides context to azure architecture patterns",

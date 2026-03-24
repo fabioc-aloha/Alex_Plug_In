@@ -1,39 +1,39 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.0.0",
-    "skillId": "msal-authentication",
-    "connections": [
-        {
-            "target": ".github/skills/microsoft-graph-api/SKILL.md",
-            "type": "integrates",
-            "strength": 0.9,
-            "reason": "MSAL provides tokens for Graph API calls",
-            "when": "Authenticating for Microsoft Graph API access",
-            "yields": "authenticated Graph API integration"
-        },
-        {
-            "target": ".github/skills/secrets-management/SKILL.md",
-            "type": "validates",
-            "strength": 0.7,
-            "reason": "Client IDs and auth config must be securely managed",
-            "when": "Storing MSAL configuration and credentials",
-            "yields": "secure authentication credential management"
-        },
-        {
-            "target": ".github/skills/azure-openai-patterns/SKILL.md",
-            "type": "integrates",
-            "strength": 0.65,
-            "reason": "MSAL tokens can authenticate Azure OpenAI requests",
-            "when": "Using Entra ID auth for Azure OpenAI instead of API keys",
-            "yields": "Entra-authenticated Azure OpenAI access"
-        },
-        {
-            "target": ".github/skills/security-review/SKILL.md",
-            "type": "validates",
-            "strength": 0.75,
-            "reason": "Authentication is a core security review concern",
-            "when": "Reviewing authentication implementation for vulnerabilities",
-            "yields": "security-validated authentication patterns"
-        }
-    ]
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.0.0",
+  "skillId": "msal-authentication",
+  "connections": [
+    {
+      "target": ".github/skills/microsoft-graph-api/SKILL.md",
+      "type": "complements",
+      "strength": 0.9,
+      "reason": "MSAL provides tokens for Graph API calls",
+      "when": "Authenticating for Microsoft Graph API access",
+      "yields": "authenticated Graph API integration"
+    },
+    {
+      "target": ".github/skills/secrets-management/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "reason": "Client IDs and auth config must be securely managed",
+      "when": "Storing MSAL configuration and credentials",
+      "yields": "secure authentication credential management"
+    },
+    {
+      "target": ".github/skills/azure-openai-patterns/SKILL.md",
+      "type": "complements",
+      "strength": 0.65,
+      "reason": "MSAL tokens can authenticate Azure OpenAI requests",
+      "when": "Using Entra ID auth for Azure OpenAI instead of API keys",
+      "yields": "Entra-authenticated Azure OpenAI access"
+    },
+    {
+      "target": ".github/skills/security-review/SKILL.md",
+      "type": "supports",
+      "strength": 0.75,
+      "reason": "Authentication is a core security review concern",
+      "when": "Reviewing authentication implementation for vulnerabilities",
+      "yields": "security-validated authentication patterns"
+    }
+  ]
 }

@@ -6,10 +6,10 @@
   "connections": [
     {
       "target": ".github/skills/secrets-management/SKILL.md",
-      "type": "depends-on",
+      "type": "requires",
       "strength": 0.9,
       "reason": "Secrets scanning is core to distribution security",
-      "when": "Secrets scanning is core to distribution security",
+      "when": "When task involves .github/skills/secrets management/SKILL.md",
       "yields": "secrets management required patterns and guidance"
     }
   ],

@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/academic-research/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.9,
       "description": "Grant writing requires research expertise",
       "when": "grant writing depends on academic research",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Grants require project planning",
       "when": "grant writing connects to project management",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/business-analysis/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Budget justification is business analysis",
       "when": "grant writing connects to business analysis",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.3,
       "description": "Narrative skills help with proposal writing",
       "when": "grant writing enhances creative writing",

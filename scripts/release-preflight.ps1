@@ -28,7 +28,7 @@ $errors = @()
 
 # 0. PAT Check
 Write-Host "0. Checking PAT configuration..." -ForegroundColor Yellow
-$envFile = Join-Path $extensionPath ".env"
+$envFile = Join-Path $rootPath ".env"
 $patFound = $false
 
 if ($env:VSCE_PAT) {
@@ -44,7 +44,7 @@ elseif (Test-Path $envFile) {
 }
 
 if (-not $patFound) {
-    $errors += "VSCE_PAT not configured (set env var or add to platforms/vscode-extension/.env)"
+    $errors += "VSCE_PAT not configured (set env var or add VSCE_PAT to root .env)"
     Write-Host "   ❌ VSCE_PAT not found" -ForegroundColor Red
 }
 

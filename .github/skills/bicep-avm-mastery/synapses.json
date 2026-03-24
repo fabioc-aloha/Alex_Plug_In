@@ -7,7 +7,7 @@
   "connectionCount": 4,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "bicep|avm|iac|azure verified modules",
       "target": ".github/skills/azure-architecture-patterns/SKILL.md",
       "yields": [

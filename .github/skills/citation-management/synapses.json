@@ -7,7 +7,7 @@
   "connectionCount": 5,
   "connections": [
     {
-      "type": "when",
+      "type": "relates",
       "when": "citation|apa|mla|reference|bibliography",
       "target": ".github/skills/literature-review/SKILL.md",
       "yields": [

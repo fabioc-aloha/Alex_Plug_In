@@ -34,7 +34,7 @@
     {
       "target": ".github/skills/refactoring-patterns/SKILL.md",
       "strength": 0.65,
-      "type": "triggers",
+      "type": "activates",
       "direction": "backward",
       "description": "Post-refactor audit needed",
       "when": "architecture audit initiates refactoring patterns",
@@ -52,7 +52,7 @@
     {
       "target": ".github/skills/lint-clean-markdown/SKILL.md",
       "strength": 0.55,
-      "type": "applies",
+      "type": "implements",
       "direction": "forward",
       "description": "Documentation quality checks",
       "when": "architecture audit connects to lint clean markdown",

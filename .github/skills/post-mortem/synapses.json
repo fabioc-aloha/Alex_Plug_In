@@ -8,7 +8,7 @@
   "connections": [
     {
       "target": ".github/skills/incident-response/SKILL.md",
-      "type": "FollowsFrom",
+      "type": "uses",
       "strength": 0.9,
       "description": "Post-mortem follows incident response",
       "when": "post mortem follows from incident response",
@@ -16,7 +16,7 @@
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "Requires",
+      "type": "requires",
       "strength": 0.9,
       "description": "Post-mortems require root cause analysis",
       "when": "post mortem depends on root cause analysis",
@@ -24,7 +24,7 @@
     },
     {
       "target": ".github/skills/project-management/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
       "description": "Action items become project work",
       "when": "post mortem connects to project management",
@@ -32,7 +32,7 @@
     },
     {
       "target": ".github/skills/change-management/SKILL.md",
-      "type": "Triggers",
+      "type": "activates",
       "strength": 0.7,
       "description": "Post-mortems often trigger process changes",
       "when": "post mortem initiates change management",
@@ -40,7 +40,7 @@
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "Implements",
+      "type": "implements",
       "strength": 0.7,
       "description": "Blameless culture enables learning",
       "when": "Applying learning psychology procedures",
@@ -48,7 +48,7 @@
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "Informs",
+      "type": "feeds",
       "strength": 0.7,
       "description": "Post-mortems inform better testing",
       "when": "post mortem provides context to testing strategies",

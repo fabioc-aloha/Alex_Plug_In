@@ -5,7 +5,7 @@
   "connections": [
     {
       "target": ".github/skills/svg-graphics/SKILL.md",
-      "type": "input-source",
+      "type": "consumes",
       "strength": 0.85,
       "when": "converting FROM svg format",
       "yields": "SVG creation patterns, viewBox, dark mode CSS"
@@ -33,7 +33,7 @@
     },
     {
       "target": ".github/skills/ai-character-reference-generation/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "when": "generating character portraits with face references via nano-banana/flux-2-pro",
       "yields": "Model selection, image_input API patterns, batch generation"
@@ -54,14 +54,14 @@
     },
     {
       "target": ".github/skills/flux-brand-finetune/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.8,
       "when": "user has trained a custom LoRA for brand-consistent image generation",
       "yields": "Fine-tuned model inference, trigger word usage, training data prep"
     },
     {
       "target": ".github/skills/ai-generated-readme-banners/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.85,
       "when": "generating README banners (SVG default via Recraft, raster fallback via Ideogram/Flux)",
       "yields": "Banner format selection, model routing, prompt engineering for banners"
