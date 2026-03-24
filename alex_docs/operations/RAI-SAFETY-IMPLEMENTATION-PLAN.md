@@ -286,7 +286,7 @@ Stop ─────────→ H23 session-end audit checklist
 - [x] `airs-appropriate-reliance/SKILL.md` contains PA construct with 4 items
 - [x] `appropriate-reliance/SKILL.md` contains psychological indicator thresholds
 - [x] `appropriate-reliance/SKILL.md` contains all 4 calibration intervention scripts
-- [ ] AIRS-16 references in book/architecture are not broken (AIRS-20 extends, not replaces)
+- [x] AIRS-16 references in book/architecture are not broken (AIRS-20 extends, not replaces) -- verified: 7 AIRS-16 refs intact
 - [x] Commit: `feat: WS4 AIRS-20 psychological autonomy construct` (eef920d)
 
 ### WS5b: Layer 5 Content Safety Implementation
