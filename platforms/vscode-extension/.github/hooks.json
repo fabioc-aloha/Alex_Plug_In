@@ -7,6 +7,11 @@
                         "type": "command",
                         "command": "node .github/muscles/hooks/session-start.cjs",
                         "timeout": 5
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/rai-session-safety.cjs",
+                        "timeout": 3
                     }
                 ]
             }
@@ -27,6 +32,11 @@
                     {
                         "type": "command",
                         "command": "node .github/muscles/hooks/decision-journal.cjs",
+                        "timeout": 3
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/rai-response-audit.cjs",
                         "timeout": 3
                     }
                 ]

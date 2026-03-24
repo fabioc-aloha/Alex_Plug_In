@@ -40,6 +40,7 @@ Six platforms. Four active, two planned.
 
 | Version    | Theme                                                                                                                                                                         | Shipped    |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v6.8.0** | RAI Psychological Safety — 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, AIRS-20 PA, content safety Layer 5), 3 hooks, VS Code 1.113 eval           | 2026-03-24 |
 | **v6.7.3** | Synapse Integrity & Dialog Engineering — 428 type normalizations, 287 when/reason deduplication, dialog-engineering skill, skill-building Phase 0 activation check, GCX audit | 2026-03-24 |
 | **v6.7.2** | Memory Export & Platform Readiness — memory-export trifecta, /troubleshoot integration, Worker/Teams assessment                                                               | 2026-03-19 |
 | **v6.7.1** | Vision-Enhanced Skills — view_image verification in 5 image skills, lint-docs hardening                                                                                       | 2026-03-18 |
@@ -208,8 +209,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                                 |
 | -------------------------- | --------------------------------------------------------------- |
-| **Current Master Version** | 6.7.3                                                           |
-| **Current Heirs**          | VS Code (6.7.3), M365 (6.2.0), Plugin (6.7.0)                   |
+| **Current Master Version** | 6.8.0                                                           |
+| **Current Heirs**          | VS Code (6.8.0), M365 (6.2.0), Plugin (6.7.0)                   |
 | **Architecture**           | 145 skills, 39 trifectas, 69 instructions, 49 prompts, 7 agents |
 | **Platforms**              | 6 total (4 active, 2 planned)                                   |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence                             |
