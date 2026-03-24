@@ -1,42 +1,34 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
-    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "scripts/release-preflight.ps1",
-    "scripts/release-vscode.ps1",
-    "alex_docs/audits/GCX-MASTER-AUDIT-2026-03-24.md"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1774364715548
+      "scannedAt": 1774365584929
+    },
+    {
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.7.3.vsix",
+      "todoCount": 2,
+      "scannedAt": 1774365584929
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1774364715548
+      "scannedAt": 1774365584929
     },
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1774364715548
+      "scannedAt": 1774365584929
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1774364715548
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1774364715548
+      "scannedAt": 1774365584929
     }
   ],
-  "lastUpdated": 1774364715548
+  "lastUpdated": 1774365584929
 }

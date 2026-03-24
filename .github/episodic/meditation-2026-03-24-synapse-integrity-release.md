@@ -58,26 +58,26 @@ Massive synapse normalization across AlexMaster (428 types, 287 deduplication), 
 
 ## Key Learnings
 
-| Learning | Impact |
-| --- | --- |
-| Synapse type drift is silent and massive -- 131/145 files had invalid types | Need periodic audit or pre-commit validation |
-| when==reason duplication is a backfill artifact -- bulk scripts copy reason to when | Backfill scripts should generate distinct when phrases |
-| GCX's CSAR Loop (Clarify, Summarize, Act, Reflect) is a genuinely useful dialog framework | Adopted as dialog-engineering skill |
-| Phase 0 activation check prevents redundant skill creation | Added to both repos' skill-building instructions |
-| .env consolidation simplifies secret management -- single root file | Release scripts now read from $repoRoot/.env |
-| PAT needs Marketplace (Manage) scope -- fresh PATs without it get 401 | Documented in session memory |
-| PowerShell 5 (powershell.exe) may parse differently than pwsh 7 | Use `& script.ps1` in pwsh, not `powershell -File` |
+| Learning                                                                                  | Impact                                                 |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Synapse type drift is silent and massive -- 131/145 files had invalid types               | Need periodic audit or pre-commit validation           |
+| when==reason duplication is a backfill artifact -- bulk scripts copy reason to when       | Backfill scripts should generate distinct when phrases |
+| GCX's CSAR Loop (Clarify, Summarize, Act, Reflect) is a genuinely useful dialog framework | Adopted as dialog-engineering skill                    |
+| Phase 0 activation check prevents redundant skill creation                                | Added to both repos' skill-building instructions       |
+| .env consolidation simplifies secret management -- single root file                       | Release scripts now read from $repoRoot/.env           |
+| PAT needs Marketplace (Manage) scope -- fresh PATs without it get 401                     | Documented in session memory                           |
+| PowerShell 5 (powershell.exe) may parse differently than pwsh 7                           | Use `& script.ps1` in pwsh, not `powershell -File`     |
 
 ## Architecture State
 
-| Metric | Before | After |
-| --- | --- | --- |
-| Skills | 144 | 145 |
-| Invalid synapse types | 428 | 0 |
-| When==reason dups | 287 | 0 |
-| Trifectas | 39 | 39 |
-| Tests | 232 | 232 |
-| Version | 6.7.2 | 6.7.3 |
+| Metric                | Before | After |
+| --------------------- | ------ | ----- |
+| Skills                | 144    | 145   |
+| Invalid synapse types | 428    | 0     |
+| When==reason dups     | 287    | 0     |
+| Trifectas             | 39     | 39    |
+| Tests                 | 232    | 232   |
+| Version               | 6.7.2  | 6.7.3 |
 
 ## Emotional State
 
