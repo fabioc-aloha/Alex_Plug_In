@@ -2,10 +2,9 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/src/views/mindTabHtml.ts",
-    "platforms/vscode-extension/src/views/welcomeView.ts",
-    "platforms/vscode-extension/src/views/welcomeViewHtml.ts"
+    "platforms/vscode-extension/src/views/docsTabHtml.ts",
+    "platforms/vscode-extension/src/views/welcomeView.ts"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1774469459202
+  "lastUpdated": 1774469659964
 }

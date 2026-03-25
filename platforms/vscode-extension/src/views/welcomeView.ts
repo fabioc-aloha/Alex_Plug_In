@@ -183,19 +183,19 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       openGitHub: "https://github.com/fabioc-aloha/Alex_Plug_In",
       openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
       provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
-      learnAlex: "https://learnalex.correax.com/",
-      learnAlexSelfStudy: "https://learnalex.correax.com/self-study",
-      learnAlexExercises: "https://learnalex.correax.com/exercises",
-      learnAlexSessionPlan: "https://learnalex.correax.com/session-plan",
-      learnAlexSlides: "https://learnalex.correax.com/slides",
-      learnAlexDemoScripts: "https://learnalex.correax.com/demo-scripts",
-      learnAlexHandout: "https://learnalex.correax.com/handout",
-      learnAlexPreRead: "https://learnalex.correax.com/pre-read",
-      learnAlexGitHubGuide: "https://learnalex.correax.com/github-guide",
-      learnAlexResponsibleAI: "https://learnalex.correax.com/responsible-ai",
-      learnAlexAirs: "https://learnalex.correax.com/airs",
-      learnAlexQuiz: "https://learnalex.correax.com/quiz",
-      learnAlexBooks: "https://learnalex.correax.com/books",
+      learnAlex: "https://learnai.correax.com/",
+      learnAlexSelfStudy: "https://learnai.correax.com/self-study",
+      learnAlexExercises: "https://learnai.correax.com/exercises",
+      learnAlexSessionPlan: "https://learnai.correax.com/session-plan",
+      learnAlexSlides: "https://learnai.correax.com/slides",
+      learnAlexDemoScripts: "https://learnai.correax.com/demo-scripts",
+      learnAlexHandout: "https://learnai.correax.com/handout",
+      learnAlexPreRead: "https://learnai.correax.com/pre-read",
+      learnAlexGitHubGuide: "https://learnai.correax.com/github-guide",
+      learnAlexResponsibleAI: "https://learnai.correax.com/responsible-ai",
+      learnAlexAirs: "https://learnai.correax.com/airs",
+      learnAlexQuiz: "https://learnai.correax.com/quiz",
+      learnAlexBooks: "https://learnai.correax.com/books",
     };
 
     // Handle simple command execution
@@ -220,7 +220,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     switch (command) {
       case "learnAlexWorkshop": {
         const persona = (payload as any).workshop || 'software-developers';
-        const url = `https://learnalex.correax.com/workshop/${encodeURIComponent(persona)}`;
+        const url = `https://learnai.correax.com/workshop/${encodeURIComponent(persona)}`;
         logInfo(`[Alex][WelcomeView] Opening workshop URL for persona: ${persona}`);
         await vscode.env.openExternal(vscode.Uri.parse(url));
         break;
@@ -228,9 +228,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       case "learnAlexGuideSection": {
         const anchor = (payload as any).anchor || '';
         const url = anchor
-          ? `https://learnalex.correax.com/workshop/guide#${encodeURIComponent(anchor)}`
-          : 'https://learnalex.correax.com/workshop/guide';
-        logInfo(`[Alex][WelcomeView] Opening study guide section: ${anchor || 'all'}`);
+          ? `https://learnai.correax.com/workshop/guide#${encodeURIComponent(anchor)}`
+          : 'https://learnai.correax.com/workshop/guide';
+        logInfo(`[Alex][WelcomeView] Opening playbook section: ${anchor || 'all'}`);
         await vscode.env.openExternal(vscode.Uri.parse(url));
         break;
       }

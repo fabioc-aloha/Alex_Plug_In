@@ -8,10 +8,10 @@ import { escapeHtml } from '../shared/sanitize';
 import { actionButton } from './welcomeViewHtml';
 
 /**
- * Study guide category sections linking to learnalex.correax.com/workshop/guide.
- * 76+ guides now live on the site — link to sections rather than listing each one.
+ * Playbook category sections linking to learnai.correax.com/workshop/guide.
+ * 80+ playbooks now live on the site — link to sections rather than listing each one.
  */
-const STUDY_GUIDE_SECTIONS: Array<{ icon: string; name: string; anchor: string }> = [
+const PLAYBOOK_SECTIONS: Array<{ icon: string; name: string; anchor: string }> = [
     { icon: '💻', name: 'Technology & Engineering', anchor: 'technology--engineering' },
     { icon: '💼', name: 'Business & Professional', anchor: 'business--professional-services' },
     { icon: '🎨', name: 'Creative & Media', anchor: 'creative--media' },
@@ -138,9 +138,9 @@ export function getDocsTabHtml(): string {
           </div>
 
           <div class="docs-section">
-              <div class="docs-section-title">Study Guides</div>
+              <div class="docs-section-title">Playbooks</div>
               <div class="doc-grid">
-                  ${STUDY_GUIDE_SECTIONS.map(s =>
+                  ${PLAYBOOK_SECTIONS.map(s =>
                       `<div class="doc-grid-card" data-cmd="learnAlexGuideSection" data-anchor="${escapeHtml(s.anchor)}" tabindex="0" role="button">
                       <span class="doc-grid-icon">${s.icon}</span>
                       <div class="doc-grid-text">
@@ -150,7 +150,7 @@ export function getDocsTabHtml(): string {
                   ).join('\n                  ')}
               </div>
               <div style="margin-top: 8px; text-align: center;">
-                  <button class="action-btn" data-cmd="learnAlexGuideSection" data-anchor="" tabindex="0" style="display: inline-flex;">Browse all 76+ study guides</button>
+                  <button class="action-btn" data-cmd="learnAlexGuideSection" data-anchor="" tabindex="0" style="display: inline-flex;">Browse all 80+ playbooks</button>
               </div>
           </div>
 
@@ -168,9 +168,9 @@ export function getDocsTabHtml(): string {
           </div>
 
           <div class="docs-cta">
-              <div class="docs-cta-title">📚 Learn Alex Online</div>
-              <div class="docs-cta-desc">Comprehensive study guides, exercises, and training at the companion site.</div>
-              <button class="action-btn primary" data-cmd="learnAlex" tabindex="0" style="display: inline-flex;">Visit learnalex.correax.com</button>
+              <div class="docs-cta-title">📚 Learn AI Online</div>
+              <div class="docs-cta-desc">80+ playbooks, exercises, and training at the companion site.</div>
+              <button class="action-btn primary" data-cmd="learnAlex" tabindex="0" style="display: inline-flex;">Visit learnai.correax.com</button>
           </div>
 
       </div>`;
