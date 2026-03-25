@@ -32,28 +32,42 @@ const HTTP_INITIAL_BACKOFF_MS = 1000;
 const MAX_INPUT_CHARS = 400000;
 
 const IMAGE_MODELS = {
-  // Cost-effective (2 credits)
-  'flux-quick': 'flux-1-quick',
+  // Standard (2-15 credits)
+  'flux-quick': 'flux-2-klein',
   'flux-kontext': 'flux-kontext-fast',
   'imagen-flash': 'imagen-3-flash',
   'luma-flash': 'luma-photon-flash-1',
-  // Standard (8-15 credits)
-  'flux-pro': 'flux-1-pro',
-  'imagen-pro': 'imagen-3-pro',
+  'qwen-fast': 'qwen-image-fast',
+  'qwen': 'qwen-image',
+  'flux-pro': 'flux-2-pro',
   'ideogram-turbo': 'ideogram-v3-turbo',
+  'imagen4-fast': 'imagen-4-fast',
+  'luma': 'luma-photon-1',
+  'recraft4': 'recraft-v4',
   'leonardo': 'leonardo-phoenix',
-  // Premium (20-33 credits)
+  // Advanced (20-33 credits)
+  'flux-flex': 'flux-2-flex',
+  'flux-max': 'flux-2-max',
+  'flux-kontext-pro': 'flux-kontext-pro',
   'ideogram': 'ideogram-v3',
   'imagen4': 'imagen-4-pro',
-  'gemini': 'gemini-2.5-flash-image',
   'recraft': 'recraft-v3',
+  'gemini-pro': 'gemini-3-pro-image',
+  'gemini': 'gemini-2.5-flash-image',
   'gpt-image': 'gpt-image-1-medium',
   'dalle3': 'dall-e-3',
-  // Ultra (30-120 credits)
-  'flux-ultra': 'flux-1-ultra',
-  'imagen4-ultra': 'imagen-4-ultra',
+  // Premium (34-75 credits)
+  'nano-banana-mini': 'gemini-3.1-flash-image-mini',
   'recraft-svg': 'recraft-v3-svg',
+  'recraft4-svg': 'recraft-v4-svg',
+  'ideogram-quality': 'ideogram-v3-quality',
+  'nano-banana': 'gemini-3.1-flash-image',
+  'gemini-pro-hd': 'gemini-3-pro-image-hd',
+  'nano-banana-hd': 'gemini-3.1-flash-image-hd',
+  // Ultra (30-125 credits)
+  'imagen4-ultra': 'imagen-4-ultra',
   'gpt-image-hd': 'gpt-image-1-high',
+  'recraft4-pro': 'recraft-v4-pro',
 };
 
 // ============================================================================
@@ -382,10 +396,21 @@ class GammaGenerator {
     }
 
     // Add card options
-    if (this.options.dimensions) {
-      request.cardOptions = {
-        dimensions: this.options.dimensions,
-      };
+    if (this.options.dimensions || this.options.cardSplit) {
+      request.cardOptions = {};
+      if (this.options.dimensions) {
+        request.cardOptions.dimensions = this.options.dimensions;
+      }
+    }
+
+    // Add card split mode (auto or inputTextBreaks)
+    if (this.options.cardSplit) {
+      request.cardSplit = this.options.cardSplit;
+    }
+
+    // Add style preset
+    if (this.options.stylePreset) {
+      request.stylePreset = this.options.stylePreset;
     }
 
     // Add additional instructions
@@ -577,6 +602,14 @@ function parseArgs() {
         options.instructions = value;
         i++;
         break;
+      case '--card-split':
+        options.cardSplit = value;
+        i++;
+        break;
+      case '--style-preset':
+        options.stylePreset = value;
+        i++;
+        break;
       case '--draft':
         options.draft = true;
         break;
@@ -613,9 +646,11 @@ Options:
   --image-model <name>     AI image model (flux-quick, flux-pro, dalle3, etc.)
   --image-style <text>     Image style description
   --image-source <type>    Image source: aiGenerated, pexels, pictographic, giphy, etc.
-  --instructions, -i <text> Additional instructions for the AI (max 2000 chars)
+  --instructions, -i <text> Additional instructions for the AI (max 5000 chars)
   --dimensions, -d <size>  Card dimensions (16x9, 4x3, 1x1, 4x5, 9x16)
-  --export, -e <type>      Export format: pptx, pdf
+  --card-split <mode>      Card splitting: auto (default) or inputTextBreaks
+  --style-preset <name>    Style preset for the output
+  --export, -e <type>      Export format: pptx, pdf, png
   --output, -o <dir>       Output directory for exports (default: ./exports)
   --timeout <seconds>      Generation timeout in seconds (default: 420)
   --quiet, -q              Suppress progress messages
@@ -649,10 +684,13 @@ Examples:
     --open
 
 Image Models:
-  Cost-effective (2 credits): flux-quick, flux-kontext, imagen-flash, luma-flash
-  Standard (8-15 credits):    flux-pro, imagen-pro, ideogram-turbo, leonardo
-  Premium (20-33 credits):    ideogram, imagen4, gemini, recraft, gpt-image, dalle3
-  Ultra (30-120 credits):     flux-ultra, imagen4-ultra, recraft-svg, gpt-image-hd
+  Standard (2-15 credits):    flux-quick, flux-kontext, imagen-flash, luma-flash, qwen-fast,
+                              qwen, flux-pro, ideogram-turbo, imagen4-fast, luma, recraft4, leonardo
+  Advanced (20-33 credits):   flux-flex, flux-max, flux-kontext-pro, ideogram, imagen4, recraft,
+                              gemini-pro, gemini, gpt-image, dalle3
+  Premium (34-75 credits):    nano-banana-mini, recraft-svg, recraft4-svg, ideogram-quality,
+                              nano-banana, gemini-pro-hd, nano-banana-hd
+  Ultra (30-125 credits):     imagen4-ultra, gpt-image-hd, recraft4-pro
 
 Environment:
   GAMMA_API_KEY            Required. Get from https://gamma.app/settings

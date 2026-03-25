@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.8.1] - 2026-03-25
+
+> **Converter Infrastructure Sprint** -- All 46 converter improvement items completed (v5.1.0), then 11 additional recommendations from gap analysis implemented (v5.2.0 + v5.3.0). New prompt preprocessor, batch retry hardening, base64 image embedding, heading validation, link validation, dry-run mode, recursive batch mode, negative prompt support, footnote fix, and 97 new QA assertions (284 total).
+
+### Added
+
+- **prompt-preprocessor.cjs** (NEW shared module) -- section validation (SUBJECT/SCENE/STYLE), model-family prompt length limits, smart quote cleanup, identity trait injection from `visual-memory.json`, full `preprocessPrompt()` pipeline
+- **Duration constraint validation** -- `validateDuration()` pre-flight check for video models (hailuo, luma, kling, stability) with allowed values and min/max ranges
+- **Model freshness tracking** -- `MODEL_REGISTRY` with verification dates and status for 12 models; `checkModelFreshness()` warns when models exceed 90-day staleness threshold
+- **Image post-processing pipeline** -- `postProcess()` chains RemBG background removal and upscale models as pipeline steps; `--postprocess` CLI flag
+- **Prompt versioning** -- `runBatch()` saves `.prompt.txt` alongside each output when `--save-prompts` flag is set
+- **A/B prompt comparison** -- `--variants=N` CLI flag for generating multiple prompt variants per subject
+- **Batch retry hardening** -- `maxRetries` raised from 2 to 4; 429 AND 5xx errors trigger exponential backoff; batch continues on individual failures
+- **Caption styling** -- `keepCaptionsWithContent()` now applies italic 9pt gray (#595959) centered alignment to Table/Figure captions (was keepNext-only)
+- **Base64 image embedding** -- `--embed-images` flag in md-to-word.cjs + `embedLocalImages()` in markdown-preprocessor.cjs for portable documents
+- **YAML frontmatter stripping** -- `--strip-frontmatter` flag in md-to-word.cjs removes front matter before pandoc conversion
+- **Recursive batch mode** -- `--recursive` flag processes all `.md` files in a directory tree with per-file `.docx` output
+- **Heading hierarchy validation** -- `validateHeadingHierarchy()` warns when heading levels skip (H1→H3) with line numbers
+- **Mermaid syntax pre-validation** -- regex-based diagram type check before expensive mmdc rendering
+- **Output file size validation** -- warns when generated `.docx` is <5 KB (possible corruption)
+- **Negative prompt support** -- `--negative-prompt=TEXT` CLI flag in replicate-core.cjs for model-aware parameter routing
+- **External prompt file** -- `--prompt-file=PATH` CLI flag loads prompt text from disk
+- **image-generation-guidelines.instructions.md** -- 8 pipeline workflows, model selection table, prompt structure template, converter patterns
+- **CONVERTER-CHANGELOG.md** -- version history from v3.0.0 through v5.3.0
+- **Link validation** -- `validateLinks()` in markdown-preprocessor.cjs detects empty URLs and broken local file references; integrated into md-to-word.cjs preprocessing
+- **Dry-run mode** -- `--dry-run` flag in md-to-word.cjs runs all preprocessing validation without generating .docx (useful for CI and pre-flight checks)
+- **Footnote preservation fix** -- superscript regex no longer corrupts `[^N]` pandoc footnote syntax spanning newlines
+- **97 new QA assertions** across 13 new test suites in converter-qa.cjs (284 total, up from 187):
+  - Word OOXML visual regression (ZIP structure, caption italic, heading colors)
+  - Word table styling regression (cantSplit, tblHeader, shading, borders)
+  - Email rendering structure (RFC 5322, base64 body decode, inline styles)
+  - PDF engine cross-validation (lualatex + xelatex)
+  - Replicate core validation (duration, freshness, CLI parsing)
+  - Prompt preprocessor (cleanup, length limits, trait injection, pipeline)
+  - Heading hierarchy validation (skip detection, edge cases)
+  - Image embedding (local, HTTP passthrough, data URI passthrough)
+  - Negative prompt + prompt-file CLI (parsing, file loading, edge cases)
+  - CLI flag acceptance (new flags in usage message)
+  - Link validation (empty URL, broken local, HTTP passthrough, mailto, image exclusion)
+  - Footnote passthrough (ref and def survive preprocessing)
+  - Dry-run mode (exit code, message, no output file)
+
+---
+
 ## [6.8.0] - 2026-03-24
 
 > **RAI Psychological Safety** -- Five workstreams addressing RLHF-emergent manipulation patterns (sycophancy, gaslighting, blame-shifting, emotional mimicry, dependency creation). Three new hooks, instruction-level protocols, skill updates, AIRS-20 PA extension, and content safety Layer 5.
