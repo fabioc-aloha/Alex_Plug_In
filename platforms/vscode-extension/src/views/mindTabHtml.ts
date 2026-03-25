@@ -119,14 +119,6 @@ export function getMindTabHtml(ctx: MindTabContext): string {
           </div>
 
           <div class="dashboard-card">
-              <div class="dashboard-card-title">System</div>
-              ${actionButton('upgrade', hasGlobalKnowledge ? '🌐' : '⬆️', 'Initialize / Update', 'Deploy or refresh Alex architecture')}
-              ${actionButton('exportMemory', '📤', 'Export Memory', 'Export all memory to a portable file for other AI surfaces')}
-              ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
-              ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
-          </div>
-
-          <div class="dashboard-card">
               <div class="dashboard-card-title">Knowledge Freshness</div>
               <div class="freshness-panel">
                   <div class="freshness-bucket thriving">
