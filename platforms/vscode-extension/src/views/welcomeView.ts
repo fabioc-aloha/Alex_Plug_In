@@ -597,25 +597,25 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const opusCfg = vscode.workspace.getConfiguration('github.copilot.chat.models.anthropic.claude-opus-4-5');
       const settingsToggles: SettingsToggle[] = [
         // Alex Features
-        { key: 'alex.autoInsights.enabled', label: 'Auto Insights', enabled: alexCfg.get<boolean>('autoInsights.enabled', true), group: 'Alex Features' },
-        { key: 'alex.dailyBriefing.enabled', label: 'Daily Briefing', enabled: alexCfg.get<boolean>('dailyBriefing.enabled', true), group: 'Alex Features' },
-        { key: 'alex.voice.enabled', label: 'Voice Mode', enabled: alexCfg.get<boolean>('voice.enabled', false), group: 'Alex Features' },
-        { key: 'alex.globalKnowledge.enabled', label: 'Global Knowledge', enabled: alexCfg.get<boolean>('globalKnowledge.enabled', true), group: 'Alex Features' },
+        { key: 'alex.autoInsights.enabled', label: 'Auto Insights', enabled: alexCfg.get<boolean>('autoInsights.enabled', true), group: 'Alex Features', tooltip: 'Automatically detect and suggest saving insights from conversations' },
+        { key: 'alex.dailyBriefing.enabled', label: 'Daily Briefing', enabled: alexCfg.get<boolean>('dailyBriefing.enabled', true), group: 'Alex Features', tooltip: 'Show a summary briefing on your first chat each day' },
+        { key: 'alex.voice.enabled', label: 'Voice Mode', enabled: alexCfg.get<boolean>('voice.enabled', false), group: 'Alex Features', tooltip: 'Read Alex responses aloud using text-to-speech' },
+        { key: 'alex.globalKnowledge.enabled', label: 'Global Knowledge', enabled: alexCfg.get<boolean>('globalKnowledge.enabled', true), group: 'Alex Features', tooltip: 'Enable cross-project learning and memory via the Global Knowledge repo' },
         // Copilot Power Settings
-        { key: 'chat.autopilot.enabled', label: 'Autopilot Mode', enabled: chatCfg.get<boolean>('autopilot.enabled', false), group: 'Copilot Power' },
-        { key: 'github.copilot.chat.copilotMemory.enabled', label: 'Copilot Memory', enabled: copilotChatCfg.get<boolean>('copilotMemory.enabled', false), group: 'Copilot Power' },
-        { key: 'chat.mcp.gallery.enabled', label: 'MCP Gallery', enabled: chatCfg.get<boolean>('mcp.gallery.enabled', false), group: 'Copilot Power' },
-        { key: 'github.copilot.chat.searchSubagent.enabled', label: 'Search Subagent', enabled: copilotChatCfg.get<boolean>('searchSubagent.enabled', false), group: 'Copilot Power' },
-        { key: 'chat.requestQueuing.enabled', label: 'Request Queuing', enabled: chatCfg.get<boolean>('requestQueuing.enabled', false), group: 'Copilot Power' },
-        { key: 'github.copilot.chat.agent.thinkingTool', label: 'Thinking Tool', enabled: copilotChatCfg.get<boolean>('agent.thinkingTool', false), group: 'Copilot Power' },
-        { key: 'chat.customAgentInSubagent.enabled', label: 'Agents in Subagents', enabled: chatCfg.get<boolean>('customAgentInSubagent.enabled', false), group: 'Copilot Power' },
+        { key: 'chat.autopilot.enabled', label: 'Autopilot Mode', enabled: chatCfg.get<boolean>('autopilot.enabled', false), group: 'Copilot Power', tooltip: 'Let Copilot run tools and make edits without asking for approval each time' },
+        { key: 'github.copilot.chat.copilotMemory.enabled', label: 'Copilot Memory', enabled: copilotChatCfg.get<boolean>('copilotMemory.enabled', false), group: 'Copilot Power', tooltip: 'Persist conversation context and preferences across sessions' },
+        { key: 'chat.mcp.gallery.enabled', label: 'MCP Gallery', enabled: chatCfg.get<boolean>('mcp.gallery.enabled', false), group: 'Copilot Power', tooltip: 'Browse and install Model Context Protocol servers from the gallery' },
+        { key: 'github.copilot.chat.searchSubagent.enabled', label: 'Search Subagent', enabled: copilotChatCfg.get<boolean>('searchSubagent.enabled', false), group: 'Copilot Power', tooltip: 'Allow agents to spawn a fast search subagent for codebase exploration' },
+        { key: 'chat.requestQueuing.enabled', label: 'Request Queuing', enabled: chatCfg.get<boolean>('requestQueuing.enabled', false), group: 'Copilot Power', tooltip: 'Queue multiple chat requests instead of waiting for each to finish' },
+        { key: 'github.copilot.chat.agent.thinkingTool', label: 'Thinking Tool', enabled: copilotChatCfg.get<boolean>('agent.thinkingTool', false), group: 'Copilot Power', tooltip: 'Give agents a dedicated tool for structured reasoning before acting' },
+        { key: 'chat.customAgentInSubagent.enabled', label: 'Agents in Subagents', enabled: chatCfg.get<boolean>('customAgentInSubagent.enabled', false), group: 'Copilot Power', tooltip: 'Allow custom agents (like Alex) to be invoked inside subagent calls' },
         // Agent Capabilities
-        { key: 'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled', label: 'Extended Thinking', enabled: opusCfg.get<boolean>('extendedThinkingEnabled', false), group: 'Agent Capabilities' },
-        { key: 'chat.tools.autoRun', label: 'Auto-Run Tools', enabled: chatCfg.get<boolean>('tools.autoRun', false), group: 'Agent Capabilities' },
-        { key: 'chat.tools.fileSystem.autoApprove', label: 'Auto-Approve Files', enabled: chatCfg.get<boolean>('tools.fileSystem.autoApprove', false), group: 'Agent Capabilities' },
-        { key: 'chat.hooks.enabled', label: 'Agent Hooks', enabled: chatCfg.get<boolean>('hooks.enabled', false), group: 'Agent Capabilities' },
-        { key: 'chat.useCustomAgentHooks', label: 'Agent-Scoped Hooks', enabled: chatCfg.get<boolean>('useCustomAgentHooks', false), group: 'Agent Capabilities' },
-        { key: 'chat.restoreLastPanelSession', label: 'Restore Last Session', enabled: chatCfg.get<boolean>('restoreLastPanelSession', false), group: 'Agent Capabilities' },
+        { key: 'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled', label: 'Extended Thinking', enabled: opusCfg.get<boolean>('extendedThinkingEnabled', false), group: 'Agent Capabilities', tooltip: 'Enable deep reasoning mode for Claude Opus (uses more tokens, better for complex tasks)' },
+        { key: 'chat.tools.autoRun', label: 'Auto-Run Tools', enabled: chatCfg.get<boolean>('tools.autoRun', false), group: 'Agent Capabilities', tooltip: 'Automatically execute tools without confirmation prompts' },
+        { key: 'chat.tools.fileSystem.autoApprove', label: 'Auto-Approve Files', enabled: chatCfg.get<boolean>('tools.fileSystem.autoApprove', false), group: 'Agent Capabilities', tooltip: 'Skip confirmation when agents create or edit files' },
+        { key: 'chat.hooks.enabled', label: 'Agent Hooks', enabled: chatCfg.get<boolean>('hooks.enabled', false), group: 'Agent Capabilities', tooltip: 'Run pre/post scripts around agent actions (e.g., lint after edit)' },
+        { key: 'chat.useCustomAgentHooks', label: 'Agent-Scoped Hooks', enabled: chatCfg.get<boolean>('useCustomAgentHooks', false), group: 'Agent Capabilities', tooltip: 'Use project-level hooks defined in .github/hooks.json' },
+        { key: 'chat.restoreLastPanelSession', label: 'Restore Last Session', enabled: chatCfg.get<boolean>('restoreLastPanelSession', false), group: 'Agent Capabilities', tooltip: 'Reopen the last chat session when VS Code starts' },
       ];
 
 

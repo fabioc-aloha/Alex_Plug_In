@@ -189,7 +189,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
                         lastGroup = s.group;
                       }
                       return `${groupHeader}
-                  <div class="setting-row">
+                  <div class="setting-row"${s.tooltip ? ` title="${escapeHtml(s.tooltip)}"` : ''}>
                       <span>${escapeHtml(s.label)}</span>
                       <div class="toggle-switch ${s.enabled ? 'on' : ''}" data-setting="${escapeHtml(s.key)}" tabindex="0" role="switch" aria-checked="${s.enabled}" aria-label="Toggle ${escapeHtml(s.label)}"></div>
                   </div>`;

@@ -59,6 +59,7 @@ export interface SettingsToggle {
   label: string;
   enabled: boolean;
   group?: string;
+  tooltip?: string;
 }
 
 /** Data contract for the Skills tab */
