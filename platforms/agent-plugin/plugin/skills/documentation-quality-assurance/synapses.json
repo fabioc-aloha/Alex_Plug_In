@@ -1,24 +1,27 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "1.0",
+  "skillId": "documentation-quality-assurance",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.1.0",
-  "skill": "documentation-quality-assurance",
   "description": "Systematic documentation audit, drift detection, preflight validation, and multi-pass quality pipelines",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/release-process/SKILL.md",
       "strength": 0.85,
-      "type": "operational",
+      "type": "implements",
       "direction": "bidirectional",
-      "context": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles"
+      "reason": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles",
+      "when": "When task involves .github/skills/release process/SKILL.md",
+      "yields": "release process operational procedures"
     },
     {
       "target": ".github/skills/heir-sync-management/SKILL.md",
       "strength": 0.7,
-      "type": "quality-gate",
+      "type": "supports",
       "direction": "supports",
-      "context": "Heir validation uses doc QA patterns for sync verification"
+      "reason": "Heir validation uses doc QA patterns for sync verification",
+      "when": "When task involves .github/skills/heir sync management/SKILL.md",
+      "yields": "heir sync management gate criteria and checks"
     }
   ],
   "activationContexts": [
@@ -31,20 +34,6 @@
     "preflight validation",
     "operational documentation",
     "document headers"
-  ],
-  "yields": [
-    {
-      "concept": "5-pass quality pipeline",
-      "whenNeeded": "reviewing large documentation suites systematically"
-    },
-    {
-      "concept": "count elimination rules",
-      "whenNeeded": "hardcoded numbers in docs drift from reality"
-    },
-    {
-      "concept": "comprehensive header pattern",
-      "whenNeeded": "operational docs lack at-a-glance context (regression checklists, deployment guides)"
-    }
   ],
   "lastUpdated": "2026-02-20T07:45:33.299Z",
   "changelog": [

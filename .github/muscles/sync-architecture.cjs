@@ -194,7 +194,7 @@ const SKILL_PII_SUBPATHS = {
 function getExcludedMuscles() {
     const inheritancePath = path.join(MASTER_GITHUB, 'muscles', 'inheritance.json');
     if (!fs.existsSync(inheritancePath)) {
-        console.warn('  ⚠️ muscles/inheritance.json not found, using defaults');
+        console.warn('  [WARN] muscles/inheritance.json not found, using defaults');
         return ['sync-architecture.cjs', 'build-extension-package.ps1', 'audit-master-alex.ps1', 'inheritance.json'];
     }
     try {
@@ -207,7 +207,7 @@ function getExcludedMuscles() {
         }
         return excluded;
     } catch (e) {
-        console.warn(`  ⚠️ Could not read inheritance.json: ${e.message}`);
+        console.warn(`  [WARN] Could not read inheritance.json: ${e.message}`);
         return ['sync-architecture.cjs', 'build-extension-package.ps1', 'audit-master-alex.ps1', 'inheritance.json'];
     }
 }
@@ -239,7 +239,7 @@ function copyDirRecursive(src, dest, excludeFiles = []) {
     for (const entry of entries) {
         // Skip excluded files
         if (excludeFiles.includes(entry.name)) {
-            console.log(`   ⏭️  Excluded: ${entry.name}`);
+            console.log(`   [SKIP] Excluded: ${entry.name}`);
             continue;
         }
         
@@ -255,7 +255,7 @@ function copyDirRecursive(src, dest, excludeFiles = []) {
 }
 
 function syncSkills() {
-    console.log('\n📦 Syncing skills from Master to Heir...\n');
+    console.log('\n[SKILLS] Syncing skills from Master to Heir...\n');
     
     const stats = {
         copied: [],
@@ -300,7 +300,7 @@ function syncSkills() {
                     const heirSubPath = path.join(heirSkillPath, ...subPath.split('/'));
                     if (fs.existsSync(heirSubPath)) {
                         fs.writeFileSync(heirSubPath, template, 'utf8');
-                        console.log(`   🔒 PII scrubbed: ${skillName}/${subPath}`);
+                        console.log(`   [PII] Scrubbed: ${skillName}/${subPath}`);
                     }
                 }
 
@@ -327,28 +327,28 @@ function syncSkills() {
     }
 
     // Report
-    console.log(`✅ Copied: ${stats.copied.length} skills`);
+    console.log(`[OK] Copied: ${stats.copied.length} skills`);
     if (cleaned.length > 0) {
-        console.log(`🗑️  Cleaned stale heir skills: ${cleaned.length}`);
+        console.log(`[CLEAN] Cleaned stale heir skills: ${cleaned.length}`);
         cleaned.forEach(s => console.log(`   - ${s} (${getInheritance(s)})`));
     }
     if (stats.skippedMasterOnly.length > 0) {
-        console.log(`⏭️  Skipped (master-only): ${stats.skippedMasterOnly.length}`);
+        console.log(`[SKIP] Skipped (master-only): ${stats.skippedMasterOnly.length}`);
         stats.skippedMasterOnly.forEach(s => console.log(`   - ${s}`));
     }
     if (stats.skippedM365.length > 0) {
-        console.log(`⏭️  Skipped (heir:m365): ${stats.skippedM365.length}`);
+        console.log(`[SKIP] Skipped (heir:m365): ${stats.skippedM365.length}`);
         stats.skippedM365.forEach(s => console.log(`   - ${s}`));
     }
     if (stats.skippedHeirSpecific.length > 0) {
-        console.log(`⏭️  Skipped (heir:vscode): ${stats.skippedHeirSpecific.length}`);
+        console.log(`[SKIP] Skipped (heir:vscode): ${stats.skippedHeirSpecific.length}`);
     }
     
     return stats;
 }
 
 function cleanBrokenSynapseReferences(skippedMasterOnly) {
-    console.log('\n🧹 Cleaning broken synapse references to master-only resources...\n');
+    console.log('\n[SYNAPSES] Cleaning broken synapse references to master-only resources...\n');
     
     // Master-only files and paths that shouldn't be referenced in heir
     const masterOnlyPatterns = [
@@ -416,14 +416,14 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
                 console.log(`   Cleaned: ${skillName} (removed ${removed} refs)`);
             }
         } catch (e) {
-            console.warn(`   ⚠️ Could not clean ${synapsePath}: ${e.message}`);
+            console.warn(`   [WARN] Could not clean ${synapsePath}: ${e.message}`);
         }
     }
     
     if (cleanedCount > 0) {
-        console.log(`\n✅ Cleaned ${cleanedCount} synapse files (${totalRemoved} references removed)`);
+        console.log(`\n[OK] Cleaned ${cleanedCount} synapse files (${totalRemoved} references removed)`);
     } else {
-        console.log('✅ No broken references found');
+        console.log('[OK] No broken references found');
     }
 }
 
@@ -436,7 +436,7 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
  * Targets: ALL heir synapses.json files (including heir:vscode maintained skills)
  */
 function normalizeBackslashPaths() {
-    console.log('\n🔧 Normalizing backslash paths in heir synapses...\n');
+    console.log('\n[NORMALIZE] Normalizing backslash paths in heir synapses...\n');
 
     let normalizedCount = 0;
     let pathsFixed = 0;
@@ -467,19 +467,19 @@ function normalizeBackslashPaths() {
             pathsFixed += backslashCount;
             console.log(`   Normalized: ${skillName} (${backslashCount} paths)`);
         } catch (e) {
-            console.warn(`   ⚠️ Could not normalize ${synapsePath}: ${e.message}`);
+            console.warn(`   [WARN] Could not normalize ${synapsePath}: ${e.message}`);
         }
     }
 
     if (normalizedCount > 0) {
-        console.log(`\n✅ Normalized ${normalizedCount} synapse file(s) (${pathsFixed} backslash path(s) fixed)`);
+        console.log(`\n[OK] Normalized ${normalizedCount} synapse file(s) (${pathsFixed} backslash path(s) fixed)`);
     } else {
-        console.log('✅ No backslash paths found');
+        console.log('[OK] No backslash paths found');
     }
 }
 
 function syncArchitectureFolders() {
-    console.log('\n📁 Syncing architecture folders...\n');
+    console.log('\n[FOLDERS] Syncing architecture folders...\n');
     
     for (const folder of ARCHITECTURE_FOLDERS) {
         const masterPath = path.join(MASTER_GITHUB, folder);
@@ -500,7 +500,7 @@ function syncArchitectureFolders() {
             
             const count = fs.readdirSync(masterPath).length;
             const excluded = exclusions.length;
-            console.log(`✅ ${folder}/ (${count} items${excluded ? `, ${excluded} excluded` : ''})`);
+            console.log(`[OK] ${folder}/ (${count} items${excluded ? `, ${excluded} excluded` : ''})`);
 
             // Rename heir-specific files after sync (e.g., brain-qa-heir.ps1 → brain-qa.ps1)
             if (folder === 'muscles') {
@@ -510,11 +510,11 @@ function syncArchitectureFolders() {
                     const toPath = path.join(heirPath, to);
                     if (fs.existsSync(fromPath)) {
                         fs.renameSync(fromPath, toPath);
-                        console.log(`  🔄 Renamed ${from} → ${to}`);
+                        console.log(`  [RENAME] ${from} -> ${to}`);
                     }
                 }
             }        } else {
-            console.log(`⚠️  ${folder}/ not found in master`);
+            console.log(`[WARN] ${folder}/ not found in master`);
         }
     }
 
@@ -533,12 +533,12 @@ function syncArchitectureFolders() {
         }
         // Add .gitkeep to preserve empty folder in git
         fs.writeFileSync(path.join(heirPath, '.gitkeep'), '', 'utf8');
-        console.log(`📂 ${folder}/ (empty — populated at runtime)`);
+        console.log(`[EMPTY] ${folder}/ (empty -- populated at runtime)`);
     }
 }
 
 function syncArchitectureFiles() {
-    console.log('\n📄 Syncing architecture files...\n');
+    console.log('\n[FILES] Syncing architecture files...\n');
     
     // Exclusion-based: sync ALL .md files from master .github root except those in EXCLUDED_ROOT_FILES
     const rootFiles = fs.readdirSync(MASTER_GITHUB)
@@ -546,13 +546,13 @@ function syncArchitectureFiles() {
     
     for (const file of rootFiles) {
         if (EXCLUDED_ROOT_FILES.includes(file)) {
-            console.log(`⏭️  ${file} (excluded)`);
+            console.log(`[SKIP] ${file} (excluded)`);
             continue;
         }
         const masterPath = path.join(MASTER_GITHUB, file);
         const heirPath = path.join(HEIR_GITHUB, file);
         fs.copyFileSync(masterPath, heirPath);
-        console.log(`✅ ${file}`);
+        console.log(`[OK] ${file}`);
     }
 
     // Sync non-md root files that are part of the architecture
@@ -562,7 +562,7 @@ function syncArchitectureFiles() {
         const heirPath = path.join(HEIR_GITHUB, file);
         if (fs.existsSync(masterPath)) {
             fs.copyFileSync(masterPath, heirPath);
-            console.log(`✅ ${file}`);
+            console.log(`[OK] ${file}`);
         }
     }
 
@@ -582,7 +582,7 @@ function syncArchitectureFiles() {
             if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
             fs.copyFileSync(src, dest);
             const fileName = path.relative(HEIR_ROOT, dest).replace(/\\/g, '/');
-            console.log(`✅ ${fileName} (walkthrough media)`);
+            console.log(`[OK] ${fileName} (walkthrough media)`);
         }
     }
 
@@ -597,12 +597,12 @@ function syncArchitectureFiles() {
             fs.copyFileSync(path.join(masterClaude, f), path.join(heirClaude, f));
             claudeCount++;
         }
-        console.log(`✅ .claude/ (${claudeCount} files)`);
+        console.log(`[OK] .claude/ (${claudeCount} files)`);
     }
 }
 
 function verifyCounts() {
-    console.log('\n🔍 Verifying sync...\n');
+    console.log('\n[VERIFY] Verifying sync...\n');
     
     const masterSkillCount = fs.readdirSync(MASTER_SKILLS, { withFileTypes: true })
         .filter(d => d.isDirectory()).length;
@@ -628,9 +628,9 @@ function verifyCounts() {
     console.log(`Expected heir: ${expectedHeirCount} (inheritable + universal)`);
     
     if (heirSkillCount >= expectedHeirCount) {
-        console.log('\n✅ Skill sync verified!\n');
+        console.log('\n[OK] Skill sync verified!\n');
     } else {
-        console.error(`\n❌ MISMATCH: Heir has ${heirSkillCount} but should have at least ${expectedHeirCount}`);
+        console.error(`\n[ERROR] MISMATCH: Heir has ${heirSkillCount} but should have at least ${expectedHeirCount}`);
         process.exit(1);
     }
 }
@@ -640,7 +640,7 @@ function verifyCounts() {
 // ============================================================
 
 function applyHeirTransformations() {
-    console.log('\n🔧 Applying heir-specific transformations...\n');
+    console.log('\n[TRANSFORM] Applying heir-specific transformations...\n');
     
     let transformCount = 0;
     
@@ -741,10 +741,10 @@ function applyHeirTransformations() {
         
         if (content !== original) {
             fs.writeFileSync(copilotPath, content, 'utf8');
-            console.log(`✅ copilot-instructions.md: ${diffs.join(', ')}`);
+            console.log(`[OK] copilot-instructions.md: ${diffs.join(', ')}`);
             transformCount += diffs.length;
         } else {
-            console.log('ℹ️  copilot-instructions.md: no transformations needed (already heir format)');
+            console.log('[INFO] copilot-instructions.md: no transformations needed (already heir format)');
         }
     }
     
@@ -756,7 +756,7 @@ function applyHeirTransformations() {
             const newContent = content.replace(removal.pattern, '');
             if (newContent !== content) {
                 fs.writeFileSync(filePath, newContent, 'utf8');
-                console.log(`✅ ${removal.file}: removed synapse (${removal.reason})`);
+                console.log(`[OK] ${removal.file}: removed synapse (${removal.reason})`);
                 transformCount++;
             }
         }
@@ -771,7 +771,7 @@ function applyHeirTransformations() {
     for (const filePath of masterOnlyFiles) {
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
-            console.log(`🗑️  Deleted leaked file: ${path.basename(filePath)}`);
+            console.log(`[DELETE] Deleted leaked file: ${path.basename(filePath)}`);
             transformCount++;
         }
     }
@@ -785,7 +785,7 @@ function applyHeirTransformations() {
 // ============================================================
 
 function cleanBrokenEmbeddedSynapses() {
-    console.log('\n🧹 Cleaning broken embedded synapse references in heir...\n');
+    console.log('\n[SYNAPSES] Cleaning broken embedded synapse references in heir...\n');
 
     let cleanedFiles = 0;
     let removedLines = 0;
@@ -845,9 +845,9 @@ function cleanBrokenEmbeddedSynapses() {
     }
 
     if (cleanedFiles > 0) {
-        console.log(`\n✅ Cleaned ${cleanedFiles} file(s) (${removedLines} broken reference line(s) removed)`);
+        console.log(`\n[OK] Cleaned ${cleanedFiles} file(s) (${removedLines} broken reference line(s) removed)`);
     } else {
-        console.log('✅ No broken embedded synapse references found');
+        console.log('[OK] No broken embedded synapse references found');
     }
 }
 
@@ -856,7 +856,7 @@ function cleanBrokenEmbeddedSynapses() {
 // ============================================================
 
 function validateHeirIntegrity() {
-    console.log('\n🛡️  Validating heir integrity...\n');
+    console.log('\n[INTEGRITY] Validating heir integrity...\n');
     
     const errors = [];
     const warnings = [];
@@ -948,19 +948,19 @@ function validateHeirIntegrity() {
     
     // Report
     if (errors.length === 0 && warnings.length === 0) {
-        console.log('✅ Heir integrity validated — no contamination detected\n');
+        console.log('[OK] Heir integrity validated -- no contamination detected\n');
         return true;
     }
     
     if (warnings.length > 0) {
-        console.log(`⚠️  ${warnings.length} warning(s):`);
-        warnings.forEach(w => console.log(`   ⚠️  ${w}`));
+        console.log(`[WARN] ${warnings.length} warning(s):`);
+        warnings.forEach(w => console.log(`   [WARN] ${w}`));
     }
     
     if (errors.length > 0) {
-        console.log(`❌ ${errors.length} CONTAMINATION ERROR(S):`);
-        errors.forEach(e => console.log(`   ❌ ${e}`));
-        console.log('\n🚫 HEIR IS CONTAMINATED — Fix before publishing!\n');
+        console.log(`[ERROR] ${errors.length} CONTAMINATION ERROR(S):`);
+        errors.forEach(e => console.log(`   [ERROR] ${e}`));
+        console.log('\n[BLOCKED] HEIR IS CONTAMINATED -- Fix before publishing!\n');
         process.exit(1);
     }
     
@@ -972,7 +972,7 @@ function validateHeirIntegrity() {
 // ============================================================
 
 function validateSkillFrontmatter() {
-    console.log('\n📋 Validating SKILL.md frontmatter...\n');
+    console.log('\n[FRONTMATTER] Validating SKILL.md frontmatter...\n');
     
     const errors = [];
     const warnings = [];
@@ -1020,15 +1020,15 @@ function validateSkillFrontmatter() {
     }
     
     if (errors.length === 0 && warnings.length === 0) {
-        console.log('✅ All SKILL.md files have valid frontmatter\n');
+        console.log('[OK] All SKILL.md files have valid frontmatter\n');
     } else {
         if (warnings.length > 0) {
-            console.log(`⚠️  ${warnings.length} warning(s):`);
-            warnings.forEach(w => console.log(`   ⚠️  ${w}`));
+            console.log(`[WARN] ${warnings.length} warning(s):`);
+            warnings.forEach(w => console.log(`   [WARN] ${w}`));
         }
         if (errors.length > 0) {
-            console.log(`❌ ${errors.length} frontmatter error(s):`);
-            errors.forEach(e => console.log(`   ❌ ${e}`));
+            console.log(`[ERROR] ${errors.length} frontmatter error(s):`);
+            errors.forEach(e => console.log(`   [ERROR] ${e}`));
         }
         console.log('');
     }
@@ -1041,7 +1041,7 @@ function validateSkillFrontmatter() {
 // ============================================================
 
 function validateSynapseTargets() {
-    console.log('\n🔗 Validating synapse targets...\n');
+    console.log('\n[TARGETS] Validating synapse targets...\n');
     
     const errors = [];
     const warnings = [];
@@ -1104,15 +1104,15 @@ function validateSynapseTargets() {
     }
     
     if (errors.length === 0 && warnings.length === 0) {
-        console.log('✅ All synapse targets validated\n');
+        console.log('[OK] All synapse targets validated\n');
     } else {
         if (warnings.length > 0) {
-            console.log(`⚠️  ${warnings.length} warning(s):`);
-            warnings.forEach(w => console.log(`   ⚠️  ${w}`));
+            console.log(`[WARN] ${warnings.length} warning(s):`);
+            warnings.forEach(w => console.log(`   [WARN] ${w}`));
         }
         if (errors.length > 0) {
-            console.log(`❌ ${errors.length} broken synapse reference(s):`);
-            errors.forEach(e => console.log(`   ❌ ${e}`));
+            console.log(`[ERROR] ${errors.length} broken synapse reference(s):`);
+            errors.forEach(e => console.log(`   [ERROR] ${e}`));
         }
         console.log('');
     }
@@ -1125,7 +1125,7 @@ function validateSynapseTargets() {
 // ============================================================
 
 function validateSkillActivationIndex() {
-    console.log('\n📇 Validating memory-activation skill...\n');
+    console.log('\n[INDEX] Validating memory-activation skill...\n');
     
     const errors = [];
     const warnings = [];
@@ -1137,7 +1137,7 @@ function validateSkillActivationIndex() {
         return { errors, warnings };
     }
     
-    console.log('✅ memory-activation skill exists\n');
+    console.log('[OK] memory-activation skill exists\n');
     
     // Note: The skill activation index is embedded within SKILL.md itself,
     // not a separate file. Manual review is needed to ensure all skills are discoverable.
@@ -1159,7 +1159,7 @@ function cleanupLegacyFolders() {
         const legacyPath = path.join(HEIR_GITHUB, folder);
         if (fs.existsSync(legacyPath)) {
             fs.rmSync(legacyPath, { recursive: true });
-            console.log(`🧹 Removed legacy folder: .github/${folder}/`);
+            console.log(`[CLEAN] Removed legacy folder: .github/${folder}/`);
         }
     }
 }
@@ -1201,7 +1201,7 @@ function countSynapseConnections(skillsDir) {
 }
 
 function auditFileCounts() {
-    console.log('\n📊 File & Synapse Count Audit\n');
+    console.log('\n[AUDIT] File & Synapse Count Audit\n');
 
     const folders = ['agents', 'assets', 'config', 'instructions', 'muscles', 'prompts', 'skills', 'episodic'];
     const pad = (s, n) => String(s).padStart(n);
@@ -1226,7 +1226,7 @@ function auditFileCounts() {
     }
 
     console.log(`  ${'Folder'.padEnd(15)} ${'Master'.padStart(6)}  ${'Heir'.padStart(6)}  Status`);
-    console.log(`  ${'─'.repeat(15)} ${'─'.repeat(6)}  ${'─'.repeat(6)}  ${'─'.repeat(12)}`);
+    console.log(`  ${'-'.repeat(15)} ${'-'.repeat(6)}  ${'-'.repeat(6)}  ${'-'.repeat(12)}`);
 
     for (const folder of folders) {
         const mc = countFilesRecursive(path.join(MASTER_GITHUB, folder));
@@ -1235,21 +1235,21 @@ function auditFileCounts() {
         let status;
         if (folder === 'episodic') {
             // Heir episodic should have only .gitkeep
-            status = hc <= 1 ? '✅ empty OK' : `⚠️  has ${hc} files`;
+            status = hc <= 1 ? '[OK] empty' : `[WARN] has ${hc} files`;
             if (hc > 1) allMatch = false;
         } else if (folder === 'skills') {
             // Skills have known exclusions (master-only, heir:m365) plus synapse cleaning diffs
-            status = hc > 0 ? '✅ curated' : '❌ EMPTY';
+            status = hc > 0 ? '[OK] curated' : '[ERROR] EMPTY';
             if (hc === 0) allMatch = false;
         } else if (mc === hc) {
-            status = '✅ match';
+            status = '[OK] match';
         } else {
             const diff = mc - hc;
             const expected = expectedDiffs[folder] || 0;
             if (diff === expected) {
-                status = `✅ ${diff} excluded`;
+                status = `[OK] ${diff} excluded`;
             } else {
-                status = `⚠️  diff ${diff}`;
+                status = `[WARN] diff ${diff}`;
                 allMatch = false;
             }
         }
@@ -1265,11 +1265,11 @@ function auditFileCounts() {
     const rootDiff = masterRootMd - heirRootMd;
     let rootStatus;
     if (masterRootMd === heirRootMd) {
-        rootStatus = '✅ match';
+        rootStatus = '[OK] match';
     } else if (rootDiff === expectedRootDiff) {
-        rootStatus = `✅ ${rootDiff} GitHub-only`;
+        rootStatus = `[OK] ${rootDiff} GitHub-only`;
     } else {
-        rootStatus = `⚠️  diff ${rootDiff}`;
+        rootStatus = `[WARN] diff ${rootDiff}`;
         allMatch = false;
     }
     console.log(`  ${padR('root .md', 15)} ${pad(masterRootMd, 6)}  ${pad(heirRootMd, 6)}  ${rootStatus}`);
@@ -1284,16 +1284,16 @@ function auditFileCounts() {
         ? fs.readdirSync(HEIR_SKILLS, { withFileTypes: true }).filter(d => d.isDirectory()).length : 0;
 
     console.log(`  ${'Metric'.padEnd(15)} ${'Master'.padStart(6)}  ${'Heir'.padStart(6)}  Status`);
-    console.log(`  ${'─'.repeat(15)} ${'─'.repeat(6)}  ${'─'.repeat(6)}  ${'─'.repeat(20)}`);
+    console.log(`  ${'-'.repeat(15)} ${'-'.repeat(6)}  ${'-'.repeat(6)}  ${'-'.repeat(20)}`);
     console.log(`  ${padR('Skill dirs', 15)} ${pad(masterSkillDirs, 6)}  ${pad(heirSkillDirs, 6)}  ${nonHeirSkills} excluded (master/m365)`);
     console.log(`  ${padR('Synapse files', 15)} ${pad(masterSyn.synapseFiles, 6)}  ${pad(heirSyn.synapseFiles, 6)}`);
     console.log(`  ${padR('Connections', 15)} ${pad(masterSyn.connections, 6)}  ${pad(heirSyn.connections, 6)}  heir cleaned of master-only refs`);
 
     console.log('');
     if (allMatch) {
-        console.log('✅ All folder counts verified\n');
+        console.log('[OK] All folder counts verified\n');
     } else {
-        console.log('⚠️  Some counts differ — review above\n');
+        console.log('[WARN] Some counts differ -- review above\n');
     }
 }
 
@@ -1302,17 +1302,17 @@ function auditFileCounts() {
 // ============================================================
 
 function updatePackageJsonChatSkills() {
-    console.log('\n📦 Updating package.json chatSkills...\n');
+    console.log('\n[CHATSKILLS] Updating package.json chatSkills...\n');
     
     const packagePath = path.join(HEIR_ROOT, 'package.json');
     if (!fs.existsSync(packagePath)) {
-        console.log('⚠️  package.json not found — skipping chatSkills update');
+        console.log('[WARN] package.json not found — skipping chatSkills update');
         return;
     }
     
     const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
     if (!pkg.contributes) {
-        console.log('⚠️  No contributes section — skipping chatSkills update');
+        console.log('[WARN] No contributes section — skipping chatSkills update');
         return;
     }
     
@@ -1331,16 +1331,16 @@ function updatePackageJsonChatSkills() {
     fs.writeFileSync(packagePath, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
     
     if (oldCount !== newCount) {
-        console.log(`✅ chatSkills updated: ${oldCount} → ${newCount} entries`);
+        console.log(`[OK] chatSkills updated: ${oldCount} -> ${newCount} entries`);
     } else {
-        console.log(`✅ chatSkills verified: ${newCount} entries (no change)`);
+        console.log(`[OK] chatSkills verified: ${newCount} entries (no change)`);
     }
 }
 
 // Main
-console.log('═══════════════════════════════════════════');
-console.log('  Alex Architecture Sync (Master → Heir)');
-console.log('═══════════════════════════════════════════');
+console.log('-------------------------------------------');
+console.log('  Alex Architecture Sync (Master -> Heir)');
+console.log('-------------------------------------------');
 
 // Clean up legacy folders in heir
 cleanupLegacyFolders();
@@ -1370,14 +1370,14 @@ const allErrors = [
 ];
 
 if (allErrors.length > 0) {
-    console.log('\n⚠️  ═══════════════════════════════════════════');
-    console.log('⚠️   VALIDATION FAILURES DETECTED');
-    console.log('⚠️  ═══════════════════════════════════════════');
-    console.log(`\n❌ ${allErrors.length} error(s) found during sync validation.`);
+    console.log('\n[WARN] -------------------------------------------');
+    console.log('[WARN]  VALIDATION FAILURES DETECTED');
+    console.log('[WARN] -------------------------------------------');
+    console.log(`\n[ERROR] ${allErrors.length} error(s) found during sync validation.`);
     console.log('   Review the output above and fix issues in MASTER before syncing again.\n');
     console.log('   Note: Sync completed but heir may have quality issues.\n');
 }
 
-console.log('═══════════════════════════════════════════');
+console.log('-------------------------------------------');
 console.log('  Sync complete!');
-console.log('═══════════════════════════════════════════\n');
+console.log('-------------------------------------------\n');

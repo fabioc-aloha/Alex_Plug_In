@@ -131,13 +131,13 @@ if ($Strict) {
 
 if ($criticalErrors -gt 0) {
     if (-not $Quiet) {
-        Write-Host "`n❌ Synapse validation failed with $criticalErrors critical error(s)" -ForegroundColor Red
+        Write-Host "`n[ERROR] Synapse validation failed with $criticalErrors critical error(s)" -ForegroundColor Red
     }
     exit 1
 }
 else {
     if (-not $Quiet) {
-        Write-Host "`n✅ All synapse files valid" -ForegroundColor Green
+        Write-Host "`n[OK] All synapse files valid" -ForegroundColor Green
     }
     exit 0
 }

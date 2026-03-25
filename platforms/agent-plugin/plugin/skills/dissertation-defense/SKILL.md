@@ -1,7 +1,9 @@
 ---
-name: "Dissertation Defense Skill"
-description: "Comprehensive preparation for doctoral dissertation defense including timeline management, presentation design, Q&A practice, mock sessions, and committee dynamics."
-applyTo: "**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*,**/*mock*,**/*q&a*"
+name: dissertation-defense
+description: >-
+  Comprehensive preparation for doctoral dissertation defense including timeline management, presentation design, Q&A
+  practice, mock sessions, and committee dynamics.
+applyTo: '**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*,**/*mock*,**/*q&a*'
 ---
 
 # Dissertation Defense Skill
@@ -306,11 +308,11 @@ For dissertations involving scale development (like AIRS):
 
 ## Related Skills
 
-- [gamma-presentations](.github/skills/gamma-presentations/SKILL.md) — AI-powered presentation generation
-- [academic-research](.github/skills/academic-research/SKILL.md) — Research methodology
-- [practitioner-research](.github/skills/practitioner-research/SKILL.md) — DBA/practitioner methodology
-- [socratic-questioning](.github/skills/socratic-questioning/SKILL.md) — Question handling techniques
-- [academic-paper-drafting](.github/skills/academic-paper-drafting/SKILL.md) — Writing and publication
+- [gamma-presentations](..\gamma-presentations/SKILL.md) — AI-powered presentation generation
+- [academic-research](..\academic-research/SKILL.md) — Research methodology
+- [practitioner-research](..\practitioner-research/SKILL.md) — DBA/practitioner methodology
+- [socratic-questioning](..\socratic-questioning/SKILL.md) — Question handling techniques
+- [academic-research](..\academic-research/SKILL.md) — Writing and publication
 
 ---
 
@@ -550,6 +552,6 @@ Alex will:
 ## Synapses
 
 - [.github/skills/slide-design/SKILL.md] (High, Uses, Bidirectional) - "Defense presentation slides"
-- [.github/skills/academic-paper-drafting/SKILL.md] (High, Complements, Bidirectional) - "Defense draws from written work"
+- [.github/skills/academic-research/SKILL.md] (High, Complements, Bidirectional) - "Defense draws from written work"
 - [.github/skills/coaching-techniques/SKILL.md] (Medium, Uses, Forward) - "Mock defense feedback techniques"
 - [.github/skills/deep-work-optimization/SKILL.md] (Medium, Enables, Forward) - "Focus for defense preparation"

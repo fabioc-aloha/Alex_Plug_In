@@ -35,15 +35,21 @@ Add these fields to your project's `.github/copilot-instructions.md` Active Cont
 
 ```markdown
 ## Active Context
+Persona: [best-fit persona for this project]
 ...existing fields...
 North Star: [Your ambitious vision statement]
 Guidelines: Read [path/to/NORTH-STAR.md] — defines what "[key phrase]" means in practice
 ```
 
+The `Persona:` field is read by the extension's persona detection system (Priority 5). Setting it explicitly overrides workspace file-structure heuristics, so a marketing project with Bicep files won't be misdetected as DevOps.
+
+Available personas: developer, academic, researcher, technical-writer, architect, data-engineer, devops, content-creator, fiction-writer, game-developer, project-manager, security, student, job-seeker, presenter, power-user (and 30+ more — see personaDefinitions.ts).
+
 **Example** (Alex Master):
 ```markdown
+Persona: Developer
 North Star: Create the most advanced and trusted AI partner for any job
-Guidelines: Read alex_docs/NORTH-STAR.md — defines what "most advanced and trusted AI partner" means in practice
+Guidelines: Read the North Star document — defines what "most advanced and trusted AI partner" means in practice
 ```
 
 ---
@@ -300,8 +306,6 @@ Where's the ambition? What makes this project worth doing? Reach further.
 ## Resources
 
 - [NASA/JPL Power of 10 Rules](https://en.wikipedia.org/wiki/The_Power_of_10:_Rules_for_Developing_Safety-Critical_Code)
-- [Alex's North Star document](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/NORTH-STAR.md) — Alex's North Star in practice
-- [NASA Code Standards Analysis](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/research/NASA-CODE-STANDARDS-ANALYSIS.md) — How Alex implements NASA standards
 
 ---
 
@@ -309,6 +313,6 @@ Where's the ambition? What makes this project worth doing? Reach further.
 
 - **research-first-development** — North Star shapes what to research before building
 - **code-review** — Reviews should check North Star alignment
-- **architecture-health** — Health includes vision alignment
+- **brain-qa** — Health includes vision alignment
 - **self-actualization** — Regular assessment of North Star adherence
 - **release-process** — Releases should serve the North Star

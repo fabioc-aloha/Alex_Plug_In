@@ -9,9 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.8.1] - 2026-03-25
 
-> **Converter Infrastructure Sprint** -- All 46 converter improvement items completed (v5.1.0), then 11 additional recommendations from gap analysis implemented (v5.2.0 + v5.3.0). New prompt preprocessor, batch retry hardening, base64 image embedding, heading validation, link validation, dry-run mode, recursive batch mode, negative prompt support, footnote fix, and 97 new QA assertions (284 total).
+> **Welcome View Simplification & Cognitive Resilience** -- Removed Agents tab from welcome menu (4-tab layout), added Failure Pivot Protocol and Scope Clarification Protocol to prevent retry loops and assumption errors, converter infrastructure sprint completed.
 
 ### Added
+
+- **Failure Pivot Protocol** -- Rule of Three: after 2 failures, 3rd attempt must be fundamentally different. Detection signals table, anti-loop inhibitory control. Deployed in `alex-core.instructions.md`
+- **Scope Clarification Protocol** -- Narrow Scope Default principle, explicit scope confirmation before large-scale operations. Deployed in `alex-core.instructions.md`
+- **User Signal Detection** -- Critical pivot signals ("you are stuck", "try something different", "this is not working") with required actions. Deployed in `awareness/SKILL.md`
+- **Alex-First Scripts Guidelines** -- Machine-consumable output (JSON), no decorative formatting for automation scripts. Deployed in `alex-core.instructions.md`
+- **Personality Toggle in Mission Tab** -- Auto/Precise/Chatty buttons moved from Agents tab to Mission tab
+
+### Changed
+
+- **Welcome View** -- Simplified from 5 tabs to 4 tabs (Mission, Skills, Mind, Docs)
+- **Agents Tab Removed** -- Agent orchestration moved to chat participant routing; agent count displayed in Mind tab
+
+### Fixed
+
+- **Retry Loop Resilience** -- Added cognitive protocols to prevent stuck states with same failing approach
+- **Scope Assumption Errors** -- Added clarification protocols for ambiguous terms ("heirs", "all" operations)
+
+### Converter Infrastructure
 
 - **prompt-preprocessor.cjs** (NEW shared module) -- section validation (SUBJECT/SCENE/STYLE), model-family prompt length limits, smart quote cleanup, identity trait injection from `visual-memory.json`, full `preprocessPrompt()` pipeline
 - **Duration constraint validation** -- `validateDuration()` pre-flight check for video models (hailuo, luma, kling, stability) with allowed values and min/max ranges

@@ -1,6 +1,6 @@
 ---
-name: "Citation Management"
-description: "APA 7th formatting, citation integration, reference validation, and bibliography generation"
+name: citation-management
+description: APA 7th formatting, citation integration, reference validation, and bibliography generation
 ---
 
 # Skill: Citation Management
@@ -16,7 +16,7 @@ description: "APA 7th formatting, citation integration, reference validation, an
 | **Category** | Research |
 | **Difficulty** | Intermediate |
 | **Prerequisites** | None |
-| **Related Skills** | literature-review, academic-paper-drafting |
+| **Related Skills** | literature-review, academic-research |
 
 ---
 
@@ -314,5 +314,5 @@ Web:      Author. (Year, Month Day). Title. Site. URL
 ## Synapses
 
 - [.github/skills/literature-review/SKILL.md] (High, Enables, Bidirectional) - "Lit review requires proper citations"
-- [.github/skills/academic-paper-drafting/SKILL.md] (High, Enables, Forward) - "Papers need correct citations"
+- [.github/skills/academic-research/SKILL.md] (High, Enables, Forward) - "Papers need correct citations"
 - [.github/skills/dissertation-defense/SKILL.md] (Medium, Supports, Forward) - "Defense references must be accurate"

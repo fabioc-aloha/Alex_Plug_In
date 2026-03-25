@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "6.8.0",
+  "version": "6.8.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -315,6 +315,21 @@
         "icon": "$(file-text)"
       },
       {
+        "command": "alex.convertToEmail",
+        "title": "Alex: Convert to Email (.eml)",
+        "icon": "$(mail)"
+      },
+      {
+        "command": "alex.scaffoldMarkdown",
+        "title": "Alex: New Markdown from Template...",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "alex.injectNavigation",
+        "title": "Alex: Inject Navigation Table",
+        "icon": "$(list-tree)"
+      },
+      {
         "command": "alex.generateGammaPresentation",
         "title": "Alex: Generate Gamma Presentation",
         "icon": "$(presentation)"
@@ -572,37 +587,47 @@
           "when": "resourceExtname == '.md'"
         },
         {
-          "command": "alex.generateGammaFromFile",
+          "command": "alex.convertToEmail",
           "group": "3_generate@5",
           "when": "resourceExtname == '.md'"
         },
         {
-          "command": "alex.generateGammaWithOptions",
+          "command": "alex.injectNavigation",
           "group": "3_generate@6",
           "when": "resourceExtname == '.md'"
         },
         {
+          "command": "alex.generateGammaFromFile",
+          "group": "3_generate@7",
+          "when": "resourceExtname == '.md'"
+        },
+        {
+          "command": "alex.generateGammaWithOptions",
+          "group": "3_generate@8",
+          "when": "resourceExtname == '.md'"
+        },
+        {
           "command": "alex.generateImageFromSelection",
-          "group": "3_generate@7"
+          "group": "3_generate@9"
         },
         {
           "command": "alex.generateAIImage",
-          "group": "3_generate@8",
+          "group": "3_generate@10",
           "when": "resourceExtname == '.md' || resourceExtname == '.txt'"
         },
         {
           "command": "alex.editImageWithPrompt",
-          "group": "3_generate@9",
+          "group": "3_generate@11",
           "when": "resourceExtname =~ /\\.(png|jpg|jpeg|webp|gif)$/"
         },
         {
           "command": "alex.upscaleImage",
-          "group": "3_generate@10",
+          "group": "3_generate@12",
           "when": "resourceExtname =~ /\\.(png|jpg|jpeg|webp)$/"
         },
         {
           "command": "alex.generateDiagram",
-          "group": "3_generate@11",
+          "group": "3_generate@13",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
         },
         {
@@ -828,6 +853,9 @@
         "path": "./.github/skills/content-safety-implementation/SKILL.md"
       },
       {
+        "path": "./.github/skills/converter-qa/SKILL.md"
+      },
+      {
         "path": "./.github/skills/correax-brand/SKILL.md"
       },
       {
@@ -957,6 +985,12 @@
         "path": "./.github/skills/mcp-development/SKILL.md"
       },
       {
+        "path": "./.github/skills/md-scaffold/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/md-to-eml/SKILL.md"
+      },
+      {
         "path": "./.github/skills/md-to-word/SKILL.md"
       },
       {
@@ -985,6 +1019,9 @@
       },
       {
         "path": "./.github/skills/muscle-memory-recognition/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/nav-inject/SKILL.md"
       },
       {
         "path": "./.github/skills/north-star/SKILL.md"

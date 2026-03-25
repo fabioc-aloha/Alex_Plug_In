@@ -6,6 +6,8 @@
  * - Builds a regex for --ignoreFiles to skip dynamic modules
  * - Runs ts-unused-exports and filters output against allowlisted exports
  * - Exits 1 if any unallowlisted unused exports remain
+ *
+ * Alex-first: Use --json for machine-consumable output
  */
 
 const path = require('path');
@@ -15,6 +17,9 @@ const fs = require('fs');
 const ROOT = path.resolve(__dirname, '..');
 const CONFIG_PATH = path.join(ROOT, 'ts-unused-exports.json');
 const TSCONFIG = path.join(ROOT, 'tsconfig.json');
+
+// Alex-first: JSON output mode
+const JSON_MODE = process.argv.includes('--json');
 
 function loadConfig() {
   if (!fs.existsSync(CONFIG_PATH)) return { ignoreFiles: [], ignoreExports: {} };
@@ -105,23 +110,35 @@ function main() {
   const stdout = (result.stdout || '').toString();
   const stderr = (result.stderr || '').toString();
 
-  if (stderr.trim().length > 0) {
+  if (stderr.trim().length > 0 && !JSON_MODE) {
     console.warn('[lint-unused] stderr:', stderr.trim());
   }
 
   const unexpected = parseOutput(stdout, cfg.ignoreExports || {});
+
+  if (JSON_MODE) {
+    const jsonResult = {
+      passed: unexpected.length === 0,
+      unexportedCount: unexpected.length,
+      unexported: unexpected.map(u => u.raw),
+      stderr: stderr.trim() || null
+    };
+    console.log(JSON.stringify(jsonResult, null, 2));
+    process.exit(unexpected.length > 0 ? 1 : 0);
+  }
+
   if (unexpected.length > 0) {
-    console.error('[lint-unused] ❌ Unexpected unused exports detected:');
-    unexpected.forEach(({ raw }) => console.error(`  • ${raw}`));
+    console.error('[lint-unused] Unexpected unused exports detected:');
+    unexpected.forEach(({ raw }) => console.error(`  - ${raw}`));
     console.error('\nTo allowlist, add entries to ts-unused-exports.json -> ignoreExports.');
     process.exit(1);
   }
 
   if (stdout.trim().length > 0) {
-    console.log('[lint-unused] ✅ No unallowlisted unused exports. (ts-unused-exports output follows for review)');
+    console.log('[lint-unused] [PASS] No unallowlisted unused exports. (ts-unused-exports output follows for review)');
     console.log(stdout.trim());
   } else {
-    console.log('[lint-unused] ✅ No unused exports reported.');
+    console.log('[lint-unused] [PASS] No unused exports reported.');
   }
   process.exit(0);
 }

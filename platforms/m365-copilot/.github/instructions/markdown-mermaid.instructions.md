@@ -1,3 +1,7 @@
+---
+description: "Mermaid diagram creation, technical documentation visuals, diagram type selection, and rendering troubleshooting"
+---
+
 # Markdown & Mermaid Diagram Instructions
 
 **Auto-loaded when**: Creating Mermaid diagrams, writing technical documentation with visuals, choosing diagram types, or troubleshooting rendering issues
@@ -113,3 +117,4 @@ Red (error/risk):        fill:#ffebe9,stroke:#cf222e,color:#a40e26
 - [ ] Node labels use `<br/>` for line breaks (NOT `\n`)
 - [ ] `**Figure N:** *description*` caption below the code block
 - [ ] Rendered and visually verified (not just syntax-checked)
+- [ ] For exported PNG/SVG: verified via `view_image` — readable labels, correct palette, no clipped nodes (VS Code 1.112+)

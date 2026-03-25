@@ -3,11 +3,17 @@
  * lint-docs.cjs
  * - Runs markdownlint on docs and README files
  * - Validates Mermaid init blocks to enforce pastel theme (edgeLabelBackground '#ffffff', theme 'base', etc.)
+ * 
+ * Usage: node scripts/lint-docs.cjs [--json]
+ * Alex-first: Use --json for machine-consumable output
  */
 
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+
+// Alex-first: JSON output mode
+const JSON_MODE = process.argv.includes('--json');
 
 const ROOT = path.resolve(__dirname, '..');
 const DOC_PATHS = [
@@ -17,6 +23,9 @@ const DOC_PATHS = [
 ];
 
 const MERMAID_REQUIRED = `%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%`;
+
+// collect results for JSON mode
+let jsonResult = { markdownlint: { passed: true, errors: [] }, mermaid: { passed: true, violations: [] } };
 
 function runMarkdownlint() {
   const markdownlint = require('markdownlint');
@@ -38,17 +47,23 @@ function runMarkdownlint() {
   // Filter out archived docs from fail condition
   const nonArchivedErrors = errorEntries.filter(([file]) => !file.includes(`${path.sep}archive${path.sep}`));
 
+  if (JSON_MODE) {
+    jsonResult.markdownlint.errors = errorEntries.map(([file, errors]) => ({ file: path.relative(ROOT, file), errors }));
+    jsonResult.markdownlint.passed = nonArchivedErrors.length === 0;
+    return;
+  }
+
   if (errorEntries.length > 0) {
     const formatted = formatter ? formatter(result, options) : JSON.stringify(result, null, 2);
     console.error(formatted);
     if (nonArchivedErrors.length > 0) {
-      console.error('[lint-docs] ❌ markdownlint errors (non-archive) — fix before publishing');
+      console.error('[lint-docs] markdownlint errors (non-archive) -- fix before publishing');
       process.exit(1);
     } else {
-      console.warn('[lint-docs] ⚠️ markdownlint warnings (archives only)');
+      console.warn('[lint-docs] [WARN] markdownlint warnings (archives only)');
     }
   }
-  console.log('[lint-docs] ✅ markdownlint passed (archives ignored)');
+  console.log('[lint-docs] [PASS] markdownlint passed (archives ignored)');
 }
 
 function checkMermaidInit(filePath) {
@@ -104,13 +119,22 @@ function main() {
   for (const file of mdFiles) {
     allViolations.push(...checkMermaidInit(file));
   }
+
+  if (JSON_MODE) {
+    jsonResult.mermaid.violations = allViolations.map(v => ({ file: path.relative(ROOT, v.filePath), reason: v.reason }));
+    jsonResult.mermaid.passed = allViolations.length === 0;
+    jsonResult.passed = jsonResult.markdownlint.passed && jsonResult.mermaid.passed;
+    console.log(JSON.stringify(jsonResult, null, 2));
+    process.exit(jsonResult.passed ? 0 : 1);
+  }
+
   if (allViolations.length > 0) {
-    console.error('[lint-docs] ❌ Mermaid init violations:');
-    allViolations.forEach((v) => console.error(`  • ${path.relative(ROOT, v.filePath)} → ${v.reason}`));
+    console.error('[lint-docs] Mermaid init violations:');
+    allViolations.forEach((v) => console.error(`  - ${path.relative(ROOT, v.filePath)} -> ${v.reason}`));
     console.error('\nEnsure diagrams include the pastel init block, e.g.\n' + MERMAID_REQUIRED);
     process.exit(1);
   }
-  console.log('[lint-docs] ✅ Mermaid init checks passed');
+  console.log('[lint-docs] [PASS] Mermaid init checks passed');
 }
 
 main();

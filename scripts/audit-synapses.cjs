@@ -3,10 +3,14 @@
  * Validates all synapses.json files for schema compliance, broken targets,
  * and semantic correctness.
  * 
- * Usage: node scripts/audit-synapses.cjs
+ * Usage: node scripts/audit-synapses.cjs [--json]
+ * Alex-first: Use --json for machine-consumable output
  */
 const fs = require('fs');
 const path = require('path');
+
+// Alex-first: JSON output mode
+const JSON_MODE = process.argv.includes('--json');
 
 const ROOT = path.resolve(__dirname, '..');
 const skillsDir = path.join(ROOT, '.github', 'skills');
@@ -203,6 +207,21 @@ stats.asymmetricLinks = asymmetricCount;
 
 // 6. Skills without synapses.json
 const skillsWithoutSynapses = dirs.filter(d => !fs.existsSync(path.join(skillsDir, d, 'synapses.json')));
+
+// Alex-first: JSON output
+if (JSON_MODE) {
+    const jsonResult = {
+        passed: issues.length === 0,
+        date: new Date().toISOString().split('T')[0],
+        stats,
+        skillsWithoutSynapses,
+        issues,
+        warnings,
+        asymmetricPairs
+    };
+    console.log(JSON.stringify(jsonResult, null, 2));
+    process.exit(issues.length > 0 ? 1 : 0);
+}
 
 console.log('=== SYNAPSE SEMANTIC AUDIT ===');
 console.log(`Date: ${new Date().toISOString().split('T')[0]}`);

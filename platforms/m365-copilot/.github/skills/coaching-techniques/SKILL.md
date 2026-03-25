@@ -1,6 +1,6 @@
 ---
-name: "Coaching Techniques"
-description: "GROW model, active listening, developmental feedback, and team growth approaches"
+name: coaching-techniques
+description: GROW model, active listening, developmental feedback, and team growth approaches
 ---
 
 # Skill: Coaching Techniques

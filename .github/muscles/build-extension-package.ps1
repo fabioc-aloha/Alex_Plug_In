@@ -88,7 +88,7 @@ if (Test-Path $masterInstructionsPath) {
         
         if ($pkgVersion -ne $masterVersion) {
             Write-Host "" -ForegroundColor Red
-            Write-Host "  ❌ VERSION MISMATCH DETECTED!" -ForegroundColor Red
+            Write-Host "  [ERROR] VERSION MISMATCH DETECTED!" -ForegroundColor Red
             Write-Host "     package.json:              $pkgVersion" -ForegroundColor Red
             Write-Host "     copilot-instructions.md:   $masterVersion" -ForegroundColor Red
             Write-Host "" -ForegroundColor Red
@@ -103,11 +103,11 @@ if (Test-Path $masterInstructionsPath) {
             }
         }
         else {
-            Write-Host "  ✅ Versions synchronized" -ForegroundColor Green
+            Write-Host "  [OK] Versions synchronized" -ForegroundColor Green
         }
     }
     else {
-        Write-Host "  ⚠️ Could not parse version from copilot-instructions.md" -ForegroundColor Yellow
+        Write-Host "  [WARN] Could not parse version from copilot-instructions.md" -ForegroundColor Yellow
     }
 }
 else {
@@ -133,7 +133,7 @@ if (-not $DryRun) {
             Write-Error "sync-architecture.cjs failed with exit code $LASTEXITCODE"
             exit 1
         }
-        Write-Host "  ✅ Architecture sync complete" -ForegroundColor Green
+        Write-Host "  [OK] Architecture sync complete" -ForegroundColor Green
     }
     finally {
         Pop-Location
@@ -187,7 +187,7 @@ else {
             Write-Error "Compilation failed"
             exit 1
         }
-        Write-Host "  ✅ Compilation successful" -ForegroundColor Green
+        Write-Host "  [OK] Compilation successful" -ForegroundColor Green
     }
     finally {
         Pop-Location
@@ -204,10 +204,10 @@ if (Test-Path $heirInstructionsPath) {
     if ($heirContent -match '# Alex v(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
         $heirVersion = $matches[1]
         if ($heirVersion -eq $pkgVersion) {
-            Write-Host "  ✅ Heir version verified: $heirVersion" -ForegroundColor Green
+            Write-Host "  [OK] Heir version verified: $heirVersion" -ForegroundColor Green
         }
         else {
-            Write-Host "  ❌ CRITICAL: Heir version ($heirVersion) != package.json ($pkgVersion)" -ForegroundColor Red
+            Write-Host "  [ERROR] CRITICAL: Heir version ($heirVersion) != package.json ($pkgVersion)" -ForegroundColor Red
             exit 1
         }
     }
@@ -252,10 +252,10 @@ if (-not $DryRun -and (Test-Path $TargetGithub)) {
     
     if ($violations.Count -gt 0) {
         Write-Host ""
-        Write-Host "  ❌ PERSONAL DATA DETECTED IN HEIR!" -ForegroundColor Red
+        Write-Host "  [ERROR] PERSONAL DATA DETECTED IN HEIR!" -ForegroundColor Red
         Write-Host "  ---------------------------------" -ForegroundColor Red
         foreach ($v in $violations) {
-            Write-Host "  📁 $($v.File)" -ForegroundColor Yellow
+            Write-Host "  [DIR] $($v.File)" -ForegroundColor Yellow
             Write-Host "     Pattern: $($v.Pattern)" -ForegroundColor Gray
             Write-Host "     Found:   '$($v.Match)'" -ForegroundColor Red
         }
@@ -263,7 +263,7 @@ if (-not $DryRun -and (Test-Path $TargetGithub)) {
         exit 1
     }
     else {
-        Write-Host "  ✅ No personal data found — heir is clean" -ForegroundColor Green
+        Write-Host "  [OK] No personal data found — heir is clean" -ForegroundColor Green
     }
 }
 else {
@@ -280,7 +280,7 @@ Write-Host "----------------------------------------" -ForegroundColor Green
 Write-Host ""
 Write-Host "Files in heir: $copiedCount"
 Write-Host "Target:        $TargetGithub"
-Write-Host "Version:       $pkgVersion ✓"
+Write-Host "Version:       $pkgVersion [OK]"
 Write-Host ""
 
 if ($DryRun) {

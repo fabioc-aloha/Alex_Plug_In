@@ -49,13 +49,13 @@ function Write-Pass {
 
 function Write-Warn {
     param([string]$Msg)
-    if (-not $Quiet) { Write-Host "  ⚠️ $Msg" -ForegroundColor Yellow }
+    if (-not $Quiet) { Write-Host "  [WARN] $Msg" -ForegroundColor Yellow }
     $script:warnings += $Msg
 }
 
 function Write-Fail {
     param([string]$Msg)
-    if (-not $Quiet) { Write-Host "  ❌ $Msg" -ForegroundColor Red }
+    if (-not $Quiet) { Write-Host "  [ERROR] $Msg" -ForegroundColor Red }
     $script:issues += $Msg
 }
 
@@ -161,7 +161,7 @@ if (4 -in $runPhases) {
     Get-Content "$ghPath\skills\memory-activation\SKILL.md" | 
     Select-String -Pattern "^\| .+ \| .+ \|$" | 
     ForEach-Object {
-        if ($_ -match "\| ⭐?\s*([a-z\-]+) \| (.+) \|") {
+        if ($_ -match "\| ?\s*([a-z\-]+) \| (.+) \|") {
             $skill = $matches[1]
             $keywords = $matches[2] -split ", "
             foreach ($kw in $keywords) {
@@ -533,7 +533,7 @@ if (20 -in $runPhases) {
                 $formatWarnings += "${file} - Contains box-drawing ASCII art (Mermaid or tables preferred)"
             }
             
-            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑←→]' }).Count -gt 5) {
+            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑<-->]' }).Count -gt 5) {
                 $formatWarnings += "${file} - Heavy use of ASCII arrows (structured format preferred)"
             }
         }
@@ -544,7 +544,7 @@ if (20 -in $runPhases) {
     }
     else {
         foreach ($fw in $formatWarnings) { Write-Warn $fw }
-        Write-Host "  💡 Use Mermaid or tables instead of ASCII art." -ForegroundColor DarkGray
+        Write-Host "   Use Mermaid or tables instead of ASCII art." -ForegroundColor DarkGray
     }
 }
 
@@ -556,7 +556,7 @@ if (21 -in $runPhases) {
     $emojiCount = 0
     Get-ChildItem "$ghPath\agents\*.md" | ForEach-Object {
         $content = Get-Content $_.FullName -Raw
-        $emojis = @("🔨", "🔍", "📚", "🧠", "✅", "❌", "⚠️", "☁️", "🔷", "⭐")
+        $emojis = @("", "", "", "", "[OK]", "[ERROR]", "[WARN]", "", "", "")
         foreach ($e in $emojis) {
             $emojiCount += ([regex]::Matches($content, [regex]::Escape($e))).Count
         }
@@ -909,21 +909,21 @@ Write-Host "========================================" -ForegroundColor Cyan
 
 if ($fixed.Count -gt 0) {
     Write-Host "`nFIXED ($($fixed.Count)):" -ForegroundColor Green
-    $fixed | ForEach-Object { Write-Host "  ✅ $_" -ForegroundColor Green }
+    $fixed | ForEach-Object { Write-Host "  [OK] $_" -ForegroundColor Green }
 }
 
 if ($warnings.Count -gt 0) {
     Write-Host "`nWARNINGS ($($warnings.Count)):" -ForegroundColor Yellow
-    $warnings | ForEach-Object { Write-Host "  ⚠️ $_" -ForegroundColor Yellow }
+    $warnings | ForEach-Object { Write-Host "  [WARN] $_" -ForegroundColor Yellow }
 }
 
 if ($issues.Count -gt 0) {
     Write-Host "`nISSUES ($($issues.Count)):" -ForegroundColor Red
-    $issues | ForEach-Object { Write-Host "  ❌ $_" -ForegroundColor Red }
+    $issues | ForEach-Object { Write-Host "  [ERROR] $_" -ForegroundColor Red }
 }
 
 if ($issues.Count -eq 0 -and $warnings.Count -eq 0) {
-    Write-Host "`n✅ All heir phases passed!" -ForegroundColor Green
+    Write-Host "`n[OK] All heir phases passed!" -ForegroundColor Green
 }
 
 Pop-Location

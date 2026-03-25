@@ -1,6 +1,6 @@
 ---
 description: "Semantic, logic, code, and architectural consistency audit procedure — the mental layer on top of automated scripts"
-applyTo: "**/*audit*,**/*qa*,**/*review*,**/*validation*"
+applyTo: "**/*audit*,**/*qa*"
 ---
 
 # Semantic Audit Procedure
@@ -13,7 +13,7 @@ applyTo: "**/*audit*,**/*qa*,**/*review*,**/*validation*"
 ## Synapses
 
 - [.github/skills/brain-qa/SKILL.md] (High, Implements, Forward) - "Brain QA skill teaches what to look for; this procedure is the how"
-- [.github/skills/master-alex-audit/SKILL.md] (High, Implements, Forward) - "Master audit skill scopes the check; this procedure drives the review"
+- [.github/skills/architecture-audit/SKILL.md] (High, Implements, Forward) - "Master audit skill scopes the check; this procedure drives the review"
 - [.github/instructions/trifecta-audit.instructions.md] (Medium, Complements, Bidirectional) - "Trifecta checks completeness; semantic audit checks coherence"
 - [.github/instructions/dream-state-automation.instructions.md] (Medium, Validates, Forward) - "Dream detects structural issues; semantic audit detects meaning issues"
 - [.github/instructions/cognitive-health-validation.instructions.md] (Medium, Complements, Bidirectional) - "Semantic audit checks meaning, brain-qa checks structure"

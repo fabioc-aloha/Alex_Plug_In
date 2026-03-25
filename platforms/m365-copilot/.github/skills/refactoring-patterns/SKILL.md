@@ -1,7 +1,7 @@
 ---
-name: "Refactoring Patterns Skill"
-description: "Safe transformations — same behavior, better structure."
-applyTo: "**/*refactor*,**/*extract*,**/*rename*,**/*inline*"
+name: refactoring-patterns
+description: Safe transformations — same behavior, better structure.
+applyTo: '**/*refactor*,**/*extract*,**/*rename*,**/*inline*'
 ---
 
 # Refactoring Patterns Skill

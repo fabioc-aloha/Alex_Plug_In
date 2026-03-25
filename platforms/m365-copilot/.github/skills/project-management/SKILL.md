@@ -1,6 +1,8 @@
 ---
-name: "Project Management Skill"
-description: "Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work, and safety-first release gates."
+name: project-management
+description: >-
+  Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work,
+  and safety-first release gates.
 ---
 
 # Project Management Skill
@@ -111,7 +113,7 @@ Always use dual-column effort estimates:
 - 📦 Session (1-2h)
 - 🗓️ Multi-session (2h+)
 
-See [alex-effort-estimation skill](.github/skills/alex-effort-estimation/SKILL.md) for methodology.
+See [alex-effort-estimation skill](..\alex-effort-estimation/SKILL.md) for methodology.
 
 ---
 

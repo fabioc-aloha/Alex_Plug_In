@@ -1,7 +1,7 @@
 ---
-name: "PII & Privacy Regulations Skill"
-description: "Handling personally identifiable information under European and Australian privacy regulations."
-applyTo: "**/*privacy*,**/*PII*,**/*personal*,**/*GDPR*,**/*data-protection*,**/*consent*,**/*user-data*"
+name: pii-privacy-regulations
+description: Handling personally identifiable information under European and Australian privacy regulations.
+applyTo: '**/*privacy*,**/*PII*,**/*personal*,**/*GDPR*,**/*data-protection*,**/*consent*,**/*user-data*'
 ---
 
 # PII & Privacy Regulations Skill

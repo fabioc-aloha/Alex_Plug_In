@@ -98,7 +98,7 @@ if ($Path) {
         $targetFiles += Get-Item $Path
     }
     else {
-        Write-Host "❌ File not found: $Path" -ForegroundColor Red
+        Write-Host "[ERROR] File not found: $Path" -ForegroundColor Red
         exit 1
     }
 }
@@ -107,12 +107,12 @@ else {
     if ($FullRepo) {
         # Find repo root (go up from .github/muscles/ to repo root)
         $scanRoot = (Get-Item $PSScriptRoot).Parent.Parent.FullName
-        Write-Host "📁 Scanning full repo: $scanRoot" -ForegroundColor Gray
+        Write-Host "[DIR] Scanning full repo: $scanRoot" -ForegroundColor Gray
     }
     else {
         # Default: just .github/ folder
         $scanRoot = Join-Path $PSScriptRoot ".."
-        Write-Host "📁 Scanning: $scanRoot" -ForegroundColor Gray
+        Write-Host "[DIR] Scanning: $scanRoot" -ForegroundColor Gray
     }
     Write-Host ""
     
@@ -141,7 +141,7 @@ foreach ($file in $targetFiles) {
             $language = Remove-WrappingFence $file.FullName
             $result.Fixed = $true
             $script:issuesFixed++
-            Write-Host "✅ Fixed: $relativePath (was ``````$language)" -ForegroundColor Green
+            Write-Host "[OK] Fixed: $relativePath (was ``````$language)" -ForegroundColor Green
         }
         else {
             $content = Get-Content $file.FullName -Raw
@@ -156,7 +156,7 @@ foreach ($file in $targetFiles) {
     elseif ($Verbose) {
         $repoRoot = (Get-Item $PSScriptRoot).Parent.Parent.FullName
         $relativePath = $file.FullName -replace [regex]::Escape($repoRoot + "\"), ''
-        Write-Host "✓ Clean: $relativePath" -ForegroundColor DarkGray
+        Write-Host "[OK] Clean: $relativePath" -ForegroundColor DarkGray
     }
 }
 
@@ -164,23 +164,23 @@ Write-Host ""
 Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Cyan
 
 if ($script:issuesFound -eq 0) {
-    Write-Host "✅ No wrapping fence bugs found!" -ForegroundColor Green
+    Write-Host "[OK] No wrapping fence bugs found!" -ForegroundColor Green
     exit 0
 }
 else {
-    Write-Host "📊 Summary:" -ForegroundColor Cyan
+    Write-Host " Summary:" -ForegroundColor Cyan
     Write-Host "   Issues found: $($script:issuesFound)" -ForegroundColor Yellow
     
     if ($Fix) {
         Write-Host "   Issues fixed: $($script:issuesFixed)" -ForegroundColor Green
         Write-Host ""
-        Write-Host "💡 Run 'npm run sync-architecture' to propagate fixes to heir" -ForegroundColor Cyan
+        Write-Host " Run 'npm run sync-architecture' to propagate fixes to heir" -ForegroundColor Cyan
     }
     else {
         $critical = ($results | Where-Object { $_.Severity -eq "Critical" }).Count
         Write-Host "   Critical: $critical" -ForegroundColor Red
         Write-Host ""
-        Write-Host "💡 Run with -Fix to automatically repair:" -ForegroundColor Cyan
+        Write-Host " Run with -Fix to automatically repair:" -ForegroundColor Cyan
         Write-Host "   pwsh -File .github/muscles/fix-fence-bug.ps1 -Fix" -ForegroundColor White
     }
     

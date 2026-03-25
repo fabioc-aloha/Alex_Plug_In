@@ -13,23 +13,59 @@ Memory files define *what* and *how*; muscles *do*.
 
 ## Current Inventory
 
-| Script                        | Language   | Lines | Purpose                      | Inheritance |
-| ----------------------------- | ---------- | ----- | ---------------------------- | ----------- |
-| `audit-master-alex.ps1`       | PowerShell | 432   | 22-point pre-release audit   | master-only |
-| `brain-qa.ps1`                | PowerShell | 1273  | 32-phase deep validation     | master-only |
-| `brain-qa-heir.ps1`           | PowerShell | 840   | 25-phase heir validation     | inheritable |
-| `build-extension-package.ps1` | PowerShell | 295   | VSIX packaging               | master-only |
-| `dream-cli.ts`                | TypeScript | 116   | Neural maintenance CLI       | inheritable |
-| `fix-fence-bug.ps1`           | PowerShell | 189   | Detect/fix VS Code fence bug | inheritable |
-| `gamma-generator.cjs`         | JavaScript | 777   | Markdown → Gamma slides      | inheritable |
-| `normalize-paths.ps1`         | PowerShell | 194   | Path consistency fixes       | inheritable |
-| `pptxgen-cli.ts`              | TypeScript | 136   | PowerPoint generation        | inheritable |
-| `sync-architecture.cjs`       | JavaScript | 771   | Master → Heir sync           | master-only |
-| `install-hooks.ps1`           | PowerShell | —     | Install hooks config         | inheritable |
-| `md-to-word.cjs`              | JavaScript | —     | Markdown → Word conversion   | inheritable |
-| `new-skill.ps1`               | PowerShell | —     | Scaffold new skill trifecta  | inheritable |
-| `validate-skills.ps1`         | PowerShell | 113   | Skill file validation        | inheritable |
-| `validate-synapses.ps1`       | PowerShell | 154   | Synapse target validation    | inheritable |
+### Main Muscles
+
+| Script                        | Language   | Purpose                                   | Inheritance |
+| ----------------------------- | ---------- | ----------------------------------------- | ----------- |
+| `audit-master-alex.ps1`       | PowerShell | 22-point pre-release audit                | master-only |
+| `brain-qa.ps1`                | PowerShell | 32-phase deep validation                  | master-only |
+| `brain-qa-heir.ps1`           | PowerShell | 25-phase heir validation                  | inheritable |
+| `build-extension-package.ps1` | PowerShell | VSIX packaging                            | master-only |
+| `converter-qa.cjs`            | JavaScript | 284-assertion converter test harness      | master-only |
+| `dream-cli.ts`                | TypeScript | Neural maintenance CLI                    | inheritable |
+| `fix-fence-bug.ps1`           | PowerShell | Detect/fix VS Code fence bug              | inheritable |
+| `gamma-generator.cjs`         | JavaScript | Markdown to Gamma slides                  | inheritable |
+| `install-hooks.ps1`           | PowerShell | Install hooks config                      | inheritable |
+| `markdown-lint.cjs`           | JavaScript | 19-rule pre-conversion markdown validator | inheritable |
+| `md-scaffold.cjs`             | JavaScript | Markdown template scaffolder              | inheritable |
+| `md-to-eml.cjs`               | JavaScript | Markdown to RFC 5322 email (.eml)         | inheritable |
+| `md-to-word.cjs`              | JavaScript | Markdown to Word conversion               | inheritable |
+| `nav-inject.cjs`              | JavaScript | Cross-document navigation injection       | inheritable |
+| `new-skill.ps1`               | PowerShell | Scaffold new skill trifecta               | inheritable |
+| `normalize-paths.ps1`         | PowerShell | Path consistency fixes                    | inheritable |
+| `pptxgen-cli.ts`              | TypeScript | PowerPoint generation                     | inheritable |
+| `sync-architecture.cjs`       | JavaScript | Master to Heir sync                       | master-only |
+| `validate-skills.ps1`         | PowerShell | Skill file validation                     | inheritable |
+| `validate-synapses.ps1`       | PowerShell | Synapse target validation                 | inheritable |
+
+### Shared Modules (`shared/`)
+
+Reusable libraries consumed by multiple muscles via `require()` or ESM `import`.
+
+| Module                      | Purpose                                              |
+| --------------------------- | ---------------------------------------------------- |
+| `index.mjs`                 | ESM bridge re-exporting all CJS modules              |
+| `converter-config.cjs`      | Config loader with `.converter.json` walk-up         |
+| `data-uri.cjs`              | Base64 data URI encode/decode, file download         |
+| `markdown-preprocessor.cjs` | LaTeX to Unicode, callouts, checkboxes, validation   |
+| `mermaid-pipeline.cjs`      | Mermaid render, validate, create, brand palette      |
+| `prompt-preprocessor.cjs`   | Replicate prompt processing, trait injection         |
+| `replicate-core.cjs`        | Replicate API init, batch exec, cost, model registry |
+| `svg-pipeline.cjs`          | SVG creation, validation, PNG conversion             |
+
+### Lua Filters (`lua-filters/`)
+
+Pandoc Lua filters applied during Word/PDF conversion.
+
+| Filter                 | Purpose                        |
+| ---------------------- | ------------------------------ |
+| `caption-labels.lua`   | Figure/table caption numbering |
+| `keep-headings.lua`    | Preserve heading formatting    |
+| `word-table-style.lua` | Word-specific table styling    |
+
+### Hook Muscles (`hooks/`)
+
+Pre/post action hooks for chat agent lifecycle (18 scripts). See `.github/hooks.json` for registry.
 
 ## Language Selection
 
@@ -38,7 +74,7 @@ Memory files define *what* and *how*; muscles *do*.
 | Language         | Best For                                        | Example Muscles                                 |
 | ---------------- | ----------------------------------------------- | ----------------------------------------------- |
 | **PowerShell**   | File scanning, validation, audits, reporting    | `validate-*.ps1`, `brain-qa.ps1`, `audit-*.ps1` |
-| **Node.js (JS)** | Complex transforms, JSON manipulation, npm libs | `sync-architecture.cjs`, `gamma-generator.cjs`   |
+| **Node.js (JS)** | Complex transforms, JSON manipulation, npm libs | `sync-architecture.cjs`, `gamma-generator.cjs`  |
 | **TypeScript**   | CLI tools with nice UX, type-safe APIs          | `dream-cli.ts`, `pptxgen-cli.ts`                |
 
 ### Quick Decision Guide
@@ -118,11 +154,14 @@ npm run validate-skills
 
 ### Special Requirements
 
-| Muscle                 | Requirement                                                                |
-| ---------------------- | -------------------------------------------------------------------------- |
-| `pptxgen-cli.ts`       | **Must run from heir directory** — needs heir's node_modules for pptxgenjs |
-| `sync-architecture.cjs` | Must run from repo root (uses `npm run sync-architecture`)                 |
-| `gamma-generator.cjs`  | Requires Playwright (`npm install playwright` in heir)                     |
+| Muscle                  | Requirement                                                                 |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `md-to-word.cjs`        | Requires **pandoc**, **mmdc** (mermaid-cli), **jszip**, optional svgexport  |
+| `md-to-eml.cjs`         | Requires **pandoc** and shared modules                                      |
+| `pptxgen-cli.ts`        | **Must run from heir directory** -- needs heir's node_modules for pptxgenjs |
+| `sync-architecture.cjs` | Must run from repo root (uses `npm run sync-architecture`)                  |
+| `gamma-generator.cjs`   | Requires `GAMMA_API_KEY` env var; optional Playwright for export            |
+| `svg-pipeline.cjs`      | Requires Inkscape, rsvg-convert, or ImageMagick for SVG to PNG              |
 
 ```powershell
 # pptxgen-cli.ts example (run from heir context)

@@ -167,7 +167,7 @@ $curatedPrompts = @(
 
 function Write-Step {
     param([string]$Message)
-    Write-Host "  → $Message" -ForegroundColor Cyan
+    Write-Host "  -> $Message" -ForegroundColor Cyan
 }
 
 function Sync-Directory {

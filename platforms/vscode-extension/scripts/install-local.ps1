@@ -35,7 +35,7 @@ try {
     $vsixName = "$($pkg.name)-$version.vsix"
     $vsixPath = Join-Path $extensionDir $vsixName
 
-    Write-Host "`n📦 Extension: $extensionId" -ForegroundColor Gray
+    Write-Host "`n[PKG] Extension: $extensionId" -ForegroundColor Gray
     Write-Host "   Version:   $version" -ForegroundColor Gray
 
     # Check for existing vsix
@@ -45,11 +45,11 @@ try {
 
     $needsPackage = $Package
     if (-not $existingVsix) {
-        Write-Host "`n⚠️  No .vsix found - packaging required" -ForegroundColor Yellow
+        Write-Host "`n[WARN]  No .vsix found - packaging required" -ForegroundColor Yellow
         $needsPackage = $true
     }
     elseif ($existingVsix.Name -ne $vsixName) {
-        Write-Host "`n⚠️  Found $($existingVsix.Name) but package.json is $version" -ForegroundColor Yellow
+        Write-Host "`n[WARN]  Found $($existingVsix.Name) but package.json is $version" -ForegroundColor Yellow
         $needsPackage = $true
     }
     else {
@@ -59,7 +59,7 @@ try {
 
     # Package if needed
     if ($needsPackage) {
-        Write-Host "`n🔨 Building package..." -ForegroundColor Yellow
+        Write-Host "`n Building package..." -ForegroundColor Yellow
         
         # Clean old vsix files
         Get-ChildItem -Filter "*.vsix" | ForEach-Object {
@@ -70,7 +70,7 @@ try {
         # Run vsce package
         $packageOutput = & npx vsce package 2>&1
         if ($LASTEXITCODE -ne 0) {
-            Write-Host "❌ Package failed!" -ForegroundColor Red
+            Write-Host "[ERROR] Package failed!" -ForegroundColor Red
             Write-Host $packageOutput -ForegroundColor Red
             exit 1
         }
@@ -78,18 +78,18 @@ try {
         # Find the new vsix
         $vsixPath = Get-ChildItem -Filter "*.vsix" | Select-Object -First 1
         if (-not $vsixPath) {
-            Write-Host "❌ No .vsix file created!" -ForegroundColor Red
+            Write-Host "[ERROR] No .vsix file created!" -ForegroundColor Red
             exit 1
         }
         $vsixPath = $vsixPath.FullName
-        Write-Host "   ✅ Created: $(Split-Path $vsixPath -Leaf)" -ForegroundColor Green
+        Write-Host "   [OK] Created: $(Split-Path $vsixPath -Leaf)" -ForegroundColor Green
     }
     else {
         $vsixPath = $existingVsix.FullName
     }
 
     # Check currently installed version
-    Write-Host "`n🔍 Checking installed extensions..." -ForegroundColor Yellow
+    Write-Host "`n Checking installed extensions..." -ForegroundColor Yellow
     $installedExtensions = & code --list-extensions --show-versions 2>&1
     $installedVersion = $null
     
@@ -103,8 +103,8 @@ try {
     if ($installedVersion) {
         Write-Host "   Currently installed: v$installedVersion" -ForegroundColor Gray
         if ($installedVersion -eq $version -and -not $Force) {
-            Write-Host "   ✅ Same version already installed" -ForegroundColor Green
-            Write-Host "`n💡 Use -Force to reinstall" -ForegroundColor DarkGray
+            Write-Host "   [OK] Same version already installed" -ForegroundColor Green
+            Write-Host "`n Use -Force to reinstall" -ForegroundColor DarkGray
             exit 0
         }
     }
@@ -144,12 +144,12 @@ try {
     }
 
     if ($process.ExitCode -ne 0) {
-        Write-Host "❌ Installation failed (exit code: $($process.ExitCode))" -ForegroundColor Red
+        Write-Host "[ERROR] Installation failed (exit code: $($process.ExitCode))" -ForegroundColor Red
         exit 1
     }
 
     # Verify installation
-    Write-Host "`n✅ Verifying installation..." -ForegroundColor Yellow
+    Write-Host "`n[OK] Verifying installation..." -ForegroundColor Yellow
     Start-Sleep -Milliseconds 500  # Give VS Code a moment
     
     # Primary: Check extensions directory (reliable)
@@ -157,9 +157,9 @@ try {
     $installedDir = Join-Path $extensionsDir "$extensionId-$version"
     
     if (Test-Path $installedDir) {
-        Write-Host "   ✅ $extensionId@$version installed successfully" -ForegroundColor Green
-        Write-Host "`n🎉 Installation complete!" -ForegroundColor Cyan
-        Write-Host "   Reload VS Code window to activate: Ctrl+Shift+P → 'Reload Window'" -ForegroundColor Gray
+        Write-Host "   [OK] $extensionId@$version installed successfully" -ForegroundColor Green
+        Write-Host "`n Installation complete!" -ForegroundColor Cyan
+        Write-Host "   Reload VS Code window to activate: Ctrl+Shift+P -> 'Reload Window'" -ForegroundColor Gray
     }
     else {
         # Fallback: Try CLI (may not work if VS Code is running)
@@ -174,14 +174,14 @@ try {
         }
         
         if ($verified) {
-            Write-Host "   ✅ $extensionId@$version installed successfully" -ForegroundColor Green
-            Write-Host "`n🎉 Installation complete!" -ForegroundColor Cyan
-            Write-Host "   Reload VS Code window to activate: Ctrl+Shift+P → 'Reload Window'" -ForegroundColor Gray
+            Write-Host "   [OK] $extensionId@$version installed successfully" -ForegroundColor Green
+            Write-Host "`n Installation complete!" -ForegroundColor Cyan
+            Write-Host "   Reload VS Code window to activate: Ctrl+Shift+P -> 'Reload Window'" -ForegroundColor Gray
         }
         else {
-            Write-Host "   ⚠️ Could not verify installation" -ForegroundColor Yellow
+            Write-Host "   [WARN] Could not verify installation" -ForegroundColor Yellow
             Write-Host "   Extension folder: $installedDir" -ForegroundColor Gray
-            Write-Host "   Try: Ctrl+Shift+P → 'Reload Window'" -ForegroundColor Gray
+            Write-Host "   Try: Ctrl+Shift+P -> 'Reload Window'" -ForegroundColor Gray
         }
     }
 }

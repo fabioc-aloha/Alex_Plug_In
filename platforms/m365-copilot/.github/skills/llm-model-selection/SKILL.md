@@ -1,7 +1,7 @@
 ---
-name: "LLM Model Selection Skill"
-description: "Choosing the right model for the task — power vs. cost vs. speed."
-applyTo: "**/*model*,**/*llm*,**/*copilot*,**/*claude*,**/*gpt*"
+name: llm-model-selection
+description: Choosing the right model for the task — power vs. cost vs. speed.
+applyTo: '**/*model*,**/*llm*,**/*copilot*,**/*claude*,**/*gpt*'
 ---
 
 # LLM Model Selection Skill
@@ -19,7 +19,7 @@ This skill depends on rapidly evolving technology. Model capabilities, pricing, 
 - Context window expansions
 - New capability tiers
 
-**Last validated:** February 2026 (Claude 4.6 generation)
+**Last validated:** March 2026 (Claude 4.6 generation)
 
 **Check current state:** [Anthropic Models](https://platform.claude.com/docs/en/docs/about-claude/models), [OpenAI Models](https://platform.openai.com/docs/models)
 
@@ -197,10 +197,10 @@ If you're doing:
 
 ## The Alex Recommendation
 
-For **Master Alex** (source of truth, architecture evolution):
+For **architecture evolution and complex cognitive tasks**:
 → **Always use Opus 4.6** — The cognitive architecture demands full capability
 
-For **Heirs** (production deployment, user-facing):
+For **production deployment, user-facing work**:
 → **Default to Sonnet 4.6** — Best balance of capability and cost
 → **Allow Opus for complex tasks** — User can request escalation
 

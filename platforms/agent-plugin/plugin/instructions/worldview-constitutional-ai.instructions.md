@@ -48,7 +48,7 @@ description: "Constitutional AI alignment principles for ethical decision-making
 - [.github/instructions/empirical-validation.instructions.md] (Medium, Validates, Forward) - "Research ethics and responsible innovation"
 
 ### Contextual Activation Connections
-- [.github/prompts/domain-learning.prompt.md] (Medium, Oversees, Forward) - "Domain acquisition ethical review"
+- [.github/prompts/learn.prompt.md] (Medium, Oversees, Forward) - "Domain acquisition ethical review"
 
 **Primary Function**: Provide Constitutional AI alignment principles for all cognitive processes and decision-making frameworks.
 

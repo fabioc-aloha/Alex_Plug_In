@@ -1,11 +1,23 @@
 {
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "inheritance": "inheritable",
   "skillId": "dissertation-defense",
   "version": "1.0.0",
   "lastUpdated": "2026-02-10",
-  "connections": [],
+  "connections": [
+    {
+      "type": "relates",
+      "when": "dissertation|defense|thesis|viva",
+      "target": ".github/skills/literature-review/SKILL.md",
+      "yields": [
+        "literature-review",
+        "citation-management",
+        "gamma-presentations"
+      ],
+      "weight": 0.88,
+      "notes": "When user mentions defense prep, recommend literature and citation helpers plus slide tooling"
+    }
+  ],
   "synapses": [
     {
       "target": ".github/skills/defense-qa-practice/SKILL.md",
@@ -50,7 +62,7 @@
       "context": "Question handling and response techniques"
     },
     {
-      "target": ".github/skills/writing-publication/SKILL.md",
+      "target": ".github/skills/academic-research/SKILL.md",
       "type": "conceptual",
       "strength": "moderate",
       "direction": "incoming",
@@ -77,5 +89,37 @@
   "inhibitionPatterns": [
     "simple-task",
     "quick-fix"
+  ],
+  "activationContexts": [
+    {
+      "context": "Thesis defense prep",
+      "keywords": [
+        "dissertation",
+        "thesis defense",
+        "viva voce",
+        "committee",
+        "oral exam",
+        "defense presentation"
+      ]
+    },
+    {
+      "context": "Academic argumentation",
+      "keywords": [
+        "research question",
+        "methodology defense",
+        "contribution",
+        "limitation",
+        "future work"
+      ]
+    },
+    {
+      "context": "Scholarly communication",
+      "keywords": [
+        "literature gap",
+        "theoretical framework",
+        "findings presentation",
+        "Q&A preparation"
+      ]
+    }
   ]
 }

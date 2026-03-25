@@ -1,3 +1,8 @@
+---
+description: "UI/UX accessibility compliance and design system consistency for UI code"
+applyTo: "**/*.{html,jsx,tsx,vue,svelte,css,scss}"
+---
+
 # UI/UX Design Quality Standards
 
 **Purpose**: Enforce accessibility compliance and design system consistency when working with UI code  
@@ -614,6 +619,40 @@ margin: 7px 13px 21px;
 
 ---
 
+## UI Audit Procedure (Proven March 2026)
+
+**When to use**: Requested UI/UX audit, pre-release quality gate, mockup alignment check.
+
+### Three-Pass Audit
+
+**Pass 1: UI/UX Compliance** — Assess against this instruction file
+1. Read entire UI file (HTML generation + CSS)
+2. Check each design system standard: typography (min 11px), spacing (8px scale), touch targets (36px compact min), color (theme variables), focus indicators (2px consistent)
+3. Check accessibility: ARIA roles, `aria-labelledby`/`aria-describedby` resolution, keyboard activation for all interactive elements, semantic HTML
+4. Classify findings: P1 HIGH (WCAG violations), P2 MEDIUM (design system deviations), P3 LOW (polish)
+5. Note positives — what's already correct (prevents regression)
+
+**Pass 2: Content Audit** — Assess against approved mockups
+1. Read all mockup SVGs (design inputs)
+2. Cross-reference every mockup section against implementation
+3. Classify each section: MISSING / PARTIAL / MATCH / EXTRA
+4. Further classify gaps: ⬡ Implementable Now / ⬢ Needs Data Provider / ◇ Design Decision
+
+**Pass 3: Cross-Tab Consistency** — For multi-tab/multi-view surfaces
+1. Content density analysis: count sections and interactive elements per tab
+2. Feature parity: check search/filter, empty states, collapsible sections, footer hints across all tabs
+3. Navigation pattern consistency: verify each tab uses an appropriate pattern for its content type
+4. JavaScript quality: CSP compliance, event delegation, state persistence, security (XSS, injection)
+5. Classify gaps as cross-tab consistency findings
+
+### Output Format
+- Per-finding: severity, specific CSS selectors, current vs target values, file + line reference
+- Summary table: total findings by severity and classification
+- Positives section: what's already correct (anchor for future audits)
+- For multi-tab: content density table + feature parity matrix
+
+---
+
 ## Auto-Application Rules
 
 **When to Apply**
@@ -636,6 +675,6 @@ margin: 7px 13px 21px;
 
 ---
 
-**Version**: 1.0.0 (2026-02-15)  
-**Based On**: Alex v5.8.0 accessibility implementation session  
-**Validated Against**: welcomeView.ts production refactoring (1876 lines, WCAG AA compliant)
+**Version**: 1.2.0 (2026-03-09)  
+**Based On**: Alex v6.2.0 Command Center audit sessions (UI/UX + Content + Cross-Tab Consistency)  
+**Validated Against**: sharedStyles.ts + 5 tab modules (missionTabHtml, agentsTabHtml, skillStoreTabHtml, mindTabHtml, docsTabHtml)

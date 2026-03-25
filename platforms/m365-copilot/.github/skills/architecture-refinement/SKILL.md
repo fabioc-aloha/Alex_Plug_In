@@ -1,6 +1,8 @@
 ---
-name: "Architecture Refinement Skill"
-description: "Meta-skill for maintaining and evolving Alex's cognitive architecture through deliberate documentation and pattern extraction."
+name: architecture-refinement
+description: >-
+  Meta-skill for maintaining and evolving Alex's cognitive architecture through deliberate documentation and pattern
+  extraction.
 ---
 
 # Architecture Refinement Skill

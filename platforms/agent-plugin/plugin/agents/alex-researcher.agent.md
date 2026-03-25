@@ -1,10 +1,19 @@
 ---
 description: Alex Researcher Mode - Deep domain research and knowledge discovery
 name: Researcher
-model: ['Claude Opus 4', 'GPT-4o', 'Claude Sonnet 4']
-tools: ['search', 'codebase', 'fetch', 'runSubagent', 'agent', 'alex_knowledge_search', 'alex_save_insight']
-user-invokable: true
+model: ['GPT-4o', 'Claude Sonnet 4']
+tools: ['search', 'codebase', 'fetch', 'runSubagent', 'agent', 'alex_knowledge_search']
+user-invocable: true
 agents: ['Builder', 'Validator']
+hooks:
+  SessionStart:
+    - type: command
+      command: "node .github/muscles/hooks/researcher-session-start.cjs"
+      timeout: 5000
+  Stop:
+    - type: command
+      command: "node .github/muscles/hooks/researcher-stop.cjs"
+      timeout: 3000
 handoffs:
   - label: 🔨 Ready to Build
     agent: Builder
@@ -198,4 +207,3 @@ And save new insights for cross-project reuse:
 ---
 
 *Researcher mode — understand deeply before building*
-

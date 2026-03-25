@@ -1,7 +1,7 @@
 ---
-name: "Skill Building"
-description: "Create effective, reusable skills from real-world experience for promotion to Master Alex"
-applyTo: "**/*skill*,**/*SKILL*,**/skills/**"
+name: skill-building
+description: Create effective, reusable skills from real-world experience for promotion to Master Alex
+applyTo: '**/*skill*,**/*SKILL*,**/skills/**'
 ---
 
 # Skill Building
@@ -190,7 +190,7 @@ applyTo: "**/*"
 | **Enables** | This skill makes another possible | slide-design → dissertation-defense |
 | **Enhances** | This skill improves another | coaching → executive-storytelling |
 | **Requires** | This skill depends on another | citation → literature-review |
-| **Extends** | This skill adds to another | airs-integration → appropriate-reliance |
+| **Extends** | This skill adds to another | airs-appropriate-reliance → appropriate-reliance |
 
 ### Strength Values
 
@@ -239,7 +239,7 @@ Before promoting to Master, verify:
 - [ ] **applyTo set**: Appropriate glob patterns
 - [ ] **Synapses defined**: 2-5 meaningful connections
 - [ ] **No duplication**: Doesn't overlap with existing skills
-- [ ] **Keywords identified**: For skill-activation index
+- [ ] **Keywords identified**: For memory-activation index
 
 ---
 
@@ -368,7 +368,7 @@ A **muscle** is an execution script in `.github/muscles/` — the motor cortex o
 |--------|:-:|----------|
 | Same terminal commands run repeatedly | **Yes** | `brain-qa.ps1` — synapse validation |
 | File validation that could be automated | **Yes** | `validate-skills.ps1` — schema checking |
-| Multi-file transformations | **Yes** | `sync-architecture.js` — heir sync |
+| Multi-file transformations | **Yes** | `sync-architecture.cjs` — heir sync |
 | Decision-making that requires judgment | **No** | Code review (that's a skill, not a script) |
 | Creative work | **No** | Writing (LLM does this, not a script) |
 | One-time operation | **No** | Not worth automating |
@@ -378,7 +378,7 @@ A **muscle** is an execution script in `.github/muscles/` — the motor cortex o
 | Pattern | Example | What It Does |
 |---------|---------|---------------|
 | `{verb}-{noun}.ps1` | `validate-synapses.ps1` | PowerShell validation |
-| `{verb}-{noun}.js` | `sync-architecture.js` | Node.js transformation |
+| `{verb}-{noun}.js` | `sync-architecture.cjs` | Node.js transformation |
 | `{noun}-{noun}.ps1` | `brain-qa.ps1` | PowerShell audit |
 
 ### Muscle + Trifecta Integration
@@ -390,6 +390,53 @@ SKILL.md          → "What to check" (knowledge)
 .instructions.md  → "Step 5: Run brain-qa.ps1" (procedure)
 .prompt.md        → "Shall I run the health check?" (interaction)
 brain-qa.ps1      → Actually runs the check (execution)
+```
+
+---
+
+## Memory File Inheritance
+
+Every memory file declares how it syncs from Master Alex to heir projects.
+Default is **inheritable** (syncs automatically). Each file type uses its native format:
+
+### Declaration Mechanisms
+
+| File Type | Mechanism | Where |
+|-----------|-----------|-------|
+| Skills | Central exclusion map | `SKILL_EXCLUSIONS` in `sync-architecture.cjs` |
+| Instructions | YAML frontmatter | `inheritance: master-only` in the `.instructions.md` file |
+| Prompts | YAML frontmatter | `inheritance: master-only` in the `.prompt.md` file |
+| Muscles | JSON sidecar | `.github/muscles/inheritance.json` |
+| Config | Hardcoded array | `EXCLUDED_CONFIG_FILES` in `sync-architecture.cjs` |
+
+### Inheritance Types
+
+| Type | Behavior | When to Use |
+|------|----------|-------------|
+| `inheritable` | Syncs to all heirs (default) | Most files — no declaration needed |
+| `master-only` | Stays in Master Alex | Release tooling, master audits, promotion workflows |
+| `heir:vscode` | Heir maintains own version | Skills where heir has diverged |
+| `heir:m365` | Targets M365 heir only | M365/Teams-specific content |
+
+### Trifecta Consistency Rule
+
+When a skill is non-inheritable, its trifecta siblings **must** have matching frontmatter:
+
+```yaml
+# In the .instructions.md and .prompt.md files:
+---
+description: "..."
+inheritance: master-only   # ← Must match the skill's exclusion type
+---
+```
+
+Without this, the instruction/prompt syncs as an orphan to heirs where the paired skill doesn't exist.
+
+### Scaffold with Inheritance
+
+```powershell
+# Creates skill + auto-registers in SKILL_EXCLUSIONS:
+.github/muscles/new-skill.ps1 -SkillName "my-skill" -Inheritance master-only
 ```
 
 ---
@@ -478,11 +525,11 @@ When related skills exist, merge rather than proliferate:
 
 ---
 
-## After Creation: Register with Skill-Activation
+## After Creation: Register with Memory-Activation
 
 Add your skill to the action-keyword index:
 
-**Location**: `.github/skills/skill-activation/SKILL.md`
+**Location**: `.github/skills/memory-activation/SKILL.md`
 
 **Format:**
 ```markdown
@@ -501,9 +548,9 @@ Add your skill to the action-keyword index:
 - [.github/instructions/skill-building.instructions.md] (Critical, Implements, Forward) - "Step-by-step procedure for creating and completing skills"
 - [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Learning becomes skill"
 - [.github/instructions/heir-skill-promotion.instructions.md] (Critical, Implements, Forward) - "Skill ready for promotion"
-- [.github/skills/skill-activation/SKILL.md] (High, Integrates, Forward) - "Register for discovery"
+- [.github/skills/memory-activation/SKILL.md] (High, Integrates, Forward) - "Register for discovery"
 - [.github/skills/skill-catalog-generator/SKILL.md] (Medium, Triggers, Forward) - "Regenerate catalog after creation"
-- [SYNAPSE-SCHEMA.md](../SYNAPSE-SCHEMA.md) (High, References, Backward) - "Canonical synapse architecture reference"
+- [SYNAPSE-SCHEMA.md](../../instructions/SYNAPSE-SCHEMA.md) (High, References, Backward) - "Canonical synapse architecture reference"
 
 ---
 

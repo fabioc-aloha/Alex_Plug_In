@@ -1,3 +1,8 @@
+---
+description: "Testing strategy selection, test coverage review, and test failure triage"
+applyTo: "**/*.test.*,**/*.spec.*,**/test/**,**/__tests__/**"
+---
+
 # Testing Strategies Instructions
 
 **Auto-loaded when**: Writing tests, reviewing test coverage, choosing test types, or triaging failing tests
@@ -100,6 +105,73 @@ suite('Extension Activation', () => {
 
 **Run**: `npm run test` (uses `@vscode/test-cli` — runs inside VS Code host)
 **Unit tests** (pure logic, no VS Code API): standard jest/vitest, no VS Code runner needed.
+
+### VS Code Extension Test Boilerplate
+
+**Test runner** (`src/test/runTests.ts`):
+```typescript
+import * as path from 'path';
+import { runTests } from '@vscode/test-electron';
+
+async function main() {
+    await runTests({
+        extensionDevelopmentPath: path.resolve(__dirname, '../../'),
+        extensionTestsPath: path.resolve(__dirname, './suite/index'),
+        launchArgs: ['--disable-extensions']
+    });
+}
+main().catch(err => { console.error(err); process.exit(1); });
+```
+
+**Suite index** (`src/test/suite/index.ts`):
+```typescript
+import * as path from 'path';
+import Mocha from 'mocha';
+import { glob } from 'glob';
+
+export function run(): Promise<void> {
+    const mocha = new Mocha({ ui: 'bdd', color: true, timeout: 60_000 });
+    const testsRoot = path.resolve(__dirname, '.');
+    return new Promise((resolve, reject) => {
+        glob('**/*.test.js', { cwd: testsRoot }).then(files => {
+            files.forEach(f => mocha.addFile(path.resolve(testsRoot, f)));
+            mocha.run(failures => {
+                if (failures > 0) reject(new Error(`${failures} test(s) failed`));
+                else resolve();
+            });
+        }).catch(reject);
+    });
+}
+```
+
+### Mocking VS Code APIs (Unit Tests)
+
+```typescript
+const mockOutputChannel: Partial<vscode.OutputChannel> = {
+    appendLine: () => {},
+    show: () => {},
+    dispose: () => {}
+};
+
+const mockSecrets: Partial<vscode.SecretStorage> = {
+    get: async (key: string) => testSecrets[key],
+    store: async (key: string, value: string) => { testSecrets[key] = value; },
+    delete: async (key: string) => { delete testSecrets[key]; },
+    onDidChange: new vscode.EventEmitter<vscode.SecretStorageChangeEvent>().event
+};
+```
+
+### Test File Naming Convention
+
+```
+src/services/myService.ts      → test/services/myService.test.ts
+src/commands/myCommand.ts       → test/commands/myCommand.test.ts
+src/test/suite/index.ts         (suite bootstrap)
+src/test/suite/extension.test.ts (integration tests)
+src/test/runTests.ts            (test runner entry)
+```
+
+**Note**: Integration tests need a display server. In CI, Xvfb is auto-configured by `@vscode/test-electron`. On Windows, tests run in the desktop VS Code instance.
 
 ---
 

@@ -21,18 +21,18 @@ Write-Host "📂 Project: $projectRoot" -ForegroundColor Yellow
 Write-Host ""
 
 # Check git status
-Write-Host "1️⃣  Checking git status..." -ForegroundColor Cyan
+Write-Host "[1]  Checking git status..." -ForegroundColor Cyan
 $status = git status --porcelain
 if (-not $status) {
-    Write-Host "   ℹ️  No changes to commit" -ForegroundColor Yellow
+    Write-Host "   [INFO]  No changes to commit" -ForegroundColor Yellow
     Pop-Location
     exit 0
 }
-Write-Host "   ✅ Changes detected" -ForegroundColor Green
+Write-Host "   [OK] Changes detected" -ForegroundColor Green
 Write-Host ""
 
 # Show what will be committed
-Write-Host "2️⃣  Files to commit:" -ForegroundColor Cyan
+Write-Host "[2]  Files to commit:" -ForegroundColor Cyan
 Write-Host ""
 
 $filesToAdd = @(
@@ -49,10 +49,10 @@ $filesToAdd = @(
 
 foreach ($file in $filesToAdd) {
     if (Test-Path $file) {
-        Write-Host "   ✅ $file" -ForegroundColor Green
+        Write-Host "   [OK] $file" -ForegroundColor Green
     }
     else {
-        Write-Host "   ⚠️  $file (not found)" -ForegroundColor Yellow
+        Write-Host "   [WARN]  $file (not found)" -ForegroundColor Yellow
     }
 }
 Write-Host ""
@@ -83,12 +83,12 @@ Enables:
 - Outlook: Smart email replies (Professional/Casual/Brief)
 - M365 Copilot: Declarative agent (already working)
 
-Next: Commit → Push → Wait 2-3 min → Verify → Upload to M365
+Next: Commit -> Push -> Wait 2-3 min -> Verify -> Upload to M365
 
 Refs: DEPLOYMENT-SUMMARY.md, M365-FULL-INTEGRATION-GUIDE.md
 "@
 
-Write-Host "3️⃣  Commit message:" -ForegroundColor Cyan
+Write-Host "[3]  Commit message:" -ForegroundColor Cyan
 Write-Host ""
 Write-Host $commitMessage -ForegroundColor Gray
 Write-Host ""
@@ -112,32 +112,32 @@ if ($WhatIf) {
 }
 
 # Add files
-Write-Host "4️⃣  Adding files to git..." -ForegroundColor Cyan
+Write-Host "[4]  Adding files to git..." -ForegroundColor Cyan
 foreach ($file in $filesToAdd) {
     if (Test-Path $file) {
         git add $file
-        Write-Host "   ✅ Added: $file" -ForegroundColor Green
+        Write-Host "   [OK] Added: $file" -ForegroundColor Green
     }
 }
 Write-Host ""
 
 # Commit
-Write-Host "5️⃣  Committing changes..." -ForegroundColor Cyan
+Write-Host "[5]  Committing changes..." -ForegroundColor Cyan
 git commit -m $commitMessage
-Write-Host "   ✅ Committed" -ForegroundColor Green
+Write-Host "   [OK] Committed" -ForegroundColor Green
 Write-Host ""
 
 if ($Push) {
-    Write-Host "6️⃣  Pushing to GitHub..." -ForegroundColor Cyan
+    Write-Host "[6]  Pushing to GitHub..." -ForegroundColor Cyan
     git push
-    Write-Host "   ✅ Pushed" -ForegroundColor Green
+    Write-Host "   [OK] Pushed" -ForegroundColor Green
     Write-Host ""
     
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
-    Write-Host "  ✅ Deployment in progress!" -ForegroundColor Green
+    Write-Host "  [OK] Deployment in progress!" -ForegroundColor Green
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
     Write-Host ""
-    Write-Host "📋 Next Steps:" -ForegroundColor Yellow
+    Write-Host "[LIST] Next Steps:" -ForegroundColor Yellow
     Write-Host ""
     Write-Host "1. Wait 2-3 minutes for GitHub Pages to update" -ForegroundColor White
     Write-Host ""
@@ -147,15 +147,15 @@ if ($Push) {
     Write-Host ""
     Write-Host "3. Upload to M365:" -ForegroundColor White
     Write-Host "   https://dev.teams.microsoft.com/apps" -ForegroundColor Gray
-    Write-Host "   → Import app → appPackage/build/appPackage.dev.zip" -ForegroundColor Gray
+    Write-Host "   -> Import app -> appPackage/build/appPackage.dev.zip" -ForegroundColor Gray
     Write-Host ""
 }
 else {
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
-    Write-Host "  ✅ Changes committed locally" -ForegroundColor Green
+    Write-Host "  [OK] Changes committed locally" -ForegroundColor Green
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
     Write-Host ""
-    Write-Host "📋 Next Steps:" -ForegroundColor Yellow
+    Write-Host "[LIST] Next Steps:" -ForegroundColor Yellow
     Write-Host ""
     Write-Host "1. Push to GitHub:" -ForegroundColor White
     Write-Host "   git push" -ForegroundColor Gray

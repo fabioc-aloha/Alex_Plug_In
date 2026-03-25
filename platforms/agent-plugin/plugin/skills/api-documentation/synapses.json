@@ -1,52 +1,71 @@
 {
-    "skill": "api-documentation",
-    "connections": [
-        {
-            "bidirectional": true,
-            "reason": "Documentation project structure and templates",
-            "type": "extends",
-            "strength": 0.85,
-            "target": ".github/skills/project-scaffolding/SKILL.md"
-        },
-        {
-            "bidirectional": true,
-            "reason": "Documented code is quality code",
-            "type": "complements",
-            "strength": 0.8,
-            "target": ".github/skills/code-review/SKILL.md"
-        },
-        {
-            "reason": "Clear writing techniques apply to technical docs",
-            "type": "complements",
-            "strength": 0.6,
-            "target": ".github/skills/creative-writing/SKILL.md"
-        },
-        {
-            "reason": "Docs-as-code versioning workflows",
-            "type": "uses",
-            "strength": 0.6,
-            "target": ".github/skills/git-workflow/SKILL.md"
-        },
-        {
-            "reason": "Core markdown formatting for documentation",
-            "type": "uses",
-            "strength": 0.65,
-            "target": ".github/skills/lint-clean-markdown/SKILL.md"
-        }
-    ],
-    "inheritance": "inheritable",
-    "triggers": [
-        "documentation",
-        "docs",
-        "api",
-        "readme",
-        "guide",
-        "reference",
-        "manual",
-        "technical writing",
-        "openapi",
-        "swagger"
-    ],
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.0.0"
+  "schemaVersion": "2.0.0",
+  "skillId": "api-documentation",
+  "connections": [
+    {
+      "reason": "Documentation project structure and templates",
+      "type": "extends",
+      "strength": 0.85,
+      "target": ".github/skills/project-scaffolding/SKILL.md",
+      "when": "When task involves .github/skills/project scaffolding/SKILL.md",
+      "yields": "project scaffolding extended capabilities"
+    },
+    {
+      "reason": "Documented code is quality code",
+      "type": "complements",
+      "strength": 0.8,
+      "target": ".github/skills/code-review/SKILL.md",
+      "when": "When task involves .github/skills/code review/SKILL.md",
+      "yields": "code review complementary techniques"
+    },
+    {
+      "reason": "Clear writing techniques apply to technical docs",
+      "type": "complements",
+      "strength": 0.6,
+      "target": ".github/skills/creative-writing/SKILL.md",
+      "when": "When task involves .github/skills/creative writing/SKILL.md",
+      "yields": "creative writing complementary techniques"
+    },
+    {
+      "reason": "Docs-as-code versioning workflows",
+      "type": "uses",
+      "strength": 0.6,
+      "target": ".github/skills/git-workflow/SKILL.md",
+      "when": "When task involves .github/skills/git workflow/SKILL.md",
+      "yields": "git workflow patterns and guidance"
+    },
+    {
+      "reason": "Core markdown formatting for documentation",
+      "type": "uses",
+      "strength": 0.65,
+      "target": ".github/skills/lint-clean-markdown/SKILL.md",
+      "when": "When task involves .github/skills/lint clean markdown/SKILL.md",
+      "yields": "lint clean markdown patterns and guidance"
+    }
+  ],
+  "triggers": [
+    "documentation",
+    "docs",
+    "api",
+    "readme",
+    "guide",
+    "reference",
+    "manual",
+    "technical writing",
+    "openapi",
+    "swagger"
+  ],
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "activationContexts": [
+    "documentation",
+    "docs",
+    "api",
+    "readme",
+    "guide",
+    "reference",
+    "manual",
+    "technical writing",
+    "openapi",
+    "swagger"
+  ]
 }

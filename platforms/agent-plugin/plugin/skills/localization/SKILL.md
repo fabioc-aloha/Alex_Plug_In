@@ -959,7 +959,7 @@ See [synapses.json](./synapses.json) for connection mapping.
 
 **Medium Affinity:**
 - `vscode-extension-patterns` — Extension localization
-- `writing-publication` — Multilingual content
+- `academic-research` — Multilingual content
 
 **Low Affinity:**
 - `graphic-design` — RTL layouts, typography

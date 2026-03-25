@@ -1,0 +1,38 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "md-to-eml",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "muscle": ".github/muscles/md-to-eml.cjs",
+    "connections": [
+        {
+            "target": ".github/skills/md-to-word/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "reason": "Sister converter — both convert Markdown to professional distribution formats",
+            "when": "When choosing between Word export and email export",
+            "yields": "md-to-word complementary conversion patterns"
+        },
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "Mermaid diagrams in source markdown are converted to table fallbacks for email",
+            "when": "When source markdown contains Mermaid diagrams",
+            "yields": "markdown-mermaid diagram authoring guidance"
+        },
+        {
+            "target": ".github/skills/lint-clean-markdown/SKILL.md",
+            "type": "requires",
+            "strength": 0.75,
+            "reason": "Clean markdown produces better email HTML output",
+            "when": "When pre-validating markdown before email conversion",
+            "yields": "lint-clean markdown validation patterns"
+        }
+    ],
+    "activationContexts": [
+        "converting markdown to email",
+        "generating .eml file",
+        "newsletter from markdown",
+        "email-safe HTML conversion"
+    ]
+}

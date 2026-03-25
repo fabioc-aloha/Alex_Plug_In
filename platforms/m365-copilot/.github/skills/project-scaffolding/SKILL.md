@@ -1,7 +1,7 @@
 ---
-name: "Project Scaffolding Skill"
-description: "First impressions matter. Set projects up for success."
-applyTo: "**/*scaffold*,**/*init*,**/*new*,**/*create*,**/README*"
+name: project-scaffolding
+description: First impressions matter. Set projects up for success.
+applyTo: '**/*scaffold*,**/*init*,**/*new*,**/*create*,**/README*'
 ---
 
 # Project Scaffolding Skill

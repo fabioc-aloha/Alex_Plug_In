@@ -340,7 +340,7 @@ function main() {
   console.log(`Files modified:  ${stats.filesModified}`);
   console.log(`when added:      ${stats.whenAdded}`);
   console.log(`yields added:    ${stats.yieldsAdded}`);
-  console.log(`type fixed:      ${stats.typeFixed} (relationship→type)`);
+  console.log(`type fixed:      ${stats.typeFixed} (relationship->type)`);
   console.log(`activationContexts migrated: ${stats.activationContextsMigrated}`);
   console.log(`activationContexts generated: ${stats.activationContextsGenerated}`);
   if (DRY_RUN) console.log('\nRe-run without --dry-run to apply changes.');

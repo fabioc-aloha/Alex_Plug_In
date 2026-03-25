@@ -3,11 +3,18 @@
  * audit-heir-sync-drift.cjs
  * Detects drift for excluded skills between master (.github/skills) and heir copy (platforms/vscode-extension/.github/skills).
  * If SKILL.md or synapses.json differ for an excluded skill, fail with instructions to manually sync.
+ * 
+ * Usage: node scripts/audit-heir-sync-drift.cjs [--json]
+ * Alex-first: Use --json for machine-consumable output
  */
 
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+
+// Alex-first: JSON output mode
+const JSON_MODE = process.argv.includes('--json');
+
 const ROOT = path.resolve(__dirname, '..');
 const MASTER_SKILLS = path.join(ROOT, '.github', 'skills');
 const HEIR_SKILLS = path.join(ROOT, 'platforms', 'vscode-extension', '.github', 'skills');
@@ -43,7 +50,7 @@ function skillFiles(skillDir) {
 
 function main() {
   const exclusions = loadExclusions();
-  if (!exclusions.length) {
+  if (!exclusions.length && !JSON_MODE) {
     console.warn('[audit-heir-sync-drift] WARN: could not parse SKILL_EXCLUSIONS from sync-architecture.cjs');
   }
   const drift = [];
@@ -67,14 +74,24 @@ function main() {
     }
   }
 
+  if (JSON_MODE) {
+    const jsonResult = {
+      passed: drift.length === 0,
+      exclusionCount: exclusions.length,
+      drift
+    };
+    console.log(JSON.stringify(jsonResult, null, 2));
+    process.exit(drift.length > 0 ? 1 : 0);
+  }
+
   if (drift.length > 0) {
-    console.error('[audit-heir-sync-drift] ❌ Drift detected for excluded skills (manual sync required):');
-    drift.forEach(({ skillId, file }) => console.error(`  • ${skillId}/${file}`));
+    console.error('[audit-heir-sync-drift] Drift detected for excluded skills (manual sync required):');
+    drift.forEach(({ skillId, file }) => console.error(`  - ${skillId}/${file}`));
     console.error('\nRun .github/muscles/sync-architecture.cjs with a temporary whitelist or copy files manually.');
     process.exit(1);
   }
 
-  console.log('[audit-heir-sync-drift] ✅ No drift detected for excluded skills.');
+  console.log('[audit-heir-sync-drift] [PASS] No drift detected for excluded skills.');
 }
 
 main();

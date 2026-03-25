@@ -146,8 +146,8 @@ Current Problem + Extracted Patterns + Contextual Adaptation = Solution Approach
 - [.github/prompts/cross-domain-transfer.prompt.md] (High, Enables, Forward) - "Cross-domain pattern application"
 
 ### Input Connections
-- [.github/prompts/unified-meditation-protocols.prompt.md] (Medium, Receives, Backward) - "Consolidated insights for retrieval"
-- [.github/prompts/domain-learning.prompt.md] (Medium, Receives, Backward) - "Acquired domain knowledge integration"
+- [.github/prompts/meditate.prompt.md] (Medium, Receives, Backward) - "Consolidated insights for retrieval"
+- [.github/prompts/learn.prompt.md] (Medium, Receives, Backward) - "Acquired domain knowledge integration"
 
 **Primary Function**: Execute systematic deep thinking with episodic memory integration for comprehensive problem analysis.
 

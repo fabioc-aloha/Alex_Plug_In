@@ -1,6 +1,6 @@
 ---
-applyTo: "**/*research*,**/*validation*,**/*empirical*,**/*evidence*"
-description: "Research foundation and validation protocols"
+applyTo: "**/*empirical*,**/*evidence*,**/research/**"
+description: "Research foundation and empirical validation protocols"
 ---
 
 # Empirical Validation Excellence

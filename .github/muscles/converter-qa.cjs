@@ -36,22 +36,22 @@ const _suiteArg = (process.argv.find(a => a.startsWith('--suite=')) || '').split
 function assert(condition, message) {
   if (condition) {
     _passed++;
-    if (_verbose) console.log(`  ✓ ${message}`);
+    if (_verbose) console.log(`  [PASS] ${message}`);
   } else {
     _failed++;
     _failures.push(message);
-    console.log(`  ✗ ${message}`);
+    console.log(`  [FAIL] ${message}`);
   }
 }
 
 function skip(message) {
   _skipped++;
-  if (_verbose) console.log(`  ⊘ SKIP: ${message}`);
+  if (_verbose) console.log(`  [SKIP] ${message}`);
 }
 
 function suite(name, fn) {
   if (_suiteArg !== 'all' && !name.toLowerCase().includes(_suiteArg.toLowerCase())) return;
-  console.log(`\n── ${name} ${'─'.repeat(Math.max(0, 60 - name.length))}`);
+  console.log(`\n-- ${name} ${'-'.repeat(Math.max(0, 60 - name.length))}`);
   fn();
 }
 
@@ -1253,9 +1253,9 @@ try {
   fs.rmSync(TEMP_DIR, { recursive: true, force: true });
 } catch { /* ignore cleanup errors */ }
 
-console.log('\n══════════════════════════════════════════════════════════════');
+console.log('\n==================================================================');
 console.log(`  QA Results: ${_passed} passed, ${_failed} failed, ${_skipped} skipped`);
-console.log('══════════════════════════════════════════════════════════════');
+console.log('==================================================================');
 
 if (_failures.length > 0) {
   console.log('\n  Failures:');

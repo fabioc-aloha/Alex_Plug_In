@@ -28,12 +28,12 @@ $newSkillPath = Join-Path $skillsPath $skillName
 
 # Validation
 if (Test-Path $newSkillPath) {
-    Write-Host "❌ Skill already exists: $skillName" -ForegroundColor Red
+    Write-Host "[ERROR] Skill already exists: $skillName" -ForegroundColor Red
     exit 1
 }
 
 if (-not (Test-Path $templatePath)) {
-    Write-Host "❌ Skill template not found: $templatePath" -ForegroundColor Red
+    Write-Host "[ERROR] Skill template not found: $templatePath" -ForegroundColor Red
     exit 1
 }
 
@@ -94,15 +94,15 @@ if ($Inheritance -ne "inheritable" -and $Inheritance -ne "universal") {
             $newEntry = "`n    '$skillName':$(' ' * [Math]::Max(1, 33 - $skillName.Length))'$Inheritance',"
             $syncContent = $syncContent -replace $pattern, "`$1$newEntry`$2"
             Set-Content $syncArchPath $syncContent -NoNewline
-            Write-Host "📋 Registered in SKILL_EXCLUSIONS as '$Inheritance'" -ForegroundColor Cyan
+            Write-Host "[LIST] Registered in SKILL_EXCLUSIONS as '$Inheritance'" -ForegroundColor Cyan
         } else {
-            Write-Host "⚠️  Could not find SKILL_EXCLUSIONS in sync-architecture.cjs" -ForegroundColor Yellow
+            Write-Host "[WARN]  Could not find SKILL_EXCLUSIONS in sync-architecture.cjs" -ForegroundColor Yellow
             Write-Host "   Manually add: '$skillName': '$Inheritance'" -ForegroundColor Yellow
         }
     }
 }
 
-Write-Host "✅ Created skill: $skillName" -ForegroundColor Green
+Write-Host "[OK] Created skill: $skillName" -ForegroundColor Green
 Write-Host "   Location: .github/skills/$skillName/" -ForegroundColor Gray
 if ($Inheritance -eq "inheritable" -or $Inheritance -eq "universal") {
     Write-Host "   Inheritance: $Inheritance (syncs to all heirs automatically)" -ForegroundColor Gray

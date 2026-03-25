@@ -12,10 +12,10 @@ import { WelcomeViewProvider } from '../../views/welcomeView';
 suite('Welcome View Test Suite', () => {
 
     suite('Tab architecture', () => {
-        const TAB_ORDER = ['Mission Command', 'Agents', 'Skill Store', 'Mind', 'Docs'];
+        const TAB_ORDER = ['Mission Command', 'Skill Store', 'Mind', 'Docs'];
 
-        test('should have exactly 5 tabs', () => {
-            assert.strictEqual(TAB_ORDER.length, 5);
+        test('should have exactly 4 tabs', () => {
+            assert.strictEqual(TAB_ORDER.length, 4);
         });
 
         test('Mission Command should be first tab', () => {
@@ -46,20 +46,6 @@ suite('Welcome View Test Suite', () => {
             };
             assert.ok(data.synapseHealth >= 0 && data.synapseHealth <= 100);
             assert.ok(data.memoryModalities.skills > 0);
-        });
-    });
-
-    suite('AgentInfo interface contract', () => {
-        test('should accept valid agent info', () => {
-            const agent = {
-                id: 'researcher',
-                name: 'Researcher',
-                description: 'Deep domain research',
-                available: true,
-            };
-            assert.ok(agent.id);
-            assert.ok(agent.name);
-            assert.ok(agent.available);
         });
     });
 

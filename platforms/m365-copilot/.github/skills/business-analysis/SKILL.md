@@ -1,6 +1,6 @@
 ---
-name: "Business Analysis Skill"
-description: "Patterns for requirements elicitation, BRDs, process analysis, and stakeholder alignment."
+name: business-analysis
+description: Patterns for requirements elicitation, BRDs, process analysis, and stakeholder alignment.
 ---
 
 # Business Analysis Skill
@@ -285,4 +285,4 @@ Low Value  │ Fill-ins   │ Avoid           │
 ### Supporting Connections
 
 - [architecture-refinement] (Low, Informs, Forward) — "Requirements shape architecture"
-- [writing-publication] (Low, Uses, Forward) — "Clear documentation writing"
+- [academic-research] (Low, Uses, Forward) — "Clear documentation writing"

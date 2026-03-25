@@ -1,38 +1,46 @@
 {
-  "skill": "privacy-responsible-ai",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "privacy-responsible-ai",
   "connections": [
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "Privacy is part of security"
+      "reason": "Privacy is part of security",
+      "when": "When task involves .github/skills/security review/SKILL.md",
+      "yields": "security review complementary techniques"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
-      "reason": "Privacy checks in review"
+      "reason": "Privacy checks in review",
+      "when": "When task involves .github/skills/code review/SKILL.md",
+      "yields": "code review contextual assessment"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "Privacy incidents need response"
+      "reason": "Privacy incidents need response",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
+      "yields": "incident response extended capabilities"
     },
     {
       "target": ".github/skills/pii-privacy-regulations/SKILL.md",
       "type": "extends",
       "strength": 0.9,
-      "bidirectional": true,
-      "reason": "Detailed regulatory compliance for PII"
+      "reason": "Detailed regulatory compliance for PII",
+      "when": "When task involves .github/skills/pii privacy regulations/SKILL.md",
+      "yields": "PII privacy regulations extended capabilities"
     },
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "complements",
       "strength": 0.75,
-      "bidirectional": true,
-      "reason": "Human-AI trust calibration is core to responsible AI"
+      "reason": "Human-AI trust calibration is core to responsible AI",
+      "when": "When task involves .github/skills/appropriate reliance/SKILL.md",
+      "yields": "appropriate reliance complementary techniques"
     }
   ],
   "triggers": [
@@ -53,5 +61,21 @@
     "human oversight"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "privacy",
+    "PII",
+    "GDPR",
+    "consent",
+    "data protection",
+    "responsible AI",
+    "bias",
+    "fairness",
+    "ethical AI",
+    "RAI",
+    "transparency",
+    "accountability",
+    "model card",
+    "HAX",
+    "human oversight"
+  ]
 }

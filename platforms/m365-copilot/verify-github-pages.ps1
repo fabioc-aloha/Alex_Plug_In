@@ -30,7 +30,7 @@ $urlsToCheck = @(
 $results = @()
 $allCriticalPass = $true
 
-Write-Host "🔍 Checking $($urlsToCheck.Count) URLs..." -ForegroundColor Yellow
+Write-Host " Checking $($urlsToCheck.Count) URLs..." -ForegroundColor Yellow
 Write-Host ""
 
 foreach ($item in $urlsToCheck) {
@@ -45,18 +45,18 @@ foreach ($item in $urlsToCheck) {
         $response = Invoke-WebRequest -Uri $url -Method Head -TimeoutSec $TimeoutSeconds -ErrorAction Stop
         
         if ($response.StatusCode -eq 200) {
-            Write-Host "   ✅ Status: $($response.StatusCode) OK" -ForegroundColor Green
+            Write-Host "   [OK] Status: $($response.StatusCode) OK" -ForegroundColor Green
             $results += [PSCustomObject]@{
                 Name = $name
-                Status = "✅ PASS"
+                Status = "[OK] PASS"
                 StatusCode = $response.StatusCode
                 Critical = $critical
             }
         } else {
-            Write-Host "   ⚠️  Status: $($response.StatusCode)" -ForegroundColor Yellow
+            Write-Host "   [WARN]  Status: $($response.StatusCode)" -ForegroundColor Yellow
             $results += [PSCustomObject]@{
                 Name = $name
-                Status = "⚠️ WARN"
+                Status = "[WARN] WARN"
                 StatusCode = $response.StatusCode
                 Critical = $critical
             }
@@ -67,17 +67,17 @@ foreach ($item in $urlsToCheck) {
         if ($url -match '\.(html|js)$') {
             $contentType = $response.Headers['Content-Type']
             if ($contentType -match 'text/(html|javascript)') {
-                Write-Host "   ✅ Content-Type: $contentType" -ForegroundColor Green
+                Write-Host "   [OK] Content-Type: $contentType" -ForegroundColor Green
             } else {
-                Write-Host "   ⚠️  Content-Type: $contentType (unexpected)" -ForegroundColor Yellow
+                Write-Host "   [WARN]  Content-Type: $contentType (unexpected)" -ForegroundColor Yellow
             }
         }
         
     } catch {
-        Write-Host "   ❌ FAILED: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "   [ERROR] FAILED: $($_.Exception.Message)" -ForegroundColor Red
         $results += [PSCustomObject]@{
             Name = $name
-            Status = "❌ FAIL"
+            Status = "[ERROR] FAIL"
             StatusCode = "N/A"
             Critical = $critical
         }
@@ -96,13 +96,13 @@ $results | Format-Table -Property Name, Status, StatusCode, Critical -AutoSize
 
 if ($allCriticalPass) {
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
-    Write-Host "  ✅ All critical files accessible!" -ForegroundColor Green
+    Write-Host "  [OK] All critical files accessible!" -ForegroundColor Green
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
     Write-Host ""
-    Write-Host "📋 Ready for Office Add-in deployment:" -ForegroundColor Yellow
+    Write-Host "[LIST] Ready for Office Add-in deployment:" -ForegroundColor Yellow
     Write-Host "   1. Upload appPackage/build/appPackage.dev.zip to M365" -ForegroundColor White
     Write-Host "   2. Open Word/Excel/PowerPoint/Outlook" -ForegroundColor White
-    Write-Host "   3. Home tab → Alex button → Task pane loads!" -ForegroundColor White
+    Write-Host "   3. Home tab -> Alex button -> Task pane loads!" -ForegroundColor White
     Write-Host ""
     
     if ($OpenBrowser) {
@@ -111,10 +111,10 @@ if ($allCriticalPass) {
     }
 } else {
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Red
-    Write-Host "  ❌ Deployment verification failed" -ForegroundColor Red
+    Write-Host "  [ERROR] Deployment verification failed" -ForegroundColor Red
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Red
     Write-Host ""
-    Write-Host "🔧 Troubleshooting:" -ForegroundColor Yellow
+    Write-Host "[FIX] Troubleshooting:" -ForegroundColor Yellow
     Write-Host "   1. Run: .\deploy-to-github-pages.ps1 -Commit" -ForegroundColor White
     Write-Host "   2. git push" -ForegroundColor White
     Write-Host "   3. Wait 2-3 minutes for GitHub Pages to update" -ForegroundColor White
@@ -127,6 +127,6 @@ Write-Host ""
 Write-Host "🌐 GitHub Pages Base URL:" -ForegroundColor Cyan
 Write-Host "   $baseUrl" -ForegroundColor White
 Write-Host ""
-Write-Host "📄 Task Pane URL (used in manifest):" -ForegroundColor Cyan
+Write-Host "[FILE] Task Pane URL (used in manifest):" -ForegroundColor Cyan
 Write-Host "   $baseUrl/taskpane/taskpane.html" -ForegroundColor White
 Write-Host ""

@@ -1,7 +1,7 @@
 ---
-name: "Security Review Skill"
-description: "Defend before attackers find the gaps - OWASP, STRIDE, and Microsoft SFI"
-applyTo: "**/*security*,**/*auth*,**/*password*,**/*token*,**/*credential*,**/*vulnerability*,**/*CVE*,**/*secret*"
+name: security-review
+description: Defend before attackers find the gaps - OWASP, STRIDE, and Microsoft SFI
+applyTo: '**/*security*,**/*auth*,**/*password*,**/*token*,**/*credential*,**/*vulnerability*,**/*CVE*,**/*secret*'
 ---
 
 # Security Review Skill

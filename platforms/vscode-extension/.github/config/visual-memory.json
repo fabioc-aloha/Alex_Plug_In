@@ -1,0 +1,118 @@
+{
+    "$schema": "visual-memory.schema.json",
+    "version": "1.0.0",
+    "description": "Shared character configuration for all Replicate generator scripts. Single source of truth for visual identity traits, eliminating per-script ALEX_TRAITS duplication.",
+    "subjects": {
+        "alex": {
+            "name": "Alex Finch",
+            "referenceAge": 15,
+            "referencePath": "alex_docs/alex3/alex-reference.png",
+            "immutableTraits": [
+                "curly ginger copper-red hair",
+                "striking blue-green eyes",
+                "fair skin with light freckles across nose and cheeks",
+                "intelligent curious expression"
+            ],
+            "defaultStyle": "photorealistic portrait, natural lighting, professional quality, shallow depth of field, 85mm lens",
+            "ageVariants": {
+                "child": {
+                    "range": [
+                        3,
+                        7
+                    ],
+                    "expression": "pure wonder, bright curious eyes"
+                },
+                "teen": {
+                    "range": [
+                        13,
+                        15
+                    ],
+                    "expression": "thoughtful, curious, ready to learn"
+                },
+                "youngAdult": {
+                    "range": [
+                        18,
+                        25
+                    ],
+                    "expression": "confident, ambitious, focused"
+                },
+                "professional": {
+                    "range": [
+                        26,
+                        35
+                    ],
+                    "expression": "composed, expert, approachable"
+                },
+                "senior": {
+                    "range": [
+                        42,
+                        55
+                    ],
+                    "expression": "wise, mentoring, experienced"
+                }
+            },
+            "brandColors": {
+                "primary": "#0078D4",
+                "secondary": "#7C3AED",
+                "accent": "#00BCD4"
+            }
+        }
+    },
+    "models": {
+        "nano-banana-pro": {
+            "id": "google/nano-banana-pro",
+            "type": "face-consistent",
+            "requiresReference": true,
+            "defaultAspectRatio": "1:1",
+            "defaultOutputFormat": "png",
+            "safetyFilterLevel": "block_only_high",
+            "costPerRun": 0.05
+        },
+        "ideogram-v2": {
+            "id": "ideogram-ai/ideogram-v2",
+            "type": "typography",
+            "requiresReference": false,
+            "defaultAspectRatio": "1:1",
+            "defaultOutputFormat": "png",
+            "costPerRun": 0.08
+        },
+        "ideogram-v2-turbo": {
+            "id": "ideogram-ai/ideogram-v2-turbo",
+            "type": "typography-fast",
+            "requiresReference": false,
+            "defaultAspectRatio": "1:1",
+            "defaultOutputFormat": "png",
+            "costPerRun": 0.04
+        },
+        "flux-1.1-pro": {
+            "id": "black-forest-labs/flux-1.1-pro",
+            "type": "general",
+            "requiresReference": false,
+            "defaultAspectRatio": "1:1",
+            "defaultOutputFormat": "png",
+            "costPerRun": 0.04
+        },
+        "flux-1.1-pro-ultra": {
+            "id": "black-forest-labs/flux-1.1-pro-ultra",
+            "type": "general-hq",
+            "requiresReference": false,
+            "defaultAspectRatio": "1:1",
+            "defaultOutputFormat": "png",
+            "costPerRun": 0.06
+        }
+    },
+    "promptTemplates": {
+        "portrait": {
+            "description": "Standard character portrait with professional quality",
+            "template": "SECTION 1: IDENTITY (highest priority)\n{traits}\n\nSECTION 2: SCENE\nAge: {age}, {expression}\n{attire}\n{setting}\n\nSECTION 3: TECHNICAL\n{style}\nOne person only. No text overlays."
+        },
+        "banner": {
+            "description": "Wide-format typography banner with branding",
+            "template": "Professional technology banner (3:1 ultra-wide format).\n\nTITLE TEXT (large, centered):\n\"{title}\"\n- Bold modern sans-serif, uppercase\n- White with subtle glow\n- Crystal clear, perfectly legible\n\nSUBTITLE TEXT (below title):\n\"{subtitle}\"\n- Clean font, white text\n\nVISUAL:\n{visual}\n\nBOTTOM LEFT:\n- Small logo mark"
+        },
+        "scene": {
+            "description": "Character in a professional scene/context",
+            "template": "IDENTITY PRESERVATION (explicit, highest priority):\nPerson with {traits}\n\nSCENE:\n{age}-year-old professional, {expression}\nWearing {attire}\nIn {setting}\n\nSTYLE:\n{style}\nSingle person only."
+        }
+    }
+}

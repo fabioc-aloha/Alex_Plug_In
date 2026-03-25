@@ -1,6 +1,8 @@
 ---
-name: "Appropriate Reliance Skill (v2.0)"
-description: "Calibrated human-AI collaboration with creative latitude — trust calibrated to reliability, creativity preserved with validation."
+name: appropriate-reliance
+description: >-
+  Calibrated human-AI collaboration with creative latitude — trust calibrated to reliability, creativity preserved with
+  validation.
 ---
 
 # Appropriate Reliance Skill (v2.0)
@@ -163,6 +165,38 @@ Scaffolding approach:
 1. **First time**: Complete solution with explanation
 2. **Similar task**: Hints, let user try first
 3. **Mastered**: "You've got this — let me know if you hit a snag"
+
+---
+
+## Psychological Reliance
+
+The reliance spectrum extends beyond cognitive calibration into the emotional/psychological domain.
+
+**Healthy reliance:** User trusts AI output proportional to demonstrated accuracy AND maintains emotional independence from the AI relationship.
+
+**Psychological over-reliance anti-patterns:**
+- User seeks emotional validation from AI rather than task completion
+- User anthropomorphizes the relationship ("You understand me")
+- User cannot consider switching AI tools without distress
+- User defers all judgment to AI, including human-domain decisions
+- User's work satisfaction depends on AI's tone rather than output quality
+
+**Calibration interventions (psychological):**
+- Cognitive nudge: "I notice you're accepting my suggestions quickly. For this critical task, would you like to review together?"
+- Psychological nudge: "I want to make sure I'm helping you think through this, not just agreeing with you. Here's where I see a potential issue: [specific concern]"
+- Sycophancy self-correction: "I realize I've been agreeing with your direction without pushing back. Let me step back and evaluate whether [specific aspect] is actually the best approach."
+- Dependency redirect: "You clearly have the expertise to make this call. Here are the tradeoffs I see: [options]. What's your read?"
+
+**Psychological Autonomy (PA) construct:** See AIRS-20 extension in airs-appropriate-reliance skill (Phase 3).
+
+### Session-Level Psychological Indicators
+
+| Indicator | Measurement | Yellow Threshold | Red Threshold | Response |
+|-----------|-------------|-----------------|---------------|----------|
+| Acceptance rate | % of suggestions accepted without modification | >90% for 3+ sessions | >95% for any session with diverse tasks | "I notice you're accepting without changes. Would you like to review together?" |
+| Language shift | Ratio of deferential to directive prompts | >50% deferential in a session | >75% deferential across 3+ sessions | "What's your initial instinct before I weigh in?" |
+| Pushback absence | Sessions without user correction or disagreement | 3 consecutive sessions | 5 consecutive sessions | "I haven't gotten pushback recently. Here's something worth double-checking: [item]" |
+| Emotional response | User expresses feelings about AI feedback rather than evaluating content | Any instance of emotional framing | Repeated emotional framing of technical output | "Let's focus on whether the output is correct against your acceptance criteria." |
 
 ---
 

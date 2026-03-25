@@ -1,6 +1,6 @@
 ---
-name: "AI Agent Design Skill"
-description: "**Domain**: AI/ML Architecture"
+name: ai-agent-design
+description: '**Domain**: AI/ML Architecture'
 ---
 
 # AI Agent Design Skill

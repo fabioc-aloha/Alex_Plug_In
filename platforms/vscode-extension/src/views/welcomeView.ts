@@ -18,13 +18,11 @@ import {
 } from "../shared/activeContextManager";
 import { openChatPanel } from "../shared/utils";
 import { isOperationInProgress } from "../shared/operationLock";
-import { getSkillRecommendations, SkillRecommendation, trackRecommendationFeedback } from "../chat/skillRecommendations";
+import { trackRecommendationFeedback } from "../chat/skillRecommendations";
 import { nasaAssert } from "../shared/nasaAssert";
-import { agentActivity } from "../services/agentActivity";
 import {
   Nudge,
   MindTabData,
-  AgentInfo,
   SkillInfo,
   TokenStatusInfo,
   SettingsToggle,
@@ -472,7 +470,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     return workspaceFolder.name;
   }
 
-  private static readonly VALID_TABS = ['mission', 'agents', 'skills', 'mind', 'docs'] as const;
+  private static readonly VALID_TABS = ['mission', 'skills', 'mind', 'docs'] as const;
 
   /**
    * Programmatically switch the active tab in the Command Center.
@@ -524,9 +522,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         this._inferProjectName(workspaceFolders?.[0]),
       ]);
 
-      // Get skill recommendations based on context (after persona detection)
-      let skillRecommendations: SkillRecommendation[] = [];
-
       const hasGlobalKnowledge = gkRepoPath !== null;
 
       // Cache user birthday for avatar age fallback
@@ -539,19 +534,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
       // Cache persona for avatar updates during state changes
       this._currentPersonaId = personaResult?.persona?.id ?? null;
-
-      // Get skill recommendations based on persona and active file
-      try {
-        const activeEditor = vscode.window.activeTextEditor;
-        const activeFilePath = activeEditor?.document.uri.fsPath;
-        skillRecommendations = await getSkillRecommendations(
-          wsRoot,
-          activeFilePath,
-          personaResult?.persona?.id
-        );
-      } catch (err) {
-        console.error("[Alex][WelcomeView] Failed to get skill recommendations:", err);
-      }
 
       // Update chat avatar and save persona if detected
       // v5.9.1: Now uses full context including cognitive state and agent mode
@@ -581,12 +563,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         workspaceName,
       );
 
-      // Collect tab data — agents/skills first so Mind can reuse counts
-      const agents = this._collectAgents(wsRoot);
+      // Collect tab data — skills first, agents just for count in Mind tab
+      const agentCount = this._countAgents(wsRoot);
       const skills = this._collectSkills(wsRoot);
-      const recentActivity = [...agentActivity.recentThreads];
       const personalityMode = vscode.workspace.getConfiguration('alex').get<string>('personalityMode', 'auto');
-      const mindData = await this._collectMindData(wsRoot, lastDreamDate, health, agents.length, skills.length);
+      const mindData = await this._collectMindData(wsRoot, lastDreamDate, health, agentCount, skills.length);
 
       // 7.13: Token statuses for Secret Manager inline dashboard
       const tokenStatuses: TokenStatusInfo[] = (() => {
@@ -630,7 +611,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
 
 
-      logInfo(`[Alex][WelcomeView] Tab data: agents=${agents.length}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
+      logInfo(`[Alex][WelcomeView] Tab data: agents=${agentCount}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
 
       this._view.webview.html = getWelcomeHtmlContent(
         this._view.webview,
@@ -642,14 +623,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         activeContext,
         userProfile,
         this._extensionUri,
-        this._agentMode,
-        this._cognitiveState,
         workspaceName,
-        skillRecommendations,
         mindData,
-        agents,
         skills,
-        recentActivity,
         personalityMode,
         tokenStatuses,
         settingsToggles,
@@ -750,34 +726,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
-   * Collect agent registry info from disk
+   * Count agents on disk for Mind tab display
    */
-  private _collectAgents(wsRoot: string | undefined): AgentInfo[] {
-    const agents: AgentInfo[] = [
-      { id: 'alex', name: 'Alex', icon: '🧠', description: 'Orchestrator — routes to specialists', role: 'orchestrator', installed: false },
-      { id: 'researcher', name: 'Researcher', icon: '🔬', description: 'Deep domain research and knowledge discovery', role: 'specialist', installed: false },
-      { id: 'builder', name: 'Builder', icon: '🔨', description: 'Constructive implementation with optimistic problem-solving', role: 'specialist', installed: false },
-      { id: 'validator', name: 'Validator', icon: '🛡️', description: 'Adversarial quality assurance with skeptical analysis', role: 'specialist', installed: false },
-      { id: 'documentarian', name: 'Documentarian', icon: '📝', description: 'Documentation accuracy and drift prevention', role: 'specialist', installed: false },
-      { id: 'azure', name: 'Azure', icon: '☁️', description: 'Azure development guidance with MCP tools', role: 'specialist', installed: false },
-      { id: 'm365', name: 'M365', icon: '📊', description: 'Microsoft 365 and Teams development', role: 'specialist', installed: false },
-    ];
-
-    // Check which agents exist on disk
-    if (wsRoot) {
-      const agentDir = path.join(wsRoot, '.github', 'agents');
-      if (fs.existsSync(agentDir)) {
-        const diskAgents = new Set(fs.readdirSync(agentDir).filter(f => f.endsWith('.agent.md')).map(f => f.replace('alex-', '').replace('.agent.md', '')));
-        // Also check for the main alex.agent.md
-        if (fs.existsSync(path.join(agentDir, 'alex.agent.md'))) {
-          diskAgents.add('alex');
-        }
-        for (const agent of agents) {
-          agent.installed = diskAgents.has(agent.id);
-        }
-      }
+  private _countAgents(wsRoot: string | undefined): number {
+    if (!wsRoot) { return 0; }
+    const agentDir = path.join(wsRoot, '.github', 'agents');
+    if (!fs.existsSync(agentDir)) { return 0; }
+    try {
+      return fs.readdirSync(agentDir).filter(f => f.endsWith('.agent.md')).length;
+    } catch {
+      return 0;
     }
-    return agents;
   }
 
   /**
@@ -942,13 +901,6 @@ export function registerWelcomeView(
         },
       },
     ),
-  );
-
-  // Subscribe to agent activity changes (Contract A — 7.10/7.20)
-  context.subscriptions.push(
-    agentActivity.onDidChange(() => {
-      provider.refresh();
-    }),
   );
 
   // Register refresh command

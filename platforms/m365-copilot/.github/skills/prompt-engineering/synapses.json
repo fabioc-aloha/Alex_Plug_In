@@ -1,39 +1,50 @@
 {
-  "skill": "prompt-engineering",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "prompt-engineering",
   "connections": [
     {
       "target": ".github/skills/rag-architecture/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "bidirectional": true
+      "when": "Combining prompt engineering with RAG architecture",
+      "yields": "RAG architecture complementary techniques"
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
       "type": "requires",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "prompt engineering depends on LLM model selection",
+      "yields": "LLM model selection required patterns and guidance"
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "type": "enhances",
-      "strength": 0.8
+      "type": "extends",
+      "strength": 0.8,
+      "when": "prompt engineering enhances anti hallucination",
+      "yields": "anti hallucination enhanced capabilities"
     },
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
       "type": "implements",
-      "strength": 0.75
+      "strength": 0.75,
+      "when": "Applying appropriate reliance procedures",
+      "yields": "appropriate reliance implementation steps"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.6,
-      "note": "API design principles apply to prompt interfaces"
+      "note": "API design principles apply to prompt interfaces",
+      "when": "prompt engineering provides context to API design",
+      "yields": "API design contextual assessment"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "requires",
       "strength": 0.7,
-      "note": "Prompt testing and evaluation"
+      "note": "Prompt testing and evaluation",
+      "when": "prompt engineering depends on testing strategies",
+      "yields": "testing strategies required patterns and guidance"
     }
   ],
   "activationBoost": [
@@ -57,5 +68,24 @@
     "copilot"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "prompt",
+    "prompting",
+    "LLM",
+    "language model",
+    "GPT",
+    "Claude",
+    "system prompt",
+    "few-shot",
+    "zero-shot",
+    "chain of thought",
+    "CoT",
+    "instruction",
+    "temperature",
+    "token",
+    "completion",
+    "chat completion",
+    "AI agent",
+    "copilot"
+  ]
 }

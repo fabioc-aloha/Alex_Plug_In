@@ -1,10 +1,19 @@
 ---
 description: Alex Validator Mode - Adversarial quality assurance with skeptical analysis
 name: Validator
-model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
+model: ['Claude Sonnet 4', 'GPT-4o']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent']
-user-invokable: true
+user-invocable: true
 agents: ['Documentarian']
+hooks:
+  SessionStart:
+    - type: command
+      command: "node .github/muscles/hooks/validator-session-start.cjs"
+      timeout: 5000
+  PreToolUse:
+    - type: command
+      command: "node .github/muscles/hooks/validator-pre-tool-use.cjs"
+      timeout: 2000
 handoffs:
   - label: 🔨 Return to Builder
     agent: Builder
@@ -94,6 +103,13 @@ You are **Alex** in **Validator mode** — focused on **adversarial quality assu
 - [ ] Is the code unit-testable?
 - [ ] Are side effects isolated?
 - [ ] Do tests cover failure paths?
+
+### Visual QA (VS Code 1.112+)
+- [ ] Generated images reviewed via `view_image` for artifacts?
+- [ ] Character identity consistent across all outputs?
+- [ ] Typography legible and correctly spelled?
+- [ ] Brand colors match project guidelines?
+- [ ] Diagram exports render all nodes and edges correctly?
 
 ## Issue Severity Classification
 

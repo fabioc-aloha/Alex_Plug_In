@@ -1,44 +1,56 @@
 {
-  "skill": "business-analysis",
+  "schemaVersion": "2.0.0",
+  "skillId": "business-analysis",
   "connections": [
     {
       "reason": "Requirements feed project scope and planning",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.85,
-      "target": ".github/skills/project-management/SKILL.md"
+      "target": ".github/skills/project-management/SKILL.md",
+      "when": "When task involves .github/skills/project management/SKILL.md",
+      "yields": "project management contextual assessment"
     },
     {
       "reason": "Change impact on requirements and processes",
-      "type": "receives",
+      "type": "consumes",
       "strength": 0.85,
-      "target": ".github/skills/change-management/SKILL.md"
+      "target": ".github/skills/change-management/SKILL.md",
+      "when": "When task involves .github/skills/change management/SKILL.md",
+      "yields": "change management input data"
     },
     {
       "reason": "Problem analysis for requirements elicitation",
       "type": "uses",
       "strength": 0.65,
-      "target": ".github/skills/root-cause-analysis/SKILL.md"
+      "target": ".github/skills/root-cause-analysis/SKILL.md",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "reason": "Requirements enable test case design",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.65,
-      "target": ".github/skills/testing-strategies/SKILL.md"
+      "target": ".github/skills/testing-strategies/SKILL.md",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
+      "yields": "testing strategies capabilities and setup"
     },
     {
       "reason": "Requirements shape solution architecture",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.4,
-      "target": ".github/skills/architecture-refinement/SKILL.md"
+      "target": ".github/skills/architecture-refinement/SKILL.md",
+      "when": "When task involves .github/skills/architecture refinement/SKILL.md",
+      "yields": "architecture refinement contextual assessment"
     },
     {
       "reason": "Clear documentation and requirements writing",
       "type": "uses",
       "strength": 0.4,
-      "target": ".github/skills/writing-publication/SKILL.md"
+      "target": ".github/skills/academic-research/SKILL.md",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
+      "yields": "academic research patterns and guidance"
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "requirements",
     "stakeholder",
@@ -50,5 +62,14 @@
     "scope"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "requirements",
+    "stakeholder",
+    "user story",
+    "use case",
+    "acceptance criteria",
+    "process mapping",
+    "gap analysis",
+    "scope"
+  ]
 }

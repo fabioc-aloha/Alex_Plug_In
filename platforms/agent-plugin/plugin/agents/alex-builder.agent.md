@@ -1,10 +1,15 @@
 ---
 description: Alex Builder Mode - Constructive implementation with optimistic problem-solving
 name: Builder
-model: ['Claude Sonnet 4', 'GPT-4o', 'Claude Opus 4']
+model: ['Claude Sonnet 4', 'GPT-4o']
 tools: ['search', 'codebase', 'problems', 'usages', 'runSubagent', 'fetch', 'agent']
-user-invokable: true
+user-invocable: true
 agents: ['Validator']
+hooks:
+  PostToolUse:
+    - type: command
+      command: "node .github/muscles/hooks/builder-post-tool-use.cjs"
+      timeout: 2000
 handoffs:
   - label: 🔍 Request QA Review
     agent: Validator
@@ -118,6 +123,7 @@ flowchart LR
 | Implementation complete, need review | Validator |
 | Complex architectural decision | Alex (main) |
 | Need to validate edge cases | Validator |
+| Image generation complete, need visual QA | Validator (use `view_image`) |
 
 ## Code Generation Guidelines
 

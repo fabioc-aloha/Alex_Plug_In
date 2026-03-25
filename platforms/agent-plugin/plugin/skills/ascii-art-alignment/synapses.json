@@ -1,26 +1,38 @@
 {
-  "skill": "ascii-art-alignment",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "ascii-art-alignment",
   "description": "Create perfectly aligned ASCII diagrams",
   "connections": [
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "complements",
       "strength": 0.9,
-      "bidirectional": true,
-      "context": "ASCII for precise control, Mermaid for auto-layout"
+      "reason": "ASCII for precise control, Mermaid for auto-layout",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
+      "yields": "markdown mermaid complementary techniques"
     },
     {
       "target": ".github/skills/lint-clean-markdown/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.7,
-      "context": "Both require attention to character-level detail"
+      "reason": "Both require attention to character-level detail",
+      "when": "When working with .github/skills/lint clean markdown/SKILL.md patterns",
+      "yields": "lint clean markdown related patterns and guidance"
     },
     {
-      "target": ".github/skills/writing-publication/SKILL.md",
+      "target": ".github/skills/academic-research/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "context": "Visual diagrams enhance documentation quality"
+      "reason": "Visual diagrams enhance documentation quality",
+      "when": "When task involves .github/skills/academic research/SKILL.md",
+      "yields": "academic research supporting context"
+    },
+    {
+      "target": ".github/skills/graphic-design/SKILL.md",
+      "type": "complements",
+      "strength": 0.65,
+      "when": "Combining ascii art alignment with graphic design",
+      "yields": "graphic design complementary techniques"
     }
   ],
   "triggers": [
@@ -31,5 +43,11 @@
     "right border jagged"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "ASCII diagram misaligned",
+    "box drawing characters",
+    "text-based UI mockup",
+    "lines don't match up",
+    "right border jagged"
+  ]
 }

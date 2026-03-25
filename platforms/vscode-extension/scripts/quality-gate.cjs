@@ -1,16 +1,18 @@
 /**
- * Quality Gate — Automated Pre-Publish Validation
+ * Quality Gate -- Automated Pre-Publish Validation
  * ================================================
  * Created: 2026-02-26 (RCA: prevent recurring regressions)
  *
  * Catches issues that caused v5.9.10 regressions:
  *   1. U+FFFD emoji corruption (encoding corruption)
- *   2. Command↔handler parity (orphaned commands)
- *   3. Command↔file inclusion (doc files missing from VSIX)
+ *   2. Command<->handler parity (orphaned commands)
+ *   3. Command<->file inclusion (doc files missing from VSIX)
  *   4. Markdown table integrity (broken table formatting)
  *
  * Run: npm test
  * Wired into: vscode:prepublish (blocks packaging on failure)
+ *
+ * Alex-first: Use --json for machine-consumable output
  */
 
 const fs = require('fs');
@@ -28,29 +30,57 @@ const VSCODEIGNORE = path.join(ROOT, '.vscodeignore');
 const SCAN_EXTENSIONS = ['.md', '.ts', '.js', '.json', '.cjs', '.mjs', '.html', '.css'];
 const SCAN_EXCLUDE = ['node_modules', '.venv', '.vscode-test', '.git'];
 
+// Alex-first: JSON output mode
+const JSON_MODE = process.argv.includes('--json');
+const jsonResult = { gates: [], errors: 0, warnings: 0, passed: true };
+
 let totalErrors = 0;
 let totalWarnings = 0;
+let currentGate = null;
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
 function header(title) {
-  console.log(`\n${'═'.repeat(60)}`);
-  console.log(`  ${title}`);
-  console.log(`${'═'.repeat(60)}`);
+  if (JSON_MODE) {
+    currentGate = { name: title, status: 'pass', issues: [] };
+    jsonResult.gates.push(currentGate);
+  } else {
+    console.log(`\n${'═'.repeat(60)}`);
+    console.log(`  ${title}`);
+    console.log(`${'═'.repeat(60)}`);
+  }
 }
 
 function pass(msg) {
-  console.log(`  ✅ ${msg}`);
+  if (JSON_MODE) {
+    if (currentGate) currentGate.summary = msg;
+  } else {
+    console.log(`  [PASS] ${msg}`);
+  }
 }
 
 function fail(msg) {
   totalErrors++;
-  console.log(`  ❌ ${msg}`);
+  if (JSON_MODE) {
+    if (currentGate) {
+      currentGate.status = 'fail';
+      currentGate.issues.push({ level: 'error', message: msg });
+    }
+  } else {
+    console.log(`  [FAIL] ${msg}`);
+  }
 }
 
 function warn(msg) {
   totalWarnings++;
-  console.log(`  ⚠️  ${msg}`);
+  if (JSON_MODE) {
+    if (currentGate) {
+      if (currentGate.status !== 'fail') currentGate.status = 'warn';
+      currentGate.issues.push({ level: 'warning', message: msg });
+    }
+  } else {
+    console.log(`  [WARN] ${msg}`);
+  }
 }
 
 function getAllFiles(dir, exts, exclude) {
@@ -98,19 +128,19 @@ function checkEncodingCorruption() {
         }
       }
     } catch {
-      // Binary file or encoding issue — skip
+      // Binary file or encoding issue -- skip
     }
   }
 
   if (corruptedFiles === 0) {
-    pass(`${files.length} files scanned — zero encoding corruption`);
+    pass(`${files.length} files scanned -- zero encoding corruption`);
   }
 }
 
-// ─── Gate 2: Command ↔ Handler Parity ────────────────────────────────────────
+// ─── Gate 2: Command <-> Handler Parity ────────────────────────────────────────
 
 function checkCommandParity() {
-  header('Gate 2: Command ↔ Handler Parity');
+  header('Gate 2: Command <-> Handler Parity');
 
   const pkg = JSON.parse(fs.readFileSync(PACKAGE_JSON, 'utf8'));
   const declaredCommands = new Set(
@@ -166,7 +196,7 @@ function checkCommandParity() {
   }
 
   if (orphanedCount === 0 && undeclaredCount === 0) {
-    pass(`${declaredCommands.size} commands declared, ${registeredCommands.size} handlers — all matched`);
+    pass(`${declaredCommands.size} commands declared, ${registeredCommands.size} handlers -- all matched`);
   }
 }
 
@@ -182,7 +212,7 @@ function checkDocFileInclusion() {
   for (const line of ignoreContent.split('\n')) {
     const trimmed = line.trim();
     if (trimmed.startsWith('!alex_docs/')) {
-      // Convert !alex_docs/README.md → alex_docs/README.md
+      // Convert !alex_docs/README.md -> alex_docs/README.md
       whitelistedDocs.add(trimmed.substring(1));
     }
   }
@@ -190,7 +220,7 @@ function checkDocFileInclusion() {
   // Find all alex_docs file references in source code
   // joinPath calls span multiple lines, so we parse the full content
   const tsFiles = getAllFiles(SRC_DIR, ['.ts'], []);
-  const referencedDocs = new Map(); // path → [file:line, ...]
+  const referencedDocs = new Map(); // path -> [file:line, ...]
 
   for (const filePath of tsFiles) {
     const content = fs.readFileSync(filePath, 'utf8');
@@ -284,7 +314,7 @@ function checkMarkdownTables() {
 
       if (isTableRow) {
         if (inTable && (i - lastTableLine > 1)) {
-          // Gap between table rows — check if non-empty lines in between
+          // Gap between table rows -- check if non-empty lines in between
           let hasContent = false;
           for (let j = lastTableLine + 1; j < i; j++) {
             if (lines[j].trim().length > 0) {
@@ -303,13 +333,13 @@ function checkMarkdownTables() {
         // Non-table, non-empty line ends the table
         inTable = false;
       } else if (trimmed.length === 0 && inTable) {
-        // Empty line — could be end of table, keep tracking
+        // Empty line -- could be end of table, keep tracking
       }
     }
   }
 
   if (brokenTables === 0) {
-    pass(`${packaged.length} packaged markdown files — tables intact`);
+    pass(`${packaged.length} packaged markdown files -- tables intact`);
   }
 }
 
@@ -323,7 +353,7 @@ function checkWalkthroughSync() {
   const syncScript = path.resolve(ROOT, '..', '..', '.github', 'muscles', 'sync-architecture.cjs');
 
   if (!fs.existsSync(syncScript)) {
-    warn('sync-architecture.cjs not found — skipping sync parity check');
+    warn('sync-architecture.cjs not found -- skipping sync parity check');
     return;
   }
 
@@ -346,7 +376,7 @@ function checkWalkthroughSync() {
     // The filename should appear in the sync script
     const filename = path.basename(docPath);
     if (!syncContent.includes(filename)) {
-      fail(`Whitelisted ${docPath} not found in sync-architecture.cjs — won't be synced from master`);
+      fail(`Whitelisted ${docPath} not found in sync-architecture.cjs -- won't be synced from master`);
       syncErrors++;
     }
   }
@@ -415,14 +445,14 @@ function checkSkillFrontmatterIntegrity() {
       const normA = String(fmName).trim().toLowerCase();
       const normB = folder.trim().toLowerCase();
       if (normA !== normB) {
-        fail(`Frontmatter name mismatch: ${folder} → '${fmName}' (${path.relative(ROOT, skillMd)})`);
+        fail(`Frontmatter name mismatch: ${folder} -> '${fmName}' (${path.relative(ROOT, skillMd)})`);
         errors++;
       }
     }
   }
 
   if (errors === 0) {
-    pass(`${checked} skills validated — frontmatter names match folder names`);
+    pass(`${checked} skills validated -- frontmatter names match folder names`);
   }
 }
 
@@ -508,7 +538,7 @@ function checkVsixSizeBudget() {
       shell: true,
     });
     if (result.status !== 0) {
-      // vsce failed — use fallback file walker
+      // vsce failed -- use fallback file walker
       warn('vsce ls failed; using fallback file walker');
       method = 'fallback';
       const est = estimateVsixSizeFallback();
@@ -525,7 +555,7 @@ function checkVsixSizeBudget() {
       }
     }
   } catch (err) {
-    // Total failure — use fallback
+    // Total failure -- use fallback
     warn(`vsce unavailable (${err.message}); using fallback file walker`);
     method = 'fallback';
     const est = estimateVsixSizeFallback();
@@ -568,9 +598,11 @@ function checkSkillActivationIndex() {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 function main() {
-  console.log('╔══════════════════════════════════════════════════════════╗');
-  console.log('║         Alex Quality Gate — Pre-Publish Checks         ║');
-  console.log('╚══════════════════════════════════════════════════════════╝');
+  if (!JSON_MODE) {
+    console.log('============================================================');
+    console.log('         Alex Quality Gate -- Pre-Publish Checks            ');
+    console.log('============================================================');
+  }
 
   checkEncodingCorruption();
   checkCommandParity();
@@ -583,15 +615,24 @@ function main() {
 
   // ─── Summary ──────────────────────────────────────────────────────────────
 
+  jsonResult.errors = totalErrors;
+  jsonResult.warnings = totalWarnings;
+  jsonResult.passed = totalErrors === 0;
+
+  if (JSON_MODE) {
+    console.log(JSON.stringify(jsonResult, null, 2));
+    process.exit(totalErrors === 0 ? 0 : 1);
+  }
+
   header('Summary');
 
   if (totalErrors === 0) {
-    console.log(`  ✅ All quality gates passed (${totalWarnings} warning${totalWarnings !== 1 ? 's' : ''})`);
+    console.log(`  [PASS] All quality gates passed (${totalWarnings} warning${totalWarnings !== 1 ? 's' : ''})`);
     console.log('');
     process.exit(0);
   } else {
-    console.log(`  ❌ ${totalErrors} error${totalErrors !== 1 ? 's' : ''}, ${totalWarnings} warning${totalWarnings !== 1 ? 's' : ''}`);
-    console.log(`  ⛔ Packaging blocked — fix errors above before publishing`);
+    console.log(`  [FAIL] ${totalErrors} error${totalErrors !== 1 ? 's' : ''}, ${totalWarnings} warning${totalWarnings !== 1 ? 's' : ''}`);
+    console.log(`  Packaging blocked -- fix errors above before publishing`);
     console.log('');
     process.exit(1);
   }

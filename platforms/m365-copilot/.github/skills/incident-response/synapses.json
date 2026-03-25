@@ -1,24 +1,30 @@
 {
-  "skill": "incident-response",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "incident-response",
   "connections": [
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "triggers",
+      "type": "activates",
       "strength": 0.65,
-      "reason": "Post-mortem requires RCA"
+      "reason": "Post-mortem requires RCA",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
+      "yields": "root cause analysis activation and procedures"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Recovery patterns during resolution"
+      "reason": "Recovery patterns during resolution",
+      "when": "When task involves .github/skills/error recovery patterns/SKILL.md",
+      "yields": "error recovery patterns patterns and guidance"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.8,
-      "reason": "Debug during investigation phase"
+      "reason": "Debug during investigation phase",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
+      "yields": "debugging patterns patterns and guidance"
     }
   ],
   "triggers": [
@@ -31,5 +37,13 @@
     "post-mortem"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "incident",
+    "outage",
+    "production issue",
+    "P1",
+    "P2",
+    "on-call",
+    "post-mortem"
+  ]
 }

@@ -3,61 +3,112 @@
   "schemaVersion": "1.0",
   "skillId": "security-review",
   "version": "2.0.0",
-  "inheritance": "inheritable",
   "created": "2026-02-01",
   "lastUpdated": "2026-02-20T07:45:33.347Z",
   "description": "Security-focused code analysis, OWASP patterns, STRIDE threat modeling, Microsoft SFI",
   "connections": [
     {
       "target": ".github/skills/incident-response/SKILL.md",
-      "type": "Triggers",
+      "type": "activates",
       "strength": 0.9,
-      "description": "Vulnerability found triggers incident response"
+      "description": "Vulnerability found triggers incident response",
+      "when": "security review initiates incident response",
+      "yields": "incident response activation and procedures"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "Enhances",
+      "type": "extends",
       "strength": 0.9,
-      "description": "Security lens enhances standard code review"
+      "description": "Security lens enhances standard code review",
+      "when": "security review enhances code review",
+      "yields": "code review enhanced capabilities"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
-      "description": "Security incidents need root cause analysis"
+      "description": "Security incidents need root cause analysis",
+      "when": "security review connects to root cause analysis",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
-      "description": "Security bugs need systematic debugging"
+      "description": "Security bugs need systematic debugging",
+      "when": "security review connects to debugging patterns",
+      "yields": "debugging patterns patterns and guidance"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "Relates",
+      "type": "relates",
       "strength": 0.7,
-      "description": "Security testing is specialized testing"
+      "description": "Security testing is specialized testing",
+      "when": "security review connects to testing strategies",
+      "yields": "testing strategies patterns and guidance"
     },
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",
-      "type": "Complements",
+      "type": "complements",
       "strength": 0.7,
-      "description": "Security enables privacy protection"
+      "description": "Security enables privacy protection",
+      "when": "Combining security review with privacy responsible AI",
+      "yields": "privacy responsible AI complementary techniques"
     },
     {
       "target": ".github/instructions/dependency-management.instructions.md",
-      "type": "Implements",
+      "type": "implements",
       "strength": 0.9,
-      "description": "Dependency security practices and vulnerability scanning"
+      "description": "Dependency security practices and vulnerability scanning",
+      "when": "Applying dependency management procedures",
+      "yields": "dependency management implementation steps"
     },
     {
-      "target": "global-knowledge://GI-csp-onclick-to-data-cmd-pattern-2026-02-08",
-      "type": "Documents",
-      "strength": 0.8,
-      "description": "CSP event delegation pattern for VS Code webviews"
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "uses",
+      "strength": 0.7,
+      "description": "Cross-project security patterns including CSP event delegation for VS Code webviews",
+      "when": "security review leverages global knowledge patterns",
+      "yields": "global knowledge patterns and guidance"
+    },
+    {
+      "target": ".github/skills/pii-privacy-regulations/SKILL.md",
+      "type": "complements",
+      "strength": 0.75,
+      "when": "Combining security review with PII privacy regulations",
+      "yields": "PII privacy regulations complementary techniques"
     }
   ],
   "activationTriggers": [
+    "security review",
+    "vulnerability",
+    "OWASP",
+    "threat model",
+    "STRIDE",
+    "penetration test",
+    "security audit",
+    "credential",
+    "authentication",
+    "authorization",
+    "injection",
+    "XSS",
+    "CSRF",
+    "CSP",
+    "Content-Security-Policy",
+    "secrets scanning",
+    "PII detection",
+    "audit logging",
+    "enterprise security",
+    "Entra ID",
+    "RBAC",
+    "Microsoft SFI",
+    "Secure Future Initiative",
+    "secure by design",
+    "secure by default",
+    "CVE",
+    "dependency security"
+  ],
+  "activationContexts": [
     "security review",
     "vulnerability",
     "OWASP",

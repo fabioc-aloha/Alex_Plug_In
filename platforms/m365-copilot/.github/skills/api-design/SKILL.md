@@ -1,7 +1,7 @@
 ---
-name: "API Design Skill"
-description: "Design APIs that developers love to use."
-applyTo: "**/*api*,**/*rest*,**/*endpoint*,**/*route*,**/*schema*"
+name: api-design
+description: Design APIs that developers love to use.
+applyTo: '**/*api*,**/*rest*,**/*endpoint*,**/*route*,**/*schema*'
 ---
 
 # API Design Skill

@@ -52,6 +52,14 @@
       "reason": "Research documents must follow Word-Compatible Research Writing Style before conversion",
       "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research required patterns and guidance"
+    },
+    {
+      "target": ".github/skills/lint-clean-markdown/SKILL.md",
+      "type": "requires",
+      "strength": 0.8,
+      "reason": "Markdown should pass lint checks before converting to Word for consistent output",
+      "when": "When pre-validating markdown before Word conversion",
+      "yields": "lint-clean markdown validation patterns"
     }
   ],
   "when": [

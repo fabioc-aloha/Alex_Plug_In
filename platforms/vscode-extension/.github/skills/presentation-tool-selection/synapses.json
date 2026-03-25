@@ -20,6 +20,14 @@
       "yields": "PPTX generation coordination protocols"
     },
     {
+      "target": ".github/skills/slide-design/SKILL.md",
+      "type": "complements",
+      "strength": 0.85,
+      "reason": "Slide design principles enhance any presentation tool choice",
+      "when": "When designing presentation content and visuals",
+      "yields": "slide design visual hierarchy and composition guidance"
+    },
+    {
       "target": ".github/skills/text-to-speech/SKILL.md",
       "type": "extends",
       "strength": 0.7,

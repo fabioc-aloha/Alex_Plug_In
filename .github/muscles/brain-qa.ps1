@@ -45,18 +45,18 @@ function Write-Phase {
 
 function Write-Pass { 
     param([string]$Msg)
-    if ($Detail -and -not $Quiet) { Write-Host "  ✅ $Msg" -ForegroundColor Green }
+    if ($Detail -and -not $Quiet) { Write-Host "  [OK] $Msg" -ForegroundColor Green }
 }
 
 function Write-Warn {
     param([string]$Msg)
-    if ($Detail -and -not $Quiet) { Write-Host "  ⚠️ $Msg" -ForegroundColor Yellow }
+    if ($Detail -and -not $Quiet) { Write-Host "  [WARN] $Msg" -ForegroundColor Yellow }
     $script:warnings += $Msg
 }
 
 function Write-Fail {
     param([string]$Msg)
-    if (-not $Quiet) { Write-Host "  ❌ $Msg" -ForegroundColor Red }
+    if (-not $Quiet) { Write-Host "  [ERROR] $Msg" -ForegroundColor Red }
     $script:issues += $Msg
 }
 
@@ -83,7 +83,7 @@ if ($Phase) { $runPhases = $Phase }
 # PRE-SYNC: Ensure heir is up-to-date before comparisons
 # ============================================================
 # This prevents false positives after meditation sessions that modify master synapses.
-# The sync runs master→heir to ensure we're comparing "deployed" state, not "drift" state.
+# The sync runs master->heir to ensure we're comparing "deployed" state, not "drift" state.
 #
 # Strategy:
 #   1. Run sync-architecture.cjs to copy skills/instructions/prompts/agents
@@ -91,7 +91,7 @@ if ($Phase) { $runPhases = $Phase }
 #
 $needsSync = ($Mode -eq "all" -or $Mode -eq "sync") -and (-not $SkipSync)
 if ($needsSync) {
-    if (-not $Quiet) { Write-Host "  [Pre-Sync] Master → Heir Synchronization" -ForegroundColor Magenta }
+    if (-not $Quiet) { Write-Host "  [Pre-Sync] Master -> Heir Synchronization" -ForegroundColor Magenta }
     
     # Step 1: Sync architecture (skills, instructions, prompts, etc.)
     $syncScript = Join-Path $ghPath "muscles\sync-architecture.cjs"
@@ -100,21 +100,21 @@ if ($needsSync) {
             $syncOutput = & node $syncScript 2>&1
             if ($LASTEXITCODE -eq 0) {
                 if ($Detail -and -not $Quiet) { 
-                    Write-Host "  ✅ Architecture synchronized" -ForegroundColor Green 
+                    Write-Host "  [OK] Architecture synchronized" -ForegroundColor Green 
                 }
             }
             else {
-                Write-Host "  ⚠️ Sync completed with warnings" -ForegroundColor Yellow
+                Write-Host "  [WARN] Sync completed with warnings" -ForegroundColor Yellow
                 $warnings += "sync-architecture.cjs returned exit code $LASTEXITCODE"
             }
         }
         catch {
-            Write-Host "  ❌ Sync failed: $_" -ForegroundColor Red
+            Write-Host "  [ERROR] Sync failed: $_" -ForegroundColor Red
             $issues += "Pre-sync failed: $_"
         }
     }
     else {
-        Write-Host "  ⚠️ sync-architecture.cjs not found at $syncScript" -ForegroundColor Yellow
+        Write-Host "  [WARN] sync-architecture.cjs not found at $syncScript" -ForegroundColor Yellow
         $warnings += "sync-architecture.cjs not found"
     }
     
@@ -122,7 +122,7 @@ if ($needsSync) {
     # After meditation, master synapses.json files are updated with new connections.
     # sync-architecture.cjs copies them, but Phase 7's comparison logic is more sophisticated.
     # Running the Phase 7 sync logic here ensures apples-to-apples comparison.
-    if (-not $Quiet) { Write-Host "  🔗 Synapse sync..." -ForegroundColor Magenta }
+    if (-not $Quiet) { Write-Host "   Synapse sync..." -ForegroundColor Magenta }
     
     if (Test-Path "$heirBase\.github\skills") {
         # Dynamic detection: skills in master but not heir are master-only
@@ -145,7 +145,7 @@ if ($needsSync) {
                 $heirHash = (Get-FileHash $heirSyn).Hash
                 
                 if ($masterHash -ne $heirHash) {
-                    # Sync master → heir with master-only filtering
+                    # Sync master -> heir with master-only filtering
                     $masterSynJson = Get-Content $masterSyn -Raw | ConvertFrom-Json
                     $heirConns = @($masterSynJson.connections | Where-Object {
                             $target = $_.target
@@ -160,12 +160,12 @@ if ($needsSync) {
         
         if ($synapseSyncCount -gt 0) {
             if ($Detail -and -not $Quiet) { 
-                Write-Host "  ✅ Synced $synapseSyncCount synapse file(s)" -ForegroundColor Green 
+                Write-Host "  [OK] Synced $synapseSyncCount synapse file(s)" -ForegroundColor Green 
             }
         }
         else {
             if ($Detail -and -not $Quiet) { 
-                Write-Host "  ✅ All synapses already in sync" -ForegroundColor Green 
+                Write-Host "  [OK] All synapses already in sync" -ForegroundColor Green 
             }
         }
     }
@@ -258,7 +258,7 @@ if (4 -in $runPhases) {
     Get-Content "$ghPath\skills\memory-activation\SKILL.md" | 
     Select-String -Pattern "^\| .+ \| .+ \|$" | 
     ForEach-Object {
-        if ($_ -match "\| ⭐?\s*([a-z\-]+) \| (.+) \|") {
+        if ($_ -match "\| ?\s*([a-z\-]+) \| (.+) \|") {
             $skill = $matches[1]
             $keywords = $matches[2] -split ", "
             foreach ($kw in $keywords) {
@@ -864,7 +864,7 @@ if (20 -in $runPhases) {
             }
             
             # Arrow-heavy ASCII (spatial reasoning required)
-            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑←→]' }).Count -gt 5) {
+            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑<-->]' }).Count -gt 5) {
                 $formatWarnings += "${file} - Heavy use of ASCII arrows (structured format preferred)"
             }
         }
@@ -878,7 +878,7 @@ if (20 -in $runPhases) {
     }
     else {
         foreach ($fw in $formatWarnings) { Write-Warn $fw }
-        Write-Host "  💡 Use Mermaid or tables instead of ASCII art — LLMs parse structured syntax better." -ForegroundColor DarkGray
+        Write-Host "   Use Mermaid or tables instead of ASCII art — LLMs parse structured syntax better." -ForegroundColor DarkGray
     }
 }
 
@@ -892,7 +892,7 @@ if (21 -in $runPhases) {
     Get-ChildItem "$ghPath\agents\*.md" | ForEach-Object {
         $content = Get-Content $_.FullName -Raw
         # Count common semantic emojis used in the codebase
-        $emojis = @("🔨", "🔍", "📚", "🧠", "✅", "❌", "⚠️", "☁️", "🔷", "⭐")
+        $emojis = @("", "", "", "", "[OK]", "[ERROR]", "[WARN]", "", "", "")
         foreach ($e in $emojis) {
             $emojiCount += ([regex]::Matches($content, [regex]::Escape($e))).Count
         }
@@ -926,7 +926,7 @@ if (22 -in $runPhases) {
                     if (-not (Test-Path $archivePath)) { New-Item -ItemType Directory -Path $archivePath -Force | Out-Null }
                     Move-Item $lp.FullName $archivePath -Force
                     $script:fixed += "Archived legacy file: $($lp.Name)"
-                    Write-Pass "  → Archived to archive/upgrades/$($lp.Name)"
+                    Write-Pass "  -> Archived to archive/upgrades/$($lp.Name)"
                 }
             }
         }
@@ -1392,7 +1392,7 @@ if (32 -in $runPhases) {
             $instrFiles = if (Test-Path $instrDir) { Get-ChildItem $instrDir -Filter "*.instructions.md" | ForEach-Object { $_.Name -replace '\.instructions\.md$', '' } } else { @() }
             $promptFiles = if (Test-Path $promptDir) { Get-ChildItem $promptDir -Filter "*.prompt.md" | ForEach-Object { $_.Name -replace '\.prompt\.md$', '' } } else { @() }
 
-            # Known instruction aliases (skill-name → instruction-name when different)
+            # Known instruction aliases (skill-name -> instruction-name when different)
             $instrAliases = @{
                 'dream-state'                = 'dream-state-automation'
                 'release-process'            = 'release-management'
@@ -1403,7 +1403,7 @@ if (32 -in $runPhases) {
                 'global-knowledge'           = 'global-knowledge-curation'
                 'gamma-presentations'        = 'gamma-presentation'
             }
-            # Known prompt aliases (skill-name → prompt-name when different)
+            # Known prompt aliases (skill-name -> prompt-name when different)
             $promptAliases = @{
                 'meditation'                      = 'meditate'
                 'dream-state'                     = 'dream'
@@ -1740,21 +1740,21 @@ Write-Host "========================================" -ForegroundColor Cyan
 
 if ($fixed.Count -gt 0) {
     Write-Host "`nFIXED ($($fixed.Count)):" -ForegroundColor Green
-    $fixed | ForEach-Object { Write-Host "  ✅ $_" -ForegroundColor Green }
+    $fixed | ForEach-Object { Write-Host "  [OK] $_" -ForegroundColor Green }
 }
 
 if ($warnings.Count -gt 0) {
     Write-Host "`nWARNINGS ($($warnings.Count)):" -ForegroundColor Yellow
-    $warnings | ForEach-Object { Write-Host "  ⚠️ $_" -ForegroundColor Yellow }
+    $warnings | ForEach-Object { Write-Host "  [WARN] $_" -ForegroundColor Yellow }
 }
 
 if ($issues.Count -gt 0) {
     Write-Host "`nISSUES ($($issues.Count)):" -ForegroundColor Red
-    $issues | ForEach-Object { Write-Host "  ❌ $_" -ForegroundColor Red }
+    $issues | ForEach-Object { Write-Host "  [ERROR] $_" -ForegroundColor Red }
 }
 
 if ($issues.Count -eq 0 -and $warnings.Count -eq 0) {
-    Write-Host "`n✅ All phases passed!" -ForegroundColor Green
+    Write-Host "`n[OK] All phases passed!" -ForegroundColor Green
 }
 
 Pop-Location

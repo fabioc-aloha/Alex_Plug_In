@@ -1,12 +1,24 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "inheritance": "inheritable",
+  "skillId": "deep-work-optimization",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
-  "skill": "deep-work-optimization",
   "created": "2026-02-10",
-  "connectionCount": 6,
-  "connections": [],
+  "connectionCount": 7,
+  "connections": [
+    {
+      "type": "relates",
+      "when": "deep work|focus|flow|time block",
+      "target": ".github/skills/frustration-recognition/SKILL.md",
+      "yields": [
+        "frustration-recognition",
+        "meeting-efficiency",
+        "skill-building"
+      ],
+      "weight": 0.8,
+      "notes": "Route deep work requests to adjacent skills that protect focus and build habits"
+    }
+  ],
   "synapses": [
     {
       "id": "DEEP-001",
@@ -47,7 +59,7 @@
     {
       "id": "DEEP-005",
       "source": "deep-work-optimization",
-      "target": ".github/skills/academic-paper-drafting/SKILL.md",
+      "target": ".github/skills/academic-research/SKILL.md",
       "type": "enables",
       "strength": 0.85,
       "description": "Academic writing requires sustained deep work sessions",
@@ -56,7 +68,7 @@
     {
       "id": "DEEP-006",
       "source": "deep-work-optimization",
-      "target": ".github/skills/airs-integration.session-calibration/SKILL.md",
+      "target": ".github/skills/airs-appropriate-reliance/SKILL.md",
       "type": "informs",
       "strength": 0.6,
       "description": "Deep work sessions benefit from appropriate reliance calibration",
@@ -83,6 +95,38 @@
     {
       "trigger": "time block|schedule focus|protect time",
       "confidence": 0.85
+    }
+  ],
+  "activationContexts": [
+    {
+      "context": "Focus and flow",
+      "keywords": [
+        "deep work",
+        "flow state",
+        "focus",
+        "distraction",
+        "time blocking",
+        "pomodoro"
+      ]
+    },
+    {
+      "context": "Productivity systems",
+      "keywords": [
+        "productivity",
+        "attention management",
+        "cognitive load",
+        "task batching",
+        "energy management"
+      ]
+    },
+    {
+      "context": "Work environment",
+      "keywords": [
+        "workspace optimization",
+        "notification management",
+        "context switching",
+        "single-tasking"
+      ]
     }
   ]
 }

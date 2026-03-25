@@ -1,3 +1,7 @@
+---
+description: "MCP server development, tool integration, and Model Context Protocol patterns for AI assistants"
+---
+
 # MCP Development Instructions
 
 **Auto-loaded when**: Building an MCP server, integrating MCP tools, or connecting AI assistants to external data via the Model Context Protocol

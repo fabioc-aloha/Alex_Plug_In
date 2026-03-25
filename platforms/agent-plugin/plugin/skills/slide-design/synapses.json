@@ -1,12 +1,24 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "inheritance": "inheritable",
+  "skillId": "slide-design",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
-  "skill": "slide-design",
   "created": "2026-02-10",
-  "connectionCount": 4,
-  "connections": [],
+  "connectionCount": 5,
+  "connections": [
+    {
+      "type": "relates",
+      "when": "slide|deck|powerpoint|presentation|assertion-evidence",
+      "target": ".github/skills/gamma-presentations/SKILL.md",
+      "yields": [
+        "gamma-presentations",
+        "executive-storytelling",
+        "pptx-generation"
+      ],
+      "weight": 0.86,
+      "notes": "Surface slide generators and storytelling helpers when user talks about decks"
+    }
+  ],
   "synapses": [
     {
       "id": "SLIDE-001",
@@ -63,6 +75,40 @@
     {
       "trigger": "too much text|clean up|simplify slides",
       "confidence": 0.85
+    }
+  ],
+  "activationContexts": [
+    {
+      "context": "Presentation design",
+      "keywords": [
+        "slide design",
+        "presentation",
+        "deck",
+        "visual hierarchy",
+        "slide layout",
+        "PowerPoint"
+      ]
+    },
+    {
+      "context": "Content structure",
+      "keywords": [
+        "slide structure",
+        "bullet points",
+        "speaker notes",
+        "slide count",
+        "key takeaway"
+      ]
+    },
+    {
+      "context": "Visual communication",
+      "keywords": [
+        "data visualization",
+        "chart",
+        "diagram",
+        "infographic",
+        "brand consistency",
+        "Gamma"
+      ]
     }
   ]
 }

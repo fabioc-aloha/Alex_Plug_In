@@ -2,7 +2,7 @@
  * welcomeViewHtml.ts - HTML generation orchestrator for the Welcome sidebar view
  *
  * Shell: interfaces, shared CSS, header, tab bar, client JS.
- * Tab content extracted to: missionTabHtml, agentsTabHtml, skillStoreTabHtml, mindTabHtml, docsTabHtml
+ * Tab content extracted to: missionTabHtml, skillStoreTabHtml, mindTabHtml, docsTabHtml
  */
 import * as vscode from 'vscode';
 import {
@@ -18,12 +18,9 @@ import {
 import { ActiveContext } from '../shared/activeContextManager';
 import { escapeHtml, getNonce } from '../shared/sanitize';
 import { getCachedCognitiveLevel, getFeatureRequirement, CognitiveLevel } from '../shared/cognitiveTier';
-import { SkillRecommendation } from '../chat/skillRecommendations';
 import { getSkillDisplayName } from '../shared/skillConstants';
 import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
-import { AgentActivity } from '../services/agentActivity';
 import { getMissionTabHtml } from './missionTabHtml';
-import { getAgentsTabHtml } from './agentsTabHtml';
 import { getSkillStoreTabHtml } from './skillStoreTabHtml';
 import { getMindTabHtml } from './mindTabHtml';
 import { getDocsTabHtml } from './docsTabHtml';
@@ -62,16 +59,6 @@ export interface SettingsToggle {
   label: string;
   enabled: boolean;
   group?: string;
-}
-
-/** Data contract for the Agents tab */
-export interface AgentInfo {
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-  role: string;
-  installed: boolean;
 }
 
 /** Data contract for the Skills tab */
@@ -196,14 +183,9 @@ export function getWelcomeHtmlContent(
   activeContext: ActiveContext | null,
   userProfile: { birthday?: string; name?: string } | null,
   extensionUri: vscode.Uri,
-  agentMode: string | null,
-  cognitiveState: string | null,
   workspaceName?: string,
-  skillRecommendations?: SkillRecommendation[],
   mindData?: MindTabData,
-  agents?: AgentInfo[],
   skills?: SkillInfo[],
-  recentActivity?: AgentActivity[],
   personalityMode?: string,
   tokenStatuses?: TokenStatusInfo[],
   settingsToggles?: SettingsToggle[],
@@ -225,19 +207,6 @@ export function getWelcomeHtmlContent(
 
   // Persona display
   const persona = personaResult?.persona;
-
-  // Focus Trifectas from Active Context - parse early for avatar resolution
-  const rawTrifectas = activeContext?.focusTrifectas;
-  const hasLiveTrifectas =
-    rawTrifectas &&
-    !rawTrifectas.includes("*(") &&
-    rawTrifectas.trim().length > 0;
-  const trifectaIds = hasLiveTrifectas
-    ? rawTrifectas!
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean)
-    : []; // Empty when no live trifectas (user hasn't started working yet)
 
   // Easter egg and persona display
   // Priority: Easter egg > Agent > Cognitive State > Skill State > Skill Persona > Persona > Age > Default
@@ -276,16 +245,6 @@ export function getWelcomeHtmlContent(
         ? "Cached"
         : "Auto";
 
-  // Skill display names now imported from shared/skillConstants.ts (DRY)
-
-  const trifectaTagsHtml = trifectaIds.length > 0
-    ? trifectaIds.map((id) => {
-      const name = getSkillDisplayName(id);
-      return `<span class="trifecta-tag" data-cmd="launchRecommendedSkill" data-skill="${id}" data-skill-name="${name}" title="Launch ${name}" tabindex="0" role="button">${name}</span>`;
-    })
-    .join("\n                ")
-    : `<span class="trifecta-placeholder" style="opacity: 0.6; font-style: italic;">Focus trifectas will appear here when you start working</span>`;
-
   // Objective from Active Context (hidden when session card is showing)
   const rawObjective = activeContext?.objective;
   const hasObjective =
@@ -312,20 +271,6 @@ export function getWelcomeHtmlContent(
   void assessedLabel;
   void principlesText;
   void recommendedSkillName;
-
-  // Skill recommendations HTML
-  const skillRecommendationsHtml = skillRecommendations && skillRecommendations.length > 0
-    ? `<div class="skill-recommendations-section">
-              <div class="skill-recommendations-list">
-                  ${skillRecommendations.map(rec => 
-                      `<button class="skill-recommendation-btn" data-cmd="launchRecommendedSkill" data-skill="${rec.skillId}" data-skill-name="${rec.displayName}" title="${rec.reason}">
-                          <span class="skill-rec-name">${rec.displayName}</span>
-                          <span class="skill-rec-reason">${rec.reason}</span>
-                      </button>`
-                  ).join('\n                    ')}
-              </div>
-          </div>`
-    : "";
 
   // Health indicator
   const isHealthy = health.status === HealthStatus.Healthy;
@@ -375,23 +320,18 @@ export function getWelcomeHtmlContent(
           ${userProfile?.name ? `<div class="hero-greeting">Hi ${escapeHtml(userProfile.name)} 👋</div>` : ''}
           ${activeContext?.northStar ? `<div class="hero-north-star" data-cmd="northStar" title="North Star — Click to review" tabindex="0" role="button">⭐ ${escapeHtml(activeContext.northStar)}</div>` : ''}
           ${hasObjective ? `<div class="hero-objective">${escapeHtml(rawObjective!)}</div>` : ''}
-          <div class="hero-trifectas">${trifectaTagsHtml}</div>
       </div>
 
       <!-- Spike 1B: Tab Bar -->
       <div class="tab-bar" role="tablist" aria-label="Command Center">
           <button role="tab" id="tab-mission" class="tab active" data-tab="mission" aria-selected="true" aria-controls="panel-mission" tabindex="0">Mission</button>
-          <button role="tab" id="tab-agents" class="tab" data-tab="agents" aria-selected="false" aria-controls="panel-agents" tabindex="-1">Agents</button>
           <button role="tab" id="tab-skills" class="tab" data-tab="skills" aria-selected="false" aria-controls="panel-skills" tabindex="-1">Skills</button>
           <button role="tab" id="tab-mind" class="tab" data-tab="mind" aria-selected="false" aria-controls="panel-mind" tabindex="-1">Mind</button>
           <button role="tab" id="tab-docs" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
       </div>
 
-      ${getMissionTabHtml({ nudges })}
+      ${getMissionTabHtml({ nudges, personalityMode })}
 
-      ${getAgentsTabHtml({ agents, recentActivity, cognitiveState, agentMode, personalityMode })}
-
-      ${skillRecommendationsHtml ? `<section class="skill-recs" aria-label="Recommended Skills">${skillRecommendationsHtml}</section>` : ''}
       ${getSkillStoreTabHtml({ skills, health })}
       ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, tokenStatuses, settingsToggles })}
 
@@ -507,7 +447,7 @@ export function getWelcomeHtmlContent(
       });
       
       // Listen for messages from the extension (e.g. programmatic tab switch)
-      const validTabs = ['mission', 'agents', 'skills', 'mind', 'docs'];
+      const validTabs = ['mission', 'skills', 'mind', 'docs'];
       window.addEventListener('message', (event) => {
           const message = event.data;
           if (message.command === 'switchToTab' && validTabs.includes(message.tabId)) {

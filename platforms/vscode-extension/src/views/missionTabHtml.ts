@@ -9,16 +9,23 @@ import { Nudge, actionButton, getNudgesHtml } from './welcomeViewHtml';
 
 export interface MissionTabContext {
     nudges: Nudge[];
+    personalityMode?: string;
 }
 
 /** Generate the Mission Command tab panel HTML. */
 export function getMissionTabHtml(ctx: MissionTabContext): string {
-    const { nudges } = ctx;
+    const { nudges, personalityMode } = ctx;
 
     return `
       <div class="tab-panel active" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
 
           ${getNudgesHtml(nudges)}
+
+          <div class="personality-toggle" role="radiogroup" aria-label="Personality mode">
+              <button class="personality-toggle-btn${(personalityMode ?? 'auto') === 'auto' ? ' active' : ''}" data-mode="auto" role="radio" aria-checked="${(personalityMode ?? 'auto') === 'auto'}">🤖 Auto</button>
+              <button class="personality-toggle-btn${personalityMode === 'precise' ? ' active' : ''}" data-mode="precise" role="radio" aria-checked="${personalityMode === 'precise'}">🎯 Precise</button>
+              <button class="personality-toggle-btn${personalityMode === 'chatty' ? ' active' : ''}" data-mode="chatty" role="radio" aria-checked="${personalityMode === 'chatty'}">💬 Chatty</button>
+          </div>
 
           <input type="text" class="quick-command-input" id="mission-command-search" placeholder="Search commands\u2026" aria-label="Search commands" />
 

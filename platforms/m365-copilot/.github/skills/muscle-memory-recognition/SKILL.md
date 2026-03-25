@@ -1,6 +1,6 @@
 ---
-name: "Muscle Memory Recognition"
-description: "Identify opportunities to build automation scripts (muscles) from repetitive or heavy-lifting tasks"
+name: muscle-memory-recognition
+description: Identify opportunities to build automation scripts (muscles) from repetitive or heavy-lifting tasks
 ---
 
 # Muscle Memory Recognition
@@ -121,9 +121,9 @@ IF (cross-platform required OR heir-critical):
 
 Examples:
 - validate-skills.ps1
-- sync-architecture.js
+- sync-architecture.cjs
 - normalize-paths.ps1
-- gamma-generator.js
+- gamma-generator.cjs
 - brain-qa.ps1
 ```
 
@@ -170,9 +170,9 @@ When identifying a muscle opportunity:
 
 ## Related Skills
 
-- [Bootstrap Learning](.github/skills/bootstrap-learning/SKILL.md) - Parent skill for learning-to-automation flow
-- [Research-First Development](.github/skills/research-first-development/SKILL.md) - Research before building muscles
-- [Architecture Health](.github/skills/architecture-health/SKILL.md) - Validate muscle integration
+- [Bootstrap Learning](..\bootstrap-learning/SKILL.md) - Parent skill for learning-to-automation flow
+- [Research-First Development](..\research-first-development/SKILL.md) - Research before building muscles
+- [Brain QA](..\brain-qa/SKILL.md) - Validate muscle integration
 
 ## Synapses
 

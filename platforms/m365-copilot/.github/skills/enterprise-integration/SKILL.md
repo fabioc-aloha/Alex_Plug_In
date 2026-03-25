@@ -1,7 +1,7 @@
 ---
-name: "Enterprise Integration Skill"
-description: "Patterns for Microsoft Graph, Azure AD, and enterprise feature integration in VS Code extensions"
-applyTo: "**/enterprise/**,**/graph/**,**/auth/**"
+name: enterprise-integration
+description: Patterns for Microsoft Graph, Azure AD, and enterprise feature integration in VS Code extensions
+applyTo: '**/enterprise/**,**/graph/**,**/auth/**'
 ---
 
 # Enterprise Integration Skill
@@ -233,6 +233,6 @@ async function handleCalendarCommand(
 
 ## Related Skills
 
-- [VS Code Extension Patterns](.github/skills/vscode-extension-patterns/SKILL.md) - General extension patterns
-- [API Design](.github/skills/api-design/SKILL.md) - API client patterns
-- [Security Review](.github/skills/security-review/SKILL.md) - Auth security considerations
+- [VS Code Extension Patterns](..\vscode-extension-patterns/SKILL.md) - General extension patterns
+- [API Design](..\api-design/SKILL.md) - API client patterns
+- [Security Review](..\security-review/SKILL.md) - Auth security considerations

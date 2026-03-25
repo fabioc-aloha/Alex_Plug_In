@@ -10,7 +10,7 @@ $hooksSource = Join-Path $rootPath ".github\hooks"
 $hooksTarget = Join-Path $rootPath ".git\hooks"
 
 if (-not (Test-Path $hooksTarget)) {
-    Write-Host "❌ .git/hooks directory not found. Is this a Git repository?" -ForegroundColor Red
+    Write-Host "[ERROR] .git/hooks directory not found. Is this a Git repository?" -ForegroundColor Red
     exit 1
 }
 
@@ -21,7 +21,7 @@ $preCommitSource = Join-Path $hooksSource "pre-commit"
 $preCommitTarget = Join-Path $hooksTarget "pre-commit"
 
 if (Test-Path $preCommitTarget) {
-    Write-Host "  ⚠️  pre-commit hook already exists" -ForegroundColor Yellow
+    Write-Host "  [WARN]  pre-commit hook already exists" -ForegroundColor Yellow
     $response = Read-Host "  Overwrite? (y/N)"
     if ($response -ne 'y') {
         Write-Host "  Skipped pre-commit hook" -ForegroundColor Gray
@@ -36,7 +36,7 @@ if ($IsLinux -or $IsMacOS) {
     chmod +x $preCommitTarget
 }
 
-Write-Host "✅ Git hooks installed" -ForegroundColor Green
+Write-Host "[OK] Git hooks installed" -ForegroundColor Green
 Write-Host ""
 Write-Host "Pre-commit hook will validate:" -ForegroundColor Cyan
 Write-Host "  • SKILL.md YAML frontmatter" -ForegroundColor Gray

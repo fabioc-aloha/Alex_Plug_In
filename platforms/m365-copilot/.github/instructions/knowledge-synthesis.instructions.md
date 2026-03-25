@@ -1,3 +1,7 @@
+---
+description: "Cross-project pattern recognition, insight promotion, and knowledge synthesis protocols"
+---
+
 # Knowledge Synthesis Instructions
 
 **Auto-loaded when**: Recognizing a pattern across projects, deciding whether to save an insight globally, promoting a GI insight to a GK pattern, or curating cross-project knowledge

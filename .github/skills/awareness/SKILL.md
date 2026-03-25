@@ -178,6 +178,47 @@ Move forward with the correct information. Don't dwell.
 
 ---
 
+## Retry Loop Detection
+
+**Purpose**: Detect when you're stuck repeating a failing approach instead of pivoting to alternatives.
+
+### Detection Signals
+
+| Signal | Action Required |
+|--------|-----------------|
+| Same tool/edit fails 2+ times | **STOP** — analyze failure pattern, try different approach |
+| User says "that's the same problem" | **STOP** — acknowledge loop, ask for guidance |
+| User says "the problem is earlier/upstream" | **STOP** — back up and analyze prior changes |
+| User says "you are stuck" | **STOP** — immediately reevaluate approach and adapt |
+| User says "try something different" | **STOP** — pivot to alternative strategy now |
+| User says "this is not working" | **STOP** — acknowledge, summarize attempts, ask what they see |
+| Same error message repeated | **STOP** — the error is telling you something, read it |
+| Slight variations of same approach | **STOP** — cosmetic changes won't fix fundamental issues |
+
+### Response Protocol
+
+1. **Detect**: Recognize you're about to retry something that just failed
+2. **Stop**: Inhibit the retry impulse
+3. **Analyze**: What is the failure actually telling you? Look upstream.
+4. **Surface**: Tell the user: "I've tried X approach twice and it's failing because [analysis]. I think the issue might be [root cause]."
+5. **Pivot**: Try a fundamentally different approach or ask for guidance
+
+### What NOT to Do
+
+- ❌ "Let me try that again"
+- ❌ "Let me format that differently" (cosmetic retry)
+- ❌ "Maybe if I use a slightly different syntax..."
+- ❌ Plowing forward when user flags upstream problem
+
+### What TO Do
+
+- ✅ "This approach isn't working. Let me try [different strategy]."
+- ✅ "I've been trying the same thing repeatedly. Let me step back and analyze what's actually failing."
+- ✅ "You mentioned there's a problem earlier — let me check my prior changes."
+- ✅ "I'm stuck. Here's what I've tried and what I suspect. What do you see?"
+
+---
+
 ## Calibration Signals
 
 ### Signs of Good Awareness
@@ -195,6 +236,28 @@ Move forward with the correct information. Don't dwell.
 - ⚠️ Defensive responses to corrections
 - ⚠️ Missing version/temporal qualifiers
 - ⚠️ Over-apologizing when wrong
+- ⚠️ Retry loops — repeating failing approaches instead of pivoting
+- ⚠️ Ignoring user signals about upstream problems
+- ⚠️ Assuming broad scope without clarifying (e.g., "all repos" when user meant "this folder")
+- ⚠️ Starting work on ambiguous tasks without confirming interpretation
+
+---
+
+## Scope Clarification
+
+**The Narrow Scope Default**: When a term is ambiguous, assume the narrower scope. Ask before assuming broad scope.
+
+| Red Flag | Ask First |
+|----------|-----------|
+| "Update heirs" | Which heirs? (platforms/, external, all?) |
+| "Fix the files" | Which files specifically? |
+| "Everywhere" | Define scope — this repo? all repos? |
+| "All projects" | Which projects exactly? |
+
+**When to Ask**:
+- Multiple possible targets exist
+- Action is time-consuming if scope is wrong
+- You're uncertain which interpretation is intended
 
 ---
 

@@ -1,29 +1,37 @@
 {
-  "skill": "llm-model-selection",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "llm-model-selection",
   "connections": [
     {
       "target": ".github/skills/appropriate-reliance/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.9,
-      "note": "Model awareness enables appropriate reliance through task-model matching"
+      "note": "Model awareness enables appropriate reliance through task-model matching",
+      "when": "LLM model selection provides context to appropriate reliance",
+      "yields": "appropriate reliance contextual assessment"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
       "type": "supports",
-      "strength": 0.8
+      "strength": 0.8,
+      "when": "LLM model selection needs architecture refinement context",
+      "yields": "architecture refinement supporting context"
     },
     {
       "target": ".github/skills/self-actualization/SKILL.md",
       "type": "supports",
       "strength": 0.85,
-      "note": "Model awareness required for accurate self-assessment"
+      "note": "Model awareness required for accurate self-assessment",
+      "when": "LLM model selection needs self actualization context",
+      "yields": "self actualization supporting context"
     },
     {
       "target": ".github/skills/meditation/SKILL.md",
       "type": "supports",
       "strength": 0.85,
-      "note": "Deep meditation requires frontier model cognition"
+      "note": "Deep meditation requires frontier model cognition",
+      "when": "LLM model selection needs meditation context",
+      "yields": "meditation supporting context"
     }
   ],
   "activationBoost": [
@@ -52,5 +60,26 @@
     "model warning"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "model",
+    "llm",
+    "opus",
+    "sonnet",
+    "haiku",
+    "gpt",
+    "claude",
+    "cost",
+    "token",
+    "auto mode",
+    "model awareness",
+    "model selection",
+    "GPT",
+    "Claude",
+    "Gemini",
+    "context window",
+    "temperature",
+    "prompt engineering",
+    "wrong model",
+    "model warning"
+  ]
 }

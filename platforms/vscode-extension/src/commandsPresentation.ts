@@ -10,6 +10,7 @@ import { openChatPanel, getLanguageIdFromPath } from './shared/utils';
 import * as telemetry from './shared/telemetry';
 import { registerWordCommands } from './commandsWord';
 import { registerGammaCommands } from './commandsGamma';
+import { registerConvertCommands } from './commandsConvert';
 
 export function registerPresentationCommands(context: vscode.ExtensionContext): void {
   const generateDiagramDisposable = vscode.commands.registerCommand(
@@ -571,4 +572,5 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
   // Register extracted command modules
   registerWordCommands(context);
   registerGammaCommands(context);
+  registerConvertCommands(context);
 }

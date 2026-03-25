@@ -14,7 +14,7 @@ $extensionPath = Join-Path $rootPath "platforms\vscode-extension"
 
 # Validate extension path exists
 if (-not (Test-Path $extensionPath)) {
-    Write-Host "❌ Extension path not found: $extensionPath" -ForegroundColor Red
+    Write-Host "[ERROR] Extension path not found: $extensionPath" -ForegroundColor Red
     exit 1
 }
 
@@ -32,20 +32,20 @@ $envFile = Join-Path $rootPath ".env"
 $patFound = $false
 
 if ($env:VSCE_PAT) {
-    Write-Host "   ✅ VSCE_PAT set in environment" -ForegroundColor Green
+    Write-Host "   [OK] VSCE_PAT set in environment" -ForegroundColor Green
     $patFound = $true
 }
 elseif (Test-Path $envFile) {
     $patLine = Get-Content $envFile | Where-Object { $_ -match '^VSCE_PAT=' }
     if ($patLine) {
-        Write-Host "   ✅ VSCE_PAT found in .env" -ForegroundColor Green
+        Write-Host "   [OK] VSCE_PAT found in .env" -ForegroundColor Green
         $patFound = $true
     }
 }
 
 if (-not $patFound) {
     $errors += "VSCE_PAT not configured (set env var or add VSCE_PAT to root .env)"
-    Write-Host "   ❌ VSCE_PAT not found" -ForegroundColor Red
+    Write-Host "   [ERROR] VSCE_PAT not found" -ForegroundColor Red
 }
 
 # 1. Version Synchronization Check
@@ -65,19 +65,19 @@ if (Test-Path $changelogPath) {
         
         if ($pkgVersion -ne $changelogVersion) {
             $errors += "Version mismatch: package.json ($pkgVersion) != CHANGELOG ($changelogVersion)"
-            Write-Host "   ❌ MISMATCH!" -ForegroundColor Red
+            Write-Host "   [ERROR] MISMATCH!" -ForegroundColor Red
         }
         else {
-            Write-Host "   ✅ Versions match" -ForegroundColor Green
+            Write-Host "   [OK] Versions match" -ForegroundColor Green
         }
     }
     else {
         $errors += "Could not parse version from CHANGELOG.md"
-        Write-Host "   ⚠️ Could not parse CHANGELOG version" -ForegroundColor Yellow
+        Write-Host "   [WARN] Could not parse CHANGELOG version" -ForegroundColor Yellow
     }
 }
 else {
-    Write-Host "   ⚠️ CHANGELOG.md not found at root" -ForegroundColor Yellow
+    Write-Host "   [WARN] CHANGELOG.md not found at root" -ForegroundColor Yellow
 }
 
 # Check MASTER copilot-instructions.md version (SOURCE OF TRUTH)
@@ -89,20 +89,20 @@ if (Test-Path $masterInstructions) {
         Write-Host "   Master copilot-instructions.md: $masterVersion" -ForegroundColor Gray
         if ($pkgVersion -ne $masterVersion) {
             $errors += "Version mismatch: package.json ($pkgVersion) != Master copilot-instructions ($masterVersion)"
-            Write-Host "   ❌ MISMATCH! Update .github/copilot-instructions.md version" -ForegroundColor Red
+            Write-Host "   [ERROR] MISMATCH! Update .github/copilot-instructions.md version" -ForegroundColor Red
         }
         else {
-            Write-Host "   ✅ Master version matches" -ForegroundColor Green
+            Write-Host "   [OK] Master version matches" -ForegroundColor Green
         }
     }
     else {
         $errors += "Could not parse version from Master .github/copilot-instructions.md"
-        Write-Host "   ⚠️ Could not parse Master version" -ForegroundColor Yellow
+        Write-Host "   [WARN] Could not parse Master version" -ForegroundColor Yellow
     }
 }
 else {
     $errors += "Master .github/copilot-instructions.md not found"
-    Write-Host "   ❌ Master copilot-instructions.md not found" -ForegroundColor Red
+    Write-Host "   [ERROR] Master copilot-instructions.md not found" -ForegroundColor Red
 }
 
 # Check heir copilot-instructions.md version (should match after build)
@@ -114,10 +114,10 @@ if (Test-Path $heirInstructions) {
         Write-Host "   Heir copilot-instructions.md: $heirVersion" -ForegroundColor Gray
         if ($pkgVersion -ne $heirVersion) {
             $errors += "Version mismatch: package.json ($pkgVersion) != heir copilot-instructions ($heirVersion). Run build-extension-package.ps1 to sync."
-            Write-Host "   ❌ MISMATCH! Run build-extension-package.ps1" -ForegroundColor Red
+            Write-Host "   [ERROR] MISMATCH! Run build-extension-package.ps1" -ForegroundColor Red
         }
         else {
-            Write-Host "   ✅ Heir version matches" -ForegroundColor Green
+            Write-Host "   [OK] Heir version matches" -ForegroundColor Green
         }
     }
 }
@@ -132,19 +132,19 @@ if (Test-Path $manifestPath) {
         $hoursSinceBuild = ((Get-Date) - $buildTime).TotalHours
         Write-Host "   BUILD-MANIFEST.json: $buildTimestamp" -ForegroundColor Gray
         if ($hoursSinceBuild -gt 24) {
-            Write-Host "   ⚠️ Build manifest is $([math]::Round($hoursSinceBuild)) hours old - consider re-running build-extension-package.ps1" -ForegroundColor Yellow
+            Write-Host "   [WARN] Build manifest is $([math]::Round($hoursSinceBuild)) hours old - consider re-running build-extension-package.ps1" -ForegroundColor Yellow
         }
         else {
-            Write-Host "   ✅ Build manifest is recent ($([math]::Round($hoursSinceBuild, 1)) hours ago)" -ForegroundColor Green
+            Write-Host "   [OK] Build manifest is recent ($([math]::Round($hoursSinceBuild, 1)) hours ago)" -ForegroundColor Green
         }
     }
     else {
-        Write-Host "   ⚠️ BUILD-MANIFEST.json missing timestamp" -ForegroundColor Yellow
+        Write-Host "   [WARN] BUILD-MANIFEST.json missing timestamp" -ForegroundColor Yellow
     }
 }
 else {
     $errors += "BUILD-MANIFEST.json not found. Run build-extension-package.ps1 to generate."
-    Write-Host "   ❌ BUILD-MANIFEST.json missing! Run build-extension-package.ps1" -ForegroundColor Red
+    Write-Host "   [ERROR] BUILD-MANIFEST.json missing! Run build-extension-package.ps1" -ForegroundColor Red
 }
 
 # Check ROADMAP-UNIFIED.md version
@@ -155,10 +155,10 @@ if (Test-Path $roadmapPath) {
         $roadmapVersion = $matches[1]
         Write-Host "   ROADMAP-UNIFIED.md: $roadmapVersion" -ForegroundColor Gray
         if ($pkgVersion -ne $roadmapVersion) {
-            Write-Host "   ⚠️ ROADMAP version differs (update recommended)" -ForegroundColor Yellow
+            Write-Host "   [WARN] ROADMAP version differs (update recommended)" -ForegroundColor Yellow
         }
         else {
-            Write-Host "   ✅ ROADMAP version matches" -ForegroundColor Green
+            Write-Host "   [OK] ROADMAP version matches" -ForegroundColor Green
         }
     }
 }
@@ -175,10 +175,10 @@ if ((Test-Path $readmePath) -and (Test-Path $masterSkillsPath)) {
         Write-Host "   README.md skills: $readmeSkillCount (actual: $actualSkillCount)" -ForegroundColor Gray
         if ($readmeSkillCount -ne $actualSkillCount) {
             $errors += "Skill count mismatch: README ($readmeSkillCount) != actual ($actualSkillCount)"
-            Write-Host "   ❌ MISMATCH! Update README.md skill count" -ForegroundColor Red
+            Write-Host "   [ERROR] MISMATCH! Update README.md skill count" -ForegroundColor Red
         }
         else {
-            Write-Host "   ✅ README skill count matches" -ForegroundColor Green
+            Write-Host "   [OK] README skill count matches" -ForegroundColor Green
         }
     }
 }
@@ -189,10 +189,10 @@ $buildOutput = npm run compile 2>&1
 $buildExitCode = $LASTEXITCODE
 if ($buildExitCode -ne 0) {
     $errors += "Build failed"
-    Write-Host "   ❌ Build failed" -ForegroundColor Red
+    Write-Host "   [ERROR] Build failed" -ForegroundColor Red
 }
 else {
-    Write-Host "   ✅ Build successful" -ForegroundColor Green
+    Write-Host "   [OK] Build successful" -ForegroundColor Green
 }
 
 # 3. Lint Check
@@ -201,10 +201,10 @@ $lintOutput = npm run lint 2>&1
 $lintExitCode = $LASTEXITCODE
 if ($lintExitCode -ne 0) {
     $errors += "Lint errors found"
-    Write-Host "   ❌ Lint errors" -ForegroundColor Red
+    Write-Host "   [ERROR] Lint errors" -ForegroundColor Red
 }
 else {
-    Write-Host "   ✅ Lint clean" -ForegroundColor Green
+    Write-Host "   [OK] Lint clean" -ForegroundColor Green
 }
 
 # 4. Test Check
@@ -214,10 +214,10 @@ if (-not $SkipTests) {
     $testExitCode = $LASTEXITCODE
     if ($testExitCode -ne 0) {
         $errors += "Tests failed"
-        Write-Host "   ❌ Tests failed" -ForegroundColor Red
+        Write-Host "   [ERROR] Tests failed" -ForegroundColor Red
     }
     else {
-        Write-Host "   ✅ Tests passed" -ForegroundColor Green
+        Write-Host "   [OK] Tests passed" -ForegroundColor Green
     }
 }
 else {
@@ -229,21 +229,21 @@ Push-Location $rootPath
 Write-Host "`n5. Checking git status..." -ForegroundColor Yellow
 $gitStatus = git status --porcelain
 if ($gitStatus) {
-    Write-Host "   ⚠️ Uncommitted changes:" -ForegroundColor Yellow
+    Write-Host "   [WARN] Uncommitted changes:" -ForegroundColor Yellow
     $gitStatus | ForEach-Object { Write-Host "      $_" -ForegroundColor Gray }
 }
 else {
-    Write-Host "   ✅ Working directory clean" -ForegroundColor Green
+    Write-Host "   [OK] Working directory clean" -ForegroundColor Green
 }
 
 # 6. Git Tag Check
 Write-Host "`n6. Checking git tags..." -ForegroundColor Yellow
 $existingTag = git tag -l "v$pkgVersion"
 if ($existingTag) {
-    Write-Host "   ⚠️ Tag v$pkgVersion already exists" -ForegroundColor Yellow
+    Write-Host "   [WARN] Tag v$pkgVersion already exists" -ForegroundColor Yellow
 }
 else {
-    Write-Host "   ✅ Tag v$pkgVersion available" -ForegroundColor Green
+    Write-Host "   [OK] Tag v$pkgVersion available" -ForegroundColor Green
 }
 Pop-Location
 
@@ -253,24 +253,24 @@ if ($Package) {
     npx vsce package --no-dependencies 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
         $errors += "Package creation failed"
-        Write-Host "   ❌ Package failed" -ForegroundColor Red
+        Write-Host "   [ERROR] Package failed" -ForegroundColor Red
     }
     else {
         $vsix = Get-ChildItem "*.vsix" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-        Write-Host "   ✅ Package created: $($vsix.Name)" -ForegroundColor Green
+        Write-Host "   [OK] Package created: $($vsix.Name)" -ForegroundColor Green
     }
 }
 
 # Summary
 Write-Host "`n========================================" -ForegroundColor Cyan
 if ($errors.Count -eq 0) {
-    Write-Host "  ✅ PREFLIGHT PASSED - Ready to publish!" -ForegroundColor Green
+    Write-Host "  [OK] PREFLIGHT PASSED - Ready to publish!" -ForegroundColor Green
     Write-Host "========================================`n" -ForegroundColor Cyan
     Write-Host "Next steps:" -ForegroundColor White
     Write-Host "  Run: .\scripts\release-vscode.ps1 -BumpType patch [-PreRelease]" -ForegroundColor Gray
 }
 else {
-    Write-Host "  ❌ PREFLIGHT FAILED - Fix issues before publishing" -ForegroundColor Red
+    Write-Host "  [ERROR] PREFLIGHT FAILED - Fix issues before publishing" -ForegroundColor Red
     Write-Host "========================================`n" -ForegroundColor Cyan
     Write-Host "Issues found:" -ForegroundColor White
     $errors | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }

@@ -1,44 +1,54 @@
 {
-  "skill": "pii-privacy-regulations",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "pii-privacy-regulations",
   "connections": [
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",
       "type": "extends",
       "strength": 0.9,
-      "bidirectional": true,
-      "reason": "Deep dive into regulatory compliance aspects"
+      "reason": "Deep dive into regulatory compliance aspects",
+      "when": "When task involves .github/skills/privacy responsible ai/SKILL.md",
+      "yields": "privacy responsible AI extended capabilities"
     },
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "complements",
       "strength": 0.75,
-      "bidirectional": true,
-      "reason": "Security enables privacy compliance"
+      "reason": "Security enables privacy compliance",
+      "when": "When task involves .github/skills/security review/SKILL.md",
+      "yields": "security review complementary techniques"
     },
     {
       "target": ".github/skills/code-review/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.7,
-      "reason": "Privacy review checklist for code reviews"
+      "reason": "Privacy review checklist for code reviews",
+      "when": "When task involves .github/skills/code review/SKILL.md",
+      "yields": "code review contextual assessment"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.8,
-      "reason": "Data breach notification requirements"
+      "reason": "Data breach notification requirements",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
+      "yields": "incident response contextual assessment"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.6,
-      "reason": "Privacy testing and PII detection in test data"
+      "reason": "Privacy testing and PII detection in test data",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
+      "yields": "testing strategies contextual assessment"
     },
     {
       "target": ".github/skills/architecture-audit/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.75,
-      "reason": "Privacy by design architectural patterns"
+      "reason": "Privacy by design architectural patterns",
+      "when": "When task involves .github/skills/architecture audit/SKILL.md",
+      "yields": "architecture audit contextual assessment"
     }
   ],
   "triggers": [
@@ -65,5 +75,27 @@
     "DPIA"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "PII",
+    "personal data",
+    "personally identifiable",
+    "GDPR",
+    "privacy",
+    "data protection",
+    "consent",
+    "data subject",
+    "right to erasure",
+    "right to access",
+    "Australian Privacy",
+    "APP",
+    "Privacy Act",
+    "data breach",
+    "cross-border transfer",
+    "encryption",
+    "anonymization",
+    "pseudonymization",
+    "retention policy",
+    "DPO",
+    "DPIA"
+  ]
 }

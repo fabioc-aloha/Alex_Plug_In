@@ -5,12 +5,12 @@ $projectDir = $PSScriptRoot
 $packagePath = "$projectDir\appPackage\build\alex-m365-agent.zip"
 $envFile = "$projectDir\env\.env.dev"
 
-Write-Host "`n🚀 Alex M365 Agent - Quick Deploy" -ForegroundColor Cyan
+Write-Host "`n Alex M365 Agent - Quick Deploy" -ForegroundColor Cyan
 Write-Host "==================================" -ForegroundColor Cyan
 
 # Step 1: Rebuild package if requested or if files changed
 if ($Rebuild -or -not (Test-Path $packagePath)) {
-    Write-Host "`n📦 Building app package..." -ForegroundColor Yellow
+    Write-Host "`n[PKG] Building app package..." -ForegroundColor Yellow
     Push-Location "$projectDir\appPackage"
     New-Item -ItemType Directory -Path "build" -Force | Out-Null
     
@@ -42,17 +42,17 @@ if ($Rebuild -or -not (Test-Path $packagePath)) {
     # Create zip from build folder contents
     Compress-Archive -Path build/manifest.json, build/declarativeAgent.json, build/color.png, build/outline.png -DestinationPath "build\alex-m365-agent.zip" -Force
     Pop-Location
-    Write-Host "✅ Package built" -ForegroundColor Green
+    Write-Host "[OK] Package built" -ForegroundColor Green
 }
 
 # Step 2: Validate
-Write-Host "`n🔍 Validating package..." -ForegroundColor Yellow
+Write-Host "`n Validating package..." -ForegroundColor Yellow
 $validateOutput = teamsapp validate --package-file $packagePath 2>&1
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✅ Validation passed" -ForegroundColor Green
+    Write-Host "[OK] Validation passed" -ForegroundColor Green
 }
 else {
-    Write-Host "❌ Validation failed:" -ForegroundColor Red
+    Write-Host "[ERROR] Validation failed:" -ForegroundColor Red
     Write-Host $validateOutput
     exit 1
 }
@@ -60,8 +60,8 @@ else {
 # Copy path to clipboard and prompt for manual upload
 $packagePath | Set-Clipboard
 
-Write-Host "`n📋 Package path copied to clipboard!" -ForegroundColor Green
-Write-Host "`n📁 $packagePath" -ForegroundColor White
+Write-Host "`n[LIST] Package path copied to clipboard!" -ForegroundColor Green
+Write-Host "`n[DIR] $packagePath" -ForegroundColor White
 Write-Host "`n👉 Upload manually to Teams Developer Portal" -ForegroundColor Yellow
 Write-Host "   https://dev.teams.microsoft.com/apps" -ForegroundColor Cyan
-Write-Host "`n✨ Done!" -ForegroundColor Cyan
+Write-Host "`n Done!" -ForegroundColor Cyan

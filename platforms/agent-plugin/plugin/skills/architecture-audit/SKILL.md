@@ -1,6 +1,6 @@
 ---
-name: "Architecture Audit"
-description: "Comprehensive **project** consistency review across code, documentation, diagrams, and configuration"
+name: architecture-audit
+description: Comprehensive **project** consistency review across code, documentation, diagrams, and configuration
 ---
 
 # Architecture Audit
@@ -214,14 +214,85 @@ on:
 ## Integration with Other Skills
 
 - `release-preflight` → Trigger audit before release
-- `architecture-health` → Synapse-specific validation
+- `brain-qa` → Synapse-specific validation and architecture health
 - `code-review` → Audit as part of PR review
 - `refactoring-patterns` → Audit after major refactoring
+
+---
+
+## Master Alex Extensions
+
+> Master Alex-specific audit procedures that extend the generic project audit above. These leverage knowledge of exact folder structure, heir relationships, safety imperatives, and build/release workflows.
+
+### Audit Philosophy (Semantic + Structural)
+
+| Dimension | Script (Automated) | Alex (With This Skill) |
+|-----------|-------------------|------------------------|
+| **Structural** | File existence, counts, format | ✅ Automated |
+| **Semantic** | — | Do files describe concepts consistently? |
+| **Logic** | — | Are documented workflows achievable? |
+| **Code** | Compile, lint, bundle | Does code match documented claims? |
+| **Architectural** | Version alignment, heir sync | Is memory architecture reflected accurately? |
+
+### Master-Only Sections (1-9)
+
+| # | Section | What It Checks |
+|---|---------|----------------|
+| 1 | Version Alignment | package.json ↔ CHANGELOG ↔ copilot-instructions |
+| 2 | Heir Folder Sync | Master → heir file counts |
+| 3 | Skill Inheritance | SKILL_EXCLUSIONS in sync-architecture.cjs |
+| 4 | Safety Imperatives | Kill switch, protection markers |
+| 5 | Build Artifacts | dist/extension.js exists and recent |
+| 6 | Documentation Cross-Refs | Required links between docs |
+| 7 | Synapse Health | Valid connections, no orphans |
+| 8 | alex_docs Audit | Version refs, deprecated terms |
+| 9 | Skill Network Diagram | Node count matches actual skills |
+
+### Inheritable Sections (10-22)
+
+| # | Section | What It Checks |
+|---|---------|----------------|
+| 10 | Extension UI | Dead buttons |
+| 11 | Dependency Health | npm audit vulnerabilities |
+| 12 | TypeScript & Lint | Compile errors, lint warnings |
+| 13 | Security | Secrets in code, CSP compliance |
+| 14 | Bundle Size | extension.js size |
+| 15 | Git Hygiene | Uncommitted changes, branch status |
+| 16 | Changelog | Format, version alignment |
+| 17 | API Compatibility | Deprecated VS Code APIs |
+| 18 | Test Coverage | Test file count vs source files |
+| 19 | Accessibility | ARIA labels, CSS variables |
+| 20 | Localization | l10n configuration |
+| 21 | Asset Integrity | Icon exists, no missing assets |
+| 22 | Configuration Files | launch.json, tsconfig.json, .vscodeignore |
+
+### Production Scripts
+
+```powershell
+# Full audit (all 22 sections)
+.\.github\muscles\audit-master-alex.ps1
+
+# Quick audit (master-specific only, sections 1-9)
+.\.github\muscles\audit-master-alex.ps1 -Section quick
+
+# Specific sections
+.\.github\muscles\audit-master-alex.ps1 -Section 4,7,13
+```
+
+### Semantic Review Checklist (Manual — Not Scriptable)
+
+- [ ] Cross-heir semantic parity: M365 system prompt matches copilot-instructions
+- [ ] Deprecated terminology: No "DK files" / "domain-knowledge/" in active files
+- [ ] Claim vs. reality: README features match package.json commands
+- [ ] Process logic: Heir evolution, meditation, dream workflows internally consistent
+- [ ] Architectural model: Memory architecture described consistently everywhere
+- [ ] Code behavior: TypeScript handlers match instruction file docs
+- [ ] Version source of truth: package.json is canonical
 
 ## Synapses
 
 - [release-preflight/SKILL.md] (High, Enables, Forward) - "Pre-release audit trigger"
-- [architecture-health/SKILL.md] (High, Complements, Bidirectional) - "Health + consistency"
+- [brain-qa/SKILL.md] (High, Complements, Bidirectional) - "Health + consistency"
 - [code-review/SKILL.md] (Medium, Extends, Forward) - "Broader than code"
 - [refactoring-patterns/SKILL.md] (Medium, Triggers, Backward) - "Post-refactor audit"
 - [self-actualization.instructions.md] (Medium, Complements, Bidirectional) - "Architecture introspection"

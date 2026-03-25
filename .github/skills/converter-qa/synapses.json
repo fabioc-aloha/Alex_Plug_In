@@ -1,0 +1,38 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "converter-qa",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "muscle": ".github/muscles/converter-qa.cjs",
+    "connections": [
+        {
+            "target": ".github/skills/md-to-word/SKILL.md",
+            "type": "supports",
+            "strength": 0.9,
+            "reason": "Validates Word converter output quality via regression tests",
+            "when": "When verifying converter changes before release",
+            "yields": "md-to-word regression test coverage"
+        },
+        {
+            "target": ".github/skills/md-to-eml/SKILL.md",
+            "type": "supports",
+            "strength": 0.85,
+            "reason": "Validates email converter output structure",
+            "when": "When verifying email converter changes",
+            "yields": "md-to-eml structure validation"
+        },
+        {
+            "target": ".github/skills/testing-strategies/SKILL.md",
+            "type": "implements",
+            "strength": 0.8,
+            "reason": "Applies testing strategy patterns to converter validation",
+            "when": "When designing new converter test assertions",
+            "yields": "testing-strategies test design patterns"
+        }
+    ],
+    "activationContexts": [
+        "running converter tests",
+        "validating converter output",
+        "pre-release quality check for converters",
+        "adding converter test assertions"
+    ]
+}

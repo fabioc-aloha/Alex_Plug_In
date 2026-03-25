@@ -60,6 +60,12 @@ try {
 }
 
 // ---------------------------------------------------------------------------
+// Shared module imports
+// ---------------------------------------------------------------------------
+const { preprocessMarkdown, validateHeadingHierarchy, embedLocalImages, validateLinks } = require(path.join(__dirname, 'shared', 'markdown-preprocessor.cjs'));
+const { findMermaidBlocks } = require(path.join(__dirname, 'shared', 'mermaid-pipeline.cjs'));
+
+// ---------------------------------------------------------------------------
 // Page Layout Constants (Letter: 8.5" × 11", 1" margins)
 // ---------------------------------------------------------------------------
 const PAGE_WIDTH_INCHES = 6.5;
@@ -133,15 +139,6 @@ function determineImageSizeHeuristic(mmdContent) {
 // ---------------------------------------------------------------------------
 // Mermaid / SVG conversion
 // ---------------------------------------------------------------------------
-function findMermaidBlocks(content) {
-  const pattern = /```mermaid\r?\n([\s\S]*?)```/g;
-  const blocks = [];
-  let m;
-  while ((m = pattern.exec(content)) !== null) {
-    blocks.push({ index: blocks.length, content: m[1] });
-  }
-  return blocks;
-}
 
 function convertMermaidToPng(mmdContent, outputPath) {
   const tmpFile = path.join(os.tmpdir(), `alex-mmd-${Date.now()}-${Math.random().toString(36).slice(2)}.mmd`);
@@ -171,157 +168,6 @@ function convertSvgToPng(svgPath, pngPath) {
     console.log(`WARNING: svgexport not available, skipping ${svgPath}`);
     return false;
   }
-}
-
-// ---------------------------------------------------------------------------
-// LaTeX math → Unicode (harvested from AIRS preprocess_latex_tables.py)
-// ---------------------------------------------------------------------------
-const LATEX_MATH_MAP = [
-  // Compound symbols (longest match first)
-  ['\\Delta\\lambda', 'Δλ'], ['\\Delta\\chi', 'Δχ'],
-  ['\\chi\\^2', 'χ²'], ['\\eta\\^2', 'η²'],
-  ['\\rightarrow', '→'], ['\\leftarrow', '←'],
-  // Greek letters
-  ['\\Delta', 'Δ'], ['\\beta', 'β'], ['\\alpha', 'α'],
-  ['\\lambda', 'λ'], ['\\gamma', 'γ'], ['\\rho', 'ρ'],
-  ['\\sigma', 'σ'], ['\\omega', 'ω'], ['\\Omega', 'Ω'],
-  ['\\chi', 'χ'], ['\\eta', 'η'], ['\\phi', 'φ'],
-  ['\\mu', 'μ'], ['\\pi', 'π'], ['\\theta', 'θ'],
-  ['\\epsilon', 'ε'], ['\\kappa', 'κ'], ['\\tau', 'τ'],
-  // Operators
-  ['\\geq', '≥'], ['\\leq', '≤'], ['\\neq', '≠'],
-  ['\\approx', '≈'], ['\\times', '×'], ['\\pm', '±'],
-  ['\\infty', '∞'], ['\\cdot', '·'], ['\\sqrt', '√'],
-];
-
-function convertLatexMathToUnicode(text) {
-  return text.replace(/\$([^$]+)\$/g, (_match, expr) => {
-    let result = expr;
-    for (const [latex, unicode] of LATEX_MATH_MAP) {
-      result = result.split(latex).join(unicode);
-    }
-    // Superscripts: ^2 → ², ^3 → ³, ^n → ⁿ
-    result = result.replace(/\^2(?!\d)/g, '²');
-    result = result.replace(/\^3(?!\d)/g, '³');
-    result = result.replace(/\^n(?!\w)/g, 'ⁿ');
-    result = result.replace(/\^\{([^}]+)\}/g, (_m, sup) => {
-      const supMap = { '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','+':'⁺','-':'⁻','=':'⁼','n':'ⁿ','i':'ⁱ' };
-      return [...sup].map(c => supMap[c] || c).join('');
-    });
-    // Strip remaining \text{}, \mathrm{} wrappers
-    result = result.replace(/\\(?:text|mathrm|mathit|mathbf)\{([^}]*)\}/g, '$1');
-    return result.trim();
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Markdown preprocessing
-// ---------------------------------------------------------------------------
-function preprocessMarkdown(content) {
-  // Strip UTF-8 BOM (harvested from AlexBooks build-pdf.js)
-  content = content.replace(/^\uFEFF/, '');
-
-  // Convert inline LaTeX math to Unicode (harvested from AIRS)
-  content = convertLatexMathToUnicode(content);
-
-  // Page-break directives (harvested from AlexBooks build-epub.js)
-  content = content.replace(/<!--\s*pagebreak\s*-->/gi, '\\newpage');
-  content = content.replace(/<div\s+class\s*=\s*["']page-break["']\s*(?:\/\s*)?>/gi, '\\newpage');
-  content = content.replace(/<div\s+style\s*=\s*["']page-break-(?:before|after)\s*:\s*always;?["']\s*(?:\/\s*)?>/gi, '\\newpage');
-
-  // Landscape section markers (port from AlexBooks)
-  // <!-- landscape --> opens, <!-- portrait --> closes
-  content = content.replace(/<!--\s*landscape\s*-->/gi,
-    '\\newpage\n\n::: {custom-style="LandscapeSection"}\n');
-  content = content.replace(/<!--\s*portrait\s*-->/gi,
-    '\n:::\n\n\\newpage');
-
-  // Callout blocks: ::: tip / ::: warning / ::: note / ::: important / ::: caution
-  // Convert fenced divs to blockquote format that pandoc handles well
-  content = content.replace(/^:::\s*(tip|warning|note|important|caution)\s*$/gim, (_, type) => {
-    const icons = { tip: '💡', warning: '⚠️', note: '📝', important: '❗', caution: '🔥' };
-    const icon = icons[type.toLowerCase()] || '📌';
-    return `> **${icon} ${type.charAt(0).toUpperCase() + type.slice(1)}**\n>`;
-  });
-  content = content.replace(/^:::\s*$/gm, '');
-
-  // Also support GitHub-style callout syntax: > [!TIP], > [!WARNING], etc.
-  content = content.replace(/^>\s*\[!(TIP|WARNING|NOTE|IMPORTANT|CAUTION)\]\s*$/gim, (_, type) => {
-    const icons = { TIP: '💡', WARNING: '⚠️', NOTE: '📝', IMPORTANT: '❗', CAUTION: '🔥' };
-    const icon = icons[type.toUpperCase()] || '📌';
-    return `> **${icon} ${type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}**`;
-  });
-
-  // Keyboard shortcuts: [[Ctrl+S]] → <kbd>Ctrl</kbd>+<kbd>S</kbd>
-  content = content.replace(/\[\[([^\]]+)\]\]/g, (_match, keys) => {
-    return keys.split('+').map(k => `<kbd>${k.trim()}</kbd>`).join('+');
-  });
-
-  // Highlights: ==text== → <mark>text</mark> (VT build-pdf.js pattern)
-  content = content.replace(/==([^=]+)==/g, '<mark>$1</mark>');
-
-  // Subscript: ~text~ (single tilde, not in code or ~~strikethrough~~)
-  content = content.replace(/(?<![~\\])~([^~\s][^~]*)~(?!~)/g, '<sub>$1</sub>');
-
-  // Superscript: ^text^ (single caret)
-  content = content.replace(/(?<![\\])\^([^^\s][^^]*)\^/g, '<sup>$1</sup>');
-
-  // Definition lists: Term\n: Definition
-  content = content.replace(/^([^\n:>*#-][^\n]*)\n:\s+(.+)$/gm, '\n**$1**\n:   $2\n');
-
-  const lines = content.split('\n');
-  const result = [];
-  let prevWasList = false;
-  let prevWasBlank = false;
-
-  for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-    const stripped = line.trim();
-    const isList = /^[-*+]\s|^\d+\.\s|^[-*+]\s*\[[ xX]\]/.test(stripped);
-    const isBlank = !stripped;
-
-    // Add blank line before lists if previous line was not blank/list
-    if (isList && !prevWasList && !prevWasBlank && result.length > 0) {
-      result.push('');
-    }
-
-    // Add blank line after heading if next line is not blank
-    if (i > 0 && result.length > 0) {
-      const prevLine = lines[i - 1].trim();
-      if (prevLine.startsWith('#') && !isBlank) {
-        if (result[result.length - 1] !== '') {
-          result.push('');
-        }
-      }
-    }
-
-    // Convert checkbox markers for pandoc compatibility
-    if (/^[-*+]\s*\[ \]/.test(stripped)) {
-      line = line.replace(/^([-*+])\s*\[ \]/, '$1 ☐');
-    } else if (/^[-*+]\s*\[[xX]\]/.test(stripped)) {
-      line = line.replace(/^([-*+])\s*\[[xX]\]/, '$1 ☑');
-    }
-
-    result.push(line);
-    prevWasList = isList;
-    prevWasBlank = isBlank;
-  }
-
-  // Add blank line after lists before non-list content
-  const final = [];
-  for (let i = 0; i < result.length; i++) {
-    final.push(result[i]);
-    const stripped = result[i].trim();
-    const isList = /^[-*+]\s|^\d+\.\s|^[-*+]\s*[☐☑]/.test(stripped);
-    if (isList && i + 1 < result.length) {
-      const nextStripped = result[i + 1].trim();
-      const nextIsList = /^[-*+]\s|^\d+\.\s|^[-*+]\s*[☐☑]/.test(nextStripped);
-      if (!nextIsList && nextStripped) {
-        final.push('');
-      }
-    }
-  }
-  return final.join('\n');
 }
 
 // ---------------------------------------------------------------------------
@@ -859,7 +705,7 @@ function addFooterRefToSectionProps(docXml, footerRId) {
 // ---------------------------------------------------------------------------
 async function postProcessDocx(docxPath, options) {
   if (!JSZip) {
-    console.log('⚠️  Skipping post-processing (jszip not available)');
+    console.log('[WARN] Skipping post-processing (jszip not available)');
     return;
   }
 
@@ -868,7 +714,7 @@ async function postProcessDocx(docxPath, options) {
 
   const docXmlFile = zip.file('word/document.xml');
   if (!docXmlFile) {
-    console.log('⚠️  No word/document.xml found in docx — skipping post-processing');
+    console.log('[WARN] No word/document.xml found in docx -- skipping post-processing');
     return;
   }
 
@@ -1058,52 +904,25 @@ async function build(args) {
       }
     }
 
-    content = preprocessMarkdown(content);
+    content = preprocessMarkdown(content, { format: 'docx' });
 
     // Validate heading hierarchy
-    const headingWarnings = [];
-    let lastHeadingLevel = 0;
-    let lineNum = 0;
-    for (const line of content.split('\n')) {
-      lineNum++;
-      const hMatch = line.match(/^(#{1,6})\s+/);
-      if (!hMatch) continue;
-      const level = hMatch[1].length;
-      if (lastHeadingLevel > 0 && level > lastHeadingLevel + 1) {
-        headingWarnings.push(`   \u26a0\ufe0f  Line ${lineNum}: H${lastHeadingLevel} \u2192 H${level} (skips H${lastHeadingLevel + 1})`);
-      }
-      lastHeadingLevel = level;
-    }
-    if (headingWarnings.length > 0) {
+    const headingResult = validateHeadingHierarchy(content);
+    if (!headingResult.valid) {
       console.log('   \u{1f4da} Heading hierarchy warnings:');
-      headingWarnings.forEach(w => console.log(w));
+      headingResult.warnings.forEach(w => console.log(`   \u26a0\ufe0f  ${w}`));
     }
 
     // Embed local images as base64 data URIs (prevents broken image references)
     if (args.embedImages) {
-      const imgPattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
-      let embedCount = 0;
-      const MIME_MAP = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
-        '.gif': 'image/gif', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
-      content = content.replace(imgPattern, (full, alt, imgPath) => {
-        if (imgPath.startsWith('http') || imgPath.startsWith('data:')) return full;
-        const absPath = path.resolve(sourceDir, imgPath);
-        if (!fs.existsSync(absPath)) return full;
-        const ext = path.extname(absPath).toLowerCase();
-        const mime = MIME_MAP[ext];
-        if (!mime) return full;
-        try {
-          const buf = fs.readFileSync(absPath);
-          const dataUri = `data:${mime};base64,${buf.toString('base64')}`;
-          embedCount++;
-          return `![${alt}](${dataUri})`;
-        } catch { return full; }
-      });
-      if (embedCount > 0) console.log(`   \u{1f5bc}\ufe0f  Embedded ${embedCount} image(s) as base64`);
+      const beforeLen = content.length;
+      content = embedLocalImages(content, sourceDir);
+      if (content.length !== beforeLen) {
+        console.log(`   \u{1f5bc}\ufe0f  Embedded image(s) as base64`);
+      }
     }
 
     // Validate links (check for broken local file references)
-    const { validateLinks } = require(path.join(__dirname, 'shared', 'markdown-preprocessor.cjs'));
     const linkResult = validateLinks(content, sourceDir);
     if (!linkResult.valid) {
       console.log('   \u{1f517} Link warnings:');
@@ -1112,7 +931,7 @@ async function build(args) {
 
     // Dry-run mode: report preprocessing results and exit without generating .docx
     if (args.dryRun) {
-      console.log('\\n\u{1f50d} Dry-run complete (no .docx generated)');
+      console.log('\n\u{1f50d} Dry-run complete (no .docx generated)');
       console.log(`   Source: ${sourcePath} (${(fs.statSync(sourcePath).size / 1024).toFixed(1)} KB)`);
       console.log(`   Output would be: ${outputPath}`);
       return;
@@ -1241,14 +1060,8 @@ async function build(args) {
       }
     }
 
-    // Page size via pandoc variables
-    const pageSizes = {
-      letter: { width: '8.5in', height: '11in' },
-      a4: { width: '210mm', height: '297mm' },
-      '6x9': { width: '6in', height: '9in' }
-    };
-    const ps = pageSizes[args.pageSize] || pageSizes.letter;
-    pandocArgs.push(`-V geometry:paperwidth=${ps.width}`, `-V geometry:paperheight=${ps.height}`);
+    // NOTE: Page size is applied via OOXML post-processing, not pandoc variables.
+    // The -V geometry:* flags only work for LaTeX output, not docx.
 
     try {
       execSync(

@@ -1,62 +1,79 @@
 {
-  "skill": "ai-agent-design",
+  "schemaVersion": "2.0.0",
+  "skillId": "ai-agent-design",
   "version": "1.1.0",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/prompt-engineering/SKILL.md",
-      "relationship": "requires",
       "strength": 0.9,
-      "context": "Agent prompts require sophisticated prompt engineering"
+      "type": "requires",
+      "reason": "Agent prompts require sophisticated prompt engineering",
+      "when": "When task involves .github/skills/prompt engineering/SKILL.md",
+      "yields": "prompt engineering required patterns and guidance"
     },
     {
       "target": ".github/skills/rag-architecture/SKILL.md",
-      "relationship": "complements",
       "strength": 0.9,
-      "context": "Agents often use RAG for knowledge retrieval"
+      "type": "complements",
+      "reason": "Agents often use RAG for knowledge retrieval",
+      "when": "When task involves .github/skills/rag architecture/SKILL.md",
+      "yields": "RAG architecture complementary techniques"
     },
     {
       "target": ".github/skills/mcp-development/SKILL.md",
-      "relationship": "complements",
       "strength": 0.9,
-      "context": "MCP provides standardized tool interface for agents"
+      "type": "complements",
+      "reason": "MCP provides standardized tool interface for agents",
+      "when": "When task involves .github/skills/mcp development/SKILL.md",
+      "yields": "MCP development complementary techniques"
     },
     {
       "target": ".github/skills/llm-model-selection/SKILL.md",
-      "relationship": "informs",
       "strength": 0.7,
-      "context": "Agent design requires model selection for different components"
+      "type": "feeds",
+      "reason": "Agent design requires model selection for different components",
+      "when": "When task involves .github/skills/llm model selection/SKILL.md",
+      "yields": "LLM model selection contextual assessment"
     },
     {
       "target": ".github/skills/api-design/SKILL.md",
-      "relationship": "complements",
       "strength": 0.7,
-      "context": "Tool APIs must be well-designed for agent consumption"
+      "type": "complements",
+      "reason": "Tool APIs must be well-designed for agent consumption",
+      "when": "When task involves .github/skills/api design/SKILL.md",
+      "yields": "API design complementary techniques"
     },
     {
       "target": ".github/skills/anti-hallucination/SKILL.md",
-      "relationship": "requires",
       "strength": 0.9,
-      "context": "Agents must detect and handle hallucinated tool calls"
+      "type": "requires",
+      "reason": "Agents must detect and handle hallucinated tool calls",
+      "when": "When task involves .github/skills/anti hallucination/SKILL.md",
+      "yields": "anti hallucination required patterns and guidance"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
-      "relationship": "requires",
       "strength": 0.9,
-      "context": "Agents need robust error handling and recovery"
+      "type": "requires",
+      "reason": "Agents need robust error handling and recovery",
+      "when": "When task involves .github/skills/error recovery patterns/SKILL.md",
+      "yields": "error recovery patterns required patterns and guidance"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "relationship": "complements",
       "strength": 0.7,
-      "context": "Agent testing requires specialized evaluation approaches"
+      "type": "complements",
+      "reason": "Agent testing requires specialized evaluation approaches",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
+      "yields": "testing strategies complementary techniques"
     },
     {
       "target": ".github/skills/foundry-agent-platform/SKILL.md",
-      "relationship": "implements",
       "strength": 0.9,
-      "context": "Foundry Agent Service is the cloud runtime for agent design patterns",
-      "bidirectional": true
+      "type": "implements",
+      "reason": "Foundry Agent Service is the cloud runtime for agent design patterns",
+      "when": "When task involves .github/skills/foundry agent platform/SKILL.md",
+      "yields": "foundry agent platform implementation steps"
     }
   ],
   "activationTriggers": [
@@ -83,5 +100,19 @@
     ]
   },
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "agent",
+    "autonomous",
+    "multi-agent",
+    "tool use",
+    "function calling",
+    "ReAct",
+    "plan and execute",
+    "LangChain",
+    "LangGraph",
+    "AutoGen",
+    "CrewAI",
+    "orchestration",
+    "supervisor"
+  ]
 }

@@ -1,16 +1,20 @@
 {
-  "skill": "git-workflow",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "git-workflow",
   "connections": [
     {
       "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "enables",
-      "strength": 0.9
+      "type": "supports",
+      "strength": 0.9,
+      "when": "git workflow requires release preflight capabilities",
+      "yields": "release preflight capabilities and setup"
     },
     {
       "target": ".github/instructions/release-management.instructions.md",
       "type": "supports",
-      "strength": 0.85
+      "strength": 0.85,
+      "when": "git workflow needs release management context",
+      "yields": "release management supporting context"
     }
   ],
   "activationBoost": [
@@ -34,5 +38,18 @@
     "conflict"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "commit",
+    "git",
+    "branch",
+    "merge",
+    "recovery",
+    "undo",
+    "reset",
+    "rebase",
+    "pull request",
+    "PR",
+    "cherry-pick",
+    "conflict"
+  ]
 }

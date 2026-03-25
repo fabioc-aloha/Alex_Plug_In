@@ -212,11 +212,47 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | -------------------------- | --------------------------------------------------------------- |
 | **Current Master Version** | 6.8.1                                                           |
 | **Current Heirs**          | VS Code (6.8.0), M365 (6.2.0), Plugin (6.7.0)                   |
-| **Architecture**           | 145 skills, 39 trifectas, 69 instructions, 49 prompts, 7 agents |
+| **Architecture**           | 149 skills, 39 trifectas, 69 instructions, 49 prompts, 7 agents |
 | **Platforms**              | 6 total (4 active, 2 planned)                                   |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence                             |
-| **Open Items**             | 9 total: 4 blocked, 1 gated, 4 conditional                      |
+| **Open Items**             | 12 total: 4 blocked, 1 gated, 4 conditional, 3 next actions     |
 | **Updated**                | 2026-03-25                                                      |
+
+---
+
+## 🎯 Next Actions
+
+> Immediate items to address in the next session.
+
+### Converter UI Integration (Priority 1)
+
+The 4 new converter skills (md-to-eml, md-scaffold, nav-inject, converter-qa) have muscles and skill trifectas but lack VS Code UI integration:
+
+| Command                 | Description                               | Context Menu                        | Status    |
+| ----------------------- | ----------------------------------------- | ----------------------------------- | --------- |
+| `alex.convertToEmail`   | Convert Markdown to RFC 5322 email (.eml) | .md right-click                     | ⬜ Missing |
+| `alex.scaffoldMarkdown` | New Markdown from Template...             | Folder/palette                      | ⬜ Missing |
+| `alex.injectNavigation` | Inject Navigation Table                   | .md right-click (requires nav.json) | ⬜ Missing |
+
+**Implementation location**: `platforms/vscode-extension/src/commandsConvert.ts` (new file, follows `commandsWord.ts` pattern)
+
+### Sync Script Cleanup (Priority 2)
+
+Sync scripts reference stale/renamed skills that no longer exist in Master:
+
+| Script            | Stale References                                                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `sync-m365.ps1`   | meditation-facilitation, writing-publication, skill-activation, prompt-activation, airs-integration, academic-paper-drafting |
+| `sync-plugin.ps1` | Same as above                                                                                                                |
+
+**Action**: Remove stale skill names from `$curatedSkills` arrays.
+
+### Quality Gate Validation (Priority 3)
+
+Run full quality gate after converter work to ensure everything compiles and tests pass:
+- `npm run lint`
+- `npm run test`
+- `node platforms/vscode-extension/scripts/quality-gate.cjs`
 
 ---
 

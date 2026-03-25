@@ -1,6 +1,6 @@
 ---
-name: "Slide Design"
-description: "Visual hierarchy, data visualization, and minimal text patterns for impactful presentations"
+name: slide-design
+description: Visual hierarchy, data visualization, and minimal text patterns for impactful presentations
 ---
 
 # Skill: Slide Design Principles

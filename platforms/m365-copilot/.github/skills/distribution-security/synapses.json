@@ -1,37 +1,43 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "skill": "distribution-security",
-    "version": "1.0.0",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/secrets-management/SKILL.md",
-            "type": "depends-on",
-            "strength": 0.9,
-            "reason": "Secrets scanning is core to distribution security"
-        },
-        {
-            "target": ".github/instructions/release-management.instructions.md",
-            "type": "related",
-            "strength": 0.85,
-            "reason": "Security checks are part of the release workflow"
-        },
-        {
-            "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-            "type": "supports",
-            "strength": 0.7,
-            "reason": "Extension packaging must follow defense-in-depth patterns"
-        }
-    ],
-    "when": [
-        "User packages software for distribution",
-        "User needs PII protection or secrets scanning",
-        "User prepares extension for marketplace publishing"
-    ],
-    "yields": [
-        "Defense-in-depth security assessment",
-        "PII protection validation",
-        "Secure packaging configuration"
-    ]
+  "schemaVersion": "2.1.0",
+  "skillId": "distribution-security",
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "version": "1.0.0",
+  "connections": [
+    {
+      "target": ".github/skills/secrets-management/SKILL.md",
+      "type": "requires",
+      "strength": 0.9,
+      "reason": "Secrets scanning is core to distribution security",
+      "when": "When task involves .github/skills/secrets management/SKILL.md",
+      "yields": "secrets management required patterns and guidance"
+    },
+    {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "relates",
+      "strength": 0.85,
+      "reason": "Security checks are part of the release workflow",
+      "when": "When task involves .github/instructions/release management.instructions.md",
+      "yields": "release management related rules and guidelines"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "reason": "Extension packaging must follow defense-in-depth patterns",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns supporting context"
+    }
+  ],
+  "when": [
+    "User packages software for distribution",
+    "User needs PII protection or secrets scanning",
+    "User prepares extension for marketplace publishing"
+  ],
+  "activationContexts": [
+    "distribution-security",
+    "distribution security",
+    "distribution",
+    "security"
+  ]
 }

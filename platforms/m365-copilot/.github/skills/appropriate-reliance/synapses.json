@@ -1,38 +1,47 @@
 {
-  "skill": "appropriate-reliance",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "appropriate-reliance",
   "description": "Calibrated human-AI collaboration patterns",
   "connections": [
     {
       "target": ".github/instructions/bootstrap-learning.instructions.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
-      "context": "Appropriate reliance is prerequisite for effective bootstrap learning"
+      "reason": "Appropriate reliance is prerequisite for effective bootstrap learning",
+      "when": "When task involves .github/instructions/bootstrap learning.instructions.md",
+      "yields": "bootstrap learning capabilities and setup"
     },
     {
       "target": ".github/skills/architecture-refinement/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.7,
-      "context": "Mutual challenge improves architecture documentation quality"
+      "reason": "Mutual challenge improves architecture documentation quality",
+      "when": "When task involves .github/skills/architecture refinement/SKILL.md",
+      "yields": "architecture refinement enhanced capabilities"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "related",
+      "type": "relates",
       "strength": 0.7,
-      "context": "Grounded in learning science and trust calibration research"
+      "reason": "Grounded in learning science and trust calibration research",
+      "when": "When task involves .github/skills/learning psychology/SKILL.md",
+      "yields": "learning psychology related patterns and guidance"
     },
     {
       "target": ".github/instructions/alex-identity-integration.instructions.md",
       "type": "implements",
       "strength": 0.9,
-      "context": "Proactive collaboration is core to Alex personality"
+      "reason": "Proactive collaboration is core to Alex personality",
+      "when": "When task involves .github/instructions/alex identity integration.instructions.md",
+      "yields": "alex identity integration implementation steps"
     },
     {
       "target": ".github/skills/privacy-responsible-ai/SKILL.md",
       "type": "complements",
       "strength": 0.75,
-      "bidirectional": true,
-      "context": "Trust calibration is core to responsible AI deployment"
+      "reason": "Trust calibration is core to responsible AI deployment",
+      "when": "When task involves .github/skills/privacy responsible ai/SKILL.md",
+      "yields": "privacy responsible AI complementary techniques"
     }
   ],
   "triggers": [
@@ -48,5 +57,16 @@
     "appropriate reliance"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "collaboration feels one-sided",
+    "user accepts without reviewing",
+    "user rejects without reasoning",
+    "AI should challenge assumption",
+    "trust calibration needed",
+    "CAIR",
+    "CSR",
+    "over-reliance",
+    "under-reliance",
+    "appropriate reliance"
+  ]
 }

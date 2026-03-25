@@ -1,0 +1,46 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "md-scaffold",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "muscle": ".github/muscles/md-scaffold.cjs",
+    "connections": [
+        {
+            "target": ".github/skills/md-to-word/SKILL.md",
+            "type": "feeds",
+            "strength": 0.9,
+            "reason": "Scaffolded documents are structured for clean Word conversion",
+            "when": "When creating a document that will be exported to Word",
+            "yields": "md-to-word converter-ready document structure"
+        },
+        {
+            "target": ".github/skills/md-to-eml/SKILL.md",
+            "type": "feeds",
+            "strength": 0.8,
+            "reason": "Email template scaffold includes correct RFC 5322 frontmatter",
+            "when": "When scaffolding an email-format document",
+            "yields": "md-to-eml email frontmatter and structure"
+        },
+        {
+            "target": ".github/skills/nav-inject/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "reason": "Scaffolded files include navigation sentinels for nav-inject",
+            "when": "When creating files in a multi-document suite",
+            "yields": "nav-inject navigation sentinel placement"
+        },
+        {
+            "target": ".github/skills/lint-clean-markdown/SKILL.md",
+            "type": "implements",
+            "strength": 0.9,
+            "reason": "Templates are pre-validated against lint rules for clean first pass",
+            "when": "When scaffolding any markdown document",
+            "yields": "lint-clean markdown compliance"
+        }
+    ],
+    "activationContexts": [
+        "scaffolding a markdown document",
+        "creating a new report template",
+        "starting a document from template",
+        "generating markdown boilerplate"
+    ]
+}

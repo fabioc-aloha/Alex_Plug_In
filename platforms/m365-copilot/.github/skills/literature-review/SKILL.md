@@ -1,6 +1,6 @@
 ---
-name: "Literature Review"
-description: "Systematic literature search, synthesis, gap identification, and narrative construction for academic research"
+name: literature-review
+description: Systematic literature search, synthesis, gap identification, and narrative construction for academic research
 ---
 
 # Skill: Literature Review
@@ -16,7 +16,7 @@ description: "Systematic literature search, synthesis, gap identification, and n
 | **Category** | Research |
 | **Difficulty** | Advanced |
 | **Prerequisites** | None |
-| **Related Skills** | academic-paper-drafting, citation-management, dissertation-defense |
+| **Related Skills** | academic-research, citation-management, dissertation-defense |
 
 ---
 
@@ -346,5 +346,5 @@ Gap and contribution (what's missing → your work)
 ## Synapses
 
 - [.github/skills/citation-management/SKILL.md] (High, Uses, Bidirectional) - "Lit review requires proper citations"
-- [.github/skills/academic-paper-drafting/SKILL.md] (High, Feeds, Forward) - "Lit review becomes paper section"
+- [.github/skills/academic-research/SKILL.md] (High, Feeds, Forward) - "Lit review becomes paper section"
 - [.github/instructions/empirical-validation.instructions.md] (Medium, Applies, Forward) - "Evidence-based source evaluation"

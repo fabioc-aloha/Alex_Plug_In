@@ -1,57 +1,64 @@
 {
-  "skill": "practitioner-research",
+  "schemaVersion": "2.0.0",
+  "skillId": "practitioner-research",
   "connections": [
     {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "extends",
       "strength": 0.9,
       "reason": "Practitioner-specific extension of academic research methods",
-      "bidirectional": true
-    },
-    {
-      "target": ".github/skills/writing-publication/SKILL.md",
-      "type": "enables",
-      "strength": 0.85,
-      "reason": "Research methodology produces publication-ready documents"
+      "when": "When task involves .github/skills/academic research/SKILL.md",
+      "yields": "academic research extended capabilities"
     },
     {
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Practice-first approach is core bootstrap learning pattern"
+      "reason": "Practice-first approach is core bootstrap learning pattern",
+      "when": "When task involves .github/skills/bootstrap learning/SKILL.md",
+      "yields": "bootstrap learning patterns and guidance"
     },
     {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "requires",
       "strength": 0.85,
-      "reason": "Visual research requires Mermaid diagramming excellence"
+      "reason": "Visual research requires Mermaid diagramming excellence",
+      "when": "When task involves .github/skills/markdown mermaid/SKILL.md",
+      "yields": "markdown mermaid required patterns and guidance"
     },
     {
       "target": ".github/skills/root-cause-analysis/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.75,
-      "reason": "Pattern analysis across projects uses RCA techniques"
+      "reason": "Pattern analysis across projects uses RCA techniques",
+      "when": "When task involves .github/skills/root cause analysis/SKILL.md",
+      "yields": "root cause analysis patterns and guidance"
     },
     {
       "target": ".github/skills/post-mortem/SKILL.md",
       "type": "uses",
       "strength": 0.6,
-      "reason": "Chronicle pattern for documenting research incidents"
+      "reason": "Chronicle pattern for documenting research incidents",
+      "when": "When task involves .github/skills/post mortem/SKILL.md",
+      "yields": "post mortem patterns and guidance"
     },
     {
       "target": ".github/skills/knowledge-synthesis/SKILL.md",
-      "type": "enhances",
+      "type": "extends",
       "strength": 0.7,
-      "reason": "Cross-project pattern recognition is knowledge synthesis"
+      "reason": "Cross-project pattern recognition is knowledge synthesis",
+      "when": "When task involves .github/skills/knowledge synthesis/SKILL.md",
+      "yields": "knowledge synthesis enhanced capabilities"
     },
     {
       "target": ".github/skills/global-knowledge/SKILL.md",
       "type": "uses",
       "strength": 0.8,
-      "reason": "Global insights become research evidence"
+      "reason": "Global insights become research evidence",
+      "when": "When task involves .github/skills/global knowledge/SKILL.md",
+      "yields": "global knowledge patterns and guidance"
     }
   ],
-  "inheritance": "inheritable",
   "triggers": [
     "research",
     "methodology",
@@ -68,5 +75,19 @@
     "ship document promote"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "research",
+    "methodology",
+    "case study",
+    "longitudinal",
+    "publication",
+    "evidence",
+    "prior art",
+    "literature review",
+    "academic paper",
+    "fact-check",
+    "structured abstract",
+    "practitioner research",
+    "ship document promote"
+  ]
 }

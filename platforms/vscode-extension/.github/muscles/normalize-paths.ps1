@@ -35,7 +35,7 @@ $totalSkipped = 0
 # TARGET: instructions — Normalize .instructions.md and .prompt.md files
 # ============================================================
 function Normalize-InstructionPaths {
-    Write-Host "`n📝 Normalizing instruction & prompt file paths..." -ForegroundColor Cyan
+    Write-Host "`n Normalizing instruction & prompt file paths..." -ForegroundColor Cyan
     $updated = 0; $skipped = 0
 
     # Process instruction files
@@ -44,11 +44,11 @@ function Normalize-InstructionPaths {
         $content = Get-Content $file.FullName -Raw
         $original = $content
 
-        # [file.instructions.md] → [.github/instructions/file.instructions.md]
+        # [file.instructions.md] -> [.github/instructions/file.instructions.md]
         $content = $content -replace '\[([^\[\]]+\.instructions\.md)\](?!\()', '[.github/instructions/$1]'
-        # [file.prompt.md] → [.github/prompts/file.prompt.md]
+        # [file.prompt.md] -> [.github/prompts/file.prompt.md]
         $content = $content -replace '\[([^\[\]]+\.prompt\.md)\](?!\()', '[.github/prompts/$1]'
-        # [skill-name/SKILL.md] → [.github/skills/skill-name/SKILL.md]
+        # [skill-name/SKILL.md] -> [.github/skills/skill-name/SKILL.md]
         $content = $content -replace '\[([^\[\]/]+)/SKILL\.md\](?!\()', '[.github/skills/$1/SKILL.md]'
 
         if ($content -ne $original) {
@@ -87,7 +87,7 @@ function Normalize-InstructionPaths {
 # TARGET: skills — Normalize SKILL.md embedded synapses
 # ============================================================
 function Normalize-SkillPaths {
-    Write-Host "`n📦 Normalizing SKILL.md paths..." -ForegroundColor Cyan
+    Write-Host "`n[PKG] Normalizing SKILL.md paths..." -ForegroundColor Cyan
     $updated = 0; $skipped = 0
 
     $files = Get-ChildItem $skillsPath -Recurse -Filter "SKILL.md" -ErrorAction SilentlyContinue
@@ -95,9 +95,9 @@ function Normalize-SkillPaths {
         $content = Get-Content $file.FullName -Raw
         $original = $content
 
-        # [Name](../skill-name/SKILL.md) → [Name](.github/skills/skill-name/SKILL.md)
+        # [Name](../skill-name/SKILL.md) -> [Name](.github/skills/skill-name/SKILL.md)
         $content = $content -replace '\]\(\.\./([^/]+)/SKILL\.md\)', '](.github/skills/$1/SKILL.md)'
-        # [Name](../instructions/file.md) → [Name](.github/instructions/file.md)
+        # [Name](../instructions/file.md) -> [Name](.github/instructions/file.md)
         $content = $content -replace '\]\(\.\./instructions/([^\)]+)\)', '](.github/instructions/$1)'
 
         if ($content -ne $original) {
@@ -117,7 +117,7 @@ function Normalize-SkillPaths {
 # TARGET: synapses — Normalize synapses.json target fields
 # ============================================================
 function Normalize-SynapsePaths {
-    Write-Host "`n🧠 Normalizing synapses.json targets..." -ForegroundColor Cyan
+    Write-Host "`n Normalizing synapses.json targets..." -ForegroundColor Cyan
     $updated = 0; $skipped = 0
 
     $files = Get-ChildItem $skillsPath -Recurse -Filter "synapses.json" -ErrorAction SilentlyContinue
@@ -135,19 +135,19 @@ function Normalize-SynapsePaths {
                 $target = $entry.target
                 if (-not $target -or $target -match "^\.github/") { continue }
 
-                # ../instructions/file.md → .github/instructions/file.md
+                # ../instructions/file.md -> .github/instructions/file.md
                 if ($target -match "^\.\./instructions/(.+)$") {
                     $entry.target = ".github/instructions/$($Matches[1])"
                     $modified = $true; continue
                 }
 
-                # skill-name/SKILL.md → .github/skills/skill-name/SKILL.md
+                # skill-name/SKILL.md -> .github/skills/skill-name/SKILL.md
                 if ($target -match "^([^/]+)/SKILL\.md$") {
                     $entry.target = ".github/skills/$($Matches[1])/SKILL.md"
                     $modified = $true; continue
                 }
 
-                # Bare skill name → .github/skills/name/SKILL.md
+                # Bare skill name -> .github/skills/name/SKILL.md
                 if ($target -notmatch "/" -and $target -notmatch "\.md$") {
                     $entry.target = ".github/skills/$target/SKILL.md"
                     $modified = $true; continue

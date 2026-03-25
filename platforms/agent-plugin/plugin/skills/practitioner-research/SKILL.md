@@ -1,6 +1,8 @@
 ---
-name: "Practitioner Research Skill"
-description: "Practitioner methodology for longitudinal case study research, evidence-based documentation, and publication-ready academic writing in AI-assisted development."
+name: practitioner-research
+description: >-
+  Practitioner methodology for longitudinal case study research, evidence-based documentation, and publication-ready
+  academic writing in AI-assisted development.
 ---
 
 # Practitioner Research Skill
@@ -24,7 +26,7 @@ This skill captures the practitioner research approach: **practitioner-first, ev
 ### Phase 1: Practice First (3-18 months)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#f6f8fa'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     P1["🚀 Ship Projects"] --> P2["📝 Capture Insights"] --> P3["🔍 Notice Patterns"]
     P3 --> P4["💡 Publication Potential"]
@@ -121,7 +123,7 @@ The paper architecture follows this template:
 ### Mermaid Color Palette
 
 ```javascript
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#f6f8fa'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 ```
 
 | Color | Hex | Usage |
@@ -210,7 +212,7 @@ Always distinguish:
 ## Publication Pipeline
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#f6f8fa'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TB
     subgraph Practice["Phase 1: Practice"]
         A["Projects"] --> B["Insights"] --> C["Patterns"]

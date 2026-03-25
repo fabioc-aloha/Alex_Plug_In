@@ -1,6 +1,6 @@
 ---
-name: "Graphic Design Skill"
-description: "Patterns for visual design, SVG creation, layout composition, typography, and brand identity."
+name: graphic-design
+description: Patterns for visual design, SVG creation, layout composition, typography, and brand identity.
 ---
 
 # Graphic Design Skill
@@ -464,5 +464,5 @@ Every illustration should serve one of these purposes:
 
 ### Supporting Connections
 
-- [writing-publication] (Low, Supports, Forward) — "Document visual design"
-- [meditation-facilitation] (Low, Uses, Forward) — "Reflective design iteration"
+- [academic-research] (Low, Supports, Forward) — "Document visual design"
+- [meditation] (Low, Uses, Forward) — "Reflective design iteration"

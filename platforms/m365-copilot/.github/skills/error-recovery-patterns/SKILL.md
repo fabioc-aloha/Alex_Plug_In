@@ -1,7 +1,7 @@
 ---
-name: "Error Recovery Patterns Skill"
-description: "What to do when things break."
-applyTo: "**/*error*,**/*exception*,**/*retry*,**/*fallback*,**/*recovery*"
+name: error-recovery-patterns
+description: What to do when things break.
+applyTo: '**/*error*,**/*exception*,**/*retry*,**/*fallback*,**/*recovery*'
 ---
 
 # Error Recovery Patterns Skill

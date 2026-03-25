@@ -1,43 +1,43 @@
 {
-    "$schema": "../SYNAPSE-SCHEMA.json",
-    "schemaVersion": "2.1.0",
-    "skill": "doc-hygiene",
-    "version": "1.0.0",
-    "inheritance": "inheritable",
-    "connections": [
-        {
-            "target": ".github/skills/documentation-quality-assurance/SKILL.md",
-            "type": "sibling",
-            "strength": 0.9,
-            "reason": "Doc hygiene and QA are complementary — hygiene prevents, QA detects"
-        },
-        {
-            "target": ".github/instructions/roadmap-maintenance.instructions.md",
-            "type": "related",
-            "strength": 0.75,
-            "reason": "Roadmap hygiene follows doc-hygiene anti-drift rules"
-        },
-        {
-            "target": ".github/instructions/semantic-audit.instructions.md",
-            "type": "supports",
-            "strength": 0.8,
-            "reason": "Semantic audits enforce doc hygiene standards"
-        },
-        {
-            "target": ".github/skills/release-process/SKILL.md",
-            "type": "coordinates",
-            "strength": 0.8,
-            "reason": "Release workflows should trigger doc hygiene sweeps — 3 consecutive releases missed secondary doc updates (TEST-GUIDE, operational docs, heir READMEs)"
-        }
-    ],
-    "when": [
-        "User needs to prevent documentation drift",
-        "User encounters stale counts or hardcoded values in docs",
-        "User maintains living documents"
-    ],
-    "yields": [
-        "Anti-drift documentation rules",
-        "Count elimination patterns",
-        "Living document maintenance guidelines"
-    ]
+  "schemaVersion": "2.0.0",
+  "skillId": "doc-hygiene",
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "version": "1.0.0",
+  "connections": [
+    {
+      "target": ".github/skills/documentation-quality-assurance/SKILL.md",
+      "type": "complements",
+      "strength": 0.9,
+      "reason": "Doc hygiene and QA are complementary — hygiene prevents, QA detects",
+      "when": "When task involves .github/skills/documentation quality assurance/SKILL.md",
+      "yields": "documentation quality assurance trifecta patterns and guidance"
+    },
+    {
+      "target": ".github/instructions/roadmap-maintenance.instructions.md",
+      "type": "relates",
+      "strength": 0.75,
+      "reason": "Roadmap hygiene follows doc-hygiene anti-drift rules",
+      "when": "When task involves .github/instructions/roadmap maintenance.instructions.md",
+      "yields": "roadmap maintenance related rules and guidelines"
+    },
+    {
+      "target": ".github/instructions/semantic-audit.instructions.md",
+      "type": "supports",
+      "strength": 0.8,
+      "reason": "Semantic audits enforce doc hygiene standards",
+      "when": "When task involves .github/instructions/semantic audit.instructions.md",
+      "yields": "semantic audit supporting context"
+    }
+  ],
+  "when": [
+    "User needs to prevent documentation drift",
+    "User encounters stale counts or hardcoded values in docs",
+    "User maintains living documents"
+  ],
+  "activationContexts": [
+    "doc-hygiene",
+    "doc hygiene",
+    "doc",
+    "hygiene"
+  ]
 }

@@ -1,30 +1,38 @@
 {
-  "skill": "knowledge-synthesis",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "knowledge-synthesis",
   "connections": [
     {
-      "target": ".github/skills/meditation-facilitation/SKILL.md",
-      "type": "follows",
+      "target": ".github/skills/meditation/SKILL.md",
+      "type": "uses",
       "strength": 0.7,
-      "reason": "Synthesis often happens during meditation"
+      "reason": "Synthesis often happens during meditation",
+      "when": "When task involves .github/skills/meditation/SKILL.md",
+      "yields": "meditation prerequisite steps"
     },
     {
       "target": ".github/skills/learning-psychology/SKILL.md",
-      "type": "applies",
+      "type": "implements",
       "strength": 0.8,
-      "reason": "Synthesis is elaborative encoding"
+      "reason": "Synthesis is elaborative encoding",
+      "when": "When task involves .github/skills/learning psychology/SKILL.md",
+      "yields": "learning psychology patterns and guidance"
     },
     {
       "target": ".github/instructions/bootstrap-learning.instructions.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "Goes beyond learning to integration"
+      "reason": "Goes beyond learning to integration",
+      "when": "When task involves .github/instructions/bootstrap learning.instructions.md",
+      "yields": "bootstrap learning extended capabilities"
     },
     {
       "target": ".github/skills/research-first-development/SKILL.md",
-      "type": "integrates",
+      "type": "complements",
       "strength": 0.85,
-      "reason": "Research generates pre-project knowledge that synthesis organizes"
+      "reason": "Research generates pre-project knowledge that synthesis organizes",
+      "when": "When task involves .github/skills/research first development/SKILL.md",
+      "yields": "research first development integration patterns"
     }
   ],
   "triggers": [
@@ -69,5 +77,37 @@
     "formalize learning"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "promote knowledge",
+    "save insight",
+    "cross-project",
+    "pattern",
+    "we learned",
+    "reusable",
+    "knowledge synthesis",
+    "synthesize",
+    "abstract pattern",
+    "extract pattern",
+    "generalize learning",
+    "this could be reused",
+    "other projects could use",
+    "save to global",
+    "promote to global",
+    "global pattern",
+    "knowledge abstraction",
+    "pattern extraction",
+    "insight capture",
+    "cross-cutting concern",
+    "universal pattern",
+    "shareable knowledge",
+    "distill learning",
+    "crystallize knowledge",
+    "pattern recognition",
+    "meta-pattern",
+    "higher-order pattern",
+    "transferable knowledge",
+    "knowledge encoding",
+    "encode insight",
+    "formalize learning"
+  ]
 }

@@ -26,6 +26,14 @@
       "reason": "Lint-clean is baseline for documentation excellence",
       "when": "When task involves .github/skills/academic research/SKILL.md",
       "yields": "academic research supporting context"
+    },
+    {
+      "target": ".github/skills/md-to-word/SKILL.md",
+      "type": "feeds",
+      "strength": 0.85,
+      "reason": "Lint-clean markdown produces better Word conversion output",
+      "when": "When preparing markdown for Word export",
+      "yields": "md-to-word pre-conversion quality input"
     }
   ],
   "triggers": [

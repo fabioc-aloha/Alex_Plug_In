@@ -1,12 +1,24 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.1.0",
-  "inheritance": "inheritable",
+  "skillId": "executive-storytelling",
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.0.0",
-  "skill": "executive-storytelling",
   "created": "2026-02-10",
-  "connectionCount": 5,
-  "connections": [],
+  "connectionCount": 6,
+  "connections": [
+    {
+      "type": "relates",
+      "when": "executive|c-suite|vp|scqa|pyramid|minto",
+      "target": ".github/skills/slide-design/SKILL.md",
+      "yields": [
+        "slide-design",
+        "gamma-presentations",
+        "coaching-techniques"
+      ],
+      "weight": 0.87,
+      "notes": "Surface slide tooling and coaching prompts for exec storytelling requests"
+    }
+  ],
   "synapses": [
     {
       "id": "EXEC-001",
@@ -38,7 +50,7 @@
     {
       "id": "EXEC-004",
       "source": "executive-storytelling",
-      "target": ".github/skills/airs-integration/SKILL.md",
+      "target": ".github/skills/airs-appropriate-reliance/SKILL.md",
       "type": "applies",
       "strength": 0.7,
       "description": "AIRS findings need executive framing for enterprise adoption",
@@ -70,6 +82,38 @@
     {
       "trigger": "data storytelling|present findings|business case",
       "confidence": 0.85
+    }
+  ],
+  "activationContexts": [
+    {
+      "context": "Executive communication",
+      "keywords": [
+        "executive summary",
+        "elevator pitch",
+        "stakeholder narrative",
+        "business case",
+        "ROI story"
+      ]
+    },
+    {
+      "context": "Presentation narrative",
+      "keywords": [
+        "storytelling",
+        "narrative arc",
+        "data storytelling",
+        "persuasion",
+        "audience engagement"
+      ]
+    },
+    {
+      "context": "Strategic messaging",
+      "keywords": [
+        "key message",
+        "talking points",
+        "value proposition",
+        "strategic narrative",
+        "boardroom"
+      ]
     }
   ]
 }

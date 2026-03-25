@@ -1,15 +1,37 @@
 /**
- * md-to-word.cjs v3.0.0 - Convert Markdown with Mermaid diagrams to professional Word documents
+ * md-to-word.cjs v5.3.0 - Convert Markdown to production-quality Word documents
  *
- * Node.js port of md-to-word.py — eliminates the Python/python-docx dependency.
+ * Produces professional, visually complete Word output on the first run.
+ * Harvests proven fixes from AlexBooks, VT_AIPOWERBI, AlexVideos,
+ * FishbowlGovernance, and AIRS_Data_Analysis projects.
  *
  * Usage:
- *   node md-to-word.cjs SOURCE.md [OUTPUT.docx] [--no-format-tables] [--keep-temp]
+ *   node md-to-word.cjs SOURCE.md [OUTPUT.docx] [options]
+ *
+ * Options:
+ *   --no-format-tables   Skip table styling (borders, shading, headers)
+ *   --keep-temp          Keep temporary files for debugging
+ *   --toc                Generate Table of Contents
+ *   --cover              Generate cover page from H1 + metadata
+ *   --no-cover           Skip cover page (default)
+ *   --page-size SIZE     Page size: letter (default), a4, 6x9
+ *   --style PRESET       Style preset: professional (default), academic, course, creative
+ *   --reference-doc PATH Use a custom Word template (.dotx or .docx)
+ *   --watch              Watch source file for changes and auto-rebuild
+ *   --debug              Save preprocessed markdown as _debug_combined.md
+ *   --images-dir DIR     Image output directory (default: images)
+ *   --lua-filter PATH    Custom pandoc Lua filter to apply
+ *   --embed-images       Embed local images as base64 data URIs (prevents broken refs)
+ *   --strip-frontmatter  Remove YAML frontmatter before conversion
+ *   --recursive          Process all .md files in a directory tree
+ *   --dry-run            Run preprocessing + validation only, no .docx output
  *
  * Examples:
  *   node md-to-word.cjs README.md
- *   node md-to-word.cjs docs/spec.md spec.docx
- *   node md-to-word.cjs README.md --no-format-tables
+ *   node md-to-word.cjs docs/spec.md spec.docx --toc --cover
+ *   node md-to-word.cjs thesis.md --page-size a4 --style academic --debug
+ *   node md-to-word.cjs report.md --reference-doc corporate-template.docx
+ *   node md-to-word.cjs draft.md --watch
  *
  * Requirements:
  *   - pandoc  (winget install pandoc)
@@ -38,13 +60,20 @@ try {
 }
 
 // ---------------------------------------------------------------------------
+// Shared module imports
+// ---------------------------------------------------------------------------
+const { preprocessMarkdown, validateHeadingHierarchy, embedLocalImages, validateLinks } = require(path.join(__dirname, 'shared', 'markdown-preprocessor.cjs'));
+const { findMermaidBlocks } = require(path.join(__dirname, 'shared', 'mermaid-pipeline.cjs'));
+
+// ---------------------------------------------------------------------------
 // Page Layout Constants (Letter: 8.5" × 11", 1" margins)
 // ---------------------------------------------------------------------------
 const PAGE_WIDTH_INCHES = 6.5;
 const PAGE_HEIGHT_INCHES = 9.0;
-const MAX_IMAGE_RATIO = 0.90;
-const MAX_IMAGE_WIDTH = PAGE_WIDTH_INCHES * MAX_IMAGE_RATIO;   // ~5.85"
-const MAX_IMAGE_HEIGHT = PAGE_HEIGHT_INCHES * MAX_IMAGE_RATIO; // ~8.1"
+const MAX_IMAGE_WIDTH_RATIO = 1.00;  // 100% of printable width
+const MAX_IMAGE_HEIGHT_RATIO = 0.40; // 40% of printable height
+const MAX_IMAGE_WIDTH = PAGE_WIDTH_INCHES * MAX_IMAGE_WIDTH_RATIO;   // 6.5"
+const MAX_IMAGE_HEIGHT = PAGE_HEIGHT_INCHES * MAX_IMAGE_HEIGHT_RATIO; // 3.6"
 const PNG_DPI = 96;
 
 // ---------------------------------------------------------------------------
@@ -96,34 +125,27 @@ function calculateOptimalSize(pngPath, mmdContent) {
 function determineImageSizeHeuristic(mmdContent) {
   const lower = mmdContent.toLowerCase();
   const subgraphCount = (lower.match(/subgraph/g) || []).length;
-  if (lower.includes('gantt')) return '{width=5.8in}';
-  if (subgraphCount >= 3) return '{width=5.8in}';
-  if (lower.includes('flowchart lr') || lower.includes('graph lr')) return '{width=5.8in}';
-  if (lower.includes('flowchart tb') || lower.includes('graph tb')) {
-    if (subgraphCount >= 2) return '{height=8in}';
-    return '{width=5in}';
+  if (lower.includes('gantt')) return '{width=6.5in}';
+  if (subgraphCount >= 3) return '{width=6.5in}';
+  if (lower.includes('flowchart lr') || lower.includes('graph lr')) return '{width=6.5in}';
+  if (lower.includes('flowchart td') || lower.includes('graph td') ||
+      lower.includes('flowchart tb') || lower.includes('graph tb')) {
+    if (subgraphCount >= 2) return `{height=${MAX_IMAGE_HEIGHT.toFixed(1)}in}`;
+    return '{width=6.5in}';
   }
-  return '{width=5in}';
+  return '{width=5.5in}';
 }
 
 // ---------------------------------------------------------------------------
 // Mermaid / SVG conversion
 // ---------------------------------------------------------------------------
-function findMermaidBlocks(content) {
-  const pattern = /```mermaid\r?\n([\s\S]*?)```/g;
-  const blocks = [];
-  let m;
-  while ((m = pattern.exec(content)) !== null) {
-    blocks.push({ index: blocks.length, content: m[1] });
-  }
-  return blocks;
-}
 
 function convertMermaidToPng(mmdContent, outputPath) {
   const tmpFile = path.join(os.tmpdir(), `alex-mmd-${Date.now()}-${Math.random().toString(36).slice(2)}.mmd`);
   try {
     fs.writeFileSync(tmpFile, mmdContent, 'utf8');
-    execSync(`npx mmdc -i "${tmpFile}" -o "${outputPath}" -b white`, {
+    // Scale 8 for high-quality diagrams (harvested from AlexBooks build-pdf.js)
+    execSync(`npx mmdc -i "${tmpFile}" -o "${outputPath}" -b white -s 8 -w 2400`, {
       stdio: ['pipe', 'pipe', 'pipe'],
       timeout: 60000
     });
@@ -146,65 +168,6 @@ function convertSvgToPng(svgPath, pngPath) {
     console.log(`WARNING: svgexport not available, skipping ${svgPath}`);
     return false;
   }
-}
-
-// ---------------------------------------------------------------------------
-// Markdown preprocessing
-// ---------------------------------------------------------------------------
-function preprocessMarkdown(content) {
-  const lines = content.split('\n');
-  const result = [];
-  let prevWasList = false;
-  let prevWasBlank = false;
-
-  for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-    const stripped = line.trim();
-    const isList = /^[-*+]\s|^\d+\.\s|^[-*+]\s*\[[ xX]\]/.test(stripped);
-    const isBlank = !stripped;
-
-    // Add blank line before lists if previous line was not blank/list
-    if (isList && !prevWasList && !prevWasBlank && result.length > 0) {
-      result.push('');
-    }
-
-    // Add blank line after heading if next line is not blank
-    if (i > 0 && result.length > 0) {
-      const prevLine = lines[i - 1].trim();
-      if (prevLine.startsWith('#') && !isBlank) {
-        if (result[result.length - 1] !== '') {
-          result.push('');
-        }
-      }
-    }
-
-    // Convert checkbox markers for pandoc compatibility
-    if (/^[-*+]\s*\[ \]/.test(stripped)) {
-      line = line.replace(/^([-*+])\s*\[ \]/, '$1 ☐');
-    } else if (/^[-*+]\s*\[[xX]\]/.test(stripped)) {
-      line = line.replace(/^([-*+])\s*\[[xX]\]/, '$1 ☑');
-    }
-
-    result.push(line);
-    prevWasList = isList;
-    prevWasBlank = isBlank;
-  }
-
-  // Add blank line after lists before non-list content
-  const final = [];
-  for (let i = 0; i < result.length; i++) {
-    final.push(result[i]);
-    const stripped = result[i].trim();
-    const isList = /^[-*+]\s|^\d+\.\s|^[-*+]\s*[☐☑]/.test(stripped);
-    if (isList && i + 1 < result.length) {
-      const nextStripped = result[i + 1].trim();
-      const nextIsList = /^[-*+]\s|^\d+\.\s|^[-*+]\s*[☐☑]/.test(nextStripped);
-      if (!nextIsList && nextStripped) {
-        final.push('');
-      }
-    }
-  }
-  return final.join('\n');
 }
 
 // ---------------------------------------------------------------------------
@@ -239,9 +202,18 @@ function formatTables(xml) {
     '<w:insideV w:val="single" w:sz="4" w:space="0" w:color="AAAAAA"/>' +
     '</w:tblBorders>';
 
-  // Auto-fit width
+  // Cell margins (top/bottom 40twips ~2pt, left/right 80twips ~4pt)
+  const cellMarginsXml =
+    '<w:tblCellMar xmlns:w="' + W_NS + '">' +
+    '<w:top w:w="40" w:type="dxa"/>' +
+    '<w:left w:w="80" w:type="dxa"/>' +
+    '<w:bottom w:w="40" w:type="dxa"/>' +
+    '<w:right w:w="80" w:type="dxa"/>' +
+    '</w:tblCellMar>';
+
+  // Full-width table
   const autoWidthXml =
-    '<w:tblW xmlns:w="' + W_NS + '" w:type="auto" w:w="0"/>';
+    '<w:tblW xmlns:w="' + W_NS + '" w:type="pct" w:w="5000"/>';
   const autoLayoutXml =
     '<w:tblLayout xmlns:w="' + W_NS + '" w:type="autofit"/>';
 
@@ -253,8 +225,9 @@ function formatTables(xml) {
       let cleaned = inner
         .replace(/<w:tblBorders[\s\S]*?<\/w:tblBorders>/g, '')
         .replace(/<w:tblW[^/]*\/>/g, '')
-        .replace(/<w:tblLayout[^/]*\/>/g, '');
-      return `<w:tblPr>${cleaned}${bordersXml}${autoWidthXml}${autoLayoutXml}</w:tblPr>`;
+        .replace(/<w:tblLayout[^/]*\/>/g, '')
+        .replace(/<w:tblCellMar[\s\S]*?<\/w:tblCellMar>/g, '');
+      return `<w:tblPr>${cleaned}${bordersXml}${cellMarginsXml}${autoWidthXml}${autoLayoutXml}</w:tblPr>`;
     });
 
     // --- Row formatting ---
@@ -273,16 +246,18 @@ function formatTables(xml) {
 
       // Can't-split row property
       const cantSplitXml = `<w:cantSplit xmlns:w="${W_NS}"/>`;
+      // Header row repeat across pages (harvested from AIRS format_word_tables.py)
+      const tblHeaderXml = isHeader ? `<w:tblHeader xmlns:w="${W_NS}"/>` : '';
 
-      // Add cantSplit to row properties
+      // Add cantSplit (+ tblHeader for row 0) to row properties
       if (rowMatch.includes('<w:trPr>')) {
         rowMatch = rowMatch.replace(/<w:trPr>([\s\S]*?)<\/w:trPr>/, (m, trInner) => {
-          let c = trInner.replace(/<w:cantSplit[^/]*\/>/g, '');
-          return `<w:trPr>${c}${cantSplitXml}</w:trPr>`;
+          let c = trInner.replace(/<w:cantSplit[^/]*\/>/g, '').replace(/<w:tblHeader[^/]*\/>/g, '');
+          return `<w:trPr>${c}${cantSplitXml}${tblHeaderXml}</w:trPr>`;
         });
       } else {
         // Insert trPr after <w:tr...>
-        rowMatch = rowMatch.replace(/(<w:tr\b[^>]*>)/, `$1<w:trPr>${cantSplitXml}</w:trPr>`);
+        rowMatch = rowMatch.replace(/(<w:tr\b[^>]*>)/, `$1<w:trPr>${cantSplitXml}${tblHeaderXml}</w:trPr>`);
       }
 
       // Format each cell
@@ -352,14 +327,15 @@ function centerImages(xml) {
 }
 
 /**
- * Apply heading colors and spacing.
+ * Apply heading colors and spacing, driven by style preset.
  */
-function formatHeadings(xml) {
+function formatHeadings(xml, style) {
+  const preset = STYLE_PRESETS[style] || STYLE_PRESETS.professional;
   const headingStyles = {
-    'Heading1': { color: '00528B', spaceBefore: 360, spaceAfter: 120 }, // 18pt / 6pt
-    'Heading2': { color: '0078D4', spaceBefore: 280, spaceAfter: 80 },  // 14pt / 4pt
-    'Heading3': { color: '105E7E', spaceBefore: 240, spaceAfter: 80 },  // 12pt / 4pt
-    'Heading4': { color: '105E7E', spaceBefore: 200, spaceAfter: 60 },  // 10pt / 3pt
+    'Heading1': { color: preset.h1Color, spaceBefore: 360, spaceAfter: 120 },
+    'Heading2': { color: preset.h2Color, spaceBefore: 280, spaceAfter: 80 },
+    'Heading3': { color: preset.h3Color, spaceBefore: 240, spaceAfter: 80 },
+    'Heading4': { color: preset.h4Color, spaceBefore: 200, spaceAfter: 60 },
   };
 
   return xml.replace(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g, (pMatch, pInner) => {
@@ -448,9 +424,83 @@ function formatCodeBlocks(xml) {
 }
 
 /**
+ * Style hyperlinks blue with underline (harvested from first-run failures).
+ */
+function formatHyperlinks(xml) {
+  return xml.replace(/<w:hyperlink[^>]*>[\s\S]*?<\/w:hyperlink>/g, (hlMatch) => {
+    // Add blue + underline to existing run properties
+    hlMatch = hlMatch.replace(/<w:rPr>([\s\S]*?)<\/w:rPr>/g, (_rprMatch, rprInner) => {
+      let c = rprInner
+        .replace(/<w:color[^/]*\/>/g, '')
+        .replace(/<w:u[^/]*\/>/g, '');
+      return `<w:rPr>${c}<w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr>`;
+    });
+    // Runs without rPr inside hyperlinks get styling added
+    hlMatch = hlMatch.replace(/<w:r>((?:(?!<w:rPr)[\s\S])*?<w:t)/g,
+      '<w:r><w:rPr><w:color w:val="0563C1"/><w:u w:val="single"/></w:rPr><w:t');
+    return hlMatch;
+  });
+}
+
+/**
+ * Keep table/figure captions attached to the content that follows.
+ * Detects paragraphs starting with "Table N" or "Figure N" and adds:
+ * - keepNext (prevent caption orphans)
+ * - Centered alignment
+ * - Italic 9pt styling on run properties
+ */
+function keepCaptionsWithContent(xml) {
+  return xml.replace(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g, (pMatch, pInner) => {
+    // Extract text content from runs
+    const textParts = [];
+    pInner.replace(/<w:t[^>]*>([^<]*)<\/w:t>/g, (_m, t) => { textParts.push(t); });
+    const textContent = textParts.join('').trim();
+    if (!/^(Table|Figure)\s+\d/.test(textContent)) return pMatch;
+
+    // Paragraph properties: keepNext + centered + italic 9pt
+    const captionPPr = [
+      `<w:keepNext xmlns:w="${W_NS}"/>`,
+      `<w:jc xmlns:w="${W_NS}" w:val="center"/>`,
+      `<w:rPr><w:i xmlns:w="${W_NS}"/><w:sz xmlns:w="${W_NS}" w:val="18"/><w:color xmlns:w="${W_NS}" w:val="595959"/></w:rPr>`,
+    ].join('');
+
+    // Inject paragraph-level caption styling
+    let result = pMatch;
+    if (result.includes('<w:pPr>')) {
+      result = result.replace(/<w:pPr>([\s\S]*?)<\/w:pPr>/, (_m, inner) => {
+        let props = inner;
+        if (!props.includes('<w:keepNext')) props += `<w:keepNext xmlns:w="${W_NS}"/>`;
+        if (!props.includes('<w:jc')) props += `<w:jc xmlns:w="${W_NS}" w:val="center"/>`;
+        return `<w:pPr>${props}</w:pPr>`;
+      });
+    } else {
+      result = result.replace(/(<w:p\b[^>]*>)/, `$1<w:pPr>${captionPPr}</w:pPr>`);
+    }
+
+    // Apply italic + 9pt + gray to every run in the caption
+    result = result.replace(/<w:r>([\s\S]*?)<\/w:r>/g, (rMatch, rInner) => {
+      if (rInner.includes('<w:rPr>')) {
+        return rMatch.replace(/<w:rPr>([\s\S]*?)<\/w:rPr>/, (_m, rprInner) => {
+          let rpr = rprInner;
+          if (!rpr.includes('<w:i')) rpr += `<w:i xmlns:w="${W_NS}"/>`;
+          if (!rpr.includes('<w:sz')) rpr += `<w:sz xmlns:w="${W_NS}" w:val="18"/>`;
+          if (!rpr.includes('<w:color')) rpr += `<w:color xmlns:w="${W_NS}" w:val="595959"/>`;
+          return `<w:rPr>${rpr}</w:rPr>`;
+        });
+      }
+      const captionRPr = `<w:rPr><w:i xmlns:w="${W_NS}"/><w:sz xmlns:w="${W_NS}" w:val="18"/><w:color xmlns:w="${W_NS}" w:val="595959"/></w:rPr>`;
+      return rMatch.replace(/<w:r>/, `<w:r>${captionRPr}`);
+    });
+
+    return result;
+  });
+}
+
+/**
  * Fix paragraph spacing — widow/orphan control, list spacing.
  */
-function fixParagraphSpacing(xml) {
+function fixParagraphSpacing(xml, style) {
+  const preset = STYLE_PRESETS[style] || STYLE_PRESETS.professional;
   return xml.replace(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g, (pMatch, pInner) => {
     const styleMatch = pInner.match(/<w:pStyle\s+w:val="([^"]+)"/);
     const styleName = styleMatch ? styleMatch[1] : '';
@@ -462,10 +512,12 @@ function fixParagraphSpacing(xml) {
     let widowControlXml = '<w:widowControl/>';
     let spacingXml = '';
 
+    const lineSpacing = `w:line="${preset.lineHeight}" w:lineRule="auto"`;
+
     if (styleName.includes('List')) {
-      spacingXml = '<w:spacing w:before="40" w:after="40"/>';
+      spacingXml = `<w:spacing w:before="40" w:after="40" ${lineSpacing}/>`;
     } else if (styleName === 'Normal' || styleName === 'BodyText' || styleName === '') {
-      spacingXml = '<w:spacing w:before="120" w:after="120"/>';
+      spacingXml = `<w:spacing w:before="120" w:after="120" ${lineSpacing}/>`;
     }
 
     // Skip headings and code (already handled)
@@ -489,17 +541,163 @@ function fixParagraphSpacing(xml) {
 }
 
 /**
+ * Set default body font and spacing in document defaults, driven by style preset.
+ */
+function setDocumentDefaults(xml, style) {
+  const preset = STYLE_PRESETS[style] || STYLE_PRESETS.professional;
+  const rPrDefault =
+    '<w:rPrDefault><w:rPr xmlns:w="' + W_NS + '">' +
+    `<w:rFonts w:ascii="${preset.bodyFont}" w:hAnsi="${preset.bodyFont}" w:cs="${preset.bodyFont}"/>` +
+    `<w:sz w:val="${preset.bodySize}"/><w:szCs w:val="${preset.bodySize}"/>` +
+    `<w:color w:val="${preset.bodyColor}"/>` +
+    '</w:rPr></w:rPrDefault>';
+  const pPrDefault =
+    '<w:pPrDefault><w:pPr xmlns:w="' + W_NS + '">' +
+    `<w:spacing w:after="120" w:line="${preset.lineHeight}" w:lineRule="auto"/>` +
+    '</w:pPr></w:pPrDefault>';
+  const defaults = `<w:docDefaults>${rPrDefault}${pPrDefault}</w:docDefaults>`;
+
+  // Replace existing docDefaults or insert into w:styles
+  if (xml.includes('<w:docDefaults>')) {
+    xml = xml.replace(/<w:docDefaults>[\s\S]*?<\/w:docDefaults>/, defaults);
+  } else if (xml.includes('<w:styles')) {
+    xml = xml.replace(/(<w:styles[^>]*>)/, `$1${defaults}`);
+  }
+  return xml;
+}
+
+/**
+ * Prevent tables from splitting across pages when they fit on one page.
+ * Adds keepNext to all rows except the last, so the table stays together.
+ */
+function keepTablesIntact(xml) {
+  return xml.replace(/<w:tbl\b[^>]*>([\s\S]*?)<\/w:tbl>/g, (tableMatch) => {
+    // Count rows
+    const rows = tableMatch.match(/<w:tr\b/g) || [];
+    if (rows.length <= 1) return tableMatch;
+
+    // Add keepNext to all rows except the last to keep table together
+    let rowIdx = 0;
+    const totalRows = rows.length;
+    tableMatch = tableMatch.replace(/<w:tr\b[^>]*>([\s\S]*?)<\/w:tr>/g, (rowMatch) => {
+      const isLast = ++rowIdx === totalRows;
+      if (isLast) return rowMatch;
+
+      const keepNextXml = `<w:keepNext xmlns:w="${W_NS}"/>`;
+      // Add to trPr > first paragraph pPr, or to each paragraph pPr
+      rowMatch = rowMatch.replace(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g, (pMatch) => {
+        if (pMatch.includes('<w:pPr>')) {
+          return pMatch.replace(/<w:pPr>([\s\S]*?)<\/w:pPr>/, (m, inner) => {
+            if (inner.includes('<w:keepNext')) return m;
+            return `<w:pPr>${inner}${keepNextXml}</w:pPr>`;
+          });
+        }
+        return pMatch.replace(/(<w:p\b[^>]*>)/, `$1<w:pPr>${keepNextXml}</w:pPr>`);
+      });
+      return rowMatch;
+    });
+    return tableMatch;
+  });
+}
+
+/**
  * Apply all OOXML formatting passes to document.xml content.
  */
 function applyAllFormatting(xml, options) {
+  const style = options.style || 'professional';
   if (!options.noFormatTables) {
     xml = formatTables(xml);
+    xml = keepTablesIntact(xml);
   }
   xml = centerImages(xml);
-  xml = formatHeadings(xml);
+  xml = formatHeadings(xml, style);
   xml = formatCodeBlocks(xml);
-  xml = fixParagraphSpacing(xml);
+  xml = formatHyperlinks(xml);
+  xml = keepCaptionsWithContent(xml);
+  xml = fixParagraphSpacing(xml, style);
   return xml;
+}
+
+// ---------------------------------------------------------------------------
+// Page Number Footer (harvested from AIRS defence/exports pipeline)
+// ---------------------------------------------------------------------------
+
+/**
+ * Add centered page number footer to docx package.
+ * Creates footer1.xml, adds relationship, updates content types,
+ * and injects footer reference into the document section properties.
+ */
+async function addPageNumberFooter(zip) {
+  // 1. Create footer1.xml
+  const footerXml = [
+    '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+    '<w:ftr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"',
+    '       xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">',
+    '  <w:p>',
+    '    <w:pPr>',
+    '      <w:jc w:val="center"/>',
+    '    </w:pPr>',
+    '    <w:r>',
+    '      <w:rPr><w:sz w:val="18"/><w:color w:val="888888"/></w:rPr>',
+    '      <w:fldChar w:fldCharType="begin"/>',
+    '    </w:r>',
+    '    <w:r>',
+    '      <w:rPr><w:sz w:val="18"/><w:color w:val="888888"/></w:rPr>',
+    '      <w:instrText xml:space="preserve"> PAGE </w:instrText>',
+    '    </w:r>',
+    '    <w:r>',
+    '      <w:rPr><w:sz w:val="18"/><w:color w:val="888888"/></w:rPr>',
+    '      <w:fldChar w:fldCharType="end"/>',
+    '    </w:r>',
+    '  </w:p>',
+    '</w:ftr>'
+  ].join('\n');
+  zip.file('word/footer1.xml', footerXml);
+
+  // 2. Add relationship to document.xml.rels
+  const relsFile = zip.file('word/_rels/document.xml.rels');
+  if (!relsFile) return null;
+
+  let relsXml = await relsFile.async('string');
+  const rIdMatches = relsXml.match(/Id="rId(\d+)"/g) || [];
+  const maxId = rIdMatches.reduce((max, m) => {
+    const n = parseInt(m.match(/\d+/)[0], 10);
+    return n > max ? n : max;
+  }, 0);
+  const footerRId = `rId${maxId + 1}`;
+
+  relsXml = relsXml.replace('</Relationships>',
+    `<Relationship Id="${footerRId}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Target="footer1.xml"/>\n</Relationships>`);
+  zip.file('word/_rels/document.xml.rels', relsXml);
+
+  // 3. Update [Content_Types].xml
+  const ctFile = zip.file('[Content_Types].xml');
+  if (ctFile) {
+    let ctXml = await ctFile.async('string');
+    if (!ctXml.includes('footer1.xml')) {
+      ctXml = ctXml.replace('</Types>',
+        '<Override PartName="/word/footer1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>\n</Types>');
+      zip.file('[Content_Types].xml', ctXml);
+    }
+  }
+
+  return footerRId;
+}
+
+/**
+ * Insert footer reference into the document's section properties.
+ */
+function addFooterRefToSectionProps(docXml, footerRId) {
+  const R_NS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+  const footerRef = `<w:footerReference xmlns:w="${W_NS}" xmlns:r="${R_NS}" w:type="default" r:id="${footerRId}"/>`;
+
+  // Find sectPr (section properties) — usually near the end of body
+  if (docXml.includes('<w:sectPr')) {
+    docXml = docXml.replace(/<w:sectPr([^>]*)>/, (m, attrs) => {
+      return `<w:sectPr${attrs}>${footerRef}`;
+    });
+  }
+  return docXml;
 }
 
 // ---------------------------------------------------------------------------
@@ -507,7 +705,7 @@ function applyAllFormatting(xml, options) {
 // ---------------------------------------------------------------------------
 async function postProcessDocx(docxPath, options) {
   if (!JSZip) {
-    console.log('⚠️  Skipping post-processing (jszip not available)');
+    console.log('[WARN] Skipping post-processing (jszip not available)');
     return;
   }
 
@@ -516,13 +714,28 @@ async function postProcessDocx(docxPath, options) {
 
   const docXmlFile = zip.file('word/document.xml');
   if (!docXmlFile) {
-    console.log('⚠️  No word/document.xml found in docx — skipping post-processing');
+    console.log('[WARN] No word/document.xml found in docx -- skipping post-processing');
     return;
   }
 
   let docXml = await docXmlFile.async('string');
   docXml = applyAllFormatting(docXml, options);
+
+  // Add page number footer
+  const footerRId = await addPageNumberFooter(zip);
+  if (footerRId) {
+    docXml = addFooterRefToSectionProps(docXml, footerRId);
+  }
+
   zip.file('word/document.xml', docXml);
+
+  // Apply document defaults (font, line spacing) to styles.xml
+  const stylesFile = zip.file('word/styles.xml');
+  if (stylesFile) {
+    let stylesXml = await stylesFile.async('string');
+    stylesXml = setDocumentDefaults(stylesXml, options.style || 'professional');
+    zip.file('word/styles.xml', stylesXml);
+  }
 
   const result = await zip.generateAsync({
     type: 'nodebuffer',
@@ -531,6 +744,36 @@ async function postProcessDocx(docxPath, options) {
   });
   fs.writeFileSync(docxPath, result);
 }
+
+// ---------------------------------------------------------------------------
+// Style Presets (harvested from VT build-pdf.js + AlexBooks + AIRS)
+// ---------------------------------------------------------------------------
+const STYLE_PRESETS = {
+  professional: {
+    bodyFont: 'Segoe UI', bodySize: '21', headingColor: '0078D4',
+    lineHeight: '312', bodyColor: '1F2328',
+    h1Color: '0078D4', h2Color: '2B579A', h3Color: '3B3B3B', h4Color: '555555',
+    margins: { top: '1440', right: '1440', bottom: '1440', left: '1440' }
+  },
+  academic: {
+    bodyFont: 'Times New Roman', bodySize: '24', headingColor: '1A1A2E',
+    lineHeight: '480', bodyColor: '000000',
+    h1Color: '1A1A2E', h2Color: '2D2D44', h3Color: '3B3B3B', h4Color: '555555',
+    margins: { top: '1440', right: '1440', bottom: '1440', left: '1440' }
+  },
+  course: {
+    bodyFont: 'Calibri', bodySize: '22', headingColor: '861F41',
+    lineHeight: '360', bodyColor: '333333',
+    h1Color: '861F41', h2Color: 'E87722', h3Color: '3B3B3B', h4Color: '555555',
+    margins: { top: '1296', right: '1152', bottom: '1296', left: '1152' }
+  },
+  creative: {
+    bodyFont: 'Georgia', bodySize: '22', headingColor: '2C3E50',
+    lineHeight: '336', bodyColor: '2C3E50',
+    h1Color: '2C3E50', h2Color: '8E44AD', h3Color: '2980B9', h4Color: '555555',
+    margins: { top: '1440', right: '1584', bottom: '1440', left: '1584' }
+  }
+};
 
 // ---------------------------------------------------------------------------
 // CLI Argument Parsing
@@ -542,7 +785,19 @@ function parseArgs(argv) {
     output: null,
     imagesDir: 'images',
     noFormatTables: false,
-    keepTemp: false
+    keepTemp: false,
+    toc: false,
+    cover: false,
+    pageSize: 'letter',
+    style: 'professional',
+    referenceDoc: null,
+    watch: false,
+    luaFilter: null,
+    debug: false,
+    embedImages: false,
+    stripFrontmatter: false,
+    recursive: false,
+    dryRun: false
   };
 
   const positional = [];
@@ -551,15 +806,54 @@ function parseArgs(argv) {
       result.noFormatTables = true;
     } else if (args[i] === '--keep-temp') {
       result.keepTemp = true;
+    } else if (args[i] === '--toc') {
+      result.toc = true;
+    } else if (args[i] === '--cover') {
+      result.cover = true;
+    } else if (args[i] === '--no-cover') {
+      result.cover = false;
+    } else if (args[i] === '--page-size' && i + 1 < args.length) {
+      const size = args[++i].toLowerCase();
+      if (['letter', 'a4', '6x9'].includes(size)) {
+        result.pageSize = size;
+      } else {
+        console.warn(`⚠️  Unknown page size "${size}" — using letter`);
+      }
+    } else if (args[i] === '--style' && i + 1 < args.length) {
+      const style = args[++i].toLowerCase();
+      if (STYLE_PRESETS[style]) {
+        result.style = style;
+      } else {
+        console.warn(`⚠️  Unknown style "${style}" — using professional. Available: ${Object.keys(STYLE_PRESETS).join(', ')}`);
+      }
+    } else if (args[i] === '--reference-doc' && i + 1 < args.length) {
+      result.referenceDoc = args[++i];
+    } else if (args[i] === '--watch') {
+      result.watch = true;
+    } else if (args[i] === '--lua-filter' && i + 1 < args.length) {
+      result.luaFilter = args[++i];
+    } else if (args[i] === '--debug') {
+      result.debug = true;
     } else if (args[i] === '--images-dir' && i + 1 < args.length) {
       result.imagesDir = args[++i];
+    } else if (args[i] === '--embed-images') {
+      result.embedImages = true;
+    } else if (args[i] === '--strip-frontmatter') {
+      result.stripFrontmatter = true;
+    } else if (args[i] === '--recursive') {
+      result.recursive = true;
+    } else if (args[i] === '--dry-run') {
+      result.dryRun = true;
     } else if (!args[i].startsWith('--')) {
       positional.push(args[i]);
     }
   }
 
   if (positional.length === 0) {
-    console.error('Usage: node md-to-word.cjs SOURCE.md [OUTPUT.docx] [--no-format-tables] [--keep-temp]');
+    console.error('Usage: node md-to-word.cjs SOURCE.md [OUTPUT.docx] [options]');
+    console.error('  Options: --toc --cover --page-size letter|a4|6x9 --style professional|academic|course|creative');
+    console.error('           --reference-doc PATH --watch --lua-filter PATH --debug --no-format-tables --keep-temp');
+    console.error('           --embed-images --strip-frontmatter --recursive --dry-run');
     process.exit(1);
   }
 
@@ -569,11 +863,9 @@ function parseArgs(argv) {
 }
 
 // ---------------------------------------------------------------------------
-// Main
+// Build (single conversion run)
 // ---------------------------------------------------------------------------
-async function main() {
-  const args = parseArgs(process.argv);
-
+async function build(args) {
   const sourcePath = path.resolve(args.source);
   if (!fs.existsSync(sourcePath)) {
     console.error(`ERROR: Source file not found: ${sourcePath}`);
@@ -588,96 +880,302 @@ async function main() {
     fs.mkdirSync(imagesDir, { recursive: true });
   }
 
-  console.log(`📄 Converting ${sourcePath} → ${outputPath}`);
+  // Use os.tmpdir for temp files (proper cleanup)
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'md-to-word-'));
 
-  // Phase 0: Preprocess markdown
-  let content = fs.readFileSync(sourcePath, 'utf8');
-  console.log('🔧 Preprocessing markdown...');
-  content = preprocessMarkdown(content);
+  console.log(`\u{1f4c4} Converting ${sourcePath} \u2192 ${outputPath}`);
+  if (args.toc) console.log('   \u{1f4d1} Table of Contents: enabled');
+  if (args.cover) console.log('   \u{1f4d8} Cover page: enabled');
+  if (args.style !== 'professional') console.log(`   \u{1f3a8} Style: ${args.style}`);
+  if (args.pageSize !== 'letter') console.log(`   \u{1f4cf} Page size: ${args.pageSize}`);
+  if (args.referenceDoc) console.log(`   \u{1f4c4} Reference doc: ${args.referenceDoc}`);
 
-  // Phase 1: Find and convert Mermaid diagrams
-  const mermaidBlocks = findMermaidBlocks(content);
-  console.log(`📊 Found ${mermaidBlocks.length} Mermaid diagrams`);
+  try {
+    // Phase 0: Preprocess markdown
+    let content = fs.readFileSync(sourcePath, 'utf8');
+    console.log('\u{1f527} Preprocessing markdown...');
 
-  const replacements = [];
-  for (const block of mermaidBlocks) {
-    const pngName = `diagram-${block.index + 1}.png`;
-    const pngPath = path.join(imagesDir, pngName);
-    process.stdout.write(`   Converting diagram ${block.index + 1}... `);
+    // Strip YAML frontmatter if requested
+    if (args.stripFrontmatter) {
+      const fmMatch = content.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n/);
+      if (fmMatch) {
+        content = content.slice(fmMatch[0].length);
+        console.log('   \u{1f4cb} YAML frontmatter stripped');
+      }
+    }
 
-    if (convertMermaidToPng(block.content, pngPath)) {
-      const size = calculateOptimalSize(pngPath, block.content);
-      replacements.push(`![Diagram ${block.index + 1}](${args.imagesDir}/${pngName})${size}`);
-      console.log(`✓ ${size}`);
+    content = preprocessMarkdown(content, { format: 'docx' });
+
+    // Validate heading hierarchy
+    const headingResult = validateHeadingHierarchy(content);
+    if (!headingResult.valid) {
+      console.log('   \u{1f4da} Heading hierarchy warnings:');
+      headingResult.warnings.forEach(w => console.log(`   \u26a0\ufe0f  ${w}`));
+    }
+
+    // Embed local images as base64 data URIs (prevents broken image references)
+    if (args.embedImages) {
+      const beforeLen = content.length;
+      content = embedLocalImages(content, sourceDir);
+      if (content.length !== beforeLen) {
+        console.log(`   \u{1f5bc}\ufe0f  Embedded image(s) as base64`);
+      }
+    }
+
+    // Validate links (check for broken local file references)
+    const linkResult = validateLinks(content, sourceDir);
+    if (!linkResult.valid) {
+      console.log('   \u{1f517} Link warnings:');
+      linkResult.warnings.forEach(w => console.log(`   \u26a0\ufe0f  ${w}`));
+    }
+
+    // Dry-run mode: report preprocessing results and exit without generating .docx
+    if (args.dryRun) {
+      console.log('\n\u{1f50d} Dry-run complete (no .docx generated)');
+      console.log(`   Source: ${sourcePath} (${(fs.statSync(sourcePath).size / 1024).toFixed(1)} KB)`);
+      console.log(`   Output would be: ${outputPath}`);
+      return;
+    }
+
+    // Phase 0.5: Generate cover page from H1 + metadata
+    if (args.cover) {
+      const h1Match = content.match(/^#\s+(.+)$/m);
+      const title = h1Match ? h1Match[1].trim() : path.basename(sourcePath, '.md');
+      const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      const coverMd = [
+        '',
+        '<div style="text-align: center; padding-top: 3in;">',
+        '',
+        `# ${title}`,
+        '',
+        `*${dateStr}*`,
+        '',
+        '</div>',
+        '',
+        '\\newpage',
+        '',
+      ].join('\n');
+      content = coverMd + content;
+      console.log('   \u{1f4d8} Cover page generated');
+    }
+
+    // Phase 1: Find and convert Mermaid diagrams
+    const mermaidBlocks = findMermaidBlocks(content);
+    console.log(`\u{1f4ca} Found ${mermaidBlocks.length} Mermaid diagrams`);
+
+    // Pre-validate Mermaid syntax before expensive rendering
+    for (const block of mermaidBlocks) {
+      const trimmed = block.content.trim();
+      const validTypes = /^(flowchart|graph|sequenceDiagram|classDiagram|stateDiagram|erDiagram|journey|gantt|pie|quadrantChart|requirementDiagram|gitGraph|mindmap|timeline|sankey|xychart|block)/;
+      if (!validTypes.test(trimmed)) {
+        console.warn(`   \u26a0\ufe0f  Diagram ${block.index + 1}: unrecognized diagram type in first line`);
+      }
+    }
+
+    const replacements = [];
+    for (const block of mermaidBlocks) {
+      const pngName = `diagram-${block.index + 1}.png`;
+      const pngPath = path.join(imagesDir, pngName);
+      process.stdout.write(`   Converting diagram ${block.index + 1}... `);
+
+      if (convertMermaidToPng(block.content, pngPath)) {
+        const size = calculateOptimalSize(pngPath, block.content);
+        replacements.push(`![Diagram ${block.index + 1}](${args.imagesDir}/${pngName})${size}`);
+        console.log(`\u2713 ${size}`);
+      } else {
+        console.log('\u2717 (failed)');
+        replacements.push(`![Diagram ${block.index + 1}](${args.imagesDir}/${pngName})`);
+      }
+    }
+
+    // Phase 2: Convert SVG references to PNG
+    const svgPattern = /!\[([^\]]*)\]\(([^)]+\.svg)\)/g;
+    let svgMatch;
+    while ((svgMatch = svgPattern.exec(content)) !== null) {
+      const [fullMatch, altText, svgRelPath] = svgMatch;
+      const svgPath = path.join(sourceDir, svgRelPath);
+
+      if (fs.existsSync(svgPath)) {
+        const pngName = path.basename(svgPath, '.svg') + '.png';
+        const pngPath = path.join(imagesDir, pngName);
+
+        if (!fs.existsSync(pngPath)) {
+          process.stdout.write(`\u{1f5bc}\ufe0f  Converting SVG: ${path.basename(svgPath)}... `);
+          if (convertSvgToPng(svgPath, pngPath)) {
+            console.log('\u2713');
+          } else {
+            console.log('\u2717');
+          }
+        }
+
+        const newRef = `![${altText}](${args.imagesDir}/${pngName}){width=5.8in}`;
+        content = content.replace(fullMatch, newRef);
+      }
+    }
+
+    // Phase 3: Replace mermaid blocks with image references
+    const mermaidPattern = /```mermaid\r?\n[\s\S]*?```/;
+    for (const replacement of replacements) {
+      content = content.replace(mermaidPattern, replacement);
+    }
+
+    // Save debug output (combined preprocessed markdown)
+    if (args.debug) {
+      const debugPath = path.join(sourceDir, '_debug_combined.md');
+      fs.writeFileSync(debugPath, content, 'utf8');
+      console.log(`\u{1f50d} Debug: saved preprocessed markdown to ${debugPath}`);
+    }
+
+    // Write temporary markdown to temp dir
+    const tempMd = path.join(tempDir, '_temp_word.md');
+    fs.writeFileSync(tempMd, content, 'utf8');
+
+    // Phase 4: Convert to Word with pandoc
+    console.log('\u{1f4dd} Generating Word document...');
+    const resourcePath = path.resolve(sourceDir);
+
+    // Build pandoc command with options
+    const pandocArgs = [
+      `"${tempMd}"`,
+      `-o "${outputPath}"`,
+      '--from markdown',
+      '--to docx',
+      `--resource-path="${resourcePath}"`
+    ];
+    if (args.toc) pandocArgs.push('--toc', '--toc-depth=3');
+    if (args.referenceDoc) {
+      const refDocPath = path.resolve(args.referenceDoc);
+      if (fs.existsSync(refDocPath)) {
+        pandocArgs.push(`--reference-doc="${refDocPath}"`);
+      } else {
+        console.warn(`⚠️  Reference doc not found: ${refDocPath} — using default`);
+      }
+    }
+    if (args.luaFilter) {
+      const filterPath = path.resolve(args.luaFilter);
+      if (fs.existsSync(filterPath)) {
+        pandocArgs.push(`--lua-filter="${filterPath}"`);
+      } else {
+        console.warn(`⚠️  Lua filter not found: ${filterPath} — skipping`);
+      }
+    }
+
+    // NOTE: Page size is applied via OOXML post-processing, not pandoc variables.
+    // The -V geometry:* flags only work for LaTeX output, not docx.
+
+    try {
+      execSync(
+        `pandoc ${pandocArgs.join(' ')}`,
+        { stdio: ['pipe', 'pipe', 'pipe'], timeout: 120000 }
+      );
+    } catch (err) {
+      const stderr = err.stderr ? err.stderr.toString() : String(err);
+      console.error(`ERROR: pandoc failed: ${stderr}`);
+      process.exit(1);
+    }
+
+    // Phase 5: Apply OOXML formatting
+    console.log('\u{1f3a8} Applying formatting...');
+    await postProcessDocx(outputPath, {
+      noFormatTables: args.noFormatTables,
+      pageSize: args.pageSize,
+      style: args.style
+    });
+
+    // Phase 6: Output validation
+    const stats = fs.statSync(outputPath);
+    const sizeKB = stats.size / 1024;
+    if (sizeKB < 5) {
+      console.warn(`\u26a0\ufe0f  Output file is only ${sizeKB.toFixed(1)} KB — may be corrupt or empty`);
+    }
+    console.log(`\u2705 Done! Output: ${outputPath}`);
+    console.log(`   Size: ${sizeKB.toFixed(1)} KB`);
+    if (args.toc) console.log('   \u{1f4d1} Update TOC: Open in Word \u2192 right-click TOC \u2192 Update Field');
+  } finally {
+    // Cleanup temp directory
+    if (!args.keepTemp) {
+      try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch { /* ignore */ }
     } else {
-      console.log('✗ (failed)');
-      replacements.push(`![Diagram ${block.index + 1}](${args.imagesDir}/${pngName})`);
+      console.log(`   \u{1f4c2} Temp files kept at: ${tempDir}`);
     }
   }
+}
 
-  // Phase 2: Convert SVG references to PNG
-  const svgPattern = /!\[([^\]]*)\]\(([^)]+\.svg)\)/g;
-  let svgMatch;
-  while ((svgMatch = svgPattern.exec(content)) !== null) {
-    const [fullMatch, altText, svgRelPath] = svgMatch;
-    const svgPath = path.join(sourceDir, svgRelPath);
+// ---------------------------------------------------------------------------
+// Main (with watch mode support)
+// ---------------------------------------------------------------------------
+async function main() {
+  const args = parseArgs(process.argv);
 
-    if (fs.existsSync(svgPath)) {
-      const pngName = path.basename(svgPath, '.svg') + '.png';
-      const pngPath = path.join(imagesDir, pngName);
-
-      if (!fs.existsSync(pngPath)) {
-        process.stdout.write(`🖼️  Converting SVG: ${path.basename(svgPath)}... `);
-        if (convertSvgToPng(svgPath, pngPath)) {
-          console.log('✓');
-        } else {
-          console.log('✗');
+  // Recursive batch mode: find all .md files in a directory tree
+  if (args.recursive) {
+    const sourceDir = path.resolve(args.source);
+    if (!fs.statSync(sourceDir).isDirectory()) {
+      console.error('--recursive requires source to be a directory');
+      process.exit(1);
+    }
+    const mdFiles = [];
+    const walk = (dir) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+          walk(full);
+        } else if (entry.isFile() && entry.name.endsWith('.md')) {
+          mdFiles.push(full);
         }
       }
-
-      const newRef = `![${altText}](${args.imagesDir}/${pngName}){width=5.8in}`;
-      content = content.replace(fullMatch, newRef);
+    };
+    walk(sourceDir);
+    console.log(`\u{1f4c2} Recursive mode: found ${mdFiles.length} markdown files in ${sourceDir}`);
+    let succeeded = 0, failed = 0;
+    for (const mdFile of mdFiles) {
+      const relPath = path.relative(sourceDir, mdFile);
+      const outFile = mdFile.replace(/\.md$/i, '.docx');
+      const batchArgs = { ...args, source: mdFile, output: outFile, recursive: false };
+      console.log(`\n--- [${succeeded + failed + 1}/${mdFiles.length}] ${relPath} ---`);
+      try {
+        await build(batchArgs);
+        succeeded++;
+      } catch (err) {
+        console.error(`\u274c Failed: ${err.message || err}`);
+        failed++;
+      }
     }
+    console.log(`\n\u{1f4ca} Batch complete: ${succeeded} succeeded, ${failed} failed out of ${mdFiles.length}`);
+    return;
   }
 
-  // Phase 3: Replace mermaid blocks with image references
-  const mermaidPattern = /```mermaid\r?\n[\s\S]*?```/;
-  for (const replacement of replacements) {
-    content = content.replace(mermaidPattern, replacement);
+  // Run initial build
+  await build(args);
+
+  // Watch mode: monitor source for changes and auto-rebuild
+  if (args.watch) {
+    const sourcePath = path.resolve(args.source);
+    console.log(`\n\u{1f440} Watching ${sourcePath} for changes... (Ctrl+C to stop)`);
+    let debounceTimer = null;
+    let building = false;
+
+    fs.watch(sourcePath, { persistent: true }, (_eventType) => {
+      if (building) return;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(async () => {
+        building = true;
+        console.log(`\n\u{1f504} Change detected, rebuilding...`);
+        try {
+          await build(args);
+        } catch (err) {
+          console.error(`\u274c Rebuild failed: ${err.message || err}`);
+        }
+        building = false;
+      }, 500);
+    });
+
+    // Keep process alive
+    process.on('SIGINT', () => {
+      console.log('\n\u{1f44b} Watch mode stopped.');
+      process.exit(0);
+    });
   }
-
-  // Write temporary markdown
-  const tempMd = path.join(sourceDir, '_temp_word.md');
-  fs.writeFileSync(tempMd, content, 'utf8');
-
-  // Phase 4: Convert to Word with pandoc
-  console.log('📝 Generating Word document...');
-  const resourcePath = path.resolve(sourceDir);
-  try {
-    execSync(
-      `pandoc "${tempMd}" -o "${outputPath}" --from markdown --to docx --resource-path="${resourcePath}"`,
-      { stdio: ['pipe', 'pipe', 'pipe'], timeout: 120000 }
-    );
-  } catch (err) {
-    const stderr = err.stderr ? err.stderr.toString() : String(err);
-    console.error(`ERROR: pandoc failed: ${stderr}`);
-    process.exit(1);
-  }
-
-  // Phase 5: Apply OOXML formatting
-  console.log('🎨 Applying formatting...');
-  await postProcessDocx(outputPath, {
-    noFormatTables: args.noFormatTables
-  });
-
-  // Cleanup
-  if (!args.keepTemp) {
-    try { fs.unlinkSync(tempMd); } catch { /* ignore */ }
-  }
-
-  const stats = fs.statSync(outputPath);
-  console.log(`✅ Done! Output: ${outputPath}`);
-  console.log(`   Size: ${(stats.size / 1024).toFixed(1)} KB`);
 }
 
 main().catch(err => {

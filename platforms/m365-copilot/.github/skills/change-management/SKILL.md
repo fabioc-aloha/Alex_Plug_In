@@ -1,6 +1,6 @@
 ---
-name: "Change Management Skill"
-description: "Patterns for organizational change, ADKAR methodology, stakeholder engagement, and adoption strategies."
+name: change-management
+description: Patterns for organizational change, ADKAR methodology, stakeholder engagement, and adoption strategies.
 ---
 
 # Change Management Skill
@@ -248,4 +248,4 @@ Tier 4: Specialists (complex problems)
 ### Supporting Connections
 
 - [cognitive-load] (Low, Considers, Forward) — "Change capacity limits"
-- [meditation-facilitation] (Low, Supports, Forward) — "Reflection on change progress"
+- [meditation] (Low, Supports, Forward) — "Reflection on change progress"

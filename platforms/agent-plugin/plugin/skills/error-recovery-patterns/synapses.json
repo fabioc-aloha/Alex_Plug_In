@@ -1,24 +1,30 @@
 {
-  "skill": "error-recovery-patterns",
-  "inheritance": "inheritable",
+  "schemaVersion": "2.0.0",
+  "skillId": "error-recovery-patterns",
   "connections": [
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "follows",
+      "type": "uses",
       "strength": 0.7,
-      "reason": "Recovery happens after finding the error"
+      "reason": "Recovery happens after finding the error",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
+      "yields": "debugging patterns prerequisite steps"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "reason": "Recovery is part of incident handling"
+      "reason": "Recovery is part of incident handling",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
+      "yields": "incident response supporting context"
     },
     {
       "target": ".github/skills/testing-strategies/SKILL.md",
-      "type": "enables",
+      "type": "supports",
       "strength": 0.9,
-      "reason": "Recovery paths need testing"
+      "reason": "Recovery paths need testing",
+      "when": "When task involves .github/skills/testing strategies/SKILL.md",
+      "yields": "testing strategies capabilities and setup"
     }
   ],
   "triggers": [
@@ -30,5 +36,12 @@
     "error handling"
   ],
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0"
+  "activationContexts": [
+    "retry",
+    "fallback",
+    "rollback",
+    "circuit breaker",
+    "graceful degradation",
+    "error handling"
+  ]
 }

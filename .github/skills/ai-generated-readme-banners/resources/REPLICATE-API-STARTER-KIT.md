@@ -8,18 +8,20 @@
 
 **Pick your model based on the task:**
 
-| Task | Model | Why |
-|------|-------|-----|
-| README banner WITH text/title | `ideogram-ai/ideogram-v2` | Only model with reliable typography |
-| README banner WITHOUT text | `black-forest-labs/flux-1.1-pro` | Best quality/speed balance |
-| Quick test/iteration | `black-forest-labs/flux-schnell` | Cheapest ($0.003), fast |
-| Character/avatar with consistent face | `google/nano-banana-pro` | Requires reference image |
-| Print-quality (4MP+) | `black-forest-labs/flux-1.1-pro-ultra` | Highest resolution |
+| Task                                  | Model                                  | Why                                |
+| ------------------------------------- | -------------------------------------- | ---------------------------------- |
+| README banner WITH text/title         | `ideogram-ai/ideogram-v2`              | Fast reliable typography ($0.08)   |
+| README banner WITH premium text       | `ideogram-ai/ideogram-v3-quality`      | Highest quality typography ($0.09) |
+| README banner WITHOUT text            | `black-forest-labs/flux-1.1-pro`       | Best quality/speed balance         |
+| Quick test/iteration                  | `black-forest-labs/flux-schnell`       | Cheapest ($0.003), fast            |
+| Character/avatar with consistent face | `google/nano-banana-pro`               | Requires reference image           |
+| Print-quality (4MP+)                  | `black-forest-labs/flux-1.1-pro-ultra` | Highest resolution                 |
 
 **Decision Tree:**
 ```
 Need text in image?
-  YES → ideogram-ai/ideogram-v2 ($0.08)
+  YES → Premium quality? → ideogram-ai/ideogram-v3-quality ($0.09)
+        Standard? → ideogram-ai/ideogram-v2 ($0.08)
   NO → Need face consistency from reference?
          YES → google/nano-banana-pro ($0.025)
          NO → Is this production or test?
@@ -122,13 +124,13 @@ This avoids putting tokens in config files that might be committed to git.
 
 ### Configuration Options
 
-| Option | Description |
-|--------|-------------|
-| `--client=claude` | Optimizes tool schemas for Claude/Copilot |
-| `--tools=dynamic` | Enables dynamic endpoint discovery (recommended) |
-| `--tools=static` | Loads all tools upfront (larger context) |
-| `--resource=models` | Filter to specific API resources |
-| `--operation=read` | Filter to read-only operations |
+| Option              | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `--client=claude`   | Optimizes tool schemas for Claude/Copilot        |
+| `--tools=dynamic`   | Enables dynamic endpoint discovery (recommended) |
+| `--tools=static`    | Loads all tools upfront (larger context)         |
+| `--resource=models` | Filter to specific API resources                 |
+| `--operation=read`  | Filter to read-only operations                   |
 
 ### Testing MCP Installation
 
@@ -197,13 +199,14 @@ const replicate = new Replicate({
 
 ### Image Generation Models
 
-| Model | ID | Cost | Best For | Notes |
-|-------|-----|------|----------|-------|
-| **Flux Schnell** | `black-forest-labs/flux-schnell` | $0.003 | Quick iteration, testing | Fast (1-3s), good quality |
-| **Flux 1.1 Pro** | `black-forest-labs/flux-1.1-pro` | $0.04 | Production images, no text | High quality, 10-30s |
-| **Flux 1.1 Pro Ultra** | `black-forest-labs/flux-1.1-pro-ultra` | $0.06 | Print quality (4MP) | Up to 4MP output |
-| **Ideogram v2** | `ideogram-ai/ideogram-v2` | $0.08 | Typography, text in images | Crystal-clear text rendering |
-| **Nano-Banana Pro** | `google/nano-banana-pro` | $0.025 | Face-consistent editing | Uses reference image input |
+| Model                   | ID                                     | Cost   | Best For                   | Notes                          |
+| ----------------------- | -------------------------------------- | ------ | -------------------------- | ------------------------------ |
+| **Flux Schnell**        | `black-forest-labs/flux-schnell`       | $0.003 | Quick iteration, testing   | Fast (1-3s), good quality      |
+| **Flux 1.1 Pro**        | `black-forest-labs/flux-1.1-pro`       | $0.04  | Production images, no text | High quality, 10-30s           |
+| **Flux 1.1 Pro Ultra**  | `black-forest-labs/flux-1.1-pro-ultra` | $0.06  | Print quality (4MP)        | Up to 4MP output               |
+| **Ideogram v2**         | `ideogram-ai/ideogram-v2`              | $0.08  | Typography, text in images | Fast text rendering            |
+| **Ideogram v3 Quality** | `ideogram-ai/ideogram-v3-quality`      | $0.09  | Premium typography         | Highest quality text rendering |
+| **Nano-Banana Pro**     | `google/nano-banana-pro`               | $0.025 | Face-consistent editing    | Uses reference image input     |
 
 ### When to Use Each Model
 
@@ -350,7 +353,7 @@ const response = await fetch(output.toString());
 await writeFile("./avatar.png", Buffer.from(await response.arrayBuffer()));
 ```
 
-### Pattern 3: Typography Banner (Ideogram v2)
+### Pattern 3: Typography Banner (Ideogram v2 / v3 Quality)
 
 ```javascript
 import Replicate from "replicate";
@@ -522,6 +525,7 @@ function estimateCost(model, imageCount) {
     "black-forest-labs/flux-1.1-pro": 0.04,
     "black-forest-labs/flux-1.1-pro-ultra": 0.06,
     "ideogram-ai/ideogram-v2": 0.08,
+    "ideogram-ai/ideogram-v3-quality": 0.09,
     "google/nano-banana-pro": 0.025,
   };
 
@@ -560,6 +564,7 @@ const MODELS = {
   "flux-pro": { id: "black-forest-labs/flux-1.1-pro", cost: 0.04 },
   "flux-ultra": { id: "black-forest-labs/flux-1.1-pro-ultra", cost: 0.06 },
   "ideogram": { id: "ideogram-ai/ideogram-v2", cost: 0.08 },
+  "ideogram-quality": { id: "ideogram-ai/ideogram-v3-quality", cost: 0.09 },
   "nano-banana": { id: "google/nano-banana-pro", cost: 0.025 },
 };
 

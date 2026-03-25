@@ -1,0 +1,38 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "nav-inject",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "muscle": ".github/muscles/nav-inject.cjs",
+    "connections": [
+        {
+            "target": ".github/skills/md-scaffold/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "reason": "Scaffolded files include navigation sentinels that nav-inject populates",
+            "when": "When building a multi-document suite from templates",
+            "yields": "md-scaffold sentinel-ready document structure"
+        },
+        {
+            "target": ".github/skills/md-to-word/SKILL.md",
+            "type": "supports",
+            "strength": 0.7,
+            "reason": "Navigation tables enhance converted Word documents with cross-references",
+            "when": "When converting a multi-file doc suite to Word",
+            "yields": "md-to-word navigation-aware document source"
+        },
+        {
+            "target": ".github/skills/documentation-quality-assurance/SKILL.md",
+            "type": "supports",
+            "strength": 0.75,
+            "reason": "Consistent navigation reduces documentation drift in multi-file suites",
+            "when": "When auditing cross-document navigation integrity",
+            "yields": "documentation-quality-assurance navigation consistency"
+        }
+    ],
+    "activationContexts": [
+        "injecting navigation into markdown files",
+        "maintaining cross-document navigation",
+        "updating nav.json config",
+        "multi-file documentation suite management"
+    ]
+}

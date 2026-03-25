@@ -9,12 +9,12 @@ $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $extensionRoot = Split-Path -Parent $scriptDir
 
-Write-Host "🔍 Validating VS Code Extension Manifest..." -ForegroundColor Cyan
+Write-Host " Validating VS Code Extension Manifest..." -ForegroundColor Cyan
 
 # Load package.json
 $packageJsonPath = Join-Path $extensionRoot "package.json"
 if (-not (Test-Path $packageJsonPath)) {
-    Write-Host "❌ package.json not found at: $packageJsonPath" -ForegroundColor Red
+    Write-Host "[ERROR] package.json not found at: $packageJsonPath" -ForegroundColor Red
     exit 1
 }
 
@@ -36,8 +36,8 @@ if ($manifest.contributes.commands) {
     }
 }
 
-Write-Host "✓ Found $($registeredConfigs.Count) registered configuration properties" -ForegroundColor Green
-Write-Host "✓ Found $($registeredCommands.Count) registered commands" -ForegroundColor Green
+Write-Host "[OK] Found $($registeredConfigs.Count) registered configuration properties" -ForegroundColor Green
+Write-Host "[OK] Found $($registeredCommands.Count) registered commands" -ForegroundColor Green
 
 # Validation results
 $configIssues = @()
@@ -79,7 +79,7 @@ Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse | ForEach-Object {
                     Message  = "Unregistered config with try-catch (OK if intentional)"
                 }
                 if ($Verbose) {
-                    Write-Host "  ⚠️  $fullKey in $relativePath (line $lineNumber) - has try-catch" -ForegroundColor Yellow
+                    Write-Host "  [WARN]  $fullKey in $relativePath (line $lineNumber) - has try-catch" -ForegroundColor Yellow
                 }
             }
             else {
@@ -93,7 +93,7 @@ Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse | ForEach-Object {
             }
         }
         elseif ($Verbose) {
-            Write-Host "  ✓ $fullKey - registered" -ForegroundColor Gray
+            Write-Host "  [OK] $fullKey - registered" -ForegroundColor Gray
         }
     }
 }
@@ -127,7 +127,7 @@ Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse | ForEach-Object {
                 }
             }
             elseif ($Verbose) {
-                Write-Host "  ✓ $command - registered" -ForegroundColor Gray
+                Write-Host "  [OK] $command - registered" -ForegroundColor Gray
             }
         }
     }
@@ -137,7 +137,7 @@ Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse | ForEach-Object {
 Write-Host "`n" -NoNewline
 
 if ($configIssues.Count -gt 0) {
-    Write-Host "❌ Configuration Registration Issues ($($configIssues.Count)):" -ForegroundColor Red
+    Write-Host "[ERROR] Configuration Registration Issues ($($configIssues.Count)):" -ForegroundColor Red
     foreach ($issue in $configIssues) {
         Write-Host "  • $($issue.Key)" -ForegroundColor Red
         Write-Host "    File: $($issue.File):$($issue.Line)" -ForegroundColor Gray
@@ -147,7 +147,7 @@ if ($configIssues.Count -gt 0) {
 }
 
 if ($commandIssues.Count -gt 0) {
-    Write-Host "❌ Command Registration Issues ($($commandIssues.Count)):" -ForegroundColor Red
+    Write-Host "[ERROR] Command Registration Issues ($($commandIssues.Count)):" -ForegroundColor Red
     foreach ($issue in $commandIssues) {
         Write-Host "  • $($issue.Command)" -ForegroundColor Red
         Write-Host "    File: $($issue.File):$($issue.Line)" -ForegroundColor Gray
@@ -157,7 +157,7 @@ if ($commandIssues.Count -gt 0) {
 }
 
 if ($warnings.Count -gt 0) {
-    Write-Host "⚠️  Warnings ($($warnings.Count)):" -ForegroundColor Yellow
+    Write-Host "[WARN]  Warnings ($($warnings.Count)):" -ForegroundColor Yellow
     foreach ($warning in $warnings) {
         Write-Host "  • $($warning.Key) - unregistered but has try-catch" -ForegroundColor Yellow
         Write-Host "    File: $($warning.File):$($warning.Line)" -ForegroundColor Gray
@@ -169,14 +169,14 @@ if ($warnings.Count -gt 0) {
 $totalIssues = $configIssues.Count + $commandIssues.Count
 
 if ($totalIssues -eq 0) {
-    Write-Host "✅ All validations passed!" -ForegroundColor Green
+    Write-Host "[OK] All validations passed!" -ForegroundColor Green
     if ($warnings.Count -gt 0) {
         Write-Host "   Note: $($warnings.Count) warning(s) - review for intentional use" -ForegroundColor Yellow
     }
     exit 0
 }
 else {
-    Write-Host "❌ Found $totalIssues issue(s) that must be fixed before release" -ForegroundColor Red
+    Write-Host "[ERROR] Found $totalIssues issue(s) that must be fixed before release" -ForegroundColor Red
     Write-Host "`nSee .github/skills/vscode-configuration-validation/SKILL.md for guidance" -ForegroundColor Cyan
     exit 1
 }

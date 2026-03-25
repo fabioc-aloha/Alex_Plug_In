@@ -124,11 +124,11 @@ if ($intentional.Count -gt 0) {
 
 Write-Host "`n========================================" -ForegroundColor Yellow
 if ($issues.Count -eq 0 -and $warnings.Count -eq 0) {
-    Write-Host "✅ .github/ is fully self-contained" -ForegroundColor Green
+    Write-Host "[OK] .github/ is fully self-contained" -ForegroundColor Green
 }
 elseif ($issues.Count -eq 0) {
-    Write-Host "⚠️  Self-contained with warnings — review relative uplinks" -ForegroundColor Yellow
+    Write-Host "[WARN]  Self-contained with warnings — review relative uplinks" -ForegroundColor Yellow
 }
 else {
-    Write-Host "❌ External references detected — fix before shipping" -ForegroundColor Red
+    Write-Host "[ERROR] External references detected — fix before shipping" -ForegroundColor Red
 }

@@ -36,10 +36,11 @@
 import Replicate from 'replicate';
 import fs from 'fs-extra';
 import path from 'path';
-import https from 'https';
-import http from 'http';
 import { fileURLToPath } from 'url';
 import { config as loadEnv } from 'dotenv';
+import { encodeToDataUri, downloadFile } from '../.github/muscles/shared/index.mjs';
+import { estimateCost, writeOutput, writeReport } from '../.github/muscles/shared/index.mjs';
+import { loadCharacterConfig } from '../.github/muscles/shared/index.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -67,8 +68,10 @@ const replicate = new Replicate({
 // Canonical traits from Alex at 15 — maintained across all ages
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Load character config from visual-memory.json (with inline fallback)
+const _charConfig = loadCharacterConfig(null, ROOT);
 const ALEX_TRAITS = {
-  immutable: [
+  immutable: _charConfig?.subjects?.alex?.immutableTraits || [
     'curly ginger copper-red hair',
     'striking blue-green eyes',
     'fair skin with light freckles across nose and cheeks',
@@ -248,13 +251,8 @@ TECHNICAL REQUIREMENTS:
 // GENERATION ENGINE
 // ─────────────────────────────────────────────────────────────────────────────
 
-async function encodeImageToDataURI(imagePath) {
-  const buffer = await fs.readFile(imagePath);
-  const base64 = buffer.toString('base64');
-  const ext = path.extname(imagePath).toLowerCase();
-  const mime = ext === '.png' ? 'image/png' : ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg' : 'image/png';
-  return `data:${mime};base64,${base64}`;
-}
+// encodeImageToDataURI replaced by shared/data-uri.cjs encodeToDataUri
+const encodeImageToDataURI = encodeToDataUri;
 
 async function generateWithNanoBanana(prompt, referenceDataURI, outputPath) {
   if (DRY_RUN) {
@@ -276,54 +274,13 @@ async function generateWithNanoBanana(prompt, referenceDataURI, outputPath) {
     },
   });
 
-  // Modern Replicate API: output is a FileObject
-  // Write directly to disk (recommended approach from docs)
-  const { writeFile } = await import('fs/promises');
-  await writeFile(outputPath, output);
+  // Write output (handles FileObject, URL, Buffer, array via shared module)
+  await writeOutput(output, outputPath);
   
   return outputPath;
 }
 
-async function downloadImage(url, filepath) {
-  // Ensure directory exists
-  await fs.ensureDir(path.dirname(filepath));
-  
-  return new Promise((resolve, reject) => {
-    const client = url.startsWith('https') ? https : http;
-    
-    const request = client.get(url, (res) => {
-      // Handle redirects
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return downloadImage(res.headers.location, filepath).then(resolve).catch(reject);
-      }
-      
-      // Check for successful response
-      if (res.statusCode !== 200) {
-        reject(new Error(`HTTP ${res.statusCode}: Failed to download ${url}`));
-        return;
-      }
-      
-      const chunks = [];
-      res.on('data', chunk => chunks.push(chunk));
-      res.on('end', async () => {
-        try {
-          const buffer = Buffer.concat(chunks);
-          await fs.writeFile(filepath, buffer);
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      });
-      res.on('error', reject);
-    });
-    
-    request.on('error', reject);
-    request.setTimeout(60000, () => {
-      request.destroy();
-      reject(new Error('Download timeout'));
-    });
-  });
-}
+// downloadImage replaced by shared/data-uri.cjs downloadFile
 
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN
@@ -353,7 +310,7 @@ async function main() {
   console.log(`  Reference: ${REFERENCE_IMAGE}`);
   console.log(`  Output: ${outputDir}`);
   console.log(`  Ages: ${AGE_PROGRESSION.map(a => a.age).join(', ')}`);
-  console.log(`  Estimated cost: ~$${(AGE_PROGRESSION.length * 0.05).toFixed(2)} (${AGE_PROGRESSION.length} images)`);
+  console.log(`  Estimated cost: ~$${estimateCost('google/nano-banana-pro', AGE_PROGRESSION.length).toFixed(2)} (${AGE_PROGRESSION.length} images)`);
   console.log(`  Dry-run: ${DRY_RUN}`);
   console.log('═══════════════════════════════════════════════════════════════\n');
 
@@ -415,13 +372,13 @@ async function main() {
     dryRun: DRY_RUN,
     successful,
     total: AGE_PROGRESSION.length,
-    estimatedCost: `$${(successful * 0.05).toFixed(2)}`,
+    estimatedCost: `$${estimateCost('google/nano-banana-pro', successful).toFixed(2)}`,
     outputDir,
     results,
   };
 
   const reportPath = path.join(outputDir, 'generation-report.json');
-  await fs.writeJSON(reportPath, report, { spaces: 2 });
+  await writeReport(reportPath, report);
 
   console.log('\n═══════════════════════════════════════════════════════════════');
   console.log('  COMPLETE');

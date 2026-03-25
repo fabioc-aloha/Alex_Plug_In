@@ -4,31 +4,38 @@
   "skillId": "root-cause-analysis",
   "version": "1.1.0",
   "lastValidated": "2026-02-14",
-  "inheritance": "inheritable",
   "connections": [
     {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.8,
-      "reason": "RCA goes deeper than debugging"
+      "reason": "RCA goes deeper than debugging",
+      "when": "When task involves .github/skills/debugging patterns/SKILL.md",
+      "yields": "debugging patterns extended capabilities"
     },
     {
       "target": ".github/skills/incident-response/SKILL.md",
       "type": "complements",
       "strength": 0.7,
-      "reason": "RCA follows incident resolution"
+      "reason": "RCA follows incident resolution",
+      "when": "When task involves .github/skills/incident response/SKILL.md",
+      "yields": "incident response complementary techniques"
     },
     {
       "target": ".github/skills/error-recovery-patterns/SKILL.md",
-      "type": "informs",
+      "type": "feeds",
       "strength": 0.65,
-      "reason": "RCA reveals what recovery is needed"
+      "reason": "RCA reveals what recovery is needed",
+      "when": "When task involves .github/skills/error recovery patterns/SKILL.md",
+      "yields": "error recovery patterns contextual assessment"
     },
     {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "informs",
-      "strength": 0.70,
-      "reason": "Systematic debugging techniques for production build issues"
+      "type": "feeds",
+      "strength": 0.7,
+      "reason": "Systematic debugging techniques for production build issues",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns contextual assessment"
     }
   ],
   "activationPatterns": [
@@ -39,6 +46,15 @@
     "investigate production errors"
   ],
   "triggers": [
+    "root cause",
+    "5 whys",
+    "post-mortem",
+    "why did this happen",
+    "how do we prevent",
+    "TDZ error",
+    "production failure"
+  ],
+  "activationContexts": [
     "root cause",
     "5 whys",
     "post-mortem",

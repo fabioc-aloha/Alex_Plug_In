@@ -31,13 +31,13 @@ $extensionPath = Join-Path $repoRoot "platforms\vscode-extension"
 
 # Validate extension path
 if (-not (Test-Path $extensionPath)) {
-    Write-Host "❌ Extension path not found: $extensionPath" -ForegroundColor Red
+    Write-Host "[ERROR] Extension path not found: $extensionPath" -ForegroundColor Red
     exit 1
 }
 
 Push-Location $repoRoot
 try {
-    Write-Host "`n🚀 VS Code Extension Release" -ForegroundColor Cyan
+    Write-Host "`n VS Code Extension Release" -ForegroundColor Cyan
     Write-Host "   Bump: $BumpType | PreRelease: $PreRelease | DryRun: $DryRun" -ForegroundColor Gray
     Write-Host "   Extension: $extensionPath" -ForegroundColor Gray
 
@@ -47,7 +47,7 @@ try {
         $patLine = Get-Content $envFile | Where-Object { $_ -match '^VSCE_PAT=' }
         if ($patLine) {
             $env:VSCE_PAT = $patLine.Split("=", 2)[1].Trim()
-            Write-Host "   ✅ PAT loaded from .env" -ForegroundColor Green
+            Write-Host "   [OK] PAT loaded from .env" -ForegroundColor Green
         }
     }
     if (-not $env:VSCE_PAT) {
@@ -58,10 +58,10 @@ try {
     Write-Host "`n🔄 Syncing Master Alex to extension package..." -ForegroundColor Yellow
     & "$repoRoot\.github\muscles\build-extension-package.ps1" -SkipCompile
     if ($LASTEXITCODE -ne 0) { throw "Build/sync failed!" }
-    Write-Host "   ✅ Extension .github/ synced from Master Alex" -ForegroundColor Green
+    Write-Host "   [OK] Extension .github/ synced from Master Alex" -ForegroundColor Green
 
     # 1b. Run preflight (from extension folder)
-    Write-Host "`n📋 Gate 1-4: Running preflight checks..." -ForegroundColor Yellow
+    Write-Host "`n[LIST] Gate 1-4: Running preflight checks..." -ForegroundColor Yellow
     & "$scriptDir\release-preflight.ps1" -Package -SkipTests
     if ($LASTEXITCODE -ne 0) { throw "Preflight failed!" }
 
@@ -88,7 +88,7 @@ try {
     Pop-Location
 
     # 3. Update CHANGELOG (in repo root)
-    Write-Host "`n📝 Updating CHANGELOG..." -ForegroundColor Yellow
+    Write-Host "`n Updating CHANGELOG..." -ForegroundColor Yellow
     $date = Get-Date -Format "yyyy-MM-dd"
     $changelog = Get-Content CHANGELOG.md -Raw
     $newEntry = "## [$newVersion] - $date`n`n### Added`n`n### Changed`n`n### Fixed`n`n---`n`n"
@@ -97,20 +97,20 @@ try {
     Write-Host "   Added entry for $newVersion" -ForegroundColor Green
 
     if ($DryRun) {
-        Write-Host "`n⚠️ DRY RUN - Stopping before commit" -ForegroundColor Yellow
+        Write-Host "`n[WARN] DRY RUN - Stopping before commit" -ForegroundColor Yellow
         Write-Host "   Review changes: git diff" -ForegroundColor Gray
         Write-Host "   Reset if needed: git checkout -- ." -ForegroundColor Gray
         exit 0
     }
 
     # 4. Gate 5: Human confirmation (skip in automated mode)
-    Write-Host "`n🔍 Gate 5: Human Review" -ForegroundColor Yellow
+    Write-Host "`n Gate 5: Human Review" -ForegroundColor Yellow
     Write-Host "   - CHANGELOG entry for $newVersion added" -ForegroundColor Gray
     Write-Host "   - Version bumped to $newVersion" -ForegroundColor Gray
     Write-Host "   - Proceeding with commit, tag, push, and publish..." -ForegroundColor Gray
 
     # 5. Commit and tag
-    Write-Host "`n📦 Committing and tagging..." -ForegroundColor Yellow
+    Write-Host "`n[PKG] Committing and tagging..." -ForegroundColor Yellow
     git add -A
     git commit -m "chore: release v$newVersion"
     git tag "v$newVersion"
@@ -122,7 +122,7 @@ try {
     git push --tags
 
     # 7. Publish (from extension folder)
-    Write-Host "`n🎯 Publishing to marketplace..." -ForegroundColor Yellow
+    Write-Host "`n Publishing to marketplace..." -ForegroundColor Yellow
     Push-Location $extensionPath
     
     if ($PreRelease) {
@@ -134,7 +134,7 @@ try {
     
     Pop-Location
 
-    Write-Host "`n✅ Release v$newVersion complete!" -ForegroundColor Green
+    Write-Host "`n[OK] Release v$newVersion complete!" -ForegroundColor Green
     Write-Host "   Marketplace: https://marketplace.visualstudio.com/items?itemName=$publisher.$extName" -ForegroundColor Gray
 }
 finally {

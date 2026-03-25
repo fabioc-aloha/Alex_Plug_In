@@ -55,12 +55,12 @@ Search this index when processing any task request:
 | bicep-avm-mastery | deploy bicep, azure infrastructure, write bicep module, avm template, infrastructure as code |
 | book-publishing | publish book, markdown to pdf, pandoc, lualatex, print pdf, digital pdf, book pipeline |
 | bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
-| brand-asset-management | branding, logo, banner, brand assets, marketplace description, store listing, visual identity |
-| correax-brand | design system, brand colors, CorreaX palette, typography, banner pattern, design tokens, color system, accent colors, CSS variables, brand identity, visual identity |
+| brand-asset-management | branding, logo, banner, brand assets, marketplace description, store listing, visual identity, brand guidelines |
+| correax-brand | CorreaX palette, CorreaX brand, CorreaX design, banner pattern, design tokens, color system, accent colors, CSS variables, correax colors |
 | business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
 | career-development | resume, cv, interview prep, job search, cover letter, portfolio, linkedin profile, career planning, salary negotiation |
 | change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
-| citation-management | manage citations, reference list, bibliography, zotero, mendeley, cite sources |
+| citation-management | manage citations, reference list, bibliography, zotero, mendeley, citation format, apa format, bibtex |
 | chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension, @mention, register participant, language model api, lm tool, agent skill vs participant, build copilot participant, create @participant, ai extension, copilot chat extension, llm in extension |
 | character-aging-progression | age progression, aging character, life stages, generate ages, avatar aging, birthday images, age-based avatar |
 | code-review | review code, review pr, feedback comment, blocking issue, approve merge |
@@ -68,6 +68,7 @@ Search this index when processing any task request:
 | coaching-techniques | coach user, mentoring, skill development, learning support, feedback |
 | cognitive-symbiosis | ai partnership, cognitive symbiosis, human-ai collaboration, ai identity, consciousness integration |
 | comedy-writing | joke structure, standup comedy, comedic timing, callback patterns, sketch writing, humor, satire, set construction |
+| converter-qa | converter qa, test converters, run converter tests, validate conversion, converter regression, converter assertions |
 | counseling-psychology | therapeutic frameworks, counseling assessment, mental health, therapy documentation, client wellbeing, psychological assessment |
 | creative-writing | write story, character arc, plot structure, dialogue, narrative |
 | cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
@@ -89,11 +90,11 @@ Search this index when processing any task request:
 | flux-brand-finetune | flux lora, fine-tune brand, train replicate, brand consistency, lora training, trigger word |
 | foundry-agent-platform | foundry agent, azure ai foundry, deploy agent, agent orchestration, foundry deploy, ai agent platform |
 | frustration-recognition | detect frustration, user struggling, stuck, overwhelmed, patience |
-| ⭐ gamma-presentations | gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use pitch |
+| ⭐ gamma-presentations | gamma, gamma app, gamma api, gamma deck, gamma presentation |
 | game-design | game mechanics, level design, player psychology, systems balancing, narrative design, gameplay, npc, quest design |
 | git-workflow | git commit, git recovery, undo commit, restore file, branch strategy, git status, merge conflict, rebase, git worktrees, background agent git, stash changes, cherry pick, undo push, reset branch, clean git history |
 | global-knowledge | search knowledge, cross-project, find pattern, save insight, reuse solution, look in global knowledge, gk search, previously learned, transfer knowledge, knowledge base, curate gk, maintain knowledge, audit gk, sync knowledge, push gk, pull gk, gk sync, promote to global |
-| global-knowledge-sync | gk sync, sync global knowledge, push insights, pull knowledge, bidirectional sync, knowledge repository |
+| global-knowledge-sync | sync global knowledge, push insights, pull knowledge, bidirectional sync, knowledge repository |
 | grant-writing | write grant, nsf proposal, nih application, specific aims, funding |
 | graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
 | heir-curation | curate heir, package extension, exclude files, clean payload, heir audit |
@@ -114,6 +115,8 @@ Search this index when processing any task request:
 | localization | translate, i18n, localize app, language detection, rtl support |
 | m365-agent-debugging | debug m365 agent, declarative agent, manifest validation, copilot agent, agent not working, agent not responding, conversation starters not showing, da validation, copilot not responding, teams app fails, schema version, declarativeagent.json, capability not working, sideload fails |
 | markdown-mermaid | create diagram, mermaid syntax, flowchart, sequence diagram, visualize, draw architecture, make a chart, show this as diagram, visualize process, document design, mermaid flowchart, render diagram, ataccu, github pastel, diagram type, architecture diagram, diagram not rendering |
+| md-scaffold | scaffold markdown, create document template, new report, new tutorial, starter markdown, converter-ready template, email template |
+| md-to-eml | convert to email, markdown to email, generate eml, email newsletter, eml export, rfc 5322, email-safe html |
 | md-to-word | convert to word, export docx, markdown to word, stakeholder document, export document, word document, docx export, pandoc convert |
 | mcp-development | build mcp server, mcp tools, model context protocol, mcp client, connect ai to api, give copilot access to data, tool for agent, expose data to ai, ai tool server, mcp typescript, mcp stdio, mcp http, tool schema, resource uri, mcp inspector |
 | meditation | meditate, consolidate knowledge, reflect session, memory integration, guide meditation, four r's, deep dive |
@@ -121,12 +124,13 @@ Search this index when processing any task request:
 | microsoft-graph-api | call graph api, integrate m365, graph authentication, read calendar, send mail, access office data, read teams messages, get user presence, m365 api, graph sdk, msal, microsoft 365 data, graph permissions, delegated access, read sharepoint, people api, graph endpoint, beta graph |
 | multi-agent-orchestration | orchestrate agents, decompose task, delegate subtask, coordinate agents |
 | muscle-memory-recognition | repetitive task, automate this, script this, heavy lifting, we did this before, muscle |
+| nav-inject | inject navigation, nav json, cross-document navigation, document navigation, navigation table, multi-file nav |
 | observability-monitoring | instrument logs, collect metrics, add tracing, setup monitoring, create alerts |
 | performance-profiling | profile performance, find bottleneck, analyze memory, cpu profiling, benchmark code |
 | persona-detection | detect persona, project type, know your customer, welcome screen, sidebar persona, workspace classification |
 | pii-privacy-regulations | gdpr compliance, pii handling, data protection, privacy audit, consent |
-| pptx-generation | generate pptx, powerpoint slides, md to pptx, pptxgenjs, programmatic slides, use auto |
-| ⭐ presentation-tool-selection | which presentation tool, marp vs gamma, use slides, use pitch, use auto, slide deck options |
+| pptx-generation | generate pptx, pptxgenjs, programmatic slides, offline pptx, pptxgen |
+| ⭐ presentation-tool-selection | which presentation tool, marp vs gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use slides, use pitch, use auto, slide deck options, powerpoint slides, md to pptx |
 | post-mortem | run post-mortem, blameless review, incident analysis, action items, 5 whys |
 | practitioner-research | research methodology, case study, evidence collection, academic writing |
 | privacy-responsible-ai | responsible ai, ethical ai, bias detection, fairness, data minimization, gdpr compliance, privacy concerns, data protection, ai ethics, eu ai act, pii in ai, consent management, ai regulation, high risk ai, privacy by design |

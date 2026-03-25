@@ -28,23 +28,23 @@ if (-not (Test-Path $m365Dir)) {
 
 Push-Location $m365Dir
 try {
-    Write-Host "`n🚀 M365 Copilot Agent Release" -ForegroundColor Cyan
+    Write-Host "`n M365 Copilot Agent Release" -ForegroundColor Cyan
     Write-Host "   Environment: $Environment" -ForegroundColor Gray
 
     # 1. Check dependencies
-    Write-Host "`n📋 Checking dependencies..." -ForegroundColor Yellow
+    Write-Host "`n[LIST] Checking dependencies..." -ForegroundColor Yellow
     $teamsapp = Get-Command teamsapp -ErrorAction SilentlyContinue
     if (-not $teamsapp) {
         Write-Host "   Installing @microsoft/teamsapp-cli..." -ForegroundColor Gray
         npm install -g @microsoft/teamsapp-cli
     }
-    Write-Host "   ✅ teamsapp CLI available" -ForegroundColor Green
+    Write-Host "   [OK] teamsapp CLI available" -ForegroundColor Green
 
     # 2. Package with teamsapp (resolves variables)
-    Write-Host "`n📦 Packaging agent..." -ForegroundColor Yellow
+    Write-Host "`n[PKG] Packaging agent..." -ForegroundColor Yellow
     npx teamsapp package --env $Environment
     if ($LASTEXITCODE -ne 0) { throw "Packaging failed!" }
-    Write-Host "   ✅ Base package created" -ForegroundColor Green
+    Write-Host "   [OK] Base package created" -ForegroundColor Green
 
     # 3. Fix: teamsapp doesn't include declarativeAgent.json - rebuild with all files
     $buildDir = Join-Path $m365Dir "appPackage\build"
@@ -75,7 +75,7 @@ try {
         
         $finalPkg = Join-Path $buildDir "appPackage.final.zip"
         Compress-Archive -Path "$finalDir\*" -DestinationPath $finalPkg -Force
-        Write-Host "   ✅ Final package with declarativeAgent.json" -ForegroundColor Green
+        Write-Host "   [OK] Final package with declarativeAgent.json" -ForegroundColor Green
     }
 
     # 4. Find package (prefer final, fallback to base)
@@ -92,13 +92,13 @@ try {
     Write-Host "   Package: $($pkg.Name) ($([math]::Round($pkg.Length/1KB, 1)) KB)" -ForegroundColor Gray
 
     # 5. Validate
-    Write-Host "`n✅ Validating package..." -ForegroundColor Yellow
+    Write-Host "`n[OK] Validating package..." -ForegroundColor Yellow
     npx teamsapp validate --package-file $pkg.FullName
     if ($LASTEXITCODE -ne 0) { 
-        Write-Host "   ⚠️ Validation warnings (review output above)" -ForegroundColor Yellow
+        Write-Host "   [WARN] Validation warnings (review output above)" -ForegroundColor Yellow
     }
     else {
-        Write-Host "   ✅ Validation passed" -ForegroundColor Green
+        Write-Host "   [OK] Validation passed" -ForegroundColor Green
     }
     
     # Verify package contents
@@ -109,16 +109,16 @@ try {
     $verifyFiles | ForEach-Object { $sizeKB = [math]::Round($_.Length / 1KB, 1); Write-Host "   - $($_.Name) ($sizeKB KB)" -ForegroundColor Gray }
     
     if (-not (Test-Path (Join-Path $verifyDir "declarativeAgent.json"))) {
-        throw "❌ CRITICAL: declarativeAgent.json missing from package!"
+        throw "[ERROR] CRITICAL: declarativeAgent.json missing from package!"
     }
 
     if ($Validate) {
-        Write-Host "`n⚠️ Validation only - stopping here" -ForegroundColor Yellow
+        Write-Host "`n[WARN] Validation only - stopping here" -ForegroundColor Yellow
         exit 0
     }
 
     # 5. Next steps
-    Write-Host "`n📋 Next Steps (Manual):" -ForegroundColor Cyan
+    Write-Host "`n[LIST] Next Steps (Manual):" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "   1. Open Developer Portal:" -ForegroundColor White
     Write-Host "      https://dev.teams.microsoft.com/apps" -ForegroundColor Blue
@@ -127,17 +127,17 @@ try {
     Write-Host "      $($pkg.FullName)" -ForegroundColor Gray
     Write-Host ""
     Write-Host "   3. Test in Teams/M365 Copilot:" -ForegroundColor White
-    Write-Host "      - Open Teams → Apps → Upload a custom app" -ForegroundColor Gray
-    Write-Host "      - Or use M365 Copilot → Your agents" -ForegroundColor Gray
+    Write-Host "      - Open Teams -> Apps -> Upload a custom app" -ForegroundColor Gray
+    Write-Host "      - Or use M365 Copilot -> Your agents" -ForegroundColor Gray
     Write-Host ""
     Write-Host "   4. Submit for approval (if publishing to org):" -ForegroundColor White
-    Write-Host "      Developer Portal → Your app → Publish → Submit" -ForegroundColor Gray
+    Write-Host "      Developer Portal -> Your app -> Publish -> Submit" -ForegroundColor Gray
     Write-Host ""
 
     # Copy path to clipboard if possible
     try {
         $pkg.FullName | Set-Clipboard
-        Write-Host "   📋 Package path copied to clipboard" -ForegroundColor Green
+        Write-Host "   [LIST] Package path copied to clipboard" -ForegroundColor Green
     }
     catch {
         # Clipboard not available, ignore

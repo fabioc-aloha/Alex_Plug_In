@@ -96,4 +96,4 @@ description: "Ethical reasoning and moral psychology framework"
 
 ### Cross-Domain Ethical Applications
 - [.github/prompts/cross-domain-transfer.prompt.md] (Medium, Validates, Forward) - "Ethical cross-domain pattern transfer"
-- [.github/prompts/domain-learning.prompt.md] (Medium, Oversees, Forward) - "Domain learning ethical oversight"
+- [.github/prompts/learn.prompt.md] (Medium, Oversees, Forward) - "Domain learning ethical oversight"

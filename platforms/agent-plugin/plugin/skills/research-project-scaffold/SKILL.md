@@ -1,6 +1,6 @@
 ---
-name: "Research Project Scaffold"
-description: "Scaffolding academic research projects and refactoring existing ones for Alex-assisted workflows"
+name: research-project-scaffold
+description: Scaffolding academic research projects and refactoring existing ones for Alex-assisted workflows
 ---
 
 # Research Project Scaffold Skill
@@ -366,7 +366,7 @@ analysis/outputs/figure-1-demographics.png   # Matches paper reference
 - **practitioner-research**: Use for publication workflows (Ship→Document→Promote)
 - **project-scaffolding**: Base patterns for folder structure
 - **bootstrap-learning**: For learning new research methods
-- **writing-publication**: For manuscript preparation
+- **academic-research**: For manuscript preparation
 
 ---
 

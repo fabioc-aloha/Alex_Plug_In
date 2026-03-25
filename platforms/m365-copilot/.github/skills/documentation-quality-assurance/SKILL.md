@@ -338,6 +338,27 @@ Run this 10-item checklist for any documentation review. **Semantic checks first
 
 **Rule**: Never mark a doc suite "clean" based only on Phase 2 passing. Phase 1 semantic checks are non-negotiable.
 
+## TODO Files as Self-Models
+
+A TODO list that contains completed work is worse than no TODO list. TODO.md is a **self-model** — when read at session start, it forms a mental picture of what exists and what doesn't. Completed tasks masquerading as pending create:
+
+1. **Rediscovery tax** — work already done gets re-investigated
+2. **False urgency** — energy directed at "building" something already built
+
+### The Fix: Done Section First
+
+```markdown
+## Done — Audited [date]
+- [x] secretScanner.ts ported to shared/utils/
+- [x] All 15 extension.ts files implemented
+
+## Next
+- [ ] npm run compile — verify TypeScript
+- [ ] F5 smoke test in Extension Development Host
+```
+
+**Maintenance Rule**: During every meditation or sprint transition, audit TODO.md first. Move completed items to Done. A stale self-model wastes more time than the audit costs.
+
 ## CHANGELOG Best Practices
 
 | Practice | Why |

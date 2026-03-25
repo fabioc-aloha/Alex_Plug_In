@@ -69,10 +69,10 @@ if (1 -in $runSections) {
     Write-Host "  copilot-instructions: $($copilotMatch.Groups[1].Value)"
     
     if ($pkgVersion -eq $changelogMatch.Groups[1].Value -and $pkgVersion -eq $copilotMatch.Groups[1].Value) {
-        Write-Host "  ✅ Versions aligned" -ForegroundColor Green
+        Write-Host "  [OK] Versions aligned" -ForegroundColor Green
     }
     else {
-        Write-Host "  ❌ Version mismatch" -ForegroundColor Red
+        Write-Host "  [ERROR] Version mismatch" -ForegroundColor Red
         Add-Issue "Version mismatch"
     }
 }
@@ -90,11 +90,11 @@ if (2 -in $runSections) {
     Write-Host "  Master instructions: $masterInstructions | Heir instructions: $heirInstructions"
     
     if ($masterSkills -gt $heirSkills + 10) {
-        Write-Host "  ⚠️ Heir may need sync" -ForegroundColor Yellow
+        Write-Host "  [WARN] Heir may need sync" -ForegroundColor Yellow
         Add-Warning "Heir skills behind by $($masterSkills - $heirSkills)"
     }
     else {
-        Write-Host "  ✅ Heir appears synced" -ForegroundColor Green
+        Write-Host "  [OK] Heir appears synced" -ForegroundColor Green
     }
 }
 
@@ -113,9 +113,9 @@ if (3 -in $runSections) {
         Write-Host "  Inheritable (default): $($totalSkills - $exclusionLines)"
     }
     else {
-        Write-Host "  ⚠️ SKILL_EXCLUSIONS not found in sync-architecture.cjs" -ForegroundColor Yellow
+        Write-Host "  [WARN] SKILL_EXCLUSIONS not found in sync-architecture.cjs" -ForegroundColor Yellow
     }
-    Write-Host "✅ Inheritance checked" -ForegroundColor Green
+    Write-Host "[OK] Inheritance checked" -ForegroundColor Green
 }
 
 # === SECTION 4: Safety Imperatives ===
@@ -130,11 +130,11 @@ if (4 -in $runSections) {
         if (Test-Path $check.File) {
             $content = Get-Content $check.File -Raw
             $found = $content -match [regex]::Escape($check.Check)
-            if ($found) { Write-Host "  ✅ $($check.Purpose)" -ForegroundColor Green }
-            else { Write-Host "  ❌ $($check.Purpose) MISSING" -ForegroundColor Red; Add-Issue $check.Purpose }
+            if ($found) { Write-Host "  [OK] $($check.Purpose)" -ForegroundColor Green }
+            else { Write-Host "  [ERROR] $($check.Purpose) MISSING" -ForegroundColor Red; Add-Issue $check.Purpose }
         }
         else {
-            Write-Host "  ❌ FILE MISSING: $($check.File)" -ForegroundColor Red
+            Write-Host "  [ERROR] FILE MISSING: $($check.File)" -ForegroundColor Red
             Add-Issue "Missing: $($check.File)"
         }
     }
@@ -149,7 +149,7 @@ if (5 -in $runSections) {
         Write-Host "  Build age: $age hours" -ForegroundColor $(if ($age -lt 24) { 'Green' }else { 'Yellow' })
     }
     else {
-        Write-Host "  ⚠️ No build found" -ForegroundColor Yellow
+        Write-Host "  [WARN] No build found" -ForegroundColor Yellow
         Add-Warning "No dist/extension.js"
     }
 }
@@ -164,7 +164,7 @@ if (6 -in $runSections) {
         if (Test-Path $ref.Doc) {
             $content = Get-Content $ref.Doc -Raw
             $found = $content -match [regex]::Escape($ref.MustLink)
-            $status = if ($found) { "✅" } else { "⚠️" }
+            $status = if ($found) { "[OK]" } else { "[WARN]" }
             Write-Host "  $status $($ref.Doc) -> $($ref.MustLink)"
             if (-not $found) { Add-Warning "$($ref.Doc) missing link to $($ref.MustLink)" }
         }
@@ -174,7 +174,7 @@ if (6 -in $runSections) {
 # === SECTION 7: Synapse Health ===
 if (7 -in $runSections) {
     Write-Section 7 "Synapse Network Health"
-    & "$musclesPath\validate-synapses.ps1" 2>&1 | Select-String "✅|❌|⚠️|Valid|Invalid|Error"
+    & "$musclesPath\validate-synapses.ps1" 2>&1 | Select-String "[OK]|[ERROR]|[WARN]|Valid|Invalid|Error"
 }
 
 # === SECTION 8: alex_docs Audit ===
@@ -188,11 +188,11 @@ if (8 -in $runSections) {
     # Check deprecated terms
     $deprecated = Select-String -Path "alex_docs/*.md" -Pattern 'DK-|domain-knowledge/' -ErrorAction SilentlyContinue
     if ($deprecated) {
-        Write-Host "  ⚠️ Deprecated terms found in alex_docs" -ForegroundColor Yellow
+        Write-Host "  [WARN] Deprecated terms found in alex_docs" -ForegroundColor Yellow
         Add-Warning "Deprecated terminology in alex_docs"
     }
     else {
-        Write-Host "  ✅ No deprecated terms" -ForegroundColor Green
+        Write-Host "  [OK] No deprecated terms" -ForegroundColor Green
     }
 }
 
@@ -206,10 +206,10 @@ if (9 -in $runSections) {
             Select-Object -ExpandProperty Value | Sort-Object -Unique).Count
         Write-Host "  Skills: $skills | Diagram nodes: $nodes"
         if ($skills -eq $nodes) {
-            Write-Host "  ✅ MATCH" -ForegroundColor Green
+            Write-Host "  [OK] MATCH" -ForegroundColor Green
         }
         else {
-            Write-Host "  ⚠️ MISMATCH" -ForegroundColor Yellow
+            Write-Host "  [WARN] MISMATCH" -ForegroundColor Yellow
             Add-Warning "Skill diagram out of sync"
         }
     }
@@ -224,11 +224,11 @@ if (10 -in $runSections) {
     $windowOpen = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'window\.open\(' -ErrorAction SilentlyContinue
     $locationReload = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'location\.reload\(\)' -ErrorAction SilentlyContinue
     
-    if ($windowOpen) { Write-Host "  ⚠️ window.open() found (dead in WebViews)" -ForegroundColor Yellow; Add-Warning "window.open in WebView" }
-    else { Write-Host "  ✅ No window.open()" -ForegroundColor Green }
+    if ($windowOpen) { Write-Host "  [WARN] window.open() found (dead in WebViews)" -ForegroundColor Yellow; Add-Warning "window.open in WebView" }
+    else { Write-Host "  [OK] No window.open()" -ForegroundColor Green }
     
-    if ($locationReload) { Write-Host "  ⚠️ location.reload() found (dead in WebViews)" -ForegroundColor Yellow; Add-Warning "location.reload in WebView" }
-    else { Write-Host "  ✅ No location.reload()" -ForegroundColor Green }
+    if ($locationReload) { Write-Host "  [WARN] location.reload() found (dead in WebViews)" -ForegroundColor Yellow; Add-Warning "location.reload in WebView" }
+    else { Write-Host "  [OK] No location.reload()" -ForegroundColor Green }
 }
 
 # === SECTION 11: Dependency Health ===
@@ -254,15 +254,15 @@ if (12 -in $runSections) {
         $age = [int]((Get-Date) - $dist.LastWriteTime).TotalHours
         Write-Host "  Last build: $age hours ago"
         if ($age -lt 24) {
-            Write-Host "  ✅ Recent build exists" -ForegroundColor Green
+            Write-Host "  [OK] Recent build exists" -ForegroundColor Green
         }
         else {
-            Write-Host "  ⚠️ Build is stale ($age hours)" -ForegroundColor Yellow
+            Write-Host "  [WARN] Build is stale ($age hours)" -ForegroundColor Yellow
             Add-Warning "Build is $age hours old"
         }
     }
     else {
-        Write-Host "  ❌ No build found" -ForegroundColor Red
+        Write-Host "  [ERROR] No build found" -ForegroundColor Red
         Add-Issue "No dist/extension.js"
     }
     # Tip for manual check
@@ -283,13 +283,13 @@ if (13 -in $runSections) {
         if ($results) { $secretsFound = $true }
     }
     
-    if ($secretsFound) { Write-Host "  ⚠️ Potential secrets in code" -ForegroundColor Yellow; Add-Warning "Potential secrets" }
-    else { Write-Host "  ✅ No secrets detected" -ForegroundColor Green }
+    if ($secretsFound) { Write-Host "  [WARN] Potential secrets in code" -ForegroundColor Yellow; Add-Warning "Potential secrets" }
+    else { Write-Host "  [OK] No secrets detected" -ForegroundColor Green }
     
     # CSP check
     $csp = Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern 'Content-Security-Policy|getNonce' -ErrorAction SilentlyContinue
-    if ($csp) { Write-Host "  ✅ CSP implemented" -ForegroundColor Green }
-    else { Write-Host "  ⚠️ No CSP found" -ForegroundColor Yellow }
+    if ($csp) { Write-Host "  [OK] CSP implemented" -ForegroundColor Green }
+    else { Write-Host "  [WARN] No CSP found" -ForegroundColor Yellow }
 }
 
 # === SECTION 14: Bundle Size ===
@@ -299,8 +299,8 @@ if (14 -in $runSections) {
     if ($dist) {
         $sizeKB = [math]::Round($dist.Length / 1KB, 1)
         Write-Host "  Bundle: $sizeKB KB"
-        if ($sizeKB -gt 500) { Write-Host "  ⚠️ Large bundle" -ForegroundColor Yellow; Add-Warning "Large bundle: $sizeKB KB" }
-        else { Write-Host "  ✅ Size acceptable" -ForegroundColor Green }
+        if ($sizeKB -gt 500) { Write-Host "  [WARN] Large bundle" -ForegroundColor Yellow; Add-Warning "Large bundle: $sizeKB KB" }
+        else { Write-Host "  [OK] Size acceptable" -ForegroundColor Green }
     }
 }
 
@@ -325,10 +325,10 @@ if (16 -in $runSections) {
         $pkgVersion = (Get-Content "$extPath/package.json" | ConvertFrom-Json).version
         
         if ($versions.Count -gt 0 -and $versions[0].Groups[1].Value -eq $pkgVersion) {
-            Write-Host "  ✅ Changelog matches package.json ($pkgVersion)" -ForegroundColor Green
+            Write-Host "  [OK] Changelog matches package.json ($pkgVersion)" -ForegroundColor Green
         }
         else {
-            Write-Host "  ⚠️ Changelog may need update" -ForegroundColor Yellow
+            Write-Host "  [WARN] Changelog may need update" -ForegroundColor Yellow
             Add-Warning "Changelog version mismatch"
         }
     }
@@ -351,11 +351,11 @@ if (17 -in $runSections) {
         if ($results) { $found += $entry.Key }
     }
     if ($found) {
-        Write-Host "  ⚠️ Deprecated APIs: $($found -join ', ')" -ForegroundColor Yellow
+        Write-Host "  [WARN] Deprecated APIs: $($found -join ', ')" -ForegroundColor Yellow
         Add-Warning "Deprecated APIs in use"
     }
     else {
-        Write-Host "  ✅ No deprecated APIs" -ForegroundColor Green
+        Write-Host "  [OK] No deprecated APIs" -ForegroundColor Green
     }
 }
 
@@ -384,7 +384,7 @@ if (19 -in $runSections) {
 if (20 -in $runSections) {
     Write-Section 20 "Localization"
     $hasL10n = (Test-Path "$extPath/l10n") -or (Test-Path "$extPath/package.nls.json")
-    if ($hasL10n) { Write-Host "  ✅ l10n configured" -ForegroundColor Green }
+    if ($hasL10n) { Write-Host "  [OK] l10n configured" -ForegroundColor Green }
     else { Write-Host "  [Info] No l10n (optional)" }
 }
 
@@ -393,10 +393,10 @@ if (21 -in $runSections) {
     Write-Section 21 "Asset Integrity"
     $pkg = Get-Content "$extPath/package.json" | ConvertFrom-Json
     if ($pkg.icon -and (Test-Path "$extPath/$($pkg.icon)")) {
-        Write-Host "  ✅ Icon exists" -ForegroundColor Green
+        Write-Host "  [OK] Icon exists" -ForegroundColor Green
     }
     else {
-        Write-Host "  ⚠️ Icon missing or not configured" -ForegroundColor Yellow
+        Write-Host "  [WARN] Icon missing or not configured" -ForegroundColor Yellow
     }
 }
 
@@ -410,10 +410,10 @@ if (22 -in $runSections) {
     )
     foreach ($cfg in $configs) {
         if (Test-Path $cfg.File) {
-            Write-Host "  ✅ $($cfg.Name)" -ForegroundColor Green
+            Write-Host "  [OK] $($cfg.Name)" -ForegroundColor Green
         }
         else {
-            Write-Host "  ⚠️ $($cfg.Name) missing" -ForegroundColor Yellow
+            Write-Host "  [WARN] $($cfg.Name) missing" -ForegroundColor Yellow
         }
     }
 }
@@ -424,15 +424,15 @@ Write-Host "  AUDIT SUMMARY" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 
 if ($script:issues.Count -eq 0 -and $script:warnings.Count -eq 0) {
-    Write-Host "✅ All checks passed!" -ForegroundColor Green
+    Write-Host "[OK] All checks passed!" -ForegroundColor Green
 }
 else {
     if ($script:issues.Count -gt 0) {
-        Write-Host "`n❌ ISSUES ($($script:issues.Count)):" -ForegroundColor Red
+        Write-Host "`n[ERROR] ISSUES ($($script:issues.Count)):" -ForegroundColor Red
         $script:issues | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
     }
     if ($script:warnings.Count -gt 0) {
-        Write-Host "`n⚠️ WARNINGS ($($script:warnings.Count)):" -ForegroundColor Yellow
+        Write-Host "`n[WARN] WARNINGS ($($script:warnings.Count)):" -ForegroundColor Yellow
         $script:warnings | ForEach-Object { Write-Host "  - $_" -ForegroundColor Yellow }
     }
 }

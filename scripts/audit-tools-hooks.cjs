@@ -2,9 +2,15 @@
 /**
  * Hooks & Tools Consistency Audit
  * Validates hooks.json scripts, MCP tool registrations, and extension tool registrations.
+ * 
+ * Usage: node scripts/audit-tools-hooks.cjs [--json]
+ * Alex-first: Use --json for machine-consumable output
  */
 const fs = require('fs');
 const path = require('path');
+
+// Alex-first: JSON output mode
+const JSON_MODE = process.argv.includes('--json');
 
 const base = process.cwd();
 const issues = [];
@@ -206,6 +212,18 @@ if (fs.existsSync(pkgJson)) {
 // ── Summary ────────────────────────────────────────────────────
 const bugs = issues.filter(i => i.startsWith('BUG:'));
 const warns = issues.filter(i => i.startsWith('WARN:'));
+
+// Alex-first: JSON output
+if (JSON_MODE) {
+    const jsonResult = {
+        passed: bugs.length === 0,
+        bugs: bugs.map(b => b.replace('BUG: ', '')),
+        warnings: warns.map(w => w.replace('WARN: ', ''))
+    };
+    console.log(JSON.stringify(jsonResult, null, 2));
+    process.exit(bugs.length > 0 ? 1 : 0);
+}
+
 console.log('\n=== ISSUES (' + issues.length + ': ' + bugs.length + ' bugs, ' + warns.length + ' warnings) ===');
 issues.forEach(i => console.log('  ' + i));
 

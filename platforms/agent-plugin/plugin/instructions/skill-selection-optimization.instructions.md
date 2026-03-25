@@ -19,7 +19,7 @@ Proactive pre-task cognitive resource planning. Before executing complex tasks, 
 | **Skill Activation** (reactive) | Safety net during execution | During response formation |
 | **Deep Thinking** | Systematic problem analysis | During execution |
 
-This protocol fills the gap between session-level planning and reactive skill-activation.
+This protocol fills the gap between session-level planning and reactive memory-activation.
 
 ## Activation Triggers
 
@@ -57,7 +57,7 @@ Parse the request and classify:
 
 ### Phase 1: Skill Survey
 
-Scan the **action-keyword index** in `skill-activation/SKILL.md` for ALL matching skills:
+Scan the **action-keyword index** in `memory-activation/SKILL.md` for ALL matching skills:
 
 1. **Extract all action verbs and domain nouns** from the request
 2. **Match against the index** — collect ALL hits, not just the first match
@@ -169,7 +169,7 @@ When deep thinking is also triggered:
 - If task shifts domain mid-execution, Pivot Detection Protocol re-evaluates focus
 
 ### With Reactive Skill Activation
-Skill Selection Optimization runs BEFORE execution. The reactive skill-activation system remains as a safety net DURING execution. If the reactive system fires, it means the proactive system missed something — that's a learning signal.
+Skill Selection Optimization runs BEFORE execution. The reactive memory-activation system remains as a safety net DURING execution. If the reactive system fires, it means the proactive system missed something — that's a learning signal.
 
 ## Scenario Examples
 
@@ -210,7 +210,7 @@ These signals should inform future skill selection accuracy — no formal loggin
 
 ## Synapses
 
-- ↔ `.github/skills/skill-activation/SKILL.md` — WHEN: complex task detected | YIELDS: action-keyword index for skill survey
+- ↔ `.github/skills/memory-activation/SKILL.md` — WHEN: complex task detected | YIELDS: action-keyword index for skill survey
 - ↔ `.github/instructions/deep-thinking.instructions.md` — WHEN: complex task needs both planning and analysis | YIELDS: episodic memory scan coordination
 - → `.github/instructions/alex-core.instructions.md` — WHEN: meta-cognitive planning | YIELDS: working memory slot management
 - → `.github/skills/cognitive-load/SKILL.md` — WHEN: many skills matched | YIELDS: prioritization and chunking
@@ -222,4 +222,4 @@ These signals should inform future skill selection accuracy — no formal loggin
 - ← `.github/instructions/self-actualization.instructions.md` — WHEN: deep assessment needs resource planning | YIELDS: pre-assessment skill survey
 - ← `.github/skills/research-first-development/SKILL.md` — WHEN: gap analysis creates skills | YIELDS: enriched skill pool for SSO selection
 - ⊙ `.github/instructions/dream-state-automation.instructions.md` — INHIBITS: suppress SSO during dream state (unconscious processing doesn't need task planning)
-- ⊙ `.github/prompts/unified-meditation-protocols.prompt.md` — INHIBITS: suppress SSO for simple meditation (only activate for complex multi-phase consolidation)
+- ⊙ `.github/prompts/meditate.prompt.md` — INHIBITS: suppress SSO for simple meditation (only activate for complex multi-phase consolidation)
