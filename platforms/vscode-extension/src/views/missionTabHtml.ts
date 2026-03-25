@@ -38,7 +38,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                       <span class="action-text">Chat with Alex</span>
                   </button>
                   ${actionButton('northStar', '⭐', 'North Star', 'Define or review project vision and quality standards')}
-                  ${actionButton('rubberDuck', '🦆', 'Think Together', 'Work through problems as partners')}
+                  ${actionButton('rubberDuck', '🦆', 'Rubber Duck', 'Think through problems together')}
                   ${actionButton('upgrade', '⬆️', 'Initialize / Update', 'Deploy or refresh Alex architecture')}
               </div>
 
@@ -55,8 +55,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               <div class="action-group-label" data-group="create" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>CREATE</div>
               <div class="action-group-content" data-group="create">
                   ${actionButton('generatePptx', '📝', 'Generate PPTX', 'Create polished PowerPoint presentations locally — free, offline')}
-                  ${actionButton('generateGammaPresentation', '🎨', 'Gamma (Cloud)', 'Generate beautiful AI presentations via Gamma API')}
-                  ${actionButton('generateGammaAdvanced', '⚙️', 'Gamma Advanced', 'Gamma with style, model, and image options')}
+                  ${actionButton('generateGammaPresentation', '🎨', 'Gamma Presentation', 'Generate AI presentations via Gamma API (use advanced options in dialog)')}
                   ${actionButton('generateAIImage', '🖼️', 'Generate Image', 'Generate AI images from text prompts via Replicate')}
                   ${actionButton('editImageAI', '✏️', 'Edit Image (AI)', 'Edit images with AI using nano-banana-pro model')}
               </div>
@@ -66,7 +65,6 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                   ${actionButton('askAboutSelection', '💬', 'Ask About Selection', 'Ask about code or concepts')}
                   ${actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
                   ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
-                  ${actionButton('readAloud', '🔊', 'Read Aloud', 'Listen to documentation')}
               </div>
 
           </nav>

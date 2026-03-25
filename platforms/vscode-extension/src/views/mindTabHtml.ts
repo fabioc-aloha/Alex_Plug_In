@@ -122,7 +122,6 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               <div class="dashboard-card-title">System</div>
               ${actionButton('upgrade', hasGlobalKnowledge ? '🌐' : '⬆️', 'Initialize / Update', 'Deploy or refresh Alex architecture')}
               ${actionButton('exportMemory', '📤', 'Export Memory', 'Export all memory to a portable file for other AI surfaces')}
-              ${actionButton('exportM365', '📦', 'Export for M365', 'Package knowledge for M365 Copilot')}
               ${actionButton('provideFeedback', '💬', 'Feedback', 'Share feedback, ideas, or feature requests')}
               ${actionButton('viewDiagnostics', '🩺', 'Diagnostics', 'View diagnostics and report issues')}
           </div>
@@ -147,6 +146,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
                       <div class="freshness-label">Dormant</div>
                   </div>
               </div>
+              ${(mindData.freshness.fading + mindData.freshness.dormant) > 0 ? actionButton('reviewFadingSkills', '🔄', 'Review Fading Skills', 'Refresh skills that need attention') : ''}
           </div>
 
           ${mindData.calibration.total > 0 ? `
@@ -164,6 +164,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
                       <span class="calibration-pct">${pct}%</span>
                   </div>`;}).join('')}
               </div>
+              ${(mindData.calibration.low + mindData.calibration.uncertain) > 0 ? actionButton('reviewLowConfidence', '📚', 'Review Low-Confidence', 'Build knowledge in uncertain areas') : ''}
           </div>` : ''}
 
           ${(tokenStatuses ?? []).length > 0 ? `

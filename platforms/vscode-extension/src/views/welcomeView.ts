@@ -143,7 +143,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       dream: "alex.dream",
       selfActualize: "alex.selfActualize",
       northStar: "alex.northStar",
-      exportM365: "alex.exportForM365",
       openDocs: "alex.openDocs",
       agentVsChat: "alex.agentVsChat",
       upgrade: "alex.upgrade",
@@ -165,11 +164,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       generateDiagram: "alex.generateDiagram",
       generatePptx: "alex.generatePptx",
       generateGammaPresentation: "alex.generateGammaPresentation",
-      generateGammaAdvanced: "alex.generateGammaWithOptions",
       generateAIImage: "alex.generateAIImage",
       editImageAI: "alex.editImageWithPrompt",
       reviewPR: "alex.reviewPR",
-      readAloud: "alex.readAloud",
       askAboutSelection: "alex.askAboutSelection",
       saveSelectionAsInsight: "alex.saveSelectionAsInsight",
       searchRelatedKnowledge: "alex.searchRelatedKnowledge",
@@ -269,6 +266,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         logInfo('[Alex] Opening skill: ' + JSON.stringify({ skillId, skillDisplayName }));
         const skillPrompt = `Explain how to use the ${skillDisplayName} skill. Read the skill file and summarize what it does, when to use it, and give me examples.`;
         await openChatPanel(skillPrompt);
+        break;
+      }
+      case "reviewFadingSkills": {
+        logInfo('[Alex] Opening fading skills review');
+        const fadingPrompt = 'Review my fading and dormant skills. Read the Knowledge Freshness data and recommend which skills I should practice or refresh. For each skill, explain why it\'s fading and suggest a quick exercise to reinforce it.';
+        await openChatPanel(fadingPrompt);
+        break;
+      }
+      case "reviewLowConfidence": {
+        logInfo('[Alex] Opening low-confidence review');
+        const confidencePrompt = 'Review my low-confidence and uncertain skills. Read the Honest Uncertainty calibration data and help me understand where I need more practice or knowledge. Suggest specific resources or exercises to improve confidence in these areas.';
+        await openChatPanel(confidencePrompt);
         break;
       }
       case "tabSwitch": {
