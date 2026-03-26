@@ -8,13 +8,13 @@ charting assets.
 
 ## Deliverables
 
-| # | Deliverable | Files | Status |
-|---|-------------|-------|--------|
-| 1 | 5 data trifectas | 20 files (5 instructions, 5 skills, 5 prompts, 5 synapses) | Complete |
-| 2 | 4 data muscles | data-ingest.cjs, data-profile.cjs, chart-recommend.cjs, dashboard-scaffold.cjs | Complete |
-| 3 | Chart gallery | alex_docs/research/chart-gallery.html (24 types, 9 intents) | Complete |
-| 4 | Colorblind-safe palette | Tableau 10 enforced across all charting files | Complete |
-| 5 | v6.8.3 release | Bumped, compiled, packaged (1.96 MB), locally installed | Complete |
+| #   | Deliverable             | Files                                                                          | Status   |
+| --- | ----------------------- | ------------------------------------------------------------------------------ | -------- |
+| 1   | 5 data trifectas        | 20 files (5 instructions, 5 skills, 5 prompts, 5 synapses)                     | Complete |
+| 2   | 4 data muscles          | data-ingest.cjs, data-profile.cjs, chart-recommend.cjs, dashboard-scaffold.cjs | Complete |
+| 3   | Chart gallery           | alex_docs/research/chart-gallery.html (24 types, 9 intents)                    | Complete |
+| 4   | Colorblind-safe palette | Tableau 10 enforced across all charting files                                  | Complete |
+| 5   | v6.8.3 release          | Bumped, compiled, packaged (1.96 MB), locally installed                        | Complete |
 
 ## Architecture State
 

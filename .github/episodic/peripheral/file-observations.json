@@ -1,17 +1,14 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "alex_docs/research/population.html",
-    "alex_docs/research/visuals.html"
+    "github/episodic/meditation-2026-03-26-data-storytelling.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1774554773489
+      "scannedAt": 1774554879593
     }
   ],
-  "lastUpdated": 1774554773489
+  "lastUpdated": 1774554879593
 }
