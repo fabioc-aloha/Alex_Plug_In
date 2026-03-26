@@ -5,9 +5,6 @@ applyTo: "**/*TODO*,**/*FIXME*,**/*debt*"
 
 # Technical Debt Tracking Procedural Memory
 
-**Classification**: Procedural Memory | Code Quality  
-**Activation**: debt, technical debt, TODO, FIXME, HACK, refactor, cleanup, code smell  
-**Priority**: Proactive - Track and manage debt before it accumulates
 
 ---
 

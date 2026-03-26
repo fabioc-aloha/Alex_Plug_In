@@ -5,9 +5,6 @@ applyTo: "**/*package*.json,**/requirements*.txt,**/Cargo.toml,**/go.mod,**/pom.
 
 # Dependency Management Procedural Memory
 
-**Classification**: Procedural Memory | Security & Maintenance  
-**Activation**: dependency, package, npm, outdated, vulnerability, security, audit, upgrade, breaking change  
-**Priority**: Proactive - Regular maintenance prevents emergencies
 
 ---
 

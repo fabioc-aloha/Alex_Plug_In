@@ -152,7 +152,3 @@ test('processItems rejects oversized batch', () => {
 | Fails only in CI | Environment difference | Pin versions, use containers |
 | Fails after another test | Test pollution | Isolate setup/teardown |
 | Fails on slow machines | Hardcoded timeouts | Use retry with backoff or event-based waits |
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

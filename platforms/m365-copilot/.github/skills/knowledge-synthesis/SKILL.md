@@ -90,7 +90,3 @@ Phase 2 of meditation is the natural synthesis point:
 2. For each insight: Abstract → check if existing pattern covers it → extend or create
 3. Connect new entries via synapses to related skills
 4. Verify the global knowledge index is updated
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

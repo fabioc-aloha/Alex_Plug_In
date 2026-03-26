@@ -20,9 +20,9 @@
 | 5   | **Or Metered usage enabled**      | Tenant admin enables pay-per-use billing for Copilot                           | ⬜      |
 | 6   | **Teams access**                  | User can access Microsoft Teams                                                | ⬜      |
 
-### Azure AD / Entra ID
+### Microsoft Entra ID
 
-> ✅ **Not Required for Pure M365!** Alex v4.0.0 uses only native M365 capabilities.
+> **Not Required for Pure M365!** Alex uses only native M365 capabilities.
 > No Azure Functions, no API plugins, no app registrations needed.
 
 | #    | Requirement                                                      | Status |
@@ -205,7 +205,7 @@ az ad app list --display-name "Alex" --query "[].{name:displayName, appId:appId}
 | **Tenant ID**                 | `72f988bf-86f1-41af-91ab-2d7cd011db47`              |
 | **Account**                   | `SC-fc209@microsoft.com`                            |
 
-### Existing Azure AD Apps (Potential Reuse)
+### Existing Entra ID Apps (Potential Reuse)
 
 | Name      | App ID                                 |
 | --------- | -------------------------------------- |
@@ -225,5 +225,5 @@ az ad app list --display-name "Alex" --query "[].{name:displayName, appId:appId}
 
 ---
 
-*Last updated: February 13, 2026*
-*Version: 5.7.0*
+*Last updated: March 25, 2026*
+*Version: 6.8.2*

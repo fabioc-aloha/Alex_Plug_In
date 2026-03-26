@@ -164,7 +164,3 @@ What we learned from the Phoenix incident:
 These lessons became: ADR-006, RISKS.md, the 5-layer protection system.
 
 **Every failure makes the architecture stronger.**
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

@@ -1,21 +1,21 @@
 ---
 name: enterprise-integration
-description: Patterns for Microsoft Graph, Azure AD, and enterprise feature integration in VS Code extensions
+description: Patterns for Microsoft Graph, Microsoft Entra ID, and enterprise feature integration in VS Code extensions
 applyTo: '**/enterprise/**,**/graph/**,**/auth/**'
 ---
 
 # Enterprise Integration Skill
 
-Expert in building enterprise features with Microsoft Graph API, Azure AD authentication, and enterprise-mode feature gating for VS Code extensions.
+Expert in building enterprise features with Microsoft Graph API, Microsoft Entra ID authentication, and enterprise-mode feature gating for VS Code extensions.
 
 ## ⚠️ Staleness Warning
 
-Microsoft Graph and Azure AD APIs evolve frequently. Authentication flows and permission models change.
+Microsoft Graph and Microsoft Entra ID APIs evolve frequently. Authentication flows and permission models change.
 
 **Refresh triggers:**
 - Microsoft Graph API version updates
 - MSAL library major releases
-- Azure AD becoming Microsoft Entra ID
+- Microsoft Entra ID rebranded to Microsoft Entra ID
 - New Graph scopes or permissions
 
 **Last validated:** February 2026 (MSAL 2.x, Graph v1.0)

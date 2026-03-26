@@ -174,8 +174,31 @@ When identifying a muscle opportunity:
 - [Research-First Development](..\research-first-development/SKILL.md) - Research before building muscles
 - [Brain QA](..\brain-qa/SKILL.md) - Validate muscle integration
 
-## Synapses
+## Alex-First Output Guidelines
 
-- **Bootstrap Learning** → This skill (enables): Learning identifies automation opportunities
-- **This skill** → Trifecta System (produces): Muscles become part of trifectas
-- **Deep Thinking** → This skill (informs): Complex analysis reveals automation patterns
+When building muscles for Alex's own use (not user-facing tools), optimize for machine consumption:
+
+**DO**:
+- Output structured data (JSON, key: value pairs)
+- Use exit codes (0 = success, non-zero = failure)
+- Keep output minimal — only what Alex needs to parse
+- Use clear, grep-able status lines
+
+**DON'T**:
+- Add emojis or decorative Unicode
+- Build elaborate formatted tables
+- Add "helpful" explanations Alex doesn't need
+- Create progress spinners or animations
+
+**Example**:
+```javascript
+// ✅ Alex-first: parseable, minimal
+console.log(JSON.stringify({ passed: 12, failed: 0, warnings: 1 }));
+process.exit(0);
+
+// ❌ Human-first: decorative, verbose
+console.log('✅ All 12 checks passed!');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━');
+```
+
+**Exception**: User-facing CLI tools (not muscles) should still be human-friendly.

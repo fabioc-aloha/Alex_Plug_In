@@ -200,7 +200,3 @@ Key sources:
 - Lave & Wenger — Situated learning, communities of practice
 - Bandura — Social learning theory
 - Brusilovsky — Adaptive learning systems
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

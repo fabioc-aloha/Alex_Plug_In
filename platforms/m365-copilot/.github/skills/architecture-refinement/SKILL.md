@@ -118,7 +118,3 @@ User corrections = high-value learning.
 ## Connection to Bootstrap Learning
 
 Learn → Coach → Extract → Document → Consolidate
-
-## Synapses
-
-See [synapses.json](synapses.json) for connection mapping.

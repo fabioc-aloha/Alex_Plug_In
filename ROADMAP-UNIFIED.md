@@ -212,7 +212,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 |                            |                                                                 |
 | -------------------------- | --------------------------------------------------------------- |
 | **Current Master Version** | 6.8.2                                                           |
-| **Current Heirs**          | VS Code (6.8.2), M365 (6.2.0), Plugin (6.7.0)                   |
+| **Current Heirs**          | VS Code (6.8.2), M365 (6.8.2), Plugin (6.7.0)                   |
 | **Architecture**           | 150 skills, 40 trifectas, 71 instructions, 50 prompts, 7 agents |
 | **Platforms**              | 6 total (4 active, 2 planned)                                   |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence                             |

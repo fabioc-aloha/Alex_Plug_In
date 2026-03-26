@@ -85,7 +85,3 @@ docs/
 - [ ] License specified
 - [ ] Contributing guide exists
 - [ ] .gitignore appropriate for stack
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

@@ -1,10 +1,18 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
+    "github/copilot-instructions.md",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/platforms/GCX-AI-HEIR-PLAN.md"
+    "platforms/m365-copilot/DEPLOYMENT-CHECKLIST.md",
+    "platforms/m365-copilot/package.json",
+    "platforms/m365-copilot/sync-m365.ps1"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1774492598469
+  "todoHotspots": [
+    {
+      "file": "ROADMAP-UNIFIED.md",
+      "todoCount": 2,
+      "scannedAt": 1774493044623
+    }
+  ],
+  "lastUpdated": 1774493044623
 }

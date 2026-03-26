@@ -57,6 +57,18 @@ const result = await primary().catch(() => fallback());
 
 Contain failures to prevent cascade. Catch at component boundaries, log, show fallback UI.
 
-## Synapses
+## Strategy Pivot (For AI Assistants)
 
-See [synapses.json](synapses.json) for connections.
+When your approach fails repeatedly, don't keep retrying — pivot.
+
+| Failure Pattern | Pivot Strategy |
+| --------------- | -------------- |
+| Same edit fails twice | Re-read file, verify context is current |
+| Same command fails twice | Try alternative tool or manual approach |
+| Same build error | Check if your prior changes caused it |
+| User says "upstream problem" | Back up, analyze earlier changes |
+| Pattern doesn't work | Ask user what they know |
+
+**Rule of Three**: Two failures of the same approach = third attempt MUST be fundamentally different.
+
+**Surface the problem**: "I've tried X twice and it's failing. I think the issue is [analysis]. Here's an alternative approach..."

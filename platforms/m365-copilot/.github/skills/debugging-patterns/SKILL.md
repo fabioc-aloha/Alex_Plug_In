@@ -114,7 +114,3 @@ npm list --depth=0
 - ❌ Ignoring error messages
 - ❌ "It works on my machine" without investigating why
 - ❌ Removing error handling to "fix" errors
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

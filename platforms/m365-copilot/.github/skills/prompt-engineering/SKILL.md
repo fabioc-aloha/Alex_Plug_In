@@ -353,7 +353,3 @@ def validate_response(response, expected_format):
 | GPT-3.5/Haiku | Speed, cost | May need more examples |
 | Llama/Mistral | Open source, customizable | Fine-tuning options |
 | Specialized | Domain expertise | Limited scope |
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

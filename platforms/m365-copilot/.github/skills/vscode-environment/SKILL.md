@@ -107,7 +107,3 @@ applyTo: '**/.vscode/**,**/settings.json,**/launch.json,**/tasks.json,**/extensi
   }
 }
 ```
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

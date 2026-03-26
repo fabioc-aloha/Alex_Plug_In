@@ -321,7 +321,3 @@ Select-String -Path "*.md" -Pattern '[▼▲◄►]' |
 ✅ **Correct**: Run PowerShell validation, confirm line counts match
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connection mapping.
