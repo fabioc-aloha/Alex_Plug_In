@@ -237,18 +237,24 @@ The 4 new converter skills (md-to-eml, md-scaffold, nav-inject, converter-qa) ha
 
 **Implementation location**: `platforms/vscode-extension/src/commandsConvert.ts` (new file, follows `commandsWord.ts` pattern)
 
-### Sync Script Cleanup (Priority 2)
+### Marketplace README Republish (Priority 2)
+
+README.md updated with v6.8.x What's New, 150 skills, 40 trifectas, current counts. Changes committed (`1932d8d`) but marketplace still shows old README because v6.8.2 was already published before the update. VSCE does not allow re-publishing the same version.
+
+**Action**: Include in next feature release (v6.8.3+) -- no standalone bump needed.
+
+### Sync Script Cleanup (Priority 3)
 
 Sync scripts reference stale/renamed skills that no longer exist in Master:
 
-| Script            | Location                  | Stale References                                                                                                             |
-| ----------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `sync-m365.ps1`   | `platforms/m365-copilot/` | meditation-facilitation, writing-publication, skill-activation, prompt-activation, airs-integration, academic-paper-drafting |
-| `sync-plugin.ps1` | `platforms/agent-plugin/` | Same as above                                                                                                                |
+| Script            | Location                  | Stale References                                                                        | Status   |
+| ----------------- | ------------------------- | --------------------------------------------------------------------------------------- | -------- |
+| `sync-m365.ps1`   | `platforms/m365-copilot/` | 6 stale refs removed (v6.8.2)                                                          | ✅ Done   |
+| `sync-plugin.ps1` | `platforms/agent-plugin/` | meditation-facilitation, writing-publication, skill-activation, prompt-activation, etc. | ⬜ Pending |
 
-**Action**: Remove stale skill names from `$curatedSkills` arrays.
+**Action**: Clean `sync-plugin.ps1` stale skill names from `$curatedSkills` array.
 
-### Quality Gate Validation (Priority 3)
+### Quality Gate Validation (Priority 4)
 
 Run full quality gate after converter work to ensure everything compiles and tests pass:
 - `npm run lint`
