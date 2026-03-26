@@ -113,12 +113,6 @@ export function getSkillStoreTabHtml(ctx: SkillStoreTabContext): string {
               </div>`;
           }).join('')}
           </div>
-
-          <div class="install-github-card" data-cmd="openChat" tabindex="0" role="button" title="Install skills from GitHub repositories">
-              <div style="font-size: 20px; margin-bottom: 4px;">📥</div>
-              <div style="font-weight: 600; font-size: 12px; margin-bottom: 2px;">Install from GitHub</div>
-              <div style="font-size: 11px; opacity: 0.7;">Ask Alex to install community skills from GitHub repositories</div>
-          </div>
           `}
       </div>`;
 }

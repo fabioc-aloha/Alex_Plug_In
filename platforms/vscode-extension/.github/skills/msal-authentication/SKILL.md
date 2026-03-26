@@ -14,7 +14,7 @@ applyTo: "**/*auth*,**/*msal*,**/*login*,**/*identity*,**/*entra*"
 
 ## Core Concepts
 
-**Microsoft Authentication Library (MSAL)** handles authentication with Microsoft Entra ID (formerly Azure AD). It manages:
+**Microsoft Authentication Library (MSAL)** handles authentication with Microsoft Entra ID (formerly Microsoft Entra ID). It manages:
 - Token acquisition and caching
 - Silent token renewal
 - Redirect/popup authentication flows

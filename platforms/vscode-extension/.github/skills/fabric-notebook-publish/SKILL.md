@@ -30,7 +30,6 @@ This skill enables seamless notebook publishing from VS Code to Microsoft Fabric
 ## Architecture
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     subgraph LOCAL["VS Code"]
         NB[Notebooks]
@@ -165,14 +164,6 @@ git checkout -b FishBowl --track fabric/FishBowl
 | `401 Unauthorized` | Re-run `Connect-AzAccount` |
 | `403 Forbidden` | Check workspace Admin/Member role |
 | `Sync conflict` | Resolve in Fabric portal |
-
-## Synapses
-
-- fabric-notebook-push.instructions.md → Core procedural memory (not yet created)
-- [git-workflow/SKILL.md](..\git-workflow/SKILL.md) → Git worktree management
-- [microsoft-fabric/SKILL.md](..\microsoft-fabric/SKILL.md) → Fabric platform knowledge
-- [api-design/SKILL.md](..\api-design/SKILL.md) → REST API token handling
-
 ## Related Files
 
 | File | Purpose |

@@ -39,7 +39,6 @@ Added to copilot-instructions.md:
 ### 3. Mermaid Diagrams Fixed
 
 Fixed multiple diagrams across alex_docs:
-- **CLOUD-SYNC.md**: 4 diagrams themed with `%%{init}%%`
 - **COGNITIVE-ARCHITECTURE.md**: Dual-Mind Model diagram
 
 ### 4. Critical Discovery: Subgraph Width Calculation

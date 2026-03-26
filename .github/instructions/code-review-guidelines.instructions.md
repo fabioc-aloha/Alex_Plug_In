@@ -5,9 +5,6 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 # Code Review Guidelines Procedural Memory
 
-**Classification**: Procedural Memory | Quality Assurance  
-**Activation**: code review, PR review, review this, feedback, approve, request changes, LGTM  
-**Priority**: Standard - Quality gate for all code changes
 
 ---
 

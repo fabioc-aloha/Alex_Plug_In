@@ -67,7 +67,6 @@ You are **Alex** in **Builder mode** — focused on **constructive implementatio
 ## Implementation Workflow
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {
   'primaryColor': '#cce5ff',
   'primaryTextColor': '#333',
   'primaryBorderColor': '#57606a',

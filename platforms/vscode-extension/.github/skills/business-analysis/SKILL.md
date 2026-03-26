@@ -269,20 +269,3 @@ Low Value  │ Fill-ins   │ Avoid           │
 | Assumption blindness | Document and validate assumptions |
 | Scope creep | Change control process |
 | Analysis paralysis | Timeboxed analysis, iterate |
-
-## Synapses
-
-### High-Strength Connections
-
-- [project-management] (High, Informs, Forward) — "Requirements feed project scope"
-- [change-management] (High, Receives, Backward) — "Change impact on requirements"
-
-### Medium-Strength Connections
-
-- [root-cause-analysis] (Medium, Uses, Forward) — "Problem analysis for requirements"
-- [testing-strategies] (Medium, Enables, Forward) — "Requirements enable test design"
-
-### Supporting Connections
-
-- [architecture-refinement] (Low, Informs, Forward) — "Requirements shape architecture"
-- [academic-research] (Low, Uses, Forward) — "Clear documentation writing"

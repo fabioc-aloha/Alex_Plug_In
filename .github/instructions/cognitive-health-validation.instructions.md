@@ -6,8 +6,6 @@ inheritance: master-only
 
 # Cognitive Health Validation Protocols
 
-**Classification**: Procedural Memory | Architecture Quality Assurance  
-**Activation**: brain-qa, cognitive health, architecture audit, post-meditation validation  
 **Purpose**: Systematic validation of cognitive architecture integrity, master-heir synchronization, and knowledge base consistency  
 **Implementation**: brain-qa.ps1 (33-phase automated audit) + manual interpretation
 

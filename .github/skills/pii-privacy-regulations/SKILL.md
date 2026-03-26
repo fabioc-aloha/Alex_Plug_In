@@ -356,7 +356,3 @@ function pseudonymize(record: UserRecord): PseudonymizedRecord {
 - Data discovery and classification tools
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

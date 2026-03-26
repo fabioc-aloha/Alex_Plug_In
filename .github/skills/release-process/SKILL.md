@@ -6,8 +6,6 @@ disable-model-invocation: true
 
 # Release Process Skill
 
-**Classification**: Master-Only Skill | Process Automation
-**Activation**: release, publish, marketplace, vsix, version bump, pre-release
 **Inheritance**: master-only (contains PAT handling, marketplace credentials)
 
 ---

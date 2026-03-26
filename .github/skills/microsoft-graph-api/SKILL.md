@@ -15,7 +15,7 @@ Microsoft Graph APIs evolve frequently. Permissions, endpoints, and authenticati
 **Refresh triggers:**
 - Microsoft Graph API version updates
 - MSAL library major releases
-- Azure AD → Microsoft Entra ID migration
+- Microsoft Entra ID to Microsoft Entra ID migration (completed)
 - New Graph scopes or permissions
 
 **Last validated:** February 2026 (Graph v1.0, MSAL 2.x)
@@ -507,28 +507,6 @@ Retry-After: 30
 | **Sensitivity Labels** | `/me/informationProtection/sensitivityLabels` | Document classification |
 
 ---
-
-## Synapses
-
-```
-→ [enterprise-integration skill] AUTH_PATTERNS_AND_SCOPES (strong, bidirectional)
-→ [vscode-extension-patterns skill] VSCODE_AUTH_SESSION_API (strong, outbound)
-→ [alex-core] ENTERPRISE_MODE_GATING (strong, inbound)
-→ [localization skill] USER_PREFERRED_LANGUAGE_FROM_GRAPH (moderate, outbound)
-→ [GI-heir-promotion-pattern-graph-api-2026-02-12] PROMOTION_CASE_STUDY (strong, origin)
-→ [FishbowlGovernance DK-MICROSOFT-GRAPH.md] HEIR_SOURCE_KNOWLEDGE (strong, inbound)
-→ [error-handling-patterns] CUSTOM_ERROR_TYPES (moderate, outbound)
-→ [api-design patterns] BATCH_AUTO_CHUNKING_PATTERN (strong, outbound)
-```
-
-### Session 2026-02-12: Heir Promotion
-- Promoted from FishbowlGovernance heir's production Graph integration
-- Added: Service Health, Email, OneDrive modules
-- Added: graphBatchAll() auto-chunking pattern
-- Blocker discovered: Admin consent required for Microsoft tenants
-
----
-
 ## References
 
 - [Microsoft Graph Overview](https://learn.microsoft.com/graph/overview)

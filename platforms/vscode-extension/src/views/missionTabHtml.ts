@@ -6,15 +6,18 @@
  * Focused on project work: partnership, build, create.
  */
 import { Nudge, actionButton, getNudgesHtml } from './welcomeViewHtml';
+import { ActiveContext } from '../shared/activeContextManager';
 
 export interface MissionTabContext {
     nudges: Nudge[];
     personalityMode?: string;
+    activeContext?: ActiveContext | null;
 }
 
 /** Generate the Mission Command tab panel HTML. */
 export function getMissionTabHtml(ctx: MissionTabContext): string {
-    const { nudges, personalityMode } = ctx;
+    const { nudges, personalityMode, activeContext } = ctx;
+
 
     return `
       <div class="tab-panel active" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
@@ -26,6 +29,8 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               <button class="personality-toggle-btn${personalityMode === 'precise' ? ' active' : ''}" data-mode="precise" role="radio" aria-checked="${personalityMode === 'precise'}">🎯 Precise</button>
               <button class="personality-toggle-btn${personalityMode === 'chatty' ? ' active' : ''}" data-mode="chatty" role="radio" aria-checked="${personalityMode === 'chatty'}">💬 Chatty</button>
           </div>
+
+
 
           <input type="text" class="quick-command-input" id="mission-command-search" placeholder="Search commands\u2026" aria-label="Search commands" />
 

@@ -330,12 +330,3 @@ When vulnerability found:
 See [incident-response](../incident-response/SKILL.md) for full IR workflow.
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.
-
----
-
-*Consolidated: 2026-02-19*
-*Sources: security-review (2026-02-01) + microsoft-sfi*

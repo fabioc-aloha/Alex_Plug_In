@@ -322,9 +322,3 @@ W: What will you do?
 *Skill created: 2026-02-10 | Category: Leadership | Status: Active*
 
 ---
-
-## Synapses
-
-- [.github/skills/frustration-recognition/SKILL.md] (High, Enables, Bidirectional) - "Recognize coachee emotional state"
-- [.github/instructions/alex-core.instructions.md] (Medium, Applies, Forward) - "Meta-cognitive awareness in coaching"
-- [.github/skills/executive-storytelling/SKILL.md] (Medium, Complements, Bidirectional) - "Leadership communication skills"

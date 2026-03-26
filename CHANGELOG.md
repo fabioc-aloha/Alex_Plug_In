@@ -23,6 +23,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Welcome View** -- Simplified from 5 tabs to 4 tabs (Mission, Skills, Mind, Docs)
 - **Agents Tab Removed** -- Agent orchestration moved to chat participant routing; agent count displayed in Mind tab
+- **Docs Tab Playbooks** -- Expanded from 5 to 8 categories (added Allied Health & Clinical, Trades & Applied Sciences, Community & Human Services) with anchors aligned to live site
+- **Docs Tab CTA** -- Redesigned with LearnAI branding, companion tool quick links (Prompt Engineering, AI Readiness, AI Adoption)
+- **Docs Tab Reference** -- Folded single-card Reference section into Architecture as 7th card (Skill-to-Discipline Map)
+- **Inline Styles** -- All inline styles in tab HTML moved to CSS classes in sharedStyles.tabs.ts
+- **Hardcoded Counts** -- Replaced "133 skills mapped to 76 disciplines" with generic label to prevent drift
+- **LearnAI URL** -- Canonical URL updated to learnai.correax.com across READMEs
+
+### Removed
+
+- **Practice Section** -- Self-Study, Exercises, Quiz, and AIRS action buttons removed from Docs tab
+- **Books Section** -- Alex Finch Library action button removed from Docs tab
+- **Dead URL Handlers** -- 5 external URL handlers removed from welcomeView.ts (learnAlexSelfStudy, learnAlexExercises, learnAlexAirs, learnAlexQuiz, learnAlexBooks)
 
 ### Fixed
 

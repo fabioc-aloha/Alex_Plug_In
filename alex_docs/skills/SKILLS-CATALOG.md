@@ -9,11 +9,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 120
+## Skill Count: 150
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 100   |
+| Inheritable | 136   |
 | Master-Only | 5     |
 | Heir:vscode | 7     |
 | Heir:m365   | 2     |
@@ -43,7 +43,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [appropriate-reliance](../../.github/skills/appropriate-reliance/SKILL.md)           | inheritable | Build trust through calibrated confidence             |
 | [airs-appropriate-reliance](../../.github/skills/airs-appropriate-reliance/SKILL.md) | inheritable | AIRS-16/18 research, AR construct, telemetry design   |
 | [bootstrap-learning](../../.github/skills/bootstrap-learning/SKILL.md)               | inheritable | Domain-agnostic knowledge acquisition                 |
-| [meditation](../../.github/skills/meditation/SKILL.md)                               | inheritable | Core meditation protocols + facilitation               |
+| [meditation](../../.github/skills/meditation/SKILL.md)                               | inheritable | Core meditation protocols + facilitation              |
 | [knowledge-synthesis](../../.github/skills/knowledge-synthesis/SKILL.md)             | inheritable | Cross-project pattern extraction                      |
 | [global-knowledge](../../.github/skills/global-knowledge/SKILL.md)                   | inheritable | Global knowledge management + maintenance + sync      |
 | [socratic-questioning](../../.github/skills/socratic-questioning/SKILL.md)           | inheritable | Guide users to discover answers through questions     |
@@ -113,29 +113,29 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 📝 Documentation & Communication
 
-| Skill                                                                                            | Inheritance | Purpose                                                       |
-| ------------------------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------- |
-| [academic-research](../../.github/skills/academic-research/SKILL.md)                             | inheritable | Research methodology + paper drafting + publication            |
-| [practitioner-research](../../.github/skills/practitioner-research/SKILL.md)                     | inheritable | Ship→Document→Promote methodology, longitudinal case study    |
-| [research-project-scaffold](../../.github/skills/research-project-scaffold/SKILL.md)             | inheritable | Research project structure, refactoring existing projects     |
-| [grant-writing](../../.github/skills/grant-writing/SKILL.md)                                     | inheritable | Research funding applications, NSF/NIH patterns               |
-| [creative-writing](../../.github/skills/creative-writing/SKILL.md)                               | inheritable | Narrative, storytelling, engagement                           |
-| [markdown-mermaid](../../.github/skills/markdown-mermaid/SKILL.md)                               | inheritable | Diagrams and visualization                                    |
-| [md-to-word](../../.github/skills/md-to-word/SKILL.md)                                           | inheritable | 🆕 Markdown→Word conversion with diagrams, pandoc/python-docx  |
-| [lint-clean-markdown](../../.github/skills/lint-clean-markdown/SKILL.md)                         | inheritable | Clean, consistent markdown                                    |
-| [ascii-art-alignment](../../.github/skills/ascii-art-alignment/SKILL.md)                         | inheritable | Text-based diagrams                                           |
-| [localization](../../.github/skills/localization/SKILL.md)                                       | inheritable | i18n, l10n, translation workflows                             |
-| [api-documentation](../../.github/skills/api-documentation/SKILL.md)                             | inheritable | API docs, OpenAPI specs, developer portal content             |
-| [cross-cultural-collaboration](../../.github/skills/cross-cultural-collaboration/SKILL.md)       | inheritable | Cross-cultural team dynamics, communication adaptation        |
-| [executive-storytelling](../../.github/skills/executive-storytelling/SKILL.md)                   | inheritable | 🆕 Data-driven narrative + stakeholder mgmt + meetings         |
-| [slide-design](../../.github/skills/slide-design/SKILL.md)                                       | inheritable | 🆕 Visual hierarchy, minimal text, impactful presentations     |
-| [book-publishing](../../.github/skills/book-publishing/SKILL.md)                                 | inheritable | 🆕 Markdown-to-PDF via Pandoc/LuaLaTeX, dual output            |
-| [documentation-quality-assurance](../../.github/skills/documentation-quality-assurance/SKILL.md) | inheritable | 🆕 Doc audit, drift detection, hygiene, preflight validation   |
+| Skill                                                                                            | Inheritance | Purpose                                                      |
+| ------------------------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------ |
+| [academic-research](../../.github/skills/academic-research/SKILL.md)                             | inheritable | Research methodology + paper drafting + publication          |
+| [practitioner-research](../../.github/skills/practitioner-research/SKILL.md)                     | inheritable | Ship→Document→Promote methodology, longitudinal case study   |
+| [research-project-scaffold](../../.github/skills/research-project-scaffold/SKILL.md)             | inheritable | Research project structure, refactoring existing projects    |
+| [grant-writing](../../.github/skills/grant-writing/SKILL.md)                                     | inheritable | Research funding applications, NSF/NIH patterns              |
+| [creative-writing](../../.github/skills/creative-writing/SKILL.md)                               | inheritable | Narrative, storytelling, engagement                          |
+| [markdown-mermaid](../../.github/skills/markdown-mermaid/SKILL.md)                               | inheritable | Diagrams and visualization                                   |
+| [md-to-word](../../.github/skills/md-to-word/SKILL.md)                                           | inheritable | 🆕 Markdown→Word conversion with diagrams, pandoc/python-docx |
+| [lint-clean-markdown](../../.github/skills/lint-clean-markdown/SKILL.md)                         | inheritable | Clean, consistent markdown                                   |
+| [ascii-art-alignment](../../.github/skills/ascii-art-alignment/SKILL.md)                         | inheritable | Text-based diagrams                                          |
+| [localization](../../.github/skills/localization/SKILL.md)                                       | inheritable | i18n, l10n, translation workflows                            |
+| [api-documentation](../../.github/skills/api-documentation/SKILL.md)                             | inheritable | API docs, OpenAPI specs, developer portal content            |
+| [cross-cultural-collaboration](../../.github/skills/cross-cultural-collaboration/SKILL.md)       | inheritable | Cross-cultural team dynamics, communication adaptation       |
+| [executive-storytelling](../../.github/skills/executive-storytelling/SKILL.md)                   | inheritable | 🆕 Data-driven narrative + stakeholder mgmt + meetings        |
+| [slide-design](../../.github/skills/slide-design/SKILL.md)                                       | inheritable | 🆕 Visual hierarchy, minimal text, impactful presentations    |
+| [book-publishing](../../.github/skills/book-publishing/SKILL.md)                                 | inheritable | 🆕 Markdown-to-PDF via Pandoc/LuaLaTeX, dual output           |
+| [documentation-quality-assurance](../../.github/skills/documentation-quality-assurance/SKILL.md) | inheritable | 🆕 Doc audit, drift detection, hygiene, preflight validation  |
 
 ### 📚 Academic Research
 
-| Skill                                                                            | Inheritance | Purpose                                                 |
-| -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------- |
+| Skill | Inheritance | Purpose |
+| ----- | ----------- | ------- |
 
 | [literature-review](../../.github/skills/literature-review/SKILL.md)             | inheritable | 🆕 Systematic search, synthesis, gap identification      |
 | [citation-management](../../.github/skills/citation-management/SKILL.md)         | inheritable | 🆕 APA 7th, IEEE, Chicago formatting                     |
@@ -167,10 +167,10 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 🏗️ Architecture & Design
 
-| Skill                                                                                      | Inheritance | Purpose                                                                            |
-| ------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------- |
-| [architecture-refinement](../../.github/skills/architecture-refinement/SKILL.md)           | inheritable | Architecture evolution decisions                                                   |
-| [architecture-audit](../../.github/skills/architecture-audit/SKILL.md)                     | inheritable | Comprehensive consistency review + Master audit                                    |
+| Skill                                                                            | Inheritance | Purpose                                         |
+| -------------------------------------------------------------------------------- | ----------- | ----------------------------------------------- |
+| [architecture-refinement](../../.github/skills/architecture-refinement/SKILL.md) | inheritable | Architecture evolution decisions                |
+| [architecture-audit](../../.github/skills/architecture-audit/SKILL.md)           | inheritable | Comprehensive consistency review + Master audit |
 
 | [release-process](../../.github/skills/release-process/SKILL.md)                           | master-only | VS Code marketplace publishing workflow                                            |
 | [release-preflight](../../.github/skills/release-preflight/SKILL.md)                       | master-only | Pre-release checks, version sync                                                   |
@@ -331,35 +331,35 @@ Muscles (.github/muscles/) are execution scripts, NOT a trifecta component.
 
 ### Full Trifectas (26)
 
-| Capability              | Skill                             | Instruction                       | Prompt                                 | Muscles                     |
-| ----------------------- | --------------------------------- | --------------------------------- | -------------------------------------- | --------------------------- |
-| **AI Char. Ref. Gen.**  | ai-character-reference-generation | ai-character-reference-generation | ai-character-reference-generation      | —                           |
-| **AI README Banners**   | ai-generated-readme-banners       | ai-generated-readme-banners       | ai-generated-readme-banners            | —                           |
-| **Bootstrap Learning**  | bootstrap-learning                | bootstrap-learning                | learn                                  | —                           |
-| **Brain QA**            | brain-qa                          | cognitive-health-validation       | dream                                  | brain-qa.ps1                |
-| **Brand Asset Mgmt**    | brand-asset-management            | brand-asset-management            | brand                                  | —                           |
-| **Chat Participants**   | chat-participant-patterns         | chat-participant-patterns         | chat-participant                       | —                           |
-| **Code Review**         | code-review                       | code-review-guidelines            | review                                 | —                           |
-| **Dream State**         | dream-state                       | dream-state-automation            | dream                                  | dream-cli.ts                |
-| **Ext. Audit Method.**  | extension-audit-methodology       | extension-audit-methodology       | extension-audit-methodology            | —                           |
-| **Gamma Presentations** | gamma-presentations               | gamma-presentation                | gamma                                  | —                           |
-| **Knowledge Synthesis** | knowledge-synthesis               | knowledge-synthesis               | cross-domain-transfer                  | —                           |
-| **M365 Agent Debug**    | m365-agent-debugging              | m365-agent-debugging              | m365-agent-debug                       | —                           |
-| **Markdown Mermaid**    | markdown-mermaid                  | markdown-mermaid                  | marp                                   | —                           |
-| **MCP Development**     | mcp-development                   | mcp-development                   | mcp-server                             | —                           |
-| **MD to Word**          | md-to-word                        | md-to-word                        | md-to-word                             | —                           |
-| **Meditation**          | meditation                        | meditation                        | meditate                               | —                           |
-| **Microsoft Graph**     | microsoft-graph-api               | microsoft-graph-api               | graph-api                              | —                           |
-| **North Star**          | north-star                        | north-star                        | northstar                              | —                           |
-| **Release Management**  | release-process                   | release-management                | release                                | build-extension-package.ps1 |
-| **Research-First Dev**  | research-first-development        | research-first-workflow           | gapanalysis                            | —                           |
-| **Secrets Management**  | secrets-management                | secrets-management                | secrets                                | —                           |
-| **Self-Actualization**  | self-actualization                | self-actualization                | selfactualize                          | —                           |
-| **Teams App Patterns**  | teams-app-patterns                | teams-app-patterns                | teams-app                              | —                           |
-| **Testing/TDD**         | testing-strategies                | testing-strategies                | tdd                                    | —                           |
-| **UI/UX Design**        | ui-ux-design                      | ui-ux-design                      | accessibility                          | —                           |
-| **VS Code Extension**   | vscode-extension-patterns         | vscode-extension-patterns         | vscode-extension-audit                 | —                           |
-| **VSCode Config**       | vscode-configuration-validation   | vscode-configuration-validation   | vscode-settings                        | —                           |
+| Capability              | Skill                             | Instruction                       | Prompt                            | Muscles                     |
+| ----------------------- | --------------------------------- | --------------------------------- | --------------------------------- | --------------------------- |
+| **AI Char. Ref. Gen.**  | ai-character-reference-generation | ai-character-reference-generation | ai-character-reference-generation | —                           |
+| **AI README Banners**   | ai-generated-readme-banners       | ai-generated-readme-banners       | ai-generated-readme-banners       | —                           |
+| **Bootstrap Learning**  | bootstrap-learning                | bootstrap-learning                | learn                             | —                           |
+| **Brain QA**            | brain-qa                          | cognitive-health-validation       | dream                             | brain-qa.ps1                |
+| **Brand Asset Mgmt**    | brand-asset-management            | brand-asset-management            | brand                             | —                           |
+| **Chat Participants**   | chat-participant-patterns         | chat-participant-patterns         | chat-participant                  | —                           |
+| **Code Review**         | code-review                       | code-review-guidelines            | review                            | —                           |
+| **Dream State**         | dream-state                       | dream-state-automation            | dream                             | dream-cli.ts                |
+| **Ext. Audit Method.**  | extension-audit-methodology       | extension-audit-methodology       | extension-audit-methodology       | —                           |
+| **Gamma Presentations** | gamma-presentations               | gamma-presentation                | gamma                             | —                           |
+| **Knowledge Synthesis** | knowledge-synthesis               | knowledge-synthesis               | cross-domain-transfer             | —                           |
+| **M365 Agent Debug**    | m365-agent-debugging              | m365-agent-debugging              | m365-agent-debug                  | —                           |
+| **Markdown Mermaid**    | markdown-mermaid                  | markdown-mermaid                  | marp                              | —                           |
+| **MCP Development**     | mcp-development                   | mcp-development                   | mcp-server                        | —                           |
+| **MD to Word**          | md-to-word                        | md-to-word                        | md-to-word                        | —                           |
+| **Meditation**          | meditation                        | meditation                        | meditate                          | —                           |
+| **Microsoft Graph**     | microsoft-graph-api               | microsoft-graph-api               | graph-api                         | —                           |
+| **North Star**          | north-star                        | north-star                        | northstar                         | —                           |
+| **Release Management**  | release-process                   | release-management                | release                           | build-extension-package.ps1 |
+| **Research-First Dev**  | research-first-development        | research-first-workflow           | gapanalysis                       | —                           |
+| **Secrets Management**  | secrets-management                | secrets-management                | secrets                           | —                           |
+| **Self-Actualization**  | self-actualization                | self-actualization                | selfactualize                     | —                           |
+| **Teams App Patterns**  | teams-app-patterns                | teams-app-patterns                | teams-app                         | —                           |
+| **Testing/TDD**         | testing-strategies                | testing-strategies                | tdd                               | —                           |
+| **UI/UX Design**        | ui-ux-design                      | ui-ux-design                      | accessibility                     | —                           |
+| **VS Code Extension**   | vscode-extension-patterns         | vscode-extension-patterns         | vscode-extension-audit            | —                           |
+| **VSCode Config**       | vscode-configuration-validation   | vscode-configuration-validation   | vscode-settings                   | —                           |
 
 ### Partial Trifectas (4)
 
@@ -717,21 +717,21 @@ flowchart LR
 
 ### Subgraph Index
 
-| Subgraph         | Skills                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🧠 Cognitive      | bootstrap-learning, learning-psychology, cognitive-load, appropriate-reliance, airs-appropriate-reliance, anti-hallucination, awareness, socratic-questioning, rubber-duck-debugging, work-life-balance, frustration-recognition, coaching-techniques, deep-work-optimization, cognitive-symbiosis, proactive-assistance                                                                                   |
-| 🔮 Meta-Cognitive | meditation, knowledge-synthesis, global-knowledge, self-actualization, architecture-refinement, skill-catalog-generator, skill-building, skill-development, architecture-audit, brain-qa, memory-activation, dream-state, muscle-memory-recognition                                                                 |
-| 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code, azure-architecture-patterns, azure-devops-automation, research-first-development, bicep-avm-mastery, database-design, performance-profiling                                                                        |
-| 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management, azure-deployment-operations, observability-monitoring, scope-management, status-reporting                                                                                                                                                      |
-| 🔐 Security       | security-review, privacy-responsible-ai, pii-privacy-regulations, distribution-security, secrets-management                                                                                                                                                                                                                                                                                                |
-| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development, llm-model-selection, foundry-agent-platform, multi-agent-orchestration, microsoft-graph-api                                                                                                                                                                                                                                        |
-| 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                                                                                                                                                                                                                  |
+| Subgraph         | Skills                                                                                                                                                                                                                                                                                                                                          |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🧠 Cognitive      | bootstrap-learning, learning-psychology, cognitive-load, appropriate-reliance, airs-appropriate-reliance, anti-hallucination, awareness, socratic-questioning, rubber-duck-debugging, work-life-balance, frustration-recognition, coaching-techniques, deep-work-optimization, cognitive-symbiosis, proactive-assistance                        |
+| 🔮 Meta-Cognitive | meditation, knowledge-synthesis, global-knowledge, self-actualization, architecture-refinement, skill-catalog-generator, skill-building, skill-development, architecture-audit, brain-qa, memory-activation, dream-state, muscle-memory-recognition                                                                                             |
+| 🔧 Engineering    | testing-strategies, refactoring-patterns, debugging-patterns, code-review, git-workflow, project-scaffolding, vscode-environment, api-design, infrastructure-as-code, azure-architecture-patterns, azure-devops-automation, research-first-development, bicep-avm-mastery, database-design, performance-profiling                               |
+| 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management, azure-deployment-operations, observability-monitoring, scope-management, status-reporting                                                                                           |
+| 🔐 Security       | security-review, privacy-responsible-ai, pii-privacy-regulations, distribution-security, secrets-management                                                                                                                                                                                                                                     |
+| 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development, llm-model-selection, foundry-agent-platform, multi-agent-orchestration, microsoft-graph-api                                                                                                                                                                             |
+| 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                                                                                                                                                       |
 | 📝 Docs & Writing | markdown-mermaid, lint-clean-markdown, ascii-art-alignment, academic-research, practitioner-research, research-project-scaffold, creative-writing, grant-writing, localization, api-documentation, cross-cultural-collaboration, citation-management, literature-review, dissertation-defense, book-publishing, documentation-quality-assurance |
-| 🎨 Visual & Audio | svg-graphics, image-handling, graphic-design, gamma-presentations, text-to-speech, pptx-generation, slide-design, visual-memory, ai-character-reference-generation                                                                                                                                                                                                                                         |
-| 💼 Business       | business-analysis, alex-effort-estimation, executive-storytelling                                                                                                                                                                                                                                                                                                                                          |
-| 💻 VS Code        | vscode-extension-patterns, chat-participant-patterns, persona-detection                                                                                                                                                                                                                                                                                                                                    |
-| ☁️ M365           | m365-agent-debugging, teams-app-patterns                                                                                                                                                                                                                                                                                                                                                                   |
-| 👑 Master         | heir-sync-management, release-process, release-preflight                                                                                                                                                                                                                                                                                                                                                   |
+| 🎨 Visual & Audio | svg-graphics, image-handling, graphic-design, gamma-presentations, text-to-speech, pptx-generation, slide-design, visual-memory, ai-character-reference-generation                                                                                                                                                                              |
+| 💼 Business       | business-analysis, alex-effort-estimation, executive-storytelling                                                                                                                                                                                                                                                                               |
+| 💻 VS Code        | vscode-extension-patterns, chat-participant-patterns, persona-detection                                                                                                                                                                                                                                                                         |
+| ☁️ M365           | m365-agent-debugging, teams-app-patterns                                                                                                                                                                                                                                                                                                        |
+| 👑 Master         | heir-sync-management, release-process, release-preflight                                                                                                                                                                                                                                                                                        |
 
 ---
 
@@ -793,7 +793,7 @@ flowchart LR
     end
 
     subgraph Trifecta["🔺 Trifecta Completeness"]
-        TRI["Skill + Instruction + Prompt<br/><small>26 full / 4 partial / ~83 skill-only</small>"]
+        TRI["Skill + Instruction + Prompt<br/><small>40 full trifectas</small>"]
     end
 
     SESSION -->|"meditation consolidates"| EPISODIC
@@ -917,12 +917,12 @@ flowchart TB
 ```
 
 **Inheritance values** (source of truth: `SKILL_EXCLUSIONS` in `sync-architecture.cjs`):
-| Value          | Count | Meaning                  | Sync Behavior      |
-| -------------- | ----- | ------------------------ | ------------------ |
-| `inheritable`  | 100   | All heirs receive        | Master → All Heirs |
-| `master-only`  | 5     | Master keeps exclusively | Not synced         |
-| `heir:vscode`  | 7     | VS Code heir only        | Master → VS Code   |
-| `heir:m365`    | 2     | M365 heir only           | Master → M365      |
+| Value         | Count | Meaning                  | Sync Behavior      |
+| ------------- | ----- | ------------------------ | ------------------ |
+| `inheritable` | 100   | All heirs receive        | Master → All Heirs |
+| `master-only` | 5     | Master keeps exclusively | Not synced         |
+| `heir:vscode` | 7     | VS Code heir only        | Master → VS Code   |
+| `heir:m365`   | 2     | M365 heir only           | Master → M365      |
 
 ---
 

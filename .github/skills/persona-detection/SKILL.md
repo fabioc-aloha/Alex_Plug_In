@@ -5,8 +5,6 @@ description: "Intelligent project persona identification using priority chain de
 
 # Persona Detection Skill
 
-**Classification**: Inheritable (VS Code heir) | Feature Knowledge
-**Activation**: persona, know your customer, project type detection, welcome screen, sidebar persona
 **Inheritance**: heir:vscode
 
 ---
@@ -110,9 +108,3 @@ The welcome view displays the persona with confidence % and detection source (pr
 | Every Alex project shows DevOps | `.github/` matched via substring | Use `fs.pathExists()` for path patterns (v5.7.1) |
 | `.github/` triggers power-user | Noise signal in every project | Removed from power-user patterns (v5.7.1) |
 | Wrong persona cached | projectPersona in user-profile.json stale | 7-day expiry + re-detect on upgrade |
-
-## Synapses
-
-- [.github/skills/heir-curation/SKILL.md] (High, Integrates, Forward) - "Persona detection ships to heir via inheritance"
-- [.github/instructions/alex-core.instructions.md] (Medium, References, Forward) - "P5-P7 working memory slots updated by persona detection"
-- [.github/skills/release-process/SKILL.md] (Medium, Validates, Forward) - "Persona detection tested during pre-publish"

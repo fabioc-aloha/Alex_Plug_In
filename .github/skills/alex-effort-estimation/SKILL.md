@@ -149,10 +149,3 @@ When reviewing task lists:
 ❌ **Don't skip human review** - Speed without quality is waste  
 ❌ **Don't ignore iteration cycles** - First attempt isn't always right  
 ❌ **Don't forget context-building** - Reading files takes real time  
-
-## Synapses
-
-- [bootstrap-learning/SKILL.md] → Learning acceleration estimates
-- [project-management/SKILL.md] → Task planning integration
-- [release-process/SKILL.md] → Release effort estimation
-- [testing-strategies/SKILL.md] → Test effort (real time bottleneck)

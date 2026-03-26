@@ -157,9 +157,9 @@ graph TB
 
 **Specialized expertise** - deep knowledge in specific areas. Each skill is a folder with `SKILL.md` and optional `synapses.json`.
 
-### Core Skills (130 folders)
+### Core Skills (150 folders)
 
-Master Alex includes 130 skills covering areas like:
+Master Alex includes 150 skills covering areas like:
 
 **Table 8:** *Example Skill Categories*
 

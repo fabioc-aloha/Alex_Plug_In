@@ -7,6 +7,7 @@
  */
 import { HealthCheckResult } from '../shared/healthCheck';
 import { escapeHtml } from '../shared/sanitize';
+import { ActiveContext } from '../shared/activeContextManager';
 import { MindTabData, TokenStatusInfo, SettingsToggle, actionButton } from './welcomeViewHtml';
 
 export interface MindTabContext {
@@ -19,6 +20,7 @@ export interface MindTabContext {
     healthPct: number;
     tokenStatuses?: TokenStatusInfo[];
     settingsToggles?: SettingsToggle[];
+    activeContext?: ActiveContext | null;
 }
 
 /** Generate the Mind tab panel HTML. */
@@ -26,16 +28,35 @@ export function getMindTabHtml(ctx: MindTabContext): string {
     const {
         mindData, health, hasGlobalKnowledge,
         healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct,
-        tokenStatuses, settingsToggles,
+        tokenStatuses, settingsToggles, activeContext,
     } = ctx;
+
+    // Build Active Context row items for the transparency card
+    const ctxRows: { label: string; value: string }[] = [];
+    if (activeContext) {
+        if (activeContext.persona) { ctxRows.push({ label: 'Persona', value: activeContext.persona }); }
+        if (activeContext.tone && !activeContext.tone.includes('auto')) { ctxRows.push({ label: 'Tone', value: activeContext.tone }); }
+
+        if (activeContext.priorities) { ctxRows.push({ label: 'Priorities', value: activeContext.priorities }); }
+        if (activeContext.principles) { ctxRows.push({ label: 'Principles', value: activeContext.principles }); }
+        if (activeContext.northStar) { ctxRows.push({ label: 'North Star', value: activeContext.northStar }); }
+    }
 
     return `
       <div class="tab-panel" id="panel-mind" role="tabpanel" aria-labelledby="tab-mind">
           ${mindData ? `
-          <div class="identity-card">
-              <div class="identity-name">${mindData.identityName}</div>
-              <div class="identity-meta">${mindData.identityMeta}</div>
-          </div>
+
+          ${ctxRows.length > 0 ? `
+          <div class="dashboard-card">
+              <div class="dashboard-card-title" data-cmd="openCopilotInstructions" tabindex="0" role="button" title="Click to open copilot-instructions.md">Agent Context <span class="agent-context-edit">📄 Edit</span></div>
+              <div class="agent-context-panel">
+                  ${ctxRows.map(r => `
+                  <div class="agent-context-row">
+                      <span class="agent-context-label">${escapeHtml(r.label)}</span>
+                      <span class="agent-context-value">${escapeHtml(r.value)}</span>
+                  </div>`).join('')}
+              </div>
+          </div>` : ''}
 
           <div class="arch-status-banner ${healthBannerClass}" data-cmd="healthDashboard" title="Click to open Health Dashboard" tabindex="0" role="button" aria-label="Architecture health: ${healthBannerLabel}">
               <span class="arch-status-icon" aria-hidden="true">${healthBannerIcon}</span>
@@ -46,24 +67,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
           </div>
 
           ${hasGlobalKnowledge ? `
-          <div class="dashboard-card">
-              <div class="dashboard-card-title">Global Knowledge</div>
-              <div class="gk-panel">
-                  <div class="gk-stat">
-                      <span class="gk-stat-icon">📚</span>
-                      <div class="gk-stat-label">Insights</div>
-                  </div>
-                  <div class="gk-stat">
-                      <span class="gk-stat-icon">🔗</span>
-                      <div class="gk-stat-label">Cross-Project</div>
-                  </div>
-                  <div class="gk-stat">
-                      <span class="gk-stat-icon">⭐</span>
-                      <div class="gk-stat-label">Promoted</div>
-                  </div>
-              </div>
-              ${actionButton('knowledgeQuickPick', '🔎', 'Search Knowledge', 'Find patterns from past work')}
-          </div>
+          ${actionButton('knowledgeQuickPick', '🔎', 'Search Knowledge', 'Find patterns from past work')}
           ` : ''}
 
           <div class="dashboard-card">
@@ -118,46 +122,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
               </div>` : ''}
           </div>
 
-          <div class="dashboard-card">
-              <div class="dashboard-card-title">Knowledge Freshness</div>
-              <div class="freshness-panel">
-                  <div class="freshness-bucket thriving">
-                      <div class="freshness-count">${mindData.freshness.thriving}</div>
-                      <div class="freshness-label">Thriving</div>
-                  </div>
-                  <div class="freshness-bucket active">
-                      <div class="freshness-count">${mindData.freshness.active}</div>
-                      <div class="freshness-label">Active</div>
-                  </div>
-                  <div class="freshness-bucket fading">
-                      <div class="freshness-count">${mindData.freshness.fading}</div>
-                      <div class="freshness-label">Fading</div>
-                  </div>
-                  <div class="freshness-bucket dormant">
-                      <div class="freshness-count">${mindData.freshness.dormant}</div>
-                      <div class="freshness-label">Dormant</div>
-                  </div>
-              </div>
-              ${(mindData.freshness.fading + mindData.freshness.dormant) > 0 ? actionButton('reviewFadingSkills', '🔄', 'Review Fading Skills', 'Refresh skills that need attention') : ''}
-          </div>
 
-          ${mindData.calibration.total > 0 ? `
-          <div class="dashboard-card">
-              <div class="dashboard-card-title">Honest Uncertainty</div>
-              <div class="calibration-panel">
-                  ${(['high', 'medium', 'low', 'uncertain'] as const).map(level => {
-                      const count = mindData.calibration[level];
-                      const pct = mindData.calibration.total > 0 ? Math.round((count / mindData.calibration.total) * 100) : 0;
-                      const emoji = level === 'high' ? '🟢' : level === 'medium' ? '🟡' : level === 'low' ? '🟠' : '🔴';
-                      return `
-                  <div class="calibration-bar-row">
-                      <span class="calibration-label">${emoji} ${level.charAt(0).toUpperCase() + level.slice(1)}</span>
-                      <div class="calibration-bar-track"><div class="calibration-bar-fill ${level}" style="width: ${pct}%"></div></div>
-                      <span class="calibration-pct">${pct}%</span>
-                  </div>`;}).join('')}
-              </div>
-              ${(mindData.calibration.low + mindData.calibration.uncertain) > 0 ? actionButton('reviewLowConfidence', '📚', 'Review Low-Confidence', 'Build knowledge in uncertain areas') : ''}
-          </div>` : ''}
 
           ${(tokenStatuses ?? []).length > 0 ? `
           <div class="dashboard-card">

@@ -551,7 +551,3 @@ For side-view quadrupeds (dog, cat, horse):
 6. **Squint test** — Remove all color. Is the silhouette recognizable?
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

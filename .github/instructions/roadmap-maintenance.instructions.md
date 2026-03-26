@@ -6,9 +6,6 @@ inheritance: master-only
 
 # Roadmap Maintenance Procedural Memory
 
-**Classification**: Procedural Memory | Documentation Quality  
-**Activation**: roadmap update, backlog audit, research findings, version planning  
-**Priority**: HIGH - Prevents roadmap drift and duplication
 
 ---
 

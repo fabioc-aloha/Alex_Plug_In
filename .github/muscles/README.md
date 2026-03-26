@@ -36,6 +36,7 @@ Memory files define *what* and *how*; muscles *do*.
 | `pptxgen-cli.ts`              | TypeScript | PowerPoint generation                     | inheritable |
 | `sync-architecture.cjs`       | JavaScript | Master to Heir sync                       | master-only |
 | `validate-skills.ps1`         | PowerShell | Skill file validation                     | inheritable |
+| `audit-token-waste.cjs`       | JavaScript | Token waste detection and auto-fix        | inheritable |
 | `validate-synapses.ps1`       | PowerShell | Synapse target validation                 | inheritable |
 
 ### Shared Modules (`shared/`)

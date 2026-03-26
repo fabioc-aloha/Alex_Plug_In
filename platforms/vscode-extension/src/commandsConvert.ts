@@ -290,7 +290,7 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
             break;
           }
           const parent = path.dirname(searchDir);
-          if (parent === searchDir) break;
+          if (parent === searchDir) { break; }
           searchDir = parent;
         }
 

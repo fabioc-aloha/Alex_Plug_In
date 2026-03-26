@@ -135,11 +135,6 @@
         "icon": "$(info)"
       },
       {
-        "command": "alex.exportForM365",
-        "title": "Alex: Export for M365 Copilot",
-        "icon": "$(package)"
-      },
-      {
         "command": "alex.askAboutSelection",
         "title": "Ask Alex about this",
         "icon": "$(comment-discussion)"
@@ -1141,6 +1136,9 @@
         "path": "./.github/skills/text-to-speech/SKILL.md"
       },
       {
+        "path": "./.github/skills/token-waste-elimination/SKILL.md"
+      },
+      {
         "path": "./.github/skills/ui-ux-design/SKILL.md"
       },
       {
@@ -1166,16 +1164,6 @@
           "type": "boolean",
           "default": true,
           "description": "Automatically enable protected mode when Alex extension source code (platforms/vscode-extension/) is detected in workspace."
-        },
-        "alex.m365.enabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable M365 Copilot integration features"
-        },
-        "alex.m365.autoSync": {
-          "type": "boolean",
-          "default": false,
-          "description": "Automatically sync knowledge to OneDrive on meditate/dream"
         },
         "alex.autoInsights.enabled": {
           "type": "boolean",
@@ -1461,12 +1449,6 @@
             "name": "docs",
             "description": "Open Alex cognitive architecture documentation",
             "sampleRequest": "Open architecture documentation"
-          },
-          {
-            "name": "exportm365",
-            "description": "Export your Alex memory for M365 Copilot integration",
-            "when": "config.alex.m365.enabled",
-            "sampleRequest": "Export my architecture for M365 Copilot"
           },
           {
             "name": "help",

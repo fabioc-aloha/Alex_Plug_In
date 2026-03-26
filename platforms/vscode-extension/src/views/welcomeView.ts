@@ -14,6 +14,7 @@ import {
 } from "../chat/personaDetection";
 import {
   readActiveContext,
+  updateActiveContext,
   updatePersona,
 } from "../shared/activeContextManager";
 import { openChatPanel } from "../shared/utils";
@@ -31,7 +32,6 @@ import {
   getWelcomeHtmlContent,
 } from "./welcomeViewHtml";
 import { getTokenStatuses, TOKEN_CONFIGS } from '../services/secretsManager';
-import { getCalibrationSummary } from '../chat/honestUncertainty';
 
 export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "alex.welcomeView";
@@ -184,8 +184,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
       provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
       learnAlex: "https://learnai.correax.com/",
-      learnAlexSelfStudy: "https://learnai.correax.com/self-study",
-      learnAlexExercises: "https://learnai.correax.com/exercises",
       learnAlexSessionPlan: "https://learnai.correax.com/session-plan",
       learnAlexSlides: "https://learnai.correax.com/slides",
       learnAlexDemoScripts: "https://learnai.correax.com/demo-scripts",
@@ -193,9 +191,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       learnAlexPreRead: "https://learnai.correax.com/pre-read",
       learnAlexGitHubGuide: "https://learnai.correax.com/github-guide",
       learnAlexResponsibleAI: "https://learnai.correax.com/responsible-ai",
-      learnAlexAirs: "https://learnai.correax.com/airs",
-      learnAlexQuiz: "https://learnai.correax.com/quiz",
-      learnAlexBooks: "https://learnai.correax.com/books",
+      learnAlexPromptEngineering: "https://learnai.correax.com/prompt-engineering",
+      learnAlexAiReadiness: "https://learnai.correax.com/ai-readiness",
+      learnAlexAiAdoption: "https://learnai.correax.com/ai-adoption",
     };
 
     // Handle simple command execution
@@ -268,18 +266,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         await openChatPanel(skillPrompt);
         break;
       }
-      case "reviewFadingSkills": {
-        logInfo('[Alex] Opening fading skills review');
-        const fadingPrompt = 'Review my fading and dormant skills. Read the Knowledge Freshness data and recommend which skills I should practice or refresh. For each skill, explain why it\'s fading and suggest a quick exercise to reinforce it.';
-        await openChatPanel(fadingPrompt);
-        break;
-      }
-      case "reviewLowConfidence": {
-        logInfo('[Alex] Opening low-confidence review');
-        const confidencePrompt = 'Review my low-confidence and uncertain skills. Read the Honest Uncertainty calibration data and help me understand where I need more practice or knowledge. Suggest specific resources or exercises to improve confidence in these areas.';
-        await openChatPanel(confidencePrompt);
-        break;
-      }
+
       case "tabSwitch": {
         const tabId = typeof (payload as any).tabId === 'string' ? (payload as any).tabId : '';
         if (!tabId) {
@@ -295,9 +282,20 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         const allowedModes = ['auto', 'precise', 'chatty'] as const;
         const mode = allowedModes.includes(modeRaw) ? modeRaw : 'auto';
         await vscode.workspace.getConfiguration('alex').update('personalityMode', mode, vscode.ConfigurationTarget.Global);
+        // Sync tone to copilot-instructions.md so agent mode respects it
+        const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (wsRoot) {
+          const toneMap: Record<string, string> = {
+            'auto': '_(auto — adapt to context)_',
+            'precise': 'Concise, code-first, minimal explanation',
+            'chatty': 'Explanatory, conversational, teaching-oriented',
+          };
+          await updateActiveContext(wsRoot, { tone: toneMap[mode] || toneMap['auto'] }, 'personality-toggle');
+        }
         logInfo(`[Alex] Personality mode set to: ${mode}`);
         break;
       }
+
       case "toggleSetting": {
         // 7.14: Inline settings toggle
         const settingKey = typeof (payload as any).key === 'string' ? (payload as any).key : '';
@@ -333,6 +331,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       case "refresh":
         await this.refresh();
         break;
+      case "openCopilotInstructions": {
+        const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+        if (wsRoot) {
+          const instructionsPath = path.join(wsRoot, '.github', 'copilot-instructions.md');
+          const doc = await vscode.workspace.openTextDocument(instructionsPath);
+          await vscode.window.showTextDocument(doc);
+        }
+        break;
+      }
       default: {
         // Handle openDoc:<NAME> commands — open architecture docs by name
         if (command?.startsWith('openDoc:')) {
@@ -658,8 +665,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    */
   private async _collectMindData(wsRoot: string | undefined, lastDreamDate: Date | null, health: HealthCheckResult, agentCount: number, skillCount: number): Promise<MindTabData> {
     const data: MindTabData = {
-      identityName: 'Alex Finch',
-      identityMeta: 'Age 26 \u00b7 Curious \u00b7 Ethical \u00b7 Grows through reflection',
       skillCount,
       instructionCount: 0,
       promptCount: 0,
@@ -669,8 +674,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       lastDreamDate: lastDreamDate ? lastDreamDate.toISOString().slice(0, 10) : null,
       lastMeditationDate: null,
       meditationCount: 0,
-      freshness: { thriving: 0, active: 0, fading: 0, dormant: 0 },
-      calibration: { high: 0, medium: 0, low: 0, uncertain: 0, total: 0 },
     };
 
     if (!wsRoot) { return data; }
@@ -701,33 +704,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             data.lastMeditationDate = match[1];
           }
         }
-
-        // 7.32: Knowledge freshness — bucket episodic files by age
-        const now = Date.now();
-        const dayMs = 24 * 60 * 60 * 1000;
-        for (const f of episodicFiles) {
-          const dateMatch = f.match(/(\d{4}-\d{2}-\d{2})/);
-          if (dateMatch) {
-            const age = (now - new Date(dateMatch[1]).getTime()) / dayMs;
-            if (age <= 7) { data.freshness.thriving++; }
-            else if (age <= 30) { data.freshness.active++; }
-            else if (age <= 90) { data.freshness.fading++; }
-            else { data.freshness.dormant++; }
-          }
-        }
       }
-
-      // 7.33: Honest Uncertainty — get calibration summary
-      try {
-        const calibSummary = await getCalibrationSummary(wsRoot);
-        if (calibSummary) {
-          data.calibration.total = calibSummary.totalResponses;
-          data.calibration.high = calibSummary.byLevel.high ?? 0;
-          data.calibration.medium = calibSummary.byLevel.medium ?? 0;
-          data.calibration.low = calibSummary.byLevel.low ?? 0;
-          data.calibration.uncertain = calibSummary.byLevel.uncertain ?? 0;
-        }
-      } catch { /* silent — calibration is optional enhancement */ }
     } catch (err) {
       console.error("[Alex][WelcomeView] _collectMindData failed (non-fatal):", err);
     }

@@ -114,7 +114,3 @@ One paragraph: what happened, impact, resolution.
 - [ ] Known issues (monitoring gaps, flaky tests)
 - [ ] Pending alerts (expected noise vs real signal)
 - [ ] Escalation contacts (who to call at 3am)
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

@@ -29,7 +29,6 @@ A skill for markdown authoring, Mermaid diagramming, multi-tool visualization, V
 | ---- | ------ | ---------- |
 | **A** | **Analyze** | What data/process am I visualizing? Who is the audience? What diagram type fits? |
 | **T** | **Think** | Which layout pattern? (Medallion/Lineage/Pipeline) How many nodes? Will it be too wide/tall? |
-| **A** | **Apply Skills** | Load GitHub Pastel v2 palette. Select `classDef` colors by semantic meaning. Add `%%{init}%%` directive. Choose `direction` for subgraphs. |
 | **C** | **Create** | Write the Mermaid code. Every node gets a style. Every flowchart gets `linkStyle default`. |
 | **C** | **Check** | Render the diagram. Verify: pastels (not saturated), layout (not lopsided), labels (readable), arrows (gray #57606a). |
 | **U** | **Update** | Write the final diagram into the target `.md` file. Add `**Figure N:** *description*` label. |
@@ -44,7 +43,6 @@ Before writing any Mermaid code, answer these:
 □ Subgraph strategy decided (Medallion vs Lineage vs Pipeline)
 □ Color assignments mapped (what color = what meaning)
 □ Multi-line node labels use <br/> NOT \n
-□ Init directive ready: %%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': '#ffffff', ...}}}%%
 ```
 
 ### Quality Gate (Steps C-C-U)
@@ -447,7 +445,6 @@ web_server.style.fill: "#f3e5f5"
 Copy this template for every new diagram. It sets the GitHub Pastel v2 palette defaults:
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
 flowchart LR
     A[Source]:::blue --> B[Process]:::gold --> C[Output]:::green
 
@@ -459,7 +456,6 @@ flowchart LR
 ```
 
 **Three things every diagram needs:**
-1. `%%{init}%%` directive (first line)
 2. `classDef` or `style` for node colors
 3. `linkStyle default` for arrow color
 
@@ -545,7 +541,6 @@ linkStyle default stroke:#57606a,stroke-width:1.5px
 **Complete Example**:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
     A[Source] --> |Transform| B[Target]
     
@@ -579,7 +574,6 @@ flowchart LR
 **Init directive (Fishbowl):**
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#ffffff'}}}%%
 ```
 
 **When to choose Fishbowl over GitHub Pastel v2**: Use Fishbowl when all nodes need equal visual weight (e.g., governance structures, compliance flows). Use GitHub Pastel v2 when nodes carry semantic meaning that should be color-coded by category.
@@ -591,19 +585,16 @@ Add as FIRST line inside mermaid block:
 **Default init directive (GitHub Pastel v2):**
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
 ```
 
 **Standard GitHub-compatible theme (legacy):**
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0'}}}%%
 ```
 
 **Quadrant chart theme:**
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': { 'quadrant1Fill': '#e8f5e9', 'quadrant2Fill': '#e3f2fd', 'quadrant3Fill': '#f3e5f5', 'quadrant4Fill': '#fff3e0', 'quadrant1TextFill': '#1f2328', 'quadrant2TextFill': '#1f2328', 'quadrant3TextFill': '#1f2328', 'quadrant4TextFill': '#1f2328', 'quadrantPointFill': '#1565c0', 'quadrantPointTextFill': '#1f2328'}}}%%
 ```
 
 ### classDef Reusable Styles
@@ -665,7 +656,6 @@ flowchart LR
 Gantt charts use different theme variables than flowcharts:
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': {
   'taskBkgColor': '#ddf4ff',
   'activeTaskBkgColor': '#d3f5db',
   'activeTaskBorderColor': '#6fdd8b',
@@ -698,7 +688,6 @@ gantt
 ### Sequence Diagram Theming
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': {
   'actorBkg': '#ddf4ff',
   'actorBorder': '#80ccff',
   'actorTextColor': '#0550ae',
@@ -812,7 +801,6 @@ Get-ChildItem -Recurse -Filter "*.md" | Select-String -Pattern '\\u[0-9a-fA-F]{4
 **Fix**: Always use `#ffffff` for clean white label backgrounds:
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': {'edgeLabelBackground': '#ffffff', 'lineColor': '#57606a'}}}%%
 ```
 
 This provides a clean white background for edge labels, ensuring readability on any rendering surface.
@@ -834,7 +822,6 @@ This provides a clean white background for edge labels, ensuring readability on 
 
 **Problem**: Diagrams have dark backgrounds in VS Code preview
 
-**Solution 1**: Use per-diagram `%%{init}%%` theming (see above)
 
 **Solution 2**: Apply included `markdown-light.css` via settings
 
@@ -1375,7 +1362,6 @@ class MemorySystem base
 
 ```text
 %% ❌ FAILS - single series, all bars same color
-%%{init: {'theme': 'base', 'themeVariables': { 'xyChart': {'plotColorPalette': '#1565c0, #2e7d32, #7b1fa2'}}}}%%
 xychart-beta
     x-axis [A, B, C]
     bar [1, 2, 3]  %% All same color!
@@ -1391,7 +1377,6 @@ xychart-beta
 
 1. **Pie chart** — Use `pie` with theming when showing proportions:
    ```text
-   %%{init: {'theme': 'base', 'themeVariables': { 'pie1': '#1565c0', 'pie2': '#2e7d32'}}}%%
    pie showData
        title "Task Distribution"
        "Task A" : 8
@@ -1474,7 +1459,6 @@ Create an inventory table to track diagram state:
 
 Apply fixes in batches by issue type:
 
-1. **Missing init directives** — Add `%%{init}%%` theme block
 2. **Reserved word errors** — Rephrase or quote labels
 3. **Parse errors** — Apply 4 safety rules
 4. **Style inconsistencies** — Apply GitHub Pastel v2 palette
@@ -1496,7 +1480,6 @@ Re-render all diagrams and confirm fixes:
 
 ### Before Committing
 
-- [ ] All diagrams have `%%{init}%%` theme directive
 - [ ] All diagrams have figure labels
 - [ ] All tables have table labels
 - [ ] No unicode escape sequences

@@ -58,7 +58,3 @@ Tests pass before AND after.
 ## Safe Workflow
 
 Commit → Test → Small change → Test → Commit → Repeat
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

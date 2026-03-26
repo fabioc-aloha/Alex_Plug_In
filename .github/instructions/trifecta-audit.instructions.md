@@ -5,8 +5,6 @@ inheritance: master-only
 
 # Trifecta Audit Protocol
 
-**Classification**: Procedural Memory | Architecture Quality  
-**Activation**: trifecta audit, capability completeness, memory coverage  
 **Purpose**: Ensure architecturally significant capabilities exist across all three memory systems  
 **Created**: 2026-02-13 (Trifecta refactoring session)
 

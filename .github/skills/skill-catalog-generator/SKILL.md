@@ -181,7 +181,6 @@ Not individual lines (reduces diagram clutter).
 function generateNetworkDiagram(skills: SkillInfo[]): string {
   const lines: string[] = [
     '```mermaid',
-    "%%{init: {'theme': 'base', 'themeVariables': { 'lineColor': '#666', 'primaryColor': '#e8f4f8', 'primaryBorderColor': '#0969da', 'edgeLabelBackground': '#ffffff'}}}%%",
     'flowchart LR',
   ];
 

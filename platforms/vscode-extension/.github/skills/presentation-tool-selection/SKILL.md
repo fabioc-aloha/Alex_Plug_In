@@ -224,7 +224,3 @@ Sometimes the best approach combines tools:
 - "presentation strategy"
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

@@ -5,8 +5,6 @@ applyTo: "**/*audit*,**/*qa*"
 
 # Semantic Audit Procedure
 
-**Classification**: Procedural Memory | Quality Assurance  
-**Activation**: semantic audit, logic check, consistency review, meaning drift  
 **Purpose**: Verify that documented meaning, process logic, code behavior, and architectural claims are internally consistent  
 **Complements**: brain-qa.ps1 (structural), audit-master-alex.ps1 (automated)
 

@@ -249,7 +249,3 @@ if ('serviceWorker' in navigator) {
 | Cache fills up device storage | Set max cache size, prune old entries |
 | SW blocks updates | Use `skipWaiting()` to activate immediately |
 | API data stale after offline | Show "last updated" timestamp to users |
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

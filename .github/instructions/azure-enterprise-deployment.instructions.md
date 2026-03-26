@@ -5,8 +5,6 @@ applyTo: "**/azure/**,**/infrastructure/**,**/*deploy*.{ps1,sh,md}"
 
 # Azure Enterprise Deployment Patterns
 
-**Classification**: Procedural Knowledge | Enterprise Infrastructure  
-**Activation**: Azure deployment, enterprise infrastructure, permission validation, phased rollout  
 **Domain**: Cloud infrastructure deployment in enterprise environments with policy restrictions
 
 ---

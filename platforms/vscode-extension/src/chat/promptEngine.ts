@@ -190,7 +190,7 @@ async function buildActiveContextLayer(ctx: PromptContext): Promise<string> {
             }
         }
 
-        if (activeCtx.objective && activeCtx.objective !== '*(session-objective — set by user or focus timer)*') {
+        if (activeCtx.objective && !activeCtx.objective.includes('session-objective')) {
             parts.push(`- **Current Objective**: ${activeCtx.objective}`);
         }
 

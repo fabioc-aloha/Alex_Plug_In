@@ -901,7 +901,3 @@ MCP servers extend AI capabilities with external tools (Azure, GitHub, databases
 - <35: Needs Work — Major refactoring
 
 **When to apply**: Before marketplace publishing, after major features, quarterly reviews.
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

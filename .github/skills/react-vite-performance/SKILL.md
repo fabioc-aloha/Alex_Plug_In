@@ -299,7 +299,3 @@ onTTFB(reportMetric);
 - [ ] Fonts: `font-display: swap`, preload critical
 - [ ] Brotli/gzip compression enabled
 - [ ] Critical CSS inlined
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

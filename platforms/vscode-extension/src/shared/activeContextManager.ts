@@ -30,8 +30,13 @@ import * as workspaceFs from './workspaceFs';
 export interface ActiveContext {
     persona?: string;       // e.g. "Developer (85% confidence)"
     objective?: string;     // e.g. "Build ActiveContextManager" or placeholder
+    tone?: string;          // e.g. "Concise, code-first, minimal explanation"
+
     focusTrifectas?: string; // e.g. "master-heir-management, brand-asset-management"
+    priorities?: string;    // e.g. "north-star-alignment, autonomous-partnership"
     principles?: string;    // e.g. "KISS, DRY, Optimize-for-AI"
+    recent?: string;        // e.g. "Summary of recent work"
+    guidelines?: string;    // e.g. "Architecture MUST NOT depend on the Extension"
     lastAssessed?: string;  // e.g. "2026-02-14 — v5.7.0"
     northStar?: string;     // e.g. "Create the most advanced and trusted AI partner for any job"
 }
@@ -44,14 +49,19 @@ type ActiveContextField = Exclude<keyof ActiveContext, 'northStar'>;
 
 const SECTION_HEADER = '## Active Context';
 const SECTION_COMMENT = '<!-- Extension-managed session state. Read this FIRST to resume context across sessions. -->';
-const OBJECTIVE_PLACEHOLDER = '*(session-objective — set by user or focus timer)*';
+const OBJECTIVE_PLACEHOLDER = '_(session-objective — set by user)_';
 
 /** Field labels as they appear in copilot-instructions.md */
 const FIELD_LABELS: Record<ActiveContextField, string> = {
     persona: 'Persona',
     objective: 'Objective',
+    tone: 'Tone',
+
     focusTrifectas: 'Focus Trifectas',
+    priorities: 'Priorities',
     principles: 'Principles',
+    recent: 'Recent',
+    guidelines: 'Guidelines',
     lastAssessed: 'Last Assessed',
 };
 
@@ -147,10 +157,18 @@ function parseSection(section: string): ActiveContext {
             ctx.persona = trimmed.substring('Persona:'.length).trim();
         } else if (trimmed.startsWith('Objective:')) {
             ctx.objective = trimmed.substring('Objective:'.length).trim();
+        } else if (trimmed.startsWith('Tone:')) {
+            ctx.tone = trimmed.substring('Tone:'.length).trim();
         } else if (trimmed.startsWith('Focus Trifectas:')) {
             ctx.focusTrifectas = trimmed.substring('Focus Trifectas:'.length).trim();
+        } else if (trimmed.startsWith('Priorities:')) {
+            ctx.priorities = trimmed.substring('Priorities:'.length).trim();
         } else if (trimmed.startsWith('Principles:')) {
             ctx.principles = trimmed.substring('Principles:'.length).trim();
+        } else if (trimmed.startsWith('Recent:')) {
+            ctx.recent = trimmed.substring('Recent:'.length).trim();
+        } else if (trimmed.startsWith('Guidelines:')) {
+            ctx.guidelines = trimmed.substring('Guidelines:'.length).trim();
         } else if (trimmed.startsWith('Last Assessed:')) {
             ctx.lastAssessed = trimmed.substring('Last Assessed:'.length).trim();
         }
@@ -167,8 +185,12 @@ function rebuildSection(ctx: ActiveContext): string {
         SECTION_COMMENT,
         `Persona: ${ctx.persona ?? 'Unknown'}`,
         `Objective: ${ctx.objective ?? OBJECTIVE_PLACEHOLDER}`,
+        `Tone: ${ctx.tone ?? '_(auto — adapt to context)_'}`,
         `Focus Trifectas: ${ctx.focusTrifectas ?? ''}`,
+        `Priorities: ${ctx.priorities ?? ''}`,
         `Principles: ${ctx.principles ?? 'KISS, DRY, Optimize-for-AI'}`,
+        `Recent: ${ctx.recent ?? ''}`,
+        `Guidelines: ${ctx.guidelines ?? ''}`,
         `Last Assessed: ${ctx.lastAssessed ?? 'never'}`,
         '', // trailing newline before next section
     ];
@@ -241,13 +263,29 @@ export async function updateActiveContext(
                 }
             }
 
-            // Merge updates
+            // Targeted line replacement within the section (preserves all existing fields)
+            let section = parts.section;
             const changed: string[] = [];
+
             for (const [key, value] of Object.entries(updates)) {
+                if (value === undefined) { continue; }
                 const field = key as ActiveContextField;
-                if (value !== undefined && ctx[field] !== value) {
-                    (ctx as Record<string, string>)[field] = value;
-                    changed.push(`${FIELD_LABELS[field]}: ${value}`);
+                const label = FIELD_LABELS[field];
+                if (!label) { continue; }
+
+                const lineRegex = new RegExp(`^${label}:.*$`, 'm');
+                const newLine = `${label}: ${value}`;
+
+                if (lineRegex.test(section)) {
+                    const oldLine = section.match(lineRegex)?.[0];
+                    if (oldLine !== newLine) {
+                        section = section.replace(lineRegex, newLine);
+                        changed.push(newLine);
+                    }
+                } else {
+                    // Field doesn't exist — insert before trailing whitespace
+                    section = section.trimEnd() + '\n' + newLine + '\n';
+                    changed.push(newLine);
                 }
             }
 
@@ -255,9 +293,10 @@ export async function updateActiveContext(
                 return false;
             }
 
-            // Rebuild and write
-            rebuildSection(ctx);
-
+            // Write the updated content
+            const newContent = parts.before + section + parts.after;
+            await workspaceFs.writeFile(filePath, newContent);
+            console.log(`[ActiveContext] Updated (${source}): ${changed.join(', ')}`);
             return true;
         } catch (err) {
             console.warn(`[ActiveContext] Write failed (source: ${source}):`, err);

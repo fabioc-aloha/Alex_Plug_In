@@ -5,18 +5,20 @@
  * Exports a single function called by the orchestrator.
  */
 import { escapeHtml } from '../shared/sanitize';
-import { actionButton } from './welcomeViewHtml';
 
 /**
  * Playbook category sections linking to learnai.correax.com/workshop/guide.
  * 80+ playbooks now live on the site — link to sections rather than listing each one.
  */
 const PLAYBOOK_SECTIONS: Array<{ icon: string; name: string; anchor: string }> = [
-    { icon: '💻', name: 'Technology & Engineering', anchor: 'technology--engineering' },
-    { icon: '💼', name: 'Business & Professional', anchor: 'business--professional-services' },
-    { icon: '🎨', name: 'Creative & Media', anchor: 'creative--media' },
-    { icon: '🎓', name: 'Education & Research', anchor: 'education--research' },
-    { icon: '🏥', name: 'Health, Law & Human Services', anchor: 'health-law--human-services' },
+    { icon: '💻', name: 'Technology & Engineering', anchor: 'technology' },
+    { icon: '💼', name: 'Business & Professional', anchor: 'business' },
+    { icon: '🎨', name: 'Creative & Media', anchor: 'creative' },
+    { icon: '🎓', name: 'Education & Research', anchor: 'education' },
+    { icon: '🏥', name: 'Health, Law & Human Services', anchor: 'services' },
+    { icon: '🩺', name: 'Allied Health & Clinical', anchor: 'allied-health' },
+    { icon: '🔧', name: 'Trades & Applied Sciences', anchor: 'trades-technology' },
+    { icon: '🤝', name: 'Community & Human Services', anchor: 'community-humanities' },
 ];
 
 /** Generate the Docs tab panel HTML. */
@@ -121,17 +123,11 @@ export function getDocsTabHtml(): string {
                           <div class="doc-grid-desc">Skill + Instruction + Prompt</div>
                       </div>
                   </div>
-              </div>
-          </div>
-
-          <div class="docs-section">
-              <div class="docs-section-title">Reference</div>
-              <div class="doc-grid">
                   <div class="doc-grid-card" data-cmd="openDoc:SKILL-DISCIPLINE-MAP" tabindex="0" role="button">
                       <span class="doc-grid-icon">🎯</span>
                       <div class="doc-grid-text">
                           <div class="doc-grid-title">Skill-to-Discipline Map</div>
-                          <div class="doc-grid-desc">133 skills mapped to 76 disciplines</div>
+                          <div class="doc-grid-desc">Skills mapped to disciplines</div>
                       </div>
                   </div>
               </div>
@@ -149,28 +145,22 @@ export function getDocsTabHtml(): string {
                   </div>`
                   ).join('\n                  ')}
               </div>
-              <div style="margin-top: 8px; text-align: center;">
-                  <button class="action-btn" data-cmd="learnAlexGuideSection" data-anchor="" tabindex="0" style="display: inline-flex;">Browse all 80+ playbooks</button>
+              <div class="playbook-browse-row">
+                  <button class="action-btn" data-cmd="learnAlexGuideSection" data-anchor="" tabindex="0">Browse all 80 playbooks</button>
               </div>
           </div>
 
-          <div class="docs-section">
-              <div class="docs-section-title">Practice</div>
-              ${actionButton('learnAlexSelfStudy', '📝', 'Self-Study Path', 'Self-paced learning at your own speed')}
-              ${actionButton('learnAlexExercises', '🏋️', 'Exercises', 'Hands-on practice exercises')}
-              ${actionButton('learnAlexQuiz', '❓', 'Quiz', 'Test your knowledge')}
-              ${actionButton('learnAlexAirs', '📊', 'AIRS Assessment', 'AI Readiness Score — discover where you stand')}
-          </div>
-
-          <div class="docs-section">
-              <div class="docs-section-title">Books</div>
-              ${actionButton('learnAlexBooks', '📚', 'The Alex Finch Library', 'Biography, fiction, and companion content')}
-          </div>
-
           <div class="docs-cta">
-              <div class="docs-cta-title">📚 Learn AI Online</div>
-              <div class="docs-cta-desc">80+ playbooks, exercises, and training at the companion site.</div>
-              <button class="action-btn primary" data-cmd="learnAlex" tabindex="0" style="display: inline-flex;">Visit learnai.correax.com</button>
+              <div class="docs-cta-title">📚 LearnAI</div>
+              <div class="docs-cta-desc">80 playbooks and readiness tools -- free for any AI platform.</div>
+              <button class="action-btn primary" data-cmd="learnAlex" tabindex="0">Browse learnai.correax.com</button>
+              <div class="docs-cta-links">
+                  <a class="docs-cta-link" data-cmd="learnAlexPromptEngineering" tabindex="0">Prompt Engineering</a>
+                  <span class="docs-cta-sep">·</span>
+                  <a class="docs-cta-link" data-cmd="learnAlexAiReadiness" tabindex="0">AI Readiness</a>
+                  <span class="docs-cta-sep">·</span>
+                  <a class="docs-cta-link" data-cmd="learnAlexAiAdoption" tabindex="0">AI Adoption</a>
+              </div>
           </div>
 
       </div>`;

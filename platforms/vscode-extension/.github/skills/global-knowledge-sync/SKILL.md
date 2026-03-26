@@ -129,7 +129,3 @@ Insight content.
 - "global knowledge sync", "gk sync"
 - "check skills", "pull skill"
 - "/knowledge", "/saveinsight", "/promote"
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

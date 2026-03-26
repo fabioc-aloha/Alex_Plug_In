@@ -192,7 +192,3 @@ Microsoft orgs with strict conditional access policies may block `teamsapp auth 
 **M365 Positioning Example**:
 - ❌ "Accelerate your Python development"
 - ✅ "Your AI research partner. Remembers context, grows with you."
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

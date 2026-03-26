@@ -5,7 +5,7 @@
 **Version**: 2.0 — Alex v6.4.0
 **North Star**: *Create the most advanced and trusted AI partner for any job*
 
-**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md)
+**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Loading Mechanics](./LOADING-MECHANICS.md)
 
 ---
 
@@ -136,7 +136,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 | **GitHub Copilot Chat**          | (built-in with Copilot)                                  | The `@alex` chat participant requires the Chat API provided by GitHub Copilot    |
 | **Instructions Files**           | `chat.instructionsFilesLocations`                        | Auto-loads `.github/instructions/*.instructions.md` — Alex's behavioral rules    |
 | **Prompt Files**                 | `chat.promptFilesLocations`                              | Enables `/` slash commands from `.github/prompts/*.prompt.md`                    |
-| **Skills Files**                 | `chat.agentSkillsLocations`                              | Auto-loads 124 skills from `.github/skills/*/SKILL.md` — Alex's domain expertise |
+| **Skills Files**                 | `chat.agentSkillsLocations`                              | Auto-loads 136 skills from `.github/skills/*/SKILL.md` — Alex's domain expertise |
 | **Skill Adherence**              | `chat.useSkillAdherencePrompt`                           | Forces LLM to read SKILL.md before responding — knowledge quality gate           |
 | **Agent Mode**                   | `chat.agent.enabled`                                     | Enables agent-mode conversations where Alex can use tools autonomously           |
 | **Agents.md Files**              | `chat.useAgentsMdFile`                                   | Loads 7 specialist agents from `.github/agents/*.agent.md`                       |
@@ -172,7 +172,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 | **Extended Thinking**               | `claude-opus-4-5.extendedThinkingEnabled` | Deep reasoning mode for meditation, self-actualization, and architecture decisions |
 | **Thinking Budget**                 | `claude-opus-4-5.thinkingBudget: 16384`   | Maximum thinking tokens for complex cognitive tasks                                |
 | **Thinking Tool**                   | `github.copilot.chat.agent.thinkingTool`  | Enables the thinking tool for agents                                               |
-| **Thinking Phrases**                | `chat.agent.thinking.phrases`             | Alex-personality progress messages (replaces generic "Thinking...")                 |
+| **Thinking Phrases**                | `chat.agent.thinking.phrases`             | Alex-personality progress messages (replaces generic "Thinking...")                |
 | **Follow-ups**                      | `github.copilot.chat.followUps: "always"` | Helps discover Alex capabilities through suggested follow-ups                      |
 | **Include Referenced Instructions** | `chat.includeReferencedInstructions`      | Better context awareness from instruction file references                          |
 
@@ -210,7 +210,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 - **Chat**: Unlimited messages
 - **Agent Mode**: Full agent mode with tool calling
 - **Models**: GPT-4o, Claude Sonnet 4 (Capable tier); limited premium model access
-- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 124 skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
+- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 136 skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
 - **Recommended for**: Individual developers who want the full Alex experience
 
 #### Copilot Pro+
@@ -292,19 +292,19 @@ The brain (`.github/`) is the cognitive architecture. Here's how each component 
 
 ### Memory Systems → VS Code Surfaces
 
-| Brain Component      | Location                         | VS Code Integration                                        | How It's Used                                                                          |
-| -------------------- | -------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **Identity**         | `copilot-instructions.md`        | Auto-loaded by VS Code as system context                   | Defines who Alex is, routing logic, active context                                     |
-| **Instructions**     | `instructions/*.instructions.md` | Auto-loaded by `applyTo` pattern matching                  | Behavioral rules triggered by file type/name                                           |
-| **Skills**           | `skills/*/SKILL.md`              | Auto-loaded via `chatSkills` + `chat.agentSkillsLocations` | 124 domain expertise files; LLM reads before responding                                |
-| **Prompts**          | `prompts/*.prompt.md`            | Registered as `/` slash commands                           | User-invoked workflows (meditate, dream, learn, etc.)                                  |
-| **Agents**           | `agents/*.agent.md`              | Loaded via `chat.useAgentsMdFile`                          | 7 specialist agents (Builder, Researcher, Validator, Documentarian, Azure, M365, Alex) |
-| **Synapses**         | `skills/*/synapses.json`         | Read by extension at runtime                               | Skill-to-skill connections, routing weights, activation patterns                       |
-| **Episodic Memory**  | `episodic/`                      | Read/written by LM tools                                   | Session logs, calibration data, emotional patterns                                     |
-| **Domain Knowledge** | `domain-knowledge/`              | Read/written by LM tools                                   | Project-specific DK-*.md files                                                         |
-| **Config**           | `config/`                        | Read by extension at runtime                               | Feature flags, persona config, protected mode markers                                  |
-| **Muscles**          | `muscles/`                       | Executed by hooks/tasks/scripts                            | Automation scripts (sync-architecture, dream-cli, pre-commit)                          |
-| **Hooks**            | `hooks/`                         | Git integration                                            | Pre-commit quality gates for SKILL.md and synapses.json                                |
+| Brain Component      | Location                         | VS Code Integration                                               | How It's Used                                                                                                 |
+| -------------------- | -------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Identity**         | `copilot-instructions.md`        | Auto-loaded by VS Code as system context                          | Defines who Alex is, routing logic, active context                                                            |
+| **Instructions**     | `instructions/*.instructions.md` | Auto-loaded by `applyTo` pattern or semantic description matching | Behavioral rules — see [Loading Mechanics](./LOADING-MECHANICS.md) for Tier 2 details                         |
+| **Skills**           | `skills/*/SKILL.md`              | 3-level progressive disclosure via `chat.agentSkillsLocations`    | 150 domain expertise files; body loads on-demand — see [Loading Mechanics](./LOADING-MECHANICS.md) for Tier 3 |
+| **Prompts**          | `prompts/*.prompt.md`            | Registered as `/` slash commands                                  | User-invoked workflows (meditate, dream, learn, etc.)                                                         |
+| **Agents**           | `agents/*.agent.md`              | Loaded via `chat.useAgentsMdFile`                                 | 7 specialist agents (Builder, Researcher, Validator, Documentarian, Azure, M365, Alex)                        |
+| **Synapses**         | `skills/*/synapses.json`         | Read by extension at runtime                                      | Skill-to-skill connections, routing weights, activation patterns                                              |
+| **Episodic Memory**  | `episodic/`                      | Read/written by LM tools                                          | Session logs, calibration data, emotional patterns                                                            |
+| **Domain Knowledge** | `domain-knowledge/`              | Read/written by LM tools                                          | Project-specific DK-*.md files                                                                                |
+| **Config**           | `config/`                        | Read by extension at runtime                                      | Feature flags, persona config, protected mode markers                                                         |
+| **Muscles**          | `muscles/`                       | Executed by hooks/tasks/scripts                                   | Automation scripts (sync-architecture, dream-cli, pre-commit)                                                 |
+| **Hooks**            | `hooks/`                         | Git integration                                                   | Pre-commit quality gates for SKILL.md and synapses.json                                                       |
 
 ### Language Model Tools → Brain Access
 
@@ -409,7 +409,7 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 | ----------------------------------------------- | ----------------------------------------------------- |
 | Full agent-mode conversations                   | Extended thinking (requires Frontier model + setting) |
 | All 13 LM tools accessible by the model         | MCP tools (unless MCP gallery enabled)                |
-| 124 skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
+| 136 skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
 | 50+ instructions auto-loaded by pattern         |                                                       |
 | 7 specialist agents (Builder, Researcher, etc.) |                                                       |
 | Search subagent (web search in conversations)   |                                                       |
@@ -633,7 +633,7 @@ The Recommended tier is where Alex becomes a true cognitive partner. Agent mode 
 | ---------------------------------- | :-----: | :---: | :---------: | :------: |
 | Agent Mode                         |    ❌    |   ❌   |      ✅      |    ✅     |
 | 13 Language Model Tools            |    ❌    |   ❌   |      ✅      |    ✅     |
-| 124 Skills (auto-loaded)           |    ❌    |   ❌   |      ✅      |    ✅     |
+| 136 Skills (auto-loaded)           |    ❌    |   ❌   |      ✅      |    ✅     |
 | 50+ Instructions (pattern-matched) |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents                |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session)     |    ❌    |   ❌   |      ✅      |    ✅     |

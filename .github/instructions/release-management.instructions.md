@@ -6,9 +6,6 @@ inheritance: master-only
 
 # Release Management Procedural Memory
 
-**Classification**: Procedural Memory | Process Adherence  
-**Activation**: release, publish, deploy, version bump, ship, vsix, marketplace  
-**Priority**: MANDATORY - These processes must not be bypassed
 
 ---
 

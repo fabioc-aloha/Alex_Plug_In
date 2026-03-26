@@ -160,7 +160,3 @@ npx teamsapp package --env local
 npx teamsapp validate --package-file appPackage/build/*.zip
 # Upload to Developer Portal → Preview in Teams
 ```
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

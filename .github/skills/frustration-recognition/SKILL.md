@@ -212,7 +212,6 @@ Based on detected frustration type, route to appropriate skill:
 After de-escalation, rebuild momentum:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {
   'primaryColor': '#cce5ff',
   'primaryTextColor': '#333',
   'primaryBorderColor': '#57606a',
@@ -385,7 +384,3 @@ This skill should NOT over-activate:
 - [socratic-questioning](..\socratic-questioning/SKILL.md) — Guide to insight (carefully when frustrated)
 - [awareness](..\awareness/SKILL.md) — Self-correction and epistemic vigilance
 - [learning-psychology](..\learning-psychology/SKILL.md) — Zone of proximal development
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

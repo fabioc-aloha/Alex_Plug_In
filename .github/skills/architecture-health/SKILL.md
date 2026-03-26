@@ -98,7 +98,3 @@ Dream runs the scans. This skill teaches how to read and act on the results.
 - "how's my brain?", "connection status"
 - Before meditation (pre-assessment)
 - After dream reports with warnings
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

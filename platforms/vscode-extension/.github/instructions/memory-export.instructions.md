@@ -4,13 +4,6 @@ description: "Portable memory export for porting Alex context to other AI work s
 
 # Memory Export Instructions
 
-## When This Applies
-
-- User asks to "export memory", "export context", "port Alex", "move to Claude Code", "move to ChatGPT"
-- User asks for a portable summary of what Alex knows about them
-- User wants to seed another AI surface with their preferences and history
-- User asks to "dump everything you know about me"
-
 ## Core Rules
 
 1. **Collect all sources**: User profile, user memory files, session memory, repository memories, Copilot Memory cognitive tools — check every layer
@@ -28,5 +21,3 @@ Instructions → Identity → Career → Projects → Preferences → Architectu
 ## Portability
 
 Strip Alex-specific concepts (synapses, trifectas, muscles, hooks) from the export body. The goal is a document any AI can consume to know who the user is and how they want to work.
-
-Synapses: memory-export skill

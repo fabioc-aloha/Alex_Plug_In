@@ -5,7 +5,7 @@
 > AIRS platform, books, marketing materials, and any future interface.
 >
 > Canonical source: `c:\Development\AlexLearn\DK-correax-brand.md`
-> Derived from: Live production site at learnalexai.com
+> Derived from: Live production site at learnai.correax.com
 > Last updated: February 28, 2026
 
 ---
@@ -16,22 +16,22 @@
 
 The brand stack has three levels and should be treated differently in design work:
 
-| Level | Brand | Meaning | Typical expressions |
-| ----- | ----- | ------- | ------------------- |
-| **Company** | **CorreaX** | The parent company brand | CorreaX wordmark, CX geometric mark, corporate/legal attribution |
-| **Product family** | **Alex** | The umbrella product brand covering multiple projects and products | Alex extension identity, Alex platform messaging, Alex-specific product marks |
-| **UI surface** | **Command Center** | A specific interface inside the Alex VS Code extension | Sidebar tabs, badges, icons, avatars, in-product navigation |
+| Level              | Brand              | Meaning                                                            | Typical expressions                                                           |
+| ------------------ | ------------------ | ------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| **Company**        | **CorreaX**        | The parent company brand                                           | CorreaX wordmark, CX geometric mark, corporate/legal attribution              |
+| **Product family** | **Alex**           | The umbrella product brand covering multiple projects and products | Alex extension identity, Alex platform messaging, Alex-specific product marks |
+| **UI surface**     | **Command Center** | A specific interface inside the Alex VS Code extension             | Sidebar tabs, badges, icons, avatars, in-product navigation                   |
 
 ### The CorreaX brand family
 
-| Product / Surface     | Domain / Context     | Role |
-| --------------------- | -------------------- | ---- |
-| **CorreaX**           | correax.com          | Company brand |
-| **LearnAlex**         | learnalexai.com      | CorreaX product |
-| **AIRS**              | airs.correax.com     | CorreaX product |
-| **Alex Extension**    | VS Code Marketplace  | Alex product |
-| **Command Center**    | Alex VS Code sidebar | Alex UI surface |
-| **Alex Finch Books**  | Amazon               | Alex product line |
+| Product / Surface    | Domain / Context     | Role              |
+| -------------------- | -------------------- | ----------------- |
+| **CorreaX**          | correax.com          | Company brand     |
+| **LearnAlex**        | learnai.correax.com  | CorreaX product   |
+| **AIRS**             | airs.correax.com     | CorreaX product   |
+| **Alex Extension**   | VS Code Marketplace  | Alex product      |
+| **Command Center**   | Alex VS Code sidebar | Alex UI surface   |
+| **Alex Finch Books** | Amazon               | Alex product line |
 
 ### Logo responsibility
 
@@ -595,13 +595,13 @@ CorreaX remains the visual foundation for the Command Center, but micro-assets f
 
 ### Family Grammar
 
-| Family | Container | Color logic | Role |
-| ------ | --------- | ----------- | ---- |
-| Tab icons | Rounded rectangle / panel form | Indigo-led, muted when inactive | Navigation and feature identity |
-| State avatars | Circle | Semantic accent by cognitive state | What Alex is doing right now |
-| Agent icons | Rounded hexagon | Indigo base, optional platform accent | Specialist mode identity |
-| Persona icons | Squircle / rounded badge | Persona mapping from section 13 | User-context category, not literal portraiture |
-| Badges | Pill, dot, or compact count chip | Neutral base + single accent | Status, counts, and lightweight taxonomy |
+| Family        | Container                        | Color logic                           | Role                                           |
+| ------------- | -------------------------------- | ------------------------------------- | ---------------------------------------------- |
+| Tab icons     | Rounded rectangle / panel form   | Indigo-led, muted when inactive       | Navigation and feature identity                |
+| State avatars | Circle                           | Semantic accent by cognitive state    | What Alex is doing right now                   |
+| Agent icons   | Rounded hexagon                  | Indigo base, optional platform accent | Specialist mode identity                       |
+| Persona icons | Squircle / rounded badge         | Persona mapping from section 13       | User-context category, not literal portraiture |
+| Badges        | Pill, dot, or compact count chip | Neutral base + single accent          | Status, counts, and lightweight taxonomy       |
 
 ### Surface Treatment
 

@@ -4,9 +4,6 @@ description: "Architecture Decision Record (ADR) templates and documentation pro
 
 # Architecture Decision Records (ADR) Procedural Memory
 
-**Classification**: Procedural Memory | Documentation  
-**Activation**: ADR, architecture decision, why did we, design decision, technical decision, trade-off  
-**Priority**: Standard - Document significant decisions for future reference
 
 ---
 

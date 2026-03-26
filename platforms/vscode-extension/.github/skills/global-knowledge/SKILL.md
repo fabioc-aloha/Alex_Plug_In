@@ -273,7 +273,3 @@ Discover and pull new skills from GK via `skills/skill-registry.json`. Commands:
 ✅ `git status` clean (or changes committed)
 
 ---
-
-## Synapses
-
-**Synapse**: [meditate.prompt.md](../../prompts/meditate.prompt.md) (0.8, episodic, forward) — "Knowledge promotion during meditation"

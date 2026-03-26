@@ -186,7 +186,3 @@ const previousRequests = context.history.filter(
 | Use progress for long operations | Leave user waiting silently |
 | Limit to one participant per extension | Create multiple participants |
 | Ask consent for costly operations | Auto-execute destructive actions |
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

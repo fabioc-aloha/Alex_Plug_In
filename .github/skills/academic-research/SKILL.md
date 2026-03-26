@@ -479,19 +479,3 @@ Conventions for Markdown documents converted to Word via Pandoc or md-to-word.
 | Zotero | Reference management |
 | Connected Papers | Literature discovery |
 | Pandoc | Markdown to Word/PDF |
-
-## Synapses
-
-### High-Strength Connections
-
-- [bootstrap-learning] (High, Uses, Forward) — "Knowledge acquisition methodology"
-
-### Medium-Strength Connections
-
-- [knowledge-synthesis] (Medium, Uses, Forward) — "Literature synthesis patterns"
-- [root-cause-analysis] (Medium, Applies, Forward) — "Research problem analysis"
-
-### Supporting Connections
-
-- [cognitive-load] (Low, Considers, Forward) — "Information chunking in writing"
-- [meditation] (Low, Supports, Forward) — "Knowledge consolidation after research sessions"

@@ -83,12 +83,6 @@ Why: Mermaid parser will fail on placeholder text like `[DIAGRAM_TYPE]`.
 
 ### Diagram Type Required
 
-After `%%{init}%%`, must immediately have diagram type: `flowchart`, `sequenceDiagram`, `graph`, etc.
-
-❌ **Wrong**: `%%{init}%%` then content directly
-
-✅ **Correct**: `%%{init}%%\nflowchart LR` then content
-
 ## Nested Code Block Problem
 
 **You cannot nest fenced code blocks in markdown.**
@@ -110,7 +104,3 @@ Before writing markdown, plan for:
 3. ☐ Will I show "wrong" examples? → Can't nest fences, describe instead
 4. ☐ Will I have tables? → Need `| ---- |` separator row
 5. ☐ Will I have mermaid? → Need diagram type after init
-
-## Synapses
-
-See [synapses.json](synapses.json) for connection mapping.

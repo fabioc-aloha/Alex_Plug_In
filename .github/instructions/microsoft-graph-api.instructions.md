@@ -1,36 +1,12 @@
 ---
 description: "Microsoft Graph API integration — endpoint calls, MSAL/OAuth authentication, and M365 service patterns"
+applyTo: "**/*graph*,**/*msal*,**/*oauth*,**/*entra*"
 ---
 
-# Microsoft Graph API Instructions
+# Microsoft Graph API — Auto-Loaded Rules
 
-**Auto-loaded when**: Calling Microsoft Graph API endpoints, handling Graph authentication (MSAL/OAuth), or building M365 service integrations
-**Domain**: Microsoft 365, Graph API, Azure AD (Entra ID), OAuth 2.0
-**Synapses**: [microsoft-graph-api/SKILL.md](../skills/microsoft-graph-api/SKILL.md)
-
----
-
-## Purpose
-
-Apply correct Microsoft Graph API patterns: principle of least privilege, progressive scope acquisition, proper token handling, pagination, rate limit management, and error parsing — ensuring reliable and secure M365 service integration.
-
----
-
-## When This Applies
-
-**File Patterns**:
-- `**/src/**/*.ts` — Code calling Graph endpoints or using MSAL
-- Any file referencing `graph.microsoft.com`
-- Authentication code with Microsoft scopes
-
-**Contextual Triggers**:
-- Integrating with M365 services (mail, calendar, users, presence, SharePoint, Teams)
-- Debugging Graph API errors (401, 403, 429, 404)
-- Requesting OAuth scopes for M365 data
-- Implementing Graph SDK client initialization
-- Handling pagination for large Graph result sets
-
----
+Endpoint reference table, scope catalog, service-specific patterns → see microsoft-graph-api skill.
+This instruction covers runtime patterns: auth flow, error handling, pagination, retry.
 
 ## Authentication Protocol
 

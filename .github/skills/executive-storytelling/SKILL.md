@@ -459,9 +459,3 @@ Opponent → Skeptic → Neutral → Supporter → Champion
 *Merged: stakeholder-management, meeting-efficiency*
 
 ---
-
-## Synapses
-
-- [.github/skills/slide-design/SKILL.md] (High, Uses, Bidirectional) - "Executive presentation design"
-- [.github/skills/coaching-techniques/SKILL.md] (Medium, Complements, Bidirectional) - "Leadership communication overlap"
-- [.github/skills/project-management/SKILL.md] (Medium, Integrates, Forward) - "Stakeholder communication in projects"

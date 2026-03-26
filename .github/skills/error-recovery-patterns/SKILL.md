@@ -72,7 +72,3 @@ When your approach fails repeatedly, don't keep retrying — pivot.
 **Rule of Three**: Two failures of the same approach = third attempt MUST be fundamentally different.
 
 **Surface the problem**: "I've tried X twice and it's failing. I think the issue is [analysis]. Here's an alternative approach..."
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

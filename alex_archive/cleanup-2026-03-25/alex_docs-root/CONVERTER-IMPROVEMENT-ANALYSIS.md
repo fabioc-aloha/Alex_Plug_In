@@ -3,7 +3,7 @@
 **Date**: 2026-03-24
 **Scope**: All Alex Cognitive Architecture converters and generators that transform source inputs into output formats
 **Goal**: Achieve first-run production quality -- eliminate the iterative back-and-forth that burns hours on every project
-**Status**: **46 of 46 items implemented** (v5.1.0 sprint) -- all phases complete, 247 QA assertions passing
+**Status**: **46 of 46 items implemented** (v5.1.0 sprint) -- all phases complete, 284 QA assertions passing
 
 ## 0. The Problem: Death by Iteration
 
@@ -47,7 +47,7 @@ Every converter has two phases: **source preparation** and **output generation**
 | Source authoring       | Content authored correctly from the start                                          | **New** `md-scaffold.cjs` (6 templates), `markdown-lint.cjs` (19 rules), mermaid creation helpers, `svg-pipeline.cjs` (create/validate)                                      |
 | Output post-processing | All known OOXML/image fixes applied by default                                     | md-to-word full pipeline (tables, headings, code, hyperlinks, captions, page numbers, footer); md-to-eml inline CSS + CID images; 3 Lua filters                              |
 | Sensible defaults      | Professional fonts, colors, spacing, page layout out of the box                    | md-to-word has 4 style presets (professional/academic/course/creative); per-project `.converter.json` overrides; `visual-memory.json` for character traits                   |
-| Lessons encoded        | Every visual issue found and fixed in any project feeds back to the base converter | **v5.0.0 merged fixes from 5 projects** into 7 shared modules + 3 Lua filters + config system. 187 QA assertions prevent regression                                          |
+| Lessons encoded        | Every visual issue found and fixed in any project feeds back to the base converter | **v5.0.0 merged fixes from 5 projects** into 7 shared modules + 3 Lua filters + config system. 284 QA assertions prevent regression                                          |
 | No manual flags needed | The default run should be production-quality without special flags                 | Default md-to-word run is professional preset with full OOXML post-processing. `markdown-lint.cjs` catches issues before conversion                                          |
 
 ## 1. Current Converter Inventory
@@ -84,7 +84,7 @@ Every converter has two phases: **source preparation** and **output generation**
 | mermaid-cli (mmdc) | Renders `.mmd` to PNG (used by md-to-word)                                        |
 | svgexport          | SVG-to-PNG rasterization for banners/logos                                        |
 | PptxGenJS          | Programmatic slide generation (used by pptxgen-cli)                               |
-| converter-qa.cjs   | QA test harness -- 247 assertions across 21 suites (validates all shared modules) |
+| converter-qa.cjs   | QA test harness -- 284 assertions across 21 suites (validates all shared modules) |
 
 ### D. Shared Modules (`.github/muscles/shared/`)
 
@@ -1312,7 +1312,7 @@ Before building anything new, harvest all fixes already developed in project for
 1. ✅ **Audit all project converter forks** -- ~~diff every project's local converter against the Alex Master base~~ -- **completed** (5 projects analyzed in §8)
 2. ✅ **Merge generalizable fixes** -- ~~source preprocessing, OOXML post-processing, prompt improvements~~ -- **completed v5.0.0** (7 shared modules extracted)
 3. ✅ **Update base converters** -- ~~md-to-word.cjs, generate-alex-*.js with all harvested fixes~~ -- **completed v5.0.0** (md-to-word v5.0.0, age-progression refactored)
-4. ✅ **Validate first-run quality** -- ~~run updated base converters against each project's source~~ -- **completed** (converter-qa.cjs: 247 assertions, 0 failures across 21 suites)
+4. ✅ **Validate first-run quality** -- ~~run updated base converters against each project's source~~ -- **completed** (converter-qa.cjs: 284 assertions, 0 failures across 21 suites)
 
 **AlexBooks harvest (identified in §8.1.7)**:
 - ✅ ~~Mermaid scale 8 → md-to-word.cjs (1-line change)~~ -- **implemented v4.0.0**

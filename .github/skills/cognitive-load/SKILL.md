@@ -65,7 +65,3 @@ Ask before going deeper.
 - 3 sentences summary
 - 3 examples
 - 3 minutes before checking understanding
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

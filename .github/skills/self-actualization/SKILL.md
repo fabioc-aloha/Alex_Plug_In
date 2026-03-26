@@ -197,7 +197,3 @@ Total Skills: 119 | Total Instructions: 31
 - Fixed: Updated 3 version instances, added counts
 - Verified: PowerShell confirmed 119 skills, 31 instructions
 - Result: Clean build, 0 contamination, ready for publish
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

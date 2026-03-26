@@ -17,7 +17,6 @@ import { setupEnvironment } from './commands/setupEnvironment';
 import { upgradeArchitecture } from './commands/upgrade';
 import { completeMigration, showMigrationCandidates } from './commands/upgradeMigration';
 import { runSelfActualization } from './commands/self-actualization';
-import { runExportForM365, exportForM365 } from './commands/exportForM365';
 import { generateSkillCatalog } from './commands/skillCatalog';
 import { inheritSkillFromGlobal } from './commands/inheritSkill';
 import { proposeSkillToGlobal } from './commands/proposeSkill';
@@ -115,15 +114,6 @@ export function registerCoreCommands(
           await runDreamProtocol(context);
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
-          
-          // Auto-sync to OneDrive if enabled
-          const config = vscode.workspace.getConfiguration('alex');
-          if (config.get<boolean>('m365.autoSync', false)) {
-            const result = await exportForM365(context);
-            if (result.oneDrivePath) {
-              vscode.window.showInformationMessage(`☁️ Synced to OneDrive: ${result.oneDrivePath}`);
-            }
-          }
           
           done(true);
         } catch (err) {
@@ -246,15 +236,6 @@ export function registerCoreCommands(
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
           
-          // Auto-sync to OneDrive if enabled
-          const config = vscode.workspace.getConfiguration('alex');
-          if (config.get<boolean>('m365.autoSync', false)) {
-            const result = await exportForM365(context);
-            if (result.oneDrivePath) {
-              vscode.window.showInformationMessage(`☁️ Synced to OneDrive: ${result.oneDrivePath}`);
-            }
-          }
-          
           done(true);
         } catch (err) {
           done(false, err instanceof Error ? err : new Error(String(err)));
@@ -264,20 +245,7 @@ export function registerCoreCommands(
     },
   ));
 
-  // --- Export & Chat Commands ---
-
-  context.subscriptions.push(vscode.commands.registerCommand(
-    "alex.exportForM365",
-    async () => {
-      const endLog = telemetry.logTimed("command", "export_m365");
-      try {
-        await runExportForM365(context);
-        endLog(true);
-      } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
-      }
-    },
-  ));
+  // --- Chat Commands ---
 
   // Meditate command - opens chat with /meditate prompt
   context.subscriptions.push(vscode.commands.registerCommand(

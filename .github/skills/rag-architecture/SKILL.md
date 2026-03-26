@@ -387,7 +387,3 @@ logger.info({
 | Use smaller embedding model | API cost |
 | Compress vectors (PQ) | Storage |
 | Filter before semantic search | Compute |
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

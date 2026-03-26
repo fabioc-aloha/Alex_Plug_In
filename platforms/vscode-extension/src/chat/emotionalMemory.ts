@@ -392,7 +392,7 @@ export async function getMeditationEmotionalReview(workspaceRoot: string): Promi
             lines.push(`⚠️ **High frustration detected** — Last ${recent.length} sessions averaged ${(avgFrustration * 100).toFixed(0)}% frustration. Consider:`);
             lines.push('  - Simplifying the current debugging workflow');
             lines.push('  - Breaking large tasks into smaller wins');
-            lines.push('  - More frequent Pomodoro breaks');
+            lines.push('  - Taking more frequent breaks');
         }
 
         // Flow trend

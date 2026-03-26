@@ -107,7 +107,7 @@ Distribute resources across physically separate datacenters.
 ### Identity Patterns
 
 #### Managed Identity
-Eliminate credential management with Azure AD-backed identity.
+Eliminate credential management with Microsoft Entra ID-backed identity.
 
 ```json
 {
@@ -571,9 +571,3 @@ Tool outputs:
 *Skill updated: 2026-02-14 | Category: Cloud/Infrastructure | Status: Active | MCP-Enhanced: Yes*
 
 ---
-
-## Synapses
-
-- [.github/skills/observability/SKILL.md] (High, Enables, Bidirectional) - "Monitoring and observability patterns"
-- [.github/skills/project-scaffolding/SKILL.md] (Medium, Uses, Forward) - "Infrastructure-as-code project setup"
-- [.github/instructions/empirical-validation.instructions.md] (Medium, Validates, Forward) - "Architecture decisions require evidence"

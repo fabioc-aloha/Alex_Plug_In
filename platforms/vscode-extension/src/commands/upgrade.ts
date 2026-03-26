@@ -293,7 +293,7 @@ async function createVersionAwareBackup(
  * and should be preserved across upgrades.
  */
 const ACTIVE_CONTEXT_FIELDS = [
-  'Persona', 'Objective', 'Phase', 'Mode',
+  'Persona', 'Objective',
   'Focus Trifectas', 'Priorities', 'Principles', 'Recent',
   'North Star', 'Guidelines', 'Last Assessed',
 ];

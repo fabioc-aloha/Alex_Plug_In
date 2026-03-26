@@ -105,7 +105,3 @@ The RCA section of a post-mortem should include:
 2. **Contributing factors** (things that made it worse, not the direct cause)
 3. **What we were lucky about** (things that could have made it much worse)
 4. **Action items** with owners and dates for permanent fix + prevention
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

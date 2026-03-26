@@ -13,11 +13,6 @@ function getQuickPickItems(): vscode.QuickPickItem[] {
       detail: "Ctrl+Alt+S",
     },
     {
-      label: "$(package) Export for M365",
-      description: "Package memory for M365 Copilot",
-      detail: "Export to ~/Alex-Memory-Export/ → upload to OneDrive",
-    },
-    {
       label: "$(book) Open Documentation",
       description: "View Alex documentation",
       detail: "Ctrl+Alt+H",
@@ -51,16 +46,6 @@ function getQuickPickItems(): vscode.QuickPickItem[] {
     {
       label: "$(search) Search Knowledge",
       description: "Quick search across global knowledge",
-    },
-    {
-      label: "$(watch) Start Focus Session",
-      description: "Pomodoro timer for focused work with breaks",
-      detail: "⚖️ Work-Life Balance",
-    },
-    {
-      label: "$(target) Manage Learning Goals",
-      description: "Track progress with targets and streaks",
-      detail: "⚖️ Work-Life Balance",
     },
     {
       label: "$(graph) Health Dashboard",
@@ -173,7 +158,6 @@ function getDispatchMap(): Array<[string, string]> {
   return [
     ["Dream", "alex.dream"],
     ["Self-Actualize", "alex.selfActualize"],
-    ["Export for M365", "alex.exportForM365"],
     ["Documentation", "alex.openDocs"],
     ["Working with Alex", "alex.workingWithAlex"],
     ["Upgrade", "alex.upgrade"],
@@ -182,8 +166,6 @@ function getDispatchMap(): Array<[string, string]> {
     ["Chat", "workbench.panel.chat.view.copilot.focus"],
     ["Skill Catalog", "alex.generateSkillCatalog"],
     ["Search Knowledge", "alex.knowledgeQuickPick"],
-    ["Focus Session", "alex.startSession"],
-    ["Goals", "alex.showGoals"],
     ["Memory Dashboard", "alex.openMemoryDashboard"],
     ["Health Dashboard", "alex.openHealthDashboard"],
     ["Project Audit", "alex.runAudit"],

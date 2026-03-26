@@ -347,9 +347,3 @@ Pretend your slide is a highway billboard:
 *Skill created: 2026-02-10 | Category: Communication | Status: Active*
 
 ---
-
-## Synapses
-
-- [.github/skills/dissertation-defense/SKILL.md] (High, Enables, Bidirectional) - "Defense presentation slides"
-- [.github/skills/executive-storytelling/SKILL.md] (High, Enables, Bidirectional) - "Executive presentation design"
-- [.github/skills/markdown-mermaid/SKILL.md] (Medium, Complements, Forward) - "Technical diagrams in slides"

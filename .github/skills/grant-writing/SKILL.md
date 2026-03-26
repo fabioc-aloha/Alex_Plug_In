@@ -169,7 +169,3 @@ Most grants don't fund on first try. Resubmissions:
 - **Justify everything** (why this equipment? why this travel?)
 - **Include indirect costs** (check your institution's rate)
 - **Don't under-budget** (reviewers wonder what you're hiding)
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

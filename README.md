@@ -1,6 +1,6 @@
 # 🤝 Alex Cognitive Architecture
 
-![Your Trusted AI Partner for Any Job](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
+![Your Trusted AI Partner for Any Job](.github/assets/banner.svg)
 
 [![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0d9488)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![Agent Plugin](https://img.shields.io/badge/Agent%20Plugin-New-22c55e)](platforms/agent-plugin/) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-6366f1)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-0d9488)](LICENSE.md)
 
@@ -66,7 +66,7 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 
 Alex as an installable VS Code agent plugin (1.110+) — no extension required:
 
-- 84 skills, 7 agents, 22 instructions, 11 prompts
+- 79 skills, 7 agents, 22 instructions, 11 prompts
 - Install from plugin marketplace, local path, or git repo
 - All knowledge-based capabilities without extension overhead
 - MCP cognitive tools server included
@@ -77,7 +77,7 @@ Alex as an installable VS Code agent plugin (1.110+) — no extension required:
 
 ## 🚀 Quick Start (VS Code)
 
-> 🌐 **New to Alex?** Visit **[learnalex.correax.com](https://learnalex.correax.com/)** for study guides, documentation, and training.
+> 🌐 **New to Alex?** Visit **[learnai.correax.com](https://learnai.correax.com/)** for study guides, documentation, and training.
 
 ### Step 1: Install
 
@@ -154,7 +154,7 @@ The sweet spot — full partnership with autonomous tools, deep skills, speciali
 | ------------------------------ | :-----: | :---: | :---------: | :------: |
 | Agent Mode                     |    ❌    |   ❌   |      ✅      |    ✅     |
 | 13 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
-| 128 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
+| 136 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents            |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session) |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge Operations    |    ❌    |   ❌   |      ✅      |    ✅     |
@@ -222,16 +222,16 @@ The upgrade preserves:
 
 ### What's New (v6.5.0 — The Trust Release)
 
-| Category             | Highlights                                                                                       |
-| -------------------- | ------------------------------------------------------------------------------------------------ |
-| **Safety Hooks**     | 16 hooks shipped (10 global + 6 agent-scoped) across all 7 VS Code hook events                   |
+| Category               | Highlights                                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------- |
+| **Safety Hooks**       | 16 hooks shipped (10 global + 6 agent-scoped) across all 7 VS Code hook events                    |
 | **Security Hardening** | Autopilot safety gates (deny for heir contamination + architecture independence), prompt scanning |
 | **Agent Intelligence** | Session context injection, subagent context loader, decision journal, targeted test runner        |
-| **Agent-Scoped**     | Validator read-only enforcement, Builder compile reminder, Researcher continuity                  |
-| **Skill Promotions** | 4 skills promoted to Global Knowledge + heirs; 3 evaluated with documented verdicts              |
-| **Quick Settings**   | 17 sidebar toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities)                |
-| **Cloud Sync Removed** | Deprecated Gist-based cloud sync fully removed (3 slash commands, setting, handler code)        |
-| **Theme Compliance** | 17 hex colors → CSS variables; sub-11px fonts fixed; avatar system removed (25 MB savings)       |
+| **Agent-Scoped**       | Validator read-only enforcement, Builder compile reminder, Researcher continuity                  |
+| **Skill Promotions**   | 4 skills promoted to Global Knowledge + heirs; 3 evaluated with documented verdicts               |
+| **Quick Settings**     | 17 sidebar toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities)                 |
+| **Cloud Sync Removed** | Deprecated Gist-based cloud sync fully removed (3 slash commands, setting, handler code)          |
+| **Theme Compliance**   | 17 hex colors → CSS variables; sub-11px fonts fixed; avatar system removed (25 MB savings)        |
 
 ### Migration Notes
 
@@ -246,7 +246,7 @@ The upgrade preserves:
 
 ## ✨ Features
 
-> 🌐 **Full feature documentation, tutorials, and training at [learnalex.correax.com](https://learnalex.correax.com/)**
+> 🌐 **Full feature documentation, tutorials, and training at [learnai.correax.com](https://learnai.correax.com/)**
 
 The VS Code extension includes everything described below — see the **[VS Code Extension README](platforms/vscode-extension/README.md)** for the complete feature reference:
 
@@ -255,7 +255,7 @@ The VS Code extension includes everything described below — see the **[VS Code
 | **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support |
 | **Global Knowledge Base**  | Cross-project patterns and insights that persist in `~/.alex/`   |
 | **User Profiles**          | Personalized tone, detail level, and tech stack awareness        |
-| **128 Skills**             | Portable domain expertise — from coding to research to Azure     |
+| **136 Skills**             | Portable domain expertise — from coding to research to Azure     |
 | **7 Custom Agents**        | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
 | **13 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
 | **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API      |
@@ -267,40 +267,39 @@ The VS Code extension includes everything described below — see the **[VS Code
 
 ## 📖 Documentation
 
-> 🌐 **New to Alex?** Visit **[learnalex.correax.com](https://learnalex.correax.com/)** for study guides, documentation, and training.
+> 🌐 **New to Alex?** Visit **[learnai.correax.com](https://learnai.correax.com/)** for study guides, documentation, and training.
 
 ### Architecture Deep Dive
 
 Comprehensive documentation is included with the extension in the `alex_docs/` folder:
 
-| Document                                                                                                                          | Description                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| **[learnalex.correax.com](https://learnalex.correax.com/)**                                                                       | 📘 **START HERE** — Study guides, training, and full documentation |
-| [User Manual](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/USER-MANUAL.md)                             | Complete guide to using Alex                                      |
-| [VS Code ↔ Brain Integration](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md)                                                 | Subscription guide, cognitive tiers, feature matrix               |
-| [Cognitive Architecture](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/COGNITIVE-ARCHITECTURE.md) | Complete architecture overview with diagrams                      |
-| [Skills & Capabilities](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/skills/SKILLS-CAPABILITIES.md)           | Hard skills, soft skills, and wish list                           |
-| [Copilot Integration](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/platforms/archive/COPILOT-INTEGRATION.md)  | How Alex uses native Copilot features                             |
-| [Conscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/CONSCIOUS-MIND.md)                 | User-initiated operations and commands                            |
-| [Unconscious Mind](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/UNCONSCIOUS-MIND.md)             | Automatic background processes                                    |
-| [Memory Systems](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/architecture/MEMORY-SYSTEMS.md)                 | Procedural, episodic, and domain memory                           |
-| [Project Structure](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/PROJECT-STRUCTURE.md)                 | .github folder files and functions                                |
-| [Global Knowledge](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE.md)                 | Cross-project knowledge sharing                                   |
-| [Team Sharing](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)             | GitHub-based team knowledge sharing                               |
-| [Quick Reference](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/guides/QUICK-REFERENCE.md)                     | Commands and shortcuts cheat sheet                                |
+| Document                                                                        | Description                                                       |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **[learnai.correax.com](https://learnai.correax.com/)**                         | 📘 **START HERE** — Study guides, training, and full documentation |
+| [User Manual](alex_docs/guides/USER-MANUAL.md)                                  | Complete guide to using Alex                                      |
+| [VS Code Brain Integration](alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md) | Subscription guide, cognitive tiers, feature matrix               |
+| [Cognitive Architecture](alex_docs/architecture/COGNITIVE-ARCHITECTURE.md)      | Complete architecture overview with diagrams                      |
+| [Skills & Capabilities](alex_docs/skills/SKILLS-CAPABILITIES.md)                | Hard skills, soft skills, and wish list                           |
+| [Conscious Mind](alex_docs/architecture/CONSCIOUS-MIND.md)                      | User-initiated operations and commands                            |
+| [Unconscious Mind](alex_docs/architecture/UNCONSCIOUS-MIND.md)                  | Automatic background processes                                    |
+| [Memory Systems](alex_docs/architecture/MEMORY-SYSTEMS.md)                      | Procedural, episodic, and domain memory                           |
+| [Project Structure](alex_docs/guides/PROJECT-STRUCTURE.md)                      | .github folder files and functions                                |
+| [Global Knowledge](alex_docs/features/GLOBAL-KNOWLEDGE.md)                      | Cross-project knowledge sharing                                   |
+| [Team Sharing](alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md)                  | GitHub-based team knowledge sharing                               |
+| [Quick Reference](alex_docs/guides/QUICK-REFERENCE.md)                          | Commands and shortcuts cheat sheet                                |
 
 ### External Resources
 
-| Resource                                                                              | Description               |
-| ------------------------------------------------------------------------------------- | ------------------------- |
-| [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history  |
-| [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In)                           | TypeScript implementation |
+| Resource                                                    | Description               |
+| ----------------------------------------------------------- | ------------------------- |
+| [Full Changelog](CHANGELOG.md)                              | Complete version history  |
+| [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In) | TypeScript implementation |
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! See [CONTRIBUTING.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CONTRIBUTING.md) for guidelines.
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 🔒 Privacy & Responsible AI
 
@@ -312,10 +311,10 @@ Alex is built **local-first**. Your data stays on your machine:
 | ---------------------------------- | ---------------------------------------------------- |
 | ❌ Collect usage telemetry          | ✅ Store all memory in local `.github/` files you own |
 | ❌ Track your code or conversations | ✅ Send text to Edge TTS (transient, not stored)      |
-| ❌ Share data with third parties    | ✅ All memory in local files you own                   |
+| ❌ Share data with third parties    | ✅ All memory in local files you own                  |
 | ❌ Require an account or login      | ✅ Encrypt API keys via VS Code SecretStorage         |
 
-See the full [Privacy Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md).
+See the full [Privacy Policy](PRIVACY.md).
 
 ### Responsible AI
 
@@ -336,19 +335,19 @@ Alex implements Microsoft's Responsible AI principles:
 | Secure by Default | No cloud sync; secrets via VS Code SecretStorage                |
 | Secure Operations | No PII in logs; signed Marketplace packages; public SECURITY.md |
 
-See the full [Compliance Audit](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/audits/COMPLIANCE-AUDIT.md) and [Security Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md).
+See the full [Security Policy](SECURITY.md).
 
 Report vulnerabilities via [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new).
 
 ## 💬 Support
 
-- **[learnalex.correax.com](https://learnalex.correax.com/)** - Study guides, documentation, and training
+- **[learnai.correax.com](https://learnai.correax.com/)** - Study guides, documentation, and training
 - **[GitHub Discussions](https://github.com/fabioc-aloha/Alex_Plug_In/discussions)** - Ask questions and share ideas
 - **[Issue Tracker](https://github.com/fabioc-aloha/Alex_Plug_In/issues)** - Report bugs and request features
 
 ## 📝 License
 
-Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md) for details.
+Apache 2.0 - See [LICENSE.md](LICENSE.md) for details.
 
 ---
 

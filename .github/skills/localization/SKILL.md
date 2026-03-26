@@ -948,19 +948,3 @@ All detection methods should be GDPR/privacy compliant:
 - ❌ IP-based geolocation (PII, avoid)
 
 ---
-
-## Synapses
-
-See [synapses.json](./synapses.json) for connection mapping.
-
-**High Affinity:**
-- `testing-strategies` — Localization testing, pseudo-loc
-- `architecture` — i18n architecture patterns
-
-**Medium Affinity:**
-- `vscode-extension-patterns` — Extension localization
-- `academic-research` — Multilingual content
-
-**Low Affinity:**
-- `graphic-design` — RTL layouts, typography
-- `cognitive-load` — Minimize language-switching friction

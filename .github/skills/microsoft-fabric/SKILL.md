@@ -214,7 +214,6 @@ $storageToken = az account get-access-token --resource https://storage.azure.com
 
 **7-Step CPM Pattern**:
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'#ffffff', 'lineColor': '#57606a' }}}%%
 graph LR
     A["📥 Copy<br/>Contacts"] --> B["🔐 MSWide<br/>Perm API"]
     B --> C["🔐 TXN<br/>Perm API"]
@@ -321,43 +320,6 @@ if ($response.StatusCode -eq 202) {
 1. **Bronze**: Accept all formats, minimal transformation
 2. **Silver**: Standardize types, deduplicate, validate
 3. **Gold**: Domain models, business logic, aggregations
-
-## Synapses
-
-```json
-{
-  "version": "1.0",
-  "skill": "microsoft-fabric",
-  "connections": [
-    {
-      "target": "medallion-architecture",
-      "type": "Implements",
-      "strength": "Critical"
-    },
-    {
-      "target": "data-governance",
-      "type": "Enables",
-      "strength": "Critical"
-    },
-    {
-      "target": "powershell-automation",
-      "type": "Integrates",
-      "strength": "High"
-    },
-    {
-      "target": "api-design",
-      "type": "Follows",
-      "strength": "High"
-    },
-    {
-      "target": "compliance-pipelines",
-      "type": "Implements",
-      "strength": "Critical"
-    }
-  ]
-}
-```
-
 ## Related Resources
 
 - [Microsoft Fabric REST API Documentation](https://learn.microsoft.com/en-us/rest/api/fabric/)

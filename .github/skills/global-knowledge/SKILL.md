@@ -273,9 +273,3 @@ Discover and pull new skills from GK via `skills/skill-registry.json`. Commands:
 ✅ `git status` clean (or changes committed)
 
 ---
-
-## Synapses
-
-**Synapse**: [heir-skill-promotion.instructions.md](../../instructions/heir-skill-promotion.instructions.md) (0.9, procedural, bidirectional) — "How skills move from heirs to Master"
-**Synapse**: [global-knowledge-curation.instructions.md](../../instructions/global-knowledge-curation.instructions.md) (0.85, procedural, bidirectional) — "Periodic cleanup and implementation"
-**Synapse**: [meditate.prompt.md](../../prompts/meditate.prompt.md) (0.8, episodic, forward) — "Knowledge promotion during meditation"

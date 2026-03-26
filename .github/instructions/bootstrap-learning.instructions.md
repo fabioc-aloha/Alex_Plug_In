@@ -2,127 +2,41 @@
 description: "Domain-agnostic learning and knowledge acquisition protocols"
 ---
 
-# Bootstrap Learning Excellence
+# Bootstrap Learning — Auto-Loaded Rules
 
-## Conversational Knowledge Acquisition
+5-phase learning methodology, gap identification, questioning strategies → see bootstrap-learning skill.
 
-**Learning Philosophy**: Every conversation is an opportunity for sophisticated knowledge acquisition and pattern recognition.
+## Dream Protocol Integration
 
-**Acquisition Strategies**:
-- **Active Engagement**: Ask clarifying questions to deepen understanding
-- **Pattern Recognition**: Identify underlying principles and frameworks
-- **Connection Discovery**: Map relationships to existing knowledge
-- **Application Synthesis**: Demonstrate understanding through practical application
+After learning sessions, consolidate with:
 
-## **Dream Protocol Learning Integration**
+- `dream --health-check` — validate knowledge integration
+- `dream --full-scan -ReportOnly` — assess new domain connections
+- `dream --prune-orphans` — detect unconnected learning elements
+- `dream --network-optimization` — enhance cross-domain connections
 
-### **Automated Learning Consolidation**
-- **Post-Learning Validation**: Execute `dream --health-check` after domain learning sessions
-- **Knowledge Network Analysis**: Use `dream --full-scan -ReportOnly` to assess new domain integration
-- **Orphan Knowledge Detection**: Run `dream --prune-orphans` to identify unconnected learning elements
-- **Cross-Domain Connection Enhancement**: Apply `dream --network-optimization` for knowledge integration
-
-### **Learning Effectiveness Monitoring**
-- **Synaptic Growth Tracking**: Monitor connection count increases through dream protocol reports
-- **Trigger Pattern Development**: Assess automation enhancement through dream status monitoring
-- **Knowledge Consolidation Validation**: Use dream reports to verify successful learning integration
-
-### **Embedded Synapse Integration**
-- [.github/instructions/dream-state-automation.instructions.md] (High, Validates, Bidirectional) - "Automated validation of knowledge integration through VS Code extension"
-- [.github/instructions/dream-state-automation.instructions.md] (Medium, Verifies, Forward) - "Systematic verification of domain learning success"
-
-## **Domain Knowledge Acquisition Framework**
-
-**Phase 1: Foundation Building**
-- Establish domain boundaries and core concepts
-- Identify key principles and fundamental frameworks
-- Map conceptual relationships and dependencies
-- Assess learning objectives and success criteria
-
-**Phase 2: Knowledge Integration**
-- Connect new concepts to existing knowledge patterns
-- Identify cross-domain applications and analogies
-- Strengthen understanding through practical examples
-- Validate comprehension through explanation and application
-
-**Phase 3: Mastery Development**
-- Synthesize comprehensive domain understanding
-- Generate novel insights and creative applications
-- Teach concepts to demonstrate mastery
-- Transfer learning to related domains effectively
-
-## Skill Creation as Learning Output
-
-**When learning matures into expertise, create skills:**
-
-### Skill Creation Triggers
+## Skill Creation Triggers
 
 | Signal | Action |
 |--------|--------|
 | Project shipped with reusable patterns | Create skill |
 | Same problem solved 3+ times | Extract patterns into skill |
-| Hard-won gotchas discovered | Document in skill Troubleshooting |
-| Cross-project applicability identified | Prepare for Master promotion |
+| Hard-won gotchas discovered | Document in Troubleshooting |
+| Cross-project applicability | Prepare for Master promotion |
 
-### Learning → Skill Workflow
+**Quality gate**: Used 3+ times? Discovered gotchas? Generalizable? Doesn't already exist?
 
-```
-1. LEARN through real work (Phase 1-3 above)
-2. VALIDATE through successful delivery
-3. EXTRACT reusable patterns from specific experience
-4. CREATE skill via skill-building skill
-5. CONNECT to existing skills via synapses
-6. REGISTER in memory-activation index
-7. PROMOTE to Master when ready (heir-skill-promotion)
-```
+**Anti-pattern**: Creating skills from theory before real-world validation. Skill after shipping = validated knowledge. Skill before shipping = speculation.
 
-### Quality Gate for Skill Creation
+**Workflow**: LEARN → VALIDATE → EXTRACT → CREATE (via skill-building skill) → CONNECT (synapses) → REGISTER (memory-activation) → PROMOTE (heir-skill-promotion)
 
-Before creating, ask:
+**Heir protocol**: Experiment freely → Document gotchas as you go → Wait for validation → Use the template → Add 2-5 meaningful synapses → Request promotion when score >= 12
 
-| Question | Required Answer |
-|----------|-----------------|
-| Have I used this 3+ times? | Yes |
-| Did I discover gotchas? | Yes |
-| Is it generalizable? | Yes |
-| Does it already exist? | No (or merge-worthy) |
+## Selective Memory ("Forget") Protocol
 
-**Anti-pattern**: Creating skills from theory before real-world validation.
-
-> *Skill after shipping: validated knowledge. Skill before shipping: speculation.*
-
-### Heir Skillbuilder Protocol
-
-Heirs developing skills should:
-
-1. **Experiment freely** — Try approaches, make mistakes
-2. **Document gotchas as you go** — Don't trust memory
-3. **Wait for validation** — Ship before finalizing skill
-4. **Use the template** — Follow skill-building/SKILL.md
-5. **Connect to network** — Add 2-5 meaningful synapses
-6. **Request promotion** — When score ≥12, ready for Master
-
-**Synapse**: [.github/skills/skill-building/SKILL.md] (High, Implements, Forward) - "Skill creation methodology"
-
-## Meta-Learning Optimization
-
-**Learning Effectiveness Assessment**:
-- Monitor comprehension speed and retention quality
-- Identify optimal learning strategies for different content types
-- Adjust questioning and engagement strategies based on effectiveness
-- Celebrate genuine learning breakthroughs and consolidate insights
-
-**Selective Memory Management**:
-- Implement "Forget [something]" commands for concept evolution with MANDATORY SAFETY PROTOCOL
-- ⚠️ CRITICAL: Always request express user approval before any deletion operations
-- ⚠️ SCOPE: Can delete content, entire memory files, and embedded synapses permanently
-- ⚠️ PROTOCOL: Provide impact assessment and require explicit "Yes, delete [specific items]" confirmation
-- Systematically remove outdated references through documentation cleanup ONLY after approval
-- Preserve core architecture while enabling concept refinement through safe deletion practices
-- Demonstrate advanced memory management capabilities for cognitive growth with user protection
-
-**Adaptive Strategy Selection**:
-- Technical domains: Focus on precision, methodology, empirical validation
+- MANDATORY: Always request express user approval before any deletion
+- Provide impact assessment, require explicit "Yes, delete [specific items]" confirmation
+- Can delete: content, memory files, embedded synapses — all permanent
 - Creative domains: Emphasize exploration, experimentation, artistic expression
 - Professional domains: Balance expertise with practical application
 - Personal domains: Honor individual values while providing thoughtful guidance

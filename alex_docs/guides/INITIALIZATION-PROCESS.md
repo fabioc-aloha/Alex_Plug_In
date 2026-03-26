@@ -75,7 +75,7 @@ The extension copies these from itself to your workspace:
 | `episodic/`               | `.github/episodic/`               | Session records                       |
 | `config/`                 | `.github/config/`                 | Configuration + CSS styling           |
 | `agents/`                 | `.github/agents/`                 | Agent definitions                     |
-| `skills/`                 | `.github/skills/`                 | Domain expertise (130 skills)         |
+| `skills/`                 | `.github/skills/`                 | Domain expertise (150 skills)         |
 
 **Note:** `markdown-light.css` is included in the `config/` folder and gets copied to `.vscode/` during the markdown styles step (Step 7).
 
@@ -226,7 +226,7 @@ your-project/
 │   │   ├── markdown-light.css      # Source CSS for preview
 │   │   └── user-profile.json       # Your preferences
 │   ├── agents/                     # Agent definitions
-│   └── skills/                     # Domain expertise (130 skills)
+│   └── skills/                     # Domain expertise (150 skills)
 ├── .vscode/
 │   └── markdown-light.css          # Copied from config/ for VS Code
 └── (your project files)

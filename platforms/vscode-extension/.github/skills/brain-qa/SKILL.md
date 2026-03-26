@@ -10,15 +10,6 @@ applyTo: '**/*synapse*,**/*skill*,**/*trigger*'
 # Brain QA
 
 > Semantic, logic, code, and architectural validation of Alex's cognitive architecture — not just file counts, but meaning coherence
-
-## Synapses
-
-*Format: See `SYNAPSE-SCHEMA.md` for notation reference*
-
-- [.github/instructions/semantic-audit.instructions.md] (High, Coordinates, Bidirectional) - "Procedural memory for manual semantic review that complements automated brain-qa"
-- [.github/skills/architecture-audit/SKILL.md] (Medium, Related, Bidirectional) - "Full repository/project audit including brain-qa execution"
-- [.github/instructions/dream-state-automation.instructions.md] (Medium, Complements, Forward) - "Dream validates synapses, brain-qa validates structure"
-
 ## Philosophy
 
 Brain QA is a **mental exercise**, not just a muscle exercise. The script validates structure, but the skill's true value is teaching Alex *what to look for* beyond what scripts can automate.

@@ -332,7 +332,3 @@ const output = await replicate.run("qwen/qwen3-tts", {
 | Multi-language content creation | Either | Edge has 32 languages; Speech Turbo has 40+ |
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

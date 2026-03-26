@@ -389,17 +389,3 @@ The 4-dimension gap analysis (GA-S, GA-I, GA-A, GA-P) was developed by Master Al
 The meta-insight: **You're not just building software — you're building a knowledge base that builds software.** The investment in research and skill creation pays compound dividends as the project grows.
 
 ---
-
-## Synapses
-
-- [.github/skills/bootstrap-learning/SKILL.md] (High, Extends, Forward) - "Research-first uses bootstrap learning for unknown domains"
-- [.github/skills/project-scaffolding/SKILL.md] (High, Extends, Forward) - "Research-first adds knowledge layer to scaffolding"
-- [.github/skills/skill-building/SKILL.md] (Critical, Requires, Bidirectional) - "Skills extracted from research use skill-building quality gates"
-- [.github/skills/knowledge-synthesis/SKILL.md] (High, Integrates, Bidirectional) - "Research generates knowledge that synthesis organizes"
-- [.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "Gap analysis creates skills that SSO selects from"
-- [.github/instructions/research-first-workflow.instructions.md] (Critical, Implements, Bidirectional) - "Instruction provides step-by-step procedures for this skill"
-- [.github/prompts/gapanalysis.prompt.md] (High, Implements, Forward) - "Interactive prompt for 4-dimension gap analysis"
-
-*Skill created: 2026-02-13 | Category: Architecture | Status: Active*
-*Origin: Heir promotion — Dead Letter project cognitive architecture expansion*
-*Updated: 2026-02-13 — Added 4-dimension gap analysis (GA-S, GA-I, GA-A, GA-P), heir generalization, instruction + prompt*

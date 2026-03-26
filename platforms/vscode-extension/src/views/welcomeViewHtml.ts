@@ -28,8 +28,6 @@ import { getSharedStyles } from './sharedStyles';
 
 /** Data contract for the Mind tab */
 export interface MindTabData {
-  identityName: string;
-  identityMeta: string;
   skillCount: number;
   instructionCount: number;
   promptCount: number;
@@ -40,10 +38,6 @@ export interface MindTabData {
   lastMeditationDate: string | null;
   /** 7.38: Meditation session count for streak tracking */
   meditationCount: number;
-  /** 7.32: Knowledge freshness buckets */
-  freshness: { thriving: number; active: number; fading: number; dormant: number };
-  /** 7.33: Calibration distribution snapshot */
-  calibration: { high: number; medium: number; low: number; uncertain: number; total: number };
 }
 
 /** 7.13: Token status for Secret Manager inline dashboard */
@@ -331,10 +325,10 @@ export function getWelcomeHtmlContent(
           <button role="tab" id="tab-docs" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
       </div>
 
-      ${getMissionTabHtml({ nudges, personalityMode })}
+      ${getMissionTabHtml({ nudges, personalityMode, activeContext })}
 
       ${getSkillStoreTabHtml({ skills, health })}
-      ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, tokenStatuses, settingsToggles })}
+      ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, tokenStatuses, settingsToggles, activeContext })}
 
       ${getDocsTabHtml()}
 
@@ -570,6 +564,8 @@ export function getWelcomeHtmlContent(
               vscode.postMessage({ command: 'setPersonalityMode', mode: mode });
           });
       });
+
+
 
       // ── Settings Toggles (7.14) ──
       document.querySelectorAll('.toggle-switch[data-setting]').forEach(function(sw) {

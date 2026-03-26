@@ -4,9 +4,6 @@ description: "Mandatory adversarial review protocols for quality-critical operat
 
 # Adversarial Oversight Protocol
 
-**Classification**: Procedural Memory | Quality Assurance  
-**Activation**: release, publish, promote skill, architecture change, security, critical  
-**Priority**: MANDATORY - These gates cannot be bypassed
 
 ---
 
@@ -75,7 +72,6 @@ These operations **MUST** trigger Validator agent review:
 ### Standard Pattern: Builder → Validator → Merge
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TD
     BUILD["Builder  creates/implements"] --> REQUEST["Request  Validation"]
     REQUEST --> VALIDATOR["Validator  reviews adversarially"]
@@ -276,7 +272,6 @@ Adversarial oversight succeeds when:
 ## Quick Reference: When to Invoke Validator
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TD
     TASK["Task or Change"] --> CRITICAL{"Critical operation?"}
     CRITICAL -->|Yes| MANDATORY["🔴 MANDATORY  Validator Review"]

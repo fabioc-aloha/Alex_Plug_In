@@ -480,16 +480,3 @@ This is not documentation. It is a **handoff message** from Master to the heir's
 - It replaces the need for a separate onboarding doc — it IS the onboarding, embedded where the heir will find it first
 
 ---
-
-## Synapses
-
-- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
-- [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
-- [brain-qa/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
-- [.github/skills/persona-detection/SKILL.md] (High, Integrates, Backward) - "Persona detection ships to heir via inheritance model"
-
----
-
-*Consolidated: 2026-02-19*
-*Sources: heir-sync-management + heir-curation*
-*Last Updated: 2026-02-19*

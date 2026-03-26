@@ -614,20 +614,6 @@ Alex automatically detects the language of your text and selects an appropriate 
 - Basic markdown support
 
 ---
-
-## Synapses
-
-- **accessibility**: Primary use case enabler
-- **vscode-extension-patterns**: Extension command patterns, CSP-compliant webview
-- **markdown-mermaid**: Source content processing
-- **academic-research**: Document reading for research projects
-- **gamma-presentations**: Audio playback of pitch content for rehearsal and delivery
-- **project-management**: Stakeholder pitch presentations generated as audio files
-- **ux-design**: Emoji feedback patterns, keyboard shortcut UX
-- **testing-strategies**: Unit test patterns for language detection
-
----
-
 ## Future Enhancements
 
 | Feature | Status | Notes |

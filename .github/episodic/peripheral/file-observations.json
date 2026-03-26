@@ -1,10 +1,28 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/src/views/docsTabHtml.ts",
-    "platforms/vscode-extension/src/views/welcomeView.ts"
+    "claude/CLAUDE.md",
+    "CHANGELOG.md",
+    "PRE-PUBLISH-CHECKLIST.md",
+    "README.md",
+    "ROADMAP-UNIFIED.md",
+    "TEST-GUIDE.md",
+    "alex_docs/ALEX-FIRSTS.md",
+    "alex_docs/CONVERTER-IMPROVEMENT-ANALYSIS.md",
+    "alex_docs/DK-correax-brand.md",
+    "alex_docs/NORTH-STAR.md"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1774469659964
+  "todoHotspots": [
+    {
+      "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1774487610414
+    },
+    {
+      "file": "alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1774487610414
+    }
+  ],
+  "lastUpdated": 1774487610414
 }

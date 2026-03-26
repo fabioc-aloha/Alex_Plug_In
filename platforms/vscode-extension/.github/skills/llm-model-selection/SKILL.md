@@ -212,7 +212,3 @@ For **production deployment, user-facing work**:
 | Complex refactor | 10,000-20,000 | $0.15-0.30 | $0.03-0.06 |
 | Full session | 50,000-150,000 | $0.75-2.25 | $0.15-0.45 |
 | Meditation | 30,000-80,000 | $0.45-1.20 | $0.09-0.24 |
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

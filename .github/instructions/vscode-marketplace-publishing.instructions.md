@@ -1,13 +1,11 @@
 ---
 description: "VS Code Marketplace publishing workflow, constraints, and best practices for extension deployment"
 inheritance: master-only
+applyTo: "**/*.vsix,**/*publish*,**/vsce*"
 ---
 
 # VS Code Marketplace Publishing Protocol
 
-**Classification**: Procedural Memory | Extension Publishing  
-**Activation**: publish extension, vsce, marketplace, package vsix, deploy extension  
-**Priority**: CRITICAL for production deployment
 
 ---
 

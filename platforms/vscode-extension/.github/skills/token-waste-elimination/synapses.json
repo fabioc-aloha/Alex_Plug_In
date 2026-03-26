@@ -1,0 +1,94 @@
+{
+    "schemaVersion": "2.0.0",
+    "skillId": "token-waste-elimination",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "version": "2.0.0",
+    "connections": [
+        {
+            "target": ".github/instructions/token-waste-elimination.instructions.md",
+            "type": "implements",
+            "strength": 1.0,
+            "reason": "Instruction provides auto-loaded decision tables and size thresholds",
+            "when": "When working with .github/ memory files",
+            "yields": "Quick-reference rules without loading full skill"
+        },
+        {
+            "target": ".github/prompts/token-audit.prompt.md",
+            "type": "implements",
+            "strength": 1.0,
+            "reason": "Prompt provides /token-audit guided workflow",
+            "when": "When user invokes /token-audit",
+            "yields": "Interactive audit session with fix tracking"
+        },
+        {
+            "target": ".github/muscles/audit-token-waste.cjs",
+            "type": "uses",
+            "strength": 0.95,
+            "reason": "Muscle automates pattern scanning and baseline measurement",
+            "when": "When running automated waste detection",
+            "yields": "Machine-readable findings with optional auto-fix"
+        },
+        {
+            "target": ".github/skills/doc-hygiene/SKILL.md",
+            "type": "complements",
+            "strength": 0.9,
+            "reason": "Doc hygiene prevents drift; token waste elimination removes bloat",
+            "when": "When cleaning documentation or reducing context size",
+            "yields": "Anti-drift rules that prevent waste from recurring"
+        },
+        {
+            "target": ".github/instructions/heir-project-improvement.instructions.md",
+            "type": "supports",
+            "strength": 0.85,
+            "reason": "Heir improvement includes context optimization as a quality step",
+            "when": "When improving an heir project's cognitive architecture",
+            "yields": "Practical audit procedure for heir maintainers"
+        },
+        {
+            "target": ".github/skills/architecture-audit/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "reason": "Architecture audit checks structure; token waste audit checks efficiency",
+            "when": "When running comprehensive project health checks",
+            "yields": "Token-level efficiency analysis alongside structural validation"
+        },
+        {
+            "target": ".github/skills/skill-building/SKILL.md",
+            "type": "feeds",
+            "strength": 0.75,
+            "reason": "New skills should be lean from the start",
+            "when": "When creating or reviewing new skills",
+            "yields": "Size targets and waste patterns to avoid during skill creation"
+        },
+        {
+            "target": ".github/instructions/meditation.instructions.md",
+            "type": "relates",
+            "strength": 0.6,
+            "reason": "Meditation consolidation may produce bloated memory files",
+            "when": "When reviewing meditation outputs for context efficiency",
+            "yields": "Post-meditation cleanup checklist"
+        }
+    ],
+    "when": [
+        "User asks to reduce token usage or context size",
+        "User reports degraded response quality (possible context bloat)",
+        "User is preparing heir project for release",
+        "User runs architecture audit and finds large files",
+        "User asks about optimizing cognitive architecture",
+        "User invokes /token-audit"
+    ],
+    "activationContexts": [
+        "token-waste-elimination",
+        "token waste",
+        "token optimization",
+        "context bloat",
+        "reduce tokens",
+        "trim waste",
+        "lean architecture",
+        "context size",
+        "memory bloat",
+        "instruction bloat",
+        "prompt bloat",
+        "skill bloat"
+    ]
+}

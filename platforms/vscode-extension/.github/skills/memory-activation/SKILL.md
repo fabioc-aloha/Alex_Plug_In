@@ -81,8 +81,8 @@ Search this index when processing any task request:
 | doc-hygiene | anti-drift rules, count elimination, living document, documentation maintenance, hardcoded counts, prevent drift |
 | documentation-quality-assurance | doc audit, drift detection, preflight validation, documentation qa, link integrity, staleness check, documentation drift, living document, doc hygiene, stale docs, anti-drift |
 | dream-state | dream, neural maintenance, health check, synapse validation, sleep mode |
-| error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling, handle failure, transient error, retry with backoff, graceful degradation, resilience pattern, timeout handling, idempotency |
 | enterprise-integration | enterprise auth, sso, entra, aad, enterprise features, corp login |
+| error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling, handle failure, transient error, retry with backoff, graceful degradation, resilience pattern, timeout handling, idempotency |
 | executive-storytelling | executive summary, stakeholder narrative, board presentation, c-suite |
 | extension-audit-methodology | audit extension, extension quality, debug audit, dead code, performance audit |
 | ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
@@ -174,6 +174,7 @@ Search this index when processing any task request:
 | terminal-image-rendering | terminal image, kitty graphics, imgcat, inline image, terminal avatar, enable images, integrated terminal image, iterm2 protocol, chafa |
 | testing-strategies | write tests, unit test, test coverage, mock dependencies, tdd, add tests for this, how to test, test strategy, coverage gaps, jest, vitest, mocha, testing pyramid, integration test, e2e test, what to mock, flaky tests, aaa pattern, test refactor |
 | ⭐ text-to-speech | read aloud, tts, edge tts, speak text, voice synthesis, audio playback |
+| token-waste-elimination | token waste, token optimization, context bloat, reduce tokens, trim waste, lean architecture, context size, memory bloat, instruction bloat, prompt bloat, skill bloat, eliminate waste |
 | ui-ux-design | accessibility audit, wcag compliance, design system, typography, spacing, contrast, touch targets, aria, keyboard navigation, screen reader |
 | visual-memory | visual memory, reference portrait, face consistency, base64 reference, character photo set, subject photo, embedded media, face-consistent generation |
 | vscode-configuration-validation | validate config, manifest validation, package.json validation, command registration, settings registration, configuration errors |
@@ -266,6 +267,7 @@ Prompts (`.prompt.md`) contain complex workflows — episodic memory requiring a
 | `/tdd` | red green refactor, test first | Test-driven development |
 | `/uiuxaudit` | accessibility audit, wcag check, ui review | UI/UX accessibility audit |
 | `/export-memory` | export memory, port alex, move to claude, portable export | Portable memory export for other AI surfaces |
+| `/token-audit` | token waste, context bloat, reduce tokens, audit instructions, lean architecture | Token waste detection and remediation |
 
 ### Workflow Categories
 
@@ -284,10 +286,3 @@ Prompts (`.prompt.md`) contain complex workflows — episodic memory requiring a
 | Guiding same multi-step process 3+ times | Create new prompt |
 | User asks "how do I always..." | Repeatable protocol |
 | Complex decision tree explained repeatedly | Decision prompt |
-
-## Synapses
-
-- ↔ `.github/instructions/skill-selection-optimization.instructions.md` — WHEN: complex task detected (3+ operations) | YIELDS: proactive skill survey, dependency analysis, activation plan
-- ↔ `.github/skills/awareness/SKILL.md` — WHEN: detecting own uncertainty | YIELDS: red flag phrases, self-correction patterns
-- → `.github/skills/anti-hallucination/SKILL.md` — WHEN: uncertain if skill exists | YIELDS: verification protocol, admit-uncertainty
-- → `.github/skills/cognitive-load/SKILL.md` — WHEN: multiple skill matches | YIELDS: chunking strategies, decision simplification

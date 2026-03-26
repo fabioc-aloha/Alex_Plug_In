@@ -495,7 +495,6 @@ export async function handleHelpCommand(
 | Command | Description |
 |---------|-------------|
 | \`/forget <topic>\` | Selectively remove information from memory |
-| \`/exportm365\` | Export memory for M365 Copilot |
 
 ---
 

@@ -34,7 +34,7 @@ Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, 
 | -------------------- | -------------------------- | -------------------------------------------- |
 | **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
 | **Trust**            | Rebuild context every time | Consistency through shared history           |
-| **Skills**           | You re-prompt from scratch | 124 pre-built skills, inheritable            |
+| **Skills**           | You re-prompt from scratch | 136 pre-built skills, inheritable            |
 | **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
 | **Context**          | You re-explain every time  | Synapses map relationships automatically     |
 | **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
@@ -121,7 +121,7 @@ Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 See [Quick Start](#-quick-start-vs-code) for installation.
 
-📘 **[Full Documentation & Training](https://learnalex.correax.com/)**
+📘 **[Full Documentation & Training](https://learnai.correax.com/)**
 
 ### M365 Copilot Agent
 
@@ -220,7 +220,7 @@ Depth of reasoning — frontier models for meditation, audits, and architecture.
 
 ## 🚀 Quick Start (VS Code)
 
-> 🌐 **New to Alex?** Visit **[learnalex.correax.com](https://learnalex.correax.com/)** for study guides, documentation, and training.
+> 🌐 **New to Alex?** Visit **[learnai.correax.com](https://learnai.correax.com/)** for study guides, documentation, and training.
 
 ### Step 1: Install
 
@@ -269,22 +269,22 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New (v6.5.1)
 
-| Category           | Highlights                                                                                                   |
-| ------------------ | ------------------------------------------------------------------------------------------------------------ |
-| **Presentations**  | PPTX engine rewritten — Calibri typography, modern slide masters, paragraph bullets, zebra tables             |
-| **Model Tiers**    | GPT-5.3, o4-mini, GPT-4.1 capable/mini/nano, Gemini 2.5 Flash — improved pattern matching accuracy          |
-| **UI**             | API Keys sidebar section, cleaner command labels, Marp → PPTX terminology                                    |
+| Category          | Highlights                                                                                         |
+| ----------------- | -------------------------------------------------------------------------------------------------- |
+| **Presentations** | PPTX engine rewritten — Calibri typography, modern slide masters, paragraph bullets, zebra tables  |
+| **Model Tiers**   | GPT-5.3, o4-mini, GPT-4.1 capable/mini/nano, Gemini 2.5 Flash — improved pattern matching accuracy |
+| **UI**            | API Keys sidebar section, cleaner command labels, Marp → PPTX terminology                          |
 
 ### What's New (v6.5.0 — The Trust Release)
 
-| Category          | Highlights                                                                                                   |
-| ----------------- | ------------------------------------------------------------------------------------------------------------ |
-| **Hooks**         | 16 agent hooks (hooks.json + muscles/hooks/) — quality gates, safety enforcement, autopilot deny() for H8/H9 |
-| **Skills**        | 37 complete trifectas — 4 new promotions from heir projects                                                  |
-| **Agents**        | 7 custom agents with handoff buttons and specialist workflows                                                |
-| **Quality**       | Automated quality gates, NASA-grade audit methodology, pre-publish pipeline                                  |
-| **Upgrade**       | v3→v6 automatic preservation — backup, clean install, gap analysis, auto-restore, synapse normalization      |
-| **Infrastructure**| Extended thinking, MCP tools, Copilot Memory, global knowledge, 47 personas                                  |
+| Category           | Highlights                                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------ |
+| **Hooks**          | 16 agent hooks (hooks.json + muscles/hooks/) — quality gates, safety enforcement, autopilot deny() for H8/H9 |
+| **Skills**         | 33 complete trifectas — 4 new promotions from heir projects                                                  |
+| **Agents**         | 7 custom agents with handoff buttons and specialist workflows                                                |
+| **Quality**        | Automated quality gates, NASA-grade audit methodology, pre-publish pipeline                                  |
+| **Upgrade**        | v3→v6 automatic preservation — backup, clean install, gap analysis, auto-restore, synapse normalization      |
+| **Infrastructure** | Extended thinking, MCP tools, Copilot Memory, global knowledge, 47 personas                                  |
 
 <details><summary>Previous releases</summary>
 
@@ -1071,13 +1071,13 @@ See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/
 
 ## 📖 Documentation & Training
 
-> 🌐 **[learnalex.correax.com](https://learnalex.correax.com/)** — Study guides, documentation, and training on how to partner with Alex.
+> 🌐 **[learnai.correax.com](https://learnai.correax.com/)** — Study guides, documentation, and training on how to partner with Alex.
 
 Everything you need to learn Alex, understand the architecture, and get the most out of your partnership:
 
 | Resource                                                                              | Description                                                       |
 | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| **[learnalex.correax.com](https://learnalex.correax.com/)**                           | 📘 **START HERE** — Study guides, training, and full documentation |
+| **[learnai.correax.com](https://learnai.correax.com/)**                               | 📘 **START HERE** — Study guides, training, and full documentation |
 | [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) | Complete version history                                          |
 | [Source Code](https://github.com/fabioc-aloha/Alex_Plug_In)                           | TypeScript implementation                                         |
 
@@ -1171,7 +1171,7 @@ Alex is designed and operated in alignment with Microsoft's [Secure Future Initi
 
 ## 💬 Support
 
-- [learnalex.correax.com](https://learnalex.correax.com/) - Study guides, documentation and training
+- [learnai.correax.com](https://learnai.correax.com/) - Study guides, documentation and training
 - [GitHub Discussions](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) - Ask questions and share ideas
 - [Issue Tracker](https://github.com/fabioc-aloha/Alex_Plug_In/issues) - Report bugs and request features
 

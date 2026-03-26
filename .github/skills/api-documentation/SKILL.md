@@ -309,20 +309,3 @@ curl -X GET "https://api.example.com/v1/resource/123" \
 | Jargon overload | Glossary + define on first use |
 
 ---
-
-## Synapses
-
-### High-Strength Connections
-
-- [project-scaffolding] (High, Extends, Bidirectional) — "Documentation project structure"
-- [code-quality] (High, Complements, Bidirectional) — "Documented code is quality code"
-
-### Medium-Strength Connections
-
-- [creative-writing] (Medium, Complements, Forward) — "Clear writing techniques"
-- [git-workflow] (Medium, Uses, Forward) — "Docs-as-code versioning"
-
-### Supporting Connections
-
-- [markdown-mastery] (Medium, Uses, Forward) — "Core formatting"
-- [appropriate-reliance] (Low, Applies, Forward) — "AI assistance in docs"

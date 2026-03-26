@@ -548,10 +548,3 @@ Alex will:
 - "Mock defense" or "practice questions"
 
 ---
-
-## Synapses
-
-- [.github/skills/slide-design/SKILL.md] (High, Uses, Bidirectional) - "Defense presentation slides"
-- [.github/skills/academic-research/SKILL.md] (High, Complements, Bidirectional) - "Defense draws from written work"
-- [.github/skills/coaching-techniques/SKILL.md] (Medium, Uses, Forward) - "Mock defense feedback techniques"
-- [.github/skills/deep-work-optimization/SKILL.md] (Medium, Enables, Forward) - "Focus for defense preparation"

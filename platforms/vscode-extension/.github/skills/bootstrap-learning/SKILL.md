@@ -110,7 +110,3 @@ A good bootstrap learning output (SKILL.md) should:
 - [ ] Have tables with real data (thresholds, trade-offs, decision criteria)
 - [ ] Avoid the "capabilities list" anti-pattern ("Expert in X. Can do Y.")
 - [ ] Pass the Feynman check — any section should be explainable simply
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

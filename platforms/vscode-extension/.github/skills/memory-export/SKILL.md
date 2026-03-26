@@ -100,7 +100,3 @@ The receiving surface won't have Alex's architecture, so:
 | Include secrets, tokens, or API keys | Security risk |
 | Include full file contents from the workspace | Too large; export should be <10KB |
 | Omit the completeness statement | User needs to know if anything was missed |
-
-## Synapses
-
-See [synapses.json](synapses.json) for connection map.

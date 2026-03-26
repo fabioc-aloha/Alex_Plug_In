@@ -149,7 +149,3 @@ git worktree prune
 - ❌ Committing secrets or credentials
 - ❌ Giant commits with unrelated changes
 - ❌ Vague messages like "fix stuff" or "update"
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

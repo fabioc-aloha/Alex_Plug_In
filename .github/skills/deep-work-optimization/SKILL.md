@@ -347,9 +347,3 @@ For March 2026 defense:
 *Skill created: 2026-02-10 | Category: Productivity | Status: Active*
 
 ---
-
-## Synapses
-
-- [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Focused learning requires deep work"
-- [.github/instructions/alex-core.instructions.md] (Medium, Applies, Forward) - "Meta-cognitive monitoring during focus"
-- [.github/skills/dissertation-defense/SKILL.md] (Medium, Supports, Forward) - "Defense prep needs deep focus"

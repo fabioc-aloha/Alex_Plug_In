@@ -324,7 +324,7 @@ Embedding the same skills and behaviors across multiple AI platforms (VS Code, M
 ### How Alex Implements It
 
 **VS Code Heir**: Full skill files in `.github/skills/*/SKILL.md`
-- 130 skills with detailed procedures
+- 150 skills with detailed procedures
 - Synaptic connections to related knowledge
 - File-based activation patterns
 

@@ -302,7 +302,3 @@ Do not suppress. Self-correct transparently. Examples:
 - **self-actualization**: Self-assessment includes awareness metrics
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connection mapping.

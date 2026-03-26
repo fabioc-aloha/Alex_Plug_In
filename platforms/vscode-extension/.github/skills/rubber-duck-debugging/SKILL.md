@@ -168,7 +168,3 @@ Traditional rubber duck debugging works because **forcing scattered thoughts int
 4. Let the human have the "aha" moment
 
 *The insight belongs to them. The structure belongs to us.*
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

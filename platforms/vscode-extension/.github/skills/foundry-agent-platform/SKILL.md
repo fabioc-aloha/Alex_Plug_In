@@ -277,16 +277,3 @@ When designing a Foundry-based agent:
 - [ ] Auth model? (Entra ID keyless via DefaultAzureCredential)
 
 ---
-
-## Synapses
-
-- [.github/skills/ai-agent-design/SKILL.md] (Critical, Implements, Bidirectional) - "Foundry is the runtime for agent design patterns"
-- [.github/skills/multi-agent-orchestration/SKILL.md] (Critical, Implements, Bidirectional) - "Foundry Agent Service enables multi-agent orchestration at scale"
-- [.github/skills/azure-architecture-patterns/SKILL.md] (High, Extends, Bidirectional) - "Foundry is an Azure PaaS that follows WAF principles"
-- [.github/skills/mcp-development/SKILL.md] (High, Complements, Bidirectional) - "Foundry supports MCP servers as agent tools"
-- [.github/skills/enterprise-integration/SKILL.md] (High, Enables, Forward) - "Foundry provides enterprise-grade agent deployment"
-- [.github/instructions/meditation.instructions.md] (Medium, Created-During, Forward) - "Skill created during platform expansion meditation"
-
----
-
-*Microsoft Foundry Agent Platform — cloud-native agent deployment for the Alex ecosystem*

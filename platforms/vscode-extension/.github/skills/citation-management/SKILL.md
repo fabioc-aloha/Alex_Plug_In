@@ -310,9 +310,3 @@ Web:      Author. (Year, Month Day). Title. Site. URL
 *Skill created: 2026-02-10 | Category: Research | Status: Active*
 
 ---
-
-## Synapses
-
-- [.github/skills/literature-review/SKILL.md] (High, Enables, Bidirectional) - "Lit review requires proper citations"
-- [.github/skills/academic-research/SKILL.md] (High, Enables, Forward) - "Papers need correct citations"
-- [.github/skills/dissertation-defense/SKILL.md] (Medium, Supports, Forward) - "Defense references must be accurate"

@@ -202,9 +202,3 @@ console.log('━━━━━━━━━━━━━━━━━━━━━━�
 ```
 
 **Exception**: User-facing CLI tools (not muscles) should still be human-friendly.
-
-## Synapses
-
-- **Bootstrap Learning** → This skill (enables): Learning identifies automation opportunities
-- **This skill** → Trifecta System (produces): Muscles become part of trifectas
-- **Deep Thinking** → This skill (informs): Complex analysis reveals automation patterns

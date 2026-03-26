@@ -3,12 +3,10 @@
  * 
  * Identifies user personas from their profile and project context.
  * Uses semantic signal rules for flexible, weighted detection.
- * LLM-based analysis for dynamic persona detection when available.
  * 
  * v5.0.0 Feature: Know Your Customer
- * v5.1.0 Feature: LLM-based persona detection + P6 update
- * v5.1.1 Feature: Priority-based detection chain
  * v5.6.9 Feature: Semantic rules replace flat keyword lists
+ * v6.8.1 Feature: Simplified 3-tier detection (explicit → cached → scored)
  * 
  * DETECTION MODEL:
  * Instead of flat keyword arrays, each persona defines weighted "signals":
@@ -22,49 +20,24 @@
  * and easy addition of new personas without changing detection logic.
  * 
  * PRIORITY CHAIN (highest to lowest):
- * 1. Focus - Current session topic from Pomodoro timer
- * 2. Goal - Stated session objective
- * 3. Project Phase - Current phase from project config
- * 4. Project Goals - From learning goals
- * 5. Copilot Instructions - Persona: field from Active Context in copilot-instructions.md
- * 6. Profile - User profile credentials/expertise
- * 7. Workspace Scoring - File structure heuristic
- * 8. Developer - Default fallback
+ * 1. Explicit - Persona: field from copilot-instructions.md Active Context
+ * 2. Cached - Recent projectPersona from user-profile.json (<1 day)
+ * 3. Workspace Scoring - Unified heuristic (profile + structure + deps + content + roadmap)
+ * 4. Developer - Default fallback
  */
 
-import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import * as os from 'os';
 import * as workspaceFs from '../shared/workspaceFs';
 
 // ============================================================================
 // CONFIDENCE THRESHOLDS & LIMITS
 // ============================================================================
 
-/** Confidence threshold for Focus session detection (P1) */
-const CONFIDENCE_FOCUS = 0.95;
-// const CONFIDENCE_FOCUS_TECH = 0.9; // reserved for future focus tech matching
-/** Confidence threshold for Session goal detection (P2) */
-const CONFIDENCE_GOAL = 0.85;
-/** Confidence threshold for Project phase detection (P3) */
-const CONFIDENCE_PHASE = 0.75;
-/** Confidence threshold for Learning goals detection (P4) */
-const CONFIDENCE_LEARNING_GOALS = 0.7;
-/** Confidence threshold for copilot-instructions.md Persona: field (P5) */
-const CONFIDENCE_COPILOT_PERSONA = 0.85;
-/** Minimum threshold to use priority chain result */
-const THRESHOLD_PRIORITY_1 = 0.8;
-const THRESHOLD_PRIORITY_2 = 0.7;
-const THRESHOLD_PRIORITY_3 = 0.7;
-const THRESHOLD_PRIORITY_4 = 0.6;
-const THRESHOLD_PRIORITY_5 = 0.7;
+/** Confidence for copilot-instructions.md Persona: field (explicit declaration) */
+const CONFIDENCE_COPILOT_PERSONA = 0.9;
 /** Default confidence for fallback detection */
 const CONFIDENCE_FALLBACK = 0.5;
-
-// Reserved for future filesystem heuristics (currently unused)
-// const MAX_DIR_ENTRIES = 50;
-// const MAX_SUBDIR_ENTRIES = 10;
 
 
 // ============================================================================
@@ -90,198 +63,13 @@ export {
 // SIGNAL MATCHING HELPERS
 // ============================================================================
 
-/**
- * Test whether a text matches any identity or technology signals for a persona.
- * Returns the best-matching persona and reason, or null.
- */
-function matchTextAgainstSignals(
-    text: string,
-    categories: PersonaSignal['category'][],
-): { persona: Persona; confidence: number; reason: string } | null {
-    const textLower = text.toLowerCase();
-    let bestPersona: Persona | null = null;
-    let bestWeight = 0;
-    let bestReason = '';
-
-    for (const persona of PERSONAS) {
-        for (const signal of persona.signals) {
-            if (!categories.includes(signal.category)) { continue; }
-            try {
-                const re = new RegExp(signal.pattern, 'i');
-                if (re.test(textLower)) {
-                    if (signal.weight > bestWeight) {
-                        bestWeight = signal.weight;
-                        bestPersona = persona;
-                        bestReason = `Matched "${signal.pattern}" in text`;
-                    }
-                }
-            } catch { /* skip invalid regex */ }
-        }
-    }
-
-    return bestPersona ? { persona: bestPersona, confidence: 0, reason: bestReason } : null;
-}
-
 // ============================================================================
-// PRIORITY CHAIN DETECTION HELPERS
+// EXPLICIT DECLARATION DETECTION
 // ============================================================================
 
 /**
- * PRIORITY 1: Detect persona from active Focus session (Pomodoro timer)
- * Uses semantic signal matching against session topic.
- */
-async function detectFromFocusSession(): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
-    try {
-        const sessionStatePath = path.join(os.homedir(), '.alex', 'session-state.json');
-        if (!await fs.pathExists(sessionStatePath)) {
-            return null;
-        }
-        
-        const sessionState = await fs.readJson(sessionStatePath);
-        if (!sessionState.active || !sessionState.topic) {
-            return null;
-        }
-        
-        const topic = sessionState.topic;
-        
-        // Match topic against identity and technology signals
-        const match = matchTextAgainstSignals(topic, ['identity', 'technology']);
-        if (match) {
-            return {
-                persona: match.persona,
-                confidence: CONFIDENCE_FOCUS,
-                reasons: [`Active focus session: "${sessionState.topic}"`]
-            };
-        }
-    } catch (err) {
-        // Ignore - not all projects have focus sessions
-    }
-    return null;
-}
-
-/**
- * PRIORITY 2: Detect persona from current session goal
- * Uses semantic signal matching against goal text.
- */
-async function detectFromSessionGoals(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
-    if (!rootPath) { return null; }
-    
-    try {
-        const goalsPath = path.join(rootPath, '.github', 'config', 'goals.json');
-        if (!await workspaceFs.pathExists(goalsPath)) {
-            return null;
-        }
-        
-        const goalsData = await workspaceFs.readJson(goalsPath) as { goals?: Array<{ completedAt?: string; title?: string; description?: string; tags?: string[] }> };
-        const activeGoals = goalsData.goals?.filter((g: { completedAt?: string }) => !g.completedAt) || [];
-        
-        for (const goal of activeGoals) {
-            const goalText = `${goal.title} ${goal.description || ''} ${(goal.tags || []).join(' ')}`;
-            const match = matchTextAgainstSignals(goalText, ['identity', 'technology']);
-            if (match) {
-                return {
-                    persona: match.persona,
-                    confidence: CONFIDENCE_GOAL,
-                    reasons: [`Active goal: "${goal.title}"`]
-                };
-            }
-        }
-    } catch (err) {
-        // Ignore - not all projects have goals
-    }
-    return null;
-}
-
-/**
- * PRIORITY 3: Detect persona from project phase
- * Uses semantic pattern matching against roadmap content.
- */
-async function detectFromProjectPhase(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
-    if (!rootPath) { return null; }
-    
-    try {
-        const roadmapPaths = [
-            path.join(rootPath, 'ROADMAP.md'),
-            path.join(rootPath, 'ROADMAP-UNIFIED.md'),
-            path.join(rootPath, '.github', 'ROADMAP.md')
-        ];
-        
-        // Phase semantic rules: regex pattern → persona ID
-        const phaseRules: Array<{ pattern: RegExp; personaId: string }> = [
-            { pattern: /🔄 in progress|## current|active track|sprint \d+/i,                personaId: 'developer' },
-            { pattern: /documentation phase|docs sprint|writing phase|api docs/i,            personaId: 'technical-writer' },
-            { pattern: /release phase|publish|deployment|go.?live|launch/i,                  personaId: 'devops' },
-            { pattern: /architecture review|design phase|system design|adr/i,                personaId: 'architect' },
-            { pattern: /research phase|literature review|data collection|experiment/i,       personaId: 'researcher' },
-            { pattern: /presentation|demo prep|conference|talk prep/i,                       personaId: 'presenter' },
-            { pattern: /security audit|compliance review|pen.?test|threat model/i,           personaId: 'security' },
-            { pattern: /data pipeline|etl|data migration|lakehouse|medallion/i,              personaId: 'data-engineer' },
-            { pattern: /game design|level design|game jam|game prototype|playtest/i,         personaId: 'game-developer' },
-            { pattern: /learning phase|study|exam prep|course.?work|tutorial/i,              personaId: 'student' },
-            { pattern: /content phase|blog writing|content calendar|editorial/i,             personaId: 'content-creator' },
-        ];
-        
-        for (const roadmapPath of roadmapPaths) {
-            if (await workspaceFs.pathExists(roadmapPath)) {
-                const content = await workspaceFs.readFile(roadmapPath);
-                
-                for (const { pattern, personaId } of phaseRules) {
-                    if (pattern.test(content)) {
-                        const persona = PERSONAS.find(p => p.id === personaId);
-                        if (persona) {
-                            return {
-                                persona,
-                                confidence: CONFIDENCE_PHASE,
-                                reasons: [`Project phase from roadmap`]
-                            };
-                        }
-                    }
-                }
-            }
-        }
-    } catch (err) {
-        // Ignore - not all projects have roadmaps
-    }
-    return null;
-}
-
-/**
- * PRIORITY 4: Detect persona from project learning goals
- * Uses semantic signal matching against goal text.
- */
-async function detectFromProjectGoals(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
-    if (!rootPath) { return null; }
-    
-    try {
-        const profilePath = path.join(rootPath, '.github', 'config', 'user-profile.json');
-        if (!await workspaceFs.pathExists(profilePath)) {
-            return null;
-        }
-        
-        const profile = await workspaceFs.readJson(profilePath) as { learningGoals?: string[] };
-        const goals = profile.learningGoals || [];
-        
-        for (const goal of goals) {
-            if (typeof goal !== 'string') { continue; }
-            const match = matchTextAgainstSignals(goal, ['identity', 'technology']);
-            if (match) {
-                return {
-                    persona: match.persona,
-                    confidence: CONFIDENCE_LEARNING_GOALS,
-                    reasons: [`Learning goal: "${goal}"`]
-                };
-            }
-        }
-    } catch (err) {
-        // Ignore - not all projects have learning goals
-    }
-    return null;
-}
-
-/**
- * PRIORITY 5: Detect persona from copilot-instructions.md Active Context
- * Reads the Persona: field from the project's copilot-instructions.md.
- * This is an explicit project-level declaration that overrides heuristic scoring.
+ * P1: Detect persona from copilot-instructions.md Active Context.
+ * Reads the Persona: field — this is an explicit declaration that outranks all heuristics.
  */
 async function detectFromCopilotInstructions(rootPath?: string): Promise<Omit<PersonaDetectionResult, 'source'> | null> {
     if (!rootPath) { return null; }
@@ -299,9 +87,10 @@ async function detectFromCopilotInstructions(rootPath?: string): Promise<Omit<Pe
             return null;
         }
 
-        const declaredPersona = personaMatch[1].trim().toLowerCase();
+        // Strip confidence suffix like "Developer (85% confidence)" → "developer"
+        const raw = personaMatch[1].trim();
+        const declaredPersona = raw.replace(/\s*\(\d+%\s*confidence\)/i, '').toLowerCase();
         if (!declaredPersona || declaredPersona.startsWith('_') || declaredPersona.startsWith('(')) {
-            // Skip placeholder values like "_(session-objective)_"
             return null;
         }
 
@@ -310,13 +99,65 @@ async function detectFromCopilotInstructions(rootPath?: string): Promise<Omit<Pe
             return {
                 persona: matchedPersona,
                 confidence: CONFIDENCE_COPILOT_PERSONA,
-                reasons: [`Persona declared in copilot-instructions.md: "${personaMatch[1].trim()}"`]
+                reasons: [`Persona declared in copilot-instructions.md: "${raw}"`]
             };
         }
     } catch {
         // Ignore — not all projects have copilot-instructions.md
     }
     return null;
+}
+
+// ============================================================================
+// ROADMAP PHASE SCORING (folded into workspace scoring)
+// ============================================================================
+
+/** Phase semantic rules: regex pattern → persona ID boost */
+const ROADMAP_PHASE_RULES: Array<{ pattern: RegExp; personaId: string }> = [
+    { pattern: /documentation phase|docs sprint|writing phase|api docs/i,            personaId: 'technical-writer' },
+    { pattern: /release phase|publish|deployment|go.?live|launch/i,                  personaId: 'devops' },
+    { pattern: /architecture review|design phase|system design|adr/i,                personaId: 'architect' },
+    { pattern: /research phase|literature review|data collection|experiment/i,       personaId: 'researcher' },
+    { pattern: /presentation|demo prep|conference|talk prep/i,                       personaId: 'presenter' },
+    { pattern: /security audit|compliance review|pen.?test|threat model/i,           personaId: 'security' },
+    { pattern: /data pipeline|etl|data migration|lakehouse|medallion/i,              personaId: 'data-engineer' },
+    { pattern: /game design|level design|game jam|game prototype|playtest/i,         personaId: 'game-developer' },
+    { pattern: /learning phase|study|exam prep|course.?work|tutorial/i,              personaId: 'student' },
+    { pattern: /content phase|blog writing|content calendar|editorial/i,             personaId: 'content-creator' },
+];
+
+/**
+ * Score roadmap phase signals against ROADMAP.md content.
+ * Folded into workspace scoring as a supplementary signal (not a separate priority).
+ */
+async function scoreRoadmapPhaseSignals(
+    wsRoot: string,
+    scores: Map<string, PersonaScoreEntry>
+): Promise<void> {
+    const roadmapPaths = [
+        path.join(wsRoot, 'ROADMAP.md'),
+        path.join(wsRoot, 'ROADMAP-UNIFIED.md'),
+        path.join(wsRoot, '.github', 'ROADMAP.md'),
+    ];
+
+    for (const roadmapPath of roadmapPaths) {
+        try {
+            if (!await workspaceFs.pathExists(roadmapPath)) { continue; }
+            const content = await workspaceFs.readFile(roadmapPath);
+
+            for (const { pattern, personaId } of ROADMAP_PHASE_RULES) {
+                if (pattern.test(content)) {
+                    const entry = scores.get(personaId);
+                    if (entry) {
+                        entry.score += 2; // strong signal
+                        const reason = 'Project roadmap phase';
+                        if (!entry.reasons.includes(reason)) { entry.reasons.push(reason); }
+                    }
+                }
+            }
+            break; // only read the first roadmap found
+        } catch { /* skip */ }
+    }
 }
 
 /**
@@ -326,6 +167,7 @@ interface UserProfile {
     name?: string;
     nickname?: string;
     birthday?: string;  // ISO date string for age-based avatar fallback
+    role?: string;      // e.g. "Director of Advanced Analytics"
     primaryTechnologies?: string[];
     learningGoals?: string[];
     expertiseAreas?: string[];
@@ -556,6 +398,9 @@ function collectProfileEvidence(userProfile?: UserProfile): ProfileEvidence[] {
     const profileTexts: ProfileEvidence[] = [];
     if (!userProfile) { return profileTexts; }
     
+    if (userProfile.role && typeof userProfile.role === 'string') {
+        profileTexts.push({ text: userProfile.role, label: `Role: ${userProfile.role}` });
+    }
     for (const tech of (userProfile.primaryTechnologies || [])) {
         if (typeof tech === 'string') { profileTexts.push({ text: tech, label: `Uses ${tech}` }); }
     }
@@ -573,21 +418,18 @@ function collectProfileEvidence(userProfile?: UserProfile): ProfileEvidence[] {
 }
 
 /**
- * Detect the most likely persona based on priority chain.
+ * Detect the most likely persona based on a 4-tier priority chain.
  * 
- * PRIORITY CHAIN (each level overrides lower levels if confident):
- * 1. Focus - Current session topic from Pomodoro timer (highest priority)
- * 2. Goal - Stated session objective
- * 3. Project Phase - Current phase from project config
- * 4. Project Goals - From learning goals
- * 5. Copilot Instructions - Persona: field from Active Context
- * 6. Profile - Cached projectPersona from user-profile.json
- * 7. Workspace Scoring - File structure heuristic
- * 8. Developer - Default fallback (lowest priority)
+ * PRIORITY CHAIN:
+ * 1. Explicit    - Persona: field from copilot-instructions.md Active Context
+ * 2. Cached      - Recent projectPersona from user-profile.json (<1 day old)
+ * 3. Scored      - Unified heuristic: profile + structure + deps + content + roadmap phase
+ * 4. User Profile - Role/expertise from user-profile.json (weaker than workspace signals)
+ * 5. Fallback    - Developer (always)
  * 
  * @param userProfile - User profile from user-profile.json
  * @param workspaceFolders - Current workspace folders
- * @returns Detected persona with confidence score, or null if insufficient data
+ * @returns Detected persona with confidence score
  */
 export async function detectPersona(
     userProfile?: UserProfile,
@@ -595,37 +437,13 @@ export async function detectPersona(
 ): Promise<PersonaDetectionResult | null> {
     const rootPath = workspaceFolders?.[0]?.uri.fsPath;
     
-    // PRIORITY 1: Check active focus session (Pomodoro timer topic)
-    const focusResult = await detectFromFocusSession();
-    if (focusResult && focusResult.confidence >= THRESHOLD_PRIORITY_1) {
-        return { ...focusResult, source: 'detected' };
+    // P1: Explicit declaration in copilot-instructions.md (highest authority)
+    const explicitResult = await detectFromCopilotInstructions(rootPath);
+    if (explicitResult) {
+        return { ...explicitResult, source: 'detected' };
     }
     
-    // PRIORITY 2: Check session goal from goals.json
-    const goalResult = await detectFromSessionGoals(rootPath);
-    if (goalResult && goalResult.confidence >= THRESHOLD_PRIORITY_2) {
-        return { ...goalResult, source: 'detected' };
-    }
-    
-    // PRIORITY 3: Check project phase from config
-    const phaseResult = await detectFromProjectPhase(rootPath);
-    if (phaseResult && phaseResult.confidence >= THRESHOLD_PRIORITY_3) {
-        return { ...phaseResult, source: 'detected' };
-    }
-    
-    // PRIORITY 4: Check project learning goals
-    const projectGoalsResult = await detectFromProjectGoals(rootPath);
-    if (projectGoalsResult && projectGoalsResult.confidence >= THRESHOLD_PRIORITY_4) {
-        return { ...projectGoalsResult, source: 'detected' };
-    }
-    
-    // PRIORITY 5: Check copilot-instructions.md Persona: field
-    const copilotResult = await detectFromCopilotInstructions(rootPath);
-    if (copilotResult && copilotResult.confidence >= THRESHOLD_PRIORITY_5) {
-        return { ...copilotResult, source: 'detected' };
-    }
-    
-    // PRIORITY 6: Use saved projectPersona if available and recent (within 1 day)
+    // P2: Cached projectPersona from user-profile.json (valid <1 day)
     const extendedProfile = userProfile as ExtendedUserProfile | undefined;
     if (extendedProfile?.projectPersona) {
         const savedPersona = extendedProfile.projectPersona;
@@ -649,13 +467,13 @@ export async function detectPersona(
         }
     }
     
-    // PRIORITY 7: Signal-based scoring across all evidence sources
+    // P3: Unified workspace scoring (all heuristic signals in one pass)
     const scores = new Map<string, PersonaScoreEntry>();
     for (const persona of PERSONAS) {
         scores.set(persona.id, { score: 0, reasons: [] });
     }
     
-    // Collect and score profile evidence (NASA R4 compliance)
+    // Score profile evidence (identity + technology signals)
     const profileTexts = collectProfileEvidence(userProfile);
     scoreProfileSignals(profileTexts, scores);
     
@@ -669,6 +487,7 @@ export async function detectPersona(
                 await scoreStructureSignals(wsRoot, entries, scores);
                 await scoreDependencySignals(wsRoot, scores);
                 await scoreContentSignals(wsRoot, scores);
+                await scoreRoadmapPhaseSignals(wsRoot, scores);
             } catch { /* Ignore errors reading directory */ }
         }
     }
@@ -676,6 +495,26 @@ export async function detectPersona(
     // Select best persona from scores
     const result = selectBestPersona(scores);
     if (result) { return result; }
+    
+    // P4: User profile role/expertise fallback (weaker than workspace signals)
+    if (userProfile?.role) {
+        const roleLower = userProfile.role.toLowerCase();
+        for (const persona of PERSONAS) {
+            for (const signal of persona.signals) {
+                if (signal.category !== 'identity') { continue; }
+                try {
+                    if (new RegExp(signal.pattern, 'i').test(roleLower)) {
+                        return {
+                            persona,
+                            confidence: 0.6,
+                            reasons: [`User profile role: "${userProfile.role}"`],
+                            source: 'detected'
+                        };
+                    }
+                } catch { /* skip */ }
+            }
+        }
+    }
     
     // FALLBACK: Default to Developer
     const developerPersona = PERSONAS.find(p => p.id === 'developer')!;

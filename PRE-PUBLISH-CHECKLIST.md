@@ -169,15 +169,15 @@ $missing | ForEach-Object { Write-Host "  Excluded: $_" }
 
 ### What Gets Synced
 
-| Source | Destination | Rule |
-| --- | --- | --- |
-| Root `.github/skills/*` | Heir `.github/skills/` | Copy unless in `SKILL_EXCLUSIONS` |
-| Root `.github/instructions/` | Heir `.github/instructions/` | Skip files with `inheritance: master-only` or `heir:m365` frontmatter |
-| Root `.github/prompts/` | Heir `.github/prompts/` | Skip files with `inheritance: master-only` or `heir:m365` frontmatter |
-| Root `.github/muscles/` | Heir `.github/muscles/` | Skip files with `master-only` in `inheritance.json` |
-| Root `.github/config/` | Heir `.github/config/` | Skip PII files (`user-profile.json`, `MASTER-ALEX-PROTECTED.json`, `cognitive-config.json`) |
-| Root `.github/agents/` | Heir `.github/agents/` | Always copy |
-| Root `.github/copilot-instructions.md` | Heir | Always copy (with heir decontamination transforms) |
+| Source                                 | Destination                  | Rule                                                                                        |
+| -------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------- |
+| Root `.github/skills/*`                | Heir `.github/skills/`       | Copy unless in `SKILL_EXCLUSIONS`                                                           |
+| Root `.github/instructions/`           | Heir `.github/instructions/` | Skip files with `inheritance: master-only` or `heir:m365` frontmatter                       |
+| Root `.github/prompts/`                | Heir `.github/prompts/`      | Skip files with `inheritance: master-only` or `heir:m365` frontmatter                       |
+| Root `.github/muscles/`                | Heir `.github/muscles/`      | Skip files with `master-only` in `inheritance.json`                                         |
+| Root `.github/config/`                 | Heir `.github/config/`       | Skip PII files (`user-profile.json`, `MASTER-ALEX-PROTECTED.json`, `cognitive-config.json`) |
+| Root `.github/agents/`                 | Heir `.github/agents/`       | Always copy                                                                                 |
+| Root `.github/copilot-instructions.md` | Heir                         | Always copy (with heir decontamination transforms)                                          |
 
 ## 📖 Documentation
 
@@ -283,7 +283,7 @@ Run `get_errors` in VS Code or check Problems panel:
 - [ ] System files updated
 - [ ] User files preserved
 - [ ] New folders created:
-  - [ ] `.github/agents/` (5 agent files)
+  - [ ] `.github/agents/` (7 agent files)
   - [ ] `config/` templates
 - [ ] Migration tasks generated for schema changes
 

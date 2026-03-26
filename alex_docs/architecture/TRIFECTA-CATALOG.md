@@ -41,26 +41,25 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 ```
 
 **Trifecta-referenced muscles** (`.github/muscles/`): Execution scripts referenced by trifecta files.
-**Other scripts** (`scripts/`): Release utilities not part of trifectas (release-preflight.ps1, release-vscode.ps1, etc.)
-**Archived scripts** (`scripts/archive/`): One-time migrations and superseded tools.
+**Other scripts** (`scripts/`): Release utilities not part of trifectas (release-preflight.ps1, release-vscode.ps1, etc.).
 
-| Script                                        | Referenced By                               |
-| --------------------------------------------- | ------------------------------------------- |
-| `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, architecture-audit  |
-| `.github/muscles/brain-qa.ps1`                | brain-qa (31-phase validation)              |
-| `.github/muscles/build-extension-package.ps1` | heir-sync-management, release-management           |
-| `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)    |
-| `.github/muscles/gamma-generator.cjs`         | gamma-presentations (CLI generation)        |
-| `.github/muscles/normalize-paths.ps1`         | dream-state-automation (path normalization) |
-| `.github/muscles/pptxgen-cli.ts`              | pptx-generation (offline PPTX)              |
-| `.github/muscles/sync-architecture.cjs`        | heir-sync-management, build-extension-package.ps1  |
-| `.github/muscles/validate-skills.ps1`         | brain-qa, dream-state-automation            |
-| `.github/muscles/validate-synapses.ps1`       | brain-qa, dream-state-automation            |
-| `scripts/release-preflight.ps1`               | release-management, release-preflight       |
+| Script                                        | Referenced By                                     |
+| --------------------------------------------- | ------------------------------------------------- |
+| `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, architecture-audit        |
+| `.github/muscles/brain-qa.ps1`                | brain-qa (31-phase validation)                    |
+| `.github/muscles/build-extension-package.ps1` | heir-sync-management, release-management          |
+| `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)          |
+| `.github/muscles/gamma-generator.cjs`         | gamma-presentations (CLI generation)              |
+| `.github/muscles/normalize-paths.ps1`         | dream-state-automation (path normalization)       |
+| `.github/muscles/pptxgen-cli.ts`              | pptx-generation (offline PPTX)                    |
+| `.github/muscles/sync-architecture.cjs`       | heir-sync-management, build-extension-package.ps1 |
+| `.github/muscles/validate-skills.ps1`         | brain-qa, dream-state-automation                  |
+| `.github/muscles/validate-synapses.ps1`       | brain-qa, dream-state-automation                  |
+| `scripts/release-preflight.ps1`               | release-management, release-preflight             |
 
 ---
 
-## Complete Trifectas (38)
+## Complete Trifectas (39)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -198,11 +197,11 @@ Capabilities with all three memory system components — each justified by the "
 
 ### Heir Sync Management
 
-| Component   | File                                                        | Why It Exists                                                                   |
-| ----------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/heir-sync-management/SKILL.md`              | Domain knowledge: quality gates, promotion criteria, master→heir sync patterns  |
-| Instruction | `.github/instructions/heir-skill-promotion.instructions.md` | Auto-loaded procedure: validation scoring, YAML frontmatter, promotion workflow |
-| ~~Prompt~~  | ~~`promotetomaster.prompt.md`~~ — **MISSING** (needs creation) | `/promotetomaster` — skill promotion from heir to Master Alex                |
+| Component   | File                                                           | Why It Exists                                                                   |
+| ----------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/heir-sync-management/SKILL.md`                 | Domain knowledge: quality gates, promotion criteria, master→heir sync patterns  |
+| Instruction | `.github/instructions/heir-skill-promotion.instructions.md`    | Auto-loaded procedure: validation scoring, YAML frontmatter, promotion workflow |
+| ~~Prompt~~  | ~~`promotetomaster.prompt.md`~~ — **MISSING** (needs creation) | `/promotetomaster` — skill promotion from heir to Master Alex                   |
 
 **Status**: Skill+Instruction only — prompt does not exist yet.
 **Muscle**: `sync-architecture.cjs` — automated master→heir synchronization with PII protection
@@ -213,7 +212,7 @@ Capabilities with all three memory system components — each justified by the "
 | Component   | File                                              | Why It Exists                                                                              |
 | ----------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Skill       | `.github/skills/md-to-word/SKILL.md`              | Domain knowledge: markdown→docx conversion patterns, diagram embedding, style preservation |
-| Instruction | `.github/instructions/md-to-word.instructions.md` | Auto-loaded procedure: pandoc workflow, OOXML post-processing, mermaid→image conversion  |
+| Instruction | `.github/instructions/md-to-word.instructions.md` | Auto-loaded procedure: pandoc workflow, OOXML post-processing, mermaid→image conversion    |
 | Prompt      | `.github/prompts/word.prompt.md`                  | `/word` — user invokes markdown to Word document conversion with diagrams                  |
 
 **Muscle**: `md-to-word.cjs` — Node.js script for conversion with diagram support
@@ -306,11 +305,11 @@ Capabilities with all three memory system components — each justified by the "
 
 ### Markdown & Mermaid
 
-| Component   | File                                                       | Why It Exists                                                                                    |
-| ----------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Skill       | `.github/skills/markdown-mermaid/SKILL.md`                 | Domain knowledge: Mermaid diagram types, syntax, VS Code rendering, diagram selection heuristics |
-| Instruction | `.github/instructions/markdown-mermaid.instructions.md`    | Auto-loaded procedure: diagram type selection, syntax patterns, troubleshooting rendering        |
-| ~~Prompt~~  | ~~`diagramming-mastery-meditation.prompt.md`~~ — **MISSING** (needs creation) | `/diagramming` — Mermaid mastery integration meditation session |
+| Component   | File                                                                          | Why It Exists                                                                                    |
+| ----------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/markdown-mermaid/SKILL.md`                                    | Domain knowledge: Mermaid diagram types, syntax, VS Code rendering, diagram selection heuristics |
+| Instruction | `.github/instructions/markdown-mermaid.instructions.md`                       | Auto-loaded procedure: diagram type selection, syntax patterns, troubleshooting rendering        |
+| ~~Prompt~~  | ~~`diagramming-mastery-meditation.prompt.md`~~ — **MISSING** (needs creation) | `/diagramming` — Mermaid mastery integration meditation session                                  |
 
 **Status**: Skill+Instruction only — prompt does not exist yet.
 **Inheritance**: `inheritable` — documentation visualization across all heirs
@@ -347,125 +346,137 @@ Capabilities with all three memory system components — each justified by the "
 
 ### Image Handling
 
-| Component   | File                                                | Why It Exists                                                                             |
-| ----------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Component   | File                                                  | Why It Exists                                                                              |
+| ----------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Skill       | `.github/skills/image-handling/SKILL.md`              | Domain knowledge: format selection, conversion rules, Replicate model selection for AI gen |
-| Instruction | `.github/instructions/image-handling.instructions.md` | Auto-loaded procedure: format rules, conversion steps, model parameters                   |
+| Instruction | `.github/instructions/image-handling.instructions.md` | Auto-loaded procedure: format rules, conversion steps, model parameters                    |
 | Prompt      | `.github/prompts/image-handling.prompt.md`            | `/image-handling` — user invokes image format selection and AI generation workflow         |
 
 **Inheritance**: `inheritable` — image handling universal across all heirs
 
 ### Character Aging Progression
 
-| Component   | File                                                                  | Why It Exists                                                                         |
-| ----------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/character-aging-progression/SKILL.md`                  | Domain knowledge: life-stage accuracy, age-specific prompts, nano-banana-pro parameters |
-| Instruction | `.github/instructions/character-aging-progression.instructions.md`    | Auto-loaded procedure: age progression generation, identity consistency rules          |
-| Prompt      | `.github/prompts/character-aging-progression.prompt.md`               | `/character-aging-progression` — user invokes age progression generation workflow      |
+| Component   | File                                                               | Why It Exists                                                                           |
+| ----------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/character-aging-progression/SKILL.md`              | Domain knowledge: life-stage accuracy, age-specific prompts, nano-banana-pro parameters |
+| Instruction | `.github/instructions/character-aging-progression.instructions.md` | Auto-loaded procedure: age progression generation, identity consistency rules           |
+| Prompt      | `.github/prompts/character-aging-progression.prompt.md`            | `/character-aging-progression` — user invokes age progression generation workflow       |
 
 **Synapse connections**: ai-character-reference-generation (0.95), visual-memory (0.9)
 **Inheritance**: `inheritable` — character consistency applicable across all heirs
 
 ### Visual Memory
 
-| Component   | File                                                    | Why It Exists                                                                            |
-| ----------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/visual-memory/SKILL.md`                  | Domain knowledge: embedded reference photos, face-consistent generation, base64 encoding  |
-| Instruction | `.github/instructions/visual-memory.instructions.md`    | Auto-loaded procedure: reference photo setup, visual-memory.json structure, API params    |
-| Prompt      | `.github/prompts/visual-memory.prompt.md`               | `/visual-memory` — user invokes visual memory subject management                         |
+| Component   | File                                                 | Why It Exists                                                                            |
+| ----------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/visual-memory/SKILL.md`              | Domain knowledge: embedded reference photos, face-consistent generation, base64 encoding |
+| Instruction | `.github/instructions/visual-memory.instructions.md` | Auto-loaded procedure: reference photo setup, visual-memory.json structure, API params   |
+| Prompt      | `.github/prompts/visual-memory.prompt.md`            | `/visual-memory` — user invokes visual memory subject management                         |
 
 **Inheritance**: `inheritable` — self-sufficient skills with embedded media refs
 
 ### Code Review
 
-| Component   | File                                                          | Why It Exists                                                                         |
-| ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/code-review/SKILL.md`                          | Domain knowledge: 3-pass review, comment prefixes, epistemic confidence calibration    |
+| Component   | File                                                          | Why It Exists                                                                             |
+| ----------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/code-review/SKILL.md`                         | Domain knowledge: 3-pass review, comment prefixes, epistemic confidence calibration       |
 | Instruction | `.github/instructions/code-review-guidelines.instructions.md` | Auto-loaded procedure: review quality gates, feedback guidelines, severity classification |
-| Prompt      | `.github/prompts/review.prompt.md`                            | `/review` — user invokes epistemic code review with confidence calibration             |
+| Prompt      | `.github/prompts/review.prompt.md`                            | `/review` — user invokes epistemic code review with confidence calibration                |
 
 **Inheritance**: `inheritable` — code review discipline universal across all coding heirs
 
 ### Root Cause Analysis
 
-| Component   | File                                                              | Why It Exists                                                                         |
-| ----------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/root-cause-analysis/SKILL.md`                      | Domain knowledge: 5 Whys, binary search debugging, cause categories, timeline reconstruction |
-| Instruction | `.github/instructions/root-cause-analysis.instructions.md`        | Auto-loaded procedure: 6-step investigation protocol, category-based fix patterns      |
-| Prompt      | `.github/prompts/root-cause-analysis.prompt.md`                   | `/rca` — user invokes systematic root cause investigation                              |
+| Component   | File                                                       | Why It Exists                                                                                |
+| ----------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/root-cause-analysis/SKILL.md`              | Domain knowledge: 5 Whys, binary search debugging, cause categories, timeline reconstruction |
+| Instruction | `.github/instructions/root-cause-analysis.instructions.md` | Auto-loaded procedure: 6-step investigation protocol, category-based fix patterns            |
+| Prompt      | `.github/prompts/root-cause-analysis.prompt.md`            | `/rca` — user invokes systematic root cause investigation                                    |
 
 **Inheritance**: `inheritable` — debugging methodology universal across all heirs
 
 ### Refactoring Patterns
 
-| Component   | File                                                            | Why It Exists                                                                         |
-| ----------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/refactoring-patterns/SKILL.md`                    | Domain knowledge: code smells, safe moves, refactor vs rewrite decision               |
-| Instruction | `.github/instructions/refactoring-patterns.instructions.md`      | Auto-loaded procedure: safe workflow, file decomposition for monoliths, smell→fix mapping |
-| Prompt      | `.github/prompts/refactor.prompt.md`                             | `/refactor` — user invokes guided refactoring session                                  |
+| Component   | File                                                        | Why It Exists                                                                             |
+| ----------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/refactoring-patterns/SKILL.md`              | Domain knowledge: code smells, safe moves, refactor vs rewrite decision                   |
+| Instruction | `.github/instructions/refactoring-patterns.instructions.md` | Auto-loaded procedure: safe workflow, file decomposition for monoliths, smell→fix mapping |
+| Prompt      | `.github/prompts/refactor.prompt.md`                        | `/refactor` — user invokes guided refactoring session                                     |
 
 **Inheritance**: `inheritable` — refactoring discipline universal across all coding heirs
 
 ### Debugging Patterns
 
-| Component   | File                                                          | Why It Exists                                                                         |
-| ----------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/debugging-patterns/SKILL.md`                    | Domain knowledge: debugging mindset, binary search, stack trace reading, error categories |
-| Instruction | `.github/instructions/debugging-patterns.instructions.md`      | Auto-loaded procedure: 6-step debug protocol, isolation techniques, hypothesis testing  |
-| Prompt      | `.github/prompts/debug.prompt.md`                              | `/debug` — user invokes systematic debugging session                                   |
+| Component   | File                                                      | Why It Exists                                                                             |
+| ----------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/debugging-patterns/SKILL.md`              | Domain knowledge: debugging mindset, binary search, stack trace reading, error categories |
+| Instruction | `.github/instructions/debugging-patterns.instructions.md` | Auto-loaded procedure: 6-step debug protocol, isolation techniques, hypothesis testing    |
+| Prompt      | `.github/prompts/debug.prompt.md`                         | `/debug` — user invokes systematic debugging session                                      |
 
 **Inheritance**: `inheritable` — debugging methodology universal across all heirs
 
 ### Security Review
 
-| Component   | File                                                        | Why It Exists                                                                         |
-| ----------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/security-review/SKILL.md`                    | Domain knowledge: OWASP Top 10, STRIDE, Microsoft SFI, dependency audit patterns      |
-| Instruction | `.github/instructions/security-review.instructions.md`      | Auto-loaded procedure: 6-point security checklist, STRIDE threat assessment, reporting  |
-| Prompt      | `.github/prompts/security-review.prompt.md`                 | `/security-review` — user invokes security review with OWASP and STRIDE checks         |
+| Component   | File                                                   | Why It Exists                                                                          |
+| ----------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/security-review/SKILL.md`              | Domain knowledge: OWASP Top 10, STRIDE, Microsoft SFI, dependency audit patterns       |
+| Instruction | `.github/instructions/security-review.instructions.md` | Auto-loaded procedure: 6-point security checklist, STRIDE threat assessment, reporting |
+| Prompt      | `.github/prompts/security-review.prompt.md`            | `/security-review` — user invokes security review with OWASP and STRIDE checks         |
 
 **Inheritance**: `inheritable` — security review critical across all coding heirs
 
 ### Skill Building
 
-| Component   | File                                                    | Why It Exists                                                                         |
-| ----------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/skill-building/SKILL.md`                  | Domain knowledge: skill creation workflow, depth rubric, trifecta assessment           |
-| Instruction | `.github/instructions/skill-building.instructions.md`    | Auto-loaded procedure: phase-by-phase skill creation, registration, depth validation   |
-| Prompt      | `.github/prompts/skill-building.prompt.md`               | `/skill-building` — user invokes guided skill creation from real-world experience      |
+| Component   | File                                                  | Why It Exists                                                                        |
+| ----------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/skill-building/SKILL.md`              | Domain knowledge: skill creation workflow, depth rubric, trifecta assessment         |
+| Instruction | `.github/instructions/skill-building.instructions.md` | Auto-loaded procedure: phase-by-phase skill creation, registration, depth validation |
+| Prompt      | `.github/prompts/skill-building.prompt.md`            | `/skill-building` — user invokes guided skill creation from real-world experience    |
 
 **Inheritance**: `inheritable` — meta-skill for building skills across all heirs
 
 ### Global Knowledge
 
-| Component   | File                                                               | Why It Exists                                                                         |
-| ----------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/global-knowledge/SKILL.md`                          | Domain knowledge: GK/GI patterns, knowledge types, memory system differentiation       |
-| Instruction | `.github/instructions/global-knowledge-curation.instructions.md`  | Auto-loaded procedure: curation workflow, triage decisions, promotion criteria          |
-| Prompt      | `.github/prompts/knowledge.prompt.md`                              | `/knowledge` — user invokes global knowledge search, save, promote, or curate          |
+| Component   | File                                                             | Why It Exists                                                                    |
+| ----------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/global-knowledge/SKILL.md`                       | Domain knowledge: GK/GI patterns, knowledge types, memory system differentiation |
+| Instruction | `.github/instructions/global-knowledge-curation.instructions.md` | Auto-loaded procedure: curation workflow, triage decisions, promotion criteria   |
+| Prompt      | `.github/prompts/knowledge.prompt.md`                            | `/knowledge` — user invokes global knowledge search, save, promote, or curate    |
 
 **Inheritance**: `inheritable` — cross-project knowledge management universal
 
 ### Flux Brand Finetune
 
-| Component   | File                                                        | Why It Exists                                                                           |
-| ----------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/flux-brand-finetune/SKILL.md`               | Domain knowledge: FLUX LoRA fine-tuning on Replicate, training data prep, trigger words |
-| Instruction | `.github/instructions/flux-brand-finetune.instructions.md`  | Auto-loaded procedure: training data requirements, model creation, inference parameters |
-| Prompt      | `.github/prompts/flux-brand-finetune.prompt.md`             | `/flux-brand-finetune` — user invokes LoRA training or image generation workflow        |
+| Component   | File                                                       | Why It Exists                                                                           |
+| ----------- | ---------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/flux-brand-finetune/SKILL.md`              | Domain knowledge: FLUX LoRA fine-tuning on Replicate, training data prep, trigger words |
+| Instruction | `.github/instructions/flux-brand-finetune.instructions.md` | Auto-loaded procedure: training data requirements, model creation, inference parameters |
+| Prompt      | `.github/prompts/flux-brand-finetune.prompt.md`            | `/flux-brand-finetune` — user invokes LoRA training or image generation workflow        |
 
 **Synapse connections**: ai-character-reference-generation (0.95), visual-memory (0.9), brand-asset-management (0.85)
 **Inheritance**: `inheritable` — brand character fine-tuning applicable across all heirs
 
 ### AI Writing Avoidance
 
-| Component   | File                                                          | Why It Exists                                                                            |
-| ----------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/ai-writing-avoidance/SKILL.md`                | Domain knowledge: AI writing tells, authentic voice patterns, detection-avoidance tactics |
-| Instruction | `.github/instructions/ai-writing-avoidance.instructions.md`   | Auto-loaded procedure: writing quality rules, pattern detection, authentic voice guidance |
-| Prompt      | `.github/prompts/audit-writing.prompt.md`                     | `/audit-writing` — user invokes document audit for AI writing tells                      |
+| Component   | File                                                        | Why It Exists                                                                             |
+| ----------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/ai-writing-avoidance/SKILL.md`              | Domain knowledge: AI writing tells, authentic voice patterns, detection-avoidance tactics |
+| Instruction | `.github/instructions/ai-writing-avoidance.instructions.md` | Auto-loaded procedure: writing quality rules, pattern detection, authentic voice guidance |
+| Prompt      | `.github/prompts/audit-writing.prompt.md`                   | `/audit-writing` — user invokes document audit for AI writing tells                       |
 
 **Inheritance**: `inheritable` — authentic writing relevant across all content-producing heirs
+
+### Token Waste Elimination
+
+| Component   | File                                                           | Why It Exists                                                                      |
+| ----------- | -------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/token-waste-elimination/SKILL.md`              | Domain knowledge: VS Code loading tiers, token cost models, waste pattern taxonomy |
+| Instruction | `.github/instructions/token-waste-elimination.instructions.md` | Auto-loaded procedure: decision tables, size thresholds, quick-check patterns      |
+| Prompt      | `.github/prompts/token-audit.prompt.md`                        | `/token-audit` — user invokes full token waste audit with automated muscle         |
+| Muscle      | `.github/muscles/audit-token-waste.cjs`                        | 6-phase automated scanner with `--fix` auto-repair and `--json` machine output     |
+
+**Synapse connections**: doc-hygiene (0.9), heir-project-improvement (0.85), architecture-audit (0.8), skill-building (0.75)
+**Inheritance**: `inheritable` — context optimization applicable across all heirs
 
 ---
 
@@ -498,11 +509,11 @@ These instructions intentionally lack one or more components. The "Why?" test de
 
 ### Prompt-Only (Prompt exists, no instruction or skill needed)
 
-| Prompt                           | Why No Instruction?                                             | Why No Skill?                                    |
-| -------------------------------- | --------------------------------------------------------------- | ------------------------------------------------ |
-| `alex-initialization`            | One-time setup, not a repeated procedure                        | No domain knowledge to teach                     |
-| `domain-learning`                | Guided session, bootstrap-learning instruction covers procedure | Bootstrap-learning skill covers domain           |
-| `performance-assessment`         | Post-session evaluation, ad hoc                                 | No persistent domain to teach                    |
+| Prompt                   | Why No Instruction?                                             | Why No Skill?                          |
+| ------------------------ | --------------------------------------------------------------- | -------------------------------------- |
+| `alex-initialization`    | One-time setup, not a repeated procedure                        | No domain knowledge to teach           |
+| `domain-learning`        | Guided session, bootstrap-learning instruction covers procedure | Bootstrap-learning skill covers domain |
+| `performance-assessment` | Post-session evaluation, ad hoc                                 | No persistent domain to teach          |
 
 ### Skill-Only (No instruction or prompt, just domain expertise)
 
@@ -519,7 +530,7 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:   38 (36 verified + 2 pending prompt creation)
+Complete Trifectas:   39 (37 verified + 2 pending prompt creation)
 Procedural-Only:      17 (all justified)
 Prompt-Only:           3 (all justified)
 Skill-Only:          ~90 (standard — passive expertise)
@@ -532,7 +543,7 @@ Skill-Only:          ~90 (standard — passive expertise)
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (38)"]
+    subgraph COMPLETE["✅ Complete Trifectas (39)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]

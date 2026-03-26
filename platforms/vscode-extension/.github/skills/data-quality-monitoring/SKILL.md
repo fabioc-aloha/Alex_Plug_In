@@ -208,7 +208,3 @@ def update_baseline(history: list, new_value: int,
 - [ ] Rolling baselines updated after successful runs
 - [ ] Quality reports stored for trend analysis
 - [ ] Alerting integrated (email, Slack, PagerDuty)
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

@@ -26,34 +26,34 @@ This is not a tagline. It is a commitment. Every feature, every decision, every 
 
 Six platforms. Four active, two planned.
 
-| Platform               | Heir                          |  Status   | Notes                                                                                                                                                      |
-| ---------------------- | ----------------------------- | :-------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **VS Code Extension**  | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                   |
-| **M365 Copilot Agent** | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                       |
-| **Agent Plugin**       | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — skills, agents, instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
-| **Claude Cowork**      | `platforms/claude-cowork/`    | ⏳ Planned | Plugin bundle for Claude Cowork VM — Gate #17                                                                                                              |
-| **Claude Chat**        | `platforms/claude-chat/`      | ⏳ Planned | Projects + Memory config for Claude.ai — Gate #18                                                                                                          |
+| Platform               | Heir                          |  Status   | Notes                                                                                                                                                              |
+| ---------------------- | ----------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **VS Code Extension**  | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                           |
+| **M365 Copilot Agent** | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                               |
+| **Agent Plugin**       | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
+| **Claude Cowork**      | `platforms/claude-cowork/`    | ⏳ Planned | Plugin bundle for Claude Cowork VM — Gate #17                                                                                                                      |
+| **Claude Chat**        | `platforms/claude-chat/`      | ⏳ Planned | Projects + Memory config for Claude.ai — Gate #18                                                                                                                  |
 
 ---
 
 ## ✅ Shipped Releases
 
-| Version    | Theme                                                                                                                                                                         | Shipped    |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **v6.8.1** | Converter Infrastructure Sprint -- 46/46 improvement items, prompt-preprocessor, batch retry hardening, model freshness, 247 QA assertions                                    | 2026-03-25 |
-| **v6.8.0** | RAI Psychological Safety — 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, AIRS-20 PA, content safety Layer 5), 3 hooks, VS Code 1.113 eval           | 2026-03-24 |
-| **v6.7.3** | Synapse Integrity & Dialog Engineering — 428 type normalizations, 287 when/reason deduplication, dialog-engineering skill, skill-building Phase 0 activation check, GCX audit | 2026-03-24 |
-| **v6.7.2** | Memory Export & Platform Readiness — memory-export trifecta, /troubleshoot integration, Worker/Teams assessment                                                               | 2026-03-19 |
-| **v6.7.1** | Vision-Enhanced Skills — view_image verification in 5 image skills, lint-docs hardening                                                                                       | 2026-03-18 |
-| **v6.7.0** | Heir Harvest Release — 10 skills ported from heirs, 7 knowledge merges, stale heir cleanup across 33 projects, Gamma reliability hardened                                     | 2026-03-15 |
-| **v6.6.0** | Quality & Audit Hardening — lint-unused enforcement, quality gates 7-8, audit-heir-sync-drift, max-lines ESLint rule                                                          | 2026-03-14 |
-| **v6.5.5** | Performance — parallel activation, right-click menu audit, startup optimization                                                                                               | 2026-03-12 |
-| **v6.5.3** | Trust Release — synapse audit, master→heir sync hardening, leakage remediation, quality gates                                                                                 | 2026-03-11 |
-| **v6.4.0** | Agent Hooks Release — VS Code 1.111 settings adoption, autopilot, hooks, sandbox, debug docs                                                                                  | 2026-03-09 |
-| **v6.3.0** | Accessibility & Workshop Alignment — WCAG keyboard fixes, 10 domain skills, 41 workshops, I8 cardinal rule                                                                    | 2026-03-09 |
-| **v6.2.0** | On-Brand Partnership — FLUX fine-tune trifecta, SVG-first banners, GH Web heir discontinued                                                                                   | 2026-03-05 |
-| **v6.1.5** | M365 Schema + Agent Plugin — manifest v1.25, Agent Plugin heir, MCP standalone bundle                                                                                         | 2026-03-04 |
-| **v6.0.0** | The Partnership Release — episodic memory, outcome tracking, autonomous tasks, workflow engine                                                                                | 2026-02-28 |
+| Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v6.8.1** | Welcome View UI Polish & Converter Sprint -- Docs tab streamlined (Practice/Books removed, 8 playbook categories, LearnAI CTA redesign), converter infrastructure (prompt-preprocessor, batch retry, model freshness, 284 QA assertions), workspace cleanup (928 stale files archived, TEST-GUIDE.md retired) | 2026-03-25 |
+| **v6.8.0** | RAI Psychological Safety — 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, AIRS-20 PA, content safety Layer 5), 3 hooks, VS Code 1.113 eval                                                                                                                                           | 2026-03-24 |
+| **v6.7.3** | Synapse Integrity & Dialog Engineering — 428 type normalizations, 287 when/reason deduplication, dialog-engineering skill, skill-building Phase 0 activation check, GCX audit                                                                                                                                 | 2026-03-24 |
+| **v6.7.2** | Memory Export & Platform Readiness — memory-export trifecta, /troubleshoot integration, Worker/Teams assessment                                                                                                                                                                                               | 2026-03-19 |
+| **v6.7.1** | Vision-Enhanced Skills — view_image verification in 5 image skills, lint-docs hardening                                                                                                                                                                                                                       | 2026-03-18 |
+| **v6.7.0** | Heir Harvest Release — 10 skills ported from heirs, 7 knowledge merges, stale heir cleanup across 33 projects, Gamma reliability hardened                                                                                                                                                                     | 2026-03-15 |
+| **v6.6.0** | Quality & Audit Hardening — lint-unused enforcement, quality gates 7-8, audit-heir-sync-drift, max-lines ESLint rule                                                                                                                                                                                          | 2026-03-14 |
+| **v6.5.5** | Performance — parallel activation, right-click menu audit, startup optimization                                                                                                                                                                                                                               | 2026-03-12 |
+| **v6.5.3** | Trust Release — synapse audit, master→heir sync hardening, leakage remediation, quality gates                                                                                                                                                                                                                 | 2026-03-11 |
+| **v6.4.0** | Agent Hooks Release — VS Code 1.111 settings adoption, autopilot, hooks, sandbox, debug docs                                                                                                                                                                                                                  | 2026-03-09 |
+| **v6.3.0** | Accessibility & Workshop Alignment — WCAG keyboard fixes, 10 domain skills, 41 workshops, I8 cardinal rule                                                                                                                                                                                                    | 2026-03-09 |
+| **v6.2.0** | On-Brand Partnership — FLUX fine-tune trifecta, SVG-first banners, GH Web heir discontinued                                                                                                                                                                                                                   | 2026-03-05 |
+| **v6.1.5** | M365 Schema + Agent Plugin — manifest v1.25, Agent Plugin heir, MCP standalone bundle                                                                                                                                                                                                                         | 2026-03-04 |
+| **v6.0.0** | The Partnership Release — episodic memory, outcome tracking, autonomous tasks, workflow engine                                                                                                                                                                                                                | 2026-02-28 |
 
 > Full details in the [Appendix](#-appendix-completed-work).
 
@@ -130,7 +130,7 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 | --- | -------------------------- | --------------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------ |
 | 15  | **Foundry POC**            | Real user/team requests Alex in Teams         |   1w   | Foundry project + Alex orchestrator + Teams publish                                                                |
 | 16  | **Teams Deep Integration** | Active M365 users                             |  12w   | Bot Framework + Message Extensions + Meeting Integration                                                           |
-| 17  | **Claude Cowork Heir**     | Cowork exits Research Preview + user adoption |   8w   | Plugin bundle: 144 skills, 7 sub-agents, 49 slash commands. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md)        |
+| 17  | **Claude Cowork Heir**     | Cowork exits Research Preview + user adoption |   8w   | Plugin bundle: 150 skills, 7 sub-agents, 50 slash commands. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md)        |
 | 18  | **Claude Chat Heir**       | Gate #17 done                                 |   1w   | Lightweight Projects + Memory config heir. Depends on Cowork heir. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md) |
 
 ---
@@ -211,8 +211,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 |                            |                                                                 |
 | -------------------------- | --------------------------------------------------------------- |
 | **Current Master Version** | 6.8.1                                                           |
-| **Current Heirs**          | VS Code (6.8.0), M365 (6.2.0), Plugin (6.7.0)                   |
-| **Architecture**           | 149 skills, 39 trifectas, 69 instructions, 49 prompts, 7 agents |
+| **Current Heirs**          | VS Code (6.8.1), M365 (6.2.0), Plugin (6.7.0)                   |
+| **Architecture**           | 150 skills, 40 trifectas, 71 instructions, 50 prompts, 7 agents |
 | **Platforms**              | 6 total (4 active, 2 planned)                                   |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence                             |
 | **Open Items**             | 12 total: 4 blocked, 1 gated, 4 conditional, 3 next actions     |
@@ -240,10 +240,10 @@ The 4 new converter skills (md-to-eml, md-scaffold, nav-inject, converter-qa) ha
 
 Sync scripts reference stale/renamed skills that no longer exist in Master:
 
-| Script            | Stale References                                                                                                             |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `sync-m365.ps1`   | meditation-facilitation, writing-publication, skill-activation, prompt-activation, airs-integration, academic-paper-drafting |
-| `sync-plugin.ps1` | Same as above                                                                                                                |
+| Script            | Location                  | Stale References                                                                                                             |
+| ----------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `sync-m365.ps1`   | `platforms/m365-copilot/` | meditation-facilitation, writing-publication, skill-activation, prompt-activation, airs-integration, academic-paper-drafting |
+| `sync-plugin.ps1` | `platforms/agent-plugin/` | Same as above                                                                                                                |
 
 **Action**: Remove stale skill names from `$curatedSkills` arrays.
 
@@ -263,14 +263,14 @@ Run full quality gate after converter work to ensure everything compiles and tes
 
 #### Core (must-ship) — Completed
 
-| #   | Task                                | Description                                                                                                                                                                                                                |
-| --- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **Remove deprecated avatar system** | Deleted 122 avatar files (25.3 MB), gutted avatarMappings.ts (771→68), removed PERSONA_AVATAR_MAP + getAvatarForPersona + avatarFile. 241 tests passing. See [Payload Audit](alex_docs/audits/PAYLOAD-AUDIT-2026-03-10.md) |
-| 2   | **console.log → OutputChannel**     | Created `src/shared/logger.ts` (centralized OutputChannel 'Alex'), migrated 31 console.log calls across 9 files to `logInfo()`, added `disposeLog()` to deactivate. 1 webview-internal console.log correctly preserved     |
-| 3   | **UI theme + font compliance**      | Migrated 17 dashboard hex colors to `--vscode-charts-*` / `--vscode-textLink-foreground` with fallbacks. Fixed 3 sub-11px fonts. SVG art + persona brand colors + Mermaid themes preserved as hex                          |
-| 4   | **Heir version alignment**          | agent-plugin updated (v6.1.5/v6.1.7/v6.2.0→v6.4.6 across 4 files), M365 build artifacts gitignored, visual-memory trifecta removed from M365                                                                               |
-| 5   | **Quick Settings sidebar**          | Expanded from 4 to 17 toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities). Environment Setup relocated to Quick Settings as compact button. `chat.useCustomAgentHooks` toggle added                     |
-| 6   | **Cloud Sync removal**              | Gist-based cloud sync fully removed (deprecated since v5.0.1): 3 slash commands (`/sync`, `/push`, `/pull`), `cloudSync.enabled` setting, handler functions, interface fields across 7 files                               |
+| #   | Task                                | Description                                                                                                                                                                                                                                      |
+| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | **Remove deprecated avatar system** | Deleted 122 avatar files (25.3 MB), gutted avatarMappings.ts (771→68), removed PERSONA_AVATAR_MAP + getAvatarForPersona + avatarFile. 241 tests passing. See [Payload Audit](alex_archive/cleanup-2026-03-25/audits/PAYLOAD-AUDIT-2026-03-10.md) |
+| 2   | **console.log → OutputChannel**     | Created `src/shared/logger.ts` (centralized OutputChannel 'Alex'), migrated 31 console.log calls across 9 files to `logInfo()`, added `disposeLog()` to deactivate. 1 webview-internal console.log correctly preserved                           |
+| 3   | **UI theme + font compliance**      | Migrated 17 dashboard hex colors to `--vscode-charts-*` / `--vscode-textLink-foreground` with fallbacks. Fixed 3 sub-11px fonts. SVG art + persona brand colors + Mermaid themes preserved as hex                                                |
+| 4   | **Heir version alignment**          | agent-plugin updated (v6.1.5/v6.1.7/v6.2.0→v6.4.6 across 4 files), M365 build artifacts gitignored, visual-memory trifecta removed from M365                                                                                                     |
+| 5   | **Quick Settings sidebar**          | Expanded from 4 to 17 toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities). Environment Setup relocated to Quick Settings as compact button. `chat.useCustomAgentHooks` toggle added                                           |
+| 6   | **Cloud Sync removal**              | Gist-based cloud sync fully removed (deprecated since v5.0.1): 3 slash commands (`/sync`, `/push`, `/pull`), `cloudSync.enabled` setting, handler functions, interface fields across 7 files                                                     |
 
 #### Hooks — All 16 Shipped
 
@@ -324,7 +324,7 @@ Also shipped: agent-plugin PreToolUse, Claude Code bridge PreToolUse, Git pre-co
 | 3   | `global-knowledge-sync` skill | AlexLearn    |
 | 4   | `domain-learning` prompt      | AlexLearn    |
 
-Full scan: [SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md](alex_docs/research/SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md)
+Full scan: [SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md](alex_archive/cleanup-2026-03-25/research/SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md)
 
 #### Stretch — Completed
 
@@ -402,16 +402,17 @@ From the comprehensive trifecta audit: 38 complete trifectas verified, 7 bugs fi
 ### Current State Summary (v6.5.3)
 
 Alex now has:
-- **133 Skills** — 38 complete trifectas, 668 synapse connections with full `when`/`yields`/`type` metadata
-- **65 Instructions** — auto-loaded rules across all domains (YAML frontmatter on all files)
-- **48 Prompts** — user-invoked `/` commands
+- **150 Skills** — 40 complete trifectas, synapse connections with full `when`/`yields`/`type` metadata
+- **71 Instructions** — auto-loaded rules across all domains (YAML frontmatter on all files)
+- **50 Prompts** — user-invoked `/` commands
 - **7 Agents** — specialist modes for Builder, Researcher, Validator, Documentarian, Azure, M365
-- **90 Registered Commands** — full command surface including 10 v6.0.0 partnership commands
+- **79 Registered Commands** — full command surface including 10 v6.0.0 partnership commands
 - **3 Platform Heirs** — VS Code Extension, M365 Copilot Agent, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
-- **Command Center** — 5-tab sidebar (Mission Ctrl, Agents, Skill Store, Mind, Docs) with 98/100 steps shipped
+- **Command Center** — 4-tab sidebar (Mission, Skills, Mind, Docs)
 - **128 TypeScript source files** — modular architecture (extension.ts 248L orchestrator + commandsCore/Presentation/Developer)
 - **16 Agent hooks** — 10 global + 6 agent-scoped across all 7 VS Code hook events
 - **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces
+- **LearnAI Companion Site** — 80 playbooks at [learnai.correax.com](https://learnai.correax.com/) integrated into Docs tab
 - **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall
 - **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring across 500 records
 - **Autonomous Task Detection** — 30-minute interval surveying stalled work and TODO hotspots
@@ -424,7 +425,7 @@ Alex now has:
 - **Honest Uncertainty** — confidence scoring on every request
 - **The Forgetting Curve** — usage-weighted knowledge decay
 - **Copilot Memory** — cross-session context persistence
-- **Avatar State System** — 9 cognitive states + 6 agent modes
+- **RAI Psychological Safety** — Anti-sycophancy, emotional boundaries, anti-gaslighting, content safety Layer 5
 
 ### Post-v6.2.0 — Completed Work (March 5–7, 2026)
 

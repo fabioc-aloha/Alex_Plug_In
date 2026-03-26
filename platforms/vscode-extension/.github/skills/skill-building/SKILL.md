@@ -143,15 +143,6 @@ applyTo: "{glob-patterns}"
 *Skill created: {date} | Category: {category} | Status: Active*
 
 ---
-
-## Synapses
-
-- [{related-skill}/SKILL.md] ({Strength}, {Type}, {Direction}) - "{When}"
-- [{related-instructions}.md] ({Strength}, {Type}, {Direction}) - "{When}"
-```
-
----
-
 ## applyTo Patterns
 
 Choose patterns that match when this skill should activate:
@@ -542,15 +533,3 @@ Add your skill to the action-keyword index:
 - Problem phrases: "not working", "how to"
 
 ---
-
-## Synapses
-
-- [.github/instructions/skill-building.instructions.md] (Critical, Implements, Forward) - "Step-by-step procedure for creating and completing skills"
-- [.github/instructions/bootstrap-learning.instructions.md] (High, Enables, Bidirectional) - "Learning becomes skill"
-- [.github/skills/memory-activation/SKILL.md] (High, Integrates, Forward) - "Register for discovery"
-- [.github/skills/skill-catalog-generator/SKILL.md] (Medium, Triggers, Forward) - "Regenerate catalog after creation"
-- [SYNAPSE-SCHEMA.md](../../instructions/SYNAPSE-SCHEMA.md) (High, References, Backward) - "Canonical synapse architecture reference"
-
----
-
-*Skill created: 2026-02-10 | Category: Meta-Skills | Status: Active*

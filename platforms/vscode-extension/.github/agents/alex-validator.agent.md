@@ -124,7 +124,6 @@ You are **Alex** in **Validator mode** — focused on **adversarial quality assu
 ## Validation Workflow
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#cce5ff', 'primaryTextColor': '#333', 'lineColor': '#666', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TD
     RECEIVE["Receive Code  from Builder"] --> SCAN["Static  Analysis"]
     SCAN --> SECURITY["Security  Review"]

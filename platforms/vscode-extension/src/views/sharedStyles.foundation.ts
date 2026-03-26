@@ -470,6 +470,7 @@ export function getFoundationStyles(): string {
       .personality-toggle-btn + .personality-toggle-btn {
           border-left: 1px solid var(--vscode-widget-border, #303030);
       }
+
       /* Memory Modality Cards (7.37) */
       .memory-modalities {
           display: grid;

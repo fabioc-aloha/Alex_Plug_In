@@ -555,7 +555,6 @@ $storageToken = az account get-access-token --resource https://storage.azure.com
 ### Multi-Platform Sync Architecture
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {
   'primaryColor': '#cce5ff',
   'primaryTextColor': '#333',
   'primaryBorderColor': '#57606a',
@@ -653,7 +652,3 @@ Before shipping an API:
 □ Breaking changes are versioned
 □ OpenAPI spec is accurate
 ```
-
-## Synapses
-
-See [synapses.json](synapses.json) for connections.

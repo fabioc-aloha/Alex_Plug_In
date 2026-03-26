@@ -456,7 +456,3 @@ This pattern respects user agency while contributing creatively. User and AI rea
 | Kahneman (2011) | Dual-process theory informing confidence expression |
 
 ---
-
-## Synapses
-
-See [synapses.json](synapses.json) for connection mapping.

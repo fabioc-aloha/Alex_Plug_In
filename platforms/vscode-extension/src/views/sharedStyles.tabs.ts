@@ -109,6 +109,23 @@ export function getTabStyles(): string {
       }
       .docs-cta-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
       .docs-cta-desc { font-size: 11px; opacity: 0.6; margin-bottom: 8px; }
+      .docs-cta .action-btn,
+      .playbook-browse-row .action-btn { display: inline-flex; }
+      .docs-cta-links { margin-top: 10px; font-size: 11px; }
+      .docs-cta-link {
+          color: var(--vscode-textLink-foreground);
+          cursor: pointer;
+          opacity: 0.8;
+          transition: opacity 0.12s;
+      }
+      .docs-cta-link:hover { opacity: 1; text-decoration: underline; }
+      .docs-cta-sep { opacity: 0.3; margin: 0 6px; }
+      .playbook-browse-row { margin-top: 8px; text-align: center; }
+      .agent-context-edit {
+          opacity: 0.5;
+          font-size: 10px;
+          cursor: pointer;
+      }
 
       /* Dashboard card styling for Mission Command */
       .dashboard-card {
@@ -136,6 +153,34 @@ export function getTabStyles(): string {
 
       /* Settings toggles inside dashboard card */
       .dashboard-card .settings-toggles { margin-top: 8px; }
+
+      /* Agent Context transparency card */
+      .agent-context-panel {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+      }
+      .agent-context-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          font-size: 11px;
+          padding: 2px 0;
+      }
+      .agent-context-label {
+          font-weight: 600;
+          opacity: 0.6;
+          min-width: 70px;
+          flex-shrink: 0;
+      }
+      .agent-context-value {
+          text-align: right;
+          opacity: 0.85;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 180px;
+      }
 
       /* ── Tab Section Title ── */
       .tab-section-title {
@@ -482,34 +527,7 @@ export function getTabStyles(): string {
       }
       .skill-category-header.collapsed + .skill-category-group-content { display: none; }
 
-      /* ── Identity Card (7.35) ── */
-      .identity-card {
-          background: var(--vscode-editor-background);
-          border: 1px solid var(--vscode-widget-border, #303030);
-          border-radius: 6px;
-          padding: 12px;
-          margin-bottom: 8px;
-          text-align: center;
-      }
-      .identity-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
-      .identity-meta { font-size: 11px; opacity: 0.6; }
 
-      /* ── Global Knowledge Panel (7.34) ── */
-      .gk-panel {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 8px;
-          margin-bottom: 8px;
-      }
-      .gk-stat {
-          background: var(--vscode-editor-background);
-          border: 1px solid var(--vscode-widget-border, #303030);
-          border-radius: 6px;
-          padding: 8px;
-          text-align: center;
-      }
-      .gk-stat-icon { font-size: 20px; display: block; margin-bottom: 2px; }
-      .gk-stat-label { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.3px; }
 
       /* ── Doc Grid Cards (7.40, 7.41, 7.42) ── */
       .doc-grid {
@@ -655,46 +673,7 @@ export function getTabStyles(): string {
       /* ── 7.29 Skill Icon ── */
       .skill-icon { font-size: 14px; flex-shrink: 0; }
 
-      /* ── 7.30 Install from GitHub ── */
-      .install-github-card {
-          border: 1px dashed var(--vscode-widget-border, #303030);
-          border-radius: 6px; padding: 12px; text-align: center;
-          opacity: 0.7; margin-top: 8px;
-      }
-      .install-github-card:hover { opacity: 1; border-color: var(--persona-accent, #6366f1); }
 
-      /* ── 7.32 Knowledge Freshness ── */
-      .freshness-panel { display: flex; gap: 8px; margin-bottom: 8px; }
-      .freshness-bucket {
-          flex: 1; text-align: center; padding: 8px 4px;
-          background: var(--vscode-editor-background);
-          border: 1px solid var(--vscode-widget-border, #303030);
-          border-radius: 6px; font-size: 11px;
-      }
-      .freshness-count { font-size: 16px; font-weight: 700; }
-      .freshness-label { opacity: 0.7; margin-top: 2px; }
-      .freshness-bucket.thriving { border-bottom: 2px solid var(--vscode-testing-iconPassed, #73c991); }
-      .freshness-bucket.active { border-bottom: 2px solid var(--persona-accent, #6366f1); }
-      .freshness-bucket.fading { border-bottom: 2px solid var(--vscode-editorWarning-foreground, #cca700); }
-      .freshness-bucket.dormant { border-bottom: 2px solid var(--vscode-errorForeground, #f14c4c); }
-
-      /* ── 7.33 Honest Uncertainty ── */
-      .calibration-panel { margin-bottom: 8px; }
-      .calibration-bar-row {
-          display: flex; align-items: center; gap: 8px;
-          font-size: 11px; margin-bottom: 4px;
-      }
-      .calibration-label { width: 76px; text-align: right; opacity: 0.7; flex-shrink: 0; white-space: nowrap; }
-      .calibration-bar-track {
-          flex: 1; height: 8px; background: var(--vscode-input-background, #3c3c3c);
-          border-radius: 4px; overflow: hidden;
-      }
-      .calibration-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
-      .calibration-bar-fill.high { background: var(--vscode-testing-iconPassed, #73c991); }
-      .calibration-bar-fill.medium { background: var(--persona-accent, #6366f1); }
-      .calibration-bar-fill.low { background: var(--vscode-editorWarning-foreground, #cca700); }
-      .calibration-bar-fill.uncertain { background: var(--vscode-errorForeground, #f14c4c); }
-      .calibration-pct { width: 30px; font-size: 11px; opacity: 0.6; }
 
       /* ── 7.38 Meditation Streak ── */
       .meditation-streak-row {

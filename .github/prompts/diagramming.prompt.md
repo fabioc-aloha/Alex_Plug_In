@@ -13,7 +13,6 @@ Create professional Mermaid diagrams using the ATACCU methodology from the markd
 | ---- | ------ | ---------- |
 | **A** | Analyze | What data/process? Who is the audience? What diagram type? |
 | **T** | Think | Layout pattern (Medallion/Lineage/Pipeline), node count, direction |
-| **A** | Apply Skills | GitHub Pastel v2 palette, `classDef` by semantic meaning, `%%{init}%%` directive |
 | **C** | Create | Write Mermaid code — every node gets a style, every flowchart gets `linkStyle default` |
 | **C** | Check | Render and verify: pastels (not saturated), layout, labels, arrows (#57606a) |
 | **U** | Update | Write into target `.md` with `**Figure N:** *description*` label |
