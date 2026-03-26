@@ -79,6 +79,7 @@ Search this index when processing any task request:
 | dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
 | distribution-security | secrets scanning, pii protection, secure packaging, distribution security, defense in depth, csp patterns |
 | doc-hygiene | anti-drift rules, count elimination, living document, documentation maintenance, hardcoded counts, prevent drift |
+| docx-to-md | word to markdown, import docx, convert word document, ingest word, reverse converter, docx import, word import |
 | documentation-quality-assurance | doc audit, drift detection, preflight validation, documentation qa, link integrity, staleness check, documentation drift, living document, doc hygiene, stale docs, anti-drift |
 | dream-state | dream, neural maintenance, health check, synapse validation, sleep mode |
 | enterprise-integration | enterprise auth, sso, entra, aad, enterprise features, corp login |
@@ -117,6 +118,7 @@ Search this index when processing any task request:
 | markdown-mermaid | create diagram, mermaid syntax, flowchart, sequence diagram, visualize, draw architecture, make a chart, show this as diagram, visualize process, document design, mermaid flowchart, render diagram, ataccu, github pastel, diagram type, architecture diagram, diagram not rendering |
 | md-scaffold | scaffold markdown, create document template, new report, new tutorial, starter markdown, converter-ready template, email template |
 | md-to-eml | convert to email, markdown to email, generate eml, email newsletter, eml export, rfc 5322, email-safe html |
+| md-to-html | convert to html, markdown to html, html page, standalone html, html export, web page export, self-contained html |
 | md-to-word | convert to word, export docx, markdown to word, stakeholder document, export document, word document, docx export, pandoc convert |
 | mcp-development | build mcp server, mcp tools, model context protocol, mcp client, connect ai to api, give copilot access to data, tool for agent, expose data to ai, ai tool server, mcp typescript, mcp stdio, mcp http, tool schema, resource uri, mcp inspector |
 | meditation | meditate, consolidate knowledge, reflect session, memory integration, guide meditation, four r's, deep dive |

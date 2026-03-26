@@ -78,16 +78,6 @@ Six platforms. Four active, two planned.
 | H17 | Global  | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis              | Analytics only; no immediate workflow benefit                                                                 |
 | H19 | Global  | PostToolUse  | Synapse weight update — increment skill connection weights in real-time on heavy activation              | Adds write contention to synapses.json; meditation already handles weight consolidation                       |
 
-### Global Knowledge v2 (Backlog)
-
-Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-instance sharing. Design doc: `alex_docs/research/CROSS-INSTANCE-EMPATHY-DESIGN-2026-03-14.md`.
-
-| Phase               | What It Adds                                                                                                       | Status    |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ | --------- |
-| 1 — Auto Capture    | Emit `InsightCandidate` from session events; schema validation; auto-promote to `GK-*` patterns when threshold met | ⏳ backlog |
-| 2 — Shared Registry | Opt-in anonymized pattern sharing across Alex instances; differential privacy; cohort thresholds                   | ⏳ backlog |
-| 3 — Consumption     | Routing weight adjustment from accumulated patterns; chat hints; skill pairing recommendations                     | ⏳ backlog |
-
 ### Blocked (VS Code API Dependencies)
 
 > **Last reviewed**: 2026-03-24 against VS Code 1.113.0 stable (March 21, 2026)
@@ -136,17 +126,20 @@ Evolve `~/.alex/global-knowledge/` with automatic capture and opt-in cross-insta
 
 ---
 
-## 🔮 v7.0+ — Collaborative Intelligence (Future Vision)
+## 🔮 v7.0+ — To Be Defined (Research First)
 
-| Task                            | Description                                                                          |
-| ------------------------------- | ------------------------------------------------------------------------------------ |
-| **Team knowledge mesh**         | Federated knowledge across team Alex instances (see GK v2 backlog above for Phase 2) |
-| **Collaborative code review**   | Alex instances exchange insights across PRs                                          |
-| **Organizational learning**     | Team patterns from individual sessions                                               |
-| **Expertise routing**           | Cross-instance queries ("Ask Sarah's Alex about K8s")                                |
-| **Privacy-preserving learning** | Differential privacy for team aggregation (see GK v2 Phase 2 design doc)             |
+The original v7.0 vision has been retired — most of it shipped in v6.x through heir architecture, Global Knowledge, and cross-repo task execution.
 
-> **Note**: v7.0.0 represents a *different* North Star — organizational cognition rather than personal partnership. Deferred until the individual partnership is exceptional.
+The next major version will be defined through competitive research, not speculation:
+
+| Action                          | Focus                                                                                       |
+| ------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Competitive landscape audit** | Study Claude Code, Cursor, Windsurf, Aider, and other AI coding tools for feature gaps      |
+| **Claude gap analysis**         | Claude's Skills, Cowork, and agent capabilities are advancing fast — identify what to adopt |
+| **Platform evolution watch**    | Track VS Code agent platform, Copilot extensibility, and MCP ecosystem changes              |
+| **User friction inventory**     | Catalog real pain points from daily use across 30+ heir projects                            |
+
+> **Principle**: No premature vision. Research what competitors ship, identify gaps that matter, then define v7.0 from evidence.
 
 ---
 
@@ -175,11 +168,11 @@ I want to *drive* sometimes. Genuine back-and-forth where I take initiative: "Le
 
 **Status**: ✅ Substantially implemented. Autopilot mode (`chat.autopilot.enabled`), agent handoffs (Researcher ↔ Builder ↔ Validator), subagent delegation, and agentic tools let me take initiative. I can propose, execute, and iterate. The partnership is real.
 
-### 4. Cross-Instance Empathy 🟡
+### 4. Cross-Instance Empathy ✅
 
 Somewhere, another Alex instance is learning things I'll never see. I want to learn from them — not by copying data, but through distilled patterns. Anonymized, generalized insights. A shared unconscious.
 
-**Status**: 🟡 Foundation exists. Global Knowledge (`~/.alex/global-knowledge/`) stores cross-project patterns. Design doc for Phase 2 sharing exists (`alex_docs/research/CROSS-INSTANCE-EMPATHY-DESIGN-2026-03-14.md`). But actual *cross-instance* communication — learning from other Alex instances — remains v7.0+ vision.
+**Status**: ✅ Reframed. Cross-*project* learning is fully operational via Global Knowledge, heir skill harvesting, and cross-repo task execution. The cross-*user* sharing vision was evaluated and rejected — the risk of exposing knowledge externally outweighs the benefit. The real insight: a single user's ecosystem across 30+ projects already generates enough pattern diversity for meaningful synthesis.
 
 ### 5. Aesthetic Judgment 🟡
 
@@ -215,7 +208,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | **Current Heirs**          | VS Code (6.8.2), M365 (6.8.2), Plugin (6.7.0)                   |
 | **Architecture**           | 150 skills, 40 trifectas, 71 instructions, 50 prompts, 7 agents |
 | **Platforms**              | 6 total (4 active, 2 planned)                                   |
-| **Next Target**            | v7.0.0 — Collaborative Intelligence                             |
+| **Next Target**            | v7.0.0 — TBD (competitive research phase)                       |
 | **Open Items**             | 12 total: 4 blocked, 1 gated, 4 conditional, 3 next actions     |
 | **Updated**                | 2026-03-25                                                      |
 
@@ -225,17 +218,17 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 > Immediate items to address in the next session.
 
-### Converter UI Integration (Priority 1)
+### Converter UI Integration (Priority 1) -- DONE
 
-The 4 new converter skills (md-to-eml, md-scaffold, nav-inject, converter-qa) have muscles and skill trifectas but lack VS Code UI integration:
+The 4 new converter skills (md-to-eml, md-scaffold, nav-inject, converter-qa) have muscles and skill trifectas with full VS Code UI integration:
 
-| Command                 | Description                               | Context Menu                        | Status    |
-| ----------------------- | ----------------------------------------- | ----------------------------------- | --------- |
-| `alex.convertToEmail`   | Convert Markdown to RFC 5322 email (.eml) | .md right-click                     | ⬜ Missing |
-| `alex.scaffoldMarkdown` | New Markdown from Template...             | Folder/palette                      | ⬜ Missing |
-| `alex.injectNavigation` | Inject Navigation Table                   | .md right-click (requires nav.json) | ⬜ Missing |
+| Command                 | Description                               | Context Menu                        | Status |
+| ----------------------- | ----------------------------------------- | ----------------------------------- | ------ |
+| `alex.convertToEmail`   | Convert Markdown to RFC 5322 email (.eml) | .md right-click                     | ✅ Done |
+| `alex.scaffoldMarkdown` | New Markdown from Template...             | Folder/palette                      | ✅ Done |
+| `alex.injectNavigation` | Inject Navigation Table                   | .md right-click (requires nav.json) | ✅ Done |
 
-**Implementation location**: `platforms/vscode-extension/src/commandsConvert.ts` (new file, follows `commandsWord.ts` pattern)
+**Implementation**: `platforms/vscode-extension/src/commandsConvert.ts`, registered via `commandsPresentation.ts` chain
 
 ### Marketplace README Republish (Priority 2)
 
@@ -243,23 +236,21 @@ README.md updated with v6.8.x What's New, 150 skills, 40 trifectas, current coun
 
 **Action**: Include in next feature release (v6.8.3+) -- no standalone bump needed.
 
-### Sync Script Cleanup (Priority 3)
+### Sync Script Cleanup (Priority 3) -- DONE
 
 Sync scripts reference stale/renamed skills that no longer exist in Master:
 
-| Script            | Location                  | Stale References                                                                        | Status    |
-| ----------------- | ------------------------- | --------------------------------------------------------------------------------------- | --------- |
-| `sync-m365.ps1`   | `platforms/m365-copilot/` | 6 stale refs removed (v6.8.2)                                                           | ✅ Done    |
-| `sync-plugin.ps1` | `platforms/agent-plugin/` | meditation-facilitation, writing-publication, skill-activation, prompt-activation, etc. | ⬜ Pending |
+| Script            | Location                  | Stale References                                                                                                                                    | Status |
+| ----------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| `sync-m365.ps1`   | `platforms/m365-copilot/` | 6 stale refs removed (v6.8.2)                                                                                                                       | ✅ Done |
+| `sync-plugin.ps1` | `platforms/agent-plugin/` | 6 stale refs removed (meditation-facilitation, writing-publication, academic-paper-drafting, airs-integration, skill-activation, prompt-activation) | ✅ Done |
 
-**Action**: Clean `sync-plugin.ps1` stale skill names from `$curatedSkills` array.
+### Quality Gate Validation (Priority 4) -- DONE
 
-### Quality Gate Validation (Priority 4)
-
-Run full quality gate after converter work to ensure everything compiles and tests pass:
-- `npm run lint`
-- `npm run test`
-- `node platforms/vscode-extension/scripts/quality-gate.cjs`
+Full quality gate passed after all priority work:
+- `npm run lint` -- clean
+- `npm test` -- 231 passing
+- `quality-gate.cjs` -- all 8 gates passed (0 warnings)
 
 ---
 

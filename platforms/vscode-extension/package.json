@@ -315,6 +315,16 @@
         "icon": "$(mail)"
       },
       {
+        "command": "alex.convertToHtml",
+        "title": "Alex: Convert to HTML",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "alex.convertDocxToMarkdown",
+        "title": "Alex: Convert Word to Markdown",
+        "icon": "$(file-code)"
+      },
+      {
         "command": "alex.scaffoldMarkdown",
         "title": "Alex: New Markdown from Template...",
         "icon": "$(new-file)"
@@ -587,42 +597,57 @@
           "when": "resourceExtname == '.md'"
         },
         {
-          "command": "alex.injectNavigation",
+          "command": "alex.convertToHtml",
           "group": "3_generate@6",
           "when": "resourceExtname == '.md'"
         },
         {
-          "command": "alex.generateGammaFromFile",
+          "command": "alex.convertDocxToMarkdown",
           "group": "3_generate@7",
+          "when": "resourceExtname == '.docx'"
+        },
+        {
+          "command": "alex.scaffoldMarkdown",
+          "group": "3_generate@8",
+          "when": "explorerResourceIsFolder || resourceExtname == '.md'"
+        },
+        {
+          "command": "alex.injectNavigation",
+          "group": "3_generate@9",
+          "when": "resourceExtname == '.md'"
+        },
+        {
+          "command": "alex.generateGammaFromFile",
+          "group": "3_generate@10",
           "when": "resourceExtname == '.md'"
         },
         {
           "command": "alex.generateGammaWithOptions",
-          "group": "3_generate@8",
+          "group": "3_generate@11",
           "when": "resourceExtname == '.md'"
         },
         {
           "command": "alex.generateImageFromSelection",
-          "group": "3_generate@9"
+          "group": "3_generate@12"
         },
         {
           "command": "alex.generateAIImage",
-          "group": "3_generate@10",
+          "group": "3_generate@13",
           "when": "resourceExtname == '.md' || resourceExtname == '.txt'"
         },
         {
           "command": "alex.editImageWithPrompt",
-          "group": "3_generate@11",
+          "group": "3_generate@14",
           "when": "resourceExtname =~ /\\.(png|jpg|jpeg|webp|gif)$/"
         },
         {
           "command": "alex.upscaleImage",
-          "group": "3_generate@12",
+          "group": "3_generate@15",
           "when": "resourceExtname =~ /\\.(png|jpg|jpeg|webp)$/"
         },
         {
           "command": "alex.generateDiagram",
-          "group": "3_generate@13",
+          "group": "3_generate@16",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
         },
         {

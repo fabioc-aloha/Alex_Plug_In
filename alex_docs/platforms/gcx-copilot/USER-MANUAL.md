@@ -14,10 +14,10 @@
 2. [The Four Pillars](#the-four-pillars)
 3. [Requirements](#requirements)
 4. [Quick Start](#quick-start)
-5. [What is the GCX Copilot?](#what-is-the-gcx-ai-agent)
+5. [What is the GCX Copilot?](#what-is-the-gcx-copilot)
 6. [Installation](#installation)
 7. [Features by Pillar](#features-by-pillar)
-8. [Working with Copilot](#working-with-the-agent)
+8. [Working with Copilot](#working-with-copilot)
 9. [Available Skills](#available-skills)
 10. [Slash Commands](#slash-commands)
 11. [Specialist Agents](#specialist-agents)
@@ -51,32 +51,32 @@ flowchart TD
 
 ## The Four Pillars
 
-| Pillar | Role | Key Capabilities |
-|--------|------|------------------|
-| **🔧 Code Assistant** | Your pair programmer | Code review, debugging, testing, refactoring, security analysis |
-| **📝 Technical Writer** | Your documentation partner | API docs, user guides, PPTX generation, markdown mastery |
-| **📚 Documentation Wizard** | Your quality guardian | Audit pipelines, drift detection, staleness alerts, semantic validation |
-| **🔗 Integration Hub** | Your platform connector | ADO, Fabric, Azure, SFI, MS Graph, **CPM**, **Everest**, Qualtrics |
+| Pillar                     | Role                       | Key Capabilities                                                        |
+| -------------------------- | -------------------------- | ----------------------------------------------------------------------- |
+| **🔧 Code Assistant**       | Your pair programmer       | Code review, debugging, testing, refactoring, security analysis         |
+| **📝 Technical Writer**     | Your documentation partner | API docs, user guides, PPTX generation, markdown mastery                |
+| **📚 Documentation Wizard** | Your quality guardian      | Audit pipelines, drift detection, staleness alerts, semantic validation |
+| **🔗 Integration Hub**      | Your platform connector    | ADO, Fabric, Azure, SFI, MS Graph, **CPM**, **Everest**, Qualtrics      |
 
 ### Core Strengths
 
-| Strength | Description |
-|----------|-------------|
+| Strength                    | Description                                                                             |
+| --------------------------- | --------------------------------------------------------------------------------------- |
 | **Microsoft Graph Mastery** | Deep integration with M365 — users, groups, calendar, mail, Teams, SharePoint, OneDrive |
-| **Azure DevOps Native** | Work items, pipelines, PRs, boards — all from natural language |
-| **Fabric Data Platform** | Medallion architecture, governance, REST API patterns |
-| **CPM Compliance** | Customer Promise Management workflows, SLA tracking, compliance reporting |
-| **Everest Integration** | Enterprise survey platform, feedback loops, sentiment analysis |
-| **SFI Security-First** | STRIDE modeling, secure by design, SDL compliance built-in |
+| **Azure DevOps Native**     | Work items, pipelines, PRs, boards — all from natural language                          |
+| **Fabric Data Platform**    | Medallion architecture, governance, REST API patterns                                   |
+| **CPM Compliance**          | Customer Promise Management workflows, SLA tracking, compliance reporting               |
+| **Everest Integration**     | Enterprise survey platform, feedback loops, sentiment analysis                          |
+| **SFI Security-First**      | STRIDE modeling, secure by design, SDL compliance built-in                              |
 
 ### Key Benefits
 
-| Benefit | Description |
-|---------|-------------|
-| **Instant Setup** | Just add `.github/` to your repo — no extension install |
+| Benefit                   | Description                                                     |
+| ------------------------- | --------------------------------------------------------------- |
+| **Instant Setup**         | Just add `.github/` to your repo — no extension install         |
 | **Microsoft Integration** | Native support for Graph API, ADO, Fabric, Azure, SFI, and more |
-| **Quality-First** | Research before code, documentation before shipping |
-| **Team Consistency** | Shared skills and standards across your organization |
+| **Quality-First**         | Research before code, documentation before shipping             |
+| **Team Consistency**      | Shared skills and standards across your organization            |
 
 
 
@@ -133,14 +133,14 @@ flowchart TD
 
 ### Architecture Components
 
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| **Identity** | `.github/copilot-instructions.md` | Defines Copilot's behavior and four pillars |
-| **Skills** | `.github/skills/` | Domain-specific expertise (50+ skills) |
-| **Instructions** | `.github/instructions/` | Auto-loaded rules based on file patterns |
-| **Prompts** | `.github/prompts/` | Reusable `/commands` for common tasks |
-| **Agents** | `.github/agents/` | Specialist personas (@builder, @documentarian, etc.) |
-| **Config** | `.github/config/` | Settings and feature flags |
+| Component        | Location                          | Purpose                                              |
+| ---------------- | --------------------------------- | ---------------------------------------------------- |
+| **Identity**     | `.github/copilot-instructions.md` | Defines Copilot's behavior and four pillars          |
+| **Skills**       | `.github/skills/`                 | Domain-specific expertise (50+ skills)               |
+| **Instructions** | `.github/instructions/`           | Auto-loaded rules based on file patterns             |
+| **Prompts**      | `.github/prompts/`                | Reusable `/commands` for common tasks                |
+| **Agents**       | `.github/agents/`                 | Specialist personas (@builder, @documentarian, etc.) |
+| **Config**       | `.github/config/`                 | Settings and feature flags                           |
 
 
 
@@ -148,23 +148,23 @@ flowchart TD
 
 ### Software Requirements
 
-| Requirement | Version | Purpose |
-|-------------|---------|----------|
-| **VS Code** | 1.100+ | IDE with Copilot agent support |
-| **GitHub Copilot** | Latest | AI assistant (requires license) |
-| **Git** | 2.30+ | Template operations |
+| Requirement        | Version | Purpose                         |
+| ------------------ | ------- | ------------------------------- |
+| **VS Code**        | 1.100+  | IDE with Copilot agent support  |
+| **GitHub Copilot** | Latest  | AI assistant (requires license) |
+| **Git**            | 2.30+   | Template operations             |
 
 ### Optional Integrations
 
-| Integration | Requirement | Purpose |
-|-------------|-------------|----------|
-| **MS Graph API** | Azure AD app registration | M365 data access |
-| **Azure DevOps** | PAT or service connection | Work items, pipelines |
-| **Microsoft Fabric** | Workspace access | Data platform features |
-| **Azure** | Subscription | Cloud resource management |
-| **CPM** | API access | Customer Promise Management |
-| **Everest** | API credentials | Enterprise survey platform |
-| **Qualtrics** | API credentials | Survey data integration |
+| Integration          | Requirement               | Purpose                     |
+| -------------------- | ------------------------- | --------------------------- |
+| **MS Graph API**     | Azure AD app registration | M365 data access            |
+| **Azure DevOps**     | PAT or service connection | Work items, pipelines       |
+| **Microsoft Fabric** | Workspace access          | Data platform features      |
+| **Azure**            | Subscription              | Cloud resource management   |
+| **CPM**              | API access                | Customer Promise Management |
+| **Everest**          | API credentials           | Enterprise survey platform  |
+| **Qualtrics**        | API credentials           | Survey data integration     |
 
 ### Network Access
 
@@ -445,14 +445,14 @@ Copilot has **deep expertise** in Microsoft Graph — the unified API for Micros
 
 **Capabilities:**
 
-| Domain | Examples |
-|--------|----------|
-| **Users & Groups** | Profile lookup, group membership, org hierarchy |
-| **Calendar & Mail** | Events, messages, attachments, scheduling |
-| **Teams** | Channels, messages, tabs, apps |
-| **SharePoint** | Sites, lists, documents, permissions |
-| **OneDrive** | Files, sharing, sync status |
-| **Planner** | Tasks, plans, buckets |
+| Domain              | Examples                                        |
+| ------------------- | ----------------------------------------------- |
+| **Users & Groups**  | Profile lookup, group membership, org hierarchy |
+| **Calendar & Mail** | Events, messages, attachments, scheduling       |
+| **Teams**           | Channels, messages, tabs, apps                  |
+| **SharePoint**      | Sites, lists, documents, permissions            |
+| **OneDrive**        | Files, sharing, sync status                     |
+| **Planner**         | Tasks, plans, buckets                           |
 
 **Patterns:**
 - MSAL authentication (delegated & app-only)
@@ -470,11 +470,11 @@ Copilot has **deep expertise** in Microsoft Graph — the unified API for Micros
 
 Copilot communicates in a professional, efficient manner:
 
-| Instead of... | Copilot says... |
-|---------------|-------------------|
-| "I think maybe..." | "Analysis suggests..." |
-| "Let me check..." | "Reviewing..." |
-| "Hmm, interesting!" | *(gets to the point)* |
+| Instead of...       | Copilot says...        |
+| ------------------- | ---------------------- |
+| "I think maybe..."  | "Analysis suggests..." |
+| "Let me check..."   | "Reviewing..."         |
+| "Hmm, interesting!" | *(gets to the point)*  |
 
 ### Asking Questions
 
@@ -500,54 +500,54 @@ Copilot follows a research-first methodology:
 
 ### 🔧 Code Assistant Skills
 
-| Skill | Description | Use When |
-|-------|-------------|----------|
-| `code-review` | Comprehensive code analysis with SFI compliance | Reviewing PRs or code changes |
-| `debugging-patterns` | Root cause analysis and fix verification | Investigating bugs |
-| `refactoring-patterns` | Code improvement and cleanup | Cleaning up technical debt |
-| `testing-strategies` | Test design, mocks, coverage | Writing tests |
-| `security-review` | OWASP, STRIDE, SFI compliance | Pre-release security checks |
-| `content-safety-implementation` | Azure Content Safety API patterns | Building safe AI features |
+| Skill                           | Description                                     | Use When                      |
+| ------------------------------- | ----------------------------------------------- | ----------------------------- |
+| `code-review`                   | Comprehensive code analysis with SFI compliance | Reviewing PRs or code changes |
+| `debugging-patterns`            | Root cause analysis and fix verification        | Investigating bugs            |
+| `refactoring-patterns`          | Code improvement and cleanup                    | Cleaning up technical debt    |
+| `testing-strategies`            | Test design, mocks, coverage                    | Writing tests                 |
+| `security-review`               | OWASP, STRIDE, SFI compliance                   | Pre-release security checks   |
+| `content-safety-implementation` | Azure Content Safety API patterns               | Building safe AI features     |
 
 ### 📝 Technical Writer Skills
 
-| Skill | Description | Use When |
-|-------|-------------|----------|
-| `api-documentation` | OpenAPI specs, endpoint docs | Documenting APIs |
-| `pptx-generation` | Markdown to PowerPoint | Creating presentations |
-| `gamma-presentations` | Gamma.app integration | Modern slide decks |
-| `md-to-word` | Markdown to Word conversion | Formal documents |
-| `executive-storytelling` | Leadership-ready content | Executive summaries |
+| Skill                    | Description                  | Use When               |
+| ------------------------ | ---------------------------- | ---------------------- |
+| `api-documentation`      | OpenAPI specs, endpoint docs | Documenting APIs       |
+| `pptx-generation`        | Markdown to PowerPoint       | Creating presentations |
+| `gamma-presentations`    | Gamma.app integration        | Modern slide decks     |
+| `md-to-word`             | Markdown to Word conversion  | Formal documents       |
+| `executive-storytelling` | Leadership-ready content     | Executive summaries    |
 
 ### 📚 Documentation Wizard Skills
 
-| Skill | Description | Use When |
-|-------|-------------|----------|
-| `documentation-quality-assurance` | 5-pass audit pipeline | Auditing documentation |
-| `doc-hygiene` | Cleanup and maintenance | Spring cleaning docs |
-| `lint-clean-markdown` | Markdown linting | Enforcing standards |
-| `knowledge-synthesis` | Consolidating information | Creating summaries |
+| Skill                             | Description               | Use When               |
+| --------------------------------- | ------------------------- | ---------------------- |
+| `documentation-quality-assurance` | 5-pass audit pipeline     | Auditing documentation |
+| `doc-hygiene`                     | Cleanup and maintenance   | Spring cleaning docs   |
+| `lint-clean-markdown`             | Markdown linting          | Enforcing standards    |
+| `knowledge-synthesis`             | Consolidating information | Creating summaries     |
 
 ### 🔗 Integration Hub Skills
 
-| Skill | Description | Use When |
-|-------|-------------|----------|
-| `azure-devops-automation` | CI/CD, pipelines, work items | ADO workflows |
-| `microsoft-fabric` | Workspaces, medallion, governance | Data platform work |
-| `azure-architecture-patterns` | ARM, Bicep, Well-Architected | Cloud architecture |
-| `azure-deployment-operations` | Deployment automation | Release management |
-| `microsoft-graph-api` | M365 integration | Graph API calls |
-| `msal-authentication` | Azure AD auth patterns | Authentication |
-| `data-quality-monitoring` | Anomaly detection, schema drift | Pipeline quality |
-| `infrastructure-as-code` | Bicep, Terraform patterns | IaC development |
+| Skill                         | Description                       | Use When           |
+| ----------------------------- | --------------------------------- | ------------------ |
+| `azure-devops-automation`     | CI/CD, pipelines, work items      | ADO workflows      |
+| `microsoft-fabric`            | Workspaces, medallion, governance | Data platform work |
+| `azure-architecture-patterns` | ARM, Bicep, Well-Architected      | Cloud architecture |
+| `azure-deployment-operations` | Deployment automation             | Release management |
+| `microsoft-graph-api`         | M365 integration                  | Graph API calls    |
+| `msal-authentication`         | Azure AD auth patterns            | Authentication     |
+| `data-quality-monitoring`     | Anomaly detection, schema drift   | Pipeline quality   |
+| `infrastructure-as-code`      | Bicep, Terraform patterns         | IaC development    |
 
 ### Enterprise & Compliance Skills
 
-| Skill | Description | Use When |
-|-------|-------------|----------|
-| `security-review` | SFI, SDL, STRIDE analysis | Security compliance |
-| `pii-privacy-regulations` | GDPR, privacy patterns | Data protection |
-| `legal-compliance` | Regulatory requirements | Compliance checks |
+| Skill                      | Description               | Use When               |
+| -------------------------- | ------------------------- | ---------------------- |
+| `security-review`          | SFI, SDL, STRIDE analysis | Security compliance    |
+| `pii-privacy-regulations`  | GDPR, privacy patterns    | Data protection        |
+| `legal-compliance`         | Regulatory requirements   | Compliance checks      |
 | `observability-monitoring` | Metrics, logging, tracing | Operational excellence |
 
 
@@ -558,37 +558,37 @@ Access frequently used workflows with slash commands:
 
 ### 🔧 Code Assistant Commands
 
-| Command | Description |
-|---------|-------------|
-| `/review` | Start a code review session |
-| `/debug` | Begin debugging analysis |
-| `/test` | Generate tests for selected code |
-| `/security` | Run SFI/security analysis |
+| Command     | Description                      |
+| ----------- | -------------------------------- |
+| `/review`   | Start a code review session      |
+| `/debug`    | Begin debugging analysis         |
+| `/test`     | Generate tests for selected code |
+| `/security` | Run SFI/security analysis        |
 | `/refactor` | Suggest refactoring improvements |
 
 ### 📝 Technical Writer Commands
 
-| Command | Description |
-|---------|-------------|
-| `/docs` | Generate documentation |
-| `/api-docs` | Create API reference |
-| `/slides` | Generate presentation |
-| `/explain` | Explain how code works |
+| Command     | Description            |
+| ----------- | ---------------------- |
+| `/docs`     | Generate documentation |
+| `/api-docs` | Create API reference   |
+| `/slides`   | Generate presentation  |
+| `/explain`  | Explain how code works |
 
 ### 📚 Documentation Wizard Commands
 
-| Command | Description |
-|---------|-------------|
-| `/audit` | Run documentation audit |
+| Command      | Description             |
+| ------------ | ----------------------- |
+| `/audit`     | Run documentation audit |
 | `/freshness` | Check for stale content |
-| `/links` | Validate all links |
+| `/links`     | Validate all links      |
 
 ### 🔗 Integration Commands
 
-| Command | Description |
-|---------|-------------|
-| `/ado` | Azure DevOps operations |
-| `/fabric` | Microsoft Fabric helpers |
+| Command     | Description              |
+| ----------- | ------------------------ |
+| `/ado`      | Azure DevOps operations  |
+| `/fabric`   | Microsoft Fabric helpers |
 | `/pipeline` | Pipeline troubleshooting |
 
 ### Usage Examples
@@ -742,12 +742,12 @@ Edit `.github/config/settings.json` to adjust Agent behavior:
 
 ### 1. Choose the Right Pillar
 
-| Task | Pillar | Example Prompt |
-|------|--------|----------------|
-| Bug fix | 🔧 Code Assistant | "Debug this null reference exception" |
-| Write docs | 📝 Technical Writer | "Create API documentation for this endpoint" |
-| Quality check | 📚 Documentation Wizard | "Audit our docs for accuracy" |
-| Platform work | 🔗 Integration Hub | "Set up a Fabric workspace with medallion architecture" |
+| Task          | Pillar                 | Example Prompt                                          |
+| ------------- | ---------------------- | ------------------------------------------------------- |
+| Bug fix       | 🔧 Code Assistant       | "Debug this null reference exception"                   |
+| Write docs    | 📝 Technical Writer     | "Create API documentation for this endpoint"            |
+| Quality check | 📚 Documentation Wizard | "Audit our docs for accuracy"                           |
+| Platform work | 🔗 Integration Hub      | "Set up a Fabric workspace with medallion architecture" |
 
 ### 2. Be Specific
 

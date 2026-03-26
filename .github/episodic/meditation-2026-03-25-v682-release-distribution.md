@@ -43,15 +43,15 @@
 
 ## Commits This Session
 
-| Hash | Message |
-|------|---------|
+| Hash    | Message                                                   |
+| ------- | --------------------------------------------------------- |
 | 7a00551 | docs: v6.8.1 workspace cleanup -- archive 928 stale files |
-| 5c32de1 | chore: release v6.8.2 (tag: v6.8.2) |
-| d3b7b05 | chore: bump to v6.8.2 -- update all docs |
-| 8fcb71e | docs: add GCX sync procedure to heir plan |
-| 7359c97 | chore: sync M365 heir to v6.8.2 |
-| 1932d8d | docs: update marketplace README -- v6.8.x What's New |
-| 9c1f801 | docs: add marketplace README republish to roadmap |
+| 5c32de1 | chore: release v6.8.2 (tag: v6.8.2)                       |
+| d3b7b05 | chore: bump to v6.8.2 -- update all docs                  |
+| 8fcb71e | docs: add GCX sync procedure to heir plan                 |
+| 7359c97 | chore: sync M365 heir to v6.8.2                           |
+| 1932d8d | docs: update marketplace README -- v6.8.x What's New      |
+| 9c1f801 | docs: add marketplace README republish to roadmap         |
 
 ## Open Items (ROADMAP)
 

@@ -3,6 +3,8 @@
  *
  * Commands:
  * - alex.convertToEmail: Convert Markdown to RFC 5322 .eml files
+ * - alex.convertToHtml: Convert Markdown to standalone HTML pages
+ * - alex.convertDocxToMarkdown: Convert Word .docx to Markdown
  * - alex.scaffoldMarkdown: Create new Markdown file from template
  * - alex.injectNavigation: Inject navigation table from nav.json
  */
@@ -361,9 +363,175 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
     }
   );
 
+  // --------------------------------------------------
+  // alex.convertToHtml - Convert Markdown to HTML
+  // --------------------------------------------------
+  const convertToHtmlDisposable = vscode.commands.registerCommand(
+    "alex.convertToHtml",
+    async (uri: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "convert_to_html");
+      try {
+        if (!uri || !uri.fsPath.endsWith(".md")) {
+          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          endLog(true);
+          return;
+        }
+
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
+        if (!workspaceFolder) {
+          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          endLog(true);
+          return;
+        }
+
+        const nodeScript = await resolveMuscleScript(
+          "md-to-html.cjs",
+          workspaceFolder.uri.fsPath,
+          context.extensionPath
+        );
+
+        if (!nodeScript) {
+          vscode.window.showErrorMessage(
+            "md-to-html.cjs not found. Please ensure Alex architecture is initialized."
+          );
+          endLog(false);
+          return;
+        }
+
+        const styleChoice = await vscode.window.showQuickPick(
+          [
+            { label: "$(globe) Professional", description: "Clean business style (Segoe UI)", value: "professional" },
+            { label: "$(mortar-board) Academic", description: "Serif style (Palatino)", value: "academic" },
+            { label: "$(dash) Minimal", description: "Modern clean style (Inter)", value: "minimal" },
+            { label: "$(color-mode) Dark", description: "Dark mode style", value: "dark" },
+          ],
+          { placeHolder: "Select HTML style preset" }
+        );
+
+        if (styleChoice === undefined) {
+          endLog(true);
+          return;
+        }
+
+        const outputPath = uri.fsPath.replace(/\.md$/, ".html");
+        vscode.window.showInformationMessage("🌐 Converting to HTML...");
+
+        const terminal = vscode.window.createTerminal({
+          name: "Alex: HTML Conversion",
+          cwd: path.dirname(uri.fsPath),
+          env: { NODE_PATH: path.join(context.extensionPath, 'node_modules') }
+        });
+        terminal.show();
+        terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" --style ${styleChoice.value}`);
+
+        setTimeout(() => {
+          vscode.window.showInformationMessage(
+            `🌐 HTML conversion complete: ${path.basename(outputPath)}`
+          );
+        }, 3000);
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `HTML conversion failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
+  // --------------------------------------------------
+  // alex.convertDocxToMarkdown - Convert Word to Markdown
+  // --------------------------------------------------
+  const convertDocxToMarkdownDisposable = vscode.commands.registerCommand(
+    "alex.convertDocxToMarkdown",
+    async (uri: vscode.Uri) => {
+      const endLog = telemetry.logTimed("command", "convert_docx_to_md");
+      try {
+        if (!uri || !uri.fsPath.toLowerCase().endsWith(".docx")) {
+          vscode.window.showWarningMessage("Please right-click a Word (.docx) file.");
+          endLog(true);
+          return;
+        }
+
+        const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
+        if (!workspaceFolder) {
+          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          endLog(true);
+          return;
+        }
+
+        const nodeScript = await resolveMuscleScript(
+          "docx-to-md.cjs",
+          workspaceFolder.uri.fsPath,
+          context.extensionPath
+        );
+
+        if (!nodeScript) {
+          vscode.window.showErrorMessage(
+            "docx-to-md.cjs not found. Please ensure Alex architecture is initialized."
+          );
+          endLog(false);
+          return;
+        }
+
+        const flags: string[] = [];
+
+        const optionChoice = await vscode.window.showQuickPick(
+          [
+            { label: "$(file-text) Basic", description: "Clean conversion with image extraction", value: "basic" },
+            { label: "$(wrench) Full cleanup", description: "Fix headings, add frontmatter, strip comments", value: "full" },
+          ],
+          { placeHolder: "Select conversion options" }
+        );
+
+        if (optionChoice === undefined) {
+          endLog(true);
+          return;
+        }
+
+        if (optionChoice.value === "full") {
+          flags.push("--fix-headings", "--add-frontmatter", "--strip-comments");
+        }
+
+        const outputPath = uri.fsPath.replace(/\.docx$/i, ".md");
+        vscode.window.showInformationMessage("📄 Converting Word to Markdown...");
+
+        const terminal = vscode.window.createTerminal({
+          name: "Alex: Word to Markdown",
+          cwd: path.dirname(uri.fsPath),
+          env: { NODE_PATH: path.join(context.extensionPath, 'node_modules') }
+        });
+        terminal.show();
+        terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" ${flags.join(' ')}`.trim());
+
+        setTimeout(async () => {
+          try {
+            const doc = await vscode.workspace.openTextDocument(outputPath);
+            await vscode.window.showTextDocument(doc);
+            vscode.window.showInformationMessage(
+              `📄 Conversion complete: ${path.basename(outputPath)}`
+            );
+          } catch {
+            vscode.window.showInformationMessage("📄 Conversion complete. Check terminal for output.");
+          }
+        }, 3000);
+
+        endLog(true);
+      } catch (error) {
+        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        vscode.window.showErrorMessage(
+          `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+    }
+  );
+
   context.subscriptions.push(
     convertToEmailDisposable,
     scaffoldMarkdownDisposable,
     injectNavigationDisposable,
+    convertToHtmlDisposable,
+    convertDocxToMarkdownDisposable,
   );
 }

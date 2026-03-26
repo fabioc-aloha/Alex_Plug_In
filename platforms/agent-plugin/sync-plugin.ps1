@@ -32,7 +32,6 @@ $curatedSkills = @(
     'learning-psychology'
     'appropriate-reliance'
     'airs-appropriate-reliance'
-    'meditation-facilitation'
     'socratic-questioning'
     'rubber-duck-debugging'
     'anti-hallucination'
@@ -74,7 +73,6 @@ $curatedSkills = @(
     'markdown-mermaid'
     'documentation-quality-assurance'
     'doc-hygiene'
-    'writing-publication'
     'ai-writing-avoidance'
     'academic-research'
     'practitioner-research'
@@ -89,11 +87,9 @@ $curatedSkills = @(
     'executive-storytelling'
     'slide-design'
     # Academic Research
-    'academic-paper-drafting'
     'literature-review'
     'citation-management'
     'dissertation-defense'
-    'airs-integration'
     # Visual Design (no-dependency subset)
     'svg-graphics'
     'graphic-design'
@@ -106,8 +102,6 @@ $curatedSkills = @(
     'llm-model-selection'
     'skill-building'
     'skill-development'
-    'skill-activation'
-    'prompt-activation'
     'muscle-memory-recognition'
     # AI & Machine Learning (no-dependency subset)
     'prompt-engineering'

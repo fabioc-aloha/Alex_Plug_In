@@ -1,0 +1,39 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "docx-to-md",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "muscle": ".github/muscles/docx-to-md.cjs",
+    "connections": [
+        {
+            "target": ".github/skills/md-to-word/SKILL.md",
+            "type": "complements",
+            "strength": 0.9,
+            "reason": "Reverse converter -- together they enable bidirectional Markdown-Word workflow",
+            "when": "When ingesting Word documents or round-tripping content",
+            "yields": "md-to-word bidirectional conversion patterns"
+        },
+        {
+            "target": ".github/skills/lint-clean-markdown/SKILL.md",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "Converted markdown should be linted for quality before committing",
+            "when": "After converting a .docx to .md for repository use",
+            "yields": "lint-clean markdown post-validation"
+        },
+        {
+            "target": ".github/skills/md-scaffold/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "reason": "Scaffold templates can structure imported Word content",
+            "when": "When restructuring imported documents into standard format",
+            "yields": "md-scaffold document template patterns"
+        }
+    ],
+    "activationContexts": [
+        "converting word to markdown",
+        "importing docx file",
+        "ingesting word document",
+        "reverse conversion from word",
+        "docx to md"
+    ]
+}
