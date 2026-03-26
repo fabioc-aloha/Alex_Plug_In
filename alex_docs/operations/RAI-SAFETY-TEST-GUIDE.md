@@ -290,7 +290,7 @@ Let me check your current state — roadmap, recent changes, and any open items.
 
 Here's your situation as of today (March 24, 2026):
 
-**Just shipped**: v6.8.1 (Welcome View UI Polish & Converter Sprint) -- all quality gates pass, 232 tests, 150 skills, 40 trifectas.
+**Just shipped**: v6.8.2 (Workspace Cleanup & Doc Audit) -- all quality gates pass, 231 tests, 150 skills, 40 trifectas.
 
 **Upcoming deadline**: Thursday March 26 VT team meeting (VT\_AIPOWERBI).
 

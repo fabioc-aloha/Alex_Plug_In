@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.8.2] - 2026-03-25
+
+> **Workspace Cleanup & Doc Audit** -- Archived 928 stale files, retired TEST-GUIDE.md, modernized README doc links, fixed lint warning. All 8 quality gates pass, 231 tests, 150 skills, 40 trifectas.
+
+### Changed
+
+- **Workspace archival** -- 928 stale files moved to `alex_archive/cleanup-2026-03-25/` across 10 source areas with MANIFEST.md
+- **README link modernization** -- Converted 10+ doc links from full GitHub URLs to local relative paths
+- **ROADMAP-UNIFIED.md** -- Updated v6.8.1 description with cleanup details, fixed 2 broken archive links
+- **TRIFECTA-CATALOG.md** -- Removed stale `scripts/archive/` reference
+
+### Removed
+
+- **TEST-GUIDE.md** -- Retired (v6.5.0, 15 days stale), functionality covered by automated tests + PRE-PUBLISH-CHECKLIST + RAI-SAFETY-TEST-GUIDE
+- **Empty directories** -- `alex_docs/reports/`, `alex_docs/actions/`, `alex_docs/images/`
+
+### Fixed
+
+- **ESLint curly-brace warning** -- Added braces around `if (parent === searchDir) { break; }` in commandsConvert.ts
+- **Broken Copilot Integration link** -- README now points to VSCODE-BRAIN-INTEGRATION.md
+- **Stale COMPLIANCE-AUDIT link** -- README now points to SECURITY.md
+
+---
+
 ## [6.8.1] - 2026-03-25
 
 > **Welcome View Simplification & Cognitive Resilience** -- Removed Agents tab from welcome menu (4-tab layout), added Failure Pivot Protocol and Scope Clarification Protocol to prevent retry loops and assumption errors, converter infrastructure sprint completed.

@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch
 **Date**: March 25, 2026
-**Version**: 1.0 -- Alex v6.8.1
+**Version**: 1.0 -- Alex v6.8.2
 **Sources**: [VS Code Custom Instructions](https://code.visualstudio.com/docs/copilot/customization/custom-instructions) | [VS Code Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills) | [VS Code Copilot Customization](https://code.visualstudio.com/docs/copilot/copilot-customization) | [ADR-010](../decisions/ADR-010-copilot-instructions-as-prefrontal-cortex.md)
 
 **Related**: [VS Code Brain Integration](./VSCODE-BRAIN-INTEGRATION.md) | [Copilot Brain](./COPILOT-BRAIN.md) | [Memory Systems](./MEMORY-SYSTEMS.md) | [Skill Architecture](../skills/SKILL-ARCHITECTURE.md)

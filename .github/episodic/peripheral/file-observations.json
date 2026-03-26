@@ -1,14 +1,14 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "cripts/release-vscode.ps1"
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/architecture/LOADING-MECHANICS.md",
+    "alex_docs/operations/RAI-SAFETY-TEST-GUIDE.md",
+    "package-lock.json",
+    "package.json"
   ],
-  "todoHotspots": [
-    {
-      "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1774488296316
-    }
-  ],
-  "lastUpdated": 1774488296316
+  "todoHotspots": [],
+  "lastUpdated": 1774489226834
 }

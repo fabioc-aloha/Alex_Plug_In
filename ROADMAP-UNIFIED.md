@@ -40,6 +40,7 @@ Six platforms. Four active, two planned.
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v6.8.2** | Workspace Cleanup & Doc Audit -- 928 stale files archived, TEST-GUIDE.md retired, README link modernization, lint fix, all 8 quality gates pass                                                                                                                                                              | 2026-03-25 |
 | **v6.8.1** | Welcome View UI Polish & Converter Sprint -- Docs tab streamlined (Practice/Books removed, 8 playbook categories, LearnAI CTA redesign), converter infrastructure (prompt-preprocessor, batch retry, model freshness, 284 QA assertions), workspace cleanup (928 stale files archived, TEST-GUIDE.md retired) | 2026-03-25 |
 | **v6.8.0** | RAI Psychological Safety — 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, AIRS-20 PA, content safety Layer 5), 3 hooks, VS Code 1.113 eval                                                                                                                                           | 2026-03-24 |
 | **v6.7.3** | Synapse Integrity & Dialog Engineering — 428 type normalizations, 287 when/reason deduplication, dialog-engineering skill, skill-building Phase 0 activation check, GCX audit                                                                                                                                 | 2026-03-24 |
@@ -210,8 +211,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                                 |
 | -------------------------- | --------------------------------------------------------------- |
-| **Current Master Version** | 6.8.1                                                           |
-| **Current Heirs**          | VS Code (6.8.1), M365 (6.2.0), Plugin (6.7.0)                   |
+| **Current Master Version** | 6.8.2                                                           |
+| **Current Heirs**          | VS Code (6.8.2), M365 (6.2.0), Plugin (6.7.0)                   |
 | **Architecture**           | 150 skills, 40 trifectas, 71 instructions, 50 prompts, 7 agents |
 | **Platforms**              | 6 total (4 active, 2 planned)                                   |
 | **Next Target**            | v7.0.0 — Collaborative Intelligence                             |
