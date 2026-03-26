@@ -342,7 +342,7 @@ Alex maintains several types of memory:
 ### 📚 Procedural Memory (Auto-Loaded)
 Instructions in `.github/instructions/` load automatically when relevant files are opened. You don't need to reference them.
 
-### 🧠 Skills (76 Available)
+### 🧠 Skills (150 Available)
 Domain expertise in `.github/skills/`. Activate with context:
 ```
 I'm working on authentication (→ activates security skills)
@@ -609,13 +609,13 @@ The best prompt engineers share these traits:
 
 VS Code 1.111+ includes built-in slash commands for creating agent customization files directly from chat. These are the fastest way to build Alex trifectas:
 
-| Command | Creates | Alex Use |
-| --- | --- | --- |
-| `/create-skill` | `.github/skills/{name}/SKILL.md` | Domain knowledge with tables, thresholds, examples |
-| `/create-instruction` | `.github/instructions/{name}.instructions.md` | Auto-loaded rules matched by `applyTo` file patterns |
-| `/create-prompt` | `.github/prompts/{name}.prompt.md` | Interactive `/` commands for guided workflows |
-| `/create-agent` | `.github/agents/{name}.agent.md` | Specialist agent modes with tool restrictions |
-| `/create-hook` | `.github/hooks.json` entry + script | Event-driven automation (SessionStart, PreToolUse, etc.) |
+| Command               | Creates                                       | Alex Use                                                 |
+| --------------------- | --------------------------------------------- | -------------------------------------------------------- |
+| `/create-skill`       | `.github/skills/{name}/SKILL.md`              | Domain knowledge with tables, thresholds, examples       |
+| `/create-instruction` | `.github/instructions/{name}.instructions.md` | Auto-loaded rules matched by `applyTo` file patterns     |
+| `/create-prompt`      | `.github/prompts/{name}.prompt.md`            | Interactive `/` commands for guided workflows            |
+| `/create-agent`       | `.github/agents/{name}.agent.md`              | Specialist agent modes with tool restrictions            |
+| `/create-hook`        | `.github/hooks.json` entry + script           | Event-driven automation (SessionStart, PreToolUse, etc.) |
 
 ### Quick Trifecta Workflow
 
@@ -636,28 +636,28 @@ VS Code 1.111+ includes built-in slash commands for creating agent customization
 
 ## 🔧 Build & Quality Commands (Local)
 
-| Task | Command | Notes |
-|------|---------|-------|
-| TypeScript compile (no emit) | `npm run check-types` | Uses `tsc --noEmit` |
-| Strict unused check | `npx tsc --noEmit --noUnusedLocals --noUnusedParameters` | ✅ Passing as of 2026‑03‑13 |
-| ESLint | `npm run lint` | TS 5.4.x pinned; @typescript-eslint v7.6.0 |
-| Unused exports audit | `npm run lint:unused` | Wrapper script (`scripts/lint-unused.cjs`) uses `ts-unused-exports` + allowlist |
-| Quality gates | `npm run quality-gate` | Adds Gate 6: SKILL frontmatter name matches folder |
-| Tests | `npm test` | Runs VS Code test harness (227 tests) |
-| Welcome View routing tests | `npm test -- --grep "Welcome command routing"` | Uses `handleMessageForTest()` helper; covers message guard, tab persistence, toggle guard, `openDoc` routing |
-| Skill frontmatter fix | `node scripts/fix-skill-frontmatter.cjs` | Normalizes `name` in `SKILL.md` to folder name |
+| Task                         | Command                                                  | Notes                                                                                                        |
+| ---------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| TypeScript compile (no emit) | `npm run check-types`                                    | Uses `tsc --noEmit`                                                                                          |
+| Strict unused check          | `npx tsc --noEmit --noUnusedLocals --noUnusedParameters` | ✅ Passing as of 2026‑03‑13                                                                                   |
+| ESLint                       | `npm run lint`                                           | TS 5.4.x pinned; @typescript-eslint v7.6.0                                                                   |
+| Unused exports audit         | `npm run lint:unused`                                    | Wrapper script (`scripts/lint-unused.cjs`) uses `ts-unused-exports` + allowlist                              |
+| Quality gates                | `npm run quality-gate`                                   | Adds Gate 6: SKILL frontmatter name matches folder                                                           |
+| Tests                        | `npm test`                                               | Runs VS Code test harness (227 tests)                                                                        |
+| Welcome View routing tests   | `npm test -- --grep "Welcome command routing"`           | Uses `handleMessageForTest()` helper; covers message guard, tab persistence, toggle guard, `openDoc` routing |
+| Skill frontmatter fix        | `node scripts/fix-skill-frontmatter.cjs`                 | Normalizes `name` in `SKILL.md` to folder name                                                               |
 
 > **CI recommendation**: Add `npm run check-types`, `npx tsc --noUnused*`, `npm run lint`, `npm run lint:unused`, and `npm run quality-gate` to the pipeline once allowlist is finalized.
 - Pair with the **Agent Debug Panel** (`Developer: Open Agent Debug Panel`) to verify loading
 
 ### Trifecta Decision Matrix
 
-| Need | Just SKILL.md | + Instruction | + Prompt |
-| --- | :---: | :---: | :---: |
-| Reference knowledge ("how does X work?") | ✅ | | |
-| Auto-loaded rules ("always do X when editing .ts files") | ✅ | ✅ | |
-| Multi-step guided workflow ("walk me through X") | ✅ | | ✅ |
-| Full procedure with auto-enforcement | ✅ | ✅ | ✅ |
+| Need                                                     | Just SKILL.md | + Instruction | + Prompt |
+| -------------------------------------------------------- | :-----------: | :-----------: | :------: |
+| Reference knowledge ("how does X work?")                 |       ✅       |               |          |
+| Auto-loaded rules ("always do X when editing .ts files") |       ✅       |       ✅       |          |
+| Multi-step guided workflow ("walk me through X")         |       ✅       |               |    ✅     |
+| Full procedure with auto-enforcement                     |       ✅       |       ✅       |    ✅     |
 
 ---
 

@@ -135,7 +135,7 @@ try {
     Pop-Location
 
     Write-Host "`n[OK] Release v$newVersion complete!" -ForegroundColor Green
-    Write-Host "   Marketplace: https://marketplace.visualstudio.com/items?itemName=$publisher.$extName" -ForegroundColor Gray
+    Write-Host "   Marketplace: https://marketplace.visualstudio.com/items?itemName=${publisher}.${extName}" -ForegroundColor Gray
 }
 finally {
     Pop-Location

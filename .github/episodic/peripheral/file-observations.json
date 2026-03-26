@@ -1,28 +1,14 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "claude/CLAUDE.md",
-    "CHANGELOG.md",
-    "PRE-PUBLISH-CHECKLIST.md",
-    "README.md",
-    "ROADMAP-UNIFIED.md",
-    "TEST-GUIDE.md",
-    "alex_docs/ALEX-FIRSTS.md",
-    "alex_docs/CONVERTER-IMPROVEMENT-ANALYSIS.md",
-    "alex_docs/DK-correax-brand.md",
-    "alex_docs/NORTH-STAR.md"
+    "cripts/release-vscode.ps1"
   ],
   "todoHotspots": [
     {
       "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1774487610414
-    },
-    {
-      "file": "alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1774487610414
+      "scannedAt": 1774488296316
     }
   ],
-  "lastUpdated": 1774487610414
+  "lastUpdated": 1774488296316
 }
