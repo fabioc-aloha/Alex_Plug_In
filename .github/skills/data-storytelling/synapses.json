@@ -1,0 +1,66 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "data-storytelling",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "version": "1.0.0",
+    "created": "2026-03-26",
+    "connectionCount": 8,
+    "connections": [
+        {
+            "target": ".github/skills/data-analysis/SKILL.md",
+            "type": "activates",
+            "strength": 0.95,
+            "when": "Storytelling orchestration activates analysis as Phase 1 to discover findings",
+            "yields": "data-analysis discovery phase for narrative construction"
+        },
+        {
+            "target": ".github/skills/data-visualization/SKILL.md",
+            "type": "activates",
+            "strength": 0.95,
+            "when": "Storytelling activates visualization as Phase 2 to render insights as charts",
+            "yields": "data-visualization chart rendering for story evidence"
+        },
+        {
+            "target": ".github/skills/dashboard-design/SKILL.md",
+            "type": "activates",
+            "strength": 0.9,
+            "when": "Storytelling activates dashboard design as Phase 3 to arrange visuals into layout",
+            "yields": "dashboard-design layout arrangement for narrative flow"
+        },
+        {
+            "target": ".github/skills/chart-interpretation/SKILL.md",
+            "type": "activates",
+            "strength": 0.8,
+            "when": "Storytelling can invoke chart interpretation for reverse-flow analysis of existing visuals",
+            "yields": "chart-interpretation reverse-flow insight extraction"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "when": "Data storytelling methodology complements executive narrative framing and stakeholder communication",
+            "yields": "executive-storytelling audience framing and stakeholder patterns"
+        },
+        {
+            "target": ".github/skills/slide-design/SKILL.md",
+            "type": "complements",
+            "strength": 0.75,
+            "when": "Data stories often become presentation slides; slide design principles apply to chart narratives",
+            "yields": "slide-design visual hierarchy for presentation output"
+        },
+        {
+            "target": ".github/skills/gamma-presentations/SKILL.md",
+            "type": "complements",
+            "strength": 0.65,
+            "when": "Data story markdown can feed into Gamma for presentation generation",
+            "yields": "gamma-presentations automated slide generation from story markdown"
+        },
+        {
+            "target": ".github/skills/ai-writing-avoidance/SKILL.md",
+            "type": "uses",
+            "strength": 0.7,
+            "when": "Data story narratives must sound human, not AI-generated",
+            "yields": "ai-writing-avoidance authentic voice patterns for data narratives"
+        }
+    ]
+}

@@ -73,6 +73,11 @@ Search this index when processing any task request:
 | creative-writing | write story, character arc, plot structure, dialogue, narrative |
 | cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
 | database-design | design database, model schema, normalize tables, optimize query, choose database |
+| ⭐ data-analysis | analyze data, EDA, exploratory analysis, profile dataset, distribution, correlation, outlier, anomaly, statistics, segment, insight, so what, DIKW |
+| ⭐ data-storytelling | data story, narrative arc, three act, Knaflic, Duarte, Big Idea, explanatory, orchestrate data, end to end story, datastory |
+| ⭐ data-visualization | chart, visualization, plot, graph, bar chart, line chart, scatter, heatmap, treemap, donut, pie chart, histogram, visualize data, choose chart, story intent, declutter |
+| ⭐ chart-interpretation | interpret chart, read chart, analyze chart, chart review, what does this chart, misleading visual, bias check, explain this visual, read visualization |
+| ⭐ dashboard-design | dashboard, KPI, panel, layout, drill-down, filter, interactive dashboard, 5-Visual Rule, scaffold dashboard, dashboard layout |
 | debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug, can't find bug, it's not working, fix exception, error keeps happening, trace the issue, reproduce bug, narrow down, systematic debug |
 | deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
 | dialog-engineering | CSAR loop, dialog engineering, structured conversation, clarify summarize act reflect, multi-turn, prompt engineering, conversation design, steering moves, iterative dialog |

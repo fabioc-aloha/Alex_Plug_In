@@ -1,14 +1,15 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "lex_docs/platforms/WINDOWS-HEIR-PLAN.md"
+    "github/copilot-instructions.md",
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "alex_docs/skills/SKILLS-CATALOG.md",
+    "scripts/audit-architecture.cjs",
+    "alex_docs/research/DATA-STORYTELLING-TRIFECTA-PLAN.md",
+    "alex_docs/research/adv_visuals.html",
+    "alex_docs/research/population.html",
+    "alex_docs/research/visuals.html"
   ],
-  "todoHotspots": [
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1774540149436
-    }
-  ],
-  "lastUpdated": 1774540149436
+  "todoHotspots": [],
+  "lastUpdated": 1774546295115
 }

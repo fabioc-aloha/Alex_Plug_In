@@ -1,0 +1,59 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "data-visualization",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "version": "1.0.0",
+    "created": "2026-03-26",
+    "connectionCount": 7,
+    "connections": [
+        {
+            "target": ".github/skills/dashboard-design/SKILL.md",
+            "type": "feeds",
+            "strength": 0.95,
+            "when": "Charts populate dashboard panels; visualization is the atomic unit of dashboards",
+            "yields": "dashboard-design visualization patterns and chart panel content"
+        },
+        {
+            "target": ".github/skills/data-analysis/SKILL.md",
+            "type": "consumes",
+            "strength": 0.9,
+            "when": "Visualization consumes analysis insights and renders them as charts",
+            "yields": "data-analysis findings rendered as visual encodings"
+        },
+        {
+            "target": ".github/skills/data-storytelling/SKILL.md",
+            "type": "feeds",
+            "strength": 0.9,
+            "when": "Visualization provides the visual evidence that storytelling weaves into narrative",
+            "yields": "data-storytelling visual evidence for narrative construction"
+        },
+        {
+            "target": ".github/skills/chart-interpretation/SKILL.md",
+            "type": "feeds",
+            "strength": 0.85,
+            "when": "Chart type knowledge from visualization aids decoding in interpretation",
+            "yields": "chart-interpretation type recognition and decoding context"
+        },
+        {
+            "target": ".github/skills/graphic-design/SKILL.md",
+            "type": "complements",
+            "strength": 0.75,
+            "when": "Graphic design provides color theory and typography foundations for chart design",
+            "yields": "graphic-design color and typography foundations"
+        },
+        {
+            "target": ".github/skills/slide-design/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "when": "Slide design shares visual hierarchy and decluttering principles",
+            "yields": "slide-design layout and decluttering principles"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "supports",
+            "strength": 0.7,
+            "when": "Data visualization provides visual evidence for executive narratives",
+            "yields": "executive-storytelling data-backed visual evidence"
+        }
+    ]
+}

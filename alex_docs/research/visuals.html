@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Visualization Guide — Choose the Right Chart</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0f1117;--surface:#1a1d27;--surface2:#23263a;--surface3:#2d3148;
+  --text:#e2e8f0;--muted:#94a3b8;--border:#2d3148;
+  --comparison:#6366f1;--trend:#3b82f6;--distribution:#10b981;
+  --relationship:#f59e0b;--proportion:#ec4899;--pattern:#8b5cf6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#1a1d27 0%,#14162b 100%);
+  border-bottom:1px solid var(--border);
+  padding:28px 32px 24px;
+  text-align:center;
+}
+header h1{font-size:1.9rem;font-weight:800;background:linear-gradient(90deg,#818cf8,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+header p{color:var(--muted);font-size:.95rem;max-width:600px;margin:0 auto 20px}
+.cat-legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.cat-pip{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted)}
+.pip-dot{width:10px;height:10px;border-radius:50%}
+
+/* MAIN */
+.main{padding:24px 32px;max-width:1600px;margin:0 auto}
+
+/* FILTER BAR */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
+.filters span{font-size:.8rem;color:var(--muted);margin-right:4px}
+.fbtn{
+  background:var(--surface);border:1px solid var(--border);color:var(--muted);
+  padding:6px 14px;border-radius:99px;cursor:pointer;font-size:.82rem;
+  transition:all .2s;white-space:nowrap
+}
+.fbtn:hover{color:var(--text);border-color:var(--surface3)}
+.fbtn.active{color:#fff;font-weight:600}
+.fbtn[data-f="all"].active{background:var(--surface2);border-color:var(--surface3);color:var(--text)}
+.fbtn[data-f="comparison"].active{background:var(--comparison);border-color:var(--comparison)}
+.fbtn[data-f="trend"].active{background:var(--trend);border-color:var(--trend)}
+.fbtn[data-f="distribution"].active{background:var(--distribution);border-color:var(--distribution)}
+.fbtn[data-f="relationship"].active{background:var(--relationship);border-color:var(--relationship)}
+.fbtn[data-f="proportion"].active{background:var(--proportion);border-color:var(--proportion)}
+.fbtn[data-f="pattern"].active{background:var(--pattern);border-color:var(--pattern)}
+
+/* SECTION HEADERS */
+.section-header{display:flex;align-items:center;gap:10px;margin:28px 0 14px}
+.section-header h2{font-size:1rem;font-weight:700}
+.section-header .line{flex:1;height:1px;background:var(--border)}
+.section-header .cat-badge{padding:3px 10px;border-radius:99px;font-size:.7rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:8px}
+
+/* CHART CARD */
+.chart-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:18px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.chart-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transition:opacity .2s;opacity:.6}
+.chart-card:hover{border-color:var(--surface3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.chart-card:hover::before{opacity:1}
+.chart-card[data-cat="comparison"]::before{background:var(--comparison)}
+.chart-card[data-cat="trend"]::before{background:var(--trend)}
+.chart-card[data-cat="distribution"]::before{background:var(--distribution)}
+.chart-card[data-cat="relationship"]::before{background:var(--relationship)}
+.chart-card[data-cat="proportion"]::before{background:var(--proportion)}
+.chart-card[data-cat="pattern"]::before{background:var(--pattern)}
+
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.card-name{font-size:.95rem;font-weight:700}
+.card-badge{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:99px;color:#fff}
+.card-badge[data-cat="comparison"]{background:var(--comparison)}
+.card-badge[data-cat="trend"]{background:var(--trend)}
+.card-badge[data-cat="distribution"]{background:var(--distribution)}
+.card-badge[data-cat="relationship"]{background:var(--relationship)}
+.card-badge[data-cat="proportion"]{background:var(--proportion)}
+.card-badge[data-cat="pattern"]{background:var(--pattern)}
+
+.mini-chart{height:130px;position:relative;margin-bottom:10px}
+.card-tagline{font-size:.78rem;color:var(--muted);line-height:1.5}
+.card-hint{font-size:.7rem;color:var(--surface3);margin-top:8px;text-align:right}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);padding:24px;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;width:100%;max-width:1000px;max-height:92vh;overflow-y:auto;display:flex;flex-direction:column}
+.modal-header{
+  padding:22px 26px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  position:sticky;top:0;background:var(--surface);z-index:5;
+}
+.modal-title-row{display:flex;align-items:center;gap:12px}
+.modal-name{font-size:1.3rem;font-weight:800}
+.modal-cat-badge{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:3px 10px;border-radius:99px;color:#fff}
+.modal-cat-badge[data-cat="comparison"]{background:var(--comparison)}
+.modal-cat-badge[data-cat="trend"]{background:var(--trend)}
+.modal-cat-badge[data-cat="distribution"]{background:var(--distribution)}
+.modal-cat-badge[data-cat="relationship"]{background:var(--relationship)}
+.modal-cat-badge[data-cat="proportion"]{background:var(--proportion)}
+.modal-cat-badge[data-cat="pattern"]{background:var(--pattern)}
+.modal-tagline{font-size:.85rem;color:var(--muted);margin-top:3px}
+.modal-close{background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:8px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.modal-close:hover{background:var(--surface3);color:var(--text)}
+
+.modal-body{display:grid;grid-template-columns:1fr 360px;gap:0}
+.modal-chart-area{padding:24px;border-right:1px solid var(--border)}
+.modal-chart-wrap{height:340px;position:relative}
+.modal-info{padding:24px;display:flex;flex-direction:column;gap:18px;overflow-y:auto}
+
+.info-block h3{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.info-block p{font-size:.83rem;color:var(--text);line-height:1.6}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:.75rem;padding:3px 10px;border-radius:6px}
+.avoid-note{background:#ef444410;border:1px solid #ef444430;border-radius:8px;padding:10px 14px;font-size:.8rem;color:#fca5a5;line-height:1.5}
+.use-note{background:#10b98110;border:1px solid #10b98130;border-radius:8px;padding:10px 14px;font-size:.8rem;color:#6ee7b7;line-height:1.5}
+.data-note{background:#6366f110;border:1px solid #6366f130;border-radius:8px;padding:10px 14px;font-size:.8rem;color:#a5b4fc;line-height:1.5}
+.examples-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.examples-list li{font-size:.8rem;color:var(--muted);padding-left:14px;position:relative;line-height:1.5}
+.examples-list li::before{content:"→";position:absolute;left:0;color:var(--surface3)}
+
+/* NAV in modal */
+.modal-nav{padding:14px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:10px;background:var(--surface);position:sticky;bottom:0}
+.nav-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:8px;cursor:pointer;font-size:.82rem;transition:all .2s}
+.nav-btn:hover{color:var(--text);background:var(--surface3)}
+.nav-btn:disabled{opacity:.3;cursor:default}
+
+footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border)}
+@media(max-width:780px){
+  .modal-body{grid-template-columns:1fr}
+  .modal-chart-area{border-right:none;border-bottom:1px solid var(--border)}
+  .main{padding:16px}
+  header{padding:20px 16px 16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Choose the Right Chart</h1>
+  <p>An interactive guide to 14 visualization types — explore what each chart is best for, when to use it, and when to avoid it.</p>
+  <div class="cat-legend">
+    <div class="cat-pip"><span class="pip-dot" style="background:var(--comparison)"></span>Comparison</div>
+    <div class="cat-pip"><span class="pip-dot" style="background:var(--trend)"></span>Trend</div>
+    <div class="cat-pip"><span class="pip-dot" style="background:var(--distribution)"></span>Distribution</div>
+    <div class="cat-pip"><span class="pip-dot" style="background:var(--relationship)"></span>Relationship</div>
+    <div class="cat-pip"><span class="pip-dot" style="background:var(--proportion)"></span>Proportion</div>
+    <div class="cat-pip"><span class="pip-dot" style="background:var(--pattern)"></span>Pattern</div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="filters">
+    <span>Filter:</span>
+    <button class="fbtn active" data-f="all" onclick="filter('all')">All Charts</button>
+    <button class="fbtn" data-f="comparison" onclick="filter('comparison')">Comparison</button>
+    <button class="fbtn" data-f="trend" onclick="filter('trend')">Trend</button>
+    <button class="fbtn" data-f="distribution" onclick="filter('distribution')">Distribution</button>
+    <button class="fbtn" data-f="relationship" onclick="filter('relationship')">Relationship</button>
+    <button class="fbtn" data-f="proportion" onclick="filter('proportion')">Proportion</button>
+    <button class="fbtn" data-f="pattern" onclick="filter('pattern')">Pattern</button>
+  </div>
+  <div id="chartGrid" class="grid"></div>
+</div>
+
+<footer>Click any chart card to explore it in detail · Hover to preview · 14 chart types across 6 categories</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title-row">
+          <span class="modal-name" id="mName"></span>
+          <span class="modal-cat-badge" id="mBadge"></span>
+        </div>
+        <div class="modal-tagline" id="mTagline"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal(null)">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-chart-area">
+        <div class="modal-chart-wrap"><canvas id="modalCanvas"></canvas></div>
+      </div>
+      <div class="modal-info" id="mInfo"></div>
+    </div>
+    <div class="modal-nav">
+      <button class="nav-btn" id="prevBtn" onclick="navigateModal(-1)">← Previous</button>
+      <span style="font-size:.8rem;color:var(--muted);align-self:center" id="navLabel"></span>
+      <button class="nav-btn" id="nextBtn" onclick="navigateModal(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  SHARED CHART HELPERS
+// ═══════════════════════════════════════════════════════
+const GRID = { color: '#2d3148' };
+const TICK = { color: '#94a3b8', font: { size: 11 } };
+const TIP  = { backgroundColor:'#1a1d27', borderColor:'#2d3148', borderWidth:1, titleColor:'#e2e8f0', bodyColor:'#94a3b8', padding:10 };
+
+function miniOpts(extra={}){
+  return { responsive:true, maintainAspectRatio:false, animation:{duration:600},
+    plugins:{ legend:{display:false}, tooltip:{enabled:false} },
+    scales:{ x:{display:false}, y:{display:false} }, ...extra };
+}
+function modalOpts(extra={}){
+  return { responsive:true, maintainAspectRatio:false, animation:{duration:700},
+    plugins:{ legend:{display:true,labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:12}}, tooltip:TIP },
+    scales:{ x:{ticks:TICK,grid:GRID}, y:{ticks:TICK,grid:GRID} }, ...extra };
+}
+function noScale(o){ delete o.scales; return o; }
+function yOnly(o){ o.scales={ y:{ticks:TICK,grid:GRID}, x:{display:false} }; return o; }
+
+// ═══════════════════════════════════════════════════════
+//  CHART DEFINITIONS
+// ═══════════════════════════════════════════════════════
+const C = { // colors
+  ind:'#6366f1', blu:'#3b82f6', grn:'#10b981', amb:'#f59e0b', pnk:'#ec4899', vio:'#8b5cf6',
+  red:'#f87171', sky:'#38bdf8', lim:'#a3e635', org:'#fb923c'
+};
+
+const CHARTS = [
+  // ── COMPARISON ────────────────────────────────────────
+  {
+    id:'bar', cat:'comparison', name:'Bar Chart', tagline:'Compare quantities across distinct categories',
+    bestFor:['Ranking or comparing 2–15 categories','Showing exact values matter','Discrete, named groups'],
+    whenToUse:'A bar chart is the workhorse of comparison. Use it when you have a modest number of named categories and want to show their relative magnitudes clearly. Sorting bars by value (descending) helps readers quickly identify rankings.',
+    avoidWhen:'Avoid with too many categories (>15 makes it unreadable), continuous data, or when the primary story is change over time.',
+    dataType:'X: Categorical · Y: Quantitative',
+    examples:['Monthly revenue by product line','Survey agreement scores by question','Sales by region'],
+    mini:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['A','B','C','D','E'],datasets:[{data:[42,67,53,81,74],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:3}]},options:miniOpts()}),
+    full:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],datasets:[{label:'Revenue ($K)',data:[42,67,53,81,74,91,88,95],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:5}]},options:modalOpts()})
+  },
+  {
+    id:'hbar', cat:'comparison', name:'Horizontal Bar', tagline:'Rank items when labels need space',
+    bestFor:['Long category names','Ranking many items (up to 20)','Natural "largest to smallest" story'],
+    whenToUse:'Flip the bar chart on its side when your category names are long or when ranking is the focus. Readers naturally scan top-to-bottom, so sorting largest-first works intuitively. Also great for survey Likert scales.',
+    avoidWhen:'Avoid when you have fewer than 4 items (vertical bars work fine) or when values are very close together.',
+    dataType:'Y: Categorical · X: Quantitative',
+    examples:['Top 10 countries by GDP','Feature popularity from user survey','Employee satisfaction by department'],
+    mini:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['E','D','C','B','A'],datasets:[{data:[91,81,74,67,53],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:3}]},options:{...miniOpts(),indexAxis:'y'}}),
+    full:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['Germany','France','Japan','UK','Canada','Italy','Brazil','Mexico'],datasets:[{label:'GDP (Trillion USD)',data:[4.5,3.1,4.2,3.1,2.1,2.2,1.9,1.3],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:5}]},options:{...modalOpts(),indexAxis:'y'}})
+  },
+  {
+    id:'grouped', cat:'comparison', name:'Grouped Bar', tagline:'Compare multiple series side by side',
+    bestFor:['2–4 series across same categories','Comparing sub-groups','Before/after comparisons'],
+    whenToUse:'Use grouped bars when you need to compare more than one metric across the same set of categories — for example, quarterly performance across products. Limit to 3–4 groups per cluster; more creates visual noise.',
+    avoidWhen:'Avoid with more than 4 series or more than 6–8 categories — switch to a small multiples layout instead.',
+    dataType:'X: Categorical · Y: Quantitative · Color: Series',
+    examples:['Q1 vs Q2 vs Q3 sales by product','Male vs female response by age group','Budget vs actual by department'],
+    mini:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['A','B','C','D'],datasets:[{data:[42,67,53,81],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:2},{data:[58,44,70,62],backgroundColor:C.blu+'bb',borderColor:C.blu,borderWidth:1,borderRadius:2}]},options:miniOpts()}),
+    full:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Product A',data:[42,67,53,81],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:4},{label:'Product B',data:[58,44,70,62],backgroundColor:C.blu+'bb',borderColor:C.blu,borderWidth:1,borderRadius:4},{label:'Product C',data:[35,80,48,73],backgroundColor:C.grn+'bb',borderColor:C.grn,borderWidth:1,borderRadius:4}]},options:modalOpts()})
+  },
+  {
+    id:'stacked', cat:'comparison', name:'Stacked Bar', tagline:'Show part-to-whole within comparisons',
+    bestFor:['Total size + composition at once','2–5 components per category','Seeing proportional changes'],
+    whenToUse:'Stacked bars reveal both the total and its composition. Use when both matter — for example, showing total headcount by team while also breaking down seniority levels. 100% stacked bars (normalized) are ideal for showing proportional shifts.',
+    avoidWhen:'Avoid when exact values of individual segments are critical (only the bottom segment has a stable baseline), or when you have more than 5 segments.',
+    dataType:'X: Categorical · Y: Quantitative · Color: Component',
+    examples:['Revenue by segment per quarter','Time allocation by project','Headcount by seniority per team'],
+    mini:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['A','B','C','D'],datasets:[{data:[25,35,20,40],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1},{data:[20,25,35,30],backgroundColor:C.blu+'bb',borderColor:C.blu,borderWidth:1},{data:[15,10,20,15],backgroundColor:C.grn+'bb',borderColor:C.grn,borderWidth:1}]},options:{...miniOpts(),scales:{x:{display:false,stacked:true},y:{display:false,stacked:true}}}}),
+    full:(ctx)=>new Chart(ctx,{type:'bar',data:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Enterprise',data:[120,145,160,190],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:0},{label:'Mid-Market',data:[80,90,95,110],backgroundColor:C.blu+'bb',borderColor:C.blu,borderWidth:1},{label:'SMB',data:[50,55,60,70],backgroundColor:C.grn+'bb',borderColor:C.grn,borderWidth:1}]},options:{...modalOpts(),scales:{x:{ticks:TICK,grid:GRID,stacked:true},y:{ticks:TICK,grid:GRID,stacked:true}}}})
+  },
+  {
+    id:'radar', cat:'comparison', name:'Radar / Spider', tagline:'Compare across multiple dimensions at once',
+    bestFor:['3–8 dimensions per entity','Comparing 2–3 profiles','Strengths & weaknesses overview'],
+    whenToUse:'Radar charts shine for multi-dimensional profiling — for example, comparing two products across 6 feature dimensions. The shape of the polygon communicates overall balance: a large regular polygon = consistently high performer.',
+    avoidWhen:'Avoid with more than 3 overlapping series (too cluttered), more than 8 axes (hard to read), or when the exact values matter more than the shape.',
+    dataType:'Axes: Multiple quantitative dimensions · Color: Entity',
+    examples:['Product feature comparison','Athlete performance profile','UX heuristics evaluation'],
+    mini:(ctx)=>new Chart(ctx,{type:'radar',data:{labels:['S','P','U','R','D','F'],datasets:[{data:[80,60,90,70,50,85],backgroundColor:C.ind+'33',borderColor:C.ind,borderWidth:2,pointRadius:2},{data:[65,80,55,85,70,60],backgroundColor:C.amb+'33',borderColor:C.amb,borderWidth:2,pointRadius:2}]},options:{...miniOpts(),scales:{r:{display:false}}}}),
+    full:(ctx)=>new Chart(ctx,{type:'radar',data:{labels:['Speed','Performance','Usability','Reliability','Design','Features'],datasets:[{label:'Product A',data:[80,60,90,70,50,85],backgroundColor:C.ind+'33',borderColor:C.ind,borderWidth:2,pointRadius:4,pointBackgroundColor:C.ind},{label:'Product B',data:[65,80,55,85,70,60],backgroundColor:C.amb+'33',borderColor:C.amb,borderWidth:2,pointRadius:4,pointBackgroundColor:C.amb}]},options:{...noScale(modalOpts()),scales:{r:{ticks:{color:'#94a3b8',backdropColor:'transparent',font:{size:9}},grid:{color:'#2d3148'},pointLabels:{color:'#e2e8f0',font:{size:11}}}}}})
+  },
+
+  // ── TREND ─────────────────────────────────────────────
+  {
+    id:'line', cat:'trend', name:'Line Chart', tagline:'Show how values change over continuous time',
+    bestFor:['Time-series data','Showing trends, peaks, dips','Multiple series over time (up to 5)'],
+    whenToUse:'The line chart is the default for time-series data. Connect data points to emphasize continuity — the slope between points communicates speed of change. Use multiple lines to compare how different series evolve together.',
+    avoidWhen:'Avoid for categorical data with no meaningful ordering, or when there are so many lines the chart becomes a spaghetti plot (>5 series). Consider small multiples instead.',
+    dataType:'X: Temporal / Ordinal · Y: Quantitative · Color: Series',
+    examples:['Daily active users over a year','Stock price history','Temperature readings by month'],
+    mini:(ctx)=>new Chart(ctx,{type:'line',data:{labels:[0,1,2,3,4,5,6,7,8,9,10,11],datasets:[{data:[30,42,38,55,48,65,70,60,75,82,78,90],borderColor:C.blu,borderWidth:2,pointRadius:0,tension:.4,fill:false}]},options:miniOpts()}),
+    full:(ctx)=>new Chart(ctx,{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],datasets:[{label:'Active Users (K)',data:[30,42,38,55,48,65,70,60,75,82,78,90],borderColor:C.blu,backgroundColor:C.blu+'22',borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.blu,tension:.4,fill:false},{label:'New Signups (K)',data:[8,12,9,16,13,19,22,17,21,25,23,28],borderColor:C.grn,backgroundColor:C.grn+'22',borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.grn,tension:.4,fill:false}]},options:modalOpts()})
+  },
+  {
+    id:'area', cat:'trend', name:'Area Chart', tagline:'Emphasize volume and magnitude over time',
+    bestFor:['When total magnitude matters','Cumulative metrics','Single series or stacked totals'],
+    whenToUse:'Fill the area under a line to emphasize volume and magnitude, not just direction. Stacked area charts show how multiple components add up to a total over time — ideal for market share over time or cost breakdown trends.',
+    avoidWhen:'Avoid when overlapping filled areas obscure each other (use lines instead). Stacked areas hide the individual series shapes — don\'t use if individual trends matter more than the total.',
+    dataType:'X: Temporal · Y: Quantitative · Fill: Volume',
+    examples:['Monthly revenue over time','Energy consumption by source','Website traffic by channel'],
+    mini:(ctx)=>new Chart(ctx,{type:'line',data:{labels:[0,1,2,3,4,5,6,7,8,9],datasets:[{data:[20,30,28,45,40,55,60,52,68,72],borderColor:C.blu,backgroundColor:C.blu+'44',borderWidth:2,pointRadius:0,tension:.4,fill:true},{data:[10,15,12,20,18,25,28,22,32,35],borderColor:C.grn,backgroundColor:C.grn+'44',borderWidth:2,pointRadius:0,tension:.4,fill:true}]},options:{...miniOpts(),scales:{x:{display:false,stacked:true},y:{display:false,stacked:true}}}}),
+    full:(ctx)=>new Chart(ctx,{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],datasets:[{label:'Organic',data:[20,30,28,45,40,55,60,52,68,72,80,88],borderColor:C.blu,backgroundColor:C.blu+'55',borderWidth:2,pointRadius:3,tension:.4,fill:true},{label:'Paid',data:[10,15,12,20,18,25,28,22,32,35,38,42],borderColor:C.grn,backgroundColor:C.grn+'55',borderWidth:2,pointRadius:3,tension:.4,fill:true},{label:'Direct',data:[5,8,7,10,9,12,14,11,15,18,17,20],borderColor:C.amb,backgroundColor:C.amb+'55',borderWidth:2,pointRadius:3,tension:.4,fill:true}]},options:{...modalOpts(),scales:{x:{ticks:TICK,grid:GRID,stacked:true},y:{ticks:TICK,grid:GRID,stacked:true}}}})
+  },
+
+  // ── DISTRIBUTION ──────────────────────────────────────
+  {
+    id:'histogram', cat:'distribution', name:'Histogram', tagline:'Reveal the shape of a data distribution',
+    bestFor:['Single continuous variable','Finding skew, peaks, outliers','Checking if data is normal'],
+    whenToUse:'Histograms group continuous data into bins and show how many values fall in each range. Use them to understand the shape of your data — is it symmetric? Skewed? Bimodal? This is the first chart to make before fitting any statistical model.',
+    avoidWhen:'Avoid for categorical data (use a bar chart instead). The number of bins dramatically changes the shape — try several bin widths before publishing.',
+    dataType:'X: Continuous/Quantitative (binned) · Y: Frequency / Count',
+    examples:['Age distribution of customers','Response time distribution','Product rating distribution'],
+    mini:(ctx)=>{
+      const bins=[5,12,22,38,45,35,28,16,8,3];
+      return new Chart(ctx,{type:'bar',data:{labels:bins.map((_,i)=>i),datasets:[{data:bins,backgroundColor:C.grn+'bb',borderColor:C.grn,borderWidth:1,borderRadius:2,categoryPercentage:1,barPercentage:0.95}]},options:miniOpts()});
+    },
+    full:(ctx)=>{
+      const bins=[2,5,12,22,38,55,65,58,45,35,25,16,9,4,2];
+      const labels=['<20','20','25','30','35','40','45','50','55','60','65','70','75','80','85+'];
+      return new Chart(ctx,{type:'bar',data:{labels,datasets:[{label:'Customer Count',data:bins,backgroundColor:C.grn+'bb',borderColor:C.grn,borderWidth:1,borderRadius:3,categoryPercentage:1,barPercentage:0.9}]},options:{...modalOpts(),plugins:{...modalOpts().plugins,tooltip:{...TIP,callbacks:{label:i=>` Count: ${i.raw}`,title:i=>`Age: ${i[0].label}`}}}}});
+    }
+  },
+
+  // ── RELATIONSHIP ──────────────────────────────────────
+  {
+    id:'scatter', cat:'relationship', name:'Scatter Plot', tagline:'Find correlations between two variables',
+    bestFor:['Correlation/relationship between 2 variables','Spotting outliers','Hundreds–thousands of data points'],
+    whenToUse:'Scatter plots reveal whether two quantitative variables are correlated — positively, negatively, or not at all. Each dot represents one observation. Add a trend line (regression line) to make the relationship explicit.',
+    avoidWhen:'Avoid when you have fewer than ~20 points (a table communicates better) or when overplotting hides density (use a heatmap or contour plot instead).',
+    dataType:'X: Quantitative · Y: Quantitative · Optional: Color (category), Size (3rd variable)',
+    examples:['Ad spend vs conversions','Height vs weight','Study hours vs exam score'],
+    mini:(ctx)=>{
+      const pts=Array.from({length:30},()=>({x:Math.random()*80+10,y:Math.random()*60+20+(Math.random()>0.5?20:0)}));
+      return new Chart(ctx,{type:'scatter',data:{datasets:[{data:pts,backgroundColor:C.amb+'99',borderColor:C.amb,borderWidth:0,pointRadius:3}]},options:miniOpts()});
+    },
+    full:(ctx)=>{
+      // Generate correlated data
+      const datasets=[
+        {label:'Electronics',color:C.amb,pts:Array.from({length:40},()=>{const x=Math.random()*80+20;return{x,y:x*0.9+Math.random()*25}})},
+        {label:'Fashion',color:C.pnk,pts:Array.from({length:35},()=>{const x=Math.random()*60+10;return{x,y:x*0.7+Math.random()*20+15}})},
+        {label:'Food',color:C.grn,pts:Array.from({length:30},()=>{const x=Math.random()*50+5;return{x,y:x*1.1+Math.random()*15}})},
+      ];
+      return new Chart(ctx,{type:'scatter',data:{datasets:datasets.map(d=>({label:d.label,data:d.pts,backgroundColor:d.color+'99',borderColor:d.color,borderWidth:0,pointRadius:5,pointHoverRadius:7}))},options:{...modalOpts(),plugins:{...modalOpts().plugins,tooltip:{...TIP,callbacks:{label:i=>` Spend: $${i.parsed.x.toFixed(0)}K → Revenue: $${i.parsed.y.toFixed(0)}K`}}},scales:{x:{...{ticks:TICK,grid:GRID},title:{display:true,text:'Ad Spend ($K)',color:'#94a3b8'}},y:{...{ticks:TICK,grid:GRID},title:{display:true,text:'Revenue ($K)',color:'#94a3b8'}}}}});
+    }
+  },
+  {
+    id:'bubble', cat:'relationship', name:'Bubble Chart', tagline:'Encode a third variable as bubble size',
+    bestFor:['3-variable relationships','Comparing entities on 3 dimensions','Population / size as a weight'],
+    whenToUse:'A bubble chart extends the scatter plot by encoding a third quantitative variable as the radius of each point. Classic use: GDP (x) vs life expectancy (y) vs population (size). Works best with 5–50 bubbles labeled by name.',
+    avoidWhen:'Avoid when the size variable spans many orders of magnitude (bubbles become unreadable), when you have many overlapping bubbles, or when the size comparison is the primary story (use a bar chart).',
+    dataType:'X: Quantitative · Y: Quantitative · Size: Quantitative · Optional: Color (category)',
+    examples:['Countries: GDP vs life expectancy vs population','Products: Price vs rating vs sales volume'],
+    mini:(ctx)=>{
+      const pts=[{x:30,y:70,r:8},{x:55,y:60,r:14},{x:70,y:80,r:6},{x:45,y:50,r:18},{x:80,y:65,r:10}];
+      return new Chart(ctx,{type:'bubble',data:{datasets:[{data:pts,backgroundColor:C.amb+'88',borderColor:C.amb,borderWidth:1}]},options:miniOpts()});
+    },
+    full:(ctx)=>{
+      const countries=[
+        {label:'USA',x:65000,y:78.8,r:18,color:C.blu},{label:'China',x:12500,y:76.1,r:22,color:C.red},
+        {label:'Germany',x:50800,y:80.9,r:10,color:C.grn},{label:'India',x:2300,y:69.4,r:20,color:C.amb},
+        {label:'Japan',x:40000,y:84.3,r:12,color:C.pnk},{label:'Brazil',x:8900,y:75.7,r:13,color:C.org},
+        {label:'UK',x:46300,y:81.2,r:9,color:C.vio},{label:'Canada',x:52000,y:82.3,r:8,color:C.sky},
+        {label:'Nigeria',x:2100,y:62.6,r:15,color:C.lim},{label:'France',x:43000,y:82.5,r:9,color:C.ind},
+      ];
+      return new Chart(ctx,{type:'bubble',data:{datasets:countries.map(c=>({label:c.label,data:[{x:c.x,y:c.y,r:c.r}],backgroundColor:c.color+'99',borderColor:c.color,borderWidth:1.5}))},options:{...modalOpts(),plugins:{...modalOpts().plugins,tooltip:{...TIP,callbacks:{label:i=>[` Country: ${i.dataset.label}`,` GDP/capita: $${i.parsed.x.toLocaleString()}`,` Life Exp: ${i.parsed.y} yrs`]}}},scales:{x:{ticks:{...TICK,callback:v=>'$'+(v/1000).toFixed(0)+'K'},grid:GRID,title:{display:true,text:'GDP per Capita (USD)',color:'#94a3b8'}},y:{ticks:TICK,grid:GRID,title:{display:true,text:'Life Expectancy (years)',color:'#94a3b8'}}}}});
+    }
+  },
+
+  // ── PROPORTION ────────────────────────────────────────
+  {
+    id:'pie', cat:'proportion', name:'Pie Chart', tagline:'Show part-to-whole with few categories',
+    bestFor:['2–5 categories only','When one slice is clearly dominant','Simple proportional story'],
+    whenToUse:'A pie chart shows parts of a whole — every slice must add to 100%. Use it only when you have a small number of categories (2–5) and the proportional relationship is the key insight. The eye is good at judging "about a quarter" or "about half."',
+    avoidWhen:'Avoid with more than 5 slices (use a bar chart instead), when the values are similar (hard to distinguish), or when exact values matter. Humans are poor at judging angles for close values.',
+    dataType:'Categories: Qualitative · Values: Quantitative (must sum to 100%)',
+    examples:['Market share breakdown','Budget allocation','Survey: Yes / No / Unsure'],
+    mini:(ctx)=>new Chart(ctx,{type:'pie',data:{labels:['A','B','C','D'],datasets:[{data:[38,25,22,15],backgroundColor:[C.pnk+'cc',C.ind+'cc',C.blu+'cc',C.grn+'cc'],borderColor:['#0f1117'],borderWidth:2}]},options:noScale(miniOpts())}),
+    full:(ctx)=>new Chart(ctx,{type:'pie',data:{labels:['North America','Europe','Asia Pacific','Latin America','Middle East & Africa'],datasets:[{data:[38,25,22,10,5],backgroundColor:[C.pnk+'cc',C.ind+'cc',C.blu+'cc',C.grn+'cc',C.amb+'cc'],borderColor:['#0f1117'],borderWidth:3,hoverOffset:8}]},options:{...noScale(modalOpts()),plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:14}},tooltip:{...TIP,callbacks:{label:i=>` ${i.label}: ${i.parsed}%`}}}}})
+  },
+  {
+    id:'donut', cat:'proportion', name:'Donut Chart', tagline:'Like a pie chart, but with a center label',
+    bestFor:['Same use cases as pie (2–5 categories)','When a KPI or total belongs in the center','Slightly more modern aesthetic'],
+    whenToUse:'Functionally identical to a pie chart. The hollow center creates space for a key summary number — total, percentage, or KPI label. Slightly easier to compare arc lengths than full slices. Use the same rules as pie: few categories only.',
+    avoidWhen:'All the same caveats as pie charts apply. Do not use nested donut charts — they are nearly impossible to read.',
+    dataType:'Categories: Qualitative · Values: Quantitative (must sum to 100%)',
+    examples:['Budget allocation with total in center','Completion rate dashboard widget','NPS score breakdown'],
+    mini:(ctx)=>new Chart(ctx,{type:'doughnut',data:{labels:['A','B','C','D'],datasets:[{data:[40,28,20,12],backgroundColor:[C.pnk+'cc',C.ind+'cc',C.blu+'cc',C.grn+'cc'],borderColor:['#0f1117'],borderWidth:2}]},options:{...noScale(miniOpts()),cutout:'60%'}}),
+    full:(ctx)=>new Chart(ctx,{type:'doughnut',data:{labels:['Engineering','Marketing','Operations','Sales','R&D'],datasets:[{data:[35,20,15,18,12],backgroundColor:[C.ind+'cc',C.pnk+'cc',C.grn+'cc',C.amb+'cc',C.blu+'cc'],borderColor:['#0f1117'],borderWidth:3,hoverOffset:8}]},options:{...noScale(modalOpts()),cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:14}},tooltip:{...TIP,callbacks:{label:i=>` ${i.label}: ${i.parsed}%`}}}}})
+  },
+  {
+    id:'treemap', cat:'proportion', name:'Treemap', tagline:'Show hierarchical proportions as nested rectangles',
+    bestFor:['Large number of categories (>10)','Hierarchical data (categories with sub-categories)','Disk usage, portfolio, budget trees'],
+    whenToUse:'Treemaps pack proportional data into a rectangle — area encodes value. They handle many more categories than a pie chart and support two levels of hierarchy through nesting and color. Use when the dataset is large and the relative sizes are the story.',
+    avoidWhen:'Avoid when exact values are critical (area is hard to compare precisely), when you have very few categories (use pie/bar), or when all values are similar (all rectangles look the same).',
+    dataType:'Categories: Hierarchical · Values: Quantitative (determines area)',
+    examples:['Operating system market share','Company expense breakdown','Stock portfolio by sector'],
+    mini:(ctx,canvas)=>{ drawTreemapMini(canvas); return null; },
+    full:(ctx,canvas)=>{ drawTreemapFull(canvas); return null; }
+  },
+
+  // ── PATTERN ───────────────────────────────────────────
+  {
+    id:'heatmap', cat:'pattern', name:'Heatmap', tagline:'Reveal patterns across two categorical dimensions',
+    bestFor:['Two categorical dimensions + one quantitative','Finding time-based patterns','Correlation matrices','Calendar views'],
+    whenToUse:'Heatmaps use color intensity to encode a quantitative value across a 2D grid. They excel at revealing patterns, cycles, and anomalies across two dimensions — for example, hourly sales by day of week, or user activity by month and hour.',
+    avoidWhen:'Avoid when exact values are critical (color is a coarse encoding), when you have only a few cells (use a table), or when your audience is colorblind without a colorblind-safe palette.',
+    dataType:'X: Categorical · Y: Categorical · Color: Quantitative value',
+    examples:['Website traffic by hour and day','Correlation matrix of features','Call center volume by time'],
+    mini:(ctx,canvas)=>{ drawHeatmapMini(canvas); return null; },
+    full:(ctx,canvas)=>{ drawHeatmapFull(canvas); return null; }
+  },
+];
+
+// ═══════════════════════════════════════════════════════
+//  CUSTOM CANVAS: HEATMAP
+// ═══════════════════════════════════════════════════════
+function lerp(a,b,t){return a+(b-a)*t}
+function heatColor(v,lo,hi){
+  const t=(v-lo)/(hi-lo);
+  const r=Math.round(lerp(15,99,t)),g=Math.round(lerp(17,183,t)),b=Math.round(lerp(39,83,t));
+  // dark->accent gradient: #0f1127 → #6366f1 → #f59e0b
+  if(t<0.5){
+    const s=t*2;
+    return `rgb(${Math.round(lerp(15,99,s))},${Math.round(lerp(17,102,s))},${Math.round(lerp(39,241,s))})`;
+  } else {
+    const s=(t-0.5)*2;
+    return `rgb(${Math.round(lerp(99,245,s))},${Math.round(lerp(102,158,s))},${Math.round(lerp(241,11,s))})`;
+  }
+}
+
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const HOURS=['12a','2a','4a','6a','8a','10a','12p','2p','4p','6p','8p','10p'];
+function genHeatData(){
+  return DAYS.map((d,di)=>HOURS.map((h,hi)=>{
+    let v=Math.random()*30;
+    if(hi>=4&&hi<=7&&di<5)v+=50+Math.random()*40; // morning weekday
+    if(hi>=6&&hi<=8&&di<5)v+=30+Math.random()*30; // afternoon
+    if(di>=5)v+=20+Math.random()*30; // weekends
+    return Math.round(v);
+  }));
+}
+const HEAT_DATA=genHeatData();
+
+function drawHeatmapMini(canvas){
+  const ctx=canvas.getContext('2d');
+  const W=canvas.clientWidth||canvas.width,H=canvas.clientHeight||canvas.height;
+  canvas.width=W;canvas.height=H;
+  const rows=DAYS.length,cols=HOURS.length;
+  const cw=W/cols,ch=H/rows;
+  const flat=HEAT_DATA.flat();
+  const lo=Math.min(...flat),hi=Math.max(...flat);
+  HEAT_DATA.forEach((row,ri)=>row.forEach((v,ci)=>{
+    ctx.fillStyle=heatColor(v,lo,hi);
+    ctx.fillRect(ci*cw+.5,ri*ch+.5,cw-1,ch-1);
+  }));
+}
+
+function drawHeatmapFull(canvas){
+  const ctx=canvas.getContext('2d');
+  const PAD_L=36,PAD_T=10,PAD_B=28,PAD_R=10;
+  const W=canvas.clientWidth||canvas.width,H=canvas.clientHeight||canvas.height;
+  canvas.width=W;canvas.height=H;
+  const rows=DAYS.length,cols=HOURS.length;
+  const gW=W-PAD_L-PAD_R,gH=H-PAD_T-PAD_B;
+  const cw=gW/cols,ch=gH/rows;
+  const flat=HEAT_DATA.flat();
+  const lo=Math.min(...flat),hi=Math.max(...flat);
+  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
+  HEAT_DATA.forEach((row,ri)=>row.forEach((v,ci)=>{
+    ctx.fillStyle=heatColor(v,lo,hi);
+    const rx=PAD_L+ci*cw,ry=PAD_T+ri*ch;
+    ctx.beginPath();ctx.roundRect(rx+1,ry+1,cw-2,ch-2,3);ctx.fill();
+  }));
+  ctx.fillStyle='#94a3b8';ctx.font='11px Segoe UI,system-ui,sans-serif';ctx.textAlign='right';
+  DAYS.forEach((d,i)=>{ctx.fillText(d,PAD_L-6,PAD_T+i*ch+ch/2+4)});
+  ctx.textAlign='center';
+  HOURS.forEach((h,i)=>{ctx.fillText(h,PAD_L+i*cw+cw/2,H-PAD_B+16)});
+}
+
+// ═══════════════════════════════════════════════════════
+//  CUSTOM CANVAS: TREEMAP
+// ═══════════════════════════════════════════════════════
+const TM_DATA_MINI=[
+  {label:'A',value:40,color:'#6366f1'},{label:'B',value:25,color:'#3b82f6'},
+  {label:'C',value:18,color:'#10b981'},{label:'D',value:10,color:'#f59e0b'},
+  {label:'E',value:7,color:'#ec4899'}
+];
+const TM_DATA_FULL=[
+  {label:'Salaries',value:42,color:'#6366f1'},{label:'Infrastructure',value:18,color:'#3b82f6'},
+  {label:'Marketing',value:14,color:'#ec4899'},{label:'R&D',value:11,color:'#10b981'},
+  {label:'Office',value:7,color:'#f59e0b'},{label:'Legal',value:4,color:'#8b5cf6'},
+  {label:'Travel',value:4,color:'#fb923c'}
+];
+
+function drawTreemap(canvas,data,showLabels){
+  const ctx=canvas.getContext('2d');
+  const W=canvas.clientWidth||canvas.width,H=canvas.clientHeight||canvas.height;
+  canvas.width=W;canvas.height=H;
+  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
+  const total=data.reduce((s,d)=>s+d.value,0);
+  let x=0;
+  data.forEach(d=>{
+    const w=Math.round(W*d.value/total);
+    ctx.fillStyle=d.color+'cc';
+    ctx.beginPath();ctx.roundRect(x+1,1,w-2,H-2,4);ctx.fill();
+    ctx.strokeStyle=d.color;ctx.lineWidth=1;
+    ctx.beginPath();ctx.roundRect(x+1,1,w-2,H-2,4);ctx.stroke();
+    if(showLabels&&w>40){
+      ctx.fillStyle='#fff';ctx.textAlign='center';
+      ctx.font=`bold ${Math.min(13,w/5)}px Segoe UI,sans-serif`;
+      ctx.fillText(d.label,x+w/2,H/2-6);
+      ctx.font=`${Math.min(11,w/6)}px Segoe UI,sans-serif`;
+      ctx.fillStyle='rgba(255,255,255,.7)';
+      ctx.fillText(d.value+'%',x+w/2,H/2+10);
+    }
+    x+=w;
+  });
+}
+function drawTreemapMini(canvas){drawTreemap(canvas,TM_DATA_MINI,false)}
+function drawTreemapFull(canvas){drawTreemap(canvas,TM_DATA_FULL,true)}
+
+// ═══════════════════════════════════════════════════════
+//  RENDERING
+// ═══════════════════════════════════════════════════════
+const miniInstances={};
+let activeFilter='all', currentIdx=0;
+
+function renderGrid(){
+  const grid=document.getElementById('chartGrid');
+  grid.innerHTML='';
+  const visible=CHARTS.filter(c=>activeFilter==='all'||c.cat===activeFilter);
+  if(visible.length===0){grid.innerHTML='<div style="color:var(--muted);padding:32px">No charts match this filter.</div>';return;}
+  visible.forEach(ch=>{
+    const card=document.createElement('div');
+    card.className='chart-card';card.dataset.id=ch.id;card.dataset.cat=ch.cat;
+    card.onclick=()=>openModal(ch.id);
+    card.innerHTML=`
+      <div class="card-top">
+        <div class="card-name">${ch.name}</div>
+        <span class="card-badge" data-cat="${ch.cat}">${ch.cat}</span>
+      </div>
+      <div class="mini-chart"><canvas id="mini-${ch.id}"></canvas></div>
+      <div class="card-tagline">${ch.tagline}</div>
+    `;
+    grid.appendChild(card);
+  });
+  // init mini charts
+  requestAnimationFrame(()=>{
+    visible.forEach(ch=>{
+      // destroy old
+      if(miniInstances[ch.id]){try{miniInstances[ch.id].destroy()}catch(e){}}
+      const canvas=document.getElementById('mini-'+ch.id);
+      if(!canvas)return;
+      const ctx=canvas.getContext('2d');
+      const inst=ch.mini(ctx,canvas);
+      miniInstances[ch.id]=inst;
+      // custom canvas charts
+      if(!inst){
+        if(ch.id==='heatmap')drawHeatmapMini(canvas);
+        if(ch.id==='treemap')drawTreemapMini(canvas);
+      }
+    });
+  });
+}
+
+function filter(f){
+  activeFilter=f;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.toggle('active',b.dataset.f===f));
+  // destroy all mini instances
+  Object.values(miniInstances).forEach(i=>{if(i)try{i.destroy()}catch(e){}});
+  Object.keys(miniInstances).forEach(k=>delete miniInstances[k]);
+  renderGrid();
+}
+
+// ═══════════════════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════════════════
+let modalInst=null;
+
+function openModal(id){
+  const idx=CHARTS.findIndex(c=>c.id===id);
+  if(idx<0)return;
+  currentIdx=idx;
+  renderModal(idx);
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function renderModal(idx){
+  const ch=CHARTS[idx];
+  // header
+  document.getElementById('mName').textContent=ch.name;
+  const badge=document.getElementById('mBadge');
+  badge.textContent=ch.cat;badge.dataset.cat=ch.cat;
+  document.getElementById('mTagline').textContent=ch.tagline;
+  // nav
+  document.getElementById('navLabel').textContent=`${idx+1} / ${CHARTS.length}`;
+  document.getElementById('prevBtn').disabled=idx===0;
+  document.getElementById('nextBtn').disabled=idx===CHARTS.length-1;
+  // info
+  document.getElementById('mInfo').innerHTML=`
+    <div class="info-block">
+      <h3>Best For</h3>
+      <div class="tags">${ch.bestFor.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="info-block">
+      <h3>When to Use</h3>
+      <div class="use-note">${ch.whenToUse}</div>
+    </div>
+    <div class="info-block">
+      <h3>Avoid When</h3>
+      <div class="avoid-note">${ch.avoidWhen}</div>
+    </div>
+    <div class="info-block">
+      <h3>Data Requirements</h3>
+      <div class="data-note">${ch.dataType}</div>
+    </div>
+    <div class="info-block">
+      <h3>Real-World Examples</h3>
+      <ul class="examples-list">${ch.examples.map(e=>`<li>${e}</li>`).join('')}</ul>
+    </div>
+  `;
+  // chart
+  if(modalInst){try{modalInst.destroy()}catch(e){}modalInst=null;}
+  const canvas=document.getElementById('modalCanvas');
+  // reset canvas
+  const parent=canvas.parentElement;
+  const newCanvas=document.createElement('canvas');
+  newCanvas.id='modalCanvas';
+  parent.replaceChild(newCanvas,canvas);
+  const ctx=newCanvas.getContext('2d');
+  const inst=ch.full(ctx,newCanvas);
+  modalInst=inst;
+  if(!inst){
+    // custom
+    requestAnimationFrame(()=>{
+      if(ch.id==='heatmap')drawHeatmapFull(newCanvas);
+      if(ch.id==='treemap')drawTreemapFull(newCanvas);
+    });
+  }
+}
+
+function navigateModal(dir){
+  const next=currentIdx+dir;
+  if(next<0||next>=CHARTS.length)return;
+  currentIdx=next;
+  renderModal(currentIdx);
+}
+
+function closeModal(e){
+  if(e&&e.target!==document.getElementById('modalBg'))return;
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow='';
+  if(modalInst){try{modalInst.destroy()}catch(e){}modalInst=null;}
+}
+
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('modalBg').classList.contains('open'))return;
+  if(e.key==='Escape')closeModal(null);
+  if(e.key==='ArrowRight')navigateModal(1);
+  if(e.key==='ArrowLeft')navigateModal(-1);
+});
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+renderGrid();
+</script>
+</body>
+</html>

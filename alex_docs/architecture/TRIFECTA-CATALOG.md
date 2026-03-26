@@ -59,7 +59,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (39)
+## Complete Trifectas (44)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -477,6 +477,64 @@ Capabilities with all three memory system components — each justified by the "
 
 **Synapse connections**: doc-hygiene (0.9), heir-project-improvement (0.85), architecture-audit (0.8), skill-building (0.75)
 **Inheritance**: `inheritable` — context optimization applicable across all heirs
+
+### Data Visualization
+
+| Component   | File                                                      | Why It Exists                                                                                    |
+| ----------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/data-visualization/SKILL.md`              | Domain knowledge: story-intent chart selection, color theory, decluttering, annotation hierarchy |
+| Instruction | `.github/instructions/data-visualization.instructions.md` | Auto-loaded procedure: 8-step chart generation from intent to validation                         |
+| Prompt      | `.github/prompts/visualize.prompt.md`                     | `/visualize` — user invokes guided chart creation                                                |
+| Muscles     | `.github/muscles/chart-recommend.cjs`                     | Story-intent chart advisor with audience filtering                                               |
+
+**Synapse connections**: dashboard-design (0.95), data-analysis (0.9), data-storytelling (0.9), chart-interpretation (0.85)
+**Inheritance**: `inheritable` — visualization applicable across all data-producing heirs
+
+### Data Analysis
+
+| Component   | File                                                  | Why It Exists                                                                                |
+| ----------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/data-analysis/SKILL.md`               | Domain knowledge: EDA, statistics, distribution shapes, correlation, anomaly detection, DIKW |
+| Instruction | `.github/instructions/data-analysis.instructions.md`  | Auto-loaded procedure: 9-step analysis from ingestion to narrative arc                       |
+| Prompt      | `.github/prompts/analyze.prompt.md`                   | `/analyze` — user invokes guided exploratory data analysis                                   |
+| Muscles     | `.github/muscles/data-ingest.cjs`, `data-profile.cjs` | Universal data loader and statistical profiler                                               |
+
+**Synapse connections**: data-visualization (0.95), data-storytelling (0.9), dashboard-design (0.85), chart-interpretation (0.8)
+**Inheritance**: `inheritable` — analysis patterns applicable across all heirs
+
+### Dashboard Design
+
+| Component   | File                                                    | Why It Exists                                                                          |
+| ----------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/dashboard-design/SKILL.md`              | Domain knowledge: layout patterns, KPI cards, filter architecture, self-contained HTML |
+| Instruction | `.github/instructions/dashboard-design.instructions.md` | Auto-loaded procedure: 10-step dashboard from audience identification to export        |
+| Prompt      | `.github/prompts/dashboard.prompt.md`                   | `/dashboard` — user invokes guided dashboard creation                                  |
+| Muscles     | `.github/muscles/dashboard-scaffold.cjs`                | JSON-spec to self-contained HTML generator with dark/light themes                      |
+
+**Synapse connections**: data-visualization (0.95), data-analysis (0.85), data-storytelling (0.9), ui-ux-design (0.8)
+**Inheritance**: `inheritable` — dashboard patterns applicable across all heirs
+
+### Data Storytelling
+
+| Component   | File                                                     | Why It Exists                                                                               |
+| ----------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/data-storytelling/SKILL.md`              | Domain knowledge: three-act data structure, Knaflic+Duarte, audience framing, orchestration |
+| Instruction | `.github/instructions/data-storytelling.instructions.md` | Auto-loaded procedure: 4-phase orchestration (Ingest -> Discover -> Visualize -> Arrange)   |
+| Prompt      | `.github/prompts/datastory.prompt.md`                    | `/datastory` — user invokes end-to-end data storytelling                                    |
+
+**Synapse connections**: data-analysis (0.95), data-visualization (0.95), dashboard-design (0.9), executive-storytelling (0.85)
+**Inheritance**: `inheritable` — narrative data communication across all heirs
+
+### Chart Interpretation
+
+| Component   | File                                                        | Why It Exists                                                                          |
+| ----------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/chart-interpretation/SKILL.md`              | Domain knowledge: chart type recognition, visual decoding, bias detection, CSAR loop   |
+| Instruction | `.github/instructions/chart-interpretation.instructions.md` | Auto-loaded procedure: 10-step reverse-flow from chart image to narrative + confidence |
+| Prompt      | `.github/prompts/interpret.prompt.md`                       | `/interpret` — user invokes chart reading and insight extraction                       |
+
+**Synapse connections**: data-visualization (0.9), data-storytelling (0.85), data-analysis (0.8), dashboard-design (0.7)
+**Inheritance**: `inheritable` — chart literacy applicable across all heirs
 
 ---
 

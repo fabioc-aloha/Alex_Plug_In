@@ -1,0 +1,52 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "chart-interpretation",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "version": "1.0.0",
+    "created": "2026-03-26",
+    "connectionCount": 6,
+    "connections": [
+        {
+            "target": ".github/skills/data-visualization/SKILL.md",
+            "type": "uses",
+            "strength": 0.9,
+            "when": "Chart type knowledge from visualization skill aids accurate interpretation and decoding",
+            "yields": "data-visualization chart type recognition and encoding patterns"
+        },
+        {
+            "target": ".github/skills/data-storytelling/SKILL.md",
+            "type": "feeds",
+            "strength": 0.85,
+            "when": "Extracted insights from chart interpretation feed into data story construction",
+            "yields": "data-storytelling extracted insights for narrative"
+        },
+        {
+            "target": ".github/skills/data-analysis/SKILL.md",
+            "type": "feeds",
+            "strength": 0.8,
+            "when": "Chart observations can trigger re-analysis to validate or deepen findings",
+            "yields": "data-analysis re-validation triggered by chart review"
+        },
+        {
+            "target": ".github/skills/code-review/SKILL.md",
+            "type": "complements",
+            "strength": 0.6,
+            "when": "Visual review of data presentations complements code-level review",
+            "yields": "code-review visual presentation quality checks"
+        },
+        {
+            "target": ".github/skills/dashboard-design/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "when": "Interpretation validates whether dashboard panels tell their intended story",
+            "yields": "dashboard-design panel narrative validation"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "supports",
+            "strength": 0.65,
+            "when": "Chart interpretation produces executive-ready bullet summaries from visuals",
+            "yields": "executive-storytelling data-backed bullet summaries"
+        }
+    ]
+}

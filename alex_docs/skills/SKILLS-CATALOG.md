@@ -9,11 +9,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 150
+## Skill Count: 155
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 136   |
+| Inheritable | 141   |
 | Master-Only | 5     |
 | Heir:vscode | 7     |
 | Heir:m365   | 2     |
@@ -201,10 +201,15 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ### 📊 Data Analytics
 
-| Skill                                                                            | Inheritance | Purpose                                      |
-| -------------------------------------------------------------------------------- | ----------- | -------------------------------------------- |
-| [microsoft-fabric](../../.github/skills/microsoft-fabric/SKILL.md)               | inheritable | Microsoft Fabric analytics platform patterns |
-| [fabric-notebook-publish](../../.github/skills/fabric-notebook-publish/SKILL.md) | inheritable | Fabric notebook Git sync, worktree workflow  |
+| Skill                                                                            | Inheritance | Purpose                                              |
+| -------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
+| [microsoft-fabric](../../.github/skills/microsoft-fabric/SKILL.md)               | inheritable | Microsoft Fabric analytics platform patterns         |
+| [fabric-notebook-publish](../../.github/skills/fabric-notebook-publish/SKILL.md) | inheritable | Fabric notebook Git sync, worktree workflow          |
+| [data-visualization](../../.github/skills/data-visualization/SKILL.md)           | inheritable | Story-intent chart selection, Chart.js, Canvas 2D    |
+| [data-analysis](../../.github/skills/data-analysis/SKILL.md)                     | inheritable | EDA profiling, statistics, anomaly detection, DIKW   |
+| [dashboard-design](../../.github/skills/dashboard-design/SKILL.md)               | inheritable | Layout patterns, KPI cards, self-contained HTML      |
+| [data-storytelling](../../.github/skills/data-storytelling/SKILL.md)             | inheritable | Three-act data narrative, Knaflic+Duarte methodology |
+| [chart-interpretation](../../.github/skills/chart-interpretation/SKILL.md)       | inheritable | Reverse-flow chart reading, bias detection, insights |
 
 ### 💻 Platform-Specific
 
@@ -475,6 +480,11 @@ flowchart LR
     subgraph Data["📊 Data Analytics"]
         MF_DATA[microsoft-fabric]
         FNP[fabric-notebook-publish]
+        DATAVIZ[data-visualization]
+        DATANAL[data-analysis]
+        DASHDES[dashboard-design]
+        DATASTORY[data-storytelling]
+        CHARTINT[chart-interpretation]
     end
 
     subgraph Docs["📝 Docs & Writing"]
@@ -725,7 +735,7 @@ flowchart LR
 | 🚨 Operations     | error-recovery-patterns, root-cause-analysis, incident-response, post-mortem, project-deployment, release-preflight, change-management, project-management, azure-deployment-operations, observability-monitoring, scope-management, status-reporting                                                                                           |
 | 🔐 Security       | security-review, privacy-responsible-ai, pii-privacy-regulations, distribution-security, secrets-management                                                                                                                                                                                                                                     |
 | 🤖 AI & ML        | prompt-engineering, rag-architecture, ai-agent-design, mcp-development, llm-model-selection, foundry-agent-platform, multi-agent-orchestration, microsoft-graph-api                                                                                                                                                                             |
-| 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish                                                                                                                                                                                                                                                                                                       |
+| 📊 Data Analytics | microsoft-fabric, fabric-notebook-publish, data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation                                                                                                                                                                                                         |
 | 📝 Docs & Writing | markdown-mermaid, lint-clean-markdown, ascii-art-alignment, academic-research, practitioner-research, research-project-scaffold, creative-writing, grant-writing, localization, api-documentation, cross-cultural-collaboration, citation-management, literature-review, dissertation-defense, book-publishing, documentation-quality-assurance |
 | 🎨 Visual & Audio | svg-graphics, image-handling, graphic-design, gamma-presentations, text-to-speech, pptx-generation, slide-design, visual-memory, ai-character-reference-generation                                                                                                                                                                              |
 | 💼 Business       | business-analysis, alex-effort-estimation, executive-storytelling                                                                                                                                                                                                                                                                               |
