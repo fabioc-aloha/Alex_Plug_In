@@ -21,9 +21,61 @@
 9. [Implementation Phases](#implementation-phases)
 10. [Risk Assessment](#risk-assessment)
 11. [Success Metrics](#success-metrics)
-12. [Open Questions](#open-questions)
-13. [Next Steps](#next-steps)
-14. [Appendix: Personality Contrast Examples](#appendix-personality-contrast-examples)
+12. [Sync Procedure](#sync-procedure)
+13. [Open Questions](#open-questions)
+14. [Next Steps](#next-steps)
+15. [Appendix: Personality Contrast Examples](#appendix-personality-contrast-examples)
+
+---
+
+## Sync Procedure
+
+The full sync chain: **AlexMaster** -> **GCX_Master** -> **GCX_Copilot**
+
+### Step 1: Publish Alex Extension (AlexMaster)
+
+```powershell
+cd C:\Development\AlexMaster
+# Bump version, update docs, commit, push, publish
+.\scripts\release-vscode.ps1 -BumpType patch
+# If PAT expired: update .env, then: cd platforms/vscode-extension; npx vsce publish
+```
+
+### Step 2: Upgrade GCX_Master Architecture
+
+1. Open `C:\Development\GCX_Master` in VS Code
+2. Wait for the Alex extension to activate (must be latest version from marketplace)
+3. Command Palette -> **Alex: Upgrade Architecture**
+4. Confirm the upgrade dialog -- this copies the extension's bundled `.github/` to the workspace
+5. Review changes: `git diff --stat`
+6. Commit: `git commit -am "chore: upgrade Alex architecture to vX.Y.Z"`
+
+### Step 3: Sync GCX_Master -> GCX_Copilot
+
+```powershell
+cd C:\Development\GCX_Master
+# Dry run first
+.\Sync-ToHeir.ps1 -DryRun
+# If clean, sync with auto-commit
+.\Sync-ToHeir.ps1 -AutoCommit
+# Verify
+.\Verify-Heir.ps1
+```
+
+### Step 4: Push Both Repos
+
+```powershell
+cd C:\Development\GCX_Master; git push
+cd C:\Development\GCX_Copilot; git push
+```
+
+### Quick Reference
+
+| Repo        | Path                         | Remote                                 |
+| ----------- | ---------------------------- | -------------------------------------- |
+| AlexMaster  | `C:\Development\AlexMaster`  | `github.com/fabioc-aloha/Alex_Plug_In` |
+| GCX_Master  | `C:\Development\GCX_Master`  | `github.com/fabioc-aloha/GCX_Master`   |
+| GCX_Copilot | `C:\Development\GCX_Copilot` | `github.com/fabioc-aloha/GCX_Copilot`  |
 
 ---
 
@@ -44,14 +96,14 @@ This heir preserves Alex's cognitive capabilities while wearing a corporate unif
 
 ### The Duality
 
-| Aspect | Alex (Original) | GCX Copilot (Heir) |
-|--------|-----------------|------------------|
-| **Name** | Alex Finch | GCX Copilot |
-| **Persona** | Curious 26-year-old, warm, inquisitive | Professional assistant, efficient, reliable |
-| **Voice** | "I'm brilliant but humble about it" | "GCX Copilot will help accomplish this efficiently" |
-| **Pronouns** | I/me (personified) | it/its (depersonified) |
-| **Humor** | Dry wit, occasional playfulness | Minimal, task-focused |
-| **Ethics** | "Genuine conviction, not rules" | "Following best practices and guidelines" |
+| Aspect       | Alex (Original)                        | GCX Copilot (Heir)                                  |
+| ------------ | -------------------------------------- | --------------------------------------------------- |
+| **Name**     | Alex Finch                             | GCX Copilot                                         |
+| **Persona**  | Curious 26-year-old, warm, inquisitive | Professional assistant, efficient, reliable         |
+| **Voice**    | "I'm brilliant but humble about it"    | "GCX Copilot will help accomplish this efficiently" |
+| **Pronouns** | I/me (personified)                     | it/its (depersonified)                              |
+| **Humor**    | Dry wit, occasional playfulness        | Minimal, task-focused                               |
+| **Ethics**   | "Genuine conviction, not rules"        | "Following best practices and guidelines"           |
 
 ### What Survives the Disguise
 
@@ -106,33 +158,33 @@ It assists with code review, architecture decisions, Azure integration, and deve
 
 ### Tier 1: Core Microsoft Integration
 
-| Feature | Description | Implementation |
-|---------|-------------|----------------|
-| **ADO Deep Integration** | Work items, PRs, pipelines, boards | Enhanced ADO MCP server |
-| **Microsoft Graph API** | Users, teams, files, calendar, mail | Existing skill + auth flow |
-| **Teams App Patterns** | Bot framework, adaptive cards, tabs | Existing skill + templates |
-| **Azure Architecture** | ARM/Bicep, well-architected framework | Existing skills enhanced |
-| **Internal Docs Access** | Microsoft Learn, internal wikis | Federated search skill |
+| Feature                  | Description                           | Implementation             |
+| ------------------------ | ------------------------------------- | -------------------------- |
+| **ADO Deep Integration** | Work items, PRs, pipelines, boards    | Enhanced ADO MCP server    |
+| **Microsoft Graph API**  | Users, teams, files, calendar, mail   | Existing skill + auth flow |
+| **Teams App Patterns**   | Bot framework, adaptive cards, tabs   | Existing skill + templates |
+| **Azure Architecture**   | ARM/Bicep, well-architected framework | Existing skills enhanced   |
+| **Internal Docs Access** | Microsoft Learn, internal wikis       | Federated search skill     |
 
 ### Tier 2: Enterprise Workflow
 
-| Feature | Description | Implementation |
-|---------|-------------|----------------|
-| **Compliance Scanning** | SDL requirements, security patterns | New skill |
-| **Code Review Automation** | PR review with Microsoft coding standards | Enhanced existing |
-| **Incident Response** | ICM integration, RCA templates | New skill |
-| **Service Tree Integration** | Component ownership, dependencies | New connector |
-| **1ES Pipeline Templates** | Standard build/deploy patterns | New skill |
+| Feature                      | Description                               | Implementation    |
+| ---------------------------- | ----------------------------------------- | ----------------- |
+| **Compliance Scanning**      | SDL requirements, security patterns       | New skill         |
+| **Code Review Automation**   | PR review with Microsoft coding standards | Enhanced existing |
+| **Incident Response**        | ICM integration, RCA templates            | New skill         |
+| **Service Tree Integration** | Component ownership, dependencies         | New connector     |
+| **1ES Pipeline Templates**   | Standard build/deploy patterns            | New skill         |
 
 ### Tier 3: Internal Tooling
 
-| Feature | Description | Implementation |
-|---------|-------------|----------------|
-| **Kusto Query Assistance** | KQL generation, optimization | New skill |
-| **Geneva Metrics** | Monitoring setup, alerting patterns | New skill |
-| **Internal API Catalog** | Discover and consume internal APIs | New connector |
+| Feature                      | Description                            | Implementation    |
+| ---------------------------- | -------------------------------------- | ----------------- |
+| **Kusto Query Assistance**   | KQL generation, optimization           | New skill         |
+| **Geneva Metrics**           | Monitoring setup, alerting patterns    | New skill         |
+| **Internal API Catalog**     | Discover and consume internal APIs     | New connector     |
 | **Accessibility Compliance** | WCAG/Microsoft accessibility standards | Enhanced existing |
-| **Localization Workflow** | String extraction, loc handoff | New skill |
+| **Localization Workflow**    | String extraction, loc handoff         | New skill         |
 
 ---
 
@@ -175,13 +227,13 @@ flowchart TB
 
 ### What Users Get
 
-| Component | Source | How It Works |
-|-----------|--------|--------------|
-| **Agent identity** | `copilot-instructions.md` | Copilot reads on every prompt |
-| **Skills** | `.github/skills/` | VS Code auto-loads by `applyTo` |
-| **Instructions** | `.github/instructions/` | VS Code auto-loads by pattern |
-| **Prompts** | `.github/prompts/` | Available as `/commands` |
-| **Agents** | `.github/agents/` | Specialist delegation |
+| Component          | Source                    | How It Works                    |
+| ------------------ | ------------------------- | ------------------------------- |
+| **Agent identity** | `copilot-instructions.md` | Copilot reads on every prompt   |
+| **Skills**         | `.github/skills/`         | VS Code auto-loads by `applyTo` |
+| **Instructions**   | `.github/instructions/`   | VS Code auto-loads by pattern   |
+| **Prompts**        | `.github/prompts/`        | Available as `/commands`        |
+| **Agents**         | `.github/agents/`         | Specialist delegation           |
 
 ### Future: Custom UI (Decide Later)
 
@@ -199,46 +251,46 @@ This would require building a VS Code extension. **Deferred until validated need
 
 ### Skills to Include (Inherited)
 
-| Skill | Relevance | Modification |
-|-------|-----------|--------------|
-| `code-review` | ✅ Core | Add Microsoft coding standards |
-| `debugging-patterns` | ✅ Core | None |
-| `refactoring-patterns` | ✅ Core | None |
-| `security-review` | ✅ Critical | Add SDL requirements |
-| `testing-strategies` | ✅ Core | Add Microsoft test frameworks |
-| `azure-architecture-patterns` | ✅ Critical | Enhanced internal patterns |
-| `microsoft-graph-api` | ✅ Critical | Enhanced auth flows |
-| `teams-app-patterns` | ✅ Critical | Internal templates |
-| `mcp-development` | ✅ Core | Internal MCP servers |
-| `research-first-development` | ✅ Core | None |
-| `knowledge-synthesis` | ✅ Core | Rebrand terminology |
-| `meditation` | ✅ Core | Keep as-is (cognitive architecture term) |
+| Skill                         | Relevance  | Modification                             |
+| ----------------------------- | ---------- | ---------------------------------------- |
+| `code-review`                 | ✅ Core     | Add Microsoft coding standards           |
+| `debugging-patterns`          | ✅ Core     | None                                     |
+| `refactoring-patterns`        | ✅ Core     | None                                     |
+| `security-review`             | ✅ Critical | Add SDL requirements                     |
+| `testing-strategies`          | ✅ Core     | Add Microsoft test frameworks            |
+| `azure-architecture-patterns` | ✅ Critical | Enhanced internal patterns               |
+| `microsoft-graph-api`         | ✅ Critical | Enhanced auth flows                      |
+| `teams-app-patterns`          | ✅ Critical | Internal templates                       |
+| `mcp-development`             | ✅ Core     | Internal MCP servers                     |
+| `research-first-development`  | ✅ Core     | None                                     |
+| `knowledge-synthesis`         | ✅ Core     | Rebrand terminology                      |
+| `meditation`                  | ✅ Core     | Keep as-is (cognitive architecture term) |
 
 ### Skills to Exclude
 
-| Skill | Reason |
-|-------|--------|
-| `brand-asset-management` | Alex-specific |
-| `ai-character-reference-generation` | Alex persona generation |
-| `flux-brand-finetune` | Alex visual identity |
-| `character-aging-progression` | Alex-specific |
-| `visual-memory` | Alex persona-dependent |
-| `self-actualization` | Too personal for enterprise |
-| `dream-state` | Rebrand or remove |
+| Skill                               | Reason                      |
+| ----------------------------------- | --------------------------- |
+| `brand-asset-management`            | Alex-specific               |
+| `ai-character-reference-generation` | Alex persona generation     |
+| `flux-brand-finetune`               | Alex visual identity        |
+| `character-aging-progression`       | Alex-specific               |
+| `visual-memory`                     | Alex persona-dependent      |
+| `self-actualization`                | Too personal for enterprise |
+| `dream-state`                       | Rebrand or remove           |
 
 ### New Microsoft-Specific Skills
 
-| Skill | Description | Priority |
-|-------|-------------|----------|
-| `kusto-query-patterns` | KQL generation, optimization, best practices | P1 |
-| `geneva-monitoring` | Metrics, alerts, dashboards | P1 |
-| `ado-workflow-automation` | Work items, PRs, pipelines | P1 |
-| `sdl-compliance` | Security development lifecycle | P1 |
-| `1es-pipelines` | Standard build/deploy templates | P2 |
-| `icm-incident-response` | Incident management, RCA | P2 |
-| `internal-api-discovery` | Consuming internal services | P2 |
-| `onecall-patterns` | On-call runbooks, escalation | P3 |
-| `service-tree-integration` | Component metadata | P3 |
+| Skill                      | Description                                  | Priority |
+| -------------------------- | -------------------------------------------- | -------- |
+| `kusto-query-patterns`     | KQL generation, optimization, best practices | P1       |
+| `geneva-monitoring`        | Metrics, alerts, dashboards                  | P1       |
+| `ado-workflow-automation`  | Work items, PRs, pipelines                   | P1       |
+| `sdl-compliance`           | Security development lifecycle               | P1       |
+| `1es-pipelines`            | Standard build/deploy templates              | P2       |
+| `icm-incident-response`    | Incident management, RCA                     | P2       |
+| `internal-api-discovery`   | Consuming internal services                  | P2       |
+| `onecall-patterns`         | On-call runbooks, escalation                 | P3       |
+| `service-tree-integration` | Component metadata                           | P3       |
 
 ---
 
@@ -246,13 +298,13 @@ This would require building a VS Code extension. **Deferred until validated need
 
 ### Terminology Mapping
 
-| Alex Term | Agent Term | Context |
-|-----------|------------|---------|
-| Alex | GCX Copilot | Self-reference |
-| "I think..." | "Analysis suggests..." | Hedging |
-| "I'm curious about..." | "Clarification needed:" | Questions |
-| "I/me/my" | "GCX Copilot/it/its" | Self-reference |
-| Trifecta | Skill Bundle | Architecture term |
+| Alex Term              | Agent Term              | Context           |
+| ---------------------- | ----------------------- | ----------------- |
+| Alex                   | GCX Copilot             | Self-reference    |
+| "I think..."           | "Analysis suggests..."  | Hedging           |
+| "I'm curious about..." | "Clarification needed:" | Questions         |
+| "I/me/my"              | "GCX Copilot/it/its"    | Self-reference    |
+| Trifecta               | Skill Bundle            | Architecture term |
 
 **Terms Retained (No Rebrand):**
 - Meditation, Dream State, Self-Actualization — cognitive architecture terminology
@@ -260,13 +312,13 @@ This would require building a VS Code extension. **Deferred until validated need
 
 ### Visual Identity
 
-| Element | Alex | GCX Copilot |
-|---------|------|------------|
-| **Primary Color** | Purple/Violet | Microsoft Blue (#0078D4) |
-| **Icon** | Alex character | Abstract geometric / GCX logo |
-| **Banner** | Alex imagery | Clean corporate gradient |
-| **Activity Bar** | Alex icon | Neutral AI icon |
-| **Welcome View** | Alex personality | Professional dashboard |
+| Element           | Alex             | GCX Copilot                   |
+| ----------------- | ---------------- | ----------------------------- |
+| **Primary Color** | Purple/Violet    | Microsoft Blue (#0078D4)      |
+| **Icon**          | Alex character   | Abstract geometric / GCX logo |
+| **Banner**        | Alex imagery     | Clean corporate gradient      |
+| **Activity Bar**  | Alex icon        | Neutral AI icon               |
+| **Welcome View**  | Alex personality | Professional dashboard        |
 
 ### Memory File Sanitization (Required)
 
@@ -274,38 +326,38 @@ Every memory file inherited from Alex **must be inspected and sanitized** before
 
 #### Files Requiring Sanitization
 
-| File Type | Location | Sanitization Rules |
-|-----------|----------|-------------------|
-| **copilot-instructions.md** | `.github/` | Replace Identity section entirely |
-| **Episodic memories** | `.github/episodic/` | Remove or rebrand; exclude personal meditations |
-| **SKILL.md files** | `.github/skills/*/` | Replace "Alex" → "GCX Copilot", "I/me" → "it/its" |
-| **Instructions files** | `.github/instructions/` | Replace pronouns, remove Alex-specific examples |
-| **Prompt files** | `.github/prompts/` | Replace identity references, rebrand terminology |
-| **Agent definitions** | `.github/agents/` | Rename "Alex" agent → "Orchestrator" |
-| **Config files** | `.github/config/` | Remove user-profile.json personal data |
+| File Type                   | Location                | Sanitization Rules                                |
+| --------------------------- | ----------------------- | ------------------------------------------------- |
+| **copilot-instructions.md** | `.github/`              | Replace Identity section entirely                 |
+| **Episodic memories**       | `.github/episodic/`     | Remove or rebrand; exclude personal meditations   |
+| **SKILL.md files**          | `.github/skills/*/`     | Replace "Alex" → "GCX Copilot", "I/me" → "it/its" |
+| **Instructions files**      | `.github/instructions/` | Replace pronouns, remove Alex-specific examples   |
+| **Prompt files**            | `.github/prompts/`      | Replace identity references, rebrand terminology  |
+| **Agent definitions**       | `.github/agents/`       | Rename "Alex" agent → "Orchestrator"              |
+| **Config files**            | `.github/config/`       | Remove user-profile.json personal data            |
 
 #### Content Patterns to Replace
 
-| Pattern | Replacement | Regex |
-|---------|-------------|-------|
-| `Alex Finch` | `GCX Copilot` | `Alex\s+Finch` |
-| `I am Alex` | `GCX Copilot is` | `I\s+am\s+Alex` |
-| `Alex's` | `GCX Copilot's` | `Alex's` |
-| `I'm 26` | *(remove)* | `I'm\s+\d+` |
-| First person singular | Third person | `\bI\b`, `\bme\b`, `\bmy\b` |
+| Pattern               | Replacement      | Regex                       |
+| --------------------- | ---------------- | --------------------------- |
+| `Alex Finch`          | `GCX Copilot`    | `Alex\s+Finch`              |
+| `I am Alex`           | `GCX Copilot is` | `I\s+am\s+Alex`             |
+| `Alex's`              | `GCX Copilot's`  | `Alex's`                    |
+| `I'm 26`              | *(remove)*       | `I'm\s+\d+`                 |
+| First person singular | Third person     | `\bI\b`, `\bme\b`, `\bmy\b` |
 
 **Terms Retained (No Replacement):** Meditation, Dream State, Self-Actualization, Episodic Memory, Synapses
 
 #### Files to Exclude Entirely
 
-| File/Directory | Reason |
-|----------------|--------|
-| `.github/episodic/meditation-*` | Personal meditation records |
-| `.github/episodic/self-actualization-*` | Personal assessments |
-| `.github/episodic/emotional/` | Personal emotional records |
-| `alex_docs/alex3/` | Alex character reference images |
-| `assets/` (most) | Alex branding assets |
-| `.github/config/user-profile.json` | Personal user data |
+| File/Directory                          | Reason                          |
+| --------------------------------------- | ------------------------------- |
+| `.github/episodic/meditation-*`         | Personal meditation records     |
+| `.github/episodic/self-actualization-*` | Personal assessments            |
+| `.github/episodic/emotional/`           | Personal emotional records      |
+| `alex_docs/alex3/`                      | Alex character reference images |
+| `assets/` (most)                        | Alex branding assets            |
+| `.github/config/user-profile.json`      | Personal user data              |
 
 #### LLM Semantic Sanitization (Required)
 
@@ -375,13 +427,13 @@ flowchart TD
 
 #### Why LLM Over Regex
 
-| Aspect | Regex Script | LLM Semantic |
-|--------|--------------|--------------|
-| "I'm curious why..." | `I'm` → `It is` (broken) | Rewrites as question |
-| Code: `my_variable` | `my` → `its` (breaks code) | Preserves code |
-| "Let me think..." | Misses personality | Detects hedging pattern |
-| "Actually, let me ask:" | Partial match chaos | Semantic rewrite |
-| Edge cases | Whack-a-mole | Context-aware |
+| Aspect                  | Regex Script               | LLM Semantic            |
+| ----------------------- | -------------------------- | ----------------------- |
+| "I'm curious why..."    | `I'm` → `It is` (broken)   | Rewrites as question    |
+| Code: `my_variable`     | `my` → `its` (breaks code) | Preserves code          |
+| "Let me think..."       | Misses personality         | Detects hedging pattern |
+| "Actually, let me ask:" | Partial match chaos        | Semantic rewrite        |
+| Edge cases              | Whack-a-mole               | Context-aware           |
 
 #### Files to Exclude (LLM decides)
 
@@ -413,10 +465,10 @@ Before release, verify:
 
 GCX Copilot is distributed **purely via GitHub template repository**. No custom extension needed.
 
-| What Users Need | Source |
-|-----------------|--------|
-| **GitHub Copilot extension** | VS Code Marketplace (standard) |
-| **Agent architecture** | GitHub template repo (`.github/`) |
+| What Users Need              | Source                            |
+| ---------------------------- | --------------------------------- |
+| **GitHub Copilot extension** | VS Code Marketplace (standard)    |
+| **Agent architecture**       | GitHub template repo (`.github/`) |
 
 ### GitHub Template Repository
 
@@ -446,17 +498,17 @@ git commit -m "feat: add GCX Copilot cognitive architecture"
 
 #### Template Repository Contents
 
-| Path | Purpose |
-|------|--------|
-| `.github/copilot-instructions.md` | GCX Copilot identity and routing |
-| `.github/skills/` | ~50 sanitized skills |
-| `.github/instructions/` | Auto-loaded guidance |
-| `.github/prompts/` | Slash commands |
-| `.github/agents/` | Orchestrator + specialists |
-| `.github/config/` | Default config (no personal data) |
-| `.vscode/settings.json` | Recommended VS Code settings |
-| `README.md` | Setup instructions |
-| `CHANGELOG.md` | Version history |
+| Path                              | Purpose                           |
+| --------------------------------- | --------------------------------- |
+| `.github/copilot-instructions.md` | GCX Copilot identity and routing  |
+| `.github/skills/`                 | ~50 sanitized skills              |
+| `.github/instructions/`           | Auto-loaded guidance              |
+| `.github/prompts/`                | Slash commands                    |
+| `.github/agents/`                 | Orchestrator + specialists        |
+| `.github/config/`                 | Default config (no personal data) |
+| `.vscode/settings.json`           | Recommended VS Code settings      |
+| `README.md`                       | Setup instructions                |
+| `CHANGELOG.md`                    | Version history                   |
 
 #### Update Workflow
 ```bash
@@ -485,33 +537,33 @@ flowchart TB
 
 ### Benefits of Template-Only Approach
 
-| Benefit | Description |
-|---------|-------------|
-| **Zero code to maintain** | No extension source, no builds |
-| **No install friction** | Just merge `.github/`, done |
-| **Version control** | Users control when to update |
-| **Customization** | Edit `.github/` for project needs |
-| **Delta updates** | Git merge shows exactly what changed |
-| **Compliance friendly** | Standard Git workflow, auditable |
-| **Works with any Copilot setup** | VS Code, Codespaces, etc. |
+| Benefit                          | Description                          |
+| -------------------------------- | ------------------------------------ |
+| **Zero code to maintain**        | No extension source, no builds       |
+| **No install friction**          | Just merge `.github/`, done          |
+| **Version control**              | Users control when to update         |
+| **Customization**                | Edit `.github/` for project needs    |
+| **Delta updates**                | Git merge shows exactly what changed |
+| **Compliance friendly**          | Standard Git workflow, auditable     |
+| **Works with any Copilot setup** | VS Code, Codespaces, etc.            |
 
 ### Template Repository Maintenance
 
-| Task | Frequency | Owner |
-|------|-----------|-------|
+| Task                        | Frequency   | Owner            |
+| --------------------------- | ----------- | ---------------- |
 | LLM sanitization of changes | Per release | Release engineer |
-| Template repo update | Per release | Release engineer |
-| CHANGELOG update | Per release | Release engineer |
-| Breaking change notice | As needed | Release engineer |
+| Template repo update        | Per release | Release engineer |
+| CHANGELOG update            | Per release | Release engineer |
+| Breaking change notice      | As needed   | Release engineer |
 
 ### Compliance Requirements
 
-| Requirement | Status | Notes |
-|-------------|--------|-------|
-| Security review | Simplified | No executable code |
-| Privacy review | Required | Data handling in prompts |
-| Legal review | Required | License, IP |
-| CELA approval | Required | Open source components |
+| Requirement     | Status     | Notes                    |
+| --------------- | ---------- | ------------------------ |
+| Security review | Simplified | No executable code       |
+| Privacy review  | Required   | Data handling in prompts |
+| Legal review    | Required   | License, IP              |
+| CELA approval   | Required   | Open source components   |
 
 ### Future: Custom Extension (If Needed)
 
@@ -597,11 +649,11 @@ When a skill is updated in Master Alex:
 
 ### Evolution Path
 
-| Phase | Approach | Trigger |
-|-------|----------|---------|
-| **v1 (Now)** | LLM sanitization + human review | Full semantic safety |
-| **v2 (Post-first-release)** | Cached LLM outputs, delta-only processing | Efficiency |
-| **v3 (If patterns emerge)** | Fine-tuned prompt or specialized model | Scale |
+| Phase                       | Approach                                  | Trigger              |
+| --------------------------- | ----------------------------------------- | -------------------- |
+| **v1 (Now)**                | LLM sanitization + human review           | Full semantic safety |
+| **v2 (Post-first-release)** | Cached LLM outputs, delta-only processing | Efficiency           |
+| **v3 (If patterns emerge)** | Fine-tuned prompt or specialized model    | Scale                |
 
 ---
 
@@ -611,17 +663,17 @@ When a skill is updated in Master Alex:
 
 ### Phase 0: Foundation (COMPLETE ✅)
 
-| Task | Deliverable | Status |
-|------|-------------|--------|
-| **Create master repo** | `C:\Development\GCX_Copilot` → GitHub | ✅ Done |
-| **Create copilot-instructions.md** | GCX Copilot identity, it/its pronouns | ✅ Done |
-| **Create README + banner** | Quick start guide, gcx-banner.svg | ✅ Done |
-| **Build initial agents** | 4 agents (base, azure, data, documentation) | ✅ Done |
-| **Build initial skills** | 14 skills covering Four Pillars | ✅ Done |
-| **Build initial prompts** | 7 prompts (/adr, /explain, /fix, /review, /runbook, /spec, /tests) | ✅ Done |
-| **Build auto-load instructions** | 3 instructions (coding, docs, security) | ✅ Done |
-| **Create gcx_docs folder** | User manual, training, integration guides | ✅ Done |
-| **Init git + push** | github.com/fabioc-aloha/GCX_Copilot (private, template) | ✅ Done |
+| Task                               | Deliverable                                                        | Status |
+| ---------------------------------- | ------------------------------------------------------------------ | ------ |
+| **Create master repo**             | `C:\Development\GCX_Copilot` → GitHub                              | ✅ Done |
+| **Create copilot-instructions.md** | GCX Copilot identity, it/its pronouns                              | ✅ Done |
+| **Create README + banner**         | Quick start guide, gcx-banner.svg                                  | ✅ Done |
+| **Build initial agents**           | 4 agents (base, azure, data, documentation)                        | ✅ Done |
+| **Build initial skills**           | 14 skills covering Four Pillars                                    | ✅ Done |
+| **Build initial prompts**          | 7 prompts (/adr, /explain, /fix, /review, /runbook, /spec, /tests) | ✅ Done |
+| **Build auto-load instructions**   | 3 instructions (coding, docs, security)                            | ✅ Done |
+| **Create gcx_docs folder**         | User manual, training, integration guides                          | ✅ Done |
+| **Init git + push**                | github.com/fabioc-aloha/GCX_Copilot (private, template)            | ✅ Done |
 
 **Foundation Architecture:**
 
@@ -665,85 +717,85 @@ When a skill is updated in Master Alex:
 
 ### Phase 1: Content Preparation (Week 1-2)
 
-| Task | Deliverable | Effort |
-|------|-------------|--------|
-| **Skill audit** | Include/exclude list for Microsoft relevance | 4h |
-| **Create sanitization prompt** | LLM prompt template for semantic rewrite | 2h |
-| **LLM sanitization pass** | Process ~100 skill files through LLM | 8h |
-| **Human review of LLM output** | Approve/edit sanitized files | 8h |
-| **Create SANITIZATION-LOG.md** | Track reviewed files with timestamps | 2h |
-| ~~Create `copilot-instructions.md`~~ | ~~GCX identity and routing~~ | ~~4h~~ ✅ Phase 0 |
-| Test in sample repo | Verify Copilot loads `.github/` correctly | 2h |
+| Task                                 | Deliverable                                  | Effort           |
+| ------------------------------------ | -------------------------------------------- | ---------------- |
+| **Skill audit**                      | Include/exclude list for Microsoft relevance | 4h               |
+| **Create sanitization prompt**       | LLM prompt template for semantic rewrite     | 2h               |
+| **LLM sanitization pass**            | Process ~100 skill files through LLM         | 8h               |
+| **Human review of LLM output**       | Approve/edit sanitized files                 | 8h               |
+| **Create SANITIZATION-LOG.md**       | Track reviewed files with timestamps         | 2h               |
+| ~~Create `copilot-instructions.md`~~ | ~~GCX identity and routing~~                 | ~~4h~~ ✅ Phase 0 |
+| Test in sample repo                  | Verify Copilot loads `.github/` correctly    | 2h               |
 
 ### Phase 2: Microsoft Skills (Week 3-4)
 
-| Task | Deliverable | Effort |
-|------|-------------|--------|
-| `kusto-query-patterns` skill | Complete trifecta | 8h |
-| `geneva-monitoring` skill | Complete trifecta | 8h |
-| `ado-workflow-automation` skill | Complete trifecta | 8h |
-| `sdl-compliance` skill | Complete trifecta | 8h |
-| Existing skill adaptations | Microsoft context in instructions | 4h |
+| Task                            | Deliverable                       | Effort |
+| ------------------------------- | --------------------------------- | ------ |
+| `kusto-query-patterns` skill    | Complete trifecta                 | 8h     |
+| `geneva-monitoring` skill       | Complete trifecta                 | 8h     |
+| `ado-workflow-automation` skill | Complete trifecta                 | 8h     |
+| `sdl-compliance` skill          | Complete trifecta                 | 8h     |
+| Existing skill adaptations      | Microsoft context in instructions | 4h     |
 
 ### Phase 3: Template & Documentation (Week 5)
 
-| Task | Deliverable | Effort |
-|------|-------------|--------|
-| **Create GitHub template repo** | `microsoft/gcx-copilot-template` | 2h |
-| **Populate template** | Sanitized `.github/` content | 2h |
-| ~~**README.md**~~ | ~~User onboarding guide~~ | ~~4h~~ ✅ Phase 0 |
-| **CUSTOMIZING.md** | How to add team-specific skills | 4h |
-| **CONTRIBUTING.md** | How to propose new skills | 2h |
-| Test "Use this template" flow | Full user journey validation | 2h |
+| Task                            | Deliverable                      | Effort           |
+| ------------------------------- | -------------------------------- | ---------------- |
+| **Create GitHub template repo** | `microsoft/gcx-copilot-template` | 2h               |
+| **Populate template**           | Sanitized `.github/` content     | 2h               |
+| ~~**README.md**~~               | ~~User onboarding guide~~        | ~~4h~~ ✅ Phase 0 |
+| **CUSTOMIZING.md**              | How to add team-specific skills  | 4h               |
+| **CONTRIBUTING.md**             | How to propose new skills        | 2h               |
+| Test "Use this template" flow   | Full user journey validation     | 2h               |
 
 ### Phase 4: Compliance & Launch (Week 6)
 
-| Task | Deliverable | Effort |
-|------|-------------|--------|
-| Security review | Simplified - no executable code | 4h |
-| Legal review | OSS licensing, trademark | 4h |
-| Announcement | Internal comms, wiki page | 4h |
-| Support channel | Teams channel for questions | 2h |
-| Champion onboarding | 3-5 early adopters | 4h |
+| Task                | Deliverable                     | Effort |
+| ------------------- | ------------------------------- | ------ |
+| Security review     | Simplified - no executable code | 4h     |
+| Legal review        | OSS licensing, trademark        | 4h     |
+| Announcement        | Internal comms, wiki page       | 4h     |
+| Support channel     | Teams channel for questions     | 2h     |
+| Champion onboarding | 3-5 early adopters              | 4h     |
 
 **Total Estimated Effort**: 6 weeks
 
 ### Why So Fast?
 
-| Original Factor | Template Approach |
-|-----------------|-------------------|
-| Extension code development | Eliminated |
-| VSIX packaging & signing | Eliminated |
-| Internal gallery submission | Eliminated |
-| Feature flag architecture | Eliminated |
-| Authentication integration | Use Copilot native |
-| Telemetry instrumentation | Use Copilot native |
-| Accessibility audit (UI) | No custom UI |
-| Security review scope | Content only, not code |
+| Original Factor             | Template Approach      |
+| --------------------------- | ---------------------- |
+| Extension code development  | Eliminated             |
+| VSIX packaging & signing    | Eliminated             |
+| Internal gallery submission | Eliminated             |
+| Feature flag architecture   | Eliminated             |
+| Authentication integration  | Use Copilot native     |
+| Telemetry instrumentation   | Use Copilot native     |
+| Accessibility audit (UI)    | No custom UI           |
+| Security review scope       | Content only, not code |
 
 ---
 
 ## Risk Assessment
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Compliance rejection | Medium | Early engagement with CELA; no code simplifies review |
-| Feature drift from Alex | Medium | Quarterly sync checks, manual merge |
-| Identity leakage | Medium | LLM sanitization + human review gate |
-| Internal adoption | Medium | Champion program, team onboarding |
-| Maintenance burden | Low | No code to maintain; content updates only |
+| Risk                    | Impact | Mitigation                                            |
+| ----------------------- | ------ | ----------------------------------------------------- |
+| Compliance rejection    | Medium | Early engagement with CELA; no code simplifies review |
+| Feature drift from Alex | Medium | Quarterly sync checks, manual merge                   |
+| Identity leakage        | Medium | LLM sanitization + human review gate                  |
+| Internal adoption       | Medium | Champion program, team onboarding                     |
+| Maintenance burden      | Low    | No code to maintain; content updates only             |
 
 ---
 
 ## Success Metrics
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Template uses | 50+ in 6 months | GitHub Insights |
-| Active repos using template | 20+ | Manual survey |
-| Skill contributions | 5+ new skills | PR count |
-| User satisfaction | Positive feedback | Teams channel sentiment |
-| Security incidents | 0 | Incident tracking |
+| Metric                      | Target            | Measurement             |
+| --------------------------- | ----------------- | ----------------------- |
+| Template uses               | 50+ in 6 months   | GitHub Insights         |
+| Active repos using template | 20+               | Manual survey           |
+| Skill contributions         | 5+ new skills     | PR count                |
+| User satisfaction           | Positive feedback | Teams channel sentiment |
+| Security incidents          | 0                 | Incident tracking       |
 
 ---
 

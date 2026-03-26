@@ -1,14 +1,10 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
+    "github/episodic/peripheral/file-observations.json",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/architecture/LOADING-MECHANICS.md",
-    "alex_docs/operations/RAI-SAFETY-TEST-GUIDE.md",
-    "package-lock.json",
-    "package.json"
+    "alex_docs/platforms/GCX-AI-HEIR-PLAN.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1774489226834
+  "lastUpdated": 1774492598469
 }
