@@ -3,37 +3,15 @@
   "stalledFiles": [
     "github/copilot-instructions.md",
     "CHANGELOG.md",
-    "alex_docs/research/chart-gallery.html",
     "alex_docs/research/population.html",
-    "alex_docs/research/visuals.html",
-    "platforms/vscode-extension/package.json"
+    "alex_docs/research/visuals.html"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1774553747254
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.8.3.vsix",
-      "todoCount": 3,
-      "scannedAt": 1774553747254
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1774553747254
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1774553747254
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1774553747254
+      "scannedAt": 1774554773489
     }
   ],
-  "lastUpdated": 1774553747254
+  "lastUpdated": 1774554773489
 }

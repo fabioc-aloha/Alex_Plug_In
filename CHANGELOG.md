@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **copilot-instructions.md** -- 40 → 45 trifectas in routing table
 - **audit-architecture.cjs** -- Added 5 prompt aliases for new trifectas
 
+### Fixed
+
+- **Colorblind-safe palette enforcement** -- Replaced all charting colors across chart-gallery.html, visuals.html, population.html, dashboard-scaffold.cjs with Tableau 10 palette (`#4e79a7, #f28e2b, #e15759, #76b7b2, #59a14f, #edc948, #b07aa1, #ff9da7, #9c755f, #bab0ac`). Made mandatory in SKILL.md Module 3 and instruction Step 6.
+
 ---
 
 ## [6.8.2] - 2026-03-25

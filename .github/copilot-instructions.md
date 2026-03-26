@@ -27,10 +27,10 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.8.2 published to marketplace. 928 stale files archived, docs bumped. M365 heir synced (86 skills, 23 instructions). GCX sync procedure documented. Marketplace README updated (150 skills, 40 trifectas). VSCE version-lock prevents README-only republish -- bundled with next release. All quality gates pass, 231 tests, 150 skills, 40 trifectas.
+Recent: v6.8.3 compiled and locally installed. Data storytelling trifecta suite: 5 trifectas (data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation), 4 muscles, 24-chart interactive gallery. Colorblind-safe Tableau 10 palette enforced across all charting assets. All quality gates pass, 157 skills, 45 trifectas, 802 synapse connections, brain-qa 0 bugs.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-03-25
+Last Assessed: 2026-03-26
 
 ## User Profile
 

@@ -114,19 +114,35 @@ From `population.html` reference -- arrange visuals in absorption order:
 
 ## Module 3: Color Theory
 
-### Colorblind-Safe Palettes
+### Mandatory: Colorblind-Safe Palette
+
+All chart output MUST use a colorblind-safe palette. The canonical palette for all Alex charting skills is **Tableau 10**, verified against deuteranopia, protanopia, and tritanopia:
+
+```
+#4e79a7  Blue-Steel   (primary)
+#f28e2b  Orange
+#e15759  Coral
+#76b7b2  Teal
+#59a14f  Sage
+#edc948  Gold
+#b07aa1  Mauve
+#ff9da7  Rose
+#9c755f  Brown
+#bab0ac  Warm Gray
+```
 
 | Palette | Colors | Use Case |
 |---------|--------|----------|
-| **Categorical-8** | `#4e79a7, #f28e2b, #e15759, #76b7b2, #59a14f, #edc948, #b07aa1, #ff9da7` | Unordered categories (Tableau-inspired) |
+| **Categorical (default)** | First N colors from the canonical 10 above | Unordered categories |
 | **Sequential Blue** | `#deebf7 → #08519c` | Low-to-high numeric |
 | **Diverging RdBu** | `#b2182b → #f7f7f7 → #2166ac` | Above/below midpoint |
-| **Semantic Region** | Use consistent color for same category across all charts | Region, department, status |
+| **Semantic Region** | Consistent color per category across all charts on a page | Region, department, status |
 
-### Color Rules
+### Color Rules (Non-Negotiable)
 
 | Rule | Explanation |
 |------|------------|
+| **Always colorblind-safe** | Never use a palette that has not been tested for deuteranopia, protanopia, and tritanopia |
 | **Semantic consistency** | Same color = same meaning across all charts on a page |
 | **Highlight, don't decorate** | Use saturated color for the key data point; mute everything else |
 | **Sequential for ordered data** | Light-to-dark for low-to-high |
