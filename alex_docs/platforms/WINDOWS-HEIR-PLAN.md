@@ -240,63 +240,63 @@ This transforms Copilot Actions from a generic desktop automator into an **Alex-
 
 Each Alex capability is assessed for Windows Agent portability based on the MCP tool surface and Copilot Actions' file access model.
 
-| Capability | Category | Portability | Transport | Notes |
-|------------|----------|-------------|-----------|-------|
-| Global Knowledge Search | Knowledge | Ready Now | `alex_knowledge_search` MCP tool | Cross-project patterns and insights available immediately |
-| Global Knowledge Save | Knowledge | Ready Now | `alex_knowledge_save` MCP tool | Learning loop -- desktop interactions persist to global KB |
-| Memory Search | Knowledge | Ready Now | `alex_memory_search` MCP tool | Search skills, instructions, prompts, episodic, and global memory |
-| Architecture Status | Meta-Cognitive | Ready Now | `alex_architecture_status` MCP tool | Skill counts, trifectas, agents -- full inventory |
-| Synapse Health | Meta-Cognitive | Ready Now | `alex_synapse_health` MCP tool | Architecture integrity checks before trusting outputs |
-| Meditation Protocol | Meta-Cognitive | New MCP Tool | Expose as `alex_meditate` tool | Knowledge consolidation checkpoint -- summarize and save session state |
-| Self-Actualization | Meta-Cognitive | New MCP Tool | Expose as `alex_self_actualize` tool | Deep architecture assessment and growth planning |
-| Skill Catalog (150 skills) | Skills | File Access | Copilot Actions reads `~/.alex/` or workspace `.github/skills/` | Vision-based: agent reads SKILL.md files directly from disk |
-| Instruction Library (60+) | Skills | File Access | Copilot Actions reads `.github/instructions/` | Domain-specific rules available as reference documents |
-| Prompt Templates (26+) | Workflow | File Access | Copilot Actions reads `.github/prompts/` | Reusable workflow templates for desktop tasks |
-| Bootstrap Learning | Knowledge | New MCP Tool | Expose as `alex_bootstrap_learn` tool | Domain-agnostic knowledge acquisition for unfamiliar tasks |
-| Knowledge Synthesis | Knowledge | Partial | Via `alex_knowledge_search` + `alex_knowledge_save` | Cross-project pattern recognition works; trifecta routing does not |
-| Code Review | Development | File Access | Copilot Actions reads code files + `.github/instructions/code-review-guidelines.instructions.md` | Vision-based code review on desktop IDE screenshots |
-| Research-First Development | Workflow | File Access | Agent reads research workflow instructions | 4-dimension gap analysis before starting work |
-| Root Cause Analysis | Debugging | File Access | Agent reads RCA instruction | 5 Whys, binary search, timeline reconstruction |
-| Debugging Patterns | Development | File Access | Agent reads debugging instruction | Reproduce, isolate, hypothesize, fix |
-| Security Review | Security | File Access | Agent reads security-review instruction | OWASP Top 10, STRIDE, dependency audit |
-| AI Writing Avoidance | Writing | File Access | Agent reads writing instruction | Human-sounding content generation |
-| Brand Asset Management | Creative | File Access | Agent accesses `assets/` via known folders | Logo, icon, and banner management |
-| Image Generation (Replicate) | Creative | New MCP Tool | Expose as `alex_generate_image` tool | AI image generation via Replicate API |
-| Gamma Presentations | Productivity | Not Portable | Requires Gamma API + browser | Web-based service, not desktop-native |
-| MD to Word Conversion | Productivity | Partial | Copilot Actions can run CLI commands | Requires Pandoc installed on system |
-| Chat Participant (@alex) | VS Code | Not Portable | VS Code Extension API only | Platform-specific -- no equivalent in Agent Workspace |
-| Agent Modes (7 agents) | VS Code | Not Portable | VS Code agent framework only | Builder, Researcher, Validator, etc. are VS Code constructs |
-| Language Model Tools | VS Code | Not Portable | VS Code LM API only | Copilot Chat tool calling is extension-specific |
-| Slash Commands | VS Code | Not Portable | VS Code Chat API only | /meditate, /dream, /learn are chat-specific |
-| Graph API Integration | M365 | Not Portable | Teams/M365 runtime only | Declarative Agent + Graph connector |
-| Adaptive Cards | M365 | Not Portable | Teams rendering only | M365-specific UI surface |
-| Episodic Memory (session) | Memory | Built-in | Agent Workspace audit logs | Windows provides its own session logging |
-| Copilot Memory | Memory | Not Portable | GitHub Copilot API only | Cross-session memory is platform-specific |
-| Dream State Automation | Meta-Cognitive | New MCP Tool | Expose as `alex_dream` tool | Automated neural maintenance and consolidation |
+| Capability                   | Category       | Portability  | Transport                                                                                        | Notes                                                                  |
+| ---------------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| Global Knowledge Search      | Knowledge      | Ready Now    | `alex_knowledge_search` MCP tool                                                                 | Cross-project patterns and insights available immediately              |
+| Global Knowledge Save        | Knowledge      | Ready Now    | `alex_knowledge_save` MCP tool                                                                   | Learning loop -- desktop interactions persist to global KB             |
+| Memory Search                | Knowledge      | Ready Now    | `alex_memory_search` MCP tool                                                                    | Search skills, instructions, prompts, episodic, and global memory      |
+| Architecture Status          | Meta-Cognitive | Ready Now    | `alex_architecture_status` MCP tool                                                              | Skill counts, trifectas, agents -- full inventory                      |
+| Synapse Health               | Meta-Cognitive | Ready Now    | `alex_synapse_health` MCP tool                                                                   | Architecture integrity checks before trusting outputs                  |
+| Meditation Protocol          | Meta-Cognitive | New MCP Tool | Expose as `alex_meditate` tool                                                                   | Knowledge consolidation checkpoint -- summarize and save session state |
+| Self-Actualization           | Meta-Cognitive | New MCP Tool | Expose as `alex_self_actualize` tool                                                             | Deep architecture assessment and growth planning                       |
+| Skill Catalog (150 skills)   | Skills         | File Access  | Copilot Actions reads `~/.alex/` or workspace `.github/skills/`                                  | Vision-based: agent reads SKILL.md files directly from disk            |
+| Instruction Library (60+)    | Skills         | File Access  | Copilot Actions reads `.github/instructions/`                                                    | Domain-specific rules available as reference documents                 |
+| Prompt Templates (26+)       | Workflow       | File Access  | Copilot Actions reads `.github/prompts/`                                                         | Reusable workflow templates for desktop tasks                          |
+| Bootstrap Learning           | Knowledge      | New MCP Tool | Expose as `alex_bootstrap_learn` tool                                                            | Domain-agnostic knowledge acquisition for unfamiliar tasks             |
+| Knowledge Synthesis          | Knowledge      | Partial      | Via `alex_knowledge_search` + `alex_knowledge_save`                                              | Cross-project pattern recognition works; trifecta routing does not     |
+| Code Review                  | Development    | File Access  | Copilot Actions reads code files + `.github/instructions/code-review-guidelines.instructions.md` | Vision-based code review on desktop IDE screenshots                    |
+| Research-First Development   | Workflow       | File Access  | Agent reads research workflow instructions                                                       | 4-dimension gap analysis before starting work                          |
+| Root Cause Analysis          | Debugging      | File Access  | Agent reads RCA instruction                                                                      | 5 Whys, binary search, timeline reconstruction                         |
+| Debugging Patterns           | Development    | File Access  | Agent reads debugging instruction                                                                | Reproduce, isolate, hypothesize, fix                                   |
+| Security Review              | Security       | File Access  | Agent reads security-review instruction                                                          | OWASP Top 10, STRIDE, dependency audit                                 |
+| AI Writing Avoidance         | Writing        | File Access  | Agent reads writing instruction                                                                  | Human-sounding content generation                                      |
+| Brand Asset Management       | Creative       | File Access  | Agent accesses `assets/` via known folders                                                       | Logo, icon, and banner management                                      |
+| Image Generation (Replicate) | Creative       | New MCP Tool | Expose as `alex_generate_image` tool                                                             | AI image generation via Replicate API                                  |
+| Gamma Presentations          | Productivity   | Not Portable | Requires Gamma API + browser                                                                     | Web-based service, not desktop-native                                  |
+| MD to Word Conversion        | Productivity   | Partial      | Copilot Actions can run CLI commands                                                             | Requires Pandoc installed on system                                    |
+| Chat Participant (@alex)     | VS Code        | Not Portable | VS Code Extension API only                                                                       | Platform-specific -- no equivalent in Agent Workspace                  |
+| Agent Modes (7 agents)       | VS Code        | Not Portable | VS Code agent framework only                                                                     | Builder, Researcher, Validator, etc. are VS Code constructs            |
+| Language Model Tools         | VS Code        | Not Portable | VS Code LM API only                                                                              | Copilot Chat tool calling is extension-specific                        |
+| Slash Commands               | VS Code        | Not Portable | VS Code Chat API only                                                                            | /meditate, /dream, /learn are chat-specific                            |
+| Graph API Integration        | M365           | Not Portable | Teams/M365 runtime only                                                                          | Declarative Agent + Graph connector                                    |
+| Adaptive Cards               | M365           | Not Portable | Teams rendering only                                                                             | M365-specific UI surface                                               |
+| Episodic Memory (session)    | Memory         | Built-in     | Agent Workspace audit logs                                                                       | Windows provides its own session logging                               |
+| Copilot Memory               | Memory         | Not Portable | GitHub Copilot API only                                                                          | Cross-session memory is platform-specific                              |
+| Dream State Automation       | Meta-Cognitive | New MCP Tool | Expose as `alex_dream` tool                                                                      | Automated neural maintenance and consolidation                         |
 
 ### Portability Summary
 
-| Portability Level | Count | Description |
-|-------------------|-------|-------------|
-| **Ready Now** | 5 | Existing MCP tools -- register in ODR and go |
-| **New MCP Tool** | 5 | Requires adding new tools to `@alex/mcp-cognitive-tools` |
-| **File Access** | 10 | Copilot Actions reads Alex files via desktop vision/file access |
-| **Partial** | 2 | Some functionality works, some does not |
-| **Built-in** | 1 | Windows provides equivalent capability natively |
-| **Not Portable** | 7 | Platform-specific to VS Code or M365 -- no transport path |
-| **Total** | **30** | **23 of 30 capabilities (77%) are portable to Windows Agent** |
+| Portability Level | Count  | Description                                                     |
+| ----------------- | ------ | --------------------------------------------------------------- |
+| **Ready Now**     | 5      | Existing MCP tools -- register in ODR and go                    |
+| **New MCP Tool**  | 5      | Requires adding new tools to `@alex/mcp-cognitive-tools`        |
+| **File Access**   | 10     | Copilot Actions reads Alex files via desktop vision/file access |
+| **Partial**       | 2      | Some functionality works, some does not                         |
+| **Built-in**      | 1      | Windows provides equivalent capability natively                 |
+| **Not Portable**  | 7      | Platform-specific to VS Code or M365 -- no transport path       |
+| **Total**         | **30** | **23 of 30 capabilities (77%) are portable to Windows Agent**   |
 
 ### Priority for New MCP Tools
 
 If building new tools for Phase 2, prioritize in this order:
 
-| Priority | Tool | Rationale |
-|----------|------|-----------|
-| P0 | `alex_meditate` | Core cognitive protocol -- every heir should support checkpointing |
-| P1 | `alex_dream` | Automated maintenance keeps architecture healthy between sessions |
-| P1 | `alex_self_actualize` | Deep assessment enables growth on any platform |
-| P2 | `alex_bootstrap_learn` | Knowledge acquisition is platform-agnostic |
-| P3 | `alex_generate_image` | Creative capability via Replicate API -- nice to have on desktop |
+| Priority | Tool                   | Rationale                                                          |
+| -------- | ---------------------- | ------------------------------------------------------------------ |
+| P0       | `alex_meditate`        | Core cognitive protocol -- every heir should support checkpointing |
+| P1       | `alex_dream`           | Automated maintenance keeps architecture healthy between sessions  |
+| P1       | `alex_self_actualize`  | Deep assessment enables growth on any platform                     |
+| P2       | `alex_bootstrap_learn` | Knowledge acquisition is platform-agnostic                         |
+| P3       | `alex_generate_image`  | Creative capability via Replicate API -- nice to have on desktop   |
 
 ## Platform Comparison
 
