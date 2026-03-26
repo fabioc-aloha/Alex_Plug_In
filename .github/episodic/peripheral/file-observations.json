@@ -1,18 +1,20 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "ROADMAP-UNIFIED.md",
-    "platforms/m365-copilot/DEPLOYMENT-CHECKLIST.md",
-    "platforms/m365-copilot/package.json",
-    "platforms/m365-copilot/sync-m365.ps1"
+    "github/episodic/peripheral/file-observations.json",
+    "platforms/vscode-extension/README.md"
   ],
   "todoHotspots": [
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1774493044623
+      "scannedAt": 1774493207520
+    },
+    {
+      "file": "platforms/vscode-extension/README.md",
+      "todoCount": 1,
+      "scannedAt": 1774493207520
     }
   ],
-  "lastUpdated": 1774493044623
+  "lastUpdated": 1774493207520
 }

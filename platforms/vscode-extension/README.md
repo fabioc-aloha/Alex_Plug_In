@@ -34,7 +34,7 @@ Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, 
 | -------------------- | -------------------------- | -------------------------------------------- |
 | **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
 | **Trust**            | Rebuild context every time | Consistency through shared history           |
-| **Skills**           | You re-prompt from scratch | 136 pre-built skills, inheritable            |
+| **Skills**           | You re-prompt from scratch | 150 pre-built skills, inheritable            |
 | **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
 | **Context**          | You re-explain every time  | Synapses map relationships automatically     |
 | **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
@@ -267,20 +267,23 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
-### What's New (v6.5.1)
+### What's New (v6.8.x)
 
-| Category          | Highlights                                                                                         |
-| ----------------- | -------------------------------------------------------------------------------------------------- |
-| **Presentations** | PPTX engine rewritten — Calibri typography, modern slide masters, paragraph bullets, zebra tables  |
-| **Model Tiers**   | GPT-5.3, o4-mini, GPT-4.1 capable/mini/nano, Gemini 2.5 Flash — improved pattern matching accuracy |
-| **UI**            | API Keys sidebar section, cleaner command labels, Marp → PPTX terminology                          |
+| Category           | Highlights                                                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| **RAI Safety**     | 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, appropriate reliance, content safety)  |
+| **Skills**         | 150 skills, 40 complete trifectas, dialog engineering, memory activation                                      |
+| **Converters**     | prompt-preprocessor, batch retry, model freshness tracking, 284 QA assertions                                 |
+| **Welcome View**   | 4-tab layout (Mission, Skills, Mind, Docs), 8 playbook categories, LearnAI CTA redesign                      |
+| **Quality**        | 8 automated quality gates, synapse integrity audit, heir sync drift detection                                  |
+| **Cognitive**      | Failure Pivot Protocol, Scope Clarification Protocol, token waste elimination                                  |
 
 ### What's New (v6.5.0 — The Trust Release)
 
 | Category           | Highlights                                                                                                   |
 | ------------------ | ------------------------------------------------------------------------------------------------------------ |
 | **Hooks**          | 16 agent hooks (hooks.json + muscles/hooks/) — quality gates, safety enforcement, autopilot deny() for H8/H9 |
-| **Skills**         | 33 complete trifectas — 4 new promotions from heir projects                                                  |
+| **Skills**         | 40 complete trifectas — proven capabilities across all 3 memory systems                                      |
 | **Agents**         | 7 custom agents with handoff buttons and specialist workflows                                                |
 | **Quality**        | Automated quality gates, NASA-grade audit methodology, pre-publish pipeline                                  |
 | **Upgrade**        | v3→v6 automatic preservation — backup, clean install, gap analysis, auto-restore, synapse normalization      |
@@ -886,13 +889,13 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (55 files)
+├── instructions/              # 📚 Procedural memory (71 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (38 files)
+├── prompts/                   # 📖 Episodic memory (50 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
@@ -903,7 +906,7 @@ After initialization, Alex manages this structure:
 ├── assets/                    # 🎨 Visual identity (2 files)
 │   ├── banner.svg
 │   └── banner.png
-├── muscles/                   # 💪 Execution scripts (13 files)
+├── muscles/                   # 💪 Execution scripts (24 files)
 │   ├── brain-qa.ps1
 │   ├── sync-architecture.js
 │   └── ...
@@ -935,7 +938,7 @@ After initialization, Alex manages this structure:
 
 ## 🔬 Research Foundation
 
-Alex is built on **270+ academic sources** spanning 150+ years:
+Alex is built on **270+ academic sources** spanning 150+ years of research:
 
 - **Cognitive Science**: Baddeley & Hitch working memory model (1974)
 - **Neuroscience**: Squire & Kandel declarative memory systems (2009)
@@ -948,7 +951,7 @@ Alex is built on **270+ academic sources** spanning 150+ years:
 
 ###  Skill Pull-Sync & Growth (v5.6.2-5.6.9)
 
-Skills grew from 92 → 116 with new acquisition and inheritance mechanisms:
+Skills grew from 92 → 150 with new acquisition and inheritance mechanisms:
 
 - **`/checkskills`** — Discover new skills available from Global Knowledge
 - **`/pullskill <id>`** — Install a skill into your project from GK
@@ -956,7 +959,7 @@ Skills grew from 92 → 116 with new acquisition and inheritance mechanisms:
 - **31-phase Brain QA** — Comprehensive architecture health validation
 - **Trifecta model** — Core capabilities encoded across all 3 memory systems
 - **7 custom agents** — Alex, Researcher, Builder, Validator, Documentarian, Azure, M365
-- **Muscle scripts** — 13 execution scripts for audit, build, sync, and validation
+- **Muscle scripts** — 24 execution scripts for audit, build, sync, and validation
 
 ### 🔒 Release Automation & PII Safety (v5.6.4-5.6.8)
 
@@ -1165,7 +1168,7 @@ Alex is designed and operated in alignment with Microsoft's [Secure Future Initi
 | Vulnerability policy    | Public `SECURITY.md` with responsible disclosure process              |
 | PII pipeline protection | 3-layer PII guard: `.gitignore` + `.vscodeignore` + publish-time scan |
 
-📄 [Compliance Audit](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/alex_docs/audits/COMPLIANCE-AUDIT.md) · [Security Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md)
+📄 [Security Policy](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/SECURITY.md)
 
 🔐 Report vulnerabilities via [GitHub Security Advisories](https://github.com/fabioc-aloha/Alex_Plug_In/security/advisories/new)
 
@@ -1183,6 +1186,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 **Alex Cognitive Architecture** — Your Trusted AI Partner for Any Job 🚀
 
-Built on 270+ academic sources
+Built on 270+ academic sources | 150 skills | 40 trifectas
 
 © 2026 CorreaX • AI That Learns How to Learn
