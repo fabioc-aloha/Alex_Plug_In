@@ -81,15 +81,13 @@ Remove in this order:
 5. Legend (replace with direct labels when possible)
 6. Redundant axis labels (context goes in title/subtitle)
 
-### Step 6: Apply Color Palette (Mandatory: Colorblind-Safe)
+### Step 6: Apply Color Palette
 
-1. **Always use the canonical Tableau 10 palette**: `#4e79a7, #f28e2b, #e15759, #76b7b2, #59a14f, #edc948, #b07aa1, #ff9da7, #9c755f, #bab0ac`
-2. Pick the first N colors needed from this 10-color sequence
-3. Apply semantic consistency: same category = same color across all charts
-4. Highlight the key insight data point with saturated color; mute the rest with lower opacity
-5. For sequential data: light-to-dark single hue (e.g., `#deebf7 → #08519c`)
-6. For diverging data: two hues from neutral midpoint (e.g., `#b2182b → #f7f7f7 → #2166ac`)
-7. Never use raw CSS color names or arbitrary hex -- always reference the canonical palette
+1. Use colorblind-safe palette (see SKILL.md Module 3)
+2. Apply semantic consistency: same category = same color across all charts
+3. Highlight the key insight data point with saturated color; mute the rest
+4. For sequential data: light-to-dark single hue
+5. For diverging data: two hues from neutral midpoint
 
 ### Step 7: Annotate
 

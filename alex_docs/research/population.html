@@ -8,9 +8,10 @@
   <style>
     :root {
       --bg:#0f1117; --surface:#1a1d27; --surface2:#23263a; --surface3:#2d3148;
-      --accent:#6366f1; --accent2:#818cf8;
+      /* Colorblind-safe palette — Tableau 10 */
+      --accent:#4e79a7; --accent2:#6d96bf;
       --text:#e2e8f0; --muted:#94a3b8; --border:#2d3148;
-      --NE:#f59e0b; --MW:#10b981; --SO:#f87171; --WE:#60a5fa;
+      --NE:#f28e2b; --MW:#76b7b2; --SO:#e15759; --WE:#4e79a7;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
@@ -28,10 +29,10 @@
     .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
     .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden;cursor:default}
     .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-    .kpi-card.purple::before{background:linear-gradient(90deg,#6366f1,#818cf8)}
-    .kpi-card.blue::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
-    .kpi-card.green::before{background:linear-gradient(90deg,#10b981,#34d399)}
-    .kpi-card.amber::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+    .kpi-card.purple::before{background:linear-gradient(90deg,#4e79a7,#6d96bf)}
+    .kpi-card.blue::before{background:linear-gradient(90deg,#59a14f,#72b968)}
+    .kpi-card.green::before{background:linear-gradient(90deg,#76b7b2,#92cdc8)}
+    .kpi-card.amber::before{background:linear-gradient(90deg,#f28e2b,#f5a752)}
     .kpi-card.red::before{background:linear-gradient(90deg,#ef4444,#f87171)}
     .kpi-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
     .kpi-value{font-size:1.7rem;font-weight:800;line-height:1}
@@ -74,7 +75,7 @@
     .rank-b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:var(--surface2);font-size:.75rem;font-weight:700;color:var(--muted)}
     .rank-b.top{background:var(--accent);color:#fff}
     .rdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
-    .pbar{height:5px;border-radius:99px;background:linear-gradient(90deg,#6366f1,#60a5fa);transition:width .4s}
+    .pbar{height:5px;border-radius:99px;background:linear-gradient(90deg,#4e79a7,#6d96bf);transition:width .4s}
 
     /* ── DRILL-DOWN PANEL ── */
     .drilldown{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:24px}
@@ -196,7 +197,7 @@
 // ═══════════════════════════════════════════════════════════════
 //  DATA
 // ═══════════════════════════════════════════════════════════════
-const RC = { Northeast:"#f59e0b", Midwest:"#10b981", South:"#f87171", West:"#60a5fa" };
+const RC = { Northeast:"#f28e2b", Midwest:"#76b7b2", South:"#e15759", West:"#4e79a7" };
 
 const STATES = [
   {state:"California",abbr:"CA",region:"West",pop:38965193},
@@ -433,7 +434,7 @@ function buildDonut(){
 // ═══════════════════════════════════════════════════════════════
 function buildSizeChart(){
   const buckets=[{l:"< 1M",mn:0,mx:1e6},{l:"1M–5M",mn:1e6,mx:5e6},{l:"5M–10M",mn:5e6,mx:10e6},{l:"10M–20M",mn:10e6,mx:20e6},{l:"> 20M",mn:20e6,mx:Infinity}];
-  const clrs=["#f87171","#fb923c","#fbbf24","#34d399","#60a5fa"];
+  const clrs=["#e15759","#f28e2b","#edc948","#76b7b2","#4e79a7"];
   sizeInst=new Chart(document.getElementById("sizeChart").getContext("2d"),{
     type:"bar",
     data:{

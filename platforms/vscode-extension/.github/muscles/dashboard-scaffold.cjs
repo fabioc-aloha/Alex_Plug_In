@@ -53,15 +53,13 @@ const THEMES = {
     bgPrimary: '#0f0f23', bgCard: '#1a1a2e', bgHover: '#16213e',
     textPrimary: '#e8e8f0', textSecondary: '#888', textMuted: '#555',
     border: '#2a2a4a', shadow: '0 2px 8px rgba(0,0,0,0.3)',
-    // Colorblind-safe palette — Tableau 10
-    accent: ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948', '#b07aa1', '#ff9da7']
+    accent: ['#6366f1', '#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4', '#f97316']
   },
   light: {
     bgPrimary: '#f8f9fa', bgCard: '#ffffff', bgHover: '#f0f2f5',
     textPrimary: '#1f2328', textSecondary: '#555', textMuted: '#999',
     border: '#e0e0e0', shadow: '0 2px 8px rgba(0,0,0,0.08)',
-    // Colorblind-safe palette — Tableau 10
-    accent: ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948', '#b07aa1', '#ff9da7']
+    accent: ['#4f46e5', '#2563eb', '#059669', '#d97706', '#db2777', '#7c3aed', '#0891b2', '#ea580c']
   }
 };
 

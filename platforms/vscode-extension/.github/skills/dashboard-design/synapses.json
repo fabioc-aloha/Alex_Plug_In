@@ -1,0 +1,59 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "dashboard-design",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "version": "1.0.0",
+    "created": "2026-03-26",
+    "connectionCount": 7,
+    "connections": [
+        {
+            "target": ".github/skills/data-visualization/SKILL.md",
+            "type": "uses",
+            "strength": 0.95,
+            "when": "Dashboards use visualization charts as panel content",
+            "yields": "data-visualization chart components for dashboard panels"
+        },
+        {
+            "target": ".github/skills/data-analysis/SKILL.md",
+            "type": "consumes",
+            "strength": 0.85,
+            "when": "Analysis provides KPIs, segments, and insights that populate dashboard panels",
+            "yields": "data-analysis KPI definitions and segment insights"
+        },
+        {
+            "target": ".github/skills/data-storytelling/SKILL.md",
+            "type": "feeds",
+            "strength": 0.9,
+            "when": "Dashboard layout gives data storytelling its visual structure",
+            "yields": "data-storytelling visual layout structure"
+        },
+        {
+            "target": ".github/skills/ui-ux-design/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "when": "UI/UX accessibility and layout principles apply to dashboard design",
+            "yields": "ui-ux-design accessibility and layout patterns"
+        },
+        {
+            "target": ".github/skills/react-vite-performance/SKILL.md",
+            "type": "complements",
+            "strength": 0.6,
+            "when": "React performance patterns apply when dashboards target web frameworks",
+            "yields": "react-vite-performance optimization for dashboard web apps"
+        },
+        {
+            "target": ".github/skills/chart-interpretation/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "when": "Chart interpretation validates whether dashboard panels tell their intended story",
+            "yields": "chart-interpretation validation of panel narratives"
+        },
+        {
+            "target": ".github/skills/executive-storytelling/SKILL.md",
+            "type": "supports",
+            "strength": 0.7,
+            "when": "Executive dashboards support C-suite storytelling with data-backed KPIs",
+            "yields": "executive-storytelling data-backed executive visual summaries"
+        }
+    ]
+}

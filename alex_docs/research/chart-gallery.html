@@ -1,863 +1,1407 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Chart Gallery — 24 Visualization Types</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-:root{
-  --bg:#0f1117;--surface:#1a1d27;--surface2:#23263a;--surface3:#2d3148;
-  --text:#e2e8f0;--muted:#94a3b8;--border:#2d3148;
-  --compare:#6366f1;--trend:#3b82f6;--partwhole:#10b981;
-  --distribution:#f59e0b;--relationship:#ec4899;--flow:#8b5cf6;
-  --hierarchy:#fb923c;--spatial:#38bdf8;--deviation:#f87171;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Chart Gallery — 24 Visualization Types</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --surface2: #23263a;
+            --surface3: #2d3148;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --border: #2d3148;
+            /* Colorblind-safe palette — Tableau 10 */
+            --compare: #4e79a7;
+            --trend: #59a14f;
+            --partwhole: #76b7b2;
+            --distribution: #f28e2b;
+            --relationship: #e15759;
+            --flow: #b07aa1;
+            --hierarchy: #edc948;
+            --spatial: #9c755f;
+            --deviation: #ff9da7;
+        }
 
-/* HEADER */
-header{
-  background:linear-gradient(135deg,#1a1d27 0%,#14162b 100%);
-  border-bottom:1px solid var(--border);padding:28px 32px 24px;text-align:center;
-}
-header h1{font-size:1.9rem;font-weight:800;background:linear-gradient(90deg,#818cf8,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-header p{color:var(--muted);font-size:.92rem;max-width:700px;margin:0 auto 18px}
-.legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:.76rem;color:var(--muted)}
-.legend-dot{width:10px;height:10px;border-radius:50%}
-.stats{margin-top:14px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 16px;text-align:center}
-.stat-num{font-size:1.4rem;font-weight:800;color:var(--text)}
-.stat-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
 
-/* MAIN */
-.main{padding:24px 32px;max-width:1600px;margin:0 auto}
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh
+        }
 
-/* FILTERS */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
-.filters span{font-size:.8rem;color:var(--muted);margin-right:4px}
-.fbtn{
-  background:var(--surface);border:1px solid var(--border);color:var(--muted);
-  padding:6px 14px;border-radius:99px;cursor:pointer;font-size:.8rem;
-  transition:all .2s;white-space:nowrap;
-}
-.fbtn:hover{color:var(--text);border-color:var(--surface3)}
-.fbtn.active{color:#fff;font-weight:600}
-.fbtn[data-f="all"].active{background:var(--surface2);border-color:var(--surface3);color:var(--text)}
-.fbtn[data-f="compare"].active{background:var(--compare);border-color:var(--compare)}
-.fbtn[data-f="trend"].active{background:var(--trend);border-color:var(--trend)}
-.fbtn[data-f="part-to-whole"].active{background:var(--partwhole);border-color:var(--partwhole)}
-.fbtn[data-f="distribution"].active{background:var(--distribution);border-color:var(--distribution)}
-.fbtn[data-f="relationship"].active{background:var(--relationship);border-color:var(--relationship)}
-.fbtn[data-f="flow"].active{background:var(--flow);border-color:var(--flow)}
-.fbtn[data-f="hierarchy"].active{background:var(--hierarchy);border-color:var(--hierarchy)}
-.fbtn[data-f="spatial"].active{background:var(--spatial);border-color:var(--spatial)}
-.fbtn[data-f="deviation"].active{background:var(--deviation);border-color:var(--deviation)}
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #1a1d27 0%, #14162b 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 28px 32px 24px;
+            text-align: center;
+        }
 
-.type-toggle{display:flex;gap:4px;margin-left:auto}
-.type-toggle .fbtn.active{background:var(--surface2);border-color:var(--surface3);color:var(--text)}
+        header h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #818cf8, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px
+        }
 
-/* SECTION HEADERS */
-.section-hdr{display:flex;align-items:center;gap:10px;margin:28px 0 14px}
-.section-hdr h2{font-size:1rem;font-weight:700;white-space:nowrap}
-.section-hdr .line{flex:1;height:1px;background:var(--border)}
-.section-hdr .badge{padding:3px 10px;border-radius:99px;font-size:.68rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em}
+        header p {
+            color: var(--muted);
+            font-size: .92rem;
+            max-width: 700px;
+            margin: 0 auto 18px
+        }
 
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:8px}
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center
+        }
 
-/* CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);border-radius:14px;
-  padding:18px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden;
-  display:flex;flex-direction:column;
-}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:.6;transition:opacity .2s}
-.card:hover{border-color:var(--surface3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.card:hover::before{opacity:1}
-.card[data-intent="compare"]::before{background:var(--compare)}
-.card[data-intent="trend"]::before{background:var(--trend)}
-.card[data-intent="part-to-whole"]::before{background:var(--partwhole)}
-.card[data-intent="distribution"]::before{background:var(--distribution)}
-.card[data-intent="relationship"]::before{background:var(--relationship)}
-.card[data-intent="flow"]::before{background:var(--flow)}
-.card[data-intent="hierarchy"]::before{background:var(--hierarchy)}
-.card[data-intent="spatial"]::before{background:var(--spatial)}
-.card[data-intent="deviation"]::before{background:var(--deviation)}
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .76rem;
+            color: var(--muted)
+        }
 
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:8px}
-.card-name{font-size:.93rem;font-weight:700}
-.card-badges{display:flex;gap:4px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
-.intent-badge{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:99px;color:#fff;white-space:nowrap}
-.type-badge{font-size:.58rem;font-weight:600;padding:2px 6px;border-radius:99px;border:1px solid var(--border);color:var(--muted);white-space:nowrap}
-.mini{height:130px;position:relative;margin-bottom:10px}
-.card-desc{font-size:.78rem;color:var(--muted);line-height:1.5;flex:1}
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%
+        }
 
-/* MODAL */
-.modal-bg{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);padding:24px;align-items:center;justify-content:center}
-.modal-bg.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;width:100%;max-width:1050px;max-height:92vh;overflow-y:auto;display:flex;flex-direction:column}
-.modal-header{
-  padding:22px 26px 18px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  position:sticky;top:0;background:var(--surface);z-index:5;
-}
-.modal-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.modal-name{font-size:1.3rem;font-weight:800}
-.modal-intent{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:99px;color:#fff}
-.modal-type{font-size:.68rem;padding:3px 8px;border-radius:99px;border:1px solid var(--border);color:var(--muted)}
-.modal-tagline{font-size:.84rem;color:var(--muted);margin-top:3px;width:100%}
-.modal-close{background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:8px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
-.modal-close:hover{background:var(--surface3);color:var(--text)}
+        .stats {
+            margin-top: 14px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
 
-.modal-body{display:grid;grid-template-columns:1fr 380px;gap:0}
-.modal-chart{padding:24px;border-right:1px solid var(--border)}
-.modal-canvas-wrap{height:340px;position:relative}
-.modal-info{padding:24px;display:flex;flex-direction:column;gap:16px;overflow-y:auto}
+        .stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 16px;
+            text-align: center
+        }
 
-.info-block h3{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
-.info-block p{font-size:.82rem;color:var(--text);line-height:1.6}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:.74rem;padding:3px 10px;border-radius:6px}
-.use-box{background:#10b98110;border:1px solid #10b98130;border-radius:8px;padding:10px 14px;font-size:.8rem;color:#6ee7b7;line-height:1.55}
-.avoid-box{background:#ef444410;border:1px solid #ef444430;border-radius:8px;padding:10px 14px;font-size:.8rem;color:#fca5a5;line-height:1.55}
-.data-box{background:#6366f110;border:1px solid #6366f130;border-radius:8px;padding:10px 14px;font-size:.8rem;color:#a5b4fc;line-height:1.55}
-.ex-list{list-style:none;display:flex;flex-direction:column;gap:5px}
-.ex-list li{font-size:.8rem;color:var(--muted);padding-left:14px;position:relative;line-height:1.5}
-.ex-list li::before{content:"→";position:absolute;left:0;color:var(--surface3)}
+        .stat-num {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text)
+        }
 
-.modal-nav{padding:14px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:10px;background:var(--surface);position:sticky;bottom:0}
-.nav-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:8px;cursor:pointer;font-size:.82rem;transition:all .2s}
-.nav-btn:hover{color:var(--text);background:var(--surface3)}
-.nav-btn:disabled{opacity:.3;cursor:default}
+        .stat-label {
+            font-size: .7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .06em
+        }
 
-footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border)}
+        /* MAIN */
+        .main {
+            padding: 24px 32px;
+            max-width: 1600px;
+            margin: 0 auto
+        }
 
-@media(max-width:780px){
-  .modal-body{grid-template-columns:1fr}
-  .modal-chart{border-right:none;border-bottom:1px solid var(--border)}
-  .main{padding:16px}
-  header{padding:20px 16px 16px}
-  .type-toggle{margin-left:0;margin-top:8px}
-}
-</style>
+        /* FILTERS */
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            align-items: center
+        }
+
+        .filters span {
+            font-size: .8rem;
+            color: var(--muted);
+            margin-right: 4px
+        }
+
+        .fbtn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 6px 14px;
+            border-radius: 99px;
+            cursor: pointer;
+            font-size: .8rem;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+
+        .fbtn:hover {
+            color: var(--text);
+            border-color: var(--surface3)
+        }
+
+        .fbtn.active {
+            color: #fff;
+            font-weight: 600
+        }
+
+        .fbtn[data-f="all"].active {
+            background: var(--surface2);
+            border-color: var(--surface3);
+            color: var(--text)
+        }
+
+        .fbtn[data-f="compare"].active {
+            background: var(--compare);
+            border-color: var(--compare)
+        }
+
+        .fbtn[data-f="trend"].active {
+            background: var(--trend);
+            border-color: var(--trend)
+        }
+
+        .fbtn[data-f="part-to-whole"].active {
+            background: var(--partwhole);
+            border-color: var(--partwhole)
+        }
+
+        .fbtn[data-f="distribution"].active {
+            background: var(--distribution);
+            border-color: var(--distribution)
+        }
+
+        .fbtn[data-f="relationship"].active {
+            background: var(--relationship);
+            border-color: var(--relationship)
+        }
+
+        .fbtn[data-f="flow"].active {
+            background: var(--flow);
+            border-color: var(--flow)
+        }
+
+        .fbtn[data-f="hierarchy"].active {
+            background: var(--hierarchy);
+            border-color: var(--hierarchy)
+        }
+
+        .fbtn[data-f="spatial"].active {
+            background: var(--spatial);
+            border-color: var(--spatial)
+        }
+
+        .fbtn[data-f="deviation"].active {
+            background: var(--deviation);
+            border-color: var(--deviation)
+        }
+
+        .type-toggle {
+            display: flex;
+            gap: 4px;
+            margin-left: auto
+        }
+
+        .type-toggle .fbtn.active {
+            background: var(--surface2);
+            border-color: var(--surface3);
+            color: var(--text)
+        }
+
+        /* SECTION HEADERS */
+        .section-hdr {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 28px 0 14px
+        }
+
+        .section-hdr h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        .section-hdr .line {
+            flex: 1;
+            height: 1px;
+            background: var(--border)
+        }
+
+        .section-hdr .badge {
+            padding: 3px 10px;
+            border-radius: 99px;
+            font-size: .68rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: .06em
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 8px
+        }
+
+        /* CARD */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all .22s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            opacity: .6;
+            transition: opacity .2s
+        }
+
+        .card:hover {
+            border-color: var(--surface3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .3)
+        }
+
+        .card:hover::before {
+            opacity: 1
+        }
+
+        .card[data-intent="compare"]::before {
+            background: var(--compare)
+        }
+
+        .card[data-intent="trend"]::before {
+            background: var(--trend)
+        }
+
+        .card[data-intent="part-to-whole"]::before {
+            background: var(--partwhole)
+        }
+
+        .card[data-intent="distribution"]::before {
+            background: var(--distribution)
+        }
+
+        .card[data-intent="relationship"]::before {
+            background: var(--relationship)
+        }
+
+        .card[data-intent="flow"]::before {
+            background: var(--flow)
+        }
+
+        .card[data-intent="hierarchy"]::before {
+            background: var(--hierarchy)
+        }
+
+        .card[data-intent="spatial"]::before {
+            background: var(--spatial)
+        }
+
+        .card[data-intent="deviation"]::before {
+            background: var(--deviation)
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            gap: 8px
+        }
+
+        .card-name {
+            font-size: .93rem;
+            font-weight: 700
+        }
+
+        .card-badges {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            justify-content: flex-end
+        }
+
+        .intent-badge {
+            font-size: .6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            padding: 2px 7px;
+            border-radius: 99px;
+            color: #fff;
+            white-space: nowrap
+        }
+
+        .type-badge {
+            font-size: .58rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            white-space: nowrap
+        }
+
+        .mini {
+            height: 130px;
+            position: relative;
+            margin-bottom: 10px
+        }
+
+        .card-desc {
+            font-size: .78rem;
+            color: var(--muted);
+            line-height: 1.5;
+            flex: 1
+        }
+
+        /* MODAL */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, .75);
+            backdrop-filter: blur(6px);
+            padding: 24px;
+            align-items: center;
+            justify-content: center
+        }
+
+        .modal-bg.open {
+            display: flex
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            width: 100%;
+            max-width: 1050px;
+            max-height: 92vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column
+        }
+
+        .modal-header {
+            padding: 22px 26px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            background: var(--surface);
+            z-index: 5;
+        }
+
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .modal-name {
+            font-size: 1.3rem;
+            font-weight: 800
+        }
+
+        .modal-intent {
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            padding: 3px 10px;
+            border-radius: 99px;
+            color: #fff
+        }
+
+        .modal-type {
+            font-size: .68rem;
+            padding: 3px 8px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            color: var(--muted)
+        }
+
+        .modal-tagline {
+            font-size: .84rem;
+            color: var(--muted);
+            margin-top: 3px;
+            width: 100%
+        }
+
+        .modal-close {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all .2s
+        }
+
+        .modal-close:hover {
+            background: var(--surface3);
+            color: var(--text)
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 0
+        }
+
+        .modal-chart {
+            padding: 24px;
+            border-right: 1px solid var(--border)
+        }
+
+        .modal-canvas-wrap {
+            height: 340px;
+            position: relative
+        }
+
+        .modal-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto
+        }
+
+        .info-block h3 {
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--muted);
+            margin-bottom: 8px
+        }
+
+        .info-block p {
+            font-size: .82rem;
+            color: var(--text);
+            line-height: 1.6
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px
+        }
+
+        .tag {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: .74rem;
+            padding: 3px 10px;
+            border-radius: 6px
+        }
+
+        .use-box {
+            background: #10b98110;
+            border: 1px solid #10b98130;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: .8rem;
+            color: #6ee7b7;
+            line-height: 1.55
+        }
+
+        .avoid-box {
+            background: #ef444410;
+            border: 1px solid #ef444430;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: .8rem;
+            color: #fca5a5;
+            line-height: 1.55
+        }
+
+        .data-box {
+            background: #6366f110;
+            border: 1px solid #6366f130;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: .8rem;
+            color: #a5b4fc;
+            line-height: 1.55
+        }
+
+        .ex-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px
+        }
+
+        .ex-list li {
+            font-size: .8rem;
+            color: var(--muted);
+            padding-left: 14px;
+            position: relative;
+            line-height: 1.5
+        }
+
+        .ex-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--surface3)
+        }
+
+        .modal-nav {
+            padding: 14px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            background: var(--surface);
+            position: sticky;
+            bottom: 0
+        }
+
+        .nav-btn {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 7px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: .82rem;
+            transition: all .2s
+        }
+
+        .nav-btn:hover {
+            color: var(--text);
+            background: var(--surface3)
+        }
+
+        .nav-btn:disabled {
+            opacity: .3;
+            cursor: default
+        }
+
+        footer {
+            text-align: center;
+            padding: 16px 32px;
+            color: var(--muted);
+            font-size: .78rem;
+            border-top: 1px solid var(--border)
+        }
+
+        @media(max-width:780px) {
+            .modal-body {
+                grid-template-columns: 1fr
+            }
+
+            .modal-chart {
+                border-right: none;
+                border-bottom: 1px solid var(--border)
+            }
+
+            .main {
+                padding: 16px
+            }
+
+            header {
+                padding: 20px 16px 16px
+            }
+
+            .type-toggle {
+                margin-left: 0;
+                margin-top: 8px
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Chart Gallery</h1>
-  <p>24 visualization types organized by story intent — choose the right chart for the story you want to tell, not just the data shape you have.</p>
-  <div class="legend">
-    <div class="legend-item"><span class="legend-dot" style="background:var(--compare)"></span>Compare</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--trend)"></span>Trend</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--partwhole)"></span>Part-to-Whole</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--distribution)"></span>Distribution</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--relationship)"></span>Relationship</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--flow)"></span>Flow</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--hierarchy)"></span>Hierarchy</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--spatial)"></span>Spatial</div>
-    <div class="legend-item"><span class="legend-dot" style="background:var(--deviation)"></span>Deviation</div>
-  </div>
-  <div class="stats">
-    <div class="stat"><div class="stat-num">24</div><div class="stat-label">Chart Types</div></div>
-    <div class="stat"><div class="stat-num">9</div><div class="stat-label">Story Intents</div></div>
-    <div class="stat"><div class="stat-num">14</div><div class="stat-label">Chart.js</div></div>
-    <div class="stat"><div class="stat-num">10</div><div class="stat-label">Canvas 2D</div></div>
-  </div>
-</header>
-
-<div class="main">
-  <div class="filters">
-    <span>Story Intent:</span>
-    <button class="fbtn active" data-f="all" onclick="setFilter('all')">All</button>
-    <button class="fbtn" data-f="compare" onclick="setFilter('compare')">Compare</button>
-    <button class="fbtn" data-f="trend" onclick="setFilter('trend')">Trend</button>
-    <button class="fbtn" data-f="part-to-whole" onclick="setFilter('part-to-whole')">Part-to-Whole</button>
-    <button class="fbtn" data-f="distribution" onclick="setFilter('distribution')">Distribution</button>
-    <button class="fbtn" data-f="relationship" onclick="setFilter('relationship')">Relationship</button>
-    <button class="fbtn" data-f="flow" onclick="setFilter('flow')">Flow</button>
-    <button class="fbtn" data-f="hierarchy" onclick="setFilter('hierarchy')">Hierarchy</button>
-    <button class="fbtn" data-f="spatial" onclick="setFilter('spatial')">Spatial</button>
-    <button class="fbtn" data-f="deviation" onclick="setFilter('deviation')">Deviation</button>
-    <div class="type-toggle">
-      <button class="fbtn active" data-f="all-type" onclick="setTypeFilter('all-type')">All</button>
-      <button class="fbtn" data-f="standard" onclick="setTypeFilter('standard')">Standard</button>
-      <button class="fbtn" data-f="advanced" onclick="setTypeFilter('advanced')">Advanced</button>
-    </div>
-  </div>
-  <div id="grid" class="grid"></div>
-</div>
-
-<footer>Click any card to explore in detail · 24 chart types across 9 story intents · Chart.js 4.x + Canvas 2D</footer>
-
-<!-- MODAL -->
-<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-title">
-          <span class="modal-name" id="mName"></span>
-          <span class="modal-intent" id="mIntent"></span>
-          <span class="modal-type" id="mType"></span>
+    <header>
+        <h1>Chart Gallery</h1>
+        <p>24 visualization types organized by story intent — choose the right chart for the story you want to tell, not
+            just the data shape you have.</p>
+        <div class="legend">
+            <div class="legend-item"><span class="legend-dot" style="background:var(--compare)"></span>Compare</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--trend)"></span>Trend</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--partwhole)"></span>Part-to-Whole
+            </div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--distribution)"></span>Distribution
+            </div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--relationship)"></span>Relationship
+            </div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--flow)"></span>Flow</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--hierarchy)"></span>Hierarchy</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--spatial)"></span>Spatial</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--deviation)"></span>Deviation</div>
         </div>
-        <div class="modal-tagline" id="mTagline"></div>
-      </div>
-      <button class="modal-close" onclick="closeModal(null)">&#x2715;</button>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-num">24</div>
+                <div class="stat-label">Chart Types</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">9</div>
+                <div class="stat-label">Story Intents</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">14</div>
+                <div class="stat-label">Chart.js</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">10</div>
+                <div class="stat-label">Canvas 2D</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="filters">
+            <span>Story Intent:</span>
+            <button class="fbtn active" data-f="all" onclick="setFilter('all')">All</button>
+            <button class="fbtn" data-f="compare" onclick="setFilter('compare')">Compare</button>
+            <button class="fbtn" data-f="trend" onclick="setFilter('trend')">Trend</button>
+            <button class="fbtn" data-f="part-to-whole" onclick="setFilter('part-to-whole')">Part-to-Whole</button>
+            <button class="fbtn" data-f="distribution" onclick="setFilter('distribution')">Distribution</button>
+            <button class="fbtn" data-f="relationship" onclick="setFilter('relationship')">Relationship</button>
+            <button class="fbtn" data-f="flow" onclick="setFilter('flow')">Flow</button>
+            <button class="fbtn" data-f="hierarchy" onclick="setFilter('hierarchy')">Hierarchy</button>
+            <button class="fbtn" data-f="spatial" onclick="setFilter('spatial')">Spatial</button>
+            <button class="fbtn" data-f="deviation" onclick="setFilter('deviation')">Deviation</button>
+            <div class="type-toggle">
+                <button class="fbtn active" data-f="all-type" onclick="setTypeFilter('all-type')">All</button>
+                <button class="fbtn" data-f="standard" onclick="setTypeFilter('standard')">Standard</button>
+                <button class="fbtn" data-f="advanced" onclick="setTypeFilter('advanced')">Advanced</button>
+            </div>
+        </div>
+        <div id="grid" class="grid"></div>
     </div>
-    <div class="modal-body">
-      <div class="modal-chart">
-        <div class="modal-canvas-wrap"><canvas id="modalCanvas"></canvas></div>
-      </div>
-      <div class="modal-info" id="mInfo"></div>
+
+    <footer>Click any card to explore in detail · 24 chart types across 9 story intents · Chart.js 4.x + Canvas 2D
+    </footer>
+
+    <!-- MODAL -->
+    <div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title">
+                        <span class="modal-name" id="mName"></span>
+                        <span class="modal-intent" id="mIntent"></span>
+                        <span class="modal-type" id="mType"></span>
+                    </div>
+                    <div class="modal-tagline" id="mTagline"></div>
+                </div>
+                <button class="modal-close" onclick="closeModal(null)">&#x2715;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-chart">
+                    <div class="modal-canvas-wrap"><canvas id="modalCanvas"></canvas></div>
+                </div>
+                <div class="modal-info" id="mInfo"></div>
+            </div>
+            <div class="modal-nav">
+                <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">&larr; Previous</button>
+                <span style="font-size:.8rem;color:var(--muted);align-self:center" id="navLabel"></span>
+                <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next &rarr;</button>
+            </div>
+        </div>
     </div>
-    <div class="modal-nav">
-      <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">&larr; Previous</button>
-      <span style="font-size:.8rem;color:var(--muted);align-self:center" id="navLabel"></span>
-      <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next &rarr;</button>
-    </div>
-  </div>
-</div>
 
-<script>
-// ================================================================
-//  COLORS & HELPERS
-// ================================================================
-const C={ind:'#6366f1',blu:'#3b82f6',grn:'#10b981',amb:'#f59e0b',pnk:'#ec4899',vio:'#8b5cf6',red:'#f87171',sky:'#38bdf8',lim:'#a3e635',org:'#fb923c'};
-const INTENT_COLORS={compare:'var(--compare)',trend:'var(--trend)','part-to-whole':'var(--partwhole)',distribution:'var(--distribution)',relationship:'var(--relationship)',flow:'var(--flow)',hierarchy:'var(--hierarchy)',spatial:'var(--spatial)',deviation:'var(--deviation)'};
-const GRID_C={color:'#2d3148'};
-const TICK_C={color:'#94a3b8',font:{size:11}};
-const TIP={backgroundColor:'#1a1d27',borderColor:'#2d3148',borderWidth:1,titleColor:'#e2e8f0',bodyColor:'#94a3b8',padding:10};
+    <script>
+        // ================================================================
+        //  COLORS & HELPERS
+        // ================================================================
+        // Colorblind-safe palette — Tableau 10 (verified deuteranopia, protanopia, tritanopia)
+        const C = { ind: '#4e79a7', blu: '#59a14f', grn: '#76b7b2', amb: '#f28e2b', pnk: '#e15759', vio: '#b07aa1', red: '#ff9da7', sky: '#edc948', lim: '#9c755f', org: '#bab0ac' };
+        const INTENT_COLORS = { compare: 'var(--compare)', trend: 'var(--trend)', 'part-to-whole': 'var(--partwhole)', distribution: 'var(--distribution)', relationship: 'var(--relationship)', flow: 'var(--flow)', hierarchy: 'var(--hierarchy)', spatial: 'var(--spatial)', deviation: 'var(--deviation)' };
+        const GRID_C = { color: '#2d3148' };
+        const TICK_C = { color: '#94a3b8', font: { size: 11 } };
+        const TIP = { backgroundColor: '#1a1d27', borderColor: '#2d3148', borderWidth: 1, titleColor: '#e2e8f0', bodyColor: '#94a3b8', padding: 10 };
 
-function miniOpts(extra={}){return{responsive:true,maintainAspectRatio:false,animation:{duration:500},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}},...extra}}
-function fullOpts(extra={}){return{responsive:true,maintainAspectRatio:false,animation:{duration:600},plugins:{legend:{display:true,labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:12}},tooltip:TIP},scales:{x:{ticks:TICK_C,grid:GRID_C},y:{ticks:TICK_C,grid:GRID_C}},...extra}}
-function noScale(o){const r={...o};delete r.scales;return r}
+        function miniOpts(extra = {}) { return { responsive: true, maintainAspectRatio: false, animation: { duration: 500 }, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } }, ...extra } }
+        function fullOpts(extra = {}) { return { responsive: true, maintainAspectRatio: false, animation: { duration: 600 }, plugins: { legend: { display: true, labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12, padding: 12 } }, tooltip: TIP }, scales: { x: { ticks: TICK_C, grid: GRID_C }, y: { ticks: TICK_C, grid: GRID_C } }, ...extra } }
+        function noScale(o) { const r = { ...o }; delete r.scales; return r }
 
-// ================================================================
-//  CHART DEFINITIONS — 24 types
-// ================================================================
-const CHARTS=[
-// ── COMPARE ──────────────────────────────────────────
-{
-  id:'bar',intent:'compare',type:'standard',name:'Bar Chart',
-  tagline:'Compare quantities across categories',
-  bestFor:['Ranking 2-15 categories','Showing exact magnitudes','Discrete named groups'],
-  whenToUse:'The workhorse of comparison. Sort bars by value (descending) to communicate rank. Works best with up to 15 categories -- beyond that, switch to horizontal bars or filter.',
-  avoidWhen:'Too many categories (>15), continuous data, or when the story is change over time.',
-  dataType:'X: Categorical · Y: Quantitative',
-  examples:['Revenue by product line','Survey scores by question','Sales by region'],
-  mini(ctx){return new Chart(ctx,{type:'bar',data:{labels:['A','B','C','D','E'],datasets:[{data:[42,67,53,81,74],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:3}]},options:miniOpts()})},
-  full(ctx){return new Chart(ctx,{type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],datasets:[{label:'Revenue ($K)',data:[42,67,53,81,74,91,88,95],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:5}]},options:fullOpts()})}
-},
-{
-  id:'hbar',intent:'compare',type:'standard',name:'Horizontal Bar',
-  tagline:'Rank items when labels need space',
-  bestFor:['Long category names','Ranking up to 20 items','Top-to-bottom scan'],
-  whenToUse:'Flip bars sideways when labels are long or ranking is the focus. Readers scan top-to-bottom naturally. Sort largest-first for ranking stories.',
-  avoidWhen:'Fewer than 4 items (vertical works fine) or when values are nearly identical.',
-  dataType:'Y: Categorical · X: Quantitative',
-  examples:['Top 10 countries by GDP','Feature popularity survey','Satisfaction by department'],
-  mini(ctx){return new Chart(ctx,{type:'bar',data:{labels:['E','D','C','B','A'],datasets:[{data:[91,81,74,67,53],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:3}]},options:{...miniOpts(),indexAxis:'y'}})},
-  full(ctx){return new Chart(ctx,{type:'bar',data:{labels:['Germany','France','Japan','UK','Canada','Italy','Brazil','Mexico'],datasets:[{label:'GDP (Trillion USD)',data:[4.5,3.1,4.2,3.1,2.1,2.2,1.9,1.3],backgroundColor:C.ind+'bb',borderColor:C.ind,borderWidth:1,borderRadius:5}]},options:{...fullOpts(),indexAxis:'y'}})}
-},
-{
-  id:'grouped',intent:'compare',type:'standard',name:'Grouped Bar',
-  tagline:'Compare multiple series side by side',
-  bestFor:['2-4 series across same categories','Before/after comparisons','Sub-group comparison'],
-  whenToUse:'Place bars side by side to compare multiple metrics across the same categories. Limit to 3-4 series per cluster to avoid visual noise.',
-  avoidWhen:'More than 4 series or more than 8 categories -- use small multiples instead.',
-  dataType:'X: Categorical · Y: Quantitative · Color: Series',
-  examples:['Q1 vs Q2 vs Q3 by product','Male vs female by age group','Budget vs actual by team'],
-  mini(ctx){return new Chart(ctx,{type:'bar',data:{labels:['A','B','C','D'],datasets:[{data:[42,67,53,81],backgroundColor:C.ind+'bb',borderRadius:2},{data:[58,44,70,62],backgroundColor:C.blu+'bb',borderRadius:2}]},options:miniOpts()})},
-  full(ctx){return new Chart(ctx,{type:'bar',data:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Product A',data:[42,67,53,81],backgroundColor:C.ind+'bb',borderRadius:4},{label:'Product B',data:[58,44,70,62],backgroundColor:C.blu+'bb',borderRadius:4},{label:'Product C',data:[35,80,48,73],backgroundColor:C.grn+'bb',borderRadius:4}]},options:fullOpts()})}
-},
-{
-  id:'radar',intent:'compare',type:'standard',name:'Radar / Spider',
-  tagline:'Compare across multiple dimensions',
-  bestFor:['3-8 dimensions per entity','Comparing 2-3 profiles','Strength/weakness overview'],
-  whenToUse:'Radar charts profile entities across multiple dimensions. The polygon shape communicates balance: a large regular polygon = consistently strong. Best for 2-3 overlapping profiles.',
-  avoidWhen:'More than 3 series (clutter), more than 8 axes, or when exact values matter more than shape.',
-  dataType:'Axes: Multiple quantitative · Color: Entity',
-  examples:['Product feature comparison','Athlete performance profile','UX heuristics evaluation'],
-  mini(ctx){return new Chart(ctx,{type:'radar',data:{labels:['S','P','U','R','D','F'],datasets:[{data:[80,60,90,70,50,85],backgroundColor:C.ind+'33',borderColor:C.ind,borderWidth:2,pointRadius:2},{data:[65,80,55,85,70,60],backgroundColor:C.amb+'33',borderColor:C.amb,borderWidth:2,pointRadius:2}]},options:{...miniOpts(),scales:{r:{display:false}}}})},
-  full(ctx){return new Chart(ctx,{type:'radar',data:{labels:['Speed','Performance','Usability','Reliability','Design','Features'],datasets:[{label:'Product A',data:[80,60,90,70,50,85],backgroundColor:C.ind+'33',borderColor:C.ind,borderWidth:2,pointRadius:4,pointBackgroundColor:C.ind},{label:'Product B',data:[65,80,55,85,70,60],backgroundColor:C.amb+'33',borderColor:C.amb,borderWidth:2,pointRadius:4,pointBackgroundColor:C.amb}]},options:{...noScale(fullOpts()),scales:{r:{ticks:{color:'#94a3b8',backdropColor:'transparent',font:{size:9}},grid:{color:'#2d3148'},pointLabels:{color:'#e2e8f0',font:{size:11}}}}}})}
-},
-{
-  id:'beeswarm',intent:'compare',type:'advanced',name:'Beeswarm',
-  tagline:'Show every data point without overlap',
-  bestFor:['Comparing distributions across groups','Showing individual data points','Small-to-medium datasets (50-500)'],
-  whenToUse:'A beeswarm arranges individual dots along a value axis, jittering them horizontally to avoid overlap. It reveals the distribution shape, density, and outliers while keeping every data point visible. Best for comparing 2-5 groups.',
-  avoidWhen:'More than ~500 points per group (too dense), when exact positions matter, or when aggregate statistics are the focus.',
-  dataType:'Y: Quantitative · X: Categorical groups · Dots: Individual observations',
-  examples:['Salary distribution by department','Response times by service tier','Test scores by class section'],
-  mini(ctx,canvas){drawBeeswarmMini(canvas);return null},
-  full(ctx,canvas){drawBeeswarmFull(canvas);return null}
-},
-{
-  id:'parallel',intent:'compare',type:'advanced',name:'Parallel Coordinates',
-  tagline:'Compare items across many dimensions at once',
-  bestFor:['5+ quantitative dimensions','Finding clusters and outliers','Multivariate comparison'],
-  whenToUse:'Each vertical axis represents one variable; each data item is a polyline connecting its values. Patterns emerge when similar items create "bundles" of lines. Powerful for multivariate comparison with 5-15 dimensions.',
-  avoidWhen:'Few dimensions (<4, use radar), too many items (>50 lines become unreadable), or non-quantitative data.',
-  dataType:'Axes: Multiple quantitative · Lines: Individual items · Color: Category (optional)',
-  examples:['Car specs: mpg, horsepower, weight, acceleration','Employee metrics across performance dimensions'],
-  mini(ctx,canvas){drawParallelMini(canvas);return null},
-  full(ctx,canvas){drawParallelFull(canvas);return null}
-},
+        // ================================================================
+        //  CHART DEFINITIONS — 24 types
+        // ================================================================
+        const CHARTS = [
+            // ── COMPARE ──────────────────────────────────────────
+            {
+                id: 'bar', intent: 'compare', type: 'standard', name: 'Bar Chart',
+                tagline: 'Compare quantities across categories',
+                bestFor: ['Ranking 2-15 categories', 'Showing exact magnitudes', 'Discrete named groups'],
+                whenToUse: 'The workhorse of comparison. Sort bars by value (descending) to communicate rank. Works best with up to 15 categories -- beyond that, switch to horizontal bars or filter.',
+                avoidWhen: 'Too many categories (>15), continuous data, or when the story is change over time.',
+                dataType: 'X: Categorical · Y: Quantitative',
+                examples: ['Revenue by product line', 'Survey scores by question', 'Sales by region'],
+                mini(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['A', 'B', 'C', 'D', 'E'], datasets: [{ data: [42, 67, 53, 81, 74], backgroundColor: C.ind + 'bb', borderColor: C.ind, borderWidth: 1, borderRadius: 3 }] }, options: miniOpts() }) },
+                full(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'], datasets: [{ label: 'Revenue ($K)', data: [42, 67, 53, 81, 74, 91, 88, 95], backgroundColor: C.ind + 'bb', borderColor: C.ind, borderWidth: 1, borderRadius: 5 }] }, options: fullOpts() }) }
+            },
+            {
+                id: 'hbar', intent: 'compare', type: 'standard', name: 'Horizontal Bar',
+                tagline: 'Rank items when labels need space',
+                bestFor: ['Long category names', 'Ranking up to 20 items', 'Top-to-bottom scan'],
+                whenToUse: 'Flip bars sideways when labels are long or ranking is the focus. Readers scan top-to-bottom naturally. Sort largest-first for ranking stories.',
+                avoidWhen: 'Fewer than 4 items (vertical works fine) or when values are nearly identical.',
+                dataType: 'Y: Categorical · X: Quantitative',
+                examples: ['Top 10 countries by GDP', 'Feature popularity survey', 'Satisfaction by department'],
+                mini(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['E', 'D', 'C', 'B', 'A'], datasets: [{ data: [91, 81, 74, 67, 53], backgroundColor: C.ind + 'bb', borderColor: C.ind, borderWidth: 1, borderRadius: 3 }] }, options: { ...miniOpts(), indexAxis: 'y' } }) },
+                full(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['Germany', 'France', 'Japan', 'UK', 'Canada', 'Italy', 'Brazil', 'Mexico'], datasets: [{ label: 'GDP (Trillion USD)', data: [4.5, 3.1, 4.2, 3.1, 2.1, 2.2, 1.9, 1.3], backgroundColor: C.ind + 'bb', borderColor: C.ind, borderWidth: 1, borderRadius: 5 }] }, options: { ...fullOpts(), indexAxis: 'y' } }) }
+            },
+            {
+                id: 'grouped', intent: 'compare', type: 'standard', name: 'Grouped Bar',
+                tagline: 'Compare multiple series side by side',
+                bestFor: ['2-4 series across same categories', 'Before/after comparisons', 'Sub-group comparison'],
+                whenToUse: 'Place bars side by side to compare multiple metrics across the same categories. Limit to 3-4 series per cluster to avoid visual noise.',
+                avoidWhen: 'More than 4 series or more than 8 categories -- use small multiples instead.',
+                dataType: 'X: Categorical · Y: Quantitative · Color: Series',
+                examples: ['Q1 vs Q2 vs Q3 by product', 'Male vs female by age group', 'Budget vs actual by team'],
+                mini(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['A', 'B', 'C', 'D'], datasets: [{ data: [42, 67, 53, 81], backgroundColor: C.ind + 'bb', borderRadius: 2 }, { data: [58, 44, 70, 62], backgroundColor: C.blu + 'bb', borderRadius: 2 }] }, options: miniOpts() }) },
+                full(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ label: 'Product A', data: [42, 67, 53, 81], backgroundColor: C.ind + 'bb', borderRadius: 4 }, { label: 'Product B', data: [58, 44, 70, 62], backgroundColor: C.blu + 'bb', borderRadius: 4 }, { label: 'Product C', data: [35, 80, 48, 73], backgroundColor: C.grn + 'bb', borderRadius: 4 }] }, options: fullOpts() }) }
+            },
+            {
+                id: 'radar', intent: 'compare', type: 'standard', name: 'Radar / Spider',
+                tagline: 'Compare across multiple dimensions',
+                bestFor: ['3-8 dimensions per entity', 'Comparing 2-3 profiles', 'Strength/weakness overview'],
+                whenToUse: 'Radar charts profile entities across multiple dimensions. The polygon shape communicates balance: a large regular polygon = consistently strong. Best for 2-3 overlapping profiles.',
+                avoidWhen: 'More than 3 series (clutter), more than 8 axes, or when exact values matter more than shape.',
+                dataType: 'Axes: Multiple quantitative · Color: Entity',
+                examples: ['Product feature comparison', 'Athlete performance profile', 'UX heuristics evaluation'],
+                mini(ctx) { return new Chart(ctx, { type: 'radar', data: { labels: ['S', 'P', 'U', 'R', 'D', 'F'], datasets: [{ data: [80, 60, 90, 70, 50, 85], backgroundColor: C.ind + '33', borderColor: C.ind, borderWidth: 2, pointRadius: 2 }, { data: [65, 80, 55, 85, 70, 60], backgroundColor: C.amb + '33', borderColor: C.amb, borderWidth: 2, pointRadius: 2 }] }, options: { ...miniOpts(), scales: { r: { display: false } } } }) },
+                full(ctx) { return new Chart(ctx, { type: 'radar', data: { labels: ['Speed', 'Performance', 'Usability', 'Reliability', 'Design', 'Features'], datasets: [{ label: 'Product A', data: [80, 60, 90, 70, 50, 85], backgroundColor: C.ind + '33', borderColor: C.ind, borderWidth: 2, pointRadius: 4, pointBackgroundColor: C.ind }, { label: 'Product B', data: [65, 80, 55, 85, 70, 60], backgroundColor: C.amb + '33', borderColor: C.amb, borderWidth: 2, pointRadius: 4, pointBackgroundColor: C.amb }] }, options: { ...noScale(fullOpts()), scales: { r: { ticks: { color: '#94a3b8', backdropColor: 'transparent', font: { size: 9 } }, grid: { color: '#2d3148' }, pointLabels: { color: '#e2e8f0', font: { size: 11 } } } } } }) }
+            },
+            {
+                id: 'beeswarm', intent: 'compare', type: 'advanced', name: 'Beeswarm',
+                tagline: 'Show every data point without overlap',
+                bestFor: ['Comparing distributions across groups', 'Showing individual data points', 'Small-to-medium datasets (50-500)'],
+                whenToUse: 'A beeswarm arranges individual dots along a value axis, jittering them horizontally to avoid overlap. It reveals the distribution shape, density, and outliers while keeping every data point visible. Best for comparing 2-5 groups.',
+                avoidWhen: 'More than ~500 points per group (too dense), when exact positions matter, or when aggregate statistics are the focus.',
+                dataType: 'Y: Quantitative · X: Categorical groups · Dots: Individual observations',
+                examples: ['Salary distribution by department', 'Response times by service tier', 'Test scores by class section'],
+                mini(ctx, canvas) { drawBeeswarmMini(canvas); return null },
+                full(ctx, canvas) { drawBeeswarmFull(canvas); return null }
+            },
+            {
+                id: 'parallel', intent: 'compare', type: 'advanced', name: 'Parallel Coordinates',
+                tagline: 'Compare items across many dimensions at once',
+                bestFor: ['5+ quantitative dimensions', 'Finding clusters and outliers', 'Multivariate comparison'],
+                whenToUse: 'Each vertical axis represents one variable; each data item is a polyline connecting its values. Patterns emerge when similar items create "bundles" of lines. Powerful for multivariate comparison with 5-15 dimensions.',
+                avoidWhen: 'Few dimensions (<4, use radar), too many items (>50 lines become unreadable), or non-quantitative data.',
+                dataType: 'Axes: Multiple quantitative · Lines: Individual items · Color: Category (optional)',
+                examples: ['Car specs: mpg, horsepower, weight, acceleration', 'Employee metrics across performance dimensions'],
+                mini(ctx, canvas) { drawParallelMini(canvas); return null },
+                full(ctx, canvas) { drawParallelFull(canvas); return null }
+            },
 
-// ── TREND ────────────────────────────────────────────
-{
-  id:'line',intent:'trend',type:'standard',name:'Line Chart',
-  tagline:'Show change over continuous time',
-  bestFor:['Time-series data','Trends, peaks, dips','Up to 5 series over time'],
-  whenToUse:'The default for time-series. Connect points to emphasize continuity -- the slope communicates speed of change. Use multiple lines (up to 5) to compare how series evolve together.',
-  avoidWhen:'Categorical data with no ordering, or >5 lines (spaghetti). Use small multiples instead.',
-  dataType:'X: Temporal/Ordinal · Y: Quantitative · Color: Series',
-  examples:['Daily active users over a year','Stock price history','Temperature by month'],
-  mini(ctx){return new Chart(ctx,{type:'line',data:{labels:[0,1,2,3,4,5,6,7,8,9,10,11],datasets:[{data:[30,42,38,55,48,65,70,60,75,82,78,90],borderColor:C.blu,borderWidth:2,pointRadius:0,tension:.4,fill:false}]},options:miniOpts()})},
-  full(ctx){return new Chart(ctx,{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],datasets:[{label:'Active Users (K)',data:[30,42,38,55,48,65,70,60,75,82,78,90],borderColor:C.blu,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.blu,tension:.4,fill:false},{label:'New Signups (K)',data:[8,12,9,16,13,19,22,17,21,25,23,28],borderColor:C.grn,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.grn,tension:.4,fill:false}]},options:fullOpts()})}
-},
-{
-  id:'area',intent:'trend',type:'standard',name:'Area Chart',
-  tagline:'Emphasize volume over time',
-  bestFor:['Total magnitude matters','Cumulative metrics','Stacked totals over time'],
-  whenToUse:'Fill under a line to emphasize volume. Stacked areas show how components sum to a total over time -- ideal for market share or cost trends. Single areas work for cumulative metrics.',
-  avoidWhen:'Overlapping fills obscure each other (use lines), or individual trends matter more than the total.',
-  dataType:'X: Temporal · Y: Quantitative · Fill: Volume',
-  examples:['Revenue over time','Traffic by channel','Energy by source'],
-  mini(ctx){return new Chart(ctx,{type:'line',data:{labels:[0,1,2,3,4,5,6,7,8,9],datasets:[{data:[20,30,28,45,40,55,60,52,68,72],borderColor:C.blu,backgroundColor:C.blu+'44',borderWidth:2,pointRadius:0,tension:.4,fill:true},{data:[10,15,12,20,18,25,28,22,32,35],borderColor:C.grn,backgroundColor:C.grn+'44',borderWidth:2,pointRadius:0,tension:.4,fill:true}]},options:{...miniOpts(),scales:{x:{display:false,stacked:true},y:{display:false,stacked:true}}}})},
-  full(ctx){return new Chart(ctx,{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],datasets:[{label:'Organic',data:[20,30,28,45,40,55,60,52,68,72,80,88],borderColor:C.blu,backgroundColor:C.blu+'55',borderWidth:2,pointRadius:3,tension:.4,fill:true},{label:'Paid',data:[10,15,12,20,18,25,28,22,32,35,38,42],borderColor:C.grn,backgroundColor:C.grn+'55',borderWidth:2,pointRadius:3,tension:.4,fill:true},{label:'Direct',data:[5,8,7,10,9,12,14,11,15,18,17,20],borderColor:C.amb,backgroundColor:C.amb+'55',borderWidth:2,pointRadius:3,tension:.4,fill:true}]},options:{...fullOpts(),scales:{x:{ticks:TICK_C,grid:GRID_C,stacked:true},y:{ticks:TICK_C,grid:GRID_C,stacked:true}}}})}
-},
-{
-  id:'streamgraph',intent:'trend',type:'advanced',name:'Streamgraph',
-  tagline:'Organic flow of multiple categories over time',
-  bestFor:['Many categories evolving over time','Showing relative volume shifts','Narrative, organic aesthetic'],
-  whenToUse:'A streamgraph stacks area layers around a central baseline, creating an organic "river" shape. It de-emphasizes exact values but powerfully shows how the relative volume of categories shifts over time. Works with 4-10 categories.',
-  avoidWhen:'Exact values matter, fewer than 4 categories, or audience expects precision. Hard to read individual layer heights.',
-  dataType:'X: Temporal · Y: Quantitative (stacked) · Color: Category',
-  examples:['Music genre popularity 1960-2020','Browser market share over time','Topic mentions by month'],
-  mini(ctx,canvas){drawStreamMini(canvas);return null},
-  full(ctx,canvas){drawStreamFull(canvas);return null}
-},
-{
-  id:'ridgeline',intent:'trend',type:'advanced',name:'Ridgeline (Joy Plot)',
-  tagline:'Compare distribution shapes across a sequence',
-  bestFor:['Distribution shape comparison over time','Showing evolution of density','5-20 overlapping distributions'],
-  whenToUse:'Stack partially-overlapping density curves vertically, each representing a time period or category. Reveals how the shape of a distribution changes. Named after the Joy Division album cover.',
-  avoidWhen:'Exact quantiles matter, fewer than 5 distributions, or when overlap causes confusion about which curve is which.',
-  dataType:'X: Quantitative · Y: Ordinal/Temporal categories · Height: Density',
-  examples:['Temperature distribution by month','Response time distribution by release version','Income distribution by decade'],
-  mini(ctx,canvas){drawRidgeMini(canvas);return null},
-  full(ctx,canvas){drawRidgeFull(canvas);return null}
-},
+            // ── TREND ────────────────────────────────────────────
+            {
+                id: 'line', intent: 'trend', type: 'standard', name: 'Line Chart',
+                tagline: 'Show change over continuous time',
+                bestFor: ['Time-series data', 'Trends, peaks, dips', 'Up to 5 series over time'],
+                whenToUse: 'The default for time-series. Connect points to emphasize continuity -- the slope communicates speed of change. Use multiple lines (up to 5) to compare how series evolve together.',
+                avoidWhen: 'Categorical data with no ordering, or >5 lines (spaghetti). Use small multiples instead.',
+                dataType: 'X: Temporal/Ordinal · Y: Quantitative · Color: Series',
+                examples: ['Daily active users over a year', 'Stock price history', 'Temperature by month'],
+                mini(ctx) { return new Chart(ctx, { type: 'line', data: { labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], datasets: [{ data: [30, 42, 38, 55, 48, 65, 70, 60, 75, 82, 78, 90], borderColor: C.blu, borderWidth: 2, pointRadius: 0, tension: .4, fill: false }] }, options: miniOpts() }) },
+                full(ctx) { return new Chart(ctx, { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], datasets: [{ label: 'Active Users (K)', data: [30, 42, 38, 55, 48, 65, 70, 60, 75, 82, 78, 90], borderColor: C.blu, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: C.blu, tension: .4, fill: false }, { label: 'New Signups (K)', data: [8, 12, 9, 16, 13, 19, 22, 17, 21, 25, 23, 28], borderColor: C.grn, borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: C.grn, tension: .4, fill: false }] }, options: fullOpts() }) }
+            },
+            {
+                id: 'area', intent: 'trend', type: 'standard', name: 'Area Chart',
+                tagline: 'Emphasize volume over time',
+                bestFor: ['Total magnitude matters', 'Cumulative metrics', 'Stacked totals over time'],
+                whenToUse: 'Fill under a line to emphasize volume. Stacked areas show how components sum to a total over time -- ideal for market share or cost trends. Single areas work for cumulative metrics.',
+                avoidWhen: 'Overlapping fills obscure each other (use lines), or individual trends matter more than the total.',
+                dataType: 'X: Temporal · Y: Quantitative · Fill: Volume',
+                examples: ['Revenue over time', 'Traffic by channel', 'Energy by source'],
+                mini(ctx) { return new Chart(ctx, { type: 'line', data: { labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], datasets: [{ data: [20, 30, 28, 45, 40, 55, 60, 52, 68, 72], borderColor: C.blu, backgroundColor: C.blu + '44', borderWidth: 2, pointRadius: 0, tension: .4, fill: true }, { data: [10, 15, 12, 20, 18, 25, 28, 22, 32, 35], borderColor: C.grn, backgroundColor: C.grn + '44', borderWidth: 2, pointRadius: 0, tension: .4, fill: true }] }, options: { ...miniOpts(), scales: { x: { display: false, stacked: true }, y: { display: false, stacked: true } } } }) },
+                full(ctx) { return new Chart(ctx, { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], datasets: [{ label: 'Organic', data: [20, 30, 28, 45, 40, 55, 60, 52, 68, 72, 80, 88], borderColor: C.blu, backgroundColor: C.blu + '55', borderWidth: 2, pointRadius: 3, tension: .4, fill: true }, { label: 'Paid', data: [10, 15, 12, 20, 18, 25, 28, 22, 32, 35, 38, 42], borderColor: C.grn, backgroundColor: C.grn + '55', borderWidth: 2, pointRadius: 3, tension: .4, fill: true }, { label: 'Direct', data: [5, 8, 7, 10, 9, 12, 14, 11, 15, 18, 17, 20], borderColor: C.amb, backgroundColor: C.amb + '55', borderWidth: 2, pointRadius: 3, tension: .4, fill: true }] }, options: { ...fullOpts(), scales: { x: { ticks: TICK_C, grid: GRID_C, stacked: true }, y: { ticks: TICK_C, grid: GRID_C, stacked: true } } } }) }
+            },
+            {
+                id: 'streamgraph', intent: 'trend', type: 'advanced', name: 'Streamgraph',
+                tagline: 'Organic flow of multiple categories over time',
+                bestFor: ['Many categories evolving over time', 'Showing relative volume shifts', 'Narrative, organic aesthetic'],
+                whenToUse: 'A streamgraph stacks area layers around a central baseline, creating an organic "river" shape. It de-emphasizes exact values but powerfully shows how the relative volume of categories shifts over time. Works with 4-10 categories.',
+                avoidWhen: 'Exact values matter, fewer than 4 categories, or audience expects precision. Hard to read individual layer heights.',
+                dataType: 'X: Temporal · Y: Quantitative (stacked) · Color: Category',
+                examples: ['Music genre popularity 1960-2020', 'Browser market share over time', 'Topic mentions by month'],
+                mini(ctx, canvas) { drawStreamMini(canvas); return null },
+                full(ctx, canvas) { drawStreamFull(canvas); return null }
+            },
+            {
+                id: 'ridgeline', intent: 'trend', type: 'advanced', name: 'Ridgeline (Joy Plot)',
+                tagline: 'Compare distribution shapes across a sequence',
+                bestFor: ['Distribution shape comparison over time', 'Showing evolution of density', '5-20 overlapping distributions'],
+                whenToUse: 'Stack partially-overlapping density curves vertically, each representing a time period or category. Reveals how the shape of a distribution changes. Named after the Joy Division album cover.',
+                avoidWhen: 'Exact quantiles matter, fewer than 5 distributions, or when overlap causes confusion about which curve is which.',
+                dataType: 'X: Quantitative · Y: Ordinal/Temporal categories · Height: Density',
+                examples: ['Temperature distribution by month', 'Response time distribution by release version', 'Income distribution by decade'],
+                mini(ctx, canvas) { drawRidgeMini(canvas); return null },
+                full(ctx, canvas) { drawRidgeFull(canvas); return null }
+            },
 
-// ── PART-TO-WHOLE ────────────────────────────────────
-{
-  id:'pie',intent:'part-to-whole',type:'standard',name:'Pie Chart',
-  tagline:'Show proportions with few categories',
-  bestFor:['2-5 categories only','One slice clearly dominant','Simple proportional story'],
-  whenToUse:'Every slice sums to 100%. Use only with 2-5 categories when the proportional relationship is the key insight. The eye judges "about a quarter" or "about half" well.',
-  avoidWhen:'More than 5 slices, similar values (hard to distinguish), or when exact values matter. Humans are bad at comparing angles.',
-  dataType:'Qualitative categories · Quantitative values (sum to 100%)',
-  examples:['Market share breakdown','Budget allocation','Yes / No / Unsure survey'],
-  mini(ctx){return new Chart(ctx,{type:'pie',data:{labels:['A','B','C','D'],datasets:[{data:[38,25,22,15],backgroundColor:[C.grn+'cc',C.ind+'cc',C.blu+'cc',C.amb+'cc'],borderColor:['#0f1117'],borderWidth:2}]},options:noScale(miniOpts())})},
-  full(ctx){return new Chart(ctx,{type:'pie',data:{labels:['North America','Europe','Asia Pacific','Latin America','Middle East'],datasets:[{data:[38,25,22,10,5],backgroundColor:[C.grn+'cc',C.ind+'cc',C.blu+'cc',C.amb+'cc',C.pnk+'cc'],borderColor:['#0f1117'],borderWidth:3,hoverOffset:8}]},options:{...noScale(fullOpts()),plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:14}},tooltip:TIP}}})}
-},
-{
-  id:'donut',intent:'part-to-whole',type:'standard',name:'Donut Chart',
-  tagline:'Pie chart with a center KPI label',
-  bestFor:['Same as pie (2-5 categories)','Center space for a KPI total','Modern dashboard aesthetic'],
-  whenToUse:'Functionally identical to pie. The hollow center creates space for a summary number -- total, percentage, or label. Slightly easier to compare arc lengths than full slices.',
-  avoidWhen:'All pie caveats apply. Never use nested donuts -- unreadable.',
-  dataType:'Qualitative categories · Quantitative values (sum to 100%)',
-  examples:['Budget with total in center','Completion % widget','NPS score breakdown'],
-  mini(ctx){return new Chart(ctx,{type:'doughnut',data:{labels:['A','B','C','D'],datasets:[{data:[40,28,20,12],backgroundColor:[C.grn+'cc',C.ind+'cc',C.blu+'cc',C.amb+'cc'],borderColor:['#0f1117'],borderWidth:2}]},options:{...noScale(miniOpts()),cutout:'60%'}})},
-  full(ctx){return new Chart(ctx,{type:'doughnut',data:{labels:['Engineering','Marketing','Operations','Sales','R&D'],datasets:[{data:[35,20,15,18,12],backgroundColor:[C.ind+'cc',C.pnk+'cc',C.grn+'cc',C.amb+'cc',C.blu+'cc'],borderColor:['#0f1117'],borderWidth:3,hoverOffset:8}]},options:{...noScale(fullOpts()),cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:14}},tooltip:TIP}}})}
-},
-{
-  id:'stacked',intent:'part-to-whole',type:'standard',name:'Stacked Bar',
-  tagline:'Total + composition in one view',
-  bestFor:['Total size AND composition','2-5 components per category','Proportional changes across groups'],
-  whenToUse:'Shows both total and its parts. 100% stacked bars normalize to show proportional shifts. Use when both the total and breakdown matter -- e.g., headcount by team with seniority levels.',
-  avoidWhen:'Exact segment values are critical (only bottom segment has stable baseline), or more than 5 segments.',
-  dataType:'X: Categorical · Y: Quantitative · Color: Component',
-  examples:['Revenue by segment per quarter','Time allocation by project','Headcount by seniority per team'],
-  mini(ctx){return new Chart(ctx,{type:'bar',data:{labels:['A','B','C','D'],datasets:[{data:[25,35,20,40],backgroundColor:C.ind+'bb'},{data:[20,25,35,30],backgroundColor:C.blu+'bb'},{data:[15,10,20,15],backgroundColor:C.grn+'bb'}]},options:{...miniOpts(),scales:{x:{display:false,stacked:true},y:{display:false,stacked:true}}}})},
-  full(ctx){return new Chart(ctx,{type:'bar',data:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Enterprise',data:[120,145,160,190],backgroundColor:C.ind+'bb'},{label:'Mid-Market',data:[80,90,95,110],backgroundColor:C.blu+'bb'},{label:'SMB',data:[50,55,60,70],backgroundColor:C.grn+'bb'}]},options:{...fullOpts(),scales:{x:{ticks:TICK_C,grid:GRID_C,stacked:true},y:{ticks:TICK_C,grid:GRID_C,stacked:true}}}})}
-},
-{
-  id:'treemap',intent:'part-to-whole',type:'standard',name:'Treemap',
-  tagline:'Hierarchical proportions as nested rectangles',
-  bestFor:['Many categories (>10)','Hierarchical (parent/child)','Disk usage, portfolios, budgets'],
-  whenToUse:'Pack proportional data into rectangles -- area encodes value. Handles many more categories than pie and supports two levels via nesting and color.',
-  avoidWhen:'Exact values critical (area hard to compare), very few categories, or all values similar.',
-  dataType:'Hierarchical categories · Quantitative (determines area)',
-  examples:['OS market share','Expense breakdown','Stock portfolio by sector'],
-  mini(ctx,canvas){drawTreemapMini(canvas);return null},
-  full(ctx,canvas){drawTreemapFull(canvas);return null}
-},
-{
-  id:'waffle',intent:'part-to-whole',type:'advanced',name:'Waffle Chart',
-  tagline:'Discrete squares for intuitive percentages',
-  bestFor:['Showing percentages as discrete units','1-3 categories','When "73 out of 100" is the message'],
-  whenToUse:'A 10x10 grid of squares colored by category. Each square = 1%. Humans count discrete units more accurately than they judge angles (pie) or areas (treemap). Best for 1-3 categories with rounded percentages.',
-  avoidWhen:'More than 4 categories, values that do not sum to 100, or fractional percentages.',
-  dataType:'Categories with percentage values summing to 100',
-  examples:['73% completion rate','Market share: iOS 28%, Android 72%','Budget: 60% salaries, 25% ops, 15% R&D'],
-  mini(ctx,canvas){drawWaffleMini(canvas);return null},
-  full(ctx,canvas){drawWaffleFull(canvas);return null}
-},
-{
-  id:'sunburst',intent:'hierarchy',type:'advanced',name:'Sunburst',
-  tagline:'Multi-level hierarchy as concentric rings',
-  bestFor:['2-4 levels of hierarchy','Showing parent-child proportions','Interactive drill-down navigation'],
-  whenToUse:'A sunburst chart extends the donut to multiple rings, each representing a deeper level of hierarchy. The inner ring is the top level; outer rings are subdivisions. Click-to-drill interaction is expected.',
-  avoidWhen:'Deep hierarchies (>4 levels), many tiny segments, or when exact values matter.',
-  dataType:'Hierarchical: parent categories with child subdivisions · Quantitative: arc angle',
-  examples:['File system disk usage','Organizational structure with budgets','Product taxonomy with sales'],
-  mini(ctx,canvas){drawSunburstMini(canvas);return null},
-  full(ctx,canvas){drawSunburstFull(canvas);return null}
-},
+            // ── PART-TO-WHOLE ────────────────────────────────────
+            {
+                id: 'pie', intent: 'part-to-whole', type: 'standard', name: 'Pie Chart',
+                tagline: 'Show proportions with few categories',
+                bestFor: ['2-5 categories only', 'One slice clearly dominant', 'Simple proportional story'],
+                whenToUse: 'Every slice sums to 100%. Use only with 2-5 categories when the proportional relationship is the key insight. The eye judges "about a quarter" or "about half" well.',
+                avoidWhen: 'More than 5 slices, similar values (hard to distinguish), or when exact values matter. Humans are bad at comparing angles.',
+                dataType: 'Qualitative categories · Quantitative values (sum to 100%)',
+                examples: ['Market share breakdown', 'Budget allocation', 'Yes / No / Unsure survey'],
+                mini(ctx) { return new Chart(ctx, { type: 'pie', data: { labels: ['A', 'B', 'C', 'D'], datasets: [{ data: [38, 25, 22, 15], backgroundColor: [C.grn + 'cc', C.ind + 'cc', C.blu + 'cc', C.amb + 'cc'], borderColor: ['#0f1117'], borderWidth: 2 }] }, options: noScale(miniOpts()) }) },
+                full(ctx) { return new Chart(ctx, { type: 'pie', data: { labels: ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East'], datasets: [{ data: [38, 25, 22, 10, 5], backgroundColor: [C.grn + 'cc', C.ind + 'cc', C.blu + 'cc', C.amb + 'cc', C.pnk + 'cc'], borderColor: ['#0f1117'], borderWidth: 3, hoverOffset: 8 }] }, options: { ...noScale(fullOpts()), plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12, padding: 14 } }, tooltip: TIP } } }) }
+            },
+            {
+                id: 'donut', intent: 'part-to-whole', type: 'standard', name: 'Donut Chart',
+                tagline: 'Pie chart with a center KPI label',
+                bestFor: ['Same as pie (2-5 categories)', 'Center space for a KPI total', 'Modern dashboard aesthetic'],
+                whenToUse: 'Functionally identical to pie. The hollow center creates space for a summary number -- total, percentage, or label. Slightly easier to compare arc lengths than full slices.',
+                avoidWhen: 'All pie caveats apply. Never use nested donuts -- unreadable.',
+                dataType: 'Qualitative categories · Quantitative values (sum to 100%)',
+                examples: ['Budget with total in center', 'Completion % widget', 'NPS score breakdown'],
+                mini(ctx) { return new Chart(ctx, { type: 'doughnut', data: { labels: ['A', 'B', 'C', 'D'], datasets: [{ data: [40, 28, 20, 12], backgroundColor: [C.grn + 'cc', C.ind + 'cc', C.blu + 'cc', C.amb + 'cc'], borderColor: ['#0f1117'], borderWidth: 2 }] }, options: { ...noScale(miniOpts()), cutout: '60%' } }) },
+                full(ctx) { return new Chart(ctx, { type: 'doughnut', data: { labels: ['Engineering', 'Marketing', 'Operations', 'Sales', 'R&D'], datasets: [{ data: [35, 20, 15, 18, 12], backgroundColor: [C.ind + 'cc', C.pnk + 'cc', C.grn + 'cc', C.amb + 'cc', C.blu + 'cc'], borderColor: ['#0f1117'], borderWidth: 3, hoverOffset: 8 }] }, options: { ...noScale(fullOpts()), cutout: '60%', plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12, padding: 14 } }, tooltip: TIP } } }) }
+            },
+            {
+                id: 'stacked', intent: 'part-to-whole', type: 'standard', name: 'Stacked Bar',
+                tagline: 'Total + composition in one view',
+                bestFor: ['Total size AND composition', '2-5 components per category', 'Proportional changes across groups'],
+                whenToUse: 'Shows both total and its parts. 100% stacked bars normalize to show proportional shifts. Use when both the total and breakdown matter -- e.g., headcount by team with seniority levels.',
+                avoidWhen: 'Exact segment values are critical (only bottom segment has stable baseline), or more than 5 segments.',
+                dataType: 'X: Categorical · Y: Quantitative · Color: Component',
+                examples: ['Revenue by segment per quarter', 'Time allocation by project', 'Headcount by seniority per team'],
+                mini(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['A', 'B', 'C', 'D'], datasets: [{ data: [25, 35, 20, 40], backgroundColor: C.ind + 'bb' }, { data: [20, 25, 35, 30], backgroundColor: C.blu + 'bb' }, { data: [15, 10, 20, 15], backgroundColor: C.grn + 'bb' }] }, options: { ...miniOpts(), scales: { x: { display: false, stacked: true }, y: { display: false, stacked: true } } } }) },
+                full(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], datasets: [{ label: 'Enterprise', data: [120, 145, 160, 190], backgroundColor: C.ind + 'bb' }, { label: 'Mid-Market', data: [80, 90, 95, 110], backgroundColor: C.blu + 'bb' }, { label: 'SMB', data: [50, 55, 60, 70], backgroundColor: C.grn + 'bb' }] }, options: { ...fullOpts(), scales: { x: { ticks: TICK_C, grid: GRID_C, stacked: true }, y: { ticks: TICK_C, grid: GRID_C, stacked: true } } } }) }
+            },
+            {
+                id: 'treemap', intent: 'part-to-whole', type: 'standard', name: 'Treemap',
+                tagline: 'Hierarchical proportions as nested rectangles',
+                bestFor: ['Many categories (>10)', 'Hierarchical (parent/child)', 'Disk usage, portfolios, budgets'],
+                whenToUse: 'Pack proportional data into rectangles -- area encodes value. Handles many more categories than pie and supports two levels via nesting and color.',
+                avoidWhen: 'Exact values critical (area hard to compare), very few categories, or all values similar.',
+                dataType: 'Hierarchical categories · Quantitative (determines area)',
+                examples: ['OS market share', 'Expense breakdown', 'Stock portfolio by sector'],
+                mini(ctx, canvas) { drawTreemapMini(canvas); return null },
+                full(ctx, canvas) { drawTreemapFull(canvas); return null }
+            },
+            {
+                id: 'waffle', intent: 'part-to-whole', type: 'advanced', name: 'Waffle Chart',
+                tagline: 'Discrete squares for intuitive percentages',
+                bestFor: ['Showing percentages as discrete units', '1-3 categories', 'When "73 out of 100" is the message'],
+                whenToUse: 'A 10x10 grid of squares colored by category. Each square = 1%. Humans count discrete units more accurately than they judge angles (pie) or areas (treemap). Best for 1-3 categories with rounded percentages.',
+                avoidWhen: 'More than 4 categories, values that do not sum to 100, or fractional percentages.',
+                dataType: 'Categories with percentage values summing to 100',
+                examples: ['73% completion rate', 'Market share: iOS 28%, Android 72%', 'Budget: 60% salaries, 25% ops, 15% R&D'],
+                mini(ctx, canvas) { drawWaffleMini(canvas); return null },
+                full(ctx, canvas) { drawWaffleFull(canvas); return null }
+            },
+            {
+                id: 'sunburst', intent: 'hierarchy', type: 'advanced', name: 'Sunburst',
+                tagline: 'Multi-level hierarchy as concentric rings',
+                bestFor: ['2-4 levels of hierarchy', 'Showing parent-child proportions', 'Interactive drill-down navigation'],
+                whenToUse: 'A sunburst chart extends the donut to multiple rings, each representing a deeper level of hierarchy. The inner ring is the top level; outer rings are subdivisions. Click-to-drill interaction is expected.',
+                avoidWhen: 'Deep hierarchies (>4 levels), many tiny segments, or when exact values matter.',
+                dataType: 'Hierarchical: parent categories with child subdivisions · Quantitative: arc angle',
+                examples: ['File system disk usage', 'Organizational structure with budgets', 'Product taxonomy with sales'],
+                mini(ctx, canvas) { drawSunburstMini(canvas); return null },
+                full(ctx, canvas) { drawSunburstFull(canvas); return null }
+            },
 
-// ── DISTRIBUTION ─────────────────────────────────────
-{
-  id:'histogram',intent:'distribution',type:'standard',name:'Histogram',
-  tagline:'Reveal the shape of a distribution',
-  bestFor:['Single continuous variable','Finding skew, peaks, outliers','Checking normality'],
-  whenToUse:'Group continuous data into bins to show how many values fall in each range. Understand shape: symmetric? Skewed? Bimodal? First chart before fitting a model.',
-  avoidWhen:'Categorical data (use bar chart). Bin count changes shape -- try several widths.',
-  dataType:'X: Continuous (binned) · Y: Frequency',
-  examples:['Customer age distribution','Response time distribution','Product rating distribution'],
-  mini(ctx){const d=[5,12,22,38,45,35,28,16,8,3];return new Chart(ctx,{type:'bar',data:{labels:d.map((_,i)=>i),datasets:[{data:d,backgroundColor:C.amb+'bb',borderColor:C.amb,borderWidth:1,borderRadius:2,categoryPercentage:1,barPercentage:.95}]},options:miniOpts()})},
-  full(ctx){const d=[2,5,12,22,38,55,65,58,45,35,25,16,9,4,2];const l=['<20','20','25','30','35','40','45','50','55','60','65','70','75','80','85+'];return new Chart(ctx,{type:'bar',data:{labels:l,datasets:[{label:'Count',data:d,backgroundColor:C.amb+'bb',borderColor:C.amb,borderWidth:1,borderRadius:3,categoryPercentage:1,barPercentage:.9}]},options:fullOpts()})}
-},
-{
-  id:'violin',intent:'distribution',type:'advanced',name:'Violin Plot',
-  tagline:'Distribution shape + density in one view',
-  bestFor:['Comparing distributions across groups','Seeing bimodality and skew','Alternative to box plots'],
-  whenToUse:'Mirrors a density curve on both sides of an axis, creating a violin shape. Shows the full distribution shape (not just quartiles like a box plot). Compare 2-8 groups side by side.',
-  avoidWhen:'Small samples (<30), when quartiles/median are the focus (use box plot), or non-technical audience.',
-  dataType:'Y: Quantitative · X: Categorical groups · Width: Density',
-  examples:['Salary distribution by department','Score distribution by test version','Latency distribution by server region'],
-  mini(ctx,canvas){drawViolinMini(canvas);return null},
-  full(ctx,canvas){drawViolinFull(canvas);return null}
-},
+            // ── DISTRIBUTION ─────────────────────────────────────
+            {
+                id: 'histogram', intent: 'distribution', type: 'standard', name: 'Histogram',
+                tagline: 'Reveal the shape of a distribution',
+                bestFor: ['Single continuous variable', 'Finding skew, peaks, outliers', 'Checking normality'],
+                whenToUse: 'Group continuous data into bins to show how many values fall in each range. Understand shape: symmetric? Skewed? Bimodal? First chart before fitting a model.',
+                avoidWhen: 'Categorical data (use bar chart). Bin count changes shape -- try several widths.',
+                dataType: 'X: Continuous (binned) · Y: Frequency',
+                examples: ['Customer age distribution', 'Response time distribution', 'Product rating distribution'],
+                mini(ctx) { const d = [5, 12, 22, 38, 45, 35, 28, 16, 8, 3]; return new Chart(ctx, { type: 'bar', data: { labels: d.map((_, i) => i), datasets: [{ data: d, backgroundColor: C.amb + 'bb', borderColor: C.amb, borderWidth: 1, borderRadius: 2, categoryPercentage: 1, barPercentage: .95 }] }, options: miniOpts() }) },
+                full(ctx) { const d = [2, 5, 12, 22, 38, 55, 65, 58, 45, 35, 25, 16, 9, 4, 2]; const l = ['<20', '20', '25', '30', '35', '40', '45', '50', '55', '60', '65', '70', '75', '80', '85+']; return new Chart(ctx, { type: 'bar', data: { labels: l, datasets: [{ label: 'Count', data: d, backgroundColor: C.amb + 'bb', borderColor: C.amb, borderWidth: 1, borderRadius: 3, categoryPercentage: 1, barPercentage: .9 }] }, options: fullOpts() }) }
+            },
+            {
+                id: 'violin', intent: 'distribution', type: 'advanced', name: 'Violin Plot',
+                tagline: 'Distribution shape + density in one view',
+                bestFor: ['Comparing distributions across groups', 'Seeing bimodality and skew', 'Alternative to box plots'],
+                whenToUse: 'Mirrors a density curve on both sides of an axis, creating a violin shape. Shows the full distribution shape (not just quartiles like a box plot). Compare 2-8 groups side by side.',
+                avoidWhen: 'Small samples (<30), when quartiles/median are the focus (use box plot), or non-technical audience.',
+                dataType: 'Y: Quantitative · X: Categorical groups · Width: Density',
+                examples: ['Salary distribution by department', 'Score distribution by test version', 'Latency distribution by server region'],
+                mini(ctx, canvas) { drawViolinMini(canvas); return null },
+                full(ctx, canvas) { drawViolinFull(canvas); return null }
+            },
 
-// ── RELATIONSHIP ─────────────────────────────────────
-{
-  id:'scatter',intent:'relationship',type:'standard',name:'Scatter Plot',
-  tagline:'Find correlations between two variables',
-  bestFor:['Two quantitative variables','Spotting outliers','Hundreds-thousands of points'],
-  whenToUse:'Each dot is one observation plotted on two axes. Reveals positive, negative, or no correlation. Add a trend line to make the relationship explicit.',
-  avoidWhen:'Fewer than ~20 points (use a table) or overplotting hides density (use a heatmap).',
-  dataType:'X: Quantitative · Y: Quantitative · Optional: Color, Size',
-  examples:['Ad spend vs conversions','Height vs weight','Study hours vs exam score'],
-  mini(ctx){const p=Array.from({length:30},()=>({x:Math.random()*80+10,y:Math.random()*60+20}));return new Chart(ctx,{type:'scatter',data:{datasets:[{data:p,backgroundColor:C.pnk+'99',borderColor:C.pnk,pointRadius:3}]},options:miniOpts()})},
-  full(ctx){
-    const ds=[{label:'Electronics',c:C.pnk,pts:Array.from({length:40},()=>{const x=Math.random()*80+20;return{x,y:x*.9+Math.random()*25}})},{label:'Fashion',c:C.ind,pts:Array.from({length:35},()=>{const x=Math.random()*60+10;return{x,y:x*.7+Math.random()*20+15}})},{label:'Food',c:C.grn,pts:Array.from({length:30},()=>{const x=Math.random()*50+5;return{x,y:x*1.1+Math.random()*15}})}];
-    return new Chart(ctx,{type:'scatter',data:{datasets:ds.map(d=>({label:d.label,data:d.pts,backgroundColor:d.c+'99',borderColor:d.c,pointRadius:5}))},options:{...fullOpts(),scales:{x:{ticks:TICK_C,grid:GRID_C,title:{display:true,text:'Ad Spend ($K)',color:'#94a3b8'}},y:{ticks:TICK_C,grid:GRID_C,title:{display:true,text:'Revenue ($K)',color:'#94a3b8'}}}}})
-  }
-},
-{
-  id:'bubble',intent:'relationship',type:'standard',name:'Bubble Chart',
-  tagline:'Encode a third variable as bubble size',
-  bestFor:['3-variable relationships','Comparing entities on 3 dimensions','5-50 labeled bubbles'],
-  whenToUse:'Extends scatter by encoding a third quantitative variable as radius. Classic: GDP (x) vs life expectancy (y) vs population (size).',
-  avoidWhen:'Size spans many orders of magnitude, many overlapping bubbles, or size is the primary story (use bar).',
-  dataType:'X: Quantitative · Y: Quantitative · Size: Quantitative · Color: Category',
-  examples:['Countries: GDP vs life expectancy vs population','Products: price vs rating vs sales volume'],
-  mini(ctx){const p=[{x:30,y:70,r:8},{x:55,y:60,r:14},{x:70,y:80,r:6},{x:45,y:50,r:18},{x:80,y:65,r:10}];return new Chart(ctx,{type:'bubble',data:{datasets:[{data:p,backgroundColor:C.pnk+'88',borderColor:C.pnk,borderWidth:1}]},options:miniOpts()})},
-  full(ctx){
-    const cs=[{l:'USA',x:65,y:78.8,r:18,c:C.blu},{l:'China',x:12.5,y:76.1,r:22,c:C.red},{l:'Germany',x:50.8,y:80.9,r:10,c:C.grn},{l:'India',x:2.3,y:69.4,r:20,c:C.amb},{l:'Japan',x:40,y:84.3,r:12,c:C.pnk},{l:'Brazil',x:8.9,y:75.7,r:13,c:C.org}];
-    return new Chart(ctx,{type:'bubble',data:{datasets:cs.map(d=>({label:d.l,data:[{x:d.x,y:d.y,r:d.r}],backgroundColor:d.c+'99',borderColor:d.c,borderWidth:1.5}))},options:{...fullOpts(),scales:{x:{ticks:TICK_C,grid:GRID_C,title:{display:true,text:'GDP per capita ($K)',color:'#94a3b8'}},y:{ticks:TICK_C,grid:GRID_C,title:{display:true,text:'Life Expectancy',color:'#94a3b8'}}}}})
-  }
-},
-{
-  id:'chord',intent:'relationship',type:'advanced',name:'Chord Diagram',
-  tagline:'Show flows between interconnected entities',
-  bestFor:['Mutual relationships or flows','Migration, trade, communication between groups','Symmetric matrices'],
-  whenToUse:'Entities sit on a circle; ribbons connect them, with thickness proportional to flow magnitude. Reveals which pairs have the strongest connections and the relative volume of each entity.',
-  avoidWhen:'More than 8 entities (too many ribbons), asymmetric data (use Sankey), or when exact values matter.',
-  dataType:'Square matrix: entities x entities · Values: Flow magnitude',
-  examples:['Immigration between countries','Inter-departmental email volume','Trade flows between regions'],
-  mini(ctx,canvas){drawChordMini(canvas);return null},
-  full(ctx,canvas){drawChordFull(canvas);return null}
-},
-{
-  id:'network',intent:'relationship',type:'advanced',name:'Network Graph',
-  tagline:'Map connections between entities',
-  bestFor:['Node-link structures','Social networks, citations','Finding clusters and hubs'],
-  whenToUse:'Nodes represent entities, edges represent connections. Force-directed layouts reveal clusters, bridges, and hubs. Best for 10-100 nodes with natural grouping.',
-  avoidWhen:'More than ~100 nodes (hairball), when structure is simple (use a list), or when edge weights are the primary story (use chord).',
-  dataType:'Nodes: Entities · Edges: Connections · Optional: Size, Color, Weight',
-  examples:['Social network graph','API dependency map','Citation network','Skill synapse connections'],
-  mini(ctx,canvas){drawNetworkMini(canvas);return null},
-  full(ctx,canvas){drawNetworkFull(canvas);return null}
-},
+            // ── RELATIONSHIP ─────────────────────────────────────
+            {
+                id: 'scatter', intent: 'relationship', type: 'standard', name: 'Scatter Plot',
+                tagline: 'Find correlations between two variables',
+                bestFor: ['Two quantitative variables', 'Spotting outliers', 'Hundreds-thousands of points'],
+                whenToUse: 'Each dot is one observation plotted on two axes. Reveals positive, negative, or no correlation. Add a trend line to make the relationship explicit.',
+                avoidWhen: 'Fewer than ~20 points (use a table) or overplotting hides density (use a heatmap).',
+                dataType: 'X: Quantitative · Y: Quantitative · Optional: Color, Size',
+                examples: ['Ad spend vs conversions', 'Height vs weight', 'Study hours vs exam score'],
+                mini(ctx) { const p = Array.from({ length: 30 }, () => ({ x: Math.random() * 80 + 10, y: Math.random() * 60 + 20 })); return new Chart(ctx, { type: 'scatter', data: { datasets: [{ data: p, backgroundColor: C.pnk + '99', borderColor: C.pnk, pointRadius: 3 }] }, options: miniOpts() }) },
+                full(ctx) {
+                    const ds = [{ label: 'Electronics', c: C.pnk, pts: Array.from({ length: 40 }, () => { const x = Math.random() * 80 + 20; return { x, y: x * .9 + Math.random() * 25 } }) }, { label: 'Fashion', c: C.ind, pts: Array.from({ length: 35 }, () => { const x = Math.random() * 60 + 10; return { x, y: x * .7 + Math.random() * 20 + 15 } }) }, { label: 'Food', c: C.grn, pts: Array.from({ length: 30 }, () => { const x = Math.random() * 50 + 5; return { x, y: x * 1.1 + Math.random() * 15 } }) }];
+                    return new Chart(ctx, { type: 'scatter', data: { datasets: ds.map(d => ({ label: d.label, data: d.pts, backgroundColor: d.c + '99', borderColor: d.c, pointRadius: 5 })) }, options: { ...fullOpts(), scales: { x: { ticks: TICK_C, grid: GRID_C, title: { display: true, text: 'Ad Spend ($K)', color: '#94a3b8' } }, y: { ticks: TICK_C, grid: GRID_C, title: { display: true, text: 'Revenue ($K)', color: '#94a3b8' } } } } })
+                }
+            },
+            {
+                id: 'bubble', intent: 'relationship', type: 'standard', name: 'Bubble Chart',
+                tagline: 'Encode a third variable as bubble size',
+                bestFor: ['3-variable relationships', 'Comparing entities on 3 dimensions', '5-50 labeled bubbles'],
+                whenToUse: 'Extends scatter by encoding a third quantitative variable as radius. Classic: GDP (x) vs life expectancy (y) vs population (size).',
+                avoidWhen: 'Size spans many orders of magnitude, many overlapping bubbles, or size is the primary story (use bar).',
+                dataType: 'X: Quantitative · Y: Quantitative · Size: Quantitative · Color: Category',
+                examples: ['Countries: GDP vs life expectancy vs population', 'Products: price vs rating vs sales volume'],
+                mini(ctx) { const p = [{ x: 30, y: 70, r: 8 }, { x: 55, y: 60, r: 14 }, { x: 70, y: 80, r: 6 }, { x: 45, y: 50, r: 18 }, { x: 80, y: 65, r: 10 }]; return new Chart(ctx, { type: 'bubble', data: { datasets: [{ data: p, backgroundColor: C.pnk + '88', borderColor: C.pnk, borderWidth: 1 }] }, options: miniOpts() }) },
+                full(ctx) {
+                    const cs = [{ l: 'USA', x: 65, y: 78.8, r: 18, c: C.blu }, { l: 'China', x: 12.5, y: 76.1, r: 22, c: C.red }, { l: 'Germany', x: 50.8, y: 80.9, r: 10, c: C.grn }, { l: 'India', x: 2.3, y: 69.4, r: 20, c: C.amb }, { l: 'Japan', x: 40, y: 84.3, r: 12, c: C.pnk }, { l: 'Brazil', x: 8.9, y: 75.7, r: 13, c: C.org }];
+                    return new Chart(ctx, { type: 'bubble', data: { datasets: cs.map(d => ({ label: d.l, data: [{ x: d.x, y: d.y, r: d.r }], backgroundColor: d.c + '99', borderColor: d.c, borderWidth: 1.5 })) }, options: { ...fullOpts(), scales: { x: { ticks: TICK_C, grid: GRID_C, title: { display: true, text: 'GDP per capita ($K)', color: '#94a3b8' } }, y: { ticks: TICK_C, grid: GRID_C, title: { display: true, text: 'Life Expectancy', color: '#94a3b8' } } } } })
+                }
+            },
+            {
+                id: 'chord', intent: 'relationship', type: 'advanced', name: 'Chord Diagram',
+                tagline: 'Show flows between interconnected entities',
+                bestFor: ['Mutual relationships or flows', 'Migration, trade, communication between groups', 'Symmetric matrices'],
+                whenToUse: 'Entities sit on a circle; ribbons connect them, with thickness proportional to flow magnitude. Reveals which pairs have the strongest connections and the relative volume of each entity.',
+                avoidWhen: 'More than 8 entities (too many ribbons), asymmetric data (use Sankey), or when exact values matter.',
+                dataType: 'Square matrix: entities x entities · Values: Flow magnitude',
+                examples: ['Immigration between countries', 'Inter-departmental email volume', 'Trade flows between regions'],
+                mini(ctx, canvas) { drawChordMini(canvas); return null },
+                full(ctx, canvas) { drawChordFull(canvas); return null }
+            },
+            {
+                id: 'network', intent: 'relationship', type: 'advanced', name: 'Network Graph',
+                tagline: 'Map connections between entities',
+                bestFor: ['Node-link structures', 'Social networks, citations', 'Finding clusters and hubs'],
+                whenToUse: 'Nodes represent entities, edges represent connections. Force-directed layouts reveal clusters, bridges, and hubs. Best for 10-100 nodes with natural grouping.',
+                avoidWhen: 'More than ~100 nodes (hairball), when structure is simple (use a list), or when edge weights are the primary story (use chord).',
+                dataType: 'Nodes: Entities · Edges: Connections · Optional: Size, Color, Weight',
+                examples: ['Social network graph', 'API dependency map', 'Citation network', 'Skill synapse connections'],
+                mini(ctx, canvas) { drawNetworkMini(canvas); return null },
+                full(ctx, canvas) { drawNetworkFull(canvas); return null }
+            },
 
-// ── FLOW ─────────────────────────────────────────────
-{
-  id:'sankey',intent:'flow',type:'advanced',name:'Sankey Diagram',
-  tagline:'Trace flows from source to destination',
-  bestFor:['Multi-stage flows','Energy/budget/conversion funnels','Showing where volume goes'],
-  whenToUse:'Nodes represent stages or categories; links show flow between them with width proportional to volume. Reveals where the biggest transfers happen and where volume is lost. Classic: energy production to consumption.',
-  avoidWhen:'Few paths (<3), circular flows (Sankey is acyclic), or when timing matters (use line chart).',
-  dataType:'Source-Target pairs with quantitative flow values',
-  examples:['Website conversion funnel','Budget allocation through departments','Energy production to consumption'],
-  mini(ctx,canvas){drawSankeyMini(canvas);return null},
-  full(ctx,canvas){drawSankeyFull(canvas);return null}
-},
+            // ── FLOW ─────────────────────────────────────────────
+            {
+                id: 'sankey', intent: 'flow', type: 'advanced', name: 'Sankey Diagram',
+                tagline: 'Trace flows from source to destination',
+                bestFor: ['Multi-stage flows', 'Energy/budget/conversion funnels', 'Showing where volume goes'],
+                whenToUse: 'Nodes represent stages or categories; links show flow between them with width proportional to volume. Reveals where the biggest transfers happen and where volume is lost. Classic: energy production to consumption.',
+                avoidWhen: 'Few paths (<3), circular flows (Sankey is acyclic), or when timing matters (use line chart).',
+                dataType: 'Source-Target pairs with quantitative flow values',
+                examples: ['Website conversion funnel', 'Budget allocation through departments', 'Energy production to consumption'],
+                mini(ctx, canvas) { drawSankeyMini(canvas); return null },
+                full(ctx, canvas) { drawSankeyFull(canvas); return null }
+            },
 
-// ── SPATIAL ──────────────────────────────────────────
-{
-  id:'heatmap',intent:'spatial',type:'standard',name:'Heatmap',
-  tagline:'Reveal patterns across two dimensions',
-  bestFor:['Two categorical + one quantitative','Time-based pattern detection','Correlation matrices'],
-  whenToUse:'Color intensity encodes a value on a 2D grid. Reveals patterns, cycles, and anomalies -- e.g., hourly sales by day of week, or feature correlations.',
-  avoidWhen:'Exact values critical (color is coarse), few cells (use table), or colorblind audience without safe palette.',
-  dataType:'X: Categorical · Y: Categorical · Color: Quantitative',
-  examples:['Traffic by hour and day','Correlation matrix','Call center volume heatmap'],
-  mini(ctx,canvas){drawHeatmapMini(canvas);return null},
-  full(ctx,canvas){drawHeatmapFull(canvas);return null}
-},
+            // ── SPATIAL ──────────────────────────────────────────
+            {
+                id: 'heatmap', intent: 'spatial', type: 'standard', name: 'Heatmap',
+                tagline: 'Reveal patterns across two dimensions',
+                bestFor: ['Two categorical + one quantitative', 'Time-based pattern detection', 'Correlation matrices'],
+                whenToUse: 'Color intensity encodes a value on a 2D grid. Reveals patterns, cycles, and anomalies -- e.g., hourly sales by day of week, or feature correlations.',
+                avoidWhen: 'Exact values critical (color is coarse), few cells (use table), or colorblind audience without safe palette.',
+                dataType: 'X: Categorical · Y: Categorical · Color: Quantitative',
+                examples: ['Traffic by hour and day', 'Correlation matrix', 'Call center volume heatmap'],
+                mini(ctx, canvas) { drawHeatmapMini(canvas); return null },
+                full(ctx, canvas) { drawHeatmapFull(canvas); return null }
+            },
 
-// ── DEVIATION ────────────────────────────────────────
-{
-  id:'diverging',intent:'deviation',type:'standard',name:'Diverging Bar',
-  tagline:'Show positive and negative deviations from a baseline',
-  bestFor:['Above/below target comparison','Sentiment (positive/negative)','Budget variance analysis'],
-  whenToUse:'Bars extend left for negative values and right for positive, sharing a central zero baseline. Immediately communicates which items are above or below target and by how much.',
-  avoidWhen:'No meaningful baseline exists, or when all values are the same sign (use standard bar).',
-  dataType:'X: Quantitative (+ and -) · Y: Categorical items',
-  examples:['Actual vs budget variance by department','NPS: promoters vs detractors by product','Year-over-year growth by region'],
-  mini(ctx){return new Chart(ctx,{type:'bar',data:{labels:['A','B','C','D','E','F'],datasets:[{data:[12,-8,25,-15,18,-5],backgroundColor:ctx2=>{const v=[12,-8,25,-15,18,-5];return v.map(x=>x>=0?C.grn+'bb':C.red+'bb')},borderWidth:0,borderRadius:3}]},options:{...miniOpts(),indexAxis:'y'}})},
-  full(ctx){
-    const labels=['Engineering','Marketing','Sales','Operations','R&D','Support','Legal','HR'];
-    const data=[12,-8,25,-15,18,-5,3,-2];
-    return new Chart(ctx,{type:'bar',data:{labels,datasets:[{label:'Budget Variance (%)',data,backgroundColor:data.map(v=>v>=0?C.grn+'bb':C.red+'bb'),borderColor:data.map(v=>v>=0?C.grn:C.red),borderWidth:1,borderRadius:4}]},options:{...fullOpts(),indexAxis:'y',scales:{x:{ticks:TICK_C,grid:GRID_C},y:{ticks:TICK_C,grid:{display:false}}}}})
-  }
-},
-];
+            // ── DEVIATION ────────────────────────────────────────
+            {
+                id: 'diverging', intent: 'deviation', type: 'standard', name: 'Diverging Bar',
+                tagline: 'Show positive and negative deviations from a baseline',
+                bestFor: ['Above/below target comparison', 'Sentiment (positive/negative)', 'Budget variance analysis'],
+                whenToUse: 'Bars extend left for negative values and right for positive, sharing a central zero baseline. Immediately communicates which items are above or below target and by how much.',
+                avoidWhen: 'No meaningful baseline exists, or when all values are the same sign (use standard bar).',
+                dataType: 'X: Quantitative (+ and -) · Y: Categorical items',
+                examples: ['Actual vs budget variance by department', 'NPS: promoters vs detractors by product', 'Year-over-year growth by region'],
+                mini(ctx) { return new Chart(ctx, { type: 'bar', data: { labels: ['A', 'B', 'C', 'D', 'E', 'F'], datasets: [{ data: [12, -8, 25, -15, 18, -5], backgroundColor: ctx2 => { const v = [12, -8, 25, -15, 18, -5]; return v.map(x => x >= 0 ? C.grn + 'bb' : C.red + 'bb') }, borderWidth: 0, borderRadius: 3 }] }, options: { ...miniOpts(), indexAxis: 'y' } }) },
+                full(ctx) {
+                    const labels = ['Engineering', 'Marketing', 'Sales', 'Operations', 'R&D', 'Support', 'Legal', 'HR'];
+                    const data = [12, -8, 25, -15, 18, -5, 3, -2];
+                    return new Chart(ctx, { type: 'bar', data: { labels, datasets: [{ label: 'Budget Variance (%)', data, backgroundColor: data.map(v => v >= 0 ? C.grn + 'bb' : C.red + 'bb'), borderColor: data.map(v => v >= 0 ? C.grn : C.red), borderWidth: 1, borderRadius: 4 }] }, options: { ...fullOpts(), indexAxis: 'y', scales: { x: { ticks: TICK_C, grid: GRID_C }, y: { ticks: TICK_C, grid: { display: false } } } } })
+                }
+            },
+        ];
 
-// ================================================================
-//  CANVAS RENDERERS — Advanced chart types
-// ================================================================
+        // ================================================================
+        //  CANVAS RENDERERS — Advanced chart types
+        // ================================================================
 
-// ── Heatmap ──
-const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-const HOURS=['12a','2a','4a','6a','8a','10a','12p','2p','4p','6p','8p','10p'];
-const HEAT_DATA=DAYS.map((d,di)=>HOURS.map((h,hi)=>{
-  let v=Math.random()*30;
-  if(hi>=4&&hi<=7&&di<5)v+=50+Math.random()*40;
-  if(hi>=6&&hi<=8&&di<5)v+=30+Math.random()*30;
-  if(di>=5)v+=20+Math.random()*30;
-  return Math.round(v);
-}));
-function heatColor(v,lo,hi){const t=(v-lo)/(hi-lo);if(t<.5){const s=t*2;return`rgb(${Math.round(15+84*s)},${Math.round(17+85*s)},${Math.round(39+202*s)})`}else{const s=(t-.5)*2;return`rgb(${Math.round(99+146*s)},${Math.round(102+56*s)},${Math.round(241-230*s)})`}}
-function drawHeatmapMini(canvas){const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||130;canvas.width=W;canvas.height=H;const flat=HEAT_DATA.flat(),lo=Math.min(...flat),hi=Math.max(...flat);const cw=W/12,ch=H/7;HEAT_DATA.forEach((r,ri)=>r.forEach((v,ci)=>{ctx.fillStyle=heatColor(v,lo,hi);ctx.fillRect(ci*cw+.5,ri*ch+.5,cw-1,ch-1)}))}
-function drawHeatmapFull(canvas){const ctx=canvas.getContext('2d');const PL=36,PT=10,PB=28,PR=10;const W=canvas.clientWidth||600,H=canvas.clientHeight||340;canvas.width=W;canvas.height=H;const gW=W-PL-PR,gH=H-PT-PB;const cw=gW/12,ch=gH/7;const flat=HEAT_DATA.flat(),lo=Math.min(...flat),hi=Math.max(...flat);ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);HEAT_DATA.forEach((r,ri)=>r.forEach((v,ci)=>{ctx.fillStyle=heatColor(v,lo,hi);ctx.beginPath();ctx.roundRect(PL+ci*cw+1,PT+ri*ch+1,cw-2,ch-2,3);ctx.fill()}));ctx.fillStyle='#94a3b8';ctx.font='11px Segoe UI,sans-serif';ctx.textAlign='right';DAYS.forEach((d,i)=>ctx.fillText(d,PL-6,PT+i*ch+ch/2+4));ctx.textAlign='center';HOURS.forEach((h,i)=>ctx.fillText(h,PL+i*cw+cw/2,H-PB+16))}
+        // ── Heatmap ──
+        const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const HOURS = ['12a', '2a', '4a', '6a', '8a', '10a', '12p', '2p', '4p', '6p', '8p', '10p'];
+        const HEAT_DATA = DAYS.map((d, di) => HOURS.map((h, hi) => {
+            let v = Math.random() * 30;
+            if (hi >= 4 && hi <= 7 && di < 5) v += 50 + Math.random() * 40;
+            if (hi >= 6 && hi <= 8 && di < 5) v += 30 + Math.random() * 30;
+            if (di >= 5) v += 20 + Math.random() * 30;
+            return Math.round(v);
+        }));
+        function heatColor(v, lo, hi) { const t = (v - lo) / (hi - lo); if (t < .5) { const s = t * 2; return `rgb(${Math.round(15 + 84 * s)},${Math.round(17 + 85 * s)},${Math.round(39 + 202 * s)})` } else { const s = (t - .5) * 2; return `rgb(${Math.round(99 + 146 * s)},${Math.round(102 + 56 * s)},${Math.round(241 - 230 * s)})` } }
+        function drawHeatmapMini(canvas) { const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 130; canvas.width = W; canvas.height = H; const flat = HEAT_DATA.flat(), lo = Math.min(...flat), hi = Math.max(...flat); const cw = W / 12, ch = H / 7; HEAT_DATA.forEach((r, ri) => r.forEach((v, ci) => { ctx.fillStyle = heatColor(v, lo, hi); ctx.fillRect(ci * cw + .5, ri * ch + .5, cw - 1, ch - 1) })) }
+        function drawHeatmapFull(canvas) { const ctx = canvas.getContext('2d'); const PL = 36, PT = 10, PB = 28, PR = 10; const W = canvas.clientWidth || 600, H = canvas.clientHeight || 340; canvas.width = W; canvas.height = H; const gW = W - PL - PR, gH = H - PT - PB; const cw = gW / 12, ch = gH / 7; const flat = HEAT_DATA.flat(), lo = Math.min(...flat), hi = Math.max(...flat); ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H); HEAT_DATA.forEach((r, ri) => r.forEach((v, ci) => { ctx.fillStyle = heatColor(v, lo, hi); ctx.beginPath(); ctx.roundRect(PL + ci * cw + 1, PT + ri * ch + 1, cw - 2, ch - 2, 3); ctx.fill() })); ctx.fillStyle = '#94a3b8'; ctx.font = '11px Segoe UI,sans-serif'; ctx.textAlign = 'right'; DAYS.forEach((d, i) => ctx.fillText(d, PL - 6, PT + i * ch + ch / 2 + 4)); ctx.textAlign = 'center'; HOURS.forEach((h, i) => ctx.fillText(h, PL + i * cw + cw / 2, H - PB + 16)) }
 
-// ── Treemap ──
-const TM_MINI=[{l:'A',v:40,c:C.ind},{l:'B',v:25,c:C.blu},{l:'C',v:18,c:C.grn},{l:'D',v:10,c:C.amb},{l:'E',v:7,c:C.pnk}];
-const TM_FULL=[{l:'Salaries',v:42,c:C.ind},{l:'Infra',v:18,c:C.blu},{l:'Marketing',v:14,c:C.pnk},{l:'R&D',v:11,c:C.grn},{l:'Office',v:7,c:C.amb},{l:'Legal',v:4,c:C.vio},{l:'Travel',v:4,c:C.org}];
-function drawTreemap(canvas,data,labels){const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||130;canvas.width=W;canvas.height=H;ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);const tot=data.reduce((s,d)=>s+d.v,0);let x=0;data.forEach(d=>{const w=Math.round(W*d.v/tot);ctx.fillStyle=d.c+'cc';ctx.beginPath();ctx.roundRect(x+1,1,w-2,H-2,4);ctx.fill();if(labels&&w>40){ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font=`bold ${Math.min(13,w/5)}px Segoe UI,sans-serif`;ctx.fillText(d.l,x+w/2,H/2-6);ctx.font=`${Math.min(11,w/6)}px Segoe UI,sans-serif`;ctx.fillStyle='rgba(255,255,255,.7)';ctx.fillText(d.v+'%',x+w/2,H/2+10)}x+=w})}
-function drawTreemapMini(c){drawTreemap(c,TM_MINI,false)}
-function drawTreemapFull(c){drawTreemap(c,TM_FULL,true)}
+        // ── Treemap ──
+        const TM_MINI = [{ l: 'A', v: 40, c: C.ind }, { l: 'B', v: 25, c: C.blu }, { l: 'C', v: 18, c: C.grn }, { l: 'D', v: 10, c: C.amb }, { l: 'E', v: 7, c: C.pnk }];
+        const TM_FULL = [{ l: 'Salaries', v: 42, c: C.ind }, { l: 'Infra', v: 18, c: C.blu }, { l: 'Marketing', v: 14, c: C.pnk }, { l: 'R&D', v: 11, c: C.grn }, { l: 'Office', v: 7, c: C.amb }, { l: 'Legal', v: 4, c: C.vio }, { l: 'Travel', v: 4, c: C.org }];
+        function drawTreemap(canvas, data, labels) { const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 130; canvas.width = W; canvas.height = H; ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H); const tot = data.reduce((s, d) => s + d.v, 0); let x = 0; data.forEach(d => { const w = Math.round(W * d.v / tot); ctx.fillStyle = d.c + 'cc'; ctx.beginPath(); ctx.roundRect(x + 1, 1, w - 2, H - 2, 4); ctx.fill(); if (labels && w > 40) { ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.font = `bold ${Math.min(13, w / 5)}px Segoe UI,sans-serif`; ctx.fillText(d.l, x + w / 2, H / 2 - 6); ctx.font = `${Math.min(11, w / 6)}px Segoe UI,sans-serif`; ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.fillText(d.v + '%', x + w / 2, H / 2 + 10) } x += w }) }
+        function drawTreemapMini(c) { drawTreemap(c, TM_MINI, false) }
+        function drawTreemapFull(c) { drawTreemap(c, TM_FULL, true) }
 
-// ── Waffle ──
-function drawWaffle(canvas,data,labels){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||130;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const cols=10,rows=10,gap=2;const pad=labels?50:0;const gW=W-pad,gH=H;const sw=(gW-gap*(cols+1))/cols,sh=(gH-gap*(rows+1))/rows;const sz=Math.min(sw,sh);
-  const offX=(gW-cols*(sz+gap)-gap)/2+gap;const offY=(gH-rows*(sz+gap)-gap)/2+gap;
-  let idx=0;const colors=[];data.forEach(d=>{for(let i=0;i<d.v;i++)colors.push(d.c)});
-  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){ctx.fillStyle=(colors[idx]||'#2d3148')+'cc';const x=offX+c*(sz+gap),y=offY+r*(sz+gap);ctx.beginPath();ctx.roundRect(x,y,sz,sz,2);ctx.fill();idx++}
-  if(labels){ctx.textAlign='left';let ly=20;data.forEach(d=>{ctx.fillStyle=d.c;ctx.beginPath();ctx.roundRect(W-45,ly-8,10,10,2);ctx.fill();ctx.fillStyle='#94a3b8';ctx.font='10px Segoe UI,sans-serif';ctx.fillText(d.v+'%',W-30,ly);ly+=18})}
-}
-function drawWaffleMini(c){drawWaffle(c,[{v:62,c:C.grn},{v:25,c:C.ind},{v:13,c:C.amb}],false)}
-function drawWaffleFull(c){drawWaffle(c,[{v:60,c:C.ind,l:'Salaries'},{v:25,c:C.grn,l:'Ops'},{v:15,c:C.amb,l:'R&D'}],true)}
+        // ── Waffle ──
+        function drawWaffle(canvas, data, labels) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 130; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const cols = 10, rows = 10, gap = 2; const pad = labels ? 50 : 0; const gW = W - pad, gH = H; const sw = (gW - gap * (cols + 1)) / cols, sh = (gH - gap * (rows + 1)) / rows; const sz = Math.min(sw, sh);
+            const offX = (gW - cols * (sz + gap) - gap) / 2 + gap; const offY = (gH - rows * (sz + gap) - gap) / 2 + gap;
+            let idx = 0; const colors = []; data.forEach(d => { for (let i = 0; i < d.v; i++)colors.push(d.c) });
+            for (let r = 0; r < rows; r++)for (let c = 0; c < cols; c++) { ctx.fillStyle = (colors[idx] || '#2d3148') + 'cc'; const x = offX + c * (sz + gap), y = offY + r * (sz + gap); ctx.beginPath(); ctx.roundRect(x, y, sz, sz, 2); ctx.fill(); idx++ }
+            if (labels) { ctx.textAlign = 'left'; let ly = 20; data.forEach(d => { ctx.fillStyle = d.c; ctx.beginPath(); ctx.roundRect(W - 45, ly - 8, 10, 10, 2); ctx.fill(); ctx.fillStyle = '#94a3b8'; ctx.font = '10px Segoe UI,sans-serif'; ctx.fillText(d.v + '%', W - 30, ly); ly += 18 }) }
+        }
+        function drawWaffleMini(c) { drawWaffle(c, [{ v: 62, c: C.grn }, { v: 25, c: C.ind }, { v: 13, c: C.amb }], false) }
+        function drawWaffleFull(c) { drawWaffle(c, [{ v: 60, c: C.ind, l: 'Salaries' }, { v: 25, c: C.grn, l: 'Ops' }, { v: 15, c: C.amb, l: 'R&D' }], true) }
 
-// ── Sunburst ──
-function drawSunburst(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const cx=W/2,cy=H/2,maxR=Math.min(cx,cy)*.88;
-  const inner=[{v:40,c:C.ind},{v:35,c:C.grn},{v:25,c:C.amb}];
-  const outer=[[{v:25,c:C.ind},{v:15,c:C.blu}],[{v:20,c:C.grn},{v:15,c:C.sky}],[{v:15,c:C.amb},{v:10,c:C.org}]];
-  const labels=['Product','Services','Support'];
-  // inner ring
-  let a=-.5*Math.PI;const tot=inner.reduce((s,d)=>s+d.v,0);const r1=maxR*.35,r2=maxR*.62,r3=maxR;
-  inner.forEach((d,i)=>{const sweep=d.v/tot*2*Math.PI;ctx.beginPath();ctx.arc(cx,cy,r2,a,a+sweep);ctx.arc(cx,cy,r1,a+sweep,a,true);ctx.closePath();ctx.fillStyle=d.c+'bb';ctx.fill();ctx.strokeStyle='#0f1117';ctx.lineWidth=2;ctx.stroke();
-    if(full){const mid=a+sweep/2;const lr=(r1+r2)/2;ctx.fillStyle='#fff';ctx.font='bold 11px Segoe UI,sans-serif';ctx.textAlign='center';ctx.fillText(labels[i],cx+Math.cos(mid)*lr,cy+Math.sin(mid)*lr+4)}
-    // outer children
-    let oa=a;const otot=outer[i].reduce((s,d)=>s+d.v,0);outer[i].forEach(od=>{const os=od.v/otot*sweep;ctx.beginPath();ctx.arc(cx,cy,r3,oa,oa+os);ctx.arc(cx,cy,r2+2,oa+os,oa,true);ctx.closePath();ctx.fillStyle=od.c+'99';ctx.fill();ctx.strokeStyle='#0f1117';ctx.lineWidth=2;ctx.stroke();oa+=os});
-    a+=sweep});
-}
-function drawSunburstMini(c){drawSunburst(c,false)}
-function drawSunburstFull(c){drawSunburst(c,true)}
+        // ── Sunburst ──
+        function drawSunburst(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const cx = W / 2, cy = H / 2, maxR = Math.min(cx, cy) * .88;
+            const inner = [{ v: 40, c: C.ind }, { v: 35, c: C.grn }, { v: 25, c: C.amb }];
+            const outer = [[{ v: 25, c: C.ind }, { v: 15, c: C.blu }], [{ v: 20, c: C.grn }, { v: 15, c: C.sky }], [{ v: 15, c: C.amb }, { v: 10, c: C.org }]];
+            const labels = ['Product', 'Services', 'Support'];
+            // inner ring
+            let a = -.5 * Math.PI; const tot = inner.reduce((s, d) => s + d.v, 0); const r1 = maxR * .35, r2 = maxR * .62, r3 = maxR;
+            inner.forEach((d, i) => {
+                const sweep = d.v / tot * 2 * Math.PI; ctx.beginPath(); ctx.arc(cx, cy, r2, a, a + sweep); ctx.arc(cx, cy, r1, a + sweep, a, true); ctx.closePath(); ctx.fillStyle = d.c + 'bb'; ctx.fill(); ctx.strokeStyle = '#0f1117'; ctx.lineWidth = 2; ctx.stroke();
+                if (full) { const mid = a + sweep / 2; const lr = (r1 + r2) / 2; ctx.fillStyle = '#fff'; ctx.font = 'bold 11px Segoe UI,sans-serif'; ctx.textAlign = 'center'; ctx.fillText(labels[i], cx + Math.cos(mid) * lr, cy + Math.sin(mid) * lr + 4) }
+                // outer children
+                let oa = a; const otot = outer[i].reduce((s, d) => s + d.v, 0); outer[i].forEach(od => { const os = od.v / otot * sweep; ctx.beginPath(); ctx.arc(cx, cy, r3, oa, oa + os); ctx.arc(cx, cy, r2 + 2, oa + os, oa, true); ctx.closePath(); ctx.fillStyle = od.c + '99'; ctx.fill(); ctx.strokeStyle = '#0f1117'; ctx.lineWidth = 2; ctx.stroke(); oa += os });
+                a += sweep
+            });
+        }
+        function drawSunburstMini(c) { drawSunburst(c, false) }
+        function drawSunburstFull(c) { drawSunburst(c, true) }
 
-// ── Beeswarm ──
-function genSwarm(n,mean,sd){const pts=[];for(let i=0;i<n;i++){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();pts.push(mean+sd*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v))}return pts}
-function drawBeeswarm(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const groups=[{label:'Eng',c:C.ind,pts:genSwarm(40,65,12)},{label:'Sales',c:C.grn,pts:genSwarm(35,55,15)},{label:'Mktg',c:C.pnk,pts:genSwarm(30,50,10)}];
-  const allV=groups.flatMap(g=>g.pts);const lo=Math.min(...allV),hi=Math.max(...allV);
-  const pad=full?{l:40,r:10,t:10,b:30}:{l:5,r:5,t:5,b:5};
-  const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;const colW=gW/groups.length;
-  groups.forEach((g,gi)=>{
-    const cx=pad.l+gi*colW+colW/2;const bins={};const r=full?4:2.5;
-    g.pts.forEach(v=>{const y=pad.t+gH-(v-lo)/(hi-lo)*gH;const bk=Math.round(y/(r*2));if(!bins[bk])bins[bk]=0;const off=bins[bk]*r*2.2*(bins[bk]%2===0?1:-1)/2;bins[bk]++;ctx.beginPath();ctx.arc(cx+off,y,r,0,Math.PI*2);ctx.fillStyle=g.c+'bb';ctx.fill()});
-    if(full){ctx.fillStyle='#94a3b8';ctx.font='11px Segoe UI,sans-serif';ctx.textAlign='center';ctx.fillText(g.label,cx,H-pad.b+16)}
-  });
-  if(full){ctx.fillStyle='#94a3b8';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign='right';for(let v=lo;v<=hi;v+=(hi-lo)/4){const y=pad.t+gH-(v-lo)/(hi-lo)*gH;ctx.fillText(Math.round(v),pad.l-6,y+3);ctx.strokeStyle='#2d3148';ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke()}}
-}
-function drawBeeswarmMini(c){drawBeeswarm(c,false)}
-function drawBeeswarmFull(c){drawBeeswarm(c,true)}
+        // ── Beeswarm ──
+        function genSwarm(n, mean, sd) { const pts = []; for (let i = 0; i < n; i++) { let u = 0, v = 0; while (u === 0) u = Math.random(); while (v === 0) v = Math.random(); pts.push(mean + sd * Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v)) } return pts }
+        function drawBeeswarm(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const groups = [{ label: 'Eng', c: C.ind, pts: genSwarm(40, 65, 12) }, { label: 'Sales', c: C.grn, pts: genSwarm(35, 55, 15) }, { label: 'Mktg', c: C.pnk, pts: genSwarm(30, 50, 10) }];
+            const allV = groups.flatMap(g => g.pts); const lo = Math.min(...allV), hi = Math.max(...allV);
+            const pad = full ? { l: 40, r: 10, t: 10, b: 30 } : { l: 5, r: 5, t: 5, b: 5 };
+            const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b; const colW = gW / groups.length;
+            groups.forEach((g, gi) => {
+                const cx = pad.l + gi * colW + colW / 2; const bins = {}; const r = full ? 4 : 2.5;
+                g.pts.forEach(v => { const y = pad.t + gH - (v - lo) / (hi - lo) * gH; const bk = Math.round(y / (r * 2)); if (!bins[bk]) bins[bk] = 0; const off = bins[bk] * r * 2.2 * (bins[bk] % 2 === 0 ? 1 : -1) / 2; bins[bk]++; ctx.beginPath(); ctx.arc(cx + off, y, r, 0, Math.PI * 2); ctx.fillStyle = g.c + 'bb'; ctx.fill() });
+                if (full) { ctx.fillStyle = '#94a3b8'; ctx.font = '11px Segoe UI,sans-serif'; ctx.textAlign = 'center'; ctx.fillText(g.label, cx, H - pad.b + 16) }
+            });
+            if (full) { ctx.fillStyle = '#94a3b8'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'right'; for (let v = lo; v <= hi; v += (hi - lo) / 4) { const y = pad.t + gH - (v - lo) / (hi - lo) * gH; ctx.fillText(Math.round(v), pad.l - 6, y + 3); ctx.strokeStyle = '#2d3148'; ctx.lineWidth = .5; ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke() } }
+        }
+        function drawBeeswarmMini(c) { drawBeeswarm(c, false) }
+        function drawBeeswarmFull(c) { drawBeeswarm(c, true) }
 
-// ── Violin ──
-function drawViolin(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const groups=[{label:'Group A',c:C.ind,mean:60,sd:15},{label:'Group B',c:C.grn,mean:50,sd:10},{label:'Group C',c:C.amb,mean:70,sd:20}];
-  const pad=full?{l:40,r:10,t:15,b:30}:{l:5,r:5,t:5,b:5};
-  const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;const colW=gW/groups.length;
-  const lo=10,hi=100;const steps=30;
-  groups.forEach((g,gi)=>{
-    const cx=pad.l+gi*colW+colW/2;const maxW=colW*.38;
-    ctx.beginPath();
-    for(let i=0;i<=steps;i++){const v=lo+(hi-lo)*i/steps;const y=pad.t+gH-(v-lo)/(hi-lo)*gH;const density=Math.exp(-.5*((v-g.mean)/g.sd)**2);const w=density*maxW;ctx.lineTo(cx+w,y)}
-    for(let i=steps;i>=0;i--){const v=lo+(hi-lo)*i/steps;const y=pad.t+gH-(v-lo)/(hi-lo)*gH;const density=Math.exp(-.5*((v-g.mean)/g.sd)**2);const w=density*maxW;ctx.lineTo(cx-w,y)}
-    ctx.closePath();ctx.fillStyle=g.c+'66';ctx.fill();ctx.strokeStyle=g.c;ctx.lineWidth=1.5;ctx.stroke();
-    // median line
-    const medY=pad.t+gH-(g.mean-lo)/(hi-lo)*gH;ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx-8,medY);ctx.lineTo(cx+8,medY);ctx.stroke();
-    if(full){ctx.fillStyle='#94a3b8';ctx.font='11px Segoe UI,sans-serif';ctx.textAlign='center';ctx.fillText(g.label,cx,H-pad.b+16)}
-  });
-  if(full){ctx.fillStyle='#94a3b8';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign='right';for(let v=lo;v<=hi;v+=20){const y=pad.t+gH-(v-lo)/(hi-lo)*gH;ctx.fillText(v,pad.l-6,y+3)}}
-}
-function drawViolinMini(c){drawViolin(c,false)}
-function drawViolinFull(c){drawViolin(c,true)}
+        // ── Violin ──
+        function drawViolin(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const groups = [{ label: 'Group A', c: C.ind, mean: 60, sd: 15 }, { label: 'Group B', c: C.grn, mean: 50, sd: 10 }, { label: 'Group C', c: C.amb, mean: 70, sd: 20 }];
+            const pad = full ? { l: 40, r: 10, t: 15, b: 30 } : { l: 5, r: 5, t: 5, b: 5 };
+            const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b; const colW = gW / groups.length;
+            const lo = 10, hi = 100; const steps = 30;
+            groups.forEach((g, gi) => {
+                const cx = pad.l + gi * colW + colW / 2; const maxW = colW * .38;
+                ctx.beginPath();
+                for (let i = 0; i <= steps; i++) { const v = lo + (hi - lo) * i / steps; const y = pad.t + gH - (v - lo) / (hi - lo) * gH; const density = Math.exp(-.5 * ((v - g.mean) / g.sd) ** 2); const w = density * maxW; ctx.lineTo(cx + w, y) }
+                for (let i = steps; i >= 0; i--) { const v = lo + (hi - lo) * i / steps; const y = pad.t + gH - (v - lo) / (hi - lo) * gH; const density = Math.exp(-.5 * ((v - g.mean) / g.sd) ** 2); const w = density * maxW; ctx.lineTo(cx - w, y) }
+                ctx.closePath(); ctx.fillStyle = g.c + '66'; ctx.fill(); ctx.strokeStyle = g.c; ctx.lineWidth = 1.5; ctx.stroke();
+                // median line
+                const medY = pad.t + gH - (g.mean - lo) / (hi - lo) * gH; ctx.strokeStyle = '#fff'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx - 8, medY); ctx.lineTo(cx + 8, medY); ctx.stroke();
+                if (full) { ctx.fillStyle = '#94a3b8'; ctx.font = '11px Segoe UI,sans-serif'; ctx.textAlign = 'center'; ctx.fillText(g.label, cx, H - pad.b + 16) }
+            });
+            if (full) { ctx.fillStyle = '#94a3b8'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'right'; for (let v = lo; v <= hi; v += 20) { const y = pad.t + gH - (v - lo) / (hi - lo) * gH; ctx.fillText(v, pad.l - 6, y + 3) } }
+        }
+        function drawViolinMini(c) { drawViolin(c, false) }
+        function drawViolinFull(c) { drawViolin(c, true) }
 
-// ── Parallel Coordinates ──
-function drawParallel(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const axes=['Speed','Power','Weight','Fuel','Safety'];
-  const items=[
-    {vals:[80,60,40,70,90],c:C.ind},{vals:[50,90,80,30,60],c:C.pnk},
-    {vals:[70,70,60,60,80],c:C.grn},{vals:[90,40,30,90,70],c:C.amb},
-    {vals:[60,80,70,50,50],c:C.blu},{vals:[40,50,90,80,40],c:C.vio}
-  ];
-  const pad=full?{l:40,r:20,t:25,b:15}:{l:8,r:8,t:8,b:8};
-  const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;const axeGap=gW/(axes.length-1);
-  // axes
-  axes.forEach((a,i)=>{const x=pad.l+i*axeGap;ctx.strokeStyle='#2d3148';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,pad.t+gH);ctx.stroke();if(full){ctx.fillStyle='#e2e8f0';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign='center';ctx.fillText(a,x,pad.t-8)}});
-  // lines
-  items.forEach(item=>{ctx.beginPath();item.vals.forEach((v,i)=>{const x=pad.l+i*axeGap;const y=pad.t+gH-(v/100)*gH;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.strokeStyle=item.c+'99';ctx.lineWidth=full?2:1.5;ctx.stroke()});
-}
-function drawParallelMini(c){drawParallel(c,false)}
-function drawParallelFull(c){drawParallel(c,true)}
+        // ── Parallel Coordinates ──
+        function drawParallel(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const axes = ['Speed', 'Power', 'Weight', 'Fuel', 'Safety'];
+            const items = [
+                { vals: [80, 60, 40, 70, 90], c: C.ind }, { vals: [50, 90, 80, 30, 60], c: C.pnk },
+                { vals: [70, 70, 60, 60, 80], c: C.grn }, { vals: [90, 40, 30, 90, 70], c: C.amb },
+                { vals: [60, 80, 70, 50, 50], c: C.blu }, { vals: [40, 50, 90, 80, 40], c: C.vio }
+            ];
+            const pad = full ? { l: 40, r: 20, t: 25, b: 15 } : { l: 8, r: 8, t: 8, b: 8 };
+            const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b; const axeGap = gW / (axes.length - 1);
+            // axes
+            axes.forEach((a, i) => { const x = pad.l + i * axeGap; ctx.strokeStyle = '#2d3148'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + gH); ctx.stroke(); if (full) { ctx.fillStyle = '#e2e8f0'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'center'; ctx.fillText(a, x, pad.t - 8) } });
+            // lines
+            items.forEach(item => { ctx.beginPath(); item.vals.forEach((v, i) => { const x = pad.l + i * axeGap; const y = pad.t + gH - (v / 100) * gH; if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y) }); ctx.strokeStyle = item.c + '99'; ctx.lineWidth = full ? 2 : 1.5; ctx.stroke() });
+        }
+        function drawParallelMini(c) { drawParallel(c, false) }
+        function drawParallelFull(c) { drawParallel(c, true) }
 
-// ── Ridgeline ──
-function drawRidge(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul'];
-  const pad=full?{l:36,r:10,t:10,b:10}:{l:5,r:5,t:5,b:5};
-  const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;const rowH=gH/months.length;const overlap=rowH*.6;
-  months.forEach((m,mi)=>{
-    const mean=30+mi*8+Math.sin(mi)*5;const sd=8+mi*1.5;const baseY=pad.t+(mi+1)*rowH-overlap*mi;
-    ctx.beginPath();ctx.moveTo(pad.l,baseY);
-    for(let x=0;x<=gW;x+=2){const v=x/gW*100;const d=Math.exp(-.5*((v-mean)/sd)**2);const h=d*rowH*1.8;ctx.lineTo(pad.l+x,baseY-h)}
-    ctx.lineTo(pad.l+gW,baseY);ctx.closePath();
-    const colors=[C.blu,C.ind,C.vio,C.pnk,C.red,C.amb,C.grn];
-    ctx.fillStyle=colors[mi%7]+'44';ctx.fill();ctx.strokeStyle=colors[mi%7];ctx.lineWidth=1.5;ctx.stroke();
-    if(full){ctx.fillStyle='#94a3b8';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign='right';ctx.fillText(m,pad.l-6,baseY)}
-  });
-}
-function drawRidgeMini(c){drawRidge(c,false)}
-function drawRidgeFull(c){drawRidge(c,true)}
+        // ── Ridgeline ──
+        function drawRidge(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+            const pad = full ? { l: 36, r: 10, t: 10, b: 10 } : { l: 5, r: 5, t: 5, b: 5 };
+            const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b; const rowH = gH / months.length; const overlap = rowH * .6;
+            months.forEach((m, mi) => {
+                const mean = 30 + mi * 8 + Math.sin(mi) * 5; const sd = 8 + mi * 1.5; const baseY = pad.t + (mi + 1) * rowH - overlap * mi;
+                ctx.beginPath(); ctx.moveTo(pad.l, baseY);
+                for (let x = 0; x <= gW; x += 2) { const v = x / gW * 100; const d = Math.exp(-.5 * ((v - mean) / sd) ** 2); const h = d * rowH * 1.8; ctx.lineTo(pad.l + x, baseY - h) }
+                ctx.lineTo(pad.l + gW, baseY); ctx.closePath();
+                const colors = [C.blu, C.ind, C.vio, C.pnk, C.red, C.amb, C.grn];
+                ctx.fillStyle = colors[mi % 7] + '44'; ctx.fill(); ctx.strokeStyle = colors[mi % 7]; ctx.lineWidth = 1.5; ctx.stroke();
+                if (full) { ctx.fillStyle = '#94a3b8'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'right'; ctx.fillText(m, pad.l - 6, baseY) }
+            });
+        }
+        function drawRidgeMini(c) { drawRidge(c, false) }
+        function drawRidgeFull(c) { drawRidge(c, true) }
 
-// ── Streamgraph ──
-function drawStream(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const n=12,cats=5;const colors=[C.ind,C.blu,C.grn,C.amb,C.pnk];
-  const data=[];for(let c=0;c<cats;c++){const row=[];for(let i=0;i<n;i++)row.push(10+Math.random()*30+Math.sin(i/2+c)*10);data.push(row)}
-  const pad=full?{l:10,r:10,t:15,b:25}:{l:3,r:3,t:3,b:3};
-  const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;const stepX=gW/(n-1);
-  // compute stacked values
-  const totals=[];for(let i=0;i<n;i++){let t=0;data.forEach(r=>t+=r[i]);totals.push(t)}
-  const maxT=Math.max(...totals);
-  for(let c=cats-1;c>=0;c--){
-    ctx.beginPath();
-    for(let i=0;i<n;i++){const x=pad.l+i*stepX;let below=0;for(let k=0;k<c;k++)below+=data[k][i];const above=below+data[c][i];const yLo=pad.t+gH/2+(below/maxT-.5)*gH;const yHi=pad.t+gH/2+(above/maxT-.5)*gH;if(i===0){ctx.moveTo(x,yHi)}else{const px=pad.l+(i-1)*stepX;ctx.bezierCurveTo(px+stepX*.4,ctx._lastY||yHi,x-stepX*.4,yHi,x,yHi)}ctx._lastY=yHi}
-    for(let i=n-1;i>=0;i--){const x=pad.l+i*stepX;let below=0;for(let k=0;k<c;k++)below+=data[k][i];const yLo=pad.t+gH/2+(below/maxT-.5)*gH;ctx.lineTo(x,yLo)}
-    ctx.closePath();ctx.fillStyle=colors[c]+'88';ctx.fill();ctx.strokeStyle=colors[c];ctx.lineWidth=1;ctx.stroke();
-  }
-  if(full){const labels=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];ctx.fillStyle='#94a3b8';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign='center';labels.forEach((l,i)=>{if(i%2===0)ctx.fillText(l,pad.l+i*stepX,H-pad.b+14)})}
-}
-function drawStreamMini(c){drawStream(c,false)}
-function drawStreamFull(c){drawStream(c,true)}
+        // ── Streamgraph ──
+        function drawStream(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const n = 12, cats = 5; const colors = [C.ind, C.blu, C.grn, C.amb, C.pnk];
+            const data = []; for (let c = 0; c < cats; c++) { const row = []; for (let i = 0; i < n; i++)row.push(10 + Math.random() * 30 + Math.sin(i / 2 + c) * 10); data.push(row) }
+            const pad = full ? { l: 10, r: 10, t: 15, b: 25 } : { l: 3, r: 3, t: 3, b: 3 };
+            const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b; const stepX = gW / (n - 1);
+            // compute stacked values
+            const totals = []; for (let i = 0; i < n; i++) { let t = 0; data.forEach(r => t += r[i]); totals.push(t) }
+            const maxT = Math.max(...totals);
+            for (let c = cats - 1; c >= 0; c--) {
+                ctx.beginPath();
+                for (let i = 0; i < n; i++) { const x = pad.l + i * stepX; let below = 0; for (let k = 0; k < c; k++)below += data[k][i]; const above = below + data[c][i]; const yLo = pad.t + gH / 2 + (below / maxT - .5) * gH; const yHi = pad.t + gH / 2 + (above / maxT - .5) * gH; if (i === 0) { ctx.moveTo(x, yHi) } else { const px = pad.l + (i - 1) * stepX; ctx.bezierCurveTo(px + stepX * .4, ctx._lastY || yHi, x - stepX * .4, yHi, x, yHi) } ctx._lastY = yHi }
+                for (let i = n - 1; i >= 0; i--) { const x = pad.l + i * stepX; let below = 0; for (let k = 0; k < c; k++)below += data[k][i]; const yLo = pad.t + gH / 2 + (below / maxT - .5) * gH; ctx.lineTo(x, yLo) }
+                ctx.closePath(); ctx.fillStyle = colors[c] + '88'; ctx.fill(); ctx.strokeStyle = colors[c]; ctx.lineWidth = 1; ctx.stroke();
+            }
+            if (full) { const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; ctx.fillStyle = '#94a3b8'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'center'; labels.forEach((l, i) => { if (i % 2 === 0) ctx.fillText(l, pad.l + i * stepX, H - pad.b + 14) }) }
+        }
+        function drawStreamMini(c) { drawStream(c, false) }
+        function drawStreamFull(c) { drawStream(c, true) }
 
-// ── Sankey ──
-function drawSankey(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const pad=full?{l:10,r:10,t:20,b:10}:{l:5,r:5,t:5,b:5};
-  const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;
-  // simplified 3-column sankey
-  const left=[{l:'Organic',v:45,c:C.blu},{l:'Paid',v:35,c:C.grn},{l:'Direct',v:20,c:C.amb}];
-  const mid=[{l:'Browse',v:50,c:C.ind},{l:'Search',v:30,c:C.pnk},{l:'Cart',v:20,c:C.vio}];
-  const right=[{l:'Purchase',v:55,c:C.grn},{l:'Bounce',v:45,c:C.red}];
-  const colW=16;const x1=pad.l,x2=pad.l+gW/2-colW/2,x3=pad.l+gW-colW;
-  function drawCol(items,x){let y=pad.t;const tot=items.reduce((s,d)=>s+d.v,0);items.forEach(d=>{const h=d.v/tot*gH;ctx.fillStyle=d.c+'cc';ctx.beginPath();ctx.roundRect(x,y,colW,h-2,3);ctx.fill();if(full){ctx.fillStyle='#e2e8f0';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign=x<gW/2?'left':'right';ctx.fillText(d.l,x<gW/2?x+colW+6:x-6,y+h/2+3)}d._y=y;d._h=h-2;y+=h})}
-  drawCol(left,x1);drawCol(mid,x2);drawCol(right,x3);
-  // flows left→mid
-  function flow(from,fi,to,ti,frac,color){const sy=from[fi]._y+from[fi]._h*frac;const sh=from[fi]._h*.3;const dy=to[ti]._y+to[ti]._h*frac;const dh=sh;const sx=fi===undefined?0:0;
-    ctx.beginPath();ctx.moveTo(from===left?x1+colW:x2+colW,sy);
-    const cpx=(from===left?x1+colW:x2+colW)+(to===mid?x2:x3-(from===left?x1+colW:x2+colW))/2;
-    ctx.bezierCurveTo(cpx,sy,cpx,dy,to===mid?x2:x3,dy);ctx.lineTo(to===mid?x2:x3,dy+dh);ctx.bezierCurveTo(cpx,dy+dh,cpx,sy+sh,from===left?x1+colW:x2+colW,sy+sh);ctx.closePath();ctx.fillStyle=color+'44';ctx.fill()}
-  flow(left,0,mid,0,.1,C.blu);flow(left,1,mid,1,.1,C.grn);flow(left,2,mid,2,.1,C.amb);
-  flow(mid,0,right,0,.1,C.ind);flow(mid,1,right,0,.5,C.pnk);flow(mid,2,right,1,.1,C.vio);
-}
-function drawSankeyMini(c){drawSankey(c,false)}
-function drawSankeyFull(c){drawSankey(c,true)}
+        // ── Sankey ──
+        function drawSankey(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const pad = full ? { l: 10, r: 10, t: 20, b: 10 } : { l: 5, r: 5, t: 5, b: 5 };
+            const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+            // simplified 3-column sankey
+            const left = [{ l: 'Organic', v: 45, c: C.blu }, { l: 'Paid', v: 35, c: C.grn }, { l: 'Direct', v: 20, c: C.amb }];
+            const mid = [{ l: 'Browse', v: 50, c: C.ind }, { l: 'Search', v: 30, c: C.pnk }, { l: 'Cart', v: 20, c: C.vio }];
+            const right = [{ l: 'Purchase', v: 55, c: C.grn }, { l: 'Bounce', v: 45, c: C.red }];
+            const colW = 16; const x1 = pad.l, x2 = pad.l + gW / 2 - colW / 2, x3 = pad.l + gW - colW;
+            function drawCol(items, x) { let y = pad.t; const tot = items.reduce((s, d) => s + d.v, 0); items.forEach(d => { const h = d.v / tot * gH; ctx.fillStyle = d.c + 'cc'; ctx.beginPath(); ctx.roundRect(x, y, colW, h - 2, 3); ctx.fill(); if (full) { ctx.fillStyle = '#e2e8f0'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = x < gW / 2 ? 'left' : 'right'; ctx.fillText(d.l, x < gW / 2 ? x + colW + 6 : x - 6, y + h / 2 + 3) } d._y = y; d._h = h - 2; y += h }) }
+            drawCol(left, x1); drawCol(mid, x2); drawCol(right, x3);
+            // flows left→mid
+            function flow(from, fi, to, ti, frac, color) {
+                const sy = from[fi]._y + from[fi]._h * frac; const sh = from[fi]._h * .3; const dy = to[ti]._y + to[ti]._h * frac; const dh = sh; const sx = fi === undefined ? 0 : 0;
+                ctx.beginPath(); ctx.moveTo(from === left ? x1 + colW : x2 + colW, sy);
+                const cpx = (from === left ? x1 + colW : x2 + colW) + (to === mid ? x2 : x3 - (from === left ? x1 + colW : x2 + colW)) / 2;
+                ctx.bezierCurveTo(cpx, sy, cpx, dy, to === mid ? x2 : x3, dy); ctx.lineTo(to === mid ? x2 : x3, dy + dh); ctx.bezierCurveTo(cpx, dy + dh, cpx, sy + sh, from === left ? x1 + colW : x2 + colW, sy + sh); ctx.closePath(); ctx.fillStyle = color + '44'; ctx.fill()
+            }
+            flow(left, 0, mid, 0, .1, C.blu); flow(left, 1, mid, 1, .1, C.grn); flow(left, 2, mid, 2, .1, C.amb);
+            flow(mid, 0, right, 0, .1, C.ind); flow(mid, 1, right, 0, .5, C.pnk); flow(mid, 2, right, 1, .1, C.vio);
+        }
+        function drawSankeyMini(c) { drawSankey(c, false) }
+        function drawSankeyFull(c) { drawSankey(c, true) }
 
-// ── Chord ──
-function drawChord(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const cx=W/2,cy=H/2,R=Math.min(cx,cy)*.82;
-  const labels=['US','EU','Asia','Africa','LatAm'];const colors=[C.blu,C.ind,C.grn,C.amb,C.pnk];
-  const matrix=[[0,30,25,10,15],[30,0,20,8,12],[25,20,0,15,10],[10,8,15,0,5],[15,12,10,5,0]];
-  const totals=matrix.map(r=>r.reduce((s,v)=>s+v,0));const grandTot=totals.reduce((s,v)=>s+v,0);
-  const gap=.04;const totalGap=gap*labels.length;const available=2*Math.PI-totalGap;
-  let angle=-Math.PI/2;const arcs=[];
-  totals.forEach((t,i)=>{const sweep=t/grandTot*available;arcs.push({start:angle,end:angle+sweep,mid:angle+sweep/2});
-    ctx.beginPath();ctx.arc(cx,cy,R,angle,angle+sweep);ctx.arc(cx,cy,R-10,angle+sweep,angle,true);ctx.closePath();ctx.fillStyle=colors[i]+'cc';ctx.fill();
-    if(full){const la=angle+sweep/2;const lr=R+14;ctx.fillStyle='#e2e8f0';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign=Math.cos(la)>0?'left':'right';ctx.fillText(labels[i],cx+Math.cos(la)*lr,cy+Math.sin(la)*lr+3)}
-    angle+=sweep+gap});
-  // ribbons
-  for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){if(matrix[i][j]<8)continue;
-    const a1=arcs[i].mid,a2=arcs[j].mid;ctx.beginPath();ctx.moveTo(cx+Math.cos(a1)*(R-10),cy+Math.sin(a1)*(R-10));ctx.quadraticCurveTo(cx,cy,cx+Math.cos(a2)*(R-10),cy+Math.sin(a2)*(R-10));ctx.strokeStyle=colors[i]+'55';ctx.lineWidth=matrix[i][j]/3;ctx.stroke()}
-}
-function drawChordMini(c){drawChord(c,false)}
-function drawChordFull(c){drawChord(c,true)}
+        // ── Chord ──
+        function drawChord(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const cx = W / 2, cy = H / 2, R = Math.min(cx, cy) * .82;
+            const labels = ['US', 'EU', 'Asia', 'Africa', 'LatAm']; const colors = [C.blu, C.ind, C.grn, C.amb, C.pnk];
+            const matrix = [[0, 30, 25, 10, 15], [30, 0, 20, 8, 12], [25, 20, 0, 15, 10], [10, 8, 15, 0, 5], [15, 12, 10, 5, 0]];
+            const totals = matrix.map(r => r.reduce((s, v) => s + v, 0)); const grandTot = totals.reduce((s, v) => s + v, 0);
+            const gap = .04; const totalGap = gap * labels.length; const available = 2 * Math.PI - totalGap;
+            let angle = -Math.PI / 2; const arcs = [];
+            totals.forEach((t, i) => {
+                const sweep = t / grandTot * available; arcs.push({ start: angle, end: angle + sweep, mid: angle + sweep / 2 });
+                ctx.beginPath(); ctx.arc(cx, cy, R, angle, angle + sweep); ctx.arc(cx, cy, R - 10, angle + sweep, angle, true); ctx.closePath(); ctx.fillStyle = colors[i] + 'cc'; ctx.fill();
+                if (full) { const la = angle + sweep / 2; const lr = R + 14; ctx.fillStyle = '#e2e8f0'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = Math.cos(la) > 0 ? 'left' : 'right'; ctx.fillText(labels[i], cx + Math.cos(la) * lr, cy + Math.sin(la) * lr + 3) }
+                angle += sweep + gap
+            });
+            // ribbons
+            for (let i = 0; i < 5; i++)for (let j = i + 1; j < 5; j++) {
+                if (matrix[i][j] < 8) continue;
+                const a1 = arcs[i].mid, a2 = arcs[j].mid; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a1) * (R - 10), cy + Math.sin(a1) * (R - 10)); ctx.quadraticCurveTo(cx, cy, cx + Math.cos(a2) * (R - 10), cy + Math.sin(a2) * (R - 10)); ctx.strokeStyle = colors[i] + '55'; ctx.lineWidth = matrix[i][j] / 3; ctx.stroke()
+            }
+        }
+        function drawChordMini(c) { drawChord(c, false) }
+        function drawChordFull(c) { drawChord(c, true) }
 
-// ── Network ──
-function drawNetwork(canvas,full){
-  const ctx=canvas.getContext('2d');const W=canvas.clientWidth||260,H=canvas.clientHeight||260;canvas.width=W;canvas.height=H;
-  ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
-  const nodes=[{x:.5,y:.3,r:8,c:C.ind,l:'Hub'},{x:.25,y:.55,r:5,c:C.blu,l:'A'},{x:.75,y:.55,r:6,c:C.grn,l:'B'},{x:.15,y:.3,r:4,c:C.amb,l:'C'},{x:.85,y:.3,r:4,c:C.pnk,l:'D'},{x:.4,y:.75,r:5,c:C.vio,l:'E'},{x:.6,y:.75,r:5,c:C.sky,l:'F'},{x:.35,y:.15,r:3,c:C.org,l:'G'},{x:.65,y:.15,r:3,c:C.lim,l:'H'}];
-  const edges=[[0,1],[0,2],[0,3],[0,4],[0,7],[0,8],[1,2],[1,5],[2,6],[3,7],[4,8],[5,6]];
-  const pad=full?15:5;
-  edges.forEach(([a,b])=>{const na=nodes[a],nb=nodes[b];ctx.beginPath();ctx.moveTo(pad+na.x*(W-2*pad),pad+na.y*(H-2*pad));ctx.lineTo(pad+nb.x*(W-2*pad),pad+nb.y*(H-2*pad));ctx.strokeStyle='#2d314888';ctx.lineWidth=1;ctx.stroke()});
-  nodes.forEach(n=>{const x=pad+n.x*(W-2*pad),y=pad+n.y*(H-2*pad);ctx.beginPath();ctx.arc(x,y,full?n.r*1.5:n.r,0,Math.PI*2);ctx.fillStyle=n.c+'cc';ctx.fill();ctx.strokeStyle=n.c;ctx.lineWidth=1;ctx.stroke();
-    if(full){ctx.fillStyle='#e2e8f0';ctx.font='10px Segoe UI,sans-serif';ctx.textAlign='center';ctx.fillText(n.l,x,y-n.r*1.5-4)}});
-}
-function drawNetworkMini(c){drawNetwork(c,false)}
-function drawNetworkFull(c){drawNetwork(c,true)}
+        // ── Network ──
+        function drawNetwork(canvas, full) {
+            const ctx = canvas.getContext('2d'); const W = canvas.clientWidth || 260, H = canvas.clientHeight || 260; canvas.width = W; canvas.height = H;
+            ctx.fillStyle = '#0f1117'; ctx.fillRect(0, 0, W, H);
+            const nodes = [{ x: .5, y: .3, r: 8, c: C.ind, l: 'Hub' }, { x: .25, y: .55, r: 5, c: C.blu, l: 'A' }, { x: .75, y: .55, r: 6, c: C.grn, l: 'B' }, { x: .15, y: .3, r: 4, c: C.amb, l: 'C' }, { x: .85, y: .3, r: 4, c: C.pnk, l: 'D' }, { x: .4, y: .75, r: 5, c: C.vio, l: 'E' }, { x: .6, y: .75, r: 5, c: C.sky, l: 'F' }, { x: .35, y: .15, r: 3, c: C.org, l: 'G' }, { x: .65, y: .15, r: 3, c: C.lim, l: 'H' }];
+            const edges = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 7], [0, 8], [1, 2], [1, 5], [2, 6], [3, 7], [4, 8], [5, 6]];
+            const pad = full ? 15 : 5;
+            edges.forEach(([a, b]) => { const na = nodes[a], nb = nodes[b]; ctx.beginPath(); ctx.moveTo(pad + na.x * (W - 2 * pad), pad + na.y * (H - 2 * pad)); ctx.lineTo(pad + nb.x * (W - 2 * pad), pad + nb.y * (H - 2 * pad)); ctx.strokeStyle = '#2d314888'; ctx.lineWidth = 1; ctx.stroke() });
+            nodes.forEach(n => {
+                const x = pad + n.x * (W - 2 * pad), y = pad + n.y * (H - 2 * pad); ctx.beginPath(); ctx.arc(x, y, full ? n.r * 1.5 : n.r, 0, Math.PI * 2); ctx.fillStyle = n.c + 'cc'; ctx.fill(); ctx.strokeStyle = n.c; ctx.lineWidth = 1; ctx.stroke();
+                if (full) { ctx.fillStyle = '#e2e8f0'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'center'; ctx.fillText(n.l, x, y - n.r * 1.5 - 4) }
+            });
+        }
+        function drawNetworkMini(c) { drawNetwork(c, false) }
+        function drawNetworkFull(c) { drawNetwork(c, true) }
 
-// ================================================================
-//  RENDERING ENGINE
-// ================================================================
-const miniInst={};
-let activeFilter='all',typeFilter='all-type',currentIdx=0;
+        // ================================================================
+        //  RENDERING ENGINE
+        // ================================================================
+        const miniInst = {};
+        let activeFilter = 'all', typeFilter = 'all-type', currentIdx = 0;
 
-function getVisible(){
-  return CHARTS.filter(c=>{
-    if(activeFilter!=='all'&&c.intent!==activeFilter)return false;
-    if(typeFilter==='standard'&&c.type!=='standard')return false;
-    if(typeFilter==='advanced'&&c.type!=='advanced')return false;
-    return true;
-  });
-}
+        function getVisible() {
+            return CHARTS.filter(c => {
+                if (activeFilter !== 'all' && c.intent !== activeFilter) return false;
+                if (typeFilter === 'standard' && c.type !== 'standard') return false;
+                if (typeFilter === 'advanced' && c.type !== 'advanced') return false;
+                return true;
+            });
+        }
 
-function renderGrid(){
-  const grid=document.getElementById('grid');grid.innerHTML='';
-  const visible=getVisible();
-  if(!visible.length){grid.innerHTML='<div style="color:var(--muted);padding:32px">No charts match these filters.</div>';return}
-  visible.forEach(ch=>{
-    const card=document.createElement('div');
-    card.className='card';card.dataset.id=ch.id;card.dataset.intent=ch.intent;
-    card.onclick=()=>openModal(ch.id);
-    const intentLabel=ch.intent.replace(/-/g,' ');
-    card.innerHTML=`
+        function renderGrid() {
+            const grid = document.getElementById('grid'); grid.innerHTML = '';
+            const visible = getVisible();
+            if (!visible.length) { grid.innerHTML = '<div style="color:var(--muted);padding:32px">No charts match these filters.</div>'; return }
+            visible.forEach(ch => {
+                const card = document.createElement('div');
+                card.className = 'card'; card.dataset.id = ch.id; card.dataset.intent = ch.intent;
+                card.onclick = () => openModal(ch.id);
+                const intentLabel = ch.intent.replace(/-/g, ' ');
+                card.innerHTML = `
       <div class="card-top">
         <div class="card-name">${ch.name}</div>
         <div class="card-badges">
-          <span class="intent-badge" style="background:${INTENT_COLORS[ch.intent]||'#666'}">${intentLabel}</span>
+          <span class="intent-badge" style="background:${INTENT_COLORS[ch.intent] || '#666'}">${intentLabel}</span>
           <span class="type-badge">${ch.type}</span>
         </div>
       </div>
       <div class="mini"><canvas id="mini-${ch.id}"></canvas></div>
       <div class="card-desc">${ch.tagline}</div>
     `;
-    grid.appendChild(card);
-  });
-  requestAnimationFrame(()=>{
-    visible.forEach(ch=>{
-      if(miniInst[ch.id])try{miniInst[ch.id].destroy()}catch(e){}
-      const canvas=document.getElementById('mini-'+ch.id);
-      if(!canvas)return;
-      miniInst[ch.id]=ch.mini(canvas.getContext('2d'),canvas);
-    });
-  });
-}
+                grid.appendChild(card);
+            });
+            requestAnimationFrame(() => {
+                visible.forEach(ch => {
+                    if (miniInst[ch.id]) try { miniInst[ch.id].destroy() } catch (e) { }
+                    const canvas = document.getElementById('mini-' + ch.id);
+                    if (!canvas) return;
+                    miniInst[ch.id] = ch.mini(canvas.getContext('2d'), canvas);
+                });
+            });
+        }
 
-function setFilter(f){
-  activeFilter=f;
-  document.querySelectorAll('.filters>.fbtn').forEach(b=>b.classList.toggle('active',b.dataset.f===f));
-  Object.values(miniInst).forEach(i=>{if(i)try{i.destroy()}catch(e){}});
-  Object.keys(miniInst).forEach(k=>delete miniInst[k]);
-  renderGrid();
-}
-function setTypeFilter(f){
-  typeFilter=f==='all-type'?'all-type':f;
-  document.querySelectorAll('.type-toggle .fbtn').forEach(b=>b.classList.toggle('active',b.dataset.f===f));
-  Object.values(miniInst).forEach(i=>{if(i)try{i.destroy()}catch(e){}});
-  Object.keys(miniInst).forEach(k=>delete miniInst[k]);
-  renderGrid();
-}
+        function setFilter(f) {
+            activeFilter = f;
+            document.querySelectorAll('.filters>.fbtn').forEach(b => b.classList.toggle('active', b.dataset.f === f));
+            Object.values(miniInst).forEach(i => { if (i) try { i.destroy() } catch (e) { } });
+            Object.keys(miniInst).forEach(k => delete miniInst[k]);
+            renderGrid();
+        }
+        function setTypeFilter(f) {
+            typeFilter = f === 'all-type' ? 'all-type' : f;
+            document.querySelectorAll('.type-toggle .fbtn').forEach(b => b.classList.toggle('active', b.dataset.f === f));
+            Object.values(miniInst).forEach(i => { if (i) try { i.destroy() } catch (e) { } });
+            Object.keys(miniInst).forEach(k => delete miniInst[k]);
+            renderGrid();
+        }
 
-// ================================================================
-//  MODAL
-// ================================================================
-let modalInst=null;
+        // ================================================================
+        //  MODAL
+        // ================================================================
+        let modalInst = null;
 
-function openModal(id){
-  const idx=CHARTS.findIndex(c=>c.id===id);if(idx<0)return;
-  currentIdx=idx;renderModalContent(idx);
-  document.getElementById('modalBg').classList.add('open');document.body.style.overflow='hidden';
-}
-function renderModalContent(idx){
-  const ch=CHARTS[idx];
-  document.getElementById('mName').textContent=ch.name;
-  const ib=document.getElementById('mIntent');ib.textContent=ch.intent.replace(/-/g,' ');ib.style.background=INTENT_COLORS[ch.intent]||'#666';
-  document.getElementById('mType').textContent=ch.type;
-  document.getElementById('mTagline').textContent=ch.tagline;
-  document.getElementById('navLabel').textContent=`${idx+1} / ${CHARTS.length}`;
-  document.getElementById('prevBtn').disabled=idx===0;
-  document.getElementById('nextBtn').disabled=idx===CHARTS.length-1;
-  document.getElementById('mInfo').innerHTML=`
-    <div class="info-block"><h3>Best For</h3><div class="tags">${ch.bestFor.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>
+        function openModal(id) {
+            const idx = CHARTS.findIndex(c => c.id === id); if (idx < 0) return;
+            currentIdx = idx; renderModalContent(idx);
+            document.getElementById('modalBg').classList.add('open'); document.body.style.overflow = 'hidden';
+        }
+        function renderModalContent(idx) {
+            const ch = CHARTS[idx];
+            document.getElementById('mName').textContent = ch.name;
+            const ib = document.getElementById('mIntent'); ib.textContent = ch.intent.replace(/-/g, ' '); ib.style.background = INTENT_COLORS[ch.intent] || '#666';
+            document.getElementById('mType').textContent = ch.type;
+            document.getElementById('mTagline').textContent = ch.tagline;
+            document.getElementById('navLabel').textContent = `${idx + 1} / ${CHARTS.length}`;
+            document.getElementById('prevBtn').disabled = idx === 0;
+            document.getElementById('nextBtn').disabled = idx === CHARTS.length - 1;
+            document.getElementById('mInfo').innerHTML = `
+    <div class="info-block"><h3>Best For</h3><div class="tags">${ch.bestFor.map(t => `<span class="tag">${t}</span>`).join('')}</div></div>
     <div class="info-block"><h3>When to Use</h3><div class="use-box">${ch.whenToUse}</div></div>
     <div class="info-block"><h3>Avoid When</h3><div class="avoid-box">${ch.avoidWhen}</div></div>
     <div class="info-block"><h3>Data Requirements</h3><div class="data-box">${ch.dataType}</div></div>
-    <div class="info-block"><h3>Real-World Examples</h3><ul class="ex-list">${ch.examples.map(e=>`<li>${e}</li>`).join('')}</ul></div>
+    <div class="info-block"><h3>Real-World Examples</h3><ul class="ex-list">${ch.examples.map(e => `<li>${e}</li>`).join('')}</ul></div>
   `;
-  if(modalInst){try{modalInst.destroy()}catch(e){}modalInst=null}
-  const canvas=document.getElementById('modalCanvas');
-  const parent=canvas.parentElement;const nc=document.createElement('canvas');nc.id='modalCanvas';parent.replaceChild(nc,canvas);
-  modalInst=ch.full(nc.getContext('2d'),nc);
-}
-function navigate(dir){const next=currentIdx+dir;if(next<0||next>=CHARTS.length)return;currentIdx=next;renderModalContent(next)}
-function closeModal(e){if(e&&e.target!==document.getElementById('modalBg'))return;document.getElementById('modalBg').classList.remove('open');document.body.style.overflow='';if(modalInst){try{modalInst.destroy()}catch(e){}modalInst=null}}
-document.addEventListener('keydown',e=>{if(!document.getElementById('modalBg').classList.contains('open'))return;if(e.key==='Escape')closeModal(null);if(e.key==='ArrowRight')navigate(1);if(e.key==='ArrowLeft')navigate(-1)});
+            if (modalInst) { try { modalInst.destroy() } catch (e) { } modalInst = null }
+            const canvas = document.getElementById('modalCanvas');
+            const parent = canvas.parentElement; const nc = document.createElement('canvas'); nc.id = 'modalCanvas'; parent.replaceChild(nc, canvas);
+            modalInst = ch.full(nc.getContext('2d'), nc);
+        }
+        function navigate(dir) { const next = currentIdx + dir; if (next < 0 || next >= CHARTS.length) return; currentIdx = next; renderModalContent(next) }
+        function closeModal(e) { if (e && e.target !== document.getElementById('modalBg')) return; document.getElementById('modalBg').classList.remove('open'); document.body.style.overflow = ''; if (modalInst) { try { modalInst.destroy() } catch (e) { } modalInst = null } }
+        document.addEventListener('keydown', e => { if (!document.getElementById('modalBg').classList.contains('open')) return; if (e.key === 'Escape') closeModal(null); if (e.key === 'ArrowRight') navigate(1); if (e.key === 'ArrowLeft') navigate(-1) });
 
-// ── INIT ──
-renderGrid();
-</script>
+        // ── INIT ──
+        renderGrid();
+    </script>
 </body>
+
 </html>

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.8.3] - 2026-03-26
+
+> **Data Storytelling Trifecta Suite** -- 5 new trifectas (data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation), 4 muscles, 24-chart interactive gallery. 45/45 trifectas, 155 skills, brain-qa 0 bugs.
+
+### Added
+
+- **5 data storytelling trifectas** -- data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation (instructions + skills + prompts + synapses)
+- **4 data muscles** -- data-ingest.cjs, data-profile.cjs, chart-recommend.cjs, dashboard-scaffold.cjs
+- **Chart gallery** -- 24 interactive visualization types (14 Chart.js + 10 Canvas 2D) with story-intent filtering and usage guidance
+- **Story-intent chart selection** -- 9 intents (compare, trend, part-to-whole, distribution, relationship, flow, hierarchy, spatial, deviation) mapped to primary + advanced charts
+
+### Changed
+
+- **SKILLS-CATALOG.md** -- 150 → 155 skills, 136 → 141 inheritable
+- **TRIFECTA-CATALOG.md** -- 39 → 44 complete trifectas
+- **copilot-instructions.md** -- 40 → 45 trifectas in routing table
+- **audit-architecture.cjs** -- Added 5 prompt aliases for new trifectas
+
+---
+
 ## [6.8.2] - 2026-03-25
 
 > **Workspace Cleanup & Doc Audit** -- Archived 928 stale files, retired TEST-GUIDE.md, modernized README doc links, fixed lint warning. All 8 quality gates pass, 231 tests, 150 skills, 40 trifectas.

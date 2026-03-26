@@ -1,0 +1,47 @@
+{
+    "schemaVersion": "2.1.0",
+    "skillId": "md-to-html",
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "muscle": ".github/muscles/md-to-html.cjs",
+    "connections": [
+        {
+            "target": ".github/skills/md-to-word/SKILL.md",
+            "type": "complements",
+            "strength": 0.85,
+            "reason": "Sister converter -- both convert Markdown to professional distribution formats",
+            "when": "When choosing between Word export and HTML export",
+            "yields": "md-to-word complementary conversion patterns"
+        },
+        {
+            "target": ".github/skills/md-to-eml/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "reason": "Sister converter -- both produce HTML output from Markdown, different wrapping",
+            "when": "When choosing between standalone HTML page and email distribution",
+            "yields": "md-to-eml email-specific HTML patterns"
+        },
+        {
+            "target": ".github/skills/markdown-mermaid/SKILL.md",
+            "type": "uses",
+            "strength": 0.8,
+            "reason": "Mermaid diagrams in source markdown are rendered to PNG or table fallback",
+            "when": "When source markdown contains Mermaid diagrams",
+            "yields": "markdown-mermaid diagram authoring guidance"
+        },
+        {
+            "target": ".github/skills/lint-clean-markdown/SKILL.md",
+            "type": "requires",
+            "strength": 0.75,
+            "reason": "Clean markdown produces better HTML output",
+            "when": "When pre-validating markdown before HTML conversion",
+            "yields": "lint-clean markdown validation patterns"
+        }
+    ],
+    "activationContexts": [
+        "converting markdown to html",
+        "generating html page from markdown",
+        "standalone html export",
+        "self-contained html document",
+        "markdown to web page"
+    ]
+}

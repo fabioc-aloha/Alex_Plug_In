@@ -22,6 +22,7 @@ Memory files define *what* and *how*; muscles *do*.
 | `brain-qa-heir.ps1`           | PowerShell | 25-phase heir validation                  | inheritable |
 | `build-extension-package.ps1` | PowerShell | VSIX packaging                            | master-only |
 | `converter-qa.cjs`            | JavaScript | 284-assertion converter test harness      | master-only |
+| `docx-to-md.cjs`              | JavaScript | Word document to Markdown conversion      | inheritable |
 | `dream-cli.ts`                | TypeScript | Neural maintenance CLI                    | inheritable |
 | `fix-fence-bug.ps1`           | PowerShell | Detect/fix VS Code fence bug              | inheritable |
 | `gamma-generator.cjs`         | JavaScript | Markdown to Gamma slides                  | inheritable |
@@ -29,6 +30,7 @@ Memory files define *what* and *how*; muscles *do*.
 | `markdown-lint.cjs`           | JavaScript | 19-rule pre-conversion markdown validator | inheritable |
 | `md-scaffold.cjs`             | JavaScript | Markdown template scaffolder              | inheritable |
 | `md-to-eml.cjs`               | JavaScript | Markdown to RFC 5322 email (.eml)         | inheritable |
+| `md-to-html.cjs`              | JavaScript | Markdown to standalone HTML page          | inheritable |
 | `md-to-word.cjs`              | JavaScript | Markdown to Word conversion               | inheritable |
 | `nav-inject.cjs`              | JavaScript | Cross-document navigation injection       | inheritable |
 | `new-skill.ps1`               | PowerShell | Scaffold new skill trifecta               | inheritable |
@@ -155,14 +157,16 @@ npm run validate-skills
 
 ### Special Requirements
 
-| Muscle                  | Requirement                                                                 |
-| ----------------------- | --------------------------------------------------------------------------- |
-| `md-to-word.cjs`        | Requires **pandoc**, **mmdc** (mermaid-cli), **jszip**, optional svgexport  |
-| `md-to-eml.cjs`         | Requires **pandoc** and shared modules                                      |
-| `pptxgen-cli.ts`        | **Must run from heir directory** -- needs heir's node_modules for pptxgenjs |
-| `sync-architecture.cjs` | Must run from repo root (uses `npm run sync-architecture`)                  |
-| `gamma-generator.cjs`   | Requires `GAMMA_API_KEY` env var; optional Playwright for export            |
-| `svg-pipeline.cjs`      | Requires Inkscape, rsvg-convert, or ImageMagick for SVG to PNG              |
+| Muscle                  | Requirement                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| `md-to-word.cjs`        | Requires **pandoc**, **mmdc** (mermaid-cli), **jszip**, optional svgexport    |
+| `md-to-html.cjs`        | Requires **pandoc** and shared modules; optional **mmdc** for `--mermaid-png` |
+| `md-to-eml.cjs`         | Requires **pandoc** and shared modules                                        |
+| `docx-to-md.cjs`        | Requires **pandoc**                                                           |
+| `pptxgen-cli.ts`        | **Must run from heir directory** -- needs heir's node_modules for pptxgenjs   |
+| `sync-architecture.cjs` | Must run from repo root (uses `npm run sync-architecture`)                    |
+| `gamma-generator.cjs`   | Requires `GAMMA_API_KEY` env var; optional Playwright for export              |
+| `svg-pipeline.cjs`      | Requires Inkscape, rsvg-convert, or ImageMagick for SVG to PNG                |
 
 ```powershell
 # pptxgen-cli.ts example (run from heir context)

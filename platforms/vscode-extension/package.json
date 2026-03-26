@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "6.8.2",
+  "version": "6.8.3",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -852,6 +852,9 @@
         "path": "./.github/skills/character-aging-progression/SKILL.md"
       },
       {
+        "path": "./.github/skills/chart-interpretation/SKILL.md"
+      },
+      {
         "path": "./.github/skills/citation-management/SKILL.md"
       },
       {
@@ -888,7 +891,19 @@
         "path": "./.github/skills/cross-cultural-collaboration/SKILL.md"
       },
       {
+        "path": "./.github/skills/dashboard-design/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/data-analysis/SKILL.md"
+      },
+      {
         "path": "./.github/skills/data-quality-monitoring/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/data-storytelling/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/data-visualization/SKILL.md"
       },
       {
         "path": "./.github/skills/database-design/SKILL.md"
@@ -913,6 +928,9 @@
       },
       {
         "path": "./.github/skills/documentation-quality-assurance/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/docx-to-md/SKILL.md"
       },
       {
         "path": "./.github/skills/dream-state/SKILL.md"
@@ -1009,6 +1027,9 @@
       },
       {
         "path": "./.github/skills/md-to-eml/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/md-to-html/SKILL.md"
       },
       {
         "path": "./.github/skills/md-to-word/SKILL.md"
