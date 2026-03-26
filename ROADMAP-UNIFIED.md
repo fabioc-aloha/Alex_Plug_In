@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 25, 2026
+**Last Updated**: March 26, 2026
 
 ---
 
@@ -24,13 +24,14 @@ This is not a tagline. It is a commitment. Every feature, every decision, every 
 
 ## 🗺️ Platform Strategy
 
-Six platforms. Four active, two planned.
+Seven platforms. Four active, three planned.
 
 | Platform               | Heir                          |  Status   | Notes                                                                                                                                                              |
 | ---------------------- | ----------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **VS Code Extension**  | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                           |
 | **M365 Copilot Agent** | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                               |
 | **Agent Plugin**       | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
+| **Windows Agent**      | `platforms/windows-agent/`    | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace — Gate #19                                                                      |
 | **Claude Cowork**      | `platforms/claude-cowork/`    | ⏳ Planned | Plugin bundle for Claude Cowork VM — Gate #17                                                                                                                      |
 | **Claude Chat**        | `platforms/claude-chat/`      | ⏳ Planned | Projects + Memory config for Claude.ai — Gate #18                                                                                                                  |
 
@@ -101,13 +102,15 @@ Six platforms. Four active, two planned.
 
 **Reasoning effort from model picker** (#300235, 1.113): Users can configure reasoning effort directly from the model picker UI. This may interact with the existing `thinkingBudget` setting — worth monitoring whether a programmatic API emerges that would let Alex auto-tune reasoning per-task.
 
+**Windows Agent Workspace + MCP Agent Connectors** ([Experimental Agentic Features](https://support.microsoft.com/en-us/windows/experimental-agentic-features-a25ede8a-e4c2-4841-85a8-44839191dfb3)): Windows introduces OS-level agent isolation -- agents get their own Windows account, desktop session, and scoped file access (Documents, Downloads, Desktop, etc.) with per-agent consent. Agent connectors are **MCP servers** registered in the Windows On-Device Registry (ODR). Alex's existing MCP cognitive tools (`packages/mcp-cognitive-tools/`) could be registered as ODR connectors, giving Copilot Actions access to Alex's knowledge base, architecture status, and skill catalog. The 6 agentic security principles (least privilege, audit logs, user consent, containment) align with Alex's Safety Imperatives I1-I8. **Status**: Windows Insider preview (Copilot Labs). Not GA. Gated on Conditional #19.
+
 ### Gated (External Dependencies)
 
 > **Last reviewed**: 2026-03-19
 
-| #   | Task                           | Gate                             | Effort | Description                           | Status                                     |
-| --- | ------------------------------ | -------------------------------- | :----: | ------------------------------------- | ------------------------------------------ |
-| 14  | **Worker agent orchestration** | v1.6 worker_agents exits preview |   1w   | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. |
+| #   | Task                           | Gate                             | Effort | Description                           | Status                                                                                                              |
+| --- | ------------------------------ | -------------------------------- | :----: | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| 14  | **Worker agent orchestration** | v1.6 worker_agents exits preview |   1w   | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. ATK 6.6 ships MCP-in-DA (GA) and Foundry template but not worker_agents. |
 
 ### Archived (No Longer Needed)
 
@@ -117,12 +120,13 @@ Six platforms. Four active, two planned.
 
 ### Conditional (Trigger-Dependent)
 
-| #   | Task                       | Trigger                                       | Effort | Description                                                                                                        |
-| --- | -------------------------- | --------------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------ |
-| 15  | **Foundry POC**            | Real user/team requests Alex in Teams         |   1w   | Foundry project + Alex orchestrator + Teams publish                                                                |
-| 16  | **Teams Deep Integration** | Active M365 users                             |  12w   | Bot Framework + Message Extensions + Meeting Integration                                                           |
-| 17  | **Claude Cowork Heir**     | Cowork exits Research Preview + user adoption |   8w   | Plugin bundle: 150 skills, 7 sub-agents, 50 slash commands. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md)        |
-| 18  | **Claude Chat Heir**       | Gate #17 done                                 |   1w   | Lightweight Projects + Memory config heir. Depends on Cowork heir. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md) |
+| #   | Task                       | Trigger                                       | Effort | Description                                                                                                                                                                                                                     |
+| --- | -------------------------- | --------------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 15  | **Foundry POC**            | Real user/team requests Alex in Teams         |   1w   | Foundry project + Alex orchestrator + Teams publish. ATK 6.6 adds Foundry proxy template in CLI (`atk init`).                                                                                                                   |
+| 16  | **Teams Deep Integration** | Active M365 users                             |  12w   | Bot Framework + Message Extensions + Meeting Integration                                                                                                                                                                        |
+| 17  | **Claude Cowork Heir**     | Cowork exits Research Preview + user adoption |   8w   | Plugin bundle: 150 skills, 7 sub-agents, 50 slash commands. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md)                                                                                                                     |
+| 18  | **Claude Chat Heir**       | Gate #17 done                                 |   1w   | Lightweight Projects + Memory config heir. Depends on Cowork heir. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md)                                                                                                              |
+| 19  | **Windows Agent Heir**     | Agent Workspace exits Insider Preview (GA)    |   2w   | Register Alex MCP tools as ODR agent connectors. Enables Copilot Actions to use Alex's knowledge search, architecture status, and skill routing on the Windows desktop. Bridge: `packages/mcp-cognitive-tools/` already exists. |
 
 ---
 
@@ -207,9 +211,9 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 | **Current Master Version** | 6.8.2                                                           |
 | **Current Heirs**          | VS Code (6.8.2), M365 (6.8.2), Plugin (6.7.0)                   |
 | **Architecture**           | 150 skills, 40 trifectas, 71 instructions, 50 prompts, 7 agents |
-| **Platforms**              | 6 total (4 active, 2 planned)                                   |
+| **Platforms**              | 7 total (4 active, 3 planned)                                   |
 | **Next Target**            | v7.0.0 — TBD (competitive research phase)                       |
-| **Open Items**             | 12 total: 4 blocked, 1 gated, 4 conditional, 3 next actions     |
+| **Open Items**             | 13 total: 4 blocked, 1 gated, 5 conditional, 3 next actions     |
 | **Updated**                | 2026-03-25                                                      |
 
 ---
@@ -251,6 +255,24 @@ Full quality gate passed after all priority work:
 - `npm run lint` -- clean
 - `npm test` -- 231 passing
 - `quality-gate.cjs` -- all 8 gates passed (0 warnings)
+
+### M365 Heir: ATK 6.6 Integration (Priority 5)
+
+Microsoft 365 Agents Toolkit v6.6.0 (Mar 9) + v6.6.1 hotfix (Mar 26) shipped features directly relevant to the M365 heir:
+
+| Feature                                  | ATK Version | Impact                                                                                                                                           | Action                                                                           |
+| ---------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **MCP tools in Declarative Agents (GA)** | 6.6.0       | High -- Alex's MCP cognitive tools (knowledge search, architecture status, insight save) can be exposed as actions in the M365 declarative agent | Wire MCP tools into agent manifest via ATK's new separated tool definition files |
+| **Embedded Knowledge for DAs**           | 6.6.0       | High -- Alex's instructions, skills, and domain knowledge can be packaged as embedded knowledge for grounded, context-aware responses            | Evaluate packaging a subset of skill catalog as embedded knowledge               |
+| **MCP auto-parameter retrieval**         | 6.6.1       | Medium -- automatically retrieves all parameters from MCP tool definitions, reducing manual manifest work                                        | Update ATK extension, verify auto-discovery works with Alex MCP tools            |
+| **Foundry Agent template (CLI)**         | 6.6.0       | Medium -- `atk init` + Foundry proxy template provides alternative deployment path for Alex agent logic                                          | Evaluate alongside Conditional #15 (Foundry POC)                                 |
+| **Enhanced share flow**                  | 6.6.0       | Low -- clearer environment differentiation and error handling when sharing agents                                                                | Adopt when distributing M365 agent to others                                     |
+
+**Immediate actions**:
+1. Update ATK extension to v6.6.1
+2. Test MCP tool integration with Alex's cognitive tools in declarative agent
+3. Prototype embedded knowledge with Alex's instruction files
+4. Evaluate `atk init` for existing M365 heir project
 
 ---
 
