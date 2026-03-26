@@ -1,35 +1,35 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "ROADMAP-UNIFIED.md"
+    "OADMAP-UNIFIED.md",
+    "platforms/vscode-extension/README.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1774493745773
+      "scannedAt": 1774493802891
     },
     {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1774493745773
+      "scannedAt": 1774493802891
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1774493745773
+      "scannedAt": 1774493802891
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1774493745773
+      "scannedAt": 1774493802891
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1774493745773
+      "scannedAt": 1774493802891
     }
   ],
-  "lastUpdated": 1774493745773
+  "lastUpdated": 1774493802891
 }

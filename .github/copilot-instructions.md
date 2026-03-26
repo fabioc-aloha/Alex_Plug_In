@@ -27,10 +27,10 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: RAI Psychological Safety release -- 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, AIRS-20 PA, content safety Layer 5), 3 hooks (H22/H23/H24), 8 architecture files updated, VS Code 1.113 eval. All quality gates pass, 232 tests, 150 skills, 40 trifectas.
+Recent: v6.8.2 published to marketplace. 928 stale files archived, docs bumped. M365 heir synced (86 skills, 23 instructions). GCX sync procedure documented. Marketplace README updated (150 skills, 40 trifectas). VSCE version-lock prevents README-only republish -- bundled with next release. All quality gates pass, 231 tests, 150 skills, 40 trifectas.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-03-24
+Last Assessed: 2026-03-25
 
 ## User Profile
 

@@ -247,9 +247,9 @@ README.md updated with v6.8.x What's New, 150 skills, 40 trifectas, current coun
 
 Sync scripts reference stale/renamed skills that no longer exist in Master:
 
-| Script            | Location                  | Stale References                                                                        | Status   |
-| ----------------- | ------------------------- | --------------------------------------------------------------------------------------- | -------- |
-| `sync-m365.ps1`   | `platforms/m365-copilot/` | 6 stale refs removed (v6.8.2)                                                          | ✅ Done   |
+| Script            | Location                  | Stale References                                                                        | Status    |
+| ----------------- | ------------------------- | --------------------------------------------------------------------------------------- | --------- |
+| `sync-m365.ps1`   | `platforms/m365-copilot/` | 6 stale refs removed (v6.8.2)                                                           | ✅ Done    |
 | `sync-plugin.ps1` | `platforms/agent-plugin/` | meditation-facilitation, writing-publication, skill-activation, prompt-activation, etc. | ⬜ Pending |
 
 **Action**: Clean `sync-plugin.ps1` stale skill names from `$curatedSkills` array.

@@ -269,14 +269,14 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New (v6.8.x)
 
-| Category           | Highlights                                                                                                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------- |
-| **RAI Safety**     | 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, appropriate reliance, content safety)  |
-| **Skills**         | 150 skills, 40 complete trifectas, dialog engineering, memory activation                                      |
-| **Converters**     | prompt-preprocessor, batch retry, model freshness tracking, 284 QA assertions                                 |
-| **Welcome View**   | 4-tab layout (Mission, Skills, Mind, Docs), 8 playbook categories, LearnAI CTA redesign                      |
-| **Quality**        | 8 automated quality gates, synapse integrity audit, heir sync drift detection                                  |
-| **Cognitive**      | Failure Pivot Protocol, Scope Clarification Protocol, token waste elimination                                  |
+| Category         | Highlights                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| **RAI Safety**   | 5 workstreams (anti-sycophancy, emotional boundaries, anti-gaslighting, appropriate reliance, content safety) |
+| **Skills**       | 150 skills, 40 complete trifectas, dialog engineering, memory activation                                      |
+| **Converters**   | prompt-preprocessor, batch retry, model freshness tracking, 284 QA assertions                                 |
+| **Welcome View** | 4-tab layout (Mission, Skills, Mind, Docs), 8 playbook categories, LearnAI CTA redesign                       |
+| **Quality**      | 8 automated quality gates, synapse integrity audit, heir sync drift detection                                 |
+| **Cognitive**    | Failure Pivot Protocol, Scope Clarification Protocol, token waste elimination                                 |
 
 ### What's New (v6.5.0 — The Trust Release)
 
