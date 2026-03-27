@@ -9,9 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.8.3] - 2026-03-26
+
+> **Data Storytelling Trifecta Suite** -- 5 new trifectas (data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation), 4 muscles, 24-chart interactive gallery. Colorblind-safe Tableau 10 palette enforced across all charting assets.
+
+### Added
+
+- 5 data storytelling trifectas with instructions, skills, prompts, and synapses
+- 4 data muscles (data-ingest, data-profile, chart-recommend, dashboard-scaffold)
+- 24-chart interactive gallery with story-intent filtering
+- Colorblind-safe Tableau 10 palette enforcement
+
 ### Changed
-- **Welcome View safety & telemetry** — Message routing guarded with `_isWelcomeMessage`, operation lock covers long-running commands (dream, setupEnvironment, releasePreflight, runAudit, generate* flows), `_executeCommandSafely` wraps commands with progress + toasts, tab persistence via memento, `toggleSetting` guards invalid keys and logs external links.
-- **Testing & docs** — Added `handleMessageForTest` helper and unit tests for routing, tab persistence, toggle guard, and openDoc preview; `TEST-GUIDE.md` updated with welcome message routing test instructions.
+
+- Skills: 155 → 157, Trifectas: 40 → 45
 
 ---
 

@@ -864,7 +864,7 @@ if (20 -in $runPhases) {
             }
             
             # Arrow-heavy ASCII (spatial reasoning required)
-            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑<-->]' }).Count -gt 5) {
+            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑<\->]' }).Count -gt 5) {
                 $formatWarnings += "${file} - Heavy use of ASCII arrows (structured format preferred)"
             }
         }

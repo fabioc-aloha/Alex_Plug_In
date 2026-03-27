@@ -1,6 +1,6 @@
 {
   "name": "alex-m365-agent",
-  "version": "6.8.2",
+  "version": "6.8.3",
   "description": "Alex \u2014 Your Trusted AI Partner for M365 Copilot",
   "scripts": {
     "package": "teamsapp package --env local",

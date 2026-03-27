@@ -1,14 +1,14 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-03-24
-> Total Skills: **145** (131 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
-> Total Connections: **736** (0 bidirectional, 123 weak)
+> Generated: 2026-03-27
+> Total Skills: **157** (143 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
+> Total Connections: **802** (0 bidirectional, 130 weak)
 
 ---
 
 ## Skills by Inheritance
 
-### Inheritable (131)
+### Inheritable (143)
 
 | Skill | Connections |
 | ----- | ----------- |
@@ -40,6 +40,7 @@
 | `career-development` | 5 |
 | `change-management` | 5 |
 | `character-aging-progression` | 3 |
+| `chart-interpretation` | 6 |
 | `citation-management` | 1 |
 | `coaching-techniques` | 1 |
 | `code-review` | 9 |
@@ -47,11 +48,16 @@
 | `cognitive-symbiosis` | 3 |
 | `comedy-writing` | 4 |
 | `content-safety-implementation` | 5 |
+| `converter-qa` | 3 |
 | `correax-brand` | 6 |
 | `counseling-psychology` | 5 |
 | `creative-writing` | 5 |
 | `cross-cultural-collaboration` | 6 |
+| `dashboard-design` | 7 |
+| `data-analysis` | 7 |
 | `data-quality-monitoring` | 4 |
+| `data-storytelling` | 8 |
+| `data-visualization` | 7 |
 | `database-design` | 6 |
 | `debugging-patterns` | 3 |
 | `deep-work-optimization` | 1 |
@@ -60,6 +66,7 @@
 | `distribution-security` | 3 |
 | `doc-hygiene` | 3 |
 | `documentation-quality-assurance` | 2 |
+| `docx-to-md` | 3 |
 | `dream-state` | 4 |
 | `error-recovery-patterns` | 3 |
 | `executive-storytelling` | 1 |
@@ -84,13 +91,16 @@
 | `knowledge-synthesis` | 4 |
 | `learning-psychology` | 3 |
 | `legal-compliance` | 5 |
-| `lint-clean-markdown` | 3 |
+| `lint-clean-markdown` | 4 |
 | `literature-review` | 1 |
 | `llm-model-selection` | 4 |
 | `localization` | 10 |
 | `markdown-mermaid` | 7 |
 | `mcp-development` | 8 |
-| `md-to-word` | 6 |
+| `md-scaffold` | 4 |
+| `md-to-eml` | 3 |
+| `md-to-html` | 4 |
+| `md-to-word` | 7 |
 | `meditation` | 5 |
 | `meeting-efficiency` | 5 |
 | `memory-activation` | 5 |
@@ -100,6 +110,7 @@
 | `msal-authentication` | 4 |
 | `multi-agent-orchestration` | 7 |
 | `muscle-memory-recognition` | 5 |
+| `nav-inject` | 3 |
 | `north-star` | 9 |
 | `observability-monitoring` | 6 |
 | `performance-profiling` | 6 |
@@ -107,7 +118,7 @@
 | `post-mortem` | 6 |
 | `pptx-generation` | 4 |
 | `practitioner-research` | 7 |
-| `presentation-tool-selection` | 3 |
+| `presentation-tool-selection` | 4 |
 | `privacy-responsible-ai` | 5 |
 | `proactive-assistance` | 6 |
 | `project-deployment` | 4 |
@@ -139,6 +150,7 @@
 | `terminal-image-rendering` | 3 |
 | `testing-strategies` | 9 |
 | `text-to-speech` | 10 |
+| `token-waste-elimination` | 8 |
 | `ui-ux-design` | 7 |
 | `visual-memory` | 6 |
 | `vscode-environment` | 4 |

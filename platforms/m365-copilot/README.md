@@ -2,7 +2,7 @@
 
 ![Take Your Work to New Heights](https://raw.githubusercontent.com/fabioc-aloha/Alex_Plug_In/main/.github/assets/banner.svg)
 
-[![Version](https://img.shields.io/badge/version-6.2.0-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
+[![Version](https://img.shields.io/badge/version-6.8.3-0078d4)](https://github.com/fabioc-aloha/Alex_Plug_In)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md)
 [![M365](https://img.shields.io/badge/M365-Copilot-7c3aed)](https://copilot.microsoft.com/)
 [![Office](https://img.shields.io/badge/Office-Add--ins-217346)](https://learn.microsoft.com/office/dev/add-ins/)
@@ -11,7 +11,7 @@
 
 > **Strap a rocket to your back.** Take Your Work to New Heights with Alex — the AI that remembers & grows. 🚀
 
-**v6.2.0**: On-Brand Partnership Release — EmbeddedKnowledge RAG, partnership voice, slimmed instructions.
+**v6.8.3**: Data Storytelling Trifecta Suite — 5 data storytelling trifectas, 4 muscles, 24-chart gallery.
 
 ---
 
@@ -95,17 +95,17 @@ Alex now runs as an **Office Add-in** with a task pane UI in Word, Excel, PowerP
 
 ### What Alex Can Do (v1.6 Schema)
 
-| Capability               | Description                                             |
-| ------------------------ | ------------------------------------------------------- |
-| 📖 **OneDrive**           | READ your Alex-Memory files (profile, notes, knowledge) |
-| 🔍 **WebSearch**          | Research topics online                                  |
-| 🎨 **GraphicArt**         | Generate images and diagrams                            |
-| 🐍 **CodeInterpreter**    | Run Python code for calculations                        |
-| 📧 **Email**              | Search and summarize Outlook conversations              |
-| 💬 **Teams**              | Find discussions across channels and chats              |
-| 👥 **People**             | Look up colleagues and org structure                    |
-| 📅 **Meetings**           | Meeting prep and calendar awareness                     |
-| 📚 **EmbeddedKnowledge**  | RAG over 6 bundled knowledge files (protocols, skills, workflows) |
+| Capability              | Description                                                       |
+| ----------------------- | ----------------------------------------------------------------- |
+| 📖 **OneDrive**          | READ your Alex-Memory files (profile, notes, knowledge)           |
+| 🔍 **WebSearch**         | Research topics online                                            |
+| 🎨 **GraphicArt**        | Generate images and diagrams                                      |
+| 🐍 **CodeInterpreter**   | Run Python code for calculations                                  |
+| 📧 **Email**             | Search and summarize Outlook conversations                        |
+| 💬 **Teams**             | Find discussions across channels and chats                        |
+| 👥 **People**            | Look up colleagues and org structure                              |
+| 📅 **Meetings**          | Meeting prep and calendar awareness                               |
+| 📚 **EmbeddedKnowledge** | RAG over 6 bundled knowledge files (protocols, skills, workflows) |
 
 ### Memory Workflow
 
@@ -217,16 +217,16 @@ Or sideload manually:
 
 ## M365 Capabilities (v1.6 Schema)
 
-| Capability              | What Alex Does With It                                         |
-| ----------------------- | -------------------------------------------------------------- |
-| `OneDriveAndSharePoint` | Read your memory files (profile, notes, knowledge)             |
-| `WebSearch`             | Research topics online                                         |
-| `GraphicArt`            | Generate images and visualizations                             |
-| `CodeInterpreter`       | Run Python code for analysis, charts, file generation          |
-| `Email`                 | Search Outlook conversations, surface action items             |
-| `TeamsMessages`         | Find channel/chat discussions and context                      |
-| `People`                | Look up colleagues, org structure, relationships               |
-| `Meetings`              | Calendar awareness, meeting prep, workload check               |
+| Capability              | What Alex Does With It                                            |
+| ----------------------- | ----------------------------------------------------------------- |
+| `OneDriveAndSharePoint` | Read your memory files (profile, notes, knowledge)                |
+| `WebSearch`             | Research topics online                                            |
+| `GraphicArt`            | Generate images and visualizations                                |
+| `CodeInterpreter`       | Run Python code for analysis, charts, file generation             |
+| `Email`                 | Search Outlook conversations, surface action items                |
+| `TeamsMessages`         | Find channel/chat discussions and context                         |
+| `People`                | Look up colleagues, org structure, relationships                  |
+| `Meetings`              | Calendar awareness, meeting prep, workload check                  |
 | `EmbeddedKnowledge`     | RAG over 6 bundled knowledge files (protocols, skills, workflows) |
 
 ## Conversation Starters
@@ -461,6 +461,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 ---
 
-**Alex M365** - v6.2.0 | On-Brand Partnership Release
+**Alex M365** - v6.8.3 | Data Storytelling Trifecta Suite
 
 (C) 2026 CorreaX \u2014 The Most Advanced and Trusted AI Partner for Any Job

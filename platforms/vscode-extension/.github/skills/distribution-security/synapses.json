@@ -11,6 +11,14 @@
       "reason": "Secrets scanning is core to distribution security",
       "when": "When task involves .github/skills/secrets management/SKILL.md",
       "yields": "secrets management required patterns and guidance"
+    },
+    {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "relates",
+      "strength": 0.85,
+      "reason": "Security checks are part of the release workflow",
+      "when": "When task involves .github/instructions/release management.instructions.md",
+      "yields": "release management related rules and guidelines"
     }
   ],
   "when": [
