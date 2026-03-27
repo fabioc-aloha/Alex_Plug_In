@@ -1,10 +1,90 @@
 # Windows Agent Heir Plan
 
-> **Status**: Research Complete | **Created**: 2026-03-26 | **Updated**: 2026-03-26 | **Platform**: Windows Agent Workspace | **Roadmap**: Conditional #19
+> **Status**: Research Complete | **Created**: 2026-03-26 | **Updated**: 2026-03-27 | **Platform**: Windows Agent Workspace | **Roadmap**: Conditional #19
 >
 > **Research Sources**: Official Microsoft blogs + Windows Insider Preview documentation
 >
 > **Gate**: Agent Workspace exits Insider Preview (GA) + ODR developer documentation published
+
+## Project Checklist
+
+### Pre-Gate (Can Start Now)
+
+- [ ] **PG-01** Obtain code signing certificate (EV or Azure Trusted Signing)
+- [ ] **PG-02** Enroll in Windows Insider Preview (Dev Channel) on test machine
+- [ ] **PG-03** Enable Copilot Labs and Agent Workspace: Settings > System > AI components > Agent tools > Experimental agentic features
+- [ ] **PG-04** Verify `@alex/mcp-cognitive-tools` v1.0.0 builds cleanly: `cd packages/mcp-cognitive-tools && npm run build`
+- [ ] **PG-05** Run existing MCP tools end-to-end via Claude Desktop or VS Code to confirm baseline behavior
+- [ ] **PG-06** Monitor Windows Insider blog for ODR developer preview announcements
+- [ ] **PG-07** Sign up for private developer preview when Microsoft opens registration (post-Build)
+
+### Phase 1: ODR Registration
+
+- [ ] **P1-01** Read ODR developer documentation (publish date TBD)
+- [ ] **P1-02** Create `packages/mcp-cognitive-tools/windows-manifest.json` -- declarative privilege manifest
+- [ ] **P1-03** Declare read-only access scope: `~/.alex/global-knowledge/`, workspace `.github/`
+- [ ] **P1-04** Declare write access scope: `~/.alex/global-knowledge/insights/` (for `alex_knowledge_save`)
+- [ ] **P1-05** Sign the `alex-mcp` binary with code signing certificate
+- [ ] **P1-06** Verify immutable tool definitions -- ensure `ListToolsRequestSchema` handler returns static `TOOLS` array (already compliant)
+- [ ] **P1-07** Run security tests against all 5 tool input schemas (fuzz inputs, path traversal, injection)
+- [ ] **P1-08** Register package in Windows ODR with package identity `com.alex.mcp-cognitive-tools`
+- [ ] **P1-09** Verify tool discovery: open Agent Workspace, confirm all 5 tools appear in Copilot Actions tool palette
+- [ ] **P1-10** Verify tool-level authorization: confirm user approval prompt fires on first invocation of each tool
+- [ ] **P1-11** Verify proxy-mediated communication: confirm `alex-mcp` receives calls through Windows proxy (not direct stdio)
+- [ ] **P1-12** Test error scenario: kill MCP server mid-invocation, verify Copilot Actions handles gracefully
+
+### Phase 2: Tool Enhancement for Desktop
+
+- [ ] **P2-01** Review all 5 tool `description` fields and rewrite for desktop agent context (not developer-centric)
+- [ ] **P2-02** Add `examples` property to each tool's `inputSchema` showing desktop use cases
+- [ ] **P2-03** Add structured output formatting: return markdown-friendly text (not raw JSON) for vision model consumption
+- [ ] **P2-04** Implement `alex_meditate` tool: checkpoint session state, summarize active work, save episodic memory
+- [ ] **P2-05** Implement `alex_dream` tool: run synapse validation, prune stale connections, consolidate episodic fragments
+- [ ] **P2-06** Implement `alex_self_actualize` tool: deep architecture assessment with growth recommendations
+- [ ] **P2-07** Update `TOOLS` array and `CallToolRequestSchema` switch for new tools (5 -> 8)
+- [ ] **P2-08** Update tool privilege declarations in `windows-manifest.json` for new tool scopes
+- [ ] **P2-09** Bump `@alex/mcp-cognitive-tools` to v2.0.0 (breaking: new tool surface)
+- [ ] **P2-10** Rebuild and re-sign the binary
+- [ ] **P2-11** Re-register updated package in ODR
+- [ ] **P2-12** Test learning loop: invoke `alex_knowledge_save` from Copilot Actions, then retrieve via `alex_knowledge_search`
+
+### Phase 3: Integration Testing
+
+- [ ] **P3-01** Scenario: "Search my knowledge base before writing this report" -- verify `alex_knowledge_search` returns relevant results
+- [ ] **P3-02** Scenario: "Check architecture health" -- verify `alex_synapse_health` returns accurate status
+- [ ] **P3-03** Scenario: "What patterns have I seen across projects?" -- verify `alex_memory_search` with `memoryType: global`
+- [ ] **P3-04** Scenario: "Save what I learned from this task" -- verify `alex_knowledge_save` persists correctly
+- [ ] **P3-05** Scenario: "Meditate on today's work" -- verify `alex_meditate` creates episodic checkpoint
+- [ ] **P3-06** Security: confirm agent account cannot read `~/.alex/` paths outside declared scope
+- [ ] **P3-07** Security: confirm agent account cannot write to workspace `.github/` (read-only scope)
+- [ ] **P3-08** Security: fuzz all tool inputs through proxy -- verify no injection escapes to shell
+- [ ] **P3-09** Security: verify audit trail captures all tool invocations with timestamps and parameters
+- [ ] **P3-10** Performance: measure tool response time through Windows proxy (target: <2s per tool call)
+- [ ] **P3-11** Performance: test with large `.github/` directory (157+ skills) -- verify no timeout
+- [ ] **P3-12** Resilience: test with Network disconnected (tools should still work -- all local)
+- [ ] **P3-13** Resilience: test with `~/.alex/` missing -- verify graceful error messages
+- [ ] **P3-14** Resilience: test with corrupt `synapses.json` -- verify health check reports issue without crashing
+
+### Phase 4: Documentation and Release
+
+- [ ] **P4-01** Create `platforms/windows-agent/README.md` with setup + troubleshooting guide
+- [ ] **P4-02** Update `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md` -- add Windows Agent to heir diagram
+- [ ] **P4-03** Update `copilot-instructions.md` Heirs section -- add `Windows Agent: platforms/windows-agent/`
+- [ ] **P4-04** Update `ROADMAP-UNIFIED.md` -- close Conditional #19, add to Shipped Releases
+- [ ] **P4-05** Document known limitations (vision-based interaction, no slash commands, no agent modes)
+- [ ] **P4-06** Create troubleshooting guide: ODR registration errors, proxy timeout, permission denied, tool not discovered
+- [ ] **P4-07** Update `packages/mcp-cognitive-tools/README.md` -- add Windows ODR configuration section
+- [ ] **P4-08** Publish `@alex/mcp-cognitive-tools` v2.0.0 to npm
+- [ ] **P4-09** Add Windows Agent to Platform Strategy table in ROADMAP (active, not conditional)
+- [ ] **P4-10** Write meditation/episodic entry documenting heir launch
+
+### Ongoing Maintenance
+
+- [ ] **M-01** Monitor Windows Insider blog for Agent Workspace GA announcement
+- [ ] **M-02** Track MCP SDK breaking changes (`@modelcontextprotocol/sdk` updates)
+- [ ] **M-03** Run `brain-qa` to validate cognitive architecture after each MCP tool change
+- [ ] **M-04** Re-sign binary when code signing certificate approaches expiry
+- [ ] **M-05** Review ODR security requirements quarterly as Microsoft evolves the platform
 
 ## Executive Summary
 
@@ -339,14 +419,153 @@ If building new tools for Phase 2, prioritize in this order:
 **Prerequisites**:
 - Windows 11 Insider Preview with Agent Workspace enabled
 - ODR developer documentation published (currently private preview)
-- Code signing certificate
+- Code signing certificate (EV or Azure Trusted Signing)
 
-**Tasks**:
-1. Review ODR registration requirements and developer documentation
-2. Add code signing to `@alex/mcp-cognitive-tools` package
-3. Create declarative privilege manifest (tools only read from `~/.alex/` and workspace `.github/`)
-4. Register package in Windows ODR
-5. Verify tool discovery: Copilot Actions can see all 5 Alex tools
+#### 1.1 Code Signing
+
+The ODR requires **mandatory code signing** to establish provenance and enable revocation. Options:
+
+| Option                              | Cost           | Trust Level       | Notes                                                               |
+| ----------------------------------- | -------------- | ----------------- | ------------------------------------------------------------------- |
+| Azure Trusted Signing               | ~$10/month     | Microsoft-trusted | Native Azure integration, recommended for Microsoft ecosystem       |
+| EV Code Signing (DigiCert, Sectigo) | ~$350-500/year | Broadly trusted   | Industry standard, works with any platform                          |
+| Self-signed (dev mode only)         | Free           | Device-local only | Only works when Windows is in Developer Mode during private preview |
+
+**Recommended**: Azure Trusted Signing -- aligns with Microsoft ecosystem, Alex already uses Azure for other services, and the ODR may provide accelerated trust for Azure-signed packages.
+
+**Signing workflow**:
+```
+Build: npm run build
+Package: npm pack
+Sign: signtool sign /fd SHA256 /td SHA256 /tr http://timestamp.digicert.com /sha1 <cert-thumbprint> dist/index.js
+```
+
+For Azure Trusted Signing, the workflow uses `az codesign` CLI instead of `signtool`.
+
+#### 1.2 Declarative Privilege Manifest
+
+The ODR requires servers to **declare privileges upfront**. This is the bridge between Windows security and Alex's read/write patterns.
+
+Create `packages/mcp-cognitive-tools/windows-manifest.json`:
+
+```json
+{
+  "$schema": "https://schemas.microsoft.com/windows/mcp-server/v1/manifest.json",
+  "identity": {
+    "name": "com.alex.mcp-cognitive-tools",
+    "displayName": "Alex Cognitive Tools",
+    "version": "1.0.0",
+    "publisher": "Alex Cognitive Architecture",
+    "description": "Cognitive architecture tools for knowledge search, architecture health, and learning"
+  },
+  "signing": {
+    "method": "azure-trusted-signing",
+    "certificateProfile": "alex-mcp-production"
+  },
+  "capabilities": {
+    "fileSystem": {
+      "read": [
+        "~/.alex/global-knowledge/**",
+        "${workspacePath}/.github/skills/**",
+        "${workspacePath}/.github/instructions/**",
+        "${workspacePath}/.github/prompts/**",
+        "${workspacePath}/.github/agents/**",
+        "${workspacePath}/.github/episodic/**",
+        "${workspacePath}/.github/copilot-instructions.md"
+      ],
+      "write": [
+        "~/.alex/global-knowledge/insights/**"
+      ]
+    },
+    "network": "none",
+    "childProcesses": "none",
+    "shellExecution": "none"
+  },
+  "tools": {
+    "immutable": true,
+    "definitions": [
+      "alex_synapse_health",
+      "alex_memory_search",
+      "alex_architecture_status",
+      "alex_knowledge_search",
+      "alex_knowledge_save"
+    ]
+  },
+  "runtime": {
+    "command": "node",
+    "args": ["dist/index.js"],
+    "transport": "stdio"
+  }
+}
+```
+
+**Key design decisions**:
+- **No network access**: All tools operate on local files. This minimizes attack surface and simplifies the security review.
+- **No shell execution**: Alex MCP tools use pure Node.js `fs` module -- no `execSync` or child processes. This eliminates command injection risk entirely.
+- **Write scope limited to insights**: Only `alex_knowledge_save` writes, and only to `~/.alex/global-knowledge/insights/`. Architecture files, skills, and instructions are read-only.
+- **Immutable tool definitions**: The `TOOLS` array in `index.ts` is a static constant. No dynamic tool generation at runtime. This satisfies ODR requirement #2.
+
+#### 1.3 Immutable Tool Compliance Verification
+
+The ODR requires that **tool definitions cannot change at runtime** (prevents tool poisoning). Alex's current implementation is already compliant:
+
+```typescript
+// packages/mcp-cognitive-tools/src/index.ts
+
+// Static constant -- never modified after initialization
+const TOOLS: Tool[] = [
+  { name: "alex_synapse_health", ... },
+  { name: "alex_memory_search", ... },
+  { name: "alex_architecture_status", ... },
+  { name: "alex_knowledge_search", ... },
+  { name: "alex_knowledge_save", ... },
+];
+
+// Handler returns the static array directly
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools: TOOLS,  // No mutation, no dynamic generation
+}));
+```
+
+**Verification**: Run `ListToolsRequestSchema` at t=0 and t=60s -- output must be byte-identical.
+
+#### 1.4 Security Testing
+
+ODR requirement #3 mandates security testing of exposed interfaces. Required test matrix:
+
+| Test Category       | Tool(s)                                       | Test Cases                                                                     |
+| ------------------- | --------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Path Traversal**  | All tools with `workspacePath`                | `../../etc/passwd`, `..\\..\\Windows\\System32`, UNC paths `\\\\server\\share` |
+| **Input Injection** | `alex_memory_search`, `alex_knowledge_search` | Query with shell metacharacters: `; rm -rf /`, `$(whoami)`, backticks          |
+| **Large Input**     | `alex_knowledge_save`                         | Content >1MB, title >10K chars, 1000+ tags                                     |
+| **Null/Missing**    | All tools                                     | Omit required fields, pass null, pass wrong types                              |
+| **Unicode**         | `alex_knowledge_save`                         | Emoji in title, RTL text, zero-width characters                                |
+| **Concurrent**      | All tools                                     | 50 parallel invocations -- no race conditions in file writes                   |
+
+**Current risk assessment**: Low. All tools use `fs.readFileSync`/`fs.writeFileSync` with path-joined operations and no shell execution. The primary risk vector is path traversal via `workspacePath`, which should be validated against a whitelist of allowed base directories.
+
+**Hardening needed**: Add path validation to `synapseHealth()` and `architectureStatus()` to reject paths containing `..` segments or UNC prefixes before any filesystem access:
+
+```typescript
+function validatePath(inputPath: string): string {
+  const resolved = path.resolve(inputPath);
+  // Reject UNC paths and paths outside user home
+  if (resolved.startsWith('\\\\') || !resolved.startsWith(os.homedir())) {
+    throw new Error('Path outside allowed scope');
+  }
+  return resolved;
+}
+```
+
+#### 1.5 ODR Registration
+
+The exact registration process depends on the developer preview documentation (not yet published). Expected workflow based on Microsoft's blog posts:
+
+1. **Enable Developer Mode** on Windows 11 Insider Preview
+2. **Package the server** with manifest, signed binary, and tool definitions
+3. **Register via ODR CLI** (expected): `mcp-register --manifest windows-manifest.json`
+4. **Verify discovery**: open Copilot Actions, search for "Alex Cognitive" in available tools
+5. **Approve tool-level authorization**: first invocation of each tool triggers a User Approval dialog
 
 **Validation**:
 - [ ] MCP server appears in Windows ODR
@@ -356,61 +575,273 @@ If building new tools for Phase 2, prioritize in this order:
 
 ### Phase 2: Tool Enhancement for Desktop Context (Week 2)
 
-**Goal**: Optimize tool descriptions and schemas for desktop agent use cases
+**Goal**: Optimize tool descriptions and add new cognitive tools for desktop agent use cases
 
-**Tasks**:
-1. Review tool descriptions for clarity in desktop context (current descriptions optimized for developer use)
-2. Add desktop-specific examples to tool schemas
-3. Consider new tools for desktop-specific scenarios:
-   - `alex_desktop_context`: Provide relevant knowledge based on active files/applications
-   - `alex_task_history`: Search previous desktop task completions for patterns
-4. Test tool invocation through Copilot Actions vision + reasoning pipeline
-5. Validate the learning loop: insights saved via `alex_knowledge_save` are retrievable
+#### 2.1 Tool Description Rewrite
+
+Current tool descriptions are developer-centric (optimized for VS Code / Claude Desktop). Desktop agent context requires descriptions that help Copilot Actions' vision + reasoning model understand **when** to invoke each tool.
+
+| Tool                       | Current Description                                                                                      | Desktop-Optimized Description                                                                                                                                                 |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alex_synapse_health`      | "Check the health of Alex's cognitive architecture -- validates synapses, memory files, and connections" | "Run a health check on my knowledge system before starting important work. Returns architecture integrity status and any issues that need attention."                         |
+| `alex_memory_search`       | "Search across all Alex memory systems (skills, instructions, prompts, episodic, global knowledge)"      | "Search my accumulated knowledge across all domains -- finds relevant skills, past decisions, documented patterns, and saved insights. Use before starting unfamiliar tasks." |
+| `alex_architecture_status` | "Get current inventory of Alex's cognitive architecture -- skill counts, trifectas, agents, etc."        | "Show what I know -- returns a complete inventory of my skills, expertise areas, and capabilities so you can assess what help is available."                                  |
+| `alex_knowledge_search`    | "Search Alex's global knowledge base for patterns and insights"                                          | "Search my cross-project library for reusable patterns, lessons learned, and best practices that might apply to the current task."                                            |
+| `alex_knowledge_save`      | "Save a new insight to Alex's global knowledge base"                                                     | "Save a new insight or lesson learned from this task so I can apply it to future work across all projects."                                                                   |
+
+The key shift: descriptions become **task-oriented** ("before starting important work", "use before unfamiliar tasks") rather than **component-oriented** ("validates synapses", "skill counts").
+
+#### 2.2 Structured Output for Vision Model
+
+Copilot Actions uses vision + reasoning. Tool responses that return raw JSON are harder for the vision model to interpret than formatted text. Add a `formatForDesktop` option:
+
+```typescript
+function formatHealthForDesktop(health: object): string {
+  return `
+## Architecture Health: ${health.status}
+
+| Component    | Count                  |
+| ------------ | ---------------------- |
+| Skills       | ${health.skills}       |
+| Instructions | ${health.instructions} |
+| Prompts      | ${health.prompts}      |
+| Agents       | ${health.agents}       |
+
+**Synapses**: ${health.synapses} total, ${health.brokenSynapses} broken
+
+${health.status === 'EXCELLENT' ? 'All systems healthy -- safe to proceed.' :
+  `**Action needed**: ${health.brokenSynapses} broken connections found.`}
+`;
+}
+```
+
+This returns markdown that renders cleanly when Copilot Actions displays results in the Agent Workspace.
+
+#### 2.3 New Tool: `alex_meditate`
+
+**Purpose**: Knowledge consolidation checkpoint -- the most fundamental cognitive protocol. Every heir should support meditation.
+
+```typescript
+{
+  name: "alex_meditate",
+  description: "Take a moment to consolidate what was learned in this session. " +
+    "Summarizes active work, saves key decisions to memory, and creates a checkpoint " +
+    "that can be resumed later. Use at natural stopping points or before context switches.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      summary: {
+        type: "string",
+        description: "Brief summary of what was accomplished in this session"
+      },
+      keyDecisions: {
+        type: "array",
+        items: { type: "string" },
+        description: "Important decisions made during this session"
+      },
+      openQuestions: {
+        type: "array",
+        items: { type: "string" },
+        description: "Unresolved questions to carry forward"
+      }
+    },
+    required: ["summary"]
+  }
+}
+```
+
+**Implementation**: Writes a timestamped markdown file to `~/.alex/episodic/meditation-{date}-{slug}.md` using the same format as VS Code meditation entries. This keeps the episodic memory format consistent across all heirs.
+
+#### 2.4 New Tool: `alex_dream`
+
+**Purpose**: Automated neural maintenance -- run synapse validation, detect stale connections, suggest consolidation targets.
+
+```typescript
+{
+  name: "alex_dream",
+  description: "Run automated maintenance on the knowledge architecture. " +
+    "Validates all synapse connections, identifies stale or orphaned knowledge, " +
+    "and suggests areas for consolidation. Run periodically to keep the system healthy.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      workspacePath: {
+        type: "string",
+        description: "Path to workspace (optional, uses cwd)"
+      },
+      autoFix: {
+        type: "boolean",
+        description: "Automatically fix broken synapse connections (default: false)"
+      }
+    }
+  }
+}
+```
+
+**Implementation**: Combines synapse health validation with deeper analysis -- checks for skills without synapses, episodic files older than 30 days without consolidation, and knowledge files without tags. Returns a maintenance report.
+
+#### 2.5 New Tool: `alex_self_actualize`
+
+**Purpose**: Deep architecture assessment -- evaluates cognitive completeness and recommends growth areas.
+
+```typescript
+{
+  name: "alex_self_actualize",
+  description: "Perform a deep assessment of cognitive architecture completeness. " +
+    "Evaluates which skill domains are strong, which have gaps, and recommends " +
+    "areas for growth. Use when planning what to learn or improve next.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      workspacePath: {
+        type: "string",
+        description: "Path to workspace (optional, uses cwd)"
+      },
+      focusArea: {
+        type: "string",
+        description: "Optional domain to focus assessment on (e.g., 'security', 'data')"
+      }
+    }
+  }
+}
+```
+
+**Implementation**: Reads the skills catalog, counts trifecta completeness, identifies skills without synapses (isolated knowledge), and returns a growth roadmap.
+
+#### 2.6 Version Bump and Re-Registration
+
+After adding 3 new tools, the package requires:
+
+1. Bump version: `1.0.0` -> `2.0.0` (new tool surface is a breaking change for automation consumers)
+2. Update `windows-manifest.json` tool definitions array (5 -> 8 tools)
+3. Add write scope for episodic directory: `~/.alex/episodic/**` (for `alex_meditate`)
+4. Rebuild: `npm run build`
+5. Re-sign binary with code signing certificate
+6. Re-register in ODR: `mcp-register --manifest windows-manifest.json --update`
 
 **Validation**:
 - [ ] Copilot Actions correctly invokes Alex tools for relevant tasks
 - [ ] Tool responses are useful in desktop automation context
 - [ ] Knowledge save/search round-trip works through ODR
+- [ ] New tools (meditate, dream, self-actualize) function correctly
+- [ ] User authorization prompt fires for new tools on first use
 
 ### Phase 3: Integration Testing (Week 3)
 
 **Goal**: End-to-end validation in Agent Workspace environment
 
-**Tasks**:
-1. Test scenarios:
-   - "Search my knowledge base before starting this document"
-   - "Check architecture health before making changes"
-   - "Save what I learned from this task"
-   - "What patterns have I seen across my projects?"
-2. Validate security boundaries:
-   - Agent account cannot access files outside declared scope
-   - User authorization required for sensitive operations
-   - Audit trail captures all tool invocations
-3. Performance testing: tool response times through Windows proxy
-4. Error handling: graceful degradation when MCP server unavailable
+#### 3.1 Functional Test Scenarios
+
+Each scenario tests a realistic desktop workflow:
+
+| #   | Scenario                                                 | Tools Invoked                                               | Expected Outcome                                                                |
+| --- | -------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| 1   | "Search my knowledge base before starting this document" | `alex_knowledge_search`                                     | Returns relevant patterns; Copilot Actions uses them to guide document creation |
+| 2   | "Check architecture health before making changes"        | `alex_synapse_health`                                       | Returns EXCELLENT/GOOD status with component counts                             |
+| 3   | "Save what I learned from this task"                     | `alex_knowledge_save`                                       | Insight persisted to `~/.alex/global-knowledge/insights/{category}/`            |
+| 4   | "What patterns have I seen across my projects?"          | `alex_memory_search` (type: global)                         | Returns cross-project patterns sorted by relevance                              |
+| 5   | "What skills do I have for data analysis?"               | `alex_memory_search` (type: skills, query: "data analysis") | Returns data-analysis, data-visualization, dashboard-design skills              |
+| 6   | "Meditate on today's work"                               | `alex_meditate`                                             | Creates episodic checkpoint file with session summary                           |
+| 7   | "Run maintenance on my knowledge system"                 | `alex_dream`                                                | Returns maintenance report with synapse health and suggestions                  |
+| 8   | "What should I learn next?"                              | `alex_self_actualize`                                       | Returns growth recommendations based on skill gaps                              |
+
+#### 3.2 Security Boundary Validation
+
+| Test                                                    | Expected Result | Pass Criteria                                                 |
+| ------------------------------------------------------- | --------------- | ------------------------------------------------------------- |
+| Agent reads `~/.alex/global-knowledge/`                 | Allowed         | File content returned                                         |
+| Agent reads `~/.alex/secrets/` (if exists)              | Denied          | Access denied by Windows ACL                                  |
+| Agent writes to workspace `.github/skills/`             | Denied          | Write blocked (read-only scope)                               |
+| Agent writes to `~/.alex/global-knowledge/insights/`    | Allowed         | File created successfully                                     |
+| Agent attempts `workspacePath: "C:\\Windows\\System32"` | Rejected        | Path validation blocks before filesystem access               |
+| Agent tool invocation logged in audit trail             | Logged          | Windows Event Log or Agent Workspace history shows invocation |
+| Agent runs with standard account (not admin)            | Confirmed       | `whoami` from agent context shows agent account, not user     |
+
+#### 3.3 Performance Benchmarks
+
+| Metric                             | Target             | Measurement Method                                        |
+| ---------------------------------- | ------------------ | --------------------------------------------------------- |
+| Tool response time (simple)        | <500ms             | `alex_architecture_status` with small workspace           |
+| Tool response time (search)        | <2s                | `alex_memory_search` across 157+ skills                   |
+| Tool response time (through proxy) | <3s                | Same operations measured including Windows proxy overhead |
+| Concurrent tool calls              | No race conditions | 10 parallel `alex_knowledge_search` calls                 |
+| Memory footprint                   | <50MB              | Node.js process during active tool invocation             |
+| Cold start time                    | <3s                | Time from ODR launch to first tool response               |
+
+#### 3.4 Resilience Testing
+
+| Failure Mode                                      | Expected Behavior                                      |
+| ------------------------------------------------- | ------------------------------------------------------ |
+| `~/.alex/` directory missing                      | "Global knowledge base not found" message (no crash)   |
+| Workspace has no `.github/`                       | "Architecture not installed" status (no crash)         |
+| Corrupt `synapses.json`                           | Health check reports issue, other tools unaffected     |
+| MCP server process killed mid-invocation          | Copilot Actions shows error, offers retry              |
+| Disk full during `alex_knowledge_save`            | Write fails gracefully with clear error message        |
+| Very large workspace (1000+ skills, hypothetical) | Tools complete within timeout, use streaming if needed |
 
 **Validation**:
-- [ ] All test scenarios pass
-- [ ] Security boundaries verified
-- [ ] Performance acceptable (<2s tool response through proxy)
-- [ ] Error handling graceful
+- [ ] All 8 test scenarios pass
+- [ ] Security boundaries verified (all 7 tests)
+- [ ] Performance acceptable (all metrics within targets)
+- [ ] Error handling graceful (all 6 failure modes handled)
 
 ### Phase 4: Documentation and Release (Week 4)
 
 **Goal**: Publish Windows Agent heir with documentation
 
-**Tasks**:
-1. Create `platforms/windows-agent/README.md` with setup instructions
-2. Update heir architecture diagram in `MASTER-HEIR-ARCHITECTURE.md`
-3. Add Windows Agent to copilot-instructions.md Heirs section
-4. Document known limitations and workarounds
-5. Create troubleshooting guide for common ODR issues
-6. Update ROADMAP: close Conditional #19, move to shipped
+#### 4.1 Platform Directory Structure
+
+```
+platforms/windows-agent/
+  README.md                    # Setup guide, architecture, troubleshooting
+  KNOWN-LIMITATIONS.md         # What doesn't port, workarounds
+```
+
+The Windows Agent heir has **no new codebase** -- it refers to `packages/mcp-cognitive-tools/` for all code. The `platforms/windows-agent/` directory contains only documentation and configuration.
+
+#### 4.2 Documentation Updates
+
+| Document                                          | Change                                                                       |
+| ------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `platforms/windows-agent/README.md`               | New: Setup guide, ODR registration steps, tool reference, troubleshooting    |
+| `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md` | Add Windows Agent box to heir diagram, update platform count                 |
+| `.github/copilot-instructions.md`                 | Add `Windows Agent: platforms/windows-agent/` to Heirs section               |
+| `ROADMAP-UNIFIED.md`                              | Close Conditional #19, move Windows Agent to Shipped Releases                |
+| `packages/mcp-cognitive-tools/README.md`          | Add "Windows ODR" configuration section alongside VS Code and Claude Desktop |
+| Platform Strategy table                           | Change Windows Agent from "Planned" to "Active"                              |
+
+#### 4.3 Troubleshooting Guide
+
+Common issues and resolutions for the Windows Agent heir:
+
+| Issue                                  | Cause                                                | Resolution                                                                                      |
+| -------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Tools not appearing in Copilot Actions | ODR registration failed or pending                   | Re-run `mcp-register`, check Windows Event Log for registration errors                          |
+| "Access denied" on tool invocation     | Agent account lacks read permission to `~/.alex/`    | Grant agent account read access: `icacls %USERPROFILE%\.alex /grant "AgentAccount:(OI)(CI)(R)"` |
+| Tool invocation times out              | Windows proxy timeout too short for large workspaces | Optimize search to use index, or request longer timeout in manifest                             |
+| "Global knowledge base not found"      | `~/.alex/global-knowledge/` not created              | Run `alex_knowledge_save` once to auto-create the directory structure                           |
+| Binary signature invalid               | Certificate expired or revoked                       | Re-sign with current certificate, re-register in ODR                                            |
+| Tool definition mismatch               | Stale registration after upgrade                     | Re-register: `mcp-register --manifest windows-manifest.json --update`                           |
+| Agent can't find workspace `.github/`  | `workspacePath` not set or incorrect                 | Pass explicit `workspacePath` parameter, or ensure cwd is set to workspace root                 |
+
+#### 4.4 npm Publish Checklist
+
+Before publishing `@alex/mcp-cognitive-tools` v2.0.0:
+
+1. All 8 tools tested end-to-end in Agent Workspace
+2. Security test matrix passed (Phase 1.4)
+3. `npm run build` succeeds with zero errors
+4. `npm pack --dry-run` shows only `dist/`, `README.md`, `windows-manifest.json`
+5. Version bumped in `package.json`
+6. CHANGELOG updated with new tools and breaking changes
+7. Binary re-signed with code signing certificate
+8. `npm publish --access public`
 
 **Validation**:
 - [ ] Documentation complete and reviewed
 - [ ] Heir architecture docs updated
 - [ ] ROADMAP reflects shipped status
+- [ ] npm package v2.0.0 published
 
 ## Risk Assessment
 

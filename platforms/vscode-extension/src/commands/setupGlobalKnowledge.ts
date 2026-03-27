@@ -12,12 +12,12 @@ const GK_PATH = path.join(ALEX_HOME, 'global-knowledge');
 const SKILL_REGISTRY_PATH = path.join(GK_PATH, 'skills', 'skill-registry.json');
 const GK_REPO_URL = 'https://github.com/fabioc-aloha/Alex-Global-Knowledge.git';
 
-// Common developer paths to check for existing GK repo
+// Common developer paths to check for existing GK repo (cross-platform)
 const DEVELOPER_PATHS = [
-    'C:\\Development\\Alex-Global-Knowledge',
-    'D:\\Development\\Alex-Global-Knowledge',
     path.join(os.homedir(), 'Development', 'Alex-Global-Knowledge'),
+    path.join(os.homedir(), 'Developer', 'Alex-Global-Knowledge'),
     path.join(os.homedir(), 'dev', 'Alex-Global-Knowledge'),
+    path.join(os.homedir(), 'src', 'Alex-Global-Knowledge'),
     path.join(os.homedir(), 'repos', 'Alex-Global-Knowledge'),
     path.join(os.homedir(), 'projects', 'Alex-Global-Knowledge'),
     path.join(os.homedir(), 'code', 'Alex-Global-Knowledge'),
@@ -74,8 +74,8 @@ async function createSymlink(target: string, linkPath: string): Promise<void> {
         }
     }
     
-    // Create symlink
-    await fs.symlink(target, linkPath, 'junction'); // junction works without admin on Windows
+    // Create symlink (junction type used on Windows for non-admin; ignored on macOS/Linux)
+    await fs.symlink(target, linkPath, 'junction');
 }
 
 /**
@@ -125,7 +125,7 @@ export async function ensureGlobalKnowledgeSetup(): Promise<boolean> {
                 return true;
             } catch (error) {
                 vscode.window.showErrorMessage(
-                    `Failed to create symlink: ${error}. Try running VS Code as administrator.`
+                    `Failed to create symlink: ${error}. ${process.platform === 'win32' ? 'Try running VS Code as administrator.' : 'Check folder permissions.'}`
                 );
                 return false;
             }

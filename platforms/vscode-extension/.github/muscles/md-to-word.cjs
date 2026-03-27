@@ -34,7 +34,7 @@
  *   node md-to-word.cjs draft.md --watch
  *
  * Requirements:
- *   - pandoc  (winget install pandoc)
+ *   - pandoc  (Windows: winget install pandoc | macOS: brew install pandoc | Linux: apt install pandoc)
  *   - mermaid-cli (npm install -g @mermaid-js/mermaid-cli)
  *   - jszip   (npm dependency — resolved from extension node_modules)
  *   - svgexport (npm install -g svgexport) [optional, for SVG banners]

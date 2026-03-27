@@ -24,7 +24,7 @@
  *
  * Requirements:
  *   - Node.js 18+
- *   - pandoc (winget install pandoc)
+ *   - pandoc (Windows: winget install pandoc | macOS: brew install pandoc | Linux: apt install pandoc)
  */
 
 'use strict';
