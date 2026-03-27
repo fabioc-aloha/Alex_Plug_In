@@ -1,41 +1,16 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/config/cognitive-config.json",
+    "github/episodic/peripheral/file-observations.json",
     "ROADMAP-UNIFIED.md",
-    "alex_docs/skills/SKILLS-CATALOG.md",
-    "package.json",
-    "platforms/m365-copilot/README.md",
-    "platforms/m365-copilot/package.json",
-    "platforms/vscode-extension/CHANGELOG.md",
-    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md"
+    "alex_docs/platforms/CLAUDE-HEIR-PLAN.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1774651091343
-    },
-    {
       "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1774651091343
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1774651091343
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1774651091343
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1774651091343
+      "scannedAt": 1774653012158
     }
   ],
-  "lastUpdated": 1774651091343
+  "lastUpdated": 1774653012158
 }

@@ -31,9 +31,7 @@ Seven platforms. Four active, three planned.
 | **VS Code Extension**  | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                           |
 | **M365 Copilot Agent** | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                               |
 | **Agent Plugin**       | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
-| **Windows Agent**      | `platforms/windows-agent/`    | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace — Gate #19                                                                      |
-| **Claude Cowork**      | `platforms/claude-cowork/`    | ⏳ Planned | Plugin bundle for Claude Cowork VM — Gate #17                                                                                                                      |
-| **Claude Chat**        | `platforms/claude-chat/`      | ⏳ Planned | Projects + Memory config for Claude.ai — Gate #18                                                                                                                  |
+| **Windows Agent**      | `platforms/windows-agent/`    | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace — Gate #17                                                                      |
 
 ---
 
@@ -125,9 +123,7 @@ Seven platforms. Four active, three planned.
 | --- | -------------------------- | --------------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 15  | **Foundry POC**            | Real user/team requests Alex in Teams         |   1w   | Foundry project + Alex orchestrator + Teams publish. ATK 6.6 adds Foundry proxy template in CLI (`atk init`).                                                                                                                   |
 | 16  | **Teams Deep Integration** | Active M365 users                             |  12w   | Bot Framework + Message Extensions + Meeting Integration                                                                                                                                                                        |
-| 17  | **Claude Cowork Heir**     | Cowork exits Research Preview + user adoption |   8w   | Plugin bundle: 150 skills, 7 sub-agents, 50 slash commands. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md)                                                                                                                     |
-| 18  | **Claude Chat Heir**       | Gate #17 done                                 |   1w   | Lightweight Projects + Memory config heir. Depends on Cowork heir. [Plan](alex_docs/platforms/CLAUDE-HEIR-PLAN.md)                                                                                                              |
-| 19  | **Windows Agent Heir**     | Agent Workspace exits Insider Preview (GA)    |   2w   | Register Alex MCP tools as ODR agent connectors. Enables Copilot Actions to use Alex's knowledge search, architecture status, and skill routing on the Windows desktop. Bridge: `packages/mcp-cognitive-tools/` already exists. |
+| 17  | **Windows Agent Heir**     | Agent Workspace exits Insider Preview (GA)    |   2w   | Register Alex MCP tools as ODR agent connectors. Enables Copilot Actions to use Alex's knowledge search, architecture status, and skill routing on the Windows desktop. Bridge: `packages/mcp-cognitive-tools/` already exists. |
 
 ---
 
@@ -140,7 +136,6 @@ The next major version will be defined through competitive research, not specula
 | Action                          | Focus                                                                                       |
 | ------------------------------- | ------------------------------------------------------------------------------------------- |
 | **Competitive landscape audit** | Study Claude Code, Cursor, Windsurf, Aider, and other AI coding tools for feature gaps      |
-| **Claude gap analysis**         | Claude's Skills, Cowork, and agent capabilities are advancing fast — identify what to adopt |
 | **Platform evolution watch**    | Track VS Code agent platform, Copilot extensibility, and MCP ecosystem changes              |
 | **User friction inventory**     | Catalog real pain points from daily use across 30+ heir projects                            |
 
