@@ -111,12 +111,6 @@ Seven platforms. Four active, three planned.
 | --- | ------------------------------ | -------------------------------- | :----: | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | 14  | **Worker agent orchestration** | v1.6 worker_agents exits preview |   1w   | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. ATK 6.6 ships MCP-in-DA (GA) and Foundry template but not worker_agents. |
 
-### Archived (No Longer Needed)
-
-| #   | Task                     | Original Gate                  | Rationale                                                                                                                                                                                                                                                                                 |
-| --- | ------------------------ | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 12  | **Semantic Skill Graph** | Azure OpenAI key + 150+ skills | ❌ Retired — LLM-native semantic routing makes vector embeddings redundant. Claude/Copilot match skills via description text; the LLM *is* the semantic engine. 144 skills × ~100 tokens each = 15K tokens, well within context. Would only matter at 1000+ skills or for non-LLM routing. |
-
 ### Conditional (Trigger-Dependent)
 
 | #   | Task                       | Trigger                                       | Effort | Description                                                                                                                                                                                                                     |
