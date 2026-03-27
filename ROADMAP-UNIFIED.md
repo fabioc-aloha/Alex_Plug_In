@@ -39,6 +39,7 @@ Seven platforms. Four active, three planned.
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v6.8.4** | Quality Review & Roadmap Cleanup -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes                                                                                                                | 2026-03-27 |
 | **v6.8.3** | Data Storytelling Trifecta Suite -- 5 new trifectas, 4 muscles, 24-chart interactive gallery, colorblind-safe Tableau 10 palette, 157 skills, 45 trifectas, brain-qa 0 bugs                                                                                                                                   | 2026-03-26 |
 | **v6.8.2** | Workspace Cleanup & Doc Audit -- 928 stale files archived, TEST-GUIDE.md retired, README link modernization, lint fix, all 8 quality gates pass                                                                                                                                                               | 2026-03-25 |
 | **v6.8.1** | Welcome View UI Polish & Converter Sprint -- Docs tab streamlined (Practice/Books removed, 8 playbook categories, LearnAI CTA redesign), converter infrastructure (prompt-preprocessor, batch retry, model freshness, 284 QA assertions), workspace cleanup (928 stale files archived, TEST-GUIDE.md retired) | 2026-03-25 |
@@ -113,11 +114,11 @@ Seven platforms. Four active, three planned.
 
 ### Conditional (Trigger-Dependent)
 
-| #   | Task                       | Trigger                                       | Effort | Description                                                                                                                                                                                                                     |
-| --- | -------------------------- | --------------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 15  | **Foundry POC**            | Real user/team requests Alex in Teams         |   1w   | Foundry project + Alex orchestrator + Teams publish. ATK 6.6 adds Foundry proxy template in CLI (`atk init`).                                                                                                                   |
-| 16  | **Teams Deep Integration** | Active M365 users                             |  12w   | Bot Framework + Message Extensions + Meeting Integration                                                                                                                                                                        |
-| 17  | **Windows Agent Heir**     | Agent Workspace exits Insider Preview (GA)    |   2w   | Register Alex MCP tools as ODR agent connectors. Enables Copilot Actions to use Alex's knowledge search, architecture status, and skill routing on the Windows desktop. Bridge: `packages/mcp-cognitive-tools/` already exists. |
+| #   | Task                       | Trigger                                    | Effort | Description                                                                                                                                                                                                                     |
+| --- | -------------------------- | ------------------------------------------ | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 15  | **Foundry POC**            | Real user/team requests Alex in Teams      |   1w   | Foundry project + Alex orchestrator + Teams publish. ATK 6.6 adds Foundry proxy template in CLI (`atk init`).                                                                                                                   |
+| 16  | **Teams Deep Integration** | Active M365 users                          |  12w   | Bot Framework + Message Extensions + Meeting Integration                                                                                                                                                                        |
+| 17  | **Windows Agent Heir**     | Agent Workspace exits Insider Preview (GA) |   2w   | Register Alex MCP tools as ODR agent connectors. Enables Copilot Actions to use Alex's knowledge search, architecture status, and skill routing on the Windows desktop. Bridge: `packages/mcp-cognitive-tools/` already exists. |
 
 ---
 
@@ -127,11 +128,11 @@ The original v7.0 vision has been retired — most of it shipped in v6.x through
 
 The next major version will be defined through competitive research, not speculation:
 
-| Action                          | Focus                                                                                       |
-| ------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Competitive landscape audit** | Study Claude Code, Cursor, Windsurf, Aider, and other AI coding tools for feature gaps      |
-| **Platform evolution watch**    | Track VS Code agent platform, Copilot extensibility, and MCP ecosystem changes              |
-| **User friction inventory**     | Catalog real pain points from daily use across 30+ heir projects                            |
+| Action                          | Focus                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------------------- |
+| **Competitive landscape audit** | Study Claude Code, Cursor, Windsurf, Aider, and other AI coding tools for feature gaps |
+| **Platform evolution watch**    | Track VS Code agent platform, Copilot extensibility, and MCP ecosystem changes         |
+| **User friction inventory**     | Catalog real pain points from daily use across 30+ heir projects                       |
 
 > **Principle**: No premature vision. Research what competitors ship, identify gaps that matter, then define v7.0 from evidence.
 
@@ -198,13 +199,13 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                                 |
 | -------------------------- | --------------------------------------------------------------- |
-| **Current Master Version** | 6.8.3                                                           |
-| **Current Heirs**          | VS Code (6.8.3), M365 (6.8.3), Plugin (6.7.0)                   |
-| **Architecture**           | 157 skills, 45 trifectas, 71 instructions, 50 prompts, 7 agents |
-| **Platforms**              | 7 total (4 active, 3 planned)                                   |
+| **Current Master Version** | 6.8.4                                                           |
+| **Current Heirs**          | VS Code (6.8.4), M365 (6.8.3), Plugin (6.7.0)                   |
+| **Architecture**           | 157 skills, 45 trifectas, 77 instructions, 55 prompts, 7 agents |
+| **Platforms**              | 5 total (4 active, 1 planned)                                   |
 | **Next Target**            | v7.0.0 — TBD (competitive research phase)                       |
 | **Open Items**             | 13 total: 4 blocked, 1 gated, 5 conditional, 3 next actions     |
-| **Updated**                | 2026-03-25                                                      |
+| **Updated**                | 2026-03-27                                                      |
 
 ---
 

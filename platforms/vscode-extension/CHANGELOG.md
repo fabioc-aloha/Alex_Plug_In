@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.8.4] - 2026-03-27
+
+### Changed
+
+- Quality review: GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired
+- Roadmap cleanup: renumbered gates, removed archived entries
+- brain-qa regex fix for invalid character range
+- Version drift fixes across root package.json, cognitive-config.json, M365 heir
+
+---
+
 ## [6.8.3] - 2026-03-26
 
 > **Data Storytelling Trifecta Suite** -- 5 new trifectas (data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation), 4 muscles, 24-chart interactive gallery. Colorblind-safe Tableau 10 palette enforced across all charting assets.

@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.8.4] - 2026-03-27
+
+> **Quality Review & Roadmap Cleanup** -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes.
+
+### Changed
+
+- **GCX autonomous**: Removed `alex_docs/platforms/gcx-copilot/`, GCX-AI-HEIR-PLAN.md, and GCX audit -- GCX_Master is now a self-governing fork
+- **Claude heirs removed**: Removed Claude Cowork (Gate #17) and Claude Chat (Gate #18) from roadmap -- Windows Agent subsumes this use case
+- **Semantic Skill Graph retired**: Removed archived entry from roadmap -- LLM-native routing makes vector embeddings redundant
+- **brain-qa regex fix**: Escaped hyphen in character class that caused invalid range error
+- **Version drift fixes**: Synchronized root package.json, cognitive-config.json, M365 heir, and heir CHANGELOG to 6.8.3+
+- **Gate renumbering**: Windows Agent heir renumbered from #19 to #17
+
+---
+
 ## [6.8.3] - 2026-03-26
 
 > **Data Storytelling Trifecta Suite** -- 5 new trifectas (data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation), 4 muscles, 24-chart interactive gallery. 45/45 trifectas, 155 skills, brain-qa 0 bugs.

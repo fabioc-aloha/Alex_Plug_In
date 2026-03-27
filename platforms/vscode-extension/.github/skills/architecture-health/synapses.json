@@ -21,14 +21,6 @@
       "yields": "meditation contextual assessment"
     },
     {
-      "target": ".github/instructions/cognitive-health-validation.instructions.md",
-      "type": "complements",
-      "strength": 0.85,
-      "reason": "Instruction enforces; skill interprets results",
-      "when": "When task involves .github/instructions/cognitive health validation.instructions.md",
-      "yields": "cognitive health validation trifecta rules and guidelines"
-    },
-    {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "complements",
       "strength": 0.8,

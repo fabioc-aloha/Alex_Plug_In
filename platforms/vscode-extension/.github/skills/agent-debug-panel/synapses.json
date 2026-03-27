@@ -20,6 +20,14 @@
       "reason": "Specialized debugging for agent/skill/hook loading",
       "when": "When task involves .github/skills/debugging patterns/SKILL.md",
       "yields": "debugging patterns extended capabilities"
+    },
+    {
+      "target": ".github/instructions/vscode-configuration-validation.instructions.md",
+      "type": "uses",
+      "strength": 0.75,
+      "reason": "Settings checklist is prerequisite for debug panel effectiveness",
+      "when": "When task involves .github/instructions/vscode configuration validation.instructions.md",
+      "yields": "VS Code configuration validation rules and guidelines"
     }
   ],
   "activationPatterns": [
