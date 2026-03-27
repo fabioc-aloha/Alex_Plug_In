@@ -1,14 +1,14 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/meditation-2026-03-26-data-storytelling.md"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1774554879593
+      "file": "alex_archive/cleanup-2026-03-25/research/mockups/icons/tabs/mind-b.png",
+      "todoCount": 1,
+      "scannedAt": 1774636785291
     }
   ],
-  "lastUpdated": 1774554879593
+  "lastUpdated": 1774636785291
 }

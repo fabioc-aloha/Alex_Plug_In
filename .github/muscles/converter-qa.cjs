@@ -68,6 +68,7 @@ const MD_TO_EML = path.join(MUSCLES, 'md-to-eml.cjs');
 const NAV_INJECT = path.join(MUSCLES, 'nav-inject.cjs');
 
 const TEMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'converter-qa-'));
+process.on('exit', () => { try { fs.rmSync(TEMP_DIR, { recursive: true, force: true }); } catch { /* ignore */ } });
 
 // ─────────────────────────────────────────────────────────────────────────────
 // HELPERS

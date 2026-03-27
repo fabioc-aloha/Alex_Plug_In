@@ -125,6 +125,7 @@ function markdownToEmailHtml(markdown, options = {}) {
 
   // Convert to HTML via pandoc
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'md-to-eml-'));
+  process.on('exit', () => { try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch { /* ignore */ } });
   const tempMd = path.join(tempDir, 'email.md');
   const tempHtml = path.join(tempDir, 'email.html');
 

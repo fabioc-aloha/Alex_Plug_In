@@ -882,6 +882,7 @@ async function build(args) {
 
   // Use os.tmpdir for temp files (proper cleanup)
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'md-to-word-'));
+  process.on('exit', () => { try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch { /* ignore */ } });
 
   console.log(`\u{1f4c4} Converting ${sourcePath} \u2192 ${outputPath}`);
   if (args.toc) console.log('   \u{1f4d1} Table of Contents: enabled');

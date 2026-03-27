@@ -234,9 +234,12 @@ function processMermaidBlocks(markdown, sourceDir, usePng) {
         format: 'html', scale: 3, width: 1200, injectPalette: true
       });
       if (rendered && fs.existsSync(tmpPng)) {
-        const base64 = fs.readFileSync(tmpPng).toString('base64');
-        markdown = markdown.replace(block.raw, `![Diagram](data:image/png;base64,${base64})`);
-        try { fs.unlinkSync(tmpPng); } catch { /* ignore */ }
+        try {
+          const base64 = fs.readFileSync(tmpPng).toString('base64');
+          markdown = markdown.replace(block.raw, `![Diagram](data:image/png;base64,${base64})`);
+        } finally {
+          try { fs.unlinkSync(tmpPng); } catch { /* ignore */ }
+        }
       } else {
         const fallback = sharedMermaid.mermaidToTableFallback(block.content);
         markdown = markdown.replace(block.raw, fallback);
@@ -318,6 +321,7 @@ function convertMarkdownToHtml(sourcePath, outputPath, options = {}) {
 
   // Convert via pandoc
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'md-to-html-'));
+  process.on('exit', () => { try { fs.rmSync(tempDir, { recursive: true, force: true }); } catch { /* ignore */ } });
   const tempMd = path.join(tempDir, 'source.md');
   const tempHtml = path.join(tempDir, 'output.html');
 
