@@ -104,7 +104,7 @@ Expert in Alex brand hierarchy, visual identity systems, asset deployment, and p
 
 ## PNG Generation
 
-```powershell
+```bash
 npx sharp-cli --input source.svg --output output.png -f png --density 150
 ```
 

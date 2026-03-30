@@ -91,10 +91,13 @@ function sleep(ms) {
 function getApiKey() {
   const apiKey = process.env.GAMMA_API_KEY;
   if (!apiKey) {
+    const hint = process.platform === 'win32'
+      ? '$env:GAMMA_API_KEY = "sk-gamma-xxx"'
+      : 'export GAMMA_API_KEY="sk-gamma-xxx"';
     throw new Error(
       'GAMMA_API_KEY environment variable is required.\n' +
         'Get your API key from: https://gamma.app/settings\n' +
-        'Set it with: $env:GAMMA_API_KEY = "sk-gamma-xxx"'
+        `Set it with: ${hint}`
     );
   }
   return apiKey;

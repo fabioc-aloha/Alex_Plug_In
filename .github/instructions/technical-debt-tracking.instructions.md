@@ -95,7 +95,7 @@ class MegaHandler {
 
 ### Step 1: Scan for Debt Markers
 
-```powershell
+```bash
 # Find all DEBT markers in codebase
 grep -rn "DEBT:" --include="*.ts" --include="*.js" --include="*.md" .
 

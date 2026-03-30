@@ -13,7 +13,7 @@ When user requests Word export (`/word`, "convert to word", "export docx"):
 1. **Use the muscle script**: `.github/muscles/md-to-word.cjs`
 2. **Do NOT manually run pandoc** — the script handles everything
 
-```powershell
+```bash
 node .github/muscles/md-to-word.cjs SOURCE.md [OUTPUT.docx]
 ```
 | mmdc not found | `npm install -g @mermaid-js/mermaid-cli` |

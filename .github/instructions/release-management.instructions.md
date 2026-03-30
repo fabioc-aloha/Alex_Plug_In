@@ -351,7 +351,7 @@ if ($badgeVersion -ne $pkgVersion) { Write-Warning "README badge outdated: $badg
 
 ### Phase 2: Version Bump
 
-```powershell
+```bash
 # Choose ONE based on change type:
 npm version patch  # Bug fixes only (1.0.0 → 1.0.1)
 npm version minor  # New features (1.0.0 → 1.1.0)  
@@ -360,14 +360,14 @@ npm version major  # Breaking changes (1.0.0 → 2.0.0)
 
 ### Phase 3: Build & Package
 
-```powershell
+```bash
 npm run package    # Production build
 vsce package       # Create .vsix
 ```
 
 ### Phase 4: Test Locally (RECOMMENDED)
 
-```powershell
+```bash
 # Install from .vsix to verify
 code --install-extension alex-cognitive-architecture-<version>.vsix
 ```
@@ -376,7 +376,7 @@ code --install-extension alex-cognitive-architecture-<version>.vsix
 
 **⚠️ VSCE requires an Azure DevOps PAT, NOT a GitHub PAT!**
 
-```powershell
+```bash
 # RECOMMENDED: Use PAT directly (single command, no login needed)
 npx vsce publish --no-dependencies --pat <AZURE_DEVOPS_PAT>
 ```

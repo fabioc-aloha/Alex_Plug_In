@@ -209,7 +209,7 @@ output webAppUrl string = 'https://${webApp.properties.defaultHostName}'
 
 ### Deployment Command
 
-```powershell
+```bash
 # What-if preview
 az deployment group what-if `
   --resource-group rg-myapp-dev `
@@ -411,7 +411,7 @@ else
 
 ### Common Commands
 
-```powershell
+```bash
 # Azure CLI
 az login
 az account set --subscription "Production"

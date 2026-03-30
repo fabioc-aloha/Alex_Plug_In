@@ -50,7 +50,7 @@ The `@m365agents` chat participant exposes MCP tools. **Use these programmatical
 - **v3.x**: `--package-file` flag, correctly includes declarativeAgent.json
 
 **Upgrade CLI if packaging fails:**
-```powershell
+```bash
 npm install -g @microsoft/teamsapp-cli@latest
 teamsapp --version  # Should be 3.x
 ```
@@ -79,7 +79,7 @@ appPackage/
 
 When syncing icons from VS Code assets to M365:
 
-```powershell
+```bash
 # Install sharp if needed
 npm install sharp
 
@@ -137,7 +137,7 @@ const token = await microsoftTeams.authentication.getAuthToken();
 The M365 Agents Toolkit (formerly Teams Toolkit) provides:
 
 **CLI commands:**
-```powershell
+```bash
 npx teamsapp package --env local
 npx teamsapp validate --package-file ...
 npx teamsapp preview --env local

@@ -6,7 +6,7 @@ Pre-commit quality gates to catch issues before they enter the repository.
 
 ### Automatic (Recommended)
 
-```powershell
+```bash
 # Install pre-commit hook
 .\.github\muscles\install-hooks.ps1
 ```

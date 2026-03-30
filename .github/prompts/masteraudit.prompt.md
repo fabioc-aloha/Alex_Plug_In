@@ -14,7 +14,7 @@ Run a comprehensive Master Alex audit: automated 22-section checks + semantic co
 ### Step 1: Automated Audit
 Run the master audit script:
 
-```powershell
+```bash
 .github/muscles/audit-master-alex.ps1
 ```
 

@@ -339,7 +339,7 @@ vsce publish
 
 **Full rebuild workflow** (for UI/config changes):
 
-```powershell
+```bash
 # 1. Build production bundle
 npm run package
 

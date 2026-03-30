@@ -33,7 +33,7 @@ A clear and concise description of what you expected to happen.
 A clear and concise description of what actually happened.
 
 ## Validation Results
-```powershell
+```bash
 # If applicable, paste output from:
 # Run via VS Code Command Palette:
 Alex: Dream (Neural Maintenance)

@@ -1,8 +1,8 @@
-# Alex Cognitive Architecture — Roadmap v6.0
+# Alex Cognitive Architecture — Roadmap v7.0
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 26, 2026
+**Last Updated**: March 30, 2026
 
 ---
 
@@ -35,11 +35,19 @@ Seven platforms. Four active, three planned.
 
 ---
 
+## 🚧 In Progress
+
+| Version    | Theme                                                                                                                                                                                                                                                                                                                       | Target     |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v7.0.0** | Working Together Edition -- cross-platform parity across full architecture (35+ file fixes, brew/winget pairing, bash code blocks), macOS-native capabilities (sips, say, caffeinate, launchd), mac heir setup guides promoted to Master, PS muscle ports to Node.js. Tracker: alex_docs/audits/MACOS-EXPEDITION-TRACKER.md | 2026-03-30 |
+
+---
+
 ## ✅ Shipped Releases
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **v6.8.4** | Quality Review & Roadmap Cleanup -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes                                                                                                                | 2026-03-27 |
+| **v6.8.4** | Quality Review & Roadmap Cleanup -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes                                                                                                              | 2026-03-27 |
 | **v6.8.3** | Data Storytelling Trifecta Suite -- 5 new trifectas, 4 muscles, 24-chart interactive gallery, colorblind-safe Tableau 10 palette, 157 skills, 45 trifectas, brain-qa 0 bugs                                                                                                                                   | 2026-03-26 |
 | **v6.8.2** | Workspace Cleanup & Doc Audit -- 928 stale files archived, TEST-GUIDE.md retired, README link modernization, lint fix, all 8 quality gates pass                                                                                                                                                               | 2026-03-25 |
 | **v6.8.1** | Welcome View UI Polish & Converter Sprint -- Docs tab streamlined (Practice/Books removed, 8 playbook categories, LearnAI CTA redesign), converter infrastructure (prompt-preprocessor, batch retry, model freshness, 284 QA assertions), workspace cleanup (928 stale files archived, TEST-GUIDE.md retired) | 2026-03-25 |

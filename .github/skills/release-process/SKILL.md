@@ -29,7 +29,7 @@ Comprehensive knowledge for releasing Alex Cognitive Architecture to VS Code Mar
 
 ### Manual Publishing
 
-```powershell
+```bash
 cd platforms/vscode-extension
 npx vsce publish --pre-release  # Pre-release
 npx vsce publish                # Stable release

@@ -1,39 +1,16 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
+    "github/ISSUE_TEMPLATE/bug_report.md",
     "ROADMAP-UNIFIED.md",
-    "platforms/vscode-extension/CHANGELOG.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json"
+    "alex_docs/audits/MACOS-EXPEDITION-TRACKER.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1774654826446
-    },
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1774654826446
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.8.4.vsix",
+      "file": "ROADMAP-UNIFIED.md",
       "todoCount": 2,
-      "scannedAt": 1774654826446
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-6.8.3.vsix",
-      "todoCount": 2,
-      "scannedAt": 1774654826446
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1774654826446
+      "scannedAt": 1774895924683
     }
   ],
-  "lastUpdated": 1774654826446
+  "lastUpdated": 1774895924683
 }

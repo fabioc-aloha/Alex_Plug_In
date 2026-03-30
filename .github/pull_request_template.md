@@ -65,7 +65,7 @@ For changes involving cognitive science concepts, provide empirical backing:
 - [ ] Impact assessment documented
 
 ### Test Results
-```powershell
+```bash
 # Paste validation output here
 ```
 

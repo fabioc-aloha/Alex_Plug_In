@@ -86,7 +86,7 @@
     "copy-files": [
       ".github/muscles/md-to-word.cjs"
     ],
-    "install": "winget install pandoc; npm i -g @mermaid-js/mermaid-cli"
+    "install": "brew install pandoc (macOS) / winget install JohnMacFarlane.Pandoc (Windows); npm i -g @mermaid-js/mermaid-cli"
   },
   "triggers": [
     "convert to word",

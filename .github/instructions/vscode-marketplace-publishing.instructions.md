@@ -79,7 +79,7 @@ ERROR: "Failed request: (401)"
 ### Phase 2: Build & Package
 
 1. **Compile TypeScript**
-   ```powershell
+   ```bash
    npm run compile
    ```
    - Runs esbuild for production bundle (dist/)
@@ -87,7 +87,7 @@ ERROR: "Failed request: (401)"
    - Validates no compilation errors
 
 2. **Package Extension**
-   ```powershell
+   ```bash
    npx @vscode/vsce package
    ```
    - Creates `.vsix` file (e.g., `alex-cognitive-architecture-5.7.1.vsix`)
@@ -103,7 +103,7 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ### Phase 3: Pre-Publish Validation
 
 1. **Test Installation Locally**
-   ```powershell
+   ```bash
    code --install-extension alex-cognitive-architecture-5.7.1.vsix
    ```
    - Verify extension loads without errors
@@ -119,7 +119,7 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ### Phase 4: Publish to Marketplace
 
 1. **Publish Command**
-   ```powershell
+   ```bash
    npx @vscode/vsce publish -p <PERSONAL_ACCESS_TOKEN>
    ```
    - Requires valid PAT from https://marketplace.visualstudio.com
@@ -139,7 +139,7 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ### Phase 5: Post-Publish Documentation
 
 1. **Create GitHub Release**
-   ```powershell
+   ```bash
    git tag v5.7.1
    git push origin v5.7.1
    ```
@@ -169,7 +169,7 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 3. Copy token immediately (shown only once)
 
 4. Publish with token:
-   ```powershell
+   ```bash
    npx @vscode/vsce publish -p <YOUR_PAT_TOKEN_HERE>
    ```
 
@@ -316,7 +316,7 @@ Always verify with `npx vsce ls` before publish. Expected: `dist/`, `package.jso
 
 ## Unpublishing (Use with Caution)
 
-```powershell
+```bash
 # Remove specific version
 npx vsce unpublish publisher.extension-name@0.0.1
 
