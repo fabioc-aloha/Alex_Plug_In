@@ -164,7 +164,25 @@ All tables receive professional styling:
 | Tables not styled | jszip not available | Ensure NODE_PATH is set |
 | Diagrams too large | Old script version | Update to v2.0.0 with 90% H+V |
 | Bullet lists merged | Markdown spacing | Script auto-fixes (v2.0.0+) |
+### macOS `textutil` Fallback (No Pandoc)
 
+macOS ships `textutil` which can convert HTML to DOCX natively. If Pandoc is unavailable, this provides a basic conversion path:
+
+```bash
+# Convert markdown to HTML first, then HTML to DOCX
+npx marked document.md -o document.html
+textutil -convert docx document.html -output document.docx
+```
+
+| Feature | Pandoc (primary) | textutil (fallback) |
+|---------|-----------------|-------------------|
+| Table styling | Full (via jszip post-processing) | Basic |
+| Mermaid diagrams | Supported (pre-rendered PNG) | Must be pre-rendered |
+| Heading styles | Mapped to Word styles | Basic HTML mapping |
+| Cross-references | Supported | Not supported |
+| Install | `brew install pandoc` | Built-in (macOS only) |
+
+**Limitations**: `textutil` needs HTML input (not raw Markdown), produces simpler formatting, and doesn't support the table styling or image sizing that `md-to-word.cjs` provides. Use only when Pandoc is unavailable and a quick conversion is needed.
 ### Debug Mode
 
 ```bash

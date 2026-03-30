@@ -290,6 +290,16 @@ function svgToPng(svgPath, outputPath, options = {}) {
     return outputPath;
   } catch { /* fall through */ }
 
+  // Try sips (macOS built-in -- raster-to-raster only, no SVG rendering)
+  if (process.platform === 'darwin' && !/\.svg$/i.test(svgPath)) {
+    try {
+      execSync(`sips -Z ${width} "${svgPath}" --out "${outputPath}"`, {
+        stdio: 'pipe', timeout: 15000,
+      });
+      return outputPath;
+    } catch { /* fall through */ }
+  }
+
   throw new Error('No SVG-to-PNG converter found. Install Inkscape, rsvg-convert, or ImageMagick.');
 }
 

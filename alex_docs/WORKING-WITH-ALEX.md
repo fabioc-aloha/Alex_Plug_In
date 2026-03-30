@@ -693,11 +693,11 @@ brew install pandoc
 
 ### SVG Pipeline (pick one)
 
-| Tool         | Install                          | Notes                            |
-| ------------ | -------------------------------- | -------------------------------- |
-| **librsvg**  | `brew install librsvg`           | Lightweight, recommended for CI  |
-| **Inkscape** | `brew install --cask inkscape`   | Full vector editor, best quality |
-| **sips**     | *(built-in)*                     | macOS-native, no SVG rendering   |
+| Tool         | Install                        | Notes                            |
+| ------------ | ------------------------------ | -------------------------------- |
+| **librsvg**  | `brew install librsvg`         | Lightweight, recommended for CI  |
+| **Inkscape** | `brew install --cask inkscape` | Full vector editor, best quality |
+| **sips**     | *(built-in)*                   | macOS-native, no SVG rendering   |
 
 ### Automated Maintenance
 
@@ -712,6 +712,28 @@ macOS includes tools Alex can leverage without installing anything:
 - **`caffeinate`** -- prevent sleep during long-running operations
 - **`open`** -- open files in their default app, launch URLs, reveal in Finder
 - **`pbcopy` / `pbpaste`** -- clipboard access from terminal
+- **`mdfind`** -- Spotlight-powered search (faster than `grep -r` for indexed content)
+- **`textutil`** -- built-in HTML/RTF/DOCX conversion (basic Pandoc alternative)
+- **`osascript`** -- Notification Center alerts after long operations
+- **`cp -c`** -- APFS copy-on-write clones (zero-cost, instant file backups)
+
+**Power patterns**:
+
+```bash
+# Pipe brain-qa output to clipboard
+node .github/muscles/brain-qa.cjs --mode quick 2>&1 | pbcopy
+
+# Search architecture files via Spotlight (instant, indexes everything)
+mdfind -onlyin .github "synapse" -name ".md"
+
+# Zero-cost backup before risky refactoring (APFS clone -- instant, no disk space)
+cp -c -r .github .github-backup
+
+# Notify when done + speak completion
+caffeinate -s node .github/muscles/brain-qa.cjs --mode all && \
+  osascript -e 'display notification "All phases passed" with title "Alex"' && \
+  say "Dream state complete"
+```
 
 ### Further Reference
 

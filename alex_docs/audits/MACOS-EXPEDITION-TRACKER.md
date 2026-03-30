@@ -158,9 +158,9 @@ macOS ships `sips` (Scriptable Image Processing System) for resize, convert, and
 
 | #   | Action                                                                            | Effort | Status |
 | --- | --------------------------------------------------------------------------------- | ------ | ------ |
-| 1   | Add `sips` as macOS fallback in image-handling skill                              | Small  | [ ]    |
-| 2   | Add `sips` to svg-pipeline.cjs fallback chain (after librsvg, before ImageMagick) | Medium | [ ]    |
-| 3   | Document limitations (no SVG rendering, no compositing)                           | Small  | [ ]    |
+| 1   | Add `sips` as macOS fallback in image-handling skill                              | Small  | [x]    |
+| 2   | Add `sips` to svg-pipeline.cjs fallback chain (after librsvg, before ImageMagick) | Medium | [x]    |
+| 3   | Document limitations (no SVG rendering, no compositing)                           | Small  | [x]    |
 
 ### 3.2 `say` -- Offline Text-to-Speech
 
@@ -168,9 +168,9 @@ macOS has 30+ built-in voices with the `say` command -- instant, offline, zero-c
 
 | #   | Action                                                               | Effort | Status |
 | --- | -------------------------------------------------------------------- | ------ | ------ |
-| 1   | Add `say` as macOS-native offline fallback in text-to-speech skill   | Small  | [ ]    |
-| 2   | Add `say` notification after long operations (brain-qa, dream-state) | Small  | [ ]    |
-| 3   | Note the "Alex" voice name coincidence in documentation              | Tiny   | [ ]    |
+| 1   | Add `say` as macOS-native offline fallback in text-to-speech skill   | Small  | [x]    |
+| 2   | Add `say` notification after long operations (brain-qa, dream-state) | Small  | [x]    |
+| 3   | Note the "Alex" voice name coincidence in documentation              | Tiny   | [x]    |
 
 ### 3.3 `caffeinate` -- Prevent Sleep During Long Operations
 
@@ -178,8 +178,8 @@ Dream state, brain-qa, and VSIX packaging can take minutes. Mac sleep corrupts r
 
 | #   | Action                                                                               | Effort | Status |
 | --- | ------------------------------------------------------------------------------------ | ------ | ------ |
-| 1   | Add `caffeinate -s` wrapping advice to dream-state-automation instruction            | Small  | [ ]    |
-| 2   | Consider auto-wrapping in Node.js muscle runner when `process.platform === 'darwin'` | Medium | [ ]    |
+| 1   | Add `caffeinate -s` wrapping advice to dream-state-automation instruction            | Small  | [x]    |
+| 2   | Consider auto-wrapping in Node.js muscle runner when `process.platform === 'darwin'` | Medium | [x]    |
 
 ### 3.4 `osascript` -- Native Notification Center Alerts
 
@@ -187,8 +187,8 @@ VS Code toasts are easy to miss. macOS Notification Center with sound is better 
 
 | #   | Action                                                               | Effort | Status |
 | --- | -------------------------------------------------------------------- | ------ | ------ |
-| 1   | Document `osascript` notification pattern in dream-state instruction | Small  | [ ]    |
-| 2   | Consider adding to hook completion events                            | Medium | [ ]    |
+| 1   | Document `osascript` notification pattern in dream-state instruction | Small  | [x]    |
+| 2   | Consider adding to hook completion events                            | Medium | [x]    |
 
 ### 3.5 `textutil` -- Built-In Document Conversion
 
@@ -196,8 +196,8 @@ macOS ships `textutil` for HTML/RTF/DOCX conversion. Partial Pandoc replacement.
 
 | #   | Action                                                                 | Effort | Status |
 | --- | ---------------------------------------------------------------------- | ------ | ------ |
-| 1   | Add `textutil` as macOS fallback in md-to-word skill (HTML->DOCX path) | Medium | [ ]    |
-| 2   | Document limitations (needs HTML input, reduced formatting fidelity)   | Small  | [ ]    |
+| 1   | Add `textutil` as macOS fallback in md-to-word skill (HTML->DOCX path) | Medium | [x]    |
+| 2   | Document limitations (needs HTML input, reduced formatting fidelity)   | Small  | [x]    |
 
 ### 3.6 `launchd` -- Native Task Scheduling
 
@@ -205,16 +205,16 @@ macOS equivalent of Task Scheduler but more powerful (file watchers, keep-alive,
 
 | #   | Action                                                          | Effort | Status |
 | --- | --------------------------------------------------------------- | ------ | ------ |
-| 1   | Create launchd plist template for dream-state nightly runs      | Small  | [ ]    |
-| 2   | Document file-watch trigger for `.github/` validation on change | Small  | [ ]    |
+| 1   | Create launchd plist template for dream-state nightly runs      | Small  | [x]    |
+| 2   | Document file-watch trigger for `.github/` validation on change | Small  | [x]    |
 
 ### 3.7 Clipboard, Spotlight, APFS (Lower Priority)
 
 | #   | Tool                  | Opportunity                           | Effort | Status |
 | --- | --------------------- | ------------------------------------- | ------ | ------ |
-| 1   | `pbcopy`/`pbpaste`    | Pipe muscle output to clipboard       | Small  | [ ]    |
-| 2   | `mdfind`              | Spotlight-powered architecture search | Medium | [ ]    |
-| 3   | APFS clones (`cp -c`) | Zero-cost pre-refactoring backups     | Small  | [ ]    |
+| 1   | `pbcopy`/`pbpaste`    | Pipe muscle output to clipboard       | Small  | [x]    |
+| 2   | `mdfind`              | Spotlight-powered architecture search | Medium | [x]    |
+| 3   | APFS clones (`cp -c`) | Zero-cost pre-refactoring backups     | Small  | [x]    |
 
 ## Phase 4: Extension Source Validation
 
@@ -313,7 +313,7 @@ Once the guides are cross-platform, they're candidates for Master's documentatio
 | ---------------------------- | ----------- | -------- | ----------- | -------- |
 | Phase 1 (P1 -- Broken)       | 28          | 28       | 0           | 0        |
 | Phase 2 (P2 -- Gaps)         | 15          | 12       | 0           | 3        |
-| Phase 3 (P3 -- macOS-Native) | 16          | 0        | 0           | 0        |
+| Phase 3 (P3 -- macOS-Native) | 16          | 16       | 0           | 0        |
 | Phase 4 (Extension)          | 7           | 5        | 0           | 0        |
 | Phase 5 (Mac Heir XP)        | 27          | 16       | 0           | 2        |
-| **Total**                    | **93**      | **61**   | **0**       | **5**    |
+| **Total**                    | **93**      | **77**   | **0**       | **5**    |

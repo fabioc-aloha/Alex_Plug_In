@@ -223,6 +223,51 @@ Alex's voice synthesis capability using Microsoft Edge TTS via native TypeScript
 
 ---
 
+## macOS Offline Fallback: `say`
+
+macOS ships 30+ built-in neural voices via the `say` command -- instant, offline, zero-cost. Use as a fallback when Edge TTS is unavailable (no internet, WebSocket blocked) or for quick, lightweight reads.
+
+```bash
+# Basic usage
+say "Hello from Alex"
+
+# Read a file aloud
+say -f document.txt
+
+# Save to audio file (AIFF)
+say -o output.aiff "Synthesis complete"
+
+# Save as AAC (smaller file)
+say -o output.m4a --data-format=aac "Dream state finished"
+
+# Choose a voice (the macOS "Alex" voice is a fun coincidence)
+say -v Alex "I am Alex, reading your documentation"
+
+# List all installed voices
+say -v '?'
+```
+
+| Feature | Edge TTS (primary) | macOS `say` (fallback) |
+|---------|-------------------|----------------------|
+| Quality | 400+ neural voices | 30+ system voices |
+| Cost | Free | Free |
+| Offline | No (WebSocket) | Yes |
+| Output formats | MP3 | AIFF, AAC, WAV |
+| Languages | 90+ | ~20 |
+| Best for | Production audio, MP3 export | Quick reads, notifications |
+
+**Notification after long operations**: Add `say` calls to signal completion of brain-qa, dream-state, or VSIX packaging:
+
+```bash
+# After brain-qa completes
+node .github/muscles/brain-qa.cjs --mode quick && say "Brain QA complete"
+
+# After dream state
+node .github/muscles/brain-qa.cjs --mode all && say "Dream maintenance finished"
+```
+
+> **Note**: The macOS "Alex" voice name is a happy coincidence -- it's one of the highest-quality built-in voices.
+
 ## Alex Voice Presets
 
 | Preset | Voice ID | Character |

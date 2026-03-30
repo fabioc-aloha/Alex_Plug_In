@@ -99,13 +99,30 @@ For batch operations, use VS Code's image carousel to compare multiple outputs s
 
 ## Batch Processing
 
-```powershell
-# Convert all SVGs to PNGs
-Get-ChildItem *.svg | ForEach-Object {
-  $out = $_.BaseName + ".png"
-  magick $_.Name -resize 256x256 $out
-}
+```bash
+# Convert all PNGs in a folder (cross-platform)
+for f in *.png; do magick "$f" -resize 256x256 "resized-$f"; done
+
+# macOS -- sips (zero-install, ships with macOS)
+sips -Z 256 *.png                          # Resize to max 256px
+sips -s format jpeg input.png --out out.jpg # Convert PNG to JPEG
+sips -g pixelHeight -g pixelWidth image.png # Read dimensions
 ```
+
+### macOS `sips` (Scriptable Image Processing System)
+
+macOS ships `sips` -- zero install, always available. Use for quick resize, format conversion, and metadata reads.
+
+| Operation | Command | Notes |
+|-----------|---------|-------|
+| Resize (max dimension) | `sips -Z 512 image.png` | Preserves aspect ratio |
+| Resize (exact) | `sips -z 100 100 image.png` | Stretches to fit |
+| Convert format | `sips -s format jpeg img.png --out img.jpg` | png, jpeg, tiff, gif, bmp |
+| Read dimensions | `sips -g pixelHeight -g pixelWidth img.png` | Useful in scripts |
+| Rotate | `sips -r 90 image.png` | Degrees clockwise |
+| Set DPI | `sips -s dpiHeight 150 -s dpiWidth 150 img.png` | For print |
+
+**Limitations**: No SVG rendering, no compositing, no layering, no text overlay. For those, use ImageMagick or Inkscape.
 
 ## Replicate Model Selection
 
