@@ -661,7 +661,65 @@ VS Code 1.111+ includes built-in slash commands for creating agent customization
 
 ---
 
-## 🆘 Getting Help
+## � Getting Started on macOS
+
+Alex is fully cross-platform. Every muscle, script, and hook runs on macOS, Linux, and Windows.
+
+### Prerequisites
+
+1. **Xcode Command Line Tools** (gives you `git`, `clang`, `make`):
+
+```bash
+xcode-select --install
+```
+
+2. **Homebrew** (package manager):
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+3. **Node.js 18+** (runs all muscles and hooks):
+
+```bash
+brew install node
+```
+
+4. **Pandoc** (optional -- markdown-to-document pipeline):
+
+```bash
+brew install pandoc
+```
+
+### SVG Pipeline (pick one)
+
+| Tool         | Install                          | Notes                            |
+| ------------ | -------------------------------- | -------------------------------- |
+| **librsvg**  | `brew install librsvg`           | Lightweight, recommended for CI  |
+| **Inkscape** | `brew install --cask inkscape`   | Full vector editor, best quality |
+| **sips**     | *(built-in)*                     | macOS-native, no SVG rendering   |
+
+### Automated Maintenance
+
+Schedule weekly brain-qa health checks with `launchd` or `cron`. See the templates in `.github/instructions/dream-state-automation.instructions.md` under "OS-Level Scheduling".
+
+### macOS-Native Extras
+
+macOS includes tools Alex can leverage without installing anything:
+
+- **`say`** -- offline text-to-speech (30+ built-in voices, including one named "Alex")
+- **`sips`** -- image resize/convert/metadata (Scriptable Image Processing System)
+- **`caffeinate`** -- prevent sleep during long-running operations
+- **`open`** -- open files in their default app, launch URLs, reveal in Finder
+- **`pbcopy` / `pbpaste`** -- clipboard access from terminal
+
+### Further Reference
+
+The [mac](https://github.com/fabioc-aloha/mac) heir project has comprehensive macOS-specific guides covering `alex/cli-tools.md` (full tool matrix), `alex/vscode-setup.md` (extension configuration), and `alex/installing-alex.md` (end-to-end setup).
+
+---
+
+## �🆘 Getting Help
 
 - **Documentation**: `Alex: Documentation` command
 - **Health Check**: `Alex: Health Dashboard` for system status

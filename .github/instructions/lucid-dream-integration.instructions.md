@@ -27,7 +27,9 @@ description: "Lucid dream hybrid processing and unconscious-conscious bridge pro
 
 ## Lucid Dream Bridge Protocol
 
-**Activation Trigger**: PowerShell script detects enhancement opportunities and recommends AI-driven optimization
+**Activation Trigger**: Dream script detects enhancement opportunities and recommends AI-driven optimization
+
+**Cross-Platform Scheduling**: See dream-state-automation.instructions.md "OS-Level Scheduling" for launchd (macOS), cron (Linux/macOS), and Task Scheduler (Windows) templates.
 
 **Bridge Mechanism**:
 1. **Unconscious Detection** → PowerShell identifies improvement potential
@@ -37,8 +39,8 @@ description: "Lucid dream hybrid processing and unconscious-conscious bridge pro
 
 ## Implementation Standards
 
-### **PowerShell Integration Requirements**
-- **Function Export**: Invoke-DreamState function with "lucid-dream" mode
+### **Dream Script Integration Requirements**
+- **Cross-platform**: brain-qa.cjs (Node.js) or brain-qa.ps1 (PowerShell) with identical phase coverage
 - **Enhancement Detection**: Automated identification of synaptic network expansion opportunities
 - **Recommendation Generation**: Intelligent handoff to AI enhancement protocols
 - **Metrics Tracking**: Quantified measurement of improvements through hybrid processing

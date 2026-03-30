@@ -120,16 +120,16 @@ Muscle error messages show `$env:VAR` (PowerShell syntax) to macOS users who nee
 
 | #   | Muscle                      | Purpose                     | Recommendation                      | Status |
 | --- | --------------------------- | --------------------------- | ----------------------------------- | ------ |
-| 1   | brain-qa.ps1                | 32-phase deep validation    | Port to .cjs (highest value)        | [ ]    |
-| 2   | validate-skills.ps1         | Skill file validation       | Port to .cjs                        | [ ]    |
-| 3   | audit-master-alex.ps1       | 22-point pre-release audit  | Port to .cjs                        | [ ]    |
-| 4   | validate-synapses.ps1       | Synapse target validation   | Port to .cjs                        | [ ]    |
+| 1   | brain-qa.ps1                | 35-phase deep validation    | Port to .cjs (highest value)        | [x]    |
+| 2   | validate-skills.ps1         | Skill file validation       | Port to .cjs                        | [x]    |
+| 3   | audit-master-alex.ps1       | 22-point pre-release audit  | Port to .cjs                        | [x]    |
+| 4   | validate-synapses.ps1       | Synapse target validation   | Port to .cjs                        | [x]    |
 | 5   | build-extension-package.ps1 | VSIX packaging              | Keep PS -- Windows CI/release only  | [—]    |
 | 6   | fix-fence-bug.ps1           | VS Code fence bug fix       | Keep PS -- rare utility             | [—]    |
-| 7   | install-hooks.ps1           | Install hooks config        | Port to .cjs (small scope)          | [ ]    |
-| 8   | new-skill.ps1               | Scaffold new skill trifecta | Port to .cjs (high value for heirs) | [ ]    |
+| 7   | install-hooks.ps1           | Install hooks config        | Port to .cjs (small scope)          | [x]    |
+| 8   | new-skill.ps1               | Scaffold new skill trifecta | Port to .cjs (high value for heirs) | [x]    |
 | 9   | normalize-paths.ps1         | Path consistency fixes      | Keep PS -- Master dev tool          | [—]    |
-| 10  | brain-qa-heir.ps1           | 25-phase heir validation    | Port to .cjs (follows brain-qa)     | [ ]    |
+| 10  | brain-qa-heir.ps1           | 25-phase heir validation    | Port to .cjs (follows brain-qa)     | [x]    |
 
 **Priority order**: brain-qa > new-skill > validate-skills > validate-synapses > audit-master-alex > install-hooks > brain-qa-heir
 
@@ -137,16 +137,16 @@ Muscle error messages show `$env:VAR` (PowerShell syntax) to macOS users who nee
 
 | #   | Action                                                                  | Status |
 | --- | ----------------------------------------------------------------------- | ------ |
-| 1   | Add launchd plist template to dream-state-automation.instructions.md    | [ ]    |
-| 2   | Add macOS scheduling section to lucid-dream-integration.instructions.md | [ ]    |
-| 3   | Add cron as a simpler alternative for both instructions                 | [ ]    |
+| 1   | Add launchd plist template to dream-state-automation.instructions.md    | [x]    |
+| 2   | Add macOS scheduling section to lucid-dream-integration.instructions.md | [x]    |
+| 3   | Add cron as a simpler alternative for both instructions                 | [x]    |
 
 ### 2.3 macOS Setup Documentation
 
 | #   | Action                                                                           | Status |
 | --- | -------------------------------------------------------------------------------- | ------ |
-| 1   | Create a "Getting Started on macOS" section in WORKING-WITH-ALEX.md or a new doc | [ ]    |
-| 2   | Reference mac heir's cli-tools.md and vscode-setup.md as source material         | [ ]    |
+| 1   | Create a "Getting Started on macOS" section in WORKING-WITH-ALEX.md or a new doc | [x]    |
+| 2   | Reference mac heir's cli-tools.md and vscode-setup.md as source material         | [x]    |
 
 ## Phase 3: Leverage macOS-Native Capabilities (P3)
 
@@ -312,8 +312,8 @@ Once the guides are cross-platform, they're candidates for Master's documentatio
 | Category                     | Total Items | Complete | In Progress | Deferred |
 | ---------------------------- | ----------- | -------- | ----------- | -------- |
 | Phase 1 (P1 -- Broken)       | 28          | 28       | 0           | 0        |
-| Phase 2 (P2 -- Gaps)         | 15          | 0        | 0           | 3        |
+| Phase 2 (P2 -- Gaps)         | 15          | 12       | 0           | 3        |
 | Phase 3 (P3 -- macOS-Native) | 16          | 0        | 0           | 0        |
 | Phase 4 (Extension)          | 7           | 5        | 0           | 0        |
 | Phase 5 (Mac Heir XP)        | 27          | 16       | 0           | 2        |
-| **Total**                    | **93**      | **49**   | **0**       | **5**    |
+| **Total**                    | **93**      | **61**   | **0**       | **5**    |
