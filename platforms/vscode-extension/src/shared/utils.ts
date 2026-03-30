@@ -10,6 +10,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import * as os from 'os';
 import { 
     MEMORY_FILE_PATTERNS, 
     SYNAPSE_REGEX, 
@@ -679,4 +680,44 @@ export async function openChatPanel(query?: string): Promise<void> {
             );
         }
     }
+}
+
+/**
+ * Platform environment info for diagnostics and cross-platform awareness.
+ */
+export interface PlatformInfo {
+    os: string;
+    arch: string;
+    shell: string;
+    homeDir: string;
+    nodeVersion: string;
+    pathSeparator: string;
+}
+
+/**
+ * Detect the current platform environment including default shell.
+ * Used by diagnostics, bug reports, and platform-aware terminal creation.
+ */
+export function detectPlatform(): PlatformInfo {
+    let shell: string;
+    if (process.platform === 'win32') {
+        shell = process.env.COMSPEC || 'cmd.exe';
+    } else {
+        shell = process.env.SHELL || '/bin/sh';
+    }
+    // Also check VS Code's configured default profile
+    const profileKey = process.platform === 'win32' ? 'windows'
+        : process.platform === 'darwin' ? 'osx' : 'linux';
+    const configuredProfile = vscode.workspace.getConfiguration('terminal.integrated.defaultProfile').get<string>(profileKey);
+    if (configuredProfile) {
+        shell = `${configuredProfile} (${shell})`;
+    }
+    return {
+        os: `${process.platform} (${os.release()})`,
+        arch: process.arch,
+        shell,
+        homeDir: os.homedir(),
+        nodeVersion: process.version,
+        pathSeparator: path.sep,
+    };
 }

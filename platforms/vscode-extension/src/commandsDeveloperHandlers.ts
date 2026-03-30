@@ -403,6 +403,8 @@ async function exportTelemetryBugReport(extensionVersion: string): Promise<void>
     vscodeVersion: vscode.version,
     platform: process.platform,
     arch: process.arch,
+    shell: process.platform === 'win32' ? (process.env.COMSPEC || 'cmd.exe') : (process.env.SHELL || '/bin/sh'),
+    nodeVersion: process.version,
     health: {
       status: currentHealth.status,
       initialized: currentHealth.initialized,

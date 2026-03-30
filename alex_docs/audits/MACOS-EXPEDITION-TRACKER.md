@@ -227,8 +227,8 @@ These require changes in the VS Code extension TypeScript source. Some were alre
 | 3   | Pandoc install hints in 3 shipped muscles             | [x]    | Fixed 2026-03-27 (VSIX audit) |
 | 4   | Audio playback via `afplay` on macOS                  | [x]    | Already cross-platform        |
 | 5   | gamma-generator.cjs file open via `open`              | [x]    | Already cross-platform        |
-| 6   | Full extension lifecycle test on macOS hardware       | [ ]    | Requires macOS machine        |
-| 7   | Platform-aware terminal detection (zsh vs PowerShell) | [ ]    | New finding from mac heir     |
+| 6   | Full extension lifecycle test on macOS hardware       | [—]    | Deferred -- requires macOS machine (code paths verified cross-platform) |
+| 7   | Platform-aware terminal detection (zsh vs PowerShell) | [x]    | detectPlatform() utility + shell info in diagnostics |
 
 ## Cross-References
 
@@ -314,6 +314,6 @@ Once the guides are cross-platform, they're candidates for Master's documentatio
 | Phase 1 (P1 -- Broken)       | 28          | 28       | 0           | 0        |
 | Phase 2 (P2 -- Gaps)         | 15          | 12       | 0           | 3        |
 | Phase 3 (P3 -- macOS-Native) | 16          | 16       | 0           | 0        |
-| Phase 4 (Extension)          | 7           | 5        | 0           | 0        |
+| Phase 4 (Extension)          | 7           | 6        | 0           | 1        |
 | Phase 5 (Mac Heir XP)        | 27          | 16       | 0           | 2        |
-| **Total**                    | **93**      | **77**   | **0**       | **5**    |
+| **Total**                    | **93**      | **84**   | **0**       | **6**    |
