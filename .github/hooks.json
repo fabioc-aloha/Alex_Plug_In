@@ -49,6 +49,11 @@
                         "type": "command",
                         "command": "node .github/muscles/hooks/pre-tool-use.cjs",
                         "timeout": 2
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/breaking-change-detector.cjs",
+                        "timeout": 2
                     }
                 ]
             }
@@ -64,6 +69,11 @@
                     {
                         "type": "command",
                         "command": "node .github/muscles/hooks/targeted-test-runner.cjs",
+                        "timeout": 2
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/output-secret-scan.cjs",
                         "timeout": 2
                     }
                 ]

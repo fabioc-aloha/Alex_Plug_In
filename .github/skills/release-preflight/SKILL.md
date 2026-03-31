@@ -1,6 +1,7 @@
 ---
 name: release-preflight
 description: Pre-checks, version consistency, and deployment discipline.
+tier: standard
 applyTo: '**/*release*,**/*publish*,**/*deploy*,**/*version*,**/package.json,**/CHANGELOG*'
 ---
 

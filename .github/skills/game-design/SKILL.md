@@ -1,6 +1,7 @@
 ---
 name: game-design
 description: Game mechanics, level design, player psychology, systems balancing, and narrative design for game developers.
+tier: extended
 applyTo: '**/*game*,**/*gameplay*,**/*level-design*,**/*player*,**/*npc*,**/*quest*,**/*gamedev*'
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: change-management
 description: Patterns for organizational change, ADKAR methodology, stakeholder engagement, and adoption strategies.
+tier: standard
 ---
 
 # Change Management Skill

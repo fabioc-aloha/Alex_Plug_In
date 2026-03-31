@@ -1,6 +1,7 @@
 ---
 name: hr-people-operations
 description: Talent acquisition, employee lifecycle, compensation, labor regulations, and organizational development.
+tier: extended
 applyTo: '**/*hr*,**/*hiring*,**/*recruit*,**/*onboard*,**/*compensation*,**/*employee*,**/*talent*,**/*workforce*'
 ---
 

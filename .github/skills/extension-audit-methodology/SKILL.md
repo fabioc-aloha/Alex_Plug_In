@@ -1,6 +1,7 @@
 ---
 name: extension-audit-methodology
 description: >-
+tier: standard
   Systematic 5-dimension audit framework for VS Code extensions — debug hygiene, dead code, performance, menu
   validation, dependency cleanup
 applyTo: '**/*extension*,**/*audit*,**/package.json,**/tsconfig.json'

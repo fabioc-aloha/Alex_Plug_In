@@ -1,6 +1,7 @@
 ---
 name: ai-agent-design
 description: '**Domain**: AI/ML Architecture'
+tier: standard
 ---
 
 # AI Agent Design Skill

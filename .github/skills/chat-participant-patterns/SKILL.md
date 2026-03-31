@@ -1,6 +1,7 @@
 ---
 name: chat-participant-patterns
 description: VS Code Chat API patterns.
+tier: standard
 user-invokable: false
 applyTo: '**/*participant*,**/*chat*,**/*copilot*,**/lm/**'
 ---

@@ -1,6 +1,7 @@
 ---
 name: skill-catalog-generator
 description: Generate dynamic skill catalogs with network diagrams to visualize Alex's capabilities and track learning progress.
+tier: extended
 ---
 
 # Skill: Skill Catalog Generator

@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.1.0] - 2026-03-31
+
+> **Excavation Edition** -- Deep competitive analysis of Copilot Chat's architecture drives 17 improvements: PromptVariantRegistry (10 model families), priority-based context window scaling, conversation summarization, steering awareness, rich stream enrichment, session trajectory logging, hook-based secret scanning and breaking change detection, agent handoff enrichment, TypeScript 6.0 migration.
+
+### Added
+
+- **PromptVariantRegistry** (P2) -- 10 model family variants (claude-opus/sonnet/haiku, gpt-frontier/capable/efficient, gemini-pro/flash, o-series) with per-family layer budgets, communication style, and identity depth
+- **Skill tier classification** (P1) -- 158 skills classified into core (21), standard (85), and extended (52) tiers with `tier` frontmatter; 17 domain group index
+- **Context window scaling** (P4) -- Priority-based layer truncation (identity=1000 down to peripheralVision=300) using 40% of maxInputTokens as system prompt budget
+- **Conversation summarization** (P3) -- 2-tier history: last 4 turns verbatim, older turns summarized into compact paragraph
+- **Steering awareness** (C5) -- Yield-aware request handler using proposed `ChatContext.yieldRequested` API with 100ms polling; cancellation checks between tool calls
+- **Stream enrichment** (F6) -- `streamEnrichment.ts` with `streamWarning()`, `streamConfirmation()`, `streamCognitiveTree()`, `streamProgress()`, `streamSafetyAlert()` using runtime feature detection for proposed APIs
+- **Session trajectory logging** (F1) -- 200-event bounded in-memory trace with `modelRequest()`, `toolCall()`, `handoff()`, `getSummary()`, `formatSummaryMarkdown()`
+- **Hook H10: Output secret scan** (C4) -- 11 secret patterns (AWS, Azure, GitHub, npm, Bearer, private keys, connection strings) in PostToolUse
+- **Hook H13: Breaking change detector** (C4) -- 7 critical file patterns + exported symbol modification detection in PreToolUse
+- **Agent handoff enrichment** (C1) -- All 7 agents enriched with model overrides on research/doc delegations
+- **Persona-driven follow-ups** (C2) -- Topic detection (code/architecture/learning) for contextual follow-up suggestions
+- **Nested subagent guard** (C3) -- `agents` allowlists in all agent.md files to prevent runaway delegation chains
+- **Plugin install URL** (F2) -- One-click `vscode://` install link in agent-plugin README
+- **Chat Customizations editor docs** (F3) -- Instructions for using VS Code's Customizations view with Alex
+
+### Changed
+
+- **TypeScript 6.0 migration** (F5) -- `typescript@~5.8.3` to `6.0.2`, `moduleResolution: "bundler"`, clean compilation
+- **Compilation check discipline** (G3) -- Builder agent Principle 5: always verify compilation before declaring work complete
+- **Workflow prompt audit** (G1) -- All prompts reviewed for model-variant compatibility
+
+---
+
 ## [7.0.1] - 2026-03-31
 
 > **Welcome UI Hotfix** -- Chat Memories and Memory Audit buttons were added to source but missed the v7.0.0 VSIX build. This patch ships the Welcome UI additions.

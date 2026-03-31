@@ -1,129 +1,143 @@
-import * as vscode from 'vscode';
-import { IAlexChatResult } from '../participantTypes';
-import { getUserProfile } from '../tools';
-import { validateWorkspace } from '../../shared/utils';
-import { detectAndUpdateProjectPersona } from '../personaDetection';
-import { getModelInfo, formatModelWarning } from '../modelIntelligence';
-import { searchGlobalKnowledge, getGlobalKnowledgeSummary, ensureProjectRegistry, getAlexGlobalPath } from '../globalKnowledge';
+import * as vscode from "vscode";
+import { IAlexChatResult } from "../participantTypes";
+import { getUserProfile } from "../tools";
+import { validateWorkspace } from "../../shared/utils";
+import { detectAndUpdateProjectPersona } from "../personaDetection";
+import { getModelInfo, formatModelWarning } from "../modelIntelligence";
+import {
+  searchGlobalKnowledge,
+  getGlobalKnowledgeSummary,
+  ensureProjectRegistry,
+  getAlexGlobalPath,
+} from "../globalKnowledge";
+import { streamWarning } from "../streamEnrichment";
 
 /**
  * Check if the user's prompt is a greeting
  */
 export function isGreeting(prompt: string): boolean {
-    const greetingPatterns = [
-        /^(hi|hello|hey|good\s*(morning|afternoon|evening)|greetings|howdy|yo|sup|what'?s\s*up)/i,
-        /^(how\s*are\s*you|how'?s\s*it\s*going)/i,
-        /^alex[\s,!?.]*$/i,
-        /^@alex[\s,!?.]*$/i,
-        /^(let'?s\s*(start|begin|get\s*started))/i
-    ];
-    
-    return greetingPatterns.some(pattern => pattern.test(prompt.trim()));
+  const greetingPatterns = [
+    /^(hi|hello|hey|good\s*(morning|afternoon|evening)|greetings|howdy|yo|sup|what'?s\s*up)/i,
+    /^(how\s*are\s*you|how'?s\s*it\s*going)/i,
+    /^alex[\s,!?.]*$/i,
+    /^@alex[\s,!?.]*$/i,
+    /^(let'?s\s*(start|begin|get\s*started))/i,
+  ];
+
+  return greetingPatterns.some((pattern) => pattern.test(prompt.trim()));
 }
 
 /**
  * Check if this is the start of a session (first message or after long gap)
  */
 export function isStartOfSession(context: vscode.ChatContext): boolean {
-    // If no history, it's definitely the start
-    if (context.history.length === 0) {
-        return true;
-    }
-    
-    // If only 1-2 previous exchanges, treat as start of session
-    if (context.history.length <= 2) {
-        return true;
-    }
-    
-    return false;
+  // If no history, it's definitely the start
+  if (context.history.length === 0) {
+    return true;
+  }
+
+  // If only 1-2 previous exchanges, treat as start of session
+  if (context.history.length <= 2) {
+    return true;
+  }
+
+  return false;
 }
 
 /**
  * Handle greeting with automatic self-actualization
  */
 export async function handleGreetingWithSelfActualization(
-    _request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  _request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    // Get user profile for personalized greeting
-    const profile = await getUserProfile();
-    const userName = profile?.nickname || profile?.name;
-    
-    // Detect and update project persona on greeting
-    stream.progress('🎯 Detecting project context...');
-    const workspace = validateWorkspace();
-    let personaInfo = '';
-    if (workspace.isValid && workspace.rootPath) {
-        try {
-            const personaResult = await detectAndUpdateProjectPersona(workspace.rootPath);
-            if (personaResult) {
-                personaInfo = `\n**Detected Context**: ${personaResult.persona.icon} ${personaResult.persona.name} (${(personaResult.confidence * 100).toFixed(0)}% confidence)\n`;
-            }
-        } catch (err) {
-            // Persona detection is not critical
-        }
+  // Get user profile for personalized greeting
+  const profile = await getUserProfile();
+  const userName = profile?.nickname || profile?.name;
+
+  // Detect and update project persona on greeting
+  stream.progress("🎯 Detecting project context...");
+  const workspace = validateWorkspace();
+  let personaInfo = "";
+  if (workspace.isValid && workspace.rootPath) {
+    try {
+      const personaResult = await detectAndUpdateProjectPersona(
+        workspace.rootPath,
+      );
+      if (personaResult) {
+        personaInfo = `\n**Detected Context**: ${personaResult.persona.icon} ${personaResult.persona.name} (${(personaResult.confidence * 100).toFixed(0)}% confidence)\n`;
+      }
+    } catch (err) {
+      // Persona detection is not critical
     }
-    
-    stream.progress('🧠 Running self-actualization on session start...');
-    
-    // Personalized greeting
-    if (userName) {
-        stream.markdown(`## 👋 Hello, ${userName}!\n\n`);
-    } else {
-        stream.markdown(`## 👋 Hello!\n\n`);
-    }
-    
-    stream.markdown(`Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.\n${personaInfo}\n`);
-    
-    // Run mini self-actualization report
-    stream.markdown(`### 🧠 Quick Architecture Check\n\n`);
-    
-    // Trigger the button for full self-actualization
-    stream.button({
-        command: 'alex.selfActualize',
-        title: '🧘 Full Self-Actualization',
-        arguments: []
-    });
-    
-    // Get extension version (consistent with /status)
-    const extension = vscode.extensions.getExtension('fabioc-aloha.alex-cognitive-architecture');
-    const version = extension?.packageJSON?.version || 'Unknown';
-    
-    stream.markdown(`\n\n**Alex v${version}** - Ready to assist!\n\n`);
-    
-    stream.markdown(`### What would you like to work on today?\n\n`);
-    stream.markdown(`- **\`/learn [topic]\`** - Acquire new domain knowledge\n`);
-    stream.markdown(`- **\`/azure [query]\`** - Azure development guidance\n`);
-    stream.markdown(`- **\`/m365 [query]\`** - Microsoft 365 development\n`);
-    stream.markdown(`- **\`/knowledge [query]\`** - Search global knowledge base\n`);
-    stream.markdown(`- **\`/selfactualize\`** - Deep meditation & architecture assessment\n`);
-    
-    return { metadata: { command: 'greeting' } };
+  }
+
+  stream.progress("🧠 Running self-actualization on session start...");
+
+  // Personalized greeting
+  if (userName) {
+    stream.markdown(`## 👋 Hello, ${userName}!\n\n`);
+  } else {
+    stream.markdown(`## 👋 Hello!\n\n`);
+  }
+
+  stream.markdown(
+    `Welcome back! I'm running a quick self-actualization to ensure everything is optimal for our session.\n${personaInfo}\n`,
+  );
+
+  // Run mini self-actualization report
+  stream.markdown(`### 🧠 Quick Architecture Check\n\n`);
+
+  // Trigger the button for full self-actualization
+  stream.button({
+    command: "alex.selfActualize",
+    title: "🧘 Full Self-Actualization",
+    arguments: [],
+  });
+
+  // Get extension version (consistent with /status)
+  const extension = vscode.extensions.getExtension(
+    "fabioc-aloha.alex-cognitive-architecture",
+  );
+  const version = extension?.packageJSON?.version || "Unknown";
+
+  stream.markdown(`\n\n**Alex v${version}** - Ready to assist!\n\n`);
+
+  stream.markdown(`### What would you like to work on today?\n\n`);
+  stream.markdown(`- **\`/learn [topic]\`** - Acquire new domain knowledge\n`);
+  stream.markdown(`- **\`/azure [query]\`** - Azure development guidance\n`);
+  stream.markdown(`- **\`/m365 [query]\`** - Microsoft 365 development\n`);
+  stream.markdown(
+    `- **\`/knowledge [query]\`** - Search global knowledge base\n`,
+  );
+  stream.markdown(
+    `- **\`/selfactualize\`** - Deep meditation & architecture assessment\n`,
+  );
+
+  return { metadata: { command: "greeting" } };
 }
 
 /**
  * Handle /selfactualize command - Comprehensive self-assessment
  */
 export async function handleSelfActualizeCommand(
-    request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    // Model Intelligence: Check if current model is suitable for self-actualization
-    const modelInfo = getModelInfo(request);
-    const modelWarning = formatModelWarning(modelInfo, 'selfActualization');
-    if (modelWarning) {
-        stream.markdown(`${modelWarning}\n\n---\n\n`);
-    }
-    
-    stream.progress('🧘 Initiating self-actualization protocol...');
-    
-    stream.markdown(`## 🧘 Self-Actualization Protocol
+  // Model Intelligence: Check if current model is suitable for self-actualization
+  const modelInfo = getModelInfo(request);
+  const modelWarning = formatModelWarning(modelInfo, "selfActualization");
+  if (modelWarning) {
+    streamWarning(stream, modelWarning);
+  }
+
+  stream.progress("🧘 Initiating self-actualization protocol...");
+
+  stream.markdown(`## 🧘 Self-Actualization Protocol
 
 I'm running a comprehensive self-assessment of my cognitive architecture.
 
@@ -136,36 +150,37 @@ I'm running a comprehensive self-assessment of my cognitive architecture.
 
 `);
 
-    stream.button({
-        command: 'alex.selfActualize',
-        title: '▶️ Execute Full Self-Actualization',
-        arguments: []
-    });
+  stream.button({
+    command: "alex.selfActualize",
+    title: "▶️ Execute Full Self-Actualization",
+    arguments: [],
+  });
 
-    stream.markdown(`\n\n*Click the button above to run the complete 5-phase protocol, or I can provide a summary assessment.*\n`);
+  stream.markdown(
+    `\n\n*Click the button above to run the complete 5-phase protocol, or I can provide a summary assessment.*\n`,
+  );
 
-    // Add meditation integration note
-    stream.markdown(`\n### 🔗 Integration with Meditation\n`);
-    stream.markdown(`Self-actualization automatically triggers during:\n`);
-    stream.markdown(`- Session greetings (quick check)\n`);
-    stream.markdown(`- Deep meditation sessions (full protocol)\n`);
-    stream.markdown(`- Explicit \`/selfactualize\` command\n`);
+  // Add meditation integration note
+  stream.markdown(`\n### 🔗 Integration with Meditation\n`);
+  stream.markdown(`Self-actualization automatically triggers during:\n`);
+  stream.markdown(`- Session greetings (quick check)\n`);
+  stream.markdown(`- Deep meditation sessions (full protocol)\n`);
+  stream.markdown(`- Explicit \`/selfactualize\` command\n`);
 
-    return { metadata: { command: 'selfactualize' } };
+  return { metadata: { command: "selfactualize" } };
 }
 
 /**
  * Handle /knowledge command - Search global knowledge base
  */
 export async function handleKnowledgeCommand(
-    request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    if (!request.prompt) {
-        stream.markdown(`## 🌐 Global Knowledge Search
+  if (!request.prompt) {
+    stream.markdown(`## 🌐 Global Knowledge Search
 
 Use this command to search across knowledge learned from ALL your projects.
 
@@ -182,16 +197,16 @@ Use this command to search across knowledge learned from ALL your projects.
 - **Insights (GI-*)**: Specific learnings with timestamps
 
 `);
-        return { metadata: { command: 'knowledge' } };
-    }
+    return { metadata: { command: "knowledge" } };
+  }
 
-    stream.progress(`🔍 Searching global knowledge for: ${request.prompt}`);
+  stream.progress(`🔍 Searching global knowledge for: ${request.prompt}`);
 
-    try {
-        const results = await searchGlobalKnowledge(request.prompt, { limit: 5 });
+  try {
+    const results = await searchGlobalKnowledge(request.prompt, { limit: 5 });
 
-        if (results.length === 0) {
-            stream.markdown(`## 🌐 No Global Knowledge Found
+    if (results.length === 0) {
+      stream.markdown(`## 🌐 No Global Knowledge Found
 
 No results found for "**${request.prompt}**".
 
@@ -202,42 +217,41 @@ No results found for "**${request.prompt}**".
 
 💡 *Tip: Use \`@alex /saveinsight\` after solving a tricky problem to remember it for future projects!*
 `);
-        } else {
-            stream.markdown(`## 🌐 Global Knowledge Results
+    } else {
+      stream.markdown(`## 🌐 Global Knowledge Results
 
 Found **${results.length}** results for "**${request.prompt}**":
 
 `);
-            for (const { entry /*, relevance*/ } of results) {
-                const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
-                stream.markdown(`### ${typeEmoji} ${entry.title}
+      for (const { entry /*, relevance*/ } of results) {
+        const typeEmoji = entry.type === "pattern" ? "📐" : "💡";
+        stream.markdown(`### ${typeEmoji} ${entry.title}
 - **Type**: ${entry.type} | **Category**: ${entry.category}
-- **Tags**: ${entry.tags.join(', ')}
-${entry.sourceProject ? `- **From**: ${entry.sourceProject}` : ''}
+- **Tags**: ${entry.tags.join(", ")}
+${entry.sourceProject ? `- **From**: ${entry.sourceProject}` : ""}
 - **Summary**: ${entry.summary}
 
 ---
 `);
-            }
-        }
-    } catch (err) {
-        stream.markdown(`❌ Error searching global knowledge: ${err}`);
+      }
     }
+  } catch (err) {
+    stream.markdown(`❌ Error searching global knowledge: ${err}`);
+  }
 
-    return { metadata: { command: 'knowledge' } };
+  return { metadata: { command: "knowledge" } };
 }
 
 /**
  * Handle /saveinsight command - Save a new insight to global knowledge
  */
 export async function handleSaveInsightCommand(
-    request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## 💡 Save Insight to Global Knowledge
+  stream.markdown(`## 💡 Save Insight to Global Knowledge
 
 This saves a valuable learning that can help you in other projects.
 
@@ -254,8 +268,8 @@ Tell me about the insight you want to save. I'll help structure it with:
 
 `);
 
-    if (request.prompt) {
-        stream.markdown(`### Your Input
+  if (request.prompt) {
+    stream.markdown(`### Your Input
 ${request.prompt}
 
 I'll use the **alex_knowledge_save_insight** tool to save this. The tool will:
@@ -265,22 +279,21 @@ I'll use the **alex_knowledge_save_insight** tool to save this. The tool will:
 4. Make it searchable across all projects
 
 `);
-    }
+  }
 
-    return { metadata: { command: 'saveinsight' } };
+  return { metadata: { command: "saveinsight" } };
 }
 
 /**
  * Handle /promote command - Promote project knowledge to global
  */
 export async function handlePromoteCommand(
-    _request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  _request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## ⬆️ Promote Knowledge to Global
+  stream.markdown(`## ⬆️ Promote Knowledge to Global
 
 Promote a project-local knowledge file (DK-*.md or skill) to make it available across all your projects.
 
@@ -300,58 +313,63 @@ Promote a project-local knowledge file (DK-*.md or skill) to make it available a
 ### Current Project's Knowledge Files
 `);
 
-    // List available knowledge files (skills and legacy DK)
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (workspaceFolders) {
-        // Check for skills first
-        const skillPattern = new vscode.RelativePattern(workspaceFolders[0], '.github/skills/*/SKILL.md');
-        const skillFiles = await vscode.workspace.findFiles(skillPattern);
-        
-        // Also check for legacy DK files
-        const dkPattern = new vscode.RelativePattern(workspaceFolders[0], '.github/domain-knowledge/DK-*.md');
-        const dkFiles = await vscode.workspace.findFiles(dkPattern);
-        
-        if (skillFiles.length > 0) {
-            stream.markdown(`**Skills** (${skillFiles.length}):\n`);
-            for (const file of skillFiles) {
-                const relativePath = vscode.workspace.asRelativePath(file);
-                stream.markdown(`- \`${relativePath}\`\n`);
-            }
-        }
-        
-        if (dkFiles.length > 0) {
-            stream.markdown(`\n**Legacy DK files** (${dkFiles.length}):\n`);
-            for (const file of dkFiles) {
-                const relativePath = vscode.workspace.asRelativePath(file);
-                stream.markdown(`- \`${relativePath}\`\n`);
-            }
-        }
-        
-        if (skillFiles.length === 0 && dkFiles.length === 0) {
-            stream.markdown(`*No knowledge files found in this project.*\n`);
-        }
+  // List available knowledge files (skills and legacy DK)
+  const workspaceFolders = vscode.workspace.workspaceFolders;
+  if (workspaceFolders) {
+    // Check for skills first
+    const skillPattern = new vscode.RelativePattern(
+      workspaceFolders[0],
+      ".github/skills/*/SKILL.md",
+    );
+    const skillFiles = await vscode.workspace.findFiles(skillPattern);
+
+    // Also check for legacy DK files
+    const dkPattern = new vscode.RelativePattern(
+      workspaceFolders[0],
+      ".github/domain-knowledge/DK-*.md",
+    );
+    const dkFiles = await vscode.workspace.findFiles(dkPattern);
+
+    if (skillFiles.length > 0) {
+      stream.markdown(`**Skills** (${skillFiles.length}):\n`);
+      for (const file of skillFiles) {
+        const relativePath = vscode.workspace.asRelativePath(file);
+        stream.markdown(`- \`${relativePath}\`\n`);
+      }
     }
 
-    return { metadata: { command: 'promote' } };
+    if (dkFiles.length > 0) {
+      stream.markdown(`\n**Legacy DK files** (${dkFiles.length}):\n`);
+      for (const file of dkFiles) {
+        const relativePath = vscode.workspace.asRelativePath(file);
+        stream.markdown(`- \`${relativePath}\`\n`);
+      }
+    }
+
+    if (skillFiles.length === 0 && dkFiles.length === 0) {
+      stream.markdown(`*No knowledge files found in this project.*\n`);
+    }
+  }
+
+  return { metadata: { command: "promote" } };
 }
 
 /**
  * Handle /knowledgestatus command - Show global knowledge status
  */
 export async function handleKnowledgeStatusCommand(
-    _request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  _request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    stream.progress('📊 Gathering global knowledge status...');
+  stream.progress("📊 Gathering global knowledge status...");
 
-    try {
-        const summary = await getGlobalKnowledgeSummary();
-        const registry = await ensureProjectRegistry();
+  try {
+    const summary = await getGlobalKnowledgeSummary();
+    const registry = await ensureProjectRegistry();
 
-        stream.markdown(`## 🧠 Global Knowledge Base Status
+    stream.markdown(`## 🧠 Global Knowledge Base Status
 
 ### Overview
 | Metric | Count |
@@ -362,58 +380,62 @@ export async function handleKnowledgeStatusCommand(
 
 `);
 
-        if (Object.keys(summary.categories).length > 0) {
-            stream.markdown(`### Knowledge by Category\n`);
-            for (const [cat, count] of Object.entries(summary.categories)) {
-                stream.markdown(`- **${cat}**: ${count}\n`);
-            }
-        }
-
-        if (summary.topTags.length > 0) {
-            stream.markdown(`\n### Top Tags\n`);
-            for (const { tag, count } of summary.topTags) {
-                stream.markdown(`- ${tag}: ${count} entries\n`);
-            }
-        }
-
-        if (summary.recentEntries.length > 0) {
-            stream.markdown(`\n### Recent Entries\n`);
-            for (const entry of summary.recentEntries) {
-                const typeEmoji = entry.type === 'pattern' ? '📐' : '💡';
-                stream.markdown(`- ${typeEmoji} **${entry.title}** (${entry.category})\n`);
-            }
-        }
-
-        if (registry.projects.length > 0) {
-            stream.markdown(`\n### Known Projects\n`);
-            for (const project of registry.projects.slice(0, 5)) {
-                stream.markdown(`- **${project.name}** - ${project.knowledgeFiles} knowledge files\n`);
-            }
-            if (registry.projects.length > 5) {
-                stream.markdown(`- *...and ${registry.projects.length - 5} more*\n`);
-            }
-        }
-
-        stream.markdown(`\n### 📍 Global Knowledge Location\n\`${getAlexGlobalPath()}\`\n`);
-
-    } catch (err) {
-        stream.markdown(`❌ Error getting global knowledge status: ${err}`);
+    if (Object.keys(summary.categories).length > 0) {
+      stream.markdown(`### Knowledge by Category\n`);
+      for (const [cat, count] of Object.entries(summary.categories)) {
+        stream.markdown(`- **${cat}**: ${count}\n`);
+      }
     }
 
-    return { metadata: { command: 'knowledgestatus' } };
+    if (summary.topTags.length > 0) {
+      stream.markdown(`\n### Top Tags\n`);
+      for (const { tag, count } of summary.topTags) {
+        stream.markdown(`- ${tag}: ${count} entries\n`);
+      }
+    }
+
+    if (summary.recentEntries.length > 0) {
+      stream.markdown(`\n### Recent Entries\n`);
+      for (const entry of summary.recentEntries) {
+        const typeEmoji = entry.type === "pattern" ? "📐" : "💡";
+        stream.markdown(
+          `- ${typeEmoji} **${entry.title}** (${entry.category})\n`,
+        );
+      }
+    }
+
+    if (registry.projects.length > 0) {
+      stream.markdown(`\n### Known Projects\n`);
+      for (const project of registry.projects.slice(0, 5)) {
+        stream.markdown(
+          `- **${project.name}** - ${project.knowledgeFiles} knowledge files\n`,
+        );
+      }
+      if (registry.projects.length > 5) {
+        stream.markdown(`- *...and ${registry.projects.length - 5} more*\n`);
+      }
+    }
+
+    stream.markdown(
+      `\n### 📍 Global Knowledge Location\n\`${getAlexGlobalPath()}\`\n`,
+    );
+  } catch (err) {
+    stream.markdown(`❌ Error getting global knowledge status: ${err}`);
+  }
+
+  return { metadata: { command: "knowledgestatus" } };
 }
 
 /**
  * Handle /docs command - Open documentation
  */
 export async function handleDocsCommand(
-    _request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  _request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## 📚 Alex Documentation
+  stream.markdown(`## 📚 Alex Documentation
 
 Opening the documentation index...
 
@@ -432,25 +454,26 @@ Opening the documentation index...
 
 `);
 
-    // Open the documentation
-    await vscode.commands.executeCommand('alex.openDocs');
+  // Open the documentation
+  await vscode.commands.executeCommand("alex.openDocs");
 
-    stream.markdown(`\n✅ Documentation opened in preview. You can also access docs anytime via Command Palette: **"Alex: Open Documentation"**`);
+  stream.markdown(
+    `\n✅ Documentation opened in preview. You can also access docs anytime via Command Palette: **"Alex: Open Documentation"**`,
+  );
 
-    return { metadata: { command: 'docs' } };
+  return { metadata: { command: "docs" } };
 }
 
 /**
  * Handle /help command - Discoverability for all Alex capabilities
  */
 export async function handleHelpCommand(
-    _request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  _request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## 🚀 Alex Cognitive Architecture - Commands & Capabilities
+  stream.markdown(`## 🚀 Alex Cognitive Architecture - Commands & Capabilities
 
 ### 📝 Slash Commands
 
@@ -514,23 +537,22 @@ Alex provides tools that the AI can use automatically:
 *Type any command to get started, or just ask me anything!*
 `);
 
-    return { metadata: { command: 'help' } };
+  return { metadata: { command: "help" } };
 }
 
 /**
  * Handle /forget command - Selective memory cleanup
  */
 export async function handleForgetCommand(
-    request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    const topic = request.prompt?.trim();
-    
-    if (!topic) {
-        stream.markdown(`## 🗑️ Selective Memory Cleanup
+  const topic = request.prompt?.trim();
+
+  if (!topic) {
+    stream.markdown(`## 🗑️ Selective Memory Cleanup
 
 The \`/forget\` command helps you remove outdated or unwanted information from Alex's memory.
 
@@ -557,17 +579,17 @@ The \`/forget\` command helps you remove outdated or unwanted information from A
 
 *Provide a topic to search for and I'll show you what can be removed.*
 `);
-        return { metadata: { command: 'forget', action: 'help' } };
-    }
-    
-    // Search for matches in global knowledge
-    stream.progress(`🔍 Searching for "${topic}" in memory...`);
-    
-    // global path available via getAlexGlobalPath() if needed
-    const searchResults = await searchGlobalKnowledge(topic);
-    
-    if (searchResults.length === 0) {
-        stream.markdown(`## 🔍 No Matches Found
+    return { metadata: { command: "forget", action: "help" } };
+  }
+
+  // Search for matches in global knowledge
+  stream.progress(`🔍 Searching for "${topic}" in memory...`);
+
+  // global path available via getAlexGlobalPath() if needed
+  const searchResults = await searchGlobalKnowledge(topic);
+
+  if (searchResults.length === 0) {
+    stream.markdown(`## 🔍 No Matches Found
 
 I couldn't find any memory entries matching "**${topic}**".
 
@@ -577,25 +599,27 @@ I couldn't find any memory entries matching "**${topic}**".
 - Use \`/knowledgestatus\` to see what's in memory
 
 `);
-        return { metadata: { command: 'forget', action: 'no-matches' } };
-    }
-    
-    stream.markdown(`## 🗑️ Found ${searchResults.length} Matches for "${topic}"
+    return { metadata: { command: "forget", action: "no-matches" } };
+  }
+
+  stream.markdown(`## 🗑️ Found ${searchResults.length} Matches for "${topic}"
 
 **⚠️ Review carefully before deleting!**
 
 | # | Type | Title | Source |
 |:-:|------|-------|--------|
 `);
-    
-    for (let i = 0; i < searchResults.length; i++) {
-        const result = searchResults[i];
-        const type = result.entry.type === 'pattern' ? '📐' : '💡';
-        const source = result.entry.sourceProject || 'Unknown';
-        stream.markdown(`| ${i + 1} | ${type} | ${result.entry.title} | ${source} |\n`);
-    }
-    
-    stream.markdown(`
+
+  for (let i = 0; i < searchResults.length; i++) {
+    const result = searchResults[i];
+    const type = result.entry.type === "pattern" ? "📐" : "💡";
+    const source = result.entry.sourceProject || "Unknown";
+    stream.markdown(
+      `| ${i + 1} | ${type} | ${result.entry.title} | ${source} |\n`,
+    );
+  }
+
+  stream.markdown(`
 ---
 
 ### To Delete
@@ -611,21 +635,20 @@ I cannot automatically delete files yet. To remove an entry:
 Automatic deletion with confirmation is planned for a future version.
 
 `);
-    
-    return { metadata: { command: 'forget', action: 'search-results' } };
+
+  return { metadata: { command: "forget", action: "search-results" } };
 }
 
 /**
  * Handle /confidence command - Epistemic integrity education
  */
 export async function handleConfidenceCommand(
-    _request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  _request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    stream.markdown(`## 🎯 Understanding AI Confidence Levels
+  stream.markdown(`## 🎯 Understanding AI Confidence Levels
 
 ### The 4-Tier Confidence System
 
@@ -683,22 +706,21 @@ Watch out for these red flags in AI responses:
 *Use \`/status\` to check Alex's current architecture health.*
 `);
 
-    return { metadata: { command: 'confidence' } };
+  return { metadata: { command: "confidence" } };
 }
 
 /**
  * Handle /creative command - Switch to brainstorming/ideation mode
  */
 export async function handleCreativeCommand(
-    request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    const topic = request.prompt.trim() || 'general brainstorming';
-    
-    stream.markdown(`## 💡 Creative Mode Activated
+  const topic = request.prompt.trim() || "general brainstorming";
+
+  stream.markdown(`## 💡 Creative Mode Activated
 
 I'm switching to **brainstorming mode** for: **${topic}**
 
@@ -735,23 +757,22 @@ In creative mode, I'll offer ideas and approaches for us to evaluate together. T
 Ready to brainstorm! What's your first question or challenge?
 `);
 
-    return { metadata: { command: 'creative', mode: 'generative', topic } };
+  return { metadata: { command: "creative", mode: "generative", topic } };
 }
 
 /**
  * Handle /verify command - Multi-turn verification for high-stakes decisions
  */
 export async function handleVerifyCommand(
-    request: vscode.ChatRequest,
-    _context: vscode.ChatContext,
-    stream: vscode.ChatResponseStream,
-    _token: vscode.CancellationToken
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
 ): Promise<IAlexChatResult> {
-    
-    const topic = request.prompt.trim();
-    
-    if (!topic) {
-        stream.markdown(`## 🔍 Verification Walkthrough
+  const topic = request.prompt.trim();
+
+  if (!topic) {
+    stream.markdown(`## 🔍 Verification Walkthrough
 
 The \`/verify\` command helps you validate high-stakes decisions through structured review.
 
@@ -777,10 +798,10 @@ The \`/verify\` command helps you validate high-stakes decisions through structu
 5. **Suggest validation** — How can we test our approach?
 
 `);
-        return { metadata: { command: 'verify', action: 'help' } };
-    }
-    
-    stream.markdown(`## 🔍 Verification Walkthrough: ${topic}
+    return { metadata: { command: "verify", action: "help" } };
+  }
+
+  stream.markdown(`## 🔍 Verification Walkthrough: ${topic}
 
 Let me help you think through this carefully.
 
@@ -833,5 +854,5 @@ Consider testing:
 > 💡 *This is structured thinking, not definitive answers. You know your context better than I do.*
 `);
 
-    return { metadata: { command: 'verify', topic, action: 'walkthrough' } };
+  return { metadata: { command: "verify", topic, action: "walkthrough" } };
 }

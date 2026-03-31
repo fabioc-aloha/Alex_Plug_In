@@ -1,6 +1,7 @@
 ---
 name: prompt-evolution-system
 description: Externalized prompt store, A/B testing, metrics-driven evolution, quality gates, and auto-rollback
+tier: standard
 metadata:
   version: 1.0.0
   category: ai-engineering

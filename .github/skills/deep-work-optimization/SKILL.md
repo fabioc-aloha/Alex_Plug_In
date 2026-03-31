@@ -1,6 +1,7 @@
 ---
 name: deep-work-optimization
 description: Focus blocks, distraction management, and flow state triggers for cognitively demanding work
+tier: extended
 ---
 
 # Skill: Deep Work Optimization

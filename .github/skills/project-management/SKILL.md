@@ -1,6 +1,7 @@
 ---
 name: project-management
 description: >-
+tier: standard
   Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work,
   and safety-first release gates.
 ---

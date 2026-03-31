@@ -1,6 +1,7 @@
 ---
 name: teams-app-patterns
 description: Full Teams app development patterns.
+tier: standard
 user-invokable: false
 applyTo: '**/*teams*,**/*manifest*,**/*m365*'
 ---

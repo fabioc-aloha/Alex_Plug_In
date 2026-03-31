@@ -1,6 +1,7 @@
 ---
 name: git-workflow
 description: Consistent git practices, recovery patterns, and safe operations.
+tier: core
 applyTo: '**/.git/**,**/commit*,**/branch*,**/merge*'
 ---
 

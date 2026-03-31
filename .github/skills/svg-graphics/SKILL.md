@@ -1,6 +1,7 @@
 ---
 name: "svg-graphics"
 description: "Scalable, accessible, theme-aware visuals."
+tier: standard
 ---
 
 # SVG Graphics Skill

@@ -1,6 +1,7 @@
 ---
 name: api-design
 description: Design APIs that developers love to use.
+tier: standard
 applyTo: '**/*api*,**/*rest*,**/*endpoint*,**/*route*,**/*schema*'
 ---
 

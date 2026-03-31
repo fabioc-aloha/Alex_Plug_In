@@ -1,6 +1,7 @@
 ---
 name: performance-profiling
 description: CPU, memory, network bottleneck analysis — systematic performance investigation
+tier: standard
 applyTo: '**/*profile*,**/*performance*,**/*benchmark*,**/*bottleneck*,**/*optimize*'
 ---
 

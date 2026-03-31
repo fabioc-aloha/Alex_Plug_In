@@ -1,6 +1,7 @@
 ---
 name: "scope-management"
 description: "Recognize scope creep, suggest MVP cuts, and manage project boundaries"
+tier: standard
 ---
 
 # Scope Management Skill

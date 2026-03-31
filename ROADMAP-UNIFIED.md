@@ -37,15 +37,16 @@ Seven platforms. Four active, three planned.
 
 ## 🚧 In Progress
 
-| Version    | Theme                                                                                                                          | Target  |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| **v7.1.0** | Intelligence Edition -- competitive research, M365 MCP integration, generative meditation, defense-in-depth hooks, adaptive UX | 2026-Q2 |
+| Version    | Theme                                                                            | Target  |
+| ---------- | -------------------------------------------------------------------------------- | ------- |
+| **v7.2.0** | Intelligence Edition -- M365 MCP integration, generative meditation, adaptive UX | 2026-Q2 |
 ---
 
 ## ✅ Shipped Releases
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v7.1.0** | Excavation Edition -- Copilot Chat competitive analysis drives 17 improvements: PromptVariantRegistry (10 model families), context window scaling, conversation summarization, steering awareness, stream enrichment, session trace, TS6, hooks H10/H13                                                       | 2026-03-31 |
 | **v7.0.1** | Welcome UI Hotfix -- Chat Memories button (Mind tab), Memory Audit button (Mission tab)                                                                                                                                                                                                                       | 2026-03-31 |
 | **v7.0.0** | Working Together Edition -- cross-platform parity (88/93 items, 52 files, brew/winget pairing), macOS-native capabilities (sips, say, caffeinate, launchd), PS muscle ports to Node.js, LLM-friendly script refactor, User Memory Leverage, MCP v1.1.0, Welcome UI (Chat Memories + Memory Audit buttons)     | 2026-03-31 |
 | **v6.8.4** | Quality Review & Roadmap Cleanup -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes                                                                                                              | 2026-03-27 |
@@ -66,13 +67,9 @@ Seven platforms. Four active, three planned.
 | **v6.1.5** | M365 Schema + Agent Plugin — manifest v1.25, Agent Plugin heir, MCP standalone bundle                                                                                                                                                                                                                         | 2026-03-04 |
 | **v6.0.0** | The Partnership Release — episodic memory, outcome tracking, autonomous tasks, workflow engine                                                                                                                                                                                                                | 2026-02-28 |
 
-> Full details in the [Appendix](#-appendix-completed-work).
-
 ---
 
 ## 📋 Open Backlog
-
-> All completed work is in the [Appendix](#-appendix-completed-work).
 
 ### Deferred Hooks (Low Priority)
 
@@ -100,6 +97,8 @@ Seven platforms. Four active, three planned.
 | **D**    | Recently-used command tracking             | Command history API                                | Adaptive UX (command history)         | ❌ Still blocked — no change in 1.111–1.113.                                                                                                                                                                                       |
 
 ### 🔭 Future Watch
+
+**Simulation Testing (F4)**: Build a test harness that replays recorded session traces against the prompt engine to validate prompt assembly, layer truncation, and model-variant behavior without live model calls. Derived from Copilot Chat excavation (see `alex_docs/vscode/EXCAVATION-PLAN.md` F4). High impact, 5d+ effort.
 
 **Parent-repo customization inheritance** (`chat.useCustomizationsInParentRepositories`, #293277): VS Code 1.112 ships a setting that searches parent repositories for `.github/` customizations (instructions, prompts, agents.md, skills). Today this has limited impact because internal heirs (`platforms/vscode-extension/`) are in the same repo (handled by `sync-architecture.cjs`) and external heirs are separate repos, not nested.
 
@@ -131,7 +130,7 @@ Seven platforms. Four active, three planned.
 
 ---
 
-## 🔮 v7.1.0 — Intelligence Edition
+## 🔮 v7.2.0 — Intelligence Edition
 
 v7.0.0 shipped cross-platform parity. v7.1.0 shifts focus to making Alex *smarter*: deeper M365 integration, generative meditation, competitive feature parity, and defense-in-depth improvements.
 
@@ -255,12 +254,12 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                                                |
 | -------------------------- | ------------------------------------------------------------------------------ |
-| **Current Master Version** | 7.0.1                                                                          |
-| **Current Heirs**          | VS Code (7.0.1), M365 (6.8.3), Plugin (6.7.0)                                  |
+| **Current Master Version** | 7.1.0                                                                          |
+| **Current Heirs**          | VS Code (7.1.0), M365 (6.8.3), Plugin (6.7.0)                                  |
 | **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                |
 | **Platforms**              | 5 total (4 active, 1 planned)                                                  |
-| **Next Target**            | v7.1.0 (Intelligence Edition, Q2 2026)                                         |
-| **Open Items**             | 23 total: 14 v7.1.0 features, 4 blocked, 1 gated, 3 conditional, 1 next action |
+| **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                         |
+| **Open Items**             | 23 total: 14 v7.2.0 features, 4 blocked, 1 gated, 3 conditional, 1 next action |
 | **Updated**                | 2026-03-31                                                                     |
 
 ---
@@ -286,303 +285,6 @@ Microsoft 365 Agents Toolkit v6.6.0 (Mar 9) + v6.6.1 hotfix (Mar 26) shipped fea
 2. Test MCP tool integration with Alex's cognitive tools in declarative agent
 3. Prototype embedded knowledge with Alex's instruction files
 4. Evaluate `atk init` for existing M365 heir project
-
----
-
-<details>
-<summary><h2>📖 Appendix: Completed Work</h2></summary>
-
-### v6.5.0 — Completed Trust Release Work
-
-#### Core (must-ship) — Completed
-
-| #   | Task                                | Description                                                                                                                                                                                                                                      |
-| --- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1   | **Remove deprecated avatar system** | Deleted 122 avatar files (25.3 MB), gutted avatarMappings.ts (771→68), removed PERSONA_AVATAR_MAP + getAvatarForPersona + avatarFile. 241 tests passing. See [Payload Audit](alex_archive/cleanup-2026-03-25/audits/PAYLOAD-AUDIT-2026-03-10.md) |
-| 2   | **console.log → OutputChannel**     | Created `src/shared/logger.ts` (centralized OutputChannel 'Alex'), migrated 31 console.log calls across 9 files to `logInfo()`, added `disposeLog()` to deactivate. 1 webview-internal console.log correctly preserved                           |
-| 3   | **UI theme + font compliance**      | Migrated 17 dashboard hex colors to `--vscode-charts-*` / `--vscode-textLink-foreground` with fallbacks. Fixed 3 sub-11px fonts. SVG art + persona brand colors + Mermaid themes preserved as hex                                                |
-| 4   | **Heir version alignment**          | agent-plugin updated (v6.1.5/v6.1.7/v6.2.0→v6.4.6 across 4 files), M365 build artifacts gitignored, visual-memory trifecta removed from M365                                                                                                     |
-| 5   | **Quick Settings sidebar**          | Expanded from 4 to 17 toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities). Environment Setup relocated to Quick Settings as compact button. `chat.useCustomAgentHooks` toggle added                                           |
-| 6   | **Cloud Sync removal**              | Gist-based cloud sync fully removed (deprecated since v5.0.1): 3 slash commands (`/sync`, `/push`, `/pull`), `cloudSync.enabled` setting, handler functions, interface fields across 7 files                                                     |
-
-#### Hooks — All 16 Shipped
-
-F1–F6 API corrections applied 2026-03-10: config format (3-level nesting, seconds timeouts), scripts (stdin JSON, structured JSON output, exit 2 for safety blocks), event renamed (SessionStop→Stop). All scripts `.cjs` (CommonJS for ESM compat).
-
-**Global hooks** (10):
-
-| Event            | Script                     | What It Does                                                                                                                                    |
-| ---------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| SessionStart     | `session-start.cjs`        | Loads user profile, active goals, meditation recency → `additionalContext`                                                                      |
-| PreToolUse       | `pre-tool-use.cjs`         | Safety gates: I3/I4 exit 2 (Master Alex), Q1 deny (version drift), Q2 compile reminder, H8 deny (heir contamination), H9 deny (I8 architecture) |
-| PostToolUse      | `post-tool-use.cjs`        | Logs tool usage to `session-tool-log.json`. Keeps last 500                                                                                      |
-| PostToolUse      | `targeted-test-runner.cjs` | After `.ts` edits, suggests companion `.test.ts` files                                                                                          |
-| UserPromptSubmit | `prompt-safety-gate.cjs`   | Scans prompts for secrets and I1 violations                                                                                                     |
-| SubagentStart    | `subagent-context.cjs`     | Injects Active Context for subagent sessions                                                                                                    |
-| Stop             | `stop.cjs`                 | Records session metrics to `session-metrics.json`. Keeps last 100                                                                               |
-| Stop             | `auto-commit-suggest.cjs`  | Warns when >5 uncommitted files at session end                                                                                                  |
-| Stop             | `decision-journal.cjs`     | Prompts decision documentation on long sessions (>30 min / >50 tool calls)                                                                      |
-| PreCompact       | `pre-compact.cjs`          | Saves session state before context compaction                                                                                                   |
-
-**Agent-scoped hooks** (6):
-
-| Agent         | Event        | Script                            | What It Does                                        |
-| ------------- | ------------ | --------------------------------- | --------------------------------------------------- |
-| Validator     | PreToolUse   | `validator-pre-tool-use.cjs`      | Blocks write tools during QA review                 |
-| Validator     | SessionStart | `validator-session-start.cjs`     | Loads adversarial checklist + git log summary       |
-| Builder       | PostToolUse  | `builder-post-tool-use.cjs`       | Reminds to compile after `.ts` edits                |
-| Researcher    | SessionStart | `researcher-session-start.cjs`    | Loads research docs index + research-first protocol |
-| Researcher    | Stop         | `researcher-stop.cjs`             | Saves unanswered questions + recent findings        |
-| Documentarian | PostToolUse  | `documentarian-post-tool-use.cjs` | Tracks doc edits, suggests CHANGELOG updates        |
-
-Also shipped: agent-plugin PreToolUse, Claude Code bridge PreToolUse, Git pre-commit (YAML/synapse/contamination validation).
-
-**Autopilot safety audit (H1)**: H8 + H9 escalated from warn → `deny()` for non-interactive safety.
-
-#### Security & Dependencies
-
-| Task                 | Description                                  |
-| -------------------- | -------------------------------------------- |
-| MCP SDK bump         | `@modelcontextprotocol/sdk` ^1.0.0 → ^1.27.1 |
-| npm audit            | 0 vulnerabilities                            |
-| `@types/vscode` bump | Aligned to engine version                    |
-| `ws` bump            | WebSocket security update                    |
-
-#### Skill Promotions (4 of 7 promoted)
-
-| #   | Asset                         | Source       |
-| --- | ----------------------------- | ------------ |
-| 1   | `doc-hygiene` skill           | GK + 3 heirs |
-| 2   | `architecture-health` skill   | AlexLearn    |
-| 3   | `global-knowledge-sync` skill | AlexLearn    |
-| 4   | `domain-learning` prompt      | AlexLearn    |
-
-Full scan: [SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md](alex_archive/cleanup-2026-03-25/research/SKILL-SCAN-HEIR-ADOPTION-2026-03-10.md)
-
-#### Stretch — Completed
-
-| #   | Task                                | Description                                                                                                                                                                                     |
-| --- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 6   | **Document Autopilot workflows**    | Safety implications documented in SECURITY.md: recommended workflows (Dream, Meditation, Brain QA), supervision requirements, hook coverage table                                               |
-| 7   | **Update extension-patterns SKILL** | Added VS Code 1.111 agent hooks API (config format, stdin JSON protocol, PreToolUse decisions, agent-scoped hooks, Autopilot mode, debug events snapshot) to vscode-extension-patterns SKILL.md |
-
-#### Skill Promotion Evaluations
-
-| #   | Asset                                    | Verdict                                                                                                  |
-| --- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| 5   | `meditation-facilitation`                | Already merged — 4 R's framework, facilitation techniques, session types in master `meditation` SKILL.md |
-| 6   | `prompt-activation` / `skill-activation` | Keep in heir — master `memory-activation` unified design covers both                                     |
-| 7   | `writing-publication`                    | Keep in heir — academic/research-specific, not general-purpose                                           |
-
-#### Trifecta Quality (T1–T7 Completed)
-
-From the comprehensive trifecta audit: 38 complete trifectas verified, 7 bugs fixed.
-
-| #   | What                                                         | Result                                                                                                                                                                   |
-| --- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| T1  | **Code Review** `/review` prompt enriched                    | 3-Pass Review, comment prefixes, review priority from skill. Epistemic confidence kept as additive layer                                                                 |
-| T2  | **Testing Strategies** `/tdd` prompt broadened               | Now covers pyramid, mocking, coverage philosophy, flaky test triage — not just TDD cycle                                                                                 |
-| T3  | **Self-Actualization** thresholds canonicalized              | Instruction now references skill's 6-dimension scoring; duplicate memory balance + density tables removed                                                                |
-| T4  | **Code Review** deduplication                                | Instruction's comment prefix table + review checklist replaced with references to skill's canonical tables                                                               |
-| T5  | **Markdown & Mermaid** `diagramming.prompt.md` created       | ATACCU methodology, diagram types, quality rules                                                                                                                         |
-| T6  | **Heir Sync Management** `promotetomaster.prompt.md` created | Promotion criteria, workflow, Validator gate                                                                                                                             |
-| T7  | **Trifecta sibling synapses** added                          | Code Review, Testing Strategies, Self-Actualization synapses.json now connect to own instruction + prompt                                                                |
-| T8  | **Orphan prompts assessed**                                  | `presentation` has 2 matching skills (not orphaned). `improve`, `journey`, `plan`, `marp` are justified standalone workflow/orchestration prompts — no new skills needed |
-
-#### Definition of Done (v6.5.0)
-
-1. **All tests passing** — 268/268 (4 dead avatar tests removed, 27 new tests added in v6.4.5)
-2. **No npm audit vulnerabilities** — 0 (achieved in v6.4.5, Mocha 11 + overrides)
-3. **VSIX < 5 MB** — deprecated avatar PNGs removed (25.3 MB eliminated), 433 files in VSIX
-4. **UI WCAG AA compliant** — no sub-11px fonts, theme-aware colors
-5. **Shipped hooks API-compliant** — F1–F6 fixes applied: correct config format, stdin JSON protocol, structured output, proper exit codes, event name corrected. Synced to heirs
-6. **Agent hooks evaluated** — H1–H22 assessed: 16 implemented (10 global, 6 agent-scoped), 7 deferred with rationale
-7. **North Star Trust score ≥ 8/10** — up from 7.2 baseline
-
-### v6.4.5 — Audit Hygiene (Shipped 2026-03-10)
-
-| #   | Task                          | Result                                                                                                                                                                                                 |
-| --- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1   | **Fix 7 failing tests**       | ✅ 268 passing, 0 failing. Fixed GK-/GI- prefix expectations + 3 regex patterns in expertiseModel                                                                                                       |
-| 2   | **Fix doc freshness**         | ✅ cognitive-config→6.4.0, NEUROANATOMICAL-MAPPING (130 skills, 64 instructions, I1-I8), VSCODE-BRAIN-INTEGRATION→v6.4.0, counts in 4 more docs, broken synapse fixed, 2 legacy episodic files archived |
-| 3   | **Fix broken links + ghosts** | ✅ 14 broken links fixed across 7 docs. AGENT-VS-CHAT-COMPARISON→v6.4.0. 3 ghost PROJECT-TYPE-TEMPLATES refs removed. Heir copy synced                                                                  |
-| 4   | **Mocha 11 upgrade**          | ✅ 10.8.2→11.7.5 + npm overrides for serialize-javascript and diff. 0 audit vulnerabilities                                                                                                             |
-| 5   | **Reindex skills**            | ✅ 130 skills, 643 connections. Removed stale `inheritance` from 10 synapses.json. Updated pre-commit hook + new-skill.ps1                                                                              |
-| 6   | **Reconcile settings docs**   | ✅ ENVIRONMENT-SETUP.md designated canonical (21 SoT settings added). USER-MANUAL.md now points there                                                                                                   |
-
-### v6.3.1 → v6.4.0 — Completed Low-Hanging Fruit
-
-| #   | Task                                               | Status | Description                                                                 |
-| --- | -------------------------------------------------- | :----: | --------------------------------------------------------------------------- |
-| 1   | **Enable `chat.useCustomAgentHooks`**              | ✅ Done | Enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json`    |
-| 3   | **Enable `chat.autopilot.enabled`**                | ✅ Done | Enabled in `.vscode/settings.json` and `.devcontainer/devcontainer.json`    |
-| 4   | **Update copilot-instructions.md settings header** | ✅ Done | Header updated to `(1.111+)`, all new settings documented                   |
-| 7   | **Document `#debugEventsSnapshot`**                | ✅ Done | Added to WORKING-WITH-ALEX.md and debugging-patterns.instructions.md        |
-| 11  | **Terminal sandbox trust domains**                 | ✅ Done | `chat.tools.terminal.sandbox.network` configured in `.vscode/settings.json` |
-| 12  | **OS notifications for confirmations**             | ✅ Done | `chat.notifyWindowOnConfirmation` set to `always`                           |
-| 13  | **VS Code Insiders pre-publish testing**           | ✅ Done | Insiders testing section added to PRE-PUBLISH-CHECKLIST.md                  |
-
-### v6.3.0 — Completed Trust Release Items
-
-| Task                           | Status | Description                                                                                                                                    |
-| ------------------------------ | :----: | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Test the core services**     | ✅ Done | 20 test files covering all v6.0.0 services                                                                                                     |
-| **Break down the monoliths**   | ✅ Done | 0 logic files >1,500L. P5B: extension.ts 894L, globalKnowledgeContent.ts 808L. P5C: 7 orchestrators split. P5D: structural exceptions accepted |
-| **Command Center — Waves 0–7** | ✅ Done | 98/100 steps shipped. 5-tab sidebar, full UI/UX audit, WCAG keyboard accessibility, 41 workshop study guides                                   |
-| **Wave 8 — UI/UX Audit**       | ✅ Done | 20/20 findings fixed (5 P1 + 6 P2 + 6 P3 + 3 cross-tab)                                                                                        |
-| **Persona Detection P7**       | ✅ Done | 12/12 items shipped (CRITICAL through LOW). 47 personas, 81 avatar entries                                                                     |
-
-### Current State Summary (v6.5.3)
-
-Alex now has:
-- **150 Skills** — 40 complete trifectas, synapse connections with full `when`/`yields`/`type` metadata
-- **71 Instructions** — auto-loaded rules across all domains (YAML frontmatter on all files)
-- **50 Prompts** — user-invoked `/` commands
-- **7 Agents** — specialist modes for Builder, Researcher, Validator, Documentarian, Azure, M365
-- **79 Registered Commands** — full command surface including 10 v6.0.0 partnership commands
-- **3 Platform Heirs** — VS Code Extension, M365 Copilot Agent, Agent Plugin ([standalone repo](https://github.com/fabioc-aloha/AlexAgent))
-- **Command Center** — 4-tab sidebar (Mission, Skills, Mind, Docs)
-- **128 TypeScript source files** — modular architecture (extension.ts 248L orchestrator + commandsCore/Presentation/Developer)
-- **16 Agent hooks** — 10 global + 6 agent-scoped across all 7 VS Code hook events
-- **M365 Declarative Agent** — v1.6 schema, manifest v1.25, GPT 5.1+ hardened, Word/PowerPoint surfaces
-- **LearnAI Companion Site** — 80 playbooks at [learnai.correax.com](https://learnai.correax.com/) integrated into Docs tab
-- **Episodic Memory** — persistent session records at `~/.alex/episodic/sessions.json` with keyword search and recall
-- **Outcome Learning Loop** — 👍/👎 tracking with per-domain confidence scoring across 500 records
-- **Autonomous Task Detection** — 30-minute interval surveying stalled work and TODO hotspots
-- **Multi-Step Workflow Engine** — 4 built-in JSON workflows, extensible via `.alex/workflows/`
-- **User Expertise Model** — 10-domain expertise tracking (novice → expert) with automatic prompt calibration
-- **Proactive Code Review Triggers** — git diff threshold nudges on save
-- **CorreaX Brand System** — unified visual identity across all 5 properties
-- **FLUX Brand Fine-Tune** — custom LoRA training workflow for consistent brand imagery
-- **Background File Watcher** — ambient awareness of hot files, stalled work, TODO hotspots
-- **Honest Uncertainty** — confidence scoring on every request
-- **The Forgetting Curve** — usage-weighted knowledge decay
-- **Copilot Memory** — cross-session context persistence
-- **RAI Psychological Safety** — Anti-sycophancy, emotional boundaries, anti-gaslighting, content safety Layer 5
-
-### Post-v6.2.0 — Completed Work (March 5–7, 2026)
-
-| Task                       | Status | Description                                                                                                                                   |
-| -------------------------- | :----: | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Command Center Waves 0–5   | ✅ Done | 5-tab sidebar: Mission Ctrl, Agents, Skill Store, Mind, Docs. 98/100 steps shipped. Wave 6 (Advanced Tabs) deferred pending runtime contracts |
-| Skill consolidation        | ✅ Done | 11 skills merged into 7 targets (130→120→133 with new skills). 4 redundant prompts removed. 96+ stale refs fixed                              |
-| Icon design system         | ✅ Done | Rocket-character system (33 final SVGs across 4 categories) via Recraft v4 SVG                                                                |
-| Brain QA clean             | ✅ Done | 35/35 phases passing, 0 issues after consolidation + meditation pass                                                                          |
-| Codex competitive analysis | ✅ Done | Market positioning research vs OpenAI Codex for Command Center differentiation                                                                |
-
-### v6.2.0 — On-Brand Partnership Release (Shipped 2026-03-05)
-
-| Task                             | Description                                                                                     |
-| -------------------------------- | ----------------------------------------------------------------------------------------------- |
-| FLUX brand fine-tune trifecta    | 37th trifecta: skill + instruction + prompt for custom LoRA training on Replicate               |
-| SVG-first banner strategy        | Recraft v4 SVG generation for resolution-independent banners                                    |
-| GH Copilot Web heir discontinued | Removed lowest-parity heir (1.5%); Agent Plugin covers same use case                            |
-| Script audit                     | 8 sync/build/release scripts audited, 3 fixed (dead regex, wrong exclusions, redundant compile) |
-| Sync verification                | All 3 heirs verified in sync: VS Code (130 skills), M365 (90 skills), Agent Plugin (85 skills)  |
-
-### v6.1.5 — M365 Schema + Agent Plugin + Polish (Shipped 2026-03-04)
-
-| Task                                | Description                                                                 |
-| ----------------------------------- | --------------------------------------------------------------------------- |
-| Manifest v1.19 → v1.25              | Upgraded M365 app manifest schema to latest v1.25                           |
-| GPT 5.1+ system prompt hardening    | Literal-execution header, self-evaluation gate, atomic tasks                |
-| Conversation starters v1.6          | Trimmed 11 → 6 starters (v1.6 schema max)                                   |
-| Word & PowerPoint agent surfaces    | Documented declarative agent support across docs                            |
-| Teams Toolkit → M365 Agents Toolkit | Renamed all references across 3 docs (10 refs)                              |
-| EmbeddedKnowledge readiness         | knowledge/ folder pre-prepared for zero-delay adoption                      |
-| capabilities.md v1.6 features       | Platform features, M365 capabilities table, agent surfaces                  |
-| Agent Plugin heir                   | Full platform: 84 skills, 7 agents, 22 instructions, 11 prompts             |
-| AlexAgent distribution repo         | Standalone public repo with install scripts, setup scripts, on-brand banner |
-| AI Writing Avoidance trifecta       | Skill + instruction + prompt for detecting and fixing AI writing tells      |
-| sync-plugin.ps1 AlexAgent publish   | `-DistroRepo` param copies plugin bundle to distribution repo               |
-| M365 heir version alignment         | All files aligned to v6.1.5 (was scattered 5.7.7–6.1.0)                     |
-| M365 sync script                    | sync-m365.ps1 with backup/restore                                           |
-| Thinking phrases                    | 15 cognitive-themed progress phrases via `chat.agent.thinking.phrases`      |
-| Agent Plugin audit                  | 11 parity checks, 4 issues fixed                                            |
-| M365 heir audit                     | 8-dimension audit, 4 fixes, 2 items deferred                                |
-| Banner redesign                     | 8 SVGs, 10 PNGs, brand doc tokens updated, roadmap banner                   |
-| Agent Debug Panel skill             | Skill with 7 debug scenarios + WORKING-WITH-ALEX.md update                  |
-| Kitty terminal images               | `terminal.integrated.enableImages` + skill with Node.js/imgcat/chafa        |
-| MCP standalone bundle               | 704KB self-contained esbuild bundle, zero dependencies                      |
-
-### v6.0.0 — The Partnership Release (Shipped 2026-02-28)
-
-**Paradigm**: Autonomous Partnership — Alex doesn't wait to be asked. Alex anticipates, remembers, learns, and earns trust.
-
-| Feature                            | Description                                                                                                                                     | North Star Alignment        |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| **Episodic memory**                | Session records at `~/.alex/episodic/sessions.json`. Commands: `alex.recallSession`, `alex.showSessionHistory`.                                 | *Partner remembers*         |
-| **Outcome learning loop**          | 👍/👎 tracking with per-domain confidence scoring. Commands: `alex.recordPositiveOutcome`, `alex.recordNegativeOutcome`, `alex.showOutcomeStats`. | *Partner learns what works* |
-| **Autonomous task detection**      | Reads peripheral observations every 30 min, surfaces stalled work via notifications. Commands: `alex.showPendingTasks`, `alex.forceCheckTasks`. | *Partner shows up*          |
-| **Multi-step workflow engine**     | JSON workflows at `.alex/workflows/`. 4 built-in: Plan→Build→Review, Debug→Fix→Verify, Research-First, Release Prep.                            | *Partner handles any job*   |
-| **User expertise model**           | 10-domain interaction tracking (novice→expert). Injects calibration hint into every `@alex` prompt.                                             | *Partner adapts*            |
-| **Proactive code review triggers** | On save, debounced 60s → `git diff --stat HEAD` → nudge if >200 lines changed.                                                                  | *Partner brings context*    |
-
-### v6.x and v5.9.x Series (Q1 2026)
-
-| Version | Theme                                       | Date       |
-| ------- | ------------------------------------------- | ---------- |
-| v6.2.0  | On-Brand Partnership Release                | 2026-03-05 |
-| v6.1.8  | Doc Alignment Hotfix                        | 2026-03-05 |
-| v6.1.7  | Stable Marketplace Release                  | 2026-03-05 |
-| v6.1.5  | M365 Schema Alignment + Agent Plugin        | 2026-03-04 |
-| v6.1.0  | Cognitive Tier Hardening                    | 2026-03-03 |
-| v6.0.3  | Marketplace Compliance + Doc Hygiene        | 2026-03-02 |
-| v6.0.2  | Brand Doc Correction + Trifecta Audit       | 2026-02-28 |
-| v6.0.1  | Banner Opacity Fix                          | 2026-02-28 |
-| v6.0.0  | The Partnership Release                     | 2026-02-28 |
-| v5.9.13 | CorreaX Brand Release                       | 2026-02-28 |
-| v5.9.12 | Documentation Hygiene Edition               | 2026-02-26 |
-| v5.9.11 | Post-Publish Synapse Hardening              | 2026-02-26 |
-| v5.9.10 | Workspace File API Migration + NASA Edition | 2026-02-26 |
-| v5.9.9  | Platform Architecture Reinforcement         | 2026-02-24 |
-| v5.9.8  | Background File Watcher                     | 2026-02-21 |
-| v5.9.7  | P2 Feature Completion                       | 2026-02-21 |
-| v5.9.6  | The Forgetting Curve                        | 2026-02-21 |
-| v5.9.5  | Honest Uncertainty                          | 2026-02-21 |
-| v5.9.4  | Avatar System + Peripheral Vision           | 2026-02-21 |
-| v5.9.3  | Stabilization + Quality Gates               | 2026-02-20 |
-| v5.9.2  | Identity + Architecture Polish              | 2026-02-20 |
-| v5.9.1  | Platform Quick Wins                         | 2026-02-20 |
-| v5.9.0  | VS Code API Adoption                        | 2026-02-19 |
-
-### v5.8.x Series (Q1 2026)
-
-| Version | Theme                              | Date       |
-| ------- | ---------------------------------- | ---------- |
-| v5.8.5  | Cognitive Architecture Enhancement | 2026-02-19 |
-| v5.8.4  | Secrets Management                 | 2026-02-19 |
-| v5.8.3  | Welcome Panel UI Polish            | 2026-02-17 |
-| v5.8.2  | @alex Personality (P2)             | 2026-02-16 |
-| v5.8.1  | @alex Tools + Files (P1)           | 2026-02-16 |
-| v5.8.0  | @alex Prompt Engine (P0)           | 2026-02-16 |
-
-### v5.7.x Series (Q1 2026)
-
-| Version | Theme                          | Date       |
-| ------- | ------------------------------ | ---------- |
-| v5.7.7  | Propose-to-Global Workflow     | 2026-02-15 |
-| v5.7.6  | Office Add-in Research         | 2026-02-15 |
-| v5.7.5  | Skill Intelligence             | 2026-02-15 |
-| v5.7.2  | Global Knowledge Maintenance   | 2026-02-15 |
-| v5.7.1  | Visual Identity + UI/UX Polish | 2026-02-15 |
-| v5.7.0  | Structural Consistency         | 2026-02-14 |
-
-### Earlier Versions
-
-| Version Range | Theme                          | Completion   |
-| ------------- | ------------------------------ | ------------ |
-| v5.6.0-v5.6.9 | Enterprise Systems Integration | Feb 2026     |
-| v5.5.0        | Model Intelligence             | Feb 2026     |
-| v5.4.x        | Text-to-Speech & Voice         | Feb 2026     |
-| v5.3.x        | Enterprise Readiness           | Feb 2026     |
-| v5.0.x-v5.2.0 | Team Scaling & UX              | Feb 2026     |
-| v4.0.x-v4.3.0 | Trust & Skills                 | Jan-Feb 2026 |
-| v3.6.0-v3.9.0 | Dawn → Awareness               | Jan 2026     |
-
-**Full History**: See `archive/roadmaps/ROADMAP-UNIFIED-V3.5-V5.3-COMPLETED.md`
-
-</details>
 
 ---
 

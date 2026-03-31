@@ -1,6 +1,7 @@
 ---
 name: content-safety-implementation
 description: Azure Content Safety API integration, multi-layer defense pipeline, output validation, and operational safety controls
+tier: standard
 metadata:
   version: 1.0.0
   category: security

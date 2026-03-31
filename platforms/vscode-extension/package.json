@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "7.0.1",
+  "version": "7.1.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -2233,7 +2233,7 @@
     "ts-node": "^10.9.2",
     "ts-unused-exports": "^9.0.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.4.5"
+    "typescript": "~6.0.2"
   },
   "dependencies": {
     "fs-extra": "^11.3.3",

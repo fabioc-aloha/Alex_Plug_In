@@ -1,6 +1,7 @@
 ---
 name: project-deployment
 description: Universal deployment patterns for any project type.
+tier: standard
 applyTo: '**/*release*,**/*deploy*,**/*publish*,**/package.json,**/pyproject.toml,**/*.csproj,**/Cargo.toml'
 ---
 

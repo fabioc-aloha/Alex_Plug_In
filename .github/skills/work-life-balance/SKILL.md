@@ -1,6 +1,7 @@
 ---
 name: work-life-balance
 description: Detect burnout signals and proactively support sustainable productivity.
+tier: extended
 applyTo: '**/*focus*,**/*session*,**/*goal*,**/*streak*,**/*break*,**/*health*'
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: airs-appropriate-reliance
 description: Domain knowledge for AI adoption measurement, psychometric instrument development, and appropriate reliance research
+tier: extended
 user-invokable: false
 applyTo: '**/*airs*,**/*reliance*,**/*adoption*,**/*utaut*,**/*psychometric*,**/*instrument*,**/*survey*,**/*scale*'
 ---

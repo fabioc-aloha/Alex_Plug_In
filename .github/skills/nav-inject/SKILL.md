@@ -1,6 +1,7 @@
 ---
 name: "nav-inject"
 description: "Inject cross-document navigation tables into multi-file Markdown documentation suites"
+tier: extended
 version: "1.0.0"
 ---
 

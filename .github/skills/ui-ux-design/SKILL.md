@@ -1,6 +1,7 @@
 ---
 name: ui-ux-design
 description: User interface design, user experience optimization, accessibility compliance, design systems
+tier: standard
 ---
 
 # UI/UX Design

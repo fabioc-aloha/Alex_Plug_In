@@ -1,6 +1,7 @@
 ---
 name: legal-compliance
 description: Legal research, contract analysis, regulatory compliance, and case law citation for legal professionals.
+tier: extended
 applyTo: '**/*legal*,**/*compliance*,**/*contract*,**/*regulation*,**/*law*,**/*attorney*,**/*litigation*'
 ---
 

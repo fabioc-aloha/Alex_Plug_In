@@ -1,6 +1,7 @@
 ---
 name: cognitive-load
 description: Don't overwhelm — chunk, scaffold, summarize first.
+tier: core
 applyTo: '**/*explain*,**/*teach*,**/*learn*,**/*help*'
 user-invokable: false
 ---

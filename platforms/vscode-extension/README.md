@@ -34,7 +34,7 @@ Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, 
 | -------------------- | -------------------------- | -------------------------------------------- |
 | **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
 | **Trust**            | Rebuild context every time | Consistency through shared history           |
-| **Skills**           | You re-prompt from scratch | 150 pre-built skills, inheritable            |
+| **Skills**           | You re-prompt from scratch | 158 pre-built skills, inheritable            |
 | **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
 | **Context**          | You re-explain every time  | Synapses map relationships automatically     |
 | **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
@@ -267,6 +267,31 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
+### What's New (v7.1.0 -- Excavation Edition)
+
+| Category                | Highlights                                                                                                           |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Prompt Intelligence** | PromptVariantRegistry (10 model families), priority-based context window scaling, conversation summarization         |
+| **Steering Awareness**  | Yield-aware handler using proposed `yieldRequested` API; cancellation checks between tool calls                      |
+| **Stream Enrichment**   | `streamWarning()`, `streamCognitiveTree()`, `streamProgress()`, `streamSafetyAlert()` with runtime feature detection |
+| **Session Trace**       | 200-event bounded trajectory logger: model requests, tool calls, handoffs, exportable summary                        |
+| **Quality Hooks**       | H10 (output secret scan, 11 patterns) and H13 (breaking change detector) in Pre/PostToolUse                          |
+| **Agent Handoffs**      | All 7 agents enriched with model overrides and persona-driven follow-ups                                             |
+| **TypeScript 6.0**      | Migrated to TS 6.0.2 with `moduleResolution: "bundler"`, clean compilation                                           |
+| **Skills**              | 158 skills classified into core (21), standard (85), extended (52) tiers; 17 domain groups                           |
+
+### What's New (v7.0.0 -- Working Together Edition)
+
+| Category           | Highlights                                                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| **Cross-Platform** | 88/93 parity items, 52 files audited, brew/winget pairing, macOS-native capabilities (sips, say, caffeinate, etc.) |
+| **PS to Node.js**  | brain-qa, validate-skills, audit-master-alex, and 9 more muscles ported to .cjs for universal execution            |
+| **User Memory**    | memory-curation skill, `/memory-audit` prompt, Meditation Phase 1.5 cross-project scan                             |
+| **MCP v1.1.0**     | 4 prompts + 6 resources exposed via cognitive tools MCP server                                                     |
+| **Welcome UI**     | Chat Memories button (Mind tab), Memory Audit button (Mission tab)                                                 |
+
+<details><summary>Previous releases (v6.x)</summary>
+
 ### What's New (v6.8.x)
 
 | Category         | Highlights                                                                                                    |
@@ -278,7 +303,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Quality**      | 8 automated quality gates, synapse integrity audit, heir sync drift detection                                 |
 | **Cognitive**    | Failure Pivot Protocol, Scope Clarification Protocol, token waste elimination                                 |
 
-### What's New (v6.5.0 — The Trust Release)
+### What's New (v6.5.0 -- The Trust Release)
 
 | Category           | Highlights                                                                                                   |
 | ------------------ | ------------------------------------------------------------------------------------------------------------ |
@@ -322,6 +347,8 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 - **hooks.json**: New in v6.5.0 — deployed automatically on initialize or upgrade
 - **Config files**: `user-profile.json`, `MASTER-ALEX-PROTECTED.json` preserved across upgrades
 - **Custom agents**: `.github/agents/` folder maintained with 7 specialist agents
+
+</details>
 
 </details>
 
@@ -889,13 +916,13 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (71 files)
+├── instructions/              # 📚 Procedural memory (77 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (50 files)
+├── prompts/                   # 📖 Episodic memory (56 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
@@ -944,131 +971,6 @@ Alex is built on **270+ academic sources** spanning 150+ years of research:
 - **Neuroscience**: Squire & Kandel declarative memory systems (2009)
 - **AI Safety**: Constitutional AI principles and alignment research
 - **Learning Psychology**: Bloom's taxonomy, spaced repetition, transfer learning
-
----
-
-## 🆕 What's New in v5.6.x (Stabilized)
-
-###  Skill Pull-Sync & Growth (v5.6.2-5.6.9)
-
-Skills grew from 92 → 150 with new acquisition and inheritance mechanisms:
-
-- **`/checkskills`** — Discover new skills available from Global Knowledge
-- **`/pullskill <id>`** — Install a skill into your project from GK
-- **`Alex: Inherit Skill from Global Knowledge`** — Multi-select batch inheritance
-- **31-phase Brain QA** — Comprehensive architecture health validation
-- **Trifecta model** — Core capabilities encoded across all 3 memory systems
-- **7 custom agents** — Alex, Researcher, Builder, Validator, Documentarian, Azure, M365
-- **Muscle scripts** — 24 execution scripts for audit, build, sync, and validation
-
-### 🔒 Release Automation & PII Safety (v5.6.4-5.6.8)
-
-Production-hardened release pipeline with zero PII leaks:
-
-- **`sync-architecture.js`** — Automated master→heir sync during `vscode:prepublish`
-- **3-layer PII protection** — `.gitignore` + `.vscodeignore` + sync script exclusions
-- **`validateHeirIntegrity()`** — Blocks publish if PII, master-only files, or master content detected
-- **Self-contained `.github/`** — Zero external path references in synapse files
-- **Persona detection fix** — Type-safe pattern matching eliminates false-positive DevOps scoring
-
----
-
-## 🆕 What's New in v5.5.0
-
-### 🧠 Model Intelligence
-
-Alex now adapts behavior based on the running LLM:
-
-- **`/model` command** — Full dashboard showing model tier, context capacity, and capabilities
-- **`/model <task>`** — Analyze any task and get model recommendations
-- **Task-Model Matching** — Cognitive tasks check if current model meets requirements
-- **Upgrade/Downgrade Advice** — Smart suggestions for cost optimization
-
-###  Automated Doc Count Validation
-
-- Dream protocol now validates documented counts against actual files
-- Reports drift for Procedural (28), Episodic (17), and Skills (116)
-
----
-
-## 🆕 What's New in v5.0.0
-
-### 🌐 Global Knowledge Infrastructure
-
-Cross-project knowledge sharing is now built-in:
-
-- **Slash commands** — `/knowledge`, `/saveinsight`, `/promote`, `/knowledgestatus`
-- **Agent-callable tools** — `global_knowledge`, `save_insight`, `promote_knowledge`, `knowledge_status`
-- **Team sharing** — Share your GK GitHub repo with team members for instant knowledge sync
-- **GK init integrated** — `Alex: Initialize Architecture` now scaffolds GK automatically
-
-### 🎯 Persona-Aware UX
-
-- **Auto-detection** — Detects 16 user personas from profile and workspace files
-- **Adaptive theming** — UI accent colors match detected persona
-- **Skill recommendations** — Suggests relevant skills based on persona
-
-### 🧠 Architecture Refinements
-
-- **Active Context** — Session-scoped persona, objective, and Focus Trifectas (3 skills for current work)
-- **LLM as Executive Function** — Claude/GPT as prefrontal cortex model
-- **Model tier awareness** — Warnings when Frontier models needed
-
----
-
-### Previous: v4.2.12
-
-<details>
-<summary>v4.2.12 Release Notes</summary>
-
-#### 🧠 Cognitive Symbiosis Paradigm
-
-Alex now embodies **Era 3** of AI-human interaction — from Tool → Assistant → **Partner**:
-
-- **LLM as Executive Function** — Claude/GPT serves as the prefrontal cortex orchestrating memory systems
-- **Model Tier Awareness** — Adaptive warnings when tasks need Frontier models (Opus/GPT-5.2)
-- **Partnership Equation** — `(Intent × Capability × Context) ÷ Friction`
-- **Neuroanatomical Diagrams** — Architecture now includes brain-analog Mermaid visualizations
-
-#### 🎙️ TTS v2.2 - Robust Speech Synthesis
-
-- **Chunking** — Splits long documents at paragraph/sentence boundaries
-- **Auto-summarization** — Offers to summarize documents over 5 minutes
-- **Retry with backoff** — 3 attempts with exponential backoff + jitter
-- **Speaker warmup** — 2-second delay for Bluetooth/USB speakers
-
-#### 🧠 Brain QA Skill
-
-31-phase cognitive architecture validation — now mandatory Step 0 in release preflight
-
-#### 💡 Smart Nudges
-
-Contextual reminders appear at the top of the Welcome View (max 2 at a time):
-
-- "Haven't dreamed in X days" - neural maintenance reminder
-- "X-day streak at risk!" - goal streak protection
-- "X broken synapses need repair" - health warnings
-- "Local changes not synced" - sync status nudges
-
-Each nudge has a one-click action button to resolve.
-
-</details>
-
-### ☁️ OneDrive Auto-Sync
-
-Export for M365 now auto-detects OneDrive and syncs directly:
-
-- Supports personal OneDrive and OneDrive for Business
-- Enable `alex.m365.autoSync` for automatic sync after Dream operations
-- Share knowledge seamlessly between VS Code and M365 Copilot
-
-### 🎯 Streamlined Welcome View
-
-- Reduced metrics from 6 to 4 (Health, Sync, Skills, Synapses)
-- Click metrics to open Health Dashboard
-- Removed niche actions (still in Command Palette)
-
-See the [Full Changelog](https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/CHANGELOG.md) for complete version history and release notes.
 
 ---
 
@@ -1186,6 +1088,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 **Alex Cognitive Architecture** — Your Trusted AI Partner for Any Job 🚀
 
-Built on 270+ academic sources | 150 skills | 40 trifectas
+Built on 270+ academic sources | 158 skills | 45 trifectas
 
 © 2026 CorreaX • AI That Learns How to Learn

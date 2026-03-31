@@ -1,6 +1,7 @@
 ---
 name: release-process
 description: Complete release automation for VS Code Marketplace publishing
+tier: standard
 disable-model-invocation: true
 ---
 

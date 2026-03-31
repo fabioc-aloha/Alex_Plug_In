@@ -1,6 +1,7 @@
 ---
 name: cross-cultural-collaboration
 description: '**Domain**: Multicultural team communication, cultural intelligence, global collaboration'
+tier: extended
 disableModelInvocation: true
 ---
 

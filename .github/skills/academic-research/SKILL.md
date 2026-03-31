@@ -1,6 +1,7 @@
 ---
 name: academic-research
 description: >-
+tier: extended
   Patterns for thesis writing, dissertations, research papers, literature reviews, scholarly work, and venue-specific
   publication drafting
 applyTo: >-

@@ -1,6 +1,7 @@
 ---
 name: "global-knowledge-sync"
 description: "Synchronize insights between local projects and the Alex Global Knowledge repository"
+tier: standard
 ---
 
 # Global Knowledge Sync Skill
