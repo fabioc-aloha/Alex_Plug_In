@@ -1,6 +1,7 @@
 ---
 name: journalism
 description: News writing, investigative reporting, source verification, editorial standards, and fact-checking for journalists.
+tier: extended
 applyTo: '**/*journal*,**/*news*,**/*reporter*,**/*editorial*,**/*press*,**/*investigat*,**/*fact-check*'
 ---
 

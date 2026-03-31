@@ -1,6 +1,7 @@
 ---
 name: "markdown-mermaid"
 description: "Clear documentation through visual excellence"
+tier: standard
 ---
 
 # Markdown & Mermaid

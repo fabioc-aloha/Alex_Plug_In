@@ -1,6 +1,7 @@
 ---
 name: "vscode-extension-patterns"
 description: "Reusable patterns for VS Code extension development."
+tier: core
 ---
 
 # VS Code Extension Patterns Skill

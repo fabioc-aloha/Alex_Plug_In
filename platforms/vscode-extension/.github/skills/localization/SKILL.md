@@ -1,6 +1,7 @@
 ---
 name: "localization"
 description: "**Domain**: Software localization, internationalization, multilingual application development"
+tier: extended
 ---
 
 # Localization & Internationalization (i18n/l10n)

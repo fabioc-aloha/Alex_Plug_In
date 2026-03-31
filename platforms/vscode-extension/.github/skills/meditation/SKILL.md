@@ -1,6 +1,7 @@
 ---
 name: meditation
 description: >-
+tier: standard
   Knowledge consolidation, memory integration, and guided meditation — the interactive counterpart to automated dream
   processing
 disable-model-invocation: true

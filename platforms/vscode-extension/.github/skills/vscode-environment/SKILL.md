@@ -1,6 +1,7 @@
 ---
 name: vscode-environment
 description: Optimal workspace setup for productivity.
+tier: standard
 applyTo: '**/.vscode/**,**/settings.json,**/launch.json,**/tasks.json,**/extensions.json'
 ---
 

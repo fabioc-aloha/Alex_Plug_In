@@ -1,6 +1,7 @@
 ---
 name: infrastructure-as-code
 description: '**Domain**: DevOps & Cloud Engineering'
+tier: standard
 ---
 
 # Infrastructure as Code Skill

@@ -1,6 +1,7 @@
 ---
 name: frustration-recognition
 description: Detect user frustration from conversational signals and respond with empathy, de-escalation, and practical support.
+tier: core
 applyTo: '**/*'
 user-invokable: false
 ---

@@ -1,6 +1,7 @@
 ---
 name: "md-to-word"
 description: "Convert Markdown with Mermaid diagrams to professional Word documents"
+tier: standard
 version: "2.0.0"
 ---
 

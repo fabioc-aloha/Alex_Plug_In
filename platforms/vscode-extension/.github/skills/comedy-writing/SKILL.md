@@ -1,6 +1,7 @@
 ---
 name: comedy-writing
 description: Joke structure, comedic timing, set construction, callback patterns, and audience engagement for comedy writers.
+tier: extended
 applyTo: '**/*comedy*,**/*standup*,**/*joke*,**/*humor*,**/*sketch*,**/*funny*,**/*satire*'
 ---
 

@@ -73,6 +73,14 @@
       "reason": "Research-first planning validates features against North Star before building — proven in v6.0.0 4-phase roadmap mapping",
       "when": "When task involves .github/skills/north star/SKILL.md",
       "yields": "north star alignment criteria"
+    },
+    {
+      "target": ".github/skills/architecture-audit/SKILL.md",
+      "type": "feeds",
+      "strength": 0.8,
+      "reason": "Competitive excavation methodology: research competitor code first, then audit own architecture for gaps — proven in v7.1.0 Copilot Chat excavation",
+      "when": "When analyzing competitor or reference implementations to improve own architecture",
+      "yields": "architecture audit gap analysis inputs"
     }
   ],
   "triggers": [

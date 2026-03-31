@@ -1,6 +1,7 @@
 ---
 name: data-storytelling
 description: "End-to-end data narrative construction -- three-act structure, Knaflic/Duarte methodology, audience-first framing, and orchestration across analysis, visualization, and dashboard skills"
+tier: standard
 applyTo: "**/*story*,**/*narrative*,**/*datastory*"
 ---
 

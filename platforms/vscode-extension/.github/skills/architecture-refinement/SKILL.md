@@ -1,6 +1,7 @@
 ---
 name: architecture-refinement
 description: >-
+tier: standard
   Meta-skill for maintaining and evolving Alex's cognitive architecture through deliberate documentation and pattern
   extraction.
 ---

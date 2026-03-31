@@ -1,6 +1,7 @@
 ---
 name: error-recovery-patterns
 description: What to do when things break.
+tier: core
 applyTo: '**/*error*,**/*exception*,**/*retry*,**/*fallback*,**/*recovery*'
 ---
 

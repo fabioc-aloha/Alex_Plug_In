@@ -1,6 +1,7 @@
 ---
 name: "ai-character-reference-generation"
 description: "Generate consistent visual character references across multiple scenarios using Flux and nano-banana-pro on Replicate"
+tier: standard
 ---
 
 # AI Character Reference Generation

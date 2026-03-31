@@ -1,6 +1,7 @@
 ---
 name: "skill-development"
 description: "Track desired capabilities and proactively acquire them through user collaboration"
+tier: standard
 ---
 
 # Skill Development

@@ -1,6 +1,7 @@
 ---
 name: "agent-debug-panel"
 description: "Debug skill/hook/agent loading issues using VS Code's Agent Debug Panel"
+tier: standard
 applyTo: "**/*debug*,**/*agent*,**/*skill*,**/*hook*,**/*instruction*"
 ---
 

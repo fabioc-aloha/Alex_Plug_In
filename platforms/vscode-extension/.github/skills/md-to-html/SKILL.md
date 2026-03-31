@@ -1,6 +1,7 @@
 ---
 name: "md-to-html"
 description: "Convert Markdown to standalone HTML pages with embedded CSS, images, and Mermaid diagrams"
+tier: standard
 version: "1.0.0"
 ---
 

@@ -2,38 +2,34 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/src/views/mindTabHtml.ts",
-    "platforms/vscode-extension/src/views/welcomeView.ts",
-    "platforms/vscode-extension/src/views/welcomeViewHtml.ts"
+    "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1774976082120
+      "scannedAt": 1774976513267
     },
     {
       "file": "alex_docs/vscode/PROMPT-OVERHAUL-PLAN.md",
       "todoCount": 7,
-      "scannedAt": 1774976082120
+      "scannedAt": 1774976513267
     },
     {
-      "file": "platforms/vscode-extension/README.md",
-      "todoCount": 1,
-      "scannedAt": 1774976082120
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1774976513267
     },
     {
-      "file": "alex_docs/WORKING-WITH-ALEX.md",
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-7.1.0.vsix",
       "todoCount": 1,
-      "scannedAt": 1774976082120
+      "scannedAt": 1774976513267
     },
     {
-      "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1774976082120
+      "scannedAt": 1774976513267
     }
   ],
-  "lastUpdated": 1774976082120
+  "lastUpdated": 1774976513267
 }

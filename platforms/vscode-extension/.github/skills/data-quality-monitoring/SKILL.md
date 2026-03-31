@@ -1,6 +1,7 @@
 ---
 name: data-quality-monitoring
 description: >-
+tier: standard
   Data pipeline quality assurance — anomaly detection, schema drift, null ratio monitoring, freshness checks,
   and safe-write protection for reliable data engineering
 applyTo: '**/*quality*,**/*anomal*,**/*baseline*,**/*schema-drift*,**/*data-valid*,**/*pipeline*'

@@ -1,6 +1,7 @@
 ---
 name: vscode-configuration-validation
 description: Validate VS Code extension manifest against runtime code usage
+tier: standard
 ---
 
 # VS Code Extension Configuration Validation

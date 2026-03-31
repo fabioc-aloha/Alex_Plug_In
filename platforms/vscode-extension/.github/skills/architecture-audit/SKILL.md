@@ -1,6 +1,7 @@
 ---
 name: architecture-audit
 description: Comprehensive **project** consistency review across code, documentation, diagrams, and configuration
+tier: standard
 ---
 
 # Architecture Audit

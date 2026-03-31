@@ -1,6 +1,7 @@
 ---
 name: mcp-development
 description: '**Domain**: AI Infrastructure'
+tier: standard
 user-invokable: false
 ---
 

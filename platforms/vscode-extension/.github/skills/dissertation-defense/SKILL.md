@@ -1,6 +1,7 @@
 ---
 name: dissertation-defense
 description: >-
+tier: extended
   Comprehensive preparation for doctoral dissertation defense including timeline management, presentation design, Q&A
   practice, mock sessions, and committee dynamics.
 applyTo: '**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*,**/*mock*,**/*q&a*'

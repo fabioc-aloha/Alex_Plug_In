@@ -1,6 +1,7 @@
 ---
 name: "global-knowledge"
 description: "Cross-project knowledge search, pattern recognition, and insight management — the long-term memory across all projects"
+tier: standard
 ---
 
 # Global Knowledge Skill

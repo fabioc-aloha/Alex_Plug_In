@@ -54,6 +54,15 @@ What am I missing?
 
 ---
 
+### Quick Install
+
+Install the Alex Cognitive Architecture extension directly in VS Code:
+
+- **Marketplace**: Search "Alex Cognitive Architecture" in the Extensions view
+- **Command line**: `code --install-extension fabioc-aloha.alex-cognitive-architecture`
+
+---
+
 ## 🎯 Prompting Patterns That Work
 
 ### 🎯 The CONTEXT-GOAL-CONSTRAINTS Pattern
@@ -743,6 +752,7 @@ The [mac](https://github.com/fabioc-aloha/mac) heir project has comprehensive ma
 
 ## 🆘 Getting Help
 
+- **Chat Customizations Editor**: Run `Chat: Open Chat Customizations` from the Command Palette to browse, create, and manage all of Alex's instructions, skills, agents, and prompts in a visual editor. This is the easiest way to understand what's loaded and create new trifectas.
 - **Documentation**: `Alex: Documentation` command
 - **Health Check**: `Alex: Health Dashboard` for system status
 - **Memory View**: `Alex: Memory Dashboard` for architecture visualization

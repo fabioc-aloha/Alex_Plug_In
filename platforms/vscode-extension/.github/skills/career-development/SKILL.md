@@ -1,6 +1,7 @@
 ---
 name: career-development
 description: Resume crafting, interview preparation, job search strategy, and professional growth planning.
+tier: extended
 applyTo: '**/*resume*,**/*cv*,**/*interview*,**/*job*,**/*career*,**/*cover-letter*,**/*portfolio*,**/*linkedin*'
 ---
 

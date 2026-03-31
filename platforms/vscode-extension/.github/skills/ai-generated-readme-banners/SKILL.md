@@ -1,6 +1,7 @@
 ---
 name: "ai-generated-readme-banners"
 description: "Create professional ultra-wide cinematic banners for GitHub READMEs using Flux and Ideogram models with typography options"
+tier: standard
 ---
 
 # AI-Generated README Banners

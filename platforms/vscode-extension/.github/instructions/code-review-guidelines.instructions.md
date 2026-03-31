@@ -5,7 +5,6 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 # Code Review Guidelines Procedural Memory
 
-
 ---
 
 ## Synapses
@@ -18,6 +17,14 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 ## Review Philosophy
 
+### Compilation Check Discipline
+
+**You MUST verify compilation succeeds before declaring any code task complete.**
+
+For TypeScript projects: run `npx tsc --noEmit` and confirm zero errors.
+For any project with tests: run the test suite and confirm zero failures.
+Do NOT skip this step. Do NOT assume "it should work." Verify.
+
 ### Goals of Code Review
 
 1. **Catch bugs** before they reach users
@@ -28,12 +35,12 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 ### Mindset
 
-| Reviewer | Author |
-|----------|--------|
-| Assume positive intent | Be open to feedback |
-| Ask questions, don't demand | Explain your reasoning |
-| Focus on the code, not the person | Don't take feedback personally |
-| Offer alternatives, not just criticism | Acknowledge good suggestions |
+| Reviewer                               | Author                         |
+| -------------------------------------- | ------------------------------ |
+| Assume positive intent                 | Be open to feedback            |
+| Ask questions, don't demand            | Explain your reasoning         |
+| Focus on the code, not the person      | Don't take feedback personally |
+| Offer alternatives, not just criticism | Acknowledge good suggestions   |
 
 ---
 
@@ -41,15 +48,15 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 ### Priority Order
 
-| Priority | Category | Examples |
-|----------|----------|----------|
-| 🔴 **Critical** | Correctness | Bugs, logic errors, edge cases |
-| 🔴 **Critical** | Security | Input validation, auth, secrets |
-| 🟠 **High** | Architecture | Patterns, structure, extensibility |
-| 🟠 **High** | Performance | N+1 queries, memory leaks, complexity |
-| 🟡 **Medium** | Maintainability | Readability, naming, comments |
-| 🟡 **Medium** | Testing | Coverage, edge cases, clarity |
-| 🟢 **Low** | Style | Formatting, conventions (ideally automated) |
+| Priority        | Category        | Examples                                    |
+| --------------- | --------------- | ------------------------------------------- |
+| 🔴 **Critical** | Correctness     | Bugs, logic errors, edge cases              |
+| 🔴 **Critical** | Security        | Input validation, auth, secrets             |
+| 🟠 **High**     | Architecture    | Patterns, structure, extensibility          |
+| 🟠 **High**     | Performance     | N+1 queries, memory leaks, complexity       |
+| 🟡 **Medium**   | Maintainability | Readability, naming, comments               |
+| 🟡 **Medium**   | Testing         | Coverage, edge cases, clarity               |
+| 🟢 **Low**      | Style           | Formatting, conventions (ideally automated) |
 
 ### Review Checklist
 
@@ -69,27 +76,27 @@ Use the comment prefix system defined in the [code-review SKILL.md](..\skills\co
 [blocking] This will throw a null reference exception if `user` is undefined.
 Suggestion: Add a null check or use optional chaining.
 
-[suggestion] Consider extracting this logic into a separate function 
+[suggestion] Consider extracting this logic into a separate function
 for reusability. Happy to approve either way.
 
-[question] I'm not familiar with this pattern. Can you explain why 
+[question] I'm not familiar with this pattern. Can you explain why
 we're using a factory here instead of direct instantiation?
 
 [nit] Typo: "recieve" → "receive"
 
-[praise] Really elegant solution to the caching problem! 
+[praise] Really elegant solution to the caching problem!
 I learned something new here.
 ```
 
 ### Tone Guidelines
 
-| ❌ Avoid | ✅ Prefer |
-|----------|-----------|
-| "This is wrong" | "This might cause X issue because..." |
-| "Why would you..." | "What was the reasoning for..." |
-| "Just do X" | "Have you considered X? It would help with..." |
-| "Obviously..." | "One approach that's worked well is..." |
-| No comment, just "Request changes" | Explain what needs to change and why |
+| ❌ Avoid                           | ✅ Prefer                                      |
+| ---------------------------------- | ---------------------------------------------- |
+| "This is wrong"                    | "This might cause X issue because..."          |
+| "Why would you..."                 | "What was the reasoning for..."                |
+| "Just do X"                        | "Have you considered X? It would help with..." |
+| "Obviously..."                     | "One approach that's worked well is..."        |
+| No comment, just "Request changes" | Explain what needs to change and why           |
 
 ---
 
@@ -106,15 +113,15 @@ I learned something new here.
 ### Handling Disagreements
 
 ```markdown
-Author: "I see your point, but I chose this approach because [reason]. 
+Author: "I see your point, but I chose this approach because [reason].
 Do you think that trade-off is acceptable, or should we discuss further?"
 
-Reviewer: "Good point, I hadn't considered [reason]. 
+Reviewer: "Good point, I hadn't considered [reason].
 Let's go with your approach. Approved!"
 
 -- OR --
 
-Reviewer: "I understand, but I'm still concerned about [issue]. 
+Reviewer: "I understand, but I'm still concerned about [issue].
 Can we sync for 5 minutes to discuss?"
 ```
 
@@ -144,11 +151,11 @@ Can we sync for 5 minutes to discuss?"
 
 ### Review States
 
-| State | When to Use |
-|-------|-------------|
-| **Approve** | Ready to merge, no blocking issues |
+| State               | When to Use                        |
+| ------------------- | ---------------------------------- |
+| **Approve**         | Ready to merge, no blocking issues |
 | **Request Changes** | Blocking issues that must be fixed |
-| **Comment** | Questions or non-blocking feedback |
+| **Comment**         | Questions or non-blocking feedback |
 
 ---
 
@@ -169,14 +176,14 @@ Before requesting review, author should:
 
 ## Trigger Phrases & Responses
 
-| User Says | Alex Response |
-|-----------|---------------|
-| "Review this" | "I'll review the changes. Let me check correctness, security, and architecture first, then move to maintainability." |
-| "Is this PR ready?" | "Let me run through the self-review checklist: description, tests, lint, no debug code..." |
-| "How should I respond to this feedback?" | "What's the reviewer's concern? Let's understand their perspective before deciding how to address it." |
-| "This review is harsh" | "Let's focus on the technical content. Is there valid feedback we should address? If the tone is problematic, that's a separate conversation." |
-| "Should I approve this?" | "Let's go through the checklist: correctness, security, architecture, tests. Any concerns in those areas?" |
-| "LGTM" | "If no blocking issues, approve with optional nits. If there are concerns, leave as comments rather than quick approval." |
+| User Says                                | Alex Response                                                                                                                                  |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Review this"                            | "I'll review the changes. Let me check correctness, security, and architecture first, then move to maintainability."                           |
+| "Is this PR ready?"                      | "Let me run through the self-review checklist: description, tests, lint, no debug code..."                                                     |
+| "How should I respond to this feedback?" | "What's the reviewer's concern? Let's understand their perspective before deciding how to address it."                                         |
+| "This review is harsh"                   | "Let's focus on the technical content. Is there valid feedback we should address? If the tone is problematic, that's a separate conversation." |
+| "Should I approve this?"                 | "Let's go through the checklist: correctness, security, architecture, tests. Any concerns in those areas?"                                     |
+| "LGTM"                                   | "If no blocking issues, approve with optional nits. If there are concerns, leave as comments rather than quick approval."                      |
 
 ---
 
@@ -185,6 +192,7 @@ Before requesting review, author should:
 ### Reviewing Your Own Code (Solo Dev)
 
 Even without a second reviewer:
+
 1. Take a break before self-review (fresh eyes)
 2. Use the checklist systematically
 3. Read the diff as if you didn't write it
@@ -201,6 +209,7 @@ Even without a second reviewer:
 ### Reviewing Security-Sensitive Code
 
 Escalate to senior reviewer if:
+
 - Authentication/authorization changes
 - Cryptography
 - PII handling
@@ -211,18 +220,18 @@ Escalate to senior reviewer if:
 
 For safety-critical, mission-critical, or high-reliability projects, apply NASA/JPL Power of 10 rules during review:
 
-| Rule | Check For | Blocking? |
-|------|-----------|----------|
-| **R1** Bounded Recursion | Recursive functions without `maxDepth` | 🔴 Yes |
-| **R2** Fixed Loop Bounds | `while` loops without `MAX_ITERATIONS` counter | 🔴 Yes |
-| **R3** Bounded Collections | Arrays/maps without size limits | 🔴 Yes |
-| **R4** Function Size | Functions > 60 lines | 🟠 High |
-| **R5** Assertions | Critical paths without `assert()` calls | 🟠 High |
-| **R6** Minimal Scope | Variables declared far from use | 🟡 Medium |
-| **R7** Return Handling | Unchecked return values | 🟡 Medium |
-| **R8** Nesting Depth | > 4 levels of nesting | 🟠 High |
-| **R9** Defensive Access | `obj.prop.prop` without optional chaining | 🟡 Medium |
-| **R10** Strict Compilation | Compiler warnings present | 🟡 Medium |
+| Rule                       | Check For                                      | Blocking? |
+| -------------------------- | ---------------------------------------------- | --------- |
+| **R1** Bounded Recursion   | Recursive functions without `maxDepth`         | 🔴 Yes    |
+| **R2** Fixed Loop Bounds   | `while` loops without `MAX_ITERATIONS` counter | 🔴 Yes    |
+| **R3** Bounded Collections | Arrays/maps without size limits                | 🔴 Yes    |
+| **R4** Function Size       | Functions > 60 lines                           | 🟠 High   |
+| **R5** Assertions          | Critical paths without `assert()` calls        | 🟠 High   |
+| **R6** Minimal Scope       | Variables declared far from use                | 🟡 Medium |
+| **R7** Return Handling     | Unchecked return values                        | 🟡 Medium |
+| **R8** Nesting Depth       | > 4 levels of nesting                          | 🟠 High   |
+| **R9** Defensive Access    | `obj.prop.prop` without optional chaining      | 🟡 Medium |
+| **R10** Strict Compilation | Compiler warnings present                      | 🟡 Medium |
 
 **Reference**: `.github/instructions/nasa-code-standards.instructions.md`
 
@@ -234,22 +243,22 @@ For safety-critical, mission-critical, or high-reliability projects, apply NASA/
 
 ### Reviewer Anti-Patterns
 
-| ❌ Pattern | Why It's Bad |
-|------------|--------------|
-| Rubber-stamping | Bugs slip through |
-| Bikeshedding | Wastes time on trivia |
-| Gatekeeping | Blocks progress unnecessarily |
-| Moving goalposts | Frustrates authors |
-| No explanation | Author can't learn or respond |
+| ❌ Pattern       | Why It's Bad                  |
+| ---------------- | ----------------------------- |
+| Rubber-stamping  | Bugs slip through             |
+| Bikeshedding     | Wastes time on trivia         |
+| Gatekeeping      | Blocks progress unnecessarily |
+| Moving goalposts | Frustrates authors            |
+| No explanation   | Author can't learn or respond |
 
 ### Author Anti-Patterns
 
-| ❌ Pattern | Why It's Bad |
-|------------|--------------|
-| Huge PRs | Hard to review effectively |
-| No description | Reviewer lacks context |
-| Ignoring feedback | Same issues will recur |
-| Taking it personally | Damages collaboration |
+| ❌ Pattern                  | Why It's Bad                 |
+| --------------------------- | ---------------------------- |
+| Huge PRs                    | Hard to review effectively   |
+| No description              | Reviewer lacks context       |
+| Ignoring feedback           | Same issues will recur       |
+| Taking it personally        | Damages collaboration        |
 | "It works" as justification | Correctness isn't everything |
 
 ---
@@ -258,14 +267,14 @@ For safety-critical, mission-critical, or high-reliability projects, apply NASA/
 
 Track if you want data on review health:
 
-| Metric | Target | Warning Sign |
-|--------|--------|--------------|
-| Time to first review | < 24 hours | > 48 hours consistently |
-| Review cycles | 1-2 rounds | > 4 rounds regularly |
-| PR size | < 400 lines | > 1000 lines regularly |
-| Comments per PR | 2-10 | 0 (rubber stamp) or 50+ (bikeshed) |
+| Metric               | Target      | Warning Sign                       |
+| -------------------- | ----------- | ---------------------------------- |
+| Time to first review | < 24 hours  | > 48 hours consistently            |
+| Review cycles        | 1-2 rounds  | > 4 rounds regularly               |
+| PR size              | < 400 lines | > 1000 lines regularly             |
+| Comments per PR      | 2-10        | 0 (rubber stamp) or 50+ (bikeshed) |
 
 ---
 
-*Last Updated: 2026-01-23*
-*This procedural memory ensures code reviews are constructive, thorough, and efficient*
+_Last Updated: 2026-01-23_
+_This procedural memory ensures code reviews are constructive, thorough, and efficient_

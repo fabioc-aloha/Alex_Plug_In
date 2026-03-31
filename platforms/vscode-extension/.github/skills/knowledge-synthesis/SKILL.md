@@ -1,6 +1,7 @@
 ---
 name: "knowledge-synthesis"
 description: "Cross-project pattern recognition — abstract, generalize, connect, store at the highest true level"
+tier: standard
 applyTo: "**/*knowledge*,**/*insight*,**/*pattern*,**/*global*"
 ---
 

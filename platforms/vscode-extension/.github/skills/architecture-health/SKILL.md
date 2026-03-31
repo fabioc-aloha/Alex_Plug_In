@@ -1,6 +1,7 @@
 ---
 name: "architecture-health"
 description: "Diagnose cognitive architecture health — synapse integrity, memory balance, connection density, and drift detection"
+tier: standard
 ---
 
 # Architecture Health Skill

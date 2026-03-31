@@ -1,6 +1,7 @@
 ---
 name: "md-to-eml"
 description: "Convert Markdown to RFC 5322 email (.eml) with inline CSS and CID images"
+tier: extended
 version: "1.0.0"
 ---
 

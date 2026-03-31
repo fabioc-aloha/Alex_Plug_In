@@ -1,6 +1,7 @@
 ---
 name: correax-brand
 description: CorreaX visual design system — color tokens, typography, banner patterns, and component architecture
+tier: extended
 triggerPhrases:
   [
     "design system",
