@@ -99,3 +99,21 @@ Shipped v7.0.0 "Working Together Edition" to the VS Code Marketplace. This is th
 - **ROADMAP cleanup**: Removed 4 completed Next Actions (Converter UI, Marketplace README, Sync Script, Quality Gate), promoted M365 ATK to Priority 1
 - **Status table**: 23 open items (14 v7.1.0 features, 4 blocked, 1 gated, 3 conditional, 1 next action)
 - **Published v7.0.0**: Live on marketplace, PAT refreshed (old one expired with 401)
+
+## v7.0.1 Hotfix (meditation #3)
+
+- **Root cause**: VSIX was packaged via `npx vsce package` before the Welcome UI button code was added to mindTabHtml.ts and missionTabHtml.ts. The commit included both the buttons and the VSIX, but the VSIX binary was stale.
+- **Fix**: Bumped to v7.0.1 (package.json, package-lock.json, CHANGELOG, copilot-instructions, ROADMAP), rebuilt VSIX, published to marketplace.
+- **Lesson**: Always verify code changes are complete BEFORE running `vsce package`. The packaging step freezes the build; code added after packaging won't be in the VSIX.
+- **Commits**: `180bf14` (v7.0.0 release), `3a2b5de` (v7.0.1 hotfix)
+
+## Final Session State
+
+| Metric | Value |
+|--------|-------|
+| Version | 7.0.1 |
+| Commits | 58ca9c0 (LLM-friendly), 180bf14 (v7.0.0), 3a2b5de (v7.0.1) |
+| Tests | 231 passing |
+| Quality Gates | 8/8 |
+| Marketplace | v7.0.1 live |
+| ROADMAP | v7.1.0 Intelligence Edition planned (Q2 2026) |
