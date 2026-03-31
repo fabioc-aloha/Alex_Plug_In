@@ -1,43 +1,35 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/agents/alex-azure.agent.md",
-    "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
-    "alex_docs/WORKING-WITH-ALEX.md",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/chat/handlers/coreHandlers.ts",
-    "platforms/vscode-extension/src/chat/handlers/workflowHandlers.ts",
-    "platforms/vscode-extension/src/chat/participant.ts"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/vscode/PROMPT-OVERHAUL-PLAN.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1774974195563
+      "scannedAt": 1774974608437
     },
     {
-      "file": "alex_docs/vscode/EXCAVATION-PLAN.md",
-      "todoCount": 3,
-      "scannedAt": 1774974195563
+      "file": "alex_docs/vscode/PROMPT-OVERHAUL-PLAN.md",
+      "todoCount": 7,
+      "scannedAt": 1774974608437
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1774974195563
+      "scannedAt": 1774974608437
     },
     {
       "file": "alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1774974195563
+      "scannedAt": 1774974608437
     },
     {
       "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
       "todoCount": 1,
-      "scannedAt": 1774974195563
+      "scannedAt": 1774974608437
     }
   ],
-  "lastUpdated": 1774974195563
+  "lastUpdated": 1774974608437
 }
