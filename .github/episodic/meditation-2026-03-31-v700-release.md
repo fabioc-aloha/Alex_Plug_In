@@ -109,11 +109,11 @@ Shipped v7.0.0 "Working Together Edition" to the VS Code Marketplace. This is th
 
 ## Final Session State
 
-| Metric | Value |
-|--------|-------|
-| Version | 7.0.1 |
-| Commits | 58ca9c0 (LLM-friendly), 180bf14 (v7.0.0), 3a2b5de (v7.0.1) |
-| Tests | 231 passing |
-| Quality Gates | 8/8 |
-| Marketplace | v7.0.1 live |
-| ROADMAP | v7.1.0 Intelligence Edition planned (Q2 2026) |
+| Metric        | Value                                                      |
+| ------------- | ---------------------------------------------------------- |
+| Version       | 7.0.1                                                      |
+| Commits       | 58ca9c0 (LLM-friendly), 180bf14 (v7.0.0), 3a2b5de (v7.0.1) |
+| Tests         | 231 passing                                                |
+| Quality Gates | 8/8                                                        |
+| Marketplace   | v7.0.1 live                                                |
+| ROADMAP       | v7.1.0 Intelligence Edition planned (Q2 2026)              |

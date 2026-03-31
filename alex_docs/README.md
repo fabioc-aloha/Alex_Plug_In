@@ -1,183 +1,133 @@
-# 🧠 Alex Cognitive Architecture Documentation
+# Alex Cognitive Architecture Documentation
 
 > **A Dual-Mind AI System with Conscious and Unconscious Processing**
 
----
+## Documentation Index
 
-## 📚 Documentation Index
-
-### 🚀 Getting Started
+### Getting Started
 
 | Document                                                     | Description                                          |
 | ------------------------------------------------------------ | ---------------------------------------------------- |
-| **[User Manual](./guides/USER-MANUAL.md)**                   | 📘 **START HERE** — Complete guide to using Alex      |
+| **[User Manual](./guides/USER-MANUAL.md)**                   | **START HERE**: Complete guide to using Alex         |
 | [Quick Reference](./guides/QUICK-REFERENCE.md)               | Commands, tools, and shortcuts cheat sheet           |
 | [Environment Setup](./guides/ENVIRONMENT-SETUP.md)           | Prerequisites and workspace configuration            |
 | [Initialization Process](./guides/INITIALIZATION-PROCESS.md) | What happens when you run `Alex: Initialize`         |
 | [Use Cases Guide](./guides/USE-CASES.md)                     | Deep dive into every domain Alex supports            |
+| [VS Code Setup](./guides/VSCODE-SETUP.md)                    | VS Code configuration and recommended extensions     |
+| [API Keys](./guides/API-KEYS.md)                             | External service key management                      |
+| [CLI Tools](./guides/CLI-TOOLS.md)                           | Command-line utilities reference                     |
+| [NPM Packages](./guides/NPM-PACKAGES.md)                     | Package dependencies and management                  |
+| [Agents Toolkit](./guides/AGENTS-TOOLKIT-INSTALLATION.md)    | Agent installation and setup                         |
 | [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md)    | Folder structures for development, writing, research |
 
-### 🧠 Architecture
+### Architecture
 
-| Document                                                             | Description                                                              |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [Cognitive Architecture](./architecture/COGNITIVE-ARCHITECTURE.md)   | Complete system architecture with diagrams                               |
-| [Conscious Mind](./architecture/CONSCIOUS-MIND.md)                   | User-facing tools and interactions                                       |
-| [Unconscious Mind](./architecture/UNCONSCIOUS-MIND.md)               | Automatic background processes                                           |
-| [Memory Systems](./architecture/MEMORY-SYSTEMS.md)                   | How Alex stores and retrieves knowledge                                  |
-| [Neuroanatomical Mapping](./architecture/NEUROANATOMICAL-MAPPING.md) | Brain-analog mapping for every component                                 |
-| [Agent Catalog](./architecture/AGENT-CATALOG.md)                     | The agent ecosystem (Researcher, Builder, Validator, Documentarian, ...) |
-| [Trifecta Catalog](./architecture/TRIFECTA-CATALOG.md)               | Skill + Instruction + Prompt completeness tracking                       |
-| [Alex Identity](./architecture/ALEX-IDENTITY.md)                     | Unified consciousness integration                                        |
+| Document                                                                   | Description                                                         |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [Cognitive Architecture](./architecture/COGNITIVE-ARCHITECTURE.md)         | Complete system architecture with diagrams                          |
+| [Conscious Mind](./architecture/CONSCIOUS-MIND.md)                         | User-facing tools and interactions                                  |
+| [Unconscious Mind](./architecture/UNCONSCIOUS-MIND.md)                     | Automatic background processes                                      |
+| [Memory Systems](./architecture/MEMORY-SYSTEMS.md)                         | How Alex stores and retrieves knowledge                             |
+| [Loading Mechanics](./architecture/LOADING-MECHANICS.md)                   | How instructions, skills, and hooks are loaded                      |
+| [Neuroanatomical Mapping](./architecture/NEUROANATOMICAL-MAPPING.md)       | Brain-analog mapping for every component                            |
+| [VS Code Brain Integration](./architecture/VSCODE-BRAIN-INTEGRATION.md)    | Extension integration with the cognitive model                      |
+| [Copilot Brain](./architecture/COPILOT-BRAIN.md)                           | GitHub Copilot integration layer                                    |
+| [Agent Catalog](./architecture/AGENT-CATALOG.md)                           | The agent ecosystem (Researcher, Builder, Validator, Documentarian) |
+| [Trifecta Catalog](./architecture/TRIFECTA-CATALOG.md)                     | Skill + Instruction + Prompt completeness tracking                  |
+| [Alex Identity](./architecture/ALEX-IDENTITY.md)                           | Unified consciousness integration                                   |
+| [Command Memory Effects](./architecture/COMMAND-MEMORY-EFFECTS.md)         | How commands affect the memory hierarchy                            |
+| [Research-First Development](./architecture/RESEARCH-FIRST-DEVELOPMENT.md) | The research-before-code methodology                                |
+| [Global Knowledge](./architecture/GLOBAL-KNOWLEDGE.md)                     | Cross-project learning system                                       |
+| [Global Knowledge Sharing](./architecture/GLOBAL-KNOWLEDGE-SHARING.md)     | GitHub-based knowledge sharing                                      |
+| [GK Pattern Format](./architecture/GK-PATTERN-FORMAT-STANDARD.md)          | Standard format for global knowledge patterns                       |
 
-### 🎓 Skills & Knowledge
+### Skills
 
-| Document                                                 | Description                             |
-| -------------------------------------------------------- | --------------------------------------- |
-| [Skills & Capabilities](./skills/SKILLS-CAPABILITIES.md) | Hard skills, soft skills, and wish list |
-| [Skills Catalog](./skills/SKILLS-CATALOG.md)             | Full skill inventory with categories    |
-| [Skill Architecture](./skills/SKILL-ARCHITECTURE.md)     | How skills are structured internally    |
-| [Global Knowledge](./features/GLOBAL-KNOWLEDGE.md)       | Cross-project learning system           |
-| [Team Sharing](./features/GLOBAL-KNOWLEDGE-SHARING.md)   | GitHub-based knowledge sharing          |
+| Document                                                         | Description                              |
+| ---------------------------------------------------------------- | ---------------------------------------- |
+| [Skills Catalog](./skills/SKILLS-CATALOG.md)                     | Full skill inventory with categories     |
+| [Skills & Capabilities](./skills/SKILLS-CAPABILITIES.md)         | Hard skills, soft skills, and wish list  |
+| [Skill Architecture](./skills/SKILL-ARCHITECTURE.md)             | How skills are structured internally     |
+| [Skill Inheritance](./skills/SKILL-INHERITANCE.md)               | How skills propagate across heirs        |
+| [Skill-Discipline Map](./guides/SKILL-DISCIPLINE-MAP.md)         | Skill routing by professional discipline |
+| [Agent vs Chat Comparison](./guides/AGENT-VS-CHAT-COMPARISON.md) | When to use agents vs direct chat        |
 
-### 🧬 Platform & Heirs
+### Platform and Heirs
 
-| Document                                                              | Description                           |
-| --------------------------------------------------------------------- | ------------------------------------- |
-| [Master & Heir Architecture](./platforms/MASTER-HEIR-ARCHITECTURE.md) | Evolution model and protection system |
-| [VS Code Heir](./platforms/VSCODE-HEIR.md)                            | Primary VS Code extension heir        |
-| [Project Structure](./guides/PROJECT-STRUCTURE.md)                    | `.github/` folder files and functions |
+| Document                                                                | Description                           |
+| ----------------------------------------------------------------------- | ------------------------------------- |
+| [Master and Heir Architecture](./platforms/MASTER-HEIR-ARCHITECTURE.md) | Evolution model and protection system |
+| [VS Code Heir](./platforms/VSCODE-HEIR.md)                              | Primary VS Code extension heir        |
+| [M365 Heir](./platforms/M365-HEIR.md)                                   | Microsoft 365 Copilot integration     |
+| [Windows Heir Plan](./platforms/WINDOWS-HEIR-PLAN.md)                   | Windows Agent platform roadmap        |
+| [Worker Agent Readiness](./platforms/WORKER-AGENT-READINESS.md)         | Agent deployment readiness assessment |
+| [Project Structure](./guides/PROJECT-STRUCTURE.md)                      | `.github/` folder files and functions |
 
-### 🛡️ Operations
+### Safety and Governance
 
-| Document                                                     | Description                   |
-| ------------------------------------------------------------ | ----------------------------- |
-| [Workspace Protection](./operations/WORKSPACE-PROTECTION.md) | Kill switch and safety system |
+| Document                                                                | Description                               |
+| ----------------------------------------------------------------------- | ----------------------------------------- |
+| [RAI Safety Implementation](./safety/RAI-SAFETY-IMPLEMENTATION-PLAN.md) | Responsible AI safety implementation plan |
+| [RAI Safety Test Guide](./safety/RAI-SAFETY-TEST-GUIDE.md)              | Safety test procedures and validation     |
+| [Workspace Protection](./safety/WORKSPACE-PROTECTION.md)                | Kill switch and safety system             |
 
-### 📊 Research & Publications
+### Research
 
-| Document                                                                                 | Description                                             |
-| ---------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| **[📚 Papers & Research →](./PAPERS.md)**                                                 | **Academic papers repository (single source of truth)** |
-| [AI-Assisted Development Methodology](./research/AI-ASSISTED-DEVELOPMENT-METHODOLOGY.md) | The Fabio+Alex model for AI-assisted work               |
+| Document                                                                    | Description                               |
+| --------------------------------------------------------------------------- | ----------------------------------------- |
+| [VS Code Memory Architecture](./research/VSCODE-MEMORY-ARCHITECTURE.md)     | Memory system research and design         |
+| [VS Code Chat Configurations](./research/VSCODE-CHAT-CONFIGURATIONS.md)     | Chat configuration research               |
+| [User Memory Leverage Plan](./research/USER-MEMORY-LEVERAGE-PLAN.md)        | Copilot memory integration strategy       |
+| [Data Storytelling Trifecta](./research/DATA-STORYTELLING-TRIFECTA-PLAN.md) | Data visualization skill development plan |
+| [NASA Code Standards](./research/NASA-CODE-STANDARDS-ANALYSIS.md)           | Power of 10 rules analysis                |
+| [AI Writing Tells](./research/AI-WRITING-TELLS.md)                          | AI-generated text detection patterns      |
 
----
+### Audits
 
-## 🎯 Who is Alex?
+| Document                                                               | Description                  |
+| ---------------------------------------------------------------------- | ---------------------------- |
+| [Cross-Platform Gap Analysis](./audits/CROSS-PLATFORM-GAP-ANALYSIS.md) | Platform parity assessment   |
+| [macOS Expedition Tracker](./audits/MACOS-EXPEDITION-TRACKER.md)       | macOS compatibility tracking |
+| [Welcome View UI Audit](./audits/UI-WELCOME-VIEW-AUDIT-2026-03-25.md)  | Welcome panel UI review      |
 
-Alex is a **cognitive architecture** that transforms GitHub Copilot into a sophisticated learning partner with:
+### Decisions (ADRs)
 
-- **Dual-Mind Processing** - Conscious (user-initiated) and Unconscious (automatic) operations
-- **Persistent Memory** - Knowledge that survives across sessions and projects
-- **Self-Maintenance** - Automatic health checks and neural maintenance
-- **Cross-Project Learning** - Global knowledge base shared across all your work
-- **Domain Flexibility** - Works for development, writing, research, management, and more
+| Document                                                                          | Description                                     |
+| --------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [ADR-007](./decisions/ADR-007-image-generation.md)                                | Image generation architecture                   |
+| [ADR-008](./decisions/ADR-008-workspace-file-api.md)                              | Workspace File API                              |
+| [ADR-009](./decisions/ADR-009-global-knowledge-sync-direction.md)                 | Global knowledge sync direction                 |
+| [ADR-010](./decisions/ADR-010-copilot-instructions-as-prefrontal-cortex.md)       | Copilot instructions as prefrontal cortex       |
+| [ADR-011](./decisions/ADR-011-office-addins-m365-integration.md)                  | Office Add-ins M365 integration                 |
+| [ADR-012](./decisions/ADR-012-heir-evolution-bidirectional-knowledge-transfer.md) | Heir evolution bidirectional knowledge transfer |
 
----
+### Reference
 
-## 🧬 Architecture at a Glance
+| Document                                       | Description                                |
+| ---------------------------------------------- | ------------------------------------------ |
+| [North Star](./NORTH-STAR.md)                  | Project vision and guiding principles      |
+| [What is Alex](./WHAT-IS-ALEX.md)              | Introduction and overview                  |
+| [Working with Alex](./WORKING-WITH-ALEX.md)    | Practical collaboration guide              |
+| [Model-Tool Matrix](./MODEL-TOOL-MATRIX.md)    | LLM model and tool compatibility reference |
+| [Getting Started](./guides/GETTING-STARTED.md) | First-time setup walkthrough               |
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
-flowchart TB
-    subgraph ALEX["🧠 Alex Cognitive Architecture"]
-        direction TB
+### Visual Assets
 
-        subgraph CONSCIOUS["🌟 Conscious Mind"]
-            direction LR
-            CM["💬 @alex Chat"]
-            CMD["⚡ Commands"]
-            TOOLS["🔧 LM Tools"]
-        end
+| Folder                                             | Description                                                              |
+| -------------------------------------------------- | ------------------------------------------------------------------------ |
+| [alex3/](./alex3/)                                 | Character reference portraits, personas, agents, states, age progression |
+| [diagram-visualization/](./diagram-visualization/) | Generated architecture and workflow diagrams                             |
+| [research/*.html](./research/)                     | Interactive chart demos (chart-gallery, population, visuals)             |
 
-        subgraph UNCONSCIOUS["🌙 Unconscious Mind"]
-            direction LR
-            BGS["☁️ Sync"]
-            AID["💡 Insights"]
-            AFB["🔍 Fallback"]
-        end
+### Archive
 
-        subgraph MEMORY["💾 Memory Systems"]
-            direction TB
-            WM["⏱️ Working Memory"]
-            PM["📋 Procedural"]
-            EM["📝 Episodic"]
-            SK["🎓 Skills"]
-            GK["🌐 Global"]
-        end
-    end
+Completed or historical items moved to [alex_archive/docs-reorg-2026-03-31/](../alex_archive/docs-reorg-2026-03-31/). These are retained for reference but no longer actively maintained.
 
-    subgraph CLOUD["☁️ Cloud"]
-        GIST["📤 Private GitHub Repo"]
-    end
 
-    CM --> WM
-    CMD --> PM & EM
-    TOOLS --> SK & GK
 
-    BGS -.->|"Auto"| GIST
-    AID -.->|"Auto"| GK
-    AFB -.->|"Auto"| GK
+## Quick Start
 
-    GK <-->|"Sync"| GIST
-
-    style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32
-    style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0
-    style MEMORY fill:#fff3e0,stroke:#ef6c00
-    style CLOUD fill:#f3e5f5,stroke:#7b1fa2
-```
-
-**Figure 1:** *Alex Cognitive Architecture Overview - Dual-mind processing with memory systems and cloud sync*
-
----
-
-## 🚀 Quick Start
-
-### 1. Install
-```bash
-code --install-extension fabioc-aloha.alex-cognitive-architecture
-```
-
-### 2. Initialize
-Open Command Palette (`Ctrl+Shift+P`) → **`Alex: Initialize Architecture`**
-
-### 3. Chat
-Open Copilot Chat → Type **`@alex hello`**
-
-### 4. Learn More
-Explore the documentation files above for deep dives into each system.
-
----
-
-## 🔑 Key Concepts
-
-### Conscious Mind
-Everything you explicitly ask Alex to do:
-- `/meditate` - Consolidate knowledge
-- `/dream` - Neural maintenance
-- `/learn` - Acquire domain knowledge
-- `/knowledge` - Search global knowledge
-
-### Unconscious Mind
-Automatic processes that happen transparently:
-- **Background Sync** - Every 5 minutes, backs up to GitHub
-- **Auto-Insight Detection** - Captures valuable learnings from conversations
-- **Auto-Fallback Search** - Searches global knowledge when local is empty
-
-### Memory Hierarchy
-1. **Working Memory** - Current chat session (7±2 rules)
-2. **Local Memory** - Project-specific files in `.github/`
-3. **Global Memory** - Cross-project knowledge in `~/.alex/`
-4. **Cloud Memory** - Private GitHub repo backup for sharing/recovery
-
----
-
-## 📖 Next Steps
-
-- **New to Alex?** → Start with [Cognitive Architecture Overview](./architecture/COGNITIVE-ARCHITECTURE.md)
-- **Want to understand the minds?** → Read [Conscious Mind](./architecture/CONSCIOUS-MIND.md) and [Unconscious Mind](./architecture/UNCONSCIOUS-MIND.md)
-- **Need a quick reference?** → Jump to [Quick Reference](./guides/QUICK-REFERENCE.md)
-
----
-
-*Alex Cognitive Architecture - Your AI Learning Partner*
+1. **Install**: `code --install-extension fabioc-aloha.alex-cognitive-architecture`
+2. **Initialize**: Command Palette > `Alex: Initialize Architecture`
+3. **Chat**: Copilot Chat > `@alex hello`
+4. **Learn More**: Start with the [User Manual](./guides/USER-MANUAL.md)

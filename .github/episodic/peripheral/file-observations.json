@@ -1,38 +1,17 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json"
+    "github/episodic/meditation-2026-03-31-v700-release.md",
+    "alex_docs/ALEX-FIRSTS.md -> alex_archive/docs-reorg-2026-03-31/ALEX-FIRSTS.md",
+    "alex_docs/operations/RCA-fence-bug.md -> alex_archive/docs-reorg-2026-03-31/RCA-fence-bug.md",
+    "alex_docs/operations/WORK-LIFE-BALANCE.md -> alex_archive/docs-reorg-2026-03-31/WORK-LIFE-BALANCE.md",
+    "alex_docs/research/adv_visuals.html -> alex_archive/docs-reorg-2026-03-31/adv_visuals.html",
+    "alex_docs/snippets/correax-mermaid-theme.md -> alex_archive/docs-reorg-2026-03-31/correax-mermaid-theme.md",
+    "alex_docs/README.md",
+    "alex_docs/features/GLOBAL-KNOWLEDGE-SHARING.md -> alex_docs/architecture/GLOBAL-KNOWLEDGE-SHARING.md",
+    "alex_docs/features/GLOBAL-KNOWLEDGE.md -> alex_docs/architecture/GLOBAL-KNOWLEDGE.md",
+    "alex_docs/operations/RAI-SAFETY-IMPLEMENTATION-PLAN.md -> alex_docs/safety/RAI-SAFETY-IMPLEMENTATION-PLAN.md"
   ],
-  "todoHotspots": [
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1774948639111
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-7.0.1.vsix",
-      "todoCount": 2,
-      "scannedAt": 1774948639111
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1774948639111
-    },
-    {
-      "file": "ROADMAP-UNIFIED.md",
-      "todoCount": 2,
-      "scannedAt": 1774948639111
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1774948639111
-    }
-  ],
-  "lastUpdated": 1774948639111
+  "todoHotspots": [],
+  "lastUpdated": 1774949667475
 }

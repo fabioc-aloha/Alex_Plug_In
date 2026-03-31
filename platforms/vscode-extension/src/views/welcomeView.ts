@@ -362,7 +362,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             'AGENT-CATALOG': 'alex_docs/architecture/AGENT-CATALOG.md',
             'TRIFECTA-CATALOG': 'alex_docs/architecture/TRIFECTA-CATALOG.md',
             'MASTER-ALEX-PROTECTED': '.github/config/MASTER-ALEX-PROTECTED.json',
-            'HEIR-ARCHITECTURE': 'alex_docs/platforms/HEIR-ARCHITECTURE.md',
+            'HEIR-ARCHITECTURE': 'alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md',
             'RESEARCH-FIRST': 'alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md',
             'SKILL-DISCIPLINE-MAP': 'alex_docs/guides/SKILL-DISCIPLINE-MAP.md',
           };
