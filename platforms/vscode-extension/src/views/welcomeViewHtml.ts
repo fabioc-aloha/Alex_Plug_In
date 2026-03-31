@@ -4,27 +4,28 @@
  * Shell: interfaces, shared CSS, header, tab bar, client JS.
  * Tab content extracted to: missionTabHtml, skillStoreTabHtml, mindTabHtml, docsTabHtml
  */
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
+import { HealthCheckResult, HealthStatus } from "../shared/healthCheck";
 import {
-  HealthCheckResult,
-  HealthStatus,
-} from '../shared/healthCheck';
-import {
-    PersonaDetectionResult,
+  PersonaDetectionResult,
   getEasterEggOverride,
   EasterEgg,
-} from '../chat/personaDetection';
+} from "../chat/personaDetection";
 
-import { ActiveContext } from '../shared/activeContextManager';
-import { escapeHtml, getNonce } from '../shared/sanitize';
-import { getCachedCognitiveLevel, getFeatureRequirement, CognitiveLevel } from '../shared/cognitiveTier';
-import { getSkillDisplayName } from '../shared/skillConstants';
-import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
-import { getMissionTabHtml } from './missionTabHtml';
-import { getSkillStoreTabHtml } from './skillStoreTabHtml';
-import { getMindTabHtml } from './mindTabHtml';
-import { getDocsTabHtml } from './docsTabHtml';
-import { getSharedStyles } from './sharedStyles';
+import { ActiveContext } from "../shared/activeContextManager";
+import { escapeHtml, getNonce } from "../shared/sanitize";
+import {
+  getCachedCognitiveLevel,
+  getFeatureRequirement,
+  CognitiveLevel,
+} from "../shared/cognitiveTier";
+import { getSkillDisplayName } from "../shared/skillConstants";
+import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
+import { getMissionTabHtml } from "./missionTabHtml";
+import { getSkillStoreTabHtml } from "./skillStoreTabHtml";
+import { getMindTabHtml } from "./mindTabHtml";
+import { getDocsTabHtml } from "./docsTabHtml";
+import { getSharedStyles } from "./sharedStyles";
 
 /** Data contract for the Mind tab */
 export interface MindTabData {
@@ -33,6 +34,7 @@ export interface MindTabData {
   promptCount: number;
   agentCount: number;
   episodicCount: number;
+  chatMemoryLines: number;
   synapseHealthPct: number;
   lastDreamDate: string | null;
   lastMeditationDate: string | null;
@@ -68,8 +70,14 @@ export interface SkillInfo {
 /**
  * Resolve a webview-safe URI for an asset in the extension's assets/ folder.
  */
-export function getAssetUri(webview: vscode.Webview, extensionUri: vscode.Uri, assetPath: string): vscode.Uri {
-  return webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'assets', ...assetPath.split('/')));
+export function getAssetUri(
+  webview: vscode.Webview,
+  extensionUri: vscode.Uri,
+  assetPath: string,
+): vscode.Uri {
+  return webview.asWebviewUri(
+    vscode.Uri.joinPath(extensionUri, "assets", ...assetPath.split("/")),
+  );
 }
 
 /**
@@ -186,19 +194,15 @@ export function getWelcomeHtmlContent(
   settingsToggles?: SettingsToggle[],
 ): string {
   // NASA R5: Entry point assertions
-  nasaAssert(webview !== undefined, '_getHtmlContent: webview must be defined');
-  nasaAssertBounded(health.brokenSynapses, 0, 10000, 'health.brokenSynapses');
-  nasaAssertBounded(nudges.length, 0, 10, 'nudges.length');
+  nasaAssert(webview !== undefined, "_getHtmlContent: webview must be defined");
+  nasaAssertBounded(health.brokenSynapses, 0, 10000, "health.brokenSynapses");
+  nasaAssertBounded(nudges.length, 0, 10, "nudges.length");
 
   // Security: Generate nonce for CSP
   const nonce = getNonce();
 
   // Logo URI for webview
-  const logoUri = getAssetUri(
-    webview,
-    extensionUri,
-    'icon.png',
-  );
+  const logoUri = getAssetUri(webview, extensionUri, "icon.png");
 
   // Persona display
   const persona = personaResult?.persona;
@@ -207,9 +211,8 @@ export function getWelcomeHtmlContent(
   // Priority: Easter egg > Agent > Cognitive State > Skill State > Skill Persona > Persona > Age > Default
   // Uses organized subdirectories: personas/, ages/, agents/, states/
   const workspaceFolderName = vscode.workspace.workspaceFolders?.[0]?.name;
-  const easterEgg: EasterEgg | null =
-    getEasterEggOverride(workspaceFolderName);
-  
+  const easterEgg: EasterEgg | null = getEasterEggOverride(workspaceFolderName);
+
   const personaHook = persona?.hook || "Take Your Code to New Heights";
   const personaIcon = persona?.icon || "💻";
   const personaName = persona?.name || "Developer";
@@ -220,9 +223,13 @@ export function getWelcomeHtmlContent(
 
   // Use persona accent color (easter eggs no longer override global accent — they get a badge-local color instead)
   const personaAccent = persona?.accentColor || "#6366f1";
-  const rawEggColor = easterEgg?.accentColor || '';
-  const safeEggColor = /^#[0-9a-fA-F]{3,8}$/.test(rawEggColor) ? rawEggColor : personaAccent;
-  const easterEggBadgeColor = easterEgg?.accentColor ? safeEggColor : personaAccent;
+  const rawEggColor = easterEgg?.accentColor || "";
+  const safeEggColor = /^#[0-9a-fA-F]{3,8}$/.test(rawEggColor)
+    ? rawEggColor
+    : personaAccent;
+  const easterEggBadgeColor = easterEgg?.accentColor
+    ? safeEggColor
+    : personaAccent;
 
   const easterEggBadge = easterEgg
     ? `<span class="easter-egg-badge" title="${easterEgg.label}" style="--egg-accent: ${easterEggBadgeColor}">${easterEgg.emoji}</span>`
@@ -230,7 +237,8 @@ export function getWelcomeHtmlContent(
 
   // Active Context — live state from copilot-instructions.md
   const confidenceLabel =
-    personaResult?.confidence !== null && personaResult?.confidence !== undefined
+    personaResult?.confidence !== null &&
+    personaResult?.confidence !== undefined
       ? `${Math.round(personaResult.confidence * 100)}%`
       : "";
   const sourceLabel =
@@ -269,18 +277,29 @@ export function getWelcomeHtmlContent(
 
   // Health indicator
   const isHealthy = health.status === HealthStatus.Healthy;
-  const healthText = isHealthy
-    ? "Healthy"
-    : `${health.brokenSynapses} issues`;
+  const healthText = isHealthy ? "Healthy" : `${health.brokenSynapses} issues`;
   void healthText;
 
   // Architecture status banner (7.9)
-  const healthPct = health.totalSynapses > 0
-    ? Math.round((1 - health.brokenSynapses / health.totalSynapses) * 100)
-    : 100;
-  const healthBannerClass = isHealthy ? 'status-healthy' : health.brokenSynapses > 5 ? 'status-error' : 'status-warning';
-  const healthBannerIcon = isHealthy ? '✓' : health.brokenSynapses > 5 ? '✗' : '⚠';
-  const healthBannerLabel = isHealthy ? 'Healthy' : health.brokenSynapses > 5 ? 'Issues' : 'Warnings';
+  const healthPct =
+    health.totalSynapses > 0
+      ? Math.round((1 - health.brokenSynapses / health.totalSynapses) * 100)
+      : 100;
+  const healthBannerClass = isHealthy
+    ? "status-healthy"
+    : health.brokenSynapses > 5
+      ? "status-error"
+      : "status-warning";
+  const healthBannerIcon = isHealthy
+    ? "✓"
+    : health.brokenSynapses > 5
+      ? "✗"
+      : "⚠";
+  const healthBannerLabel = isHealthy
+    ? "Healthy"
+    : health.brokenSynapses > 5
+      ? "Issues"
+      : "Warnings";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -312,9 +331,9 @@ export function getWelcomeHtmlContent(
 
       <div class="hero-text-box">
           <div class="hero-hook">Your Trusted Partner for <strong>${bannerNoun}</strong></div>
-          ${userProfile?.name ? `<div class="hero-greeting">Hi ${escapeHtml(userProfile.name)} 👋</div>` : ''}
-          ${activeContext?.northStar ? `<div class="hero-north-star" data-cmd="northStar" title="North Star — Click to review" tabindex="0" role="button">⭐ ${escapeHtml(activeContext.northStar)}</div>` : ''}
-          ${hasObjective ? `<div class="hero-objective">${escapeHtml(rawObjective!)}</div>` : ''}
+          ${userProfile?.name ? `<div class="hero-greeting">Hi ${escapeHtml(userProfile.name)} 👋</div>` : ""}
+          ${activeContext?.northStar ? `<div class="hero-north-star" data-cmd="northStar" title="North Star — Click to review" tabindex="0" role="button">⭐ ${escapeHtml(activeContext.northStar)}</div>` : ""}
+          ${hasObjective ? `<div class="hero-objective">${escapeHtml(rawObjective!)}</div>` : ""}
       </div>
 
       <!-- Spike 1B: Tab Bar -->
@@ -594,25 +613,33 @@ export function getWelcomeHtmlContent(
 </html>`;
 }
 
-
-
 /**
  * Generate action button HTML with accessibility attributes
  */
-export function actionButton(cmd: string, icon: string, label: string, title?: string): string {
-  const titleAttr = title ? ` title="${escapeHtml(title)}"` : '';
+export function actionButton(
+  cmd: string,
+  icon: string,
+  label: string,
+  title?: string,
+): string {
+  const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
   const ariaLabel = title ? escapeHtml(title) : label;
 
   // Show tier badge if the command is gated above current level
-  let tierBadge = '';
+  let tierBadge = "";
   const commandId = `alex.${cmd}`;
   const req = getFeatureRequirement(commandId);
   if (req) {
     const cached = getCachedCognitiveLevel();
     const currentLevel = cached?.level ?? 1;
     if (currentLevel < req.minimumLevel) {
-      const tierEmoji: Record<CognitiveLevel, string> = { 1: '📁', 2: '💬', 3: '🤖', 4: '🧠' };
-      tierBadge = ` <span class="tier-lock" title="Requires Level ${req.minimumLevel}">${tierEmoji[req.minimumLevel] || '🔒'} L${req.minimumLevel}</span>`;
+      const tierEmoji: Record<CognitiveLevel, string> = {
+        1: "📁",
+        2: "💬",
+        3: "🤖",
+        4: "🧠",
+      };
+      tierBadge = ` <span class="tier-lock" title="Requires Level ${req.minimumLevel}">${tierEmoji[req.minimumLevel] || "🔒"} L${req.minimumLevel}</span>`;
     }
   }
 
@@ -635,7 +662,7 @@ export function getNudgesHtml(nudges: Nudge[]): string {
     .map((nudge) => {
       const typeClass = `nudge-${nudge.type}`;
       const actionHtml = nudge.action
-        ? `<button class="nudge-action" data-cmd="${nudge.action}" tabindex="0" role="button" aria-label="${escapeHtml(nudge.actionLabel || 'Take action')}">${escapeHtml(nudge.actionLabel || 'Take action')}</button>`
+        ? `<button class="nudge-action" data-cmd="${nudge.action}" tabindex="0" role="button" aria-label="${escapeHtml(nudge.actionLabel || "Take action")}">${escapeHtml(nudge.actionLabel || "Take action")}</button>`
         : "";
 
       return `

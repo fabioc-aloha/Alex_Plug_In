@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Nested subagent guard** (C3) -- `agents` allowlists in all agent.md files to prevent runaway delegation chains
 - **Plugin install URL** (F2) -- One-click `vscode://` install link in agent-plugin README
 - **Chat Customizations editor docs** (F3) -- Instructions for using VS Code's Customizations view with Alex
+- **Chat Memory tile** -- 6th Memory Architecture tile shows line count of Copilot Chat user memory; click to edit
 
 ### Changed
 

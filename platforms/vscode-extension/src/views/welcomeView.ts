@@ -1,17 +1,14 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
-import { logInfo } from '../shared/logger';
+import { logInfo } from "../shared/logger";
 import {
   checkHealth,
   HealthCheckResult,
   HealthStatus,
 } from "../shared/healthCheck";
 import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
-import {
-  detectPersona,
-  loadUserProfile,
-} from "../chat/personaDetection";
+import { detectPersona, loadUserProfile } from "../chat/personaDetection";
 import {
   readActiveContext,
   updateActiveContext,
@@ -31,7 +28,7 @@ import {
   getErrorHtml,
   getWelcomeHtmlContent,
 } from "./welcomeViewHtml";
-import { getTokenStatuses, TOKEN_CONFIGS } from '../services/secretsManager';
+import { getTokenStatuses, TOKEN_CONFIGS } from "../services/secretsManager";
 
 export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "alex.welcomeView";
@@ -86,20 +83,30 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   /**
    * Execute a VS Code command with safe error handling and optional progress.
    */
-  private async _executeCommandSafely(commandId: string, label?: string, ...args: any[]): Promise<void> {
-    const progressTitle = WelcomeViewProvider.LONG_RUNNING_COMMANDS[label ?? ''];
+  private async _executeCommandSafely(
+    commandId: string,
+    label?: string,
+    ...args: any[]
+  ): Promise<void> {
+    const progressTitle =
+      WelcomeViewProvider.LONG_RUNNING_COMMANDS[label ?? ""];
     const runner = async () => {
       try {
         await vscode.commands.executeCommand(commandId, ...args);
       } catch (err) {
         console.error(`[Alex][WelcomeView] Command failed: ${commandId}`, err);
-        vscode.window.showErrorMessage(`Alex: ${label ?? commandId} failed. Check console for details.`);
+        vscode.window.showErrorMessage(
+          `Alex: ${label ?? commandId} failed. Check console for details.`,
+        );
       }
     };
 
     if (progressTitle) {
       await vscode.window.withProgress(
-        { location: vscode.ProgressLocation.Notification, title: progressTitle },
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: progressTitle,
+        },
         runner,
       );
     } else {
@@ -110,14 +117,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   /**
    * Lightweight payload guard to prevent malformed messages from being processed.
    */
-  private static _isWelcomeMessage(message: unknown): message is { command: string; [k: string]: unknown } {
+  private static _isWelcomeMessage(
+    message: unknown,
+  ): message is { command: string; [k: string]: unknown } {
     return typeof (message as any)?.command === "string";
   }
 
   /**
    * Centralized message router so tests can invoke directly.
    */
-  public async handleMessageForTest(message: unknown): Promise<void> { // exposed for tests only
+  public async handleMessageForTest(message: unknown): Promise<void> {
+    // exposed for tests only
     await this._handleMessageInternal(message);
   }
 
@@ -131,7 +141,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const command = payload.command;
 
     // Commands that use operation lock - check before executing
-    if (WelcomeViewProvider.LOCKED_COMMANDS.includes(command as any) && isOperationInProgress()) {
+    if (
+      WelcomeViewProvider.LOCKED_COMMANDS.includes(command as any) &&
+      isOperationInProgress()
+    ) {
       vscode.window.showWarningMessage(
         "Another Alex operation is already in progress. Please wait for it to complete.",
       );
@@ -179,9 +192,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
     // External URL map
     const externalUrlMap: Record<string, string> = {
-      openMarketplace: "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
+      openMarketplace:
+        "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
       openGitHub: "https://github.com/fabioc-aloha/Alex_Plug_In",
-      openBrainAnatomy: "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
+      openBrainAnatomy:
+        "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
       provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
       learnAlex: "https://learnai.correax.com/",
       learnAlexSessionPlan: "https://learnai.correax.com/session-plan",
@@ -191,7 +206,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       learnAlexPreRead: "https://learnai.correax.com/pre-read",
       learnAlexGitHubGuide: "https://learnai.correax.com/github-guide",
       learnAlexResponsibleAI: "https://learnai.correax.com/responsible-ai",
-      learnAlexPromptEngineering: "https://learnai.correax.com/prompt-engineering",
+      learnAlexPromptEngineering:
+        "https://learnai.correax.com/prompt-engineering",
       learnAlexAiReadiness: "https://learnai.correax.com/ai-readiness",
       learnAlexAiAdoption: "https://learnai.correax.com/ai-adoption",
     };
@@ -206,9 +222,14 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     if (externalUrlMap[command]) {
       try {
         logInfo(`[Alex][WelcomeView] Opening external link: ${command}`);
-        await vscode.env.openExternal(vscode.Uri.parse(externalUrlMap[command]));
+        await vscode.env.openExternal(
+          vscode.Uri.parse(externalUrlMap[command]),
+        );
       } catch (err) {
-        console.error(`[Alex][WelcomeView] Failed to open external: ${command}`, err);
+        console.error(
+          `[Alex][WelcomeView] Failed to open external: ${command}`,
+          err,
+        );
         vscode.window.showErrorMessage(`Alex: Failed to open ${command}.`);
       }
       return;
@@ -217,29 +238,36 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     // Handle special cases
     switch (command) {
       case "learnAlexWorkshop": {
-        const persona = (payload as any).workshop || 'software-developers';
+        const persona = (payload as any).workshop || "software-developers";
         const url = `https://learnai.correax.com/workshop/${encodeURIComponent(persona)}`;
-        logInfo(`[Alex][WelcomeView] Opening workshop URL for persona: ${persona}`);
+        logInfo(
+          `[Alex][WelcomeView] Opening workshop URL for persona: ${persona}`,
+        );
         await vscode.env.openExternal(vscode.Uri.parse(url));
         break;
       }
       case "learnAlexGuideSection": {
-        const anchor = (payload as any).anchor || '';
+        const anchor = (payload as any).anchor || "";
         const url = anchor
           ? `https://learnai.correax.com/workshop/guide#${encodeURIComponent(anchor)}`
-          : 'https://learnai.correax.com/workshop/guide';
-        logInfo(`[Alex][WelcomeView] Opening playbook section: ${anchor || 'all'}`);
+          : "https://learnai.correax.com/workshop/guide";
+        logInfo(
+          `[Alex][WelcomeView] Opening playbook section: ${anchor || "all"}`,
+        );
         await vscode.env.openExternal(vscode.Uri.parse(url));
         break;
       }
       case "openChat":
-        logInfo('[Alex] Opening chat panel');
+        logInfo("[Alex] Opening chat panel");
         openChatPanel();
         break;
       case "launchRecommendedSkill": {
         const skill = (payload as any).skill || "code-quality";
         const skillName = (payload as any).skillName || skill;
-        logInfo('[Alex] Launching recommended skill: ' + JSON.stringify({ skill, skillName }));
+        logInfo(
+          "[Alex] Launching recommended skill: " +
+            JSON.stringify({ skill, skillName }),
+        );
         const prompt = `I'd like help with ${skillName}. Use the ${skill} skill to assist me with this project. Analyze the current workspace and provide actionable recommendations.`;
         await trackRecommendationFeedback(skill, true);
         await openChatPanel(prompt);
@@ -247,61 +275,108 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       }
       case "meditate":
         // Set cognitive state to meditation and open chat panel
-        logInfo('[Alex] Entering meditation state');
-        this.setCognitiveState('meditation');
+        logInfo("[Alex] Entering meditation state");
+        this.setCognitiveState("meditation");
         // Intentionally not awaited — VS Code focuses chat panel
-        void vscode.commands.executeCommand("workbench.panel.chat.view.copilot.focus");
+        void vscode.commands.executeCommand(
+          "workbench.panel.chat.view.copilot.focus",
+        );
         break;
       case "exportMemory": {
-        logInfo('[Alex] Launching memory export');
-        const exportPrompt = 'Use the memory-export skill. Export all of my stored memories, user profile, preferences, and context to a single portable file I can paste into another AI surface like Claude Code or ChatGPT. Follow the /export-memory prompt format.';
+        logInfo("[Alex] Launching memory export");
+        const exportPrompt =
+          "Use the memory-export skill. Export all of my stored memories, user profile, preferences, and context to a single portable file I can paste into another AI surface like Claude Code or ChatGPT. Follow the /export-memory prompt format.";
         await openChatPanel(exportPrompt);
         break;
       }
       case "memoryAudit": {
-        logInfo('[Alex] Launching memory audit');
-        const auditPrompt = 'Run a memory audit using the /memory-audit prompt. Check my /memories/ files for scope violations, waste, token budget, and suggest improvements.';
+        logInfo("[Alex] Launching memory audit");
+        const auditPrompt =
+          "Run a memory audit using the /memory-audit prompt. Check my /memories/ files for scope violations, waste, token budget, and suggest improvements.";
         await openChatPanel(auditPrompt);
         break;
       }
       case "openChatMemories": {
-        logInfo('[Alex] Opening Chat Memories settings');
-        await vscode.commands.executeCommand('workbench.action.openSettings', 'github.copilot.chat.copilotMemory');
+        logInfo("[Alex] Opening Chat Memories settings");
+        await vscode.commands.executeCommand(
+          "workbench.action.openSettings",
+          "github.copilot.chat.copilotMemory",
+        );
+        break;
+      }
+      case "openChatMemoryFile": {
+        const ourStorage = this._context?.globalStorageUri?.fsPath;
+        if (ourStorage) {
+          const memDir = path.join(
+            path.dirname(ourStorage),
+            "github.copilot-chat",
+            "memory-tool",
+            "memories",
+          );
+          if (fs.existsSync(memDir)) {
+            const mdFiles = fs
+              .readdirSync(memDir)
+              .filter((f) => f.endsWith(".md"));
+            if (mdFiles.length > 0) {
+              const filePath = path.join(memDir, mdFiles[0]);
+              logInfo(`[Alex] Opening Chat Memory file: ${filePath}`);
+              await vscode.commands.executeCommand(
+                "vscode.open",
+                vscode.Uri.file(filePath),
+              );
+            }
+          }
+        }
         break;
       }
       case "openSkill": {
         const skillId = (payload as any).skill || "";
         const skillDisplayName = (payload as any).skillName || skillId;
-        logInfo('[Alex] Opening skill: ' + JSON.stringify({ skillId, skillDisplayName }));
+        logInfo(
+          "[Alex] Opening skill: " +
+            JSON.stringify({ skillId, skillDisplayName }),
+        );
         const skillPrompt = `Explain how to use the ${skillDisplayName} skill. Read the skill file and summarize what it does, when to use it, and give me examples.`;
         await openChatPanel(skillPrompt);
         break;
       }
 
       case "tabSwitch": {
-        const tabId = typeof (payload as any).tabId === 'string' ? (payload as any).tabId : '';
+        const tabId =
+          typeof (payload as any).tabId === "string"
+            ? (payload as any).tabId
+            : "";
         if (!tabId) {
-          vscode.window.showWarningMessage('Alex: Invalid tab id');
+          vscode.window.showWarningMessage("Alex: Invalid tab id");
           return;
         }
         logInfo(`[Alex][TAB SPIKE] Tab switched to: ${tabId}`);
-        await this._context?.globalState.update(WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY, tabId);
+        await this._context?.globalState.update(
+          WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY,
+          tabId,
+        );
         break;
       }
       case "setPersonalityMode": {
         const modeRaw = (payload as any).mode;
-        const allowedModes = ['auto', 'precise', 'chatty'] as const;
-        const mode = allowedModes.includes(modeRaw) ? modeRaw : 'auto';
-        await vscode.workspace.getConfiguration('alex').update('personalityMode', mode, vscode.ConfigurationTarget.Global);
+        const allowedModes = ["auto", "precise", "chatty"] as const;
+        const mode = allowedModes.includes(modeRaw) ? modeRaw : "auto";
+        await vscode.workspace
+          .getConfiguration("alex")
+          .update("personalityMode", mode, vscode.ConfigurationTarget.Global);
         // Sync tone to copilot-instructions.md so agent mode respects it
         const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (wsRoot) {
           const toneMap: Record<string, string> = {
-            'auto': '_(auto — adapt to context)_',
-            'precise': 'Concise, code-first, minimal explanation',
-            'chatty': 'Explanatory, conversational, teaching-oriented',
+            auto: "_(auto — adapt to context)_",
+            precise: "Concise, code-first, minimal explanation",
+            chatty: "Explanatory, conversational, teaching-oriented",
           };
-          await updateActiveContext(wsRoot, { tone: toneMap[mode] || toneMap['auto'] }, 'personality-toggle');
+          await updateActiveContext(
+            wsRoot,
+            { tone: toneMap[mode] || toneMap["auto"] },
+            "personality-toggle",
+          );
         }
         logInfo(`[Alex] Personality mode set to: ${mode}`);
         break;
@@ -309,33 +384,56 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
 
       case "toggleSetting": {
         // 7.14: Inline settings toggle
-        const settingKey = typeof (payload as any).key === 'string' ? (payload as any).key : '';
+        const settingKey =
+          typeof (payload as any).key === "string" ? (payload as any).key : "";
         const allowedSettings = [
-          'alex.autoInsights.enabled', 'alex.dailyBriefing.enabled', 'alex.voice.enabled',
-          'alex.globalKnowledge.enabled',
-          'chat.autopilot.enabled', 'github.copilot.chat.copilotMemory.enabled',
-          'chat.mcp.gallery.enabled', 'github.copilot.chat.searchSubagent.enabled',
-          'chat.requestQueuing.enabled', 'github.copilot.chat.agent.thinkingTool',
-          'chat.customAgentInSubagent.enabled',
-          'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled',
-          'chat.tools.autoRun', 'chat.tools.fileSystem.autoApprove',
-          'chat.hooks.enabled', 'chat.useCustomAgentHooks', 'chat.restoreLastPanelSession',
+          "alex.autoInsights.enabled",
+          "alex.dailyBriefing.enabled",
+          "alex.voice.enabled",
+          "alex.globalKnowledge.enabled",
+          "chat.autopilot.enabled",
+          "github.copilot.chat.copilotMemory.enabled",
+          "chat.mcp.gallery.enabled",
+          "github.copilot.chat.searchSubagent.enabled",
+          "chat.requestQueuing.enabled",
+          "github.copilot.chat.agent.thinkingTool",
+          "chat.customAgentInSubagent.enabled",
+          "github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled",
+          "chat.tools.autoRun",
+          "chat.tools.fileSystem.autoApprove",
+          "chat.hooks.enabled",
+          "chat.useCustomAgentHooks",
+          "chat.restoreLastPanelSession",
         ];
         if (!settingKey) {
-          vscode.window.showWarningMessage('Alex: Missing setting key for toggle');
+          vscode.window.showWarningMessage(
+            "Alex: Missing setting key for toggle",
+          );
           return;
         }
         if (allowedSettings.includes(settingKey)) {
-          const [section, ...rest] = settingKey.split('.');
-          const configKey = rest.join('.');
+          const [section, ...rest] = settingKey.split(".");
+          const configKey = rest.join(".");
           if (!configKey) {
-            vscode.window.showWarningMessage(`Alex: Invalid config key for ${settingKey}`);
+            vscode.window.showWarningMessage(
+              `Alex: Invalid config key for ${settingKey}`,
+            );
             return;
           }
-          await vscode.workspace.getConfiguration(section).update(configKey, !!(payload as any).value, vscode.ConfigurationTarget.Global);
-          logInfo(`[Alex] Setting ${settingKey} toggled to: ${(payload as any).value}`);
+          await vscode.workspace
+            .getConfiguration(section)
+            .update(
+              configKey,
+              !!(payload as any).value,
+              vscode.ConfigurationTarget.Global,
+            );
+          logInfo(
+            `[Alex] Setting ${settingKey} toggled to: ${(payload as any).value}`,
+          );
         } else {
-          vscode.window.showWarningMessage(`Alex: Unsupported setting ${settingKey}`);
+          vscode.window.showWarningMessage(
+            `Alex: Unsupported setting ${settingKey}`,
+          );
         }
         break;
       }
@@ -345,7 +443,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       case "openCopilotInstructions": {
         const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         if (wsRoot) {
-          const instructionsPath = path.join(wsRoot, '.github', 'copilot-instructions.md');
+          const instructionsPath = path.join(
+            wsRoot,
+            ".github",
+            "copilot-instructions.md",
+          );
           const doc = await vscode.workspace.openTextDocument(instructionsPath);
           await vscode.window.showTextDocument(doc);
         }
@@ -353,25 +455,33 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       }
       default: {
         // Handle openDoc:<NAME> commands — open architecture docs by name
-        if (command?.startsWith('openDoc:')) {
-          const docName = command.slice('openDoc:'.length);
+        if (command?.startsWith("openDoc:")) {
+          const docName = command.slice("openDoc:".length);
           const docMap: Record<string, string> = {
-            'COGNITIVE-ARCHITECTURE': 'alex_docs/architecture/COGNITIVE-ARCHITECTURE.md',
-            'MEMORY-SYSTEMS': 'alex_docs/architecture/MEMORY-SYSTEMS.md',
-            'CONSCIOUS-MIND': 'alex_docs/architecture/CONSCIOUS-MIND.md',
-            'AGENT-CATALOG': 'alex_docs/architecture/AGENT-CATALOG.md',
-            'TRIFECTA-CATALOG': 'alex_docs/architecture/TRIFECTA-CATALOG.md',
-            'MASTER-ALEX-PROTECTED': '.github/config/MASTER-ALEX-PROTECTED.json',
-            'HEIR-ARCHITECTURE': 'alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md',
-            'RESEARCH-FIRST': 'alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md',
-            'SKILL-DISCIPLINE-MAP': 'alex_docs/guides/SKILL-DISCIPLINE-MAP.md',
+            "COGNITIVE-ARCHITECTURE":
+              "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+            "MEMORY-SYSTEMS": "alex_docs/architecture/MEMORY-SYSTEMS.md",
+            "CONSCIOUS-MIND": "alex_docs/architecture/CONSCIOUS-MIND.md",
+            "AGENT-CATALOG": "alex_docs/architecture/AGENT-CATALOG.md",
+            "TRIFECTA-CATALOG": "alex_docs/architecture/TRIFECTA-CATALOG.md",
+            "MASTER-ALEX-PROTECTED":
+              ".github/config/MASTER-ALEX-PROTECTED.json",
+            "HEIR-ARCHITECTURE":
+              "alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md",
+            "RESEARCH-FIRST":
+              "alex_docs/architecture/RESEARCH-FIRST-DEVELOPMENT.md",
+            "SKILL-DISCIPLINE-MAP": "alex_docs/guides/SKILL-DISCIPLINE-MAP.md",
           };
           const relPath = docMap[docName];
           if (relPath) {
             const folders = vscode.workspace.workspaceFolders;
             if (folders?.[0]) {
               const docUri = vscode.Uri.joinPath(folders[0].uri, relPath);
-              await this._executeCommandSafely('markdown.showPreview', command, docUri);
+              await this._executeCommandSafely(
+                "markdown.showPreview",
+                command,
+                docUri,
+              );
             }
           } else {
             console.warn(`[Alex] Unknown doc: ${docName}`);
@@ -427,9 +537,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   ) {
     void context; // mark TS unused parameter
     // NASA R5: Validate entry point preconditions
-    nasaAssert(webviewView !== undefined, 'resolveWebviewView: webviewView must be defined');
-    nasaAssert(this._extensionUri !== undefined, 'resolveWebviewView: extensionUri must be initialized');
-    
+    nasaAssert(
+      webviewView !== undefined,
+      "resolveWebviewView: webviewView must be defined",
+    );
+    nasaAssert(
+      this._extensionUri !== undefined,
+      "resolveWebviewView: extensionUri must be initialized",
+    );
+
     this._view = webviewView;
 
     webviewView.webview.options = {
@@ -451,7 +567,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   /**
    * Infer project display name from README.md, package.json, or workspace folder name
    */
-  private async _inferProjectName(workspaceFolder?: vscode.WorkspaceFolder): Promise<string> {
+  private async _inferProjectName(
+    workspaceFolder?: vscode.WorkspaceFolder,
+  ): Promise<string> {
     if (!workspaceFolder) {
       return "Project";
     }
@@ -478,7 +596,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const packagePath = path.join(workspaceFolder.uri.fsPath, "package.json");
       if (fs.existsSync(packagePath)) {
         const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf-8"));
-        if (packageJson.displayName && typeof packageJson.displayName === "string") {
+        if (
+          packageJson.displayName &&
+          typeof packageJson.displayName === "string"
+        ) {
           return packageJson.displayName;
         }
         if (packageJson.name && typeof packageJson.name === "string") {
@@ -497,7 +618,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     return workspaceFolder.name;
   }
 
-  private static readonly VALID_TABS = ['mission', 'skills', 'mind', 'docs'] as const;
+  private static readonly VALID_TABS = [
+    "mission",
+    "skills",
+    "mind",
+    "docs",
+  ] as const;
 
   /**
    * Programmatically switch the active tab in the Command Center.
@@ -508,16 +634,18 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     if (!this._view) {
       return;
     }
-    if (!(WelcomeViewProvider.VALID_TABS as readonly string[]).includes(tabId)) {
+    if (
+      !(WelcomeViewProvider.VALID_TABS as readonly string[]).includes(tabId)
+    ) {
       console.warn(`[Alex][WelcomeView] Invalid tab ID: ${tabId}`);
       return;
     }
-    this._view.webview.postMessage({ command: 'switchToTab', tabId });
+    this._view.webview.postMessage({ command: "switchToTab", tabId });
   }
 
   /**
    * Refresh the welcome view content
-   * 
+   *
    * NASA R5: Critical function with assertion density
    */
   public async refresh(): Promise<void> {
@@ -530,7 +658,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const wsRoot = workspaceFolders?.[0]?.uri.fsPath;
 
       // NASA R5: Validate view state
-      nasaAssert(this._view.webview !== undefined, 'Webview must be defined during refresh');
+      nasaAssert(
+        this._view.webview !== undefined,
+        "Webview must be defined during refresh",
+      );
 
       // Parallelize all async operations for faster loading
       const [
@@ -571,12 +702,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             await updatePersona(
               wsRoot,
               personaResult.persona.name,
-              personaResult.confidence
+              personaResult.confidence,
             );
-            logInfo(`[Alex][WelcomeView] Persona detected and saved: ${personaResult.persona.name} (${Math.round(personaResult.confidence * 100)}%)`);
+            logInfo(
+              `[Alex][WelcomeView] Persona detected and saved: ${personaResult.persona.name} (${Math.round(personaResult.confidence * 100)}%)`,
+            );
           }
         } catch (personaErr) {
-          console.error("[Alex][WelcomeView] updatePersona failed (non-fatal):", personaErr);
+          console.error(
+            "[Alex][WelcomeView] updatePersona failed (non-fatal):",
+            personaErr,
+          );
         }
       }
 
@@ -584,17 +720,21 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         "fabioc-aloha.alex-cognitive-architecture",
       );
       const version = extension?.packageJSON?.version || "0.0.0";
-      const nudges = this._generateNudges(
-        health,
-        lastDreamDate,
-        workspaceName,
-      );
+      const nudges = this._generateNudges(health, lastDreamDate, workspaceName);
 
       // Collect tab data — skills first, agents just for count in Mind tab
       const agentCount = this._countAgents(wsRoot);
       const skills = this._collectSkills(wsRoot);
-      const personalityMode = vscode.workspace.getConfiguration('alex').get<string>('personalityMode', 'auto');
-      const mindData = await this._collectMindData(wsRoot, lastDreamDate, health, agentCount, skills.length);
+      const personalityMode = vscode.workspace
+        .getConfiguration("alex")
+        .get<string>("personalityMode", "auto");
+      const mindData = await this._collectMindData(
+        wsRoot,
+        lastDreamDate,
+        health,
+        agentCount,
+        skills.length,
+      );
 
       // 7.13: Token statuses for Secret Manager inline dashboard
       const tokenStatuses: TokenStatusInfo[] = (() => {
@@ -605,40 +745,159 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             displayName: config.displayName,
             isSet: !!statuses[name],
           }));
-        } catch { return []; }
+        } catch {
+          return [];
+        }
       })();
 
       // 7.14: Settings snapshot for inline toggles
-      const alexCfg = vscode.workspace.getConfiguration('alex');
-      const chatCfg = vscode.workspace.getConfiguration('chat');
-      const copilotChatCfg = vscode.workspace.getConfiguration('github.copilot.chat');
-      const opusCfg = vscode.workspace.getConfiguration('github.copilot.chat.models.anthropic.claude-opus-4-5');
+      const alexCfg = vscode.workspace.getConfiguration("alex");
+      const chatCfg = vscode.workspace.getConfiguration("chat");
+      const copilotChatCfg = vscode.workspace.getConfiguration(
+        "github.copilot.chat",
+      );
+      const opusCfg = vscode.workspace.getConfiguration(
+        "github.copilot.chat.models.anthropic.claude-opus-4-5",
+      );
       const settingsToggles: SettingsToggle[] = [
         // Alex Features
-        { key: 'alex.autoInsights.enabled', label: 'Auto Insights', enabled: alexCfg.get<boolean>('autoInsights.enabled', true), group: 'Alex Features', tooltip: 'Automatically detect and suggest saving insights from conversations' },
-        { key: 'alex.dailyBriefing.enabled', label: 'Daily Briefing', enabled: alexCfg.get<boolean>('dailyBriefing.enabled', true), group: 'Alex Features', tooltip: 'Show a summary briefing on your first chat each day' },
-        { key: 'alex.voice.enabled', label: 'Voice Mode', enabled: alexCfg.get<boolean>('voice.enabled', false), group: 'Alex Features', tooltip: 'Read Alex responses aloud using text-to-speech' },
-        { key: 'alex.globalKnowledge.enabled', label: 'Global Knowledge', enabled: alexCfg.get<boolean>('globalKnowledge.enabled', true), group: 'Alex Features', tooltip: 'Enable cross-project learning and memory via the Global Knowledge repo' },
+        {
+          key: "alex.autoInsights.enabled",
+          label: "Auto Insights",
+          enabled: alexCfg.get<boolean>("autoInsights.enabled", true),
+          group: "Alex Features",
+          tooltip:
+            "Automatically detect and suggest saving insights from conversations",
+        },
+        {
+          key: "alex.dailyBriefing.enabled",
+          label: "Daily Briefing",
+          enabled: alexCfg.get<boolean>("dailyBriefing.enabled", true),
+          group: "Alex Features",
+          tooltip: "Show a summary briefing on your first chat each day",
+        },
+        {
+          key: "alex.voice.enabled",
+          label: "Voice Mode",
+          enabled: alexCfg.get<boolean>("voice.enabled", false),
+          group: "Alex Features",
+          tooltip: "Read Alex responses aloud using text-to-speech",
+        },
+        {
+          key: "alex.globalKnowledge.enabled",
+          label: "Global Knowledge",
+          enabled: alexCfg.get<boolean>("globalKnowledge.enabled", true),
+          group: "Alex Features",
+          tooltip:
+            "Enable cross-project learning and memory via the Global Knowledge repo",
+        },
         // Copilot Power Settings
-        { key: 'chat.autopilot.enabled', label: 'Autopilot Mode', enabled: chatCfg.get<boolean>('autopilot.enabled', false), group: 'Copilot Power', tooltip: 'Let Copilot run tools and make edits without asking for approval each time' },
-        { key: 'github.copilot.chat.copilotMemory.enabled', label: 'Copilot Memory', enabled: copilotChatCfg.get<boolean>('copilotMemory.enabled', false), group: 'Copilot Power', tooltip: 'Persist conversation context and preferences across sessions' },
-        { key: 'chat.mcp.gallery.enabled', label: 'MCP Gallery', enabled: chatCfg.get<boolean>('mcp.gallery.enabled', false), group: 'Copilot Power', tooltip: 'Browse and install Model Context Protocol servers from the gallery' },
-        { key: 'github.copilot.chat.searchSubagent.enabled', label: 'Search Subagent', enabled: copilotChatCfg.get<boolean>('searchSubagent.enabled', false), group: 'Copilot Power', tooltip: 'Allow agents to spawn a fast search subagent for codebase exploration' },
-        { key: 'chat.requestQueuing.enabled', label: 'Request Queuing', enabled: chatCfg.get<boolean>('requestQueuing.enabled', false), group: 'Copilot Power', tooltip: 'Queue multiple chat requests instead of waiting for each to finish' },
-        { key: 'github.copilot.chat.agent.thinkingTool', label: 'Thinking Tool', enabled: copilotChatCfg.get<boolean>('agent.thinkingTool', false), group: 'Copilot Power', tooltip: 'Give agents a dedicated tool for structured reasoning before acting' },
-        { key: 'chat.customAgentInSubagent.enabled', label: 'Agents in Subagents', enabled: chatCfg.get<boolean>('customAgentInSubagent.enabled', false), group: 'Copilot Power', tooltip: 'Allow custom agents (like Alex) to be invoked inside subagent calls' },
+        {
+          key: "chat.autopilot.enabled",
+          label: "Autopilot Mode",
+          enabled: chatCfg.get<boolean>("autopilot.enabled", false),
+          group: "Copilot Power",
+          tooltip:
+            "Let Copilot run tools and make edits without asking for approval each time",
+        },
+        {
+          key: "github.copilot.chat.copilotMemory.enabled",
+          label: "Copilot Memory",
+          enabled: copilotChatCfg.get<boolean>("copilotMemory.enabled", false),
+          group: "Copilot Power",
+          tooltip:
+            "Persist conversation context and preferences across sessions",
+        },
+        {
+          key: "chat.mcp.gallery.enabled",
+          label: "MCP Gallery",
+          enabled: chatCfg.get<boolean>("mcp.gallery.enabled", false),
+          group: "Copilot Power",
+          tooltip:
+            "Browse and install Model Context Protocol servers from the gallery",
+        },
+        {
+          key: "github.copilot.chat.searchSubagent.enabled",
+          label: "Search Subagent",
+          enabled: copilotChatCfg.get<boolean>("searchSubagent.enabled", false),
+          group: "Copilot Power",
+          tooltip:
+            "Allow agents to spawn a fast search subagent for codebase exploration",
+        },
+        {
+          key: "chat.requestQueuing.enabled",
+          label: "Request Queuing",
+          enabled: chatCfg.get<boolean>("requestQueuing.enabled", false),
+          group: "Copilot Power",
+          tooltip:
+            "Queue multiple chat requests instead of waiting for each to finish",
+        },
+        {
+          key: "github.copilot.chat.agent.thinkingTool",
+          label: "Thinking Tool",
+          enabled: copilotChatCfg.get<boolean>("agent.thinkingTool", false),
+          group: "Copilot Power",
+          tooltip:
+            "Give agents a dedicated tool for structured reasoning before acting",
+        },
+        {
+          key: "chat.customAgentInSubagent.enabled",
+          label: "Agents in Subagents",
+          enabled: chatCfg.get<boolean>("customAgentInSubagent.enabled", false),
+          group: "Copilot Power",
+          tooltip:
+            "Allow custom agents (like Alex) to be invoked inside subagent calls",
+        },
         // Agent Capabilities
-        { key: 'github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled', label: 'Extended Thinking', enabled: opusCfg.get<boolean>('extendedThinkingEnabled', false), group: 'Agent Capabilities', tooltip: 'Enable deep reasoning mode for Claude Opus (uses more tokens, better for complex tasks)' },
-        { key: 'chat.tools.autoRun', label: 'Auto-Run Tools', enabled: chatCfg.get<boolean>('tools.autoRun', false), group: 'Agent Capabilities', tooltip: 'Automatically execute tools without confirmation prompts' },
-        { key: 'chat.tools.fileSystem.autoApprove', label: 'Auto-Approve Files', enabled: chatCfg.get<boolean>('tools.fileSystem.autoApprove', false), group: 'Agent Capabilities', tooltip: 'Skip confirmation when agents create or edit files' },
-        { key: 'chat.hooks.enabled', label: 'Agent Hooks', enabled: chatCfg.get<boolean>('hooks.enabled', false), group: 'Agent Capabilities', tooltip: 'Run pre/post scripts around agent actions (e.g., lint after edit)' },
-        { key: 'chat.useCustomAgentHooks', label: 'Agent-Scoped Hooks', enabled: chatCfg.get<boolean>('useCustomAgentHooks', false), group: 'Agent Capabilities', tooltip: 'Use project-level hooks defined in .github/hooks.json' },
-        { key: 'chat.restoreLastPanelSession', label: 'Restore Last Session', enabled: chatCfg.get<boolean>('restoreLastPanelSession', false), group: 'Agent Capabilities', tooltip: 'Reopen the last chat session when VS Code starts' },
+        {
+          key: "github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled",
+          label: "Extended Thinking",
+          enabled: opusCfg.get<boolean>("extendedThinkingEnabled", false),
+          group: "Agent Capabilities",
+          tooltip:
+            "Enable deep reasoning mode for Claude Opus (uses more tokens, better for complex tasks)",
+        },
+        {
+          key: "chat.tools.autoRun",
+          label: "Auto-Run Tools",
+          enabled: chatCfg.get<boolean>("tools.autoRun", false),
+          group: "Agent Capabilities",
+          tooltip: "Automatically execute tools without confirmation prompts",
+        },
+        {
+          key: "chat.tools.fileSystem.autoApprove",
+          label: "Auto-Approve Files",
+          enabled: chatCfg.get<boolean>("tools.fileSystem.autoApprove", false),
+          group: "Agent Capabilities",
+          tooltip: "Skip confirmation when agents create or edit files",
+        },
+        {
+          key: "chat.hooks.enabled",
+          label: "Agent Hooks",
+          enabled: chatCfg.get<boolean>("hooks.enabled", false),
+          group: "Agent Capabilities",
+          tooltip:
+            "Run pre/post scripts around agent actions (e.g., lint after edit)",
+        },
+        {
+          key: "chat.useCustomAgentHooks",
+          label: "Agent-Scoped Hooks",
+          enabled: chatCfg.get<boolean>("useCustomAgentHooks", false),
+          group: "Agent Capabilities",
+          tooltip: "Use project-level hooks defined in .github/hooks.json",
+        },
+        {
+          key: "chat.restoreLastPanelSession",
+          label: "Restore Last Session",
+          enabled: chatCfg.get<boolean>("restoreLastPanelSession", false),
+          group: "Agent Capabilities",
+          tooltip: "Reopen the last chat session when VS Code starts",
+        },
       ];
 
-
-
-      logInfo(`[Alex][WelcomeView] Tab data: agents=${agentCount}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`);
+      logInfo(
+        `[Alex][WelcomeView] Tab data: agents=${agentCount}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`,
+      );
 
       this._view.webview.html = getWelcomeHtmlContent(
         this._view.webview,
@@ -659,13 +918,21 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       );
 
       // Restore last active tab if available
-      const lastTab = this._context?.globalState.get<string>(WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY);
+      const lastTab = this._context?.globalState.get<string>(
+        WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY,
+      );
       if (lastTab) {
-        this._view.webview.postMessage({ command: 'switchToTab', tabId: lastTab });
+        this._view.webview.postMessage({
+          command: "switchToTab",
+          tabId: lastTab,
+        });
       }
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
-      console.error("[Alex][WelcomeView] Error stack:", err instanceof Error ? err.stack : String(err));
+      console.error(
+        "[Alex][WelcomeView] Error stack:",
+        err instanceof Error ? err.stack : String(err),
+      );
       this._view.webview.html = getErrorHtml(err);
     }
   }
@@ -674,40 +941,65 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    * Collect Mind tab data from workspace.
    * Accepts pre-collected agent/skill counts to avoid redundant disk reads.
    */
-  private async _collectMindData(wsRoot: string | undefined, lastDreamDate: Date | null, health: HealthCheckResult, agentCount: number, skillCount: number): Promise<MindTabData> {
+  private async _collectMindData(
+    wsRoot: string | undefined,
+    lastDreamDate: Date | null,
+    health: HealthCheckResult,
+    agentCount: number,
+    skillCount: number,
+  ): Promise<MindTabData> {
     const data: MindTabData = {
       skillCount,
       instructionCount: 0,
       promptCount: 0,
       agentCount,
       episodicCount: 0,
-      synapseHealthPct: health.totalSynapses > 0 ? Math.round(((health.totalSynapses - health.brokenSynapses) / health.totalSynapses) * 100) : 0,
-      lastDreamDate: lastDreamDate ? lastDreamDate.toISOString().slice(0, 10) : null,
+      chatMemoryLines: 0,
+      synapseHealthPct:
+        health.totalSynapses > 0
+          ? Math.round(
+              ((health.totalSynapses - health.brokenSynapses) /
+                health.totalSynapses) *
+                100,
+            )
+          : 0,
+      lastDreamDate: lastDreamDate
+        ? lastDreamDate.toISOString().slice(0, 10)
+        : null,
       lastMeditationDate: null,
       meditationCount: 0,
     };
 
-    if (!wsRoot) { return data; }
+    if (!wsRoot) {
+      return data;
+    }
 
-    const githubPath = path.join(wsRoot, '.github');
+    const githubPath = path.join(wsRoot, ".github");
     try {
       // Only count modalities not already provided
-      const instDir = path.join(githubPath, 'instructions');
+      const instDir = path.join(githubPath, "instructions");
       if (fs.existsSync(instDir)) {
-        data.instructionCount = fs.readdirSync(instDir).filter(f => f.endsWith('.instructions.md')).length;
+        data.instructionCount = fs
+          .readdirSync(instDir)
+          .filter((f) => f.endsWith(".instructions.md")).length;
       }
-      const promptDir = path.join(githubPath, 'prompts');
+      const promptDir = path.join(githubPath, "prompts");
       if (fs.existsSync(promptDir)) {
-        data.promptCount = fs.readdirSync(promptDir).filter(f => f.endsWith('.prompt.md')).length;
+        data.promptCount = fs
+          .readdirSync(promptDir)
+          .filter((f) => f.endsWith(".prompt.md")).length;
       }
-      const episodicDir = path.join(githubPath, 'episodic');
+      const episodicDir = path.join(githubPath, "episodic");
       if (fs.existsSync(episodicDir)) {
-        const episodicFiles = fs.readdirSync(episodicDir).filter(f => f.endsWith('.md'));
+        const episodicFiles = fs
+          .readdirSync(episodicDir)
+          .filter((f) => f.endsWith(".md"));
         data.episodicCount = episodicFiles.length;
         // Find last meditation date from episodic
         const medFiles = episodicFiles
-          .filter(f => f.startsWith('meditation-'))
-          .sort().reverse();
+          .filter((f) => f.startsWith("meditation-"))
+          .sort()
+          .reverse();
         data.meditationCount = medFiles.length;
         if (medFiles.length > 0) {
           const match = medFiles[0].match(/meditation-(\d{4}-\d{2}-\d{2})/);
@@ -716,8 +1008,37 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           }
         }
       }
+      // Count lines in Copilot Chat user memory files
+      try {
+        // Derive sibling globalStorage path for github.copilot-chat from our own globalStorageUri
+        const ourStorage = this._context?.globalStorageUri?.fsPath;
+        const memDir = ourStorage
+          ? path.join(
+              path.dirname(ourStorage),
+              "github.copilot-chat",
+              "memory-tool",
+              "memories",
+            )
+          : undefined;
+        if (memDir && fs.existsSync(memDir)) {
+          let totalLines = 0;
+          for (const f of fs
+            .readdirSync(memDir)
+            .filter((f) => f.endsWith(".md"))) {
+            totalLines += fs
+              .readFileSync(path.join(memDir, f), "utf-8")
+              .split("\n").length;
+          }
+          data.chatMemoryLines = totalLines;
+        }
+      } catch {
+        /* non-fatal */
+      }
     } catch (err) {
-      console.error("[Alex][WelcomeView] _collectMindData failed (non-fatal):", err);
+      console.error(
+        "[Alex][WelcomeView] _collectMindData failed (non-fatal):",
+        err,
+      );
     }
     return data;
   }
@@ -726,11 +1047,16 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    * Count agents on disk for Mind tab display
    */
   private _countAgents(wsRoot: string | undefined): number {
-    if (!wsRoot) { return 0; }
-    const agentDir = path.join(wsRoot, '.github', 'agents');
-    if (!fs.existsSync(agentDir)) { return 0; }
+    if (!wsRoot) {
+      return 0;
+    }
+    const agentDir = path.join(wsRoot, ".github", "agents");
+    if (!fs.existsSync(agentDir)) {
+      return 0;
+    }
     try {
-      return fs.readdirSync(agentDir).filter(f => f.endsWith('.agent.md')).length;
+      return fs.readdirSync(agentDir).filter((f) => f.endsWith(".agent.md"))
+        .length;
     } catch {
       return 0;
     }
@@ -741,41 +1067,56 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    */
   private _collectSkills(wsRoot: string | undefined): SkillInfo[] {
     const skills: SkillInfo[] = [];
-    if (!wsRoot) { return skills; }
+    if (!wsRoot) {
+      return skills;
+    }
 
-    const skillsDir = path.join(wsRoot, '.github', 'skills');
-    if (!fs.existsSync(skillsDir)) { return skills; }
+    const skillsDir = path.join(wsRoot, ".github", "skills");
+    if (!fs.existsSync(skillsDir)) {
+      return skills;
+    }
 
     try {
-      const dirs = fs.readdirSync(skillsDir).filter(d => {
+      const dirs = fs.readdirSync(skillsDir).filter((d) => {
         const fullPath = path.join(skillsDir, d);
-        return fs.statSync(fullPath).isDirectory() && fs.existsSync(path.join(fullPath, 'SKILL.md'));
+        return (
+          fs.statSync(fullPath).isDirectory() &&
+          fs.existsSync(path.join(fullPath, "SKILL.md"))
+        );
       });
 
       for (const dir of dirs) {
-        const synapsePath = path.join(skillsDir, dir, 'synapses.json');
-        let description = '';
-        let category = 'general';
+        const synapsePath = path.join(skillsDir, dir, "synapses.json");
+        let description = "";
+        let category = "general";
 
         // Read description from synapses.json if available
         if (fs.existsSync(synapsePath)) {
           try {
-            const synapses = JSON.parse(fs.readFileSync(synapsePath, 'utf8'));
-            description = synapses.description || '';
-            category = synapses.category || 'general';
-          } catch { /* skip */ }
+            const synapses = JSON.parse(fs.readFileSync(synapsePath, "utf8"));
+            description = synapses.description || "";
+            category = synapses.category || "general";
+          } catch {
+            /* skip */
+          }
         }
 
         skills.push({
           id: dir,
-          displayName: dir.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+          displayName: dir
+            .split("-")
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(" "),
           description,
           category,
           hasSynapses: fs.existsSync(synapsePath),
         });
       }
     } catch (err) {
-      console.error("[Alex][WelcomeView] _collectSkills failed (non-fatal):", err);
+      console.error(
+        "[Alex][WelcomeView] _collectSkills failed (non-fatal):",
+        err,
+      );
     }
     return skills.sort((a, b) => a.displayName.localeCompare(b.displayName));
   }
@@ -833,7 +1174,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     const now = new Date();
     const dayMs = 24 * 60 * 60 * 1000;
     if (workspaceName) {
-      nudges.push({ type: "tip", icon: "🗂️", message: `Workspace: ${workspaceName}`, priority: 5 });
+      nudges.push({
+        type: "tip",
+        icon: "🗂️",
+        message: `Workspace: ${workspaceName}`,
+        priority: 5,
+      });
     }
 
     // Check health issues (high priority)
@@ -909,35 +1255,44 @@ export function registerWelcomeView(
 
   // Register tab switch command - allows other commands to navigate to a specific tab
   context.subscriptions.push(
-    vscode.commands.registerCommand("alex.switchToTab", async (tabId: string) => {
-      // Focus the welcome view first, then switch to the requested tab
-      await vscode.commands.executeCommand('alex.welcomeView.focus');
-      provider.switchToTab(tabId);
-    }),
+    vscode.commands.registerCommand(
+      "alex.switchToTab",
+      async (tabId: string) => {
+        // Focus the welcome view first, then switch to the requested tab
+        await vscode.commands.executeCommand("alex.welcomeView.focus");
+        provider.switchToTab(tabId);
+      },
+    ),
   );
 
   // Register cognitive state command - allows chat/prompts to change avatar
   context.subscriptions.push(
-    vscode.commands.registerCommand("alex.setCognitiveState", (state: string | null) => {
-      provider.setCognitiveState(state);
-      if (state) {
-        logInfo(`[Alex] Cognitive state set to: ${state}`);
-      } else {
-        logInfo('[Alex] Cognitive state cleared');
-      }
-    }),
+    vscode.commands.registerCommand(
+      "alex.setCognitiveState",
+      (state: string | null) => {
+        provider.setCognitiveState(state);
+        if (state) {
+          logInfo(`[Alex] Cognitive state set to: ${state}`);
+        } else {
+          logInfo("[Alex] Cognitive state cleared");
+        }
+      },
+    ),
   );
 
   // Register agent mode command - allows switching to agent-specific avatars
   context.subscriptions.push(
-    vscode.commands.registerCommand("alex.setAgentMode", (agent: string | null) => {
-      provider.setAgentMode(agent);
-      if (agent) {
-        logInfo(`[Alex] Agent mode set to: ${agent}`);
-      } else {
-        logInfo('[Alex] Agent mode cleared');
-      }
-    }),
+    vscode.commands.registerCommand(
+      "alex.setAgentMode",
+      (agent: string | null) => {
+        provider.setAgentMode(agent);
+        if (agent) {
+          logInfo(`[Alex] Agent mode set to: ${agent}`);
+        } else {
+          logInfo("[Alex] Agent mode cleared");
+        }
+      },
+    ),
   );
 
   return provider;

@@ -2,34 +2,38 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/vscode/PROMPT-OVERHAUL-PLAN.md"
+    "CHANGELOG.md",
+    "platforms/vscode-extension/README.md",
+    "platforms/vscode-extension/src/views/mindTabHtml.ts",
+    "platforms/vscode-extension/src/views/welcomeView.ts",
+    "platforms/vscode-extension/src/views/welcomeViewHtml.ts"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1774974608437
+      "scannedAt": 1774976082120
     },
     {
       "file": "alex_docs/vscode/PROMPT-OVERHAUL-PLAN.md",
       "todoCount": 7,
-      "scannedAt": 1774974608437
+      "scannedAt": 1774976082120
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1774974608437
+      "scannedAt": 1774976082120
     },
     {
       "file": "alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1774974608437
+      "scannedAt": 1774976082120
     },
     {
       "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
       "todoCount": 1,
-      "scannedAt": 1774974608437
+      "scannedAt": 1774976082120
     }
   ],
-  "lastUpdated": 1774974608437
+  "lastUpdated": 1774976082120
 }

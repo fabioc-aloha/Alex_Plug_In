@@ -279,6 +279,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Agent Handoffs**      | All 7 agents enriched with model overrides and persona-driven follow-ups                                             |
 | **TypeScript 6.0**      | Migrated to TS 6.0.2 with `moduleResolution: "bundler"`, clean compilation                                           |
 | **Skills**              | 158 skills classified into core (21), standard (85), extended (52) tiers; 17 domain groups                           |
+| **Welcome View**        | 6th Memory Architecture tile: Chat Memory line count with click-to-edit                                              |
 
 ### What's New (v7.0.0 -- Working Together Edition)
 
