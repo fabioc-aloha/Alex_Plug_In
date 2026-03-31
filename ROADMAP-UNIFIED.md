@@ -46,6 +46,7 @@ Seven platforms. Four active, three planned.
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v7.0.1** | Welcome UI Hotfix -- Chat Memories button (Mind tab), Memory Audit button (Mission tab)                                                                                                                                                                                                                       | 2026-03-31 |
 | **v7.0.0** | Working Together Edition -- cross-platform parity (88/93 items, 52 files, brew/winget pairing), macOS-native capabilities (sips, say, caffeinate, launchd), PS muscle ports to Node.js, LLM-friendly script refactor, User Memory Leverage, MCP v1.1.0, Welcome UI (Chat Memories + Memory Audit buttons)     | 2026-03-31 |
 | **v6.8.4** | Quality Review & Roadmap Cleanup -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes                                                                                                              | 2026-03-27 |
 | **v6.8.3** | Data Storytelling Trifecta Suite -- 5 new trifectas, 4 muscles, 24-chart interactive gallery, colorblind-safe Tableau 10 palette, 157 skills, 45 trifectas, brain-qa 0 bugs                                                                                                                                   | 2026-03-26 |
@@ -254,8 +255,8 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                                                |
 | -------------------------- | ------------------------------------------------------------------------------ |
-| **Current Master Version** | 7.0.0                                                                          |
-| **Current Heirs**          | VS Code (7.0.0), M365 (6.8.3), Plugin (6.7.0)                                  |
+| **Current Master Version** | 7.0.1                                                                          |
+| **Current Heirs**          | VS Code (7.0.1), M365 (6.8.3), Plugin (6.7.0)                                  |
 | **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                |
 | **Platforms**              | 5 total (4 active, 1 planned)                                                  |
 | **Next Target**            | v7.1.0 (Intelligence Edition, Q2 2026)                                         |

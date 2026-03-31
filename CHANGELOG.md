@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.0.1] - 2026-03-31
+
+> **Welcome UI Hotfix** -- Chat Memories and Memory Audit buttons were added to source but missed the v7.0.0 VSIX build. This patch ships the Welcome UI additions.
+
+### Added
+
+- **Chat Memories button** (Mind tab) -- opens Copilot Memory settings for managing stored preferences and memories
+- **Memory Audit button** (Mission tab) -- launches /memory-audit prompt to check /memories/ for scope violations and waste
+
+---
+
 ## [7.0.0] - 2026-03-31
 
 > **Working Together Edition** -- Cross-platform parity across the full cognitive architecture (88/93 items complete), macOS-native capabilities, PS muscle ports to Node.js, LLM-friendly script refactor, User Memory Leverage, MCP enrichment. Alex works on any OS and uses each platform's native strengths.
