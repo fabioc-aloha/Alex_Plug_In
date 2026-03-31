@@ -14,6 +14,14 @@
       "yields": "root cause analysis patterns and guidance"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "reason": "Extension development frequently needs debug panel for skill/hook troubleshooting",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns complementary techniques"
+    },
+    {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "extends",
       "strength": 0.7,

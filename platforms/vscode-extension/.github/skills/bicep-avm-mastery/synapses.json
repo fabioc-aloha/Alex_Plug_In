@@ -5,7 +5,19 @@
   "version": "1.0.0",
   "created": "2026-02-11",
   "connectionCount": 4,
-  "connections": [],
+  "connections": [
+    {
+      "type": "relates",
+      "when": "bicep|avm|iac|azure verified modules",
+      "target": ".github/skills/azure-architecture-patterns/SKILL.md",
+      "yields": [
+        "azure-architecture-patterns",
+        "azure-devops-automation"
+      ],
+      "weight": 0.9,
+      "notes": "If user asks about Bicep/AVM, surface architecture and pipeline skills"
+    }
+  ],
   "synapses": [
     {
       "id": "BICEP-001",

@@ -26,9 +26,9 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 Push-Location $scriptDir
 try {
-    Write-Host "`n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
-    Write-Host "  Alex Cognitive Architecture — Quick Publish" -ForegroundColor Cyan
-    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
+    Write-Host "`n----------------------------------------" -ForegroundColor Cyan
+    Write-Host "  Alex Cognitive Architecture -- Quick Publish" -ForegroundColor Cyan
+    Write-Host "----------------------------------------" -ForegroundColor Cyan
 
     # Load PAT
     $envFile = Join-Path $scriptDir ".env"
@@ -37,13 +37,13 @@ try {
             $patLine = Get-Content $envFile | Where-Object { $_ -match '^VSCE_PAT=' }
             if ($patLine) {
                 $env:VSCE_PAT = $patLine.Split("=", 2)[1].Trim()
-                Write-Host "   ✅ PAT loaded from .env" -ForegroundColor Green
+                Write-Host "   [OK] PAT loaded from .env" -ForegroundColor Green
             }
         }
     }
     
     if (-not $env:VSCE_PAT -and -not $PackageOnly) {
-        Write-Host "❌ VSCE_PAT not set. Add to .env or set environment variable." -ForegroundColor Red
+        Write-Host "[ERROR] VSCE_PAT not set. Add to .env or set environment variable." -ForegroundColor Red
         exit 1
     }
 
@@ -54,13 +54,13 @@ try {
     $name = $pkg.name
     $releaseType = if ($Stable) { "stable" } else { "pre-release" }
 
-    Write-Host "`n📦 Extension: $publisher.$name" -ForegroundColor White
+    Write-Host "`n[PKG] Extension: $publisher.$name" -ForegroundColor White
     Write-Host "   Version:   $version" -ForegroundColor White
     Write-Host "   Type:      $releaseType" -ForegroundColor White
 
-    # Confirm
-    if (-not $SkipConfirm -and -not $PackageOnly) {
-        Write-Host "`n⚠️  About to publish v$version as $releaseType" -ForegroundColor Yellow
+    # Confirm (skip by default for LLM-friendly non-interactive use)
+    if (-not $SkipConfirm -and -not $PackageOnly -and [Environment]::UserInteractive -and [Console]::IsInputRedirected -eq $false) {
+        Write-Host "`n[WARN] About to publish v$version as $releaseType" -ForegroundColor Yellow
         Write-Host "   For full release workflow (bump, changelog, git), use:" -ForegroundColor Gray
         Write-Host "   ..\..\scripts\release-vscode.ps1 -BumpType patch" -ForegroundColor Gray
         $confirm = Read-Host "`nContinue? (y/N)"
@@ -69,25 +69,28 @@ try {
             exit 0
         }
     }
+    else {
+        Write-Host "[INFO] Publishing v$version as $releaseType (non-interactive)" -ForegroundColor Cyan
+    }
 
     # Package
-    Write-Host "`n🔨 Packaging..." -ForegroundColor Yellow
+    Write-Host "`n[BUILD] Packaging..." -ForegroundColor Yellow
     npx vsce package
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "❌ Package failed" -ForegroundColor Red
+        Write-Host "[ERROR] Package failed" -ForegroundColor Red
         exit 1
     }
 
     $vsixFile = Get-ChildItem "*.vsix" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-    Write-Host "   ✅ Created: $($vsixFile.Name)" -ForegroundColor Green
+    Write-Host "   [OK] Created: $($vsixFile.Name)" -ForegroundColor Green
 
     if ($PackageOnly) {
-        Write-Host "`n📦 Package ready: $($vsixFile.FullName)" -ForegroundColor Cyan
+        Write-Host "`n[PKG] Package ready: $($vsixFile.FullName)" -ForegroundColor Cyan
         exit 0
     }
 
     # Publish
-    Write-Host "`n🚀 Publishing to VS Code Marketplace..." -ForegroundColor Yellow
+    Write-Host "`n[PUBLISH] Publishing to VS Code Marketplace..." -ForegroundColor Yellow
     $vsceArgs = @("publish")
     if (-not $Stable) {
         $vsceArgs += "--pre-release"
@@ -95,11 +98,11 @@ try {
     
     & npx vsce @vsceArgs
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "❌ Publish failed" -ForegroundColor Red
+        Write-Host "[ERROR] Publish failed" -ForegroundColor Red
         exit 1
     }
 
-    Write-Host "`n✅ Published successfully!" -ForegroundColor Green
+    Write-Host "`n[OK] Published successfully!" -ForegroundColor Green
     Write-Host "   https://marketplace.visualstudio.com/items?itemName=$publisher.$name" -ForegroundColor Gray
 }
 finally {

@@ -20,6 +20,14 @@
       "yields": "API design required patterns and guidance"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "strength": 0.9,
+      "type": "complements",
+      "reason": "VS Code integrates MCP servers for Copilot",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns complementary techniques"
+    },
+    {
       "target": ".github/skills/security-review/SKILL.md",
       "strength": 0.7,
       "type": "requires",

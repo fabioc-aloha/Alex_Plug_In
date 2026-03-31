@@ -27,6 +27,14 @@
       "yields": "code review supporting context"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "reason": "Webview decomposition patterns (tab extraction, CSS extraction, client JS extraction) proven in Command Center optimization",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns complementary techniques"
+    },
+    {
       "target": ".github/skills/localization/SKILL.md",
       "type": "relates",
       "strength": 0.75,

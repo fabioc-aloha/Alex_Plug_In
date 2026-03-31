@@ -189,6 +189,7 @@ After running the script, Alex should check:
 - [ ] **Working memory model**: Does the 4+3 slot claim match the actual P1-P7 table? Are sub-slots (P4a-d) accounted for?
 - [ ] **Legacy terminology**: Any surviving references to deprecated concepts (DK files, domain-knowledge folders)?
 - [ ] **Trigger-to-code alignment**: Do synapse trigger keywords in .md files match actual activation paths in TypeScript?
+- [ ] **Heir evolution logic**: Does the documented 4-step heir cycle match what heir-skill-promotion.instructions.md actually describes?
 - [ ] **Version source of truth**: Is `package.json` the single source, or are versions hardcoded in prose that will drift?
 - [ ] **Neuroanatomical consistency**: Do brain-analog mappings in copilot-instructions match descriptions in alex-core?
 

@@ -21,12 +21,7 @@ $preCommitSource = Join-Path $hooksSource "pre-commit"
 $preCommitTarget = Join-Path $hooksTarget "pre-commit"
 
 if (Test-Path $preCommitTarget) {
-    Write-Host "  [WARN]  pre-commit hook already exists" -ForegroundColor Yellow
-    $response = Read-Host "  Overwrite? (y/N)"
-    if ($response -ne 'y') {
-        Write-Host "  Skipped pre-commit hook" -ForegroundColor Gray
-        exit 0
-    }
+    Write-Host "  [WARN] pre-commit hook already exists -- overwriting" -ForegroundColor Yellow
 }
 
 Copy-Item $preCommitSource $preCommitTarget -Force

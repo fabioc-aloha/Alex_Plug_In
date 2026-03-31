@@ -35,6 +35,14 @@
       "yields": "testing strategies quality checks and validation"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "implements",
+      "strength": 0.75,
+      "reason": "Webview UI patterns must follow accessibility standards",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns domain-specific context"
+    },
+    {
       "target": ".github/skills/markdown-mermaid/SKILL.md",
       "type": "supports",
       "strength": 0.5,

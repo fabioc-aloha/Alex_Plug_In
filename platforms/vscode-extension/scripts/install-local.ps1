@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Install the VS Code extension locally from a .vsix package.
 .DESCRIPTION
@@ -24,9 +24,9 @@ $extensionDir = Split-Path -Parent $scriptDir
 
 Push-Location $extensionDir
 try {
-    Write-Host "`n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
+    Write-Host "`n----------------------------------------" -ForegroundColor Cyan
     Write-Host "  Alex Local Installation" -ForegroundColor Cyan
-    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
+    Write-Host "----------------------------------------" -ForegroundColor Cyan
 
     # Get version from package.json
     $pkg = Get-Content "package.json" | ConvertFrom-Json
@@ -113,7 +113,7 @@ try {
     }
 
     # Install the extension
-    Write-Host "`n📥 Installing extension..." -ForegroundColor Yellow
+    Write-Host "`n[INSTALL] Installing extension..." -ForegroundColor Yellow
     Write-Host "   File: $(Split-Path $vsixPath -Leaf)" -ForegroundColor Gray
     
     $installArgs = @("--install-extension", $vsixPath)

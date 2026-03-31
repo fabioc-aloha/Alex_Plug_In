@@ -38,6 +38,14 @@
       "yields": "security review supporting context"
     },
     {
+      "target": ".github/skills/azure-architecture-patterns/SKILL.md",
+      "type": "feeds",
+      "strength": 0.8,
+      "note": "Azure Monitor, App Insights integration",
+      "when": "observability monitoring provides context to azure architecture patterns",
+      "yields": "azure architecture patterns contextual assessment"
+    },
+    {
       "target": ".github/skills/debugging-patterns/SKILL.md",
       "type": "complements",
       "strength": 0.85,

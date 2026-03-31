@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 30, 2026
+**Last Updated**: March 31, 2026
 
 ---
 
@@ -47,6 +47,7 @@ Seven platforms. Four active, three planned.
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v6.8.5** | User Memory Leverage & MCP Enrichment -- VS Code memory research (v1.99-v1.102), MCP v1.1.0 (prompts + resources), tool sets, memory-curation skill, meditation Phase 1.5, `/memories/` restructured                                                                                                          | 2026-03-31 |
 | **v6.8.4** | Quality Review & Roadmap Cleanup -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes                                                                                                              | 2026-03-27 |
 | **v6.8.3** | Data Storytelling Trifecta Suite -- 5 new trifectas, 4 muscles, 24-chart interactive gallery, colorblind-safe Tableau 10 palette, 157 skills, 45 trifectas, brain-qa 0 bugs                                                                                                                                   | 2026-03-26 |
 | **v6.8.2** | Workspace Cleanup & Doc Audit -- 928 stale files archived, TEST-GUIDE.md retired, README link modernization, lint fix, all 8 quality gates pass                                                                                                                                                               | 2026-03-25 |
@@ -207,13 +208,13 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                                 |
 | -------------------------- | --------------------------------------------------------------- |
-| **Current Master Version** | 6.8.4                                                           |
+| **Current Master Version** | 6.8.5                                                           |
 | **Current Heirs**          | VS Code (6.8.4), M365 (6.8.3), Plugin (6.7.0)                   |
-| **Architecture**           | 157 skills, 45 trifectas, 77 instructions, 55 prompts, 7 agents |
+| **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents |
 | **Platforms**              | 5 total (4 active, 1 planned)                                   |
 | **Next Target**            | v7.0.0 — TBD (competitive research phase)                       |
 | **Open Items**             | 13 total: 4 blocked, 1 gated, 5 conditional, 3 next actions     |
-| **Updated**                | 2026-03-27                                                      |
+| **Updated**                | 2026-03-31                                                      |
 
 ---
 

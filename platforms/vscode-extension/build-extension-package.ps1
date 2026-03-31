@@ -47,23 +47,23 @@ if (-not (Test-Path $RootGitHub)) {
     exit 1
 }
 
-Write-Host "📁 Root .github/: $RootGitHub" -ForegroundColor Gray
-Write-Host "📁 Extension dir: $ExtensionDir" -ForegroundColor Gray
+Write-Host "[DIR] Root .github/: $RootGitHub" -ForegroundColor Gray
+Write-Host "[DIR] Extension dir: $ExtensionDir" -ForegroundColor Gray
 Write-Host ""
 
 # Step 1: Clean existing extension .github/
-Write-Host "🧹 Step 1: Cleaning existing extension .github/..." -ForegroundColor Yellow
+Write-Host "[1/6] Step 1: Cleaning existing extension .github/..." -ForegroundColor Yellow
 if (Test-Path $ExtGitHub) {
     Remove-Item -Path $ExtGitHub -Recurse -Force
     Write-Host "   Removed existing .github/ folder" -ForegroundColor Gray
 }
 
 # Step 2: Copy root .github/ to extension
-Write-Host "📋 Step 2: Copying root .github/ to extension..." -ForegroundColor Yellow
+Write-Host "[2/6] Step 2: Copying root .github/ to extension..." -ForegroundColor Yellow
 Copy-Item -Path $RootGitHub -Destination $ExtGitHub -Recurse -Force
 
 # Step 3: Remove development-specific files/folders
-Write-Host "🗑️  Step 3: Removing development-specific files..." -ForegroundColor Yellow
+Write-Host "[3/6] Step 3: Removing development-specific files..." -ForegroundColor Yellow
 
 $excludeItems = @(
     # GitHub repo-specific (not needed for user projects)
@@ -99,7 +99,7 @@ foreach ($item in $excludeItems) {
         if (Test-Path $parentDir) {
             $foundItems = Get-ChildItem -Path $parentDir -Filter $pattern -ErrorAction SilentlyContinue
             foreach ($match in $foundItems) {
-                Remove-Item -Path $match.FullName -Force
+                Remove-Item -Path $match.FullName -Recurse -Force
                 Write-Host "   Removed: $($match.Name)" -ForegroundColor Gray
             }
         }
@@ -137,7 +137,7 @@ if ($cleanedCount -gt 0) {
 }
 
 # Step 4: Verify essential files exist
-Write-Host "✅ Step 4: Verifying essential files..." -ForegroundColor Yellow
+Write-Host "[4/6] Step 4: Verifying essential files..." -ForegroundColor Yellow
 
 $requiredFiles = @(
     "copilot-instructions.md",
@@ -150,10 +150,10 @@ $allPresent = $true
 foreach ($file in $requiredFiles) {
     $filePath = Join-Path $ExtGitHub $file
     if (Test-Path $filePath) {
-        Write-Host "   ✓ $file" -ForegroundColor Green
+        Write-Host "   [OK] $file" -ForegroundColor Green
     }
     else {
-        Write-Host "   ✗ $file MISSING!" -ForegroundColor Red
+        Write-Host "   [FAIL] $file MISSING!" -ForegroundColor Red
         $allPresent = $false
     }
 }
@@ -168,7 +168,7 @@ $fileCount = (Get-ChildItem -Path $ExtGitHub -Recurse -File).Count
 Write-Host "   Total files in extension .github/: $fileCount" -ForegroundColor Cyan
 
 # Step 4b: Personal data validation
-Write-Host "🔍 Step 4b: Scanning for personal data leakage..." -ForegroundColor Yellow
+Write-Host "[4b/6] Step 4b: Scanning for personal data leakage..." -ForegroundColor Yellow
 
 $ForbiddenPatterns = @(
     @{ Pattern = "Fabio\s+Correa|Fabio's"; Description = "Developer's full name" },
@@ -202,11 +202,11 @@ foreach ($file in $heirFiles) {
 
 if ($violations.Count -gt 0) {
     Write-Host ""
-    Write-Host "   ❌ PERSONAL DATA DETECTED IN HEIR!" -ForegroundColor Red
+    Write-Host "   [FAIL] PERSONAL DATA DETECTED IN HEIR!" -ForegroundColor Red
     Write-Host ""
     
     foreach ($v in $violations) {
-        Write-Host "   📁 $($v.File)" -ForegroundColor Yellow
+        Write-Host "   [FILE] $($v.File)" -ForegroundColor Yellow
         Write-Host "      Pattern: $($v.Pattern)" -ForegroundColor Gray
         Write-Host "      Found:   '$($v.Match)'" -ForegroundColor Red
         Write-Host ""
@@ -219,11 +219,11 @@ if ($violations.Count -gt 0) {
     exit 1
 }
 else {
-    Write-Host "   ✓ No personal data found - heir is clean" -ForegroundColor Green
+    Write-Host "   [OK] No personal data found - heir is clean" -ForegroundColor Green
 }
 
 # Step 5: Run npm compile
-Write-Host "🔨 Step 5: Compiling TypeScript..." -ForegroundColor Yellow
+Write-Host "[5/6] Step 5: Compiling TypeScript..." -ForegroundColor Yellow
 Push-Location $ExtensionDir
 try {
     npm run compile
@@ -239,7 +239,7 @@ finally {
 
 # Step 6: Package extension (optional)
 if (-not $SkipNpmPackage) {
-    Write-Host "📦 Step 6: Packaging extension..." -ForegroundColor Yellow
+    Write-Host "[6/6] Step 6: Packaging extension..." -ForegroundColor Yellow
     Push-Location $ExtensionDir
     try {
         npm run package
@@ -260,13 +260,13 @@ if (-not $SkipNpmPackage) {
     }
 }
 else {
-    Write-Host "⏭️  Step 6: Skipping npm package (--SkipNpmPackage)" -ForegroundColor Yellow
+    Write-Host "[SKIP] Step 6: Skipping npm package (--SkipNpmPackage)" -ForegroundColor Yellow
 }
 
 # Summary
 Write-Host ""
 Write-Host "----------------------------------------" -ForegroundColor Cyan
-Write-Host "  Build Complete! 🎉" -ForegroundColor Green
+Write-Host "  Build Complete!" -ForegroundColor Green
 Write-Host "----------------------------------------" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor White

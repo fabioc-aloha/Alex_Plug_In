@@ -19,6 +19,14 @@
       "yields": "architecture refinement impact assessment"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "implements",
+      "strength": 0.7,
+      "reason": "VS Code extensions use package.nls.json for localization",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns patterns and guidance"
+    },
+    {
       "target": ".github/skills/academic-research/SKILL.md",
       "type": "complements",
       "strength": 0.7,

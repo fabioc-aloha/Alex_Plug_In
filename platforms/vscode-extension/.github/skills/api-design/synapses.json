@@ -37,6 +37,14 @@
       "description": "API design is architectural decision",
       "when": "API design connects to architecture audit",
       "yields": "architecture audit patterns and guidance"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "relates",
+      "strength": 0.3,
+      "description": "Extension APIs follow similar patterns",
+      "when": "API design connects to VS Code extension patterns",
+      "yields": "VS Code extension patterns patterns and guidance"
     }
   ],
   "activationTriggers": [

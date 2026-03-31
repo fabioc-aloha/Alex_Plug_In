@@ -20,6 +20,14 @@
       "reason": "Terminal preview after image generation",
       "when": "When task involves .github/skills/image handling/SKILL.md",
       "yields": "image handling complementary techniques"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "uses",
+      "strength": 0.6,
+      "reason": "VS Code terminal settings configuration",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns patterns and guidance"
     }
   ],
   "activationPatterns": [

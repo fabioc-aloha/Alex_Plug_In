@@ -50,6 +50,14 @@
       "yields": "brain QA complementary techniques"
     },
     {
+      "target": ".github/skills/release-process/SKILL.md",
+      "strength": 0.7,
+      "type": "feeds",
+      "reason": "Release decisions filtered through North Star commitment",
+      "when": "When task involves .github/skills/release process/SKILL.md",
+      "yields": "release process decision frameworks"
+    },
+    {
       "target": ".github/skills/scope-management/SKILL.md",
       "strength": 0.85,
       "type": "supports",
@@ -72,6 +80,14 @@
       "reason": "North Star should be documented and referenced",
       "when": "When task involves .github/skills/documentation quality assurance/SKILL.md",
       "yields": "documentation quality assurance complementary techniques"
+    },
+    {
+      "target": ".github/skills/persona-detection/SKILL.md",
+      "strength": 0.8,
+      "type": "complements",
+      "reason": "/northstar define sets Persona: field in copilot-instructions.md; persona detection reads it as Priority 5",
+      "when": "When task involves .github/skills/persona detection/SKILL.md",
+      "yields": "persona detection coordination protocols"
     }
   ],
   "metadata": {

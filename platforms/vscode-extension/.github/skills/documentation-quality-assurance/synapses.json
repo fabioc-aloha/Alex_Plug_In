@@ -4,7 +4,26 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "version": "1.1.0",
   "description": "Systematic documentation audit, drift detection, preflight validation, and multi-pass quality pipelines",
-  "connections": [],
+  "connections": [
+    {
+      "target": ".github/skills/release-process/SKILL.md",
+      "strength": 0.85,
+      "type": "implements",
+      "direction": "bidirectional",
+      "reason": "DoD Criterion #8 (CHANGELOG documents delta) relies on doc QA principles",
+      "when": "When task involves .github/skills/release process/SKILL.md",
+      "yields": "release process operational procedures"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "strength": 0.7,
+      "type": "supports",
+      "direction": "supports",
+      "reason": "Heir validation uses doc QA patterns for sync verification",
+      "when": "When task involves .github/skills/heir sync management/SKILL.md",
+      "yields": "heir sync management gate criteria and checks"
+    }
+  ],
   "activationContexts": [
     "documentation audit",
     "doc quality",

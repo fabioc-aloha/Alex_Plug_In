@@ -27,6 +27,18 @@ Every meditation session MUST complete ALL three before concluding:
 3. Discover connections between new information and existing knowledge
 4. Organize insights for permanent integration
 
+### Phase 1.5: Cross-Project Memory Scan
+
+1. Read `/memories/` (all user memory files)
+2. Compare session insights against stored universal patterns
+3. If session produced a pattern that passes the 3-workspace test, promote to `/memories/`
+4. If a stored pattern was reinforced by this session, note confirmation in the episodic file
+5. If a stored pattern was contradicted, flag for review (do not auto-delete)
+6. Check for project-specific content that leaked into `/memories/` during this session
+7. If 3+ episodic files across different repos share an unrecorded pattern, surface as a skill candidate
+
+See `memory-curation` skill for scope rules and the 3-workspace test.
+
 ### Phase 2: Memory File Creation
 
 1. **Procedural**: Create `.instructions.md` for repeatable processes
@@ -84,8 +96,9 @@ Every meditation session MUST complete ALL three before concluding:
 
 Meditation is a complex operation (3+ phases). Before starting:
 1. SSO auto-activates to survey needed skills
-2. Pre-load: brain-qa, knowledge-synthesis, global-knowledge
-3. If synapse health unknown, run dream first
+2. Pre-load: brain-qa, knowledge-synthesis, global-knowledge, memory-curation
+3. Read `/memories/` for cross-project context (enriches episodic output)
+4. If synapse health unknown, run dream first
 
 ---
 

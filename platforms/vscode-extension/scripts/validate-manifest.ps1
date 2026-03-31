@@ -45,7 +45,7 @@ $commandIssues = @()
 $warnings = @()
 
 # 1. Validate Configuration Updates
-Write-Host "`n🔎 Checking configuration.update() calls..." -ForegroundColor Yellow
+Write-Host "`n[CHECK] Checking configuration.update() calls..." -ForegroundColor Yellow
 
 $srcPath = Join-Path $extensionRoot "src"
 $configUpdatePattern = 'getConfiguration\([''"]([^''"]+)[''"].*?\.update\([''"]([^''"]+)'
@@ -99,7 +99,7 @@ Get-ChildItem -Path $srcPath -Filter "*.ts" -Recurse | ForEach-Object {
 }
 
 # 2. Validate Command Registrations
-Write-Host "`n🔎 Checking registerCommand() calls..." -ForegroundColor Yellow
+Write-Host "`n[CHECK] Checking registerCommand() calls..." -ForegroundColor Yellow
 
 $commandPattern = 'registerCommand\([''"]([^''"]+)[''"]'
 

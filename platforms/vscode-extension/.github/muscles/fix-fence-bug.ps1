@@ -76,10 +76,10 @@ function Format-Severity {
     param([string]$Severity)
     
     switch ($Severity) {
-        "Critical" { return "🔴 Critical" }
-        "Medium" { return "🟡 Medium" }
-        "Low" { return "🟢 Low" }
-        default { return "⚪ Unknown" }
+        "Critical" { return "[!!] Critical" }
+        "Medium" { return "[! ] Medium" }
+        "Low" { return "[  ] Low" }
+        default { return "[  ] Unknown" }
     }
 }
 

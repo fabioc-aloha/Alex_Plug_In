@@ -77,6 +77,7 @@ Add to build pipeline:
 
 ## Related Skills
 
+- [extension-audit-methodology](extension-audit-methodology.instructions.md) — Dimension 6: Configuration validation
 - [vscode-extension-patterns](../skills/vscode-extension-patterns/SKILL.md) — Extension development patterns
 - [code-review-guidelines](code-review-guidelines.instructions.md) — Configuration API usage review
 

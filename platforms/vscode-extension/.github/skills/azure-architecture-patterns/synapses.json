@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "2.1.0",
+  "skillId": "azure-architecture-patterns",
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "version": "1.0.0",
+  "created": "2026-02-10",
+  "connectionCount": 6,
+  "connections": [
+    {
+      "type": "relates",
+      "when": "azure|cloud|bicep|terraform|well-architected",
+      "target": ".github/skills/azure-deployment-operations/SKILL.md",
+      "yields": [
+        "azure-deployment-operations",
+        "bicep-avm-mastery",
+        "azure-devops-automation"
+      ],
+      "weight": 0.9,
+      "notes": "Activate deployment and IaC helpers when Azure architecture patterns are referenced"
+    }
+  ],
+  "synapses": [
+    {
+      "id": "AZURE-001",
+      "source": "azure-architecture-patterns",
+      "target": ".github/skills/azure-devops-automation/SKILL.md",
+      "type": "complements",
+      "strength": 0.95,
+      "description": "Architecture patterns implemented via DevOps automation",
+      "bidirectional": true
+    },
+    {
+      "id": "AZURE-002",
+      "source": "azure-architecture-patterns",
+      "target": ".github/skills/code-review/SKILL.md",
+      "type": "informs",
+      "strength": 0.7,
+      "description": "Architecture principles guide infrastructure code review",
+      "bidirectional": false
+    },
+    {
+      "id": "AZURE-004",
+      "source": "azure-architecture-patterns",
+      "target": ".github/instructions/deep-thinking.instructions.md",
+      "type": "triggers",
+      "strength": 0.5,
+      "description": "Complex architecture decisions require deep analysis",
+      "bidirectional": false
+    },
+    {
+      "id": "AZURE-005",
+      "source": "azure-architecture-patterns.cost-optimization",
+      "target": ".github/skills/airs-appropriate-reliance.price-value/SKILL.md",
+      "type": "parallels",
+      "strength": 0.6,
+      "description": "Cost optimization in architecture parallels PV in adoption - value clarity drives decisions",
+      "bidirectional": false
+    }
+  ],
+  "activationPatterns": [
+    {
+      "trigger": "Azure|cloud architecture|well-architected",
+      "confidence": 0.95
+    },
+    {
+      "trigger": "reliability|availability|resilience|DR",
+      "module": "1",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "security|zero trust|managed identity|RBAC",
+      "module": "2",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "cost|optimize|savings|reserved instance",
+      "module": "3",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "Bicep|Terraform|IaC|observability",
+      "module": "4",
+      "confidence": 0.9
+    },
+    {
+      "trigger": "performance|scaling|caching|autoscale",
+      "module": "5",
+      "confidence": 0.9
+    }
+  ],
+  "activationContexts": [
+    {
+      "context": "Azure infrastructure design",
+      "keywords": [
+        "well-architected",
+        "landing zone",
+        "hub-spoke",
+        "availability zone",
+        "disaster recovery",
+        "Azure architecture"
+      ]
+    },
+    {
+      "context": "Cloud patterns",
+      "keywords": [
+        "microservices",
+        "event-driven",
+        "CQRS",
+        "saga pattern",
+        "circuit breaker",
+        "retry policy"
+      ]
+    },
+    {
+      "context": "Azure governance",
+      "keywords": [
+        "management group",
+        "policy",
+        "blueprint",
+        "cost management",
+        "tagging strategy"
+      ]
+    }
+  ]
+}

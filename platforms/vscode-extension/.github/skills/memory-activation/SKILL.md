@@ -31,6 +31,7 @@ Search this index when processing any task request:
 | Skill | Action Keywords |
 |-------|-----------------|
 | memory-activation | internal skill index, auto-activation, skill lookup, capability discovery |
+| memory-curation | review memory, clean memory, audit memory, curate memory, organize memory, memory waste, memory budget, memory drift, memory leak check, quarterly memory review |
 | academic-research | write thesis, literature review, cite sources, research paper, dissertation, draft paper, write manuscript, journal paper, CHI paper, HBR article, academic writing |
 | agent-debug-panel | agent debug, debug panel, skill not loading, hook not firing, instruction not matching, why didn't skill activate, agent routing, debug agent |
 | ai-agent-design | design agent, react pattern, multi-agent, tool use, agent architecture |

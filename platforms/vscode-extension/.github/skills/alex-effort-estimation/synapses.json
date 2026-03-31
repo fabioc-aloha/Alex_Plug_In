@@ -20,6 +20,13 @@
       "yields": "Project breakdown patterns"
     },
     {
+      "target": ".github/skills/release-process/SKILL.md",
+      "type": "extends",
+      "strength": 0.7,
+      "when": "Estimating release effort",
+      "yields": "Release workflow complexity factors"
+    },
+    {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "uses",
       "strength": 0.7,

@@ -819,7 +819,13 @@
         "path": "./.github/skills/awareness/SKILL.md"
       },
       {
+        "path": "./.github/skills/azure-architecture-patterns/SKILL.md"
+      },
+      {
         "path": "./.github/skills/azure-deployment-operations/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/azure-devops-automation/SKILL.md"
       },
       {
         "path": "./.github/skills/azure-openai-patterns/SKILL.md"
@@ -853,6 +859,9 @@
       },
       {
         "path": "./.github/skills/chart-interpretation/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/chat-participant-patterns/SKILL.md"
       },
       {
         "path": "./.github/skills/citation-management/SKILL.md"
@@ -934,6 +943,9 @@
       },
       {
         "path": "./.github/skills/dream-state/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/enterprise-integration/SKILL.md"
       },
       {
         "path": "./.github/skills/error-recovery-patterns/SKILL.md"
@@ -1044,6 +1056,9 @@
         "path": "./.github/skills/memory-activation/SKILL.md"
       },
       {
+        "path": "./.github/skills/memory-curation/SKILL.md"
+      },
+      {
         "path": "./.github/skills/memory-export/SKILL.md"
       },
       {
@@ -1072,6 +1087,9 @@
       },
       {
         "path": "./.github/skills/performance-profiling/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/persona-detection/SKILL.md"
       },
       {
         "path": "./.github/skills/pii-privacy-regulations/SKILL.md"
@@ -1191,7 +1209,13 @@
         "path": "./.github/skills/visual-memory/SKILL.md"
       },
       {
+        "path": "./.github/skills/vscode-configuration-validation/SKILL.md"
+      },
+      {
         "path": "./.github/skills/vscode-environment/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/vscode-extension-patterns/SKILL.md"
       },
       {
         "path": "./.github/skills/work-life-balance/SKILL.md"

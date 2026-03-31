@@ -21,12 +21,28 @@
       "yields": "meditation contextual assessment"
     },
     {
+      "target": ".github/instructions/cognitive-health-validation.instructions.md",
+      "type": "complements",
+      "strength": 0.85,
+      "reason": "Instruction enforces; skill interprets results",
+      "when": "When task involves .github/instructions/cognitive health validation.instructions.md",
+      "yields": "cognitive health validation trifecta rules and guidelines"
+    },
+    {
       "target": ".github/skills/brain-qa/SKILL.md",
       "type": "complements",
       "strength": 0.8,
       "reason": "Architecture health assesses runtime dimensions; brain-qa audits trifecta completeness",
       "when": "When task involves .github/skills/brain qa/SKILL.md",
       "yields": "brain QA complementary techniques"
+    },
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "feeds",
+      "strength": 0.65,
+      "reason": "Health checks surface heir sync drift for excluded skills",
+      "when": "When task involves .github/skills/heir sync management/SKILL.md",
+      "yields": "heir sync management contextual assessment"
     }
   ],
   "when": [

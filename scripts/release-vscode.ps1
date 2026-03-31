@@ -55,7 +55,7 @@ try {
     }
 
     # 1a. Sync Master Alex to extension (ensures .github/ is fresh)
-    Write-Host "`n🔄 Syncing Master Alex to extension package..." -ForegroundColor Yellow
+    Write-Host "`n[SYNC] Syncing Master Alex to extension package..." -ForegroundColor Yellow
     & "$repoRoot\.github\muscles\build-extension-package.ps1" -SkipCompile
     if ($LASTEXITCODE -ne 0) { throw "Build/sync failed!" }
     Write-Host "   [OK] Extension .github/ synced from Master Alex" -ForegroundColor Green
@@ -67,7 +67,7 @@ try {
 
     # 2. Bump version (in extension folder)
     Push-Location $extensionPath
-    Write-Host "`n📈 Bumping version ($BumpType)..." -ForegroundColor Yellow
+    Write-Host "`n[BUMP] Bumping version ($BumpType)..." -ForegroundColor Yellow
     npm version $BumpType --no-git-tag-version
     $pkg = Get-Content package.json | ConvertFrom-Json
     $newVersion = $pkg.version
@@ -88,7 +88,7 @@ try {
     Pop-Location
 
     # 3. Update CHANGELOG (in repo root)
-    Write-Host "`n Updating CHANGELOG..." -ForegroundColor Yellow
+    Write-Host "`n[CHANGELOG] Updating CHANGELOG..." -ForegroundColor Yellow
     $date = Get-Date -Format "yyyy-MM-dd"
     $changelog = Get-Content CHANGELOG.md -Raw
     $newEntry = "## [$newVersion] - $date`n`n### Added`n`n### Changed`n`n### Fixed`n`n---`n`n"
@@ -104,7 +104,7 @@ try {
     }
 
     # 4. Gate 5: Human confirmation (skip in automated mode)
-    Write-Host "`n Gate 5: Human Review" -ForegroundColor Yellow
+    Write-Host "`n[GATE] Gate 5: Human Review" -ForegroundColor Yellow
     Write-Host "   - CHANGELOG entry for $newVersion added" -ForegroundColor Gray
     Write-Host "   - Version bumped to $newVersion" -ForegroundColor Gray
     Write-Host "   - Proceeding with commit, tag, push, and publish..." -ForegroundColor Gray
@@ -117,12 +117,12 @@ try {
     Write-Host "   Tagged: v$newVersion" -ForegroundColor Green
 
     # 6. Push
-    Write-Host "`n⬆️ Pushing to remote..." -ForegroundColor Yellow
+    Write-Host "`n[PUSH] Pushing to remote..." -ForegroundColor Yellow
     git push
     git push --tags
 
     # 7. Publish (from extension folder)
-    Write-Host "`n Publishing to marketplace..." -ForegroundColor Yellow
+    Write-Host "`n[PUBLISH] Publishing to marketplace..." -ForegroundColor Yellow
     Push-Location $extensionPath
     
     if ($PreRelease) {

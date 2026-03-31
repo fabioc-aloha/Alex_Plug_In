@@ -10,6 +10,13 @@
       "yields": "git workflow patterns and guidance"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "implements",
+      "strength": 0.75,
+      "when": "Applying debugging patterns to VS Code extension patterns domain",
+      "yields": "VS Code extension patterns domain-specific context"
+    },
+    {
       "target": ".github/skills/testing-strategies/SKILL.md",
       "type": "complements",
       "strength": 0.7,

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "skillId": "persona-detection",
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "version": "1.0.0",
+  "connections": [
+    {
+      "target": ".github/skills/heir-sync-management/SKILL.md",
+      "type": "complements",
+      "strength": 0.85,
+      "note": "Persona detection ships to heir via inheritance model",
+      "when": "Integrating heir sync management into persona detection workflow",
+      "yields": "heir sync management integration patterns"
+    },
+    {
+      "target": ".github/instructions/alex-core.instructions.md",
+      "type": "uses",
+      "strength": 0.7,
+      "note": "Active Context persona field updated by detection chain",
+      "when": "persona detection references alex core",
+      "yields": "alex core reference material"
+    },
+    {
+      "target": ".github/skills/release-process/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "note": "Persona detection tested during pre-publish",
+      "when": "Verifying release process quality or compliance",
+      "yields": "release process quality checks and validation"
+    },
+    {
+      "target": ".github/skills/brand-asset-management/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "note": "BannerNoun action phrasing and persona avatar mappings are brand decisions",
+      "when": "Coordinating with brand asset management",
+      "yields": "brand asset management coordination protocols"
+    },
+    {
+      "target": ".github/skills/north-star/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "note": "North Star /northstar define sets Persona: field; detection reads it as P5",
+      "when": "Coordinating with north star",
+      "yields": "north star coordination protocols"
+    }
+  ],
+  "activationBoost": [
+    "persona",
+    "project type",
+    "auto-detect",
+    "P5 slot",
+    "P6 slot",
+    "P7 slot",
+    "working memory"
+  ],
+  "activationContexts": [
+    "persona",
+    "project type",
+    "auto-detect",
+    "P5 slot",
+    "P6 slot",
+    "P7 slot",
+    "working memory"
+  ]
+}

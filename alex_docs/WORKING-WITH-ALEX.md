@@ -661,7 +661,7 @@ VS Code 1.111+ includes built-in slash commands for creating agent customization
 
 ---
 
-## � Getting Started on macOS
+## 🍎 Getting Started on macOS
 
 Alex is fully cross-platform. Every muscle, script, and hook runs on macOS, Linux, and Windows.
 
@@ -741,7 +741,7 @@ The [mac](https://github.com/fabioc-aloha/mac) heir project has comprehensive ma
 
 ---
 
-## �🆘 Getting Help
+## 🆘 Getting Help
 
 - **Documentation**: `Alex: Documentation` command
 - **Health Check**: `Alex: Health Dashboard` for system status

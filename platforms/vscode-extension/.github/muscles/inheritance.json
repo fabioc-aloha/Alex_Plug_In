@@ -1,0 +1,238 @@
+{
+    "$schema": "../../alex_docs/schemas/muscle-inheritance.schema.json",
+    "schemaVersion": "1.0.0",
+    "description": "Defines inheritance rules for muscle scripts (execution artifacts)",
+    "inherits": "Muscles with 'inheritable' or 'universal' are synced to heirs. Master-only scripts stay in master.",
+    "muscles": {
+        "audit-master-alex.ps1": {
+            "inheritance": "master-only",
+            "description": "22-check comprehensive audit for Master Alex only",
+            "referencedBy": [
+                "architecture-audit",
+                "dream-state-automation"
+            ]
+        },
+        "brain-qa.ps1": {
+            "inheritance": "master-only",
+            "description": "32-phase brain QA validation (master-only, full phases)",
+            "referencedBy": [
+                "brain-qa"
+            ]
+        },
+        "brain-qa-heir.ps1": {
+            "inheritance": "inheritable",
+            "description": "23-phase brain QA validation for heirs (renamed to brain-qa.ps1 during sync)",
+            "referencedBy": [
+                "brain-qa"
+            ]
+        },
+        "build-extension-package.ps1": {
+            "inheritance": "master-only",
+            "description": "Orchestrates master→heir build process",
+            "referencedBy": [
+                "heir-sync-management",
+                "release-management"
+            ]
+        },
+        "dream-cli.ts": {
+            "inheritance": "inheritable",
+            "description": "CLI wrapper for dream/neural maintenance outside VS Code",
+            "referencedBy": [
+                "dream-state-automation"
+            ]
+        },
+        "fix-fence-bug.ps1": {
+            "inheritance": "inheritable",
+            "description": "Detect and fix VS Code create_file wrapping fence bug",
+            "referencedBy": []
+        },
+        "gamma-generator.cjs": {
+            "inheritance": "inheritable",
+            "description": "Gamma API CLI for presentation generation (CommonJS)",
+            "referencedBy": [
+                "gamma-presentations"
+            ]
+        },
+        "install-hooks.ps1": {
+            "inheritance": "inheritable",
+            "description": "Install chat hooks configuration for workspace",
+            "referencedBy": []
+        },
+        "md-to-word.cjs": {
+            "inheritance": "inheritable",
+            "description": "Convert Markdown with Mermaid diagrams to professional Word documents (Node.js)",
+            "referencedBy": [
+                "md-to-word"
+            ]
+        },
+        "new-skill.ps1": {
+            "inheritance": "inheritable",
+            "description": "Scaffold a new skill trifecta (SKILL.md + instructions + prompt + synapses)",
+            "referencedBy": [
+                "skill-building"
+            ]
+        },
+        "normalize-paths.ps1": {
+            "inheritance": "inheritable",
+            "description": "Normalize memory file paths to canonical .github/ format",
+            "referencedBy": [
+                "dream-state-automation"
+            ]
+        },
+        "pptxgen-cli.ts": {
+            "inheritance": "inheritable",
+            "description": "Offline PowerPoint generation via PptxGenJS",
+            "referencedBy": [
+                "pptx-generation"
+            ]
+        },
+        "sync-architecture.cjs": {
+            "inheritance": "master-only",
+            "description": "Syncs master architecture to heir (CommonJS variant)",
+            "referencedBy": [
+                "heir-sync-management",
+                "build-extension-package.ps1"
+            ]
+        },
+        "validate-skills.ps1": {
+            "inheritance": "inheritable",
+            "description": "Skill frontmatter and structure validation",
+            "referencedBy": [
+                "brain-qa",
+                "dream-state-automation"
+            ]
+        },
+        "validate-synapses.ps1": {
+            "inheritance": "inheritable",
+            "description": "Synapse connection validation",
+            "referencedBy": [
+                "brain-qa",
+                "dream-state-automation"
+            ]
+        },
+        "README.md": {
+            "inheritance": "inheritable",
+            "description": "Muscles folder documentation with language selection guide",
+            "referencedBy": []
+        },
+        "CONVERTER-CHANGELOG.md": {
+            "inheritance": "inheritable",
+            "description": "Version history for converter muscles and shared modules",
+            "referencedBy": []
+        },
+        "md-to-eml.cjs": {
+            "inheritance": "inheritable",
+            "description": "Convert Markdown to RFC 5322 email (.eml) with inline CSS and CID images",
+            "referencedBy": [
+                "md-to-eml"
+            ]
+        },
+        "markdown-lint.cjs": {
+            "inheritance": "inheritable",
+            "description": "19-rule pre-conversion markdown validator",
+            "referencedBy": [
+                "lint-clean-markdown"
+            ]
+        },
+        "md-scaffold.cjs": {
+            "inheritance": "inheritable",
+            "description": "Markdown template scaffolder (report, tutorial, reference, slides, email)",
+            "referencedBy": [
+                "md-scaffold"
+            ]
+        },
+        "nav-inject.cjs": {
+            "inheritance": "inheritable",
+            "description": "Cross-document navigation injection from nav.json",
+            "referencedBy": [
+                "nav-inject"
+            ]
+        },
+        "converter-qa.cjs": {
+            "inheritance": "master-only",
+            "description": "Test harness — 284 assertions across all converter outputs",
+            "referencedBy": [
+                "converter-qa",
+                "testing-strategies"
+            ]
+        },
+        "shared/index.mjs": {
+            "inheritance": "inheritable",
+            "description": "ESM bridge re-exporting all CJS shared modules",
+            "referencedBy": []
+        },
+        "shared/converter-config.cjs": {
+            "inheritance": "inheritable",
+            "description": "Config loader with .converter.json walk-up and preset merging",
+            "referencedBy": [
+                "md-to-word"
+            ]
+        },
+        "shared/markdown-preprocessor.cjs": {
+            "inheritance": "inheritable",
+            "description": "Unified markdown preprocessing — LaTeX, callouts, checkboxes, validation",
+            "referencedBy": [
+                "md-to-word",
+                "lint-clean-markdown"
+            ]
+        },
+        "shared/mermaid-pipeline.cjs": {
+            "inheritance": "inheritable",
+            "description": "Mermaid rendering, validation, creation helpers, and brand palette",
+            "referencedBy": [
+                "md-to-word",
+                "markdown-mermaid"
+            ]
+        },
+        "shared/prompt-preprocessor.cjs": {
+            "inheritance": "inheritable",
+            "description": "Replicate prompt processing — length validation, trait injection",
+            "referencedBy": [
+                "image-handling"
+            ]
+        },
+        "shared/svg-pipeline.cjs": {
+            "inheritance": "inheritable",
+            "description": "SVG creation, validation, PNG conversion with brand awareness",
+            "referencedBy": [
+                "svg-graphics"
+            ]
+        },
+        "shared/data-uri.cjs": {
+            "inheritance": "inheritable",
+            "description": "Base64 data URI encode/decode and file download utilities",
+            "referencedBy": [
+                "visual-memory"
+            ]
+        },
+        "shared/replicate-core.cjs": {
+            "inheritance": "inheritable",
+            "description": "Replicate API utilities — init, batch execution, cost estimation, model registry",
+            "referencedBy": [
+                "image-handling",
+                "ai-character-reference-generation"
+            ]
+        },
+        "lua-filters/caption-labels.lua": {
+            "inheritance": "inheritable",
+            "description": "Pandoc Lua filter for figure/table caption numbering",
+            "referencedBy": [
+                "md-to-word"
+            ]
+        },
+        "lua-filters/keep-headings.lua": {
+            "inheritance": "inheritable",
+            "description": "Pandoc Lua filter to preserve heading formatting",
+            "referencedBy": [
+                "md-to-word"
+            ]
+        },
+        "lua-filters/word-table-style.lua": {
+            "inheritance": "inheritable",
+            "description": "Pandoc Lua filter for Word table styling",
+            "referencedBy": [
+                "md-to-word"
+            ]
+        }
+    }
+}

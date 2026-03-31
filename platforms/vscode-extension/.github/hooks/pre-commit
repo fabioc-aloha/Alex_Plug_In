@@ -1,0 +1,13 @@
+#!/bin/sh
+# Git pre-commit hook wrapper
+# Calls the PowerShell validation script
+
+# Check if PowerShell 7+ is available
+if command -v pwsh > /dev/null 2>&1; then
+    pwsh -NoProfile -ExecutionPolicy Bypass -File ".github/hooks/pre-commit.ps1"
+    exit $?
+else
+    echo "⚠️  PowerShell 7+ not found - skipping quality gates"
+    echo "   Install: https://github.com/PowerShell/PowerShell"
+    exit 0
+fi

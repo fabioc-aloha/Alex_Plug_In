@@ -11,6 +11,14 @@
       "yields": "project scaffolding supporting context"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "complements",
+      "strength": 0.7,
+      "reason": "Extension dev needs good environment",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns complementary techniques"
+    },
+    {
       "target": ".github/skills/git-workflow/SKILL.md",
       "type": "supports",
       "strength": 0.75,

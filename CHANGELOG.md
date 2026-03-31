@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.8.5] - 2026-03-31
+
+> **User Memory Leverage & MCP Enrichment** -- VS Code memory research (v1.99-v1.102), MCP cognitive tools v1.1.0 (prompts + resources), tool sets, memory-curation skill, `/memory-audit` prompt, meditation Phase 1.5 (cross-project memory scan), `/memories/` restructured for 0% waste.
+
+### Added
+
+- **VS Code memory research** -- Comprehensive research document covering two memory systems, 10-layer customization stack, v1.99-v1.102 features, 14 architectural opportunities (`alex_docs/research/VSCODE-MEMORY-ARCHITECTURE.md`)
+- **MCP prompts** -- 4 prompts (health-check, architecture-overview, search-knowledge, save-insight) exposed via cognitive tools MCP server
+- **MCP resources** -- 6 architecture documents as browseable resources with `alex://` URI scheme
+- **Tool sets** -- `.vscode/toolsets.json` with 3 groups (alex-brain, alex-knowledge, alex-memory) for `#toolSetName` chat references
+- **memory-curation skill** -- Audit procedure, scope rules, budget monitoring, meditation integration, pattern discovery pipeline
+- **`/memory-audit` prompt** -- On-demand user memory audit for scope violations, waste, and budget usage
+- **Meditation Phase 1.5** -- Cross-project memory scan during meditation: pattern promotion, reinforcement tracking, skill candidate discovery
+- **User Memory Leverage Plan** -- Full plan document with phases, token budget analysis, governance strategy (`alex_docs/research/USER-MEMORY-LEVERAGE-PLAN.md`)
+- **VS Code Chat Configurations doc** -- Documents tool sets, MCP prompts, resources, and flow diagrams (`alex_docs/research/VSCODE-CHAT-CONFIGURATIONS.md`)
+
+### Changed
+
+- **MCP cognitive tools** -- Bumped to v1.1.0 with prompts and resources capabilities
+- **meditation.instructions.md** -- Added Phase 1.5 (Cross-Project Memory Scan), pre-meditation now pre-loads memory-curation skill and reads `/memories/`
+- **memory-activation/SKILL.md** -- Added memory-curation activation keywords to action-keyword index
+- **`/memories/fabio-preferences.md`** -- Restructured from flat dump (30 lines, 40% waste) to 6 categorized sections (29 lines, 0% waste): Writing Style, Tool Preferences, Workflow, Cross-Workspace Access, Learning and Explanation, Charting
+
+---
+
 ## [6.8.4] - 2026-03-27
 
 > **Quality Review & Roadmap Cleanup** -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes.

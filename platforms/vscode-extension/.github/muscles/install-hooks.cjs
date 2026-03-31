@@ -7,8 +7,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
-
 const scriptDir = __dirname;
 const rootPath = path.resolve(scriptDir, '..', '..');
 const hooksSource = path.join(rootPath, '.github', 'hooks');
@@ -31,18 +29,9 @@ function main() {
   }
 
   if (fs.existsSync(preCommitTarget)) {
-    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-    rl.question('  [WARN] pre-commit hook already exists. Overwrite? (y/N) ', (answer) => {
-      rl.close();
-      if (answer.toLowerCase() !== 'y') {
-        console.log('  Skipped pre-commit hook');
-        process.exit(0);
-      }
-      copyHook(preCommitSource, preCommitTarget);
-    });
-  } else {
-    copyHook(preCommitSource, preCommitTarget);
+    console.log('  [WARN] pre-commit hook already exists -- overwriting');
   }
+  copyHook(preCommitSource, preCommitTarget);
 }
 
 function copyHook(source, target) {

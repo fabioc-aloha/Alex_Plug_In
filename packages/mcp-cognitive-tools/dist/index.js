@@ -182,6 +182,102 @@ const TOOLS = [
 // ---------------------------------------------------------------------------
 // Tool Implementations
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Prompt Definitions
+// ---------------------------------------------------------------------------
+const PROMPTS = [
+    {
+        name: "health-check",
+        description: "Run a cognitive architecture health check and report status",
+    },
+    {
+        name: "architecture-overview",
+        description: "Get a summary of how Alex's cognitive architecture is structured in this workspace",
+    },
+    {
+        name: "search-knowledge",
+        description: "Search Alex's knowledge base for patterns, insights, or prior learnings",
+        arguments: [
+            {
+                name: "query",
+                description: "What to search for across skills, instructions, prompts, episodic memory, and global knowledge",
+                required: true,
+            },
+        ],
+    },
+    {
+        name: "save-insight",
+        description: "Save a new insight or lesson learned to Alex's global knowledge base",
+        arguments: [
+            {
+                name: "title",
+                description: "Brief title for the insight",
+                required: true,
+            },
+            {
+                name: "content",
+                description: "Full insight content",
+                required: true,
+            },
+            {
+                name: "category",
+                description: "Category: architecture, patterns, debugging, best-practices, or lessons-learned",
+                required: true,
+            },
+        ],
+    },
+];
+// ---------------------------------------------------------------------------
+// Resource Definitions
+// ---------------------------------------------------------------------------
+function getArchitectureResources() {
+    const basePath = process.cwd();
+    const resources = [];
+    const resourceFiles = [
+        {
+            relPath: "alex_docs/NORTH-STAR.md",
+            name: "North Star",
+            description: "Alex's project vision and mission definition",
+        },
+        {
+            relPath: "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+            name: "Cognitive Architecture",
+            description: "Complete cognitive architecture documentation",
+        },
+        {
+            relPath: "alex_docs/skills/SKILLS-CATALOG.md",
+            name: "Skills Catalog",
+            description: "Full inventory of Alex's skills and trifecta status",
+        },
+        {
+            relPath: ".github/copilot-instructions.md",
+            name: "Conscious Mind",
+            description: "Alex's always-on instructions (identity, routing, active context)",
+        },
+        {
+            relPath: "alex_docs/architecture/CONSCIOUS-MIND.md",
+            name: "Conscious Mind Architecture",
+            description: "How the conscious mind layer works",
+        },
+        {
+            relPath: "alex_docs/WHAT-IS-ALEX.md",
+            name: "What is Alex",
+            description: "Introduction and overview of Alex's cognitive architecture",
+        },
+    ];
+    for (const rf of resourceFiles) {
+        const fullPath = path.join(basePath, rf.relPath);
+        if (fs.existsSync(fullPath)) {
+            resources.push({
+                uri: `alex://${rf.relPath}`,
+                name: rf.name,
+                description: rf.description,
+                mimeType: "text/markdown",
+            });
+        }
+    }
+    return resources;
+}
 async function synapseHealth(workspacePath) {
     const basePath = workspacePath || process.cwd();
     const githubPath = path.join(basePath, ".github");
@@ -234,13 +330,24 @@ async function synapseHealth(workspacePath) {
     for (const synapseFile of synapseFiles) {
         try {
             const content = JSON.parse(fs.readFileSync(synapseFile, "utf-8"));
-            if (content.connections) {
+            if (Array.isArray(content.connections)) {
                 for (const conn of content.connections) {
+                    if (!conn.target) {
+                        continue;
+                    }
+                    // Skip URI-scheme targets (external cross-system references)
+                    if (/^(global-knowledge:\/\/|external:)/.test(conn.target)) {
+                        continue;
+                    }
                     const targetPath = path.join(basePath, conn.target);
                     if (!fs.existsSync(targetPath)) {
                         stats.brokenSynapses++;
                     }
                 }
+            }
+            // Object-format connections: validate by iterating values
+            else if (content.connections && typeof content.connections === 'object') {
+                // Legacy object format — skip deep validation
             }
         }
         catch {
@@ -564,10 +671,12 @@ function extractSnippet(content, query, contextChars = 100) {
 async function main() {
     const server = new index_js_1.Server({
         name: "alex-cognitive-tools",
-        version: "1.0.0",
+        version: "1.1.0",
     }, {
         capabilities: {
             tools: {},
+            prompts: {},
+            resources: {},
         },
     });
     // List tools handler
@@ -616,6 +725,114 @@ async function main() {
                 isError: true,
             };
         }
+    });
+    // ---------------------------------------------------------------------------
+    // Prompt Handlers
+    // ---------------------------------------------------------------------------
+    server.setRequestHandler(types_js_1.ListPromptsRequestSchema, async () => ({
+        prompts: PROMPTS,
+    }));
+    server.setRequestHandler(types_js_1.GetPromptRequestSchema, async (request) => {
+        const { name, arguments: args } = request.params;
+        switch (name) {
+            case "health-check":
+                return {
+                    messages: [
+                        {
+                            role: "user",
+                            content: {
+                                type: "text",
+                                text: "Run a cognitive architecture health check. Use the alex_synapse_health tool to check synapse integrity, then use alex_architecture_status to get the current inventory. Summarize the overall health status, highlight any issues, and suggest improvements.",
+                            },
+                        },
+                    ],
+                };
+            case "architecture-overview":
+                return {
+                    messages: [
+                        {
+                            role: "user",
+                            content: {
+                                type: "text",
+                                text: "Provide an overview of Alex's cognitive architecture in this workspace. Use the alex_architecture_status tool to get the current inventory of skills, instructions, prompts, agents, and episodic files. Then summarize the architecture structure, what capabilities are available, and the current version.",
+                            },
+                        },
+                    ],
+                };
+            case "search-knowledge": {
+                const query = args?.query;
+                if (!query) {
+                    throw new Error("Missing required argument: query");
+                }
+                return {
+                    messages: [
+                        {
+                            role: "user",
+                            content: {
+                                type: "text",
+                                text: `Search Alex's knowledge base for: "${query}". Use both alex_memory_search (for skills, instructions, prompts, episodic memory) and alex_knowledge_search (for global patterns and insights) to find relevant results. Synthesize the findings into a coherent summary.`,
+                            },
+                        },
+                    ],
+                };
+            }
+            case "save-insight": {
+                const title = args?.title;
+                const content = args?.content;
+                const category = args?.category;
+                if (!title || !content || !category) {
+                    throw new Error("Missing required arguments: title, content, category");
+                }
+                return {
+                    messages: [
+                        {
+                            role: "user",
+                            content: {
+                                type: "text",
+                                text: `Save this insight to Alex's global knowledge base using the alex_knowledge_save tool:\n\nTitle: ${title}\nCategory: ${category}\nContent: ${content}`,
+                            },
+                        },
+                    ],
+                };
+            }
+            default:
+                throw new Error(`Unknown prompt: ${name}`);
+        }
+    });
+    // ---------------------------------------------------------------------------
+    // Resource Handlers
+    // ---------------------------------------------------------------------------
+    server.setRequestHandler(types_js_1.ListResourcesRequestSchema, async () => ({
+        resources: getArchitectureResources(),
+    }));
+    server.setRequestHandler(types_js_1.ReadResourceRequestSchema, async (request) => {
+        const { uri } = request.params;
+        const basePath = process.cwd();
+        // Parse alex:// URIs → file paths
+        if (!uri.startsWith("alex://")) {
+            throw new Error(`Unsupported URI scheme: ${uri}`);
+        }
+        const relPath = uri.replace("alex://", "");
+        const fullPath = path.join(basePath, relPath);
+        // Prevent path traversal
+        const resolved = path.resolve(fullPath);
+        const baseResolved = path.resolve(basePath);
+        if (!resolved.startsWith(baseResolved)) {
+            throw new Error("Access denied: path traversal detected");
+        }
+        if (!fs.existsSync(fullPath)) {
+            throw new Error(`Resource not found: ${relPath}`);
+        }
+        const content = fs.readFileSync(fullPath, "utf-8");
+        return {
+            contents: [
+                {
+                    uri,
+                    mimeType: "text/markdown",
+                    text: content,
+                },
+            ],
+        };
     });
     // Connect via stdio
     const transport = new stdio_js_1.StdioServerTransport();

@@ -6,6 +6,22 @@
   "lastValidated": "2026-02-12",
   "connections": [
     {
+      "target": ".github/skills/enterprise-integration/SKILL.md",
+      "type": "extends",
+      "strength": 0.95,
+      "reason": "Provides API reference for enterprise Graph integration",
+      "when": "When .github/skills/enterprise integration/SKILL.md capabilities are needed",
+      "yields": "enterprise integration extended capabilities"
+    },
+    {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "uses",
+      "strength": 0.7,
+      "reason": "VS Code auth session API for token acquisition",
+      "when": "When task involves .github/skills/vscode extension patterns/SKILL.md",
+      "yields": "VS Code extension patterns patterns and guidance"
+    },
+    {
       "target": ".github/skills/localization/SKILL.md",
       "type": "complements",
       "strength": 0.5,

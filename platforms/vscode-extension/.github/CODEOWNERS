@@ -1,0 +1,31 @@
+# CODEOWNERS
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owner for the entire repository
+* @fabioc-aloha
+
+# Core architecture files - require review from maintainer
+/.github/copilot-instructions.md @fabioc-aloha
+/.github/skills/ @fabioc-aloha
+/.github/instructions/ @fabioc-aloha
+/.github/config/ @fabioc-aloha
+
+# VS Code extension code - require review for security
+/platforms/vscode-extension/src/ @fabioc-aloha
+/platforms/vscode-extension/package.json @fabioc-aloha
+
+# M365 Copilot agent - require review
+/platforms/m365-copilot/ @fabioc-aloha
+
+# Security-sensitive files
+/SECURITY.md @fabioc-aloha
+/.github/workflows/ @fabioc-aloha
+
+# Documentation - community contributions welcome, but reviewed
+/alex_docs/ @fabioc-aloha
+/README.md @fabioc-aloha
+/CONTRIBUTING.md @fabioc-aloha
+
+# Scripts - require careful review
+/scripts/ @fabioc-aloha
+/.github/muscles/ @fabioc-aloha

@@ -222,6 +222,7 @@ When user corrects Alex:
 - [.github/instructions/dream-state-automation.instructions.md] (Critical, Coordinates, Bidirectional) - "Dream protocol execution"
 - [.github/prompts/meditate.prompt.md] (Critical, Coordinates, Bidirectional) - "Meditation protocol execution"
 - [.github/instructions/self-actualization.instructions.md] (High, Triggers, Forward) - "Self-assessment protocols"
+- [.github/instructions/release-management.instructions.md] (Critical, Enforces, Gateway) - "Release process compliance"
 - [.github/instructions/technical-debt-tracking.instructions.md] (High, Monitors, Proactive) - "Debt visibility and tracking"
 - [.github/instructions/architecture-decision-records.instructions.md] (Medium, Documents, Forward) - "Decision documentation"
 - [.github/instructions/dependency-management.instructions.md] (High, Maintains, Proactive) - "Dependency health"

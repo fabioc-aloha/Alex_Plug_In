@@ -18,6 +18,13 @@
       "yields": "README structure, hero banner placement"
     },
     {
+      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
+      "type": "supports",
+      "strength": 0.7,
+      "when": "creating extension icons",
+      "yields": "Icon size requirements, package.json icon field"
+    },
+    {
       "target": ".github/skills/visual-memory/SKILL.md",
       "type": "complements",
       "strength": 0.85,

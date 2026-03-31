@@ -44,6 +44,14 @@
       "note": "Schema migrations parallel code refactoring",
       "when": "database design applies analogous patterns from refactoring patterns",
       "yields": "refactoring patterns analogous domain patterns"
+    },
+    {
+      "target": ".github/skills/azure-architecture-patterns/SKILL.md",
+      "type": "supports",
+      "strength": 0.75,
+      "note": "Azure SQL, Cosmos DB patterns",
+      "when": "database design needs azure architecture patterns context",
+      "yields": "azure architecture patterns supporting context"
     }
   ],
   "activationBoost": [

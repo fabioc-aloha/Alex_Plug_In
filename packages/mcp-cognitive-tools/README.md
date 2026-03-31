@@ -9,6 +9,8 @@ Standalone MCP server that exposes Alex's cognitive architecture tools for use w
 - **Architecture Status**: Get current inventory of cognitive components
 - **Global Knowledge Search**: Search cross-project patterns and insights
 - **Knowledge Save**: Persist new insights to the global knowledge base
+- **MCP Prompts**: Reusable prompt templates accessible as `/mcp.alex-cognitive-tools.*` slash commands
+- **MCP Resources**: Browse and attach Alex architecture documents as chat context
 
 ## Installation
 
@@ -129,6 +131,51 @@ Input:
 Output:
   - Confirmation with saved file path
 ```
+
+## Prompts Reference
+
+Prompts appear as `/mcp.alex-cognitive-tools.<name>` slash commands in VS Code chat.
+
+### health-check
+
+Run a cognitive architecture health check and report status. No arguments required.
+
+### architecture-overview
+
+Get a summary of the cognitive architecture in this workspace. No arguments required.
+
+### search-knowledge
+
+Search Alex's knowledge base for patterns, insights, or prior learnings.
+
+```
+Arguments:
+  query: string  # What to search for (required)
+```
+
+### save-insight
+
+Save a new insight to Alex's global knowledge base.
+
+```
+Arguments:
+  title: string     # Brief title (required)
+  content: string   # Full insight content (required)
+  category: string  # architecture | patterns | debugging | best-practices | lessons-learned (required)
+```
+
+## Resources Reference
+
+Architecture documents are exposed as browseable MCP resources. Attach them to chat via `Add Context > MCP Resources`.
+
+| Resource                    | URI                                                       | Description                         |
+| --------------------------- | --------------------------------------------------------- | ----------------------------------- |
+| North Star                  | `alex://alex_docs/NORTH-STAR.md`                          | Project vision and mission          |
+| Cognitive Architecture      | `alex://alex_docs/architecture/COGNITIVE-ARCHITECTURE.md` | Full architecture docs              |
+| Skills Catalog              | `alex://alex_docs/skills/SKILLS-CATALOG.md`               | Skill inventory and trifecta status |
+| Conscious Mind              | `alex://.github/copilot-instructions.md`                  | Always-on instructions              |
+| Conscious Mind Architecture | `alex://alex_docs/architecture/CONSCIOUS-MIND.md`         | How the conscious mind works        |
+| What is Alex                | `alex://alex_docs/WHAT-IS-ALEX.md`                        | Architecture overview               |
 
 ## Requirements
 
