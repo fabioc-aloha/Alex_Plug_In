@@ -12,7 +12,7 @@ Before generating: read the Replicate API Starter Kit in the skill's resources/.
 
 **Face Reference Prep** — Resize to 512px longest edge @ 85% JPEG (~40-80KB):
 
-```powershell
+```bash
 magick input.jpg -resize 512x512 -quality 85 output.jpg
 $b64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes("output.jpg"))
 $uri = "data:image/jpeg;base64,$b64"

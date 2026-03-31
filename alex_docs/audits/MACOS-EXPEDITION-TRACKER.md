@@ -124,11 +124,11 @@ Muscle error messages show `$env:VAR` (PowerShell syntax) to macOS users who nee
 | 2   | validate-skills.ps1         | Skill file validation       | Port to .cjs                        | [x]    |
 | 3   | audit-master-alex.ps1       | 22-point pre-release audit  | Port to .cjs                        | [x]    |
 | 4   | validate-synapses.ps1       | Synapse target validation   | Port to .cjs                        | [x]    |
-| 5   | build-extension-package.ps1 | VSIX packaging              | Keep PS -- Windows CI/release only  | [—]    |
-| 6   | fix-fence-bug.ps1           | VS Code fence bug fix       | Keep PS -- rare utility             | [—]    |
+| 5   | build-extension-package.ps1 | VSIX packaging              | Keep PS -- Master-only (release CI) | [—]    |
+| 6   | fix-fence-bug.ps1           | VS Code fence bug fix       | Keep PS -- Master-only (rare util)  | [—]    |
 | 7   | install-hooks.ps1           | Install hooks config        | Port to .cjs (small scope)          | [x]    |
 | 8   | new-skill.ps1               | Scaffold new skill trifecta | Port to .cjs (high value for heirs) | [x]    |
-| 9   | normalize-paths.ps1         | Path consistency fixes      | Keep PS -- Master dev tool          | [—]    |
+| 9   | normalize-paths.ps1         | Path consistency fixes      | Keep PS -- Master-only (dev tool)   | [—]    |
 | 10  | brain-qa-heir.ps1           | 25-phase heir validation    | Port to .cjs (follows brain-qa)     | [x]    |
 
 **Priority order**: brain-qa > new-skill > validate-skills > validate-synapses > audit-master-alex > install-hooks > brain-qa-heir
@@ -220,15 +220,15 @@ macOS equivalent of Task Scheduler but more powerful (file watchers, keep-alive,
 
 These require changes in the VS Code extension TypeScript source. Some were already fixed by the VSIX audit.
 
-| #   | Action                                                | Status | Notes                         |
-| --- | ----------------------------------------------------- | ------ | ----------------------------- |
-| 1   | setupGlobalKnowledge.ts -- hardcoded Windows paths    | [x]    | Fixed 2026-03-27 (VSIX audit) |
-| 2   | setupGlobalKnowledge.ts -- symlink error message      | [x]    | Fixed 2026-03-27 (VSIX audit) |
-| 3   | Pandoc install hints in 3 shipped muscles             | [x]    | Fixed 2026-03-27 (VSIX audit) |
-| 4   | Audio playback via `afplay` on macOS                  | [x]    | Already cross-platform        |
-| 5   | gamma-generator.cjs file open via `open`              | [x]    | Already cross-platform        |
-| 6   | Full extension lifecycle test on macOS hardware       | [—]    | Deferred -- requires macOS machine (code paths verified cross-platform) |
-| 7   | Platform-aware terminal detection (zsh vs PowerShell) | [x]    | detectPlatform() utility + shell info in diagnostics |
+| #   | Action                                                | Status | Notes                                                                  |
+| --- | ----------------------------------------------------- | ------ | ---------------------------------------------------------------------- |
+| 1   | setupGlobalKnowledge.ts -- hardcoded Windows paths    | [x]    | Fixed 2026-03-27 (VSIX audit)                                          |
+| 2   | setupGlobalKnowledge.ts -- symlink error message      | [x]    | Fixed 2026-03-27 (VSIX audit)                                          |
+| 3   | Pandoc install hints in 3 shipped muscles             | [x]    | Fixed 2026-03-27 (VSIX audit)                                          |
+| 4   | Audio playback via `afplay` on macOS                  | [x]    | Already cross-platform                                                 |
+| 5   | gamma-generator.cjs file open via `open`              | [x]    | Already cross-platform                                                 |
+| 6   | Full extension lifecycle test on macOS hardware       | [—]    | Blocked -- requires macOS machine (code paths verified cross-platform) |
+| 7   | Platform-aware terminal detection (zsh vs PowerShell) | [x]    | detectPlatform() utility + shell info in diagnostics                   |
 
 ## Cross-References
 
@@ -267,12 +267,12 @@ Each guide needs a dual-platform treatment: keep the macOS content, add Windows 
 | --- | ----------------------- | --------------------------------------------- | ------------------------------------------------ | ------ |
 | 1   | alex/cli-tools.md       | `brew install node git pandoc...`             | `winget install` equivalents                     | [x]    |
 | 2   | alex/cli-tools.md       | `xcode-select --install`                      | Note: Windows uses VS Build Tools                | [x]    |
-| 3   | alex/cli-tools.md       | `eval "$(/opt/homebrew/bin/brew shellenv)"`   | N/A on Windows (winget is built-in)              | [—]    |
+| 3   | alex/cli-tools.md       | `eval "$(/opt/homebrew/bin/brew shellenv)"`   | N/A -- macOS-only (winget needs no init)         | [—]    |
 | 4   | alex/cli-tools.md       | Verification script uses bash `command -v`    | Add PowerShell `Get-Command` version             | [x]    |
 | 5   | alex/api-keys.md        | `export VAR="value"` in `.zprofile`           | `$env:VAR` in PowerShell profile / `.env` file   | [x]    |
 | 6   | alex/api-keys.md        | `ssh-keygen` + `pbcopy`                       | `ssh-keygen` + `clip` (or `Get-Clipboard`)       | [x]    |
 | 7   | alex/api-keys.md        | Verification script uses bash `[ -n "$VAR" ]` | Add PowerShell `$env:VAR` check                  | [x]    |
-| 8   | alex/npm-packages.md    | `~/.npm-global` permission fix                | Not needed on Windows (npm global works)         | [—]    |
+| 8   | alex/npm-packages.md    | `~/.npm-global` permission fix                | N/A -- macOS-only (Windows npm works natively)   | [—]    |
 | 9   | alex/npm-packages.md    | `NODE_PATH` uses `$HOME/.vscode/extensions/`  | `$env:APPDATA` / `%USERPROFILE%` path            | [x]    |
 | 10  | alex/installing-alex.md | `rm -rf .git`                                 | `Remove-Item -Recurse -Force .git`               | [x]    |
 | 11  | alex/installing-alex.md | `cp -r` for copying `.github/`                | `Copy-Item -Recurse`                             | [x]    |
@@ -288,9 +288,9 @@ The mac heir's `.github/` is a copy of Master's architecture. Once Phase 1-2 fix
 
 | #   | Action                                                         | Status |
 | --- | -------------------------------------------------------------- | ------ |
-| 1   | After Phase 1 completes in Master, sync `.github/` to mac heir | [ ]    |
-| 2   | Verify mac heir's `.github/` matches Master post-sync          | [ ]    |
-| 3   | Run brain-qa on mac heir to validate architecture health       | [ ]    |
+| 1   | After Phase 1 completes in Master, sync `.github/` to mac heir | [x]    |
+| 2   | Verify mac heir's `.github/` matches Master post-sync          | [x]    |
+| 3   | Run brain-qa on mac heir to validate architecture health       | [x]    |
 
 ### 5.3 Promotion Pipeline -- Mac Heir Docs to Master
 
@@ -298,13 +298,13 @@ Once the guides are cross-platform, they're candidates for Master's documentatio
 
 | #   | Source (mac heir)                | Destination (Master)                      | Value                                                  | Status |
 | --- | -------------------------------- | ----------------------------------------- | ------------------------------------------------------ | ------ |
-| 1   | alex/alex-ai.md                  | alex_docs/WHAT-IS-ALEX.md (new)           | "What is Alex?" primer -- Master has nothing like this | [ ]    |
-| 2   | alex/installing-alex.md          | alex_docs/guides/GETTING-STARTED.md (new) | First-time setup guide                                 | [ ]    |
-| 3   | alex/cli-tools.md                | alex_docs/guides/CLI-TOOLS.md (new)       | Cross-platform dependency reference                    | [ ]    |
-| 4   | alex/vscode-setup.md             | alex_docs/guides/VSCODE-SETUP.md (new)    | VS Code config for Alex projects                       | [ ]    |
-| 5   | alex/api-keys.md                 | alex_docs/guides/API-KEYS.md (new)        | Service configuration                                  | [ ]    |
-| 6   | alex/npm-packages.md             | alex_docs/guides/NPM-PACKAGES.md (new)    | Muscle dependency reference                            | [ ]    |
-| 7   | docs/cross-platform-workflows.md | Global Knowledge (GK promotion)           | Dual-OS daily driver patterns                          | [ ]    |
+| 1   | alex/alex-ai.md                  | alex_docs/WHAT-IS-ALEX.md (new)           | "What is Alex?" primer -- Master has nothing like this | [x]    |
+| 2   | alex/installing-alex.md          | alex_docs/guides/GETTING-STARTED.md (new) | First-time setup guide                                 | [x]    |
+| 3   | alex/cli-tools.md                | alex_docs/guides/CLI-TOOLS.md (new)       | Cross-platform dependency reference                    | [x]    |
+| 4   | alex/vscode-setup.md             | alex_docs/guides/VSCODE-SETUP.md (new)    | VS Code config for Alex projects                       | [x]    |
+| 5   | alex/api-keys.md                 | alex_docs/guides/API-KEYS.md (new)        | Service configuration                                  | [x]    |
+| 6   | alex/npm-packages.md             | alex_docs/guides/NPM-PACKAGES.md (new)    | Muscle dependency reference                            | [x]    |
+| 7   | docs/cross-platform-workflows.md | Global Knowledge (GK promotion)           | Dual-OS daily driver patterns                          | [x]    |
 | 8   | docs/alex-macos-gap-analysis.md  | Already tracked (this document)           | Architecture audit findings absorbed here              | [x]    |
 
 ## Metrics
@@ -315,5 +315,5 @@ Once the guides are cross-platform, they're candidates for Master's documentatio
 | Phase 2 (P2 -- Gaps)         | 15          | 12       | 0           | 3        |
 | Phase 3 (P3 -- macOS-Native) | 16          | 16       | 0           | 0        |
 | Phase 4 (Extension)          | 7           | 6        | 0           | 1        |
-| Phase 5 (Mac Heir XP)        | 27          | 16       | 0           | 2        |
-| **Total**                    | **93**      | **84**   | **0**       | **6**    |
+| Phase 5 (Mac Heir XP)        | 27          | 26       | 0           | 1        |
+| **Total**                    | **93**      | **88**   | **0**       | **5**    |

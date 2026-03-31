@@ -133,8 +133,11 @@ function initReplicate(envPath) {
   } catch { /* dotenv not available, rely on env vars */ }
 
   if (!process.env.REPLICATE_API_TOKEN) {
+    const hint = process.platform === 'win32'
+      ? '$env:REPLICATE_API_TOKEN = "r8_..."'
+      : 'export REPLICATE_API_TOKEN="r8_..."';
     console.error('ERROR: REPLICATE_API_TOKEN not set.');
-    console.error('Set via: .env file or $env:REPLICATE_API_TOKEN = "r8_..."');
+    console.error(`Set via: .env file or ${hint}`);
     process.exit(1);
   }
 

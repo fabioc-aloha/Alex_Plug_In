@@ -30,7 +30,7 @@ applyTo: "**/azure/**,**/infrastructure/**,**/*deploy*.{ps1,sh,md}"
 
 ### 1. Azure Subscription Permissions
 
-```powershell
+```bash
 # Verify authenticated and correct subscription
 az account show
 
@@ -46,7 +46,7 @@ az role assignment list --assignee $(az account show --query user.name -o tsv) `
 
 ### 2. Azure Policy Compliance
 
-```powershell
+```bash
 # List all policy assignments at subscription level
 az policy assignment list --query "[].{Name:displayName, Effect:parameters.effect.value}"
 
@@ -68,7 +68,7 @@ az policy assignment list --query "[].{Name:displayName, Effect:parameters.effec
 
 ### 3. Entra App Registration Permissions
 
-```powershell
+```bash
 # Test app registration permission
 az ad app create --display-name "test-permissions-$(Get-Random)"
 
@@ -100,7 +100,7 @@ az ad app create --display-name "test-permissions-$(Get-Random)"
 
 ### 4. Resource Provider Registration
 
-```powershell
+```bash
 # Check required providers are registered
 az provider show --namespace Microsoft.Web --query "registrationState"
 az provider show --namespace Microsoft.BotService --query "registrationState"
@@ -131,7 +131,7 @@ az provider show --namespace Microsoft.Insights --query "registrationState"
 
 **12-Step Deployment Script** (from Teams Deep Integration Plan):
 
-```powershell
+```bash
 # 1. Set Azure context
 az login
 az account set --subscription "your-subscription-id"

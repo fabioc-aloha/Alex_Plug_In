@@ -13,7 +13,7 @@ Run a full brain QA session: automated structural validation + manual semantic r
 ### Step 1: Automated Validation
 Run the brain-qa script and report results:
 
-```powershell
+```bash
 .github/muscles/brain-qa.ps1 -Mode all
 ```
 

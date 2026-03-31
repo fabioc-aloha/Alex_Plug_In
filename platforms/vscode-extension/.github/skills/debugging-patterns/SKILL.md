@@ -30,7 +30,7 @@ When you don't know where the problem is:
 
 Git bisect automates this:
 
-```powershell
+```bash
 git bisect start
 git bisect bad                    # Current is broken
 git bisect good <known-good-sha>  # This worked

@@ -1,16 +1,31 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/ISSUE_TEMPLATE/bug_report.md",
-    "ROADMAP-UNIFIED.md",
-    "alex_docs/audits/MACOS-EXPEDITION-TRACKER.md"
+    "alex_docs/audits/MACOS-EXPEDITION-TRACKER.md",
+    "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+    "alex_docs/WHAT-IS-ALEX.md",
+    "alex_docs/guides/API-KEYS.md",
+    "alex_docs/guides/CLI-TOOLS.md",
+    "alex_docs/guides/GETTING-STARTED.md",
+    "alex_docs/guides/NPM-PACKAGES.md",
+    "alex_docs/guides/VSCODE-SETUP.md"
   ],
   "todoHotspots": [
     {
-      "file": "ROADMAP-UNIFIED.md",
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1774895924683
+      "scannedAt": 1774918199321
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1774918199321
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1774918199321
     }
   ],
-  "lastUpdated": 1774895924683
+  "lastUpdated": 1774918199321
 }

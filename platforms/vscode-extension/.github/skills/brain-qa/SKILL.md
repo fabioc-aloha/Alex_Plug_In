@@ -36,7 +36,7 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 ## Quick Start
 
 ### Master Context
-```powershell
+```bash
 # Full 31-phase audit
 .github/muscles/brain-qa.ps1
 
@@ -60,7 +60,7 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 ```
 
 ### Heir Context
-```powershell
+```bash
 # Full heir audit (23 heir-relevant phases)
 .github/muscles/brain-qa.ps1
 

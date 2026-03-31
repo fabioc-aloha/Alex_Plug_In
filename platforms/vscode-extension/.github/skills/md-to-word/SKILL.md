@@ -37,7 +37,7 @@ This skill handles step 1. Steps 2 and 3 are manual because Word provides superi
 
 ### One-Command Conversion
 
-```powershell
+```bash
 # From your project root
 node .github/muscles/md-to-word.cjs docs/spec.md
 
@@ -65,18 +65,25 @@ node .github/muscles/md-to-word.cjs docs/plan.md --keep-temp
 
 ### Prerequisites
 
-| Tool | Install Command | Purpose |
-|------|-----------------|---------|
-| **Node.js 18+** | (system) | Script runtime |
-| **pandoc** | `winget install pandoc` | Markdown to Word |
-| **mermaid-cli** | `npm install -g @mermaid-js/mermaid-cli` | Mermaid to PNG |
-| **jszip** | (bundled with extension) | OOXML post-processing |
-| **svgexport** | `npm install -g svgexport` | SVG to PNG (optional) |
+| Tool | Install (macOS) | Install (Windows) | Purpose |
+|------|-----------------|-------------------|---------|
+| **Node.js 18+** | `brew install node` | `winget install OpenJS.NodeJS.LTS` | Script runtime |
+| **pandoc** | `brew install pandoc` | `winget install JohnMacFarlane.Pandoc` | Markdown to Word |
+| **mermaid-cli** | `npm install -g @mermaid-js/mermaid-cli` | same | Mermaid to PNG |
+| **jszip** | (bundled with extension) | same | OOXML post-processing |
+| **svgexport** | `npm install -g svgexport` | same | SVG to PNG (optional) |
 
 ### Quick Install (All Dependencies)
 
+**macOS**
+```bash
+brew install pandoc
+npm install -g @mermaid-js/mermaid-cli svgexport
+```
+
+**Windows**
 ```powershell
-winget install pandoc
+winget install JohnMacFarlane.Pandoc
 npm install -g @mermaid-js/mermaid-cli svgexport
 ```
 
@@ -153,14 +160,32 @@ All tables receive professional styling:
 | Issue | Cause | Fix |
 |-------|-------|-----|
 | "mmdc not found" | mermaid-cli not installed | `npm install -g @mermaid-js/mermaid-cli` |
-| "pandoc not found" | pandoc not in PATH | `winget install pandoc`, restart terminal |
+| "pandoc not found" | pandoc not in PATH | `brew install pandoc` (macOS) / `winget install JohnMacFarlane.Pandoc` (Windows), restart terminal |
 | Tables not styled | jszip not available | Ensure NODE_PATH is set |
 | Diagrams too large | Old script version | Update to v2.0.0 with 90% H+V |
 | Bullet lists merged | Markdown spacing | Script auto-fixes (v2.0.0+) |
+### macOS `textutil` Fallback (No Pandoc)
 
+macOS ships `textutil` which can convert HTML to DOCX natively. If Pandoc is unavailable, this provides a basic conversion path:
+
+```bash
+# Convert markdown to HTML first, then HTML to DOCX
+npx marked document.md -o document.html
+textutil -convert docx document.html -output document.docx
+```
+
+| Feature | Pandoc (primary) | textutil (fallback) |
+|---------|-----------------|-------------------|
+| Table styling | Full (via jszip post-processing) | Basic |
+| Mermaid diagrams | Supported (pre-rendered PNG) | Must be pre-rendered |
+| Heading styles | Mapped to Word styles | Basic HTML mapping |
+| Cross-references | Supported | Not supported |
+| Install | `brew install pandoc` | Built-in (macOS only) |
+
+**Limitations**: `textutil` needs HTML input (not raw Markdown), produces simpler formatting, and doesn't support the table styling or image sizing that `md-to-word.cjs` provides. Use only when Pandoc is unavailable and a quick conversion is needed.
 ### Debug Mode
 
-```powershell
+```bash
 node .github/muscles/md-to-word.cjs doc.md --keep-temp
 # Check _temp_word.md for transformed content
 ```

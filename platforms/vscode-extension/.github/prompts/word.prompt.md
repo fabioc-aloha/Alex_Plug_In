@@ -20,7 +20,7 @@ Convert Markdown documents to professionally formatted Word files with perfect d
 
 ## Usage
 
-```powershell
+```bash
 /word                         # Current file → .docx
 /word docs/spec.md            # Specific file
 /word README.md output.docx   # Custom output name
@@ -51,7 +51,11 @@ The script reads actual PNG dimensions and applies the most constraining limit w
 
 ## Prerequisites
 
-```powershell
-winget install pandoc
+```bash
+# macOS
+brew install pandoc
+# Windows
+# winget install JohnMacFarlane.Pandoc
+
 npm install -g @mermaid-js/mermaid-cli
 ```

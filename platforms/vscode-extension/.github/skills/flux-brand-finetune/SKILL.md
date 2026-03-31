@@ -102,7 +102,9 @@ The trigger word activates your LoRA concept in prompts.
 New-Item -ItemType Directory -Path "training-data" -Force
 
 # Optionally resize images to 1024px (if oversized)
-# Requires ImageMagick: winget install ImageMagick.ImageMagick
+# Requires ImageMagick:
+# macOS: brew install imagemagick
+# Windows: winget install ImageMagick.ImageMagick
 Get-ChildItem training-data/*.jpg, training-data/*.png | ForEach-Object {
     magick $_.FullName -resize "1024x1024>" $_.FullName
 }

@@ -118,7 +118,7 @@ All settings in `fabric-governance/scripts/fabric-publish/fabric-publish.config.
 ## Command Reference
 
 ### Sync v2 (Recommended)
-```powershell
+```bash
 cd fabric-governance\scripts\fabric-publish
 
 # Sync changed notebooks
@@ -138,14 +138,14 @@ cd fabric-governance\scripts\fabric-publish
 ```
 
 ### Direct Publish (Dev Only)
-```powershell
+```bash
 .\Publish-ToFabric.ps1 -NotebookName "ArchiveData" `
     -NotebookPath "..\..\notebooks\Fabric\Data Engineering\Notebooks\Bronze_Layer\ArchiveData.Notebook\notebook-content.py"
 ```
 
 ## First-Time Setup
 
-```powershell
+```bash
 # From repo root
 git remote add fabric https://xodo-team.visualstudio.com/XODO/_git/XODO
 git fetch fabric FishBowl

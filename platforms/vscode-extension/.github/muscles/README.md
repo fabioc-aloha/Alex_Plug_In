@@ -76,20 +76,25 @@ Pre/post action hooks for chat agent lifecycle (18 scripts). See `.github/hooks.
 
 | Language         | Best For                                        | Example Muscles                                 |
 | ---------------- | ----------------------------------------------- | ----------------------------------------------- |
-| **PowerShell**   | File scanning, validation, audits, reporting    | `validate-*.ps1`, `brain-qa.ps1`, `audit-*.ps1` |
 | **Node.js (JS)** | Complex transforms, JSON manipulation, npm libs | `sync-architecture.cjs`, `gamma-generator.cjs`  |
 | **TypeScript**   | CLI tools with nice UX, type-safe APIs          | `dream-cli.ts`, `pptxgen-cli.ts`                |
+| **PowerShell**   | Windows-specific automation, legacy scripts     | `validate-*.ps1`, `brain-qa.ps1`, `audit-*.ps1` |
+| **Bash / Zsh**   | macOS/Linux quick scripts, CI pipelines         | `*.sh` (future)                                 |
 
 ### Quick Decision Guide
 
 ```
-Validation/Audit task     → PowerShell
+Cross-platform automation → Node.js (.cjs)
+Validation / audit        → Node.js (.cjs) preferred, or shell script
 JSON/Config manipulation  → Node.js
 CLI with user interaction → TypeScript
 npm library required      → Node.js
-Windows-only quick script → PowerShell
-Cross-platform critical   → Node.js
+Quick macOS script        → Bash / Zsh (.sh)
+Quick Windows script      → PowerShell (.ps1)
 ```
+
+> **Note**: Prefer Node.js for any script that heirs or macOS/Linux users need to run.
+> PowerShell muscles are being ported to Node.js for cross-platform parity (v7.0.0).
 
 ## Inheritance Model
 
@@ -137,7 +142,7 @@ Examples:
 ## Invocation
 
 From Master Alex root:
-```powershell
+```bash
 # PowerShell muscles
 pwsh -File .github/muscles/validate-skills.ps1
 
@@ -168,7 +173,7 @@ npm run validate-skills
 | `gamma-generator.cjs`   | Requires `GAMMA_API_KEY` env var; optional Playwright for export              |
 | `svg-pipeline.cjs`      | Requires Inkscape, rsvg-convert, or ImageMagick for SVG to PNG                |
 
-```powershell
+```bash
 # pptxgen-cli.ts example (run from heir context)
 cd platforms/vscode-extension
 npx tsx ../../.github/muscles/pptxgen-cli.ts --help

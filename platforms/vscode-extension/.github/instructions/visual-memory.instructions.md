@@ -82,13 +82,13 @@ Generate a photo of EXACTLY the person shown in the reference images.
 
 1. **Prepare**: Resize photos to `512px @ 85% JPEG` with ImageMagick:
 
-   ```powershell
+   ```bash
    magick input.jpg -resize "512x512>" -quality 85 output.jpg
    ```
 
 2. **Encode**: Convert to base64 Node.js or PowerShell:
 
-   ```powershell
+   ```bash
    "data:image/jpeg;base64," + [Convert]::ToBase64String([IO.File]::ReadAllBytes("photo.jpg"))
    ```
 

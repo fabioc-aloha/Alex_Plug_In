@@ -33,7 +33,7 @@ text-to-speech/
 
 1. **Python Environment**
 
-   ```powershell
+   ```bash
    python -m pip install edge-tts
    ```
 

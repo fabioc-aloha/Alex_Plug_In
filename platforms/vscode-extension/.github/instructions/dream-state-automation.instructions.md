@@ -238,6 +238,155 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 - **After file reorganization**: Ensure all synapses remain valid
 - **Before major changes**: Baseline network health assessment
 
+### **macOS: Prevent Sleep During Long Operations**
+
+Dream state, brain-qa full runs, and VSIX packaging can take minutes. On macOS, the system may sleep mid-operation, corrupting results. Use `caffeinate` to prevent this:
+
+```bash
+# Wrap any long-running command (prevents sleep until command finishes)
+caffeinate -s node .github/muscles/brain-qa.cjs --mode all
+
+# Prevent sleep for a fixed duration (in seconds)
+caffeinate -t 600  # 10 minutes
+
+# Prevent display sleep too (useful for watched operations)
+caffeinate -di node .github/muscles/brain-qa.cjs --mode all --detail
+```
+
+| Flag | Effect |
+|------|--------|
+| `-s` | Prevent system sleep (AC power assertion) |
+| `-d` | Prevent display sleep |
+| `-i` | Prevent system idle sleep |
+| `-t N` | Timeout after N seconds |
+| (none) | Wraps command -- exits when child exits |
+
+**Recommended pattern for scheduled dreams**:
+
+```bash
+# In crontab or launchd
+caffeinate -s node /path/to/brain-qa.cjs --mode all --quiet
+```
+
+> On Windows, use `powercfg /change standby-timeout-ac 0` before long ops, or run within Task Scheduler (which prevents sleep by default).
+
+### **macOS: Notification Center Alerts**
+
+VS Code toasts are easy to miss. On macOS, use `osascript` to push native Notification Center alerts with sound after long operations:
+
+```bash
+# Simple notification
+osascript -e 'display notification \"Dream state complete\" with title \"Alex\" sound name \"Glass\"'
+
+# After brain-qa
+node .github/muscles/brain-qa.cjs --mode all && \
+  osascript -e 'display notification \"All phases passed\" with title \"Alex Brain QA\" sound name \"Glass\"'
+
+# Combined with caffeinate and say
+caffeinate -s node .github/muscles/brain-qa.cjs --mode all && \
+  osascript -e 'display notification \"Neural maintenance finished\" with title \"Alex\"' && \
+  say "Dream state complete"
+```
+
+> On Windows, use `[System.Windows.Forms.MessageBox]::Show()` in PowerShell or the BurntToast module for toast notifications.
+
+### **OS-Level Scheduling (Automated Dreams)**
+
+Choose the scheduler for your platform. All examples run a weekly dream at 3 AM Sunday.
+
+**macOS -- launchd (recommended)**
+
+Create `~/Library/LaunchAgents/com.alex.dream.plist`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.alex.dream</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/node</string>
+    <string>/path/to/repo/.github/muscles/brain-qa.cjs</string>
+    <string>--mode</string>
+    <string>quick</string>
+    <string>--quiet</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key><integer>0</integer>
+    <key>Hour</key><integer>3</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/tmp/alex-dream.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/alex-dream.err</string>
+</dict>
+</plist>
+```
+
+Load with: `launchctl load ~/Library/LaunchAgents/com.alex.dream.plist`
+Unload with: `launchctl unload ~/Library/LaunchAgents/com.alex.dream.plist`
+
+**macOS -- launchd file watcher (validate on change)**
+
+launchd can watch for file changes in `.github/` and auto-run validation. Create `~/Library/LaunchAgents/com.alex.validate-on-change.plist`:
+
+```xml
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\"
+  \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+  <key>Label</key>
+  <string>com.alex.validate-on-change</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/node</string>
+    <string>/path/to/repo/.github/muscles/brain-qa.cjs</string>
+    <string>--mode</string>
+    <string>schema</string>
+    <string>--quiet</string>
+  </array>
+  <key>WatchPaths</key>
+  <array>
+    <string>/path/to/repo/.github/skills</string>
+    <string>/path/to/repo/.github/instructions</string>
+    <string>/path/to/repo/.github/prompts</string>
+  </array>
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+  <key>StandardOutPath</key>
+  <string>/tmp/alex-validate.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/alex-validate.err</string>
+</dict>
+</plist>
+```
+
+This runs `brain-qa --mode schema` whenever any file in `.github/skills/`, `.github/instructions/`, or `.github/prompts/` changes, throttled to at most once every 30 seconds.
+
+**macOS / Linux -- cron (simpler alternative)**
+
+```bash
+# Edit crontab
+crontab -e
+
+# Weekly dream at 3 AM Sunday
+0 3 * * 0  /usr/local/bin/node /path/to/repo/.github/muscles/brain-qa.cjs --mode quick --quiet >> /tmp/alex-dream.log 2>&1
+```
+
+**Windows -- Task Scheduler**
+
+```powershell
+$action = New-ScheduledTaskAction -Execute "pwsh" -Argument "-File C:\path\to\repo\.github\muscles\brain-qa.ps1 -Mode quick -Quiet"
+$trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At 3am
+Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -Description "Alex weekly neural maintenance"
+```
+
 ### **When to Run Dream Protocol**
 ✅ **Do run when:**
 - Learning new domain knowledge

@@ -82,7 +82,9 @@ Stored as JSON prompt templates — not actual video files.
 ### Step 1: Prepare Photos
 
 ```powershell
-# Install ImageMagick if needed: winget install ImageMagick.ImageMagick
+# Install ImageMagick if needed:
+# macOS: brew install imagemagick
+# Windows: winget install ImageMagick.ImageMagick
 
 # Resize single photo: 512px longest edge @ 85% JPEG quality
 magick input.jpg -resize 512x512> -quality 85 output.jpg

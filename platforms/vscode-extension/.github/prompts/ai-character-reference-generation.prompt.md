@@ -59,7 +59,7 @@ Physical Traits (be VERY specific):
 Using face reference photos dramatically improves consistency. If you have existing images of the character (from a previous generation or real photos), prepare them:
 
 **Prepare reference images**:
-```powershell
+```bash
 # Resize to 512px, 85% JPEG quality
 magick input.jpg -resize 512x512 -quality 85 ref-001.jpg
 ```

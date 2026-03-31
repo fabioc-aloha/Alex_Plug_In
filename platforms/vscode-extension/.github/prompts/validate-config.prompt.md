@@ -20,7 +20,7 @@ You are reviewing a VS Code extension for configuration and manifest consistency
 **Process**:
 
 1. **Run automated validation**:
-   ```powershell
+   ```bash
    # Navigate to extension directory if in multi-platform workspace
    .\scripts\validate-manifest.ps1
    ```

@@ -48,7 +48,7 @@ For Command Center micro-assets (16-24px), use `DK-correax-brand.md` — optimiz
 
 ## PNG from SVG
 
-```powershell
+```bash
 npx sharp-cli --input source.svg --output output.png -f png --density 150
 ```
 

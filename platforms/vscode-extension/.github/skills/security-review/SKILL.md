@@ -230,7 +230,7 @@ If secrets accidentally committed:
 
 ### Regular Audits
 
-```powershell
+```bash
 # npm
 npm audit
 npm audit fix
