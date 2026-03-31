@@ -41,12 +41,12 @@ On macOS you need **Homebrew** (see [CLI Tools](CLI-TOOLS.md)).
 
 ### Method 1: Clone the Template (Recommended)
 
-The GCX_Copilot repository is the official Alex template (heir):
+Clone an existing Alex-powered repository to use as your starting point:
 
 **macOS / Linux**
 
 ```bash
-git clone https://github.com/fabioc-aloha/GCX_Copilot.git my-project
+git clone https://github.com/your-org/your-alex-template.git my-project
 cd my-project
 rm -rf .git
 git init
@@ -57,7 +57,7 @@ git commit -m "feat: initialize project with Alex cognitive architecture"
 **Windows (PowerShell)**
 
 ```powershell
-git clone https://github.com/fabioc-aloha/GCX_Copilot.git my-project
+git clone https://github.com/your-org/your-alex-template.git my-project
 cd my-project
 Remove-Item -Recurse -Force .git
 git init
@@ -76,7 +76,7 @@ Copy the `.github/` folder from an Alex-powered project into yours:
 cp -r /path/to/alex-project/.github/ /path/to/your-project/.github/
 
 # Or clone the template and copy just .github/
-git clone https://github.com/fabioc-aloha/GCX_Copilot.git /tmp/alex-template
+git clone https://github.com/your-org/your-alex-template.git /tmp/alex-template
 cp -r /tmp/alex-template/.github/ /path/to/your-project/.github/
 rm -rf /tmp/alex-template
 ```
@@ -88,7 +88,7 @@ rm -rf /tmp/alex-template
 Copy-Item -Recurse C:\path\to\alex-project\.github\ C:\path\to\your-project\.github\
 
 # Or clone the template and copy just .github/
-git clone https://github.com/fabioc-aloha/GCX_Copilot.git $env:TEMP\alex-template
+git clone https://github.com/your-org/your-alex-template.git $env:TEMP\alex-template
 Copy-Item -Recurse $env:TEMP\alex-template\.github\ C:\path\to\your-project\.github\
 Remove-Item -Recurse -Force $env:TEMP\alex-template
 ```
@@ -218,7 +218,7 @@ To update, pull the latest from the template:
 
 ```bash
 # Add the template as a remote (one-time)
-git remote add alex-template https://github.com/fabioc-aloha/GCX_Copilot.git
+git remote add alex-template https://github.com/your-org/your-alex-template.git
 
 # Fetch and merge just the .github/ folder
 git fetch alex-template

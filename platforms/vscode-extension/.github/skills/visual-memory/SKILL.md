@@ -9,7 +9,6 @@ metadata:
 
 > Self-sufficient skills that carry their own reference media — no external folder dependencies.
 
-**Pattern Origin**: AlexBooks (promoted 2026-03-01)
 **Applies To**: Any skill needing consistent visual identity, voice, or motion style across multiple generation tasks.
 
 ---

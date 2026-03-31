@@ -27,7 +27,7 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v6.8.4 quality review and roadmap cleanup. GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired. Data storytelling trifecta suite synced to GCX. 157 skills, 45 trifectas.
+Recent: v6.8.4 quality review and roadmap cleanup. Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired. 157 skills, 45 trifectas.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: 2026-03-26

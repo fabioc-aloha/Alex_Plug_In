@@ -1,7 +1,7 @@
 {
     "$schema": "converter-config.schema.json",
     "version": "1.0.0",
-    "description": "Per-project converter configuration. Place as .converter.json in project root to override default converter behavior. Based on AlexBooks book.json and AIRS meta.yaml patterns.",
+    "description": "Per-project converter configuration. Place as .converter.json in project root to override default converter behavior.",
     "example": {
         "word": {
             "style": "professional",
