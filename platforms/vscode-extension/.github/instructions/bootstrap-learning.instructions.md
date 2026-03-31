@@ -62,7 +62,6 @@ After learning sessions, consolidate with:
 
 ### Skill Output Pathways
 - [.github/skills/skill-building/SKILL.md] (High, Produces, Forward) - "Learning becomes reusable skill"
-- [.github/instructions/heir-skill-promotion.instructions.md] (High, Enables, Forward) - "Skills promoted to Master"
 - [.github/skills/memory-activation/SKILL.md] (Medium, Registers, Forward) - "Skills discoverable via activation"
 
 ### Activation Patterns

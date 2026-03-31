@@ -45,22 +45,6 @@
       "yields": "meditation related patterns and guidance"
     },
     {
-      "target": ".github/skills/release-preflight/SKILL.md",
-      "type": "feeds",
-      "strength": 0.9,
-      "note": "Brain QA is step 0 of release preflight checklist",
-      "when": "brain QA provides context to release preflight",
-      "yields": "release preflight contextual assessment"
-    },
-    {
-      "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "supports",
-      "strength": 0.8,
-      "note": "Phase 5 validates synapse normalization during heir upgrades",
-      "when": "Verifying heir skill promotion quality or compliance",
-      "yields": "heir skill promotion quality checks and validation"
-    },
-    {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
       "type": "supports",
       "strength": 0.75,
@@ -83,14 +67,6 @@
       "note": "Future Phase 23 validates motor cortex mapping matches muscle inventory",
       "when": "Verifying muscle memory recognition quality or compliance",
       "yields": "muscle memory recognition quality checks and validation"
-    },
-    {
-      "target": ".github/skills/heir-sync-management/SKILL.md",
-      "type": "complements",
-      "strength": 0.85,
-      "note": "brain-qa-heir.ps1 is synced via heir-sync rename pattern; Phase 30 validates muscles per context",
-      "when": "Coordinating brain QA with heir sync management",
-      "yields": "heir sync management coordination protocols"
     },
     {
       "target": ".github/instructions/semantic-audit.instructions.md",

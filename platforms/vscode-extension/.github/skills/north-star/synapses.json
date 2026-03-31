@@ -50,14 +50,6 @@
       "yields": "brain QA complementary techniques"
     },
     {
-      "target": ".github/skills/release-process/SKILL.md",
-      "strength": 0.7,
-      "type": "feeds",
-      "reason": "Release decisions filtered through North Star commitment",
-      "when": "When task involves .github/skills/release process/SKILL.md",
-      "yields": "release process decision frameworks"
-    },
-    {
       "target": ".github/skills/scope-management/SKILL.md",
       "strength": 0.85,
       "type": "supports",

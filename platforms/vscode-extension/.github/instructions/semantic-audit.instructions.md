@@ -12,9 +12,7 @@ applyTo: "**/*audit*,**/*qa*"
 
 - [.github/skills/brain-qa/SKILL.md] (High, Implements, Forward) - "Brain QA skill teaches what to look for; this procedure is the how"
 - [.github/skills/architecture-audit/SKILL.md] (High, Implements, Forward) - "Master audit skill scopes the check; this procedure drives the review"
-- [.github/instructions/trifecta-audit.instructions.md] (Medium, Complements, Bidirectional) - "Trifecta checks completeness; semantic audit checks coherence"
 - [.github/instructions/dream-state-automation.instructions.md] (Medium, Validates, Forward) - "Dream detects structural issues; semantic audit detects meaning issues"
-- [.github/instructions/cognitive-health-validation.instructions.md] (Medium, Complements, Bidirectional) - "Semantic audit checks meaning, brain-qa checks structure"
 
 ---
 

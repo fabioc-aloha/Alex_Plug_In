@@ -73,6 +73,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                   ${actionButton('saveSelectionAsInsight', '💡', 'Save Insight', 'Remember this for future projects')}
                   ${actionButton('generateDiagram', '📊', 'Generate Diagram', 'Visualize architecture and flow')}
                   ${actionButton('exportMemory', '📤', 'Export Memory', 'Export all memory to a portable file for other AI surfaces')}
+                  ${actionButton('memoryAudit', '🔍', 'Memory Audit', 'Audit user memory for scope violations, waste, and budget usage')}
               </div>
 
           </nav>

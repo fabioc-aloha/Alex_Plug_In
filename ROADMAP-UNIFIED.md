@@ -1,4 +1,4 @@
-# Alex Cognitive Architecture — Roadmap v7.0
+# Alex Cognitive Architecture — Roadmap v7.1
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
@@ -37,17 +37,16 @@ Seven platforms. Four active, three planned.
 
 ## 🚧 In Progress
 
-| Version    | Theme                                                                                                                                                                                                                                                                                                                       | Target     |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **v7.0.0** | Working Together Edition -- cross-platform parity across full architecture (35+ file fixes, brew/winget pairing, bash code blocks), macOS-native capabilities (sips, say, caffeinate, launchd), mac heir setup guides promoted to Master, PS muscle ports to Node.js. Tracker: alex_docs/audits/MACOS-EXPEDITION-TRACKER.md | 2026-03-30 |
-
+| Version    | Theme                                                                                                                          | Target  |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| **v7.1.0** | Intelligence Edition -- competitive research, M365 MCP integration, generative meditation, defense-in-depth hooks, adaptive UX | 2026-Q2 |
 ---
 
 ## ✅ Shipped Releases
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **v6.8.5** | User Memory Leverage & MCP Enrichment -- VS Code memory research (v1.99-v1.102), MCP v1.1.0 (prompts + resources), tool sets, memory-curation skill, meditation Phase 1.5, `/memories/` restructured                                                                                                          | 2026-03-31 |
+| **v7.0.0** | Working Together Edition -- cross-platform parity (88/93 items, 52 files, brew/winget pairing), macOS-native capabilities (sips, say, caffeinate, launchd), PS muscle ports to Node.js, LLM-friendly script refactor, User Memory Leverage, MCP v1.1.0, Welcome UI (Chat Memories + Memory Audit buttons)     | 2026-03-31 |
 | **v6.8.4** | Quality Review & Roadmap Cleanup -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes                                                                                                              | 2026-03-27 |
 | **v6.8.3** | Data Storytelling Trifecta Suite -- 5 new trifectas, 4 muscles, 24-chart interactive gallery, colorblind-safe Tableau 10 palette, 157 skills, 45 trifectas, brain-qa 0 bugs                                                                                                                                   | 2026-03-26 |
 | **v6.8.2** | Workspace Cleanup & Doc Audit -- 928 stale files archived, TEST-GUIDE.md retired, README link modernization, lint fix, all 8 quality gates pass                                                                                                                                                               | 2026-03-25 |
@@ -131,19 +130,66 @@ Seven platforms. Four active, three planned.
 
 ---
 
-## 🔮 v7.0+ — To Be Defined (Research First)
+## 🔮 v7.1.0 — Intelligence Edition
 
-The original v7.0 vision has been retired — most of it shipped in v6.x through heir architecture, Global Knowledge, and cross-repo task execution.
+v7.0.0 shipped cross-platform parity. v7.1.0 shifts focus to making Alex *smarter*: deeper M365 integration, generative meditation, competitive feature parity, and defense-in-depth improvements.
 
-The next major version will be defined through competitive research, not speculation:
+### Pillar 1: M365 MCP Integration (from ATK 6.6)
 
-| Action                          | Focus                                                                                  |
-| ------------------------------- | -------------------------------------------------------------------------------------- |
-| **Competitive landscape audit** | Study Claude Code, Cursor, Windsurf, Aider, and other AI coding tools for feature gaps |
-| **Platform evolution watch**    | Track VS Code agent platform, Copilot extensibility, and MCP ecosystem changes         |
-| **User friction inventory**     | Catalog real pain points from daily use across 30+ heir projects                       |
+Wire Alex's MCP cognitive tools into the M365 declarative agent for Teams/Copilot access.
 
-> **Principle**: No premature vision. Research what competitors ship, identify gaps that matter, then define v7.0 from evidence.
+| #   | Feature                             | Effort | Description                                                                                                |
+| --- | ----------------------------------- | :----: | ---------------------------------------------------------------------------------------------------------- |
+| 7.1 | **MCP tools in Declarative Agent**  |   3d   | Expose knowledge search, architecture status, and insight save as DA actions via ATK tool definition files |
+| 7.2 | **Embedded Knowledge for DA**       |   2d   | Package a curated subset of skill catalog + instructions as embedded knowledge for grounded M365 responses |
+| 7.3 | **MCP auto-parameter verification** |   1d   | Verify ATK 6.6.1 auto-discovery works with Alex MCP tools, document any manual overrides needed            |
+
+### Pillar 2: Generative Meditation (Wish List #1)
+
+Evolve meditation from *consolidation* (organize existing knowledge) to *generation* (create new connections).
+
+| #   | Feature                            | Effort | Description                                                                                                   |
+| --- | ---------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------- |
+| 7.4 | **Cross-domain pattern synthesis** |   2d   | During meditation, compare episodic memories across unrelated domains to surface unexpected skill connections |
+| 7.5 | **Insight generation pipeline**    |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)               |
+| 7.6 | **Dream creativity score**         |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains                   |
+
+### Pillar 3: Competitive Research and Feature Parity
+
+Study leading AI coding tools and close meaningful gaps.
+
+| #   | Feature                                       | Effort | Description                                                                                            |
+| --- | --------------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
+| 7.7 | **Competitive landscape audit**               |   3d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work       |
+| 7.8 | **User friction inventory**                   |   2d   | Catalog real pain points from daily use across 30+ heir projects, prioritize by frequency and severity |
+| 7.9 | **Platform evolution watch (VS Code 1.114+)** |   1d   | Review new VS Code stable releases for unblocked contracts (A-D) and new extensibility opportunities   |
+
+### Pillar 4: Defense-in-Depth Hooks
+
+Promote two high-value deferred hooks that close real safety gaps.
+
+| #    | Feature                           | Effort | Description                                                                                    |
+| ---- | --------------------------------- | :----: | ---------------------------------------------------------------------------------------------- |
+| 7.10 | **H10: Output secret scan**       |   1d   | PostToolUse hook scans tool output for leaked API keys/tokens (complements H21 input scanning) |
+| 7.11 | **H13: Breaking change detector** |   2d   | PreToolUse hook warns when editing exported API surfaces (extension.ts activate, public types) |
+
+### Pillar 5: Adaptive UX
+
+Make the Welcome UI respond to usage patterns and context.
+
+| #    | Feature                               | Effort | Description                                                                                            |
+| ---- | ------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
+| 7.12 | **Frecency command ranking**          |   2d   | Track command usage in session-tool-log.json, surface most-used commands at top of action groups       |
+| 7.13 | **Context-aware nudges**              |   1d   | Nudge engine uses workspace type (Node/Python/docs) to suggest relevant skills instead of generic tips |
+| 7.14 | **Silence as signal skill (Wish #7)** |   1d   | Skill that recognizes "user is thinking" patterns and suppresses proactive suggestions                 |
+
+### Release Criteria
+
+- All 8 quality gates passing
+- 231+ tests (no regression)
+- M365 MCP integration verified in Teams
+- Competitive audit documented in `alex_docs/research/`
+- At least one generative meditation session producing novel connections
 
 ---
 
@@ -206,15 +252,15 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📊 Current Status
 
-|                            |                                                                 |
-| -------------------------- | --------------------------------------------------------------- |
-| **Current Master Version** | 6.8.5                                                           |
-| **Current Heirs**          | VS Code (6.8.4), M365 (6.8.3), Plugin (6.7.0)                   |
-| **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents |
-| **Platforms**              | 5 total (4 active, 1 planned)                                   |
-| **Next Target**            | v7.0.0 — TBD (competitive research phase)                       |
-| **Open Items**             | 13 total: 4 blocked, 1 gated, 5 conditional, 3 next actions     |
-| **Updated**                | 2026-03-31                                                      |
+|                            |                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------ |
+| **Current Master Version** | 7.0.0                                                                          |
+| **Current Heirs**          | VS Code (7.0.0), M365 (6.8.3), Plugin (6.7.0)                                  |
+| **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                |
+| **Platforms**              | 5 total (4 active, 1 planned)                                                  |
+| **Next Target**            | v7.1.0 (Intelligence Edition, Q2 2026)                                         |
+| **Open Items**             | 23 total: 14 v7.1.0 features, 4 blocked, 1 gated, 3 conditional, 1 next action |
+| **Updated**                | 2026-03-31                                                                     |
 
 ---
 
@@ -222,41 +268,7 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 > Immediate items to address in the next session.
 
-### Converter UI Integration (Priority 1) -- DONE
-
-The 4 new converter skills (md-to-eml, md-scaffold, nav-inject, converter-qa) have muscles and skill trifectas with full VS Code UI integration:
-
-| Command                 | Description                               | Context Menu                        | Status |
-| ----------------------- | ----------------------------------------- | ----------------------------------- | ------ |
-| `alex.convertToEmail`   | Convert Markdown to RFC 5322 email (.eml) | .md right-click                     | ✅ Done |
-| `alex.scaffoldMarkdown` | New Markdown from Template...             | Folder/palette                      | ✅ Done |
-| `alex.injectNavigation` | Inject Navigation Table                   | .md right-click (requires nav.json) | ✅ Done |
-
-**Implementation**: `platforms/vscode-extension/src/commandsConvert.ts`, registered via `commandsPresentation.ts` chain
-
-### Marketplace README Republish (Priority 2)
-
-README.md updated with v6.8.x What's New, 150 skills, 40 trifectas, current counts. Changes committed (`1932d8d`) but marketplace still shows old README because v6.8.2 was already published before the update. VSCE does not allow re-publishing the same version.
-
-**Action**: Include in next feature release (v6.8.3+) -- no standalone bump needed.
-
-### Sync Script Cleanup (Priority 3) -- DONE
-
-Sync scripts reference stale/renamed skills that no longer exist in Master:
-
-| Script            | Location                  | Stale References                                                                                                                                    | Status |
-| ----------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| `sync-m365.ps1`   | `platforms/m365-copilot/` | 6 stale refs removed (v6.8.2)                                                                                                                       | ✅ Done |
-| `sync-plugin.ps1` | `platforms/agent-plugin/` | 6 stale refs removed (meditation-facilitation, writing-publication, academic-paper-drafting, airs-integration, skill-activation, prompt-activation) | ✅ Done |
-
-### Quality Gate Validation (Priority 4) -- DONE
-
-Full quality gate passed after all priority work:
-- `npm run lint` -- clean
-- `npm test` -- 231 passing
-- `quality-gate.cjs` -- all 8 gates passed (0 warnings)
-
-### M365 Heir: ATK 6.6 Integration (Priority 5)
+### M365 Heir: ATK 6.6 Integration (Priority 1)
 
 Microsoft 365 Agents Toolkit v6.6.0 (Mar 9) + v6.6.1 hotfix (Mar 26) shipped features directly relevant to the M365 heir:
 

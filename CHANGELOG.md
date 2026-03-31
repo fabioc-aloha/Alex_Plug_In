@@ -7,28 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [6.8.5] - 2026-03-31
+## [7.0.0] - 2026-03-31
 
-> **User Memory Leverage & MCP Enrichment** -- VS Code memory research (v1.99-v1.102), MCP cognitive tools v1.1.0 (prompts + resources), tool sets, memory-curation skill, `/memory-audit` prompt, meditation Phase 1.5 (cross-project memory scan), `/memories/` restructured for 0% waste.
+> **Working Together Edition** -- Cross-platform parity across the full cognitive architecture (88/93 items complete), macOS-native capabilities, PS muscle ports to Node.js, LLM-friendly script refactor, User Memory Leverage, MCP enrichment. Alex works on any OS and uses each platform's native strengths.
 
 ### Added
 
-- **VS Code memory research** -- Comprehensive research document covering two memory systems, 10-layer customization stack, v1.99-v1.102 features, 14 architectural opportunities (`alex_docs/research/VSCODE-MEMORY-ARCHITECTURE.md`)
+- **Cross-platform parity** -- 52 files audited, 167 code blocks classified, ~55 converted from powershell to bash for universal commands (Phase 1: 28/28 complete)
+- **brew/winget pairing** -- Every `winget install` now has a `brew install` equivalent across skills, prompts, and muscles
+- **macOS-native capabilities** -- `sips` (image processing), `say` (offline TTS), `caffeinate` (sleep prevention), `osascript` (notifications), `textutil` (doc conversion), `launchd` (scheduling), `pbcopy`/`mdfind`/APFS clones (Phase 3: 16/16 complete)
+- **PS muscle ports to Node.js** -- brain-qa, validate-skills, audit-master-alex, validate-synapses, install-hooks, new-skill, brain-qa-heir ported to .cjs (Phase 2: 12/15, 3 intentionally deferred)
+- **macOS setup documentation** -- 6 cross-platform guides promoted from mac heir to Master (`alex_docs/guides/`): GETTING-STARTED, CLI-TOOLS, VSCODE-SETUP, API-KEYS, NPM-PACKAGES, plus WHAT-IS-ALEX
+- **VS Code memory research** -- Comprehensive research document covering two memory systems, 10-layer customization stack, v1.99-v1.102 features (`alex_docs/research/VSCODE-MEMORY-ARCHITECTURE.md`)
 - **MCP prompts** -- 4 prompts (health-check, architecture-overview, search-knowledge, save-insight) exposed via cognitive tools MCP server
 - **MCP resources** -- 6 architecture documents as browseable resources with `alex://` URI scheme
-- **Tool sets** -- `.vscode/toolsets.json` with 3 groups (alex-brain, alex-knowledge, alex-memory) for `#toolSetName` chat references
+- **Tool sets** -- `.vscode/toolsets.json` with 3 groups (alex-brain, alex-knowledge, alex-memory)
 - **memory-curation skill** -- Audit procedure, scope rules, budget monitoring, meditation integration, pattern discovery pipeline
 - **`/memory-audit` prompt** -- On-demand user memory audit for scope violations, waste, and budget usage
 - **Meditation Phase 1.5** -- Cross-project memory scan during meditation: pattern promotion, reinforcement tracking, skill candidate discovery
-- **User Memory Leverage Plan** -- Full plan document with phases, token budget analysis, governance strategy (`alex_docs/research/USER-MEMORY-LEVERAGE-PLAN.md`)
-- **VS Code Chat Configurations doc** -- Documents tool sets, MCP prompts, resources, and flow diagrams (`alex_docs/research/VSCODE-CHAT-CONFIGURATIONS.md`)
 
 ### Changed
 
+- **LLM-friendly scripts** -- Removed all interactive prompts (Read-Host, readline), replaced emoji with ASCII bracket notation in 7 PS1 scripts (24/24 clean), fixed Remove-Item missing -Recurse (confirmation dialog blocker)
 - **MCP cognitive tools** -- Bumped to v1.1.0 with prompts and resources capabilities
-- **meditation.instructions.md** -- Added Phase 1.5 (Cross-Project Memory Scan), pre-meditation now pre-loads memory-curation skill and reads `/memories/`
-- **memory-activation/SKILL.md** -- Added memory-curation activation keywords to action-keyword index
-- **`/memories/fabio-preferences.md`** -- Restructured from flat dump (30 lines, 40% waste) to 6 categorized sections (29 lines, 0% waste): Writing Style, Tool Preferences, Workflow, Cross-Workspace Access, Learning and Explanation, Charting
+- **meditation.instructions.md** -- Added Phase 1.5 (Cross-Project Memory Scan), pre-meditation now pre-loads memory-curation skill
+- **memory-activation/SKILL.md** -- Added memory-curation activation keywords
+- **Platform detection** -- `detectPlatform()` utility + shell info in diagnostics for cross-platform terminal awareness
+- **Environment variable syntax** -- Muscle error messages now show platform-appropriate syntax (`$env:VAR` vs `export VAR=`)
+- **WORKING-WITH-ALEX.md** -- Fixed U+FFFD encoding corruption in two headings
 
 ---
 

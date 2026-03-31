@@ -35,14 +35,6 @@
       "yields": "testing strategies planning framework"
     },
     {
-      "reason": "Release planning within project delivery",
-      "type": "uses",
-      "strength": 0.65,
-      "target": ".github/skills/release-preflight/SKILL.md",
-      "when": "When task involves .github/skills/release preflight/SKILL.md",
-      "yields": "release preflight patterns and guidance"
-    },
-    {
       "reason": "Project issues may become incidents",
       "type": "feeds",
       "strength": 0.4,

@@ -46,13 +46,6 @@
       "strength": 0.7,
       "when": "brain-qa.ps1 requires API tokens for skill validation",
       "yields": "Exported .env file with REPLICATE_API_TOKEN for script access"
-    },
-    {
-      "target": ".github/skills/release-process/SKILL.md",
-      "type": "complements",
-      "strength": 0.85,
-      "when": "PAT expiry blocks Marketplace publish — dual .env files need sync",
-      "yields": "PAT lifecycle awareness, --packagePath retry, credential renewal workflow"
     }
   ],
   "triggers": [

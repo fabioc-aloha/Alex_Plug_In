@@ -100,6 +100,7 @@ export function getMindTabHtml(ctx: MindTabContext): string {
                   </div>
               </div>
               ${actionButton('memoryDashboard', '🧠', 'Memory Architecture', 'Explore all memory systems')}
+              ${actionButton('openChatMemories', '💾', 'Chat Memories', 'Manage Copilot memory preferences and stored memories')}
           </div>
 
           <div class="dashboard-card">

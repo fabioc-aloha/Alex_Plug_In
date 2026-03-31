@@ -213,7 +213,6 @@ async function trackRecommendation(skillId: string, accepted: boolean) {
 
 ## Integration with Existing QA
 
-Add to `.github/instructions/extension-audit-methodology.instructions.md`:
 
 ```markdown
 ### Configuration Validation

@@ -258,6 +258,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         await openChatPanel(exportPrompt);
         break;
       }
+      case "memoryAudit": {
+        logInfo('[Alex] Launching memory audit');
+        const auditPrompt = 'Run a memory audit using the /memory-audit prompt. Check my /memories/ files for scope violations, waste, token budget, and suggest improvements.';
+        await openChatPanel(auditPrompt);
+        break;
+      }
+      case "openChatMemories": {
+        logInfo('[Alex] Opening Chat Memories settings');
+        await vscode.commands.executeCommand('workbench.action.openSettings', 'github.copilot.chat.copilotMemory');
+        break;
+      }
       case "openSkill": {
         const skillId = (payload as any).skill || "";
         const skillDisplayName = (payload as any).skillName || skillId;

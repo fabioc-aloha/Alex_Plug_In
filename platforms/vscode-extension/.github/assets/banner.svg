@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <rect width="1200" height="300" fill="#0f172a"/>
+  <rect x="0" y="0" width="4" height="300" fill="#6366f1"/>
+  <text x="1180" y="260" font-family="'Segoe UI', system-ui, sans-serif" font-size="160" font-weight="800" fill="#f1f5f9" opacity="0.10" text-anchor="end">ALEX</text>
+  <line x1="960" y1="110" x2="1040" y2="150" stroke="#6366f1" stroke-width="1.5" opacity="0.18"/>
+  <line x1="1040" y1="150" x2="1010" y2="210" stroke="#818cf8" stroke-width="1.5" opacity="0.15"/>
+  <line x1="960" y1="110" x2="1100" y2="95" stroke="#6366f1" stroke-width="1.5" opacity="0.15"/>
+  <line x1="1100" y1="95" x2="1040" y2="150" stroke="#6366f1" stroke-width="1.5" opacity="0.12"/>
+  <line x1="1040" y1="150" x2="1120" y2="190" stroke="#818cf8" stroke-width="1.5" opacity="0.12"/>
+  <line x1="1010" y1="210" x2="1120" y2="190" stroke="#6366f1" stroke-width="1.5" opacity="0.10"/>
+  <circle cx="960" cy="110" r="10" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.30"/>
+  <circle cx="1040" cy="150" r="14" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.25"/>
+  <circle cx="1100" cy="95" r="8" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.22"/>
+  <circle cx="1010" cy="210" r="11" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.22"/>
+  <circle cx="1120" cy="190" r="8" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.18"/>
+  <text x="40" y="85" font-family="'Segoe UI', system-ui, sans-serif" font-size="18" font-weight="700" fill="#94a3b8" letter-spacing="5">ALEX COGNITIVE ARCHITECTURE</text>
+  <text x="40" y="185" font-family="'Segoe UI', system-ui, sans-serif" font-size="86" font-weight="700" fill="#f1f5f9">Alex Finch</text>
+  <text x="40" y="240" font-family="'Segoe UI', system-ui, sans-serif" font-size="28" font-weight="600" fill="#94a3b8">Your cognitive AI partner for VS Code</text>
+</svg>

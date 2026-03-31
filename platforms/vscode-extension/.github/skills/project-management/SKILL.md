@@ -152,7 +152,6 @@ Our roadmap is a **living document**, not a frozen spec.
 | Changelog | Entry for this version | Visual review |
 | Committed | No uncommitted changes | `git status` |
 
-See [release-management.instructions.md](../../instructions/release-management.instructions.md) for full protocol.
 
 ### If User Says "Just Publish"
 
