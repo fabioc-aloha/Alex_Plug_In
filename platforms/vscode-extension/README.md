@@ -271,7 +271,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 | Category                    | Highlights                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Workspace Protection**    | Extended 4-layer protection system with additional workspace marker files                                           |
+| **Workspace Protection**    | Extended 4-layer protection system with additional workspace marker files                                          |
 | **Cross-Platform Blockers** | Fixed `path.isAbsolute()` for Windows paths in forgettingCurve.ts; fixed CRLF frontmatter regex in proposeSkill.ts |
 | **Zero Runtime Deps**       | Moved fs-extra, jszip, pptxgenjs, proper-lockfile, ws to devDependencies (all bundled by esbuild)                  |
 | **Documentation**           | 13 files converted from PowerShell-only to bash/pseudocode for Windows + macOS parity                              |

@@ -1,27 +1,25 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "ROADMAP-UNIFIED.md",
+    "OADMAP-UNIFIED.md",
     "platforms/vscode-extension/README.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1775098893560
+      "scannedAt": 1775098956275
     },
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1775098893560
+      "scannedAt": 1775098956275
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1775098893560
+      "scannedAt": 1775098956275
     }
   ],
-  "lastUpdated": 1775098893560
+  "lastUpdated": 1775098956275
 }
