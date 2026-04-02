@@ -1,25 +1,32 @@
 {
   "hotFiles": [],
-  "stalledFiles": [
-    "OADMAP-UNIFIED.md",
-    "platforms/vscode-extension/README.md"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1775098956275
+      "scannedAt": 1775099393047
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1775099393047
     },
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1775098956275
+      "scannedAt": 1775099393047
     },
     {
-      "file": "platforms/vscode-extension/README.md",
+      "file": "platforms/vscode-extension/alex-cognitive-architecture-7.1.1.vsix",
       "todoCount": 1,
-      "scannedAt": 1775098956275
+      "scannedAt": 1775099393047
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1775099393047
     }
   ],
-  "lastUpdated": 1775098956275
+  "lastUpdated": 1775099393047
 }

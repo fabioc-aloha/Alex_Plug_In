@@ -139,25 +139,15 @@ await vscode.workspace.getConfiguration('alex.globalKnowledge')
 
 ### Automated Audit Script
 
-Create `scripts/validate-manifest.ps1`:
-
-```powershell
-# Find all config updates
-$updates = Select-String -Path "src/**/*.ts" -Pattern "getConfiguration\(['\"]([^'\"]+)['\"].*\.update\(['\"]([^'\"]+)"
-
-# Load package.json properties
-$manifest = Get-Content "package.json" | ConvertFrom-Json
-$registered = $manifest.contributes.configuration.properties.PSObject.Properties.Name
-
-# Check each update
-$issues = @()
-foreach ($match in $updates) {
-  $context = $match.Matches.Groups[1].Value
-  $key = $match.Matches.Groups[2].Value
-  $fullKey = "$context.$key"
-  
-  if ($registered -notcontains $fullKey) {
-    # Check if wrapped in try-catch (manual review needed)
+```text
+Pseudocode: validate-manifest
+1. Search src/**/*.ts for getConfiguration('section').update('key') calls
+2. Load contributes.configuration.properties from package.json
+3. For each config update found in source code:
+   If the full key (section.key) is NOT in package.json properties:
+     Flag as unregistered config write (potential runtime error)
+4. Report all mismatches
+```
     $issues += "⚠️  $fullKey - not registered (verify try-catch exists)"
   }
 }

@@ -67,6 +67,14 @@
       "strength": 0.7,
       "when": "localization applies VS Code extension patterns",
       "yields": "localization application context"
+    },
+    {
+      "target": ".github/skills/chat-participant-patterns/SKILL.md",
+      "type": "complements",
+      "strength": 0.85,
+      "reason": "PromptVariantRegistry, stream enrichment, and agent handoffs bridge extension lifecycle with chat API",
+      "when": "When building chat participants, prompt engines, or agent orchestration",
+      "yields": "chat participant API patterns and prompt adaptation strategies"
     }
   ],
   "activationPatterns": [

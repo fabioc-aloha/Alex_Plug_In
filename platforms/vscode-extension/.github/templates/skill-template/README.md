@@ -4,10 +4,9 @@ Use this template to create new skills with proper structure and frontmatter.
 
 ## Usage
 
-```powershell
+```bash
 # Copy template to new skill directory
-$skillName = "my-new-skill"
-Copy-Item -Recurse ".github/templates/skill-template" ".github/skills/$skillName"
+cp -r .github/templates/skill-template .github/skills/my-new-skill
 
 # Edit SKILL.md and synapses.json
 # Replace placeholders with actual values
@@ -32,6 +31,6 @@ Set in `synapses.json`:
 
 Run brain-qa to validate:
 
-```powershell
-.\.github\muscles\brain-qa.ps1 -Mode schema
+```bash
+node .github/muscles/brain-qa.cjs --mode schema
 ```
