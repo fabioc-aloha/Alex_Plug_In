@@ -3,7 +3,7 @@
 <!-- Validation: ask "What are my focus trifectas?" - should read Active Context -->
 <!-- Validation: ask "How do you route to meditation?" - should reference synapses.json -->
 
-# Alex v7.1.0
+# Alex v7.1.1
 
 ## Identity
 

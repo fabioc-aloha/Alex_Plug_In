@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.1.1] - 2026-04-01
+
+> **Cross-Platform Hardening** -- GCX workspace protection, 2 cross-platform blockers fixed, dependency cleanup, documentation portability.
+
+### Added
+
+- **GCX workspace protection** -- Extended 4-layer protection system (path failsafe, marker files, VS Code settings, pre-tool-use hooks) to cover GCX_Master and GCX_Copilot workspaces via 3 marker files: `MASTER-ALEX-PROTECTED.json`, `GCX-MASTER-PROTECTED.json`, `GCX-COPILOT-PROTECTED.json`
+
+### Fixed
+
+- **forgettingCurve.ts path detection** (BLOCKER) -- `filePath.startsWith('/')` only detected Unix absolute paths; Windows paths (`C:\...`) were treated as relative, producing corrupted paths. Replaced with `path.isAbsolute()`
+- **proposeSkill.ts CRLF frontmatter regex** (BLOCKER) -- YAML frontmatter regex used `\n` only; Windows CRLF files would fail to match, causing duplicate frontmatter injection. Updated to `\r?\n`
+- **speechTextProcessor.ts line ending normalization** -- Added `\r\n` to `\n` normalization before newline processing to prevent `\r` artifacts on Windows
+- **GCX_Master pre-tool-use hook** -- Was checking non-existent `MASTER-PROTECTED.json` instead of actual protection markers; fixed to scan all 3 correct markers
+
+### Changed
+
+- **Zero runtime dependencies** -- Moved fs-extra, jszip, pptxgenjs, proper-lockfile, ws from `dependencies` to `devDependencies` (all bundled by esbuild; VSIX excludes node_modules)
+- **Cross-platform documentation** -- 13 documentation files converted from PowerShell-only code blocks to bash/pseudocode for Windows + macOS parity
+
+---
+
 ## [7.1.0] - 2026-03-31
 
 > **Excavation Edition** -- Deep competitive analysis of Copilot Chat's architecture drives 17 improvements: PromptVariantRegistry (10 model families), priority-based context window scaling, conversation summarization, steering awareness, rich stream enrichment, session trajectory logging, hook-based secret scanning and breaking change detection, agent handoff enrichment, TypeScript 6.0 migration.

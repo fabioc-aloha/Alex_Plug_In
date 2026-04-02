@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: March 31, 2026
+**Last Updated**: April 1, 2026
 
 ---
 
@@ -46,6 +46,7 @@ Seven platforms. Four active, three planned.
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v7.1.1** | Cross-Platform Hardening -- GCX workspace protection (3 markers), 2 cross-platform blockers fixed (path detection, CRLF regex), zero runtime dependencies, 13 docs converted to cross-platform                                                                                                                | 2026-04-01 |
 | **v7.1.0** | Excavation Edition -- Copilot Chat competitive analysis drives 17 improvements: PromptVariantRegistry (10 model families), context window scaling, conversation summarization, steering awareness, stream enrichment, session trace, TS6, hooks H10/H13                                                       | 2026-03-31 |
 | **v7.0.1** | Welcome UI Hotfix -- Chat Memories button (Mind tab), Memory Audit button (Mission tab)                                                                                                                                                                                                                       | 2026-03-31 |
 | **v7.0.0** | Working Together Edition -- cross-platform parity (88/93 items, 52 files, brew/winget pairing), macOS-native capabilities (sips, say, caffeinate, launchd), PS muscle ports to Node.js, LLM-friendly script refactor, User Memory Leverage, MCP v1.1.0, Welcome UI (Chat Memories + Memory Audit buttons)     | 2026-03-31 |
@@ -254,13 +255,13 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 |                            |                                                                                |
 | -------------------------- | ------------------------------------------------------------------------------ |
-| **Current Master Version** | 7.1.0                                                                          |
-| **Current Heirs**          | VS Code (7.1.0), M365 (6.8.3), Plugin (6.7.0)                                  |
+| **Current Master Version** | 7.1.1                                                                          |
+| **Current Heirs**          | VS Code (7.1.1), M365 (6.8.3), Plugin (6.7.0)                                  |
 | **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                |
 | **Platforms**              | 5 total (4 active, 1 planned)                                                  |
 | **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                         |
 | **Open Items**             | 23 total: 14 v7.2.0 features, 4 blocked, 1 gated, 3 conditional, 1 next action |
-| **Updated**                | 2026-03-31                                                                     |
+| **Updated**                | 2026-04-01                                                                     |
 
 ---
 

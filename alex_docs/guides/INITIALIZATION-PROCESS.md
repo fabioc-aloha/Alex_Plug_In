@@ -172,8 +172,8 @@ Alex-Global-Knowledge/
 ```
 
 #### Follow-up Steps (shown to user):
-```powershell
-cd "C:\Development\Alex-Global-Knowledge"
+```bash
+cd Alex-Global-Knowledge
 git init && git add -A && git commit -m "feat: initialize global knowledge"
 gh repo create Alex-Global-Knowledge --private --source=. --push
 ```

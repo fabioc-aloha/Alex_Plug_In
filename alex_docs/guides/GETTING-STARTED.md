@@ -48,18 +48,8 @@ Clone an existing Alex-powered repository to use as your starting point:
 ```bash
 git clone https://github.com/your-org/your-alex-template.git my-project
 cd my-project
-rm -rf .git
-git init
-git add -A
-git commit -m "feat: initialize project with Alex cognitive architecture"
-```
-
-**Windows (PowerShell)**
-
-```powershell
-git clone https://github.com/your-org/your-alex-template.git my-project
-cd my-project
-Remove-Item -Recurse -Force .git
+rm -rf .git         # macOS/Linux
+# Windows: rmdir /s /q .git
 git init
 git add -A
 git commit -m "feat: initialize project with Alex cognitive architecture"
@@ -69,28 +59,15 @@ git commit -m "feat: initialize project with Alex cognitive architecture"
 
 Copy the `.github/` folder from an Alex-powered project into yours:
 
-**macOS / Linux**
-
 ```bash
 # From an existing Alex project
 cp -r /path/to/alex-project/.github/ /path/to/your-project/.github/
+# Windows: xcopy /E /I \path\to\alex-project\.github \path\to\your-project\.github
 
 # Or clone the template and copy just .github/
 git clone https://github.com/your-org/your-alex-template.git /tmp/alex-template
 cp -r /tmp/alex-template/.github/ /path/to/your-project/.github/
 rm -rf /tmp/alex-template
-```
-
-**Windows (PowerShell)**
-
-```powershell
-# From an existing Alex project
-Copy-Item -Recurse C:\path\to\alex-project\.github\ C:\path\to\your-project\.github\
-
-# Or clone the template and copy just .github/
-git clone https://github.com/your-org/your-alex-template.git $env:TEMP\alex-template
-Copy-Item -Recurse $env:TEMP\alex-template\.github\ C:\path\to\your-project\.github\
-Remove-Item -Recurse -Force $env:TEMP\alex-template
 ```
 
 Then commit:
@@ -141,23 +118,15 @@ Alex uses this to personalize responses and detect your persona.
 
 If you plan to use the document converters or automation muscles:
 
-**macOS**
-
 ```bash
+# Cross-platform npm packages
 npm install -g @mermaid-js/mermaid-cli svgexport tsx
-brew install pandoc librsvg
 npm init -y
 npm install jszip dotenv
-```
 
-**Windows (PowerShell)**
-
-```powershell
-npm install -g @mermaid-js/mermaid-cli svgexport tsx
-winget install JohnMacFarlane.Pandoc
-winget install ImageMagick.ImageMagick
-npm init -y
-npm install jszip dotenv
+# Pandoc (platform-specific install)
+# macOS:   brew install pandoc librsvg
+# Windows: winget install JohnMacFarlane.Pandoc ImageMagick.ImageMagick
 ```
 
 See [npm Packages](NPM-PACKAGES.md) and [CLI Tools](CLI-TOOLS.md) for the full list.

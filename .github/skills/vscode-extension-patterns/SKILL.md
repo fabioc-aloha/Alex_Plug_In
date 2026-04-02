@@ -319,10 +319,10 @@ const rootPath = 'c:\\Development\\MyProject';  // Never!
 
 ## Publishing Workflow
 
-```powershell
-# Load PAT from .env
-$env:VSCE_PAT = (Get-Content .env | Select-String "VSCE_PAT" | ForEach-Object { $_.Line.Split("=",2)[1] })
-vsce publish
+```bash
+# Load PAT from .env and publish
+# Ensure VSCE_PAT is set in your environment or .env file
+npx vsce publish
 ```
 
 **Version collision**: Increment patch → update package.json, README badge, CHANGELOG → retry.

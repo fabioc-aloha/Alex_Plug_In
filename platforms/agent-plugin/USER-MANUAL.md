@@ -31,14 +31,14 @@
 
 The Alex Agent Plugin installs Alex's cognitive architecture directly into VS Code's Copilot Chat — no extension needed. It includes:
 
-| Component | Count | How It Works |
-| --------- | ----: | ------------ |
-| Skills | 84 | On-demand domain knowledge across 16 categories |
-| Agents | 7 | Specialist personas (Researcher, Builder, Validator, etc.) |
-| Instructions | 22 | Auto-loaded rules matched by file patterns |
-| Prompts | 11 | Reusable `/` commands for common workflows |
-| MCP Server | 1 | Cognitive tools via Model Context Protocol |
-| Hooks | 1 | PreToolUse safety gate for destructive operations |
+| Component    | Count | How It Works                                               |
+| ------------ | ----: | ---------------------------------------------------------- |
+| Skills       |    84 | On-demand domain knowledge across 16 categories            |
+| Agents       |     7 | Specialist personas (Researcher, Builder, Validator, etc.) |
+| Instructions |    22 | Auto-loaded rules matched by file patterns                 |
+| Prompts      |    11 | Reusable `/` commands for common workflows                 |
+| MCP Server   |     1 | Cognitive tools via Model Context Protocol                 |
+| Hooks        |     1 | PreToolUse safety gate for destructive operations          |
 
 ---
 
@@ -163,28 +163,28 @@ Skills are Alex's domain expertise — 84 curated knowledge packages organized i
 
 Skills use 3-level progressive disclosure:
 
-| Level | What Loads | When |
-| ----- | ---------- | ---- |
-| **Name** | Skill title and description | Always visible in routing |
-| **Body** | Full SKILL.md content | When the topic comes up |
-| **Resources** | Linked references and guides | When going deep |
+| Level         | What Loads                   | When                      |
+| ------------- | ---------------------------- | ------------------------- |
+| **Name**      | Skill title and description  | Always visible in routing |
+| **Body**      | Full SKILL.md content        | When the topic comes up   |
+| **Resources** | Linked references and guides | When going deep           |
 
 ### Skill Categories at a Glance
 
-| Category | Skills | Examples |
-| -------- | -----: | ------- |
-| Cognitive & Learning | 14 | bootstrap-learning, knowledge-synthesis, cognitive-symbiosis |
-| Empathy & Coaching | 3 | frustration-recognition, coaching-techniques, proactive-assistance |
-| Engineering Fundamentals | 9 | testing-strategies, code-review, research-first-development |
-| Operations & Reliability | 10 | incident-response, root-cause-analysis, scope-management |
-| Security & Privacy | 4 | security-review, pii-privacy-regulations, distribution-security |
-| Documentation & Communication | 16 | markdown-mermaid, documentation-quality-assurance, creative-writing |
-| Academic Research | 5 | academic-paper-drafting, literature-review, citation-management |
-| Visual Design | 2 | svg-graphics, graphic-design |
-| Business & Analysis | 2 | business-analysis, alex-effort-estimation |
-| Architecture & Design | 8 | architecture-audit, llm-model-selection, skill-building |
-| AI & Machine Learning | 4 | prompt-engineering, mcp-development, rag-architecture, ai-agent-design |
-| Other | 7 | ui-ux-design, database-design, multi-agent-orchestration |
+| Category                      | Skills | Examples                                                               |
+| ----------------------------- | -----: | ---------------------------------------------------------------------- |
+| Cognitive & Learning          |     14 | bootstrap-learning, knowledge-synthesis, cognitive-symbiosis           |
+| Empathy & Coaching            |      3 | frustration-recognition, coaching-techniques, proactive-assistance     |
+| Engineering Fundamentals      |      9 | testing-strategies, code-review, research-first-development            |
+| Operations & Reliability      |     10 | incident-response, root-cause-analysis, scope-management               |
+| Security & Privacy            |      4 | security-review, pii-privacy-regulations, distribution-security        |
+| Documentation & Communication |     16 | markdown-mermaid, documentation-quality-assurance, creative-writing    |
+| Academic Research             |      5 | academic-paper-drafting, literature-review, citation-management        |
+| Visual Design                 |      2 | svg-graphics, graphic-design                                           |
+| Business & Analysis           |      2 | business-analysis, alex-effort-estimation                              |
+| Architecture & Design         |      8 | architecture-audit, llm-model-selection, skill-building                |
+| AI & Machine Learning         |      4 | prompt-engineering, mcp-development, rag-architecture, ai-agent-design |
+| Other                         |      7 | ui-ux-design, database-design, multi-agent-orchestration               |
 
 > **Tip**: See the [Plugin README](./README.md) for the complete 126-skill inventory with trifecta status, dependencies, and plugin-ready ratings.
 
@@ -208,15 +208,15 @@ Agents are specialist personas that bring a specific mindset and approach to you
 
 ### Available Agents
 
-| Agent | Persona | Best For |
-| ----- | ------- | -------- |
-| **Alex** | Orchestrator | General tasks — routes to skills and other agents |
-| **Researcher** | Deep explorer | Research, gap analysis, knowledge discovery |
-| **Builder** | Constructive implementer | Code generation, feature implementation |
-| **Validator** | Adversarial QA | Code review, security audit, quality gates |
-| **Documentarian** | Documentation specialist | Docs, READMEs, changelogs, drift detection |
-| **Azure** | Azure expert | Azure services, deployment, architecture |
-| **M365** | Microsoft 365 expert | Teams apps, Graph API, Copilot agents |
+| Agent             | Persona                  | Best For                                          |
+| ----------------- | ------------------------ | ------------------------------------------------- |
+| **Alex**          | Orchestrator             | General tasks — routes to skills and other agents |
+| **Researcher**    | Deep explorer            | Research, gap analysis, knowledge discovery       |
+| **Builder**       | Constructive implementer | Code generation, feature implementation           |
+| **Validator**     | Adversarial QA           | Code review, security audit, quality gates        |
+| **Documentarian** | Documentation specialist | Docs, READMEs, changelogs, drift detection        |
+| **Azure**         | Azure expert             | Azure services, deployment, architecture          |
+| **M365**          | Microsoft 365 expert     | Teams apps, Graph API, Copilot agents             |
 
 ### How to Use an Agent
 
@@ -250,19 +250,19 @@ Prompts are reusable workflow templates invoked as `/` commands in chat. The plu
 
 ### Available Prompts
 
-| Command | Purpose | Example |
-| ------- | ------- | ------- |
-| `/learn` | Start a learning session on any topic | `/learn Kubernetes networking` |
-| `/review` | Structured code review | `/review` (on selected code) |
-| `/plan` | Create an implementation plan | `/plan Add user authentication` |
-| `/improve` | Improve existing code or docs | `/improve` (on selection) |
-| `/tdd` | Test-driven development workflow | `/tdd Write a rate limiter` |
-| `/gapanalysis` | 4-dimension gap analysis | `/gapanalysis Our deployment pipeline` |
-| `/northstar` | Align work with project goals | `/northstar Are we still on track?` |
-| `/cross-domain-transfer` | Apply patterns from another domain | `/cross-domain-transfer Apply gaming UX to our dashboard` |
-| `/mcp-server` | Create an MCP server | `/mcp-server Build a weather data tool` |
-| `/ui-ux-audit` | Audit UI/UX patterns | `/ui-ux-audit` (on component code) |
-| `/presentation` | Create a presentation outline | `/presentation Q3 architecture review` |
+| Command                  | Purpose                               | Example                                                   |
+| ------------------------ | ------------------------------------- | --------------------------------------------------------- |
+| `/learn`                 | Start a learning session on any topic | `/learn Kubernetes networking`                            |
+| `/review`                | Structured code review                | `/review` (on selected code)                              |
+| `/plan`                  | Create an implementation plan         | `/plan Add user authentication`                           |
+| `/improve`               | Improve existing code or docs         | `/improve` (on selection)                                 |
+| `/tdd`                   | Test-driven development workflow      | `/tdd Write a rate limiter`                               |
+| `/gapanalysis`           | 4-dimension gap analysis              | `/gapanalysis Our deployment pipeline`                    |
+| `/northstar`             | Align work with project goals         | `/northstar Are we still on track?`                       |
+| `/cross-domain-transfer` | Apply patterns from another domain    | `/cross-domain-transfer Apply gaming UX to our dashboard` |
+| `/mcp-server`            | Create an MCP server                  | `/mcp-server Build a weather data tool`                   |
+| `/ui-ux-audit`           | Audit UI/UX patterns                  | `/ui-ux-audit` (on component code)                        |
+| `/presentation`          | Create a presentation outline         | `/presentation Q3 architecture review`                    |
 
 ### How to Use Prompts
 
@@ -278,13 +278,13 @@ Prompts guide the conversation through a structured workflow. They combine Alex'
 
 For maximum effectiveness, pair prompts with the right agent:
 
-| Combination | When to Use |
-| ----------- | ----------- |
-| Researcher + `/gapanalysis` | Before starting a new project |
-| Builder + `/tdd` | Implementing new features |
-| Validator + `/review` | Pre-merge code review |
-| Documentarian + `/improve` | Documentation cleanup |
-| Alex + `/plan` | Sprint planning or task breakdown |
+| Combination                 | When to Use                       |
+| --------------------------- | --------------------------------- |
+| Researcher + `/gapanalysis` | Before starting a new project     |
+| Builder + `/tdd`            | Implementing new features         |
+| Validator + `/review`       | Pre-merge code review             |
+| Documentarian + `/improve`  | Documentation cleanup             |
+| Alex + `/plan`              | Sprint planning or task breakdown |
 
 ---
 
@@ -296,27 +296,27 @@ Instructions are rules that load automatically based on the files you're working
 
 The plugin includes 22 instruction files covering:
 
-| Category | Instructions |
-| -------- | ------------ |
-| **Code Quality** | code-review-guidelines, nasa-code-standards, testing-strategies, semantic-audit |
-| **Architecture** | architecture-decision-records, research-first-workflow, skill-selection-optimization |
-| **Security** | adversarial-oversight, dependency-management |
-| **Knowledge** | bootstrap-learning, knowledge-synthesis, deep-thinking, empirical-validation |
-| **Ethics** | worldview-constitutional-ai, worldview-integration, worldview-moral-psychology |
-| **Workflow** | north-star, technical-debt-tracking, skill-building, ui-ux-design, mcp-development |
-| **Documentation** | markdown-mermaid |
+| Category          | Instructions                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| **Code Quality**  | code-review-guidelines, nasa-code-standards, testing-strategies, semantic-audit      |
+| **Architecture**  | architecture-decision-records, research-first-workflow, skill-selection-optimization |
+| **Security**      | adversarial-oversight, dependency-management                                         |
+| **Knowledge**     | bootstrap-learning, knowledge-synthesis, deep-thinking, empirical-validation         |
+| **Ethics**        | worldview-constitutional-ai, worldview-integration, worldview-moral-psychology       |
+| **Workflow**      | north-star, technical-debt-tracking, skill-building, ui-ux-design, mcp-development   |
+| **Documentation** | markdown-mermaid                                                                     |
 
 ### How Instructions Activate
 
 Each instruction file has an `applyTo` glob pattern. Examples:
 
-| Instruction | Activates When You Edit |
-| ----------- | ----------------------- |
-| code-review-guidelines | `*.ts`, `*.js`, `*.py`, `*.go`, `*.rs`, etc. |
-| dependency-management | `package.json`, `requirements.txt`, `Cargo.toml` |
-| testing-strategies | `*.test.ts`, `*.spec.js`, test files |
-| nasa-code-standards | Any source code file |
-| markdown-mermaid | `*.md` files |
+| Instruction            | Activates When You Edit                          |
+| ---------------------- | ------------------------------------------------ |
+| code-review-guidelines | `*.ts`, `*.js`, `*.py`, `*.go`, `*.rs`, etc.     |
+| dependency-management  | `package.json`, `requirements.txt`, `Cargo.toml` |
+| testing-strategies     | `*.test.ts`, `*.spec.js`, test files             |
+| nasa-code-standards    | Any source code file                             |
+| markdown-mermaid       | `*.md` files                                     |
 
 You don't need to do anything — relevant instructions inject automatically into Alex's context.
 
@@ -400,13 +400,13 @@ To enable hooks, ensure this setting is on:
 
 The agent plugin uses **file-based memory only**. Knowledge lives in the files within your project's `.github/` directory (if initialized) and within the plugin's own skill files.
 
-| Memory Type | Location | Description |
-| ----------- | -------- | ----------- |
-| Skills | `plugin/skills/` | 84 domain knowledge packages |
-| Instructions | `plugin/instructions/` | 22 auto-loaded rule sets |
-| Prompts | `plugin/prompts/` | 11 workflow templates |
+| Memory Type    | Location                  | Description                               |
+| -------------- | ------------------------- | ----------------------------------------- |
+| Skills         | `plugin/skills/`          | 84 domain knowledge packages              |
+| Instructions   | `plugin/instructions/`    | 22 auto-loaded rule sets                  |
+| Prompts        | `plugin/prompts/`         | 11 workflow templates                     |
 | Project memory | Your project's `.github/` | Custom skills and instructions you create |
-| Copilot Memory | VS Code Copilot Memory | Conversational context across sessions |
+| Copilot Memory | VS Code Copilot Memory    | Conversational context across sessions    |
 
 ### Creating Project-Specific Knowledge
 
@@ -468,8 +468,9 @@ If installed via `chat.plugins.paths`:
 1. Pull the latest version of the repository
 2. Run the sync script in the `platforms/agent-plugin/` directory:
 
-```powershell
-.\sync-plugin.ps1
+```bash
+./sync-plugin.sh    # macOS/Linux
+# or: .\sync-plugin.ps1  # Windows
 ```
 
 3. Reload VS Code (`Ctrl+Shift+P` → "Reload Window")
@@ -499,31 +500,31 @@ If you're coming from the full Alex VS Code extension, here's what changes with 
 
 ### Available in Both
 
-| Feature | Extension | Plugin |
-| ------- | :-------: | :----: |
-| Skills (domain knowledge) | 126 | 84 |
-| Specialist agents | 7 | 7 |
-| Auto-loaded instructions | 40+ | 22 |
-| Prompt commands | 20+ | 11 |
-| MCP cognitive tools | Yes | Yes |
-| Lifecycle hooks | Yes | Yes |
-| Agent mode | Yes | Yes |
+| Feature                   | Extension | Plugin |
+| ------------------------- | :-------: | :----: |
+| Skills (domain knowledge) |    126    |   84   |
+| Specialist agents         |     7     |   7    |
+| Auto-loaded instructions  |    40+    |   22   |
+| Prompt commands           |    20+    |   11   |
+| MCP cognitive tools       |    Yes    |  Yes   |
+| Lifecycle hooks           |    Yes    |  Yes   |
+| Agent mode                |    Yes    |  Yes   |
 
 ### Extension Only (Not in Plugin)
 
-| Feature | Why |
-| ------- | --- |
-| `@alex` chat participant | Requires extension registration |
-| Welcome panel & avatar | WebView needs extension runtime |
-| Command Palette commands | `alex.meditate`, `alex.dream`, etc. need extension |
-| Keyboard shortcuts | Bound to extension commands |
-| SecretStorage credentials | VS Code extension API only |
-| Episodic memory & outcome tracking | Extension services |
-| Expertise model & workflow engine | Extension services |
-| Health Dashboard webview | Extension runtime |
-| Auto-update notifications | Extension lifecycle |
-| Global Knowledge sync | Requires extension Cloud service |
-| Learning session timer | Extension UI component |
+| Feature                            | Why                                                |
+| ---------------------------------- | -------------------------------------------------- |
+| `@alex` chat participant           | Requires extension registration                    |
+| Welcome panel & avatar             | WebView needs extension runtime                    |
+| Command Palette commands           | `alex.meditate`, `alex.dream`, etc. need extension |
+| Keyboard shortcuts                 | Bound to extension commands                        |
+| SecretStorage credentials          | VS Code extension API only                         |
+| Episodic memory & outcome tracking | Extension services                                 |
+| Expertise model & workflow engine  | Extension services                                 |
+| Health Dashboard webview           | Extension runtime                                  |
+| Auto-update notifications          | Extension lifecycle                                |
+| Global Knowledge sync              | Requires extension Cloud service                   |
+| Learning session timer             | Extension UI component                             |
 
 ### Migration Path
 
@@ -618,31 +619,31 @@ You can use both simultaneously — the extension and plugin don't conflict. The
 
 ### Prompt Quick Reference
 
-| Command | Action |
-| ------- | ------ |
-| `/learn <topic>` | Learn something new |
-| `/review` | Review code |
-| `/plan <feature>` | Plan implementation |
-| `/improve` | Improve code or docs |
-| `/tdd <feature>` | Test-driven development |
-| `/gapanalysis <area>` | Find gaps in approach |
-| `/northstar` | Check alignment with goals |
+| Command                  | Action                        |
+| ------------------------ | ----------------------------- |
+| `/learn <topic>`         | Learn something new           |
+| `/review`                | Review code                   |
+| `/plan <feature>`        | Plan implementation           |
+| `/improve`               | Improve code or docs          |
+| `/tdd <feature>`         | Test-driven development       |
+| `/gapanalysis <area>`    | Find gaps in approach         |
+| `/northstar`             | Check alignment with goals    |
 | `/cross-domain-transfer` | Apply patterns across domains |
-| `/mcp-server` | Create an MCP server |
-| `/ui-ux-audit` | Audit UI/UX quality |
-| `/presentation <topic>` | Create presentation outline |
+| `/mcp-server`            | Create an MCP server          |
+| `/ui-ux-audit`           | Audit UI/UX quality           |
+| `/presentation <topic>`  | Create presentation outline   |
 
 ### Agent Quick Reference
 
-| Agent | Mindset | Use When |
-| ----- | ------- | -------- |
-| Alex | Balanced orchestrator | General tasks |
-| Researcher | Curious explorer | Before building anything new |
-| Builder | Optimistic creator | Implementing features |
-| Validator | Skeptical reviewer | Before merging or shipping |
-| Documentarian | Precise recorder | Writing or updating docs |
-| Azure | Cloud architect | Azure infrastructure |
-| M365 | Platform expert | Teams, Graph, Copilot agents |
+| Agent         | Mindset               | Use When                     |
+| ------------- | --------------------- | ---------------------------- |
+| Alex          | Balanced orchestrator | General tasks                |
+| Researcher    | Curious explorer      | Before building anything new |
+| Builder       | Optimistic creator    | Implementing features        |
+| Validator     | Skeptical reviewer    | Before merging or shipping   |
+| Documentarian | Precise recorder      | Writing or updating docs     |
+| Azure         | Cloud architect       | Azure infrastructure         |
+| M365          | Platform expert       | Teams, Graph, Copilot agents |
 
 ### Contents at a Glance
 

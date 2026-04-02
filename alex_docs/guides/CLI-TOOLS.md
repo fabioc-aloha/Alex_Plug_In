@@ -31,13 +31,13 @@ echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
 
 **Git for Windows**: gives you `git`, `bash`, and Unix tools:
 
-```powershell
+```bash
 winget install Git.Git
 ```
 
 **Visual Studio Build Tools**: the Windows equivalent of Xcode CLT (only needed for native npm modules):
 
-```powershell
+```bash
 winget install Microsoft.VisualStudio.2022.BuildTools
 ```
 
@@ -111,7 +111,7 @@ brew install starship tree htop bat fd ripgrep fzf tldr wget
 
 **Windows** (via winget):
 
-```powershell
+```bash
 # Core
 winget install OpenJS.NodeJS.LTS Git.Git Python.Python.3.12 JohnMacFarlane.Pandoc ImageMagick.ImageMagick jqlang.jq
 
@@ -121,28 +121,11 @@ winget install Starship.Starship sharkdp.bat sharkdp.fd BurntSushi.ripgrep.MSVC 
 
 ## Verifying Your Setup
 
-**macOS / Linux** (bash/zsh):
+After installing, verify tools are available (works on any platform):
 
 ```bash
 echo "=== Alex Dev Environment Check ==="
-for cmd in node npm git pandoc rsvg-convert jq; do
-    if command -v "$cmd" &>/dev/null; then
-        echo "OK $cmd: $(command -v "$cmd")"
-    else
-        echo "MISSING $cmd: NOT FOUND"
-    fi
+for cmd in node npm git pandoc jq; do
+    command -v "$cmd" && echo "OK $cmd" || echo "MISSING $cmd"
 done
-```
-
-**Windows** (PowerShell):
-
-```powershell
-Write-Host "=== Alex Dev Environment Check ==="
-foreach ($cmd in @('node', 'npm', 'git', 'pandoc', 'magick', 'jq')) {
-    if (Get-Command $cmd -ErrorAction SilentlyContinue) {
-        Write-Host "OK $cmd: $((Get-Command $cmd).Source)"
-    } else {
-        Write-Host "MISSING $cmd: NOT FOUND"
-    }
-}
 ```

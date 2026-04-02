@@ -207,15 +207,12 @@ When an instruction and skill cover the same domain:
 
 To find instructions that duplicate their matching skills:
 
-```powershell
-Get-ChildItem .github/instructions/*.instructions.md | ForEach-Object {
-  $name = $_.BaseName -replace '\.instructions$', ''
-  $skillPath = ".github/skills/$name/SKILL.md"
-  if (Test-Path $skillPath) {
-    $iLines = (Get-Content $_ | Measure-Object -Line).Lines
-    "$iLines  $($_.Name)"
-  }
-}
+```text
+Pseudocode:
+For each file in .github/instructions/*.instructions.md:
+  Extract skill name from filename (remove .instructions suffix)
+  If .github/skills/{name}/SKILL.md exists:
+    Print line count + filename (candidate for deduplication)
 ```
 
 Any instruction with a matching skill that exceeds 50 lines is a trimming candidate. The instruction should contain only unique rules and decision tables; all procedural content should live in the skill.

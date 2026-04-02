@@ -56,7 +56,7 @@ AlexMaster/
 
 ### 1. Fork and Clone
 
-```powershell
+```bash
 # Fork the repository via GitHub UI, then:
 git clone https://github.com/YOUR-USERNAME/AlexMaster.git
 cd AlexMaster
@@ -72,7 +72,7 @@ npm install
 
 ### 2. Create a Feature Branch
 
-```powershell
+```bash
 git checkout -b feature/your-feature-name
 ```
 
@@ -293,12 +293,12 @@ Brief overview of changes
 
 ### Automated Validation
 
-```powershell
+```bash
 # Full validation suite
-.\scripts\validate-synapses.ps1
+node scripts/validate-synapses.cjs
 
-# Dream protocol health check
-.\scripts\neural-dream.ps1 --health-check
+# Brain QA health check
+node scripts/audit-synapses.cjs
 
 # Expected results:
 # - 0 broken references

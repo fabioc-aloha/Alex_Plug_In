@@ -41,25 +41,15 @@ These are `require()`-d by individual muscles. In a project with a `package.json
 
 Some muscles (like `md-to-word.cjs`) rely on packages from the Alex VS Code extension's `node_modules` rather than a local install. If you get "Cannot find module" errors, set `NODE_PATH`:
 
-**macOS / Linux**
-
 ```bash
-# Find the extension's node_modules
+# macOS / Linux
 export NODE_PATH="$HOME/.vscode/extensions/<alex-extension>/node_modules"
 
-# Or add to your .zprofile for persistence
-echo 'export NODE_PATH="$HOME/.vscode/extensions/<alex-extension>/node_modules"' >> ~/.zprofile
+# Windows (any shell)
+# set NODE_PATH=%USERPROFILE%\.vscode\extensions\<alex-extension>\node_modules
 ```
 
-**Windows (PowerShell)**
-
-```powershell
-# Set for the current session
-$env:NODE_PATH = "$env:USERPROFILE\.vscode\extensions\<alex-extension>\node_modules"
-
-# Or add to your PowerShell profile for persistence
-Add-Content $PROFILE '$env:NODE_PATH = "$env:USERPROFILE\.vscode\extensions\<alex-extension>\node_modules"'
-```
+For persistence, add the export to your shell profile (`~/.zprofile` on macOS, `$PROFILE` on Windows PowerShell).
 
 Replace `<alex-extension>` with the actual extension folder name (e.g., `fabioc-aloha.alex-cognitive-architecture-6.8.2`).
 

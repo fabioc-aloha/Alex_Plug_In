@@ -19,7 +19,7 @@ After installing, enable the `code` command in your PATH:
 
 **Windows**
 
-```powershell
+```bash
 winget install Microsoft.VisualStudioCode
 ```
 

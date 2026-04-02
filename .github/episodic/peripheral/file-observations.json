@@ -1,35 +1,28 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md"
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "ROADMAP-UNIFIED.md",
+    "alex_docs/alex3/README.md",
+    "alex_docs/architecture/GK-PATTERN-FORMAT-STANDARD.md",
+    "alex_docs/architecture/LOADING-MECHANICS.md",
+    "alex_docs/guides/API-KEYS.md",
+    "alex_docs/guides/CLI-TOOLS.md",
+    "alex_docs/guides/GETTING-STARTED.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1774976513267
+      "scannedAt": 1775098512663
     },
     {
-      "file": "alex_docs/vscode/PROMPT-OVERHAUL-PLAN.md",
-      "todoCount": 7,
-      "scannedAt": 1774976513267
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1774976513267
-    },
-    {
-      "file": "platforms/vscode-extension/alex-cognitive-architecture-7.1.0.vsix",
-      "todoCount": 1,
-      "scannedAt": 1774976513267
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1774976513267
+      "scannedAt": 1775098512663
     }
   ],
-  "lastUpdated": 1774976513267
+  "lastUpdated": 1775098512663
 }

@@ -123,21 +123,14 @@ function extractSkillFromGKPattern(content: string): { metadata: object, skillCo
 
 To migrate existing GK patterns to the new format:
 
-```powershell
-# Located in: scripts/migrate-gk-patterns.ps1
-
-$patterns = Get-ChildItem ~/.alex/global-knowledge/patterns/*.md
-
-foreach ($file in $patterns) {
-    $content = Get-Content $file -Raw
-
-    # Parse old format
-    $match = $content -match '# (.*?)\n\n\*\*ID\*\*: (.*?)\s*\n\*\*Category\*\*: (.*?)\s*\n\*\*Tags\*\*: (.*?)\s*\n\*\*Source\*\*: (.*?)\s*\n\*\*Created\*\*: (.*?)\s*\n\n---\n\n([\s\S]*)'
-
-    if ($match) {
-        # Extract components and rebuild in new format
-        # ... (full implementation)
-    }
+```text
+Pseudocode:
+For each markdown file in ~/.alex/global-knowledge/patterns/:
+  Parse old format (ID, Category, Tags, Source, Created from header)
+  Extract frontmatter fields
+  Rebuild file in new YAML frontmatter format
+  Write updated file
+```
 }
 ```
 
