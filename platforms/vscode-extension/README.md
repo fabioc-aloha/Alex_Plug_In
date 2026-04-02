@@ -269,13 +269,13 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 ### What's New (v7.1.1 -- Cross-Platform Hardening)
 
-| Category                    | Highlights                                                                                                                      |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| **GCX Protection**          | Extended 4-layer protection system to GCX_Master and GCX_Copilot workspaces via 3 marker files                                 |
-| **Cross-Platform Blockers** | Fixed `path.isAbsolute()` for Windows paths in forgettingCurve.ts; fixed CRLF frontmatter regex in proposeSkill.ts              |
-| **Zero Runtime Deps**       | Moved fs-extra, jszip, pptxgenjs, proper-lockfile, ws to devDependencies (all bundled by esbuild)                               |
-| **Documentation**           | 13 files converted from PowerShell-only to bash/pseudocode for Windows + macOS parity                                          |
-| **Speech Processing**       | Added `\r\n` normalization in speechTextProcessor.ts to prevent artifacts on Windows                                           |
+| Category                    | Highlights                                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Workspace Protection**    | Extended 4-layer protection system with additional workspace marker files                                           |
+| **Cross-Platform Blockers** | Fixed `path.isAbsolute()` for Windows paths in forgettingCurve.ts; fixed CRLF frontmatter regex in proposeSkill.ts |
+| **Zero Runtime Deps**       | Moved fs-extra, jszip, pptxgenjs, proper-lockfile, ws to devDependencies (all bundled by esbuild)                  |
+| **Documentation**           | 13 files converted from PowerShell-only to bash/pseudocode for Windows + macOS parity                              |
+| **Speech Processing**       | Added `\r\n` normalization in speechTextProcessor.ts to prevent artifacts on Windows                               |
 
 ### What's New (v7.1.0 -- Excavation Edition)
 

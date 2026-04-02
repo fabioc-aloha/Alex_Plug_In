@@ -9,18 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [7.1.1] - 2026-04-01
 
-> **Cross-Platform Hardening** -- GCX workspace protection, 2 cross-platform blockers fixed, dependency cleanup, documentation portability.
+> **Cross-Platform Hardening** -- Extended workspace protection, 2 cross-platform blockers fixed, dependency cleanup, documentation portability.
 
 ### Added
 
-- **GCX workspace protection** -- Extended 4-layer protection system (path failsafe, marker files, VS Code settings, pre-tool-use hooks) to cover GCX_Master and GCX_Copilot workspaces via 3 marker files: `MASTER-ALEX-PROTECTED.json`, `GCX-MASTER-PROTECTED.json`, `GCX-COPILOT-PROTECTED.json`
+- **Extended workspace protection** -- Extended 4-layer protection system (path failsafe, marker files, VS Code settings, pre-tool-use hooks) to cover additional protected workspaces via marker file scanning
 
 ### Fixed
 
 - **forgettingCurve.ts path detection** (BLOCKER) -- `filePath.startsWith('/')` only detected Unix absolute paths; Windows paths (`C:\...`) were treated as relative, producing corrupted paths. Replaced with `path.isAbsolute()`
 - **proposeSkill.ts CRLF frontmatter regex** (BLOCKER) -- YAML frontmatter regex used `\n` only; Windows CRLF files would fail to match, causing duplicate frontmatter injection. Updated to `\r?\n`
 - **speechTextProcessor.ts line ending normalization** -- Added `\r\n` to `\n` normalization before newline processing to prevent `\r` artifacts on Windows
-- **GCX_Master pre-tool-use hook** -- Was checking non-existent `MASTER-PROTECTED.json` instead of actual protection markers; fixed to scan all 3 correct markers
+- **Pre-tool-use hook fix** -- Was checking non-existent marker filename instead of actual protection markers; fixed to scan all correct markers
 
 ### Changed
 
@@ -103,11 +103,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.8.4] - 2026-03-27
 
-> **Quality Review & Roadmap Cleanup** -- GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes.
+> **Quality Review & Roadmap Cleanup** -- Heir cleanup (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired, brain-qa regex fix, version drift fixes.
 
 ### Changed
 
-- **GCX autonomous**: Removed `alex_docs/platforms/gcx-copilot/`, GCX-AI-HEIR-PLAN.md, and GCX audit -- GCX_Master is now a self-governing fork
+- **Heir cleanup**: Removed obsolete platform docs and audit files for self-governing forks
 - **Claude heirs removed**: Removed Claude Cowork (Gate #17) and Claude Chat (Gate #18) from roadmap -- Windows Agent subsumes this use case
 - **Semantic Skill Graph retired**: Removed archived entry from roadmap -- LLM-native routing makes vector embeddings redundant
 - **brain-qa regex fix**: Escaped hyphen in character class that caused invalid range error
@@ -267,15 +267,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.7.3] - 2026-03-24
 
-> **Synapse Integrity & Dialog Engineering** — Massive synapse normalization (428 types, 287 deduplication), new dialog-engineering skill, skill-building hardened with Phase 0 activation check, GCX Master audit.
+> **Synapse Integrity & Dialog Engineering** — Massive synapse normalization (428 types, 287 deduplication), new dialog-engineering skill, skill-building hardened with Phase 0 activation check, heir audit.
 
 ### Added
 
-- **Dialog Engineering Skill** — CSAR Loop (Clarify, Summarize, Act, Reflect) framework with turn design patterns, anti-patterns, complexity-calibrated guidance. Adopted from GCX Master audit findings
+- **Dialog Engineering Skill** — CSAR Loop (Clarify, Summarize, Act, Reflect) framework with turn design patterns, anti-patterns, complexity-calibrated guidance. Adopted from heir audit findings
 - **Skill-Building Phase 0 Activation Check** — Before creating a new skill, check if the issue is simply a missing activation entry for an existing skill. Added to `skill-building.instructions.md`
 - **Staleness Warning Template** — skill-building Phase 1 now includes a staleness warning template for outdated content detection
 - **Global Knowledge Prerequisite** — skill-building now requires `/knowledge` search before creating any new skill
-- **GCX Master Audit** (`alex_docs/audits/GCX-MASTER-AUDIT-2026-03-24.md`) — Comprehensive audit of GCX_Master heir with pattern adoption recommendations
+- **Heir audit** — Comprehensive audit of heir workspace with pattern adoption recommendations
 
 ### Fixed
 
