@@ -1,28 +1,24 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "CONTRIBUTING.md",
-    "ROADMAP-UNIFIED.md",
-    "alex_docs/alex3/README.md",
-    "alex_docs/architecture/GK-PATTERN-FORMAT-STANDARD.md",
-    "alex_docs/architecture/LOADING-MECHANICS.md",
-    "alex_docs/guides/API-KEYS.md",
-    "alex_docs/guides/CLI-TOOLS.md",
-    "alex_docs/guides/GETTING-STARTED.md"
+    "latforms/vscode-extension/README.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1775098512663
+      "scannedAt": 1775098708681
     },
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1775098512663
+      "scannedAt": 1775098708681
+    },
+    {
+      "file": "platforms/vscode-extension/README.md",
+      "todoCount": 1,
+      "scannedAt": 1775098708681
     }
   ],
-  "lastUpdated": 1775098512663
+  "lastUpdated": 1775098708681
 }
