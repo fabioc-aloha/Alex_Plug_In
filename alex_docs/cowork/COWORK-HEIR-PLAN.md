@@ -139,7 +139,7 @@ Convert 5 high-value Alex skills to Cowork format:
 - [ ] **P5-06** Measure: output quality compared to non-skill Cowork output
 - [ ] **P5-07** Update `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md`: add Cowork to heir diagram
 - [ ] **P5-08** Update `copilot-instructions.md` Heirs section: add Cowork entry
-- [ ] **P5-09** Update `ROADMAP-UNIFIED.md`: add Alex Coworker to platform strategy
+- [x] **P5-09** Update `ROADMAP.md`: add Alex Coworker to platform strategy
 - [ ] **P5-10** Create `alex_docs/platforms/COWORK-HEIR.md` with setup and troubleshooting guide
 
 ## Candidate skills for conversion

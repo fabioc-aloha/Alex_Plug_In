@@ -70,7 +70,7 @@
 - [ ] **P4-01** Create `platforms/windows-agent/README.md` with setup + troubleshooting guide
 - [ ] **P4-02** Update `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md` -- add Windows Agent to heir diagram
 - [ ] **P4-03** Update `copilot-instructions.md` Heirs section -- add `Windows Agent: platforms/windows-agent/`
-- [ ] **P4-04** Update `ROADMAP-UNIFIED.md` -- close Conditional #19, add to Shipped Releases
+- [ ] **P4-04** Update `ROADMAP.md` -- close Conditional #19, add to Shipped Releases
 - [ ] **P4-05** Document known limitations (vision-based interaction, no slash commands, no agent modes)
 - [ ] **P4-06** Create troubleshooting guide: ODR registration errors, proxy timeout, permission denied, tool not discovered
 - [ ] **P4-07** Update `packages/mcp-cognitive-tools/README.md` -- add Windows ODR configuration section

@@ -1,12 +1,13 @@
 {
-  "hotFiles": [
-    "alex_docs/cowork/PLATFORM-COMPARISON.md",
-    "platforms/cowork/Cowork/custom-instructions.txt"
-  ],
+  "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "platforms/cowork/Cowork/Skills/status-reporting/SKILL.md"
+    "ROADMAP-UNIFIED.md -> ROADMAP.md",
+    "alex_docs/cowork/COWORK-HEIR-PLAN.md",
+    "alex_docs/platforms/WINDOWS-HEIR-PLAN.md",
+    "ROADMAP-COWORKER.md",
+    "ROADMAP-UNIFIED.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1775245075187
+  "lastUpdated": 1775254266537
 }

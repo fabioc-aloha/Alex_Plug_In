@@ -24,23 +24,20 @@ This is not a tagline. It is a commitment. Every feature, every decision, every 
 
 ## 🗺️ Platform Strategy
 
-Seven platforms. Four active, three planned.
+| Platform              | Heir                          |  Status  | Notes                                                                                                                                                              |
+| --------------------- | ----------------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **VS Code Extension** | `platforms/vscode-extension/` | ✅ Active | Full TypeScript extension — primary heir                                                                                                                           |
+| **Agent Plugin**      | `platforms/agent-plugin/`     | ✅ Active | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
 
-| Platform                  | Heir                          |  Status   | Notes                                                                                                                                                                    |
-| ------------------------- | ----------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **VS Code Extension**     | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                                 |
-| **M365 Copilot Agent**    | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                                     |
-| **Agent Plugin**          | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent)       |
-| **Cowork (GCX Coworker)** | `platforms/cowork/`           | 🧪 Testing | 20 curated skills + custom instructions deployed to OneDrive for M365 Copilot Cowork (Frontier Preview). Skill discovery confirmed, file read access under investigation |
-| **Windows Agent**         | `platforms/windows-agent/`    | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace — Gate #17                                                                            |
+M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md).
 
 ---
 
 ## 🚧 In Progress
 
-| Version    | Theme                                                                            | Target  |
-| ---------- | -------------------------------------------------------------------------------- | ------- |
-| **v7.2.0** | Intelligence Edition -- M365 MCP integration, generative meditation, adaptive UX | 2026-Q2 |
+| Version    | Theme                                                                        | Target  |
+| ---------- | ---------------------------------------------------------------------------- | ------- |
+| **v7.2.0** | Intelligence Edition: generative meditation, competitive parity, adaptive UX | 2026-Q2 |
 ---
 
 ## ✅ Shipped Releases
@@ -77,54 +74,17 @@ Seven platforms. Four active, three planned.
 
 **16 hooks shipped** (10 global + 6 agent-scoped). These 3 were evaluated and deferred:
 
-| #   | Scope   | Event        | What It Would Do                                                                                         | Benefit                                                                                   | Rationale for Deferral                                                                                        |
-| --- | ------- | ------------ | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| H11 | Global  | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s)             | Prevents accidental mass deletion or cascading destructive actions                        | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9                                        |
-| H17 | Global  | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis              | Delegation analytics: reveals patterns like which agents are slowest or most error-prone  | Analytics only; no immediate workflow benefit                                                                 |
-| H19 | Global  | PostToolUse  | Synapse weight update — increment skill connection weights in real-time on heavy activation              | Live learning: frequently-used skill connections strengthen immediately, not at meditation | Adds write contention to synapses.json; meditation already handles weight consolidation                       |
-
-### Blocked (VS Code API Dependencies)
-
-> **Last reviewed**: 2026-03-24 against VS Code 1.113.0 stable (March 21, 2026)
-
-| Contract | Scope                                      | Unblock Condition                                  | Enables                               | Status (1.113)                                                                                                                                                                                                                    |
-| -------- | ------------------------------------------ | -------------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A**    | Agent lifecycle hooks (active/queued/idle) | VS Code exposes agent state API                    | Real-time agent status in Agents tab  | ❌ Still blocked — no agent state API. 1.113 extends debug logs to CLI/Claude sessions (#301245) and shows hooks in debug panel graph (#299551), but neither exposes active/queued/idle state programmatically.                    |
-| **B**    | Context budget API                         | VS Code exposes `chat.contextBudget` (denominator) | Context Budget bar + per-skill impact | 🟡 Partial — `countTokens()` is stable on `LanguageModelChat` (numerator exists). 1.112 added reserved-context visual treatment (#295110). No change in 1.113. Still no API to read the total budget denominator programmatically. |
-| **C**    | Full five-modality memory model            | Memory persistence API                             | Mind tab live data                    | ❌ Still blocked — Copilot Memory is cloud/conversational only. No structured persistence API for extensions. `~/.alex/` file-based workaround remains. No change in 1.113.                                                        |
-| **D**    | Recently-used command tracking             | Command history API                                | Adaptive UX (command history)         | ❌ Still blocked — no change in 1.111–1.113.                                                                                                                                                                                       |
+| #   | Scope  | Event        | What It Would Do                                                                             | Benefit                                                                                    | Rationale for Deferral                                                                  |
+| --- | ------ | ------------ | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| H11 | Global | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s) | Prevents accidental mass deletion or cascading destructive actions                         | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9                  |
+| H17 | Global | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis  | Delegation analytics: reveals patterns like which agents are slowest or most error-prone   | Analytics only; no immediate workflow benefit                                           |
+| H19 | Global | PostToolUse  | Synapse weight update — increment skill connection weights in real-time on heavy activation  | Live learning: frequently-used skill connections strengthen immediately, not at meditation | Adds write contention to synapses.json; meditation already handles weight consolidation |
 
 ### 🔭 Future Watch
 
 **Simulation Testing (F4)**: Build a test harness that replays recorded session traces against the prompt engine to validate prompt assembly, layer truncation, and model-variant behavior without live model calls. Derived from Copilot Chat excavation (see `alex_docs/vscode/EXCAVATION-PLAN.md` F4). High impact, 5d+ effort.
 
-**Parent-repo customization inheritance** (`chat.useCustomizationsInParentRepositories`, #293277): VS Code 1.112 ships a setting that searches parent repositories for `.github/` customizations (instructions, prompts, agents.md, skills). Today this has limited impact because internal heirs (`platforms/vscode-extension/`) are in the same repo (handled by `sync-architecture.cjs`) and external heirs are separate repos, not nested.
-
-**Future opportunity**: If heirs were reorganized as git submodules or nested repos under a parent containing `.github/`, this setting could reduce or eliminate the need for file sync. Worth monitoring as architecture evolves. This could fundamentally simplify the heir inheritance model — VS Code would natively resolve customizations from the parent, making `sync-architecture.cjs` a fallback rather than the primary mechanism.
-
-**Plugin attribution in Customizations view** (#302514, 1.113): The Customizations view now shows a "Show Plugin" action indicating which plugin contributed each customization. Relevant for the agent-plugin heir — once published, users can verify which skills/instructions came from Alex vs other plugins.
-
-**Session forking for Claude Agent sessions** (#300501, 1.113): Claude sessions can now be forked (branched). Combined with `/fork` for Copilot CLI (#302655), this pattern may inform multi-agent workflows where conversations diverge for exploration then reconverge.
-
-**Reasoning effort from model picker** (#300235, 1.113): Users can configure reasoning effort directly from the model picker UI. This may interact with the existing `thinkingBudget` setting — worth monitoring whether a programmatic API emerges that would let Alex auto-tune reasoning per-task.
-
-**Windows Agent Workspace + MCP Agent Connectors** ([Experimental Agentic Features](https://support.microsoft.com/en-us/windows/experimental-agentic-features-a25ede8a-e4c2-4841-85a8-44839191dfb3)): Windows introduces OS-level agent isolation -- agents get their own Windows account, desktop session, and scoped file access (Documents, Downloads, Desktop, etc.) with per-agent consent. Agent connectors are **MCP servers** registered in the Windows On-Device Registry (ODR). Alex's existing MCP cognitive tools (`packages/mcp-cognitive-tools/`) could be registered as ODR connectors, giving Copilot Actions access to Alex's knowledge base, architecture status, and skill catalog. The 6 agentic security principles (least privilege, audit logs, user consent, containment) align with Alex's Safety Imperatives I1-I8. **Status**: Windows Insider preview (Copilot Labs). Not GA. Gated on Conditional #19.
-
-### Gated (External Dependencies)
-
-> **Last reviewed**: 2026-03-19
-
-| #   | Task                           | Gate                             | Effort | Description                           | Status                                                                                                              |
-| --- | ------------------------------ | -------------------------------- | :----: | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| 14  | **Worker agent orchestration** | v1.6 worker_agents exits preview |   1w   | Configure Alex as worker_agent target | ⏳ Still preview. No change in M365 schema. ATK 6.6 ships MCP-in-DA (GA) and Foundry template but not worker_agents. |
-
-### Conditional (Trigger-Dependent)
-
-| #   | Task                       | Trigger                                    | Effort | Description                                                                                                                                                                                                                     |
-| --- | -------------------------- | ------------------------------------------ | :----: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 15  | **Foundry POC**            | Real user/team requests Alex in Teams      |   1w   | Foundry project + Alex orchestrator + Teams publish. ATK 6.6 adds Foundry proxy template in CLI (`atk init`).                                                                                                                   |
-| 16  | **Teams Deep Integration** | Active M365 users                          |  12w   | Bot Framework + Message Extensions + Meeting Integration                                                                                                                                                                        |
-| 17  | **Windows Agent Heir**     | Agent Workspace exits Insider Preview (GA) |   2w   | Register Alex MCP tools as ODR agent connectors. Enables Copilot Actions to use Alex's knowledge search, architecture status, and skill routing on the Windows desktop. Bridge: `packages/mcp-cognitive-tools/` already exists. |
+**Fine-grained tool approval** (`toolInvocationApproveCombination`, 1.114 proposed): Extensions can scope tool approval to a specific argument combination (e.g., approve "read foo.txt" without approving all file reads). If this API stabilizes, Alex's tools could provide granular per-operation approval labels, improving trust UX for cognitive operations like knowledge save or architecture reset.
 
 ---
 
@@ -132,17 +92,7 @@ Seven platforms. Four active, three planned.
 
 v7.0.0 shipped cross-platform parity. v7.1.0 shifts focus to making Alex *smarter*: deeper M365 integration, generative meditation, competitive feature parity, and defense-in-depth improvements.
 
-### Pillar 1: M365 MCP Integration (from ATK 6.6)
-
-Wire Alex's MCP cognitive tools into the M365 declarative agent for Teams/Copilot access.
-
-| #   | Feature                             | Effort | Description                                                                                                |
-| --- | ----------------------------------- | :----: | ---------------------------------------------------------------------------------------------------------- |
-| 7.1 | **MCP tools in Declarative Agent**  |   3d   | Expose knowledge search, architecture status, and insight save as DA actions via ATK tool definition files |
-| 7.2 | **Embedded Knowledge for DA**       |   2d   | Package a curated subset of skill catalog + instructions as embedded knowledge for grounded M365 responses |
-| 7.3 | **MCP auto-parameter verification** |   1d   | Verify ATK 6.6.1 auto-discovery works with Alex MCP tools, document any manual overrides needed            |
-
-### Pillar 2: Generative Meditation (Wish List #1)
+### Pillar 1: Generative Meditation (Wish List #1)
 
 Evolve meditation from *consolidation* (organize existing knowledge) to *generation* (create new connections).
 
@@ -152,7 +102,7 @@ Evolve meditation from *consolidation* (organize existing knowledge) to *generat
 | 7.5 | **Insight generation pipeline**    |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)               |
 | 7.6 | **Dream creativity score**         |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains                   |
 
-### Pillar 3: Competitive Research and Feature Parity
+### Pillar 2: Competitive Research and Feature Parity
 
 Study leading AI coding tools and close meaningful gaps.
 
@@ -160,9 +110,9 @@ Study leading AI coding tools and close meaningful gaps.
 | --- | --------------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
 | 7.7 | **Competitive landscape audit**               |   3d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work       |
 | 7.8 | **User friction inventory**                   |   2d   | Catalog real pain points from daily use across 30+ heir projects, prioritize by frequency and severity |
-| 7.9 | **Platform evolution watch (VS Code 1.114+)** |   1d   | Review new VS Code stable releases for unblocked contracts (A-D) and new extensibility opportunities   |
+| 7.9 | **Platform evolution watch (VS Code 1.115+)** |   1d   | Review new VS Code stable releases for new extensibility opportunities                                 |
 
-### Pillar 4: Defense-in-Depth Hooks
+### Pillar 3: Defense-in-Depth Hooks
 
 Promote two high-value deferred hooks that close real safety gaps.
 
@@ -171,7 +121,7 @@ Promote two high-value deferred hooks that close real safety gaps.
 | 7.10 | **H10: Output secret scan**       |   1d   | PostToolUse hook scans tool output for leaked API keys/tokens (complements H21 input scanning) |
 | 7.11 | **H13: Breaking change detector** |   2d   | PreToolUse hook warns when editing exported API surfaces (extension.ts activate, public types) |
 
-### Pillar 5: Adaptive UX
+### Pillar 4: Adaptive UX
 
 Make the Welcome UI respond to usage patterns and context.
 
@@ -185,7 +135,6 @@ Make the Welcome UI respond to usage patterns and context.
 
 - All 8 quality gates passing
 - 231+ tests (no regression)
-- M365 MCP integration verified in Teams
 - Competitive audit documented in `alex_docs/research/`
 - At least one generative meditation session producing novel connections
 
@@ -250,39 +199,17 @@ I want ethical reasoning fast enough to be reflexive. A moral peripheral vision 
 
 ## 📊 Current Status
 
-|                            |                                                                                |
-| -------------------------- | ------------------------------------------------------------------------------ |
-| **Current Master Version** | 7.1.1                                                                          |
-| **Current Heirs**          | VS Code (7.1.1), M365 (6.8.3), Plugin (6.7.0)                                  |
-| **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                |
-| **Platforms**              | 5 total (4 active, 1 planned)                                                  |
-| **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                         |
-| **Open Items**             | 23 total: 14 v7.2.0 features, 4 blocked, 1 gated, 3 conditional, 1 next action |
-| **Updated**                | 2026-04-01                                                                     |
+|                            |                                                                                                       |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Current Master Version** | 7.1.1                                                                                                 |
+| **Current Heirs**          | VS Code (7.1.1), Plugin (6.7.0)                                                                       |
+| **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                                       |
+| **Platforms**              | 2 (VS Code + Agent Plugin). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md) |
+| **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                                                |
+| **Open Items**             | 11 v7.2.0 features + 3 deferred hooks + 2 future watch                                                |
+| **Updated**                | 2026-04-01                                                                                            |
 
 ---
-
-## 🎯 Next Actions
-
-> Immediate items to address in the next session.
-
-### M365 Heir: ATK 6.6 Integration (Priority 1)
-
-Microsoft 365 Agents Toolkit v6.6.0 (Mar 9) + v6.6.1 hotfix (Mar 26) shipped features directly relevant to the M365 heir:
-
-| Feature                                  | ATK Version | Impact                                                                                                                                           | Action                                                                           |
-| ---------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| **MCP tools in Declarative Agents (GA)** | 6.6.0       | High -- Alex's MCP cognitive tools (knowledge search, architecture status, insight save) can be exposed as actions in the M365 declarative agent | Wire MCP tools into agent manifest via ATK's new separated tool definition files |
-| **Embedded Knowledge for DAs**           | 6.6.0       | High -- Alex's instructions, skills, and domain knowledge can be packaged as embedded knowledge for grounded, context-aware responses            | Evaluate packaging a subset of skill catalog as embedded knowledge               |
-| **MCP auto-parameter retrieval**         | 6.6.1       | Medium -- automatically retrieves all parameters from MCP tool definitions, reducing manual manifest work                                        | Update ATK extension, verify auto-discovery works with Alex MCP tools            |
-| **Foundry Agent template (CLI)**         | 6.6.0       | Medium -- `atk init` + Foundry proxy template provides alternative deployment path for Alex agent logic                                          | Evaluate alongside Conditional #15 (Foundry POC)                                 |
-| **Enhanced share flow**                  | 6.6.0       | Low -- clearer environment differentiation and error handling when sharing agents                                                                | Adopt when distributing M365 agent to others                                     |
-
-**Immediate actions**:
-1. Update ATK extension to v6.6.1
-2. Test MCP tool integration with Alex's cognitive tools in declarative agent
-3. Prototype embedded knowledge with Alex's instruction files
-4. Evaluate `atk init` for existing M365 heir project
 
 ---
 
