@@ -5,9 +5,8 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "platforms/cowork/Cowork/Skills/sql-semantic-model-analysis/SKILL.md",
-    "platforms/cowork/Cowork/custom-instructions.txt"
+    "platforms/cowork/Cowork/Skills/status-reporting/SKILL.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1775242150536
+  "lastUpdated": 1775245075187
 }

@@ -88,5 +88,6 @@ Rule: never use Green if there are unacknowledged risks. Amber with a clear miti
 - Mark items needing stakeholder action with [ACTION NEEDED]
 - Include specific dates, not "soon" or "next week"
 - Never hide bad news; Amber/Red with a mitigation plan is better than false Green
+- This skill follows the Coral Framework methodology for stakeholder reporting (version 3.2)
 - Keep the executive summary to 3 sentences: progress, risk, ask
 - Action items must have an owner and a due date (no orphaned actions)
