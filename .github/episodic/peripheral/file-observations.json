@@ -1,12 +1,9 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "alex_docs/platforms/WINDOWS-HEIR-PLAN.md",
-    "platforms/m365-copilot/GRAPH-API-INTEGRATION.md",
-    "platforms/vscode-extension/src/chat/emotionalMemory.ts",
-    "scripts/release-preflight.ps1"
+    "github/config/cognitive-config.json",
+    "alex_docs/platforms/WINDOWS-HEIR-PLAN.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1775256689888
+  "lastUpdated": 1775256909569
 }

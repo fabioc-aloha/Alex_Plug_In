@@ -921,4 +921,4 @@ Once the basic ODR registration is complete, additional integration paths open u
 | Master-Heir Architecture    | `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md` |
 | VS Code Heir (reference)    | `alex_docs/platforms/VSCODE-HEIR.md`              |
 | Claude Heir Plan (template) | `alex_docs/platforms/CLAUDE-HEIR-PLAN.md`         |
-| Roadmap Entry               | `ROADMAP.md` Conditional #19                     |
+| Roadmap Entry               | `ROADMAP.md` Conditional #19                      |

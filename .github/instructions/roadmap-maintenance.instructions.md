@@ -6,7 +6,6 @@ inheritance: master-only
 
 # Roadmap Maintenance Procedural Memory
 
-
 ---
 
 ## Synapses
@@ -24,6 +23,7 @@ inheritance: master-only
 ### Principle
 
 The roadmap is a **living document** that requires active curation to prevent:
+
 - **Duplication** — Items appearing in both "Research Findings" and scheduled versions
 - **Drift** — Backlog items already implemented but not removed
 - **Ambiguity** — Similar items listed separately instead of combined
@@ -33,14 +33,14 @@ The roadmap is a **living document** that requires active curation to prevent:
 
 ## Mandatory Maintenance Triggers
 
-| Trigger | Action | Frequency |
-|---------|--------|-----------|
-| Version shipped | Update Version Status table (📋 Planned → ✅ Shipped) | Every release |
-| Research complete | Move from Research Findings → scheduled version OR remove if obsolete | When research concludes |
-| New feature added | Check if already in backlog/research before adding | Before roadmap edit |
-| Backlog item proposed | Verify not already scheduled in Version Details | Before adding to backlog |
-| Similar features found | Combine into single entry with comprehensive scope | During backlog audit |
-| VS Code stable released | Run VS Code Version Evaluation procedure (see below) | Each stable release |
+| Trigger                 | Action                                                                | Frequency                |
+| ----------------------- | --------------------------------------------------------------------- | ------------------------ |
+| Version shipped         | Update Version Status table (📋 Planned → ✅ Shipped)                 | Every release            |
+| Research complete       | Move from Research Findings → scheduled version OR remove if obsolete | When research concludes  |
+| New feature added       | Check if already in backlog/research before adding                    | Before roadmap edit      |
+| Backlog item proposed   | Verify not already scheduled in Version Details                       | Before adding to backlog |
+| Similar features found  | Combine into single entry with comprehensive scope                    | During backlog audit     |
+| VS Code stable released | Run VS Code Version Evaluation procedure (see below)                  | Each stable release      |
 
 ---
 
@@ -148,10 +148,13 @@ Research Started → Research Findings (unscheduled)
 ### When Version Ships
 
 1. **Update Version Status Table**
+
    ```markdown
    | v5.7.5 | Skill Intelligence | Context-Aware Guidance | 📋 Planned |
    ```
+
    becomes:
+
    ```markdown
    | **v5.7.5** | **Skill Intelligence** | **Context-Aware Guidance** | **✅ Shipped** |
    ```
@@ -166,17 +169,18 @@ Research Started → Research Findings (unscheduled)
 
 Binary status (`Planned` / `Shipped`) misses the most common real-world state: **work is complete but not yet published or released**. Use three states to avoid roadmaps that lie.
 
-| Status | Emoji | Meaning |
-|--------|:-----:|---------|
-| In scaffold | 📋 | Structure exists; substantive logic not yet written |
-| Implemented | 🔨 | Real code written and logically complete; not yet compiled/tested/published |
-| Shipped | ✅ | Compiled, tested, and published to users |
+| Status      | Emoji | Meaning                                                                     |
+| ----------- | :---: | --------------------------------------------------------------------------- |
+| In scaffold |  📋   | Structure exists; substantive logic not yet written                         |
+| Implemented |  🔨   | Real code written and logically complete; not yet compiled/tested/published |
+| Shipped     |  ✅   | Compiled, tested, and published to users                                    |
 
 **Why the middle state matters**: A roadmap that jumps from `📋 In scaffold` to `✅ Shipped` creates a false picture during the implementation phase — where most time is actually spent. A feature that's 80% to ship looks identical to one that's 0% to ship without `🔨 Implemented`.
 
 ### Application Rule
 
 When auditing a roadmap item:
+
 1. Does a `src/` or equivalent exist with real logic (not just boilerplate)? → `🔨 Implemented`
 2. Has it passed compile, test, and been published to users? → `✅ Shipped`
 3. Neither? → `📋 In scaffold`
@@ -207,6 +211,7 @@ For extension-specific roadmaps, "Implemented" means `extension.ts` has real com
 **Issue**: Research Findings accumulated duplicates with scheduled roadmap
 
 **Actions Taken**:
+
 1. **Removed from Research Findings** (already scheduled):
    - VS Code 1.109 → already in v5.9.0
    - Architecture assessment → already completed
@@ -236,4 +241,4 @@ Before committing roadmap changes:
 
 ---
 
-*Roadmap maintenance procedural memory — learned from February 15, 2026 backlog audit session*
+_Roadmap maintenance procedural memory — learned from February 15, 2026 backlog audit session_

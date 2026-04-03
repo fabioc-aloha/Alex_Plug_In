@@ -22,13 +22,13 @@ inheritance: master-only
 
 ## When to Run brain-qa
 
-| Trigger | Mode | Expected Outcome | Action on Failure |
-|---------|------|------------------|-------------------|
-| **Post-Meditation** | `-Phase 7,13` | Heir sync validated | Copy missing files to heir |
-| **Pre-Release** | `-Mode all` | 0 critical issues | Fix blocking issues before publish |
-| **After Bulk Changes** | `-Mode all` | <30 warnings | Review new warnings for unintended drift |
-| **User-Requested Audit** | `-Mode all` | Health report | Prioritize critical issues first |
-| **Weekly Maintenance** | `-Mode all` | Trend monitoring | Track warning count over time |
+| Trigger                  | Mode          | Expected Outcome    | Action on Failure                        |
+| ------------------------ | ------------- | ------------------- | ---------------------------------------- |
+| **Post-Meditation**      | `-Phase 7,13` | Heir sync validated | Copy missing files to heir               |
+| **Pre-Release**          | `-Mode all`   | 0 critical issues   | Fix blocking issues before publish       |
+| **After Bulk Changes**   | `-Mode all`   | <30 warnings        | Review new warnings for unintended drift |
+| **User-Requested Audit** | `-Mode all`   | Health report       | Prioritize critical issues first         |
+| **Weekly Maintenance**   | `-Mode all`   | Trend monitoring    | Track warning count over time            |
 
 ## The 33-Phase Architecture
 
@@ -36,21 +36,21 @@ inheritance: master-only
 
 **Purpose**: Verify file existence, schema compliance, master-heir synchronization
 
-| Phase | Check | Critical Issue Example | Intentional Warning Example |
-|-------|-------|------------------------|----------------------------|
-| 1 | Synapse Target Validation | [file.md] links to non-existent file | - |
-| 2 | Inheritance Field Validation | Missing `inheritable: false` | - |
-| 3 | Skill Index Coverage | Skill exists but not indexed | - |
-| 4 | Trigger Semantic Analysis | - | 15 overlaps (related skills share triggers) |
-| 5 | Master-Heir Skill Sync | Skill missing from heir | 3 master-only skills (expected) |
-| 6 | Synapse Schema Format | Invalid JSON in synapses.json | - |
-| 7 | **Synapse File Sync** ⚠️ | synapses.json out of sync with heir | - |
-| 8 | Memory-Activation Index Sync | Index doesn't match disk | - |
-| 9 | Catalog Accuracy | Skill count mismatch | - |
-| 10 | Core File Token Budget | copilot-instructions.md > 16K tokens | - |
-| 11 | Boilerplate Descriptions | Generic "TBD" placeholders | - |
-| 12 | Heir Reset Validation | Init script missing required files | - |
-| 13 | **Instructions/Prompts Sync** ⚠️ | New instruction missing from heir | - |
+| Phase | Check                            | Critical Issue Example               | Intentional Warning Example                 |
+| ----- | -------------------------------- | ------------------------------------ | ------------------------------------------- |
+| 1     | Synapse Target Validation        | [file.md] links to non-existent file | -                                           |
+| 2     | Inheritance Field Validation     | Missing `inheritable: false`         | -                                           |
+| 3     | Skill Index Coverage             | Skill exists but not indexed         | -                                           |
+| 4     | Trigger Semantic Analysis        | -                                    | 15 overlaps (related skills share triggers) |
+| 5     | Master-Heir Skill Sync           | Skill missing from heir              | 3 master-only skills (expected)             |
+| 6     | Synapse Schema Format            | Invalid JSON in synapses.json        | -                                           |
+| 7     | **Synapse File Sync** ⚠️         | synapses.json out of sync with heir  | -                                           |
+| 8     | Memory-Activation Index Sync     | Index doesn't match disk             | -                                           |
+| 9     | Catalog Accuracy                 | Skill count mismatch                 | -                                           |
+| 10    | Core File Token Budget           | copilot-instructions.md > 16K tokens | -                                           |
+| 11    | Boilerplate Descriptions         | Generic "TBD" placeholders           | -                                           |
+| 12    | Heir Reset Validation            | Init script missing required files   | -                                           |
+| 13    | **Instructions/Prompts Sync** ⚠️ | New instruction missing from heir    | -                                           |
 
 **Priority Fix Order**: Phase 7 → Phase 13 → Phase 1
 
@@ -58,39 +58,39 @@ inheritance: master-only
 
 **Purpose**: Verify documentation accuracy, formatting consistency, proper organization
 
-| Phase | Check | Example Issue |
-|-------|-------|---------------|
-| 14 | Agent File Consistency | Agent listed in copilot-instructions but no .agent.md file |
-| 15 | Config Schema Validation | Invalid JSON in config files |
-| 16 | Skill Frontmatter Completeness | Missing applyTo or description |
-| 17 | Instruction applyTo Validation | Invalid glob patterns |
-| 18 | LLM-First Design Compliance | Binary files in LLM-readable locations |
-| 19 | Episodic Memory Hygiene | - |
-| 20 | ASCII Art Validation | Complex art that breaks LLM parsing |
-| 21 | Brand Asset Completeness | Missing required logo files |
-| 22 | Template Freshness | Outdated boilerplate |
-| 23-26 | .github/ Organization | Misplaced files, orphaned content |
+| Phase | Check                          | Example Issue                                              |
+| ----- | ------------------------------ | ---------------------------------------------------------- |
+| 14    | Agent File Consistency         | Agent listed in copilot-instructions but no .agent.md file |
+| 15    | Config Schema Validation       | Invalid JSON in config files                               |
+| 16    | Skill Frontmatter Completeness | Missing applyTo or description                             |
+| 17    | Instruction applyTo Validation | Invalid glob patterns                                      |
+| 18    | LLM-First Design Compliance    | Binary files in LLM-readable locations                     |
+| 19    | Episodic Memory Hygiene        | -                                                          |
+| 20    | ASCII Art Validation           | Complex art that breaks LLM parsing                        |
+| 21    | Brand Asset Completeness       | Missing required logo files                                |
+| 22    | Template Freshness             | Outdated boilerplate                                       |
+| 23-26 | .github/ Organization          | Misplaced files, orphaned content                          |
 
 ### Category 3: Cross-Repo Integration (Phases 27-29)
 
 **Purpose**: Validate heir health and global knowledge synchronization
 
-| Phase | Check | Critical Issue | Intentional Warning |
-|-------|-------|----------------|---------------------|
-| 27 | M365 Heir Health | Broken heir structure | Version 5.9.0 ≠ 5.8.3 (different cycles) |
-| 28 | Codespaces Heir Health | Broken heir structure | - |
-| 29 | **Global Knowledge Sync** ⚠️ | - | Insight count stale (17 uncommitted insights) |
+| Phase | Check                        | Critical Issue        | Intentional Warning                           |
+| ----- | ---------------------------- | --------------------- | --------------------------------------------- |
+| 27    | M365 Heir Health             | Broken heir structure | Version 5.9.0 ≠ 5.8.3 (different cycles)      |
+| 28    | Codespaces Heir Health       | Broken heir structure | -                                             |
+| 29    | **Global Knowledge Sync** ⚠️ | -                     | Insight count stale (17 uncommitted insights) |
 
 ### Category 4: Architecture Evolution (Phases 30-33)
 
 **Purpose**: Track architecture growth and validate integrity
 
-| Phase | Check | Example Issue |
-|-------|-------|---------------|
-| 30 | Muscles Integrity | Broken PowerShell scripts |
-| 31 | **ROADMAP Version Alignment** ⚠️ | package.json 5.8.3 vs ROADMAP 5.8.2 | M365 heir ahead of VS Code heir |
-| 32 | Prefrontal Cortex Evolution | Core architecture regressions |
-| 33 | Pre-Sync Master Validation | - | PII in user-profile.json (stripped during heir sync) |
+| Phase | Check                            | Example Issue                       |
+| ----- | -------------------------------- | ----------------------------------- | ---------------------------------------------------- |
+| 30    | Muscles Integrity                | Broken PowerShell scripts           |
+| 31    | **ROADMAP Version Alignment** ⚠️ | package.json 5.8.3 vs ROADMAP 5.8.2 | M365 heir ahead of VS Code heir                      |
+| 32    | Prefrontal Cortex Evolution      | Core architecture regressions       |
+| 33    | Pre-Sync Master Validation       | -                                   | PII in user-profile.json (stripped during heir sync) |
 
 **Priority Fix Order**: Phase 31 (version alignment) before any release
 
@@ -106,12 +106,14 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 ### Critical Issues vs Intentional Warnings
 
 **Critical Issues (MUST FIX)**:
+
 - Broken file references (Phase 1)
 - Master-heir sync drift (Phase 7, 13)
 - Version misalignment before release (Phase 31)
 - Missing required files (Phase 12)
 
 **Intentional Warnings (MONITOR, DON'T FIX)**:
+
 - Trigger overlaps (Phase 4) - Related skills share activation patterns
 - Master-only skills (Phase 5) - global-knowledge, heir-curation, architecture-audit
 - Different heir versions (Phase 27) - M365 and VS Code on different release cycles
@@ -122,6 +124,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 ### Output Interpretation
 
 **Example Output:**
+
 ```powershell
 [PASS] Phase 1: Synapse Target Validation (0 broken links)
 [WARN] Phase 4: Trigger Semantic Analysis (15 overlaps)
@@ -130,6 +133,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 ```
 
 **Translation:**
+
 - ✅ All synapses point to valid files
 - ⚠️ 15 trigger overlaps expected (related skills)
 - ❌ 4 synapse files need sync to heir → **FIX THIS**
@@ -144,17 +148,17 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 **Enhanced Phase 5:** Dream + brain-qa (synapse + structure validation)
 
 **Procedure:**
+
 1. **Phase 5.1: Dream Synapse Validation**
    - Run `Alex: Dream (Neural Maintenance)`
    - Verify newly added synapses are valid
    - Confirm bidirectional connections have reciprocal entries
-   
 2. **Phase 5.2: brain-qa Structural Validation**
    - Run `brain-qa.ps1 -Phase 7,13`
    - **Phase 7**: Verify synapse files synced to heir
    - **Phase 13**: Verify new instruction files synced to heir
-   
 3. **Phase 5.3: Validation Outcome**
+
    ```
    ✓ Dream Health Check: [passed|issues found]
    ✓ brain-qa Phase 7: [synapse sync status]
@@ -169,6 +173,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
    - Use when Phase 5.1-5.3 pass but runtime behavior doesn't match expectations
 
 **When to Fix:**
+
 - Dream finds broken synapses → Fix before concluding meditation
 - brain-qa Phase 7/13 fail → Copy missing files to heir immediately
 - If fixes made → Re-run validation to confirm
@@ -180,6 +185,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 **Solution**: Phase 5.2 catches this immediately after meditation, allowing manual sync before continuing work.
 
 **Example from Feb 18, 2026 Session:**
+
 - Meditation created azure-enterprise-deployment.instructions.md
 - Dream validated synapses ✓
 - brain-qa Phase 13 FAILED: instruction missing from heir
@@ -197,17 +203,20 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 ```
 
 **Release Readiness Criteria:**
+
 - ✅ Exit code 0 OR exit code 1 with only intentional warnings
 - ✅ Zero critical issues in Phase 1, 7, 13, 31
 - ✅ Version alignment across package.json, ROADMAP, CHANGELOG (Phase 31)
 - ✅ All heirs healthy (Phase 27, 28)
 
 **If Issues Found:**
+
 1. **Critical issues** → Fix before release (Phase 7, 13, 31 priority)
 2. **New warnings** → Investigate cause (unintended drift?)
 3. **Intentional warnings** → Document and proceed
 
 **Example Decision from Feb 18, 2026:**
+
 - v5.8.3 published Feb 17 (stable)
 - Today's changes: meditation + audit fixes (cognitive architecture only)
 - brain-qa: 33/33 PASS, 0 critical, 26 intentional warnings
@@ -270,6 +279,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 ### Phase 7 Fails: Synapse Files Out of Sync
 
 **Symptoms:**
+
 ```
 [FAIL] Phase 7: Synapse File Sync (4 files out of sync)
   - brain-qa/synapses.json
@@ -279,6 +289,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 ```
 
 **Fix:**
+
 ```powershell
 Copy-Item .github/skills/brain-qa/synapses.json platforms/vscode-extension/.github/skills/brain-qa/
 Copy-Item .github/skills/brand-asset-management/synapses.json platforms/vscode-extension/.github/skills/brand-asset-management/
@@ -289,12 +300,14 @@ Copy-Item .github/skills/security-review/synapses.json platforms/vscode-extensio
 ### Phase 13 Fails: New Instruction Missing from Heir
 
 **Symptoms:**
+
 ```
 [FAIL] Phase 13: Instructions/Prompts Sync (master: 39, heir: 38)
 Missing in heir: azure-enterprise-deployment.instructions.md
 ```
 
 **Fix:**
+
 ```powershell
 Copy-Item .github/instructions/azure-enterprise-deployment.instructions.md platforms/vscode-extension/.github/instructions/
 ```
@@ -302,11 +315,13 @@ Copy-Item .github/instructions/azure-enterprise-deployment.instructions.md platf
 ### Phase 31 Warns: Version Misalignment
 
 **Symptoms:**
+
 ```
 [WARN] Phase 31: ROADMAP says 5.8.2, package.json says 5.8.3
 ```
 
 **Fix:**
+
 1. Open ROADMAP.md
 2. Update current version reference (line ~13)
 3. Update version table (lines ~533-537)
@@ -315,11 +330,13 @@ Copy-Item .github/instructions/azure-enterprise-deployment.instructions.md platf
 ### Phase 29 Warns: Global Knowledge Insight Count Stale
 
 **Symptoms:**
+
 ```
 [WARN] Phase 29: GK README says 242 insights, actual count 258
 ```
 
 **Fix:**
+
 ```powershell
 cd ..\Alex-Global-Knowledge
 (Get-ChildItem insights/GI-*.md).Count  # Get actual count
@@ -351,6 +368,7 @@ Does it indicate unintended drift? (new warning)
 ```
 
 **Intentional Warnings to Monitor (Not Fix):**
+
 - Phase 4: Trigger overlaps (related skills share activation patterns)
 - Phase 5: Master-only skills (3 expected: global-knowledge, heir-curation, architecture-audit)
 - Phase 19: Undated dream files (housekeeping, deferred)
@@ -359,6 +377,7 @@ Does it indicate unintended drift? (new warning)
 - Phase 33: PII in master user-profile.json (stripped during heir sync)
 
 **Critical Issues to Fix Immediately:**
+
 - Phase 1: Broken synapse targets
 - Phase 7: Synapse files out of sync
 - Phase 13: Instructions missing from heir
@@ -371,12 +390,14 @@ Does it indicate unintended drift? (new warning)
 **Principle**: Not every architecture improvement requires immediate marketplace publish.
 
 **Pattern from Feb 18, 2026:**
+
 - v5.8.3 published Feb 17 (UI Polish)
 - Session work: meditation + audit fixes
 - brain-qa: 33/33 PASS, 0 critical, 26 warnings
 - **Decision**: Queue changes for v5.9.0 (no urgent fixes)
 
 **Rationale:**
+
 - Cognitive architecture improvements accumulate value over time
 - Strategic patience reduces marketplace noise
 - Quality-focused releases over velocity-focused releases
@@ -387,6 +408,7 @@ Does it indicate unintended drift? (new warning)
 **Pattern**: brain-qa detects cognitive drift before it becomes architectural debt
 
 **Example:**
+
 - 17 Global Knowledge insights accumulated over 3 days (Feb 15-18)
 - Metadata drift: README said 242, actual count 258
 - Phase 29 caught this immediately
@@ -408,4 +430,4 @@ Does it indicate unintended drift? (new warning)
 
 ---
 
-*Cognitive health validation protocols - systematic architecture integrity validation with meditation and release workflow integration*
+_Cognitive health validation protocols - systematic architecture integrity validation with meditation and release workflow integration_

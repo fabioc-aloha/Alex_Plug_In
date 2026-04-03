@@ -12,6 +12,7 @@ inheritance: master-only
 ## Purpose
 
 Global knowledge (`~/.alex/global-knowledge/`) accumulates insights and patterns from all projects. Without curation, it becomes cluttered with:
+
 - Outdated insights
 - Duplicate patterns
 - Context-specific learnings that shouldn't be global
@@ -30,6 +31,7 @@ Get-ChildItem ~/.alex/global-knowledge/insights/ -Recurse
 ```
 
 For each item, assess:
+
 - **Relevance**: Is this still useful?
 - **Scope**: Is this truly cross-project, or context-specific?
 - **Implementation**: Has this already been implemented somewhere?
@@ -39,39 +41,41 @@ For each item, assess:
 
 For each global knowledge item, decide:
 
-| Decision | Action | When to Use |
-|----------|--------|-------------|
-| **Keep** | Leave in global knowledge | Valuable, not yet implemented |
+| Decision             | Action                       | When to Use                      |
+| -------------------- | ---------------------------- | -------------------------------- |
+| **Keep**             | Leave in global knowledge    | Valuable, not yet implemented    |
 | **Implement Master** | Promote to Master Alex files | Core capability for all projects |
-| **Implement Heirs** | Deploy to heir platforms | Platform-specific enhancement |
-| **Implement Both** | Master + sync to heirs | Universal improvement |
-| **Archive** | Move to `~/.alex/archive/` | Outdated but worth keeping |
-| **Delete** | Remove entirely | No longer relevant |
+| **Implement Heirs**  | Deploy to heir platforms     | Platform-specific enhancement    |
+| **Implement Both**   | Master + sync to heirs       | Universal improvement            |
+| **Archive**          | Move to `~/.alex/archive/`   | Outdated but worth keeping       |
+| **Delete**           | Remove entirely              | No longer relevant               |
 
 ### Step 3: Implementation Paths
 
 #### A. Implement in Master Only
+
 For knowledge that belongs in the core architecture but doesn't need heir distribution:
 
 1. Create/update appropriate Master Alex file:
    - New skill → `.github/skills/[skill-name]/SKILL.md`
    - New procedure → `.github/instructions/[name].instructions.md`
    - New workflow → `.github/prompts/[name].prompt.md`
-   
 2. Remove from global knowledge:
    ```powershell
    Remove-Item ~/.alex/global-knowledge/[patterns|insights]/[item]
    ```
 
 #### B. Implement in Heirs
+
 For knowledge that should be available in packaged distributions:
 
 1. Implement in Master first (single source of truth)
 2. Sync to heirs:
+
    ```powershell
    # Sync skills
    Copy-Item -Path ".\.github\skills\*" -Destination ".\platforms\vscode-extension\.github\skills\" -Recurse -Force
-   
+
    # Sync instructions
    Copy-Item -Path ".\.github\instructions\*" -Destination ".\platforms\vscode-extension\.github\instructions\" -Recurse -Force
    ```
@@ -79,6 +83,7 @@ For knowledge that should be available in packaged distributions:
 3. Remove from global knowledge after heir sync
 
 #### C. Archive
+
 For knowledge that's outdated but has historical value:
 
 ```powershell
@@ -92,6 +97,7 @@ Move-Item ~/.alex/global-knowledge/[patterns|insights]/[item] ~/.alex/archive/
 ### Step 4: Document Changes
 
 After curation session, update:
+
 - Changelog if significant
 - Skill catalog if new skills added
 - Implementation plan if related to roadmap
@@ -99,6 +105,7 @@ After curation session, update:
 ## Curation Triggers
 
 Run this protocol when:
+
 - **Scheduled**: Weekly or bi-weekly review
 - **Before Release**: Ensure no orphaned knowledge
 - **After Major Learning**: When global knowledge grows significantly
@@ -111,6 +118,7 @@ GK index entries can drift from the expected schema. Run this validation during 
 ### Two-Layer Validation Protocol
 
 **Layer 1: File ↔ Index Sync**
+
 ```powershell
 # Check for orphaned files (file exists, no index entry)
 $allFiles = (Get-ChildItem patterns/*.md) + (Get-ChildItem insights/*.md)
@@ -122,6 +130,7 @@ $missing = $indexPaths | Where-Object { -not (Test-Path $_) }
 ```
 
 **Layer 2: Schema Field Compliance**
+
 ```powershell
 $requiredFields = @('id', 'title', 'type', 'category', 'created', 'filePath')
 $index = Get-Content index.json | ConvertFrom-Json
@@ -132,6 +141,7 @@ foreach ($entry in $index.entries) {
 ```
 
 **Common Schema Drift Issues**:
+
 - `source` instead of `sourceProject`
 - `path` instead of `filePath`
 - Missing `type`, `modified`, or `summary` fields
@@ -190,6 +200,7 @@ Summary: 2 implemented, 1 retained, 1 archived, 1 deleted
 ### End-to-End Procedural Pattern
 
 **Phase 1: Discovery**
+
 ```powershell
 # Check GK skill registry
 $registry = Get-Content ~/.alex/global-knowledge/skills/skill-registry.json | ConvertFrom-Json
@@ -197,14 +208,15 @@ $registrySkills = $registry.skills | Where-Object { $_.inheritance -eq 'inherita
 
 # Check GK patterns for knowledge-only patterns
 $patterns = Get-ChildItem ~/.alex/global-knowledge/patterns/GK-*.md
-$knowledgeOnlyPatterns = $patterns | Where-Object { 
-    (Get-Content $_.FullName -Raw) -notmatch 'trifecta-complete' 
+$knowledgeOnlyPatterns = $patterns | Where-Object {
+    (Get-Content $_.FullName -Raw) -notmatch 'trifecta-complete'
 }
 ```
 
 **Phase 2: Triage and Assessment**
+
 1. **Full Trifectas** (SKILL.md + synapses.json in registry) → Ready for direct copy
-2. **Knowledge-Only Patterns** (GK-*.md in patterns/) → Need trifecta creation
+2. **Knowledge-Only Patterns** (GK-\*.md in patterns/) → Need trifecta creation
 3. Assess which to promote based on:
    - Relevance to Master Alex's core capabilities
    - Quality and completeness of documentation
@@ -213,6 +225,7 @@ $knowledgeOnlyPatterns = $patterns | Where-Object {
 **Phase 3: Promotion Execution**
 
 For **Full Trifectas**:
+
 ```powershell
 # Copy entire skill folder
 Copy-Item -Path "~/.alex/global-knowledge/skills/database-design/" `
@@ -221,6 +234,7 @@ Copy-Item -Path "~/.alex/global-knowledge/skills/database-design/" `
 ```
 
 For **Knowledge-Only Patterns**:
+
 1. Extract skill content from GK pattern file
 2. Create skill folder structure:
    ```
@@ -237,6 +251,7 @@ For **Knowledge-Only Patterns**:
 **Phase 4: Documentation Updates**
 
 Update skill count across all files (search for old count → replace with new):
+
 1. `.github/copilot-instructions.md` → "Total Skills: X"
 2. `CHANGELOG.md` → Add new skills under current version
 3. `README.md` → Multiple instances (architecture tree, features, etc.)
@@ -248,6 +263,7 @@ Update skill count across all files (search for old count → replace with new):
 **Phase 5: Asset Generation (if applicable)**
 
 For skills that generate visual assets:
+
 ```powershell
 # Run generation scripts
 node scripts/generate-{skill-assets}.js
@@ -259,12 +275,14 @@ Get-ChildItem assets/ -Filter "banner-*"
 **Phase 6: Validation**
 
 1. **Syntax**: Check for errors in new skill files
+
    ```powershell
    # VS Code will show diagnostics
    code .github/skills/{new-skill}/SKILL.md
    ```
 
 2. **Synapses**: Verify all connection targets exist
+
    ```powershell
    # Run Dream to validate synaptic health
    # Alex: Dream (Neural Maintenance)
@@ -279,6 +297,7 @@ Get-ChildItem assets/ -Filter "banner-*"
 **Phase 7: Global Knowledge Cleanup**
 
 After successful promotion:
+
 ```powershell
 # For full trifectas - remove from GK (now in Master)
 Remove-Item ~/.alex/global-knowledge/skills/{skill-name}/ -Recurse
@@ -291,10 +310,12 @@ Move-Item ~/.alex/global-knowledge/patterns/GK-{pattern}.md `
 ### Real-World Example (February 15, 2026)
 
 **Discovered**:
+
 - 4 full trifectas in GK skill registry: database-design, multi-agent-orchestration, observability-monitoring, performance-profiling
 - 3 knowledge-only patterns: extension-audit-methodology, ai-character-reference-generation, ai-generated-readme-banners
 
 **Promoted**:
+
 - Created 3 new skill trifectas from knowledge-only patterns
 - Total: 119 skills (116 → 119)
 - Updated 7 documentation files
@@ -307,6 +328,7 @@ Move-Item ~/.alex/global-knowledge/patterns/GK-{pattern}.md `
 ### Automation Opportunities
 
 **Future Enhancement**: Create `/promote-gk-skill` command that:
+
 1. Scans GK for new skills
 2. Shows QuickPick for selection
 3. Executes promotion workflow
@@ -322,10 +344,10 @@ Heirs can **inherit skills** from Global Knowledge rather than creating them fro
 
 ### Two Inheritance Sources
 
-| Source | Location | Format | Transformation |
-|--------|----------|--------|----------------|
-| **Skill Registry** | `~/.alex/global-knowledge/skills/` | Ready-to-use folders | Direct copy |
-| **GK Patterns** | `~/.alex/global-knowledge/patterns/GK-*-skill*.md` | Embedded skills | Strip GK header |
+| Source             | Location                                           | Format               | Transformation  |
+| ------------------ | -------------------------------------------------- | -------------------- | --------------- |
+| **Skill Registry** | `~/.alex/global-knowledge/skills/`                 | Ready-to-use folders | Direct copy     |
+| **GK Patterns**    | `~/.alex/global-knowledge/patterns/GK-*-skill*.md` | Embedded skills      | Strip GK header |
 
 ### Source 1: Skill Registry (Primary)
 
@@ -350,6 +372,7 @@ The `skill-registry.json` contains 89+ production-ready skills:
 ```
 
 **Inheritance Process**:
+
 1. Read `~/.alex/global-knowledge/skills/skill-registry.json`
 2. Filter skills not in project's `.github/skills/`
 3. Copy entire folder: `skills/{folder}/` → `.github/skills/{folder}/`
@@ -360,6 +383,7 @@ The `skill-registry.json` contains 89+ production-ready skills:
 Some skills are embedded in GK pattern files (e.g., `GK-book-publishing-skill.md`):
 
 **Pattern File Structure**:
+
 ```markdown
 # Book Publishing Skill
 
@@ -367,19 +391,21 @@ Some skills are embedded in GK pattern files (e.g., `GK-book-publishing-skill.md
 **Category**: documentation  
 **Tags**: publishing, pdf, pandoc  
 **Source**: AlexCook  
-**Created**: 2026-02-04T16:05:51.785Z  
+**Created**: 2026-02-04T16:05:51.785Z
 
 ---
 
 ---
-applyTo: "**/*book*,**/*publish*"
----
+
+## applyTo: "**/_book_,**/_publish_"
 
 # Book Publishing Skill
+
 > [Actual skill content starts here]
 ```
 
 **Extraction Process**:
+
 1. Find GK metadata block (ends at first `---\n---`)
 2. Extract content after the YAML frontmatter
 3. Create skill folder with extracted content
@@ -405,6 +431,7 @@ Add to the inherited skill's `synapses.json`:
 ### Command: `Alex: Inherit Skill from Global`
 
 **Workflow**:
+
 ```
 1. Load skill-registry.json
 2. Get existing project skills
@@ -425,19 +452,20 @@ Add to the inherited skill's `synapses.json`:
 ### Validation After Inheritance
 
 Run `Alex: Dream (Neural Maintenance)` to validate:
+
 - Synapse connections are valid
 - No broken references
 - Schema compliance
 
 ### When to Inherit vs. Create
 
-| Inherit from Global | Create New |
-|---------------------|------------|
-| Skill exists in registry | Novel domain expertise |
+| Inherit from Global                    | Create New                 |
+| -------------------------------------- | -------------------------- |
+| Skill exists in registry               | Novel domain expertise     |
 | Standard patterns (testing, debugging) | Project-specific knowledge |
-| Quick capability deployment | Deep customization needed |
-| Proven, tested skills | Experimental approaches |
+| Quick capability deployment            | Deep customization needed  |
+| Proven, tested skills                  | Experimental approaches    |
 
 ---
 
-*Global Knowledge Curation: Keeping the collective memory clean and actionable*
+_Global Knowledge Curation: Keeping the collective memory clean and actionable_

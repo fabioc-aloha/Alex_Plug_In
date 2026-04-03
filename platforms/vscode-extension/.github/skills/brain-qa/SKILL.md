@@ -5,38 +5,40 @@ tier: standard
   Semantic, logic, code, and architectural validation of Alex's cognitive architecture — not just file counts, but
   meaning coherence
 disable-model-invocation: true
-applyTo: '**/*synapse*,**/*skill*,**/*trigger*'
+applyTo: "**/*synapse*,**/*skill*,**/*trigger*"
 ---
 
 # Brain QA
 
 > Semantic, logic, code, and architectural validation of Alex's cognitive architecture — not just file counts, but meaning coherence
+
 ## Philosophy
 
-Brain QA is a **mental exercise**, not just a muscle exercise. The script validates structure, but the skill's true value is teaching Alex *what to look for* beyond what scripts can automate.
+Brain QA is a **mental exercise**, not just a muscle exercise. The script validates structure, but the skill's true value is teaching Alex _what to look for_ beyond what scripts can automate.
 
 Two scripts serve different contexts:
 
-| Script | Context | Phases | Inheritance |
-|--------|---------|--------|-------------|
-| `brain-qa.ps1` | Master Alex | 31 (full) | master-only |
+| Script              | Context          | Phases             | Inheritance |
+| ------------------- | ---------------- | ------------------ | ----------- |
+| `brain-qa.ps1`      | Master Alex      | 31 (full)          | master-only |
 | `brain-qa-heir.ps1` | Heir deployments | 23 (heir-relevant) | inheritable |
 
 During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, so all contexts use the same filename. The master version includes cross-repo sync phases (5, 7, 8, 13) and master-only validations (26-29) that don't apply to heirs.
 
-| Dimension | Script Catches | Alex Catches (with this skill) |
-|-----------|---------------|-------------------------------|
-| **Structural** | Missing files, broken paths, count mismatches | ✅ Automated |
-| **Semantic** | — | Terminology drift (e.g. "DK files" vs "skills"), meaning contradictions between documents |
-| **Logic** | — | Process descriptions that conflict (e.g. dream says X, meditation says Y), impossible workflows |
-| **Code** | Compile errors, lint | Code behavior diverging from documented claims (e.g. documented trigger not wired in TypeScript) |
-| **Architectural** | — | Working memory model inconsistencies, neuroanatomical mappings that contradict instruction files |
+| Dimension         | Script Catches                                | Alex Catches (with this skill)                                                                   |
+| ----------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Structural**    | Missing files, broken paths, count mismatches | ✅ Automated                                                                                     |
+| **Semantic**      | —                                             | Terminology drift (e.g. "DK files" vs "skills"), meaning contradictions between documents        |
+| **Logic**         | —                                             | Process descriptions that conflict (e.g. dream says X, meditation says Y), impossible workflows  |
+| **Code**          | Compile errors, lint                          | Code behavior diverging from documented claims (e.g. documented trigger not wired in TypeScript) |
+| **Architectural** | —                                             | Working memory model inconsistencies, neuroanatomical mappings that contradict instruction files |
 
 **Rule**: When running brain-qa, always pair the script output with a semantic review. The script is the body; this skill is the brain.
 
 ## Quick Start
 
 ### Master Context
+
 ```bash
 # Full 31-phase audit
 .github/muscles/brain-qa.ps1
@@ -61,6 +63,7 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 ```
 
 ### Heir Context
+
 ```bash
 # Full heir audit (23 heir-relevant phases)
 .github/muscles/brain-qa.ps1
@@ -91,51 +94,51 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 
 ## Audit Phases
 
-| Phase  | Name                         | Validates                                     | Heir? |
-| ------ | ---------------------------- | --------------------------------------------- | ----- |
-| 1      | Synapse Target Validation    | All connection targets exist                  | Yes |
-| 2      | Inheritance Field Validation | All skills have inheritance field             | Yes |
-| 3      | Skill Index Coverage         | All skills in memory-activation index          | Yes |
-| 4      | Trigger Semantic Analysis    | Overlapping keywords (warnings OK if related) | Yes |
-| 5      | Master-Heir Skill Sync       | Skill directories match                       | No  |
-| 6      | Synapse Schema Format        | Numeric strengths, $schema present            | Yes |
-| 7      | Synapse File Sync            | synapses.json hash match                      | No  |
-| 8      | Memory-Activation Index Sync  | SKILL.md hash match                           | No  |
-| 9      | Catalog Accuracy             | SKILLS-CATALOG count matches reality          | Yes (count-only) |
-| 10     | Core File Token Budget       | Size + ASCII art checks on core files         | Yes |
-| 11     | Boilerplate Descriptions     | No placeholder skill descriptions             | Yes |
-| 12     | Heir Reset Validation        | Empty profile, available P5-P7 slots          | Yes |
-| 13     | Instructions/Prompts Sync    | Memory files synced to heir                   | No  |
-| 14     | Agents Structure             | Valid agent files in both                     | Yes |
-| 15     | Config Files                 | Required configs present, no leaks            | Yes |
-| 16     | Skill YAML Frontmatter       | name and description in frontmatter           | Yes |
-| 17     | Internal Skills Hidden        | user-invokable: false for metacognition       | Yes |
-| 18     | Agent Handoffs                | Return-to-Alex handoffs present               | Yes |
-| 19     | ApplyTo Patterns              | Instructions have file-type patterns          | Yes |
-| 20     | LLM-First Content             | No ASCII art, Mermaid OK                      | Yes |
-| 21     | Emoji Semantics               | Meaningful emoji usage stats                  | Yes |
-| 22     | Episodic Archive Health       | .github/episodic/ session records valid       | Yes |
-| 23     | Assets Validation             | .github/assets/ contains expected files       | Yes |
-| 24     | Issue/PR Templates            | GitHub templates present and valid            | Yes |
-| 25     | Root File Completeness        | Required .github/ root files exist            | Yes |
-| 26     | alex_docs Freshness           | Documentation not stale beyond threshold      | No  |
-| 27     | M365 Heir Validation          | M365 heir structure and version alignment     | No  |
-| 28     | Codespaces Heir Validation    | Codespaces devcontainer and config valid      | No  |
-| 29     | Global Knowledge Sync         | GK repo index and counts consistent           | No  |
-| 30     | Muscles Integrity             | All scripts referenced by trifectas exist     | Yes |
-| 31     | ROADMAP Version Alignment     | ROADMAP versions match package.json           | Yes (config-only) |
+| Phase | Name                         | Validates                                     | Heir?             |
+| ----- | ---------------------------- | --------------------------------------------- | ----------------- |
+| 1     | Synapse Target Validation    | All connection targets exist                  | Yes               |
+| 2     | Inheritance Field Validation | All skills have inheritance field             | Yes               |
+| 3     | Skill Index Coverage         | All skills in memory-activation index         | Yes               |
+| 4     | Trigger Semantic Analysis    | Overlapping keywords (warnings OK if related) | Yes               |
+| 5     | Master-Heir Skill Sync       | Skill directories match                       | No                |
+| 6     | Synapse Schema Format        | Numeric strengths, $schema present            | Yes               |
+| 7     | Synapse File Sync            | synapses.json hash match                      | No                |
+| 8     | Memory-Activation Index Sync | SKILL.md hash match                           | No                |
+| 9     | Catalog Accuracy             | SKILLS-CATALOG count matches reality          | Yes (count-only)  |
+| 10    | Core File Token Budget       | Size + ASCII art checks on core files         | Yes               |
+| 11    | Boilerplate Descriptions     | No placeholder skill descriptions             | Yes               |
+| 12    | Heir Reset Validation        | Empty profile, available P5-P7 slots          | Yes               |
+| 13    | Instructions/Prompts Sync    | Memory files synced to heir                   | No                |
+| 14    | Agents Structure             | Valid agent files in both                     | Yes               |
+| 15    | Config Files                 | Required configs present, no leaks            | Yes               |
+| 16    | Skill YAML Frontmatter       | name and description in frontmatter           | Yes               |
+| 17    | Internal Skills Hidden       | user-invokable: false for metacognition       | Yes               |
+| 18    | Agent Handoffs               | Return-to-Alex handoffs present               | Yes               |
+| 19    | ApplyTo Patterns             | Instructions have file-type patterns          | Yes               |
+| 20    | LLM-First Content            | No ASCII art, Mermaid OK                      | Yes               |
+| 21    | Emoji Semantics              | Meaningful emoji usage stats                  | Yes               |
+| 22    | Episodic Archive Health      | .github/episodic/ session records valid       | Yes               |
+| 23    | Assets Validation            | .github/assets/ contains expected files       | Yes               |
+| 24    | Issue/PR Templates           | GitHub templates present and valid            | Yes               |
+| 25    | Root File Completeness       | Required .github/ root files exist            | Yes               |
+| 26    | alex_docs Freshness          | Documentation not stale beyond threshold      | No                |
+| 27    | M365 Heir Validation         | M365 heir structure and version alignment     | No                |
+| 28    | Codespaces Heir Validation   | Codespaces devcontainer and config valid      | No                |
+| 29    | Global Knowledge Sync        | GK repo index and counts consistent           | No                |
+| 30    | Muscles Integrity            | All scripts referenced by trifectas exist     | Yes               |
+| 31    | ROADMAP Version Alignment    | ROADMAP versions match package.json           | Yes (config-only) |
 
 ## Mode Shortcuts
 
-| Mode     | Phases              | Use Case                                   |
-| -------- | ------------------- | ------------------------------------------ |
-| `all`    | 1-31                | Full audit before release                  |
-| `quick`  | 1-6                 | Fast validation during development         |
-| `sync`   | 5,7,8,13-15,27,28   | Master-Heir synchronization check          |
-| `schema` | 2,6,11,16,17        | Schema, frontmatter, and format validation |
-| `llm`    | 10,20,21            | LLM-first content format validation        |
-| `ghfolder`| 22-25              | .github/ subfolder health                  |
-| `full`   | 26-31               | External folders + cross-repo validation   |
+| Mode       | Phases            | Use Case                                   |
+| ---------- | ----------------- | ------------------------------------------ |
+| `all`      | 1-31              | Full audit before release                  |
+| `quick`    | 1-6               | Fast validation during development         |
+| `sync`     | 5,7,8,13-15,27,28 | Master-Heir synchronization check          |
+| `schema`   | 2,6,11,16,17      | Schema, frontmatter, and format validation |
+| `llm`      | 10,20,21          | LLM-first content format validation        |
+| `ghfolder` | 22-25             | .github/ subfolder health                  |
+| `full`     | 26-31             | External folders + cross-repo validation   |
 
 ## Known Gaps (Future Phases)
 
@@ -159,7 +162,7 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 | ASCII art warning        | Replace with Mermaid diagrams or tables                    |
 | Missing return-to-Alex   | Add handoff to main Alex agent                             |
 | Brain HTML count drift   | Update hardcoded numbers in `docs/alex-brain-anatomy.html` |
-| Incomplete synapse path  | Use full path: `.github/skills/name/SKILL.md` not `name`  |
+| Incomplete synapse path  | Use full path: `.github/skills/name/SKILL.md` not `name`   |
 | Missing $schema property | Add `"$schema": "../SYNAPSE-SCHEMA.json"` to synapses.json |
 | Master-heir ref mismatch | Remove master-only files (ROADMAP.md) from heir            |
 
@@ -176,6 +179,7 @@ When repairing architecture issues, use this proven pattern:
 ```
 
 **Example from 2026-02-15 session:**
+
 - Phase 1 failed → Fixed incomplete synapse paths → Phase 1 passed
 - Phase 6 failed → Added $schema properties → Phase 6 passed
 - Phase 7 warned about sync differences → Expected after manual edits, auto-resolves at publish
@@ -207,14 +211,14 @@ After running the script, Alex should check:
 
 ### Health Dimensions
 
-| Dimension | What It Measures | Healthy | Warning | Critical |
-| --------- | ---------------- | ------- | ------- | -------- |
-| Synapse Integrity | % of connections targeting existing files | 100% | 95-99% | <95% |
-| Connection Density | Avg connections per skill | 3-6 | 1-2 | 0 |
-| Bidirectional Coverage | % of connections with reciprocal entries | >80% | 50-80% | <50% |
-| Memory Balance | Ratio of procedural:episodic:declarative | ~1:1:4 | Skewed 3:1 | Missing category |
-| Schema Compliance | Skills with valid synapses.json | 100% | 95-99% | <95% |
-| Staleness | Skills with outdated content | <5% | 5-15% | >15% |
+| Dimension              | What It Measures                          | Healthy | Warning    | Critical         |
+| ---------------------- | ----------------------------------------- | ------- | ---------- | ---------------- |
+| Synapse Integrity      | % of connections targeting existing files | 100%    | 95-99%     | <95%             |
+| Connection Density     | Avg connections per skill                 | 3-6     | 1-2        | 0                |
+| Bidirectional Coverage | % of connections with reciprocal entries  | >80%    | 50-80%     | <50%             |
+| Memory Balance         | Ratio of procedural:episodic:declarative  | ~1:1:4  | Skewed 3:1 | Missing category |
+| Schema Compliance      | Skills with valid synapses.json           | 100%    | 95-99%     | <95%             |
+| Staleness              | Skills with outdated content              | <5%     | 5-15%      | >15%             |
 
 ### Diagnostic Patterns
 
@@ -222,28 +226,30 @@ After running the script, Alex should check:
 
 **Connection Density**: orphan = 0 connections (isolated), hub = 8+ connections (bottleneck), leaf = 1-3 (normal).
 
-**Memory Balance**: Declarative (SKILL.md) ~60%, Procedural (.instructions.md) ~25%, Episodic (.prompt.md) ~15%. Too many skills + few instructions = knows *what* but not *how*.
+**Memory Balance**: Declarative (SKILL.md) ~60%, Procedural (.instructions.md) ~25%, Episodic (.prompt.md) ~15%. Too many skills + few instructions = knows _what_ but not _how_.
 
 ### Drift Detection
 
-| Drift Type | Signal | Resolution |
-| ---------- | ------ | ---------- |
-| Version drift | package.json ≠ copilot-instructions.md | Sync via release-preflight |
-| Terminology drift | Old terms in active files | Grep + replace |
-| Count drift | Hardcoded numbers stale | Replace with references |
-| Inheritance drift | Catalog vs sync exclusions mismatch | Trust SKILL_EXCLUSIONS in sync-architecture.cjs |
+| Drift Type        | Signal                                 | Resolution                                      |
+| ----------------- | -------------------------------------- | ----------------------------------------------- |
+| Version drift     | package.json ≠ copilot-instructions.md | Sync via release-preflight                      |
+| Terminology drift | Old terms in active files              | Grep + replace                                  |
+| Count drift       | Hardcoded numbers stale                | Replace with references                         |
+| Inheritance drift | Catalog vs sync exclusions mismatch    | Trust SKILL_EXCLUSIONS in sync-architecture.cjs |
 
 ### Health Report Template
 
 ```markdown
 ## Architecture Health Report — [date]
+
 ### Summary: [HEALTHY | ATTENTION REQUIRED | CRITICAL]
-| Dimension | Score | Status |
-| --------- | ----- | ------ |
-| Synapse Integrity | X/Y valid (Z%) | ✅/⚠️/🔴 |
-| Connection Density | avg N.N | ✅/⚠️/🔴 |
-| Memory Balance | P:E:D = X:Y:Z | ✅/⚠️/🔴 |
-| Schema Compliance | X/Y valid | ✅/⚠️/🔴 |
+
+| Dimension          | Score          | Status   |
+| ------------------ | -------------- | -------- |
+| Synapse Integrity  | X/Y valid (Z%) | ✅/⚠️/🔴 |
+| Connection Density | avg N.N        | ✅/⚠️/🔴 |
+| Memory Balance     | P:E:D = X:Y:Z  | ✅/⚠️/🔴 |
+| Schema Compliance  | X/Y valid      | ✅/⚠️/🔴 |
 ```
 
 ## Triggers

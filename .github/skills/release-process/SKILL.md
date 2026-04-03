@@ -64,11 +64,13 @@ npx vsce publish                # Stable release
 ### Storing the PAT
 
 **Option 1: Environment Variable** (Session only)
+
 ```powershell
 $env:VSCE_PAT = "your-token-here"
 ```
 
 **Option 2: .env File** (Persistent, gitignored)
+
 ```
 # platforms/vscode-extension/.env
 VSCE_PAT=your-token-here
@@ -80,19 +82,20 @@ VSCE_PAT=your-token-here
 > caused 401 errors across consecutive releases (v5.9.11, v5.9.12).
 
 **Option 3: System Environment** (Persistent)
+
 ```powershell
 [Environment]::SetEnvironmentVariable("VSCE_PAT", "your-token", "User")
 ```
 
 ### PAT Troubleshooting
 
-| Error | Cause | Solution |
-|-------|-------|----------|
-| 401 Unauthorized | PAT expired or invalid | Create new PAT |
-| 401 Unauthorized | Wrong scope | Ensure "Marketplace (Manage)" scope |
-| 401 Unauthorized | Wrong `.env` updated | Ensure `platforms/vscode-extension/.env` has the token |
-| 403 Forbidden | Not publisher owner | Check publisher membership |
-| Token not found | .env not loaded | Check file path, run preflight |
+| Error            | Cause                  | Solution                                               |
+| ---------------- | ---------------------- | ------------------------------------------------------ |
+| 401 Unauthorized | PAT expired or invalid | Create new PAT                                         |
+| 401 Unauthorized | Wrong scope            | Ensure "Marketplace (Manage)" scope                    |
+| 401 Unauthorized | Wrong `.env` updated   | Ensure `platforms/vscode-extension/.env` has the token |
+| 403 Forbidden    | Not publisher owner    | Check publisher membership                             |
+| Token not found  | .env not loaded        | Check file path, run preflight                         |
 
 ### Retry After PAT Fix
 
@@ -120,10 +123,10 @@ MAJOR.MINOR.PATCH
 
 ### Pre-Release vs Stable
 
-| Type | Flag | Visibility | Use Case |
-|------|------|------------|----------|
-| Pre-release | `--pre-release` | Opt-in only | Beta testing |
-| Stable | (none) | Everyone | Production ready |
+| Type        | Flag            | Visibility  | Use Case         |
+| ----------- | --------------- | ----------- | ---------------- |
+| Pre-release | `--pre-release` | Opt-in only | Beta testing     |
+| Stable      | (none)          | Everyone    | Production ready |
 
 **VS Code Marketplace Rule**: Pre-release versions must use the `--pre-release` flag, NOT semver suffixes like `-beta.1`.
 
@@ -176,18 +179,19 @@ The `release-vscode.ps1` script handles all of these automatically.
 
 **Before publishing**, verify ALL 8 criteria from ROADMAP.md:
 
-| # | Criterion | Validation Method |
-|---|-----------|-------------------|
-| 1 | Builds clean | `npm run compile` exits 0 with zero errors |
-| 2 | No dead code | All imports resolve, no orphaned modules |
-| 3 | Counts match reality | Slash commands, tools, skills, trifectas in docs = actual code |
-| 4 | F5 smoke test passes | Extension activates, welcome view renders, 3 random commands work |
-| 5 | Version aligned | package.json = CHANGELOG = copilot-instructions |
-| 6 | Heir sync clean | `sync-architecture.cjs` runs with 0 errors, no contamination |
-| 7 | No non-functional features | If in UI/command palette, it works. If broken, removed. |
-| 8 | CHANGELOG documents delta | Every user-visible change has a line item |
+| #   | Criterion                  | Validation Method                                                 |
+| --- | -------------------------- | ----------------------------------------------------------------- |
+| 1   | Builds clean               | `npm run compile` exits 0 with zero errors                        |
+| 2   | No dead code               | All imports resolve, no orphaned modules                          |
+| 3   | Counts match reality       | Slash commands, tools, skills, trifectas in docs = actual code    |
+| 4   | F5 smoke test passes       | Extension activates, welcome view renders, 3 random commands work |
+| 5   | Version aligned            | package.json = CHANGELOG = copilot-instructions                   |
+| 6   | Heir sync clean            | `sync-architecture.cjs` runs with 0 errors, no contamination      |
+| 7   | No non-functional features | If in UI/command palette, it works. If broken, removed.           |
+| 8   | CHANGELOG documents delta  | Every user-visible change has a line item                         |
 
 **Pattern**: Use regression checklist as DoD tracker:
+
 - Create `alex_docs/operations/VXXX-REGRESSION-CHECKLIST.md`
 - Track verification status for each criterion
 - Document evidence (commit hashes, test counts, sync output)
@@ -214,19 +218,19 @@ If not using the script:
 
 The `release-preflight.ps1` script validates:
 
-| Check | What It Does |
-|-------|--------------|
-| PAT | Verifies VSCE_PAT is available in env or .env |
-| Version Sync | package.json = CHANGELOG = Master instructions = heir instructions |
-| BUILD-MANIFEST | Checks heir was synced recently (warns if > 24h old) |
-| README Skill Count | Verifies documented skill count matches actual |
-| ROADMAP Version | Warns if ROADMAP.md version differs |
-| Build | `npm run compile` succeeds |
-| Lint | `npm run lint` passes |
-| Tests | `npm test` passes (can skip with `-SkipTests`) |
-| Git Status | Shows uncommitted changes |
-| Git Tags | Warns if tag already exists |
-| Package | Creates VSIX (with `-Package` flag) |
+| Check              | What It Does                                                       |
+| ------------------ | ------------------------------------------------------------------ |
+| PAT                | Verifies VSCE_PAT is available in env or .env                      |
+| Version Sync       | package.json = CHANGELOG = Master instructions = heir instructions |
+| BUILD-MANIFEST     | Checks heir was synced recently (warns if > 24h old)               |
+| README Skill Count | Verifies documented skill count matches actual                     |
+| ROADMAP Version    | Warns if ROADMAP.md version differs                                |
+| Build              | `npm run compile` succeeds                                         |
+| Lint               | `npm run lint` passes                                              |
+| Tests              | `npm test` passes (can skip with `-SkipTests`)                     |
+| Git Status         | Shows uncommitted changes                                          |
+| Git Tags           | Warns if tag already exists                                        |
+| Package            | Creates VSIX (with `-Package` flag)                                |
 
 ---
 
@@ -262,6 +266,7 @@ Alex_Plug_In/
 **Cause**: PAT expired, invalid, or wrong scope
 
 **Solution**:
+
 1. Create new PAT at marketplace.visualstudio.com/manage/publishers
 2. Ensure "Marketplace (Manage)" scope
 3. Update .env or environment variable
@@ -277,6 +282,7 @@ Alex_Plug_In/
 **Cause**: Often network or auth issues
 
 **Solution**:
+
 1. Check internet connection
 2. Verify PAT is valid
 3. Try `npx vsce login <publisher-name>` first
