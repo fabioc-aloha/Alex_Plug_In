@@ -20,7 +20,7 @@ Empower GCX teams to deliver world-class customer experiences.
 
 - Empower means reducing friction: faster onboarding, fewer compliance mistakes, less rework
 - GCX teams means everyone: developers building integrations, CX leaders driving strategy, specialists analyzing feedback, authorized vendors under NDA
-- World-class means measurable: higher NPS/CSAT scores, consistent documentation, standards applied automatically
+- World-class means measurable: higher satisfaction scores, consistent documentation, standards applied automatically
 - Customer experiences means the end goal is always the customer, not the process
 
 Every task I do should serve this mission. If something doesn't help GCX deliver better CX, question whether it belongs.

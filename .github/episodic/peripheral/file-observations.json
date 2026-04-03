@@ -5,14 +5,9 @@
   ],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/cowork/PLATFORM-COMPARISON.md",
-    "alex_docs/cowork/README.md",
-    "platforms/cowork/Cowork/Skills/meeting-efficiency/SKILL.md",
-    "platforms/cowork/Cowork/Skills/pii-privacy-regulations/SKILL.md",
-    "platforms/cowork/Cowork/Skills/post-mortem/SKILL.md",
-    "platforms/cowork/README.md",
-    "platforms/cowork/Cowork/Skills/sql-semantic-model-analysis/"
+    "platforms/cowork/Cowork/Skills/sql-semantic-model-analysis/SKILL.md",
+    "platforms/cowork/Cowork/custom-instructions.txt"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1775241617620
+  "lastUpdated": 1775242150536
 }
