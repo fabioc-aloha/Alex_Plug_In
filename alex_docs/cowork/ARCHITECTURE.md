@@ -37,7 +37,7 @@ flowchart TD
     subgraph PLANNED["Planned Heirs"]
         direction LR
         FOUNDRY["Foundry<br/>Cloud backend"]
-        CLAUDE["Claude Code<br/>Terminal + IDE"]
+        WINAGENT["Windows Agent<br/>Desktop agent, vision-based"]
         CURSOR["Cursor<br/>AI-native IDE"]
     end
 
@@ -45,7 +45,7 @@ flowchart TD
     MASTER -->|export command| M365
     MASTER -->|cowork-sync.cjs| COWORK
     MASTER -.->|future| FOUNDRY
-    MASTER -.->|future| CLAUDE
+    MASTER -.->|future| WINAGENT
     MASTER -.->|future| CURSOR
 
     M365 <-.->|complements| COWORK
@@ -55,7 +55,7 @@ flowchart TD
     style VSCODE fill:#d4edda,stroke:#2e7d32,color:#1f2328
     style M365 fill:#d4edda,stroke:#2e7d32,color:#1f2328
     style FOUNDRY fill:#e6d5f0,stroke:#b39ddb,color:#1f2328
-    style CLAUDE fill:#e6d5f0,stroke:#b39ddb,color:#1f2328
+    style WINAGENT fill:#e6d5f0,stroke:#b39ddb,color:#1f2328
     style CURSOR fill:#e6d5f0,stroke:#b39ddb,color:#1f2328
 ```
 
@@ -269,10 +269,10 @@ flowchart TB
 
     style ALEX_MEM fill:#dbe9f6,stroke:#6ea8d9,color:#1f2328
     style COWORK_MEM fill:#d4edda,stroke:#2e7d32,color:#1f2328
-    style C_EPIS fill:#fce4e0,stroke:#e15759,color:#1f2328
+    style C_EPIS fill:#fef3cd,stroke:#edc948,color:#1f2328
 ```
 
-**Figure 4:** *Memory mapping. Episodic memory has no Cowork equivalent; personality and procedures must be embedded in skills.*
+**Figure 4:** *Memory mapping. Episodic memory maps partially to Saved Memories (unstructured). Identity lives in Custom Instructions (0 skill slots). Procedures are consolidated into SKILL.md bodies.*
 
 ### Memory Gap Mitigations
 
@@ -400,9 +400,9 @@ One additional special-purpose skill provides lightweight cognitive capability:
 | --------------- | -------------------------------------------------- | --------- |
 | alex-checkpoint | Save session notes to OneDrive at conversation end | 1         |
 | alex-briefing   | Morning briefing with Alex's structured format     | 1         |
-| *Task skills*   | Domain-specific execution skills                   | Up to 17  |
+| *Task skills*   | Domain-specific execution skills                   | Up to 18  |
 
-**Total budget**: 3 cognitive + 17 task = 20 skills (hard limit)
+**Total budget**: 2 cognitive + 18 task = 20 skills (hard limit)
 
 ## Sync Script Architecture (cowork-sync.cjs)
 
@@ -459,13 +459,13 @@ A skill is Cowork-eligible when all of the following are true:
 
 Skills are ranked into tiers for the 20-slot budget:
 
-| Tier | Criteria                                             | Slots |
-| ---- | ---------------------------------------------------- | ----- |
-| P0   | Core: daily use, direct M365 mapping, high impact    | 3-5   |
-| P1   | High: strong M365 fit, produces deliverables         | 5-7   |
-| P2   | Medium: useful but less frequent                     | 3-5   |
-| P3   | Low: niche, partial M365 fit                         | 0-2   |
-| Cog  | Cognitive: identity, checkpoint, briefing (reserved) | 3     |
+| Tier | Criteria                                          | Slots |
+| ---- | ------------------------------------------------- | ----- |
+| P0   | Core: daily use, direct M365 mapping, high impact | 3-5   |
+| P1   | High: strong M365 fit, produces deliverables      | 5-7   |
+| P2   | Medium: useful but less frequent                  | 3-5   |
+| P3   | Low: niche, partial M365 fit                      | 0-2   |
+| Cog  | Cognitive: checkpoint, briefing (reserved)        | 2     |
 
 ### Sync Report Schema (skills-synced.json)
 
@@ -479,8 +479,8 @@ Skills are ranked into tiers for the 20-slot budget:
   "skipped": 137,
   "skills": [
     {
-      "name": "meeting-efficiency",
-      "tier": "P0",
+      "name": "executive-storytelling",
+      "tier": "P1",
       "sourceSize": 4200,
       "translatedSize": 2800,
       "status": "deployed"

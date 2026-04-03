@@ -421,16 +421,16 @@ Cowork takes Alex from a developer-only partner to a universal work partner.
 
 Capability scores across 7 dimensions (1-5 scale, 5 = best):
 
-| Dimension                  | VS Code + Copilot |  Cowork   | Notes                                             |
-| -------------------------- | :---------------: | :-------: | ------------------------------------------------- |
-| **Cognitive depth**        |         5         |     2     | Full brain, meditation, agents, extended thinking |
-| **Execution power**        |         3         |     5     | Cowork acts across M365; VS Code acts on code     |
-| **Enterprise integration** |         1         |     5     | Work IQ, compliance, audit, org-wide search       |
-| **Automation**             |         1         |     4     | Scheduled prompts vs. manual triggers only        |
-| **Skill architecture**     |         5         |     3     | 157 unrestricted vs. 20 max with constraints      |
-| **Identity persistence**   |         5         |     2     | Always-on vs. skill-injected                      |
-| **Audience reach**         |         2         |     5     | Developers only vs. all knowledge workers         |
-| **Overall**                |     **22/35**     | **26/35** | Different strengths, genuinely complementary      |
+| Dimension                  | VS Code + Copilot |  Cowork   | Notes                                                                        |
+| -------------------------- | :---------------: | :-------: | ---------------------------------------------------------------------------- |
+| **Cognitive depth**        |         5         |     2     | Full brain, meditation, agents, extended thinking                            |
+| **Execution power**        |         3         |     5     | Cowork acts across M365; VS Code acts on code                                |
+| **Enterprise integration** |         1         |     5     | Work IQ, compliance, audit, org-wide search                                  |
+| **Automation**             |         1         |     4     | Scheduled prompts vs. manual triggers only                                   |
+| **Skill architecture**     |         5         |     3     | 157 unrestricted vs. 20 max with constraints                                 |
+| **Identity persistence**   |         5         |     3     | Always-on structured file vs. Custom Instructions (free-text, always loaded) |
+| **Audience reach**         |         2         |     5     | Developers only vs. all knowledge workers                                    |
+| **Overall**                |     **22/35**     | **27/35** | Different strengths, genuinely complementary                                 |
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%

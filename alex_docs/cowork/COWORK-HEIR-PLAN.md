@@ -93,7 +93,7 @@ Convert 5 high-value Alex skills to Cowork format:
 
 - [ ] **P1-01** Create `platforms/cowork/` directory in Master Alex
 - [ ] **P1-02** Create `platforms/cowork/skills/` for Cowork-adapted skill files
-- [ ] **P1-03** Convert `meeting-efficiency` skill: calendar cleanup, prep, briefing (maps to Calendar Management + Meetings)
+- [ ] **P1-03** Convert `bootstrap-learning` skill: structured knowledge acquisition (maps to Deep Research + Word + Excel)
 - [ ] **P1-04** Convert `status-reporting` skill: weekly status updates from M365 data (maps to Email + Word + Enterprise Search)
 - [ ] **P1-05** Convert `executive-storytelling` skill: data-driven narratives (maps to PowerPoint + Word + Excel)
 - [ ] **P1-06** Convert `stakeholder-management` skill: stakeholder communications (maps to Email + Communications)
