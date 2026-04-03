@@ -1,5 +1,7 @@
 # Alex Coworker Platforms — Roadmap
 
+![The path from partnership to trust](assets/banner-roadmap.svg)
+
 **Last Updated**: April 3, 2026
 
 Roadmap for Alex's non-VS Code platforms: M365 Copilot Agent, Cowork (GCX Coworker), and Windows Agent.
@@ -25,9 +27,9 @@ Wire Alex's MCP cognitive tools into the M365 declarative agent for Teams/Copilo
 
 | #   | Feature                             | Effort | Description                                                                                                |
 | --- | ----------------------------------- | :----: | ---------------------------------------------------------------------------------------------------------- |
-| 7.1 | **MCP tools in Declarative Agent**  |   3d   | Expose knowledge search, architecture status, and insight save as DA actions via ATK tool definition files |
-| 7.2 | **Embedded Knowledge for DA**       |   2d   | Package a curated subset of skill catalog + instructions as embedded knowledge for grounded M365 responses |
-| 7.3 | **MCP auto-parameter verification** |   1d   | Verify ATK 6.6.1 auto-discovery works with Alex MCP tools, document any manual overrides needed            |
+| 1   | **MCP tools in Declarative Agent**  |   3d   | Expose knowledge search, architecture status, and insight save as DA actions via ATK tool definition files |
+| 2   | **Embedded Knowledge for DA**       |   2d   | Package a curated subset of skill catalog + instructions as embedded knowledge for grounded M365 responses |
+| 3   | **MCP auto-parameter verification** |   1d   | Verify ATK 6.6.1 auto-discovery works with Alex MCP tools, document any manual overrides needed            |
 
 ### Cowork (GCX Coworker)
 
