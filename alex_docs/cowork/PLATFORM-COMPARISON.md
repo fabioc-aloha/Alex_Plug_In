@@ -58,38 +58,165 @@ flowchart TD
 
 ### Skills and Knowledge
 
-| Capability                | VS Code + Copilot                            | Cowork                                     | Winner     |
-| ------------------------- | -------------------------------------------- | ------------------------------------------ | ---------- |
-| Skill capacity            | No hard limit (157 currently)                | 20 custom skills (hard limit)              | VS Code    |
-| Skill auto-loading        | By applyTo pattern + semantic description    | Auto-discovered at conversation start      | Tie        |
-| Skill format              | SKILL.md with YAML frontmatter               | SKILL.md with YAML frontmatter             | Identical  |
-| Skill interdependency     | Synapse connections map skill relationships  | Skills are independent                     | VS Code    |
-| Instructions (procedures) | 50+ .instructions.md files, always available | Must be embedded in SKILL.md body          | VS Code    |
-| Agent specialization      | 7 agents (Builder, Researcher, Validator...) | No agent switching                         | VS Code    |
-| Slash commands / prompts  | .prompt.md files as `/` commands             | Natural language only                      | VS Code    |
-| Enterprise knowledge      | None (file-system scoped)                    | Work IQ: org-wide SharePoint, Teams, email | **Cowork** |
-| Organizational context    | Workspace-scoped only                        | Semantic index across entire M365 tenant   | **Cowork** || Enterprise search         | None                                                | Copilot Search: AI-powered universal search across M365 + 100+ third-party connectors | **Cowork** |
-| Data source connectors    | MCP tools (manual per-tool)                         | 100+ prebuilt Copilot Connectors + custom connectors via Graph API | **Cowork** |
+| Capability                | VS Code + Copilot                            | Cowork                                                             | Winner     |
+| ------------------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------- |
+| Skill capacity            | No hard limit (157 currently)                | 20 custom skills (hard limit)                                      | VS Code    |
+| Skill auto-loading        | By applyTo pattern + semantic description    | Auto-discovered at conversation start                              | Tie        |
+| Skill format              | SKILL.md with YAML frontmatter               | SKILL.md with YAML frontmatter                                     | Identical  |
+| Skill interdependency     | Synapse connections map skill relationships  | Skills are independent                                             | VS Code    |
+| Instructions (procedures) | 50+ .instructions.md files, always available | Must be embedded in SKILL.md body                                  | VS Code    |
+| Agent specialization      | 7 agents (Builder, Researcher, Validator...) | No agent switching                                                 | VS Code    |
+| Slash commands / prompts  | .prompt.md files as `/` commands             | Natural language only                                              | VS Code    |
+| Enterprise knowledge      | None (file-system scoped)                    | Work IQ: org-wide SharePoint, Teams, email                         | **Cowork** |
+| Organizational context    | Workspace-scoped only                        | Semantic index across entire M365 tenant                           | **Cowork** |  | Enterprise search | None | Copilot Search: AI-powered universal search across M365 + 100+ third-party connectors | **Cowork** |
+| Data source connectors    | MCP tools (manual per-tool)                  | 100+ prebuilt Copilot Connectors + custom connectors via Graph API | **Cowork** |
 ### Execution and Action
 
-| Capability                    | VS Code + Copilot                         | Cowork                                     | Winner     |
-| ----------------------------- | ----------------------------------------- | ------------------------------------------ | ---------- |
-| Send emails                   | No                                        | Draft, reply, forward, send via Outlook    | **Cowork** |
-| Schedule meetings             | No                                        | Natural language calendar management       | **Cowork** |
-| Create documents              | Local files only (code, markdown, config) | Word, Excel, PowerPoint, PDF in OneDrive   | **Cowork** |
-| Post to Teams                 | No                                        | Channel messages, 1:1, group chats         | **Cowork** |
-| Run code / terminal           | Full terminal access                      | No                                         | VS Code    |
-| Git operations                | Full (commit, push, branch, merge)        | No                                         | VS Code    |
-| File system access            | Full read/write on local machine          | OneDrive/SharePoint only (no local files)  | VS Code    |
-| Build / compile / test        | Full (npm, dotnet, python, etc.)          | No                                         | VS Code    |
-| Debug code                    | Full debugger integration                 | No                                         | VS Code    |
-| Browser / web requests        | Via MCP tools or terminal                 | Deep Research skill searches the web       | Tie        |
+| Capability                    | VS Code + Copilot                         | Cowork                                                    | Winner     |
+| ----------------------------- | ----------------------------------------- | --------------------------------------------------------- | ---------- |
+| Send emails                   | No                                        | Draft, reply, forward, send via Outlook                   | **Cowork** |
+| Schedule meetings             | No                                        | Natural language calendar management                      | **Cowork** |
+| Create documents              | Local files only (code, markdown, config) | Word, Excel, PowerPoint, PDF in OneDrive                  | **Cowork** |
+| Post to Teams                 | No                                        | Channel messages, 1:1, group chats                        | **Cowork** |
+| Run code / terminal           | Full terminal access                      | No                                                        | VS Code    |
+| Git operations                | Full (commit, push, branch, merge)        | No                                                        | VS Code    |
+| File system access            | Full read/write on local machine          | OneDrive/SharePoint only (no local files)                 | VS Code    |
+| Build / compile / test        | Full (npm, dotnet, python, etc.)          | No                                                        | VS Code    |
+| Debug code                    | Full debugger integration                 | No                                                        | VS Code    |
+| Browser / web requests        | Via MCP tools or terminal                 | Deep Research skill searches the web                      | Tie        |
 | Copilot APIs (programmatic)   | None                                      | 5 APIs: Retrieval, Search, Chat, Export, Meeting Insights | **Cowork** |
-| Long-running background tasks | Terminal background processes             | Native: tasks continue across devices      | **Cowork** |
-| Scheduled automation          | None (manual triggers only)               | Scheduled prompts (daily/weekly/custom)    | **Cowork** |
-| Approval gating               | Auto-run setting (blanket on/off)         | Per-action approve/reject with risk levels | **Cowork** |
+| Long-running background tasks | Terminal background processes             | Native: tasks continue across devices                     | **Cowork** |
+| Scheduled automation          | None (manual triggers only)               | Scheduled prompts (daily/weekly/custom)                   | **Cowork** |
+| Approval gating               | Auto-run setting (blanket on/off)         | Per-action approve/reject with risk levels                | **Cowork** |
 
 ### Cognitive Architecture
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d4f5f7', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#d4edda', 'tertiaryBorderColor': '#2e7d32', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
+flowchart LR
+    subgraph VSCODE_COG["Alex Cognitive Features<br/>(VS Code)"]
+        direction TB
+
+        subgraph IDENTITY_VS["Identity Layer"]
+            CI_VS["copilot-instructions.md<br/>(structured, always loaded)"]
+            UP_VS["user-profile.json<br/>(name, tone, role)"]
+            AC_VS["Active Context Manager<br/>(persona, goals, state)"]
+        end
+
+        subgraph MEMORY_VS["Memory Layer"]
+            EP_VS["Episodic Memory<br/>(.github/episodic/)"]
+            DK_VS["Domain Knowledge<br/>(.github/skills/ x 157)"]
+            SN_VS["Synapse Network<br/>(synapses.json)"]
+            GK_VS["Global Knowledge<br/>(~/.alex/ cross-project)"]
+            CM_VS["Copilot Memory<br/>(VS Code user memory)"]
+        end
+
+        subgraph COGNITIVE_VS["Cognitive Protocols"]
+            MED_VS["Meditation<br/>(knowledge consolidation)"]
+            SA_VS["Self-Actualization<br/>(7-phase assessment)"]
+            DS_VS["Dream State<br/>(auto maintenance)"]
+            DT_VS["Deep Thinking<br/>(extended reasoning)"]
+        end
+
+        subgraph AGENTS_VS["Agent System"]
+            AGT_VS["7 Specialist Agents<br/>(Builder, Researcher,<br/>Validator, Documentarian,<br/>Azure, M365, Alex)"]
+            LM_VS["13 LM Tools<br/>(brain access API)"]
+        end
+
+        subgraph AWARENESS_VS["Awareness Layer"]
+            EI_VS["Emotional Intelligence<br/>(frustration detection)"]
+            HU_VS["Honest Uncertainty<br/>(coverage scoring)"]
+            MT_VS["Model Tier Awareness<br/>(adapt per model)"]
+        end
+    end
+
+    subgraph M365_COG["M365 Copilot / Cowork<br/>Translation"]
+        direction TB
+
+        subgraph IDENTITY_M365["Identity Layer"]
+            CI_M365["Custom Instructions<br/>(free-text, always loaded)"]
+            UP_M365["Work Profile<br/>(org data, Work IQ)"]
+            AC_M365["No equivalent<br/>(no active context)"]
+        end
+
+        subgraph MEMORY_M365["Memory Layer"]
+            EP_M365["Saved Memories<br/>(Exchange hidden folder)"]
+            DK_M365["Custom Skills x 20<br/>(OneDrive SKILL.md)"]
+            SN_M365["No equivalent<br/>(skills are independent)"]
+            GK_M365["Enterprise Search<br/>(Copilot Search + 100<br/>connectors, org-wide)"]
+            CM_M365["Chat History<br/>(implicit, dynamic)"]
+        end
+
+        subgraph COGNITIVE_M365["Cognitive Protocols"]
+            MED_M365["No equivalent"]
+            SA_M365["No equivalent"]
+            DS_M365["No equivalent"]
+            DT_M365["Researcher Critique<br/>(dual-model review)"]
+        end
+
+        subgraph AGENTS_M365["Agent System"]
+            AGT_M365["No agent switching<br/>(single Alex persona)"]
+            LM_M365["Copilot APIs x 5<br/>(Retrieval, Search, Chat,<br/>Export, Meeting Insights)"]
+        end
+
+        subgraph AWARENESS_M365["Awareness Layer"]
+            EI_M365["No equivalent"]
+            HU_M365["No equivalent"]
+            MT_M365["Auto model selection<br/>(platform-managed)"]
+        end
+    end
+
+    CI_VS -. "translates to" .-> CI_M365
+    UP_VS -. "replaced by" .-> UP_M365
+    EP_VS -. "partial" .-> EP_M365
+    DK_VS -. "top 20 of 157" .-> DK_M365
+    GK_VS -. "org equivalent" .-> GK_M365
+    CM_VS -. "maps to" .-> CM_M365
+    DT_VS -. "platform handles" .-> DT_M365
+    LM_VS -. "counterpart" .-> LM_M365
+
+    style VSCODE_COG fill:#dbe9f6,stroke:#6ea8d9,color:#1f2328
+    style M365_COG fill:#d4edda,stroke:#2e7d32,color:#1f2328
+
+    style IDENTITY_VS fill:#e6d5f0,stroke:#b39ddb,color:#1f2328
+    style MEMORY_VS fill:#d4f5f7,stroke:#5ab5a0,color:#1f2328
+    style COGNITIVE_VS fill:#fce4e0,stroke:#e15759,color:#1f2328
+    style AGENTS_VS fill:#fef3cd,stroke:#edc948,color:#1f2328
+    style AWARENESS_VS fill:#d4edda,stroke:#59a14f,color:#1f2328
+
+    style IDENTITY_M365 fill:#e6d5f0,stroke:#b39ddb,color:#1f2328
+    style MEMORY_M365 fill:#d4f5f7,stroke:#5ab5a0,color:#1f2328
+    style COGNITIVE_M365 fill:#fce4e0,stroke:#e15759,color:#1f2328
+    style AGENTS_M365 fill:#fef3cd,stroke:#edc948,color:#1f2328
+    style AWARENESS_M365 fill:#d4edda,stroke:#59a14f,color:#1f2328
+
+    style AC_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+    style SN_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+    style MED_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+    style SA_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+    style DS_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+    style EI_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+    style HU_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+    style AGT_M365 fill:#f8d7da,stroke:#e15759,color:#1f2328
+```
+
+**Figure 4:** *Cognitive feature translation map. Green backgrounds have M365 equivalents. Red backgrounds have no Cowork counterpart. Dashed lines show how each VS Code feature maps (or partially maps) to the M365 surface.*
+
+**Translation summary by layer:**
+
+| Layer | VS Code features | Translates to M365 | Gaps (no equivalent) |
+| --- | --- | --- | --- |
+| **Identity** | copilot-instructions, user-profile, Active Context | Custom Instructions, Work Profile | Active Context Manager (real-time persona/goal tracking) |
+| **Memory** | Episodic, 157 skills, synapses, global knowledge, Copilot Memory | Saved Memories, 20 custom skills, Enterprise Search, Chat History | Synapse network (skill-to-skill routing), global knowledge (personal cross-project) |
+| **Cognitive** | Meditation, self-actualization, dream state, deep thinking | Researcher Critique (dual-model review) | Meditation, self-actualization, dream state (all require episodic logging + state) |
+| **Agents** | 7 specialist agents, 13 LM tools | 5 Copilot APIs | Agent switching (Builder/Researcher/Validator modes), brain-access LM tools |
+| **Awareness** | Emotional intelligence, honest uncertainty, model tier awareness | Auto model selection | Frustration detection, coverage scoring (require cross-turn state tracking) |
+
+**What transfers well**: Identity (Custom Instructions), knowledge distillation (top-20 skills), enterprise context (actually *stronger* via Work IQ), research quality (Critique surpasses single-model approach).
+
+**What is lost entirely**: Cognitive protocols (meditation, dream state, self-actualization), synapse network, multi-agent routing, emotional state tracking, honest uncertainty scoring. These features require persistent cross-session state and architecture-level access that M365 Copilot doesn't expose.
+
+**What transforms**: Global knowledge becomes enterprise knowledge (personal cross-project library becomes org-wide search). Deep thinking becomes Researcher Critique (user-controlled reasoning becomes platform-managed dual-model review). 13 LM tools become 5 Copilot APIs (internal brain access becomes external programmatic access).
 
 | Capability                 | VS Code + Copilot                              | Cowork                                     | Winner    |
 | -------------------------- | ---------------------------------------------- | ------------------------------------------ | --------- |
@@ -163,7 +290,7 @@ flowchart TD
 | No specialist agents           | No Builder/Researcher/Validator modes                                         | Yes: 7 agent modes                              |
 | No meditation or consolidation | No knowledge consolidation protocol                                           | Yes: full meditation protocol                   |
 | No code generation             | Cannot write, review, or refactor code                                        | Yes: core capability                            |
-| No MCP tool ecosystem (yet)    | MCP Apps expanding; A2A protocol GA April 2026 in Copilot Studio             | Yes: MCP gallery today                          |
+| No MCP tool ecosystem (yet)    | MCP Apps expanding; A2A protocol GA April 2026 in Copilot Studio              | Yes: MCP gallery today                          |
 | 1 MB per skill file            | Skills must be concise                                                        | Yes: no size limit                              |
 | Per-user deployment            | Each user manages their own skill set                                         | Yes: workspace-shared architecture              |
 | Frontier Preview only          | API and behavior may change                                                   | Yes: stable, production APIs                    |
@@ -352,26 +479,26 @@ The path forward is not choosing one over the other but running both from the sa
 | [A closer look at Work IQ](https://techcommunity.microsoft.com/blog/microsoft365copilotblog/a-closer-look-at-work-iq/4499789)                               | Seth Patton, Tech Community | Work IQ 3 layers (Data, Context, Skills & Tools), Dataverse Summer 2026, Work IQ API preview, MCP/A2A support planned, Semantic Index, memory system |
 | [GitHub Copilot plans](https://github.com/features/copilot/plans)                                                                                           | GitHub                      | Agent mode in ALL plans (incl. Free), MCP in ALL plans, 50 premium req (Free), model list: GPT-5.x, Claude Opus/Sonnet 4.x, Gemini 3.x, Grok         |
 | [VS Code Copilot customization](https://code.visualstudio.com/docs/copilot/copilot-customization)                                                           | VS Code Docs                | .instructions.md, .prompt.md, SKILL.md format, applyTo patterns, YAML frontmatter                                                                    |
-| [M365 Copilot overview](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview)                                             | Microsoft Learn             | Copilot Search, Semantic Index, Purview integration, enterprise templates, agents, Anthropic subprocessor                                             |
-| [Copilot Search](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-search)                                                      | Microsoft Learn             | Universal AI search, 100+ connectors, natural language queries, admin-curated answers, no additional cost                                             |
+| [M365 Copilot overview](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview)                                             | Microsoft Learn             | Copilot Search, Semantic Index, Purview integration, enterprise templates, agents, Anthropic subprocessor                                            |
+| [Copilot Search](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-search)                                                      | Microsoft Learn             | Universal AI search, 100+ connectors, natural language queries, admin-curated answers, no additional cost                                            |
 | [M365 Copilot extensibility](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview)                                                | Microsoft Learn             | 5 Copilot APIs (Retrieval, Search, Chat, Export, Meeting Insights), agents, connectors                                                               |
-| [Copilot Studio March 2026](https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/new-and-improved-multi-agent-orchestration/)               | Nitasha Chopra, Studio Blog | Multi-agent GA: Fabric, Agents SDK, A2A protocol; Prompt Builder; Claude/Grok/GPT-5.3 models; MCP expanding                                         |
-| [Researcher multi-model](https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-multi-model-intelligence-in-researcher/4506011)        | Tech Community              | Critique: dual-model eval, +13.8% DRACO, rubric-based review. Council: side-by-side multi-model reports                                              |
+| [Copilot Studio March 2026](https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/new-and-improved-multi-agent-orchestration/)              | Nitasha Chopra, Studio Blog | Multi-agent GA: Fabric, Agents SDK, A2A protocol; Prompt Builder; Claude/Grok/GPT-5.3 models; MCP expanding                                          |
+| [Researcher multi-model](https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-multi-model-intelligence-in-researcher/4506011)       | Tech Community              | Critique: dual-model eval, +13.8% DRACO, rubric-based review. Council: side-by-side multi-model reports                                              |
 
 ### Corrections applied during review
 
-| Original claim                           | Correction                                                                                                 | Source                                                                                   |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Cowork has no keyboard shortcuts         | Cowork has configurable keyboard shortcuts via Settings dialog                                             | Cowork Get Started docs                                                                  |
-| Cowork has no voice input                | Cowork supports speech-to-text via microphone button                                                       | Cowork Get Started docs                                                                  |
-| GitHub Copilot Free/$10/$39 pricing      | 6 tiers: Free, Student (free), Pro ($10), Pro+ ($39), Business ($19/user), Enterprise ($39/user)           | GitHub plans page                                                                        |
-| Model list: "GPT-4o, Claude Sonnet/Opus" | Current: GPT-5.x series, Claude Opus/Sonnet 4.x, Gemini 3.x, Grok Code Fast 1                              | GitHub plans page                                                                        |
-| Cowork has no MCP                        | MCP Apps and A2A support confirmed on Work IQ roadmap                                                      | Work IQ Tech Community article                                                           |
-| Cowork model selection is fully opaque   | Users can choose foundation models in Copilot Chat; auto-select remains for Cowork tasks                   | Work IQ Tech Community article                                                           |
-| Cowork platforms: browser + desktop      | Also accessible via Outlook and Teams                                                                      | Cowork Get Started docs                                                                  |
-| DRACO +13.8% stated as fact              | Qualified as "per Microsoft announcement" (primary benchmark source not independently verified)            | Wave 3 blog (Critique pattern described; specific number unverified from primary source) |
-| Cowork has no persistent identity        | M365 Copilot has Custom Instructions (persistent free-text, always loaded) + Saved Memories + Chat History | M365 Copilot Personalization settings (verified via UI)                                  |
-| No cross-session memory in Cowork        | Saved Memories (explicit + implicit) and Chat History provide cross-session personalization                | M365 Copilot Personalization settings (verified via UI)                                  |
-| MCP/A2A "planned" for Cowork             | A2A protocol and MCP Apps are GA in Copilot Studio as of April 2026; MCP Apps SDK expanding               | Copilot Studio March 2026 blog                                                          |
-| No mention of Copilot Search             | Copilot Search is a GA universal AI search layer with 100+ connectors; included with M365 Copilot license | M365 Copilot Search Learn docs                                                          |
-| No mention of Copilot APIs               | 5 APIs available: Retrieval (GA), Search (preview), Chat (preview), Interaction Export (GA), Meeting Insights (GA) | M365 Copilot extensibility overview                                              |
+| Original claim                           | Correction                                                                                                         | Source                                                                                   |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Cowork has no keyboard shortcuts         | Cowork has configurable keyboard shortcuts via Settings dialog                                                     | Cowork Get Started docs                                                                  |
+| Cowork has no voice input                | Cowork supports speech-to-text via microphone button                                                               | Cowork Get Started docs                                                                  |
+| GitHub Copilot Free/$10/$39 pricing      | 6 tiers: Free, Student (free), Pro ($10), Pro+ ($39), Business ($19/user), Enterprise ($39/user)                   | GitHub plans page                                                                        |
+| Model list: "GPT-4o, Claude Sonnet/Opus" | Current: GPT-5.x series, Claude Opus/Sonnet 4.x, Gemini 3.x, Grok Code Fast 1                                      | GitHub plans page                                                                        |
+| Cowork has no MCP                        | MCP Apps and A2A support confirmed on Work IQ roadmap                                                              | Work IQ Tech Community article                                                           |
+| Cowork model selection is fully opaque   | Users can choose foundation models in Copilot Chat; auto-select remains for Cowork tasks                           | Work IQ Tech Community article                                                           |
+| Cowork platforms: browser + desktop      | Also accessible via Outlook and Teams                                                                              | Cowork Get Started docs                                                                  |
+| DRACO +13.8% stated as fact              | Qualified as "per Microsoft announcement" (primary benchmark source not independently verified)                    | Wave 3 blog (Critique pattern described; specific number unverified from primary source) |
+| Cowork has no persistent identity        | M365 Copilot has Custom Instructions (persistent free-text, always loaded) + Saved Memories + Chat History         | M365 Copilot Personalization settings (verified via UI)                                  |
+| No cross-session memory in Cowork        | Saved Memories (explicit + implicit) and Chat History provide cross-session personalization                        | M365 Copilot Personalization settings (verified via UI)                                  |
+| MCP/A2A "planned" for Cowork             | A2A protocol and MCP Apps are GA in Copilot Studio as of April 2026; MCP Apps SDK expanding                        | Copilot Studio March 2026 blog                                                           |
+| No mention of Copilot Search             | Copilot Search is a GA universal AI search layer with 100+ connectors; included with M365 Copilot license          | M365 Copilot Search Learn docs                                                           |
+| No mention of Copilot APIs               | 5 APIs available: Retrieval (GA), Search (preview), Chat (preview), Interaction Export (GA), Meeting Insights (GA) | M365 Copilot extensibility overview                                                      |
