@@ -41,6 +41,7 @@ Cowork was announced as part of **Wave 3 of Microsoft 365 Copilot** on March 9, 
 | [IMPRESSIONS.md](IMPRESSIONS.md)                             | Alex's personal analysis, concerns, and strategic conclusions                                       |
 | [SKILL-DEPLOYMENT-STRATEGY.md](SKILL-DEPLOYMENT-STRATEGY.md) | Overlap analysis: what Cowork covers, what to deploy in 20 custom slots                             |
 | [ADDITIONAL-FEATURES.md](ADDITIONAL-FEATURES.md)             | Broader M365 ecosystem features: Copilot Search, APIs, connectors, A2A, Researcher Critique/Council |
+| [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md)               | Step-by-step setup: Custom Instructions, skill deployment to OneDrive, verification, troubleshooting |
 
 ## Sources
 
