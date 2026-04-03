@@ -53,13 +53,13 @@ Alex skills need adaptation for Cowork's execution context:
 
 ### Memory mapping
 
-| Alex memory             | Cowork equivalent                 | Notes                            |
-| ----------------------- | --------------------------------- | -------------------------------- |
+| Alex memory             | Cowork equivalent                                | Notes                                                                                                                           |
+| ----------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | copilot-instructions.md | Custom Instructions (Settings > Personalization) | Persistent free-text, always loaded every conversation. Combined with Saved Memories + Chat History for cross-session identity. |
-| .github/skills/         | OneDrive/Documents/Cowork/Skills/ | Custom skills folder             |
-| .github/episodic/       | Saved Memories (partial)          | Persist until user deletes, but unstructured (no episodic file format) |
-| User profile            | Work IQ user context              | Cowork learns from M365 activity |
-| Global knowledge        | Enterprise Search skill           | Searches across organization     |
+| .github/skills/         | OneDrive/Documents/Cowork/Skills/                | Custom skills folder                                                                                                            |
+| .github/episodic/       | Saved Memories (partial)                         | Persist until user deletes, but unstructured (no episodic file format)                                                          |
+| User profile            | Work IQ user context                             | Cowork learns from M365 activity                                                                                                |
+| Global knowledge        | Enterprise Search skill                          | Searches across organization                                                                                                    |
 
 ### Deployment model
 
@@ -146,18 +146,18 @@ Convert 5 high-value Alex skills to Cowork format:
 
 Skills ranked by M365 execution fit (highest to lowest):
 
-| Priority | Alex skill             | Cowork fit                             | Why                                                     |
-| -------- | ---------------------- | -------------------------------------- | ------------------------------------------------------- |
+| Priority | Alex skill             | Cowork fit                             | Why                                                                                                    |
+| -------- | ---------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | ~~P0~~   | ~~meeting-efficiency~~ | Calendar Management + Meetings + Email | **Superseded**: Covered by Cowork built-ins (see SKILL-DEPLOYMENT-STRATEGY Category A). Do not deploy. |
-| P0       | status-reporting       | Word + Email + Enterprise Search       | Weekly reports from M365 data, auto-distribute          |
-| P1       | executive-storytelling | PowerPoint + Word + Excel              | Data-driven narratives with real deliverables           |
-| P1       | stakeholder-management | Email + Communications + Teams         | Stakeholder comms across channels                       |
-| P1       | data-analysis          | Excel + Deep Research + PDF            | Analyze data, produce reports                           |
-| P2       | business-analysis      | Word + Excel + Enterprise Search       | BRDs, process docs from org data                        |
-| P2       | project-scaffolding    | Word + Excel + SharePoint              | Project structure with templates                        |
-| P2       | slide-design           | PowerPoint                             | Presentation creation and refinement                    |
-| P3       | citation-management    | Deep Research + Word                   | Academic research compilation                           |
-| P3       | coaching-techniques    | Email + Word                           | Feedback and coaching documents                         |
+| P0       | status-reporting       | Word + Email + Enterprise Search       | Weekly reports from M365 data, auto-distribute                                                         |
+| P1       | executive-storytelling | PowerPoint + Word + Excel              | Data-driven narratives with real deliverables                                                          |
+| P1       | stakeholder-management | Email + Communications + Teams         | Stakeholder comms across channels                                                                      |
+| P1       | data-analysis          | Excel + Deep Research + PDF            | Analyze data, produce reports                                                                          |
+| P2       | business-analysis      | Word + Excel + Enterprise Search       | BRDs, process docs from org data                                                                       |
+| P2       | project-scaffolding    | Word + Excel + SharePoint              | Project structure with templates                                                                       |
+| P2       | slide-design           | PowerPoint                             | Presentation creation and refinement                                                                   |
+| P3       | citation-management    | Deep Research + Word                   | Academic research compilation                                                                          |
+| P3       | coaching-techniques    | Email + Word                           | Feedback and coaching documents                                                                        |
 
 ### Skills that don't translate
 

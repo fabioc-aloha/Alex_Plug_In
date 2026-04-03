@@ -63,17 +63,17 @@ flowchart TD
 
 ### Heir Type Comparison
 
-| Dimension          | VS Code Heir                | M365 Declarative         | Cowork Heir                  |
-| ------------------ | --------------------------- | ------------------------ | ---------------------------- |
-| **Mode**           | Conversational + Dev tools  | Conversational           | Execution                    |
-| **Runtime**        | VS Code extension host      | M365 Copilot (Teams/Web) | M365 Copilot Cowork          |
-| **Skill format**   | SKILL.md (direct copy)      | Embedded in manifest     | SKILL.md (translated)        |
-| **Skill count**    | All inheritable (~100+)     | 15 embedded              | Up to 20                     |
-| **Sync mechanism** | sync-architecture.cjs       | Manual export            | cowork-sync.cjs (new)        |
-| **Can execute**    | Terminal, file system, git  | No                       | Email, calendar, docs, Teams |
-| **Memory**         | .github/ (full brain)       | OneDrive knowledge       | Work IQ + custom skills      |
+| Dimension          | VS Code Heir                | M365 Declarative         | Cowork Heir                                |
+| ------------------ | --------------------------- | ------------------------ | ------------------------------------------ |
+| **Mode**           | Conversational + Dev tools  | Conversational           | Execution                                  |
+| **Runtime**        | VS Code extension host      | M365 Copilot (Teams/Web) | M365 Copilot Cowork                        |
+| **Skill format**   | SKILL.md (direct copy)      | Embedded in manifest     | SKILL.md (translated)                      |
+| **Skill count**    | All inheritable (~100+)     | 15 embedded              | Up to 20                                   |
+| **Sync mechanism** | sync-architecture.cjs       | Manual export            | cowork-sync.cjs (new)                      |
+| **Can execute**    | Terminal, file system, git  | No                       | Email, calendar, docs, Teams               |
+| **Memory**         | .github/ (full brain)       | OneDrive knowledge       | Work IQ + custom skills                    |
 | **Identity**       | Full (copilot-instructions) | Partial (system prompt)  | Custom Instructions (persistent free-text) |
-| **Multi-model**    | Via GitHub Copilot          | Via M365 Copilot         | Auto / Sonnet 4.6 / Opus 4.6 |
+| **Multi-model**    | Via GitHub Copilot          | Via M365 Copilot         | Auto / Sonnet 4.6 / Opus 4.6               |
 
 ## Component Architecture
 
@@ -276,14 +276,14 @@ flowchart TB
 
 ### Memory Gap Mitigations
 
-| Gap                     | Impact                                     | Mitigation                                                     |
-| ----------------------- | ------------------------------------------ | -------------------------------------------------------------- |
-| No episodic memory      | No structured session history between conversations | Saved Memories persist (unstructured); add a "checkpoint" skill for notes |
-| Limited identity format  | Custom Instructions is free-text, no structured sections | Deploy identity in Custom Instructions (0 skill slots); accepted trade-off |
-| No synapse connections  | Skills can't reference each other          | Make each skill fully self-contained                           |
-| No code execution       | Can't run scripts, muscles, or brain-qa    | Focus on M365-native actions only                              |
-| 20 skill limit          | Can't deploy full architecture             | Curate top 20 highest-value M365-relevant skills               |
-| No active context       | No persona detection or objective tracking | Use Work IQ's implicit memory for user context                 |
+| Gap                     | Impact                                                   | Mitigation                                                                 |
+| ----------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| No episodic memory      | No structured session history between conversations      | Saved Memories persist (unstructured); add a "checkpoint" skill for notes  |
+| Limited identity format | Custom Instructions is free-text, no structured sections | Deploy identity in Custom Instructions (0 skill slots); accepted trade-off |
+| No synapse connections  | Skills can't reference each other                        | Make each skill fully self-contained                                       |
+| No code execution       | Can't run scripts, muscles, or brain-qa                  | Focus on M365-native actions only                                          |
+| 20 skill limit          | Can't deploy full architecture                           | Curate top 20 highest-value M365-relevant skills                           |
+| No active context       | No persona detection or objective tracking               | Use Work IQ's implicit memory for user context                             |
 
 ## Deployment Architecture
 
