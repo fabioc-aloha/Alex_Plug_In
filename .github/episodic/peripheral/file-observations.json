@@ -2,16 +2,11 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/architecture/MEMORY-SYSTEMS.md",
-    "alex_docs/architecture/alex-brain-anatomy.html",
-    "alex_docs/audits/CROSS-PLATFORM-GAP-ANALYSIS.md",
-    "alex_docs/audits/UI-WELCOME-VIEW-AUDIT-2026-03-25.md",
-    "alex_docs/guides/AGENTS-TOOLKIT-INSTALLATION.md",
-    "alex_docs/platforms/VSCODE-HEIR.md",
-    "alex_docs/research/DATA-STORYTELLING-TRIFECTA-PLAN.md",
-    "alex_docs/research/visuals.html",
-    "alex_docs/skills/SKILLS-CAPABILITIES.md"
+    "alex_docs/platforms/WINDOWS-HEIR-PLAN.md",
+    "platforms/m365-copilot/GRAPH-API-INTEGRATION.md",
+    "platforms/vscode-extension/src/chat/emotionalMemory.ts",
+    "scripts/release-preflight.ps1"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1775256188750
+  "lastUpdated": 1775256689888
 }

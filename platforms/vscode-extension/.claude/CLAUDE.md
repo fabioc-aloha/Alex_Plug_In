@@ -34,7 +34,7 @@ Recovery: `git checkout HEAD -- .github/`
 
 - **Read first**: `.github/copilot-instructions.md`
 - **Architecture**: `alex_docs/architecture/`
-- **Roadmap**: `ROADMAP-UNIFIED.md`
+- **Roadmap**: `ROADMAP.md`
 - **Changelog**: `CHANGELOG.md`
 
 ## Build & Run

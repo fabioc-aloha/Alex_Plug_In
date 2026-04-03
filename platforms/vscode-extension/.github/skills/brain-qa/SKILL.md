@@ -161,7 +161,7 @@ During sync, `brain-qa-heir.ps1` is **renamed** to `brain-qa.ps1` in the heir, s
 | Brain HTML count drift   | Update hardcoded numbers in `docs/alex-brain-anatomy.html` |
 | Incomplete synapse path  | Use full path: `.github/skills/name/SKILL.md` not `name`  |
 | Missing $schema property | Add `"$schema": "../SYNAPSE-SCHEMA.json"` to synapses.json |
-| Master-heir ref mismatch | Remove master-only files (ROADMAP-UNIFIED.md) from heir    |
+| Master-heir ref mismatch | Remove master-only files (ROADMAP.md) from heir            |
 
 ## Iterative Validation Workflow
 

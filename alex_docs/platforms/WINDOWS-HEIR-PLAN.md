@@ -804,7 +804,7 @@ The Windows Agent heir has **no new codebase** -- it refers to `packages/mcp-cog
 | `platforms/windows-agent/README.md`               | New: Setup guide, ODR registration steps, tool reference, troubleshooting    |
 | `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md` | Add Windows Agent box to heir diagram, update platform count                 |
 | `.github/copilot-instructions.md`                 | Add `Windows Agent: platforms/windows-agent/` to Heirs section               |
-| `ROADMAP-UNIFIED.md`                              | Close Conditional #19, move Windows Agent to Shipped Releases                |
+| `ROADMAP.md`                                      | Close Conditional #19, move Windows Agent to Shipped Releases                |
 | `packages/mcp-cognitive-tools/README.md`          | Add "Windows ODR" configuration section alongside VS Code and Claude Desktop |
 | Platform Strategy table                           | Change Windows Agent from "Planned" to "Active"                              |
 
@@ -921,4 +921,4 @@ Once the basic ODR registration is complete, additional integration paths open u
 | Master-Heir Architecture    | `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md` |
 | VS Code Heir (reference)    | `alex_docs/platforms/VSCODE-HEIR.md`              |
 | Claude Heir Plan (template) | `alex_docs/platforms/CLAUDE-HEIR-PLAN.md`         |
-| Roadmap Entry               | `ROADMAP-UNIFIED.md` Conditional #19              |
+| Roadmap Entry               | `ROADMAP.md` Conditional #19                     |

@@ -34,7 +34,7 @@ try {
 
 // ── Load active knowledge gaps from roadmap ────────────────────────────────
 
-const roadmapPath = path.join(workspaceRoot, 'ROADMAP-UNIFIED.md');
+const roadmapPath = path.join(workspaceRoot, 'ROADMAP.md');
 try {
   const roadmap = fs.readFileSync(roadmapPath, 'utf8');
   const researchFindings = roadmap.match(/^### Research Findings[\s\S]*?(?=^## |$)/m);

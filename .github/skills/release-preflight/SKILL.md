@@ -35,7 +35,7 @@ scripts/release-preflight.ps1 -SkipTests
 | 3 | `.github/copilot-instructions.md` | `**Version**:` line | `**Version**: 5.1.0` |
 | 4 | `platforms/vscode-extension/.github/copilot-instructions.md` | Same as #3 |
 | 5 | `docs/index.html` | Footer version | `v5.1.0` |
-| 6 | `ROADMAP-UNIFIED.md` | Quick Status table | Master 5.1.0 row |
+| 6 | `ROADMAP.md` | Quick Status table | Master version row |
 | 7 | Git tag | Tag name | `v5.1.0` |
 
 ## Preflight Gates

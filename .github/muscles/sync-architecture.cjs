@@ -64,7 +64,7 @@ const SKILL_EXCLUSIONS = {
     // master-only: skill only makes sense in master Alex, never synced
     'heir-sync-management':        'master-only',
     'release-process':             'master-only',  // PAT handling, marketplace credentials, platforms/ paths
-    'release-preflight':           'master-only',  // platforms/vscode-extension paths, ROADMAP-UNIFIED
+    'release-preflight':           'master-only',  // platforms/vscode-extension paths, ROADMAP
     'extension-audit-methodology': 'master-only',  // master audit methodology, alex_docs/audits
     'skill-catalog-generator':     'master-only',  // master catalog generation
 
@@ -352,7 +352,7 @@ function cleanBrokenSynapseReferences(skippedMasterOnly) {
     
     // Master-only files and paths that shouldn't be referenced in heir
     const masterOnlyPatterns = [
-        'ROADMAP-UNIFIED.md',
+        'ROADMAP.md',
         'alex_docs/',                    // Documentation folder (master-only)
         'platforms/',                    // Heir doesn't have platforms/
         'MASTER-ALEX-PROTECTED.json',
@@ -937,12 +937,12 @@ function validateHeirIntegrity() {
         }
     }
     
-    // 4. Check for ROADMAP-UNIFIED.md references in heir instructions
+    // 4. Check for ROADMAP.md references in heir instructions
     const releaseMgmt = path.join(HEIR_GITHUB, 'instructions', 'release-management.instructions.md');
     if (fs.existsSync(releaseMgmt)) {
         const content = fs.readFileSync(releaseMgmt, 'utf8');
         if (content.includes('ROADMAP-UNIFIED.md')) {
-            warnings.push('release-management.instructions.md references ROADMAP-UNIFIED.md (master-only file)');
+            warnings.push('release-management.instructions.md references ROADMAP-UNIFIED.md (should be ROADMAP.md)');
         }
     }
     

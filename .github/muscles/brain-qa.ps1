@@ -1264,7 +1264,7 @@ if (31 -in $runPhases) {
     }
 
     # Check ROADMAP references current version
-    $roadmapPath = Join-Path $rootPath "ROADMAP-UNIFIED.md"
+    $roadmapPath = Join-Path $rootPath "ROADMAP.md"
     if (Test-Path $roadmapPath) {
         $rmContent = Get-Content $roadmapPath -Raw
         if ($rmContent -match 'Current Master Version.*?(\d+\.\d+\.\d+)') {
@@ -1573,7 +1573,7 @@ if (33 -in $runPhases) {
                 foreach ($conn in $syn.connections) {
                     $target = $conn.target
                     # Check for master-only paths
-                    if ($target -match '(ROADMAP-UNIFIED|alex_docs/|platforms/|MASTER-ALEX-PROTECTED|episodic/)') {
+                    if ($target -match '(ROADMAP\.md|alex_docs/|platforms/|MASTER-ALEX-PROTECTED|episodic/)') {
                         $contaminated += "$($_.Name): references master-only path '$target'"
                     }
                 }

@@ -240,7 +240,7 @@ Update skill count across all files (search for old count → replace with new):
 1. `.github/copilot-instructions.md` → "Total Skills: X"
 2. `CHANGELOG.md` → Add new skills under current version
 3. `README.md` → Multiple instances (architecture tree, features, etc.)
-4. `ROADMAP-UNIFIED.md` → Total and inheritable counts
+4. `ROADMAP.md` → Total and inheritable counts
 5. `platforms/vscode-extension/README.md` → Heir documentation
 6. `.github/skills/self-actualization/SKILL.md` → Self-reference
 7. `.github/skills/documentation-quality-assurance/SKILL.md` → Examples

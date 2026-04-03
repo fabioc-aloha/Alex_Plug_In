@@ -174,7 +174,7 @@ The `release-vscode.ps1` script handles all of these automatically.
 
 ### Definition of Done Verification
 
-**Before publishing**, verify ALL 8 criteria from ROADMAP-UNIFIED.md:
+**Before publishing**, verify ALL 8 criteria from ROADMAP.md:
 
 | # | Criterion | Validation Method |
 |---|-----------|-------------------|
@@ -220,7 +220,7 @@ The `release-preflight.ps1` script validates:
 | Version Sync | package.json = CHANGELOG = Master instructions = heir instructions |
 | BUILD-MANIFEST | Checks heir was synced recently (warns if > 24h old) |
 | README Skill Count | Verifies documented skill count matches actual |
-| ROADMAP Version | Warns if ROADMAP-UNIFIED.md version differs |
+| ROADMAP Version | Warns if ROADMAP.md version differs |
 | Build | `npm run compile` succeeds |
 | Lint | `npm run lint` passes |
 | Tests | `npm test` passes (can skip with `-SkipTests`) |

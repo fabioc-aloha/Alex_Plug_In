@@ -443,7 +443,7 @@ Planned enhancements:
 - [API Plugins for Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-api-plugins)
 
 ### Internal Resources
-- ROADMAP-UNIFIED.md — Track Graph integration progress
+- ROADMAP.md — Track Graph integration progress
 - alex_docs/platforms/m365/ — M365 architecture documentation
 - platforms/m365-copilot/DEPLOYMENT-GUIDE-HYBRID.md — M365 deployment patterns
 

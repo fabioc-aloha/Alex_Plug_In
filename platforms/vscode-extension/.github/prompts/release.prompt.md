@@ -22,7 +22,7 @@ Execute the full release workflow with quality gates at every step.
    - `CHANGELOG.md` (new entry header)
    - `.github/copilot-instructions.md` (line 6: `# Alex vX.Y.Z`)
    - `platforms/vscode-extension/.github/copilot-instructions.md` (heir copy, line 2)
-   - `ROADMAP-UNIFIED.md` (Current Master Version + move to Shipped)
+   - `ROADMAP.md` (Current Master Version + move to Shipped)
 3. Run `node scripts/release-preflight.ps1` and verify all checks pass
 
 ## Phase 2: Compile and Test

@@ -51,7 +51,7 @@ if (isSignificantSession) {
         `.\nBefore ending, consider documenting key decisions made:\n` +
         `- Architecture decisions → alex_docs/decisions/\n` +
         `- Implementation notes → session memory or CHANGELOG\n` +
-        `- Unresolved questions → ROADMAP-UNIFIED.md Research Findings`,
+        `- Unresolved questions → ROADMAP.md Research Findings`,
     },
   };
   process.stdout.write(JSON.stringify(response));

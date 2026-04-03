@@ -147,13 +147,13 @@ else {
     Write-Host "   [ERROR] BUILD-MANIFEST.json missing! Run build-extension-package.ps1" -ForegroundColor Red
 }
 
-# Check ROADMAP-UNIFIED.md version
-$roadmapPath = Join-Path $rootPath "ROADMAP-UNIFIED.md"
+# Check ROADMAP.md version
+$roadmapPath = Join-Path $rootPath "ROADMAP.md"
 if (Test-Path $roadmapPath) {
     $roadmapContent = Get-Content $roadmapPath -Raw
     if ($roadmapContent -match 'Current Master Version\*\*\s*\|\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
         $roadmapVersion = $matches[1]
-        Write-Host "   ROADMAP-UNIFIED.md: $roadmapVersion" -ForegroundColor Gray
+        Write-Host "   ROADMAP.md: $roadmapVersion" -ForegroundColor Gray
         if ($pkgVersion -ne $roadmapVersion) {
             Write-Host "   [WARN] ROADMAP version differs (update recommended)" -ForegroundColor Yellow
         }

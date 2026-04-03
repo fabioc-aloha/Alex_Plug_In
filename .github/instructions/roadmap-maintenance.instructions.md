@@ -11,7 +11,7 @@ inheritance: master-only
 
 ## Synapses
 
-- [ROADMAP-UNIFIED.md] → (Critical, Documentation, Source-of-Truth) - "Product roadmap requiring active maintenance"
+- [ROADMAP.md] → (Critical, Documentation, Source-of-Truth) - "Product roadmap requiring active maintenance"
 - [.github/instructions/release-management.instructions.md] → (High, Coordinates, Bidirectional) - "Version shipping updates roadmap status"
 - [.github/instructions/research-first-workflow.instructions.md] → (Medium, Feeds, Forward) - "Research outputs should integrate with roadmap"
 - [.github/instructions/technical-debt-tracking.instructions.md] → (Medium, References, Bidirectional) - "Debt items may appear in backlog"

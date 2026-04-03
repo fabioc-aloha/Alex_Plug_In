@@ -936,7 +936,7 @@ if (runPhases.includes(31)) {
   const vscPkg = readJSON(path.join(rootPath, 'platforms', 'vscode-extension', 'package.json'));
   const currentVersion = vscPkg ? vscPkg.version : 'unknown';
 
-  const roadmapPath = path.join(rootPath, 'ROADMAP-UNIFIED.md');
+  const roadmapPath = path.join(rootPath, 'ROADMAP.md');
   if (fs.existsSync(roadmapPath)) {
     const rmContent = fs.readFileSync(roadmapPath, 'utf8');
     const rmMatch = rmContent.match(/Current Master Version.*?(\d+\.\d+\.\d+)/);
@@ -1154,7 +1154,7 @@ if (runPhases.includes(33)) {
     const syn = readJSON(synPath);
     if (!syn || !syn.connections) continue;
     for (const conn of syn.connections) {
-      if (conn.target && /(ROADMAP-UNIFIED|alex_docs\/|platforms\/|MASTER-ALEX-PROTECTED|episodic\/)/.test(conn.target)) {
+      if (conn.target && /(ROADMAP\.md|alex_docs\/|platforms\/|MASTER-ALEX-PROTECTED|episodic\/)/.test(conn.target)) {
         contaminated.push(`${skill}: references master-only path '${conn.target}'`);
       }
     }

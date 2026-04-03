@@ -307,7 +307,7 @@ Copy-Item .github/instructions/azure-enterprise-deployment.instructions.md platf
 ```
 
 **Fix:**
-1. Open ROADMAP-UNIFIED.md
+1. Open ROADMAP.md
 2. Update current version reference (line ~13)
 3. Update version table (lines ~533-537)
 4. Verify heir CHANGELOG has entry for current version

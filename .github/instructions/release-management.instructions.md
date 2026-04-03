@@ -17,7 +17,7 @@ inheritance: master-only
 - [.github/muscles/sync-architecture.cjs] → (Critical, Enables, Forward) - "Master-to-heir sync runs during vsce package - validates skill inheritance"
 - [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
 - [.github/instructions/automated-quality-gates.instructions.md] → (Critical, Automates, Bidirectional) - "Build-pipeline quality gates replace manual checklist items (v5.9.10 RCA)"
-- [ROADMAP-UNIFIED.md] → (Medium, References, Bidirectional) - "Forward-pull pattern sources items from roadmap"
+- [ROADMAP.md] → (Medium, References, Bidirectional) - "Forward-pull pattern sources items from roadmap"
 - [.github/instructions/roadmap-maintenance.instructions.md] → (High, Coordinates, Bidirectional) - "Roadmap status updates when version ships"
 - [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
 - [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"

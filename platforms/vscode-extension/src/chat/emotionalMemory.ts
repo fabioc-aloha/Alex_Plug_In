@@ -13,7 +13,7 @@
  * 
  * Privacy: All data stays in .github/episodic/emotional/. No telemetry.
  * 
- * @see ROADMAP-UNIFIED.md — Emotional Memory sub-section in v5.9.3
+ * @see ROADMAP.md — Emotional Memory sub-section in v5.9.3
  */
 
 // vscode import removed (unused)
