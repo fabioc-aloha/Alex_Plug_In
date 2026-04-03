@@ -5,7 +5,7 @@
 |              |                               |
 | ------------ | ----------------------------- |
 | **Status**   | ✅ Production                  |
-| **Version**  | 5.7.0 (February 2026)         |
+| **Version**  | 7.1.1 (April 2026)            |
 | **Engine**   | VS Code ^1.109.0              |
 | **Location** | `platforms/vscode-extension/` |
 
