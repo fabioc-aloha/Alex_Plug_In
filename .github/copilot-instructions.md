@@ -74,7 +74,7 @@ Multi-step workflow → check prompts index first.
 
 ## Heirs
 
-VS Code Extension: platforms/vscode-extension/ | M365: platforms/m365-copilot/ | Agent Plugin: platforms/agent-plugin/
+VS Code Extension: platforms/vscode-extension/ | M365: platforms/m365-copilot/
 Kill switch: .github/config/MASTER-ALEX-PROTECTED.json
 
 ## Agents

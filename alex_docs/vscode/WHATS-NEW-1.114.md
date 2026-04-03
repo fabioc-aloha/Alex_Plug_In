@@ -118,7 +118,6 @@ These shipped with the 1.113 milestone and are included in 1.114.
 | ------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | **Nested subagents**           | High     | Enable `chat.subagents.allowInvocationsFromSubagents` for multi-hop chains (Researcher calls Explore, Builder calls Validator) |
 | **Chat Customizations editor** | Medium   | Reference in WORKING-WITH-ALEX.md so users know they can manage Alex's customizations via UI                                   |
-| **Plugin install URL**         | Medium   | Add `vscode://chat-plugin/install?source=fabioc-aloha/AlexAgent` to distribution docs for one-click install                    |
 | **MCP bridging to CLI/Claude** | Medium   | Alex's MCP cognitive tools are automatically available in Copilot CLI and Claude sessions with no code changes                 |
 | **TS6 tsconfig migration**     | Medium   | Migrate `moduleResolution` from `"node"` to `"nodenext"`, add `"types": ["node"]`, prep for TS 7.0                             |
 | **Images preview**             | Low      | No action needed; improves UX for image-generating skills (banners, avatars) automatically                                     |
@@ -157,8 +156,6 @@ This review fulfills **v7.1.0 item 7.9**: "Platform evolution watch (VS Code 1.1
 
 | Item                                          | Source                                                        | Why it matters                                                                            |
 | --------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **Parent-repo customization inheritance**     | `chat.useCustomizationsInParentRepositories` (#293277, 1.112) | Could simplify heir sync if repos were nested                                             |
-| **Plugin attribution in Customizations view** | #302514 (1.113)                                               | Shows which plugin contributed each customization; relevant for AlexAgent                 |
 | **TypeScript 7.0 native preview**             | TS blog, March 2026                                           | Go-based compiler, parallel type checking, massive speed gains. Expected "within months." |
 | **Reasoning effort programmatic API**         | Model picker UI shipped (1.113)                               | If a programmatic API emerges, Alex could auto-tune reasoning per-task                    |
 | **Windows Agent Workspace**                   | Copilot Labs (Insider preview)                                | MCP tools as ODR agent connectors; Alex's cognitive tools could register                  |

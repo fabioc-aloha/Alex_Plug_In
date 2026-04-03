@@ -92,7 +92,7 @@ Windows 11 is introducing an **Agent Workspace** -- a contained, OS-level enviro
 
 The bridge between Alex and this platform is the **Model Context Protocol (MCP)**. Windows uses MCP servers registered in the **On-Device Registry (ODR)** as the standard mechanism for agent connectors. Alex already ships a production MCP server (`packages/mcp-cognitive-tools/`) exposing 5 cognitive tools -- making this the lowest-friction heir deployment in the entire platform family.
 
-This document defines the **Windows Agent heir**, creating a desktop-native AI partner alongside VS Code Extension (developer), M365 Copilot (enterprise productivity), and Agent Plugin (cloud API).
+This document defines the **Windows Agent heir**, creating a desktop-native AI partner alongside VS Code Extension (developer) and M365 Copilot (enterprise productivity).
 
 ## Platform Overview
 
@@ -386,9 +386,7 @@ If building new tools for Phase 2, prioritize in this order:
 | --------------------- | -------------- | ---------------------- | ----------------------------- | --------------------------------- |
 | **VS Code Extension** | Code editor    | Node.js Extension Host | Chat / commands / agent modes | Full cognitive partner (flagship) |
 | **M365 Copilot**      | Teams / Office | Declarative Agent      | Graph + adaptive cards        | Enterprise productivity           |
-| **Agent Plugin**      | Cloud API      | Azure Functions        | API calls                     | Service-to-service                |
 | **Windows Agent**     | Desktop OS     | MCP Server via ODR     | Vision + reasoning            | Desktop knowledge partner         |
-| **Claude Cowork**     | Desktop app    | Skills + Connectors    | File access + sub-agents      | Knowledge worker (planned)        |
 
 ### Unique Value Propositions
 

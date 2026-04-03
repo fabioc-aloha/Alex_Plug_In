@@ -130,16 +130,9 @@ The Copilot Chat codebase reveals a mature, production-grade architecture built 
 3. **Session replay for meditation**: During `/meditate`, read the session trace to identify patterns (most-used tools, common errors, agent delegation chains)
 4. **Export format**: Align with ATIF v1.5 for compatibility with VS Code's debug analysis tools
 
-### ~~F2. One-Click Plugin Install URL (Medium Impact, Quick Win)~~ DONE
+### ~~F2. One-Click Plugin Install URL~~ DISCONTINUED
 
-**What Copilot does**: `vscode://chat-plugin/install?source=<source>` triggers plugin installation. `vscode://chat-plugin/add-marketplace?ref=<repo/owner>` adds a marketplace.
-
-**Alex current state**: AlexAgent plugin is distributed via GitHub repo. Installation is manual.
-
-**Plan**:
-1. **Add install URL to AlexAgent README**: `vscode://chat-plugin/install?source=fabioc-aloha/AlexAgent`
-2. **Add to alex.correax.com**: Landing page button for one-click install
-3. **Add to marketplace listing**: In the VS Code extension description
+Agent Plugin heir discontinued 2026-04-03. VS Code extension is the sole distribution channel.
 
 ### ~~F3. Chat Customizations Editor Reference (Low Impact, Quick Win)~~ DONE
 

@@ -748,7 +748,7 @@ The same "Ask Why" philosophy applies, with adapted questions:
 
 ### GitHub Copilot Web Heir (DISCONTINUED)
 
-~~Discontinued 2026-03-05. Was `.github/`-only — no TypeScript extension. Agent Plugin covers the same use case better.~~
+~~Discontinued 2026-03-05. Was `.github/`-only, no TypeScript extension.~~
 
 ### Promotion Path for Heir Trifectas
 

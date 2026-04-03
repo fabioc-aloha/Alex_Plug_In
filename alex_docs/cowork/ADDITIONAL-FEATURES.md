@@ -57,7 +57,7 @@ Five APIs that expose Copilot's capabilities for custom development:
 | **Copilot Interaction Export API**  | GA      | Export user prompts and responses for governance and analytics      | Audit trail, adoption measurement, quality monitoring   |
 | **Copilot AI Meeting Insights API** | GA      | Access Teams Intelligent Recap: AI notes, action items, @mentions   | Build follow-up automation from meeting outcomes        |
 
-**Strategic importance**: These APIs mean Cowork custom skills are not the only integration point. A future Alex Agent Plugin (the `platforms/agent-plugin/` folder in our repo) could call the Chat API or Retrieval API directly, creating a deeper integration than custom skills alone.
+**Strategic importance**: These APIs mean Cowork custom skills are not the only integration point. The Chat API or Retrieval API could enable deeper integrations beyond custom skills alone.
 
 **Meeting Insights API** is particularly interesting: it returns structured data (action items, decisions, @mentions) from meeting transcripts. An Alex skill in Cowork could combine meeting insights with the `status-reporting` skill to auto-generate project updates from recent meetings.
 
@@ -125,7 +125,7 @@ Copilot Studio agents can now work with Fabric agents to reason over enterprise 
 
 Copilot Studio agents can orchestrate alongside agents built for Microsoft 365 experiences. Agent capabilities are reusable across multiple agents, reducing duplication.
 
-**Alex leverage**: The Alex Agent Plugin (`platforms/agent-plugin/`) could potentially be built as an M365 Agents SDK agent that participates in Copilot Studio orchestration. Instead of only deploying Alex as custom skills, Alex could become an orchestrated agent that other enterprise agents can delegate to.
+**Alex leverage**: Alex could potentially be built as an M365 Agents SDK agent that participates in Copilot Studio orchestration. Instead of only deploying Alex as custom skills, Alex could become an orchestrated agent that other enterprise agents can delegate to.
 
 ### Agent-to-Agent (A2A) Protocol
 
@@ -137,7 +137,7 @@ Open protocol allowing Copilot Studio agents to communicate with any agent (firs
 - Alex could delegate "look up last month's sales data" to a Dynamics 365 agent
 - Cross-vendor agent ecosystems become possible
 
-This aligns directly with Alex's multi-agent orchestration skill and the Agent Plugin platform. A2A could be the protocol that connects VS Code Alex (via MCP) with M365 Alex (via A2A).
+This aligns directly with Alex's multi-agent orchestration skill. A2A could be the protocol that connects VS Code Alex (via MCP) with M365 Alex (via A2A).
 
 ## Additional Copilot Studio Updates (March 2026)
 
@@ -205,7 +205,7 @@ More detailed than initially captured:
 
 **COWORK-HEIR-PLAN.md** implications:
 
-- Phase 3 (Agent Plugin) should evaluate A2A protocol as the integration standard
+- A2A protocol should be evaluated as the integration standard for deeper M365 integration
 - Phase 2 (Cowork deployment) can leverage enterprise templates for slide-design skill
 - Evaluation APIs from Copilot Studio could be used for skill quality testing
 

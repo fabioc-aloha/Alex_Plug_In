@@ -224,7 +224,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 #### GitHub Copilot Web (DISCONTINUED)
 
-~~The GitHub Copilot Web heir was `.github/`-only — discontinued 2026-03-05. Agent Plugin covers the same use case better.~~
+~~Discontinued 2026-03-05. Was `.github/`-only, no TypeScript extension.~~
 
 #### M365 / Teams
 
