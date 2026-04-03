@@ -1,6 +1,6 @@
 ---
 name: Bootstrap Learning
-description: Domain-agnostic knowledge acquisition framework for building structured expertise on any topic from zero, through progressive discovery.
+description: Build structured expertise on any unfamiliar topic through progressive discovery, from high-level overview to deep understanding.
 ---
 
 ## Purpose

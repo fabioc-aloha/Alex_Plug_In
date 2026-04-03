@@ -1,6 +1,6 @@
 ---
 name: Status Reporting
-description: Structured project status updates with RAG ratings, risk tracking, dependency management, and action items for stakeholder communication.
+description: Generate structured project status reports with RAG ratings, risk tracking, and action items for stakeholder communication.
 ---
 
 ## Purpose

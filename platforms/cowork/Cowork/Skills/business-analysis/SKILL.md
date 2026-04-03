@@ -1,6 +1,6 @@
 ---
 name: Business Analysis
-description: Requirements elicitation, business requirement documents, process analysis, SWOT, and stakeholder alignment for structured business decision-making.
+description: Create business requirement documents, process analyses, SWOT assessments, and stakeholder alignment plans for structured decision-making.
 ---
 
 ## Purpose

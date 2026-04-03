@@ -1,6 +1,6 @@
 ---
 name: Literature Review
-description: Systematic literature search, synthesis, gap identification, and narrative construction for academic and professional research.
+description: Conduct systematic literature searches, synthesize findings, identify research gaps, and construct evidence-based narratives.
 ---
 
 ## Purpose

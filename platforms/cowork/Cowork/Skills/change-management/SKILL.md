@@ -1,6 +1,6 @@
 ---
 name: Change Management
-description: ADKAR methodology, adoption strategies, resistance patterns, and organizational transformation planning for change initiatives.
+description: Plan organizational change initiatives using ADKAR methodology with adoption strategies, resistance handling, and communication planning.
 ---
 
 ## Purpose

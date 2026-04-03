@@ -1,6 +1,6 @@
 ---
 name: Stakeholder Management
-description: Influence mapping, communication strategy, expectation management, and resistance handling for complex organizational environments.
+description: Map stakeholder influence, plan communication strategies, manage expectations, and handle resistance across complex organizations.
 ---
 
 ## Purpose

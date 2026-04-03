@@ -1,6 +1,6 @@
 ---
 name: Scope Management
-description: Scope creep detection, MVP definition, boundary management, and prioritization techniques for keeping projects focused.
+description: Detect scope creep, define MVPs, manage project boundaries, and prioritize work to keep initiatives focused and on track.
 ---
 
 ## Purpose

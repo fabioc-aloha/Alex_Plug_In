@@ -1,6 +1,6 @@
 ---
 name: Coaching Techniques
-description: GROW model, developmental feedback, active listening, and team growth approaches for managers and mentors.
+description: Structure coaching conversations using the GROW model with developmental feedback frameworks and active listening techniques.
 ---
 
 ## Purpose

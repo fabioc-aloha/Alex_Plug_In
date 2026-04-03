@@ -1,6 +1,6 @@
 ---
 name: Creative Writing
-description: Narrative structure, character development, dialogue craft, and storytelling techniques for engaging long-form content.
+description: Write engaging long-form content using narrative structure, character development, and storytelling techniques that hold attention.
 ---
 
 ## Purpose

@@ -1,6 +1,6 @@
 ---
 name: Data Analysis
-description: Exploratory data analysis methodology covering profiling, distributions, correlations, segmentation, anomaly detection, and translating statistics into business-language insights.
+description: Analyze datasets by profiling, finding distributions and correlations, detecting anomalies, and translating statistics into actionable business insights.
 ---
 
 ## Purpose

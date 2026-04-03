@@ -1,6 +1,6 @@
 ---
 name: Data Storytelling
-description: End-to-end data narrative construction using three-act structure, Knaflic/Duarte methodology, and audience-first framing to turn analysis into compelling arguments.
+description: Build data narratives using three-act structure and audience-first framing to turn analysis into compelling arguments that drive decisions.
 ---
 
 ## Purpose

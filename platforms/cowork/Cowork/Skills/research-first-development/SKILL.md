@@ -1,6 +1,6 @@
 ---
 name: Research-First Development
-description: Pre-action knowledge encoding using 4-dimension gap analysis to ensure thorough understanding before producing deliverables.
+description: Gather and structure knowledge before producing deliverables using 4-dimension gap analysis to ensure thorough understanding first.
 ---
 
 ## Purpose

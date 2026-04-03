@@ -1,6 +1,6 @@
 ---
 name: Slide Design
-description: Visual hierarchy, data visualization, minimal text patterns, and layout principles for impactful presentations.
+description: Design impactful presentation slides using visual hierarchy, minimal text patterns, and data visualization principles.
 ---
 
 ## Purpose
