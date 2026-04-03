@@ -153,6 +153,7 @@ Skills ranked by M365 execution fit (highest to lowest):
 | P1       | executive-storytelling | PowerPoint + Word + Excel              | Data-driven narratives with real deliverables                                                          |
 | P1       | stakeholder-management | Email + Communications + Teams         | Stakeholder comms across channels                                                                      |
 | P1       | data-analysis          | Excel + Deep Research + PDF            | Analyze data, produce reports                                                                          |
+| P1       | bootstrap-learning     | Deep Research + Word + Excel           | Domain-agnostic knowledge acquisition from zero to structured expertise (used in Phase 1 P1-03)        |
 | P2       | business-analysis      | Word + Excel + Enterprise Search       | BRDs, process docs from org data                                                                       |
 | P2       | project-scaffolding    | Word + Excel + SharePoint              | Project structure with templates                                                                       |
 | P2       | slide-design           | PowerPoint                             | Presentation creation and refinement                                                                   |
@@ -242,7 +243,7 @@ Alex Master (.github/)
 
 ## Open questions
 
-1. **Skill discovery timing**: Cowork discovers skills at conversation start. If you add a skill mid-conversation, do you need to start a new conversation?
+1. ~~**Skill discovery timing**~~: **Answered**: Yes. Cowork discovers skills at conversation start. Adding a skill mid-conversation requires starting a new conversation for it to be loaded.
 2. **Scheduled prompts + custom skills**: Can scheduled prompts invoke custom skills, or only built-in skills?
 3. **Skill versioning**: Cowork has no version tracking for custom skills. How do we handle skill updates?
 4. **Multi-user deployment**: Can an admin deploy Alex skills tenant-wide, or is it per-user OneDrive only?

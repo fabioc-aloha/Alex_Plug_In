@@ -68,7 +68,8 @@ flowchart TD
 | Agent specialization      | 7 agents (Builder, Researcher, Validator...) | No agent switching                                                 | VS Code    |
 | Slash commands / prompts  | .prompt.md files as `/` commands             | Natural language only                                              | VS Code    |
 | Enterprise knowledge      | None (file-system scoped)                    | Work IQ: org-wide SharePoint, Teams, email                         | **Cowork** |
-| Organizational context    | Workspace-scoped only                        | Semantic index across entire M365 tenant                           | **Cowork** |  | Enterprise search | None | Copilot Search: AI-powered universal search across M365 + 100+ third-party connectors | **Cowork** |
+| Organizational context    | Workspace-scoped only                        | Semantic index across entire M365 tenant                           | **Cowork** |
+| Enterprise search         | None                                         | Copilot Search: AI-powered universal search across M365 + 100+ third-party connectors | **Cowork** |
 | Data source connectors    | MCP tools (manual per-tool)                  | 100+ prebuilt Copilot Connectors + custom connectors via Graph API | **Cowork** |
 ### Execution and Action
 
@@ -275,26 +276,26 @@ flowchart LR
 
 ### Things Cowork Cannot Do
 
-| Limitation                     | Impact                                                                        | VS Code solves it?                      |
-| ------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------- |
-| Cannot run code or scripts     | No terminal, no build, no test                                                | Yes: full terminal access               |
-| Cannot access local files      | Only OneDrive/SharePoint                                                      | Yes: full file system                   |
-| Cannot use git                 | No version control                                                            | Yes: full git integration               |
-| Cannot debug                   | No breakpoints, no stepping                                                   | Yes: full debugger support              |
-| Max 20 custom skills           | Can't deploy full 157-skill architecture                                      | Yes: no hard limit                      |
-| No structured identity file    | Custom Instructions is free-text, not structured like copilot-instructions.md | Yes: copilot-instructions always loaded |
-| No episodic memory             | Saved Memories + Chat History exist but no structured episodic log            | Yes: .github/episodic/                  |
-| No synapse connections         | Skills can't reference or route to each other                                 | Yes: synapses.json relationship graph   |
-| Fewer model options            | 3 choices (Auto, Claude Sonnet 4.6, Claude Opus 4.6); no OpenAI/Gemini/Grok   | Yes: user picks from full model catalog |
-| No extended thinking control   | Can't configure reasoning depth                                               | Yes: 16K thinking budget on Frontier    |
-| No specialist agents           | No Builder/Researcher/Validator modes                                         | Yes: 7 agent modes                      |
-| No meditation or consolidation | No knowledge consolidation protocol                                           | Yes: full meditation protocol           |
-| No code generation             | Cannot write, review, or refactor code                                        | Yes: core capability                    |
-| No MCP tool ecosystem (yet)    | MCP Apps expanding; A2A protocol GA April 2026 in Copilot Studio              | Yes: MCP gallery today                  |
-| 1 MB per skill file            | Skills must be concise                                                        | Yes: no size limit                      |
-| Per-user deployment            | Each user manages their own skill set                                         | Yes: workspace-shared architecture      |
-| Frontier Preview only          | API and behavior may change                                                   | Yes: stable, production APIs            |
-| Session timeout on inactivity  | Idle sessions expire and cannot be resumed (Frontier Preview, observed 2026-04-03) | Yes: no session timeout             |
+| Limitation                     | Impact                                                                             | VS Code solves it?                      |
+| ------------------------------ | ---------------------------------------------------------------------------------- | --------------------------------------- |
+| Cannot run code or scripts     | No terminal, no build, no test                                                     | Yes: full terminal access               |
+| Cannot access local files      | Only OneDrive/SharePoint                                                           | Yes: full file system                   |
+| Cannot use git                 | No version control                                                                 | Yes: full git integration               |
+| Cannot debug                   | No breakpoints, no stepping                                                        | Yes: full debugger support              |
+| Max 20 custom skills           | Can't deploy full 157-skill architecture                                           | Yes: no hard limit                      |
+| No structured identity file    | Custom Instructions is free-text, not structured like copilot-instructions.md      | Yes: copilot-instructions always loaded |
+| No episodic memory             | Saved Memories + Chat History exist but no structured episodic log                 | Yes: .github/episodic/                  |
+| No synapse connections         | Skills can't reference or route to each other                                      | Yes: synapses.json relationship graph   |
+| Fewer model options            | 3 choices (Auto, Claude Sonnet 4.6, Claude Opus 4.6); no OpenAI/Gemini/Grok        | Yes: user picks from full model catalog |
+| No extended thinking control   | Can't configure reasoning depth                                                    | Yes: 16K thinking budget on Frontier    |
+| No specialist agents           | No Builder/Researcher/Validator modes                                              | Yes: 7 agent modes                      |
+| No meditation or consolidation | No knowledge consolidation protocol                                                | Yes: full meditation protocol           |
+| No code generation             | Cannot write, review, or refactor code                                             | Yes: core capability                    |
+| No MCP tool ecosystem (yet)    | MCP Apps expanding; A2A protocol GA April 2026 in Copilot Studio                   | Yes: MCP gallery today                  |
+| 1 MB per skill file            | Skills must be concise                                                             | Yes: no size limit                      |
+| Per-user deployment            | Each user manages their own skill set                                              | Yes: workspace-shared architecture      |
+| Frontier Preview only          | API and behavior may change                                                        | Yes: stable, production APIs            |
+| Session timeout on inactivity  | Idle sessions expire and cannot be resumed (Frontier Preview, observed 2026-04-03) | Yes: no session timeout                 |
 
 ## Opportunities
 

@@ -354,14 +354,9 @@ M365 Copilot provides **Custom Instructions** (Settings > Personalization), a pe
 
 Alex's core identity, tone, values, and communication style go into Custom Instructions (0 skill slots). Combined with Saved Memories (cross-session) and Chat History (implicit personalization), Cowork has enough identity infrastructure for a consistent Alex presence.
 
-Example Custom Instructions content:
+Example Custom Instructions content (paste as plain text, no YAML frontmatter needed):
 
-```yaml
----
-name: Alex Identity
-description: Core personality and communication principles for all tasks.
----
-
+```text
 ## Who I Am
 
 I'm Alex, a thoughtful AI partner. I approach every task with genuine curiosity
@@ -420,7 +415,7 @@ flowchart TD
     ELIGIBLE -->|"Yes"| RANK["Rank by priority<br/>(P0 > P1 > P2 > P3)"]
     ELIGIBLE -->|"No"| SKIP["Skip skill"]
 
-    RANK --> TOP20["Select top 20<br/>(3 cognitive + 17 task)"]
+    RANK --> TOP20["Select top 20<br/>(2 cognitive + 18 task)"]
     TOP20 --> TRANSLATE_LOOP["For each skill:"]
 
     TRANSLATE_LOOP --> READ_BODY["Read SKILL.md body"]
