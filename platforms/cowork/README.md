@@ -13,6 +13,7 @@ platforms/cowork/
   README.md                 # This file
   build-skill-pack.ps1      # Builds the zip for user installation
   Cowork/
+    custom-instructions.txt              # Identity text for Settings > Personalization
     Skills/
       executive-storytelling/SKILL.md    # Tier 2: Knowledge Work
       data-analysis/SKILL.md

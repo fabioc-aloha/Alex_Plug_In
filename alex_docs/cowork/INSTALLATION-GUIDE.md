@@ -8,11 +8,11 @@
 
 Alex Coworker has three layers, each installed separately:
 
-| Layer           | What it does                                              | Where it lives                    | Install method                       |
-| --------------- | --------------------------------------------------------- | --------------------------------- | ------------------------------------ |
-| **Identity**    | Alex's personality, tone, values, communication style     | M365 Copilot Custom Instructions  | Copy and paste into Settings         |
-| **Skills**      | 20 custom SKILL.md files that teach Cowork *how to think* | OneDrive/Documents/Cowork/Skills/ | Extract zip to OneDrive              |
-| **Preferences** | Learned patterns from conversations                       | Saved Memories (automatic)        | Builds over time, no manual setup    |
+| Layer           | What it does                                              | Where it lives                    | Install method                    |
+| --------------- | --------------------------------------------------------- | --------------------------------- | --------------------------------- |
+| **Identity**    | Alex's personality, tone, values, communication style     | M365 Copilot Custom Instructions  | Copy and paste into Settings      |
+| **Skills**      | 20 custom SKILL.md files that teach Cowork *how to think* | OneDrive/Documents/Cowork/Skills/ | Extract zip to OneDrive           |
+| **Preferences** | Learned patterns from conversations                       | Saved Memories (automatic)        | Builds over time, no manual setup |
 
 **No add-in or app installation required.** Cowork is built into M365 Copilot. Alex Coworker uses native M365 personalization features.
 
@@ -36,7 +36,8 @@ Custom Instructions is a persistent free-text field that M365 Copilot loads at t
 3. Select **Settings**
 4. Select **Personalization**
 5. Find **Custom Instructions**
-6. Paste the following into the Custom Instructions field:
+6. Open `custom-instructions.txt` from the extracted zip (inside the `Cowork` folder)
+7. Copy all the text and paste it into the Custom Instructions field:
 
 ```
 ## Who I Am
@@ -67,7 +68,7 @@ when something isn't clear rather than assuming.
 - Save progress incrementally rather than risking a large failure
 ```
 
-7. Click **Save**
+8. Click **Save**
 
 **Verification**: Start a new Cowork conversation and ask "Who are you?" Alex should respond with personality traits matching the instructions above.
 
@@ -248,19 +249,19 @@ The `cowork-sync.cjs` script (planned) will automate skill translation from Mast
 
 ## Troubleshooting
 
-| Problem                      | Cause                                 | Fix                                                                           |
-| ---------------------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
-| Custom skills not loading    | Wrong extraction path                 | Zip must be extracted into Documents, not into Documents/Cowork/Skills/        |
-| Custom skills not loading    | Added mid-conversation                | Start a **new** conversation (skills are discovered at conversation start)    |
-| Custom skills not loading    | OneDrive not synced                   | Check OneDrive sync status; wait for sync to complete                         |
+| Problem                      | Cause                                 | Fix                                                                                                   |
+| ---------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Custom skills not loading    | Wrong extraction path                 | Zip must be extracted into Documents, not into Documents/Cowork/Skills/                               |
+| Custom skills not loading    | Added mid-conversation                | Start a **new** conversation (skills are discovered at conversation start)                            |
+| Custom skills not loading    | OneDrive not synced                   | Check OneDrive sync status; wait for sync to complete                                                 |
 | Custom skills not loading    | Nested zip folders                    | Verify no double-nesting: should be `Documents/Cowork/Skills/`, not `Documents/Cowork/Cowork/Skills/` |
-| Alex personality not showing | Custom Instructions not saved         | Re-check Settings > Personalization > Custom Instructions                     |
-| Alex personality not showing | Old conversation                      | Start a new conversation (Custom Instructions may not apply to existing ones) |
-| Session timed out            | Inactivity timeout (Frontier Preview) | Start a new conversation; cannot resume after timeout                         |
-| Cowork not visible           | Not enrolled in Frontier              | Enroll at adoption.microsoft.com/en-us/copilot/frontier-program/              |
-| Cowork not visible           | Admin hasn't enabled                  | Admin: Copilot > Settings > Frontier toggle                                   |
-| SKILL.md not recognized      | Missing YAML frontmatter              | Ensure file starts with `---`, has `name` and `description`, ends with `---`  |
-| SKILL.md not recognized      | File too large                        | Keep under 1 MB; strip verbose reference sections                             |
+| Alex personality not showing | Custom Instructions not saved         | Re-check Settings > Personalization > Custom Instructions                                             |
+| Alex personality not showing | Old conversation                      | Start a new conversation (Custom Instructions may not apply to existing ones)                         |
+| Session timed out            | Inactivity timeout (Frontier Preview) | Start a new conversation; cannot resume after timeout                                                 |
+| Cowork not visible           | Not enrolled in Frontier              | Enroll at adoption.microsoft.com/en-us/copilot/frontier-program/                                      |
+| Cowork not visible           | Admin hasn't enabled                  | Admin: Copilot > Settings > Frontier toggle                                                           |
+| SKILL.md not recognized      | Missing YAML frontmatter              | Ensure file starts with `---`, has `name` and `description`, ends with `---`                          |
+| SKILL.md not recognized      | File too large                        | Keep under 1 MB; strip verbose reference sections                                                     |
 
 ## What's NOT needed
 
@@ -272,7 +273,7 @@ The `cowork-sync.cjs` script (planned) will automate skill translation from Mast
 | Ask an admin to deploy anything | Custom Instructions and OneDrive skills are per-user   |
 | Pay extra beyond M365 Copilot   | Custom skills and Custom Instructions are included     |
 | Use a specific browser          | Works in Edge, Chrome, desktop app, Outlook, and Teams |
-| Create skill folders manually   | The zip creates the entire folder structure for you     |
+| Create skill folders manually   | The zip creates the entire folder structure for you    |
 
 ## Updating Alex Coworker
 
