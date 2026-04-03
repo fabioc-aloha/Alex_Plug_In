@@ -119,10 +119,6 @@
 | [diagram-visualization/](./diagram-visualization/) | Generated architecture and workflow diagrams                             |
 | [research/*.html](./research/)                     | Interactive chart demos (chart-gallery, population, visuals)             |
 
-### Archive
-
-Completed or historical items moved to [alex_archive/docs-reorg-2026-03-31/](../alex_archive/docs-reorg-2026-03-31/). These are retained for reference but no longer actively maintained.
-
 
 
 ## Quick Start

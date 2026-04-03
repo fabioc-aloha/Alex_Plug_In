@@ -1,21 +1,23 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "ROADMAP.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "alex_docs/cowork/ADDITIONAL-FEATURES.md",
-    "alex_docs/platforms/WINDOWS-HEIR-PLAN.md",
-    "alex_docs/skills/SKILLS-CATALOG.md",
-    "alex_docs/vscode/EXCAVATION-PLAN.md",
-    "alex_docs/vscode/WHATS-NEW-1.114.md"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_archive/cleanup-2026-03-25/MANIFEST.md",
+    "alex_archive/cleanup-2026-03-25/TEST-GUIDE.md",
+    "alex_archive/cleanup-2026-03-25/actions/WELCOME-VIEW-ACTION-PLAN-2026-03-13.md",
+    "alex_archive/cleanup-2026-03-25/alex_docs-archive/BRANDING-PLAN-COMPLETED-2026-02-28.md",
+    "alex_archive/cleanup-2026-03-25/alex_docs-archive/CODESPACES-HEIR.md",
+    "alex_archive/cleanup-2026-03-25/alex_docs-archive/COGNITIVE-DASHBOARD-DESIGN-v5x-era.md",
+    "alex_archive/cleanup-2026-03-25/alex_docs-archive/COMEBACK-PLAN.md",
+    "alex_archive/cleanup-2026-03-25/alex_docs-archive/COMMAND-CENTER-DESIGN-PRINCIPLES.md",
+    "alex_archive/cleanup-2026-03-25/alex_docs-archive/COMMAND-CENTER-FEASIBILITY-2026-03-05.md"
   ],
   "todoHotspots": [
     {
       "file": "alex_docs/vscode/EXCAVATION-PLAN.md",
       "todoCount": 3,
-      "scannedAt": 1775255072923
+      "scannedAt": 1775255226862
     }
   ],
-  "lastUpdated": 1775255072923
+  "lastUpdated": 1775255226862
 }

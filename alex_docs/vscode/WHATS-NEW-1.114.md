@@ -154,8 +154,8 @@ This review fulfills **v7.1.0 item 7.9**: "Platform evolution watch (VS Code 1.1
 
 ## Future Watch Items
 
-| Item                                          | Source                                                        | Why it matters                                                                            |
-| --------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **TypeScript 7.0 native preview**             | TS blog, March 2026                                           | Go-based compiler, parallel type checking, massive speed gains. Expected "within months." |
-| **Reasoning effort programmatic API**         | Model picker UI shipped (1.113)                               | If a programmatic API emerges, Alex could auto-tune reasoning per-task                    |
-| **Windows Agent Workspace**                   | Copilot Labs (Insider preview)                                | MCP tools as ODR agent connectors; Alex's cognitive tools could register                  |
+| Item                                  | Source                          | Why it matters                                                                            |
+| ------------------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------- |
+| **TypeScript 7.0 native preview**     | TS blog, March 2026             | Go-based compiler, parallel type checking, massive speed gains. Expected "within months." |
+| **Reasoning effort programmatic API** | Model picker UI shipped (1.113) | If a programmatic API emerges, Alex could auto-tune reasoning per-task                    |
+| **Windows Agent Workspace**           | Copilot Labs (Insider preview)  | MCP tools as ODR agent connectors; Alex's cognitive tools could register                  |
