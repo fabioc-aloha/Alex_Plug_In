@@ -100,6 +100,16 @@ if (-not (Test-Path $deploySkills)) {
     Write-Host "[INFO] Created $deploySkills" -ForegroundColor Yellow
 }
 
+# Prune skills in OneDrive that no longer exist in source
+$sourceNames = $skillDirs | ForEach-Object { $_.Name }
+$existing = Get-ChildItem -Path $deploySkills -Directory -ErrorAction SilentlyContinue
+foreach ($e in $existing) {
+    if ($sourceNames -notcontains $e.Name) {
+        Remove-Item -Recurse -Force $e.FullName
+        Write-Host "[PRUNE] Removed stale skill: $($e.Name)" -ForegroundColor Yellow
+    }
+}
+
 # Sync skills
 $synced = 0
 foreach ($dir in $skillDirs) {
