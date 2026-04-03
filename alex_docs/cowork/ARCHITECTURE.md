@@ -1,4 +1,4 @@
-# Copilot Cowork Heir: Technical Architecture
+# Alex Coworker: Technical Architecture
 
 > **Status**: Architecture Draft | **Created**: 2026-04-02 | **Version**: 0.1
 >
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-This document defines the technical architecture for deploying Alex as a Copilot Cowork heir. Cowork is a fundamentally different heir type: while VS Code and M365 declarative heirs operate in **conversational mode** (answer questions, retrieve info), Cowork operates in **execution mode** (take action, produce deliverables, automate workflows).
+This document defines the technical architecture for deploying Alex as a Copilot Cowork heir ("Alex Coworker"). Cowork is a fundamentally different heir type: while VS Code and M365 declarative heirs operate in **conversational mode** (answer questions, retrieve info), Cowork operates in **execution mode** (take action, produce deliverables, automate workflows).
 
 The architecture must solve three problems:
 
@@ -31,7 +31,7 @@ flowchart TD
 
     subgraph EXEC["Execution Heirs"]
         direction LR
-        COWORK["Cowork Heir<br/>Up to 20 adapted skills<br/>M365 action execution"]
+        COWORK["Alex Coworker<br/>Up to 20 adapted skills<br/>M365 action execution"]
     end
 
     subgraph PLANNED["Planned Heirs"]
@@ -63,7 +63,7 @@ flowchart TD
 
 ### Heir Type Comparison
 
-| Dimension          | VS Code Heir                | M365 Declarative         | Cowork Heir                                |
+| Dimension          | VS Code Heir                | M365 Declarative         | Alex Coworker                              |
 | ------------------ | --------------------------- | ------------------------ | ------------------------------------------ |
 | **Mode**           | Conversational + Dev tools  | Conversational           | Execution                                  |
 | **Runtime**        | VS Code extension host      | M365 Copilot (Teams/Web) | M365 Copilot Cowork                        |
@@ -77,7 +77,7 @@ flowchart TD
 
 ## Component Architecture
 
-### Cowork Heir Components
+### Alex Coworker Components
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d4f5f7', 'secondaryBorderColor': '#5ab5a0', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
@@ -555,7 +555,7 @@ flowchart LR
 
 ### With Existing M365 Declarative Agent
 
-The Cowork heir **complements** the existing M365 declarative agent:
+The Alex Coworker **complements** the existing M365 declarative agent:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d4f5f7', 'secondaryBorderColor': '#5ab5a0', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
@@ -567,7 +567,7 @@ flowchart LR
     end
 
     subgraph ACTION["Action: 'Send the team a recap email'"]
-        COWORK_AGENT["Cowork Heir<br/>Drafts email, sends it<br/>Execution"]
+        COWORK_AGENT["Alex Coworker<br/>Drafts email, sends it<br/>Execution"]
     end
 
     USER -->|"asks"| M365_AGENT

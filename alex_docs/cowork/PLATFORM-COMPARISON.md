@@ -17,7 +17,7 @@ flowchart TD
         V_ACTION["Actions: code, terminal, file system, git"]
     end
 
-    subgraph COWORK["Cowork + Alex"]
+    subgraph COWORK["Alex Coworker"]
         direction LR
         C_MODE["Mode: Execution + Deliverables"]
         C_BRAIN["Partial brain (up to 20 custom skills)"]
@@ -34,7 +34,7 @@ flowchart TD
 
 **Figure 1:** *Two deployment surfaces for two contexts. VS Code is where Alex builds; Cowork is where Alex executes business work.*
 
-| Dimension                   | VS Code + Copilot + Alex                                                        | Cowork + Alex                                             |
+| Dimension                   | VS Code + Copilot + Alex                                                        | Alex Coworker                                             |
 | --------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | **Primary audience**        | Developers, architects, researchers                                             | Knowledge workers, managers, business users               |
 | **Operating mode**          | Conversational + agent tools                                                    | Execution + deliverables                                  |
@@ -451,7 +451,7 @@ quadrantChart
 
 ## Strategic Conclusion
 
-VS Code + Copilot + Alex and Cowork + Alex are not competitors. They are **complementary deployment surfaces** with almost zero overlap in their strengths:
+VS Code + Copilot + Alex and Alex Coworker are not competitors. They are **complementary deployment surfaces** with almost zero overlap in their strengths:
 
 - **VS Code** is where Alex **thinks**: deep reasoning, code generation, architecture, meditation, cross-project knowledge, full cognitive brain
 - **Cowork** is where Alex **acts**: sending emails, creating documents, scheduling meetings, automating recurring work, accessing enterprise data

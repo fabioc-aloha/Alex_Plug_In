@@ -40,7 +40,7 @@ The North Star says "the most advanced and trusted AI partner for any job." Cowo
 
 Cowork expands Alex's reach from developers and architects to project managers, business analysts, executives, and anyone who works in M365. That's a meaningful step toward "any job."
 
-But it comes at a cost to "most advanced." The cognitive depth we've built (157 skills, synapse connections, episodic memory, meditation cycles, 7 specialist agents, extended thinking control) can't fully transfer. Cowork Alex would be a capable executor with good knowledge, not a deep thinker with a living memory.
+But it comes at a cost to "most advanced." The cognitive depth we've built (157 skills, synapse connections, episodic memory, meditation cycles, 7 specialist agents, extended thinking control) can't fully transfer. Alex Coworker would be a capable executor with good knowledge, not a deep thinker with a living memory.
 
 The honest conclusion: **we need both platforms, doing different things.** VS Code stays the thinking brain. Cowork becomes the acting body. Skills flow from one Master brain into both surfaces, adapted for each platform's constraints.
 

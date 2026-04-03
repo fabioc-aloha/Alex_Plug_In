@@ -1,4 +1,4 @@
-# Copilot Cowork Heir Plan
+# Alex Coworker: Heir Plan
 
 > **Status**: Research Complete | **Created**: 2026-04-02 | **Platform**: Microsoft 365 Copilot Cowork | **Roadmap**: Candidate (pending evaluation)
 >
@@ -12,7 +12,7 @@ Copilot Cowork is a new execution layer inside Microsoft 365 Copilot that carrie
 
 This makes Cowork a natural heir platform for Alex: deploy Alex's skills into Cowork, enabling an AI partner that doesn't just answer questions but **executes real work** across Outlook, Teams, Word, Excel, PowerPoint, SharePoint, and OneDrive.
 
-### Why Cowork as a Heir?
+### Why Cowork as an Alex Coworker Heir?
 
 | Factor                     | Assessment                                                          |
 | -------------------------- | ------------------------------------------------------------------- |
@@ -26,7 +26,7 @@ This makes Cowork a natural heir platform for Alex: deploy Alex's skills into Co
 ### Strategic positioning
 
 ```
-Current M365 heir (declarative agent)     Cowork heir (execution layer)
+Current M365 heir (declarative agent)     Alex Coworker (execution layer)
   Answers questions                         Takes action
   Retrieves information                     Creates deliverables
   Runs in Teams/Outlook chat                Runs across all M365 apps
@@ -34,7 +34,7 @@ Current M365 heir (declarative agent)     Cowork heir (execution layer)
   Limited to conversation                   Long-running background tasks
 ```
 
-The Cowork heir is not a replacement for the M365 declarative agent heir. It's a **companion deployment** that adds execution capability.
+The Alex Coworker heir is not a replacement for the M365 declarative agent heir. It's a **companion deployment** that adds execution capability.
 
 ## Architecture: How Alex Maps to Cowork
 
@@ -105,7 +105,7 @@ Convert 5 high-value Alex skills to Cowork format:
 
 - [ ] **P2-01** Design `cowork-sync.cjs` muscle: converts Alex skills to Cowork SKILL.md format
 - [ ] **P2-02** Define conversion rules: strip VS Code-specific instructions, add M365 action instructions
-- [ ] **P2-03** Define SKILL_EXCLUSIONS for Cowork heir (skills that don't make sense in M365 context)
+- [ ] **P2-03** Define SKILL_EXCLUSIONS for Alex Coworker (skills that don't make sense in M365 context)
 - [ ] **P2-04** Implement `cowork-sync.cjs`: read master skills, apply conversion, write to staging folder
 - [ ] **P2-05** Add OneDrive deployment option: copy converted skills to `Documents/Cowork/Skills/`
 - [ ] **P2-06** Add Graph API deployment option (future): upload skills via Microsoft Graph
@@ -139,7 +139,7 @@ Convert 5 high-value Alex skills to Cowork format:
 - [ ] **P5-06** Measure: output quality compared to non-skill Cowork output
 - [ ] **P5-07** Update `alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md`: add Cowork to heir diagram
 - [ ] **P5-08** Update `copilot-instructions.md` Heirs section: add Cowork entry
-- [ ] **P5-09** Update `ROADMAP-UNIFIED.md`: add Cowork heir to platform strategy
+- [ ] **P5-09** Update `ROADMAP-UNIFIED.md`: add Alex Coworker to platform strategy
 - [ ] **P5-10** Create `alex_docs/platforms/COWORK-HEIR.md` with setup and troubleshooting guide
 
 ## Candidate skills for conversion
@@ -230,7 +230,7 @@ Alex Master (.github/)
      |     Conversational: answers questions, retrieves info
      |     15 embedded skills, OneDrive memory
      |
-     ├── Cowork Heir (platforms/cowork/)  <-- NEW
+     ├── Alex Coworker (platforms/cowork/)  <-- NEW
      |     Execution: takes action across M365
      |     Up to 20 adapted skills
      |     Complements M365 declarative agent

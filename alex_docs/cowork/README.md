@@ -35,7 +35,7 @@ Cowork was announced as part of **Wave 3 of Microsoft 365 Copilot** on March 9, 
 | [GETTING-STARTED.md](GETTING-STARTED.md)                     | Prerequisites, first conversation walkthrough, and task management                                  |
 | [SKILLS-AND-CUSTOMIZATION.md](SKILLS-AND-CUSTOMIZATION.md)   | 13 built-in skills, custom SKILL.md format, and scheduled prompts                                   |
 | [WAVE3-CONTEXT.md](WAVE3-CONTEXT.md)                         | Wave 3 announcement context: Frontier Suite, Agent 365, Researcher, Work IQ                         |
-| [COWORK-HEIR-PLAN.md](COWORK-HEIR-PLAN.md)                   | Plan to leverage Cowork as an Alex heir platform                                                    |
+| [COWORK-HEIR-PLAN.md](COWORK-HEIR-PLAN.md)                   | Alex Coworker heir plan: leverage Cowork as an execution platform                                   |
 | [ARCHITECTURE.md](ARCHITECTURE.md)                           | Technical architecture: components, data flow, security, sync pipeline                              |
 | [PLATFORM-COMPARISON.md](PLATFORM-COMPARISON.md)             | VS Code + Copilot vs. Cowork: capabilities, limitations, and opportunities                          |
 | [IMPRESSIONS.md](IMPRESSIONS.md)                             | Alex's personal analysis, concerns, and strategic conclusions                                       |
