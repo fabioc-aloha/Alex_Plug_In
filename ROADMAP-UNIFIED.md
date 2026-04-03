@@ -75,15 +75,11 @@ Seven platforms. Four active, three planned.
 
 ### Deferred Hooks (Low Priority)
 
-**16 hooks shipped** (10 global + 6 agent-scoped). These 7 were evaluated and deferred:
+**16 hooks shipped** (10 global + 6 agent-scoped). These 3 were evaluated and deferred:
 
 | #   | Scope   | Event        | What It Would Do                                                                                         | Benefit                                                                                   | Rationale for Deferral                                                                                        |
 | --- | ------- | ------------ | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| H7  | Dream   | SessionStart | Load synapse health baseline + recent tool usage patterns                                                | Head start for dream processing with pre-loaded usage data                                | Dream sessions are infrequent; global SessionStart already loads sufficient context                           |
-| H10 | Global  | PostToolUse  | Secret leak scan — scan tool output for API key/token patterns                                           | Defense-in-depth: catches secrets in tool responses (e.g., git log exposing a key)        | Medium value but H21 (UserPromptSubmit) already catches secrets at input; output scanning is defense-in-depth |
 | H11 | Global  | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s)             | Prevents accidental mass deletion or cascading destructive actions                        | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9                                        |
-| H13 | Builder | PreToolUse   | Breaking change detector — warn when editing exported API surfaces (extension.ts activate, public types) | Prevents accidental public API changes that would break consumers                         | Medium value; requires maintaining a list of public API surfaces                                              |
-| H15 | Builder | PostToolUse  | Package size check — estimate VSIX size after src/assets edits, warn if approaching 5 MB ceiling         | Early warning for package bloat before publish time                                       | Medium value; quality-gate.cjs already catches this at publish time                                           |
 | H17 | Global  | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis              | Delegation analytics: reveals patterns like which agents are slowest or most error-prone  | Analytics only; no immediate workflow benefit                                                                 |
 | H19 | Global  | PostToolUse  | Synapse weight update — increment skill connection weights in real-time on heavy activation              | Live learning: frequently-used skill connections strengthen immediately, not at meditation | Adds write contention to synapses.json; meditation already handles weight consolidation                       |
 
