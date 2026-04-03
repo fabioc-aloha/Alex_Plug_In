@@ -24,10 +24,9 @@ This is not a tagline. It is a commitment. Every feature, every decision, every 
 
 ## 🗺️ Platform Strategy
 
-| Platform              | Heir                          |  Status  | Notes                                                                                                                                                              |
-| --------------------- | ----------------------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **VS Code Extension** | `platforms/vscode-extension/` | ✅ Active | Full TypeScript extension — primary heir                                                                                                                           |
-| **Agent Plugin**      | `platforms/agent-plugin/`     | ✅ Active | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
+| Platform              | Heir                          |  Status  | Notes                                    |
+| --------------------- | ----------------------------- | :------: | ---------------------------------------- |
+| **VS Code Extension** | `platforms/vscode-extension/` | ✅ Active | Full TypeScript extension — primary heir |
 
 M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md).
 
@@ -162,9 +161,9 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 |                            |                                                                                                       |
 | -------------------------- | ----------------------------------------------------------------------------------------------------- |
 | **Current Master Version** | 7.1.1                                                                                                 |
-| **Current Heirs**          | VS Code (7.1.1), Plugin (6.7.0)                                                                       |
+| **Current Heirs**          | VS Code (7.1.1)                                                                                       |
 | **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                                       |
-| **Platforms**              | 2 (VS Code + Agent Plugin). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md) |
+| **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                |
 | **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                                                |
 | **Open Items**             | 8 v7.2.0 features + 3 deferred hooks + 2 future watch                                                 |
 | **Updated**                | 2026-04-03                                                                                            |

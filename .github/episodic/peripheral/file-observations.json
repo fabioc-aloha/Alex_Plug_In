@@ -2,9 +2,16 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "ROADMAP-COWORKER.md",
-    "ROADMAP.md"
+    "ROADMAP.md",
+    "platforms/agent-plugin/README.md",
+    "platforms/agent-plugin/USER-MANUAL.md",
+    "platforms/agent-plugin/marketplace.json",
+    "platforms/agent-plugin/plugin/agents/alex-azure.agent.md",
+    "platforms/agent-plugin/plugin/agents/alex-builder.agent.md",
+    "platforms/agent-plugin/plugin/agents/alex-documentarian.agent.md",
+    "platforms/agent-plugin/plugin/agents/alex-m365.agent.md",
+    "platforms/agent-plugin/plugin/agents/alex-researcher.agent.md"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1775254747998
+  "lastUpdated": 1775254916662
 }
