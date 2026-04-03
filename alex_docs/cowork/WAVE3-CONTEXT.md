@@ -43,10 +43,10 @@ Microsoft 365 Copilot brings leading models from multiple providers:
 
 - **Claude**: Available in mainline chat via Frontier program
 - **OpenAI**: Latest generation (GPT-5.4) continuing to roll out
-- Auto-model-selection: Copilot applies the right model per task
+- Auto-model-selection (default): Copilot applies the right model per task
 - All grounded in enterprise context and protected by Microsoft security
 
-No vendor lock-in. Users don't need to think about model selection.
+**Cowork model picker** (verified from UI, 2026-04-03): Users can explicitly choose between Auto (default), Claude Sonnet 4.6, and Claude Opus 4.6. Only Anthropic models appear in the Cowork picker. OpenAI models may participate behind the scenes in Auto mode or in Researcher's Critique/Council patterns.
 
 ### 5. Agent 365
 

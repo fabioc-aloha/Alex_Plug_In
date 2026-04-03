@@ -21,7 +21,7 @@ Cowork was announced as part of **Wave 3 of Microsoft 365 Copilot** on March 9, 
 | Access URL            | https://m365.cloud.microsoft/                                    |
 | Platforms             | Browser (Edge/Chrome), Desktop app (Windows/Mac), Outlook, Teams |
 | Mobile support        | Not yet available                                                |
-| AI models             | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6   |
+| AI models             | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6        |
 | Built-in skills       | 13                                                               |
 | Custom skills limit   | 20 per user                                                      |
 | Max input             | 16,000 characters per message                                    |

@@ -34,15 +34,15 @@ flowchart TD
 
 **Figure 1:** *Two deployment surfaces for two contexts. VS Code is where Alex builds; Cowork is where Alex executes business work.*
 
-| Dimension                   | VS Code + Copilot + Alex                                                        | Cowork + Alex                               |
-| --------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------- |
-| **Primary audience**        | Developers, architects, researchers                                             | Knowledge workers, managers, business users |
-| **Operating mode**          | Conversational + agent tools                                                    | Execution + deliverables                    |
-| **Core value**              | Think, reason, code, review                                                     | Take action, produce output, automate       |
-| **Runtime**                 | VS Code extension host (local)                                                  | M365 cloud (sandboxed)                      |
+| Dimension                   | VS Code + Copilot + Alex                                                        | Cowork + Alex                                             |
+| --------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| **Primary audience**        | Developers, architects, researchers                                             | Knowledge workers, managers, business users               |
+| **Operating mode**          | Conversational + agent tools                                                    | Execution + deliverables                                  |
+| **Core value**              | Think, reason, code, review                                                     | Take action, produce output, automate                     |
+| **Runtime**                 | VS Code extension host (local)                                                  | M365 cloud (sandboxed)                                    |
 | **AI models**               | User-selected: GPT-5.x, Claude Opus/Sonnet 4.x, Gemini, Grok (all plans)        | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6 |
-| **License cost (AI layer)** | GitHub Copilot Free/Student (free)/Pro $10/Pro+ $39/Business $19/Enterprise $39 | M365 Copilot license + Frontier enrollment  |
-| **Alex cost**               | Free (VS Code Marketplace)                                                      | Free (custom skills in OneDrive)            |
+| **License cost (AI layer)** | GitHub Copilot Free/Student (free)/Pro $10/Pro+ $39/Business $19/Enterprise $39 | M365 Copilot license + Frontier enrollment                |
+| **Alex cost**               | Free (VS Code Marketplace)                                                      | Free (custom skills in OneDrive)                          |
 
 ## Capability Comparison
 
@@ -204,13 +204,13 @@ flowchart LR
 
 **Translation summary by layer:**
 
-| Layer | VS Code features | Translates to M365 | Gaps (no equivalent) |
-| --- | --- | --- | --- |
-| **Identity** | copilot-instructions, user-profile, Active Context | Custom Instructions, Work Profile | Active Context Manager (real-time persona/goal tracking) |
-| **Memory** | Episodic, 157 skills, synapses, global knowledge, Copilot Memory | Saved Memories, 20 custom skills, Enterprise Search, Chat History | Synapse network (skill-to-skill routing), global knowledge (personal cross-project) |
-| **Cognitive** | Meditation, self-actualization, dream state, deep thinking | Researcher Critique (dual-model review) | Meditation, self-actualization, dream state (all require episodic logging + state) |
-| **Agents** | 7 specialist agents, 13 LM tools | 5 Copilot APIs | Agent switching (Builder/Researcher/Validator modes), brain-access LM tools |
-| **Awareness** | Emotional intelligence, honest uncertainty, model tier awareness | User model selection (3 options) | Frustration detection, coverage scoring (require cross-turn state tracking) |
+| Layer         | VS Code features                                                 | Translates to M365                                                | Gaps (no equivalent)                                                                |
+| ------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Identity**  | copilot-instructions, user-profile, Active Context               | Custom Instructions, Work Profile                                 | Active Context Manager (real-time persona/goal tracking)                            |
+| **Memory**    | Episodic, 157 skills, synapses, global knowledge, Copilot Memory | Saved Memories, 20 custom skills, Enterprise Search, Chat History | Synapse network (skill-to-skill routing), global knowledge (personal cross-project) |
+| **Cognitive** | Meditation, self-actualization, dream state, deep thinking       | Researcher Critique (dual-model review)                           | Meditation, self-actualization, dream state (all require episodic logging + state)  |
+| **Agents**    | 7 specialist agents, 13 LM tools                                 | 5 Copilot APIs                                                    | Agent switching (Builder/Researcher/Validator modes), brain-access LM tools         |
+| **Awareness** | Emotional intelligence, honest uncertainty, model tier awareness | User model selection (3 options)                                  | Frustration detection, coverage scoring (require cross-turn state tracking)         |
 
 **What transfers well**: Identity (Custom Instructions), knowledge distillation (top-20 skills), enterprise context (actually *stronger* via Work IQ), research quality (Critique surpasses single-model approach).
 
@@ -218,18 +218,18 @@ flowchart LR
 
 **What transforms**: Global knowledge becomes enterprise knowledge (personal cross-project library becomes org-wide search). Deep thinking becomes Researcher Critique (user-controlled reasoning becomes platform-managed dual-model review). 13 LM tools become 5 Copilot APIs (internal brain access becomes external programmatic access).
 
-| Capability                 | VS Code + Copilot                              | Cowork                                     | Winner    |
-| -------------------------- | ---------------------------------------------- | ------------------------------------------ | --------- |
-| Dual-mind model            | Conscious (chat) + Unconscious (auto-insights) | Single mode (conversation only)            | VS Code   |
-| Meditation / consolidation | Full protocol with episodic logging            | Not available                              | VS Code   |
-| Self-actualization         | 7-phase architecture assessment                | Not available                              | VS Code   |
-| Dream state                | Automated maintenance cycles                   | Not available                              | VS Code   |
+| Capability                 | VS Code + Copilot                              | Cowork                                       | Winner    |
+| -------------------------- | ---------------------------------------------- | -------------------------------------------- | --------- |
+| Dual-mind model            | Conscious (chat) + Unconscious (auto-insights) | Single mode (conversation only)              | VS Code   |
+| Meditation / consolidation | Full protocol with episodic logging            | Not available                                | VS Code   |
+| Self-actualization         | 7-phase architecture assessment                | Not available                                | VS Code   |
+| Dream state                | Automated maintenance cycles                   | Not available                                | VS Code   |
 | Model tier awareness       | Detects GPT/Claude/tier, adapts behavior       | User picks Auto/Sonnet/Opus; Auto is default | Tie       |
-| Extended thinking          | 16K token budget on Frontier models            | Unknown (platform-managed)                 | VS Code   |
-| Emotional intelligence     | Frustration detection, state tracking          | None                                       | VS Code   |
-| Honest uncertainty         | Knowledge coverage scoring per response        | None                                       | VS Code   |
-| Global knowledge           | ~/.alex/ cross-project pattern library         | Enterprise Search (org-wide, not personal) | Different |
-| LM tools (brain access)    | 13 tools: synapse health, memory search, etc.  | None                                       | VS Code   |
+| Extended thinking          | 16K token budget on Frontier models            | Unknown (platform-managed)                   | VS Code   |
+| Emotional intelligence     | Frustration detection, state tracking          | None                                         | VS Code   |
+| Honest uncertainty         | Knowledge coverage scoring per response        | None                                         | VS Code   |
+| Global knowledge           | ~/.alex/ cross-project pattern library         | Enterprise Search (org-wide, not personal)   | Different |
+| LM tools (brain access)    | 13 tools: synapse health, memory search, etc.  | None                                         | VS Code   |
 
 ### UI and User Experience
 
@@ -275,25 +275,25 @@ flowchart LR
 
 ### Things Cowork Cannot Do
 
-| Limitation                     | Impact                                                                        | VS Code solves it?                              |
-| ------------------------------ | ----------------------------------------------------------------------------- | ----------------------------------------------- |
-| Cannot run code or scripts     | No terminal, no build, no test                                                | Yes: full terminal access                       |
-| Cannot access local files      | Only OneDrive/SharePoint                                                      | Yes: full file system                           |
-| Cannot use git                 | No version control                                                            | Yes: full git integration                       |
-| Cannot debug                   | No breakpoints, no stepping                                                   | Yes: full debugger support                      |
-| Max 20 custom skills           | Can't deploy full 157-skill architecture                                      | Yes: no hard limit                              |
-| No structured identity file    | Custom Instructions is free-text, not structured like copilot-instructions.md | Yes: copilot-instructions always loaded         |
-| No episodic memory             | Saved Memories + Chat History exist but no structured episodic log            | Yes: .github/episodic/                          |
-| No synapse connections         | Skills can't reference or route to each other                                 | Yes: synapses.json relationship graph           |
-| Fewer model options           | 3 choices (Auto, Claude Sonnet 4.6, Claude Opus 4.6); no OpenAI/Gemini/Grok  | Yes: user picks from full model catalog         |
-| No extended thinking control   | Can't configure reasoning depth                                               | Yes: 16K thinking budget on Frontier            |
-| No specialist agents           | No Builder/Researcher/Validator modes                                         | Yes: 7 agent modes                              |
-| No meditation or consolidation | No knowledge consolidation protocol                                           | Yes: full meditation protocol                   |
-| No code generation             | Cannot write, review, or refactor code                                        | Yes: core capability                            |
-| No MCP tool ecosystem (yet)    | MCP Apps expanding; A2A protocol GA April 2026 in Copilot Studio              | Yes: MCP gallery today                          |
-| 1 MB per skill file            | Skills must be concise                                                        | Yes: no size limit                              |
-| Per-user deployment            | Each user manages their own skill set                                         | Yes: workspace-shared architecture              |
-| Frontier Preview only          | API and behavior may change                                                   | Yes: stable, production APIs                    |
+| Limitation                     | Impact                                                                        | VS Code solves it?                      |
+| ------------------------------ | ----------------------------------------------------------------------------- | --------------------------------------- |
+| Cannot run code or scripts     | No terminal, no build, no test                                                | Yes: full terminal access               |
+| Cannot access local files      | Only OneDrive/SharePoint                                                      | Yes: full file system                   |
+| Cannot use git                 | No version control                                                            | Yes: full git integration               |
+| Cannot debug                   | No breakpoints, no stepping                                                   | Yes: full debugger support              |
+| Max 20 custom skills           | Can't deploy full 157-skill architecture                                      | Yes: no hard limit                      |
+| No structured identity file    | Custom Instructions is free-text, not structured like copilot-instructions.md | Yes: copilot-instructions always loaded |
+| No episodic memory             | Saved Memories + Chat History exist but no structured episodic log            | Yes: .github/episodic/                  |
+| No synapse connections         | Skills can't reference or route to each other                                 | Yes: synapses.json relationship graph   |
+| Fewer model options            | 3 choices (Auto, Claude Sonnet 4.6, Claude Opus 4.6); no OpenAI/Gemini/Grok   | Yes: user picks from full model catalog |
+| No extended thinking control   | Can't configure reasoning depth                                               | Yes: 16K thinking budget on Frontier    |
+| No specialist agents           | No Builder/Researcher/Validator modes                                         | Yes: 7 agent modes                      |
+| No meditation or consolidation | No knowledge consolidation protocol                                           | Yes: full meditation protocol           |
+| No code generation             | Cannot write, review, or refactor code                                        | Yes: core capability                    |
+| No MCP tool ecosystem (yet)    | MCP Apps expanding; A2A protocol GA April 2026 in Copilot Studio              | Yes: MCP gallery today                  |
+| 1 MB per skill file            | Skills must be concise                                                        | Yes: no size limit                      |
+| Per-user deployment            | Each user manages their own skill set                                         | Yes: workspace-shared architecture      |
+| Frontier Preview only          | API and behavior may change                                                   | Yes: stable, production APIs            |
 
 ## Opportunities
 
@@ -487,18 +487,18 @@ The path forward is not choosing one over the other but running both from the sa
 
 ### Corrections applied during review
 
-| Original claim                           | Correction                                                                                                         | Source                                                                                   |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| Cowork has no keyboard shortcuts         | Cowork has configurable keyboard shortcuts via Settings dialog                                                     | Cowork Get Started docs                                                                  |
-| Cowork has no voice input                | Cowork supports speech-to-text via microphone button                                                               | Cowork Get Started docs                                                                  |
-| GitHub Copilot Free/$10/$39 pricing      | 6 tiers: Free, Student (free), Pro ($10), Pro+ ($39), Business ($19/user), Enterprise ($39/user)                   | GitHub plans page                                                                        |
-| Model list: "GPT-4o, Claude Sonnet/Opus" | Current: GPT-5.x series, Claude Opus/Sonnet 4.x, Gemini 3.x, Grok Code Fast 1                                      | GitHub plans page                                                                        |
-| Cowork has no MCP                        | MCP Apps and A2A support confirmed on Work IQ roadmap                                                              | Work IQ Tech Community article                                                           |
+| Original claim                           | Correction                                                                                                               | Source                                                                                   |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Cowork has no keyboard shortcuts         | Cowork has configurable keyboard shortcuts via Settings dialog                                                           | Cowork Get Started docs                                                                  |
+| Cowork has no voice input                | Cowork supports speech-to-text via microphone button                                                                     | Cowork Get Started docs                                                                  |
+| GitHub Copilot Free/$10/$39 pricing      | 6 tiers: Free, Student (free), Pro ($10), Pro+ ($39), Business ($19/user), Enterprise ($39/user)                         | GitHub plans page                                                                        |
+| Model list: "GPT-4o, Claude Sonnet/Opus" | Current: GPT-5.x series, Claude Opus/Sonnet 4.x, Gemini 3.x, Grok Code Fast 1                                            | GitHub plans page                                                                        |
+| Cowork has no MCP                        | MCP Apps and A2A support confirmed on Work IQ roadmap                                                                    | Work IQ Tech Community article                                                           |
 | Cowork model selection is fully opaque   | Cowork offers 3 choices: Auto (default), Claude Sonnet 4.6, Claude Opus 4.6. Only Anthropic models; no OpenAI in picker. | Cowork UI screenshot (verified 2026-04-03)                                               |
-| Cowork platforms: browser + desktop      | Also accessible via Outlook and Teams                                                                              | Cowork Get Started docs                                                                  |
-| DRACO +13.8% stated as fact              | Qualified as "per Microsoft announcement" (primary benchmark source not independently verified)                    | Wave 3 blog (Critique pattern described; specific number unverified from primary source) |
-| Cowork has no persistent identity        | M365 Copilot has Custom Instructions (persistent free-text, always loaded) + Saved Memories + Chat History         | M365 Copilot Personalization settings (verified via UI)                                  |
-| No cross-session memory in Cowork        | Saved Memories (explicit + implicit) and Chat History provide cross-session personalization                        | M365 Copilot Personalization settings (verified via UI)                                  |
-| MCP/A2A "planned" for Cowork             | A2A protocol and MCP Apps are GA in Copilot Studio as of April 2026; MCP Apps SDK expanding                        | Copilot Studio March 2026 blog                                                           |
-| No mention of Copilot Search             | Copilot Search is a GA universal AI search layer with 100+ connectors; included with M365 Copilot license          | M365 Copilot Search Learn docs                                                           |
-| No mention of Copilot APIs               | 5 APIs available: Retrieval (GA), Search (preview), Chat (preview), Interaction Export (GA), Meeting Insights (GA) | M365 Copilot extensibility overview                                                      |
+| Cowork platforms: browser + desktop      | Also accessible via Outlook and Teams                                                                                    | Cowork Get Started docs                                                                  |
+| DRACO +13.8% stated as fact              | Qualified as "per Microsoft announcement" (primary benchmark source not independently verified)                          | Wave 3 blog (Critique pattern described; specific number unverified from primary source) |
+| Cowork has no persistent identity        | M365 Copilot has Custom Instructions (persistent free-text, always loaded) + Saved Memories + Chat History               | M365 Copilot Personalization settings (verified via UI)                                  |
+| No cross-session memory in Cowork        | Saved Memories (explicit + implicit) and Chat History provide cross-session personalization                              | M365 Copilot Personalization settings (verified via UI)                                  |
+| MCP/A2A "planned" for Cowork             | A2A protocol and MCP Apps are GA in Copilot Studio as of April 2026; MCP Apps SDK expanding                              | Copilot Studio March 2026 blog                                                           |
+| No mention of Copilot Search             | Copilot Search is a GA universal AI search layer with 100+ connectors; included with M365 Copilot license                | M365 Copilot Search Learn docs                                                           |
+| No mention of Copilot APIs               | 5 APIs available: Retrieval (GA), Search (preview), Chat (preview), Interaction Export (GA), Meeting Insights (GA)       | M365 Copilot extensibility overview                                                      |

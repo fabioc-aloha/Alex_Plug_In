@@ -63,17 +63,17 @@ flowchart TD
 
 ### Heir Type Comparison
 
-| Dimension          | VS Code Heir                | M365 Declarative         | Cowork Heir                    |
-| ------------------ | --------------------------- | ------------------------ | ------------------------------ |
-| **Mode**           | Conversational + Dev tools  | Conversational           | Execution                      |
-| **Runtime**        | VS Code extension host      | M365 Copilot (Teams/Web) | M365 Copilot Cowork            |
-| **Skill format**   | SKILL.md (direct copy)      | Embedded in manifest     | SKILL.md (translated)          |
-| **Skill count**    | All inheritable (~100+)     | 15 embedded              | Up to 20                       |
-| **Sync mechanism** | sync-architecture.cjs       | Manual export            | cowork-sync.cjs (new)          |
-| **Can execute**    | Terminal, file system, git  | No                       | Email, calendar, docs, Teams   |
-| **Memory**         | .github/ (full brain)       | OneDrive knowledge       | Work IQ + custom skills        |
-| **Identity**       | Full (copilot-instructions) | Partial (system prompt)  | Skill-injected personality     |
-| **Multi-model**    | Via GitHub Copilot          | Via M365 Copilot         | Auto / Sonnet 4.6 / Opus 4.6  |
+| Dimension          | VS Code Heir                | M365 Declarative         | Cowork Heir                  |
+| ------------------ | --------------------------- | ------------------------ | ---------------------------- |
+| **Mode**           | Conversational + Dev tools  | Conversational           | Execution                    |
+| **Runtime**        | VS Code extension host      | M365 Copilot (Teams/Web) | M365 Copilot Cowork          |
+| **Skill format**   | SKILL.md (direct copy)      | Embedded in manifest     | SKILL.md (translated)        |
+| **Skill count**    | All inheritable (~100+)     | 15 embedded              | Up to 20                     |
+| **Sync mechanism** | sync-architecture.cjs       | Manual export            | cowork-sync.cjs (new)        |
+| **Can execute**    | Terminal, file system, git  | No                       | Email, calendar, docs, Teams |
+| **Memory**         | .github/ (full brain)       | OneDrive knowledge       | Work IQ + custom skills      |
+| **Identity**       | Full (copilot-instructions) | Partial (system prompt)  | Custom Instructions (persistent free-text) |
+| **Multi-model**    | Via GitHub Copilot          | Via M365 Copilot         | Auto / Sonnet 4.6 / Opus 4.6 |
 
 ## Component Architecture
 
@@ -256,7 +256,7 @@ flowchart TB
         direction TB
         C_WM["Conversation Context<br/>Current Cowork session<br/>Includes loaded skills"]
         C_PROC["Custom SKILL.md<br/>OneDrive/Documents/Cowork/Skills/<br/>Procedure embedded in skill body"]
-        C_EPIS["Not available<br/>No session persistence<br/>between conversations"]
+        C_EPIS["Saved Memories (partial)<br/>Persist until user deletes<br/>but unstructured"]
         C_SKILL["Custom Skills (20 max)<br/>OneDrive/Documents/Cowork/Skills/<br/>Auto-discovered"]
         C_GK["Work IQ<br/>Enterprise Search + Memory<br/>Org-wide intelligence"]
     end
@@ -265,7 +265,7 @@ flowchart TB
     A_PROC -.->|"consolidated into"| C_PROC
     A_SKILL -.->|"translated to"| C_SKILL
     A_GK -.->|"mapped to"| C_GK
-    A_EPIS -.->|"no equivalent"| C_EPIS
+    A_EPIS -.->|"partial equivalent"| C_EPIS
 
     style ALEX_MEM fill:#dbe9f6,stroke:#6ea8d9,color:#1f2328
     style COWORK_MEM fill:#d4edda,stroke:#2e7d32,color:#1f2328
@@ -278,8 +278,8 @@ flowchart TB
 
 | Gap                     | Impact                                     | Mitigation                                                     |
 | ----------------------- | ------------------------------------------ | -------------------------------------------------------------- |
-| No episodic memory      | No session history between conversations   | Save session notes to OneDrive via a "checkpoint" skill        |
-| No copilot-instructions | No persistent identity injection           | Create a `alex-identity` SKILL.md that Cowork loads every time |
+| No episodic memory      | No structured session history between conversations | Saved Memories persist (unstructured); add a "checkpoint" skill for notes |
+| Limited identity format  | Custom Instructions is free-text, no structured sections | Deploy identity in Custom Instructions (0 skill slots); accepted trade-off |
 | No synapse connections  | Skills can't reference each other          | Make each skill fully self-contained                           |
 | No code execution       | Can't run scripts, muscles, or brain-qa    | Focus on M365-native actions only                              |
 | 20 skill limit          | Can't deploy full architecture             | Curate top 20 highest-value M365-relevant skills               |
@@ -348,11 +348,13 @@ sequenceDiagram
 
 ## Identity Projection
 
-Without `copilot-instructions.md`, Alex's identity must be injected through a dedicated skill.
+M365 Copilot provides **Custom Instructions** (Settings > Personalization), a persistent free-text field loaded every conversation. This serves as the Cowork equivalent of `copilot-instructions.md` and requires no skill slot.
 
-### Alex Identity Skill
+### Alex Identity via Custom Instructions
 
-A special-purpose skill that Cowork loads alongside task skills. It establishes tone, principles, and communication patterns:
+Alex's core identity, tone, values, and communication style go into Custom Instructions (0 skill slots). Combined with Saved Memories (cross-session) and Chat History (implicit personalization), Cowork has enough identity infrastructure for a consistent Alex presence.
+
+Example Custom Instructions content:
 
 ```yaml
 ---
@@ -388,15 +390,14 @@ when something isn't clear rather than assuming.
 - Save progress incrementally rather than risking a large failure
 ```
 
-This consumes 1 of the 20 skill slots but provides consistent personality.
+This lives in Custom Instructions, not a skill slot.
 
 ### Cognitive Skills
 
-Two additional special-purpose skills provide lightweight cognitive capabilities:
+One additional special-purpose skill provides lightweight cognitive capability:
 
 | Skill           | Purpose                                            | Slot cost |
 | --------------- | -------------------------------------------------- | --------- |
-| alex-identity   | Personality, tone, communication principles        | 1         |
 | alex-checkpoint | Save session notes to OneDrive at conversation end | 1         |
 | alex-briefing   | Morning briefing with Alex's structured format     | 1         |
 | *Task skills*   | Domain-specific execution skills                   | Up to 17  |

@@ -19,7 +19,7 @@ This makes Cowork a natural heir platform for Alex: deploy Alex's skills into Co
 | Skill format compatibility | SKILL.md with YAML frontmatter: identical to Alex                   |
 | Execution capability       | Sends emails, schedules meetings, creates documents, posts in Teams |
 | Enterprise context         | Work IQ provides organizational context Alex doesn't natively have  |
-| Multi-model                | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6          |
+| Multi-model                | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6           |
 | User controls              | Approve/reject actions, pause/resume, scheduled prompts             |
 | Existing M365 heir         | Extends the current M365 Copilot heir with execution power          |
 
@@ -55,9 +55,9 @@ Alex skills need adaptation for Cowork's execution context:
 
 | Alex memory             | Cowork equivalent                 | Notes                            |
 | ----------------------- | --------------------------------- | -------------------------------- |
-| copilot-instructions.md | Not applicable                    | Cowork has its own system prompt |
+| copilot-instructions.md | Custom Instructions (Settings > Personalization) | Persistent free-text, always loaded every conversation. Combined with Saved Memories + Chat History for cross-session identity. |
 | .github/skills/         | OneDrive/Documents/Cowork/Skills/ | Custom skills folder             |
-| .github/episodic/       | Not available                     | No episodic memory in Cowork     |
+| .github/episodic/       | Saved Memories (partial)          | Persist until user deletes, but unstructured (no episodic file format) |
 | User profile            | Work IQ user context              | Cowork learns from M365 activity |
 | Global knowledge        | Enterprise Search skill           | Searches across organization     |
 
@@ -123,11 +123,11 @@ Convert 5 high-value Alex skills to Cowork format:
 
 ### Phase 4: Identity and personality
 
-- [ ] **P4-01** Create Alex personality SKILL.md for Cowork (tone, principles, communication style)
-- [ ] **P4-02** Test personality injection: verify Cowork adopts Alex's conversational style
+- [ ] **P4-01** Deploy Alex identity in Custom Instructions (Settings > Personalization): tone, principles, communication style (0 skill slots)
+- [ ] **P4-02** Test personality injection: verify Cowork adopts Alex's conversational style via Custom Instructions
 - [ ] **P4-03** Create "Alex cognitive" SKILL.md: meditation checkpoint that saves session notes to OneDrive
 - [ ] **P4-04** Create "Alex learning" SKILL.md: captures insights from completed tasks and saves to knowledge folder
-- [ ] **P4-05** Evaluate if Alex identity persists across Cowork conversations (likely limited)
+- [x] **P4-05** ~~Evaluate if Alex identity persists across Cowork conversations~~ **Answered**: Custom Instructions persist across all conversations. Saved Memories persist until user deletes. Chat History provides implicit personalization.
 
 ### Phase 5: Integration testing and documentation
 
@@ -148,7 +148,7 @@ Skills ranked by M365 execution fit (highest to lowest):
 
 | Priority | Alex skill             | Cowork fit                             | Why                                                     |
 | -------- | ---------------------- | -------------------------------------- | ------------------------------------------------------- |
-| P0       | meeting-efficiency     | Calendar Management + Meetings + Email | Core Cowork use case: calendar cleanup, prep, follow-up |
+| ~~P0~~   | ~~meeting-efficiency~~ | Calendar Management + Meetings + Email | **Superseded**: Covered by Cowork built-ins (see SKILL-DEPLOYMENT-STRATEGY Category A). Do not deploy. |
 | P0       | status-reporting       | Word + Email + Enterprise Search       | Weekly reports from M365 data, auto-distribute          |
 | P1       | executive-storytelling | PowerPoint + Word + Excel              | Data-driven narratives with real deliverables           |
 | P1       | stakeholder-management | Email + Communications + Teams         | Stakeholder comms across channels                       |
@@ -246,6 +246,6 @@ Alex Master (.github/)
 2. **Scheduled prompts + custom skills**: Can scheduled prompts invoke custom skills, or only built-in skills?
 3. **Skill versioning**: Cowork has no version tracking for custom skills. How do we handle skill updates?
 4. **Multi-user deployment**: Can an admin deploy Alex skills tenant-wide, or is it per-user OneDrive only?
-5. **Identity persistence**: Does Cowork maintain personality across conversations, or does it reset each time?
+5. ~~**Identity persistence**~~: **Answered**: Custom Instructions (Settings > Personalization) persist across all conversations. Saved Memories (explicit + implicit) persist until user deletes. Chat History provides implicit personalization. Identity does persist.
 6. **Approval memory scope**: "Approve and Remember" is per-conversation. Can custom skills influence default approval behavior?
 7. **GA timeline**: When will Cowork exit Frontier Preview? Pricing implications?

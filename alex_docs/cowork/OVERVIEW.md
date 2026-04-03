@@ -102,8 +102,10 @@ Working closely with Anthropic, Microsoft integrated the technology platform tha
 
 - Your work is not limited by one brand of models
 - Copilot hosts innovation from across the industry and chooses the right model for the job
-- Claude is available in mainline chat via the Frontier program alongside latest OpenAI models
-- Copilot automatically applies the right model per task, all grounded in enterprise context
+- Claude is available in mainline chat via the Frontier program
+- In Auto mode, Copilot automatically applies the right model per task, all grounded in enterprise context
+
+**Cowork model picker** (verified from UI, 2026-04-03): Users can explicitly choose between Auto (default), Claude Sonnet 4.6, and Claude Opus 4.6. Only Anthropic models appear in the Cowork picker. OpenAI models may participate behind the scenes in Auto mode or in Researcher's Critique/Council patterns.
 
 The pattern: Anthropic's agentic model for multi-step tasks + Microsoft 365 security and governance = managed, enterprise-grade experience.
 
