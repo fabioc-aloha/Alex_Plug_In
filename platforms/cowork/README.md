@@ -56,13 +56,13 @@ Documents/
 
 ## Tier Plan
 
-| Tier | Slots | Purpose | Skills |
-| ---- | ----- | ------- | ------ |
-| 1 | 0 | Identity (Custom Instructions) | Alex identity, tone, preferences |
-| 2 | 1-6 | Knowledge Work Methodology | executive-storytelling, data-analysis, data-storytelling, research-first-development, bootstrap-learning, literature-review |
-| 3 | 7-11 | Business Execution | stakeholder-management, business-analysis, change-management, status-reporting, scope-management |
-| 4 | 12-14 | Communication Quality | ai-writing-avoidance, slide-design, creative-writing |
-| 5 | 15-20 | Stretch Candidates | coaching-techniques, chart-interpretation, citation-management, prompt-engineering, north-star, data-visualization |
+| Tier | Slots | Purpose                        | Skills                                                                                                                      |
+| ---- | ----- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| 1    | 0     | Identity (Custom Instructions) | Alex identity, tone, preferences                                                                                            |
+| 2    | 1-6   | Knowledge Work Methodology     | executive-storytelling, data-analysis, data-storytelling, research-first-development, bootstrap-learning, literature-review |
+| 3    | 7-11  | Business Execution             | stakeholder-management, business-analysis, change-management, status-reporting, scope-management                            |
+| 4    | 12-14 | Communication Quality          | ai-writing-avoidance, slide-design, creative-writing                                                                        |
+| 5    | 15-20 | Stretch Candidates             | coaching-techniques, chart-interpretation, citation-management, prompt-engineering, north-star, data-visualization          |
 
 ## Translation Rules Applied
 

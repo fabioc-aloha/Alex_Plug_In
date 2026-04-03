@@ -9,11 +9,11 @@ Every incident is an opportunity to make the system stronger. Post-mortems turn 
 
 ## Blameless Philosophy
 
-| Blame Culture | Learning Culture |
-|---------------|------------------|
-| "Who messed up?" | "How did the system allow this?" |
-| "They should have known" | "Why wasn't it obvious?" |
-| "Follow the process!" | "Is the process followable?" |
+| Blame Culture               | Learning Culture                           |
+| --------------------------- | ------------------------------------------ |
+| "Who messed up?"            | "How did the system allow this?"           |
+| "They should have known"    | "Why wasn't it obvious?"                   |
+| "Follow the process!"       | "Is the process followable?"               |
 | "Don't let it happen again" | "How do we prevent this class of problem?" |
 
 People did what made sense to them at the time, with the information they had.
@@ -26,11 +26,11 @@ What happened, when, and the impact.
 
 ### 2. Timeline
 
-| Time (UTC) | Event | Actor/System |
-|------------|-------|--------------|
-| 14:00 | Deployment started | CI/CD |
-| 14:05 | Error rate increased | Monitoring |
-| 14:07 | On-call paged | PagerDuty |
+| Time (UTC) | Event                | Actor/System |
+| ---------- | -------------------- | ------------ |
+| 14:00      | Deployment started   | CI/CD        |
+| 14:05      | Error rate increased | Monitoring   |
+| 14:07      | On-call paged        | PagerDuty    |
 
 ### 3. Impact
 
@@ -42,6 +42,7 @@ What happened, when, and the impact.
 ### 4. Root Cause(s)
 
 Not "human error." Go deeper:
+
 - Why was the error possible?
 - What safeguards didn't catch it?
 - What systemic conditions contributed?
@@ -62,10 +63,10 @@ Not "human error." Go deeper:
 
 ### 7. Action Items
 
-| Action | Owner | Due Date | Priority |
-|--------|-------|----------|----------|
-| Add validation | @alice | 2026-04-15 | P1 |
-| Improve runbook | @bob | 2026-04-10 | P2 |
+| Action          | Owner  | Due Date   | Priority |
+| --------------- | ------ | ---------- | -------- |
+| Add validation  | @alice | 2026-04-15 | P1       |
+| Improve runbook | @bob   | 2026-04-10 | P2       |
 
 Every action item has an owner and date. No orphan items. Limit to 3-5 meaningful items.
 
@@ -100,12 +101,12 @@ Every action item has an owner and date. No orphan items. Limit to 3-5 meaningfu
 
 ## Severity Classification
 
-| Severity | Criteria | Post-Mortem Required? |
-|----------|----------|----------------------|
-| SEV1 | Customer-facing outage > 30 min | Yes, within 48 hours |
-| SEV2 | Degraded service, workaround exists | Yes, within 1 week |
-| SEV3 | Internal impact, no customer effect | Recommended |
-| SEV4 | Near-miss, caught before impact | Optional but valuable |
+| Severity | Criteria                            | Post-Mortem Required? |
+| -------- | ----------------------------------- | --------------------- |
+| SEV1     | Customer-facing outage > 30 min     | Yes, within 48 hours  |
+| SEV2     | Degraded service, workaround exists | Yes, within 1 week    |
+| SEV3     | Internal impact, no customer effect | Recommended           |
+| SEV4     | Near-miss, caught before impact     | Optional but valuable |
 
 ## Questions That Unlock Learning
 
@@ -117,14 +118,14 @@ Every action item has an owner and date. No orphan items. Limit to 3-5 meaningfu
 
 ## Anti-Patterns
 
-| Anti-Pattern | Why It's Harmful |
-|--------------|------------------|
+| Anti-Pattern                     | Why It's Harmful                    |
+| -------------------------------- | ----------------------------------- |
 | Naming individuals in root cause | Creates fear, hides future problems |
-| "They should have..." | Hindsight bias, doesn't fix systems |
-| No action items | Wasted learning opportunity |
-| Too many action items | Nothing gets done |
-| Action items without owners | Nothing gets done |
-| Never following up | Actions drift, cynicism grows |
+| "They should have..."            | Hindsight bias, doesn't fix systems |
+| No action items                  | Wasted learning opportunity         |
+| Too many action items            | Nothing gets done                   |
+| Action items without owners      | Nothing gets done                   |
+| Never following up               | Actions drift, cynicism grows       |
 
 ## Guidelines
 

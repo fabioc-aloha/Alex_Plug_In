@@ -58,19 +58,19 @@ flowchart TD
 
 ### Skills and Knowledge
 
-| Capability                | VS Code + Copilot                            | Cowork                                                             | Winner     |
-| ------------------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------- |
-| Skill capacity            | No hard limit (157 currently)                | 20 custom skills (hard limit)                                      | VS Code    |
-| Skill auto-loading        | By applyTo pattern + semantic description    | Auto-discovered at conversation start                              | Tie        |
-| Skill format              | SKILL.md with YAML frontmatter               | SKILL.md with YAML frontmatter                                     | Identical  |
-| Skill interdependency     | Synapse connections map skill relationships  | Skills are independent                                             | VS Code    |
-| Instructions (procedures) | 50+ .instructions.md files, always available | Must be embedded in SKILL.md body                                  | VS Code    |
-| Agent specialization      | 7 agents (Builder, Researcher, Validator...) | No agent switching                                                 | VS Code    |
-| Slash commands / prompts  | .prompt.md files as `/` commands             | Natural language only                                              | VS Code    |
-| Enterprise knowledge      | None (file-system scoped)                    | Work IQ: org-wide SharePoint, Teams, email                         | **Cowork** |
-| Organizational context    | Workspace-scoped only                        | Semantic index across entire M365 tenant                           | **Cowork** |
+| Capability                | VS Code + Copilot                            | Cowork                                                                                | Winner     |
+| ------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------- | ---------- |
+| Skill capacity            | No hard limit (157 currently)                | 20 custom skills (hard limit)                                                         | VS Code    |
+| Skill auto-loading        | By applyTo pattern + semantic description    | Auto-discovered at conversation start                                                 | Tie        |
+| Skill format              | SKILL.md with YAML frontmatter               | SKILL.md with YAML frontmatter                                                        | Identical  |
+| Skill interdependency     | Synapse connections map skill relationships  | Skills are independent                                                                | VS Code    |
+| Instructions (procedures) | 50+ .instructions.md files, always available | Must be embedded in SKILL.md body                                                     | VS Code    |
+| Agent specialization      | 7 agents (Builder, Researcher, Validator...) | No agent switching                                                                    | VS Code    |
+| Slash commands / prompts  | .prompt.md files as `/` commands             | Natural language only                                                                 | VS Code    |
+| Enterprise knowledge      | None (file-system scoped)                    | Work IQ: org-wide SharePoint, Teams, email                                            | **Cowork** |
+| Organizational context    | Workspace-scoped only                        | Semantic index across entire M365 tenant                                              | **Cowork** |
 | Enterprise search         | None                                         | Copilot Search: AI-powered universal search across M365 + 100+ third-party connectors | **Cowork** |
-| Data source connectors    | MCP tools (manual per-tool)                  | 100+ prebuilt Copilot Connectors + custom connectors via Graph API | **Cowork** |
+| Data source connectors    | MCP tools (manual per-tool)                  | 100+ prebuilt Copilot Connectors + custom connectors via Graph API                    | **Cowork** |
 ### Execution and Action
 
 | Capability                    | VS Code + Copilot                         | Cowork                                                    | Winner     |

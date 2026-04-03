@@ -11,48 +11,48 @@ Protect personally identifiable information by applying privacy regulations at d
 
 ### Direct Identifiers
 
-| Category | Examples |
-| -------- | -------- |
-| **Name** | Full name, maiden name, alias |
+| Category           | Examples                                  |
+| ------------------ | ----------------------------------------- |
+| **Name**           | Full name, maiden name, alias             |
 | **Government IDs** | SSN, passport, driver's license, TFN (AU) |
-| **Financial** | Bank account, credit card numbers |
-| **Contact** | Email, phone, physical address |
-| **Biometric** | Fingerprints, facial recognition, voice |
+| **Financial**      | Bank account, credit card numbers         |
+| **Contact**        | Email, phone, physical address            |
+| **Biometric**      | Fingerprints, facial recognition, voice   |
 
 ### Indirect Identifiers (Quasi-identifiers)
 
-| Category | Examples |
-| -------- | -------- |
-| **Location** | IP address, GPS coordinates, ZIP/postcode |
-| **Device** | Device ID, MAC address, browser fingerprint |
-| **Demographic** | Age, gender, ethnicity, occupation |
-| **Behavioral** | Purchase history, browsing patterns |
+| Category        | Examples                                    |
+| --------------- | ------------------------------------------- |
+| **Location**    | IP address, GPS coordinates, ZIP/postcode   |
+| **Device**      | Device ID, MAC address, browser fingerprint |
+| **Demographic** | Age, gender, ethnicity, occupation          |
+| **Behavioral**  | Purchase history, browsing patterns         |
 
 Combining quasi-identifiers can uniquely identify individuals even without direct identifiers.
 
 ## GDPR Core Principles (Article 5)
 
-| Principle | Requirement |
-| --------- | ----------- |
-| **Lawfulness, Fairness, Transparency** | Process data legally with clear communication |
-| **Purpose Limitation** | Collect only for specified, legitimate purposes |
-| **Data Minimization** | Collect only what's necessary |
-| **Accuracy** | Keep data accurate and up to date |
-| **Storage Limitation** | Retain only as long as necessary |
-| **Integrity & Confidentiality** | Ensure appropriate security |
-| **Accountability** | Demonstrate compliance |
+| Principle                              | Requirement                                     |
+| -------------------------------------- | ----------------------------------------------- |
+| **Lawfulness, Fairness, Transparency** | Process data legally with clear communication   |
+| **Purpose Limitation**                 | Collect only for specified, legitimate purposes |
+| **Data Minimization**                  | Collect only what's necessary                   |
+| **Accuracy**                           | Keep data accurate and up to date               |
+| **Storage Limitation**                 | Retain only as long as necessary                |
+| **Integrity & Confidentiality**        | Ensure appropriate security                     |
+| **Accountability**                     | Demonstrate compliance                          |
 
 ## Individual Rights (Data Subject Rights)
 
-| Right | Description | Response Time |
-| ----- | ----------- | ------------- |
-| **Access** | Obtain copy of their data | 1 month |
-| **Rectification** | Correct inaccurate data | 1 month |
-| **Erasure** | Delete their data | 1 month |
-| **Restrict Processing** | Limit how data is used | 1 month |
-| **Data Portability** | Receive data in machine-readable format | 1 month |
-| **Object** | Stop certain processing | Without delay |
-| **Automated Decision-Making** | Human review of automated decisions | 1 month |
+| Right                         | Description                             | Response Time |
+| ----------------------------- | --------------------------------------- | ------------- |
+| **Access**                    | Obtain copy of their data               | 1 month       |
+| **Rectification**             | Correct inaccurate data                 | 1 month       |
+| **Erasure**                   | Delete their data                       | 1 month       |
+| **Restrict Processing**       | Limit how data is used                  | 1 month       |
+| **Data Portability**          | Receive data in machine-readable format | 1 month       |
+| **Object**                    | Stop certain processing                 | Without delay |
+| **Automated Decision-Making** | Human review of automated decisions     | 1 month       |
 
 ## Code Patterns
 
@@ -75,7 +75,7 @@ return user; // Contains PII you don't need
 
 // GOOD: Select only needed fields
 const user = await db.users.findById(id, {
-  select: ['id', 'displayName', 'preferences']
+  select: ["id", "displayName", "preferences"],
 });
 return user;
 ```
@@ -102,14 +102,14 @@ await db.users.update({ id: user.id, email: encryptedEmail });
 
 ## When Processing is Prohibited
 
-| Scenario | GDPR | APP |
-| -------- | ---- | --- |
-| No lawful basis identified | Prohibited | Prohibited |
-| Sensitive data without explicit consent | Prohibited | Prohibited |
-| Marketing without opt-out option | Prohibited | Prohibited |
+| Scenario                                 | GDPR       | APP        |
+| ---------------------------------------- | ---------- | ---------- |
+| No lawful basis identified               | Prohibited | Prohibited |
+| Sensitive data without explicit consent  | Prohibited | Prohibited |
+| Marketing without opt-out option         | Prohibited | Prohibited |
 | Cross-border transfer without safeguards | Prohibited | Prohibited |
-| Retention beyond stated period | Prohibited | Prohibited |
-| Collection beyond stated purpose | Prohibited | Prohibited |
+| Retention beyond stated period           | Prohibited | Prohibited |
+| Collection beyond stated purpose         | Prohibited | Prohibited |
 
 ## Guidelines
 
