@@ -294,6 +294,7 @@ flowchart LR
 | 1 MB per skill file            | Skills must be concise                                                        | Yes: no size limit                      |
 | Per-user deployment            | Each user manages their own skill set                                         | Yes: workspace-shared architecture      |
 | Frontier Preview only          | API and behavior may change                                                   | Yes: stable, production APIs            |
+| Session timeout on inactivity  | Idle sessions expire and cannot be resumed (Frontier Preview, observed 2026-04-03) | Yes: no session timeout             |
 
 ## Opportunities
 

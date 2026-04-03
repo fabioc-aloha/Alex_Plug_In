@@ -147,6 +147,7 @@ Preview supported inline: PDF, CSV, Markdown, Images, HTML.
 - Cannot delete files or folders in OneDrive/SharePoint
 - Custom skills created by users are not validated by Microsoft
 - Mobile support not yet available
+- Sessions time out after extended inactivity; conversation cannot be resumed after timeout (observed in Frontier Preview, 2026-04-03)
 
 ## Real-world scenarios (from announcement blog)
 
