@@ -94,7 +94,7 @@ flowchart TD
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d4f5f7', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#d4edda', 'tertiaryBorderColor': '#2e7d32', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
-    subgraph VSCODE_COG["Alex Cognitive Features (VS Code)"]
+    subgraph VSCODE_COG["Alex Cognitive (VS Code)"]
         direction TB
 
         subgraph IDENTITY_VS["Identity Layer"]
@@ -130,7 +130,7 @@ flowchart LR
         end
     end
 
-    subgraph M365_COG["M365 Copilot / Cowork Translation"]
+    subgraph M365_COG["M365 Copilot Cowork"]
         direction TB
 
         subgraph IDENTITY_M365["Identity Layer"]
