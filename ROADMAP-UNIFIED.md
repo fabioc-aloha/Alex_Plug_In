@@ -26,13 +26,13 @@ This is not a tagline. It is a commitment. Every feature, every decision, every 
 
 Seven platforms. Four active, three planned.
 
-| Platform               | Heir                          |  Status   | Notes                                                                                                                                                              |
-| ---------------------- | ----------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **VS Code Extension**  | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                           |
-| **M365 Copilot Agent** | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                               |
-| **Agent Plugin**       | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
-| **Cowork (GCX Coworker)** | `platforms/cowork/`        | 🧪 Testing | 20 curated skills + custom instructions deployed to OneDrive for M365 Copilot Cowork (Frontier Preview). Skill discovery confirmed, file read access under investigation |
-| **Windows Agent**      | `platforms/windows-agent/`    | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace — Gate #17                                                                      |
+| Platform                  | Heir                          |  Status   | Notes                                                                                                                                                                    |
+| ------------------------- | ----------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **VS Code Extension**     | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                                 |
+| **M365 Copilot Agent**    | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                                     |
+| **Agent Plugin**          | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent)       |
+| **Cowork (GCX Coworker)** | `platforms/cowork/`           | 🧪 Testing | 20 curated skills + custom instructions deployed to OneDrive for M365 Copilot Cowork (Frontier Preview). Skill discovery confirmed, file read access under investigation |
+| **Windows Agent**         | `platforms/windows-agent/`    | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace — Gate #17                                                                            |
 
 ---
 
@@ -77,15 +77,15 @@ Seven platforms. Four active, three planned.
 
 **16 hooks shipped** (10 global + 6 agent-scoped). These 7 were evaluated and deferred:
 
-| #   | Scope   | Event        | What It Would Do                                                                                         | Rationale for Deferral                                                                                        |
-| --- | ------- | ------------ | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| H7  | Dream   | SessionStart | Load synapse health baseline + recent tool usage patterns                                                | Dream sessions are infrequent; global SessionStart already loads sufficient context                           |
-| H10 | Global  | PostToolUse  | Secret leak scan — scan tool output for API key/token patterns                                           | Medium value but H21 (UserPromptSubmit) already catches secrets at input; output scanning is defense-in-depth |
-| H11 | Global  | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s)             | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9                                        |
-| H13 | Builder | PreToolUse   | Breaking change detector — warn when editing exported API surfaces (extension.ts activate, public types) | Medium value; requires maintaining a list of public API surfaces                                              |
-| H15 | Builder | PostToolUse  | Package size check — estimate VSIX size after src/assets edits, warn if approaching 5 MB ceiling         | Medium value; quality-gate.cjs already catches this at publish time                                           |
-| H17 | Global  | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis              | Analytics only; no immediate workflow benefit                                                                 |
-| H19 | Global  | PostToolUse  | Synapse weight update — increment skill connection weights in real-time on heavy activation              | Adds write contention to synapses.json; meditation already handles weight consolidation                       |
+| #   | Scope   | Event        | What It Would Do                                                                                         | Benefit                                                                                   | Rationale for Deferral                                                                                        |
+| --- | ------- | ------------ | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| H7  | Dream   | SessionStart | Load synapse health baseline + recent tool usage patterns                                                | Head start for dream processing with pre-loaded usage data                                | Dream sessions are infrequent; global SessionStart already loads sufficient context                           |
+| H10 | Global  | PostToolUse  | Secret leak scan — scan tool output for API key/token patterns                                           | Defense-in-depth: catches secrets in tool responses (e.g., git log exposing a key)        | Medium value but H21 (UserPromptSubmit) already catches secrets at input; output scanning is defense-in-depth |
+| H11 | Global  | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s)             | Prevents accidental mass deletion or cascading destructive actions                        | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9                                        |
+| H13 | Builder | PreToolUse   | Breaking change detector — warn when editing exported API surfaces (extension.ts activate, public types) | Prevents accidental public API changes that would break consumers                         | Medium value; requires maintaining a list of public API surfaces                                              |
+| H15 | Builder | PostToolUse  | Package size check — estimate VSIX size after src/assets edits, warn if approaching 5 MB ceiling         | Early warning for package bloat before publish time                                       | Medium value; quality-gate.cjs already catches this at publish time                                           |
+| H17 | Global  | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis              | Delegation analytics: reveals patterns like which agents are slowest or most error-prone  | Analytics only; no immediate workflow benefit                                                                 |
+| H19 | Global  | PostToolUse  | Synapse weight update — increment skill connection weights in real-time on heavy activation              | Live learning: frequently-used skill connections strengthen immediately, not at meditation | Adds write contention to synapses.json; meditation already handles weight consolidation                       |
 
 ### Blocked (VS Code API Dependencies)
 
