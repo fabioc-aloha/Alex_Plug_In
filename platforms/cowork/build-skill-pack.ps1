@@ -1,7 +1,7 @@
 # build-skill-pack.ps1
-# Builds the alex-coworker-skills.zip from the Cowork/ subfolder.
+# Builds the alex-coworker-skills.zip and deploys to local OneDrive.
 # Usage: .\build-skill-pack.ps1
-# Output: alex-coworker-skills.zip in the same directory
+# Output: alex-coworker-skills.zip in the same directory + local OneDrive sync
 
 $ErrorActionPreference = 'Stop'
 
@@ -60,7 +60,81 @@ if (Test-Path $outputZip) {
     foreach ($dir in ($skillDirs | Sort-Object Name)) {
         Write-Host "  - $($dir.Name)"
     }
-} else {
+}
+else {
     Write-Host "[FAIL] Zip creation failed" -ForegroundColor Red
     exit 1
+}
+
+# --- Local OneDrive deployment ---
+
+# Detect OneDrive Documents path
+$oneDriveDocs = $null
+$candidates = @(
+    (Join-Path $env:USERPROFILE 'OneDrive - Microsoft\Documents'),
+    (Join-Path $env:USERPROFILE 'OneDrive\Documents'),
+    (Join-Path $env:OneDriveCommercial 'Documents')
+)
+foreach ($c in $candidates) {
+    if ($c -and (Test-Path $c)) {
+        $oneDriveDocs = $c
+        break
+    }
+}
+
+if (-not $oneDriveDocs) {
+    Write-Host ""
+    Write-Host "[SKIP] OneDrive Documents folder not found. Zip built but not deployed locally." -ForegroundColor Yellow
+    Write-Host "[INFO] To deploy manually, extract the zip at your OneDrive Documents root." -ForegroundColor Yellow
+    exit 0
+}
+
+$deployTarget = Join-Path $oneDriveDocs 'Cowork'
+Write-Host ""
+Write-Host "[INFO] Deploying to: $deployTarget" -ForegroundColor Cyan
+
+# Create Cowork/Skills/ if needed
+$deploySkills = Join-Path $deployTarget 'Skills'
+if (-not (Test-Path $deploySkills)) {
+    New-Item -Path $deploySkills -ItemType Directory -Force | Out-Null
+    Write-Host "[INFO] Created $deploySkills" -ForegroundColor Yellow
+}
+
+# Sync skills
+$synced = 0
+foreach ($dir in $skillDirs) {
+    $targetDir = Join-Path $deploySkills $dir.Name
+    if (-not (Test-Path $targetDir)) {
+        New-Item -Path $targetDir -ItemType Directory -Force | Out-Null
+    }
+    $srcFile = Join-Path $dir.FullName 'SKILL.md'
+    $dstFile = Join-Path $targetDir 'SKILL.md'
+    Copy-Item $srcFile $dstFile -Force
+    $synced++
+}
+
+# Sync custom-instructions.txt
+$ciSrc = Join-Path $coworkDir 'custom-instructions.txt'
+$ciDst = Join-Path $deployTarget 'custom-instructions.txt'
+if (Test-Path $ciSrc) {
+    Copy-Item $ciSrc $ciDst -Force
+    Write-Host "[OK] Synced custom-instructions.txt" -ForegroundColor Green
+}
+
+# Verify with hash comparison
+$mismatches = 0
+foreach ($dir in $skillDirs) {
+    $srcFile = Join-Path $dir.FullName 'SKILL.md'
+    $dstFile = Join-Path $deploySkills "$($dir.Name)\SKILL.md"
+    if ((Get-FileHash $srcFile -Algorithm MD5).Hash -ne (Get-FileHash $dstFile -Algorithm MD5).Hash) {
+        Write-Host "[MISMATCH] $($dir.Name)" -ForegroundColor Red
+        $mismatches++
+    }
+}
+
+if ($mismatches -eq 0) {
+    Write-Host "[OK] Deployed $synced skills to OneDrive (all verified)" -ForegroundColor Green
+}
+else {
+    Write-Host "[WARN] $mismatches file(s) did not match after copy" -ForegroundColor Red
 }
