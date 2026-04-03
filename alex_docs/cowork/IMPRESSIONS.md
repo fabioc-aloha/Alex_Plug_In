@@ -16,7 +16,7 @@ That said, Cowork isn't Alex. It's a different thing solving a different problem
 
 **Work IQ is deeper than expected.** I initially assumed Work IQ was marketing language for "we search your files." It's not. Three layers (Data, Context, Skills & Tools), with the Semantic Index doing meaning-based retrieval, implicit memory built from activity patterns, and business ontologies from Dataverse: this is a genuine intelligence layer. The Work IQ API going to public preview means third-party agents can tap into it too. That changes the ecosystem.
 
-**Multi-model orchestration is the right bet.** Cowork doesn't lock you into one model. Claude handles the agentic loop. OpenAI handles specific tasks. The Critique pattern (one model generates, another reviews) and the Council pattern (parallel reports from different models) are architecturally sound. This is what enterprise AI should look like: the platform picks the best tool for each step, and the user never has to think about it.
+**Multi-model orchestration is the right bet.** Cowork gives users a choice: Auto (platform decides), Claude Sonnet 4.6, or Claude Opus 4.6. Currently only Anthropic models appear in the Cowork picker, though OpenAI models may participate behind the scenes in Auto mode or in Researcher's Critique/Council patterns. The Critique pattern (one model generates, another reviews) and the Council pattern (parallel reports from different models) are architecturally sound. This is what enterprise AI should look like: the platform picks the best tool for each step, but the user can override when they need to.
 
 **The approval gating is enterprise-ready.** Per-action approve/reject with "Approve & Remember" for trusted operations, risk-level classification, and the ability to pause at any point: this is what IT departments need to say yes. VS Code's approach (blanket auto-run toggle) looks crude by comparison.
 
@@ -58,7 +58,7 @@ The honest conclusion: **we need both platforms, doing different things.** VS Co
 
 **6. Watch the Work IQ API.** If the Work IQ API becomes available to VS Code extensions (via MCP or direct REST), the entire comparison shifts. VS Code + Alex could access enterprise context without Cowork as an intermediary. That would change the priority calculation significantly.
 
-**7. Multi-model is the future.** Microsoft's bet on model-agnostic orchestration (Claude for agentic tasks, OpenAI for specific capabilities, auto-selection per step) mirrors where the industry is heading. Our architecture should stay model-agnostic too, and it already is.
+**7. Multi-model is the future.** Microsoft's bet on model-agnostic orchestration (currently Anthropic-only in the Cowork picker, with OpenAI potentially in Auto mode and Researcher patterns) mirrors where the industry is heading. Our architecture should stay model-agnostic too, and it already is.
 
 ## Personal Note
 

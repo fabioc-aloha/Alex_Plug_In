@@ -73,7 +73,7 @@ flowchart TD
 | **Can execute**    | Terminal, file system, git  | No                       | Email, calendar, docs, Teams   |
 | **Memory**         | .github/ (full brain)       | OneDrive knowledge       | Work IQ + custom skills        |
 | **Identity**       | Full (copilot-instructions) | Partial (system prompt)  | Skill-injected personality     |
-| **Multi-model**    | Via GitHub Copilot          | Via M365 Copilot         | Anthropic + OpenAI auto-select |
+| **Multi-model**    | Via GitHub Copilot          | Via M365 Copilot         | Auto / Sonnet 4.6 / Opus 4.6  |
 
 ## Component Architecture
 

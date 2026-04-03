@@ -9,17 +9,17 @@
 The initial Cowork research focused on Cowork itself (13 built-in skills, custom skills, task management). This document captures the broader M365 Copilot ecosystem features that surround Cowork and create additional leverage points for Alex.
 
 | Feature area                  | Status          | Alex leverage potential |
-| ----------------------------- | --------------- | ---------------------- |
-| Copilot Search                | GA              | High                   |
-| Copilot APIs (5 APIs)         | GA + Preview    | High                   |
-| Copilot Connectors (100+)     | GA              | High                   |
-| Researcher Critique           | Frontier        | Medium                 |
-| Researcher Council            | Frontier        | Medium                 |
-| Copilot Studio Multi-agent    | GA (April 2026) | Strategic              |
-| Agent-to-Agent (A2A) protocol | GA (April 2026) | Strategic              |
-| Memory storage compliance     | GA              | Governance             |
-| Enterprise data governance    | GA              | Governance             |
-| Copilot Studio model choices  | Preview         | Informational          |
+| ----------------------------- | --------------- | ----------------------- |
+| Copilot Search                | GA              | High                    |
+| Copilot APIs (5 APIs)         | GA + Preview    | High                    |
+| Copilot Connectors (100+)     | GA              | High                    |
+| Researcher Critique           | Frontier        | Medium                  |
+| Researcher Council            | Frontier        | Medium                  |
+| Copilot Studio Multi-agent    | GA (April 2026) | Strategic               |
+| Agent-to-Agent (A2A) protocol | GA (April 2026) | Strategic               |
+| Memory storage compliance     | GA              | Governance              |
+| Enterprise data governance    | GA              | Governance              |
+| Copilot Studio model choices  | Preview         | Informational           |
 
 ## Copilot Search: Universal AI Search
 
@@ -37,11 +37,11 @@ The initial Cowork research focused on Cowork itself (13 built-in skills, custom
 
 **How Copilot Search differs from Copilot Chat**:
 
-| Dimension        | Copilot Search            | Copilot Chat                              |
-| ---------------- | ------------------------- | ----------------------------------------- |
-| Best for         | Find what you need fast   | Generate answers, create content, do work |
-| Interaction      | Query-based (search box)  | Conversational (chat-based)               |
-| Data sources     | Graph + 3P connectors     | Graph + 3P connectors + web               |
+| Dimension    | Copilot Search           | Copilot Chat                              |
+| ------------ | ------------------------ | ----------------------------------------- |
+| Best for     | Find what you need fast  | Generate answers, create content, do work |
+| Interaction  | Query-based (search box) | Conversational (chat-based)               |
+| Data sources | Graph + 3P connectors    | Graph + 3P connectors + web               |
 
 **Alex leverage**: Copilot Search is the **discovery layer** that feeds Cowork's reasoning. When an Alex skill says "find last month's project status reports," that query hits Copilot Search under the hood. Understanding this means we can write skills that compose natural language searches effectively, not just keyword patterns. Alex's `enterprise-search` thinking in skills can be optimized for how Copilot Search actually works (semantic, not keyword).
 
@@ -49,13 +49,13 @@ The initial Cowork research focused on Cowork itself (13 built-in skills, custom
 
 Five APIs that expose Copilot's capabilities for custom development:
 
-| API                                | Status  | What it does                                                       | Alex leverage                                           |
-| ---------------------------------- | ------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
-| **Copilot Retrieval API**          | GA      | Retrieve from semantic + lexical indexes across M365 and connectors | Custom agents can query enterprise data with governance  |
-| **Copilot Search API**             | Preview | Hybrid search across OneDrive using natural language               | Build search-first workflows in custom apps              |
-| **Copilot Chat API**               | Preview | Send prompts to Copilot from external apps, get responses          | Embed Copilot-powered conversations in any application   |
-| **Copilot Interaction Export API** | GA      | Export user prompts and responses for governance and analytics      | Audit trail, adoption measurement, quality monitoring    |
-| **Copilot AI Meeting Insights API** | GA     | Access Teams Intelligent Recap: AI notes, action items, @mentions  | Build follow-up automation from meeting outcomes          |
+| API                                 | Status  | What it does                                                        | Alex leverage                                           |
+| ----------------------------------- | ------- | ------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Copilot Retrieval API**           | GA      | Retrieve from semantic + lexical indexes across M365 and connectors | Custom agents can query enterprise data with governance |
+| **Copilot Search API**              | Preview | Hybrid search across OneDrive using natural language                | Build search-first workflows in custom apps             |
+| **Copilot Chat API**                | Preview | Send prompts to Copilot from external apps, get responses           | Embed Copilot-powered conversations in any application  |
+| **Copilot Interaction Export API**  | GA      | Export user prompts and responses for governance and analytics      | Audit trail, adoption measurement, quality monitoring   |
+| **Copilot AI Meeting Insights API** | GA      | Access Teams Intelligent Recap: AI notes, action items, @mentions   | Build follow-up automation from meeting outcomes        |
 
 **Strategic importance**: These APIs mean Cowork custom skills are not the only integration point. A future Alex Agent Plugin (the `platforms/agent-plugin/` folder in our repo) could call the Chat API or Retrieval API directly, creating a deeper integration than custom skills alone.
 
@@ -141,15 +141,15 @@ This aligns directly with Alex's multi-agent orchestration skill and the Agent P
 
 ## Additional Copilot Studio Updates (March 2026)
 
-| Feature                        | Status                      | Details                                                                 |
-| ------------------------------ | --------------------------- | ----------------------------------------------------------------------- |
-| Immersive Prompt Builder       | GA                          | In-agent prompt editing, model switching, knowledge swapping, testing   |
-| Content moderation settings    | GA (supported regions)      | Adjustable harmful content sensitivity per prompt                       |
-| Evaluation automation APIs     | GA                          | Programmatic quality checks in CI/CD pipelines                          |
-| Teams meeting agent access     | GA                          | Real-time transcript and group chat access during meetings              |
-| MCP Apps and Apps SDK          | Expanding                   | External app connectivity for agents                                    |
-| Anthropic models in Studio     | Paid experimental preview   | Claude Opus 4.6, Claude Sonnet 4.5 available for prompt tuning         |
-| Additional models              | Paid experimental preview   | Grok 4.1 Fast, GPT-5.3 Thinking, GPT-5.4 Instant                      |
+| Feature                     | Status                    | Details                                                               |
+| --------------------------- | ------------------------- | --------------------------------------------------------------------- |
+| Immersive Prompt Builder    | GA                        | In-agent prompt editing, model switching, knowledge swapping, testing |
+| Content moderation settings | GA (supported regions)    | Adjustable harmful content sensitivity per prompt                     |
+| Evaluation automation APIs  | GA                        | Programmatic quality checks in CI/CD pipelines                        |
+| Teams meeting agent access  | GA                        | Real-time transcript and group chat access during meetings            |
+| MCP Apps and Apps SDK       | Expanding                 | External app connectivity for agents                                  |
+| Anthropic models in Studio  | Paid experimental preview | Claude Opus 4.6, Claude Sonnet 4.5 available for prompt tuning        |
+| Additional models           | Paid experimental preview | Grok 4.1 Fast, GPT-5.3 Thinking, GPT-5.4 Instant                      |
 
 **Prompt Builder leverage**: The Immersive Prompt Builder could be used to refine Alex custom skills before deploying them to user OneDrive. It gives a test environment for prompt iteration.
 
@@ -159,17 +159,17 @@ This aligns directly with Alex's multi-agent orchestration skill and the Agent P
 
 More detailed than initially captured:
 
-| Property             | Detail                                                                   |
-| -------------------- | ------------------------------------------------------------------------ |
-| Storage location     | Exchange mailbox hidden folder (same security as email)                  |
-| Encryption           | At rest, same as mailbox data                                            |
-| Customer Lockbox     | Supported (no Microsoft access without customer approval)                |
-| Saved Memories       | Retained until user manually deletes                                     |
-| Chat History         | Dynamic: Copilot updates/discards older details; 7-day delete propagation |
-| Admin control        | Enhanced Personalization toggle (on by default in tenant)                |
-| Discovery            | Searchable via eDiscovery and Graph Explorer                             |
-| No additional cost   | Included with M365 Copilot license                                       |
-| Retention policies   | No specific retention policy enforcement on memories (yet)              |
+| Property           | Detail                                                                    |
+| ------------------ | ------------------------------------------------------------------------- |
+| Storage location   | Exchange mailbox hidden folder (same security as email)                   |
+| Encryption         | At rest, same as mailbox data                                             |
+| Customer Lockbox   | Supported (no Microsoft access without customer approval)                 |
+| Saved Memories     | Retained until user manually deletes                                      |
+| Chat History       | Dynamic: Copilot updates/discards older details; 7-day delete propagation |
+| Admin control      | Enhanced Personalization toggle (on by default in tenant)                 |
+| Discovery          | Searchable via eDiscovery and Graph Explorer                              |
+| No additional cost | Included with M365 Copilot license                                        |
+| Retention policies | No specific retention policy enforcement on memories (yet)                |
 
 **Alex leverage**: Knowing that Saved Memories live in Exchange means they're subject to the same legal holds, eDiscovery, and compliance policies as email. For enterprise deployment, this is actually a strength: IT can audit what Alex's memory contains. For Custom Instructions (where Alex identity lives), the same Exchange-based compliance applies.
 
@@ -177,12 +177,12 @@ More detailed than initially captured:
 
 ## Enterprise Data Governance Features
 
-| Feature                          | What it does                                                        | Alex relevance                                                |
-| -------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------- |
-| SharePoint Advanced Mgmt (SAM)  | Reduce oversharing, cleanup inactive sites                          | Improves data quality for Work IQ grounding                   |
-| Restricted SharePoint Search    | Admin-curated allowed list for Copilot-accessible sites             | Controls what enterprise data Alex skills can reach            |
-| Microsoft Purview               | Classify/label data, prevent unauthorized sharing, audit Copilot    | Copilot prompt/response review applies to Alex skill outputs   |
-| Enterprise templates            | PowerPoint creation from Word file using org-approved templates     | Alex's slide-design skill can leverage org templates natively  |
+| Feature                        | What it does                                                     | Alex relevance                                                |
+| ------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| SharePoint Advanced Mgmt (SAM) | Reduce oversharing, cleanup inactive sites                       | Improves data quality for Work IQ grounding                   |
+| Restricted SharePoint Search   | Admin-curated allowed list for Copilot-accessible sites          | Controls what enterprise data Alex skills can reach           |
+| Microsoft Purview              | Classify/label data, prevent unauthorized sharing, audit Copilot | Copilot prompt/response review applies to Alex skill outputs  |
+| Enterprise templates           | PowerPoint creation from Word file using org-approved templates  | Alex's slide-design skill can leverage org templates natively |
 
 **Enterprise templates** deserve special attention: when the PowerPoint built-in skill creates a presentation, it can use organization-approved templates. This means Alex's `slide-design` skill doesn't need to teach formatting from scratch. It can focus on narrative structure and data visualization while trusting the platform to apply brand-compliant templates.
 
@@ -236,9 +236,9 @@ More detailed than initially captured:
 
 | Source                                                                                                                                             | Date       | Key content                                             |
 | -------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------- |
-| [M365 Copilot overview](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview)                                   | 2026-03-24 | Architecture, apps, Search, services, agents            |
-| [Copilot Search](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-search)                                            | 2026-03-24 | Universal search, natural language, connectors, answers |
-| [Extensibility overview](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview)                                          | 2026-03-16 | Agents, connectors, 5 Copilot APIs                     |
+| [M365 Copilot overview](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview)                                    | 2026-03-24 | Architecture, apps, Search, services, agents            |
+| [Copilot Search](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-search)                                             | 2026-03-24 | Universal search, natural language, connectors, answers |
+| [Extensibility overview](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview)                                           | 2026-03-16 | Agents, connectors, 5 Copilot APIs                      |
 | [Researcher multi-model blog](https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-multi-model-intelligence-in-researcher) | 2026-03-30 | Critique (+13.8% DRACO), Council, rubric evaluation     |
 | [Copilot Studio March 2026](https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/new-and-improved-multi-agent-orchestration/)     | 2026-04-01 | Multi-agent GA, A2A, Fabric, SDK, Prompt Builder        |
 | [Cowork Frontier blog](https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/)                    | 2026-03-30 | Cowork launch, Capital Group quote, Researcher updates  |

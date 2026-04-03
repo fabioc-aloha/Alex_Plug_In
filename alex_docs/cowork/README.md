@@ -21,7 +21,7 @@ Cowork was announced as part of **Wave 3 of Microsoft 365 Copilot** on March 9, 
 | Access URL            | https://m365.cloud.microsoft/                                    |
 | Platforms             | Browser (Edge/Chrome), Desktop app (Windows/Mac), Outlook, Teams |
 | Mobile support        | Not yet available                                                |
-| AI models             | Multi-model: Anthropic (Claude) + OpenAI, auto-selected per task |
+| AI models             | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6   |
 | Built-in skills       | 13                                                               |
 | Custom skills limit   | 20 per user                                                      |
 | Max input             | 16,000 characters per message                                    |
@@ -29,17 +29,17 @@ Cowork was announced as part of **Wave 3 of Microsoft 365 Copilot** on March 9, 
 
 ## Document index
 
-| Document                                                     | Description                                                                 |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| [OVERVIEW.md](OVERVIEW.md)                                   | Architecture, capabilities, enterprise features, and multi-model strategy   |
-| [GETTING-STARTED.md](GETTING-STARTED.md)                     | Prerequisites, first conversation walkthrough, and task management          |
-| [SKILLS-AND-CUSTOMIZATION.md](SKILLS-AND-CUSTOMIZATION.md)   | 13 built-in skills, custom SKILL.md format, and scheduled prompts           |
-| [WAVE3-CONTEXT.md](WAVE3-CONTEXT.md)                         | Wave 3 announcement context: Frontier Suite, Agent 365, Researcher, Work IQ |
-| [COWORK-HEIR-PLAN.md](COWORK-HEIR-PLAN.md)                   | Plan to leverage Cowork as an Alex heir platform                            |
-| [ARCHITECTURE.md](ARCHITECTURE.md)                           | Technical architecture: components, data flow, security, sync pipeline      |
-| [PLATFORM-COMPARISON.md](PLATFORM-COMPARISON.md)             | VS Code + Copilot vs. Cowork: capabilities, limitations, and opportunities  |
-| [IMPRESSIONS.md](IMPRESSIONS.md)                             | Alex's personal analysis, concerns, and strategic conclusions               |
-| [SKILL-DEPLOYMENT-STRATEGY.md](SKILL-DEPLOYMENT-STRATEGY.md) | Overlap analysis: what Cowork covers, what to deploy in 20 custom slots     |
+| Document                                                     | Description                                                                                         |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| [OVERVIEW.md](OVERVIEW.md)                                   | Architecture, capabilities, enterprise features, and multi-model strategy                           |
+| [GETTING-STARTED.md](GETTING-STARTED.md)                     | Prerequisites, first conversation walkthrough, and task management                                  |
+| [SKILLS-AND-CUSTOMIZATION.md](SKILLS-AND-CUSTOMIZATION.md)   | 13 built-in skills, custom SKILL.md format, and scheduled prompts                                   |
+| [WAVE3-CONTEXT.md](WAVE3-CONTEXT.md)                         | Wave 3 announcement context: Frontier Suite, Agent 365, Researcher, Work IQ                         |
+| [COWORK-HEIR-PLAN.md](COWORK-HEIR-PLAN.md)                   | Plan to leverage Cowork as an Alex heir platform                                                    |
+| [ARCHITECTURE.md](ARCHITECTURE.md)                           | Technical architecture: components, data flow, security, sync pipeline                              |
+| [PLATFORM-COMPARISON.md](PLATFORM-COMPARISON.md)             | VS Code + Copilot vs. Cowork: capabilities, limitations, and opportunities                          |
+| [IMPRESSIONS.md](IMPRESSIONS.md)                             | Alex's personal analysis, concerns, and strategic conclusions                                       |
+| [SKILL-DEPLOYMENT-STRATEGY.md](SKILL-DEPLOYMENT-STRATEGY.md) | Overlap analysis: what Cowork covers, what to deploy in 20 custom slots                             |
 | [ADDITIONAL-FEATURES.md](ADDITIONAL-FEATURES.md)             | Broader M365 ecosystem features: Copilot Search, APIs, connectors, A2A, Researcher Critique/Council |
 
 ## Sources

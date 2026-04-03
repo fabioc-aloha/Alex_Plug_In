@@ -40,7 +40,7 @@ flowchart TD
 | **Operating mode**          | Conversational + agent tools                                                    | Execution + deliverables                    |
 | **Core value**              | Think, reason, code, review                                                     | Take action, produce output, automate       |
 | **Runtime**                 | VS Code extension host (local)                                                  | M365 cloud (sandboxed)                      |
-| **AI models**               | User-selected: GPT-5.x, Claude Opus/Sonnet 4.x, Gemini, Grok (all plans)        | Multi-model auto-select (Claude + OpenAI)   |
+| **AI models**               | User-selected: GPT-5.x, Claude Opus/Sonnet 4.x, Gemini, Grok (all plans)        | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6 |
 | **License cost (AI layer)** | GitHub Copilot Free/Student (free)/Pro $10/Pro+ $39/Business $19/Enterprise $39 | M365 Copilot license + Frontier enrollment  |
 | **Alex cost**               | Free (VS Code Marketplace)                                                      | Free (custom skills in OneDrive)            |
 
@@ -162,7 +162,7 @@ flowchart LR
         subgraph AWARENESS_M365["Awareness Layer"]
             EI_M365["No equivalent"]
             HU_M365["No equivalent"]
-            MT_M365["Auto model selection<br/>(platform-managed)"]
+            MT_M365["User model selection<br/>(Auto / Sonnet 4.6 / Opus 4.6)"]
         end
     end
 
@@ -210,7 +210,7 @@ flowchart LR
 | **Memory** | Episodic, 157 skills, synapses, global knowledge, Copilot Memory | Saved Memories, 20 custom skills, Enterprise Search, Chat History | Synapse network (skill-to-skill routing), global knowledge (personal cross-project) |
 | **Cognitive** | Meditation, self-actualization, dream state, deep thinking | Researcher Critique (dual-model review) | Meditation, self-actualization, dream state (all require episodic logging + state) |
 | **Agents** | 7 specialist agents, 13 LM tools | 5 Copilot APIs | Agent switching (Builder/Researcher/Validator modes), brain-access LM tools |
-| **Awareness** | Emotional intelligence, honest uncertainty, model tier awareness | Auto model selection | Frustration detection, coverage scoring (require cross-turn state tracking) |
+| **Awareness** | Emotional intelligence, honest uncertainty, model tier awareness | User model selection (3 options) | Frustration detection, coverage scoring (require cross-turn state tracking) |
 
 **What transfers well**: Identity (Custom Instructions), knowledge distillation (top-20 skills), enterprise context (actually *stronger* via Work IQ), research quality (Critique surpasses single-model approach).
 
@@ -224,7 +224,7 @@ flowchart LR
 | Meditation / consolidation | Full protocol with episodic logging            | Not available                              | VS Code   |
 | Self-actualization         | 7-phase architecture assessment                | Not available                              | VS Code   |
 | Dream state                | Automated maintenance cycles                   | Not available                              | VS Code   |
-| Model tier awareness       | Detects GPT/Claude/tier, adapts behavior       | Auto-selected by platform (opaque)         | VS Code   |
+| Model tier awareness       | Detects GPT/Claude/tier, adapts behavior       | User picks Auto/Sonnet/Opus; Auto is default | Tie       |
 | Extended thinking          | 16K token budget on Frontier models            | Unknown (platform-managed)                 | VS Code   |
 | Emotional intelligence     | Frustration detection, state tracking          | None                                       | VS Code   |
 | Honest uncertainty         | Knowledge coverage scoring per response        | None                                       | VS Code   |
@@ -285,7 +285,7 @@ flowchart LR
 | No structured identity file    | Custom Instructions is free-text, not structured like copilot-instructions.md | Yes: copilot-instructions always loaded         |
 | No episodic memory             | Saved Memories + Chat History exist but no structured episodic log            | Yes: .github/episodic/                          |
 | No synapse connections         | Skills can't reference or route to each other                                 | Yes: synapses.json relationship graph           |
-| Limited model selection        | Users can choose models in Copilot Chat; Cowork tasks auto-select             | Yes: user picks tier and model per conversation |
+| Fewer model options           | 3 choices (Auto, Claude Sonnet 4.6, Claude Opus 4.6); no OpenAI/Gemini/Grok  | Yes: user picks from full model catalog         |
 | No extended thinking control   | Can't configure reasoning depth                                               | Yes: 16K thinking budget on Frontier            |
 | No specialist agents           | No Builder/Researcher/Validator modes                                         | Yes: 7 agent modes                              |
 | No meditation or consolidation | No knowledge consolidation protocol                                           | Yes: full meditation protocol                   |
@@ -397,7 +397,7 @@ VS Code Alex requires the user to initiate every interaction. Cowork opens sched
 
 | Dimension               | VS Code + GitHub Copilot                                     | Cowork                                                                          |
 | ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Model selection         | User chooses (GPT-5.x, Claude Opus/Sonnet 4.x, Gemini, Grok) | Platform auto-selects per task                                                  |
+| Model selection         | User chooses (GPT-5.x, Claude Opus/Sonnet 4.x, Gemini, Grok) | User chooses Auto, Claude Sonnet 4.6, or Claude Opus 4.6                        |
 | Multi-model in one task | Single model per conversation                                | Different models for different steps                                            |
 | Critique pattern        | Not available                                                | One model generates, another reviews (per Microsoft: +13.8% on DRACO benchmark) |
 | Council pattern         | Not available                                                | Side-by-side reports from multiple models                                       |
@@ -494,7 +494,7 @@ The path forward is not choosing one over the other but running both from the sa
 | GitHub Copilot Free/$10/$39 pricing      | 6 tiers: Free, Student (free), Pro ($10), Pro+ ($39), Business ($19/user), Enterprise ($39/user)                   | GitHub plans page                                                                        |
 | Model list: "GPT-4o, Claude Sonnet/Opus" | Current: GPT-5.x series, Claude Opus/Sonnet 4.x, Gemini 3.x, Grok Code Fast 1                                      | GitHub plans page                                                                        |
 | Cowork has no MCP                        | MCP Apps and A2A support confirmed on Work IQ roadmap                                                              | Work IQ Tech Community article                                                           |
-| Cowork model selection is fully opaque   | Users can choose foundation models in Copilot Chat; auto-select remains for Cowork tasks                           | Work IQ Tech Community article                                                           |
+| Cowork model selection is fully opaque   | Cowork offers 3 choices: Auto (default), Claude Sonnet 4.6, Claude Opus 4.6. Only Anthropic models; no OpenAI in picker. | Cowork UI screenshot (verified 2026-04-03)                                               |
 | Cowork platforms: browser + desktop      | Also accessible via Outlook and Teams                                                                              | Cowork Get Started docs                                                                  |
 | DRACO +13.8% stated as fact              | Qualified as "per Microsoft announcement" (primary benchmark source not independently verified)                    | Wave 3 blog (Critique pattern described; specific number unverified from primary source) |
 | Cowork has no persistent identity        | M365 Copilot has Custom Instructions (persistent free-text, always loaded) + Saved Memories + Chat History         | M365 Copilot Personalization settings (verified via UI)                                  |

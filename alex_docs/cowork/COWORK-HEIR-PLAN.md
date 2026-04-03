@@ -19,7 +19,7 @@ This makes Cowork a natural heir platform for Alex: deploy Alex's skills into Co
 | Skill format compatibility | SKILL.md with YAML frontmatter: identical to Alex                   |
 | Execution capability       | Sends emails, schedules meetings, creates documents, posts in Teams |
 | Enterprise context         | Work IQ provides organizational context Alex doesn't natively have  |
-| Multi-model                | Anthropic + OpenAI, auto-selected per task                          |
+| Multi-model                | User-selectable: Auto, Claude Sonnet 4.6, Claude Opus 4.6          |
 | User controls              | Approve/reject actions, pause/resume, scheduled prompts             |
 | Existing M365 heir         | Extends the current M365 Copilot heir with execution power          |
 
