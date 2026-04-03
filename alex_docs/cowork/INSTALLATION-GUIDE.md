@@ -8,11 +8,11 @@
 
 Alex Coworker has three layers, each installed separately:
 
-| Layer | What it does | Where it lives | Install method |
-| ----- | ------------ | -------------- | -------------- |
-| **Identity** | Alex's personality, tone, values, communication style | M365 Copilot Custom Instructions | Copy and paste into Settings |
-| **Skills** | 20 custom SKILL.md files that teach Cowork *how to think* | OneDrive/Documents/Cowork/Skills/ | Create folders and files in OneDrive |
-| **Preferences** | Learned patterns from conversations | Saved Memories (automatic) | Builds over time, no manual setup |
+| Layer           | What it does                                              | Where it lives                    | Install method                       |
+| --------------- | --------------------------------------------------------- | --------------------------------- | ------------------------------------ |
+| **Identity**    | Alex's personality, tone, values, communication style     | M365 Copilot Custom Instructions  | Copy and paste into Settings         |
+| **Skills**      | 20 custom SKILL.md files that teach Cowork *how to think* | OneDrive/Documents/Cowork/Skills/ | Extract zip to OneDrive              |
+| **Preferences** | Learned patterns from conversations                       | Saved Memories (automatic)        | Builds over time, no manual setup    |
 
 **No add-in or app installation required.** Cowork is built into M365 Copilot. Alex Coworker uses native M365 personalization features.
 
@@ -82,32 +82,42 @@ The text above is a starting template. You can personalize it:
 
 Custom Instructions apply to all M365 Copilot conversations (Chat and Cowork), not just Cowork.
 
-## Step 2: Create OneDrive Skills Folder
+## Step 2: Configure M365 Copilot Settings
 
-Cowork discovers custom skills from a specific OneDrive folder. Create the folder structure first.
+A few M365 Copilot settings improve Alex's effectiveness. All are in the same Settings panel.
 
-### Using OneDrive (browser)
+### Enhanced Personalization
 
-1. Open **OneDrive** at onedrive.cloud.microsoft
-2. Navigate to **Documents**
-3. Look for a folder called **Cowork**. If it exists, open it. If not, create it.
-4. Inside Cowork, look for or create a folder called **Skills**
+1. In **Settings > Personalization**, find **Enhanced Personalization**
+2. Confirm it is **ON** (it's on by default, but verify)
+3. This allows Copilot to learn from your interactions and build Saved Memories over time
 
-Your path should be: `Documents/Cowork/Skills/`
+Without this, Alex cannot accumulate learned preferences across conversations.
 
-### Using File Explorer (Windows, if OneDrive is synced)
+### Model selection (per conversation)
 
-```
-C:\Users\<your-username>\OneDrive\Documents\Cowork\Skills\
-```
+Cowork lets you choose a model at the start of each conversation via the model picker:
 
-Create the folders if they don't exist.
+| Option             | When to use                                         |
+| ------------------ | --------------------------------------------------- |
+| **Auto** (default) | Platform selects the best model per step            |
+| Claude Sonnet 4.6  | Faster responses, lighter tasks                     |
+| Claude Opus 4.6    | Complex multi-step work, deep research, long output |
 
-## Step 3: Deploy Alex Skills
+This is not a persistent setting. You pick it per conversation.
 
-Each skill is a single `SKILL.md` file inside a named folder under `Skills/`. Cowork auto-discovers them at conversation start.
+## Step 3: Deploy Alex Skills (zip extraction)
 
-### Folder structure
+Cowork discovers custom skills from `OneDrive/Documents/Cowork/Skills/`. Rather than creating 20 folders manually, extract the pre-built skill pack.
+
+### How to deploy
+
+1. Download the Alex Coworker skill pack: `alex-coworker-skills.zip`
+2. Locate your OneDrive **Documents** folder:
+   - **Windows (OneDrive synced)**: `C:\Users\<your-username>\OneDrive\Documents\`
+   - **Browser**: Open OneDrive at onedrive.cloud.microsoft, navigate to Documents
+3. Extract the zip into the Documents folder
+4. Verify the resulting folder structure:
 
 ```
 Documents/
@@ -119,56 +129,60 @@ Documents/
         SKILL.md
       bootstrap-learning/
         SKILL.md
-      ...up to 20 folders
+      ...20 folders total
 ```
 
-### Which skills to deploy
+5. If OneDrive is synced locally, wait for sync to complete (check the OneDrive icon in the system tray)
 
-Deploy in tiers, starting with the highest-impact skills. See [SKILL-DEPLOYMENT-STRATEGY.md](SKILL-DEPLOYMENT-STRATEGY.md) for the full analysis.
+### What's in the zip
 
-**Start with Tier 2 (slots 1-6): Knowledge Work Methodology**
+The skill pack contains 20 SKILL.md files organized by tier. See [SKILL-DEPLOYMENT-STRATEGY.md](SKILL-DEPLOYMENT-STRATEGY.md) for the full analysis.
 
-| Slot | Folder name | What it teaches Cowork |
-| ---- | ----------- | ---------------------- |
-| 1 | executive-storytelling | Data-driven narrative construction, stakeholder framing |
-| 2 | data-analysis | EDA methodology: profiling, distributions, anomaly detection |
-| 3 | data-storytelling | Three-act narrative, audience-first framing |
-| 4 | research-first-development | 4-dimension gap analysis, knowledge encoding before action |
-| 5 | bootstrap-learning | Domain-agnostic knowledge acquisition from zero to expertise |
-| 6 | literature-review | Systematic search, synthesis, gap identification |
+**Tier 2 (slots 1-6): Knowledge Work Methodology**
 
-**Then add Tier 3 (slots 7-11): Business Execution**
+| Folder name                | What it teaches Cowork                                       |
+| -------------------------- | ------------------------------------------------------------ |
+| executive-storytelling     | Data-driven narrative construction, stakeholder framing      |
+| data-analysis              | EDA methodology: profiling, distributions, anomaly detection |
+| data-storytelling          | Three-act narrative, audience-first framing                  |
+| research-first-development | 4-dimension gap analysis, knowledge encoding before action   |
+| bootstrap-learning         | Domain-agnostic knowledge acquisition from zero to expertise |
+| literature-review          | Systematic search, synthesis, gap identification             |
 
-| Slot | Folder name | What it teaches Cowork |
-| ---- | ----------- | ---------------------- |
-| 7 | stakeholder-management | Influence mapping, communication strategy |
-| 8 | business-analysis | Requirements elicitation, BRDs, process analysis |
-| 9 | change-management | ADKAR methodology, adoption strategies |
-| 10 | status-reporting | Structured project status: RAG, risks, action items |
-| 11 | scope-management | Scope creep detection, MVP cuts |
+**Tier 3 (slots 7-11): Business Execution**
 
-**Then Tier 4 (slots 12-14): Communication Quality**
+| Folder name            | What it teaches Cowork                              |
+| ---------------------- | --------------------------------------------------- |
+| stakeholder-management | Influence mapping, communication strategy           |
+| business-analysis      | Requirements elicitation, BRDs, process analysis    |
+| change-management      | ADKAR methodology, adoption strategies              |
+| status-reporting       | Structured project status: RAG, risks, action items |
+| scope-management       | Scope creep detection, MVP cuts                     |
 
-| Slot | Folder name | What it teaches Cowork |
-| ---- | ----------- | ---------------------- |
-| 12 | ai-writing-avoidance | Eliminate telltale AI patterns from all outputs |
-| 13 | slide-design | Visual hierarchy, minimal text, data-viz principles |
-| 14 | creative-writing | Narrative structure, engagement techniques |
+**Tier 4 (slots 12-14): Communication Quality**
 
-**Then Tier 5 (slots 15-20): Stretch, deploy based on your role**
+| Folder name          | What it teaches Cowork                              |
+| -------------------- | --------------------------------------------------- |
+| ai-writing-avoidance | Eliminate telltale AI patterns from all outputs     |
+| slide-design         | Visual hierarchy, minimal text, data-viz principles |
+| creative-writing     | Narrative structure, engagement techniques          |
 
-| Slot | Folder name | Deploy if... |
-| ---- | ----------- | ------------ |
-| 15 | coaching-techniques | You manage people |
-| 16 | chart-interpretation | You work with data reports |
-| 17 | citation-management | You write academic papers |
-| 18 | prompt-engineering | You want to get more from Cowork |
-| 19 | north-star | Your org uses Alex as a strategic partner |
-| 20 | data-visualization | You create visual reports |
+**Tier 5 (slots 15-20): Stretch (deploy based on your role)**
 
-### Creating a skill file
+| Folder name          | Deploy if...                              |
+| -------------------- | ----------------------------------------- |
+| coaching-techniques  | You manage people                         |
+| chart-interpretation | You work with data reports                |
+| citation-management  | You write academic papers                 |
+| prompt-engineering   | You want to get more from Cowork          |
+| north-star           | Your org uses Alex as a strategic partner |
+| data-visualization   | You create visual reports                 |
 
-For each skill, create a `SKILL.md` file with YAML frontmatter:
+To remove stretch skills you don't need, delete the folder from `Documents/Cowork/Skills/` before starting your first conversation.
+
+### SKILL.md format
+
+Each skill file follows this structure (for reference or manual editing):
 
 ```yaml
 ---
@@ -204,16 +218,11 @@ audiences. Focus on the "so what?" not just the "what."
 - Flag risks and assumptions explicitly
 ```
 
-**Important constraints:**
+**Constraints**: Each SKILL.md must be under **1 MB**, YAML frontmatter requires `name` and `description` fields, maximum **20 custom skills** total. Skills are **not validated by Microsoft**: review outputs carefully.
 
-- Each SKILL.md must be under **1 MB**
-- YAML frontmatter requires `name` and `description` fields
-- Maximum **20 custom skills** total
-- Skills are **not validated by Microsoft**: review outputs carefully
+### Building the zip
 
-### Automated deployment (future)
-
-The `cowork-sync.cjs` script (planned) will automate skill translation and deployment from Master Alex. Until then, skill files are created manually based on the templates in the [ARCHITECTURE.md](ARCHITECTURE.md) translation rules.
+The `cowork-sync.cjs` script (planned) will automate skill translation from Master Alex and produce the zip. Until that exists, the skill pack is curated manually based on the translation rules in [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Step 4: Verify Installation
 
@@ -239,37 +248,39 @@ The `cowork-sync.cjs` script (planned) will automate skill translation and deplo
 
 ## Troubleshooting
 
-| Problem | Cause | Fix |
-| ------- | ----- | --- |
-| Custom skills not loading | Wrong folder path | Verify: `OneDrive/Documents/Cowork/Skills/<name>/SKILL.md` |
-| Custom skills not loading | Added mid-conversation | Start a **new** conversation (skills are discovered at conversation start) |
-| Custom skills not loading | OneDrive not synced | Check OneDrive sync status; wait for sync to complete |
-| Alex personality not showing | Custom Instructions not saved | Re-check Settings > Personalization > Custom Instructions |
-| Alex personality not showing | Old conversation | Start a new conversation (Custom Instructions may not apply to existing ones) |
-| Session timed out | Inactivity timeout (Frontier Preview) | Start a new conversation; cannot resume after timeout |
-| Cowork not visible | Not enrolled in Frontier | Enroll at adoption.microsoft.com/en-us/copilot/frontier-program/ |
-| Cowork not visible | Admin hasn't enabled | Admin: Copilot > Settings > Frontier toggle |
-| SKILL.md not recognized | Missing YAML frontmatter | Ensure file starts with `---`, has `name` and `description`, ends with `---` |
-| SKILL.md not recognized | File too large | Keep under 1 MB; strip verbose reference sections |
+| Problem                      | Cause                                 | Fix                                                                           |
+| ---------------------------- | ------------------------------------- | ----------------------------------------------------------------------------- |
+| Custom skills not loading    | Wrong extraction path                 | Zip must be extracted into Documents, not into Documents/Cowork/Skills/        |
+| Custom skills not loading    | Added mid-conversation                | Start a **new** conversation (skills are discovered at conversation start)    |
+| Custom skills not loading    | OneDrive not synced                   | Check OneDrive sync status; wait for sync to complete                         |
+| Custom skills not loading    | Nested zip folders                    | Verify no double-nesting: should be `Documents/Cowork/Skills/`, not `Documents/Cowork/Cowork/Skills/` |
+| Alex personality not showing | Custom Instructions not saved         | Re-check Settings > Personalization > Custom Instructions                     |
+| Alex personality not showing | Old conversation                      | Start a new conversation (Custom Instructions may not apply to existing ones) |
+| Session timed out            | Inactivity timeout (Frontier Preview) | Start a new conversation; cannot resume after timeout                         |
+| Cowork not visible           | Not enrolled in Frontier              | Enroll at adoption.microsoft.com/en-us/copilot/frontier-program/              |
+| Cowork not visible           | Admin hasn't enabled                  | Admin: Copilot > Settings > Frontier toggle                                   |
+| SKILL.md not recognized      | Missing YAML frontmatter              | Ensure file starts with `---`, has `name` and `description`, ends with `---`  |
+| SKILL.md not recognized      | File too large                        | Keep under 1 MB; strip verbose reference sections                             |
 
 ## What's NOT needed
 
-| You do NOT need to... | Because... |
-| --------------------- | ---------- |
-| Install an add-in or app | Cowork is built into M365 Copilot |
-| Register skills with Microsoft | Skills are auto-discovered from OneDrive |
-| Configure an API key | Authentication uses your M365 identity |
-| Ask an admin to deploy anything | Custom Instructions and OneDrive skills are per-user |
-| Pay extra beyond M365 Copilot | Custom skills and Custom Instructions are included |
-| Use a specific browser | Works in Edge, Chrome, desktop app, Outlook, and Teams |
+| You do NOT need to...           | Because...                                             |
+| ------------------------------- | ------------------------------------------------------ |
+| Install an add-in or app        | Cowork is built into M365 Copilot                      |
+| Register skills with Microsoft  | Skills are auto-discovered from OneDrive               |
+| Configure an API key            | Authentication uses your M365 identity                 |
+| Ask an admin to deploy anything | Custom Instructions and OneDrive skills are per-user   |
+| Pay extra beyond M365 Copilot   | Custom skills and Custom Instructions are included     |
+| Use a specific browser          | Works in Edge, Chrome, desktop app, Outlook, and Teams |
+| Create skill folders manually   | The zip creates the entire folder structure for you     |
 
 ## Updating Alex Coworker
 
-| What to update | How | Takes effect |
-| -------------- | --- | ------------ |
-| Identity (Custom Instructions) | Edit in Settings > Personalization | Next new conversation |
-| Skill content | Edit the SKILL.md file in OneDrive | Next new conversation |
-| Add a new skill | Create new folder + SKILL.md in OneDrive | Next new conversation |
-| Remove a skill | Delete the folder from OneDrive | Next new conversation |
+| What to update                 | How                                      | Takes effect          |
+| ------------------------------ | ---------------------------------------- | --------------------- |
+| Identity (Custom Instructions) | Edit in Settings > Personalization       | Next new conversation |
+| Skill content                  | Edit the SKILL.md file in OneDrive       | Next new conversation |
+| Add a new skill                | Create new folder + SKILL.md in OneDrive | Next new conversation |
+| Remove a skill                 | Delete the folder from OneDrive          | Next new conversation |
 
 All changes take effect at the start of the **next** conversation. Ongoing conversations use whatever was loaded when they started.
