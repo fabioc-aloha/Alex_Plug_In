@@ -31,6 +31,7 @@ Seven platforms. Four active, three planned.
 | **VS Code Extension**  | `platforms/vscode-extension/` | ✅ Active  | Full TypeScript extension — primary heir                                                                                                                           |
 | **M365 Copilot Agent** | `platforms/m365-copilot/`     | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                               |
 | **Agent Plugin**       | `platforms/agent-plugin/`     | ✅ Active  | Curated plugin bundle — 79 skills, 7 agents, 22 instructions via VS Code 1.110 plugin system. Distribution: [AlexAgent](https://github.com/fabioc-aloha/AlexAgent) |
+| **Cowork (GCX Coworker)** | `platforms/cowork/`        | 🧪 Testing | 20 curated skills + custom instructions deployed to OneDrive for M365 Copilot Cowork (Frontier Preview). Skill discovery confirmed, file read access under investigation |
 | **Windows Agent**      | `platforms/windows-agent/`    | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace — Gate #17                                                                      |
 
 ---
