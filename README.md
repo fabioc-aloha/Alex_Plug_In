@@ -209,18 +209,17 @@ The upgrade preserves:
 
 > **Stale items** (not modified in >90 days) are flagged for manual review via MIGRATION-CANDIDATES.md.
 
-### What's New (v6.5.0 — The Trust Release)
+### What's New (v7.1.3 -- Install/Upgrade Hardening + H19)
 
-| Category               | Highlights                                                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------- |
-| **Safety Hooks**       | 16 hooks shipped (10 global + 6 agent-scoped) across all 7 VS Code hook events                    |
-| **Security Hardening** | Autopilot safety gates (deny for heir contamination + architecture independence), prompt scanning |
-| **Agent Intelligence** | Session context injection, subagent context loader, decision journal, targeted test runner        |
-| **Agent-Scoped**       | Validator read-only enforcement, Builder compile reminder, Researcher continuity                  |
-| **Skill Promotions**   | 4 skills promoted to Global Knowledge + heirs; 3 evaluated with documented verdicts               |
-| **Quick Settings**     | 17 sidebar toggles in 3 groups (Alex Features, Copilot Power, Agent Capabilities)                 |
-| **Cloud Sync Removed** | Deprecated Gist-based cloud sync fully removed (3 slash commands, setting, handler code)          |
-| **Theme Compliance**   | 17 hex colors → CSS variables; sub-11px fonts fixed; avatar system removed (25 MB savings)        |
+| Category                 | Highlights                                                                                                   |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| **H19 Hook**             | Live synapse weight updates via PostToolUse hook; buffers activations, flushes +0.05 strength after 10 calls |
+| **Critical Fix**         | Upgrade no longer deletes non-Alex `.github/` content (workflows, templates, FUNDING.yml preserved)          |
+| **Upgrade Rollback**     | Failed upgrades auto-rollback from backup instead of leaving workspace broken                                |
+| **Force Repair**         | "Upgrade Architecture" offers repair option when already at latest version                                   |
+| **First-Install UX**     | Proactive "Initialize Now" notification for new users on first activation                                    |
+| **Version Intelligence** | Upgrade notifications distinguish major/minor/patch with tailored messaging                                  |
+| **17 Hooks**             | 17 hooks shipped (11 global + 6 agent-scoped) across all 7 VS Code hook events                               |
 
 ### Migration Notes
 

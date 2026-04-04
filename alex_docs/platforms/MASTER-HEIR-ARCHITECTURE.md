@@ -39,7 +39,7 @@ flowchart TD
 
 | Aspect         | Details                                                |
 | -------------- | ------------------------------------------------------ |
-| **Location**   | `C:\Development\Alex_Plug_In`                          |
+| **Location**   | `C:\Development\AlexMaster`                            |
 | **Purpose**    | Living cognitive architecture, source of all knowledge |
 | **Protection** | 5-layer kill switch prevents accidental corruption     |
 | **Canonical**  | Root `.github/` folder                                 |
@@ -55,9 +55,9 @@ Master Alex is where the "living mind" resides. All procedural memory, domain kn
 | ---------------- | --------------------------------------------------- |
 | **Location**     | `platforms/vscode-extension/`                       |
 | **Deployment**   | VS Code Marketplace                                 |
-| **Status**       | ✅ Production (v5.7.0)                               |
+| **Status**       | ✅ Production (v7.1.3)                               |
 | **Role**         | Flagship deployment + primary R&D lab               |
-| **Capabilities** | Full command palette, LM tools, agents, 100+ skills |
+| **Capabilities** | Full command palette, LM tools, agents, 159+ skills |
 
 The VS Code heir is the most feature-rich deployment, with full GitHub Copilot integration.
 

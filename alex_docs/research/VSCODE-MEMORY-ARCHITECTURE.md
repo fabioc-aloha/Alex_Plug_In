@@ -117,12 +117,11 @@ Shell commands at agent lifecycle points.
 - Points: after file edit, before commit, etc.
 - Alex status: **Available, selectively used**
 
-### Layer 8: Agent Plugins (Preview)
+### Layer 8: Agent Plugins (Discontinued)
 
-Pre-packaged bundles of customizations from marketplaces.
+Pre-packaged bundles of customizations from marketplaces. Alex explored this as a distribution mechanism for heirs but discontinued it in v7.1.2 in favor of sync-architecture.cjs and platform-specific deployment.
 
-- Install a single plugin to get: slash commands, skills, agents, hooks, MCP servers
-- Alex status: **Not leveraged** (preview, potential distribution mechanism for heirs)
+- Alex status: **Discontinued** (v7.1.2)
 
 ### Layer 9: Custom Chat Modes (Preview, v1.101)
 
@@ -301,9 +300,9 @@ Define mode files that map to Alex's existing agents:
 
 This gives native VS Code mode-switching UX for Alex's personas.
 
-**5. Agent Plugin Packaging**
+**5. ~~Agent Plugin Packaging~~ (Discontinued v7.1.2)**
 
-Package Alex as an installable agent plugin for heir distribution. A single plugin install would give heirs: agents, skills, instructions, hooks, and MCP configuration. Currently preview, but worth prototyping.
+Agent plugins were evaluated as a distribution mechanism for heir deployment but discontinued. Heir distribution uses sync-architecture.cjs instead.
 
 **6. MCP Sampling for Autonomous Reasoning**
 
@@ -370,6 +369,6 @@ With v1.102's on-demand loading, Alex's instruction files no longer need aggress
 
 ## Conclusion
 
-Alex's architecture is well-aligned with VS Code's customization stack. The primary gaps are in the v1.101/v1.102 features (tool sets, MCP prompts/resources, custom chat modes, terminal auto approval, on-demand instruction loading) which offer native UX improvements without architectural changes. The biggest strategic opportunity is agent plugin packaging for heir distribution using the now-GA MCP infrastructure. The biggest risk is continued user memory scope leakage, which requires ongoing discipline about what goes into `/memories/` vs brain files.
+Alex's architecture is well-aligned with VS Code's customization stack. The primary gaps are in the v1.101/v1.102 features (tool sets, MCP prompts/resources, custom chat modes, terminal auto approval, on-demand instruction loading) which offer native UX improvements without architectural changes. The biggest risk is continued user memory scope leakage, which requires ongoing discipline about what goes into `/memories/` vs brain files.
 
 The open-sourcing of Copilot Chat (v1.102) opens a new dimension: Alex can study the actual agent loop, prompt construction, and tool calling implementation to optimize its own architecture against the real token budget and tool invocation patterns.

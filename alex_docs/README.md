@@ -6,19 +6,17 @@
 
 ### Getting Started
 
-| Document                                                     | Description                                          |
-| ------------------------------------------------------------ | ---------------------------------------------------- |
-| **[User Manual](./guides/USER-MANUAL.md)**                   | **START HERE**: Complete guide to using Alex         |
-| [Quick Reference](./guides/QUICK-REFERENCE.md)               | Commands, tools, and shortcuts cheat sheet           |
-| [Environment Setup](./guides/ENVIRONMENT-SETUP.md)           | Prerequisites and workspace configuration            |
-| [Initialization Process](./guides/INITIALIZATION-PROCESS.md) | What happens when you run `Alex: Initialize`         |
-| [Use Cases Guide](./guides/USE-CASES.md)                     | Deep dive into every domain Alex supports            |
-| [VS Code Setup](./guides/VSCODE-SETUP.md)                    | VS Code configuration and recommended extensions     |
-| [API Keys](./guides/API-KEYS.md)                             | External service key management                      |
-| [CLI Tools](./guides/CLI-TOOLS.md)                           | Command-line utilities reference                     |
-| [NPM Packages](./guides/NPM-PACKAGES.md)                     | Package dependencies and management                  |
-| [Agents Toolkit](./guides/AGENTS-TOOLKIT-INSTALLATION.md)    | Agent installation and setup                         |
-| [Project Templates](../.github/PROJECT-TYPE-TEMPLATES.md)    | Folder structures for development, writing, research |
+| Document                                                     | Description                                      |
+| ------------------------------------------------------------ | ------------------------------------------------ |
+| **[User Manual](./guides/USER-MANUAL.md)**                   | **START HERE**: Complete guide to using Alex     |
+| [Quick Reference](./guides/QUICK-REFERENCE.md)               | Commands, tools, and shortcuts cheat sheet       |
+| [Environment Setup](./guides/ENVIRONMENT-SETUP.md)           | Prerequisites and workspace configuration        |
+| [Initialization Process](./guides/INITIALIZATION-PROCESS.md) | What happens when you run `Alex: Initialize`     |
+| [Use Cases Guide](./guides/USE-CASES.md)                     | Deep dive into every domain Alex supports        |
+| [VS Code Setup](./guides/VSCODE-SETUP.md)                    | VS Code configuration and recommended extensions |
+| [API Keys](./guides/API-KEYS.md)                             | External service key management                  |
+| [CLI Tools](./guides/CLI-TOOLS.md)                           | Command-line utilities reference                 |
+| [NPM Packages](./guides/NPM-PACKAGES.md)                     | Package dependencies and management              |
 
 ### Architecture
 
@@ -46,9 +44,7 @@
 | Document                                                         | Description                              |
 | ---------------------------------------------------------------- | ---------------------------------------- |
 | [Skills Catalog](./skills/SKILLS-CATALOG.md)                     | Full skill inventory with categories     |
-| [Skills & Capabilities](./skills/SKILLS-CAPABILITIES.md)         | Hard skills, soft skills, and wish list  |
 | [Skill Architecture](./skills/SKILL-ARCHITECTURE.md)             | How skills are structured internally     |
-| [Skill Inheritance](./skills/SKILL-INHERITANCE.md)               | How skills propagate across heirs        |
 | [Skill-Discipline Map](./guides/SKILL-DISCIPLINE-MAP.md)         | Skill routing by professional discipline |
 | [Agent vs Chat Comparison](./guides/AGENT-VS-CHAT-COMPARISON.md) | When to use agents vs direct chat        |
 
@@ -82,19 +78,10 @@
 | [NASA Code Standards](./research/NASA-CODE-STANDARDS-ANALYSIS.md)           | Power of 10 rules analysis                |
 | [AI Writing Tells](./research/AI-WRITING-TELLS.md)                          | AI-generated text detection patterns      |
 
-### Audits
-
-| Document                                                               | Description                  |
-| ---------------------------------------------------------------------- | ---------------------------- |
-| [Cross-Platform Gap Analysis](./audits/CROSS-PLATFORM-GAP-ANALYSIS.md) | Platform parity assessment   |
-| [macOS Expedition Tracker](./audits/MACOS-EXPEDITION-TRACKER.md)       | macOS compatibility tracking |
-| [Welcome View UI Audit](./audits/UI-WELCOME-VIEW-AUDIT-2026-03-25.md)  | Welcome panel UI review      |
-
 ### Decisions (ADRs)
 
 | Document                                                                          | Description                                     |
 | --------------------------------------------------------------------------------- | ----------------------------------------------- |
-| [ADR-007](./decisions/ADR-007-image-generation.md)                                | Image generation architecture                   |
 | [ADR-008](./decisions/ADR-008-workspace-file-api.md)                              | Workspace File API                              |
 | [ADR-009](./decisions/ADR-009-global-knowledge-sync-direction.md)                 | Global knowledge sync direction                 |
 | [ADR-010](./decisions/ADR-010-copilot-instructions-as-prefrontal-cortex.md)       | Copilot instructions as prefrontal cortex       |

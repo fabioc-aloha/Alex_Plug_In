@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Upgrade rollback** -- If the fresh install phase fails during upgrade, the workspace is automatically rolled back from backup instead of being left broken
 - **Post-upgrade warning aggregation** -- Dream, persona detection, and secrets migration failures are now collected and surfaced in the completion summary instead of silently swallowed
 
+### Changed
+
+- **Documentation refresh** -- Updated What's New sections in root README (v6.5.0 -> v7.1.3) and extension README (added v7.1.3 above v7.1.1); fixed stale hook counts (16 -> 17, 10 global -> 11 global) across both READMEs; corrected ROADMAP H19 shipped version (v7.2.0 -> v7.1.3)
+
 ### Fixed
 
 - **CRITICAL: Upgrade no longer deletes non-Alex .github content** -- `cleanOldStructure()` previously removed the entire `.github/` folder, destroying GitHub Actions workflows, issue templates, PR templates, and FUNDING.yml; now only removes Alex-owned items (instructions, skills, prompts, config, agents, muscles, assets, episodic)

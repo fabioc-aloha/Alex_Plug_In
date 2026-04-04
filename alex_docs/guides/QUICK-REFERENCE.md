@@ -31,15 +31,14 @@
 | `/promote`         | Promote local skill to global | `@alex /promote .github/skills/api-design/SKILL.md` |
 | `/knowledgestatus` | View knowledge base stats     | `@alex /knowledgestatus`                            |
 | `/model`           | Model intelligence dashboard  | `@alex /model` or `@alex /model <task>`             |
-| `/calendar`        | View upcoming calendar events | `@alex /calendar` or `@alex /calendar 7`            |
-| `/mail`            | View recent emails            | `@alex /mail` or `@alex /mail unread`               |
-| `/context`         | Full work context (Graph)     | `@alex /context`                                    |
-| `/people`          | Search people in org          | `@alex /people John Smith`                          |
-| `/checkskills`     | Discover new skills from GK   | `@alex /checkskills`                                |
-| `/pullskill`       | Install skill from GK         | `@alex /pullskill <id>`                             |
-| `/session`         | Start/manage learning session | `@alex /session React hooks`                        |
-| `/goals`           | View learning goals & streak  | `@alex /goals`                                      |
-| `/sync`            | Sync with cloud               | `@alex /sync`                                       |
+| `/meditate`        | Knowledge consolidation       | `@alex /meditate`                                   |
+| `/dream`           | Neural maintenance            | `@alex /dream`                                      |
+| `/selfactualize`   | Deep self-assessment          | `@alex /selfactualize`                              |
+| `/brainqa`         | Architecture validation       | `@alex /brainqa`                                    |
+| `/learn`           | Bootstrap domain learning     | `@alex /learn React Server Components`              |
+| `/status`          | Architecture health check     | `@alex /status`                                     |
+| `/docs`            | Open documentation            | `@alex /docs`                                       |
+| `/help`            | Show all commands             | `@alex /help`                                       |
 
 ---
 
@@ -49,22 +48,21 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 **Table 2:** *VS Code Command Palette Commands*
 
-| Command                                     | Description                                                         |
-| ------------------------------------------- | ------------------------------------------------------------------- |
-| `Alex: Initialize Architecture`             | Deploy Alex to current project                                      |
-| `Alex: Dream (Neural Maintenance)`          | Run health check and maintenance                                    |
-| `Alex: Upgrade Architecture`                | Update to latest Alex version                                       |
-| `Alex: Setup Environment`                   | Optimize VS Code settings for Alex                                  |
-| `Alex: Sync Knowledge to Cloud`             | Manual cloud sync                                                   |
-| `Alex: Start Learning Session`              | Begin Pomodoro-style focus session                                  |
-| `Alex: Pause/Resume Session`                | Pause or resume active session                                      |
-| `Alex: Session Actions`                     | View/manage active session                                          |
-| `Alex: Open Health Dashboard`               | Rich webview with architecture visualization                        |
-| `Alex: Create Learning Goal`                | Create a new learning goal                                          |
-| `Alex: Show Learning Goals`                 | View and manage learning goals                                      |
-| `Alex: Skill & Knowledge Review`            | **NEW** Review staleness-prone skills (security, privacy, AI, APIs) |
-| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository                                      |
-| `Alex: Report Issue / View Diagnostics`     | View local telemetry for bug reports                                |
+| Command                                     | Description                                                 |
+| ------------------------------------------- | ----------------------------------------------------------- |
+| `Alex: Initialize Architecture`             | Deploy Alex to current project                              |
+| `Alex: Upgrade Architecture`                | Update to latest Alex version                               |
+| `Alex: Dream (Neural Maintenance)`          | Run health check and maintenance                            |
+| `Alex: Meditate`                            | Knowledge consolidation session                             |
+| `Alex: Self-Actualize`                      | Deep architecture assessment                                |
+| `Alex: Deep Brain QA`                       | Structural validation and consistency check                 |
+| `Alex: Setup Environment`                   | Optimize VS Code settings for Alex                          |
+| `Alex: Open Health Dashboard`               | Rich webview with architecture visualization                |
+| `Alex: Open Memory Dashboard`               | Memory system visualization                                 |
+| `Alex: Skill & Knowledge Review`            | Review staleness-prone skills (security, privacy, AI, APIs) |
+| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository                              |
+| `Alex: Release Preflight`                   | Pre-publish validation gates                                |
+| `Alex: Report Issue / View Diagnostics`     | View local telemetry for bug reports                        |
 
 ---
 
@@ -88,7 +86,6 @@ Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 | ------------------------ | ----------------------- | ----------------- |
 | `alex_save_insight`      | Save learning to global | ✅ Auto cloud sync |
 | `alex_promote_knowledge` | Promote local to global | ✅ Auto cloud sync |
-| `alex_cloud_sync`        | Sync with GitHub Gist   | –                 |
 
 ### Architecture Health
 

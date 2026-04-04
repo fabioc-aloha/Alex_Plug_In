@@ -9,7 +9,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 157
+## Skill Count: 159+
 
 | Inheritance | Count |
 | ----------- | ----- |

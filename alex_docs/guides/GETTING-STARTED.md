@@ -9,12 +9,12 @@ Alex is a cognitive architecture that transforms GitHub Copilot into a personali
 | Component    | Count | Location                          | Purpose                                                     |
 | ------------ | ----- | --------------------------------- | ----------------------------------------------------------- |
 | Identity     | 1     | `.github/copilot-instructions.md` | Alex's personality, routing, and active context             |
-| Instructions | ~60   | `.github/instructions/`           | Behavioral rules loaded by file pattern                     |
-| Skills       | ~136  | `.github/skills/`                 | Domain knowledge loaded on demand                           |
-| Prompts      | ~46   | `.github/prompts/`                | Reusable prompt templates                                   |
+| Instructions | 60+   | `.github/instructions/`           | Behavioral rules loaded by file pattern                     |
+| Skills       | 159+  | `.github/skills/`                 | Domain knowledge loaded on demand                           |
+| Prompts      | 46+   | `.github/prompts/`                | Reusable prompt templates                                   |
 | Agents       | 7     | `.github/agents/`                 | Specialized personas (Builder, Researcher, Validator, etc.) |
-| Muscles      | ~9    | `.github/muscles/`                | Node.js automation scripts                                  |
-| Hooks        | ~18   | `.github/muscles/hooks/`          | Lifecycle triggers (session start, stop, tool use)          |
+| Muscles      | 9+    | `.github/muscles/`                | Node.js automation scripts                                  |
+| Hooks        | 17    | `.github/muscles/hooks/`          | Lifecycle triggers (session start, stop, tool use)          |
 | Config       | 6+    | `.github/config/`                 | Runtime settings, manifest, user profile                    |
 
 ## Prerequisites

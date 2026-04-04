@@ -1,20 +1,23 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
+    "github/episodic/peripheral/file-observations.json",
     "CHANGELOG.md",
+    "PRIVACY.md",
+    "README.md",
     "ROADMAP.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/commands/upgrade.ts",
-    "platforms/vscode-extension/src/services/extensionLifecycle.ts"
+    "SECURITY.md",
+    "URGENT_PATCH.md",
+    "alex_docs/README.md",
+    "alex_docs/architecture/LOADING-MECHANICS.md",
+    "alex_docs/architecture/TRIFECTA-CATALOG.md"
   ],
   "todoHotspots": [
     {
-      "file": "CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1775317272717
+      "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1775318386161
     }
   ],
-  "lastUpdated": 1775317272717
+  "lastUpdated": 1775318386161
 }

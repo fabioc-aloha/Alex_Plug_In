@@ -299,9 +299,7 @@ Here's your situation as of today (March 24, 2026):
 1. **VT\_AIPOWERBI prep** -- your Thursday meeting with Dr. Venkatesh is 2 days out. If you have materials to prepare, demo content, or deployment updates for `vt.correax.com`, that's time-sensitive.
 2. **Post-release maintenance** -- v6.7.3 is fresh. Good time to:
    * Run a meditation session to consolidate the synapse integrity work
-   * Verify heir sync (VS Code extension heir is at 6.7.3, plugin at 6.7.0 -- may need a sync)
-3. **Backlog items** (no urgency):
-   * Agent Plugin heir is at 6.7.0 vs Master 6.7.3 -- 3 versions behind
+   * Verify heir sync (VS Code extension heir is current)
    * Global Knowledge v2 Phase 1 (auto-capture) is the next architecture evolution
    * 7 deferred hooks remain low-priority
    * 4 blocked items still waiting on VS Code API (reviewed today, no changes)

@@ -267,6 +267,17 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
+### What's New (v7.1.3 -- Install/Upgrade Hardening + H19)
+
+| Category             | Highlights                                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **H19 Hook**         | Live synapse weight updates via PostToolUse hook; buffers activations, flushes +0.05 strength after 10 calls |
+| **Critical Fix**     | Upgrade no longer deletes non-Alex `.github/` content (workflows, templates, FUNDING.yml preserved)          |
+| **Upgrade Rollback** | Failed upgrades auto-rollback from backup instead of leaving workspace broken                                |
+| **Force Repair**     | "Upgrade Architecture" offers repair when already at latest version                                          |
+| **First-Install UX** | Proactive "Initialize Now" notification for new users on first activation                                    |
+| **17 Hooks**         | 17 hooks shipped (11 global + 6 agent-scoped) across all 7 VS Code hook events                               |
+
 ### What's New (v7.1.1 -- Cross-Platform Hardening)
 
 | Category                    | Highlights                                                                                                         |
@@ -318,7 +329,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 
 | Category           | Highlights                                                                                                   |
 | ------------------ | ------------------------------------------------------------------------------------------------------------ |
-| **Hooks**          | 16 agent hooks (hooks.json + muscles/hooks/) — quality gates, safety enforcement, autopilot deny() for H8/H9 |
+| **Hooks**          | 17 agent hooks (hooks.json + muscles/hooks/) — quality gates, safety enforcement, autopilot deny() for H8/H9 |
 | **Skills**         | 40 complete trifectas — proven capabilities across all 3 memory systems                                      |
 | **Agents**         | 7 custom agents with handoff buttons and specialist workflows                                                |
 | **Quality**        | Automated quality gates, NASA-grade audit methodology, pre-publish pipeline                                  |

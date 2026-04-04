@@ -15,15 +15,15 @@ graph TB
         CI[copilot-instructions.md<br/>Main Configuration]
 
         subgraph "instructions/"
-            PROC[Procedural Memory<br/>64 files]
+            PROC[Procedural Memory<br/>60+ files]
         end
 
         subgraph "prompts/"
-            EPIS[Episodic Memory<br/>45 files]
+            EPIS[Episodic Memory<br/>46+ files]
         end
 
         subgraph "skills/"
-            SK[Skills<br/>130 folders]
+            SK[Skills<br/>159+ folders]
         end
 
         subgraph "config/"

@@ -11,18 +11,18 @@
 
 This document adapts NASA's safety-critical coding standards to AI assistant development, addressing both traditional reliability concerns and AI-specific challenges like unbounded context growth, hallucination-prone operations, and human-AI trust calibration.
 
-**Implementation Status**: 8 of 10 rules implemented or adapted (v5.9.10)
+**Implementation Status**: 8 of 10 rules implemented or adapted
 
-| Rule | Status | Implementation |
-|------|--------|----------------|
-| R1: Bounded recursion | ✅ Done | `synapse-core.ts` MAX_RECURSION_DEPTH=10 |
-| R2: Bounded loops | ✅ Done | Iteration limits in file operations |
-| R3: Bounded memory | ✅ Done | Rolling logs, forgetting curve, decay |
-| R4: Short functions | ✅ Done | `handleGeneralQuery` extracted (v5.9.10) |
-| R5: Assertions | ✅ Done | `assertions.ts` utility + production usage (v5.9.10) |
-| R6: Minimal scope | ✅ Done | const/let, block scoping |
-| R7: Check returns | ✅ Done | Explicit `void` for fire-and-forget |
-| R10: Strict compile | ✅ Done | TypeScript strict + additional flags (v5.9.10) |
+| Rule                  | Status | Implementation                                       |
+| --------------------- | ------ | ---------------------------------------------------- |
+| R1: Bounded recursion | ✅ Done | `synapse-core.ts` MAX_RECURSION_DEPTH=10             |
+| R2: Bounded loops     | ✅ Done | Iteration limits in file operations                  |
+| R3: Bounded memory    | ✅ Done | Rolling logs, forgetting curve, decay                |
+| R4: Short functions   | ✅ Done | `handleGeneralQuery` extracted (v5.9.10)             |
+| R5: Assertions        | ✅ Done | `assertions.ts` utility + production usage (v5.9.10) |
+| R6: Minimal scope     | ✅ Done | const/let, block scoping                             |
+| R7: Check returns     | ✅ Done | Explicit `void` for fire-and-forget                  |
+| R10: Strict compile   | ✅ Done | TypeScript strict + additional flags (v5.9.10)       |
 
 ---
 
@@ -51,11 +51,11 @@ NASA's defensive programming philosophy directly addresses these concerns throug
 
 **Applicability to Alex**: ✅ **Implemented (v5.9.10)**
 
-| Aspect | Our Situation |
-|--------|---------------|
-| `goto` | TypeScript doesn't have `goto` — N/A |
-| `setjmp/longjmp` | N/A in JavaScript/TypeScript |
-| **Recursion** | ✅ Bounded in `synapse-core.ts` with `MAX_RECURSION_DEPTH=10` |
+| Aspect           | Our Situation                                                |
+| ---------------- | ------------------------------------------------------------ |
+| `goto`           | TypeScript doesn't have `goto` — N/A                         |
+| `setjmp/longjmp` | N/A in JavaScript/TypeScript                                 |
+| **Recursion**    | ✅ Bounded in `synapse-core.ts` with `MAX_RECURSION_DEPTH=10` |
 
 **Implementation** (synapse-core.ts):
 ```typescript
@@ -94,12 +94,12 @@ const MAX_REFLECTION_DEPTH = 3; // Reflect → Reflect on reflection → Final s
 
 **Implementations**:
 
-| Location | Bound | Purpose |
-|----------|-------|---------|
-| `ttsService.ts` | `MAX_RETRIES = 3` | API retry limit |
-| `ttsService.ts` | `MAX_CHUNK_CHARS = 3000` | Text chunking |
-| `honestUncertainty.ts` | Log size cap | Rolling log bounds |
-| `emotionalMemory.ts` | Session limit | Recent sessions only |
+| Location               | Bound                    | Purpose              |
+| ---------------------- | ------------------------ | -------------------- |
+| `ttsService.ts`        | `MAX_RETRIES = 3`        | API retry limit      |
+| `ttsService.ts`        | `MAX_CHUNK_CHARS = 3000` | Text chunking        |
+| `honestUncertainty.ts` | Log size cap             | Rolling log bounds   |
+| `emotionalMemory.ts`   | Session limit            | Recent sessions only |
 
 **Pattern Applied**:
 ```typescript
@@ -144,12 +144,12 @@ Don't let arrays/maps grow indefinitely — implement decay and caps.
 
 **Implementations**:
 
-| System | Bound | Mechanism |
-|--------|-------|-----------|
-| `feedback-log.json` | 500 entries | Rolling cap with oldest dropped |
-| Emotional memory | Recent sessions | Session count limit |
-| Forgetting Curve (v5.9.6) | Decay function | Memory strength decays over time |
-| Honest uncertainty log | Fixed size | Circular buffer behavior |
+| System                    | Bound           | Mechanism                        |
+| ------------------------- | --------------- | -------------------------------- |
+| `feedback-log.json`       | 500 entries     | Rolling cap with oldest dropped  |
+| Emotional memory          | Recent sessions | Session count limit              |
+| Forgetting Curve (v5.9.6) | Decay function  | Memory strength decays over time |
+| Honest uncertainty log    | Fixed size      | Circular buffer behavior         |
 
 **AI Extension — Context Window Management**:
 AI systems accumulate context that can exceed model limits:
@@ -182,11 +182,11 @@ function applyForgettingCurve(memory: MemoryEntry): number {
 
 **Refactoring Completed**:
 
-| File | Function | Before | After | Status |
-|------|----------|--------|-------|--------|
-| `participant.ts` | `handleGeneralQuery()` | ~200 lines | ~60 lines | ✅ Done |
-| `participant.ts` | `detectPersona()` | ~150 lines | ~50 lines | ✅ Done |
-| `synapse-core.ts` | Helper extraction | — | Multiple focused functions | ✅ Done |
+| File              | Function               | Before     | After                      | Status |
+| ----------------- | ---------------------- | ---------- | -------------------------- | ------ |
+| `participant.ts`  | `handleGeneralQuery()` | ~200 lines | ~60 lines                  | ✅ Done |
+| `participant.ts`  | `detectPersona()`      | ~150 lines | ~50 lines                  | ✅ Done |
+| `synapse-core.ts` | Helper extraction      | —          | Multiple focused functions | ✅ Done |
 
 **Extracted Helper Functions** (participant.ts):
 ```typescript
@@ -220,10 +220,10 @@ function buildSystemPrompt(): string {
 ```
 
 **Remaining Work**:
-| File | Function | Lines | Priority |
-|------|----------|-------|----------|
-| `extension.ts` | `activate()` | ~3000+ | Medium (command registration) |
-| `welcomeView.ts` | `_getHtmlForWebview()` | ~800+ | Low (HTML template) |
+| File             | Function               | Lines  | Priority                      |
+| ---------------- | ---------------------- | ------ | ----------------------------- |
+| `extension.ts`   | `activate()`           | ~3000+ | Medium (command registration) |
+| `welcomeView.ts` | `_getHtmlForWebview()` | ~800+  | Low (HTML template)           |
 
 **Value**: 🟢 High — Improved readability, testability, and reduced cognitive load.
 
@@ -237,11 +237,11 @@ function buildSystemPrompt(): string {
 
 **Current State**:
 
-| Location | Assertion Type | Status |
-|----------|---------------|--------|
-| Test files (*.test.ts) | `assert.*`, `expect()` | ✅ Present |
-| Production code | Precondition checks | ✅ Via if/throw |
-| Production code | Formal assertions | ✅ Via `assertions.ts` |
+| Location               | Assertion Type         | Status                |
+| ---------------------- | ---------------------- | --------------------- |
+| Test files (*.test.ts) | `assert.*`, `expect()` | ✅ Present             |
+| Production code        | Precondition checks    | ✅ Via if/throw        |
+| Production code        | Formal assertions      | ✅ Via `assertions.ts` |
 
 **Assertions Found in Tests**:
 ```typescript
@@ -274,15 +274,15 @@ export function assertPromptInvariants(ctx: PromptContext): void { ... }
 ```
 
 **Assertions in Production Code**:
-| File | Function | Assertions |
-|------|----------|------------|
-| `synapse-core.ts` | `findMdFilesRecursive` | `assertBounded(maxDepth)` |
-| `synapse-core.ts` | `findMemoryFiles` | `assertDefined`, `assertAbsolutePath` |
-| `synapse-core.ts` | `repairSynapse` | 3x `assertDefined` |
-| `synapse-core.ts` | `runDreamCore` | `assertDefined`, `assertAbsolutePath` |
-| `participant.ts` | `handleGeneralQuery` | 3x `assertDefined` |
-| `tools.ts` | `SynapseHealthTool.invoke` | 2x `assertDefined` |
-| `personaDetection.ts` | `detectAndUpdateProjectPersona` | `assertDefined`, `assertNonEmpty` |
+| File                  | Function                        | Assertions                            |
+| --------------------- | ------------------------------- | ------------------------------------- |
+| `synapse-core.ts`     | `findMdFilesRecursive`          | `assertBounded(maxDepth)`             |
+| `synapse-core.ts`     | `findMemoryFiles`               | `assertDefined`, `assertAbsolutePath` |
+| `synapse-core.ts`     | `repairSynapse`                 | 3x `assertDefined`                    |
+| `synapse-core.ts`     | `runDreamCore`                  | `assertDefined`, `assertAbsolutePath` |
+| `participant.ts`      | `handleGeneralQuery`            | 3x `assertDefined`                    |
+| `tools.ts`            | `SynapseHealthTool.invoke`      | 2x `assertDefined`                    |
+| `personaDetection.ts` | `detectAndUpdateProjectPersona` | `assertDefined`, `assertNonEmpty`     |
 
 **AI Extension — Prompt Invariants**:
 ```typescript
@@ -307,13 +307,13 @@ function buildPrompt(context: PromptContext): string {
 **Applicability to Alex**: ✅ **Implemented**
 
 **Verification**:
-| Practice | Status | Evidence |
-|----------|--------|----------|
-| `const` by default | ✅ | ESLint `prefer-const` enabled |
-| `let` only when needed | ✅ | Code review standard |
-| `var` prohibited | ✅ | ESLint `no-var` rule |
-| Module singletons minimized | ✅ | Only `currentPanel`, `outputChannel` |
-| Block scoping | ✅ | TypeScript enforced |
+| Practice                    | Status | Evidence                             |
+| --------------------------- | ------ | ------------------------------------ |
+| `const` by default          | ✅      | ESLint `prefer-const` enabled        |
+| `let` only when needed      | ✅      | Code review standard                 |
+| `var` prohibited            | ✅      | ESLint `no-var` rule                 |
+| Module singletons minimized | ✅      | Only `currentPanel`, `outputChannel` |
+| Block scoping               | ✅      | TypeScript enforced                  |
 
 **AI Extension — Context Isolation**:
 AI systems must isolate context between sessions:
@@ -344,12 +344,12 @@ async function handleRequest(request: ChatRequest) {
 
 **Implementation Status**:
 
-| Practice | Status | Evidence |
-|----------|--------|----------|
-| Explicit `void` for fire-and-forget | ✅ | Telemetry, logging |
-| Try/catch for async operations | ✅ | All file I/O wrapped |
-| ESLint no-floating-promises | ✅ | Enabled |
-| Error boundaries for UI | ✅ | `try/catch` in webview handlers |
+| Practice                            | Status | Evidence                        |
+| ----------------------------------- | ------ | ------------------------------- |
+| Explicit `void` for fire-and-forget | ✅      | Telemetry, logging              |
+| Try/catch for async operations      | ✅      | All file I/O wrapped            |
+| ESLint no-floating-promises         | ✅      | Enabled                         |
+| Error boundaries for UI             | ✅      | `try/catch` in webview handlers |
 
 **Pattern Used**:
 ```typescript
@@ -410,12 +410,12 @@ async function queryModel(prompt: string): Promise<Response> {
 
 **Implementation**:
 
-| Technique | Status | Purpose |
-|-----------|--------|---------|
-| Optional chaining (`?.`) | ✅ | Null safety |
-| Nullish coalescing (`??`) | ✅ | Default values |
-| Early extraction | ✅ | Reduce chain depth |
-| Destructuring | ✅ | Name intermediate values |
+| Technique                 | Status | Purpose                  |
+| ------------------------- | ------ | ------------------------ |
+| Optional chaining (`?.`)  | ✅      | Null safety              |
+| Nullish coalescing (`??`) | ✅      | Default values           |
+| Early extraction          | ✅      | Reduce chain depth       |
+| Destructuring             | ✅      | Name intermediate values |
 
 **Pattern**:
 ```typescript
@@ -475,16 +475,16 @@ function extractContent(response: ModelResponse): string {
 
 **Implementation Status**:
 
-| Compiler Flag | Status | Notes |
-|--------------|--------|-------|
-| `strict` | ✅ Enabled | Master strict flag |
-| `noEmit` | ✅ Enabled | Type-check without output |
-| `noImplicitAny` | ✅ (via strict) | No implicit any types |
-| `strictNullChecks` | ✅ (via strict) | Null safety |
-| `noImplicitReturns` | ✅ Enabled | v5.9.10 |
-| `noFallthroughCasesInSwitch` | ✅ Enabled | v5.9.10 |
-| `noUnusedLocals` | 🔄 Deferred | v6.0 (252 existing warnings) |
-| `noUnusedParameters` | 🔄 Deferred | v6.0 (requires API changes) |
+| Compiler Flag                | Status         | Notes                        |
+| ---------------------------- | -------------- | ---------------------------- |
+| `strict`                     | ✅ Enabled      | Master strict flag           |
+| `noEmit`                     | ✅ Enabled      | Type-check without output    |
+| `noImplicitAny`              | ✅ (via strict) | No implicit any types        |
+| `strictNullChecks`           | ✅ (via strict) | Null safety                  |
+| `noImplicitReturns`          | ✅ Enabled      | v5.9.10                      |
+| `noFallthroughCasesInSwitch` | ✅ Enabled      | v5.9.10                      |
+| `noUnusedLocals`             | 🔄 Deferred     | v6.0 (252 existing warnings) |
+| `noUnusedParameters`         | 🔄 Deferred     | v6.0 (requires API changes)  |
 
 **Current Configuration** (v5.9.10):
 ```json
@@ -529,18 +529,18 @@ interface ModelChoice {
 
 ## Summary: Implementation Status Matrix
 
-| Rule | NASA Intent | Alex Adaptation | Status | Version |
-|------|-------------|-----------------|--------|---------|
-| **R1** | No complex flow | Bounded recursion | ✅ Implemented | v5.9.6 |
-| **R2** | Bounded loops | Iteration limits | ✅ Implemented | v5.9.6 |
-| **R3** | No dynamic alloc | Context window mgmt | ✅ Adapted | v5.9.6 |
-| **R4** | Short functions | Function extraction | ✅ Implemented | v5.9.10 |
-| **R5** | Liberal assertions | `assertions.ts` utility | ✅ Implemented | v5.9.10 |
-| **R6** | Minimal scope | const/let + ESLint | ✅ Implemented | v5.0.0 |
-| **R7** | Check returns | Explicit void pattern | ✅ Implemented | v5.8.0 |
-| **R8** | Limited preprocessor | — | ❌ N/A | — |
-| **R9** | Limited pointer depth | Safe navigation | ✅ Implemented | v5.0.0 |
-| **R10** | Strict compilation | TypeScript strict + flags | ✅ Enhanced | v5.9.10 |
+| Rule    | NASA Intent           | Alex Adaptation           | Status        | Version |
+| ------- | --------------------- | ------------------------- | ------------- | ------- |
+| **R1**  | No complex flow       | Bounded recursion         | ✅ Implemented | v5.9.6  |
+| **R2**  | Bounded loops         | Iteration limits          | ✅ Implemented | v5.9.6  |
+| **R3**  | No dynamic alloc      | Context window mgmt       | ✅ Adapted     | v5.9.6  |
+| **R4**  | Short functions       | Function extraction       | ✅ Implemented | v5.9.10 |
+| **R5**  | Liberal assertions    | `assertions.ts` utility   | ✅ Implemented | v5.9.10 |
+| **R6**  | Minimal scope         | const/let + ESLint        | ✅ Implemented | v5.0.0  |
+| **R7**  | Check returns         | Explicit void pattern     | ✅ Implemented | v5.8.0  |
+| **R8**  | Limited preprocessor  | —                         | ❌ N/A         | —       |
+| **R9**  | Limited pointer depth | Safe navigation           | ✅ Implemented | v5.0.0  |
+| **R10** | Strict compilation    | TypeScript strict + flags | ✅ Enhanced    | v5.9.10 |
 
 **Score: 8/10 Rules Fully Implemented** (9/10 including N/A)
 
@@ -578,16 +578,16 @@ interface ModelChoice {
 
 This analysis extends NASA's safety-critical rules with AI-specific adaptations:
 
-| AI Extension | Related Rule | Purpose |
-|--------------|--------------|---------|
-| Bounded Self-Reflection | R1 | Prevent recursive self-analysis loops |
-| Context Window Management | R3 | Memory pruning via forgetting curve |
-| Prompt Template Decomposition | R4 | Composable prompt layers |
-| Prompt Invariants | R5 | Assert safety guardrails present |
-| Conversation Depth Limits | R2 | Cap tool call chains |
-| Model Response Validation | R7 | Check even "successful" responses |
-| Safe Model Response Access | R9 | Handle unpredictable AI responses |
-| Type-Safe Model Interfaces | R10 | Strict typing for AI contracts |
+| AI Extension                  | Related Rule | Purpose                               |
+| ----------------------------- | ------------ | ------------------------------------- |
+| Bounded Self-Reflection       | R1           | Prevent recursive self-analysis loops |
+| Context Window Management     | R3           | Memory pruning via forgetting curve   |
+| Prompt Template Decomposition | R4           | Composable prompt layers              |
+| Prompt Invariants             | R5           | Assert safety guardrails present      |
+| Conversation Depth Limits     | R2           | Cap tool call chains                  |
+| Model Response Validation     | R7           | Check even "successful" responses     |
+| Safe Model Response Access    | R9           | Handle unpredictable AI responses     |
+| Type-Safe Model Interfaces    | R10          | Strict typing for AI contracts        |
 
 ---
 
@@ -606,13 +606,13 @@ AI systems face unique failure modes that NASA's rules help prevent:
 
 ### Implementation Journey
 
-| Version | NASA Rules Added | Key Changes |
-|---------|-----------------|-------------|
-| v5.0.0 | R6, R9, R10 | TypeScript strict mode foundation |
-| v5.8.0 | R7 | Explicit void pattern |
-| v5.9.6 | R1, R2, R3 | Bounded operations, forgetting curve |
-| v5.9.10 | R4 | Function extraction (handleGeneralQuery) |
-| v6.0 (planned) | R5 | Production assertions |
+| Version        | NASA Rules Added | Key Changes                              |
+| -------------- | ---------------- | ---------------------------------------- |
+| v5.0.0         | R6, R9, R10      | TypeScript strict mode foundation        |
+| v5.8.0         | R7               | Explicit void pattern                    |
+| v5.9.6         | R1, R2, R3       | Bounded operations, forgetting curve     |
+| v5.9.10        | R4               | Function extraction (handleGeneralQuery) |
+| v6.0 (planned) | R5               | Production assertions                    |
 
 ### Key Insight
 

@@ -4,9 +4,9 @@
 
 | Version | Supported             |
 | ------- | --------------------- |
-| 6.x.x   | ✅ Actively supported  |
-| 5.x.x   | ⚠️ Security fixes only |
-| < 5.0   | ❌ No longer supported |
+| 7.x.x   | ✅ Actively supported  |
+| 6.x.x   | ⚠️ Security fixes only |
+| < 6.0   | ❌ No longer supported |
 
 ## Reporting a Vulnerability
 
@@ -104,32 +104,32 @@ VS Code's Autopilot mode (`chat.autopilot.enabled`) allows the agent to execute 
 
 ### Safety Hooks Active in Autopilot
 
-| Hook | Event | Protection |
-| --- | --- | --- |
-| `pre-tool-use.cjs` | PreToolUse | I3/I4: Blocks Initialize/Reset on Master Alex (exit 2) |
-| `pre-tool-use.cjs` | PreToolUse | H8: Denies heir contamination (writing master files from heir workspace) |
-| `pre-tool-use.cjs` | PreToolUse | H9: Denies I8 violations (architecture depending on extension) |
-| `prompt-safety-gate.cjs` | UserPromptSubmit | Scans prompts for embedded secrets and I1 violations |
+| Hook                     | Event            | Protection                                                               |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------ |
+| `pre-tool-use.cjs`       | PreToolUse       | I3/I4: Blocks Initialize/Reset on Master Alex (exit 2)                   |
+| `pre-tool-use.cjs`       | PreToolUse       | H8: Denies heir contamination (writing master files from heir workspace) |
+| `pre-tool-use.cjs`       | PreToolUse       | H9: Denies I8 violations (architecture depending on extension)           |
+| `prompt-safety-gate.cjs` | UserPromptSubmit | Scans prompts for embedded secrets and I1 violations                     |
 
 All safety hooks use `decision: "deny"` (not warn) — they block the action even when the user is not present to confirm.
 
 ### Recommended Autopilot Workflows
 
-| Workflow | Why It's Safe | Example |
-| --- | --- | --- |
-| Dream / Neural Maintenance | Read-only analysis + write to session files | `@alex /dream` |
-| Meditation | Knowledge consolidation in memory files | `@alex /meditate` |
-| Brain QA | Read-only architecture health check | `@alex /brainqa` |
-| Routine maintenance | Sync, reindex, validate | `@alex reindex skills` |
+| Workflow                   | Why It's Safe                               | Example                |
+| -------------------------- | ------------------------------------------- | ---------------------- |
+| Dream / Neural Maintenance | Read-only analysis + write to session files | `@alex /dream`         |
+| Meditation                 | Knowledge consolidation in memory files     | `@alex /meditate`      |
+| Brain QA                   | Read-only architecture health check         | `@alex /brainqa`       |
+| Routine maintenance        | Sync, reindex, validate                     | `@alex reindex skills` |
 
 ### Workflows That Require Supervision
 
-| Workflow | Risk | Mitigation |
-| --- | --- | --- |
-| Code generation / refactoring | May introduce bugs | Review diffs before committing |
-| File deletion / restructuring | Data loss | Commit before starting; review changes |
-| Publishing / releasing | Public impact | Never run `vsce publish` in Autopilot |
-| Infrastructure changes | External systems | Always require human approval |
+| Workflow                      | Risk               | Mitigation                             |
+| ----------------------------- | ------------------ | -------------------------------------- |
+| Code generation / refactoring | May introduce bugs | Review diffs before committing         |
+| File deletion / restructuring | Data loss          | Commit before starting; review changes |
+| Publishing / releasing        | Public impact      | Never run `vsce publish` in Autopilot  |
+| Infrastructure changes        | External systems   | Always require human approval          |
 
 ### Disabling Autopilot
 

@@ -1,7 +1,7 @@
 # Agent vs @alex Chat Mode: Feature Comparison
 
-**Last Updated**: March 9, 2026
-**Version**: 6.4.0
+**Last Updated**: April 4, 2026
+**Version**: 7.1.3
 
 ## Overview
 
