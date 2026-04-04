@@ -185,8 +185,10 @@ if ((Test-Path $readmePath) -and (Test-Path $masterSkillsPath)) {
 
 # 2. Build Check
 Write-Host "`n2. Checking build..." -ForegroundColor Yellow
+$prevEAP = $ErrorActionPreference; $ErrorActionPreference = "Continue"
 $buildOutput = npm run compile 2>&1
 $buildExitCode = $LASTEXITCODE
+$ErrorActionPreference = $prevEAP
 if ($buildExitCode -ne 0) {
     $errors += "Build failed"
     Write-Host "   [ERROR] Build failed" -ForegroundColor Red
@@ -197,8 +199,10 @@ else {
 
 # 3. Lint Check
 Write-Host "`n3. Checking lint..." -ForegroundColor Yellow
+$prevEAP = $ErrorActionPreference; $ErrorActionPreference = "Continue"
 $lintOutput = npm run lint 2>&1
 $lintExitCode = $LASTEXITCODE
+$ErrorActionPreference = $prevEAP
 if ($lintExitCode -ne 0) {
     $errors += "Lint errors found"
     Write-Host "   [ERROR] Lint errors" -ForegroundColor Red
@@ -210,8 +214,10 @@ else {
 # 4. Test Check
 if (-not $SkipTests) {
     Write-Host "`n4. Running tests..." -ForegroundColor Yellow
+    $prevEAP = $ErrorActionPreference; $ErrorActionPreference = "Continue"
     $testOutput = npm test 2>&1
     $testExitCode = $LASTEXITCODE
+    $ErrorActionPreference = $prevEAP
     if ($testExitCode -ne 0) {
         $errors += "Tests failed"
         Write-Host "   [ERROR] Tests failed" -ForegroundColor Red
