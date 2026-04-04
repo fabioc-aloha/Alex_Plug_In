@@ -1,16 +1,15 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "ROADMAP.md",
+    "github/episodic/peripheral/file-observations.json",
     "alex_docs/research/USER-FRICTION-INVENTORY.md"
   ],
   "todoHotspots": [
     {
       "file": "alex_docs/research/USER-FRICTION-INVENTORY.md",
       "todoCount": 3,
-      "scannedAt": 1775263505323
+      "scannedAt": 1775264586132
     }
   ],
-  "lastUpdated": 1775263505323
+  "lastUpdated": 1775264586132
 }

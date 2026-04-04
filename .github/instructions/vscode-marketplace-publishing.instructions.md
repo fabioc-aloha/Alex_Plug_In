@@ -6,7 +6,6 @@ applyTo: "**/*.vsix,**/*publish*,**/vsce*"
 
 # VS Code Marketplace Publishing Protocol
 
-
 ---
 
 ## Synapses
@@ -20,25 +19,28 @@ applyTo: "**/*.vsix,**/*publish*,**/vsce*"
 
 ## Marketplace Constraints (Non-Negotiable)
 
-| Constraint | Requirement | Validation |
-|------------|-------------|------------|
-| **Image Format** | PNG only for all images in README | SVG rejected during packaging |
-| **Inline HTML** | Not supported in headings | Use emojis or text only in titles |
-| **Banner Image** | Must be PNG, recommended 1280x640 | Referenced in package.json icon/banner |
-| **File Size** | Package should be < 50 MB | Check .vscodeignore for exclusions |
+| Constraint         | Requirement                       | Validation                             |
+| ------------------ | --------------------------------- | -------------------------------------- |
+| **Image Format**   | PNG only for all images in README | SVG rejected during packaging          |
+| **Inline HTML**    | Not supported in headings         | Use emojis or text only in titles      |
+| **Banner Image**   | Must be PNG, recommended 1280x640 | Referenced in package.json icon/banner |
+| **File Size**      | Package should be < 50 MB         | Check .vscodeignore for exclusions     |
 | **Authentication** | PAT token required for publishing | Manage at marketplace.visualstudio.com |
 
 **Icon Rules**:
+
 - Must be 128x128 pixels, PNG format
 - Located at `assets/icon.png` (or as declared in `icon` field)
 - Must be included in package (not in .vscodeignore)
 
 **Pre-Release Channel Convention**:
+
 - Stable uses even minor (`0.2.0`, `0.4.0`)
 - Pre-release uses odd minor (`0.1.0`, `0.3.0`)
 - Use `npx vsce publish --pre-release` flag regardless of version number
 
 **Common Failures**:
+
 ```
 ERROR: "SVGs are restricted in README.md; please use other file image formats, such as PNG"
 → Solution: Convert all README images to PNG before packaging
@@ -79,9 +81,11 @@ ERROR: "Failed request: (401)"
 ### Phase 2: Build & Package
 
 1. **Compile TypeScript**
+
    ```bash
    npm run compile
    ```
+
    - Runs esbuild for production bundle (dist/)
    - Runs tsc for type checking (no emit)
    - Validates no compilation errors
@@ -90,12 +94,14 @@ ERROR: "Failed request: (401)"
    ```bash
    npx @vscode/vsce package
    ```
+
    - Creates `.vsix` file (e.g., `alex-cognitive-architecture-5.7.1.vsix`)
    - Runs architecture sync (Master → Heir)
    - Reports package size and file count
    - May fail on marketplace constraints (SVG, file size)
 
 **Expected Output**:
+
 ```
 DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ```
@@ -103,9 +109,11 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ### Phase 3: Pre-Publish Validation
 
 1. **Test Installation Locally**
+
    ```bash
    code --install-extension alex-cognitive-architecture-5.7.1.vsix
    ```
+
    - Verify extension loads without errors
    - Test key commands (Initialize, Dream, Self-Actualization)
    - Check extension view renders correctly
@@ -119,9 +127,11 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ### Phase 4: Publish to Marketplace
 
 1. **Publish Command**
+
    ```bash
    npx @vscode/vsce publish -p <PERSONAL_ACCESS_TOKEN>
    ```
+
    - Requires valid PAT from https://marketplace.visualstudio.com
    - PAT needs `Marketplace (Manage)` scope
    - Token expires - manage at publisher portal
@@ -139,10 +149,12 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
 ### Phase 5: Post-Publish Documentation
 
 1. **Create GitHub Release**
+
    ```bash
    git tag v5.7.1
    git push origin v5.7.1
    ```
+
    - Create release on GitHub with CHANGELOG excerpt
    - Attach `.vsix` file to release for offline installation
 
@@ -174,17 +186,21 @@ DONE  Packaged: alex-cognitive-architecture-5.7.1.vsix (9.45 MB, 431 files)
    ```
 
 **Common Failure: 401 Unauthorized**
+
 ```
 ERROR  Failed request: (401)
 ```
+
 → **Solution**: Your PAT expired, is invalid, was created in the wrong Azure DevOps organization, or is missing `Marketplace (Manage)`. Create a fresh token in the publisher's Azure DevOps org or use `All accessible organizations`, then retry.
 
 **Important nuance**:
+
 - A PAT can appear valid for login checks and still fail `vsce publish` with 401.
 - The publisher is tied to a specific Azure DevOps organization, so organization mismatch is a real failure mode.
 - Treat 401 as: token expired OR wrong org OR missing Marketplace scope, not just "bad token".
 
-**Security Note**: 
+**Security Note**:
+
 - Never commit PAT token to repository
 - Tokens are single-use secrets, create fresh for each session
 - If publish succeeds, token is valid; if 401, token expired/invalid
@@ -212,6 +228,7 @@ During `vsce package`, automatic sync runs:
    - File structure: Proper directory organization
 
 **Expected Sync Output** (counts will vary):
+
 ```
 Copying N inheritable skills to heir...
 Cleaned X synapses with no valid targets
@@ -229,15 +246,20 @@ Applied Y heir transformations
 **Error**: "SVGs are restricted in README.md; please use other file image formats, such as PNG"
 
 **Solution**:
+
 1. Convert SVG banner to PNG: `assets/banner.svg` → `assets/banner.png`
 2. Update `platforms/vscode-extension/README.md`:
+
    ```markdown
    <!-- Before -->
+
    ![Alex Banner](../../assets/banner.svg)
-   
+
    <!-- After -->
+
    ![Alex Banner](../../assets/banner.png)
    ```
+
 3. Re-run `vsce package`
 
 ### Authentication Failure
@@ -245,6 +267,7 @@ Applied Y heir transformations
 **Error**: "Failed request: (401)"
 
 **Solution**:
+
 1. Verify PAT token is valid at marketplace.visualstudio.com
 2. Check token has `Marketplace (Manage)` scope
 3. Use explicit `-p` flag: `vsce publish -p <TOKEN>`
@@ -255,6 +278,7 @@ Applied Y heir transformations
 **Error**: Package exceeds 50 MB limit
 
 **Solution**:
+
 1. Review `.vscodeignore` to exclude unnecessary files
 2. Add to `.vscodeignore`:
    ```
@@ -271,6 +295,7 @@ Applied Y heir transformations
 **Issue**: Images don't render on marketplace page
 
 **Solution**:
+
 1. Ensure all images are PNG format
 2. Use relative paths from extension root: `assets/icon.png`
 3. Avoid inline HTML - marketplace strips most HTML tags
@@ -290,6 +315,7 @@ Applied Y heir transformations
 ## .vscodeignore Template
 
 Expected exclusions:
+
 ```
 .vscode/**
 .vscode-test/**
@@ -322,12 +348,8 @@ npx vsce unpublish publisher.extension-name@0.0.1
 npx vsce unpublish publisher.extension-name
 ```
 
-**Prefer deprecating over unpublishing** — existing users lose the extension if you unpublish.
-5. **Version everything together** - package.json, READMEs, CHANGELOG in one commit
-6. **Test installation** from marketplace after publish to verify propagation
-7. **Document in CHANGELOG** - users rely on clear release notes
-8. **Tag releases in Git** - enables rollback and version history
+**Prefer deprecating over unpublishing** — existing users lose the extension if you unpublish. 5. **Version everything together** - package.json, READMEs, CHANGELOG in one commit 6. **Test installation** from marketplace after publish to verify propagation 7. **Document in CHANGELOG** - users rely on clear release notes 8. **Tag releases in Git** - enables rollback and version history
 
 ---
 
-*Marketplace publishing procedural memory — learned from v5.7.1 production deployment on 2026-02-15*
+_Marketplace publishing procedural memory — learned from v5.7.1 production deployment on 2026-02-15_
