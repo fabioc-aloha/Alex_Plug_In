@@ -1,36 +1,34 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/alex_docs/guides/SKILL-DISCIPLINE-MAP.md",
-    "platforms/vscode-extension/package.json"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1775266102875
+      "scannedAt": 1775266909806
     },
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1775266102875
+      "scannedAt": 1775266909806
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1775266102875
+      "scannedAt": 1775266909806
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1775266102875
+      "scannedAt": 1775266909806
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1775266102875
+      "scannedAt": 1775266909806
     }
   ],
-  "lastUpdated": 1775266102875
+  "lastUpdated": 1775266909806
 }
