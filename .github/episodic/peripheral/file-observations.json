@@ -1,8 +1,13 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/MODEL-TOOL-MATRIX.md",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/src/chat/tools/index.ts",
+    "platforms/vscode-extension/src/chat/tools/types.ts",
+    "platforms/vscode-extension/src/chat/tools/crossDomainSynthesisTool.ts"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1775261096022
+  "lastUpdated": 1775262361059
 }

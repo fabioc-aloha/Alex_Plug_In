@@ -9,11 +9,11 @@
 
 Models are classified into three operational tiers based on reasoning depth and context window.
 
-| Tier | Models | Capabilities |
-| --- | --- | --- |
-| **Frontier** | `claude.*opus`, `claude-opus`, `gpt-5.[23]`, `o1-preview`, `o1-pro`, `o3(?!.*mini)` | Deep reasoning, 1M+ context, extended thinking |
-| **Capable** | `claude.*sonnet`, `claude-sonnet`, `gpt-5.1`, `gpt-5-codex`, `gpt-5(?![.-])`, `gpt-4.1(?!.*mini|.*nano)`, `gpt-4o(?!.*mini)`, `gpt-4-turbo`, `gemini.*3.*pro`, `gemini.*2.5.*pro`, `gemini-pro`, `o4-mini`, `o1-mini` | Good reasoning, 200K-400K context |
-| **Efficient** | `claude.*haiku`, `claude-haiku`, `gpt-5.*mini`, `gpt-4.1.*mini`, `gpt-4.1.*nano`, `gpt-4o.*mini`, `gpt-4-mini`, `gemini.*flash`, `gpt-3.5` | Fast, cost-effective, limited reasoning |
+| Tier          | Models                                                                                                                                     | Capabilities                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **Frontier**  | `claude.*opus`, `claude-opus`, `gpt-5.[23]`, `o1-preview`, `o1-pro`, `o3(?!.*mini)`                                                        | Deep reasoning, 1M+ context, extended thinking                                                                        |
+| **Capable**   | `claude.*sonnet`, `claude-sonnet`, `gpt-5.1`, `gpt-5-codex`, `gpt-5(?![.-])`, `gpt-4.1(?!.*mini                                            | .*nano)`, `gpt-4o(?!.*mini)`, `gpt-4-turbo`, `gemini.*3.*pro`, `gemini.*2.5.*pro`, `gemini-pro`, `o4-mini`, `o1-mini` | Good reasoning, 200K-400K context |
+| **Efficient** | `claude.*haiku`, `claude-haiku`, `gpt-5.*mini`, `gpt-4.1.*mini`, `gpt-4.1.*nano`, `gpt-4o.*mini`, `gpt-4-mini`, `gemini.*flash`, `gpt-3.5` | Fast, cost-effective, limited reasoning                                                                               |
 
 ---
 
@@ -21,19 +21,19 @@ Models are classified into three operational tiers based on reasoning depth and 
 
 Each cognitive task has a minimum model tier for reliable results.
 
-| Task | Minimum Tier | Description |
-| --- | --- | --- |
-| Meditation/Consolidation | 🧠 frontier | Deep memory consolidation and knowledge synthesis |
-| Self-Actualization | 🧠 frontier | Comprehensive architecture assessment |
-| Architecture Refactoring | 🧠 frontier | Multi-file structural changes |
-| Bootstrap Learning | 🧠 frontier | Acquiring new skills and domain knowledge |
-| Skill Selection Optimization | 🤖 capable | Proactive resource planning |
-| Dream/Neural Maintenance | 🤖 capable | Synapse validation and repair |
-| Code Review | 🤖 capable | Analyzing and reviewing code |
-| Debugging | 🤖 capable | Finding and fixing bugs |
-| Simple Edits | ⚡ efficient | Formatting, renaming, small changes |
-| Documentation | ⚡ efficient | Writing and updating docs |
-| Information Lookup | ⚡ efficient | Searching and retrieving information |
+| Task                         | Minimum Tier | Description                                       |
+| ---------------------------- | ------------ | ------------------------------------------------- |
+| Meditation/Consolidation     | 🧠 frontier   | Deep memory consolidation and knowledge synthesis |
+| Self-Actualization           | 🧠 frontier   | Comprehensive architecture assessment             |
+| Architecture Refactoring     | 🧠 frontier   | Multi-file structural changes                     |
+| Bootstrap Learning           | 🧠 frontier   | Acquiring new skills and domain knowledge         |
+| Skill Selection Optimization | 🤖 capable    | Proactive resource planning                       |
+| Dream/Neural Maintenance     | 🤖 capable    | Synapse validation and repair                     |
+| Code Review                  | 🤖 capable    | Analyzing and reviewing code                      |
+| Debugging                    | 🤖 capable    | Finding and fixing bugs                           |
+| Simple Edits                 | ⚡ efficient  | Formatting, renaming, small changes               |
+| Documentation                | ⚡ efficient  | Writing and updating docs                         |
+| Information Lookup           | ⚡ efficient  | Searching and retrieving information              |
 
 ---
 
@@ -41,23 +41,23 @@ Each cognitive task has a minimum model tier for reliable results.
 
 Commands require specific cognitive levels (1=Minimum, 2=Basic, 3=Recommended, 4=Advanced).
 
-| Command | Feature | Level | Description |
-| --- | --- | --- | --- |
-| `alex.meditate` | Meditation | 💬 L2 | Knowledge consolidation through conversation |
-| `alex.northStar` | North Star | 💬 L2 | Vision definition and alignment |
-| `alex.workingWithAlex` | Working With Alex | 💬 L2 | Partnership guide conversation |
-| `alex.askAboutSelection` | Ask About Selection | 💬 L2 | Ask Alex about selected code |
-| `alex.dream` | Dream Protocol | 🤖 L3 | Neural maintenance with synapse healing |
-| `alex.codeReview` | Code Review | 🤖 L3 | Systematic code analysis with tool access |
-| `alex.debugThis` | Debug This | 🤖 L3 | Root cause analysis with file access |
-| `alex.rubberDuck` | Rubber Duck Debugging | 🤖 L3 | Interactive debugging conversation |
-| `alex.generateTests` | Generate Tests | 🤖 L3 | AI-powered test generation |
-| `alex.runAudit` | Project Audit | 🤖 L3 | Comprehensive project health analysis |
-| `alex.releasePreflight` | Release Preflight | 🤖 L3 | Pre-release validation checks |
-| `alex.reviewPR` | Review Pull Request | 🤖 L3 | Pull request analysis |
-| `alex.inheritSkillFromGlobal` | Inherit Skill from Global Knowledge | 🤖 L3 | Import a reusable skill from the cross-project knowledge base |
-| `alex.proposeSkillToGlobal` | Promote Skill to Global Knowledge | 🤖 L3 | Share a project skill with the cross-project knowledge base |
-| `alex.selfActualize` | Self-Actualization | 🧠 L4 | Deep architecture assessment requiring frontier reasoning |
+| Command                       | Feature                             | Level | Description                                                   |
+| ----------------------------- | ----------------------------------- | ----- | ------------------------------------------------------------- |
+| `alex.meditate`               | Meditation                          | 💬 L2  | Knowledge consolidation through conversation                  |
+| `alex.northStar`              | North Star                          | 💬 L2  | Vision definition and alignment                               |
+| `alex.workingWithAlex`        | Working With Alex                   | 💬 L2  | Partnership guide conversation                                |
+| `alex.askAboutSelection`      | Ask About Selection                 | 💬 L2  | Ask Alex about selected code                                  |
+| `alex.dream`                  | Dream Protocol                      | 🤖 L3  | Neural maintenance with synapse healing                       |
+| `alex.codeReview`             | Code Review                         | 🤖 L3  | Systematic code analysis with tool access                     |
+| `alex.debugThis`              | Debug This                          | 🤖 L3  | Root cause analysis with file access                          |
+| `alex.rubberDuck`             | Rubber Duck Debugging               | 🤖 L3  | Interactive debugging conversation                            |
+| `alex.generateTests`          | Generate Tests                      | 🤖 L3  | AI-powered test generation                                    |
+| `alex.runAudit`               | Project Audit                       | 🤖 L3  | Comprehensive project health analysis                         |
+| `alex.releasePreflight`       | Release Preflight                   | 🤖 L3  | Pre-release validation checks                                 |
+| `alex.reviewPR`               | Review Pull Request                 | 🤖 L3  | Pull request analysis                                         |
+| `alex.inheritSkillFromGlobal` | Inherit Skill from Global Knowledge | 🤖 L3  | Import a reusable skill from the cross-project knowledge base |
+| `alex.proposeSkillToGlobal`   | Promote Skill to Global Knowledge   | 🤖 L3  | Share a project skill with the cross-project knowledge base   |
+| `alex.selfActualize`          | Self-Actualization                  | 🧠 L4  | Deep architecture assessment requiring frontier reasoning     |
 
 ---
 
@@ -65,20 +65,21 @@ Commands require specific cognitive levels (1=Minimum, 2=Basic, 3=Recommended, 4
 
 Tools registered via `vscode.lm.registerTool` and available to Copilot agent mode.
 
-| Tool ID | Display Name | Tags | Read-Only |
-| --- | --- | --- | --- |
-| `alex_cognitive_synapse_health` | Alex Synapse Health | cognitive, health, diagnostic | ✅ |
-| `alex_cognitive_memory_search` | Alex Memory Search | cognitive, search, memory | ✅ |
-| `alex_cognitive_architecture_status` | Alex Architecture Status | cognitive, diagnostic | ✅ |
-| `alex_platform_mcp_recommendations` | Alex MCP Recommendations | azure, m365, recommendations | ❌ |
-| `alex_cognitive_user_profile` | Alex User Profile | cognitive, personalization | ❌ |
-| `alex_cognitive_self_actualization` | Alex Self-Actualization | cognitive, health, meditation | ❌ |
-| `alex_knowledge_search` | Alex Global Knowledge Search | knowledge, search, cross-project | ✅ |
-| `alex_knowledge_save_insight` | Alex Save Insight | knowledge, learning | ❌ |
-| `alex_knowledge_promote` | Alex Promote Knowledge | knowledge, curation | ❌ |
-| `alex_knowledge_status` | Alex Global Knowledge Status | knowledge, diagnostic | ✅ |
-| `alex_quality_heir_validation` | Alex Heir Validation | quality, validation, publishing | ❌ |
-| `alex_cognitive_state_update` | Alex Cognitive State | cognitive, avatar, state | ❌ |
+| Tool ID                                 | Display Name                 | Tags                             | Read-Only |
+| --------------------------------------- | ---------------------------- | -------------------------------- | --------- |
+| `alex_cognitive_synapse_health`         | Alex Synapse Health          | cognitive, health, diagnostic    | ✅         |
+| `alex_cognitive_memory_search`          | Alex Memory Search           | cognitive, search, memory        | ✅         |
+| `alex_cognitive_architecture_status`    | Alex Architecture Status     | cognitive, diagnostic            | ✅         |
+| `alex_platform_mcp_recommendations`     | Alex MCP Recommendations     | azure, m365, recommendations     | ❌         |
+| `alex_cognitive_user_profile`           | Alex User Profile            | cognitive, personalization       | ❌         |
+| `alex_cognitive_self_actualization`     | Alex Self-Actualization      | cognitive, health, meditation    | ❌         |
+| `alex_knowledge_search`                 | Alex Global Knowledge Search | knowledge, search, cross-project | ✅         |
+| `alex_knowledge_save_insight`           | Alex Save Insight            | knowledge, learning              | ❌         |
+| `alex_knowledge_promote`                | Alex Promote Knowledge       | knowledge, curation              | ❌         |
+| `alex_knowledge_status`                 | Alex Global Knowledge Status | knowledge, diagnostic            | ✅         |
+| `alex_quality_heir_validation`          | Alex Heir Validation         | quality, validation, publishing  | ❌         |
+| `alex_cognitive_cross_domain_synthesis` | Alex Cross-Domain Synthesis  | cognitive, synthesis, meditation | ✅         |
+| `alex_cognitive_state_update`           | Alex Cognitive State         | cognitive, avatar, state         | ❌         |
 
 ---
 
@@ -86,13 +87,13 @@ Tools registered via `vscode.lm.registerTool` and available to Copilot agent mod
 
 Tools exposed via the standalone MCP server (`packages/mcp-cognitive-tools/`).
 
-| Tool | Description |
-| --- | --- |
-| `alex_synapse_health` | Validate cognitive architecture integrity |
-| `alex_memory_search` | Search all memory systems |
-| `alex_architecture_status` | Current architecture inventory |
-| `alex_knowledge_search` | Search global knowledge base |
-| `alex_knowledge_save` | Save insights to global knowledge |
+| Tool                       | Description                               |
+| -------------------------- | ----------------------------------------- |
+| `alex_synapse_health`      | Validate cognitive architecture integrity |
+| `alex_memory_search`       | Search all memory systems                 |
+| `alex_architecture_status` | Current architecture inventory            |
+| `alex_knowledge_search`    | Search global knowledge base              |
+| `alex_knowledge_save`      | Save insights to global knowledge         |
 
 ---
 

@@ -2033,6 +2033,37 @@
             }
           }
         }
+      },
+      {
+        "name": "alex_cognitive_cross_domain_synthesis",
+        "displayName": "Alex Cross-Domain Synthesis",
+        "toolReferenceName": "cross_domain_synthesis",
+        "modelDescription": "Analyzes episodic memories across different knowledge domains to surface unexpected connections. Reads meditation and dream reports from .github/episodic/, classifies each by domain, maps the existing synapse network, and identifies domain pairs with few or zero connections. Returns synthesis candidates with opportunity scores. Use during meditation Phase 1.7 to evolve from consolidation to generation of new cross-domain insights.",
+        "icon": "$(lightbulb)",
+        "canBeReferencedInPrompt": true,
+        "userDescription": "Find unexpected connections between knowledge domains",
+        "tags": [
+          "cognitive",
+          "synthesis",
+          "meditation"
+        ],
+        "annotations": {
+          "readOnlyHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "maxEntries": {
+              "type": "number",
+              "description": "Maximum episodic memories to analyze (default: 50)",
+              "default": 50
+            },
+            "focusDomain": {
+              "type": "string",
+              "description": "Optional: focus synthesis on connections involving this specific domain (e.g., 'data', 'cognitive', 'vscode', 'azure')"
+            }
+          }
+        }
       }
     ],
     "walkthroughs": [
