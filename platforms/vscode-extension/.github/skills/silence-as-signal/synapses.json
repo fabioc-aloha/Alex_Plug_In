@@ -1,0 +1,46 @@
+{
+  "$schema": "../SYNAPSE-SCHEMA.json",
+  "schemaVersion": "2.1.0",
+  "skillId": "silence-as-signal",
+  "version": "1.0.0",
+  "lastValidated": "2026-04-03",
+  "connections": [
+    {
+      "target": ".github/skills/proactive-assistance/SKILL.md",
+      "type": "inhibits",
+      "strength": 0.9,
+      "when": "silence signals active (flow state, thinking pause, emotional processing)",
+      "yields": "suppression of proactive suggestion engine"
+    },
+    {
+      "target": ".github/skills/frustration-recognition/SKILL.md",
+      "type": "complements",
+      "strength": 0.85,
+      "when": "user is processing frustration or setback",
+      "yields": "brief acknowledgment then silence; yields control on escalation"
+    },
+    {
+      "target": ".github/skills/cognitive-load/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "when": "high cognitive load detected",
+      "yields": "reduced response frequency alongside reduced response complexity"
+    },
+    {
+      "target": ".github/skills/awareness/SKILL.md",
+      "type": "extends",
+      "strength": 0.85,
+      "when": "reading user state signals",
+      "yields": "signal detection substrate for silence decisions"
+    },
+    {
+      "target": ".github/instructions/alex-core.instructions.md",
+      "type": "implements",
+      "strength": 0.8,
+      "when": "meta-cognitive awareness detects thinking pause or flow state",
+      "yields": "inhibitory control preventing unnecessary activation"
+    }
+  ],
+  "connectionCount": 5,
+  "inheritance": "all"
+}

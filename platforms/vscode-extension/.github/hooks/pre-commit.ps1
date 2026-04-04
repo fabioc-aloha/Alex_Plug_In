@@ -142,7 +142,7 @@ if ($changedSynapses -or $changedInstructions) {
                     if (($syn.inheritance ?? 'inheritable') -in @('inheritable', 'universal')) {
                         foreach ($conn in $syn.connections) {
                             $target = $conn.target
-                            if ($target -match '(ROADMAP\.md|alex_docs/|platforms/(?!vscode-extension)|MASTER-ALEX-PROTECTED)') {
+                            if ($target -match '(ROADMAP|alex_docs/|platforms/(?!vscode-extension)|MASTER-ALEX-PROTECTED)') {
                                 $warnings += "${file}: Inheritable skill references master-only path: $target"
                             }
                         }

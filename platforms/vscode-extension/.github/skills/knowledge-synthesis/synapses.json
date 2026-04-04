@@ -33,6 +33,14 @@
       "reason": "Research generates pre-project knowledge that synthesis organizes",
       "when": "When task involves .github/skills/research first development/SKILL.md",
       "yields": "research first development integration patterns"
+    },
+    {
+      "target": ".github/prompts/cross-domain-transfer.prompt.md",
+      "type": "implements",
+      "strength": 0.9,
+      "reason": "Cross-domain transfer is the generative output of synthesis",
+      "when": "During meditation Phase 3 cross-domain synthesis",
+      "yields": "cross-domain transfer protocol and quality gates"
     }
   ],
   "triggers": [

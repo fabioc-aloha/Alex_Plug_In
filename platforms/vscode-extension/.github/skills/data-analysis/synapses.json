@@ -4,8 +4,15 @@
     "$schema": "../SYNAPSE-SCHEMA.json",
     "version": "1.0.0",
     "created": "2026-03-26",
-    "connectionCount": 7,
+    "connectionCount": 8,
     "connections": [
+        {
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
+            "type": "inspires",
+            "strength": 0.7,
+            "when": "Cross-domain synthesis applies data-analysis methodology (profile, explore, visualize, narrate) to episodic memory analysis",
+            "yields": "knowledge-synthesis data-driven approach to knowledge gap detection"
+        },
         {
             "target": ".github/skills/data-visualization/SKILL.md",
             "type": "feeds",

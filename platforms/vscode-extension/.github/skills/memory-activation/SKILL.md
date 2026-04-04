@@ -172,6 +172,7 @@ Search this index when processing any task request:
 | stakeholder-management | stakeholder map, influence grid, communication plan, expectation management, power-interest matrix, sponsor engagement |
 | security-review | security audit, owasp check, vulnerability scan, auth review, stride, is this secure, review for vulnerabilities, check for security issues, secure this code, sfi, sfi compliance, injection attack, xss, csrf, threat model, secrets in code, access control, input validation |
 | self-actualization | self-actualize, deep assessment, architecture review, comprehensive check |
+| silence-as-signal | silence, quiet, no response, stopped talking, disengaged, user silent, lost interest, confused silence, thinking pause |
 | skill-building | create skill, build skill, skill template, promotion ready, skill creation, new skill |
 | skill-catalog-generator | show skills, skill catalog, skill network, learning progress |
 | skill-development | develop skill, track learning, skill wishlist, practice capability, improve ability |

@@ -134,6 +134,22 @@
         "burnout signal",
         "emotional state"
       ]
+    },
+    {
+      "context": "Silence handoff",
+      "keywords": [
+        "silence-as-signal",
+        "emotional processing",
+        "hold space",
+        "thinking pause"
+      ]
     }
-  ]
+  ],
+  "silenceHandoff": {
+    "target": ".github/skills/silence-as-signal/SKILL.md",
+    "type": "complements",
+    "strength": 0.85,
+    "when": "frustration detected but user is processing (not escalating)",
+    "yields": "silence-as-signal holds space; control returns on escalation"
+  }
 }
