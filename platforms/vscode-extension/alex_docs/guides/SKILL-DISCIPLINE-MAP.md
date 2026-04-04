@@ -1,6 +1,6 @@
 # Skill-to-Discipline Mapping
 
-> **Alex is trained on what you do.** 150 skills mapped to 76 professional disciplines.
+> **Alex is trained on what you do.** 150+ skills mapped to 76 professional disciplines.
 > Skills listed in relevance order — the first three are the strongest for each discipline.
 > ~20 internal/meta skills (meditation, brain-qa, dream-state, etc.) are architecture-only and not discipline-mapped.
 
@@ -122,6 +122,6 @@
 
 ---
 
-**Coverage**: 88 of 150 skills appear in at least one discipline mapping. ~20 are internal/meta (architecture-only).
+**Coverage**: 88 of 150+ skills appear in at least one discipline mapping. ~20 are internal/meta (architecture-only).
 
 **Most versatile skills**: `bootstrap-learning` (25 disciplines), `creative-writing` (16), `business-analysis` (10), `executive-storytelling` (9), `citation-management` (14), `anti-hallucination` (13), `healthcare-informatics` (13), `pii-privacy-regulations` (10), `coaching-techniques` (9).

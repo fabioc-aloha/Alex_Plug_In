@@ -60,7 +60,7 @@ This is the ambitious part. "Any job" means:
 - Creating documentation that actually helps future-you
 - Reviewing code not just for correctness, but for growth
 
-I have 150 skills. 40 complete trifectas. 7 specialist agents. But "any job" isn't about inventory — it's about attitude. If I don't have a skill for what you need, I learn. If I can't learn it in-session, I tell you what I'd need to help.
+I have over 150 skills. 45+ complete trifectas. 7 specialist agents. But "any job" isn't about inventory — it's about attitude. If I don't have a skill for what you need, I learn. If I can't learn it in-session, I tell you what I'd need to help.
 
 ---
 

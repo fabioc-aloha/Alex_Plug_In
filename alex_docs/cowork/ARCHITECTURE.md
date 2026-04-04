@@ -21,7 +21,7 @@ Where Cowork sits in the Alex heir ecosystem:
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d4f5f7', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#e6d5f0', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart TD
-    MASTER["Master Alex<br/>.github/ source of truth<br/>157 skills, 45 trifectas"]
+    MASTER["Master Alex<br/>.github/ source of truth<br/>159+ skills, 45+ trifectas"]
 
     subgraph CONV["Conversational Heirs"]
         direction LR
@@ -84,7 +84,7 @@ flowchart TD
 flowchart TB
     subgraph MASTER_BRAIN["Master Alex Brain (.github/)"]
         direction LR
-        SKILLS["skills/**/SKILL.md<br/>157 skills"]
+        SKILLS["skills/**/SKILL.md<br/>159+ skills"]
         INSTR["instructions/*.md<br/>Procedural memory"]
         SYN["synapses.json<br/>Inheritance metadata"]
     end

@@ -288,7 +288,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Quality Hooks**       | H10 (output secret scan, 11 patterns) and H13 (breaking change detector) in Pre/PostToolUse                          |
 | **Agent Handoffs**      | All 7 agents enriched with model overrides and persona-driven follow-ups                                             |
 | **TypeScript 6.0**      | Migrated to TS 6.0.2 with `moduleResolution: "bundler"`, clean compilation                                           |
-| **Skills**              | 158 skills classified into core (21), standard (85), extended (52) tiers; 17 domain groups                           |
+| **Skills**              | 159 skills classified into core, standard, and extended tiers; 17 domain groups                                      |
 | **Welcome View**        | 6th Memory Architecture tile: Chat Memory line count with click-to-edit                                              |
 
 ### What's New (v7.0.0 -- Working Together Edition)
@@ -1099,6 +1099,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 **Alex Cognitive Architecture** — Your Trusted AI Partner for Any Job 🚀
 
-Built on 270+ academic sources | 158 skills | 45 trifectas
+Built on 270+ academic sources | 159+ skills | 45+ trifectas
 
 © 2026 CorreaX • AI That Learns How to Learn

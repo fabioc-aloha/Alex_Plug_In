@@ -62,17 +62,6 @@ Alex as a declarative agent for Microsoft 365 Copilot:
 
 📘 **[M365 Copilot Documentation](platforms/m365-copilot/)**
 
-### Agent Plugin
-
-Alex as an installable VS Code agent plugin (1.110+) — no extension required:
-
-- 79 skills, 7 agents, 22 instructions, 11 prompts
-- Install from plugin marketplace, local path, or git repo
-- All knowledge-based capabilities without extension overhead
-- MCP cognitive tools server included
-
-📘 **[Agent Plugin Documentation](platforms/agent-plugin/)**
-
 ---
 
 ## 🚀 Quick Start (VS Code)
@@ -153,8 +142,8 @@ The sweet spot — full partnership with autonomous tools, deep skills, speciali
 | Feature                        | Minimum | Basic | Recommended | Advanced |
 | ------------------------------ | :-----: | :---: | :---------: | :------: |
 | Agent Mode                     |    ❌    |   ❌   |      ✅      |    ✅     |
-| 13 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
-| 136 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
+| 14 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
+| 150+ Skills (auto-loaded)      |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents            |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session) |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge Operations    |    ❌    |   ❌   |      ✅      |    ✅     |
@@ -255,9 +244,9 @@ The VS Code extension includes everything described below — see the **[VS Code
 | **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support |
 | **Global Knowledge Base**  | Cross-project patterns and insights that persist in `~/.alex/`   |
 | **User Profiles**          | Personalized tone, detail level, and tech stack awareness        |
-| **136 Skills**             | Portable domain expertise — from coding to research to Azure     |
+| **150+ Skills**            | Portable domain expertise — from coding to research to Azure     |
 | **7 Custom Agents**        | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
-| **13 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
+| **14 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
 | **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API      |
 | **AI Image Generation**    | Flux, SDXL, and nano-banana-pro via Replicate API                |
 | **MCP Integrations**       | 50+ Azure tools, M365 tools, and Alex's own MCP cognitive server |

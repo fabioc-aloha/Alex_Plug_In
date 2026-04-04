@@ -136,7 +136,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 | **GitHub Copilot Chat**          | (built-in with Copilot)                                  | The `@alex` chat participant requires the Chat API provided by GitHub Copilot    |
 | **Instructions Files**           | `chat.instructionsFilesLocations`                        | Auto-loads `.github/instructions/*.instructions.md` — Alex's behavioral rules    |
 | **Prompt Files**                 | `chat.promptFilesLocations`                              | Enables `/` slash commands from `.github/prompts/*.prompt.md`                    |
-| **Skills Files**                 | `chat.agentSkillsLocations`                              | Auto-loads 136 skills from `.github/skills/*/SKILL.md` — Alex's domain expertise |
+| **Skills Files**                 | `chat.agentSkillsLocations`                              | Auto-loads skills from `.github/skills/*/SKILL.md` — Alex's domain expertise    |
 | **Skill Adherence**              | `chat.useSkillAdherencePrompt`                           | Forces LLM to read SKILL.md before responding — knowledge quality gate           |
 | **Agent Mode**                   | `chat.agent.enabled`                                     | Enables agent-mode conversations where Alex can use tools autonomously           |
 | **Agents.md Files**              | `chat.useAgentsMdFile`                                   | Loads 7 specialist agents from `.github/agents/*.agent.md`                       |
@@ -210,7 +210,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 - **Chat**: Unlimited messages
 - **Agent Mode**: Full agent mode with tool calling
 - **Models**: GPT-4o, Claude Sonnet 4 (Capable tier); limited premium model access
-- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 136 skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
+- **Alex Impact**: Full Level 3 experience. All 14 LM tools, 150+ skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
 - **Recommended for**: Individual developers who want the full Alex experience
 
 #### Copilot Pro+
@@ -408,8 +408,8 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 | Works (adds to Level 2)                         | Doesn't Work                                          |
 | ----------------------------------------------- | ----------------------------------------------------- |
 | Full agent-mode conversations                   | Extended thinking (requires Frontier model + setting) |
-| All 13 LM tools accessible by the model         | MCP tools (unless MCP gallery enabled)                |
-| 136 skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
+| All 14 LM tools accessible by the model         | MCP tools (unless MCP gallery enabled)                |
+| 150+ skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
 | 50+ instructions auto-loaded by pattern         |                                                       |
 | 7 specialist agents (Builder, Researcher, etc.) |                                                       |
 | Search subagent (web search in conversations)   |                                                       |
@@ -632,8 +632,8 @@ The Recommended tier is where Alex becomes a true cognitive partner. Agent mode 
 | Feature                            | Minimum | Basic | Recommended | Advanced |
 | ---------------------------------- | :-----: | :---: | :---------: | :------: |
 | Agent Mode                         |    ❌    |   ❌   |      ✅      |    ✅     |
-| 13 Language Model Tools            |    ❌    |   ❌   |      ✅      |    ✅     |
-| 136 Skills (auto-loaded)           |    ❌    |   ❌   |      ✅      |    ✅     |
+| 14 Language Model Tools            |    ❌    |   ❌   |      ✅      |    ✅     |
+| 150+ Skills (auto-loaded)          |    ❌    |   ❌   |      ✅      |    ✅     |
 | 50+ Instructions (pattern-matched) |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents                |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session)     |    ❌    |   ❌   |      ✅      |    ✅     |
