@@ -43,6 +43,7 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v7.1.3** | Install/Upgrade Hardening + H19 -- Critical .github preservation fix, upgrade rollback, force repair, first-install prompt, H19 synapse weight update hook (buffered live learning), post-upgrade warning aggregation, version notification tiers                                                              | 2026-04-04 |
 | **v7.1.2** | Intelligence Foundations -- Cross-domain pattern synthesis LM tool, silence-as-signal skill, user friction inventory (29 signals), meditation Phase 3, stale count elimination, PS5 preflight fix, Agent Plugin discontinued, alex_archive deleted, 21 stale docs removed, brain audit (0 issues)             | 2026-04-03 |
 | **v7.1.1** | Cross-Platform Hardening -- Extended workspace protection, 2 cross-platform blockers fixed (path detection, CRLF regex), zero runtime dependencies, 13 docs converted to cross-platform                                                                                                                       | 2026-04-01 |
 | **v7.1.0** | Excavation Edition -- Copilot Chat competitive analysis drives 17 improvements: PromptVariantRegistry (10 model families), context window scaling, conversation summarization, steering awareness, stream enrichment, session trace, TS6, hooks H10/H13                                                       | 2026-03-31 |
@@ -72,13 +73,14 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 ### Deferred Hooks (Low Priority)
 
-**16 hooks shipped** (10 global + 6 agent-scoped). These 3 were evaluated and deferred:
+**17 hooks shipped** (11 global + 6 agent-scoped). These 2 were evaluated and deferred:
 
-| #   | Scope  | Event        | What It Would Do                                                                             | Benefit                                                                                    | Rationale for Deferral                                                                  |
-| --- | ------ | ------------ | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| H11 | Global | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s) | Prevents accidental mass deletion or cascading destructive actions                         | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9                  |
-| H17 | Global | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis  | Delegation analytics: reveals patterns like which agents are slowest or most error-prone   | Analytics only; no immediate workflow benefit                                           |
-| H19 | Global | PostToolUse  | Synapse weight update — increment skill connection weights in real-time on heavy activation  | Live learning: frequently-used skill connections strengthen immediately, not at meditation | Adds write contention to synapses.json; meditation already handles weight consolidation |
+| #   | Scope  | Event        | What It Would Do                                                                             | Benefit                                                                                  | Rationale for Deferral                                                 |
+| --- | ------ | ------------ | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| H11 | Global | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s) | Prevents accidental mass deletion or cascading destructive actions                       | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9 |
+| H17 | Global | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis  | Delegation analytics: reveals patterns like which agents are slowest or most error-prone | Analytics only; no immediate workflow benefit                          |
+
+**H19 shipped** (v7.2.0): Synapse weight update via buffered PostToolUse hook. Uses `synapse-activation-buffer.json` to batch activations (threshold: 10 calls = +0.05 strength) and avoid synapses.json write contention. Maps tool calls to skills via file paths, instruction edits, and Alex cognitive tool names.
 
 ### 🔭 Future Watch
 
@@ -161,13 +163,13 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 
 |                            |                                                                                        |
 | -------------------------- | -------------------------------------------------------------------------------------- |
-| **Current Master Version** | 7.1.2                                                                                  |
-| **Current Heirs**          | VS Code (7.1.2)                                                                        |
+| **Current Master Version** | 7.1.3                                                                                  |
+| **Current Heirs**          | VS Code (7.1.3)                                                                        |
 | **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                         |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md) |
 | **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                                 |
-| **Open Items**             | 5 v7.2.0 features + 3 deferred hooks + 2 future watch                                  |
-| **Updated**                | 2026-04-03                                                                             |
+| **Open Items**             | 5 v7.2.0 features + 2 deferred hooks + 2 future watch                                  |
+| **Updated**                | 2026-04-04                                                                             |
 
 ---
 

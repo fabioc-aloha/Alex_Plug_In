@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.1.3] - 2026-04-04
+
+> **Install/Upgrade Hardening + H19** -- 6 install/upgrade process fixes (critical .github preservation, rollback, force repair), H19 synapse weight update hook for live learning.
+
+### Added
+
+- **H19: Synapse weight update hook** -- PostToolUse hook that buffers skill activations and flushes +0.05 strength bumps to `synapses.json` after 10 activations per skill; maps tools to skills via file paths, instruction edits, and Alex cognitive tool names; avoids write contention via `synapse-activation-buffer.json`
+- **Force repair option** -- "Alex: Upgrade" now offers "Force Repair" when already at latest version, allowing re-deployment of corrupted architecture files
+- **First-install initialization prompt** -- New users now see a proactive "Initialize Now" notification on first activation instead of having to discover the command
+- **Upgrade rollback** -- If the fresh install phase fails during upgrade, the workspace is automatically rolled back from backup instead of being left broken
+- **Post-upgrade warning aggregation** -- Dream, persona detection, and secrets migration failures are now collected and surfaced in the completion summary instead of silently swallowed
+
+### Fixed
+
+- **CRITICAL: Upgrade no longer deletes non-Alex .github content** -- `cleanOldStructure()` previously removed the entire `.github/` folder, destroying GitHub Actions workflows, issue templates, PR templates, and FUNDING.yml; now only removes Alex-owned items (instructions, skills, prompts, config, agents, muscles, assets, episodic)
+- **Version upgrade notifications now distinguish major/minor/patch** -- Previously only differentiated major vs non-major; now shows distinct messages for major (new release), minor (new features), and patch (bug fixes) updates
+
+---
+
 ## [7.1.2] - 2026-04-03
 
 > **Intelligence Foundations** -- User friction inventory (29 signals), silence-as-signal skill, cross-domain pattern synthesis tool, stale count elimination across documentation.

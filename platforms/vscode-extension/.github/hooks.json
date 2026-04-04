@@ -75,6 +75,11 @@
                         "type": "command",
                         "command": "node .github/muscles/hooks/output-secret-scan.cjs",
                         "timeout": 2
+                    },
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/synapse-weight-update.cjs",
+                        "timeout": 2
                     }
                 ]
             }

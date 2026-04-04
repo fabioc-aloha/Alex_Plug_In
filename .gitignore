@@ -8,3 +8,7 @@ node_modules
 .markdownlint.json
 Alex-Global-Knowledge/
 TESTE/
+
+# Runtime hook artifacts (H19 synapse weight buffer, tool telemetry)
+.github/config/synapse-activation-buffer.json
+.github/config/session-tool-log.json
