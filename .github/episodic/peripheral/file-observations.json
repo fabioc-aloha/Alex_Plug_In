@@ -1,35 +1,34 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "scripts/release-preflight.ps1"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1775267368727
+      "scannedAt": 1775267485505
     },
     {
       "file": "CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1775267368727
+      "scannedAt": 1775267485505
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1775267368727
+      "scannedAt": 1775267485505
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1775267368727
+      "scannedAt": 1775267485505
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1775267368727
+      "scannedAt": 1775267485505
     }
   ],
-  "lastUpdated": 1775267368727
+  "lastUpdated": 1775267485505
 }
