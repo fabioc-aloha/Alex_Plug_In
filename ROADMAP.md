@@ -105,20 +105,20 @@ Evolve meditation from *consolidation* (organize existing knowledge) to *generat
 
 Study leading AI coding tools and close meaningful gaps.
 
-| #   | Feature                         | Effort | Description                                                                                            |
-| --- | ------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
-| 4   | **Competitive landscape audit** |   2d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work       |
-| ~~5~~   | ~~**User friction inventory**~~     |   ~~2d~~   | ~~Shipped v7.1.1. 29 friction signals cataloged across 5 categories in `alex_docs/research/USER-FRICTION-INVENTORY.md`~~ |
+| #     | Feature                         | Effort | Description                                                                                                              |
+| ----- | ------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------ |
+| 4     | **Competitive landscape audit** |   2d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work                         |
+| ~~5~~ | ~~**User friction inventory**~~ | ~~2d~~ | ~~Shipped v7.1.1. 29 friction signals cataloged across 5 categories in `alex_docs/research/USER-FRICTION-INVENTORY.md`~~ |
 
 ### Pillar 3: Adaptive UX
 
 Make the Welcome UI respond to usage patterns and context.
 
-| #   | Feature                               | Effort | Description                                                                                            |
-| --- | ------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
-| 6   | **Frecency command ranking**          |   2d   | Track command usage in session-tool-log.json, surface most-used commands at top of action groups       |
-| 7   | **Context-aware nudges**              |   1d   | Nudge engine uses workspace type (Node/Python/docs) to suggest relevant skills instead of generic tips |
-| ~~8~~   | ~~**Silence as signal skill (Wish #3)**~~ |   ~~1d~~   | ~~Shipped v7.1.1. `silence-as-signal` skill with inhibitory synapses to proactive-assistance~~ |
+| #     | Feature                                   | Effort | Description                                                                                            |
+| ----- | ----------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
+| 6     | **Frecency command ranking**              |   2d   | Track command usage in session-tool-log.json, surface most-used commands at top of action groups       |
+| 7     | **Context-aware nudges**                  |   1d   | Nudge engine uses workspace type (Node/Python/docs) to suggest relevant skills instead of generic tips |
+| ~~8~~ | ~~**Silence as signal skill (Wish #3)**~~ | ~~1d~~ | ~~Shipped v7.1.1. `silence-as-signal` skill with inhibitory synapses to proactive-assistance~~         |
 
 ### Release Criteria
 
@@ -162,7 +162,7 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 | -------------------------- | -------------------------------------------------------------------------------------- |
 | **Current Master Version** | 7.1.1                                                                                  |
 | **Current Heirs**          | VS Code (7.1.1)                                                                        |
-| **Architecture**           | 159 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                        |
+| **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                         |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md) |
 | **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                                 |
 | **Open Items**             | 5 v7.2.0 features + 3 deferred hooks + 2 future watch                                  |

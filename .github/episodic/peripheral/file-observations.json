@@ -3,15 +3,14 @@
   "stalledFiles": [
     "github/copilot-instructions.md",
     "ROADMAP.md",
-    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md",
     "alex_docs/research/USER-FRICTION-INVENTORY.md"
   ],
   "todoHotspots": [
     {
       "file": "alex_docs/research/USER-FRICTION-INVENTORY.md",
       "todoCount": 3,
-      "scannedAt": 1775263340923
+      "scannedAt": 1775263505323
     }
   ],
-  "lastUpdated": 1775263340923
+  "lastUpdated": 1775263505323
 }

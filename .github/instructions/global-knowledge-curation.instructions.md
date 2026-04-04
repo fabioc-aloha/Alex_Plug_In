@@ -317,7 +317,7 @@ Move-Item ~/.alex/global-knowledge/patterns/GK-{pattern}.md `
 **Promoted**:
 
 - Created 3 new skill trifectas from knowledge-only patterns
-- Total: 119 skills (116 → 119)
+- Skill count increased (run `gen-skill-catalog.cjs` for current total)
 - Updated 7 documentation files
 - Generated 6 Ideogram banners ($0.48, stunning quality)
 

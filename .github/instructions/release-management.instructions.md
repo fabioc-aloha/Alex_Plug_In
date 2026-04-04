@@ -785,9 +785,9 @@ During VS Code packaging, the `sync-architecture.cjs` script runs automatically:
 **Expected Output:**
 
 ```
-✅ Copied: 110 skills
-⏭️  Skipped (master-only): 4
-⏭️  Skipped (heir:m365): 2
+✅ Copied: N skills
+⏭️  Skipped (master-only): X
+⏭️  Skipped (heir:m365): Y
 ✅ Skill sync verified!
 ```
 

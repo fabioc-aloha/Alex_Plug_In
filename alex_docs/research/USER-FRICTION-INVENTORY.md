@@ -14,7 +14,7 @@
 | Settings           | 22                                   |
 | LM Tools           | 14                                   |
 | Lifecycle hooks    | 20                                   |
-| Skills             | 158                                  |
+| Skills             | 159+                                 |
 | Prompts            | 56                                   |
 | Views/tabs         | 4 (Mind, Mission, Docs, Skill Store) |
 | Dashboards         | 3 (Health, Memory, Cognitive)        |
@@ -61,7 +61,7 @@
 
 | #   | Signal                                                                                                                  | Severity | Frequency | Fix Effort |  Score   |
 | --- | ----------------------------------------------------------------------------------------------------------------------- | :------: | :-------: | :--------: | :------: |
-| D1  | **158 skills with no guided discovery**: Tier system but no "what can Alex do for me?" onboarding flow                  |    4     |     4     |     L      |    16    |
+| D1  | **Many skills with no guided discovery**: Tier system but no "what can Alex do for me?" onboarding flow                  |    4     |     4     |     L      |    16    |
 | D2  | **Session tool log empty**: session-tool-log.json has one entry; no data on what users actually use                     |    3     |     5     |     M      |    15    |
 | D3  | **56 prompts are descriptive, not procedural**: Users must know prompts exist and manually invoke them                  |    3     |     3     |     M      |    9     |
 | D4  | **Removed features without migration path**: Pomodoro, Learning Goals, Focus Context deleted v6.5.7 with no alternative |    3     |     1     |     -      | Accepted |
@@ -86,7 +86,7 @@ Scoring: **Frequency (1-5) x Severity (1-5)**, then grouped by fix effort.
 | Rank | #   | Signal                                           | Score | Effort |
 | ---- | --- | ------------------------------------------------ | :---: | :----: |
 | 1    | C6  | Broken synapse cascade (recurring every release) |  20   |   M    |
-| 2    | D1  | No guided skill discovery (158 skills, no flow)  |  16   |   L    |
+| 2    | D1  | No guided skill discovery (many skills, no flow)  |  16   |   L    |
 | 3    | D2  | Session tool log empty (no usage data)           |  15   |   M    |
 | 4    | A1  | Initialize-or-fail pattern (7 commands)          |  12   |   M    |
 | 5    | B2  | Deprecated P5-P7 memory slots visible            |   9   |   S    |

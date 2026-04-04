@@ -196,10 +196,8 @@ ERROR  Failed request: (401)
 During `vsce package`, automatic sync runs:
 
 1. **Master → Heir Content Transfer**
-   - 105 inheritable skills (116 total - 11 Master-only)
-   - 31 instructions
-   - 19 prompts
-   - 7 agents
+   - Inheritable skills (Master total minus Master-only exclusions)
+   - Instructions, prompts, and agents (counts vary; sync script reports actuals)
 
 2. **Heir Transformations** (10 total):
    - Master-specific content filtered
@@ -213,12 +211,12 @@ During `vsce package`, automatic sync runs:
    - Synapse integrity: All targets exist, bidirectional pairs valid
    - File structure: Proper directory organization
 
-**Expected Sync Output**:
+**Expected Sync Output** (counts will vary):
 ```
-Copying 105 inheritable skills to heir...
-Cleaned 5 synapses with no valid targets
-Applied 10 heir transformations
-✅ Skill count verified: Master 116, Heir 114, Expected 105 inheritable
+Copying N inheritable skills to heir...
+Cleaned X synapses with no valid targets
+Applied Y heir transformations
+✅ Skill count verified: Master M, Heir H, Expected E inheritable
 ✅ Contamination check passed: no contamination detected
 ```
 
