@@ -43,6 +43,7 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v7.1.2** | Intelligence Foundations -- Cross-domain pattern synthesis LM tool, silence-as-signal skill, user friction inventory (29 signals), meditation Phase 3, stale count elimination, PS5 preflight fix, Agent Plugin discontinued, alex_archive deleted, 21 stale docs removed, brain audit (0 issues)             | 2026-04-03 |
 | **v7.1.1** | Cross-Platform Hardening -- Extended workspace protection, 2 cross-platform blockers fixed (path detection, CRLF regex), zero runtime dependencies, 13 docs converted to cross-platform                                                                                                                       | 2026-04-01 |
 | **v7.1.0** | Excavation Edition -- Copilot Chat competitive analysis drives 17 improvements: PromptVariantRegistry (10 model families), context window scaling, conversation summarization, steering awareness, stream enrichment, session trace, TS6, hooks H10/H13                                                       | 2026-03-31 |
 | **v7.0.1** | Welcome UI Hotfix -- Chat Memories button (Mind tab), Memory Audit button (Mission tab)                                                                                                                                                                                                                       | 2026-03-31 |
@@ -97,7 +98,7 @@ Evolve meditation from *consolidation* (organize existing knowledge) to *generat
 
 | #     | Feature                                | Effort | Description                                                                                       |
 | ----- | -------------------------------------- | :----: | ------------------------------------------------------------------------------------------------- |
-| ~~1~~ | ~~**Cross-domain pattern synthesis**~~ | ~~2d~~ | ~~Shipped v7.1.1. `alex_cognitive_cross_domain_synthesis` LM tool + meditation Phase 3 protocol~~ |
+| ~~1~~ | ~~**Cross-domain pattern synthesis**~~ | ~~2d~~ | ~~Shipped v7.1.2. `alex_cognitive_cross_domain_synthesis` LM tool + meditation Phase 3 protocol~~ |
 | 2     | **Insight generation pipeline**        |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)   |
 | 3     | **Dream creativity score**             |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains       |
 
@@ -108,7 +109,7 @@ Study leading AI coding tools and close meaningful gaps.
 | #     | Feature                         | Effort | Description                                                                                                              |
 | ----- | ------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------------------ |
 | 4     | **Competitive landscape audit** |   2d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work                         |
-| ~~5~~ | ~~**User friction inventory**~~ | ~~2d~~ | ~~Shipped v7.1.1. 29 friction signals cataloged across 5 categories in `alex_docs/research/USER-FRICTION-INVENTORY.md`~~ |
+| ~~5~~ | ~~**User friction inventory**~~ | ~~2d~~ | ~~Shipped v7.1.2. 29 friction signals cataloged across 5 categories in `alex_docs/research/USER-FRICTION-INVENTORY.md`~~ |
 
 ### Pillar 3: Adaptive UX
 
@@ -118,7 +119,7 @@ Make the Welcome UI respond to usage patterns and context.
 | ----- | ----------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
 | 6     | **Frecency command ranking**              |   2d   | Track command usage in session-tool-log.json, surface most-used commands at top of action groups       |
 | 7     | **Context-aware nudges**                  |   1d   | Nudge engine uses workspace type (Node/Python/docs) to suggest relevant skills instead of generic tips |
-| ~~8~~ | ~~**Silence as signal skill (Wish #3)**~~ | ~~1d~~ | ~~Shipped v7.1.1. `silence-as-signal` skill with inhibitory synapses to proactive-assistance~~         |
+| ~~8~~ | ~~**Silence as signal skill (Wish #3)**~~ | ~~1d~~ | ~~Shipped v7.1.2. `silence-as-signal` skill with inhibitory synapses to proactive-assistance~~         |
 
 ### Release Criteria
 
