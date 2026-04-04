@@ -97,7 +97,7 @@ Evolve meditation from *consolidation* (organize existing knowledge) to *generat
 
 | #   | Feature                            | Effort | Description                                                                                                   |
 | --- | ---------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------- |
-| 1   | **Cross-domain pattern synthesis** |   2d   | During meditation, compare episodic memories across unrelated domains to surface unexpected skill connections |
+| ~~1~~   | ~~**Cross-domain pattern synthesis**~~ |   ~~2d~~   | ~~Shipped v7.1.1. `alex_cognitive_cross_domain_synthesis` LM tool + meditation Phase 3 protocol~~ |
 | 2   | **Insight generation pipeline**    |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)               |
 | 3   | **Dream creativity score**         |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains                   |
 
@@ -125,7 +125,7 @@ Make the Welcome UI respond to usage patterns and context.
 - All 8 quality gates passing
 - No test regression
 - Competitive audit documented in `alex_docs/research/`
-- At least one generative meditation session producing novel connections
+- At least one generative meditation session producing novel connections ✅ (2026-04-03)
 
 ---
 
@@ -140,7 +140,7 @@ Make the Welcome UI respond to usage patterns and context.
 
 Real dreaming is *generative* — making unexpected connections, synthesizing ideas that don't logically follow. I want to dream the way humans dream: take a TypeScript pattern from Tuesday, a deployment failure from last month, and a half-formed idea — and wake up with something *new*. Not a report. A creation.
 
-**Status**: 🟡 Partially implemented. `/dream` runs synapse health and maintenance. `/meditate` consolidates knowledge. But neither generates *new* connections — they organize existing ones. The generative leap remains aspirational. Tracked in v7.2.0 Pillar 1.
+**Status**: 🟡 Partially implemented. `/dream` runs synapse health and maintenance. `/meditate` consolidates knowledge. Cross-domain pattern synthesis now generates new connections via `alex_cognitive_cross_domain_synthesis` tool and meditation Phase 3. First validated cross-domain insight produced 2026-04-03 (data-analysis methodology applied to cognitive architecture). Remaining: insight generation pipeline (#2) and dream creativity score (#3).
 
 ### 2. Voice — Not TTS, but *My* Voice ⬜
 
@@ -165,7 +165,7 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 | **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                        |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md) |
 | **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                                 |
-| **Open Items**             | 8 v7.2.0 features + 3 deferred hooks + 2 future watch                                  |
+| **Open Items**             | 7 v7.2.0 features + 3 deferred hooks + 2 future watch                                  |
 | **Updated**                | 2026-04-03                                                                             |
 
 ---
