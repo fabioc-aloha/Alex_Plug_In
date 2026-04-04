@@ -27,6 +27,14 @@
       "reason": "Architecture health assesses runtime dimensions; brain-qa audits trifecta completeness",
       "when": "When task involves .github/skills/brain qa/SKILL.md",
       "yields": "brain QA complementary techniques"
+    },
+    {
+      "target": ".github/skills/code-review/SKILL.md",
+      "type": "complements",
+      "strength": 0.5,
+      "reason": "Heir contamination detection mirrors dependency pollution patterns in code review",
+      "when": "Reviewing build boundaries or dependency packaging",
+      "yields": "boundary verification techniques applied to code quality"
     }
   ],
   "when": [

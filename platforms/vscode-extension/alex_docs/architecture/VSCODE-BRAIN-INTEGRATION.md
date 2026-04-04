@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch
 **Date**: February 26, 2026
-**Version**: 2.0 — Alex v6.4.0
+**Version**: 2.1 — Alex v7.1.3
 **North Star**: *Create the most advanced and trusted AI partner for any job*
 
 **Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Loading Mechanics](./LOADING-MECHANICS.md)
@@ -87,7 +87,7 @@ VS Code 1.109+ is the minimum. This gates access to the Chat Participant API, La
 | API Surface                  | Source Module                                                                         | Purpose                                                                                                                   |
 | ---------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | **Chat Participant API**     | `participant.ts`                                                                      | Registers `@alex` as a chat participant with slash commands, disambiguation, and response streaming                       |
-| **Language Model Tools API** | `tools.ts`                                                                            | Registers 14 LM tools (synapse health, memory search, knowledge, cross-domain synthesis, etc.) that models can invoke     |
+| **Language Model Tools API** | `tools.ts`                                                                            | Registers 13 LM tools (synapse health, memory search, knowledge, etc.) that models can invoke                             |
 | **Language Model Chat API**  | `participant.ts`, `readAloud.ts`, `personaDetection.ts`                               | Direct model access via `vscode.lm.selectChatModels()` and `model.sendRequest()` for persona detection, TTS summarization |
 | **WebviewView Provider**     | `welcomeView.ts`, `cognitiveDashboard.ts`, `healthDashboard.ts`, `memoryDashboard.ts` | Sidebar panels with HTML/CSS/JS for welcome view, cognitive dashboard, health dashboard, memory architecture              |
 | **TreeDataProvider**         | `memoryTreeProvider.ts`                                                               | Memory Architecture tree in the Activity Bar sidebar                                                                      |

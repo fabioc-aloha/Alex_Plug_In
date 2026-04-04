@@ -15,10 +15,10 @@
  * Part of: v7.2.0 — Intelligence Edition (H19)
  */
 
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // ── Configuration ──────────────────────────────────────────────────────────
 
@@ -34,36 +34,41 @@ const MAX_STRENGTH = 1.0;
 // ── Tool-to-skill mapping for Alex cognitive tools ─────────────────────────
 
 const TOOL_SKILL_MAP = {
-  'alex_cognitive_synapse_health': 'architecture-health',
-  'alex_cognitive_memory_search': 'global-knowledge',
-  'alex_cognitive_architecture_status': 'architecture-health',
-  'alex_cognitive_user_profile': 'persona-detection',
-  'alex_cognitive_self_actualization': 'self-actualization',
-  'alex_cognitive_state_update': 'meditation',
-  'alex_cognitive_cross_domain_synthesis': 'knowledge-synthesis',
-  'alex_knowledge_search': 'global-knowledge',
-  'alex_knowledge_save_insight': 'knowledge-synthesis',
-  'alex_knowledge_promote': 'knowledge-synthesis',
-  'alex_knowledge_status': 'global-knowledge',
+  alex_cognitive_synapse_health: "architecture-health",
+  alex_cognitive_memory_search: "global-knowledge",
+  alex_cognitive_architecture_status: "architecture-health",
+  alex_cognitive_user_profile: "persona-detection",
+  alex_cognitive_self_actualization: "self-actualization",
+  alex_cognitive_state_update: "meditation",
+  alex_cognitive_cross_domain_synthesis: "knowledge-synthesis",
+  alex_knowledge_search: "global-knowledge",
+  alex_knowledge_save_insight: "knowledge-synthesis",
+  alex_knowledge_promote: "knowledge-synthesis",
+  alex_knowledge_status: "global-knowledge",
 };
 
 // ── Read stdin JSON ────────────────────────────────────────────────────────
 
 let input = {};
 try {
-  input = JSON.parse(fs.readFileSync(0, 'utf8'));
-} catch { /* No stdin or invalid JSON — use defaults */ }
+  input = JSON.parse(fs.readFileSync(0, "utf8"));
+} catch {
+  /* No stdin or invalid JSON — use defaults */
+}
 
-const toolName = input.tool_name || '';
+const toolName = input.tool_name || "";
 const toolInput = input.tool_input || {};
-const workspaceRoot = input.cwd || path.resolve(__dirname, '../../..');
+const workspaceRoot = input.cwd || path.resolve(__dirname, "../../..");
 
 // ── Identify activated skill(s) ────────────────────────────────────────────
 
 const activatedSkills = new Set();
 
 // Strategy 1: File path analysis — if editing a .github/skills/X/ file
-const filePath = (toolInput.filePath || toolInput.file_path || '').replace(/\\/g, '/');
+const filePath = (toolInput.filePath || toolInput.file_path || "").replace(
+  /\\/g,
+  "/",
+);
 const skillPathMatch = filePath.match(/\.github\/skills\/([^/]+)\//);
 if (skillPathMatch) {
   activatedSkills.add(skillPathMatch[1]);
@@ -75,7 +80,9 @@ if (TOOL_SKILL_MAP[toolName]) {
 }
 
 // Strategy 3: Instruction file edits map to related skills
-const instrMatch = filePath.match(/\.github\/instructions\/([^.]+)\.instructions\.md$/);
+const instrMatch = filePath.match(
+  /\.github\/instructions\/([^.]+)\.instructions\.md$/,
+);
 if (instrMatch) {
   // Instruction names often match skill names (e.g. meditation.instructions.md -> meditation)
   activatedSkills.add(instrMatch[1]);
@@ -88,12 +95,17 @@ if (activatedSkills.size === 0) {
 
 // ── Buffer management ──────────────────────────────────────────────────────
 
-const bufferPath = path.join(workspaceRoot, '.github', 'config', 'synapse-activation-buffer.json');
+const bufferPath = path.join(
+  workspaceRoot,
+  ".github",
+  "config",
+  "synapse-activation-buffer.json",
+);
 
 let buffer = { activations: {}, lastFlushed: null };
 try {
   if (fs.existsSync(bufferPath)) {
-    buffer = JSON.parse(fs.readFileSync(bufferPath, 'utf8'));
+    buffer = JSON.parse(fs.readFileSync(bufferPath, "utf8"));
   }
 } catch {
   // Fresh buffer
@@ -115,27 +127,34 @@ for (const [skill, count] of Object.entries(buffer.activations)) {
 }
 
 if (skillsToFlush.length > 0) {
-  const skillsDir = path.join(workspaceRoot, '.github', 'skills');
+  const skillsDir = path.join(workspaceRoot, ".github", "skills");
 
   for (const skill of skillsToFlush) {
-    const synapsePath = path.join(skillsDir, skill, 'synapses.json');
+    const synapsePath = path.join(skillsDir, skill, "synapses.json");
     try {
       if (!fs.existsSync(synapsePath)) continue;
 
-      const synapse = JSON.parse(fs.readFileSync(synapsePath, 'utf8'));
+      const synapse = JSON.parse(fs.readFileSync(synapsePath, "utf8"));
       if (!Array.isArray(synapse.connections)) continue;
 
       let modified = false;
       for (const conn of synapse.connections) {
-        if (typeof conn.strength === 'number' && conn.strength < MAX_STRENGTH) {
-          conn.strength = Math.min(MAX_STRENGTH, +(conn.strength + ACTIVATION_DELTA).toFixed(2));
+        if (typeof conn.strength === "number" && conn.strength < MAX_STRENGTH) {
+          conn.strength = Math.min(
+            MAX_STRENGTH,
+            +(conn.strength + ACTIVATION_DELTA).toFixed(2),
+          );
           modified = true;
         }
       }
 
       if (modified) {
-        synapse.lastActivated = new Date().toISOString().split('T')[0];
-        fs.writeFileSync(synapsePath, JSON.stringify(synapse, null, 2) + '\n', 'utf8');
+        synapse.lastActivated = new Date().toISOString().split("T")[0];
+        fs.writeFileSync(
+          synapsePath,
+          JSON.stringify(synapse, null, 2) + "\n",
+          "utf8",
+        );
       }
     } catch {
       // Silent — never fail the tool call for synapse bookkeeping
@@ -153,7 +172,7 @@ if (skillsToFlush.length > 0) {
 try {
   const configDir = path.dirname(bufferPath);
   if (!fs.existsSync(configDir)) fs.mkdirSync(configDir, { recursive: true });
-  fs.writeFileSync(bufferPath, JSON.stringify(buffer, null, 2) + '\n', 'utf8');
+  fs.writeFileSync(bufferPath, JSON.stringify(buffer, null, 2) + "\n", "utf8");
 } catch {
   // Silent — PostToolUse must never fail the tool call
 }
