@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.1.2] - 2026-04-03
+
+> **Intelligence Foundations** -- User friction inventory (29 signals), silence-as-signal skill, cross-domain pattern synthesis tool, stale count elimination across documentation.
+
+### Added
+
+- **`silence-as-signal` skill** -- Core-tier skill recognizing 5 silence contexts (flow state, thinking pause, emotional processing, user-has-the-answer, after-bad-news) with inhibitory synapse to `proactive-assistance` and complementary synapse with `frustration-recognition`
+- **`alex_cognitive_cross_domain_synthesis` LM tool** -- Reads `.github/episodic/*.md`, classifies into 14 domain categories, builds synapse adjacency matrix, identifies under-connected domain pairs, returns structured synthesis report for meditation Phase 3
+- **User friction inventory** -- 29 friction signals cataloged across 5 categories (onboarding, daily workflow, error/recovery, feature discovery, cross-platform) with priority matrix and 7 quick wins in `alex_docs/research/USER-FRICTION-INVENTORY.md`
+- **Meditation Phase 3** -- Cross-Domain Pattern Synthesis phase added to 8-phase meditation protocol with Transfer Test quality gate
+
+### Changed
+
+- **Stale count elimination** -- Replaced hardcoded skill/tool/instruction counts with dynamic references across copilot-instructions.md, ROADMAP.md, VSCODE-BRAIN-INTEGRATION.md, marketplace publishing instructions, and 6 alex_docs files
+- **Documentation refresh** -- Updated LM tool count (13 to 14), skill counts (136/150/158 to 150+/159+), removed discontinued Agent Plugin section from root README
+- **Meditation protocol renumbered** -- Fractional phases (1, 1.5, 1.7, 2, 3, 3.5, 4, 5) renumbered to sequential 1-8
+
+### Removed
+
+- **Agent Plugin platform** -- `platforms/agent-plugin/` deleted; references cleaned from 7 live docs
+- **alex_archive/** -- 1,105 files (218 MB) of stale archives deleted
+- **21 stale alex_docs files** -- Orphaned research, audits, and guides removed
+
+---
+
 ## [7.1.1] - 2026-04-01
 
 > **Cross-Platform Hardening** -- Extended workspace protection, 2 cross-platform blockers fixed, dependency cleanup, documentation portability.

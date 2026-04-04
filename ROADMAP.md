@@ -160,8 +160,8 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 
 |                            |                                                                                        |
 | -------------------------- | -------------------------------------------------------------------------------------- |
-| **Current Master Version** | 7.1.1                                                                                  |
-| **Current Heirs**          | VS Code (7.1.1)                                                                        |
+| **Current Master Version** | 7.1.2                                                                                  |
+| **Current Heirs**          | VS Code (7.1.2)                                                                        |
 | **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                         |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md) |
 | **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                                 |

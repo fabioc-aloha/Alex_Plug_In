@@ -11,6 +11,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.1.2] - 2026-04-03
+
+> **Intelligence Foundations** -- User friction inventory (29 signals), silence-as-signal skill, cross-domain pattern synthesis tool, stale count elimination across documentation.
+
+### Added
+
+- **`silence-as-signal` skill** -- Core-tier skill recognizing 5 silence contexts (flow state, thinking pause, emotional processing, user-has-the-answer, after-bad-news) with inhibitory synapse to `proactive-assistance`
+- **`alex_cognitive_cross_domain_synthesis` LM tool** -- Episodic memory analysis for cross-domain pattern discovery during meditation Phase 3
+- **User friction inventory** -- 29 friction signals cataloged across 5 categories in `alex_docs/research/USER-FRICTION-INVENTORY.md`
+- **Meditation Phase 3** -- Cross-Domain Pattern Synthesis with Transfer Test quality gate
+
+### Changed
+
+- **Stale count elimination** -- Replaced hardcoded counts with dynamic references across documentation
+- **Documentation refresh** -- Updated LM tool count (14), skill counts (159+), removed discontinued Agent Plugin references
+- **Meditation protocol renumbered** -- Sequential 1-8 phases (was fractional)
+
+---
+
 ## [6.8.4] - 2026-03-27
 
 ### Changed

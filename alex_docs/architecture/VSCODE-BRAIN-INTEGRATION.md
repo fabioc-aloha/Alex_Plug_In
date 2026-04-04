@@ -131,16 +131,16 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 
 ### Hard Dependencies (Alex Cannot Function Without)
 
-| Feature                          | Setting                                                  | Why Alex Needs It                                                                |
-| -------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **GitHub Copilot Chat**          | (built-in with Copilot)                                  | The `@alex` chat participant requires the Chat API provided by GitHub Copilot    |
-| **Instructions Files**           | `chat.instructionsFilesLocations`                        | Auto-loads `.github/instructions/*.instructions.md` — Alex's behavioral rules    |
-| **Prompt Files**                 | `chat.promptFilesLocations`                              | Enables `/` slash commands from `.github/prompts/*.prompt.md`                    |
-| **Skills Files**                 | `chat.agentSkillsLocations`                              | Auto-loads skills from `.github/skills/*/SKILL.md` — Alex's domain expertise    |
-| **Skill Adherence**              | `chat.useSkillAdherencePrompt`                           | Forces LLM to read SKILL.md before responding — knowledge quality gate           |
-| **Agent Mode**                   | `chat.agent.enabled`                                     | Enables agent-mode conversations where Alex can use tools autonomously           |
-| **Agents.md Files**              | `chat.useAgentsMdFile`                                   | Loads 7 specialist agents from `.github/agents/*.agent.md`                       |
-| **Code Generation Instructions** | `github.copilot.chat.codeGeneration.useInstructionFiles` | Ensures `copilot-instructions.md` (Alex's identity) is always loaded             |
+| Feature                          | Setting                                                  | Why Alex Needs It                                                             |
+| -------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **GitHub Copilot Chat**          | (built-in with Copilot)                                  | The `@alex` chat participant requires the Chat API provided by GitHub Copilot |
+| **Instructions Files**           | `chat.instructionsFilesLocations`                        | Auto-loads `.github/instructions/*.instructions.md` — Alex's behavioral rules |
+| **Prompt Files**                 | `chat.promptFilesLocations`                              | Enables `/` slash commands from `.github/prompts/*.prompt.md`                 |
+| **Skills Files**                 | `chat.agentSkillsLocations`                              | Auto-loads skills from `.github/skills/*/SKILL.md` — Alex's domain expertise  |
+| **Skill Adherence**              | `chat.useSkillAdherencePrompt`                           | Forces LLM to read SKILL.md before responding — knowledge quality gate        |
+| **Agent Mode**                   | `chat.agent.enabled`                                     | Enables agent-mode conversations where Alex can use tools autonomously        |
+| **Agents.md Files**              | `chat.useAgentsMdFile`                                   | Loads 7 specialist agents from `.github/agents/*.agent.md`                    |
+| **Code Generation Instructions** | `github.copilot.chat.codeGeneration.useInstructionFiles` | Ensures `copilot-instructions.md` (Alex's identity) is always loaded          |
 
 ### Agentic Features (Agent-Mode Capabilities)
 
@@ -409,7 +409,7 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 | ----------------------------------------------- | ----------------------------------------------------- |
 | Full agent-mode conversations                   | Extended thinking (requires Frontier model + setting) |
 | All 14 LM tools accessible by the model         | MCP tools (unless MCP gallery enabled)                |
-| 150+ skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
+| 150+ skills auto-loaded and adhered to          | Hooks lifecycle automation                            |
 | 50+ instructions auto-loaded by pattern         |                                                       |
 | 7 specialist agents (Builder, Researcher, etc.) |                                                       |
 | Search subagent (web search in conversations)   |                                                       |
