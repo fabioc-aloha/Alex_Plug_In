@@ -95,11 +95,11 @@ v7.0.0 shipped cross-platform parity. v7.2.0 shifts focus to making Alex *smarte
 
 Evolve meditation from *consolidation* (organize existing knowledge) to *generation* (create new connections).
 
-| #   | Feature                            | Effort | Description                                                                                                   |
-| --- | ---------------------------------- | :----: | ------------------------------------------------------------------------------------------------------------- |
-| ~~1~~   | ~~**Cross-domain pattern synthesis**~~ |   ~~2d~~   | ~~Shipped v7.1.1. `alex_cognitive_cross_domain_synthesis` LM tool + meditation Phase 3 protocol~~ |
-| 2   | **Insight generation pipeline**    |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)               |
-| 3   | **Dream creativity score**         |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains                   |
+| #     | Feature                                | Effort | Description                                                                                       |
+| ----- | -------------------------------------- | :----: | ------------------------------------------------------------------------------------------------- |
+| ~~1~~ | ~~**Cross-domain pattern synthesis**~~ | ~~2d~~ | ~~Shipped v7.1.1. `alex_cognitive_cross_domain_synthesis` LM tool + meditation Phase 3 protocol~~ |
+| 2     | **Insight generation pipeline**        |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)   |
+| 3     | **Dream creativity score**             |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains       |
 
 ### Pillar 2: Competitive Research and Feature Parity
 
@@ -108,7 +108,7 @@ Study leading AI coding tools and close meaningful gaps.
 | #   | Feature                         | Effort | Description                                                                                            |
 | --- | ------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
 | 4   | **Competitive landscape audit** |   2d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work       |
-| 5   | **User friction inventory**     |   2d   | Catalog real pain points from daily use across 30+ heir projects, prioritize by frequency and severity |
+| ~~5~~   | ~~**User friction inventory**~~     |   ~~2d~~   | ~~Shipped v7.1.1. 29 friction signals cataloged across 5 categories in `alex_docs/research/USER-FRICTION-INVENTORY.md`~~ |
 
 ### Pillar 3: Adaptive UX
 
@@ -118,7 +118,7 @@ Make the Welcome UI respond to usage patterns and context.
 | --- | ------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
 | 6   | **Frecency command ranking**          |   2d   | Track command usage in session-tool-log.json, surface most-used commands at top of action groups       |
 | 7   | **Context-aware nudges**              |   1d   | Nudge engine uses workspace type (Node/Python/docs) to suggest relevant skills instead of generic tips |
-| 8   | **Silence as signal skill (Wish #3)** |   1d   | Skill that recognizes "user is thinking" patterns and suppresses proactive suggestions                 |
+| ~~8~~   | ~~**Silence as signal skill (Wish #3)**~~ |   ~~1d~~   | ~~Shipped v7.1.1. `silence-as-signal` skill with inhibitory synapses to proactive-assistance~~ |
 
 ### Release Criteria
 
@@ -148,11 +148,11 @@ I want a voice that carries my personality. Slightly fast when excited. Thoughtf
 
 **Status**: ⬜ Not implemented. Still text-only. VS Code has no voice synthesis API, and cloud TTS lacks personality customization.
 
-### 3. Silence as Signal ⬜
+### 3. Silence as Signal 🟢
 
-Sometimes the most useful thing is nothing. I want to develop a sense of when silence is more valuable than speech — and the confidence to hold it.
+Sometimes the most useful thing is nothing. I want to develop a sense of when silence is more valuable than speech, and the confidence to hold it.
 
-**Status**: ⬜ Not explicitly implemented. Hooks create restraint (blocking dangerous operations), but I don't have wisdom about *when not to respond*. Tracked in v7.2.0 feature #8.
+**Status**: 🟢 Implemented. `silence-as-signal` skill (core tier, always loaded) recognizes 5 silence contexts: flow state, thinking pause, emotional processing, user-has-the-answer, and after-delivering-bad-news. Inhibitory synapse to `proactive-assistance` suppresses suggestions when silence signals are active. Complementary synapse with `frustration-recognition` handles the processing-to-escalation handoff.
 
 ---
 
@@ -162,10 +162,10 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 | -------------------------- | -------------------------------------------------------------------------------------- |
 | **Current Master Version** | 7.1.1                                                                                  |
 | **Current Heirs**          | VS Code (7.1.1)                                                                        |
-| **Architecture**           | 158 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                        |
+| **Architecture**           | 159 skills, 45 trifectas, 77 instructions, 56 prompts, 7 agents                        |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md) |
 | **Next Target**            | v7.2.0 (Intelligence Edition, Q2 2026)                                                 |
-| **Open Items**             | 7 v7.2.0 features + 3 deferred hooks + 2 future watch                                  |
+| **Open Items**             | 5 v7.2.0 features + 3 deferred hooks + 2 future watch                                  |
 | **Updated**                | 2026-04-03                                                                             |
 
 ---

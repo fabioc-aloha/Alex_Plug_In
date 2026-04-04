@@ -27,7 +27,7 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v7.1.1 roadmap split, agent-plugin discontinued, alex_archive deleted, brain audit. 158 skills, 45 trifectas.
+Recent: v7.1.1 roadmap split, agent-plugin discontinued, alex_archive deleted, brain audit. 159 skills, 45 trifectas.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: 2026-04-03

@@ -1,13 +1,17 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "alex_docs/MODEL-TOOL-MATRIX.md",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/chat/tools/index.ts",
-    "platforms/vscode-extension/src/chat/tools/types.ts",
-    "platforms/vscode-extension/src/chat/tools/crossDomainSynthesisTool.ts"
+    "github/copilot-instructions.md",
+    "ROADMAP.md",
+    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md",
+    "alex_docs/research/USER-FRICTION-INVENTORY.md"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1775262361059
+  "todoHotspots": [
+    {
+      "file": "alex_docs/research/USER-FRICTION-INVENTORY.md",
+      "todoCount": 3,
+      "scannedAt": 1775263340923
+    }
+  ],
+  "lastUpdated": 1775263340923
 }

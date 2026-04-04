@@ -1,14 +1,14 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-03-27
-> Total Skills: **157** (143 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
-> Total Connections: **802** (0 bidirectional, 130 weak)
+> Generated: 2026-04-04
+> Total Skills: **159** (145 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
+> Total Connections: **820** (0 bidirectional, 131 weak)
 
 ---
 
 ## Skills by Inheritance
 
-### Inheritable (143)
+### Inheritable (145)
 
 | Skill | Connections |
 | ----- | ----------- |
@@ -54,7 +54,7 @@
 | `creative-writing` | 5 |
 | `cross-cultural-collaboration` | 6 |
 | `dashboard-design` | 7 |
-| `data-analysis` | 7 |
+| `data-analysis` | 8 |
 | `data-quality-monitoring` | 4 |
 | `data-storytelling` | 8 |
 | `data-visualization` | 7 |
@@ -88,7 +88,7 @@
 | `incident-response` | 3 |
 | `infrastructure-as-code` | 5 |
 | `journalism` | 5 |
-| `knowledge-synthesis` | 4 |
+| `knowledge-synthesis` | 5 |
 | `learning-psychology` | 3 |
 | `legal-compliance` | 5 |
 | `lint-clean-markdown` | 4 |
@@ -104,6 +104,7 @@
 | `meditation` | 5 |
 | `meeting-efficiency` | 5 |
 | `memory-activation` | 5 |
+| `memory-curation` | 8 |
 | `memory-export` | 4 |
 | `microsoft-fabric` | 5 |
 | `microsoft-graph-api` | 4 |
@@ -120,7 +121,7 @@
 | `practitioner-research` | 7 |
 | `presentation-tool-selection` | 4 |
 | `privacy-responsible-ai` | 5 |
-| `proactive-assistance` | 6 |
+| `proactive-assistance` | 7 |
 | `project-deployment` | 4 |
 | `project-management` | 7 |
 | `project-scaffolding` | 7 |
@@ -129,7 +130,7 @@
 | `rag-architecture` | 7 |
 | `react-vite-performance` | 4 |
 | `refactoring-patterns` | 5 |
-| `research-first-development` | 9 |
+| `research-first-development` | 10 |
 | `research-project-scaffold` | 5 |
 | `root-cause-analysis` | 4 |
 | `rubber-duck-debugging` | 7 |
@@ -139,6 +140,7 @@
 | `security-review` | 9 |
 | `self-actualization` | 6 |
 | `service-worker-offline-first` | 4 |
+| `silence-as-signal` | 5 |
 | `skill-building` | 1 |
 | `skill-development` | 9 |
 | `slide-design` | 1 |
@@ -176,7 +178,7 @@
 | `enterprise-integration` | 3 |
 | `persona-detection` | 5 |
 | `vscode-configuration-validation` | 6 |
-| `vscode-extension-patterns` | 11 |
+| `vscode-extension-patterns` | 12 |
 
 ### M365 Heir (2)
 
