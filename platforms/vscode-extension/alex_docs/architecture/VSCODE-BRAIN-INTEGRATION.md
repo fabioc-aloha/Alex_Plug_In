@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch
 **Date**: February 26, 2026
-**Version**: 2.1 — Alex v7.1.3
+**Version**: 2.2 — Alex v7.2.0
 **North Star**: *Create the most advanced and trusted AI partner for any job*
 
 **Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Loading Mechanics](./LOADING-MECHANICS.md)
@@ -36,7 +36,7 @@ This document maps every integration point between the two, inventories all plat
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    VS Code Host (≥1.109)                │
+│                    VS Code Host (≥1.110)                │
 │  ┌────────────────┐  ┌───────────┐  ┌────────────────┐  │
 │  │ Chat Platform  │  │ LM Access │  │  UI Surfaces   │  │
 │  │  @alex chat    │  │ GPT/Claude│  │  Sidebar       │  │
@@ -51,6 +51,7 @@ This document maps every integration point between the two, inventories all plat
 │  │  modelIntelligence.ts → honestUncertainty.ts      │  │
 │  │  emotionalMemory.ts → personaDetection.ts         │  │
 │  │  fileWatcher.ts → globalKnowledge.ts              │  │
+│  │  terminalOrchestrator.ts → browserContext.ts      │  │
 │  └───────┬────────────────┬─────────────────┬────────┘  │
 │          │                │                 │           │
 │  ┌───────┴───┐  ┌─────────┴─────┐  ┌────────┴────────┐  │
@@ -77,17 +78,17 @@ Alex doesn't wrap VS Code — Alex **inhabits** VS Code. The cognitive architect
 ### Engine Requirement
 
 ```json
-"engines": { "vscode": "^1.109.0" }
+"engines": { "vscode": "^1.110.0" }
 ```
 
-VS Code 1.109+ is the minimum. This gates access to the Chat Participant API, Language Model Tools API, Agent mode, and the skills/instructions file system.
+VS Code 1.110+ is the minimum. This gates access to the Chat Participant API, Language Model Tools API, Agent mode, and the skills/instructions file system.
 
 ### Core VS Code APIs Used
 
 | API Surface                  | Source Module                                                                         | Purpose                                                                                                                   |
 | ---------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | **Chat Participant API**     | `participant.ts`                                                                      | Registers `@alex` as a chat participant with slash commands, disambiguation, and response streaming                       |
-| **Language Model Tools API** | `tools.ts`                                                                            | Registers 13 LM tools (synapse health, memory search, knowledge, etc.) that models can invoke                             |
+| **Language Model Tools API** | `tools.ts`, `globalKnowledgeTools.ts`                                                 | Registers 13 LM tools (synapse health, memory search, knowledge, etc.) that models can invoke                             |
 | **Language Model Chat API**  | `participant.ts`, `readAloud.ts`, `personaDetection.ts`                               | Direct model access via `vscode.lm.selectChatModels()` and `model.sendRequest()` for persona detection, TTS summarization |
 | **WebviewView Provider**     | `welcomeView.ts`, `cognitiveDashboard.ts`, `healthDashboard.ts`, `memoryDashboard.ts` | Sidebar panels with HTML/CSS/JS for welcome view, cognitive dashboard, health dashboard, memory architecture              |
 | **TreeDataProvider**         | `memoryTreeProvider.ts`                                                               | Memory Architecture tree in the Activity Bar sidebar                                                                      |
@@ -210,7 +211,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 - **Chat**: Unlimited messages
 - **Agent Mode**: Full agent mode with tool calling
 - **Models**: GPT-4o, Claude Sonnet 4 (Capable tier); limited premium model access
-- **Alex Impact**: Full Level 3 experience. All 14 LM tools, 150+ skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
+- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 159 skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
 - **Recommended for**: Individual developers who want the full Alex experience
 
 #### Copilot Pro+
@@ -296,11 +297,11 @@ The brain (`.github/`) is the cognitive architecture. Here's how each component 
 | -------------------- | -------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | **Identity**         | `copilot-instructions.md`        | Auto-loaded by VS Code as system context                          | Defines who Alex is, routing logic, active context                                                            |
 | **Instructions**     | `instructions/*.instructions.md` | Auto-loaded by `applyTo` pattern or semantic description matching | Behavioral rules — see [Loading Mechanics](./LOADING-MECHANICS.md) for Tier 2 details                         |
-| **Skills**           | `skills/*/SKILL.md`              | 3-level progressive disclosure via `chat.agentSkillsLocations`    | 150 domain expertise files; body loads on-demand — see [Loading Mechanics](./LOADING-MECHANICS.md) for Tier 3 |
+| **Skills**           | `skills/*/SKILL.md`              | 3-level progressive disclosure via `chat.agentSkillsLocations`    | 159 domain expertise files; body loads on-demand — see [Loading Mechanics](./LOADING-MECHANICS.md) for Tier 3 |
 | **Prompts**          | `prompts/*.prompt.md`            | Registered as `/` slash commands                                  | User-invoked workflows (meditate, dream, learn, etc.)                                                         |
 | **Agents**           | `agents/*.agent.md`              | Loaded via `chat.useAgentsMdFile`                                 | 7 specialist agents (Builder, Researcher, Validator, Documentarian, Azure, M365, Alex)                        |
 | **Synapses**         | `skills/*/synapses.json`         | Read by extension at runtime                                      | Skill-to-skill connections, routing weights, activation patterns                                              |
-| **Episodic Memory**  | `episodic/`                      | Read/written by LM tools                                          | Session logs, calibration data, emotional patterns                                                            |
+| **Episodic Memory**  | `episodic/`                      | Read/written by LM tools                                          | Session logs with chatSessionId, sessionName, referencedUrls; calibration data; emotional patterns            |
 | **Domain Knowledge** | `domain-knowledge/`              | Read/written by LM tools                                          | Project-specific DK-*.md files                                                                                |
 | **Config**           | `config/`                        | Read by extension at runtime                                      | Feature flags, persona config, protected mode markers                                                         |
 | **Muscles**          | `muscles/`                       | Executed by hooks/tasks/scripts                                   | Automation scripts (sync-architecture, dream-cli, pre-commit)                                                 |
@@ -348,7 +349,7 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 
 ### Level 1: Minimum — Extension Only (No Copilot)
 
-**Requirements**: VS Code ≥1.109, Alex extension installed
+**Requirements**: VS Code ≥1.110, Alex extension installed
 **Copilot Plan**: None
 **What's Missing**: No GitHub Copilot subscription
 
@@ -374,7 +375,7 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 
 ### Level 2: Basic — Copilot Chat (No Agent Mode)
 
-**Requirements**: VS Code ≥1.109, GitHub Copilot (any plan), Alex extension
+**Requirements**: VS Code ≥1.110, GitHub Copilot (any plan), Alex extension
 **Copilot Plan**: Copilot Free (rate-limited) or any paid plan in chat-only mode
 **What's Added**: Chat API access, basic model access
 
@@ -401,15 +402,15 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 
 ### Level 3: Recommended — Copilot with Agent Mode
 
-**Requirements**: VS Code ≥1.109, GitHub Copilot with agent mode, essential + recommended settings applied
+**Requirements**: VS Code ≥1.110, GitHub Copilot with agent mode, essential + recommended settings applied
 **Copilot Plan**: Copilot Pro ($10/mo) or Copilot Business ($19/user/mo) — *recommended minimum for full Alex*
 **What's Added**: Agent mode, tool calling, skills, instructions, agents
 
 | Works (adds to Level 2)                         | Doesn't Work                                          |
 | ----------------------------------------------- | ----------------------------------------------------- |
 | Full agent-mode conversations                   | Extended thinking (requires Frontier model + setting) |
-| All 14 LM tools accessible by the model         | MCP tools (unless MCP gallery enabled)                |
-| 150+ skills auto-loaded and adhered to          | Hooks lifecycle automation                            |
+| All 13 LM tools accessible by the model         | MCP tools (unless MCP gallery enabled)                |
+| 159 skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
 | 50+ instructions auto-loaded by pattern         |                                                       |
 | 7 specialist agents (Builder, Researcher, etc.) |                                                       |
 | Search subagent (web search in conversations)   |                                                       |
@@ -431,7 +432,7 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 
 ### Level 4: Advanced — Full Platform (Frontier Model + MCP + Extended Thinking)
 
-**Requirements**: VS Code ≥1.109, GitHub Copilot with Frontier model access (Claude Opus 4/4.5), all settings including extended thinking, MCP gallery, and auto-approval enabled
+**Requirements**: VS Code ≥1.110, GitHub Copilot with Frontier model access (Claude Opus 4/4.5), all settings including extended thinking, MCP gallery, and auto-approval enabled
 **Copilot Plan**: Copilot Pro+ ($39/mo) or Copilot Enterprise ($39/user/mo) — *where Alex truly thrives*
 **What's Added**: Deep reasoning, extended context, MCP integrations
 
@@ -633,7 +634,7 @@ The Recommended tier is where Alex becomes a true cognitive partner. Agent mode 
 | ---------------------------------- | :-----: | :---: | :---------: | :------: |
 | Agent Mode                         |    ❌    |   ❌   |      ✅      |    ✅     |
 | 14 Language Model Tools            |    ❌    |   ❌   |      ✅      |    ✅     |
-| 150+ Skills (auto-loaded)          |    ❌    |   ❌   |      ✅      |    ✅     |
+| 159 Skills (auto-loaded)           |    ❌    |   ❌   |      ✅      |    ✅     |
 | 50+ Instructions (pattern-matched) |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents                |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session)     |    ❌    |   ❌   |      ✅      |    ✅     |

@@ -2,8 +2,8 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "1.0",
   "skillId": "vscode-extension-patterns",
-  "version": "1.5.0",
-  "lastValidated": "2026-03-09",
+  "version": "1.6.0",
+  "lastValidated": "2026-04-07",
   "connections": [
     {
       "target": ".github/instructions/release-management.instructions.md",
@@ -32,8 +32,8 @@
     {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "implements",
-      "strength": 0.8,
-      "reason": "CSP, SecretStorage, telemetry compliance",
+      "strength": 0.9,
+      "reason": "CSP, SecretStorage, telemetry compliance, webview XSS/path traversal (v7.2.0)",
       "when": "When task involves .github/skills/security review/SKILL.md",
       "yields": "security review implementation steps"
     },

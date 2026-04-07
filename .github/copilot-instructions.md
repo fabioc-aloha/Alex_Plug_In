@@ -27,10 +27,10 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v7.1.1 roadmap split, agent-plugin discontinued, alex_archive deleted, brain audit. Silence-as-signal skill, user friction inventory.
+Recent: v7.2.0 Intelligence Edition published. Terminal Orchestrator, Browser Context, Session Memory. 17 bugs fixed (XSS, path traversal, CRLF). Full cross-platform audit.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-04-03
+Last Assessed: 2026-04-07
 
 ## User Profile
 

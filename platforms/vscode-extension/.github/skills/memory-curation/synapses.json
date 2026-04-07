@@ -52,13 +52,6 @@
       "strength": 0.7,
       "when": "Pattern in /memories/ reaches skill-candidate threshold (3+ repos)",
       "yields": "Skill creation procedure, trifecta scaffolding, quality gates"
-    },
-    {
-      "target": "alex_docs/research/USER-MEMORY-LEVERAGE-PLAN.md",
-      "type": "implements",
-      "strength": 1,
-      "when": "Executing any memory curation task",
-      "yields": "Full plan with constraints, structure, budget analysis, and governance"
     }
   ],
   "activationTriggers": [
