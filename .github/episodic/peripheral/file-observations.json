@@ -1,43 +1,34 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "README.md",
-    "ROADMAP.md",
-    "alex_docs/vscode/EXCAVATION-PLAN.md",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/chat/participant.ts",
-    "platforms/vscode-extension/src/chat/promptEngine.ts"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/WHAT-IS-ALEX.md",
+    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+    "alex_docs/architecture/LOADING-MECHANICS.md",
+    "alex_docs/architecture/MEMORY-SYSTEMS.md",
+    "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1775590320286
+      "scannedAt": 1775591131744
     },
     {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1775590320286
+      "file": "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+      "todoCount": 1,
+      "scannedAt": 1775591131744
+    },
+    {
+      "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1775591131744
     },
     {
       "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
       "todoCount": 1,
-      "scannedAt": 1775590320286
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1775590320286
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1775590320286
+      "scannedAt": 1775591131744
     }
   ],
-  "lastUpdated": 1775590320286
+  "lastUpdated": 1775591131744
 }

@@ -485,12 +485,16 @@ graph TB
 
 **Table 3:** *Version History*
 
-| Version | Codename     | Major Features                                                                   |
-| ------- | ------------ | -------------------------------------------------------------------------------- |
-| 1.x     | Initial      | Basic memory files, manual synapse management                                    |
-| 2.x     | BIOCTNILIUM  | Embedded synapses, dream protocols                                               |
-| 3.x     | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge                  |
-| 5.x     | Current      | dlPFC executive functions: attention gating, inhibitory control, pivot detection |
+| Version | Codename     | Major Features                                                                                |
+| ------- | ------------ | --------------------------------------------------------------------------------------------- |
+| 1.x     | Initial      | Basic memory files, manual synapse management                                                 |
+| 2.x     | BIOCTNILIUM  | Embedded synapses, dream protocols                                                            |
+| 3.x     | BIOCTNILIUM+ | Dual-mind architecture, unconscious processes, global knowledge                               |
+| 5.x     | Maturity     | dlPFC executive functions: attention gating, inhibitory control, pivot detection              |
+| 6.x     | Platform     | Multi-platform heirs (VS Code, M365), heir validation, release automation                     |
+| 7.0     | Identity     | Unified consciousness, self-actualization, North Star alignment                               |
+| 7.1     | Hardening    | Install/upgrade hardening, synapse weight hooks, cross-platform audit                         |
+| 7.2     | Intelligence | 12-layer prompt engine, terminal orchestrator, browser context, session-aware episodic memory |
 
 ---
 

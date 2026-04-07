@@ -46,7 +46,7 @@ Alex lives in a `.github/` folder in your repository:
 ```
 .github/
 +-- copilot-instructions.md   <-- Alex's identity, routing, and active context
-+-- skills/                   <-- 120+ domain-specific knowledge modules
++-- skills/                   <-- 159 domain-specific knowledge modules
 |   +-- code-review/
 |   +-- testing-strategies/
 |   +-- security-review/
@@ -82,7 +82,7 @@ Skills are domain knowledge modules that Alex loads on demand. Examples:
 - **image-handling**: AI image generation via Replicate
 - **gamma-presentations**: slide decks from markdown via the Gamma API
 
-There are over 150 skills spanning software engineering, research, writing, design, business, and more.
+There are 159 skills spanning software engineering, research, writing, design, business, and more.
 
 ## Agents: Specialized Modes
 

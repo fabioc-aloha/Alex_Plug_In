@@ -204,6 +204,24 @@ Key learnings from this session
 | `meditation-2026-01-24.prompt.md`        | Record of a meditation     |
 | `dream-report-*.md`                      | Neural maintenance reports |
 
+### Session Records (v7.2.0+)
+
+The extension also maintains session-aware episodic records at `~/.alex/episodic/sessions.json`. Each `EpisodicRecord` contains:
+
+| Field            | Type       | Purpose                                             |
+| ---------------- | ---------- | --------------------------------------------------- |
+| `id`             | `string`   | Unique record identifier                            |
+| `timestamp`      | `string`   | ISO date of the session                             |
+| `type`           | `string`   | Session type (meditation, dream, chat, etc.)        |
+| `summary`        | `string`   | Brief description of what happened                  |
+| `chatSessionId`  | `string?`  | VS Code chat session ID for cross-referencing       |
+| `sessionName`    | `string?`  | Auto-generated name from topic and inferred tags    |
+| `referencedUrls` | `string[]` | URLs tracked via browser context during the session |
+| `tags`           | `string[]` | Categorization tags                                 |
+| `synapseWeight`  | `number`   | Relevance score for retrieval                       |
+
+The `chatSessionId` enables lookup across sessions. `referencedUrls` links browser context (web pages viewed during the session) to the episodic record for future recall.
+
 ---
 
 ## Skills (Domain Knowledge)
