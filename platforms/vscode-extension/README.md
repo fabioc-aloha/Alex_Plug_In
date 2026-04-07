@@ -34,7 +34,7 @@ Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, 
 | -------------------- | -------------------------- | -------------------------------------------- |
 | **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
 | **Trust**            | Rebuild context every time | Consistency through shared history           |
-| **Skills**           | You re-prompt from scratch | 158 pre-built skills, inheritable            |
+| **Skills**           | You re-prompt from scratch | 159 pre-built skills, inheritable            |
 | **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
 | **Context**          | You re-explain every time  | Synapses map relationships automatically     |
 | **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
