@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.2.0] - 2026-04-07
+
+> **Intelligence Edition** -- 3 new services (terminal orchestrator, browser context, session-aware episodic memory), prompt Layer 12, 7 bug fixes across security, logic, and cross-platform patterns.
+
+### Added
+
+- **Terminal orchestrator service** -- Multi-step workflow engine leveraging VS Code 1.115 background terminal notifications; step-based sequential execution with exit code tracking, 3 built-in templates (build-test, build-test-package, quality-gates), timeout guards, cancellation support, session trace integration, markdown result formatting for chat responses
+- **Browser context service** -- Tracks URLs referenced during chat sessions from browser tab attachments (VS Code 1.115), model response links, and tool calls; deduplicates up to 30 references per session; persists URL history in episodic records for future recall
+- **Session-aware episodic memory** -- `EpisodicRecord` extended with `chatSessionId`, `sessionName`, `referencedUrls`; auto-generated session names from topic + inferred tags; `findSessionByChatId()` cross-reference lookup; `addReferencedUrl()` for browser context integration
+- **Prompt Layer 12: Browser Context** -- New prompt engine layer (priority 350) injects session-referenced URLs into system prompt so the model can reference web pages without re-fetching; enabled in FULL and STANDARD layer budgets, disabled in LEAN
+
+### Fixed
+
+- **XSS in cognitive dashboard** (SECURITY) -- `activity.description` derived from file names was injected into `innerHTML` without escaping; a crafted file name could execute JavaScript in the webview. Now escaped via `escapeHtml()` on the host side before `postMessage`
+- **Path traversal in health/memory dashboards** (SECURITY) -- `openFile` and `openFolder` message handlers accepted arbitrary file paths from webview messages without validation. Now validates resolved paths start within the workspace root
+- **Inverted Global Knowledge detection** (LOGIC) -- `offerGlobalKnowledgeSetup()` returned early when no GK repo existed (the users who need the offer most), and showed the offer to users who already had GK. Condition inverted to correct behavior
+- **Browser context capture ordering** (LOGIC) -- `captureFromChatRequest()` was called after `buildAlexSystemPrompt()`, so browser tab URLs from the current request never appeared in Layer 12 until the next turn. Moved capture before prompt building
+- **CRLF-unsafe frontmatter regex in parseSkillMetadata** (CROSS-PLATFORM) -- `^---\n` pattern in `proposeSkill.ts` failed on Windows CRLF files, causing `parseSkillMetadata()` to return empty metadata. Fixed to `\r?\n` (same fix already applied at line 717 in the same file)
+- **Uncaught promise rejection in autoInsights** -- `promptToSaveInsight()` called without `.catch()` from fire-and-forget context; async I/O in `isDuplicateInsight()` could throw unhandled rejection. Added `.catch(() => {})`
+- **CRLF bugs in muscle scripts** (CROSS-PLATFORM) -- `audit-token-waste.cjs`, `brain-qa.cjs`, `brain-qa-heir.cjs`, and `docx-to-md.cjs` used `.split('\n')` or `\n` in frontmatter regex without `\r?`, causing `$`-anchored regex to silently fail on CRLF files. Fixed all to use `/\r?\n/`
+- **Hardcoded backslash path separators in PS1 muscles** (CROSS-PLATFORM) -- `brain-qa.ps1`, `brain-qa-heir.ps1`, `normalize-paths.ps1`, and `fix-fence-bug.ps1` used `+ "\"` for path stripping, breaking relative path computation on macOS. Fixed to `[IO.Path]::DirectorySeparatorChar`. Also fixed `.git\\` exclusion regex in `fix-fence-bug.ps1` to match both `\` and `/`
+- **Missing `#Requires` in build-extension-package.ps1** -- Script uses PS7-only `??` operator but had no version guard; produces parse error on PowerShell 5.1. Added `#Requires -Version 7.0`
+- **Unused imports and dead code** -- Removed unused `getSessionReferencedUrls` import in browserContext.ts and unused `OUTPUT_TAIL_LINES` constant in terminalOrchestrator.ts
+
+---
+
 ## [7.1.3] - 2026-04-04
 
 > **Install/Upgrade Hardening + H19** -- 6 install/upgrade process fixes (critical .github preservation, rollback, force repair), H19 synapse weight update hook for live learning.

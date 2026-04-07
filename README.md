@@ -209,6 +209,17 @@ The upgrade preserves:
 
 > **Stale items** (not modified in >90 days) are flagged for manual review via MIGRATION-CANDIDATES.md.
 
+### What's New (v7.2.0 -- Intelligence Edition)
+
+| Category                  | Highlights                                                                                                        |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Terminal Orchestrator** | Multi-step workflow engine with VS Code 1.115 background terminal notifications; 3 built-in templates             |
+| **Browser Context**       | Tracks URLs from chat browser tabs, response links, and tool calls; injects into prompt Layer 12                  |
+| **Session Memory**        | Episodic records now capture chat session IDs, auto-generated names, and referenced URLs for cross-session recall |
+| **Security Fixes**        | XSS in cognitive dashboard, path traversal in health/memory dashboards                                            |
+| **Logic Fixes**           | Inverted Global Knowledge setup offer, browser context capture ordering                                           |
+| **Cross-Platform**        | CRLF-safe frontmatter parsing in proposeSkill.ts                                                                  |
+
 ### What's New (v7.1.3 -- Install/Upgrade Hardening + H19)
 
 | Category                 | Highlights                                                                                                   |

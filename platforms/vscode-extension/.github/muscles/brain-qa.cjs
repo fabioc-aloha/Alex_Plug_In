@@ -299,7 +299,7 @@ if (runPhases.includes(4)) {
   );
   if (fs.existsSync(indexPath)) {
     const triggers = {};
-    const lines = fs.readFileSync(indexPath, "utf8").split("\n");
+    const lines = fs.readFileSync(indexPath, "utf8").split(/\r?\n/);
     for (const line of lines) {
       const m = line.match(/^\|\s*([a-z-]+)\s*\|\s*(.+?)\s*\|$/);
       if (m) {

@@ -1,6 +1,6 @@
 /**
  * Cognitive Dashboard v5.2.0
- * 
+ *
  * Unified dashboard consolidating:
  * - Brain Health (synapse status)
  * - Memory Architecture (skills, instructions, prompts)
@@ -8,10 +8,10 @@
  * - Recent Activity
  */
 
-import * as vscode from 'vscode';
-import * as path from 'path';
-import * as workspaceFs from '../shared/workspaceFs';
-import { getNonce } from '../shared/sanitize';
+import * as vscode from "vscode";
+import * as path from "path";
+import * as workspaceFs from "../shared/workspaceFs";
+import { escapeHtml, getNonce } from "../shared/sanitize";
 
 /**
  * Dashboard data structure
@@ -20,7 +20,7 @@ interface DashboardData {
   version: string;
   lastUpdated: string;
   health: {
-    overall: 'healthy' | 'warning' | 'critical';
+    overall: "healthy" | "warning" | "critical";
     synapseCount: number;
     healthySynapses: number;
     brokenSynapses: number;
@@ -42,7 +42,7 @@ interface DashboardData {
  * Cognitive Dashboard Provider
  */
 export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
-  public static readonly viewType = 'alex.cognitiveDashboard';
+  public static readonly viewType = "alex.cognitiveDashboard";
 
   private _view?: vscode.WebviewView;
   private _extensionUri: vscode.Uri;
@@ -55,38 +55,43 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
     _context: vscode.WebviewViewResolveContext,
-    _token: vscode.CancellationToken
+    _token: vscode.CancellationToken,
   ): void {
     this._view = webviewView;
 
     webviewView.webview.options = {
       enableScripts: true,
-      localResourceRoots: [this._extensionUri]
+      localResourceRoots: [this._extensionUri],
     };
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
     // Handle messages from webview
-    webviewView.webview.onDidReceiveMessage(async message => {
+    webviewView.webview.onDidReceiveMessage(async (message) => {
       switch (message.command) {
-        case 'refresh':
+        case "refresh":
           await this.refresh();
           break;
-        case 'dream':
-          await vscode.commands.executeCommand('alex.dream');
+        case "dream":
+          await vscode.commands.executeCommand("alex.dream");
           break;
-        case 'selfActualize':
-          await vscode.commands.executeCommand('alex.selfActualize');
+        case "selfActualize":
+          await vscode.commands.executeCommand("alex.selfActualize");
           break;
-        case 'syncKnowledge':
-          await vscode.commands.executeCommand('alex.syncKnowledge');
+        case "syncKnowledge":
+          await vscode.commands.executeCommand("alex.syncKnowledge");
           break;
       }
     });
 
     // Start auto-refresh
-    const refreshInterval = vscode.workspace.getConfiguration('alex.dashboard').get('refreshInterval', 30);
-    this._refreshInterval = setInterval(() => this.refresh(), refreshInterval * 1000);
+    const refreshInterval = vscode.workspace
+      .getConfiguration("alex.dashboard")
+      .get("refreshInterval", 30);
+    this._refreshInterval = setInterval(
+      () => this.refresh(),
+      refreshInterval * 1000,
+    );
 
     // Initial data load
     this.refresh();
@@ -103,10 +108,12 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
    * Refresh dashboard data
    */
   public async refresh(): Promise<void> {
-    if (!this._view) {return;}
+    if (!this._view) {
+      return;
+    }
 
     const data = await this.collectDashboardData();
-    this._view.webview.postMessage({ command: 'update', data });
+    this._view.webview.postMessage({ command: "update", data });
   }
 
   /**
@@ -115,10 +122,10 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
   private async collectDashboardData(): Promise<DashboardData> {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     const data: DashboardData = {
-      version: this.context.extension.packageJSON.version || '5.2.0',
+      version: this.context.extension.packageJSON.version || "5.2.0",
       lastUpdated: new Date().toISOString(),
       health: {
-        overall: 'healthy',
+        overall: "healthy",
         synapseCount: 0,
         healthySynapses: 0,
         brokenSynapses: 0,
@@ -132,38 +139,48 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
       recentActivity: [],
     };
 
-    if (!workspaceFolder) {return data;}
+    if (!workspaceFolder) {
+      return data;
+    }
 
     const rootPath = workspaceFolder.uri.fsPath;
-    const githubPath = path.join(rootPath, '.github');
+    const githubPath = path.join(rootPath, ".github");
 
     try {
       // Count skills (async)
-      const skillsPath = path.join(githubPath, 'skills');
+      const skillsPath = path.join(githubPath, "skills");
       if (await workspaceFs.pathExists(skillsPath)) {
         const skillDirs = await workspaceFs.readDirectory(skillsPath);
-        data.memory.skillCount = skillDirs.filter(([_, fileType]) => fileType === vscode.FileType.Directory).length;
+        data.memory.skillCount = skillDirs.filter(
+          ([_, fileType]) => fileType === vscode.FileType.Directory,
+        ).length;
       }
 
       // Count instructions (async)
-      const instructionsPath = path.join(githubPath, 'instructions');
+      const instructionsPath = path.join(githubPath, "instructions");
       if (await workspaceFs.pathExists(instructionsPath)) {
         const files = await workspaceFs.readDirectory(instructionsPath);
-        data.memory.instructionCount = files.filter(([name, _]) => name.endsWith('.instructions.md')).length;
+        data.memory.instructionCount = files.filter(([name, _]) =>
+          name.endsWith(".instructions.md"),
+        ).length;
       }
 
       // Count prompts (async)
-      const promptsPath = path.join(githubPath, 'prompts');
+      const promptsPath = path.join(githubPath, "prompts");
       if (await workspaceFs.pathExists(promptsPath)) {
         const files = await workspaceFs.readDirectory(promptsPath);
-        data.memory.promptCount = files.filter(([name, _]) => name.endsWith('.prompt.md')).length;
+        data.memory.promptCount = files.filter(([name, _]) =>
+          name.endsWith(".prompt.md"),
+        ).length;
       }
 
       // Count episodic memories (async)
-      const episodicPath = path.join(githubPath, 'episodic');
+      const episodicPath = path.join(githubPath, "episodic");
       if (await workspaceFs.pathExists(episodicPath)) {
         const files = await workspaceFs.readDirectory(episodicPath);
-        data.memory.episodicCount = files.filter(([name, _]) => name.endsWith('.md')).length;
+        data.memory.episodicCount = files.filter(([name, _]) =>
+          name.endsWith(".md"),
+        ).length;
       }
 
       // Check synapse health by scanning skill directories (async)
@@ -172,11 +189,12 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
       let brokenSynapses = 0;
 
       if (await workspaceFs.pathExists(skillsPath)) {
-        const skillDirs = (await workspaceFs.readDirectory(skillsPath))
-          .filter(([_, fileType]) => fileType === vscode.FileType.Directory);
+        const skillDirs = (await workspaceFs.readDirectory(skillsPath)).filter(
+          ([_, fileType]) => fileType === vscode.FileType.Directory,
+        );
 
         for (const [dirName, _] of skillDirs) {
-          const synapsePath = path.join(skillsPath, dirName, 'synapses.json');
+          const synapsePath = path.join(skillsPath, dirName, "synapses.json");
           if (await workspaceFs.pathExists(synapsePath)) {
             totalSynapses++;
             try {
@@ -184,7 +202,11 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
               JSON.parse(content); // Validates JSON
               healthySynapses++;
             } catch (err) {
-              console.warn('[Alex Dashboard] Broken synapse:', dirName, err instanceof Error ? err.message : String(err));
+              console.warn(
+                "[Alex Dashboard] Broken synapse:",
+                dirName,
+                err instanceof Error ? err.message : String(err),
+              );
               brokenSynapses++;
             }
           }
@@ -194,16 +216,19 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
       data.health.synapseCount = totalSynapses;
       data.health.healthySynapses = healthySynapses;
       data.health.brokenSynapses = brokenSynapses;
-      data.health.overall = brokenSynapses > 0 
-        ? (brokenSynapses > 5 ? 'critical' : 'warning') 
-        : 'healthy';
+      data.health.overall =
+        brokenSynapses > 0
+          ? brokenSynapses > 5
+            ? "critical"
+            : "warning"
+          : "healthy";
 
       // Collect recent activity from episodic (async)
       if (await workspaceFs.pathExists(episodicPath)) {
         const entries = await workspaceFs.readDirectory(episodicPath);
         const files = entries
           .map(([name, _]) => name)
-          .filter(f => f.endsWith('.md'))
+          .filter((f) => f.endsWith(".md"))
           .sort()
           .reverse()
           .slice(0, 5);
@@ -211,16 +236,18 @@ export class CognitiveDashboardProvider implements vscode.WebviewViewProvider {
         for (const file of files) {
           const dateMatch = file.match(/(\d{4}-\d{2}-\d{2})/);
           data.recentActivity.push({
-            type: file.includes('meditation') ? 'meditation' : 
-                  file.includes('session') ? 'session' : 'activity',
-            description: file.replace('.md', '').replace(/-/g, ' '),
-            timestamp: dateMatch ? dateMatch[1] : 'Unknown',
+            type: file.includes("meditation")
+              ? "meditation"
+              : file.includes("session")
+                ? "session"
+                : "activity",
+            description: escapeHtml(file.replace(".md", "").replace(/-/g, " ")),
+            timestamp: dateMatch ? dateMatch[1] : "Unknown",
           });
         }
       }
-
     } catch (error) {
-      console.warn('[Alex Dashboard] Error collecting data:', error);
+      console.warn("[Alex Dashboard] Error collecting data:", error);
     }
 
     return data;
@@ -547,14 +574,16 @@ function getDashboardScript(): string {
 /**
  * Register cognitive dashboard
  */
-export function registerCognitiveDashboard(context: vscode.ExtensionContext): CognitiveDashboardProvider {
+export function registerCognitiveDashboard(
+  context: vscode.ExtensionContext,
+): CognitiveDashboardProvider {
   const provider = new CognitiveDashboardProvider(context);
-  
+
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
       CognitiveDashboardProvider.viewType,
-      provider
-    )
+      provider,
+    ),
   );
 
   return provider;

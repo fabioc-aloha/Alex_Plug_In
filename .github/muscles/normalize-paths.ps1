@@ -102,7 +102,7 @@ function Normalize-SkillPaths {
 
         if ($content -ne $original) {
             Set-Content $file.FullName -Value $content -Encoding UTF8 -NoNewline
-            $relative = $file.FullName.Replace("$RepoRoot\", '')
+            $relative = $file.FullName.Replace("$RepoRoot$([IO.Path]::DirectorySeparatorChar)", '')
             Write-Host "  Updated: $relative" -ForegroundColor Green
             $updated++
         }
@@ -157,7 +157,7 @@ function Normalize-SynapsePaths {
 
         if ($modified) {
             $json | ConvertTo-Json -Depth 10 | Set-Content $file.FullName -Encoding UTF8
-            $relative = $file.FullName.Replace("$RepoRoot\", '')
+            $relative = $file.FullName.Replace("$RepoRoot$([IO.Path]::DirectorySeparatorChar)", '')
             Write-Host "  Updated: $relative" -ForegroundColor Green
             $updated++
         }

@@ -27,11 +27,11 @@
  *   - pandoc (Windows: winget install pandoc | macOS: brew install pandoc | Linux: apt install pandoc)
  */
 
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 // ---------------------------------------------------------------------------
 // Post-processing transforms
@@ -40,18 +40,18 @@ const { execSync } = require('child_process');
 /** Remove pandoc escape quirks */
 function cleanPandocQuirks(md) {
   // Remove escaped brackets \[ \] that pandoc adds
-  md = md.replace(/\\\[/g, '[').replace(/\\\]/g, ']');
+  md = md.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
   // Remove trailing backslashes pandoc uses for hard line breaks
-  md = md.replace(/\\\s*$/gm, '');
+  md = md.replace(/\\\s*$/gm, "");
   // Clean up excessive blank lines (3+ → 2)
-  md = md.replace(/\n{3,}/g, '\n\n');
+  md = md.replace(/\n{3,}/g, "\n\n");
   // Remove {width="..."} image attributes pandoc adds
-  md = md.replace(/\{width="[^"]*"(?:\s+height="[^"]*")?\}/g, '');
+  md = md.replace(/\{width="[^"]*"(?:\s+height="[^"]*")?\}/g, "");
   // Remove {.underline} and similar pandoc span classes
-  md = md.replace(/\{\.underline\}/g, '');
-  md = md.replace(/\{\.[a-z-]+\}/g, '');
+  md = md.replace(/\{\.underline\}/g, "");
+  md = md.replace(/\{\.[a-z-]+\}/g, "");
   // Clean up empty heading anchors {#section-n}
-  md = md.replace(/\s*\{#[a-zA-Z0-9_-]+\}/g, '');
+  md = md.replace(/\s*\{#[a-zA-Z0-9_-]+\}/g, "");
   return md;
 }
 
@@ -66,13 +66,13 @@ function normalizeHeadings(md) {
   const shift = firstLevel - 1;
   return md.replace(/^(#{1,6})\s/gm, (match, hashes) => {
     const newLevel = Math.max(1, hashes.length - shift);
-    return '#'.repeat(newLevel) + ' ';
+    return "#".repeat(newLevel) + " ";
   });
 }
 
 /** Clean up pandoc table output for readable alignment */
 function cleanTables(md) {
-  const lines = md.split('\n');
+  const lines = md.split(/\r?\n/);
   const result = [];
   let inTable = false;
   let tableLines = [];
@@ -94,7 +94,7 @@ function cleanTables(md) {
   }
   if (inTable) result.push(...formatTable(tableLines));
 
-  return result.join('\n');
+  return result.join("\n");
 }
 
 function formatTable(lines) {
@@ -102,18 +102,23 @@ function formatTable(lines) {
 
   // Parse cells
   const rows = lines
-    .filter(l => l.startsWith('|'))
-    .map(l => l.split('|').slice(1, -1).map(c => c.trim()));
+    .filter((l) => l.startsWith("|"))
+    .map((l) =>
+      l
+        .split("|")
+        .slice(1, -1)
+        .map((c) => c.trim()),
+    );
 
   if (rows.length === 0) return lines;
 
-  const colCount = Math.max(...rows.map(r => r.length));
+  const colCount = Math.max(...rows.map((r) => r.length));
 
   // Calculate max widths
   const widths = Array(colCount).fill(3);
   for (const row of rows) {
     for (let i = 0; i < row.length; i++) {
-      widths[i] = Math.max(widths[i], (row[i] || '').length);
+      widths[i] = Math.max(widths[i], (row[i] || "").length);
     }
   }
 
@@ -122,14 +127,14 @@ function formatTable(lines) {
   for (let r = 0; r < rows.length; r++) {
     const cells = [];
     for (let c = 0; c < colCount; c++) {
-      cells.push(` ${(rows[r][c] || '').padEnd(widths[c])} `);
+      cells.push(` ${(rows[r][c] || "").padEnd(widths[c])} `);
     }
-    formatted.push('|' + cells.join('|') + '|');
+    formatted.push("|" + cells.join("|") + "|");
 
     // Add separator after header row
     if (r === 0) {
-      const sep = widths.map(w => '-'.repeat(w + 2));
-      formatted.push('|' + sep.join('|') + '|');
+      const sep = widths.map((w) => "-".repeat(w + 2));
+      formatted.push("|" + sep.join("|") + "|");
     }
   }
 
@@ -142,40 +147,48 @@ function extractImages(md, outputDir, imageDirName) {
   let imageCount = 0;
 
   // Handle base64 data URI images from pandoc
-  md = md.replace(/!\[([^\]]*)\]\(data:image\/([a-z+]+);base64,([A-Za-z0-9+/=\s]+)\)/g,
+  md = md.replace(
+    /!\[([^\]]*)\]\(data:image\/([a-z+]+);base64,([A-Za-z0-9+/=\s]+)\)/g,
     (match, alt, ext, base64) => {
       imageCount++;
-      const cleanExt = ext === 'svg+xml' ? 'svg' : ext;
-      const filename = `image-${String(imageCount).padStart(3, '0')}.${cleanExt}`;
+      const cleanExt = ext === "svg+xml" ? "svg" : ext;
+      const filename = `image-${String(imageCount).padStart(3, "0")}.${cleanExt}`;
       const imagePath = path.join(imageDir, filename);
 
       if (!fs.existsSync(imageDir)) fs.mkdirSync(imageDir, { recursive: true });
-      fs.writeFileSync(imagePath, Buffer.from(base64.replace(/\s/g, ''), 'base64'));
+      fs.writeFileSync(
+        imagePath,
+        Buffer.from(base64.replace(/\s/g, ""), "base64"),
+      );
 
       return `![${alt}](${imageDirName}/${filename})`;
-    }
+    },
   );
 
   // Handle pandoc media/ references
-  md = md.replace(/!\[([^\]]*)\]\(media\/([^)]+)\)/g,
+  md = md.replace(
+    /!\[([^\]]*)\]\(media\/([^)]+)\)/g,
     (match, alt, filename) => {
       imageCount++;
       const ext = path.extname(filename);
-      const newName = `image-${String(imageCount).padStart(3, '0')}${ext}`;
+      const newName = `image-${String(imageCount).padStart(3, "0")}${ext}`;
 
       // Try to copy from pandoc media dir if it exists
-      const mediaPath = path.join(outputDir, 'media', filename);
+      const mediaPath = path.join(outputDir, "media", filename);
       if (fs.existsSync(mediaPath)) {
-        if (!fs.existsSync(imageDir)) fs.mkdirSync(imageDir, { recursive: true });
+        if (!fs.existsSync(imageDir))
+          fs.mkdirSync(imageDir, { recursive: true });
         fs.copyFileSync(mediaPath, path.join(imageDir, newName));
       }
 
       return `![${alt}](${imageDirName}/${newName})`;
-    }
+    },
   );
 
   if (imageCount > 0) {
-    console.log(`  \u{1F5BC}\uFE0F  Extracted ${imageCount} image(s) to ${imageDirName}/`);
+    console.log(
+      `  \u{1F5BC}\uFE0F  Extracted ${imageCount} image(s) to ${imageDirName}/`,
+    );
   }
 
   return md;
@@ -184,17 +197,19 @@ function extractImages(md, outputDir, imageDirName) {
 /** Strip Word comment annotations */
 function stripComments(md) {
   // Remove comment markers like [GD1], [FC1], etc.
-  md = md.replace(/\[([A-Z]{1,4}\d+)\]/g, '');
+  md = md.replace(/\[([A-Z]{1,4}\d+)\]/g, "");
   // Remove comment text blocks pandoc sometimes inserts
-  md = md.replace(/> \*\*Comment \[.*?\]\*\*.*?(?=\n[^>]|\n\n|\z)/gs, '');
+  md = md.replace(/> \*\*Comment \[.*?\]\*\*.*?(?=\n[^>]|\n\n|\z)/gs, "");
   return md;
 }
 
 /** Generate YAML frontmatter from document properties */
 function generateFrontmatter(sourcePath) {
-  const basename = path.basename(sourcePath, '.docx');
-  const title = basename.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-  const date = new Date().toISOString().split('T')[0];
+  const basename = path.basename(sourcePath, ".docx");
+  const title = basename
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+  const date = new Date().toISOString().split("T")[0];
 
   return `---\ntitle: "${title}"\ndate: ${date}\nsource: "${path.basename(sourcePath)}"\n---\n\n`;
 }
@@ -219,24 +234,25 @@ function convertDocxToMarkdown(sourcePath, outputPath, options = {}) {
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
   // Pandoc conversion
-  const wrapArg = wrapWidth > 0 ? `--wrap=auto --columns=${wrapWidth}` : '--wrap=none';
-  const extractArg = doExtractImages ? `--extract-media="${outputDir}"` : '';
+  const wrapArg =
+    wrapWidth > 0 ? `--wrap=auto --columns=${wrapWidth}` : "--wrap=none";
+  const extractArg = doExtractImages ? `--extract-media="${outputDir}"` : "";
 
   try {
     execSync(
       `pandoc "${sourcePath}" -o "${outputPath}" --from docx --to markdown ${wrapArg} ${extractArg}`,
-      { stdio: ['pipe', 'pipe', 'pipe'], timeout: 60000 }
+      { stdio: ["pipe", "pipe", "pipe"], timeout: 60000 },
     );
   } catch (err) {
-    const stderr = err.stderr ? err.stderr.toString() : '';
+    const stderr = err.stderr ? err.stderr.toString() : "";
     console.error(`ERROR: pandoc conversion failed: ${stderr || err.message}`);
     process.exit(1);
   }
 
-  let md = fs.readFileSync(outputPath, 'utf8');
+  let md = fs.readFileSync(outputPath, "utf8");
 
   if (options.debug) {
-    fs.writeFileSync(outputPath.replace(/\.md$/, '_debug_raw.md'), md, 'utf8');
+    fs.writeFileSync(outputPath.replace(/\.md$/, "_debug_raw.md"), md, "utf8");
     console.log(`  \u{1F50D} Debug: saved raw pandoc output to _debug_raw.md`);
   }
 
@@ -248,13 +264,17 @@ function convertDocxToMarkdown(sourcePath, outputPath, options = {}) {
   if (doCleanTables) md = cleanTables(md);
 
   if (doExtractImages) {
-    const imagesDirName = 'images';
+    const imagesDirName = "images";
     md = extractImages(md, outputDir, imagesDirName);
 
     // Clean up pandoc media/ dir if it created one
-    const mediaDir = path.join(outputDir, 'media');
+    const mediaDir = path.join(outputDir, "media");
     if (fs.existsSync(mediaDir)) {
-      try { fs.rmSync(mediaDir, { recursive: true, force: true }); } catch { /* ignore */ }
+      try {
+        fs.rmSync(mediaDir, { recursive: true, force: true });
+      } catch {
+        /* ignore */
+      }
     }
   }
 
@@ -263,13 +283,15 @@ function convertDocxToMarkdown(sourcePath, outputPath, options = {}) {
   }
 
   // Final cleanup: ensure single trailing newline
-  md = md.trimEnd() + '\n';
+  md = md.trimEnd() + "\n";
 
-  fs.writeFileSync(outputPath, md, 'utf8');
+  fs.writeFileSync(outputPath, md, "utf8");
 
   const sizeKb = (fs.statSync(outputPath).size / 1024).toFixed(1);
-  const lineCount = md.split('\n').length;
-  console.log(`\u2705 Converted: ${path.basename(outputPath)} (${sizeKb} KB, ${lineCount} lines)`);
+  const lineCount = md.split("\n").length;
+  console.log(
+    `\u2705 Converted: ${path.basename(outputPath)} (${sizeKb} KB, ${lineCount} lines)`,
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -282,16 +304,27 @@ function parseCliArgs() {
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    if (arg === '--extract-images') { options.extractImages = true; }
-    else if (arg === '--no-extract-images') { options.extractImages = false; }
-    else if (arg === '--add-frontmatter') { options.addFrontmatter = true; }
-    else if (arg === '--clean-tables') { options.cleanTables = true; }
-    else if (arg === '--no-clean-tables') { options.cleanTables = false; }
-    else if (arg === '--fix-headings') { options.fixHeadings = true; }
-    else if (arg === '--strip-comments') { options.stripComments = true; }
-    else if (arg === '--wrap' && args[i + 1]) { options.wrap = parseInt(args[++i], 10); }
-    else if (arg === '--debug') { options.debug = true; }
-    else if (!arg.startsWith('--')) { positional.push(arg); }
+    if (arg === "--extract-images") {
+      options.extractImages = true;
+    } else if (arg === "--no-extract-images") {
+      options.extractImages = false;
+    } else if (arg === "--add-frontmatter") {
+      options.addFrontmatter = true;
+    } else if (arg === "--clean-tables") {
+      options.cleanTables = true;
+    } else if (arg === "--no-clean-tables") {
+      options.cleanTables = false;
+    } else if (arg === "--fix-headings") {
+      options.fixHeadings = true;
+    } else if (arg === "--strip-comments") {
+      options.stripComments = true;
+    } else if (arg === "--wrap" && args[i + 1]) {
+      options.wrap = parseInt(args[++i], 10);
+    } else if (arg === "--debug") {
+      options.debug = true;
+    } else if (!arg.startsWith("--")) {
+      positional.push(arg);
+    }
   }
 
   return { positional, options };
@@ -301,18 +334,22 @@ function main() {
   const { positional, options } = parseCliArgs();
 
   if (positional.length === 0) {
-    console.log('Usage: node docx-to-md.cjs SOURCE.docx [OUTPUT.md] [options]');
-    console.log('');
-    console.log('Options:');
-    console.log('  --extract-images      Extract images to images/ (default)');
-    console.log('  --no-extract-images   Keep images inline');
-    console.log('  --add-frontmatter     Generate YAML frontmatter');
-    console.log('  --clean-tables        Normalize table formatting (default)');
-    console.log('  --no-clean-tables     Keep raw pandoc tables');
-    console.log('  --fix-headings        Normalize heading levels to start at H1');
-    console.log('  --strip-comments      Remove Word comment annotations');
-    console.log('  --wrap N              Wrap lines at N characters (0 = none)');
-    console.log('  --debug               Save raw pandoc output');
+    console.log("Usage: node docx-to-md.cjs SOURCE.docx [OUTPUT.md] [options]");
+    console.log("");
+    console.log("Options:");
+    console.log("  --extract-images      Extract images to images/ (default)");
+    console.log("  --no-extract-images   Keep images inline");
+    console.log("  --add-frontmatter     Generate YAML frontmatter");
+    console.log("  --clean-tables        Normalize table formatting (default)");
+    console.log("  --no-clean-tables     Keep raw pandoc tables");
+    console.log(
+      "  --fix-headings        Normalize heading levels to start at H1",
+    );
+    console.log("  --strip-comments      Remove Word comment annotations");
+    console.log(
+      "  --wrap N              Wrap lines at N characters (0 = none)",
+    );
+    console.log("  --debug               Save raw pandoc output");
     process.exit(1);
   }
 
@@ -324,7 +361,7 @@ function main() {
 
   const outputPath = positional[1]
     ? path.resolve(positional[1])
-    : sourcePath.replace(/\.docx$/i, '.md');
+    : sourcePath.replace(/\.docx$/i, ".md");
 
   convertDocxToMarkdown(sourcePath, outputPath, options);
 }
@@ -333,4 +370,9 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { convertDocxToMarkdown, cleanPandocQuirks, normalizeHeadings, cleanTables };
+module.exports = {
+  convertDocxToMarkdown,
+  cleanPandocQuirks,
+  normalizeHeadings,
+  cleanTables,
+};

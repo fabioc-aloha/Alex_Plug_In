@@ -2,13 +2,27 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as crypto from "crypto";
-import { getAlexWorkspaceFolder, checkProtectionAndWarn } from "../shared/utils";
+import {
+  getAlexWorkspaceFolder,
+  checkProtectionAndWarn,
+} from "../shared/utils";
 import { offerEnvironmentSetup, applyMarkdownStyles } from "./setupEnvironment";
-import { detectGlobalKnowledgeRepo, scaffoldGlobalKnowledgeRepo } from "../chat/globalKnowledge";
-import { detectAndUpdateProjectPersona, PERSONAS } from "../chat/personaDetection";
+import {
+  detectGlobalKnowledgeRepo,
+  scaffoldGlobalKnowledgeRepo,
+} from "../chat/globalKnowledge";
+import {
+  detectAndUpdateProjectPersona,
+  PERSONAS,
+} from "../chat/personaDetection";
 import * as telemetry from "../shared/telemetry";
 import { migrateSecretsFromEnvironment } from "../services/secretsManager";
-import { ARCHITECTURE_ROOT_FILES, ARCHITECTURE_DIRECTORIES, ARCHITECTURE_EMPTY_FOLDERS, MANIFEST_EXTENSIONS } from "./upgrade";
+import {
+  ARCHITECTURE_ROOT_FILES,
+  ARCHITECTURE_DIRECTORIES,
+  ARCHITECTURE_EMPTY_FOLDERS,
+  MANIFEST_EXTENSIONS,
+} from "./upgrade";
 
 interface FileManifestEntry {
   type: "system" | "hybrid" | "user-created";
@@ -72,7 +86,7 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
   const canProceed = await checkProtectionAndWarn(
     rootPath,
     "Alex: Initialize",
-    true  // Allow override with double confirmation
+    true, // Allow override with double confirmation
   );
   if (!canProceed) {
     telemetry.log("command", "initialize_blocked_protected_workspace");
@@ -125,7 +139,7 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
   const canProceed = await checkProtectionAndWarn(
     rootPath,
     "Alex: Reset Architecture",
-    true  // Allow override with double confirmation
+    true, // Allow override with double confirmation
   );
   if (!canProceed) {
     telemetry.log("command", "reset_blocked_protected_workspace");
@@ -228,18 +242,27 @@ async function performInitialization(
   try {
     // Deploy architecture files (sources + permissions + copy + manifest)
     const { copiedCount, skippedCount } = await deployArchitectureFiles(
-      context, extensionPath, rootPath, overwrite,
+      context,
+      extensionPath,
+      rootPath,
+      overwrite,
     );
 
-    telemetry.log("command", "initialize_copy_complete", { copiedCount, skippedCount });
+    telemetry.log("command", "initialize_copy_complete", {
+      copiedCount,
+      skippedCount,
+    });
 
     // Apply markdown preview CSS
     await applyMarkdownStyles();
 
     // Detect persona early - reused for GK offer
     // Don't update Active Context during init — deploy clean architecture with placeholder state.
-    const personaResult = await detectAndUpdateProjectPersona(rootPath, { updateSlots: false });
-    const persona = personaResult?.persona ?? PERSONAS.find(p => p.id === 'developer')!;
+    const personaResult = await detectAndUpdateProjectPersona(rootPath, {
+      updateSlots: false,
+    });
+    const persona =
+      personaResult?.persona ?? PERSONAS.find((p) => p.id === "developer")!;
 
     if (personaResult) {
       telemetry.log("command", "initialize_persona_detected", {
@@ -289,11 +312,19 @@ async function deployArchitectureFiles(
   overwrite: boolean,
 ): Promise<{ copiedCount: number; skippedCount: number }> {
   const sources = [
-    ...ARCHITECTURE_ROOT_FILES.map(f => ({ src: path.join(extensionPath, ".github", f), dest: path.join(rootPath, ".github", f) })),
-    ...ARCHITECTURE_DIRECTORIES.map(d => ({ src: path.join(extensionPath, ".github", d), dest: path.join(rootPath, ".github", d) })),
+    ...ARCHITECTURE_ROOT_FILES.map((f) => ({
+      src: path.join(extensionPath, ".github", f),
+      dest: path.join(rootPath, ".github", f),
+    })),
+    ...ARCHITECTURE_DIRECTORIES.map((d) => ({
+      src: path.join(extensionPath, ".github", d),
+      dest: path.join(rootPath, ".github", d),
+    })),
   ];
 
-  const emptyFolders = ARCHITECTURE_EMPTY_FOLDERS.map(f => path.join(rootPath, ".github", f));
+  const emptyFolders = ARCHITECTURE_EMPTY_FOLDERS.map((f) =>
+    path.join(rootPath, ".github", f),
+  );
 
   // Test write permissions
   telemetry.log("command", "initialize_testing_permissions");
@@ -305,16 +336,23 @@ async function deployArchitectureFiles(
     await fs.remove(testFile);
     telemetry.log("command", "initialize_permissions_ok");
   } catch (permError: any) {
-    const permErrorMessage = permError instanceof Error ? permError.message : String(permError);
+    const permErrorMessage =
+      permError instanceof Error ? permError.message : String(permError);
     telemetry.logError("initialize_permission_denied", permError);
-    throw new Error(`Cannot write to workspace - check folder permissions: ${permErrorMessage || "Permission denied"}`);
+    throw new Error(
+      `Cannot write to workspace - check folder permissions: ${permErrorMessage || "Permission denied"}`,
+    );
   }
 
   let copiedCount = 0;
   let skippedCount = 0;
 
   await vscode.window.withProgress(
-    { location: vscode.ProgressLocation.Notification, title: "Initializing Alex Cognitive Architecture...", cancellable: false },
+    {
+      location: vscode.ProgressLocation.Notification,
+      title: "Initializing Alex Cognitive Architecture...",
+      cancellable: false,
+    },
     async (progress) => {
       for (const item of sources) {
         progress.report({ message: `Copying ${path.basename(item.dest)}...` });
@@ -322,14 +360,20 @@ async function deployArchitectureFiles(
           try {
             await fs.copy(item.src, item.dest, { overwrite });
             copiedCount++;
-            telemetry.log("command", "initialize_copied", { item: path.basename(item.dest) });
+            telemetry.log("command", "initialize_copied", {
+              item: path.basename(item.dest),
+            });
           } catch (copyErr) {
-            telemetry.logError("initialize_copy_failed", copyErr, { item: path.basename(item.dest) });
+            telemetry.logError("initialize_copy_failed", copyErr, {
+              item: path.basename(item.dest),
+            });
             throw copyErr;
           }
         } else {
           skippedCount++;
-          telemetry.log("command", "initialize_source_missing", { item: path.basename(item.src) });
+          telemetry.log("command", "initialize_source_missing", {
+            item: path.basename(item.src),
+          });
           console.warn(`Source not found: ${item.src}`);
         }
       }
@@ -362,7 +406,9 @@ async function offerGlobalKnowledgeSetup(
 ): Promise<void> {
   try {
     const existingGkRepo = await detectGlobalKnowledgeRepo();
-    if (!existingGkRepo) { return; }
+    if (existingGkRepo) {
+      return;
+    }
 
     const parentDir = path.dirname(rootPath);
     const gkRepoName = "Alex-Global-Knowledge";
@@ -386,7 +432,8 @@ async function offerGlobalKnowledgeSetup(
 
     if (gkChoice === "Create New") {
       telemetry.log("command", "initialize_global_knowledge_create", {
-        persona: persona.id, confidence: personaResult?.confidence ?? 0,
+        persona: persona.id,
+        confidence: personaResult?.confidence ?? 0,
       });
       await scaffoldGlobalKnowledgeRepo(gkRepoPath);
       vscode.window.showInformationMessage(
@@ -394,32 +441,49 @@ async function offerGlobalKnowledgeSetup(
         { modal: false },
       );
       telemetry.log("command", "initialize_global_knowledge_created", {
-        repoPath: gkRepoPath, persona: persona.id,
+        repoPath: gkRepoPath,
+        persona: persona.id,
       });
     } else if (gkChoice === "Connect GitHub") {
       const ownerInput = await vscode.window.showInputBox({
         title: "Connect to GitHub Global Knowledge",
-        prompt: "Enter the GitHub owner/org name (repo is standardized as 'Alex-Global-Knowledge')",
+        prompt:
+          "Enter the GitHub owner/org name (repo is standardized as 'Alex-Global-Knowledge')",
         placeHolder: "fabioc-aloha",
         validateInput: (value) => {
-          if (!value) { return "Owner name is required"; }
-          if (value.includes(' ')) { return "Owner name cannot contain spaces"; }
+          if (!value) {
+            return "Owner name is required";
+          }
+          if (value.includes(" ")) {
+            return "Owner name cannot contain spaces";
+          }
           return undefined;
         },
       });
       if (ownerInput) {
-        await vscode.workspace.getConfiguration('alex.globalKnowledge').update(
-          'remoteRepo', ownerInput.trim(), vscode.ConfigurationTarget.Global,
-        );
-        const fullRepo = ownerInput.includes('/') ? ownerInput : `${ownerInput}/Alex-Global-Knowledge`;
+        await vscode.workspace
+          .getConfiguration("alex.globalKnowledge")
+          .update(
+            "remoteRepo",
+            ownerInput.trim(),
+            vscode.ConfigurationTarget.Global,
+          );
+        const fullRepo = ownerInput.includes("/")
+          ? ownerInput
+          : `${ownerInput}/Alex-Global-Knowledge`;
         vscode.window.showInformationMessage(
           `✅ Connected to GitHub: ${fullRepo}\n\nAlex can now read your Global Knowledge directly from GitHub. No local clone required!`,
           { modal: false },
         );
-        telemetry.log("command", "initialize_global_knowledge_remote", { persona: persona.id, repo: ownerInput });
+        telemetry.log("command", "initialize_global_knowledge_remote", {
+          persona: persona.id,
+          repo: ownerInput,
+        });
       }
     } else {
-      telemetry.log("command", "initialize_global_knowledge_skipped", { persona: persona.id });
+      telemetry.log("command", "initialize_global_knowledge_skipped", {
+        persona: persona.id,
+      });
     }
   } catch (globalErr) {
     telemetry.logError("initialize_global_knowledge_failed", globalErr);
@@ -448,13 +512,15 @@ async function showInitSuccessAndGettingStarted(
     );
     panel.webview.html = getGettingStartedHtml();
   } else if (result === "Open Chat") {
-    vscode.commands.executeCommand('workbench.action.chat.open', {
-      query: '@alex /status',
+    vscode.commands.executeCommand("workbench.action.chat.open", {
+      query: "@alex /status",
       isPartialQuery: false,
     });
   }
 
-  telemetry.log("command", "initialize_user_choice", { choice: result || "dismissed" });
+  telemetry.log("command", "initialize_user_choice", {
+    choice: result || "dismissed",
+  });
 }
 
 /**
@@ -598,21 +664,26 @@ async function createInitialManifest(
  */
 const MAX_MANIFEST_WALK_DEPTH = 10;
 
-async function collectDeployedFiles(dir: string, depth: number = 0): Promise<string[]> {
+async function collectDeployedFiles(
+  dir: string,
+  depth: number = 0,
+): Promise<string[]> {
   if (depth >= MAX_MANIFEST_WALK_DEPTH) {
     console.warn(`[NASA] Max manifest walk depth reached at: ${dir}`);
     return [];
   }
 
   const files: string[] = [];
-  if (!await fs.pathExists(dir)) { return files; }
+  if (!(await fs.pathExists(dir))) {
+    return files;
+  }
 
   const entries = await fs.readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      files.push(...await collectDeployedFiles(fullPath, depth + 1));
-    } else if (MANIFEST_EXTENSIONS.some(ext => entry.name.endsWith(ext))) {
+      files.push(...(await collectDeployedFiles(fullPath, depth + 1)));
+    } else if (MANIFEST_EXTENSIONS.some((ext) => entry.name.endsWith(ext))) {
       files.push(fullPath);
     }
   }

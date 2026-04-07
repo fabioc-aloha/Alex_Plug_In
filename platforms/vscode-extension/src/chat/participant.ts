@@ -39,6 +39,7 @@ import {
 } from "../services/expertiseModel";
 import { agentActivity } from "../services/agentActivity";
 import { sessionTrace } from "../services/sessionTrace";
+import { browserContext } from "../services/browserContext";
 
 // ============================================================================
 // C5: Steering Awareness — yield detection for mid-turn user input
@@ -324,6 +325,7 @@ export function resetSessionState(): void {
   lastFrustrationCheck = 0;
   conversationBuffer = [];
   resetEmotionalState(); // v5.9.3: Reset emotional memory tracking
+  browserContext.reset(); // v7.2.0: Reset browser context for new session
 }
 
 /**
@@ -935,6 +937,10 @@ async function handleGeneralQuery(
       }
     : undefined;
 
+  // v7.2.0: Capture browser tab references BEFORE prompt building
+  // so Layer 12 (browserContext) includes URLs from the current request
+  browserContext.captureFromChatRequest(request);
+
   const promptContext: PromptContext = {
     workspaceRoot,
     profile,
@@ -1019,11 +1025,19 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
     // Voice Mode: Read response aloud if enabled (fire and forget)
     speakIfVoiceModeEnabled(collectedResponse).catch(() => {});
 
+    // v7.2.0: Capture URLs from model response for research context
+    // (request capture moved above buildAlexSystemPrompt so Layer 12 has current URLs)
+    browserContext.captureFromResponse(collectedResponse);
+
     // v6.0.0: Episodic memory + expertise model — fire-and-forget background updates
+    // v7.2.0: Pass session ID for session-aware episodic tracking
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const chatSessionId = (context as any).sessionId as string | undefined;
     appendToEpisodicDraft(
       request.prompt,
       peripheral?.fileWatcherObservations?.stalledFiles ?? [],
       workspaceRoot,
+      chatSessionId,
     ).catch(() => {});
     recordInteraction(request.prompt).catch(() => {});
   } catch (err) {

@@ -1635,7 +1635,7 @@ if (34 -in $runPhases) {
             foreach ($conn in $j.connections) {
                 $escaped = Test-SelfContained -sourceFile $f.FullName -target $conn.target
                 if ($null -ne $escaped) {
-                    $short = $f.FullName -replace [regex]::Escape($ghPath + "\"), ""
+                    $short = $f.FullName -replace [regex]::Escape($ghPath + [IO.Path]::DirectorySeparatorChar), ""
                     if (-not (Test-KnownScException $short)) {
                         $scIssues += "[synapse] $short -> $escaped"
                     }
@@ -1649,7 +1649,7 @@ if (34 -in $runPhases) {
     $linkRx = [regex]'\[([^\]]*)\]\(([^)]+)\)'
     Get-ChildItem "$ghPath" -Recurse -Include "*.md" | ForEach-Object {
         $f = $_
-        $short = $f.FullName -replace [regex]::Escape($ghPath + "\"), ""
+        $short = $f.FullName -replace [regex]::Escape($ghPath + [IO.Path]::DirectorySeparatorChar), ""
         if (Test-KnownScException $short) { return }
         $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
         if (-not $content) { return }

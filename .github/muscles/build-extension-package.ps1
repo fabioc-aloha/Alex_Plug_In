@@ -1,3 +1,4 @@
+#Requires -Version 7.0
 # build-extension-package.ps1
 # Builds Alex VS Code Extension package from Master Alex source
 #

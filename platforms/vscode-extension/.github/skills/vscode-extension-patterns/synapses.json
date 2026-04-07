@@ -6,6 +6,22 @@
   "lastValidated": "2026-03-09",
   "connections": [
     {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "supports",
+      "strength": 0.85,
+      "reason": "Publishing workflow",
+      "when": "When task involves .github/instructions/release management.instructions.md",
+      "yields": "release management capabilities and setup"
+    },
+    {
+      "target": ".github/instructions/vscode-marketplace-publishing.instructions.md",
+      "type": "implements",
+      "strength": 0.9,
+      "reason": "Marketplace publishing deployment patterns",
+      "when": "When task involves .github/instructions/vscode marketplace publishing.instructions.md",
+      "yields": "VS Code marketplace publishing implementation steps"
+    },
+    {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "implements",
       "strength": 0.8,
@@ -75,6 +91,14 @@
       "reason": "PromptVariantRegistry, stream enrichment, and agent handoffs bridge extension lifecycle with chat API",
       "when": "When building chat participants, prompt engines, or agent orchestration",
       "yields": "chat participant API patterns and prompt adaptation strategies"
+    },
+    {
+      "target": ".github/skills/doc-hygiene/SKILL.md",
+      "type": "complements",
+      "strength": 0.65,
+      "reason": "Release cycles expose doc drift: stale version stamps, dead commands, outdated counts. Doc sweep should accompany every publish.",
+      "when": "When preparing documentation for extension release or post-release audit",
+      "yields": "doc hygiene anti-drift patterns for release documentation"
     }
   ],
   "activationPatterns": [

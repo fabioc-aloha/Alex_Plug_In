@@ -56,6 +56,7 @@ export interface LayerBudget {
   expertise: boolean; // Layer 10b
   responseGuidelines: boolean; // Layer 10
   honestUncertainty: boolean; // Layer 11
+  browserContext: boolean; // Layer 12 (v7.2.0)
 }
 
 export interface PromptVariant {
@@ -85,6 +86,7 @@ const FULL_LAYERS: LayerBudget = {
   expertise: true,
   responseGuidelines: true,
   honestUncertainty: true,
+  browserContext: true,
 };
 
 const STANDARD_LAYERS: LayerBudget = {
@@ -105,6 +107,7 @@ const LEAN_LAYERS: LayerBudget = {
   expertise: false,
   responseGuidelines: true,
   honestUncertainty: false,
+  browserContext: false,
 };
 
 // ============================================================================

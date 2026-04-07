@@ -352,7 +352,7 @@ function parseSkillMetadata(content: string): SkillMetadata {
   const metadata: SkillMetadata = {};
 
   // Match YAML frontmatter
-  const yamlMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  const yamlMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (yamlMatch) {
     const yaml = yamlMatch[1];
 

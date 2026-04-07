@@ -1,24 +1,35 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
-import * as workspaceFs from '../shared/workspaceFs';
-import { checkHealth, HealthCheckResult, HealthStatus } from '../shared/healthCheck';
-import { getGlobalKnowledgeSummary, detectGlobalKnowledgeRepo } from '../chat/globalKnowledge';
-import { escapeHtml, getNonce } from '../shared/sanitize';
-import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
-import { openChatPanel } from '../shared/utils';
-import { getPersonaHexColor } from '../shared/skillConstants';
-import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
+import * as vscode from "vscode";
+import * as path from "path";
+import * as workspaceFs from "../shared/workspaceFs";
+import {
+  checkHealth,
+  HealthCheckResult,
+  HealthStatus,
+} from "../shared/healthCheck";
+import {
+  getGlobalKnowledgeSummary,
+  detectGlobalKnowledgeRepo,
+} from "../chat/globalKnowledge";
+import { escapeHtml, getNonce } from "../shared/sanitize";
+import {
+  detectPersona,
+  loadUserProfile,
+  PersonaDetectionResult,
+} from "../chat/personaDetection";
+import { openChatPanel } from "../shared/utils";
+import { getPersonaHexColor } from "../shared/skillConstants";
+import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
 
 /**
  * Memory Architecture Dashboard - Premium visualization of Alex's cognitive memory structure
- * 
+ *
  * Features:
  * - Neuroanatomical brain mapping diagram
  * - Memory type breakdown (Procedural, Episodic, Skills, Synapses, GK)
  * - Active Context status (persona, focus trifectas, objective)
  * - Real-time memory file counts
  * - Interactive exploration
- * 
+ *
  * NOTE: P1-P7 slot visualization is deprecated and will be replaced with Active Context visualization in a future release.
  */
 
@@ -26,252 +37,347 @@ let currentPanel: vscode.WebviewPanel | undefined;
 let extensionUri: vscode.Uri | undefined;
 
 interface MemoryStats {
-    instructions: number;
-    prompts: number;
-    skills: number;
-    episodic: number;
-    synapses: number;
-    globalPatterns: number;
-    globalInsights: number;
+  instructions: number;
+  prompts: number;
+  skills: number;
+  episodic: number;
+  synapses: number;
+  globalPatterns: number;
+  globalInsights: number;
 }
 
 interface WorkingMemorySlot {
-    id: string;
-    name: string;
-    type: 'Core' | 'Domain';
-    description: string;
-    active: boolean;
+  id: string;
+  name: string;
+  type: "Core" | "Domain";
+  description: string;
+  active: boolean;
 }
 
 /**
  * Open or focus the memory dashboard
  */
-export async function openMemoryDashboard(context: vscode.ExtensionContext): Promise<void> {
-    const column = vscode.window.activeTextEditor 
-        ? vscode.window.activeTextEditor.viewColumn
-        : undefined;
-    
-    // If panel already exists, reveal it
-    if (currentPanel) {
-        currentPanel.reveal(column);
-        await refreshDashboard();
-        return;
-    }
-    
-    extensionUri = context.extensionUri;
-    
-    // Create a new panel
-    currentPanel = vscode.window.createWebviewPanel(
-        'alexMemoryDashboard',
-        'Alex Memory Architecture',
-        column || vscode.ViewColumn.One,
-        {
-            enableScripts: true,
-            retainContextWhenHidden: true,
-            localResourceRoots: [context.extensionUri]
-        }
-    );
-    
-    // Set up message handling
-    currentPanel.webview.onDidReceiveMessage(
-        async message => {
-            switch (message.command) {
-                case 'refresh':
-                    await refreshDashboard();
-                    break;
-                case 'openSkillCatalog':
-                    vscode.commands.executeCommand('alex.generateSkillCatalog');
-                    break;
-                case 'openHealthDashboard':
-                    vscode.commands.executeCommand('alex.openHealthDashboard');
-                    break;
-                case 'dream':
-                    vscode.commands.executeCommand('alex.dream');
-                    break;
-                case 'meditate':
-                    openChatPanel();
-                    break;
-                case 'openFile':
-                    if (message.filePath) {
-                        const doc = await vscode.workspace.openTextDocument(message.filePath);
-                        await vscode.window.showTextDocument(doc);
-                    }
-                    break;
-                case 'openFolder':
-                    if (message.folderPath) {
-                        const uri = vscode.Uri.file(message.folderPath);
-                        vscode.commands.executeCommand('revealInExplorer', uri);
-                    }
-                    break;
-                case 'deepBrainQA':
-                    vscode.commands.executeCommand('alex.deepBrainQA');
-                    break;
-            }
-        },
-        undefined,
-        context.subscriptions
-    );
-    
-    currentPanel.onDidDispose(
-        () => {
-            currentPanel = undefined;
-        },
-        undefined,
-        context.subscriptions
-    );
-    
+export async function openMemoryDashboard(
+  context: vscode.ExtensionContext,
+): Promise<void> {
+  const column = vscode.window.activeTextEditor
+    ? vscode.window.activeTextEditor.viewColumn
+    : undefined;
+
+  // If panel already exists, reveal it
+  if (currentPanel) {
+    currentPanel.reveal(column);
     await refreshDashboard();
+    return;
+  }
+
+  extensionUri = context.extensionUri;
+
+  // Create a new panel
+  currentPanel = vscode.window.createWebviewPanel(
+    "alexMemoryDashboard",
+    "Alex Memory Architecture",
+    column || vscode.ViewColumn.One,
+    {
+      enableScripts: true,
+      retainContextWhenHidden: true,
+      localResourceRoots: [context.extensionUri],
+    },
+  );
+
+  // Set up message handling
+  currentPanel.webview.onDidReceiveMessage(
+    async (message) => {
+      switch (message.command) {
+        case "refresh":
+          await refreshDashboard();
+          break;
+        case "openSkillCatalog":
+          vscode.commands.executeCommand("alex.generateSkillCatalog");
+          break;
+        case "openHealthDashboard":
+          vscode.commands.executeCommand("alex.openHealthDashboard");
+          break;
+        case "dream":
+          vscode.commands.executeCommand("alex.dream");
+          break;
+        case "meditate":
+          openChatPanel();
+          break;
+        case "openFile":
+          if (message.filePath) {
+            const resolvedPath = path.resolve(message.filePath);
+            const workspaceRoot =
+              vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (
+              workspaceRoot &&
+              (resolvedPath + path.sep).startsWith(
+                path.resolve(workspaceRoot) + path.sep,
+              )
+            ) {
+              const doc = await vscode.workspace.openTextDocument(resolvedPath);
+              await vscode.window.showTextDocument(doc);
+            }
+          }
+          break;
+        case "openFolder":
+          if (message.folderPath) {
+            const resolvedFolder = path.resolve(message.folderPath);
+            const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (
+              wsRoot &&
+              (resolvedFolder + path.sep).startsWith(
+                path.resolve(wsRoot) + path.sep,
+              )
+            ) {
+              const uri = vscode.Uri.file(resolvedFolder);
+              vscode.commands.executeCommand("revealInExplorer", uri);
+            }
+          }
+          break;
+        case "deepBrainQA":
+          vscode.commands.executeCommand("alex.deepBrainQA");
+          break;
+      }
+    },
+    undefined,
+    context.subscriptions,
+  );
+
+  currentPanel.onDidDispose(
+    () => {
+      currentPanel = undefined;
+    },
+    undefined,
+    context.subscriptions,
+  );
+
+  await refreshDashboard();
 }
 
 /**
  * Refresh dashboard content
- * 
+ *
  * NASA R5: Critical function with assertion density
  */
 async function refreshDashboard(): Promise<void> {
-    if (!currentPanel || !extensionUri) {
-        return;
+  if (!currentPanel || !extensionUri) {
+    return;
+  }
+
+  // NASA R5: Validate panel state
+  nasaAssert(
+    currentPanel.webview !== undefined,
+    "Webview must be defined during refresh",
+  );
+
+  try {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    const rootPath = workspaceFolders?.[0]?.uri.fsPath || "";
+
+    const [health, memoryStats, gkRepo, gkSummary] = await Promise.all([
+      checkHealth(false),
+      getMemoryStats(rootPath),
+      detectGlobalKnowledgeRepo(),
+      getGlobalKnowledgeSummary(),
+    ]);
+
+    // Detect persona for UI accent
+    let personaResult: PersonaDetectionResult | null = null;
+    if (workspaceFolders) {
+      const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
+      personaResult = await detectPersona(
+        userProfile ?? undefined,
+        workspaceFolders,
+      );
     }
-    
-    // NASA R5: Validate panel state
-    nasaAssert(currentPanel.webview !== undefined, 'Webview must be defined during refresh');
-    
-    try {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        const rootPath = workspaceFolders?.[0]?.uri.fsPath || '';
-        
-        const [health, memoryStats, gkRepo, gkSummary] = await Promise.all([
-            checkHealth(false),
-            getMemoryStats(rootPath),
-            detectGlobalKnowledgeRepo(),
-            getGlobalKnowledgeSummary()
-        ]);
-        
-        // Detect persona for UI accent
-        let personaResult: PersonaDetectionResult | null = null;
-        if (workspaceFolders) {
-            const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
-            personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
-        }
-        
-        const workingMemory = getWorkingMemorySlots();
-        
-        currentPanel.webview.html = await getWebviewContent(
-            currentPanel.webview,
-            extensionUri,
-            health,
-            memoryStats,
-            workingMemory,
-            gkRepo,
-            gkSummary,
-            personaResult
-        );
-    } catch (err) {
-        currentPanel.webview.html = getErrorContent(err);
-    }
+
+    const workingMemory = getWorkingMemorySlots();
+
+    currentPanel.webview.html = await getWebviewContent(
+      currentPanel.webview,
+      extensionUri,
+      health,
+      memoryStats,
+      workingMemory,
+      gkRepo,
+      gkSummary,
+      personaResult,
+    );
+  } catch (err) {
+    currentPanel.webview.html = getErrorContent(err);
+  }
 }
 
 /**
  * Get memory file statistics
  */
 async function getMemoryStats(rootPath: string): Promise<MemoryStats> {
-    const stats: MemoryStats = {
-        instructions: 0,
-        prompts: 0,
-        skills: 0,
-        episodic: 0,
-        synapses: 0,
-        globalPatterns: 0,
-        globalInsights: 0
-    };
-    
-    if (!rootPath) {
-        return stats;
-    }
-    
-    const githubPath = path.join(rootPath, '.github');
-    
-    try {
-        // Instructions
-        const instrPath = path.join(githubPath, 'instructions');
-        if (await workspaceFs.pathExists(instrPath)) {
-            const files = await workspaceFs.readDirectory(instrPath);
-            stats.instructions = files.filter(([name, _]) => name.endsWith('.md')).length;
-        }
-        
-        // Prompts
-        const promptsPath = path.join(githubPath, 'prompts');
-        if (await workspaceFs.pathExists(promptsPath)) {
-            const files = await workspaceFs.readDirectory(promptsPath);
-            stats.prompts = files.filter(([name, _]) => name.endsWith('.md')).length;
-        }
-        
-        // Skills
-        const skillsPath = path.join(githubPath, 'skills');
-        if (await workspaceFs.pathExists(skillsPath)) {
-            const entries = await workspaceFs.readDirectory(skillsPath);
-            stats.skills = entries.filter(([_, fileType]) => fileType === vscode.FileType.Directory).length;
-        }
-        
-        // Episodic
-        const episodicPath = path.join(githubPath, 'episodic');
-        if (await workspaceFs.pathExists(episodicPath)) {
-            const files = await workspaceFs.readDirectory(episodicPath);
-            stats.episodic = files.filter(([name, _]) => name.endsWith('.md')).length;
-        }
-        
-        // Count synapses
-        if (await workspaceFs.pathExists(skillsPath)) {
-            const entries = await workspaceFs.readDirectory(skillsPath);
-            for (const [name, fileType] of entries) {
-                if (fileType === vscode.FileType.Directory) {
-                    const synapsePath = path.join(skillsPath, name, 'synapses.json');
-                    if (await workspaceFs.pathExists(synapsePath)) {
-                        stats.synapses++;
-                    }
-                }
-            }
-        }
-        
-        // Global Knowledge
-        const gkRepo = await detectGlobalKnowledgeRepo();
-        if (gkRepo) {
-            const patternsPath = path.join(gkRepo, 'patterns');
-            const insightsPath = path.join(gkRepo, 'insights');
-            
-            if (await workspaceFs.pathExists(patternsPath)) {
-                const files = await workspaceFs.readDirectory(patternsPath);
-                stats.globalPatterns = files.filter(([name, _]) => name.endsWith('.md')).length;
-            }
-            if (await workspaceFs.pathExists(insightsPath)) {
-                const files = await workspaceFs.readDirectory(insightsPath);
-                stats.globalInsights = files.filter(([name, _]) => name.endsWith('.md')).length;
-            }
-        }
-    } catch (err) {
-        console.error('Error getting memory stats:', err);
-    }
-    
+  const stats: MemoryStats = {
+    instructions: 0,
+    prompts: 0,
+    skills: 0,
+    episodic: 0,
+    synapses: 0,
+    globalPatterns: 0,
+    globalInsights: 0,
+  };
+
+  if (!rootPath) {
     return stats;
+  }
+
+  const githubPath = path.join(rootPath, ".github");
+
+  try {
+    // Instructions
+    const instrPath = path.join(githubPath, "instructions");
+    if (await workspaceFs.pathExists(instrPath)) {
+      const files = await workspaceFs.readDirectory(instrPath);
+      stats.instructions = files.filter(([name, _]) =>
+        name.endsWith(".md"),
+      ).length;
+    }
+
+    // Prompts
+    const promptsPath = path.join(githubPath, "prompts");
+    if (await workspaceFs.pathExists(promptsPath)) {
+      const files = await workspaceFs.readDirectory(promptsPath);
+      stats.prompts = files.filter(([name, _]) => name.endsWith(".md")).length;
+    }
+
+    // Skills
+    const skillsPath = path.join(githubPath, "skills");
+    if (await workspaceFs.pathExists(skillsPath)) {
+      const entries = await workspaceFs.readDirectory(skillsPath);
+      stats.skills = entries.filter(
+        ([_, fileType]) => fileType === vscode.FileType.Directory,
+      ).length;
+    }
+
+    // Episodic
+    const episodicPath = path.join(githubPath, "episodic");
+    if (await workspaceFs.pathExists(episodicPath)) {
+      const files = await workspaceFs.readDirectory(episodicPath);
+      stats.episodic = files.filter(([name, _]) => name.endsWith(".md")).length;
+    }
+
+    // Count synapses
+    if (await workspaceFs.pathExists(skillsPath)) {
+      const entries = await workspaceFs.readDirectory(skillsPath);
+      for (const [name, fileType] of entries) {
+        if (fileType === vscode.FileType.Directory) {
+          const synapsePath = path.join(skillsPath, name, "synapses.json");
+          if (await workspaceFs.pathExists(synapsePath)) {
+            stats.synapses++;
+          }
+        }
+      }
+    }
+
+    // Global Knowledge
+    const gkRepo = await detectGlobalKnowledgeRepo();
+    if (gkRepo) {
+      const patternsPath = path.join(gkRepo, "patterns");
+      const insightsPath = path.join(gkRepo, "insights");
+
+      if (await workspaceFs.pathExists(patternsPath)) {
+        const files = await workspaceFs.readDirectory(patternsPath);
+        stats.globalPatterns = files.filter(([name, _]) =>
+          name.endsWith(".md"),
+        ).length;
+      }
+      if (await workspaceFs.pathExists(insightsPath)) {
+        const files = await workspaceFs.readDirectory(insightsPath);
+        stats.globalInsights = files.filter(([name, _]) =>
+          name.endsWith(".md"),
+        ).length;
+      }
+    }
+  } catch (err) {
+    console.error("Error getting memory stats:", err);
+  }
+
+  return stats;
 }
 
 /**
  * Get working memory slot definitions
  */
 function getWorkingMemorySlots(): WorkingMemorySlot[] {
-    return [
-        { id: 'P1', name: 'meta-cognitive-awareness', type: 'Core', description: 'Self-monitoring, model awareness, adaptive behavior', active: true },
-        { id: 'P2', name: 'bootstrap-learning', type: 'Core', description: 'Domain-agnostic knowledge acquisition', active: true },
-        { id: 'P3', name: 'worldview-integration', type: 'Core', description: 'Ethical reasoning, moral psychology, constitutional AI', active: true },
-        { id: 'P4a', name: 'grounded-factual-processing', type: 'Core', description: 'Evidence-based, precise language, verify claims', active: true },
-        { id: 'P4b', name: 'meditation-consolidation', type: 'Core', description: 'Memory file persistence, synapse enhancement', active: true },
-        { id: 'P4c', name: 'dream-automation', type: 'Core', description: 'Unconscious processing, neural maintenance', active: true },
-        { id: 'P4d', name: 'self-actualization', type: 'Core', description: 'Deep assessment, architecture optimization', active: true },
-        // P5-P7 slots deprecated - replaced by Active Context Focus Trifectas
-        { id: 'P5', name: '*(deprecated)', type: 'Domain', description: 'Now managed via Active Context - Focus Trifectas', active: false },
-        { id: 'P6', name: '*(deprecated)', type: 'Domain', description: 'Now managed via Active Context - Focus Trifectas', active: false },
-        { id: 'P7', name: '*(deprecated)', type: 'Domain', description: 'Now managed via Active Context - Focus Trifectas', active: false }
-    ];
+  return [
+    {
+      id: "P1",
+      name: "meta-cognitive-awareness",
+      type: "Core",
+      description: "Self-monitoring, model awareness, adaptive behavior",
+      active: true,
+    },
+    {
+      id: "P2",
+      name: "bootstrap-learning",
+      type: "Core",
+      description: "Domain-agnostic knowledge acquisition",
+      active: true,
+    },
+    {
+      id: "P3",
+      name: "worldview-integration",
+      type: "Core",
+      description: "Ethical reasoning, moral psychology, constitutional AI",
+      active: true,
+    },
+    {
+      id: "P4a",
+      name: "grounded-factual-processing",
+      type: "Core",
+      description: "Evidence-based, precise language, verify claims",
+      active: true,
+    },
+    {
+      id: "P4b",
+      name: "meditation-consolidation",
+      type: "Core",
+      description: "Memory file persistence, synapse enhancement",
+      active: true,
+    },
+    {
+      id: "P4c",
+      name: "dream-automation",
+      type: "Core",
+      description: "Unconscious processing, neural maintenance",
+      active: true,
+    },
+    {
+      id: "P4d",
+      name: "self-actualization",
+      type: "Core",
+      description: "Deep assessment, architecture optimization",
+      active: true,
+    },
+    // P5-P7 slots deprecated - replaced by Active Context Focus Trifectas
+    {
+      id: "P5",
+      name: "*(deprecated)",
+      type: "Domain",
+      description: "Now managed via Active Context - Focus Trifectas",
+      active: false,
+    },
+    {
+      id: "P6",
+      name: "*(deprecated)",
+      type: "Domain",
+      description: "Now managed via Active Context - Focus Trifectas",
+      active: false,
+    },
+    {
+      id: "P7",
+      name: "*(deprecated)",
+      type: "Domain",
+      description: "Now managed via Active Context - Focus Trifectas",
+      active: false,
+    },
+  ];
 }
 
 // Persona accent colors now imported from shared/skillConstants.ts (DRY)
@@ -279,36 +385,44 @@ function getWorkingMemorySlots(): WorkingMemorySlot[] {
 
 /**\n * Generate webview content\n * \n * NASA R5: Critical function with assertion density\n */
 async function getWebviewContent(
-    webview: vscode.Webview,
-    extUri: vscode.Uri,
-    health: HealthCheckResult,
-    stats: MemoryStats,
-    workingMemory: WorkingMemorySlot[],
-    gkRepo: string | null,
-    _gkSummary: { totalPatterns: number; totalInsights: number } | null,
-    personaResult: PersonaDetectionResult | null
+  webview: vscode.Webview,
+  extUri: vscode.Uri,
+  health: HealthCheckResult,
+  stats: MemoryStats,
+  workingMemory: WorkingMemorySlot[],
+  gkRepo: string | null,
+  _gkSummary: { totalPatterns: number; totalInsights: number } | null,
+  personaResult: PersonaDetectionResult | null,
 ): Promise<string> {
-    // NASA R5: Entry point assertions
-    nasaAssert(webview !== undefined, 'getWebviewContent: webview must be defined');
-    nasaAssertBounded(stats.instructions, 0, 10000, 'stats.instructions');
-    nasaAssertBounded(stats.skills, 0, 10000, 'stats.skills');
-    nasaAssertBounded(health.brokenSynapses, 0, 10000, 'health.brokenSynapses');
+  // NASA R5: Entry point assertions
+  nasaAssert(
+    webview !== undefined,
+    "getWebviewContent: webview must be defined",
+  );
+  nasaAssertBounded(stats.instructions, 0, 10000, "stats.instructions");
+  nasaAssertBounded(stats.skills, 0, 10000, "stats.skills");
+  nasaAssertBounded(health.brokenSynapses, 0, 10000, "health.brokenSynapses");
 
-    const logoUri = webview.asWebviewUri(vscode.Uri.joinPath(extUri, 'assets', 'logo.svg'));
-    const isHealthy = health.status === HealthStatus.Healthy;
-    const healthColor = isHealthy ? 'var(--vscode-charts-green, #4CAF50)' : 'var(--vscode-charts-yellow, #FF9800)';
-    
-    // Get persona accent color (from shared constants)
-    const persona = personaResult?.persona;
-    const personaAccent = getPersonaHexColor(persona?.id);
-    
-    const totalMemory = stats.instructions + stats.prompts + stats.skills + stats.episodic;
-    const totalGK = stats.globalPatterns + stats.globalInsights;
-    const hasIssues = !isHealthy || health.brokenSynapses > 0;
-    
-    const nonce = getNonce();
-    
-    return `<!DOCTYPE html>
+  const logoUri = webview.asWebviewUri(
+    vscode.Uri.joinPath(extUri, "assets", "logo.svg"),
+  );
+  const isHealthy = health.status === HealthStatus.Healthy;
+  const healthColor = isHealthy
+    ? "var(--vscode-charts-green, #4CAF50)"
+    : "var(--vscode-charts-yellow, #FF9800)";
+
+  // Get persona accent color (from shared constants)
+  const persona = personaResult?.persona;
+  const personaAccent = getPersonaHexColor(persona?.id);
+
+  const totalMemory =
+    stats.instructions + stats.prompts + stats.skills + stats.episodic;
+  const totalGK = stats.globalPatterns + stats.globalInsights;
+  const hasIssues = !isHealthy || health.brokenSynapses > 0;
+
+  const nonce = getNonce();
+
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -619,7 +733,7 @@ async function getWebviewContent(
                 </div>
             </div>
             <div class="header-actions">
-                ${hasIssues ? `<button class="btn btn-fix" data-cmd="deepBrainQA">🔧 Fix Issues</button>` : ''}
+                ${hasIssues ? `<button class="btn btn-fix" data-cmd="deepBrainQA">🔧 Fix Issues</button>` : ""}
                 <button class="btn btn-secondary" data-cmd="openHealthDashboard">📊 Health</button>
                 <button class="btn btn-secondary" data-cmd="openSkillCatalog">📚 Skills</button>
                 <button class="btn btn-accent" data-cmd="refresh">🔄 Refresh</button>
@@ -773,7 +887,9 @@ flowchart LR
                     <div class="memory-stat-value">${stats.episodic}</div>
                 </div>
                 
-                ${gkRepo ? `
+                ${
+                  gkRepo
+                    ? `
                 <div class="memory-stat" style="border-top: 2px solid var(--premium); margin-top: 8px; padding-top: 12px;">
                     <div class="memory-stat-label">
                         <span class="memory-stat-icon">🌐</span>
@@ -784,20 +900,26 @@ flowchart LR
                     </div>
                     <div class="memory-stat-value">${totalGK}</div>
                 </div>
-                ` : ''}
+                `
+                    : ""
+                }
             </div>
             
             <!-- Working Memory Slots -->
             <div class="card">
                 <h2><span class="icon">🧩</span> Working Memory (7±2 Rule)</h2>
                 
-                ${workingMemory.map(slot => `
-                    <div class="wm-slot ${slot.type.toLowerCase()} ${slot.active ? 'active' : ''}">
+                ${workingMemory
+                  .map(
+                    (slot) => `
+                    <div class="wm-slot ${slot.type.toLowerCase()} ${slot.active ? "active" : ""}">
                         <div class="wm-id">${slot.id}</div>
                         <div class="wm-name">${slot.name}</div>
                         <div class="wm-type ${slot.type.toLowerCase()}">${slot.type}</div>
                     </div>
-                `).join('')}
+                `,
+                  )
+                  .join("")}
                 
                 <div style="margin-top: 12px; font-size: 11px; color: var(--text-secondary);">
                     <strong>Core slots</strong> (P1-P4d): Always active<br>
@@ -808,8 +930,8 @@ flowchart LR
         
         <div class="footer">
             Alex Cognitive Architecture v5.0.0 • Memory Dashboard • 
-            Health: <span style="color: ${healthColor};">${isHealthy ? '✓ Healthy' : '⚠ Issues'}</span>
-            ${gkRepo ? ' • <span style="color: var(--premium);">🌐 Global Knowledge Active</span>' : ''}
+            Health: <span style="color: ${healthColor};">${isHealthy ? "✓ Healthy" : "⚠ Issues"}</span>
+            ${gkRepo ? ' • <span style="color: var(--premium);">🌐 Global Knowledge Active</span>' : ""}
         </div>
     </div>
     
@@ -874,9 +996,9 @@ flowchart LR
  * Error content
  */
 function getErrorContent(err: unknown): string {
-    const message = err instanceof Error ? err.message : String(err);
-    const nonce = getNonce();
-    return `<!DOCTYPE html>
+  const message = err instanceof Error ? err.message : String(err);
+  const nonce = getNonce();
+  return `<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'nonce-${nonce}';">
@@ -897,10 +1019,12 @@ function getErrorContent(err: unknown): string {
 /**
  * Register the memory dashboard command
  */
-export function registerMemoryDashboard(context: vscode.ExtensionContext): void {
-    context.subscriptions.push(
-        vscode.commands.registerCommand('alex.openMemoryDashboard', async () => {
-            await openMemoryDashboard(context);
-        })
-    );
+export function registerMemoryDashboard(
+  context: vscode.ExtensionContext,
+): void {
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.openMemoryDashboard", async () => {
+      await openMemoryDashboard(context);
+    }),
+  );
 }

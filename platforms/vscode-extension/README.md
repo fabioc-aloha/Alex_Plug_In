@@ -267,6 +267,16 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
+### What's New (v7.2.0 -- Intelligence Edition)
+
+| Category                  | Highlights                                                                                                        |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Terminal Orchestrator** | Multi-step workflow engine with VS Code 1.115 background terminal notifications; 3 built-in templates             |
+| **Browser Context**       | Tracks URLs from chat browser tabs, response links, and tool calls; injects into prompt Layer 12                  |
+| **Session Memory**        | Episodic records now capture chat session IDs, auto-generated names, and referenced URLs for cross-session recall |
+| **Security Fixes**        | XSS in cognitive dashboard, path traversal in health/memory dashboards                                            |
+| **7 Bug Fixes**           | Inverted GK detection, browser context ordering, CRLF frontmatter parsing, uncaught promise, dead code cleanup    |
+
 ### What's New (v7.1.3 -- Install/Upgrade Hardening + H19)
 
 | Category             | Highlights                                                                                                   |

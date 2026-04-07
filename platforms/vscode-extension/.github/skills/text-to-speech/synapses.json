@@ -64,6 +64,13 @@
       "yields": "Regex patterns: negative lookbehind, emoji-text deduplication"
     },
     {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "consumes",
+      "strength": 0.3,
+      "when": "TTS hotfix release",
+      "yields": "PAT-based publishing protocol"
+    },
+    {
       "target": ".github/skills/image-handling/SKILL.md",
       "type": "complements",
       "strength": 0.7,

@@ -31,6 +31,7 @@ import { loadMoodContext } from "./emotionalMemory";
 import { PeripheralContext } from "./peripheralVision";
 import { CoverageScore } from "./honestUncertainty";
 import { PERSONAS, Persona } from "./personaDetection";
+import { browserContext } from "../services/browserContext";
 import {
   getPromptVariant,
   shouldIncludeLayer,
@@ -60,6 +61,7 @@ const LAYER_PRIORITIES: Record<keyof LayerBudget, number> = {
   honestUncertainty: 600, // Epistemic signals
   emotionalMemory: 500, // Mood awareness
   knowledgeContext: 400, // Pre-seeded knowledge
+  browserContext: 350, // v7.2.0: Session browser references
   peripheralVision: 300, // Ambient workspace context
 };
 
@@ -137,6 +139,7 @@ export async function buildAlexSystemPrompt(
     ["emotionalMemory", () => buildEmotionalMemoryLayer(ctx)],
     ["peripheralVision", () => buildPeripheralVisionLayer(ctx)],
     ["knowledgeContext", () => buildKnowledgeContextLayer(ctx)],
+    ["browserContext", () => buildBrowserContextLayer()],
     ["modelAdaptive", () => buildModelAdaptiveLayer(ctx, variant)],
     ["expertise", () => buildExpertiseLayer(ctx)],
     ["responseGuidelines", () => buildResponseGuidelinesLayer(ctx)],
@@ -933,6 +936,21 @@ async function buildKnowledgeContextLayer(ctx: PromptContext): Promise<string> {
     console.warn("[PromptEngine] Failed to search knowledge context:", err);
     return "";
   }
+}
+
+// ============================================================================
+// Layer 12: Browser Context (v7.2.0)
+// ============================================================================
+
+/**
+ * Inject session browser references into prompt context.
+ * Enables the model to reference web pages opened during the session
+ * without requiring re-fetching.
+ *
+ * Token budget: ~150 tokens
+ */
+async function buildBrowserContextLayer(): Promise<string> {
+  return browserContext.buildPromptContext();
 }
 
 // ============================================================================

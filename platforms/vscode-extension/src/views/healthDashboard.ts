@@ -1,21 +1,25 @@
-import * as vscode from 'vscode';
-import * as path from 'path';
-import * as workspaceFs from '../shared/workspaceFs';
-import { 
-    checkHealth, 
-    HealthCheckResult, 
-    HealthStatus
-} from '../shared/healthCheck';
-import { getGlobalKnowledgeSummary } from '../chat/globalKnowledge';
-import { getInstalledAlexVersion } from '../shared/utils';
-import { escapeHtml, getNonce } from '../shared/sanitize';
-import { detectPersona, loadUserProfile, PersonaDetectionResult } from '../chat/personaDetection';
-import { getPersonaAccent } from '../shared/skillConstants';
-import { nasaAssert, nasaAssertBounded } from '../shared/nasaAssert';
+import * as vscode from "vscode";
+import * as path from "path";
+import * as workspaceFs from "../shared/workspaceFs";
+import {
+  checkHealth,
+  HealthCheckResult,
+  HealthStatus,
+} from "../shared/healthCheck";
+import { getGlobalKnowledgeSummary } from "../chat/globalKnowledge";
+import { getInstalledAlexVersion } from "../shared/utils";
+import { escapeHtml, getNonce } from "../shared/sanitize";
+import {
+  detectPersona,
+  loadUserProfile,
+  PersonaDetectionResult,
+} from "../chat/personaDetection";
+import { getPersonaAccent } from "../shared/skillConstants";
+import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
 
 /**
  * Health Dashboard - Rich webview visualization of Alex cognitive architecture
- * 
+ *
  * Features:
  * - Synaptic network visualization (ASCII art)
  * - Health metrics with color-coded status
@@ -30,78 +34,90 @@ let currentPanel: vscode.WebviewPanel | undefined;
 /**
  * Open or focus the health dashboard
  */
-export async function openHealthDashboard(context: vscode.ExtensionContext): Promise<void> {
-    const column = vscode.window.activeTextEditor 
-        ? vscode.window.activeTextEditor.viewColumn
-        : undefined;
-    
-    // If panel already exists, reveal it
-    if (currentPanel) {
-        currentPanel.reveal(column);
-        await refreshDashboard();
-        return;
-    }
-    
-    // Store extension URI for content generation
-    extensionUri = context.extensionUri;
-    
-    // Create a new panel
-    currentPanel = vscode.window.createWebviewPanel(
-        'alexHealthDashboard',
-        'Alex Health Dashboard',
-        column || vscode.ViewColumn.One,
-        {
-            enableScripts: true,
-            retainContextWhenHidden: true,
-            localResourceRoots: [context.extensionUri]
-        }
-    );
-    
-    // Set up message handling
-    currentPanel.webview.onDidReceiveMessage(
-        async message => {
-            switch (message.command) {
-                case 'refresh':
-                    await refreshDashboard();
-                    break;
-                case 'runDream':
-                    vscode.commands.executeCommand('alex.dream');
-                    break;
-                case 'selfActualize':
-                    vscode.commands.executeCommand('alex.selfActualize');
-                    break;
-                case 'runAudit':
-                    vscode.commands.executeCommand('alex.runAudit');
-                    break;
-                case 'viewDiagnostics':
-                    vscode.commands.executeCommand('alex.viewBetaTelemetry');
-                    break;
-                case 'openFile':
-                    if (message.filePath) {
-                        const doc = await vscode.workspace.openTextDocument(message.filePath);
-                        await vscode.window.showTextDocument(doc);
-                    }
-                    break;
-                case 'deepBrainQA':
-                    vscode.commands.executeCommand('alex.deepBrainQA');
-                    break;
-            }
-        },
-        undefined,
-        context.subscriptions
-    );
-    
-    // Handle panel disposal
-    currentPanel.onDidDispose(
-        () => {
-            currentPanel = undefined;
-        },
-        undefined,
-        context.subscriptions
-    );
-    
-    // Load initial content
+export async function openHealthDashboard(
+  context: vscode.ExtensionContext,
+): Promise<void> {
+  const column = vscode.window.activeTextEditor
+    ? vscode.window.activeTextEditor.viewColumn
+    : undefined;
+
+  // If panel already exists, reveal it
+  if (currentPanel) {
+    currentPanel.reveal(column);
     await refreshDashboard();
+    return;
+  }
+
+  // Store extension URI for content generation
+  extensionUri = context.extensionUri;
+
+  // Create a new panel
+  currentPanel = vscode.window.createWebviewPanel(
+    "alexHealthDashboard",
+    "Alex Health Dashboard",
+    column || vscode.ViewColumn.One,
+    {
+      enableScripts: true,
+      retainContextWhenHidden: true,
+      localResourceRoots: [context.extensionUri],
+    },
+  );
+
+  // Set up message handling
+  currentPanel.webview.onDidReceiveMessage(
+    async (message) => {
+      switch (message.command) {
+        case "refresh":
+          await refreshDashboard();
+          break;
+        case "runDream":
+          vscode.commands.executeCommand("alex.dream");
+          break;
+        case "selfActualize":
+          vscode.commands.executeCommand("alex.selfActualize");
+          break;
+        case "runAudit":
+          vscode.commands.executeCommand("alex.runAudit");
+          break;
+        case "viewDiagnostics":
+          vscode.commands.executeCommand("alex.viewBetaTelemetry");
+          break;
+        case "openFile":
+          if (message.filePath) {
+            const resolvedPath = path.resolve(message.filePath);
+            const workspaceRoot =
+              vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+            if (
+              workspaceRoot &&
+              (resolvedPath + path.sep).startsWith(
+                path.resolve(workspaceRoot) + path.sep,
+              )
+            ) {
+              const doc = await vscode.workspace.openTextDocument(resolvedPath);
+              await vscode.window.showTextDocument(doc);
+            }
+          }
+          break;
+        case "deepBrainQA":
+          vscode.commands.executeCommand("alex.deepBrainQA");
+          break;
+      }
+    },
+    undefined,
+    context.subscriptions,
+  );
+
+  // Handle panel disposal
+  currentPanel.onDidDispose(
+    () => {
+      currentPanel = undefined;
+    },
+    undefined,
+    context.subscriptions,
+  );
+
+  // Load initial content
+  await refreshDashboard();
 }
 
 // Store extension URI for webview content generation
@@ -109,46 +125,52 @@ let extensionUri: vscode.Uri | undefined;
 
 /**
  * Refresh dashboard content
- * 
+ *
  * NASA R5: Critical function with assertion density
  */
 async function refreshDashboard(): Promise<void> {
-    if (!currentPanel || !extensionUri) {
-        return;
+  if (!currentPanel || !extensionUri) {
+    return;
+  }
+
+  // NASA R5: Validate panel state
+  nasaAssert(
+    currentPanel.webview !== undefined,
+    "Webview must be defined during refresh",
+  );
+
+  try {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    const rootPath = workspaceFolders?.[0]?.uri.fsPath || "";
+
+    // Gather all data in parallel
+    const [health, knowledgeSummary, version] = await Promise.all([
+      checkHealth(true), // Force fresh health check
+      getGlobalKnowledgeSummary(),
+      rootPath ? getInstalledAlexVersion(rootPath) : Promise.resolve(null),
+    ]);
+
+    // Detect persona for UI accent
+    let personaResult: PersonaDetectionResult | null = null;
+    if (workspaceFolders) {
+      const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
+      personaResult = await detectPersona(
+        userProfile ?? undefined,
+        workspaceFolders,
+      );
     }
-    
-    // NASA R5: Validate panel state
-    nasaAssert(currentPanel.webview !== undefined, 'Webview must be defined during refresh');
-    
-    try {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        const rootPath = workspaceFolders?.[0]?.uri.fsPath || '';
-        
-        // Gather all data in parallel
-        const [health, knowledgeSummary, version] = await Promise.all([
-            checkHealth(true), // Force fresh health check
-            getGlobalKnowledgeSummary(),
-            rootPath ? getInstalledAlexVersion(rootPath) : Promise.resolve(null)
-        ]);
-        
-        // Detect persona for UI accent
-        let personaResult: PersonaDetectionResult | null = null;
-        if (workspaceFolders) {
-            const userProfile = await loadUserProfile(workspaceFolders[0].uri.fsPath);
-            personaResult = await detectPersona(userProfile ?? undefined, workspaceFolders);
-        }
-        
-        currentPanel.webview.html = await getWebviewContent(
-            currentPanel.webview,
-            extensionUri,
-            health,
-            knowledgeSummary,
-            version,
-            personaResult
-        );
-    } catch (err) {
-        currentPanel.webview.html = getErrorContent(err);
-    }
+
+    currentPanel.webview.html = await getWebviewContent(
+      currentPanel.webview,
+      extensionUri,
+      health,
+      knowledgeSummary,
+      version,
+      personaResult,
+    );
+  } catch (err) {
+    currentPanel.webview.html = getErrorContent(err);
+  }
 }
 
 // Persona accent colors now imported from shared/skillConstants.ts (DRY)
@@ -157,40 +179,49 @@ async function refreshDashboard(): Promise<void> {
  * Generate the webview HTML content
  */
 async function getWebviewContent(
-    webview: vscode.Webview,
-    extUri: vscode.Uri,
-    health: HealthCheckResult,
-    knowledge: { totalPatterns: number; totalInsights: number } | null,
-    version: string | null,
-    personaResult: PersonaDetectionResult | null
+  webview: vscode.Webview,
+  extUri: vscode.Uri,
+  health: HealthCheckResult,
+  knowledge: { totalPatterns: number; totalInsights: number } | null,
+  version: string | null,
+  personaResult: PersonaDetectionResult | null,
 ): Promise<string> {
-    // NASA R5: Entry point assertions
-    nasaAssert(webview !== undefined, 'getWebviewContent: webview must be defined');
-    nasaAssertBounded(health.brokenSynapses, 0, 10000, 'health.brokenSynapses');
-    nasaAssertBounded(health.totalSynapses, 0, 100000, 'health.totalSynapses');
+  // NASA R5: Entry point assertions
+  nasaAssert(
+    webview !== undefined,
+    "getWebviewContent: webview must be defined",
+  );
+  nasaAssertBounded(health.brokenSynapses, 0, 10000, "health.brokenSynapses");
+  nasaAssertBounded(health.totalSynapses, 0, 100000, "health.totalSynapses");
 
-    const isHealthy = health.status === HealthStatus.Healthy;
-    const healthColor = isHealthy ? 'var(--vscode-charts-green, #4CAF50)' : (health.brokenSynapses > 5 ? 'var(--vscode-charts-red, #F44336)' : 'var(--vscode-charts-yellow, #FF9800)');
-    
-    // Get persona accent color (from shared constants)
-    const persona = personaResult?.persona;
-    const personaAccent = getPersonaAccent(persona?.id);
-    
-    // Logo URI
-    const logoUri = webview.asWebviewUri(vscode.Uri.joinPath(extUri, 'assets', 'logo.svg'));
-    
-    // Build synapse network visualization
-    const synapseViz = buildSynapseVisualization(health);
-    
-    // Build memory file breakdown
-    const memoryCategories = await buildMemoryBreakdownAsync();
-    const memoryBreakdown = buildMemoryBreakdown(memoryCategories);
-    
-    const hasIssues = !isHealthy || health.brokenSynapses > 0;
-    
-    const nonce = getNonce();
-    
-    return `<!DOCTYPE html>
+  const isHealthy = health.status === HealthStatus.Healthy;
+  const healthColor = isHealthy
+    ? "var(--vscode-charts-green, #4CAF50)"
+    : health.brokenSynapses > 5
+      ? "var(--vscode-charts-red, #F44336)"
+      : "var(--vscode-charts-yellow, #FF9800)";
+
+  // Get persona accent color (from shared constants)
+  const persona = personaResult?.persona;
+  const personaAccent = getPersonaAccent(persona?.id);
+
+  // Logo URI
+  const logoUri = webview.asWebviewUri(
+    vscode.Uri.joinPath(extUri, "assets", "logo.svg"),
+  );
+
+  // Build synapse network visualization
+  const synapseViz = buildSynapseVisualization(health);
+
+  // Build memory file breakdown
+  const memoryCategories = await buildMemoryBreakdownAsync();
+  const memoryBreakdown = buildMemoryBreakdown(memoryCategories);
+
+  const hasIssues = !isHealthy || health.brokenSynapses > 0;
+
+  const nonce = getNonce();
+
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -600,11 +631,11 @@ async function getWebviewContent(
                 <img src="${logoUri}" alt="Alex" class="logo" />
                 <div class="title-block">
                     <h1>Alex Health Dashboard</h1>
-                    <span class="version">Version ${version || 'Unknown'}</span>
+                    <span class="version">Version ${version || "Unknown"}</span>
                 </div>
             </div>
             <div class="header-actions">
-                ${hasIssues ? `<button class="btn btn-fix" data-cmd="deepBrainQA">🔧 Fix Issues</button>` : ''}
+                ${hasIssues ? `<button class="btn btn-fix" data-cmd="deepBrainQA">🔧 Fix Issues</button>` : ""}
                 <button class="btn btn-accent" data-cmd="refresh">
                     🔄 Refresh
                 </button>
@@ -628,8 +659,8 @@ async function getWebviewContent(
             <div class="card">
                 <div class="card-header">
                     <span class="card-title">🏥 Architecture Health</span>
-                    <span class="card-badge ${isHealthy ? 'badge-success' : (health.brokenSynapses > 5 ? 'badge-error' : 'badge-warning')}">
-                        ${isHealthy ? 'Healthy' : (health.brokenSynapses > 5 ? 'Critical' : 'Needs Attention')}
+                    <span class="card-badge ${isHealthy ? "badge-success" : health.brokenSynapses > 5 ? "badge-error" : "badge-warning"}">
+                        ${isHealthy ? "Healthy" : health.brokenSynapses > 5 ? "Critical" : "Needs Attention"}
                     </span>
                 </div>
                 <div class="health-score">
@@ -644,7 +675,7 @@ async function getWebviewContent(
                         <div class="stat-label">Total Synapses</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value" style="color: ${health.brokenSynapses > 0 ? 'var(--warning)' : 'var(--success)'}">${health.brokenSynapses}</div>
+                        <div class="stat-value" style="color: ${health.brokenSynapses > 0 ? "var(--warning)" : "var(--success)"}">${health.brokenSynapses}</div>
                         <div class="stat-label">Broken</div>
                     </div>
                     <div class="stat-item">
@@ -652,7 +683,7 @@ async function getWebviewContent(
                         <div class="stat-label">Memory Files</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-value">${isHealthy ? '✓' : '!'}</div>
+                        <div class="stat-value">${isHealthy ? "✓" : "!"}</div>
                         <div class="stat-label">Status</div>
                     </div>
                 </div>
@@ -732,36 +763,47 @@ async function getWebviewContent(
  * Build modern visualization of synapse network
  */
 function buildSynapseVisualization(health: HealthCheckResult): string {
-    if (!health.initialized || health.totalSynapses === 0) {
-        return `
+  if (!health.initialized || health.totalSynapses === 0) {
+    return `
         <div class="synapse-empty">
             <div class="synapse-empty-icon">🔗</div>
             <div class="synapse-empty-text">No synapses found</div>
             <div class="synapse-empty-hint">Run 'Alex: Initialize' to deploy architecture</div>
         </div>`;
-    }
-    
-    const healthyCount = health.totalSynapses - health.brokenSynapses;
-    const healthPercent = Math.round((healthyCount / health.totalSynapses) * 100);
-    const healthColor = healthPercent >= 95 ? 'var(--success)' : (healthPercent >= 80 ? 'var(--warning)' : 'var(--error)');
-    
-    // Build issues HTML if any
-    let issuesHtml = '';
-    if (health.issues.length > 0) {
-        const issueItems = health.issues.slice(0, 6).map(issue => {
-            const sanitizedIssue = escapeHtml(issue);
-            return `<div class="synapse-issue-item">⚠️ ${sanitizedIssue}</div>`;
-        }).join('');
-        const moreCount = health.issues.length > 6 ? `<div class="synapse-issue-more">... and ${health.issues.length - 6} more issues</div>` : '';
-        issuesHtml = `
+  }
+
+  const healthyCount = health.totalSynapses - health.brokenSynapses;
+  const healthPercent = Math.round((healthyCount / health.totalSynapses) * 100);
+  const healthColor =
+    healthPercent >= 95
+      ? "var(--success)"
+      : healthPercent >= 80
+        ? "var(--warning)"
+        : "var(--error)";
+
+  // Build issues HTML if any
+  let issuesHtml = "";
+  if (health.issues.length > 0) {
+    const issueItems = health.issues
+      .slice(0, 6)
+      .map((issue) => {
+        const sanitizedIssue = escapeHtml(issue);
+        return `<div class="synapse-issue-item">⚠️ ${sanitizedIssue}</div>`;
+      })
+      .join("");
+    const moreCount =
+      health.issues.length > 6
+        ? `<div class="synapse-issue-more">... and ${health.issues.length - 6} more issues</div>`
+        : "";
+    issuesHtml = `
         <div class="synapse-issues">
             <div class="synapse-issues-header">Issues Detected</div>
             ${issueItems}
             ${moreCount}
         </div>`;
-    }
-    
-    return `
+  }
+
+  return `
     <div class="synapse-grid">
         <div class="synapse-metric">
             <div class="synapse-metric-value">${health.totalSynapses}</div>
@@ -772,7 +814,7 @@ function buildSynapseVisualization(health: HealthCheckResult): string {
             <div class="synapse-metric-label">Healthy</div>
         </div>
         <div class="synapse-metric">
-            <div class="synapse-metric-value" style="color: ${health.brokenSynapses > 0 ? 'var(--error)' : 'var(--success)'}">${health.brokenSynapses}</div>
+            <div class="synapse-metric-value" style="color: ${health.brokenSynapses > 0 ? "var(--error)" : "var(--success)"}">${health.brokenSynapses}</div>
             <div class="synapse-metric-label">Broken</div>
         </div>
         <div class="synapse-metric">
@@ -795,40 +837,71 @@ function buildSynapseVisualization(health: HealthCheckResult): string {
 /**
  * Build memory file breakdown HTML
  */
-async function buildMemoryBreakdownAsync(): Promise<{ icon: string; name: string; count: number }[]> {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-        return [];
+async function buildMemoryBreakdownAsync(): Promise<
+  { icon: string; name: string; count: number }[]
+> {
+  const workspaceFolders = vscode.workspace.workspaceFolders;
+  if (!workspaceFolders) {
+    return [];
+  }
+
+  const rootPath = workspaceFolders[0].uri.fsPath;
+  const categories = [
+    {
+      icon: "📋",
+      name: "Instructions (.instructions.md)",
+      path: path.join(rootPath, ".github", "instructions"),
+      count: 0,
+    },
+    {
+      icon: "📝",
+      name: "Prompts (.prompt.md)",
+      path: path.join(rootPath, ".github", "prompts"),
+      count: 0,
+    },
+    {
+      icon: "🎯",
+      name: "Skills (SKILL.md)",
+      path: path.join(rootPath, ".github", "skills"),
+      count: 0,
+    },
+    {
+      icon: "🧠",
+      name: "Domain Knowledge (legacy)",
+      path: path.join(rootPath, ".github", "domain-knowledge"),
+      count: 0,
+    },
+    {
+      icon: "⚙️",
+      name: "Configuration",
+      path: path.join(rootPath, ".github", "config"),
+      count: 0,
+    },
+  ];
+
+  // Count files in each directory
+  for (const cat of categories) {
+    try {
+      if (await workspaceFs.pathExists(cat.path)) {
+        const files = await workspaceFs.readDirectory(cat.path);
+        cat.count = files.filter(([name, _]) => name.endsWith(".md")).length;
+      }
+    } catch {
+      // Ignore errors
     }
-    
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    const categories = [
-        { icon: '📋', name: 'Instructions (.instructions.md)', path: path.join(rootPath, '.github', 'instructions'), count: 0 },
-        { icon: '📝', name: 'Prompts (.prompt.md)', path: path.join(rootPath, '.github', 'prompts'), count: 0 },
-        { icon: '🎯', name: 'Skills (SKILL.md)', path: path.join(rootPath, '.github', 'skills'), count: 0 },
-        { icon: '🧠', name: 'Domain Knowledge (legacy)', path: path.join(rootPath, '.github', 'domain-knowledge'), count: 0 },
-        { icon: '⚙️', name: 'Configuration', path: path.join(rootPath, '.github', 'config'), count: 0 }
-    ];
-    
-    // Count files in each directory
-    for (const cat of categories) {
-        try {
-            if (await workspaceFs.pathExists(cat.path)) {
-                const files = await workspaceFs.readDirectory(cat.path);
-                cat.count = files.filter(([name, _]) => name.endsWith('.md')).length;
-            }
-        } catch {
-            // Ignore errors
-        }
-    }
-    
-    return categories;
+  }
+
+  return categories;
 }
 
-function buildMemoryBreakdown(categories: { icon: string; name: string; count: number }[]): string {
-    return `
+function buildMemoryBreakdown(
+  categories: { icon: string; name: string; count: number }[],
+): string {
+  return `
     <ul class="memory-list">
-        ${categories.map(cat => `
+        ${categories
+          .map(
+            (cat) => `
         <li class="memory-item">
             <span class="memory-name">
                 <span class="memory-icon">${cat.icon}</span>
@@ -836,7 +909,9 @@ function buildMemoryBreakdown(categories: { icon: string; name: string; count: n
             </span>
             <span class="memory-count">${cat.count}</span>
         </li>
-        `).join('')}
+        `,
+          )
+          .join("")}
     </ul>`;
 }
 
@@ -844,8 +919,8 @@ function buildMemoryBreakdown(categories: { icon: string; name: string; count: n
  * Get error content
  */
 function getErrorContent(err: unknown): string {
-    const nonce = getNonce();
-    return `<!DOCTYPE html>
+  const nonce = getNonce();
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -893,10 +968,12 @@ function getErrorContent(err: unknown): string {
 /**
  * Register the dashboard command
  */
-export function registerHealthDashboard(context: vscode.ExtensionContext): void {
-    context.subscriptions.push(
-        vscode.commands.registerCommand('alex.openHealthDashboard', async () => {
-            await openHealthDashboard(context);
-        })
-    );
+export function registerHealthDashboard(
+  context: vscode.ExtensionContext,
+): void {
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.openHealthDashboard", async () => {
+      await openHealthDashboard(context);
+    }),
+  );
 }

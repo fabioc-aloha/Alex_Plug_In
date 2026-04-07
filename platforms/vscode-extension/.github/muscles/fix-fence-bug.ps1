@@ -118,7 +118,7 @@ else {
     
     # Get all .md and .json files
     $targetFiles = Get-ChildItem $scanRoot -Recurse -Include "*.md", "*.json" -File |
-    Where-Object { $_.FullName -notmatch 'node_modules|\.git\\' }
+    Where-Object { $_.FullName -notmatch 'node_modules|[\\/]\.git[\\/]' }
 }
 
 $results = @()
@@ -128,7 +128,7 @@ foreach ($file in $targetFiles) {
         $script:issuesFound++
         $impact = Test-FileImpact $file.FullName
         $repoRoot = (Get-Item $PSScriptRoot).Parent.Parent.FullName
-        $relativePath = $file.FullName -replace [regex]::Escape($repoRoot + "\"), ''
+        $relativePath = $file.FullName -replace [regex]::Escape($repoRoot + [IO.Path]::DirectorySeparatorChar), ''
         
         $result = [PSCustomObject]@{
             File     = $relativePath
@@ -155,7 +155,7 @@ foreach ($file in $targetFiles) {
     }
     elseif ($Verbose) {
         $repoRoot = (Get-Item $PSScriptRoot).Parent.Parent.FullName
-        $relativePath = $file.FullName -replace [regex]::Escape($repoRoot + "\"), ''
+        $relativePath = $file.FullName -replace [regex]::Escape($repoRoot + [IO.Path]::DirectorySeparatorChar), ''
         Write-Host "[OK] Clean: $relativePath" -ForegroundColor DarkGray
     }
 }
