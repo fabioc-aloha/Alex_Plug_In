@@ -178,13 +178,13 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 
 |                            |                                                                                                                                                                                             |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Current Master Version** | 7.2.0                                                                                                                                                                                       |
-| **Current Heirs**          | VS Code (7.2.0)                                                                                                                                                                             |
+| **Current Master Version** | 7.3.0                                                                                                                                                                                       |
+| **Current Heirs**          | VS Code (7.3.0)                                                                                                                                                                             |
 | **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                                                                                                                              |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                                                                                                      |
 | **Next Target**            | TBD                                                                                                                                                                                         |
 | **Open Items**             | 3 v7.2.0 features deferred (insight pipeline, dream creativity score, frecency) + competitive audit + context-aware nudges + 2 deferred hooks + 2 future watch + 6 platform unlocks (1.115) |
-| **Updated**                | 2026-04-07                                                                                                                                                                                  |
+| **Updated**                | 2026-04-08                                                                                                                                                                                  |
 
 ---
 
