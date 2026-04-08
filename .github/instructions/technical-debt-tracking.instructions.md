@@ -113,14 +113,32 @@ grep -rn "DEBT:" --include="*.ts" --include="*.js" --include="*.md" .
 | D001 | code | high | Duplicated validation | validator.ts | 45 | 2026-01-23 | @dev | 2h |
 | D002 | design | medium | SRP violation | handler.ts | 12 | 2026-01-15 | - | 4h |
 
-### Step 3: Prioritize
+### Step 3: Prioritize with Composite Scoring
 
-**Prioritization Matrix:**
+Score each debt item with the composite formula:
+
+```
+Debt Score = (Severity x 3) + (Churn x 2) + (Blast Radius x 2) + (Fix Simplicity) + (Age)
+```
+
+| Factor | Scale | How to Measure |
+|--------|-------|----------------|
+| **Severity** | 1-5 | Critical=5, High=4, Medium=3, Low=2, Cosmetic=1 |
+| **Churn** | 1-5 | git log frequency: daily=5, weekly=4, monthly=3, quarterly=2, dormant=1 |
+| **Blast Radius** | 1-5 | Files importing this module: 20+=5, 10-19=4, 5-9=3, 2-4=2, 1=1 |
+| **Fix Simplicity** | 1-5 | Trivial=5, Straightforward=4, Moderate=3, Complex=2, Risky=1 |
+| **Age** | 1-5 | >1yr=5, 6-12mo=4, 3-6mo=3, 1-3mo=2, <1mo=1 |
+
+**Score range**: 9 (minimal) to 45 (urgent). Prioritize highest scores first.
+
+**Key insight**: High churn + many dependents + debt markers = top priority hotspot. Cross-reference `git log --format='%H' --follow <file> | wc -l` with `grep -rn "import.*from.*<module>"` to find these.
+
+**Quick prioritization matrix** (for when composite scoring is overkill):
 
 | | Low Effort | High Effort |
 |---|------------|-------------|
-| **High Impact** | ⭐ Do First | 📋 Plan Carefully |
-| **Low Impact** | ✅ Quick Wins | ❌ Defer |
+| **High Impact** | Do First | Plan Carefully |
+| **Low Impact** | Quick Wins | Defer |
 
 ---
 

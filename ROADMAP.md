@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: April 7, 2026
+**Last Updated**: April 8, 2026
 
 ---
 
@@ -42,6 +42,7 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                                                | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| **v7.3.0** | Research-Driven Quality Edition -- 6 new instruction files + 10 existing instruction enhancements adapted from 1ES AI-First Dev Starter Pack research, heir-bootstrap wizard skill (10-phase post-Initialize project tailoring), skill telemetry protocol, cognitive benchmarking, repository readiness eval, coupling metrics       | 2026-04-08 |
 | **v7.2.0** | Intelligence Edition -- Terminal orchestrator service (3 workflow templates), browser context service (URL tracking from chat tabs/responses/tools, prompt Layer 12), session-aware episodic memory (chatSessionId, sessionName, referencedUrls), 7 bug fixes (XSS, path traversal, inverted GK logic, CRLF regex, capture ordering) | 2026-04-07 |
 | **v7.1.3** | Install/Upgrade Hardening + H19 -- Critical .github preservation fix, upgrade rollback, force repair, first-install prompt, H19 synapse weight update hook (buffered live learning), post-upgrade warning aggregation, version notification tiers, documentation audit (4 archived, 17 fixed, dead commands/links removed)           | 2026-04-04 |
 | **v7.1.2** | Intelligence Foundations -- Cross-domain pattern synthesis LM tool, silence-as-signal skill, user friction inventory (29 signals), meditation Phase 3, stale count elimination, PS5 preflight fix, Agent Plugin discontinued, alex_archive deleted, 21 stale docs removed, brain audit (0 issues)                                    | 2026-04-03 |

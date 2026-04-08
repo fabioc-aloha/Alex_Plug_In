@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.3.0] - 2026-04-08
+
+> **Research-Driven Quality Edition** -- 6 new instruction files and 10 enhancements to existing instructions, adapted from Microsoft 1ES AI-First Dev Starter Pack research. Heir Bootstrap Wizard skill for post-Initialize project tailoring.
+
+### Added
+
+- **Skill telemetry protocol** (`skill-telemetry.instructions.md`) -- Two-phase signal protocol (start beacon + completion signal), JSONL storage at `~/.alex/telemetry/`, 90-day rolling, privacy rules, 3-phase implementation plan
+- **Cognitive benchmarking protocol** (`cognitive-benchmarking.instructions.md`) -- A/B comparison harness (with/without .github/ architecture), 3 task categories, 1-5 scoring rubric, LLM-as-judge calibration, statistical rigor (paired t-test, Cohen's d)
+- **Repository readiness evaluation** (`repository-readiness-eval.instructions.md`) -- 4-axis scoring (Code Understanding 30%, Dependency Restore 25%, Build Success 25%, Test Execution 20%), autonomy penalty formula, composite score bands
+- **Coupling metrics** (`coupling-metrics.instructions.md`) -- Afferent/efferent coupling, instability formula (Ce/(Ca+Ce)), hub risk detection (Ca x Ce), dead code 5-point verification, bash measurement scripts
+- **Log pattern analyzer** (`log-pattern-analyzer.instructions.md`) -- 4 analysis dimensions (coverage gaps, level misuse, sensitive data exposure, structured logging compliance), quick audit script, VS Code extension-specific checks
+- **Heir Bootstrap Wizard skill design** (`skills/heir-bootstrap/SKILL.md`) -- Skill definition for a future post-Initialize wizard that tailors architecture to specific heir projects; 10-phase interactive process using CONFIRM/DECIDE protocols, state persistence, 30-80 line content budget, inferability-gated rule selection. Does not modify the extension's Initialize command (extension integration is a future TODO)
+
+### Changed
+
+- **Multi-pass focused-lens protocol** (`adversarial-oversight`) -- 4-pass refinement table (Draft, Correctness, Clarity, Edge Cases, Excellence) with "stay in your lane" rule; 2-pass shortcut for small tasks
+- **Named evaluation patterns** (`adversarial-oversight`) -- 3 patterns (Basic Reflection, Evaluator-Optimizer, Tool-Reflective) with shared rules: criteria before generating, cap 3-5 iterations, convergence tracking
+- **Confidence-scored findings** (`code-review-guidelines`) -- Numeric % per finding with 4-tier bands (90-100/70-89/50-69/<50), security exception for low-confidence findings
+- **Pattern-aware review** (`code-review-guidelines`) -- "Detect 2+ examples first" before flagging deviations; burden of proof on the deviation
+- **3+ competing hypotheses** (`debugging-patterns`) -- Replaced single-hypothesis Step 4 with mandatory 3+ hypotheses to prevent anchoring bias; HYPOTHESIS.md for complex bugs
+- **Test quality scoring** (`testing-strategies`) -- 1-5 per-test scoring with Red/Yellow/Green rapid triage
+- **Composite tech debt scoring** (`technical-debt-tracking`) -- Formula: (Severity x 3) + (Churn x 2) + (Blast Radius x 2) + (Fix Simplicity) + (Age), range 9-45
+- **Rule inferability taxonomy** (`token-waste-elimination`) -- 1-5 scale calibrated against ETH Zurich finding that 42% of rules score 4-5
+- **Overlap detection** (`token-waste-elimination`) -- Semantic similarity formula: 0.4 x Jaccard + 0.6 x Keyword Overlap, >0.50 = merge
+- **Reader testing** (`semantic-audit`) -- 5th audit dimension: predict 5-10 reader questions and verify the document answers each one
+
+---
+
 ## [7.2.0] - 2026-04-07
 
 > **Intelligence Edition** -- 3 new services (terminal orchestrator, browser context, session-aware episodic memory), prompt Layer 12, 7 bug fixes across security, logic, and cross-platform patterns.

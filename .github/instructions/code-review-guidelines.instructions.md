@@ -63,6 +63,38 @@ Do NOT skip this step. Do NOT assume "it should work." Verify.
 
 Use the comprehensive checklist from the [code-review SKILL.md](..\skills\code-review/SKILL.md#review-checklist) covering Security, Logic, Quality, and Architecture dimensions. The skill also defines the 3-Pass Review methodology (Orientation → Logic → Polish).
 
+### Confidence-Scored Findings
+
+Every review finding must include a numeric confidence percentage (not just High/Medium/Low). This enables automated filtering and calibrates reviewer certainty.
+
+**Required per finding**: file:line, current code, recommended fix, confidence %, prevention principle.
+
+| Confidence | Meaning | Action |
+|------------|---------|--------|
+| 90-100% | Certain this is a bug/issue | Always report |
+| 70-89% | Highly likely, needs attention | Report with evidence |
+| 50-69% | Possible issue, needs investigation | Report as `[question]` |
+| <50% | Uncertain, might be fine | Suppress (except security findings) |
+
+**Security exception**: Always report security findings regardless of confidence. A 30% chance of an injection vulnerability is still worth flagging.
+
+**Example**:
+```markdown
+[blocking] (92%) Unsanitized user input passed to SQL query.
+- File: `api/users.ts:47`
+- Current: `db.query(\`SELECT * FROM users WHERE id = ${req.params.id}\`)`
+- Fix: Use parameterized query: `db.query('SELECT * FROM users WHERE id = $1', [req.params.id])`
+- Prevention: All database queries must use parameterized inputs.
+```
+
+### Pattern-Aware Review ("Detect First")
+
+Before flagging code as unconventional, scan for 2+ existing examples of the same pattern in the codebase. If the code matches existing conventions, approve. If it deviates, the burden of proof is on the deviation.
+
+- Scan: directory structure, naming conventions, file composition, imports/registration, test patterns
+- If 2+ examples exist: "This deviates from the pattern in X and Y. Intentional?"
+- If 0-1 examples: no established pattern; evaluate on merit alone
+
 ---
 
 ## How to Give Feedback

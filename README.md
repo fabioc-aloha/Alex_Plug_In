@@ -209,6 +209,15 @@ The upgrade preserves:
 
 > **Stale items** (not modified in >90 days) are flagged for manual review via MIGRATION-CANDIDATES.md.
 
+### What's New (v7.3.0 -- Research-Driven Quality Edition)
+
+| Category                        | Highlights                                                                                                                     |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| **6 New Instructions**          | Skill telemetry, cognitive benchmarking, repository readiness eval, coupling metrics, log pattern analyzer, heir bootstrap     |
+| **10 Instruction Enhancements** | Multi-pass refinement, confidence scoring, 3-hypothesis debugging, test quality scoring, composite tech debt scoring, and more |
+| **Heir Bootstrap Wizard**       | Skill design for a future post-Initialize wizard; does not change the current Initialize command                               |
+| **Research-Backed**             | Adapted from Microsoft 1ES AI-First Dev Starter Pack and ETH Zurich research (1,925+ repos)                                    |
+
 ### What's New (v7.2.0 -- Intelligence Edition)
 
 | Category                  | Highlights                                                                                                        |

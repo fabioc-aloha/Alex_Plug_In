@@ -1,25 +1,37 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md"
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "README.md",
+    "ROADMAP.md",
+    "platforms/vscode-extension/README.md",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json",
+    "AI-FIRST-DEV-STARTER-PACK-IDEAS.md",
+    "HEIR-BOOTSTRAP.md"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
-      "todoCount": 2,
-      "scannedAt": 1775591724232
+      "file": "CHANGELOG.md",
+      "todoCount": 10,
+      "scannedAt": 1775669633118
     },
     {
-      "file": "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
-      "todoCount": 1,
-      "scannedAt": 1775591724232
+      "file": "HEIR-BOOTSTRAP.md",
+      "todoCount": 5,
+      "scannedAt": 1775669633118
     },
     {
-      "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "file": "AI-FIRST-DEV-STARTER-PACK-IDEAS.md",
+      "todoCount": 4,
+      "scannedAt": 1775669633118
+    },
+    {
+      "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1775591724232
+      "scannedAt": 1775669633118
     }
   ],
-  "lastUpdated": 1775591724232
+  "lastUpdated": 1775669633118
 }

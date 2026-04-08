@@ -31,11 +31,28 @@ Stack trace reading pattern:
 - **Bottom frames**: Entry point (trigger)
 - Ignore `node_modules` frames unless the bug is in a dependency
 
-### Step 4: Hypothesize and Test
+### Step 4: Generate 3+ Competing Hypotheses
 
-- Form ONE hypothesis about the cause
-- Design a test to prove or disprove it
-- If disproved, form the next hypothesis — don't guess blindly
+Generate **at least 3 competing hypotheses** before investigating any one. This prevents anchoring bias (fixating on the first plausible explanation).
+
+For each hypothesis, document:
+
+| Field | Content |
+|-------|--------|
+| **Theory** | What you think is wrong |
+| **Supporting Evidence** | What makes this plausible |
+| **Contradicting Evidence** | What argues against it |
+| **Verification Plan** | Exact steps to prove/disprove |
+| **Fix Approach** | What you'd change if confirmed |
+
+Investigate from most likely to least likely. After each verification:
+- **CONFIRMED**: Apply fix, skip remaining hypotheses
+- **DENIED**: Cross off, move to next
+- **PARTIAL**: Combine with other hypotheses
+
+If all hypotheses fail: re-examine your assumptions, widen scope (check recent deploys, environment changes, dependency updates), form 3 new hypotheses.
+
+For complex bugs, maintain a `HYPOTHESIS.md` in the working directory to track investigation state across sessions.
 
 ### Step 5: Fix ONE Thing
 
