@@ -206,7 +206,7 @@ Progress is persisted to `.github/.heir-bootstrap-state.json`:
     ".github/instructions/api-conventions.instructions.md"
   ],
   "skippedPhases": [2],
-  "heirName": "GCX_Copilot",
+  "heirName": "MyProject",
   "repoProfile": {
     "languages": ["typescript", "scss"],
     "packageManager": "npm",

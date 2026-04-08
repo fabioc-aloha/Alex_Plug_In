@@ -2,36 +2,31 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/copilot-instructions.md",
-    "CHANGELOG.md",
+    "HEIR-BOOTSTRAP.md",
     "README.md",
-    "ROADMAP.md",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "AI-FIRST-DEV-STARTER-PACK-IDEAS.md",
-    "HEIR-BOOTSTRAP.md"
+    "ROADMAP.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1775669633118
+      "scannedAt": 1775669911520
     },
     {
       "file": "HEIR-BOOTSTRAP.md",
       "todoCount": 5,
-      "scannedAt": 1775669633118
+      "scannedAt": 1775669911520
     },
     {
       "file": "AI-FIRST-DEV-STARTER-PACK-IDEAS.md",
       "todoCount": 4,
-      "scannedAt": 1775669633118
+      "scannedAt": 1775669911520
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1775669633118
+      "scannedAt": 1775669911520
     }
   ],
-  "lastUpdated": 1775669633118
+  "lastUpdated": 1775669911520
 }

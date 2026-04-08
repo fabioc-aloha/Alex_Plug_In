@@ -27,10 +27,10 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v7.2.0 Intelligence Edition published. Terminal Orchestrator, Browser Context, Session Memory. 17 bugs fixed (XSS, path traversal, CRLF). Full cross-platform audit.
+Recent: v7.3.0 Research-Driven Quality Edition. 6 new instructions + 10 enhancements from 1ES AI-First Dev Starter Pack research. Heir Bootstrap Wizard skill design.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-04-07
+Last Assessed: 2026-04-08
 
 ## User Profile
 

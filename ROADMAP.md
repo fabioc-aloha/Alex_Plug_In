@@ -1,4 +1,4 @@
-# Alex Cognitive Architecture — Roadmap v7.1
+# Alex Cognitive Architecture — Roadmap
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 

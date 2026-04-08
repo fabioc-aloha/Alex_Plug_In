@@ -39,7 +39,7 @@ State persisted to `.github/.heir-bootstrap-state.json`:
   "lastCompletedPhase": 3,
   "createdFiles": [".github/instructions/project-specific.instructions.md"],
   "skippedPhases": [2],
-  "heirName": "GCX_Copilot",
+  "heirName": "MyProject",
   "repoProfile": {}
 }
 ```
