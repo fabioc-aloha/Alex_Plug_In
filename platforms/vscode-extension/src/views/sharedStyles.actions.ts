@@ -76,6 +76,22 @@ export function getActionStyles(): string {
           opacity: 0.6;
           color: var(--persona-accent);
       }
+      .action-badge {
+          font-size: 10px;
+          margin-left: auto;
+          opacity: 0.6;
+          white-space: nowrap;
+          padding: 1px 6px;
+          border-radius: 4px;
+          background: color-mix(in srgb, var(--vscode-descriptionForeground) 10%, transparent);
+          color: var(--vscode-descriptionForeground);
+      }
+      .action-badge.badge-warning {
+          background: color-mix(in srgb, var(--vscode-charts-yellow) 20%, transparent);
+          color: var(--vscode-charts-yellow);
+          opacity: 1;
+          font-weight: 500;
+      }
       
       /* Skill Recommendations Styles */
       .skill-recommendations-section {

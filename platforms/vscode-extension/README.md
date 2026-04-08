@@ -267,6 +267,19 @@ When the extension updates, Alex detects the version change and shows a notifica
 
 Your learned domains, custom synapses, and memory files are preserved automatically.
 
+### What's New (v7.4.0 -- Multi-Agent Strategy Edition)
+
+| Category                  | Highlights                                                                                                                       |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Multi-Pass Refinement** | 4-pass protocol (Draft, Correctness, Clarity, Edge Cases) with pass-specific focus per agent and 2-pass shortcut for small tasks |
+| **Skill-Based Routing**   | 3-tier task routing: keyword matching, learned expertise (30-day decay), fallback to orchestrator                                |
+| **Assignment Lifecycle**  | H17 SubagentStop hook records delegation outcomes; meditation-time expertise analysis (analyze-assignments.cjs)                  |
+| **Structured Unknowns**   | 5-category uncertainty taxonomy (information, interpretation, decision, authority, capability) with lifecycle tracking           |
+| **Correlation Vectors**   | Request tracing across delegations with `req-{hex}.agent.operation` chain format                                                 |
+| **Mission Profiles**      | 5 behavioral presets (release, research, debug, review, draft) as reusable prompt files                                          |
+| **Knowledge Artifacts**   | Confidence-scored research records with supersession chains and automatic pruning                                                |
+| **18 Hooks**              | 18 hooks shipped (12 global + 6 agent-scoped) across 8 VS Code hook events                                                       |
+
 ### What's New (v7.3.0 -- Research-Driven Quality Edition)
 
 | Category                        | Highlights                                                                                                                     |

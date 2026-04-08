@@ -1,0 +1,5 @@
+{
+  "activeId": null,
+  "chain": [],
+  "_notes": "Generated at session start or first subagent call. Chain traces the delegation path: req-xxxx.agent.operation"
+}

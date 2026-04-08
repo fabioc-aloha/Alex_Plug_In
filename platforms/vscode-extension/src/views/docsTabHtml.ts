@@ -1,48 +1,13 @@
 /**
  * docsTabHtml.ts - Docs tab HTML generation for the Command Center sidebar
  *
- * Extracted from welcomeViewHtml.ts during Post-Implementation Optimization (P0).
  * Exports a single function called by the orchestrator.
  */
-import { escapeHtml } from '../shared/sanitize';
-
-/**
- * Playbook category sections linking to learnai.correax.com/workshop/guide.
- * 80+ playbooks now live on the site — link to sections rather than listing each one.
- */
-const PLAYBOOK_SECTIONS: Array<{ icon: string; name: string; anchor: string }> = [
-    { icon: '💻', name: 'Technology & Engineering', anchor: 'technology' },
-    { icon: '💼', name: 'Business & Professional', anchor: 'business' },
-    { icon: '🎨', name: 'Creative & Media', anchor: 'creative' },
-    { icon: '🎓', name: 'Education & Research', anchor: 'education' },
-    { icon: '🏥', name: 'Health, Law & Human Services', anchor: 'services' },
-    { icon: '🩺', name: 'Allied Health & Clinical', anchor: 'allied-health' },
-    { icon: '🔧', name: 'Trades & Applied Sciences', anchor: 'trades-technology' },
-    { icon: '🤝', name: 'Community & Human Services', anchor: 'community-humanities' },
-];
 
 /** Generate the Docs tab panel HTML. */
 export function getDocsTabHtml(): string {
-    return `
+  return `
       <div class="tab-panel" id="panel-docs" role="tabpanel" aria-labelledby="tab-docs">
-
-          <div class="doc-tips" id="doc-tips">
-              <div class="doc-tip">
-                  <span class="doc-tip-icon">💡</span>
-                  <span>Use <strong>/meditate</strong> to consolidate learning across sessions</span>
-                  <button class="doc-tip-dismiss" aria-label="Dismiss tip">×</button>
-              </div>
-              <div class="doc-tip">
-                  <span class="doc-tip-icon">💡</span>
-                  <span>Skills auto-load by file type — open a .ts file and coding skills activate</span>
-                  <button class="doc-tip-dismiss" aria-label="Dismiss tip">×</button>
-              </div>
-              <div class="doc-tip">
-                  <span class="doc-tip-icon">💡</span>
-                  <span>Run <strong>/dream</strong> after big changes to validate synapses</span>
-                  <button class="doc-tip-dismiss" aria-label="Dismiss tip">×</button>
-              </div>
-          </div>
 
           <div class="docs-section">
               <div class="docs-section-title">Getting Started</div>
@@ -95,20 +60,6 @@ export function getDocsTabHtml(): string {
                           <div class="doc-grid-desc">Full system design</div>
                       </div>
                   </div>
-                  <div class="doc-grid-card" data-cmd="openDoc:MEMORY-SYSTEMS" tabindex="0" role="button">
-                      <span class="doc-grid-icon">💾</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Memory Systems</div>
-                          <div class="doc-grid-desc">5 modality architecture</div>
-                      </div>
-                  </div>
-                  <div class="doc-grid-card" data-cmd="openDoc:CONSCIOUS-MIND" tabindex="0" role="button">
-                      <span class="doc-grid-icon">💡</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Conscious Mind</div>
-                          <div class="doc-grid-desc">Skills, agents, prompts</div>
-                      </div>
-                  </div>
                   <div class="doc-grid-card" data-cmd="openDoc:AGENT-CATALOG" tabindex="0" role="button">
                       <span class="doc-grid-icon">🤖</span>
                       <div class="doc-grid-text">
@@ -116,37 +67,6 @@ export function getDocsTabHtml(): string {
                           <div class="doc-grid-desc">All specialist agents</div>
                       </div>
                   </div>
-                  <div class="doc-grid-card" data-cmd="openDoc:TRIFECTA-CATALOG" tabindex="0" role="button">
-                      <span class="doc-grid-icon">🔺</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Trifecta Catalog</div>
-                          <div class="doc-grid-desc">Skill + Instruction + Prompt</div>
-                      </div>
-                  </div>
-                  <div class="doc-grid-card" data-cmd="openDoc:SKILL-DISCIPLINE-MAP" tabindex="0" role="button">
-                      <span class="doc-grid-icon">🎯</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">Skill-to-Discipline Map</div>
-                          <div class="doc-grid-desc">Skills mapped to disciplines</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <div class="docs-section">
-              <div class="docs-section-title">Playbooks</div>
-              <div class="doc-grid">
-                  ${PLAYBOOK_SECTIONS.map(s =>
-                      `<div class="doc-grid-card" data-cmd="learnAlexGuideSection" data-anchor="${escapeHtml(s.anchor)}" tabindex="0" role="button">
-                      <span class="doc-grid-icon">${s.icon}</span>
-                      <div class="doc-grid-text">
-                          <div class="doc-grid-title">${escapeHtml(s.name)}</div>
-                      </div>
-                  </div>`
-                  ).join('\n                  ')}
-              </div>
-              <div class="playbook-browse-row">
-                  <button class="action-btn" data-cmd="learnAlexGuideSection" data-anchor="" tabindex="0">Browse all 80 playbooks</button>
               </div>
           </div>
 

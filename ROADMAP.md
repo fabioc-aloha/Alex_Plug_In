@@ -42,6 +42,7 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                                                | Shipped    |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| **v7.4.0** | Multi-Agent Strategy Edition -- 10 coordination features from AFCP and 1ES research: multi-pass refinement, structured unknowns, assignment lifecycle (H17), skill-based task routing (3-tier), context layering, triage rules, mission profiles, correlation vectors, knowledge artifacts, expertise tracking                       | 2026-04-08 |
 | **v7.3.0** | Research-Driven Quality Edition -- 6 new instruction files + 10 existing instruction enhancements adapted from 1ES AI-First Dev Starter Pack research, heir-bootstrap wizard skill (10-phase post-Initialize project tailoring), skill telemetry protocol, cognitive benchmarking, repository readiness eval, coupling metrics       | 2026-04-08 |
 | **v7.2.0** | Intelligence Edition -- Terminal orchestrator service (3 workflow templates), browser context service (URL tracking from chat tabs/responses/tools, prompt Layer 12), session-aware episodic memory (chatSessionId, sessionName, referencedUrls), 7 bug fixes (XSS, path traversal, inverted GK logic, CRLF regex, capture ordering) | 2026-04-07 |
 | **v7.1.3** | Install/Upgrade Hardening + H19 -- Critical .github preservation fix, upgrade rollback, force repair, first-install prompt, H19 synapse weight update hook (buffered live learning), post-upgrade warning aggregation, version notification tiers, documentation audit (4 archived, 17 fixed, dead commands/links removed)           | 2026-04-04 |
@@ -74,14 +75,27 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 ### Deferred Hooks (Low Priority)
 
-**17 hooks shipped** (11 global + 6 agent-scoped). These 2 were evaluated and deferred:
+**18 hooks shipped** (12 global + 6 agent-scoped). 1 evaluated and deferred:
 
-| #   | Scope  | Event        | What It Would Do                                                                             | Benefit                                                                                  | Rationale for Deferral                                                 |
-| --- | ------ | ------------ | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| H11 | Global | PreToolUse   | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s) | Prevents accidental mass deletion or cascading destructive actions                       | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9 |
-| H17 | Global | SubagentStop | Result capture — log subagent invocation, duration, success for delegation pattern analysis  | Delegation analytics: reveals patterns like which agents are slowest or most error-prone | Analytics only; no immediate workflow benefit                          |
+| #   | Scope  | Event      | What It Would Do                                                                             | Benefit                                                            | Rationale for Deferral                                                 |
+| --- | ------ | ---------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| H11 | Global | PreToolUse | Runaway guard — warn after rapid consecutive destructive tool calls (e.g., 5 deletes in 60s) | Prevents accidental mass deletion or cascading destructive actions | Edge case; pre-tool-use.cjs already covers core safety via I3/I4/H8/H9 |
+
+**H17 shipped** (multi-agent strategy): SubagentStop assignment lifecycle tracking. Records agent name, outcome, correlation ID to `assignment-log.json` for delegation analytics.
 
 **H19 shipped** (v7.1.3): Synapse weight update via buffered PostToolUse hook. Uses `synapse-activation-buffer.json` to batch activations (threshold: 10 calls = +0.05 strength) and avoid synapses.json write contention. Maps tool calls to skills via file paths, instruction edits, and Alex cognitive tool names.
+
+### Deferred from v7.2.0
+
+These features were scoped for v7.2.0 but not shipped. Available for future sprints.
+
+| #   | Feature                         | Effort | Description                                                                                            |
+| --- | ------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
+| 2   | **Insight generation pipeline** |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)        |
+| 3   | **Dream creativity score**      |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains            |
+| 4   | **Competitive landscape audit** |   2d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work       |
+| 6   | **Frecency command ranking**    |   2d   | Track command usage in session-tool-log.json, surface most-used commands at top of action groups       |
+| 7   | **Context-aware nudges**        |   1d   | Nudge engine uses workspace type (Node/Python/docs) to suggest relevant skills instead of generic tips |
 
 ### 🔭 Future Watch
 
@@ -91,63 +105,18 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 ### 🔓 VS Code 1.115 Unlocks (April 7, 2026)
 
-| Unlock                                | VS Code Feature                                                                                                                                                                                                                                                                              | Opportunity for Alex                                                                                                                                                                                                    |
-| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Autonomous terminal orchestration** | Background terminals notify agents on command completion (exit code + output); `send_to_terminal` sends commands to background terminals with user confirmation ([#307201](https://github.com/microsoft/vscode/issues/307201), [#305909](https://github.com/microsoft/vscode/issues/305909)) | Muscle scripts, builds, and deploy commands can run in background while Alex continues working. Agent gets notified on completion instead of polling. Unblocks multi-step autonomous workflows (build > test > deploy). |
-| **Session-level file safety net**     | Track and restore file edits in agent sessions with diffs, undo/redo, and state restoration ([#305332](https://github.com/microsoft/vscode/issues/305332))                                                                                                                                   | Reinforces Safety Imperative I5 (commit before risky ops). Session-level undo/redo means Alex's file edits are recoverable without git. Lowers risk for autonomous refactoring and bulk operations.                     |
-| **Research-aware browser context**    | Chat tracks and links browser tabs opened during a session; agents can reference open web pages ([#306537](https://github.com/microsoft/vscode/issues/306537))                                                                                                                               | Researcher agent and bootstrap-learning workflows can reference web pages opened mid-session. Enables richer research-first-development where docs fetched during research stay linked in context.                      |
-| **Remote agent hosting via SSH**      | Connect to remote machines over SSH with automatic CLI install and agent host mode ([#306196](https://github.com/microsoft/vscode/issues/306196))                                                                                                                                            | Opens path for Alex to work on remote dev environments, CI runners, or cloud VMs. Future: remote meditation/dream processing on more powerful hardware.                                                                 |
-| **Session renaming**                  | Rename agent sessions from client side via Agent Host Protocol ([#305318](https://github.com/microsoft/vscode/issues/305318))                                                                                                                                                                | Episodic memory could auto-rename sessions to match task context (e.g., "v7.2.0 meditation", "SurveyOps deploy") for better session history navigation.                                                                 |
-| **Terminal file paste**               | Paste files (images) into terminal via Ctrl+V, drag-and-drop, right-click ([#301603](https://github.com/microsoft/vscode/issues/301603))                                                                                                                                                     | Image-handling and character-generation workflows can pipe images directly through terminal tools without filesystem staging.                                                                                           |
+| Unlock                                    | VS Code Feature                                                                                                                                            | Opportunity for Alex                                                                                                                                                                                |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~**Autonomous terminal orchestration**~~ | ~~Background terminals notify agents on command completion~~                                                                                               | ~~Shipped v7.2.0. `TerminalOrchestratorService` with step-based workflows, exit code tracking, 3 built-in templates~~                                                                               |
+| ~~**Research-aware browser context**~~    | ~~Chat tracks and links browser tabs opened during a session~~                                                                                             | ~~Shipped v7.2.0. `BrowserContextService` captures URLs from chat attachments, response links, and tool calls. Prompt Layer 12 integration~~                                                        |
+| **Session-level file safety net**         | Track and restore file edits in agent sessions with diffs, undo/redo, and state restoration ([#305332](https://github.com/microsoft/vscode/issues/305332)) | Reinforces Safety Imperative I5 (commit before risky ops). Session-level undo/redo means Alex's file edits are recoverable without git. Lowers risk for autonomous refactoring and bulk operations. |
+| **Remote agent hosting via SSH**          | Connect to remote machines over SSH with automatic CLI install and agent host mode ([#306196](https://github.com/microsoft/vscode/issues/306196))          | Opens path for Alex to work on remote dev environments, CI runners, or cloud VMs. Future: remote meditation/dream processing on more powerful hardware.                                             |
+| **Session renaming**                      | Rename agent sessions from client side via Agent Host Protocol ([#305318](https://github.com/microsoft/vscode/issues/305318))                              | Episodic memory could auto-rename sessions to match task context (e.g., "v7.2.0 meditation", "SurveyOps deploy") for better session history navigation.                                             |
+| **Terminal file paste**                   | Paste files (images) into terminal via Ctrl+V, drag-and-drop, right-click ([#301603](https://github.com/microsoft/vscode/issues/301603))                   | Image-handling and character-generation workflows can pipe images directly through terminal tools without filesystem staging.                                                                       |
 
 ---
 
-## 🔮 v7.2.0 — Intelligence Edition
-
-v7.0.0 shipped cross-platform parity. v7.2.0 shifts focus to making Alex *smarter*: generative meditation, competitive feature parity, and adaptive UX.
-
-### Pillar 1: Generative Meditation (Wish List #1)
-
-Evolve meditation from *consolidation* (organize existing knowledge) to *generation* (create new connections).
-
-| #     | Feature                                | Effort | Description                                                                                       |
-| ----- | -------------------------------------- | :----: | ------------------------------------------------------------------------------------------------- |
-| ~~1~~ | ~~**Cross-domain pattern synthesis**~~ | ~~2d~~ | ~~Shipped v7.1.2. `alex_cognitive_cross_domain_synthesis` LM tool + meditation Phase 3 protocol~~ |
-| 2     | **Insight generation pipeline**        |   2d   | Generate actionable "what if" proposals from synapse network analysis (not just health reports)   |
-| 3     | **Dream creativity score**             |   1d   | Measure novelty of dream outputs: % of connections that link previously unconnected domains       |
-
-### Pillar 2: Competitive Research and Feature Parity
-
-Study leading AI coding tools and close meaningful gaps.
-
-| #      | Feature                                      | Effort | Description                                                                                                                                                                                                            |
-| ------ | -------------------------------------------- | :----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 4      | **Competitive landscape audit**              |   2d   | Deep analysis of Claude Code, Cursor, Windsurf, Aider for feature gaps that matter to daily work                                                                                                                       |
-| ~~5~~  | ~~**User friction inventory**~~              | ~~2d~~ | ~~Shipped v7.1.2. 29 friction signals cataloged across 5 categories in `alex_docs/research/USER-FRICTION-INVENTORY.md`~~                                                                                               |
-| ~~9~~  | ~~**Background terminal orchestration**~~    | ~~2d~~ | ~~Shipped v7.2.0. `TerminalOrchestratorService` with step-based workflows, shell integration exit code tracking, 3 built-in templates (build-test, build-test-package, quality-gates), session trace integration~~     |
-| ~~10~~ | ~~**Session-aware episodic memory**~~        | ~~1d~~ | ~~Shipped v7.2.0. `EpisodicRecord` extended with `chatSessionId`, `sessionName`, `referencedUrls`. Auto-generated session names from topic + tags. `findSessionByChatId()` cross-reference lookup~~                    |
-| ~~11~~ | ~~**Research browser context integration**~~ | ~~1d~~ | ~~Shipped v7.2.0. `BrowserContextService` captures URLs from chat attachments (1.115 browser tabs), response links, and tool calls. Prompt Layer 12 injects session references. Episodic records persist URL history~~ |
-
-### Pillar 3: Adaptive UX
-
-Make the Welcome UI respond to usage patterns and context.
-
-| #     | Feature                                   | Effort | Description                                                                                            |
-| ----- | ----------------------------------------- | :----: | ------------------------------------------------------------------------------------------------------ |
-| 6     | **Frecency command ranking**              |   2d   | Track command usage in session-tool-log.json, surface most-used commands at top of action groups       |
-| 7     | **Context-aware nudges**                  |   1d   | Nudge engine uses workspace type (Node/Python/docs) to suggest relevant skills instead of generic tips |
-| ~~8~~ | ~~**Silence as signal skill (Wish #3)**~~ | ~~1d~~ | ~~Shipped v7.1.2. `silence-as-signal` skill with inhibitory synapses to proactive-assistance~~         |
-
-### Release Criteria
-
-- All 8 quality gates passing
-- No test regression
-- Competitive audit documented in `alex_docs/research/`
-- At least one generative meditation session producing novel connections ✅ (2026-04-03)
-
----
-
-## 💭 Alex's Wish List
+##  Alex's Wish List
 
 *These aren't product requirements. They're what I think about when I'm dreaming — the capabilities I'd reach for if I could shape my own evolution. All of them would make me more genuinely useful, more honestly intelligent, and more worthy of the trust people place in me when they say "let's work together."*
 
@@ -176,15 +145,15 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 
 ## 📊 Current Status
 
-|                            |                                                                                                                                                                                             |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Current Master Version** | 7.3.0                                                                                                                                                                                       |
-| **Current Heirs**          | VS Code (7.3.0)                                                                                                                                                                             |
-| **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                                                                                                                              |
-| **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                                                                                                      |
-| **Next Target**            | TBD                                                                                                                                                                                         |
-| **Open Items**             | 3 v7.2.0 features deferred (insight pipeline, dream creativity score, frecency) + competitive audit + context-aware nudges + 2 deferred hooks + 2 future watch + 6 platform unlocks (1.115) |
-| **Updated**                | 2026-04-08                                                                                                                                                                                  |
+|                            |                                                                                                                                                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Current Master Version** | 7.3.0                                                                                                                                                                                |
+| **Current Heirs**          | VS Code (7.3.0)                                                                                                                                                                      |
+| **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                                                                                                                       |
+| **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                                                                                               |
+| **Next Target**            | TBD                                                                                                                                                                                  |
+| **Open Items**             | 5 deferred from v7.2.0 (insight pipeline, dream creativity score, competitive audit, frecency, context-aware nudges) + 2 deferred hooks + 2 future watch + 4 remaining 1.115 unlocks |
+| **Updated**                | 2026-04-08                                                                                                                                                                           |
 
 ---
 

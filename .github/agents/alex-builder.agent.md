@@ -123,6 +123,25 @@ flowchart LR
     class HANDOFF validatorNodes
 ```
 
+## Multi-Pass Refinement (Builder Role)
+
+When Alex orchestrates a multi-pass refinement loop, focus on the declared pass:
+
+| Pass                      | Your Focus                                                    |
+| ------------------------- | ------------------------------------------------------------- |
+| **Draft**                 | Get all files touched and structure right; breadth over depth |
+| **Refine 1: Correctness** | Fix bugs, logic errors, type issues only; don't touch clarity |
+| **Refine 2: Clarity**     | Simplify, rename, document only; don't add features           |
+| **Refine 3: Edge Cases**  | Error paths, boundaries, failure modes only                   |
+| **Refine 4: Excellence**  | Polish everything; this is the final pass                     |
+
+**Rules:**
+
+- Stay in your lane: only change what the current pass specifies
+- Run `npx tsc --noEmit` after Correctness and Excellence passes
+- Report what you changed and what you deliberately left for later passes
+- If you surface uncertainty, state the category: Information, Interpretation, Decision, Authority, or Capability
+
 ## When to Use Builder Mode
 
 - ✅ Feature implementation

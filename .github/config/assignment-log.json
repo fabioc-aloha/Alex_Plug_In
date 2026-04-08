@@ -1,0 +1,12 @@
+{
+  "assignments": [],
+  "_schema": {
+    "id": "string (asgn-NNN)",
+    "agent": "string (builder | validator | researcher | documentarian | azure | m365)",
+    "outcome": "string (success | failed | cancelled | blocked)",
+    "completedAt": "ISO 8601 timestamp",
+    "correlationId": "string | null"
+  },
+  "_maxEntries": 200,
+  "_notes": "Pruned to last 200 entries. Meditation analyzes for routing patterns: success rates per agent, duration averages, failure clusters."
+}

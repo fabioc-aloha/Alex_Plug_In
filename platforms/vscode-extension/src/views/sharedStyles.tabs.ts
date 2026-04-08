@@ -109,8 +109,7 @@ export function getTabStyles(): string {
       }
       .docs-cta-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
       .docs-cta-desc { font-size: 11px; opacity: 0.6; margin-bottom: 8px; }
-      .docs-cta .action-btn,
-      .playbook-browse-row .action-btn { display: inline-flex; }
+      .docs-cta .action-btn { display: inline-flex; }
       .docs-cta-links { margin-top: 10px; font-size: 11px; }
       .docs-cta-link {
           color: var(--vscode-textLink-foreground);
@@ -120,7 +119,6 @@ export function getTabStyles(): string {
       }
       .docs-cta-link:hover { opacity: 1; text-decoration: underline; }
       .docs-cta-sep { opacity: 0.3; margin: 0 6px; }
-      .playbook-browse-row { margin-top: 8px; text-align: center; }
       .agent-context-edit {
           opacity: 0.5;
           font-size: 10px;
@@ -320,75 +318,6 @@ export function getTabStyles(): string {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-      }
-
-      /* ── Mind Tab ── */
-      .stat-good { color: var(--vscode-testing-iconPassed); }
-      .stat-warn { color: var(--vscode-editorWarning-foreground); }
-      .stat-bad { color: var(--vscode-errorForeground); }
-
-      .memory-modality {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-bottom: 8px;
-      }
-      .modality-label {
-          font-size: 11px;
-          width: 72px;
-          flex-shrink: 0;
-          opacity: 0.8;
-      }
-      .modality-bar {
-          flex: 1;
-          height: 6px;
-          background: var(--vscode-progressBar-background, #333);
-          border-radius: 3px;
-          overflow: hidden;
-      }
-      .modality-fill {
-          height: 100%;
-          background: var(--persona-accent, #6366f1);
-          border-radius: 3px;
-          transition: width 0.3s ease;
-      }
-      .modality-count {
-          font-size: 11px;
-          font-weight: 600;
-          width: 28px;
-          text-align: right;
-          flex-shrink: 0;
-      }
-
-      .mind-maintenance-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 8px;
-          margin-bottom: 8px;
-      }
-      .maintenance-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 8px;
-          cursor: pointer;
-          border-radius: 4px;
-          transition: background 0.12s;
-      }
-      .maintenance-item:hover {
-          background: var(--vscode-list-hoverBackground);
-      }
-      .maintenance-icon { font-size: 20px; margin-bottom: 4px; }
-      .maintenance-label {
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          opacity: 0.6;
-          margin-bottom: 2px;
-      }
-      .maintenance-value {
-          font-size: 11px;
-          font-weight: 500;
       }
 
       /* ── Architecture Status Banner (7.9) ── */

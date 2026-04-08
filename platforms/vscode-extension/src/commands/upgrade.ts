@@ -590,6 +590,7 @@ async function runGapAnalysis(
       const content = await fs.readFile(filePath, "utf8");
       const firstLine =
         content
+          .replace(/\r\n/g, "\n")
           .split("\n")
           .find((l) => l.startsWith("#"))
           ?.replace(/^#+\s*/, "") || file;
@@ -621,6 +622,7 @@ async function runGapAnalysis(
       const content = await fs.readFile(filePath, "utf8");
       const firstLine =
         content
+          .replace(/\r\n/g, "\n")
           .split("\n")
           .find((l) => l.startsWith("#"))
           ?.replace(/^#+\s*/, "") || file;
@@ -668,6 +670,7 @@ async function runGapAnalysis(
           const content = await fs.readFile(skillMdPath, "utf8");
           description =
             content
+              .replace(/\r\n/g, "\n")
               .split("\n")
               .find((l) => l.startsWith("#"))
               ?.replace(/^#+\s*/, "") || skill;

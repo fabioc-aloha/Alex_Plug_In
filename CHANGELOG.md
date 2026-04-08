@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.4.0] - 2026-04-08
+
+> **Multi-Agent Strategy Edition** -- 10 coordination features across 3 phases, adapted from AFCP and 1ES AI-First Dev Starter Pack research. Multi-pass refinement, structured unknowns, assignment lifecycle tracking, skill-based task routing, and correlation vectors.
+
+### Added
+
+- **Structured Unknowns store** (`config/unknowns.json`) -- 5-category taxonomy (information, interpretation, decision, authority, capability) with 4 lifecycle states (open, consulting, resolved, deferred); agents surface uncertainty instead of guessing; 50-entry rolling store
+- **Assignment Lifecycle hook (H17 SubagentStop)** (`hooks/subagent-stop.cjs`) -- Records agent name, outcome (success/partial/failure/cancelled), completion timestamp, and correlation ID to `assignment-log.json` after every delegation; 200-entry rolling log with metadata-preserving writes
+- **Correlation Vectors** (`hooks/subagent-context.cjs` enhanced) -- `req-{hex}` request IDs generated at delegation, appended to chain as `req.agent.operation`; propagated via H16 SubagentStart, reset on session start; stored in `config/correlation-vector.json`
+- **Skill-Based Task Routing** (`alex.agent.md`) -- 3-tier routing: Tier 1 keyword table (6 agents x task signals), Tier 2 learned expertise (5+ observations, 30-day decay), Tier 3 fallback to Alex orchestrator
+- **Scoped Knowledge Artifacts** (`alex-researcher.agent.md` + `config/knowledge-artifacts.json`) -- Confidence-scored (0-1) knowledge records with supersession chains, tags, and 100-entry store; pruning at >90 days + <0.5 confidence
+- **Expertise Tracking** (`muscles/analyze-assignments.cjs`) -- Meditation-time delegation analysis: per-agent success rates, recency weighting (30-day window), declining performance detection, Tier 2 readiness checks
+- **Mission Profiles** -- 5 behavioral presets as prompt files: `mission-release` (heightened quality gates), `mission-research` (breadth-first, cite sources), `mission-debug` (3+ hypotheses, binary search), `mission-review` (adversarial, pattern deviation), `mission-draft` (skip Validator, accept TODOs)
+- **Multi-Agent Strategy document** (`MULTI-AGENT-STRATEGY.md`) -- Master strategy synthesizing AFCP fleet coordination and 1ES Starter Pack patterns into 10 features across 3 implementation phases
+
+### Changed
+
+- **Multi-Pass Refinement** (`alex.agent.md`, `alex-builder.agent.md`, `alex-validator.agent.md`) -- 4-pass protocol (Draft, Correctness, Clarity, Edge Cases to Excellence) with pass-specific focus tables, "stay in your lane" rule, and 2-pass shortcut for small tasks; Builder gets pass-specific guidance, Validator gets lens-focused review
+- **Context Layering Protocol** (`alex.agent.md`) -- 3-layer context injection for delegations: Always (Active Context, North Star, safety imperatives), Relevant (domain skills, recent episodic, related synapses), Never (unrelated domain knowledge, other project context)
+- **Triage Rules with Confidence Scoring** (`alex-validator.agent.md`) -- Severity x confidence action matrix: high-severity always blocks, medium-severity blocks at 70%+ confidence, low-severity informational only; security findings always escalated regardless of confidence
+- **Delegation Verification** (`alex.agent.md`) -- Post-delegation spot-checks: re-read changed files, run `tsc` for TypeScript, verify no stale imports/dead code; trust-but-verify with intensity scaling by task risk
+- **H16 SubagentStart enhanced** (`hooks/subagent-context.cjs`) -- Now generates and propagates correlation vectors alongside Active Context injection
+- **SessionStart hook enhanced** (`hooks/session-start.cjs`) -- Resets correlation vector state on new sessions while preserving existing metadata keys
+
+---
+
 ## [7.3.0] - 2026-04-08
 
 > **Research-Driven Quality Edition** -- 6 new instruction files and 10 enhancements to existing instructions, adapted from Microsoft 1ES AI-First Dev Starter Pack research. Heir Bootstrap Wizard skill for post-Initialize project tailoring.

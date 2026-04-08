@@ -166,7 +166,6 @@ function getDispatchMap(): Array<[string, string]> {
     ["Chat", "workbench.panel.chat.view.copilot.focus"],
     ["Skill Catalog", "alex.generateSkillCatalog"],
     ["Search Knowledge", "alex.knowledgeQuickPick"],
-    ["Memory Dashboard", "alex.openMemoryDashboard"],
     ["Health Dashboard", "alex.openHealthDashboard"],
     ["Project Audit", "alex.runAudit"],
     ["Release Preflight", "alex.releasePreflight"],
@@ -200,7 +199,9 @@ export async function showStatusQuickPick(): Promise<void> {
     title: "🚀 Alex Status",
   });
 
-  if (!selected) { return; }
+  if (!selected) {
+    return;
+  }
 
   const dispatch = getDispatchMap();
   for (const [label, command] of dispatch) {

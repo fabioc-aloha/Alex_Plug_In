@@ -1,0 +1,16 @@
+{
+  "artifacts": [],
+  "_schema": {
+    "id": "string (ka-NNN)",
+    "topic": "string",
+    "insight": "string",
+    "confidence": "number 0-1",
+    "source": "string (agent name or session)",
+    "createdAt": "ISO 8601 timestamp",
+    "supersededBy": "string (ka-NNN) | null",
+    "correlationId": "string | null",
+    "tags": "string[]"
+  },
+  "_maxEntries": 100,
+  "_notes": "Knowledge artifacts with supersededBy are kept for provenance but deprioritized in searches. Meditation prunes artifacts older than 90 days with confidence < 0.5."
+}

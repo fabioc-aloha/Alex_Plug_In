@@ -88,15 +88,6 @@ export function getFoundationStyles(): string {
           border: 1px solid var(--vscode-widget-border, #303030);
           border-radius: 6px;
       }
-      .hero-hook {
-          font-size: 15px;
-          font-weight: 600;
-          color: var(--vscode-foreground);
-          margin-bottom: 8px;
-      }
-      .hero-hook strong {
-          color: var(--persona-accent);
-      }
       .hero-north-star {
           font-size: 12px;
           color: var(--vscode-descriptionForeground);
@@ -397,30 +388,6 @@ export function getFoundationStyles(): string {
       .action-group-content.collapsed {
           display: none;
       }
-      /* Quick Command Bar (7.11) */
-      .quick-command-input {
-          width: 100%;
-          padding: 4px 8px;
-          min-height: 36px;
-          border: 1px solid var(--vscode-input-border, var(--vscode-widget-border));
-          border-radius: 4px;
-          background: var(--vscode-input-background);
-          color: var(--vscode-input-foreground);
-          font-size: 12px;
-          box-sizing: border-box;
-          margin-bottom: 8px;
-      }
-      .quick-command-input:focus {
-          border-color: var(--vscode-focusBorder);
-          outline: none;
-      }
-      .quick-command-input:focus-visible {
-          outline: 2px solid var(--vscode-focusBorder);
-          outline-offset: -1px;
-      }
-      .quick-command-input::placeholder {
-          color: var(--vscode-input-placeholderForeground);
-      }
       /* Cognitive State Card (7.18) */
       .cognitive-state-card {
           display: flex;
@@ -436,57 +403,35 @@ export function getFoundationStyles(): string {
       .cognitive-state-detail { flex: 1; }
       .cognitive-state-label { font-size: 12px; font-weight: 600; }
       .cognitive-state-mode { font-size: 11px; opacity: 0.6; }
-      /* Personality Toggle (7.16) */
-      .personality-toggle {
+
+      /* Mission Profile Bar (7.40) */
+      .mission-profile-bar {
           display: flex;
-          align-items: center;
-          gap: 0;
-          background: var(--vscode-editor-background);
-          border: 1px solid var(--vscode-widget-border, #303030);
-          border-radius: 6px;
+          flex-wrap: wrap;
+          gap: 4px;
           margin-bottom: 8px;
-          overflow: hidden;
       }
-      .personality-toggle-btn {
-          flex: 1;
-          padding: 8px 8px;
+      .mission-profile-btn {
+          padding: 4px 10px;
           font-size: 11px;
           font-weight: 500;
-          text-align: center;
           cursor: pointer;
-          border: none;
-          background: transparent;
+          border: 1px solid var(--vscode-widget-border, #303030);
+          border-radius: 12px;
+          background: var(--vscode-editor-background);
           color: var(--vscode-foreground);
-          opacity: 0.6;
-          transition: opacity 0.12s, background 0.12s;
+          opacity: 0.7;
+          transition: opacity 0.12s, background 0.12s, border-color 0.12s;
       }
-      .personality-toggle-btn:hover { opacity: 0.8; }
-      .personality-toggle-btn.active {
+      .mission-profile-btn:hover { opacity: 1; }
+      .mission-profile-btn.active {
           opacity: 1;
           background: var(--vscode-button-background);
           color: var(--vscode-button-foreground);
+          border-color: var(--vscode-button-background);
           font-weight: 600;
       }
-      .personality-toggle-btn + .personality-toggle-btn {
-          border-left: 1px solid var(--vscode-widget-border, #303030);
-      }
 
-      /* Memory Modality Cards (7.37) */
-      .memory-modalities {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-          gap: 8px;
-          margin-bottom: 8px;
-      }
-      .memory-modality-card {
-          background: var(--vscode-editor-background);
-          border: 1px solid var(--vscode-widget-border, #303030);
-          border-radius: 6px;
-          padding: 8px;
-          text-align: center;
-      }
-      .memory-modality-icon { font-size: 18px; margin-bottom: 4px; }
-      .memory-modality-count { font-size: 16px; font-weight: 600; color: var(--vscode-foreground); }
-      .memory-modality-label { font-size: 11px; color: var(--vscode-descriptionForeground); }
+      /* Memory Modality Cards (7.37) — removed: only used in dead mindTabHtml.ts */
   `;
 }

@@ -1,0 +1,17 @@
+{
+  "unknowns": [],
+  "_schema": {
+    "type": "string (information | interpretation | decision | authority | capability)",
+    "description": "string",
+    "confidence": "number 0-1",
+    "state": "string (open | consulting | resolved | deferred)",
+    "surfacedBy": "string (alex | builder | validator | researcher | documentarian | azure | m365)",
+    "surfacedAt": "ISO 8601 timestamp",
+    "resolvedBy": "string | null",
+    "resolvedAt": "ISO 8601 timestamp | null",
+    "resolution": "string | null",
+    "correlationId": "string | null"
+  },
+  "_maxEntries": 50,
+  "_notes": "Unknowns with state=resolved are pruned during meditation. Deferred unknowns become research candidates."
+}

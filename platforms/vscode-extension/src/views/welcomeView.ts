@@ -11,7 +11,6 @@ import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
 import { detectPersona, loadUserProfile } from "../chat/personaDetection";
 import {
   readActiveContext,
-  updateActiveContext,
   updatePersona,
 } from "../shared/activeContextManager";
 import { openChatPanel } from "../shared/utils";
@@ -61,7 +60,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     "runAudit",
     "generatePptx",
     "generateGammaPresentation",
-    "generateGammaAdvanced",
     "generateAIImage",
     "generateDiagram",
     "generateTests",
@@ -70,7 +68,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
   private static readonly LONG_RUNNING_COMMANDS: Record<string, string> = {
     generatePptx: "Alex: Generating PowerPoint...",
     generateGammaPresentation: "Alex: Generating Gamma presentation...",
-    generateGammaAdvanced: "Alex: Generating Gamma presentation (advanced)...",
     generateAIImage: "Alex: Generating AI image...",
     generateDiagram: "Alex: Generating diagram...",
     generateTests: "Alex: Generating tests...",
@@ -167,7 +164,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       generateSkillCatalog: "alex.generateSkillCatalog",
       knowledgeQuickPick: "alex.knowledgeQuickPick",
       healthDashboard: "alex.openHealthDashboard",
-      memoryDashboard: "alex.openMemoryDashboard",
       runAudit: "alex.runAudit",
       releasePreflight: "alex.releasePreflight",
       debugThis: "alex.debugThis",
@@ -235,6 +231,15 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       return;
     }
 
+    // Handle agent chat launches (agentChat:AgentName)
+    if (command.startsWith("agentChat:")) {
+      const agentName = command.slice("agentChat:".length);
+      logInfo(`[Alex] Launching agent chat: ${agentName}`);
+      const agentPrompt = `@alex Use the ${agentName} agent for this conversation. I'd like to work with the ${agentName} specialist.`;
+      await openChatPanel(agentPrompt);
+      return;
+    }
+
     // Handle special cases
     switch (command) {
       case "learnAlexWorkshop": {
@@ -255,6 +260,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           `[Alex][WelcomeView] Opening playbook section: ${anchor || "all"}`,
         );
         await vscode.env.openExternal(vscode.Uri.parse(url));
+        break;
+      }
+      case "heirBootstrap": {
+        const bootstrapPrompt =
+          "I want to bootstrap this project. Walk me through the heir bootstrap wizard to tailor your architecture to this codebase: scan the project, verify build/test commands, mine existing AI configs, generate project-specific instructions, and set up security hooks. Check .github/.heir-bootstrap-state.json first; if it exists, resume from where we left off.";
+        await openChatPanel(bootstrapPrompt);
         break;
       }
       case "openChat":
@@ -287,6 +298,30 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         const exportPrompt =
           "Use the memory-export skill. Export all of my stored memories, user profile, preferences, and context to a single portable file I can paste into another AI surface like Claude Code or ChatGPT. Follow the /export-memory prompt format.";
         await openChatPanel(exportPrompt);
+        break;
+      }
+      case "missionProfile": {
+        const profile =
+          typeof (payload as any).profile === "string"
+            ? (payload as any).profile
+            : "";
+        const profileMap: Record<string, string> = {
+          release:
+            "Activate release mission profile. Use heightened quality gates, run Validator on all changes, and suppress speculation.",
+          research:
+            "Activate research mission profile. Go breadth-first, cite sources, time-box exploration, and compare 2+ approaches before recommending.",
+          debug:
+            "Activate debug mission profile. Generate 3+ hypotheses, use binary search isolation, and avoid shotgun debugging.",
+          review:
+            "Activate review mission profile. Be adversarial, score confidence on findings, and detect pattern deviations.",
+          draft:
+            "Activate draft mission profile. Skip Validator, accept TODOs, and move fast. Quality gates relaxed for rapid iteration.",
+        };
+        const missionPrompt = profileMap[profile];
+        if (missionPrompt) {
+          logInfo(`[Alex] Activating mission profile: ${profile}`);
+          await openChatPanel(missionPrompt);
+        }
         break;
       }
       case "memoryAudit": {
@@ -355,30 +390,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY,
           tabId,
         );
-        break;
-      }
-      case "setPersonalityMode": {
-        const modeRaw = (payload as any).mode;
-        const allowedModes = ["auto", "precise", "chatty"] as const;
-        const mode = allowedModes.includes(modeRaw) ? modeRaw : "auto";
-        await vscode.workspace
-          .getConfiguration("alex")
-          .update("personalityMode", mode, vscode.ConfigurationTarget.Global);
-        // Sync tone to copilot-instructions.md so agent mode respects it
-        const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-        if (wsRoot) {
-          const toneMap: Record<string, string> = {
-            auto: "_(auto — adapt to context)_",
-            precise: "Concise, code-first, minimal explanation",
-            chatty: "Explanatory, conversational, teaching-oriented",
-          };
-          await updateActiveContext(
-            wsRoot,
-            { tone: toneMap[mode] || toneMap["auto"] },
-            "personality-toggle",
-          );
-        }
-        logInfo(`[Alex] Personality mode set to: ${mode}`);
         break;
       }
 
@@ -618,12 +629,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     return workspaceFolder.name;
   }
 
-  private static readonly VALID_TABS = [
-    "mission",
-    "skills",
-    "mind",
-    "docs",
-  ] as const;
+  private static readonly VALID_TABS = ["mission", "settings", "docs"] as const;
 
   /**
    * Programmatically switch the active tab in the Command Center.
@@ -899,6 +905,51 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         `[Alex][WelcomeView] Tab data: agents=${agentCount}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`,
       );
 
+      // Determine if Bootstrap button should be shown:
+      // Initialized + not Master Alex + bootstrap state file either absent (never started)
+      // or present with lastCompletedPhase < 9 (interrupted, resumable)
+      let showBootstrap = false;
+      let isBootstrapResume = false;
+      if (health.initialized && wsRoot) {
+        const masterProtectedPath = path.join(
+          wsRoot,
+          ".github",
+          "config",
+          "MASTER-ALEX-PROTECTED.json",
+        );
+        const bootstrapStatePath = path.join(
+          wsRoot,
+          ".github",
+          ".heir-bootstrap-state.json",
+        );
+        const isMaster = fs.existsSync(masterProtectedPath);
+        if (!isMaster) {
+          if (fs.existsSync(bootstrapStatePath)) {
+            // State file exists: check if bootstrap is in progress (not completed)
+            try {
+              const stateData = JSON.parse(
+                fs.readFileSync(bootstrapStatePath, "utf-8"),
+              );
+              if (
+                typeof stateData.lastCompletedPhase === "number" &&
+                stateData.lastCompletedPhase < 9
+              ) {
+                showBootstrap = true;
+                isBootstrapResume = true;
+              }
+              // Phase 9 complete = state file should have been deleted,
+              // but if it exists with phase 9 done, bootstrap is finished
+            } catch {
+              // Corrupt state file: show bootstrap to let user restart
+              showBootstrap = true;
+            }
+          } else {
+            // No state file: never bootstrapped, show the button
+            showBootstrap = true;
+          }
+        }
+      }
+
       this._view.webview.html = getWelcomeHtmlContent(
         this._view.webview,
         health,
@@ -915,6 +966,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         personalityMode,
         tokenStatuses,
         settingsToggles,
+        showBootstrap,
+        isBootstrapResume,
       );
 
       // Restore last active tab if available

@@ -13,6 +13,7 @@ import * as vscode from "vscode";
 function tableToSpeech(tableMatch: string): string {
   const lines = tableMatch
     .trim()
+    .replace(/\r\n/g, "\n")
     .split("\n")
     .filter((line) => line.trim());
   if (lines.length < 2) {

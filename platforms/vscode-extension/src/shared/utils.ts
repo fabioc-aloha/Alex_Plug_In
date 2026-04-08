@@ -229,23 +229,6 @@ export async function getInstalledAlexVersion(
 }
 
 /**
- * Get extension version from package.json
- */
-export async function getExtensionVersion(
-  extensionPath: string,
-): Promise<string> {
-  try {
-    const packageJson = await fs.readJson(
-      path.join(extensionPath, "package.json"),
-    );
-    return packageJson.version || "0.0.0";
-  } catch (error) {
-    console.error("Failed to read extension package.json:", error);
-    return "0.0.0";
-  }
-}
-
-/**
  * Check if Alex is installed in the workspace
  */
 export async function isAlexInstalled(rootPath: string): Promise<boolean> {
@@ -316,7 +299,7 @@ export async function scanSynapseHealth(
       result.totalFiles++;
       try {
         const content = await workspaceFs.readFile(file.fsPath);
-        const lines = content.split("\n");
+        const lines = content.replace(/\r\n/g, "\n").split("\n");
 
         let inCodeBlock = false;
         for (let i = 0; i < lines.length; i++) {
@@ -406,34 +389,6 @@ export async function countMemoryFiles(
     domain,
     total: procedural + episodic + skills + domain,
   };
-}
-
-/**
- * Find all memory files in workspace
- */
-export async function findAllMemoryFiles(
-  workspaceFolder: vscode.WorkspaceFolder,
-): Promise<vscode.Uri[]> {
-  let allFiles: vscode.Uri[] = [];
-
-  for (const pattern of MEMORY_FILE_PATTERNS) {
-    const relativePattern = new vscode.RelativePattern(
-      workspaceFolder,
-      pattern,
-    );
-    const files = await vscode.workspace.findFiles(relativePattern);
-    allFiles = allFiles.concat(files);
-  }
-
-  // Remove duplicates by path
-  const seen = new Set<string>();
-  return allFiles.filter((file) => {
-    if (seen.has(file.fsPath)) {
-      return false;
-    }
-    seen.add(file.fsPath);
-    return true;
-  });
 }
 
 /**
@@ -772,50 +727,4 @@ export async function openChatPanel(query?: string): Promise<void> {
       );
     }
   }
-}
-
-/**
- * Platform environment info for diagnostics and cross-platform awareness.
- */
-export interface PlatformInfo {
-  os: string;
-  arch: string;
-  shell: string;
-  homeDir: string;
-  nodeVersion: string;
-  pathSeparator: string;
-}
-
-/**
- * Detect the current platform environment including default shell.
- * Used by diagnostics, bug reports, and platform-aware terminal creation.
- */
-export function detectPlatform(): PlatformInfo {
-  let shell: string;
-  if (process.platform === "win32") {
-    shell = process.env.COMSPEC || "cmd.exe";
-  } else {
-    shell = process.env.SHELL || "/bin/sh";
-  }
-  // Also check VS Code's configured default profile
-  const profileKey =
-    process.platform === "win32"
-      ? "windows"
-      : process.platform === "darwin"
-        ? "osx"
-        : "linux";
-  const configuredProfile = vscode.workspace
-    .getConfiguration("terminal.integrated.defaultProfile")
-    .get<string>(profileKey);
-  if (configuredProfile) {
-    shell = `${configuredProfile} (${shell})`;
-  }
-  return {
-    os: `${process.platform} (${os.release()})`,
-    arch: process.arch,
-    shell,
-    homeDir: os.homedir(),
-    nodeVersion: process.version,
-    pathSeparator: path.sep,
-  };
 }

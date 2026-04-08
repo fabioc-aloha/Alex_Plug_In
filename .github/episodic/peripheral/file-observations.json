@@ -1,6 +1,23 @@
 {
   "hotFiles": [],
-  "stalledFiles": [],
-  "todoHotspots": [],
-  "lastUpdated": 1775671155509
+  "stalledFiles": [
+    "github/agents/alex-builder.agent.md",
+    "CHANGELOG.md",
+    "README.md",
+    "ROADMAP.md",
+    "platforms/vscode-extension/README.md",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/src/chat/personaProjectDetection.ts",
+    "platforms/vscode-extension/src/chat/promptEngine.ts",
+    "platforms/vscode-extension/src/chat/tools/memorySearchTool.ts"
+  ],
+  "todoHotspots": [
+    {
+      "file": "platforms/vscode-extension/src/chat/promptEngine.ts",
+      "todoCount": 1,
+      "scannedAt": 1775685503205
+    }
+  ],
+  "lastUpdated": 1775685503205
 }

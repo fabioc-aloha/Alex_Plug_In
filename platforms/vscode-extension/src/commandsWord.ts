@@ -4,14 +4,17 @@
  * Extracted from commandsPresentation.ts to reduce file size.
  * Contains: quick conversion, conversion with options (format, debug, custom path).
  */
-import * as vscode from 'vscode';
-import * as path from 'path';
-import * as telemetry from './shared/telemetry';
+import * as vscode from "vscode";
+import * as path from "path";
+import * as telemetry from "./shared/telemetry";
 
 /**
  * Resolve md-to-word.cjs: workspace first, then extension bundle fallback.
  */
-async function resolveMdToWordScript(workspacePath: string, extensionPath: string): Promise<string | undefined> {
+async function resolveMdToWordScript(
+  workspacePath: string,
+  extensionPath: string,
+): Promise<string | undefined> {
   const candidates = [
     path.join(workspacePath, ".github", "muscles", "md-to-word.cjs"),
     path.join(extensionPath, ".github", "muscles", "md-to-word.cjs"),
@@ -34,24 +37,31 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
       const endLog = telemetry.logTimed("command", "convert_to_word");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
-          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          vscode.window.showWarningMessage(
+            "Please right-click a markdown (.md) file.",
+          );
           endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
-          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          vscode.window.showWarningMessage(
+            "File must be in a workspace folder.",
+          );
           endLog(true);
           return;
         }
 
         const outputPath = uri.fsPath.replace(/\.md$/, ".docx");
-        const nodeScript = await resolveMdToWordScript(workspaceFolder.uri.fsPath, context.extensionPath);
-        
+        const nodeScript = await resolveMdToWordScript(
+          workspaceFolder.uri.fsPath,
+          context.extensionPath,
+        );
+
         if (!nodeScript) {
           vscode.window.showErrorMessage(
-            "md-to-word.cjs not found. Please ensure Alex architecture is initialized."
+            "md-to-word.cjs not found. Please ensure Alex architecture is initialized.",
           );
           endLog(false);
           return;
@@ -62,52 +72,67 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         const terminal = vscode.window.createTerminal({
           name: "Alex: Word Conversion",
           cwd: path.dirname(uri.fsPath),
-          env: { NODE_PATH: path.join(context.extensionPath, 'node_modules') }
+          env: { NODE_PATH: path.join(context.extensionPath, "node_modules") },
         });
         terminal.show();
-        terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" "${outputPath}"`);
+        terminal.sendText(
+          `node "${nodeScript}" "${uri.fsPath}" "${outputPath}"`,
+        );
 
         // Wait a bit then notify - in real implementation we'd monitor the process
         setTimeout(() => {
           vscode.window.showInformationMessage(
-            `📝 Word conversion complete: ${path.basename(outputPath)}`
+            `📝 Word conversion complete: ${path.basename(outputPath)}`,
           );
         }, 5000);
 
         endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        endLog(
+          false,
+          error instanceof Error ? error : new Error(String(error)),
+        );
         vscode.window.showErrorMessage(
-          `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`
+          `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`,
         );
       }
-    }
+    },
   );
 
   // Convert to Word with options
   const convertToWordWithOptionsDisposable = vscode.commands.registerCommand(
     "alex.convertToWordWithOptions",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "convert_to_word_with_options");
+      const endLog = telemetry.logTimed(
+        "command",
+        "convert_to_word_with_options",
+      );
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
-          vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
+          vscode.window.showWarningMessage(
+            "Please right-click a markdown (.md) file.",
+          );
           endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
-          vscode.window.showWarningMessage("File must be in a workspace folder.");
+          vscode.window.showWarningMessage(
+            "File must be in a workspace folder.",
+          );
           endLog(true);
           return;
         }
 
-        const nodeScript = await resolveMdToWordScript(workspaceFolder.uri.fsPath, context.extensionPath);
-        
+        const nodeScript = await resolveMdToWordScript(
+          workspaceFolder.uri.fsPath,
+          context.extensionPath,
+        );
+
         if (!nodeScript) {
           vscode.window.showErrorMessage(
-            "md-to-word.cjs not found. Please ensure Alex architecture is initialized."
+            "md-to-word.cjs not found. Please ensure Alex architecture is initialized.",
           );
           endLog(false);
           return;
@@ -144,7 +169,7 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           {
             placeHolder: "Select conversion options",
             title: "Markdown to Word Conversion",
-          }
+          },
         );
 
         if (!options) {
@@ -163,7 +188,7 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
               if (!value || value.trim().length === 0) {
                 return "File name cannot be empty";
               }
-              if (value.includes("/") || value.includes("\\\\")) {
+              if (value.includes("/") || value.includes("\\")) {
                 return "Enter file name only, not path";
               }
               return null;
@@ -175,7 +200,10 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
             return;
           }
 
-          outputPath = path.join(path.dirname(uri.fsPath), customPath + ".docx");
+          outputPath = path.join(
+            path.dirname(uri.fsPath),
+            customPath + ".docx",
+          );
           flags = "";
         }
 
@@ -184,27 +212,31 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         const terminal = vscode.window.createTerminal({
           name: "Alex: Word Conversion",
           cwd: path.dirname(uri.fsPath),
-          env: { NODE_PATH: path.join(context.extensionPath, 'node_modules') }
+          env: { NODE_PATH: path.join(context.extensionPath, "node_modules") },
         });
         terminal.show();
-        
-        const command = `node "${nodeScript}" "${uri.fsPath}" "${outputPath}" ${flags}`.trim();
+
+        const command =
+          `node "${nodeScript}" "${uri.fsPath}" "${outputPath}" ${flags}`.trim();
         terminal.sendText(command);
 
         setTimeout(() => {
           vscode.window.showInformationMessage(
-            `📝 Word conversion complete: ${path.basename(outputPath)}`
+            `📝 Word conversion complete: ${path.basename(outputPath)}`,
           );
         }, 5000);
 
         endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        endLog(
+          false,
+          error instanceof Error ? error : new Error(String(error)),
+        );
         vscode.window.showErrorMessage(
-          `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`
+          `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`,
         );
       }
-    }
+    },
   );
 
   context.subscriptions.push(

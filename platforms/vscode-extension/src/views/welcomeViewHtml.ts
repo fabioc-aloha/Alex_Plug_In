@@ -2,10 +2,10 @@
  * welcomeViewHtml.ts - HTML generation orchestrator for the Welcome sidebar view
  *
  * Shell: interfaces, shared CSS, header, tab bar, client JS.
- * Tab content extracted to: missionTabHtml, skillStoreTabHtml, mindTabHtml, docsTabHtml
+ * Tab content extracted to: missionTabHtml, settingsTabHtml (formerly mindTabHtml), docsTabHtml
  */
 import * as vscode from "vscode";
-import { HealthCheckResult, HealthStatus } from "../shared/healthCheck";
+import { HealthCheckResult } from "../shared/healthCheck";
 import {
   PersonaDetectionResult,
   getEasterEggOverride,
@@ -19,11 +19,9 @@ import {
   getFeatureRequirement,
   CognitiveLevel,
 } from "../shared/cognitiveTier";
-import { getSkillDisplayName } from "../shared/skillConstants";
 import { nasaAssert, nasaAssertBounded } from "../shared/nasaAssert";
 import { getMissionTabHtml } from "./missionTabHtml";
-import { getSkillStoreTabHtml } from "./skillStoreTabHtml";
-import { getMindTabHtml } from "./mindTabHtml";
+import { getSettingsTabHtml } from "./settingsTabHtml";
 import { getDocsTabHtml } from "./docsTabHtml";
 import { getSharedStyles } from "./sharedStyles";
 
@@ -192,6 +190,8 @@ export function getWelcomeHtmlContent(
   personalityMode?: string,
   tokenStatuses?: TokenStatusInfo[],
   settingsToggles?: SettingsToggle[],
+  showBootstrap?: boolean,
+  isBootstrapResume?: boolean,
 ): string {
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, "_getHtmlContent: webview must be defined");
@@ -213,13 +213,10 @@ export function getWelcomeHtmlContent(
   const workspaceFolderName = vscode.workspace.workspaceFolders?.[0]?.name;
   const easterEgg: EasterEgg | null = getEasterEggOverride(workspaceFolderName);
 
-  const personaHook = persona?.hook || "Take Your Code to New Heights";
-  const personaIcon = persona?.icon || "💻";
+  const personaIcon = persona?.icon || "\ud83d\udcbb";
   const personaName = persona?.name || "Developer";
-  const personaSkill = persona?.skill || "code-review";
-  const bannerNoun = persona?.bannerNoun || "CODE";
   // mark locals for TS unused checks
-  void personaHook;
+  void workspaceName;
 
   // Use persona accent color (easter eggs no longer override global accent — they get a badge-local color instead)
   const personaAccent = persona?.accentColor || "#6366f1";
@@ -235,71 +232,10 @@ export function getWelcomeHtmlContent(
     ? `<span class="easter-egg-badge" title="${easterEgg.label}" style="--egg-accent: ${easterEggBadgeColor}">${easterEgg.emoji}</span>`
     : "";
 
-  // Active Context — live state from copilot-instructions.md
-  const confidenceLabel =
-    personaResult?.confidence !== null &&
-    personaResult?.confidence !== undefined
-      ? `${Math.round(personaResult.confidence * 100)}%`
-      : "";
-  const sourceLabel =
-    personaResult?.source === "llm"
-      ? "LLM"
-      : personaResult?.source === "cached"
-        ? "Cached"
-        : "Auto";
-
   // Objective from Active Context (hidden when session card is showing)
   const rawObjective = activeContext?.objective;
   const hasObjective =
     rawObjective && !rawObjective.includes("session-objective");
-
-  // Last Assessed from Active Context
-  const rawAssessed = activeContext?.lastAssessed || "never";
-  const isNeverAssessed =
-    rawAssessed === "never" || rawAssessed.includes("never");
-  const assessedLabel = isNeverAssessed
-    ? "Not assessed"
-    : rawAssessed.split(" — ")[0];
-
-  // Principles from Active Context
-  const principlesText =
-    activeContext?.principles || "KISS, DRY, Optimize-for-AI";
-
-  const recommendedSkillName = getSkillDisplayName(personaSkill);
-
-  // mark locals for TS unused checks
-  void workspaceName;
-  void confidenceLabel;
-  void sourceLabel;
-  void assessedLabel;
-  void principlesText;
-  void recommendedSkillName;
-
-  // Health indicator
-  const isHealthy = health.status === HealthStatus.Healthy;
-  const healthText = isHealthy ? "Healthy" : `${health.brokenSynapses} issues`;
-  void healthText;
-
-  // Architecture status banner (7.9)
-  const healthPct =
-    health.totalSynapses > 0
-      ? Math.round((1 - health.brokenSynapses / health.totalSynapses) * 100)
-      : 100;
-  const healthBannerClass = isHealthy
-    ? "status-healthy"
-    : health.brokenSynapses > 5
-      ? "status-error"
-      : "status-warning";
-  const healthBannerIcon = isHealthy
-    ? "✓"
-    : health.brokenSynapses > 5
-      ? "✗"
-      : "⚠";
-  const healthBannerLabel = isHealthy
-    ? "Healthy"
-    : health.brokenSynapses > 5
-      ? "Issues"
-      : "Warnings";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -330,7 +266,6 @@ export function getWelcomeHtmlContent(
       </div>
 
       <div class="hero-text-box">
-          <div class="hero-hook">Your Trusted Partner for <strong>${bannerNoun}</strong></div>
           ${userProfile?.name ? `<div class="hero-greeting">Hi ${escapeHtml(userProfile.name)} 👋</div>` : ""}
           ${activeContext?.northStar ? `<div class="hero-north-star" data-cmd="northStar" title="North Star — Click to review" tabindex="0" role="button">⭐ ${escapeHtml(activeContext.northStar)}</div>` : ""}
           ${hasObjective ? `<div class="hero-objective">${escapeHtml(rawObjective!)}</div>` : ""}
@@ -339,15 +274,13 @@ export function getWelcomeHtmlContent(
       <!-- Spike 1B: Tab Bar -->
       <div class="tab-bar" role="tablist" aria-label="Command Center">
           <button role="tab" id="tab-mission" class="tab active" data-tab="mission" aria-selected="true" aria-controls="panel-mission" tabindex="0">Mission</button>
-          <button role="tab" id="tab-skills" class="tab" data-tab="skills" aria-selected="false" aria-controls="panel-skills" tabindex="-1">Skills</button>
-          <button role="tab" id="tab-mind" class="tab" data-tab="mind" aria-selected="false" aria-controls="panel-mind" tabindex="-1">Mind</button>
+          <button role="tab" id="tab-settings" class="tab" data-tab="settings" aria-selected="false" aria-controls="panel-settings" tabindex="-1">Settings</button>
           <button role="tab" id="tab-docs" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
       </div>
 
-      ${getMissionTabHtml({ nudges, personalityMode, activeContext })}
+      ${getMissionTabHtml({ nudges, activeContext, showBootstrap, isBootstrapResume, chatMemoryLines: mindData?.chatMemoryLines ?? 0 })}
 
-      ${getSkillStoreTabHtml({ skills, health })}
-      ${getMindTabHtml({ mindData, health, hasGlobalKnowledge, healthBannerClass, healthBannerIcon, healthBannerLabel, healthPct, tokenStatuses, settingsToggles, activeContext })}
+      ${getSettingsTabHtml({ tokenStatuses, settingsToggles })}
 
       ${getDocsTabHtml()}
 
@@ -461,7 +394,7 @@ export function getWelcomeHtmlContent(
       });
       
       // Listen for messages from the extension (e.g. programmatic tab switch)
-      const validTabs = ['mission', 'skills', 'mind', 'docs'];
+      const validTabs = ['mission', 'settings', 'docs'];
       window.addEventListener('message', (event) => {
           const message = event.data;
           if (message.command === 'switchToTab' && validTabs.includes(message.tabId)) {
@@ -491,69 +424,6 @@ export function getWelcomeHtmlContent(
           }
       });
 
-      // ── Skill search filter ──
-      function applySkillSearch() {
-          const searchEl = document.getElementById('skill-search');
-          const q = (searchEl ? searchEl.value : '').toLowerCase();
-          document.querySelectorAll('.skill-card').forEach(function(card) {
-              card.style.display = (!q || (card.textContent || '').toLowerCase().includes(q)) ? '' : 'none';
-          });
-          // Hide category groups where all cards are hidden
-          document.querySelectorAll('.skill-category-group').forEach(function(group) {
-              const visibleCards = group.querySelectorAll('.skill-card:not([style*="display: none"])');
-              group.style.display = visibleCards.length === 0 ? 'none' : '';
-          });
-      }
-
-      const skillSearch = document.getElementById('skill-search');
-      if (skillSearch) {
-          skillSearch.addEventListener('input', applySkillSearch);
-      }
-
-      // ── Category collapse (7.27) ──
-      document.querySelectorAll('.skill-category-header').forEach(function(hdr) {
-          hdr.addEventListener('click', function() {
-              const isCollapsed = this.classList.toggle('collapsed');
-              this.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-          });
-          hdr.addEventListener('keydown', function(e) {
-              if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  this.click();
-              }
-          });
-      });
-
-      // ── Doc tip dismiss (7.39) ──
-      document.addEventListener('click', function(e) {
-          const btn = e.target.closest('.doc-tip-dismiss');
-          if (btn) {
-              const tip = btn.closest('.doc-tip');
-              if (tip) { tip.style.display = 'none'; }
-          }
-      });
-
-      // ── Quick Command search (7.11) ──
-      const missionSearch = document.getElementById('mission-command-search');
-      if (missionSearch) {
-          missionSearch.addEventListener('input', function() {
-              const q = this.value.toLowerCase();
-              const nav = document.getElementById('mission-action-list');
-              if (!nav) return;
-              nav.querySelectorAll('.action-btn').forEach(function(btn) {
-                  btn.style.display = (!q || (btn.textContent || '').toLowerCase().includes(q)) ? '' : 'none';
-              });
-              // Show/hide group labels based on visible children
-              nav.querySelectorAll('.action-group-content').forEach(function(group) {
-                  const visible = group.querySelectorAll('.action-btn:not([style*="display: none"])');
-                  const gName = group.getAttribute('data-group');
-                  group.style.display = visible.length === 0 ? 'none' : '';
-                  const label = nav.querySelector('.action-group-label[data-group="' + gName + '"]');
-                  if (label) label.style.display = visible.length === 0 ? 'none' : '';
-              });
-          });
-      }
-
       // ── Collapsible action groups (7.17/7.44) ──
       document.querySelectorAll('.action-group-label[data-group]').forEach(function(label) {
           label.addEventListener('click', function() {
@@ -570,20 +440,20 @@ export function getWelcomeHtmlContent(
               }
           });      });
 
-      // ── Personality Toggle (7.16) ──
-      document.querySelectorAll('.personality-toggle-btn').forEach(function(btn) {
+      // ── Mission Profile Toggle (7.40) ──
+      document.querySelectorAll('.mission-profile-btn').forEach(function(btn) {
           btn.addEventListener('click', function() {
-              const mode = this.getAttribute('data-mode');
-              document.querySelectorAll('.personality-toggle-btn').forEach(function(b) {
+              var profile = this.getAttribute('data-mission');
+              var wasActive = this.classList.contains('active');
+              document.querySelectorAll('.mission-profile-btn').forEach(function(b) {
                   b.classList.remove('active');
-                  b.setAttribute('aria-checked', 'false');
               });
-              this.classList.add('active');
-              this.setAttribute('aria-checked', 'true');
-              vscode.postMessage({ command: 'setPersonalityMode', mode: mode });
+              if (!wasActive) {
+                  this.classList.add('active');
+                  vscode.postMessage({ command: 'missionProfile', profile: profile });
+              }
           });
       });
-
 
 
       // ── Settings Toggles (7.14) ──

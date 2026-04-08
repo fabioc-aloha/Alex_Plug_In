@@ -257,7 +257,11 @@ async function buildIdentityLayer(ctx: PromptContext): Promise<string> {
     let safetyText = "";
     if (safetyMatch) {
       // Extract first 5 imperatives (I1-I5) to keep token budget reasonable
-      const safetyLines = safetyMatch[1].trim().split("\n").slice(0, 10);
+      const safetyLines = safetyMatch[1]
+        .trim()
+        .replace(/\r\n/g, "\n")
+        .split("\n")
+        .slice(0, 10);
       safetyText = safetyLines.join("\n");
     }
 
