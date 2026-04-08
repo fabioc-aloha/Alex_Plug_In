@@ -856,3 +856,194 @@ Consider testing:
 
   return { metadata: { command: "verify", topic, action: "walkthrough" } };
 }
+
+/**
+ * Handle /journey command - Curated learning journey
+ */
+export async function handleJourneyCommand(
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
+): Promise<IAlexChatResult> {
+  const role = request.prompt.trim();
+
+  if (!role) {
+    stream.markdown(`## 🗺️ Learning Journeys
+
+The \`/journey\` command starts a curated learning path tailored to your role.
+
+### Available Journeys
+
+| Role | Focus Areas |
+|------|-------------|
+| \`frontend-developer\` | React, TypeScript, accessibility, testing |
+| \`backend-developer\` | APIs, databases, security, architecture |
+| \`devops-engineer\` | CI/CD, IaC, monitoring, cloud platforms |
+| \`data-engineer\` | Pipelines, warehousing, quality, governance |
+| \`full-stack\` | End-to-end: frontend + backend + deployment |
+
+### Usage
+
+\`\`\`
+/journey frontend-developer
+/journey devops-engineer
+\`\`\`
+
+Each journey adapts to your experience level and builds progressively.
+`);
+    return { metadata: { command: "journey", action: "help" } };
+  }
+
+  stream.markdown(`## 🗺️ Learning Journey: ${role}
+
+Let's build a learning path tailored to the **${role}** role.
+
+To personalize this journey, I need to understand your starting point:
+
+1. **Experience level**: Beginner, intermediate, or advanced?
+2. **Current project**: What are you building right now?
+3. **Pain points**: What's your biggest challenge today?
+4. **Time commitment**: How much time can you dedicate per week?
+
+Share these details and I'll create a structured learning plan with:
+- Skill assessments to identify gaps
+- Curated resources and exercises
+- Milestone checkpoints
+- Hands-on projects aligned with your work
+
+> 💡 *I'll adapt the journey as you progress. Just say "next step" to continue or "adjust" to change pace.*
+`);
+
+  return { metadata: { command: "journey", role } };
+}
+
+/**
+ * Handle /marp command - Create Marp presentation
+ */
+export async function handleMarpCommand(
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
+): Promise<IAlexChatResult> {
+  const topic = request.prompt.trim();
+
+  if (!topic) {
+    stream.markdown(`## 🖼️ Marp Presentation Generator
+
+The \`/marp\` command creates a Marp-formatted markdown presentation.
+
+### Usage
+
+\`\`\`
+/marp Our new architecture
+/marp Q1 team retrospective
+\`\`\`
+
+### What You'll Get
+
+- Markdown file with Marp frontmatter
+- Professional slide layout with H2 headings as slide breaks
+- Ready for export to PDF, PPTX, or HTML via Marp CLI or VS Code extension
+
+### Tips
+
+- Install the **Marp for VS Code** extension for live preview
+- Export with: \`marp --pdf slides.md\` or \`marp --pptx slides.md\`
+`);
+    return { metadata: { command: "marp", action: "help" } };
+  }
+
+  stream.markdown(`## 🖼️ Creating Marp Presentation: ${topic}
+
+I'll generate a Marp markdown presentation about **${topic}**.
+
+Tell me more about what you'd like to cover:
+
+1. **Audience**: Who is this for? (team, executives, clients, conference)
+2. **Slide count**: Rough target? (5-10 quick, 15-20 detailed)
+3. **Key points**: What are the 3-5 main messages?
+4. **Tone**: Technical deep-dive, executive summary, or workshop style?
+
+Once I have the details, I'll create a complete Marp markdown file you can save and present.
+
+> 💡 *For AI-powered cloud presentations, try \`/presentation\` instead (routes to Gamma or PPTX generation).*
+`);
+
+  return { metadata: { command: "marp", topic } };
+}
+
+/**
+ * Handle /presentation command - Generate presentation (routes to Gamma or PPTX)
+ */
+export async function handlePresentationCommand(
+  request: vscode.ChatRequest,
+  _context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  _token: vscode.CancellationToken,
+): Promise<IAlexChatResult> {
+  const topic = request.prompt.trim();
+
+  if (!topic) {
+    stream.markdown(`## 📊 Presentation Generator
+
+The \`/presentation\` command generates professional presentations.
+
+### Output Options
+
+| Method | Best For | How |
+|--------|----------|-----|
+| **Gamma** | AI-designed slides with visuals | Cloud-based, requires Gamma account |
+| **PPTX** | Local PowerPoint generation | Offline, full control, data-driven |
+| **Marp** | Markdown-based slides | Developer-friendly, version-controlled |
+
+### Usage
+
+\`\`\`
+/presentation pitch deck for investors
+/presentation quarterly business review
+/presentation technical architecture overview
+\`\`\`
+
+### Related Commands
+
+- \`/marp\` — Marp-specific markdown presentation
+- **Command Palette** — \`Alex: Generate Presentation (PPTX)\` for direct PPTX generation
+- **Command Palette** — \`Alex: Generate Gamma Presentation\` for Gamma AI slides
+`);
+    return { metadata: { command: "presentation", action: "help" } };
+  }
+
+  stream.markdown(`## 📊 Presentation: ${topic}
+
+Let me help you create a presentation about **${topic}**.
+
+### Choose Your Format
+
+1. **Gamma** (recommended for visual impact)
+   - Run: \`Alex: Generate Gamma Presentation\` from the Command Palette
+   - AI-designed slides with professional visuals
+
+2. **PPTX** (recommended for data-driven decks)
+   - Run: \`Alex: Generate Presentation (PPTX)\` from the Command Palette
+   - Full PowerPoint file generated locally
+
+3. **Marp** (recommended for developers)
+   - Use \`/marp ${topic}\` for markdown-based slides
+   - Version-controlled, exportable to PDF/PPTX/HTML
+
+### Let Me Help You Prepare
+
+Share the following and I'll draft your content:
+
+- **Audience**: Who will see this?
+- **Duration**: How long is the presentation?
+- **Key message**: What's the one thing they should remember?
+- **Data**: Any metrics or charts to include?
+
+I'll structure the narrative, then you can generate slides in your preferred format.
+`);
+
+  return { metadata: { command: "presentation", topic } };
+}

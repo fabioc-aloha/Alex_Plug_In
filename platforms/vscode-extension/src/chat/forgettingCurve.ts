@@ -246,7 +246,7 @@ export interface FreshnessFields {
 /**
  * Determine the default decay profile for a knowledge category.
  */
-export function getDefaultDecayProfile(category: string): DecayProfile {
+function getDefaultDecayProfile(category: string): DecayProfile {
   return (
     CATEGORY_DECAY_DEFAULTS[category as GlobalKnowledgeCategory] ?? "moderate"
   );
@@ -256,7 +256,7 @@ export function getDefaultDecayProfile(category: string): DecayProfile {
  * Compute a freshness score for a knowledge entry.
  * Works with the base IGlobalKnowledgeEntry type plus optional FreshnessFields.
  */
-export function computeFreshnessScore(
+function computeFreshnessScore(
   entry: IGlobalKnowledgeEntry & Partial<FreshnessFields>,
 ): FreshnessScore {
   const referenceCount = entry.referenceCount ?? 0;

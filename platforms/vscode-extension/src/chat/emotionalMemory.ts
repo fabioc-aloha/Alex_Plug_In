@@ -188,7 +188,7 @@ export function recordEmotionalSignal(
  * Compute the emotional arc for the current session.
  * Call this when the session is ending (chat closes, user stops, timer ends).
  */
-export function computeSessionArc(): SessionEmotionalArc | null {
+function computeSessionArc(): SessionEmotionalArc | null {
     if (currentSignals.length === 0) {
         return null;
     }
@@ -425,13 +425,6 @@ export function resetEmotionalState(): void {
     currentSignals = [];
     sessionStartTime = null;
     lastMessageTime = 0;
-}
-
-/**
- * Get current signal count (for status display).
- */
-export function getCurrentSignalCount(): number {
-    return currentSignals.length;
 }
 
 // ============================================================================

@@ -133,13 +133,7 @@ export function addReferencedUrl(url: string): void {
 }
 
 /**
- * v7.2.0: Get the current session's referenced URLs.
- */
-export function getSessionReferencedUrls(): readonly string[] {
-  return _currentDraft?.referencedUrls ?? [];
-}
 
-/**
  * Flush the current draft to persistent storage.
  * Call from deactivate() or endSession().
  * No-op if no draft or draft has fewer than 2 exchanges.
@@ -335,19 +329,6 @@ function generateSessionName(topic: string, tags: string[]): string {
   }
 
   return name;
-}
-
-/**
- * v7.2.0: Get the current session's suggested name for renaming.
- * Returns null if no draft or insufficient context.
- */
-export function getCurrentSessionName(): string | null {
-  if (!_currentDraft || _currentDraft.prompts.length < 1) {
-    return null;
-  }
-  const text = [_currentDraft.topic, ..._currentDraft.prompts].join(" ");
-  const tags = inferTags(text);
-  return generateSessionName(_currentDraft.topic, tags);
 }
 
 /**

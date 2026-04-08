@@ -102,6 +102,9 @@ import {
   handleConfidenceCommand,
   handleCreativeCommand,
   handleVerifyCommand,
+  handleJourneyCommand,
+  handleMarpCommand,
+  handlePresentationCommand,
 } from "./handlers/workflowHandlers";
 
 // ============================================================================
@@ -616,6 +619,21 @@ async function handleAlexRequest(
   // Verify command - multi-turn verification for high-stakes decisions
   if (request.command === "verify") {
     return await handleVerifyCommand(request, context, stream, token);
+  }
+
+  // Journey command - curated learning paths
+  if (request.command === "journey") {
+    return await handleJourneyCommand(request, context, stream, token);
+  }
+
+  // Marp command - Marp markdown presentations
+  if (request.command === "marp") {
+    return await handleMarpCommand(request, context, stream, token);
+  }
+
+  // Presentation command - routes to Gamma, PPTX, or Marp
+  if (request.command === "presentation") {
+    return await handlePresentationCommand(request, context, stream, token);
   }
 
   // Check if this is a greeting at the start of a session

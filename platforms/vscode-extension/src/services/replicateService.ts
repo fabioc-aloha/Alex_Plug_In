@@ -472,39 +472,6 @@ export function getPrediction(
   });
 }
 
-/**
- * Cancel a running prediction.
- */
-export function cancelPrediction(
-  apiToken: string,
-  predictionId: string,
-): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const options: https.RequestOptions = {
-      hostname: "api.replicate.com",
-      port: 443,
-      path: `/v1/predictions/${predictionId}/cancel`,
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiToken}`,
-        "Content-Length": 0,
-      },
-    };
-
-    const req = https.request(options, (res) => {
-      res.resume();
-      res.on("end", () =>
-        res.statusCode === 200
-          ? resolve()
-          : reject(new Error(`Cancel returned ${res.statusCode}`)),
-      );
-    });
-
-    req.on("error", reject);
-    req.end();
-  });
-}
-
 // ---------------------------------------------------------------------------
 // High-level generation API
 // ---------------------------------------------------------------------------

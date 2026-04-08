@@ -15,21 +15,6 @@ export function logInfo(message: string): void {
     channel().appendLine(`[INFO]  ${message}`);
 }
 
-/** Warn-level log → Output Channel */
-export function logWarn(message: string): void {
-    channel().appendLine(`[WARN]  ${message}`);
-}
-
-/** Error-level log → Output Channel */
-export function logError(message: string): void {
-    channel().appendLine(`[ERROR] ${message}`);
-}
-
-/** Show the Alex output channel in the panel. */
-export function showLog(): void {
-    channel().show(true);
-}
-
 /** Dispose the channel (call from extension deactivate). */
 export function disposeLog(): void {
     _channel?.dispose();

@@ -232,29 +232,9 @@ export async function fetchDiceBearAvatar(
     });
 }
 
-/**
- * Parse avatar syntax: seed or seed#style
- * @param value e.g., 'John' or 'John#open-peeps'
- * @returns [seed, style] with default style if not specified
- */
-export function parseAvatarValue(value: string): [string, string] {
-    const parts = value.split('#');
-    const seed = parts[0].trim();
-    const style = parts[1]?.trim() || 'open-peeps';
-    return [seed, style];
-}
-
 // =============================================================================
 // UTILITY FUNCTIONS
 // =============================================================================
-
-/**
- * Convert SVG string to base64 data URI
- */
-export function svgToBase64DataUri(svg: string): string {
-    const base64 = Buffer.from(svg).toString('base64');
-    return `data:image/svg+xml;base64,${base64}`;
-}
 
 /**
  * Check if a URL is reachable (HEAD request)

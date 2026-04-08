@@ -213,13 +213,6 @@ export async function toggleVoiceMode(): Promise<void> {
 }
 
 /**
- * Check if voice mode is enabled
- */
-export function isVoiceModeEnabled(): boolean {
-  return voiceModeEnabled;
-}
-
-/**
  * Speak text aloud if voice mode is enabled
  * Used by chat participant to auto-read responses
  * @param text - The text to speak (markdown will be stripped)

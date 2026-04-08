@@ -60,7 +60,7 @@ const RECOMMENDED_EXTENSIONS: RecommendedExtension[] = [
  * Check which recommended extensions are installed.
  * Returns arrays of installed and missing extensions.
  */
-export function checkRecommendedExtensions(): {
+function checkRecommendedExtensions(): {
   installed: RecommendedExtension[];
   missing: RecommendedExtension[];
 } {

@@ -63,52 +63,6 @@ export function nasaAssert(
 }
 
 /**
- * Assert that a value is defined (not null/undefined).
- * Type guard that narrows the type when assertion passes.
- *
- * @param value - The value to check
- * @param name - Name of the value for error message
- * @returns True if value is defined
- *
- * @example
- * if (nasaAssertDefined(workspaceFolder, 'workspaceFolder')) {
- *   // TypeScript knows workspaceFolder is defined here
- *   processFolder(workspaceFolder);
- * }
- */
-export function nasaAssertDefined<T>(
-  value: T | null | undefined,
-  name: string,
-): value is T {
-  return nasaAssert(
-    value !== null && value !== undefined,
-    `${name} must be defined`,
-    { actualType: typeof value, value: value === null ? "null" : "undefined" },
-  );
-}
-
-/**
- * Assert that an array is not empty.
- *
- * @param arr - The array to check
- * @param name - Name of the array for error message
- * @returns True if array has elements
- *
- * @example
- * nasaAssertNonEmpty(workspaceFolders, 'workspaceFolders');
- */
-export function nasaAssertNonEmpty<T>(
-  arr: T[] | undefined,
-  name: string,
-): arr is T[] & { length: number } {
-  return nasaAssert(
-    Array.isArray(arr) && arr.length > 0,
-    `${name} must be non-empty array`,
-    { isArray: Array.isArray(arr), length: arr?.length ?? 0 },
-  );
-}
-
-/**
  * Assert that a number is within expected bounds.
  *
  * @param value - The number to check
@@ -133,25 +87,4 @@ export function nasaAssertBounded(
   );
 }
 
-/**
- * Assert that a string matches expected pattern.
- *
- * @param value - The string to check
- * @param pattern - RegExp pattern to match
- * @param name - Name of the value for error message
- * @returns True if string matches pattern
- *
- * @example
- * nasaAssertPattern(version, /^\d+\.\d+\.\d+$/, 'version');
- */
-export function nasaAssertPattern(
-  value: string | undefined,
-  pattern: RegExp,
-  name: string,
-): boolean {
-  return nasaAssert(
-    typeof value === "string" && pattern.test(value),
-    `${name} must match pattern ${pattern}`,
-    { value, pattern: pattern.toString() },
-  );
-}
+

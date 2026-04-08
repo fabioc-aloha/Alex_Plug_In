@@ -1080,6 +1080,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
             .filter((f) => f.endsWith(".md"))) {
             totalLines += fs
               .readFileSync(path.join(memDir, f), "utf-8")
+              .replace(/\r\n/g, "\n")
               .split("\n").length;
           }
           data.chatMemoryLines = totalLines;

@@ -87,26 +87,6 @@ export function findLocalLogo(
 }
 
 /**
- * List all logos in the local logos folder.
- */
-export function listLocalLogos(workspacePath: string, config: LogoServiceConfig = DEFAULT_CONFIG): string[] {
-    const logosDir = path.join(workspacePath, config.logosFolder);
-    
-    if (!fs.existsSync(logosDir)) {
-        return [];
-    }
-    
-    try {
-        const files = fs.readdirSync(logosDir);
-        const imageExtensions = ['.png', '.jpg', '.jpeg', '.svg', '.webp'];
-        return files
-            .filter(f => imageExtensions.includes(path.extname(f).toLowerCase()))
-            .map(f => path.basename(f, path.extname(f)));
-    } catch (err) {
-        return [];
-    }
-}
-
 // =============================================================================
 // TICKER-BASED LOGO API
 // =============================================================================
@@ -263,87 +243,4 @@ export function fileToBase64DataUri(filePath: string): string | null {
     const base64 = buffer.toString('base64');
     
     return `data:${mimeType};base64,${base64}`;
-}
-
-// =============================================================================
-// COMMON TICKER → DOMAIN MAPPINGS
-// =============================================================================
-
-/**
- * Well-known ticker → domain mappings for logo lookup fallback.
- * Used when API doesn't support direct ticker search.
- */
-export const TICKER_DOMAINS: Record<string, string> = {
-    // Tech Giants
-    'AAPL': 'apple.com',
-    'MSFT': 'microsoft.com',
-    'GOOGL': 'google.com',
-    'GOOG': 'google.com',
-    'AMZN': 'amazon.com',
-    'META': 'meta.com',
-    'NVDA': 'nvidia.com',
-    'TSLA': 'tesla.com',
-    'AMD': 'amd.com',
-    'INTC': 'intel.com',
-    'IBM': 'ibm.com',
-    'ORCL': 'oracle.com',
-    'CRM': 'salesforce.com',
-    'ADBE': 'adobe.com',
-    'CSCO': 'cisco.com',
-    'NFLX': 'netflix.com',
-    'PYPL': 'paypal.com',
-    'SQ': 'squareup.com',
-    'SHOP': 'shopify.com',
-    'SPOT': 'spotify.com',
-    'UBER': 'uber.com',
-    'LYFT': 'lyft.com',
-    'ABNB': 'airbnb.com',
-    'SNAP': 'snap.com',
-    'PINS': 'pinterest.com',
-    'TWTR': 'twitter.com',
-    'X': 'x.com',
-    
-    // Finance
-    'JPM': 'jpmorgan.com',
-    'BAC': 'bankofamerica.com',
-    'WFC': 'wellsfargo.com',
-    'GS': 'goldmansachs.com',
-    'MS': 'morganstanley.com',
-    'V': 'visa.com',
-    'MA': 'mastercard.com',
-    'AXP': 'americanexpress.com',
-    
-    // Enterprise
-    'SAP': 'sap.com',
-    'WDAY': 'workday.com',
-    'NOW': 'servicenow.com',
-    'ZM': 'zoom.us',
-    'TEAM': 'atlassian.com',
-    'DDOG': 'datadoghq.com',
-    'SNOW': 'snowflake.com',
-    'PLTR': 'palantir.com',
-    
-    // Retail
-    'WMT': 'walmart.com',
-    'TGT': 'target.com',
-    'COST': 'costco.com',
-    'HD': 'homedepot.com',
-    'LOW': 'lowes.com',
-    'NKE': 'nike.com',
-    'SBUX': 'starbucks.com',
-    'MCD': 'mcdonalds.com',
-    
-    // Telecom/Media
-    'DIS': 'disney.com',
-    'CMCSA': 'comcast.com',
-    'T': 'att.com',
-    'VZ': 'verizon.com',
-    'TMUS': 't-mobile.com',
-};
-
-/**
- * Get domain for a ticker symbol (for domain-based logo APIs).
- */
-export function getTickerDomain(ticker: string): string | null {
-    return TICKER_DOMAINS[ticker.toUpperCase()] || null;
 }

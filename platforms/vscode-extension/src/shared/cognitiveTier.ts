@@ -526,13 +526,6 @@ export async function requireCognitiveLevel(commandId: string): Promise<boolean>
 }
 
 /**
- * Get the feature requirement for a command, if any.
- */
-export function getFeatureRequirement(commandId: string): FeatureRequirement | undefined {
-    return FEATURE_REQUIREMENTS[commandId];
-}
-
-/**
  * Check if a command is available at the current cognitive level.
  * Unlike requireCognitiveLevel, this does NOT show a warning — useful
  * for UI state (e.g., graying out buttons).
@@ -546,69 +539,9 @@ export async function isFeatureAvailable(commandId: string): Promise<boolean> {
     return current.level >= requirement.minimumLevel;
 }
 
-// ============================================================================
-// FORMATTING HELPERS
-// ============================================================================
-
 /**
- * Get all tier definitions (for the Cognitive Levels UI).
+ * Get the feature requirement for a command, if any.
  */
-export function getAllTiers(): Record<CognitiveLevel, CognitiveTierInfo> {
-    return { ...COGNITIVE_TIERS };
-}
-
-/**
- * Format a cognitive level summary for display.
- */
-export function formatCognitiveLevelSummary(result: CognitiveLevelResult): string {
-    const tier = result.tierInfo;
-    const account = result.gitHubAccount;
-
-    const planLabel = account.accountHint !== 'unknown' ? account.accountHint : 'plan unknown';
-    const multiAcct = account.sessionCount > 1 ? ` (+${account.sessionCount - 1} more)` : '';
-    const accountDisplay = account.signedIn
-        ? `✅ ${account.label}${multiAcct} — ${planLabel}`
-        : '❌ Not signed in';
-
-    const checks = [
-        `GitHub Account: ${accountDisplay}`,
-        `GitHub Copilot: ${result.copilotInstalled ? '✅ Installed' : '❌ Not installed'}`,
-        `Copilot Chat: ${result.copilotChatInstalled ? '✅ Installed' : '❌ Not installed'}`,
-        `Language Models: ${result.hasModels ? '✅' : '❌'}`,
-        `Agent Mode: ${result.agentModeEnabled ? '✅' : '❌'}`,
-        `Extended Thinking: ${result.extendedThinkingEnabled ? '✅' : '❌'}`,
-        `MCP Gallery: ${result.mcpGalleryEnabled ? '✅' : '❌'}`,
-        `Copilot Memory: ${result.copilotMemoryEnabled ? '✅' : '❌'}`,
-        `Best Model Tier: ${result.bestModelTier}`,
-    ];
-
-    let summary = `## ${tier.emoji} Cognitive Level ${tier.level}: ${tier.displayName}\n\n` +
-        `${tier.description}\n\n` +
-        `### Detection Results\n${checks.map(c => `- ${c}`).join('\n')}\n\n` +
-        `### Reason\n${result.reason}`;
-
-    // Add account switching guidance for Level 3 users stuck without frontier models
-    if (result.level === 3 && result.bestModelTier !== 'frontier' && account.signedIn) {
-        summary += '\n\n### 💡 Upgrade Tip\n' +
-            'Frontier models require **Copilot Pro** (personal) or **Copilot Business/Enterprise** (organization) with frontier model access enabled.\n\n' +
-            (account.sessionCount > 1
-                ? '**You have multiple GitHub accounts.** If your other account has a higher Copilot plan, try switching:\n' +
-                  '1. Open the **Accounts** menu (bottom-left person icon)\n' +
-                  '2. Sign out of the current GitHub session\n' +
-                  '3. Sign in with the account that has Copilot Pro/Business\n' +
-                  '4. Run **Alex: Detect Cognitive Level** to refresh'
-                : 'If you have another GitHub account with Copilot Pro/Business, you can switch accounts:\n' +
-                  '1. Open the **Accounts** menu (bottom-left person icon)\n' +
-                  '2. Add your other GitHub account\n' +
-                  '3. Switch Copilot to use the account with frontier model access');
-    }
-
-    return summary;
-}
-
-/**
- * Get all feature requirements (for documentation/UI).
- */
-export function getAllFeatureRequirements(): Record<string, FeatureRequirement> {
-    return { ...FEATURE_REQUIREMENTS };
+export function getFeatureRequirement(commandId: string): FeatureRequirement | undefined {
+    return FEATURE_REQUIREMENTS[commandId];
 }

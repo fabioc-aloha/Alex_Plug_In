@@ -473,7 +473,7 @@ function calculateValidationScore(
   }
 
   // Content length
-  const lines = content.split("\n").length;
+  const lines = content.replace(/\r\n/g, "\n").split("\n").length;
   if (lines > 200) {
     score += 2;
   } else if (lines > 100) {
@@ -512,7 +512,7 @@ async function validateSkill(
   }
 
   // Check content length
-  const lines = skill.content.split("\n").length;
+  const lines = skill.content.replace(/\r\n/g, "\n").split("\n").length;
   if (lines < 50) {
     warnings.push(
       `Content is short (${lines} lines). Consider adding more details.`,

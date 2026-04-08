@@ -400,22 +400,6 @@ export async function promoteToGlobalKnowledge(
     }
 }
 
-/**
- * Find relevant global knowledge for the current project context
- */
-export async function findRelevantKnowledge(
-    context: string,
-    technologies?: string[]
-): Promise<{ entry: IGlobalKnowledgeEntry; relevance: number; content?: string }[]> {
-    // Build search query from context and technologies
-    const searchTerms = [context];
-    if (technologies) {
-        searchTerms.push(...technologies);
-    }
-    
-    return searchGlobalKnowledge(searchTerms.join(' '), { limit: 5 });
-}
-
 // ============================================================================
 // AUTO-PROMOTION DURING MEDITATION (UNCONSCIOUS MIND)
 // ============================================================================
