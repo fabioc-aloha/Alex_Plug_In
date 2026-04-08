@@ -163,6 +163,22 @@ if (Test-Path $roadmapPath) {
     }
 }
 
+# Check PRIVACY.md version
+$privacyPath = Join-Path $rootPath "PRIVACY.md"
+if (Test-Path $privacyPath) {
+    $privacyContent = Get-Content $privacyPath -Raw
+    if ($privacyContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)') {
+        $privacyVersion = $matches[1]
+        Write-Host "   PRIVACY.md: $privacyVersion" -ForegroundColor Gray
+        if ($pkgVersion -ne $privacyVersion) {
+            Write-Host "   [WARN] PRIVACY.md version differs (update recommended)" -ForegroundColor Yellow
+        }
+        else {
+            Write-Host "   [OK] PRIVACY.md version matches" -ForegroundColor Green
+        }
+    }
+}
+
 # Check README.md skill count matches actual
 $readmePath = Join-Path $rootPath "README.md"
 $masterSkillsPath = Join-Path $rootPath ".github\skills"
@@ -256,6 +272,8 @@ Pop-Location
 # 7. Package Check (optional)
 if ($Package) {
     Write-Host "`n7. Creating package..." -ForegroundColor Yellow
+    # Remove stale VSIX files to avoid picking up old versions
+    Get-ChildItem "*.vsix" -ErrorAction SilentlyContinue | Remove-Item -Force
     npx vsce package --no-dependencies 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
         $errors += "Package creation failed"

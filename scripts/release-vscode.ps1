@@ -75,7 +75,17 @@ try {
     $extName = $pkg.name
     Write-Host "   New version: $newVersion" -ForegroundColor Green
     
-    # 2b. Update heir copilot-instructions.md version
+    # 2b. Update Master copilot-instructions.md version (SOURCE OF TRUTH)
+    $masterInstructions = Join-Path $repoRoot ".github\copilot-instructions.md"
+    if (Test-Path $masterInstructions) {
+        $content = Get-Content $masterInstructions -Raw
+        $replacement = '${1}' + $newVersion
+        $content = $content -replace '(# Alex v)\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?', $replacement
+        Set-Content $masterInstructions $content -NoNewline
+        Write-Host "   Updated Master copilot-instructions.md" -ForegroundColor Green
+    }
+
+    # 2c. Update heir copilot-instructions.md version
     $heirInstructions = Join-Path $extensionPath ".github\copilot-instructions.md"
     if (Test-Path $heirInstructions) {
         $content = Get-Content $heirInstructions -Raw
@@ -91,7 +101,7 @@ try {
     Write-Host "`n[CHANGELOG] Updating CHANGELOG..." -ForegroundColor Yellow
     $date = Get-Date -Format "yyyy-MM-dd"
     $changelog = Get-Content CHANGELOG.md -Raw
-    $newEntry = "## [$newVersion] - $date`n`n### Added`n`n### Changed`n`n### Fixed`n`n---`n`n"
+    $newEntry = "## [$newVersion] - $date`n`n### Added`n`n### Changed`n`n### Fixed`n`n"
     $changelog = $changelog -replace '(# Changelog\s*\n[^\n]*\n[^\n]*\n---\s*\n)', "`$1`n$newEntry"
     Set-Content CHANGELOG.md $changelog -NoNewline
     Write-Host "   Added entry for $newVersion" -ForegroundColor Green

@@ -2,35 +2,10 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "PRIVACY.md",
-    "ROADMAP.md"
+    "platforms/vscode-extension/build-extension-package.ps1",
+    "scripts/release-preflight.ps1",
+    "scripts/release-vscode.ps1"
   ],
-  "todoHotspots": [
-    {
-      "file": "alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1775670479106
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1775670479106
-    },
-    {
-      "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1775670479106
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1775670479106
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1775670479106
-    }
-  ],
-  "lastUpdated": 1775670479106
+  "todoHotspots": [],
+  "lastUpdated": 1775671114515
 }
