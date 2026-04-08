@@ -2,30 +2,41 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/skills/SKILL-GROUPS.md",
-    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md"
+    "alex_docs/architecture/LOADING-MECHANICS.md",
+    "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+    "alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+    "alex_docs/platforms/MASTER-HEIR-ARCHITECTURE.md",
+    "alex_docs/platforms/VSCODE-HEIR.md",
+    "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+    "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+    "platforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1775669945503
+      "scannedAt": 1775670401099
     },
     {
-      "file": "HEIR-BOOTSTRAP.md",
-      "todoCount": 5,
-      "scannedAt": 1775669945503
+      "file": "alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1775670401099
     },
     {
-      "file": "AI-FIRST-DEV-STARTER-PACK-IDEAS.md",
-      "todoCount": 4,
-      "scannedAt": 1775669945503
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1775670401099
     },
     {
-      "file": "platforms/vscode-extension/README.md",
+      "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1775669945503
+      "scannedAt": 1775670401099
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1775670401099
     }
   ],
-  "lastUpdated": 1775669945503
+  "lastUpdated": 1775670401099
 }

@@ -87,6 +87,32 @@ applyTo: "**/*audit*,**/*qa*"
 - Memory tiers: declared in copilot-instructions, implemented in dream, validated by brain-qa — same categories?
 - Agent ecosystem: listed in copilot-instructions, files in .github/agents/ — same count and names?
 
+### 5. Reader Testing (Doc Comprehension Gate)
+
+**Question**: Could a reader with no prior context understand this document and act on it correctly?
+
+**Procedure**:
+1. After writing or updating any user-facing documentation, predict 5-10 questions a new reader would ask
+2. For each predicted question, verify the document answers it clearly
+3. Fix gaps: if a predicted question has no answer in the doc, add the information
+4. Exit condition: "a reader with no prior context could answer all predicted questions correctly from this document alone"
+
+**Example for a README**:
+
+| Predicted Reader Question | Answered? | Where |
+|--------------------------|-----------|-------|
+| What does this project do? | Yes | First paragraph |
+| How do I install it? | Yes | Installation section |
+| What are the prerequisites? | No | **GAP: add prerequisites** |
+| How do I run it locally? | Yes | Getting Started |
+| Where do I report bugs? | No | **GAP: add contributing link** |
+
+**When to apply**:
+- New documents: always
+- Updated documents: when the update changes the audience or scope
+- Release notes: predict "what changed for me?" and "do I need to do anything?"
+- Heir documentation: predict "how do I get started?" and "what's different from Master?"
+
 ## Output Format
 
 When completing a semantic audit, report:

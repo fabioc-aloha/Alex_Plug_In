@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch
 **Date**: February 26, 2026
-**Version**: 2.2 — Alex v7.2.0
+**Version**: 2.2 — Alex v7.3.0
 **North Star**: *Create the most advanced and trusted AI partner for any job*
 
 **Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Loading Mechanics](./LOADING-MECHANICS.md)
