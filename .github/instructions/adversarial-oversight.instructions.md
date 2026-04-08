@@ -48,7 +48,7 @@ These operations **MUST** trigger Validator agent review:
 | **Skill Promotion to Master** | Before merge to Master `.github/` | Promotion score < 12 OR trifecta incomplete |
 | **Security-sensitive code** | Any auth/secrets/validation change | Security checklist incomplete |
 | **Breaking changes** | Any major version bump | Migration path undefined |
-| **Global Knowledge promotion** | Before `alex_knowledge_promote` | Pattern score < 5 OR missing citations |
+| **Global Knowledge promotion** | Before manual promotion | Pattern score < 5 OR missing citations |
 
 ### 🟠 HIGH: Strongly Recommend Validator
 

@@ -41,9 +41,9 @@ This is **Alex's brain** — a meta-cognitive AI architecture that transforms yo
 
 If Alex seems confused or capabilities are missing:
 
-1. **Run dream maintenance**: Ask Alex to "dream" or use `Alex: Dream` command
+1. **Run dream maintenance**: Ask Alex to "dream" or use the dream prompt
 2. **Check for corruption**: Ask Alex to "self-actualize"
-3. **Restore from backup**: Use `Alex: Reset Architecture` to reinstall
+3. **Restore from backup**: Run `node .github/muscles/sync-architecture.cjs` to reinstall
 
 ## Want to Customize?
 

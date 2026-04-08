@@ -2,7 +2,10 @@ import * as vscode from "vscode";
 import * as path from "path";
 import * as os from "os";
 import { detectCognitiveLevel } from "../shared/cognitiveTier";
-import { applyMarkdownStyles, setExtensionPathForCss } from "./setupMarkdownCss";
+import {
+  applyMarkdownStyles,
+  setExtensionPathForCss,
+} from "./setupMarkdownCss";
 export { setExtensionPathForCss, applyMarkdownStyles };
 
 /**
@@ -36,7 +39,8 @@ const RECOMMENDED_EXTENSIONS: RecommendedExtension[] = [
   {
     id: "github.copilot",
     name: "GitHub Copilot",
-    purpose: "AI language models — enables all AI-powered features (Levels 2-4)",
+    purpose:
+      "AI language models — enables all AI-powered features (Levels 2-4)",
     unlocksLevel: 2,
     required: false, // Alex Level 1 works without it
   },
@@ -105,7 +109,8 @@ export async function offerExtensionInstall(): Promise<number> {
 
   const selected = await vscode.window.showQuickPick(items, {
     canPickMany: true,
-    placeHolder: "Select extensions to install (Copilot extensions unlock AI features)",
+    placeHolder:
+      "Select extensions to install (Copilot extensions unlock AI features)",
     title: "🧩 Recommended Extensions for Alex",
   });
 
@@ -167,7 +172,7 @@ const ESSENTIAL_SETTINGS: Record<string, unknown> = {
   "chat.promptFilesLocations": {
     ".github/prompts": true,
   },
-  // Enable AGENTS.md files - verified in docs  
+  // Enable AGENTS.md files - verified in docs
   "chat.useAgentsMdFile": true,
   // Enable nested AGENTS.md in subfolders - experimental but documented
   "chat.useNestedAgentsMdFiles": true,
@@ -359,7 +364,6 @@ function getExistingSettings(settings: Record<string, unknown>): string[] {
   return existing;
 }
 
-
 /**
  * Apply settings to VS Code user configuration
  * @param settings - The settings to apply
@@ -416,36 +420,91 @@ function buildSettingsCategoryItems(): CategoryQuickPickItem[] {
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
   const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
-  const extendedThinkingExisting = getExistingSettings(EXTENDED_THINKING_SETTINGS);
+  const extendedThinkingExisting = getExistingSettings(
+    EXTENDED_THINKING_SETTINGS,
+  );
   const enterpriseExisting = getExistingSettings(ENTERPRISE_SETTINGS);
 
-  const essentialNeeded = Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
-  const recommendedNeeded = Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
-  const autoApprovalNeeded = Object.keys(AUTO_APPROVAL_SETTINGS).length - autoApprovalExisting.length;
-  const extendedThinkingNeeded = Object.keys(EXTENDED_THINKING_SETTINGS).length - extendedThinkingExisting.length;
-  const enterpriseNeeded = Object.keys(ENTERPRISE_SETTINGS).length - enterpriseExisting.length;
+  const essentialNeeded =
+    Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
+  const recommendedNeeded =
+    Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
+  const autoApprovalNeeded =
+    Object.keys(AUTO_APPROVAL_SETTINGS).length - autoApprovalExisting.length;
+  const extendedThinkingNeeded =
+    Object.keys(EXTENDED_THINKING_SETTINGS).length -
+    extendedThinkingExisting.length;
+  const enterpriseNeeded =
+    Object.keys(ENTERPRISE_SETTINGS).length - enterpriseExisting.length;
 
-  const enterpriseCurrentlyEnabled = vscode.workspace.getConfiguration().get<boolean>("alex.enterprise.enabled", false);
+  const enterpriseCurrentlyEnabled = vscode.workspace
+    .getConfiguration()
+    .get<boolean>("alex.enterprise.enabled", false);
 
-  const statusText = (needed: number) => needed === 0 ? "✓ all configured" : `${needed} to add`;
+  const statusText = (needed: number) =>
+    needed === 0 ? "✓ all configured" : `${needed} to add`;
 
   const enterpriseStatus = enterpriseCurrentlyEnabled
     ? "✓ enabled (uncheck to disable)"
     : statusText(enterpriseNeeded);
 
   return [
-    { label: `${SETTING_CATEGORIES[0].icon} Essential Settings`, description: statusText(essentialNeeded), detail: SETTING_CATEGORIES[0].description, category: SETTING_CATEGORIES[0], needed: essentialNeeded, existing: essentialExisting.length, picked: true },
-    { label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`, description: statusText(recommendedNeeded), detail: SETTING_CATEGORIES[1].description, category: SETTING_CATEGORIES[1], needed: recommendedNeeded, existing: recommendedExisting.length, picked: true },
-    { label: `${SETTING_CATEGORIES[2].icon} Auto-Approval Settings`, description: statusText(autoApprovalNeeded), detail: SETTING_CATEGORIES[2].description, category: SETTING_CATEGORIES[2], needed: autoApprovalNeeded, existing: autoApprovalExisting.length, picked: true },
-    { label: `${SETTING_CATEGORIES[3].icon} Extended Thinking`, description: statusText(extendedThinkingNeeded), detail: SETTING_CATEGORIES[3].description, category: SETTING_CATEGORIES[3], needed: extendedThinkingNeeded, existing: extendedThinkingExisting.length, picked: false },
-    { label: `${SETTING_CATEGORIES[4].icon} Enterprise (MS Graph)`, description: enterpriseStatus, detail: SETTING_CATEGORIES[4].description + " - enables MS Graph integration", category: SETTING_CATEGORIES[4], needed: enterpriseNeeded, existing: enterpriseExisting.length, picked: enterpriseCurrentlyEnabled },
+    {
+      label: `${SETTING_CATEGORIES[0].icon} Essential Settings`,
+      description: statusText(essentialNeeded),
+      detail: SETTING_CATEGORIES[0].description,
+      category: SETTING_CATEGORIES[0],
+      needed: essentialNeeded,
+      existing: essentialExisting.length,
+      picked: true,
+    },
+    {
+      label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`,
+      description: statusText(recommendedNeeded),
+      detail: SETTING_CATEGORIES[1].description,
+      category: SETTING_CATEGORIES[1],
+      needed: recommendedNeeded,
+      existing: recommendedExisting.length,
+      picked: true,
+    },
+    {
+      label: `${SETTING_CATEGORIES[2].icon} Auto-Approval Settings`,
+      description: statusText(autoApprovalNeeded),
+      detail: SETTING_CATEGORIES[2].description,
+      category: SETTING_CATEGORIES[2],
+      needed: autoApprovalNeeded,
+      existing: autoApprovalExisting.length,
+      picked: true,
+    },
+    {
+      label: `${SETTING_CATEGORIES[3].icon} Extended Thinking`,
+      description: statusText(extendedThinkingNeeded),
+      detail: SETTING_CATEGORIES[3].description,
+      category: SETTING_CATEGORIES[3],
+      needed: extendedThinkingNeeded,
+      existing: extendedThinkingExisting.length,
+      picked: false,
+    },
+    {
+      label: `${SETTING_CATEGORIES[4].icon} Enterprise (MS Graph)`,
+      description: enterpriseStatus,
+      detail:
+        SETTING_CATEGORIES[4].description + " - enables MS Graph integration",
+      category: SETTING_CATEGORIES[4],
+      needed: enterpriseNeeded,
+      existing: enterpriseExisting.length,
+      picked: enterpriseCurrentlyEnabled,
+    },
   ];
 }
 
 /**
  * Show preview, confirm, and apply the collected settings
  */
-async function previewConfirmAndApply(settingsToApply: Record<string, unknown>, categoryNames: string): Promise<void> {
+async function previewConfirmAndApply(
+  settingsToApply: Record<string, unknown>,
+  categoryNames: string,
+): Promise<void> {
   const preview = formatSettingsPreview(settingsToApply);
 
   const confirm = await vscode.window.showInformationMessage(
@@ -541,7 +600,8 @@ export async function setupEnvironment(): Promise<void> {
   const items = buildSettingsCategoryItems();
   const selected = await vscode.window.showQuickPick(items, {
     canPickMany: true,
-    placeHolder: "Select categories to apply (will re-apply even if already configured)",
+    placeHolder:
+      "Select categories to apply (will re-apply even if already configured)",
     title: "Alex Environment Setup",
   });
 
@@ -555,8 +615,12 @@ export async function setupEnvironment(): Promise<void> {
     Object.assign(settingsToApply, item.category.settings);
   }
 
-  const enterpriseCurrentlyEnabled = vscode.workspace.getConfiguration().get<boolean>("alex.enterprise.enabled", false);
-  const enterpriseSelected = selected.some(s => s.category.name === "Enterprise (Experimental)");
+  const enterpriseCurrentlyEnabled = vscode.workspace
+    .getConfiguration()
+    .get<boolean>("alex.enterprise.enabled", false);
+  const enterpriseSelected = selected.some(
+    (s) => s.category.name === "Enterprise (Experimental)",
+  );
   if (!enterpriseSelected && enterpriseCurrentlyEnabled) {
     for (const key of Object.keys(ENTERPRISE_SETTINGS)) {
       settingsToApply[key] = false;
@@ -615,16 +679,21 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
       const cogResult = await detectCognitiveLevel(true);
       const account = cogResult.gitHubAccount;
 
-      if (account.signedIn && cogResult.hasModels && cogResult.bestModelTier !== 'frontier') {
+      if (
+        account.signedIn &&
+        cogResult.hasModels &&
+        cogResult.bestModelTier !== "frontier"
+      ) {
         // Signed in with models but no frontier — account might be on a lower plan
-        const accountMsg = account.sessionCount > 1
-          ? `Signed in as "${account.label}" (${account.sessionCount} accounts detected). ` +
-            `Current plan provides ${cogResult.bestModelTier}-tier models. ` +
-            `Frontier models (Level 4) need Copilot Pro or Business. ` +
-            `Your other account may have a higher plan — switch via the Accounts menu (bottom-left).`
-          : `Signed in as "${account.label}" with ${cogResult.bestModelTier}-tier models. ` +
-            `Frontier models (Level 4) require Copilot Pro or Business. ` +
-            `If you have another GitHub account with a higher plan, add it via the Accounts menu (bottom-left).`;
+        const accountMsg =
+          account.sessionCount > 1
+            ? `Signed in as "${account.label}" (${account.sessionCount} accounts detected). ` +
+              `Current plan provides ${cogResult.bestModelTier}-tier models. ` +
+              `Frontier models (Level 4) need Copilot Pro or Business. ` +
+              `Your other account may have a higher plan — switch via the Accounts menu (bottom-left).`
+            : `Signed in as "${account.label}" with ${cogResult.bestModelTier}-tier models. ` +
+              `Frontier models (Level 4) require Copilot Pro or Business. ` +
+              `If you have another GitHub account with a higher plan, add it via the Accounts menu (bottom-left).`;
 
         const acctChoice = await vscode.window.showInformationMessage(
           `🔑 ${accountMsg}`,
@@ -636,14 +705,20 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
         if (acctChoice === "Open Accounts") {
           vscode.commands.executeCommand("workbench.action.accounts");
         } else if (acctChoice === "Check Plans") {
-          vscode.env.openExternal(vscode.Uri.parse("https://github.com/settings/copilot"));
+          vscode.env.openExternal(
+            vscode.Uri.parse("https://github.com/settings/copilot"),
+          );
         }
-      } else if (!account.signedIn && cogResult.copilotInstalled && !cogResult.hasModels) {
+      } else if (
+        !account.signedIn &&
+        cogResult.copilotInstalled &&
+        !cogResult.hasModels
+      ) {
         // Copilot installed but not signed in
         const signInChoice = await vscode.window.showInformationMessage(
           "🔑 GitHub Copilot is installed but you're not signed in.\n\n" +
-          "Sign in to activate AI models. If you have multiple GitHub accounts " +
-          "(personal + work), choose the one with Copilot Pro or Business for best results.",
+            "Sign in to activate AI models. If you have multiple GitHub accounts " +
+            "(personal + work), choose the one with Copilot Pro or Business for best results.",
           "Sign In",
           "Skip",
         );
@@ -661,14 +736,14 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
   const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
   const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
   const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
-  
+
   const essentialNeeded =
     Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
   const recommendedNeeded =
     Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
   const autoApprovalNeeded =
     Object.keys(AUTO_APPROVAL_SETTINGS).length - autoApprovalExisting.length;
-  
+
   const totalNeeded = essentialNeeded + recommendedNeeded + autoApprovalNeeded;
 
   // If all critical settings are already configured, skip

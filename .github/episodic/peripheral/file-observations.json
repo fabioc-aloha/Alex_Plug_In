@@ -1,17 +1,28 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/vscode-extension/src/chat/emotionalMemory.ts",
-    "platforms/vscode-extension/src/chat/forgettingCurve.ts",
-    "platforms/vscode-extension/src/chat/globalKnowledge.ts",
-    "platforms/vscode-extension/src/chat/globalKnowledgeMigration.ts",
-    "platforms/vscode-extension/src/chat/globalKnowledgeOps.ts",
-    "platforms/vscode-extension/src/chat/handlers/workflowHandlers.ts",
-    "platforms/vscode-extension/src/chat/participant.ts",
-    "platforms/vscode-extension/src/chat/peripheralVision.ts",
-    "platforms/vscode-extension/src/commands/proposeSkill.ts"
+    "github/ASSISTANT-COMPATIBILITY.md",
+    "alex_docs/README.md",
+    "alex_docs/WHAT-IS-ALEX.md",
+    "alex_docs/WORKING-WITH-ALEX.md",
+    "alex_docs/architecture/AGENT-CATALOG.md",
+    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+    "alex_docs/architecture/COMMAND-MEMORY-EFFECTS.md",
+    "alex_docs/architecture/CONSCIOUS-MIND.md",
+    "alex_docs/architecture/COPILOT-BRAIN.md",
+    "alex_docs/architecture/GK-PATTERN-FORMAT-STANDARD.md"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1775687221186
+  "todoHotspots": [
+    {
+      "file": "alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1775692192738
+    },
+    {
+      "file": "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
+      "todoCount": 1,
+      "scannedAt": 1775692192738
+    }
+  ],
+  "lastUpdated": 1775692192738
 }

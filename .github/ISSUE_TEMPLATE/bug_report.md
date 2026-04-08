@@ -34,9 +34,8 @@ A clear and concise description of what actually happened.
 
 ## Validation Results
 ```bash
-# If applicable, paste output from:
-# Run via VS Code Command Palette:
-Alex: Dream (Neural Maintenance)
+# If applicable, paste output from dream protocol:
+node .github/muscles/brain-qa.cjs
 # Check generated report for network health
 ```
 

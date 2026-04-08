@@ -1,35 +1,35 @@
 /**
  * Alex Illustration Service
- * 
+ *
  * Fetches icons and illustrations from public APIs:
  * - Iconify: 150K+ icons from 100+ icon sets (mdi, heroicons, ph, tabler, etc.)
  * - DiceBear: Generative avatars (open-peeps, avataaars, bottts, etc.)
- * 
+ *
  * All APIs are free, no authentication required.
- * 
+ *
  * @module illustrationService
  */
 
-import * as https from 'https';
+import * as https from "https";
 
 // =============================================================================
 // TYPES
 // =============================================================================
 
 export interface IconifyOptions {
-    /** Color in hex format without # (e.g., '0550ae') */
-    color?: string;
-    /** Width in pixels */
-    width?: number;
-    /** Height in pixels */
-    height?: number;
+  /** Color in hex format without # (e.g., '0550ae') */
+  color?: string;
+  /** Width in pixels */
+  width?: number;
+  /** Height in pixels */
+  height?: number;
 }
 
 export interface DiceBearOptions {
-    /** Background color in hex format without # */
-    backgroundColor?: string;
-    /** Size in pixels */
-    size?: number;
+  /** Background color in hex format without # */
+  backgroundColor?: string;
+  /** Size in pixels */
+  size?: number;
 }
 
 // =============================================================================
@@ -47,17 +47,17 @@ export interface DiceBearOptions {
  * - material-symbols: Google Material Symbols (15,111 icons)
  */
 export const ICONIFY_PREFIXES = [
-    'mdi',
-    'ph',
-    'heroicons',
-    'tabler',
-    'lucide',
-    'carbon',
-    'material-symbols',
-    'ic',
-    'fa6-solid',
-    'fa6-regular',
-    'feather'
+  "mdi",
+  "ph",
+  "heroicons",
+  "tabler",
+  "lucide",
+  "carbon",
+  "material-symbols",
+  "ic",
+  "fa6-solid",
+  "fa6-regular",
+  "feather",
 ] as const;
 
 /**
@@ -67,22 +67,26 @@ export const ICONIFY_PREFIXES = [
  * @param options Color and size options
  * @returns Full URL to SVG icon
  */
-export function getIconifyUrl(prefix: string, name: string, options: IconifyOptions = {}): string {
-    const params = new URLSearchParams();
-    
-    if (options.color) {
-        // URL encode the # character
-        params.set('color', `#${options.color}`);
-    }
-    if (options.width) {
-        params.set('width', String(options.width));
-    }
-    if (options.height) {
-        params.set('height', String(options.height));
-    }
-    
-    const queryString = params.toString();
-    return `https://api.iconify.design/${prefix}/${name}.svg${queryString ? '?' + queryString : ''}`;
+export function getIconifyUrl(
+  prefix: string,
+  name: string,
+  options: IconifyOptions = {},
+): string {
+  const params = new URLSearchParams();
+
+  if (options.color) {
+    // URL encode the # character
+    params.set("color", `#${options.color}`);
+  }
+  if (options.width) {
+    params.set("width", String(options.width));
+  }
+  if (options.height) {
+    params.set("height", String(options.height));
+  }
+
+  const queryString = params.toString();
+  return `https://api.iconify.design/${prefix}/${name}.svg${queryString ? "?" + queryString : ""}`;
 }
 
 /**
@@ -93,36 +97,40 @@ export function getIconifyUrl(prefix: string, name: string, options: IconifyOpti
  * @returns SVG string or null if fetch fails
  */
 export async function fetchIconifyIcon(
-    prefix: string,
-    name: string,
-    options: IconifyOptions = {}
+  prefix: string,
+  name: string,
+  options: IconifyOptions = {},
 ): Promise<string | null> {
-    const url = getIconifyUrl(prefix, name, options);
-    
-    return new Promise((resolve) => {
-        https.get(url, (res) => {
-            if (res.statusCode !== 200) {
-                console.warn(`Iconify fetch failed: ${res.statusCode} for ${prefix}/${name}`);
-                resolve(null);
-                return;
-            }
-            
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                // Validate it's actually SVG
-                if (data.trim().startsWith('<svg')) {
-                    resolve(data);
-                } else {
-                    console.warn(`Invalid SVG response for ${prefix}/${name}`);
-                    resolve(null);
-                }
-            });
-        }).on('error', (err) => {
-            console.warn(`Iconify fetch error: ${err.message}`);
+  const url = getIconifyUrl(prefix, name, options);
+
+  return new Promise((resolve) => {
+    https
+      .get(url, (res) => {
+        if (res.statusCode !== 200) {
+          console.warn(
+            `Iconify fetch failed: ${res.statusCode} for ${prefix}/${name}`,
+          );
+          resolve(null);
+          return;
+        }
+
+        let data = "";
+        res.on("data", (chunk) => (data += chunk));
+        res.on("end", () => {
+          // Validate it's actually SVG
+          if (data.trim().startsWith("<svg")) {
+            resolve(data);
+          } else {
+            console.warn(`Invalid SVG response for ${prefix}/${name}`);
             resolve(null);
+          }
         });
-    });
+      })
+      .on("error", (err) => {
+        console.warn(`Iconify fetch error: ${err.message}`);
+        resolve(null);
+      });
+  });
 }
 
 /**
@@ -131,10 +139,12 @@ export async function fetchIconifyIcon(
  * @returns [prefix, name] or null if invalid
  */
 export function parseIconifyValue(value: string): [string, string] | null {
-    // Support both / and : as separators
-    const match = value.match(/^([a-z0-9-]+)[\/:]([a-z0-9-]+)$/i);
-    if (!match) {return null;}
-    return [match[1].toLowerCase(), match[2].toLowerCase()];
+  // Support both / and : as separators
+  const match = value.match(/^([a-z0-9-]+)[\/:]([a-z0-9-]+)$/i);
+  if (!match) {
+    return null;
+  }
+  return [match[1].toLowerCase(), match[2].toLowerCase()];
 }
 
 // =============================================================================
@@ -153,20 +163,20 @@ export function parseIconifyValue(value: string): [string, string] | null {
  * - thumbs: Circle with thumbs up
  */
 export const DICEBEAR_STYLES = [
-    'avataaars',
-    'open-peeps',
-    'bottts',
-    'notionists',
-    'lorelei',
-    'personas',
-    'pixel-art',
-    'thumbs',
-    'big-ears',
-    'big-smile',
-    'identicon'
+  "avataaars",
+  "open-peeps",
+  "bottts",
+  "notionists",
+  "lorelei",
+  "personas",
+  "pixel-art",
+  "thumbs",
+  "big-ears",
+  "big-smile",
+  "identicon",
 ] as const;
 
-export type DiceBearStyle = typeof DICEBEAR_STYLES[number];
+export type DiceBearStyle = (typeof DICEBEAR_STYLES)[number];
 
 /**
  * Build DiceBear URL for an avatar
@@ -176,21 +186,21 @@ export type DiceBearStyle = typeof DICEBEAR_STYLES[number];
  * @returns Full URL to SVG avatar
  */
 export function getDiceBearUrl(
-    seed: string,
-    style: string = 'open-peeps',
-    options: DiceBearOptions = {}
+  seed: string,
+  style: string = "open-peeps",
+  options: DiceBearOptions = {},
 ): string {
-    const params = new URLSearchParams();
-    params.set('seed', seed);
-    
-    if (options.backgroundColor) {
-        params.set('backgroundColor', options.backgroundColor);
-    }
-    if (options.size) {
-        params.set('size', String(options.size));
-    }
-    
-    return `https://api.dicebear.com/7.x/${style}/svg?${params}`;
+  const params = new URLSearchParams();
+  params.set("seed", seed);
+
+  if (options.backgroundColor) {
+    params.set("backgroundColor", options.backgroundColor);
+  }
+  if (options.size) {
+    params.set("size", String(options.size));
+  }
+
+  return `https://api.dicebear.com/7.x/${style}/svg?${params}`;
 }
 
 /**
@@ -201,35 +211,37 @@ export function getDiceBearUrl(
  * @returns SVG string or null if fetch fails
  */
 export async function fetchDiceBearAvatar(
-    seed: string,
-    style: string = 'open-peeps',
-    options: DiceBearOptions = {}
+  seed: string,
+  style: string = "open-peeps",
+  options: DiceBearOptions = {},
 ): Promise<string | null> {
-    const url = getDiceBearUrl(seed, style, options);
-    
-    return new Promise((resolve) => {
-        https.get(url, (res) => {
-            if (res.statusCode !== 200) {
-                console.warn(`DiceBear fetch failed: ${res.statusCode} for ${seed}`);
-                resolve(null);
-                return;
-            }
-            
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                if (data.trim().startsWith('<svg')) {
-                    resolve(data);
-                } else {
-                    console.warn(`Invalid SVG response from DiceBear`);
-                    resolve(null);
-                }
-            });
-        }).on('error', (err) => {
-            console.warn(`DiceBear fetch error: ${err.message}`);
+  const url = getDiceBearUrl(seed, style, options);
+
+  return new Promise((resolve) => {
+    https
+      .get(url, (res) => {
+        if (res.statusCode !== 200) {
+          console.warn(`DiceBear fetch failed: ${res.statusCode} for ${seed}`);
+          resolve(null);
+          return;
+        }
+
+        let data = "";
+        res.on("data", (chunk) => (data += chunk));
+        res.on("end", () => {
+          if (data.trim().startsWith("<svg")) {
+            resolve(data);
+          } else {
+            console.warn(`Invalid SVG response from DiceBear`);
             resolve(null);
+          }
         });
-    });
+      })
+      .on("error", (err) => {
+        console.warn(`DiceBear fetch error: ${err.message}`);
+        resolve(null);
+      });
+  });
 }
 
 // =============================================================================
@@ -240,15 +252,15 @@ export async function fetchDiceBearAvatar(
  * Check if a URL is reachable (HEAD request)
  */
 export async function isUrlReachable(url: string): Promise<boolean> {
-    return new Promise((resolve) => {
-        const req = https.request(url, { method: 'HEAD' }, (res) => {
-            resolve(res.statusCode === 200);
-        });
-        req.on('error', () => resolve(false));
-        req.setTimeout(5000, () => {
-            req.destroy();
-            resolve(false);
-        });
-        req.end();
+  return new Promise((resolve) => {
+    const req = https.request(url, { method: "HEAD" }, (res) => {
+      resolve(res.statusCode === 200);
     });
+    req.on("error", () => resolve(false));
+    req.setTimeout(5000, () => {
+      req.destroy();
+      resolve(false);
+    });
+    req.end();
+  });
 }

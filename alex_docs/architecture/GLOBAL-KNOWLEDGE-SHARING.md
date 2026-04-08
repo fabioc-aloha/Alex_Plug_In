@@ -46,7 +46,7 @@ flowchart LR
 
 ### First User (Creator)
 
-1. Run `Alex: Initialize` in your project
+1. Initialize architecture: `node .github/muscles/sync-architecture.cjs`
 2. Choose **"Create New"** when prompted for Global Knowledge
 3. Follow the next steps to push to GitHub:
    ```bash
@@ -58,7 +58,7 @@ flowchart LR
 
 ### Team Members
 
-1. Run `Alex: Initialize` in your project
+1. Initialize architecture: `node .github/muscles/sync-architecture.cjs`
 2. Choose **"Connect GitHub"** when prompted
 3. Enter the owner name: `fabioc-aloha` (repo name is standardized)
 4. For private repos, sign in with GitHub when prompted (or configure PAT)

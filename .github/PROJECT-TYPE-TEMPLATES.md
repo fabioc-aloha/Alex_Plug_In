@@ -1022,8 +1022,11 @@ your-governance/
 # 1. Copy Alex cognitive architecture (everything is in .github/)
 cp -r .github/ your-project/
 
-# 2. Initialize via VS Code Command Palette (Ctrl+Shift+P):
-Alex: Dream (Neural Maintenance)
+# 2. Initialize architecture:
+node .github/muscles/sync-architecture.cjs
+
+# 3. Run dream maintenance:
+node .github/muscles/brain-qa.cjs
 
 # 3. Start collaborating
 "Alex, analyze this project and suggest improvements..."

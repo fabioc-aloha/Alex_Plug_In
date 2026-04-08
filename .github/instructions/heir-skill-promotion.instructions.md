@@ -115,7 +115,7 @@ Before promoting, assess whether the capability is a trifecta candidate:
 
 **Option A (Manual)**: Copy skill folder from heir to Master's `.github/skills/`
 
-**Option B (Tool)**: Use `alex_knowledge_promote` tool to promote a skill to global knowledge
+**Option B (Prompt)**: Use the promote prompt to interactively promote a skill to global knowledge
 
 ### 6. Update Master's Catalog
 - Add to `copilot-instructions.md` skill list
@@ -246,16 +246,15 @@ Heirs detect new skills via:
 
 ### `Alex: Inherit Skill from Global Knowledge`
 
-Manual command for heirs to pull skills from Global Knowledge:
+Manual process for heirs to pull skills from Global Knowledge:
 
-```
-Command Palette → Alex: Inherit Skill from Global Knowledge
-```
+1. Check available inheritable skills in the Global Knowledge repository
+2. Copy skill trifecta (instruction + skill + prompt) to the heir project
+3. Register in `synapses.json` with `inheritedFrom` tracking
 
 **Features**:
-- Multi-select QuickPick (batch inheritance)
-- Shows only `inheritance: "inheritable"` skills not already present
-- Adds `inheritedFrom` tracking to `synapses.json`
+- Only `inheritance: "inheritable"` skills are eligible
+- `inheritedFrom` tracking in `synapses.json` prevents drift
 - Master Alex protection warning (kill switch aware)
 
 **Inheritance Tracking**:

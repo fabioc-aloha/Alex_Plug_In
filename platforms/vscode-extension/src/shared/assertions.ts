@@ -102,4 +102,3 @@ export function assertAbsolutePath(filePath: string, name: string): void {
     );
   }
 }
-

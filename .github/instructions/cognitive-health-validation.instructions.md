@@ -150,7 +150,7 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 **Procedure:**
 
 1. **Phase 5.1: Dream Synapse Validation**
-   - Run `Alex: Dream (Neural Maintenance)`
+   - Run `node .github/muscles/brain-qa.cjs` or use the dream prompt
    - Verify newly added synapses are valid
    - Confirm bidirectional connections have reciprocal entries
 2. **Phase 5.2: brain-qa Structural Validation**

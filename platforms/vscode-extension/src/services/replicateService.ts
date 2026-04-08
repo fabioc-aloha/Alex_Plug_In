@@ -195,7 +195,8 @@ export const REPLICATE_MODELS: Record<string, ReplicateModel> = {
     id: "ideogram-ai/ideogram-v3-quality",
     label: "Ideogram v3 Quality",
     cost: "$0.09",
-    bestFor: "Highest quality text rendering — premium typography, detailed signage",
+    bestFor:
+      "Highest quality text rendering — premium typography, detailed signage",
     keywords: [
       "ideogram quality",
       "best text",

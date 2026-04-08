@@ -62,21 +62,21 @@ For questions not suitable for public discussion:
 
 ### Common Issues
 
-| Issue                        | Solution                            |
-| ---------------------------- | ----------------------------------- |
-| Extension not loading        | Check VS Code version >= 1.109      |
-| Commands not working         | Run `Alex: Initialize Architecture` |
-| Synapse errors               | Run `@alex /dream` to repair        |
-| Chat participant not showing | Ensure GitHub Copilot is active     |
+| Issue                        | Solution                                         |
+| ---------------------------- | ------------------------------------------------ |
+| Extension not loading        | Check VS Code version >= 1.109                   |
+| Commands not working         | Run `node .github/muscles/sync-architecture.cjs` |
+| Synapse errors               | Use the dream prompt to repair                   |
+| Chat participant not showing | Ensure GitHub Copilot is active                  |
 
 ### Useful Commands
 
-| Command                         | What It Does               |
-| ------------------------------- | -------------------------- |
-| `@alex /status`                 | Check architecture health  |
-| `@alex /dream`                  | Run neural maintenance     |
-| `@alex /selfactualize`          | Comprehensive health check |
-| `Alex: Initialize Architecture` | Deploy/reset architecture  |
+| Action                     | How                                          |
+| -------------------------- | -------------------------------------------- |
+| Check architecture health  | Use the status prompt (agent mode)           |
+| Run neural maintenance     | Use the dream prompt (agent mode)            |
+| Comprehensive health check | Use the selfactualize prompt                 |
+| Deploy/reset architecture  | `node .github/muscles/sync-architecture.cjs` |
 
 ## 📦 Version Support
 

@@ -24,7 +24,7 @@ Implement secure credential storage using VS Code SecretStorage API for API keys
 4. **Implement UI**: Quick pick for management + input prompts with validation
 5. **Integrate features**: Update code to use `getToken()` instead of `process.env`
 6. **Add migration**: Copy env vars to SecretStorage (non-destructive)
-7. **Register command**: Add "Manage API Keys & Secrets" to Command Palette
+7. **Register command**: Add credential management to the extension's command surface
 8. **Security review**: Check for hardcoded credentials, logging issues
 
 ## Token Registry Template
@@ -87,5 +87,3 @@ if (!apiKey) {
 ## Start
 
 Beginning secrets management. What service needs credential storage, or would you like to review existing code?
-
-

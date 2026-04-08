@@ -12,7 +12,7 @@ Export everything Alex knows about me into a single portable document I can past
 1. Read `.github/config/user-profile.json` for identity, career, credentials, and preferences
 2. Read `/memories/` directory for all user memory files (patterns, lessons, instructions)
 3. Check `/memories/session/` for any active session notes
-4. Query `alex_cognitive_user_profile` tool for cognitive profile data
+4. Read `.github/config/user-profile.json` for cognitive profile data
 5. Check repository memories from prior agent interactions (available in system context)
 6. Read Active Context from `.github/copilot-instructions.md` for current phase/mode/version
 

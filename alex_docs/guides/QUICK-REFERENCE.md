@@ -42,27 +42,24 @@
 
 ---
 
-## VS Code Commands
+## Operations
 
-Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
+Available via prompts (agent mode), scripts, or extension Command Palette:
 
-**Table 2:** *VS Code Command Palette Commands*
+**Table 2:** *Alex Operations*
 
-| Command                                     | Description                                                 |
-| ------------------------------------------- | ----------------------------------------------------------- |
-| `Alex: Initialize Architecture`             | Deploy Alex to current project                              |
-| `Alex: Upgrade Architecture`                | Update to latest Alex version                               |
-| `Alex: Dream (Neural Maintenance)`          | Run health check and maintenance                            |
-| `Alex: Meditate`                            | Knowledge consolidation session                             |
-| `Alex: Self-Actualize`                      | Deep architecture assessment                                |
-| `Alex: Deep Brain QA`                       | Structural validation and consistency check                 |
-| `Alex: Setup Environment`                   | Optimize VS Code settings for Alex                          |
-| `Alex: Open Health Dashboard`               | Rich webview with architecture visualization                |
-| `Alex: Open Memory Dashboard`               | Memory system visualization                                 |
-| `Alex: Skill & Knowledge Review`            | Review staleness-prone skills (security, privacy, AI, APIs) |
-| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository                              |
-| `Alex: Release Preflight`                   | Pre-publish validation gates                                |
-| `Alex: Report Issue / View Diagnostics`     | View local telemetry for bug reports                        |
+| Operation                           | Description                                                 |
+| ----------------------------------- | ----------------------------------------------------------- |
+| Initialize Architecture             | Deploy Alex to current project                              |
+| Upgrade Architecture                | Update to latest Alex version                               |
+| Dream (Neural Maintenance)          | Run health check and maintenance                            |
+| Meditate                            | Knowledge consolidation session                             |
+| Self-Actualize                      | Deep architecture assessment                                |
+| Deep Brain QA                       | Structural validation and consistency check                 |
+| Setup Environment                   | Optimize VS Code settings for Alex                          |
+| Skill & Knowledge Review            | Review staleness-prone skills (security, privacy, AI, APIs) |
+| Inherit Skill from Global Knowledge | Pull skills from GK repository                              |
+| Release Preflight                   | Pre-publish validation gates                                |
 
 ---
 
@@ -249,8 +246,8 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 
 ```text
 1. Open project in VS Code
-2. Run "Alex: Initialize Architecture"
-3. Pull existing knowledge: @alex /sync
+2. Run: node .github/muscles/sync-architecture.cjs
+3. Pull existing knowledge: ask Alex to sync
 ```
 
 ### Capturing a Learning
@@ -273,10 +270,10 @@ View in VS Code Output panel (`Ctrl+Shift+U`):
 ### Debugging Knowledge Issues
 
 ```text
-1. @alex /knowledgestatus
+1. Ask Alex for knowledge status
 2. Check output channel
-3. @alex /sync (if needed)
-4. "Alex: Dream" for architecture health
+3. Ask Alex to sync (if needed)
+4. Run brain-qa.cjs for architecture health
 ```
 
 ---

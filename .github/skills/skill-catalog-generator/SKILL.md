@@ -362,7 +362,7 @@ ${userSkills.length > 0 ? generateUserSkillsSection(userSkills) : ''}
 
 ## VS Code Integration
 
-### Command: `Alex: Show Skill Catalog`
+### Skill Catalog Generation
 
 ```typescript
 vscode.commands.registerCommand('alex.showSkillCatalog', async () => {

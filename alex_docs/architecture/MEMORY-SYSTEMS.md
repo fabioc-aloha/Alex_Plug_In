@@ -464,7 +464,7 @@ flowchart LR
     end
 
     subgraph "Promotion Process"
-        CMD["@alex /promote"]
+        CMD["Promote action"]
         COPY[Copy content]
         INDEX[Update index]
         SYNC[Trigger sync]

@@ -37,7 +37,7 @@ When an heir improves a skill:
 2. Human reviews and validates improvement
 3. Human manually promotes to Master Alex:
    - Copy improvement to Master's .github/skills/
-   - Validate with `Alex: Dream`
+   - Validate with dream protocol (`brain-qa.cjs`)
 4. Master syncs to Global Knowledge via curation protocol
 5. Other heirs can re-inherit the improved version
 ```

@@ -106,6 +106,17 @@
                 ]
             }
         ],
+        "SubagentStop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "node .github/muscles/hooks/subagent-stop.cjs",
+                        "timeout": 3
+                    }
+                ]
+            }
+        ],
         "PreCompact": [
             {
                 "hooks": [

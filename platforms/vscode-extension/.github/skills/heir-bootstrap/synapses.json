@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "2.0.0",
+  "skillId": "heir-bootstrap",
+  "version": "1.0.0",
+  "description": "Post-Initialize wizard that tailors Alex's cognitive architecture to a specific heir project",
+  "category": "architecture",
+  "connections": [
+    {
+      "target": ".github/skills/bootstrap-learning/SKILL.md",
+      "type": "relates",
+      "strength": 0.8,
+      "when": "acquiring project-specific domain knowledge during bootstrap phases",
+      "yields": "Structured learning protocol for unknown tech stacks"
+    },
+    {
+      "target": ".github/skills/persona-detection/SKILL.md",
+      "type": "uses",
+      "strength": 0.7,
+      "when": "detecting project type and workspace classification during Phase 1",
+      "yields": "Automated project persona identification"
+    },
+    {
+      "target": ".github/instructions/research-first-workflow.instructions.md",
+      "type": "relates",
+      "strength": 0.7,
+      "when": "encoding project-specific knowledge before tailoring architecture",
+      "yields": "4-dimension gap analysis for heir project readiness"
+    },
+    {
+      "target": ".github/skills/skill-building/SKILL.md",
+      "type": "relates",
+      "strength": 0.6,
+      "when": "wizard identifies need for project-specific skills",
+      "yields": "Skill creation pipeline for heir-specific capabilities"
+    },
+    {
+      "target": ".github/skills/memory-activation/SKILL.md",
+      "type": "activates",
+      "strength": 0.9,
+      "when": "user requests heir bootstrap, post-initialize setup, or project tailoring",
+      "yields": "Routing to heir-bootstrap wizard via activation index"
+    }
+  ]
+}

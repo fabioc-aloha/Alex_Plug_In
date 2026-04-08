@@ -11,7 +11,7 @@
 | **[User Manual](./guides/USER-MANUAL.md)**                   | **START HERE**: Complete guide to using Alex     |
 | [Quick Reference](./guides/QUICK-REFERENCE.md)               | Commands, tools, and shortcuts cheat sheet       |
 | [Environment Setup](./guides/ENVIRONMENT-SETUP.md)           | Prerequisites and workspace configuration        |
-| [Initialization Process](./guides/INITIALIZATION-PROCESS.md) | What happens when you run `Alex: Initialize`     |
+| [Initialization Process](./guides/INITIALIZATION-PROCESS.md) | What happens during architecture initialization  |
 | [Use Cases Guide](./guides/USE-CASES.md)                     | Deep dive into every domain Alex supports        |
 | [VS Code Setup](./guides/VSCODE-SETUP.md)                    | VS Code configuration and recommended extensions |
 | [API Keys](./guides/API-KEYS.md)                             | External service key management                  |
@@ -111,6 +111,6 @@
 ## Quick Start
 
 1. **Install**: `code --install-extension fabioc-aloha.alex-cognitive-architecture`
-2. **Initialize**: Command Palette > `Alex: Initialize Architecture`
-3. **Chat**: Copilot Chat > `@alex hello`
+2. **Initialize**: Run `node .github/muscles/sync-architecture.cjs` or use the extension
+3. **Chat**: Ask Alex anything in Copilot Chat
 4. **Learn More**: Start with the [User Manual](./guides/USER-MANUAL.md)

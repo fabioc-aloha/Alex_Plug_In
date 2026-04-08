@@ -214,7 +214,7 @@ All declarative agents undergo **Responsible AI (RAI) validation** during publis
 
 ### How to Export
 
-**Command Palette:**
+Use the export-memory prompt, or if the extension is installed:
 1. Press `Ctrl+Shift+P`
 2. Type "Alex: Export for M365 Copilot"
 3. Press Enter
@@ -267,11 +267,7 @@ Due to M365 token limits, 15 high-value skills are embedded:
 
 ### Step 1: Build Knowledge in VS Code
 
-```
-@alex /saveinsight    # Save insights as you learn
-@alex /promote        # Promote project knowledge
-@alex /knowledgestatus # Check what's available
-```
+Save insights as you learn, promote project knowledge to global, and check status regularly.
 
 ### Step 2: Export
 
@@ -391,7 +387,7 @@ Azure Functions API for real-time sync:
 
 | Issue                          | Solution                                              |
 | ------------------------------ | ----------------------------------------------------- |
-| "No global knowledge found"    | Run `Alex: Initialize`, then `@alex /saveinsight`     |
+| "No global knowledge found"    | Initialize architecture, then save some insights      |
 | "M365 integration is disabled" | Enable `alex.m365.enabled` in settings                |
 | Files not appearing in M365    | Verify files in `OneDrive/Alex-Memory/`, refresh M365 |
 

@@ -97,7 +97,7 @@ Agents are personas that Alex can switch into for specialized work:
 | **Azure**         | Azure development guidance with MCP tools      |
 | **M365**          | Microsoft 365 and Teams development            |
 
-You can invoke them directly: "@Alex /builder build the API endpoint" or Alex routes to the right agent automatically based on your request.
+You can invoke them directly in agent mode: use the builder prompt to "build the API endpoint" or Alex routes to the right agent automatically based on your request.
 
 ## Muscles: Automation
 

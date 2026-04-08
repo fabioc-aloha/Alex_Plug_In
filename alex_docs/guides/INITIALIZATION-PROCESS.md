@@ -1,6 +1,6 @@
 # Alex Initialization Process
 
-> Complete guide to how `Alex: Initialize Architecture` works
+> Complete guide to how architecture initialization works
 
 ## Overview
 
@@ -18,7 +18,7 @@ The initialization process deploys the Alex Cognitive Architecture to a workspac
 
 ### Step 1: Workspace Detection
 
-When you run `Alex: Initialize Architecture`:
+When you run the initialization operation (via `sync-architecture.cjs` or the extension):
 
 1. The extension checks if a workspace folder is open
 2. If multiple folders are open, prompts you to select one
@@ -47,7 +47,7 @@ If Alex is already installed (`.github/copilot-instructions.md` exists):
 
 | Option                 | Action                                        |
 | ---------------------- | --------------------------------------------- |
-| **Upgrade Instead**    | Runs `Alex: Upgrade` to preserve your changes |
+| **Upgrade Instead**    | Runs upgrade to preserve your changes         |
 | **Reset Architecture** | Deletes all memory files and reinstalls fresh |
 | **Cancel**             | Aborts the operation                          |
 
@@ -198,10 +198,10 @@ User can accept all, choose specific settings, or skip.
 
 Shows completion message with options:
 
-| Button              | Action                                  |
-| ------------------- | --------------------------------------- |
-| **Getting Started** | Opens webview with usage instructions   |
-| **Open Chat**       | Opens Copilot Chat with `@alex /status` |
+| Button              | Action                                |
+| ------------------- | ------------------------------------- |
+| **Getting Started** | Opens webview with usage instructions |
+| **Open Chat**       | Opens Copilot Chat                    |
 
 ---
 
@@ -280,11 +280,11 @@ Each team member clones the shared repo as a sibling to their projects, and Alex
 
 ## Related Commands
 
-| Command                            | Purpose                                 |
-| ---------------------------------- | --------------------------------------- |
-| `Alex: Upgrade Architecture`       | Update to new version, preserve changes |
-| `Alex: Reset Architecture`         | Delete all memory, fresh install        |
-| `Alex: Dream (Neural Maintenance)` | Health check and synapse validation     |
+| Operation                  | Purpose                                 |
+| -------------------------- | --------------------------------------- |
+| Upgrade Architecture       | Update to new version, preserve changes |
+| Reset Architecture         | Delete all memory, fresh install        |
+| Dream (Neural Maintenance) | Health check and synapse validation     |
 
 ---
 

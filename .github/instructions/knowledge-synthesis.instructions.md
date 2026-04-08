@@ -13,7 +13,7 @@ Abstraction protocol, GI/GK storage formats, promotion criteria, quality gates â
 
 ## Cross-Domain Synthesis Tool
 
-During meditation Phase 3, invoke `alex_cognitive_cross_domain_synthesis` to get a data-driven report of domain coverage and under-connected pairs. Apply the Transfer Test (structural, actionable, independent) before creating connections. See the knowledge-synthesis skill for connection types and output format.
+During meditation Phase 3, analyze episodic memories for cross-domain synthesis to identify domain coverage and under-connected pairs. Apply the Transfer Test (structural, actionable, independent) before creating connections. See the knowledge-synthesis skill for connection types and output format.
 
 ## The Synthesis Decision
 

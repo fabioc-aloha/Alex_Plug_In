@@ -43,7 +43,7 @@ See `memory-curation` skill for scope rules and the 3-workspace test.
 
 Evolve from consolidation (organizing what you know) to generation (creating new connections).
 
-1. Invoke the `alex_cognitive_cross_domain_synthesis` tool to analyze episodic memories
+1. Analyze episodic memories for cross-domain pattern synthesis (identify domain coverage, under-connected pairs, and opportunity scores)
 2. Review the synthesis report: domain coverage, under-connected pairs, opportunity scores
 3. For each top synthesis candidate (3 max per meditation):
    - Read the episodic memories from both domains
@@ -98,7 +98,7 @@ Evolve from consolidation (organizing what you know) to generation (creating new
 
 ### Phase 8: Post-Meditation Synapse Validation
 
-1. Run `Alex: Dream (Neural Maintenance)` for automated health check
+1. Run `node .github/muscles/brain-qa.cjs` or use the dream prompt for automated health check
 2. Review generated report in `.github/episodic/`
 3. Verify newly added synapses are valid (target files exist)
 4. Confirm bidirectional connections have reciprocal entries
@@ -112,7 +112,7 @@ Evolve from consolidation (organizing what you know) to generation (creating new
 - Working memory > 7 rules → Execute consolidation
 - Domain learning complete → Consolidate and update Focus Trifectas in Active Context
 - Significant breakthrough → Create permanent memory
-- Cross-domain patterns → Run `alex_cognitive_cross_domain_synthesis` tool, then establish new synaptic connections
+- Cross-domain patterns → Analyze episodic memories for cross-domain synthesis, then establish new synaptic connections
 
 ## Pre-Meditation Optimization
 

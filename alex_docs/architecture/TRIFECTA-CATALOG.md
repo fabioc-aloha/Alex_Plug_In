@@ -92,7 +92,7 @@ Capabilities with all three memory system components — each justified by the "
 | Component   | File                                                          | Why It Exists                                                                                |
 | ----------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | Skill       | `.github/skills/dream-state/SKILL.md`                         | Domain knowledge: 6-phase protocol concepts, health metrics, dream vs meditation distinction |
-| Instruction | `.github/instructions/dream-state-automation.instructions.md` | Auto-loaded procedure: VS Code command integration, repair steps, consolidation mappings     |
+| Instruction | `.github/instructions/dream-state-automation.instructions.md` | Auto-loaded procedure: activation methods, repair steps, consolidation mappings              |
 | Prompt      | `.github/prompts/dream.prompt.md`                             | `/dream` — user invokes neural maintenance                                                   |
 
 ### Release Management

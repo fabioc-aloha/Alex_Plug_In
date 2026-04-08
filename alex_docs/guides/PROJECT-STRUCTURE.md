@@ -6,7 +6,7 @@
 
 ## Overview
 
-When you run **"Alex: Initialize Architecture"**, Alex deploys a cognitive memory system to your project's `.github/` folder. This document explains every file and folder.
+When you initialize the architecture (via `sync-architecture.cjs` or the extension's Initialize command), Alex deploys a cognitive memory system to your project's `.github/` folder. This document explains every file and folder.
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
@@ -371,11 +371,11 @@ Every memory file ends with a **Synapses** section mapping connections:
 
 **Table 19:** *Architecture Maintenance Commands*
 
-| Command                      | What It Does                                   |
-| ---------------------------- | ---------------------------------------------- |
-| `Alex: Dream`                | Validates synapses, repairs broken connections |
-| `Alex: Upgrade Architecture` | Updates to latest Alex version                 |
-| `Alex: Reset Architecture`   | Clean reinstall (backs up first)               |
+| Operation                     | What It Does                                   |
+| ----------------------------- | ---------------------------------------------- |
+| Dream (`brain-qa.cjs`)        | Validates synapses, repairs broken connections |
+| Upgrade (`sync-architecture`) | Updates to latest Alex version                 |
+| Reset (extension only)        | Clean reinstall (backs up first)               |
 
 ---
 
@@ -384,7 +384,7 @@ Every memory file ends with a **Synapses** section mapping connections:
 ### DO
 
 - ✅ Create skills in `.github/skills/` for project-specific knowledge
-- ✅ Run `Alex: Dream` periodically to maintain health
+- ✅ Run `node .github/muscles/brain-qa.cjs` periodically to maintain health
 - ✅ Add synapses when files relate to each other
 - ✅ Use meditation to consolidate learnings
 

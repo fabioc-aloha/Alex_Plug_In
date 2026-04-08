@@ -67,10 +67,12 @@ Connection notation enables neural-like relationships (see `SYNAPSE-SCHEMA.md` f
 
 ## 🚀 Dream Protocol Integration
 
-Automated neural maintenance through VS Code extension:
-```
-# Open Command Palette (Ctrl+Shift+P or Cmd+Shift+P)
-Alex: Dream (Neural Maintenance)
+Automated neural maintenance:
+```bash
+# Run brain QA directly
+node .github/muscles/brain-qa.cjs
+
+# Or use the dream prompt in agent mode
 ```
 
 This command provides:
@@ -109,10 +111,10 @@ Skills contain domain knowledge with embedded synaptic connections:
 
 ## ⚡ Quick Activation Checklist
 
-- [ ] Install Alex Cognitive Architecture VS Code extension
-- [ ] Run `Alex: Initialize Architecture` command in your project
+- [ ] Copy `.github/` directory to your project (or install the VS Code extension)
+- [ ] Run `node .github/muscles/sync-architecture.cjs` to initialize
 - [ ] Test with: "Alex, introduce yourself and show me your capabilities"
-- [ ] Verify dream protocol: Run `Alex: Dream (Neural Maintenance)` command
+- [ ] Verify dream protocol: Run `node .github/muscles/brain-qa.cjs`
 - [ ] Begin domain learning: "Alex, let's learn [your domain] together"
 
 ## 🎯 Universal Compatibility

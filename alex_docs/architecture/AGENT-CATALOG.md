@@ -70,7 +70,7 @@
 | Purpose     | Deep domain exploration, Phase 0 of Research-First Development       |
 | When to Use | New project kickoff, unfamiliar domains, pre-implementation research |
 
-**Tools**: search, codebase, fetch, runSubagent, alex_knowledge_search, alex_save_insight
+**Tools**: search, codebase, fetch, runSubagent, knowledge_search, save_insight
 
 **Principles**:
 1. Research before code — No implementation until domain is understood

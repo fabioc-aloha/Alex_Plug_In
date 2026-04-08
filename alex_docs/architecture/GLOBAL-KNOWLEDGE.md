@@ -207,10 +207,10 @@ flowchart LR
 
 **Figure 2:** *Global Knowledge Search Flow - Index filtering and content matching*
 
-**Via chat:**
+**Via chat or prompt:**
 
 ```text
-@alex /knowledge error handling async
+Ask Alex to search knowledge: "error handling async"
 ```
 
 **Via tool:**
@@ -224,10 +224,10 @@ The `alex_global_knowledge_search` tool with parameters:
 
 ### Saving Insights
 
-**Via chat:**
+**Via chat or prompt:**
 
 ```text
-@alex /saveinsight React's useEffect cleanup runs before the next effect, not just on unmount
+Ask Alex to save insight: "React's useEffect cleanup runs before the next effect, not just on unmount"
 ```
 
 **Via tool:**
@@ -245,10 +245,10 @@ The `alex_save_insight` tool with parameters:
 
 Move project-local skills to global knowledge:
 
-**Via chat:**
+**Via chat or prompt:**
 
 ```text
-@alex /promote .github/skills/api-design/SKILL.md
+Ask Alex to promote: .github/skills/api-design/SKILL.md
 ```
 
 **Via tool:**
@@ -261,10 +261,10 @@ The `alex_promote_knowledge` tool with parameters:
 
 ### Viewing Status
 
-**Via chat:**
+**Via chat or prompt:**
 
 ```text
-@alex /knowledgestatus
+Ask Alex for knowledge status
 ```
 
 Shows:
@@ -397,7 +397,7 @@ flowchart TD
 
 ### Knowledge Not Found
 
-1. Check if global knowledge exists: `@alex /knowledgestatus`
+1. Check if global knowledge exists: ask Alex for knowledge status
 2. Verify search terms match content
 3. Try broader search terms
 4. Check category/tag filters

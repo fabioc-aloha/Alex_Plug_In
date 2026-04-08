@@ -462,8 +462,9 @@ your-i18n-project/
 
 ### Step 1: Initialize Alex
 
-```text
-Ctrl+Shift+P → "Alex: Initialize Architecture"
+```bash
+node .github/muscles/sync-architecture.cjs
+# Or via extension: Ctrl+Shift+P → "Alex: Initialize Architecture"
 ```
 
 ### Step 2: Set Up Your Folder Structure

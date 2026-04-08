@@ -70,9 +70,10 @@ ls .github/episodic/*.md | wc -l                   # Meditation sessions (initia
 
 ### **2. Dream Protocol Validation**
 
-**Via VS Code Command Palette (`Ctrl+Shift+P`):**
-```
-Alex: Dream (Neural Maintenance)
+**Via script or prompt:**
+```bash
+node .github/muscles/brain-qa.cjs
+# Or use the dream prompt in agent mode
 ```
 
 **Expected Results:**
@@ -136,7 +137,7 @@ How do you approach this?"
 **Solutions**:
 - [ ] Verify Alex extension is installed in VS Code
 - [ ] Check that workspace folder is open (not just files)
-- [ ] Run `Alex: Initialize Architecture` if architecture not deployed
+- [ ] Run `node .github/muscles/sync-architecture.cjs` if architecture not deployed
 - [ ] Check VS Code output panel for error messages
 - [ ] Verify write permissions to workspace folder
 - [ ] Ensure `.github/episodic/` folder exists or can be created
@@ -153,9 +154,9 @@ How do you approach this?"
 - [ ] Verify file content not truncated
 
 ### **Issue**: Synaptic Network Errors
-**Solution**: Run dream protocol via Command Palette
-```
-Alex: Dream (Neural Maintenance)
+**Solution**: Run dream protocol
+```bash
+node .github/muscles/brain-qa.cjs
 ```
 
 **Review the generated report for:**
@@ -166,8 +167,8 @@ Alex: Dream (Neural Maintenance)
 
 ### **Issue**: Performance Problems
 **Solution**: Run comprehensive maintenance
-```
-Alex: Dream (Neural Maintenance)
+```bash
+node .github/muscles/brain-qa.cjs
 ```
 
 **Check dream report for:**

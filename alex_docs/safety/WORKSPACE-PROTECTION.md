@@ -15,13 +15,13 @@ The Workspace Protection System is a **5-layer kill switch** that prevents dange
 
 ### The Risk
 
-Some Alex commands can modify or delete the entire `.github/` folder:
+Some Alex operations can modify or delete the entire `.github/` folder:
 
-| Command | Risk |
-|---------|------|
-| `Alex: Initialize Architecture` | Overwrites `.github/` with packaged template |
-| `Alex: Reset Architecture` | Deletes entire `.github/` folder |
-| `Alex: Upgrade Architecture` | Modifies architecture files |
+| Operation               | Risk                                         |
+| ----------------------- | -------------------------------------------- |
+| Initialize Architecture | Overwrites `.github/` with packaged template |
+| Reset Architecture      | Deletes entire `.github/` folder             |
+| Upgrade Architecture    | Modifies architecture files                  |
 
 If run in the wrong workspace (like the extension source code), these commands could corrupt the living cognitive architecture.
 
@@ -120,11 +120,11 @@ The marker file uniquely identifies Master Alex (the extension source workspace)
 
 ### Why a Marker File?
 
-| Protection Method | Weakness |
-|-------------------|----------|
-| Settings-based | Old extension code might ignore settings |
-| Path-based | User might have similar paths elsewhere |
-| **Marker file** | ✅ Definitive, physical, cannot be packaged |
+| Protection Method | Weakness                                   |
+| ----------------- | ------------------------------------------ |
+| Settings-based    | Old extension code might ignore settings   |
+| Path-based        | User might have similar paths elsewhere    |
+| **Marker file**   | ✅ Definitive, physical, cannot be packaged |
 
 ---
 
@@ -177,19 +177,19 @@ When a dangerous command runs in a protected workspace:
 ⚙️ Setting check: protectedMode = true
 🏗️ Auto-detect: Has platforms/vscode-extension folder
 ✅ Final result: PROTECTED
-🛑 Alex: Initialize BLOCKED for protected workspace
+🛑 Initialize BLOCKED for protected workspace
 ```
 
 ---
 
 ## Related Files
 
-| File | Purpose |
-|------|---------|
-| `.github/config/MASTER-ALEX-PROTECTED.json` | Marker file (Master Alex only) |
-| `.vscode/settings.json` | Workspace settings with protection |
-| `platforms/vscode-extension/.vscodeignore` | Excludes marker from package |
-| `platforms/vscode-extension/src/shared/utils.ts` | Protection implementation |
+| File                                             | Purpose                            |
+| ------------------------------------------------ | ---------------------------------- |
+| `.github/config/MASTER-ALEX-PROTECTED.json`      | Marker file (Master Alex only)     |
+| `.vscode/settings.json`                          | Workspace settings with protection |
+| `platforms/vscode-extension/.vscodeignore`       | Excludes marker from package       |
+| `platforms/vscode-extension/src/shared/utils.ts` | Protection implementation          |
 
 ---
 
@@ -214,13 +214,13 @@ checkProtectionAndWarn(commandName: string): Promise<boolean>
 
 ### Safety Imperatives
 
-| # | Rule |
-|---|------|
-| I1 | NEVER test extension in Master Alex workspace |
-| I2 | ALWAYS use F5 + Sandbox for testing |
-| I3 | NEVER run Initialize on Master Alex |
-| I4 | NEVER run Reset on Master Alex |
-| I5 | COMMIT before risky operations |
+| #   | Rule                                          |
+| --- | --------------------------------------------- |
+| I1  | NEVER test extension in Master Alex workspace |
+| I2  | ALWAYS use F5 + Sandbox for testing           |
+| I3  | NEVER run Initialize on Master Alex           |
+| I4  | NEVER run Reset on Master Alex                |
+| I5  | COMMIT before risky operations                |
 
 ---
 

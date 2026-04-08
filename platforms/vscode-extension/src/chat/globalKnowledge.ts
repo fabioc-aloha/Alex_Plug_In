@@ -1060,6 +1060,4 @@ export {
   autoPromoteDuringMeditation,
   getGlobalKnowledgeSummary,
 } from "./globalKnowledgeOps";
-export {
-  registerGlobalKnowledgeTools,
-} from "./globalKnowledgeTools";
+export { registerGlobalKnowledgeTools } from "./globalKnowledgeTools";

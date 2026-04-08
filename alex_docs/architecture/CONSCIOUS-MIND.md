@@ -49,7 +49,7 @@ flowchart TB
     end
 
     USER(("👤 User")) -->|"Deliberate Action"| CHAT
-    USER -->|"Command Palette"| COMMANDS
+    USER -->|"Prompts / Scripts"| COMMANDS
     CHAT --> TOOLS
 
     style CONSCIOUS fill:#e8f5e9,stroke:#2e7d32
@@ -72,36 +72,29 @@ The primary interface for conscious interaction:
 
 Alex responds with personality, context awareness, and access to all cognitive tools.
 
-### Slash Commands
+### Actions
 
-**Table 1:** *Alex Chat Slash Commands*
+**Table 1:** *Alex Conscious Actions (via prompts or agent mode)*
 
-| Command              | Purpose                                 | Example                                        |
-| -------------------- | --------------------------------------- | ---------------------------------------------- |
-| `/meditate`          | Consolidate knowledge into memory files | `@alex /meditate learned about React hooks`    |
-| `/dream`             | Run neural maintenance                  | `@alex /dream`                                 |
-| `/selfactualize`     | Deep architecture assessment            | `@alex /selfactualize`                         |
-| `/learn [topic]`     | Acquire domain knowledge                | `@alex /learn TypeScript generics`             |
-| `/session [topic]`   | Start focused learning session          | `@alex /session React hooks`                   |
-| `/status`            | Check architecture health               | `@alex /status`                                |
-| `/knowledge [query]` | Search global knowledge                 | `@alex /knowledge error handling`              |
-| `/saveinsight`       | Save a learning                         | `@alex /saveinsight React useEffect cleanup`   |
-| `/promote`           | Promote local knowledge to global       | `@alex /promote .github/skills/react/SKILL.md` |
-| `/knowledgestatus`   | View global knowledge stats             | `@alex /knowledgestatus`                       |
-| `/sync`              | Sync with cloud (manual)                | `@alex /sync`                                  |
-| `/push`              | Push to cloud                           | `@alex /push`                                  |
-| `/pull`              | Pull from cloud                         | `@alex /pull`                                  |
-| `/azure [query]`     | Azure development help                  | `@alex /azure create function app`             |
-| `/m365 [query]`      | M365 development help                   | `@alex /m365 teams bot`                        |
-| `/profile`           | View/update preferences                 | `@alex /profile`                               |
+| Action            | Purpose                                 | How                                    |
+| ----------------- | --------------------------------------- | -------------------------------------- |
+| meditate          | Consolidate knowledge into memory files | Use the meditate prompt                |
+| dream             | Run neural maintenance                  | Use the dream prompt or `brain-qa.cjs` |
+| selfactualize     | Deep architecture assessment            | Use the selfactualize prompt           |
+| learn [topic]     | Acquire domain knowledge                | Use the learn prompt                   |
+| status            | Check architecture health               | Ask Alex for status                    |
+| knowledge [query] | Search global knowledge                 | Ask Alex to search knowledge           |
+| saveinsight       | Save a learning                         | Ask Alex to save an insight            |
+| promote           | Promote local knowledge to global       | Ask Alex to promote a skill            |
+| knowledgestatus   | View global knowledge stats             | Ask Alex for knowledge status          |
 
 ---
 
-## VS Code Commands
+## Core Operations
 
-Access via Command Palette (`Ctrl+Shift+P`):
+These operations can be invoked via prompts (agent mode), scripts, or the VS Code extension:
 
-### Alex: Initialize Architecture
+### Initialize Architecture
 
 Deploys the complete cognitive architecture to a new project:
 
@@ -110,7 +103,9 @@ Deploys the complete cognitive architecture to a new project:
 - Sets up synapse network
 - Registers project in global registry
 
-### Alex: Dream (Neural Maintenance)
+**Script**: `node .github/muscles/sync-architecture.cjs`
+
+### Dream (Neural Maintenance)
 
 Runs automated health checks and repairs:
 
@@ -128,7 +123,9 @@ flowchart LR
 
 **Figure 2:** *Dream Maintenance Flow - Automated health check and repair process*
 
-### Alex: Self-Actualize (Deep Meditation)
+**Script**: `node .github/muscles/brain-qa.cjs` or use the dream prompt
+
+### Self-Actualize (Deep Meditation)
 
 Comprehensive 5-phase assessment:
 
@@ -138,7 +135,9 @@ Comprehensive 5-phase assessment:
 4. **Recommendation Generation** - Identify improvements
 5. **Session Documentation** - Create meditation record
 
-### Alex: Upgrade Architecture
+**Prompt**: Use the selfactualize prompt in agent mode
+
+### Upgrade Architecture
 
 Updates workspace files to latest version while preserving:
 
@@ -147,13 +146,7 @@ Updates workspace files to latest version while preserving:
 - Episodic memory records
 - Project-specific configurations
 
-### Alex: Sync/Push/Pull Knowledge
-
-Manual cloud synchronization controls:
-
-- **Sync** - Bidirectional merge (recommended)
-- **Push** - Upload local to cloud
-- **Pull** - Download cloud to local
+**Script**: `node .github/muscles/sync-architecture.cjs`
 
 ---
 
@@ -249,7 +242,7 @@ flowchart TD
 End productive sessions with meditation:
 
 ```
-@alex /meditate I learned about the adapter pattern today and how it helps with legacy code integration
+Use the meditate prompt: "I learned about the adapter pattern today and how it helps with legacy code integration"
 ```
 
 ### 2. Save Valuable Insights
@@ -257,15 +250,15 @@ End productive sessions with meditation:
 When you solve a tricky problem:
 
 ```
-@alex /saveinsight The fix for React hydration mismatch is to use useEffect for client-only code
+Ask Alex to save insight: "The fix for React hydration mismatch is to use useEffect for client-only code"
 ```
 
 ### 3. Periodic Health Checks
 
 Run dream protocol weekly:
 
-```
-@alex /dream
+```bash
+node .github/muscles/brain-qa.cjs
 ```
 
 ### 4. Promote Reusable Knowledge
@@ -273,7 +266,7 @@ Run dream protocol weekly:
 When skill knowledge applies to other projects:
 
 ```text
-@alex /promote .github/skills/api-patterns/SKILL.md
+Ask Alex to promote: .github/skills/api-patterns/SKILL.md
 ```
 
 ---

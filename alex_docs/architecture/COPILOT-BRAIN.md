@@ -108,7 +108,7 @@ const ctx = await readActiveContext(root);
 | Active Context defaults | Master-curated trifectas                     | Generic defaults (`code-review, testing-strategies, deep-thinking`) |
 | Last Assessed           | Date + version                               | `never` (until first self-actualization)                            |
 
-The heir file is what gets **copied to user projects** during `Alex: Initialize Architecture`.
+The heir file is what gets **copied to user projects** during architecture initialization (`sync-architecture.cjs`).
 
 ## Token Budget
 

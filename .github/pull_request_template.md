@@ -54,7 +54,7 @@ For changes involving cognitive science concepts, provide empirical backing:
 ## Testing Performed
 
 ### Automated Validation
-- [ ] `Alex: Dream (Neural Maintenance)` - Passed (HEALTHY status, 0 broken synapses)
+- [ ] Dream protocol (via `node .github/muscles/brain-qa.cjs` or dream prompt) - Passed (HEALTHY status, 0 broken synapses)
 - [ ] All existing tests pass
 
 ### Manual Validation

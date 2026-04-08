@@ -63,7 +63,7 @@ Deprecated-to-current file resolution for automatic repair:
 | Mode | Unconscious, automated | Conscious, manual |
 | Focus | Maintenance, diagnostics | Knowledge consolidation |
 | Creates files? | Reports only | Memory files + synapses |
-| Activation | VS Code command | User-requested |
+| Activation | Prompt or script (`brain-qa.cjs`) | User-requested |
 | Analogy | REM sleep | Contemplative meditation |
 
 ## Quality Principles

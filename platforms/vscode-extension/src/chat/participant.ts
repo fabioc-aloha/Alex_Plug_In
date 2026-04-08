@@ -83,8 +83,6 @@ import {
   handleLearnCommand,
   handleStatusCommand,
   handleModelCommand,
-  handleAzureCommand,
-  handleM365Command,
   handleProfileCommand,
 } from "./handlers/coreHandlers";
 import {
@@ -93,18 +91,10 @@ import {
   handleGreetingWithSelfActualization,
   handleSelfActualizeCommand,
   handleKnowledgeCommand,
-  handleSaveInsightCommand,
   handlePromoteCommand,
   handleKnowledgeStatusCommand,
   handleDocsCommand,
-  handleHelpCommand,
   handleForgetCommand,
-  handleConfidenceCommand,
-  handleCreativeCommand,
-  handleVerifyCommand,
-  handleJourneyCommand,
-  handleMarpCommand,
-  handlePresentationCommand,
 } from "./handlers/workflowHandlers";
 
 // ============================================================================
@@ -554,14 +544,6 @@ async function handleAlexRequest(
     return await handleModelCommand(request, context, stream, token);
   }
 
-  if (request.command === "azure") {
-    return await handleAzureCommand(request, context, stream, token);
-  }
-
-  if (request.command === "m365") {
-    return await handleM365Command(request, context, stream, token);
-  }
-
   if (request.command === "profile") {
     return await handleProfileCommand(request, context, stream, token);
   }
@@ -579,10 +561,6 @@ async function handleAlexRequest(
     return await handleKnowledgeCommand(request, context, stream, token);
   }
 
-  if (request.command === "saveinsight") {
-    return await handleSaveInsightCommand(request, context, stream, token);
-  }
-
   if (request.command === "promote") {
     return await handlePromoteCommand(request, context, stream, token);
   }
@@ -596,44 +574,9 @@ async function handleAlexRequest(
     return await handleDocsCommand(request, context, stream, token);
   }
 
-  // Help command - discoverability
-  if (request.command === "help") {
-    return await handleHelpCommand(request, context, stream, token);
-  }
-
   // Forget command - selective memory cleanup
   if (request.command === "forget") {
     return await handleForgetCommand(request, context, stream, token);
-  }
-
-  // Confidence command - epistemic integrity
-  if (request.command === "confidence") {
-    return await handleConfidenceCommand(request, context, stream, token);
-  }
-
-  // Creative mode command - brainstorming/ideation
-  if (request.command === "creative") {
-    return await handleCreativeCommand(request, context, stream, token);
-  }
-
-  // Verify command - multi-turn verification for high-stakes decisions
-  if (request.command === "verify") {
-    return await handleVerifyCommand(request, context, stream, token);
-  }
-
-  // Journey command - curated learning paths
-  if (request.command === "journey") {
-    return await handleJourneyCommand(request, context, stream, token);
-  }
-
-  // Marp command - Marp markdown presentations
-  if (request.command === "marp") {
-    return await handleMarpCommand(request, context, stream, token);
-  }
-
-  // Presentation command - routes to Gamma, PPTX, or Marp
-  if (request.command === "presentation") {
-    return await handlePresentationCommand(request, context, stream, token);
   }
 
   // Check if this is a greeting at the start of a session

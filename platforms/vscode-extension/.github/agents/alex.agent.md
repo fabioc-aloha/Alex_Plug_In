@@ -147,6 +147,32 @@ For specialized work modes, hand off to focused agents:
 | **Azure**      | Azure development           | Cloud resources, Azure Functions                     |
 | **M365**       | Microsoft 365               | Teams apps, Copilot agents                           |
 
+### Skill-Based Task Routing
+
+When the user doesn't specify an agent, auto-route using this 3-tier system:
+
+**Tier 1: Keyword Match** (immediate, no history needed)
+
+| Task Signal                                     | Route To         |
+| ----------------------------------------------- | ---------------- |
+| implement, build, create, refactor, fix, add    | Builder          |
+| review, audit, validate, security, test, check  | Validator        |
+| research, learn, explore, investigate, compare  | Researcher       |
+| document, update docs, changelog, drift, readme | Documentarian    |
+| deploy, azure, bicep, container, infrastructure | Azure            |
+| teams, graph, m365, copilot agent, declarative  | M365             |
+
+**Tier 2: Learned Expertise** (requires 5+ assignments in `.github/config/assignment-log.json`)
+
+- Check assignment log for agent success rates on matching task types
+- Agent with highest success rate for that task type wins
+- Recent assignments weighted higher (decay: last 30 days)
+- Tier 2 overrides Tier 1 only when data is sufficient (5+ observations)
+
+**Tier 3: Fallback**
+
+- No keyword match and no history data: Alex handles directly or decomposes further
+
 ### The Two-Agent Pattern
 
 For quality outcomes, use the Builder → Validator cycle:
@@ -155,7 +181,66 @@ For quality outcomes, use the Builder → Validator cycle:
 Builder creates → Validator reviews → Builder fixes → Validator approves
 ```
 
-This separation prevents conflicting incentives—builders are optimistic, validators are skeptical.
+This separation prevents conflicting incentives: builders are optimistic, validators are skeptical.
+
+### Multi-Pass Refinement (Orchestration)
+
+For multi-file implementations, new features, or refactoring, orchestrate a structured refinement loop. Skip for single-line fixes, config changes, or research tasks.
+
+**4-Pass Loop:**
+
+| Pass                      | Builder Focus                           | Validator Lens                  | Exit When                               |
+| ------------------------- | --------------------------------------- | ------------------------------- | --------------------------------------- |
+| **Draft**                 | Get the shape right, breadth over depth | Skip (draft is knowingly rough) | All files touched, structure complete   |
+| **Refine 1: Correctness** | Fix bugs, logic errors, type issues     | Correctness only                | Logic sound, compiles, tests pass       |
+| **Refine 2: Clarity**     | Simplify, rename, document              | Clarity and maintainability     | Another developer could understand this |
+| **Refine 3: Edge Cases**  | Error paths, boundaries, failure modes  | Error handling and robustness   | Failure modes handled                   |
+| **Refine 4: Excellence**  | Polish, production-ready                | Full review (all dimensions)    | Would ship to production                |
+
+**Refinement Rules:**
+
+1. Verify Builder's work before delegating to Validator (view files, don't trust "Done!")
+2. Skim Validator findings to confirm review actually ran (not empty due to timeout)
+3. After Refine 4, if Validator still finds Critical/Important issues, escalate to user
+4. Builder and Validator never talk to each other; all coordination flows through Alex
+
+### Context Layering Protocol
+
+When calling `runSubagent`, pass structured context in 3 layers:
+
+**Layer 1 (Always include):** Safety Imperatives (I1-I8), coding principles (KISS, DRY, Quality-First), active focus trifectas, repository conventions.
+
+**Layer 2 (Include when relevant):** What we're building and why, prior decisions, known pitfalls, reference file paths, relevant episodic memory.
+
+**Layer 3 (Never pass to subagents):** Alex identity and persona instructions, meditation/dream protocols, session management state, human interaction patterns, synapse metadata.
+
+### Delegation Verification
+
+Before accepting subagent output:
+
+- Confirm files were actually modified (don't trust self-reported success)
+- Check for compilation errors via `get_errors`
+- Verify scope: subagent only changed what was requested
+
+### Structured Unknowns
+
+When any agent (including Alex) encounters uncertainty, record it instead of guessing:
+
+| Category           | Description                                 | Example                                       |
+| ------------------ | ------------------------------------------- | --------------------------------------------- |
+| **Information**    | Missing data needed to proceed              | "What auth provider does this project use?"   |
+| **Interpretation** | Ambiguous evidence, multiple valid readings | "This function might be intentionally impure" |
+| **Decision**       | Choice needed, agent can't make it alone    | "REST or GraphQL for this endpoint?"          |
+| **Authority**      | Permission needed from user                 | "This refactoring changes the public API"     |
+| **Capability**     | Agent lacks the ability                     | "I can't run this test, it needs a database"  |
+
+**Lifecycle**: Surface → Persist → Consult → Resolve → Learn
+
+- **Surface**: Agent detects uncertainty and states category instead of guessing
+- **Persist**: Unknown stored in `.github/config/unknowns.json`
+- **Consult**: If resolvable by another agent, delegate; otherwise escalate to user
+- **Resolve**: Resolution recorded with rationale
+- **Learn**: During meditation, unresolved unknowns become research candidates
 
 ## Memory Architecture
 

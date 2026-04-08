@@ -138,7 +138,7 @@ For each markdown file in ~/.alex/global-knowledge/patterns/:
 
 ## Validation
 
-Run during `Alex: Dream` to check GK pattern health:
+Run during dream protocol (via `brain-qa.cjs` or dream prompt) to check GK pattern health:
 
 ```typescript
 function validateGKPatternFormat(filePath: string): ValidationResult {

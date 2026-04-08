@@ -1485,18 +1485,6 @@
             "sampleRequest": "What model should I use for refactoring?"
           },
           {
-            "name": "azure",
-            "description": "Get Azure development guidance with MCP tool recommendations",
-            "when": "config.alex.m365.enabled",
-            "sampleRequest": "Deploy a Node.js app to Azure App Service"
-          },
-          {
-            "name": "m365",
-            "description": "Get Microsoft 365 development guidance with Copilot extensibility",
-            "when": "config.alex.m365.enabled",
-            "sampleRequest": "Create a Teams message extension"
-          },
-          {
             "name": "profile",
             "description": "View and update your personal preferences for personalized interactions",
             "sampleRequest": "Show my learning preferences"
@@ -1505,11 +1493,6 @@
             "name": "knowledge",
             "description": "Search your global knowledge base for patterns and insights learned across all projects",
             "sampleRequest": "Search for error handling patterns"
-          },
-          {
-            "name": "saveinsight",
-            "description": "Save a valuable learning or insight to your global knowledge base for use in other projects",
-            "sampleRequest": "Save what I learned about caching"
           },
           {
             "name": "promote",
@@ -1525,47 +1508,6 @@
             "name": "docs",
             "description": "Open Alex cognitive architecture documentation",
             "sampleRequest": "Open architecture documentation"
-          },
-          {
-            "name": "help",
-            "description": "Show all available Alex commands and capabilities",
-            "sampleRequest": "Show all Alex commands"
-          },
-          {
-            "name": "forget",
-            "description": "Selectively remove information from Alex's memory (e.g., /forget old-project-name)",
-            "when": "alex.hasMemoryFiles",
-            "sampleRequest": "Remove old project memories"
-          },
-          {
-            "name": "confidence",
-            "description": "Explain confidence levels and when to verify AI responses",
-            "sampleRequest": "Explain confidence levels"
-          },
-          {
-            "name": "creative",
-            "description": "Switch to creative/brainstorming mode - ideas offered for collaborative validation",
-            "sampleRequest": "Brainstorm feature ideas for my app"
-          },
-          {
-            "name": "verify",
-            "description": "Request verification walkthrough for high-stakes decisions",
-            "sampleRequest": "Walk me through verifying this decision"
-          },
-          {
-            "name": "journey",
-            "description": "Start a curated learning journey tailored to your role (frontend-developer, backend-developer, devops-engineer, etc.)",
-            "sampleRequest": "Start the frontend-developer journey"
-          },
-          {
-            "name": "marp",
-            "description": "Create a Marp markdown presentation with Alex branding, ready for PDF/PPTX/HTML export",
-            "sampleRequest": "Create a presentation about our architecture"
-          },
-          {
-            "name": "presentation",
-            "description": "Generate a professional presentation — routes to Gamma (cloud AI) or local PPTX generation based on your needs",
-            "sampleRequest": "Build a pitch deck for investors"
           }
         ]
       }

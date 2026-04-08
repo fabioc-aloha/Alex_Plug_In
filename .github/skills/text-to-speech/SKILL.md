@@ -39,8 +39,9 @@ Text-to-Speech gives Alex a **voice**. This transforms Alex from a text-only ass
 3. Press `Ctrl+Alt+R` (Windows/Linux) or `Cmd+Alt+R` (macOS)
 4. Audio begins playing through the webview player
 
-**Command palette**:
-- `Ctrl+Shift+P` → "Alex: Read Aloud"
+**Invocation**:
+- Keyboard shortcut: `Ctrl+Alt+R` (Windows/Linux) or `Cmd+Alt+R` (macOS)
+- Via command: "Read Aloud"
 
 ### 📊 Status Bar Feedback
 
@@ -82,7 +83,7 @@ A sleek panel opens with full playback controls:
 
 Choose Alex's voice before reading:
 
-1. `Ctrl+Shift+P` → "Alex: Read with Voice Selection"
+1. Invoke "Read with Voice Selection"
 2. Quick pick appears:
 
 | Voice | Character | Best For |
@@ -98,7 +99,7 @@ Choose Alex's voice before reading:
 
 Export any document to audio file:
 
-1. `Ctrl+Shift+P` → "Alex: Save as Audio"
+1. Invoke "Save as Audio"
 2. Save dialog opens (default name based on document)
 3. Progress notification shows synthesis progress
 4. Success notification with options:
@@ -118,7 +119,7 @@ Multiple ways to stop playback:
 - **Press `Escape`** when reading
 - **Click stop button** in webview player
 - **Close webview panel**
-- `Ctrl+Shift+P` → "Alex: Stop Reading"
+- `Ctrl+Shift+P` → "Stop Reading"
 
 ### 📝 Smart Markdown Processing
 
@@ -153,7 +154,6 @@ This skill gives Alex a voice. **Version 2.0** uses native TypeScript WebSocket 
 - Native TypeScript implementation (no Python/MCP dependencies)
 - Direct WebSocket connection to Edge TTS endpoint
 - Webview-based audio player (cross-platform)
-- Integrated as VS Code commands
 - Status bar progress feedback
 
 **Why promote to Master:**
@@ -185,10 +185,10 @@ Alex's voice synthesis capability using Microsoft Edge TTS via native TypeScript
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  Commands:                                                   │
-│  • Alex: Read Aloud (Ctrl+Alt+R)                            │
-│  • Alex: Read with Voice Selection                          │
-│  • Alex: Save as Audio                                      │
-│  • Alex: Stop Reading                                       │
+│  • Read Aloud (Ctrl+Alt+R)                                   │
+│  • Read with Voice Selection                                 │
+│  • Save as Audio                                             │
+│  • Stop Reading                                              │
 │                     │                                        │
 │                     ▼                                        │
 │  ┌─────────────────────────────────────────────┐            │
@@ -288,9 +288,9 @@ Alex's default voice (GuyNeural) was chosen for:
 
 ---
 
-## VS Code Commands
+## Commands
 
-### Alex: Read Aloud
+### Read Aloud
 
 **Command**: `alex.readAloud`  
 **Keybinding**: `Ctrl+Alt+R` (Windows/Linux), `Cmd+Alt+R` (macOS)
@@ -306,13 +306,13 @@ Reads the current selection or entire document aloud using Alex's default voice.
 - Progress shown in status bar
 - Click status bar to stop playback
 
-### Alex: Read with Voice Selection
+### Read with Voice Selection
 
 **Command**: `alex.readWithVoice`
 
 Quick pick to select a voice preset before reading.
 
-### Alex: Save as Audio
+### Save as Audio
 
 **Command**: `alex.saveAsAudio`
 
@@ -525,13 +525,13 @@ Select text first to read only selection
 
 ### Generate Audio File
 ```
-Command Palette → "Alex: Save as Audio"
+Invoke "Save as Audio"
 Choose output location → MP3 saved
 ```
 
 ### Voice Customization
 ```
-Command Palette → "Alex: Read with Voice Selection"
+Invoke "Read with Voice Selection"
 Choose: Default | Warm | British | Friendly
 ```
 
@@ -646,7 +646,6 @@ Alex automatically detects the language of your text and selects an appropriate 
 - Native TypeScript implementation
 - Removed Python/MCP server dependencies
 - Webview-based cross-platform audio player
-- VS Code command integration
 - Status bar progress feedback
 
 ### v1.1.0 (2026-02-05)

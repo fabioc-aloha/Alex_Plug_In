@@ -23,7 +23,7 @@ flowchart TB
 
     subgraph CONSCIOUS["🌟 Conscious Mind"]
         CP["💬 Chat Participant"]
-        SC["⚡ VS Code Commands"]
+        SC["⚡ Operations"]
         LMT["🔧 Language Model Tools"]
     end
 
@@ -441,8 +441,8 @@ This eliminates the previous failure mode where skills were discovered reactivel
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph TB
     subgraph "Interface Layer"
-        CHAT["@alex Chat Participant"]
-        CMD[VS Code Commands]
+        CHAT["Chat Participant"]
+        CMD[Operations]
         API[Language Model Tools]
     end
 

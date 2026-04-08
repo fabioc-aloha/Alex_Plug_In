@@ -38,8 +38,9 @@
 
 2. **Initialize Alex in Your Project**
 
-   ```text
-   Ctrl+Shift+P → "Alex: Initialize Architecture"
+   ```bash
+   node .github/muscles/sync-architecture.cjs
+   # Or if the extension is installed: Ctrl+Shift+P → "Alex: Initialize Architecture"
    ```
 
    This creates the `.github/` folder with Alex's cognitive memory files.
@@ -54,16 +55,16 @@
 
 ### First Session Checklist
 
-- [ ] Extension installed
-- [ ] `Alex: Initialize Architecture` run
-- [ ] Test `@alex /status` in chat
-- [ ] Run `@alex /profile` to personalize (optional)
+- [ ] Extension installed (or `.github/` copied manually)
+- [ ] Architecture initialized
+- [ ] Test Alex in chat: "Hello!"
+- [ ] Personalize with profile prompt (optional)
 
 ### Recommended Settings (VS Code 1.111+)
 
 See [Environment Setup](ENVIRONMENT-SETUP.md) for the complete tiered settings reference (Essential / Recommended / Nice-to-Have).
 
-**Quick Setup:** Run `Alex: Apply Recommended Settings` from the Command Palette.
+**Quick Setup:** See [Environment Setup](ENVIRONMENT-SETUP.md) for recommended VS Code settings.
 - **Background Agents**: Run long tasks (like Dream) without blocking your work
 
 ---
@@ -188,22 +189,22 @@ Search across all your projects:
 
 ## Commands Reference
 
-### Command Palette (Ctrl+Shift+P)
+### Core Operations
 
-**Table 2:** *VS Code Command Palette Commands*
+**Table 2:** *Alex Operations (available via prompts, scripts, or extension Command Palette)*
 
-| Command                                     | Description                           |
-| ------------------------------------------- | ------------------------------------- |
-| `Alex: Initialize Architecture`             | First-time setup for a project        |
-| `Alex: Upgrade Architecture`                | Update to latest version              |
-| `Alex: Dream (Neural Maintenance)`          | Validate and repair synapses          |
-| `Alex: Self-Actualize (Deep Meditation)`    | Comprehensive health check            |
-| `Alex: Skill & Knowledge Review`            | **NEW** Review staleness-prone skills |
-| `Alex: Inherit Skill from Global Knowledge` | Pull skills from GK repository        |
-| `Alex: Open Documentation`                  | View the docs                         |
-| `Alex: Sync Global Knowledge`               | Sync with GitHub Gist                 |
-| `Alex: Push Knowledge to Cloud`             | Upload to GitHub                      |
-| `Alex: Pull Knowledge from Cloud`           | Download from GitHub                  |
+| Operation                           | Description                    |
+| ----------------------------------- | ------------------------------ |
+| Initialize Architecture             | First-time setup for a project |
+| Upgrade Architecture                | Update to latest version       |
+| Dream (Neural Maintenance)          | Validate and repair synapses   |
+| Self-Actualize (Deep Meditation)    | Comprehensive health check     |
+| Skill & Knowledge Review            | Review staleness-prone skills  |
+| Inherit Skill from Global Knowledge | Pull skills from GK repository |
+| Open Documentation                  | View the docs                  |
+| Sync Global Knowledge               | Sync with GitHub               |
+| Push Knowledge to Cloud             | Upload to GitHub               |
+| Pull Knowledge from Cloud           | Download from GitHub           |
 
 ### Chat Commands (@alex /command)
 
@@ -399,23 +400,16 @@ Or ask Alex directly:
 
 Run neural maintenance to keep connections healthy:
 
-```text
-@alex /dream
-```
-
-Or from Command Palette:
-
-```text
-Alex: Dream (Neural Maintenance)
+```bash
+node .github/muscles/brain-qa.cjs
+# Or use the dream prompt in agent mode
 ```
 
 ### Monthly Maintenance
 
 Deep self-assessment:
 
-```text
-@alex /selfactualize
-```
+Use the selfactualize prompt in agent mode.
 
 This:
 
@@ -437,8 +431,9 @@ When a new version is available, Alex shows a notification:
 
 ### Manual Upgrade
 
-```text
-Ctrl+Shift+P → "Alex: Upgrade Architecture"
+```bash
+node .github/muscles/sync-architecture.cjs
+# Or if extension installed: Ctrl+Shift+P → "Alex: Upgrade Architecture"
 ```
 
 ### What Happens During Upgrade
@@ -479,22 +474,16 @@ The upgrade validates automatically with Dream protocol. You can verify with:
 
 Run initialization:
 
-```text
-Ctrl+Shift+P → "Alex: Initialize Architecture"
+```bash
+node .github/muscles/sync-architecture.cjs
 ```
 
 ### Broken Synapses
 
 Run neural maintenance:
 
-```text
-@alex /dream
-```
-
-Or:
-
-```text
-Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
+```bash
+node .github/muscles/brain-qa.cjs
 ```
 
 ### Cloud Sync Issues
@@ -507,7 +496,7 @@ Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 
 1. Check the error message
 2. Look in `archive/upgrades/` for backups
-3. Try `Alex: Reset Architecture` (last resort - backs up first)
+3. Try `Alex: Reset Architecture` via extension (last resort - backs up first)
 
 ### Finding Logs
 

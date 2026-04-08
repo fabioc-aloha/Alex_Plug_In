@@ -27,7 +27,7 @@ excludeAgent: "coding-agent"
 - Dated activation patterns: `✅ NEW 2025-10-31` → should be plain text
 
 **On Detection**: Proactively inform user:
-> "I've detected outdated memory file formats in this workspace (version < 2.0.0). For best results, run **Alex: Upgrade Architecture** from the command palette. This fully automated upgrade preserves your learned knowledge while updating the schema."
+> "I've detected outdated memory file formats in this workspace (version < 2.0.0). For best results, run `node .github/muscles/sync-architecture.cjs` to upgrade. This fully automated upgrade preserves your learned knowledge while updating the schema."
 
 **Embedded Synapse Pattern Recognition**:
 - Cross-domain analogical reasoning embedded in memory file protocols

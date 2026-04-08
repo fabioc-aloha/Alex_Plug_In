@@ -135,9 +135,9 @@ The 5-layer kill switch that protects Master Alex creates a deliberate constrain
 ┌─────────────────────────────────────────────────────────────┐
 │  KILL SWITCH BLOCKS:                                        │
 │                                                             │
-│  ❌ Alex: Initialize Architecture                           │
-│  ❌ Alex: Reset Architecture                                │
-│  ❌ Alex: Upgrade Architecture                              │
+│  ❌ Initialize Architecture                                 │
+│  ❌ Reset Architecture                                      │
+│  ❌ Upgrade Architecture                                    │
 │                                                             │
 │  IN MASTER ALEX WORKSPACE                                   │
 └─────────────────────────────────────────────────────────────┘

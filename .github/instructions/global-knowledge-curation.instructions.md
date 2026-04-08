@@ -285,7 +285,7 @@ Get-ChildItem assets/ -Filter "banner-*"
 
    ```powershell
    # Run Dream to validate synaptic health
-   # Alex: Dream (Neural Maintenance)
+   # node .github/muscles/brain-qa.cjs
    ```
 
 3. **Documentation**: Confirm all skill counts match
@@ -451,7 +451,7 @@ Add to the inherited skill's `synapses.json`:
 
 ### Validation After Inheritance
 
-Run `Alex: Dream (Neural Maintenance)` to validate:
+Run `node .github/muscles/brain-qa.cjs` (or use the dream prompt) to validate:
 
 - Synapse connections are valid
 - No broken references
