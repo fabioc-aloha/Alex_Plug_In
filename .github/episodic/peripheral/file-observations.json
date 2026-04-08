@@ -1,32 +1,31 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "HEIR-BOOTSTRAP.md",
-    "README.md",
-    "ROADMAP.md"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/skills/SKILL-GROUPS.md",
+    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1775669911520
+      "scannedAt": 1775669945503
     },
     {
       "file": "HEIR-BOOTSTRAP.md",
       "todoCount": 5,
-      "scannedAt": 1775669911520
+      "scannedAt": 1775669945503
     },
     {
       "file": "AI-FIRST-DEV-STARTER-PACK-IDEAS.md",
       "todoCount": 4,
-      "scannedAt": 1775669911520
+      "scannedAt": 1775669945503
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1775669911520
+      "scannedAt": 1775669945503
     }
   ],
-  "lastUpdated": 1775669911520
+  "lastUpdated": 1775669945503
 }

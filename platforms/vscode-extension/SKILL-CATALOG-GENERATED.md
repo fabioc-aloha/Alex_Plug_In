@@ -1,8 +1,8 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-04-04
+> Generated: 2026-04-08
 > Total Skills: **159** (145 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
-> Total Connections: **820** (0 bidirectional, 131 weak)
+> Total Connections: **823** (0 bidirectional, 134 weak)
 
 ---
 
@@ -25,7 +25,7 @@
 | `api-documentation` | 5 |
 | `appropriate-reliance` | 5 |
 | `architecture-audit` | 7 |
-| `architecture-health` | 5 |
+| `architecture-health` | 6 |
 | `architecture-refinement` | 5 |
 | `ascii-art-alignment` | 4 |
 | `awareness` | 6 |
@@ -43,7 +43,7 @@
 | `chart-interpretation` | 6 |
 | `citation-management` | 1 |
 | `coaching-techniques` | 1 |
-| `code-review` | 9 |
+| `code-review` | 10 |
 | `cognitive-load` | 3 |
 | `cognitive-symbiosis` | 3 |
 | `comedy-writing` | 4 |
@@ -178,7 +178,7 @@
 | `enterprise-integration` | 3 |
 | `persona-detection` | 5 |
 | `vscode-configuration-validation` | 6 |
-| `vscode-extension-patterns` | 12 |
+| `vscode-extension-patterns` | 13 |
 
 ### M365 Heir (2)
 
