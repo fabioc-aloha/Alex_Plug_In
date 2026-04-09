@@ -206,6 +206,16 @@ The upgrade preserves:
 
 > **Stale items** (not modified in >90 days) are flagged for manual review via MIGRATION-CANDIDATES.md.
 
+### What's New (v7.4.2 -- Brain Self-Containment Edition)
+
+| Category                         | Highlights                                                                                                         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **I8 Enforcement**               | Architecture MUST NOT depend on the Extension: NORTH-STAR.md copied into .github/, 15 external references resolved |
+| **External API Staleness Audit** | EXTERNAL-API-REGISTRY.md tracks freshness of all external APIs referenced in skills                                |
+| **TTS Skill Rewrite**            | 543 to 90 lines (80% reduction) after Edge TTS removal; all ghost references cleaned across 20+ files              |
+| **Documentation Hygiene**        | 5 stale root .github/ docs archived, 14 phantom slash commands fixed, documentarian agent refreshed                |
+| **13 New AI Models**             | Flux 2 Flex/Klein, Ideogram v2a/Character, Recraft v4/Pro, Imagen 4/Fast/Ultra, and more added to image-handling   |
+
 ### What's New (v7.4.0 -- Multi-Agent Strategy Edition)
 
 | Category                  | Highlights                                                                                                                       |

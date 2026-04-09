@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.4.2] - 2026-04-09
+
+> **Brain Self-Containment Edition** -- I8 enforcement, external API staleness audit, TTS skill rewrite, 5 stale docs archived, 14 phantom slash commands fixed.
+
+### Added
+
+- **NORTH-STAR.md** in .github/ -- brain no longer depends on alex_docs/ for vision
+- **EXTERNAL-API-REGISTRY.md** -- centralized staleness tracking for external APIs in skills
+- **13 new AI models** -- Flux 2 Flex/Klein, Ideogram v2a/Character, Recraft v4/Pro, Imagen 4/Fast/Ultra, and more
+
+### Changed
+
+- **TTS skill** rewritten from 543 to 90 lines (80% reduction)
+- **5 stale .github/ docs** archived to alex_archive/
+- **14 phantom slash commands** fixed across documentation
+- **Documentarian agent** refreshed with drift-free maintenance focus
+- **Global knowledge** and skill promotion instructions updated
+
+---
+
 ## [7.4.1] - 2026-04-09
 
 > **Post-Release Quality Sweep** -- Dead export removal, stale TTS/voice reference cleanup, catalog alignment, and user documentation audit.
