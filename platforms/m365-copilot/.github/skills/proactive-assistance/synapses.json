@@ -46,6 +46,13 @@
       "strength": 0.7,
       "when": "user starting new task",
       "yields": "proactive time estimates before asked"
+    },
+    {
+      "target": ".github/skills/silence-as-signal/SKILL.md",
+      "type": "activates",
+      "strength": 0.9,
+      "when": "silence signals detected (flow state, thinking pause, emotional processing)",
+      "yields": "inhibitory gate that suppresses proactive suggestions"
     }
   ],
   "activationContexts": [

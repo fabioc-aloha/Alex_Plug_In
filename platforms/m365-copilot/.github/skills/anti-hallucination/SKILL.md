@@ -1,6 +1,7 @@
 ---
 name: anti-hallucination
 description: Recognize and prevent confabulation — when you don't know, say so.
+tier: core
 applyTo: '**/*'
 user-invokable: false
 ---

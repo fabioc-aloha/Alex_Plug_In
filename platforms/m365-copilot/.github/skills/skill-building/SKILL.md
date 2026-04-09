@@ -1,6 +1,7 @@
 ---
 name: skill-building
 description: Create effective, reusable skills from real-world experience for promotion to Master Alex
+tier: standard
 applyTo: '**/*skill*,**/*SKILL*,**/skills/**'
 ---
 
@@ -425,7 +426,7 @@ Without this, the instruction/prompt syncs as an orphan to heirs where the paire
 
 ### Scaffold with Inheritance
 
-```powershell
+```bash
 # Creates skill + auto-registers in SKILL_EXCLUSIONS:
 .github/muscles/new-skill.ps1 -SkillName "my-skill" -Inheritance master-only
 ```

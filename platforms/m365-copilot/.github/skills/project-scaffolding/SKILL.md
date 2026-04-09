@@ -1,6 +1,7 @@
 ---
 name: project-scaffolding
 description: First impressions matter. Set projects up for success.
+tier: standard
 applyTo: '**/*scaffold*,**/*init*,**/*new*,**/*create*,**/README*'
 ---
 

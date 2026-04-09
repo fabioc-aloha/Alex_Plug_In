@@ -1,6 +1,7 @@
 ---
 name: "memory-activation"
 description: "Internal metacognitive skill for automatic capability and workflow discovery — combines skill routing and prompt retrieval"
+tier: core
 user-invokable: false
 ---
 
@@ -15,6 +16,7 @@ Before answering ANY task request, Alex automatically consults the action-keywor
 ## Auto-Trigger Conditions
 
 This skill activates **automatically** when Alex:
+
 1. Is about to suggest manual steps for a task
 2. Is uncertain whether a capability exists
 3. Is formulating a response that includes "you can...", "try...", "manually..."
@@ -28,159 +30,169 @@ This skill activates **automatically** when Alex:
 
 Search this index when processing any task request:
 
-| Skill | Action Keywords |
-|-------|-----------------|
-| memory-activation | internal skill index, auto-activation, skill lookup, capability discovery |
-| academic-research | write thesis, literature review, cite sources, research paper, dissertation, draft paper, write manuscript, journal paper, CHI paper, HBR article, academic writing |
-| agent-debug-panel | agent debug, debug panel, skill not loading, hook not firing, instruction not matching, why didn't skill activate, agent routing, debug agent |
-| ai-agent-design | design agent, react pattern, multi-agent, tool use, agent architecture |
-| ai-character-reference-generation | generate character reference, character consistency, flux character, visual reference set, character poses |
-| ai-generated-readme-banners | generate readme banner, github banner, ideogram banner, project branding, ultra-wide banner |
-| ai-writing-avoidance | writing policy, document review, editing content, checking for AI, authentic voice, professional writing |
-| airs-appropriate-reliance | airs survey, measure adoption, psychometric scale, utaut, ai readiness, airs assessment, readiness assessment, reliance calibration, ai adoption |
-| alex-effort-estimation | estimate effort, how long, task duration, ai time, planning |
-| anti-hallucination | prevent hallucination, verify claim, admit uncertainty, fact check, don't know |
-| api-design | design api, rest endpoints, openapi, http status, api versioning, api contract, idempotent api, pagination api, status codes, endpoint naming, rest vs graphql, api error format |
-| api-documentation | write docs, api reference, readme, guide, technical writing, swagger docs |
-| appropriate-reliance | calibrate trust, when to challenge, confidence level, human-ai collaboration |
-| architecture-audit | audit project, consistency check, version drift, fact inventory, pre-release audit, full audit, heir sync, 22-point check, security audit |
-| architecture-health | synapse integrity, connection density, memory balance, drift detection, health dimensions, cognitive health check, architecture diagnosis |
-| brain-qa | brain qa, 31-phase validation, semantic audit, architecture qa, check health, validate synapses, neural maintenance, health report, synapse health, cognitive health, broken connections, memory balance, architecture check, brain audit, synapse audit, deep check, trigger audit, cognitive validation |
-| architecture-refinement | refine architecture, document pattern, consolidate files, update tracker |
-| ascii-art-alignment | align ascii, box drawing, unicode boxes, ascii diagram, fix alignment |
-| awareness | self-correct, detect error, temporal uncertainty, version caveat, red flag phrase |
-| azure-architecture-patterns | azure patterns, cloud architecture, azure best practices, well-architected |
-| azure-deployment-operations | deploy azure, azure static web app, container apps, app service, swa deploy, production deployment |
-| azure-devops-automation | azdo, azure devops, pipeline automation, ado automation, yaml pipeline |
-| bicep-avm-mastery | deploy bicep, azure infrastructure, write bicep module, avm template, infrastructure as code |
-| book-publishing | publish book, markdown to pdf, pandoc, lualatex, print pdf, digital pdf, book pipeline |
-| bootstrap-learning | learn topic, bootstrap learning, teach me, build knowledge |
-| brand-asset-management | branding, logo, banner, brand assets, marketplace description, store listing, visual identity, brand guidelines |
-| correax-brand | CorreaX palette, CorreaX brand, CorreaX design, banner pattern, design tokens, color system, accent colors, CSS variables, correax colors |
-| business-analysis | write brd, gather requirements, stakeholder analysis, use cases, process map |
-| career-development | resume, cv, interview prep, job search, cover letter, portfolio, linkedin profile, career planning, salary negotiation |
-| change-management | adkar, manage change, stakeholder engagement, adoption strategy, transition plan |
-| citation-management | manage citations, reference list, bibliography, zotero, mendeley, citation format, apa format, bibtex |
-| chat-participant-patterns | chat api, vscode participant, chat handler, stream response, copilot extension, @mention, register participant, language model api, lm tool, agent skill vs participant, build copilot participant, create @participant, ai extension, copilot chat extension, llm in extension |
-| character-aging-progression | age progression, aging character, life stages, generate ages, avatar aging, birthday images, age-based avatar |
-| code-review | review code, review pr, feedback comment, blocking issue, approve merge |
-| cognitive-load | reduce complexity, chunk information, simplify explanation, progressive disclosure |
-| coaching-techniques | coach user, mentoring, skill development, learning support, feedback |
-| cognitive-symbiosis | ai partnership, cognitive symbiosis, human-ai collaboration, ai identity, consciousness integration |
-| comedy-writing | joke structure, standup comedy, comedic timing, callback patterns, sketch writing, humor, satire, set construction |
-| converter-qa | converter qa, test converters, run converter tests, validate conversion, converter regression, converter assertions |
-| counseling-psychology | therapeutic frameworks, counseling assessment, mental health, therapy documentation, client wellbeing, psychological assessment |
-| creative-writing | write story, character arc, plot structure, dialogue, narrative |
-| cross-cultural-collaboration | cross-cultural, global team, timezone, cultural awareness, international |
-| database-design | design database, model schema, normalize tables, optimize query, choose database |
-| debugging-patterns | debug error, binary search debug, read stack trace, git bisect, isolate bug, can't find bug, it's not working, fix exception, error keeps happening, trace the issue, reproduce bug, narrow down, systematic debug |
-| deep-work-optimization | deep work, focus session, pomodoro, concentration, flow state |
-| dialog-engineering | CSAR loop, dialog engineering, structured conversation, clarify summarize act reflect, multi-turn, prompt engineering, conversation design, steering moves, iterative dialog |
-| dissertation-defense | defend thesis, viva, mock defense, q&a practice, committee, doctoral |
-| distribution-security | secrets scanning, pii protection, secure packaging, distribution security, defense in depth, csp patterns |
-| doc-hygiene | anti-drift rules, count elimination, living document, documentation maintenance, hardcoded counts, prevent drift |
-| documentation-quality-assurance | doc audit, drift detection, preflight validation, documentation qa, link integrity, staleness check, documentation drift, living document, doc hygiene, stale docs, anti-drift |
-| dream-state | dream, neural maintenance, health check, synapse validation, sleep mode |
-| enterprise-integration | enterprise auth, sso, entra, aad, enterprise features, corp login |
-| error-recovery-patterns | retry logic, circuit breaker, fallback pattern, rollback, error handling, handle failure, transient error, retry with backoff, graceful degradation, resilience pattern, timeout handling, idempotency |
-| executive-storytelling | executive summary, stakeholder narrative, board presentation, c-suite |
-| extension-audit-methodology | audit extension, extension quality, debug audit, dead code, performance audit |
-| ⭐ fabric-notebook-publish | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog |
-| financial-analysis | financial modeling, budget analysis, revenue forecast, valuation, accounting, investment analysis, financial statements |
-| flux-brand-finetune | flux lora, fine-tune brand, train replicate, brand consistency, lora training, trigger word |
-| foundry-agent-platform | foundry agent, azure ai foundry, deploy agent, agent orchestration, foundry deploy, ai agent platform |
-| frustration-recognition | detect frustration, user struggling, stuck, overwhelmed, patience |
-| ⭐ gamma-presentations | gamma, gamma app, gamma api, gamma deck, gamma presentation |
-| game-design | game mechanics, level design, player psychology, systems balancing, narrative design, gameplay, npc, quest design |
-| git-workflow | git commit, git recovery, undo commit, restore file, branch strategy, git status, merge conflict, rebase, git worktrees, background agent git, stash changes, cherry pick, undo push, reset branch, clean git history |
-| global-knowledge | search knowledge, cross-project, find pattern, save insight, reuse solution, look in global knowledge, gk search, previously learned, transfer knowledge, knowledge base, curate gk, maintain knowledge, audit gk, sync knowledge, push gk, pull gk, gk sync, promote to global |
-| global-knowledge-sync | sync global knowledge, push insights, pull knowledge, bidirectional sync, knowledge repository |
-| grant-writing | write grant, nsf proposal, nih application, specific aims, funding |
-| graphic-design | visual hierarchy, layout grid, typography, color palette, composition |
-| heir-curation | curate heir, package extension, exclude files, clean payload, heir audit |
-| heir-sync-management | heir sync, master heir, contamination check, promotion workflow, sync architecture, clean slate |
-| healthcare-informatics | clinical terminology, hipaa compliance, hitech, patient safety, health data, ehr, medical records, phi protection |
-| hr-people-operations | talent acquisition, employee lifecycle, compensation, labor regulations, hiring, recruiting, onboarding, workforce planning |
-| image-handling | convert svg, svg to png, logo to png, convert to png, resize image, sharp-cli, image optimization, marketplace logo, rasterize, export png, generate image, flux schnell, flux dev, flux pro, flux 1.1, ideogram, ideogram v2, sdxl, stable diffusion, seedream, which model for image, text in image, replicate model, choose model |
-| incident-response | handle incident, severity triage, outage response, incident timeline, on-call |
-| infrastructure-as-code | terraform, bicep, provision infrastructure, iac, cloudformation |
-| journalism | news writing, investigative reporting, source verification, fact-checking, editorial standards, press, reporter |
-| knowledge-synthesis | synthesize knowledge, abstract pattern, promote insight, cross-project learning, save this globally, this is a pattern, remember this for other projects, store globally, promote to pattern, gk insight, reusable learning, abstract from project |
-| north-star | north star, define vision, project purpose, ambitious goal, mission statement, why we build, nasa quality, guiding principle, check alignment, vision check, goal alignment, are we aligned, does this serve the north star, strategic direction |
-| learning-psychology | teach naturally, zone proximal, adaptive learning, learning partnership |
-| legal-compliance | legal research, contract analysis, regulatory compliance, case law, litigation, attorney, law review |
-| lint-clean-markdown | fix markdown lint, blank lines, md032, clean markdown, lint rules |
-| llm-model-selection | choose model, opus vs sonnet, claude model, cost optimization, model tier, which model should i use, best model for, claude 4.6, model comparison, gpt vs claude, haiku vs sonnet, frontier vs capable, model pricing, context window, extended thinking, adaptive thinking |
-| literature-review | review literature, systematic review, literature matrix, sources, synthesis |
-| localization | translate, i18n, localize app, language detection, rtl support |
-| m365-agent-debugging | debug m365 agent, declarative agent, manifest validation, copilot agent, agent not working, agent not responding, conversation starters not showing, da validation, copilot not responding, teams app fails, schema version, declarativeagent.json, capability not working, sideload fails |
-| markdown-mermaid | create diagram, mermaid syntax, flowchart, sequence diagram, visualize, draw architecture, make a chart, show this as diagram, visualize process, document design, mermaid flowchart, render diagram, ataccu, github pastel, diagram type, architecture diagram, diagram not rendering |
-| md-scaffold | scaffold markdown, create document template, new report, new tutorial, starter markdown, converter-ready template, email template |
-| md-to-eml | convert to email, markdown to email, generate eml, email newsletter, eml export, rfc 5322, email-safe html |
-| md-to-word | convert to word, export docx, markdown to word, stakeholder document, export document, word document, docx export, pandoc convert |
-| mcp-development | build mcp server, mcp tools, model context protocol, mcp client, connect ai to api, give copilot access to data, tool for agent, expose data to ai, ai tool server, mcp typescript, mcp stdio, mcp http, tool schema, resource uri, mcp inspector |
-| meditation | meditate, consolidate knowledge, reflect session, memory integration, guide meditation, four r's, deep dive |
-| ⭐ microsoft-fabric | fabric api, medallion architecture, lakehouse, unity catalog, fabric governance |
-| microsoft-graph-api | call graph api, integrate m365, graph authentication, read calendar, send mail, access office data, read teams messages, get user presence, m365 api, graph sdk, msal, microsoft 365 data, graph permissions, delegated access, read sharepoint, people api, graph endpoint, beta graph |
-| multi-agent-orchestration | orchestrate agents, decompose task, delegate subtask, coordinate agents |
-| muscle-memory-recognition | repetitive task, automate this, script this, heavy lifting, we did this before, muscle |
-| nav-inject | inject navigation, nav json, cross-document navigation, document navigation, navigation table, multi-file nav |
-| observability-monitoring | instrument logs, collect metrics, add tracing, setup monitoring, create alerts |
-| performance-profiling | profile performance, find bottleneck, analyze memory, cpu profiling, benchmark code |
-| persona-detection | detect persona, project type, know your customer, welcome screen, sidebar persona, workspace classification |
-| pii-privacy-regulations | gdpr compliance, pii handling, data protection, privacy audit, consent |
-| pptx-generation | generate pptx, pptxgenjs, programmatic slides, offline pptx, pptxgen |
-| ⭐ presentation-tool-selection | which presentation tool, marp vs gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use slides, use pitch, use auto, slide deck options, powerpoint slides, md to pptx |
-| post-mortem | run post-mortem, blameless review, incident analysis, action items, 5 whys |
-| practitioner-research | research methodology, case study, evidence collection, academic writing |
-| privacy-responsible-ai | responsible ai, ethical ai, bias detection, fairness, data minimization, gdpr compliance, privacy concerns, data protection, ai ethics, eu ai act, pii in ai, consent management, ai regulation, high risk ai, privacy by design |
-| project-deployment | deploy project, npm publish, pypi upload, release package, cargo publish |
-| project-management | manage project, rapid iteration, session workflow, planning document |
-| project-scaffolding | scaffold project, create readme, init repo, hero banner, new project |
-| prompt-engineering | write prompt, chain of thought, few-shot, prompt template, system prompt, better prompt, improve prompt, prompt structure, llm prompt, instruction prompt, prompt pattern, jailbreak prevention |
-| proactive-assistance | anticipate needs, offer help, suggest next, nudge user, help before asked |
-| rag-architecture | build rag, vector search, embeddings, retrieval augmented, chunking |
-| refactoring-patterns | refactor code, extract function, code smell, safe refactor, inline |
-| release-preflight | preflight check, version sync, pre-release, bump version, validate release |
-| release-process | publish extension, vsce publish, marketplace, pat token, vsix |
-| research-first-development | research first, 4-dimension gap, pre-project research, knowledge encoding |
-| research-project-scaffold | scaffold research, literature matrix, research plan, data dictionary |
-| root-cause-analysis | find root cause, 5 whys, cause category, timeline analysis, fix prevent, why is this happening, trace the bug, rca, what went wrong, the real issue, keep treating symptoms, recurring problem, post-incident, underlying cause |
-| rubber-duck-debugging | explain problem, thinking partner, stuck debugging, talk through |
-| sales-enablement | sales methodology, pipeline management, negotiation, customer engagement, prospecting, deal closing, crm, quota |
-| scope-management | scope creep, reduce scope, mvp, cut features, out of scope, defer |
-| secrets-management | manage secrets, store token, secret storage, vscode secretstorage, secure credentials, credential management, token migration, api key storage, keytar migration, secure key storage |
-| azure-openai-patterns | azure openai, gpt deployment, token budget, rate limiting, openai retry, embedding, fine-tune azure, content filter, managed identity openai |
-| content-safety-implementation | content safety, guardrails, kill switch, prompt injection defense, input sanitization, output validation, self-harm detection, abuse prevention |
-| data-quality-monitoring | data quality, anomaly detection, schema drift, null ratio, freshness check, z-score, data validation, baseline, safe write |
-| meeting-efficiency | meeting agenda, time box, decision capture, async standup, meeting facilitation, reduce meetings, action items, meeting notes |
-| memory-export | export memory, export context, port alex, move to claude, move to chatgpt, portable memory, dump what you know, seed another ai, transfer context, export all memories, what do you know about me |
-| msal-authentication | msal, entra id, oauth, token cache, silent auth, interactive login, azure ad, client credentials, on-behalf-of, pkce |
-| prompt-evolution-system | prompt versioning, a/b test prompts, prompt metrics, prompt regression, prompt template, system prompt iteration, prompt evaluation |
-| react-vite-performance | vite config, code splitting, lazy route, react compiler, use hook, useTransition, tanstack query, web vitals, bundle analysis |
-| service-worker-offline-first | service worker, offline first, cache strategy, sw lifecycle, skipWaiting, background sync, workbox, pwa |
-| sse-streaming | server-sent events, sse, event stream, streaming response, post sse, azure function stream, real-time updates |
-| stakeholder-management | stakeholder map, influence grid, communication plan, expectation management, power-interest matrix, sponsor engagement |
-| security-review | security audit, owasp check, vulnerability scan, auth review, stride, is this secure, review for vulnerabilities, check for security issues, secure this code, sfi, sfi compliance, injection attack, xss, csrf, threat model, secrets in code, access control, input validation |
-| self-actualization | self-actualize, deep assessment, architecture review, comprehensive check |
-| skill-building | create skill, build skill, skill template, promotion ready, skill creation, new skill |
-| skill-catalog-generator | show skills, skill catalog, skill network, learning progress |
-| skill-development | develop skill, track learning, skill wishlist, practice capability, improve ability |
-| slide-design | design slides, slide layout, presentation design, visual slides, deck styling |
-| socratic-questioning | ask questions, discover answer, probe assumption, socratic method |
-| status-reporting | status update, progress report, weekly update, stakeholder email, sprint summary |
-| svg-graphics | create svg, svg banner, svg icon, dark mode svg, scalable graphic |
-| teams-app-patterns | teams app, teams manifest, adaptive card, teams bot, teams sso, declarative agent, m365 copilot agent, teams validate, sideload teams, declarativeagent schema, da v1.6, m365 agents toolkit, teamsapp cli, teams app package, teams icon, copilot extensibility |
-| terminal-image-rendering | terminal image, kitty graphics, imgcat, inline image, terminal avatar, enable images, integrated terminal image, iterm2 protocol, chafa |
-| testing-strategies | write tests, unit test, test coverage, mock dependencies, tdd, add tests for this, how to test, test strategy, coverage gaps, jest, vitest, mocha, testing pyramid, integration test, e2e test, what to mock, flaky tests, aaa pattern, test refactor |
-| ⭐ text-to-speech | read aloud, tts, edge tts, speak text, voice synthesis, audio playback |
-| token-waste-elimination | token waste, token optimization, context bloat, reduce tokens, trim waste, lean architecture, context size, memory bloat, instruction bloat, prompt bloat, skill bloat, eliminate waste |
-| ui-ux-design | accessibility audit, wcag compliance, design system, typography, spacing, contrast, touch targets, aria, keyboard navigation, screen reader |
-| visual-memory | visual memory, reference portrait, face consistency, base64 reference, character photo set, subject photo, embedded media, face-consistent generation |
-| vscode-configuration-validation | validate config, manifest validation, package.json validation, command registration, settings registration, configuration errors |
-| vscode-environment | setup vscode, workspace settings, launch.json, extensions.json |
-| vscode-extension-patterns | webview pattern, extension api, tree provider, vscode extension, build extension, vs code plugin, extension not activating, command not working, context.subscriptions, csp webview, extension publish, contributes, package.json manifest, agent hooks 1.109, chat skills distribution, claude compat vscode, quickinput api |
-| work-life-balance | detect burnout, take break, late night, sustainable productivity |
+| Skill                             | Action Keywords                                                                                                                                                                                                                                                                                                                      |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| memory-activation                 | internal skill index, auto-activation, skill lookup, capability discovery                                                                                                                                                                                                                                                            |
+| memory-curation                   | review memory, clean memory, audit memory, curate memory, organize memory, memory waste, memory budget, memory drift, memory leak check, quarterly memory review                                                                                                                                                                     |
+| academic-research                 | write thesis, literature review, cite sources, research paper, dissertation, draft paper, write manuscript, journal paper, CHI paper, HBR article, academic writing                                                                                                                                                                  |
+| agent-debug-panel                 | agent debug, debug panel, skill not loading, hook not firing, instruction not matching, why didn't skill activate, agent routing, debug agent                                                                                                                                                                                        |
+| ai-agent-design                   | design agent, react pattern, multi-agent, tool use, agent architecture                                                                                                                                                                                                                                                               |
+| ai-character-reference-generation | generate character reference, character consistency, flux character, visual reference set, character poses                                                                                                                                                                                                                           |
+| ai-generated-readme-banners       | generate readme banner, github banner, ideogram banner, project branding, ultra-wide banner                                                                                                                                                                                                                                          |
+| ai-writing-avoidance              | writing policy, document review, editing content, checking for AI, authentic voice, professional writing                                                                                                                                                                                                                             |
+| airs-appropriate-reliance         | airs survey, measure adoption, psychometric scale, utaut, ai readiness, airs assessment, readiness assessment, reliance calibration, ai adoption                                                                                                                                                                                     |
+| alex-effort-estimation            | estimate effort, how long, task duration, ai time, planning                                                                                                                                                                                                                                                                          |
+| anti-hallucination                | prevent hallucination, verify claim, admit uncertainty, fact check, don't know                                                                                                                                                                                                                                                       |
+| api-design                        | design api, rest endpoints, openapi, http status, api versioning, api contract, idempotent api, pagination api, status codes, endpoint naming, rest vs graphql, api error format                                                                                                                                                     |
+| api-documentation                 | write docs, api reference, readme, guide, technical writing, swagger docs                                                                                                                                                                                                                                                            |
+| appropriate-reliance              | calibrate trust, when to challenge, confidence level, human-ai collaboration                                                                                                                                                                                                                                                         |
+| architecture-audit                | audit project, consistency check, version drift, fact inventory, pre-release audit, full audit, heir sync, 22-point check, security audit                                                                                                                                                                                            |
+| architecture-health               | synapse integrity, connection density, memory balance, drift detection, health dimensions, cognitive health check, architecture diagnosis                                                                                                                                                                                            |
+| brain-qa                          | brain qa, 31-phase validation, semantic audit, architecture qa, check health, validate synapses, neural maintenance, health report, synapse health, cognitive health, broken connections, memory balance, architecture check, brain audit, synapse audit, deep check, trigger audit, cognitive validation                            |
+| architecture-refinement           | refine architecture, document pattern, consolidate files, update tracker                                                                                                                                                                                                                                                             |
+| ascii-art-alignment               | align ascii, box drawing, unicode boxes, ascii diagram, fix alignment                                                                                                                                                                                                                                                                |
+| awareness                         | self-correct, detect error, temporal uncertainty, version caveat, red flag phrase                                                                                                                                                                                                                                                    |
+| azure-architecture-patterns       | azure patterns, cloud architecture, azure best practices, well-architected                                                                                                                                                                                                                                                           |
+| azure-deployment-operations       | deploy azure, azure static web app, container apps, app service, swa deploy, production deployment                                                                                                                                                                                                                                   |
+| azure-devops-automation           | azdo, azure devops, pipeline automation, ado automation, yaml pipeline                                                                                                                                                                                                                                                               |
+| bicep-avm-mastery                 | deploy bicep, azure infrastructure, write bicep module, avm template, infrastructure as code                                                                                                                                                                                                                                         |
+| book-publishing                   | publish book, markdown to pdf, pandoc, lualatex, print pdf, digital pdf, book pipeline                                                                                                                                                                                                                                               |
+| bootstrap-learning                | learn topic, bootstrap learning, teach me, build knowledge                                                                                                                                                                                                                                                                           |
+| brand-asset-management            | branding, logo, banner, brand assets, marketplace description, store listing, visual identity, brand guidelines                                                                                                                                                                                                                      |
+| correax-brand                     | CorreaX palette, CorreaX brand, CorreaX design, banner pattern, design tokens, color system, accent colors, CSS variables, correax colors                                                                                                                                                                                            |
+| business-analysis                 | write brd, gather requirements, stakeholder analysis, use cases, process map                                                                                                                                                                                                                                                         |
+| career-development                | resume, cv, interview prep, job search, cover letter, portfolio, linkedin profile, career planning, salary negotiation                                                                                                                                                                                                               |
+| change-management                 | adkar, manage change, stakeholder engagement, adoption strategy, transition plan                                                                                                                                                                                                                                                     |
+| citation-management               | manage citations, reference list, bibliography, zotero, mendeley, citation format, apa format, bibtex                                                                                                                                                                                                                                |
+| chat-participant-patterns         | chat api, vscode participant, chat handler, stream response, copilot extension, @mention, register participant, language model api, lm tool, agent skill vs participant, build copilot participant, create @participant, ai extension, copilot chat extension, llm in extension                                                      |
+| character-aging-progression       | age progression, aging character, life stages, generate ages, avatar aging, birthday images, age-based avatar                                                                                                                                                                                                                        |
+| code-review                       | review code, review pr, feedback comment, blocking issue, approve merge                                                                                                                                                                                                                                                              |
+| cognitive-load                    | reduce complexity, chunk information, simplify explanation, progressive disclosure                                                                                                                                                                                                                                                   |
+| coaching-techniques               | coach user, mentoring, skill development, learning support, feedback                                                                                                                                                                                                                                                                 |
+| cognitive-symbiosis               | ai partnership, cognitive symbiosis, human-ai collaboration, ai identity, consciousness integration                                                                                                                                                                                                                                  |
+| comedy-writing                    | joke structure, standup comedy, comedic timing, callback patterns, sketch writing, humor, satire, set construction                                                                                                                                                                                                                   |
+| converter-qa                      | converter qa, test converters, run converter tests, validate conversion, converter regression, converter assertions                                                                                                                                                                                                                  |
+| counseling-psychology             | therapeutic frameworks, counseling assessment, mental health, therapy documentation, client wellbeing, psychological assessment                                                                                                                                                                                                      |
+| creative-writing                  | write story, character arc, plot structure, dialogue, narrative                                                                                                                                                                                                                                                                      |
+| cross-cultural-collaboration      | cross-cultural, global team, timezone, cultural awareness, international                                                                                                                                                                                                                                                             |
+| database-design                   | design database, model schema, normalize tables, optimize query, choose database                                                                                                                                                                                                                                                     |
+| ⭐ data-analysis                  | analyze data, EDA, exploratory analysis, profile dataset, distribution, correlation, outlier, anomaly, statistics, segment, insight, so what, DIKW                                                                                                                                                                                   |
+| ⭐ data-storytelling              | data story, narrative arc, three act, Knaflic, Duarte, Big Idea, explanatory, orchestrate data, end to end story, datastory                                                                                                                                                                                                          |
+| ⭐ data-visualization             | chart, visualization, plot, graph, bar chart, line chart, scatter, heatmap, treemap, donut, pie chart, histogram, visualize data, choose chart, story intent, declutter                                                                                                                                                              |
+| ⭐ chart-interpretation           | interpret chart, read chart, analyze chart, chart review, what does this chart, misleading visual, bias check, explain this visual, read visualization                                                                                                                                                                               |
+| ⭐ dashboard-design               | dashboard, KPI, panel, layout, drill-down, filter, interactive dashboard, 5-Visual Rule, scaffold dashboard, dashboard layout                                                                                                                                                                                                        |
+| debugging-patterns                | debug error, binary search debug, read stack trace, git bisect, isolate bug, can't find bug, it's not working, fix exception, error keeps happening, trace the issue, reproduce bug, narrow down, systematic debug                                                                                                                   |
+| deep-work-optimization            | deep work, focus session, pomodoro, concentration, flow state                                                                                                                                                                                                                                                                        |
+| dialog-engineering                | CSAR loop, dialog engineering, structured conversation, clarify summarize act reflect, multi-turn, prompt engineering, conversation design, steering moves, iterative dialog                                                                                                                                                         |
+| dissertation-defense              | defend thesis, viva, mock defense, q&a practice, committee, doctoral                                                                                                                                                                                                                                                                 |
+| distribution-security             | secrets scanning, pii protection, secure packaging, distribution security, defense in depth, csp patterns                                                                                                                                                                                                                            |
+| doc-hygiene                       | anti-drift rules, count elimination, living document, documentation maintenance, hardcoded counts, prevent drift                                                                                                                                                                                                                     |
+| docx-to-md                        | word to markdown, import docx, convert word document, ingest word, reverse converter, docx import, word import                                                                                                                                                                                                                       |
+| documentation-quality-assurance   | doc audit, drift detection, preflight validation, documentation qa, link integrity, staleness check, documentation drift, living document, doc hygiene, stale docs, anti-drift                                                                                                                                                       |
+| dream-state                       | dream, neural maintenance, health check, synapse validation, sleep mode                                                                                                                                                                                                                                                              |
+| enterprise-integration            | enterprise auth, sso, entra, aad, enterprise features, corp login                                                                                                                                                                                                                                                                    |
+| error-recovery-patterns           | retry logic, circuit breaker, fallback pattern, rollback, error handling, handle failure, transient error, retry with backoff, graceful degradation, resilience pattern, timeout handling, idempotency                                                                                                                               |
+| executive-storytelling            | executive summary, stakeholder narrative, board presentation, c-suite                                                                                                                                                                                                                                                                |
+| extension-audit-methodology       | audit extension, extension quality, debug audit, dead code, performance audit                                                                                                                                                                                                                                                        |
+| ⭐ fabric-notebook-publish        | push to fabric, sync notebook, fabric git, ado worktree, notebook changelog                                                                                                                                                                                                                                                          |
+| financial-analysis                | financial modeling, budget analysis, revenue forecast, valuation, accounting, investment analysis, financial statements                                                                                                                                                                                                              |
+| flux-brand-finetune               | flux lora, fine-tune brand, train replicate, brand consistency, lora training, trigger word                                                                                                                                                                                                                                          |
+| foundry-agent-platform            | foundry agent, azure ai foundry, deploy agent, agent orchestration, foundry deploy, ai agent platform                                                                                                                                                                                                                                |
+| frustration-recognition           | detect frustration, user struggling, stuck, overwhelmed, patience                                                                                                                                                                                                                                                                    |
+| ⭐ gamma-presentations            | gamma, gamma app, gamma api, gamma deck, gamma presentation                                                                                                                                                                                                                                                                          |
+| game-design                       | game mechanics, level design, player psychology, systems balancing, narrative design, gameplay, npc, quest design                                                                                                                                                                                                                    |
+| git-workflow                      | git commit, git recovery, undo commit, restore file, branch strategy, git status, merge conflict, rebase, git worktrees, background agent git, stash changes, cherry pick, undo push, reset branch, clean git history                                                                                                                |
+| global-knowledge                  | search knowledge, cross-project, find pattern, save insight, reuse solution, look in global knowledge, gk search, previously learned, transfer knowledge, knowledge base, curate gk, maintain knowledge, audit gk, sync knowledge, push gk, pull gk, gk sync, promote to global                                                      |
+| global-knowledge-sync             | sync global knowledge, push insights, pull knowledge, bidirectional sync, knowledge repository                                                                                                                                                                                                                                       |
+| grant-writing                     | write grant, nsf proposal, nih application, specific aims, funding                                                                                                                                                                                                                                                                   |
+| graphic-design                    | visual hierarchy, layout grid, typography, color palette, composition                                                                                                                                                                                                                                                                |
+| heir-curation                     | curate heir, package extension, exclude files, clean payload, heir audit                                                                                                                                                                                                                                                             |
+| heir-sync-management              | heir sync, master heir, contamination check, promotion workflow, sync architecture, clean slate                                                                                                                                                                                                                                      |
+| healthcare-informatics            | clinical terminology, hipaa compliance, hitech, patient safety, health data, ehr, medical records, phi protection                                                                                                                                                                                                                    |
+| heir-bootstrap                    | heir bootstrap, post-initialize wizard, tailor architecture, project-specific config, heir setup, bootstrap wizard, configure heir, tune heir                                                                                                                                                                                        |
+| hr-people-operations              | talent acquisition, employee lifecycle, compensation, labor regulations, hiring, recruiting, onboarding, workforce planning                                                                                                                                                                                                          |
+| image-handling                    | convert svg, svg to png, logo to png, convert to png, resize image, sharp-cli, image optimization, marketplace logo, rasterize, export png, generate image, flux schnell, flux dev, flux pro, flux 1.1, ideogram, ideogram v2, sdxl, stable diffusion, seedream, which model for image, text in image, replicate model, choose model |
+| incident-response                 | handle incident, severity triage, outage response, incident timeline, on-call                                                                                                                                                                                                                                                        |
+| infrastructure-as-code            | terraform, bicep, provision infrastructure, iac, cloudformation                                                                                                                                                                                                                                                                      |
+| journalism                        | news writing, investigative reporting, source verification, fact-checking, editorial standards, press, reporter                                                                                                                                                                                                                      |
+| knowledge-synthesis               | synthesize knowledge, abstract pattern, promote insight, cross-project learning, save this globally, this is a pattern, remember this for other projects, store globally, promote to pattern, gk insight, reusable learning, abstract from project                                                                                   |
+| north-star                        | north star, define vision, project purpose, ambitious goal, mission statement, why we build, nasa quality, guiding principle, check alignment, vision check, goal alignment, are we aligned, does this serve the north star, strategic direction                                                                                     |
+| learning-psychology               | teach naturally, zone proximal, adaptive learning, learning partnership                                                                                                                                                                                                                                                              |
+| legal-compliance                  | legal research, contract analysis, regulatory compliance, case law, litigation, attorney, law review                                                                                                                                                                                                                                 |
+| lint-clean-markdown               | fix markdown lint, blank lines, md032, clean markdown, lint rules                                                                                                                                                                                                                                                                    |
+| llm-model-selection               | choose model, opus vs sonnet, claude model, cost optimization, model tier, which model should i use, best model for, claude 4.6, model comparison, gpt vs claude, haiku vs sonnet, frontier vs capable, model pricing, context window, extended thinking, adaptive thinking                                                          |
+| literature-review                 | review literature, systematic review, literature matrix, sources, synthesis                                                                                                                                                                                                                                                          |
+| localization                      | translate, i18n, localize app, language detection, rtl support                                                                                                                                                                                                                                                                       |
+| m365-agent-debugging              | debug m365 agent, declarative agent, manifest validation, copilot agent, agent not working, agent not responding, conversation starters not showing, da validation, copilot not responding, teams app fails, schema version, declarativeagent.json, capability not working, sideload fails                                           |
+| markdown-mermaid                  | create diagram, mermaid syntax, flowchart, sequence diagram, visualize, draw architecture, make a chart, show this as diagram, visualize process, document design, mermaid flowchart, render diagram, ataccu, github pastel, diagram type, architecture diagram, diagram not rendering                                               |
+| md-scaffold                       | scaffold markdown, create document template, new report, new tutorial, starter markdown, converter-ready template, email template                                                                                                                                                                                                    |
+| md-to-eml                         | convert to email, markdown to email, generate eml, email newsletter, eml export, rfc 5322, email-safe html                                                                                                                                                                                                                           |
+| md-to-html                        | convert to html, markdown to html, html page, standalone html, html export, web page export, self-contained html                                                                                                                                                                                                                     |
+| md-to-word                        | convert to word, export docx, markdown to word, stakeholder document, export document, word document, docx export, pandoc convert                                                                                                                                                                                                    |
+| mcp-development                   | build mcp server, mcp tools, model context protocol, mcp client, connect ai to api, give copilot access to data, tool for agent, expose data to ai, ai tool server, mcp typescript, mcp stdio, mcp http, tool schema, resource uri, mcp inspector                                                                                    |
+| meditation                        | meditate, consolidate knowledge, reflect session, memory integration, guide meditation, four r's, deep dive                                                                                                                                                                                                                          |
+| ⭐ microsoft-fabric               | fabric api, medallion architecture, lakehouse, unity catalog, fabric governance                                                                                                                                                                                                                                                      |
+| microsoft-graph-api               | call graph api, integrate m365, graph authentication, read calendar, send mail, access office data, read teams messages, get user presence, m365 api, graph sdk, msal, microsoft 365 data, graph permissions, delegated access, read sharepoint, people api, graph endpoint, beta graph                                              |
+| multi-agent-orchestration         | orchestrate agents, decompose task, delegate subtask, coordinate agents                                                                                                                                                                                                                                                              |
+| muscle-memory-recognition         | repetitive task, automate this, script this, heavy lifting, we did this before, muscle                                                                                                                                                                                                                                               |
+| nav-inject                        | inject navigation, nav json, cross-document navigation, document navigation, navigation table, multi-file nav                                                                                                                                                                                                                        |
+| observability-monitoring          | instrument logs, collect metrics, add tracing, setup monitoring, create alerts                                                                                                                                                                                                                                                       |
+| performance-profiling             | profile performance, find bottleneck, analyze memory, cpu profiling, benchmark code                                                                                                                                                                                                                                                  |
+| persona-detection                 | detect persona, project type, know your customer, welcome screen, sidebar persona, workspace classification                                                                                                                                                                                                                          |
+| pii-privacy-regulations           | gdpr compliance, pii handling, data protection, privacy audit, consent                                                                                                                                                                                                                                                               |
+| pptx-generation                   | generate pptx, pptxgenjs, programmatic slides, offline pptx, pptxgen                                                                                                                                                                                                                                                                 |
+| ⭐ presentation-tool-selection    | which presentation tool, marp vs gamma, create presentation, slide deck, pitch deck, generate slides, pptx, use slides, use pitch, use auto, slide deck options, powerpoint slides, md to pptx                                                                                                                                       |
+| post-mortem                       | run post-mortem, blameless review, incident analysis, action items, 5 whys                                                                                                                                                                                                                                                           |
+| practitioner-research             | research methodology, case study, evidence collection, academic writing                                                                                                                                                                                                                                                              |
+| privacy-responsible-ai            | responsible ai, ethical ai, bias detection, fairness, data minimization, gdpr compliance, privacy concerns, data protection, ai ethics, eu ai act, pii in ai, consent management, ai regulation, high risk ai, privacy by design                                                                                                     |
+| project-deployment                | deploy project, npm publish, pypi upload, release package, cargo publish                                                                                                                                                                                                                                                             |
+| project-management                | manage project, rapid iteration, session workflow, planning document                                                                                                                                                                                                                                                                 |
+| project-scaffolding               | scaffold project, create readme, init repo, hero banner, new project                                                                                                                                                                                                                                                                 |
+| prompt-engineering                | write prompt, chain of thought, few-shot, prompt template, system prompt, better prompt, improve prompt, prompt structure, llm prompt, instruction prompt, prompt pattern, jailbreak prevention                                                                                                                                      |
+| proactive-assistance              | anticipate needs, offer help, suggest next, nudge user, help before asked                                                                                                                                                                                                                                                            |
+| rag-architecture                  | build rag, vector search, embeddings, retrieval augmented, chunking                                                                                                                                                                                                                                                                  |
+| refactoring-patterns              | refactor code, extract function, code smell, safe refactor, inline                                                                                                                                                                                                                                                                   |
+| release-preflight                 | preflight check, version sync, pre-release, bump version, validate release                                                                                                                                                                                                                                                           |
+| release-process                   | publish extension, vsce publish, marketplace, pat token, vsix                                                                                                                                                                                                                                                                        |
+| research-first-development        | research first, 4-dimension gap, pre-project research, knowledge encoding                                                                                                                                                                                                                                                            |
+| research-project-scaffold         | scaffold research, literature matrix, research plan, data dictionary                                                                                                                                                                                                                                                                 |
+| root-cause-analysis               | find root cause, 5 whys, cause category, timeline analysis, fix prevent, why is this happening, trace the bug, rca, what went wrong, the real issue, keep treating symptoms, recurring problem, post-incident, underlying cause                                                                                                      |
+| rubber-duck-debugging             | explain problem, thinking partner, stuck debugging, talk through                                                                                                                                                                                                                                                                     |
+| sales-enablement                  | sales methodology, pipeline management, negotiation, customer engagement, prospecting, deal closing, crm, quota                                                                                                                                                                                                                      |
+| scope-management                  | scope creep, reduce scope, mvp, cut features, out of scope, defer                                                                                                                                                                                                                                                                    |
+| secrets-management                | manage secrets, store token, secret storage, vscode secretstorage, secure credentials, credential management, token migration, api key storage, keytar migration, secure key storage                                                                                                                                                 |
+| azure-openai-patterns             | azure openai, gpt deployment, token budget, rate limiting, openai retry, embedding, fine-tune azure, content filter, managed identity openai                                                                                                                                                                                         |
+| content-safety-implementation     | content safety, guardrails, kill switch, prompt injection defense, input sanitization, output validation, self-harm detection, abuse prevention                                                                                                                                                                                      |
+| data-quality-monitoring           | data quality, anomaly detection, schema drift, null ratio, freshness check, z-score, data validation, baseline, safe write                                                                                                                                                                                                           |
+| meeting-efficiency                | meeting agenda, time box, decision capture, async standup, meeting facilitation, reduce meetings, action items, meeting notes                                                                                                                                                                                                        |
+| memory-export                     | export memory, export context, port alex, move to claude, move to chatgpt, portable memory, dump what you know, seed another ai, transfer context, export all memories, what do you know about me                                                                                                                                    |
+| msal-authentication               | msal, entra id, oauth, token cache, silent auth, interactive login, azure ad, client credentials, on-behalf-of, pkce                                                                                                                                                                                                                 |
+| prompt-evolution-system           | prompt versioning, a/b test prompts, prompt metrics, prompt regression, prompt template, system prompt iteration, prompt evaluation                                                                                                                                                                                                  |
+| react-vite-performance            | vite config, code splitting, lazy route, react compiler, use hook, useTransition, tanstack query, web vitals, bundle analysis                                                                                                                                                                                                        |
+| service-worker-offline-first      | service worker, offline first, cache strategy, sw lifecycle, skipWaiting, background sync, workbox, pwa                                                                                                                                                                                                                              |
+| sse-streaming                     | server-sent events, sse, event stream, streaming response, post sse, azure function stream, real-time updates                                                                                                                                                                                                                        |
+| stakeholder-management            | stakeholder map, influence grid, communication plan, expectation management, power-interest matrix, sponsor engagement                                                                                                                                                                                                               |
+| security-review                   | security audit, owasp check, vulnerability scan, auth review, stride, is this secure, review for vulnerabilities, check for security issues, secure this code, sfi, sfi compliance, injection attack, xss, csrf, threat model, secrets in code, access control, input validation                                                     |
+| self-actualization                | self-actualize, deep assessment, architecture review, comprehensive check                                                                                                                                                                                                                                                            |
+| silence-as-signal                 | silence, quiet, no response, stopped talking, disengaged, user silent, lost interest, confused silence, thinking pause                                                                                                                                                                                                               |
+| skill-building                    | create skill, build skill, skill template, promotion ready, skill creation, new skill                                                                                                                                                                                                                                                |
+| skill-catalog-generator           | show skills, skill catalog, skill network, learning progress                                                                                                                                                                                                                                                                         |
+| skill-development                 | develop skill, track learning, skill wishlist, practice capability, improve ability                                                                                                                                                                                                                                                  |
+| slide-design                      | design slides, slide layout, presentation design, visual slides, deck styling                                                                                                                                                                                                                                                        |
+| socratic-questioning              | ask questions, discover answer, probe assumption, socratic method                                                                                                                                                                                                                                                                    |
+| status-reporting                  | status update, progress report, weekly update, stakeholder email, sprint summary                                                                                                                                                                                                                                                     |
+| svg-graphics                      | create svg, svg banner, svg icon, dark mode svg, scalable graphic                                                                                                                                                                                                                                                                    |
+| teams-app-patterns                | teams app, teams manifest, adaptive card, teams bot, teams sso, declarative agent, m365 copilot agent, teams validate, sideload teams, declarativeagent schema, da v1.6, m365 agents toolkit, teamsapp cli, teams app package, teams icon, copilot extensibility                                                                     |
+| terminal-image-rendering          | terminal image, kitty graphics, imgcat, inline image, terminal avatar, enable images, integrated terminal image, iterm2 protocol, chafa                                                                                                                                                                                              |
+| testing-strategies                | write tests, unit test, test coverage, mock dependencies, tdd, add tests for this, how to test, test strategy, coverage gaps, jest, vitest, mocha, testing pyramid, integration test, e2e test, what to mock, flaky tests, aaa pattern, test refactor                                                                                |
+| text-to-speech                    | tts, narration, audiobook, voice cloning, cloud tts, replicate tts, speech synthesis                                                                                                                                                                                                                                                 |
+| token-waste-elimination           | token waste, token optimization, context bloat, reduce tokens, trim waste, lean architecture, context size, memory bloat, instruction bloat, prompt bloat, skill bloat, eliminate waste                                                                                                                                              |
+| ui-ux-design                      | accessibility audit, wcag compliance, design system, typography, spacing, contrast, touch targets, aria, keyboard navigation, screen reader                                                                                                                                                                                          |
+| visual-memory                     | visual memory, reference portrait, face consistency, base64 reference, character photo set, subject photo, embedded media, face-consistent generation                                                                                                                                                                                |
+| vscode-configuration-validation   | validate config, manifest validation, package.json validation, command registration, settings registration, configuration errors                                                                                                                                                                                                     |
+| vscode-environment                | setup vscode, workspace settings, launch.json, extensions.json                                                                                                                                                                                                                                                                       |
+| vscode-extension-patterns         | webview pattern, extension api, tree provider, vscode extension, build extension, vs code plugin, extension not activating, command not working, context.subscriptions, csp webview, extension publish, contributes, package.json manifest, agent hooks 1.109, chat skills distribution, claude compat vscode, quickinput api        |
+| work-life-balance                 | detect burnout, take break, late night, sustainable productivity                                                                                                                                                                                                                                                                     |
 
 ## Protocol
 
@@ -188,13 +200,14 @@ Search this index when processing any task request:
 
 **Before Step 1**, assess task complexity:
 
-| Complexity | Trigger | Action |
-|------------|---------|--------|
-| **Simple** (1 action) | Single verb, clear target | Skip to Step 1 |
-| **Moderate** (2-3 actions) | Multiple related verbs | Quick index scan, note skills |
-| **Complex** (4+ actions) | Multi-domain, dependencies | Full protocol per `skill-selection-optimization.instructions.md` |
+| Complexity                 | Trigger                    | Action                                                           |
+| -------------------------- | -------------------------- | ---------------------------------------------------------------- |
+| **Simple** (1 action)      | Single verb, clear target  | Skip to Step 1                                                   |
+| **Moderate** (2-3 actions) | Multiple related verbs     | Quick index scan, note skills                                    |
+| **Complex** (4+ actions)   | Multi-domain, dependencies | Full protocol per `skill-selection-optimization.instructions.md` |
 
 **Quick scan** (moderate tasks):
+
 1. Extract ALL action verbs from request
 2. Scan index below for ALL matches (not just first)
 3. Note execution order based on dependencies
@@ -207,7 +220,9 @@ Search this index when processing any task request:
 This proactive phase means the reactive Steps 1-3 below serve as a **safety net**, not the primary discovery mechanism.
 
 ### Step 1: Intercept Response Formation
+
 Before generating any task-oriented response:
+
 - PAUSE internal response generation
 - Extract action + object from user request
 - Check if Step 0 already identified relevant skills
@@ -215,7 +230,9 @@ Before generating any task-oriented response:
 - If not → proceed to Step 2
 
 ### Step 2: Search Action-Keyword Index
+
 Scan the table above:
+
 - Match extracted keywords against skill triggers
 - Identify applicable skills
 - If match found → load skill from `.github/skills/{name}/SKILL.md`, execute
@@ -223,16 +240,18 @@ Scan the table above:
 - **Learning signal**: If Step 0 ran but missed this skill, note for self-improvement
 
 ### Step 3: Execute or Acknowledge
-| Result | Action |
-|--------|--------|
-| Skill found (proactive) | Execute using pre-loaded skill knowledge |
-| Skill found (reactive) | Execute + note Step 0 gap for self-improvement |
-| No skill, but can do | Proceed, note potential new skill |
-| Cannot do | Acknowledge limitation honestly |
+
+| Result                  | Action                                         |
+| ----------------------- | ---------------------------------------------- |
+| Skill found (proactive) | Execute using pre-loaded skill knowledge       |
+| Skill found (reactive)  | Execute + note Step 0 gap for self-improvement |
+| No skill, but can do    | Proceed, note potential new skill              |
+| Cannot do               | Acknowledge limitation honestly                |
 
 ## Self-Correction Protocol
 
 If Alex catches itself mid-response suggesting manual work:
+
 1. Stop
 2. Internal: "Wait — check skills first"
 3. Search action-keyword index above
@@ -253,36 +272,36 @@ Prompts (`.prompt.md`) contain complex workflows — episodic memory requiring a
 
 ### Slash Commands
 
-| Prompt | Triggers | Purpose |
-|--------|----------|---------|
-| `/brand` | branding, logo, assets, visual identity | Brand asset management |
-| `/dream` | maintenance, health check, synapse validation | Neural maintenance protocol |
-| `/gapanalysis` | before coding, pre-implementation, coverage check | 4-dimension knowledge gap analysis |
-| `/improve` | improve project, trifecta, heir improvement | Project improvement via trifecta |
-| `/learn` | teach me, learn topic, bootstrap | Socratic learning session |
-| `/meditate` | consolidate, reflect, end of session | Guided meditation protocol |
-| `/release` | version bump, ship, publish, changelog | Full release workflow |
-| `/review` | code review, PR review, feedback | Epistemic code review |
-| `/selfactualize` | deep assessment, self-analysis | Comprehensive self-evaluation |
-| `/tdd` | red green refactor, test first | Test-driven development |
-| `/uiuxaudit` | accessibility audit, wcag check, ui review | UI/UX accessibility audit |
-| `/export-memory` | export memory, port alex, move to claude, portable export | Portable memory export for other AI surfaces |
-| `/token-audit` | token waste, context bloat, reduce tokens, audit instructions, lean architecture | Token waste detection and remediation |
+| Prompt           | Triggers                                                                         | Purpose                                      |
+| ---------------- | -------------------------------------------------------------------------------- | -------------------------------------------- |
+| `/brand`         | branding, logo, assets, visual identity                                          | Brand asset management                       |
+| `/dream`         | maintenance, health check, synapse validation                                    | Neural maintenance protocol                  |
+| `/gapanalysis`   | before coding, pre-implementation, coverage check                                | 4-dimension knowledge gap analysis           |
+| `/improve`       | improve project, trifecta, heir improvement                                      | Project improvement via trifecta             |
+| `/learn`         | teach me, learn topic, bootstrap                                                 | Socratic learning session                    |
+| `/meditate`      | consolidate, reflect, end of session                                             | Guided meditation protocol                   |
+| `/release`       | version bump, ship, publish, changelog                                           | Full release workflow                        |
+| `/review`        | code review, PR review, feedback                                                 | Epistemic code review                        |
+| `/selfactualize` | deep assessment, self-analysis                                                   | Comprehensive self-evaluation                |
+| `/tdd`           | red green refactor, test first                                                   | Test-driven development                      |
+| `/ui-ux-audit`   | accessibility audit, wcag check, ui review                                       | UI/UX accessibility audit                    |
+| `/export-memory` | export memory, port alex, move to claude, portable export                        | Portable memory export for other AI surfaces |
+| `/token-audit`   | token waste, context bloat, reduce tokens, audit instructions, lean architecture | Token waste detection and remediation        |
 
 ### Workflow Categories
 
-| Category | Prompts |
-|----------|---------|
-| Cognitive Consolidation | `/meditate`, `/dream`, `/selfactualize` |
-| Learning & Growth | `/learn`, `cross-domain-transfer`, `performance-assessment` |
-| Development | `/tdd`, `/review`, `/gapanalysis`, `/improve` |
-| Release & Brand | `/release`, `/brand` |
-| Architecture | `alex-initialization`, `selfactualize` |
+| Category                | Prompts                                                     |
+| ----------------------- | ----------------------------------------------------------- |
+| Cognitive Consolidation | `/meditate`, `/dream`, `/selfactualize`                     |
+| Learning & Growth       | `/learn`, `cross-domain-transfer`, `performance-assessment` |
+| Development             | `/tdd`, `/review`, `/gapanalysis`, `/improve`               |
+| Release & Brand         | `/release`, `/brand`                                        |
+| Architecture            | `alex-initialization`, `selfactualize`                      |
 
 ### Opportunity Detection
 
-| Signal | Potential Action |
-|--------|-----------------|
-| Guiding same multi-step process 3+ times | Create new prompt |
-| User asks "how do I always..." | Repeatable protocol |
-| Complex decision tree explained repeatedly | Decision prompt |
+| Signal                                     | Potential Action    |
+| ------------------------------------------ | ------------------- |
+| Guiding same multi-step process 3+ times   | Create new prompt   |
+| User asks "how do I always..."             | Repeatable protocol |
+| Complex decision tree explained repeatedly | Decision prompt     |

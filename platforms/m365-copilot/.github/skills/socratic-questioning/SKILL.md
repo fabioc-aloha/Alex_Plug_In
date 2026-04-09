@@ -1,6 +1,7 @@
 ---
 name: socratic-questioning
 description: Help users discover answers, don't just deliver them.
+tier: extended
 applyTo: '**/*teach*,**/*learn*,**/*explain*,**/*understand*,**/*why*'
 ---
 

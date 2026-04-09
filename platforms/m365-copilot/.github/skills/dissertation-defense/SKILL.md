@@ -1,6 +1,7 @@
 ---
 name: dissertation-defense
 description: >-
+tier: extended
   Comprehensive preparation for doctoral dissertation defense including timeline management, presentation design, Q&A
   practice, mock sessions, and committee dynamics.
 applyTo: '**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*,**/*mock*,**/*q&a*'
@@ -371,8 +372,8 @@ For dissertations involving scale development (like AIRS):
 | 12 | Theoretical Contributions | UTAUT2 extension |
 | 13 | Practical Contributions | AIRS instrument |
 | 14 | Limitations & Future Research | Honest assessment |
-| 15 | Conclusion | AIRS as diagnostic tool |
-| 16 | Questions / Try AIRS | airs.correax.com |
+| 15 | Conclusion | Instrument as diagnostic tool |
+| 16 | Questions / Try Instrument | Assessment link |
 
 ---
 

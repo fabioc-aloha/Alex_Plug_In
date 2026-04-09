@@ -1,6 +1,7 @@
 ---
 name: post-mortem
 description: Learn from failures without blame. Improve systems, not shame people.
+tier: extended
 applyTo: '**/*incident*,**/*postmortem*,**/*retro*,**/*failure*,**/*outage*'
 ---
 

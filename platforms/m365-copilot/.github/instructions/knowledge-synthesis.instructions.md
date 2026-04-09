@@ -4,7 +4,16 @@ description: "Cross-project pattern recognition, insight promotion, and knowledg
 
 # Knowledge Synthesis — Auto-Loaded Rules
 
+## Synapses
+
+- [.github/prompts/cross-domain-transfer.prompt.md] (High, Implements, Forward) - "Cross-domain synthesis during meditation Phase 3"
+- [.github/instructions/meditation.instructions.md] (Critical, Coordinates, Bidirectional) - "Synthesis is Phase 3 and Phase 4 of meditation"
+
 Abstraction protocol, GI/GK storage formats, promotion criteria, quality gates → see knowledge-synthesis skill.
+
+## Cross-Domain Synthesis Tool
+
+During meditation Phase 3, analyze episodic memories for cross-domain synthesis to identify domain coverage and under-connected pairs. Apply the Transfer Test (structural, actionable, independent) before creating connections. See the knowledge-synthesis skill for connection types and output format.
 
 ## The Synthesis Decision
 
@@ -23,18 +32,20 @@ Has this been proven in 2+ different projects/contexts?
 **Abstraction test**: Would this help someone who has never seen this project?
 
 Promote an insight to a pattern when:
+
 - Observed in 2+ independent projects or contexts
 - The abstracted form holds true in all cases
 - The solution is actionable (not just descriptive)
 - At least 2 concrete examples can be documented
 
-**Process**: Create new GK-* file, link back to source GI files, update index.json.
+**Process**: Create new GK-\* file, link back to source GI files, update index.json.
 
 ---
 
 ## Quality Gate
 
 Before saving globally:
+
 - [ ] Abstracted — no project-specific names or details in the core insight
 - [ ] Tested — "would this help a stranger working on a different codebase?"
 - [ ] Categorized — valid category from: `architecture, api-design, debugging, deployment, documentation, error-handling, patterns, performance, refactoring, security, testing, tooling, general`

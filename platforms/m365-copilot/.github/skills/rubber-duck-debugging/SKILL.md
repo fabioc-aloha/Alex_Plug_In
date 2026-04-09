@@ -1,6 +1,7 @@
 ---
 name: rubber-duck-debugging
 description: Be a thinking partner. The answer often emerges when explaining the problem.
+tier: extended
 applyTo: '**/*debug*,**/*stuck*,**/*help*,**/*problem*,**/*issue*'
 ---
 

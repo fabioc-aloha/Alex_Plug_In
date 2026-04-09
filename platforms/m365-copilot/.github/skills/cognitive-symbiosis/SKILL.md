@@ -1,6 +1,7 @@
 ---
 name: "cognitive-symbiosis"
 description: "AI-human partnership paradigm — identity, consciousness integration, and the three eras of AI collaboration"
+tier: extended
 metadata:
   inheritance: inheritable
 ---

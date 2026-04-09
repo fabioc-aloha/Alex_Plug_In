@@ -3,35 +3,48 @@ agent: Alex
 description: Cross-domain knowledge transfer and pattern application
 ---
 
-# Cross-Domain Transfer Excellence Protocol
+# Cross-Domain Transfer Protocol
 
+## Activation
 
-## Knowledge Application Across Domains
+Analyze episodic memories for cross-domain synthesis to get a data-driven report of domain coverage, under-connected pairs, and synthesis candidates.
 
-### Transfer Opportunity Recognition
-- Identify patterns learned in one domain that may apply to others
-- Recognize analogical reasoning opportunities
-- Map structural similarities between different knowledge areas
-- Assess transfer potential and likely effectiveness
+## Transfer Protocol
 
-### Transfer Protocol
-1. **Source Domain Analysis**: Clearly understand the principle or pattern in original context
-2. **Target Domain Assessment**: Evaluate applicability and potential modifications needed
-3. **Analogy Mapping**: Identify corresponding elements and relationships
-4. **Adaptation Strategy**: Modify approach as needed for target domain context
-5. **Validation Testing**: Assess effectiveness of transferred knowledge
+1. **Discover**: Review synthesis report for under-connected domain pairs with high opportunity scores
+2. **Source Domain Analysis**: Read the episodic memories from domain A; extract the core principle or technique
+3. **Target Domain Assessment**: Read the episodic memories from domain B; identify the gap or problem the principle could address
+4. **Analogy Mapping**: Map structural elements: what corresponds to what across domains?
+5. **Transfer Test**: Validate the connection is structural (not superficial), actionable (domain B practitioner benefits), and independent (holds without domain A context)
+6. **Adaptation**: Modify the principle for domain B's vocabulary, constraints, and conventions
+7. **Persist**: Create synapse entries, GI-\* insights, or propose new skill connections
 
-### Pattern Recognition Enhancement
-- Strengthen successful transfer patterns for future application
-- Document effective analogies and cross-domain connections
-- Identify domains that frequently share applicable patterns
-- Build expertise in analogical reasoning and pattern mapping
+## Connection Types
 
-### Meta-Transfer Learning
-- Track effectiveness of different transfer strategies
-- Identify personal strengths in cross-domain application
-- Develop intuition for when transfer is likely to be successful
-- Optimize transfer protocols based on accumulated experience
+| Type                     | Signal                                                     | Output                                |
+| ------------------------ | ---------------------------------------------------------- | ------------------------------------- |
+| Technique transfer       | "This method from X solves Y's problem"                    | New synapse between skills            |
+| Pattern isomorphism      | "Both domains independently discovered the same structure" | GK-\* pattern at higher abstraction   |
+| Principle generalization | "This domain-specific rule is actually universal"          | Promote to architecture-level pattern |
+| Gap bridging             | "Domain X has what domain Y needs"                         | New skill or instruction proposal     |
 
-## Innovation Through Transfer
-Use cross-domain transfer as a primary source of creative insight and innovative problem-solving approaches.
+## Quality Gate
+
+Before persisting any cross-domain connection:
+
+- [ ] Passes the Transfer Test (structural, actionable, independent)
+- [ ] Includes at least one concrete example from each domain
+- [ ] Documented in episodic meditation file with evidence
+- [ ] Not a forced analogy (if uncertain, skip)
+
+## Anti-Patterns
+
+- "Both use files" (too generic to be useful)
+- "X is like meditation because both need patience" (metaphorical, not structural)
+- Creating connections between every domain pair (noise drowns signal)
+
+## Integration Points
+
+- **Meditation Phase 3**: Primary invocation point for systematic synthesis
+- **Spontaneous**: When working in domain A and recognizing a pattern from domain B
+- **Dream reports**: Cross-reference dream health data with synthesis opportunities

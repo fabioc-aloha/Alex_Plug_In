@@ -1,6 +1,7 @@
 ---
 name: grant-writing
 description: Translate research vision into funded reality.
+tier: extended
 applyTo: '**/*grant*,**/*funding*,**/*proposal*,**/*nsf*,**/*nih*,**/*research*'
 ---
 

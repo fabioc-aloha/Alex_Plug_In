@@ -37,6 +37,27 @@ If ratio is inverted (many E2E, few unit) → slow CI, flaky builds, hard to deb
 - **Unit tests** (pure logic): standard jest/vitest, no VS Code runner needed
 - Test files: `src/services/x.ts` → `test/services/x.test.ts`
 
+## Test Quality Scoring (Per-Test)
+
+Core question: "Would this test fail if the production code had a real bug?"
+
+Score individual tests 1-5 during review:
+
+| Score | Meaning | Action |
+|-------|---------|--------|
+| 1 | Worse than nothing (false confidence) | Delete |
+| 2 | Severely flawed (over-mocked, no real assertions) | Rewrite from scratch |
+| 3 | Has some value but weak verification | Improve assertions |
+| 4 | Solid test, catches real bugs | Acceptable |
+| 5 | High value, catches subtle regressions | Exemplar |
+
+**Rapid triage for test suites**:
+1. **Red**: No assertions, trivial assertions (`assert.ok(true)`), exception swallowing, self-referential tests → Score 1-2
+2. **Yellow**: Over-mocking, testing implementation details, weak verification (`toBeDefined`) → Score 2-3
+3. **Green**: Tests behavior, meaningful assertions, covers edge cases → Score 4-5
+
+Deep-analyze only Red and Yellow tests. Green tests pass triage.
+
 ## Coverage
 
 80%+ lines for core business logic. Don't chase 100% — chase confidence that regressions get caught. Every public API: happy path + at least one edge case + error handling.

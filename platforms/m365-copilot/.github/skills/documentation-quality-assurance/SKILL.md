@@ -1,6 +1,7 @@
 ---
 name: "documentation-quality-assurance"
 description: "Systematic documentation audit, drift detection, preflight validation, and multi-pass quality pipelines"
+tier: standard
 metadata:
   inheritance: inheritable
 ---

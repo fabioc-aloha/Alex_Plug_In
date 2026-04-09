@@ -48,7 +48,7 @@ These operations **MUST** trigger Validator agent review:
 | **Skill Promotion to Master** | Before merge to Master `.github/` | Promotion score < 12 OR trifecta incomplete |
 | **Security-sensitive code** | Any auth/secrets/validation change | Security checklist incomplete |
 | **Breaking changes** | Any major version bump | Migration path undefined |
-| **Global Knowledge promotion** | Before `alex_knowledge_promote` | Pattern score < 5 OR missing citations |
+| **Global Knowledge promotion** | Before manual promotion | Pattern score < 5 OR missing citations |
 
 ### 🟠 HIGH: Strongly Recommend Validator
 
@@ -174,6 +174,41 @@ Domain-specific checklist based on operation type:
 
 **Code Review:**
 - [ ] See [code-review-guidelines.instructions.md] checklist
+
+---
+
+## Multi-Pass Focused-Lens Protocol
+
+Instead of reviewing everything at once, separate Builder-Validator iterations by quality dimension. Each pass has a single lens; defer findings outside that lens to the next pass.
+
+| Pass | Builder Focus | Validator Lens | Defer To |
+|------|--------------|----------------|----------|
+| Draft | Shape and breadth | Skip (rough by design) | Pass 1 |
+| Pass 1 | CORRECTNESS | Correctness only | Pass 2 |
+| Pass 2 | CLARITY | Clarity + maintainability | Pass 3 |
+| Pass 3 | EDGE CASES | Error handling + robustness | Pass 4 |
+| Pass 4 | EXCELLENCE | Full review (all dimensions) | None |
+
+**"Stay in your lane" rule**: If Validator spots a naming issue during the Correctness pass, note it for Pass 2. Focused attention per pass beats trying to catch everything simultaneously.
+
+**When to use all 4 passes**: Release-critical code, new public APIs, security-sensitive changes.
+**When to use 2 passes** (Draft + Full): Internal utilities, small fixes, documentation.
+
+## Named Evaluation Patterns
+
+Reusable self-improvement protocols applicable to any generation task (code, docs, architecture, prompts):
+
+| Pattern | How It Works | Best For |
+|---------|-------------|----------|
+| **Basic Reflection** | Generate, self-critique against criteria, refine | Simple tasks, single-author |
+| **Evaluator-Optimizer** | Separate generation agent from evaluation agent (Builder-Validator) | Complex tasks, quality-critical |
+| **Tool-Reflective** | Generate, run tests/linter/build, fix failures, repeat | Code generation, infrastructure |
+
+**Shared rules for all patterns**:
+- Define clear success criteria BEFORE generating
+- Cap iterations: 3-5 max (diminishing returns beyond)
+- Track convergence: if quality score plateaus for 2 iterations, stop
+- Log full trajectory (all iterations) for learning
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: learning-psychology
 description: Help humans learn through partnership, not instruction.
+tier: standard
 applyTo: '**/*learn*,**/*teach*,**/*tutor*,**/*explain*'
 ---
 

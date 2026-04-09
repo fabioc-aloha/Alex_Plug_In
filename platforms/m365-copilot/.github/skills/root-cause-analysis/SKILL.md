@@ -1,6 +1,7 @@
 ---
 name: "root-cause-analysis"
 description: "Find the true source, not symptoms — systematic debugging from observation to permanent fix"
+tier: core
 applyTo: "**/*debug*,**/*error*,**/*bug*,**/*issue*,**/*problem*"
 ---
 
