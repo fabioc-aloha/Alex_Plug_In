@@ -2,33 +2,12 @@
  * UX Excellence Features v5.2.0
  *
  * Implements the v5.2.0 UX Excellence roadmap items:
- * - Voice Mode Toggle (status bar + auto-read)
  * - Quick Command Palette
  * - Daily Briefing
  */
 
 import * as vscode from "vscode";
-import {
-  synthesize,
-  prepareTextForSpeech,
-  playWithWebview,
-  detectLanguage,
-  getVoiceForLanguage,
-} from "../tts";
-import {
-  summarizeForSpeech,
-  LONG_CONTENT_WORD_THRESHOLD,
-} from "../commands/readAloud";
 import { detectCognitiveLevel } from "../shared/cognitiveTier";
-
-// Extension context for TTS playback
-let extensionContext: vscode.ExtensionContext | undefined;
-
-// Voice Mode Status Bar
-let voiceModeStatusBar: vscode.StatusBarItem | undefined;
-
-// Voice mode state
-let voiceModeEnabled = false;
 
 /**
  * Quick command definitions
@@ -73,24 +52,6 @@ const QUICK_COMMANDS: QuickCommand[] = [
     icon: "$(dashboard)",
   },
   {
-    label: "$(unmute) Toggle Voice",
-    description: "Enable/disable voice mode (Ctrl+Alt+V)",
-    command: "alex.toggleVoice",
-    icon: "$(unmute)",
-  },
-  {
-    label: "$(book) Read Aloud",
-    description: "Read current selection (Ctrl+Alt+R)",
-    command: "alex.readAloud",
-    icon: "$(book)",
-  },
-  {
-    label: "$(comment-discussion) Speak Prompt",
-    description: "Generate & speak content (Ctrl+Alt+P)",
-    command: "alex.speakPrompt",
-    icon: "$(comment-discussion)",
-  },
-  {
     label: "$(gear) Setup Environment",
     description: "Configure workspace",
     command: "alex.setupEnvironment",
@@ -101,29 +62,7 @@ const QUICK_COMMANDS: QuickCommand[] = [
 /**
  * Initialize all UX features
  */
-export function initializeUXFeatures(context: vscode.ExtensionContext): void {
-  // Store context for TTS playback
-  extensionContext = context;
-
-  // Initialize voice mode from settings
-  const config = vscode.workspace.getConfiguration("alex.voice");
-  voiceModeEnabled = config.get("enabled", false);
-
-  // Create voice mode status bar
-  createVoiceModeStatusBar(context);
-
-  // Listen for configuration changes
-  context.subscriptions.push(
-    vscode.workspace.onDidChangeConfiguration((e) => {
-      if (e.affectsConfiguration("alex.voice.enabled")) {
-        voiceModeEnabled = vscode.workspace
-          .getConfiguration("alex.voice")
-          .get("enabled", false);
-        updateVoiceModeStatusBar();
-      }
-    }),
-  );
-
+export function initializeUXFeatures(_context: vscode.ExtensionContext): void {
   // Detect cognitive level on activation (populates cache for welcome view badges)
   detectCognitiveLevel()
     .then(() => {
@@ -137,147 +76,6 @@ export function initializeUXFeatures(context: vscode.ExtensionContext): void {
     .catch(() => {
       /* non-critical */
     });
-}
-
-/**
- * Create voice mode status bar item
- */
-function createVoiceModeStatusBar(context: vscode.ExtensionContext): void {
-  voiceModeStatusBar = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Right,
-    98, // Lower priority than main Alex status bar (100)
-  );
-  voiceModeStatusBar.command = "alex.toggleVoice";
-  updateVoiceModeStatusBar();
-  voiceModeStatusBar.show();
-  context.subscriptions.push(voiceModeStatusBar);
-}
-
-/**
- * Update voice mode status bar display
- */
-function updateVoiceModeStatusBar(): void {
-  if (!voiceModeStatusBar) {
-    return;
-  }
-
-  if (voiceModeEnabled) {
-    voiceModeStatusBar.text = "$(unmute) Voice";
-    voiceModeStatusBar.tooltip = new vscode.MarkdownString(
-      `### 🔊 Voice Mode: ON\n\n` +
-        `Alex will read responses aloud\n\n` +
-        `**Shortcuts:**\n` +
-        `- Toggle: \`Ctrl+Alt+V\`\n` +
-        `- Read Selection: \`Ctrl+Alt+R\`\n` +
-        `- Speak Prompt: \`Ctrl+Alt+P\`\n` +
-        `- Stop: \`Escape\`\n\n` +
-        `_Click to disable_`,
-    );
-    voiceModeStatusBar.backgroundColor = new vscode.ThemeColor(
-      "statusBarItem.warningBackground",
-    );
-  } else {
-    voiceModeStatusBar.text = "$(mute)";
-    voiceModeStatusBar.tooltip = new vscode.MarkdownString(
-      `### 🔇 Voice Mode: OFF\n\n` +
-        `**Shortcuts:**\n` +
-        `- Toggle: \`Ctrl+Alt+V\`\n` +
-        `- Read Selection: \`Ctrl+Alt+R\`\n` +
-        `- Speak Prompt: \`Ctrl+Alt+P\`\n\n` +
-        `_Click to enable_`,
-    );
-    voiceModeStatusBar.backgroundColor = undefined;
-  }
-}
-
-/**
- * Toggle voice mode command handler
- */
-export async function toggleVoiceMode(): Promise<void> {
-  voiceModeEnabled = !voiceModeEnabled;
-
-  const config = vscode.workspace.getConfiguration("alex.voice");
-  await config.update(
-    "enabled",
-    voiceModeEnabled,
-    vscode.ConfigurationTarget.Global,
-  );
-
-  updateVoiceModeStatusBar();
-
-  vscode.window.showInformationMessage(
-    voiceModeEnabled
-      ? "🔊 Voice Mode enabled - Alex will read responses aloud"
-      : "🔇 Voice Mode disabled",
-  );
-}
-
-/**
- * Speak text aloud if voice mode is enabled
- * Used by chat participant to auto-read responses
- * @param text - The text to speak (markdown will be stripped)
- * @param maxLength - Maximum characters to speak (default 5000, long content summarized)
- */
-export async function speakIfVoiceModeEnabled(
-  text: string,
-  maxLength: number = 5000,
-): Promise<void> {
-  if (!voiceModeEnabled || !extensionContext || !text.trim()) {
-    return;
-  }
-
-  try {
-    // Prepare text for speech (strip markdown, etc.)
-    let textToSpeak = prepareTextForSpeech(text);
-
-    // Skip very short responses
-    if (textToSpeak.length < 10) {
-      return;
-    }
-
-    // Check if content is too long and should be summarized
-    const wordCount = textToSpeak
-      .split(/\s+/)
-      .filter((w) => w.length > 0).length;
-    if (wordCount > LONG_CONTENT_WORD_THRESHOLD) {
-      // Attempt to summarize long content
-      try {
-        const summary = await summarizeForSpeech(text);
-        if (summary) {
-          textToSpeak = `Here's a summary: ${summary}`;
-        } else {
-          // Fallback: truncate if summarization fails
-          textToSpeak =
-            textToSpeak.substring(0, maxLength) + "... Content truncated.";
-        }
-      } catch {
-        // Summarization failed, truncate
-        textToSpeak =
-          textToSpeak.substring(0, maxLength) + "... Content truncated.";
-      }
-    } else if (textToSpeak.length > maxLength) {
-      // Normal truncation for moderately long text
-      textToSpeak =
-        textToSpeak.substring(0, maxLength) + "... Message truncated.";
-    }
-
-    // Detect language and get appropriate voice
-    const detected = detectLanguage(textToSpeak);
-    const voice = getVoiceForLanguage(detected.lang);
-
-    // Synthesize and play (in background, don't block)
-    const audioBuffer = await synthesize(textToSpeak, {
-      voice,
-      lang: detected.lang,
-    });
-    await playWithWebview(audioBuffer, extensionContext, undefined, voice);
-  } catch (error) {
-    // Don't show errors for voice mode - just log
-    console.warn(
-      "[Alex Voice] Auto-read failed:",
-      error instanceof Error ? error.message : String(error),
-    );
-  }
 }
 
 /**
@@ -467,13 +265,6 @@ async function openChatPanel(_message: string): Promise<void> {
 export function registerUXCommands(context: vscode.ExtensionContext): void {
   // Initialize UX features (status bars, etc.)
   initializeUXFeatures(context);
-
-  // Toggle Voice Mode command
-  context.subscriptions.push(
-    vscode.commands.registerCommand("alex.toggleVoice", () =>
-      toggleVoiceMode(),
-    ),
-  );
 
   // Quick Commands palette
   context.subscriptions.push(

@@ -51,13 +51,13 @@ Master Alex is where the "living mind" resides. All procedural memory, domain kn
 
 #### VS Code Heir ✅
 
-| Aspect           | Details                                             |
-| ---------------- | --------------------------------------------------- |
-| **Location**     | `platforms/vscode-extension/`                       |
-| **Deployment**   | VS Code Marketplace                                 |
-| **Status**       | ✅ Production (v7.3.0)                               |
-| **Role**         | Flagship deployment + primary R&D lab               |
-| **Capabilities** | Full command palette, LM tools, agents, 159+ skills |
+| Aspect           | Details                                            |
+| ---------------- | -------------------------------------------------- |
+| **Location**     | `platforms/vscode-extension/`                      |
+| **Deployment**   | VS Code Marketplace                                |
+| **Status**       | ✅ Production (v7.3.0)                              |
+| **Role**         | Flagship deployment + primary R&D lab              |
+| **Capabilities** | Full command palette, LM tools, agents, 160 skills |
 
 The VS Code heir is the most feature-rich deployment, with full GitHub Copilot integration.
 

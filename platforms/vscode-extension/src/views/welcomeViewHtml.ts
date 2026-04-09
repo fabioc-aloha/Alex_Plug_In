@@ -193,6 +193,7 @@ export function getWelcomeHtmlContent(
   showBootstrap?: boolean,
   isBootstrapResume?: boolean,
   activeTab?: string,
+  isMaster?: boolean,
 ): string {
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, "_getHtmlContent: webview must be defined");
@@ -279,7 +280,7 @@ export function getWelcomeHtmlContent(
           <button role="tab" id="tab-docs" class="tab${activeTab === "docs" ? " active" : ""}" data-tab="docs" aria-selected="${activeTab === "docs" ? "true" : "false"}" aria-controls="panel-docs" tabindex="${activeTab === "docs" ? "0" : "-1"}">Docs</button>
       </div>
 
-      ${getMissionTabHtml({ nudges, activeContext, showBootstrap, isBootstrapResume, chatMemoryLines: mindData?.chatMemoryLines ?? 0, isActive: activeTab === "mission" || !activeTab })}
+      ${getMissionTabHtml({ nudges, activeContext, showBootstrap, isBootstrapResume, chatMemoryLines: mindData?.chatMemoryLines ?? 0, isActive: activeTab === "mission" || !activeTab, isMaster })}
 
       ${getSettingsTabHtml({ tokenStatuses, settingsToggles, isActive: activeTab === "settings" })}
 

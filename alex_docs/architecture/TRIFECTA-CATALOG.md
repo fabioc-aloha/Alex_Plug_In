@@ -1,6 +1,6 @@
 # Trifecta Catalog
 
-> **Last Audited**: 2026-04-04
+> **Last Audited**: 2026-04-08
 > **Protocol**: `.github/instructions/trifecta-audit.instructions.md`
 > **Principle**: Completeness with purpose, not completeness for its own sake.
 
@@ -59,7 +59,7 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 ---
 
-## Complete Trifectas (44)
+## Complete Trifectas (45)
 
 Capabilities with all three memory system components — each justified by the "Why?" test.
 
@@ -466,6 +466,17 @@ Capabilities with all three memory system components — each justified by the "
 
 **Inheritance**: `inheritable` — authentic writing relevant across all content-producing heirs
 
+### Memory Export
+
+| Component   | File                                                 | Why It Exists                                                                      |
+| ----------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Skill       | `.github/skills/memory-export/SKILL.md`              | Domain knowledge: multi-layer memory collection, portable format, cross-surface AI |
+| Instruction | `.github/instructions/memory-export.instructions.md` | Auto-loaded procedure: export rules, source ordering, format requirements          |
+| Prompt      | `.github/prompts/export-memory.prompt.md`            | `/export-memory` — user invokes full memory export to portable document            |
+
+**Synapse connections**: knowledge-synthesis (0.7), global-knowledge (0.8), doc-hygiene (0.6)
+**Inheritance**: `inheritable` — memory portability applicable across all heirs
+
 ### Token Waste Elimination
 
 | Component   | File                                                           | Why It Exists                                                                      |
@@ -588,7 +599,7 @@ Notable skill-only examples and why:
 ## Trifecta Health Summary
 
 ```
-Complete Trifectas:   39 (37 verified + 2 pending prompt creation)
+Complete Trifectas:   45 (+ 2 pending prompt creation: markdown-mermaid, heir-sync-management)
 Procedural-Only:      17 (all justified)
 Prompt-Only:           3 (all justified)
 Skill-Only:          ~90 (standard — passive expertise)
@@ -601,7 +612,7 @@ Skill-Only:          ~90 (standard — passive expertise)
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 flowchart LR
-    subgraph COMPLETE["✅ Complete Trifectas (39)"]
+    subgraph COMPLETE["✅ Complete Trifectas (45)"]
         RFD["Research-First Development"]
         MED["Meditation"]
         SA["Self- Actualization"]
@@ -642,6 +653,13 @@ flowchart LR
         GKN["Global Knowledge"]
         FBF["Flux Brand Finetune"]
         AWA["AI Writing Avoidance"]
+        MEX["Memory Export"]
+        TWE["Token Waste Elimination"]
+        DVZ["Data Visualization"]
+        DAN["Data Analysis"]
+        DDB["Dashboard Design"]
+        DST["Data Storytelling"]
+        CIT["Chart Interpretation"]
     end
 
     subgraph LAYERS["Memory System Coverage"]
@@ -691,6 +709,13 @@ flowchart LR
     GKN --- SK & INS & PR
     FBF --- SK & INS & PR
     AWA --- SK & INS & PR
+    MEX --- SK & INS & PR
+    TWE --- SK & INS & PR
+    DVZ --- SK & INS & PR
+    DAN --- SK & INS & PR
+    DDB --- SK & INS & PR
+    DST --- SK & INS & PR
+    CIT --- SK & INS & PR
 
     style COMPLETE fill:#d4edda,stroke:#28a745
     style LAYERS fill:#e8f4f8,stroke:#0969da

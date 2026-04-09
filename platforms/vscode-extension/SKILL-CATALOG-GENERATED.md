@@ -1,14 +1,14 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-04-08
-> Total Skills: **159** (145 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
-> Total Connections: **823** (0 bidirectional, 134 weak)
+> Generated: 2026-04-09
+> Total Skills: **160** (146 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
+> Total Connections: **828** (0 bidirectional, 135 weak)
 
 ---
 
 ## Skills by Inheritance
 
-### Inheritable (145)
+### Inheritable (146)
 
 | Skill | Connections |
 | ----- | ----------- |
@@ -83,6 +83,7 @@
 | `grant-writing` | 4 |
 | `graphic-design` | 9 |
 | `healthcare-informatics` | 5 |
+| `heir-bootstrap` | 5 |
 | `hr-people-operations` | 5 |
 | `image-handling` | 9 |
 | `incident-response` | 3 |

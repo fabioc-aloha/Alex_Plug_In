@@ -361,44 +361,6 @@ export async function updatePersona(
 }
 
 /**
- * Update the Objective field.
- * Called by session timer on start (sets topic) and end (clears to placeholder).
- *
- * @param objective - Session topic string, or null/undefined to reset to placeholder
- */
-export async function updateObjective(
-  workspaceRoot: string,
-  objective: string | null | undefined,
-): Promise<boolean> {
-  return updateActiveContext(
-    workspaceRoot,
-    { objective: objective || OBJECTIVE_PLACEHOLDER },
-    "session",
-  );
-}
-
-/**
- * Update the Focus Trifectas field.
- * Focus Trifectas = 3 skills for current work context (changes per-session).
- *
- * Blocked on Master Alex workspace (Focus Trifectas are manually curated there).
- *
- * NOTE: NOT auto-called by persona detection — trifectas managed independently from persona.
- *
- * @param trifectas - Array of trifecta IDs (e.g. ['code-review', 'testing-strategies'])
- */
-export async function updateFocusTrifectas(
-  workspaceRoot: string,
-  trifectas: string[],
-): Promise<boolean> {
-  return updateActiveContext(
-    workspaceRoot,
-    { focusTrifectas: trifectas.join(", ") },
-    "persona-detection",
-  );
-}
-
-/**
  * Update the Last Assessed field.
  * Called by self-actualization after completing the protocol.
  *
@@ -413,20 +375,5 @@ export async function updateLastAssessed(
     workspaceRoot,
     { lastAssessed: `${today} — v${version}` },
     "self-actualization",
-  );
-}
-
-/**
- * Update the Principles field.
- * Rarely called — principles are usually stable. Available for future use.
- */
-export async function updatePrinciples(
-  workspaceRoot: string,
-  principles: string[],
-): Promise<boolean> {
-  return updateActiveContext(
-    workspaceRoot,
-    { principles: principles.join(", ") },
-    "principles",
   );
 }

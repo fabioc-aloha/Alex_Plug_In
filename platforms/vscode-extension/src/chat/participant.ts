@@ -21,8 +21,6 @@ import {
 } from "./honestUncertainty";
 import { createGlobalInsight } from "./globalKnowledge";
 import { GlobalKnowledgeCategory } from "../shared/constants";
-// persona detection handled elsewhere (runtime); import removed
-import { speakIfVoiceModeEnabled } from "../ux/uxFeatures";
 import {
   getModelInfo,
   detectModelTier,
@@ -976,9 +974,6 @@ Try one of these commands, or ensure GitHub Copilot is properly configured.`);
       stream.markdown(`\n\n---\n*${encouragement}*`);
       collectedResponse += ` ${encouragement}`;
     }
-
-    // Voice Mode: Read response aloud if enabled (fire and forget)
-    speakIfVoiceModeEnabled(collectedResponse).catch(() => {});
 
     // v7.2.0: Capture URLs from model response for research context
     // (request capture moved above buildAlexSystemPrompt so Layer 12 has current URLs)

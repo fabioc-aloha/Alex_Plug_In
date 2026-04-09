@@ -84,12 +84,12 @@ Follow the architecture principles and file conventions detailed below.
 
 ```
 # Validate synaptic network integrity via VS Code Command Palette
-Alex: Dream (Neural Maintenance)
+Alex: Dream
 
 # Review generated report for:
 # - Network health status (should be HEALTHY)
 # - Broken synapses count (should be 0)
-# - Total synapses (should be 150+)
+# - Total synapses (should be 800+)
 ```
 
 ## Architecture Principles
@@ -118,13 +118,13 @@ Alex: Dream (Neural Maintenance)
 
 ### File Type Conventions
 
-| Type             | Pattern                  | Purpose                                  |
-| ---------------- | ------------------------ | ---------------------------------------- |
-| **Instructions** | `{name}.instructions.md` | Procedural memory - repeatable processes |
-| **Prompts**      | `{name}.prompt.md`       | Episodic memory - complex workflows      |
-| **Skills**       | `{name}/SKILL.md`        | Specialized expertise (replaces DK-*.md) |
-| **Scripts**      | `{name}.ps1`             | PowerShell automation tools              |
-| **Config**       | `{name}.json`            | Configuration and settings               |
+| Type             | Pattern                     | Purpose                                  |
+| ---------------- | --------------------------- | ---------------------------------------- |
+| **Instructions** | `{name}.instructions.md`    | Procedural memory - repeatable processes |
+| **Prompts**      | `{name}.prompt.md`          | Episodic memory - complex workflows      |
+| **Skills**       | `{name}/SKILL.md`           | Specialized expertise (replaces DK-*.md) |
+| **Scripts**      | `{name}.cjs` / `{name}.ps1` | Automation tools (Node.js or PowerShell) |
+| **Config**       | `{name}.json`               | Configuration and settings               |
 
 ## Memory File Guidelines
 
@@ -204,9 +204,9 @@ Before submitting a pull request:
 
 ```
 # Validate all synaptic connections via VS Code Command Palette
-Alex: Dream (Neural Maintenance)
+Alex: Dream
 
-# Expected: HEALTHY status, 0 broken synapses, 150+ total connections
+# Expected: HEALTHY status, 0 broken synapses, 800+ total connections
 ```
 
 ## Pull Request Process

@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "7.4.0",
+  "version": "7.4.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -193,31 +193,6 @@
         "command": "alex.setAgentMode",
         "title": "Alex: Set Agent Mode",
         "icon": "$(person)"
-      },
-      {
-        "command": "alex.readAloud",
-        "title": "Alex: Read Aloud",
-        "icon": "$(unmute)"
-      },
-      {
-        "command": "alex.readWithVoice",
-        "title": "Alex: Read with Voice Selection",
-        "icon": "$(mic)"
-      },
-      {
-        "command": "alex.saveAsAudio",
-        "title": "Alex: Save as Audio",
-        "icon": "$(file-media)"
-      },
-      {
-        "command": "alex.stopReading",
-        "title": "Alex: Stop Reading",
-        "icon": "$(mute)"
-      },
-      {
-        "command": "alex.speakPrompt",
-        "title": "Alex: Speak Prompt",
-        "icon": "$(comment-discussion)"
       },
       {
         "command": "alex.openHealthDashboard",
@@ -435,11 +410,6 @@
         "icon": "$(mortar-board)"
       },
       {
-        "command": "alex.toggleVoice",
-        "title": "Alex: Toggle Voice Mode",
-        "icon": "$(unmute)"
-      },
-      {
         "command": "alex.showCognitiveDashboard",
         "title": "Alex: Cognitive Dashboard",
         "icon": "$(dashboard)"
@@ -642,18 +612,6 @@
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
         },
         {
-          "command": "alex.readAloud",
-          "group": "4_voice@1"
-        },
-        {
-          "command": "alex.saveAsAudio",
-          "group": "4_voice@2"
-        },
-        {
-          "command": "alex.speakPrompt",
-          "group": "4_voice@3"
-        },
-        {
           "command": "alex.reviewPR",
           "group": "5_github@2"
         }
@@ -730,18 +688,6 @@
         {
           "command": "alex.generatePptx",
           "group": "4_create@6"
-        },
-        {
-          "command": "alex.readAloud",
-          "group": "5_voice@1"
-        },
-        {
-          "command": "alex.saveAsAudio",
-          "group": "5_voice@2"
-        },
-        {
-          "command": "alex.speakPrompt",
-          "group": "5_voice@3"
         }
       ]
     },
@@ -1306,46 +1252,6 @@
           "default": "",
           "scope": "application",
           "description": "Logo.dev API token for ticker-based logo lookup (free 500K/mo at logo.dev). Attribution required on free tier."
-        },
-        "alex.voice.enabled": {
-          "type": "boolean",
-          "default": false,
-          "scope": "machine",
-          "description": "Enable automatic voice mode. When enabled, Alex will read responses aloud."
-        },
-        "alex.voice.autoReadResponses": {
-          "type": "boolean",
-          "default": false,
-          "scope": "machine",
-          "description": "Automatically read chat responses aloud when voice mode is enabled."
-        },
-        "alex.voice.defaultPreset": {
-          "type": "string",
-          "default": "zen_master",
-          "enum": [
-            "zen_master",
-            "british_scholar",
-            "storyteller",
-            "fast_learner",
-            "custom"
-          ],
-          "enumDescriptions": [
-            "Zen Master - Calm, measured pace with a soothing male voice",
-            "British Scholar - Sophisticated UK accent, slightly formal",
-            "Storyteller - Warm, engaging narrator voice",
-            "Fast Learner - Quick pace for efficient information absorption",
-            "Custom - Use custom voice settings"
-          ],
-          "scope": "machine",
-          "description": "Default voice preset for text-to-speech."
-        },
-        "alex.tts.maxTableRows": {
-          "type": "number",
-          "default": 10,
-          "minimum": 1,
-          "maximum": 100,
-          "scope": "machine",
-          "description": "Maximum number of table rows to read aloud. Set higher for accessibility."
         },
         "alex.dashboard.refreshInterval": {
           "type": "number",
@@ -2014,7 +1920,7 @@
           {
             "id": "alex.welcome",
             "title": "Meet Alex",
-            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **100+ skills**, **persistent memory**, and **cross-project knowledge sharing**.",
+            "description": "Alex is your cognitive learning partner — an AI architecture that learns, remembers, and grows with you across projects.\n\nAlex has **160 skills**, **persistent memory**, and **cross-project knowledge sharing**.",
             "media": {
               "markdown": "alex_docs/README.md"
             }
@@ -2097,55 +2003,9 @@
             "description": "Capture a valuable learning for use across projects:\n\nTry: `@alex /saveinsight` after discovering something useful."
           }
         ]
-      },
-      {
-        "id": "alex.voiceTTS",
-        "title": "Voice & Text-to-Speech",
-        "description": "Let Alex read responses aloud with configurable voice synthesis",
-        "when": "alex.hasMemoryFiles",
-        "steps": [
-          {
-            "id": "alex.tts.intro",
-            "title": "About Voice Mode",
-            "description": "Alex can read responses aloud using text-to-speech synthesis. This is useful for accessibility, hands-free coding, or reviewing long documents."
-          },
-          {
-            "id": "alex.tts.configure",
-            "title": "Configure Voice",
-            "description": "Voice is powered by your system's speech synthesis engine. Try the Read Aloud command:\n\n[Read Aloud](command:alex.readAloud)"
-          },
-          {
-            "id": "alex.tts.try",
-            "title": "Try It Out",
-            "description": "Select some text in your editor, then right-click and choose **Ask Alex** to get a spoken response.\n\nOr use: `@alex read this file aloud`",
-            "completionEvents": [
-              "onCommand:alex.readAloud"
-            ]
-          }
-        ]
       }
     ],
     "keybindings": [
-      {
-        "command": "alex.readAloud",
-        "key": "ctrl+alt+r",
-        "mac": "cmd+alt+r"
-      },
-      {
-        "command": "alex.toggleVoice",
-        "key": "ctrl+alt+v",
-        "mac": "cmd+alt+v"
-      },
-      {
-        "command": "alex.stopReading",
-        "key": "escape",
-        "when": "alex.ttsPlaying"
-      },
-      {
-        "command": "alex.speakPrompt",
-        "key": "ctrl+alt+p",
-        "mac": "cmd+alt+p"
-      },
       {
         "command": "alex.dream",
         "key": "ctrl+alt+d",
@@ -2190,7 +2050,6 @@
     "@types/mocha": "^10.0.10",
     "@types/proper-lockfile": "^4.1.4",
     "@types/vscode": "^1.110.0",
-    "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "@vscode/test-electron": "^2.3.2",
@@ -2207,7 +2066,6 @@
     "ts-node": "^10.9.2",
     "ts-unused-exports": "^9.0.0",
     "tsx": "^4.21.0",
-    "typescript": "~6.0.2",
-    "ws": "^8.19.0"
+    "typescript": "~6.0.2"
   }
 }

@@ -33,16 +33,6 @@ let lastCheckTime: number = 0;
 const CACHE_DURATION_MS = 60000; // 1 minute cache
 
 /**
- * Get cached health result if still valid
- */
-export function getCachedHealth(): HealthCheckResult | null {
-  if (cachedResult && Date.now() - lastCheckTime < CACHE_DURATION_MS) {
-    return cachedResult;
-  }
-  return null;
-}
-
-/**
  * Build a set of known markdown file basenames for fast synapse target lookup
  */
 async function buildMarkdownFileIndex(

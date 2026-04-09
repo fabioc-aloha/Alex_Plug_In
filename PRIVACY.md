@@ -1,8 +1,8 @@
 # Privacy Policy
 
 **Effective Date**: February 5, 2026
-**Last Updated**: April 8, 2026
-**Version**: 7.4.0
+**Last Updated**: April 9, 2026
+**Version**: 7.4.1
 
 ---
 
@@ -41,14 +41,6 @@ Alex Cognitive Architecture ("Alex") is designed with **privacy by default**. Yo
 
 ## Data Processing
 
-### Text-to-Speech (Edge TTS)
-
-When you use "Read Aloud":
-- Text is sent to Microsoft Edge TTS servers
-- Audio is returned and played locally
-- **No text is stored** on Microsoft servers beyond processing
-- See [Microsoft Privacy Statement](https://privacy.microsoft.com/)
-
 ### Cloud Sync (Optional)
 
 If you enable cloud sync:
@@ -60,10 +52,10 @@ If you enable cloud sync:
 ### Image Generation (Optional)
 
 If you configure image generation:
-- Prompts are sent to your configured provider (Azure OpenAI or OpenAI)
+- Prompts are sent to **Replicate** (your configured provider)
 - Images are saved locally
 - API keys stored encrypted via VS Code SecretStorage
-- See provider's privacy policy
+- See [Replicate Privacy](https://replicate.com/privacy)
 
 ### GitHub Copilot
 
@@ -103,30 +95,26 @@ Your data is already in portable markdown/JSON format. Simply copy the folders.
 
 - **Cloud Sync**: Disabled by default (`alex.cloudSync.enabled: false`)
 - **OneDrive Sync**: Disabled by default (`alex.m365.autoSync: false`)
-- **TTS**: Don't use the Read Aloud feature
 - **Image Generation**: Don't configure API keys
 
 ---
 
 ## Third-Party Services
 
-| Service                | When Used                 | Data Sent                 | Privacy Policy                                      |
-| ---------------------- | ------------------------- | ------------------------- | --------------------------------------------------- |
-| **Microsoft Edge TTS** | Read Aloud command        | Text to speak (transient) | [Microsoft Privacy](https://privacy.microsoft.com/) |
-| **GitHub**             | Cloud Sync (opt-in)       | Knowledge files           | [GitHub Privacy](https://docs.github.com/privacy)   |
-| **OpenAI**             | Image generation (opt-in) | Image prompts             | [OpenAI Privacy](https://openai.com/privacy/)       |
-| **Azure OpenAI**       | Image generation (opt-in) | Image prompts             | [Microsoft Privacy](https://privacy.microsoft.com/) |
+| Service       | When Used                 | Data Sent          | Privacy Policy                                     |
+| ------------- | ------------------------- | ------------------ | -------------------------------------------------- |
+| **GitHub**    | Cloud Sync (opt-in)       | Knowledge files    | [GitHub Privacy](https://docs.github.com/privacy)  |
+| **Replicate** | Image generation (opt-in) | Image prompts      | [Replicate Privacy](https://replicate.com/privacy) |
+| **Gamma**     | Presentations (opt-in)    | Content for slides | [Gamma Privacy](https://gamma.app/privacy)         |
 
 ---
 
 ## Data Retention
 
-| Data Type     | Retention                          |
-| ------------- | ---------------------------------- |
-| Local files   | Until you delete them              |
-| Cloud sync    | Controlled by your GitHub settings |
-| TTS audio     | Temporary (deleted after playback) |
-| Edge TTS logs | Per Microsoft's retention policy   |
+| Data Type   | Retention                          |
+| ----------- | ---------------------------------- |
+| Local files | Until you delete them              |
+| Cloud sync  | Controlled by your GitHub settings |
 
 ---
 

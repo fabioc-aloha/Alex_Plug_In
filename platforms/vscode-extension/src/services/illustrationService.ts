@@ -243,24 +243,3 @@ export async function fetchDiceBearAvatar(
       });
   });
 }
-
-// =============================================================================
-// UTILITY FUNCTIONS
-// =============================================================================
-
-/**
- * Check if a URL is reachable (HEAD request)
- */
-export async function isUrlReachable(url: string): Promise<boolean> {
-  return new Promise((resolve) => {
-    const req = https.request(url, { method: "HEAD" }, (res) => {
-      resolve(res.statusCode === 200);
-    });
-    req.on("error", () => resolve(false));
-    req.setTimeout(5000, () => {
-      req.destroy();
-      resolve(false);
-    });
-    req.end();
-  });
-}

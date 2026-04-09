@@ -605,20 +605,6 @@ export async function requireCognitiveLevel(
 }
 
 /**
- * Check if a command is available at the current cognitive level.
- * Unlike requireCognitiveLevel, this does NOT show a warning — useful
- * for UI state (e.g., graying out buttons).
- */
-export async function isFeatureAvailable(commandId: string): Promise<boolean> {
-  const requirement = FEATURE_REQUIREMENTS[commandId];
-  if (!requirement) {
-    return true;
-  }
-  const current = await detectCognitiveLevel();
-  return current.level >= requirement.minimumLevel;
-}
-
-/**
  * Get the feature requirement for a command, if any.
  */
 export function getFeatureRequirement(

@@ -34,29 +34,6 @@ export function streamWarning(
 }
 
 // ============================================================================
-// Confirmation
-// ============================================================================
-
-/**
- * Push a confirmation dialog to the stream.
- * Uses proposed ChatResponseConfirmationPart if available, falls back to markdown + button.
- */
-export function streamConfirmation(
-  stream: vscode.ChatResponseStream,
-  title: string,
-  message: string,
-  data: unknown,
-  buttons?: string[],
-): void {
-  const s = stream as any;
-  if (typeof s.confirmation === "function") {
-    s.confirmation(title, message, data, buttons);
-  } else {
-    stream.markdown(`\n\n> **${title}**\n> ${message}\n\n`);
-  }
-}
-
-// ============================================================================
 // Filetree (Stable API)
 // ============================================================================
 
@@ -110,37 +87,4 @@ export function streamCognitiveTree(
   const tree = buildCognitiveFileTree(workspaceRoot);
   const baseUri = vscode.Uri.file(workspaceRoot);
   stream.filetree(tree, baseUri);
-}
-
-// ============================================================================
-// Progress (Stable API)
-// ============================================================================
-
-/**
- * Push a progress message for long operations.
- */
-export function streamProgress(
-  stream: vscode.ChatResponseStream,
-  message: string,
-): void {
-  stream.progress(message);
-}
-
-// ============================================================================
-// Safety Alert
-// ============================================================================
-
-/**
- * Push a safety imperative violation alert.
- * Uses warning() for visibility, with imperative code and description.
- */
-export function streamSafetyAlert(
-  stream: vscode.ChatResponseStream,
-  imperative: string,
-  description: string,
-): void {
-  streamWarning(
-    stream,
-    `**Safety Imperative Violation (${imperative})**: ${description}`,
-  );
 }

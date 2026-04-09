@@ -42,24 +42,6 @@ const HEALTH_THRESHOLDS = {
 } as const;
 
 /**
- * Determine health status based on broken connection count
- */
-export function getHealthStatus(
-  brokenCount: number,
-): "EXCELLENT" | "GOOD" | "NEEDS ATTENTION" | "CRITICAL" {
-  if (brokenCount === HEALTH_THRESHOLDS.excellent) {
-    return "EXCELLENT";
-  }
-  if (brokenCount < HEALTH_THRESHOLDS.good) {
-    return "GOOD";
-  }
-  if (brokenCount < HEALTH_THRESHOLDS.needsAttention) {
-    return "NEEDS ATTENTION";
-  }
-  return "CRITICAL";
-}
-
-/**
  * Regex to extract version from copilot-instructions.md
  */
 export const VERSION_EXTRACT_REGEX = /\*\*Version\*\*:\s*(\d+\.\d+\.\d+\s+\w+)/;

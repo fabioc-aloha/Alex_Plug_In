@@ -58,8 +58,8 @@ If you discover a security vulnerability in Alex Cognitive Architecture, please 
 
 ### Network Security
 
-- **HTTPS/WSS only** — All external communication encrypted
-- **Minimal external calls** — Only Edge TTS and GitHub (opt-in)
+- **HTTPS only** — All external communication encrypted
+- **Minimal external calls** — Only GitHub (opt-in) and Replicate/Gamma (opt-in)
 - **No data exfiltration** — Your code never leaves your machine
 
 ### Webview Security

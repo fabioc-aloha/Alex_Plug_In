@@ -7,7 +7,98 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [7.4.1] - 2026-04-09
+
+> **Post-Release Quality Sweep** -- Dead export removal, stale TTS/voice reference cleanup, catalog alignment, and user documentation audit.
+
+### Removed
+
+- **39 dead exports** across 18 files -- exported functions never imported elsewhere
+
+### Fixed
+
+- **7 user-facing docs** updated -- stale TTS/voice references, incorrect provider references, outdated counts (PRIVACY, SECURITY, CONTRIBUTING, VSCODE-BRAIN-INTEGRATION, docs/index.html)
+- **Extension CHANGELOG** -- Added 4 missing version entries (7.1.3, 7.2.0, 7.3.0, 7.4.0)
+- **Walkthrough description** -- "100+ skills" to "160 skills"
+- **Catalogs** -- TRIFECTA-CATALOG, SKILLS-CATALOG, SKILL-CATALOG-GENERATED updated with correct counts
+
+---
+
+## [7.4.0] - 2026-04-08
+
+> **Multi-Agent Strategy Edition** -- 10 coordination features across 3 phases, adapted from AFCP and 1ES AI-First Dev Starter Pack research. Multi-pass refinement, structured unknowns, assignment lifecycle tracking, skill-based task routing, and correlation vectors.
+
+### Added
+
+- **Structured Unknowns store** -- 5-category uncertainty taxonomy with 4 lifecycle states; agents surface uncertainty instead of guessing
+- **Assignment Lifecycle hook (H17)** -- Records agent delegation outcomes to `assignment-log.json`; meditation-time expertise analysis
+- **Correlation Vectors** -- `req-{hex}` request IDs propagated across delegations for end-to-end tracing
+- **Skill-Based Task Routing** -- 3-tier routing: keyword matching, learned expertise (30-day decay), fallback to orchestrator
+- **Scoped Knowledge Artifacts** -- Confidence-scored knowledge records with supersession chains and automatic pruning
+- **Mission Profiles** -- 5 behavioral presets (release, research, debug, review, draft) as reusable prompt files
+
+### Changed
+
+- **Multi-Pass Refinement** -- 4-pass protocol (Draft, Correctness, Clarity, Edge Cases) with pass-specific focus per agent; 2-pass shortcut for small tasks
+- **Setup wizard extracted and simplified** -- Settings/extensions split into separate files; bootstrap offer after init/upgrade; 7 settings promoted to Essential; 8 new settings added
+- **Master Alex protection** -- Init/Update button hidden in sidebar on Master workspace; upgrade offers suppressed
+
+### Removed
+
+- **Voice mode / TTS** -- Removed all voice synthesis features: Edge TTS service, read aloud commands, voice mode toggle, status bar indicator, keybindings, walkthrough, voice/tts settings, `ws` dependency
+- **Dead views and code** -- Removed 6 dead view files, 3 dead settings, dream nudges, enterprise category; net reduction of ~3,500 lines
+
+---
+
+## [7.3.0] - 2026-04-08
+
+> **Research-Driven Quality Edition** -- 6 new instruction files and 10 enhancements, adapted from Microsoft 1ES AI-First Dev Starter Pack research.
+
+### Added
+
+- **6 new instructions** -- Skill telemetry, cognitive benchmarking, repository readiness eval, coupling metrics, log pattern analyzer, heir bootstrap
+- **Heir Bootstrap Wizard skill design** -- Post-Initialize wizard for tailoring architecture to specific heir projects
+
+### Changed
+
+- **10 instruction enhancements** -- Multi-pass refinement, confidence scoring, 3-hypothesis debugging, test quality scoring, composite tech debt scoring, rule inferability taxonomy, overlap detection, reader testing
+
+---
+
+## [7.2.0] - 2026-04-07
+
+> **Intelligence Edition** -- 3 new services (terminal orchestrator, browser context, session-aware episodic memory), prompt Layer 12, 7 bug fixes.
+
+### Added
+
+- **Terminal orchestrator** -- Multi-step workflow engine with step-based execution, 3 built-in templates, timeout guards
+- **Browser context service** -- Tracks URLs from chat browser tabs, response links, and tool calls; injects into prompt Layer 12
+- **Session-aware episodic memory** -- Records extended with session ID, session name, and referenced URLs
+
+### Fixed
+
+- **XSS in cognitive dashboard** (SECURITY) -- File-name-derived HTML now escaped via `escapeHtml()`
+- **Path traversal in dashboards** (SECURITY) -- File path validation added to webview message handlers
+- **Inverted Global Knowledge detection** -- Offer logic was showing setup to users who already had GK
+- **CRLF-unsafe regex** -- Fixed frontmatter parsing and muscle scripts for Windows CRLF files
+
+---
+
+## [7.1.3] - 2026-04-04
+
+> **Install/Upgrade Hardening + H19** -- 6 install/upgrade process fixes, H19 synapse weight update hook for live learning.
+
+### Added
+
+- **H19: Synapse weight update hook** -- PostToolUse hook that buffers skill activations and flushes strength bumps to `synapses.json`
+- **Force repair option** -- "Alex: Upgrade" now offers "Force Repair" for corrupted architecture files
+- **First-install initialization prompt** -- Proactive "Initialize Now" notification on first activation
+- **Upgrade rollback** -- Automatic rollback from backup if fresh install phase fails
+
+### Fixed
+
+- **CRITICAL: Upgrade no longer deletes non-Alex .github content** -- Now only removes Alex-owned items (instructions, skills, prompts, config, agents, muscles, assets, episodic)
+- **Version upgrade notifications** -- Distinct messages for major, minor, and patch updates
 
 ---
 
@@ -34,7 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Quality review: GCX autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired
+- Quality review: workspace protection autonomous (removed platform docs), Claude heirs removed (Windows Agent subsumes), Semantic Skill Graph retired
 - Roadmap cleanup: renumbered gates, removed archived entries
 - brain-qa regex fix for invalid character range
 - Version drift fixes across root package.json, cognitive-config.json, M365 heir
@@ -245,6 +336,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- **Voice mode / TTS** -- Removed all voice synthesis features: Edge TTS service (`src/tts/`), read aloud commands, voice mode toggle, status bar indicator, speech text processor, audio player, keybindings, walkthrough, `alex.voice.*` and `alex.tts.*` settings, `ws` dependency, and text-to-speech skill reference
 - **Enterprise secrets scanning** — `alex.enterprise.scanSecrets`, `alex.enterprise.scanWorkspace` commands removed (did not work as expected)
 - **Enterprise audit logging** — `alex.enterprise.viewAuditLog`, `alex.enterprise.exportAuditLog` commands removed
 - **Enterprise settings** — All 11 `alex.enterprise.*` settings removed from package.json

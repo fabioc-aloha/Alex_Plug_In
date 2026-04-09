@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: April 8, 2026
+**Last Updated**: April 9, 2026
 
 ---
 
@@ -42,6 +42,7 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 | Version    | Theme                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Shipped    |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **v7.4.1** | Post-Release Quality Sweep -- 6-phase verification: 39 dead exports removed (18 files), stale TTS/voice references cleaned from 7 user-facing docs, catalog alignment (160 skills / 45 trifectas), internal documentation audit (9+ architecture files), dead code validation (tsc + ESLint + lint-unused clean)                                                                                                                                                              | 2026-04-09 |
 | **v7.4.0** | Multi-Agent Strategy Edition -- 10 coordination features from AFCP and 1ES research: multi-pass refinement, structured unknowns, assignment lifecycle (H17), skill-based task routing (3-tier), context layering, triage rules, correlation vectors, knowledge artifacts, expertise tracking. Setup wizard extraction and UX overhaul, bootstrap offer in setup flow, 7 settings promoted to Essential, 6 dead views and 3 dead settings removed (~3,500 lines net reduction) | 2026-04-08 |
 | **v7.3.0** | Research-Driven Quality Edition -- 6 new instruction files + 10 existing instruction enhancements adapted from 1ES AI-First Dev Starter Pack research, heir-bootstrap wizard skill (10-phase post-Initialize project tailoring), skill telemetry protocol, cognitive benchmarking, repository readiness eval, coupling metrics                                                                                                                                                | 2026-04-08 |
 | **v7.2.0** | Intelligence Edition -- Terminal orchestrator service (3 workflow templates), browser context service (URL tracking from chat tabs/responses/tools, prompt Layer 12), session-aware episodic memory (chatSessionId, sessionName, referencedUrls), 7 bug fixes (XSS, path traversal, inverted GK logic, CRLF regex, capture ordering)                                                                                                                                          | 2026-04-07 |
@@ -75,7 +76,7 @@ M365, Cowork, and Windows Agent platforms are tracked separately in [ROADMAP-COW
 
 ### Deferred Hooks (Low Priority)
 
-**18 hooks shipped** (12 global + 6 agent-scoped). 1 evaluated and deferred:
+**22 hooks shipped** (16 global + 6 agent-scoped). 1 evaluated and deferred:
 
 | #   | Scope  | Event      | What It Would Do                                                                             | Benefit                                                            | Rationale for Deferral                                                 |
 | --- | ------ | ---------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
@@ -147,13 +148,13 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 
 |                            |                                                                                                                                                                                      |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Current Master Version** | 7.4.0                                                                                                                                                                                |
-| **Current Heirs**          | VS Code (7.4.0)                                                                                                                                                                      |
+| **Current Master Version** | 7.4.1                                                                                                                                                                                |
+| **Current Heirs**          | VS Code (7.4.1)                                                                                                                                                                      |
 | **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                                                                                                                       |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                                                                                               |
 | **Next Target**            | TBD                                                                                                                                                                                  |
 | **Open Items**             | 5 deferred from v7.2.0 (insight pipeline, dream creativity score, competitive audit, frecency, context-aware nudges) + 2 deferred hooks + 2 future watch + 4 remaining 1.115 unlocks |
-| **Updated**                | 2026-04-08                                                                                                                                                                           |
+| **Updated**                | 2026-04-09                                                                                                                                                                           |
 
 ---
 

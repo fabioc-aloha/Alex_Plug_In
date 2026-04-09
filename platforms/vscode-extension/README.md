@@ -34,7 +34,7 @@ Alex adds a **cognitive layer** on top of GitHub Copilot — persistent memory, 
 | -------------------- | -------------------------- | -------------------------------------------- |
 | **Memory**           | None (fresh each chat)     | Persistent `.github/` memory files           |
 | **Trust**            | Rebuild context every time | Consistency through shared history           |
-| **Skills**           | You re-prompt from scratch | 159 pre-built skills, inheritable            |
+| **Skills**           | You re-prompt from scratch | 160 pre-built skills, inheritable            |
 | **Cross-Project**    | No knowledge transfer      | Global Knowledge syncs learnings             |
 | **Context**          | You re-explain every time  | Synapses map relationships automatically     |
 | **Self-Maintenance** | Manual updates             | Dream/meditation protocols                   |
@@ -165,7 +165,6 @@ Works without any subscription — genuine value from the moment you install.
 | Architecture Deploy       |    ✅    |   ✅   |      ✅      |    ✅     |
 | Welcome Sidebar           |    ✅    |   ✅   |      ✅      |    ✅     |
 | Status Bar / Memory Tree  |    ✅    |   ✅   |      ✅      |    ✅     |
-| TTS Voice Synthesis       |    ✅    |   ✅   |      ✅      |    ✅     |
 | SecretStorage / Git Hooks |    ✅    |   ✅   |      ✅      |    ✅     |
 | Walkthroughs              |    ✅    |   ✅   |      ✅      |    ✅     |
 
@@ -209,7 +208,6 @@ Depth of reasoning — frontier models for meditation, audits, and architecture.
 
 | Service                       | Cost                | Free? |
 | ----------------------------- | ------------------- | :---: |
-| **Edge TTS** / **GitHub API** | Free                |   ✅   |
 | **Brandfetch** / **Logo.dev** | Free tier           |   ✅   |
 | **Replicate** (AI images)     | ~$0.002–$0.06/image |  🆓*   |
 | **Gamma** (presentations)     | Credits-based       |  🆓*   |
@@ -277,7 +275,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Structured Unknowns**   | 5-category uncertainty taxonomy (information, interpretation, decision, authority, capability) with lifecycle tracking                       |
 | **Setup Wizard**          | Extracted settings/extensions into separate files; simplified UX; bootstrap offer after init/upgrade/setup; 7 settings promoted to Essential |
 | **Dead Code Cleanup**     | Removed 6 dead view files, 3 dead settings, dream nudges, enterprise category; net reduction of ~3,500 lines                                 |
-| **18 Hooks**              | 18 hooks shipped (12 global + 6 agent-scoped) across 8 VS Code hook events                                                                   |
+| **22 Hooks**              | 22 hooks shipped (16 global + 6 agent-scoped) across 8 VS Code hook events                                                                   |
 
 ### What's New (v7.3.0 -- Research-Driven Quality Edition)
 
@@ -315,9 +313,8 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | **Workspace Protection**    | Extended 4-layer protection system with additional workspace marker files                                          |
 | **Cross-Platform Blockers** | Fixed `path.isAbsolute()` for Windows paths in forgettingCurve.ts; fixed CRLF frontmatter regex in proposeSkill.ts |
-| **Zero Runtime Deps**       | Moved fs-extra, jszip, pptxgenjs, proper-lockfile, ws to devDependencies (all bundled by esbuild)                  |
+| **Zero Runtime Deps**       | Moved fs-extra, jszip, pptxgenjs, proper-lockfile to devDependencies (all bundled by esbuild)                      |
 | **Documentation**           | 13 files converted from PowerShell-only to bash/pseudocode for Windows + macOS parity                              |
-| **Speech Processing**       | Added `\r\n` normalization in speechTextProcessor.ts to prevent artifacts on Windows                               |
 
 ### What's New (v7.1.0 -- Excavation Edition)
 
@@ -330,7 +327,7 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Quality Hooks**       | H10 (output secret scan, 11 patterns) and H13 (breaking change detector) in Pre/PostToolUse                          |
 | **Agent Handoffs**      | All 7 agents enriched with model overrides and persona-driven follow-ups                                             |
 | **TypeScript 6.0**      | Migrated to TS 6.0.2 with `moduleResolution: "bundler"`, clean compilation                                           |
-| **Skills**              | 159 skills classified into core, standard, and extended tiers; 17 domain groups                                      |
+| **Skills**              | 160 skills classified into core, standard, and extended tiers; 17 domain groups                                      |
 | **Welcome View**        | 6th Memory Architecture tile: Chat Memory line count with click-to-edit                                              |
 
 ### What's New (v7.0.0 -- Working Together Edition)
@@ -969,13 +966,13 @@ After initialization, Alex manages this structure:
 ```text
 .github/
 ├── copilot-instructions.md    # 🧠 Main cognitive framework
-├── instructions/              # 📚 Procedural memory (77 files)
+├── instructions/              # 📚 Procedural memory (81 files)
 │   ├── alex-core.instructions.md
 │   ├── bootstrap-learning.instructions.md
 │   ├── self-actualization.instructions.md
 │   ├── worldview-integration.instructions.md
 │   └── ...
-├── prompts/                   # 📖 Episodic memory (56 files)
+├── prompts/                   # 📖 Episodic memory (63 files)
 │   ├── unified-meditation-protocols.prompt.md
 │   ├── domain-learning.prompt.md
 │   └── ...
@@ -1058,7 +1055,7 @@ Alex is **local-first**. No account required. No telemetry. No surprises.
 | What Alex does NOT do              | What Alex does                                        |
 | ---------------------------------- | ----------------------------------------------------- |
 | ❌ Collect usage telemetry          | ✅ Store all memory in local `.github/` files you own  |
-| ❌ Track your code or conversations | ✅ Send text to Edge TTS (transient, never stored)     |
+| ❌ Track your code or conversations | ✅ Store all memory in local `.github/` files you own  |
 | ❌ Share data with third parties    | ✅ Sync to YOUR GitHub repo (opt-in only, you control) |
 | ❌ Require an account or login      | ✅ Encrypt API keys via VS Code SecretStorage          |
 | ❌ Send prompts to external servers | ✅ All AI goes through GitHub Copilot (your plan)      |
@@ -1141,6 +1138,6 @@ Apache 2.0 - See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blob/
 
 **Alex Cognitive Architecture** — Your Trusted AI Partner for Any Job 🚀
 
-Built on 270+ academic sources | 159+ skills | 45+ trifectas
+Built on 270+ academic sources | 160 skills | 45+ trifectas
 
 © 2026 CorreaX • AI That Learns How to Learn

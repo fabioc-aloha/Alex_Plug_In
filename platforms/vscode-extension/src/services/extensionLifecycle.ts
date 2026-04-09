@@ -124,9 +124,22 @@ export async function checkVersionUpgrade(
   // Store current version for next time
   await context.globalState.update(LAST_VERSION_KEY, currentVersion);
 
+  // Master Alex: never offer init/upgrade (source of truth, Safety Imperative I3)
+  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+  if (workspaceFolder) {
+    const masterProtectedPath = path.join(
+      workspaceFolder.uri.fsPath,
+      ".github",
+      "config",
+      "MASTER-ALEX-PROTECTED.json",
+    );
+    if (await fs.pathExists(masterProtectedPath)) {
+      return;
+    }
+  }
+
   // First install: offer initialization if workspace doesn't have Alex yet
   if (!lastVersion) {
-    const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     if (workspaceFolder) {
       const markerPath = path.join(
         workspaceFolder.uri.fsPath,

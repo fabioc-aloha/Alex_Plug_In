@@ -15,6 +15,7 @@ export interface MissionTabContext {
   isBootstrapResume?: boolean;
   chatMemoryLines?: number;
   isActive?: boolean;
+  isMaster?: boolean;
 }
 
 /** Generate the Mission Command tab panel HTML. */
@@ -35,7 +36,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
                       <span class="action-text">Chat with Alex</span>
                   </button>
                   ${actionButton("northStar", "⭐", "North Star", "Define or review project vision and quality standards")}
-                  ${actionButton("upgrade", "⬆️", "Initialize / Update", "Deploy or refresh Alex architecture")}                  ${ctx.showBootstrap ? actionButton("heirBootstrap", "\ud83e\uddec", ctx.isBootstrapResume ? "Resume Bootstrap" : "Bootstrap Project", ctx.isBootstrapResume ? "Continue tailoring Alex to this project (interrupted session detected)" : "Tailor Alex to this project (build commands, conventions, security hooks)") : ""}              </div>
+                  ${!ctx.isMaster ? actionButton("upgrade", "\u2B06\uFE0F", "Initialize / Update", "Deploy or refresh Alex architecture") : ""}                  ${ctx.showBootstrap ? actionButton("heirBootstrap", "\ud83e\uddec", ctx.isBootstrapResume ? "Resume Bootstrap" : "Bootstrap Project", ctx.isBootstrapResume ? "Continue tailoring Alex to this project (interrupted session detected)" : "Tailor Alex to this project (build commands, conventions, security hooks)") : ""}              </div>
 
               <div class="action-group-label" data-group="agents" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>AGENTS</div>
               <div class="action-group-content" data-group="agents">

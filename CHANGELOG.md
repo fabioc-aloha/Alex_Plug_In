@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.4.1] - 2026-04-09
+
+> **Post-Release Quality Sweep** -- 6-phase verification pass after v7.4.0: dead export removal, TTS reference cleanup, catalog audit, and user documentation audit across all user-facing content.
+
+### Removed
+
+- **39 dead exports** across 18 files -- functions exported but never imported elsewhere, identified via `lint-unused` analysis
+- **Stale TTS/voice references** in 7 user-facing documents -- architecture diagrams, feature tables, settings references, and prose cleaned after voice mode removal
+
+### Fixed
+
+- **PRIVACY.md** -- Image generation provider corrected from "Azure OpenAI or OpenAI" to "Replicate" with direct privacy policy link
+- **SECURITY.md** -- Removed "WSS" protocol claim (was Edge TTS WebSocket, no longer used)
+- **CONTRIBUTING.md** -- Dream command title corrected ("Alex: Dream (Neural Maintenance)" to "Alex: Dream"), synapse count 150+ to 800+, script conventions ".ps1" to ".cjs / .ps1"
+- **docs/index.html** -- Skills count 125 to 160, "32 TTS Languages" stat replaced with "45 Complete Trifectas", "Voice" removed from Multimodal feature
+- **VSCODE-BRAIN-INTEGRATION.md** -- 11 stale TTS/voice references removed (architecture diagram, feature tables, settings reference, external services, prose); instruction count 50+ to 81
+- **Extension CHANGELOG** -- Added 4 missing version entries (7.1.3, 7.2.0, 7.3.0, 7.4.0); redacted internal codename from 6.8.4 entry
+- **package.json walkthrough** -- "100+ skills" to "160 skills" in welcome step description
+- **TRIFECTA-CATALOG.md** -- Added memory-export entry, heading count 44 to 45, health summary 39 to 45, Mermaid diagram updated with 7 new nodes
+- **SKILLS-CATALOG.md** -- Skill count 159+ to 160, inheritable count 141 to 146
+- **SKILL-CATALOG-GENERATED.md** -- Regenerated with current 160-skill inventory
+
+---
+
 ## [7.4.0] - 2026-04-08
 
 > **Multi-Agent Strategy Edition** -- 10 coordination features across 3 phases, adapted from AFCP and 1ES AI-First Dev Starter Pack research. Multi-pass refinement, structured unknowns, assignment lifecycle tracking, skill-based task routing, and correlation vectors.
@@ -36,9 +60,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Settings promoted to Essential** -- 7 settings moved from Recommended to Essential: `chat.useAgentSkills`, `chat.includeReferencedInstructions`, `github.copilot.chat.copilotMemory.enabled`, `github.copilot.chat.tools.memory.enabled`, `chat.hooks.enabled`, `chat.useCustomAgentHooks`, `chat.agent.enabled`
 - **8 new settings added** -- `chat.mcp.assisted.nuget.enabled`, `chat.autopilot.enabled`, `chat.agent.todoList`, `chat.agent.thinking.phrases`, `terminal.integrated.enableImages` (Recommended); `chat.tools.terminal.autoApprove`, `chat.tools.terminal.ignoreDefaultAutoApproveRules`, `chat.tools.urls.autoApprove` (Auto-Approval)
 - **Settings tab auto-refresh fix** -- 30-second refresh no longer resets active tab to Mission; server-side `activeTab` parameter preserves selection
+- **Master Alex protection** -- Init/Update button hidden in sidebar on Master Alex workspace; upgrade and first-install offers suppressed on Master to prevent accidental re-initialization (Safety Imperative I3/I4)
 
 ### Removed
 
+- **Voice mode / TTS** -- Removed all voice synthesis features: Edge TTS service (`src/tts/`), read aloud commands, voice mode toggle, status bar indicator, speech text processor, audio player, keybindings (`Ctrl+Alt+R/V/P`), walkthrough, `alex.voice.*` and `alex.tts.*` settings, `ws` dependency, and text-to-speech skill reference. The `readAloud.ts` command file and `ttsService.test.ts` tests were also deleted.
 - **Enterprise settings category** -- Removed experimental Enterprise/MS Graph category and `ENTERPRISE_SETTINGS` constant from setup wizard
 - **3 dead settings** -- `chat.useSkillAdherencePrompt` (never existed in VS Code), `extendedThinkingEnabled`, `thinkingBudget` (both non-existent); Extended Thinking category eliminated
 - **Dream nudges** -- All 3 dream-related nudges removed from `_generateNudges()`

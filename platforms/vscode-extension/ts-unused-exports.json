@@ -3,7 +3,6 @@
         "src/extension.ts",
         "src/commands/**",
         "src/chat/**",
-        "src/tts/**",
         "src/views/**",
         "src/ux/**",
         "src/services/**",
@@ -19,23 +18,13 @@
             "deactivate"
         ],
         "src/commandsDeveloperHandlers.ts": [
-            "CodeContext",
-            "promptForCode",
-            "handleSkillReview"
+            "CodeContext"
         ],
         "src/commands/self-actualization.ts": [
             "showReportInPanel"
         ],
         "src/commands/exportForM365.ts": [
             "silentSyncToOneDrive"
-        ],
-        "src/commands/readAloud.ts": [
-            "readAloud",
-            "saveAsAudio",
-            "stopReading",
-            "readWithVoice",
-            "speakPrompt",
-            "estimateDuration"
         ],
         "src/commands/setupEnvironment.ts": [
             "checkRecommendedExtensions",
@@ -70,23 +59,13 @@
             "runHeirValidation"
         ],
         "src/commands/inheritSkill.ts": [
-            "registerInheritSkillCommand"
-        ],
-        "src/commands/readAloud.ts": [
-            "readAloud",
-            "saveAsAudio",
-            "stopReading",
-            "readWithVoice",
-            "speakPrompt",
-            "estimateDuration"
         ],
         "src/commands/setupEnvironment.ts": [
             "checkRecommendedExtensions",
             "offerExtensionInstall"
         ],
         "src/commands/setupGlobalKnowledge.ts": [
-            "isGlobalKnowledgeSetup",
-            "registerSetupGlobalKnowledgeCommand"
+            "isGlobalKnowledgeSetup"
         ],
         "src/chat/tools/index.ts": [
             "registerLanguageModelTools",
@@ -422,21 +401,6 @@
         ],
         "src/test/suite/index.ts": [
             "run"
-        ],
-        "src/tts/index.ts": [
-            "synthesize",
-            "prepareTextForSpeech",
-            "detectLanguage",
-            "getVoiceForLanguage",
-            "playWithWebview",
-            "stopPlayback",
-            "isPlaying",
-            "saveAudioToFile",
-            "VOICE_PRESETS",
-            "LANGUAGE_VOICES",
-            "VoicePreset",
-            "TTSProgress",
-            "TTSChunkedProgress"
         ]
     }
 }

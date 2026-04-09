@@ -129,26 +129,6 @@ export async function initGlobalKnowledgeSecrets(
 }
 
 /**
- * Store a GitHub token securely
- * @param token The token to store, or empty string to clear
- */
-export async function setGitHubToken(token: string): Promise<void> {
-  if (!secretStorage) {
-    throw new Error(
-      "Secret storage not initialized. Call initGlobalKnowledgeSecrets first.",
-    );
-  }
-
-  if (token) {
-    await secretStorage.store(GITHUB_TOKEN_SECRET_KEY, token);
-    cachedGithubToken = token;
-  } else {
-    await secretStorage.delete(GITHUB_TOKEN_SECRET_KEY);
-    cachedGithubToken = null;
-  }
-}
-
-/**
  * Get the cached GitHub token (synchronous, uses cached value)
  */
 function getCachedGithubToken(): string | null {
@@ -496,19 +476,6 @@ async function getRemoteKnowledgeFile(
 }
 
 /**
- * Check if remote GK is configured and available
- */
-export async function isRemoteGlobalKnowledgeAvailable(): Promise<boolean> {
-  const config = getRemoteRepoConfig();
-  if (!config) {
-    return false;
-  }
-
-  const index = await getRemoteIndex();
-  return index !== null;
-}
-
-/**
  * Read knowledge file content from local or remote source
  * Handles both absolute paths (local) and relative paths (remote)
  */
@@ -719,16 +686,6 @@ export async function detectGlobalKnowledgeRepo(): Promise<string | null> {
   }
 
   return null;
-}
-
-/**
- * Initialize the Global Knowledge repository structure.
- * This is called when the user opts to create a new GK repo.
- *
- * @param repoPath - Path where the GK repo should be scaffolded
- */
-export async function getGlobalKnowledgeRepoPath(): Promise<string | null> {
-  return await detectGlobalKnowledgeRepo();
 }
 
 /**
@@ -967,30 +924,12 @@ export async function ensureGlobalKnowledgeIndex(): Promise<IGlobalKnowledgeInde
 }
 
 /**
- * Save the global knowledge index (with locking for concurrent safety)
- */
-export async function saveGlobalKnowledgeIndex(
-  index: IGlobalKnowledgeIndex,
-): Promise<void> {
-  await updateGlobalKnowledgeIndex(() => index);
-}
-
-/**
  * Get or initialize the project registry (with locking)
  */
 export async function ensureProjectRegistry(): Promise<IProjectRegistry> {
   await ensureGlobalKnowledgeDirectories();
 
   return await updateProjectRegistry((registry) => registry);
-}
-
-/**
- * Save the project registry (with locking for concurrent safety)
- */
-export async function saveProjectRegistry(
-  registry: IProjectRegistry,
-): Promise<void> {
-  await updateProjectRegistry(() => registry);
 }
 
 /**

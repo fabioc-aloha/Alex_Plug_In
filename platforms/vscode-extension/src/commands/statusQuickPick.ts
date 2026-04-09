@@ -129,16 +129,6 @@ function getQuickPickItems(): vscode.QuickPickItem[] {
       description: "Create polished PowerPoint from Markdown or selection",
       detail: "📊 Local PPTX generation",
     },
-    {
-      label: "$(unmute) Read Aloud",
-      description: "Read selected text with neural voices",
-      detail: "🎙️ Text-to-speech",
-    },
-    {
-      label: "$(file-media) Save as Audio",
-      description: "Export text to MP3 file",
-      detail: "🎵 Creates audio file in workspace",
-    },
     // --- GitHub Integration ---
     { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
@@ -180,8 +170,6 @@ function getDispatchMap(): Array<[string, string]> {
     ["Generate Diagram", "alex.generateDiagram"],
     ["Generate Tests", "alex.generateTests"],
     ["Generate Presentation", "alex.generatePptx"],
-    ["Read Aloud", "alex.readAloud"],
-    ["Save as Audio", "alex.saveAsAudio"],
     ["Review Pull Request", "alex.reviewPR"],
     ["Import GitHub Issues", "alex.importGitHubIssues"],
     ["Validate Heir", "alex.validateHeir"],

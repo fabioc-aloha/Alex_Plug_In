@@ -779,34 +779,3 @@ export async function generateAndSavePresentation(
     };
   }
 }
-
-/**
- * Generate presentation from markdown file
- */
-export async function generateFromMarkdown(
-  markdownPath: string,
-  options: Partial<PresentationOptions> = {},
-): Promise<GenerateResult> {
-  try {
-    const markdown = await fs.readFile(markdownPath, "utf-8");
-    const slides = parseMarkdownToSlides(markdown);
-
-    if (slides.length === 0) {
-      return { success: false, error: "No slides parsed from markdown" };
-    }
-
-    const outputPath = markdownPath.replace(/\.md$/, ".pptx");
-    const title = options.title || path.basename(markdownPath, ".md");
-
-    return generateAndSavePresentation(
-      slides,
-      { ...options, title },
-      outputPath,
-    );
-  } catch (err) {
-    return {
-      success: false,
-      error: `Failed to read markdown: ${err instanceof Error ? err.message : String(err)}`,
-    };
-  }
-}

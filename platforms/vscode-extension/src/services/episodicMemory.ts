@@ -176,78 +176,13 @@ export async function flushEpisodicDraft(): Promise<void> {
   }
 }
 
-/**
- * Explicitly save a fully-formed episodic record (e.g. from a meditation session).
- */
-export async function saveEpisodicRecord(
-  record: Omit<EpisodicRecord, "id" | "date">,
-): Promise<void> {
-  const sessions = await loadSessions();
-  sessions.unshift({
-    id: `session-${Date.now()}`,
-    date: new Date().toISOString(),
-    ...record,
-  });
-  await persistSessions(sessions);
-}
-
 // ============================================================================
 // Query
 // ============================================================================
 
-export async function queryEpisodicMemory(
-  query: string,
-): Promise<EpisodicRecord[]> {
-  const sessions = await loadSessions();
-  const terms = query
-    .toLowerCase()
-    .split(/\s+/)
-    .filter((t) => t.length > 1);
-  if (terms.length === 0) {
-    return sessions.slice(0, 20);
-  }
-
-  return sessions.filter((s) => {
-    const hay =
-      `${s.topic} ${s.summary} ${s.tags.join(" ")} ${s.workspace ?? ""}`.toLowerCase();
-    return terms.every((t) => hay.includes(t));
-  });
-}
-
 export async function getRecentSessions(n = 10): Promise<EpisodicRecord[]> {
   const sessions = await loadSessions();
   return sessions.slice(0, n);
-}
-
-export async function getSessionsByDateRange(
-  from: Date,
-  to: Date,
-): Promise<EpisodicRecord[]> {
-  const sessions = await loadSessions();
-  return sessions.filter((s) => {
-    const d = new Date(s.date);
-    return d >= from && d <= to;
-  });
-}
-
-/**
- * Build a concise context string for injection into prompts.
- * Returns the last N sessions as a readable list.
- */
-export async function buildEpisodicContext(n = 5): Promise<string> {
-  const sessions = await getRecentSessions(n);
-  if (sessions.length === 0) {
-    return "";
-  }
-  const lines = sessions.map((s) => {
-    const date = new Date(s.date).toLocaleDateString("en-US", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-    });
-    return `- [${date}] ${s.topic} (${s.tags.slice(0, 2).join(", ")})`;
-  });
-  return `Recent sessions:\n${lines.join("\n")}`;
 }
 
 // ============================================================================
@@ -329,14 +264,4 @@ function generateSessionName(topic: string, tags: string[]): string {
   }
 
   return name;
-}
-
-/**
- * v7.2.0: Look up a session by its VS Code chat session ID.
- */
-export async function findSessionByChatId(
-  chatSessionId: string,
-): Promise<EpisodicRecord | undefined> {
-  const sessions = await loadSessions();
-  return sessions.find((s) => s.chatSessionId === chatSessionId);
 }

@@ -241,9 +241,8 @@ flowchart LR
 | Output management       | Files saved to workspace                       | Side panel: input/output folders, download/preview         | **Cowork** |
 | Progress tracking       | Text responses in chat                         | Percentage complete + step-by-step log                     | **Cowork** |
 | Sidebar / dashboard     | Welcome view, cognitive dashboard, memory tree | Skills chips, permissions, schedule panel                  | Tie        |
-| Keyboard shortcuts      | 6 custom bindings                              | Custom keyboard shortcuts (Settings dialog)                | VS Code    |
-| Voice / TTS             | Edge TTS voice synthesis (input + output)      | Voice input (speech-to-text via microphone)                | VS Code    |
-| Walkthroughs            | 3 guided walkthroughs                          | None                                                       | VS Code    |
+| Keyboard shortcuts      | 2 custom bindings                              | Custom keyboard shortcuts (Settings dialog)                | VS Code    |
+| Walkthroughs            | 2 guided walkthroughs                          | None                                                       | VS Code    |
 | Multi-device continuity | Desktop only                                   | Continue tasks across browser, desktop app, Outlook, Teams | **Cowork** |
 
 ### Security and Governance

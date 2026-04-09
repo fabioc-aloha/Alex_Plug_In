@@ -211,7 +211,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 - **Chat**: Unlimited messages
 - **Agent Mode**: Full agent mode with tool calling
 - **Models**: GPT-4o, Claude Sonnet 4 (Capable tier); limited premium model access
-- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 159 skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
+- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 160 skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
 - **Recommended for**: Individual developers who want the full Alex experience
 
 #### Copilot Pro+
@@ -410,7 +410,7 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 | ----------------------------------------------- | ----------------------------------------------------- |
 | Full agent-mode conversations                   | Extended thinking (requires Frontier model + setting) |
 | All 13 LM tools accessible by the model         | MCP tools (unless MCP gallery enabled)                |
-| 159 skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
+| 160 skills auto-loaded and adhered to           | Hooks lifecycle automation                            |
 | 50+ instructions auto-loaded by pattern         |                                                       |
 | 7 specialist agents (Builder, Researcher, etc.) |                                                       |
 | Search subagent (web search in conversations)   |                                                       |
@@ -633,8 +633,8 @@ The Recommended tier is where Alex becomes a true cognitive partner. Agent mode 
 | Feature                            | Minimum | Basic | Recommended | Advanced |
 | ---------------------------------- | :-----: | :---: | :---------: | :------: |
 | Agent Mode                         |    ❌    |   ❌   |      ✅      |    ✅     |
-| 14 Language Model Tools            |    ❌    |   ❌   |      ✅      |    ✅     |
-| 159 Skills (auto-loaded)           |    ❌    |   ❌   |      ✅      |    ✅     |
+| 13 Language Model Tools            |    ❌    |   ❌   |      ✅      |    ✅     |
+| 160 Skills (auto-loaded)           |    ❌    |   ❌   |      ✅      |    ✅     |
 | 50+ Instructions (pattern-matched) |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents                |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session)     |    ❌    |   ❌   |      ✅      |    ✅     |

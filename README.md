@@ -22,7 +22,7 @@
 - 🌙 **Self-Maintains** — Validates and repairs through dream protocols to stay reliable
 - 🧘 **Knows Its Limits** — Admits uncertainty, doesn't hallucinate confidence
 - 🌐 **Works Across Domains** — Development, writing, research, management, and more
-- 🎨 **Multimodal Output** — Voice (TTS), presentations (Gamma), images, and diagrams
+- 🎨 **Multimodal Output** — Presentations (Gamma), images, and diagrams
 
 ---
 
@@ -38,11 +38,11 @@
 Transform GitHub Copilot into Alex with full cognitive capabilities:
 
 - Chat participant (`@alex`)
-- 26 slash commands
+- 12 slash commands
 - 13 Language Model tools
 - Dream/meditation protocols
 - Global knowledge base
-- **v6.0.0** Episodic memory, outcome learning, workflows, expertise model
+- Episodic memory, outcome learning, workflows, expertise model
 
 See [Quick Start](#-quick-start-vs-code) for installation.
 
@@ -115,7 +115,6 @@ Everything in this section works without any subscription — genuine value from
 | Welcome Sidebar          |    ✅    |   ✅   |      ✅      |    ✅     |
 | Status Bar Health        |    ✅    |   ✅   |      ✅      |    ✅     |
 | Memory Tree View         |    ✅    |   ✅   |      ✅      |    ✅     |
-| TTS Voice Synthesis      |    ✅    |   ✅   |      ✅      |    ✅     |
 | Keyboard Shortcuts       |    ✅    |   ✅   |      ✅      |    ✅     |
 | SecretStorage (API keys) |    ✅    |   ✅   |      ✅      |    ✅     |
 | Git Hooks                |    ✅    |   ✅   |      ✅      |    ✅     |
@@ -123,7 +122,7 @@ Everything in this section works without any subscription — genuine value from
 
 ### Chat & Conversational AI
 
-With any Copilot plan (including Free), Alex gains a voice — conversational AI with persistent identity and emotional awareness.
+With any Copilot plan (including Free), Alex provides conversational AI with persistent identity and emotional awareness.
 
 | Feature                           | Minimum | Basic | Recommended | Advanced |
 | --------------------------------- | :-----: | :---: | :---------: | :------: |
@@ -141,8 +140,8 @@ The sweet spot — full partnership with autonomous tools, deep skills, speciali
 | Feature                        | Minimum | Basic | Recommended | Advanced |
 | ------------------------------ | :-----: | :---: | :---------: | :------: |
 | Agent Mode                     |    ❌    |   ❌   |      ✅      |    ✅     |
-| 14 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
-| 150+ Skills (auto-loaded)      |    ❌    |   ❌   |      ✅      |    ✅     |
+| 13 Language Model Tools        |    ❌    |   ❌   |      ✅      |    ✅     |
+| 160 Skills (auto-loaded)       |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents            |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session) |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge Operations    |    ❌    |   ❌   |      ✅      |    ✅     |
@@ -166,7 +165,6 @@ Depth of reasoning — frontier models transform meditation, audits, and archite
 
 | Service                                 | Cost                | Free? |
 | --------------------------------------- | ------------------- | :---: |
-| **Edge TTS** (voice synthesis)          | Free                |   ✅   |
 | **GitHub API** (knowledge sync)         | Free                |   ✅   |
 | **Brandfetch / Logo.dev** (logo lookup) | Free tier           |   ✅   |
 | **Replicate** (AI images)               | ~$0.003–$0.08/image |  🆓*   |
@@ -219,7 +217,7 @@ The upgrade preserves:
 | **Correlation Vectors**   | Request tracing across delegations with `req-{hex}.agent.operation` chain format                                                 |
 | **Mission Profiles**      | 5 behavioral presets (release, research, debug, review, draft) as reusable prompt files                                          |
 | **Knowledge Artifacts**   | Confidence-scored research records with supersession chains and automatic pruning                                                |
-| **18 Hooks**              | 18 hooks shipped (12 global + 6 agent-scoped) across 8 VS Code hook events                                                       |
+| **22 Hooks**              | 22 hooks shipped (16 global + 6 agent-scoped) across 8 VS Code hook events                                                       |
 
 ### What's New (v7.3.0 -- Research-Driven Quality Edition)
 
@@ -275,9 +273,9 @@ The VS Code extension includes everything described below — see the **[VS Code
 | **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support |
 | **Global Knowledge Base**  | Cross-project patterns and insights that persist in `~/.alex/`   |
 | **User Profiles**          | Personalized tone, detail level, and tech stack awareness        |
-| **150+ Skills**            | Portable domain expertise — from coding to research to Azure     |
+| **160 Skills**             | Portable domain expertise — from coding to research to Azure     |
 | **7 Custom Agents**        | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
-| **14 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
+| **13 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
 | **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API      |
 | **AI Image Generation**    | Flux, SDXL, and nano-banana-pro via Replicate API                |
 | **MCP Integrations**       | 50+ Azure tools, M365 tools, and Alex's own MCP cognitive server |
@@ -330,7 +328,7 @@ Alex is built **local-first**. Your data stays on your machine:
 | What Alex does NOT do              | What Alex does                                       |
 | ---------------------------------- | ---------------------------------------------------- |
 | ❌ Collect usage telemetry          | ✅ Store all memory in local `.github/` files you own |
-| ❌ Track your code or conversations | ✅ Send text to Edge TTS (transient, not stored)      |
+| ❌ Track your code or conversations | ✅ Store all memory in local `.github/` files you own |
 | ❌ Share data with third parties    | ✅ All memory in local files you own                  |
 | ❌ Require an account or login      | ✅ Encrypt API keys via VS Code SecretStorage         |
 

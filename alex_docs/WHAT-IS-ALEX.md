@@ -82,7 +82,7 @@ Skills are domain knowledge modules that Alex loads on demand. Examples:
 - **image-handling**: AI image generation via Replicate
 - **gamma-presentations**: slide decks from markdown via the Gamma API
 
-There are 159 skills spanning software engineering, research, writing, design, business, and more.
+There are 160 skills spanning software engineering, research, writing, design, business, and more.
 
 ## Agents: Specialized Modes
 

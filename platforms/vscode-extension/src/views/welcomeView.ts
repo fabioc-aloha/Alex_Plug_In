@@ -393,7 +393,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         const allowedSettings = [
           "alex.autoInsights.enabled",
           "alex.dailyBriefing.enabled",
-          "alex.voice.enabled",
           "alex.globalKnowledge.enabled",
           "chat.autopilot.enabled",
           "github.copilot.chat.copilotMemory.enabled",
@@ -773,13 +772,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           tooltip: "Show a summary briefing on your first chat each day",
         },
         {
-          key: "alex.voice.enabled",
-          label: "Voice Mode",
-          enabled: alexCfg.get<boolean>("voice.enabled", false),
-          group: "Alex Features",
-          tooltip: "Read Alex responses aloud using text-to-speech",
-        },
-        {
           key: "alex.globalKnowledge.enabled",
           label: "Global Knowledge",
           enabled: alexCfg.get<boolean>("globalKnowledge.enabled", true),
@@ -892,6 +884,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       // or present with lastCompletedPhase < 9 (interrupted, resumable)
       let showBootstrap = false;
       let isBootstrapResume = false;
+      let isMaster = false;
       if (health.initialized && wsRoot) {
         const masterProtectedPath = path.join(
           wsRoot,
@@ -904,7 +897,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           ".github",
           ".heir-bootstrap-state.json",
         );
-        const isMaster = fs.existsSync(masterProtectedPath);
+        isMaster = fs.existsSync(masterProtectedPath);
         if (!isMaster) {
           if (fs.existsSync(bootstrapStatePath)) {
             // State file exists: check if bootstrap is in progress (not completed)
@@ -957,6 +950,7 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         showBootstrap,
         isBootstrapResume,
         lastTab,
+        isMaster,
       );
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);

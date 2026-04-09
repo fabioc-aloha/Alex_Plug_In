@@ -4,12 +4,12 @@
  * Contains the code-context helper, skill review prompts, and telemetry panel.
  * Extracted from commandsDeveloper.ts to satisfy NASA R4 (≤60 lines per function).
  */
-import * as vscode from 'vscode';
-import * as path from 'path';
-import { openChatPanel, getLanguageIdFromPath } from './shared/utils';
-import { getNonce } from './shared/sanitize';
-import { checkHealth } from './shared/healthCheck';
-import * as telemetry from './shared/telemetry';
+import * as vscode from "vscode";
+import * as path from "path";
+import { openChatPanel, getLanguageIdFromPath } from "./shared/utils";
+import { getNonce } from "./shared/sanitize";
+import { checkHealth } from "./shared/healthCheck";
+import * as telemetry from "./shared/telemetry";
 
 // ============================================================================
 // Shared code-context helper
@@ -35,140 +35,12 @@ export async function getCodeContext(uri?: vscode.Uri): Promise<CodeContext> {
   if (editor) {
     const selection = editor.selection;
     return {
-      text: !selection.isEmpty ? editor.document.getText(selection) : '',
+      text: !selection.isEmpty ? editor.document.getText(selection) : "",
       fileName: path.basename(editor.document.fileName),
       languageId: editor.document.languageId,
     };
   }
-  return { text: '', fileName: 'input', languageId: 'text' };
-}
-
-/** Prompt user to paste code when no context available. */
-export async function promptForCode(placeholder: string): Promise<CodeContext | null> {
-  const userInput = await vscode.window.showInputBox({
-    prompt: placeholder,
-    placeHolder: placeholder,
-    ignoreFocusOut: true,
-  });
-  if (!userInput) { return null; }
-  return { text: userInput, fileName: 'input', languageId: 'text' };
-}
-
-// ============================================================================
-// Skill Review prompt builder
-// ============================================================================
-
-const SKILL_REVIEW_PROMPTS: Record<string, string> = {
-  'Check Stale Skills': `Review Alex's staleness-prone skills and check if they need updates. Skills to check:
-1. microsoft-sfi - Secure Future Initiative (last validated: Feb 2026)
-2. pii-privacy-regulations - GDPR & Australian Privacy (last validated: Feb 2026)
-3. privacy-responsible-ai - RAI principles (last validated: Feb 2026)
-4. llm-model-selection - Model recommendations (last validated: Jan 2026)
-5. vscode-extension-patterns - VS Code APIs (last validated: Jan 2026)
-6. chat-participant-patterns - Chat APIs (last validated: Jan 2026)
-7. git-workflow - Git practices (last validated: Jan 2026)
-8. teams-app-patterns - Teams development (last validated: Jan 2026)
-9. m365-agent-debugging - M365 agents (last validated: Jan 2026)
-
-For each skill, check if there are newer versions, deprecations, or significant changes to the underlying technology.`,
-
-  'Security Review': `Review Microsoft Secure Future Initiative (SFI) compliance in the current project:
-1. Check the 3 Core Principles: Secure by Design, Secure by Default, Secure Operations
-2. Verify the 6 Pillars: Identity/Secrets, Tenants/Isolation, Networks, Engineering Systems, Threat Detection, Response/Remediation
-3. Review OWASP Top 10 mitigations
-4. Check credential management and secret handling
-5. Verify dependency security (npm audit or equivalent)
-6. Review security code patterns
-
-Reference: .github/skills/microsoft-sfi/SKILL.md`,
-
-  'Privacy & PII Review': `Review privacy and PII handling compliance in the current project:
-1. GDPR Compliance: Lawful basis, data minimization, consent, data subject rights
-2. Australian Privacy Principles (APPs): All 13 APPs checklist
-3. PII identification: Check for direct and indirect identifiers
-4. Data encryption: At rest and in transit
-5. Logging practices: Ensure PII is not logged
-6. Retention policies: Data lifecycle management
-7. Cross-border transfers: Adequacy and safeguards
-
-Reference: .github/skills/pii-privacy-regulations/SKILL.md`,
-
-  'Responsible AI Review': `Review Responsible AI practices in the current project:
-1. Microsoft's 6 RAI Principles: Fairness, Reliability/Safety, Privacy/Security, Inclusiveness, Transparency, Accountability
-2. Google's 3 Pillars: Bold Innovation, Responsible Development, Collaborative Progress
-3. Bias detection and mitigation
-4. Model documentation (Model Cards)
-5. Human-AI collaboration patterns
-6. Appropriate reliance: CAIR/CSR framework
-7. AI transparency and explainability
-
-Reference: .github/skills/privacy-responsible-ai/SKILL.md and .github/skills/appropriate-reliance/SKILL.md`,
-
-  'LLM Model Review': `Review and update LLM model recommendations:
-1. Check current model capabilities and pricing
-2. Verify context window sizes are accurate
-3. Review tier recommendations (Frontier/Capable/Fast)
-4. Check for new model announcements (Claude, GPT, Gemini)
-5. Update cost optimization strategies
-6. Review model-specific limitations
-
-Reference: .github/skills/llm-model-selection/SKILL.md
-Check: Anthropic docs, OpenAI docs, Google AI docs`,
-
-  'VS Code API Review': `Review VS Code extension patterns for current API compatibility:
-1. Check against latest VS Code release notes
-2. Verify no deprecated APIs are used
-3. Review proposed APIs that may have become stable
-4. Check webview security policies
-5. Review activation events and contributes patterns
-6. Verify compatibility with current VS Code version
-
-Reference: .github/skills/vscode-extension-patterns/SKILL.md
-Check: VS Code API docs, latest release notes`,
-
-  'Chat Patterns Review': `Review chat participant patterns for current API status:
-1. Check which proposed APIs have become stable
-2. Review deprecated patterns
-3. Verify chat participant registration patterns
-4. Check language model tool patterns
-5. Review follow-up question patterns
-
-Reference: .github/skills/chat-participant-patterns/SKILL.md`,
-
-  'Git Workflow Review': `Review git workflow patterns and best practices:
-1. Check branch naming conventions
-2. Review commit message format (Conventional Commits)
-3. Verify PR and code review patterns
-4. Check GitHub CLI usage patterns
-5. Review git hooks and automation
-
-Reference: .github/skills/git-workflow/SKILL.md`,
-};
-
-/** Run the skill review flow: pick review type → open chat. */
-export async function handleSkillReview(): Promise<boolean> {
-  const reviewTypes = [
-    { label: "$(warning) Check Stale Skills", description: "Review skills that may need updating", detail: "Security, privacy, models, APIs" },
-    { label: "$(shield) Security Review", description: "Review Microsoft SFI and security practices", detail: "Secure Future Initiative compliance" },
-    { label: "$(lock) Privacy & PII Review", description: "Review GDPR, Australian Privacy compliance", detail: "Data protection regulations" },
-    { label: "$(hubot) Responsible AI Review", description: "Review AI ethics and governance practices", detail: "Microsoft & Google RAI principles" },
-    { label: "$(rocket) LLM Model Review", description: "Check model recommendations are current", detail: "Claude, GPT, Gemini updates" },
-    { label: "$(extensions) VS Code API Review", description: "Check extension patterns are current", detail: "VS Code release compatibility" },
-    { label: "$(comment-discussion) Chat Patterns Review", description: "Review chat participant patterns", detail: "Proposed APIs, deprecations" },
-    { label: "$(git-branch) Git Workflow Review", description: "Review git best practices", detail: "Branching, commits, PR patterns" },
-  ];
-
-  const selected = await vscode.window.showQuickPick(reviewTypes, {
-    placeHolder: "Select review type",
-    title: "🔍 Skill & Knowledge Review",
-  });
-
-  if (!selected) { return true; }
-
-  const reviewName = selected.label.replace(/\$\([^)]+\)\s*/, '');
-  const prompt = SKILL_REVIEW_PROMPTS[reviewName] ?? '';
-  if (prompt) { await openChatPanel(prompt); }
-  return true;
+  return { text: "", fileName: "input", languageId: "text" };
 }
 
 // ============================================================================
@@ -252,38 +124,44 @@ function getSessionSummarySection(d: TelemetryData): string {
   return `
     <h2>📊 Session Summary</h2>
     <div class="summary">
-        <div class="stat"><div class="stat-value">${s['totalEvents'] || 0}</div><div class="stat-label">Events This Session</div></div>
-        <div class="stat"><div class="stat-value">${s['errorCount'] || 0}</div><div class="stat-label">Errors</div></div>
-        <div class="stat"><div class="stat-value">${s['avgDuration'] || 0}ms</div><div class="stat-label">Avg Duration</div></div>
+        <div class="stat"><div class="stat-value">${s["totalEvents"] || 0}</div><div class="stat-label">Events This Session</div></div>
+        <div class="stat"><div class="stat-value">${s["errorCount"] || 0}</div><div class="stat-label">Errors</div></div>
+        <div class="stat"><div class="stat-value">${s["avgDuration"] || 0}ms</div><div class="stat-label">Avg Duration</div></div>
         <div class="stat"><div class="stat-value">${d.sessions.length}</div><div class="stat-label">Total Sessions</div></div>
     </div>
     <div class="info-grid">
         <span class="info-label">Extension Version:</span><span>${d.extensionVersion}</span>
         <span class="info-label">VS Code Version:</span><span>${vscode.version}</span>
-        <span class="info-label">Session ID:</span><span>${s['sessionId'] || "unknown"}</span>
-        <span class="info-label">Started:</span><span>${s['startedAt'] || "unknown"}</span>
+        <span class="info-label">Session ID:</span><span>${s["sessionId"] || "unknown"}</span>
+        <span class="info-label">Started:</span><span>${s["startedAt"] || "unknown"}</span>
     </div>`;
 }
 
 function getHealthSection(d: TelemetryData): string {
   const h = d.health;
-  const issues = (h['issues'] as string[]) || [];
-  const statusLabel = h['status'] === 'healthy' ? '✅ Healthy'
-    : h['status'] === 'warning' ? '⚠️ Warning'
-    : h['status'] === 'error' ? '❌ Error' : '⚫ Not Initialized';
-  const issuesHtml = issues.length > 0
-    ? `<p style="margin-top: 8px; margin-bottom: 0; font-size: 12px;"><strong>Issues:</strong> ${issues.slice(0, 5).join(', ')}${issues.length > 5 ? ` (+${issues.length - 5} more)` : ''}</p>`
-    : '';
+  const issues = (h["issues"] as string[]) || [];
+  const statusLabel =
+    h["status"] === "healthy"
+      ? "✅ Healthy"
+      : h["status"] === "warning"
+        ? "⚠️ Warning"
+        : h["status"] === "error"
+          ? "❌ Error"
+          : "⚫ Not Initialized";
+  const issuesHtml =
+    issues.length > 0
+      ? `<p style="margin-top: 8px; margin-bottom: 0; font-size: 12px;"><strong>Issues:</strong> ${issues.slice(0, 5).join(", ")}${issues.length > 5 ? ` (+${issues.length - 5} more)` : ""}</p>`
+      : "";
   return `
     <h2>🏥 Architecture Health</h2>
     <div class="health-box">
         <div class="info-grid">
             <span class="info-label">Status:</span><span>${statusLabel}</span>
-            <span class="info-label">Initialized:</span><span>${h['initialized'] ? 'Yes' : 'No'}</span>
-            <span class="info-label">Total Files:</span><span>${h['totalFiles']}</span>
-            <span class="info-label">Total Synapses:</span><span>${h['totalSynapses']}</span>
-            <span class="info-label">Broken Synapses:</span><span>${h['brokenSynapses']}</span>
-            <span class="info-label">Summary:</span><span>${h['summary']}</span>
+            <span class="info-label">Initialized:</span><span>${h["initialized"] ? "Yes" : "No"}</span>
+            <span class="info-label">Total Files:</span><span>${h["totalFiles"]}</span>
+            <span class="info-label">Total Synapses:</span><span>${h["totalSynapses"]}</span>
+            <span class="info-label">Broken Synapses:</span><span>${h["brokenSynapses"]}</span>
+            <span class="info-label">Summary:</span><span>${h["summary"]}</span>
         </div>
         ${issuesHtml}
     </div>`;
@@ -296,11 +174,11 @@ function getSessionComparisonSection(d: TelemetryData): string {
     <div class="two-column">
         <div>
             <h2>📈 This Session</h2>
-            <pre>${((s['topEvents'] as string[]) || []).join("\\n") || "No events yet"}</pre>
+            <pre>${((s["topEvents"] as string[]) || []).join("\\n") || "No events yet"}</pre>
         </div>
         <div>
-            <h2>📊 All Sessions (${a['totalSessions']})</h2>
-            <pre>${((a['topEventsAllTime'] as string[]) || []).join("\\n") || "No events yet"}</pre>
+            <h2>📊 All Sessions (${a["totalSessions"]})</h2>
+            <pre>${((a["topEventsAllTime"] as string[]) || []).join("\\n") || "No events yet"}</pre>
         </div>
     </div>`;
 }
@@ -310,9 +188,9 @@ function getSettingsSection(d: TelemetryData): string {
     <h2>⚙️ Settings</h2>
     <div class="settings-box">
         <div class="settings-grid">
-            <span><strong>workspace.protectedMode:</strong> ${d.alexSettings['workspace.protectedMode'] ?? 'undefined'}</span>
-            <span><strong>m365.enabled:</strong> ${d.alexSettings['m365.enabled'] ?? 'undefined'}</span>
-            <span><strong>globalKnowledge.enabled:</strong> ${d.alexSettings['globalKnowledge.enabled'] ?? 'undefined'}</span>
+            <span><strong>workspace.protectedMode:</strong> ${d.alexSettings["workspace.protectedMode"] ?? "undefined"}</span>
+            <span><strong>m365.enabled:</strong> ${d.alexSettings["m365.enabled"] ?? "undefined"}</span>
+            <span><strong>globalKnowledge.enabled:</strong> ${d.alexSettings["globalKnowledge.enabled"] ?? "undefined"}</span>
         </div>
     </div>`;
 }
@@ -336,10 +214,15 @@ function getTelemetryScript(nonce: string): string {
 
 /** Build the full telemetry panel HTML. */
 export function buildTelemetryPanelHtml(d: TelemetryData): string {
-  const healthStatus = d.health['status'];
-  const healthColor = healthStatus === 'healthy' ? '#4caf50'
-    : healthStatus === 'warning' ? '#ff9800'
-    : healthStatus === 'error' ? '#f44336' : '#9e9e9e';
+  const healthStatus = d.health["status"];
+  const healthColor =
+    healthStatus === "healthy"
+      ? "#4caf50"
+      : healthStatus === "warning"
+        ? "#ff9800"
+        : healthStatus === "error"
+          ? "#f44336"
+          : "#9e9e9e";
   const nonce = getNonce();
   return `<!DOCTYPE html>
 <html>
@@ -380,14 +263,18 @@ export async function handleTelemetryMessage(
   } else if (message.command === "clear") {
     await clearTelemetryData(panel);
   } else if (message.command === "copied") {
-    vscode.window.showInformationMessage("Diagnostic data copied to clipboard!");
+    vscode.window.showInformationMessage(
+      "Diagnostic data copied to clipboard!",
+    );
   } else if (message.command === "refresh") {
     panel.dispose();
     vscode.commands.executeCommand("alex.viewBetaTelemetry");
   }
 }
 
-async function exportTelemetryBugReport(extensionVersion: string): Promise<void> {
+async function exportTelemetryBugReport(
+  extensionVersion: string,
+): Promise<void> {
   const data = await telemetry.getAllTelemetryData();
   const currentHealth = await checkHealth();
   const currentSettings = telemetry.getAlexSettings();
@@ -396,14 +283,19 @@ async function exportTelemetryBugReport(extensionVersion: string): Promise<void>
     defaultUri: vscode.Uri.file(`alex-bug-report-${timestamp}.json`),
     filters: { JSON: ["json"] },
   });
-  if (!uri) { return; }
+  if (!uri) {
+    return;
+  }
   const exportPayload = {
     exportedAt: new Date().toISOString(),
     extensionVersion,
     vscodeVersion: vscode.version,
     platform: process.platform,
     arch: process.arch,
-    shell: process.platform === 'win32' ? (process.env.COMSPEC || 'cmd.exe') : (process.env.SHELL || '/bin/sh'),
+    shell:
+      process.platform === "win32"
+        ? process.env.COMSPEC || "cmd.exe"
+        : process.env.SHELL || "/bin/sh",
     nodeVersion: process.version,
     health: {
       status: currentHealth.status,
@@ -417,9 +309,13 @@ async function exportTelemetryBugReport(extensionVersion: string): Promise<void>
     settings: currentSettings,
     sessions: data,
   };
-  const content = new TextEncoder().encode(JSON.stringify(exportPayload, null, 2));
+  const content = new TextEncoder().encode(
+    JSON.stringify(exportPayload, null, 2),
+  );
   await vscode.workspace.fs.writeFile(uri, content);
-  vscode.window.showInformationMessage("Diagnostics exported! Attach this file to your GitHub issue.");
+  vscode.window.showInformationMessage(
+    "Diagnostics exported! Attach this file to your GitHub issue.",
+  );
 }
 
 async function clearTelemetryData(panel: vscode.WebviewPanel): Promise<void> {

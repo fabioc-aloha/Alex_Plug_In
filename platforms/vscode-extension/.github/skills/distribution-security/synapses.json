@@ -13,6 +13,14 @@
       "yields": "secrets management required patterns and guidance"
     },
     {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "relates",
+      "strength": 0.85,
+      "reason": "Security checks are part of the release workflow",
+      "when": "When task involves .github/instructions/release management.instructions.md",
+      "yields": "release management related rules and guidelines"
+    },
+    {
       "target": ".github/skills/vscode-extension-patterns/SKILL.md",
       "type": "supports",
       "strength": 0.7,
