@@ -1,27 +1,9 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/README.md",
-    "README.md",
-    "platforms/vscode-extension/CHANGELOG.md",
-    "platforms/vscode-extension/README.md"
+    "github/config/cognitive-config.json",
+    "README.md"
   ],
-  "todoHotspots": [
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 10,
-      "scannedAt": 1775754681804
-    },
-    {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1775754681804
-    },
-    {
-      "file": "platforms/vscode-extension/README.md",
-      "todoCount": 1,
-      "scannedAt": 1775754681804
-    }
-  ],
-  "lastUpdated": 1775754681804
+  "todoHotspots": [],
+  "lastUpdated": 1775768877398
 }

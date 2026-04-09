@@ -27,7 +27,7 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v7.4.1 Brain self-containment enforcement. External API staleness audit. TTS rewrite (80% reduction). EXTERNAL-API-REGISTRY.md. 5 stale root docs archived. 14 phantom slash commands fixed.
+Recent: v7.4.2 published. Brain self-containment (I8), EXTERNAL-API-REGISTRY.md, TTS rewrite (80% reduction), 5 stale docs archived, 14 phantom slash commands fixed, 13 new AI models added.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
 Last Assessed: 2026-04-09

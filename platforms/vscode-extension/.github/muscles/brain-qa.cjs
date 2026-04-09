@@ -1031,7 +1031,9 @@ if (runPhases.includes(26)) {
         (n) => n === "SKILL.md",
       ).length;
       const m = content.match(
-        /(?:Skill Count[:\s]+|Total[^\n]*?)(\d+)\s*skills?/i,
+        /(?:Skill Count[:\s]+)(\d+)(?:\s*skills?)?/i,
+      ) || content.match(
+        /(?:Total[^\n]*?)(\d+)\s*skills?/i,
       );
       if (m) {
         const catCount = parseInt(m[1], 10);
@@ -1232,7 +1234,7 @@ if (runPhases.includes(31)) {
 
   const ciPath = path.join(ghPath, "copilot-instructions.md");
   if (fs.existsSync(ciPath)) {
-    const ciContent = fs.readFileSync(ciPath, "utf8");
+    const ciContent = fs.readFileSync(ciPath, "utf8").replace(/\r\n/g, "\n");
     const ciMatch = ciContent.match(/# Alex v(\d+\.\d+\.\d+)/);
     if (ciMatch && ciMatch[1] !== currentVersion)
       warn(
@@ -1271,7 +1273,7 @@ if (runPhases.includes(32)) {
   writePhase(32, "Prefrontal Cortex Evolution Validation");
   const ciPath = path.join(ghPath, "copilot-instructions.md");
   if (fs.existsSync(ciPath)) {
-    const ciContent = fs.readFileSync(ciPath, "utf8");
+    const ciContent = fs.readFileSync(ciPath, "utf8").replace(/\r\n/g, "\n");
 
     if (!ciContent.includes("## Identity"))
       fail("copilot-instructions.md missing ## Identity section");

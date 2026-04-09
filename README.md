@@ -2,9 +2,7 @@
 
 ![Your Trusted AI Partner for Any Job](.github/assets/banner.svg)
 
-[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0d9488)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-6366f1)](platforms/m365-copilot/) [![License](https://img.shields.io/badge/license-Apache%202.0-0d9488)](LICENSE.md)
-
-[![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues) [![GitHub discussions](https://img.shields.io/github/discussions/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) [![GitHub contributors](https://img.shields.io/github/contributors/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/graphs/contributors)
+[![VS Code](https://img.shields.io/badge/VS%20Code-Marketplace-0d9488)](https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture) [![M365 Copilot](https://img.shields.io/badge/M365%20Copilot-Preview-6366f1)](platforms/m365-copilot/) [![GitHub stars](https://img.shields.io/github/stars/fabioc-aloha/Alex_Plug_In?style=social)](https://github.com/fabioc-aloha/Alex_Plug_In/stargazers) [![GitHub contributors](https://img.shields.io/github/contributors/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/graphs/contributors) [![GitHub discussions](https://img.shields.io/github/discussions/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/discussions) [![GitHub issues](https://img.shields.io/github/issues/fabioc-aloha/Alex_Plug_In)](https://github.com/fabioc-aloha/Alex_Plug_In/issues) [![License](https://img.shields.io/badge/license-Apache%202.0-0d9488)](LICENSE.md)
 
 > **North Star**: Create the most advanced and trusted AI partner for any job
 
