@@ -1,9 +1,22 @@
 {
   "hotFiles": [],
-  "stalledFiles": [
-    "github/config/cognitive-config.json",
-    "README.md"
+  "stalledFiles": [],
+  "todoHotspots": [
+    {
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1775770435678
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1775770435678
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1775770435678
+    }
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1775768877398
+  "lastUpdated": 1775770435678
 }
