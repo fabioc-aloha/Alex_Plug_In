@@ -11,8 +11,7 @@ $schema: ../SKILL-SCHEMA.json
 > **Version**: 3.0.0  
 > **Last Updated**: 2026-04-09  
 > **Author**: Alex (Master Alex)  
-> **Staleness Watch**: Check https://replicate.com/collections/text-to-speech if last validated > 30 days ago  
-> **Last Validated**: Apr 2026
+> **Staleness Watch**: See [EXTERNAL-API-REGISTRY.md](../../EXTERNAL-API-REGISTRY.md) for source URLs and recheck cadence
 
 ## Overview
 
@@ -28,14 +27,6 @@ Cloud-based speech synthesis via Replicate for narration, audiobooks, voice clon
 | **Speech 2.8 HD**    | `minimax/speech-2.8-hd`        | higher          | No              | 40+       | Studio-grade high-fidelity    |
 | **Chatterbox Turbo** | `resemble-ai/chatterbox-turbo` | $0.025/1k chars | Yes (5s sample) | English   | Voice cloning, natural pauses |
 | **Qwen TTS**         | `qwen/qwen3-tts`               | $0.02/1k chars  | Yes             | 10        | Voice design from description |
-
-### Source of Truth URLs
-
-| Vendor      | URL                               | Last Checked |
-| ----------- | --------------------------------- | ------------ |
-| MiniMax     | https://replicate.com/minimax     | Apr 2026     |
-| Resemble AI | https://replicate.com/resemble-ai | Apr 2026     |
-| Qwen        | https://replicate.com/qwen        | Apr 2026     |
 
 ## Voice Presets
 
