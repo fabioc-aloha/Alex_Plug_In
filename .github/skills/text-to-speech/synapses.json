@@ -2,163 +2,77 @@
   "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
   "skillId": "text-to-speech",
-  "version": "2.5.0",
-  "lastUpdated": "2026-02-09",
+  "version": "3.0.0",
+  "lastUpdated": "2026-04-09",
   "promotionReady": true,
-  "promotionNotes": "v2.5.0: speakPrompt command, voice mode summarization, keyboard shortcuts, CSP-compliant webview, 35 unit tests",
+  "promotionNotes": "v3.0.0: Rewritten for Replicate cloud TTS (Edge TTS removed in v7.4.0)",
   "connections": [
     {
-      "target": ".github/skills/vscode-extension-patterns/SKILL.md",
-      "type": "implements",
-      "strength": 0.9,
-      "when": "Using native TypeScript WebSocket",
-      "yields": "Webview audio player, status bar feedback, chunked synthesis"
+      "target": ".github/skills/image-handling/SKILL.md",
+      "type": "complements",
+      "strength": 0.8,
+      "when": "Cloud TTS via Replicate for video narration, audiobooks, or content creation",
+      "yields": "Replicate TTS model catalog (speech-turbo, speech-hd, chatterbox-turbo, qwen-tts), voice cloning patterns"
     },
     {
-      "target": ".github/skills/markdown-mermaid/SKILL.md",
+      "target": ".github/instructions/language-detection-patterns.instructions.md",
       "type": "consumes",
-      "strength": 0.9,
-      "when": "Reading markdown documents for speech",
-      "yields": "Table-to-speech conversion"
-    },
-    {
-      "target": ".github/skills/academic-research/SKILL.md",
-      "type": "supports",
-      "strength": 0.9,
-      "when": "Audio reading research papers",
-      "yields": "Summarization option for long documents"
-    },
-    {
-      "target": ".github/skills/meditation/SKILL.md",
-      "type": "supports",
-      "strength": 0.3,
-      "when": "Reading meditation summaries aloud",
-      "yields": "Audio reflection support"
+      "strength": 0.6,
+      "when": "Selecting appropriate voice for non-English text",
+      "yields": "Language detection for multi-language TTS model selection"
     },
     {
       "target": ".github/skills/creative-writing/SKILL.md",
       "type": "complements",
       "strength": 0.3,
-      "when": "Reading prose for rhythm checks",
-      "yields": "Audio catches pacing issues"
+      "when": "Reading prose for rhythm checks or generating audiobook narration",
+      "yields": "Audio narration from written content"
     },
     {
       "target": ".github/skills/gamma-presentations/SKILL.md",
       "type": "supports",
-      "strength": 0.9,
-      "when": "Rehearsing pitch content",
-      "yields": "Audio playback for delivery practice"
-    },
-    {
-      "target": ".github/skills/project-management/SKILL.md",
-      "type": "supports",
-      "strength": 0.7,
-      "when": "Reading roadmap tables aloud",
-      "yields": "Natural speech for status reviews"
-    },
-    {
-      "target": ".github/skills/debugging-patterns/SKILL.md",
-      "type": "uses",
-      "strength": 0.7,
-      "when": "Pattern engineering for text processing",
-      "yields": "Regex patterns: negative lookbehind, emoji-text deduplication"
-    },
-    {
-      "target": ".github/instructions/release-management.instructions.md",
-      "type": "consumes",
-      "strength": 0.3,
-      "when": "TTS hotfix release",
-      "yields": "PAT-based publishing protocol"
-    },
-    {
-      "target": ".github/skills/image-handling/SKILL.md",
-      "type": "complements",
-      "strength": 0.7,
-      "when": "Cloud TTS via Replicate for video narration, audiobooks, or content creation",
-      "yields": "Replicate TTS model catalog (speech-turbo, chatterbox-turbo, qwen-tts), voice cloning patterns"
+      "strength": 0.5,
+      "when": "Generating narration audio for presentation delivery",
+      "yields": "Audio rendering of presentation scripts"
     }
   ],
   "activationContexts": [
-    "read aloud",
     "text to speech",
     "TTS",
-    "speak",
-    "audio",
-    "listen",
-    "play document",
-    "read this",
-    "voice synthesis",
-    "edge-tts",
-    "read table",
-    "read selection",
-    "narrate",
-    "long content",
-    "summarize for speech",
-    "speaker warmup",
-    "speak prompt",
-    "voice mode",
-    "read me a poem",
-    "generate and speak"
-  ],
-  "activationBoost": [
-    "read aloud",
-    "text to speech",
-    "TTS",
-    "speak",
-    "audio",
-    "listen",
-    "play document",
-    "read this",
-    "voice synthesis",
-    "edge-tts",
-    "read table",
-    "read selection",
-    "narrate",
-    "read out loud",
-    "read to me",
-    "say this",
-    "speak this",
-    "voice",
-    "speech",
-    "audio output",
-    "listen to document",
-    "read markdown",
-    "read file",
-    "read aloud selection",
-    "Microsoft Edge TTS",
-    "neural voice",
-    "synthesize speech",
-    "Alex read",
-    "read prompt",
-    "speak prompt response",
-    "proofread by ear",
-    "audio proofreading",
+    "narration",
+    "audiobook",
     "voice cloning",
     "clone voice",
+    "generate audio",
+    "speech synthesis",
+    "voice design",
     "chatterbox",
     "chatterbox turbo",
     "qwen tts",
     "speech turbo",
+    "speech hd",
     "replicate tts",
     "cloud tts",
+    "emotion control",
+    "minimax speech"
+  ],
+  "activationBoost": [
+    "text to speech",
+    "TTS",
+    "narration",
+    "audiobook",
+    "voice cloning",
+    "speech synthesis",
+    "generate audio",
+    "cloud tts",
+    "replicate tts",
     "voice design",
-    "emotion control"
+    "clone voice"
   ],
   "metadata": {
     "created": "2026-02-05",
-    "updated": "2026-02-09",
+    "updated": "2026-04-09",
     "author": "Alex",
-    "implementation": "Native TypeScript WebSocket with chunking + LLM integration",
-    "ttsEngine": "Microsoft Edge TTS",
-    "defaultVoice": "en-US-GuyNeural",
-    "maxChunkChars": 3000,
-    "chunkTimeoutMs": 60000,
-    "speakerWarmupMs": 2000,
-    "keyboardShortcuts": {
-      "readAloud": "Ctrl+Alt+R",
-      "toggleVoice": "Ctrl+Alt+V",
-      "speakPrompt": "Ctrl+Alt+P",
-      "stopReading": "Escape (when playing)"
-    }
+    "implementation": "Replicate cloud TTS models (MiniMax Speech, Chatterbox, Qwen TTS)"
   }
 }

@@ -56,7 +56,7 @@ This document maps every integration point between the two, inventories all plat
 │          │                │                 │           │
 │  ┌───────┴───┐  ┌─────────┴─────┐  ┌────────┴────────┐  │
 │  │ .github/  │  │ File System   │  │  External APIs  │  │
-│  │ Brain     │  │ Watcher/R/W   │  │  Edge TTS       │  │
+│  │ Brain     │  │ Watcher/R/W   │  │  External APIs  │  │
 │  │ Memory    │  │ Workspace     │  │  GitHub Auth    │  │
 │  │ Skills    │  │ SecretStorage │  │  Replicate/Logo │  │
 │  └───────────┘  └───────────────┘  └─────────────────┘  │
@@ -360,7 +360,7 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 | Context menu commands (opens chat panel but no LM) | Language model tools — no model access                 |
 | Memory tree view (reads .github/ files)            | Agent-mode conversations                               |
 | Architecture initialization (deploys .github/)     | Skill/instruction/prompt auto-loading                  |
-| TTS voice synthesis (Edge TTS, no LM needed)       | AI-powered features (persona detection, auto-insights) |
+| Cognitive task definitions                         | AI-powered features (persona detection, auto-insights) |
 | Cognitive task definitions                         | Extended thinking / deep reasoning                     |
 | Keyboard shortcuts                                 | Knowledge search and save                              |
 | Walkthroughs                                       | Honest Uncertainty scoring                             |
@@ -553,7 +553,7 @@ These must be configured for Alex to function. The `Setup Environment` command a
 | `fs-extra`        | ^11.3.3 | Enhanced file system operations           |
 | `pptxgenjs`       | ^4.0.1  | PowerPoint generation                     |
 | `proper-lockfile` | ^4.1.2  | File locking for concurrent access safety |
-| `ws`              | ^8.18.0 | WebSocket client for Edge TTS             |
+
 
 ### Dev Dependencies
 
@@ -569,14 +569,13 @@ These must be configured for Alex to function. The `Setup Environment` command a
 
 Alex integrates with third-party services for specialized features. **All are completely optional** — no core functionality requires them. Costs shown are for the external service, not for Alex.
 
-| Service                | Used For                                      | Cost                                | Free Tier?           |
-| ---------------------- | --------------------------------------------- | ----------------------------------- | -------------------- |
-| **Microsoft Edge TTS** | Voice synthesis via WebSocket                 | Free                                | ✅                    |
-| **GitHub API**         | Global Knowledge cloud sync                   | Free with GitHub account            | ✅                    |
-| **Replicate API**      | AI image generation (persona images, banners) | Pay-per-use (~$0.003–$0.08/image)   | Free trial credits   |
-| **Brandfetch API**     | Logo lookup for presentations                 | Free tier available                 | ✅                    |
-| **Logo.dev API**       | Alternative logo lookup                       | Free tier available                 | ✅                    |
-| **Gamma API**          | Presentation & content generation             | Credits-based (requires Gamma Pro+) | Limited free credits |
+| Service            | Used For                                      | Cost                                | Free Tier?           |
+| ------------------ | --------------------------------------------- | ----------------------------------- | -------------------- |
+| **GitHub API**     | Global Knowledge cloud sync                   | Free with GitHub account            | ✅                    |
+| **Replicate API**  | AI image generation (persona images, banners) | Pay-per-use (~$0.003–$0.08/image)   | Free trial credits   |
+| **Brandfetch API** | Logo lookup for presentations                 | Free tier available                 | ✅                    |
+| **Logo.dev API**   | Alternative logo lookup                       | Free tier available                 | ✅                    |
+| **Gamma API**      | Presentation & content generation             | Credits-based (requires Gamma Pro+) | Limited free credits |
 
 ---
 
@@ -665,7 +664,6 @@ These third-party integrations add specialized capabilities. **All are completel
 
 | Service                     | Minimum | Basic  | Recommended | Advanced |
 | --------------------------- | :-----: | :----: | :---------: | :------: |
-| Edge TTS (voice synthesis)  | ✅ Free  | ✅ Free |   ✅ Free    |  ✅ Free  |
 | GitHub API (knowledge sync) | ✅ Free  | ✅ Free |   ✅ Free    |  ✅ Free  |
 | Brandfetch (logo lookup)    | ✅ Free  | ✅ Free |   ✅ Free    |  ✅ Free  |
 | Logo.dev (logo lookup)      | ✅ Free  | ✅ Free |   ✅ Free    |  ✅ Free  |
