@@ -2,7 +2,7 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
+    "PRIVACY.md",
     "ROADMAP.md",
     "platforms/vscode-extension/README.md"
   ],
@@ -10,18 +10,18 @@
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1775703283652
+      "scannedAt": 1775703366226
     },
     {
       "file": "platforms/vscode-extension/README.md",
       "todoCount": 1,
-      "scannedAt": 1775703283652
+      "scannedAt": 1775703366226
     },
     {
       "file": "platforms/vscode-extension/src/commands/setupEnvironment.settings.ts",
       "todoCount": 1,
-      "scannedAt": 1775703283652
+      "scannedAt": 1775703366226
     }
   ],
-  "lastUpdated": 1775703283652
+  "lastUpdated": 1775703366226
 }
