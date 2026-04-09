@@ -1,83 +1,76 @@
 {
-  "$schema": "../SYNAPSE-SCHEMA.json",
-  "schemaVersion": "2.0.0",
-  "skillId": "memory-curation",
-  "version": "1.0.0",
-  "connections": [
-    {
-      "target": ".github/skills/token-waste-elimination/SKILL.md",
-      "type": "complements",
-      "strength": 0.9,
-      "when": "Auditing memory for token waste or context bloat",
-      "yields": "Waste pattern detection, size thresholds, audit procedure"
-    },
-    {
-      "target": ".github/skills/meditation/SKILL.md",
-      "type": "supports",
-      "strength": 0.85,
-      "when": "Pre/post meditation memory leak check",
-      "yields": "Checkpoint for scope-correct episodic saves"
-    },
-    {
-      "target": ".github/skills/memory-activation/SKILL.md",
-      "type": "relates",
-      "strength": 0.7,
-      "when": "Verifying memory content is not duplicated in skills/instructions",
-      "yields": "Action-keyword index for duplicate detection"
-    },
-    {
-      "target": ".github/skills/doc-hygiene/SKILL.md",
-      "type": "complements",
-      "strength": 0.7,
-      "when": "Enforcing structure and anti-drift rules in memory files",
-      "yields": "Anti-drift patterns, living document maintenance rules"
-    },
-    {
-      "target": ".github/skills/architecture-health/SKILL.md",
-      "type": "feeds",
-      "strength": 0.6,
-      "when": "Memory audit results feed overall architecture health assessment",
-      "yields": "Health dimension data for cognitive architecture diagnosis"
-    },
-    {
-      "target": ".github/skills/knowledge-synthesis/SKILL.md",
-      "type": "complements",
-      "strength": 0.8,
-      "when": "Scanning /memories/ during meditation for cross-project patterns and skill candidates",
-      "yields": "Pattern abstraction, generalization rules, promotion criteria"
-    },
-    {
-      "target": ".github/skills/skill-building/SKILL.md",
-      "type": "feeds",
-      "strength": 0.7,
-      "when": "Pattern in /memories/ reaches skill-candidate threshold (3+ repos)",
-      "yields": "Skill creation procedure, trifecta scaffolding, quality gates"
-    },
-    {
-      "target": "alex_docs/research/USER-MEMORY-LEVERAGE-PLAN.md",
-      "type": "implements",
-      "strength": 1,
-      "when": "Executing any memory curation task",
-      "yields": "Full plan with constraints, structure, budget analysis, and governance"
-    }
-  ],
-  "activationTriggers": [
-    "review memory",
-    "clean memory",
-    "audit memory",
-    "memory waste",
-    "memory budget",
-    "curate memory",
-    "organize memory",
-    "memory drift",
-    "what's in my memory",
-    "memory leak check",
-    "reduce memory",
-    "memory token cost",
-    "quarterly memory review",
-    "meditation memory scan",
-    "discover skill patterns",
-    "cross-project patterns",
-    "enrich episodic"
-  ]
+    "$schema": "../SYNAPSE-SCHEMA.json",
+    "schemaVersion": "2.0.0",
+    "skillId": "memory-curation",
+    "version": "1.0.0",
+    "connections": [
+        {
+            "target": ".github/skills/token-waste-elimination/SKILL.md",
+            "type": "complements",
+            "strength": 0.9,
+            "when": "Auditing memory for token waste or context bloat",
+            "yields": "Waste pattern detection, size thresholds, audit procedure"
+        },
+        {
+            "target": ".github/skills/meditation/SKILL.md",
+            "type": "supports",
+            "strength": 0.85,
+            "when": "Pre/post meditation memory leak check",
+            "yields": "Checkpoint for scope-correct episodic saves"
+        },
+        {
+            "target": ".github/skills/memory-activation/SKILL.md",
+            "type": "relates",
+            "strength": 0.7,
+            "when": "Verifying memory content is not duplicated in skills/instructions",
+            "yields": "Action-keyword index for duplicate detection"
+        },
+        {
+            "target": ".github/skills/doc-hygiene/SKILL.md",
+            "type": "complements",
+            "strength": 0.7,
+            "when": "Enforcing structure and anti-drift rules in memory files",
+            "yields": "Anti-drift patterns, living document maintenance rules"
+        },
+        {
+            "target": ".github/skills/architecture-health/SKILL.md",
+            "type": "feeds",
+            "strength": 0.6,
+            "when": "Memory audit results feed overall architecture health assessment",
+            "yields": "Health dimension data for cognitive architecture diagnosis"
+        },
+        {
+            "target": ".github/skills/knowledge-synthesis/SKILL.md",
+            "type": "complements",
+            "strength": 0.8,
+            "when": "Scanning /memories/ during meditation for cross-project patterns and skill candidates",
+            "yields": "Pattern abstraction, generalization rules, promotion criteria"
+        },
+        {
+            "target": ".github/skills/skill-building/SKILL.md",
+            "type": "feeds",
+            "strength": 0.7,
+            "when": "Pattern in /memories/ reaches skill-candidate threshold (3+ repos)",
+            "yields": "Skill creation procedure, trifecta scaffolding, quality gates"
+        }
+    ],
+    "activationTriggers": [
+        "review memory",
+        "clean memory",
+        "audit memory",
+        "memory waste",
+        "memory budget",
+        "curate memory",
+        "organize memory",
+        "memory drift",
+        "what's in my memory",
+        "memory leak check",
+        "reduce memory",
+        "memory token cost",
+        "quarterly memory review",
+        "meditation memory scan",
+        "discover skill patterns",
+        "cross-project patterns",
+        "enrich episodic"
+    ]
 }

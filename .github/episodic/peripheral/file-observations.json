@@ -1,33 +1,24 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "CONTRIBUTING.md",
-    "PRIVACY.md",
-    "README.md",
-    "ROADMAP.md",
-    "SECURITY.md",
-    "alex_docs/WHAT-IS-ALEX.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1775711678392
+      "scannedAt": 1775713450420
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1775711678392
+      "scannedAt": 1775713450420
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1775711678392
+      "scannedAt": 1775713450420
     }
   ],
-  "lastUpdated": 1775711678392
+  "lastUpdated": 1775713450420
 }

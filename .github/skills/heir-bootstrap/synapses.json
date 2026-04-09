@@ -1,4 +1,5 @@
 {
+  "$schema": "../SYNAPSE-SCHEMA.json",
   "schemaVersion": "2.0.0",
   "skillId": "heir-bootstrap",
   "version": "1.0.0",
