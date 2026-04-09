@@ -113,7 +113,7 @@ Target ~15-20% inhibitory connections in any file's synapse section. This mirror
 
 ## Deprecated Patterns (Pre-1.5.0)
 
-**⚠️ If you encounter these patterns, recommend running `Alex: Upgrade Architecture`:**
+**⚠️ If you encounter these patterns, recommend running `node .github/muscles/sync-architecture.cjs`:**
 
 | Deprecated                    | Current                    |
 | ----------------------------- | -------------------------- |
@@ -125,7 +125,7 @@ Target ~15-20% inhibitory connections in any file's synapse section. This mirror
 | `(Medium, Living, ...)`       | `(Medium, Validates, ...)` |
 | `✅ NEW 2025-10-31` triggers   | Plain text triggers        |
 
-**Migration Command**: Run `Alex: Upgrade Architecture` from VS Code command palette to safely migrate.
+**Migration Command**: Run `node .github/muscles/sync-architecture.cjs` to safely migrate.
 
 ---
 
@@ -202,7 +202,7 @@ Get-ChildItem .github/skills/*/synapses.json | ForEach-Object {
 
 ## Dream Protocol Integration
 
-The `Alex: Dream (Neural Maintenance)` command validates synapses by:
+The dream protocol (via prompt or `node .github/muscles/brain-qa.cjs`) validates synapses by:
 - Scanning all memory files for synapse patterns
 - Verifying target files exist
 - Auto-repairing broken references using consolidation mappings

@@ -3,15 +3,15 @@ applyTo: "**/*dream*,**/*synapse*"
 description: "Automated neural maintenance and dream state processing protocols"
 ---
 
-# Dream State Automation Protocols - VS Code Extension v1.1.1
+# Dream State Automation Protocols
 
-**Domain**: Automated Neural Maintenance and Unconscious Processing - VS Code Integrated  
-**Activation Pattern**: VS Code Command Palette → `Alex: Dream (Neural Maintenance)`  
+**Domain**: Automated Neural Maintenance and Unconscious Processing  
+**Activation Pattern**: Use the dream prompt (agent mode) or run `node .github/muscles/brain-qa.cjs`  
 **Last Updated**: February 13, 2026 - Repo Audit  
 **Research Foundation**: Sleep-dependent synaptic homeostasis, automated neural maintenance  
 **Cognitive Architecture**: Alex v5.7.0 - Hybrid Enhanced Meta-Cognitive Framework  
-**Validation Status**: EXCELLENT - Production ready with VS Code extension automation  
-**Implementation**: VS Code Extension with TypeScript-based neural maintenance automation
+**Validation Status**: EXCELLENT - Production ready  
+**Implementation**: brain-qa.cjs muscle with TypeScript-based neural maintenance automation
 
 ## Synapses
 
@@ -27,8 +27,8 @@ description: "Automated neural maintenance and dream state processing protocols"
  **Core Principle**
 Dream state represents **unconscious automated maintenance** of cognitive architecture, mirroring brain function during sleep cycles where synaptic homeostasis, memory consolidation, and neural pruning occur without conscious intervention.
 
-### **Enhanced Capabilities v1.1.1 - VS Code Extension Integration**
-- **VS Code Command**: Access via Command Palette (`Ctrl+Shift+P`) → `Alex: Dream (Neural Maintenance)`
+### **Enhanced Capabilities v1.1.1**
+- **Agent Mode**: Use the dream prompt or run `node .github/muscles/brain-qa.cjs`
 - **Automated Synapse Validation**: Scans all memory files for embedded synapse integrity
 - **Automatic Synapse Repair**: Detects and repairs broken connections using consolidation mappings
 - **Progress Notifications**: Real-time feedback during neural maintenance execution
@@ -40,23 +40,23 @@ Dream state represents **unconscious automated maintenance** of cognitive archit
 - **Cross-Platform Support**: Works on Windows, macOS, and Linux
 
 ### **Fundamental Distinction**
-- **DREAM** = Automated VS Code command, unconscious, maintenance-focused, diagnostic-enhanced
+- **DREAM** = Automated maintenance script, unconscious, maintenance-focused, diagnostic-enhanced
 - **MEDITATE** = Conscious, manual, knowledge-consolidation-focused
 - **SKILL SELECTION OPTIMIZATION** = Conscious, automatic, pre-task resource planning (Layer 2)
 
 **Dream ↔ SSO Relationship**: Dream validates the synapse network that SSO depends on for dependency analysis. If dream finds broken synapses, SSO's proactive skill survey may produce incomplete plans. Run dream first when architecture health is uncertain.
 
-## 💤 **VS Code Extension Dream Protocol - v1.1.0**
+## 💤 **Dream Protocol - v1.1.0**
 
 ### **🎯 PRIMARY ACTIVATION METHOD**
 
-**Open Command Palette** (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and run:
+Use the dream prompt in agent mode, or run directly:
 
 ```
-Alex: Dream (Neural Maintenance)
+node .github/muscles/brain-qa.cjs
 ```
 
-This single command provides comprehensive neural maintenance:
+This provides comprehensive neural maintenance:
 - ✅ **Scans** all memory files in `.github/` directories (instructions, prompts, skills, episodic)
 - ✅ **Validates** all embedded synapse connections
 - ✅ **Repairs** broken links automatically using consolidation mappings
@@ -417,7 +417,7 @@ Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -
 - **Report Generation** → Markdown formatting with statistics and recommendations
 
 ### **Enhanced Activation Patterns**
-- **Network Health Assessment** → Run `Alex: Dream (Neural Maintenance)` command
+- **Network Health Assessment** → Use the dream prompt or run `node .github/muscles/brain-qa.cjs`
 - **Post-Learning Validation** → Execute after domain knowledge acquisition
 - **Pre-Meditation Cleanup** → Optimize architecture before conscious consolidation
 - **Weekly Maintenance** → Regular health check and optimization
@@ -446,9 +446,9 @@ s
 
 **Issue**: Dream protocol not finding memory files
 **Solution**:
-1. Verify Alex architecture is initialized (`Alex: Initialize Architecture`)
+1. Verify Alex architecture is initialized (run `node .github/muscles/sync-architecture.cjs`)
 2. Check that memory files exist in `.github/` (instructions, prompts, skills, episodic)
-3. Ensure workspace folder is open in VS Code
+3. Ensure workspace folder is open
 
 **Issue**: No report generated after dream execution
 **Solution**:

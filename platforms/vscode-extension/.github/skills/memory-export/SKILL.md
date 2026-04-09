@@ -23,7 +23,7 @@ Gather from ALL of these sources, in order:
 | User Memory | `/memories/` (Copilot Memory files) | Persistent cross-workspace notes, patterns, lessons |
 | Session Memory | `/memories/session/` | Current conversation context (if any) |
 | Repository Memory | `/memories/repo/` | Codebase-specific facts stored by Copilot |
-| Copilot Memory | `alex_cognitive_user_profile` tool | Profile data surfaced through cognitive tools |
+| Copilot Memory | `.github/config/user-profile.json` | Profile data (same source as cognitive tools) |
 | Active Context | `.github/copilot-instructions.md` Active Context section | Current persona, phase, mode, focus trifectas |
 | Repository Memories | Repository memories in system context | Facts stored from prior agent interactions |
 

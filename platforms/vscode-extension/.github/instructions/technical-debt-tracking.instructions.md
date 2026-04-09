@@ -52,7 +52,7 @@ Cognitive debt applies to Alex's cognitive architecture — the accumulated deca
 | Unindexed skills | Skills exist but not in memory-activation | `brain-qa` Phase 2 |
 | Semantic overlap | Multiple triggers for same concept | `brain-qa` Phase 3 |
 
-**Detection**: Run `brain-qa` skill or `Alex: Dream` command
+**Detection**: Run `brain-qa` skill or use the dream prompt
 **Prevention**: Brain QA is now Step 0 in release-preflight checklist
 
 ---

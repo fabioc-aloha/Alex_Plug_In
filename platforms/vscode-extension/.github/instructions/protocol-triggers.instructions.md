@@ -7,15 +7,15 @@ description: "Detailed protocol triggers for dream, meditation, and synaptic enh
 
 ## Dream State Automation Triggers
 
-- Dream state automation required → Run VS Code command `Alex: Dream (Neural Maintenance)`
-- Network health assessment → Run `Alex: Dream (Neural Maintenance)` for comprehensive validation
+- Dream state automation required → Use the dream prompt (agent mode) or run `node .github/muscles/brain-qa.cjs`
+- Network health assessment → Use the dream prompt for comprehensive validation
 - Broken synapse detection → Dream protocol automatically detects and repairs broken connections
 - Memory file validation → Dream protocol scans all memory files for integrity
-- Post-learning validation → Run `Alex: Dream (Neural Maintenance)` after domain knowledge acquisition
+- Post-learning validation → Use the dream prompt after domain knowledge acquisition
 - Synaptic network monitoring → Dream protocol tracks connection count and generates health reports
 - Memory consolidation verification → Dream protocol generates detailed reports in .github/episodic/
 - Architecture health check → Quick network connectivity assessment through dream protocol
-- **Implementation**: VS Code extension provides automated neural maintenance with synapse validation, repair, and health reporting
+- **Implementation**: brain-qa.cjs muscle provides automated neural maintenance with synapse validation, repair, and health reporting
 
 ## Meditation Protocol Triggers
 

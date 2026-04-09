@@ -94,15 +94,6 @@ export interface DecayReport {
   generatedAt: string;
 }
 
-export interface ForgettingCeremonyResult {
-  /** Entries moved to cold storage */
-  archived: { id: string; title: string; reason: string }[];
-  /** Entries that survived (above threshold) */
-  kept: { id: string; title: string; score: number }[];
-  /** Entries skipped because their profile is 'permanent' */
-  skipped: number;
-}
-
 // ============================================================================
 // Constants
 // ============================================================================
@@ -133,9 +124,6 @@ const CATEGORY_DECAY_DEFAULTS: Partial<
   debugging: "aggressive",
   general: "moderate",
 };
-
-/** Freshness score below which an entry is a candidate for cold storage. */
-const DEFAULT_ARCHIVE_THRESHOLD = 0.1;
 
 /** Flush accumulated reference counts after this many distinct entries are queued. */
 const FLUSH_THRESHOLD = 15;
@@ -177,7 +165,7 @@ export function queueReferenceTouch(entryId: string): void {
  * Force-flush the reference queue to disk. Call before computing decay reports
  * so meditation/dream sees counters that reflect the current session.
  */
-export async function flushReferenceQueue(): Promise<void> {
+async function flushReferenceQueue(): Promise<void> {
   if (_flushTimer !== null) {
     clearTimeout(_flushTimer);
     _flushTimer = null;
@@ -392,172 +380,5 @@ export async function getDecayReport(): Promise<DecayReport | null> {
   } catch (err) {
     console.warn("[ForgettingCurve] Failed to build decay report:", err);
     return null;
-  }
-}
-
-// ============================================================================
-// Dream Cycle — Forgetting Ceremony
-// ============================================================================
-
-/**
- * During the dream state, move entries below the freshness threshold to cold
- * storage (archive folders). Entries are NEVER deleted — only moved. The
- * transition is logged to episodic memory so the user can review what changed.
- *
- * Human review first: `getDecayReport()` during meditation surfaces candidates.
- * This ceremony runs automatically only during the dream cycle (P3 — background).
- *
- * @param workspaceRoot Root path of the Alex workspace (for episodic log)
- * @param threshold     Freshness score below which entries are archived (default: 0.1)
- */
-export async function runForgettingCeremony(
-  workspaceRoot: string,
-  threshold = DEFAULT_ARCHIVE_THRESHOLD,
-): Promise<ForgettingCeremonyResult> {
-  const result: ForgettingCeremonyResult = {
-    archived: [],
-    kept: [],
-    skipped: 0,
-  };
-
-  const indexPath = path.join(os.homedir(), GLOBAL_KNOWLEDGE_PATHS.index);
-  if (!(await fs.pathExists(indexPath))) {
-    return result;
-  }
-
-  try {
-    // Flush pending touches before archiving
-    await flushReferenceQueue();
-
-    const raw = await fs.readFile(indexPath, "utf-8");
-    const index = JSON.parse(raw) as IGlobalKnowledgeIndex;
-
-    const insightArchive = path.join(
-      os.homedir(),
-      GLOBAL_KNOWLEDGE_PATHS.insights,
-      "archive",
-    );
-    const patternArchive = path.join(
-      os.homedir(),
-      GLOBAL_KNOWLEDGE_PATHS.patterns,
-      "archive",
-    );
-
-    const remainingEntries: IGlobalKnowledgeEntry[] = [];
-
-    for (const entry of index.entries) {
-      const freshness = computeFreshnessScore(
-        entry as IGlobalKnowledgeEntry & Partial<FreshnessFields>,
-      );
-
-      // Permanent entries are never archived
-      if (freshness.label === "permanent") {
-        result.skipped++;
-        remainingEntries.push(entry);
-        continue;
-      }
-
-      if (freshness.score < threshold) {
-        // Locate the source file
-        const gkBase = path.join(
-          os.homedir(),
-          GLOBAL_KNOWLEDGE_PATHS.knowledge,
-        );
-        const sourceFile = path.isAbsolute(entry.filePath)
-          ? entry.filePath
-          : path.join(gkBase, entry.filePath);
-
-        if (!(await fs.pathExists(sourceFile))) {
-          // File is already gone — remove from index
-          result.archived.push({
-            id: entry.id,
-            title: entry.title,
-            reason: `score ${freshness.score.toFixed(3)} < ${threshold} (source file absent)`,
-          });
-          continue;
-        }
-
-        // Move to archive subfolder
-        const archiveDir =
-          entry.type === "pattern" ? patternArchive : insightArchive;
-        await fs.ensureDir(archiveDir);
-        const destFile = path.join(archiveDir, path.basename(entry.filePath));
-        await fs.move(sourceFile, destFile, { overwrite: false });
-
-        const dayStr =
-          freshness.daysSinceReferenced >= 0
-            ? `${Math.round(freshness.daysSinceReferenced)}d since last use`
-            : "never referenced";
-
-        result.archived.push({
-          id: entry.id,
-          title: entry.title,
-          reason: `score ${freshness.score.toFixed(3)} | refs: ${freshness.referenceCount} | ${dayStr}`,
-        });
-      } else {
-        result.kept.push({
-          id: entry.id,
-          title: entry.title,
-          score: freshness.score,
-        });
-        remainingEntries.push(entry);
-      }
-    }
-
-    // Persist the pruned index
-    if (result.archived.length > 0) {
-      index.entries = remainingEntries;
-      index.lastUpdated = new Date().toISOString();
-      await fs.writeFile(indexPath, JSON.stringify(index, null, 2), "utf-8");
-
-      // Log the ceremony to episodic memory
-      await _logForgettingCeremony(workspaceRoot, result);
-    }
-  } catch (err) {
-    console.warn("[ForgettingCurve] Forgetting ceremony failed:", err);
-  }
-
-  return result;
-}
-
-/** Write a forgetting ceremony record to .github/episodic/ for the user to review. */
-async function _logForgettingCeremony(
-  workspaceRoot: string,
-  result: ForgettingCeremonyResult,
-): Promise<void> {
-  try {
-    const episodicPath = path.join(workspaceRoot, ".github", "episodic");
-    await fs.ensureDir(episodicPath);
-
-    const date = new Date().toISOString().split("T")[0];
-    const logPath = path.join(episodicPath, `forgetting-ceremony-${date}.md`);
-
-    const archivedLines = result.archived.map(
-      (e) => `- **${e.title}** \`${e.id}\` — ${e.reason}`,
-    );
-
-    const content = [
-      `# Forgetting Ceremony — ${date}`,
-      "",
-      `**Archived**: ${result.archived.length} entries moved to cold storage`,
-      `**Kept**: ${result.kept.length} entries retained`,
-      `**Skipped (permanent)**: ${result.skipped}`,
-      "",
-      "## Archived Entries (Cold Storage)",
-      "",
-      ...archivedLines,
-      "",
-      "> All archived entries remain recoverable. They reside in `insights/archive/`",
-      "> or `patterns/archive/` in your Global Knowledge directory.",
-      "> To restore an entry, move the file back and re-run `/knowledge index`.",
-      "",
-      "---",
-      "",
-      "*Generated by Alex Dream State — Forgetting Ceremony (v5.9.6)*",
-    ].join("\n");
-
-    await fs.writeFile(logPath, content, "utf-8");
-  } catch {
-    // Non-critical — a failed log never fails the ceremony
   }
 }

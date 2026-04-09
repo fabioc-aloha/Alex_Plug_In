@@ -231,15 +231,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       return;
     }
 
-    // Handle agent chat launches (agentChat:AgentName)
-    if (command.startsWith("agentChat:")) {
-      const agentName = command.slice("agentChat:".length);
-      logInfo(`[Alex] Launching agent chat: ${agentName}`);
-      const agentPrompt = `@alex Use the ${agentName} agent for this conversation. I'd like to work with the ${agentName} specialist.`;
-      await openChatPanel(agentPrompt);
-      return;
-    }
-
     // Handle special cases
     switch (command) {
       case "learnAlexWorkshop": {
@@ -263,6 +254,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         break;
       }
       case "heirBootstrap": {
+        // Offer environment settings before bootstrap chat
+        await vscode.commands.executeCommand("alex.setupEnvironment");
         const bootstrapPrompt =
           "I want to bootstrap this project. Walk me through the heir bootstrap wizard to tailor your architecture to this codebase: scan the project, verify build/test commands, mine existing AI configs, generate project-specific instructions, and set up security hooks. Check .github/.heir-bootstrap-state.json first; if it exists, resume from where we left off.";
         await openChatPanel(bootstrapPrompt);
@@ -762,9 +755,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       const copilotChatCfg = vscode.workspace.getConfiguration(
         "github.copilot.chat",
       );
-      const opusCfg = vscode.workspace.getConfiguration(
-        "github.copilot.chat.models.anthropic.claude-opus-4-5",
-      );
       const settingsToggles: SettingsToggle[] = [
         // Alex Features
         {
@@ -856,14 +846,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         },
         // Agent Capabilities
         {
-          key: "github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled",
-          label: "Extended Thinking",
-          enabled: opusCfg.get<boolean>("extendedThinkingEnabled", false),
-          group: "Agent Capabilities",
-          tooltip:
-            "Enable deep reasoning mode for Claude Opus (uses more tokens, better for complex tasks)",
-        },
-        {
           key: "chat.tools.autoRun",
           label: "Auto-Run Tools",
           enabled: chatCfg.get<boolean>("tools.autoRun", false),
@@ -950,6 +932,12 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         }
       }
 
+      // Read last active tab BEFORE building HTML so it renders correctly on first paint
+      const lastTab =
+        this._context?.globalState.get<string>(
+          WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY,
+        ) ?? "mission";
+
       this._view.webview.html = getWelcomeHtmlContent(
         this._view.webview,
         health,
@@ -968,18 +956,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         settingsToggles,
         showBootstrap,
         isBootstrapResume,
+        lastTab,
       );
-
-      // Restore last active tab if available
-      const lastTab = this._context?.globalState.get<string>(
-        WelcomeViewProvider.WELCOME_ACTIVE_TAB_KEY,
-      );
-      if (lastTab) {
-        this._view.webview.postMessage({
-          command: "switchToTab",
-          tabId: lastTab,
-        });
-      }
     } catch (err) {
       console.error("[Alex][WelcomeView] refresh() FAILED:", err);
       console.error(
@@ -1220,58 +1198,17 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
    * Returns max 3 nudges (mission + up to 2 contextual)
    */
   private _generateNudges(
-    health: HealthCheckResult,
-    lastDreamDate: Date | null,
+    _health: HealthCheckResult,
+    _lastDreamDate: Date | null,
     workspaceName?: string,
   ): Nudge[] {
     const nudges: Nudge[] = [];
-    const now = new Date();
-    const dayMs = 24 * 60 * 60 * 1000;
     if (workspaceName) {
       nudges.push({
         type: "tip",
         icon: "🗂️",
         message: `Workspace: ${workspaceName}`,
         priority: 5,
-      });
-    }
-
-    // Check health issues (high priority)
-    if (health.status !== HealthStatus.Healthy && health.brokenSynapses > 3) {
-      nudges.push({
-        type: "health",
-        icon: "⚠️",
-        message: `${health.brokenSynapses} broken synapses need repair`,
-        action: "dream",
-        actionLabel: "Run Dream",
-        priority: 2,
-      });
-    }
-
-    // Check last dream date (medium priority)
-    if (lastDreamDate) {
-      const daysSinceDream = Math.floor(
-        (now.getTime() - lastDreamDate.getTime()) / dayMs,
-      );
-      if (daysSinceDream >= 7) {
-        nudges.push({
-          type: "dream",
-          icon: "💭",
-          message: `Haven't dreamed in ${daysSinceDream} days. Neural maintenance recommended.`,
-          action: "dream",
-          actionLabel: "Dream",
-          priority: 4,
-        });
-      }
-    } else {
-      // Never dreamed in this workspace
-      nudges.push({
-        type: "dream",
-        icon: "💭",
-        message: "Run Dream to validate your cognitive architecture.",
-        action: "dream",
-        actionLabel: "Dream",
-        priority: 6,
       });
     }
 

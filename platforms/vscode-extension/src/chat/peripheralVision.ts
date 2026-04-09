@@ -742,12 +742,3 @@ export async function gatherPeripheralContext(
   _cache.set(workspaceRoot, { context, expires: Date.now() + CACHE_TTL_MS });
   return context;
 }
-
-/**
- * Invalidate the cached peripheral context for a workspace.
- * Call this after major operations (git commit, dependency install, etc.)
- * to ensure the next request gets a fresh snapshot.
- */
-export function invalidatePeripheralCache(workspaceRoot: string): void {
-  _cache.delete(workspaceRoot);
-}

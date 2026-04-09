@@ -94,7 +94,7 @@ Phase 4 of meditation is the natural synthesis point:
 
 ## Cross-Domain Pattern Synthesis
 
-Phase 3 of meditation uses the `alex_cognitive_cross_domain_synthesis` tool to move beyond consolidation into generation.
+Phase 3 of meditation analyzes episodic memories for cross-domain synthesis to move beyond consolidation into generation.
 
 ### The Transfer Test
 

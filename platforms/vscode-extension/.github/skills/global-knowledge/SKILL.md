@@ -196,14 +196,14 @@ When curating from multiple projects:
 | Research/experimental projects | Lower | May not be validated |
 | Archive content | Lowest | May be outdated |
 
-### Promotion Workflow Commands
+### Promotion Workflow
 
-```
-@alex /promote                  # Interactive promotion from project DK
-@alex /saveinsight              # Quick insight capture
-@alex /knowledgestatus          # Check current GK health
-@alex /knowledge <query>        # Search before adding (avoid duplicates)
-```
+Use the corresponding prompts in agent mode:
+
+- **promote prompt**: Interactive promotion from project DK
+- **saveinsight**: Quick insight capture (save to .github/global-knowledge/)
+- **knowledgestatus prompt**: Check current GK health
+- **knowledge prompt**: Search before adding (avoid duplicates)
 
 ---
 

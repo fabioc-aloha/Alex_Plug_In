@@ -1,64 +1,23 @@
 import * as vscode from "vscode";
 import * as path from "path";
-import * as os from "os";
+import * as fs from "fs";
 import { detectCognitiveLevel } from "../shared/cognitiveTier";
 import {
   applyMarkdownStyles,
   setExtensionPathForCss,
 } from "./setupMarkdownCss";
+import {
+  RecommendedExtension,
+  RECOMMENDED_EXTENSIONS,
+} from "./setupEnvironment.extensions";
+import {
+  ESSENTIAL_SETTINGS,
+  RECOMMENDED_SETTINGS,
+  AUTO_APPROVAL_SETTINGS,
+  SettingCategory,
+  SETTING_CATEGORIES,
+} from "./setupEnvironment.settings";
 export { setExtensionPathForCss, applyMarkdownStyles };
-
-/**
- * Get the global Alex directory path (~/.alex)
- */
-function getGlobalAlexDir(): string {
-  return path.join(os.homedir(), ".alex");
-}
-// mark as used (future feature hooks)
-void getGlobalAlexDir;
-// ============================================================================
-// RECOMMENDED EXTENSIONS
-// ============================================================================
-
-interface RecommendedExtension {
-  id: string;
-  name: string;
-  /** Why this extension matters for Alex */
-  purpose: string;
-  /** Cognitive level unlocked by this extension */
-  unlocksLevel: number;
-  /** Is Alex usable without it? */
-  required: boolean;
-}
-
-/**
- * Extensions that Alex works best with.
- * Ordered by importance — required first, then nice-to-have.
- */
-const RECOMMENDED_EXTENSIONS: RecommendedExtension[] = [
-  {
-    id: "github.copilot",
-    name: "GitHub Copilot",
-    purpose:
-      "AI language models — enables all AI-powered features (Levels 2-4)",
-    unlocksLevel: 2,
-    required: false, // Alex Level 1 works without it
-  },
-  {
-    id: "github.copilot-chat",
-    name: "GitHub Copilot Chat",
-    purpose: "Chat interface, agent mode, @alex participant, slash commands",
-    unlocksLevel: 2,
-    required: false,
-  },
-  {
-    id: "bierner.markdown-mermaid",
-    name: "Markdown Preview Mermaid",
-    purpose: "Mermaid diagram rendering in documentation previews",
-    unlocksLevel: 0,
-    required: false,
-  },
-];
 
 /**
  * Check which recommended extensions are installed.
@@ -155,198 +114,6 @@ export async function offerExtensionInstall(): Promise<number> {
   return installedCount;
 }
 
-// ============================================================================
-// SETTINGS DEFINITIONS
-// ============================================================================
-
-/**
- * Essential settings required for Alex to function properly
- * These are verified to exist in VS Code Copilot settings
- */
-const ESSENTIAL_SETTINGS: Record<string, unknown> = {
-  // Custom instructions location - verified in docs
-  "chat.instructionsFilesLocations": {
-    ".github/instructions": true,
-  },
-  // Prompt files location - verified in docs (for .github/prompts)
-  "chat.promptFilesLocations": {
-    ".github/prompts": true,
-  },
-  // Enable AGENTS.md files - verified in docs
-  "chat.useAgentsMdFile": true,
-  // Enable nested AGENTS.md in subfolders - experimental but documented
-  "chat.useNestedAgentsMdFiles": true,
-  // Auto-include copilot-instructions.md - verified in docs
-  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
-  // Skills auto-loading location
-  "chat.agentSkillsLocations": [".github/skills"],
-  // Skill adherence - forces LLM to read SKILL.md files before responding (A4)
-  "chat.useSkillAdherencePrompt": true,
-};
-
-/**
- * Recommended settings that improve the Alex experience
- * These are verified to exist in VS Code Copilot settings
- */
-const RECOMMENDED_SETTINGS: Record<string, unknown> = {
-  // Thinking tool for agents - experimental but documented
-  "github.copilot.chat.agent.thinkingTool": true,
-  // Max agent requests - verified in docs (default 25)
-  "chat.agent.maxRequests": 100,
-  // Participant detection - verified in docs
-  "chat.detectParticipant.enabled": true,
-  // Locale override - verified in docs
-  "github.copilot.chat.localeOverride": "en",
-  // Command center in title bar - quick access to Copilot features
-  "chat.commandCenter.enabled": true,
-  // Agent mode - enables custom agents in chat dropdown
-  "chat.agent.enabled": true,
-  // Agent session history - view and manage agent sessions
-  "chat.viewSessions.enabled": true,
-  // MCP gallery - enables Model Context Protocol tools
-  "chat.mcp.gallery.enabled": true,
-  // Follow-up suggestions - helps discover Alex capabilities
-  "github.copilot.chat.followUps": "always",
-  // Agent hooks - lifecycle automation
-  // NOTE: Disabled - not stable in VS Code 1.109 as of Feb 2026
-  // "chat.hooks.enabled": true,
-  // Copilot Memory - cross-session memory storage (persists between chats)
-  "github.copilot.chat.copilotMemory.enabled": true,
-  // Memory tool - access to memory tool in chat
-  "github.copilot.chat.tools.memory.enabled": true,
-  // Request queueing - queue messages for sequential processing
-  "chat.requestQueuing.enabled": true,
-  // Auto-queue by default
-  "chat.requestQueuing.defaultAction": "queue",
-  // Search subagent - enables web search capability in agent mode
-  "github.copilot.chat.searchSubagent.enabled": true,
-  // Custom agents in subagents - flexibility for specialized agents
-  "chat.customAgentInSubagent.enabled": true,
-  // Explore subagent model - faster model for codebase research (search_subagent)
-  // Claude Sonnet 4 balances speed and quality for read-only exploration
-  "chat.exploreAgent.defaultModel": "claude-sonnet-4",
-  // Unified agents bar - better UI
-  "chat.unifiedAgentsBar.enabled": true,
-  // Progress badge - visibility into ongoing operations
-  "chat.viewProgressBadge.enabled": true,
-  // Session orientation - stacked layout
-  "chat.viewSessions.orientation": "stacked",
-  // Show file changes in checkpoints - change tracking
-  "chat.checkpoints.showFileChanges": true,
-  // Restore last panel session - continuity
-  "chat.restoreLastPanelSession": true,
-  // MCP auto-start - start new and outdated servers automatically
-  "chat.mcp.autostart": "newAndOutdated",
-  // Code block progress - hide for cleaner output
-  "chat.agent.codeBlockProgress": false,
-  // NuGet assistance - for .NET projects
-  "chat.mcp.assisted.nuget.enabled": true,
-  // Include referenced instructions - better context awareness
-  "chat.includeReferencedInstructions": true,
-  // Use Agent Skills standard
-  "chat.useAgentSkills": true,
-  // Alex thinking phrases - personality-driven progress messages (VS Code 1.110+)
-  "chat.agent.thinking.phrases": [
-    "Meditating on this...",
-    "Consulting synapses...",
-    "Traversing knowledge graph...",
-    "Consolidating memory...",
-    "Activating neural pathways...",
-    "Searching episodic memory...",
-    "Synthesizing knowledge...",
-    "Connecting the dots...",
-    "Entering focused state...",
-    "Examining patterns...",
-    "Following the thread...",
-    "Deep in thought...",
-    "Warming up neurons...",
-    "Running cognitive analysis...",
-    "Consulting the architecture...",
-  ],
-  // Terminal image support - render images inline via Kitty graphics protocol (VS Code 1.110+)
-  "terminal.integrated.enableImages": true,
-};
-
-/**
- * Auto-approval settings for better workflow efficiency
- * These reduce friction for common operations while maintaining safety
- */
-const AUTO_APPROVAL_SETTINGS: Record<string, unknown> = {
-  // Auto-run tools - reduces manual approval prompts
-  "chat.tools.autoRun": true,
-  // Auto-approve file system operations
-  "chat.tools.fileSystem.autoApprove": true,
-  // Use custom auto-approve rules only (ignore defaults)
-  "chat.tools.terminal.ignoreDefaultAutoApproveRules": true,
-  // Auto-reply to terminal prompts
-  "chat.tools.terminal.autoReplyToPrompts": true,
-  // Allow shell history for terminal commands
-  "chat.tools.terminal.preventShellHistory": false,
-};
-
-/**
- * Extended thinking settings for Anthropic models (Opus 4.5)
- * These enable deeper reasoning for complex tasks like meditation/learning
- */
-const EXTENDED_THINKING_SETTINGS: Record<string, unknown> = {
-  // Enable extended thinking for Opus 4.5 - deep reasoning mode
-  "github.copilot.chat.models.anthropic.claude-opus-4-5.extendedThinkingEnabled": true,
-  // Thinking budget in tokens (max 16384) - higher = deeper reasoning
-  "github.copilot.chat.models.anthropic.claude-opus-4-5.thinkingBudget": 16384,
-};
-
-/**
- * Enterprise security settings (secrets scanning and audit logging)
- */
-const ENTERPRISE_SETTINGS: Record<string, unknown> = {
-  // Enterprise audit logging
-  "alex.enterprise.audit.enabled": true,
-};
-
-// Note: Mermaid/markdown preview settings are configured via the markdown-mermaid
-// skill's "Polish Mermaid Setup" prompt, not here, because they vary by VS Code
-// version and installed extensions.
-
-interface SettingCategory {
-  name: string;
-  description: string;
-  settings: Record<string, unknown>;
-  icon: string;
-}
-
-const SETTING_CATEGORIES: SettingCategory[] = [
-  {
-    name: "Essential",
-    description: "Required for full Alex functionality",
-    settings: ESSENTIAL_SETTINGS,
-    icon: "🔴",
-  },
-  {
-    name: "Recommended",
-    description: "Improves the Alex experience",
-    settings: RECOMMENDED_SETTINGS,
-    icon: "🟡",
-  },
-  {
-    name: "Auto-Approval",
-    description: "Auto-run tools and file operations for better workflow",
-    settings: AUTO_APPROVAL_SETTINGS,
-    icon: "🟠",
-  },
-  {
-    name: "Extended Thinking",
-    description: "Deep reasoning for Opus 4.5 (meditation, learning)",
-    settings: EXTENDED_THINKING_SETTINGS,
-    icon: "🧠",
-  },
-  {
-    name: "Enterprise (Experimental)",
-    description: "Microsoft 365 integration - requires admin consent",
-    settings: ENTERPRISE_SETTINGS,
-    icon: "🏢",
-  },
-];
-
 /**
  * Check which settings are already configured
  */
@@ -417,121 +184,59 @@ interface CategoryQuickPickItem extends vscode.QuickPickItem {
  * Build QuickPick items for all setting categories with current status
  */
 function buildSettingsCategoryItems(): CategoryQuickPickItem[] {
-  const essentialExisting = getExistingSettings(ESSENTIAL_SETTINGS);
-  const recommendedExisting = getExistingSettings(RECOMMENDED_SETTINGS);
-  const autoApprovalExisting = getExistingSettings(AUTO_APPROVAL_SETTINGS);
-  const extendedThinkingExisting = getExistingSettings(
-    EXTENDED_THINKING_SETTINGS,
-  );
-  const enterpriseExisting = getExistingSettings(ENTERPRISE_SETTINGS);
-
-  const essentialNeeded =
-    Object.keys(ESSENTIAL_SETTINGS).length - essentialExisting.length;
-  const recommendedNeeded =
-    Object.keys(RECOMMENDED_SETTINGS).length - recommendedExisting.length;
-  const autoApprovalNeeded =
-    Object.keys(AUTO_APPROVAL_SETTINGS).length - autoApprovalExisting.length;
-  const extendedThinkingNeeded =
-    Object.keys(EXTENDED_THINKING_SETTINGS).length -
-    extendedThinkingExisting.length;
-  const enterpriseNeeded =
-    Object.keys(ENTERPRISE_SETTINGS).length - enterpriseExisting.length;
-
-  const enterpriseCurrentlyEnabled = vscode.workspace
-    .getConfiguration()
-    .get<boolean>("alex.enterprise.enabled", false);
-
   const statusText = (needed: number) =>
     needed === 0 ? "✓ all configured" : `${needed} to add`;
 
-  const enterpriseStatus = enterpriseCurrentlyEnabled
-    ? "✓ enabled (uncheck to disable)"
-    : statusText(enterpriseNeeded);
-
-  return [
-    {
-      label: `${SETTING_CATEGORIES[0].icon} Essential Settings`,
-      description: statusText(essentialNeeded),
-      detail: SETTING_CATEGORIES[0].description,
-      category: SETTING_CATEGORIES[0],
-      needed: essentialNeeded,
-      existing: essentialExisting.length,
+  return SETTING_CATEGORIES.map((cat) => {
+    const existing = getExistingSettings(cat.settings);
+    const needed = Object.keys(cat.settings).length - existing.length;
+    return {
+      label: `${cat.icon} ${cat.name} Settings`,
+      description: statusText(needed),
+      detail: cat.description,
+      category: cat,
+      needed,
+      existing: existing.length,
       picked: true,
-    },
-    {
-      label: `${SETTING_CATEGORIES[1].icon} Recommended Settings`,
-      description: statusText(recommendedNeeded),
-      detail: SETTING_CATEGORIES[1].description,
-      category: SETTING_CATEGORIES[1],
-      needed: recommendedNeeded,
-      existing: recommendedExisting.length,
-      picked: true,
-    },
-    {
-      label: `${SETTING_CATEGORIES[2].icon} Auto-Approval Settings`,
-      description: statusText(autoApprovalNeeded),
-      detail: SETTING_CATEGORIES[2].description,
-      category: SETTING_CATEGORIES[2],
-      needed: autoApprovalNeeded,
-      existing: autoApprovalExisting.length,
-      picked: true,
-    },
-    {
-      label: `${SETTING_CATEGORIES[3].icon} Extended Thinking`,
-      description: statusText(extendedThinkingNeeded),
-      detail: SETTING_CATEGORIES[3].description,
-      category: SETTING_CATEGORIES[3],
-      needed: extendedThinkingNeeded,
-      existing: extendedThinkingExisting.length,
-      picked: false,
-    },
-    {
-      label: `${SETTING_CATEGORIES[4].icon} Enterprise (MS Graph)`,
-      description: enterpriseStatus,
-      detail:
-        SETTING_CATEGORIES[4].description + " - enables MS Graph integration",
-      category: SETTING_CATEGORIES[4],
-      needed: enterpriseNeeded,
-      existing: enterpriseExisting.length,
-      picked: enterpriseCurrentlyEnabled,
-    },
-  ];
+    };
+  });
 }
 
 /**
- * Show preview, confirm, and apply the collected settings
+ * Confirm and apply the collected settings.
+ * Shows a short confirmation with category names and setting count.
  */
-async function previewConfirmAndApply(
+async function confirmAndApply(
   settingsToApply: Record<string, unknown>,
   categoryNames: string,
 ): Promise<void> {
-  const preview = formatSettingsPreview(settingsToApply);
+  const count = Object.keys(settingsToApply).length;
 
   const confirm = await vscode.window.showInformationMessage(
-    `Apply ${Object.keys(settingsToApply).length} settings (${categoryNames})?\n\n⚠️ This will OVERWRITE existing values for these settings.\n\n• Essential: Required for Alex to read instruction files\n• Recommended: Improves agent capabilities\n• Nice-to-Have: Quality of life`,
-    { modal: true, detail: `Settings to apply:\n${preview}` },
-    "Apply Settings",
-    "Show Preview",
+    `Apply ${count} settings for: ${categoryNames}?`,
+    "Apply",
+    "Preview First",
     "Cancel",
   );
 
-  if (confirm === "Show Preview") {
+  if (confirm === "Preview First") {
+    const preview = formatSettingsPreview(settingsToApply);
     const doc = await vscode.workspace.openTextDocument({
-      content: `// Settings that will be APPLIED to your VS Code configuration\n// ⚠️ Existing values for these settings will be OVERWRITTEN\n\n${preview}`,
+      content: `// Settings that will be applied to your VS Code user configuration\n\n${preview}`,
       language: "jsonc",
     });
     await vscode.window.showTextDocument(doc, { preview: true });
 
     const confirmAfterPreview = await vscode.window.showInformationMessage(
-      "Apply these settings to your VS Code configuration?",
-      "Apply Settings",
+      `Apply these ${count} settings?`,
+      "Apply",
       "Cancel",
     );
 
-    if (confirmAfterPreview !== "Apply Settings") {
+    if (confirmAfterPreview !== "Apply") {
       return;
     }
-  } else if (confirm !== "Apply Settings") {
+  } else if (confirm !== "Apply") {
     return;
   }
 
@@ -609,27 +314,93 @@ export async function setupEnvironment(): Promise<void> {
     return;
   }
 
-  // Phase 3: Collect settings and handle enterprise toggle
+  // Phase 3: Collect settings from selected categories
   const settingsToApply: Record<string, unknown> = {};
   for (const item of selected) {
     Object.assign(settingsToApply, item.category.settings);
   }
 
-  const enterpriseCurrentlyEnabled = vscode.workspace
-    .getConfiguration()
-    .get<boolean>("alex.enterprise.enabled", false);
-  const enterpriseSelected = selected.some(
-    (s) => s.category.name === "Enterprise (Experimental)",
+  // Phase 4: Confirm and apply
+  const categoryNames = selected.map((s) => s.category.name).join(", ");
+  await confirmAndApply(settingsToApply, categoryNames);
+
+  // Phase 5: Offer Bootstrap if eligible
+  await offerBootstrapProject();
+}
+
+/**
+ * Check if the current workspace is eligible for bootstrap and offer to run it.
+ * Eligible when: workspace has .github/copilot-instructions.md, is NOT Master Alex,
+ * and bootstrap hasn't completed (no state file, or state file with phase < 9).
+ */
+async function offerBootstrapProject(): Promise<void> {
+  const wsFolder = vscode.workspace.workspaceFolders?.[0];
+  if (!wsFolder) {
+    return;
+  }
+  const wsRoot = wsFolder.uri.fsPath;
+
+  // Must be initialized
+  const markerPath = path.join(wsRoot, ".github", "copilot-instructions.md");
+  if (!fs.existsSync(markerPath)) {
+    return;
+  }
+
+  // Must NOT be Master Alex
+  const masterProtectedPath = path.join(
+    wsRoot,
+    ".github",
+    "config",
+    "MASTER-ALEX-PROTECTED.json",
   );
-  if (!enterpriseSelected && enterpriseCurrentlyEnabled) {
-    for (const key of Object.keys(ENTERPRISE_SETTINGS)) {
-      settingsToApply[key] = false;
+  if (fs.existsSync(masterProtectedPath)) {
+    return;
+  }
+
+  // Check bootstrap state
+  const bootstrapStatePath = path.join(
+    wsRoot,
+    ".github",
+    ".heir-bootstrap-state.json",
+  );
+  let isResume = false;
+  if (fs.existsSync(bootstrapStatePath)) {
+    try {
+      const stateData = JSON.parse(
+        fs.readFileSync(bootstrapStatePath, "utf-8"),
+      );
+      if (
+        typeof stateData.lastCompletedPhase === "number" &&
+        stateData.lastCompletedPhase >= 9
+      ) {
+        return; // Bootstrap already completed
+      }
+      isResume = true;
+    } catch {
+      // Corrupt state file: treat as eligible
     }
   }
 
-  // Phase 4: Preview, confirm, and apply
-  const categoryNames = selected.map((s) => s.category.name).join(", ");
-  await previewConfirmAndApply(settingsToApply, categoryNames);
+  const label = isResume ? "Resume Bootstrap" : "Bootstrap Project";
+  const detail = isResume
+    ? "Continue tailoring Alex to this project (interrupted session detected)"
+    : "Tailor Alex to this codebase: scan project, verify build/test commands, generate project-specific instructions";
+
+  const choice = await vscode.window.showInformationMessage(
+    `\uD83E\uDDEC ${label}?\n\n${detail}`,
+    label,
+    "Skip",
+  );
+
+  if (choice === label) {
+    const prompt = isResume
+      ? "I want to resume the bootstrap wizard. Check .github/.heir-bootstrap-state.json and continue from where we left off."
+      : "I want to bootstrap this project. Walk me through the heir bootstrap wizard to tailor your architecture to this codebase: scan the project, verify build/test commands, mine existing AI configs, generate project-specific instructions, and set up security hooks. Check .github/.heir-bootstrap-state.json first; if it exists, resume from where we left off.";
+
+    await vscode.commands.executeCommand("workbench.action.chat.open", {
+      query: prompt,
+    });
+  }
 }
 
 /**
@@ -777,6 +548,8 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
         `✅ Added ${result.applied.length} settings for Alex (${result.applied.length - essentialNeeded} already configured)`,
       );
     }
+    // Offer Bootstrap if eligible
+    await offerBootstrapProject();
     return true;
   }
 

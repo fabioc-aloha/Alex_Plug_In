@@ -94,7 +94,6 @@ import {
   handlePromoteCommand,
   handleKnowledgeStatusCommand,
   handleDocsCommand,
-  handleForgetCommand,
 } from "./handlers/workflowHandlers";
 
 // ============================================================================
@@ -572,11 +571,6 @@ async function handleAlexRequest(
   // Documentation command
   if (request.command === "docs") {
     return await handleDocsCommand(request, context, stream, token);
-  }
-
-  // Forget command - selective memory cleanup
-  if (request.command === "forget") {
-    return await handleForgetCommand(request, context, stream, token);
   }
 
   // Check if this is a greeting at the start of a session

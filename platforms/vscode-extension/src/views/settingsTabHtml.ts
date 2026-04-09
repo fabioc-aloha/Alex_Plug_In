@@ -14,6 +14,7 @@ import {
 export interface SettingsTabContext {
   tokenStatuses?: TokenStatusInfo[];
   settingsToggles?: SettingsToggle[];
+  isActive?: boolean;
 }
 
 /** Generate the Settings tab panel HTML. */
@@ -21,7 +22,7 @@ export function getSettingsTabHtml(ctx: SettingsTabContext): string {
   const { tokenStatuses, settingsToggles } = ctx;
 
   return `
-      <div class="tab-panel" id="panel-settings" role="tabpanel" aria-labelledby="tab-settings">
+      <div class="tab-panel${ctx.isActive ? " active" : ""}" id="panel-settings" role="tabpanel" aria-labelledby="tab-settings">
 
           ${
             (tokenStatuses ?? []).length > 0

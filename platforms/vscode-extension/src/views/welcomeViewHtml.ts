@@ -192,6 +192,7 @@ export function getWelcomeHtmlContent(
   settingsToggles?: SettingsToggle[],
   showBootstrap?: boolean,
   isBootstrapResume?: boolean,
+  activeTab?: string,
 ): string {
   // NASA R5: Entry point assertions
   nasaAssert(webview !== undefined, "_getHtmlContent: webview must be defined");
@@ -273,16 +274,16 @@ export function getWelcomeHtmlContent(
 
       <!-- Spike 1B: Tab Bar -->
       <div class="tab-bar" role="tablist" aria-label="Command Center">
-          <button role="tab" id="tab-mission" class="tab active" data-tab="mission" aria-selected="true" aria-controls="panel-mission" tabindex="0">Mission</button>
-          <button role="tab" id="tab-settings" class="tab" data-tab="settings" aria-selected="false" aria-controls="panel-settings" tabindex="-1">Settings</button>
-          <button role="tab" id="tab-docs" class="tab" data-tab="docs" aria-selected="false" aria-controls="panel-docs" tabindex="-1">Docs</button>
+          <button role="tab" id="tab-mission" class="tab${activeTab === "mission" || !activeTab ? " active" : ""}" data-tab="mission" aria-selected="${activeTab === "mission" || !activeTab ? "true" : "false"}" aria-controls="panel-mission" tabindex="${activeTab === "mission" || !activeTab ? "0" : "-1"}">Mission</button>
+          <button role="tab" id="tab-settings" class="tab${activeTab === "settings" ? " active" : ""}" data-tab="settings" aria-selected="${activeTab === "settings" ? "true" : "false"}" aria-controls="panel-settings" tabindex="${activeTab === "settings" ? "0" : "-1"}">Settings</button>
+          <button role="tab" id="tab-docs" class="tab${activeTab === "docs" ? " active" : ""}" data-tab="docs" aria-selected="${activeTab === "docs" ? "true" : "false"}" aria-controls="panel-docs" tabindex="${activeTab === "docs" ? "0" : "-1"}">Docs</button>
       </div>
 
-      ${getMissionTabHtml({ nudges, activeContext, showBootstrap, isBootstrapResume, chatMemoryLines: mindData?.chatMemoryLines ?? 0 })}
+      ${getMissionTabHtml({ nudges, activeContext, showBootstrap, isBootstrapResume, chatMemoryLines: mindData?.chatMemoryLines ?? 0, isActive: activeTab === "mission" || !activeTab })}
 
-      ${getSettingsTabHtml({ tokenStatuses, settingsToggles })}
+      ${getSettingsTabHtml({ tokenStatuses, settingsToggles, isActive: activeTab === "settings" })}
 
-      ${getDocsTabHtml()}
+      ${getDocsTabHtml(activeTab === "docs")}
 
   </div>
   
@@ -291,10 +292,6 @@ export function getWelcomeHtmlContent(
       
       function cmd(command, data) {
           vscode.postMessage({ command, ...data });
-      }
-      
-      function refresh() {
-          vscode.postMessage({ command: 'refresh' });
       }
 
       // ── Tab switching with state persistence + scroll restoration ──
@@ -401,19 +398,6 @@ export function getWelcomeHtmlContent(
               switchTab(message.tabId, false);
           }
       });
-
-      // Auto-refresh interval (30 seconds) — preserve active tab
-      const AUTO_REFRESH_MS = 30000;
-      setInterval(() => {
-          // Save active tab before refresh so it restores after HTML replacement
-          const activeTab = document.querySelector('.tab.active');
-          if (activeTab) {
-              const state = vscode.getState() || {};
-              state.activeTab = activeTab.getAttribute('data-tab');
-              vscode.setState(state);
-          }
-          refresh();
-      }, AUTO_REFRESH_MS);
 
       // ── Nudge dismiss (7.12) ──
       document.addEventListener('click', function(e) {

@@ -7,7 +7,7 @@ description: Cross-domain knowledge transfer and pattern application
 
 ## Activation
 
-Run the `alex_cognitive_cross_domain_synthesis` tool to get a data-driven report of domain coverage, under-connected pairs, and synthesis candidates from episodic memories.
+Analyze episodic memories for cross-domain synthesis to get a data-driven report of domain coverage, under-connected pairs, and synthesis candidates.
 
 ## Transfer Protocol
 

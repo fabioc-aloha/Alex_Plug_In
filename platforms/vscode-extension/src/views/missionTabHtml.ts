@@ -3,7 +3,7 @@
  *
  * Extracted from welcomeViewHtml.ts during Post-Implementation Optimization (P0).
  * Exports a single function called by the orchestrator.
- * Focused on project work: partnership, build, create.
+ * Focused on project work: partnership, agents, create, learn.
  */
 import { Nudge, actionButton, getNudgesHtml } from "./welcomeViewHtml";
 import { ActiveContext } from "../shared/activeContextManager";
@@ -14,6 +14,7 @@ export interface MissionTabContext {
   showBootstrap?: boolean;
   isBootstrapResume?: boolean;
   chatMemoryLines?: number;
+  isActive?: boolean;
 }
 
 /** Generate the Mission Command tab panel HTML. */
@@ -21,7 +22,7 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
   const { nudges } = ctx;
 
   return `
-      <div class="tab-panel active" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
+      <div class="tab-panel${ctx.isActive !== false ? " active" : ""}" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
 
           ${getNudgesHtml(nudges)}
 
@@ -39,29 +40,13 @@ export function getMissionTabHtml(ctx: MissionTabContext): string {
               <div class="action-group-label" data-group="agents" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>AGENTS</div>
               <div class="action-group-content" data-group="agents">
                   <div class="mission-profile-bar" role="radiogroup" aria-label="Mission profile">
+                      <button class="mission-profile-btn active" data-mission="alex" title="Default cognitive partner mode">🧠 Alex</button>
                       <button class="mission-profile-btn" data-mission="release" title="Heightened quality gates, Validator on all changes">🚀 Release</button>
                       <button class="mission-profile-btn" data-mission="research" title="Breadth-first, cite sources, compare approaches">🔬 Research</button>
                       <button class="mission-profile-btn" data-mission="debug" title="3+ hypotheses, binary search, no shotgun debugging">🐛 Debug</button>
                       <button class="mission-profile-btn" data-mission="review" title="Adversarial, confidence-scored, pattern deviation">👀 Review</button>
                       <button class="mission-profile-btn" data-mission="draft" title="Skip Validator, accept TODOs, move fast">⚡ Draft</button>
                   </div>
-                  ${actionButton("agentChat:Builder", "🔨", "Builder", "Constructive implementation with optimistic problem-solving")}
-                  ${actionButton("agentChat:Validator", "🛡️", "Validator", "Adversarial quality assurance with skeptical analysis")}
-                  ${actionButton("agentChat:Researcher", "🔬", "Researcher", "Deep domain research and knowledge discovery")}
-                  ${actionButton("agentChat:Documentarian", "📝", "Documentarian", "Keeps documentation accurate, current, and drift-free")}
-                  ${actionButton("agentChat:Azure", "☁️", "Azure", "Azure development guidance with MCP tools")}
-                  ${actionButton("agentChat:M365", "📧", "M365", "Microsoft 365 and Teams development guidance")}
-              </div>
-
-              <div class="action-group-label" data-group="build" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>BUILD</div>
-              <div class="action-group-content" data-group="build">
-                  ${actionButton("codeReview", "👀", "Code Review", "Review for correctness and growth")}
-                  ${actionButton("debugThis", "🐛", "Debug This", "Find the issue together")}
-                  ${actionButton("generateTests", "🧪", "Generate Tests", "Build confidence in your code")}
-                  ${actionButton("runAudit", "🔍", "Project Audit", "Comprehensive quality check")}
-                  ${actionButton("releasePreflight", "🚀", "Release Preflight")}
-                  ${actionButton("viewDiagnostics", "🩺", "Diagnostics", "View diagnostics and report issues")}
-                  ${actionButton("reviewPR", "👁️", "Review PR", "AI-powered pull request review")}
               </div>
 
               <div class="action-group-label" data-group="create" tabindex="0" role="button" aria-expanded="true"><span class="collapse-chevron" aria-hidden="true">▾</span>CREATE</div>

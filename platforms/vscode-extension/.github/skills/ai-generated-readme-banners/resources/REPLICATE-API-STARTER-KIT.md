@@ -114,11 +114,10 @@ Create `.vscode/mcp.json` in your workspace (or add to existing):
 
 ### Secure Token Storage (Recommended)
 
-**Alex users**: Use the **Secrets** feature in the Alex Welcome panel:
-1. Open Command Palette → "Alex: Show Welcome"
-2. Click **Secrets** in the sidebar
-3. Add `REPLICATE_API_TOKEN` with your `r8_...` token
-4. Token is stored securely in VS Code's SecretStorage
+**Alex users**: Store the token securely:
+1. Set `REPLICATE_API_TOKEN` as an environment variable, or
+2. If using the VS Code extension, store in SecretStorage via the Welcome panel
+3. Token format: `r8_...`
 
 This avoids putting tokens in config files that might be committed to git.
 

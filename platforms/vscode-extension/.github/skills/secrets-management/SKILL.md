@@ -118,8 +118,8 @@ graph LR
 
 | Direction | Command | Use Case |
 |-----------|---------|----------|
-| **Import** | `Alex: Migrate .env to Secrets` | Secure existing plaintext tokens |
-| **Export** | `Alex: Export Secrets to .env` | Enable external tool access |
+| **Import** | Migrate .env to SecretStorage | Secure existing plaintext tokens |
+| **Export** | Export SecretStorage to .env | Enable external tool access |
 
 ### Migration Strategy
 
@@ -260,9 +260,8 @@ const envPattern = /^\s*([A-Z_][A-Z0-9_]*)\s*=\s*([^#\n]+)/i;
 6. **Guide**: Provide code migration instructions
 
 **User Commands**:
-- `Alex: Detect & Migrate .env Secrets` - Scan workspace for .env files
-- `Alex: Export Secrets to .env` - Write SecretStorage tokens to .env for external tool access
-- Quick action button in Welcome panel - "🔍 Detect .env Secrets"
+- Detect and migrate .env secrets: Scan workspace for .env files
+- Export SecretStorage to .env: Write tokens to .env for external tool access
 
 **Migration UI Flow**:
 ```
@@ -427,7 +426,6 @@ if (Test-Path .env) {
 ## Output Format
 
 - Complete secretsManager.ts service implementation
-- VS Code command registration
 - UI integration (quick pick + input prompts)
 - Migration logic for existing credentials
 - Security review and recommendations

@@ -227,7 +227,7 @@ Synapses wired **at creation time** are 10x more valuable than synapses discover
 | Wire at creation | Fresh knowledge = accurate connections | Add synapses when creating any skill/instruction |
 | 2-4 connections minimum | Prevents isolated knowledge islands | Every new file connects to at least 2 existing files |
 | Star topology for instructions | Central activation hub | Every instruction connects to the project context instruction |
-| Run Dream before major phases | Catch broken connections early | `Alex: Dream (Neural Maintenance)` |
+| Run Dream before major phases | Catch broken connections early | Use the dream prompt or `node .github/muscles/brain-qa.cjs` |
 | Strength reflects reality | Don't over-connect | Critical = always co-activate; Low = rarely |
 
 ### Connection Strategy
@@ -269,7 +269,7 @@ To apply Research-First Development to any new project:
 - [ ] **Interactive prompts**: Create `{project}-implement`, `{project}-test`, `{project}-deploy` prompts
 - [ ] **Synapse network**: Wire all new files with 2-4 connections each
 - [ ] **4D gap analysis**: Run GA-S, GA-I, GA-A, GA-P before each phase
-- [ ] **Dream validation**: Run `Alex: Dream` to validate network health
+- [ ] **Dream validation**: Use the dream prompt or run `node .github/muscles/brain-qa.cjs` to validate network health
 
 ---
 

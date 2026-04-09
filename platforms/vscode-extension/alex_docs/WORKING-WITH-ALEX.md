@@ -376,10 +376,10 @@ Use the same approach we discussed for the user service.
 
 **Table 4:** *Command Usage Guide*
 
-| Scenario          | Command                      | What Happens                               |
+| Scenario          | Action                       | What Happens                               |
 | ----------------- | ---------------------------- | ------------------------------------------ |
-| Start of day      | `Alex: Self-Actualize`       | Deep assessment, sets working context      |
-| End of session    | `Alex: Dream`                | Consolidates learnings, maintains synapses |
+| Start of day      | Selfactualize prompt         | Deep assessment, sets working context      |
+| End of session    | Dream prompt or brain-qa.cjs | Consolidates learnings, maintains synapses |
 | Stuck on problem  | `Alex: Debug This`           | Root cause analysis prompt                 |
 | Before release    | `Alex: Release Preflight`    | Comprehensive checks                       |
 | Learning new area | `Alex: Search Knowledge`     | Find related patterns                      |
@@ -752,7 +752,7 @@ The [mac](https://github.com/fabioc-aloha/mac) heir project has comprehensive ma
 
 ## 🆘 Getting Help
 
-- **Chat Customizations Editor**: Run `Chat: Open Chat Customizations` from the Command Palette to browse, create, and manage all of Alex's instructions, skills, agents, and prompts in a visual editor. This is the easiest way to understand what's loaded and create new trifectas.
+- **Chat Customizations Editor**: Run `Chat: Open Chat Customizations` from VS Code to browse, create, and manage all of Alex's instructions, skills, agents, and prompts in a visual editor. This is the easiest way to understand what's loaded and create new trifectas.
 - **Documentation**: `Alex: Documentation` command
 - **Health Check**: `Alex: Health Dashboard` for system status
 - **Memory View**: `Alex: Memory Dashboard` for architecture visualization

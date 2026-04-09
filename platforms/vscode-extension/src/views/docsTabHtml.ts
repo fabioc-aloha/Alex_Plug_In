@@ -5,9 +5,9 @@
  */
 
 /** Generate the Docs tab panel HTML. */
-export function getDocsTabHtml(): string {
+export function getDocsTabHtml(isActive?: boolean): string {
   return `
-      <div class="tab-panel" id="panel-docs" role="tabpanel" aria-labelledby="tab-docs">
+      <div class="tab-panel${isActive ? " active" : ""}" id="panel-docs" role="tabpanel" aria-labelledby="tab-docs">
 
           <div class="docs-section">
               <div class="docs-section-title">Getting Started</div>

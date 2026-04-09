@@ -225,11 +225,6 @@
         "icon": "$(pulse)"
       },
       {
-        "command": "alex.openMemoryDashboard",
-        "title": "Alex: Memory Architecture (Premium)",
-        "icon": "$(symbol-structure)"
-      },
-      {
         "command": "alex.runAudit",
         "title": "Alex: Run Project Audit",
         "icon": "$(checklist)"
@@ -458,10 +453,6 @@
         "command": "alex.quickCommands",
         "title": "Alex: Quick Commands",
         "icon": "$(zap)"
-      },
-      {
-        "command": "alex.refreshMemoryTree",
-        "title": "Alex: Refresh Memory Tree"
       }
     ],
     "markdown.previewStyles": [

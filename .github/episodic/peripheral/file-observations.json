@@ -1,28 +1,23 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/ASSISTANT-COMPATIBILITY.md",
-    "alex_docs/README.md",
-    "alex_docs/WHAT-IS-ALEX.md",
-    "alex_docs/WORKING-WITH-ALEX.md",
-    "alex_docs/architecture/AGENT-CATALOG.md",
-    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
-    "alex_docs/architecture/COMMAND-MEMORY-EFFECTS.md",
-    "alex_docs/architecture/CONSCIOUS-MIND.md",
-    "alex_docs/architecture/COPILOT-BRAIN.md",
-    "alex_docs/architecture/GK-PATTERN-FORMAT-STANDARD.md"
+    "github/episodic/calibration/calibration-log.json",
+    "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/src/chat/forgettingCurve.ts",
+    "platforms/vscode-extension/src/chat/handlers/workflowHandlers.ts",
+    "platforms/vscode-extension/src/chat/participant.ts",
+    "platforms/vscode-extension/src/chat/peripheralVision.ts",
+    "platforms/vscode-extension/src/commands/setupEnvironment.ts",
+    "platforms/vscode-extension/src/services/terminalOrchestrator.ts",
+    "platforms/vscode-extension/src/shared/skillConstants.ts"
   ],
   "todoHotspots": [
     {
-      "file": "alex_docs/WORKING-WITH-ALEX.md",
+      "file": "platforms/vscode-extension/src/commands/setupEnvironment.settings.ts",
       "todoCount": 1,
-      "scannedAt": 1775692192738
-    },
-    {
-      "file": "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
-      "todoCount": 1,
-      "scannedAt": 1775692192738
+      "scannedAt": 1775703049002
     }
   ],
-  "lastUpdated": 1775692192738
+  "lastUpdated": 1775703049002
 }

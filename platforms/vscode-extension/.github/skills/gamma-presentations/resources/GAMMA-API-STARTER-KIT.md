@@ -8,21 +8,21 @@
 
 **Pick your output format:**
 
-| Task | Format | Why |
-|------|--------|-----|
-| Slide deck / pitch | `presentation` | Standard deck with transitions |
-| Long-form report | `document` | Scrollable, structured document |
-| Instagram/TikTok carousel | `social` | Card-based social content |
-| Landing page | `webpage` | Web-ready single page |
+| Task                      | Format         | Why                             |
+| ------------------------- | -------------- | ------------------------------- |
+| Slide deck / pitch        | `presentation` | Standard deck with transitions  |
+| Long-form report          | `document`     | Scrollable, structured document |
+| Instagram/TikTok carousel | `social`       | Card-based social content       |
+| Landing page              | `webpage`      | Web-ready single page           |
 
 **Pick your image model by budget:**
 
-| Tier | Models | Credits/Image | When to Use |
-|------|--------|---------------|-------------|
-| **Basic** | `flux-quick`, `flux-kontext`, `imagen-flash`, `luma-flash` | ~2 | Testing, drafts |
-| **Standard** | `flux-pro`, `imagen-pro`, `ideogram-turbo`, `leonardo` | ~8-15 | Most presentations |
-| **Premium** | `ideogram`, `imagen4`, `gemini`, `recraft`, `gpt-image`, `dalle3` | ~20-33 | Client-facing work |
-| **Ultra** | `flux-ultra`, `imagen4-ultra`, `recraft-svg`, `gpt-image-hd` | ~40-120 | Print/high-res needs |
+| Tier         | Models                                                            | Credits/Image | When to Use          |
+| ------------ | ----------------------------------------------------------------- | ------------- | -------------------- |
+| **Basic**    | `flux-quick`, `flux-kontext`, `imagen-flash`, `luma-flash`        | ~2            | Testing, drafts      |
+| **Standard** | `flux-pro`, `imagen-pro`, `ideogram-turbo`, `leonardo`            | ~8-15         | Most presentations   |
+| **Premium**  | `ideogram`, `imagen4`, `gemini`, `recraft`, `gpt-image`, `dalle3` | ~20-33        | Client-facing work   |
+| **Ultra**    | `flux-ultra`, `imagen4-ultra`, `recraft-svg`, `gpt-image-hd`      | ~40-120       | Print/high-res needs |
 
 **Decision Tree:**
 ```
@@ -94,11 +94,10 @@ X-API-KEY: sk-gamma-your_key_here
 
 ### Secure Storage (Alex Users)
 
-**Recommended**: Use the **Secrets** feature in the Alex Welcome panel:
-1. Open Command Palette → "Alex: Show Welcome"
-2. Click **Secrets** in the sidebar
-3. Add `GAMMA_API_KEY` with your `sk-gamma-...` key
-4. Token is stored securely in VS Code's SecretStorage
+**Recommended**: Store the key securely:
+1. Set `GAMMA_API_KEY` as an environment variable, or
+2. If using the VS Code extension, store in SecretStorage via the Welcome panel
+3. Key format: `sk-gamma-...`
 
 ---
 
@@ -148,37 +147,37 @@ node .github/muscles/gamma-generator.cjs \
 
 ### Required Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `inputText` | string | Topic or content (max 400K chars) |
-| `textMode` | enum | `generate` \| `condense` \| `preserve` |
+| Parameter   | Type   | Description                            |
+| ----------- | ------ | -------------------------------------- |
+| `inputText` | string | Topic or content (max 400K chars)      |
+| `textMode`  | enum   | `generate` \| `condense` \| `preserve` |
 
 ### Optional Parameters
 
-| Parameter | Default | Options |
-|-----------|---------|---------|
-| `format` | `presentation` | `presentation`, `document`, `social`, `webpage` |
-| `numCards` | `10` | 1-60 (Pro), 1-75 (Ultra) |
-| `exportAs` | — | `pptx`, `pdf` |
-| `themeId` | workspace default | Theme ID from GET /themes |
-| `cardSplit` | `auto` | `auto`, `inputTextBreaks` |
+| Parameter   | Default           | Options                                         |
+| ----------- | ----------------- | ----------------------------------------------- |
+| `format`    | `presentation`    | `presentation`, `document`, `social`, `webpage` |
+| `numCards`  | `10`              | 1-60 (Pro), 1-75 (Ultra)                        |
+| `exportAs`  | —                 | `pptx`, `pdf`                                   |
+| `themeId`   | workspace default | Theme ID from GET /themes                       |
+| `cardSplit` | `auto`            | `auto`, `inputTextBreaks`                       |
 
 ### textOptions
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `amount` | `medium` | `brief`, `medium`, `detailed`, `extensive` |
-| `tone` | — | e.g., "professional, inspiring" |
-| `audience` | — | e.g., "executives", "developers" |
-| `language` | `en` | ISO language code |
+| Parameter  | Default  | Description                                |
+| ---------- | -------- | ------------------------------------------ |
+| `amount`   | `medium` | `brief`, `medium`, `detailed`, `extensive` |
+| `tone`     | —        | e.g., "professional, inspiring"            |
+| `audience` | —        | e.g., "executives", "developers"           |
+| `language` | `en`     | ISO language code                          |
 
 ### imageOptions
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `source` | `aiGenerated` | See source options below |
-| `model` | auto-selected | See model tiers above |
-| `style` | — | e.g., "photorealistic", "minimal line art" |
+| Parameter | Default       | Description                                |
+| --------- | ------------- | ------------------------------------------ |
+| `source`  | `aiGenerated` | See source options below                   |
+| `model`   | auto-selected | See model tiers above                      |
+| `style`   | —             | e.g., "photorealistic", "minimal line art" |
 
 **Image Source Options:**
 - `aiGenerated` — AI-generated images (uses credits)
@@ -193,11 +192,11 @@ node .github/muscles/gamma-generator.cjs \
 
 ### cardOptions
 
-| Parameter | Options by Format |
-|-----------|-------------------|
-| `dimensions` | **presentation**: `fluid`, `16x9`, `4x3` |
-| | **document**: `fluid`, `pageless`, `letter`, `a4` |
-| | **social**: `1x1`, `4x5`, `9x16` |
+| Parameter    | Options by Format                                 |
+| ------------ | ------------------------------------------------- |
+| `dimensions` | **presentation**: `fluid`, `16x9`, `4x3`          |
+|              | **document**: `fluid`, `pageless`, `letter`, `a4` |
+|              | **social**: `1x1`, `4x5`, `9x16`                  |
 
 ---
 
@@ -282,7 +281,7 @@ Tip: Reduce numCards or use simpler image model
 ### "gamma-generator.cjs not found"
 ```
 Cause: Alex architecture not initialized in workspace
-Fix: Run "Alex: Initialize Architecture" command
+Fix: Run `node .github/muscles/sync-architecture.cjs` or copy .github/ to your project
 ```
 
 ### Right-click menu doesn't work
@@ -351,12 +350,12 @@ Gamma's MCP is **hosted** (not local like Replicate). It requires OAuth connecti
 
 ## API Endpoint Reference
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/v1.0/generations` | POST | Start generation |
-| `/v1.0/generations/{id}` | GET | Check status |
-| `/v1.0/themes` | GET | List workspace themes |
-| `/v1.0/folders` | GET | List workspace folders |
+| Endpoint                 | Method | Description            |
+| ------------------------ | ------ | ---------------------- |
+| `/v1.0/generations`      | POST   | Start generation       |
+| `/v1.0/generations/{id}` | GET    | Check status           |
+| `/v1.0/themes`           | GET    | List workspace themes  |
+| `/v1.0/folders`          | GET    | List workspace folders |
 
 ### Base URL
 ```
