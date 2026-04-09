@@ -1,23 +1,27 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/calibration/calibration-log.json",
-    "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/chat/forgettingCurve.ts",
-    "platforms/vscode-extension/src/chat/handlers/workflowHandlers.ts",
-    "platforms/vscode-extension/src/chat/participant.ts",
-    "platforms/vscode-extension/src/chat/peripheralVision.ts",
-    "platforms/vscode-extension/src/commands/setupEnvironment.ts",
-    "platforms/vscode-extension/src/services/terminalOrchestrator.ts",
-    "platforms/vscode-extension/src/shared/skillConstants.ts"
+    "github/episodic/peripheral/file-observations.json",
+    "CHANGELOG.md",
+    "ROADMAP.md",
+    "platforms/vscode-extension/README.md"
   ],
   "todoHotspots": [
     {
+      "file": "CHANGELOG.md",
+      "todoCount": 10,
+      "scannedAt": 1775703283652
+    },
+    {
+      "file": "platforms/vscode-extension/README.md",
+      "todoCount": 1,
+      "scannedAt": 1775703283652
+    },
+    {
       "file": "platforms/vscode-extension/src/commands/setupEnvironment.settings.ts",
       "todoCount": 1,
-      "scannedAt": 1775703049002
+      "scannedAt": 1775703283652
     }
   ],
-  "lastUpdated": 1775703049002
+  "lastUpdated": 1775703283652
 }

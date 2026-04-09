@@ -275,9 +275,8 @@ Your learned domains, custom synapses, and memory files are preserved automatica
 | **Skill-Based Routing**   | 3-tier task routing: keyword matching, learned expertise (30-day decay), fallback to orchestrator                                |
 | **Assignment Lifecycle**  | H17 SubagentStop hook records delegation outcomes; meditation-time expertise analysis (analyze-assignments.cjs)                  |
 | **Structured Unknowns**   | 5-category uncertainty taxonomy (information, interpretation, decision, authority, capability) with lifecycle tracking           |
-| **Correlation Vectors**   | Request tracing across delegations with `req-{hex}.agent.operation` chain format                                                 |
-| **Mission Profiles**      | 5 behavioral presets (release, research, debug, review, draft) as reusable prompt files                                          |
-| **Knowledge Artifacts**   | Confidence-scored research records with supersession chains and automatic pruning                                                |
+| **Setup Wizard**          | Extracted settings/extensions into separate files; simplified UX; bootstrap offer after init/upgrade/setup; 7 settings promoted to Essential |
+| **Dead Code Cleanup**     | Removed 6 dead view files, 3 dead settings, dream nudges, enterprise category; net reduction of ~3,500 lines                    |
 | **18 Hooks**              | 18 hooks shipped (12 global + 6 agent-scoped) across 8 VS Code hook events                                                       |
 
 ### What's New (v7.3.0 -- Research-Driven Quality Edition)

@@ -30,6 +30,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Delegation Verification** (`alex.agent.md`) -- Post-delegation spot-checks: re-read changed files, run `tsc` for TypeScript, verify no stale imports/dead code; trust-but-verify with intensity scaling by task risk
 - **H16 SubagentStart enhanced** (`hooks/subagent-context.cjs`) -- Now generates and propagates correlation vectors alongside Active Context injection
 - **SessionStart hook enhanced** (`hooks/session-start.cjs`) -- Resets correlation vector state on new sessions while preserving existing metadata keys
+- **Setup wizard extracted** -- `setupEnvironment.ts` split into `setupEnvironment.settings.ts` (setting definitions) and `setupEnvironment.extensions.ts` (recommended extensions list) for easier maintenance
+- **Setup wizard UX simplified** -- Replaced verbose JSON-in-modal confirmation with a short message and "Preview First" option; category QuickPick built dynamically from registry
+- **Bootstrap offered in setup wizard** -- `offerBootstrapProject()` checks eligibility (initialized, not Master Alex, bootstrap incomplete) and offers to launch or resume the bootstrap wizard after settings are applied; runs after init, upgrade, and manual setup
+- **Settings promoted to Essential** -- 7 settings moved from Recommended to Essential: `chat.useAgentSkills`, `chat.includeReferencedInstructions`, `github.copilot.chat.copilotMemory.enabled`, `github.copilot.chat.tools.memory.enabled`, `chat.hooks.enabled`, `chat.useCustomAgentHooks`, `chat.agent.enabled`
+- **8 new settings added** -- `chat.mcp.assisted.nuget.enabled`, `chat.autopilot.enabled`, `chat.agent.todoList`, `chat.agent.thinking.phrases`, `terminal.integrated.enableImages` (Recommended); `chat.tools.terminal.autoApprove`, `chat.tools.terminal.ignoreDefaultAutoApproveRules`, `chat.tools.urls.autoApprove` (Auto-Approval)
+- **Settings tab auto-refresh fix** -- 30-second refresh no longer resets active tab to Mission; server-side `activeTab` parameter preserves selection
+
+### Removed
+
+- **Enterprise settings category** -- Removed experimental Enterprise/MS Graph category and `ENTERPRISE_SETTINGS` constant from setup wizard
+- **3 dead settings** -- `chat.useSkillAdherencePrompt` (never existed in VS Code), `extendedThinkingEnabled`, `thinkingBudget` (both non-existent); Extended Thinking category eliminated
+- **Dream nudges** -- All 3 dream-related nudges removed from `_generateNudges()`
+- **Dead sidebar toggle** -- `extendedThinkingEnabled` toggle removed from Settings tab (setting never existed)
+- **Dead views** -- Removed `cognitiveDashboard.ts`, `memoryDashboard.ts`, `memoryTreeProvider.ts`, `mindTabHtml.ts`, `skillStoreTabHtml.ts`, `terminalOrchestrator.ts`, and `memoryTreeProvider.test.ts`
+- **Dead code** -- Removed `getGlobalAlexDir()` function, `os` import, `agentChat:` handler in welcomeView, mission profile prompt files (replaced by agent prompt files)
 
 ---
 
