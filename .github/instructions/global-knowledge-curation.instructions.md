@@ -445,7 +445,7 @@ Add to the inherited skill's `synapses.json`:
    a. Copy skill folder
    b. Add inheritedFrom tracking
    c. Log to output channel
-7. Update `alex_docs/skills/SKILLS-CATALOG.md`
+7. Run `node .github/muscles/brain-qa.cjs` to validate updated skill inventory
 8. Show success notification
 ```
 

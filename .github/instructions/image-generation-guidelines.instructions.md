@@ -31,14 +31,14 @@ STYLE:
 
 ### Model Selection
 
-| Task | Model | Cost | Notes |
-|------|-------|------|-------|
-| Face-consistent portraits | nano-banana-pro | $0.05 | Requires reference image |
-| Text in images | ideogram-v2 | $0.08 | Best typography |
-| Premium text | ideogram-v3-quality | $0.09 | Highest quality text |
-| Production banners | flux-1.1-pro | $0.04 | No text support |
-| Quick iteration | flux-schnell | $0.003 | Fast, low quality |
-| Print quality 4MP | flux-1.1-pro-ultra | $0.06 | Up to 4MP output |
+| Task                      | Model               | Cost   | Notes                    |
+| ------------------------- | ------------------- | ------ | ------------------------ |
+| Face-consistent portraits | nano-banana-pro     | $0.05  | Requires reference image |
+| Text in images            | ideogram-v2         | $0.08  | Best typography          |
+| Premium text              | ideogram-v3-quality | $0.09  | Highest quality text     |
+| Production banners        | flux-1.1-pro        | $0.04  | No text support          |
+| Quick iteration           | flux-schnell        | $0.003 | Fast, low quality        |
+| Print quality 4MP         | flux-1.1-pro-ultra  | $0.06  | Up to 4MP output         |
 
 ### Reference Image Requirements
 
@@ -108,7 +108,7 @@ STYLE:
 1. Define diagram concepts as structured prompts
 2. Generate via ideogram-v2 (1536x512, wide format)
 3. No reference image needed
-4. Save to alex_docs/diagram-visualization/
+4. Save to project output directory (e.g., docs/diagram-visualization/)
 ```
 
 ### Workflow 6: A/B Prompt Testing

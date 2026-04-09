@@ -284,7 +284,7 @@ Prompts (`.prompt.md`) contain complex workflows — episodic memory requiring a
 | `/review`        | code review, PR review, feedback                                                 | Epistemic code review                        |
 | `/selfactualize` | deep assessment, self-analysis                                                   | Comprehensive self-evaluation                |
 | `/tdd`           | red green refactor, test first                                                   | Test-driven development                      |
-| `/uiuxaudit`     | accessibility audit, wcag check, ui review                                       | UI/UX accessibility audit                    |
+| `/ui-ux-audit`   | accessibility audit, wcag check, ui review                                       | UI/UX accessibility audit                    |
 | `/export-memory` | export memory, port alex, move to claude, portable export                        | Portable memory export for other AI surfaces |
 | `/token-audit`   | token waste, context bloat, reduce tokens, audit instructions, lean architecture | Token waste detection and remediation        |
 

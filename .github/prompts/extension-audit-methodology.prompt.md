@@ -5,7 +5,6 @@ inheritance: master-only
 
 # Extension Audit Workflow
 
-
 **Invoke with**: `/extension-audit-methodology` or "audit extension quality"
 **Domain**: Systematic 5-dimension quality assurance for VS Code extensions
 **Synapses**: [extension-audit-methodology/SKILL.md](../skills/extension-audit-methodology/SKILL.md)
@@ -36,6 +35,7 @@ Last Audit Date: __________________ (or "Never")
 ```
 
 **Set expectations**:
+
 - [ ] TypeScript compiles without errors (`npm run compile`)
 - [ ] Extension activates in debug mode (F5)
 - [ ] Basic functionality verified (smoke test 2-3 commands)
@@ -48,11 +48,11 @@ Last Audit Date: __________________ (or "Never")
 
 ```bash
 # Create audit documentation folder (if doesn't exist)
-mkdir -p alex_docs/audits
+mkdir -p .github/episodic/audits
 
 # Create timestamped audit report
 $date = Get-Date -Format "yyyy-MM-dd"
-New-Item "alex_docs/audits/audit-report-$date.md" -ItemType File
+New-Item ".github/episodic/audits/audit-report-$date.md" -ItemType File
 ```
 
 **Report template**: Use structure from [extension-audit-methodology/SKILL.md](../skills/extension-audit-methodology/SKILL.md)
@@ -64,12 +64,14 @@ New-Item "alex_docs/audits/audit-report-$date.md" -ItemType File
 ### Step 3: Scan Console Statements
 
 **Execute scan**:
+
 ```powershell
-Select-String -Path src -Pattern "console\.(log|warn|error|debug)" -Recurse | 
+Select-String -Path src -Pattern "console\.(log|warn|error|debug)" -Recurse |
   Select-Object Path, LineNumber, Line
 ```
 
 **Record findings**:
+
 ```
 Total console statements found: ____
 
@@ -85,12 +87,13 @@ Categorized:
 
 **For each console statement**:
 
-| File:Line | Statement | Category | Action |
-|-----------|-----------|----------|--------|
-| src/extension.ts:123 | `console.log('activated')` | Debug | Remove |
-| src/api.ts:456 | `console.error('API failed:', err)` | Error handling | Keep |
+| File:Line            | Statement                           | Category       | Action |
+| -------------------- | ----------------------------------- | -------------- | ------ |
+| src/extension.ts:123 | `console.log('activated')`          | Debug          | Remove |
+| src/api.ts:456       | `console.error('API failed:', err)` | Error handling | Keep   |
 
 **Decision criteria**:
+
 - **Remove**: Development debugging, "checkpoint" logs, variable inspection
 - **Keep**: Error reporting, user-facing warnings, performance telemetry
 
@@ -103,6 +106,7 @@ Categorized:
 ### Step 5: Extract Registered Commands
 
 **From package.json**:
+
 ```powershell
 $packageJson = Get-Content package.json | ConvertFrom-Json
 $commands = $packageJson.contributes.commands | ForEach-Object { $_.command }
@@ -111,11 +115,12 @@ Write-Output "Total commands in package.json: $($commands.Count)"
 $commands
 ```
 
-**List all commands**: ____________________
+**List all commands**: ********\_\_\_\_********
 
 ### Step 6: Verify Command Handlers
 
 **For each command, search for handler**:
+
 ```powershell
 foreach ($cmd in $commands) {
     $found = Select-String -Path src -Pattern "registerCommand.*['`"]$cmd['`"]" -Recurse
@@ -126,23 +131,27 @@ foreach ($cmd in $commands) {
 ```
 
 **Dead commands** (in package.json without handlers):
-- ____________________
-- ____________________
+
+- ***
+- ***
 
 **Ghost commands** (handlers without package.json entry):
+
 ```powershell
-Select-String -Path src -Pattern "registerCommand\(" -Recurse | 
+Select-String -Path src -Pattern "registerCommand\(" -Recurse |
   ForEach-Object { $_.Line -match "registerCommand\(['`"](.+?)['`"]" }
 ```
 
 ### Step 7: Identify Unused Features
 
 **UI contributions without implementation**:
+
 - Check `package.json` → `contributes.menus`
 - Verify each `command` has a working handler
 - Test buttons/context menus in VS Code
 
 **Dead feature checklist**:
+
 - [ ] Commands in manifest without handlers
 - [ ] Handlers without manifest entries
 - [ ] UI buttons with missing implementations
@@ -155,6 +164,7 @@ Select-String -Path src -Pattern "registerCommand\(" -Recurse |
 ### Step 8: Scan Blocking I/O
 
 **Search for synchronous file operations**:
+
 ```powershell
 $blockingOps = Select-String -Path src -Pattern "fs\.(readFileSync|writeFileSync|existsSync|readdirSync|statSync)" -Recurse
 Write-Output "Blocking sync I/O operations found: $($blockingOps.Count)"
@@ -162,6 +172,7 @@ $blockingOps | Select-Object Path, LineNumber, Line
 ```
 
 **Record findings**:
+
 ```
 Total blocking operations: ____
 
@@ -177,23 +188,24 @@ By type:
 
 **For each blocking operation**:
 
-| File:Line | Current Code | Async Replacement | Effort |
-|-----------|--------------|-------------------|--------|
-| dashboard.ts:234 | `fs.readFileSync(path)` | `await fs.readFile(path)` | 15m |
-| utils.ts:567 | `fs.existsSync(file)` | `await fs.pathExists(file)` | 10m |
+| File:Line        | Current Code            | Async Replacement           | Effort |
+| ---------------- | ----------------------- | --------------------------- | ------ |
+| dashboard.ts:234 | `fs.readFileSync(path)` | `await fs.readFile(path)`   | 15m    |
+| utils.ts:567     | `fs.existsSync(file)`   | `await fs.pathExists(file)` | 10m    |
 
 **Refactoring pattern**:
+
 ```typescript
 // ❌ Before (blocking)
-import * as fs from 'fs';
-const data = fs.readFileSync(path, 'utf-8');
+import * as fs from "fs";
+const data = fs.readFileSync(path, "utf-8");
 
 // ✅ After (non-blocking)
-import * as fs from 'fs-extra';
-const data = await fs.readFile(path, 'utf-8');
+import * as fs from "fs-extra";
+const data = await fs.readFile(path, "utf-8");
 ```
 
-**Total refactoring effort**: ____ hours
+**Total refactoring effort**: \_\_\_\_ hours
 
 ---
 
@@ -209,16 +221,17 @@ const data = await fs.readFile(path, 'utf-8');
 
 **Test matrix**:
 
-| Command | Title | Discoverable? | Executes? | Notes |
-|---------|-------|---------------|-----------|-------|
-| alex.dreamState | Dream (Neural Maintenance) | ✅ | ✅ | Working |
-| alex.oldFeature | Old Feature | ✅ | ❌ | Runtime error |
+| Command         | Title                      | Discoverable? | Executes? | Notes         |
+| --------------- | -------------------------- | ------------- | --------- | ------------- |
+| alex.dreamState | Dream (Neural Maintenance) | ✅            | ✅        | Working       |
+| alex.oldFeature | Old Feature                | ✅            | ❌        | Runtime error |
 
-**Pass rate**: ____ / ____ commands working (___%)
+**Pass rate**: \_**\_ / \_\_** commands working (\_\_\_%)
 
 ### Step 11: Test Editor Buttons
 
 **UI contributions in package.json**:
+
 ```json
 "menus": {
   "editor/title": [
@@ -232,12 +245,14 @@ const data = await fs.readFile(path, 'utf-8');
 ```
 
 **Manual test**:
+
 1. Open file matching `when` condition
 2. Verify button appears in editor title bar
 3. Click button
 4. Verify expected behavior
 
 **Button test checklist**:
+
 - [ ] Button visible in expected context
 - [ ] Icon renders correctly
 - [ ] Command executes without error
@@ -250,15 +265,17 @@ const data = await fs.readFile(path, 'utf-8');
 ### Step 12: List Installed Packages
 
 **Execute**:
+
 ```powershell
 npm ls --depth=0
 ```
 
-**Record all dependencies**: ____________________
+**Record all dependencies**: ********\_\_\_\_********
 
 ### Step 13: Verify Package Usage
 
 **For each dependency, search imports**:
+
 ```powershell
 $packages = @('replicate', '@azure/msal-node', 'fs-extra', 'marked')
 
@@ -273,12 +290,14 @@ foreach ($pkg in $packages) {
 ```
 
 **Unused packages found**:
-- ____________________
-- ____________________
+
+- ***
+- ***
 
 ### Step 14: Remove Unused Dependencies
 
 **Uninstall workflow**:
+
 ```powershell
 # Example: Remove unused package
 npm uninstall @azure/msal-node
@@ -290,6 +309,7 @@ npm run compile
 ```
 
 **Removal checklist**:
+
 - [ ] Package removed from `package.json`
 - [ ] `node_modules` updated
 - [ ] Extension compiles without errors
@@ -304,16 +324,17 @@ npm run compile
 
 **Create remediation plan**:
 
-| Priority | Dimension | Issue | Action | Effort | Impact |
-|----------|-----------|-------|--------|--------|--------|
-| Critical | Dead Code | 3 orphaned commands | Remove from package.json | 30m | High |
-| High | Performance | 16 blocking I/O ops | Async refactor | 2h | High |
-| High | Logging | 27 debug statements | Delete removable logs | 1h | Medium |
-| Medium | Dependencies | 2 unused packages | Uninstall | 15m | Low |
+| Priority | Dimension    | Issue               | Action                   | Effort | Impact |
+| -------- | ------------ | ------------------- | ------------------------ | ------ | ------ |
+| Critical | Dead Code    | 3 orphaned commands | Remove from package.json | 30m    | High   |
+| High     | Performance  | 16 blocking I/O ops | Async refactor           | 2h     | High   |
+| High     | Logging      | 27 debug statements | Delete removable logs    | 1h     | Medium |
+| Medium   | Dependencies | 2 unused packages   | Uninstall                | 15m    | Low    |
 
-**Total estimated effort**: ____ hours
+**Total estimated effort**: \_\_\_\_ hours
 
 **Priority levels**:
+
 - **Critical**: Broken functionality, runtime errors
 - **High**: Performance issues, significant code smell
 - **Medium**: Code cleanliness, optimization opportunities
@@ -321,7 +342,7 @@ npm run compile
 
 ### Step 16: Create Audit Report
 
-**Document findings** in `alex_docs/audits/audit-report-YYYY-MM-DD.md`:
+**Document findings** in `.github/episodic/audits/audit-report-YYYY-MM-DD.md`:
 
 ```markdown
 # Extension Audit Report
@@ -332,13 +353,13 @@ npm run compile
 
 ## Executive Summary
 
-| Dimension | Current | Target | Status |
-|-----------|---------|--------|--------|
-| Console | 46 (27 removable) | <20 | 🟡 |
-| Dead Code | 4 items | 0 | 🔴 |
-| Performance | 16 blocking ops | 0 | 🟡 |
-| Menu Validation | 39/41 (95%) | 100% | 🟢 |
-| Dependencies | 2 unused | 0 | 🟢 |
+| Dimension       | Current           | Target | Status |
+| --------------- | ----------------- | ------ | ------ |
+| Console         | 46 (27 removable) | <20    | 🟡     |
+| Dead Code       | 4 items           | 0      | 🔴     |
+| Performance     | 16 blocking ops   | 0      | 🟡     |
+| Menu Validation | 39/41 (95%)       | 100%   | 🟢     |
+| Dependencies    | 2 unused          | 0      | 🟢     |
 
 **Overall Grade**: B+
 
@@ -358,6 +379,7 @@ npm run compile
 **Work through remediation plan systematically**:
 
 **Example: Remove dead commands**
+
 1. Delete command from `package.json` → `contributes.commands`
 2. Remove handler from source code (if exists)
 3. Search for references: `Select-String -Pattern "alex.oldCommand"`
@@ -365,6 +387,7 @@ npm run compile
 5. Test: `npm run compile` → `F5` debug
 
 **Example: Async refactor**
+
 1. Replace `import * as fs from 'fs'` → `import * as fs from 'fs-extra'`
 2. Change `fs.readFileSync()` → `await fs.readFile()`
 3. Ensure function is `async`
@@ -396,6 +419,7 @@ npm run compile
 ## [X.Y.Z] - YYYY-MM-DD
 
 ### Quality Improvements
+
 - Removed 27 debug console statements (kept 18 legitimate logs)
 - Deleted 3 deprecated Gist sync commands
 - Removed `generateImageFromSelection` UI and implementation
@@ -404,6 +428,7 @@ npm run compile
 - Code quality grade: B+ → A+
 
 ### Performance
+
 - Dashboard render time improved ~30% (async file operations)
 - Extension activation unchanged (clean activation already optimized)
 ```
@@ -413,13 +438,14 @@ npm run compile
 **Finalize documentation**:
 
 1. Complete audit report with all findings
-2. Save in `alex_docs/audits/audit-report-YYYY-MM-DD.md`
-3. Update `alex_docs/audits/README.md` with audit summary
+2. Save in `.github/episodic/audits/audit-report-YYYY-MM-DD.md`
+3. Update `.github/episodic/audits/README.md` with audit summary
 4. Commit audit report: `git commit -m "docs: extension audit YYYY-MM-DD — B+ to A+ quality improvement"`
 
 **Audit archive structure**:
+
 ```
-alex_docs/audits/
+.github/episodic/audits/
   README.md                    (index of all audits)
   audit-report-2026-02-15.md   (detailed findings)
   audit-report-2026-01-10.md   (previous audit)
@@ -440,10 +466,10 @@ alex_docs/audits/
 - [ ] High-priority items remediated
 - [ ] Post-remediation verification passed (all 6 checks)
 - [ ] CHANGELOG.md updated
-- [ ] Audit report archived in alex_docs/audits/
+- [ ] Audit report archived in .github/episodic/audits/
 - [ ] Changes committed to version control
 
-**Extension quality grade post-audit**: ____
+**Extension quality grade post-audit**: \_\_\_\_
 
 **Ready for release!** Your extension has been systematically audited and optimized for production quality.
 
@@ -452,6 +478,7 @@ alex_docs/audits/
 ## Success Metrics
 
 **Typical improvements**:
+
 - Console statements: 40-80 → 15-25 (50% reduction)
 - Dead code: 3-8 items → 0 (100% removal)
 - Blocking I/O: 10-30 ops → 0 (100% async)
@@ -459,6 +486,7 @@ alex_docs/audits/
 - Code quality: B/B+ → A/A+
 
 **Real-world validation** (Alex v5.7.1):
+
 - 8 hours total effort (audit + remediation)
 - B+ → A+ quality improvement
 - 61 console statements removed (across 2 releases)
@@ -471,11 +499,13 @@ alex_docs/audits/
 ## Post-Audit Notes
 
 **Audit cadence**:
+
 - **Full 5-dimension audit**: Before every minor/major release
 - **Abbreviated audit** (Dimensions 1-2): Before patch releases
 - **Continuous monitoring**: Address findings incrementally during development
 
 **Long-term benefits**:
+
 - Cleaner codebase → easier maintenance
 - Better performance → improved user experience
 - No dead code → reduced confusion for contributors

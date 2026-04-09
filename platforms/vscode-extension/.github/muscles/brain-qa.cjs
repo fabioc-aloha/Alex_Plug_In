@@ -277,7 +277,9 @@ if (runPhases.includes(3)) {
   if (fs.existsSync(indexPath)) {
     const indexContent = fs.readFileSync(indexPath, "utf8");
     const notIndexed = skillDirs.filter(
-      (s) => s !== "memory-activation" && !indexContent.includes(`${s} |`),
+      (s) =>
+        s !== "memory-activation" &&
+        !new RegExp(`\\|\\s*(?:[^|]*\\s)?${s}\\s+\\|`).test(indexContent),
     );
     if (notIndexed.length === 0) pass(`All ${skillDirs.length} skills indexed`);
     else fail(`Not indexed: ${notIndexed.join(", ")}`);
@@ -961,7 +963,7 @@ if (runPhases.includes(24)) {
 // ════════════════════════════════════════════════════════════
 if (runPhases.includes(25)) {
   writePhase(25, ".github/ Root Files Completeness");
-  const rootFiles = ["copilot-instructions.md", "README.md"];
+  const rootFiles = ["copilot-instructions.md", "README.md", "NORTH-STAR.md"];
   const missingRoot = rootFiles.filter(
     (f) => !fs.existsSync(path.join(ghPath, f)),
   );
@@ -1302,8 +1304,14 @@ if (runPhases.includes(32)) {
         .map((a) => a.split("(")[0].trim())
         .filter(Boolean)
         .sort();
-      const missing = setDiff(diskAgents, listed);
-      const extra = setDiff(listed, diskAgents);
+      const diskLower = diskAgents.map((a) => a.toLowerCase());
+      const listedLower = listed.map((a) => a.toLowerCase());
+      const missing = setDiff(diskLower, listedLower).map((a) =>
+        diskAgents.find((d) => d.toLowerCase() === a),
+      );
+      const extra = setDiff(listedLower, diskLower).map((a) =>
+        listed.find((l) => l.toLowerCase() === a),
+      );
       if (missing.length > 0)
         warn(
           `Agents on disk but NOT in copilot-instructions: ${missing.join(", ")}`,
@@ -1377,6 +1385,13 @@ if (runPhases.includes(32)) {
         "code-review": "review",
         "global-knowledge": "knowledge",
         "ai-writing-avoidance": "audit-writing",
+        "memory-export": "export-memory",
+        "token-waste-elimination": "token-audit",
+        "data-visualization": "visualize",
+        "data-analysis": "analyze",
+        "dashboard-design": "dashboard",
+        "data-storytelling": "datastory",
+        "chart-interpretation": "interpret",
       };
 
       const instrFiles = files(path.join(ghPath, "instructions"), ".md").map(

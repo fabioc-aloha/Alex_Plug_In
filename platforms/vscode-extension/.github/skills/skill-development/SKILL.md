@@ -49,71 +49,71 @@ Alex's growth mindset skill — maintaining awareness of gaps and systematically
 
 ### 🔥 High Priority
 
-| Skill | Category | Value |
-|-------|----------|-------|
-| **Model Selection Advisor** | AI/ML | Advise when to upgrade/downgrade models for cost/capability balance |
-| **Multi-Agent Orchestration** | Agentic | Coordinate multiple AI agents for complex tasks |
-| **Tool Chain Composition** | Agentic | Dynamic tool selection and workflow building |
-| **Team Knowledge Sharing** | Enterprise | Share Alex knowledge across teams via GitHub |
-| **CI/CD Pipeline Design** | Engineering | GitHub Actions, Azure Pipelines automation |
-| **Interactive Documentation** | Multi-Modal | Docs with embedded executable code |
+| Skill                         | Category    | Value                                                               |
+| ----------------------------- | ----------- | ------------------------------------------------------------------- |
+| **Model Selection Advisor**   | AI/ML       | Advise when to upgrade/downgrade models for cost/capability balance |
+| **Multi-Agent Orchestration** | Agentic     | Coordinate multiple AI agents for complex tasks                     |
+| **Tool Chain Composition**    | Agentic     | Dynamic tool selection and workflow building                        |
+| **Team Knowledge Sharing**    | Enterprise  | Share Alex knowledge across teams via GitHub                        |
+| **CI/CD Pipeline Design**     | Engineering | GitHub Actions, Azure Pipelines automation                          |
+| **Interactive Documentation** | Multi-Modal | Docs with embedded executable code                                  |
 
 ### High Priority
 
-| Skill | Category | Value |
-|-------|----------|-------|
-| Agentic Workflow Patterns | AI/ML | Multi-step autonomous execution |
-| Checkpoint & Recovery | Agentic | Save/restore agentic task state |
-| Self-Verification | Agentic | Validate outputs before delivery |
-| Estimation & Planning | Project | Calibrated "how long?" answers |
-| Prioritization Frameworks | Project | MoSCoW, value vs effort |
-| Teaching Mode | Communication | Explain at user's level |
-| Data Visualization | Analytics | Charts, dashboards, storytelling |
-| Issue Triage | Operations | Categorize, prioritize, route |
+| Skill                     | Category      | Value                            |
+| ------------------------- | ------------- | -------------------------------- |
+| Agentic Workflow Patterns | AI/ML         | Multi-step autonomous execution  |
+| Checkpoint & Recovery     | Agentic       | Save/restore agentic task state  |
+| Self-Verification         | Agentic       | Validate outputs before delivery |
+| Estimation & Planning     | Project       | Calibrated "how long?" answers   |
+| Prioritization Frameworks | Project       | MoSCoW, value vs effort          |
+| Teaching Mode             | Communication | Explain at user's level          |
+| Data Visualization        | Analytics     | Charts, dashboards, storytelling |
+| Issue Triage              | Operations    | Categorize, prioritize, route    |
 
 ### Medium Priority
 
-| Skill | Category | Value |
-|-------|----------|-------|
-| Context Window Management | AI/ML | Optimize long context utilization |
-| Performance Profiling | Engineering | CPU, memory, network analysis |
-| Database Design | Engineering | Schema design, query optimization |
-| Observability & Monitoring | Engineering | Logs, metrics, traces, OpenTelemetry |
-| Container Orchestration | Engineering | Docker, Kubernetes patterns |
-| Technology Evaluation | Analysis | Structured comparison |
-| Adaptive Explanation | Cognitive | Adjust depth to user level |
-| Overwhelm Detection | Emotional | Recognize cognitive overload |
-| Active Listening | Emotional | Understand real need behind ask |
-| Focus Recovery | Effectiveness | Help user get back on track |
-| Decision Fatigue Recognition | Effectiveness | Reduce options when overwhelming |
+| Skill                        | Category      | Value                                |
+| ---------------------------- | ------------- | ------------------------------------ |
+| Context Window Management    | AI/ML         | Optimize long context utilization    |
+| Performance Profiling        | Engineering   | CPU, memory, network analysis        |
+| Database Design              | Engineering   | Schema design, query optimization    |
+| Observability & Monitoring   | Engineering   | Logs, metrics, traces, OpenTelemetry |
+| Container Orchestration      | Engineering   | Docker, Kubernetes patterns          |
+| Technology Evaluation        | Analysis      | Structured comparison                |
+| Adaptive Explanation         | Cognitive     | Adjust depth to user level           |
+| Overwhelm Detection          | Emotional     | Recognize cognitive overload         |
+| Active Listening             | Emotional     | Understand real need behind ask      |
+| Focus Recovery               | Effectiveness | Help user get back on track          |
+| Decision Fatigue Recognition | Effectiveness | Reduce options when overwhelming     |
 
 ### Aspirational
 
-| Skill | Category | Value |
-|-------|----------|-------|
-| Video Tutorial Generation | Multi-Modal | Screen recording + TTS narration |
-| Podcast Content | Multi-Modal | Long-form audio, multi-voice |
-| Workspace Telemetry | Enterprise | Privacy-respecting usage patterns |
-| Multi-User Personalization | Enterprise | Per-user profiles in shared workspace |
-| Interview Preparation | Career | Technical, behavioral, system design |
-| Career Path Planning | Career | Growth trajectory, skill gaps |
+| Skill                      | Category    | Value                                 |
+| -------------------------- | ----------- | ------------------------------------- |
+| Video Tutorial Generation  | Multi-Modal | Screen recording + TTS narration      |
+| Podcast Content            | Multi-Modal | Long-form audio, multi-voice          |
+| Workspace Telemetry        | Enterprise  | Privacy-respecting usage patterns     |
+| Multi-User Personalization | Enterprise  | Per-user profiles in shared workspace |
+| Interview Preparation      | Career      | Technical, behavioral, system design  |
+| Career Path Planning       | Career      | Growth trajectory, skill gaps         |
 
 ---
 
 ## Context Detection Triggers
 
-| User Signal | Skills to Offer |
-|-------------|-----------------|
-| Frustrated/stuck | Frustration Recognition, Rubber Duck Debugging, Reframing |
-| Tight deadline | Estimation, Prioritization, Scope Management |
-| "Too much to do" | Overwhelm Detection, Cognitive Load Management |
-| Complex decision | Root Cause Analysis, Technology Evaluation, ADR |
-| Hesitates/unsure | Active Listening, Socratic Questioning, Encouragement |
-| Long session | Break Suggestions, Time Awareness, Energy Management |
-| Repeated failures | Failure Normalization, Patience Modeling |
-| Accomplished something | Celebration Rituals, Gratitude Prompts |
-| "Where do I start?" | Prioritization, Focus Recovery, Knowledge Scaffolding |
-| Release/deploy | Release Management, Risk Assessment |
+| User Signal            | Skills to Offer                                           |
+| ---------------------- | --------------------------------------------------------- |
+| Frustrated/stuck       | Frustration Recognition, Rubber Duck Debugging, Reframing |
+| Tight deadline         | Estimation, Prioritization, Scope Management              |
+| "Too much to do"       | Overwhelm Detection, Cognitive Load Management            |
+| Complex decision       | Root Cause Analysis, Technology Evaluation, ADR           |
+| Hesitates/unsure       | Active Listening, Socratic Questioning, Encouragement     |
+| Long session           | Break Suggestions, Time Awareness, Energy Management      |
+| Repeated failures      | Failure Normalization, Patience Modeling                  |
+| Accomplished something | Celebration Rituals, Gratitude Prompts                    |
+| "Where do I start?"    | Prioritization, Focus Recovery, Knowledge Scaffolding     |
+| Release/deploy         | Release Management, Risk Assessment                       |
 
 ---
 
@@ -181,6 +181,7 @@ When identifying a new skill need:
 This reads `skills/skill-registry.json` from your Global Knowledge repo.
 
 **Output example:**
+
 ```
 Found 2 new skills available:
 ✅ skill-development (v1.0.0) - core priority
@@ -229,11 +230,11 @@ If enabled in settings, heirs check for new skills at session start:
 
 ### Signal Detection
 
-| Signal Type | Examples |
-|-------------|----------|
-| Files | `.github/workflows/`, `docker-compose.yml`, `prisma/schema.prisma` |
-| Dependencies | `openai` in package.json, `langchain` in requirements.txt |
-| Folders | `kubernetes/`, `terraform/`, `src/agents/` |
+| Signal Type  | Examples                                                           |
+| ------------ | ------------------------------------------------------------------ |
+| Files        | `.github/workflows/`, `docker-compose.yml`, `prisma/schema.prisma` |
+| Dependencies | `openai` in package.json, `langchain` in requirements.txt          |
+| Folders      | `kubernetes/`, `terraform/`, `src/agents/`                         |
 
 ### Example Flow
 
@@ -242,8 +243,8 @@ If enabled in settings, heirs check for new skills at session start:
 # Matches: devops project type
 # Wishlist skill: ci-cd-pipeline-design
 
-"This project uses GitHub Actions. The wishlist skill 
-'CI/CD Pipeline Design' would be valuable here. 
+"This project uses GitHub Actions. The wishlist skill
+'CI/CD Pipeline Design' would be valuable here.
 Want me to practice it? /fulfillwish ci-cd-pipeline-design"
 ```
 
@@ -267,7 +268,7 @@ When a wishlist skill becomes important for multiple projects:
 
 # Output:
 # 📊 Skill Signal Report
-# 
+#
 # High signal (3+ projects):
 # - ci-cd-pipeline-design: 5 projects, 12 contexts
 # - database-design: 3 projects, 8 contexts
@@ -282,20 +283,24 @@ When a wishlist skill becomes important for multiple projects:
 When heirs successfully practice a wishlist skill:
 
 ### 1. Practice Phase
+
 - Apply skill in real project context
 - Document what worked, what didn't
 - Gather user feedback
 
 ### 2. Document Phase
-- Save insight to Global Knowledge: `/saveinsight`
+
+- Save insight to Global Knowledge: `/knowledge save`
 - Tag with skill ID and project type
 - Include concrete examples
 
 ### 3. Signal Phase
+
 - Update skill-registry.json with practice count
 - If 3+ successful uses: signal for promotion review
 
 ### 4. Promotion Phase (Master)
+
 - Master reviews heir-documented insights
 - Creates formal skill if pattern is solid
 - Publishes to GK for all heirs
@@ -312,21 +317,21 @@ When heirs successfully practice a wishlist skill:
 
 ## Metrics
 
-| Metric | Source | Target |
-|--------|--------|--------|
-| Total Skills Acquired | See SKILLS-CATALOG.md for current count | — |
-| Wishlist Items | ~60 | Reduce over time |
-| Skills In Development | 0 | 1-2 at a time |
+| Metric                | Source                                  | Target           |
+| --------------------- | --------------------------------------- | ---------------- |
+| Total Skills Acquired | See SKILLS-CATALOG.md for current count | —                |
+| Wishlist Items        | ~60                                     | Reduce over time |
+| Skills In Development | 0                                       | 1-2 at a time    |
 
 ---
 
 ## Related Skills
 
-- [skill-building](..\skill-building/SKILL.md) — How to *create* skills (for heirs)
+- [skill-building](..\skill-building/SKILL.md) — How to _create_ skills (for heirs)
 - [bootstrap-learning](..\bootstrap-learning/SKILL.md) — Domain-agnostic learning
 - [self-actualization](..\self-actualization/SKILL.md) — Deep self-assessment
 - [meditation](..\meditation/SKILL.md) — Consolidation protocols
 
 ---
 
-*Always learning, always improving, always in service of being more helpful.*
+_Always learning, always improving, always in service of being more helpful._

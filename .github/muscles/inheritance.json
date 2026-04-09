@@ -1,5 +1,4 @@
 {
-    "$schema": "../../alex_docs/schemas/muscle-inheritance.schema.json",
     "schemaVersion": "1.0.0",
     "description": "Defines inheritance rules for muscle scripts (execution artifacts)",
     "inherits": "Muscles with 'inheritable' or 'universal' are synced to heirs. Master-only scripts stay in master.",

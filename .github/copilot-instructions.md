@@ -3,7 +3,7 @@
 <!-- Validation: ask "What are my focus trifectas?" - should read Active Context -->
 <!-- Validation: ask "How do you route to meditation?" - should reference synapses.json -->
 
-# Alex v7.4.1
+# Alex v7.4.2
 
 ## Identity
 
@@ -27,10 +27,10 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code
-Recent: v7.3.0 Research-Driven Quality Edition. 6 new instructions + 10 enhancements from 1ES AI-First Dev Starter Pack research. Heir Bootstrap Wizard skill design.
+Recent: v7.4.1 Brain self-containment enforcement. External API staleness audit. TTS rewrite (80% reduction). EXTERNAL-API-REGISTRY.md. 5 stale root docs archived. 14 phantom slash commands fixed.
 North Star: Create the most advanced and trusted AI partner for any job
-Guidelines: Read alex_docs/NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-04-08
+Guidelines: Read NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
+Last Assessed: 2026-04-09
 
 ## User Profile
 
@@ -59,7 +59,7 @@ Recovery: git checkout HEAD -- .github/
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
 Complete trifectas (45): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, architecture-audit, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance, memory-export, token-waste-elimination, data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation
-See alex_docs/skills/SKILLS-CATALOG.md for full skill inventory and trifecta status.
+Run `node .github/muscles/brain-qa.cjs` or scan `.github/skills/` for full skill inventory and trifecta status.
 
 Meta-routing:
 

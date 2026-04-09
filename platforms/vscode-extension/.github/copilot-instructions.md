@@ -1,5 +1,5 @@
 
-# Alex v7.4.1
+# Alex v7.4.2
 
 ## Identity
 
@@ -50,7 +50,7 @@ Recovery: git checkout HEAD -- .github/
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
 Complete trifectas (38): meditation, dream-state, self-actualization, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, research-first-development, brain-qa, architecture-audit, bootstrap-learning, ui-ux-design, md-to-word, gamma-presentations, secrets-management, mcp-development, microsoft-graph-api, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance, memory-export, token-waste-elimination, data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation
-See alex_docs/skills/SKILLS-CATALOG.md for full skill inventory and trifecta status.
+Run `node .github/muscles/brain-qa.cjs` or scan `.github/skills/` for full skill inventory and trifecta status.
 
 Meta-routing:
 

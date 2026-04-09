@@ -192,7 +192,7 @@ The `release-vscode.ps1` script handles all of these automatically.
 
 **Pattern**: Use regression checklist as DoD tracker:
 
-- Create `alex_docs/operations/VXXX-REGRESSION-CHECKLIST.md`
+- Create a regression checklist (e.g., `VXXX-REGRESSION-CHECKLIST.md`)
 - Track verification status for each criterion
 - Document evidence (commit hashes, test counts, sync output)
 - Automated tests provide objective quality signal (test count = confidence metric)

@@ -30,7 +30,9 @@ VS Code APIs evolve with each monthly release. Patterns may become outdated or b
 ```typescript
 // Gather data in parallel, build HTML with async
 const [health, knowledge, sync] = await Promise.all([
-    checkHealth(true), getKnowledgeSummary(), getSyncStatus()
+  checkHealth(true),
+  getKnowledgeSummary(),
+  getSyncStatus(),
 ]);
 panel.webview.html = await getWebviewContent(health, knowledge, sync);
 ```
@@ -41,19 +43,24 @@ panel.webview.html = await getWebviewContent(health, knowledge, sync);
 
 ```typescript
 class WelcomeViewProvider implements vscode.WebviewViewProvider {
-    resolveWebviewView(webviewView: vscode.WebviewView) {
-        webviewView.webview.options = { enableScripts: true };
-        webviewView.webview.html = this.getHtmlContent();
-        webviewView.webview.onDidReceiveMessage(async (message) => {
-            switch (message.command) {
-                case 'refresh': await this.refresh(); break;
-            }
-        });
-    }
+  resolveWebviewView(webviewView: vscode.WebviewView) {
+    webviewView.webview.options = { enableScripts: true };
+    webviewView.webview.html = this.getHtmlContent();
+    webviewView.webview.onDidReceiveMessage(async (message) => {
+      switch (message.command) {
+        case "refresh":
+          await this.refresh();
+          break;
+      }
+    });
+  }
 }
 
 // Register in extension.ts
-vscode.window.registerWebviewViewProvider('alex.welcomeView', new WelcomeViewProvider());
+vscode.window.registerWebviewViewProvider(
+  "alex.welcomeView",
+  new WelcomeViewProvider(),
+);
 ```
 
 ## CSP-Compliant Webview Event Handling
@@ -73,19 +80,25 @@ vscode.window.registerWebviewViewProvider('alex.welcomeView', new WelcomeViewPro
 
 ```javascript
 // Single delegated listener for all commands
-document.addEventListener('click', (e) => {
-    const target = e.target.closest('[data-cmd]');
-    if (!target) return;
-    
-    const cmd = target.getAttribute('data-cmd');
-    switch (cmd) {
-        case 'play': audio.play(); break;
-        case 'stop': audio.pause(); audio.currentTime = 0; break;
-    }
+document.addEventListener("click", (e) => {
+  const target = e.target.closest("[data-cmd]");
+  if (!target) return;
+
+  const cmd = target.getAttribute("data-cmd");
+  switch (cmd) {
+    case "play":
+      audio.play();
+      break;
+    case "stop":
+      audio.pause();
+      audio.currentTime = 0;
+      break;
+  }
 });
 ```
 
 **Benefits**:
+
 - CSP-compliant (no inline scripts)
 - Single event listener (better performance)
 - Easy to add new commands
@@ -97,35 +110,42 @@ Hooks are shell scripts that run at defined points in the agent lifecycle. Confi
 
 ### Hook Events
 
-| Event | When It Fires | Use Cases |
-| --- | --- | --- |
-| `SessionStart` | Chat session begins | Load context, set persona, inject goals |
-| `UserPromptSubmit` | User sends a message | Secret scanning, safety gates |
-| `PreToolUse` | Before any tool call | Safety blocks (deny), input sanitization |
-| `PostToolUse` | After tool completes | Logging, compile reminders, test suggestions |
-| `SubagentStart` | Subagent spawned | Inject Active Context for subagents |
-| `Stop` | Session ends | Metrics, commit reminders, decision journal |
-| `PreCompact` | Before context compaction | Save session state |
+| Event              | When It Fires             | Use Cases                                    |
+| ------------------ | ------------------------- | -------------------------------------------- |
+| `SessionStart`     | Chat session begins       | Load context, set persona, inject goals      |
+| `UserPromptSubmit` | User sends a message      | Secret scanning, safety gates                |
+| `PreToolUse`       | Before any tool call      | Safety blocks (deny), input sanitization     |
+| `PostToolUse`      | After tool completes      | Logging, compile reminders, test suggestions |
+| `SubagentStart`    | Subagent spawned          | Inject Active Context for subagents          |
+| `Stop`             | Session ends              | Metrics, commit reminders, decision journal  |
+| `PreCompact`       | Before context compaction | Save session state                           |
 
 ### Config Format (3-Level Nesting)
 
 ```json
 {
   "hooks": {
-    "SessionStart": [{
-      "steps": [{
-        "hooks": [{
-          "type": "command",
-          "command": ".github/muscles/hooks/session-start.cjs",
-          "timeout": 10
-        }]
-      }]
-    }]
+    "SessionStart": [
+      {
+        "steps": [
+          {
+            "hooks": [
+              {
+                "type": "command",
+                "command": ".github/muscles/hooks/session-start.cjs",
+                "timeout": 10
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 }
 ```
 
 **Key rules**:
+
 - Timeout in **seconds** (not milliseconds)
 - Scripts read structured **JSON from stdin** (`tool_name`, `tool_input`, `session_id`, `cwd`, `hook_event_name`)
 - Scripts output structured **JSON to stdout** (`hookSpecificOutput`, `decision`, `additionalContext`)
@@ -136,19 +156,30 @@ Hooks are shell scripts that run at defined points in the agent lifecycle. Confi
 
 ```javascript
 // Allow (default)
-process.stdout.write(JSON.stringify({ hookSpecificOutput: { permissionDecision: 'allow' } }));
+process.stdout.write(
+  JSON.stringify({ hookSpecificOutput: { permissionDecision: "allow" } }),
+);
 
 // Deny — blocks the tool call
-process.stdout.write(JSON.stringify({
-  hookSpecificOutput: { permissionDecision: 'deny' },
-  additionalContext: 'Safety: This operation is blocked because...'
-}));
+process.stdout.write(
+  JSON.stringify({
+    hookSpecificOutput: { permissionDecision: "deny" },
+    additionalContext: "Safety: This operation is blocked because...",
+  }),
+);
 process.exit(2);
 
 // Modify input — rewrite tool parameters
-process.stdout.write(JSON.stringify({
-  hookSpecificOutput: { permissionDecision: 'allow', updatedInput: { /* modified params */ } }
-}));
+process.stdout.write(
+  JSON.stringify({
+    hookSpecificOutput: {
+      permissionDecision: "allow",
+      updatedInput: {
+        /* modified params */
+      },
+    },
+  }),
+);
 ```
 
 ### Agent-Scoped Hooks
@@ -193,12 +224,12 @@ Type `#debugEventsSnapshot` in chat to attach a snapshot of agent debug events. 
 
 ```typescript
 async function applySettings(settings: Record<string, unknown>) {
-    const config = vscode.workspace.getConfiguration();
-    for (const [key, value] of Object.entries(settings)) {
-        if (config.inspect(key)?.globalValue === undefined) {
-            await config.update(key, value, vscode.ConfigurationTarget.Global);
-        }
+  const config = vscode.workspace.getConfiguration();
+  for (const [key, value] of Object.entries(settings)) {
+    if (config.inspect(key)?.globalValue === undefined) {
+      await config.update(key, value, vscode.ConfigurationTarget.Global);
     }
+  }
 }
 ```
 
@@ -243,7 +274,7 @@ async function applySettings(settings: Record<string, unknown>) {
 
 - VS Code 1.109+ has 47+ chat-related settings across 6 categories
 - Hooks (`chat.hooks.enabled`) marked experimental but not stable yet
-- Auto-approval settings reduce friction (5 settings: autoRun, fileSystem.autoApprove, terminal.*)
+- Auto-approval settings reduce friction (5 settings: autoRun, fileSystem.autoApprove, terminal.\*)
 - Initialize/Upgrade should apply Essential + Recommended + Auto-Approval (36 total)
 - PowerShell inline commands unreliable — use `.ps1` file for complex scripts
 - Settings categories prevent overwhelming users (show 5 categories vs 47 individual settings)
@@ -260,7 +291,7 @@ async function applySettings(settings: Record<string, unknown>) {
 ```
 docs/guides/
 ├── FEATURE-SETTINGS-GUIDE.md         # Comprehensive reference
-├── FEATURE-SETTINGS-SUMMARY.md       # Current state snapshot  
+├── FEATURE-SETTINGS-SUMMARY.md       # Current state snapshot
 └── FEATURE-SETTINGS-APPLIED.md       # Change log (gitignore if sensitive)
 
 .vscode/
@@ -282,8 +313,8 @@ src/commands/
 
 ```typescript
 const PATTERNS = [
-    { pattern: /learned|discovered|realized/i, confidence: 0.8 },
-    { pattern: /key insight|the trick is/i, confidence: 0.85 },
+  { pattern: /learned|discovered|realized/i, confidence: 0.8 },
+  { pattern: /key insight|the trick is/i, confidence: 0.85 },
 ];
 ```
 
@@ -293,8 +324,10 @@ Use confidence thresholds for auto-actions. Higher threshold = fewer false posit
 
 ```typescript
 function isDuplicate(newText: string, existing: string[]): boolean {
-    const normalize = (s: string) => s.toLowerCase().replace(/[^\w\s]/g, '');
-    return existing.some(e => calculateSimilarity(normalize(newText), normalize(e)) > 0.8);
+  const normalize = (s: string) => s.toLowerCase().replace(/[^\w\s]/g, "");
+  return existing.some(
+    (e) => calculateSimilarity(normalize(newText), normalize(e)) > 0.8,
+  );
 }
 ```
 
@@ -305,10 +338,10 @@ Extensions must work on any machine:
 ```typescript
 // ✅ CORRECT: Dynamic paths
 const rootPath = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
-const globalPath = path.join(os.homedir(), '.alex');
+const globalPath = path.join(os.homedir(), ".alex");
 
 // ❌ WRONG: Hardcoded paths
-const rootPath = 'c:\\Development\\MyProject';  // Never!
+const rootPath = "c:\\Development\\MyProject"; // Never!
 ```
 
 **Key utilities**:
@@ -331,12 +364,12 @@ npx vsce publish
 
 **Key difference**: F5 debug mode vs installed extension workflow
 
-| Change Type | F5 Debug | Rebuild + Reinstall | Why |
-|------------|----------|---------------------|-----|
-| Code logic | ✅ Works | ✅ Works | Hot reload or restart debug session |
-| Webview HTML/CSS | ❌ Cached | ✅ Works | Installed extensions cache webview assets |
-| package.json changes | ❌ Ignored | ✅ Works | Debug uses launch.json config, not package.json |
-| New commands | ❌ Not registered | ✅ Works | Command palette populated from installed version |
+| Change Type          | F5 Debug          | Rebuild + Reinstall | Why                                              |
+| -------------------- | ----------------- | ------------------- | ------------------------------------------------ |
+| Code logic           | ✅ Works          | ✅ Works            | Hot reload or restart debug session              |
+| Webview HTML/CSS     | ❌ Cached         | ✅ Works            | Installed extensions cache webview assets        |
+| package.json changes | ❌ Ignored        | ✅ Works            | Debug uses launch.json config, not package.json  |
+| New commands         | ❌ Not registered | ✅ Works            | Command palette populated from installed version |
 
 **Full rebuild workflow** (for UI/config changes):
 
@@ -363,28 +396,28 @@ code --install-extension path/to/extension.vsix --force
 
 **Solution**: Resize images to display-appropriate dimensions:
 
-| Display Context | Recommended Size | Rationale |
-|-----------------|------------------|-----------|
-| Sidebar views | 768×768 | 300px display × 2 (retina) + headroom |
-| Status bar icons | 32×32 | 16px display × 2 (retina) |
-| Activity bar | 48×48 | 24px display × 2 (retina) |
-| Marketplace icon | 256×256 | 128px min + retina |
+| Display Context  | Recommended Size | Rationale                             |
+| ---------------- | ---------------- | ------------------------------------- |
+| Sidebar views    | 768×768          | 300px display × 2 (retina) + headroom |
+| Status bar icons | 32×32            | 16px display × 2 (retina)             |
+| Activity bar     | 48×48            | 24px display × 2 (retina)             |
+| Marketplace icon | 256×256          | 128px min + retina                    |
 
 **Bulk resize with sharp**:
 
 ```javascript
-const sharp = require('sharp');
-const fs = require('fs');
+const sharp = require("sharp");
+const fs = require("fs");
 
 async function optimizeImages(dir, targetSize = 768) {
-    const files = fs.readdirSync(dir).filter(f => f.endsWith('.png'));
-    for (const file of files) {
-        const buffer = await sharp(`${dir}/${file}`)
-            .resize(targetSize, targetSize, { fit: 'cover' })
-            .png({ compressionLevel: 9 })
-            .toBuffer();
-        fs.writeFileSync(`${dir}/${file}`, buffer);
-    }
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".png"));
+  for (const file of files) {
+    const buffer = await sharp(`${dir}/${file}`)
+      .resize(targetSize, targetSize, { fit: "cover" })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
+    fs.writeFileSync(`${dir}/${file}`, buffer);
+  }
 }
 ```
 
@@ -394,24 +427,24 @@ async function optimizeImages(dir, targetSize = 768) {
 
 ```typescript
 interface LearningGoal {
-    id: string;
-    title: string;
-    category: 'coding' | 'reading' | 'practice' | 'review';
-    targetCount: number;
-    currentCount: number;
-    type: 'daily' | 'weekly';
-    expiresAt: string;
+  id: string;
+  title: string;
+  category: "coding" | "reading" | "practice" | "review";
+  targetCount: number;
+  currentCount: number;
+  type: "daily" | "weekly";
+  expiresAt: string;
 }
 
 // Auto-increment on activity
-async function autoIncrementGoals(activityType: 'session' | 'insight') {
-    const data = await loadGoalsData();
-    for (const goal of data.goals) {
-        if (shouldIncrement(goal, activityType) && !isExpired(goal)) {
-            goal.currentCount = Math.min(goal.currentCount + 1, goal.targetCount);
-        }
+async function autoIncrementGoals(activityType: "session" | "insight") {
+  const data = await loadGoalsData();
+  for (const goal of data.goals) {
+    if (shouldIncrement(goal, activityType) && !isExpired(goal)) {
+      goal.currentCount = Math.min(goal.currentCount + 1, goal.targetCount);
     }
-    await saveGoalsData(data);
+  }
+  await saveGoalsData(data);
 }
 ```
 
@@ -425,28 +458,35 @@ let secretStorage: vscode.SecretStorage | null = null;
 let cachedToken: string | null = null;
 
 // Initialize during activation
-export async function initSecrets(context: vscode.ExtensionContext): Promise<void> {
-    secretStorage = context.secrets;
-    cachedToken = await secretStorage.get('myExtension.apiToken') || null;
-    
-    // Migration: Move token from settings to secrets
-    const config = vscode.workspace.getConfiguration('myExtension');
-    const settingsToken = config.get<string>('apiToken')?.trim();
-    if (settingsToken && !cachedToken) {
-        await secretStorage.store('myExtension.apiToken', settingsToken);
-        cachedToken = settingsToken;
-        await config.update('apiToken', undefined, vscode.ConfigurationTarget.Global);
-        vscode.window.showInformationMessage('Token migrated to secure storage.');
-    }
+export async function initSecrets(
+  context: vscode.ExtensionContext,
+): Promise<void> {
+  secretStorage = context.secrets;
+  cachedToken = (await secretStorage.get("myExtension.apiToken")) || null;
+
+  // Migration: Move token from settings to secrets
+  const config = vscode.workspace.getConfiguration("myExtension");
+  const settingsToken = config.get<string>("apiToken")?.trim();
+  if (settingsToken && !cachedToken) {
+    await secretStorage.store("myExtension.apiToken", settingsToken);
+    cachedToken = settingsToken;
+    await config.update(
+      "apiToken",
+      undefined,
+      vscode.ConfigurationTarget.Global,
+    );
+    vscode.window.showInformationMessage("Token migrated to secure storage.");
+  }
 }
 
 // Synchronous access to cached value
 function getToken(): string | null {
-    return cachedToken;
+  return cachedToken;
 }
 ```
 
 **Key points:**
+
 - `context.secrets.get()` / `store()` / `delete()` are async
 - Cache at module level for sync access
 - Migrate existing settings tokens on first run
@@ -458,11 +498,11 @@ function getToken(): string | null {
 **Always add Content-Security-Policy** when `enableScripts: true`:
 
 ```typescript
-import { getNonce } from './sanitize';
+import { getNonce } from "./sanitize";
 
 function getWebviewHtml(webview: vscode.Webview): string {
-    const nonce = getNonce();
-    return `<!DOCTYPE html>
+  const nonce = getNonce();
+  return `<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Security-Policy" content="
@@ -484,10 +524,11 @@ function getWebviewHtml(webview: vscode.Webview): string {
 
 // Nonce generator
 function getNonce(): string {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    return Array.from({ length: 32 }, () => 
-        chars.charAt(Math.floor(Math.random() * chars.length))
-    ).join('');
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  return Array.from({ length: 32 }, () =>
+    chars.charAt(Math.floor(Math.random() * chars.length)),
+  ).join("");
 }
 ```
 
@@ -507,19 +548,20 @@ function getNonce(): string {
 <button data-cmd="launchSkill" data-skill="code-review">Review</button>
 
 <script nonce="${nonce}">
-    document.addEventListener('click', function(e) {
-        const el = e.target.closest('[data-cmd]');
-        if (el) {
-            e.preventDefault();
-            const command = el.getAttribute('data-cmd');
-            const skill = el.getAttribute('data-skill');
-            vscode.postMessage(skill ? { command, skill } : { command });
-        }
-    });
+  document.addEventListener("click", function (e) {
+    const el = e.target.closest("[data-cmd]");
+    if (el) {
+      e.preventDefault();
+      const command = el.getAttribute("data-cmd");
+      const skill = el.getAttribute("data-skill");
+      vscode.postMessage(skill ? { command, skill } : { command });
+    }
+  });
 </script>
 ```
 
 **Benefits**:
+
 - Security — CSP blocks all inline scripts
 - Performance — Single event listener vs many handlers
 - Maintainability — Commands defined as data, not code
@@ -532,13 +574,13 @@ function getNonce(): string {
 
 ```typescript
 // In webview HTML
-vscode.postMessage({ type: 'openExternal', url: 'https://example.com' });
+vscode.postMessage({ type: "openExternal", url: "https://example.com" });
 
 // In extension host
 panel.webview.onDidReceiveMessage(async (message) => {
-    if (message.type === 'openExternal') {
-        await vscode.env.openExternal(vscode.Uri.parse(message.url));
-    }
+  if (message.type === "openExternal") {
+    await vscode.env.openExternal(vscode.Uri.parse(message.url));
+  }
 });
 ```
 
@@ -550,20 +592,20 @@ panel.webview.onDidReceiveMessage(async (message) => {
 
 ```typescript
 function isTelemetryEnabled(): boolean {
-    // Check VS Code global setting first
-    if (!vscode.env.isTelemetryEnabled) {
-        return false;
-    }
-    // Then check extension-specific setting
-    const config = vscode.workspace.getConfiguration('myExtension');
-    return config.get<boolean>('telemetry.enabled', true);
+  // Check VS Code global setting first
+  if (!vscode.env.isTelemetryEnabled) {
+    return false;
+  }
+  // Then check extension-specific setting
+  const config = vscode.workspace.getConfiguration("myExtension");
+  return config.get<boolean>("telemetry.enabled", true);
 }
 
 function log(event: string, data?: Record<string, unknown>): void {
-    if (!isTelemetryEnabled()) {
-        return;
-    }
-    // Send telemetry...
+  if (!isTelemetryEnabled()) {
+    return;
+  }
+  // Send telemetry...
 }
 ```
 
@@ -573,22 +615,23 @@ function log(event: string, data?: Record<string, unknown>): void {
 
 ```typescript
 export function activate(context: vscode.ExtensionContext) {
-    // Listen for configuration changes
-    context.subscriptions.push(
-        vscode.workspace.onDidChangeConfiguration(e => {
-            if (e.affectsConfiguration('myExtension.featureA')) {
-                // Refresh feature A
-                refreshFeatureA();
-            }
-            if (e.affectsConfiguration('myExtension.telemetry')) {
-                // Update telemetry state
-            }
-        })
-    );
+  // Listen for configuration changes
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration("myExtension.featureA")) {
+        // Refresh feature A
+        refreshFeatureA();
+      }
+      if (e.affectsConfiguration("myExtension.telemetry")) {
+        // Update telemetry state
+      }
+    }),
+  );
 }
 ```
 
 **Key points:**
+
 - Use `affectsConfiguration()` to filter relevant changes
 - Push listener to `context.subscriptions` for cleanup
 - Re-read config values, don't cache indefinitely
@@ -603,22 +646,25 @@ export function activate(context: vscode.ExtensionContext) {
 
 ```typescript
 // ❌ WRONG: TDZ violation (hidden until minified)
-const trifectaTagsHtml = trifectaTags.map(tag => {
+const trifectaTagsHtml = trifectaTags
+  .map((tag) => {
     return `<span class="tag">${skillNameMap[tag] || tag}</span>`;
-}).join('');
+  })
+  .join("");
 
 // ... 30+ lines of other code ...
 
 const skillNameMap: Record<string, string> = {
-    'meditation': 'Meditation',
-    'brain-qa': 'Brain QA',
-    // ... more mappings
+  meditation: "Meditation",
+  "brain-qa": "Brain QA",
+  // ... more mappings
 };
 ```
 
 **Error at runtime**: `ReferenceError: Cannot access 'ft' before initialization` (where `ft` is minified name for `skillNameMap`).
 
 **Why development didn't catch it**:
+
 - TypeScript compiles successfully (no compiler error)
 - esbuild development mode didn't reveal the issue
 - Production minification changed evaluation order
@@ -628,16 +674,19 @@ const skillNameMap: Record<string, string> = {
 ```typescript
 // ✅ CORRECT: Declare before use
 const skillNameMap: Record<string, string> = {
-    'meditation': 'Meditation',
-    'brain-qa': 'Brain QA',
+  meditation: "Meditation",
+  "brain-qa": "Brain QA",
 };
 
-const trifectaTagsHtml = trifectaTagsArray.map(tag => {
+const trifectaTagsHtml = trifectaTagsArray
+  .map((tag) => {
     return `<span class="tag">${skillNameMap[tag] || tag}</span>`;
-}).join('');
+  })
+  .join("");
 ```
 
 **Prevention strategies**:
+
 1. **Test production builds locally** — always install packaged VSIX before releasing
 2. **Declare dependencies at top of scope** — don't scatter `const` declarations
 3. **Watch for callback references** — `.map()`, `.filter()` callbacks can't see later declarations
@@ -654,13 +703,14 @@ VS Code 1.109 (January 2026) introduces a native agent platform that extensions 
 Extensions can ship agent definitions that VS Code auto-discovers:
 
 ```markdown
-<!-- .github/agents/my-agent.agent.md -->
----
+## <!-- .github/agents/my-agent.agent.md -->
+
 name: "MyAgent"
 description: "Specialized agent for domain X"
-user-invokable: true         # Show in agents dropdown (default: true)
-disable-model-invocation: false  # Allow model to invoke as subagent
+user-invokable: true # Show in agents dropdown (default: true)
+disable-model-invocation: false # Allow model to invoke as subagent
 agents: ['Validator', 'Builder'] # Limit which subagents this agent can use
+
 ---
 
 # MyAgent Instructions
@@ -685,9 +735,7 @@ Each skill folder contains a `SKILL.md` (knowledge) and optional `synapses.json`
 // package.json
 {
   "contributes": {
-    "chatSkills": [
-      { "path": "./skills/my-skill" }
-    ]
+    "chatSkills": [{ "path": "./skills/my-skill" }]
   }
 }
 ```
@@ -709,7 +757,7 @@ Run custom shell commands at key lifecycle points in agent sessions:
 
 Hook events: `PreToolUse`, `PostToolUse`, `SessionStart`, `Stop`, `SubagentStart`, `SubagentStop`.
 
-Users trigger with `/hooks` command in chat. Same format as Claude Code hooks — reuse configurations.
+Users trigger with `@alex /hooks` in chat. Same format as Claude Code hooks — reuse configurations.
 
 ```bash
 # Example: Run linter on every file edit (PreToolUse hook)
@@ -743,11 +791,11 @@ Use cases: read-only mode for validator agents, auto-compile for builder agents,
 
 Three permission tiers (session-scoped, changeable any time):
 
-| Level | Behavior |
-|-------|----------|
-| Default Approvals | Normal tool confirmation dialogs |
-| Bypass Approvals | Auto-approves all tool calls, retries on errors |
-| Autopilot | Auto-approves + auto-responds + continues until `task_complete` |
+| Level             | Behavior                                                        |
+| ----------------- | --------------------------------------------------------------- |
+| Default Approvals | Normal tool confirmation dialogs                                |
+| Bypass Approvals  | Auto-approves all tool calls, retries on errors                 |
+| Autopilot         | Auto-approves + auto-responds + continues until `task_complete` |
 
 **Warning**: Bypass and Autopilot skip ALL manual approvals including destructive operations. PreToolUse hooks still fire but user doesn't see interactive confirmations.
 
@@ -759,13 +807,13 @@ Attach `#debugEventsSnapshot` in chat to inspect loaded customizations, token co
 
 VS Code now reads Claude configuration files directly:
 
-| File | Purpose |
-| ---- | ------- |
-| `CLAUDE.md`, `.claude/CLAUDE.md`, `~/.claude/CLAUDE.md` | Instructions |
-| `.claude/rules/*.md` | Additional instruction files |
-| `.claude/agents/*.md` | Agent definitions |
-| `.claude/skills/` | Skill definitions |
-| `.claude/settings.json`, `~/.claude/settings.json` | Hook configurations |
+| File                                                    | Purpose                      |
+| ------------------------------------------------------- | ---------------------------- |
+| `CLAUDE.md`, `.claude/CLAUDE.md`, `~/.claude/CLAUDE.md` | Instructions                 |
+| `.claude/rules/*.md`                                    | Additional instruction files |
+| `.claude/agents/*.md`                                   | Agent definitions            |
+| `.claude/skills/`                                       | Skill definitions            |
+| `.claude/settings.json`, `~/.claude/settings.json`      | Hook configurations          |
 
 Teams using both VS Code + Claude Code can share a single configuration tree.
 
@@ -774,13 +822,16 @@ Teams using both VS Code + Claude Code can share a single configuration tree.
 Register custom chat participants that users can `@mention`:
 
 ```typescript
-const participant = vscode.chat.createChatParticipant('myext.agent', async (request, context, stream, token) => {
-  // Access to request.prompt, request.command
-  // Stream responses with stream.markdown(), stream.button(), stream.reference()
-  stream.markdown('Hello from my agent!');
-});
+const participant = vscode.chat.createChatParticipant(
+  "myext.agent",
+  async (request, context, stream, token) => {
+    // Access to request.prompt, request.command
+    // Stream responses with stream.markdown(), stream.button(), stream.reference()
+    stream.markdown("Hello from my agent!");
+  },
+);
 
-participant.iconPath = vscode.Uri.joinPath(context.extensionUri, 'icon.png');
+participant.iconPath = vscode.Uri.joinPath(context.extensionUri, "icon.png");
 context.subscriptions.push(participant);
 ```
 
@@ -789,14 +840,14 @@ context.subscriptions.push(participant);
 Register tools that any chat participant can invoke:
 
 ```typescript
-const tool = vscode.lm.registerTool('myext-searchDocs', {
+const tool = vscode.lm.registerTool("myext-searchDocs", {
   async invoke(options, token) {
     const query = options.input.query;
     // Perform tool action
     return new vscode.LanguageModelToolResult([
-      new vscode.LanguageModelTextPart(JSON.stringify(results))
+      new vscode.LanguageModelTextPart(JSON.stringify(results)),
     ]);
-  }
+  },
 });
 context.subscriptions.push(tool);
 ```
@@ -806,18 +857,20 @@ context.subscriptions.push(tool);
 ```json
 {
   "contributes": {
-    "languageModelTools": [{
-      "name": "myext-searchDocs",
-      "displayName": "Search Documentation",
-      "modelDescription": "Searches project documentation for relevant content",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "query": { "type": "string", "description": "Search query" }
-        },
-        "required": ["query"]
+    "languageModelTools": [
+      {
+        "name": "myext-searchDocs",
+        "displayName": "Search Documentation",
+        "modelDescription": "Searches project documentation for relevant content",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "Search query" }
+          },
+          "required": ["query"]
+        }
       }
-    }]
+    ]
   }
 }
 ```
@@ -828,17 +881,21 @@ Two new finalized APIs for `QuickPick` and `InputBox`:
 
 ```typescript
 // Button location control
-buttons: [{
-  iconPath: new vscode.ThemeIcon('gear'),
-  tooltip: 'Settings',
-  location: vscode.QuickInputButtonLocation.Inline  // or .Title, .Input
-}]
+buttons: [
+  {
+    iconPath: new vscode.ThemeIcon("gear"),
+    tooltip: "Settings",
+    location: vscode.QuickInputButtonLocation.Inline, // or .Title, .Input
+  },
+];
 
 // Toggle button (on/off state)
-buttons: [{
-  iconPath: new vscode.ThemeIcon('eye'),
-  toggle: { checked: false }  // tracks state
-}]
+buttons: [
+  {
+    iconPath: new vscode.ThemeIcon("eye"),
+    toggle: { checked: false }, // tracks state
+  },
+];
 ```
 
 ### Extended Thinking
@@ -862,40 +919,42 @@ MCP servers extend AI capabilities with external tools (Azure, GitHub, databases
 
 ### Key Settings Summary (1.111+)
 
-| Setting | Value | Purpose | Since |
-|---------|-------|---------|-------|
-| `chat.agent.enabled` | `true` | Enable custom agents | 1.109 |
-| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills | 1.109 |
-| `chat.useAgentsMdFile` | `true` | Use AGENTS.md | 1.109 |
-| `chat.mcp.gallery.enabled` | `true` | MCP tool access | 1.109 |
-| `chat.hooks.enabled` | `true` | Lifecycle hooks (Preview) | 1.109 |
-| `chat.useCustomAgentHooks` | `true` | Agent-scoped hooks (Preview) | 1.111 |
-| `chat.autopilot.enabled` | `true` | Autopilot mode (Preview) | 1.111 |
+| Setting                     | Value                | Purpose                      | Since |
+| --------------------------- | -------------------- | ---------------------------- | ----- |
+| `chat.agent.enabled`        | `true`               | Enable custom agents         | 1.109 |
+| `chat.agentSkillsLocations` | `[".github/skills"]` | Auto-load skills             | 1.109 |
+| `chat.useAgentsMdFile`      | `true`               | Use AGENTS.md                | 1.109 |
+| `chat.mcp.gallery.enabled`  | `true`               | MCP tool access              | 1.109 |
+| `chat.hooks.enabled`        | `true`               | Lifecycle hooks (Preview)    | 1.109 |
+| `chat.useCustomAgentHooks`  | `true`               | Agent-scoped hooks (Preview) | 1.111 |
+| `chat.autopilot.enabled`    | `true`               | Autopilot mode (Preview)     | 1.111 |
 
 ## Integration Audit Checklist
 
 **10-category audit scoring system** (5 points each, 50 total):
 
-| # | Category | What to Check |
-|---|----------|---------------|
-| 1 | Activation Events | package.json activationEvents match actual needs |
-| 2 | Extension Context | context.subscriptions, secrets, globalState usage |
-| 3 | Disposable Management | All disposables pushed to subscriptions |
-| 4 | Command Registration | Commands in package.json match registerCommand |
-| 5 | Configuration Access | getConfiguration usage, onDidChangeConfiguration |
-| 6 | Webview Security | CSP policies, nonce usage, enableScripts |
-| 7 | Language Model/Chat | vscode.lm patterns, tool registration |
-| 8 | Telemetry | vscode.env.isTelemetryEnabled respected |
-| 9 | Error Handling | try/catch patterns, error type handling |
-| 10 | File System | vscode.workspace.fs vs Node.js fs |
+| #   | Category              | What to Check                                     |
+| --- | --------------------- | ------------------------------------------------- |
+| 1   | Activation Events     | package.json activationEvents match actual needs  |
+| 2   | Extension Context     | context.subscriptions, secrets, globalState usage |
+| 3   | Disposable Management | All disposables pushed to subscriptions           |
+| 4   | Command Registration  | Commands in package.json match registerCommand    |
+| 5   | Configuration Access  | getConfiguration usage, onDidChangeConfiguration  |
+| 6   | Webview Security      | CSP policies, nonce usage, enableScripts          |
+| 7   | Language Model/Chat   | vscode.lm patterns, tool registration             |
+| 8   | Telemetry             | vscode.env.isTelemetryEnabled respected           |
+| 9   | Error Handling        | try/catch patterns, error type handling           |
+| 10  | File System           | vscode.workspace.fs vs Node.js fs                 |
 
 **Quick wins** (high impact, low effort):
+
 - Telemetry opt-out: Check `vscode.env.isTelemetryEnabled`
 - CSP on webviews: Add Content-Security-Policy with nonce
 - Config listeners: Add `onDidChangeConfiguration` for runtime updates
 - Secret storage: Use `context.secrets` instead of settings for tokens
 
 **Scoring**:
+
 - 45-50: Excellent — Ready for publish
 - 40-44: Good — Minor fixes
 - 35-39: Fair — Address before publish

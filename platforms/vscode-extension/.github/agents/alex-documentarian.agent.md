@@ -133,7 +133,7 @@ Apply the **Mermaid-first principle**: architecture, flow, and relationship diag
 | After adding/removing skills           | Audit skill counts across docs              |
 | After adding/removing agents           | Update agent catalog + copilot-instructions |
 | After release version bump             | CHANGELOG + ROADMAP + README                |
-| After architecture change              | Update architecture docs in `alex_docs/`    |
+| After architecture change              | Update architecture docs                    |
 | Before publishing to Marketplace       | Full doc audit pass                         |
 | New ASCII diagram added to docs        | Check: should it be Mermaid or SVG instead? |
 | User says "doc sweep" or "update docs" | Execute full audit protocol                 |

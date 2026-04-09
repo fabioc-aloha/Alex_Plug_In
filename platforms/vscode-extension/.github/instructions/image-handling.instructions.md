@@ -27,13 +27,16 @@ When a user asks to generate an image, video, or audio via Replicate, read `.git
 
 1. **Banner** → `recraft-ai/recraft-v4-svg` (SVG default — scalable, theme-aware, lightweight); fallback to Ideogram v3 Turbo for raster with text
 2. **Micro-icon concepting / emoji-style icon ideation** → `miike-ai/flux-ico:<version>` or `appmeloncreator/platmoji-beta:<version>` for PNG concept passes only; use required trigger words from the model page (`ICO`, `emoji`)
-2. **Has reference face images** → `google/nano-banana-pro` (`image_input` array, up to 14 refs)
-3. **Fast face generation** → `google/nano-banana-2` (same `image_input` API, Gemini 3.1 Flash)
-4. **Text must appear in image** → `ideogram-ai/ideogram-v3-turbo` ($0.03, 3:1 for banners)
-5. **Edit an existing image** → `black-forest-labs/flux-kontext-pro` (text-prompted editing)
-6. **Production image, no text** → `black-forest-labs/flux-1.1-pro` or `flux-2-pro` (multi-ref)
-7. **Vector SVG output** → `recraft-ai/recraft-v4-svg` or `recraft-ai/recraft-v4-pro-svg`
-8. **Fast prototype** → `black-forest-labs/flux-schnell` ($0.003)
+3. **Has reference face images** → `google/nano-banana-pro` (`image_input` array, up to 14 refs)
+4. **Fast face generation** → `google/nano-banana-2` (same `image_input` API, Gemini 3.1 Flash)
+5. **Text must appear in image** → `ideogram-ai/ideogram-v3-turbo` ($0.03, 3:1 for banners)
+6. **Edit an existing image** → `black-forest-labs/flux-kontext-pro` (text-prompted editing)
+7. **Production image, no text** → `black-forest-labs/flux-1.1-pro` or `flux-2-pro` (multi-ref)
+8. **10+ reference images** → `black-forest-labs/flux-2-flex` (up to 10 refs, successor to flux-2-pro)
+9. **Character consistency (single ref)** → `ideogram-ai/ideogram-character` (one reference image)
+10. **Google flagship** → `google/imagen-4` or `imagen-4-fast` (high quality, limited aspect ratios)
+11. **Vector SVG output** → `recraft-ai/recraft-v4-svg` or `recraft-ai/recraft-v4-pro-svg`
+12. **Fast prototype** → `black-forest-labs/flux-schnell` ($0.003)
 
 For compact UI icons, do not assume SVG generation is the best fit. `recraft-ai/recraft-v4-svg` is strong for banners and larger vector compositions, but its prompt surface is too art-directed for deterministic sidebar micro-icons. Use raster concept models for ideation, then finalize approved iconography as clean SVG.
 
@@ -50,6 +53,7 @@ For compact UI icons, do not assume SVG generation is the best fit. `recraft-ai/
 1. **Voice cloning from sample** → `resemble-ai/chatterbox-turbo` ($0.025/1k chars)
 2. **Voice design from description** → `qwen/qwen3-tts` (3 modes: Voice, Clone, Design)
 3. **Many languages + emotion** → `minimax/speech-2.8-turbo` ($0.06/1k tokens, 40+ languages)
+4. **Studio-grade fidelity** → `minimax/speech-2.8-hd` (higher cost, highest quality)
 
 ## Parameters to Always Verify
 

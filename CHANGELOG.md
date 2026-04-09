@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.4.2] - 2026-04-09
+
+### Added
+
+- Brain self-containment enforcement: architecture MUST NOT depend on the Extension (I8)
+- EXTERNAL-API-REGISTRY.md: staleness audit for all external API references
+- NORTH-STAR.md: project vision definition added to .github/
+
+### Changed
+
+- TTS skill rewritten (80% token reduction)
+- 5 stale root .github/ docs archived to alex_archive/
+- 14 phantom slash commands fixed in documentation
+- Global knowledge curation and skill promotion instructions updated
+- Documentarian agent updated with drift-free maintenance focus
+
+---
+
 ## [7.4.1] - 2026-04-09
 
 > **Post-Release Quality Sweep** -- 6-phase verification pass after v7.4.0: dead export removal, TTS reference cleanup, catalog audit, and user documentation audit across all user-facing content.

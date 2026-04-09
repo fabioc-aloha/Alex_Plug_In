@@ -29,13 +29,11 @@ This is **Alex's brain** — a meta-cognitive AI architecture that transforms yo
 
 ## Supporting Files
 
-| File                             | Purpose                                       |
-| -------------------------------- | --------------------------------------------- |
-| `ALEX-INTEGRATION.md`            | Quick-start guide for new projects            |
-| `alex-cognitive-architecture.md` | Universal template for non-Copilot assistants |
-| `ASSISTANT-COMPATIBILITY.md`     | Integration guide for ChatGPT, Claude, Gemini |
-| `PROJECT-TYPE-TEMPLATES.md`      | Project-specific integration patterns         |
-| `VALIDATION-SUITE.md`            | Post-integration validation checklist         |
+| File                       | Purpose                                        |
+| -------------------------- | ---------------------------------------------- |
+| `NORTH-STAR.md`            | Vision and cardinal rules                      |
+| `EXTERNAL-API-REGISTRY.md` | Staleness tracking for external APIs in skills |
+| `SUPPORT.md`               | Links to GitHub Discussions, Issues, Security  |
 
 ## If Something Breaks
 
