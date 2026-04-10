@@ -42,9 +42,9 @@ async function initializeTaskPane(info) {
  */
 async function checkMemoryAccess() {
     const memoryFiles = [
-        { name: 'profile.md', path: 'Alex-Memory/profile.md', status: 'checking' },
-        { name: 'notes.md', path: 'Alex-Memory/notes.md', status: 'checking' },
-        { name: 'focus-trifectas.md', path: 'Alex-Memory/focus-trifectas.md', status: 'checking' }
+        { name: 'profile.md', path: 'AI-Memory/profile.md', status: 'checking' },
+        { name: 'notes.md', path: 'AI-Memory/notes.md', status: 'checking' },
+        { name: 'focus-trifectas.md', path: 'AI-Memory/focus-trifectas.md', status: 'checking' }
     ];
     
     try {
@@ -54,7 +54,7 @@ async function checkMemoryAccess() {
         // Check each file in parallel using Graph API
         const fileChecks = memoryFiles.map(async (file) => {
             try {
-                const fileUrl = `https://graph.microsoft.com/v1.0/me/drive/root:/Alex-Memory/${file.name}`;
+                const fileUrl = `https://graph.microsoft.com/v1.0/me/drive/root:/AI-Memory/${file.name}`;
                 const response = await fetch(fileUrl, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -307,13 +307,13 @@ function showMemorySetup() {
             <p>Alex stores your cognitive memory in OneDrive for persistence across all M365 surfaces.</p>
             
             <div style="background: #fff4e5; padding: 16px; border-radius: 8px; margin: 16px 0;">
-                <strong>📍 Memory Location:</strong> <code>OneDrive/Alex-Memory/</code>
+                <strong>📍 Memory Location:</strong> <code>OneDrive/AI-Memory/</code>
             </div>
             
             <h3 style="margin: 20px 0 12px;">Setup Steps:</h3>
             <ol style="margin-left: 20px; line-height: 2;">
                 <li>Open <a href="https://onedrive.live.com" target="_blank">OneDrive in your browser</a></li>
-                <li>Create a folder called <strong>Alex-Memory</strong></li>
+                <li>Create a folder called <strong>AI-Memory</strong></li>
                 <li>Create these files:
                     <ul style="margin-top: 8px;">
                         <li><code>profile.md</code> — Your name, role, learning goals</li>
@@ -358,7 +358,7 @@ async function refreshMemory() {
     content.innerHTML = `
         <div class="loading">
             <div class="spinner"></div>
-            <p>Checking Alex-Memory folder...</p>
+            <p>Checking AI-Memory folder...</p>
         </div>
     `;
     

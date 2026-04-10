@@ -8,6 +8,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
 const crypto = require("crypto");
 const { execSync } = require("child_process");
 
@@ -1030,11 +1031,9 @@ if (runPhases.includes(26)) {
         path.join(ghPath, "skills"),
         (n) => n === "SKILL.md",
       ).length;
-      const m = content.match(
-        /(?:Skill Count[:\s]+)(\d+)(?:\s*skills?)?/i,
-      ) || content.match(
-        /(?:Total[^\n]*?)(\d+)\s*skills?/i,
-      );
+      const m =
+        content.match(/(?:Skill Count[:\s]+)(\d+)(?:\s*skills?)?/i) ||
+        content.match(/(?:Total[^\n]*?)(\d+)\s*skills?/i);
       if (m) {
         const catCount = parseInt(m[1], 10);
         if (catCount !== masterCount)
@@ -1106,55 +1105,68 @@ if (runPhases.includes(28)) {
 }
 
 // ════════════════════════════════════════════════════════════
-// PHASE 29: Global Knowledge Sync Validation
+// PHASE 29: AI-Memory Sync Validation (replaces legacy GK validation)
 // ════════════════════════════════════════════════════════════
 if (runPhases.includes(29)) {
-  writePhase(29, "Global Knowledge Sync Validation");
-  const gkPath = path.join(path.dirname(rootPath), "Alex-Global-Knowledge");
-  if (fs.existsSync(gkPath)) {
-    const indexPath = path.join(gkPath, "index.json");
-    if (fs.existsSync(indexPath)) {
-      const index = readJSON(indexPath);
-      if (index && index.entries) {
-        const indexPatterns = index.entries.filter(
-          (e) => e.type === "pattern",
-        ).length;
-        const indexInsights = index.entries.filter(
-          (e) => e.type === "insight",
-        ).length;
-        const patternsDir = path.join(gkPath, "patterns");
-        const insightsDir = path.join(gkPath, "insights");
-        const actualPatterns = fs.existsSync(patternsDir)
-          ? fs.readdirSync(patternsDir).filter((f) => f.startsWith("GK-"))
-              .length
-          : 0;
-        const actualInsights = fs.existsSync(insightsDir)
-          ? fs.readdirSync(insightsDir).filter((f) => f.startsWith("GI-"))
-              .length
-          : 0;
+  writePhase(29, "AI-Memory Sync Validation");
 
-        if (indexPatterns !== actualPatterns)
-          warn(
-            `GK index patterns (${indexPatterns}) != actual files (${actualPatterns})`,
-          );
-        if (indexInsights !== actualInsights)
-          warn(
-            `GK index insights (${indexInsights}) != actual files (${actualInsights})`,
-          );
-        if (
-          indexPatterns === actualPatterns &&
-          indexInsights === actualInsights
-        ) {
-          pass(
-            `GK index matches disk: ${actualPatterns} patterns, ${actualInsights} insights`,
-          );
-        }
-      }
+  // Resolve AI-Memory path: OneDrive first, then local fallback
+  const oneDrivePath =
+    process.env.OneDrive ||
+    process.env.OneDriveConsumer ||
+    process.env.OneDriveCommercial;
+
+  let aiMemoryPath = null;
+  let isOneDrive = false;
+
+  if (oneDrivePath && fs.existsSync(path.join(oneDrivePath, "AI-Memory"))) {
+    aiMemoryPath = path.join(oneDrivePath, "AI-Memory");
+    isOneDrive = true;
+  } else {
+    // Check local fallback: ~/.alex/AI-Memory/
+    const localFallback = path.join(os.homedir(), ".alex", "AI-Memory");
+    if (fs.existsSync(localFallback)) {
+      aiMemoryPath = localFallback;
+    }
+  }
+
+  if (aiMemoryPath) {
+    const source = isOneDrive ? "OneDrive" : "local (~/.alex/)";
+    const expectedFiles = [
+      "profile.md",
+      "global-knowledge.md",
+      "notes.md",
+      "learning-goals.md",
+    ];
+    const missing = expectedFiles.filter(
+      (f) => !fs.existsSync(path.join(aiMemoryPath, f)),
+    );
+    if (missing.length === 0) {
+      pass(`AI-Memory (${source}): ${expectedFiles.length} files present`);
     } else {
-      warn("Global Knowledge index.json not found");
+      warn(`AI-Memory (${source}) missing files: ${missing.join(", ")}`);
+    }
+    // Check global-knowledge.md is not empty
+    const gkFile = path.join(aiMemoryPath, "global-knowledge.md");
+    if (fs.existsSync(gkFile)) {
+      const content = fs.readFileSync(gkFile, "utf-8");
+      if (content.trim().length > 50) {
+        pass(
+          `global-knowledge.md has content (${content.split("\n").length} lines)`,
+        );
+      } else {
+        warn("global-knowledge.md appears empty or minimal");
+      }
+    }
+    if (!isOneDrive) {
+      warn(
+        "AI-Memory is local-only (no OneDrive sync). Install OneDrive for cross-device access.",
+      );
     }
   } else {
-    pass("Global Knowledge repo not found (skipped)");
+    warn(
+      "AI-Memory folder not found (neither OneDrive nor ~/.alex/AI-Memory/)",
+    );
   }
 }
 

@@ -57,11 +57,37 @@ export const VERSION_NUMBER_REGEX = /\*\*Version\*\*:\s*(\d+\.\d+\.\d+)/;
 
 /**
  * Global Alex home directory name (in user's home folder)
+ * @deprecated Legacy GK system. Use AI_MEMORY_PATHS for new development.
  */
 export const ALEX_GLOBAL_HOME = ".alex";
 
 /**
+ * AI-Memory folder paths (cross-platform shared memory).
+ * Preferred: OneDrive sync path. Fallback: ~/.alex/AI-Memory/ on local disk.
+ */
+export const AI_MEMORY_PATHS = {
+  /** Folder name (used under OneDrive root or local fallback) */
+  folderName: "AI-Memory",
+  /** Local fallback folder under home directory when OneDrive is unavailable */
+  localFallback: ".alex/AI-Memory",
+  /** Memory files (relative to the resolved AI-Memory root) */
+  profile: "profile.md",
+  notes: "notes.md",
+  learningGoals: "learning-goals.md",
+  globalKnowledge: "global-knowledge.md",
+} as const;
+
+/** Expected files inside the AI-Memory folder */
+export const AI_MEMORY_FILES = [
+  AI_MEMORY_PATHS.profile,
+  AI_MEMORY_PATHS.notes,
+  AI_MEMORY_PATHS.learningGoals,
+  AI_MEMORY_PATHS.globalKnowledge,
+] as const;
+
+/**
  * Global knowledge base subdirectories
+ * @deprecated Use AI_MEMORY_PATHS instead. Legacy paths kept for backward compatibility.
  */
 export const GLOBAL_KNOWLEDGE_PATHS = {
   root: ALEX_GLOBAL_HOME,

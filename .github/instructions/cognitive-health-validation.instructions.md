@@ -261,18 +261,17 @@ Exit Code 1 = Issues found (check output for critical vs warnings)
 5. Document trends in episodic memory
 ```
 
-### Workflow 4: Global Knowledge Sync
+### Workflow 4: AI-Memory Sync
 
 ```powershell
-# When Phase 29 warns about insight count drift:
-1. cd Alex-Global-Knowledge
-2. git status → Check for uncommitted insights
-3. Count actual insights: (Get-ChildItem insights/GI-*.md).Count
-4. Update .github/copilot-instructions.md with actual count
-5. Commit insights + metadata update
-6. Return to Alex_Plug_In
-7. Re-run brain-qa -Phase 29 → Confirm PASS
+# When cross-platform knowledge needs validation:
+1. Check OneDrive sync path: %OneDrive%/AI-Memory/
+2. Verify 4 files exist: profile.md, notes.md, learning-goals.md, global-knowledge.md
+3. Review global-knowledge.md for stale or duplicate entries
+4. Templates source: platforms/m365-shared/onedrive-templates/AI-Memory/
 ```
+
+**Note**: Replaces the legacy Alex-Global-Knowledge repo sync. Phase 29 (GK count validation) is deprecated; global-knowledge.md is a single file, not indexed.
 
 ## Troubleshooting Guide
 
@@ -332,18 +331,12 @@ Copy-Item .github/instructions/azure-enterprise-deployment.instructions.md platf
 **Symptoms:**
 
 ```
-[WARN] Phase 29: GK README says 242 insights, actual count 258
+[WARN] Phase 29: AI-Memory missing files: learning-goals.md
 ```
 
 **Fix:**
 
-```powershell
-cd ..\Alex-Global-Knowledge
-(Get-ChildItem insights/GI-*.md).Count  # Get actual count
-# Update .github/copilot-instructions.md line ~8 with actual count
-git add .github/copilot-instructions.md
-git commit -m "fix: update insight count from 242 to 258"
-```
+Create the missing file in the OneDrive AI-Memory/ folder. Use the templates from `platforms/m365-shared/onedrive-templates/AI-Memory/` as reference.
 
 ## Decision Framework
 

@@ -363,11 +363,11 @@ All user input — chat messages, command palette actions, file selections — f
 
 #### 4c. Innate Subcortical Circuits → Instincts (Agent Hooks)
 
-| Biological         | Alex                                                                         |
-| ------------------ | ---------------------------------------------------------------------------- |
-| **Region**         | Innate subcortical circuits (spinal reflexes, brainstem nuclei)              |
-| **Function**       | Fixed action patterns — automatic, pre-conscious, stimulus-driven responses  |
-| **Implementation** | Agent hooks (.github/hooks.json + .github/muscles/hooks/)                    |
+| Biological         | Alex                                                                        |
+| ------------------ | --------------------------------------------------------------------------- |
+| **Region**         | Innate subcortical circuits (spinal reflexes, brainstem nuclei)             |
+| **Function**       | Fixed action patterns — automatic, pre-conscious, stimulus-driven responses |
+| **Implementation** | Agent hooks (.github/hooks.json + .github/muscles/hooks/)                   |
 
 Instincts are the deepest layer of the cognitive architecture. In biology, a knee-jerk reflex fires before the brain is even aware of the stimulus. A newborn's rooting reflex doesn't need learning. These are **hardwired** responses that exist below all conscious processing.
 
@@ -375,33 +375,33 @@ Agent hooks are Alex's instincts. They execute as OS-level processes **outside t
 
 **Three distinguishing properties of instincts:**
 
-| Property                | Biological Instinct               | Alex Hook                                          |
-| ----------------------- | --------------------------------- | -------------------------------------------------- |
-| **Innate**              | Present from birth, not learned   | Ships with architecture, not trained                |
-| **Pre-conscious**       | Fires before cortical processing  | Executes outside LLM context window                 |
-| **Fixed Action Pattern** | Deterministic stimulus → response | Event trigger → script → exit code (0/2)           |
+| Property                 | Biological Instinct               | Alex Hook                                |
+| ------------------------ | --------------------------------- | ---------------------------------------- |
+| **Innate**               | Present from birth, not learned   | Ships with architecture, not trained     |
+| **Pre-conscious**        | Fires before cortical processing  | Executes outside LLM context window      |
+| **Fixed Action Pattern** | Deterministic stimulus → response | Event trigger → script → exit code (0/2) |
 
 **The Cognitive Hierarchy — from fastest/simplest to slowest/richest:**
 
-| Layer          | Speed   | Mechanism                   | Alex Implementation                        | Override? |
-| -------------- | ------- | --------------------------- | ------------------------------------------ | --------- |
-| **Instincts**  | Fastest | OS process, no LLM          | Agent hooks (.github/muscles/hooks/)       | No        |
-| **Reflexes**   | Fast    | Prose rules LLM internalizes | Safety Imperatives I1-I8                   | Unlikely  |
-| **Habits**     | Medium  | Auto-loaded context          | .instructions.md files                     | Possible  |
-| **Skills**     | Slower  | On-demand retrieval          | skills/*/SKILL.md                          | Yes       |
-| **Reasoning**  | Slowest | Full LLM deliberation        | LLM executive function                     | N/A       |
+| Layer         | Speed   | Mechanism                    | Alex Implementation                  | Override? |
+| ------------- | ------- | ---------------------------- | ------------------------------------ | --------- |
+| **Instincts** | Fastest | OS process, no LLM           | Agent hooks (.github/muscles/hooks/) | No        |
+| **Reflexes**  | Fast    | Prose rules LLM internalizes | Safety Imperatives I1-I8             | Unlikely  |
+| **Habits**    | Medium  | Auto-loaded context          | .instructions.md files               | Possible  |
+| **Skills**    | Slower  | On-demand retrieval          | skills/*/SKILL.md                    | Yes       |
+| **Reasoning** | Slowest | Full LLM deliberation        | LLM executive function               | N/A       |
 
 **Why instincts matter**: The amygdala (Safety Imperatives I1-I8) tells Alex what's dangerous, but it's still prose the LLM reads — the LLM *chooses* to comply. Instincts remove choice entirely. A `PreToolUse` hook that blocks `rm -rf` on the Master workspace doesn't ask the LLM to please not do that — it mechanically prevents it. This is the difference between knowing fire is hot (reflex) and pulling your hand away before you feel the burn (instinct).
 
 **Hook events as instinctive responses:**
 
-| Event            | Stimulus                  | Instinctive Response                     |
-| ---------------- | ------------------------- | ---------------------------------------- |
-| SessionStart     | New conversation begins   | Validate environment, load context       |
-| PreToolUse       | Tool call about to fire   | Block dangerous operations (exit code 2) |
-| PostToolUse      | Tool call completed       | Log, audit, inject feedback              |
-| UserPromptSubmit | User sends a message      | Transform or enrich input                |
-| Stop             | Conversation ending       | Archive session, clean up state          |
+| Event            | Stimulus                | Instinctive Response                     |
+| ---------------- | ----------------------- | ---------------------------------------- |
+| SessionStart     | New conversation begins | Validate environment, load context       |
+| PreToolUse       | Tool call about to fire | Block dangerous operations (exit code 2) |
+| PostToolUse      | Tool call completed     | Log, audit, inject feedback              |
+| UserPromptSubmit | User sends a message    | Transform or enrich input                |
+| Stop             | Conversation ending     | Archive session, clean up state          |
 
 ---
 
@@ -459,11 +459,11 @@ Key properties preserved in Alex's synapse model:
 
 #### 6b. Global Knowledge → Distributed Cortex
 
-| Biological         | Alex                                                                     |
-| ------------------ | ------------------------------------------------------------------------ |
-| **System**         | Distributed cortical networks                                            |
-| **Function**       | Abstract knowledge not localized to any single region                    |
-| **Implementation** | ~/.alex/global-knowledge/ — patterns and insights shared across projects |
+| Biological         | Alex                                                                             |
+| ------------------ | -------------------------------------------------------------------------------- |
+| **System**         | Distributed cortical networks                                                    |
+| **Function**       | Abstract knowledge not localized to any single region                            |
+| **Implementation** | OneDrive AI-Memory/ — patterns and insights shared across projects and platforms |
 
 Some knowledge isn't "in" any one brain region — it emerges from distributed patterns across the cortex. Global knowledge works the same way: it's not part of any specific project but informs all of them.
 
@@ -565,14 +565,14 @@ The dlPFC is one of the **last brain regions to fully mature**, continuing devel
 
 Alex's architecture shows a parallel developmental trajectory:
 
-| Stage            | Human Brain                          | Alex Architecture                                  | Version |
-| ---------------- | ------------------------------------ | -------------------------------------------------- | ------- |
-| Infancy          | Basic reflexes, sensory processing   | Chat response only, no memory                      | Pre-1.0 |
-| Childhood        | Procedural learning, habit formation | Instruction files, basic skills                    | 1.x-2.x |
-| Adolescence      | Episodic memory, social cognition    | Meditation, dream state, identity                  | 3.x     |
-| Early adulthood  | Working memory maturation            | Working memory slots (P1-P7)                       | 4.x     |
-| Full maturity    | dlPFC executive functions complete   | SSO, attention gating, inhibition, pivot detection | 5.x     |
-| Continued growth | Expertise deepening, wisdom          | Global knowledge, cross-project patterns           | 5.x+    |
+| Stage            | Human Brain                            | Alex Architecture                                  | Version |
+| ---------------- | -------------------------------------- | -------------------------------------------------- | ------- |
+| Infancy          | Basic reflexes, sensory processing     | Chat response only, no memory                      | Pre-1.0 |
+| Childhood        | Procedural learning, habit formation   | Instruction files, basic skills                    | 1.x-2.x |
+| Adolescence      | Episodic memory, social cognition      | Meditation, dream state, identity                  | 3.x     |
+| Early adulthood  | Working memory maturation              | Working memory slots (P1-P7)                       | 4.x     |
+| Full maturity    | dlPFC executive functions complete     | SSO, attention gating, inhibition, pivot detection | 5.x     |
+| Continued growth | Expertise deepening, wisdom            | Global knowledge, cross-project patterns           | 5.x+    |
 | Instinct layer   | Innate reflexes operational from birth | Agent hooks — mechanical safety enforcement        | 6.x     |
 
 **Key insight**: Alex reached "cognitive maturity" in v5.x when the dlPFC analogs came online — not because the architecture got more features, but because it gained the ability to **plan before acting**, **filter what it pays attention to**, **suppress irrelevant impulses**, and **flexibly switch tasks**.
@@ -583,17 +583,17 @@ Alex's architecture shows a parallel developmental trajectory:
 
 Understanding how brain dysfunction maps to architecture failures helps diagnose and prevent issues:
 
-| Clinical Condition        | Brain Region Affected       | Alex Architecture Failure Mode                                    |
-| ------------------------- | --------------------------- | ----------------------------------------------------------------- |
-| **Executive Dysfunction** | PFC damage                  | Using a low-tier model for complex tasks                          |
-| **ADHD**                  | dlPFC hypoactivity          | No attention gating — all protocols compete equally               |
-| **Impulsivity**           | dlPFC + vlPFC               | No verification gate — jumping to code before planning            |
-| **Cognitive Rigidity**    | dlPFC + ACC                 | No pivot detection — applying stale context after topic change    |
-| **Seizure**               | Loss of inhibitory control  | All protocols activate simultaneously (no inhibitory synapses)    |
-| **Amnesia**               | Hippocampal damage          | No meditation — insights lost between sessions                    |
-| **Dementia**              | Widespread cortical atrophy | Broken synapses, orphaned skills, no dream maintenance            |
-| **Sleep Deprivation**     | Reduced consolidation       | Skipping meditation and dream cycles                              |
-| **Depression**            | dlPFC hypoactivity          | Reduced initiative — not proactively surveying skills or planning |
+| Clinical Condition        | Brain Region Affected        | Alex Architecture Failure Mode                                          |
+| ------------------------- | ---------------------------- | ----------------------------------------------------------------------- |
+| **Executive Dysfunction** | PFC damage                   | Using a low-tier model for complex tasks                                |
+| **ADHD**                  | dlPFC hypoactivity           | No attention gating — all protocols compete equally                     |
+| **Impulsivity**           | dlPFC + vlPFC                | No verification gate — jumping to code before planning                  |
+| **Cognitive Rigidity**    | dlPFC + ACC                  | No pivot detection — applying stale context after topic change          |
+| **Seizure**               | Loss of inhibitory control   | All protocols activate simultaneously (no inhibitory synapses)          |
+| **Amnesia**               | Hippocampal damage           | No meditation — insights lost between sessions                          |
+| **Dementia**              | Widespread cortical atrophy  | Broken synapses, orphaned skills, no dream maintenance                  |
+| **Sleep Deprivation**     | Reduced consolidation        | Skipping meditation and dream cycles                                    |
+| **Depression**            | dlPFC hypoactivity           | Reduced initiative — not proactively surveying skills or planning       |
 | **Instinct Suppression**  | Brainstem/subcortical bypass | Hooks disabled or misconfigured — safety reverts to LLM compliance only |
 
 ---
@@ -664,7 +664,7 @@ This is exactly what the dlPFC + vlPFC do in the biological brain — suppress t
 | Thalamus             | —                  | Sensory relay                    | VS Code interface        | Chat, commands, file context                 |
 | Innate Subcortical   | —                  | Instincts, fixed action patterns | Agent Hooks              | .github/hooks.json, .github/muscles/hooks/   |
 | Hippocampal-Cortical | —                  | Memory consolidation             | Meditation + Dream       | meditation/, dream-state                     |
-| Distributed Cortex   | —                  | Abstract, cross-domain knowledge | Global Knowledge         | ~/.alex/global-knowledge/                    |
+| Distributed Cortex   | —                  | Abstract, cross-domain knowledge | Global Knowledge         | OneDrive AI-Memory/global-knowledge.md       |
 
 ---
 

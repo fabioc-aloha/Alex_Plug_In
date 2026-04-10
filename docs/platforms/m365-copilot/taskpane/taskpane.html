@@ -414,7 +414,7 @@
                     <div class="error-message">
                         <strong>⚠️ Initialization Failed</strong>
                         <p>${error.message}</p>
-                        <p>Please make sure you have access to OneDrive and the Alex-Memory folder.</p>
+                        <p>Please make sure you have access to OneDrive and the AI-Memory folder.</p>
                     </div>
                 `;
             }
@@ -424,9 +424,9 @@
             // Simulate checking OneDrive access
             // In production, this would use Graph API through Office.js auth
             const memoryFiles = [
-                { name: 'profile.md', path: 'Alex-Memory/profile.md', status: 'checking' },
-                { name: 'notes.md', path: 'Alex-Memory/notes.md', status: 'checking' },
-                { name: 'focus-trifectas.md', path: 'Alex-Memory/focus-trifectas.md', status: 'checking' }
+                { name: 'profile.md', path: 'AI-Memory/profile.md', status: 'checking' },
+                { name: 'notes.md', path: 'AI-Memory/notes.md', status: 'checking' },
+                { name: 'focus-trifectas.md', path: 'AI-Memory/focus-trifectas.md', status: 'checking' }
             ];
 
             // TODO: Implement actual OneDrive file check
@@ -464,7 +464,7 @@
                     ${hasMemory ? `
                         <p><strong>✅ Memory Connected</strong> — Alex has access to your OneDrive memory and can provide personalized assistance based on your profile and notes.</p>
                     ` : `
-                        <p><strong>⚠️ No Memory Found</strong> — Alex needs access to your Alex-Memory folder in OneDrive. Click "Setup Memory" to create the required files.</p>
+                        <p><strong>⚠️ No Memory Found</strong> — Alex needs access to your AI-Memory folder in OneDrive. Click "Setup Memory" to create the required files.</p>
                     `}
                     
                     <p><strong>What Alex Can Do Here:</strong></p>
@@ -552,11 +552,11 @@
             content.innerHTML = `
                 <div class="welcome-message">
                     <h2>🛠️ Setup Alex Memory</h2>
-                    <p>Alex stores your memory in OneDrive at <code>Alex-Memory/</code>. To get started:</p>
+                    <p>Alex stores your memory in OneDrive at <code>AI-Memory/</code>. To get started:</p>
                     
                     <ol style="margin: 16px 0; line-height: 1.8;">
                         <li>Open OneDrive in your browser</li>
-                        <li>Create a folder called <strong>Alex-Memory</strong></li>
+                        <li>Create a folder called <strong>AI-Memory</strong></li>
                         <li>Create these files:
                             <ul>
                                 <li><code>profile.md</code> — Your name, role, goals</li>

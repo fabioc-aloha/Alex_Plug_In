@@ -1,263 +1,207 @@
 ---
 name: "global-knowledge"
-description: "Cross-project knowledge search, pattern recognition, and insight management — the long-term memory across all projects"
+description: "Cross-project knowledge search, pattern recognition, and insight management via unified AI-Memory"
 tier: standard
 ---
 
 # Global Knowledge Skill
 
-> Your past solved problems, searchable from any project.
+> Your past solved problems, accessible from any AI surface.
+
+## Architecture: AI-Memory
+
+Global knowledge lives in a single shared file: **AI-Memory/global-knowledge.md**
+
+This replaces the previous GitHub-based system (~/.alex/global-knowledge/, GK-_/GI-_ files, index.json). The AI-Memory folder is accessible across all surfaces:
+
+- **M365 Copilot**: Reads via OneDriveAndSharePoint capability
+- **VS Code**: Reads via local OneDrive sync path. Falls back to `~/.alex/AI-Memory/` when OneDrive is unavailable
+- **Agent Builder agents**: Reads via OneDriveAndSharePoint capability
+
+### AI-Memory Files
+
+| File                  | Purpose                                         |
+| --------------------- | ----------------------------------------------- |
+| `profile.md`          | User identity, preferences, expertise           |
+| `notes.md`            | Session notes, reminders, observations          |
+| `learning-goals.md`   | Active/completed goals with progress tracking   |
+| `global-knowledge.md` | Cross-project insights, patterns, and learnings |
+
+Templates: `platforms/m365-shared/onedrive-templates/AI-Memory/`
 
 ## Check Before You Create
 
-**Always search global knowledge before creating new skills, instructions, or prompts.** This prevents duplicate work and ensures institutional knowledge is reused.
+**Always search global-knowledge.md before creating new skills, instructions, or prompts.** This prevents duplicate work and ensures institutional knowledge is reused.
 
 ### Lookup Process
 
-1. **Search** `~/.alex/global-knowledge/` for existing content:
-   - `patterns/` for reusable solutions (GK-\*)
-   - `insights/` for timestamped learnings (GI-\*)
-   - `skills/` for promoted skill files
-2. **Also search** local `.github/skills/` -- the answer may already be a skill
-3. **Evaluate** the result:
+1. **Search** `AI-Memory/global-knowledge.md` for existing content
+2. **Also search** local `.github/skills/` (the answer may already be a skill)
+3. **Also search** Copilot Memory (`/memories/`) for VS Code-specific notes
+4. **Evaluate** the result:
 
-| Result        | Action                                    |
-| ------------- | ----------------------------------------- |
-| Exact match   | Adopt directly -- don't recreate          |
-| Similar match | Adapt as starting point                   |
-| No match      | Create new, then consider promoting to GK |
-
-4. **Report** the lookup before proceeding:
-   ```
-   GK Lookup: {topic}
-     Status: Found / Similar / Not Found
-     Action: Adopting / Adapting / Creating new
-   ```
+| Result        | Action                                      |
+| ------------- | ------------------------------------------- |
+| Exact match   | Adopt directly; don't recreate              |
+| Similar match | Adapt as starting point                     |
+| No match      | Create new, then add to global-knowledge.md |
 
 This check is mandatory before skill creation (Phase 1 of skill-building procedure).
 
-## Knowledge Types
+## Knowledge Organization in global-knowledge.md
 
-| Type        | Prefix | Purpose                                     | Lifespan    | Example                               |
-| ----------- | ------ | ------------------------------------------- | ----------- | ------------------------------------- |
-| **Pattern** | GK-\*  | Reusable solution, proven in 2+ projects    | Long-term   | `GK-error-handling-patterns.md`       |
-| **Insight** | GI-\*  | Timestamped observation, may not generalize | Medium-term | `GI-react-hooks-gotcha-2026-01-24.md` |
+Insights are organized by category with a consistent format:
 
-**Key distinction**: A pattern is abstracted and proven. An insight is specific and dated. Insights may be promoted to patterns after validation.
+```markdown
+### [Topic Title]
 
-## Commands
+- **Source**: [Project or context where learned]
+- **Insight**: [The key learning]
+- **Date**: [When captured]
+```
 
-| Command              | Purpose                                   |
-| -------------------- | ----------------------------------------- |
-| `/knowledge <query>` | Search patterns + insights                |
-| `/knowledge save`    | Capture learning from current session     |
-| `/knowledge promote` | Promote local knowledge to global pattern |
-| `/knowledge status`  | Check GK health and stats                 |
+Categories emerge organically: PowerShell Patterns, Azure Patterns, Frontend Patterns, AI Image Generation, Design Patterns, Workflow Patterns, etc.
 
-## Memory System Differentiation (VS Code 1.109+)
+### What Goes in global-knowledge.md
 
-Alex uses **two complementary memory systems**. Use the right one for the right data:
+| Content                 | Example                                               |
+| ----------------------- | ----------------------------------------------------- |
+| Cross-project patterns  | "SWA EasyAuth handles login; domain gating via fetch" |
+| Hard-won gotchas        | "PowerShell -replace corrupts multi-byte content"     |
+| Architecture decisions  | "Cosmos liveness probes cause container kill loops"   |
+| Integration patterns    | "MS Graph MCP: call suggest_queries first"            |
+| Tool-specific learnings | "Flux 1.1 Pro max width 1440px"                       |
 
-### Copilot Memory (GitHub Cloud)
+### What Does NOT Go in global-knowledge.md
 
-Cloud-synced preferences and personal context. Use for:
+| Content                 | Where It Belongs                  |
+| ----------------------- | --------------------------------- |
+| Personal preferences    | AI-Memory/profile.md              |
+| Session reminders       | AI-Memory/notes.md                |
+| Learning goals          | AI-Memory/learning-goals.md       |
+| Project-specific config | Project's own .github/ or docs    |
+| Temporary workarounds   | Project notes (will become stale) |
 
-| Data               | Example                        | Why Cloud                |
-| ------------------ | ------------------------------ | ------------------------ |
-| **Preferences**    | "Use 4 spaces, dark mode"      | Same across all machines |
-| **Coding Style**   | "Prefer functional components" | Consistent patterns      |
-| **Learning Goals** | "Master K8s by March"          | Personal growth tracking |
-| **Session Notes**  | "Finish auth tests tomorrow"   | Cross-session reminders  |
+## Memory System Differentiation
 
-**Characteristics:**
+Alex uses **three complementary memory systems**:
 
-- ☁️ Syncs across all machines automatically
-- 👤 Personal to GitHub account
-- 🔒 Encrypted at rest
-- 💬 Accessible via natural language in chat
+### 1. AI-Memory (OneDrive): Cross-Platform Persistent Memory
 
-### Global Knowledge (~/.alex/)
+Shared across all AI surfaces via OneDrive sync. Use for:
 
-Local domain knowledge and project learnings. Use for:
+- User profile and preferences (profile.md)
+- Session notes and observations (notes.md)
+- Learning goals with progress tracking (learning-goals.md)
+- Cross-project insights and patterns (global-knowledge.md)
 
-| Data                 | Example                           | Why Local                  |
-| -------------------- | --------------------------------- | -------------------------- |
-| **Domain Expertise** | "How OAuth2 works in our system"  | Project-specific, detailed |
-| **Patterns (GK-\*)** | "Rate limiting implementation"    | Searchable, categorized    |
-| **Insights (GI-\*)** | "Fixed N+1 query with eager load" | Timestamped learnings      |
-| **Session History**  | Episodic meditation records       | Full context preserved     |
+### 2. Copilot Memory (/memories/): VS Code Session Memory
 
-**Characteristics:**
+GitHub-cloud-synced notes for VS Code workflows. Use for:
 
-- 💾 Local storage, you control the data
-- 🔍 Full-text searchable via MCP tools
-- 📁 Organized in patterns/ and insights/
-- 🔗 Synaptic connections between items
+- VS Code-specific preferences and workflow notes
+- Project-specific context that may overlap with AI-Memory
+- Session-scoped working state (/memories/session/)
+
+### 3. Project Memory (.github/): Local Architecture
+
+Project-specific cognitive architecture. Use for:
+
+- Skills, instructions, prompts (the trifecta)
+- Episodic memories from meditation sessions
+- Synapse connections between skills
+- Configuration and settings
 
 ### Decision Matrix
 
-| Question                        | Copilot Memory | Global Knowledge |
-| ------------------------------- | -------------- | ---------------- |
-| Is this personal preference?    | ✅             |                  |
-| Is this project know-how?       |                | ✅               |
-| Should it sync to new machines? | ✅             |                  |
-| Does it need full-text search?  |                | ✅               |
-| Is it a learning goal?          | ✅             |                  |
-| Is it a pattern/solution?       |                | ✅               |
+| Question                            | AI-Memory (OneDrive) | Copilot Memory | Project .github/  |
+| ----------------------------------- | -------------------- | -------------- | ----------------- |
+| Cross-project pattern?              | global-knowledge.md  |                |                   |
+| Personal preference (all surfaces)? | profile.md           |                |                   |
+| VS Code-specific preference?        |                      | /memories/     |                   |
+| Learning goal?                      | learning-goals.md    |                |                   |
+| Session note?                       | notes.md             |                |                   |
+| Project architecture?               |                      |                | .github/skills/   |
+| Meditation output?                  |                      |                | .github/episodic/ |
 
 ### Integration Workflow
 
 ```
-User learns something → Is it personal? → Copilot Memory
-                     → Is it shareable? → Global Knowledge (GI-*)
-                     → Is it reusable?  → Global Knowledge (GK-*)
+User learns something
+  Is it cross-project?     -> AI-Memory/global-knowledge.md
+  Is it personal preference -> AI-Memory/profile.md (or /memories/ for VS Code only)
+  Is it project-specific?  -> .github/skills/ or .github/episodic/
 ```
 
 **No duplication**: Each piece of information lives in ONE system.
 
----
+## Saving Insights
 
-## Promotion Candidate Patterns
+### From VS Code
 
-When scanning project knowledge for promotion candidates, use these patterns to identify high-value content:
+During a session, when you learn something cross-project:
 
-### 🎯 Strong Promotion Signals
+1. Open `%OneDrive%/AI-Memory/global-knowledge.md` (synced locally)
+2. Add entry under the appropriate category
+3. Use the standard format: Topic, Source, Insight, Date
+4. Save the file (OneDrive syncs automatically)
 
-| Pattern                         | Description                           | Example                                          |
-| ------------------------------- | ------------------------------------- | ------------------------------------------------ |
-| **Cross-project applicability** | Would 3+ other projects benefit?      | Error handling strategy that works anywhere      |
-| **Resolution pattern**          | Solved problem with concrete solution | "N+1 query fixed with eager loading"             |
-| **Hard-won gotchas**            | Prevents repeat mistakes              | "Jest timers require runAllTimers() after async" |
-| **Architecture with rationale** | ADR-style decisions with "why"        | "Chose event sourcing because..."                |
-| **Pipeline/workflow patterns**  | Automatable processes                 | CI/CD template, release flow                     |
-| **Integration patterns**        | How systems connect                   | OAuth flow, API gateway setup                    |
-| **Migration patterns**          | Version/format transformations        | "Upgrading from v3 to v4 schema"                 |
-| **Schema/format patterns**      | Data structures that work             | Synapse JSON schema, config templates            |
+Or say "consolidate" to trigger the cognitive protocols consolidation workflow, which prompts you to capture insights.
 
-### ❌ Anti-Promotion Signals
+### From M365 Copilot / Agent Builder
 
-| Signal                       | Why Skip                  | Example                         |
-| ---------------------------- | ------------------------- | ------------------------------- |
-| **Project-specific config**  | Only works in one context | "Our AWS account settings"      |
-| **Temporary workarounds**    | Will be obsolete          | "Hack until v2.0 releases"      |
-| **Personal preferences**     | Not generalizable         | "I like 4 spaces"               |
-| **Incomplete/draft content** | Needs validation          | Work-in-progress notes          |
-| **Already in GK**            | Avoid duplicates          | Check `index.json` first        |
-| **Too specific names/IDs**   | Not portable              | Hardcoded team names, repo URLs |
+1. Say "consolidate" or "save this insight"
+2. Alex generates the content update in a code block
+3. You save it to OneDrive > AI-Memory > global-knowledge.md
 
-### Automated Scoring (Score ≥5 = Candidate)
+### Promotion from Project to Global
 
-The extension evaluates skill files with this scoring:
+When a project-specific learning proves cross-project:
 
-| Criteria                         | Points | Detection                                                                       |
-| -------------------------------- | ------ | ------------------------------------------------------------------------------- |
-| Has synapses                     | +3     | Synapse format in content                                                       |
-| Well-structured (3+ H2 sections) | +2     | `## Section` headings                                                           |
-| Has tags defined                 | +1     | `**Tags**: tag1, tag2`                                                          |
-| Substantial content (>1KB)       | +1     | File size                                                                       |
-| Rich content (>5KB)              | +2     | File size                                                                       |
-| Has code examples                | +2     | Code blocks in content                                                          |
-| General applicability            | +1-3   | Contains: pattern, best practice, guideline, framework, principle, architecture |
+1. Identify the insight in .github/episodic/ or session notes
+2. Abstract it (remove project-specific details)
+3. Add to AI-Memory/global-knowledge.md under the right category
+4. Verify it reads well without project context
 
-**Minimum for auto-promotion**: Score ≥ 5
+## Promotion Signals
 
-### Quick Decision Tree
+### Strong Promotion Signals
 
-```
-Is this knowledge?
-├── Personal preference → Copilot Memory (not GK)
-├── Project-specific config → Keep in project skills
-├── Would I search for this in another project?
-│   ├── No → Keep in project skills
-│   └── Yes → Continue...
-│       ├── Is it a reusable solution? → Pattern (GK-*)
-│       └── Is it a timestamped learning? → Insight (GI-*)
-```
+| Pattern                         | Description                           |
+| ------------------------------- | ------------------------------------- |
+| **Cross-project applicability** | Would 3+ other projects benefit?      |
+| **Resolution pattern**          | Solved problem with concrete solution |
+| **Hard-won gotchas**            | Prevents repeat mistakes              |
+| **Architecture with rationale** | ADR-style decisions with "why"        |
+| **Integration patterns**        | How systems connect                   |
 
-### Real Examples from Curation
+### Anti-Promotion Signals
 
-These patterns were identified during cross-project knowledge curation:
+| Signal                       | Why Skip                  |
+| ---------------------------- | ------------------------- |
+| **Project-specific config**  | Only works in one context |
+| **Temporary workarounds**    | Will be obsolete          |
+| **Personal preferences**     | Goes in profile.md        |
+| **Incomplete/draft content** | Needs validation          |
 
-**Promoted as Patterns (GK-\*):**
+## Migration from Legacy GK System
 
-- `GK-kill-switch-pattern-protecting-master-alex.md` — Safety mechanism applicable to any critical system
-- `GK-synapse-schema-2026-standard.md` — Data format standard for the entire architecture
-- `GK-domain-knowledge-azure-synapse-pipeline-.md` — ETL patterns for data engineering
+The previous system used `~/.alex/global-knowledge/` with GK-_/GI-_ files and index.json. All valuable content has been migrated to `AI-Memory/global-knowledge.md`. The legacy system is deprecated:
 
-**Promoted as Insights (GI-\*):**
+| Legacy                              | Replacement                              |
+| ----------------------------------- | ---------------------------------------- |
+| `~/.alex/global-knowledge/`         | `OneDrive/AI-Memory/`                    |
+| `patterns/GK-*.md`                  | Categories in global-knowledge.md        |
+| `insights/GI-*.md`                  | Entries in global-knowledge.md           |
+| `index.json`                        | Not needed (single file, searchable)     |
+| `Alex-Global-Knowledge` GitHub repo | OneDrive sync (automatic)                |
+| `skill-registry.json`               | Master Alex .github/skills/ is canonical |
 
-- `GI-agent-consolidation-pattern-kiss-merge-2026-02-09.md` — Lesson from merging duplicate agents
-- `GI-schema-migration-discrimination-flag-vs-change-2026-02-09.md` — Distinguishing migration types
-- `GI-post-upgrade-verification-checklist-2026-02-09.md` — Checklist developed after failed upgrade
+## Triggers
 
-### Source Priority for Promotion
-
-When curating from multiple projects:
-
-| Source Type                    | Priority | Rationale                                |
-| ------------------------------ | -------- | ---------------------------------------- |
-| Master Alex episodic memories  | Highest  | Core cognitive learnings                 |
-| Production project skill files | High     | Battle-tested knowledge                  |
-| Platform heir skill files      | Medium   | May have implementation-specific details |
-| Research/experimental projects | Lower    | May not be validated                     |
-| Archive content                | Lowest   | May be outdated                          |
-
-### Promotion Workflow
-
-Use the corresponding prompts in agent mode:
-
-- **promote prompt**: Interactive promotion from project DK
-- **saveinsight**: Quick insight capture (save to .github/global-knowledge/)
-- **knowledgestatus prompt**: Check current GK health
-- **knowledge prompt**: Search before adding (avoid duplicates)
-
----
-
-## First-Time Setup
-
-If you don't have a Global Knowledge repository yet:
-
-```powershell
-cd C:\Development  # or your projects folder
-gh repo create My-Global-Knowledge --private --description "Alex Global Knowledge Base" --clone
-cd My-Global-Knowledge
-mkdir patterns, insights, skills
-
-# Create index.json and README, then:
-git add -A
-git commit -m "feat: initialize global knowledge structure"
-git push
-```
-
-**Repository Location**: GK repo should be a sibling folder to your project workspace. Configure via `globalKnowledgeRepo` in `.github/config/alex-settings.json`.
-
-## Repository Maintenance
-
-### Index Integrity Audit
-
-**Script**: `~/.alex/global-knowledge/scripts/sync-index.ps1`
-
-```powershell
-cd ~/.alex/global-knowledge
-.\scripts\sync-index.ps1      # Report only
-.\scripts\sync-index.ps1 -Fix # Auto-fix
-```
-
-Scans all `GK-*.md` and `GI-*.md` files, deduplicates entries, adds missing files to index, removes orphaned entries.
-
-### Curation Triage
-
-| Decision                | Action                              | When                                          |
-| ----------------------- | ----------------------------------- | --------------------------------------------- |
-| **Keep**                | Leave in GK                         | Still accumulating, not ready for integration |
-| **Promote to Master**   | Create skill in Master Alex         | Core capability for all projects              |
-| **Document as Insight** | Convert to GI-\* with archival note | One-time contribution, history-worthy         |
-| **Archive**             | Move to `scripts/archive/`          | Outdated but worth keeping                    |
-| **Delete**              | Remove entirely                     | No longer relevant, superseded                |
-
-### Count Synchronization
-
-After curation, verify counts match between `copilot-instructions.md` and disk:
+- "save insight", "promote to global", "consolidate"
+- "search knowledge", "have I solved this before?"
+- "global knowledge", "cross-project"
 
 ```powershell
 $patterns = (Get-ChildItem patterns\GK-*.md).Count

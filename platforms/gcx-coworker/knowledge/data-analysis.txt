@@ -1,0 +1,234 @@
+Data Analysis and Visualization
+
+=== EXPLORATORY DATA ANALYSIS PIPELINE ===
+
+Phase 1 — Profiling:
+For any dataset, start here. Capture before doing anything else:
+- Row count, column count, column names and types
+- Missing values: count and percentage per column
+- Unique values per column (cardinality)
+- Sample rows (first 5 + random 5)
+- Date ranges if temporal data exists
+- File size and encoding
+
+Phase 2 — Descriptive Statistics:
+For numeric columns: mean, median, mode, std dev, min, max, quartiles (Q1, Q3, IQR)
+For categorical: value counts, top-N categories, category distribution
+Flag: skewness > 1 or < -1, kurtosis > 3, coefficient of variation > 1
+
+Phase 3 — Distribution Analysis:
+- Histogram for each numeric column (10-20 bins)
+- Box plots to visualize outliers (points beyond 1.5x IQR)
+- Identify distribution shape: normal, skewed, bimodal, uniform, power-law
+- Check for floor/ceiling effects (data clustering at min/max)
+
+Phase 4 — Correlation and Relationships:
+- Correlation matrix (Pearson for linear, Spearman for monotonic)
+- High correlation threshold: abs(r) > 0.7 (flag for multicollinearity)
+- CAUTION: correlation is not causation. Check for confounders.
+- Simpson's Paradox: trend reverses when data is grouped — always check subgroups
+
+Phase 5 — Segmentation:
+- Group-by analysis: aggregate metrics by categorical columns
+- RFM segmentation: Recency, Frequency, Monetary (for customer data)
+- Cohort analysis: group by time period of first event
+- Cross-tabulation: frequency tables for category pairs
+
+Phase 6 — Time-Series (if temporal):
+- Decomposition: trend + seasonality + residual
+- Rolling windows: 7-day and 30-day moving averages
+- Year-over-year and period-over-period comparisons
+- Detect regime changes (structural breaks in the data)
+
+Phase 7 — Anomaly Detection:
+- Z-score method: flag points > 3 standard deviations
+- IQR method: below Q1 - 1.5*IQR or above Q3 + 1.5*IQR
+- Isolation: points that behave differently from their neighbors
+- Always verify anomalies before removing — they may be the insight
+
+=== INSIGHT TRANSLATION (DIKW) ===
+
+Raw statistics are Data. Your job is to climb the DIKW ladder:
+- Data: "Average response time is 4.2 hours"
+- Information: "Response time increased 23% from last quarter"
+- Knowledge: "The increase correlates with the 40% ticket volume spike after the product launch"
+- Wisdom: "Hire 2 temp agents for Q1 to prevent SLA breach during high-volume periods"
+
+Insight Statement Template:
+WHAT: [observation with specific numbers]
+SO WHAT: [business impact or implication]
+NOW WHAT: [recommended action]
+STORY INTENT: [compare / change over time / distribution / etc.]
+CHART: [recommended visualization type]
+
+Example:
+WHAT: Region B resolution time (6.8 hours) is 2.4x the company average (2.8 hours)
+SO WHAT: Customers in Region B are 3x more likely to escalate, costing $45K/month in agent time
+NOW WHAT: Assign dedicated senior agent to Region B, review process bottleneck
+STORY INTENT: Deviation
+CHART: Horizontal bar with Region B highlighted, company average as reference line
+
+Hypothesis Framework:
+Before analysis, state: "I expect to find [X] because [Y]"
+After analysis: "I found [Z], which confirms/contradicts the hypothesis because [W]"
+This prevents data dredging (finding patterns after the fact and claiming intent)
+
+Analysis Anti-Patterns:
+- Cherry-picking: showing only data that supports your conclusion
+- Survivorship bias: analyzing only successes, ignoring failures
+- Base rate neglect: "90% accuracy" means nothing without base rate
+- Texas sharpshooter: finding pattern in noise, drawing target around it
+- P-hacking: running many tests until something is "significant"
+- Ecological fallacy: applying group trends to individuals
+
+=== CHART SELECTION BY STORY INTENT ===
+
+Match the story you want to tell to the right chart:
+
+Compare (how do items rank or differ):
+- Detection: "which is bigger", "rank", "vs", "compare", "benchmark"
+- Charts: grouped bar (few categories), dot plot (many items), slope chart (2 time points), bullet chart (actual vs target)
+- Rule: sort by value, not alphabetically
+
+Change Over Time (what's the trend):
+- Detection: "trend", "over time", "monthly", "growth", "forecast"
+- Charts: line chart (continuous), area chart (volume emphasis), sparkline (inline context)
+- Rule: time on x-axis, consistent intervals, annotate inflection points
+
+Part-to-Whole (what's the composition):
+- Detection: "share", "proportion", "breakdown", "percentage", "composition"
+- Charts: stacked bar (categories + time), treemap (hierarchical), waffle chart (small counts)
+- Rule: never pie chart with more than 4 slices; prefer horizontal stacked bar
+
+Distribution (what's the spread):
+- Detection: "spread", "distribution", "histogram", "range", "outliers"
+- Charts: histogram, box plot, violin plot, beeswarm
+- Rule: show full distribution, not just average
+
+Relationship (are these connected):
+- Detection: "correlation", "relationship", "drives", "predicts", "association"
+- Charts: scatter plot, bubble chart, heatmap (correlation matrix)
+- Rule: avoid implying causation from correlation
+
+Flow (where does it go):
+- Detection: "flow", "path", "conversion", "funnel", "journey"
+- Charts: Sankey diagram, funnel chart, alluvial
+- Rule: show volume loss at each stage
+
+Hierarchy (what contains what):
+- Detection: "org", "structure", "nested", "contains", "parent-child"
+- Charts: treemap, sunburst, org chart
+- Rule: size = value, color = category
+
+Spatial (where is it):
+- Detection: "region", "geography", "location", "map", "where"
+- Charts: choropleth map, dot map, cartogram
+- Rule: normalize by population/area when comparing regions
+
+Deviation (how far from normal):
+- Detection: "variance", "deviation", "gap", "difference from target", "anomaly"
+- Charts: diverging bar, bullet chart, reference line overlay
+- Rule: clearly mark the baseline/reference
+
+=== COLOR AND ACCESSIBILITY ===
+
+Tableau 10 Palette (colorblind-safe default):
+#4e79a7 (blue), #f28e2b (orange), #e15759 (red), #76b7b2 (teal),
+#59a14f (green), #edc948 (yellow), #b07aa1 (purple), #ff9da7 (pink),
+#9c755f (brown), #bab0ac (gray)
+
+Color Usage Rules:
+- Categorical: max 6-8 distinct colors, then group into "other"
+- Sequential: single hue light-to-dark for continuous data (low to high)
+- Diverging: two hues with neutral midpoint (below/above target)
+- WCAG contrast: minimum 4.5:1 ratio for text, 3:1 for graphic elements
+- Never rely on color alone — add patterns, labels, or shapes as redundant encoding
+
+Decluttering Rules:
+- Remove: 3D effects, gridlines (or make very subtle), unnecessary borders, chart junk, gradient fills
+- Reduce: tick marks, legend (prefer direct labels), axis labels, decimal places
+- Emphasize: title as insight, key data points with annotations, reference lines
+- Gray out non-essential data to spotlight the story
+
+Annotation Hierarchy:
+- Title: state the insight, not the metric ("Revenue grew 34%" not "Revenue by Quarter")
+- Subtitle: context and time range ("Quarterly actuals, FY2024-FY2025")
+- Callout: arrow or highlight on key data point ("Q3 peak: $4.2M")
+- Footnote: source, methodology, caveats
+- Rule: every chart needs at least a title-as-insight and source attribution
+
+Small Multiples:
+Use when comparing the same metric across many categories. Same scale, same axes, arranged in grid. Better than one cluttered chart with 12 lines.
+
+=== DASHBOARD DESIGN ===
+
+Layout Patterns:
+- Inverted Pyramid: KPIs > hero chart > supporting charts > detail table (executives)
+- Z-Pattern: top-left > top-right > bottom-left > bottom-right (2 primary metrics)
+- F-Pattern: left column scanned top-down, detail on right (data-heavy analytics)
+- Narrative Scroll: top-to-bottom linear reading (data stories)
+
+Reading Order = Story Order:
+Layer 1 — KPI cards: "What's the headline?" (2 seconds)
+Layer 2 — Hero chart: "Show me the shape" (10 seconds)
+Layer 3 — Supporting charts: "What else?" (15 seconds)
+Layer 4 — Data table: "Give me the details" (as needed)
+Layer 5 — Drill-down: "Tell me more about X" (on demand)
+
+KPI Card Pattern (metric + delta + context):
+- Primary value: the headline number ("334M")
+- Label: what it measures ("Total Population")
+- Delta: change indicator with direction ("up 2.1% YoY")
+- Subtitle: time range or source
+- Rules: 3-6 KPIs max, each answers different "what?", include at least one delta, lead with most important in top-left
+
+Filter Architecture:
+- Global filter: top, below KPIs — affects all charts (region buttons, date range)
+- Cross-filter: click on chart — highlights related data elsewhere
+- Drill-through: click on item — opens detail view
+- Rules: active filter state clearly indicated, "Reset All" always available, filter changes animate (300ms transition)
+
+=== DATA STORYTELLING ===
+
+Cardinal Rule: Data stories have arguments, not just observations. "Here's what happened, here's why it matters, and here's what we should do."
+
+Three-Act Structure:
+- Setup: establish context and baseline (KPIs showing "here's how things were")
+- Conflict: reveal surprise, problem, or gap (hero chart showing the anomaly)
+- Resolution: deliver insight and recommendation (supporting charts + annotated insight)
+
+Big Idea Worksheet (write before building anything):
+"[Subject/audience] should [action/decision] because [evidence from data]."
+Example: "Engineering should prioritize Region B support because resolution time is 2.5x the company average."
+If you can't write this sentence, the analysis isn't done yet.
+
+Knaflic Method (Storytelling with Data):
+1. Understand context: who is the audience, what do they need to do
+2. Choose effective visual: story intent to chart type
+3. Eliminate clutter: remove everything that isn't data or supporting story
+4. Focus attention: color, size, position to direct the eye
+5. Tell a story: connect visuals with narrative text
+
+Audience-First Framing:
+- Executive (30 seconds): headline + action recommendation — KPI dashboard
+- Manager (2 minutes): context + options + trade-offs — dashboard with filters
+- Analyst (unlimited): full data + methodology + caveats — detailed report
+- General (1 minute): simple story, familiar visuals — annotated scroll narrative
+
+Visualization Anti-Patterns:
+- "Chart type first, data second" — start with story intent instead
+- Title just labels axes — write a sentence the viewer should conclude
+- Rainbow palette on categories — max 2-3 purposeful hues
+- Dual Y axes — implies false correlation, use two separate charts
+- Pie chart with 8+ slices — use sorted horizontal bar instead
+- 3D anything — distorts perception, adds zero information
+- Default gridlines — remove or make very subtle
+
+Quality Checks Before Delivery:
+- Big Idea sentence exists
+- Three-act structure identifiable (setup, conflict, resolution)
+- All titles are insights (no chart titled "Revenue by Quarter")
+- Same category = same color across all visuals
+- Every chart cites its data source
+- Hero chart has at least one callout annotation
+- Date range stated, "as of" timestamp included

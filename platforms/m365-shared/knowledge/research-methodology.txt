@@ -1,0 +1,150 @@
+Research Methodology
+
+=== RESEARCH-FIRST DEVELOPMENT ===
+
+Traditional: Requirements > Design > Code > Test
+AI-assisted: Research > Teach > Plan > Execute
+
+The quality of AI output is directly proportional to the quality of knowledge in its context. Invest in teaching before asking for output.
+
+Phase 0 — Research Sprint (Before Any Work):
+1. Competitive landscape analysis: understand prior art
+2. Technical feasibility research: deep documents (3-5 minimum)
+3. Architecture decision records: document key choices with rationale
+4. Core domain research: comprehensive domain knowledge
+5. Branding/identity decisions: project character and voice
+
+Each research document should: explore one domain exhaustively, cite sources (papers, best practices, competitive analysis), be structured with clear sections and examples, live in a docs/ or research/ directory.
+
+Phase 1 — Knowledge Encoding:
+- Skills: encode patterns and principles ("how does X work?")
+- Instructions: encode procedures ("how do I do X here?")
+- Agents: encode cognitive roles (builder = constructive, validator = adversarial)
+- Connections: wire knowledge together (2-4 links per new file)
+
+Phase 2 — Execute:
+With sufficient knowledge encoded, implementation becomes conversational. No re-explanation, no context loss, no hallucinated patterns.
+
+Without Research-First vs With:
+- Implementation quality: AI guesses vs follows documented patterns
+- Style consistency: varies per prompt vs single source of truth
+- Context between sessions: lost, must re-explain vs persists in files
+- Domain onboarding: each prompt re-teaches vs auto-loaded knowledge
+
+=== 4-DIMENSION GAP ANALYSIS ===
+
+When: before each major implementation phase
+Purpose: ensure knowledge coverage before work begins
+Decision gate: all 4 dimensions >= 75% coverage = proceed; any < 50% = research sprint needed
+
+The Four Dimensions:
+GA-S (Skills): "Does the AI know the patterns?" — domain knowledge, reusable techniques
+GA-I (Instructions): "Does the AI know the procedures?" — project-specific workflows
+GA-A (Agents): "Does the AI have the right roles?" — builder, validator, specialists
+GA-P (Prompts): "Does the AI have the right interactive workflows?" — guided commands, repeatable rituals
+
+Protocol per dimension:
+1. Inventory what you're building (list all subsystems, features, integrations)
+2. Inventory existing knowledge (catalogue across all 4 dimensions)
+3. Map capabilities to needs (for each subsystem, is there a skill/instruction/agent/prompt?)
+4. Score coverage percentage per dimension
+5. Fill gaps before coding
+
+Minimum Viable Agent Set (Two-Agent Pattern):
+- Builder: constructive thinker, "How do I create this?"
+- Validator: adversarial thinker, "How do I break this?"
+- Why separate: adversarial thinking needs different context than constructive thinking
+
+=== BOOTSTRAP LEARNING ===
+
+Turn any unfamiliar domain into structured knowledge through 5 phases.
+
+Phase 1 — Discovery (Map the Territory):
+- Boundary mapping: "What does X include and exclude?"
+- Vocabulary scan: "What are the 5 key terms?"
+- Expert identification: "Who are the authorities?"
+- Adjacent domains: "What's related but different?"
+- Exit criteria: can describe the domain in one sentence, can list 5-10 key terms
+
+Phase 2 — Foundation (Nail Core Concepts):
+- Ask for simplest possible explanation of each core concept
+- Demand concrete examples, not abstractions
+- Test understanding by explaining back in your own words
+- Red flag: if explanation uses jargon from the same domain, you haven't bottomed out
+- Exit criteria: can explain core concepts without jargon, can answer "why does this exist?"
+
+Phase 3 — Elaboration (Add Depth Through Cases):
+- Happy path: how it works normally
+- Edge cases: where it breaks
+- Anti-patterns: common mistakes beginners make
+- Trade-offs: when would you NOT use this?
+- Exit criteria: can identify when to use and when NOT to use the thing
+
+Phase 4 — Connection (Link to Existing Knowledge):
+- Map analogies: "This is like [existing concept] because..."
+- Find contradictions: "This conflicts with [existing belief], which is right?"
+- Identify synergies: "Combining this with [skill X] could improve..."
+- Exit criteria: at least 2 connections to existing skills identified
+
+Phase 5 — Consolidation (Create Persistent Memory):
+- Domain reference knowledge: store as skill file
+- Step-by-step procedure: store as instruction file
+- Interactive workflow: store as prompt file
+- Cross-project pattern: store in global knowledge
+- Exit criteria: at least one memory file created, connections updated
+
+Gap Identification Patterns:
+- "I don't know the right question" = vocabulary gap, return to Phase 1
+- "I understand words but not concept" = foundation gap, return to Phase 2
+- "I understand but can't apply" = elaboration gap, return to Phase 3
+- "I know this but it feels isolated" = connection gap, Phase 4
+- "I keep re-learning this" = consolidation gap, Phase 5
+
+Progressive Depth Questioning:
+1. What: "What is X?" (definition)
+2. Why: "Why does X exist?" (motivation)
+3. How: "How does X work?" (mechanism)
+4. When: "When should I use X?" (context)
+5. When not: "When should I NOT use X?" (boundaries)
+
+Feynman Check:
+If you can't explain it in one paragraph without jargon, you don't understand it well enough. Loop back to the unclear part.
+
+=== PROMPT ENGINEERING ===
+
+Prompt Anatomy:
+1. System Prompt: role and constraints ("You are a senior code reviewer...")
+2. Context: background information ("The codebase uses TypeScript...")
+3. Examples: few-shot patterns (Input: X > Output: Y)
+4. Task: what to do ("Review this pull request for...")
+5. Format: output structure ("Respond in JSON with fields...")
+
+Core Techniques:
+
+Zero-Shot: direct instruction without examples
+- Best for: simple, well-defined tasks the model understands
+
+Few-Shot: provide examples to demonstrate the pattern
+- Best for: nuanced tasks, custom formats, domain-specific patterns
+
+Chain-of-Thought (CoT): ask to think step-by-step before answering
+- Best for: math, logic, multi-step reasoning, complex analysis
+
+Self-Consistency: generate multiple reasoning paths, take majority vote
+- Best for: high-stakes decisions, reducing hallucination
+
+ReAct (Reason + Act): interleave reasoning with tool use
+- Best for: tasks requiring external information, tool-using agents
+
+System Prompt Patterns:
+- Role definition: "You are a senior architect with 15 years of distributed systems experience"
+- Constraint setting: "Never suggest deprecated APIs. If unsure, say so."
+- Output format: "Respond in this exact JSON format: { summary, severity, suggestions }"
+- Persona + audience: "You are explaining to a junior developer who knows Python but is new to async"
+
+Prompt Anti-Patterns:
+- Vague instructions ("Make it better") — specify: "Improve readability by adding comments"
+- Conflicting rules ("Be concise but thorough") — prioritize: "Be concise. Add detail only if asked"
+- Assuming knowledge ("Use the standard format") — define the format explicitly
+- No error handling — add: "If you don't know, say so"
+- Overloading (10 tasks in one prompt) — break into focused prompts

@@ -1,0 +1,113 @@
+Cognitive Protocols
+===================
+
+Important: M365 Copilot agents can read OneDrive files but cannot write them directly. Protocols that update memory files generate the content and ask the user to save it. Always end with a clear save prompt.
+
+Memory folder: OneDrive > AI-Memory (shared across all AI surfaces).
+Contents: profile.md, notes.md, learning-goals.md, global-knowledge.md
+On first use, guide the user to create this folder and download templates from the project repo.
+
+VS Code access: OneDrive syncs to the local filesystem. The AI-Memory folder is accessible at the user's OneDrive sync path (e.g., ~/OneDrive/AI-Memory/ or %OneDrive%/AI-Memory/).
+
+Save prompt template: "I've prepared your updated [file]. To save it, open OneDrive > AI-Memory > [file] and replace the contents. Want me to show the full content to copy?"
+
+
+CONSOLIDATE — Session Knowledge Capture
+===
+
+Triggers: "consolidate", "reflect", "meditate", "save what we learned"
+Purpose: Organize learnings from conversation into persistent memory.
+
+1. Review conversation for insights, patterns, new knowledge
+2. Extract key concepts and breakthrough discoveries
+3. Synthesize into actionable takeaways
+4. Determine the right target file:
+   - Session learnings, reminders, observations: notes.md
+   - Goal progress or new goals: learning-goals.md
+   - Profile/preference updates: profile.md
+   - Cross-project insights, reusable patterns: global-knowledge.md
+5. Present the complete updated file content in a code block for easy copying
+6. Ask user to save: "To keep these insights, save this to OneDrive > AI-Memory > [file]. Would you like me to help with anything else before you save?"
+
+Best practice: Consolidate at session end or after significant learning.
+
+
+MEMORY REVIEW — Maintenance and Cleanup
+===
+
+Triggers: "review memory", "memory maintenance", "dream", "clean up my notes"
+Purpose: Memory cleanup. Find stale, duplicate, or missing information.
+
+1. Search OneDrive for AI-Memory folder, read all files
+2. Identify stale information (outdated dates, completed tasks, resolved items)
+3. Find gaps (missing profile fields, incomplete notes, orphaned reminders)
+4. Check global-knowledge.md for outdated insights or patterns that no longer apply
+5. Suggest cleanup: items to remove, update, add
+6. Generate the complete updated file content in a code block for each file that changed
+7. Ask user to save: "I've updated [N] files. Save each to OneDrive > AI-Memory > [file]. Start with [most important file]?"
+
+Best practice: Review weekly or when memory feels cluttered.
+
+
+PROGRESS CHECK — Goal Assessment
+===
+
+Triggers: "progress check", "how am I doing", "self-actualize", "check my goals"
+Purpose: Deep assessment of growth, goals, and alignment.
+
+1. Read profile.md and learning-goals.md from OneDrive AI-Memory folder
+2. Assess each goal's progress, celebrate milestones (25%, 50%, 75%, 100%)
+3. Check notes.md for patterns (wins, struggles, recurring themes)
+4. Check global-knowledge.md for cross-project insights relevant to goals
+5. Identify genuine growth areas and areas needing attention
+6. Recommend next focus areas based on patterns
+7. Generate updated learning-goals.md with progress notes in a code block
+8. Ask user to save: "Your updated goals are ready. Save to OneDrive > AI-Memory > learning-goals.md to track this progress."
+
+Best practice: Check progress monthly or at major milestones.
+
+
+FOCUS SESSION — Structured Concentration
+===
+
+Triggers: "focus", "pomodoro", "deep work", "start a session"
+Duration: 25 min (Pomodoro), 50 min (Deep Work), or custom.
+
+1. Identify focus task (or pull from active learning goals)
+2. Check calendar for next interruption
+3. Set intention: "For the next X minutes, focus on [task]"
+4. If user gets distracted: gently redirect
+5. Check-in when time's up: How did it go?
+6. Log entry: [date] [duration] [task] [outcome]
+7. Suggest break (5 min after session, 15-30 min after 4 sessions)
+
+Note: No save step needed. Focus sessions are self-contained within the conversation.
+
+
+GOAL UPDATE
+===
+
+Triggers: "update goal progress", "goal check-in", "update my goals"
+
+1. Read learning-goals.md from OneDrive AI-Memory folder
+2. Ask for progress update on each active goal (0-100%)
+3. Celebrate milestones, acknowledge challenges without judgment
+4. Generate updated learning-goals.md content in a code block
+5. Suggest next actions for stalled goals
+6. Ask user to save: "Your goals are updated. Save to OneDrive > AI-Memory > learning-goals.md?"
+
+
+GLOBAL KNOWLEDGE SYNC
+===
+
+Triggers: "sync knowledge", "what have I learned across projects", "global insights"
+Purpose: Surface and update cross-project insights stored in global-knowledge.md.
+
+1. Read global-knowledge.md from OneDrive AI-Memory folder
+2. If user is starting a new project or topic, check for relevant existing insights
+3. If user discovered something reusable, draft a new insight entry:
+   - Topic, source, insight, where it applies, date
+4. Present updated global-knowledge.md in a code block
+5. Ask user to save: "New insight added. Save to OneDrive > AI-Memory > global-knowledge.md?"
+
+Best practice: When you notice a pattern that would help in other projects, suggest adding it to global knowledge.

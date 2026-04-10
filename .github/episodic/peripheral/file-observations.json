@@ -1,24 +1,38 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "alex_docs/architecture/GK-PATTERN-FORMAT-STANDARD.md",
+    "alex_docs/architecture/GLOBAL-KNOWLEDGE-SHARING.md",
+    "alex_docs/architecture/GLOBAL-KNOWLEDGE.md",
+    "alex_docs/architecture/MEMORY-SYSTEMS.md",
+    "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md",
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "alex_docs/platforms/M365-HEIR-COMPARISON.md",
+    "docs/platforms/m365-copilot/README.md",
+    "docs/platforms/m365-copilot/index.html",
+    "docs/platforms/m365-copilot/taskpane/office-operations.js"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "file": "docs/platforms/m365-copilot/taskpane/taskpane.html",
+      "todoCount": 3,
+      "scannedAt": 1775851812981
+    },
+    {
+      "file": "docs/platforms/m365-copilot/taskpane/office-operations.js",
       "todoCount": 2,
-      "scannedAt": 1775786124468
+      "scannedAt": 1775851812981
     },
     {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "file": "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md",
       "todoCount": 1,
-      "scannedAt": 1775786124468
+      "scannedAt": 1775851812981
     },
     {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "file": "docs/platforms/m365-copilot/taskpane/taskpane.js",
       "todoCount": 1,
-      "scannedAt": 1775786124468
+      "scannedAt": 1775851812981
     }
   ],
-  "lastUpdated": 1775786124468
+  "lastUpdated": 1775851812981
 }

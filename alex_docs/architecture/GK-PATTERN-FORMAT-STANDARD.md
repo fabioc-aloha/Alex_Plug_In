@@ -1,5 +1,7 @@
 # Global Knowledge Pattern Format Standard
 
+> **DEPRECATED (April 2026)**: The GK-\* pattern file format is superseded by category-based entries in **OneDrive AI-Memory/global-knowledge.md**. See `global-knowledge-curation.instructions.md` for the current entry format. This document is retained for historical reference.
+
 > Standardized format for skill patterns in Global Knowledge (`~/.alex/global-knowledge/patterns/`)
 
 ---

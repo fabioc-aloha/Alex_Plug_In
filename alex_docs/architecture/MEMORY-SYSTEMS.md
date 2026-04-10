@@ -359,64 +359,52 @@ When providing reference photos: **NEVER describe physical appearance** (hair co
 
 ---
 
-## Global Knowledge
+## Global Knowledge (AI-Memory)
 
 ### Purpose
 
-Stores **cross-project wisdom** - patterns and insights that apply anywhere.
+Stores **cross-project wisdom** — patterns and insights that apply anywhere, accessible across all platforms.
 
 ### Location
 
+| Platform           | Path                    | Access                           |
+| ------------------ | ----------------------- | -------------------------------- |
+| VS Code            | `%OneDrive%/AI-Memory/` | Local OneDrive sync              |
+| M365 Copilot       | OneDrive `AI-Memory/`   | OneDriveAndSharePoint capability |
+| M365 Agent Builder | OneDrive `AI-Memory/`   | OneDriveAndSharePoint capability |
+
 ```
-~/.alex/
-├── global-knowledge/
-│   ├── index.json           # Knowledge index
-│   ├── patterns/            # Reusable patterns (GK-*)
-│   │   ├── GK-error-handling-patterns.md
-│   │   └── ...
-│   └── insights/            # Timestamped learnings (GI-*)
-│       ├── GI-react-effect-cleanup-2026-01-24.md
-│       └── ...
-├── project-registry.json    # Known projects
-└── sync-metadata.json       # Cloud sync state
+OneDrive/
+└── AI-Memory/
+    ├── profile.md          # Identity, preferences, expertise
+    ├── global-knowledge.md # Cross-project patterns and insights
+    ├── notes.md            # Quick notes and session context
+    └── learning-goals.md   # Active learning objectives
 ```
 
-### Entry Types
+### Entry Format
 
-**Patterns (GK-*):**
+All cross-project knowledge lives in `global-knowledge.md`, organized under category headings:
 
-- Reusable across many projects
-- Not time-specific
-- Example: "Error Handling Best Practices"
+```markdown
+## Azure Patterns
 
-**Insights (GI-*):**
+### SWA Authentication
+- **Source**: SurveyOps project
+- **Insight**: Use staticwebapp.config.json routes for auth, not middleware
+- **Date**: 2026-03-15
 
-- Specific learning moments
-- Timestamped
-- Example: "React useEffect cleanup order"
+## Frontend Patterns
 
-### Index Structure
+### Tailwind Breakpoints
+- **Source**: Multiple projects
+- **Insight**: Always use mobile-first with sm/md/lg breakpoints
+- **Date**: 2026-02-20
+```
 
-```json
-{
-  "version": "1.0.0",
-  "lastUpdated": "2026-01-24T10:30:00.000Z",
-  "cloudGistId": "abc123...",
-  "entries": [
-    {
-      "id": "GK-error-handling-patterns",
-      "title": "Error Handling Patterns",
-      "type": "pattern",
-      "category": "error-handling",
-      "tags": ["try-catch", "async", "typescript"],
-      "sourceProject": "my-api-project",
-      "created": "2026-01-20T...",
-      "modified": "2026-01-24T...",
-      "summary": "Best practices for...",
-      "filePath": "/Users/.../.alex/global-knowledge/patterns/GK-..."
-    }
-  ]
-}
+### Legacy System (Deprecated April 2026)
+
+> The `~/.alex/global-knowledge/` folder, `Alex-Global-Knowledge` GitHub repo, GK-\*/GI-\* file format, index.json schema, and skill-registry.json are all superseded by `AI-Memory/global-knowledge.md`. See [GLOBAL-KNOWLEDGE.md](./GLOBAL-KNOWLEDGE.md) for the historical reference.
 ```
 
 ---
@@ -441,12 +429,12 @@ flowchart TD
     SK_SEARCH --> RESULTS
 
     RESULTS -->|Yes| RETURN[Return Results]
-    RESULTS -->|No| GLOBAL[Search Global Knowledge<br/>Unconscious Fallback]
+    RESULTS -->|No| GLOBAL[Search AI-Memory<br/>OneDrive global-knowledge.md]
 
-    GLOBAL --> GK_SEARCH[Search ~/.alex/]
+    GLOBAL --> GK_SEARCH[Search AI-Memory/]
     GK_SEARCH --> GK_RESULTS{Found?}
 
-    GK_RESULTS -->|Yes| AUGMENT[Return with<br/>Global Results]
+    GK_RESULTS -->|Yes| AUGMENT[Return with<br/>AI-Memory Results]
     GK_RESULTS -->|No| EMPTY[No Results]
 ```
 
@@ -466,26 +454,18 @@ flowchart LR
     subgraph "Promotion Process"
         CMD["Promote action"]
         COPY[Copy content]
-        INDEX[Update index]
-        SYNC[Trigger sync]
+        EDIT[Update global-knowledge.md]
     end
 
-    subgraph "Global (User)"
-        GK[GK-topic.md]
-        IDX[index.json]
-    end
-
-    subgraph "Cloud"
-        GIST[Private GitHub Repo]
+    subgraph "AI-Memory (OneDrive)"
+        GK[global-knowledge.md<br/>category entry]
     end
 
     SK --> CMD
     CMD --> COPY
     COPY --> GK
-    CMD --> INDEX
-    INDEX --> IDX
-    INDEX --> SYNC
-    SYNC --> GIST
+    CMD --> EDIT
+    EDIT --> GK
 ```
 
 ---

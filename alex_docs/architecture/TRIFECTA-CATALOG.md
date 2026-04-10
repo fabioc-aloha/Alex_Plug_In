@@ -437,11 +437,11 @@ Capabilities with all three memory system components — each justified by the "
 
 ### Global Knowledge
 
-| Component   | File                                                             | Why It Exists                                                                    |
-| ----------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Skill       | `.github/skills/global-knowledge/SKILL.md`                       | Domain knowledge: GK/GI patterns, knowledge types, memory system differentiation |
-| Instruction | `.github/instructions/global-knowledge-curation.instructions.md` | Auto-loaded procedure: curation workflow, triage decisions, promotion criteria   |
-| Prompt      | `.github/prompts/knowledge.prompt.md`                            | `/knowledge` — user invokes global knowledge search, save, promote, or curate    |
+| Component   | File                                                             | Why It Exists                                                                        |
+| ----------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Skill       | `.github/skills/global-knowledge/SKILL.md`                       | Domain knowledge: AI-Memory patterns, knowledge types, memory system differentiation |
+| Instruction | `.github/instructions/global-knowledge-curation.instructions.md` | Auto-loaded procedure: curation workflow, triage decisions, promotion criteria       |
+| Prompt      | `.github/prompts/knowledge.prompt.md`                            | `/knowledge` — user invokes global knowledge search, save, promote, or curate        |
 
 **Inheritance**: `inheritable` — cross-project knowledge management universal
 
@@ -782,7 +782,7 @@ Heir-only trifecta → (proven useful) → Global Knowledge pattern → (general
 ```
 
 - **Heir-only**: Platform-specific, stays in heir's `.github/`
-- **Pattern-worthy**: The approach is generalizable → promote as `GK-*` pattern
+- **Pattern-worthy**: The approach is generalizable → add to AI-Memory/global-knowledge.md
 - **Full promotion**: Useful to ALL Alexes → promote all components to Master
 
 **Signal for promotion**: If 2+ heirs develop similar trifectas independently, that's a strong signal.

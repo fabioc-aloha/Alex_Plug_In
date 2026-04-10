@@ -1,5 +1,7 @@
 # 🌐 Global Knowledge Base
 
+> **DEPRECATED (April 2026)**: The `~/.alex/global-knowledge/` system, GK-\*/GI-\* file format, index.json, and `Alex-Global-Knowledge` GitHub repo are superseded by **OneDrive AI-Memory/global-knowledge.md**. See [MEMORY-SYSTEMS.md](./MEMORY-SYSTEMS.md) for the current architecture. This document is retained for historical reference.
+
 > Cross-project learning that travels with you
 
 **Related**: [Team Sharing](./GLOBAL-KNOWLEDGE-SHARING.md) · [Pattern Format](../architecture/GK-PATTERN-FORMAT-STANDARD.md) · [ADR-009](../decisions/ADR-009-global-knowledge-sync-direction.md)

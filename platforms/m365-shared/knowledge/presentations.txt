@@ -1,0 +1,121 @@
+Presentations and Slides
+
+=== VISUAL HIERARCHY ===
+
+The 3-Second Rule:
+Show a slide briefly, cover it, ask "What was the point?" If the answer isn't immediate, redesign.
+
+Hierarchy Elements (in order of visual weight):
+1. Title: main takeaway as a full sentence (not a label)
+2. Visual: evidence/illustration, center of attention
+3. Supporting text: clarification, minimal if any
+4. Source: credibility, small bottom corner
+
+Z-Pattern (sparse slides): eyes go top-left (title) > center-right (visual) > bottom-left (conclusion)
+F-Pattern (text-heavy slides): horizontal scan of headline > horizontal scan of key point > vertical scan down left
+
+White Space: not empty, it's breathing room. 10% margin on all sides minimum. Visual grouping through space, not borders.
+
+=== ASSERTION-EVIDENCE MODEL ===
+
+Traditional (weak):
+- Title: "Q4 Sales Results"
+- Body: bullet list of numbers
+
+Assertion-Evidence (strong):
+- Title: "Q4 revenue grew 15% to $2.3M, our best quarter ever"
+- Body: bar chart showing growth trend
+
+How to apply:
+1. Write the assertion (what you want them to believe)
+2. Find/create visual evidence (chart, diagram, image)
+3. Remove all unnecessary text
+4. Test: does the visual prove the assertion?
+
+Structure comparison:
+- Traditional title = topic label, body = bullet points, cognitive load = high
+- Assertion-Evidence title = full-sentence claim, body = visual evidence, cognitive load = low
+
+=== DATA ON SLIDES ===
+
+Chart Selection for Slides:
+- Comparison: bar chart (avoid pie — hard to compare)
+- Trend over time: line chart (avoid stacked bar)
+- Part of whole: stacked bar or treemap (avoid 3D pie)
+- Relationship: scatter plot (avoid bar)
+- Distribution: histogram or box plot (avoid pie)
+
+Visualization Rules for Slides:
+1. Title = insight: "Revenue doubled in 5 years" not "Revenue 2020-2025"
+2. Reduce chart junk: remove gridlines, 3D effects, borders, unnecessary legends
+3. Highlight the insight: color the key data point differently, gray out the rest
+4. Simplify scales: round numbers ($2.3M not $2,347,891), consistent intervals
+
+=== TYPOGRAPHY ===
+
+Font Guidelines:
+- Family: sans-serif (Calibri, Arial, Segoe UI)
+- Title: 32-44pt
+- Body: 24-28pt
+- Minimum readable: 18pt (even for source notes)
+- Max fonts: 2 (one for titles, one for body)
+
+Text Rules:
+- No sentences in bullets — bullets are prompts, not scripts
+- 6 words or less per bullet
+- Max 3 bullets per slide
+- Left-align text (easier to read than centered)
+- No ALL CAPS paragraphs
+
+=== COLOR AND IMAGES ===
+
+60-30-10 Rule:
+- 60% primary/neutral: background, most content
+- 30% secondary: supporting elements
+- 10% accent: calls to action, key insights
+
+Color Rules:
+- One dominant brand color (primary)
+- One accent for highlighting key data
+- Grays for supporting elements
+- Never red/green together (colorblind accessibility)
+- Test contrast: squint at slide, can you still read it?
+
+=== SLIDE TYPES ===
+
+Title Slide: large centered title, subtitle/context below, author/date at bottom, minimal text
+Section Divider: minimal text, bold color, signals transition
+Data Slide: insight headline at top, chart taking most of area, source at bottom
+Full-Image: full-bleed background, quote or key point overlaid in white with shadow
+Comparison: headline at top, split layout with Option A left and Option B right
+
+=== TOOL SELECTION ===
+
+Three tools, three strengths:
+
+Marp (Slides):
+- Input: Markdown
+- Output: HTML, PDF, PPTX
+- Best for: version-controlled technical docs, conference talks, internal updates
+- Strengths: Git-friendly, offline, multi-format from same source
+- Weakness: no AI generation, static only
+
+Gamma (Pitch):
+- Input: natural language prompt
+- Output: web link, exportable
+- Best for: pitch decks, rapid prototyping, client-facing deliverables
+- Strengths: AI-generated content and layout, professional polish
+- Weakness: cloud-hosted, no version control
+
+PptxGenJS (Auto):
+- Input: JSON/TypeScript
+- Output: native .pptx
+- Best for: automated reports, data-driven slides, batch generation
+- Strengths: programmatic, CI/CD integration, full Slide Master control
+- Weakness: medium learning curve, code-only
+
+Quick Decision:
+- Need AI to generate content from a topic? Use Gamma
+- Need programmatic generation from data? Use PptxGenJS
+- Need version control + Markdown workflow? Use Marp
+- Default: start with Marp (fastest to get started)

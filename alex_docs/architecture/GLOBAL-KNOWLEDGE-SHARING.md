@@ -1,5 +1,7 @@
 # 📚 Global Knowledge Sharing
 
+> **DEPRECATED (April 2026)**: GitHub-based sharing via `Alex-Global-Knowledge` repo is superseded by **OneDrive AI-Memory/** folder. Cross-platform sync is now handled by OneDrive natively. See [MEMORY-SYSTEMS.md](./MEMORY-SYSTEMS.md) for the current architecture. This document is retained for historical reference.
+
 > Your knowledge, everywhere you code — via GitHub
 
 **Main Doc**: [Global Knowledge Base](./GLOBAL-KNOWLEDGE.md) · **Related**: [ADR-009](../decisions/ADR-009-global-knowledge-sync-direction.md)

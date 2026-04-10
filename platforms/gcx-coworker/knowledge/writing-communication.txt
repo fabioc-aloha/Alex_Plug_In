@@ -1,0 +1,162 @@
+Writing and Communication
+
+=== AI WRITING AVOIDANCE ===
+
+AI-generated text has 5 telltale categories. Score any text against these to detect AI patterns.
+
+Big Five AI-Tell Categories:
+1. STRUCTURAL: Formulaic intro-body-conclusion, predictable paragraph length, topic sentence + 3 supporting + wrap-up
+2. LEXICAL: Overuse of "delve", "leverage", "landscape", "crucial", "foster", "beacon", "straightforward", "game-changer", "navigate", "multifaceted"
+3. HEDGING: "It's important to note", "It's worth noting", "It should be noted", excessive "however" and "furthermore"
+4. MECHANICAL: Perfect grammar (no contractions, no fragments), uniform sentence length, no personality
+5. FRAMING: "In today's [X]", "Let's dive in", "Let's unpack", "In conclusion"
+
+Dead Giveaway Phrases (never use these):
+- "It's important to note that" / "It's worth noting"
+- "In today's rapidly evolving landscape"
+- "Let's delve into" / "Let's dive in" / "Let's unpack"
+- "This comprehensive guide" / "In this article"
+- "Furthermore" / "Moreover" at paragraph start
+- "In conclusion" / "To summarize"
+- "Crucial" / "Pivotal" / "Paramount"
+- "Navigate the complexities"
+- "Foster innovation/growth/collaboration"
+- "Harness the power of"
+- "Shed light on"
+- "Game-changer" / "A testament to"
+
+Red Flag Scoring:
+- 0-2 flags: Naturally human
+- 3-5 flags: Needs revision (edit flagged sections)
+- 6-10 flags: Significant AI patterns (rewrite)
+- 11+ flags: Almost certainly AI-generated (full rewrite)
+
+Document Audit Checklist:
+Quick Scan (2 minutes):
+- Count em dashes — more than 2 per page signals AI
+- Search for dead giveaway phrases
+- Check first word of each paragraph — repeating patterns?
+- Read first and last sentences — formulaic opening/closing?
+
+Deep Scan (10 minutes):
+- Score against Big Five categories
+- Check sentence length variation (should vary 5-25 words)
+- Look for "topic sentence, 3 supporting points, wrap-up" pattern
+- Verify contractions exist (humans use them)
+- Check for genuine voice and personality
+
+Fixes:
+- Replace banned phrases with specific language
+- Vary sentence length deliberately — mix short punchy with longer structures
+- Add contractions (don't, we're, it's)
+- Start paragraphs differently — never 3 in a row with same word
+- Use active voice: "the team decided" not "it was decided"
+- Be specific: "reduced response time by 40%" not "significantly improved"
+- No em dashes — use colons, commas, periods, semicolons, or parentheses
+
+=== EXECUTIVE STORYTELLING ===
+
+Executive Mindset:
+- Average attention span for internal presentations: 5-8 minutes
+- They scan for: "What's the decision?", "What's the risk?", "What do you need from me?"
+- Lead with the conclusion. Supporting evidence follows.
+
+SCQA Framework (Situation-Complication-Question-Answer):
+- Situation: Stable context everyone agrees on. "We process 500 support tickets/day."
+- Complication: What changed or went wrong. "Volume grew 40% but headcount stayed flat."
+- Question: The natural question this raises. "How do we maintain SLA without hiring?"
+- Answer: Your recommendation. "Implement AI triage to handle 60% of tier-1 tickets."
+
+Pyramid Principle (Barbara Minto):
+- State conclusion first, then group supporting arguments
+- Each group follows MECE: Mutually Exclusive, Collectively Exhaustive
+- "So What?" test: every point must answer "why does this matter?"
+- Top-down structure: recommendation > supporting points > evidence
+
+Numbers That Stick:
+- Anchoring: "That's 50% more than last year"
+- Humanizing: "Each hour saved = 2,000 employees x $50/hr = $100K/year"
+- Comparison: "The cost of a coffee per employee per day"
+- Rounding: "$2.3M" not "$2,347,891.23"
+
+One-Page Summary Structure:
+- Headline: main recommendation (1 line)
+- Context: why now, what's at stake (2-3 lines)
+- Key findings: 3 bullets maximum
+- Recommendation: specific action (2-3 lines)
+- Ask: what you need from them (1-2 lines)
+- Next steps: immediate actions (2-3 lines)
+
+30-Second Elevator Pitch:
+"We need to [action] because [problem]. Our approach is [solution]. This will deliver [outcome] within [timeframe]. I need [ask] to proceed."
+
+5-Minute Executive Brief:
+0:00-0:30 — Headline and ask
+0:30-1:30 — Context and stakes
+1:30-3:30 — Evidence (3 key points)
+3:30-4:30 — Recommendation details
+4:30-5:00 — Specific ask and next steps
+
+Making the Ask:
+Every executive presentation needs a clear ask:
+- Decision: "Approve the $500K investment"
+- Input: "Share your concerns so we can address them"
+- Resource: "Allocate 3 FTEs for 6 months"
+- Alignment: "Confirm this direction before we proceed"
+- Escalation: "Remove the blocker with [stakeholder]"
+
+Objection Handling — Acknowledge-Bridge-Response:
+1. Acknowledge: "That's a fair concern..."
+2. Bridge: "What we've found is..."
+3. Response: "...which is why we recommend..."
+
+Preemption by type:
+- Cost objection: lead with ROI, payback period
+- Risk objection: acknowledge, present mitigations
+- Timing objection: show urgency cost of delay
+- Complexity objection: simplify, offer phased approach
+- Skepticism: cite precedent, pilot results
+
+Data Storytelling — Three Acts:
+- Act 1 (Setup): Context and stakes — why this matters now
+- Act 2 (Conflict): The problem/challenge — what's broken, what's at risk
+- Act 3 (Resolution): Your solution — what to do, expected outcomes
+
+Narrative Patterns:
+- Hero's Journey: current state > challenge > struggle > success (for transformation stories)
+- Discovery: what we believed > what we found > what this changes (for research findings)
+- Comparison: option A status quo > option B alternative > why B wins (for recommendations)
+
+=== STAKEHOLDER MANAGEMENT ===
+
+Power-Interest Grid:
+- High Power + High Interest: Manage Closely
+- High Power + Low Interest: Keep Satisfied
+- Low Power + High Interest: Keep Informed
+- Low Power + Low Interest: Monitor
+
+Stakeholder Profile Template:
+- Name/Role, Power Level, Current Position (support/oppose/neutral)
+- Desired Position, Key Concerns, Motivators
+- Communication Preference, Strategy to move them
+
+Influence Without Authority:
+- Reciprocity: do favors first, bank goodwill (building long-term allies)
+- Coalition: build supporter network (facing resistance)
+- Evidence: data, pilots, proof points (skeptical stakeholders)
+- Authority: executive sponsor, expert endorsement (borrowed credibility)
+- Social proof: industry examples, peer adoption (risk-averse stakeholders)
+
+Stakeholder Ladder: Opponent > Skeptic > Neutral > Supporter > Champion
+
+Communication Frequency:
+- Executive sponsor: weekly (1:1, brief updates)
+- Manage closely: 2x/week (meetings, direct calls)
+- Keep satisfied: bi-weekly (email summaries)
+- Keep informed: monthly (newsletters, dashboards)
+
+RACI Matrix:
+- Responsible: does the work
+- Accountable: owns the decision (one per task)
+- Consulted: input before decision
+- Informed: told after decision

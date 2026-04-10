@@ -16,14 +16,14 @@ description: "Practical guide for heirs to create project trifectas and apply re
 
 ## Quick Reference
 
-| Step | What | Time | Output |
-|------|------|------|--------|
-| **1** | Identify core capabilities | 15 min | Candidate list |
-| **2** | Run heir Why Test on each | 20 min | Trifecta / single-file classification |
-| **3** | Create missing trifecta components | 30 min per trifecta | Instruction + prompt files |
-| **4** | Run 4D gap analysis | 30 min | Gap report |
-| **5** | Fill gaps (research if needed) | Variable | New skills, instructions, prompts |
-| **6** | Validate with Dream | 5 min | 0 broken synapses |
+| Step  | What                               | Time                | Output                                |
+| ----- | ---------------------------------- | ------------------- | ------------------------------------- |
+| **1** | Identify core capabilities         | 15 min              | Candidate list                        |
+| **2** | Run heir Why Test on each          | 20 min              | Trifecta / single-file classification |
+| **3** | Create missing trifecta components | 30 min per trifecta | Instruction + prompt files            |
+| **4** | Run 4D gap analysis                | 30 min              | Gap report                            |
+| **5** | Fill gaps (research if needed)     | Variable            | New skills, instructions, prompts     |
+| **6** | Validate with Dream                | 5 min               | 0 broken synapses                     |
 
 ---
 
@@ -33,15 +33,15 @@ description: "Practical guide for heirs to create project trifectas and apply re
 
 A capability encoded in all three memory systems:
 
-| System | File | What It Encodes | When It Activates |
-|--------|------|-----------------|-------------------|
-| **Skill** | `SKILL.md` | Domain patterns, gotchas, "why" knowledge | When relevant files are open |
-| **Instruction** | `.instructions.md` | Step-by-step procedures, auto-loaded | Every session (always in context) |
-| **Prompt** | `.prompt.md` | Guided interactive workflow | When user invokes `/command` |
+| System          | File               | What It Encodes                           | When It Activates                 |
+| --------------- | ------------------ | ----------------------------------------- | --------------------------------- |
+| **Skill**       | `SKILL.md`         | Domain patterns, gotchas, "why" knowledge | When relevant files are open      |
+| **Instruction** | `.instructions.md` | Step-by-step procedures, auto-loaded      | Every session (always in context) |
+| **Prompt**      | `.prompt.md`       | Guided interactive workflow               | When user invokes `/command`      |
 
 **Not everything needs a trifecta.** Most skills work fine alone. A trifecta is for capabilities that are **central to this project's daily work**.
 
-> **Scripts are muscles, not memories.** Scripts (`.ps1`, `.js`, `.ts`) are execution artifacts that perform physical work — they are NOT a fourth memory system. Trifecta files *reference* scripts ("run `build.ps1` after step 3"), but scripts are never a trifecta component.
+> **Scripts are muscles, not memories.** Scripts (`.ps1`, `.js`, `.ts`) are execution artifacts that perform physical work — they are NOT a fourth memory system. Trifecta files _reference_ scripts ("run `build.ps1` after step 3"), but scripts are never a trifecta component.
 
 ### Step 1: Identify Your Core Capabilities
 
@@ -49,6 +49,7 @@ List the 3-5 capabilities most central to your project's daily work:
 
 ```markdown
 ## Project Core Capabilities
+
 1. [Capability A] — used daily, complex workflow
 2. [Capability B] — platform-specific, deep domain
 3. [Capability C] — user invokes by name regularly
@@ -56,6 +57,7 @@ List the 3-5 capabilities most central to your project's daily work:
 ```
 
 **Discovery questions:**
+
 - What does this project do every day?
 - What workflows have the most steps?
 - What domain knowledge is hardest to re-explain each session?
@@ -65,19 +67,19 @@ List the 3-5 capabilities most central to your project's daily work:
 
 For each candidate, answer four questions:
 
-| # | Question | YES means... | NO means... |
-|---|----------|-------------|-------------|
-| 1 | **Is this used daily/weekly?** | Needs procedural automation (instruction) | Single file may suffice |
-| 2 | **Are there patterns worth teaching?** (gotchas, best practices, "why" knowledge) | Needs a skill | Steps-only is fine |
-| 3 | **Do users invoke this by name?** ("scaffold X", "deploy Y") | Needs a prompt | Auto-loaded is fine |
-| 4 | **Is it too complex for one file?** (6+ steps, deep domain + procedures) | Trifecta candidate | Keep it simple |
+| #   | Question                                                                          | YES means...                              | NO means...             |
+| --- | --------------------------------------------------------------------------------- | ----------------------------------------- | ----------------------- |
+| 1   | **Is this used daily/weekly?**                                                    | Needs procedural automation (instruction) | Single file may suffice |
+| 2   | **Are there patterns worth teaching?** (gotchas, best practices, "why" knowledge) | Needs a skill                             | Steps-only is fine      |
+| 3   | **Do users invoke this by name?** ("scaffold X", "deploy Y")                      | Needs a prompt                            | Auto-loaded is fine     |
+| 4   | **Is it too complex for one file?** (6+ steps, deep domain + procedures)          | Trifecta candidate                        | Keep it simple          |
 
 **Classification:**
 
 ```
 ┌─ [capability-name]
 │  Q1 (Frequency):     [daily / weekly / monthly / rare]
-│  Q2 (Domain depth):  [deep / moderate / shallow]  
+│  Q2 (Domain depth):  [deep / moderate / shallow]
 │  Q3 (User-invoked):  [yes / no]
 │  Q4 (Complexity):    [6+ steps / 3-5 / 1-2]
 └─ Classification: TRIFECTA | INSTRUCTION+SKILL | SKILL-ONLY
@@ -85,12 +87,12 @@ For each candidate, answer four questions:
 
 **Decision matrix:**
 
-| Frequency | Domain Depth | User-Invoked | Complexity | → Classification |
-|-----------|-------------|-------------|-----------|-----------------|
-| Daily+ | Deep | Yes | 6+ steps | **Trifecta** |
-| Daily+ | Deep | No | 6+ steps | Instruction + Skill |
-| Weekly | Moderate | Yes | 3-5 steps | Instruction + Prompt |
-| Any | Shallow | Any | 1-2 steps | **Skill-only** (no trifecta needed) |
+| Frequency | Domain Depth | User-Invoked | Complexity | → Classification                    |
+| --------- | ------------ | ------------ | ---------- | ----------------------------------- |
+| Daily+    | Deep         | Yes          | 6+ steps   | **Trifecta**                        |
+| Daily+    | Deep         | No           | 6+ steps   | Instruction + Skill                 |
+| Weekly    | Moderate     | Yes          | 3-5 steps  | Instruction + Prompt                |
+| Any       | Shallow      | Any          | 1-2 steps  | **Skill-only** (no trifecta needed) |
 
 ### Step 3: Create Missing Components
 
@@ -98,9 +100,10 @@ For each trifecta candidate, create the missing files:
 
 #### Creating an Heir Instruction
 
-```markdown
+`````markdown
 <!-- .github/instructions/{capability}.instructions.md -->
-````instructions
+
+```instructions
 ---
 description: "{One-line description of the procedure}"
 applyTo: "**/*relevant-pattern*"
@@ -142,8 +145,10 @@ applyTo: "**/*relevant-pattern*"
 |-------|-----|
 | {common-problem-1} | {solution} |
 | {common-problem-2} | {solution} |
-````
 ```
+`````
+
+````
 
 #### Creating an Heir Prompt
 
@@ -170,17 +175,17 @@ Guide me through {what this prompt does}.
 
 ## Output
 {What the user should have at the end}
-```
+````
 
 #### Wiring Synapses
 
 Every trifecta component must reference the other two:
 
-| File | References |
-|------|-----------|
-| `SKILL.md` → `synapses` section | Instruction (Critical, Implements) + Prompt (High, Implements) |
-| `.instructions.md` → header synapses | Skill (Critical, Implements) + Prompt (High, Triggers) |
-| `.prompt.md` → context section | Skill (read for patterns) + Instruction (follow for steps) |
+| File                                 | References                                                     |
+| ------------------------------------ | -------------------------------------------------------------- |
+| `SKILL.md` → `synapses` section      | Instruction (Critical, Implements) + Prompt (High, Implements) |
+| `.instructions.md` → header synapses | Skill (Critical, Implements) + Prompt (High, Triggers)         |
+| `.prompt.md` → context section       | Skill (read for patterns) + Instruction (follow for steps)     |
 
 Add reverse synapses too — if Skill A references Instruction B, Instruction B should reference Skill A.
 
@@ -208,11 +213,11 @@ Research → Teach → Plan → Execute
 
 Before writing any code, create research documents:
 
-| Action | Output |
-|--------|--------|
+| Action                         | Output                             |
+| ------------------------------ | ---------------------------------- |
 | Research each technical domain | 3-5 deep research docs per project |
-| Record architecture decisions | ADR files with rationale |
-| Explore prior art | Competitive landscape analysis |
+| Record architecture decisions  | ADR files with rationale           |
+| Explore prior art              | Competitive landscape analysis     |
 
 **Quality gate**: Each research doc has code examples, decision rationale, and cited sources.
 
@@ -220,14 +225,15 @@ Before writing any code, create research documents:
 
 Transform research into loadable knowledge:
 
-| Research Finding | Encode As |
-|-----------------|-----------|
-| Reusable patterns, concepts, "why" knowledge | **Skill** in `.github/skills/{name}/SKILL.md` |
+| Research Finding                              | Encode As                                                        |
+| --------------------------------------------- | ---------------------------------------------------------------- |
+| Reusable patterns, concepts, "why" knowledge  | **Skill** in `.github/skills/{name}/SKILL.md`                    |
 | Repeatable procedures, step-by-step workflows | **Instruction** in `.github/instructions/{name}.instructions.md` |
-| Roles with distinct mental models | **Agent** in `.github/agents/{name}.agent.md` |
-| Interactive guided workflows | **Prompt** in `.github/prompts/{name}.prompt.md` |
+| Roles with distinct mental models             | **Agent** in `.github/agents/{name}.agent.md`                    |
+| Interactive guided workflows                  | **Prompt** in `.github/prompts/{name}.prompt.md`                 |
 
-**Minimum encoding**: 
+**Minimum encoding**:
+
 - 1-3 skills per research document
 - 1 context instruction (the project hub: `{project}-context.instructions.md`)
 - 1 workflow instruction (coding conventions: `{project}-development-workflow.instructions.md`)
@@ -237,16 +243,17 @@ Transform research into loadable knowledge:
 
 Before each implementation phase, audit knowledge coverage across all four dimensions:
 
-| Dimension | Code | Question |
-|-----------|------|----------|
-| **Skills** | GA-S | "Does Alex know the *patterns* for every subsystem in this phase?" |
-| **Instructions** | GA-I | "Does Alex know the *procedures* for every workflow?" |
-| **Agents** | GA-A | "Does Alex have the right *roles*?" (Builder ✓ Validator ✓ Specialists?) |
-| **Prompts** | GA-P | "Does Alex have the right *interactive workflows*?" |
+| Dimension        | Code | Question                                                                 |
+| ---------------- | ---- | ------------------------------------------------------------------------ |
+| **Skills**       | GA-S | "Does Alex know the _patterns_ for every subsystem in this phase?"       |
+| **Instructions** | GA-I | "Does Alex know the _procedures_ for every workflow?"                    |
+| **Agents**       | GA-A | "Does Alex have the right _roles_?" (Builder ✓ Validator ✓ Specialists?) |
+| **Prompts**      | GA-P | "Does Alex have the right _interactive workflows_?"                      |
 
 **For each dimension**: List what you're building → check coverage → score percentage → fill gaps.
 
 **Decision gate:**
+
 - All 4 ≥ 75%: **Proceed to coding**
 - Any < 75%: **Fill gaps first**
 - Any < 50%: **Research sprint needed**
@@ -256,6 +263,7 @@ Use the `/gapanalysis` prompt for interactive guidance.
 ### Step 4: Execute with Full Context
 
 With knowledge encoded:
+
 - No re-explanation between sessions (skills auto-load)
 - No hallucinated patterns (documented patterns available)
 - No inconsistent quality (every subsystem has a skill)
@@ -266,6 +274,7 @@ With knowledge encoded:
 
 ```markdown
 ## Pre-Phase Checklist
+
 - [ ] Research: 1-2 docs on new domains
 - [ ] Skills: 1 skill per new subsystem
 - [ ] Instructions: Dev workflow instruction exists
@@ -278,6 +287,7 @@ With knowledge encoded:
 
 ```markdown
 ## Pre-Phase Checklist
+
 - [ ] Research: 3-5 deep docs, ADRs for major decisions
 - [ ] Skills: 1-3 skills per research doc (5-10 total)
 - [ ] Instructions: Context hub + workflow + deployment + testing
@@ -310,14 +320,14 @@ Research-first and trifecta creation work together:
 
 ### Anti-Patterns
 
-| Anti-Pattern | Problem | Fix |
-|-------------|---------|-----|
-| **Checkbox trifecta** | Creating files to complete the set, not because they're needed | Run the Why Test first |
-| **Copy-paste trifecta** | Skill duplicates instruction content | Skill = patterns/why, Instruction = steps/how |
-| **Skipping research** | Encoding shallow knowledge produces shallow skills | Research sprint → validate with examples → then encode |
-| **Skills-only gap analysis** | Misses procedures, roles, workflows | Always run all 4 dimensions (GA-S/I/A/P) |
-| **No synapse wiring** | Files exist but Alex can't discover connections | Wire 2-4 synapses at creation time, always |
-| **"Just start coding"** | AI has no context, guesses at patterns | Research → Teach → Plan → Execute |
+| Anti-Pattern                 | Problem                                                        | Fix                                                    |
+| ---------------------------- | -------------------------------------------------------------- | ------------------------------------------------------ |
+| **Checkbox trifecta**        | Creating files to complete the set, not because they're needed | Run the Why Test first                                 |
+| **Copy-paste trifecta**      | Skill duplicates instruction content                           | Skill = patterns/why, Instruction = steps/how          |
+| **Skipping research**        | Encoding shallow knowledge produces shallow skills             | Research sprint → validate with examples → then encode |
+| **Skills-only gap analysis** | Misses procedures, roles, workflows                            | Always run all 4 dimensions (GA-S/I/A/P)               |
+| **No synapse wiring**        | Files exist but Alex can't discover connections                | Wire 2-4 synapses at creation time, always             |
+| **"Just start coding"**      | AI has no context, guesses at patterns                         | Research → Teach → Plan → Execute                      |
 
 ### Mission-Critical Projects (NASA Standards)
 
@@ -325,6 +335,7 @@ For **safety-critical**, **mission-critical**, or **high-reliability** heir proj
 
 ```markdown
 ## Pre-Phase Checklist (Mission-Critical)
+
 - [ ] All recursive functions have `maxDepth` parameter
 - [ ] All `while` loops have `MAX_ITERATIONS` counter
 - [ ] All arrays/maps have maximum size limits
@@ -341,25 +352,25 @@ For **safety-critical**, **mission-critical**, or **high-reliability** heir proj
 
 ### When Improvements Should Promote to Master
 
-| Signal | Action |
-|--------|--------|
-| Capability is platform-specific (only this heir uses it) | Keep in heir's `.github/` |
-| The *pattern* is generalizable (other projects could use the approach) | Promote as `GK-*` pattern to Global Knowledge |
-| Capability is useful to ALL Alexes | Full promotion via `heir-skill-promotion.instructions.md` |
-| 2+ heirs develop similar capabilities independently | Strong signal for Master promotion |
+| Signal                                                                 | Action                                                          |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Capability is platform-specific (only this heir uses it)               | Keep in heir's `.github/`                                       |
+| The _pattern_ is generalizable (other projects could use the approach) | Add to AI-Memory/global-knowledge.md under appropriate category |
+| Capability is useful to ALL Alexes                                     | Full promotion via `heir-skill-promotion.instructions.md`       |
+| 2+ heirs develop similar capabilities independently                    | Strong signal for Master promotion                              |
 
 ---
 
 ## Synapse Triggers
 
-| Keyword | Activation |
-|---------|-----------|
-| "improve project" / "improve" | Full improvement workflow (trifecta + research-first) |
-| "create trifecta" / "heir trifecta" | Part 1: Trifecta creation |
-| "research first" / "before coding" | Part 2: Research-first development |
-| "gap analysis" / "4D" | Run /gapanalysis for 4-dimension audit |
-| "why test" | Trifecta candidate evaluation |
+| Keyword                             | Activation                                            |
+| ----------------------------------- | ----------------------------------------------------- |
+| "improve project" / "improve"       | Full improvement workflow (trifecta + research-first) |
+| "create trifecta" / "heir trifecta" | Part 1: Trifecta creation                             |
+| "research first" / "before coding"  | Part 2: Research-first development                    |
+| "gap analysis" / "4D"               | Run /gapanalysis for 4-dimension audit                |
+| "why test"                          | Trifecta candidate evaluation                         |
 
 ---
 
-*Instruction created: 2026-02-13 | Purpose: Teach heirs to build trifectas and apply research-first development*
+_Instruction created: 2026-02-13 | Purpose: Teach heirs to build trifectas and apply research-first development_

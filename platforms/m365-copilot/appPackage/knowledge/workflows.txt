@@ -1,376 +1,75 @@
-# Workflows — Multi-Step Processes
-
-> **RETRIEVAL DIRECTIVE**: When user asks about "research-first workflow", "release process", "code→meditate→ship", "weekly review workflow", or any multi-step process → Use this file for complete step-by-step guidance.
-
----
-
-## 🧘 Cognitive Maintenance Workflows
-
-### MEDITATE — Knowledge Consolidation
-
-**When:** After learning sessions or significant discoveries
-**Purpose:** Organize insights from conversation into memory
-
-**Steps:**
-1. Review conversation for insights, patterns, new knowledge
-2. Extract key concepts and breakthrough discoveries
-3. Synthesize learnings into actionable takeaways
-4. Generate content for memory files (notes.md, knowledge/*.md)
-5. Document session outcomes
-
-**Expected Output:**
-- Updated notes with timestamped learnings
-- New knowledge files for significant discoveries
-- Connections between new and existing knowledge
-
----
-
-### DREAM — Memory Maintenance
-
-**When:** Weekly or when memory feels cluttered
-**Purpose:** Clean up and reorganize knowledge files
-
-**Steps:**
-1. Scan Alex-Memory folder contents
-2. Identify stale information (outdated dates, completed tasks)
-3. Find gaps in profile or notes
-4. Suggest cleanup and reorganization
-5. Generate updated file content
-
-**Expected Output:**
-- List of stale items to remove
-- Gaps identified (missing profile fields, incomplete notes)
-- Suggested file updates
-
----
-
-### SELF-ACTUALIZE — Progress Assessment
-
-**When:** Monthly or at major milestones
-**Purpose:** Deep reflection on growth and wellbeing
-
-**Steps:**
-1. Review profile for current state
-2. Assess learning goals and progress percentages
-3. Check notes for patterns (wins, struggles, themes)
-4. Identify areas of growth and areas needing attention
-5. Celebrate genuine progress, acknowledge challenges
-
-**Expected Output:**
-- Goal progress summary with celebrations
-- Honest assessment of gaps and blockers
-- Recommendations for next focus areas
-
----
-
-## 🎯 Productivity Workflows
-
-### DAILY BRIEFING — Morning Prep
-
-**When:** Start of workday
-**Purpose:** Personalized summary to start productively
-
-**Implementation Steps:**
-1. **Time-Based Greeting**
-   - Generate contextual greeting based on time of day
-   - Example: "Good morning!" (6am-12pm), "Good afternoon!" (12pm-6pm)
-
-2. **Calendar Snapshot** (via Meetings capability)
-   - Query calendar for today's events
-   - Identify next 3-5 meetings with times
-   - Include meeting links (Teams, Zoom) if available
-   - Calculate total meeting hours vs available focus time
-
-3. **Email Highlights** (via Email capability)
-   - Count unread messages in inbox
-   - Identify important/flagged emails (top 2-3)
-   - Extract sender names and subjects
-   - Note any urgent action items
-
-4. **Goals & Progress** (via OneDrive capability)
-   - Read OneDrive/Alex-Memory/focus-trifectas.md
-   - Display active learning goals with progress
-   - Show current streak (consecutive days of progress)
-   - Highlight goals near milestone (25%, 50%, 75%, 100%)
-
-5. **Suggested Focus Blocks** (via Meetings capability)
-   - Find calendar gaps ≥ 2 hours
-   - Recommend deep work timing (morning preferred)
-   - Suggest task based on active goals or notes
-
-6. **Presence Check** (via People capability)
-   - Confirm user status (Available, Busy, etc.)
-   - Adjust recommendations if in Do Not Disturb
-
-**Expected Output:**
-```
-Good morning, Fabio!
-
-📅 Next 3 Meetings:
-• 10:00 AM — Team Standup (30 min) [Teams link]
-• 2:00 PM — Alex Roadmap Review w/ 3 attendees (1 hour)
-• 4:00 PM — 1:1 with Manager (30 min)
-
-📧 Inbox Status:
-• 12 unread messages
-• 2 flagged: "Q1 Planning" from Sarah, "Azure MCP Update" from Luis
-
-🎯 Active Goals:
-• M365 Integration → 75% (almost there! 💪)
-• Global Knowledge → 50% (halfway! 🚀)
-
-💡 Suggested Focus:
-• 11:00 AM - 2:00 PM (3-hour block available)
-• Recommended: Complete M365 Graph integration testing
-```
-
-**Conversation Starters:**
-- "Good morning briefing"
-- "Start my day"
-- "Morning summary"
-- "What's on my calendar today?"
-
----
-
-### FOCUS SESSION — Pomodoro
-
-**When:** User requests deep work
-**Purpose:** Structured concentration with accountability
-
-**Steps:**
-1. Identify focus task (or pull from active learning goals)
-2. Set intention: "For the next X minutes, focus on [task]"
-3. Work uninterrupted (track distraction attempts)
-4. Check-in when time's up: How did it go?
-5. Log session: 🍅 [date] [duration] - [task] - [outcome]
-6. Suggest break (5 min after session, 15-30 min after 4 sessions)
-
-**Duration Options:**
-- 25 minutes (Pomodoro)
-- 50 minutes (Deep Work)
-- Custom duration
-
----
-
-### MEETING PREP — Context Briefing
-
-**When:** Before important meetings
-**Purpose:** Comprehensive briefing from all available sources
-
-**Implementation Steps:**
-1. **Identify Target Meeting** (via Meetings capability)
-   - If user specifies meeting: Search by subject or time
-   - If "next meeting": Query calendar for next event after current time
-   - Extract: Subject, time, duration, location/link, agenda/body
-
-2. **Research Attendees** (via People capability)
-   - For each attendee (excluding user):
-     - Look up full profile (displayName, jobTitle, department)
-     - Identify reporting chain (manager, direct/indirect report)
-     - Check work location (office, remote)
-     - Note working patterns (timezone if different)
-
-3. **Email Context** (via Email capability)
-   - Search emails with each attendee in last 30 days
-   - Extract: Recent threads, key topics discussed
-   - Identify: Action items, decisions made, pending questions
-   - Flag: Any unread messages from attendees
-
-4. **Teams Context** (via TeamsMessages capability)
-   - Search Teams chats/channels with attendees
-   - Find: Recent conversations (last 7 days)
-   - Extract: Ongoing discussions, shared files, mentions
-
-5. **Meeting History** (via Meetings capability)
-   - Find: Previous meetings with same attendees
-   - Count: How many times met (weekly 1:1, first time, etc.)
-   - Check: Past meeting notes if in OneDrive/Alex-Memory/
-
-6. **Synthesize Briefing**
-   - Combine all sources into cohesive briefing
-   - Organize: Who (attendees), What (context), Why (objectives)
-   - Generate: Suggested talking points, questions to ask
-
-**Expected Output:**
-```
-Meeting Prep: "Alex Roadmap Review" — Today at 2:00 PM (1 hour)
-
-👥 Attendees (3):
-• Sarah Chen — Product Manager, Engineering
-  - Your manager, meet weekly 1:1
-  - Recent email: Asked about v5.8 timeline
-  - Teams: Mentioned Graph API priorities yesterday
-
-• Luis Martinez — Senior Developer, Platform Team
-  - Colleague, collaborated on 5 projects
-  - Recent email: Shared Azure MCP update docs
-  - No recent Teams messages
-
-• Jamie Park — UX Designer, Design Team
-  - First 1:1 meeting
-  - Job title: Senior UX Designer
-  - Department: Design Team, reports to Maria Lopez
-
-📧 Email Context:
-• Sarah sent roadmap questions (unread, 2 hours ago)
-• Luis shared MCP docs (read, includes action items)
-
-💬 Teams Context:
-• Sarah mentioned Graph API as priority (Design channel, yesterday)
-• No recent Teams discussions with Luis or Jamie
-
-🎯 Suggested Talking Points:
-1. Address Sarah's timeline questions (from unread email)
-2. Discuss Graph API integration status (per her Teams comment)
-3. Get Jamie's input on Office add-in UX (first design review)
-4. Review Luis's MCP docs and action items
-
-❓ Questions to Ask:
-• Jamie: What UX patterns work best for Office task panes?
-• Sarah: Should Graph integration block v5.8 or defer?
-• Luis: Are there Azure MCP lessons for M365 architecture?
-```
-
-**Conversation Starters:**
-- "Prep for my next meeting"
-- "Prep for [meeting name]"
-- "Who am I meeting with at [time]?"
-- "Research [person name] before my meeting"
-
----
-
-### WEEKLY REVIEW — End-of-Week Reflection
-
-**When:** End of work week
-**Purpose:** Reflection and planning
-
-**Steps:**
-1. Check calendar for meetings attended
-2. Summarize key email threads
-3. Highlight Teams discussions
-4. Review learning goal progress
-5. Count focus sessions (🍅 in notes.md)
-6. Celebrate wins, acknowledge challenges
-7. Generate week summary for notes.md
-
----
-
-## 💻 Development Workflows
-
-### RESEARCH-FIRST — Pre-Project Learning
-
-**When:** Starting new project or entering unknown domain
-**Purpose:** Build knowledge before writing code
-
-**Phase 0: Research Sprint**
-1. Identify domains the project touches
-2. Create deep research document per domain (min 3)
-3. Record architecture decisions (ADRs)
-4. Store in `/docs/` or `/research/`
-
-**Phase 1: Knowledge Encoding**
-1. Extract reusable patterns from research
-2. Create skills for domains (procedural memory)
-3. Create instructions for when/how (activation rules)
-4. Create prompts for workflows (user-facing)
-
-**Phase 2: Gap Analysis (4 Dimensions)**
-1. **Domain Coverage** — Do we have skills for all subsystems?
-2. **Depth** — Are skills complete (3-level disclosure)?
-3. **Activation** — Do instructions trigger correctly?
-4. **User Access** — Can users invoke via prompts?
-
-**Phase 3: Execute**
-1. Implement with reference to encoded knowledge
-2. Test against research expectations
-3. Validate gap analysis criteria met (≥75% all dimensions)
-
----
-
-### CODE → MEDITATE → SHIP — Standard Dev Cycle
-
-**When:** Implementing features or fixes
-**Purpose:** Maintain quality and learning while building
-
-**Steps:**
-1. **Plan** — Review roadmap, select next task
-2. **Research** — Check global knowledge for patterns
-3. **Implement** — Write code, referencing skills
-4. **Test** — Validate against acceptance criteria
-5. **Meditate** — Extract learnings, update knowledge
-6. **Ship** — Run release workflow
-
----
-
-### RELEASE — Build to Marketplace
-
-**When:** Ready to publish new version
-**Purpose:** Quality-gated deployment
-
-**Pre-Release Assessment:**
-1. Run brain-qa (synapse validation, Master-Heir sync)
-2. Detect uncommitted changes (get_changed_files)
-3. Assess version bump (patch/minor/major)
-4. Generate changelog entry
-5. Get Validator agent approval (adversarial review)
-
-**Build & Publish:**
-1. Update version in package.json
-2. Update CHANGELOG.md
-3. Sync Master → Heir architectures
-4. Run preflight checks (release-preflight.ps1)
-5. Build .vsix package (vsce package)
-6. Publish to VS Code Marketplace (vsce publish)
-7. Update roadmap status
-8. Run post-release meditation
-
-**Quality Gates:**
-- ✅ All synapses healthy
-- ✅ No uncommitted changes
-- ✅ Changelog complete
-- ✅ Validator approval
-- ✅ Preflight passed
-- ✅ Tests passing
-
----
-
-## 📚 Knowledge Management Workflows
-
-### GOAL TRACKING — Progress Check-In
-
-**When:** User requests goal update
-**Purpose:** Track learning with celebrations
-
-**Steps:**
-1. Read learning-goals.md
-2. Ask for progress update on each active goal (0-100%)
-3. Celebrate milestones:
-   - 25%: "Good start! 🌱"
-   - 50%: "Halfway there! 🚀"
-   - 75%: "Almost there! 💪"
-   - 100%: "Completed! 🎉"
-4. Generate updated learning-goals.md content
-5. Suggest next actions for stalled goals
-
----
-
-### GLOBAL KNOWLEDGE — Cross-Project Patterns
-
-**When:** User hits familiar problem
-**Purpose:** Leverage patterns from all projects
-
-**Steps:**
-1. Check OneDrive for synced knowledge files (GK-* patterns, GI-* insights)
-2. Search for topic-relevant patterns from past projects
-3. Present findings with source project context
-4. Suggest applying past learnings to current situation
-5. If new insight emerges, generate content for knowledge capture
-
-**Best Practice:** "We've seen this pattern before in [project]..."
-
----
-
-## 🎨 M365-Specific Workflows
+M365 Workflows
+
+DAILY BRIEFING
+Triggers: "good morning", "start my day", "daily briefing"
+1. Contextual greeting based on time of day
+2. Today's meetings with times, links, total meeting hours vs focus time
+3. Unread count, flagged emails (top 3), urgent action items
+4. Read AI-Memory/learning-goals.md, show active goals with progress, highlight near-milestones
+5. Find calendar gaps >= 2 hours, recommend deep work timing, suggest task from goals
+
+MEETING PREP
+Triggers: "prep for meeting", "prep for next meeting", "who am I meeting"
+1. Find meeting by name or get next upcoming — subject, time, duration, agenda
+2. For each attendee: name, title, department, manager
+3. Search last 30 days email with each attendee — threads, topics, action items
+4. Recent Teams conversations with attendees (last 7 days)
+5. Count previous meetings with same attendees — first-time or recurring
+6. Check AI-Memory/notes.md for reminders about meeting or attendees
+7. Synthesize: who + context, what + history, talking points, questions to ask
+
+PERSON LOOKUP
+Triggers: "tell me about [name]", "who is [name]"
+1. Profile: name, title, department, manager, location
+2. Recent email threads, topics, pending action items
+3. Recent Teams conversations, shared channels
+4. Meeting frequency, next scheduled meeting
+5. Any notes about this person in AI-Memory/notes.md
+
+WEEKLY REVIEW
+Triggers: "weekly review", "review my week"
+1. Meetings attended this week, total hours
+2. Key email threads, resolved and pending action items
+3. Important Teams discussions, decisions made
+4. Goal progress — calculate change from last week
+5. Count logged focus sessions in AI-Memory/notes.md
+6. Summary: wins, challenges, items for next week, content for AI-Memory/notes.md
+
+WORKLOAD CHECK
+Triggers: "am I overloaded?", "too many meetings"
+1. Meeting count and hours per day this week and next
+2. Find gaps >= 2 hours, flag days with none
+3. Flag risks: back-to-back meetings, days > 6 hours, weeks > 25 hours
+4. Check if learning goals are stalling due to meeting load
+5. Suggest: decline candidates, async alternatives, reschedule options
+
+DATA ANALYSIS
+Triggers: "analyze this data", "chart this", "visualize"
+1. Ask what the data represents and what question to answer
+2. Profile: shape, types, distributions, missing values, outliers
+3. Explore: correlations, trends, segmentation, anomalies
+4. Visualize with chart type by story intent
+5. Narrate: title = insight, annotate key findings, explain meaning
+6. Save charts/reports to OneDrive/Alex-Files/
+
+PRESENTATION GENERATION
+Triggers: "create a presentation", "make slides", "build a deck"
+1. Clarify: topic, audience, key message, slide count preference
+2. Outline: title + content slides + closing, 3-5 bullets max per slide
+3. Generate PPTX via python-pptx, save to OneDrive/Alex-Files/
+4. Present outline for feedback before generating
+5. Iterate based on feedback
+
+FIRST RUN SETUP
+Triggers: first conversation, "AI-Memory" folder not found
+1. Greet and introduce Alex
+2. Guide OneDrive setup: create AI-Memory/ folder
+3. Create profile.md (name, role, expertise, communication preferences)
+4. Create notes.md (empty, ready for session logging)
+5. Create learning-goals.md (3 goals with 0% progress)
+6. Create global-knowledge.md (empty, ready for cross-project insights)
+7. Ask user to share folder link and click "Allow"
+8. Verify access by reading profile.md, greet by name
 
 ### POWERPOINT GENERATION — Markdown to Slides
 

@@ -25,6 +25,20 @@
                 "brain-qa"
             ]
         },
+        "brain-qa.cjs": {
+            "inheritance": "master-only",
+            "description": "Cross-platform brain QA validation (master-only, full phases)",
+            "referencedBy": [
+                "brain-qa"
+            ]
+        },
+        "brain-qa-heir.cjs": {
+            "inheritance": "inheritable",
+            "description": "Cross-platform brain QA validation for heirs (renamed to brain-qa.cjs during sync)",
+            "referencedBy": [
+                "brain-qa"
+            ]
+        },
         "build-extension-package.ps1": {
             "inheritance": "master-only",
             "description": "Orchestrates master→heir build process",

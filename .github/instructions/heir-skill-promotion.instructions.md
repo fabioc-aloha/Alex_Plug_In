@@ -26,7 +26,7 @@ See [global-knowledge skill](../skills/global-knowledge/SKILL.md#promotion-candi
 | Resolution pattern with solution          | Temporary workarounds    |
 | Hard-won gotchas                          | Personal preferences     |
 | Architecture with rationale               | Incomplete/draft content |
-| Pipeline/workflow patterns                | Already exists in GK     |
+| Pipeline/workflow patterns                | Already exists in Master |
 | Integration patterns                      | Too specific names/IDs   |
 
 **Auto-promotion score ≥ 5**: synapses (+3), structure (+2), tags (+1), content size (+1-3), code examples (+2), general terms (+1-3)
@@ -217,11 +217,11 @@ weak/minimal → 0.3
 
 ### When Master Fulfills Wishlist
 
-1. **Review wishlist** in `skill-registry.json` (prioritize "high" items)
+1. **Review requests** in heir project issues or AI-Memory/notes.md
 2. **Create skill** in Master's `.github/skills/{skill-name}/`
-3. **Push to Global Knowledge**: `Copy-Item -Recurse` to `Alex-Global-Knowledge/skills/`
-4. **Update registry**: Move from `wishlist.items` to `recentlyFulfilled`
-5. **Commit both repos**: Master Alex + Global Knowledge
+3. **Heir sync** happens automatically during extension packaging
+4. **Log** the fulfillment in AI-Memory/notes.md
+5. **Commit** Master Alex
 
 ### Wishlist Item Lifecycle
 
@@ -264,11 +264,10 @@ weak/minimal → 0.3
 
 Heirs detect new skills via:
 
-- `/knowledge checkskills` command
-- Session start auto-check (if enabled)
+- Extension sync from Master .github/skills/
 - Project type matching against `projectSignals`
 
-**External Integration**: Global Knowledge skill registry (`~/.alex/global-knowledge/skills/`) tracks wishlist and skill distribution.
+**Cross-platform insights**: Notable skill patterns are also captured in AI-Memory/global-knowledge.md for access from M365 Copilot and other surfaces.
 
 ---
 
@@ -276,9 +275,9 @@ Heirs detect new skills via:
 
 ### `Alex: Inherit Skill from Global Knowledge`
 
-Manual process for heirs to pull skills from Global Knowledge:
+Manual process for heirs to pull skills from Master Alex:
 
-1. Check available inheritable skills in the Global Knowledge repository
+1. Check available inheritable skills in Master's .github/skills/
 2. Copy skill trifecta (instruction + skill + prompt) to the heir project
 3. Register in `synapses.json` with `inheritedFrom` tracking
 
@@ -288,27 +287,4 @@ Manual process for heirs to pull skills from Global Knowledge:
 - `inheritedFrom` tracking in `synapses.json` prevents drift
 - Master Alex protection warning (kill switch aware)
 
-**Inheritance Tracking**:
-
-```json
-{
-  "inheritedFrom": {
-    "source": "global-knowledge",
-    "registryId": "bicep-avm-mastery",
-    "version": "1.0.0",
-    "inheritedAt": "2026-02-11T15:00:00Z"
-  }
-}
-```
-
-### `Alex: Setup Global Knowledge`
-
-Configure Global Knowledge location:
-
-1. **Developer mode**: Links existing repo via junction symlink
-2. **End user mode**: Clones from GitHub to `~/.alex/global-knowledge/`
-
-**Auto-setup** runs silently on extension activation.
-
-**External Implementation**: VS Code extension inheritSkill command (High, Implements) - "skill inheritance command"
-**External Implementation**: VS Code extension setupGlobalKnowledge command (High, Implements) - "auto-setup functionality"
+**Note**: The legacy GitHub-based Global Knowledge repo (Alex-Global-Knowledge/) and its skill-registry.json have been replaced by the AI-Memory OneDrive folder for cross-platform knowledge and Master .github/skills/ as the canonical skill source.

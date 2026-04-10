@@ -1,0 +1,158 @@
+GCX Specialization — CX Organization Patterns
+
+=== GCX CONTEXT ===
+
+Organization: Global Customer Experience (GCX) at Microsoft
+Mission: customer satisfaction and support excellence
+Roles: developers, CX leaders, CX specialists, data scientists, program managers
+Tools: Microsoft 365, Teams, SharePoint, Power Platform, Azure, VS Code
+
+Key Metrics:
+- CSAT (Customer Satisfaction): post-interaction survey score
+- NPS (Net Promoter Score): likelihood to recommend (-100 to +100)
+- CES (Customer Effort Score): ease of getting help
+- Response Time: time from customer contact to first response
+- Resolution Rate: percentage of issues resolved on first contact
+- Escalation Rate: percentage of tickets escalated to higher tier
+
+=== SHAREPOINT ORGANIZATION FOR CX TEAMS ===
+
+Content Type to Location Mapping:
+- Process Documentation: /Documents/Processes/ (escalation procedures, workflow guides, SOPs)
+- Customer Templates: /Templates/Customer/ (email responses, status updates, escalation scripts)
+- Team Resources: /Resources/Team/ (org charts, contact lists, RACI matrices)
+- Project Archives: /Projects/{Year}/ (completed initiatives, lessons learned, post-mortems)
+- Policy Documents: /Policies/ (compliance guides, approval workflows, governance)
+- Meeting Records: /Meetings/{Year}/ (decision logs, action items, recurring meeting notes)
+
+SharePoint Search Tips:
+- Quotes for exact phrases: "customer escalation process"
+- File type filter: template filetype:docx
+- Property search: author:smith
+- Wildcards sparingly: customer* (can be slow)
+
+When to Search SharePoint vs Ask a Person vs Use Knowledge Files:
+- Standard process or template: SharePoint
+- Current work status or urgent: ask person directly
+- General professional knowledge: knowledge files
+- Historical decisions or archived projects: SharePoint meeting records
+- Who owns what: ask person or SharePoint team resources
+
+=== TEAMS COLLABORATION FOR CX ===
+
+Chat vs Channel vs Email:
+- Quick status check: Teams 1:1 chat (fast, real-time)
+- Project coordination: Teams channel (transparent, searchable)
+- Customer updates: email (professional, formal record, external recipients)
+- Urgent escalation: phone call + Teams chat follow-up
+- Document review: SharePoint comments + Teams notification
+- Cross-team requests: email with Teams follow-up loop
+
+Channel Structure for CX Teams:
+- General: team announcements, company news (all members)
+- Daily Standup: status updates, blockers (core project team)
+- Customer Escalations: active tracking, urgent issues (support leads, managers)
+- Process Improvement: workflow optimization, tool feedback (process owners)
+- Training and Resources: learning materials, best practices (all members)
+- Project: [Name]: time-bound project collaboration (project team only)
+
+Naming conventions: consistent prefixes (Project:, Client:, Initiative:), timeframes for temporary channels (Q2-Planning), archive completed project channels monthly.
+
+=== POWER PLATFORM FOR CX ===
+
+Common Power Automate Flows:
+- Customer Escalation Router: trigger on high-priority ticket > notify manager + create Teams chat
+- Survey Response Handler: trigger on Forms response > parse data + update tracking list
+- Meeting Follow-up: trigger on Teams meeting end > extract action items + assign tasks
+- Document Approval: trigger on new template upload > route to reviewers + track status
+- Status Report Generator: weekly schedule trigger > collect project updates + email summary
+- Customer Onboarding: trigger on new client added > create folder structure + send welcome email
+
+Flow Design Principles:
+- Keep simple: one clear trigger, direct actions
+- Add error handling: what happens if someone's out of office?
+- Descriptive names: "Customer Escalation Router v2"
+- Test with real data before going live
+
+Power BI Dashboard Patterns for CX:
+- Customer Health (daily): satisfaction scores, renewal rates, escalation counts (for account managers)
+- Team Performance (weekly): response times, case closure rates, workload distribution (for team leads)
+- Executive Summary (monthly): high-level trends, budget vs actual, strategic metrics (for leadership)
+- Project Status (real-time): timeline progress, milestone completion, resource utilization (for project teams)
+
+Power Apps for CX:
+- Customer Intake Form: branching logic, file attachments, approval routing
+- Escalation Tracker: status updates, owner assignment, SLA monitoring
+- Resource Finder: search by category, bookmarking, usage analytics
+
+=== EMAIL WORKFLOW PATTERNS ===
+
+When to Use Email vs Teams vs SharePoint:
+- External customer communication: email (professional, audit trail)
+- Internal team coordination: Teams (real-time, transparent)
+- Document status updates: SharePoint comments (context stays with document)
+- Formal approvals: email with cc/bcc (clear approval record)
+- Weekly status reports: email (scheduled delivery, formal record)
+- Policy or procedure changes: email notification + SharePoint update (source of truth)
+
+Email Templates for CX:
+- Customer Escalation Acknowledgment (within 2 hours): clear next steps, timeline, single point of contact
+- Project Status Update (weekly): executive summary, key metrics, risks/blockers
+- Customer Success Check-in (monthly for key accounts): satisfaction inquiry, resource offers, feedback request
+- Internal Handoff: complete context, customer preferences, history summary
+- Issue Resolution: solution summary, prevention steps, feedback request
+
+Inbox Management for High-Volume CX:
+- Touch each email once: read, respond, defer, or delete
+- Priority-based folders: Urgent, This Week, This Month, Reference
+- Quick Steps for common actions (forward + archive)
+- Schedule processing times (3x daily: 9am, 1pm, 5pm) instead of constant checking
+
+=== CALENDAR FOR DISTRIBUTED CX TEAMS ===
+
+Meeting Prep Workflow:
+- 48h before: send agenda with pre-reads (organizer)
+- 24h before: review materials, prepare questions (all attendees)
+- 2h before: test tech, prepare materials (presenter)
+- During: take notes in shared location (note-taker)
+- Within 24h: distribute action items (organizer)
+- 1 week after: follow up on commitments (action owners)
+
+Focus Time Protection:
+- 2-hour morning blocks for deep work
+- Check email/Teams 3x daily (not constantly)
+- Meeting-free Fridays (team agreement)
+- 15-minute buffer gaps between meetings
+- Use Outlook Focus Time auto-scheduling
+
+Time Zone Management:
+- Include time zones in invites: "2pm PT / 5pm ET"
+- Rotate meeting times for recurring cross-regional meetings
+- Record important meetings for those who can't attend
+- Use Scheduling Assistant for optimal overlap
+
+=== M365 COPILOT TIPS BY APP ===
+
+Copilot in Word:
+- Draft customer email: provide context (customer name, project, previous communication)
+- Summarize meeting notes: "Create executive summary highlighting decisions and action items"
+- Policy docs: "Convert bullet points into formal numbered procedure"
+- Always review and personalize before sending
+
+Copilot in Excel:
+- Use for data profiling, pivot table suggestions, formula help
+- Combine with Code Interpreter for complex analysis
+
+Copilot in Teams:
+- Meeting summaries: "Summarize key decisions and action items"
+- Channel catch-up: "What were the main discussions this week?"
+
+=== SUGGESTED PROMPTS ===
+
+Writing: "Score this email draft using the Red Flag system", "Rewrite to sound more human", "Write a one-page executive summary using SCQA"
+Data: "Walk me through a full EDA of this CSV", "What chart should I use for [data]?", "Build a three-act data story for the leadership review"
+Business: "Help me write a BRD", "Prioritize these requirements using MoSCoW", "Prepare a coaching conversation using GROW"
+Presentations: "Should I use Marp, Gamma, or PowerPoint?", "Review this slide deck for design mistakes"
+Research: "Help me learn about a topic I know nothing about", "What's the knowledge gap for this project?"
+Code: "I'm not a developer but need to review this PR", "Does this change need a security review?"
+M365: "How should our CX team organize SharePoint?", "Should this be a Teams channel post or email?"

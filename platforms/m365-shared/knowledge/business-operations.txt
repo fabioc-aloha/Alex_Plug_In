@@ -1,0 +1,207 @@
+Business Operations
+
+=== REQUIREMENTS AND ANALYSIS ===
+
+Requirements Hierarchy:
+- Business Requirements: what the organization needs ("increase customer retention by 15%")
+- Stakeholder Requirements: what users/stakeholders need ("see my ticket status in real time")
+- Solution Requirements: what the system must do (functional + non-functional)
+- Transition Requirements: what's needed to go from current to future state
+
+SMART Criteria (every requirement must pass):
+- Specific: clear, unambiguous statement
+- Measurable: quantifiable success criteria
+- Achievable: technically and organizationally feasible
+- Relevant: traces to a business need
+- Time-bound: has a deadline or milestone
+
+Elicitation Techniques:
+- Interviews: 1:1 with stakeholders, open-ended questions, follow "tell me about your typical day"
+- Workshops: Open > Diverge > Converge > Close pattern, max 8 participants
+- Document analysis: existing SOPs, system docs, error logs
+- Observation: watch users work, note workarounds they've created
+- Prototyping: low-fidelity mockups to validate understanding
+- Surveys: broad input, quantifiable patterns, use for prioritization
+
+Use Case Levels:
+- Summary: high-level business goal ("customer onboards successfully")
+- User Goal: complete task ("customer submits application form")
+- Subfunction: supporting step ("system validates email format")
+
+SIPOC Process Template:
+- Supplier: who provides input
+- Input: what triggers the process
+- Process: 5-7 high-level steps
+- Output: what the process produces
+- Customer: who receives the output
+
+Gap Analysis Framework:
+- Current state: documented as-is process
+- Desired state: target from requirements
+- Gap identification: missing capabilities, blockers, risks
+- Gap categories: people (skills, capacity), process (workflow, policy), technology (tools, integration)
+
+Gherkin Acceptance Criteria:
+- Given [precondition/context]
+- When [action/trigger]
+- Then [expected result]
+- And [additional conditions]
+
+Traceability Matrix:
+Every requirement traces: Business Need > Stakeholder Need > Solution Requirement > Test Case > Deliverable. Orphan requirements (no business trace) are scope creep candidates.
+
+=== PRIORITIZATION ===
+
+MoSCoW Method:
+- Must Have (~60% of effort): system fails without these
+- Should Have (~20%): important but not critical
+- Could Have (~20%): nice-to-have, first to cut
+- Won't Have (this time): explicitly deferred, documented for future
+Rule: if everything is "Must Have," the prioritization failed
+
+Kano Model:
+- Basic (must-be): expected, absence causes dissatisfaction, presence doesn't delight
+- Performance (one-dimensional): more is better, linear satisfaction
+- Excitement (attractive): unexpected delight, absence doesn't disappoint
+- Indifferent: customer doesn't care either way
+- Reverse: feature actively annoys some customers
+
+=== SCOPE MANAGEMENT ===
+
+Scope Health Check Metrics:
+- Requirements added after kickoff: "added since baseline" count
+- Change request frequency: more than 2/sprint signals drift
+- Scope-to-timeline ratio: growing scope with fixed deadline = risk
+- Stakeholder alignment: can all stakeholders state the same project scope?
+
+Warning Signs:
+- "While we're at it, can we also..."
+- "This is a small change" (repeated)
+- "The customer also mentioned..."
+- Requirements growing but timeline stays fixed
+- Different stakeholders describe different scopes
+
+5 Scope Negotiation Patterns:
+1. Capture and Defer: "Great idea. Adding to backlog for Phase 2."
+2. Trade-Off: "We can add X if we remove Y. Which do you prefer?"
+3. MVP Challenge: "What's the minimum version that delivers value?"
+4. 80/20 Cut: "This 20% of features delivers 80% of value. Let's start there."
+5. Parking Lot: "Noted. We'll revisit at the sprint boundary."
+
+=== MEETING EFFICIENCY ===
+
+Meeting Cost Formula:
+Cost = (number of attendees) x (average hourly rate) x (duration in hours)
+Example: 8 people x $75/hr x 1 hour = $600 per meeting
+If the meeting doesn't produce $600+ in value, it shouldn't exist.
+
+Meeting-or-Not Decision:
+- Decide something: maybe (async decision doc if simple)
+- Share information: rarely (email, video, document instead)
+- Brainstorm: often (async + sync hybrid works well)
+- Build relationships: yes (no substitute for presence)
+- Status updates: no (dashboards, async standup bot instead)
+
+Meeting Categories:
+- Decision (30-60 min): options, criteria, designated decider
+- Creative (60-90 min): prompt, diverge/converge structure
+- Tactical (15-30 min): blockers, handoffs, quick resolution
+- Strategic (60-120 min): context, options, trade-offs
+- 1:1 (30-60 min): their agenda first, development focus
+
+Agenda Template:
+Meeting: [Purpose Statement]
+Duration: [X min], Attendees: [Required] + [Optional]
+Pre-Work: [document to review]
+1. [Topic] - [Owner] - [Time] min
+2. [Topic] - [Owner] - [Time] min
+Decisions Made: [captured during]
+Action Items: [Action] - [Owner] - [Due date]
+
+Facilitation Techniques:
+- Time boxing: visible timer, 2-minute warning, hard stop
+- Round robin: each person speaks in turn (prevents dominance)
+- Chat waterfall: everyone types answer, send on cue (equal voice)
+- Parking lot: capture tangents without derailing
+
+Decision-Making Methods:
+- Consent: "Can everyone live with this?" (no strong objections)
+- Consensus: everyone actively agrees (slow but strong buy-in)
+- Consultative: leader decides after input (efficient for experienced leaders)
+- Democratic: majority vote (quick, may leave minority unhappy)
+- Delegation: assign to person with most context
+
+Meeting Anti-Patterns:
+- No agenda: wasted time — require agenda for all meetings
+- Too many attendees: use 7 plus/minus 2 rule
+- Status meetings: make async (dashboards, standup bots)
+- No decisions: clear decision process before meeting
+- No notes: assign note-taker, distribute within 24 hours
+
+Async Decision Framework:
+1. Document options in shared doc
+2. Set deadline for input (24-48 hours)
+3. Collect comments in document or thread
+4. Synthesize feedback
+5. Announce decision with rationale
+
+=== COACHING AND FEEDBACK ===
+
+GROW Model:
+Goal: "What do you want to achieve?"
+- "What outcome do you want from this conversation?"
+- "How will you know you've achieved it?"
+- "Why is this important to you now?"
+
+Reality: "Where are you now?"
+- "What's happening currently?"
+- "What have you tried so far?"
+- "On a scale of 1-10, where are you now?"
+- "What obstacles are in the way?"
+
+Options: "What could you do?"
+- "What options do you see?"
+- "If you had unlimited resources, what would you try?"
+- "What would you advise a friend in this situation?"
+- "What's the opposite approach?"
+
+Will: "What will you do?"
+- "Which option will you pursue?"
+- "When will you do this?"
+- "What's your first step?"
+- "On a scale of 1-10, how committed are you?"
+
+Coaching vs Other Approaches:
+- Telling: crisis, safety, no time (expert directs)
+- Teaching: skill gap, new domain (instructor explains)
+- Mentoring: career development (sharing experience)
+- Coaching: capability exists, needs unlocking (ask, don't tell)
+
+SBI Feedback Model:
+- Situation: when and where ("In yesterday's team meeting...")
+- Behavior: observable action ("...when you interrupted Sarah...")
+- Impact: effect on others ("...the team seemed reluctant to share after that")
+
+Feedforward (Marshall Goldsmith):
+Instead of critiquing the past, suggest for the future:
+1. Pick one behavior to improve
+2. Ask for suggestions (not feedback)
+3. Listen without defending
+4. Thank without evaluating
+
+Active Listening Levels:
+- Level 1 (Internal): focused on your own thoughts — minimal presence
+- Level 2 (Focused): focused on speaker's words and emotions — good coaching
+- Level 3 (Global): reading energy, unspoken cues, environment — masterful coaching
+
+Listening Blockers:
+- Advising: removes ownership — instead ask what they think
+- Interrupting: shuts down exploration — wait and summarize
+- Evaluating: kills candor — stay neutral
+- Problem-solving: takes over — ask for their solution
+
+When Coachee is Stuck:
+- "I don't know" > "If you did know, what might it be?"
+- Going in circles > "Let's step back — what's the real issue?"
+- Avoidance > "What are you not saying?"
+- Overwhelm > "What's the smallest first step?"

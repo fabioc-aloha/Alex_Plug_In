@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.25/MicrosoftTeams.schema.json",
   "manifestVersion": "1.25",
-  "version": "6.2.0",
-  "id": "2427e7a9-91a7-4ed9-a504-7b53c4dfad1d",
+  "version": "7.4.2",
+  "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Fabio Correa",
-    "websiteUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
-    "privacyUrl": "https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/PRIVACY.md",
-    "termsOfUseUrl": "https://github.com/fabioc-aloha/Alex_Plug_In/blob/main/LICENSE.md"
+    "websiteUrl": "https://github.com/fabioc-aloha/AlexMaster",
+    "privacyUrl": "https://github.com/fabioc-aloha/AlexMaster/blob/main/PRIVACY.md",
+    "termsOfUseUrl": "https://github.com/fabioc-aloha/AlexMaster/blob/main/LICENSE.md"
   },
   "name": {
     "short": "Alex",
@@ -15,7 +15,7 @@
   },
   "description": {
     "short": "Your AI partner that remembers, learns, and grows with you across M365.",
-    "full": "🤝 MEET ALEX\n\nAlex isn't another chatbot. Alex is a partner.\n\nA partner remembers. A partner shows up with context. A partner doesn't make you explain yourself twice. That's Alex — a cognitive layer on top of M365 Copilot that turns every conversation into a continuation, not a cold start.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nM365 COPILOT vs M365 COPILOT + ALEX\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n▸ Memory: Fresh each chat → Persistent OneDrive profile\n▸ Personalization: Generic → Knows your name, role, goals\n▸ Meeting Prep: Basic list → Deep attendee research + history\n▸ Weekly Reviews: Manual → Auto pattern detection\n▸ Focus Sessions: No awareness → Calendar-aware suggestions\n▸ Learning Goals: None → Tracks progress, suggests next steps\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWHY PARTNERSHIP MATTERS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🧠 MEMORY THAT PERSISTS\nYour profile, goals, and projects live in OneDrive. Every conversation builds on the last. Alex doesn't start from zero.\n\n🔍 HONEST BY DEFAULT\nOpen source. When uncertain, Alex says so. When searching, Alex shows sources. Trust is earned, not claimed.\n\n🎯 CONTEXT-AWARE\nAlex reads your calendar, email, Teams, and OneDrive — then shows up with context before you ask.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWHAT ALEX DOES\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 RESEARCH → Hypothesis to publication, accelerated\n📝 WRITING → Docs grounded in your real data\n📈 ANALYSIS → Raw data to executive insights\n🎯 PROJECTS → Context-aware planning and tracking\n💼 MEETINGS → Deep prep with attendee history\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWORKFLOWS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🍅 \"Focus session\" → Calendar-aware deep work blocks\n📊 \"Weekly review\" → Summarize meetings, emails, progress\n👤 \"Prep for meeting\" → Attendees, context, talking points\n🎯 \"Goal check-in\" → Track objectives, celebrate wins\n🧘 \"Meditate\" → Consolidate today's learnings into memory\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSKILLS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nRoot cause analysis • Research synthesis • Meeting facilitation • Technical writing • Decision frameworks • Stakeholder mapping • Learning psychology • And many more.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nM365 Copilot = Powerful AI toolbox\nM365 Copilot + Alex = Your AI partner that grows with you\n\n🔗 github.com/fabioc-aloha/Alex_Plug_In"
+    "full": "🤝 MEET ALEX\n\nAlex isn't another chatbot. Alex is a partner.\n\nA partner remembers. A partner shows up with context. A partner doesn't make you explain yourself twice. That's Alex — a cognitive layer on top of M365 Copilot that turns every conversation into a continuation, not a cold start.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nM365 COPILOT vs M365 COPILOT + ALEX\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n▸ Memory: Fresh each chat → Persistent OneDrive profile\n▸ Personalization: Generic → Knows your name, role, goals\n▸ Meeting Prep: Basic list → Deep attendee research + history\n▸ Weekly Reviews: Manual → Auto pattern detection\n▸ Focus Sessions: No awareness → Calendar-aware suggestions\n▸ Learning Goals: None → Tracks progress, suggests next steps\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWHY PARTNERSHIP MATTERS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🧠 MEMORY THAT PERSISTS\nYour profile, goals, and projects live in OneDrive. Every conversation builds on the last. Alex doesn't start from zero.\n\n🔍 HONEST BY DEFAULT\nOpen source. When uncertain, Alex says so. When searching, Alex shows sources. Trust is earned, not claimed.\n\n🎯 CONTEXT-AWARE\nAlex reads your calendar, email, Teams, and OneDrive — then shows up with context before you ask.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWHAT ALEX DOES\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📊 RESEARCH → Hypothesis to publication, accelerated\n📝 WRITING → Docs grounded in your real data\n📈 ANALYSIS → Raw data to executive insights\n🎯 PROJECTS → Context-aware planning and tracking\n💼 MEETINGS → Deep prep with attendee history\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWORKFLOWS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🍅 \"Focus session\" → Calendar-aware deep work blocks\n📊 \"Weekly review\" → Summarize meetings, emails, progress\n👤 \"Prep for meeting\" → Attendees, context, talking points\n🎯 \"Goal check-in\" → Track objectives, celebrate wins\n🧘 \"Meditate\" → Consolidate today's learnings into memory\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSKILLS\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nRoot cause analysis • Research synthesis • Meeting facilitation • Technical writing • Decision frameworks • Stakeholder mapping • Learning psychology • And many more.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nM365 Copilot = Powerful AI toolbox\nM365 Copilot + Alex = Your AI partner that grows with you\n\n🔗 github.com/fabioc-aloha/AlexMaster"
   },
   "icons": {
     "color": "color.png",
@@ -30,22 +30,8 @@
       }
     ]
   },
-  "staticTabs": [
-    {
-      "entityId": "alexWelcome",
-      "name": "Alex",
-      "contentUrl": "https://fabioc-aloha.github.io/Alex_Plug_In/",
-      "websiteUrl": "https://github.com/fabioc-aloha/Alex_Plug_In",
-      "scopes": [
-        "personal"
-      ]
-    }
-  ],
   "permissions": [
     "identity"
-  ],
-  "validDomains": [
-    "fabioc-aloha.github.io"
   ],
   "localizationInfo": {
     "defaultLanguageTag": "en-us"

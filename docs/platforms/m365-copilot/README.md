@@ -124,7 +124,7 @@ If updates don't appear immediately:
 - ✅ HTTPS only (required for Office Add-ins)
 - ✅ No secrets or credentials in hosted files
 - ✅ OneDrive authentication via Microsoft Graph (OAuth 2.0)
-- ✅ Read-only access to user's Alex-Memory folder
+- ✅ Read-only access to user's AI-Memory folder
 
 ## Troubleshooting
 

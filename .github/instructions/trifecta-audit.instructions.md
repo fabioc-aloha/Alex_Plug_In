@@ -291,11 +291,11 @@ When an heir capability passes the Why Test, create the missing components follo
 
 Not all heir trifectas should promote to Master:
 
-| Classification     | Meaning                                                   | Action                                                                |
-| ------------------ | --------------------------------------------------------- | --------------------------------------------------------------------- |
-| **Heir-only**      | Platform-specific, not generalizable                      | Keep in heir's `.github/`, document in heir's catalog                 |
-| **Pattern-worthy** | The _pattern_ is generalizable (not the specific content) | Promote the pattern to Global Knowledge as `GK-*`                     |
-| **Full promotion** | Capability is useful to ALL Alexes                        | Promote all three files to Master via `heir-skill-promotion` workflow |
+| Classification     | Meaning                                                   | Action                                                                      |
+| ------------------ | --------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Heir-only**      | Platform-specific, not generalizable                      | Keep in heir's `.github/`, document in heir's catalog                       |
+| **Pattern-worthy** | The _pattern_ is generalizable (not the specific content) | Add the pattern to AI-Memory/global-knowledge.md under appropriate category |
+| **Full promotion** | Capability is useful to ALL Alexes                        | Promote all three files to Master via `heir-skill-promotion` workflow       |
 
 **Promotion signal**: If 2+ heirs develop similar capabilities independently, that's a strong signal for Master promotion.
 

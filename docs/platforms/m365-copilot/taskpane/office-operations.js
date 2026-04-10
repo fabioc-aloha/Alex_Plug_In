@@ -582,7 +582,7 @@ async function readOneDriveMemoryFile(fileName) {
         const token = await getGraphAccessToken();
         
         // Graph API endpoint for OneDrive file
-        const fileUrl = `https://graph.microsoft.com/v1.0/me/drive/root:/Alex-Memory/${fileName}:/content`;
+        const fileUrl = `https://graph.microsoft.com/v1.0/me/drive/root:/AI-Memory/${fileName}:/content`;
         
         const response = await fetch(fileUrl, {
             headers: {
@@ -593,7 +593,7 @@ async function readOneDriveMemoryFile(fileName) {
 
         if (!response.ok) {
             if (response.status === 404) {
-                return { success: false, error: 'File not found in Alex-Memory folder' };
+                return { success: false, error: 'File not found in AI-Memory folder' };
             }
             throw new Error(`Graph API error: ${response.status} ${response.statusText}`);
         }

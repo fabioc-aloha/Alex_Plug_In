@@ -581,7 +581,10 @@ function syncArchitectureFolders() {
 
       // Rename heir-specific files after sync (e.g., brain-qa-heir.ps1 → brain-qa.ps1)
       if (folder === "muscles") {
-        const heirRenames = { "brain-qa-heir.ps1": "brain-qa.ps1" };
+        const heirRenames = {
+          "brain-qa-heir.ps1": "brain-qa.ps1",
+          "brain-qa-heir.cjs": "brain-qa.cjs",
+        };
         for (const [from, to] of Object.entries(heirRenames)) {
           const fromPath = path.join(heirPath, from);
           const toPath = path.join(heirPath, to);

@@ -20,7 +20,7 @@ platforms/cowork/
       data-storytelling/SKILL.md
       research-first-development/SKILL.md
       bootstrap-learning/SKILL.md
-      literature-review/SKILL.md
+      meeting-efficiency/SKILL.md
       stakeholder-management/SKILL.md    # Tier 3: Business Execution
       business-analysis/SKILL.md
       change-management/SKILL.md
@@ -28,10 +28,10 @@ platforms/cowork/
       scope-management/SKILL.md
       ai-writing-avoidance/SKILL.md      # Tier 4: Communication Quality
       slide-design/SKILL.md
-      creative-writing/SKILL.md
+      post-mortem/SKILL.md
       coaching-techniques/SKILL.md       # Tier 5: Stretch
       chart-interpretation/SKILL.md
-      citation-management/SKILL.md
+      pii-privacy-regulations/SKILL.md
       prompt-engineering/SKILL.md
       north-star/SKILL.md
       data-visualization/SKILL.md
@@ -56,13 +56,13 @@ Documents/
 
 ## Tier Plan
 
-| Tier | Slots | Purpose                        | Skills                                                                                                                      |
-| ---- | ----- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| 1    | 0     | Identity (Custom Instructions) | Alex identity, tone, preferences                                                                                            |
-| 2    | 1-6   | Knowledge Work Methodology     | executive-storytelling, data-analysis, data-storytelling, research-first-development, bootstrap-learning, literature-review |
-| 3    | 7-11  | Business Execution             | stakeholder-management, business-analysis, change-management, status-reporting, scope-management                            |
-| 4    | 12-14 | Communication Quality          | ai-writing-avoidance, slide-design, creative-writing                                                                        |
-| 5    | 15-20 | Stretch Candidates             | coaching-techniques, chart-interpretation, citation-management, prompt-engineering, north-star, data-visualization          |
+| Tier | Slots | Purpose                        | Skills                                                                                                                       |
+| ---- | ----- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| 1    | 0     | Identity (Custom Instructions) | Alex identity, tone, preferences                                                                                             |
+| 2    | 1-6   | Knowledge Work Methodology     | executive-storytelling, data-analysis, data-storytelling, research-first-development, bootstrap-learning, meeting-efficiency |
+| 3    | 7-11  | Business Execution             | stakeholder-management, business-analysis, change-management, status-reporting, scope-management                             |
+| 4    | 12-14 | Communication Quality          | ai-writing-avoidance, slide-design, post-mortem                                                                              |
+| 5    | 15-20 | Stretch Candidates             | coaching-techniques, chart-interpretation, pii-privacy-regulations, prompt-engineering, north-star, data-visualization       |
 
 ## Translation Rules Applied
 

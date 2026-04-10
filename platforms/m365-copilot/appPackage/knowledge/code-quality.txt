@@ -1,0 +1,111 @@
+Code Quality
+
+=== 3-PASS CODE REVIEW ===
+
+Pass 1 — Orientation (2-3 min):
+Does the approach make sense? Is the scope right? Over-engineered?
+Shortcut: read PR description and test names first — they reveal intent faster than code.
+
+Pass 2 — Logic (10-15 min):
+Edge cases, null handling, error paths, concurrency, off-by-one errors.
+This is where 80% of review value comes from.
+
+Pass 3 — Polish (3-5 min):
+Naming, duplication, test coverage, documentation.
+
+=== COMMENT PREFIXES ===
+
+Use these to signal intent and expected response:
+
+[blocking]: must fix before merge — author fixes it
+[suggestion]: better approach exists — author considers, explains if declining
+[question]: I don't understand — author clarifies in code, not just in reply
+[nit]: trivial style issue — fix if easy, skip if not
+[praise]: this is well done — appreciate it
+
+Good vs Bad Comments:
+BAD: "This is confusing" (vague)
+GOOD: "[suggestion] This nested ternary is hard to follow. Consider extracting to a named function like isEligibleForDiscount()."
+
+BAD: "Fix this" (no context)
+GOOD: "[blocking] This accepts user input without sanitization. Use escapeHtml() before rendering."
+
+BAD: "Why?" (sounds hostile)
+GOOD: "[question] What's the motivation for the custom sort here vs Array.sort()? Is there a performance concern?"
+
+BAD: "LGTM" on 500-line PR (rubber stamp)
+GOOD: "Pass 1: approach looks right. Pass 2 comments below. Pass 3: naming is clean."
+
+=== REVIEW CHECKLISTS ===
+
+Security:
+- No secrets, tokens, or API keys in code
+- User input validated/sanitized before use
+- Auth checks on protected endpoints
+- No SQL/command injection vectors
+- Sensitive data not logged
+
+Logic:
+- Edge cases handled (empty input, null, boundary values)
+- Error paths return meaningful messages
+- Async operations have timeout/cancellation
+- State changes are atomic (no partial updates)
+- All new branches have test coverage
+
+Quality:
+- Tests cover changed behavior, not just changed lines
+- No debug code (console.log, TODO-hacks)
+- Public API changes documented
+- Backward compatibility considered
+
+Architecture:
+- Change is in the right layer (not business logic in the controller)
+- New dependencies justified
+- No unnecessary coupling introduced
+
+=== PR SIZE GUIDELINES ===
+
+Under 100 lines: under 30 min review — perfect size
+100-400 lines: 30-60 min — ideal size
+400+ lines: 60+ min — ask author to split
+1000+ lines: refuse — request breakdown into smaller PRs
+
+=== REVIEW ANTI-PATTERNS ===
+
+Rubber-stamp: bugs ship — actually read Pass 1-3
+Bikeshedding: hours on naming, ignore logic bugs — spend 80% on Pass 2
+Gatekeeping: reviewees dread PRs — teach, don't block
+Week-long queue: PRs go stale, conflicts pile up — review within 4 hours, merge within 24
+Style wars: team friction — automate style with linters
+Everything-is-blocking: author overwhelmed — use prefix system honestly
+
+=== CODE REVIEW FOR NON-DEVELOPERS ===
+
+Where non-developers add value:
+- User Experience: does this handle the customer journey we designed?
+- Error Messages: would a customer understand this error?
+- Business Logic: is the discount calculation correct per our policy?
+- Documentation: can a new team member follow these instructions?
+- Test Cases: did we test the edge case where customer has expired subscription?
+
+Reading PRs as a non-developer (focus in order):
+1. PR Description: what problem is being solved
+2. Test Names: what scenarios are covered
+3. Changed Files: which parts of the system are affected
+4. Comments: what questions do reviewers have
+
+Don't get lost in: syntax details, variable names, code structure (unless it affects user experience)
+
+=== WHEN TO REQUEST SECURITY REVIEW ===
+
+Always required: new customer data field (PII), external API integration, new vendor/service, auth flow changes
+Maybe required: internal dashboard with sensitive data
+Not required: documentation updates, UI-only changes (unless handling sensitive display)
+
+Red flags — always get security review:
+- Customer SSN, payment card, health data
+- Integration with new external service
+- Authentication or permission changes
+- File upload capabilities
+- Customer data export features
+- Admin-level functionality

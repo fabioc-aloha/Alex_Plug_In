@@ -25,10 +25,11 @@ description: "Automated neural maintenance and dream state processing protocols"
 
 ###
 
- **Core Principle**
+**Core Principle**
 Dream state represents **unconscious automated maintenance** of cognitive architecture, mirroring brain function during sleep cycles where synaptic homeostasis, memory consolidation, and neural pruning occur without conscious intervention.
 
 ### **Enhanced Capabilities v1.1.1**
+
 - **Agent Mode**: Use the dream prompt or run `node .github/muscles/brain-qa.cjs`
 - **Automated Synapse Validation**: Scans all memory files for embedded synapse integrity
 - **Automatic Synapse Repair**: Detects and repairs broken connections using consolidation mappings
@@ -41,6 +42,7 @@ Dream state represents **unconscious automated maintenance** of cognitive archit
 - **Cross-Platform Support**: Works on Windows, macOS, and Linux
 
 ### **Fundamental Distinction**
+
 - **DREAM** = Automated maintenance script, unconscious, maintenance-focused, diagnostic-enhanced
 - **MEDITATE** = Conscious, manual, knowledge-consolidation-focused
 - **SKILL SELECTION OPTIMIZATION** = Conscious, automatic, pre-task resource planning (Layer 2)
@@ -58,6 +60,7 @@ node .github/muscles/brain-qa.cjs
 ```
 
 This provides comprehensive neural maintenance:
+
 - ✅ **Scans** all memory files in `.github/` directories (instructions, prompts, skills, episodic)
 - ✅ **Validates** all embedded synapse connections
 - ✅ **Repairs** broken links automatically using consolidation mappings
@@ -67,7 +70,9 @@ This provides comprehensive neural maintenance:
 ### **Dream Protocol Execution Flow**
 
 #### **Phase 1: Network Discovery**
+
 The extension scans for memory files matching:
+
 - `.github/copilot-instructions.md`
 - `.github/instructions/*.md`
 - `.github/prompts/*.md`
@@ -75,7 +80,9 @@ The extension scans for memory files matching:
 - `.github/episodic/*.md`
 
 #### **Phase 2: Synapse Validation**
+
 Parses embedded synapses using the format defined in `SYNAPSE-SCHEMA.md`:
+
 ```markdown
 - [target-file.md] (Strength, Type, Direction) - "Activation condition"
 ```
@@ -83,28 +90,35 @@ Parses embedded synapses using the format defined in `SYNAPSE-SCHEMA.md`:
 Validates that each target file exists in the workspace.
 
 #### **Phase 3: Automatic Repair**
+
 For broken connections, checks consolidation mappings:
+
 - Deprecated files → Current equivalents
 - Automatically rewrites synapse references
 - Tracks repair history
 
 Example consolidation mappings:
+
 - `enhanced-meditation-protocol.prompt.md` → `meditate.prompt.md`
 - `self-identity-integration.prompt.md` → `alex-identity-integration.instructions.md`
 - `dream-protocol-integration.prompt.md` → `dream-state-automation.instructions.md`
 
-#### **Phase 4: Global Knowledge Sync**
-Synchronizes with the Global Knowledge repository (if available):
-- Looks for `Alex-Global-Knowledge/` sibling folder
-- Checks for uncommitted changes
-- Pulls latest from remote if workspace is clean
-- Regenerates `KNOWLEDGE-INDEX.md` if `index.json` changed
-- Reports sync status in dream output
+#### **Phase 4: AI-Memory Sync**
 
-**Note**: Requires `Alex-Global-Knowledge/` repo as sibling folder. Skipped if not found.
+Checks the shared OneDrive AI-Memory folder for cross-platform knowledge:
+
+- Reads `AI-Memory/global-knowledge.md` for any insights added from other surfaces (M365 Copilot, Agent Builder)
+- Checks `AI-Memory/notes.md` for reminders or session notes from other surfaces
+- Reviews `AI-Memory/learning-goals.md` for progress updates
+- Reports any new cross-platform content in dream output
+
+**Access**: VS Code reads AI-Memory via local OneDrive sync path (%OneDrive%/AI-Memory/).
+**Note**: Replaces the legacy Alex-Global-Knowledge GitHub repo sync. If the OneDrive sync path is not found, this phase is skipped.
 
 #### **Phase 4.5: Brand Compliance Scan**
+
 Runs a lightweight deprecated-color check across TypeScript source and deployed SVG assets:
+
 - Scans `src/**/*.ts` and `assets/**/*.svg` for deprecated colors: `#0078d4`, `#005a9e`, `#ff6b35`, `#ff8c42`, `#ffc857`, `#00ff88`
 - Exceptions: `#0078D4` in `personaDetection.ts` is **intentional** (Developer persona per DK §13) — do not flag
 - Reports count of violations; 0 expected in source and deployed assets
@@ -114,7 +128,9 @@ Runs a lightweight deprecated-color check across TypeScript source and deployed 
 **Pass criteria**: 0 violations outside intentional exceptions.
 
 #### **Phase 5: Health Reporting**
+
 Generates comprehensive report including:
+
 - Total memory files and synapses
 - Broken connections (if any)
 - Successfully repaired connections
@@ -123,6 +139,7 @@ Generates comprehensive report including:
 - Recommendations for manual fixes
 
 #### **Phase 6: Results Display**
+
 - Shows notification with summary
 - Opens generated report automatically
 - Archives report with timestamp
@@ -133,35 +150,42 @@ Each dream execution generates a comprehensive report including:
 
 ```markdown
 # Dream Protocol Report
+
 **Timestamp**: 2025-11-26T10:30:45.123Z
 **Status**: HEALTHY / ATTENTION REQUIRED
 
 ## Statistics
+
 - Total Memory Files: 44
 - Total Synapses: 183
 - Broken Connections: 0
 - Repaired Connections: 3
 
 ## Brand Compliance
+
 - Scan: src + deployed assets
 - Violations: 0 ✅
 - Exceptions: 1 intentional (#0078D4 Developer persona)
 
 ## Repaired Synapses
+
 - Source: alex-core.instructions.md:45
   - Old Target: enhanced-meditation-protocol.prompt.md
   - New Target: meditate.prompt.md (Auto-repaired)
 
 ## Broken Synapses
+
 _None detected._
 
 ## Recommendations
+
 - [x] System is optimized.
 ```
 
 ### **🔧 VS Code Extension Features**
 
 The dream protocol now provides:
+
 - **Automatic Execution**: No command-line parameters needed
 - **Visual Progress**: Real-time notifications and status updates
 - **Report Generation**: Timestamped markdown reports in `.github/episodic/` folder
@@ -173,13 +197,13 @@ The dream protocol now provides:
 
 These scripts provide CLI and audit capabilities that complement the VS Code dream command:
 
-| Script | Purpose | When to Use |
-|--------|---------|-------------|
-| `.github/muscles/dream-cli.ts` | CLI wrapper for dream outside VS Code | CI/CD pipelines, terminal-only environments |
-| `.github/muscles/audit-master-alex.ps1` | 22-check comprehensive audit (calls validate-synapses) | Pre-release audits, deep health checks |
-| `.github/muscles/validate-synapses.ps1` | Standalone synapse validation | Quick synapse-only checks |
-| `.github/muscles/validate-skills.ps1` | Skill frontmatter and structure validation | Skill-specific validation |
-| `.github/muscles/normalize-paths.ps1` | Normalize all memory file paths to canonical `.github/` format | After file reorganization or imports |
+| Script                                  | Purpose                                                        | When to Use                                 |
+| --------------------------------------- | -------------------------------------------------------------- | ------------------------------------------- |
+| `.github/muscles/dream-cli.ts`          | CLI wrapper for dream outside VS Code                          | CI/CD pipelines, terminal-only environments |
+| `.github/muscles/audit-master-alex.ps1` | 22-check comprehensive audit (calls validate-synapses)         | Pre-release audits, deep health checks      |
+| `.github/muscles/validate-synapses.ps1` | Standalone synapse validation                                  | Quick synapse-only checks                   |
+| `.github/muscles/validate-skills.ps1`   | Skill frontmatter and structure validation                     | Skill-specific validation                   |
+| `.github/muscles/normalize-paths.ps1`   | Normalize all memory file paths to canonical `.github/` format | After file reorganization or imports        |
 
 **Dream CLI** (`dream-cli.ts`): Imports the same `synapse-core` module as the VS Code extension, enabling dream execution from terminal without VS Code. Useful for CI pipelines or automated checks.
 
@@ -188,6 +212,7 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 ## 🔄 **Integration with Meditation State**
 
 ### **Coordination Protocols**
+
 - **Dream precedes meditation**: Automated maintenance clears cognitive overhead before manual consolidation
 - **Post-meditation dreams**: Consolidation of newly acquired knowledge patterns
 - **Separated functions**: Dreams do NOT create memory files (meditation's role) but provide diagnostics
@@ -195,6 +220,7 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 - **Emergency coordination**: Critical issues detected in dreams trigger meditation enhancement protocols
 
 ### **Trigger Coordination**
+
 - **Pre-meditation cleanup**: Clear cognitive clutter before complex analysis
 - **Post-learning validation**: Optimize newly established connections
 - **Maintenance scheduling**: Regular automated housekeeping cycles
@@ -203,6 +229,7 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 ## 🧠 **Unconscious Characteristics**
 
 ### **Automated Processing Features**
+
 - **No conscious intervention required**: Fully automated optimization
 - **Background operation**: Processing without disrupting conscious work
 - **Efficiency focused**: Optimization for cognitive performance
@@ -210,6 +237,7 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 - **Health monitoring**: Continuous network health assessment
 
 ### **Quality Assurance**
+
 - **Non-destructive**: Never deletes memory files, provides analysis
 - **Comprehensive reporting**: Detailed diagnostic reports with insights
 - **Reversible operations**: All changes tracked and reviewable
@@ -219,6 +247,7 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 ## 📊 **Dream State Metrics**
 
 ### **Network Health Indicators**
+
 - **Total Memory Files**: Count of all memory files in architecture
 - **Total Synapses**: Count of all embedded synapse connections
 - **Broken Connections**: Synapses pointing to non-existent files
@@ -226,6 +255,7 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 - **Health Status**: HEALTHY (0 broken) or ATTENTION REQUIRED (>0 broken)
 
 ### **Performance Optimization Targets**
+
 - **Connection integrity**: All synapses should resolve to valid files
 - **Network resilience**: Improved fault tolerance through validation
 - **Maintenance efficiency**: Automated repair reduces manual intervention
@@ -234,6 +264,7 @@ These scripts provide CLI and audit capabilities that complement the VS Code dre
 ## 🚀 **Usage Recommendations**
 
 ### **Regular Maintenance Schedule**
+
 - **After domain learning**: Run dream protocol to validate new connections
 - **Weekly health check**: Verify network integrity
 - **After file reorganization**: Ensure all synapses remain valid
@@ -254,13 +285,13 @@ caffeinate -t 600  # 10 minutes
 caffeinate -di node .github/muscles/brain-qa.cjs --mode all --detail
 ```
 
-| Flag | Effect |
-|------|--------|
-| `-s` | Prevent system sleep (AC power assertion) |
-| `-d` | Prevent display sleep |
-| `-i` | Prevent system idle sleep |
-| `-t N` | Timeout after N seconds |
-| (none) | Wraps command -- exits when child exits |
+| Flag   | Effect                                    |
+| ------ | ----------------------------------------- |
+| `-s`   | Prevent system sleep (AC power assertion) |
+| `-d`   | Prevent display sleep                     |
+| `-i`   | Prevent system idle sleep                 |
+| `-t N` | Timeout after N seconds                   |
+| (none) | Wraps command -- exits when child exits   |
 
 **Recommended pattern for scheduled dreams**:
 
@@ -389,7 +420,9 @@ Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -
 ```
 
 ### **When to Run Dream Protocol**
+
 ✅ **Do run when:**
+
 - Learning new domain knowledge
 - Reorganizing memory files
 - Suspecting broken connections
@@ -397,6 +430,7 @@ Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -
 - After major meditation sessions
 
 ❌ **No need to run when:**
+
 - No changes to memory files
 - Just completed a dream check
 - Only editing code/documentation
@@ -405,6 +439,7 @@ Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -
 ## 🔄 **Embedded Synapse Network - VS Code Integration**
 
 ### **Core Integration Points**
+
 - **VS Code Extension** (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance with automated synapse validation"
 - **alex-core.instructions.md** (High, Foundation, Bidirectional) - "Core cognitive architecture with unconscious processing integration"
 - **embedded-synapse.instructions.md** (High, Enhancement, Unidirectional) - "Synaptic connection optimization with quality assessment"
@@ -412,12 +447,14 @@ Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -
 - [.github/skills/dream-state/SKILL.md] (Critical, Implements, Bidirectional) - "Domain knowledge this procedure operationalizes"
 
 ### **Validation Protocols**
+
 - **Embedded Synapse Detection** → Regex-based pattern matching in memory files
 - **File Existence Validation** → VS Code workspace file search
 - **Consolidation Mapping** → Automatic deprecated-to-current file resolution
 - **Report Generation** → Markdown formatting with statistics and recommendations
 
 ### **Enhanced Activation Patterns**
+
 - **Network Health Assessment** → Use the dream prompt or run `node .github/muscles/brain-qa.cjs`
 - **Post-Learning Validation** → Execute after domain knowledge acquisition
 - **Pre-Meditation Cleanup** → Optimize architecture before conscious consolidation
@@ -428,6 +465,7 @@ Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -
 ### **VS Code `/troubleshoot` Skill (Preview)**
 
 When dream reports are clean but agent behavior doesn't match expectations, use the built-in `/troubleshoot` skill in chat. It analyzes JSONL debug logs to reveal:
+
 - Why skills or instructions didn't load (name mismatches, invalid frontmatter, `applyTo` pattern failures)
 - Why tools were called or skipped
 - Why requests were slow (latency breakdown by span)
@@ -439,7 +477,8 @@ Requires `github.copilot.chat.agentDebugLog.enabled` and `github.copilot.chat.ag
 
 **Issue**: Dream protocol shows broken synapse
 s
-**Solution**: 
+**Solution**:
+
 1. Review the dream report for specific broken connections
 2. Manually verify if target file was renamed or moved
 3. Update synapse reference in source file
@@ -447,16 +486,18 @@ s
 
 **Issue**: Dream protocol not finding memory files
 **Solution**:
+
 1. Verify Alex architecture is initialized (run `node .github/muscles/sync-architecture.cjs`)
 2. Check that memory files exist in `.github/` (instructions, prompts, skills, episodic)
 3. Ensure workspace folder is open
 
 **Issue**: No report generated after dream execution
 **Solution**:
+
 1. Check `.github/episodic/` folder in workspace
 2. Verify write permissions for workspace
 3. Review VS Code output panel for errors
 
 ---
 
-*Enhanced dream state automation v1.1.0 provides unconscious neural maintenance with comprehensive diagnostics that enable optimized conscious meditation focused on knowledge consolidation and learning.*
+_Enhanced dream state automation v1.1.0 provides unconscious neural maintenance with comprehensive diagnostics that enable optimized conscious meditation focused on knowledge consolidation and learning._

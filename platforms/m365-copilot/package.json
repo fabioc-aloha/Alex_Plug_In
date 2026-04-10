@@ -1,6 +1,6 @@
 {
   "name": "alex-m365-agent",
-  "version": "6.8.3",
+  "version": "7.4.2",
   "description": "Alex \u2014 Your Trusted AI Partner for M365 Copilot",
   "scripts": {
     "package": "teamsapp package --env local",
@@ -21,7 +21,6 @@
   "author": "Alex Cognitive Architecture Team",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@microsoft/teamsapp-cli": "^3.1.0",
-    "sharp": "^0.34.5"
+    "@microsoft/teamsapp-cli": "^3.1.0"
   }
 }

@@ -2,219 +2,271 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as os from "os";
-import { exec } from "child_process";
-import { promisify } from "util";
+import { AI_MEMORY_PATHS, AI_MEMORY_FILES } from "../shared/constants";
 
-const execAsync = promisify(exec);
+// ============================================================================
+// AI-Memory Path Resolution
+// ============================================================================
 
-const ALEX_HOME = path.join(os.homedir(), ".alex");
-const GK_PATH = path.join(ALEX_HOME, "global-knowledge");
-const SKILL_REGISTRY_PATH = path.join(GK_PATH, "skills", "skill-registry.json");
-const GK_REPO_URL = "https://github.com/fabioc-aloha/Alex-Global-Knowledge.git";
-
-// Common developer paths to check for existing GK repo (cross-platform)
-const DEVELOPER_PATHS = [
-  path.join(os.homedir(), "Development", "Alex-Global-Knowledge"),
-  path.join(os.homedir(), "Developer", "Alex-Global-Knowledge"),
-  path.join(os.homedir(), "dev", "Alex-Global-Knowledge"),
-  path.join(os.homedir(), "src", "Alex-Global-Knowledge"),
-  path.join(os.homedir(), "repos", "Alex-Global-Knowledge"),
-  path.join(os.homedir(), "projects", "Alex-Global-Knowledge"),
-  path.join(os.homedir(), "code", "Alex-Global-Knowledge"),
-];
-
-/**
- * Check if Global Knowledge is properly set up
- */
-export async function isGlobalKnowledgeSetup(): Promise<boolean> {
-  return fs.pathExists(SKILL_REGISTRY_PATH);
+/** Result of resolving the AI-Memory folder location */
+export interface AIMemoryLocation {
+  /** Absolute path to the AI-Memory folder */
+  folderPath: string;
+  /** Whether this is backed by OneDrive (true) or a local-only folder (false) */
+  isOneDrive: boolean;
 }
 
 /**
- * Find existing GK repo in common developer locations
+ * Detect the OneDrive sync root on the current platform.
+ * Returns null if OneDrive is not available.
  */
-async function findExistingGKRepo(): Promise<string | null> {
-  for (const devPath of DEVELOPER_PATHS) {
-    const registryPath = path.join(devPath, "skills", "skill-registry.json");
-    if (await fs.pathExists(registryPath)) {
-      return devPath;
+function detectOneDrivePath(): string | null {
+  if (process.platform === "win32") {
+    // Windows: check standard env vars set by the OneDrive client
+    const candidates = [
+      process.env.OneDrive,
+      process.env.OneDriveConsumer,
+      process.env.OneDriveCommercial,
+    ].filter(Boolean) as string[];
+
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate)) {
+        return candidate;
+      }
+    }
+
+    // Fallback: check common Windows paths
+    const userProfile = process.env.USERPROFILE || os.homedir();
+    const windowsFallbacks = [
+      path.join(userProfile, "OneDrive"),
+      path.join(userProfile, "OneDrive - Personal"),
+    ];
+    for (const fb of windowsFallbacks) {
+      if (fs.existsSync(fb)) {
+        return fb;
+      }
+    }
+  } else if (process.platform === "darwin") {
+    // macOS: OneDrive syncs into ~/Library/CloudStorage/OneDrive-*
+    const cloudStorageDir = path.join(
+      os.homedir(),
+      "Library",
+      "CloudStorage",
+    );
+    if (fs.existsSync(cloudStorageDir)) {
+      try {
+        const entries = fs.readdirSync(cloudStorageDir);
+        const oneDriveEntry = entries.find((e) =>
+          e.startsWith("OneDrive"),
+        );
+        if (oneDriveEntry) {
+          return path.join(cloudStorageDir, oneDriveEntry);
+        }
+      } catch {
+        // Ignore read errors
+      }
+    }
+
+    // macOS fallback: ~/OneDrive (legacy symlink or standalone)
+    const legacyMac = path.join(os.homedir(), "OneDrive");
+    if (fs.existsSync(legacyMac)) {
+      return legacyMac;
     }
   }
+
   return null;
 }
 
 /**
- * Check if path is a symlink
+ * Resolve the AI-Memory folder, preferring OneDrive with local fallback.
+ *
+ * Priority:
+ *  1. OneDrive/<folderName>/ — if OneDrive is detected on disk
+ *  2. ~/.alex/<folderName>/ — local fallback (no cloud sync)
+ *
+ * Does NOT create the folder; call {@link scaffoldAIMemory} for that.
  */
-async function isSymlink(targetPath: string): Promise<boolean> {
-  try {
-    const stats = await fs.lstat(targetPath);
-    return stats.isSymbolicLink();
-  } catch {
+export function resolveAIMemoryLocation(): AIMemoryLocation {
+  const oneDriveRoot = detectOneDrivePath();
+
+  if (oneDriveRoot) {
+    return {
+      folderPath: path.join(oneDriveRoot, AI_MEMORY_PATHS.folderName),
+      isOneDrive: true,
+    };
+  }
+
+  // Local-only fallback
+  return {
+    folderPath: path.join(os.homedir(), AI_MEMORY_PATHS.localFallback),
+    isOneDrive: false,
+  };
+}
+
+/**
+ * Check whether the AI-Memory folder exists and contains the expected files.
+ */
+export async function isAIMemorySetup(): Promise<boolean> {
+  const { folderPath } = resolveAIMemoryLocation();
+  if (!(await fs.pathExists(folderPath))) {
     return false;
   }
+  // At minimum, global-knowledge.md must exist
+  return fs.pathExists(path.join(folderPath, AI_MEMORY_PATHS.globalKnowledge));
 }
 
-/**
- * Create symlink (requires admin on Windows for directories)
- */
-async function createSymlink(target: string, linkPath: string): Promise<void> {
-  // Ensure parent directory exists
-  await fs.ensureDir(path.dirname(linkPath));
+// Keep legacy export name for backward compatibility during migration
+export const isGlobalKnowledgeSetup = isAIMemorySetup;
 
-  // Remove existing path if it exists
-  if (await fs.pathExists(linkPath)) {
-    const isLink = await isSymlink(linkPath);
-    if (isLink) {
-      await fs.unlink(linkPath);
-    } else {
-      // Backup existing folder
-      const backupPath = `${linkPath}-backup-${Date.now()}`;
-      await fs.move(linkPath, backupPath);
+// ============================================================================
+// Scaffolding
+// ============================================================================
+
+/** Template content for newly created AI-Memory files */
+const TEMPLATES: Record<string, string> = {
+  [AI_MEMORY_PATHS.profile]: `# Profile
+
+## Identity
+
+- **Name**: (your name)
+- **Role**: (your role)
+
+## Preferences
+
+(Add your working preferences here)
+
+## Expertise
+
+(List your areas of expertise)
+`,
+  [AI_MEMORY_PATHS.notes]: `# Notes
+
+## Quick Notes
+
+(Jot quick notes here)
+
+## Reminders
+
+(Active reminders)
+`,
+  [AI_MEMORY_PATHS.learningGoals]: `# Learning Goals
+
+## Active Goals
+
+(Add goals with progress tracking)
+`,
+  [AI_MEMORY_PATHS.globalKnowledge]: `# Global Knowledge
+
+Cross-project insights and patterns collected across all work.
+
+## General
+
+(Add insights organized by category headings)
+`,
+};
+
+/**
+ * Create the AI-Memory folder and populate with starter templates.
+ * Existing files are never overwritten.
+ */
+async function scaffoldAIMemory(folderPath: string): Promise<void> {
+  await fs.ensureDir(folderPath);
+
+  for (const file of AI_MEMORY_FILES) {
+    const filePath = path.join(folderPath, file);
+    if (!(await fs.pathExists(filePath))) {
+      const template = TEMPLATES[file] ?? "";
+      await fs.writeFile(filePath, template, "utf-8");
     }
   }
-
-  // Create symlink (junction type used on Windows for non-admin; ignored on macOS/Linux)
-  await fs.symlink(target, linkPath, "junction");
 }
 
-/**
- * Clone GK repository
- */
-async function cloneGKRepo(targetPath: string): Promise<void> {
-  await fs.ensureDir(path.dirname(targetPath));
-  await execAsync(`git clone ${GK_REPO_URL} "${targetPath}"`);
-}
+// ============================================================================
+// Setup Flow (called on activation)
+// ============================================================================
 
 /**
- * Ensure Global Knowledge is set up - called on extension activation
- * Returns true if setup is complete, false if user skipped
+ * Ensure AI-Memory is set up — called on extension activation.
+ * If the folder doesn't exist, prompts the user to create it.
+ * Returns true if setup is complete (or was already done).
  */
 export async function ensureGlobalKnowledgeSetup(): Promise<boolean> {
-  // Already set up?
-  if (await isGlobalKnowledgeSetup()) {
+  if (await isAIMemorySetup()) {
     return true;
   }
 
-  // Check if GK path exists but is misconfigured
-  const gkExists = await fs.pathExists(GK_PATH);
-  // mark as used for TS noUnusedLocals (existence info used for telemetry later)
-  void gkExists;
-  // Intentional: we only need existence; symlink check handled elsewhere
-  await isSymlink(GK_PATH).catch(() => {});
+  const location = resolveAIMemoryLocation();
+  const locationLabel = location.isOneDrive
+    ? `OneDrive (${location.folderPath})`
+    : `local disk (${location.folderPath})`;
 
-  // Try to find existing developer repo
-  const existingRepo = await findExistingGKRepo();
+  const oneDriveNote = location.isOneDrive
+    ? "Files will sync across devices via OneDrive."
+    : "OneDrive not detected — files will be stored locally only. Install OneDrive to enable cross-device sync.";
 
-  if (existingRepo) {
-    // Developer mode: offer to symlink
-    const choice = await vscode.window.showInformationMessage(
-      `Found Global Knowledge repo at:\n${existingRepo}\n\nLink it to ~/.alex/global-knowledge?`,
-      { modal: false },
-      "Link Repository",
-      "Clone Fresh",
-      "Skip",
-    );
-
-    if (choice === "Link Repository") {
-      try {
-        await createSymlink(existingRepo, GK_PATH);
-        vscode.window.showInformationMessage(
-          `✅ Global Knowledge linked to ${existingRepo}`,
-        );
-        return true;
-      } catch (error) {
-        vscode.window.showErrorMessage(
-          `Failed to create symlink: ${error}. ${process.platform === "win32" ? "Try running VS Code as administrator." : "Check folder permissions."}`,
-        );
-        return false;
-      }
-    } else if (choice === "Clone Fresh") {
-      // Fall through to clone logic
-    } else {
-      return false; // Skipped
-    }
-  }
-
-  // No existing repo found OR user chose to clone fresh
-  const cloneChoice = await vscode.window.showInformationMessage(
-    "📚 Global Knowledge not found.\n\nClone from GitHub to unlock premium features:\n• Search Knowledge across projects\n• Save & share insights\n• Skill inheritance for heirs",
+  const choice = await vscode.window.showInformationMessage(
+    `AI-Memory folder not found.\n\nCreate it in ${locationLabel}?\n\n${oneDriveNote}`,
     { modal: false },
-    "Clone from GitHub",
+    "Create AI-Memory",
     "Skip",
   );
 
-  if (cloneChoice === "Clone from GitHub") {
-    return await vscode.window.withProgress(
-      {
-        location: vscode.ProgressLocation.Notification,
-        title: "Cloning Global Knowledge",
-        cancellable: false,
-      },
-      async (progress) => {
-        try {
-          progress.report({ message: "Cloning repository..." });
-          await cloneGKRepo(GK_PATH);
-
-          vscode.window.showInformationMessage(
-            `✅ Global Knowledge cloned to ~/.alex/global-knowledge\n\nPremium features unlocked!`,
-          );
-          return true;
-        } catch (error) {
-          vscode.window.showErrorMessage(
-            `Failed to clone: ${error}\n\nMake sure git is installed and you have internet access.`,
-          );
-          return false;
-        }
-      },
-    );
+  if (choice === "Create AI-Memory") {
+    try {
+      await scaffoldAIMemory(location.folderPath);
+      vscode.window.showInformationMessage(
+        `AI-Memory created at ${location.folderPath}`,
+      );
+      return true;
+    } catch (error) {
+      vscode.window.showErrorMessage(
+        `Failed to create AI-Memory: ${error instanceof Error ? error.message : String(error)}`,
+      );
+      return false;
+    }
   }
 
-  return false; // Skipped
+  return false;
 }
 
+// ============================================================================
+// Manual Command
+// ============================================================================
+
 /**
- * Command: Alex: Setup Global Knowledge
- * Manual trigger for GK setup
+ * Command: Alex: Setup AI-Memory
+ * Manual trigger for AI-Memory setup.
  */
 export async function setupGlobalKnowledgeCommand(): Promise<void> {
-  const isSetup = await isGlobalKnowledgeSetup();
+  const isSetup = await isAIMemorySetup();
 
   if (isSetup) {
-    const isLink = await isSymlink(GK_PATH);
-    let target = GK_PATH;
-
-    if (isLink) {
-      try {
-        target = await fs.readlink(GK_PATH);
-      } catch {
-        // Ignore
-      }
-    }
-
+    const location = resolveAIMemoryLocation();
+    const syncLabel = location.isOneDrive ? " (OneDrive)" : " (local only)";
     const reconfigure = await vscode.window.showInformationMessage(
-      `Global Knowledge is already configured.\n\nLocation: ${target}\n\nReconfigure?`,
-      "Reconfigure",
+      `AI-Memory is configured at:\n${location.folderPath}${syncLabel}\n\nWhat would you like to do?`,
       "Open Folder",
+      "Re-scaffold Missing Files",
       "Cancel",
     );
 
-    if (reconfigure === "Reconfigure") {
-      // Remove existing setup and re-run
-      if (isLink) {
-        await fs.unlink(GK_PATH);
-      } else {
-        const backupPath = `${GK_PATH}-backup-${Date.now()}`;
-        await fs.move(GK_PATH, backupPath);
-        vscode.window.showInformationMessage(`Backed up to ${backupPath}`);
-      }
-      await ensureGlobalKnowledgeSetup();
-    } else if (reconfigure === "Open Folder") {
+    if (reconfigure === "Open Folder") {
       vscode.commands.executeCommand(
         "vscode.openFolder",
-        vscode.Uri.file(target),
+        vscode.Uri.file(location.folderPath),
         { forceNewWindow: true },
       );
+    } else if (reconfigure === "Re-scaffold Missing Files") {
+      try {
+        await scaffoldAIMemory(location.folderPath);
+        vscode.window.showInformationMessage(
+          "Missing AI-Memory files re-created (existing files preserved).",
+        );
+      } catch (error) {
+        vscode.window.showErrorMessage(
+          `Failed: ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
     }
   } else {
     await ensureGlobalKnowledgeSetup();
