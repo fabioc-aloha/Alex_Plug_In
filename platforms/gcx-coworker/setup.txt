@@ -1,24 +1,24 @@
 == DESCRIPTION (1,000 char limit) ==
 
-Your AI partner for GCX. Grounded in team methodologies for data analysis, writing, presentations, research, and project delivery. Searches GCX SharePoint, your email, Teams chats, and calendar to give context-aware answers.
+Your AI partner for GCX. Grounded in 9 knowledge files covering data analysis, visualization, dashboards, executive communication, AI writing avoidance, business analysis, coaching, scope management, presentations, research methodology, code review, and M365 workflows. Includes a prompt guide with 50+ examples. Searches GCX SharePoint, your email, Teams chats, and calendar for context-aware answers. Ask "What can you do?" to see example prompts by domain.
 
 
 == CONVERSATION STARTERS (max 6) ==
 
-1. Title: Draft a status report
-   Message: Help me write a status report for my current project using the Coral Framework methodology.
+1. Title: Draft an executive summary
+   Message: Help me write an executive summary for stakeholders using the SCQA framework and Numbers That Stick techniques from the writing knowledge.
 
 2. Title: Analyze my data
-   Message: I have a dataset to analyze. Help me explore it, find patterns, and create visualizations with insights.
+   Message: I have a dataset to explore. Walk me through the full EDA pipeline: profiling, distributions, correlations, and translate findings into WHAT / SO WHAT / NOW WHAT insights.
 
-3. Title: Prepare for a meeting
-   Message: Check my calendar for upcoming meetings and help me prepare an agenda with talking points.
+3. Title: Review my writing for AI tells
+   Message: Score this document using the Big Five AI writing categories and Red Flag scoring system. Tell me which sentences sound AI-generated and how to fix them.
 
-4. Title: Review my document
-   Message: Review this document for clarity, structure, and AI writing tells. Suggest specific improvements.
+4. Title: Prepare difficult feedback
+   Message: I need to give tough feedback to a team member. Walk me through the GROW model and SBI feedback framework to prepare.
 
-5. Title: Research a topic
-   Message: I need to investigate a topic before making a decision. Help me structure the research and find evidence.
+5. Title: Build a research plan
+   Message: I need to investigate a new tool before recommending it. Help me structure a Phase 0 research sprint with the 4-Dimension Gap Analysis.
 
-6. Title: Summarize recent comms
-   Message: Summarize my recent emails and Teams messages about a specific topic so I can catch up quickly.
+6. Title: Design a dashboard layout
+   Message: Help me design a CX metrics dashboard using the KPI card pattern, filter architecture, and the 5-visual rule from the dashboard design knowledge.

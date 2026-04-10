@@ -204,30 +204,30 @@ Embedded files are the agent's working memory. Every token that isn't useful for
 
 Reorganize from 20 skill-boundary files into fewer, larger, semantically coherent documents. Each file covers a complete domain so the agent can find everything it needs in one retrieval chunk.
 
-| #   | File                                     | Source Skills                                                                                                                      | Actual Size | Domain Coverage                                                                                                                                                                              |
-| --- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 01  | **coworker-identity.docx**               | Custom (persona modes, ethical principles, quality standards)                                                                      | 21.4 KB     | Who the agent is. Tone, boundaries, GCX context, persona modes (Researcher/Builder/Validator/Documentarian behaviors), ethical principles. One file for all "how should I behave" questions. |
-| 02  | **writing-and-communication.docx**       | ai-writing-avoidance (9.9 KB), executive-storytelling (13.9 KB), status-reporting (7.1 KB)                                         | 25.5 KB     | AI writing avoidance (Big Five categories, Red Flag scoring), SCQA framework, Pyramid Principle, Numbers That Stick, stakeholder management, status report methodology.                      |
+| #   | File                                     | Source Skills                                                                                                                               | Actual Size | Domain Coverage                                                                                                                                                                              |
+| --- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 01  | **coworker-identity.docx**               | Custom (persona modes, ethical principles, quality standards)                                                                               | 21.4 KB     | Who the agent is. Tone, boundaries, GCX context, persona modes (Researcher/Builder/Validator/Documentarian behaviors), ethical principles. One file for all "how should I behave" questions. |
+| 02  | **writing-and-communication.docx**       | ai-writing-avoidance (9.9 KB), executive-storytelling (13.9 KB), status-reporting (7.1 KB)                                                  | 25.5 KB     | AI writing avoidance (Big Five categories, Red Flag scoring), SCQA framework, Pyramid Principle, Numbers That Stick, stakeholder management, status report methodology.                      |
 | 03  | **data-analysis-and-visualization.docx** | data-analysis (11 KB), data-visualization (19.6 KB), data-storytelling (8.8 KB), dashboard-design (12.2 KB), chart-interpretation (11.3 KB) | 57.1 KB     | EDA pipeline, chart selection, Tableau 10 palette, annotation, decluttering, KPI card design, filter architecture, self-contained HTML pattern, three-act data narrative, dashboard layout.  |
-| 04  | **business-operations.docx**             | business-analysis (7.6 KB), meeting-efficiency (9.7 KB), coaching-techniques (9.4 KB), scope-management (7.9 KB)                   | 36.5 KB     | Requirements elicitation, BRDs, GROW model, SBI feedback, meeting cost formula, 5 scope negotiation patterns, MoSCoW, scope health check, facilitation techniques.                          |
-| 05  | **presentations-and-slides.docx**        | slide-design (10 KB), presentation-tool-selection (7.9 KB)                                                                         | 11.4 KB     | Slide design, visual hierarchy, tool selection (Marp/Gamma/PptxGenJS), Gamma workflow. Standalone because presentation requests are frequent and specific.                                   |
-| 06  | **research-methodology.docx**            | research-first-development (16.3 KB), bootstrap-learning (4.5 KB), prompt-engineering (9.3 KB)                                     | 24.0 KB     | Phase 0 research sprint, 4-Dimension Gap Analysis, bootstrap learning 5 phases, Feynman check, prompt craft for effective LLM queries.                                                      |
-| 07  | **code-quality.docx**                    | code-review (8.1 KB), trimmed: security content removed (Copilot knows OWASP/STRIDE natively)                                     | 8.1 KB      | Code review methodology (3-pass review, comment prefixes, 4 checklists), NASA/JPL Power of 10, CX-focused: non-developers in reviews, when to request security review.                      |
-| 08  | **m365-workflows.docx**                  | Custom (replaced Graph API reference with practical CX workflows)                                                                  | 22.1 KB     | SharePoint organization for CX teams, Teams collaboration patterns, Power Automate for CX, email workflows, calendar integration, M365 Copilot usage tips.                                  |
+| 04  | **business-operations.docx**             | business-analysis (7.6 KB), meeting-efficiency (9.7 KB), coaching-techniques (9.4 KB), scope-management (7.9 KB)                            | 36.5 KB     | Requirements elicitation, BRDs, GROW model, SBI feedback, meeting cost formula, 5 scope negotiation patterns, MoSCoW, scope health check, facilitation techniques.                           |
+| 05  | **presentations-and-slides.docx**        | slide-design (10 KB), presentation-tool-selection (7.9 KB)                                                                                  | 11.4 KB     | Slide design, visual hierarchy, tool selection (Marp/Gamma/PptxGenJS), Gamma workflow. Standalone because presentation requests are frequent and specific.                                   |
+| 06  | **research-methodology.docx**            | research-first-development (16.3 KB), bootstrap-learning (4.5 KB), prompt-engineering (9.3 KB)                                              | 24.0 KB     | Phase 0 research sprint, 4-Dimension Gap Analysis, bootstrap learning 5 phases, Feynman check, prompt craft for effective LLM queries.                                                       |
+| 07  | **code-quality.docx**                    | code-review (8.1 KB), trimmed: security content removed (Copilot knows OWASP/STRIDE natively)                                               | 8.1 KB      | Code review methodology (3-pass review, comment prefixes, 4 checklists), NASA/JPL Power of 10, CX-focused: non-developers in reviews, when to request security review.                       |
+| 08  | **m365-workflows.docx**                  | Custom (replaced Graph API reference with practical CX workflows)                                                                           | 22.1 KB     | SharePoint organization for CX teams, Teams collaboration patterns, Power Automate for CX, email workflows, calendar integration, M365 Copilot usage tips.                                   |
 
 **Total**: 8 files, 206 KB actual (down from 20 files, 746 KB). 1,473 table rows preserved (96% of source). 12 unused file slots reserved for future domain additions.
 
 ### What Was Cut
 
-| Original Content                                                                              | Action         | Reason                                                                                               |
-| --------------------------------------------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
-| Pack 02: Cognitive protocols (meditation, dream state, synapse monitoring, version detection) | Dropped        | VS Code extension internals. Not relevant to workplace agent.                                        |
-| Pack 15: Azure cloud (WAF pillars, IaC, deployment patterns)                                  | Dropped        | Too specialized. GCX users ask Azure questions to Copilot Chat in VS Code, not to a workplace agent. |
-| Pack 19: Agent modes (slash commands, memory file ops)                                        | Kept behaviors | `/meditate`, `/dream` are VS Code commands. Researcher/Builder/Validator tone guidance kept in 01.   |
-| Pack 20: Ethical framework (full moral psychology)                                            | Kept principles| Compressed to core ethical reasoning principles in 01. Academic framework details dropped.            |
-| File 07: OWASP Top 10, STRIDE, SFI, credential mgmt, dependency audits                       | Dropped        | M365 Copilot already knows generic security. Kept code review methodology + CX-focused guidance.     |
-| File 08: Graph API endpoints, TypeScript code, OAuth patterns, OData, Teams SDK               | Replaced       | M365 Copilot already knows Graph/Teams. Replaced with practical CX workflow patterns.                |
-| All packs: Skill metadata tables, blockquote banners, horizontal rules, timestamps            | Dropped        | LLM noise. Zero retrieval value.                                                                     |
+| Original Content                                                                              | Action          | Reason                                                                                               |
+| --------------------------------------------------------------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Pack 02: Cognitive protocols (meditation, dream state, synapse monitoring, version detection) | Dropped         | VS Code extension internals. Not relevant to workplace agent.                                        |
+| Pack 15: Azure cloud (WAF pillars, IaC, deployment patterns)                                  | Dropped         | Too specialized. GCX users ask Azure questions to Copilot Chat in VS Code, not to a workplace agent. |
+| Pack 19: Agent modes (slash commands, memory file ops)                                        | Kept behaviors  | `/meditate`, `/dream` are VS Code commands. Researcher/Builder/Validator tone guidance kept in 01.   |
+| Pack 20: Ethical framework (full moral psychology)                                            | Kept principles | Compressed to core ethical reasoning principles in 01. Academic framework details dropped.           |
+| File 07: OWASP Top 10, STRIDE, SFI, credential mgmt, dependency audits                        | Dropped         | M365 Copilot already knows generic security. Kept code review methodology + CX-focused guidance.     |
+| File 08: Graph API endpoints, TypeScript code, OAuth patterns, OData, Teams SDK               | Replaced        | M365 Copilot already knows Graph/Teams. Replaced with practical CX workflow patterns.                |
+| All packs: Skill metadata tables, blockquote banners, horizontal rules, timestamps            | Dropped         | LLM noise. Zero retrieval value.                                                                     |
 
 ### LLM Optimization Rules for Embedded Files
 
@@ -290,14 +290,14 @@ These require no content curation. Configure the capabilities in the manifest an
 
 ### Content Budget
 
-| Resource                         | Limit                       | Our Usage                     | Headroom                    |
-| -------------------------------- | --------------------------- | ----------------------------- | --------------------------- |
-| Embedded files                   | 20                          | 8                             | 12 slots for future domains |
-| Embedded file size               | 1.8M chars / 750 pages each | 57.1 KB / ~25 pages largest   | Massive headroom            |
-| Instructions                     | 8,000 chars                 | 6,309 chars (79%)             | 1,691 chars                 |
-| SharePoint files (by ID)         | 20 (full content search)    | TBD                           | TBD                         |
-| SharePoint files (Agent Builder) | 100                         | TBD                           | TBD                         |
-| Conversation starters            | 6                           | 6                             | 0                           |
+| Resource                         | Limit                       | Our Usage                   | Headroom                    |
+| -------------------------------- | --------------------------- | --------------------------- | --------------------------- |
+| Embedded files                   | 20                          | 8                           | 12 slots for future domains |
+| Embedded file size               | 1.8M chars / 750 pages each | 57.1 KB / ~25 pages largest | Massive headroom            |
+| Instructions                     | 8,000 chars                 | 6,309 chars (79%)           | 1,691 chars                 |
+| SharePoint files (by ID)         | 20 (full content search)    | TBD                         | TBD                         |
+| SharePoint files (Agent Builder) | 100                         | TBD                         | TBD                         |
+| Conversation starters            | 6                           | 6                           | 0                           |
 
 ### Decision 2: .md File Optimization for LLM Consumption
 
@@ -421,14 +421,14 @@ To add general OneDrive access back, omit `items_by_url` entirely (searches ever
 
 ### Current State (After Phase 1-2)
 
-| File                               | Format | Size   | Status                                           |
-| ---------------------------------- | ------ | ------ | ------------------------------------------------ |
-| 8 knowledge packs                  | .md    | 206 KB | Complete, LLM-optimized, fidelity-audited        |
-| 8 knowledge packs                  | .docx  | TBD    | Pending: convert from .md via md-to-word.cjs     |
-| instructions.txt                   | .txt   | 6.3 KB | Complete (6,309/8,000 chars)                     |
-| setup.txt                          | .txt   | ~1 KB  | Complete                                         |
-| profile.png (variant-06)           | .png   | ~50 KB | Complete (gradient C logo)                       |
-| color.png + outline.png            | .png   | ~50 KB | Complete (Agent Builder icon variants)           |
+| File                     | Format | Size   | Status                                       |
+| ------------------------ | ------ | ------ | -------------------------------------------- |
+| 8 knowledge packs        | .md    | 206 KB | Complete, LLM-optimized, fidelity-audited    |
+| 8 knowledge packs        | .docx  | TBD    | Pending: convert from .md via md-to-word.cjs |
+| instructions.txt         | .txt   | 6.3 KB | Complete (6,309/8,000 chars)                 |
+| setup.txt                | .txt   | ~1 KB  | Complete                                     |
+| profile.png (variant-06) | .png   | ~50 KB | Complete (gradient C logo)                   |
+| color.png + outline.png  | .png   | ~50 KB | Complete (Agent Builder icon variants)       |
 
 ### Remaining Work
 
