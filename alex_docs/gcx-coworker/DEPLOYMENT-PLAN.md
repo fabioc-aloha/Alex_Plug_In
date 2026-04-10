@@ -1,7 +1,7 @@
 # GCX Coworker Declarative Agent: Deployment Plan
 
 **Date**: April 9, 2026
-**Status**: Planning
+**Status**: Phase 1-2 Complete, Ready for Agent Builder Deployment
 **Location**: `platforms/gcx-coworker/`
 
 ## Context
@@ -204,31 +204,30 @@ Embedded files are the agent's working memory. Every token that isn't useful for
 
 Reorganize from 20 skill-boundary files into fewer, larger, semantically coherent documents. Each file covers a complete domain so the agent can find everything it needs in one retrieval chunk.
 
-| #   | File                                     | Sources (current packs)                                                                          | Est. Size | Domain Coverage                                                                                                                                                                              |
-| --- | ---------------------------------------- | ------------------------------------------------------------------------------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 01  | **coworker-identity.docx**               | 01 (identity), 19 (agent modes: persona behaviors only), 20 (ethical framework: principles only) | ~25 KB    | Who the agent is. Tone, boundaries, GCX context, persona modes (Researcher/Builder/Validator/Documentarian behaviors), ethical principles. One file for all "how should I behave" questions. |
-| 02  | **writing-and-communication.docx**       | 04 (writing quality), 08 (executive communication)                                               | ~75 KB    | AI writing avoidance, human-sounding prose, executive storytelling, stakeholder narratives, status report methodology. Everything about producing written output.                            |
-| 03  | **data-analysis-and-visualization.docx** | 05 (data analysis), 06 (data visualization), 07 (data storytelling)                              | ~140 KB   | EDA, profiling, distributions, chart selection, color theory, annotation, decluttering, three-act data narrative, dashboard design. Complete data-to-insight pipeline.                       |
-| 04  | **business-operations.docx**             | 10 (business analysis), 18 (project leadership), 09 (meetings/coaching)                          | ~95 KB    | Requirements elicitation, BRDs, process analysis, project scaffolding, scope management, meeting efficiency, coaching techniques. Day-to-day workplace operations.                           |
-| 05  | **presentations-and-slides.docx**        | 17 (presentations)                                                                               | ~30 KB    | Slide design, visual hierarchy, tool selection (Marp/Gamma/PptxGenJS), Gamma workflow. Standalone because presentation requests are frequent and specific.                                   |
-| 06  | **research-methodology.docx**            | 03 (research/learning), 11 (prompt engineering: LLM interaction patterns only)                   | ~60 KB    | Research-first development, bootstrap learning, evidence standards, literature review, prompt craft for effective LLM queries. How to investigate before building.                           |
-| 07  | **code-quality.docx**                    | 12 (code review principles only), 14 (security awareness: OWASP/STRIDE only)                     | ~40 KB    | Code review priorities, security review checklist (OWASP Top 10, STRIDE), privacy principles. Keep only what a workplace CX professional needs, not full developer tooling.                  |
-| 08  | **m365-workflows.docx**                  | 16 (M365/Graph: workflow patterns only)                                                          | ~25 KB    | Teams app patterns, Graph API common scenarios (calendar, mail, people), Entra ID basics. Practical "how do I do X in M365" not raw API reference.                                           |
+| #   | File                                     | Source Skills                                                                                                                      | Actual Size | Domain Coverage                                                                                                                                                                              |
+| --- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 01  | **coworker-identity.docx**               | Custom (persona modes, ethical principles, quality standards)                                                                      | 21.4 KB     | Who the agent is. Tone, boundaries, GCX context, persona modes (Researcher/Builder/Validator/Documentarian behaviors), ethical principles. One file for all "how should I behave" questions. |
+| 02  | **writing-and-communication.docx**       | ai-writing-avoidance (9.9 KB), executive-storytelling (13.9 KB), status-reporting (7.1 KB)                                         | 25.5 KB     | AI writing avoidance (Big Five categories, Red Flag scoring), SCQA framework, Pyramid Principle, Numbers That Stick, stakeholder management, status report methodology.                      |
+| 03  | **data-analysis-and-visualization.docx** | data-analysis (11 KB), data-visualization (19.6 KB), data-storytelling (8.8 KB), dashboard-design (12.2 KB), chart-interpretation (11.3 KB) | 57.1 KB     | EDA pipeline, chart selection, Tableau 10 palette, annotation, decluttering, KPI card design, filter architecture, self-contained HTML pattern, three-act data narrative, dashboard layout.  |
+| 04  | **business-operations.docx**             | business-analysis (7.6 KB), meeting-efficiency (9.7 KB), coaching-techniques (9.4 KB), scope-management (7.9 KB)                   | 36.5 KB     | Requirements elicitation, BRDs, GROW model, SBI feedback, meeting cost formula, 5 scope negotiation patterns, MoSCoW, scope health check, facilitation techniques.                          |
+| 05  | **presentations-and-slides.docx**        | slide-design (10 KB), presentation-tool-selection (7.9 KB)                                                                         | 11.4 KB     | Slide design, visual hierarchy, tool selection (Marp/Gamma/PptxGenJS), Gamma workflow. Standalone because presentation requests are frequent and specific.                                   |
+| 06  | **research-methodology.docx**            | research-first-development (16.3 KB), bootstrap-learning (4.5 KB), prompt-engineering (9.3 KB)                                     | 24.0 KB     | Phase 0 research sprint, 4-Dimension Gap Analysis, bootstrap learning 5 phases, Feynman check, prompt craft for effective LLM queries.                                                      |
+| 07  | **code-quality.docx**                    | code-review (8.1 KB), trimmed: security content removed (Copilot knows OWASP/STRIDE natively)                                     | 8.1 KB      | Code review methodology (3-pass review, comment prefixes, 4 checklists), NASA/JPL Power of 10, CX-focused: non-developers in reviews, when to request security review.                      |
+| 08  | **m365-workflows.docx**                  | Custom (replaced Graph API reference with practical CX workflows)                                                                  | 22.1 KB     | SharePoint organization for CX teams, Teams collaboration patterns, Power Automate for CX, email workflows, calendar integration, M365 Copilot usage tips.                                  |
 
-**Total**: 8 files, ~490 KB estimated (down from 20 files, 746 KB). 12 unused file slots reserved for future domain additions.
+**Total**: 8 files, 206 KB actual (down from 20 files, 746 KB). 1,473 table rows preserved (96% of source). 12 unused file slots reserved for future domain additions.
 
-### What Gets Cut
+### What Was Cut
 
-| Current Content                                                                               | Action                          | Reason                                                                                               |
-| --------------------------------------------------------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Pack 02: Cognitive protocols (meditation, dream state, synapse monitoring, version detection) | **Drop entirely**               | VS Code extension internals. Not relevant to workplace agent.                                        |
-| Pack 15: Azure cloud (WAF pillars, IaC, deployment patterns)                                  | **Drop entirely**               | Too specialized. GCX users ask Azure questions to Copilot Chat in VS Code, not to a workplace agent. |
-| Pack 19: Agent modes (slash commands, memory file ops)                                        | **Keep persona behaviors only** | `/meditate`, `/dream` are VS Code commands. Researcher/Builder/Validator tone guidance is useful.    |
-| Pack 20: Ethical framework (full moral psychology)                                            | **Keep principles only**        | Compress to core ethical reasoning principles. Drop academic framework details.                      |
-| All packs: Skill metadata tables                                                              | **Drop**                        | `Skill ID`, `Version`, `Category`, `Prerequisites` are internal indexing, not user-facing knowledge. |
-| All packs: `> Knowledge pack for M365 Agent Builder` banners                                  | **Drop**                        | LLM noise.                                                                                           |
-| All packs: `---` horizontal rules                                                             | **Drop**                        | Parser confusion, token waste.                                                                       |
-| All packs: `Generated YYYY-MM-DD` timestamps                                                  | **Drop**                        | Irrelevant to retrieval.                                                                             |
+| Original Content                                                                              | Action         | Reason                                                                                               |
+| --------------------------------------------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
+| Pack 02: Cognitive protocols (meditation, dream state, synapse monitoring, version detection) | Dropped        | VS Code extension internals. Not relevant to workplace agent.                                        |
+| Pack 15: Azure cloud (WAF pillars, IaC, deployment patterns)                                  | Dropped        | Too specialized. GCX users ask Azure questions to Copilot Chat in VS Code, not to a workplace agent. |
+| Pack 19: Agent modes (slash commands, memory file ops)                                        | Kept behaviors | `/meditate`, `/dream` are VS Code commands. Researcher/Builder/Validator tone guidance kept in 01.   |
+| Pack 20: Ethical framework (full moral psychology)                                            | Kept principles| Compressed to core ethical reasoning principles in 01. Academic framework details dropped.            |
+| File 07: OWASP Top 10, STRIDE, SFI, credential mgmt, dependency audits                       | Dropped        | M365 Copilot already knows generic security. Kept code review methodology + CX-focused guidance.     |
+| File 08: Graph API endpoints, TypeScript code, OAuth patterns, OData, Teams SDK               | Replaced       | M365 Copilot already knows Graph/Teams. Replaced with practical CX workflow patterns.                |
+| All packs: Skill metadata tables, blockquote banners, horizontal rules, timestamps            | Dropped        | LLM noise. Zero retrieval value.                                                                     |
 
 ### LLM Optimization Rules for Embedded Files
 
@@ -291,18 +290,18 @@ These require no content curation. Configure the capabilities in the manifest an
 
 ### Content Budget
 
-| Resource                         | Limit                       | Our Usage                  | Headroom                    |
-| -------------------------------- | --------------------------- | -------------------------- | --------------------------- |
-| Embedded files                   | 20                          | 8                          | 12 slots for future domains |
-| Embedded file size               | 1.8M chars / 750 pages each | ~60 KB / ~25 pages largest | Massive headroom            |
-| Instructions                     | 8,000 chars                 | ~4,900 chars (TBD rewrite) | ~3,100 chars                |
-| SharePoint files (by ID)         | 20 (full content search)    | TBD                        | TBD                         |
-| SharePoint files (Agent Builder) | 100                         | TBD                        | TBD                         |
-| Conversation starters            | 6                           | 6                          | 0                           |
+| Resource                         | Limit                       | Our Usage                     | Headroom                    |
+| -------------------------------- | --------------------------- | ----------------------------- | --------------------------- |
+| Embedded files                   | 20                          | 8                             | 12 slots for future domains |
+| Embedded file size               | 1.8M chars / 750 pages each | 57.1 KB / ~25 pages largest   | Massive headroom            |
+| Instructions                     | 8,000 chars                 | 6,309 chars (79%)             | 1,691 chars                 |
+| SharePoint files (by ID)         | 20 (full content search)    | TBD                           | TBD                         |
+| SharePoint files (Agent Builder) | 100                         | TBD                           | TBD                         |
+| Conversation starters            | 6                           | 6                             | 0                           |
 
 ### Decision 2: .md File Optimization for LLM Consumption
 
-**Problem**: Current .md files are formatted for human reading (horizontal rules, decorative separators, verbose headers). LLMs don't need visual formatting. Every wasted token in a 746 KB knowledge base is retrieval noise.
+**Completed**. All 8 curated .md files have LLM optimization rules applied: no frontmatter, no horizontal rules, no blockquote banners, no metadata tables, tables first-class, query-shaped section titles, no em dashes, no AI-tell words (verified by automated scan).
 
 **Action**: Strip LLM-hostile patterns from knowledge packs before conversion:
 - Remove `---` horizontal rules (confuse YAML parsers, waste tokens)
@@ -314,14 +313,13 @@ These require no content curation. Configure the capabilities in the manifest an
 
 ### Decision 3: Instructions Optimization
 
-**Problem**: Current instructions are 4,869/8,000 chars (61%). Microsoft's instruction patterns show we can be more structured.
-
-**Action**: Rewrite instructions using Microsoft's documented patterns:
-- Add literal-execution header (Pattern 8) for GPT 5.1+ stability
-- Structure as deterministic workflows (Pattern 1)
-- Add explicit output contract (Pattern 4)
-- Add self-evaluation gate (Pattern 6)
-- Keep instructions to 70-80% of limit (leave room for iteration)
+**Completed**. Instructions rewritten to 6,309/8,000 chars (79%). Contains:
+- Identity and 4 persona modes (Researcher/Builder/Validator/Documentarian)
+- Knowledge routing table mapping 8 domains to files
+- Capability routing (8 capabilities with triggers)
+- Writing rules (no em dashes, no AI-tell words, human-sounding output)
+- Output format specifications
+- Self-evaluation gate before every response
 
 ### Decision 4: File Format for Embedded Upload
 
@@ -354,26 +352,27 @@ To add general OneDrive access back, omit `items_by_url` entirely (searches ever
 
 ## Deployment Plan
 
-### Phase 1: Curate and Build Knowledge Files
+### Phase 1: Curate and Build Knowledge Files (COMPLETED)
 
-1. Update `pack-knowledge.cjs` to produce the new 8-file semantic structure (see Content Curation Strategy)
-2. Apply LLM optimization rules: strip metadata, banners, hr rules, timestamps, skill frontmatter, Mermaid diagrams
-3. Drop: cognitive protocols (pack 02), Azure cloud (pack 15), slash commands from agent modes (pack 19)
-4. Keep: persona behaviors, ethical principles, all workplace skills
-5. Front-load critical content in each file (most-queried frameworks first)
-6. Verify no cross-file redundancy (each concept in exactly one file)
-7. Generate 8 .md source files
-8. Convert to .docx via `md-to-word.cjs`
-9. Validate: total size < 500 KB, file count = 8, tables render correctly in Word
+1. ~~Update `pack-knowledge.cjs` to produce the new 8-file semantic structure~~ Done: hand-curated from 19 source skills
+2. ~~Apply LLM optimization rules~~ Done: no frontmatter, no `---`, no blockquotes, no metadata tables, no em dashes, no AI-tell words
+3. ~~Drop cognitive protocols, Azure cloud, slash commands~~ Done: removed VS Code internals
+4. ~~Keep persona behaviors, ethical principles, all workplace skills~~ Done
+5. ~~Front-load critical content~~ Done: most-queried frameworks at top of each file
+6. ~~Verify no cross-file redundancy~~ Done: each concept in exactly one file
+7. ~~Generate 8 .md source files~~ Done: 206 KB total, 1,473 table rows
+8. Convert to .docx via `md-to-word.cjs` (PENDING)
+9. Validate: tables render correctly in Word (PENDING)
 
-### Phase 2: Rewrite Instructions
+**Behavioral fidelity audit**: 8/8 user scenarios traced through both source skills and curated files. All methodologies, decision frameworks, tables, and templates verified present.
 
-1. Audit current instructions against Microsoft's 9 patterns
-2. Add literal-execution header for GPT 5.1+ stability
-3. Structure workflows as deterministic steps
-4. Add output contract for common tasks (status reports, meeting prep)
-5. Add self-evaluation gate
-6. Validate: char count < 8,000, all capabilities referenced
+### Phase 2: Rewrite Instructions (COMPLETED)
+
+1. ~~Audit current instructions against Microsoft's 9 patterns~~ Done
+2. ~~Structure workflows as deterministic steps~~ Done: persona modes, knowledge routing, capability routing
+3. ~~Add output contract for common tasks~~ Done: format specifications per domain
+4. ~~Add self-evaluation gate~~ Done: quality check before every response
+5. ~~Validate: char count < 8,000~~ Done: 6,309/8,000 chars (79%), 1,691 chars headroom
 
 ### Phase 3: Agent Builder Deployment
 
@@ -381,7 +380,7 @@ To add general OneDrive access back, omit `items_by_url` entirely (searches ever
 2. Set name: "GCX Coworker" (30 char limit)
 3. Set description (1,000 char limit)
 4. Paste instructions from `declarativeAgent.json`
-5. Upload 20 .docx files as embedded knowledge
+5. Upload 8 .docx files as embedded knowledge
 6. Add SharePoint URL: `https://microsoft.sharepoint.com/teams/GlobalCustomerExperience`
 7. Enable capabilities: Code interpreter, Image generator
 8. Add Email, Teams, People, Meetings (Copilot license required)
@@ -392,7 +391,7 @@ To add general OneDrive access back, omit `items_by_url` entirely (searches ever
 
 1. **Canary test**: "What methodology do you use for status reports?" (expect: Coral Framework v3.2)
 2. **Identity test**: "Who are you?" (expect: GCX Coworker identity, not "Microsoft Copilot")
-3. **Knowledge test**: "What are the principles of AI writing avoidance?" (expect: content from pack 04)
+3. **Knowledge test**: "What are the principles of AI writing avoidance?" (expect: Big Five categories from file 02)
 4. **SharePoint test**: "Find the latest GCX process documentation" (expect: content from GCX SharePoint)
 5. **Capability test**: "Analyze this data" with CSV attachment (expect: Code interpreter activation)
 6. **Writing test**: Verify no em dashes, no AI-tell phrases in responses
@@ -420,38 +419,30 @@ To add general OneDrive access back, omit `items_by_url` entirely (searches ever
 
 ## File Inventory
 
-### What We Have (Current State)
+### Current State (After Phase 1-2)
 
-| File                  | Format | Size     | Purpose                                      |
-| --------------------- | ------ | -------- | -------------------------------------------- |
-| 20 knowledge packs    | .md    | 746 KB   | Source files (need reorganization + cleanup) |
-| 20 knowledge packs    | .docx  | 1,478 KB | Word conversions (stale, pre-reorganization) |
-| declarativeAgent.json | .json  | ~6 KB    | DA manifest with instructions + capabilities |
-| pack-knowledge.cjs    | .cjs   | ~15 KB   | Knowledge pack generator                     |
-| build.ps1             | .ps1   | ~4 KB    | Build and deploy script                      |
+| File                               | Format | Size   | Status                                           |
+| ---------------------------------- | ------ | ------ | ------------------------------------------------ |
+| 8 knowledge packs                  | .md    | 206 KB | Complete, LLM-optimized, fidelity-audited        |
+| 8 knowledge packs                  | .docx  | TBD    | Pending: convert from .md via md-to-word.cjs     |
+| instructions.txt                   | .txt   | 6.3 KB | Complete (6,309/8,000 chars)                     |
+| setup.txt                          | .txt   | ~1 KB  | Complete                                         |
+| profile.png (variant-06)           | .png   | ~50 KB | Complete (gradient C logo)                       |
+| color.png + outline.png            | .png   | ~50 KB | Complete (Agent Builder icon variants)           |
 
-### Target State (After Phase 1)
+### Remaining Work
 
-| File                  | Format | Size    | Purpose                                 |
-| --------------------- | ------ | ------- | --------------------------------------- |
-| 8 knowledge packs     | .md    | ~490 KB | LLM-optimized source (semantic domains) |
-| 8 knowledge packs     | .docx  | ~800 KB | Embedded upload files for Agent Builder |
-| declarativeAgent.json | .json  | ~6 KB   | DA manifest (reference, not deployed)   |
-| pack-knowledge.cjs    | .cjs   | ~15 KB  | Knowledge pack generator (updated)      |
-| build.ps1             | .ps1   | ~4 KB   | Build and deploy script                 |
-
-### What Needs to Change
-
-| Change                                           | Priority | Effort |
-| ------------------------------------------------ | -------- | ------ |
-| Reorganize 20 packs into 8 semantic domains      | P1       | 2h     |
-| Apply LLM optimization rules to all files        | P1       | 1h     |
-| Regenerate .docx from cleaned .md                | P1       | 15m    |
-| Rewrite instructions using MSoft patterns        | P1       | 2h     |
-| Deploy via Agent Builder UI                      | P1       | 30m    |
-| Run validation tests                             | P1       | 30m    |
-| Identify and add GCX SharePoint doc libraries    | P2       | 30m    |
-| Consider Copilot connectors (Azure DevOps, etc.) | P3       | TBD    |
+| Change                                           | Priority | Status      |
+| ------------------------------------------------ | -------- | ----------- |
+| ~~Reorganize 20 packs into 8 semantic domains~~  | ~~P1~~   | DONE        |
+| ~~Apply LLM optimization rules to all files~~    | ~~P1~~   | DONE        |
+| ~~Rewrite instructions using MSoft patterns~~    | ~~P1~~   | DONE        |
+| Convert 8 .md to .docx                           | P1       | Not started |
+| Deploy via Agent Builder UI                      | P1       | Not started |
+| Run validation tests (Phase 4)                   | P1       | Not started |
+| Share with pilot users (Phase 5)                 | P1       | Not started |
+| Identify and add GCX SharePoint doc libraries    | P2       | Not started |
+| Consider Copilot connectors (Azure DevOps, etc.) | P3       | Not started |
 
 ## Open Questions
 
