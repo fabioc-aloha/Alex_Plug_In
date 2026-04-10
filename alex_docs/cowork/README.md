@@ -1,6 +1,6 @@
 # Copilot Cowork Research
 
-Research collected: 2026-04-02
+Research collected: 2026-04-02, updated 2026-04-09
 Status: Frontier Preview (available via Frontier program since March 30, 2026)
 
 ## What is Copilot Cowork?
@@ -25,7 +25,11 @@ Cowork was announced as part of **Wave 3 of Microsoft 365 Copilot** on March 9, 
 | Built-in skills       | 13                                                               |
 | Custom skills limit   | 20 per user                                                      |
 | Max input             | 16,000 characters per message                                    |
+| Max attachment size   | 200 MB per file                                                  |
+| File output location  | OneDrive and SharePoint workspace                                |
+| Anthropic integration | Subprocessor for model execution (Sonnet 4.6, Opus 4.6)          |
 | Learn docs            | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/  |
+| Next milestone        | Microsoft Build 2026 (June 2-3)                                  |
 
 ## Document index
 
@@ -45,14 +49,15 @@ Cowork was announced as part of **Wave 3 of Microsoft 365 Copilot** on March 9, 
 
 ## Sources
 
-| Source                      | URL                                                                                                                                                               |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Blog: Announcement          | https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/copilot-cowork-a-new-way-of-getting-work-done/                                                      |
-| Blog: Frontier availability | https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/                                                           |
-| Blog: Wave 3 overview       | https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/powering-frontier-transformation-with-copilot-and-agents/                                           |
-| Learn: Overview             | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/                                                                                                   |
-| Learn: Get started          | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/get-started                                                                                        |
-| Learn: Usage guide          | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/use-cowork                                                                                         |
-| Learn: FAQ                  | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/cowork-faq                                                                                         |
-| Tech Community: Work IQ     | https://techcommunity.microsoft.com/blog/microsoft365copilotblog/a-closer-look-at-work-iq/4499789                                                                 |
-| Tech Community: Researcher  | https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-the-new-and-improved-researcher-%E2%80%93-powered-by-multi-model-intelligenc/4506011 |
+| Source                        | URL                                                                                                                                                               |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Blog: Announcement            | https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/copilot-cowork-a-new-way-of-getting-work-done/                                                      |
+| Blog: Frontier availability   | https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/30/copilot-cowork-now-available-in-frontier/                                                           |
+| Blog: Wave 3 overview         | https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/powering-frontier-transformation-with-copilot-and-agents/                                           |
+| Learn: Overview               | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/                                                                                                   |
+| Learn: Get started            | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/get-started                                                                                        |
+| Learn: Usage guide            | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/use-cowork                                                                                         |
+| Learn: FAQ                    | https://learn.microsoft.com/en-us/copilot/microsoft-365/cowork/cowork-faq                                                                                         |
+| Tech Community: Work IQ       | https://techcommunity.microsoft.com/blog/microsoft365copilotblog/a-closer-look-at-work-iq/4499789                                                                 |
+| Tech Community: Researcher    | https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-the-new-and-improved-researcher-%E2%80%93-powered-by-multi-model-intelligenc/4506011 |
+| Learn: Anthropic subprocessor | https://learn.microsoft.com/en-us/microsoft-365/copilot/connect-to-ai-subprocessor                                                                                |

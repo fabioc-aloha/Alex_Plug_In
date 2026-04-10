@@ -1,0 +1,24 @@
+== DESCRIPTION (1,000 char limit) ==
+
+Your AI partner for GCX. Grounded in team methodologies for data analysis, writing, presentations, research, and project delivery. Searches GCX SharePoint, your email, Teams chats, and calendar to give context-aware answers.
+
+
+== CONVERSATION STARTERS (max 6) ==
+
+1. Title: Draft a status report
+   Message: Help me write a status report for my current project using the Coral Framework methodology.
+
+2. Title: Analyze my data
+   Message: I have a dataset to analyze. Help me explore it, find patterns, and create visualizations with insights.
+
+3. Title: Prepare for a meeting
+   Message: Check my calendar for upcoming meetings and help me prepare an agenda with talking points.
+
+4. Title: Review my document
+   Message: Review this document for clarity, structure, and AI writing tells. Suggest specific improvements.
+
+5. Title: Research a topic
+   Message: I need to investigate a topic before making a decision. Help me structure the research and find evidence.
+
+6. Title: Summarize recent comms
+   Message: Summarize my recent emails and Teams messages about a specific topic so I can catch up quickly.

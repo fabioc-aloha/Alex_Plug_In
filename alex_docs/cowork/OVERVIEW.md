@@ -1,6 +1,6 @@
 # Copilot Cowork: Architecture and Capabilities
 
-Source: Microsoft official documentation and blog posts, collected 2026-04-02
+Source: Microsoft official documentation and blog posts, collected 2026-04-02, updated 2026-04-09
 
 ## What Copilot Cowork does
 
@@ -61,17 +61,18 @@ Cowork shows each step in your conversation, so you can follow along as it works
 
 ## User controls
 
-| Control              | Description                                                              |
-| -------------------- | ------------------------------------------------------------------------ |
-| Approve              | Allow action to proceed this one time                                    |
-| Approve and Remember | Allow action and skip prompt for similar actions in current conversation |
-| Reject               | Stop the action; Cowork skips it and moves on                            |
-| Pause (soft)         | Cowork finishes current step, then pauses                                |
-| Pause (hard)         | Cowork pauses immediately, including mid-step                            |
-| Resume               | Continue from where Cowork stopped                                       |
-| Cancel               | End the current task entirely                                            |
+| Control                                     | Description                                                                      |
+| ------------------------------------------- | -------------------------------------------------------------------------------- |
+| Action button (Send, Post, Create, etc.)    | Allow action to proceed this one time. Button label matches the specific action. |
+| Don't ask again (dropdown on action button) | Allow action and skip prompt for similar actions in current conversation         |
+| Approve All                                 | When multiple tool approvals are pending, allow all of them to proceed at once   |
+| Cancel                                      | Stop the action; Cowork skips it and moves on                                    |
+| Pause (soft)                                | Cowork finishes current step, then pauses                                        |
+| Pause (hard)                                | Cowork pauses immediately, including mid-step                                    |
+| Resume                                      | Continue from where Cowork stopped                                               |
+| Cancel task                                 | End the current task entirely                                                    |
 
-Approvals for medium and high risk actions include a risk level indicator so you can gauge impact before deciding.
+Approvals for medium and high risk actions include a risk level indicator so you can gauge impact before deciding. Some actions (email, Teams message, meeting) show a rich preview of the content before approval. Outlook mail rule actions show a detailed approval card explaining what the rule will do.
 
 ## Task management
 
@@ -94,7 +95,7 @@ The collapsible side panel shows:
 - **Output folder**: Files Cowork created (with Download and Preview buttons)
 - **Skills**: Skills loaded during the conversation (shown as chips)
 - **Schedule**: Scheduled prompts with management options
-- **Permissions**: Actions you approved with "Approve and Remember"
+- **Permissions**: Actions you approved with "Don't ask again", so you can review your approval preferences
 
 ## Multi-model architecture
 
@@ -119,7 +120,7 @@ The pattern: Anthropic's agentic model for multi-step tasks + Microsoft 365 secu
 - Tasks continue progressing safely as you move across devices
 - Cowork accesses only the services and data you're already permitted to use
 - Privacy: adheres to data protection policies detailed in OneDrive privacy/security documentation
-- Anthropic is used as a subprocessor (see: learn.microsoft.com/en-us/copilot/microsoft-365/connect-to-ai-subprocessor)
+- Anthropic is used as a subprocessor for secure, responsible model use within the organization (see: [Anthropic as subprocessor](https://learn.microsoft.com/en-us/microsoft-365/copilot/connect-to-ai-subprocessor))
 
 ## Supported file types
 
@@ -146,7 +147,10 @@ Preview supported inline: PDF, CSV, Markdown, Images, HTML.
 - Cannot access or edit files stored locally on your device (only OneDrive/SharePoint)
 - Cannot delete files or folders in OneDrive/SharePoint
 - Custom skills created by users are not validated by Microsoft
+- Attached files must be less than 200 MB
+- Cannot read encrypted files, even if the user has access
 - Mobile support not yet available
+- Output files saved to OneDrive and SharePoint workspace (not just OneDrive)
 - Sessions time out after extended inactivity; conversation cannot be resumed after timeout (observed in Frontier Preview, 2026-04-03)
 
 ## Real-world scenarios (from announcement blog)

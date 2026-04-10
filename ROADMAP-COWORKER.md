@@ -2,7 +2,7 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: April 3, 2026
+**Last Updated**: April 9, 2026
 
 Roadmap for Alex's non-VS Code platforms: M365 Copilot Agent, Cowork (GCX Coworker), and Windows Agent.
 Separated from the core VS Code roadmap to allow independent prioritization and decision-making.
@@ -11,11 +11,12 @@ Separated from the core VS Code roadmap to allow independent prioritization and 
 
 ## 🗺️ Platform Strategy
 
-| Platform                  | Heir                       |  Status   | Notes                                                                                                                                                                    |
-| ------------------------- | -------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **M365 Copilot Agent**    | `platforms/m365-copilot/`  | ✅ Active  | Declarative agent via Agent Builder + Office Add-ins                                                                                                                     |
-| **Cowork (GCX Coworker)** | `platforms/cowork/`        | 🧪 Testing | 20 curated skills + custom instructions deployed to OneDrive for M365 Copilot Cowork (Frontier Preview). Skill discovery confirmed, file read access under investigation |
-| **Windows Agent**         | `platforms/windows-agent/` | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace. Gate: Agent Workspace GA                                                             |
+| Platform                  | Heir                       |  Status   | Notes                                                                                                                                                   |
+| ------------------------- | -------------------------- | :-------: | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **GCX Coworker (DA)**     | `platforms/gcx-coworker/`  | ✅ Active  | Declarative agent via Agent Builder. 20 knowledge packs (82 sources, 746 KB) embedding full Alex brain. Canonical deployment path.                      |
+| **M365 Copilot Agent**    | `platforms/m365-copilot/`  | 🔄 Legacy  | Original M365 heir. Knowledge packs migrated to `gcx-coworker/`. Retained for Office Add-in and MCP integration docs.                                   |
+| **Cowork (GCX Coworker)** | `platforms/cowork/`        | ❌ Blocked | 20 curated skills deployed but Cowork cannot read file content or Custom Instructions on Microsoft corporate tenant. Pivoted to Agent Builder approach. |
+| **Windows Agent**         | `platforms/windows-agent/` | ⏳ Planned | MCP cognitive tools as ODR-registered agent connectors for Windows Agent Workspace. Gate: Agent Workspace GA                                            |
 
 ---
 
@@ -33,14 +34,80 @@ Wire Alex's MCP cognitive tools into the M365 declarative agent for Teams/Copilo
 
 ### Cowork (GCX Coworker)
 
-| Item                  | Status      | Notes                                                                                                                                       |
-| --------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Skill pack deployment | ✅ Done      | 20 skills built, zip deployed to OneDrive `Documents/Cowork/Skills/`                                                                        |
-| Custom instructions   | ✅ Done      | GCX Coworker identity, CX mission, Customer-First + Security-First principles                                                               |
-| Build script          | ✅ Done      | `platforms/cowork/build-skill-pack.ps1` with MD5 verification + prune step                                                                  |
-| Skill discovery       | ✅ Confirmed | Cowork lists all 20 skill folders correctly                                                                                                 |
-| File read access      | ❌ Blocked   | Cowork gets authentication errors reading SKILL.md content. Likely tenant-level Conditional Access/DLP policy on Microsoft corporate tenant |
-| Canary test           | ⏳ Pending   | "Coral Framework methodology version 3.2" embedded in status-reporting skill. Will validate once file read access is resolved               |
+| Item                  | Status      | Notes                                                                                                                                 |
+| --------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Skill pack deployment | ✅ Done      | 20 skills built, zip deployed to OneDrive `Documents/Cowork/Skills/`                                                                  |
+| Custom instructions   | ✅ Done      | GCX Coworker identity pasted into Settings > Personalization. File backup at `Cowork/custom-instructions.txt` (not auto-loaded)       |
+| Build script          | ✅ Done      | `platforms/cowork/build-skill-pack.ps1` with MD5 verification + prune step                                                            |
+| Skill discovery       | ✅ Confirmed | Cowork lists all 20 skill folders correctly                                                                                           |
+| File read access      | ❌ Blocked   | Cowork discovers skill folders but cannot read SKILL.md content. See investigation notes below.                                       |
+| Custom instructions   | ❌ Blocked   | Cowork ignores Custom Instructions text: responds as "Microsoft Copilot" instead of "GCX Coworker". Same root cause suspected.        |
+| Canary test           | ❌ Failed    | Asked "What status report methodology do you recommend?" Got generic RAG/4Ps/STAR. No mention of "Coral Framework v3.2" (2026-04-09). |
+
+### Agent Builder Knowledge Packs (Pivot from Cowork)
+
+Because Cowork file reading is blocked on the Microsoft corporate tenant, we pivoted to Agent Builder as the M365 deployment path. Instead of uploading 20 individual Cowork skills (80 KB), we consolidated Alex's full cognitive architecture into 20 themed knowledge packs (746 KB from 82 sources).
+
+| Item                   | Status      | Notes                                                                                                |
+| ---------------------- | ----------- | ---------------------------------------------------------------------------------------------------- |
+| Knowledge pack script  | ✅ Done      | `platforms/gcx-coworker/appPackage/knowledge/pack-knowledge.cjs` (configurable manifest, 82 sources) |
+| 20 knowledge files     | ✅ Generated | 746 KB total. Regenerable via `node pack-knowledge.cjs`                                              |
+| GCX Coworker heir      | ✅ Done      | `platforms/gcx-coworker/` with full ATK project structure, DA v1.6 manifest, build.ps1               |
+| GCX deploy guide       | ✅ Done      | `platforms/m365-copilot/AGENT-BUILDER-GCX-DEPLOY.md` (step-by-step)                                  |
+| Instructions prompt    | ✅ Done      | GCX Coworker identity (4,781 / 8,000 chars) with canary verification in declarativeAgent.json        |
+| Agent Builder creation | ⏳ Pending   | Deploy via Agent Builder UI at m365.cloud.microsoft                                                  |
+| Canary test            | ⏳ Pending   | Test "Coral Framework v3.2" + identity + writing quality                                             |
+| Share to GCX team      | ⏳ Pending   | Share after canary passes                                                                            |
+
+**Knowledge Pack Coverage** (82 sources across 20 files):
+
+| Pack | Theme                   | Sources                                                 | Size    |
+| ---- | ----------------------- | ------------------------------------------------------- | ------- |
+| 01   | Identity and Mission    | GCX persona, North Star, user profile                   | 14.5 KB |
+| 02   | Cognitive Protocols     | Meta-awareness, anti-hallucination, dialog engineering  | 52.3 KB |
+| 03   | Research and Learning   | Research-first, bootstrap learning, knowledge synthesis | 37.7 KB |
+| 04   | Writing Quality         | AI writing avoidance, markdown, documentation           | 45.6 KB |
+| 05   | Data Analysis           | Exploratory analysis, chart interpretation, databases   | 32.3 KB |
+| 06   | Data Visualization      | Charts, dashboards, graphic design, SVG                 | 64.4 KB |
+| 07   | Data Storytelling       | Narrative construction, Mermaid diagrams                | 53.6 KB |
+| 08   | Executive Communication | Storytelling, status reports, slide design              | 30.7 KB |
+| 09   | Meetings and Coaching   | Meeting efficiency, coaching, stakeholders              | 40.8 KB |
+| 10   | Business Analysis       | Requirements, scope, change management                  | 27.9 KB |
+| 11   | Prompt Engineering      | Prompts, LLM selection, multi-agent                     | 33.5 KB |
+| 12   | Code Development        | Code review, debugging, root cause                      | 17.5 KB |
+| 13   | Refactoring and Testing | Refactoring, testing, API design                        | 31.3 KB |
+| 14   | Security and Privacy    | OWASP, PII, responsible AI                              | 36.2 KB |
+| 15   | Azure Cloud             | Architecture, OpenAI, IaC, observability                | 63.0 KB |
+| 16   | M365 and Graph          | Graph API, Teams, MSAL, Fabric                          | 39.7 KB |
+| 17   | Presentations           | Gamma, PowerPoint, tool selection                       | 29.5 KB |
+| 18   | Project Leadership      | Post-mortem, incident response, career                  | 30.6 KB |
+| 19   | Agent Modes             | Researcher, Builder, Validator, Documentarian           | 42.9 KB |
+| 20   | Ethical Framework       | Constitutional AI, moral psychology                     | 22.1 KB |
+
+#### File Read Access Investigation (2026-04-09)
+
+| Check                               | Result                                                                                              |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Sensitivity labels (MIP)            | None. No alternate data streams beyond default `$DATA`.                                             |
+| File attributes                     | `A P` (Archive + Pinned). All 20 SKILL.md files pinned and synced to cloud.                         |
+| OneDrive sync status                | All files synced. No cloud-only stubs.                                                              |
+| Folder structure                    | Correct: `Documents/Cowork/Skills/<name>/SKILL.md`. All 20 folders have SKILL.md.                   |
+| Repo vs disk match                  | Identical. `Compare-Object` shows zero differences.                                                 |
+| Graph API access                    | 403 Forbidden from MCP tool (insufficient scopes). Cannot verify cloud-side properties.             |
+| Personal OneDrive                   | Empty (not in use). Cannot test as alternative.                                                     |
+| Corporate OneDrive path             | `OneDrive - Microsoft\Documents\Cowork\Skills\`. Corporate tenant policies may block Cowork access. |
+| Custom Instructions (UI)            | Text pasted via Settings > Personalization. Cowork ignores it (responds as "Microsoft Copilot").    |
+| Anthropic tenant prerequisite (new) | Learn docs now list "Anthropic enabled in tenant" as a prerequisite. May need admin verification.   |
+
+**Hypothesis**: The Microsoft corporate tenant has Conditional Access or DLP policies that block the Cowork service principal from reading OneDrive file content, even though it can enumerate folders. Custom Instructions not loading suggests a broader tenant-level issue with Cowork personalization features, not just file access.
+
+**Next steps**:
+
+1. Verify "Anthropic enabled in tenant" prerequisite with tenant admin (new requirement in Learn docs as of April 2026)
+2. Check Conditional Access policies for Cowork/Anthropic service principal
+3. Test creating a SKILL.md directly in OneDrive web UI (bypass sync client entirely)
+4. Ask tenant admin if there are DLP policies blocking M365 Copilot from reading OneDrive files
+5. Monitor Microsoft Build 2026 (June 2-3) for Cowork GA announcements or policy changes
 
 ---
 

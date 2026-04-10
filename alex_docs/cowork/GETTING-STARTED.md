@@ -1,12 +1,13 @@
 # Getting started with Copilot Cowork
 
-Source: Microsoft Learn (learn.microsoft.com/en-us/copilot/microsoft-365/cowork/get-started), collected 2026-04-02
+Source: Microsoft Learn (learn.microsoft.com/en-us/copilot/microsoft-365/cowork/get-started), collected 2026-04-02, updated 2026-04-09
 Status: Frontier Preview (prerelease documentation, subject to change)
 
 ## Prerequisites
 
 - **Microsoft 365 Copilot license**: Active license assigned to your account
 - **Frontier program enrollment**: Must be enrolled in the Frontier preview program
+- **Anthropic enabled in tenant**: Cowork uses Anthropic models as a subprocessor. Admin must enable this. See [Anthropic as subprocessor](https://learn.microsoft.com/en-us/microsoft-365/copilot/connect-to-ai-subprocessor)
 - **Modern browser**: Microsoft Edge or Google Chrome recommended
 - **Cowork enabled**: Must be enabled in your Microsoft 365 Copilot environment
 - **Admin note**: If Cowork isn't visible in Admin Center Agent management, ensure admin account is enrolled in Frontier (Copilot > Settings > Frontier)
@@ -67,13 +68,14 @@ As Cowork processes your request:
 
 Before sensitive actions (sending email, posting in Teams, scheduling meeting), Cowork shows an approval dialog.
 
-| Option               | Effect                                                                   |
-| -------------------- | ------------------------------------------------------------------------ |
-| Approve              | Proceed this one time                                                    |
-| Approve and Remember | Proceed and skip future prompts for similar actions in this conversation |
-| Reject               | Stop the action                                                          |
+| Option                                      | Effect                                                                   |
+| ------------------------------------------- | ------------------------------------------------------------------------ |
+| Action button (Send, Post, Create, etc.)    | Proceed this one time. Button label matches the specific action.         |
+| Don't ask again (dropdown on action button) | Proceed and skip future prompts for similar actions in this conversation |
+| Approve All                                 | When multiple approvals are pending, allow all at once                   |
+| Cancel                                      | Stop the action                                                          |
 
-Medium and high risk actions include a risk level indicator. You can select "Show parameters" to see technical details.
+Medium and high risk actions include a risk level indicator. Some actions show a rich content preview (email draft, Teams message, scheduled meeting). You can select "Show parameters" to see technical details.
 
 ### Step 5: Review results
 
@@ -82,7 +84,9 @@ Files Cowork created appear in the side panel:
 - Download individual files or "Download All" as a zip archive
 - Preview files directly in browser (PDF, Markdown, Images, CSV, HTML)
 - Open files in OneDrive or in native online apps
+- Files are also saved to your OneDrive and SharePoint workspace
 - Rate outputs with thumbs up/down
+- Leave inline comments directly on specific parts of Cowork's messages for targeted feedback
 
 ### Step 6: Find past work
 

@@ -23,6 +23,7 @@ Before starting:
 - [ ] Active **Microsoft 365 Copilot license** assigned to your account
 - [ ] Enrolled in the **Frontier program** ([join here](https://adoption.microsoft.com/en-us/copilot/frontier-program/))
 - [ ] Cowork visible in your M365 Copilot app (if not: Admin Center > Copilot > Settings > Frontier)
+- [ ] **Anthropic enabled in tenant**: Cowork uses Anthropic models as a subprocessor. Admin must enable this. See [Anthropic as subprocessor](https://learn.microsoft.com/en-us/microsoft-365/copilot/connect-to-ai-subprocessor)
 - [ ] OneDrive syncing on your device (for skill file deployment)
 
 ## Step 1: Install Alex Identity (Custom Instructions)

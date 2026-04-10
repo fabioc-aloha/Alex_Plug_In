@@ -132,13 +132,13 @@ flowchart TB
 
 ### Pipeline Components Detail
 
-| Component     | Input                        | Output                        | Rules                                                                                            |
-| ------------- | ---------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------ |
-| **Filter**    | All 157 master skills        | Cowork-eligible skills (~20)  | `inheritance` = inheritable + M365-relevant + ranked by priority                                 |
-| **Translate** | Alex SKILL.md + instructions | Cowork SKILL.md               | Strip VS Code refs, inject M365 action verbs, consolidate instructions into body                 |
-| **Validate**  | Translated SKILL.md          | Pass/fail                     | Size < 1 MB, valid YAML frontmatter, `name` + `description` present                              |
-| **Stage**     | Validated SKILL.md           | `platforms/cowork/skills/`    | Git-tracked staging folder in Master repo                                                        |
-| **Deploy**    | Staged skills                | OneDrive Cowork Skills folder | OneDrive desktop sync or Graph API `PUT /me/drive/root:/Documents/Cowork/Skills/{name}/SKILL.md` |
+| Component     | Input                        | Output                        | Rules                                                                                                                                                      |
+| ------------- | ---------------------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Filter**    | All 157 master skills        | Cowork-eligible skills (~20)  | `inheritance` = inheritable + M365-relevant + ranked by priority                                                                                           |
+| **Translate** | Alex SKILL.md + instructions | Cowork SKILL.md               | Strip VS Code refs, inject M365 action verbs, consolidate instructions into body                                                                           |
+| **Validate**  | Translated SKILL.md          | Pass/fail                     | Size < 1 MB, valid YAML frontmatter, `name` + `description` present                                                                                        |
+| **Stage**     | Validated SKILL.md           | `platforms/cowork/skills/`    | Git-tracked staging folder in Master repo                                                                                                                  |
+| **Deploy**    | Staged skills                | OneDrive Cowork Skills folder | OneDrive desktop sync or Graph API `PUT /me/drive/root:/Documents/Cowork/Skills/{name}/SKILL.md`. Output files saved to OneDrive and SharePoint workspace. |
 
 ## Skill Translation Architecture
 

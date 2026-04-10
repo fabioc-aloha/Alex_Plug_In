@@ -73,22 +73,22 @@ flowchart TD
 | Data source connectors    | MCP tools (manual per-tool)                  | 100+ prebuilt Copilot Connectors + custom connectors via Graph API                    | **Cowork** |
 ### Execution and Action
 
-| Capability                    | VS Code + Copilot                         | Cowork                                                    | Winner     |
-| ----------------------------- | ----------------------------------------- | --------------------------------------------------------- | ---------- |
-| Send emails                   | No                                        | Draft, reply, forward, send via Outlook                   | **Cowork** |
-| Schedule meetings             | No                                        | Natural language calendar management                      | **Cowork** |
-| Create documents              | Local files only (code, markdown, config) | Word, Excel, PowerPoint, PDF in OneDrive                  | **Cowork** |
-| Post to Teams                 | No                                        | Channel messages, 1:1, group chats                        | **Cowork** |
-| Run code / terminal           | Full terminal access                      | No                                                        | VS Code    |
-| Git operations                | Full (commit, push, branch, merge)        | No                                                        | VS Code    |
-| File system access            | Full read/write on local machine          | OneDrive/SharePoint only (no local files)                 | VS Code    |
-| Build / compile / test        | Full (npm, dotnet, python, etc.)          | No                                                        | VS Code    |
-| Debug code                    | Full debugger integration                 | No                                                        | VS Code    |
-| Browser / web requests        | Via MCP tools or terminal                 | Deep Research skill searches the web                      | Tie        |
-| Copilot APIs (programmatic)   | None                                      | 5 APIs: Retrieval, Search, Chat, Export, Meeting Insights | **Cowork** |
-| Long-running background tasks | Terminal background processes             | Native: tasks continue across devices                     | **Cowork** |
-| Scheduled automation          | None (manual triggers only)               | Scheduled prompts (daily/weekly/custom)                   | **Cowork** |
-| Approval gating               | Auto-run setting (blanket on/off)         | Per-action approve/reject with risk levels                | **Cowork** |
+| Capability                    | VS Code + Copilot                         | Cowork                                                             | Winner     |
+| ----------------------------- | ----------------------------------------- | ------------------------------------------------------------------ | ---------- |
+| Send emails                   | No                                        | Draft, reply, forward, send via Outlook                            | **Cowork** |
+| Schedule meetings             | No                                        | Natural language calendar management                               | **Cowork** |
+| Create documents              | Local files only (code, markdown, config) | Word, Excel, PowerPoint, PDF in OneDrive                           | **Cowork** |
+| Post to Teams                 | No                                        | Channel messages, 1:1, group chats                                 | **Cowork** |
+| Run code / terminal           | Full terminal access                      | No                                                                 | VS Code    |
+| Git operations                | Full (commit, push, branch, merge)        | No                                                                 | VS Code    |
+| File system access            | Full read/write on local machine          | OneDrive/SharePoint only (no local files)                          | VS Code    |
+| Build / compile / test        | Full (npm, dotnet, python, etc.)          | No                                                                 | VS Code    |
+| Debug code                    | Full debugger integration                 | No                                                                 | VS Code    |
+| Browser / web requests        | Via MCP tools or terminal                 | Deep Research skill searches the web                               | Tie        |
+| Copilot APIs (programmatic)   | None                                      | 5 APIs: Retrieval, Search, Chat, Export, Meeting Insights          | **Cowork** |
+| Long-running background tasks | Terminal background processes             | Native: tasks continue across devices                              | **Cowork** |
+| Scheduled automation          | None (manual triggers only)               | Scheduled prompts (daily/weekly/custom)                            | **Cowork** |
+| Approval gating               | Auto-run setting (blanket on/off)         | Per-action approve/cancel with risk levels + Approve All for batch | **Cowork** |
 
 ### Cognitive Architecture
 

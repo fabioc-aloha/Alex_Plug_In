@@ -1,22 +1,23 @@
 {
   "hotFiles": [],
-  "stalledFiles": [],
+  "stalledFiles": [
+    "github/episodic/peripheral/file-observations.json",
+    "ROADMAP-COWORKER.md",
+    "alex_docs/cowork/ARCHITECTURE.md",
+    "alex_docs/cowork/GETTING-STARTED.md",
+    "alex_docs/cowork/IMPRESSIONS.md",
+    "alex_docs/cowork/INSTALLATION-GUIDE.md",
+    "alex_docs/cowork/OVERVIEW.md",
+    "alex_docs/cowork/PLATFORM-COMPARISON.md",
+    "alex_docs/cowork/README.md",
+    "alex_docs/cowork/SKILLS-AND-CUSTOMIZATION.md"
+  ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1775770978441
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "file": "platforms/gcx-coworker/knowledge/07-code-quality.md",
       "todoCount": 1,
-      "scannedAt": 1775770978441
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1775770978441
+      "scannedAt": 1775782858172
     }
   ],
-  "lastUpdated": 1775770978441
+  "lastUpdated": 1775782858172
 }

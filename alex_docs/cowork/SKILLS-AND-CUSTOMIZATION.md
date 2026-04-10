@@ -1,6 +1,6 @@
 # Copilot Cowork: Skills and Customization
 
-Source: Microsoft Learn (learn.microsoft.com/en-us/copilot/microsoft-365/cowork/use-cowork), collected 2026-04-02
+Source: Microsoft Learn (learn.microsoft.com/en-us/copilot/microsoft-365/cowork/use-cowork), collected 2026-04-02, updated 2026-04-09
 Status: Frontier Preview
 
 ## Built-in skills (13)
@@ -61,6 +61,8 @@ Cowork discovers custom skills automatically at the start of each conversation. 
 - Custom skills created by users are **not validated by Microsoft**
 - Review custom skill outputs carefully
 - Skills appear as chips in the side panel's Skills section
+- Attached files must be less than 200 MB
+- Output files are saved to OneDrive and SharePoint workspace
 
 ## Scheduled prompts
 
@@ -98,3 +100,16 @@ The Cowork custom skill system has notable parallels to the Alex cognitive archi
 | Scope            | VS Code workspace                                             | Microsoft 365 Copilot tenant                       |
 
 This is a significant validation of the "skills as Markdown" pattern that Alex has been using since early versions. The SKILL.md format with YAML frontmatter that Cowork adopted is directly analogous to the Alex skill architecture.
+
+## Feedback mechanisms
+
+Cowork provides multiple feedback channels:
+
+- **Thumbs up/down**: Rate any response directly in the conversation
+- **Document feedback**: Rate documents in the preview panel
+- **Inline comments**: Leave targeted comments directly on specific parts of Cowork's messages
+- **General feedback**: Open the header menu and select the feedback option
+
+## Keyboard shortcuts
+
+Cowork supports keyboard shortcuts. Press **Ctrl+Shift+/** or select the Keyboard shortcuts button in the header to view all available shortcuts.
