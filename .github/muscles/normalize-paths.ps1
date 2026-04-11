@@ -32,7 +32,7 @@ $totalUpdated = 0
 $totalSkipped = 0
 
 # ============================================================
-# TARGET: instructions — Normalize .instructions.md and .prompt.md files
+# TARGET: instructions -- Normalize .instructions.md and .prompt.md files
 # ============================================================
 function Normalize-InstructionPaths {
     Write-Host "`n Normalizing instruction & prompt file paths..." -ForegroundColor Cyan
@@ -84,7 +84,7 @@ function Normalize-InstructionPaths {
 }
 
 # ============================================================
-# TARGET: skills — Normalize SKILL.md embedded synapses
+# TARGET: skills -- Normalize SKILL.md embedded synapses
 # ============================================================
 function Normalize-SkillPaths {
     Write-Host "`n[PKG] Normalizing SKILL.md paths..." -ForegroundColor Cyan
@@ -114,7 +114,7 @@ function Normalize-SkillPaths {
 }
 
 # ============================================================
-# TARGET: synapses — Normalize synapses.json target fields
+# TARGET: synapses -- Normalize synapses.json target fields
 # ============================================================
 function Normalize-SynapsePaths {
     Write-Host "`n Normalizing synapses.json targets..." -ForegroundColor Cyan
@@ -171,9 +171,9 @@ function Normalize-SynapsePaths {
 # ============================================================
 # MAIN: Execute selected targets
 # ============================================================
-Write-Host "═══════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "===========================================" -ForegroundColor Cyan
 Write-Host "  Alex Path Normalizer (Target: $Target)" -ForegroundColor Cyan
-Write-Host "═══════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "===========================================" -ForegroundColor Cyan
 Write-Host "Repo: $RepoRoot"
 
 $targets = if ($Target -eq 'all') { @('instructions', 'skills', 'synapses') } else { @($Target) }
@@ -188,6 +188,6 @@ foreach ($t in $targets) {
     $totalSkipped += $result.Skipped
 }
 
-Write-Host "`n═══════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "`n===========================================" -ForegroundColor Cyan
 Write-Host "  Total: $totalUpdated updated, $totalSkipped skipped" -ForegroundColor $(if ($totalUpdated -gt 0) { 'Green' } else { 'Gray' })
-Write-Host "═══════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "===========================================" -ForegroundColor Cyan

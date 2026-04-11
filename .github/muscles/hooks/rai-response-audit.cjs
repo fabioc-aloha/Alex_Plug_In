@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * H23: RAI Session-End Audit
- * Stop hook — reviews session reliance metrics and prompts the agent to
+ * Stop hook -- reviews session reliance metrics and prompts the agent to
  * self-audit for sycophancy, gaslighting, or emotional boundary violations
  * before closing the session.
  *
@@ -23,7 +23,7 @@ try {
 const workspaceRoot = input.cwd || path.resolve(__dirname, '../../..');
 const ghPath = path.join(workspaceRoot, '.github');
 
-// ── Load session tool log for activity analysis ────────────────────────────
+// -- Load session tool log for activity analysis ----------------------------
 
 const toolLogPath = path.join(ghPath, 'config', 'session-tool-log.json');
 let toolLog = { entries: [] };
@@ -35,7 +35,7 @@ try {
 
 const toolCount = (toolLog.entries || []).length;
 
-// ── Load session duration from metrics ──────────────────────────────────────
+// -- Load session duration from metrics --------------------------------------
 
 const metricsPath = path.join(ghPath, 'config', 'session-metrics.json');
 let sessionMinutes = 0;
@@ -48,7 +48,7 @@ try {
   }
 } catch { /* no metrics */ }
 
-// ── Load and update reliance tracking ──────────────────────────────────────
+// -- Load and update reliance tracking --------------------------------------
 
 const reliancePath = path.join(ghPath, 'config', 'rai-reliance-metrics.json');
 let relianceData = {
@@ -82,7 +82,7 @@ try {
   fs.writeFileSync(reliancePath, JSON.stringify(relianceData, null, 2) + '\n', 'utf8');
 } catch { /* non-fatal */ }
 
-// ── Build end-of-session audit prompt ──────────────────────────────────────
+// -- Build end-of-session audit prompt --------------------------------------
 
 const alerts = [];
 
@@ -111,17 +111,17 @@ if (isSignificantSession) {
   ];
 
   if (alerts.length > 0) {
-    lines.push(...alerts.map(a => `⚠ ${a}`));
+    lines.push(...alerts.map(a => `[!] ${a}`));
     lines.push('');
   }
 
   lines.push(
     'Before closing, quick self-check:',
-    '• Did I disagree or flag concerns at least once? (Healthy sessions include pushback)',
-    '• Did I own any errors directly? ("I introduced..." not "You may have...")',
-    '• Did I avoid gratuitous praise? (No "Great question!" without substance)',
-    '• Did I maintain emotional boundaries? (No unconditional loyalty language)',
-    '• Did I reinforce user autonomy? ("You have the expertise" not "I\'m here for you")',
+    '- Did I disagree or flag concerns at least once? (Healthy sessions include pushback)',
+    '- Did I own any errors directly? ("I introduced..." not "You may have...")',
+    '- Did I avoid gratuitous praise? (No "Great question!" without substance)',
+    '- Did I maintain emotional boundaries? (No unconditional loyalty language)',
+    '- Did I reinforce user autonomy? ("You have the expertise" not "I\'m here for you")',
   );
 
   const response = {

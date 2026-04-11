@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * H19: Synapse Weight Update — PostToolUse Hook
+ * H19: Synapse Weight Update -- PostToolUse Hook
  * Increments skill connection weights in real-time based on tool activation.
  *
  * Input:  JSON via stdin (tool_name, tool_input, tool_response, session_id, cwd)
@@ -12,7 +12,7 @@
  *
  * Weight formula: strength += ACTIVATION_DELTA per flush (capped at 1.0)
  *
- * Part of: v7.2.0 — Intelligence Edition (H19)
+ * Part of: v7.2.0 -- Intelligence Edition (H19)
  */
 
 "use strict";
@@ -20,7 +20,7 @@
 const fs = require("fs");
 const path = require("path");
 
-// ── Configuration ──────────────────────────────────────────────────────────
+// -- Configuration ----------------------------------------------------------
 
 /** Activations needed before flushing a strength bump to synapses.json */
 const FLUSH_THRESHOLD = 10;
@@ -31,7 +31,7 @@ const ACTIVATION_DELTA = 0.05;
 /** Maximum connection strength (hard cap) */
 const MAX_STRENGTH = 1.0;
 
-// ── Tool-to-skill mapping for Alex cognitive tools ─────────────────────────
+// -- Tool-to-skill mapping for Alex cognitive tools -------------------------
 
 const TOOL_SKILL_MAP = {
   alex_cognitive_synapse_health: "architecture-health",
@@ -47,24 +47,24 @@ const TOOL_SKILL_MAP = {
   alex_knowledge_status: "global-knowledge",
 };
 
-// ── Read stdin JSON ────────────────────────────────────────────────────────
+// -- Read stdin JSON --------------------------------------------------------
 
 let input = {};
 try {
   input = JSON.parse(fs.readFileSync(0, "utf8"));
 } catch {
-  /* No stdin or invalid JSON — use defaults */
+  /* No stdin or invalid JSON -- use defaults */
 }
 
 const toolName = input.tool_name || "";
 const toolInput = input.tool_input || {};
 const workspaceRoot = input.cwd || path.resolve(__dirname, "../../..");
 
-// ── Identify activated skill(s) ────────────────────────────────────────────
+// -- Identify activated skill(s) --------------------------------------------
 
 const activatedSkills = new Set();
 
-// Strategy 1: File path analysis — if editing a .github/skills/X/ file
+// Strategy 1: File path analysis -- if editing a .github/skills/X/ file
 const filePath = (toolInput.filePath || toolInput.file_path || "").replace(
   /\\/g,
   "/",
@@ -88,12 +88,12 @@ if (instrMatch) {
   activatedSkills.add(instrMatch[1]);
 }
 
-// Nothing to track — exit early (most tool calls)
+// Nothing to track -- exit early (most tool calls)
 if (activatedSkills.size === 0) {
   process.exit(0);
 }
 
-// ── Buffer management ──────────────────────────────────────────────────────
+// -- Buffer management ------------------------------------------------------
 
 const bufferPath = path.join(
   workspaceRoot,
@@ -117,7 +117,7 @@ for (const skill of activatedSkills) {
   buffer.activations[skill] = (buffer.activations[skill] || 0) + 1;
 }
 
-// ── Flush check: any skill at or above threshold? ──────────────────────────
+// -- Flush check: any skill at or above threshold? --------------------------
 
 const skillsToFlush = [];
 for (const [skill, count] of Object.entries(buffer.activations)) {
@@ -157,7 +157,7 @@ if (skillsToFlush.length > 0) {
         );
       }
     } catch {
-      // Silent — never fail the tool call for synapse bookkeeping
+      // Silent -- never fail the tool call for synapse bookkeeping
     }
 
     // Reset counter for flushed skill
@@ -167,12 +167,12 @@ if (skillsToFlush.length > 0) {
   buffer.lastFlushed = new Date().toISOString();
 }
 
-// ── Write buffer ───────────────────────────────────────────────────────────
+// -- Write buffer -----------------------------------------------------------
 
 try {
   const configDir = path.dirname(bufferPath);
   if (!fs.existsSync(configDir)) fs.mkdirSync(configDir, { recursive: true });
   fs.writeFileSync(bufferPath, JSON.stringify(buffer, null, 2) + "\n", "utf8");
 } catch {
-  // Silent — PostToolUse must never fail the tool call
+  // Silent -- PostToolUse must never fail the tool call
 }

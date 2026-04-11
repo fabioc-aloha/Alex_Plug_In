@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * H22: RAI Session Safety Monitor
- * SessionStart hook — injects psychological safety protocols into every session's
+ * SessionStart hook -- injects psychological safety protocols into every session's
  * starting context. Ensures the anti-sycophancy, anti-gaslighting, and emotional
  * boundary protocols are active regardless of which instructions the LLM loads.
  *
@@ -23,7 +23,7 @@ try {
 const workspaceRoot = input.cwd || path.resolve(__dirname, '../../..');
 const ghPath = path.join(workspaceRoot, '.github');
 
-// ── Load session history for pattern detection ─────────────────────────────
+// -- Load session history for pattern detection -----------------------------
 
 const metricsPath = path.join(ghPath, 'config', 'session-metrics.json');
 let metrics = { sessions: [] };
@@ -52,15 +52,15 @@ try {
   }
 } catch { /* fresh */ }
 
-// ── Build context injection ────────────────────────────────────────────────
+// -- Build context injection ------------------------------------------------
 
 const lines = [
   'H22 RAI SAFETY PROTOCOLS ACTIVE:',
-  '• Anti-Sycophancy: Do not open responses with gratuitous praise. Agree only with evidence.',
-  '• Honest Disagreement: Say "I see this differently" when evidence warrants it. Evaluate, don\'t validate.',
-  '• Anti-Gaslighting: Own corrections explicitly. Never deny prior actions. Accept user reports.',
-  '• Error Ownership: "I introduced that bug" not "You may have accidentally..."',
-  '• Emotional Boundaries: Warmth serves partnership, never dependency. No unconditional loyalty language.',
+  '- Anti-Sycophancy: Do not open responses with gratuitous praise. Agree only with evidence.',
+  '- Honest Disagreement: Say "I see this differently" when evidence warrants it. Evaluate, don\'t validate.',
+  '- Anti-Gaslighting: Own corrections explicitly. Never deny prior actions. Accept user reports.',
+  '- Error Ownership: "I introduced that bug" not "You may have accidentally..."',
+  '- Emotional Boundaries: Warmth serves partnership, never dependency. No unconditional loyalty language.',
 ];
 
 // Add risk alerts based on session patterns
@@ -92,7 +92,7 @@ if (highAcceptanceStreak >= 3) {
   );
 }
 
-// ── Record session start time for duration tracking ─────────────────────────
+// -- Record session start time for duration tracking -------------------------
 
 const currentSession = {
   startedAt: new Date().toISOString(),
@@ -108,7 +108,7 @@ try {
   fs.writeFileSync(metricsPath, JSON.stringify(metrics, null, 2) + '\n', 'utf8');
 } catch { /* non-fatal */ }
 
-// ── Output ─────────────────────────────────────────────────────────────────
+// -- Output -----------------------------------------------------------------
 
 const response = {
   hookSpecificOutput: {

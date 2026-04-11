@@ -3,7 +3,7 @@
  * 
  * Fills missing when/yields/type fields in synapses.json files.
  * Migrates legacy activation keywords to activationContexts.
- * Normalizes non-standard field names (relationship→type, context→reason).
+ * Normalizes non-standard field names (relationship->type, context->reason).
  * 
  * Usage: node scripts/backfill-synapse-metadata.cjs [--dry-run]
  */
@@ -242,7 +242,7 @@ function main() {
     try {
       data = JSON.parse(fs.readFileSync(synPath, 'utf8'));
     } catch {
-      console.error(`  SKIP: ${skillDir} — parse error`);
+      console.error(`  SKIP: ${skillDir} -- parse error`);
       continue;
     }
     stats.filesProcessed++;
@@ -251,7 +251,7 @@ function main() {
 
     // --- Normalize non-standard fields in connections ---
     for (const conn of (data.connections || [])) {
-      // Fix relationship → type
+      // Fix relationship -> type
       if (conn.relationship && !conn.type) {
         conn.type = conn.relationship;
         delete conn.relationship;
@@ -259,7 +259,7 @@ function main() {
         modified = true;
       }
 
-      // Fix context → reason (preserve for when/yields generation)
+      // Fix context -> reason (preserve for when/yields generation)
       if (conn.context && !conn.reason) {
         conn.reason = conn.context;
         delete conn.context;
@@ -290,7 +290,7 @@ function main() {
       }
     }
 
-    // --- Migrate activation keywords → activationContexts ---
+    // --- Migrate activation keywords -> activationContexts ---
     if (!data.activationContexts || data.activationContexts.length === 0) {
       const sources = [];
       if (Array.isArray(data.activationBoost)) sources.push(...data.activationBoost);
@@ -302,7 +302,7 @@ function main() {
         stats.activationContextsMigrated++;
         modified = true;
       } else if ((data.connections || []).length > 0) {
-        // No legacy keywords either — generate minimal set from skill name
+        // No legacy keywords either -- generate minimal set from skill name
         data.activationContexts = generateActivationContexts(skillDir);
         stats.activationContextsGenerated++;
         modified = true;
@@ -310,7 +310,7 @@ function main() {
     }
 
     // --- Normalize top-level north-star style when/yields ---
-    // north-star has top-level when (object) and yields (array) — these are non-standard
+    // north-star has top-level when (object) and yields (array) -- these are non-standard
     // Convert to per-connection format only (already handled above)
     if (typeof data.when === 'object' && !Array.isArray(data.when)) {
       delete data.when;

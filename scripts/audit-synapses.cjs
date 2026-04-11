@@ -145,7 +145,7 @@ for (const dir of dirs) {
                 }
             }
         } else if (targetPath.startsWith('global-knowledge://') || targetPath.startsWith('external:')) {
-            // Cross-project URI references — cannot validate on disk
+            // Cross-project URI references -- cannot validate on disk
             stats.externalRefs = (stats.externalRefs || 0) + 1;
         } else {
             // Generic path check

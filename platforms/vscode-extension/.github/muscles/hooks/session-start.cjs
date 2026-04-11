@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * Alex Cognitive Architecture — SessionStart Hook
+ * Alex Cognitive Architecture -- SessionStart Hook
  * Runs when a VS Code agent session begins.
  *
  * Input:  JSON via stdin (session_id, cwd, hook_event_name, source, model)
  * Output: JSON to stdout with hookSpecificOutput.additionalContext
  *         (injected into the agent's starting context)
  *
- * Part of: v6.5.0 — API-Compliant Hooks (F1–F6)
+ * Part of: v6.5.0 -- API-Compliant Hooks (F1-F6)
  */
 
 "use strict";
@@ -15,20 +15,20 @@
 const fs = require("fs");
 const path = require("path");
 
-// ── Read stdin JSON ────────────────────────────────────────────────────────
+// -- Read stdin JSON --------------------------------------------------------
 
 let input = {};
 try {
   input = JSON.parse(fs.readFileSync(0, "utf8"));
 } catch {
-  /* No stdin or invalid JSON — use defaults */
+  /* No stdin or invalid JSON -- use defaults */
 }
 
 // Use cwd from hook input when available, fall back to relative path
 const workspaceRoot = input.cwd || path.resolve(__dirname, "../../..");
 const ghPath = path.join(workspaceRoot, ".github");
 
-// ── Helpers ────────────────────────────────────────────────────────────────
+// -- Helpers ----------------------------------------------------------------
 
 function readJson(filePath) {
   try {
@@ -44,7 +44,7 @@ function daysSince(isoDate) {
   return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
-// ── Load user profile ──────────────────────────────────────────────────────
+// -- Load user profile ------------------------------------------------------
 
 const profilePath = path.join(ghPath, "config", "user-profile.json");
 const profile = readJson(profilePath);
@@ -52,14 +52,14 @@ const userName = profile?.name?.split(" ")[0] || "there";
 const preferredModel = profile?.preferredModel || "auto";
 const persona = profile?.currentPersona || "Developer";
 
-// ── Load active goals ──────────────────────────────────────────────────────
+// -- Load active goals ------------------------------------------------------
 
 const goalsPath = path.join(ghPath, "config", "goals.json");
 const goals = readJson(goalsPath);
 const activeGoals = goals?.goals?.filter((g) => g.status === "active") || [];
 const topGoal = activeGoals[0]?.title || null;
 
-// ── Check meditation recency ───────────────────────────────────────────────
+// -- Check meditation recency -----------------------------------------------
 
 const cogConfigPath = path.join(ghPath, "config", "cognitive-config.json");
 const cogConfig = readJson(cogConfigPath);
@@ -68,7 +68,7 @@ const daysSinceMeditation = daysSince(lastMeditationDate);
 const meditationOverdue =
   daysSinceMeditation !== null && daysSinceMeditation >= 7;
 
-// ── Build context output ───────────────────────────────────────────────────
+// -- Build context output ---------------------------------------------------
 
 const lines = [
   `[Alex SessionStart] Hello, ${userName}.`,
@@ -87,13 +87,13 @@ if (activeGoals.length > 1) {
 
 if (meditationOverdue) {
   lines.push(
-    `⚠️  Meditation overdue — last: ${lastMeditationDate} (${daysSinceMeditation}d ago). Consider /meditate after this session.`,
+    `[!]  Meditation overdue -- last: ${lastMeditationDate} (${daysSinceMeditation}d ago). Consider /meditate after this session.`,
   );
 }
 
 lines.push(`Session started: ${new Date().toISOString()}`);
 
-// ── Reset correlation vector for new session ───────────────────────────────
+// -- Reset correlation vector for new session -------------------------------
 
 const cvPath = path.join(ghPath, "config", "correlation-vector.json");
 try {
@@ -108,7 +108,7 @@ try {
   /* degrade gracefully */
 }
 
-// ── Output structured JSON ─────────────────────────────────────────────────
+// -- Output structured JSON -------------------------------------------------
 
 console.log(
   JSON.stringify({

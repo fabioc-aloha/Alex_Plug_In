@@ -139,7 +139,7 @@ Write-Host "`n" -NoNewline
 if ($configIssues.Count -gt 0) {
     Write-Host "[ERROR] Configuration Registration Issues ($($configIssues.Count)):" -ForegroundColor Red
     foreach ($issue in $configIssues) {
-        Write-Host "  • $($issue.Key)" -ForegroundColor Red
+        Write-Host "  - $($issue.Key)" -ForegroundColor Red
         Write-Host "    File: $($issue.File):$($issue.Line)" -ForegroundColor Gray
         Write-Host "    Fix: Add property to package.json or wrap in try-catch" -ForegroundColor Gray
     }
@@ -149,7 +149,7 @@ if ($configIssues.Count -gt 0) {
 if ($commandIssues.Count -gt 0) {
     Write-Host "[ERROR] Command Registration Issues ($($commandIssues.Count)):" -ForegroundColor Red
     foreach ($issue in $commandIssues) {
-        Write-Host "  • $($issue.Command)" -ForegroundColor Red
+        Write-Host "  - $($issue.Command)" -ForegroundColor Red
         Write-Host "    File: $($issue.File):$($issue.Line)" -ForegroundColor Gray
         Write-Host "    Fix: Add command to package.json contributes.commands" -ForegroundColor Gray
     }
@@ -159,7 +159,7 @@ if ($commandIssues.Count -gt 0) {
 if ($warnings.Count -gt 0) {
     Write-Host "[WARN]  Warnings ($($warnings.Count)):" -ForegroundColor Yellow
     foreach ($warning in $warnings) {
-        Write-Host "  • $($warning.Key) - unregistered but has try-catch" -ForegroundColor Yellow
+        Write-Host "  - $($warning.Key) - unregistered but has try-catch" -ForegroundColor Yellow
         Write-Host "    File: $($warning.File):$($warning.Line)" -ForegroundColor Gray
     }
     Write-Host ""

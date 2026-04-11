@@ -15,7 +15,7 @@ const JSON_MODE = process.argv.includes('--json');
 const base = process.cwd();
 const issues = [];
 
-// ── Hooks ──────────────────────────────────────────────────────
+// -- Hooks ------------------------------------------------------
 console.log('=== HOOKS AUDIT ===');
 const hooksFile = path.join(base, '.github/hooks.json');
 if (fs.existsSync(hooksFile)) {
@@ -74,7 +74,7 @@ if (fs.existsSync(hooksFile)) {
         issues.push('WARN: orphan hook script (not in hooks.json or agent files): ' + script);
       }
     }
-    // Check reverse — referenced scripts that don't exist
+    // Check reverse -- referenced scripts that don't exist
     for (const ref of referencedScripts) {
       if (!fs.existsSync(path.join(base, ref))) {
         // Already caught above
@@ -83,7 +83,7 @@ if (fs.existsSync(hooksFile)) {
   }
 }
 
-// ── MCP Tools ──────────────────────────────────────────────────
+// -- MCP Tools --------------------------------------------------
 console.log('\n=== MCP TOOLS AUDIT ===');
 const mcpIndex = path.join(base, 'packages/mcp-cognitive-tools/src/index.ts');
 if (fs.existsSync(mcpIndex)) {
@@ -102,11 +102,11 @@ if (fs.existsSync(mcpIndex)) {
   for (const tool of mcpTools) {
     // Each tool should have a handler in the switch/case or function
     const handlerPattern = new RegExp('case [\'"]' + tool + '[\'"]|' + tool.replace(/_/g, '\\w*'));
-    // Simplified — just count
+    // Simplified -- just count
   }
 }
 
-// ── Extension Chat Tools ───────────────────────────────────────
+// -- Extension Chat Tools ---------------------------------------
 console.log('\n=== EXTENSION CHAT TOOLS AUDIT ===');
 const toolsDir = path.join(base, 'platforms/vscode-extension/src/chat/tools');
 if (fs.existsSync(toolsDir)) {
@@ -175,7 +175,7 @@ if (fs.existsSync(toolsDir)) {
   }
 }
 
-// ── Package.json Tool Contributions ────────────────────────────
+// -- Package.json Tool Contributions ----------------------------
 console.log('\n=== PACKAGE.JSON TOOL CONTRIBUTIONS ===');
 const pkgJson = path.join(base, 'platforms/vscode-extension/package.json');
 if (fs.existsSync(pkgJson)) {
@@ -209,7 +209,7 @@ if (fs.existsSync(pkgJson)) {
   }
 }
 
-// ── Summary ────────────────────────────────────────────────────
+// -- Summary ----------------------------------------------------
 const bugs = issues.filter(i => i.startsWith('BUG:'));
 const warns = issues.filter(i => i.startsWith('WARN:'));
 

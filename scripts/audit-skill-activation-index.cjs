@@ -34,7 +34,7 @@ function extractActivationEntries(markdown) {
       const cols = line.split('|').map((c) => c.trim()).filter(Boolean);
       if (cols.length >= 1) {
         const skillCol = cols[0];
-        const normalized = skillCol.replace(/^[⭐\s]*/, '').toLowerCase();
+        const normalized = skillCol.replace(/^[[*]\s]*/, '').toLowerCase();
         if (/^[a-z0-9-]+$/.test(normalized)) {
           ids.add(normalized);
         }

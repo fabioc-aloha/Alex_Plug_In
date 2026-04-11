@@ -52,7 +52,7 @@ try {
         Write-Host "[OK] Found existing app in catalog: $teamsAppId" -ForegroundColor Green
         
         # Step 5a: Update existing app
-        Write-Host "`n🔄 Updating app package..." -ForegroundColor Yellow
+        Write-Host "`n[SYNC] Updating app package..." -ForegroundColor Yellow
         $updateUri = "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/$teamsAppId/appDefinitions"
         
         # Create multipart form data
@@ -77,7 +77,7 @@ try {
     }
     else {
         # Step 5b: Submit new app
-        Write-Host "📤 App not in catalog, submitting new..." -ForegroundColor Yellow
+        Write-Host "[OUT] App not in catalog, submitting new..." -ForegroundColor Yellow
         Write-Host "[WARN]  For new apps, use Developer Portal manual upload first" -ForegroundColor Yellow
         Write-Host "   URL: https://dev.teams.microsoft.com/apps/$AppId" -ForegroundColor Cyan
     }
@@ -93,7 +93,7 @@ catch {
         Write-Host "   3. App package -> Import app package" -ForegroundColor White
         Write-Host "   4. Upload: $PackagePath" -ForegroundColor White
         Write-Host ""
-        Write-Host "🌐 Opening Developer Portal..." -ForegroundColor Yellow
+        Write-Host "[WEB] Opening Developer Portal..." -ForegroundColor Yellow
         Start-Process "https://dev.teams.microsoft.com/apps"
         Write-Host ""
         Write-Host "Option 2: Install M365 Agents Toolkit CLI" -ForegroundColor Cyan

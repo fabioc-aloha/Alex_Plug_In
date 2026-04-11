@@ -5,10 +5,10 @@
  * Designed for newsletter/governance communication workflows.
  *
  * Features:
- *   - YAML frontmatter → RFC 5322 email headers (To, From, Subject, etc.)
- *   - Markdown → email-safe HTML (inline CSS, table-based layout)
- *   - Mermaid diagrams → static table fallback (email clients can't render JS)
- *   - Image references → base64 CID embeds (inline images in email)
+ *   - YAML frontmatter -> RFC 5322 email headers (To, From, Subject, etc.)
+ *   - Markdown -> email-safe HTML (inline CSS, table-based layout)
+ *   - Mermaid diagrams -> static table fallback (email clients can't render JS)
+ *   - Image references -> base64 CID embeds (inline images in email)
  *   - Emoji preservation in subject and body
  *   - --test flag for test-send variants (overrides recipients)
  *
@@ -32,7 +32,7 @@
  *
  * Requirements:
  *   - Node.js 18+
- *   - pandoc (for markdown → HTML conversion)
+ *   - pandoc (for markdown -> HTML conversion)
  */
 
 const fs = require('fs');
@@ -103,7 +103,7 @@ function parseFrontmatter(content) {
 }
 
 // ---------------------------------------------------------------------------
-// Markdown → Email-safe HTML
+// Markdown -> Email-safe HTML
 // ---------------------------------------------------------------------------
 function markdownToEmailHtml(markdown, options = {}) {
   // Preprocess markdown using shared module if available
@@ -120,7 +120,7 @@ function markdownToEmailHtml(markdown, options = {}) {
     }
   } else {
     // Basic Mermaid removal if shared module not available
-    markdown = markdown.replace(/```mermaid\r?\n[\s\S]*?```/g, '*[Diagram — view in browser]*');
+    markdown = markdown.replace(/```mermaid\r?\n[\s\S]*?```/g, '*[Diagram -- view in browser]*');
   }
 
   // Convert to HTML via pandoc
@@ -215,7 +215,7 @@ function applyInlineStyles(html) {
 }
 
 // ---------------------------------------------------------------------------
-// Image → Base64 CID embedding
+// Image -> Base64 CID embedding
 // ---------------------------------------------------------------------------
 function embedImagesAsCid(html, sourceDir) {
   const attachments = [];
@@ -432,7 +432,7 @@ async function main() {
     console.log(`  \u{1F4CE} ${attachments.length} inline image(s)`);
   }
   if (args.test) {
-    console.log('  \u{1F9EA} This is a TEST variant — do not distribute');
+    console.log('  \u{1F9EA} This is a TEST variant -- do not distribute');
   }
 }
 

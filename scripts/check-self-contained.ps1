@@ -9,27 +9,27 @@ $intentional = @()   # Known-OK exceptions with documented reason
 
 # Paths excluded from self-containment check with documented reasons
 $excludeFromCheck = @{
-    'episodic'   = 'Episodic memory is session-specific and cleared (emptied) on every heir deployment — absolute paths in past session records are harmless'
-    'SUPPORT.md' = 'GitHub Community Health File — designed to link to project-level files; only appears on GitHub, never loaded as cognitive instructions or routing'
+    'episodic'   = 'Episodic memory is session-specific and cleared (emptied) on every heir deployment -- absolute paths in past session records are harmless'
+    'SUPPORT.md' = 'GitHub Community Health File -- designed to link to project-level files; only appears on GitHub, never loaded as cognitive instructions or routing'
 }
 
-# Helper: resolve a relative path from a base file — returns $null if it stays in $Root, else the escaped path
+# Helper: resolve a relative path from a base file -- returns $null if it stays in $Root, else the escaped path
 function Resolve-AndCheck {
     param([string]$baseFile, [string]$target, [string]$root)
     if ($target -match '^https?://|^#|^mailto:|^external:|^global-knowledge://' ) { return $null }
-    if ($target -match '^\.github/') { return $null }  # explicit .github/ prefix — OK
-    if ($target -notmatch '[/\\]' -and $target -notmatch '\.') { return $null }  # bare skill name — OK
+    if ($target -match '^\.github/') { return $null }  # explicit .github/ prefix -- OK
+    if ($target -notmatch '[/\\]' -and $target -notmatch '\.') { return $null }  # bare skill name -- OK
     # Absolute paths are always issues
     if ($target -match '^[a-zA-Z]:\\|^/') { return $target }
-    # Relative path — resolve from file's directory
+    # Relative path -- resolve from file's directory
     $baseDir = Split-Path $baseFile -Parent
     $resolved = [System.IO.Path]::GetFullPath((Join-Path $baseDir $target))
     # Check if it stays within $Root
     if ($resolved.StartsWith($root, [System.StringComparison]::OrdinalIgnoreCase)) { return $null }
-    return $target  # escapes root — real issue
+    return $target  # escapes root -- real issue
 }
 
-# ─── 1. Synapses.json: check all 'target' fields ───────────────────────────
+# --- 1. Synapses.json: check all 'target' fields ---------------------------
 Write-Host "`n=== SYNAPSE TARGETS ===" -ForegroundColor Cyan
 $synapseFiles = Get-ChildItem $Root -Recurse -Filter "synapses.json"
 Write-Host "Files scanned: $($synapseFiles.Count)"
@@ -51,7 +51,7 @@ foreach ($f in $synapseFiles) {
     }
 }
 
-# ─── 2. Markdown files: check relative file links [...](...) ────────────────
+# --- 2. Markdown files: check relative file links [...](...) ----------------
 Write-Host "`n=== MARKDOWN FILE LINKS ===" -ForegroundColor Cyan
 $mdFiles = Get-ChildItem $Root -Recurse -Include "*.md"
 Write-Host "Files scanned: $($mdFiles.Count)"
@@ -84,7 +84,7 @@ foreach ($f in $mdFiles) {
     }
 }
 
-# ─── 3. JSON files: check for absolute paths or external repo refs ──────────
+# --- 3. JSON files: check for absolute paths or external repo refs ----------
 Write-Host "`n=== JSON FILES: ABSOLUTE/EXTERNAL PATHS ===" -ForegroundColor Cyan
 $jsonFiles = Get-ChildItem $Root -Recurse -Include "*.json" -Exclude "synapses.json"
 Write-Host "Files scanned: $($jsonFiles.Count)"
@@ -101,12 +101,12 @@ foreach ($f in $jsonFiles) {
     }
 }
 
-# ─── 4. Instruction/prompt files: already covered by section 2 ──────────────
+# --- 4. Instruction/prompt files: already covered by section 2 --------------
 # (instructions/ and prompts/ are .md files already scanned above)
 Write-Host "`n=== INSTRUCTION/PROMPT FILES ===" -ForegroundColor Cyan
 Write-Host "Covered by markdown link scan above"
 
-# ─── Summary ────────────────────────────────────────────────────────────────
+# --- Summary ----------------------------------------------------------------
 Write-Host "`n========================================" -ForegroundColor Yellow
 Write-Host "ISSUES (must fix): $($issues.Count)" -ForegroundColor Red
 if ($issues.Count -gt 0) { $issues | Format-Table -AutoSize -Wrap }
@@ -118,7 +118,7 @@ Write-Host "`nINTENTIONAL EXCEPTIONS (documented, not errors): $($intentional.Co
 if ($intentional.Count -gt 0) {
     $intentional | Group-Object File | ForEach-Object {
         Write-Host "  $($_.Name)" -ForegroundColor DarkGray
-        Write-Host "    Reason: $(($_.Group[0].Reason -split ' — ')[0])" -ForegroundColor DarkGray
+        Write-Host "    Reason: $(($_.Group[0].Reason -split ' -- ')[0])" -ForegroundColor DarkGray
     }
 }
 
@@ -127,8 +127,8 @@ if ($issues.Count -eq 0 -and $warnings.Count -eq 0) {
     Write-Host "[OK] .github/ is fully self-contained" -ForegroundColor Green
 }
 elseif ($issues.Count -eq 0) {
-    Write-Host "[WARN]  Self-contained with warnings — review relative uplinks" -ForegroundColor Yellow
+    Write-Host "[WARN]  Self-contained with warnings -- review relative uplinks" -ForegroundColor Yellow
 }
 else {
-    Write-Host "[ERROR] External references detected — fix before shipping" -ForegroundColor Red
+    Write-Host "[ERROR] External references detected -- fix before shipping" -ForegroundColor Red
 }

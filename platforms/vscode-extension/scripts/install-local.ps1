@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Install the VS Code extension locally from a .vsix package.
 .DESCRIPTION

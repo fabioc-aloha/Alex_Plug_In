@@ -1,5 +1,5 @@
 /**
- * shared/svg-pipeline.cjs — SVG creation, validation, and cross-format conversion
+ * shared/svg-pipeline.cjs -- SVG creation, validation, and cross-format conversion
  * Version: 1.0.0
  *
  * Create SVGs that work correctly in Word, email, PDF, and web on first attempt.
@@ -26,9 +26,9 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// ─────────────────────────────────────────────────────────────────────────────
-// BRAND COLORS (from user preferences — pastel palette)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// BRAND COLORS (from user preferences -- pastel palette)
+// -----------------------------------------------------------------------------
 
 const BRAND_COLORS = {
   blue:     { fill: '#dbe9f6', stroke: '#80ccff', text: '#0550ae' },
@@ -62,9 +62,9 @@ const THEME = {
   },
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CORE SVG CREATION
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 /**
  * Create an SVG document with proper viewBox, namespace, and accessibility.
@@ -215,9 +215,9 @@ function createBadge(options = {}) {
   });
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // VALIDATION
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 /**
  * Validate an SVG string for common issues that break in Word/email/PDF.
@@ -227,36 +227,36 @@ function validateSvg(svgString) {
   const warnings = [];
 
   if (!svgString.includes('xmlns="http://www.w3.org/2000/svg"')) {
-    warnings.push('Missing xmlns attribute — SVG may not render in Word or email');
+    warnings.push('Missing xmlns attribute -- SVG may not render in Word or email');
   }
   if (!svgString.includes('viewBox')) {
-    warnings.push('Missing viewBox — SVG will not scale responsively');
+    warnings.push('Missing viewBox -- SVG will not scale responsively');
   }
   if (!svgString.includes('width=') || !svgString.includes('height=')) {
-    warnings.push('Missing explicit width/height — Word and email need these');
+    warnings.push('Missing explicit width/height -- Word and email need these');
   }
   if (svgString.includes('<foreignObject')) {
-    warnings.push('Contains <foreignObject> — not supported in Word or most email clients');
+    warnings.push('Contains <foreignObject> -- not supported in Word or most email clients');
   }
   if (svgString.includes('url(') && !svgString.includes('data:')) {
-    warnings.push('Contains external URL references — may not resolve in offline/email contexts');
+    warnings.push('Contains external URL references -- may not resolve in offline/email contexts');
   }
   if (/<text[^>]*>/.test(svgString) && !svgString.includes('font-family')) {
-    warnings.push('Text without font-family — will use system default, may look different across platforms');
+    warnings.push('Text without font-family -- will use system default, may look different across platforms');
   }
   if (svgString.includes('clip-path') || svgString.includes('filter:')) {
-    warnings.push('Uses clip-path or CSS filter — limited support in email clients');
+    warnings.push('Uses clip-path or CSS filter -- limited support in email clients');
   }
   if (svgString.length > 100000) {
-    warnings.push(`Large SVG (${Math.round(svgString.length / 1024)}KB) — consider converting to PNG for email`);
+    warnings.push(`Large SVG (${Math.round(svgString.length / 1024)}KB) -- consider converting to PNG for email`);
   }
 
   return { valid: warnings.length === 0, warnings };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CONVERSION
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 /**
  * Convert SVG to PNG using Inkscape or rsvg-convert (fallback: sharp if available).
@@ -312,9 +312,9 @@ function writeSvg(svgString, outputPath) {
   return outputPath;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // INTERNAL HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function _escXml(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

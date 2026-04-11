@@ -1,5 +1,5 @@
 /**
- * data-profile.cjs — Quick data profiler
+ * data-profile.cjs -- Quick data profiler
  * Version: 1.0.0
  *
  * Produces a comprehensive profile report for any dataset: column types, nulls,
@@ -17,9 +17,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function mean(arr) { return arr.length === 0 ? 0 : arr.reduce((s, v) => s + v, 0) / arr.length; }
 function median(arr) {
@@ -45,9 +45,9 @@ function skewness(arr) {
   return arr.reduce((sum, v) => sum + ((v - m) / s) ** 3, 0) / arr.length;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // COLUMN PROFILING
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function profileNumericColumn(name, values) {
   const sorted = [...values].sort((a, b) => a - b);
@@ -98,9 +98,9 @@ function profileCategoricalColumn(name, values) {
   };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CORRELATION
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function pearsonCorrelation(x, y) {
   const n = Math.min(x.length, y.length);
@@ -119,9 +119,9 @@ function pearsonCorrelation(x, y) {
   return denom === 0 ? 0 : Math.round((num / denom) * 1000) / 1000;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // QUALITY SCORE
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function computeQualityScore(columns, totalRows) {
   let completeness = 0;
@@ -135,9 +135,9 @@ function computeQualityScore(columns, totalRows) {
   return Math.round(compScore);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // MAIN PROFILER
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 async function profile(data) {
   const { metadata, columns: colMeta, rows } = data;
@@ -180,12 +180,12 @@ async function profile(data) {
   const suggestions = [];
   for (const col of colMeta) {
     const nullPct = Math.round((col.nullCount / metadata.rowCount) * 100);
-    if (nullPct > 20) suggestions.push(`Column "${col.name}" has ${nullPct}% nulls — consider imputation or exclusion`);
-    else if (nullPct > 5) suggestions.push(`Column "${col.name}" has ${nullPct}% nulls — review before analysis`);
+    if (nullPct > 20) suggestions.push(`Column "${col.name}" has ${nullPct}% nulls -- consider imputation or exclusion`);
+    else if (nullPct > 5) suggestions.push(`Column "${col.name}" has ${nullPct}% nulls -- review before analysis`);
   }
   for (const p of profiles) {
-    if (p.isLikelyId) suggestions.push(`Column "${p.name}" appears to be an ID (${p.uniqueCount} unique of ${p.count}) — skip in analysis`);
-    if (p.outlierPct > 5) suggestions.push(`Column "${p.name}" has ${p.outlierPct}% outliers — investigate before aggregating`);
+    if (p.isLikelyId) suggestions.push(`Column "${p.name}" appears to be an ID (${p.uniqueCount} unique of ${p.count}) -- skip in analysis`);
+    if (p.outlierPct > 5) suggestions.push(`Column "${p.name}" has ${p.outlierPct}% outliers -- investigate before aggregating`);
   }
 
   return {
@@ -196,9 +196,9 @@ async function profile(data) {
   };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // TEXT FORMAT
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function formatText(result) {
   const lines = [];
@@ -221,7 +221,7 @@ function formatText(result) {
   if (result.topCorrelations.length > 0) {
     lines.push('## Top Correlations');
     for (const c of result.topCorrelations) {
-      lines.push(`  ${c.col1} × ${c.col2}: r=${c.r} (${c.strength})`);
+      lines.push(`  ${c.col1}  ${c.col2}: r=${c.r} (${c.strength})`);
     }
     lines.push('');
   }
@@ -234,15 +234,15 @@ function formatText(result) {
   return lines.join('\n');
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CLI
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 async function main() {
   const args = process.argv.slice(2);
   if (args.length === 0 || args.includes('--help')) {
     console.log(`
-data-profile.cjs — Quick data profiler
+data-profile.cjs -- Quick data profiler
 
 Usage:
   node data-profile.cjs <path>                  # Profile a file

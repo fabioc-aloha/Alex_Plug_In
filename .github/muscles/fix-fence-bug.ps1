@@ -85,9 +85,9 @@ function Format-Severity {
 
 # Main execution
 Write-Host ""
-Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║       Wrapping Fence Bug Detector/Fixer                    ║" -ForegroundColor Cyan
-Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+Write-Host "+============================================================+" -ForegroundColor Cyan
+Write-Host "|       Wrapping Fence Bug Detector/Fixer                    |" -ForegroundColor Cyan
+Write-Host "+============================================================+" -ForegroundColor Cyan
 Write-Host ""
 
 $targetFiles = @()
@@ -161,7 +161,7 @@ foreach ($file in $targetFiles) {
 }
 
 Write-Host ""
-Write-Host "═══════════════════════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "===========================================================" -ForegroundColor Cyan
 
 if ($script:issuesFound -eq 0) {
     Write-Host "[OK] No wrapping fence bugs found!" -ForegroundColor Green

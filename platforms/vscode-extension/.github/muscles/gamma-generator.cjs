@@ -24,7 +24,7 @@ const { exec } = require('child_process');
 
 const API_BASE_URL = 'https://public-api.gamma.app';
 const API_VERSION = 'v1.0';
-const DEFAULT_TIMEOUT_MS = 420000; // 7 minutes — large decks (40+ slides) need more time
+const DEFAULT_TIMEOUT_MS = 420000; // 7 minutes -- large decks (40+ slides) need more time
 const POLL_INTERVAL_MS = 3000; // 3 seconds
 const HTTP_MAX_RETRIES = 3;
 const HTTP_REQUEST_TIMEOUT_MS = 120000; // 2 minutes per individual request
@@ -263,7 +263,7 @@ class GammaClient {
 
     log(`Generation started: ${response.generationId}`, this.verbose);
     if (response.warnings) {
-      log(`⚠️ Warnings: ${response.warnings}`, this.verbose);
+      log(`[!] Warnings: ${response.warnings}`, this.verbose);
     }
 
     return response;
@@ -330,7 +330,7 @@ class GammaClient {
     await downloadFile(exportUrl, outputPath);
 
     const stats = fs.statSync(outputPath);
-    log(`✅ Downloaded: ${(stats.size / 1024 / 1024).toFixed(2)} MB`, this.verbose);
+    log(`[OK] Downloaded: ${(stats.size / 1024 / 1024).toFixed(2)} MB`, this.verbose);
 
     return outputPath;
   }
@@ -500,7 +500,7 @@ class GammaGenerator {
 
   printSummary(result) {
     console.log('\n' + '='.repeat(60));
-    console.log('✅ GENERATION COMPLETE');
+    console.log('[OK] GENERATION COMPLETE');
     console.log('='.repeat(60));
     console.log(`Generation ID: ${result.generationId}`);
     if (result.gammaUrl) {
@@ -669,7 +669,7 @@ Examples:
   # Presentation from file with export
   node .github/muscles/gamma-generator.cjs --file README.md --export pptx
 
-  # Two-step workflow: Draft → Edit → Generate
+  # Two-step workflow: Draft -> Edit -> Generate
   node .github/muscles/gamma-generator.cjs --topic "AI Ethics" --slides 10 --draft --draft-output ./my-deck.md
   # ... edit my-deck.md ...
   node .github/muscles/gamma-generator.cjs --file ./my-deck.md --export pptx --open
@@ -862,7 +862,7 @@ async function main() {
     fs.writeFileSync(outputPath, draftContent, 'utf-8');
     
     console.log('\n' + '='.repeat(60));
-    console.log('📝 DRAFT CREATED');
+    console.log('[NOTE] DRAFT CREATED');
     console.log('='.repeat(60));
     console.log(`File: ${outputPath}`);
     console.log('');

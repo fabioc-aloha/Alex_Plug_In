@@ -213,9 +213,9 @@ function mermaidToTableFallback(mmdContent) {
   return rows.join('\n');
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// CREATION HELPERS — scaffold correct, brand-aware Mermaid on first attempt
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// CREATION HELPERS -- scaffold correct, brand-aware Mermaid on first attempt
+// -----------------------------------------------------------------------------
 
 /**
  * Wrap mermaid code in a markdown fenced code block.

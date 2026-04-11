@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // H18: Decision journal
-// Global Stop hook — on long sessions (>30 min), reminds agent to journal key decisions.
+// Global Stop hook -- on long sessions (>30 min), reminds agent to journal key decisions.
 // Checks session start time from session-metrics.json.
 "use strict";
 
@@ -18,7 +18,7 @@ const workspaceRoot = input.cwd || path.resolve(__dirname, "../../..");
 const ghPath = path.join(workspaceRoot, ".github");
 const metricsPath = path.join(ghPath, "config", "session-metrics.json");
 
-// ── Check session duration ─────────────────────────────────────────────────
+// -- Check session duration -------------------------------------------------
 
 let sessionMinutes = 0;
 try {
@@ -56,9 +56,9 @@ if (isSignificantSession) {
         (sessionMinutes > 0 ? ` (~${Math.round(sessionMinutes)} min)` : "") +
         (toolCount > 0 ? `, ${toolCount} tool calls` : "") +
         `.\nBefore ending, consider documenting key decisions made:\n` +
-        `- Architecture decisions → alex_docs/decisions/\n` +
-        `- Implementation notes → session memory or CHANGELOG\n` +
-        `- Unresolved questions → ROADMAP.md Research Findings`,
+        `- Architecture decisions -> alex_docs/decisions/\n` +
+        `- Implementation notes -> session memory or CHANGELOG\n` +
+        `- Unresolved questions -> ROADMAP.md Research Findings`,
     },
   };
   process.stdout.write(JSON.stringify(response));

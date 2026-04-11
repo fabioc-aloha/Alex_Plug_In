@@ -20,7 +20,7 @@ const logPath = path.join(
   "assignment-log.json",
 );
 
-// ── Load assignment log ────────────────────────────────────────────────────
+// -- Load assignment log ----------------------------------------------------
 
 let log = { assignments: [] };
 try {
@@ -45,7 +45,7 @@ if (assignments.length === 0) {
   process.exit(0);
 }
 
-// ── Compute per-agent stats ────────────────────────────────────────────────
+// -- Compute per-agent stats ------------------------------------------------
 
 const agentStats = {};
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
@@ -77,7 +77,7 @@ for (const a of assignments) {
   }
 }
 
-// ── Build summary ──────────────────────────────────────────────────────────
+// -- Build summary ----------------------------------------------------------
 
 const summary = {
   totalAssignments: assignments.length,
@@ -119,7 +119,7 @@ for (const [name, stats] of Object.entries(agentStats)) {
   }
 }
 
-// ── Correlation vector analysis ────────────────────────────────────────────
+// -- Correlation vector analysis --------------------------------------------
 
 const cvPath = path.join(
   workspaceRoot,

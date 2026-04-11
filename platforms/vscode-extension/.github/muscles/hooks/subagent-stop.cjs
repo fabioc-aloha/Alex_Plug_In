@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * H17: SubagentStop — Assignment Lifecycle Tracking
+ * H17: SubagentStop -- Assignment Lifecycle Tracking
  * Records subagent invocation outcome for delegation pattern analysis.
  *
  * Input:  JSON via stdin (agent_id, agent_type, session_id, cwd, stop_hook_active)
@@ -15,7 +15,7 @@
 const fs = require("fs");
 const path = require("path");
 
-// ── Read stdin JSON ────────────────────────────────────────────────────────
+// -- Read stdin JSON --------------------------------------------------------
 
 let input = {};
 try {
@@ -38,7 +38,7 @@ const cvPath = path.join(
   "correlation-vector.json",
 );
 
-// ── Determine agent name ───────────────────────────────────────────────────
+// -- Determine agent name ---------------------------------------------------
 
 const agentType = (
   input.agent_type ||
@@ -59,7 +59,7 @@ const AGENT_MAP = {
 
 const agent = AGENT_MAP[agentType] || agentType;
 
-// ── Read active correlation vector ─────────────────────────────────────────
+// -- Read active correlation vector -----------------------------------------
 
 let correlationId = null;
 try {
@@ -71,7 +71,7 @@ try {
   /* no CV */
 }
 
-// ── Load or initialise assignment log ──────────────────────────────────────
+// -- Load or initialise assignment log --------------------------------------
 
 let log = { assignments: [] };
 try {
@@ -88,7 +88,7 @@ try {
   /* fresh log */
 }
 
-// ── Create assignment record ───────────────────────────────────────────────
+// -- Create assignment record -----------------------------------------------
 
 const now = new Date().toISOString();
 const nextId = log.assignments.length + 1;
@@ -108,7 +108,7 @@ if (log.assignments.length > 200) {
   log.assignments = log.assignments.slice(-200);
 }
 
-// ── Write ──────────────────────────────────────────────────────────────────
+// -- Write ------------------------------------------------------------------
 
 try {
   const configDir = path.dirname(logPath);
@@ -116,7 +116,7 @@ try {
   fs.writeFileSync(logPath, JSON.stringify(log, null, 2) + "\n", "utf8");
 } catch (err) {
   process.stderr.write(
-    `[H17] Warning: could not write assignment log — ${err.message}\n`,
+    `[H17] Warning: could not write assignment log -- ${err.message}\n`,
   );
 }
 

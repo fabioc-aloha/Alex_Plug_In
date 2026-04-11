@@ -14,7 +14,7 @@
 const fs = require("fs");
 const path = require("path");
 
-// ─── Argument parsing ───────────────────────────────────────
+// --- Argument parsing ---------------------------------------
 const args = process.argv.slice(2);
 let mode = "all";
 let phaseFilter = null;
@@ -31,7 +31,7 @@ for (let i = 0; i < args.length; i++) {
   } else if (["all", "quick", "schema", "llm"].includes(a)) mode = a;
 }
 
-// ─── Paths ──────────────────────────────────────────────────
+// --- Paths --------------------------------------------------
 const rootPath = path.resolve(__dirname, "..", "..");
 const ghPath = path.join(rootPath, ".github");
 
@@ -40,7 +40,7 @@ if (!fs.existsSync(ghPath)) {
   process.exit(1);
 }
 
-// ─── Colour helpers ─────────────────────────────────────────
+// --- Colour helpers -----------------------------------------
 const R = "\x1b[31m",
   G = "\x1b[32m",
   Y = "\x1b[33m",
@@ -67,7 +67,7 @@ function fail(msg) {
   issues.push(msg);
 }
 
-// ─── Phase groups ───────────────────────────────────────────
+// --- Phase groups -------------------------------------------
 const heirPhases = [
   1, 2, 3, 4, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
   30, 31, 32, 34,
@@ -94,10 +94,10 @@ if (phaseFilter) runPhases = phaseFilter.filter((p) => heirPhases.includes(p));
 
 if (!quiet)
   console.log(
-    `${GR}Brain QA (Heir) — Mode: ${mode} | Phases: ${runPhases.join(",")}${X}`,
+    `${GR}Brain QA (Heir) -- Mode: ${mode} | Phases: ${runPhases.join(",")}${X}`,
   );
 
-// ─── Utility functions ──────────────────────────────────────
+// --- Utility functions --------------------------------------
 function readJSON(p) {
   try {
     return JSON.parse(fs.readFileSync(p, "utf8"));
@@ -130,9 +130,9 @@ function findRecursive(dir, test) {
   return result;
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 1: Synapse Target Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(1)) {
   writePhase(1, "Synapse Target Validation");
   const broken = new Set();
@@ -159,9 +159,9 @@ if (runPhases.includes(1)) {
   else [...broken].sort().forEach((b) => fail(`Broken: ${b}`));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 2: Inheritance Centralization Check
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(2)) {
   writePhase(2, "Inheritance Centralization Check");
   const stale = dirs(path.join(ghPath, "skills")).filter((skill) => {
@@ -180,9 +180,9 @@ if (runPhases.includes(2)) {
     );
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 3: Skill Index Coverage
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(3)) {
   writePhase(3, "Skill Index Coverage");
   const skillDirs = dirs(path.join(ghPath, "skills"));
@@ -204,9 +204,9 @@ if (runPhases.includes(3)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 4: Trigger Semantic Analysis
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(4)) {
   writePhase(4, "Trigger Semantic Analysis");
   const indexPath = path.join(
@@ -237,11 +237,11 @@ if (runPhases.includes(4)) {
   }
 }
 
-// Phases 5, 7, 8 skipped — master-only
+// Phases 5, 7, 8 skipped -- master-only
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 6: Synapse Schema Format Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(6)) {
   writePhase(6, "Synapse Schema Format Validation");
   const critical = new Set();
@@ -267,18 +267,18 @@ if (runPhases.includes(6)) {
     );
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 9: Catalog Accuracy Validation (Heir: count-only)
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(9)) {
   writePhase(9, "Catalog Accuracy Validation");
   const actualSkills = dirs(path.join(ghPath, "skills")).length;
   pass(`Heir has ${actualSkills} skills deployed`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 10: Core File Token Budget
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(10)) {
   writePhase(10, "Core File Token Budget");
   const budgetWarnings = [];
@@ -291,7 +291,7 @@ if (runPhases.includes(10)) {
       budgetWarnings.push(
         `copilot-instructions.md is ${lineCount} lines (${charCount} chars) - consider trimming`,
       );
-    if (/[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]/.test(content))
+    if (/[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]/.test(content))
       budgetWarnings.push(
         "copilot-instructions.md contains ASCII box-drawing art (use Mermaid or tables)",
       );
@@ -300,9 +300,9 @@ if (runPhases.includes(10)) {
   else budgetWarnings.forEach((w) => warn(w));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 11: Boilerplate Skill Descriptions
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(11)) {
   writePhase(11, "Boilerplate Skill Descriptions");
   const boilerplate = dirs(path.join(ghPath, "skills")).filter((skill) => {
@@ -318,9 +318,9 @@ if (runPhases.includes(11)) {
   else warn(`Boilerplate (${boilerplate.length}): ${boilerplate.join(", ")}`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 12: Reset Validation (Self-Check)
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(12)) {
   writePhase(12, "Reset Validation (Self-Check)");
   const resetIssues = [];
@@ -357,11 +357,11 @@ if (runPhases.includes(12)) {
   else resetIssues.forEach((r) => fail(r));
 }
 
-// Phase 13 skipped — master-only
+// Phase 13 skipped -- master-only
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 14: Agents Structure Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(14)) {
   writePhase(14, "Agents Structure Validation");
   const agentIssues = [];
@@ -383,9 +383,9 @@ if (runPhases.includes(14)) {
   else agentIssues.forEach((a) => fail(a));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 15: Config Files Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(15)) {
   writePhase(15, "Config Files Validation");
   const required = [
@@ -415,9 +415,9 @@ if (runPhases.includes(15)) {
   else configIssues.forEach((c) => fail(c));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 16: Skill YAML Frontmatter Compliance
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(16)) {
   writePhase(16, "Skill YAML Frontmatter Compliance");
   const fmIssues = [];
@@ -442,9 +442,9 @@ if (runPhases.includes(16)) {
   else fmIssues.forEach((f) => fail(f));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 17: Internal Skills User-Invokable Check
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(17)) {
   writePhase(17, "Internal Skills User-Invokable Check");
   const internalSkills = ["memory-activation"];
@@ -461,9 +461,9 @@ if (runPhases.includes(17)) {
   else viIssues.forEach((v) => warn(v));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 18: Agent Handoffs Completeness
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(18)) {
   writePhase(18, "Agent Handoffs Completeness");
   const handoffIssues = [];
@@ -493,9 +493,9 @@ if (runPhases.includes(18)) {
   else handoffIssues.forEach((h) => warn(h));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 19: Instruction ApplyTo Pattern Coverage
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(19)) {
   writePhase(19, "Instruction ApplyTo Pattern Coverage");
   const shouldHaveApplyTo = [
@@ -522,9 +522,9 @@ if (runPhases.includes(19)) {
   else atIssues.forEach((a) => warn(a));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 20: LLM-First Content Format Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(20)) {
   writePhase(20, "LLM-First Content Format Validation");
   const formatWarnings = [];
@@ -536,12 +536,12 @@ if (runPhases.includes(20)) {
     if (!fs.existsSync(f)) continue;
     const content = fs.readFileSync(f, "utf8");
     const name = path.basename(f);
-    if (/[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]/.test(content)) {
+    if (/[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]/.test(content)) {
       formatWarnings.push(
         `${name} - Contains box-drawing ASCII art (Mermaid or tables preferred)`,
       );
     }
-    if (content.split("\n").filter((l) => /^\s*[│↓↑<\->]/.test(l)).length > 5) {
+    if (content.split("\n").filter((l) => /^\s*[|v^<\->]/.test(l)).length > 5) {
       formatWarnings.push(
         `${name} - Heavy use of ASCII arrows (structured format preferred)`,
       );
@@ -551,9 +551,9 @@ if (runPhases.includes(20)) {
   else formatWarnings.forEach((w) => warn(w));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 21: Emoji Semantic Consistency
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(21)) {
   writePhase(21, "Emoji Semantic Consistency");
   let emojiCount = 0;
@@ -573,9 +573,9 @@ if (runPhases.includes(21)) {
   pass(`Semantic markers in agents: ${emojiCount}`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 22: Episodic Archive Health
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(22)) {
   writePhase(22, "Episodic Archive Health");
   const epDir = path.join(ghPath, "episodic");
@@ -602,9 +602,9 @@ if (runPhases.includes(22)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 23: .github/ Assets Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(23)) {
   writePhase(23, ".github/ Assets Validation");
   const assetsPath = path.join(ghPath, "assets");
@@ -621,9 +621,9 @@ if (runPhases.includes(23)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 24: Issue & PR Templates
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(24)) {
   writePhase(24, "Issue & PR Templates");
   const itDir = path.join(ghPath, "ISSUE_TEMPLATE");
@@ -638,9 +638,9 @@ if (runPhases.includes(24)) {
   else pass("No PR template (normal for heir deployments)");
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 25: .github/ Root Files Completeness
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(25)) {
   writePhase(25, ".github/ Root Files Completeness");
   const rootFiles = ["copilot-instructions.md"];
@@ -669,11 +669,11 @@ if (runPhases.includes(25)) {
   else pass(`All .github/ subfolders present (${expectedDirs.length} folders)`);
 }
 
-// Phases 26-29 skipped — master-only
+// Phases 26-29 skipped -- master-only
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 30: Muscles Integrity
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(30)) {
   writePhase(30, "Muscles Integrity");
   const musclesDir = path.join(ghPath, "muscles");
@@ -695,9 +695,9 @@ if (runPhases.includes(30)) {
   else pass(`All heir muscles present (${expectedMuscles.length})`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 31: Version Consistency
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(31)) {
   writePhase(31, "Version Consistency");
   let currentVersion = "unknown";
@@ -735,9 +735,9 @@ if (runPhases.includes(31)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 32: Prefrontal Cortex Evolution Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(32)) {
   writePhase(32, "Prefrontal Cortex Evolution Validation");
   const ciPath = path.join(ghPath, "copilot-instructions.md");
@@ -795,7 +795,7 @@ if (runPhases.includes(32)) {
       warn("Could not parse Agents section from copilot-instructions.md");
     }
 
-    // Trifecta validation (simplified — no instruction/prompt alias matching in heir)
+    // Trifecta validation (simplified -- no instruction/prompt alias matching in heir)
     const trifMatch = ciContent.match(/Complete trifectas \((\d+)\):\s*(.+)/);
     if (trifMatch) {
       const listedCount = parseInt(trifMatch[1], 10);
@@ -827,9 +827,9 @@ if (runPhases.includes(32)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 34: Brain Self-Containment Check
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(34)) {
   writePhase(34, "Brain Self-Containment Check");
   const scExceptions = ["episodic", "SUPPORT.md"];
@@ -900,9 +900,9 @@ if (runPhases.includes(34)) {
   else scIssues.forEach((i) => fail(i));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // SUMMARY
-// ════════════════════════════════════════════════════════════
+// ============================================================
 console.log(`\n${C}========================================${X}`);
 console.log(`${C} BRAIN QA (HEIR) SUMMARY${X}`);
 console.log(`${C}========================================${X}`);

@@ -16,10 +16,10 @@ try {
 
 const workspaceRoot = input.cwd || path.resolve(__dirname, "../../..");
 const lines = [
-  "[Researcher SessionStart] Research mode active — understand before building.",
+  "[Researcher SessionStart] Research mode active -- understand before building.",
 ];
 
-// ── Load research findings index ───────────────────────────────────────────
+// -- Load research findings index -------------------------------------------
 
 const researchDir = path.join(workspaceRoot, "alex_docs", "research");
 try {
@@ -39,7 +39,7 @@ try {
   /* research dir not found */
 }
 
-// ── Load active knowledge gaps from roadmap ────────────────────────────────
+// -- Load active knowledge gaps from roadmap --------------------------------
 
 const roadmapPath = path.join(workspaceRoot, "ROADMAP.md");
 try {
@@ -56,21 +56,21 @@ try {
   /* roadmap not found */
 }
 
-// ── Research-first trifecta context ────────────────────────────────────────
+// -- Research-first trifecta context ----------------------------------------
 
 lines.push(
   "",
   "**Research-First Protocol:**",
   "1. Define the question clearly before searching",
   "2. Gather from multiple sources (docs, code, skills, web)",
-  "3. Cross-validate findings — prefer primary sources",
+  "3. Cross-validate findings -- prefer primary sources",
   '4. Document gaps explicitly: "I don\'t know X yet"',
   "5. Hand off to Builder only when domain is understood",
   "",
   "Check alex_docs/research/ for existing work before starting new research.",
 );
 
-// ── Output ─────────────────────────────────────────────────────────────────
+// -- Output -----------------------------------------------------------------
 
 console.log(
   JSON.stringify({

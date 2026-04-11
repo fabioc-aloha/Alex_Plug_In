@@ -43,7 +43,7 @@ function cleanPandocQuirks(md) {
   md = md.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
   // Remove trailing backslashes pandoc uses for hard line breaks
   md = md.replace(/\\\s*$/gm, "");
-  // Clean up excessive blank lines (3+ → 2)
+  // Clean up excessive blank lines (3+ -> 2)
   md = md.replace(/\n{3,}/g, "\n\n");
   // Remove {width="..."} image attributes pandoc adds
   md = md.replace(/\{width="[^"]*"(?:\s+height="[^"]*")?\}/g, "");

@@ -62,6 +62,6 @@ $packagePath | Set-Clipboard
 
 Write-Host "`n[LIST] Package path copied to clipboard!" -ForegroundColor Green
 Write-Host "`n[DIR] $packagePath" -ForegroundColor White
-Write-Host "`n👉 Upload manually to Teams Developer Portal" -ForegroundColor Yellow
+Write-Host "`n[>] Upload manually to Teams Developer Portal" -ForegroundColor Yellow
 Write-Host "   https://dev.teams.microsoft.com/apps" -ForegroundColor Cyan
 Write-Host "`n Done!" -ForegroundColor Cyan

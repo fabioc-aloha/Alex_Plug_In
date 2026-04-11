@@ -1,5 +1,5 @@
 /**
- * chart-recommend.cjs — Story-intent chart advisor
+ * chart-recommend.cjs -- Story-intent chart advisor
  * Version: 1.0.0
  *
  * Given a story intent, data shape, and audience, returns the best chart type
@@ -14,9 +14,9 @@
  */
 'use strict';
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CHART SELECTION MATRIX
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const CHART_MATRIX = {
   compare: {
@@ -85,9 +85,9 @@ const CHART_MATRIX = {
   }
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // INTENT INFERENCE FROM MESSAGE
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const INTENT_SIGNALS = [
   { intent: 'compare', patterns: /\b(rank|versus|vs|top|best|worst|differ|compare|which|highest|lowest|most|least)\b/i },
@@ -112,9 +112,9 @@ function inferIntent(message) {
   return matches.length > 0 ? matches[0].intent : null;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // DATA SHAPE INFERENCE
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const SHAPE_DEFAULTS = {
   'time-series': 'trend',
@@ -125,9 +125,9 @@ const SHAPE_DEFAULTS = {
   'flow-matrix': 'flow'
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // AUDIENCE FILTER
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function filterByAudience(candidates, audience) {
   if (audience === 'executive') {
@@ -137,9 +137,9 @@ function filterByAudience(candidates, audience) {
   return candidates;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // RECOMMEND
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function recommend(input) {
   let { storyIntent, dataShape, columns, audience, message } = input;
@@ -157,7 +157,7 @@ function recommend(input) {
   }
   if (!storyIntent) {
     storyIntent = 'compare';
-    inferenceNotes.push('No intent detected — defaulted to "compare"');
+    inferenceNotes.push('No intent detected -- defaulted to "compare"');
   }
 
   // Step 2: Look up chart candidates
@@ -194,15 +194,15 @@ function recommend(input) {
   };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CLI
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function main() {
   const args = process.argv.slice(2);
   if (args.length === 0 || args.includes('--help')) {
     console.log(`
-chart-recommend.cjs — Story-intent chart advisor
+chart-recommend.cjs -- Story-intent chart advisor
 
 Usage:
   node chart-recommend.cjs --intent compare --shape categorical-vs-numeric --audience executive

@@ -9,7 +9,7 @@
  *   (inheritance: master-only | heir:m365 | heir:vscode). Central map takes priority.
  * - Root files: ALL .md files sync by default. Only files in EXCLUDED_ROOT_FILES are skipped.
  * - Folders: Explicit list (ARCHITECTURE_FOLDERS) with per-folder exclusions.
- * - chatSkills: Auto-generated from heir disk after sync — no manual updates needed.
+ * - chatSkills: Auto-generated from heir disk after sync -- no manual updates needed.
  *
  * Exclusion categories:
  * - master-only: Stays in master only
@@ -59,13 +59,13 @@ const EMPTY_HEIR_FOLDERS = ["episodic"];
 // Root .github files that must NOT be synced to heir
 // Everything else (*.md) in .github root IS synced automatically.
 const EXCLUDED_ROOT_FILES = [
-  "pull_request_template.md", // GitHub repo template — not relevant to packaged extension
+  "pull_request_template.md", // GitHub repo template -- not relevant to packaged extension
 ];
 
 // ============================================================
 // SKILL EXCLUSIONS: Central map of skills that deviate from default sync
 // ============================================================
-// Default behavior: ALL skills sync from master → heir.
+// Default behavior: ALL skills sync from master -> heir.
 // Only skills listed here are excluded or handled specially.
 // This replaces per-skill synapses.json 'inheritance' field.
 const SKILL_EXCLUSIONS = {
@@ -150,10 +150,10 @@ const EXCLUDED_PROMPTS = getFrontmatterExcludedMarkdownFiles(
 // HEIR PROTECTION: Files that must NEVER be copied to heir
 // ============================================================
 
-// Master-only config files — contain PII or master-specific state
+// Master-only config files -- contain PII or master-specific state
 const EXCLUDED_CONFIG_FILES = [
   "user-profile.json", // PII: contains user's real name, email, social profiles
-  "MASTER-ALEX-PROTECTED.json", // Master kill-switch marker — must not exist in heir
+  "MASTER-ALEX-PROTECTED.json", // Master kill-switch marker -- must not exist in heir
   "cognitive-config.json", // Master-specific cognitive state
 ];
 
@@ -164,7 +164,7 @@ const SKILL_PII_SUBPATHS = {
   "visual-memory": [
     {
       // visual-memory.json may contain base64-encoded reference photos (PII).
-      // Heirs receive an empty template — they populate their own.
+      // Heirs receive an empty template -- they populate their own.
       subPath: "visual-memory/visual-memory.json",
       template:
         JSON.stringify(
@@ -591,7 +591,7 @@ function syncArchitectureFolders() {
         `[OK] ${folder}/ (${count} items${excluded ? `, ${excluded} excluded` : ""})`,
       );
 
-      // Rename heir-specific files after sync (e.g., brain-qa-heir.ps1 → brain-qa.ps1)
+      // Rename heir-specific files after sync (e.g., brain-qa-heir.ps1 -> brain-qa.ps1)
       if (folder === "muscles") {
         const heirRenames = {
           "brain-qa-heir.ps1": "brain-qa.ps1",
@@ -664,7 +664,7 @@ function syncArchitectureFiles() {
   }
 
   // Sync walkthrough media files (referenced by package.json walkthroughs)
-  // NOTE: alex_docs/README.md is NOT synced — the heir maintains its own
+  // NOTE: alex_docs/README.md is NOT synced -- the heir maintains its own
   // self-contained mono document (all content inline with anchor navigation)
   // because the master's README.md links to 25+ docs not packaged in the VSIX.
   const walkthroughFiles = [
@@ -725,7 +725,7 @@ function syncArchitectureFiles() {
     }
   }
 
-  // Sync .claude/ bridge (Claude Code compatibility — CLAUDE.md + settings.json)
+  // Sync .claude/ bridge (Claude Code compatibility -- CLAUDE.md + settings.json)
   const masterClaude = path.join(MASTER_ROOT, ".claude");
   const heirClaude = path.join(HEIR_ROOT, ".claude");
   if (fs.existsSync(masterClaude)) {
@@ -783,7 +783,7 @@ function verifyCounts() {
 }
 
 // ============================================================
-// HEIR TRANSFORMATIONS: Master → Heir content adjustments
+// HEIR TRANSFORMATIONS: Master -> Heir content adjustments
 // ============================================================
 
 function applyHeirTransformations() {
@@ -805,7 +805,7 @@ function applyHeirTransformations() {
     if (content !== beforeInstr) diffs.push("instrumentation comments");
 
     // 2. Reset Active Context to heir defaults
-    //    Persona: master value → detected placeholder
+    //    Persona: master value -> detected placeholder
     const beforePersona = content;
     content = content.replace(
       /^(Persona:) .+$/m,
@@ -813,15 +813,15 @@ function applyHeirTransformations() {
     );
     if (content !== beforePersona) diffs.push("persona reset");
 
-    //    Objective: master value → placeholder
+    //    Objective: master value -> placeholder
     const beforeObj = content;
     content = content.replace(
       /^(Objective:) .+$/m,
-      "$1 *(session-objective — set by user or focus timer)*",
+      "$1 *(session-objective -- set by user or focus timer)*",
     );
     if (content !== beforeObj) diffs.push("objective reset");
 
-    //    Focus Trifectas: master value → generic heir defaults
+    //    Focus Trifectas: master value -> generic heir defaults
     const beforeTri = content;
     content = content.replace(
       /^(Focus Trifectas:) .+$/m,
@@ -831,7 +831,7 @@ function applyHeirTransformations() {
 
     //    Principles: keep as-is (KISS, DRY, Optimize-for-AI is universal)
 
-    //    Recent: master session history → placeholder
+    //    Recent: master session history -> placeholder
     const beforeRecent = content;
     content = content.replace(
       /^(Recent:) .+$/m,
@@ -839,7 +839,7 @@ function applyHeirTransformations() {
     );
     if (content !== beforeRecent) diffs.push("recent reset");
 
-    //    Guidelines: master-specific path → generic
+    //    Guidelines: master-specific path -> generic
     const beforeGuidelines = content;
     content = content.replace(
       /^(Guidelines:) .+$/m,
@@ -847,7 +847,7 @@ function applyHeirTransformations() {
     );
     if (content !== beforeGuidelines) diffs.push("guidelines reset");
 
-    //    Last Assessed: master date → never
+    //    Last Assessed: master date -> never
     const beforeAssessed = content;
     content = content.replace(/^(Last Assessed:) .+$/m, "$1 never");
     if (content !== beforeAssessed) diffs.push("last assessed");
@@ -1273,7 +1273,7 @@ function validateSynapseTargets() {
           // Absolute from repo root
           targetPath = path.join(HEIR_ROOT, target);
         } else if (target.startsWith("platforms/")) {
-          // Heir doesn't have platforms/ — this is a master-only reference
+          // Heir doesn't have platforms/ -- this is a master-only reference
           errors.push(
             `${skillName}/synapses.json: references master-only path "${target}"`,
           );
@@ -1287,7 +1287,7 @@ function validateSynapseTargets() {
           // Assume it's a .github-relative path
           targetPath = path.join(HEIR_GITHUB, target);
         } else if (!target.includes("://")) {
-          // Single filename without path — might be root or unclear
+          // Single filename without path -- might be root or unclear
           warnings.push(
             `${skillName}/synapses.json: ambiguous target "${target}" (no path)`,
           );
@@ -1368,7 +1368,7 @@ function validateSkillActivationIndex() {
 function cleanupLegacyFolders() {
   // Folders that were replaced by muscles/ and should be removed from heir
   const legacyFolders = [
-    "scripts", // Replaced by muscles/ — brain-qa.ps1 moved there
+    "scripts", // Replaced by muscles/ -- brain-qa.ps1 moved there
   ];
 
   for (const folder of legacyFolders) {
@@ -1561,13 +1561,13 @@ function updatePackageJsonChatSkills() {
 
   const packagePath = path.join(HEIR_ROOT, "package.json");
   if (!fs.existsSync(packagePath)) {
-    console.log("[WARN] package.json not found — skipping chatSkills update");
+    console.log("[WARN] package.json not found -- skipping chatSkills update");
     return;
   }
 
   const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
   if (!pkg.contributes) {
-    console.log("[WARN] No contributes section — skipping chatSkills update");
+    console.log("[WARN] No contributes section -- skipping chatSkills update");
     return;
   }
 

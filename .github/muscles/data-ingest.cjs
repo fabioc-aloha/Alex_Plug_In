@@ -1,5 +1,5 @@
 /**
- * data-ingest.cjs — Universal data ingestion muscle
+ * data-ingest.cjs -- Universal data ingestion muscle
  * Version: 1.0.0
  *
  * Normalizes data from any supported source into a common JSON structure.
@@ -17,10 +17,10 @@
  *   node data-ingest.cjs <path> --output out.json  # Write to file instead of stdout
  *
  * Supported formats:
- *   .csv, .tsv    — Delimiter detection + streaming parse
- *   .xlsx, .xls   — SheetJS parse (requires: npm install xlsx)
- *   .json, .jsonl — JSON.parse / line-delimited
- *   http(s)://    — Fetch + content-type detection
+ *   .csv, .tsv    -- Delimiter detection + streaming parse
+ *   .xlsx, .xls   -- SheetJS parse (requires: npm install xlsx)
+ *   .json, .jsonl -- JSON.parse / line-delimited
+ *   http(s)://    -- Fetch + content-type detection
  *
  * Output structure:
  *   { metadata: { source, format, encoding, rowCount, columnCount, parseWarnings },
@@ -32,17 +32,17 @@
 const fs = require('fs');
 const path = require('path');
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CONSTANTS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const NULL_VARIANTS = new Set(['', 'null', 'NULL', 'NA', 'N/A', 'n/a', 'NaN', 'nan', 'None', 'none', '#N/A', '-']);
 const DEFAULT_LIMIT = 10000;
 const MAX_PREVIEW_ROWS = 5;
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // FORMAT DETECTION
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function detectFormat(source) {
   if (/^https?:\/\//i.test(source)) return 'url';
@@ -55,9 +55,9 @@ function detectFormat(source) {
   return formatMap[ext] || 'csv'; // default to CSV
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CSV / TSV PARSER
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function detectDelimiter(firstLine) {
   const candidates = [',', '\t', ';', '|'];
@@ -109,9 +109,9 @@ function parseCsvLine(line, delimiter) {
   return result;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // JSON PARSER
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function parseJson(content) {
   const data = JSON.parse(content);
@@ -132,9 +132,9 @@ function parseJsonl(content) {
   return { headers, rows };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // XLSX PARSER (optional dependency)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function parseXlsx(filePath, sheetName) {
   let XLSX;
@@ -155,9 +155,9 @@ function parseXlsx(filePath, sheetName) {
   return { headers, rows };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // TYPE INFERENCE & COLUMN PROFILING
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function inferType(values) {
   let numCount = 0, dateCount = 0, boolCount = 0, total = 0;
@@ -201,25 +201,25 @@ function profileColumn(name, values) {
   return col;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // NULL NORMALIZATION
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function normalizeNulls(rows) {
   return rows.map(row => row.map(v => NULL_VARIANTS.has(v) ? null : v));
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // COLUMN NAME CLEANUP
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function cleanColumnNames(headers) {
   return headers.map(h => h.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, ''));
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // MAIN
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 async function ingest(source, options = {}) {
   const warnings = [];
@@ -240,7 +240,7 @@ async function ingest(source, options = {}) {
     filePath = path.resolve(source);
     if (!fs.existsSync(filePath)) throw new Error(`File not found: ${filePath}`);
     if (format === 'xlsx') {
-      // Binary — handled by xlsx
+      // Binary -- handled by xlsx
     } else {
       content = fs.readFileSync(filePath, 'utf-8');
     }
@@ -312,15 +312,15 @@ async function ingest(source, options = {}) {
   };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CLI
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 async function main() {
   const args = process.argv.slice(2);
   if (args.length === 0 || args.includes('--help')) {
     console.log(`
-data-ingest.cjs — Universal data ingestion
+data-ingest.cjs -- Universal data ingestion
 
 Usage:
   node data-ingest.cjs <path|url>

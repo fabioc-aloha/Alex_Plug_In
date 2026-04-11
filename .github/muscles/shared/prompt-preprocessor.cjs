@@ -1,5 +1,5 @@
 /**
- * shared/prompt-preprocessor.cjs — Shared Prompt Preprocessing
+ * shared/prompt-preprocessor.cjs -- Shared Prompt Preprocessing
  *
  * Section validation, trait injection, length checking, and structured
  * prompt building for all Replicate image/video generation scripts.
@@ -65,7 +65,7 @@ function validatePrompt(prompt, options = {}) {
     truncated = true;
   }
 
-  // Section validation (optional — for structured prompts)
+  // Section validation (optional -- for structured prompts)
   if (requireSections) {
     for (const section of EXPECTED_SECTIONS) {
       if (!prompt.toUpperCase().includes(section)) {
@@ -76,10 +76,10 @@ function validatePrompt(prompt, options = {}) {
 
   // Common content warnings
   if (prompt.includes('\u201C') || prompt.includes('\u201D') || prompt.includes('\u2018') || prompt.includes('\u2019')) {
-    warnings.push('Smart quotes detected — may cause rendering issues in some models');
+    warnings.push('Smart quotes detected -- may cause rendering issues in some models');
   }
   if (/[\uD800-\uDBFF]/.test(prompt)) {
-    warnings.push('Surrogate pair characters detected — some models may reject these');
+    warnings.push('Surrogate pair characters detected -- some models may reject these');
   }
 
   return { valid: warnings.length === 0, warnings, truncated };
@@ -132,7 +132,7 @@ function cleanPrompt(prompt, options = {}) {
 }
 
 /**
- * Full preprocessing pipeline: clean → inject traits → validate → return.
+ * Full preprocessing pipeline: clean -> inject traits -> validate -> return.
  * @param {string} rawPrompt
  * @param {object} [options] - { model, charConfig, subject, requireSections }
  * @returns {{ prompt: string, validation: object }}
@@ -147,7 +147,7 @@ function preprocessPrompt(rawPrompt, options = {}) {
   const validation = validatePrompt(prompt, { model, requireSections });
 
   if (validation.warnings.length > 0) {
-    validation.warnings.forEach(w => console.warn(`  ⊘ Prompt: ${w}`));
+    validation.warnings.forEach(w => console.warn(`  (x) Prompt: ${w}`));
   }
 
   return { prompt, validation };

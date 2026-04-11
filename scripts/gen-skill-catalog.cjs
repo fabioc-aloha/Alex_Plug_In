@@ -1,4 +1,4 @@
-// Standalone skill catalog generator — mirrors skillCatalog.ts logic
+// Standalone skill catalog generator -- mirrors skillCatalog.ts logic
 const fs = require('fs');
 const path = require('path');
 
@@ -12,7 +12,7 @@ const STALE_PRONE = [
   'privacy-responsible-ai', 'microsoft-sfi'
 ];
 
-// Centralized exclusions — MUST match SKILL_EXCLUSIONS in .github/muscles/sync-architecture.cjs
+// Centralized exclusions -- MUST match SKILL_EXCLUSIONS in .github/muscles/sync-architecture.cjs
 // When updating sync-architecture.cjs SKILL_EXCLUSIONS, update this map too.
 const SKILL_EXCLUSIONS = {
   // master-only
@@ -158,7 +158,7 @@ STALE_PRONE.forEach(s => { md += `| \`${s}\` | Platform/API changes frequently |
 md += `
 ---
 
-_Alex Cognitive Architecture — Take Your Code to New Heights_
+_Alex Cognitive Architecture -- Take Your Code to New Heights_
 `;
 
 fs.writeFileSync(outPath, md);

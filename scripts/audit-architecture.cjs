@@ -15,7 +15,7 @@ const JSON_MODE = process.argv.includes('--json');
 const base = process.cwd();
 const issues = [];
 
-// ── Instruction Files ──────────────────────────────────────────
+// -- Instruction Files ------------------------------------------
 console.log('=== INSTRUCTION FILES AUDIT ===');
 const instrDir = path.join(base, '.github/instructions');
 const instrFiles = fs.readdirSync(instrDir).filter(f => f.endsWith('.md'));
@@ -46,8 +46,8 @@ for (const file of instrFiles) {
     issues.push('WARN: ' + file + ': very short body (' + body.length + ' chars)');
   }
 }
-// ── Trifecta Name Aliases ───────────────────────────────────────
-// Alias map: trifecta name → known instruction/prompt file stems (when names don't match)
+// -- Trifecta Name Aliases ---------------------------------------
+// Alias map: trifecta name -> known instruction/prompt file stems (when names don't match)
 const TRIFECTA_INSTR_ALIASES = {
   'dream-state': 'dream-state-automation',
   'release-process': 'release-management',
@@ -95,7 +95,7 @@ const TRIFECTA_PROMPT_ALIASES = {
   'data-storytelling': 'datastory',
   'chart-interpretation': 'interpret',
 };
-// ── Copilot-Instructions Cross-Reference ───────────────────────
+// -- Copilot-Instructions Cross-Reference -----------------------
 const ci = fs.readFileSync(path.join(base, '.github/copilot-instructions.md'), 'utf8');
 const trifectaMatch = ci.match(/Complete trifectas \((\d+)\): ([^\n]+)/);
 let trifectas = [];
@@ -123,7 +123,7 @@ if (instrOnly.length > 0 && instrOnly.length <= 30) {
   console.log('  -> ' + instrOnly.join(', '));
 }
 
-// ── Agent Files ────────────────────────────────────────────────
+// -- Agent Files ------------------------------------------------
 console.log('\n=== AGENT FILES AUDIT ===');
 const agentDir = path.join(base, '.github/agents');
 const agentFiles = fs.existsSync(agentDir)
@@ -174,7 +174,7 @@ for (const file of agentFiles) {
   }
 }
 
-// ── Prompt Files ───────────────────────────────────────────────
+// -- Prompt Files -----------------------------------------------
 console.log('\n=== PROMPT FILES AUDIT ===');
 const promptDir = path.join(base, '.github/prompts');
 const promptFiles = fs.existsSync(promptDir)
@@ -197,7 +197,7 @@ for (const file of promptFiles) {
   }
 }
 
-// ── Skill Directory Completeness ───────────────────────────────
+// -- Skill Directory Completeness -------------------------------
 console.log('\n=== SKILL DIRECTORY AUDIT ===');
 const skillDir = path.join(base, '.github/skills');
 const skillDirs = fs
@@ -235,7 +235,7 @@ for (const t of trifectas) {
   }
 }
 
-// ── Trifecta Completeness (Skill + Instruction + Prompt) ──────
+// -- Trifecta Completeness (Skill + Instruction + Prompt) ------
 console.log('\n=== TRIFECTA COMPLETENESS ===');
 let completeCount = 0;
 let incompleteDetails = [];
@@ -261,7 +261,7 @@ if (incompleteDetails.length > 0) {
   incompleteDetails.forEach(d => console.log('  - ' + d));
 }
 
-// ── Config Files ───────────────────────────────────────────────
+// -- Config Files -----------------------------------------------
 console.log('\n=== CONFIG FILES AUDIT ===');
 const configDir = path.join(base, '.github/config');
 if (fs.existsSync(configDir)) {
@@ -280,7 +280,7 @@ if (fs.existsSync(configDir)) {
   console.log('No config directory found');
 }
 
-// ── Hooks ──────────────────────────────────────────────────────
+// -- Hooks ------------------------------------------------------
 console.log('\n=== HOOKS AUDIT ===');
 const hooksFile = path.join(base, '.github/hooks.json');
 if (fs.existsSync(hooksFile)) {
@@ -326,7 +326,7 @@ if (fs.existsSync(hooksFile)) {
   console.log('No hooks.json found');
 }
 
-// ── Summary ────────────────────────────────────────────────────
+// -- Summary ----------------------------------------------------
 const bugs = issues.filter(i => i.startsWith('BUG:'));
 const warns = issues.filter(i => i.startsWith('WARN:'));
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Alex Cognitive Architecture — H13: Breaking Change Detector (PreToolUse)
+ * Alex Cognitive Architecture -- H13: Breaking Change Detector (PreToolUse)
  * Warns when editing exported API surfaces or critical extension entry points.
  *
  * Does NOT block (permissionDecision: 'allow') but injects additionalContext
@@ -9,7 +9,7 @@
  * Input:  JSON via stdin (tool_name, tool_input, session_id, cwd)
  * Output: JSON to stdout with additionalContext warning if editing critical files.
  *
- * Part of: v7.1.0 — Excavation Plan Sprint 3 (C4)
+ * Part of: v7.1.0 -- Excavation Plan Sprint 3 (C4)
  */
 
 "use strict";
@@ -17,13 +17,13 @@
 const fs = require("fs");
 const path = require("path");
 
-// ── Read stdin JSON ────────────────────────────────────────────────────────
+// -- Read stdin JSON --------------------------------------------------------
 
 let input = {};
 try {
   input = JSON.parse(fs.readFileSync(0, "utf8"));
 } catch {
-  /* No stdin or invalid JSON — use defaults */
+  /* No stdin or invalid JSON -- use defaults */
 }
 
 const toolName = input.tool_name || "";
@@ -38,16 +38,16 @@ const EDIT_TOOLS = [
 ];
 
 if (!EDIT_TOOLS.includes(toolName)) {
-  // Not a file edit tool — pass through silently
+  // Not a file edit tool -- pass through silently
   process.exit(0);
 }
 
-// ── Extract file path from tool input ──────────────────────────────────────
+// -- Extract file path from tool input --------------------------------------
 
 const filePath = toolInput.filePath || toolInput.path || "";
 const normalizedPath = filePath.replace(/\\/g, "/").toLowerCase();
 
-// ── Critical file patterns ─────────────────────────────────────────────────
+// -- Critical file patterns -------------------------------------------------
 
 const CRITICAL_PATTERNS = [
   {
@@ -74,7 +74,7 @@ const CRITICAL_PATTERNS = [
   },
 ];
 
-// ── Exported API surface detection ─────────────────────────────────────────
+// -- Exported API surface detection -----------------------------------------
 
 const warnings = [];
 
@@ -84,7 +84,7 @@ for (const { pattern, reason } of CRITICAL_PATTERNS) {
   }
 }
 
-// ── Check for export modifications in the edit content ─────────────────────
+// -- Check for export modifications in the edit content ---------------------
 
 const editContent = toolInput.newString || toolInput.content || "";
 const oldContent = toolInput.oldString || "";
@@ -103,7 +103,7 @@ if (
   warnings.push("Removing an export (breaking change for consumers)");
 }
 
-// ── Output ──────────────────────────────────────────────────────────────────
+// -- Output ------------------------------------------------------------------
 
 if (warnings.length > 0) {
   const warningMsg = [

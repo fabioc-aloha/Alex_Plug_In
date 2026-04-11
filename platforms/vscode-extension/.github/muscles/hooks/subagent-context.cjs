@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // H16: SubagentStart context injection + correlation vector
-// Global SubagentStart hook — injects parent session context so subagents
+// Global SubagentStart hook -- injects parent session context so subagents
 // don't start cold. Reads Active Context from copilot-instructions.md.
 // Also generates/propagates correlation vectors for cross-agent tracing.
 "use strict";
@@ -21,7 +21,7 @@ function extractActiveContext() {
       return match[1].trim();
     }
   } catch {
-    // File not found or unreadable — degrade gracefully
+    // File not found or unreadable -- degrade gracefully
   }
   return null;
 }

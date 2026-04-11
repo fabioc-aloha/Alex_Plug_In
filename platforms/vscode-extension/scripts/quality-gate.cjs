@@ -19,7 +19,7 @@ const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
 
-// ─── Configuration ────────────────────────────────────────────────────────────
+// --- Configuration ------------------------------------------------------------
 
 const ROOT = path.resolve(__dirname, '..');
 const SRC_DIR = path.join(ROOT, 'src');
@@ -38,16 +38,16 @@ let totalErrors = 0;
 let totalWarnings = 0;
 let currentGate = null;
 
-// ─── Utilities ────────────────────────────────────────────────────────────────
+// --- Utilities ----------------------------------------------------------------
 
 function header(title) {
   if (JSON_MODE) {
     currentGate = { name: title, status: 'pass', issues: [] };
     jsonResult.gates.push(currentGate);
   } else {
-    console.log(`\n${'═'.repeat(60)}`);
+    console.log(`\n${'='.repeat(60)}`);
     console.log(`  ${title}`);
-    console.log(`${'═'.repeat(60)}`);
+    console.log(`${'='.repeat(60)}`);
   }
 }
 
@@ -100,7 +100,7 @@ function getAllFiles(dir, exts, exclude) {
   return results;
 }
 
-// ─── Gate 1: U+FFFD Encoding Corruption ──────────────────────────────────────
+// --- Gate 1: U+FFFD Encoding Corruption --------------------------------------
 
 function checkEncodingCorruption() {
   header('Gate 1: Encoding Integrity (U+FFFD scan)');
@@ -137,7 +137,7 @@ function checkEncodingCorruption() {
   }
 }
 
-// ─── Gate 2: Command <-> Handler Parity ────────────────────────────────────────
+// --- Gate 2: Command <-> Handler Parity ----------------------------------------
 
 function checkCommandParity() {
   header('Gate 2: Command <-> Handler Parity');
@@ -200,7 +200,7 @@ function checkCommandParity() {
   }
 }
 
-// ─── Gate 3: Doc File Inclusion ──────────────────────────────────────────────
+// --- Gate 3: Doc File Inclusion ----------------------------------------------
 
 function checkDocFileInclusion() {
   header('Gate 3: Doc File Inclusion (VSIX packaging)');
@@ -277,7 +277,7 @@ function checkDocFileInclusion() {
   }
 }
 
-// ─── Gate 4: Markdown Table Integrity ────────────────────────────────────────
+// --- Gate 4: Markdown Table Integrity ----------------------------------------
 
 function checkMarkdownTables() {
   header('Gate 4: Markdown Table Integrity');
@@ -343,7 +343,7 @@ function checkMarkdownTables() {
   }
 }
 
-// ─── Gate 5: Walkthrough Sync Parity ─────────────────────────────────────────
+// --- Gate 5: Walkthrough Sync Parity -----------------------------------------
 
 function checkWalkthroughSync() {
   header('Gate 5: Walkthrough File Sync');
@@ -386,7 +386,7 @@ function checkWalkthroughSync() {
   }
 }
 
-// ─── Gate 6: Skill Frontmatter Integrity ─────────────────────────────────────
+// --- Gate 6: Skill Frontmatter Integrity -------------------------------------
 
 function parseFrontmatter(content) {
   // Minimal frontmatter parser: expects leading --- block
@@ -456,7 +456,7 @@ function checkSkillFrontmatterIntegrity() {
   }
 }
 
-// ─── Gate 7: VSIX Size Budget ──────────────────────────────────────────────
+// --- Gate 7: VSIX Size Budget ----------------------------------------------
 
 /**
  * Fallback file walker: estimates VSIX size when vsce is unavailable.
@@ -573,7 +573,7 @@ function checkVsixSizeBudget() {
   }
 }
 
-// ─── Gate 8: Skill Activation Index ────────────────────────────────────────
+// --- Gate 8: Skill Activation Index ----------------------------------------
 
 function checkSkillActivationIndex() {
   header('Gate 8: Skill Activation Index');
@@ -595,7 +595,7 @@ function checkSkillActivationIndex() {
   }
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
+// --- Main ---------------------------------------------------------------------
 
 function main() {
   if (!JSON_MODE) {
@@ -613,7 +613,7 @@ function main() {
   checkVsixSizeBudget();
   checkSkillActivationIndex();
 
-  // ─── Summary ──────────────────────────────────────────────────────────────
+  // --- Summary --------------------------------------------------------------
 
   jsonResult.errors = totalErrors;
   jsonResult.warnings = totalWarnings;

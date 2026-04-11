@@ -22,7 +22,7 @@ const OUTPUT = __dirname;
 
 const dryRun = process.argv.includes("--dry-run");
 
-// ─── Manifest: 20 knowledge packs ─────────────────────────────────────────
+// --- Manifest: 20 knowledge packs -----------------------------------------
 const manifest = [
   {
     file: "01-identity-and-mission.md",
@@ -256,7 +256,7 @@ const manifest = [
   },
 ];
 
-// ─── Processing Functions ──────────────────────────────────────────────────
+// --- Processing Functions --------------------------------------------------
 
 function stripFrontmatter(content) {
   // Remove YAML frontmatter (--- ... ---)
@@ -370,7 +370,7 @@ function readSource(source) {
   return content;
 }
 
-// ─── Main ──────────────────────────────────────────────────────────────────
+// --- Main ------------------------------------------------------------------
 
 console.log("=== Alex Knowledge Pack Generator ===\n");
 console.log(`Skills dir:  ${SKILLS}`);

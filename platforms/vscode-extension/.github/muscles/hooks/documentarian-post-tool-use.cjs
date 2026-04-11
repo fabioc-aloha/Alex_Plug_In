@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// H6: Documentarian post-tool — file change tracker
+// H6: Documentarian post-tool -- file change tracker
 // Agent-scoped PostToolUse hook for Documentarian mode.
 // Tracks file modifications and suggests CHANGELOG entries when docs change.
 'use strict';
@@ -36,7 +36,7 @@ process.stdin.on('end', () => {
     const hints = [];
 
     if (normalized.includes('CHANGELOG')) {
-      // Already editing changelog — no reminder needed
+      // Already editing changelog -- no reminder needed
       process.exit(0);
       return;
     }
@@ -46,23 +46,23 @@ process.stdin.on('end', () => {
     }
 
     if (normalized.includes('/architecture/') || normalized.includes('/guides/')) {
-      hints.push('Architecture or guide doc changed — verify cross-references are current');
+      hints.push('Architecture or guide doc changed -- verify cross-references are current');
     }
 
     if (normalized.includes('package.json')) {
-      hints.push('package.json changed — check if CHANGELOG needs a dependency or version entry');
+      hints.push('package.json changed -- check if CHANGELOG needs a dependency or version entry');
     }
 
     if (normalized.includes('copilot-instructions.md')) {
-      hints.push('copilot-instructions.md changed — this is the identity source of truth');
+      hints.push('copilot-instructions.md changed -- this is the identity source of truth');
     }
 
     if (normalized.includes('/skills/') && normalized.endsWith('SKILL.md')) {
-      hints.push('Skill file changed — verify SKILLS-CATALOG.md and TRIFECTA-CATALOG.md are current');
+      hints.push('Skill file changed -- verify SKILLS-CATALOG.md and TRIFECTA-CATALOG.md are current');
     }
 
     if (normalized.includes('/agents/') && normalized.endsWith('.agent.md')) {
-      hints.push('Agent definition changed — verify AGENT-CATALOG.md is current');
+      hints.push('Agent definition changed -- verify AGENT-CATALOG.md is current');
     }
 
     if (hints.length > 0) {

@@ -1,5 +1,5 @@
 /**
- * markdown-lint.cjs — Pre-conversion markdown validator
+ * markdown-lint.cjs -- Pre-conversion markdown validator
  * Version: 1.0.0
  *
  * Catches issues that cause conversion failures or degraded output BEFORE
@@ -21,9 +21,9 @@ const path = require('path');
 const { findMermaidBlocks: _sharedFindMermaid } = require(path.join(__dirname, 'shared', 'mermaid-pipeline.cjs'));
 // Note: glob patterns handled manually via fs + path
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // RULES
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const RULES = [
   // Structure
@@ -47,7 +47,7 @@ const RULES = [
       for (const h of headings) {
         const level = h.trim().split(' ')[0].length;
         if (level > prev + 1 && prev > 0) {
-          return `Skipped heading level: H${prev} → H${level} (may look broken in Word TOC)`;
+          return `Skipped heading level: H${prev} -> H${level} (may look broken in Word TOC)`;
         }
         prev = level;
       }
@@ -59,7 +59,7 @@ const RULES = [
     severity: 'warning',
     targets: ['word', 'email', 'pdf'],
     check: (content) => {
-      if (content.charCodeAt(0) === 0xFEFF) return 'File has UTF-8 BOM — may cause pandoc issues';
+      if (content.charCodeAt(0) === 0xFEFF) return 'File has UTF-8 BOM -- may cause pandoc issues';
     },
     fix: (content) => content.replace(/^\uFEFF/, ''),
   },
@@ -77,7 +77,7 @@ const RULES = [
         const cols1 = tables[i].split('|').length;
         const cols2 = tables[i + 1].split('|').length;
         if (cols1 !== cols2 && !tables[i + 1].match(/^[\s|:-]+$/)) {
-          return `Table column count mismatch (${cols1} vs ${cols2}) — will break in Word`;
+          return `Table column count mismatch (${cols1} vs ${cols2}) -- will break in Word`;
         }
       }
     },
@@ -119,7 +119,7 @@ const RULES = [
           'packet-beta', 'kanban', 'architecture-beta', 'graph'];
         const type = firstLine.split(/[\s{(]/)[0];
         if (!validTypes.includes(type)) {
-          return `Mermaid block starts with "${type}" — not a recognized diagram type`;
+          return `Mermaid block starts with "${type}" -- not a recognized diagram type`;
         }
       }
     },
@@ -133,7 +133,7 @@ const RULES = [
       const blocks = _findMermaidBlocks(content);
       for (const block of blocks) {
         if (block.includes('\u201C') || block.includes('\u201D') || block.includes('\u2018') || block.includes('\u2019')) {
-          return 'Mermaid block contains smart quotes (\u201C\u201D) — use straight quotes ("") instead';
+          return 'Mermaid block contains smart quotes (\u201C\u201D) -- use straight quotes ("") instead';
         }
       }
     },
@@ -153,7 +153,7 @@ const RULES = [
       const blocks = _findMermaidBlocks(content);
       for (const block of blocks) {
         if (block.includes('\\n') && !block.includes('<br')) {
-          return 'Mermaid block uses \\n for line breaks — use <br/> instead (\\n is unreliable)';
+          return 'Mermaid block uses \\n for line breaks -- use <br/> instead (\\n is unreliable)';
         }
       }
     },
@@ -166,7 +166,7 @@ const RULES = [
     check: (content) => {
       const blocks = _findMermaidBlocks(content);
       for (const block of blocks) {
-        if (block.trim().length === 0) return 'Empty Mermaid code block — will cause rendering error';
+        if (block.trim().length === 0) return 'Empty Mermaid code block -- will cause rendering error';
       }
     },
   },
@@ -187,7 +187,7 @@ const RULES = [
         if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) continue;
         const imgPath = path.resolve(dir, src);
         if (!fs.existsSync(imgPath)) {
-          return `Image not found: ${src} — will be missing in output`;
+          return `Image not found: ${src} -- will be missing in output`;
         }
       }
     },
@@ -200,7 +200,7 @@ const RULES = [
     check: (content) => {
       const emptyAlts = content.match(/!\[\]\(/g) || [];
       if (emptyAlts.length > 0) {
-        return `${emptyAlts.length} image(s) without alt text — bad for accessibility and Word captions`;
+        return `${emptyAlts.length} image(s) without alt text -- bad for accessibility and Word captions`;
       }
     },
   },
@@ -213,7 +213,7 @@ const RULES = [
     targets: ['word', 'email'],
     check: (content) => {
       if (content.includes('<svg') && !content.includes('xmlns="http://www.w3.org/2000/svg"')) {
-        return 'Inline SVG missing xmlns attribute — will not render in Word or email';
+        return 'Inline SVG missing xmlns attribute -- will not render in Word or email';
       }
     },
   },
@@ -224,7 +224,7 @@ const RULES = [
     targets: ['word', 'email', 'pdf'],
     check: (content) => {
       if (content.includes('<svg') && !content.includes('viewBox')) {
-        return 'Inline SVG missing viewBox — will not scale correctly';
+        return 'Inline SVG missing viewBox -- will not scale correctly';
       }
     },
   },
@@ -241,7 +241,7 @@ const RULES = [
         // Has $ delimiters but maybe not LaTeX
       }
       if (/\\(frac|sqrt|sum|int|prod)\{/.test(content)) {
-        return 'Contains LaTeX math commands — will be converted to Unicode approximations for Word/email';
+        return 'Contains LaTeX math commands -- will be converted to Unicode approximations for Word/email';
       }
     },
   },
@@ -253,7 +253,7 @@ const RULES = [
     check: (content) => {
       // Check for malformed callouts
       const badCallout = content.match(/^:::\s*$/m);
-      if (badCallout) return 'Empty callout block (::: without type) — use ::: tip, ::: warning, ::: note';
+      if (badCallout) return 'Empty callout block (::: without type) -- use ::: tip, ::: warning, ::: note';
     },
   },
 
@@ -278,7 +278,7 @@ const RULES = [
     targets: ['slides'],
     check: (content) => {
       const h2Count = (content.match(/^## /gm) || []).length;
-      if (h2Count < 3) return `Only ${h2Count} H2 headings found — Gamma uses H2 as slide breaks (need 3+ for a useful deck)`;
+      if (h2Count < 3) return `Only ${h2Count} H2 headings found -- Gamma uses H2 as slide breaks (need 3+ for a useful deck)`;
     },
   },
 
@@ -290,23 +290,23 @@ const RULES = [
     targets: ['word', 'email', 'pdf', 'slides'],
     check: (content) => {
       const emDashes = content.match(/\u2014/g) || [];
-      if (emDashes.length > 0) return `${emDashes.length} em dash(es) found — project convention: use -- instead of \u2014`;
+      if (emDashes.length > 0) return `${emDashes.length} em dash(es) found -- project convention: use -- instead of \u2014`;
     },
     fix: (content) => content.replace(/\u2014/g, '--'),
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function _findMermaidBlocks(content) {
   return _sharedFindMermaid(content).map(b => b.content);
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // LINTER ENGINE
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 /**
  * Lint a markdown string.
@@ -331,12 +331,12 @@ function lint(content, options = {}) {
         else if (rule.severity === 'warning') results.warnings.push(item);
         else results.info.push(item);
       }
-    } catch { /* rule threw — skip */ }
+    } catch { /* rule threw -- skip */ }
   }
 
   const total = results.errors.length + results.warnings.length + results.info.length;
   results.summary = total === 0
-    ? `\u2705 Clean — ready for ${target} conversion`
+    ? `\u2705 Clean -- ready for ${target} conversion`
     : `${results.errors.length} error(s), ${results.warnings.length} warning(s), ${results.info.length} info`;
 
   return results;
@@ -371,9 +371,9 @@ function autofix(content, options = {}) {
 
 module.exports = { lint, autofix, RULES };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CLI
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 if (require.main === module) {
   const args = process.argv.slice(2);

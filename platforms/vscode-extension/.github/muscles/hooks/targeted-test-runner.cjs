@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // H12: Targeted test runner
-// Global PostToolUse hook — after .ts edits, suggests running the companion test file.
+// Global PostToolUse hook -- after .ts edits, suggests running the companion test file.
 'use strict';
 
 const fs = require('fs');
@@ -61,7 +61,7 @@ process.stdin.on('end', () => {
         hookSpecificOutput: {
           hookEventName: 'PostToolUse',
           additionalContext:
-            `H12 TEST RUNNER: Source file modified — companion test exists.\n` +
+            `H12 TEST RUNNER: Source file modified -- companion test exists.\n` +
             `Consider running: npm test (or target: ${relativePath})\n` +
             `File: ${path.basename(filePath)}`,
         },

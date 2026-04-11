@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // H2: Validator read-only enforcement
 // Agent-scoped PreToolUse hook for Validator mode.
-// Blocks write operations — Validator reviews, it does not modify.
+// Blocks write operations -- Validator reviews, it does not modify.
 'use strict';
 
 const WRITE_TOOLS = new Set([
@@ -39,7 +39,7 @@ process.stdin.on('end', () => {
       process.exit(2);
     }
 
-    // Allow — no context needed
+    // Allow -- no context needed
     const response = {
       hookSpecificOutput: {
         hookEventName: 'PreToolUse',

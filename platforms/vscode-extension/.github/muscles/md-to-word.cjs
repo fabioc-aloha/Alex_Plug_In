@@ -36,7 +36,7 @@
  * Requirements:
  *   - pandoc  (Windows: winget install pandoc | macOS: brew install pandoc | Linux: apt install pandoc)
  *   - mermaid-cli (npm install -g @mermaid-js/mermaid-cli)
- *   - jszip   (npm dependency — resolved from extension node_modules)
+ *   - jszip   (npm dependency -- resolved from extension node_modules)
  *   - svgexport (npm install -g svgexport) [optional, for SVG banners]
  */
 
@@ -46,7 +46,7 @@ const os = require('os');
 const { execSync } = require('child_process');
 
 // ---------------------------------------------------------------------------
-// JSZip loading — try multiple resolution paths
+// JSZip loading -- try multiple resolution paths
 // ---------------------------------------------------------------------------
 let JSZip;
 try {
@@ -55,7 +55,7 @@ try {
   // When running from workspace, jszip may not be in the local node_modules.
   // The caller should set NODE_PATH to the extension's node_modules.
   console.error('ERROR: jszip not found. Ensure NODE_PATH includes the extension node_modules.');
-  console.error('  Post-processing will be skipped — output may lack professional formatting.');
+  console.error('  Post-processing will be skipped -- output may lack professional formatting.');
   JSZip = null;
 }
 
@@ -66,7 +66,7 @@ const { preprocessMarkdown, validateHeadingHierarchy, embedLocalImages, validate
 const { findMermaidBlocks } = require(path.join(__dirname, 'shared', 'mermaid-pipeline.cjs'));
 
 // ---------------------------------------------------------------------------
-// Page Layout Constants (Letter: 8.5" × 11", 1" margins)
+// Page Layout Constants (Letter: 8.5"  11", 1" margins)
 // ---------------------------------------------------------------------------
 const PAGE_WIDTH_INCHES = 6.5;
 const PAGE_HEIGHT_INCHES = 9.0;
@@ -281,7 +281,7 @@ function formatTables(xml) {
               .replace(/<w:sz[^/]*\/>/g, '');
             return `<w:rPr>${c}<w:b/><w:color w:val="FFFFFF"/><w:sz w:val="20"/></w:rPr>`;
           });
-          // Runs without rPr — add one
+          // Runs without rPr -- add one
           cellMatch = cellMatch.replace(/<w:r>((?:(?!<w:rPr)[\s\S])*?<w:t)/g,
             `<w:r><w:rPr><w:b/><w:color w:val="FFFFFF"/><w:sz w:val="20"/></w:rPr><w:t`);
         } else {
@@ -497,7 +497,7 @@ function keepCaptionsWithContent(xml) {
 }
 
 /**
- * Fix paragraph spacing — widow/orphan control, list spacing.
+ * Fix paragraph spacing -- widow/orphan control, list spacing.
  */
 function fixParagraphSpacing(xml, style) {
   const preset = STYLE_PRESETS[style] || STYLE_PRESETS.professional;
@@ -691,7 +691,7 @@ function addFooterRefToSectionProps(docXml, footerRId) {
   const R_NS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
   const footerRef = `<w:footerReference xmlns:w="${W_NS}" xmlns:r="${R_NS}" w:type="default" r:id="${footerRId}"/>`;
 
-  // Find sectPr (section properties) — usually near the end of body
+  // Find sectPr (section properties) -- usually near the end of body
   if (docXml.includes('<w:sectPr')) {
     docXml = docXml.replace(/<w:sectPr([^>]*)>/, (m, attrs) => {
       return `<w:sectPr${attrs}>${footerRef}`;
@@ -817,14 +817,14 @@ function parseArgs(argv) {
       if (['letter', 'a4', '6x9'].includes(size)) {
         result.pageSize = size;
       } else {
-        console.warn(`⚠️  Unknown page size "${size}" — using letter`);
+        console.warn(`[!]  Unknown page size "${size}" -- using letter`);
       }
     } else if (args[i] === '--style' && i + 1 < args.length) {
       const style = args[++i].toLowerCase();
       if (STYLE_PRESETS[style]) {
         result.style = style;
       } else {
-        console.warn(`⚠️  Unknown style "${style}" — using professional. Available: ${Object.keys(STYLE_PRESETS).join(', ')}`);
+        console.warn(`[!]  Unknown style "${style}" -- using professional. Available: ${Object.keys(STYLE_PRESETS).join(', ')}`);
       }
     } else if (args[i] === '--reference-doc' && i + 1 < args.length) {
       result.referenceDoc = args[++i];
@@ -1049,7 +1049,7 @@ async function build(args) {
       if (fs.existsSync(refDocPath)) {
         pandocArgs.push(`--reference-doc="${refDocPath}"`);
       } else {
-        console.warn(`⚠️  Reference doc not found: ${refDocPath} — using default`);
+        console.warn(`[!]  Reference doc not found: ${refDocPath} -- using default`);
       }
     }
     if (args.luaFilter) {
@@ -1057,7 +1057,7 @@ async function build(args) {
       if (fs.existsSync(filterPath)) {
         pandocArgs.push(`--lua-filter="${filterPath}"`);
       } else {
-        console.warn(`⚠️  Lua filter not found: ${filterPath} — skipping`);
+        console.warn(`[!]  Lua filter not found: ${filterPath} -- skipping`);
       }
     }
 
@@ -1087,7 +1087,7 @@ async function build(args) {
     const stats = fs.statSync(outputPath);
     const sizeKB = stats.size / 1024;
     if (sizeKB < 5) {
-      console.warn(`\u26a0\ufe0f  Output file is only ${sizeKB.toFixed(1)} KB — may be corrupt or empty`);
+      console.warn(`\u26a0\ufe0f  Output file is only ${sizeKB.toFixed(1)} KB -- may be corrupt or empty`);
     }
     console.log(`\u2705 Done! Output: ${outputPath}`);
     console.log(`   Size: ${sizeKB.toFixed(1)} KB`);

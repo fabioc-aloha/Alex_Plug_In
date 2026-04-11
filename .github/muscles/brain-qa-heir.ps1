@@ -21,7 +21,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# Resolve paths — heir always runs from its own workspace root
+# Resolve paths -- heir always runs from its own workspace root
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $rootPath = Split-Path -Parent (Split-Path -Parent $scriptDir)  # .github/muscles -> .github -> root
 $ghPath = Join-Path $rootPath ".github"
@@ -183,7 +183,7 @@ if (4 -in $runPhases) {
     }
 }
 
-# Phases 5, 7, 8 skipped — master-only (Master-Heir sync comparisons)
+# Phases 5, 7, 8 skipped -- master-only (Master-Heir sync comparisons)
 
 # ============================================================
 # PHASE 6: Synapse Schema Format Validation
@@ -245,7 +245,7 @@ if (10 -in $runPhases) {
             $budgetWarnings += "copilot-instructions.md is $lineCount lines ($charCount chars) - consider trimming"
         }
 
-        if ($content -match '[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]') {
+        if ($content -match '[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]') {
             $budgetWarnings += "copilot-instructions.md contains ASCII box-drawing art (use Mermaid or tables)"
         }
     }
@@ -322,7 +322,7 @@ if (12 -in $runPhases) {
     }
 }
 
-# Phase 13 skipped — master-only (Instructions/Prompts sync comparison)
+# Phase 13 skipped -- master-only (Instructions/Prompts sync comparison)
 
 # ============================================================
 # PHASE 14: Agents Structure Validation
@@ -529,11 +529,11 @@ if (20 -in $runPhases) {
             $content = Get-Content $_.FullName -Raw
             $file = $_.Name
             
-            if ($content -match '[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]') {
+            if ($content -match '[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]') {
                 $formatWarnings += "${file} - Contains box-drawing ASCII art (Mermaid or tables preferred)"
             }
             
-            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑<-->]' }).Count -gt 5) {
+            if (($content -split '\n' | Where-Object { $_ -match '^\s*[|v^<-->]' }).Count -gt 5) {
                 $formatWarnings += "${file} - Heavy use of ASCII arrows (structured format preferred)"
             }
         }
@@ -670,7 +670,7 @@ if (25 -in $runPhases) {
     else { Write-Pass "All .github/ subfolders present ($($expectedDirs.Count) folders)" }
 }
 
-# Phases 26-29 skipped — master-only (alex_docs, M365/Codespaces heirs, GK sync)
+# Phases 26-29 skipped -- master-only (alex_docs, M365/Codespaces heirs, GK sync)
 
 # ============================================================
 # PHASE 30: Muscles Integrity
@@ -821,10 +821,10 @@ if (32 -in $runPhases) {
 if (34 -in $runPhases) {
     Write-Phase 34 "Brain Self-Containment Check"
 
-    # Known-OK exceptions — files that intentionally reference outside .github/
+    # Known-OK exceptions -- files that intentionally reference outside .github/
     $scExceptions = @(
         'episodic',   # Session records cleared on heir deployment; past-session paths are harmless
-        'SUPPORT.md'  # GitHub Community Health File — links to repo-root docs by design
+        'SUPPORT.md'  # GitHub Community Health File -- links to repo-root docs by design
     )
 
     # Helper: returns $null if target stays inside $ghPath, otherwise returns the escaped value
@@ -834,8 +834,8 @@ if (34 -in $runPhases) {
         if ($target -match '^(https?://|#|mailto:|external:|global-knowledge://)') { return $null }
         if ($target -match '^\.github/') { return $null }   # explicit .github/ prefix is always OK
         if ($target -notmatch '[/\\]' -and $target -notmatch '\.') { return $null }  # bare skill name
-        if ($target -match '^[a-zA-Z]:\\|^/') { return $target }  # absolute path — always bad
-        # Relative path — resolve and verify it stays inside .github/
+        if ($target -match '^[a-zA-Z]:\\|^/') { return $target }  # absolute path -- always bad
+        # Relative path -- resolve and verify it stays inside .github/
         $baseDir = Split-Path $sourceFile -Parent
         $resolved = [System.IO.Path]::GetFullPath((Join-Path $baseDir $target))
         if ($resolved.StartsWith($ghPath, [System.StringComparison]::OrdinalIgnoreCase)) { return $null }
@@ -850,7 +850,7 @@ if (34 -in $runPhases) {
 
     $scIssues = @()
 
-    # 1. Synapse targets — must all resolve within .github/
+    # 1. Synapse targets -- must all resolve within .github/
     Get-ChildItem "$ghPath" -Recurse -Filter "synapses.json" | ForEach-Object {
         $f = $_
         try {
@@ -885,7 +885,7 @@ if (34 -in $runPhases) {
             $escaped = Test-SelfContained -sourceFile $f.FullName -target $href
             if ($null -ne $escaped) { $scIssues += "[md-link] $short -> $escaped" }
         }
-        # 3. Double-slash typo ..// — always a bug, never intentional
+        # 3. Double-slash typo ..// -- always a bug, never intentional
         if ($content -match '\.\.//') {
             $badLines = ($content -split "`n" | Select-String '\.\.//' |
                 ForEach-Object { $_.LineNumber }) -join ', '

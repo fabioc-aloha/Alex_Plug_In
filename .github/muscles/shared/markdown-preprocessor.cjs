@@ -5,7 +5,7 @@
  * - md-to-word.cjs (BOM, checkboxes, list spacing, heading spacing)
  * - VT build-pdf.js (callouts, highlights, kbd, sub/sup, definitions)
  * - AlexBooks build-epub.js (page-break directives, landscape sections)
- * - AIRS preprocess_latex_tables.py (LaTeX math → Unicode)
+ * - AIRS preprocess_latex_tables.py (LaTeX math -> Unicode)
  *
  * Usage:
  *   const { preprocessMarkdown, convertLatexMath } = require('./shared/markdown-preprocessor.cjs');
@@ -49,7 +49,7 @@ function convertLatexMath(content) {
     for (const [pattern, replacement] of LATEX_MATH_MAP) {
       result = result.replace(pattern, replacement);
     }
-    // Superscripts: ^{2} → ² or ^2 → ²
+    // Superscripts: ^{2} ->  or ^2 -> 
     result = result.replace(/\^{([^}]+)}/g, (_m, exp) =>
       exp.split('').map(c => SUPERSCRIPT_MAP[c] || c).join('')
     );
@@ -99,7 +99,7 @@ function preprocessMarkdown(content, options = {}) {
     content = body;
   }
 
-  // LaTeX math → Unicode
+  // LaTeX math -> Unicode
   content = convertLatexMath(content);
 
   // Page-break directives
@@ -200,7 +200,7 @@ function preprocessMarkdown(content, options = {}) {
 }
 
 /**
- * Validate heading hierarchy — detect jumps (e.g., H1→H3 skipping H2).
+ * Validate heading hierarchy -- detect jumps (e.g., H1->H3 skipping H2).
  * Returns warnings for each violation found.
  * @param {string} content - Markdown content
  * @returns {{ valid: boolean, warnings: string[] }}
@@ -268,7 +268,7 @@ function embedLocalImages(content, sourceDir) {
 }
 
 /**
- * Validate markdown links — detect broken local refs, empty URLs, and malformed syntax.
+ * Validate markdown links -- detect broken local refs, empty URLs, and malformed syntax.
  * @param {string} content - Markdown content
  * @param {string} [sourceDir] - Directory to resolve relative link paths against
  * @returns {{ valid: boolean, warnings: string[] }}
@@ -283,7 +283,7 @@ function validateLinks(content, sourceDir) {
     const lineNum = i + 1;
     const line = lines[i];
 
-    // Match markdown links: [text](url) — skip images ![text](url)
+    // Match markdown links: [text](url) -- skip images ![text](url)
     const linkPattern = /(?<!!)\[([^\]]*)\]\(([^)]*)\)/g;
     let match;
     while ((match = linkPattern.exec(line)) !== null) {

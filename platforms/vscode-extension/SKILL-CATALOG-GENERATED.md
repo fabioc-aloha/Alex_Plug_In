@@ -1,8 +1,8 @@
 # Alex Skills Catalog (Generated)
 
-> Generated: 2026-04-09
+> Generated: 2026-04-11
 > Total Skills: **160** (146 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
-> Total Connections: **828** (0 bidirectional, 135 weak)
+> Total Connections: **825** (0 bidirectional, 135 weak)
 
 ---
 
@@ -64,7 +64,7 @@
 | `dialog-engineering` | 4 |
 | `dissertation-defense` | 1 |
 | `distribution-security` | 3 |
-| `doc-hygiene` | 3 |
+| `doc-hygiene` | 4 |
 | `documentation-quality-assurance` | 2 |
 | `docx-to-md` | 3 |
 | `dream-state` | 4 |
@@ -78,7 +78,7 @@
 | `game-design` | 5 |
 | `gamma-presentations` | 6 |
 | `git-workflow` | 2 |
-| `global-knowledge` | 6 |
+| `global-knowledge` | 7 |
 | `global-knowledge-sync` | 5 |
 | `grant-writing` | 4 |
 | `graphic-design` | 9 |
@@ -89,7 +89,7 @@
 | `incident-response` | 3 |
 | `infrastructure-as-code` | 5 |
 | `journalism` | 5 |
-| `knowledge-synthesis` | 5 |
+| `knowledge-synthesis` | 7 |
 | `learning-psychology` | 3 |
 | `legal-compliance` | 5 |
 | `lint-clean-markdown` | 4 |
@@ -105,7 +105,7 @@
 | `meditation` | 5 |
 | `meeting-efficiency` | 5 |
 | `memory-activation` | 5 |
-| `memory-curation` | 8 |
+| `memory-curation` | 7 |
 | `memory-export` | 4 |
 | `microsoft-fabric` | 5 |
 | `microsoft-graph-api` | 4 |
@@ -152,7 +152,7 @@
 | `svg-graphics` | 5 |
 | `terminal-image-rendering` | 3 |
 | `testing-strategies` | 9 |
-| `text-to-speech` | 10 |
+| `text-to-speech` | 4 |
 | `token-waste-elimination` | 8 |
 | `ui-ux-design` | 7 |
 | `visual-memory` | 6 |
@@ -207,4 +207,4 @@
 
 ---
 
-_Alex Cognitive Architecture — Take Your Code to New Heights_
+_Alex Cognitive Architecture -- Take Your Code to New Heights_

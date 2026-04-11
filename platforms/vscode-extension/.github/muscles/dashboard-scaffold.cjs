@@ -1,10 +1,10 @@
 /**
- * dashboard-scaffold.cjs — Self-contained HTML dashboard generator
+ * dashboard-scaffold.cjs -- Self-contained HTML dashboard generator
  * Version: 1.0.0
  *
  * Takes a JSON dashboard specification and generates a complete, self-contained
  * HTML file with Chart.js charts, KPI cards, filters, data tables, and drill-down
- * modals. Zero build step — open in any browser.
+ * modals. Zero build step -- open in any browser.
  *
  * Usage:
  *   node dashboard-scaffold.cjs <spec.json>                   # Generate from spec
@@ -18,9 +18,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // EXAMPLE SPEC
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const EXAMPLE_SPEC = {
   title: 'Sample Dashboard',
@@ -44,30 +44,30 @@ const EXAMPLE_SPEC = {
   }
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // THEME
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const THEMES = {
   dark: {
     bgPrimary: '#0f0f23', bgCard: '#1a1a2e', bgHover: '#16213e',
     textPrimary: '#e8e8f0', textSecondary: '#888', textMuted: '#555',
     border: '#2a2a4a', shadow: '0 2px 8px rgba(0,0,0,0.3)',
-    // Colorblind-safe palette — Tableau 10
+    // Colorblind-safe palette -- Tableau 10
     accent: ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948', '#b07aa1', '#ff9da7']
   },
   light: {
     bgPrimary: '#f8f9fa', bgCard: '#ffffff', bgHover: '#f0f2f5',
     textPrimary: '#1f2328', textSecondary: '#555', textMuted: '#999',
     border: '#e0e0e0', shadow: '0 2px 8px rgba(0,0,0,0.08)',
-    // Colorblind-safe palette — Tableau 10
+    // Colorblind-safe palette -- Tableau 10
     accent: ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948', '#b07aa1', '#ff9da7']
   }
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // HTML GENERATORS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function generateKpiHtml(kpis) {
   return kpis.map(k => `
@@ -76,7 +76,7 @@ function generateKpiHtml(kpis) {
       <div class="kpi-value">${escapeHtml(String(k.value))}</div>
       <div class="kpi-label">${escapeHtml(k.label)}</div>
       ${k.subtitle ? `<div class="kpi-subtitle">${escapeHtml(k.subtitle)}</div>` : ''}
-      ${k.delta ? `<div class="kpi-delta ${k.delta.startsWith('+') || k.delta.startsWith('↑') ? 'positive' : 'negative'}">${escapeHtml(k.delta)}</div>` : ''}
+      ${k.delta ? `<div class="kpi-delta ${k.delta.startsWith('+') || k.delta.startsWith('^') ? 'positive' : 'negative'}">${escapeHtml(k.delta)}</div>` : ''}
     </div>
   `).join('\n');
 }
@@ -145,9 +145,9 @@ function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // MAIN GENERATOR
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function generate(spec) {
   const theme = THEMES[spec.theme] || THEMES.dark;
@@ -270,16 +270,16 @@ document.querySelectorAll('th').forEach((th, colIdx) => {
 </html>`;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CLI
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function main() {
   const args = process.argv.slice(2);
 
   if (args.includes('--help') || args.length === 0) {
     console.log(`
-dashboard-scaffold.cjs — Self-contained HTML dashboard generator
+dashboard-scaffold.cjs -- Self-contained HTML dashboard generator
 
 Usage:
   node dashboard-scaffold.cjs <spec.json>

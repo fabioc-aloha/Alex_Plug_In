@@ -42,7 +42,7 @@ function getSkillMetadata(skillPath, skillName) {
         try {
             synapses = JSON.parse(fs.readFileSync(synapsePath, 'utf8'));
         } catch (e) {
-            console.warn(`  ⚠️ Could not parse ${synapsePath}`);
+            console.warn(`  [!] Could not parse ${synapsePath}`);
         }
     }
     
@@ -75,7 +75,7 @@ function loadExistingRegistry() {
         try {
             return JSON.parse(fs.readFileSync(GK_REGISTRY, 'utf8'));
         } catch (e) {
-            console.error(`❌ Could not parse existing registry: ${e.message}`);
+            console.error(`[X] Could not parse existing registry: ${e.message}`);
             process.exit(1);
         }
     }
@@ -92,20 +92,20 @@ function loadExistingRegistry() {
 }
 
 function main() {
-    console.log('═══════════════════════════════════════════');
+    console.log('===========================================');
     console.log('  Push Skills to Global Knowledge');
-    console.log('═══════════════════════════════════════════\n');
+    console.log('===========================================\n');
     
     // Verify GK repo exists
     if (!fs.existsSync(GK_ROOT)) {
-        console.error(`❌ Global Knowledge repo not found at: ${GK_ROOT}`);
+        console.error(`[X] Global Knowledge repo not found at: ${GK_ROOT}`);
         console.error(`   Expected one of:`);
         GK_CANDIDATES.forEach(candidate => console.error(`   - ${candidate}`));
         console.error('   Clone it locally or run Alex: Initialize to create the home-directory repo.');
         process.exit(1);
     }
 
-    console.log(`📍 Using Global Knowledge repo: ${GK_ROOT}\n`);
+    console.log(`[PIN] Using Global Knowledge repo: ${GK_ROOT}\n`);
     
     // Ensure skills directory exists in GK
     if (!fs.existsSync(GK_SKILLS_DIR)) {
@@ -117,7 +117,7 @@ function main() {
     const existingSkillIds = new Set(registry.skills.map(s => s.id));
     
     // Scan master skills
-    console.log('📦 Scanning Master Alex skills...\n');
+    console.log('[PKG] Scanning Master Alex skills...\n');
     
     const masterSkillDirs = fs.readdirSync(MASTER_SKILLS, { withFileTypes: true })
         .filter(d => d.isDirectory())
@@ -169,25 +169,25 @@ function main() {
     fs.writeFileSync(GK_REGISTRY, JSON.stringify(registry, null, 4) + '\n');
     
     // Report
-    console.log(`✅ Registry updated with ${newSkills.length} skills\n`);
+    console.log(`[OK] Registry updated with ${newSkills.length} skills\n`);
     
     if (stats.added.length > 0) {
-        console.log(`🆕 Added: ${stats.added.length}`);
+        console.log(`[NEW] Added: ${stats.added.length}`);
         stats.added.forEach(s => console.log(`   + ${s}`));
     }
     
     if (stats.updated.length > 0) {
-        console.log(`📝 Updated: ${stats.updated.length}`);
+        console.log(`[NOTE] Updated: ${stats.updated.length}`);
         stats.updated.forEach(s => console.log(`   ~ ${s}`));
     }
     
     if (stats.skipped.length > 0) {
-        console.log(`⏭️  Skipped: ${stats.skipped.length}`);
+        console.log(`[>>]  Skipped: ${stats.skipped.length}`);
         stats.skipped.forEach(s => console.log(`   - ${s.name} (${s.reason})`));
     }
     
     // Git operations
-    console.log('\n📤 Pushing to Global Knowledge...\n');
+    console.log('\n[OUT] Pushing to Global Knowledge...\n');
     
     try {
         process.chdir(GK_ROOT);
@@ -201,38 +201,38 @@ function main() {
         
         try {
             execSync(`git commit -m "${commitMsg}"`, { stdio: 'pipe' });
-            console.log(`✅ Committed: ${commitMsg}`);
+            console.log(`[OK] Committed: ${commitMsg}`);
             
             // Push
             execSync('git push', { stdio: 'pipe' });
-            console.log('✅ Pushed to origin\n');
+            console.log('[OK] Pushed to origin\n');
         } catch (e) {
             if (e.message.includes('nothing to commit')) {
-                console.log('ℹ️  No changes to commit (registry already up to date)\n');
+                console.log('[i]  No changes to commit (registry already up to date)\n');
             } else {
                 throw e;
             }
         }
     } catch (e) {
-        console.error(`⚠️ Git operation failed: ${e.message}`);
+        console.error(`[!] Git operation failed: ${e.message}`);
         console.log('   You may need to commit/push manually.\n');
     }
     
     // Final message
-    console.log('═══════════════════════════════════════════');
+    console.log('===========================================');
     console.log('  Next Steps');
-    console.log('═══════════════════════════════════════════\n');
+    console.log('===========================================\n');
     
     if (stats.added.length > 0 || stats.updated.length > 0) {
-        console.log('📢 Tell heirs to sync new skills:');
+        console.log('[!] Tell heirs to sync new skills:');
         console.log('   /knowledge sync-skills\n');
         console.log('Or heirs can run:');
         console.log('   Alex: Sync Skills from Global Knowledge\n');
     } else {
-        console.log('ℹ️  No new skills to announce.\n');
+        console.log('[i]  No new skills to announce.\n');
     }
     
-    console.log('═══════════════════════════════════════════\n');
+    console.log('===========================================\n');
 }
 
 main();

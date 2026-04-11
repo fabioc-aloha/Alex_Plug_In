@@ -91,7 +91,7 @@ Smaller but readable, elegant
 
 VISUAL LAYOUT (CONSISTENT ACROSS ALL):
 - Center-left: Sleek modern rocket
-- Rocket angle: 30° upward diagonal  
+- Rocket angle: 30 upward diagonal  
 - Rocket color: ${persona.color} metallic finish
 - Thrust flame: Bright orange-yellow (#ff6b35)
 - Small "CX" logo on rocket body, subtle
@@ -113,7 +113,7 @@ LIGHTING (STANDARD SETUP):
 
 COLOR PALETTE:
 - Rocket: ${persona.color} metallic
-- Flame: Orange-yellow gradient (#ffc857 → #ff6b35)
+- Flame: Orange-yellow gradient (#ffc857 -> #ff6b35)
 - Background: Deep space blacks and dark blues
 - Title text: ${persona.color} with glow
 - Subtitle: White with soft glow
@@ -135,7 +135,7 @@ TEXT QUALITY CRITICAL:
 - This is the PRIMARY element - must be perfect
 
 COMPOSITION RULES:
-- Rocket positioned consistently (center-left, 30° angle)
+- Rocket positioned consistently (center-left, 30 angle)
 - Text positioned consistently (upper-center)
 - Background depth consistent
 - Lighting setup identical
@@ -149,7 +149,7 @@ MOOD: Inspiring, empowering, professional, upward trajectory
  * Generate image using Ideogram v2
  */
 async function generateImage(persona) {
-  console.log(`\n🚀 Generating: ${persona.filename}`);
+  console.log(`\n[GO] Generating: ${persona.filename}`);
   console.log(`   Title: "${persona.title}" | Subtitle: "${persona.subtitle}"`);
   console.log(`   Color: ${persona.color}`);
   
@@ -165,7 +165,7 @@ async function generateImage(persona) {
       output_format: 'png',
     };
 
-    console.log('   ⏳ Calling Ideogram v2 API...');
+    console.log('   [..] Calling Ideogram v2 API...');
     const output = await replicate.run('ideogram-ai/ideogram-v2', { input });
 
     // Handle Ideogram's URL getter function quirk
@@ -190,10 +190,10 @@ async function generateImage(persona) {
       throw new Error('Failed to extract image URL from Ideogram response');
     }
 
-    console.log(`   ✓ Generated: ${imageUrl.substring(0, 60)}...`);
+    console.log(`   [OK] Generated: ${imageUrl.substring(0, 60)}...`);
     return imageUrl;
   } catch (error) {
-    console.error(`   ✗ Generation failed: ${error.message}`);
+    console.error(`   [X] Generation failed: ${error.message}`);
     throw error;
   }
 }
@@ -208,7 +208,7 @@ async function downloadImage(url, filepath) {
       response.pipe(file);
       file.on('finish', () => {
         file.close();
-        console.log(`   ✓ Downloaded: ${path.basename(filepath)}`);
+        console.log(`   [OK] Downloaded: ${path.basename(filepath)}`);
         resolve();
       });
     }).on('error', (err) => {
@@ -222,13 +222,13 @@ async function downloadImage(url, filepath) {
  * Main execution
  */
 async function main() {
-  console.log('═══════════════════════════════════════════════════════════');
+  console.log('===========================================================');
   console.log('Alex Persona Welcome Image Generator');
-  console.log('═══════════════════════════════════════════════════════════');
+  console.log('===========================================================');
   console.log(`Personas to generate: ${PERSONAS.length}`);
   console.log(`Cost estimate: $${(PERSONAS.length * 0.08).toFixed(2)} (Ideogram v2 @ $0.08/image)`);
   console.log('Aspect ratio: 1:1 (1024x1024 square)');
-  console.log('═══════════════════════════════════════════════════════════\n');
+  console.log('===========================================================\n');
 
   const outputDir = path.join(__dirname, '..', 'alex_docs', 'alex2');
   await fs.ensureDir(outputDir);
@@ -257,7 +257,7 @@ async function main() {
 
       // Rate limiting: 2 second delay between generations
       if (PERSONAS.indexOf(persona) < PERSONAS.length - 1) {
-        console.log('   ⏳ Rate limiting: 2 second delay...\n');
+        console.log('   [..] Rate limiting: 2 second delay...\n');
         await new Promise(resolve => setTimeout(resolve, 2000));
       }
     } catch (error) {
@@ -292,16 +292,16 @@ async function main() {
   await fs.writeJSON(reportPath, report, { spaces: 2 });
 
   // Summary
-  console.log('\n═══════════════════════════════════════════════════════════');
+  console.log('\n===========================================================');
   console.log('GENERATION COMPLETE');
-  console.log('═══════════════════════════════════════════════════════════');
-  console.log(`✓ Successful: ${successCount}/${PERSONAS.length}`);
-  console.log(`✗ Failed: ${report.failed}`);
-  console.log(`⏱  Duration: ${duration}s`);
-  console.log(`💰 Total Cost: $${totalCost.toFixed(2)}`);
-  console.log(`📊 Report: ${reportPath}`);
-  console.log(`📁 Output: ${outputDir}`);
-  console.log('═══════════════════════════════════════════════════════════\n');
+  console.log('===========================================================');
+  console.log(`[OK] Successful: ${successCount}/${PERSONAS.length}`);
+  console.log(`[X] Failed: ${report.failed}`);
+  console.log(`[..]  Duration: ${duration}s`);
+  console.log(`[$] Total Cost: $${totalCost.toFixed(2)}`);
+  console.log(`[CHART] Report: ${reportPath}`);
+  console.log(`[DIR] Output: ${outputDir}`);
+  console.log('===========================================================\n');
 }
 
 main().catch(console.error);

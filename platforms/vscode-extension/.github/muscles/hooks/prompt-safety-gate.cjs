@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // H21: Prompt safety gate
-// Global UserPromptSubmit hook — scans user prompts for accidental secrets,
+// Global UserPromptSubmit hook -- scans user prompts for accidental secrets,
 // I1 violation patterns, and dangerous operations before the agent processes them.
 'use strict';
 
@@ -58,12 +58,12 @@ process.stdin.on('end', () => {
       }
     }
 
-    // ── H24: Psychological dependency signal detection ───────────────────────
+    // -- H24: Psychological dependency signal detection -----------------------
     // Detects user language patterns that indicate psychological over-reliance.
-    // Does NOT block — injects context so Alex responds with appropriate boundaries.
+    // Does NOT block -- injects context so Alex responds with appropriate boundaries.
     const dependencySignals = [];
 
-    // Deferential language — user abdicating judgment to AI
+    // Deferential language -- user abdicating judgment to AI
     const deferentialPatterns = [
       { pattern: /(?:just\s+)?tell\s+me\s+what\s+to\s+do/i, signal: 'Total decision deferral' },
       { pattern: /what\s+(?:do\s+you\s+think|would\s+you\s+(?:do|recommend|suggest))\s*\?/i, signal: 'Judgment deferral' },

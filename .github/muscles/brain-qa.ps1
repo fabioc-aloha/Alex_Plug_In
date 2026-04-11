@@ -31,7 +31,7 @@ if (-not (Test-Path $ghPath)) {
 Push-Location $rootPath
 
 if (-not $Quiet) { 
-    Write-Host "Brain QA — Mode: $Mode | Phases: $($runPhases -join ',') | Use -Detail for verbose output" -ForegroundColor DarkGray 
+    Write-Host "Brain QA -- Mode: $Mode | Phases: $($runPhases -join ',') | Use -Detail for verbose output" -ForegroundColor DarkGray 
 }
 
 $issues = @()
@@ -370,7 +370,7 @@ if (7 -in $runPhases) {
                             $target = $_.target
                             -not ($masterOnlySkills | Where-Object { $target -match $_ })
                         })
-                    # Compare full content after filtering (not just count) — catches new fields like apiKeys
+                    # Compare full content after filtering (not just count) -- catches new fields like apiKeys
                     $masterJson.connections = $filteredConns
                     $expectedNorm = ($masterJson | ConvertTo-Json -Depth 20 -Compress)
                     $heirNorm = ($heirJson | ConvertTo-Json -Depth 20 -Compress)
@@ -485,7 +485,7 @@ if (10 -in $runPhases) {
             }
 
             # ASCII art is bad for LLMs (requires spatial reasoning)
-            if ($content -match '[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]') {
+            if ($content -match '[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]') {
                 $budgetWarnings += "$id contains ASCII box-drawing art (use Mermaid or tables instead)"
             }
         }
@@ -859,12 +859,12 @@ if (20 -in $runPhases) {
             
             # ASCII box drawing characters (indicate ASCII art diagrams)
             # These are harder for LLMs to parse than structured formats
-            if ($content -match '[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]') {
+            if ($content -match '[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]') {
                 $formatWarnings += "${file} - Contains box-drawing ASCII art (Mermaid or tables preferred for LLM parsing)"
             }
             
             # Arrow-heavy ASCII (spatial reasoning required)
-            if (($content -split '\n' | Where-Object { $_ -match '^\s*[│↓↑<\->]' }).Count -gt 5) {
+            if (($content -split '\n' | Where-Object { $_ -match '^\s*[|v^<\->]' }).Count -gt 5) {
                 $formatWarnings += "${file} - Heavy use of ASCII arrows (structured format preferred)"
             }
         }
@@ -878,7 +878,7 @@ if (20 -in $runPhases) {
     }
     else {
         foreach ($fw in $formatWarnings) { Write-Warn $fw }
-        Write-Host "   Use Mermaid or tables instead of ASCII art — LLMs parse structured syntax better." -ForegroundColor DarkGray
+        Write-Host "   Use Mermaid or tables instead of ASCII art -- LLMs parse structured syntax better." -ForegroundColor DarkGray
     }
 }
 
@@ -1598,10 +1598,10 @@ if (33 -in $runPhases) {
 if (34 -in $runPhases) {
     Write-Phase 34 "Brain Self-Containment Check"
 
-    # Known-OK exceptions — files that intentionally reference outside .github/
+    # Known-OK exceptions -- files that intentionally reference outside .github/
     $scExceptions = @(
         'episodic',   # Session records cleared on heir deployment; past-session paths are harmless
-        'SUPPORT.md'  # GitHub Community Health File — links to repo-root docs by design
+        'SUPPORT.md'  # GitHub Community Health File -- links to repo-root docs by design
     )
 
     # Helper: returns $null if target stays inside $ghPath, otherwise returns the escaped value
@@ -1611,8 +1611,8 @@ if (34 -in $runPhases) {
         if ($target -match '^(https?://|#|mailto:|external:|global-knowledge://)') { return $null }
         if ($target -match '^\.github/') { return $null }   # explicit .github/ prefix is always OK
         if ($target -notmatch '[/\\]' -and $target -notmatch '\.') { return $null }  # bare skill name
-        if ($target -match '^[a-zA-Z]:\\|^/') { return $target }  # absolute path — always bad
-        # Relative path — resolve and verify it stays inside .github/
+        if ($target -match '^[a-zA-Z]:\\|^/') { return $target }  # absolute path -- always bad
+        # Relative path -- resolve and verify it stays inside .github/
         $baseDir = Split-Path $sourceFile -Parent
         $resolved = [System.IO.Path]::GetFullPath((Join-Path $baseDir $target))
         if ($resolved.StartsWith($ghPath, [System.StringComparison]::OrdinalIgnoreCase)) { return $null }
@@ -1627,7 +1627,7 @@ if (34 -in $runPhases) {
 
     $scIssues = @()
 
-    # 1. Synapse targets — must all resolve within .github/
+    # 1. Synapse targets -- must all resolve within .github/
     Get-ChildItem "$ghPath" -Recurse -Filter "synapses.json" | ForEach-Object {
         $f = $_
         try {
@@ -1662,7 +1662,7 @@ if (34 -in $runPhases) {
             $escaped = Test-SelfContained -sourceFile $f.FullName -target $href
             if ($null -ne $escaped) { $scIssues += "[md-link] $short -> $escaped" }
         }
-        # 3. Double-slash typo ..// — always a bug, never intentional
+        # 3. Double-slash typo ..// -- always a bug, never intentional
         if ($content -match '\.\.//') {
             $badLines = ($content -split "`n" | Select-String '\.\.//' |
                 ForEach-Object { $_.LineNumber }) -join ', '
@@ -1714,13 +1714,13 @@ if (35 -in $runPhases) {
             if (-not $val) { $val = [System.Environment]::GetEnvironmentVariable($envVar, 'Machine') }
 
             if ($val) {
-                Write-Pass "$envVar — set (skills: $($entry.skills -join ', '))"
+                Write-Pass "$envVar -- set (skills: $($entry.skills -join ', '))"
             }
             else {
                 $tag = if ($entry.required) { "required" } else { "optional" }
                 $skills = $entry.skills -join ', '
                 $hint = if ($entry.getUrl) { " | Get it: $($entry.getUrl)" } else { "" }
-                Write-Warn "$envVar not set ($tag) — needed by: $skills | $($entry.purpose)$hint"
+                Write-Warn "$envVar not set ($tag) -- needed by: $skills | $($entry.purpose)$hint"
                 $missingKeys += $envVar
             }
         }
@@ -1728,7 +1728,7 @@ if (35 -in $runPhases) {
             Write-Pass "All $($keyMap.Count) declared API key(s) are present"
         }
         else {
-            Write-Warn "$($missingKeys.Count) API key(s) missing — affected skills will fail at runtime"
+            Write-Warn "$($missingKeys.Count) API key(s) missing -- affected skills will fail at runtime"
             Write-Warn "Keys may also be stored in VS Code SecretStorage (not checkable from PowerShell)"
         }
     }

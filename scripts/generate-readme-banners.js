@@ -60,7 +60,7 @@ BOTTOM LEFT CORNER:
 - "CorreaX" text nearby in gray
 
 BACKGROUND COMPOSITION:
-- Deep space gradient (#080810 → #0d1520)
+- Deep space gradient (#080810 -> #0d1520)
 - Scattered white stars (minimal, elegant)
 - Large radial blue glow behind rocket
 - Particle effects in rocket trail
@@ -75,7 +75,7 @@ LIGHTING:
 COLOR PALETTE:
 - Background: Deep space blacks and dark blues
 - Rocket: Azure blue (#0078d4) metallic
-- Flame: Golden orange (#ffc857 → #ff6b35)
+- Flame: Golden orange (#ffc857 -> #ff6b35)
 - Text: White with blue glow
 - Logo: Blue and gray
 
@@ -125,7 +125,7 @@ BOTTOM RIGHT CORNER:
 - "CorreaX" text in gray
 
 BACKGROUND COMPOSITION:
-- Dark gradient (#0d1520 → #1a1f35)
+- Dark gradient (#0d1520 -> #1a1f35)
 - Scattered stars throughout
 - Purple and blue radial glow behind rocket
 - Particle effects rising from flame
@@ -192,7 +192,7 @@ BOTTOM CENTER:
 - "CorreaX" text in gray
 
 BACKGROUND COMPOSITION:
-- Deep space gradient (#0a1628 → #0d1f35 → #0a1a2e)
+- Deep space gradient (#0a1628 -> #0d1f35 -> #0a1a2e)
 - Scattered white stars
 - Teal and blue radial glow around rocket
 - Particle trails following rocket
@@ -245,8 +245,8 @@ async function downloadImage(url, filepath) {
 }
 
 async function generateBanner(banner) {
-  console.log(`\n🎨 Generating: ${banner.title}`);
-  console.log(`📝 Subtitle: ${banner.subtitle}`);
+  console.log(`\n[ART] Generating: ${banner.title}`);
+  console.log(`[NOTE] Subtitle: ${banner.subtitle}`);
   
   try {
     const input = {
@@ -258,7 +258,7 @@ async function generateBanner(banner) {
       output_format: 'png',
     };
 
-    console.log('⏳ Calling Ideogram v2 API...');
+    console.log('[..] Calling Ideogram v2 API...');
     const output = await replicate.run('ideogram-ai/ideogram-v2', { input });
 
     // Handle Ideogram's URL getter function quirk
@@ -282,12 +282,12 @@ async function generateBanner(banner) {
       throw new Error('Failed to extract image URL from Ideogram response');
     }
 
-    console.log(`📥 Downloading from: ${imageUrl.substring(0, 50)}...`);
+    console.log(`[IN] Downloading from: ${imageUrl.substring(0, 50)}...`);
     
     const filepath = path.join(OUTPUT_DIR, banner.filename);
     await downloadImage(imageUrl, filepath);
     
-    console.log(`✅ Saved: ${banner.filename}`);
+    console.log(`[OK] Saved: ${banner.filename}`);
     
     return {
       id: banner.id,
@@ -299,16 +299,16 @@ async function generateBanner(banner) {
     };
 
   } catch (error) {
-    console.error(`❌ Error generating ${banner.title}:`, error.message);
+    console.error(`[X] Error generating ${banner.title}:`, error.message);
     throw error;
   }
 }
 
 async function main() {
-  console.log('🚀 Alex README Banner Generator');
+  console.log('[GO] Alex README Banner Generator');
   console.log('================================\n');
   console.log(`Using: Ideogram v2 (3:1 aspect ratio, 1536x512)`);
-  console.log(`Cost: $0.08 per banner × 3 = $0.24 total`);
+  console.log(`Cost: $0.08 per banner  3 = $0.24 total`);
   console.log(`Output: ${OUTPUT_DIR}\n`);
 
   // Ensure output directory exists
@@ -323,7 +323,7 @@ async function main() {
       
       // Rate limiting: wait 2 seconds between requests
       if (BANNERS.indexOf(banner) < BANNERS.length - 1) {
-        console.log('⏸️  Waiting 2s to avoid rate limits...');
+        console.log('[||]  Waiting 2s to avoid rate limits...');
         await new Promise(r => setTimeout(r, 2000));
       }
     } catch (error) {
@@ -333,30 +333,30 @@ async function main() {
   }
 
   console.log('\n================================');
-  console.log('📊 Generation Report\n');
+  console.log('[CHART] Generation Report\n');
   
   const successful = results.filter(r => !r.error);
   const failed = results.filter(r => r.error);
   
-  console.log(`✅ Successful: ${successful.length}/${BANNERS.length}`);
-  console.log(`❌ Failed: ${failed.length}/${BANNERS.length}`);
-  console.log(`💰 Total cost: $${(successful.length * 0.08).toFixed(2)}`);
+  console.log(`[OK] Successful: ${successful.length}/${BANNERS.length}`);
+  console.log(`[X] Failed: ${failed.length}/${BANNERS.length}`);
+  console.log(`[$] Total cost: $${(successful.length * 0.08).toFixed(2)}`);
   
   if (successful.length > 0) {
-    console.log('\n📁 Generated files:');
+    console.log('\n[DIR] Generated files:');
     successful.forEach(r => {
       console.log(`   - ${r.filename} (${r.title})`);
     });
   }
   
   if (failed.length > 0) {
-    console.log('\n⚠️  Failed:');
+    console.log('\n[!]  Failed:');
     failed.forEach(r => {
       console.log(`   - ${r.id}: ${r.error}`);
     });
   }
 
-  console.log('\n🔍 Next steps:');
+  console.log('\n[SEARCH] Next steps:');
   console.log('1. Review generated banners in assets/');
   console.log('2. Update README.md to include new banners');
   console.log('3. Commit to repository');
@@ -375,7 +375,7 @@ async function main() {
     { spaces: 2 }
   );
   
-  console.log('\n📝 Metadata saved to: banner-generation-report.json');
+  console.log('\n[NOTE] Metadata saved to: banner-generation-report.json');
 }
 
 main().catch(console.error);

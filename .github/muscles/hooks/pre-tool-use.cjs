@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Alex Cognitive Architecture — PreToolUse Hook
+ * Alex Cognitive Architecture -- PreToolUse Hook
  * Runs before every tool execution in an agent session.
  *
  * Input:  JSON via stdin (tool_name, tool_input, session_id, cwd, hook_event_name)
@@ -8,16 +8,16 @@
  *         Or exit 2 + stderr for hard safety blocks
  *
  * Safety Imperatives:
- *   I3: NEVER run Initialize on Master Alex   → exit 2 (hard block)
- *   I4: NEVER run Reset on Master Alex        → exit 2 (hard block)
- *   H8: Heir contamination — deny edits to synced heir paths
- *   H9: I8 architecture guard — deny src/ importing .github/
+ *   I3: NEVER run Initialize on Master Alex   -> exit 2 (hard block)
+ *   I4: NEVER run Reset on Master Alex        -> exit 2 (hard block)
+ *   H8: Heir contamination -- deny edits to synced heir paths
+ *   H9: I8 architecture guard -- deny src/ importing .github/
  *
  * Quality Gates:
- *   Q1: Version drift — deny publish if version mismatch
+ *   Q1: Version drift -- deny publish if version mismatch
  *   Q2: TypeScript compile reminder on .ts file edits
  *
- * Part of: v6.5.0 — API-Compliant Hooks (F1–F6)
+ * Part of: v6.5.0 -- API-Compliant Hooks (F1-F6)
  */
 
 "use strict";
@@ -25,13 +25,13 @@
 const fs = require("fs");
 const path = require("path");
 
-// ── Read stdin JSON ────────────────────────────────────────────────────────
+// -- Read stdin JSON --------------------------------------------------------
 
 let input = {};
 try {
   input = JSON.parse(fs.readFileSync(0, "utf8"));
 } catch {
-  /* No stdin or invalid JSON — use defaults */
+  /* No stdin or invalid JSON -- use defaults */
 }
 
 const toolName = input.tool_name || "";
@@ -47,7 +47,7 @@ const protectedMarker = protectedMarkers.find((m) => fs.existsSync(m)) || "";
 // Serialize tool_input for keyword matching
 const toolInputStr = JSON.stringify(toolInput);
 
-// ── Helper: emit structured JSON and exit ─────────────────────────────────
+// -- Helper: emit structured JSON and exit ---------------------------------
 
 const contextMessages = [];
 
@@ -83,7 +83,7 @@ function deny(reason) {
   process.exit(0);
 }
 
-// ── Safety: Master Alex / GCX workspace protection (hard block) ──────────
+// -- Safety: Master Alex / GCX workspace protection (hard block) ----------
 
 if (protectedMarker) {
   const dangerousTools = ["initialize_architecture", "reset_architecture"];
@@ -98,15 +98,15 @@ if (protectedMarker) {
     // Exit 2 = hard block. Stderr text is fed to the agent as error context.
     process.stderr.write(
       `SAFETY GATE: "${toolName}" is BLOCKED (marker: ${markerName}).\n` +
-        `I3: NEVER run Initialize on a protected workspace — overwrites living mind\n` +
-        `I4: NEVER run Reset on a protected workspace — deletes architecture\n` +
+        `I3: NEVER run Initialize on a protected workspace -- overwrites living mind\n` +
+        `I4: NEVER run Reset on a protected workspace -- deletes architecture\n` +
         `Use a Sandbox workspace for testing. This cannot be overridden.`,
     );
     process.exit(2);
   }
 }
 
-// ── Q1: Version drift check — deny publish ───────────────────────────────
+// -- Q1: Version drift check -- deny publish -------------------------------
 
 const isPublishCommand =
   toolName === "run_in_terminal" &&
@@ -135,11 +135,11 @@ if (isPublishCommand) {
       );
     }
   } catch {
-    /* non-fatal — proceed */
+    /* non-fatal -- proceed */
   }
 }
 
-// ── Q2: TypeScript compile reminder ──────────────────────────────────────
+// -- Q2: TypeScript compile reminder --------------------------------------
 
 const editTools = [
   "editFile",
@@ -157,12 +157,12 @@ const isTsEdit =
 
 if (isTsEdit) {
   addContext(
-    `TypeScript file modified — run 'npm run compile' to verify no errors.\n` +
+    `TypeScript file modified -- run 'npm run compile' to verify no errors.\n` +
       `Q2: Compile after every .ts edit. Errors surface early, not at publish time.`,
   );
 }
 
-// ── H8: Heir contamination guard ─────────────────────────────────────────
+// -- H8: Heir contamination guard -----------------------------------------
 // Warn when editing synced files inside platforms/ that master sync overwrites.
 
 if (isEditTool && filePath) {
@@ -186,7 +186,7 @@ if (isEditTool && filePath) {
   }
 }
 
-// ── H9: I8 architecture guard ────────────────────────────────────────────
+// -- H9: I8 architecture guard --------------------------------------------
 // Warn when src/ code imports from .github/ paths (architecture independence).
 
 if (isEditTool && filePath) {
@@ -209,7 +209,7 @@ if (isEditTool && filePath) {
     if (importsArchitecture) {
       deny(
         `I8 ARCHITECTURE GUARD: Extension code must NOT import from .github/ paths.\n` +
-          `H9: Architecture NEVER depends on the Extension — the dependency arrow is Extension → Architecture.\n` +
+          `H9: Architecture NEVER depends on the Extension -- the dependency arrow is Extension -> Architecture.\n` +
           `The .github/ directory is read by the LLM, not by extension TypeScript code.\n` +
           `File: ${filePath}`,
       );
@@ -217,6 +217,6 @@ if (isEditTool && filePath) {
   }
 }
 
-// ── Default: emit collected context and allow ──────────────────────────────
+// -- Default: emit collected context and allow ------------------------------
 
 emitAndExit();

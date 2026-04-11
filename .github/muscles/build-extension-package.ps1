@@ -11,7 +11,7 @@
 #   6. Personal data scan (defense-in-depth beyond sync-architecture.cjs)
 #
 # The actual file copy, inheritance, exclusions, and heir decontamination
-# are handled by sync-architecture.cjs (DRY — single source of truth).
+# are handled by sync-architecture.cjs (DRY -- single source of truth).
 #
 # Usage: .\scripts\build-extension-package.ps1 [-SkipCompile] [-DryRun]
 
@@ -264,7 +264,7 @@ if (-not $DryRun -and (Test-Path $TargetGithub)) {
         exit 1
     }
     else {
-        Write-Host "  [OK] No personal data found — heir is clean" -ForegroundColor Green
+        Write-Host "  [OK] No personal data found -- heir is clean" -ForegroundColor Green
     }
 }
 else {

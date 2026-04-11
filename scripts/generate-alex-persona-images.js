@@ -54,10 +54,10 @@ const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CHARACTER DEFINITION
-// Canonical traits from Alex at 15 — maintained across all ages
-// ─────────────────────────────────────────────────────────────────────────────
+// Canonical traits from Alex at 15 -- maintained across all ages
+// -----------------------------------------------------------------------------
 
 const ALEX_TRAITS = {
   immutable: [
@@ -71,7 +71,7 @@ const ALEX_TRAITS = {
 
 const REFERENCE_AGE = 15;
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // PERSONA CONFIGURATIONS
 // Maps persona IDs to visual scenes. Each persona has:
 // - id: matches personaDetection.ts persona ID
@@ -81,10 +81,10 @@ const REFERENCE_AGE = 15;
 // - attire: clothing appropriate to profession
 // - setting: environment/background
 // - expression: facial expression fitting the activity
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const PERSONA_CONFIGS = [
-  // ── Core Developer Personas ──────────────────────────────────────────────
+  // -- Core Developer Personas ----------------------------------------------
   {
     id: 'developer',
     noun: 'CODE',
@@ -149,7 +149,7 @@ const PERSONA_CONFIGS = [
     expression: 'calm systematic crisis handling, focused urgency',
   },
 
-  // ── Research & Academic Personas ─────────────────────────────────────────
+  // -- Research & Academic Personas -----------------------------------------
   {
     id: 'academic',
     noun: 'THESIS',
@@ -187,7 +187,7 @@ const PERSONA_CONFIGS = [
     expression: 'persuasive determination, vision for funded research',
   },
 
-  // ── Learning & Education Personas ────────────────────────────────────────
+  // -- Learning & Education Personas ----------------------------------------
   {
     id: 'student',
     noun: 'LEARNING',
@@ -207,7 +207,7 @@ const PERSONA_CONFIGS = [
     expression: 'commanding presence, passionate about sharing knowledge',
   },
 
-  // ── Content & Writing Personas ───────────────────────────────────────────
+  // -- Content & Writing Personas -------------------------------------------
   {
     id: 'technical-writer',
     noun: 'DOCUMENTATION',
@@ -245,7 +245,7 @@ const PERSONA_CONFIGS = [
     expression: 'persuasive wordsmith, understanding what converts',
   },
 
-  // ── Business & Management Personas ───────────────────────────────────────
+  // -- Business & Management Personas ---------------------------------------
   {
     id: 'project-manager',
     noun: 'PROJECTS',
@@ -301,7 +301,7 @@ const PERSONA_CONFIGS = [
     expression: 'data-driven creativity, growth mindset',
   },
 
-  // ── Career & Personal Development ────────────────────────────────────────
+  // -- Career & Personal Development ----------------------------------------
   {
     id: 'job-seeker',
     noun: 'CAREER',
@@ -330,7 +330,7 @@ const PERSONA_CONFIGS = [
     expression: 'builder excitement, making tools work perfectly',
   },
 
-  // ── Gaming & Creative Tech ───────────────────────────────────────────────
+  // -- Gaming & Creative Tech -----------------------------------------------
   {
     id: 'game-developer',
     noun: 'GAMES',
@@ -341,11 +341,11 @@ const PERSONA_CONFIGS = [
     expression: 'playful creativity, designing fun experiences',
   },
 
-  // ══════════════════════════════════════════════════════════════════════════
-  // EXPANDED PERSONAS — Series 2
-  // ══════════════════════════════════════════════════════════════════════════
+  // ==========================================================================
+  // EXPANDED PERSONAS -- Series 2
+  // ==========================================================================
 
-  // ── AI & Machine Learning ────────────────────────────────────────────────
+  // -- AI & Machine Learning ------------------------------------------------
   {
     id: 'ai-engineer',
     noun: 'AI',
@@ -374,7 +374,7 @@ const PERSONA_CONFIGS = [
     expression: 'systematic precision, bridging research and production',
   },
 
-  // ── Platform-Specific Developers ─────────────────────────────────────────
+  // -- Platform-Specific Developers -----------------------------------------
   {
     id: 'microsoft-developer',
     noun: 'AZURE',
@@ -412,7 +412,7 @@ const PERSONA_CONFIGS = [
     expression: 'unified data vision, analytics at scale',
   },
 
-  // ── Database & Data Specialists ──────────────────────────────────────────
+  // -- Database & Data Specialists ------------------------------------------
   {
     id: 'database-developer',
     noun: 'SQL',
@@ -432,7 +432,7 @@ const PERSONA_CONFIGS = [
     expression: 'guardian vigilance, protecting critical data',
   },
 
-  // ── Security & Hacking ───────────────────────────────────────────────────
+  // -- Security & Hacking ---------------------------------------------------
   {
     id: 'hacker',
     noun: 'HACK',
@@ -452,7 +452,7 @@ const PERSONA_CONFIGS = [
     expression: 'strategic adversarial thinking, finding every weakness',
   },
 
-  // ── Debugging & Code Quality ─────────────────────────────────────────────
+  // -- Debugging & Code Quality ---------------------------------------------
   {
     id: 'debugger',
     noun: 'DEBUG',
@@ -481,7 +481,7 @@ const PERSONA_CONFIGS = [
     expression: 'thorough scrutiny, nothing escapes examination',
   },
 
-  // ── Documentation & Knowledge ────────────────────────────────────────────
+  // -- Documentation & Knowledge --------------------------------------------
   {
     id: 'documentarian',
     noun: 'DOCS',
@@ -510,7 +510,7 @@ const PERSONA_CONFIGS = [
     expression: 'deep focus, crafting knowledge for generations',
   },
 
-  // ── Research & CX ────────────────────────────────────────────────────────
+  // -- Research & CX --------------------------------------------------------
   {
     id: 'cx-researcher',
     noun: 'CX',
@@ -539,7 +539,7 @@ const PERSONA_CONFIGS = [
     expression: 'methodological precision, capturing true insights',
   },
 
-  // ── Special Team Personas ────────────────────────────────────────────────
+  // -- Special Team Personas ------------------------------------------------
   {
     id: 'gcx-team',
     noun: 'GCX',
@@ -559,7 +559,7 @@ const PERSONA_CONFIGS = [
     expression: 'visionary wisdom, the mind behind Alex, pioneering the future of human-AI collaboration',
   },
 
-  // ── Fun & Creative Personas ──────────────────────────────────────────────
+  // -- Fun & Creative Personas ----------------------------------------------
   {
     id: 'mad-scientist',
     noun: 'EXPERIMENT',
@@ -615,7 +615,7 @@ const PERSONA_CONFIGS = [
     expression: 'triumphant discovery, modern problem-solving',
   },
 
-  // ── More Professional Roles ──────────────────────────────────────────────
+  // -- More Professional Roles ----------------------------------------------
   {
     id: 'fullstack-developer',
     noun: 'FULLSTACK',
@@ -690,9 +690,9 @@ const PERSONA_CONFIGS = [
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // PROMPT BUILDER
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function buildPrompt(config) {
   const traits = ALEX_TRAITS.immutable.join(', ');
@@ -703,7 +703,7 @@ function buildPrompt(config) {
 IMPORTANT: This is a reference-based age transformation. The attached reference image shows the person at AGE ${REFERENCE_AGE}. Generate an image of THIS SAME PERSON at age ${config.age} (${ageDirection} than the reference).
 
 IDENTITY PRESERVATION (HIGHEST PRIORITY):
-- The reference image shows the person at age ${REFERENCE_AGE} — use this as the source of truth for facial identity
+- The reference image shows the person at age ${REFERENCE_AGE} -- use this as the source of truth for facial identity
 - The output must look like the SAME PERSON as the reference, transformed to age ${config.age}
 - Preserve: exact facial bone structure, nose shape, eye shape, lip shape
 - Preserve: ${traits}
@@ -715,7 +715,7 @@ AGE TRANSFORMATION:
 - Transformation: ${ageDirection}
 - Apply natural age-appropriate changes for a ${config.age}-year-old professional
 
-SCENE — "${config.noun}" Context:
+SCENE -- "${config.noun}" Context:
 - Activity: ${config.scene}
 - Attire: ${config.attire}
 - Setting: ${config.setting}
@@ -730,9 +730,9 @@ COMPOSITION:
 `.trim();
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // GENERATION ENGINE
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 async function encodeImageToDataURI(imagePath) {
   const buffer = await fs.readFile(imagePath);
@@ -766,19 +766,19 @@ async function generateImage(prompt, referenceDataURI, outputPath) {
   return outputPath;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // MAIN
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 async function main() {
-  console.log('\n╔══════════════════════════════════════════════════════════════╗');
-  console.log('║         ALEX PERSONA IMAGE GENERATOR                         ║');
-  console.log('║         google/nano-banana-pro (Replicate)                   ║');
-  console.log('╚══════════════════════════════════════════════════════════════╝\n');
+  console.log('\n+==============================================================+');
+  console.log('|         ALEX PERSONA IMAGE GENERATOR                         |');
+  console.log('|         google/nano-banana-pro (Replicate)                   |');
+  console.log('+==============================================================+\n');
 
   // Validate API token
   if (!process.env.REPLICATE_API_TOKEN && !DRY_RUN) {
-    console.error('❌ REPLICATE_API_TOKEN not set. Options:');
+    console.error('[X] REPLICATE_API_TOKEN not set. Options:');
     console.error('   1. Create .env file with REPLICATE_API_TOKEN=r8_...');
     console.error('   2. Set environment variable: $env:REPLICATE_API_TOKEN = "r8_..."');
     console.error('   3. Run with --dry-run to preview prompts');
@@ -787,24 +787,24 @@ async function main() {
 
   // Validate reference image
   if (!await fs.pathExists(REFERENCE_IMAGE)) {
-    console.error(`❌ Reference image not found: ${REFERENCE_IMAGE}`);
+    console.error(`[X] Reference image not found: ${REFERENCE_IMAGE}`);
     process.exit(1);
   }
 
-  console.log(`📷 Reference image: ${path.relative(ROOT, REFERENCE_IMAGE)}`);
-  console.log(`📁 Output directory: ${path.relative(ROOT, OUTPUT_DIR)}`);
-  console.log(`🏃 Mode: ${DRY_RUN ? 'DRY RUN (no API calls)' : 'LIVE (will charge API)'}`);
+  console.log(`[IMG] Reference image: ${path.relative(ROOT, REFERENCE_IMAGE)}`);
+  console.log(`[DIR] Output directory: ${path.relative(ROOT, OUTPUT_DIR)}`);
+  console.log(`[RUN] Mode: ${DRY_RUN ? 'DRY RUN (no API calls)' : 'LIVE (will charge API)'}`);
   console.log('');
 
   // Encode reference image
   const referenceDataURI = await encodeImageToDataURI(REFERENCE_IMAGE);
-  console.log(`✅ Reference image encoded (${Math.round(referenceDataURI.length / 1024)} KB)\n`);
+  console.log(`[OK] Reference image encoded (${Math.round(referenceDataURI.length / 1024)} KB)\n`);
 
   // Filter configs
   let configs = PERSONA_CONFIGS;
   if (ONLY) {
     configs = configs.filter(c => ONLY.includes(c.id));
-    console.log(`🎯 Filtering to: ${ONLY.join(', ')}\n`);
+    console.log(`[TARGET] Filtering to: ${ONLY.join(', ')}\n`);
   }
   configs = configs.slice(SKIP, SKIP + LIMIT);
 
@@ -820,7 +820,7 @@ async function main() {
     const filename = `PERSONA-${config.id.toUpperCase()}.png`;
     const outputPath = path.join(OUTPUT_DIR, filename);
     
-    console.log(`[${i + 1}/${configs.length}] Generating ${config.id} (${config.noun}) — age ${config.age}...`);
+    console.log(`[${i + 1}/${configs.length}] Generating ${config.id} (${config.noun}) -- age ${config.age}...`);
     
     try {
       const prompt = buildPrompt(config);
@@ -836,10 +836,10 @@ async function main() {
       });
       
       if (result) {
-        console.log(`   ✅ Saved: ${filename}`);
+        console.log(`   [OK] Saved: ${filename}`);
       }
     } catch (error) {
-      console.log(`   ❌ Failed: ${error.message}`);
+      console.log(`   [X] Failed: ${error.message}`);
       results.push({
         id: config.id,
         noun: config.noun,
@@ -861,10 +861,10 @@ async function main() {
   const succeeded = results.filter(r => r.success).length;
   const failed = results.filter(r => !r.success).length;
 
-  console.log('\n════════════════════════════════════════════════════════════════');
+  console.log('\n================================================================');
   console.log(`COMPLETE: ${succeeded} succeeded, ${failed} failed in ${elapsed}s`);
   console.log(`Est. cost: ~$${(succeeded * 0.025).toFixed(3)} (google/nano-banana-pro)`);
-  console.log('════════════════════════════════════════════════════════════════\n');
+  console.log('================================================================\n');
 
   // Write report
   const reportPath = path.join(OUTPUT_DIR, 'generation-report.json');
@@ -877,7 +877,7 @@ async function main() {
     dryRun: DRY_RUN,
     results,
   }, { spaces: 2 });
-  console.log(`📄 Report saved: ${path.relative(ROOT, reportPath)}`);
+  console.log(`[DOC] Report saved: ${path.relative(ROOT, reportPath)}`);
 }
 
 main().catch(console.error);

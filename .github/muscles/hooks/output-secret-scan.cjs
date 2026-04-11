@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Alex Cognitive Architecture — H10: Output Secret Scan (PostToolUse)
+ * Alex Cognitive Architecture -- H10: Output Secret Scan (PostToolUse)
  * Scans tool output for leaked API keys, tokens, and credentials.
  *
  * Defense-in-depth layer: H21 (UserPromptSubmit) catches secrets at input;
@@ -11,20 +11,20 @@
  * Output: JSON to stdout with additionalContext warning if secrets detected.
  *         Always allows the tool call (post-use cannot block), but injects a warning.
  *
- * Part of: v7.1.0 — Excavation Plan Sprint 3 (C4)
+ * Part of: v7.1.0 -- Excavation Plan Sprint 3 (C4)
  */
 
 "use strict";
 
 const fs = require("fs");
 
-// ── Read stdin JSON ────────────────────────────────────────────────────────
+// -- Read stdin JSON --------------------------------------------------------
 
 let input = {};
 try {
   input = JSON.parse(fs.readFileSync(0, "utf8"));
 } catch {
-  /* No stdin or invalid JSON — use defaults */
+  /* No stdin or invalid JSON -- use defaults */
 }
 
 const toolResponse = input.tool_response || {};
@@ -33,7 +33,7 @@ const responseStr =
     ? toolResponse
     : JSON.stringify(toolResponse);
 
-// ── Secret patterns (high-confidence, low false-positive) ──────────────────
+// -- Secret patterns (high-confidence, low false-positive) ------------------
 
 const SECRET_PATTERNS = [
   // Azure / Microsoft
@@ -85,7 +85,7 @@ const SECRET_PATTERNS = [
   { name: "npm Token", regex: /npm_[A-Za-z0-9]{36,}/ },
 ];
 
-// ── Scan ────────────────────────────────────────────────────────────────────
+// -- Scan --------------------------------------------------------------------
 
 const detections = [];
 for (const { name, regex } of SECRET_PATTERNS) {
@@ -94,7 +94,7 @@ for (const { name, regex } of SECRET_PATTERNS) {
   }
 }
 
-// ── Output ──────────────────────────────────────────────────────────────────
+// -- Output ------------------------------------------------------------------
 
 if (detections.length > 0) {
   const warningMsg = [
@@ -114,7 +114,7 @@ if (detections.length > 0) {
     }),
   );
 } else {
-  // Silent pass — no secrets detected
+  // Silent pass -- no secrets detected
   console.log(
     JSON.stringify({
       hookSpecificOutput: {

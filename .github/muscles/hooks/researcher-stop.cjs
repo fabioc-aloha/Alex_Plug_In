@@ -40,7 +40,7 @@ try {
       lines.push(`- ${f}`);
     }
   } else {
-    lines.push('', 'No research files were modified — consider saving findings to alex_docs/research/.');
+    lines.push('', 'No research files were modified -- consider saving findings to alex_docs/research/.');
   }
 } catch { /* research dir not found */ }
 

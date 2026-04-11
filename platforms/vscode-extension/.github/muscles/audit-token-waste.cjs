@@ -20,7 +20,7 @@ const JSON_MODE = process.argv.includes("--json");
 const base = process.cwd();
 const ghDir = path.join(base, ".github");
 
-// ── Results ────────────────────────────────────────────────────
+// -- Results ----------------------------------------------------
 const findings = [];
 let fixCount = 0;
 
@@ -34,7 +34,7 @@ function finding(severity, file, pattern, message, fixable) {
   });
 }
 
-// ── Helpers ────────────────────────────────────────────────────
+// -- Helpers ----------------------------------------------------
 function readDir(dir, ext) {
   if (!fs.existsSync(dir)) {
     return [];
@@ -54,7 +54,7 @@ function extractFrontmatter(content) {
   return m ? m[1] : "";
 }
 
-// ── Phase 1: Baseline Measurement ─────────────────────────────
+// -- Phase 1: Baseline Measurement -----------------------------
 if (!JSON_MODE) {
   console.log("\n=== TOKEN WASTE AUDIT ===\n");
 }
@@ -135,7 +135,7 @@ if (!JSON_MODE) {
   }
 }
 
-// ── Phase 2: Instruction-Skill Overlap ────────────────────────
+// -- Phase 2: Instruction-Skill Overlap ------------------------
 if (!JSON_MODE) {
   console.log("\n--- Instruction-Skill Overlap ---");
 }
@@ -165,7 +165,7 @@ if (!JSON_MODE && overlapCount === 0) {
   console.log("  All overlapping instructions are <=50 lines. Clean!");
 }
 
-// ── Phase 3: Waste Pattern Scan ───────────────────────────────
+// -- Phase 3: Waste Pattern Scan -------------------------------
 if (!JSON_MODE) {
   console.log("\n--- Waste Pattern Scan ---");
 }
@@ -179,7 +179,7 @@ const PATTERNS = [
   },
   {
     name: "Azure AD (not Entra ID)",
-    regex: /Azure AD(?! →)/g,
+    regex: /Azure AD(?! ->)/g,
     fixable: true,
     fix: (line) => line.replace(/Azure AD/g, "Microsoft Entra ID"),
   },
@@ -263,12 +263,12 @@ for (const f of allMdFiles) {
 
 if (!JSON_MODE) {
   for (const [name, count] of Object.entries(patternCounts)) {
-    const status = count === 0 ? "✓" : "✗";
+    const status = count === 0 ? "[OK]" : "[X]";
     console.log(`  ${status} ${name}: ${count} hits`);
   }
 }
 
-// ── Phase 4: Inline Synapses Check ────────────────────────────
+// -- Phase 4: Inline Synapses Check ----------------------------
 if (!JSON_MODE) {
   console.log("\n--- Inline Synapses (skills with synapses.json) ---");
 }
@@ -324,10 +324,10 @@ for (const d of skillDirs) {
   }
 }
 if (!JSON_MODE && inlineSynapseCount === 0) {
-  console.log("  Clean — no inline synapses found.");
+  console.log("  Clean -- no inline synapses found.");
 }
 
-// ── Phase 5: applyTo Coverage ─────────────────────────────────
+// -- Phase 5: applyTo Coverage ---------------------------------
 if (!JSON_MODE) {
   console.log("\n--- Instructions Without applyTo ---");
 }
@@ -353,7 +353,7 @@ if (!JSON_MODE) {
   );
 }
 
-// ── Phase 6: Always-On Cost Estimate ──────────────────────────
+// -- Phase 6: Always-On Cost Estimate --------------------------
 if (!JSON_MODE) {
   console.log("\n--- Always-On Token Cost Estimate ---");
 }
@@ -399,7 +399,7 @@ if (!JSON_MODE) {
   );
 }
 
-// ── Summary ───────────────────────────────────────────────────
+// -- Summary ---------------------------------------------------
 const bugs = findings.filter((f) => f.severity === "BUG").length;
 const warns = findings.filter((f) => f.severity === "WARN").length;
 

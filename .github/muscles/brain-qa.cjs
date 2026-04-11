@@ -12,7 +12,7 @@ const os = require("os");
 const crypto = require("crypto");
 const { execSync } = require("child_process");
 
-// ─── Argument parsing ───────────────────────────────────────
+// --- Argument parsing ---------------------------------------
 const args = process.argv.slice(2);
 let mode = "all";
 let phaseFilter = null;
@@ -33,7 +33,7 @@ for (let i = 0; i < args.length; i++) {
   } else if (["all", "quick", "sync", "schema", "llm"].includes(a)) mode = a;
 }
 
-// ─── Paths ──────────────────────────────────────────────────
+// --- Paths --------------------------------------------------
 const rootPath = path.resolve(__dirname, "..", "..");
 const ghPath = path.join(rootPath, ".github");
 const heirBase = path.join(rootPath, "platforms", "vscode-extension");
@@ -43,7 +43,7 @@ if (!fs.existsSync(ghPath)) {
   process.exit(1);
 }
 
-// ─── Colour helpers ─────────────────────────────────────────
+// --- Colour helpers -----------------------------------------
 const R = "\x1b[31m",
   G = "\x1b[32m",
   Y = "\x1b[33m",
@@ -71,7 +71,7 @@ function fail(msg) {
   issues.push(msg);
 }
 
-// ─── Phase groups ───────────────────────────────────────────
+// --- Phase groups -------------------------------------------
 const quickPhases = [1, 2, 3, 4, 5, 6];
 const syncPhases = [5, 7, 8, 13, 14, 15, 27, 28, 33, 34];
 const schemaPhases = [2, 6, 11, 16, 17];
@@ -98,10 +98,10 @@ if (phaseFilter) runPhases = phaseFilter;
 
 if (!quiet)
   console.log(
-    `${GR}Brain QA — Mode: ${mode} | Phases: ${runPhases.join(",")} | Use --detail for verbose output${X}`,
+    `${GR}Brain QA -- Mode: ${mode} | Phases: ${runPhases.join(",")} | Use --detail for verbose output${X}`,
   );
 
-// ─── Utility functions ──────────────────────────────────────
+// --- Utility functions --------------------------------------
 function readJSON(p) {
   try {
     return JSON.parse(fs.readFileSync(p, "utf8"));
@@ -154,7 +154,7 @@ function readHead(filePath, lines) {
   return content.split(/\r?\n/).slice(0, lines);
 }
 
-// ─── PRE-SYNC ───────────────────────────────────────────────
+// --- PRE-SYNC -----------------------------------------------
 const needsSync = (mode === "all" || mode === "sync") && !skipSync;
 if (needsSync) {
   if (!quiet)
@@ -211,9 +211,9 @@ if (needsSync) {
   console.log(`  ${Y}[Pre-Sync] SKIPPED (--skip-sync flag)${X}`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 1: Synapse Target Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(1)) {
   writePhase(1, "Synapse Target Validation");
   const broken = new Set();
@@ -240,9 +240,9 @@ if (runPhases.includes(1)) {
   else [...broken].sort().forEach((b) => fail(`Broken: ${b}`));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 2: Inheritance Centralization Check
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(2)) {
   writePhase(2, "Inheritance Centralization Check");
   const stale = [];
@@ -263,9 +263,9 @@ if (runPhases.includes(2)) {
     );
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 3: Skill Index Coverage
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(3)) {
   writePhase(3, "Skill Index Coverage");
   const skillDirs = dirs(path.join(ghPath, "skills"));
@@ -289,9 +289,9 @@ if (runPhases.includes(3)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 4: Trigger Semantic Analysis
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(4)) {
   writePhase(4, "Trigger Semantic Analysis");
   const indexPath = path.join(
@@ -324,9 +324,9 @@ if (runPhases.includes(4)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 5: Master-Heir Skill Sync
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(5)) {
   writePhase(5, "Master-Heir Skill Sync");
   const heirSkillsDir = path.join(heirBase, ".github", "skills");
@@ -347,9 +347,9 @@ if (runPhases.includes(5)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 6: Synapse Schema Format Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(6)) {
   writePhase(6, "Synapse Schema Format Validation");
   const critical = new Set();
@@ -376,9 +376,9 @@ if (runPhases.includes(6)) {
     );
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 7: Synapse File Sync
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(7)) {
   writePhase(7, "Synapse File Sync");
   const heirSkillsDir = path.join(heirBase, ".github", "skills");
@@ -422,9 +422,9 @@ if (runPhases.includes(7)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 8: Memory-Activation Index Sync
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(8)) {
   writePhase(8, "Memory-Activation Index Sync");
   const masterIdx = path.join(
@@ -454,9 +454,9 @@ if (runPhases.includes(8)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 9: Catalog Accuracy Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(9)) {
   writePhase(9, "Catalog Accuracy Validation");
   const actual = dirs(path.join(ghPath, "skills")).length;
@@ -482,9 +482,9 @@ if (runPhases.includes(9)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 10: Core File Token Budget
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(10)) {
   writePhase(10, "Core File Token Budget");
   const budgetWarnings = [];
@@ -503,7 +503,7 @@ if (runPhases.includes(10)) {
         `${id} is ${lineCount} lines (${charCount} chars) - consider trimming (auto-loaded every session)`,
       );
     }
-    if (/[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]/.test(content)) {
+    if (/[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]/.test(content)) {
       budgetWarnings.push(
         `${id} contains ASCII box-drawing art (use Mermaid or tables instead)`,
       );
@@ -513,9 +513,9 @@ if (runPhases.includes(10)) {
   else budgetWarnings.forEach((w) => warn(w));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 11: Boilerplate Skill Descriptions
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(11)) {
   writePhase(11, "Boilerplate Skill Descriptions");
   const boilerplate = [];
@@ -531,9 +531,9 @@ if (runPhases.includes(11)) {
   else warn(`Boilerplate (${boilerplate.length}): ${boilerplate.join(", ")}`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 12: Heir Reset Validation (Pre-Publish)
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(12)) {
   writePhase(12, "Heir Reset Validation (Pre-Publish)");
   const heirGh = path.join(heirBase, ".github");
@@ -578,9 +578,9 @@ if (runPhases.includes(12)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 13: Instructions/Prompts Sync
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(13)) {
   writePhase(13, "Instructions/Prompts Sync");
   const excludedTypes = ["master-only", "heir:m365"];
@@ -640,9 +640,9 @@ if (runPhases.includes(13)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 14: Agents Structure Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(14)) {
   writePhase(14, "Agents Structure Validation");
   const agentIssues = [];
@@ -679,9 +679,9 @@ if (runPhases.includes(14)) {
   else agentIssues.forEach((a) => fail(a));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 15: Config Files Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(15)) {
   writePhase(15, "Config Files Validation");
   const required = [
@@ -711,9 +711,9 @@ if (runPhases.includes(15)) {
   else configIssues.forEach((c) => fail(c));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 16: Skill YAML Frontmatter Compliance
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(16)) {
   writePhase(16, "Skill YAML Frontmatter Compliance");
   const fmIssues = [];
@@ -738,9 +738,9 @@ if (runPhases.includes(16)) {
   else fmIssues.forEach((f) => fail(f));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 17: Internal Skills User-Invokable Check
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(17)) {
   writePhase(17, "Internal Skills User-Invokable Check");
   const internalSkills = ["memory-activation"];
@@ -757,9 +757,9 @@ if (runPhases.includes(17)) {
   else viIssues.forEach((v) => warn(v));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 18: Agent Handoffs Completeness
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(18)) {
   writePhase(18, "Agent Handoffs Completeness");
   const handoffIssues = [];
@@ -789,9 +789,9 @@ if (runPhases.includes(18)) {
   else handoffIssues.forEach((h) => warn(h));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 19: Instruction ApplyTo Pattern Coverage
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(19)) {
   writePhase(19, "Instruction ApplyTo Pattern Coverage");
   const shouldHaveApplyTo = [
@@ -817,9 +817,9 @@ if (runPhases.includes(19)) {
   else atIssues.forEach((a) => warn(a));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 20: LLM-First Content Format Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(20)) {
   writePhase(20, "LLM-First Content Format Validation");
   const formatWarnings = [];
@@ -831,14 +831,14 @@ if (runPhases.includes(20)) {
     if (!fs.existsSync(f)) continue;
     const content = fs.readFileSync(f, "utf8");
     const name = path.basename(f);
-    if (/[┌┐└┘├┤┬┴┼│─═║╔╗╚╝╠╣╦╩╬]/.test(content)) {
+    if (/[\u250C\u2510\u2514\u2518\u251C\u2524\u252C\u2534\u253C\u2502\u2500\u2550\u2551\u2554\u2557\u255A\u255D\u2560\u2563\u2566\u2569\u256C]/.test(content)) {
       formatWarnings.push(
         `${name} - Contains box-drawing ASCII art (Mermaid or tables preferred)`,
       );
     }
     const arrowLines = content
       .split("\n")
-      .filter((l) => /^\s*[│↓↑<\->]/.test(l));
+      .filter((l) => /^\s*[|v^<\->]/.test(l));
     if (arrowLines.length > 5) {
       formatWarnings.push(
         `${name} - Heavy use of ASCII arrows (structured format preferred)`,
@@ -849,9 +849,9 @@ if (runPhases.includes(20)) {
   else formatWarnings.forEach((w) => warn(w));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 21: Emoji Semantic Consistency
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(21)) {
   writePhase(21, "Emoji Semantic Consistency");
   let emojiCount = 0;
@@ -871,9 +871,9 @@ if (runPhases.includes(21)) {
   pass(`Semantic markers in agents: ${emojiCount}`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 22: Episodic Archive Health
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(22)) {
   writePhase(22, "Episodic Archive Health");
   const epDir = path.join(ghPath, "episodic");
@@ -918,9 +918,9 @@ if (runPhases.includes(22)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 23: .github/ Assets Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(23)) {
   writePhase(23, ".github/ Assets Validation");
   const assetsPath = path.join(ghPath, "assets");
@@ -937,9 +937,9 @@ if (runPhases.includes(23)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 24: Issue & PR Templates
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(24)) {
   writePhase(24, "Issue & PR Templates");
   const itDir = path.join(ghPath, "ISSUE_TEMPLATE");
@@ -959,9 +959,9 @@ if (runPhases.includes(24)) {
   else warn("pull_request_template.md not found");
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 25: .github/ Root Files Completeness
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(25)) {
   writePhase(25, ".github/ Root Files Completeness");
   const rootFiles = ["copilot-instructions.md", "README.md", "NORTH-STAR.md"];
@@ -991,9 +991,9 @@ if (runPhases.includes(25)) {
   else pass(`All .github/ subfolders present (${expectedDirs.length} folders)`);
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 26: alex_docs/ Architecture Docs Freshness
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(26)) {
   writePhase(26, "alex_docs/ Architecture Docs Freshness");
   const docsPath = path.join(rootPath, "alex_docs");
@@ -1050,9 +1050,9 @@ if (runPhases.includes(26)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 27: M365 Heir Health
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(27)) {
   writePhase(27, "M365 Heir Health");
   const m365Path = path.join(rootPath, "platforms", "m365-copilot");
@@ -1085,9 +1085,9 @@ if (runPhases.includes(27)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 28: Codespaces Heir Health
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(28)) {
   writePhase(28, "Codespaces Heir Health");
   const csPath = path.join(rootPath, "platforms", "codespaces");
@@ -1104,9 +1104,9 @@ if (runPhases.includes(28)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 29: AI-Memory Sync Validation (replaces legacy GK validation)
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(29)) {
   writePhase(29, "AI-Memory Sync Validation");
 
@@ -1170,9 +1170,9 @@ if (runPhases.includes(29)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 30: Release Scripts & Muscles Integrity
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(30)) {
   writePhase(30, "Release Scripts & Muscles Integrity");
   const musclesDir = path.join(ghPath, "muscles");
@@ -1210,9 +1210,9 @@ if (runPhases.includes(30)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 31: ROADMAP & Root Doc Version Consistency
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(31)) {
   writePhase(31, "ROADMAP & Root Doc Version Consistency");
   const vscPkg = readJSON(
@@ -1278,9 +1278,9 @@ if (runPhases.includes(31)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 32: Prefrontal Cortex Evolution Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(32)) {
   writePhase(32, "Prefrontal Cortex Evolution Validation");
   const ciPath = path.join(ghPath, "copilot-instructions.md");
@@ -1451,9 +1451,9 @@ if (runPhases.includes(32)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 33: Pre-Sync Master Validation
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(33)) {
   writePhase(33, "Pre-Sync Master Validation");
 
@@ -1578,9 +1578,9 @@ if (runPhases.includes(33)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 34: Brain Self-Containment Check
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(34)) {
   writePhase(34, "Brain Self-Containment Check");
   const scExceptions = ["episodic", "SUPPORT.md"];
@@ -1654,9 +1654,9 @@ if (runPhases.includes(34)) {
   else scIssues.forEach((i) => fail(i));
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // PHASE 35: API Key Availability Warnings
-// ════════════════════════════════════════════════════════════
+// ============================================================
 if (runPhases.includes(35)) {
   writePhase(35, "API Key Availability Check");
   const keyMap = {};
@@ -1687,12 +1687,12 @@ if (runPhases.includes(35)) {
     for (const envVar of Object.keys(keyMap).sort()) {
       const entry = keyMap[envVar];
       if (process.env[envVar]) {
-        pass(`${envVar} — set (skills: ${entry.skills.join(", ")})`);
+        pass(`${envVar} -- set (skills: ${entry.skills.join(", ")})`);
       } else {
         const tag = entry.required ? "required" : "optional";
         const hint = entry.getUrl ? ` | Get it: ${entry.getUrl}` : "";
         warn(
-          `${envVar} not set (${tag}) — needed by: ${entry.skills.join(", ")} | ${entry.purpose}${hint}`,
+          `${envVar} not set (${tag}) -- needed by: ${entry.skills.join(", ")} | ${entry.purpose}${hint}`,
         );
         missingKeys.push(envVar);
       }
@@ -1701,7 +1701,7 @@ if (runPhases.includes(35)) {
       pass(`All ${Object.keys(keyMap).length} declared API key(s) are present`);
     else {
       warn(
-        `${missingKeys.length} API key(s) missing — affected skills will fail at runtime`,
+        `${missingKeys.length} API key(s) missing -- affected skills will fail at runtime`,
       );
       warn(
         "Keys may also be stored in VS Code SecretStorage (not checkable from Node.js)",
@@ -1710,9 +1710,9 @@ if (runPhases.includes(35)) {
   }
 }
 
-// ════════════════════════════════════════════════════════════
+// ============================================================
 // SUMMARY
-// ════════════════════════════════════════════════════════════
+// ============================================================
 console.log(`\n${C}========================================${X}`);
 console.log(`${C} BRAIN QA SUMMARY${X}`);
 console.log(`${C}========================================${X}`);

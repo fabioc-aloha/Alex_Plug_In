@@ -34,10 +34,10 @@ if ($IsLinux -or $IsMacOS) {
 Write-Host "[OK] Git hooks installed" -ForegroundColor Green
 Write-Host ""
 Write-Host "Pre-commit hook will validate:" -ForegroundColor Cyan
-Write-Host "  • SKILL.md YAML frontmatter" -ForegroundColor Gray
-Write-Host "  • synapses.json structure" -ForegroundColor Gray
-Write-Host "  • Episodic file naming" -ForegroundColor Gray
-Write-Host "  • Master-only contamination" -ForegroundColor Gray
+Write-Host "  - SKILL.md YAML frontmatter" -ForegroundColor Gray
+Write-Host "  - synapses.json structure" -ForegroundColor Gray
+Write-Host "  - Episodic file naming" -ForegroundColor Gray
+Write-Host "  - Master-only contamination" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Test it now:" -ForegroundColor Yellow
 Write-Host "  git add .github/skills/test-skill/SKILL.md" -ForegroundColor Gray

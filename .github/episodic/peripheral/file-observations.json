@@ -1,27 +1,33 @@
 {
   "hotFiles": [],
-  "stalledFiles": [],
+  "stalledFiles": [
+    "github/episodic/peripheral/file-observations.json",
+    "alex_archive/scripts/backfill-synapse-metadata.cjs",
+    "platforms/m365-copilot/appPackage/knowledge/pack-knowledge.cjs",
+    "platforms/m365-copilot/deploy-to-developer-portal.ps1",
+    "platforms/m365-copilot/deploy.ps1",
+    "platforms/vscode-extension/SKILL-CATALOG-GENERATED.md",
+    "platforms/vscode-extension/scripts/install-local.ps1",
+    "platforms/vscode-extension/scripts/lint-unused.cjs",
+    "platforms/vscode-extension/scripts/push-skills-to-global.js",
+    "platforms/vscode-extension/scripts/quality-gate.cjs"
+  ],
   "todoHotspots": [
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 10,
-      "scannedAt": 1775914896447
-    },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1775914896447
+      "scannedAt": 1775917238532
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1775914896447
+      "scannedAt": 1775917238532
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1775914896447
+      "scannedAt": 1775917238532
     }
   ],
-  "lastUpdated": 1775914896447
+  "lastUpdated": 1775917238532
 }

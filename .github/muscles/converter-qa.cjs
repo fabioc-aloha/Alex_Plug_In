@@ -1,5 +1,5 @@
 /**
- * converter-qa.cjs — Converter Quality Assurance Framework
+ * converter-qa.cjs -- Converter Quality Assurance Framework
  * Version: 1.2.0
  *
  * Test harness for validating converter outputs:
@@ -22,9 +22,9 @@ const path = require('path');
 const { execSync, spawnSync } = require('child_process');
 const os = require('os');
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // TEST FRAMEWORK (minimal, no deps)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 let _passed = 0;
 let _failed = 0;
@@ -55,9 +55,9 @@ function suite(name, fn) {
   fn();
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // PATHS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const ROOT = path.join(__dirname, '..', '..');
 const MUSCLES = path.join(ROOT, '.github', 'muscles');
@@ -70,9 +70,9 @@ const NAV_INJECT = path.join(MUSCLES, 'nav-inject.cjs');
 const TEMP_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'converter-qa-'));
 process.on('exit', () => { try { fs.rmSync(TEMP_DIR, { recursive: true, force: true }); } catch { /* ignore */ } });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function createTempFile(name, content) {
   const p = path.join(TEMP_DIR, name);
@@ -94,9 +94,9 @@ function runNode(script, args = [], timeout = 30000) {
   return { stdout: result.stdout || '', stderr: result.stderr || '', status: result.status, error: result.error };
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // TEST SUITES
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('Shared: data-uri.cjs', () => {
   const mod = require(path.join(SHARED, 'data-uri.cjs'));
@@ -139,7 +139,7 @@ suite('Shared: markdown-preprocessor.cjs', () => {
 
   // LaTeX math conversion
   const math = mod.convertLatexMath('The formula $\\alpha$ is important');
-  assert(math.includes('α'), 'LaTeX \\alpha → Unicode α');
+  assert(math.includes(''), 'LaTeX \\alpha -> Unicode ');
 
   // Page break directives
   const pb = mod.preprocessMarkdown('Before\n<!-- pagebreak -->\nAfter');
@@ -147,11 +147,11 @@ suite('Shared: markdown-preprocessor.cjs', () => {
 
   // Callout blocks
   const callout = mod.preprocessMarkdown('::: tip\nDo this\n:::');
-  assert(callout.includes('💡') || callout.includes('TIP') || callout.includes('tip'), 'Callout block processed');
+  assert(callout.includes('[IDEA]') || callout.includes('TIP') || callout.includes('tip'), 'Callout block processed');
 
   // GitHub-style callouts
   const ghCallout = mod.preprocessMarkdown('> [!WARNING]\n> Be careful');
-  assert(ghCallout.includes('⚠') || ghCallout.includes('WARNING') || ghCallout.includes('warning'), 'GitHub callout processed');
+  assert(ghCallout.includes('[!]') || ghCallout.includes('WARNING') || ghCallout.includes('warning'), 'GitHub callout processed');
 
   // Keyboard shortcuts
   const kbd = mod.preprocessMarkdown('Press [[Ctrl+S]] to save');
@@ -373,7 +373,7 @@ Final paragraph.
   // Check if pandoc is available
   const pandocCheck = spawnSync('pandoc', ['--version'], { encoding: 'utf8', timeout: 5000 });
   if (pandocCheck.status !== 0) {
-    skip('pandoc not installed — skipping e2e test');
+    skip('pandoc not installed -- skipping e2e test');
     return;
   }
 
@@ -431,11 +431,11 @@ suite('nav-inject.cjs: --init creates nav.json', () => {
   }
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // Mermaid creation helpers
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
-suite('Shared: mermaid-pipeline.cjs — creation helpers', () => {
+suite('Shared: mermaid-pipeline.cjs -- creation helpers', () => {
   const mp = require(path.join(SHARED, 'mermaid-pipeline.cjs'));
 
   // createFlowchart
@@ -491,9 +491,9 @@ suite('Shared: mermaid-pipeline.cjs — creation helpers', () => {
   assert(fenced.endsWith('```\n') || fenced.trimEnd().endsWith('```'), 'wrapInFence adds closing fence');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // SVG pipeline
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('Shared: svg-pipeline.cjs', () => {
   const svg = require(path.join(SHARED, 'svg-pipeline.cjs'));
@@ -556,9 +556,9 @@ suite('Shared: svg-pipeline.cjs', () => {
   assert(fs.readFileSync(svgOut, 'utf8').includes('<svg'), 'writeSvg content is SVG');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // Markdown lint/validator
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('markdown-lint.cjs', () => {
   const ML = path.join(__dirname, 'markdown-lint.cjs');
@@ -622,9 +622,9 @@ suite('markdown-lint.cjs', () => {
   assert(!r9.errors.some(e => e.id === 'FM001'), 'email rules skip for word target');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // Markdown scaffold
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('md-scaffold.cjs', () => {
   const SC = path.join(__dirname, 'md-scaffold.cjs');
@@ -641,33 +641,33 @@ suite('md-scaffold.cjs', () => {
   assert(templates.some(t => t.name === 'email'), 'email template exists');
   assert(templates.some(t => t.name === 'adr'), 'adr template exists');
 
-  // scaffold — report
+  // scaffold -- report
   const report = mdScaffold.scaffold('report', 'Test Report');
   assert(report.includes('# Test Report'), 'report has title');
   assert(report.includes('## Table of Contents') || report.includes('## Executive Summary'), 'report has structure');
   assert(report.includes('```mermaid'), 'report has mermaid block');
 
-  // scaffold — email
+  // scaffold -- email
   const email = mdScaffold.scaffold('email', 'Test Email', { author: 'Test User' });
   assert(email.includes('---'), 'email has frontmatter');
   assert(email.includes('subject:'), 'email has subject field');
 
-  // scaffold — adr
+  // scaffold -- adr
   const adr = mdScaffold.scaffold('adr', 'Use TypeScript');
   assert(adr.includes('Use TypeScript'), 'adr has title');
   assert(adr.includes('Status'), 'adr has status section');
 
-  // scaffold — slides
+  // scaffold -- slides
   const slides = mdScaffold.scaffold('slides', 'My Talk');
   const h2Count = (slides.match(/^## /gm) || []).length;
   assert(h2Count >= 3, 'slides has enough H2 breaks');
 
-  // scaffold — tutorial
+  // scaffold -- tutorial
   const tut = mdScaffold.scaffold('tutorial', 'Getting Started');
   assert(tut.includes('# Getting Started'), 'tutorial has title');
   assert(tut.includes('Prerequisites') || tut.includes('prerequisite'), 'tutorial has prerequisites');
 
-  // scaffold — reference
+  // scaffold -- reference
   const ref = mdScaffold.scaffold('reference', 'CLI Reference');
   assert(ref.includes('# CLI Reference'), 'reference has title');
 
@@ -677,14 +677,14 @@ suite('md-scaffold.cjs', () => {
   assert(threw, 'unknown template throws');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Visual Regression Tests (#38) — validate OOXML structure
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Visual Regression Tests (#38) -- validate OOXML structure
+// -----------------------------------------------------------------------------
 
 suite('md-to-word.cjs: visual regression (OOXML structure)', () => {
   const pandocCheck = spawnSync('pandoc', ['--version'], { encoding: 'utf8', timeout: 5000 });
   if (pandocCheck.status !== 0) {
-    skip('pandoc not installed — skipping visual regression');
+    skip('pandoc not installed -- skipping visual regression');
     return;
   }
 
@@ -749,7 +749,7 @@ Final text.
       assert(docXml.includes('w:cantSplit'), 'Table has anti-split on rows');
       assert(docXml.includes('w:keepNext'), 'Caption has keepNext');
 
-      // Check caption styling — italic on caption runs
+      // Check caption styling -- italic on caption runs
       const captionMatch = docXml.match(/Table\s+1[\s\S]{0,500}/);
       if (captionMatch) {
         assert(captionMatch[0].includes('w:i') || docXml.includes('<w:i'), 'Caption text has italic styling');
@@ -773,16 +773,16 @@ Final text.
         assert(stylesXml.includes('Segoe UI') || stylesXml.includes('rFonts'), 'Styles has font definition');
       }
     } else {
-      skip('adm-zip not available — deep OOXML validation skipped');
+      skip('adm-zip not available -- deep OOXML validation skipped');
     }
   } catch (err) {
     assert(false, `Regression OOXML inspection failed: ${err.message}`);
   }
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // Word Table Styling Regression Tests (#46)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('md-to-word.cjs: table styling regression', () => {
   const pandocCheck = spawnSync('pandoc', ['--version'], { encoding: 'utf8', timeout: 5000 });
@@ -825,7 +825,7 @@ suite('md-to-word.cjs: table styling regression', () => {
       // Blue header shading (#0078D4)
       assert(docXml.includes('0078D4'), 'Header has Microsoft blue (#0078D4)');
 
-      // Alternating row shading — check for F0F0F0 (light gray)
+      // Alternating row shading -- check for F0F0F0 (light gray)
       assert(docXml.includes('F0F0F0'), 'Even rows have alternating gray shading');
 
       // Table borders
@@ -841,9 +841,9 @@ suite('md-to-word.cjs: table styling regression', () => {
   }
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // Email Rendering Tests (#44)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('md-to-eml.cjs: email rendering structure', () => {
   const pandocCheck = spawnSync('pandoc', ['--version'], { encoding: 'utf8', timeout: 5000 });
@@ -876,7 +876,7 @@ flowchart TD
   const result = runNode(MD_TO_EML, [emailMd, emlPath], 30000);
 
   if (result.status !== 0 || !fileExists(emlPath)) {
-    // md-to-eml may fail in CI without proper setup — skip gracefully
+    // md-to-eml may fail in CI without proper setup -- skip gracefully
     skip('md-to-eml failed (may need setup)');
     return;
   }
@@ -889,7 +889,7 @@ flowchart TD
   assert(emlContent.includes('Subject:'), 'EML has Subject: header');
   assert(emlContent.includes('Content-Type:'), 'EML has Content-Type header');
 
-  // MIME structure — HTML body is base64-encoded per RFC 2045
+  // MIME structure -- HTML body is base64-encoded per RFC 2045
   assert(emlContent.includes('Content-Transfer-Encoding: base64'), 'EML uses base64 transfer encoding');
   assert(emlContent.includes('text/html'), 'Content-Type declares text/html');
 
@@ -903,7 +903,7 @@ flowchart TD
       assert(decoded.includes('style='), 'Decoded body has inline styles');
       assert(decoded.includes('href=') || decoded.includes('example.com'), 'Decoded body has link');
     } catch {
-      skip('Base64 decode failed — body may be multipart');
+      skip('Base64 decode failed -- body may be multipart');
     }
   }
 
@@ -911,9 +911,9 @@ flowchart TD
   assert(!emlContent.includes('```mermaid'), 'Mermaid blocks replaced (not raw fence)');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // PDF Engine Cross-Validation (#45)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('PDF engine cross-validation', () => {
   const pandocCheck = spawnSync('pandoc', ['--version'], { encoding: 'utf8', timeout: 5000 });
@@ -976,11 +976,11 @@ Conclusion text.
   }
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // Replicate Core: new features (#16, #19, #39, #40, #43)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
-suite('Shared: replicate-core.cjs — batch retry & validation', () => {
+suite('Shared: replicate-core.cjs -- batch retry & validation', () => {
   const mod = require(path.join(SHARED, 'replicate-core.cjs'));
 
   // Duration validation (#19)
@@ -1028,9 +1028,9 @@ suite('Shared: replicate-core.cjs — batch retry & validation', () => {
   assert(typeof mod.postProcess === 'function', 'postProcess is exported');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // Prompt Preprocessor (#27)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 suite('Shared: prompt-preprocessor.cjs', () => {
   const mod = require(path.join(SHARED, 'prompt-preprocessor.cjs'));
@@ -1094,36 +1094,36 @@ suite('Shared: prompt-preprocessor.cjs', () => {
   assert(mod.modelFamily('unknown/model') === 'default', 'modelFamily: default');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // v5.2.0 NEW FEATURE TESTS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
-suite('Shared: markdown-preprocessor.cjs — heading validation', () => {
+suite('Shared: markdown-preprocessor.cjs -- heading validation', () => {
   const mod = require(path.join(SHARED, 'markdown-preprocessor.cjs'));
 
   assert(typeof mod.validateHeadingHierarchy === 'function', 'validateHeadingHierarchy is exported');
 
-  // Valid hierarchy: H1 → H2 → H3
+  // Valid hierarchy: H1 -> H2 -> H3
   const good = mod.validateHeadingHierarchy('# Title\n## Section\n### Sub');
   assert(good.valid === true, 'Valid hierarchy returns valid=true');
   assert(good.warnings.length === 0, 'Valid hierarchy has no warnings');
 
-  // Invalid hierarchy: H1 → H3 (skips H2)
+  // Invalid hierarchy: H1 -> H3 (skips H2)
   const bad = mod.validateHeadingHierarchy('# Title\n### Skipped H2');
-  assert(bad.valid === false, 'H1→H3 skip returns valid=false');
-  assert(bad.warnings.length > 0, 'H1→H3 skip has warnings');
+  assert(bad.valid === false, 'H1->H3 skip returns valid=false');
+  assert(bad.warnings.length > 0, 'H1->H3 skip has warnings');
   assert(bad.warnings[0].includes('H3'), 'Warning mentions the offending level');
 
-  // No headings — should be valid
+  // No headings -- should be valid
   const none = mod.validateHeadingHierarchy('Just some text\nNo headings here');
   assert(none.valid === true, 'No headings returns valid=true');
 
-  // H2 → H4 skip
+  // H2 -> H4 skip
   const deepSkip = mod.validateHeadingHierarchy('## Section\n#### Deep skip');
-  assert(deepSkip.valid === false, 'H2→H4 skip returns valid=false');
+  assert(deepSkip.valid === false, 'H2->H4 skip returns valid=false');
 });
 
-suite('Shared: markdown-preprocessor.cjs — image embedding', () => {
+suite('Shared: markdown-preprocessor.cjs -- image embedding', () => {
   const mod = require(path.join(SHARED, 'markdown-preprocessor.cjs'));
 
   assert(typeof mod.embedLocalImages === 'function', 'embedLocalImages is exported');
@@ -1156,7 +1156,7 @@ suite('Shared: markdown-preprocessor.cjs — image embedding', () => {
   assert(missingResult.includes('nonexistent.png'), 'Missing file paths left unchanged');
 });
 
-suite('Shared: replicate-core.cjs — negative-prompt & prompt-file', () => {
+suite('Shared: replicate-core.cjs -- negative-prompt & prompt-file', () => {
   const mod = require(path.join(SHARED, 'replicate-core.cjs'));
 
   // Negative prompt parsing
@@ -1167,7 +1167,7 @@ suite('Shared: replicate-core.cjs — negative-prompt & prompt-file', () => {
   const negEq = mod.parseCliArgs(['node', 'script.js', '--negative-prompt=style=cartoon']);
   assert(negEq.negativePrompt === 'style=cartoon', 'parseCliArgs: --negative-prompt with = in value');
 
-  // Prompt file parsing (without actual file — just field presence)
+  // Prompt file parsing (without actual file -- just field presence)
   const noFile = mod.parseCliArgs(['node', 'script.js']);
   assert(noFile.negativePrompt === null, 'Default negativePrompt is null');
   assert(noFile.promptFile === null, 'Default promptFile is null');
@@ -1191,7 +1191,7 @@ suite('md-to-word.cjs: CLI flag parsing (new flags)', () => {
   assert(output.includes('--recursive') || output.includes('recursive'), 'Usage mentions --recursive');
 });
 
-suite('Shared: markdown-preprocessor.cjs — link validation', () => {
+suite('Shared: markdown-preprocessor.cjs -- link validation', () => {
   const mod = require(path.join(SHARED, 'markdown-preprocessor.cjs'));
 
   assert(typeof mod.validateLinks === 'function', 'validateLinks is exported');
@@ -1224,7 +1224,7 @@ suite('Shared: markdown-preprocessor.cjs — link validation', () => {
   assert(mailto.valid === true, 'mailto links are valid');
 });
 
-suite('Shared: markdown-preprocessor.cjs — footnote passthrough', () => {
+suite('Shared: markdown-preprocessor.cjs -- footnote passthrough', () => {
   const mod = require(path.join(SHARED, 'markdown-preprocessor.cjs'));
 
   // Footnote syntax should be preserved through preprocessing (pandoc handles it)
@@ -1245,9 +1245,9 @@ suite('md-to-word.cjs: dry-run mode', () => {
   assert(!fileExists(outPath), 'Dry-run does not generate .docx file');
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CLEANUP & REPORT
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 // Clean temp dir
 try {

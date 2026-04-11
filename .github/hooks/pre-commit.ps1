@@ -28,7 +28,7 @@ if ($changedSkills) {
         if (Test-Path $file) {
             $content = Get-Content $file -Raw
             if ($content -match '^```') {
-                $errors += "${file}: Wrapped in code fence — run: pwsh -File .github/muscles/fix-fence-bug.ps1 -Fix -Path ${file}"
+                $errors += "${file}: Wrapped in code fence -- run: pwsh -File .github/muscles/fix-fence-bug.ps1 -Fix -Path ${file}"
             }
             elseif ($content -notmatch '^---\s*\r?\n') {
                 $errors += "${file}: Missing YAML frontmatter (must start with ---)"
@@ -59,7 +59,7 @@ if ($changedTriFiles) {
         if (Test-Path $file) {
             $content = Get-Content $file -Raw
             if ($content -match '^```') {
-                $errors += "${file}: Wrapped in code fence — run: pwsh -File .github/muscles/fix-fence-bug.ps1 -Fix -Path ${file}"
+                $errors += "${file}: Wrapped in code fence -- run: pwsh -File .github/muscles/fix-fence-bug.ps1 -Fix -Path ${file}"
             }
             elseif ($content -notmatch '^---\s*\r?\n') {
                 $errors += "${file}: Missing YAML frontmatter (must start with ---)"

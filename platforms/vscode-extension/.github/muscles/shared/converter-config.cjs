@@ -1,5 +1,5 @@
 /**
- * converter-config.cjs — Shared converter configuration loader
+ * converter-config.cjs -- Shared converter configuration loader
  * Version: 1.0.0
  *
  * Loads per-project .converter.json from the project root and merges with defaults.
@@ -107,7 +107,7 @@ function loadConfig(section, options = {}) {
     const parsed = JSON.parse(raw);
     fileConfig = parsed[section] || {};
   } catch (err) {
-    console.warn(`⚠️  Warning: Failed to parse ${configPath}: ${err.message}`);
+    console.warn(`[!]  Warning: Failed to parse ${configPath}: ${err.message}`);
     return options.overrides ? deepMerge(defaults, options.overrides) : { ...defaults };
   }
 
@@ -139,7 +139,7 @@ function loadCharacterConfig(configPath, projectRoot) {
       try {
         return JSON.parse(fs.readFileSync(candidate, 'utf8'));
       } catch (err) {
-        console.warn(`⚠️  Warning: Failed to parse ${candidate}: ${err.message}`);
+        console.warn(`[!]  Warning: Failed to parse ${candidate}: ${err.message}`);
         return null;
       }
     }

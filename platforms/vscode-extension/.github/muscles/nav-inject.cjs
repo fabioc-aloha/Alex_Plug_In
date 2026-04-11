@@ -16,8 +16,8 @@
  *     "style": "table",          // "table" or "list"
  *     "position": "top",         // "top" or "bottom"
  *     "files": [
- *       { "path": "README.md", "label": "Overview", "icon": "📋" },
- *       { "path": "SETUP.md", "label": "Setup Guide", "icon": "🔧" }
+ *       { "path": "README.md", "label": "Overview", "icon": "[LIST]" },
+ *       { "path": "SETUP.md", "label": "Setup Guide", "icon": "[TOOL]" }
  *     ]
  *   }
  *
@@ -51,7 +51,7 @@ function generateNavTable(config, currentFile) {
   rows.push('|----------|-------------|');
 
   for (const file of files) {
-    const icon = file.icon || '📄';
+    const icon = file.icon || '[DOC]';
     const label = file.label || path.basename(file.path, '.md');
     const isCurrent = normalizePath(file.path) === normalizePath(currentFile);
 
@@ -77,7 +77,7 @@ function generateNavList(config, currentFile) {
   const rows = ['', NAV_START, `### ${title}`, ''];
 
   for (const file of files) {
-    const icon = file.icon || '📄';
+    const icon = file.icon || '[DOC]';
     const label = file.label || path.basename(file.path, '.md');
     const isCurrent = normalizePath(file.path) === normalizePath(currentFile);
 
@@ -185,7 +185,7 @@ function main() {
 
   console.log(`\u{1F4C4} nav-inject: Processing ${files.length} files`);
   console.log(`  Style: ${style}, Position: ${position}`);
-  if (dryRun) console.log('  \u{1F9EA} DRY RUN — no files will be modified');
+  if (dryRun) console.log('  \u{1F9EA} DRY RUN -- no files will be modified');
 
   let updated = 0;
   for (const file of files) {

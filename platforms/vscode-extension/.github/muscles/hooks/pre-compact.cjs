@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // H22: PreCompact state preservation
-// Global PreCompact hook — before context compaction, saves active state
+// Global PreCompact hook -- before context compaction, saves active state
 // so the compacted context retains critical session information.
 'use strict';
 
@@ -17,11 +17,11 @@ const workspaceRoot = input.cwd || path.resolve(__dirname, '../../..');
 const ghPath = path.join(workspaceRoot, '.github');
 const statePath = path.join(ghPath, 'config', 'session-compact-state.json');
 
-// ── Gather session state ───────────────────────────────────────────────────
+// -- Gather session state ---------------------------------------------------
 
 const state = {
   savedAt: new Date().toISOString(),
-  reason: 'PreCompact — context compaction imminent',
+  reason: 'PreCompact -- context compaction imminent',
 };
 
 // Uncommitted files
@@ -53,7 +53,7 @@ try {
   state.activeGoals = (goals.goals || []).filter(g => g.status === 'active').map(g => g.title);
 } catch { /* no goals */ }
 
-// ── Write state file ───────────────────────────────────────────────────────
+// -- Write state file -------------------------------------------------------
 
 try {
   const configDir = path.dirname(statePath);
@@ -61,7 +61,7 @@ try {
   fs.writeFileSync(statePath, JSON.stringify(state, null, 2) + '\n', 'utf8');
 } catch { /* non-fatal */ }
 
-// ── Inject context for compacted session ───────────────────────────────────
+// -- Inject context for compacted session -----------------------------------
 
 const lines = [
   'H22 STATE PRESERVED: Context compaction is about to occur.',

@@ -1,5 +1,5 @@
 /**
- * md-scaffold.cjs — Markdown file scaffolder
+ * md-scaffold.cjs -- Markdown file scaffolder
  * Version: 1.0.0
  *
  * Generates properly structured markdown files that convert cleanly on first pass.
@@ -20,9 +20,9 @@
 const fs = require('fs');
 const path = require('path');
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // TEMPLATES
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const TEMPLATES = {
   report: {
@@ -158,8 +158,8 @@ _How to verify everything works._
 Expected output:
 
 \`\`\`
-✓ Connection established
-✓ Configuration valid
+[OK] Connection established
+[OK] Configuration valid
 \`\`\`
 
 ## Troubleshooting
@@ -462,9 +462,9 @@ _What is the change we are proposing and/or doing?_
   },
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // HELPERS
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function _today() {
   return new Date().toISOString().split('T')[0];
@@ -480,9 +480,9 @@ function _slugify(str) {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // EXPORTS (for use as a library)
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function scaffold(templateName, title, options = {}) {
   const tmpl = TEMPLATES[templateName];
@@ -499,9 +499,9 @@ function listTemplates() {
 
 module.exports = { scaffold, listTemplates, TEMPLATES };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CLI
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 if (require.main === module) {
   const args = process.argv.slice(2);
@@ -533,7 +533,7 @@ if (require.main === module) {
     const content = scaffold(templateName, title, { author });
     const outFile = outputPath || `${_slugify(title)}.md`;
     fs.writeFileSync(outFile, content, 'utf8');
-    console.log(`✅ Created: ${outFile} (${templateName} template)`);
+    console.log(`[OK] Created: ${outFile} (${templateName} template)`);
   } catch (err) {
     console.error(`ERROR: ${err.message}`);
     process.exit(1);

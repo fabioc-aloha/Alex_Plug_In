@@ -35,7 +35,7 @@ const MODEL_COSTS = {
   'nightmareai/real-esrgan': 0.01,
 };
 
-// Duration constraints per model (seconds) — fail fast on invalid durations
+// Duration constraints per model (seconds) -- fail fast on invalid durations
 const DURATION_CONSTRAINTS = {
   'minimax/hailuo-ai-video-01-director': { allowed: [6, 10], default: 6 },
   'minimax/hailuo-ai-video-01-live': { allowed: [6, 10], default: 6 },
@@ -46,7 +46,7 @@ const DURATION_CONSTRAINTS = {
   'stability-ai/stable-video-diffusion': { min: 2, max: 5, default: 4 },
 };
 
-// Model freshness tracking — when each model was last verified
+// Model freshness tracking -- when each model was last verified
 const MODEL_REGISTRY = {
   // Video models (also in DURATION_CONSTRAINTS)
   'minimax/hailuo-ai-video-01-director':  { verified: '2026-03-25', status: 'active' },
@@ -102,7 +102,7 @@ function validateDuration(model, duration) {
 }
 
 /**
- * Check model freshness — warn if model was verified more than `maxAgeDays` ago.
+ * Check model freshness -- warn if model was verified more than `maxAgeDays` ago.
  * @param {string} model - Replicate model identifier
  * @param {number} [maxAgeDays=90] - Stale threshold in days
  * @returns {{ fresh: boolean, daysSinceVerified?: number, status?: string }}
@@ -141,7 +141,7 @@ function initReplicate(envPath) {
     process.exit(1);
   }
 
-  // Return config object — caller creates the Replicate instance
+  // Return config object -- caller creates the Replicate instance
   return {
     auth: process.env.REPLICATE_API_TOKEN,
   };
@@ -224,7 +224,7 @@ function estimateCost(model, count) {
 }
 
 /**
- * Normalize Replicate output — handles both FileObject (modern) and URL (legacy) responses.
+ * Normalize Replicate output -- handles both FileObject (modern) and URL (legacy) responses.
  * Writes the result to outputPath.
  * @param {*} output - Replicate.run() output (Buffer, FileObject, URL string, or array)
  * @param {string} outputPath - Destination file path
@@ -235,7 +235,7 @@ async function writeOutput(output, outputPath) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
-  // Modern API: output is a Buffer/FileObject — write directly
+  // Modern API: output is a Buffer/FileObject -- write directly
   if (Buffer.isBuffer(output)) {
     fs.writeFileSync(outputPath, output);
     return;
@@ -246,7 +246,7 @@ async function writeOutput(output, outputPath) {
     return writeOutput(output[0], outputPath);
   }
 
-  // String URL output — download it
+  // String URL output -- download it
   if (typeof output === 'string' && output.startsWith('http')) {
     const { downloadFile } = require('./data-uri.cjs');
     await downloadFile(output, outputPath);
@@ -293,7 +293,7 @@ async function runBatch(replicateClient, jobs, options = {}) {
       continue;
     }
 
-    // #19: Duration constraint validation — fail fast before API call
+    // #19: Duration constraint validation -- fail fast before API call
     if (job.input && job.input.duration != null) {
       const check = validateDuration(job.model, job.input.duration);
       if (!check.valid) {
@@ -409,7 +409,7 @@ async function postProcess(replicateClient, imagePath, steps, opts = {}) {
   for (const step of steps) {
     const model = PIPELINE_MODELS[step];
     if (!model) {
-      console.warn(`  ⊘ Unknown post-process step: ${step} (available: ${Object.keys(PIPELINE_MODELS).join(', ')})`);
+      console.warn(`  (x) Unknown post-process step: ${step} (available: ${Object.keys(PIPELINE_MODELS).join(', ')})`);
       continue;
     }
 
@@ -423,10 +423,10 @@ async function postProcess(replicateClient, imagePath, steps, opts = {}) {
     try {
       const output = await replicateClient.run(model, { input });
       await writeOutput(output, outPath);
-      console.log(`  ✓ Post-process ${step}: ${path.basename(outPath)}`);
+      console.log(`  [OK] Post-process ${step}: ${path.basename(outPath)}`);
       currentPath = outPath;
     } catch (err) {
-      console.error(`  ✗ Post-process ${step} failed: ${err.message}`);
+      console.error(`  [X] Post-process ${step} failed: ${err.message}`);
       break;
     }
   }

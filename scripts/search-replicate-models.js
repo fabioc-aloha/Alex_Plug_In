@@ -18,8 +18,8 @@ const replicate = new Replicate({
 });
 
 async function searchModels(query) {
-  console.log(`\n🔍 Searching Replicate for: "${query}"\n`);
-  console.log('─'.repeat(80));
+  console.log(`\n[SEARCH] Searching Replicate for: "${query}"\n`);
+  console.log('-'.repeat(80));
   
   try {
     // Use the collections.get to browse popular models, or search via API
@@ -43,13 +43,13 @@ async function searchModels(query) {
     }
     
     for (const model of results.slice(0, 20)) {
-      const runs = model.run_count ? `⭐ ${(model.run_count / 1000).toFixed(1)}k runs` : '';
-      console.log(`\n📦 ${model.owner}/${model.name}`);
+      const runs = model.run_count ? `[*] ${(model.run_count / 1000).toFixed(1)}k runs` : '';
+      console.log(`\n[PKG] ${model.owner}/${model.name}`);
       console.log(`   ${model.description?.slice(0, 100) || 'No description'}${model.description?.length > 100 ? '...' : ''}`);
       console.log(`   ${runs} | https://replicate.com/${model.owner}/${model.name}`);
     }
     
-    console.log('\n' + '─'.repeat(80));
+    console.log('\n' + '-'.repeat(80));
     console.log(`Found ${Math.min(results.length, 20)} model(s)\n`);
   } catch (err) {
     console.error('Search error:', err.message);
@@ -57,8 +57,8 @@ async function searchModels(query) {
 }
 
 async function listByOwner(owner) {
-  console.log(`\n📋 Models by owner: ${owner}\n`);
-  console.log('─'.repeat(80));
+  console.log(`\n[LIST] Models by owner: ${owner}\n`);
+  console.log('-'.repeat(80));
   
   try {
     const response = await fetch(`https://api.replicate.com/v1/models?owner=${encodeURIComponent(owner)}`, {
@@ -84,7 +84,7 @@ async function listByOwner(owner) {
       console.log(`  ${model.name.padEnd(35)} ${(model.description || '').slice(0, 50)}`);
     }
     
-    console.log('\n' + '─'.repeat(80));
+    console.log('\n' + '-'.repeat(80));
     console.log(`Found ${results.length} model(s) by ${owner}\n`);
   } catch (err) {
     console.error('List error:', err.message);

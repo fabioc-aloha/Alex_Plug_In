@@ -9,7 +9,7 @@
  * 
  * Usage:
  *   # Option 1: Store token securely via VS Code
- *   # Run "Alex: Manage API Keys & Secrets" → Replicate API Token
+ *   # Run "Alex: Manage API Keys & Secrets" -> Replicate API Token
  *   # Then run script (it will prompt if token not found)
  *   node scripts/generate-alex-age-progression.js
  *
@@ -63,10 +63,10 @@ const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // CHARACTER DEFINITION
-// Canonical traits from Alex at 15 — maintained across all ages
-// ─────────────────────────────────────────────────────────────────────────────
+// Canonical traits from Alex at 15 -- maintained across all ages
+// -----------------------------------------------------------------------------
 
 // Load character config from visual-memory.json (with inline fallback)
 const _charConfig = loadCharacterConfig(null, ROOT);
@@ -80,10 +80,10 @@ const ALEX_TRAITS = {
   style: 'photorealistic portrait, shallow depth of field, natural lighting, 85mm lens',
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // AGE CONFIGURATIONS
 // Each age represents a cognitive/professional stage
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 const AGE_PROGRESSION = [
   {
@@ -135,7 +135,7 @@ const AGE_PROGRESSION = [
     filename: 'Alex-21.png',
     age: 21,
     stage: 'Professional Competency',
-    context: 'Current operational age — full cognitive suite',
+    context: 'Current operational age -- full cognitive suite',
     attire: 'neat gray hoodie over flannel, polished casual',
     expression: 'confident, warm, approachable professional',
     setting: 'modern workspace with dual monitors',
@@ -205,9 +205,9 @@ const AGE_PROGRESSION = [
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // PROMPT BUILDER
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 function buildPrompt(config) {
   const traits = ALEX_TRAITS.immutable.join(', ');
@@ -219,7 +219,7 @@ function buildPrompt(config) {
 IMPORTANT: This is a reference-based age transformation. The attached reference image shows the person at AGE 15. Generate an image of THIS SAME PERSON at age ${config.age} (${ageDirection} than the reference).
 
 IDENTITY PRESERVATION (HIGHEST PRIORITY):
-- The reference image shows the person at age 15 — use this as the source of truth for facial identity
+- The reference image shows the person at age 15 -- use this as the source of truth for facial identity
 - The output must look like the SAME PERSON as the reference, transformed to age ${config.age}
 - Preserve: exact facial bone structure, nose shape, eye shape, lip shape
 - Preserve: ${traits}
@@ -247,9 +247,9 @@ TECHNICAL REQUIREMENTS:
 `.trim();
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // GENERATION ENGINE
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 // encodeImageToDataURI replaced by shared/data-uri.cjs encodeToDataUri
 const encodeImageToDataURI = encodeToDataUri;
@@ -282,9 +282,9 @@ async function generateWithNanoBanana(prompt, referenceDataURI, outputPath) {
 
 // downloadImage replaced by shared/data-uri.cjs downloadFile
 
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 // MAIN
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
 
 async function main() {
   if (!process.env.REPLICATE_API_TOKEN && !DRY_RUN) {
@@ -303,22 +303,22 @@ async function main() {
   const outputDir = path.join(ROOT, 'alex_docs', 'alex3', 'age-progression');
   await fs.ensureDir(outputDir);
 
-  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('===============================================================');
   console.log('  Alex Age Progression Generator');
-  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('===============================================================');
   console.log(`  Model: google/nano-banana-pro`);
   console.log(`  Reference: ${REFERENCE_IMAGE}`);
   console.log(`  Output: ${outputDir}`);
   console.log(`  Ages: ${AGE_PROGRESSION.map(a => a.age).join(', ')}`);
   console.log(`  Estimated cost: ~$${estimateCost('google/nano-banana-pro', AGE_PROGRESSION.length).toFixed(2)} (${AGE_PROGRESSION.length} images)`);
   console.log(`  Dry-run: ${DRY_RUN}`);
-  console.log('═══════════════════════════════════════════════════════════════\n');
+  console.log('===============================================================\n');
 
   let referenceDataURI = null;
   if (!DRY_RUN) {
-    console.log('  📷 Encoding reference image...');
+    console.log('  [IMG] Encoding reference image...');
     referenceDataURI = await encodeImageToDataURI(REFERENCE_IMAGE);
-    console.log('  ✓ Reference encoded\n');
+    console.log('  [OK] Reference encoded\n');
   }
 
   const results = [];
@@ -330,7 +330,7 @@ async function main() {
   for (let i = startIndex; i < endIndex; i++) {
     const config = AGE_PROGRESSION[i];
     console.log(`\n  [${i - startIndex + 1}/${totalToGenerate}] Generating: ${config.filename}`);
-    console.log(`  Age ${config.age} — ${config.stage}`);
+    console.log(`  Age ${config.age} -- ${config.stage}`);
     console.log(`  Context: ${config.context}`);
 
     const prompt = buildPrompt(config);
@@ -345,16 +345,16 @@ async function main() {
     try {
       const filepath = path.join(outputDir, config.filename);
       await generateWithNanoBanana(prompt, referenceDataURI, filepath);
-      console.log(`  ✓ Saved: ${config.filename}`);
+      console.log(`  [OK] Saved: ${config.filename}`);
       results.push({ filename: config.filename, age: config.age, stage: config.stage, status: 'success' });
     } catch (err) {
-      console.error(`  ✗ Failed: ${err.message}`);
+      console.error(`  [X] Failed: ${err.message}`);
       results.push({ filename: config.filename, age: config.age, status: 'failed', error: err.message });
     }
 
     // Rate limiting
     if (!DRY_RUN && i < endIndex - 1) {
-      process.stdout.write('  ⏳ Rate limiting (3s)...');
+      process.stdout.write('  [..] Rate limiting (3s)...');
       await new Promise(r => setTimeout(r, 3000));
       process.stdout.write(' done\n');
     }
@@ -380,14 +380,14 @@ async function main() {
   const reportPath = path.join(outputDir, 'generation-report.json');
   await writeReport(reportPath, report);
 
-  console.log('\n═══════════════════════════════════════════════════════════════');
+  console.log('\n===============================================================');
   console.log('  COMPLETE');
-  console.log('═══════════════════════════════════════════════════════════════');
+  console.log('===============================================================');
   console.log(`  Generated: ${successful}/${AGE_PROGRESSION.length} images`);
   console.log(`  Duration: ${duration}s`);
   console.log(`  Output: ${outputDir}`);
   console.log(`  Report: ${reportPath}`);
-  console.log('═══════════════════════════════════════════════════════════════\n');
+  console.log('===============================================================\n');
 }
 
 main().catch(err => {

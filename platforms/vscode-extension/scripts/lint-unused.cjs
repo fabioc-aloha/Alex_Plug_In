@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * lint-unused.cjs — wrapper around ts-unused-exports that works cross-shell and supports a JSON allowlist.
+ * lint-unused.cjs -- wrapper around ts-unused-exports that works cross-shell and supports a JSON allowlist.
  *
  * - Reads ts-unused-exports.json (ignoreFiles/ignoreExports)
  * - Builds a regex for --ignoreFiles to skip dynamic modules
