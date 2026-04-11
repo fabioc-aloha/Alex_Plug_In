@@ -333,23 +333,6 @@ async function detectGitHubAccount(): Promise<GitHubAccountInfo> {
       account.signedIn = true;
       account.sessionCount = 1;
     }
-
-    try {
-      const enterpriseSession = await vscode.authentication.getSession(
-        "github-enterprise",
-        [],
-        { createIfNone: false },
-      );
-      if (enterpriseSession) {
-        account.sessionCount++;
-        if (!account.signedIn) {
-          account.label = enterpriseSession.account.label;
-          account.signedIn = true;
-        }
-      }
-    } catch {
-      // github-enterprise provider may not exist
-    }
   } catch {
     // Authentication API unavailable
   }
