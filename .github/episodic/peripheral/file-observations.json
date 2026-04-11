@@ -1,38 +1,27 @@
 {
   "hotFiles": [],
-  "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "PRIVACY.md",
-    "ROADMAP.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/commands/initialize.ts",
-    "platforms/vscode-extension/src/commands/upgrade.ts",
-    "platforms/vscode-extension/src/services/extensionLifecycle.ts",
-    "platforms/vscode-extension/src/shared/utils.ts"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1775914814538
+      "scannedAt": 1775914896447
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1775914814538
+      "scannedAt": 1775914896447
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1775914814538
+      "scannedAt": 1775914896447
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1775914814538
+      "scannedAt": 1775914896447
     }
   ],
-  "lastUpdated": 1775914814538
+  "lastUpdated": 1775914896447
 }
