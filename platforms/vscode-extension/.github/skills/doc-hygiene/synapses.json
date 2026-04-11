@@ -13,12 +13,28 @@
       "yields": "documentation quality assurance trifecta patterns and guidance"
     },
     {
+      "target": ".github/instructions/roadmap-maintenance.instructions.md",
+      "type": "relates",
+      "strength": 0.75,
+      "reason": "Roadmap hygiene follows doc-hygiene anti-drift rules",
+      "when": "When task involves .github/instructions/roadmap maintenance.instructions.md",
+      "yields": "roadmap maintenance related rules and guidelines"
+    },
+    {
       "target": ".github/instructions/semantic-audit.instructions.md",
       "type": "supports",
       "strength": 0.8,
       "reason": "Semantic audits enforce doc hygiene standards",
       "when": "When task involves .github/instructions/semantic audit.instructions.md",
       "yields": "semantic audit supporting context"
+    },
+    {
+      "target": ".github/instructions/release-management.instructions.md",
+      "type": "relates",
+      "strength": 0.7,
+      "reason": "Feature removal creates documentation blast radius; post-release sweeps must grep all user-facing docs for removed feature names, settings, and protocol claims",
+      "when": "When removing a major feature or performing post-release documentation audit",
+      "yields": "release management checklist for documentation cleanup after feature removal"
     }
   ],
   "when": [

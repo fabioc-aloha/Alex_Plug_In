@@ -45,6 +45,14 @@
       "yields": "meditation related patterns and guidance"
     },
     {
+      "target": ".github/instructions/heir-skill-promotion.instructions.md",
+      "type": "supports",
+      "strength": 0.8,
+      "note": "Phase 5 validates synapse normalization during heir upgrades",
+      "when": "Verifying heir skill promotion quality or compliance",
+      "yields": "heir skill promotion quality checks and validation"
+    },
+    {
       "target": ".github/instructions/skill-selection-optimization.instructions.md",
       "type": "supports",
       "strength": 0.75,

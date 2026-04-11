@@ -107,6 +107,14 @@
       "reason": "Release cycles expose doc drift: stale version stamps, dead commands, outdated counts. Doc sweep should accompany every publish.",
       "when": "When preparing documentation for extension release or post-release audit",
       "yields": "doc hygiene anti-drift patterns for release documentation"
+    },
+    {
+      "target": ".github/instructions/terminal-command-safety.instructions.md",
+      "type": "supports",
+      "strength": 0.7,
+      "reason": "Extension build/test/publish pipelines run via terminal; output capture failures and hanging commands directly impact release workflow",
+      "when": "When terminal commands fail silently or hang during extension builds or VSIX packaging",
+      "yields": "terminal output capture mitigations and async mode guidance"
     }
   ],
   "activationPatterns": [
