@@ -49,6 +49,14 @@
       "reason": "Knowledge synthesis (19 skills to 9 knowledge files) is the core workflow for building M365 Agent Builder declarative agents with embedded knowledge",
       "when": "When building M365 declarative agents or curating knowledge files for Agent Builder",
       "yields": "Knowledge curation workflow: source audit, LLM optimization, routing table design"
+    },
+    {
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "feeds",
+      "strength": 0.85,
+      "reason": "Synthesis outputs persist to AI-Memory/global-knowledge.md",
+      "when": "When cross-project patterns need persistent storage",
+      "yields": "AI-Memory global knowledge persistence"
     }
   ],
   "triggers": [

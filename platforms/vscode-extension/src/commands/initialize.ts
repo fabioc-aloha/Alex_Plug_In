@@ -33,6 +33,11 @@ interface Manifest {
   version: string;
   installedAt: string;
   upgradedAt?: string;
+  upgradePolicy?: {
+    mode: "auto" | "prompt" | "locked";
+    pinnedVersion?: string;
+    reason?: string;
+  };
   files: Record<string, FileManifestEntry>;
 }
 
@@ -618,6 +623,11 @@ async function createInitialManifest(
   const manifest: Manifest = {
     version,
     installedAt: new Date().toISOString(),
+    upgradePolicy: {
+      mode: "prompt",
+      pinnedVersion: version,
+      reason: "Default heir policy: confirm before upgrading",
+    },
     files: {},
   };
 

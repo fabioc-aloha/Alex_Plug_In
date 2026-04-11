@@ -149,8 +149,8 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 
 |                            |                                                                                                                                                                                      |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Current Master Version** | 7.4.2                                                                                                                                                                                |
-| **Current Heirs**          | VS Code (7.4.2)                                                                                                                                                                      |
+| **Current Master Version** | 7.5.0                                                                                                                                                                                |
+| **Current Heirs**          | VS Code (7.5.0)                                                                                                                                                                      |
 | **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                                                                                                                       |
 | **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                                                                                               |
 | **Next Target**            | TBD                                                                                                                                                                                  |

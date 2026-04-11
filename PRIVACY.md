@@ -1,8 +1,8 @@
 # Privacy Policy
 
 **Effective Date**: February 5, 2026
-**Last Updated**: April 9, 2026
-**Version**: 7.4.2
+**Last Updated**: April 11, 2026
+**Version**: 7.5.0
 
 ---
 

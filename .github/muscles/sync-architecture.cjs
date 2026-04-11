@@ -5,7 +5,8 @@
  * to the VS Code extension heir (platforms/vscode-extension/.github/).
  *
  * EXCLUSION-BASED approach:
- * - Skills: ALL sync by default. Only skills listed in SKILL_EXCLUSIONS are skipped.
+ * - Skills: ALL sync by default. Excluded via SKILL_EXCLUSIONS map OR SKILL.md frontmatter
+ *   (inheritance: master-only | heir:m365 | heir:vscode). Central map takes priority.
  * - Root files: ALL .md files sync by default. Only files in EXCLUDED_ROOT_FILES are skipped.
  * - Folders: Explicit list (ARCHITECTURE_FOLDERS) with per-folder exclusions.
  * - chatSkills: Auto-generated from heir disk after sync — no manual updates needed.
@@ -274,9 +275,20 @@ const HEIR_SYNAPSE_REMOVALS = [
 ];
 
 function getInheritance(skillName) {
-  // Central exclusion map is the single source of truth.
-  // Skills not in the map default to 'inheritable' (sync to all heirs).
-  return SKILL_EXCLUSIONS[skillName] || "inheritable";
+  // Priority: central exclusion map > SKILL.md frontmatter > default 'inheritable'.
+  // Central map is the override; frontmatter lets skills self-declare.
+  if (SKILL_EXCLUSIONS[skillName]) {
+    return SKILL_EXCLUSIONS[skillName];
+  }
+
+  // Check SKILL.md frontmatter for self-declared inheritance
+  const skillMd = path.join(MASTER_SKILLS, skillName, "SKILL.md");
+  const frontmatterInheritance = getMarkdownInheritance(skillMd);
+  if (frontmatterInheritance) {
+    return frontmatterInheritance;
+  }
+
+  return "inheritable";
 }
 
 function copyDirRecursive(src, dest, excludeFiles = []) {

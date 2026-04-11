@@ -7,6 +7,7 @@ description: "Research-first development workflow — pre-project knowledge enco
 > Procedural memory for the Research → Teach → Plan → Execute paradigm
 
 **Synapse**: [.github/skills/research-first-development/SKILL.md] (Critical, Implements, Bidirectional) - "skill provides patterns; instruction provides procedures"
+**Synapse**: [.github/instructions/planning-first-development.instructions.md] (Critical, Extends, Forward) - "research provides knowledge; planning provides strategy before encoding"
 **Synapse**: [.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "gap analysis creates skills that SSO selects from"
 **Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (High, Extends, Forward) - "research phase uses bootstrap learning for unknown domains"
 **Synapse**: [.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement teaches heirs to apply research-first"
@@ -18,7 +19,8 @@ description: "Research-first development workflow — pre-project knowledge enco
 
 | Phase | Gate | Output |
 |-------|------|--------|
-| **0: Research** | 3+ deep docs per major domain | Research documents in `/docs/` |
+| **0: Research** | 3+ deep docs per major domain | Research documents in `/docs/` or `/research/` |
+| **0.5: Strategy** | PLAN.md + UX vision + tracker exist | Strategic artifacts (see planning-first-development) |
 | **1: Encode** | All subsystems covered | Skills, Instructions, Agents, Prompts |
 | **2: Gap Analysis** | All 4 dimensions ≥ 75% | Gap report + fill plan |
 | **3: Execute** | GA passed | Implementation code |

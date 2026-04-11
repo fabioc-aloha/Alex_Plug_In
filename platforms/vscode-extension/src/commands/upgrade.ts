@@ -25,6 +25,7 @@ import * as crypto from "crypto";
 import {
   getAlexWorkspaceFolder,
   checkProtectionAndWarn,
+  readUpgradePolicy,
 } from "../shared/utils";
 import { runDreamProtocol } from "./dream";
 import { offerEnvironmentSetup } from "./setupEnvironment";
@@ -490,6 +491,7 @@ async function freshInstall(
 
 /**
  * Create manifest for fresh install
+ * Preserves upgradePolicy from any existing manifest so user's lock survives upgrades.
  */
 async function createFreshManifest(
   extensionPath: string,
@@ -500,11 +502,47 @@ async function createFreshManifest(
   );
   const version = packageJson.version || "0.0.0";
 
-  const manifest = {
+  const manifestPath = path.join(
+    rootPath,
+    ".github",
+    "config",
+    "alex-manifest.json",
+  );
+
+  // Preserve upgradePolicy from existing manifest if present
+  let existingPolicy: Record<string, unknown> | undefined;
+  try {
+    if (await fs.pathExists(manifestPath)) {
+      const existing = await fs.readJson(manifestPath);
+      if (
+        existing.upgradePolicy &&
+        typeof existing.upgradePolicy === "object"
+      ) {
+        existingPolicy = existing.upgradePolicy;
+      }
+    }
+  } catch {
+    // Ignore read errors; policy will not be preserved
+  }
+
+  const files: Record<string, { type: string; originalChecksum: string }> = {};
+
+  const manifest: Record<string, unknown> = {
     version,
     installedAt: new Date().toISOString(),
-    files: {} as Record<string, { type: string; originalChecksum: string }>,
+    files,
   };
+
+  if (existingPolicy) {
+    manifest.upgradePolicy = existingPolicy;
+  } else {
+    // Default heir policy: always confirm before upgrading
+    manifest.upgradePolicy = {
+      mode: "prompt",
+      pinnedVersion: version,
+      reason: "Default heir policy: confirm before upgrading",
+    };
+  }
 
   // Calculate checksums for system files
   const githubPath = path.join(rootPath, ".github");
@@ -513,7 +551,7 @@ async function createFreshManifest(
   for (const file of systemFiles) {
     const content = await fs.readFile(file, "utf8");
     const relativePath = path.relative(rootPath, file).replace(/\\/g, "/");
-    manifest.files[relativePath] = {
+    files[relativePath] = {
       type: "system",
       originalChecksum: crypto
         .createHash("md5")
@@ -522,12 +560,6 @@ async function createFreshManifest(
     };
   }
 
-  const manifestPath = path.join(
-    rootPath,
-    ".github",
-    "config",
-    "alex-manifest.json",
-  );
   await fs.ensureDir(path.dirname(manifestPath));
   await fs.writeJson(manifestPath, manifest, { spaces: 2 });
 }
@@ -1084,6 +1116,31 @@ export async function upgradeArchitecture(
   );
   if (!canProceed) {
     return;
+  }
+
+  // Upgrade policy gate
+  const policy = await readUpgradePolicy(rootPath);
+  if (policy.mode === "locked") {
+    vscode.window.showWarningMessage(
+      `Upgrade blocked: this workspace has upgradePolicy "locked"` +
+        (policy.reason ? ` (${policy.reason})` : "") +
+        `.\n\nTo unlock, edit .github/config/alex-manifest.json and change "mode" to "auto" or remove upgradePolicy.`,
+      { modal: true },
+    );
+    return;
+  }
+  if (policy.mode === "prompt") {
+    const proceed = await vscode.window.showWarningMessage(
+      `This workspace has upgradePolicy "prompt"` +
+        (policy.reason ? `: ${policy.reason}` : "") +
+        `.\n\nAre you sure you want to upgrade?`,
+      { modal: true },
+      "Upgrade Anyway",
+      "Cancel",
+    );
+    if (proceed !== "Upgrade Anyway") {
+      return;
+    }
   }
 
   const packageJson = await fs.readJson(

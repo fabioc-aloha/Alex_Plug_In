@@ -41,6 +41,14 @@
       "reason": "Cross-domain transfer is the generative output of synthesis",
       "when": "During meditation Phase 3 cross-domain synthesis",
       "yields": "cross-domain transfer protocol and quality gates"
+    },
+    {
+      "target": ".github/skills/global-knowledge/SKILL.md",
+      "type": "feeds",
+      "strength": 0.85,
+      "reason": "Synthesis outputs persist to AI-Memory/global-knowledge.md",
+      "when": "When cross-project patterns need persistent storage",
+      "yields": "AI-Memory global knowledge persistence"
     }
   ],
   "triggers": [

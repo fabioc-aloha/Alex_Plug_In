@@ -8,7 +8,7 @@ import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs-extra";
 import { checkHealth, getStatusBarDisplay } from "../shared/healthCheck";
-import { isWorkspaceProtected } from "../shared/utils";
+import { isWorkspaceProtected, readUpgradePolicy } from "../shared/utils";
 import { detectGlobalKnowledgeRepo } from "../chat/globalKnowledge";
 
 /**
@@ -136,6 +136,12 @@ export async function checkVersionUpgrade(
     if (await fs.pathExists(masterProtectedPath)) {
       return;
     }
+
+    // Upgrade policy: respect locked/pinned workspaces
+    const policy = await readUpgradePolicy(workspaceFolder.uri.fsPath);
+    if (policy.mode === "locked") {
+      return; // Suppress all upgrade notifications
+    }
   }
 
   // First install: offer initialization if workspace doesn't have Alex yet
@@ -178,11 +184,20 @@ export async function checkVersionUpgrade(
   const changelogButton = "View Changelog";
   const dismissButton = "Dismiss";
 
+  // Upgrade policy "prompt" mode: warn that workspace is pinned
+  const promptPolicy = workspaceFolder
+    ? await readUpgradePolicy(workspaceFolder.uri.fsPath)
+    : undefined;
+  const pinnedWarning =
+    promptPolicy?.mode === "prompt"
+      ? ` ⚠️ This workspace has upgradePolicy "prompt" (${promptPolicy.reason || "no reason given"}). Proceed with caution.`
+      : "";
+
   const message = isMajorUpgrade
-    ? `Alex upgraded to v${currentVersion}! This is a major release with new features. Run the upgrade to update your workspace files.`
+    ? `Alex upgraded to v${currentVersion}! This is a major release with new features. Run the upgrade to update your workspace files.${pinnedWarning}`
     : isMinorUpgrade
-      ? `Alex updated to v${currentVersion} with new features. Run the upgrade to sync your workspace.`
-      : `Alex patched to v${currentVersion}. Run the upgrade to apply latest fixes.`;
+      ? `Alex updated to v${currentVersion} with new features. Run the upgrade to sync your workspace.${pinnedWarning}`
+      : `Alex patched to v${currentVersion}. Run the upgrade to apply latest fixes.${pinnedWarning}`;
 
   const selection = await vscode.window.showInformationMessage(
     message,

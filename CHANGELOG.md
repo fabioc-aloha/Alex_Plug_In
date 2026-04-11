@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.5.0] - 2026-04-11
+
+### Added
+
+- Planning-first development discipline: strategic artifacts (PLAN, UX vision, UI specs, visual guidance, tracker) must exist before implementation code
+- Terminal command safety: output capture failure mitigations and terminal hanging prevention
+
+### Changed
+
+- Research-first workflow updated with Phase 0.5 planning gate
+
+---
+
 ## [7.4.2] - 2026-04-09
 
 ### Added

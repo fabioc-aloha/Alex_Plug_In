@@ -19,14 +19,14 @@ During meditation Phase 3, analyze episodic memories for cross-domain synthesis 
 
 ```
 Is this observation project-specific (this repo only)?
-  Yes → Don't store globally (document in project docs if needed)
+  Yes -> Don't store globally (document in project docs if needed)
 
 Could this help someone in a completely different project?
-  Yes → Qualify for global knowledge (GI or GK)
+  Yes -> Add to AI-Memory/global-knowledge.md
 
 Has this been proven in 2+ different projects/contexts?
-  Yes → Pattern level (GK-*)
-  No → Insight level (GI-*) — observe before promoting
+  Yes -> Mark as a pattern (category heading in global-knowledge.md)
+  No -> Add as an insight entry; observe before promoting to pattern
 ```
 
 **Abstraction test**: Would this help someone who has never seen this project?
@@ -38,7 +38,7 @@ Promote an insight to a pattern when:
 - The solution is actionable (not just descriptive)
 - At least 2 concrete examples can be documented
 
-**Process**: Create new GK-\* file, link back to source GI files, update index.json.
+**Process**: Add entry to the appropriate category in AI-Memory/global-knowledge.md with Source, Insight, and Date fields.
 
 ---
 
@@ -48,6 +48,5 @@ Before saving globally:
 
 - [ ] Abstracted — no project-specific names or details in the core insight
 - [ ] Tested — "would this help a stranger working on a different codebase?"
-- [ ] Categorized — valid category from: `architecture, api-design, debugging, deployment, documentation, error-handling, patterns, performance, refactoring, security, testing, tooling, general`
-- [ ] Tagged — at least 3 relevant tags
-- [ ] GI vs GK chosen correctly (observation vs proven pattern)
+- [ ] Categorized — placed under an appropriate heading in global-knowledge.md
+- [ ] Formatted — uses standard entry format (Topic, Source, Insight, Date)

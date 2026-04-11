@@ -1,14 +1,14 @@
 {
-  "schemaVersion": "2.0.0",
+  "schemaVersion": "2.1.0",
   "skillId": "global-knowledge-sync",
   "$schema": "../SYNAPSE-SCHEMA.json",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "connections": [
     {
       "target": ".github/skills/global-knowledge/SKILL.md",
       "type": "extends",
       "strength": 0.95,
-      "reason": "Sync operations extend core GK search capability",
+      "reason": "Sync extends core AI-Memory knowledge capability",
       "when": "When task involves .github/skills/global knowledge/SKILL.md",
       "yields": "global knowledge extended capabilities"
     },
@@ -16,7 +16,7 @@
       "target": ".github/skills/meditation/SKILL.md",
       "type": "complements",
       "strength": 0.85,
-      "reason": "Dream protocol includes GK sync step",
+      "reason": "Dream protocol includes AI-Memory sync step",
       "when": "When task involves .github/skills/meditation/SKILL.md",
       "yields": "meditation integration patterns"
     },
@@ -24,7 +24,7 @@
       "target": ".github/skills/bootstrap-learning/SKILL.md",
       "type": "supports",
       "strength": 0.7,
-      "reason": "GK provides prior knowledge for new learning",
+      "reason": "AI-Memory provides prior knowledge for new learning",
       "when": "When task involves .github/skills/bootstrap learning/SKILL.md",
       "yields": "bootstrap learning acceleration techniques"
     },
@@ -32,7 +32,7 @@
       "target": ".github/instructions/dream-state-automation.instructions.md",
       "type": "extends",
       "strength": 0.75,
-      "reason": "Adds GK sync to dream checklist",
+      "reason": "Adds AI-Memory sync to dream checklist",
       "when": "When task involves .github/instructions/dream state automation.instructions.md",
       "yields": "dream state automation modification interface"
     },
@@ -40,22 +40,23 @@
       "target": ".github/skills/skill-development/SKILL.md",
       "type": "supports",
       "strength": 0.85,
-      "reason": "Skill pull-sync enables heir wishlist fulfillment",
+      "reason": "AI-Memory sync enables cross-platform skill discovery",
       "when": "When task involves .github/skills/skill development/SKILL.md",
       "yields": "skill development capabilities and setup"
     }
   ],
   "when": [
-    "User wants to save an insight to global knowledge",
+    "User wants to save an insight to AI-Memory",
     "User searches for cross-project patterns",
-    "Dream protocol reaches GK sync step",
-    "User wants to promote a local skill to GK"
+    "Dream protocol reaches AI-Memory sync step",
+    "User wants cross-platform knowledge access"
   ],
   "activationContexts": [
     "global-knowledge-sync",
     "global knowledge sync",
-    "global",
-    "knowledge",
-    "sync"
+    "AI-Memory",
+    "ai memory",
+    "OneDrive sync",
+    "cross-platform knowledge"
   ]
 }

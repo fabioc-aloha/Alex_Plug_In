@@ -482,6 +482,56 @@ export async function checkProtectionAndWarn(
   return true;
 }
 
+// ============================================================================
+// UPGRADE POLICY
+// ============================================================================
+
+/**
+ * Upgrade policy modes:
+ * - "auto"   : Default. Extension shows upgrade notifications and allows upgrades.
+ * - "prompt" : Always shows confirmation, warns workspace is pinned.
+ * - "locked" : Blocks all upgrades and suppresses notifications.
+ */
+export type UpgradePolicyMode = "auto" | "prompt" | "locked";
+
+export interface UpgradePolicy {
+  mode: UpgradePolicyMode;
+  pinnedVersion?: string;
+  reason?: string;
+}
+
+/**
+ * Read upgradePolicy from the workspace's alex-manifest.json.
+ * Returns { mode: "auto" } if not set or unreadable (backward-compatible default).
+ */
+export async function readUpgradePolicy(
+  rootPath: string,
+): Promise<UpgradePolicy> {
+  const DEFAULT_POLICY: UpgradePolicy = { mode: "auto" };
+  try {
+    const manifestPath = path.join(
+      rootPath,
+      ".github",
+      "config",
+      "alex-manifest.json",
+    );
+    if (!(await fs.pathExists(manifestPath))) {
+      return DEFAULT_POLICY;
+    }
+    const manifest = await fs.readJson(manifestPath);
+    if (
+      manifest.upgradePolicy &&
+      typeof manifest.upgradePolicy === "object" &&
+      ["auto", "prompt", "locked"].includes(manifest.upgradePolicy.mode)
+    ) {
+      return manifest.upgradePolicy as UpgradePolicy;
+    }
+    return DEFAULT_POLICY;
+  } catch {
+    return DEFAULT_POLICY;
+  }
+}
+
 /**
  * Get language ID from file extension for clipboard/chat commands
  *
