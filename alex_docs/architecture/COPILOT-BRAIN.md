@@ -34,7 +34,8 @@ It is his self-concept — the LLM's answer to "Who am I?" Not a capability list
 Only Alex reads this section; it's not human configuration.
 
 The **User Profile** section tells Alex how to know the human he's working with.
-Alex reads `.github/config/user-profile.json` to personalize tone, detect persona, and adapt.
+Alex reads `AI-Memory/user-profile.json` (cloud-synced) to personalize tone and adapt.
+Project persona is cached in `.github/config/project-persona.json` (workspace-specific).
 
 **Remaining sections evolve** as the architecture grows. Brain-qa Phase 32 validates
 that agent lists, trifecta counts, and section presence match what exists on disk.

@@ -19,7 +19,7 @@ import {
   getGlobalKnowledgePath,
   ensureGlobalKnowledgeDirectories,
   updateGlobalKnowledgeIndex,
-  isRemoteOnly,
+  toPortablePath,
 } from "./globalKnowledge";
 export function generateKnowledgeId(
   type: "pattern" | "insight",
@@ -89,7 +89,7 @@ ${content}
     created: new Date().toISOString(),
     modified: new Date().toISOString(),
     summary: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
-    filePath,
+    filePath: toPortablePath(filePath),
   };
 
   await updateGlobalKnowledgeIndex((index) => {
@@ -180,16 +180,6 @@ export async function createGlobalInsight(
   problemContext?: string,
   solution?: string,
 ): Promise<IGlobalKnowledgeEntry> {
-  // Check if we're in remote-only mode
-  if (isRemoteOnly()) {
-    throw new Error(
-      "Cannot save insights in remote-only mode. " +
-        "To save insights, either:\n" +
-        "1. Clone your GK repo locally: git clone https://github.com/{owner}/Alex-Global-Knowledge\n" +
-        '2. Create a new local GK: Run "Alex: Initialize"',
-    );
-  }
-
   await ensureGlobalKnowledgeDirectories();
 
   const id = generateKnowledgeId("insight", title);
@@ -249,7 +239,7 @@ ${solution || "See insight above."}
     created: new Date().toISOString(),
     modified: new Date().toISOString(),
     summary: content.substring(0, 200) + (content.length > 200 ? "..." : ""),
-    filePath,
+    filePath: toPortablePath(filePath),
   };
 
   await updateGlobalKnowledgeIndex((index) => {
@@ -384,15 +374,6 @@ export async function promoteToGlobalKnowledge(
   category: GlobalKnowledgeCategory,
   additionalTags: string[] = [],
 ): Promise<IGlobalKnowledgeEntry | null> {
-  // Check if we're in remote-only mode
-  if (isRemoteOnly()) {
-    vscode.window.showErrorMessage(
-      "Cannot promote knowledge in remote-only mode. " +
-        'Clone your GK repo locally or create a new one via "Alex: Initialize".',
-    );
-    return null;
-  }
-
   try {
     const content = await fs.readFile(localFilePath, "utf-8");
     const filename = path.basename(localFilePath, ".md");

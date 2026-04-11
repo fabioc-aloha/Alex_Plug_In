@@ -2,12 +2,9 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as os from "os";
-import * as https from "https";
 import * as lockfile from "proper-lockfile";
-import { logInfo } from "../shared/logger";
 import {
-  ALEX_GLOBAL_HOME,
-  GLOBAL_KNOWLEDGE_PATHS,
+  AI_MEMORY_PATHS,
   IGlobalKnowledgeEntry,
   IGlobalKnowledgeIndex,
   IProjectRegistry,
@@ -32,657 +29,349 @@ const LOCK_OPTIONS = {
   },
 };
 
-// ============================================================================
-// REMOTE GITHUB ACCESS (Read-only, no clone required)
-// ============================================================================
-
 /**
- * In-memory cache for remote GitHub content
+ * Convert an absolute file path to a portable relative path (forward slashes)
+ * suitable for storing in index.json. Paths are relative to the AI-Memory root.
+ * If the path is already relative, normalizes separators to forward slashes.
  */
-interface IRemoteCache {
-  content: string;
-  fetchedAt: number;
-  etag?: string;
-}
-
-const remoteCache = new Map<string, IRemoteCache>();
-
-/**
- * Track remote access status for error feedback
- */
-interface IRemoteAccessStatus {
-  lastAttempt: number;
-  lastSuccess: boolean;
-  lastError?: string;
-  authMethod?: "vscode-sso" | "pat" | "none";
-}
-
-let remoteAccessStatus: IRemoteAccessStatus | null = null;
-
-// ============================================================================
-// SECURE TOKEN STORAGE (SecretStorage API)
-// ============================================================================
-
-/** Secret storage key for GitHub token */
-const GITHUB_TOKEN_SECRET_KEY = "alex.globalKnowledge.githubToken";
-
-/** Module-level reference to VS Code SecretStorage */
-let secretStorage: vscode.SecretStorage | null = null;
-
-/** Cached token (loaded async at activation, refreshed on config change) */
-let cachedGithubToken: string | null = null;
-
-/**
- * Initialize secure storage for Global Knowledge.
- * Migrates token from settings to SecretStorage on first run.
- * @param context Extension context with secrets API
- */
-export async function initGlobalKnowledgeSecrets(
-  context: vscode.ExtensionContext,
-): Promise<void> {
-  secretStorage = context.secrets;
-
-  // Try to load token from SecretStorage
-  try {
-    cachedGithubToken =
-      (await secretStorage.get(GITHUB_TOKEN_SECRET_KEY)) || null;
-  } catch {
-    cachedGithubToken = null;
-  }
-
-  // Migration: If token exists in settings but not in secrets, migrate it
-  const config = vscode.workspace.getConfiguration("alex.globalKnowledge");
-  const settingsToken = config.get<string>("githubToken")?.trim();
-
-  if (settingsToken && !cachedGithubToken) {
-    // Migrate token to SecretStorage
-    try {
-      await secretStorage.store(GITHUB_TOKEN_SECRET_KEY, settingsToken);
-      cachedGithubToken = settingsToken;
-
-      // Clear token from settings (it's now in secure storage)
-      await config.update(
-        "githubToken",
-        undefined,
-        vscode.ConfigurationTarget.Global,
-      );
-
-      vscode.window.showInformationMessage(
-        "Alex: GitHub token migrated to secure storage.",
-      );
-    } catch (error) {
-      // Migration failed, keep using settings token
-      cachedGithubToken = settingsToken;
-    }
-  } else if (settingsToken && cachedGithubToken) {
-    // Token exists in both places - clear settings copy
-    try {
-      await config.update(
-        "githubToken",
-        undefined,
-        vscode.ConfigurationTarget.Global,
-      );
-    } catch {
-      // Ignore cleanup failure
-    }
-  }
-}
-
-/**
- * Get the cached GitHub token (synchronous, uses cached value)
- */
-function getCachedGithubToken(): string | null {
-  return cachedGithubToken;
-}
-
-/**
- * Standard repository name for Global Knowledge
- */
-const STANDARD_GK_REPO_NAME = "Alex-Global-Knowledge";
-
-/**
- * Get remote repo configuration
- * Accepts: "owner" (appends standard repo name) or "owner/repo" (custom repo name)
- */
-export function getRemoteRepoConfig(): {
-  repo: string;
-  ttl: number;
-  useAuth: boolean;
-  token: string | null;
-} | null {
-  const config = vscode.workspace.getConfiguration("alex.globalKnowledge");
-  const repoInput = config.get<string>("remoteRepo")?.trim();
-  const ttl = config.get<number>("remoteCacheTTL") || 300;
-  const useAuth = config.get<boolean>("useGitHubAuth") ?? true;
-  // Use token from SecretStorage (cached), fallback to settings for backwards compatibility
-  const token =
-    getCachedGithubToken() || config.get<string>("githubToken")?.trim() || null;
-
-  if (!repoInput) {
-    return null;
-  }
-
-  let repo: string;
-
-  // Check if it's a full URL first
-  const urlMatch = repoInput.match(/github\.com\/([^\/]+\/[^\/]+?)(?:\.git)?$/);
-  if (urlMatch) {
-    repo = urlMatch[1];
-  }
-  // Check if it's "owner/repo" format
-  else if (repoInput.includes("/")) {
-    repo = repoInput;
-  }
-  // Just owner name - append standard repo name
-  else {
-    repo = `${repoInput}/${STANDARD_GK_REPO_NAME}`;
-  }
-
-  return { repo, ttl, useAuth, token };
-}
-
-/**
- * Get GitHub authentication token using VS Code's built-in GitHub auth or PAT fallback
- */
-async function getGitHubAuthToken(): Promise<{
-  token: string | null;
-  method: "vscode-sso" | "pat" | "none";
-}> {
-  const config = getRemoteRepoConfig();
-  if (!config) {
-    return { token: null, method: "none" };
-  }
-
-  // Try VS Code GitHub authentication first (if enabled)
-  if (config.useAuth) {
-    try {
-      const session = await vscode.authentication.getSession(
-        "github",
-        ["repo"],
-        { createIfNone: false },
-      );
-      if (session) {
-        return { token: session.accessToken, method: "vscode-sso" };
-      }
-    } catch (err) {
-      logInfo("[Alex] VS Code GitHub auth not available: " + String(err));
-    }
-  }
-
-  // Fall back to PAT token
-  if (config.token) {
-    return { token: config.token, method: "pat" };
-  }
-
-  return { token: null, method: "none" };
-}
-
-/**
- * Request GitHub authentication from VS Code (prompts user to sign in)
- */
-export async function requestGitHubAuth(): Promise<boolean> {
-  try {
-    const session = await vscode.authentication.getSession("github", ["repo"], {
-      createIfNone: true,
-    });
-    return session !== undefined;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Fetch a file from GitHub raw content
- * Authentication priority: VS Code SSO > PAT token > unauthenticated (public repos only)
- */
-async function fetchFromGitHub(
-  repoPath: string,
-  filePath: string,
-  branch: string = "main",
-): Promise<string | null> {
-  const cacheKey = `${repoPath}/${branch}/${filePath}`;
-  const config = getRemoteRepoConfig();
-  const ttl = config?.ttl || 300;
-
-  // Check cache first
-  const cached = remoteCache.get(cacheKey);
-  if (cached && Date.now() - cached.fetchedAt < ttl * 1000) {
-    return cached.content;
-  }
-
-  // Get authentication token
-  const auth = await getGitHubAuthToken();
-
-  // Try raw.githubusercontent.com (works for public repos, or private with auth)
-  const rawUrl = `https://raw.githubusercontent.com/${repoPath}/${branch}/${filePath}`;
-
-  return new Promise<string | null>((resolve) => {
-    const headers: Record<string, string> = {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      "User-Agent": "Alex-Cognitive-Architecture-VSCode",
-    };
-
-    // Add authorization header if we have a token
-    if (auth.token) {
-      headers["Authorization"] = `Bearer ${auth.token}`;
-    }
-
-    const req = https.get(
-      rawUrl,
-      {
-        headers,
-        timeout: 10000,
-      },
-      (res) => {
-        // Handle redirects
-        if (res.statusCode === 301 || res.statusCode === 302) {
-          const redirectUrl = res.headers.location;
-          if (redirectUrl) {
-            https
-              .get(redirectUrl, { headers, timeout: 10000 }, (redirectRes) => {
-                handleResponse(redirectRes);
-              })
-              .on("error", () => {
-                updateAccessStatus(
-                  false,
-                  "Network error during redirect",
-                  auth.method,
-                );
-                resolve(null);
-              });
-            return;
-          }
-        }
-        handleResponse(res);
-
-        function handleResponse(response: typeof res) {
-          if (response.statusCode === 401 || response.statusCode === 403) {
-            // Authentication required or insufficient permissions
-            const errorMsg =
-              response.statusCode === 401
-                ? "Authentication required - private repository"
-                : "Access forbidden - check repository permissions";
-            updateAccessStatus(false, errorMsg, auth.method);
-            resolve(null);
-            return;
-          }
-
-          if (response.statusCode === 404) {
-            // Could be wrong branch, try 'master'
-            if (branch === "main") {
-              fetchFromGitHub(repoPath, filePath, "master")
-                .then(resolve)
-                .catch(() => {
-                  updateAccessStatus(
-                    false,
-                    "Repository or file not found",
-                    auth.method,
-                  );
-                  resolve(null);
-                });
-              return;
-            }
-            updateAccessStatus(
-              false,
-              "Repository or file not found",
-              auth.method,
-            );
-            resolve(null);
-            return;
-          }
-
-          if (response.statusCode !== 200) {
-            updateAccessStatus(
-              false,
-              `HTTP ${response.statusCode}`,
-              auth.method,
-            );
-            resolve(null);
-            return;
-          }
-
-          let data = "";
-          response.on("data", (chunk) => {
-            data += chunk;
-          });
-          response.on("end", () => {
-            // Cache the result
-            remoteCache.set(cacheKey, {
-              content: data,
-              fetchedAt: Date.now(),
-              etag: response.headers.etag as string | undefined,
-            });
-            updateAccessStatus(true, undefined, auth.method);
-            resolve(data);
-          });
-        }
-      },
-    );
-
-    req.on("error", (err) => {
-      updateAccessStatus(false, `Network error: ${err.message}`, auth.method);
-      resolve(null);
-    });
-    req.on("timeout", () => {
-      req.destroy();
-      updateAccessStatus(false, "Request timeout", auth.method);
-      resolve(null);
-    });
-  });
-}
-
-/**
- * Update the remote access status for error feedback
- */
-function updateAccessStatus(
-  success: boolean,
-  error?: string,
-  authMethod?: "vscode-sso" | "pat" | "none",
-): void {
-  remoteAccessStatus = {
-    lastAttempt: Date.now(),
-    lastSuccess: success,
-    lastError: error,
-    authMethod,
-  };
-}
-
-/**
- * Show remote access error to user with actionable guidance
- */
-export async function showRemoteAccessError(): Promise<void> {
-  const status = remoteAccessStatus;
-  const config = getRemoteRepoConfig();
-
-  if (!status || status.lastSuccess || !config) {
-    return;
-  }
-
-  let message = `Failed to access Global Knowledge from GitHub: ${status.lastError}`;
-  let actions: string[] = [];
-
-  if (
-    status.lastError?.includes("Authentication required") ||
-    status.lastError?.includes("Access forbidden")
-  ) {
-    message += "\n\nThis appears to be a private repository.";
-    actions = ["Sign in with GitHub", "Configure PAT Token", "Cancel"];
-  } else if (status.lastError?.includes("not found")) {
-    message += "\n\nCheck that the repository exists and the path is correct.";
-    actions = ["Open Settings", "Cancel"];
+export function toPortablePath(absolutePath: string): string {
+  const root = resolveAIMemoryRoot();
+  let rel: string;
+  if (path.isAbsolute(absolutePath) && absolutePath.startsWith(root)) {
+    rel = path.relative(root, absolutePath);
+  } else if (!path.isAbsolute(absolutePath)) {
+    rel = absolutePath;
   } else {
-    actions = ["Retry", "Open Settings", "Cancel"];
+    // Absolute path outside AI-Memory — store as-is but normalize slashes
+    rel = absolutePath;
   }
-
-  const choice = await vscode.window.showWarningMessage(message, ...actions);
-
-  if (choice === "Sign in with GitHub") {
-    const success = await requestGitHubAuth();
-    if (success) {
-      clearRemoteCache();
-      vscode.window.showInformationMessage(
-        "GitHub authentication successful. Retrying...",
-      );
-    }
-  } else if (choice === "Configure PAT Token") {
-    await vscode.commands.executeCommand(
-      "workbench.action.openSettings",
-      "alex.globalKnowledge.githubToken",
-    );
-  } else if (choice === "Open Settings") {
-    await vscode.commands.executeCommand(
-      "workbench.action.openSettings",
-      "alex.globalKnowledge.remoteRepo",
-    );
-  } else if (choice === "Retry") {
-    clearRemoteCache();
-  }
+  // Normalize to forward slashes for cross-platform portability
+  return rel.split(path.sep).join("/");
 }
 
 /**
- * Get remote Global Knowledge index
+ * Resolve a portable relative path from index.json to an absolute local path.
  */
-async function getRemoteIndex(): Promise<IGlobalKnowledgeIndex | null> {
-  const config = getRemoteRepoConfig();
-  if (!config) {
-    return null;
+export function resolvePortablePath(portablePath: string): string {
+  if (path.isAbsolute(portablePath)) {
+    return portablePath;
   }
-
-  const content = await fetchFromGitHub(config.repo, "index.json");
-  if (!content) {
-    return null;
-  }
-
-  try {
-    return JSON.parse(content) as IGlobalKnowledgeIndex;
-  } catch {
-    console.warn("[Alex] Failed to parse remote index.json");
-    return null;
-  }
+  // Convert forward slashes to platform separators and resolve against AI-Memory root
+  const localPath = portablePath.split("/").join(path.sep);
+  return path.join(resolveAIMemoryRoot(), localPath);
 }
 
 /**
- * Get a specific knowledge file from remote
- */
-async function getRemoteKnowledgeFile(
-  relativePath: string,
-): Promise<string | null> {
-  const config = getRemoteRepoConfig();
-  if (!config) {
-    return null;
-  }
-
-  return await fetchFromGitHub(config.repo, relativePath);
-}
-
-/**
- * Read knowledge file content from local or remote source
- * Handles both absolute paths (local) and relative paths (remote)
+ * Read knowledge file content from local filesystem.
+ * Handles both absolute and portable relative paths.
  */
 export async function readKnowledgeFileContent(
   filePath: string,
-  entry?: IGlobalKnowledgeEntry,
+  _entry?: IGlobalKnowledgeEntry,
 ): Promise<string | null> {
-  // Try local first if path is absolute and exists
-  if (path.isAbsolute(filePath)) {
-    try {
-      if (await fs.pathExists(filePath)) {
-        return await fs.readFile(filePath, "utf-8");
-      }
-    } catch {
-      // Fall through to remote
-    }
-  }
+  // Resolve portable relative paths to absolute
+  const resolvedPath = path.isAbsolute(filePath)
+    ? filePath
+    : resolvePortablePath(filePath);
 
-  // If in remote-only mode or local read failed, try remote
-  if (isRemoteOnlyMode || !path.isAbsolute(filePath)) {
-    const config = getRemoteRepoConfig();
-    if (config) {
-      // Determine relative path for remote fetch
-      let relativePath = filePath;
-      if (path.isAbsolute(filePath)) {
-        // Extract relative path from entry or guess based on type
-        if (entry) {
-          relativePath =
-            entry.type === "pattern"
-              ? `patterns/${entry.id}.md`
-              : `insights/${entry.id}.md`;
-        } else {
-          // Try to extract from absolute path
-          const match = filePath.match(/(?:patterns|insights)[\/\\].+\.md$/);
-          relativePath = match ? match[0].replace(/\\/g, "/") : filePath;
-        }
-      }
-
-      const content = await getRemoteKnowledgeFile(relativePath);
-      if (content) {
-        return content;
-      }
+  try {
+    if (await fs.pathExists(resolvedPath)) {
+      return await fs.readFile(resolvedPath, "utf-8");
     }
+  } catch {
+    // File not readable
   }
 
   return null;
 }
 
-/**
- * Clear the remote cache (useful for forcing refresh)
- */
-export function clearRemoteCache(): void {
-  remoteCache.clear();
+// ============================================================================
+// AI-MEMORY PATH RESOLUTION
+// ============================================================================
+
+/** A detected cloud storage root with its provider label */
+export interface CloudStorageRoot {
+  path: string;
+  label: string; // e.g. "OneDrive - Personal", "iCloud Drive", "Google Drive", "Dropbox"
 }
 
 /**
- * Get the full path to the Alex global home directory
+ * Detect all cloud storage roots on the current platform.
+ * Supports: OneDrive (personal/commercial/family), iCloud Drive, Google Drive, Dropbox.
  */
-export function getAlexGlobalPath(): string {
-  return path.join(os.homedir(), ALEX_GLOBAL_HOME);
-}
+export function getAllCloudStorageRoots(): CloudStorageRoot[] {
+  const roots: CloudStorageRoot[] = [];
+  const seen = new Set<string>();
 
-/**
- * Get the full path to a global knowledge subdirectory
- */
-export function getGlobalKnowledgePath(
-  subpath: keyof typeof GLOBAL_KNOWLEDGE_PATHS,
-): string {
-  return path.join(os.homedir(), GLOBAL_KNOWLEDGE_PATHS[subpath]);
-}
+  const add = (p: string, label: string) => {
+    const normalized = p.toLowerCase();
+    if (!seen.has(normalized) && fs.existsSync(p)) {
+      seen.add(normalized);
+      roots.push({ path: p, label });
+    }
+  };
 
-/**
- * Ensure all global knowledge directories exist
- */
-export async function ensureGlobalKnowledgeDirectories(): Promise<void> {
-  const paths = [
-    getGlobalKnowledgePath("root"),
-    getGlobalKnowledgePath("knowledge"),
-    getGlobalKnowledgePath("patterns"),
-    getGlobalKnowledgePath("insights"),
-  ];
+  if (process.platform === "win32") {
+    const userProfile = process.env.USERPROFILE || os.homedir();
 
-  for (const dirPath of paths) {
-    await fs.ensureDir(dirPath);
+    // OneDrive: env vars set by the client
+    for (const envVar of ["OneDrive", "OneDriveConsumer", "OneDriveCommercial"]) {
+      const val = process.env[envVar];
+      if (val) {
+        add(val, path.basename(val));
+      }
+    }
+
+    // OneDrive: scan user profile for "OneDrive*" folders
+    try {
+      for (const entry of fs.readdirSync(userProfile)) {
+        if (entry.startsWith("OneDrive")) {
+          const fullPath = path.join(userProfile, entry);
+          if (fs.statSync(fullPath).isDirectory()) {
+            add(fullPath, entry);
+          }
+        }
+      }
+    } catch { /* ignore */ }
+
+    // iCloud Drive (Windows)
+    const iCloudWin = path.join(userProfile, "iCloudDrive");
+    add(iCloudWin, "iCloud Drive");
+
+    // Google Drive (Windows — Desktop app creates a virtual drive, but also syncs here)
+    const googleDrive = path.join(userProfile, "Google Drive");
+    add(googleDrive, "Google Drive");
+    const googleDriveStream = path.join(userProfile, "My Drive");
+    add(googleDriveStream, "Google Drive (My Drive)");
+
+    // Dropbox (Windows)
+    const dropbox = path.join(userProfile, "Dropbox");
+    add(dropbox, "Dropbox");
+  } else if (process.platform === "darwin") {
+    const home = os.homedir();
+    const cloudStorageDir = path.join(home, "Library", "CloudStorage");
+
+    // macOS CloudStorage: OneDrive-*, GoogleDrive-*, Dropbox-*, etc.
+    if (fs.existsSync(cloudStorageDir)) {
+      try {
+        for (const entry of fs.readdirSync(cloudStorageDir)) {
+          const fullPath = path.join(cloudStorageDir, entry);
+          if (fs.statSync(fullPath).isDirectory()) {
+            // Friendly label: "OneDrive-Personal" → "OneDrive - Personal"
+            const label = entry.replace(/-/g, " - ").replace(/  /g, " ");
+            add(fullPath, label);
+          }
+        }
+      } catch { /* ignore */ }
+    }
+
+    // iCloud Drive (macOS)
+    const iCloudMac = path.join(
+      home,
+      "Library",
+      "Mobile Documents",
+      "com~apple~CloudDocs",
+    );
+    add(iCloudMac, "iCloud Drive");
+
+    // Legacy ~/OneDrive (standalone or symlink)
+    const legacyOneDrive = path.join(home, "OneDrive");
+    add(legacyOneDrive, "OneDrive");
+
+    // Dropbox (macOS — sometimes ~/Dropbox)
+    const dropboxMac = path.join(home, "Dropbox");
+    add(dropboxMac, "Dropbox");
+
+    // Google Drive (macOS — sometimes ~/Google Drive)
+    const googleDriveMac = path.join(home, "Google Drive");
+    add(googleDriveMac, "Google Drive");
   }
+
+  return roots;
 }
 
 /**
- * Common names for Global Knowledge repositories
+ * Detect the cloud storage root that contains the AI-Memory folder.
+ * Returns the first root with AI-Memory/, or null if none found.
+ * For first-time setup with multiple options, use {@link promptForCloudStorageRoot}.
  */
-const GK_REPO_NAMES = [
-  "Alex-Global-Knowledge",
-  "My-Global-Knowledge",
-  "Global-Knowledge",
-  "alex-global-knowledge",
-  "my-global-knowledge",
-  "global-knowledge",
-];
+export function detectCloudStorageWithAIMemory(): string | null {
+  const roots = getAllCloudStorageRoots();
+  for (const root of roots) {
+    const aiMemPath = path.join(root.path, AI_MEMORY_PATHS.folderName);
+    if (fs.existsSync(aiMemPath)) {
+      return root.path;
+    }
+  }
+  return null;
+}
 
 /**
- * Detect an existing Global Knowledge repository.
- * Returns the path if found, null otherwise.
- *
- * Priority:
- * 1. User-configured path via `alex.globalKnowledge.repoPath` setting
- * 2. Workspace folder that IS a GK repo (multi-root workspace support)
- * 3. Walk up directory tree (max 3 levels) looking for GK repo
- *    - Handles nested projects like C:\Dev\Sandbox\project when GK is at C:\Dev\Alex-Global-Knowledge
+ * Prompt the user to pick a cloud storage root for AI-Memory.
+ * Called during first-time setup when multiple cloud services are available.
+ * Returns the chosen path, or null if the user cancelled.
  */
-export async function detectGlobalKnowledgeRepo(): Promise<string | null> {
-  // First check user-configured path
+export async function promptForCloudStorageRoot(): Promise<string | null> {
+  const roots = getAllCloudStorageRoots();
+
+  if (roots.length === 0) {
+    return null;
+  }
+
+  if (roots.length === 1) {
+    return roots[0].path;
+  }
+
+  // Multiple cloud services — ask the user
+  const items = roots.map((r) => ({
+    label: r.label,
+    description: r.path,
+    path: r.path,
+  }));
+
+  // Add local-only option
+  items.push({
+    label: "Local only (no cloud sync)",
+    description: path.join(os.homedir(), AI_MEMORY_PATHS.localFallback),
+    path: path.join(os.homedir(), AI_MEMORY_PATHS.localFallback),
+  });
+
+  const picked = await vscode.window.showQuickPick(items, {
+    title: "Where should AI-Memory be stored?",
+    placeHolder: "Choose a cloud storage location for cross-device sync",
+  });
+
+  return picked?.path ?? null;
+}
+
+/**
+ * Legacy alias — returns the cloud root containing AI-Memory, or first available.
+ */
+export function detectOneDrivePath(): string | null {
+  // First check for existing AI-Memory in any cloud storage
+  const existing = detectCloudStorageWithAIMemory();
+  if (existing) {
+    return existing;
+  }
+
+  // Fall back to first available cloud storage root
+  const roots = getAllCloudStorageRoots();
+  return roots.length > 0 ? roots[0].path : null;
+}
+
+/** Cached AI-Memory root path (resolved once per session) */
+let _aiMemoryRoot: string | null = null;
+
+/**
+ * Explicitly set the AI-Memory root path (e.g., after user picks a cloud location).
+ * Also persists the choice to the `alex.globalKnowledge.repoPath` setting.
+ */
+export async function setAIMemoryRoot(aiMemoryFolderPath: string): Promise<void> {
+  _aiMemoryRoot = aiMemoryFolderPath;
+  // Persist so the user doesn't get asked again
+  await vscode.workspace
+    .getConfiguration("alex.globalKnowledge")
+    .update("repoPath", aiMemoryFolderPath, vscode.ConfigurationTarget.Global);
+}
+
+/**
+ * Resolve the AI-Memory root folder path (synchronous, no user prompts).
+ * Priority: user-configured repoPath > existing AI-Memory in cloud > first cloud root > local fallback
+ */
+export function resolveAIMemoryRoot(): string {
+  if (_aiMemoryRoot) {
+    return _aiMemoryRoot;
+  }
+
+  // Check user-configured path first
   const configuredPath = vscode.workspace
     .getConfiguration("alex.globalKnowledge")
     .get<string>("repoPath");
   if (configuredPath && configuredPath.trim() !== "") {
-    const indexPath = path.join(configuredPath, "index.json");
-    if (await fs.pathExists(indexPath)) {
-      return configuredPath;
+    if (fs.existsSync(configuredPath)) {
+      _aiMemoryRoot = configuredPath;
+      return _aiMemoryRoot;
     }
-    // If configured path doesn't exist or isn't a valid GK repo, log warning but continue
     console.warn(
-      `Configured GK repo path ${configuredPath} is not a valid Global Knowledge repository`,
+      `Configured AI-Memory path ${configuredPath} does not exist, falling back to auto-detection`,
     );
   }
 
-  const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (!workspaceFolders || workspaceFolders.length === 0) {
-    return null;
+  // OneDrive detection
+  const oneDriveRoot = detectOneDrivePath();
+  if (oneDriveRoot) {
+    _aiMemoryRoot = path.join(oneDriveRoot, AI_MEMORY_PATHS.folderName);
+    return _aiMemoryRoot;
   }
 
-  // Priority 2: Check if any workspace folder IS a GK repo (multi-root workspace)
-  for (const folder of workspaceFolders) {
-    const folderPath = folder.uri.fsPath;
-    const folderName = path.basename(folderPath);
+  // Local fallback
+  _aiMemoryRoot = path.join(os.homedir(), AI_MEMORY_PATHS.localFallback);
+  return _aiMemoryRoot;
+}
 
-    // Quick check by name first
-    if (GK_REPO_NAMES.includes(folderName)) {
-      const indexPath = path.join(folderPath, "index.json");
-      if (await fs.pathExists(indexPath)) {
-        return folderPath;
-      }
-    }
+/**
+ * Get the AI-Memory root path (alias for resolveAIMemoryRoot).
+ */
+export function getAlexGlobalPath(): string {
+  return resolveAIMemoryRoot();
+}
 
-    // Also check by structure (index.json + patterns + insights)
-    const indexPath = path.join(folderPath, "index.json");
-    const patternsPath = path.join(folderPath, "patterns");
-    const insightsPath = path.join(folderPath, "insights");
+/** Subpath keys for AI-Memory directory structure */
+type AIMemorySubpath = "root" | "knowledge" | "patterns" | "insights" | "index" | "projectRegistry" | "userProfile";
 
-    if (
-      (await fs.pathExists(indexPath)) &&
-      (await fs.pathExists(patternsPath)) &&
-      (await fs.pathExists(insightsPath))
-    ) {
-      return folderPath;
-    }
+/**
+ * Get the full path to an AI-Memory subdirectory or file.
+ */
+export function getGlobalKnowledgePath(subpath: AIMemorySubpath): string {
+  const root = resolveAIMemoryRoot();
+  switch (subpath) {
+    case "root":
+      return root;
+    case "knowledge":
+      return path.join(root, AI_MEMORY_PATHS.knowledge);
+    case "patterns":
+      return path.join(root, AI_MEMORY_PATHS.patterns);
+    case "insights":
+      return path.join(root, AI_MEMORY_PATHS.insights);
+    case "index":
+      return path.join(root, AI_MEMORY_PATHS.index);
+    case "projectRegistry":
+      return path.join(root, AI_MEMORY_PATHS.projectRegistry);
+    case "userProfile":
+      return path.join(root, AI_MEMORY_PATHS.userProfile);
+    default:
+      return root;
+  }
+}
+
+/**
+ * Ensure all AI-Memory directories exist
+ */
+export async function ensureGlobalKnowledgeDirectories(): Promise<void> {
+  const root = resolveAIMemoryRoot();
+  await fs.ensureDir(root);
+  await fs.ensureDir(path.join(root, AI_MEMORY_PATHS.insights));
+  await fs.ensureDir(path.join(root, AI_MEMORY_PATHS.knowledge));
+  await fs.ensureDir(path.join(root, AI_MEMORY_PATHS.patterns));
+}
+
+/**
+ * Detect whether the AI-Memory folder exists and is valid.
+ * Returns the path if found, null otherwise.
+ */
+export async function detectGlobalKnowledgeRepo(): Promise<string | null> {
+  const root = resolveAIMemoryRoot();
+
+  // Check if the folder exists with at least an insights/ subdirectory
+  const insightsPath = path.join(root, AI_MEMORY_PATHS.insights);
+  if (await fs.pathExists(insightsPath)) {
+    return root;
   }
 
-  // Priority 3: Walk up directory tree looking for GK repo (max 3 levels)
-  // Handles nested projects like C:\Dev\Sandbox\project when GK is at C:\Dev\Alex-Global-Knowledge
-  const workspaceRoot = workspaceFolders[0].uri.fsPath;
-  let currentDir = workspaceRoot;
-  const MAX_TREE_DEPTH = 3;
-
-  for (let depth = 0; depth < MAX_TREE_DEPTH; depth++) {
-    const parentDir = path.dirname(currentDir);
-
-    // Stop if we've reached the root
-    if (parentDir === currentDir) {
-      break;
-    }
-
-    // Check for common GK repo names at this level
-    for (const repoName of GK_REPO_NAMES) {
-      const gkPath = path.join(parentDir, repoName);
-      const indexPath = path.join(gkPath, "index.json");
-
-      if (await fs.pathExists(indexPath)) {
-        return gkPath;
-      }
-    }
-
-    // Also check for any folder with GK structure at this level
-    try {
-      const siblings = await fs.readdir(parentDir);
-      for (const sibling of siblings) {
-        const siblingPath = path.join(parentDir, sibling);
-        const stat = await fs.stat(siblingPath);
-        if (stat.isDirectory()) {
-          const indexPath = path.join(siblingPath, "index.json");
-          const patternsPath = path.join(siblingPath, "patterns");
-          const insightsPath = path.join(siblingPath, "insights");
-
-          // If it has index.json + patterns/ + insights/, it's likely a GK repo
-          if (
-            (await fs.pathExists(indexPath)) &&
-            (await fs.pathExists(patternsPath)) &&
-            (await fs.pathExists(insightsPath))
-          ) {
-            return siblingPath;
-          }
-        }
-      }
-    } catch {
-      // Directory not readable, continue walking up
-    }
-
-    currentDir = parentDir;
+  // Also accept if index.json exists (pre-migration structure)
+  const indexPath = path.join(root, AI_MEMORY_PATHS.index);
+  if (await fs.pathExists(indexPath)) {
+    return root;
   }
 
   return null;
@@ -834,32 +523,17 @@ export async function updateProjectRegistry(
 }
 
 /**
- * Track whether we're operating in remote-only mode (no local GK repo)
- */
-let isRemoteOnlyMode = false;
-
-/**
- * Check if we're in remote-only mode (no local GK, reading from GitHub)
- */
-export function isRemoteOnly(): boolean {
-  return isRemoteOnlyMode;
-}
-
-/**
- * Initialize the global knowledge index, with fallback to remote GitHub
+ * Initialize the global knowledge index from local repo or ~/.alex fallback
  *
  * Priority:
  * 1. Local GK repo (if exists)
- * 2. Remote GitHub repo (if configured)
- * 3. Create empty local index (fallback)
+ * 2. Create empty local index in ~/.alex (fallback)
  */
 export async function ensureGlobalKnowledgeIndex(): Promise<IGlobalKnowledgeIndex> {
   // First, check for local GK repo
   const gkRepo = await detectGlobalKnowledgeRepo();
 
   if (gkRepo) {
-    // Local GK repo exists - use it
-    isRemoteOnlyMode = false;
     const indexPath = path.join(gkRepo, "index.json");
 
     try {
@@ -867,10 +541,10 @@ export async function ensureGlobalKnowledgeIndex(): Promise<IGlobalKnowledgeInde
         const content = await fs.readFile(indexPath, "utf-8");
         if (content.trim()) {
           const index = JSON.parse(content) as IGlobalKnowledgeIndex;
-          // Normalize file paths to use repo path
+          // Resolve portable relative paths to absolute for the current platform
           for (const entry of index.entries) {
             if (!path.isAbsolute(entry.filePath)) {
-              entry.filePath = path.join(gkRepo, entry.filePath);
+              entry.filePath = resolvePortablePath(entry.filePath);
             }
           }
           return index;
@@ -881,22 +555,7 @@ export async function ensureGlobalKnowledgeIndex(): Promise<IGlobalKnowledgeInde
     }
   }
 
-  // No local GK repo - try remote GitHub
-  const config = getRemoteRepoConfig();
-  const remoteIndex = await getRemoteIndex();
-  if (remoteIndex) {
-    isRemoteOnlyMode = true;
-    return remoteIndex;
-  }
-
-  // If remote was configured but failed, show error feedback
-  if (config && remoteAccessStatus && !remoteAccessStatus.lastSuccess) {
-    // Show error asynchronously (don't block)
-    showRemoteAccessError().catch(() => {});
-  }
-
   // Fallback: create local empty index in ~/.alex
-  isRemoteOnlyMode = false;
   const indexPath = getGlobalKnowledgePath("index");
   await ensureGlobalKnowledgeDirectories();
 
@@ -991,8 +650,56 @@ export async function registerCurrentProject(): Promise<
  * Generate a unique ID for a knowledge entry
  */
 
+// ============================================================================
+// USER PROFILE — AI-Memory backed
+// ============================================================================
+
+/**
+ * Load user profile from AI-Memory (cross-platform, cross-workspace).
+ * Falls back to workspace `.github/config/user-profile.json` for migration.
+ */
+export async function loadUserProfileFromAIMemory(): Promise<Record<string, unknown> | null> {
+  const aiMemoryProfilePath = getGlobalKnowledgePath("userProfile");
+
+  try {
+    if (await fs.pathExists(aiMemoryProfilePath)) {
+      return await fs.readJson(aiMemoryProfilePath);
+    }
+  } catch (err) {
+    console.warn("[Alex] Failed to read AI-Memory user profile:", err);
+  }
+
+  // Fallback: check workspace .github/config/user-profile.json (legacy location)
+  const workspaceFolders = vscode.workspace.workspaceFolders;
+  if (workspaceFolders) {
+    const legacyPath = path.join(workspaceFolders[0].uri.fsPath, ".github", "config", "user-profile.json");
+    try {
+      if (await fs.pathExists(legacyPath)) {
+        const profile = await fs.readJson(legacyPath);
+        // Auto-migrate: copy to AI-Memory for future reads
+        await fs.ensureDir(path.dirname(aiMemoryProfilePath));
+        await fs.writeJson(aiMemoryProfilePath, profile, { spaces: 2 });
+        console.log("[Alex] Migrated user profile from workspace to AI-Memory");
+        return profile;
+      }
+    } catch {
+      // Ignore legacy read failures
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Save user profile to AI-Memory.
+ */
+export async function saveUserProfileToAIMemory(profile: Record<string, unknown>): Promise<void> {
+  const profilePath = getGlobalKnowledgePath("userProfile");
+  await fs.ensureDir(path.dirname(profilePath));
+  await fs.writeJson(profilePath, profile, { spaces: 2 });
+}
+
 // Re-export from extracted modules for backward compatibility
-export { scaffoldGlobalKnowledgeRepo } from "./globalKnowledgeContent";
 export {
   createGlobalInsight,
   searchGlobalKnowledge,

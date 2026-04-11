@@ -22,6 +22,16 @@ $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $extensionDir = Split-Path -Parent $scriptDir
 
+# Resolve VS Code CLI — 'code' alone fails on Windows; need 'code.cmd'
+$codeCli = Get-Command "code.cmd" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
+if (-not $codeCli) {
+    $codeCli = Get-Command "code" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
+}
+if (-not $codeCli) {
+    Write-Host "[ERROR] VS Code CLI not found. Ensure 'code' is in PATH." -ForegroundColor Red
+    exit 1
+}
+
 Push-Location $extensionDir
 try {
     Write-Host "`n----------------------------------------" -ForegroundColor Cyan
@@ -90,7 +100,7 @@ try {
 
     # Check currently installed version
     Write-Host "`n Checking installed extensions..." -ForegroundColor Yellow
-    $installedExtensions = & code --list-extensions --show-versions 2>&1
+    $installedExtensions = & $codeCli --list-extensions --show-versions 2>&1
     $installedVersion = $null
     
     foreach ($ext in $installedExtensions) {
@@ -123,7 +133,7 @@ try {
 
     # Use Start-Process to capture output properly
     $pinfo = New-Object System.Diagnostics.ProcessStartInfo
-    $pinfo.FileName = "code"
+    $pinfo.FileName = $codeCli
     $pinfo.Arguments = $installArgs -join " "
     $pinfo.RedirectStandardOutput = $true
     $pinfo.RedirectStandardError = $true
@@ -163,7 +173,7 @@ try {
     }
     else {
         # Fallback: Try CLI (may not work if VS Code is running)
-        $verifyExtensions = & code --list-extensions --show-versions 2>&1
+        $verifyExtensions = & $codeCli --list-extensions --show-versions 2>&1
         $verified = $false
         
         foreach ($ext in $verifyExtensions) {

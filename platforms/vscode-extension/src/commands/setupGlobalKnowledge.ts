@@ -1,8 +1,15 @@
 import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as os from "os";
 import { AI_MEMORY_PATHS, AI_MEMORY_FILES } from "../shared/constants";
+import {
+  detectOneDrivePath,
+  resolveAIMemoryRoot,
+  getAllCloudStorageRoots,
+  detectCloudStorageWithAIMemory,
+  promptForCloudStorageRoot,
+  setAIMemoryRoot,
+} from "../chat/globalKnowledge";
 
 // ============================================================================
 // AI-Memory Path Resolution
@@ -17,90 +24,13 @@ export interface AIMemoryLocation {
 }
 
 /**
- * Detect the OneDrive sync root on the current platform.
- * Returns null if OneDrive is not available.
- */
-function detectOneDrivePath(): string | null {
-  if (process.platform === "win32") {
-    // Windows: check standard env vars set by the OneDrive client
-    const candidates = [
-      process.env.OneDrive,
-      process.env.OneDriveConsumer,
-      process.env.OneDriveCommercial,
-    ].filter(Boolean) as string[];
-
-    for (const candidate of candidates) {
-      if (fs.existsSync(candidate)) {
-        return candidate;
-      }
-    }
-
-    // Fallback: check common Windows paths
-    const userProfile = process.env.USERPROFILE || os.homedir();
-    const windowsFallbacks = [
-      path.join(userProfile, "OneDrive"),
-      path.join(userProfile, "OneDrive - Personal"),
-    ];
-    for (const fb of windowsFallbacks) {
-      if (fs.existsSync(fb)) {
-        return fb;
-      }
-    }
-  } else if (process.platform === "darwin") {
-    // macOS: OneDrive syncs into ~/Library/CloudStorage/OneDrive-*
-    const cloudStorageDir = path.join(
-      os.homedir(),
-      "Library",
-      "CloudStorage",
-    );
-    if (fs.existsSync(cloudStorageDir)) {
-      try {
-        const entries = fs.readdirSync(cloudStorageDir);
-        const oneDriveEntry = entries.find((e) =>
-          e.startsWith("OneDrive"),
-        );
-        if (oneDriveEntry) {
-          return path.join(cloudStorageDir, oneDriveEntry);
-        }
-      } catch {
-        // Ignore read errors
-      }
-    }
-
-    // macOS fallback: ~/OneDrive (legacy symlink or standalone)
-    const legacyMac = path.join(os.homedir(), "OneDrive");
-    if (fs.existsSync(legacyMac)) {
-      return legacyMac;
-    }
-  }
-
-  return null;
-}
-
-/**
- * Resolve the AI-Memory folder, preferring OneDrive with local fallback.
- *
- * Priority:
- *  1. OneDrive/<folderName>/ — if OneDrive is detected on disk
- *  2. ~/.alex/<folderName>/ — local fallback (no cloud sync)
- *
- * Does NOT create the folder; call {@link scaffoldAIMemory} for that.
+ * Resolve the AI-Memory folder with OneDrive detection metadata.
+ * Uses the shared resolveAIMemoryRoot() for path, adds isOneDrive flag.
  */
 export function resolveAIMemoryLocation(): AIMemoryLocation {
-  const oneDriveRoot = detectOneDrivePath();
-
-  if (oneDriveRoot) {
-    return {
-      folderPath: path.join(oneDriveRoot, AI_MEMORY_PATHS.folderName),
-      isOneDrive: true,
-    };
-  }
-
-  // Local-only fallback
-  return {
-    folderPath: path.join(os.homedir(), AI_MEMORY_PATHS.localFallback),
-    isOneDrive: false,
-  };
+  const folderPath = resolveAIMemoryRoot();
+  const isOneDrive = detectOneDrivePath() !== null;
+  return { folderPath, isOneDrive };
 }
 
 /**
@@ -111,8 +41,12 @@ export async function isAIMemorySetup(): Promise<boolean> {
   if (!(await fs.pathExists(folderPath))) {
     return false;
   }
-  // At minimum, global-knowledge.md must exist
-  return fs.pathExists(path.join(folderPath, AI_MEMORY_PATHS.globalKnowledge));
+  // Accept if insights/ or global-knowledge.md or index.json exists
+  return (
+    (await fs.pathExists(path.join(folderPath, AI_MEMORY_PATHS.insights))) ||
+    (await fs.pathExists(path.join(folderPath, AI_MEMORY_PATHS.globalKnowledge))) ||
+    (await fs.pathExists(path.join(folderPath, AI_MEMORY_PATHS.index)))
+  );
 }
 
 // Keep legacy export name for backward compatibility during migration
@@ -195,17 +129,33 @@ export async function ensureGlobalKnowledgeSetup(): Promise<boolean> {
     return true;
   }
 
-  const location = resolveAIMemoryLocation();
-  const locationLabel = location.isOneDrive
-    ? `OneDrive (${location.folderPath})`
-    : `local disk (${location.folderPath})`;
+  // AI-Memory doesn't exist yet — check for multiple cloud options
+  const cloudRoots = getAllCloudStorageRoots();
+  let targetFolder: string;
 
-  const oneDriveNote = location.isOneDrive
-    ? "Files will sync across devices via OneDrive."
-    : "OneDrive not detected — files will be stored locally only. Install OneDrive to enable cross-device sync.";
+  if (cloudRoots.length > 1 && !detectCloudStorageWithAIMemory()) {
+    // Multiple cloud services, none has AI-Memory yet — ask user
+    const chosenRoot = await promptForCloudStorageRoot();
+    if (!chosenRoot) {
+      return false; // User cancelled
+    }
+    targetFolder = path.join(chosenRoot, AI_MEMORY_PATHS.folderName);
+    await setAIMemoryRoot(targetFolder);
+  } else {
+    targetFolder = resolveAIMemoryRoot();
+  }
+
+  const isCloud = cloudRoots.some((r) => targetFolder.startsWith(r.path));
+  const locationLabel = isCloud
+    ? `cloud storage (${targetFolder})`
+    : `local disk (${targetFolder})`;
+
+  const syncNote = isCloud
+    ? "Files will sync across devices via cloud storage."
+    : "No cloud storage detected — files will be stored locally only.";
 
   const choice = await vscode.window.showInformationMessage(
-    `AI-Memory folder not found.\n\nCreate it in ${locationLabel}?\n\n${oneDriveNote}`,
+    `AI-Memory folder not found.\n\nCreate it in ${locationLabel}?\n\n${syncNote}`,
     { modal: false },
     "Create AI-Memory",
     "Skip",
@@ -213,9 +163,10 @@ export async function ensureGlobalKnowledgeSetup(): Promise<boolean> {
 
   if (choice === "Create AI-Memory") {
     try {
-      await scaffoldAIMemory(location.folderPath);
+      await scaffoldAIMemory(targetFolder);
+      await setAIMemoryRoot(targetFolder);
       vscode.window.showInformationMessage(
-        `AI-Memory created at ${location.folderPath}`,
+        `AI-Memory created at ${targetFolder}`,
       );
       return true;
     } catch (error) {

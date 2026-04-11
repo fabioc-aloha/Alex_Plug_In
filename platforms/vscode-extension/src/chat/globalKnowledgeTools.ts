@@ -14,7 +14,6 @@ import {
     ensureGlobalKnowledgeDirectories,
     ensureProjectRegistry,
     getAlexGlobalPath,
-    getRemoteRepoConfig,
 } from './globalKnowledge';
 import {
     searchGlobalKnowledge,
@@ -279,12 +278,6 @@ export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Recor
         const summary = await getGlobalKnowledgeSummary();
         const registry = await ensureProjectRegistry();
 
-        // Remote GK status indicator
-        const remoteConfigured = getRemoteRepoConfig() !== null;
-        const syncStatusStr = remoteConfigured 
-            ? `| GitHub Access | ✅ Remote configured |\n`
-            : `| GitHub Access | ⚪ Local only |\n`;
-
         let result = `## 🧠 Global Knowledge Base Status
 
 ### Overview
@@ -293,7 +286,7 @@ export class GlobalKnowledgeStatusTool implements vscode.LanguageModelTool<Recor
 | Global Patterns | ${summary.totalPatterns} |
 | Global Insights | ${summary.totalInsights} |
 | Known Projects | ${registry.projects.length} |
-${syncStatusStr}
+
 ### Knowledge by Category
 `;
         

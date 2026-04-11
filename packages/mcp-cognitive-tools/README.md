@@ -181,7 +181,7 @@ Architecture documents are exposed as browseable MCP resources. Attach them to c
 
 - Node.js 18+
 - Alex cognitive architecture installed in target workspace (for workspace-specific tools)
-- `~/.alex/global-knowledge/` directory for global knowledge features
+- AI-Memory folder for global knowledge features (auto-detected in OneDrive/iCloud/Dropbox, or `~/.alex/AI-Memory/` fallback)
 
 ## Development
 

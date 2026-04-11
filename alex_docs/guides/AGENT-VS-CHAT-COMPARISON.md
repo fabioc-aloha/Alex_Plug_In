@@ -278,7 +278,7 @@ Both modes adapt to your current model, but differently:
 ## Configuration
 
 ### @alex Chat Mode Settings
-Located in [User Profile](../../.github/config/user-profile.json):
+Located in `AI-Memory/user-profile.json` (cloud-synced):
 ```json
 {
   "name": "Fabio",

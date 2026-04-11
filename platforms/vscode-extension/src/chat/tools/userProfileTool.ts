@@ -1,8 +1,12 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
-import * as workspaceFs from '../../shared/workspaceFs';
 import { validateUserProfile, safeJsonParse, createConfigBackup } from '../../shared/sanitize';
 import { IUserProfileParams, IUserProfile } from './types';
+import {
+    loadUserProfileFromAIMemory,
+    saveUserProfileToAIMemory,
+    getGlobalKnowledgePath,
+} from '../globalKnowledge';
+import * as fsExtra from 'fs-extra';
 
 /**
  * User Profile Tool - Manages user preferences and personalization
@@ -33,28 +37,20 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
         // Update welcome view avatar — user profile access = learning state
         vscode.commands.executeCommand('alex.setCognitiveState', 'learning');
 
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders) {
-            return new vscode.LanguageModelToolResult([
-                new vscode.LanguageModelTextPart('No workspace folder open. Cannot access user profile.')
-            ]);
-        }
-
-        const rootPath = workspaceFolders[0].uri.fsPath;
-        const jsonProfilePath = path.join(rootPath, '.github', 'config', 'user-profile.json');
-
+        const profilePath = getGlobalKnowledgePath("userProfile");
         const { action, field, value } = options.input;
 
         try {
             switch (action) {
                 case 'exists':
-                    const exists = await workspaceFs.pathExists(jsonProfilePath);
+                    const exists = await fsExtra.pathExists(profilePath);
                     return new vscode.LanguageModelToolResult([
-                        new vscode.LanguageModelTextPart(JSON.stringify({ exists, path: jsonProfilePath }))
+                        new vscode.LanguageModelTextPart(JSON.stringify({ exists, path: profilePath }))
                     ]);
 
                 case 'get':
-                    if (!await workspaceFs.pathExists(jsonProfilePath)) {
+                    const rawProfile = await loadUserProfileFromAIMemory();
+                    if (!rawProfile) {
                         return new vscode.LanguageModelToolResult([
                             new vscode.LanguageModelTextPart(JSON.stringify({
                                 exists: false,
@@ -69,13 +65,13 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                         ]);
                     }
                     
-                    // P0: Safe JSON parsing with error recovery
-                    const profileContent = await workspaceFs.readFile(jsonProfilePath);
+                    // P0: Safe JSON parsing with error recovery (re-serialize for validation)
+                    const profileContent = JSON.stringify(rawProfile);
                     const parseResult = safeJsonParse<IUserProfile>(profileContent);
                     
                     if (!parseResult.success) {
                         // Create backup before reporting error
-                        await createConfigBackup(jsonProfilePath);
+                        await createConfigBackup(profilePath);
                         return new vscode.LanguageModelToolResult([
                             new vscode.LanguageModelTextPart(JSON.stringify({
                                 error: true,
@@ -117,14 +113,8 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                         ]);
                     }
 
-                    // Ensure config directory exists
-                    await workspaceFs.ensureDir(path.join(rootPath, '.github', 'config'));
-
                     // Read existing profile or create new one
-                    let existingProfile: IUserProfile = {};
-                    if (await workspaceFs.pathExists(jsonProfilePath)) {
-                        existingProfile = await workspaceFs.readJson(jsonProfilePath) as IUserProfile;
-                    }
+                    let existingProfile: IUserProfile = (await loadUserProfileFromAIMemory() as IUserProfile) ?? {};
 
                     // Handle array fields
                     if (['primaryTechnologies', 'learningGoals', 'expertiseAreas'].includes(field)) {
@@ -143,8 +133,8 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
                     // Update timestamp
                     existingProfile.lastUpdated = new Date().toISOString();
 
-                    // Save JSON profile
-                    await workspaceFs.writeJson(jsonProfilePath, existingProfile);
+                    // Save to AI-Memory
+                    await saveUserProfileToAIMemory(existingProfile);
 
                     return new vscode.LanguageModelToolResult([
                         new vscode.LanguageModelTextPart(JSON.stringify({
@@ -169,33 +159,18 @@ export class UserProfileTool implements vscode.LanguageModelTool<IUserProfilePar
 }
 
 /**
- * Helper function to get user profile from workspace
- * Returns actual profile if exists, otherwise returns template defaults in-memory
- * (without creating a file - profile is created through conversation)
+ * Helper function to get user profile from AI-Memory.
+ * Returns actual profile if exists, otherwise returns null.
+ * Profile is created through conversation (not auto-scaffolded).
  */
 export async function getUserProfile(): Promise<IUserProfile | null> {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
-    if (!workspaceFolders) {
-        return null;
-    }
-
-    const rootPath = workspaceFolders[0].uri.fsPath;
-    const jsonProfilePath = path.join(rootPath, '.github', 'config', 'user-profile.json');
-
     try {
-        // Return actual profile if it exists
-        if (await workspaceFs.pathExists(jsonProfilePath)) {
-            return await workspaceFs.readJson<IUserProfile>(jsonProfilePath);
-        }
-        
-        // Return template defaults in-memory (no file created)
-        // Profile file is created when user provides info through conversation
-        const templatePath = path.join(rootPath, '.github', 'config', 'user-profile.template.json');
-        if (await workspaceFs.pathExists(templatePath)) {
-            return await workspaceFs.readJson<IUserProfile>(templatePath);
+        const profile = await loadUserProfileFromAIMemory();
+        if (profile) {
+            return profile as IUserProfile;
         }
     } catch (error) {
-        console.error('Error reading user profile:', error);
+        console.error('Error reading user profile from AI-Memory:', error);
     }
 
     return null;

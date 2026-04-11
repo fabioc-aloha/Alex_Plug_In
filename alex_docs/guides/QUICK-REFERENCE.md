@@ -100,13 +100,13 @@ Available via prompts (agent mode), scripts, or extension Command Palette:
 
 **Table 6:** *Memory File Types and Locations*
 
-| Type           | Location                             | Pattern             | Purpose                |
-| -------------- | ------------------------------------ | ------------------- | ---------------------- |
-| Procedural     | `.github/instructions/`              | `*.instructions.md` | How-to processes       |
-| Episodic       | `.github/prompts/`                   | `*.prompt.md`       | Complex workflows      |
-| Skills         | `.github/skills/`                    | `*/SKILL.md`        | Domain expertise       |
-| Global Pattern | `~/.alex/global-knowledge/patterns/` | `GK-*.md`           | Cross-project patterns |
-| Global Insight | `~/.alex/global-knowledge/insights/` | `GI-*.md`           | Timestamped learnings  |
+| Type           | Location                | Pattern             | Purpose                |
+| -------------- | ----------------------- | ------------------- | ---------------------- |
+| Procedural     | `.github/instructions/` | `*.instructions.md` | How-to processes       |
+| Episodic       | `.github/prompts/`      | `*.prompt.md`       | Complex workflows      |
+| Skills         | `.github/skills/`       | `*/SKILL.md`        | Domain expertise       |
+| Global Pattern | `AI-Memory/patterns/`   | `GK-*.md`           | Cross-project patterns |
+| Global Insight | `AI-Memory/insights/`   | `GI-*.md`           | Timestamped learnings  |
 
 ---
 
@@ -157,13 +157,12 @@ Available via prompts (agent mode), scripts, or extension Command Palette:
 ├── episodic/                  # Session records
 └── config/                    # Configuration files
 
-~/.alex/
-├── global-knowledge/
-│   ├── index.json             # Master index
-│   ├── patterns/              # GK-* files
-│   └── insights/              # GI-* files
-├── project-registry.json
-└── sync-metadata.json
+AI-Memory/                     # Cloud-synced (OneDrive/iCloud/Dropbox)
+├── user-profile.json          # Cross-workspace user profile
+├── global-knowledge.md        # Accumulated knowledge
+├── patterns/                  # GK-* files
+├── insights/                  # GI-* files
+└── index.json                 # Searchable index
 ```
 
 ---

@@ -117,66 +117,46 @@ The extension:
 
 ---
 
-### Step 8: Global Knowledge Setup
+### Step 8: AI-Memory Setup
 
-Alex has a **two-tier knowledge system**:
+Alex uses **AI-Memory** for cross-workspace knowledge:
 
-| Tier            | Location                                        | Purpose                                         |
-| --------------- | ----------------------------------------------- | ----------------------------------------------- |
-| **Local**       | `~/.alex/global-knowledge/`                     | Auto-created fallback, always available         |
-| **GitHub Repo** | Sibling folder (e.g., `Alex-Global-Knowledge/`) | Optional — version control + cross-machine sync |
+| Tier               | Location                               | Purpose                                   |
+| ------------------ | -------------------------------------- | ----------------------------------------- |
+| **Cloud-synced**   | `AI-Memory/` (OneDrive/iCloud/Dropbox) | Auto-detected, syncs across machines      |
+| **Local fallback** | `~/.alex/AI-Memory/`                   | Created when no cloud storage is detected |
 
 #### Detection Logic
 
-The extension checks for a Global Knowledge repository as a sibling folder:
-- Looks for common names: `Alex-Global-Knowledge`, `My-Global-Knowledge`, etc.
-- Validates structure: `index.json` + `patterns/` + `insights/`
+The extension scans for AI-Memory in common cloud storage locations:
+- OneDrive (personal and commercial folders)
+- iCloud Drive
+- Dropbox
+- Falls back to `~/.alex/AI-Memory/` if no cloud storage is found
 
-#### If Found (sibling folder):
-- Logs the discovery
-- No further action needed
-
-#### If Not Found:
-Shows a prompt:
-> "📚 Global Knowledge Repository — Alex can store cross-project learnings in a GitHub repository. Would you like to create one?"
-
-| Option                | Action                                               |
-| --------------------- | ---------------------------------------------------- |
-| **Create Repository** | Scaffolds `Alex-Global-Knowledge/` as sibling folder |
-| **Skip for Now**      | Continues without GK repo setup                      |
-
-#### ⚠️ What Happens If User Skips?
-
-**Nothing breaks.** All knowledge features use graceful fallback:
-
-| Feature             | Behavior When Skipped                                  |
-| ------------------- | ------------------------------------------------------ |
-| `/knowledge` search | Creates `~/.alex/` on first use, returns empty results |
-| `/saveinsight`      | Auto-creates local folders + saves normally            |
-| `/knowledgestatus`  | Shows "0 patterns, 0 insights"                         |
-| Cloud sync          | Shows "Not configured"                                 |
-
-The local `~/.alex/global-knowledge/` system is always available — it's just not synced to GitHub.
-
-#### Repository Structure Created:
-
+#### AI-Memory Structure:
 ```
-Alex-Global-Knowledge/
-├── index.json                    # Master search index
-├── README.md                     # Repository documentation
-├── .gitignore                    # Excludes sync-metadata.json
-├── .github/
-│   └── copilot-instructions.md   # GK-specific instructions
+AI-Memory/
+├── user-profile.json             # Cross-workspace user profile
+├── global-knowledge.md           # Accumulated knowledge and patterns
+├── profile.md                    # Identity and preferences
+├── notes.md                      # Personal notes
+├── learning-goals.md             # Current learning objectives
 ├── patterns/                     # GK-* reusable solutions
-└── insights/                     # GI-* timestamped learnings
+├── insights/                     # GI-* timestamped learnings
+└── index.json                    # Searchable knowledge index
 ```
 
-#### Follow-up Steps (shown to user):
-```bash
-cd Alex-Global-Knowledge
-git init && git add -A && git commit -m "feat: initialize global knowledge"
-gh repo create Alex-Global-Knowledge --private --source=. --push
-```
+#### ⚠️ What Happens If Cloud Storage Is Unavailable?
+
+**Nothing breaks.** The local fallback is always available:
+
+| Feature             | Behavior                                              |
+| ------------------- | ----------------------------------------------------- |
+| `/knowledge` search | Uses local AI-Memory, returns empty if no entries yet |
+| `/saveinsight`      | Auto-creates local folders + saves normally           |
+| `/knowledgestatus`  | Shows "0 patterns, 0 insights"                        |
+| Cross-machine sync  | Unavailable until cloud storage detected              |
 
 ---
 
@@ -223,8 +203,7 @@ your-project/
 │   ├── episodic/                   # Session records
 │   ├── config/
 │   │   ├── alex-manifest.json      # Installation manifest
-│   │   ├── markdown-light.css      # Source CSS for preview
-│   │   └── user-profile.json       # Your preferences
+│   │   └── markdown-light.css      # Source CSS for preview
 │   ├── agents/                     # Agent definitions
 │   └── skills/                     # Domain expertise (150 skills)
 ├── .vscode/
@@ -232,49 +211,29 @@ your-project/
 └── (your project files)
 ```
 
-**User's home directory** (auto-created on first knowledge operation):
+**User's AI-Memory** (cloud-synced or local fallback):
 ```
-~/.alex/
-└── global-knowledge/
-    ├── index.json                  # Knowledge index
-    ├── patterns/                   # GK-* files
-    └── insights/                   # GI-* files
+AI-Memory/                          # OneDrive/iCloud/Dropbox or ~/.alex/AI-Memory/
+├── user-profile.json               # Cross-workspace profile
+├── global-knowledge.md             # Accumulated knowledge
+├── patterns/                       # GK-* files
+└── insights/                       # GI-* files
 ```
 
 ---
 
-## Sharing Global Knowledge
+## Cross-Workspace Knowledge Sharing
 
-Since the GitHub-based GK repo is a standard Git repository, sharing is handled entirely through GitHub's permission system:
+AI-Memory is stored in a cloud-synced folder, so knowledge automatically travels across machines and workspaces:
 
-| Access Level     | GitHub Setting               | Use Case                      |
-| ---------------- | ---------------------------- | ----------------------------- |
-| **Private**      | Private repo, you only       | Personal knowledge vault      |
-| **Team**         | Private repo + collaborators | Shared team learnings         |
-| **Organization** | Org-owned repo               | Enterprise knowledge base     |
-| **Public**       | Public repo                  | Open-source knowledge sharing |
+| Storage Provider | Auto-Detected | Cross-Machine Sync |
+| ---------------- | ------------- | ------------------ |
+| **OneDrive**     | Yes           | Automatic          |
+| **iCloud Drive** | Yes           | Automatic          |
+| **Dropbox**      | Yes           | Automatic          |
+| **Local only**   | Fallback      | Manual backup only |
 
-**To share your knowledge:**
-1. Push your `Alex-Global-Knowledge` repo to GitHub
-2. Adjust repository visibility (Settings → General → Danger Zone)
-3. Add collaborators (Settings → Collaborators) or transfer to an organization
-
-**Benefits of GitHub-based sharing:**
-- No custom authentication code
-- No token management
-- No sync servers to maintain
-- Standard fork/PR workflow for knowledge contributions
-- Full Git history of knowledge evolution
-
-**Team workflow example:**
-```
-Organization/Alex-Global-Knowledge  (shared)
-├── patterns/GK-team-conventions.md
-├── patterns/GK-api-standards.md
-└── insights/GI-postmortem-*.md
-```
-
-Each team member clones the shared repo as a sibling to their projects, and Alex automatically detects and uses it.
+**No setup required** — Alex detects your cloud storage automatically during initialization.
 
 ---
 
@@ -301,8 +260,9 @@ Each team member clones the shared repo as a sibling to their projects, and Alex
 - Reinstall the Alex extension from VS Code Marketplace
 
 ### Global Knowledge not detected
-- Ensure the GK repo is a sibling folder (same parent directory)
-- Check that `index.json`, `patterns/`, and `insights/` exist
+- Ensure AI-Memory folder exists in a supported cloud storage location
+- Check that the folder contains `global-knowledge.md` or `patterns/` + `insights/`
+- Falls back to `~/.alex/AI-Memory/` if no cloud storage is detected
 
 ---
 

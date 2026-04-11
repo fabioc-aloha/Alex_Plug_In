@@ -8,7 +8,7 @@
 
 ## User Profile (Key Items)
 
-Source: `.github/config/user-profile.json`
+Source: `AI-Memory/user-profile.json` (cloud-synced via OneDrive/iCloud/Google Drive/Dropbox)
 
 | Field             | Value                                                                                               |
 | ----------------- | --------------------------------------------------------------------------------------------------- |
@@ -24,7 +24,7 @@ Source: `.github/config/user-profile.json`
 | Model Preference  | claude-opus-4-5 default; 4.6 for heavy lifting (meditation, self-actualization, bootstrap learning) |
 | Explanation Style | visual-first                                                                                        |
 
-**What belongs in `/memories/`**: Only items from this profile that affect how Alex behaves across all workspaces (learning style, explanation style, writing rules). The full profile lives in `.github/config/user-profile.json` and is available per-repo.
+**Coordination rule**: AI-Memory/user-profile.json is the **source of truth** for identity and structured preferences. `/memories/` holds VS Code-specific workflow tips only. No duplication between the two systems. If `/memories/` contains name, role, formality, detailLevel, explanationStyle, learningStyle, or technologies — it conflicts and the /memories/ copy should be removed.
 
 ## Problem Statement
 

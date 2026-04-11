@@ -396,11 +396,9 @@ function classifyCognitiveLevel(
       : "";
 
   if (!hasModels) {
-    const reason = !copilotInstalled
-      ? "GitHub Copilot extension is not installed. Install it from the Extensions panel to unlock AI features."
-      : !copilotChatInstalled
-        ? "GitHub Copilot Chat extension is not installed. Install it to enable chat and agent mode."
-        : gitHubAccount.signedIn
+    const reason = !copilotChatInstalled
+      ? "GitHub Copilot Chat extension is not installed. Install it to enable chat and agent mode."
+      : gitHubAccount.signedIn
           ? `No language models detected${accountLabel}. Your account may not have an active Copilot subscription. Check your GitHub Copilot settings.${multiAccountHint}`
           : "No language models detected. Sign in to GitHub Copilot to activate AI capabilities.";
     return { level: 1, reason };
@@ -440,7 +438,8 @@ export async function detectCognitiveLevel(
   }
 
   // Detect capabilities
-  const copilotInstalled = !!vscode.extensions.getExtension("github.copilot");
+  // github.copilot is built into VS Code — always treat as installed
+  const copilotInstalled = true;
   const copilotChatInstalled = !!vscode.extensions.getExtension(
     "github.copilot-chat",
   );

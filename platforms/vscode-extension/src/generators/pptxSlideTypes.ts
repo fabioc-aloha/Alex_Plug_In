@@ -15,8 +15,6 @@ import {
 } from "./illustrationIcons";
 import {
   fileToBase64DataUri,
-  getTickerLogoUrl,
-  LogoServiceConfig,
 } from "../services/logoService";
 import {
   getIconifyUrl,
@@ -354,13 +352,12 @@ export function addImageSlide(pres: pptxgen, content: SlideContent): void {
 }
 
 /**
- * Add an illustration slide (icon, stock, SVG, image, or ticker logo)
+ * Add an illustration slide (icon, stock, SVG, or image)
  */
 export function addIllustrationSlide(
   pres: pptxgen,
   content: SlideContent,
   workspacePath?: string,
-  logoConfig?: LogoServiceConfig,
 ): void {
   const slide = pres.addSlide({ masterName: "ALEX_CONTENT" });
   const illustrationData = content.data as IllustrationSlideData;
@@ -461,15 +458,6 @@ export function addIllustrationSlide(
         if (fs.existsSync(imgPath)) {
           resolvedImageData = fileToBase64DataUri(imgPath) || undefined;
         }
-      }
-      break;
-
-    case "ticker":
-      // Company logo by stock ticker (API lookup)
-      const tickerUrl = getTickerLogoUrl(illustration.value, logoConfig);
-      if (tickerUrl) {
-        // Use URL directly - PptxGenJS can fetch from URL
-        imgOpts.path = tickerUrl;
       }
       break;
 

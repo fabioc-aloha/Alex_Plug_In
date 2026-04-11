@@ -9,6 +9,7 @@ import {
 import {
   RecommendedExtension,
   RECOMMENDED_EXTENSIONS,
+  UNINSTALLABLE_EXTENSIONS,
 } from "./setupEnvironment.extensions";
 import {
   ESSENTIAL_SETTINGS,
@@ -283,7 +284,7 @@ export async function setupEnvironment(): Promise<void> {
   const { missing: missingExts } = checkRecommendedExtensions();
   if (missingExts.length > 0) {
     const copilotMissing = missingExts.some(
-      (e) => e.id === "github.copilot" || e.id === "github.copilot-chat",
+      (e) => e.id === "github.copilot-chat",
     );
     const extNames = missingExts.map((e) => e.name).join(", ");
     const severity = copilotMissing ? "⚠️" : "💡";
@@ -413,7 +414,7 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
   // Phase 1: Check for missing Copilot extensions and offer install
   const { missing: missingExts } = checkRecommendedExtensions();
   const copilotMissing = missingExts.some(
-    (e) => e.id === "github.copilot" || e.id === "github.copilot-chat",
+    (e) => e.id === "github.copilot-chat",
   );
 
   if (copilotMissing) {
@@ -554,4 +555,408 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
   }
 
   return false;
+}
+
+// ============================================================================
+// OPTIMIZE SETTINGS — Chat-centric, cross-platform optimized settings
+// ============================================================================
+
+/** Optimized settings for chat-centric development (no inline completions). */
+const CHAT_CENTRIC_SETTINGS: Record<string, unknown> = {
+  // Chat-centric: no inline ghost text — all code via Chat/agents
+  "editor.inlineSuggest.enabled": false,
+  "github.copilot.editor.enableAutoCompletions": false,
+};
+
+/** Cross-platform compatible settings. */
+const CROSS_PLATFORM_SETTINGS: Record<string, unknown> = {
+  // Cross-platform Python: auto-discover .venv on both platforms
+  "python.defaultInterpreterPath": "python",
+  // Remove stale absolute paths
+  "markdown.styles": [],
+};
+
+/** Formatter conflict resolution settings. */
+const FORMATTER_SETTINGS: Record<string, unknown> = {
+  // Formatting pipeline: Prettier formats, ESLint lints
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
+  "eslint.format.enable": false,
+  "prettier.resolveGlobalModules": false,
+  // Language-specific formatters (no ambiguity)
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": { comments: "off", strings: "off", other: "off" },
+    "files.trimTrailingWhitespace": true,
+  },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[yaml]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[dockercompose]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[github-actions-workflow]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[python]": { "editor.defaultFormatter": "ms-python.python", "editor.formatOnSave": true },
+  // LaTeX safety: don't interfere with Markdown files
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.latex.rootFile.doNotPrompt": true,
+};
+
+interface OptimizePickItem extends vscode.QuickPickItem {
+  settingsGroup: string;
+  settings: Record<string, unknown>;
+  count: number;
+}
+
+/**
+ * Optimize VS Code settings for chat-centric, cross-platform development.
+ * Resolves formatter conflicts, disables inline completions, sets cross-platform paths.
+ */
+export async function optimizeSettings(): Promise<void> {
+  const groups: OptimizePickItem[] = [
+    {
+      label: "🎯 Chat-Centric Workflow",
+      description: `${Object.keys(CHAT_CENTRIC_SETTINGS).length} settings`,
+      detail: "Disable inline suggest — all code authoring via Chat/agents",
+      settingsGroup: "chat-centric",
+      settings: CHAT_CENTRIC_SETTINGS,
+      count: Object.keys(CHAT_CENTRIC_SETTINGS).length,
+      picked: true,
+    },
+    {
+      label: "⚖️ Formatter Conflict Resolution",
+      description: `${Object.keys(FORMATTER_SETTINGS).length} settings`,
+      detail: "Prettier formats, ESLint lints, YAML uses Red Hat — no double-formatting",
+      settingsGroup: "formatters",
+      settings: FORMATTER_SETTINGS,
+      count: Object.keys(FORMATTER_SETTINGS).length,
+      picked: true,
+    },
+    {
+      label: "🌐 Cross-Platform Compatibility",
+      description: `${Object.keys(CROSS_PLATFORM_SETTINGS).length} settings`,
+      detail: "Platform-safe paths for Python, markdown styles (Windows + macOS)",
+      settingsGroup: "cross-platform",
+      settings: CROSS_PLATFORM_SETTINGS,
+      count: Object.keys(CROSS_PLATFORM_SETTINGS).length,
+      picked: true,
+    },
+  ];
+
+  const selected = await vscode.window.showQuickPick(groups, {
+    canPickMany: true,
+    title: "⚙️ Optimize Settings",
+    placeHolder: "Select optimization groups to apply",
+  });
+
+  if (!selected || selected.length === 0) {
+    return;
+  }
+
+  const settingsToApply: Record<string, unknown> = {};
+  for (const item of selected) {
+    Object.assign(settingsToApply, item.settings);
+  }
+
+  const count = Object.keys(settingsToApply).length;
+  const names = selected.map((s) => s.label.replace(/^[^ ]+ /, "")).join(", ");
+
+  await confirmAndApply(settingsToApply, names);
+}
+
+// ============================================================================
+// MANAGE EXTENSIONS — Install recommended, uninstall unused
+// ============================================================================
+
+/**
+ * Show a multi-action picker for installing recommended and uninstalling unused extensions.
+ */
+export async function manageExtensions(): Promise<void> {
+  const platform = process.platform === "darwin" ? "macos" : "windows";
+
+  // Filter by platform
+  const platformExtensions = RECOMMENDED_EXTENSIONS.filter(
+    (ext) => !ext.platform || ext.platform === "both" || ext.platform === platform,
+  );
+
+  // Check which are installed/missing
+  const missing: RecommendedExtension[] = [];
+  const installed: RecommendedExtension[] = [];
+  for (const ext of platformExtensions) {
+    if (vscode.extensions.getExtension(ext.id)) {
+      installed.push(ext);
+    } else {
+      missing.push(ext);
+    }
+  }
+
+  // Check which uninstallable extensions are actually installed
+  const removable = UNINSTALLABLE_EXTENSIONS.filter((ext) =>
+    vscode.extensions.getExtension(ext.id),
+  );
+
+  // Build the action picker
+  const action = await vscode.window.showQuickPick(
+    [
+      {
+        label: `$(add) Install Missing Extensions (${missing.length})`,
+        description: missing.length === 0 ? "All installed ✓" : `${missing.map((e) => e.name).join(", ")}`,
+        action: "install" as const,
+        enabled: missing.length > 0,
+      },
+      {
+        label: `$(trash) Uninstall Unused Extensions (${removable.length})`,
+        description: removable.length === 0 ? "Nothing to remove ✓" : `${removable.map((e) => e.name).join(", ")}`,
+        action: "uninstall" as const,
+        enabled: removable.length > 0,
+      },
+      {
+        label: "$(checklist) Review All Extensions",
+        description: `${installed.length} installed, ${missing.length} missing, ${removable.length} removable`,
+        action: "review" as const,
+        enabled: true,
+      },
+    ],
+    {
+      title: `🧩 Extension Manager (${platform === "macos" ? "macOS" : "Windows"})`,
+      placeHolder: "Choose an action",
+    },
+  );
+
+  if (!action) {
+    return;
+  }
+
+  if (action.action === "install" && missing.length > 0) {
+    await offerExtensionInstall();
+  } else if (action.action === "uninstall" && removable.length > 0) {
+    const items = removable.map((ext) => ({
+      label: ext.name,
+      description: ext.id,
+      detail: ext.reason,
+      picked: true,
+      ext,
+    }));
+
+    const selected = await vscode.window.showQuickPick(items, {
+      canPickMany: true,
+      title: "🗑️ Select Extensions to Uninstall",
+      placeHolder: "These extensions have no matching files across your repos",
+    });
+
+    if (selected && selected.length > 0) {
+      let removedCount = 0;
+      await vscode.window.withProgress(
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: "Uninstalling extensions...",
+        },
+        async (progress) => {
+          for (const item of selected) {
+            progress.report({ message: `Removing ${item.ext.name}...` });
+            try {
+              await vscode.commands.executeCommand(
+                "workbench.extensions.uninstallExtension",
+                item.ext.id,
+              );
+              removedCount++;
+            } catch (err) {
+              console.error(`[Alex] Failed to uninstall ${item.ext.id}:`, err);
+            }
+          }
+        },
+      );
+
+      if (removedCount > 0) {
+        const reload = await vscode.window.showInformationMessage(
+          `✅ Removed ${removedCount} extension${removedCount > 1 ? "s" : ""}. Reload to apply?`,
+          "Reload Now",
+          "Later",
+        );
+        if (reload === "Reload Now") {
+          vscode.commands.executeCommand("workbench.action.reloadWindow");
+        }
+      }
+    }
+  } else if (action.action === "review") {
+    // Show a comprehensive review of all extension statuses
+    interface ReviewItem extends vscode.QuickPickItem {
+      ext?: RecommendedExtension;
+    }
+    const reviewItems: ReviewItem[] = [
+      { label: "── Installed ──", kind: vscode.QuickPickItemKind.Separator },
+      ...installed.map((ext) => ({
+        label: `$(check) ${ext.name}`,
+        description: ext.id,
+        detail: ext.purpose,
+        ext,
+      })),
+      { label: "── Missing ──", kind: vscode.QuickPickItemKind.Separator },
+      ...missing.map((ext) => ({
+        label: `$(circle-slash) ${ext.name}`,
+        description: ext.id,
+        detail: ext.purpose,
+        ext,
+      })),
+      ...(removable.length > 0
+        ? [
+          { label: "── Can Remove ──", kind: vscode.QuickPickItemKind.Separator } as ReviewItem,
+          ...removable.map((ext) => ({
+            label: `$(trash) ${ext.name}`,
+            description: ext.id,
+            detail: ext.reason,
+          })),
+        ]
+        : []),
+    ];
+
+    await vscode.window.showQuickPick(reviewItems, {
+      title: "📋 Extension Status Review",
+      placeHolder: `${installed.length} installed, ${missing.length} missing, ${removable.length} removable`,
+    });
+  }
+}
+
+// ============================================================================
+// MCP SERVER SETUP — Install recommended MCP servers
+// ============================================================================
+
+interface McpServer {
+  name: string;
+  displayName: string;
+  description: string;
+  type: "user" | "workspace";
+  config: Record<string, unknown>;
+  /** User-level or workspace-level target */
+  scope: "user" | "workspace";
+}
+
+const RECOMMENDED_MCP_SERVERS: McpServer[] = [
+  {
+    name: "microsoft/markitdown",
+    displayName: "MarkItDown",
+    description: "Convert PDF, Word, Excel, images to Markdown for agent consumption",
+    type: "user",
+    scope: "user",
+    config: {
+      type: "stdio",
+      command: "uvx",
+      args: ["markitdown-mcp@0.0.1a4"],
+      gallery: "https://api.mcp.github.com",
+      version: "1.0.0",
+    },
+  },
+  {
+    name: "github",
+    displayName: "GitHub Copilot MCP",
+    description: "Access GitHub API — repos, issues, PRs, code search from any workspace",
+    type: "user",
+    scope: "user",
+    config: {
+      url: "https://api.githubcopilot.com/mcp",
+      type: "http",
+    },
+  },
+];
+
+/**
+ * Setup MCP servers — show which are installed and offer to add recommended ones.
+ */
+export async function setupMcpServers(): Promise<void> {
+  // Read current user-level mcp.json
+  const userMcpPath = path.join(
+    process.env.APPDATA || process.env.HOME || "",
+    process.platform === "darwin"
+      ? "Library/Application Support/Code/User/mcp.json"
+      : "Code/User/mcp.json",
+  );
+
+  let currentServers: Record<string, unknown> = {};
+  try {
+    if (fs.existsSync(userMcpPath)) {
+      const content = JSON.parse(fs.readFileSync(userMcpPath, "utf-8"));
+      currentServers = content.servers || {};
+    }
+  } catch {
+    // No existing config or parse error
+  }
+
+  // Build QuickPick items
+  const items = RECOMMENDED_MCP_SERVERS.map((server) => {
+    const isInstalled = server.name in currentServers;
+    return {
+      label: `${isInstalled ? "$(check)" : "$(add)"} ${server.displayName}`,
+      description: isInstalled ? "Installed ✓" : "Not installed",
+      detail: server.description,
+      picked: !isInstalled,
+      server,
+      isInstalled,
+    };
+  });
+
+  // Add a settings option
+  items.push({
+    label: "$(gear) MCP Gallery Settings",
+    description: "Open VS Code settings for MCP",
+    detail: "Configure autostart, gallery, and server sampling",
+    picked: false,
+    server: null as unknown as McpServer,
+    isInstalled: false,
+  });
+
+  const selected = await vscode.window.showQuickPick(items, {
+    canPickMany: true,
+    title: "🔌 MCP Server Setup",
+    placeHolder: "Select servers to install (already installed are unchecked)",
+  });
+
+  if (!selected || selected.length === 0) {
+    return;
+  }
+
+  // Handle settings option
+  const openSettings = selected.find((s) => s.server === null);
+  if (openSettings) {
+    vscode.commands.executeCommand("workbench.action.openSettings", "chat.mcp");
+  }
+
+  // Install selected servers
+  const toInstall = selected.filter((s) => s.server && !s.isInstalled);
+  if (toInstall.length === 0) {
+    return;
+  }
+
+  // Read or create mcp.json
+  let mcpConfig: { servers: Record<string, unknown>; inputs?: unknown[] } = {
+    servers: currentServers,
+    inputs: [],
+  };
+  try {
+    if (fs.existsSync(userMcpPath)) {
+      mcpConfig = JSON.parse(fs.readFileSync(userMcpPath, "utf-8"));
+    }
+  } catch {
+    // Start fresh
+  }
+
+  if (!mcpConfig.servers) {
+    mcpConfig.servers = {};
+  }
+
+  for (const item of toInstall) {
+    mcpConfig.servers[item.server.name] = item.server.config;
+  }
+
+  // Write back
+  const mcpDir = path.dirname(userMcpPath);
+  if (!fs.existsSync(mcpDir)) {
+    fs.mkdirSync(mcpDir, { recursive: true });
+  }
+  fs.writeFileSync(userMcpPath, JSON.stringify(mcpConfig, null, 2), "utf-8");
+
+  const names = toInstall.map((s) => s.server.displayName).join(", ");
+  vscode.window.showInformationMessage(
+    `✅ Added ${toInstall.length} MCP server${toInstall.length > 1 ? "s" : ""}: ${names}. MCP servers will auto-start in new chat sessions.`,
+  );
 }

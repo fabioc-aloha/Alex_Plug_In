@@ -2,7 +2,7 @@
 
 > Generated: 2026-04-11
 > Total Skills: **160** (146 inheritable, 5 master-only, 7 VS Code, 2 M365, 0 temporary)
-> Total Connections: **825** (0 bidirectional, 135 weak)
+> Total Connections: **826** (0 bidirectional, 135 weak)
 
 ---
 
@@ -179,7 +179,7 @@
 | `enterprise-integration` | 3 |
 | `persona-detection` | 5 |
 | `vscode-configuration-validation` | 6 |
-| `vscode-extension-patterns` | 13 |
+| `vscode-extension-patterns` | 14 |
 
 ### M365 Heir (2)
 

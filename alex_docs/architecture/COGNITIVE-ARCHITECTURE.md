@@ -142,7 +142,7 @@ graph TB
         PM[Procedural Memory<br/>.instructions.md]
         EM[Episodic Memory<br/>.prompt.md]
         SK[Skills<br/>skills/*/SKILL.md]
-        GK[Global Knowledge<br/>~/.alex/]
+        GK[Global Knowledge<br/>AI-Memory/]
         SYN[Synaptic Network<br/>Embedded Connections]
         MC[Meta-Cognition<br/>Self-Monitoring]
         INST[Instincts<br/>Agent Hooks]
@@ -193,7 +193,7 @@ graph TB
 | Cognitive Flexibility  | dlPFC + ACC             | Pivot Detection Protocol — task-switch re-planning                               |
 | Skill Routing          | Premotor Cortex         | skill-activation/SKILL.md — reactive capability discovery                        |
 | Skills                 | Neocortex               | skills/*/SKILL.md                                                                |
-| Global Knowledge       | Distributed Cortex      | ~/.alex/ directory                                                               |
+| Global Knowledge       | Distributed Cortex      | AI-Memory/ directory (cloud-synced)                                              |
 | Neural Connectivity    | Synaptic Networks       | Embedded synapse notation                                                        |
 | Meta-Cognition         | Medial PFC + DMN        | Self-monitoring protocols                                                        |
 
@@ -220,7 +220,7 @@ graph TB
         end
 
         subgraph "Global (User)"
-            GKB[Global Knowledge Base<br/>📁 ~/.alex/<br/>🌐 Cross-project patterns]
+            GKB[Global Knowledge Base<br/>📁 AI-Memory/<br/>🌐 Cross-project patterns]
         end
 
         subgraph "Cloud (Backup)"
@@ -244,12 +244,12 @@ graph TB
 
 **Table 2:** *Memory Persistence Levels*
 
-| Level   | Location        | Scope                | Lifespan  |
-| ------- | --------------- | -------------------- | --------- |
-| Working | Chat session    | Current conversation | Session   |
-| Local   | .github/ folder | Single project       | Permanent |
-| Global  | ~/.alex/ folder | All projects         | Permanent |
-| Cloud   | GitHub Gist     | All machines         | Permanent |
+| Level   | Location          | Scope                | Lifespan  |
+| ------- | ----------------- | -------------------- | --------- |
+| Working | Chat session      | Current conversation | Session   |
+| Local   | .github/ folder   | Single project       | Permanent |
+| Global  | AI-Memory/ folder | All projects         | Permanent |
+| Cloud   | GitHub Gist       | All machines         | Permanent |
 
 ---
 

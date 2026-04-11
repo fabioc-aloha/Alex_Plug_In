@@ -9,7 +9,6 @@ import {
 import { offerEnvironmentSetup, applyMarkdownStyles } from "./setupEnvironment";
 import {
   detectGlobalKnowledgeRepo,
-  scaffoldGlobalKnowledgeRepo,
 } from "../chat/globalKnowledge";
 import {
   detectAndUpdateProjectPersona,
@@ -402,97 +401,25 @@ async function deployArchitectureFiles(
 }
 
 /**
- * Offer Global Knowledge repository setup (create new, connect GitHub, or skip).
+ * Offer AI-Memory setup during initialization if not already configured.
  */
 async function offerGlobalKnowledgeSetup(
-  rootPath: string,
-  persona: { id: string; icon: string; hook: string },
-  personaResult: { confidence: number } | null,
+  _rootPath: string,
+  _persona: { id: string; icon: string; hook: string },
+  _personaResult: { confidence: number } | null,
 ): Promise<void> {
   try {
     const existingGkRepo = await detectGlobalKnowledgeRepo();
     if (existingGkRepo) {
-      return;
+      return; // AI-Memory already exists
     }
 
-    const parentDir = path.dirname(rootPath);
-    const gkRepoName = "Alex-Global-Knowledge";
-    const gkRepoPath = path.join(parentDir, gkRepoName);
-
-    const personalizedHook = `${persona.icon} ${persona.hook}`;
-    const premiumFeatures = [
-      "⭐ Search Knowledge — Find patterns instantly",
-      "💡 Save Insights — Capture debugging discoveries",
-      "📈 Promote Patterns — Share solutions globally",
-      "👥 Team Sharing — GitHub collaboration built-in",
-    ].join("\n");
-
-    const gkChoice = await vscode.window.showInformationMessage(
-      `📚 Global Knowledge Repository\n\n${personalizedHook}\n\nUnlock ⭐ Premium Features:\n${premiumFeatures}\n\nHow would you like to set up Global Knowledge?`,
-      { modal: true },
-      "Create New",
-      "Connect GitHub",
-      "Skip for Now",
-    );
-
-    if (gkChoice === "Create New") {
-      telemetry.log("command", "initialize_global_knowledge_create", {
-        persona: persona.id,
-        confidence: personaResult?.confidence ?? 0,
-      });
-      await scaffoldGlobalKnowledgeRepo(gkRepoPath);
-      vscode.window.showInformationMessage(
-        `✅ Global Knowledge repository created at ${gkRepoPath}\n\n🚀 Next steps:\n1. cd "${gkRepoPath}"\n2. git init && git add -A && git commit -m "feat: initialize global knowledge"\n3. gh repo create ${gkRepoName} --private --source=. --push\n\nYour ⭐ premium features are now unlocked!`,
-        { modal: false },
-      );
-      telemetry.log("command", "initialize_global_knowledge_created", {
-        repoPath: gkRepoPath,
-        persona: persona.id,
-      });
-    } else if (gkChoice === "Connect GitHub") {
-      const ownerInput = await vscode.window.showInputBox({
-        title: "Connect to GitHub Global Knowledge",
-        prompt:
-          "Enter the GitHub owner/org name (repo is standardized as 'Alex-Global-Knowledge')",
-        placeHolder: "fabioc-aloha",
-        validateInput: (value) => {
-          if (!value) {
-            return "Owner name is required";
-          }
-          if (value.includes(" ")) {
-            return "Owner name cannot contain spaces";
-          }
-          return undefined;
-        },
-      });
-      if (ownerInput) {
-        await vscode.workspace
-          .getConfiguration("alex.globalKnowledge")
-          .update(
-            "remoteRepo",
-            ownerInput.trim(),
-            vscode.ConfigurationTarget.Global,
-          );
-        const fullRepo = ownerInput.includes("/")
-          ? ownerInput
-          : `${ownerInput}/Alex-Global-Knowledge`;
-        vscode.window.showInformationMessage(
-          `✅ Connected to GitHub: ${fullRepo}\n\nAlex can now read your Global Knowledge directly from GitHub. No local clone required!`,
-          { modal: false },
-        );
-        telemetry.log("command", "initialize_global_knowledge_remote", {
-          persona: persona.id,
-          repo: ownerInput,
-        });
-      }
-    } else {
-      telemetry.log("command", "initialize_global_knowledge_skipped", {
-        persona: persona.id,
-      });
-    }
+    // Delegate to the shared AI-Memory setup flow (cloud-aware)
+    const { ensureGlobalKnowledgeSetup } = await import("./setupGlobalKnowledge");
+    await ensureGlobalKnowledgeSetup();
   } catch (globalErr) {
     telemetry.logError("initialize_global_knowledge_failed", globalErr);
-    console.warn("[Alex] Failed to setup global knowledge:", globalErr);
+    console.warn("[Alex] Failed to setup AI-Memory:", globalErr);
   }
 }
 

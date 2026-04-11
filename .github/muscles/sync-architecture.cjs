@@ -152,7 +152,7 @@ const EXCLUDED_PROMPTS = getFrontmatterExcludedMarkdownFiles(
 
 // Master-only config files -- contain PII or master-specific state
 const EXCLUDED_CONFIG_FILES = [
-  "user-profile.json", // PII: contains user's real name, email, social profiles
+  "user-profile.json", // PII: legacy location (profile now in AI-Memory). Guard against accidental copies.
   "MASTER-ALEX-PROTECTED.json", // Master kill-switch marker -- must not exist in heir
   "cognitive-config.json", // Master-specific cognitive state
 ];

@@ -2,7 +2,7 @@
 
 **Effective Date**: February 5, 2026
 **Last Updated**: April 11, 2026
-**Version**: 7.5.0
+**Version**: 7.6.0
 
 ---
 
@@ -28,12 +28,13 @@ Alex Cognitive Architecture ("Alex") is designed with **privacy by default**. Yo
 
 ### ✅ Stored Locally on Your Machine
 
-| Data Type              | Location                           | Purpose                        |
-| ---------------------- | ---------------------------------- | ------------------------------ |
-| Cognitive architecture | `.github/` in your workspace       | Alex's memory for that project |
-| Global knowledge       | `~/.alex/` (your home directory)   | Cross-project insights         |
-| User profile           | `.github/config/user-profile.json` | Personalization preferences    |
-| Meditation logs        | `.github/episodic/`                | Session history                |
+| Data Type              | Location                              | Purpose                                    |
+| ---------------------- | ------------------------------------- | ------------------------------------------ |
+| Cognitive architecture | `.github/` in your workspace          | Alex's memory for that project             |
+| Global knowledge       | `AI-Memory/` (cloud storage)          | Cross-project insights                     |
+| User profile           | `AI-Memory/user-profile.json`         | Personalization preferences (cloud-synced) |
+| Project persona        | `.github/config/project-persona.json` | Workspace-specific persona detection       |
+| Meditation logs        | `.github/episodic/`                   | Session history                            |
 
 **You own this data.** It's stored in readable files you can inspect, edit, or delete at any time.
 
@@ -43,11 +44,11 @@ Alex Cognitive Architecture ("Alex") is designed with **privacy by default**. Yo
 
 ### Cloud Sync (Optional)
 
-If you enable cloud sync:
-- Knowledge files sync to **YOUR** GitHub repository
-- You control the repository and its visibility
-- Alex accesses via your authenticated VS Code session
-- See [GitHub Privacy Statement](https://docs.github.com/privacy)
+If you use cloud-synced AI-Memory:
+- Knowledge files sync via **your own cloud storage** (OneDrive, iCloud, or Dropbox)
+- You control the folder and its contents
+- Alex reads/writes to the AI-Memory folder using your file system
+- No additional accounts or services required
 
 ### Image Generation (Optional)
 
@@ -70,7 +71,7 @@ Alex extends GitHub Copilot. Copilot's privacy practices apply:
 
 All Alex data is in readable files:
 - Open `.github/` folder in any project
-- Open `~/.alex/` folder for global knowledge
+- Open your `AI-Memory/` folder for global knowledge (cloud-synced via OneDrive/iCloud/Dropbox, or `~/.alex/AI-Memory/` local fallback)
 
 ### Delete Your Data
 
@@ -80,8 +81,10 @@ To remove all Alex data:
 # Remove from current project
 rm -rf .github/
 
-# Remove global knowledge
-rm -rf ~/.alex/
+# Remove AI-Memory (cloud-synced location varies by provider)
+# Check your OneDrive/iCloud/Dropbox folder for AI-Memory/
+# Or remove local fallback:
+rm -rf ~/.alex/AI-Memory/
 
 # Uninstall extension
 code --uninstall-extension fabioc-aloha.alex-cognitive-architecture
@@ -93,8 +96,7 @@ Your data is already in portable markdown/JSON format. Simply copy the folders.
 
 ### Opt Out
 
-- **Cloud Sync**: Disabled by default (`alex.cloudSync.enabled: false`)
-- **OneDrive Sync**: Disabled by default (`alex.m365.autoSync: false`)
+- **Cloud Sync**: Falls back to local `~/.alex/AI-Memory/` if no cloud storage is detected
 - **Image Generation**: Don't configure API keys
 
 ---
@@ -103,7 +105,6 @@ Your data is already in portable markdown/JSON format. Simply copy the folders.
 
 | Service       | When Used                 | Data Sent          | Privacy Policy                                     |
 | ------------- | ------------------------- | ------------------ | -------------------------------------------------- |
-| **GitHub**    | Cloud Sync (opt-in)       | Knowledge files    | [GitHub Privacy](https://docs.github.com/privacy)  |
 | **Replicate** | Image generation (opt-in) | Image prompts      | [Replicate Privacy](https://replicate.com/privacy) |
 | **Gamma**     | Presentations (opt-in)    | Content for slides | [Gamma Privacy](https://gamma.app/privacy)         |
 
@@ -111,10 +112,10 @@ Your data is already in portable markdown/JSON format. Simply copy the folders.
 
 ## Data Retention
 
-| Data Type   | Retention                          |
-| ----------- | ---------------------------------- |
-| Local files | Until you delete them              |
-| Cloud sync  | Controlled by your GitHub settings |
+| Data Type   | Retention                                 |
+| ----------- | ----------------------------------------- |
+| Local files | Until you delete them                     |
+| AI-Memory   | Controlled by your cloud storage provider |
 
 ---
 

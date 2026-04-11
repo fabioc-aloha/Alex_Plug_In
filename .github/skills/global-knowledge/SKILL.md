@@ -86,21 +86,23 @@ Categories emerge organically: PowerShell Patterns, Azure Patterns, Frontend Pat
 
 Alex uses **three complementary memory systems**:
 
-### 1. AI-Memory (OneDrive): Cross-Platform Persistent Memory
+### 1. AI-Memory (Cloud Storage): Cross-Platform Persistent Memory
 
-Shared across all AI surfaces via OneDrive sync. Use for:
+Shared across all AI surfaces via cloud storage sync. Use for:
 
-- User profile and preferences (profile.md)
+- User identity and structured preferences (user-profile.json)
+- Narrative profile and expertise (profile.md)
 - Session notes and observations (notes.md)
 - Learning goals with progress tracking (learning-goals.md)
 - Cross-project insights and patterns (global-knowledge.md)
 
-### 2. Copilot Memory (/memories/): VS Code Session Memory
+### 2. Copilot Memory (/memories/): VS Code Workflow Memory
 
 GitHub-cloud-synced notes for VS Code workflows. Use for:
 
-- VS Code-specific preferences and workflow notes
-- Project-specific context that may overlap with AI-Memory
+- VS Code-specific workflow tips (terse, actionable rules)
+- Tool-specific workarounds (npm, CLI, Mermaid palette, etc.)
+- Cross-workspace tool access patterns (MS Graph MCP, etc.)
 - Session-scoped working state (/memories/session/)
 
 ### 3. Project Memory (.github/): Local Architecture
@@ -110,26 +112,46 @@ Project-specific cognitive architecture. Use for:
 - Skills, instructions, prompts (the trifecta)
 - Episodic memories from meditation sessions
 - Synapse connections between skills
-- Configuration and settings
+- Project persona (.github/config/project-persona.json)
 
 ### Decision Matrix
 
-| Question                            | AI-Memory (OneDrive) | Copilot Memory | Project .github/  |
-| ----------------------------------- | -------------------- | -------------- | ----------------- |
-| Cross-project pattern?              | global-knowledge.md  |                |                   |
-| Personal preference (all surfaces)? | profile.md           |                |                   |
-| VS Code-specific preference?        |                      | /memories/     |                   |
-| Learning goal?                      | learning-goals.md    |                |                   |
-| Session note?                       | notes.md             |                |                   |
-| Project architecture?               |                      |                | .github/skills/   |
-| Meditation output?                  |                      |                | .github/episodic/ |
+| Data Type                           | AI-Memory             | /memories/     | .github/            |
+| ----------------------------------- | --------------------- | -------------- | ------------------- |
+| Name, role, identity                | user-profile.json     |                |                     |
+| Formality, detail level, humor      | user-profile.json     |                |                     |
+| Learning style, explanation style   | user-profile.json     |                |                     |
+| Technologies, expertise areas       | user-profile.json     |                |                     |
+| Writing style rules (em dash ban)   |                       | /memories/     |                     |
+| Tool workarounds (npm, CLI)         |                       | /memories/     |                     |
+| Mermaid palette, diagram prefs      |                       | /memories/     |                     |
+| Cross-workspace access (MS Graph)   |                       | /memories/     |                     |
+| Cross-project insight               | global-knowledge.md   |                |                     |
+| Learning goals with progress        | learning-goals.md     |                |                     |
+| Session notes                       | notes.md              |                |                     |
+| Project persona (detected)          |                       |                | project-persona.json|
+| Project architecture                |                       |                | .github/skills/     |
+| Meditation output                   |                       |                | .github/episodic/   |
+
+### Conflict Prevention Rules
+
+**AI-Memory/user-profile.json is the source of truth for user identity and preferences.** Copilot Memory (/memories/) supplements with VS Code-specific workflow tips. They do not overlap.
+
+| Rule | Rationale |
+|------|----------|
+| Never store name, role, or identity in /memories/ | AI-Memory owns identity |
+| Never store formality, detailLevel, explanationStyle in /memories/ | AI-Memory owns structured preferences |
+| Never store technologies or expertise in /memories/ | AI-Memory owns the profile |
+| VS Code workflow tips (em dash ban, palette, CLI workarounds) go in /memories/ only | These are terse, actionable, VS Code-specific |
+| If a preference exists in BOTH systems, AI-Memory wins | Single source of truth |
 
 ### Integration Workflow
 
 ```
 User learns something
-  Is it cross-project?     -> AI-Memory/global-knowledge.md
-  Is it personal preference -> AI-Memory/profile.md (or /memories/ for VS Code only)
+  Is it about who they are?  -> AI-Memory/user-profile.json
+  Is it a cross-project pattern? -> AI-Memory/global-knowledge.md
+  Is it a VS Code workflow tip?  -> /memories/ (terse, 3-workspace test)
   Is it project-specific?  -> .github/skills/ or .github/episodic/
 ```
 

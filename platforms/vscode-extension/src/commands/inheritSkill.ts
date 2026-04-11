@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as os from "os";
 import { getAlexWorkspaceFolder } from "../shared/utils";
+import { resolveAIMemoryRoot } from "../chat/globalKnowledge";
 
 interface SkillRegistryEntry {
   id: string;
@@ -40,11 +40,7 @@ interface SynapsesJson {
   metadata?: Record<string, unknown>;
 }
 
-const GLOBAL_KNOWLEDGE_PATH = path.join(
-  os.homedir(),
-  ".alex",
-  "global-knowledge",
-);
+const GLOBAL_KNOWLEDGE_PATH = resolveAIMemoryRoot();
 const SKILL_REGISTRY_PATH = path.join(
   GLOBAL_KNOWLEDGE_PATH,
   "skills",

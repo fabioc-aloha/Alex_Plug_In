@@ -29,6 +29,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import * as workspaceFs from '../shared/workspaceFs';
+import { loadUserProfileFromAIMemory } from './globalKnowledge';
 
 // ============================================================================
 // CONFIDENCE THRESHOLDS & LIMITS
@@ -44,19 +45,16 @@ const CONFIDENCE_FALLBACK = 0.5;
 // PERSONA DEFINITIONS (extracted to personaDefinitions.ts)
 // ============================================================================
 import {
-    PersonaSignal,
     Persona,
     PERSONAS,
 } from './personaDefinitions';
 
 // Re-export for backward compatibility - all consumers import from this file
 export {
-    PersonaSignal,
     Persona,
     PERSONAS,
     getEasterEggOverride,
     EasterEgg,
-    LLMPersona,
 } from './personaDefinitions';
 
 // ============================================================================
@@ -443,10 +441,29 @@ export async function detectPersona(
         return { ...explicitResult, source: 'detected' };
     }
     
-    // P2: Cached projectPersona from user-profile.json (valid <1 day)
-    const extendedProfile = userProfile as ExtendedUserProfile | undefined;
-    if (extendedProfile?.projectPersona) {
-        const savedPersona = extendedProfile.projectPersona;
+    // P2: Cached projectPersona from project-persona.json or user-profile.json (valid <1 day)
+    let savedPersona: ProjectPersona | undefined;
+
+    // Check workspace project-persona.json first (new location)
+    if (rootPath) {
+        try {
+            const personaFilePath = path.join(rootPath, '.github', 'config', 'project-persona.json');
+            if (await workspaceFs.pathExists(personaFilePath)) {
+                const personaData = await workspaceFs.readJson(personaFilePath) as { projectPersona?: ProjectPersona };
+                savedPersona = personaData?.projectPersona;
+            }
+        } catch {
+            // Fall through
+        }
+    }
+
+    // Fallback: check user profile (legacy location)
+    if (!savedPersona) {
+        const extendedProfile = userProfile as ExtendedUserProfile | undefined;
+        savedPersona = extendedProfile?.projectPersona;
+    }
+
+    if (savedPersona) {
         let ageInDays = 0;
         if (savedPersona.detectedAt) {
             const detectedAt = new Date(savedPersona.detectedAt);
@@ -455,7 +472,7 @@ export async function detectPersona(
             }
         }
         if (ageInDays < 1) {
-            const matchedPersona = PERSONAS.find(p => p.id === savedPersona.id);
+            const matchedPersona = PERSONAS.find(p => p.id === savedPersona!.id);
             if (matchedPersona) {
                 return {
                     persona: matchedPersona,
@@ -527,9 +544,22 @@ export async function detectPersona(
 }
 
 /**
- * Load user profile from workspace
+ * Load user profile from AI-Memory (cross-workspace).
+ * Falls back to workspace `.github/config/user-profile.json` for legacy compat.
+ * The workspaceRoot parameter is kept for backward compatibility but is only used as fallback.
  */
 export async function loadUserProfile(workspaceRoot: string): Promise<UserProfile | null> {
+    // Primary: AI-Memory (cross-workspace, cross-platform)
+    try {
+        const aiProfile = await loadUserProfileFromAIMemory();
+        if (aiProfile) {
+            return aiProfile as unknown as UserProfile;
+        }
+    } catch {
+        // Fall through to legacy
+    }
+
+    // Fallback: workspace-local (legacy)
     const profilePaths = [
         path.join(workspaceRoot, '.github', 'config', 'user-profile.json'),
         path.join(workspaceRoot, 'USER-PROFILE.json')
@@ -574,4 +604,4 @@ export interface ExtendedUserProfile {
 
 
 // Re-export project-level detection functions (extracted to personaProjectDetection.ts)
-export { detectProjectTechnologies, detectAndUpdateProjectPersona, updateWorkingMemorySlots } from './personaProjectDetection';
+export { detectProjectTechnologies, detectAndUpdateProjectPersona } from './personaProjectDetection';

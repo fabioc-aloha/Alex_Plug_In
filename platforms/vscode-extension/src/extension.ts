@@ -12,7 +12,6 @@ import {
   registerGlobalKnowledgeTools,
   ensureGlobalKnowledgeDirectories,
   registerCurrentProject,
-  initGlobalKnowledgeSecrets,
 } from "./chat/globalKnowledge";
 import {
   initSecretsManager,
@@ -100,17 +99,12 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
 
   registerLanguageModelTools(context);
 
-  // Initialize secrets in parallel (GK secrets + secrets manager are independent)
-  await Promise.all([
-    initGlobalKnowledgeSecrets(context).catch(err =>
-      console.warn('[Alex] Failed to initialize GK secrets:', err)
-    ),
-    initSecretsManager(context).then(() =>
-      logInfo('[Alex] Secrets manager initialized')
-    ).catch(err =>
-      console.warn('[Alex] Failed to initialize secrets manager:', err)
-    ),
-  ]);
+  // Initialize secrets manager
+  await initSecretsManager(context).then(() =>
+    logInfo('[Alex] Secrets manager initialized')
+  ).catch(err =>
+    console.warn('[Alex] Failed to initialize secrets manager:', err)
+  );
 
   initOutcomeTracker(context);
   initExpertiseModel(context);

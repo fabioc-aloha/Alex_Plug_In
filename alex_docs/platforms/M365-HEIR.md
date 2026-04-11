@@ -165,7 +165,7 @@ All declarative agents undergo **Responsible AI (RAI) validation** during publis
 │  └──────┬───────┘               └──────┬───────┘                    │
 │         │                              │                             │
 │         ▼                              ▼                             │
-│  ~/.alex/global-knowledge/       OneDrive/Alex-Memory/              │
+│  ~/.alex/AI-Memory/               OneDrive/AI-Memory/               │
 │                                                                      │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -178,8 +178,8 @@ All declarative agents undergo **Responsible AI (RAI) validation** during publis
 | Session notes      | Episodic folder          | `notes.md`          | Simplified         |
 | Domain knowledge   | 100+ skills + DK files   | `knowledge/*.md`    | VS Code richer     |
 | Learning goals     | Goals system             | `learning-goals.md` | Simplified         |
-| Cross-project sync | Global knowledge + cloud | ❌ N/A               | VS Code only       |
-| Cross-device sync  | GitHub Gist              | ✅ OneDrive          | Different backends |
+| Cross-project sync | AI-Memory (cloud-synced) | ❌ N/A               | VS Code only       |
+| Cross-device sync  | OneDrive/iCloud/Dropbox  | ✅ OneDrive          | Different backends |
 
 ---
 
@@ -187,14 +187,14 @@ All declarative agents undergo **Responsible AI (RAI) validation** during publis
 
 ### What VS Code Exports to M365
 
-| File                | Source                                      | Description                      |
-| ------------------- | ------------------------------------------- | -------------------------------- |
-| `profile.md`        | `~/.alex/global-knowledge/profile.json`     | Identity, preferences, expertise |
-| `notes.md`          | Generated template                          | Quick notes and reminders        |
-| `learning-goals.md` | Generated template                          | Active learning objectives       |
-| `knowledge/*.md`    | `~/.alex/global-knowledge/patterns/GK-*.md` | Domain knowledge (renamed DK-*)  |
-| `insights/*.md`     | `~/.alex/global-knowledge/insights/GI-*.md` | Timestamped learnings            |
-| `README.md`         | Generated                                   | Setup instructions               |
+| File                | Source                        | Description                      |
+| ------------------- | ----------------------------- | -------------------------------- |
+| `profile.md`        | `AI-Memory/user-profile.json` | Identity, preferences, expertise |
+| `notes.md`          | Generated template            | Quick notes and reminders        |
+| `learning-goals.md` | Generated template            | Active learning objectives       |
+| `knowledge/*.md`    | `AI-Memory/patterns/GK-*.md`  | Domain knowledge (renamed DK-*)  |
+| `insights/*.md`     | `AI-Memory/insights/GI-*.md`  | Timestamped learnings            |
+| `README.md`         | Generated                     | Setup instructions               |
 
 ### Export Location
 

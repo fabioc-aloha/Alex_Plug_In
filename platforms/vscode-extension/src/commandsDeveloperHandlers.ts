@@ -190,7 +190,6 @@ function getSettingsSection(d: TelemetryData): string {
         <div class="settings-grid">
             <span><strong>workspace.protectedMode:</strong> ${d.alexSettings["workspace.protectedMode"] ?? "undefined"}</span>
             <span><strong>m365.enabled:</strong> ${d.alexSettings["m365.enabled"] ?? "undefined"}</span>
-            <span><strong>globalKnowledge.enabled:</strong> ${d.alexSettings["globalKnowledge.enabled"] ?? "undefined"}</span>
         </div>
     </div>`;
 }

@@ -98,21 +98,15 @@ Alex should respond with his identity, not generic Copilot. If he does, the arch
 
 ### 3. Configure Your User Profile
 
-Create `.github/config/user-profile.json` with your details:
+Alex stores your profile in `AI-Memory/user-profile.json` (cloud-synced across workspaces). You can set it up by telling Alex:
 
-```json
-{
-  "name": "Your Name",
-  "email": "your-email@example.com",
-  "role": "Developer",
-  "preferences": {
-    "tone": "professional",
-    "detail_level": "concise"
-  }
-}
+```text
+@alex My name is Your Name. I'm a Developer. I prefer professional, concise responses.
 ```
 
-Alex uses this to personalize responses and detect your persona.
+Alex will create and update the profile automatically. On first use, Alex prompts you to select your cloud storage folder (OneDrive, iCloud, Google Drive, or Dropbox) for cross-workspace sync.
+
+Project-specific persona detection is cached in `.github/config/project-persona.json`.
 
 ### 4. Install Muscle Dependencies
 

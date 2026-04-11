@@ -44,10 +44,52 @@ function daysSince(isoDate) {
   return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
-// -- Load user profile ------------------------------------------------------
+// -- Load user profile (AI-Memory first, workspace fallback) ----------------
 
-const profilePath = path.join(ghPath, "config", "user-profile.json");
-const profile = readJson(profilePath);
+const os = require("os");
+
+function resolveAIMemoryProfile() {
+  // Check cloud storage roots for AI-Memory/user-profile.json
+  const candidates = [];
+
+  // OneDrive variants from env
+  for (const envKey of ["OneDrive", "OneDriveConsumer", "OneDriveCommercial"]) {
+    if (process.env[envKey]) candidates.push(process.env[envKey]);
+  }
+
+  // Scan home for OneDrive*, iCloud, Google Drive, Dropbox
+  const homeDir = os.homedir();
+  try {
+    const entries = fs.readdirSync(homeDir);
+    for (const entry of entries) {
+      if (/^OneDrive/i.test(entry) || /iCloud/i.test(entry) || /Google Drive/i.test(entry) || /Dropbox/i.test(entry)) {
+        const full = path.join(homeDir, entry);
+        if (fs.statSync(full).isDirectory() && !candidates.includes(full)) {
+          candidates.push(full);
+        }
+      }
+    }
+  } catch { /* ignore */ }
+
+  // Check each candidate for AI-Memory/user-profile.json
+  for (const root of candidates) {
+    const profileFile = path.join(root, "AI-Memory", "user-profile.json");
+    if (fs.existsSync(profileFile)) {
+      return readJson(profileFile);
+    }
+  }
+
+  // Local fallback
+  const localProfile = path.join(homeDir, ".alex", "AI-Memory", "user-profile.json");
+  if (fs.existsSync(localProfile)) {
+    return readJson(localProfile);
+  }
+
+  return null;
+}
+
+const profile = resolveAIMemoryProfile()
+  || readJson(path.join(ghPath, "config", "user-profile.json"));
 const userName = profile?.name?.split(" ")[0] || "there";
 const preferredModel = profile?.preferredModel || "auto";
 const persona = profile?.currentPersona || "Developer";

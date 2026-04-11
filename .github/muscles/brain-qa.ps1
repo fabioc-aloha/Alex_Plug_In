@@ -237,7 +237,7 @@ if (3 -in $runPhases) {
     $indexContent = Get-Content "$ghPath\skills\memory-activation\SKILL.md" -Raw
     $notIndexed = @()
     foreach ($s in $skillDirs) {
-        if ($s -ne "memory-activation" -and $indexContent -notmatch "$s \|") {
+        if ($s -ne "memory-activation" -and $indexContent -notmatch "$s\s+\|") {
             $notIndexed += $s
         }
     }
@@ -254,6 +254,13 @@ if (3 -in $runPhases) {
 # ============================================================
 if (4 -in $runPhases) {
     Write-Phase 4 "Trigger Semantic Analysis"
+    # Known intentional overlaps between related skills (reviewed and accepted)
+    $knownOverlaps = @(
+        'academic writing', 'human-ai collaboration', 'heir sync', 'security audit',
+        'memory balance', 'drift detection', 'neural maintenance', 'living document',
+        'typography', 'choose model', 'literature matrix', 'msal',
+        'gdpr compliance', 'data protection', 'action items', '5 whys', 'prompt template'
+    )
     $triggers = @{}
     Get-Content "$ghPath\skills\memory-activation\SKILL.md" | 
     Select-String -Pattern "^\| .+ \| .+ \|$" | 
@@ -268,15 +275,19 @@ if (4 -in $runPhases) {
             }
         }
     }
-    $overlaps = $triggers.GetEnumerator() | Where-Object { $_.Value -match "," }
-    if ($overlaps.Count -eq 0) {
+    $overlaps = $triggers.GetEnumerator() | Where-Object { $_.Value -match "," -and $_.Key -notin $knownOverlaps }
+    $knownCount = ($triggers.GetEnumerator() | Where-Object { $_.Value -match "," -and $_.Key -in $knownOverlaps }).Count
+    if ($overlaps.Count -eq 0 -and $knownCount -eq 0) {
         Write-Pass "No trigger overlaps"
+    }
+    elseif ($overlaps.Count -eq 0) {
+        Write-Pass "No new trigger overlaps ($knownCount known/accepted)"
     }
     else {
         foreach ($o in $overlaps) {
             Write-Warn "Overlap '$($o.Key)': $($o.Value)"
         }
-        Write-Pass "Review overlaps - shared triggers may be intentional"
+        Write-Pass "Review overlaps - shared triggers may be intentional ($knownCount known/accepted)"
     }
 }
 
@@ -285,19 +296,28 @@ if (4 -in $runPhases) {
 # ============================================================
 if (5 -in $runPhases) {
     Write-Phase 5 "Master-Heir Skill Sync"
+    # Skills intentionally excluded from heir (master-only or heir:m365)
+    $excludedFromHeir = @(
+        'heir-sync-management', 'release-process', 'release-preflight',
+        'extension-audit-methodology', 'skill-catalog-generator',
+        'm365-agent-debugging', 'teams-app-patterns'
+    )
     if (Test-Path "$heirBase\.github\skills") {
         $masterSkills = (Get-ChildItem "$ghPath\skills" -Directory).Name | Sort-Object
         $heirSkills = (Get-ChildItem "$heirBase\.github\skills" -Directory).Name | Sort-Object
         Write-Pass "Master: $($masterSkills.Count) skills | Heir: $($heirSkills.Count) skills"
         $diff = Compare-Object $masterSkills $heirSkills -ErrorAction SilentlyContinue
         if ($diff) {
-            $missingInHeir = ($diff | Where-Object { $_.SideIndicator -eq "<=" }).InputObject
+            $missingInHeir = ($diff | Where-Object { $_.SideIndicator -eq "<=" }).InputObject | Where-Object { $_ -notin $excludedFromHeir }
             $extraInHeir = ($diff | Where-Object { $_.SideIndicator -eq "=>" }).InputObject
             if ($missingInHeir) { Write-Warn "Missing in heir: $($missingInHeir -join ', ')" }
             if ($extraInHeir) { Write-Warn "Extra in heir: $($extraInHeir -join ', ')" }
+            if (-not $missingInHeir -and -not $extraInHeir) {
+                Write-Pass "Skill directories match ($($excludedFromHeir.Count) excluded by design)"
+            }
         }
         else {
-            Write-Pass "Skill directories match"
+            Write-Pass "Skill directories match ($($excludedFromHeir.Count) excluded by design)"
         }
     }
     else {
@@ -864,7 +884,8 @@ if (20 -in $runPhases) {
             }
             
             # Arrow-heavy ASCII (spatial reasoning required)
-            if (($content -split '\n' | Where-Object { $_ -match '^\s*[|v^<\->]' }).Count -gt 5) {
+            # Only match actual ASCII art arrows, not tables (|), bullets (-), or blockquotes (>)
+            if (($content -split '\n' | Where-Object { $_ -match '^\s*(?:[\|v^](?:\s*$|\s+\|)|[+\-]{3,}[>|+]|<?\-{2,}>|={2,}>|\.{3,})' }).Count -gt 5) {
                 $formatWarnings += "${file} - Heavy use of ASCII arrows (structured format preferred)"
             }
         }
@@ -1165,53 +1186,81 @@ if (28 -in $runPhases) {
 }
 
 # ============================================================
-# PHASE 29: Global Knowledge Sync Validation
+# PHASE 29: AI-Memory Sync Validation
 # ============================================================
 if (29 -in $runPhases) {
-    Write-Phase 29 "Global Knowledge Sync Validation"
-    $gkPath = Join-Path (Split-Path $rootPath -Parent) "Alex-Global-Knowledge"
-    if (Test-Path $gkPath) {
-        # Index vs actual file count
-        $indexPath = Join-Path $gkPath "index.json"
-        if (Test-Path $indexPath) {
-            $index = Get-Content $indexPath -Raw | ConvertFrom-Json
-            $indexPatterns = ($index.entries | Where-Object { $_.type -eq "pattern" }).Count
-            $indexInsights = ($index.entries | Where-Object { $_.type -eq "insight" }).Count
-            $actualPatterns = (Get-ChildItem (Join-Path $gkPath "patterns\GK-*.md") -ErrorAction SilentlyContinue).Count
-            $actualInsights = (Get-ChildItem (Join-Path $gkPath "insights\GI-*.md") -ErrorAction SilentlyContinue).Count
+    Write-Phase 29 "AI-Memory Sync Validation"
 
-            if ($indexPatterns -ne $actualPatterns) {
-                Write-Warn "GK index patterns ($indexPatterns) != actual files ($actualPatterns)"
+    # Resolve AI-Memory path: cloud storage first, then local fallback
+    $aiMemoryPath = $null
+    $isCloud = $false
+
+    # Check OneDrive variants from env
+    $cloudRoots = @($env:OneDrive, $env:OneDriveConsumer, $env:OneDriveCommercial) | Where-Object { $_ }
+
+    # Scan home for cloud storage folders
+    $homeDir = [Environment]::GetFolderPath("UserProfile")
+    Get-ChildItem $homeDir -Directory -ErrorAction SilentlyContinue |
+    Where-Object { $_.Name -match '^OneDrive|iCloud|Google Drive|Dropbox' } |
+    ForEach-Object { if ($_.FullName -notin $cloudRoots) { $cloudRoots += $_.FullName } }
+
+    # Find cloud root with AI-Memory
+    foreach ($root in $cloudRoots) {
+        $candidate = Join-Path $root "AI-Memory"
+        if (Test-Path $candidate) {
+            $aiMemoryPath = $candidate
+            $isCloud = $true
+            break
+        }
+    }
+
+    # Local fallback
+    if (-not $aiMemoryPath) {
+        $localFallback = Join-Path $homeDir ".alex\AI-Memory"
+        if (Test-Path $localFallback) {
+            $aiMemoryPath = $localFallback
+        }
+    }
+
+    if ($aiMemoryPath) {
+        $source = if ($isCloud) { "cloud storage" } else { "local (~/.alex/)" }
+        $expectedFiles = @("profile.md", "global-knowledge.md", "notes.md", "learning-goals.md")
+        $missing = $expectedFiles | Where-Object { -not (Test-Path (Join-Path $aiMemoryPath $_)) }
+
+        if ($missing.Count -eq 0) {
+            Write-Pass "AI-Memory ($source): $($expectedFiles.Count) files present"
+        }
+        else {
+            Write-Warn "AI-Memory ($source) missing files: $($missing -join ', ')"
+        }
+
+        # Check user-profile.json exists in AI-Memory
+        $profilePath = Join-Path $aiMemoryPath "user-profile.json"
+        if (Test-Path $profilePath) {
+            Write-Pass "AI-Memory user-profile.json present"
+        }
+        else {
+            Write-Warn "AI-Memory user-profile.json not found (user profile should be in AI-Memory)"
+        }
+
+        # Check global-knowledge.md is not empty
+        $gkFile = Join-Path $aiMemoryPath "global-knowledge.md"
+        if (Test-Path $gkFile) {
+            $content = Get-Content $gkFile -Raw
+            if ($content.Trim().Length -gt 50) {
+                Write-Pass "global-knowledge.md has content ($((Get-Content $gkFile).Count) lines)"
             }
-            if ($indexInsights -ne $actualInsights) {
-                Write-Warn "GK index insights ($indexInsights) != actual files ($actualInsights)"
-            }
-            if ($indexPatterns -eq $actualPatterns -and $indexInsights -eq $actualInsights) {
-                Write-Pass "GK index matches disk: $actualPatterns patterns, $actualInsights insights"
+            else {
+                Write-Warn "global-knowledge.md appears empty or minimal"
             }
         }
-        else { Write-Warn "Global Knowledge index.json not found" }
 
-        # Check GK copilot-instructions counts match reality
-        $gkCopilot = Join-Path $gkPath ".github\copilot-instructions.md"
-        if (Test-Path $gkCopilot) {
-            $gkContent = Get-Content $gkCopilot -Raw
-            if ($gkContent -match '(\d+)\s*patterns') {
-                $docPatterns = [int]$Matches[1]
-                if ($docPatterns -ne $actualPatterns) {
-                    Write-Warn "GK copilot-instructions says $docPatterns patterns, actual: $actualPatterns"
-                }
-            }
-            if ($gkContent -match '(\d+)\s*insights') {
-                $docInsights = [int]$Matches[1]
-                if ($docInsights -ne $actualInsights) {
-                    Write-Warn "GK copilot-instructions says $docInsights insights, actual: $actualInsights"
-                }
-            }
+        if (-not $isCloud) {
+            Write-Warn "AI-Memory is local-only (no cloud sync). Install cloud storage for cross-device access."
         }
     }
     else {
-        Write-Pass "Global Knowledge repo not found (skipped)"
+        Write-Warn "AI-Memory folder not found (neither cloud storage nor ~/.alex/AI-Memory/)"
     }
 }
 
@@ -1433,6 +1482,13 @@ if (32 -in $runPhases) {
                 'code-review'                     = 'review'
                 'global-knowledge'                = 'knowledge'
                 'ai-writing-avoidance'            = 'audit-writing'
+                'memory-export'                   = 'export-memory'
+                'token-waste-elimination'         = 'token-audit'
+                'data-visualization'              = 'visualize'
+                'data-analysis'                   = 'analyze'
+                'dashboard-design'                = 'dashboard'
+                'data-storytelling'               = 'datastory'
+                'chart-interpretation'            = 'interpret'
             }
 
             $noInstr = @()
@@ -1505,22 +1561,13 @@ if (33 -in $runPhases) {
         }
     }
     
-    # 3. No PII in master user-profile.json (protection layer before sync exclusion)
-    $profilePath = Join-Path $ghPath "config\user-profile.json"
-    if (Test-Path $profilePath) {
-        $profile = Get-Content $profilePath -Raw | ConvertFrom-Json
-        $hasPII = $false
-        if ($profile.name -and $profile.name.Trim() -ne '') {
-            Write-Warn "Master user-profile.json contains name: '$($profile.name)' (will be excluded from heir)"
-            $hasPII = $true
-        }
-        if ($profile.contact -and $profile.contact.email) {
-            Write-Warn "Master user-profile.json contains email (will be excluded from heir)"
-            $hasPII = $true
-        }
-        if (-not $hasPII) {
-            Write-Pass "Master user-profile.json is PII-free"
-        }
+    # 3. User profile should be in AI-Memory, not in workspace .github/config/
+    $localProfilePath = Join-Path $ghPath "config\user-profile.json"
+    if (Test-Path $localProfilePath) {
+        Write-Warn "Master .github/config/user-profile.json still exists (profile should be in AI-Memory)"
+    }
+    else {
+        Write-Pass "No workspace user-profile.json (profile in AI-Memory)"
     }
     
     # 4. Synapse references to non-existent files (will become broken in heir)

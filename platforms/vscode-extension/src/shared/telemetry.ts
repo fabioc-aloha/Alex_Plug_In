@@ -434,7 +434,6 @@ export function getAlexSettings(): Record<string, unknown> {
   return {
     'workspace.protectedMode': config.get('workspace.protectedMode'),
     'm365.enabled': config.get('m365.enabled'),
-    'globalKnowledge.enabled': config.get('globalKnowledge.enabled'),
     'telemetry.enabled': config.get('telemetry.enabled'),
   };
 }

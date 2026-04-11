@@ -722,7 +722,7 @@ async function runGapAnalysis(
     }
   }
 
-  // 4. User profile (always recommend)
+  // 4. User profile (migrate to AI-Memory if found in backup)
   const profilePath = path.join(
     backupPath,
     ".github",
@@ -735,7 +735,8 @@ async function runGapAnalysis(
       type: "profile",
       sourcePath: ".github/config/user-profile.json",
       targetPath: ".github/config/user-profile.json",
-      description: "Your preferences and settings",
+      description:
+        "Your preferences (will migrate to AI-Memory if not already there)",
       sizeKB: Math.round(stats.size / 1024),
       lastModified: stats.mtime,
       recommended: true,

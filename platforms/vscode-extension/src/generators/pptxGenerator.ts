@@ -16,9 +16,6 @@ import {
   listIconNames,
   listStockIllustrationNames,
 } from "./illustrationIcons";
-// Unused services for now (reserved for future enhancements)
-// import { fileToBase64DataUri, getTickerLogoUrl, LogoServiceConfig } from '../services/logoService';
-// import { getIconifyUrl, getDiceBearUrl } from '../services/illustrationService';
 import { parseIconifyValue } from "../services/illustrationService";
 import {
   addTitleSlide,
@@ -91,7 +88,6 @@ export interface ImageData {
  * - stock: Pre-bundled business illustrations
  * - svg: User-provided SVG files from workspace or logos folder
  * - image: User-provided PNG/JPG files from workspace or logos folder
- * - ticker: Company logo fetched by stock ticker symbol (via Logo API)
  */
 export type IllustrationType =
   | "icon"
@@ -100,8 +96,7 @@ export type IllustrationType =
   | "mermaid"
   | "stock"
   | "svg"
-  | "image"
-  | "ticker";
+  | "image";
 
 export interface IllustrationData {
   type: IllustrationType;
@@ -459,14 +454,13 @@ function parseMarkdownTable(lines: string[]): TableData | null {
  * - ![stock:collaboration] → Stock business illustration
  * - ![svg:./path/file.svg] → User-provided SVG file (explicit path)
  * - ![image:./path/logo.png] → User-provided image file (explicit path)
- * - ![ticker:AAPL] → Company logo by stock ticker (via Logo API)
  *
  * Returns IllustrationData or null if not an illustration syntax
  */
 function parseIllustrationSyntax(text: string): IllustrationData | null {
   // Match: ![type:value] or ![type:value#color/style] with optional caption
   const match = text.match(
-    /!\[(icon|iconify|avatar|stock|svg|ticker|image):([^\]#]+)(?:#([a-zA-Z0-9-]+))?\](?:\(([^)]*)\))?/,
+    /!\[(icon|iconify|avatar|stock|svg|image):([^\]#]+)(?:#([a-zA-Z0-9-]+))?\](?:\(([^)]*)\))?/,
   );
   if (!match) {
     return null;
@@ -536,13 +530,6 @@ function parseIllustrationSyntax(text: string): IllustrationData | null {
     return {
       type: "image",
       value: value.trim(),
-      caption: caption,
-    };
-  } else if (type === "ticker") {
-    // Stock ticker for API lookup
-    return {
-      type: "ticker",
-      value: value.trim().toUpperCase(),
       caption: caption,
     };
   }
@@ -630,8 +617,8 @@ export function parseMarkdownToSlides(markdown: string): SlideContent[] {
         // Speaker notes
         currentSlide.notes =
           (currentSlide.notes || "") + trimmed.replace(/^>\s+/, "") + "\n";
-      } else if (trimmed.match(/^!\[(icon|stock|svg|logo|ticker|image):/)) {
-        // Illustration syntax: ![icon:name], ![stock:name], ![svg:path], ![logo:name], ![ticker:AAPL], ![image:path]
+      } else if (trimmed.match(/^!\[(icon|stock|svg|logo|image):/)) {
+        // Illustration syntax: ![icon:name], ![stock:name], ![svg:path], ![logo:name], ![image:path]
         const illustration = parseIllustrationSyntax(trimmed);
         if (illustration) {
           // If this is the only content, make it an illustration slide

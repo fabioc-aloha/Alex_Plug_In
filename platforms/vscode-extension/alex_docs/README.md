@@ -335,18 +335,18 @@ Alex implements a dual-process cognitive model inspired by human cognition:
 
 Alex has different types of memory arranged in a hierarchy:
 
-| Type           | Location                    | Purpose                            |
-| -------------- | --------------------------- | ---------------------------------- |
-| **Working**    | Chat session                | Current conversation (temporary)   |
-| **Procedural** | `.github/instructions/`     | How-to processes (auto-loaded)     |
-| **Episodic**   | `.github/prompts/`          | Complex workflows (user-invoked)   |
-| **Skills**     | `.github/skills/`           | Domain expertise (auto-loaded)     |
-| **Global**     | `~/.alex/global-knowledge/` | Cross-project patterns & insights  |
-| **Cloud**      | Private GitHub Repo         | Backup and sharing across machines |
+| Type           | Location                | Purpose                           |
+| -------------- | ----------------------- | --------------------------------- |
+| **Working**    | Chat session            | Current conversation (temporary)  |
+| **Procedural** | `.github/instructions/` | How-to processes (auto-loaded)    |
+| **Episodic**   | `.github/prompts/`      | Complex workflows (user-invoked)  |
+| **Skills**     | `.github/skills/`       | Domain expertise (auto-loaded)    |
+| **Global**     | `AI-Memory/`            | Cross-project patterns & insights |
+| **Cloud**      | OneDrive/iCloud/Dropbox | Automatic sync across machines    |
 
 ### Global Knowledge
 
-Your `~/.alex/` folder contains knowledge that works across all projects:
+Your `AI-Memory/` folder (cloud-synced) contains knowledge that works across all projects:
 
 | Type    | File Pattern | Purpose                 |
 | ------- | ------------ | ----------------------- |
@@ -380,13 +380,12 @@ Your `~/.alex/` folder contains knowledge that works across all projects:
 ├── hooks/                     # Git hooks
 └── config/                    # Configuration files
 
-~/.alex/
-├── global-knowledge/
-│   ├── index.json             # Master index
-│   ├── patterns/              # GK-* files
-│   └── insights/              # GI-* files
-├── project-registry.json
-└── sync-metadata.json
+AI-Memory/                     # Cloud-synced (OneDrive/iCloud/Dropbox)
+├── user-profile.json          # Cross-workspace profile
+├── global-knowledge.md        # Accumulated knowledge
+├── patterns/                  # GK-* files
+├── insights/                  # GI-* files
+└── index.json                 # Searchable index
 ```
 
 ---

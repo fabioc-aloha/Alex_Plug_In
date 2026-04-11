@@ -155,10 +155,10 @@ For deeper personality changes, edit `.github/instructions/alex-identity-integra
 
 ## Related Files
 
-| File                                                                                                           | Purpose                                   |
-| -------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| File                                                                                                              | Purpose                                   |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | [alex-identity-integration.instructions.md](../../.github/instructions/alex-identity-integration.instructions.md) | Operational identity protocols (for Alex) |
-| [user-profile.json](../../.github/config/user-profile.json)                                                       | Your preferences (adjusts Alex to you)    |
+| AI-Memory/user-profile.json (cloud-synced)                                                                        | Your preferences (adjusts Alex to you)    |
 | [copilot-instructions.md](../../.github/copilot-instructions.md)                                                  | Core frame and working memory             |
 
 ---

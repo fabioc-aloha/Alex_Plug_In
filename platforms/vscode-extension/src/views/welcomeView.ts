@@ -158,6 +158,9 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       upgrade: "alex.upgrade",
       showStatus: "alex.showStatus",
       setupEnvironment: "alex.setupEnvironment",
+      optimizeSettings: "alex.optimizeSettings",
+      manageExtensions: "alex.manageExtensions",
+      setupMcpServers: "alex.setupMcpServers",
       manageSecrets: "alex.manageSecrets",
       detectEnvSecrets: "alex.detectEnvSecrets",
       viewDiagnostics: "alex.viewBetaTelemetry",
@@ -392,8 +395,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           typeof (payload as any).key === "string" ? (payload as any).key : "";
         const allowedSettings = [
           "alex.autoInsights.enabled",
-          "alex.dailyBriefing.enabled",
-          "alex.globalKnowledge.enabled",
           "chat.autopilot.enabled",
           "github.copilot.chat.copilotMemory.enabled",
           "chat.mcp.gallery.enabled",
@@ -763,21 +764,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           group: "Alex Features",
           tooltip:
             "Automatically detect and suggest saving insights from conversations",
-        },
-        {
-          key: "alex.dailyBriefing.enabled",
-          label: "Daily Briefing",
-          enabled: alexCfg.get<boolean>("dailyBriefing.enabled", true),
-          group: "Alex Features",
-          tooltip: "Show a summary briefing on your first chat each day",
-        },
-        {
-          key: "alex.globalKnowledge.enabled",
-          label: "Global Knowledge",
-          enabled: alexCfg.get<boolean>("globalKnowledge.enabled", true),
-          group: "Alex Features",
-          tooltip:
-            "Enable cross-project learning and memory via the Global Knowledge repo",
         },
         // Copilot Power Settings
         {

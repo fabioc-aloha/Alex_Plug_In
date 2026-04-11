@@ -294,6 +294,26 @@ if (runPhases.includes(3)) {
 // ============================================================
 if (runPhases.includes(4)) {
   writePhase(4, "Trigger Semantic Analysis");
+  // Known intentional overlaps between related skills (reviewed and accepted)
+  const knownOverlaps = new Set([
+    "academic writing",
+    "human-ai collaboration",
+    "heir sync",
+    "security audit",
+    "memory balance",
+    "drift detection",
+    "neural maintenance",
+    "living document",
+    "typography",
+    "choose model",
+    "literature matrix",
+    "msal",
+    "gdpr compliance",
+    "data protection",
+    "action items",
+    "5 whys",
+    "prompt template",
+  ]);
   const indexPath = path.join(
     ghPath,
     "skills",
@@ -313,13 +333,17 @@ if (runPhases.includes(4)) {
         }
       }
     }
-    const overlaps = Object.entries(triggers).filter(([, v]) =>
-      v.includes(","),
+    const overlaps = Object.entries(triggers).filter(([k, v]) =>
+      v.includes(",") && !knownOverlaps.has(k),
     );
-    if (overlaps.length === 0) pass("No trigger overlaps");
+    const knownCount = Object.entries(triggers).filter(([k, v]) =>
+      v.includes(",") && knownOverlaps.has(k),
+    ).length;
+    if (overlaps.length === 0 && knownCount === 0) pass("No trigger overlaps");
+    else if (overlaps.length === 0) pass(`No new trigger overlaps (${knownCount} known/accepted)`);
     else {
       overlaps.forEach(([k, v]) => warn(`Overlap '${k}': ${v}`));
-      pass("Review overlaps - shared triggers may be intentional");
+      pass(`Review overlaps - shared triggers may be intentional (${knownCount} known/accepted)`);
     }
   }
 }
@@ -329,19 +353,31 @@ if (runPhases.includes(4)) {
 // ============================================================
 if (runPhases.includes(5)) {
   writePhase(5, "Master-Heir Skill Sync");
+  // Skills intentionally excluded from heir (master-only or heir:m365)
+  const excludedFromHeir = new Set([
+    "heir-sync-management",
+    "release-process",
+    "release-preflight",
+    "extension-audit-methodology",
+    "skill-catalog-generator",
+    "m365-agent-debugging",
+    "teams-app-patterns",
+  ]);
   const heirSkillsDir = path.join(heirBase, ".github", "skills");
   if (fs.existsSync(heirSkillsDir)) {
     const master = dirs(path.join(ghPath, "skills")).sort();
     const heir = dirs(heirSkillsDir).sort();
     pass(`Master: ${master.length} skills | Heir: ${heir.length} skills`);
-    const missingInHeir = setDiff(master, heir);
+    const missingInHeir = setDiff(master, heir).filter(
+      (s) => !excludedFromHeir.has(s),
+    );
     const extraInHeir = setDiff(heir, master);
     if (missingInHeir.length > 0)
       warn(`Missing in heir: ${missingInHeir.join(", ")}`);
     if (extraInHeir.length > 0)
       warn(`Extra in heir: ${extraInHeir.join(", ")}`);
     if (missingInHeir.length === 0 && extraInHeir.length === 0)
-      pass("Skill directories match");
+      pass(`Skill directories match (${excludedFromHeir.size} excluded by design)`);
   } else {
     warn("Heir folder not found - skipping sync check");
   }
@@ -836,9 +872,11 @@ if (runPhases.includes(20)) {
         `${name} - Contains box-drawing ASCII art (Mermaid or tables preferred)`,
       );
     }
+    // Detect ASCII-art arrow diagrams (not tables, bullets, blockquotes, or meta-routing)
+    // Match lines that are purely arrow/box art: only whitespace + arrow chars + optional labels
     const arrowLines = content
       .split("\n")
-      .filter((l) => /^\s*[|v^<\->]/.test(l));
+      .filter((l) => /^\s*(?:[\|v^](?:\s*$|\s+\|)|[+\-]{3,}[>|+]|<?\-{2,}>|={2,}>|\.{3,})/.test(l));
     if (arrowLines.length > 5) {
       formatWarnings.push(
         `${name} - Heavy use of ASCII arrows (structured format preferred)`,
@@ -1110,28 +1148,55 @@ if (runPhases.includes(28)) {
 if (runPhases.includes(29)) {
   writePhase(29, "AI-Memory Sync Validation");
 
-  // Resolve AI-Memory path: OneDrive first, then local fallback
-  const oneDrivePath =
-    process.env.OneDrive ||
-    process.env.OneDriveConsumer ||
-    process.env.OneDriveCommercial;
-
+  // Resolve AI-Memory path: scan cloud storage roots, then local fallback
   let aiMemoryPath = null;
-  let isOneDrive = false;
+  let isCloud = false;
 
-  if (oneDrivePath && fs.existsSync(path.join(oneDrivePath, "AI-Memory"))) {
-    aiMemoryPath = path.join(oneDrivePath, "AI-Memory");
-    isOneDrive = true;
-  } else {
-    // Check local fallback: ~/.alex/AI-Memory/
-    const localFallback = path.join(os.homedir(), ".alex", "AI-Memory");
+  // Scan all potential cloud storage roots for AI-Memory/
+  const homeDir = os.homedir();
+  const cloudCandidates = [];
+  // OneDrive: env vars + any OneDrive-like folder in user home
+  const envRoots = [
+    process.env.OneDrive,
+    process.env.OneDriveConsumer,
+    process.env.OneDriveCommercial,
+  ].filter(Boolean);
+  for (const r of envRoots) cloudCandidates.push(r);
+  // Scan home for cloud storage folders (use statSync to resolve reparse points/junctions)
+  try {
+    const homeEntries = fs.readdirSync(homeDir);
+    for (const name of homeEntries) {
+      if (!/^OneDrive|^iCloudDrive|^Google Drive|^Dropbox/i.test(name)) continue;
+      const full = path.join(homeDir, name);
+      try {
+        if (fs.statSync(full).isDirectory() && !cloudCandidates.includes(full)) {
+          cloudCandidates.push(full);
+        }
+      } catch { /* permission denied or broken link */ }
+    }
+  } catch { /* ignore */ }
+  // Check iCloud on macOS
+  const iCloudPath = path.join(homeDir, "Library", "Mobile Documents", "com~apple~CloudDocs");
+  if (fs.existsSync(iCloudPath)) cloudCandidates.push(iCloudPath);
+
+  for (const root of cloudCandidates) {
+    const candidate = path.join(root, "AI-Memory");
+    if (fs.existsSync(candidate)) {
+      aiMemoryPath = candidate;
+      isCloud = true;
+      break;
+    }
+  }
+  // Local fallback: ~/.alex/AI-Memory/
+  if (!aiMemoryPath) {
+    const localFallback = path.join(homeDir, ".alex", "AI-Memory");
     if (fs.existsSync(localFallback)) {
       aiMemoryPath = localFallback;
     }
   }
 
   if (aiMemoryPath) {
-    const source = isOneDrive ? "OneDrive" : "local (~/.alex/)";
+    const source = isCloud ? "cloud storage" : "local (~/.alex/)";
     const expectedFiles = [
       "profile.md",
       "global-knowledge.md",
@@ -1146,6 +1211,15 @@ if (runPhases.includes(29)) {
     } else {
       warn(`AI-Memory (${source}) missing files: ${missing.join(", ")}`);
     }
+    // Check user-profile.json in AI-Memory
+    const profileFile = path.join(aiMemoryPath, "user-profile.json");
+    if (fs.existsSync(profileFile)) {
+      pass("AI-Memory user-profile.json present");
+    } else {
+      warn(
+        "AI-Memory user-profile.json not found (user profile should be in AI-Memory)",
+      );
+    }
     // Check global-knowledge.md is not empty
     const gkFile = path.join(aiMemoryPath, "global-knowledge.md");
     if (fs.existsSync(gkFile)) {
@@ -1158,14 +1232,14 @@ if (runPhases.includes(29)) {
         warn("global-knowledge.md appears empty or minimal");
       }
     }
-    if (!isOneDrive) {
+    if (!isCloud) {
       warn(
-        "AI-Memory is local-only (no OneDrive sync). Install OneDrive for cross-device access.",
+        "AI-Memory is local-only (no cloud sync). Install cloud storage for cross-device access.",
       );
     }
   } else {
     warn(
-      "AI-Memory folder not found (neither OneDrive nor ~/.alex/AI-Memory/)",
+      "AI-Memory folder not found (neither cloud storage nor ~/.alex/AI-Memory/)",
     );
   }
 }
@@ -1305,7 +1379,7 @@ if (runPhases.includes(32)) {
     ].sort();
 
     const agentMatch = ciContent.match(
-      /(?:^|\n)## Agents\s*\n([\s\S]*?)(?=\n## |\n$|$)/m,
+      /(?:^|\n)## Agents\s*\n([\s\S]*?)(?=\n## [A-Z]|$)/,
     );
     if (agentMatch) {
       const agentLine =
@@ -1487,24 +1561,14 @@ if (runPhases.includes(33)) {
     else pass("No legacy .prompt.md files in episodic");
   }
 
-  // 3. No PII in master user-profile.json
-  const profilePath = path.join(ghPath, "config", "user-profile.json");
-  if (fs.existsSync(profilePath)) {
-    const prof = readJSON(profilePath);
-    let hasPII = false;
-    if (prof && prof.name && prof.name.trim() !== "") {
-      warn(
-        `Master user-profile.json contains name: '${prof.name}' (will be excluded from heir)`,
-      );
-      hasPII = true;
-    }
-    if (prof && prof.contact && prof.contact.email) {
-      warn(
-        "Master user-profile.json contains email (will be excluded from heir)",
-      );
-      hasPII = true;
-    }
-    if (!hasPII) pass("Master user-profile.json is PII-free");
+  // 3. User profile should be in AI-Memory, not in workspace .github/config/
+  const localProfilePath = path.join(ghPath, "config", "user-profile.json");
+  if (fs.existsSync(localProfilePath)) {
+    warn(
+      "Master .github/config/user-profile.json still exists (profile should be in AI-Memory)",
+    );
+  } else {
+    pass("No workspace user-profile.json (profile in AI-Memory)");
   }
 
   // 4. Synapse references to non-existent files

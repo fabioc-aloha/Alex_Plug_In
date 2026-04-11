@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "7.5.0",
+  "version": "7.6.0",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -333,6 +333,21 @@
         "command": "alex.setupEnvironment",
         "title": "Alex: Setup Environment",
         "icon": "$(gear)"
+      },
+      {
+        "command": "alex.optimizeSettings",
+        "title": "Alex: Optimize Settings",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "alex.manageExtensions",
+        "title": "Alex: Manage Extensions",
+        "icon": "$(extensions)"
+      },
+      {
+        "command": "alex.setupMcpServers",
+        "title": "Alex: Setup MCP Servers",
+        "icon": "$(plug)"
       },
       {
         "command": "alex.manageSecrets",
@@ -1202,70 +1217,11 @@
           "default": false,
           "description": "Automatically save insights with very high confidence (>0.8) without prompting"
         },
-        "alex.globalKnowledge.enabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Enable Global Knowledge features for cross-project learning and memory."
-        },
         "alex.globalKnowledge.repoPath": {
           "type": "string",
           "default": "",
           "scope": "machine",
-          "description": "Custom path to Global Knowledge repository. Leave empty for auto-detection (sibling folder named Alex-Global-Knowledge)."
-        },
-        "alex.globalKnowledge.remoteRepo": {
-          "type": "string",
-          "default": "",
-          "scope": "machine",
-          "markdownDescription": "GitHub owner or repository for remote Global Knowledge access. Enter just the owner (e.g., `fabioc-aloha`) to use the standard repo name `Alex-Global-Knowledge`, or `owner/custom-repo` for a custom name."
-        },
-        "alex.globalKnowledge.remoteCacheTTL": {
-          "type": "number",
-          "default": 300,
-          "minimum": 60,
-          "maximum": 3600,
-          "scope": "machine",
-          "description": "Cache TTL in seconds for remote GitHub knowledge reads. Lower values fetch more frequently. Default: 300 (5 minutes)."
-        },
-        "alex.globalKnowledge.useGitHubAuth": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Use VS Code's built-in GitHub authentication for private repository access. Recommended for private team repos."
-        },
-        "alex.globalKnowledge.githubToken": {
-          "type": "string",
-          "default": "",
-          "scope": "machine",
-          "deprecationMessage": "This setting is deprecated. Tokens are now stored securely using VS Code SecretStorage. Any existing token will be migrated automatically on extension activation.",
-          "markdownDescription": "**DEPRECATED**: GitHub tokens are now stored securely via SecretStorage. Any token here will be migrated automatically and cleared from settings."
-        },
-        "alex.logos.brandfetchClientId": {
-          "type": "string",
-          "default": "",
-          "scope": "application",
-          "description": "Brandfetch client ID for ticker-based logo lookup (free at brandfetch.com). No attribution required."
-        },
-        "alex.logos.logoDevToken": {
-          "type": "string",
-          "default": "",
-          "scope": "application",
-          "description": "Logo.dev API token for ticker-based logo lookup (free 500K/mo at logo.dev). Attribution required on free tier."
-        },
-        "alex.dashboard.refreshInterval": {
-          "type": "number",
-          "default": 30,
-          "minimum": 10,
-          "maximum": 300,
-          "scope": "machine",
-          "description": "Dashboard auto-refresh interval in seconds."
-        },
-        "alex.dailyBriefing.enabled": {
-          "type": "boolean",
-          "default": true,
-          "scope": "machine",
-          "description": "Show daily briefing on first chat of the day."
+          "description": "Custom path to AI-Memory folder. Leave empty for auto-detection (OneDrive/AI-Memory or ~/.alex/AI-Memory)."
         },
         "alex.personalityMode": {
           "type": "string",
@@ -1976,31 +1932,31 @@
       {
         "id": "alex.globalKnowledge",
         "title": "Global Knowledge Setup",
-        "description": "Share learnings across all your projects with a Git-based knowledge repository",
+        "description": "Share learnings across all your projects with cloud-synced AI-Memory",
         "when": "alex.hasMemoryFiles",
         "steps": [
           {
             "id": "alex.gk.intro",
             "title": "What is Global Knowledge?",
-            "description": "Global Knowledge lets Alex share patterns and insights across all your projects. Learnings from one project automatically benefit every other project.\n\nIt's powered by a simple Git repository — no cloud services required."
+            "description": "Global Knowledge lets Alex share patterns and insights across all your projects. Learnings from one project automatically benefit every other project.\n\nIt's powered by AI-Memory — a cloud-synced folder (OneDrive/iCloud/Dropbox) that travels with you across workspaces."
           },
           {
             "id": "alex.gk.createRepo",
-            "title": "Create a Knowledge Repository",
-            "description": "Create a new GitHub repository named `Alex-Global-Knowledge` (or any name) and clone it next to your workspace.\n\nAlex auto-detects sibling folders with `index.json` + `patterns/` + `insights/`."
+            "title": "AI-Memory Location",
+            "description": "Alex auto-detects your AI-Memory folder in common cloud storage locations.\n\nThe folder contains your profile, global knowledge patterns, insights, and learning goals."
           },
           {
             "id": "alex.gk.firstSync",
-            "title": "First Sync",
-            "description": "Once set up, try syncing your knowledge:\n\nTry: `@alex /sync`\n\nThis merges local and remote knowledge bidirectionally.",
+            "title": "First Insight",
+            "description": "Once set up, try saving a global insight:\n\nTry: `@alex /saveinsight` after discovering something useful.\n\nInsights are stored in AI-Memory and available across all your workspaces.",
             "completionEvents": [
               "onContext:alex.globalKnowledgeConfigured"
             ]
           },
           {
             "id": "alex.gk.saveInsight",
-            "title": "Save Your First Insight",
-            "description": "Capture a valuable learning for use across projects:\n\nTry: `@alex /saveinsight` after discovering something useful."
+            "title": "Explore Knowledge",
+            "description": "View your accumulated knowledge and patterns:\n\nTry: `@alex /knowledge` to see what Alex has learned across your projects."
           }
         ]
       }

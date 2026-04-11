@@ -520,6 +520,11 @@ async function buildConversationHistoryLayer(
 /**
  * Inject personalization from user profile.
  *
+ * Source: AI-Memory/user-profile.json (cloud-synced, cross-platform).
+ * This is the source of truth for identity and structured preferences.
+ * VS Code Copilot Chat memory (/memories/) supplements with workflow tips
+ * but must NOT duplicate identity or preference fields from this profile.
+ *
  * Token budget: ~150 tokens
  */
 async function buildUserProfileLayer(ctx: PromptContext): Promise<string> {

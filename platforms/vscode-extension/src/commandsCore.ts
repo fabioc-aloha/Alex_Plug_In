@@ -13,7 +13,7 @@ import {
 } from "./commands/initialize";
 import { runDreamProtocol } from "./commands/dream";
 import { registerHeirValidationCommand } from "./commands/heirValidation";
-import { setupEnvironment } from "./commands/setupEnvironment";
+import { setupEnvironment, optimizeSettings, manageExtensions, setupMcpServers } from "./commands/setupEnvironment";
 import { upgradeArchitecture } from "./commands/upgrade";
 import {
   completeMigration,
@@ -380,6 +380,51 @@ export function registerCoreCommands(
       const endLog = telemetry.logTimed("command", "setup_environment");
       try {
         await setupEnvironment();
+        endLog(true);
+      } catch (error) {
+        endLog(
+          false,
+          error instanceof Error ? error : new Error(String(error)),
+        );
+      }
+    }),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.optimizeSettings", async () => {
+      const endLog = telemetry.logTimed("command", "optimize_settings");
+      try {
+        await optimizeSettings();
+        endLog(true);
+      } catch (error) {
+        endLog(
+          false,
+          error instanceof Error ? error : new Error(String(error)),
+        );
+      }
+    }),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.manageExtensions", async () => {
+      const endLog = telemetry.logTimed("command", "manage_extensions");
+      try {
+        await manageExtensions();
+        endLog(true);
+      } catch (error) {
+        endLog(
+          false,
+          error instanceof Error ? error : new Error(String(error)),
+        );
+      }
+    }),
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("alex.setupMcpServers", async () => {
+      const endLog = telemetry.logTimed("command", "setup_mcp_servers");
+      try {
+        await setupMcpServers();
         endLog(true);
       } catch (error) {
         endLog(

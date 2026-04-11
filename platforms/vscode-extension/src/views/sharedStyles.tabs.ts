@@ -141,6 +141,12 @@ export function getTabStyles(): string {
           opacity: 0.6;
           margin-bottom: 8px;
       }
+      .card-description {
+          font-size: var(--font-sm, 12px);
+          color: var(--vscode-descriptionForeground);
+          margin: 0 0 8px 0;
+          line-height: 1.4;
+      }
 
       /* Action buttons inside dashboard cards get proper vertical rhythm */
       .dashboard-card .action-btn { margin-top: 4px; }

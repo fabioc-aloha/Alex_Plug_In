@@ -9,10 +9,10 @@ Export everything Alex knows about me into a single portable document I can past
 
 ## Process
 
-1. Read `.github/config/user-profile.json` for identity, career, credentials, and preferences
-2. Read `/memories/` directory for all user memory files (patterns, lessons, instructions)
+1. Read `AI-Memory/user-profile.json` for identity, career, credentials, and preferences (cloud-synced)
+2. Read `/memories/` directory for all user memory files (VS Code workflow tips, patterns)
 3. Check `/memories/session/` for any active session notes
-4. Read `.github/config/user-profile.json` for cognitive profile data
+4. Read `AI-Memory/profile.md` for narrative cognitive profile data
 5. Check repository memories from prior agent interactions (available in system context)
 6. Read Active Context from `.github/copilot-instructions.md` for current phase/mode/version
 

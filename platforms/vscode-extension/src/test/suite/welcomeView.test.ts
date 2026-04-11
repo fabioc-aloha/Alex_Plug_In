@@ -190,7 +190,7 @@ suite("Welcome View Test Suite", () => {
       // valid toggle
       await provider.handleMessageForTest({
         command: "toggleSetting",
-        key: "alex.globalKnowledge.enabled",
+        key: "alex.autoInsights.enabled",
         value: true,
       });
       assert.strictEqual(updateCalls.length, 1);

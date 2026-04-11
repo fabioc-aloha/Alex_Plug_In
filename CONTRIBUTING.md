@@ -1,6 +1,6 @@
 # Contributing to Alex Cognitive Architecture
 
-**Last Updated**: February 26, 2026
+**Last Updated**: April 11, 2026
 
 Thank you for your interest in contributing to the Alex Cognitive Architecture project! This document provides guidelines and information for contributors.
 
@@ -70,17 +70,17 @@ npm install
 3. Test commands like `Alex: Initialize Architecture` in the new window.
 
 
-### 2. Create a Feature Branch
+### 3. Create a Feature Branch
 
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
-### 3. Make Changes
+### 4. Make Changes
 
 Follow the architecture principles and file conventions detailed below.
 
-### 4. Test Your Changes
+### 5. Test Your Changes
 
 ```
 # Validate synaptic network integrity via VS Code Command Palette
@@ -90,6 +90,15 @@ Alex: Dream
 # - Network health status (should be HEALTHY)
 # - Broken synapses count (should be 0)
 # - Total synapses (should be 800+)
+```
+
+### 6. Validate with brain-qa
+
+```bash
+# Run brain-qa validation
+node .github/muscles/brain-qa.cjs
+
+# Expected: 0 errors, 0 warnings
 ```
 
 ## Architecture Principles
@@ -217,7 +226,6 @@ Alex: Dream
 - [ ] Version numbers updated following IUPAC convention
 - [ ] Research citations included for new concepts
 - [ ] Dream protocol health check passed
-- [ ] No exaggerated or unsupported claims
 - [ ] File naming conventions followed
 
 ### 2. Commit Message Format
@@ -274,7 +282,7 @@ Brief overview of changes
 - **Version Changes**: {if applicable}
 
 ## Testing Performed
-- [ ] Dream protocol passed (via `Alex: Dream (Neural Maintenance)` command)
+- [ ] Dream protocol passed (via `Alex: Dream` command)
 - [ ] Network health status: HEALTHY
 - [ ] Manual validation completed
 
@@ -294,16 +302,12 @@ Brief overview of changes
 ### Automated Validation
 
 ```bash
-# Full validation suite
-node scripts/validate-synapses.cjs
-
-# Brain QA health check
-node scripts/audit-synapses.cjs
+# Brain QA comprehensive validation
+node .github/muscles/brain-qa.cjs
 
 # Expected results:
-# - 0 broken references
-# - Connection count > 900
-# - Status: OPTIMAL
+# - 0 errors, 0 warnings
+# - All phases passed
 ```
 
 ### Manual Validation

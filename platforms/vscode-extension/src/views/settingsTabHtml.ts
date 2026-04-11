@@ -2,6 +2,7 @@
  * settingsTabHtml.ts - Settings tab HTML generation for the Command Center sidebar
  *
  * Streamlined from mindTabHtml.ts in v7.4.0 to show only API keys and quick settings.
+ * v7.5.1: Added Environment Setup section with optimize, extensions, MCP buttons.
  * Exports a single function called by the orchestrator.
  */
 import { escapeHtml } from "../shared/sanitize";
@@ -23,6 +24,15 @@ export function getSettingsTabHtml(ctx: SettingsTabContext): string {
 
   return `
       <div class="tab-panel${ctx.isActive ? " active" : ""}" id="panel-settings" role="tabpanel" aria-labelledby="tab-settings">
+
+          <div class="dashboard-card">
+              <div class="dashboard-card-title">Environment Setup</div>
+              <p class="card-description">Configure VS Code for optimal chat-centric development on Windows and macOS.</p>
+              ${actionButton("optimizeSettings", "⚙️", "Optimize Settings", "Chat-centric workflow, formatter conflict resolution, cross-platform paths")}
+              ${actionButton("manageExtensions", "🧩", "Manage Extensions", "Install recommended extensions and remove unused ones")}
+              ${actionButton("setupMcpServers", "🔌", "Setup MCP Servers", "Install MarkItDown, GitHub MCP, and other recommended servers")}
+              ${actionButton("setupEnvironment", "🔧", "Full Alex Setup…", "Run the complete Alex environment wizard (settings + extensions + bootstrap)")}
+          </div>
 
           ${
             (tokenStatuses ?? []).length > 0
@@ -52,7 +62,6 @@ export function getSettingsTabHtml(ctx: SettingsTabContext): string {
               ? `
           <div class="dashboard-card">
               <div class="dashboard-card-title">Quick Settings</div>
-              ${actionButton("setupEnvironment", "⚙️", "Full Environment Setup…", "Open the environment setup wizard")}
               <div class="settings-toggles">
                   ${(() => {
                     let lastGroup = "";

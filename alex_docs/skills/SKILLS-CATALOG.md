@@ -294,7 +294,7 @@ flowchart TB
         PM["Procedural<br/>.instructions.md"]
         EM["Episodic<br/>.prompt.md"]
         SK["Skills<br/>.github/skills/"]
-        GK["Global Knowledge<br/>~/.alex/global-knowledge/"]
+        GK["Global Knowledge<br/>AI-Memory/"]
     end
 
     subgraph SYNAPSES["🔗 Synaptic Network"]
@@ -799,7 +799,7 @@ flowchart LR
         EPISODIC["📜 Episodic Memory<br/><small>.prompt.md files</small>"]
         PROCEDURAL["📋 Procedural Memory<br/><small>.instructions.md files</small>"]
         SKILLS["🎯 Skills<br/><small>.github/skills/</small>"]
-        GLOBAL["🌐 Global Knowledge<br/><small>~/.alex/global-knowledge/</small>"]
+        GLOBAL["🌐 Global Knowledge<br/><small>AI-Memory/</small>"]
     end
 
     subgraph Trifecta["🔺 Trifecta Completeness"]

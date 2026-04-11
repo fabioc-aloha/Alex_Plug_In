@@ -7,16 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.6.0] - 2026-04-11
+
+### Changed
+
+- Version bump
+
+---
+
 ## [7.5.0] - 2026-04-11
 
 ### Added
 
 - Planning-first development discipline: strategic artifacts (PLAN, UX vision, UI specs, visual guidance, tracker) must exist before implementation code
 - Terminal command safety: output capture failure mitigations and terminal hanging prevention
+- AI-Memory cloud-synced storage: user profile migrated from workspace `.github/config/` to cross-workspace AI-Memory folder (OneDrive/iCloud/Dropbox)
 
 ### Changed
 
 - Research-first workflow updated with Phase 0.5 planning gate
+- Global Knowledge walkthrough updated from Git-based repository to cloud-synced AI-Memory
+- brain-qa.cjs and brain-qa.ps1 warnings resolved to 0 (ASCII regex, agent parsing, heir exclusions, known overlaps, AI-Memory cloud detection)
+- 11 documentation files updated with correct AI-Memory profile path
+
+### Removed
+
+- **3 dead scaffolding files** removed: `globalKnowledgeBanner.ts`, `globalKnowledgePatterns.ts`, `globalKnowledgeContent.ts` (unused since AI-Memory migration)
+- **Dead exports** cleaned: `scaffoldGlobalKnowledgeRepo`, `LLMPersona`, `PersonaSignal`, `updateWorkingMemorySlots` re-exports; `MEMORY_FILE_PATTERNS`, `HEALTH_THRESHOLDS` constants
+- Workspace `user-profile.json` removed (now lives in AI-Memory)
 
 ---
 

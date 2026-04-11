@@ -38,15 +38,14 @@
 
 import * as path from "path";
 import * as fs from "fs-extra";
-import * as os from "os";
 import {
-  GLOBAL_KNOWLEDGE_PATHS,
   GlobalKnowledgeCategory,
 } from "../shared/constants";
 import type {
   IGlobalKnowledgeEntry,
   IGlobalKnowledgeIndex,
 } from "../shared/constants";
+import { getGlobalKnowledgePath } from "./globalKnowledge";
 
 // ============================================================================
 // Types
@@ -179,7 +178,7 @@ async function flushReferenceQueue(): Promise<void> {
   const snapshot = new Map(_referenceQueue);
   _referenceQueue.clear();
 
-  const indexPath = path.join(os.homedir(), GLOBAL_KNOWLEDGE_PATHS.index);
+  const indexPath = getGlobalKnowledgePath("index");
   if (!(await fs.pathExists(indexPath))) {
     return;
   }
@@ -315,7 +314,7 @@ function computeFreshnessScore(
  * Returns null if the global knowledge index does not exist locally.
  */
 export async function getDecayReport(): Promise<DecayReport | null> {
-  const indexPath = path.join(os.homedir(), GLOBAL_KNOWLEDGE_PATHS.index);
+  const indexPath = getGlobalKnowledgePath("index");
   if (!(await fs.pathExists(indexPath))) {
     return null;
   }

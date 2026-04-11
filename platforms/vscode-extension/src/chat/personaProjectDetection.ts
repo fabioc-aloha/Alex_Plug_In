@@ -227,41 +227,31 @@ export async function detectAndUpdateProjectPersona(
     return null;
   }
 
-  // Update profile with detected persona and technologies
-  const profilePath = path.join(
+  // Update workspace project persona (separate from user profile in AI-Memory)
+  const personaPath = path.join(
     workspaceRoot,
     ".github",
     "config",
-    "user-profile.json",
+    "project-persona.json",
   );
 
   try {
-    if (await workspaceFs.pathExists(profilePath)) {
-      const currentProfile = (await workspaceFs.readJson(
-        profilePath,
-      )) as ExtendedUserProfile;
+    await workspaceFs.ensureDir(path.join(workspaceRoot, ".github", "config"));
 
-      // Merge detected technologies with existing (avoid duplicates)
-      const existingTech = currentProfile.primaryTechnologies || [];
-      const mergedTech = [...new Set([...existingTech, ...detectedTech])];
+    const projectPersonaData = {
+      projectPersona: {
+        id: personaResult.persona.id,
+        confidence: personaResult.confidence,
+        detectedAt: new Date().toISOString(),
+        reasons: personaResult.reasons,
+      },
+      primaryTechnologies: detectedTech,
+      lastUpdated: new Date().toISOString(),
+    };
 
-      // Update project persona
-      const updatedProfile: ExtendedUserProfile = {
-        ...currentProfile,
-        primaryTechnologies: mergedTech,
-        projectPersona: {
-          id: personaResult.persona.id,
-          confidence: personaResult.confidence,
-          detectedAt: new Date().toISOString(),
-          reasons: personaResult.reasons,
-        },
-        lastUpdated: new Date().toISOString(),
-      };
-
-      await workspaceFs.writeJson(profilePath, updatedProfile);
-    }
+    await workspaceFs.writeJson(personaPath, projectPersonaData);
   } catch (err) {
-    console.warn("[Alex] Failed to update user profile with persona:", err);
+    console.warn("[Alex] Failed to write project persona:", err);
   }
 
   // Update Active Context with detected persona
@@ -487,30 +477,5 @@ Respond with ONLY the JSON block, no other text.`;
   } catch (err) {
     console.warn("[Alex] LLM persona detection failed:", err);
     return null;
-  }
-}
-
-/**
- * DEPRECATED: P5-P7 slot architecture removed in v5.7.x.
- * Use ActiveContextManager.updatePersona() instead.
- * Focus Trifectas are managed independently, not tied to persona detection.
- */
-export async function updateWorkingMemorySlots(
-  workspaceRoot: string,
-  persona: Persona,
-): Promise<boolean> {
-  console.warn(
-    "[Alex] updateWorkingMemorySlots() is deprecated. Use ActiveContextManager.updatePersona() instead.",
-  );
-  try {
-    const { updatePersona } = await import("../shared/activeContextManager");
-    await updatePersona(workspaceRoot, persona.name, 0.85);
-    return true;
-  } catch (err) {
-    console.warn(
-      "[Alex] Failed to update persona via ActiveContextManager:",
-      err,
-    );
-    return false;
   }
 }

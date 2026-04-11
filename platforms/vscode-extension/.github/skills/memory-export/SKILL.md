@@ -19,11 +19,11 @@ Gather from ALL of these sources, in order:
 
 | Source | Location | Contains |
 |--------|----------|----------|
-| User Profile | `.github/config/user-profile.json` | Identity, career, credentials, preferences, technologies |
-| User Memory | `/memories/` (Copilot Memory files) | Persistent cross-workspace notes, patterns, lessons |
+| User Profile | `AI-Memory/user-profile.json` | Identity, career, credentials, preferences, technologies (cloud-synced) |
+| User Memory | `/memories/` (Copilot Memory files) | VS Code workflow tips, tool workarounds, writing rules |
 | Session Memory | `/memories/session/` | Current conversation context (if any) |
 | Repository Memory | `/memories/repo/` | Codebase-specific facts stored by Copilot |
-| Copilot Memory | `.github/config/user-profile.json` | Profile data (same source as cognitive tools) |
+| AI-Memory Profile | `AI-Memory/profile.md` | Narrative profile and expertise (cloud-synced) |
 | Active Context | `.github/copilot-instructions.md` Active Context section | Current persona, phase, mode, focus trifectas |
 | Repository Memories | Repository memories in system context | Facts stored from prior agent interactions |
 

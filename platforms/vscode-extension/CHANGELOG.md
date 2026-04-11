@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.6.0] - 2026-04-11
+
+### Changed
+
+- Version bump
+
+---
+
+## [7.5.0] - 2026-04-11
+
+### Added
+
+- Planning-first development discipline: strategic artifacts must exist before implementation code
+- Terminal command safety: output capture failure mitigations and terminal hanging prevention
+- AI-Memory cloud-synced storage: user profile migrated from workspace config to cross-workspace AI-Memory
+
+### Changed
+
+- Research-first workflow updated with Phase 0.5 planning gate
+- Global Knowledge walkthrough updated to reflect AI-Memory (replaces Git-based repository references)
+- brain-qa scripts pass clean (0 warnings, 0 errors) after ASCII regex, agent parsing, and cloud detection fixes
+
+### Removed
+
+- 3 dead scaffolding files (`globalKnowledgeBanner.ts`, `globalKnowledgePatterns.ts`, `globalKnowledgeContent.ts`)
+- Dead exports and deprecated functions (`scaffoldGlobalKnowledgeRepo`, `updateWorkingMemorySlots`, `MEMORY_FILE_PATTERNS`, `HEALTH_THRESHOLDS`)
+
+---
+
 ## [7.4.2] - 2026-04-09
 
 > **Brain Self-Containment Edition** -- I8 enforcement, external API staleness audit, TTS skill rewrite, 5 stale docs archived, 14 phantom slash commands fixed.

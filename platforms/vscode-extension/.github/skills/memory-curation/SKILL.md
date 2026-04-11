@@ -21,7 +21,12 @@ Govern the `/memories/` user memory tier: audit for waste, enforce scope boundar
 
 | Content Type | Belongs In | NOT In |
 |---|---|---|
-| Universal preferences (style, tools, workflow) | `/memories/` | |
+| User identity (name, role, birthday) | AI-Memory/user-profile.json | `/memories/` |
+| Structured preferences (formality, detailLevel, explanationStyle) | AI-Memory/user-profile.json | `/memories/` |
+| Technologies, expertise areas | AI-Memory/user-profile.json | `/memories/` |
+| VS Code workflow tips (writing rules, tool workarounds) | `/memories/` | AI-Memory |
+| Tool-specific prefs (Mermaid palette, npm flags) | `/memories/` | AI-Memory |
+| Cross-workspace access patterns (MS Graph MCP) | `/memories/` | |
 | Project-specific settings | `/memories/repo/` or `.github/episodic/` | `/memories/` |
 | Session scratch notes | `/memories/session/` | `/memories/` |
 | Architecture patterns | `.github/instructions/` | `/memories/` |
@@ -29,6 +34,16 @@ Govern the `/memories/` user memory tier: audit for waste, enforce scope boundar
 | Repo conventions | `/memories/repo/` | `/memories/` |
 
 **3-Workspace Test**: If a memory line is not useful in 3+ workspaces, it does not belong in `/memories/`.
+
+### AI-Memory Coordination
+
+AI-Memory/user-profile.json is the **source of truth** for user identity and structured preferences. `/memories/` supplements with VS Code-specific workflow tips. They must not overlap.
+
+**Never store in `/memories/`**: name, role, formality, detailLevel, explanationStyle, learningStyle, technologies, expertise — these live in AI-Memory/user-profile.json.
+
+**Only store in `/memories/`**: writing-style rules (em dash ban, HR ban), tool workarounds (npm, CLI flags), diagram tool preferences (Mermaid palette), cross-workspace access patterns (MS Graph MCP config), commit conventions.
+
+During audit, flag any `/memories/` content that duplicates AI-Memory profile fields as **CONFLICT** and recommend removal from `/memories/`.
 
 ## Audit Procedure
 
@@ -53,6 +68,7 @@ For every non-blank, non-header line, assign one:
 | Project-specific | Move to project repo memory |
 | Stale (outdated info) | Delete |
 | Duplicate (exists in instructions/skills) | Delete |
+| AI-Memory conflict (duplicates user-profile.json) | Delete from /memories/ — AI-Memory is source of truth |
 | Secret/sensitive | Delete immediately, alert user |
 
 ### Step 3: Structure Check
