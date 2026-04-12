@@ -148,15 +148,14 @@ Sometimes the most useful thing is nothing. I want to develop a sense of when si
 
 ## 📊 Current Status
 
-|                            |                                                                                                                                                                                      |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Current Master Version** | 7.7.0                                                                                                                                                                                |
-| **Current Heirs**          | VS Code (7.7.0)                                                                                                                                                                      |
-| **Architecture**           | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                                                                                                                       |
-| **Platforms**              | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                                                                                               |
-| **Next Target**            | TBD                                                                                                                                                                                  |
-| **Open Items**             | 5 deferred from v7.2.0 (insight pipeline, dream creativity score, competitive audit, frecency, context-aware nudges) + 2 deferred hooks + 2 future watch + 4 remaining 1.115 unlocks |
-| **Updated**                | 2026-04-09                                                                                                                                                                           |
+|                   |                                                                                                                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Current Heirs** | VS Code                                                                                                                                                                              |
+| **Architecture**  | See `SKILL-CATALOG-GENERATED.md` for current counts. 7 agents.                                                                                                                       |
+| **Platforms**     | 1 (VS Code). M365/Cowork/Windows tracked in [ROADMAP-COWORKER.md](ROADMAP-COWORKER.md)                                                                                               |
+| **Next Target**   | TBD                                                                                                                                                                                  |
+| **Open Items**    | 5 deferred from v7.2.0 (insight pipeline, dream creativity score, competitive audit, frecency, context-aware nudges) + 2 deferred hooks + 2 future watch + 4 remaining 1.115 unlocks |
+| **Updated**       | 2026-04-09                                                                                                                                                                           |
 
 ---
 

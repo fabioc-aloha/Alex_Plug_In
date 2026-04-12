@@ -2,7 +2,6 @@
 
 **Effective Date**: February 5, 2026
 **Last Updated**: April 12, 2026
-**Version**: 7.7.0
 
 ---
 

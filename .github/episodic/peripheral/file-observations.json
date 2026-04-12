@@ -1,43 +1,33 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "diagnostics/AGENT-ECOSYSTEM.md",
-    "diagnostics/ARCHITECTURE.md",
-    "diagnostics/BUILD-PIPELINE.md",
-    "diagnostics/COMMANDS-AND-TOOLS.md",
-    "diagnostics/ISSUES-AND-GAPS.md",
-    "diagnostics/MEMORY-SYSTEM.md",
-    "diagnostics/PLAN.md",
-    "diagnostics/README.md"
+    "github/episodic/peripheral/file-observations.json",
+    "PRIVACY.md",
+    "ROADMAP.md",
+    "platforms/vscode-extension/package.json",
+    "scripts/release-preflight.ps1"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1776032788403
+      "scannedAt": 1776033195012
     },
     {
       "file": "docs/alex-brain-anatomy.html",
       "todoCount": 2,
-      "scannedAt": 1776032788403
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1776032788403
+      "scannedAt": 1776033195012
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1776032788403
+      "scannedAt": 1776033195012
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1776032788403
+      "scannedAt": 1776033195012
     }
   ],
-  "lastUpdated": 1776032788403
+  "lastUpdated": 1776033195012
 }

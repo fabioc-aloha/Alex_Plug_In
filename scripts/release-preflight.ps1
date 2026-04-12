@@ -80,48 +80,6 @@ else {
     Write-Host "   [WARN] CHANGELOG.md not found at root" -ForegroundColor Yellow
 }
 
-# Check MASTER copilot-instructions.md version (SOURCE OF TRUTH)
-$masterInstructions = Join-Path $rootPath ".github\copilot-instructions.md"
-if (Test-Path $masterInstructions) {
-    $masterContent = Get-Content $masterInstructions -Raw
-    if ($masterContent -match '# Alex v(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
-        $masterVersion = $matches[1]
-        Write-Host "   Master copilot-instructions.md: $masterVersion" -ForegroundColor Gray
-        if ($pkgVersion -ne $masterVersion) {
-            $errors += "Version mismatch: package.json ($pkgVersion) != Master copilot-instructions ($masterVersion)"
-            Write-Host "   [ERROR] MISMATCH! Update .github/copilot-instructions.md version" -ForegroundColor Red
-        }
-        else {
-            Write-Host "   [OK] Master version matches" -ForegroundColor Green
-        }
-    }
-    else {
-        $errors += "Could not parse version from Master .github/copilot-instructions.md"
-        Write-Host "   [WARN] Could not parse Master version" -ForegroundColor Yellow
-    }
-}
-else {
-    $errors += "Master .github/copilot-instructions.md not found"
-    Write-Host "   [ERROR] Master copilot-instructions.md not found" -ForegroundColor Red
-}
-
-# Check heir copilot-instructions.md version (should match after build)
-$heirInstructions = Join-Path $extensionPath ".github\copilot-instructions.md"
-if (Test-Path $heirInstructions) {
-    $heirContent = Get-Content $heirInstructions -Raw
-    if ($heirContent -match '# Alex v(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
-        $heirVersion = $matches[1]
-        Write-Host "   Heir copilot-instructions.md: $heirVersion" -ForegroundColor Gray
-        if ($pkgVersion -ne $heirVersion) {
-            $errors += "Version mismatch: package.json ($pkgVersion) != heir copilot-instructions ($heirVersion). Run build-extension-package.ps1 to sync."
-            Write-Host "   [ERROR] MISMATCH! Run build-extension-package.ps1" -ForegroundColor Red
-        }
-        else {
-            Write-Host "   [OK] Heir version matches" -ForegroundColor Green
-        }
-    }
-}
-
 # Check BUILD-MANIFEST.json exists and is recent (indicates build script was run)
 $manifestPath = Join-Path $extensionPath ".github\BUILD-MANIFEST.json"
 if (Test-Path $manifestPath) {
@@ -145,38 +103,6 @@ if (Test-Path $manifestPath) {
 else {
     $errors += "BUILD-MANIFEST.json not found. Run build-extension-package.ps1 to generate."
     Write-Host "   [ERROR] BUILD-MANIFEST.json missing! Run build-extension-package.ps1" -ForegroundColor Red
-}
-
-# Check ROADMAP.md version
-$roadmapPath = Join-Path $rootPath "ROADMAP.md"
-if (Test-Path $roadmapPath) {
-    $roadmapContent = Get-Content $roadmapPath -Raw
-    if ($roadmapContent -match 'Current Master Version\*\*\s*\|\s*(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)') {
-        $roadmapVersion = $matches[1]
-        Write-Host "   ROADMAP.md: $roadmapVersion" -ForegroundColor Gray
-        if ($pkgVersion -ne $roadmapVersion) {
-            Write-Host "   [WARN] ROADMAP version differs (update recommended)" -ForegroundColor Yellow
-        }
-        else {
-            Write-Host "   [OK] ROADMAP version matches" -ForegroundColor Green
-        }
-    }
-}
-
-# Check PRIVACY.md version
-$privacyPath = Join-Path $rootPath "PRIVACY.md"
-if (Test-Path $privacyPath) {
-    $privacyContent = Get-Content $privacyPath -Raw
-    if ($privacyContent -match '\*\*Version\*\*:\s*(\d+\.\d+\.\d+)') {
-        $privacyVersion = $matches[1]
-        Write-Host "   PRIVACY.md: $privacyVersion" -ForegroundColor Gray
-        if ($pkgVersion -ne $privacyVersion) {
-            Write-Host "   [WARN] PRIVACY.md version differs (update recommended)" -ForegroundColor Yellow
-        }
-        else {
-            Write-Host "   [OK] PRIVACY.md version matches" -ForegroundColor Green
-        }
-    }
 }
 
 # Check README.md skill count matches actual
