@@ -1,18 +1,16 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "CHANGELOG.md",
-    "ROADMAP.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json"
+    "github/episodic/peripheral/file-observations.json",
+    "PRIVACY.md",
+    "platforms/vscode-extension/src/test/suite/cognitiveTaskProvider.test.ts"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1776020896827
+      "scannedAt": 1776021077083
     }
   ],
-  "lastUpdated": 1776020896827
+  "lastUpdated": 1776021077083
 }

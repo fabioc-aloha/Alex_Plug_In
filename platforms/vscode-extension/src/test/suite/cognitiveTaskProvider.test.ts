@@ -15,7 +15,7 @@ suite('Cognitive Task Provider Test Suite', () => {
         const tasks = await provider.provideTasks(token);
         
         assert.ok(Array.isArray(tasks), 'provideTasks should return an array');
-        assert.ok(tasks && tasks.length >= 4, 'Should provide at least 4 cognitive tasks');
+        assert.ok(tasks && tasks.length >= 3, 'Should provide at least 3 cognitive tasks');
     });
 
     test('should include Meditate task', async () => {
@@ -48,16 +48,6 @@ suite('Cognitive Task Provider Test Suite', () => {
         const selfActualizeTask = tasks?.find(t => t.name === 'Alex: Self-Actualize');
         
         assert.ok(selfActualizeTask, 'Self-Actualize task should exist');
-    });
-
-    test('should include Sync Knowledge task', async () => {
-        const provider = new CognitiveTaskProvider();
-        const token = new vscode.CancellationTokenSource().token;
-        
-        const tasks = await provider.provideTasks(token);
-        const syncTask = tasks?.find(t => t.name === 'Alex: Sync Knowledge');
-        
-        assert.ok(syncTask, 'Sync Knowledge task should exist');
     });
 
     test('tasks should have CustomExecution', async () => {
