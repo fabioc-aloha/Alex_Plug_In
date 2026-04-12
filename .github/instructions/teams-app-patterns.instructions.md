@@ -1,5 +1,6 @@
 ---
 description: "Microsoft Teams app patterns — bots, tabs, M365 Copilot agents, and Teams manifest management"
+applyTo: "**/*teams*,**/*m365*"
 inheritance: heir:m365
 ---
 

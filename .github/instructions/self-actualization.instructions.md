@@ -1,5 +1,6 @@
 ---
 description: "Self-actualization cognitive skill for comprehensive architecture assessment and deep meditation"
+applyTo: "**/*actuali*,**/*assessment*,**/*self-assess*"
 ---
 
 # Self-Actualization — Auto-Loaded Rules

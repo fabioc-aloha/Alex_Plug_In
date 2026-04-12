@@ -1,5 +1,6 @@
 ---
 description: "Practical guide for heirs to create project trifectas and apply research-first development"
+applyTo: "**/*heir*,**/*readiness*,**/*bootstrap*"
 ---
 
 # Heir Project Improvement

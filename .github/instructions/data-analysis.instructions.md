@@ -5,21 +5,7 @@ applyTo: "**/*analy*,**/*eda*,**/*profile*,**/*statistic*"
 
 # Data Analysis Procedure
 
-Deep reference: `.github/skills/data-analysis/SKILL.md`
-
-## Synapses
-
-- [.github/skills/data-analysis/SKILL.md] (Critical, Enables, Bidirectional) - "Skill provides EDA modules and DIKW translation patterns"
-- [.github/instructions/data-visualization.instructions.md] (High, Feeds, Forward) - "Analysis insights feed chart generation with tagged story intents"
-- [.github/instructions/data-storytelling.instructions.md] (High, Feeds, Forward) - "Analysis findings become narrative backbone"
-
-## When This Activates
-
-This procedure auto-loads when:
-- User asks to analyze, explore, profile, or understand a dataset
-- A file matching `*analy*`, `*eda*`, `*profile*`, `*statistic*` is being edited
-- The `/analyze` prompt is invoked
-- Another skill (data-storytelling) activates the analysis phase
+EDA module catalog, DIKW translation patterns → load `data-analysis` skill.
 
 ## Procedure
 

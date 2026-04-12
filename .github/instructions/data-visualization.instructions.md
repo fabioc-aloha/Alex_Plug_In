@@ -5,21 +5,7 @@ applyTo: "**/*chart*,**/*visual*,**/*plot*,**/*graph*"
 
 # Data Visualization Procedure
 
-Deep reference: `.github/skills/data-visualization/SKILL.md`
-
-## Synapses
-
-- [.github/skills/data-visualization/SKILL.md] (Critical, Enables, Bidirectional) - "Skill provides chart selection matrix and color theory"
-- [.github/instructions/data-analysis.instructions.md] (High, Consumes, Input) - "Analysis feeds insights that visualization renders"
-- [.github/instructions/dashboard-design.instructions.md] (High, Feeds, Forward) - "Visualization provides charts that dashboards arrange"
-- [.github/instructions/data-storytelling.instructions.md] (High, Feeds, Forward) - "Visualization provides visual evidence for narrative"
-
-## When This Activates
-
-This procedure auto-loads when:
-- User asks to create, generate, or recommend a chart or visualization
-- A file matching `*chart*`, `*visual*`, `*plot*`, `*graph*` is being edited
-- Another skill (data-analysis, data-storytelling) requests visualization output
+Full chart selection matrix, all 24 types, color palettes → load `data-visualization` skill.
 
 ## Procedure
 

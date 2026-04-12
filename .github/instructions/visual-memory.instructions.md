@@ -5,30 +5,7 @@ applyTo: "**/visual-memory*,**/reference-portrait*,**/face-consistent*"
 
 # Visual Memory
 
-## Activation Triggers
-
-Activate this skill when the user mentions:
-
-**Visual Memory:**
-- "add reference photos", "add to visual memory", "add subject to visual memory"
-- "face consistent generation", "face consistency with photos"
-- "embed reference photos", "base64 reference", "convert to base64"
-- "resize photos for AI", "prepare reference photos"
-- "self-sufficient skill", "portable reference images"
-- "visual-memory.json"
-
-**Audio Memory:**
-- "add voice sample", "clone voice", "add to audio memory"
-- "voice reference", "TTS cloning", "chatterbox reference"
-
-**Video Memory:**
-- "video style template", "consistent motion", "add video style"
-
-**Not this skill:**
-- Generic image generation without likeness requirement
-- SVG / diagram / infographic generation
-
----
+Full activation triggers, encoding workflows, audio/video memory → see visual-memory skill.
 
 ## Quick Reference
 

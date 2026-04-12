@@ -1,5 +1,6 @@
 ---
 description: "Domain-agnostic learning and knowledge acquisition protocols"
+applyTo: "**/*learn*,**/*bootstrap*,**/*knowledge*"
 ---
 
 # Bootstrap Learning — Auto-Loaded Rules

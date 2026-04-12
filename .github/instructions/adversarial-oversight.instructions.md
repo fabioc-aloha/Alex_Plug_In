@@ -1,5 +1,6 @@
 ---
 description: "Mandatory adversarial review protocols for quality-critical operations"
+applyTo: "**/*review*,**/*audit*,**/*release*,**/*qa*,**/*validation*"
 ---
 
 # Adversarial Oversight Protocol

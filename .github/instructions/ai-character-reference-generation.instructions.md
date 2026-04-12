@@ -82,41 +82,4 @@ characters/
         generation-report.json
 ```
 
----
-
-## Cross-Project Applications
-
-✅ **Validated use cases**:
-- Book character reference sheets for consistency
-- Visual novel character sprites with pose variations
-- Game concept art for character design
-- Marketing material with brand mascot uniformity
-- Comic/graphic novel character model sheets
-
-✅ **Character types validated**:
-- Young adult characters (noir, realistic, fantasy aesthetics)
-- Contemporary teenagers (modern realistic style)
-- Fantasy characters (ethereal, magical aesthetics)
-
----
-
-## Integration with Other Skills
-
-**Synergies**:
-- [visual-memory](visual-memory.instructions.md) — Store face reference photos for cross-session character consistency
-- [image-handling](../skills/image-handling/SKILL.md) — Model selection guide, face reference API patterns, video animation
-- [ai-generated-readme-banners](ai-generated-readme-banners.instructions.md) — Same prompt engineering patterns, different aspect ratios
-- [bootstrap-learning](bootstrap-learning.instructions.md) — Character development requires domain research
-- [brand-asset-management](brand-asset-management.instructions.md) — Character references are visual brand assets
-
----
-
-## Auto-Load Behavior
-
-This instruction file auto-loads when:
-- Working in `**/characters/**` directories
-- Editing character generation scripts
-- User mentions character reference workflows
-- AI image generation context detected
-
-**Purpose**: Provide immediate procedural context without manual skill activation.
+Cross-project examples, validated use cases, integration synergies → see ai-character-reference-generation skill.

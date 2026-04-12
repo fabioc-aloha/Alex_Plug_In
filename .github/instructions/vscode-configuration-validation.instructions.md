@@ -1,5 +1,6 @@
 ---
 description: "VS Code extension configuration validation — package.json manifest and runtime config error diagnosis"
+applyTo: "**/package.json,**/.vscode/**,**/tsconfig*"
 ---
 
 # VS Code Configuration Validation — Auto-Loaded Rules

@@ -1,5 +1,6 @@
 ---
 description: "Architecture Decision Record (ADR) templates and documentation protocols"
+applyTo: "**/decisions/**,**/*ADR*,**/*adr*"
 ---
 
 # Architecture Decision Records (ADR) Procedural Memory

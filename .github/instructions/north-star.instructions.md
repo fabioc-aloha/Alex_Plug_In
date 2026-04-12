@@ -1,5 +1,6 @@
 ---
 description: "Project vision definition and Active Context integration for ambitious goals"
+applyTo: "**/NORTH-STAR*,**/*north-star*,**/*vision*,**/*roadmap*"
 ---
 
 # North Star — Auto-Loaded Rules

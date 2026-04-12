@@ -5,21 +5,7 @@ applyTo: "**/*dashboard*,**/*kpi*,**/*panel*"
 
 # Dashboard Design Procedure
 
-Deep reference: `.github/skills/dashboard-design/SKILL.md`
-
-## Synapses
-
-- [.github/skills/dashboard-design/SKILL.md] (Critical, Enables, Bidirectional) - "Skill provides layout patterns, KPI design, filter architecture"
-- [.github/instructions/data-visualization.instructions.md] (High, Uses, Input) - "Visualization provides chart content for dashboard panels"
-- [.github/instructions/data-analysis.instructions.md] (High, Consumes, Input) - "Analysis identifies KPIs and segments that populate panels"
-
-## When This Activates
-
-This procedure auto-loads when:
-- User asks to create, design, or layout a dashboard
-- A file matching `*dashboard*`, `*kpi*`, `*panel*` is being edited
-- The `/dashboard` prompt is invoked
-- Data-storytelling orchestration reaches the arrangement phase
+Layout patterns, KPI card templates, filter architecture reference → load `dashboard-design` skill.
 
 ## Procedure
 

@@ -5,21 +5,7 @@ applyTo: "**/*interpret*,**/*read-chart*,**/*chart-review*"
 
 # Chart Interpretation Procedure
 
-Deep reference: `.github/skills/chart-interpretation/SKILL.md`
-
-## Synapses
-
-- [.github/skills/chart-interpretation/SKILL.md] (Critical, Enables, Bidirectional) - "Skill provides chart type recognition, misleading detection, narrative extraction"
-- [.github/instructions/data-visualization.instructions.md] (High, Uses, Bidirectional) - "Chart type knowledge aids decoding"
-- [.github/instructions/data-analysis.instructions.md] (Medium, Feeds, Bidirectional) - "Extracted insights can trigger re-analysis"
-
-## When This Activates
-
-This procedure auto-loads when:
-- User shares a chart image, screenshot, or HTML file and asks what it means
-- User asks to interpret, read, or analyze an existing visualization
-- User asks to check a chart for bias or misleading elements
-- Data-storytelling orchestration needs to read existing charts
+Chart type recognition patterns, misleading detection reference → load `chart-interpretation` skill.
 
 ## Procedure
 

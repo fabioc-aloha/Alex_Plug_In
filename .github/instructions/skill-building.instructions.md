@@ -1,5 +1,6 @@
 ---
 description: "Step-by-step skill creation, assessment, and completion procedure"
+applyTo: "**/.github/skills/**,**/*SKILL*"
 ---
 
 # Skill Building Procedure

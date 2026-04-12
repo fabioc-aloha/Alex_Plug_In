@@ -1,5 +1,6 @@
 ---
 description: "Reusable strategies for detecting natural language in text content"
+applyTo: "**/*detect*,**/*language*,**/*nlp*,**/*text-processing*"
 ---
 
 # Language Detection Patterns

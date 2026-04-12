@@ -1,5 +1,6 @@
 ---
 description: "Procedural steps for knowledge consolidation meditation sessions"
+applyTo: "**/*meditation*,**/*dream*,**/*consolidation*"
 ---
 
 # Meditation Protocols
