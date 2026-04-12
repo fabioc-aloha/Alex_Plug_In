@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.7.2] - 2026-04-12
+
+### Fixed
+
+- **Republish**: v7.7.1 marketplace publish failed — version bump to retry
+
+---
+
 ## [7.7.1] - 2026-04-12
 
 ### Fixed

@@ -1,22 +1,18 @@
 {
   "hotFiles": [],
-  "stalledFiles": [],
+  "stalledFiles": [
+    "github/episodic/peripheral/file-observations.json",
+    "CHANGELOG.md",
+    "ROADMAP.md",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json"
+  ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1776033741975
-    },
-    {
-      "file": "docs/alex-brain-anatomy.html",
-      "todoCount": 2,
-      "scannedAt": 1776033741975
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1776033741975
+      "scannedAt": 1776035005681
     }
   ],
-  "lastUpdated": 1776033741975
+  "lastUpdated": 1776035005681
 }
