@@ -70,7 +70,7 @@ function fail(msg) {
 // --- Phase groups -------------------------------------------
 const heirPhases = [
   1, 2, 3, 4, 6, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
-  30, 31, 32, 34,
+  30, 31, 32, 34, 35,
 ];
 const quickPhases = [1, 2, 3, 4, 6];
 const schemaPhases = [2, 6, 11, 16, 17];
@@ -195,7 +195,7 @@ if (runPhases.includes(3)) {
   if (fs.existsSync(indexPath)) {
     const indexContent = fs.readFileSync(indexPath, "utf8");
     const notIndexed = skillDirs.filter(
-      (s) => s !== "memory-activation" && !indexContent.includes(`${s} |`),
+      (s) => s !== "memory-activation" && !new RegExp(`\\|\\s*${s}\\s*\\|`).test(indexContent),
     );
     if (notIndexed.length === 0) pass(`All ${skillDirs.length} skills indexed`);
     else fail(`Not indexed: ${notIndexed.join(", ")}`);
@@ -395,7 +395,6 @@ if (runPhases.includes(15)) {
   const masterOnly = [
     "MASTER-ALEX-PROTECTED.json",
     "cognitive-config.json",
-    "user-profile.json",
   ];
   const configIssues = [];
   const cfgDir = path.join(ghPath, "config");
@@ -678,14 +677,12 @@ if (runPhases.includes(30)) {
   writePhase(30, "Muscles Integrity");
   const musclesDir = path.join(ghPath, "muscles");
   const expectedMuscles = [
-    "brain-qa.ps1",
+    "brain-qa.cjs",
     "dream-cli.ts",
-    "fix-fence-bug.ps1",
     "gamma-generator.cjs",
-    "normalize-paths.ps1",
     "pptxgen-cli.ts",
-    "validate-skills.ps1",
-    "validate-synapses.ps1",
+    "validate-skills.cjs",
+    "validate-synapses.cjs",
   ];
   const missingMuscles = expectedMuscles.filter(
     (m) => !fs.existsSync(path.join(musclesDir, m)),
@@ -898,6 +895,41 @@ if (runPhases.includes(34)) {
       `Brain is fully self-contained (${synapseCount} synapse files, ${mdCount} markdown files scanned)`,
     );
   else scIssues.forEach((i) => fail(i));
+}
+
+// ============================================================
+// PHASE 35: Inline Path Reference Validation
+// ============================================================
+if (runPhases.includes(35)) {
+  writePhase(35, "Inline Path Reference Validation");
+  const pathRefIssues = [];
+  const mdFiles = [
+    ...findRecursive(path.join(ghPath, "instructions"), (n) => n.endsWith(".md")),
+    ...findRecursive(path.join(ghPath, "skills"), (n) => n.endsWith(".md")),
+    ...findRecursive(path.join(ghPath, "prompts"), (n) => n.endsWith(".md")),
+  ];
+  const pathPattern = /\.github\/(?:instructions|skills|prompts)\/[a-z0-9_-]+(?:\/[a-z0-9_.-]+)*\.(?:md|json)/gi;
+  for (const mdFile of mdFiles) {
+    const content = fs.readFileSync(mdFile, "utf8");
+    const lines = content.split("\n");
+    for (const m of content.matchAll(pathPattern)) {
+      // Skip paths inside backtick code spans (documentation examples)
+      const pos = m.index;
+      const lineIdx = content.substring(0, pos).split("\n").length - 1;
+      const line = lines[lineIdx] || "";
+      const before = line.substring(0, line.indexOf(m[0]));
+      const after = line.substring(line.indexOf(m[0]) + m[0].length);
+      if (before.includes("`") && after.includes("`")) continue;
+      const refPath = m[0];
+      const fullPath = path.join(rootPath, refPath);
+      if (!fs.existsSync(fullPath)) {
+        const rel = path.relative(ghPath, mdFile).replace(/\\/g, "/");
+        pathRefIssues.push(`${rel} → ${refPath}`);
+      }
+    }
+  }
+  if (pathRefIssues.length === 0) pass("All inline .github/ path references resolve");
+  else pathRefIssues.forEach((i) => fail(`Dangling ref: ${i}`));
 }
 
 // ============================================================

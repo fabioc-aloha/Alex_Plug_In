@@ -14,7 +14,6 @@ applyTo: "**/quality-gate*,**/scripts/quality*,**/*prepublish*,**/package.json"
 ## Synapses
 
 - [.github/instructions/testing-strategies.instructions.md] (High, Extends, Bidirectional) - "Quality gates are the static analysis complement to behavioral tests"
-- [.github/skills/release-preflight/SKILL.md] (Critical, Automates, Bidirectional) - "Gates automate preflight checks that were previously manual-only"
 - [.github/instructions/vscode-extension-patterns.instructions.md] (High, Validates, Forward) - "Ensures extension packaging follows VS Code patterns"
 
 ---
