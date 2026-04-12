@@ -781,16 +781,17 @@
 
 <body>
     <div class="header">
-        <h1>🧠 The <span>Alex</span> Brain <span class="version-badge">v5.x</span></h1>
+        <h1>🧠 The <span>Alex</span> Brain <span class="version-badge">v7.7.0</span></h1>
         <p>Human neuroanatomical mapping of the Alex Cognitive Architecture</p>
         <div class="stats-bar">
             <div class="stat"><span class="stat-value" style="color:#58a6ff;">14</span><span class="stat-label">Brain
                     Regions</span></div>
-            <div class="stat"><span class="stat-value" style="color:#3fb950;">116</span><span
+            <div class="stat"><span class="stat-value" style="color:#3fb950;">161</span><span
                     class="stat-label">Skills</span></div>
-            <div class="stat"><span class="stat-value" style="color:#f0883e;">28</span><span
+            <div class="stat"><span class="stat-value" style="color:#f0883e;">85</span><span
                     class="stat-label">Procedures</span></div>
-            <div class="stat"><span class="stat-value" style="color:#d2a8ff;">17</span><span class="stat-label">Episodic
+            <div class="stat"><span class="stat-value" style="color:#d2a8ff;">111</span><span
+                    class="stat-label">Episodic
                     Files</span></div>
         </div>
     </div>
@@ -812,7 +813,7 @@
                     <button class="view-btn" onclick="setView('flow')">Signal Flow</button>
                 </div>
 
-                <svg viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 900 680" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
                             <path d="M0,0 L8,3 L0,6" fill="#f0883e" />
@@ -839,7 +840,7 @@
                     </defs>
 
                     <!-- Background -->
-                    <rect width="900" height="650" fill="#0d1117" rx="8" />
+                    <rect width="900" height="680" fill="#0d1117" rx="8" />
 
                     <!-- Brain outline - lateral view (left hemisphere) -->
                     <g transform="translate(80, 30)">
@@ -849,11 +850,15 @@
                             fill="#2d333b" stroke="#484f58" stroke-width="1.5" opacity="0.6"
                             onclick="showDetail('brainstem')" data-region="brainstem" />
 
-                        <!-- Cerebellum -->
+                        <!-- Cerebellum (with foliation lines) -->
                         <path class="brain-region" id="cerebellum-path"
                             d="M 345 400 Q 380 420 400 440 Q 410 460 390 470 Q 360 475 340 460 Q 320 450 315 430 Q 320 410 345 400 Z"
                             fill="#2a2e35" stroke="#484f58" stroke-width="1.5" opacity="0.5"
                             onclick="showDetail('cerebellum')" data-region="cerebellum" />
+                        <!-- Cerebellar folia (characteristic horizontal folds) -->
+                        <path d="M 325 425 Q 350 420 375 430 Q 395 438 400 445" fill="none" stroke="#484f58" stroke-width="0.6" opacity="0.35" />
+                        <path d="M 322 440 Q 345 433 370 440 Q 390 448 398 455" fill="none" stroke="#484f58" stroke-width="0.6" opacity="0.3" />
+                        <path d="M 328 455 Q 348 448 368 453 Q 385 460 390 465" fill="none" stroke="#484f58" stroke-width="0.6" opacity="0.25" />
 
                         <!-- Main brain outline -->
                         <path d="M 320 400 Q 280 390 230 370 Q 160 340 100 290 Q 50 240 30 190
@@ -888,30 +893,30 @@
                            Q 215 150 205 135 Q 195 115 190 95 Z" fill="#5c1a3a" stroke="#f778ba" stroke-width="1.5"
                             opacity="0.8" onclick="showDetail('acc')" data-region="acc" />
 
-                        <!-- Premotor Cortex (BA 6, strip behind dlPFC) -->
-                        <path class="brain-region" id="premotor-path" d="M 260 18 Q 290 25 310 40 Q 305 70 295 100 Q 285 130 270 155
-                           Q 250 140 235 128 Q 240 100 248 72 Q 255 45 260 18 Z" fill="#1a3d1a" stroke="#3fb950"
+                        <!-- Premotor Cortex (BA 6, strip anterior to M1) -->
+                        <path class="brain-region" id="premotor-path" d="M 248 18 Q 272 24 290 35 Q 285 65 278 95 Q 270 125 258 150
+                           Q 240 138 228 125 Q 235 95 242 65 Q 246 40 248 18 Z" fill="#1a3d1a" stroke="#3fb950"
                             stroke-width="1.5" opacity="0.7" onclick="showDetail('premotor')" data-region="premotor" />
 
-                        <!-- Primary Motor Cortex (M1, BA 4, thin strip between Premotor and Central Sulcus) -->
-                        <path class="brain-region" id="motorcortex-path" d="M 295 15 Q 315 22 330 38 Q 322 68 312 100 Q 302 130 290 155
-                           Q 278 148 270 155 Q 285 130 295 100 Q 305 70 310 40 Q 308 28 295 15 Z" fill="#3d2200"
+                        <!-- Primary Motor Cortex (M1, BA 4, precentral gyrus — immediately anterior to Central Sulcus) -->
+                        <path class="brain-region" id="motorcortex-path" d="M 290 14 Q 308 20 320 35 Q 315 65 308 95 Q 300 125 290 150
+                           Q 275 143 265 148 Q 275 120 282 92 Q 288 62 292 35 Q 293 24 290 14 Z" fill="#3d2200"
                             stroke="#f0883e" stroke-width="1.5" opacity="0.75" onclick="showDetail('motorcortex')"
                             data-region="motorcortex" />
 
-                        <!-- Central Sulcus marker -->
-                        <path d="M 270 10 Q 280 50 285 100 Q 288 140 285 170 Q 280 200 270 230" fill="none"
+                        <!-- Central Sulcus marker (between M1 and somatosensory/parietal) -->
+                        <path d="M 318 10 Q 322 50 320 100 Q 318 140 315 170 Q 310 200 305 230" fill="none"
                             stroke="#636e7b" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" />
-                        <text x="272" y="5" font-size="8" fill="#636e7b" text-anchor="middle"
+                        <text x="322" y="5" font-size="8" fill="#636e7b" text-anchor="middle"
                             font-style="italic">Central
                             Sulcus</text>
 
-                        <!-- PARIETAL LOBE -->
-                        <path class="brain-region" id="parietal-path" d="M 310 40 Q 370 55 420 80 Q 460 105 490 140
+                        <!-- PARIETAL LOBE (posterior to Central Sulcus) -->
+                        <path class="brain-region" id="parietal-path" d="M 325 35 Q 370 50 420 80 Q 460 105 490 140
                            Q 510 170 520 200 Q 525 230 520 260
                            Q 490 240 450 225 Q 410 210 370 200
-                           Q 340 195 310 195 Q 295 175 285 155
-                           Q 295 120 305 85 Q 308 60 310 40 Z" fill="#0d3d0d" stroke="#3fb950" stroke-width="1.5"
+                           Q 340 195 318 195 Q 308 175 300 155
+                           Q 308 120 315 85 Q 320 55 325 35 Z" fill="#0d3d0d" stroke="#3fb950" stroke-width="1.5"
                             opacity="0.55" onclick="showDetail('parietal')" data-region="parietal" />
 
                         <!-- TEMPORAL LOBE -->
@@ -955,6 +960,23 @@
                             fill="#2d2d2d" stroke="#8b949e" stroke-width="1.5" opacity="0.6"
                             onclick="showDetail('thalamus')" data-region="thalamus" />
 
+                        <!-- Hypothalamus (just below thalamus, small endocrine hub) -->
+                        <ellipse class="brain-region" id="hypothalamus-path" cx="305" cy="275" rx="16" ry="10"
+                            fill="#3d2a1a" stroke="#f0883e" stroke-width="1.3" opacity="0.7"
+                            onclick="showDetail('hypothalamus')" data-region="hypothalamus" />
+
+                        <!-- Corpus Callosum (C-shaped arch: genu → body → splenium, above thalamus) -->
+                        <path class="brain-region" id="corpus-callosum-path" d="M 155 185 Q 145 160 150 140 Q 160 120 180 115 Q 220 108 280 110 Q 340 112 390 120 Q 420 128 435 145 Q 442 160 435 180
+                               Q 415 170 385 162 Q 340 155 280 153 Q 220 155 180 162 Q 165 168 155 185 Z" fill="#2a3040" stroke="#79c0ff"
+                            stroke-width="1.3" opacity="0.55" onclick="showDetail('corpuscallosum')"
+                            data-region="corpuscallosum" />
+
+                        <!-- Spinal Cord (below brainstem) -->
+                        <path class="brain-region" id="spinal-cord-path" d="M 330 510 Q 332 530 330 555 Q 328 575 325 590
+                               Q 322 575 320 555 Q 318 530 320 510 Z" fill="#21262d" stroke="#6e7681"
+                            stroke-width="1.3" opacity="0.6" onclick="showDetail('spinalcord')"
+                            data-region="spinalcord" />
+
                         <!-- === LABELS ON BRAIN === -->
 
                         <!-- Region labels -->
@@ -969,11 +991,11 @@
 
                         <text class="region-label" x="220" y="143" font-size="9">ACC</text>
 
-                        <text class="region-label" x="295" y="85" font-size="9">PMC</text>
-                        <text class="ba-label" x="295" y="95">BA 6</text>
+                        <text class="region-label" x="268" y="85" font-size="9">PMC</text>
+                        <text class="ba-label" x="268" y="95">BA 6</text>
 
-                        <text class="region-label" x="318" y="55" font-size="8" fill="#f0883e">M1</text>
-                        <text class="ba-label" x="318" y="65">BA 4</text>
+                        <text class="region-label" x="302" y="50" font-size="8" fill="#f0883e">M1</text>
+                        <text class="ba-label" x="302" y="60">BA 4</text>
 
                         <text class="region-label" x="410" y="145">PARIETAL</text>
                         <text class="region-label" x="410" y="160" font-size="9" opacity="0.6">LOBE</text>
@@ -992,6 +1014,14 @@
                         <text class="region-label" x="275" y="230" font-size="8" opacity="0.6">Ganglia</text>
 
                         <text class="region-label" x="310" y="254" font-size="8">Thalamus</text>
+
+                        <text class="region-label" x="305" y="278" font-size="7" fill="#f0883e">Hypo-</text>
+                        <text class="region-label" x="305" y="287" font-size="7" fill="#f0883e">thalamus</text>
+
+                        <text class="region-label" x="280" y="148" font-size="8" fill="#79c0ff">Corpus Callosum</text>
+
+                        <text class="region-label" x="325" y="555" font-size="7" fill="#6e7681">Spinal</text>
+                        <text class="region-label" x="325" y="565" font-size="7" fill="#6e7681">Cord</text>
 
                         <!-- === ALEX COMPONENT ANNOTATIONS === -->
 
@@ -1032,16 +1062,16 @@
                         <text class="alex-label" x="638" y="194">⚙️ Skill Activation</text>
                         <text class="alex-label" x="638" y="207" font-size="8" fill="#3fb950">Reactive routing
                             (PMC)</text>
-                        <line class="annotation-line" x1="565" y1="195" x2="310" y2="75" stroke="#3fb950" />
-                        <circle cx="310" cy="75" r="2.5" fill="#3fb950" />
+                        <line class="annotation-line" x1="565" y1="195" x2="268" y2="80" stroke="#3fb950" />
+                        <circle cx="268" cy="80" r="2.5" fill="#3fb950" />
 
                         <!-- Annotation: Muscles → Motor Cortex (M1) -->
                         <rect class="annotation-label-bg" x="8" y="85" width="146" height="36" />
-                        <text class="alex-label" x="81" y="99">💪 Muscles (11 scripts)</text>
+                        <text class="alex-label" x="81" y="99">💪 Muscles (33 scripts)</text>
                         <text class="alex-label" x="81" y="112" font-size="8" fill="#f0883e">Motor Execution
                             (M1)</text>
-                        <line class="annotation-line" x1="154" y1="100" x2="305" y2="35" stroke="#f0883e" />
-                        <circle cx="305" cy="35" r="2.5" fill="#f0883e" />
+                        <line class="annotation-line" x1="154" y1="100" x2="300" y2="30" stroke="#f0883e" />
+                        <circle cx="300" cy="30" r="2.5" fill="#f0883e" />
 
                         <!-- Annotation: Working Memory → PFC+ACC -->
                         <rect class="annotation-label-bg" x="565" y="232" width="150" height="36" />
@@ -1053,7 +1083,7 @@
 
                         <!-- Annotation: Procedural Memory → Basal Ganglia -->
                         <rect class="annotation-label-bg" x="565" y="285" width="155" height="36" />
-                        <text class="alex-label" x="643" y="299">🔧 .instructions.md (28)</text>
+                        <text class="alex-label" x="643" y="299">🔧 .instructions.md (85)</text>
                         <text class="alex-label" x="643" y="312" font-size="8" fill="#e3b341">Procedural (Basal
                             Ganglia)</text>
                         <line class="annotation-line" x1="565" y1="300" x2="308" y2="220" stroke="#e3b341" />
@@ -1061,7 +1091,7 @@
 
                         <!-- Annotation: Episodic Memory → Hippocampus -->
                         <rect class="annotation-label-bg" x="565" y="338" width="150" height="36" />
-                        <text class="alex-label" x="640" y="352">📓 .prompt.md (17)</text>
+                        <text class="alex-label" x="640" y="352">📓 .prompt.md (63)</text>
                         <text class="alex-label" x="640" y="365" font-size="8" fill="#79c0ff">Episodic
                             (Hippocampus)</text>
                         <line class="annotation-line" x1="565" y1="355" x2="375" y2="310" stroke="#79c0ff" />
@@ -1069,7 +1099,7 @@
 
                         <!-- Annotation: Skills → Neocortex/Parietal -->
                         <rect class="annotation-label-bg" x="565" y="390" width="145" height="36" />
-                        <text class="alex-label" x="638" y="404">🎓 Skills (116)</text>
+                        <text class="alex-label" x="638" y="404">🎓 Skills (161)</text>
                         <text class="alex-label" x="638" y="417" font-size="8" fill="#3fb950">Declarative
                             (Neocortex)</text>
                         <line class="annotation-line" x1="565" y1="408" x2="440" y2="175" stroke="#3fb950" />
@@ -1114,6 +1144,30 @@
                         <text class="alex-label" x="76" y="214">🌍 Global Knowledge</text>
                         <text class="alex-label" x="76" y="227" font-size="8" fill="#8b949e">~/.alex/ (Distributed
                             Cortex)</text>
+
+                        <!-- Annotation: Agents → Corpus Callosum -->
+                        <rect class="annotation-label-bg" x="565" y="443" width="150" height="36" />
+                        <text class="alex-label" x="640" y="457">🤖 Agents (7)</text>
+                        <text class="alex-label" x="640" y="470" font-size="8" fill="#79c0ff">Specialization (Corpus
+                            Callosum)</text>
+                        <line class="annotation-line" x1="565" y1="460" x2="340" y2="155" stroke="#79c0ff" />
+                        <circle cx="340" cy="155" r="2.5" fill="#79c0ff" />
+
+                        <!-- Annotation: Hooks → Spinal Cord -->
+                        <rect class="annotation-label-bg" x="8" y="490" width="140" height="36" />
+                        <text class="alex-label" x="78" y="504">⚡ Hooks (22)</text>
+                        <text class="alex-label" x="78" y="517" font-size="8" fill="#6e7681">Reflex Arcs (Spinal
+                            Cord)</text>
+                        <line class="annotation-line" x1="148" y1="507" x2="325" y2="540" stroke="#6e7681" />
+                        <circle cx="325" cy="540" r="2.5" fill="#6e7681" />
+
+                        <!-- Annotation: Config → Hypothalamus -->
+                        <rect class="annotation-label-bg" x="8" y="148" width="136" height="36" />
+                        <text class="alex-label" x="76" y="162">⚖️ Config (14 files)</text>
+                        <text class="alex-label" x="76" y="175" font-size="8" fill="#f0883e">Homeostasis
+                            (Hypothalamus)</text>
+                        <line class="annotation-line" x1="144" y1="163" x2="290" y2="275" stroke="#f0883e" />
+                        <circle cx="290" cy="275" r="2.5" fill="#f0883e" />
 
                         <!-- === SIGNAL FLOW ARROWS === -->
 
@@ -1302,6 +1356,18 @@
                                 <td style="color:#f0883e;">Motor Apraxia</td>
                                 <td>Broken muscles (scripts exist but fail)</td>
                             </tr>
+                            <tr>
+                                <td style="color:#79c0ff;">Split-Brain</td>
+                                <td>No agents (single undifferentiated mode)</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#6e7681;">Areflexia</td>
+                                <td>No hooks (no automatic pre/post processing)</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#f0883e;">Hypothalamic Failure</td>
+                                <td>Corrupt config (identity/parameter drift)</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1309,11 +1375,11 @@
         </div>
 
         <div class="credits">
-            Alex Cognitive Architecture v5.x — Neuroanatomical Brain Mapping — Created 2026-02-07<br />
+            Alex Cognitive Architecture v7.7.0 — Neuroanatomical Brain Mapping — Created 2026-02-07<br />
             Brain regions based on Brodmann area classifications. Diagram is an original illustration for the Alex
             project.<br />
-            <em>Note: ACC, mPFC, amygdala, hippocampus, basal ganglia, and thalamus are medial/deep structures shown by
-                educational convention.</em>
+            <em>Note: ACC, mPFC, amygdala, hippocampus, basal ganglia, thalamus, hypothalamus, and corpus callosum are
+                medial/deep structures shown by educational convention.</em>
         </div>
     </div><!-- end tab-anatomy -->
 
@@ -1348,7 +1414,7 @@
                         SA["Skill Activation<br />Reactive capability routing"]
                         end
                         subgraph M1["Primary Motor Cortex - Motor Execution"]
-                        MUS["Muscle Scripts x11<br />.github/muscles/<br />Execution, not memory"]
+                        MUS["Muscle Scripts x33<br />.github/muscles/<br />Execution, not memory"]
                         end
                         end
                         subgraph TEMPORAL["TEMPORAL LOBE"]
@@ -1359,19 +1425,19 @@
                         end
                         subgraph PARIETAL["PARIETAL LOBE"]
                         subgraph NC["Neocortex - Declarative Knowledge"]
-                        SK["Skills 116<br />skills SKILL.md"]
+                        SK["Skills 161<br />skills SKILL.md"]
                         DM["Declarative Memory<br />copilot-instructions.md"]
                         end
                         end
                         subgraph BASAL["SUBCORTICAL STRUCTURES"]
                         subgraph BG["Basal Ganglia - Procedural Memory"]
-                        PM[".instructions.md 28<br />Automated procedures"]
+                        PM[".instructions.md 85<br />Automated procedures"]
                         end
                         subgraph THAL["Thalamus - Sensory Relay"]
                         INPUT["User Input<br />Chat, Commands, Files"]
                         end
                         subgraph AMYG["Amygdala - Threat Detection"]
-                        SAFETY["Safety Imperatives I1-I7<br />Kill switch, RISKS.md"]
+                        SAFETY["Safety Imperatives I1-I8<br />Kill switch, RISKS.md"]
                         end
                         end
                         subgraph MEDIAL["MEDIAL STRUCTURES"]
@@ -1387,6 +1453,13 @@
                         subgraph DISTRIBUTE["DISTRIBUTED CORTEX"]
                         GK["Global Knowledge<br />Cross-project patterns"]
                         SYN["Synaptic Network<br />Embedded connections + inhibitory"]
+                        end
+                        subgraph WHITEMATTER["WHITE MATTER + REFLEXES"]
+                        CC["Corpus Callosum<br />Agent Definitions x7<br />Specialized processing modes"]
+                        SC["Spinal Cord<br />Hook Scripts x22<br />Reflex arcs"]
+                        end
+                        subgraph DIENCEPHALON["DIENCEPHALON"]
+                        HYPO["Hypothalamus<br />Config Files x14<br />Homeostatic regulation"]
                         end
                         LLM ==>|"orchestrates"| SSO
                         LLM ==>|"orchestrates"| WM
@@ -1412,6 +1485,9 @@
                         SK -->|"promoted"| GK
                         IC -.->|"suppresses"| DRM
                         IC -.->|"suppresses"| MED
+                        CC -->|"mode switch"| LLM
+                        SC -->|"auto-fires"| MUS
+                        HYPO -.->|"regulates"| LLM
                         style FRONTAL fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
                         style TEMPORAL fill:#0d2d3d,stroke:#39d2c0,color:#c9d1d9
                         style PARIETAL fill:#1a3d1a,stroke:#3fb950,color:#c9d1d9
@@ -1440,14 +1516,21 @@
                         style DRM fill:#0d2d3d,stroke:#79c0ff,color:#c9d1d9
                         style GK fill:#2d1a3d,stroke:#bc8cff,color:#c9d1d9
                         style SYN fill:#2d1a3d,stroke:#bc8cff,color:#c9d1d9
+                        style WHITEMATTER fill:#1a2030,stroke:#79c0ff,color:#c9d1d9
+                        style DIENCEPHALON fill:#2d1a10,stroke:#f0883e,color:#c9d1d9
+                        style CC fill:#1a2030,stroke:#79c0ff,color:#f0f6fc,stroke-width:2px
+                        style SC fill:#21262d,stroke:#6e7681,color:#c9d1d9
+                        style HYPO fill:#3d2200,stroke:#f0883e,color:#c9d1d9
                     </div>
                 </div>
                 <div class="diagram-caption">
                     Frontal lobe (blue) houses executive function; dlPFC (orange) handles task planning; ACC/vlPFC
-                    monitors conflict. Motor Cortex (orange) drives 11 muscle scripts — execution, not memory.
-                    Temporal (teal) stores episodic memory. Parietal (green) holds 116 declarative
-                    skills. Subcortical structures include 28 procedures, input relay, and threat detection (amygdala,
+                    monitors conflict. Motor Cortex (orange) drives 33 muscle scripts — execution, not memory.
+                    Temporal (teal) stores episodic memory. Parietal (green) holds 161 declarative
+                    skills. Subcortical structures include 85 procedures, input relay, and threat detection (amygdala,
                     red). Medial structures (lavender) enable meta-cognition and consolidation.
+                    Corpus Callosum (cyan) enables 7 agent specialization modes. Spinal Cord handles 22 hook
+                    reflex arcs. Hypothalamus maintains homeostasis via 14 config files.
                 </div>
             </div>
 
@@ -1462,7 +1545,7 @@
                     <div class="mermaid">
                         flowchart TB
                         INPUT["User Input - Thalamus"]
-                        SAFETY["Safety Check - Amygdala<br />Imperatives I1-I7"]
+                        SAFETY["Safety Check - Amygdala<br />Imperatives I1-I8"]
                         subgraph EXEC["Executive Processing - PFC"]
                         LLM["LLM<br />Parse intent"]
                         end
@@ -1481,7 +1564,7 @@
                         subgraph EXECUTE["Execution - Premotor + Motor Cortex"]
                         ROUTE["Route to skills<br />Premotor"]
                         INHIBIT["Check inhibitions"]
-                        MUSCLE["Muscle Scripts x11<br />Motor Cortex"]
+                        MUSCLE["Muscle Scripts x33<br />Motor Cortex"]
                         OUTPUT["Generate Response"]
                         end
                         subgraph MEMORY["Memory Systems"]
@@ -1490,6 +1573,8 @@
                         DECL["Declarative<br />Neocortex"]
                         GLOB["Global<br />Distributed"]
                         end
+                        HOOKS["Hooks x22<br />Reflex Arcs"]
+                        CONFIG["Config x14<br />Hypothalamus"]
                         INPUT --> SAFETY
                         SAFETY -->|"safe"| LLM
                         SAFETY -.->|"threat - HALT"| OUTPUT
@@ -1513,6 +1598,9 @@
                         SSO_SURVEY -.->|"scans"| DECL
                         OUTPUT -.->|"writes"| EPIS
                         EPIS -.->|"promotes"| GLOB
+                        HOOKS -.->|"pre/post"| MUSCLE
+                        HOOKS -.->|"session hooks"| LLM
+                        CONFIG -.->|"regulates"| LLM
                         style EXEC fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
                         style PLAN fill:#3d2800,stroke:#f0883e,color:#c9d1d9
                         style MONITOR fill:#3d1500,stroke:#f85149,color:#c9d1d9
@@ -1537,12 +1625,15 @@
                         style EPIS fill:#0d2d3d,stroke:#79c0ff,color:#c9d1d9
                         style DECL fill:#1a3d1a,stroke:#3fb950,color:#c9d1d9
                         style GLOB fill:#2d1a3d,stroke:#bc8cff,color:#c9d1d9
+                        style HOOKS fill:#21262d,stroke:#6e7681,color:#c9d1d9
+                        style CONFIG fill:#3d2200,stroke:#f0883e,color:#c9d1d9
                     </div>
                 </div>
                 <div class="diagram-caption">
                     The amygdala safety check can short-circuit the entire pipeline, halting output immediately when
-                    Safety Imperatives I1-I7 are triggered — the "low road" threat bypass. Motor Cortex muscle scripts
-                    (11) form the final execution stage before response generation.
+                    Safety Imperatives I1-I8 are triggered — the "low road" threat bypass. Motor Cortex muscle scripts
+                    (33) form the final execution stage before response generation. Hook scripts (22) fire as
+                    reflex arcs around execution. Config files (14) regulate internal parameters like a hypothalamus.
                 </div>
             </div>
 
@@ -1725,7 +1816,7 @@
                         flowchart TB
                         IN3["User Input<br />Chat, Commands, Files"]
                         TH3["VS Code Interface<br />Input relay - thalamus"]
-                        AM3["Safety Imperatives I1-I7<br />Kill switch - amygdala"]
+                        AM3["Safety Imperatives I1-I8<br />Kill switch - amygdala"]
                         subgraph EXEC3["Executive Processing"]
                         LLM3["LLM Claude-GPT<br />Parse intent - PFC"]
                         SSO3["SSO Protocol<br />Plan + gate - dlPFC"]
@@ -1734,13 +1825,16 @@
                         subgraph ROUTE3["Execution Layer"]
                         SK3["Skill Activation<br />Route skills - premotor"]
                         INH3["Inhibitory Synapses<br />Suppress - vlPFC"]
-                        MUS3["Muscle Scripts x11<br />Motor execution - M1"]
+                        MUS3["Muscle Scripts x33<br />Motor execution - M1"]
                         GEN3["Generate Response<br />Output"]
                         end
                         subgraph MEM3["Memory Systems"]
                         PROC3["Procedural .instructions.md<br />Basal ganglia"]
                         EPIS3["Episodic .prompt.md<br />Hippocampus"]
                         end
+                        HOOKS3["Hook Scripts x22<br />Reflex arcs - spinal cord"]
+                        CONF3["Config x14<br />Homeostasis - hypothalamus"]
+                        AGT3["Agents x7<br />Mode switch - corpus callosum"]
                         OUT3["User Gets<br />Response"]
                         IN3 --> TH3
                         TH3 --> AM3
@@ -1758,6 +1852,9 @@
                         LLM3 -.->|"auto-loaded"| PROC3
                         PROC3 -.->|"bypass"| GEN3
                         GEN3 -.->|"records"| EPIS3
+                        HOOKS3 -.->|"pre/post"| MUS3
+                        CONF3 -.->|"regulates"| LLM3
+                        AGT3 -.->|"mode switch"| LLM3
                         style EXEC3 fill:#1a3a5c,stroke:#58a6ff,color:#c9d1d9
                         style ROUTE3 fill:#2d1a3d,stroke:#f778ba,color:#c9d1d9
                         style MEM3 fill:#21262d,stroke:#6c757d,color:#c9d1d9
@@ -1774,6 +1871,9 @@
                         style PROC3 fill:#21262d,stroke:#e3b341,color:#c9d1d9
                         style EPIS3 fill:#0d2d3d,stroke:#79c0ff,color:#c9d1d9
                         style OUT3 fill:#1a3a5c,stroke:#58a6ff,color:#f0f6fc,stroke-width:2px
+                        style HOOKS3 fill:#21262d,stroke:#6e7681,color:#c9d1d9
+                        style CONF3 fill:#3d2200,stroke:#f0883e,color:#c9d1d9
+                        style AGT3 fill:#1a2030,stroke:#79c0ff,color:#f0f6fc,stroke-width:2px
                     </div>
                 </div>
                 <div class="comparison-side-footer">
@@ -1807,7 +1907,7 @@
                         <td class="step-num">2</td>
                         <td>Threat Detection</td>
                         <td class="human-col">Amygdala "low road" — bypasses cortex</td>
-                        <td class="alex-col">Safety Imperatives I1-I7 — bypasses LLM</td>
+                        <td class="alex-col">Safety Imperatives I1-I8 — bypasses LLM</td>
                     </tr>
                     <tr>
                         <td class="step-num">3</td>
@@ -1843,7 +1943,7 @@
                         <td class="step-num">8</td>
                         <td>Motor Execution</td>
                         <td class="human-col">Motor cortex → muscles → physical action</td>
-                        <td class="alex-col">Muscle scripts (11) → real-world output</td>
+                        <td class="alex-col">Muscle scripts (33) → real-world output</td>
                     </tr>
                     <tr>
                         <td class="step-num">9</td>
@@ -1862,6 +1962,24 @@
                         <td>Habit Bypass</td>
                         <td class="human-col">Basal ganglia runs routines unconsciously</td>
                         <td class="alex-col">.instructions.md auto-loads, fires on trigger</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">12</td>
+                        <td>Hemispheric Specialization</td>
+                        <td class="human-col">Corpus callosum connects left/right modes</td>
+                        <td class="alex-col">7 agents — specialized processing modes</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">13</td>
+                        <td>Reflex Arcs</td>
+                        <td class="human-col">Spinal cord reflexes bypass the brain</td>
+                        <td class="alex-col">22 hook scripts fire automatically</td>
+                    </tr>
+                    <tr>
+                        <td class="step-num">14</td>
+                        <td>Homeostasis</td>
+                        <td class="human-col">Hypothalamus regulates internal state</td>
+                        <td class="alex-col">14 config files maintain system parameters</td>
                     </tr>
                 </tbody>
             </table>
@@ -1936,9 +2054,9 @@
             motorcortex: {
                 title: 'Primary Motor Cortex (M1)',
                 region: 'Brodmann Area 4 — Pre-central gyrus (anterior to central sulcus)',
-                text: 'The primary motor cortex is the final cortical station before movement — it sends commands directly to muscles via the corticospinal tract. In Alex, the Motor Cortex represents the 11 execution scripts in .github/muscles/. These are NOT memory — they\'re the hands and feet. Skills plan, procedures automate, but muscles execute. Build scripts, sync tools, dream CLIs — they convert cognitive decisions into real-world output. The companion muscle-memory-recognition skill identifies opportunities to create new muscles from repetitive manual work — mirroring how repeated motor practice in biological systems strengthens neural motor pathways.',
+                text: 'The primary motor cortex is the final cortical station before movement — it sends commands directly to muscles via the corticospinal tract. In Alex, the Motor Cortex represents the 33 execution scripts in .github/muscles/. These are NOT memory — they\'re the hands and feet. Skills plan, procedures automate, but muscles execute. Build scripts, sync tools, dream CLIs — they convert cognitive decisions into real-world output. The companion muscle-memory-recognition skill identifies opportunities to create new muscles from repetitive manual work — mirroring how repeated motor practice in biological systems strengthens neural motor pathways.',
                 mapping: [
-                    { label: 'Alex Component', value: 'Muscles — Execution Scripts (11)' },
+                    { label: 'Alex Component', value: 'Muscles — Execution Scripts (33)' },
                     { label: 'Directory', value: '.github/muscles/', isFile: true },
                     { label: 'Function', value: 'Convert cognitive plans to real actions' },
                     { label: 'Key Property', value: 'NOT memory; execution only' },
@@ -1951,7 +2069,7 @@
                 region: 'Distributed parietal neocortex — Upper posterior brain',
                 text: 'The neocortex stores everything you "know" — facts, concepts, expertise. It\'s organized by domain (visual cortex, auditory cortex, etc.), just as Alex\'s skills are organized by domain (debugging, testing, API design, etc.). Heavily-used skills develop richer synaptic connections, mirroring how expertise causes cortical thickening in domain-specific regions.',
                 mapping: [
-                    { label: 'Alex Component', value: '116 Skills + Declarative Memory' },
+                    { label: 'Alex Component', value: '161 Skills + Declarative Memory' },
                     { label: 'Files', value: 'skills/*/SKILL.md + copilot-instructions.md', isFile: true },
                     { label: 'Function', value: 'Semantic knowledge, expertise storage' },
                     { label: 'Growth', value: 'More use → stronger synaptic connections' },
@@ -1964,7 +2082,7 @@
                 text: 'The temporal lobe houses auditory processing and, critically, the hippocampus in its medial portion. In Alex, the temporal lobe represents the episodic memory store — session records and workflow histories stored in .prompt.md files and the episodic archive.',
                 mapping: [
                     { label: 'Alex Component', value: 'Episodic Memory Store' },
-                    { label: 'Files', value: '.prompt.md (17) + .github/episodic/ (64)', isFile: true },
+                    { label: 'Files', value: '.prompt.md (63) + .github/episodic/ (111)', isFile: true },
                     { label: 'Function', value: 'Session records, workflow histories' },
                     { label: 'Persistence', value: 'Sessions → meditation → archive' }
                 ]
@@ -1986,7 +2104,7 @@
                 region: 'Caudate, Putamen, Globus Pallidus — Deep subcortical',
                 text: 'The basal ganglia store procedures you do without thinking — riding a bike, typing, driving. In Alex, .instructions.md files are auto-loaded by VS Code without explicit invocation. They fire automatically when their trigger conditions are met, just like procedural memories. You don\'t consciously recall procedural memories — they just execute.',
                 mapping: [
-                    { label: 'Alex Component', value: '28 Instruction Files (auto-loaded)' },
+                    { label: 'Alex Component', value: '85 Instruction Files (auto-loaded)' },
                     { label: 'Location', value: '.github/instructions/*.instructions.md', isFile: true },
                     { label: 'Key Property', value: 'Auto-loaded — no explicit invocation' },
                     { label: 'Analog', value: 'Habits, automated routines' },
@@ -2041,9 +2159,9 @@
             amygdala: {
                 title: 'Amygdala',
                 region: 'Medial temporal lobe — Anterior to hippocampus (deep)',
-                text: 'The amygdala is the brain\'s alarm system — it detects threats and triggers fight-or-flight responses BEFORE conscious reasoning occurs. In Alex, this maps to the Safety Imperatives (I1-I7) and the 5-layer kill switch. These are hardwired, non-negotiable rules that fire instantly: "NEVER test in Master Alex workspace," "NEVER run Initialize on Master Alex." Just as amygdala damage causes fearlessness and self-destructive behavior (Klüver-Bucy syndrome), disabling the kill switch would allow Alex to overwrite its own mind. The amygdala also handles emotional memory — in Alex, this is the RISKS.md documentation that encodes past dangers so they\'re never repeated.',
+                text: 'The amygdala is the brain\'s alarm system — it detects threats and triggers fight-or-flight responses BEFORE conscious reasoning occurs. In Alex, this maps to the Safety Imperatives (I1-I8) and the 5-layer kill switch. These are hardwired, non-negotiable rules that fire instantly: "NEVER test in Master Alex workspace," "NEVER run Initialize on Master Alex." Just as amygdala damage causes fearlessness and self-destructive behavior (Klüver-Bucy syndrome), disabling the kill switch would allow Alex to overwrite its own mind. The amygdala also handles emotional memory — in Alex, this is the RISKS.md documentation that encodes past dangers so they\'re never repeated.',
                 mapping: [
-                    { label: 'Alex Component', value: 'Safety Imperatives I1-I7' },
+                    { label: 'Alex Component', value: 'Safety Imperatives I1-I8' },
                     { label: 'File', value: 'copilot-instructions.md (Safety section)', isFile: true },
                     { label: 'Also', value: 'RISKS.md (threat memory)', isFile: true },
                     { label: 'Kill Switch', value: '5-layer protection + MASTER-ALEX-PROTECTED.json' },
@@ -2059,6 +2177,45 @@
                     { label: 'Alex Component', value: 'Todo List Management' },
                     { label: 'Function', value: 'Action sequencing and coordination' },
                     { label: 'Analog', value: 'Motor coordination and timing' }
+                ]
+            },
+            corpuscallosum: {
+                title: 'Corpus Callosum',
+                region: 'Midline white matter tract — Connects left and right hemispheres',
+                text: 'The corpus callosum is the brain\'s largest white matter structure — 200 million axons connecting left and right hemispheres, enabling specialized processing modes to share information. In Alex, the 7 agent definitions (.github/agents/) serve this function: each agent (Researcher, Builder, Validator, Documentarian, Azure, M365) is a specialized processing mode with its own cognitive style. The orchestrator agent (alex.agent.md) coordinates handoffs between them, just as the corpus callosum enables the analytical left hemisphere and creative right hemisphere to collaborate. Split-brain patients (callosotomy) lose inter-hemispheric coordination — similarly, removing agents would force Alex into a single undifferentiated processing mode.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Agent Definitions (7)' },
+                    { label: 'Directory', value: '.github/agents/*.agent.md', isFile: true },
+                    { label: 'Function', value: 'Specialized processing mode switching' },
+                    { label: 'Agents', value: 'Researcher, Builder, Validator, Documentarian, Azure, M365' },
+                    { label: 'Orchestrator', value: 'alex.agent.md (inter-mode coordination)' },
+                    { label: 'Clinical', value: 'Callosotomy → split-brain (no mode collaboration)' }
+                ]
+            },
+            spinalcord: {
+                title: 'Spinal Cord',
+                region: 'Vertebral column — Below brainstem (medulla junction)',
+                text: 'The spinal cord handles reflexes — automatic responses that bypass the brain entirely. Touch a hot stove and your hand pulls back before you consciously feel pain. In Alex, the 22 hook scripts in .github/muscles/hooks/ are reflex arcs: pre-tool-use, post-tool-use, session-start, and stop hooks fire automatically without cognitive planning. The output-secret-scan hook blocks sensitive data before it reaches the user (withdrawal reflex). The synapse-weight-update hook strengthens connections after use (motor learning). These aren\'t skills or instructions — they\'re involuntary, hardwired responses at the system boundary.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Hook Scripts (22)' },
+                    { label: 'Directory', value: '.github/muscles/hooks/', isFile: true },
+                    { label: 'Function', value: 'Automatic pre/post processing' },
+                    { label: 'Key Property', value: 'Involuntary — fires without planning' },
+                    { label: 'Examples', value: 'output-secret-scan, synapse-weight-update, session-start' },
+                    { label: 'Analog', value: 'Spinal reflexes bypass cortex entirely' }
+                ]
+            },
+            hypothalamus: {
+                title: 'Hypothalamus',
+                region: 'Ventral diencephalon — Below thalamus, above pituitary',
+                text: 'The hypothalamus is the brain\'s homeostatic regulator — it maintains body temperature, hunger, thirst, circadian rhythms, and hormonal balance. It doesn\'t make decisions; it keeps internal conditions stable so the cortex can function. In Alex, the 14 configuration files in .github/config/ serve this role: cognitive-config.json sets personality parameters, session-metrics.json tracks session health, correlation-vector.json enables request tracing, MASTER-ALEX-PROTECTED.json guards identity integrity, and rai-reliance-metrics.json calibrates responsible AI settings. These files rarely change but are always active — maintaining the internal milieu that higher cognition depends on.',
+                mapping: [
+                    { label: 'Alex Component', value: 'Configuration Files (14)' },
+                    { label: 'Directory', value: '.github/config/', isFile: true },
+                    { label: 'Function', value: 'Homeostatic parameter regulation' },
+                    { label: 'Key Files', value: 'cognitive-config.json, session-metrics.json, MASTER-ALEX-PROTECTED.json' },
+                    { label: 'Key Property', value: 'Rarely changed, always active' },
+                    { label: 'Analog', value: 'Temperature/hormone regulation — internal stability' }
                 ]
             }
         };
