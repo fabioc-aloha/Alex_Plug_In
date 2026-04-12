@@ -4,9 +4,7 @@ import {
   applyMarkdownStyles,
 } from "./commands/setupEnvironment";
 import { registerContextMenuCommands } from "./commands/contextMenu";
-import { registerChatParticipant, resetSessionState } from "./chat/participant";
 import { registerFileWatcher } from "./chat/fileWatcher";
-import { saveSessionEmotion } from "./chat/emotionalMemory";
 import { registerLanguageModelTools } from "./chat/tools";
 import {
   registerGlobalKnowledgeTools,
@@ -89,8 +87,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
   checkVersionUpgrade(context).catch(err =>
     console.warn('[Alex] Version upgrade check failed:', err)
   );
-
-  registerChatParticipant(context);
 
   const workspaceRootForWatcher = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
   if (workspaceRootForWatcher) {
@@ -210,22 +206,12 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
  * Note: Background sync timer cleanup is handled via context.subscriptions
  */
 export function deactivate() {
-  // v5.9.3: Save emotional memory arc before shutdown
-  const wsRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-  if (wsRoot) {
-    saveSessionEmotion(wsRoot).catch((err) => {
-      console.warn("[Alex] Failed to save emotional memory:", err);
-    });
-  }
-
   // Save beta telemetry session
   telemetry.log("lifecycle", "extension_deactivate");
   telemetry.saveSession().catch((err) => {
     console.warn("Failed to save telemetry session:", err);
   });
 
-  // Reset chat participant session state to prevent state bleeding
-  resetSessionState();
   logInfo('Alex Cognitive Architecture deactivated');
   disposeLog();
 }

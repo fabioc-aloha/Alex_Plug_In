@@ -39,19 +39,18 @@ This document maps every integration point between the two, inventories all plat
 │                    VS Code Host (≥1.110)                │
 │  ┌────────────────┐  ┌───────────┐  ┌────────────────┐  │
 │  │ Chat Platform  │  │ LM Access │  │  UI Surfaces   │  │
-│  │  @alex chat    │  │ GPT/Claude│  │  Sidebar       │  │
-│  │  Slash cmds    │  │ Tool call │  │  Dashboard     │  │
-│  │  Disambiguation│  │ Model API │  │  Memory Tree   │  │
+│  │  Agent mode    │  │ GPT/Claude│  │  Sidebar       │  │
+│  │  Prompt files  │  │ Tool call │  │  Dashboard     │  │
+│  │  LM Tools      │  │ Model API │  │  Memory Tree   │  │
 │  │  Agent routing │  │ Streaming │  │  Status Bar    │  │
 │  └───────┬────────┘  └─────┬─────┘  └───────┬────────┘  │
 │          │                │                 │           │
 │  ┌───────┴────────────────┴─────────────────┴────────┐  │
 │  │              Extension Runtime (TypeScript)       │  │
-│  │  participant.ts → tools.ts → promptEngine.ts      │  │
-│  │  modelIntelligence.ts → honestUncertainty.ts      │  │
+│  │  tools.ts → honestUncertainty.ts                  │  │
 │  │  emotionalMemory.ts → personaDetection.ts         │  │
 │  │  fileWatcher.ts → globalKnowledge.ts              │  │
-│  │  terminalOrchestrator.ts → browserContext.ts      │  │
+│  │  terminalOrchestrator.ts → converters             │  │
 │  └───────┬────────────────┬─────────────────┬────────┘  │
 │          │                │                 │           │
 │  ┌───────┴───┐  ┌─────────┴─────┐  ┌────────┴────────┐  │

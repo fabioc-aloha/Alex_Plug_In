@@ -383,7 +383,7 @@ function classifyCognitiveLevel(
   agentModeEnabled: boolean,
   extendedThinkingEnabled: boolean,
   bestModelTier: string,
-  copilotInstalled: boolean,
+  _copilotInstalled: boolean,
   copilotChatInstalled: boolean,
   gitHubAccount: GitHubAccountInfo,
 ): { level: CognitiveLevel; reason: string } {

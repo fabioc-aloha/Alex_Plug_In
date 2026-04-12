@@ -3,7 +3,6 @@ import * as path from "path";
 import { autoPromoteDuringMeditation } from "../chat/globalKnowledge";
 import {
   getMeditationEmotionalReview,
-  saveSessionEmotion,
 } from "../chat/emotionalMemory";
 import { getCalibrationSummary } from "../chat/honestUncertainty";
 import { getDecayReport } from "../chat/forgettingCurve";
@@ -168,7 +167,6 @@ export async function runSelfActualization(
           getCalibrationSummary(rootPath),
           getDecayReport(),
         ]);
-      await saveSessionEmotion(rootPath);
 
       // Phase 6: Create Meditation Session Record
       progress.report({

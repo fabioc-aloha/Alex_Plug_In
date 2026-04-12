@@ -12,29 +12,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as telemetry from './shared/telemetry';
-
-/**
- * Resolve a muscle script: workspace first, then extension bundle fallback.
- */
-async function resolveMuscleScript(
-  scriptName: string,
-  workspacePath: string,
-  extensionPath: string
-): Promise<string | undefined> {
-  const candidates = [
-    path.join(workspacePath, ".github", "muscles", scriptName),
-    path.join(extensionPath, ".github", "muscles", scriptName),
-  ];
-  for (const candidate of candidates) {
-    try {
-      await vscode.workspace.fs.stat(vscode.Uri.file(candidate));
-      return candidate;
-    } catch {
-      // try next
-    }
-  }
-  return undefined;
-}
+import { resolveMuscleScript } from './shared/utils';
 
 export function registerConvertCommands(context: vscode.ExtensionContext): void {
   // --------------------------------------------------
@@ -58,7 +36,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           return;
         }
 
-        const outputPath = uri.fsPath.replace(/\.md$/, ".eml");
         const nodeScript = await resolveMuscleScript(
           "md-to-eml.cjs",
           workspaceFolder.uri.fsPath,
@@ -87,8 +64,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           return;
         }
 
-        vscode.window.showInformationMessage("📧 Converting to email...");
-
         const terminal = vscode.window.createTerminal({
           name: "Alex: Email Conversion",
           cwd: path.dirname(uri.fsPath),
@@ -98,12 +73,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
 
         const flags = testMode.value ? "--test" : "";
         terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" ${flags}`.trim());
-
-        setTimeout(() => {
-          vscode.window.showInformationMessage(
-            `📧 Email conversion complete: ${path.basename(outputPath)}`
-          );
-        }, 3000);
 
         endLog(true);
       } catch (error) {
@@ -213,8 +182,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           }
         }
 
-        vscode.window.showInformationMessage(`📝 Creating ${templateType.value} template...`);
-
         const terminal = vscode.window.createTerminal({
           name: "Alex: Scaffold Markdown",
           cwd: targetDir,
@@ -228,10 +195,8 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           try {
             const doc = await vscode.workspace.openTextDocument(outputPath);
             await vscode.window.showTextDocument(doc);
-            vscode.window.showInformationMessage(`📝 Created: ${filename}`);
           } catch {
             // File may not exist yet if script is slow
-            vscode.window.showInformationMessage(`📝 Scaffolding complete. Check terminal for output.`);
           }
         }, 2000);
 
@@ -317,7 +282,7 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           terminal.sendText(`node "${nodeScript}" --init`);
 
           vscode.window.showInformationMessage(
-            "📋 Created nav.json. Edit it, then run Inject Navigation again."
+            "Created nav.json. Edit it, then run Inject Navigation again."
           );
           endLog(true);
           return;
@@ -337,8 +302,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           return;
         }
 
-        vscode.window.showInformationMessage("📋 Injecting navigation...");
-
         const terminal = vscode.window.createTerminal({
           name: "Alex: Navigation Inject",
           cwd: path.dirname(navJsonPath),
@@ -346,12 +309,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         });
         terminal.show();
         terminal.sendText(`node "${nodeScript}" "${navJsonPath}" ${action.value}`.trim());
-
-        if (!action.value) {
-          setTimeout(() => {
-            vscode.window.showInformationMessage("📋 Navigation tables injected.");
-          }, 2000);
-        }
 
         endLog(true);
       } catch (error) {
@@ -413,9 +370,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           return;
         }
 
-        const outputPath = uri.fsPath.replace(/\.md$/, ".html");
-        vscode.window.showInformationMessage("🌐 Converting to HTML...");
-
         const terminal = vscode.window.createTerminal({
           name: "Alex: HTML Conversion",
           cwd: path.dirname(uri.fsPath),
@@ -423,12 +377,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         });
         terminal.show();
         terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" --style ${styleChoice.value}`);
-
-        setTimeout(() => {
-          vscode.window.showInformationMessage(
-            `🌐 HTML conversion complete: ${path.basename(outputPath)}`
-          );
-        }, 3000);
 
         endLog(true);
       } catch (error) {
@@ -495,7 +443,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         }
 
         const outputPath = uri.fsPath.replace(/\.docx$/i, ".md");
-        vscode.window.showInformationMessage("📄 Converting Word to Markdown...");
 
         const terminal = vscode.window.createTerminal({
           name: "Alex: Word to Markdown",
@@ -505,15 +452,13 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         terminal.show();
         terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" ${flags.join(' ')}`.trim());
 
+        // Try to open the output file once the script likely finishes
         setTimeout(async () => {
           try {
             const doc = await vscode.workspace.openTextDocument(outputPath);
             await vscode.window.showTextDocument(doc);
-            vscode.window.showInformationMessage(
-              `📄 Conversion complete: ${path.basename(outputPath)}`
-            );
           } catch {
-            vscode.window.showInformationMessage("📄 Conversion complete. Check terminal for output.");
+            // Script may still be running
           }
         }, 3000);
 

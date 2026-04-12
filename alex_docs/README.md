@@ -41,12 +41,11 @@
 
 ### Skills
 
-| Document                                                         | Description                              |
-| ---------------------------------------------------------------- | ---------------------------------------- |
-| [Skills Catalog](./skills/SKILLS-CATALOG.md)                     | Full skill inventory with categories     |
-| [Skill Architecture](./skills/SKILL-ARCHITECTURE.md)             | How skills are structured internally     |
-| [Skill-Discipline Map](./guides/SKILL-DISCIPLINE-MAP.md)         | Skill routing by professional discipline |
-| [Agent vs Chat Comparison](./guides/AGENT-VS-CHAT-COMPARISON.md) | When to use agents vs direct chat        |
+| Document                                                 | Description                              |
+| -------------------------------------------------------- | ---------------------------------------- |
+| [Skills Catalog](./skills/SKILLS-CATALOG.md)             | Full skill inventory with categories     |
+| [Skill Architecture](./skills/SKILL-ARCHITECTURE.md)     | How skills are structured internally     |
+| [Skill-Discipline Map](./guides/SKILL-DISCIPLINE-MAP.md) | Skill routing by professional discipline |
 
 ### Platform and Heirs
 

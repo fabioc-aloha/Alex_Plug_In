@@ -9,11 +9,11 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 160
+## Skill Count: 161
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 146   |
+| Inheritable | 147   |
 | Master-Only | 5     |
 | Heir:vscode | 7     |
 | Heir:m365   | 2     |
@@ -186,6 +186,7 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 | [dream-state](../../.github/skills/dream-state/SKILL.md)                                   | inheritable | 🆕 Neural maintenance, synapse validation, health diagnostics                       |
 | [brand-asset-management](../../.github/skills/brand-asset-management/SKILL.md)             | inheritable | 🆕 Brand hierarchy, visual identity, asset deployment                               |
 | [heir-sync-management](../../.github/skills/heir-sync-management/SKILL.md)                 | master-only | 🆕 Master-Heir sync, contamination prevention, promotion                            |
+| [heir-feedback](../../.github/skills/heir-feedback/SKILL.md)                               | inheritable | 🆕 Submit feedback, bug reports, and feature requests via AI-Memory                  |
 
 | [muscle-memory-recognition](../../.github/skills/muscle-memory-recognition/SKILL.md)       | inheritable | 🆕 Identify automation opportunities from repetitive tasks                          |
 

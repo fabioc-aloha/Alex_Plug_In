@@ -43,7 +43,6 @@ import {
   isOperationInProgress,
   setOperationInProgress,
 } from "./shared/operationLock";
-import { logInfo } from "./shared/logger";
 import * as telemetry from "./shared/telemetry";
 import {
   updateStatusBar,
@@ -343,26 +342,6 @@ export function registerCoreCommands(
       try {
         await vscode.commands.executeCommand("markdown.showPreview", guidePath);
       } catch {
-        const doc = await vscode.workspace.openTextDocument(guidePath);
-        await vscode.window.showTextDocument(doc);
-      }
-    }),
-  );
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand("alex.agentVsChat", async () => {
-      const guidePath = vscode.Uri.joinPath(
-        context.extensionUri,
-        "alex_docs",
-        "guides",
-        "AGENT-VS-CHAT-COMPARISON.md",
-      );
-      try {
-        await vscode.commands.executeCommand("markdown.showPreview", guidePath);
-      } catch (err) {
-        logInfo(
-          "[Alex] Markdown preview failed, opening as text: " + String(err),
-        );
         const doc = await vscode.workspace.openTextDocument(guidePath);
         await vscode.window.showTextDocument(doc);
       }

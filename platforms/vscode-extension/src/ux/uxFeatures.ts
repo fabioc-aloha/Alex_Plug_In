@@ -16,8 +16,6 @@ interface QuickCommand {
   label: string;
   description: string;
   command: string;
-  detail?: string;
-  icon: string;
 }
 
 const QUICK_COMMANDS: QuickCommand[] = [
@@ -25,37 +23,26 @@ const QUICK_COMMANDS: QuickCommand[] = [
     label: "$(sparkle) Self-Actualize",
     description: "Deep architecture assessment",
     command: "alex.selfActualize",
-    icon: "$(sparkle)",
   },
   {
     label: "$(pulse) Dream",
     description: "Neural maintenance",
     command: "alex.dream",
-    icon: "$(pulse)",
-  },
-  {
-    label: "$(sync) Sync Knowledge",
-    description: "Sync with Global Knowledge",
-    command: "alex.syncKnowledge",
-    icon: "$(sync)",
   },
   {
     label: "$(calendar) Daily Briefing",
-    description: "Get your daily summary",
+    description: "Architecture summary for today",
     command: "alex.dailyBriefing",
-    icon: "$(calendar)",
   },
   {
     label: "$(dashboard) Mind Dashboard",
-    description: "View cognitive health & memory",
+    description: "View cognitive health and memory",
     command: "alex.showCognitiveDashboard",
-    icon: "$(dashboard)",
   },
   {
     label: "$(gear) Setup Environment",
     description: "Configure workspace",
     command: "alex.setupEnvironment",
-    icon: "$(gear)",
   },
 ];
 
@@ -85,7 +72,6 @@ export async function showQuickCommands(): Promise<void> {
   const items: vscode.QuickPickItem[] = QUICK_COMMANDS.map((cmd) => ({
     label: cmd.label,
     description: cmd.description,
-    detail: cmd.detail,
   }));
 
   const selected = await vscode.window.showQuickPick(items, {
@@ -146,7 +132,7 @@ export async function generateDailyBriefing(
     briefing += `- 🧘 Last meditation: ${data.recentMeditation}\n`;
   }
 
-  briefing += `\n---\n*Ready to work? Start a conversation with @alex*`;
+  briefing += `\n---\n*Ready to work? Open Agent Chat to get started.*`;
 
   return briefing;
 }
@@ -242,21 +228,6 @@ export async function showDailyBriefing(
     preview: true,
     viewColumn: vscode.ViewColumn.Beside,
   });
-
-  // Also send to chat if Alex participant is available
-  try {
-    await openChatPanel(`/status\n\n${briefing}`);
-  } catch {
-    // Chat panel not available, document is shown instead
-  }
-}
-
-/**
- * Open chat panel helper
- */
-async function openChatPanel(_message: string): Promise<void> {
-  // This is a placeholder - actual implementation would use VS Code Chat API
-  // For now, we show the briefing in a document
 }
 
 /**

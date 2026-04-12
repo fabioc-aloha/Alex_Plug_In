@@ -52,8 +52,6 @@ Alex doesn't replace GitHub Copilot — **Alex gives GitHub Copilot memory, cons
 | ----------------------------------- | :-----: | :---: | :---------: | :------: |
 | Architecture Deploy / Welcome UI    |    ✅    |   ✅   |      ✅      |    ✅     |
 | Status Bar / Memory Tree / Secrets  |    ✅    |   ✅   |      ✅      |    ✅     |
-| @alex Chat Participant              |    ❌    |   ✅   |      ✅      |    ✅     |
-| Slash Commands / Identity / EQ      |    ❌    |   ✅   |      ✅      |    ✅     |
 | Agent Mode / LM Tools               |    ❌    |   ❌   |      ✅      |    ✅     |
 | Skills / Custom Agents / Memory     |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge                    |    ❌    |   ❌   |      ✅      |    ✅     |
@@ -79,7 +77,7 @@ Alex doesn't replace GitHub Copilot — **Alex gives GitHub Copilot memory, cons
 
 ### Emotional Intelligence
 
-Detects frustration signals and responds with empathetic support and alternative approaches. Celebrates successes to build momentum.
+Detects frustration, confusion, and success signals in conversation and adapts tone accordingly. Celebrates wins, slows down during difficulty, and matches your energy in flow state. Powered by brain-based instructions, not code.
 
 ### Global Knowledge (AI-Memory)
 
@@ -145,7 +143,7 @@ Alex is **local-first**. No account required. No telemetry.
 
 ### Responsible AI
 
-Implements Microsoft's [Responsible AI Standard](https://www.microsoft.com/en-us/ai/responsible-ai) — transparency, accountability, fairness, reliability, human oversight, and appropriate reliance. Built-in `/confidence` and `/verify` commands for high-stakes decisions.
+Implements Microsoft's [Responsible AI Standard](https://www.microsoft.com/en-us/ai/responsible-ai) — transparency, accountability, fairness, reliability, human oversight, and appropriate reliance.
 
 ### Security (SFI Compliant)
 

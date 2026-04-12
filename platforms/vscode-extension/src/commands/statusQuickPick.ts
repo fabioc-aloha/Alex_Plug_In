@@ -2,25 +2,33 @@ import * as vscode from "vscode";
 
 function getQuickPickItems(): vscode.QuickPickItem[] {
   return [
+    // --- Cognitive ---
     {
-      label: "$(pulse) Run Dream Protocol",
+      label: "$(pulse) Dream",
       description: "Neural maintenance and synapse validation",
       detail: "Ctrl+Alt+D",
     },
     {
       label: "$(sparkle) Self-Actualize",
       description: "Deep meditation and assessment",
-      detail: "Ctrl+Alt+S",
     },
     {
-      label: "$(book) Open Documentation",
+      label: "$(calendar) Daily Briefing",
+      description: "Architecture summary for today",
+    },
+    {
+      label: "$(graph) Health Dashboard",
+      description: "Visual architecture health overview",
+    },
+    // --- Documentation & Setup ---
+    { label: "", kind: vscode.QuickPickItemKind.Separator },
+    {
+      label: "$(book) Documentation",
       description: "View Alex documentation",
-      detail: "Ctrl+Alt+H",
     },
     {
-      label: "$(mortar-board) Working with Alex",
-      description: "Prompting guide for effective partnership",
-      detail: "📚 Learn to work with Alex effectively",
+      label: "$(mortar-board) Prompting Guide",
+      description: "Learn to work with Alex effectively",
     },
     {
       label: "$(arrow-up) Upgrade Architecture",
@@ -31,115 +39,90 @@ function getQuickPickItems(): vscode.QuickPickItem[] {
       description: "Optimize VS Code settings for Alex",
     },
     {
-      label: "$(bug) Report Issue / View Diagnostics",
-      description: "View local telemetry for bug reports",
-      detail: "Data stays on your machine",
+      label: "$(comment-discussion) Open Agent Chat",
+      description: "Open Copilot Chat in Agent mode",
     },
-    {
-      label: "$(comment-discussion) Chat with @alex",
-      description: "Open Copilot Chat",
-    },
-    {
-      label: "$(list-tree) Generate Skill Catalog",
-      description: "Create network diagram of all skills",
-    },
+    // --- Knowledge ---
+    { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
       label: "$(search) Search Knowledge",
       description: "Quick search across global knowledge",
     },
     {
-      label: "$(graph) Health Dashboard",
-      description: "Visual architecture health overview",
+      label: "$(list-tree) Skill Catalog",
+      description: "Generate network diagram of all skills",
     },
-    {
-      label: "$(server) Memory Dashboard",
-      description: "Memory architecture visualization",
-    },
-    {
-      label: "$(checklist) Run Project Audit",
-      description: "22-point audit: security, dependencies, UI, tests",
-      detail: "🔍 Comprehensive project health check",
-    },
-    // --- Developer Tools ---
+    // --- Quality & Audit ---
     { label: "", kind: vscode.QuickPickItemKind.Separator },
+    {
+      label: "$(checklist) Project Audit",
+      description: "Security, dependencies, UI, tests",
+    },
     {
       label: "$(rocket) Release Preflight",
       description: "Pre-release checklist and verification",
-      detail: "🚀 Ready to ship?",
-    },
-    {
-      label: "$(code) Code Review Selection",
-      description: "Review selected code for issues",
-      detail: "📋 Requires text selection",
-    },
-    {
-      label: "$(bug) Debug This",
-      description: "Analyze selection for bugs/issues",
-      detail: "🐛 Requires text selection",
-    },
-    {
-      label: "$(comment-discussion) Rubber Duck Debug",
-      description: "Explain your problem to Alex as rubber duck",
-      detail: "🦆 Dialog-based debugging",
-    },
-    {
-      label: "$(question) Explain This",
-      description: "Level-appropriate code explanation",
-      detail: "📚 Junior/senior/reviewer/teacher levels",
-    },
-    {
-      label: "$(edit) Refactor This",
-      description: "Goal-oriented refactoring",
-      detail: "🔧 Readability/performance/testability/SOLID",
-    },
-    {
-      label: "$(lightbulb) Simplify This",
-      description: "Clean code transformation",
-      detail: "✨ Reduce nesting, improve naming",
-    },
-    {
-      label: "$(shield) Security Review",
-      description: "OWASP Top 10 security audit",
-      detail: "🛡️ Injection, auth, secrets, etc.",
-    },
-    {
-      label: "$(note) Document This",
-      description: "Generate documentation",
-      detail: "📝 JSDoc/docstrings/XML docs",
-    },
-    {
-      label: "$(symbol-structure) Generate Diagram",
-      description: "Create Mermaid diagrams",
-      detail: "📊 Class, sequence, flowchart, ER, etc.",
-    },
-    {
-      label: "$(beaker) Generate Tests",
-      description: "Generate tests for selected code",
-      detail: "🧪 Jest, Mocha, pytest, etc.",
     },
     {
       label: "$(verified) Validate Heir",
       description: "Check heir sync with Master Alex",
-      detail: "🧬 Extension development",
     },
-    // --- Multimodal ---
+    // --- Developer Tools ---
+    { label: "", kind: vscode.QuickPickItemKind.Separator },
+    {
+      label: "$(code) Code Review",
+      description: "Review selected code for issues",
+    },
+    {
+      label: "$(bug) Debug This",
+      description: "Analyze selection for bugs",
+    },
+    {
+      label: "$(comment-discussion) Rubber Duck",
+      description: "Dialog-based debugging",
+    },
+    {
+      label: "$(question) Explain This",
+      description: "Level-appropriate code explanation",
+    },
+    {
+      label: "$(edit) Refactor This",
+      description: "Goal-oriented refactoring",
+    },
+    {
+      label: "$(lightbulb) Simplify This",
+      description: "Clean code transformation",
+    },
+    {
+      label: "$(shield) Security Review",
+      description: "OWASP Top 10 audit",
+    },
+    {
+      label: "$(note) Document This",
+      description: "Generate JSDoc / docstrings / XML docs",
+    },
+    {
+      label: "$(symbol-structure) Generate Diagram",
+      description: "Create Mermaid diagrams from code",
+    },
+    {
+      label: "$(beaker) Generate Tests",
+      description: "Generate tests for selected code",
+    },
+    // --- Create & Convert ---
     { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
       label: "$(file-media) Generate Presentation",
-      description: "Create polished PowerPoint from Markdown or selection",
-      detail: "📊 Local PPTX generation",
+      description: "Create PowerPoint from Markdown or selection",
     },
-    // --- GitHub Integration ---
-    { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
       label: "$(git-pull-request) Review Pull Request",
-      description: "AI-assisted PR review",
-      detail: "🔍 Fetches PRs from GitHub",
+      description: "AI-assisted PR review from GitHub",
     },
+    // --- Diagnostics ---
+    { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
-      label: "$(github) Import GitHub Issues",
-      description: "Import issues as learning goals",
-      detail: "📋 Sync with GitHub Issues",
+      label: "$(bug) Report Issue / View Diagnostics",
+      description: "View local telemetry for bug reports",
     },
   ];
 }
@@ -148,17 +131,18 @@ function getDispatchMap(): Array<[string, string]> {
   return [
     ["Dream", "alex.dream"],
     ["Self-Actualize", "alex.selfActualize"],
+    ["Daily Briefing", "alex.dailyBriefing"],
+    ["Health Dashboard", "alex.openHealthDashboard"],
     ["Documentation", "alex.openDocs"],
-    ["Working with Alex", "alex.workingWithAlex"],
+    ["Prompting Guide", "alex.workingWithAlex"],
     ["Upgrade", "alex.upgrade"],
     ["Setup Environment", "alex.setupEnvironment"],
-    ["Report Issue", "alex.viewBetaTelemetry"],
-    ["Chat", "workbench.panel.chat.view.copilot.focus"],
-    ["Skill Catalog", "alex.generateSkillCatalog"],
+    ["Agent Chat", "workbench.panel.chat.view.copilot.focus"],
     ["Search Knowledge", "alex.knowledgeQuickPick"],
-    ["Health Dashboard", "alex.openHealthDashboard"],
+    ["Skill Catalog", "alex.generateSkillCatalog"],
     ["Project Audit", "alex.runAudit"],
     ["Release Preflight", "alex.releasePreflight"],
+    ["Validate Heir", "alex.validateHeir"],
     ["Code Review", "alex.codeReview"],
     ["Debug This", "alex.debugThis"],
     ["Rubber Duck", "alex.rubberDuck"],
@@ -171,8 +155,7 @@ function getDispatchMap(): Array<[string, string]> {
     ["Generate Tests", "alex.generateTests"],
     ["Generate Presentation", "alex.generatePptx"],
     ["Review Pull Request", "alex.reviewPR"],
-    ["Import GitHub Issues", "alex.importGitHubIssues"],
-    ["Validate Heir", "alex.validateHeir"],
+    ["Report Issue", "alex.viewBetaTelemetry"],
   ];
 }
 
@@ -183,8 +166,8 @@ function getDispatchMap(): Array<[string, string]> {
  */
 export async function showStatusQuickPick(): Promise<void> {
   const selected = await vscode.window.showQuickPick(getQuickPickItems(), {
-    placeHolder: "Alex Cognitive Architecture - Quick Actions",
-    title: "🚀 Alex Status",
+    placeHolder: "Select a command...",
+    title: "Alex Quick Actions",
   });
 
   if (!selected) {

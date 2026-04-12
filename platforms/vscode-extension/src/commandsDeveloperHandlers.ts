@@ -6,7 +6,7 @@
  */
 import * as vscode from "vscode";
 import * as path from "path";
-import { openChatPanel, getLanguageIdFromPath } from "./shared/utils";
+import { getLanguageIdFromPath } from "./shared/utils";
 import { getNonce } from "./shared/sanitize";
 import { checkHealth } from "./shared/healthCheck";
 import * as telemetry from "./shared/telemetry";

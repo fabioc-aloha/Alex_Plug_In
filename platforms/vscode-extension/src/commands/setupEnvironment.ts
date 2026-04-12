@@ -659,7 +659,6 @@ export async function optimizeSettings(): Promise<void> {
     Object.assign(settingsToApply, item.settings);
   }
 
-  const count = Object.keys(settingsToApply).length;
   const names = selected.map((s) => s.label.replace(/^[^ ]+ /, "")).join(", ");
 
   await confirmAndApply(settingsToApply, names);

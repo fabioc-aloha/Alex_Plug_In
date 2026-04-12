@@ -33,11 +33,6 @@ const COGNITIVE_TASKS: Array<{
         command: 'alex.selfActualize',
         detail: 'Deep self-assessment with comprehensive report',
     },
-    {
-        label: 'Alex: Sync Knowledge',
-        command: 'alex.syncKnowledge',
-        detail: 'Synchronize global knowledge base',
-    },
 ];
 
 export class CognitiveTaskProvider implements vscode.TaskProvider {

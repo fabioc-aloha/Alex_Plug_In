@@ -22,14 +22,14 @@ flowchart TB
     U((User))
 
     subgraph CONSCIOUS["🌟 Conscious Mind"]
-        CP["💬 Chat Participant"]
+        CP["💬 Agent Mode Chat"]
         SC["⚡ Operations"]
         LMT["🔧 Language Model Tools"]
     end
 
     subgraph UNCONSCIOUS["🌙 Unconscious Mind"]
         BGS["☁️ Background Sync"]
-        AID["💡 Auto-Insights"]
+        EI["🧠 Emotional Intelligence"]
         AFS["🔍 Auto-Fallback Search"]
     end
 
@@ -43,7 +43,7 @@ flowchart TB
     LMT --> MEM
 
     BGS -.->|Auto| MEM
-    AID -.->|Auto| MEM
+    EI -.->|Auto| MEM
     AFS -.->|Auto| MEM
 
     MEM -.->|Informs| CP
@@ -441,7 +441,7 @@ This eliminates the previous failure mode where skills were discovered reactivel
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph TB
     subgraph "Interface Layer"
-        CHAT["Chat Participant"]
+        CHAT["Agent Mode Chat"]
         CMD[Operations]
         API[Language Model Tools]
     end

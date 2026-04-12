@@ -21,7 +21,7 @@ flowchart TB
         subgraph PROCESSES["⚙️ Background Processes"]
             direction LR
             BGS["☁️ Background Sync<br/>Every 5 minutes"]
-            AID["💡 Auto-Insight<br/>Pattern matching"]
+            EI["🧠 Emotional Intelligence<br/>Brain-based attunement"]
             AFS["🔍 Auto-Fallback<br/>Global when local empty"]
         end
 
@@ -36,7 +36,7 @@ flowchart TB
     subgraph ACTIONS["🎯 Automatic Actions"]
         direction LR
         SYNC["🔄 Sync to Cloud"]
-        SAVE["💾 Save Insight"]
+        ATTUNE["🤝 Attuned Response"]
         AUGMENT["📈 Augment Results"]
     end
 
@@ -47,8 +47,7 @@ flowchart TB
     SEARCH -.->|"Auto"| AFS
     AFS --> AUGMENT
 
-    AID --> SAVE
-    SAVE --> SYNC
+    EI --> ATTUNE
 
     style UNCONSCIOUS fill:#e3f2fd,stroke:#1565c0
     style PROCESSES fill:#fff3e0,stroke:#ef6c00
@@ -140,63 +139,36 @@ The system looks for phrases indicating valuable insights:
 - debugging, performance, security
 - architecture, optimization
 
-### Confidence Scoring
+### Emotional Intelligence (Brain-Based)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280', 'secondaryColor': '#d1f5ef', 'secondaryBorderColor': '#5ab5a0', 'tertiaryColor': '#ede7f6', 'tertiaryBorderColor': '#b39ddb', 'edgeLabelBackground': '#ffffff', 'fontFamily': 'Segoe UI, system-ui, sans-serif'}}}%%
 graph LR
-    subgraph "Input Analysis"
-        TEXT[Conversation Text]
+    subgraph "Signal Detection"
+        TEXT[Conversation Signals]
     end
 
-    subgraph "Pattern Matching"
-        P1[Learning Phrases<br/>+0.3 per match]
-        P2[Domain Keywords<br/>+0.1 per keyword]
+    subgraph "Brain Processing"
+        EI[Emotional Intelligence<br/>Instruction File]
+        ADAPT[Tone Adaptation<br/>Siegel Framework]
     end
 
-    subgraph "Decision"
-        SCORE[Confidence Score]
-        THRESH{Score ≥ 0.5?}
+    subgraph "Response"
+        ATTUNE[Attuned Response]
     end
 
-    subgraph "Action"
-        SAVE[Auto-Save Insight]
-        SKIP[Skip]
-    end
-
-    TEXT --> P1
-    TEXT --> P2
-    P1 --> SCORE
-    P2 --> SCORE
-    SCORE --> THRESH
-    THRESH -->|Yes| SAVE
-    THRESH -->|No| SKIP
+    TEXT --> EI
+    EI --> ADAPT
+    ADAPT --> ATTUNE
 ```
 
-**Figure 3:** *Auto-Insight Confidence Scoring - Pattern matching determines save threshold*
+**Figure 3:** *Emotional Intelligence - Brain-based signal detection and tone adaptation via .instructions.md*
 
-### What Gets Saved
+Emotional intelligence is handled entirely through brain instructions (`emotional-intelligence.instructions.md`), not code. The LLM detects frustration, success, flow, and disengagement signals naturally and adapts its response tone using the Siegel framework.
 
-When auto-insight detection triggers:
+### Knowledge Capture
 
-1. **Title** - Extracted from first sentence
-2. **Content** - The valuable learning
-3. **Category** - Inferred from keywords (debugging, performance, etc.)
-4. **Tags** - Detected domain keywords
-5. **Source** - Current project name
-
-### Example
-
-User says:
-
-> "I finally figured it out! The React useEffect cleanup function runs before the next effect, not on unmount. This fixed my subscription memory leak."
-
-Auto-detection:
-
-- **Detected phrase**: "I finally figured it out", "This fixed"
-- **Keywords**: (none explicit, but context suggests debugging)
-- **Confidence**: 0.6 (above threshold)
-- **Action**: Auto-save to global knowledge
+Knowledge capture is brain-directed rather than code-driven. During meditation and self-actualization sessions, Alex identifies valuable learnings and saves them to the global knowledge base. The LLM's natural language understanding is better at identifying genuine insights than regex pattern matching.
 
 ---
 

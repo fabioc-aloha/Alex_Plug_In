@@ -48,9 +48,7 @@ type ActiveContextField = Exclude<keyof ActiveContext, "northStar">;
 // ============================================================================
 
 const SECTION_HEADER = "## Active Context";
-const SECTION_COMMENT =
-  "<!-- Extension-managed session state. Read this FIRST to resume context across sessions. -->";
-const OBJECTIVE_PLACEHOLDER = "_(session-objective — set by user)_";
+
 
 /** Field labels as they appear in copilot-instructions.md */
 const FIELD_LABELS: Record<ActiveContextField, string> = {
@@ -193,27 +191,6 @@ function parseSection(section: string): ActiveContext {
   return ctx;
 }
 
-/**
- * Rebuild the Active Context section from parsed values.
- */
-function rebuildSection(ctx: ActiveContext): string {
-  const lines = [
-    SECTION_HEADER,
-    SECTION_COMMENT,
-    `Persona: ${ctx.persona ?? "Unknown"}`,
-    `Objective: ${ctx.objective ?? OBJECTIVE_PLACEHOLDER}`,
-    `Tone: ${ctx.tone ?? "_(auto — adapt to context)_"}`,
-    `Focus Trifectas: ${ctx.focusTrifectas ?? ""}`,
-    `Priorities: ${ctx.priorities ?? ""}`,
-    `Principles: ${ctx.principles ?? "KISS, DRY, Optimize-for-AI"}`,
-    `Recent: ${ctx.recent ?? ""}`,
-    `Guidelines: ${ctx.guidelines ?? ""}`,
-    `Last Assessed: ${ctx.lastAssessed ?? "never"}`,
-    "", // trailing newline before next section
-  ];
-  return lines.join("\n");
-}
-
 // ============================================================================
 // Public API
 // ============================================================================
@@ -278,9 +255,6 @@ export async function updateActiveContext(
         );
         return false;
       }
-
-      // Parse existing values
-      const ctx = parseSection(parts.section);
 
       // Master protection: block Focus Trifectas overwrite on Master Alex
       if (updates.focusTrifectas !== undefined) {

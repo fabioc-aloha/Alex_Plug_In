@@ -7,28 +7,7 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as telemetry from "./shared/telemetry";
-
-/**
- * Resolve md-to-word.cjs: workspace first, then extension bundle fallback.
- */
-async function resolveMdToWordScript(
-  workspacePath: string,
-  extensionPath: string,
-): Promise<string | undefined> {
-  const candidates = [
-    path.join(workspacePath, ".github", "muscles", "md-to-word.cjs"),
-    path.join(extensionPath, ".github", "muscles", "md-to-word.cjs"),
-  ];
-  for (const candidate of candidates) {
-    try {
-      await vscode.workspace.fs.stat(vscode.Uri.file(candidate));
-      return candidate;
-    } catch {
-      // try next
-    }
-  }
-  return undefined;
-}
+import { resolveMuscleScript } from "./shared/utils";
 
 export function registerWordCommands(context: vscode.ExtensionContext): void {
   const convertToWordDisposable = vscode.commands.registerCommand(
@@ -54,7 +33,8 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         }
 
         const outputPath = uri.fsPath.replace(/\.md$/, ".docx");
-        const nodeScript = await resolveMdToWordScript(
+        const nodeScript = await resolveMuscleScript(
+          "md-to-word.cjs",
           workspaceFolder.uri.fsPath,
           context.extensionPath,
         );
@@ -67,8 +47,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        vscode.window.showInformationMessage("📄 Converting to Word...");
-
         const terminal = vscode.window.createTerminal({
           name: "Alex: Word Conversion",
           cwd: path.dirname(uri.fsPath),
@@ -78,13 +56,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         terminal.sendText(
           `node "${nodeScript}" "${uri.fsPath}" "${outputPath}"`,
         );
-
-        // Wait a bit then notify - in real implementation we'd monitor the process
-        setTimeout(() => {
-          vscode.window.showInformationMessage(
-            `📝 Word conversion complete: ${path.basename(outputPath)}`,
-          );
-        }, 5000);
 
         endLog(true);
       } catch (error) {
@@ -125,7 +96,8 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const nodeScript = await resolveMdToWordScript(
+        const nodeScript = await resolveMuscleScript(
+          "md-to-word.cjs",
           workspaceFolder.uri.fsPath,
           context.extensionPath,
         );
@@ -207,8 +179,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           flags = "";
         }
 
-        vscode.window.showInformationMessage("📄 Converting to Word...");
-
         const terminal = vscode.window.createTerminal({
           name: "Alex: Word Conversion",
           cwd: path.dirname(uri.fsPath),
@@ -219,12 +189,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         const command =
           `node "${nodeScript}" "${uri.fsPath}" "${outputPath}" ${flags}`.trim();
         terminal.sendText(command);
-
-        setTimeout(() => {
-          vscode.window.showInformationMessage(
-            `📝 Word conversion complete: ${path.basename(outputPath)}`,
-          );
-        }, 5000);
 
         endLog(true);
       } catch (error) {

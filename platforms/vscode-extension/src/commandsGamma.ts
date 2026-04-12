@@ -7,24 +7,35 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as telemetry from './shared/telemetry';
+import { resolveMuscleScript } from './shared/utils';
 
 /**
- * Resolve gamma-generator.cjs: workspace first, then extension bundle fallback.
+ * Check for GAMMA_API_KEY and prompt configuration if missing.
+ * Returns true if the user wants to proceed, false to abort.
  */
-async function resolveGammaScript(workspacePath: string, extensionPath: string): Promise<string | undefined> {
-  const candidates = [
-    path.join(workspacePath, ".github", "muscles", "gamma-generator.cjs"),
-    path.join(extensionPath, ".github", "muscles", "gamma-generator.cjs"),
-  ];
-  for (const candidate of candidates) {
-    try {
-      await vscode.workspace.fs.stat(vscode.Uri.file(candidate));
-      return candidate;
-    } catch {
-      // try next
+async function ensureGammaApiKey(): Promise<boolean> {
+  const { getToken } = await import("./services/secretsManager");
+  const gammaApiKey = getToken("GAMMA_API_KEY");
+  if (!gammaApiKey) {
+    const result = await vscode.window.showWarningMessage(
+      "Gamma API Key not configured. Set your API key to use presentation generation.",
+      "Configure API Key",
+      "Get API Key",
+      "Continue Anyway"
+    );
+    if (result === "Configure API Key") {
+      vscode.commands.executeCommand("alex.manageSecrets");
+      return false;
+    }
+    if (result === "Get API Key") {
+      vscode.env.openExternal(vscode.Uri.parse("https://gamma.app/settings"));
+      return false;
+    }
+    if (!result) {
+      return false;
     }
   }
-  return undefined;
+  return true;
 }
 
 export function registerGammaCommands(context: vscode.ExtensionContext): void {
@@ -33,26 +44,9 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
     async () => {
       const endLog = telemetry.logTimed("command", "generate_gamma_presentation");
       try {
-        // Check for GAMMA_API_KEY
-        const { getToken } = await import("./services/secretsManager");
-        const gammaApiKey = getToken("GAMMA_API_KEY");
-        if (!gammaApiKey) {
-          const result = await vscode.window.showWarningMessage(
-            "Gamma API Key not configured. Set your API key to use presentation generation.",
-            "Configure API Key",
-            "Get API Key",
-            "Continue Anyway"
-          );
-          if (result === "Configure API Key") {
-            vscode.commands.executeCommand("alex.manageSecrets");
-            endLog(true);
-            return;
-          }
-          if (result === "Get API Key") {
-            vscode.env.openExternal(vscode.Uri.parse("https://gamma.app/settings"));
-            endLog(true);
-            return;
-          }
+        if (!await ensureGammaApiKey()) {
+          endLog(true);
+          return;
         }
 
         const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
@@ -62,7 +56,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const gammaScript = await resolveGammaScript(workspaceFolder.uri.fsPath, context.extensionPath);
+        const gammaScript = await resolveMuscleScript("gamma-generator.cjs", workspaceFolder.uri.fsPath, context.extensionPath);
         
         if (!gammaScript) {
           vscode.window.showErrorMessage(
@@ -89,7 +83,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        vscode.window.showInformationMessage("🎨 Generating Gamma presentation...");
+        vscode.window.showInformationMessage("Generating Gamma presentation...");
 
         const terminal = vscode.window.createTerminal({
           name: "Alex: Gamma Generation",
@@ -120,43 +114,9 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        // Check for Node.js
-        try {
-          const { execSync } = await import("child_process");
-          execSync("node --version", { stdio: "ignore" });
-        } catch {
-          const result = await vscode.window.showErrorMessage(
-            "Node.js is required for Gamma generation but was not found.",
-            "Download Node.js",
-            "Cancel"
-          );
-          if (result === "Download Node.js") {
-            vscode.env.openExternal(vscode.Uri.parse("https://nodejs.org/"));
-          }
-          endLog(false);
+        if (!await ensureGammaApiKey()) {
+          endLog(true);
           return;
-        }
-
-        // Check for GAMMA_API_KEY
-        const { getToken } = await import("./services/secretsManager");
-        const gammaApiKey = getToken("GAMMA_API_KEY");
-        if (!gammaApiKey) {
-          const result = await vscode.window.showWarningMessage(
-            "Gamma API Key not configured. Set your API key to use presentation generation.",
-            "Configure API Key",
-            "Get API Key",
-            "Continue Anyway"
-          );
-          if (result === "Configure API Key") {
-            vscode.commands.executeCommand("alex.manageSecrets");
-            endLog(true);
-            return;
-          }
-          if (result === "Get API Key") {
-            vscode.env.openExternal(vscode.Uri.parse("https://gamma.app/settings"));
-            endLog(true);
-            return;
-          }
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
@@ -166,7 +126,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const gammaScript = await resolveGammaScript(workspaceFolder.uri.fsPath, context.extensionPath);
+        const gammaScript = await resolveMuscleScript("gamma-generator.cjs", workspaceFolder.uri.fsPath, context.extensionPath);
         
         if (!gammaScript) {
           vscode.window.showErrorMessage(
@@ -176,7 +136,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        vscode.window.showInformationMessage("🎨 Generating Gamma presentation from file...");
+        vscode.window.showInformationMessage("Generating Gamma presentation from file...");
 
         const terminal = vscode.window.createTerminal({
           name: "Alex: Gamma Generation",
@@ -207,43 +167,9 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        // Check for Node.js
-        try {
-          const { execSync } = await import("child_process");
-          execSync("node --version", { stdio: "ignore" });
-        } catch {
-          const result = await vscode.window.showErrorMessage(
-            "Node.js is required for Gamma generation but was not found.",
-            "Download Node.js",
-            "Cancel"
-          );
-          if (result === "Download Node.js") {
-            vscode.env.openExternal(vscode.Uri.parse("https://nodejs.org/"));
-          }
-          endLog(false);
+        if (!await ensureGammaApiKey()) {
+          endLog(true);
           return;
-        }
-
-        // Check for GAMMA_API_KEY
-        const { getToken } = await import("./services/secretsManager");
-        const gammaApiKey = getToken("GAMMA_API_KEY");
-        if (!gammaApiKey) {
-          const result = await vscode.window.showWarningMessage(
-            "Gamma API Key not configured. Set your API key to use presentation generation.",
-            "Configure API Key",
-            "Get API Key",
-            "Continue Anyway"
-          );
-          if (result === "Configure API Key") {
-            vscode.commands.executeCommand("alex.manageSecrets");
-            endLog(true);
-            return;
-          }
-          if (result === "Get API Key") {
-            vscode.env.openExternal(vscode.Uri.parse("https://gamma.app/settings"));
-            endLog(true);
-            return;
-          }
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
@@ -253,7 +179,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        const gammaScript = await resolveGammaScript(workspaceFolder.uri.fsPath, context.extensionPath);
+        const gammaScript = await resolveMuscleScript("gamma-generator.cjs", workspaceFolder.uri.fsPath, context.extensionPath);
         
         if (!gammaScript) {
           vscode.window.showErrorMessage(
@@ -392,7 +318,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           return;
         }
 
-        vscode.window.showInformationMessage("🎨 Generating Gamma presentation with custom options...");
+        vscode.window.showInformationMessage("Generating Gamma presentation with custom options...");
 
         const terminal = vscode.window.createTerminal({
           name: "Alex: Gamma Generation",

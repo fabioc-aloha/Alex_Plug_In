@@ -10,7 +10,6 @@
 import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as os from "os";
 import {
   SYNAPSE_REGEX,
   VERSION_EXTRACT_REGEX,
@@ -620,4 +619,27 @@ export async function openChatPanel(query?: string): Promise<void> {
       );
     }
   }
+}
+
+/**
+ * Resolve a muscle script from workspace .github/muscles/ first, then extension bundle.
+ */
+export async function resolveMuscleScript(
+  scriptName: string,
+  workspacePath: string,
+  extensionPath: string,
+): Promise<string | undefined> {
+  const candidates = [
+    path.join(workspacePath, ".github", "muscles", scriptName),
+    path.join(extensionPath, ".github", "muscles", scriptName),
+  ];
+  for (const candidate of candidates) {
+    try {
+      await vscode.workspace.fs.stat(vscode.Uri.file(candidate));
+      return candidate;
+    } catch {
+      // try next
+    }
+  }
+  return undefined;
 }

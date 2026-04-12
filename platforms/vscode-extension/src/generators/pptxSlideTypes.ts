@@ -26,7 +26,6 @@ import type {
   ChartData,
   TableData,
   ImageData,
-  IllustrationData,
   IllustrationSlideData,
   TwoColumnData,
 } from "./pptxGenerator";

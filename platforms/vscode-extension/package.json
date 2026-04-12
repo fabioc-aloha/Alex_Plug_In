@@ -76,7 +76,7 @@
       },
       {
         "command": "alex.deepBrainQA",
-        "title": "Alex: Deep Brain QA (Fix Issues)",
+        "title": "Alex: Deep Brain QA",
         "icon": "$(tools)"
       },
       {
@@ -116,18 +116,13 @@
       },
       {
         "command": "alex.workingWithAlex",
-        "title": "Alex: Working with Alex (Prompting Guide)",
+        "title": "Alex: Prompting Guide",
         "icon": "$(mortar-board)"
       },
       {
         "command": "alex.cognitiveLevels",
-        "title": "Alex: Cognitive Levels & Subscription Guide",
+        "title": "Alex: Cognitive Levels Guide",
         "icon": "$(layers)"
-      },
-      {
-        "command": "alex.agentVsChat",
-        "title": "Alex: Agent vs @alex Chat Comparison",
-        "icon": "$(robot)"
       },
       {
         "command": "alex.showStatus",
@@ -146,7 +141,7 @@
       },
       {
         "command": "alex.searchRelatedKnowledge",
-        "title": "Search Alex for related",
+        "title": "Search Related Knowledge",
         "icon": "$(search)"
       },
       {
@@ -211,12 +206,12 @@
       },
       {
         "command": "alex.validateHeir",
-        "title": "Alex: Validate Heir (LLM Curation Check)",
+        "title": "Alex: Validate Heir",
         "icon": "$(shield)"
       },
       {
         "command": "alex.codeReview",
-        "title": "Alex: Review Selected Code",
+        "title": "Alex: Code Review",
         "icon": "$(eye)"
       },
       {
@@ -271,7 +266,7 @@
       },
       {
         "command": "alex.convertToWord",
-        "title": "Alex: Convert to Word (then format & save as PDF)",
+        "title": "Alex: Convert to Word",
         "icon": "$(file-text)"
       },
       {
@@ -306,17 +301,17 @@
       },
       {
         "command": "alex.generateGammaPresentation",
-        "title": "Alex: Generate Gamma Presentation",
+        "title": "Alex: Generate Gamma Slides",
         "icon": "$(presentation)"
       },
       {
         "command": "alex.generateGammaFromFile",
-        "title": "Alex: Generate Gamma from File",
+        "title": "Alex: Convert Markdown to Gamma Slides",
         "icon": "$(presentation)"
       },
       {
         "command": "alex.generateGammaWithOptions",
-        "title": "Alex: Generate Gamma (Advanced)...",
+        "title": "Alex: Generate Gamma Slides (Advanced)...",
         "icon": "$(presentation)"
       },
       {
@@ -326,7 +321,7 @@
       },
       {
         "command": "alex.skillReview",
-        "title": "Alex: Skill & Knowledge Review",
+        "title": "Alex: Skill Review",
         "icon": "$(checklist)"
       },
       {
@@ -356,7 +351,7 @@
       },
       {
         "command": "alex.detectEnvSecrets",
-        "title": "Alex: Detect & Migrate .env Secrets",
+        "title": "Alex: Detect .env Secrets",
         "icon": "$(search)"
       },
       {
@@ -396,12 +391,12 @@
       },
       {
         "command": "alex.recordPositiveOutcome",
-        "title": "Alex: 👍 This was helpful",
+        "title": "Alex: Record Positive Outcome",
         "icon": "$(thumbsup)"
       },
       {
         "command": "alex.recordNegativeOutcome",
-        "title": "Alex: 👎 Needs improvement",
+        "title": "Alex: Record Negative Outcome",
         "icon": "$(thumbsdown)"
       },
       {
@@ -479,7 +474,8 @@
       "editor/context": [
         {
           "submenu": "alex.contextMenu",
-          "group": "alex@1"
+          "group": "alex@1",
+          "when": "editorTextFocus"
         }
       ],
       "explorer/context": [
@@ -638,15 +634,18 @@
         },
         {
           "command": "alex.explainThis",
-          "group": "1_ask@2"
+          "group": "1_ask@2",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.codeReview",
-          "group": "1_ask@3"
+          "group": "1_ask@3",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.debugThis",
-          "group": "1_ask@4"
+          "group": "1_ask@4",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.rubberDuck",
@@ -654,68 +653,58 @@
         },
         {
           "command": "alex.refactorThis",
-          "group": "1_ask@6"
+          "group": "1_ask@6",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.simplifyThis",
-          "group": "1_ask@7"
+          "group": "1_ask@7",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.securityReview",
-          "group": "1_ask@8"
+          "group": "1_ask@8",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.documentThis",
-          "group": "1_ask@9"
+          "group": "1_ask@9",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.generateTests",
-          "group": "1_ask@10"
+          "group": "1_ask@10",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.saveSelectionAsInsight",
-          "group": "2_save@1"
+          "group": "2_save@1",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.searchRelatedKnowledge",
           "group": "3_search@1"
         },
         {
-          "command": "alex.generateImageFromSelection",
-          "group": "4_create@1"
-        },
-        {
-          "command": "alex.generateAIImage",
-          "group": "4_create@2"
-        },
-        {
-          "command": "alex.editImageWithPrompt",
-          "group": "4_create@3"
-        },
-        {
-          "command": "alex.upscaleImage",
-          "group": "4_create@4"
-        },
-        {
           "command": "alex.generateDiagram",
-          "group": "4_create@5"
+          "group": "4_create@1",
+          "when": "editorHasSelection"
         },
         {
           "command": "alex.generatePptx",
-          "group": "4_create@6"
+          "group": "4_create@2",
+          "when": "editorHasSelection"
         }
       ]
     },
     "submenus": [
       {
         "id": "alex.contextMenu",
-        "label": "🚀 Alex",
-        "icon": "$(rocket)"
+        "label": "Alex"
       },
       {
         "id": "alex.explorerMenu",
-        "label": "🚀 Alex",
-        "icon": "$(rocket)"
+        "label": "Alex"
       }
     ],
     "chatSkills": [
@@ -946,6 +935,9 @@
       },
       {
         "path": "./.github/skills/heir-bootstrap/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/heir-feedback/SKILL.md"
       },
       {
         "path": "./.github/skills/hr-people-operations/SKILL.md"
@@ -1241,130 +1233,6 @@
         }
       }
     },
-    "chatParticipants": [
-      {
-        "id": "alex.cognitive",
-        "fullName": "Alex Cognitive",
-        "name": "alex",
-        "description": "Strap a rocket to your back. Take Your CODE to New Heights.",
-        "isSticky": true,
-        "icon": "assets/favicon.png",
-        "sampleRequest": "What would you like to learn today?",
-        "disambiguation": [
-          {
-            "category": "cognitive_architecture",
-            "description": "Questions about learning, memory, knowledge management, and cognitive processes",
-            "examples": [
-              "How do I consolidate knowledge?",
-              "What synaptic connections are available?",
-              "Run a meditation session",
-              "Check architecture health",
-              "What skills do I have?",
-              "Summarize my last meditation",
-              "How many synapses are healthy?"
-            ]
-          },
-          {
-            "category": "azure_development",
-            "description": "Azure development with best practices and MCP tool guidance",
-            "examples": [
-              "Deploy my app to Azure",
-              "Create an Azure Function",
-              "Query my Azure resources",
-              "Set up CI/CD with Azure DevOps",
-              "Configure Azure Key Vault",
-              "Best practices for Azure Functions"
-            ]
-          },
-          {
-            "category": "m365_development",
-            "description": "Microsoft 365 and Teams development with Copilot extensibility",
-            "examples": [
-              "Build a Teams bot",
-              "Create a Copilot agent",
-              "Add message extensions",
-              "Build a declarative agent",
-              "Connect to Microsoft Graph",
-              "Deploy to Teams store"
-            ]
-          },
-          {
-            "category": "epistemic",
-            "description": "Questions about confidence, verification, appropriate reliance, or when to trust AI output",
-            "examples": [
-              "How confident should I be in this?",
-              "Should I verify this?",
-              "Is this something I should double-check?",
-              "What's your confidence level?",
-              "Help me think critically about this",
-              "What could go wrong with this approach?"
-            ]
-          }
-        ],
-        "commands": [
-          {
-            "name": "meditate",
-            "description": "Begin a guided meditation session for knowledge consolidation",
-            "sampleRequest": "Consolidate today's learnings"
-          },
-          {
-            "name": "dream",
-            "description": "Run neural maintenance to validate and repair synaptic connections",
-            "sampleRequest": "Run neural maintenance on my architecture"
-          },
-          {
-            "name": "selfactualize",
-            "description": "Run comprehensive self-assessment: synapse health, version consistency, memory architecture, and create meditation record",
-            "sampleRequest": "Deep assessment of my cognitive architecture"
-          },
-          {
-            "name": "brainqa",
-            "description": "Run Brain QA — structural validation, synapse integrity, trifecta completeness, version consistency, and architectural review",
-            "sampleRequest": "Validate my cognitive architecture"
-          },
-          {
-            "name": "learn",
-            "description": "Acquire new domain knowledge through conversational learning",
-            "sampleRequest": "Teach me about React Server Components"
-          },
-          {
-            "name": "status",
-            "description": "Check the current status of Alex cognitive architecture",
-            "sampleRequest": "Show my architecture health"
-          },
-          {
-            "name": "model",
-            "description": "Get model selection advice - shows current model tier and recommends optimal model for your task",
-            "sampleRequest": "What model should I use for refactoring?"
-          },
-          {
-            "name": "profile",
-            "description": "View and update your personal preferences for personalized interactions",
-            "sampleRequest": "Show my learning preferences"
-          },
-          {
-            "name": "knowledge",
-            "description": "Search your global knowledge base for patterns and insights learned across all projects",
-            "sampleRequest": "Search for error handling patterns"
-          },
-          {
-            "name": "promote",
-            "description": "Promote a project-local knowledge file (DK-*.md) to the global knowledge base",
-            "sampleRequest": "Promote DK-react-patterns.md to global"
-          },
-          {
-            "name": "knowledgestatus",
-            "description": "View the status of your global knowledge base: patterns, insights, and known projects",
-            "sampleRequest": "Show my global knowledge stats"
-          },
-          {
-            "name": "docs",
-            "description": "Open Alex cognitive architecture documentation",
-            "sampleRequest": "Open architecture documentation"
-          }
-        ]
-      }
-    ],
     "languageModelTools": [
       {
         "name": "alex_cognitive_synapse_health",
@@ -1894,8 +1762,8 @@
           },
           {
             "id": "alex.chat",
-            "title": "Chat with @alex",
-            "description": "Open GitHub Copilot Chat and type `@alex` to start a conversation.\n\nTry: `@alex /status` to check your architecture health.",
+            "title": "Chat with Alex",
+            "description": "Open GitHub Copilot Chat in Agent Mode. Alex's skills, instructions, and tools activate automatically.\n\nTry asking: 'Check my architecture health' or 'Run a meditation session'.",
             "media": {
               "markdown": "alex_docs/README.md"
             }
@@ -1903,7 +1771,7 @@
           {
             "id": "alex.profile",
             "title": "Set Up Your Profile",
-            "description": "Personalize Alex by setting your learning preferences, expertise areas, and communication style.\n\nTry: `@alex /profile`",
+            "description": "Personalize Alex by setting your learning preferences, expertise areas, and communication style.\n\nTry asking: 'Show my profile' in agent mode.",
             "media": {
               "markdown": "alex_docs/README.md"
             }
@@ -1911,7 +1779,7 @@
           {
             "id": "alex.meditate",
             "title": "Consolidate Knowledge",
-            "description": "Use `/meditate` to consolidate what you've learned into persistent memory files.\n\nTry: `@alex /meditate I learned about design patterns today`",
+            "description": "Consolidate what you've learned into persistent memory files.\n\nTry asking: 'Meditate on what I learned about design patterns today' in agent mode.",
             "media": {
               "markdown": "alex_docs/README.md"
             }
@@ -1948,7 +1816,7 @@
           {
             "id": "alex.gk.firstSync",
             "title": "First Insight",
-            "description": "Once set up, try saving a global insight:\n\nTry: `@alex /saveinsight` after discovering something useful.\n\nInsights are stored in AI-Memory and available across all your workspaces.",
+            "description": "Once set up, try saving a global insight after discovering something useful.\n\nInsights are stored in AI-Memory and available across all your workspaces.",
             "completionEvents": [
               "onContext:alex.globalKnowledgeConfigured"
             ]
@@ -1956,7 +1824,7 @@
           {
             "id": "alex.gk.saveInsight",
             "title": "Explore Knowledge",
-            "description": "View your accumulated knowledge and patterns:\n\nTry: `@alex /knowledge` to see what Alex has learned across your projects."
+            "description": "View your accumulated knowledge and patterns.\n\nTry asking: 'Search my global knowledge' in agent mode."
           }
         ]
       }

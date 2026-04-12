@@ -29,8 +29,8 @@ flowchart TB
 
         subgraph CHAT["💬 Chat Interface"]
             direction LR
-            CP["🧠 @alex"]
-            SC["⚡ Slash Commands"]
+            CP["🧠 Agent Mode"]
+            SC["⚡ Prompt Workflows"]
         end
 
         subgraph COMMANDS["🎨 VS Code Commands"]
@@ -62,12 +62,12 @@ flowchart TB
 
 ---
 
-## Chat Participant (@alex)
+## Chat Interface (Agent Mode)
 
-The primary interface for conscious interaction:
+The primary interface for conscious interaction. Open Copilot Chat in agent mode:
 
 ```
-@alex [your message]
+Ask Alex anything in agent mode
 ```
 
 Alex responds with personality, context awareness, and access to all cognitive tools.
@@ -214,21 +214,21 @@ flowchart TD
     START[Need to interact with Alex?]
 
     START --> Q1{Learning something new?}
-    Q1 -->|Yes| LEARN["/learn [topic]"]
+    Q1 -->|Yes| LEARN["learn prompt"]
     Q1 -->|No| Q2{Searching for info?}
 
-    Q2 -->|Local project| MEM["/knowledge or memory_search"]
-    Q2 -->|Cross-project| GK["/knowledge"]
+    Q2 -->|Local project| MEM["knowledge prompt or memory_search"]
+    Q2 -->|Cross-project| GK["knowledge prompt"]
     Q2 -->|No| Q3{Saving knowledge?}
 
-    Q3 -->|Quick insight| SAVE["/saveinsight"]
-    Q3 -->|Full file| PROM["/promote"]
+    Q3 -->|Quick insight| SAVE["save-insight prompt"]
+    Q3 -->|Full file| PROM["promote prompt"]
     Q3 -->|No| Q4{Maintenance needed?}
 
-    Q4 -->|Health check| DREAM["/dream"]
-    Q4 -->|Deep assessment| SELF["/selfactualize"]
-    Q4 -->|Cloud sync| SYNC["/sync"]
-    Q4 -->|No| CHAT["Just chat with @alex"]
+    Q4 -->|Health check| DREAM["dream prompt"]
+    Q4 -->|Deep assessment| SELF["self-actualize prompt"]
+    Q4 -->|Cloud sync| SYNC["Sync command"]
+    Q4 -->|No| CHAT["Just chat with Alex"]
 ```
 
 **Figure 4:** *Decision Flow - Choosing the right conscious operation for your needs*

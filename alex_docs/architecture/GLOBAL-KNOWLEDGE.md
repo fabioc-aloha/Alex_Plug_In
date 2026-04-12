@@ -344,22 +344,22 @@ flowchart TD
 
 **Figure 3:** *Auto-Fallback Search - Automatic transition to global knowledge when local is empty*
 
-### Auto-Insight Detection
+### Knowledge Capture
 
-Valuable learnings in conversations are auto-saved:
+Valuable learnings are captured during meditation and self-actualization sessions:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#f6f8fa', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#d1d9e0', 'lineColor': '#656d76', 'secondaryColor': '#f6f8fa', 'tertiaryColor': '#ffffff', 'background': '#ffffff', 'mainBkg': '#f6f8fa', 'nodeBorder': '#d1d9e0', 'clusterBkg': '#f6f8fa', 'clusterBorder': '#d1d9e0', 'titleColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart TD
-    CONV[Conversation]
-    DETECT[Pattern Detection<br/>Unconscious]
-    SAVE[Auto-Save Insight]
+    SESSION[Session Context]
+    MEDITATE[Meditation /<br/>Self-Actualization]
+    SAVE[Save Insight to<br/>Global Knowledge]
 
-    CONV --> DETECT
-    DETECT -->|Confidence ≥ 0.5| SAVE
+    SESSION --> MEDITATE
+    MEDITATE -->|Brain-directed| SAVE
 ```
 
-**Figure 4:** *Auto-Insight Detection - Confidence-based automatic knowledge capture*
+**Figure 4:** *Knowledge Capture - Brain-directed insight saving during consolidation sessions*
 
 ---
 

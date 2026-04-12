@@ -15,10 +15,10 @@
 - [Use Cases](#-use-cases)
 - [Daily Usage](#-daily-usage)
   - [Talking to Alex](#talking-to-alex)
-  - [Slash Commands](#slash-commands)
+  - [Prompt Workflows](#prompt-workflows)
 - [Commands Reference](#-commands-reference)
   - [Command Palette](#command-palette-ctrlshiftp)
-  - [Chat Commands](#chat-commands-alex-command)
+  - [Prompt Workflows](#prompt-workflows-via-githubprompts)
   - [MCP Tools](#mcp-tools)
 - [Architecture Overview](#-architecture-overview)
   - [The Dual-Mind Model](#the-dual-mind-model)
@@ -76,18 +76,17 @@ Alex is a **cognitive architecture** that transforms GitHub Copilot into a sophi
 
 3. **Start Chatting**
 
-   Open Copilot Chat and type:
+   Open Copilot Chat (agent mode) and start a conversation:
 
    ```
-   @alex Hello!
+   Hello Alex!
    ```
 
 ### First Session Checklist
 
 - [ ] Extension installed
 - [ ] `Alex: Initialize Architecture` run
-- [ ] Test `@alex /status` in chat
-- [ ] Run `@alex /profile` to personalize (optional)
+- [ ] Test chatting with Alex in agent mode
 
 ### Environment Setup
 
@@ -123,7 +122,6 @@ Alex works best with these VS Code settings enabled. Add to your `settings.json`
   "chat.agentSkillsLocations": [".github/skills"],
   "github.copilot.chat.agent.thinkingTool": true,
   "chat.agent.maxRequests": 50,
-  "chat.experimental.detectParticipant.enabled": true,
   "github.copilot.chat.followUps": "always",
   "chat.mcp.gallery.enabled": true,
   "chat.mcp.autostart": true
@@ -174,45 +172,36 @@ Alex adapts to your domain. While VS Code is traditionally for code, Alex works 
 
 ### Talking to Alex
 
-Always start with `@alex` to activate Alex's cognitive framework:
+Open Copilot Chat in agent mode and converse naturally. Alex's brain (`.github/` instructions, skills, agents) loads automatically:
 
 ```
-@alex How do I implement error handling in this API?
-@alex Review this code for potential issues
-@alex Help me understand this architecture
+How do I implement error handling in this API?
+Review this code for potential issues
+Help me understand this architecture
 ```
 
-### Slash Commands
+### Prompt Workflows
 
-| Command            | What It Does                          |
-| ------------------ | ------------------------------------- |
-| `/status`          | Check Alex health and version         |
-| `/meditate`        | Consolidate knowledge from session    |
-| `/dream`           | Run neural maintenance                |
-| `/selfactualize`   | Deep architecture assessment          |
-| `/learn`           | Start a learning conversation         |
-| `/session`         | Start a focused learning session      |
-| `/model`           | Model intelligence dashboard          |
-| `/knowledge`       | Search global knowledge               |
-| `/saveinsight`     | Save a new insight                    |
-| `/promote`         | Promote local skill to global         |
-| `/knowledgestatus` | Knowledge base stats                  |
-| `/sync`            | Cloud sync                            |
-| `/calendar`        | View upcoming calendar events (Graph) |
-| `/mail`            | View recent emails (Graph)            |
-| `/context`         | Full work context (Graph)             |
-| `/people`          | People search (Graph)                 |
-| `/profile`         | Personalization                       |
-| `/docs`            | Open documentation                    |
-| `/azure`           | Azure guidance                        |
-| `/m365`            | M365 guidance                         |
+Prompt files in `.github/prompts/` provide structured workflows. Use them via the chat prompt picker or type naturally:
+
+| Prompt           | What It Does                       |
+| ---------------- | ---------------------------------- |
+| `meditate`       | Consolidate knowledge from session |
+| `dream`          | Run neural maintenance             |
+| `self-actualize` | Deep architecture assessment       |
+| `learn`          | Start a learning conversation      |
+| `knowledge`      | Search global knowledge            |
+| `save-insight`   | Save a new insight                 |
+| `promote`        | Promote local skill to global      |
+| `azure`          | Azure guidance                     |
+| `m365`           | M365 guidance                      |
 
 ### Learning Something New
 
-When you learn something valuable:
+When you learn something valuable, use the `save-insight` prompt or ask Alex directly:
 
 ```
-@alex /saveinsight title="Error handling pattern" insight="Always wrap async..." tags="error-handling,typescript"
+Save this insight: Error handling pattern — Always wrap async calls in try/catch with specific error types
 ```
 
 This saves the insight to your global knowledge base for use in other projects.
@@ -222,8 +211,8 @@ This saves the insight to your global knowledge base for use in other projects.
 Search across all your projects:
 
 ```
-@alex /knowledge error handling patterns
-@alex /knowledge React hooks gotchas
+Search global knowledge for error handling patterns
+Search global knowledge for React hooks gotchas
 ```
 
 ---
@@ -249,31 +238,19 @@ Search across all your projects:
 | `Alex: Sync Global Knowledge`               | Sync with private GitHub repo                |
 | `Alex: Report Issue / View Diagnostics`     | View local telemetry for bug reports         |
 
-### Chat Commands (@alex /command)
+### Prompt Workflows (via `.github/prompts/`)
 
-| Command            | Purpose                 | Example                                             |
-| ------------------ | ----------------------- | --------------------------------------------------- |
-| `/status`          | Health check            | `@alex /status`                                     |
-| `/meditate`        | Knowledge consolidation | `@alex /meditate I learned about DI patterns`       |
-| `/dream`           | Neural maintenance      | `@alex /dream`                                      |
-| `/selfactualize`   | Deep assessment         | `@alex /selfactualize`                              |
-| `/learn`           | Learning session        | `@alex /learn TypeScript generics`                  |
-| `/model`           | Model intelligence      | `@alex /model` or `@alex /model <task>`             |
-| `/azure`           | Azure guidance          | `@alex /azure deploy function app`                  |
-| `/m365`            | M365 guidance           | `@alex /m365 create teams bot`                      |
-| `/calendar`        | Calendar events         | `@alex /calendar` or `@alex /calendar 7`            |
-| `/mail`            | Recent emails           | `@alex /mail` or `@alex /mail unread`               |
-| `/context`         | Full work context       | `@alex /context`                                    |
-| `/people`          | People search           | `@alex /people John Smith`                          |
-| `/profile`         | Personalization         | `@alex /profile`                                    |
-| `/knowledge`       | Search global           | `@alex /knowledge caching patterns`                 |
-| `/saveinsight`     | Save learning           | `@alex /saveinsight [your insight]`                 |
-| `/promote`         | Promote to global       | `@alex /promote .github/skills/api-design/SKILL.md` |
-| `/knowledgestatus` | Knowledge stats         | `@alex /knowledgestatus`                            |
-| `/sync`            | Cloud sync              | `@alex /sync`                                       |
-| `/docs`            | Open documentation      | `@alex /docs`                                       |
-| `/checkskills`     | Discover new skills     | `@alex /checkskills`                                |
-| `/pullskill`       | Install from GK         | `@alex /pullskill <id>`                             |
+| Prompt           | Purpose                 | Example                                            |
+| ---------------- | ----------------------- | -------------------------------------------------- |
+| `meditate`       | Knowledge consolidation | Use the meditate prompt after a learning session   |
+| `dream`          | Neural maintenance      | Use the dream prompt for architecture health       |
+| `self-actualize` | Deep assessment         | Use for comprehensive cognitive review             |
+| `learn`          | Learning session        | "Help me learn TypeScript generics"                |
+| `azure`          | Azure guidance          | "Help me deploy a function app to Azure"           |
+| `m365`           | M365 guidance           | "Help me create a Teams bot"                       |
+| `knowledge`      | Search global           | "Search knowledge for caching patterns"            |
+| `save-insight`   | Save learning           | "Save insight about error handling pattern"        |
+| `promote`        | Promote to global       | "Promote the api-design skill to global knowledge" |
 
 ### MCP Tools
 
@@ -357,13 +334,13 @@ Your `AI-Memory/` folder (cloud-synced) contains knowledge that works across all
 **Saving insights:**
 
 ```
-@alex /saveinsight title="Error handling pattern" insight="Always wrap async..." tags="error-handling,typescript"
+Save this insight: "Error handling pattern" — Always wrap async calls in try/catch with specific error types
 ```
 
 **Cloud backup:**
 
 ```
-@alex /sync
+Sync my global knowledge
 ```
 
 ### Architecture Files
@@ -411,16 +388,16 @@ AI-Memory/                     # Cloud-synced (OneDrive/iCloud/Dropbox)
 
 ### Daily Maintenance
 
-1. Start session: `@alex Hello!` (triggers auto-check)
+1. Start session: Open Copilot Chat in agent mode
 2. Work on your project
-3. End session: `@alex /meditate` (consolidate learnings)
+3. End session: Use the `meditate` prompt to consolidate learnings
 
 ### Weekly Maintenance
 
 Run neural maintenance to keep connections healthy:
 
 ```
-@alex /dream
+Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 ```
 
 ### Monthly Maintenance
@@ -428,7 +405,7 @@ Run neural maintenance to keep connections healthy:
 Deep self-assessment:
 
 ```
-@alex /selfactualize
+Ctrl+Shift+P → "Alex: Self-Actualize (Deep Meditation)"
 ```
 
 This validates all synaptic connections, checks version consistency, analyzes memory architecture balance, and creates a session record.
@@ -454,9 +431,9 @@ Ctrl+Shift+P → "Alex: Run Project Audit"
 Or ask Alex directly:
 
 ```
-@alex run full audit
-@alex run security audit
-@alex run dependency audit
+Run full audit
+Run security audit
+Run dependency audit
 ```
 
 | Priority | Audits                                                    |
@@ -497,7 +474,7 @@ Ctrl+Shift+P → "Alex: Upgrade Architecture"
 ### Alex Not Responding
 
 1. Check extension is installed and enabled
-2. Verify `@alex` prefix in chat
+2. Ensure you're in agent mode (not participant mode)
 3. Try reloading VS Code: `Ctrl+Shift+P` → "Reload Window"
 
 ### "Not Initialized" Error
@@ -509,16 +486,14 @@ Ctrl+Shift+P → "Alex: Initialize Architecture"
 ### Broken Synapses
 
 ```
-@alex /dream
+Ctrl+Shift+P → "Alex: Dream (Neural Maintenance)"
 ```
-
-Or: `Ctrl+Shift+P` → "Alex: Dream (Neural Maintenance)"
 
 ### Cloud Sync Issues
 
 1. Check GitHub authentication in VS Code
 2. View Output panel: "Alex Unconscious Mind"
-3. Try manual sync: `@alex /sync`
+3. Try manual sync via Command Palette: "Alex: Sync Global Knowledge"
 
 ### Upgrade Failed
 
@@ -537,9 +512,9 @@ View in VS Code Output panel: `Ctrl+Shift+U`
 
 ### Getting Help
 
-1. Check documentation: `@alex /docs`
-2. Search knowledge: `@alex /knowledge [your issue]`
-3. Run diagnostics: `@alex /status`
+1. Open documentation: `Ctrl+Shift+P` → "Alex: Open Documentation"
+2. Search knowledge: ask Alex to search global knowledge
+3. Run diagnostics: `Ctrl+Shift+P` → "Alex: Report Issue / View Diagnostics"
 
 ---
 
@@ -547,10 +522,9 @@ View in VS Code Output panel: `Ctrl+Shift+U`
 
 ### Productivity
 
-- 💡 Start each session with `@alex Hello!` for health check
-- 💡 Save insights immediately when you learn something
-- 💡 Use `/knowledge` before researching — you might already know it!
-- 💡 End sessions with `/meditate` to consolidate
+- Save insights immediately when you learn something
+- Search global knowledge before researching — you might already know it!
+- End sessions with meditation to consolidate
 
 ### Organization
 

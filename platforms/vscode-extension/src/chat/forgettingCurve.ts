@@ -36,7 +36,6 @@
  *   - User reviews and decides — Alex never forgets autonomously
  */
 
-import * as path from "path";
 import * as fs from "fs-extra";
 import {
   GlobalKnowledgeCategory,

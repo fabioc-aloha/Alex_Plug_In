@@ -29,7 +29,7 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
 
         const selected = await vscode.window.showQuickPick(diagramTypes, {
           placeHolder: "Select diagram type to generate",
-          title: "📊 Generate Mermaid Diagram",
+          title: "Generate Mermaid Diagram",
         });
 
         if (!selected) {
@@ -177,7 +177,7 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           const analysis = analyzeSlideContent(mdContent);
           if (analysis.suggestions.length > 0 && analysis.score < 60) {
             const improve = await vscode.window.showInformationMessage(
-              `📊 Quality score: ${analysis.score}/100. ${analysis.suggestions[0]}`,
+              `Quality score: ${analysis.score}/100. ${analysis.suggestions[0]}`,
               "Continue Anyway",
               "Cancel"
             );
@@ -195,7 +195,7 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           );
 
           if (result.success) {
-            vscode.window.showInformationMessage(`📰 Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
+            vscode.window.showInformationMessage(`Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
             // Open containing folder
             vscode.commands.executeCommand("revealFileInOS", vscode.Uri.file(outputPath));
           } else {
@@ -275,7 +275,7 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           );
 
           if (result.success) {
-            vscode.window.showInformationMessage(`📰 Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
+            vscode.window.showInformationMessage(`Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
             vscode.commands.executeCommand("revealFileInOS", vscode.Uri.file(outputPath));
           } else {
             vscode.window.showErrorMessage(`Failed to generate: ${result.error}`);
@@ -327,7 +327,7 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
             language: "markdown",
           });
           await vscode.window.showTextDocument(doc);
-          vscode.window.showInformationMessage("📰 Fill in the template, then run 'Generate Presentation' → 'From Selection'");
+          vscode.window.showInformationMessage("Fill in the template, then run 'Generate Presentation' from the selection.");
         } else if (selected.value === "plaintext") {
           // AI-assisted plain text transformation
           const textFiles = await vscode.workspace.findFiles("**/*.{txt,md}", "**/node_modules/**", 50);
@@ -417,7 +417,7 @@ Reply with your feedback, or say "Generate slides" to proceed with this concept.
           await vscode.window.showTextDocument(doc);
           
           vscode.window.showInformationMessage(
-            "📰 Review the concept, then edit or ask Copilot to refine it. Say 'Generate slides' when ready.",
+            "Review the concept, then edit or ask Copilot to refine it.",
             "Open Copilot Chat"
           ).then(selection => {
             if (selection === "Open Copilot Chat") {
@@ -499,7 +499,7 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
           await vscode.window.showTextDocument(doc);
           
           vscode.window.showInformationMessage(
-            "📰 Select all (Ctrl+A), then press Ctrl+I → 'Execute this prompt'",
+            "Select all (Ctrl+A), then press Ctrl+I to execute this prompt.",
             "Open Copilot Chat"
           ).then(selection => {
             if (selection === "Open Copilot Chat") {
@@ -549,7 +549,7 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
         );
 
         if (result.success) {
-          vscode.window.showInformationMessage(`📰 Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
+          vscode.window.showInformationMessage(`Presentation saved: ${result.filePath} (${result.slideCount} slides)`);
           vscode.commands.executeCommand("revealFileInOS", vscode.Uri.file(outputPath));
         } else {
           vscode.window.showErrorMessage(`Failed to generate: ${result.error}`);
