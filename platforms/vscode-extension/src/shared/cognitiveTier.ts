@@ -259,13 +259,6 @@ const FEATURE_REQUIREMENTS: Record<string, FeatureRequirement> = {
     upgradeHint:
       'Enable agent mode: set "chat.agent.enabled": true in VS Code settings.',
   },
-  "alex.reviewPR": {
-    featureName: "Review Pull Request",
-    minimumLevel: 3,
-    description: "Pull request analysis",
-    upgradeHint:
-      'Enable agent mode: set "chat.agent.enabled": true in VS Code settings.',
-  },
 
   // ── Level 3: Global Memory (Agent-mode tools) ──────────────────────
   "alex.inheritSkillFromGlobal": {

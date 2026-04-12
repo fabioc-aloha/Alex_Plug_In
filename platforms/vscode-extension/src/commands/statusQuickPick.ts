@@ -114,10 +114,6 @@ function getQuickPickItems(): vscode.QuickPickItem[] {
       label: "$(file-media) Generate Presentation",
       description: "Create PowerPoint from Markdown or selection",
     },
-    {
-      label: "$(git-pull-request) Review Pull Request",
-      description: "AI-assisted PR review from GitHub",
-    },
     // --- Diagnostics ---
     { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
@@ -154,7 +150,6 @@ function getDispatchMap(): Array<[string, string]> {
     ["Generate Diagram", "alex.generateDiagram"],
     ["Generate Tests", "alex.generateTests"],
     ["Generate Presentation", "alex.generatePptx"],
-    ["Review Pull Request", "alex.reviewPR"],
     ["Report Issue", "alex.viewBetaTelemetry"],
   ];
 }

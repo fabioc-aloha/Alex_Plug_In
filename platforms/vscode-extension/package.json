@@ -3,7 +3,7 @@
   "displayName": "Alex Cognitive Architecture",
   "description": "Strap a rocket to your back. Take Your CODE to New Heights with an AI that remembers & grows.",
   "license": "Apache-2.0",
-  "version": "7.7.0",
+  "version": "7.7.1",
   "publisher": "fabioc-aloha",
   "icon": "assets/icon.png",
   "galleryBanner": {
@@ -384,11 +384,7 @@
         "title": "Alex: Setup Global Knowledge",
         "icon": "$(cloud)"
       },
-      {
-        "command": "alex.reviewPR",
-        "title": "Alex: Review Pull Request",
-        "icon": "$(git-pull-request)"
-      },
+
       {
         "command": "alex.recordPositiveOutcome",
         "title": "Alex: Record Positive Outcome",
@@ -622,10 +618,6 @@
           "group": "3_generate@16",
           "when": "resourceExtname =~ /\\.(ts|tsx|js|jsx|py|go|rs|java|cs|cpp|c|h|rb|sql)$/"
         },
-        {
-          "command": "alex.reviewPR",
-          "group": "5_github@2"
-        }
       ],
       "alex.contextMenu": [
         {

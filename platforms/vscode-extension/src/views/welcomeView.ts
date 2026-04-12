@@ -180,7 +180,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       generateGammaPresentation: "alex.generateGammaPresentation",
       generateAIImage: "alex.generateAIImage",
       editImageAI: "alex.editImageWithPrompt",
-      reviewPR: "alex.reviewPR",
       askAboutSelection: "alex.askAboutSelection",
       saveSelectionAsInsight: "alex.saveSelectionAsInsight",
       searchRelatedKnowledge: "alex.searchRelatedKnowledge",

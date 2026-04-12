@@ -24,7 +24,7 @@ import { generateSkillCatalog } from "./commands/skillCatalog";
 import { inheritSkillFromGlobal } from "./commands/inheritSkill";
 import { proposeSkillToGlobal } from "./commands/proposeSkill";
 import { setupGlobalKnowledgeCommand } from "./commands/setupGlobalKnowledge";
-import { reviewPullRequest } from "./commands/githubIntegration";
+
 import { showTokenManagementPalette } from "./services/secretsManager";
 import {
   recordPositiveOutcomeCommand,
@@ -736,23 +736,7 @@ export function registerCoreCommands(
 
   // --- GitHub Integration ---
 
-  context.subscriptions.push(
-    vscode.commands.registerCommand("alex.reviewPR", async () => {
-      if (!(await requireCognitiveLevel("alex.reviewPR"))) {
-        return;
-      }
-      const endLog = telemetry.logTimed("command", "review_pr");
-      try {
-        await reviewPullRequest();
-        endLog(true);
-      } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
-      }
-    }),
-  );
+
 
   // --- v6.0 Partnership Commands ---
 
