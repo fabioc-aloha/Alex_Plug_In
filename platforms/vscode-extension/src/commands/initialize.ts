@@ -430,7 +430,7 @@ async function showInitSuccessAndGettingStarted(
   _personaResult: { persona: { name: string } } | null,
 ): Promise<void> {
   const result = await vscode.window.showInformationMessage(
-    '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Use @alex /status to check your setup\n3. Run "Alex: Dream" periodically for health checks',
+    '✅ Alex Cognitive Architecture initialized!\n\nNext steps:\n1. Open Copilot Chat (Ctrl+Alt+I) and start chatting\n2. Run "Alex: Dream" periodically for health checks',
     "Getting Started",
     "Open Chat",
   );
@@ -444,10 +444,7 @@ async function showInitSuccessAndGettingStarted(
     );
     panel.webview.html = getGettingStartedHtml();
   } else if (result === "Open Chat") {
-    vscode.commands.executeCommand("workbench.action.chat.open", {
-      query: "@alex /status",
-      isPartialQuery: false,
-    });
+    vscode.commands.executeCommand("workbench.action.chat.open");
   }
 
   telemetry.log("command", "initialize_user_choice", {
@@ -482,29 +479,21 @@ function getGettingStartedHtml(): string {
 <body>
     <h1>🧠 Welcome to Alex Cognitive Architecture!</h1>
     <p>Alex is now installed and ready to be your cognitive learning partner.</p>
-    <h2>🚀 Two Ways to Use Alex</h2>
+    <h2>🚀 How to Use Alex</h2>
     <div class="important">
-        <strong>Key Concept:</strong> Alex works in two modes - both are valid, choose based on your needs!
+        <strong>Key Concept:</strong> Alex works through Copilot Chat agent mode. Your brain files (.github/) provide personality, skills, and memory automatically.
     </div>
-    <table>
-        <tr><th>Feature</th><th>Agent (default)</th><th>@alex</th></tr>
-        <tr><td>Alex personality & memory</td><td>✅ Automatic</td><td>✅ Automatic</td></tr>
-        <tr><td>Alex tools (synapse health, etc.)</td><td>✅ Available</td><td>✅ Available</td></tr>
-        <tr><td>Slash commands (/meditate, /dream)</td><td>❌</td><td>✅</td></tr>
-        <tr><td>Sticky conversation mode</td><td>❌</td><td>✅</td></tr>
-    </table>
     <h2>📋 Getting Started</h2>
     <div class="step"><span class="step-number">1</span><strong>Open Copilot Chat</strong><p>Press <code>Ctrl+Alt+I</code> (or <code>Cmd+Alt+I</code> on Mac) to open GitHub Copilot Chat.</p></div>
-    <div class="step"><span class="step-number">2</span><strong>Just Start Chatting!</strong><p>With <strong>Agent (default)</strong> mode, Alex's personality and capabilities are already active. Just type your question!</p></div>
-    <div class="step"><span class="step-number">3</span><strong>Or Use @alex for Commands</strong><p>Type <code>@alex</code> to access slash commands like <code>/meditate</code>, <code>/dream</code>, <code>/knowledge</code>, etc.</p></div>
+    <div class="step"><span class="step-number">2</span><strong>Just Start Chatting!</strong><p>Alex's personality and capabilities are already active through agent mode. Just type your question!</p></div>
+    <div class="step"><span class="step-number">3</span><strong>Use Prompt Workflows</strong><p>Open prompts from the Command Palette or the Alex sidebar to run meditate, dream, knowledge search, and other cognitive workflows.</p></div>
     <div class="step"><span class="step-number">4</span><strong>Introduce Yourself</strong><p>Tell Alex your name and preferences! Say <em>"My name is [your name]"</em> to enable personalized interactions.</p></div>
-    <h2>🔧 Essential Commands</h2>
+    <h2>🔧 Essential Workflows</h2>
     <ul>
-        <li><code>@alex /meditate</code> - Consolidate knowledge after learning sessions</li>
-        <li><code>@alex /dream</code> - Run neural maintenance (health checks)</li>
-        <li><code>@alex /knowledge [query]</code> - Search cross-project knowledge</li>
-        <li><code>@alex /saveinsight</code> - Save learnings for future projects</li>
-        <li><code>@alex /status</code> - Check architecture status</li>
+        <li><strong>Meditate</strong> - Consolidate knowledge after learning sessions</li>
+        <li><strong>Dream</strong> - Run neural maintenance (health checks)</li>
+        <li><strong>Knowledge Search</strong> - Search cross-project knowledge</li>
+        <li><strong>Save Insight</strong> - Save learnings for future projects</li>
     </ul>
     <div class="tip"><strong>💡 Pro Tip:</strong> Run <code>Alex: Dream (Neural Maintenance)</code> from the Command Palette periodically to keep your cognitive architecture healthy!</div>
     <p style="margin-top: 24px; color: var(--vscode-descriptionForeground);"><em>Questions? Just ask in Copilot Chat - Alex is ready to help!</em></p>

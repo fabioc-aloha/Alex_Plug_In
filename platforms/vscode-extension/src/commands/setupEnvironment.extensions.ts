@@ -40,7 +40,7 @@ export const RECOMMENDED_EXTENSIONS: RecommendedExtension[] = [
   {
     id: "github.copilot-chat",
     name: "GitHub Copilot Chat",
-    purpose: "Chat interface, agent mode, @alex participant, slash commands",
+    purpose: "Chat interface, agent mode, language model tools",
     unlocksLevel: 2,
     required: false,
     category: "core",

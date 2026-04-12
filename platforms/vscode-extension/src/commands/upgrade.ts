@@ -67,23 +67,6 @@ export interface MigrationCandidate {
   stale: boolean; // Not modified in > 90 days
 }
 
-interface UpgradeResult {
-  success: boolean;
-  backupPath: string;
-  migrationCandidatesPath: string | null;
-  candidateCount: number;
-  errors: string[];
-}
-// mark interface as used for TS
-const _upgradeResultMarker: UpgradeResult = {
-  success: false,
-  backupPath: "",
-  migrationCandidatesPath: null,
-  candidateCount: 0,
-  errors: [],
-};
-void _upgradeResultMarker;
-
 /** Stats captured during upgrade for completion message */
 interface UpgradeStats {
   restoredCount: number;

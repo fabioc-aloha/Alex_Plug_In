@@ -293,13 +293,12 @@ Alex implements a dual-process cognitive model inspired by human cognition:
 - Handles routine tasks automatically
 - Pattern recognition and auto-learning
 
-| Process                | Trigger             | Timing           |
-| ---------------------- | ------------------- | ---------------- |
-| Auto Global Search     | Local search empty  | Immediate        |
-| Startup Sync           | Extension activates | 10 seconds       |
-| Periodic Sync          | Timer               | Every 5 minutes  |
-| Post-Modification Sync | Save/promote        | 2 seconds        |
-| Auto-Insight           | Conversation        | Confidence ≥ 0.5 |
+| Process                | Trigger             | Timing          |
+| ---------------------- | ------------------- | --------------- |
+| Auto Global Search     | Local search empty  | Immediate       |
+| Startup Sync           | Extension activates | 10 seconds      |
+| Periodic Sync          | Timer               | Every 5 minutes |
+| Post-Modification Sync | Save/promote        | 2 seconds       |
 
 #### System 2: Conscious Mind (Slow, Deliberate)
 

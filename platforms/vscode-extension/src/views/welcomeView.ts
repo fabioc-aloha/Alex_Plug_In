@@ -396,7 +396,6 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
         const settingKey =
           typeof (payload as any).key === "string" ? (payload as any).key : "";
         const allowedSettings = [
-          "alex.autoInsights.enabled",
           "chat.autopilot.enabled",
           "github.copilot.chat.copilotMemory.enabled",
           "chat.mcp.gallery.enabled",
@@ -753,21 +752,11 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       })();
 
       // 7.14: Settings snapshot for inline toggles
-      const alexCfg = vscode.workspace.getConfiguration("alex");
       const chatCfg = vscode.workspace.getConfiguration("chat");
       const copilotChatCfg = vscode.workspace.getConfiguration(
         "github.copilot.chat",
       );
       const settingsToggles: SettingsToggle[] = [
-        // Alex Features
-        {
-          key: "alex.autoInsights.enabled",
-          label: "Auto Insights",
-          enabled: alexCfg.get<boolean>("autoInsights.enabled", true),
-          group: "Alex Features",
-          tooltip:
-            "Automatically detect and suggest saving insights from conversations",
-        },
         // Copilot Power Settings
         {
           key: "chat.autopilot.enabled",

@@ -74,8 +74,8 @@ export class GlobalKnowledgeSearchTool implements vscode.LanguageModelTool<IGlob
                 new vscode.LanguageModelTextPart(
                     `No global knowledge found matching "${query}".\n\n` +
                     `You can save new knowledge using:\n` +
-                    `- \`@alex /saveinsight\` to save a learning from the current project\n` +
-                    `- \`@alex /promote\` to promote project-local knowledge to global`
+                    `- The save-insight prompt to save a learning from the current project\n` +
+                    `- The promote prompt to promote project-local knowledge to global`
                 )
             ]);
         }

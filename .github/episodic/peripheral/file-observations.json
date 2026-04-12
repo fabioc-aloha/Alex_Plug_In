@@ -2,32 +2,32 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/README.md",
-    "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
-    "alex_docs/architecture/CONSCIOUS-MIND.md",
-    "alex_docs/architecture/GLOBAL-KNOWLEDGE.md",
-    "alex_docs/architecture/UNCONSCIOUS-MIND.md",
-    "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-    "alex_docs/skills/SKILLS-CATALOG.md",
-    "package.json",
-    "platforms/vscode-extension/README.md"
+    "platforms/vscode-extension/alex_docs/README.md",
+    "platforms/vscode-extension/package.json",
+    "platforms/vscode-extension/src/chat/globalKnowledgeTools.ts",
+    "platforms/vscode-extension/src/commands/initialize.ts",
+    "platforms/vscode-extension/src/commands/setupEnvironment.extensions.ts",
+    "platforms/vscode-extension/src/commands/setupEnvironment.settings.ts",
+    "platforms/vscode-extension/src/commands/upgrade.ts",
+    "platforms/vscode-extension/src/test/suite/welcomeView.test.ts",
+    "platforms/vscode-extension/src/views/welcomeView.ts"
   ],
   "todoHotspots": [
     {
+      "file": "platforms/vscode-extension/src/commands/setupEnvironment.settings.ts",
+      "todoCount": 1,
+      "scannedAt": 1776015740033
+    },
+    {
       "file": "alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1776015262670
+      "scannedAt": 1776015740033
     },
     {
       "file": "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
       "todoCount": 1,
-      "scannedAt": 1776015262670
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1776015262670
+      "scannedAt": 1776015740033
     }
   ],
-  "lastUpdated": 1776015262670
+  "lastUpdated": 1776015740033
 }

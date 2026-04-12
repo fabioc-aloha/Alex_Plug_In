@@ -58,7 +58,7 @@ export const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "github.copilot.chat.agent.thinkingTool": true,
   // Max agent requests (default 25)
   "chat.agent.maxRequests": 100,
-  // Participant detection
+  // Participant detection (helps route to Alex agent)
   "chat.detectParticipant.enabled": true,
   // Locale override
   "github.copilot.chat.localeOverride": "en",

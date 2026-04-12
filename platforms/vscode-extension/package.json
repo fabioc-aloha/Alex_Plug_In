@@ -1185,30 +1185,6 @@
           "default": true,
           "description": "Automatically enable protected mode when Alex extension source code (platforms/vscode-extension/) is detected in workspace."
         },
-        "alex.autoInsights.enabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable automatic detection of insights from conversations"
-        },
-        "alex.autoInsights.minimumConfidence": {
-          "type": "number",
-          "default": 0.3,
-          "minimum": 0.1,
-          "maximum": 1,
-          "description": "Minimum confidence level to suggest saving an insight (0.1-1.0)"
-        },
-        "alex.autoInsights.cooldownMinutes": {
-          "type": "number",
-          "default": 1,
-          "minimum": 0,
-          "maximum": 60,
-          "description": "Minutes between auto-insight prompts to avoid notification fatigue"
-        },
-        "alex.autoInsights.autoSaveHighConfidence": {
-          "type": "boolean",
-          "default": false,
-          "description": "Automatically save insights with very high confidence (>0.8) without prompting"
-        },
         "alex.globalKnowledge.repoPath": {
           "type": "string",
           "default": "",
