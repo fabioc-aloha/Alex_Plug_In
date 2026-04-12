@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.7.0] - 2026-04-12
+
+### Changed
+
+- **Agent-only mode**: Removed participant mode (@alex mentions, /command slash commands) — agent mode exclusively
+- Dead code cascade cleanup from participant removal (73 files in initial sweep, 10 in follow-up)
+- Token waste audit: added `applyTo` scoping to 19 instructions, trimmed 10 oversized instruction-skill overlaps (-396 lines)
+- Init/upgrade audit: removed dead `UpgradeResult` type, cleaned sweep findings
+
+### Removed
+
+- Chat participant registration and all slash command handlers
+- `@alex` mention support — use agent mode instead
+- Participant-specific menu items, converters, and documentation references
+
+---
+
 ## [7.6.0] - 2026-04-11
 
 ### Changed

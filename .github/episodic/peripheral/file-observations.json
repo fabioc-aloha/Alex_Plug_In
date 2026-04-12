@@ -1,9 +1,18 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "diagnostics/"
+    "github/copilot-instructions.md",
+    "CHANGELOG.md",
+    "ROADMAP.md",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1776019764358
+  "todoHotspots": [
+    {
+      "file": "CHANGELOG.md",
+      "todoCount": 10,
+      "scannedAt": 1776020896827
+    }
+  ],
+  "lastUpdated": 1776020896827
 }
