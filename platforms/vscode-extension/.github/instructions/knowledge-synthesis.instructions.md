@@ -1,5 +1,6 @@
 ---
 description: "Cross-project pattern recognition, insight promotion, and knowledge synthesis protocols"
+applyTo: "**/*knowledge*,**/*insight*,**/*synthesis*,**/*pattern*"
 ---
 
 # Knowledge Synthesis — Auto-Loaded Rules

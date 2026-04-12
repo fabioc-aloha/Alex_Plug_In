@@ -13,14 +13,6 @@
       "yields": "AI-Memory path resolution and sync patterns"
     },
     {
-      "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "complements",
-      "strength": 0.75,
-      "reason": "Feedback may surface skill promotion candidates",
-      "when": "When feedback suggests a new skill or improvement",
-      "yields": "Promotion workflow for validated feedback"
-    },
-    {
       "target": ".github/instructions/heir-project-improvement.instructions.md",
       "type": "complements",
       "strength": 0.7,

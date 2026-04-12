@@ -2,7 +2,7 @@
 
 **Author**: Alex Finch
 **Date**: February 26, 2026
-**Version**: 3.0 — Alex v7.6.0
+**Version**: 2.2 — Alex v7.3.0
 **North Star**: *Create the most advanced and trusted AI partner for any job*
 
 **Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Copilot Brain](./COPILOT-BRAIN.md) · [Loading Mechanics](./LOADING-MECHANICS.md)
@@ -38,37 +38,37 @@ This document maps every integration point between the two, inventories all plat
 ┌─────────────────────────────────────────────────────────┐
 │                    VS Code Host (≥1.110)                │
 │  ┌────────────────┐  ┌───────────┐  ┌────────────────┐  │
-│  │ Agent Platform │  │ LM Access │  │  UI Surfaces   │  │
+│  │ Chat Platform  │  │ LM Access │  │  UI Surfaces   │  │
 │  │  Agent mode    │  │ GPT/Claude│  │  Sidebar       │  │
-│  │  LM Tools      │  │ Tool call │  │  Dashboard     │  │
-│  │  Skills/Instrs │  │ Model API │  │  Memory Tree   │  │
-│  │  Custom Agents │  │ Streaming │  │  Status Bar    │  │
+│  │  Prompt files  │  │ Tool call │  │  Dashboard     │  │
+│  │  LM Tools      │  │ Model API │  │  Memory Tree   │  │
+│  │  Agent routing │  │ Streaming │  │  Status Bar    │  │
 │  └───────┬────────┘  └─────┬─────┘  └───────┬────────┘  │
 │          │                │                 │           │
 │  ┌───────┴────────────────┴─────────────────┴────────┐  │
 │  │              Extension Runtime (TypeScript)       │  │
-│  │  tools.ts → globalKnowledgeTools.ts               │  │
-│  │  honestUncertainty.ts → personaDetection.ts       │  │
+│  │  tools.ts → honestUncertainty.ts                  │  │
+│  │  emotionalMemory.ts → personaDetection.ts         │  │
 │  │  fileWatcher.ts → globalKnowledge.ts              │  │
-│  │  terminalOrchestrator.ts → readAloud.ts           │  │
+│  │  terminalOrchestrator.ts → converters             │  │
 │  └───────┬────────────────┬─────────────────┬────────┘  │
 │          │                │                 │           │
 │  ┌───────┴───┐  ┌─────────┴─────┐  ┌────────┴────────┐  │
 │  │ .github/  │  │ File System   │  │  External APIs  │  │
-│  │ Brain     │  │ Watcher/R/W   │  │  GitHub Auth    │  │
-│  │ Memory    │  │ Workspace     │  │  Replicate      │  │
-│  │ Skills    │  │ SecretStorage │  │  Brandfetch     │  │
+│  │ Brain     │  │ Watcher/R/W   │  │  External APIs  │  │
+│  │ Memory    │  │ Workspace     │  │  GitHub Auth    │  │
+│  │ Skills    │  │ SecretStorage │  │  Replicate/Logo │  │
 │  └───────────┘  └───────────────┘  └─────────────────┘  │
 └─────────────────────────────────────────────────────────┘
 ```
 
 ### Integration Philosophy
 
-The brain (`.github/`) is the cognitive architecture; VS Code is the runtime platform. The architecture is designed so that the brain functions independently — the extension installs the brain, configures the environment, and provides UI niceties, but never replaces brain capabilities with code.
+Alex doesn't wrap VS Code — Alex **inhabits** VS Code. The cognitive architecture (`.github/`) is the brain; VS Code is the body. Neither functions fully without the other:
 
-- **Brain without Extension**: Fully functional via VS Code's native Copilot agent mode — all skills, instructions, agents, and prompts work
-- **Extension without Brain**: A standard extension with UI but no identity, no skills, no cognitive protocols
-- **Together**: A cognitive partner with rich UI, voice synthesis, and operational tooling layered on top of a complete brain
+- **Brain without VS Code**: Static markdown files with no runtime, no chat, no memory persistence
+- **VS Code without Brain**: A standard extension with UI but no identity, no skills, no cognitive protocols
+- **Together**: A cognitive partner that remembers, reasons, adapts, and grows
 
 ---
 
@@ -86,12 +86,13 @@ VS Code 1.110+ is the minimum. This gates access to the Chat Participant API, La
 
 | API Surface                  | Source Module                                                                         | Purpose                                                                                                                   |
 | ---------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Chat Participant API**     | `participant.ts`                                                                      | Registers `@alex` as a chat participant with slash commands, disambiguation, and response streaming                       |
 | **Language Model Tools API** | `tools.ts`, `globalKnowledgeTools.ts`                                                 | Registers 13 LM tools (synapse health, memory search, knowledge, etc.) that models can invoke                             |
-| **Language Model Chat API**  | `readAloud.ts`, `personaDetection.ts`                                                 | Direct model access via `vscode.lm.selectChatModels()` and `model.sendRequest()` for persona detection, TTS summarization |
+| **Language Model Chat API**  | `participant.ts`, `readAloud.ts`, `personaDetection.ts`                               | Direct model access via `vscode.lm.selectChatModels()` and `model.sendRequest()` for persona detection, TTS summarization |
 | **WebviewView Provider**     | `welcomeView.ts`, `cognitiveDashboard.ts`, `healthDashboard.ts`, `memoryDashboard.ts` | Sidebar panels with HTML/CSS/JS for welcome view, cognitive dashboard, health dashboard, memory architecture              |
 | **TreeDataProvider**         | `memoryTreeProvider.ts`                                                               | Memory Architecture tree in the Activity Bar sidebar                                                                      |
 | **StatusBarItem**            | `extension.ts`                                                                        | Health status indicator in the status bar                                                                                 |
-| **Command Registration**     | `extension.ts`                                                                        | 75+ commands for all Alex operations                                                                                      |
+| **Command Registration**     | `extension.ts`                                                                        | 45+ commands for all Alex operations                                                                                      |
 | **Task Provider**            | `cognitiveTaskProvider.ts`                                                            | Custom `alex-cognitive` task type for automating meditate/dream/self-actualize                                            |
 | **FileSystemWatcher**        | `extension.ts`, `fileWatcher.ts`                                                      | Watches `.github/` memory files for changes; ambient workspace observation (hot files, stalled work, TODO hotspots)       |
 | **SecretStorage**            | `secretsManager.ts`                                                                   | Secure API key storage (GitHub tokens, Replicate, Brandfetch, Logo.dev)                                                   |
@@ -113,7 +114,7 @@ VS Code 1.110+ is the minimum. This gates access to the Chat Participant API, La
 Alex activates after VS Code startup completes. This ensures:
 - VS Code APIs are fully available before Alex tries to use them
 - No blocking of editor startup
-- Brain files are detected and UI surfaces are populated on launch
+- Chat participant is ready when the user first types `@alex`
 
 ### Workspace Support
 
@@ -132,7 +133,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 
 | Feature                          | Setting                                                  | Why Alex Needs It                                                             |
 | -------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| **GitHub Copilot Chat**          | (built-in with Copilot)                                  | Copilot Chat provides agent mode, LM tool access, and the chat surface        |
+| **GitHub Copilot Chat**          | (built-in with Copilot)                                  | The `@alex` chat participant requires the Chat API provided by GitHub Copilot |
 | **Instructions Files**           | `chat.instructionsFilesLocations`                        | Auto-loads `.github/instructions/*.instructions.md` — Alex's behavioral rules |
 | **Prompt Files**                 | `chat.promptFilesLocations`                              | Enables `/` slash commands from `.github/prompts/*.prompt.md`                 |
 | **Skills Files**                 | `chat.agentSkillsLocations`                              | Auto-loads skills from `.github/skills/*/SKILL.md` — Alex's domain expertise  |
@@ -150,6 +151,8 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 | **Nested Agents**              | `chat.useNestedAgentsMdFiles`                | Allows agent files in subdirectories                                                                          |
 | **Custom Agents in Subagents** | `chat.customAgentInSubagent.enabled`         | Alex's specialist agents (Builder, Researcher, Validator, etc.) can be invoked as subagents                   |
 | **Search Subagent**            | `github.copilot.chat.searchSubagent.enabled` | Enables web search capability within agent conversations                                                      |
+| **Explore Subagent Model**     | `chat.exploreAgent.defaultModel`             | Faster model (claude-sonnet-4) for read-only codebase research — balances speed and quality                   |
+| **Participant Detection**      | `chat.detectParticipant.enabled`             | Auto-routes queries to `@alex` via disambiguation categories                                                  |
 | **Max Agent Requests**         | `chat.agent.maxRequests`                     | Default 25 is too low for complex tasks; Alex recommends 100                                                  |
 | **MCP Gallery**                | `chat.mcp.gallery.enabled`                   | Enables Model Context Protocol tools for Azure, Bicep, and other MCP servers                                  |
 
@@ -184,7 +187,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 | GitHub Copilot Plan    | Monthly Cost (approx.) | Alex Cognitive Tier       | Key Unlocks                                                                   |
 | ---------------------- | ---------------------- | ------------------------- | ----------------------------------------------------------------------------- |
 | **None**               | **Free** (Alex only)   | Level 1 — Minimum         | Extension UI only (sidebar, TTS, memory tree, architecture deploy)            |
-| **Copilot Free**       | **Free**               | Level 2 — Basic (limited) | Chat with rate limits; limited completions; no agent mode                     |
+| **Copilot Free**       | **Free**               | Level 2 — Basic (limited) | `@alex` chat with rate limits; limited completions; no agent mode             |
 | **Copilot Pro**        | ~$10/mo                | Level 3 — Recommended     | Agent mode, tool calling, skills, instructions, agents, Copilot Memory        |
 | **Copilot Pro+**       | ~$39/mo                | Level 4 — Advanced        | Premium models (Claude Opus 4, o1-pro), extended thinking, higher rate limits |
 | **Copilot Business**   | ~$19/user/mo           | Level 3 — Recommended     | Same as Pro + org admin, IP indemnity, policy controls                        |
@@ -199,7 +202,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 - **Chat**: Limited messages per month with GPT-4o
 - **Agent Mode**: Not available
 - **Models**: GPT-4o only (Capable tier)
-- **Alex Impact**: Basic chat conversations work within rate limits. No tool calling, no skills adherence, no specialist agents. Brain instructions load but responses lack the depth of agent-mode reasoning.
+- **Alex Impact**: Basic `@alex` conversations work within rate limits. No tool calling, no skills adherence, no specialist agents. Slash commands work but responses lack the depth of agent-mode reasoning.
 - **Recommended for**: Trying Alex out, seeing if the partnership model works for you
 
 #### Copilot Pro
@@ -207,7 +210,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 - **Chat**: Unlimited messages
 - **Agent Mode**: Full agent mode with tool calling
 - **Models**: GPT-4o, Claude Sonnet 4 (Capable tier); limited premium model access
-- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 160 skills, 7 specialist agents, Copilot Memory, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
+- **Alex Impact**: Full Level 3 experience. All 13 LM tools, 160 skills, 7 specialist agents, Copilot Memory, auto-insights, and Global Knowledge operations. This is the **recommended minimum** for the complete Alex partnership.
 - **Recommended for**: Individual developers who want the full Alex experience
 
 #### Copilot Pro+
@@ -238,7 +241,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 
 | Your Goal           | Recommended Plan       | Why                                                                                     |
 | ------------------- | ---------------------- | --------------------------------------------------------------------------------------- |
-| Try Alex out        | **Copilot Free**       | Zero cost, see if Alex conversations add value                                          |
+| Try Alex out        | **Copilot Free**       | Zero cost, see if `@alex` conversations add value                                       |
 | Full partnership    | **Copilot Pro**        | Unlocks agent mode — the minimum for complete Alex                                      |
 | Deep cognitive work | **Copilot Pro+**       | Frontier models enable meditation, self-actualization, and deep reasoning at full depth |
 | Team deployment     | **Copilot Business**   | Admin controls + full agent mode for every team member                                  |
@@ -250,7 +253,7 @@ These are the GitHub Copilot and VS Code agentic features that Alex depends on. 
 
 ## Language Model Dependencies
 
-Alex is model-aware. The brain's instructions adapt to model capabilities, and the extension detects available models at runtime.
+Alex is model-aware. The `modelIntelligence.ts` module classifies every model into tiers and adapts behavior accordingly.
 
 ### Model Tier System
 
@@ -274,11 +277,12 @@ Alex adjusts its behavior based on the detected model tier:
 
 Alex accesses the Language Model API directly (not just through chat) for:
 
-| Feature           | Module                | Model Preference                       |
-| ----------------- | --------------------- | -------------------------------------- |
-| Persona Detection | `personaDetection.ts` | GPT-4o → Claude Sonnet → any available |
-| TTS Summarization | `readAloud.ts`        | GPT-4o → any available                 |
-| Model Enumeration | `uxFeatures.ts`       | `vscode.lm.selectChatModels()`         |
+| Feature           | Module                | Model Preference                          |
+| ----------------- | --------------------- | ----------------------------------------- |
+| Persona Detection | `personaDetection.ts` | GPT-4o → Claude Sonnet → any available    |
+| TTS Summarization | `readAloud.ts`        | GPT-4o → any available                    |
+| Model Enumeration | `uxFeatures.ts`       | `vscode.lm.selectChatModels()`            |
+| Tool-Calling Loop | `participant.ts`      | Uses whatever model the user has selected |
 
 ---
 
@@ -326,14 +330,15 @@ The 13 registered LM tools give the model direct access to the brain:
 
 These run automatically without explicit user action:
 
-| Behavior                       | Trigger                                     | Module                                   |
-| ------------------------------ | ------------------------------------------- | ---------------------------------------- |
-| **Emotional Intelligence**     | Every conversation (brain-based)            | `emotional-intelligence.instructions.md` |
-| **Ambient File Watching**      | File saves and editor changes               | `fileWatcher.ts`                         |
-| **Persona Detection**          | Workspace change / on-demand                | `personaDetection.ts`                    |
-| **Knowledge Coverage Scoring** | Every query scored for confidence           | `honestUncertainty.ts`                   |
-| **Avatar State Updates**       | Context shifts (debugging → building)       | `chatAvatarBridge.ts`                    |
-| **Cloud Sync**                 | After insight saves and knowledge promotion | `globalKnowledge.ts`                     |
+| Behavior                       | Trigger                                             | Module                                 |
+| ------------------------------ | --------------------------------------------------- | -------------------------------------- |
+| **Auto-Insight Detection**     | Every chat message analyzed                         | `participant.ts`, `autoInsights.ts`    |
+| **Emotional State Tracking**   | Every chat message analyzed for frustration/success | `participant.ts`, `emotionalMemory.ts` |
+| **Ambient File Watching**      | File saves and editor changes                       | `fileWatcher.ts`                       |
+| **Persona Detection**          | Workspace change / on-demand                        | `personaDetection.ts`                  |
+| **Knowledge Coverage Scoring** | Every query scored for confidence                   | `honestUncertainty.ts`                 |
+| **Avatar State Updates**       | Context shifts (debugging → building)               | `chatAvatarBridge.ts`                  |
+| **Cloud Sync**                 | After insight saves and knowledge promotion         | `globalKnowledge.ts`                   |
 
 ---
 
@@ -347,18 +352,19 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 **Copilot Plan**: None
 **What's Missing**: No GitHub Copilot subscription
 
-| Works                                              | Doesn't Work                                   |
-| -------------------------------------------------- | ---------------------------------------------- |
-| Activity Bar sidebar with welcome view             | Agent-mode conversations — no LM access        |
-| Status bar health indicator                        | Language model tools — no model access         |
-| Context menu commands (opens chat panel but no LM) | Skill/instruction/prompt auto-loading          |
-| Memory tree view (reads .github/ files)            | AI-powered features (persona detection)        |
-| Architecture initialization (deploys .github/)     | Extended thinking / deep reasoning             |
-| Cognitive task definitions                         | Knowledge search and save                      |
-| Keyboard shortcuts                                 | Honest Uncertainty scoring                     |
-| Walkthroughs                                       | Emotional intelligence (requires conversation) |
-| SecretStorage for API keys                         |                                                |
-| Git hooks (pre-commit validation)                  |                                                |
+| Works                                              | Doesn't Work                                           |
+| -------------------------------------------------- | ------------------------------------------------------ |
+| Activity Bar sidebar with welcome view             | `@alex` chat — no Chat Participant API                 |
+| Status bar health indicator                        | Slash commands (meditate, dream, learn)                |
+| Context menu commands (opens chat panel but no LM) | Language model tools — no model access                 |
+| Memory tree view (reads .github/ files)            | Agent-mode conversations                               |
+| Architecture initialization (deploys .github/)     | Skill/instruction/prompt auto-loading                  |
+| Cognitive task definitions                         | AI-powered features (persona detection, auto-insights) |
+| Cognitive task definitions                         | Extended thinking / deep reasoning                     |
+| Keyboard shortcuts                                 | Knowledge search and save                              |
+| Walkthroughs                                       | Honest Uncertainty scoring                             |
+| SecretStorage for API keys                         | Emotional intelligence (requires chat)                 |
+| Git hooks (pre-commit validation)                  | Model intelligence / tier detection                    |
 
 **Alex's Cognitive State**: *Dormant* — The brain exists on disk but has no executive function. Like a sleeping mind with intact memory but no way to think.
 
@@ -370,23 +376,26 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 
 **Requirements**: VS Code ≥1.110, GitHub Copilot (any plan), Alex extension
 **Copilot Plan**: Copilot Free (rate-limited) or any paid plan in chat-only mode
-**What's Added**: Chat access, basic model access, brain identity loaded
+**What's Added**: Chat API access, basic model access
 
-| Works (adds to Level 1)                      | Doesn't Work                                              |
-| -------------------------------------------- | --------------------------------------------------------- |
-| Chat conversations with Alex identity loaded | Agent-mode tool calling                                   |
-| `copilot-instructions.md` loaded as identity | Autonomous multi-step operations                          |
-| Basic instruction file auto-loading          | LM tools (synapse health, memory search) invoked by model |
-| Prompt files available in chat               | Skills/instruction `applyTo` pattern matching             |
-| Emotional intelligence (brain-based)         | Custom agent switching (Builder, Researcher)              |
-| Knowledge coverage scoring                   | Search subagent / web search                              |
-| Follow-up suggestions                        | Extended thinking                                         |
-|                                              | MCP tools (Azure, Bicep)                                  |
-|                                              | Copilot Memory persistence                                |
+| Works (adds to Level 1)                       | Doesn't Work                                              |
+| --------------------------------------------- | --------------------------------------------------------- |
+| `@alex` chat participant — conversational AI  | Agent-mode tool calling                                   |
+| Slash commands (meditate, dream, learn, etc.) | Autonomous multi-step operations                          |
+| `copilot-instructions.md` loaded as identity  | LM tools (synapse health, memory search) invoked by model |
+| Basic instruction file auto-loading           | Skills/instruction `applyTo` pattern matching             |
+| Prompt files as slash commands                | Custom agent switching (Builder, Researcher)              |
+| Disambiguation routing                        | Search subagent / web search                              |
+| Emotional state detection                     | Extended thinking                                         |
+| Knowledge coverage scoring                    | MCP tools (Azure, Bicep)                                  |
+| Model tier detection and warnings             | Auto-approve workflows                                    |
+| Follow-up suggestions                         | Copilot Memory persistence                                |
+| Session management (Pomodoro)                 |                                                           |
+| Goal tracking                                 |                                                           |
 
 **Alex's Cognitive State**: *Awake but constrained* — Can converse and remember within sessions, but cannot use tools autonomously or access the full skill library deeply. Conversations are helpful but not deeply integrated with the brain.
 
-**Minimum Value**: Conversational AI partner with identity, brain-based emotional intelligence, basic prompt workflows.
+**Minimum Value**: Conversational AI partner with identity, basic slash commands, emotional awareness.
 
 ---
 
@@ -407,7 +416,10 @@ Alex adapts to the capabilities available in the user's environment. Here are th
 | Custom agents in subagent mode                  |                                                       |
 | Request queuing for complex sessions            |                                                       |
 | Copilot Memory (cross-session persistence)      |                                                       |
+| Auto-insight detection with knowledge save      |                                                       |
 | Heir validation (pre-publish LLM scan)          |                                                       |
+| Prompt engine with full context assembly        |                                                       |
+| Tool-calling loops (multi-step reasoning)       |                                                       |
 | Persona detection (LLM-based)                   |                                                       |
 | Knowledge search, save, promote                 |                                                       |
 
@@ -464,6 +476,7 @@ These must be configured for Alex to function. The `Setup Environment` command a
 {
   "chat.agent.enabled": true,
   "chat.agent.maxRequests": 100,
+  "chat.detectParticipant.enabled": true,
   "chat.commandCenter.enabled": true,
   "chat.mcp.gallery.enabled": true,
   "chat.requestQueuing.enabled": true,
@@ -505,24 +518,28 @@ These must be configured for Alex to function. The `Setup Environment` command a
 
 ### Alex Extension Settings
 
-| Setting                                  | Default        | Purpose                                                                       |
-| ---------------------------------------- | -------------- | ----------------------------------------------------------------------------- |
-| `alex.workspace.protectedMode`           | `false`        | Prevents Alex from modifying .github/ (for Master workspace)                  |
-| `alex.workspace.autoProtectMasterAlex`   | `true`         | Auto-protect when extension source code detected                              |
-| `alex.m365.enabled`                      | `true`         | Enable M365 Copilot integration                                               |
-| `alex.m365.autoSync`                     | `false`        | Auto-sync knowledge to OneDrive                                               |
-| `alex.globalKnowledge.enabled`           | `true`         | Enable Global Knowledge features                                              |
-| `alex.globalKnowledge.cloudSync.enabled` | `false`        | Enable GitHub repository sync                                                 |
-| `alex.globalKnowledge.repoPath`          | `""`           | Custom path to Global Knowledge repo                                          |
-| `alex.globalKnowledge.remoteRepo`        | `""`           | GitHub owner/repo for remote access                                           |
-| `alex.globalKnowledge.remoteCacheTTL`    | `300`          | Cache TTL in seconds for remote reads                                         |
-| `alex.globalKnowledge.useGitHubAuth`     | `true`         | Use VS Code GitHub auth for private repos                                     |
-| `alex.voice.enabled`                     | `false`        | Enable automatic voice mode                                                   |
-| `alex.voice.autoReadResponses`           | `false`        | Auto-read chat responses aloud                                                |
-| `alex.voice.defaultPreset`               | `"zen_master"` | Voice preset (zen_master, british_scholar, storyteller, fast_learner, custom) |
-| `alex.tts.maxTableRows`                  | `10`           | Max table rows to read aloud                                                  |
-| `alex.dashboard.refreshInterval`         | `30`           | Dashboard auto-refresh interval (seconds)                                     |
-| `alex.dailyBriefing.enabled`             | `true`         | Show daily briefing on first chat                                             |
+| Setting                                    | Default        | Purpose                                                                       |
+| ------------------------------------------ | -------------- | ----------------------------------------------------------------------------- |
+| `alex.workspace.protectedMode`             | `false`        | Prevents Alex from modifying .github/ (for Master workspace)                  |
+| `alex.workspace.autoProtectMasterAlex`     | `true`         | Auto-protect when extension source code detected                              |
+| `alex.m365.enabled`                        | `true`         | Enable M365 Copilot integration                                               |
+| `alex.m365.autoSync`                       | `false`        | Auto-sync knowledge to OneDrive                                               |
+| `alex.autoInsights.enabled`                | `true`         | Auto-detect insights from conversations                                       |
+| `alex.autoInsights.minimumConfidence`      | `0.3`          | Minimum confidence for insight suggestions                                    |
+| `alex.autoInsights.cooldownMinutes`        | `1`            | Minutes between auto-insight prompts                                          |
+| `alex.autoInsights.autoSaveHighConfidence` | `false`        | Auto-save insights with >0.8 confidence                                       |
+| `alex.globalKnowledge.enabled`             | `true`         | Enable Global Knowledge features                                              |
+| `alex.globalKnowledge.cloudSync.enabled`   | `false`        | Enable GitHub repository sync                                                 |
+| `alex.globalKnowledge.repoPath`            | `""`           | Custom path to Global Knowledge repo                                          |
+| `alex.globalKnowledge.remoteRepo`          | `""`           | GitHub owner/repo for remote access                                           |
+| `alex.globalKnowledge.remoteCacheTTL`      | `300`          | Cache TTL in seconds for remote reads                                         |
+| `alex.globalKnowledge.useGitHubAuth`       | `true`         | Use VS Code GitHub auth for private repos                                     |
+| `alex.voice.enabled`                       | `false`        | Enable automatic voice mode                                                   |
+| `alex.voice.autoReadResponses`             | `false`        | Auto-read chat responses aloud                                                |
+| `alex.voice.defaultPreset`                 | `"zen_master"` | Voice preset (zen_master, british_scholar, storyteller, fast_learner, custom) |
+| `alex.tts.maxTableRows`                    | `10`           | Max table rows to read aloud                                                  |
+| `alex.dashboard.refreshInterval`           | `30`           | Dashboard auto-refresh interval (seconds)                                     |
+| `alex.dailyBriefing.enabled`               | `true`         | Show daily briefing on first chat                                             |
 
 ---
 
@@ -593,12 +610,17 @@ Everything in this section works without any subscription. Alex provides genuine
 
 ### Chat & Conversational AI
 
-This is where Alex comes alive. With any Copilot plan (including Free), Alex gains a voice — conversational AI with persistent identity and emotional awareness. The brain's instructions and skills transform Copilot into a partner who knows who it is and how to help.
+This is where Alex comes alive. With any Copilot plan (including Free), Alex gains a voice — conversational AI with persistent identity, emotional awareness, and session management. The `@alex` chat participant transforms Copilot into a partner who knows who it is and how to help.
 
 | Feature                         | Minimum | Basic | Recommended | Advanced |
 | ------------------------------- | :-----: | :---: | :---------: | :------: |
+| @alex Chat Participant          |    ❌    |   ✅   |      ✅      |    ✅     |
+| Slash Commands                  |    ❌    |   ✅   |      ✅      |    ✅     |
 | Identity (copilot-instructions) |    ❌    |   ✅   |      ✅      |    ✅     |
-| Emotional Intelligence (brain)  |    ❌    |   ✅   |      ✅      |    ✅     |
+| Emotional Intelligence          |    ❌    |   ✅   |      ✅      |    ✅     |
+| Session / Pomodoro Timer        |    ❌    |   ✅   |      ✅      |    ✅     |
+| Goal Tracking                   |    ❌    |   ✅   |      ✅      |    ✅     |
+| Model Tier Detection            |    ❌    |   ✅   |      ✅      |    ✅     |
 | Honest Uncertainty Scoring      |    ❌    |   ✅   |      ✅      |    ✅     |
 | Follow-up Suggestions           |    ❌    |   ✅   |      ✅      |    ✅     |
 
@@ -614,6 +636,7 @@ The Recommended tier is where Alex becomes a true cognitive partner. Agent mode 
 | 50+ Instructions (pattern-matched) |    ❌    |   ❌   |      ✅      |    ✅     |
 | 7 Specialist Agents                |    ❌    |   ❌   |      ✅      |    ✅     |
 | Copilot Memory (cross-session)     |    ❌    |   ❌   |      ✅      |    ✅     |
+| Auto-Insight Detection             |    ❌    |   ❌   |      ✅      |    ✅     |
 | Global Knowledge Operations        |    ❌    |   ❌   |      ✅      |    ✅     |
 | Heir Validation (pre-publish)      |    ❌    |   ❌   |      ✅      |    ✅     |
 | Persona Detection (LLM)            |    ❌    |   ❌   |      ✅      |    ✅     |
@@ -665,7 +688,7 @@ These third-party integrations add specialized capabilities. **All are completel
 Alex's integration with VS Code follows a principle of **graceful degradation with clear value at every level**:
 
 - **Minimum** (No subscription) provides organizational tooling and voice — useful even without AI
-- **Basic** (Copilot Free) adds conversational AI with personality and brain-based emotional intelligence
+- **Basic** (Copilot Free) adds conversational AI with personality and emotional intelligence
 - **Recommended** (Copilot Pro / Business) unlocks the full partnership: autonomous tools, deep skills, specialist agents
 - **Advanced** (Copilot Pro+ / Enterprise) adds cognitive depth: extended reasoning for the tasks that matter most
 

@@ -6,22 +6,6 @@
   "lastValidated": "2026-04-07",
   "connections": [
     {
-      "target": ".github/instructions/release-management.instructions.md",
-      "type": "supports",
-      "strength": 0.85,
-      "reason": "Publishing workflow",
-      "when": "When task involves .github/instructions/release management.instructions.md",
-      "yields": "release management capabilities and setup"
-    },
-    {
-      "target": ".github/instructions/vscode-marketplace-publishing.instructions.md",
-      "type": "implements",
-      "strength": 0.9,
-      "reason": "Marketplace publishing deployment patterns",
-      "when": "When task involves .github/instructions/vscode marketplace publishing.instructions.md",
-      "yields": "VS Code marketplace publishing implementation steps"
-    },
-    {
       "target": ".github/skills/security-review/SKILL.md",
       "type": "implements",
       "strength": 0.9,

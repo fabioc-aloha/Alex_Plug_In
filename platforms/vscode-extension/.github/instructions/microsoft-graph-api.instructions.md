@@ -119,38 +119,4 @@ for await (const page of getAllPages<User>(token, '/users')) {
 }
 ```
 
----
-
-## Key Endpoints Quick Reference
-
-### Most Used
-
-```
-GET /me                                    — current user profile
-GET /me/presence                           — presence status
-GET /me/calendar/events                    — calendar events
-GET /me/messages                           — mailbox messages
-GET /me/people                             — relevant contacts
-GET /users/{id}/manager                    — user's manager
-POST /communications/getPresencesByUserId  — bulk presence (up to 650 users)
-```
-
-### Delta Queries (Efficient Sync)
-
-```
-GET /me/calendar/events/delta              — events changed since last sync
-GET /me/messages/delta                     — messages changed since last sync
-```
-
----
-
-## Quality Checklist
-
-Before shipping Graph API code:
-- [ ] Minimum required scopes only (not all M365 permissions upfront)
-- [ ] Silent token acquisition first (`createIfNone: false`)
-- [ ] Using v1.0 endpoint (not `/beta`)
-- [ ] Pagination handled for all list operations
-- [ ] 429 rate limit handling with `Retry-After` header
-- [ ] 401/403 errors surface meaningful messages to user
-- [ ] Token never logged or exposed in output
+Endpoint reference table, scope catalog, service-specific patterns, quality checklist → see microsoft-graph-api skill.

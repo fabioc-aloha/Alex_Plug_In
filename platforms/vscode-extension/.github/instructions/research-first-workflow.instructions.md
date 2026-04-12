@@ -1,5 +1,6 @@
 ---
 description: "Research-first development workflow — pre-project knowledge encoding and 4-dimension gap analysis"
+applyTo: "**/research/**,**/*research*,**/*gap-analysis*"
 ---
 
 # Research-First Workflow
