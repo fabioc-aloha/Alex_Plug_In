@@ -2,24 +2,19 @@
 .SYNOPSIS
     Complete VS Code Extension release automation.
 .DESCRIPTION
-    Runs preflight, bumps version, updates CHANGELOG, commits, tags, pushes, and publishes.
+    Runs preflight, commits, tags, pushes, and publishes.
+    Version must already be set in package.json before running.
     Uses platforms/vscode-extension structure.
-.PARAMETER BumpType
-    Version bump type: patch, minor, or major
 .PARAMETER PreRelease
     Publish as pre-release on marketplace
 .PARAMETER DryRun
     Stop before commit/push/publish (for testing)
 .EXAMPLE
-    .\release-vscode.ps1 -BumpType patch
-    .\release-vscode.ps1 -BumpType minor -PreRelease
-    .\release-vscode.ps1 -BumpType major -DryRun
+    .\release-vscode.ps1
+    .\release-vscode.ps1 -PreRelease
+    .\release-vscode.ps1 -DryRun
 #>
 param(
-    [Parameter(Mandatory)]
-    [ValidateSet("patch", "minor", "major")]
-    [string]$BumpType,
-    
     [switch]$PreRelease,
     [switch]$DryRun
 )
@@ -38,7 +33,7 @@ if (-not (Test-Path $extensionPath)) {
 Push-Location $repoRoot
 try {
     Write-Host "`n VS Code Extension Release" -ForegroundColor Cyan
-    Write-Host "   Bump: $BumpType | PreRelease: $PreRelease | DryRun: $DryRun" -ForegroundColor Gray
+    Write-Host "   PreRelease: $PreRelease | DryRun: $DryRun" -ForegroundColor Gray
     Write-Host "   Extension: $extensionPath" -ForegroundColor Gray
 
     # 0. Load PAT from .env if not in environment
@@ -65,58 +60,25 @@ try {
     & "$scriptDir\release-preflight.ps1" -Package -SkipTests
     if ($LASTEXITCODE -ne 0) { throw "Preflight failed!" }
 
-    # 2. Bump version (in extension folder)
+    # 2. Read current version from package.json
     Push-Location $extensionPath
-    Write-Host "`n[BUMP] Bumping version ($BumpType)..." -ForegroundColor Yellow
-    npm version $BumpType --no-git-tag-version
     $pkg = Get-Content package.json | ConvertFrom-Json
     $newVersion = $pkg.version
     $publisher = $pkg.publisher
     $extName = $pkg.name
-    Write-Host "   New version: $newVersion" -ForegroundColor Green
-    
-    # 2b. Update Master copilot-instructions.md version (SOURCE OF TRUTH)
-    $masterInstructions = Join-Path $repoRoot ".github\copilot-instructions.md"
-    if (Test-Path $masterInstructions) {
-        $content = Get-Content $masterInstructions -Raw
-        $replacement = '${1}' + $newVersion
-        $content = $content -replace '(# Alex v)\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?', $replacement
-        Set-Content $masterInstructions $content -NoNewline
-        Write-Host "   Updated Master copilot-instructions.md" -ForegroundColor Green
-    }
-
-    # 2c. Update heir copilot-instructions.md version
-    $heirInstructions = Join-Path $extensionPath ".github\copilot-instructions.md"
-    if (Test-Path $heirInstructions) {
-        $content = Get-Content $heirInstructions -Raw
-        # IMPORTANT: Use ${1} syntax for backreference to avoid $1 + version = $1X.X.X ambiguity
-        $replacement = '${1}' + $newVersion
-        $content = $content -replace '(# Alex v)\d+\.\d+\.\d+(-[a-zA-Z0-9.]+)?', $replacement
-        Set-Content $heirInstructions $content -NoNewline
-        Write-Host "   Updated heir copilot-instructions.md" -ForegroundColor Green
-    }
+    Write-Host "`n[VERSION] Publishing version: $newVersion" -ForegroundColor Green
     Pop-Location
-
-    # 3. Update CHANGELOG (in repo root)
-    Write-Host "`n[CHANGELOG] Updating CHANGELOG..." -ForegroundColor Yellow
-    $date = Get-Date -Format "yyyy-MM-dd"
-    $changelog = Get-Content CHANGELOG.md -Raw
-    $newEntry = "## [$newVersion] - $date`n`n### Added`n`n### Changed`n`n### Fixed`n`n"
-    $changelog = $changelog -replace '(# Changelog\s*\n[^\n]*\n[^\n]*\n---\s*\n)', "`$1`n$newEntry"
-    Set-Content CHANGELOG.md $changelog -NoNewline
-    Write-Host "   Added entry for $newVersion" -ForegroundColor Green
 
     if ($DryRun) {
         Write-Host "`n[WARN] DRY RUN - Stopping before commit" -ForegroundColor Yellow
+        Write-Host "   Version: $newVersion" -ForegroundColor Gray
         Write-Host "   Review changes: git diff" -ForegroundColor Gray
-        Write-Host "   Reset if needed: git checkout -- ." -ForegroundColor Gray
         exit 0
     }
 
     # 4. Gate 5: Human confirmation (skip in automated mode)
     Write-Host "`n[GATE] Gate 5: Human Review" -ForegroundColor Yellow
-    Write-Host "   - CHANGELOG entry for $newVersion added" -ForegroundColor Gray
-    Write-Host "   - Version bumped to $newVersion" -ForegroundColor Gray
+    Write-Host "   - Version: $newVersion" -ForegroundColor Gray
     Write-Host "   - Proceeding with commit, tag, push, and publish..." -ForegroundColor Gray
 
     # 5. Commit and tag

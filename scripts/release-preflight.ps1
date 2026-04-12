@@ -217,7 +217,7 @@ if ($errors.Count -eq 0) {
     Write-Host "  [OK] PREFLIGHT PASSED - Ready to publish!" -ForegroundColor Green
     Write-Host "========================================`n" -ForegroundColor Cyan
     Write-Host "Next steps:" -ForegroundColor White
-    Write-Host "  Run: .\scripts\release-vscode.ps1 -BumpType patch [-PreRelease]" -ForegroundColor Gray
+    Write-Host "  Run: .\scripts\release-vscode.ps1 [-PreRelease]" -ForegroundColor Gray
 }
 else {
     Write-Host "  [ERROR] PREFLIGHT FAILED - Fix issues before publishing" -ForegroundColor Red

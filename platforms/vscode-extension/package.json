@@ -384,7 +384,6 @@
         "title": "Alex: Setup Global Knowledge",
         "icon": "$(cloud)"
       },
-
       {
         "command": "alex.recordPositiveOutcome",
         "title": "Alex: Record Positive Outcome",
