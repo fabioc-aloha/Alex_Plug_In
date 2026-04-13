@@ -11,7 +11,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Republish**: v7.7.1 marketplace publish failed — version bump to retry
+- **5 broken Quick Settings toggles**: Removed non-existent setting keys (`chat.requestQueuing.enabled`, `github.copilot.chat.agent.thinkingTool`, `chat.tools.autoRun`, `chat.tools.fileSystem.autoApprove`, `chat.hooks.enabled`) that errored on toggle in VS Code 1.115.0
+- **8 invalid setting keys** in Environment Setup wizard: replaced with correct VS Code 1.115.0 equivalents (`chat.agent.thinkingStyle`, `chat.tools.edits.autoApprove`, `chat.tools.todos.showWidget`, etc.)
+- **Dead webview routing**: Cleaned stale command handlers in sidebar
+
+### Added
+
+- **Extension pack**: All 15 recommended extensions now auto-install via `extensionPack` (Copilot Chat, ESLint, PowerShell, DotENV, YAML, Mermaid, Markdown All-in-One, MarkdownLint, Python, Pylance, Jupyter, Azure MCP Server, Bicep, Docker, ShellCheck)
+- **6 new verified settings**: `chat.newSession.defaultMode`, `github.copilot.chat.anthropic.thinking.budgetTokens` (32K max), `github.copilot.chat.agent.autoFix`, `chat.subagents.allowInvocationsFromSubagents`, `chat.tools.terminal.backgroundNotifications`, `chat.tools.terminal.detachBackgroundProcesses`
+- **Export to .env button**: Write stored API keys to a `.env` file for scripts and external tools
+
+### Changed
+
+- **Unified Environment Setup**: Merged "Optimize Settings" categories (Chat-Centric, Formatters, Cross-Platform) into the main settings category picker — one flow with 6 categories instead of two separate commands
+- **Removed Manage Extensions button** from sidebar — extension pack handles auto-install; command still available via palette
+- **Simplified Full Setup wizard**: Settings → MCP servers → account check → bootstrap (no more extension-check phase)
 
 ---
 
