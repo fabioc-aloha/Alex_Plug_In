@@ -3,37 +3,31 @@
  *
  * Extracted from extension.ts to keep the main activation file focused.
  * Contains: code review, debug, rubber duck, explain, refactor, security review,
- * document, simplify, AI image generation, test generation, skill review, diagnostics.
+ * document, simplify, AI image generation, test generation, skill review.
  */
 import * as vscode from 'vscode';
 import { openChatPanel } from './shared/utils';
 import { requireCognitiveLevel } from './shared/cognitiveTier';
-import { checkHealth } from './shared/healthCheck';
-import * as telemetry from './shared/telemetry';
-import { getCodeContext, buildTelemetryPanelHtml, handleTelemetryMessage, TelemetryData } from './commandsDeveloperHandlers';
+import { getCodeContext } from './commandsDeveloperHandlers';
 
 export function registerDeveloperCommands(context: vscode.ExtensionContext, _extensionVersion: string): void {
   const codeReviewDisposable = vscode.commands.registerCommand(
     "alex.codeReview",
     async (uri?: vscode.Uri) => {
       if (!(await requireCognitiveLevel('alex.codeReview'))) { return; }
-      const endLog = telemetry.logTimed("command", "code_review");
       try {
         const ctx = await getCodeContext(uri);
 
         if (!ctx.text) {
           const prompt = `Review the code in the current workspace for issues, improvements, and best practices. Focus on:\n1. Code quality and readability\n2. Potential bugs or edge cases\n3. Performance considerations\n4. Security concerns\n5. Adherence to project conventions`;
           await openChatPanel(prompt);
-          endLog(true);
           return;
         }
         
         const prompt = `Review this code from ${ctx.fileName} for issues, improvements, and best practices:\n\n\`\`\`${ctx.languageId}\n${ctx.text}\n\`\`\``;
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -43,7 +37,6 @@ export function registerDeveloperCommands(context: vscode.ExtensionContext, _ext
     "alex.debugThis",
     async (uri?: vscode.Uri) => {
       if (!(await requireCognitiveLevel('alex.debugThis'))) { return; }
-      const endLog = telemetry.logTimed("command", "debug_this");
       try {
         const ctx = await getCodeContext(uri);
 
@@ -53,16 +46,14 @@ export function registerDeveloperCommands(context: vscode.ExtensionContext, _ext
             placeHolder: 'Error: Cannot read property x of undefined...',
             ignoreFocusOut: true
           });
-          if (!userInput) { endLog(true); return; }
+          if (!userInput) { return; }
           ctx.text = userInput;
         }
         
         const prompt = `Help me debug this. Analyze for potential issues, suggest fixes, and explain root cause:\n\n\`\`\`${ctx.languageId}\n${ctx.text}\n\`\`\``;
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -72,7 +63,6 @@ export function registerDeveloperCommands(context: vscode.ExtensionContext, _ext
     "alex.rubberDuck",
     async (uri?: vscode.Uri) => {
       if (!(await requireCognitiveLevel('alex.rubberDuck'))) { return; }
-      const endLog = telemetry.logTimed("command", "rubber_duck");
       try {
         // Get optional context from URI (explorer) or editor selection
         let context = '';
@@ -96,10 +86,8 @@ You are my rubber duck. I need to explain my problem to you.
 **Start by asking:** "What problem are you trying to solve?"${context}`;
 
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -108,13 +96,11 @@ You are my rubber duck. I need to explain my problem to you.
   const explainThisDisposable = vscode.commands.registerCommand(
     "alex.explainThis",
     async (uri?: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "explain_this");
       try {
         const ctx = await getCodeContext(uri);
 
         if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to explain");
-          endLog(true);
           return;
         }
 
@@ -131,7 +117,6 @@ You are my rubber duck. I need to explain my problem to you.
         });
 
         if (!level) {
-          endLog(true);
           return;
         }
 
@@ -144,10 +129,8 @@ ${ctx.text}
 Focus on: purpose, data flow, key design decisions, and any non-obvious behavior.`;
         
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -156,13 +139,11 @@ Focus on: purpose, data flow, key design decisions, and any non-obvious behavior
   const refactorThisDisposable = vscode.commands.registerCommand(
     "alex.refactorThis",
     async (uri?: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "refactor_this");
       try {
         const ctx = await getCodeContext(uri);
 
         if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to refactor");
-          endLog(true);
           return;
         }
 
@@ -180,7 +161,6 @@ Focus on: purpose, data flow, key design decisions, and any non-obvious behavior
         });
 
         if (!goal) {
-          endLog(true);
           return;
         }
 
@@ -197,10 +177,8 @@ Show:
 4. Any tradeoffs to consider`;
         
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -209,13 +187,11 @@ Show:
   const securityReviewDisposable = vscode.commands.registerCommand(
     "alex.securityReview",
     async (uri?: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "security_review");
       try {
         const ctx = await getCodeContext(uri);
 
         if (!ctx.text) {
           vscode.window.showWarningMessage("Select code for security review");
-          endLog(true);
           return;
         }
 
@@ -241,10 +217,8 @@ For each finding:
 - Secure fix with code example`;
         
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -253,13 +227,11 @@ For each finding:
   const documentThisDisposable = vscode.commands.registerCommand(
     "alex.documentThis",
     async (uri?: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "document_this");
       try {
         const ctx = await getCodeContext(uri);
 
         if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to document");
-          endLog(true);
           return;
         }
 
@@ -287,10 +259,8 @@ Include:
 Output ONLY the documented code, ready to paste.`;
         
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -299,13 +269,11 @@ Output ONLY the documented code, ready to paste.`;
   const simplifyThisDisposable = vscode.commands.registerCommand(
     "alex.simplifyThis",
     async (uri?: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "simplify_this");
       try {
         const ctx = await getCodeContext(uri);
 
         if (!ctx.text) {
           vscode.window.showWarningMessage("Select code to simplify");
-          endLog(true);
           return;
         }
 
@@ -328,10 +296,8 @@ For each change:
 - Ensure no behavior changes`;
         
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -343,7 +309,6 @@ For each change:
     "alex.generateTests",
     async (uri?: vscode.Uri) => {
       if (!(await requireCognitiveLevel('alex.generateTests'))) { return; }
-      const endLog = telemetry.logTimed("command", "generate_tests");
       try {
         const ctx = await getCodeContext(uri);
 
@@ -353,7 +318,7 @@ For each change:
             placeHolder: 'function add(a, b) { return a + b; }',
             ignoreFocusOut: true
           });
-          if (!userInput) { endLog(true); return; }
+          if (!userInput) { return; }
           ctx.text = userInput;
         }
 
@@ -372,7 +337,6 @@ For each change:
         });
 
         if (!framework) {
-          endLog(true);
           return;
         }
 
@@ -380,10 +344,8 @@ For each change:
         
         const prompt = `Generate comprehensive tests for this code using ${frameworkName}. Include edge cases, error handling, and meaningful assertions:\n\n\`\`\`${ctx.languageId}\n${ctx.text}\n\`\`\``;
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
     },
   );
@@ -392,7 +354,6 @@ For each change:
   const skillReviewDisposable = vscode.commands.registerCommand(
     "alex.skillReview",
     async () => {
-      const endLog = telemetry.logTimed("command", "skill_review");
       try {
         const reviewTypes = [
           { label: "$(warning) Check Stale Skills", description: "Review skills that may need updating", detail: "Security, privacy, models, APIs" },
@@ -411,7 +372,6 @@ For each change:
         });
 
         if (!selected) {
-          endLog(true);
           return;
         }
 
@@ -515,41 +475,9 @@ Reference: .github/skills/git-workflow/SKILL.md`;
         }
         
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
+        // error handled internally
       }
-    },
-  );
-
-  // Beta telemetry commands (temporary - remove after beta)
-  const viewTelemetryDisposable = vscode.commands.registerCommand(
-    "alex.viewBetaTelemetry",
-    async () => {
-      const sessions = await telemetry.getAllTelemetryData();
-      const summary = telemetry.getSessionSummary();
-      const aggregate = await telemetry.getAllSessionsAggregate();
-      const alexSettings = telemetry.getAlexSettings();
-      const health = await checkHealth();
-      const extVersion =
-        context.extension.packageJSON.version || "unknown";
-
-      const panel = vscode.window.createWebviewPanel(
-        "alexBetaTelemetry",
-        "Alex Diagnostics & Bug Report",
-        vscode.ViewColumn.One,
-        { enableScripts: true },
-      );
-
-      const telemetryData: TelemetryData = {
-        sessions, summary, aggregate, alexSettings, health, extensionVersion: extVersion
-      };
-      panel.webview.html = buildTelemetryPanelHtml(telemetryData);
-
-      panel.webview.onDidReceiveMessage(
-        (msg) => handleTelemetryMessage(msg, panel, extVersion)
-      );
     },
   );
 
@@ -564,6 +492,5 @@ Reference: .github/skills/git-workflow/SKILL.md`;
     simplifyThisDisposable,
     generateTestsDisposable,
     skillReviewDisposable,
-    viewTelemetryDisposable,
   );
 }

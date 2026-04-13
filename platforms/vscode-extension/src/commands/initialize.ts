@@ -14,7 +14,6 @@ import {
   detectAndUpdateProjectPersona,
   PERSONAS,
 } from "../chat/personaDetection";
-import * as telemetry from "../shared/telemetry";
 import { migrateSecretsFromEnvironment } from "../services/secretsManager";
 import {
   ARCHITECTURE_ROOT_FILES,
@@ -58,18 +57,10 @@ function getManifestPath(rootPath: string): string {
 }
 
 export async function initializeArchitecture(context: vscode.ExtensionContext) {
-  telemetry.log("command", "initialize_start_detailed", {
-    workspaceFolderCount: vscode.workspace.workspaceFolders?.length ?? 0,
-  });
-
   // Use smart workspace folder detection - don't require Alex installed yet
   const workspaceResult = await getAlexWorkspaceFolder(false);
 
   if (!workspaceResult.found) {
-    telemetry.log("command", "initialize_no_workspace", {
-      cancelled: workspaceResult.cancelled,
-      error: workspaceResult.error,
-    });
     if (workspaceResult.cancelled) {
       return; // User cancelled folder selection
     }
@@ -82,9 +73,6 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
   }
 
   const rootPath = workspaceResult.rootPath!;
-  telemetry.log("command", "initialize_workspace_found", {
-    rootPath: path.basename(rootPath),
-  });
 
   // 🛡️ KILL SWITCH: Check if workspace is protected (Master Alex)
   const canProceed = await checkProtectionAndWarn(
@@ -93,14 +81,12 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
     true, // Allow override with double confirmation
   );
   if (!canProceed) {
-    telemetry.log("command", "initialize_blocked_protected_workspace");
     return;
   }
 
   const markerFile = path.join(rootPath, ".github", "copilot-instructions.md");
 
   if (await fs.pathExists(markerFile)) {
-    telemetry.log("command", "initialize_already_exists");
     const result = await vscode.window.showWarningMessage(
       'Alex is already installed in this workspace.\n\n• To update to a new version, use "Alex: Upgrade"\n• To completely reinstall, choose Reset below',
       "Upgrade Instead",
@@ -108,7 +94,6 @@ export async function initializeArchitecture(context: vscode.ExtensionContext) {
       "Cancel",
     );
 
-    telemetry.log("command", "initialize_existing_choice", { choice: result });
     if (result === "Upgrade Instead") {
       await vscode.commands.executeCommand("alex.upgrade");
     } else if (result === "Reset Architecture") {
@@ -146,7 +131,6 @@ export async function resetArchitecture(context: vscode.ExtensionContext) {
     true, // Allow override with double confirmation
   );
   if (!canProceed) {
-    telemetry.log("command", "reset_blocked_protected_workspace");
     return;
   }
 
@@ -213,9 +197,6 @@ async function performInitialization(
   rootPath: string,
   overwrite: boolean,
 ) {
-  const done = telemetry.logTimed("command", "perform_initialization", {
-    overwrite,
-  });
   const extensionPath = context.extensionPath;
 
   // Validate extension has required files
@@ -225,37 +206,22 @@ async function performInitialization(
     "copilot-instructions.md",
   );
   if (!(await fs.pathExists(requiredSource))) {
-    telemetry.logError(
-      "initialize_corrupted_extension",
-      new Error("Missing core files"),
-      { requiredSource },
-    );
     vscode.window.showErrorMessage(
       "Extension installation appears corrupted - missing core files.\n\n" +
         "Please reinstall the Alex Cognitive Architecture extension from the VS Code Marketplace.",
       { modal: true },
     );
-    done(false, new Error("Extension corrupted"));
     return;
   }
 
-  telemetry.log("command", "initialize_extension_valid", {
-    extensionPath: path.basename(extensionPath),
-  });
-
   try {
     // Deploy architecture files (sources + permissions + copy + manifest)
-    const { copiedCount, skippedCount } = await deployArchitectureFiles(
+    await deployArchitectureFiles(
       context,
       extensionPath,
       rootPath,
       overwrite,
     );
-
-    telemetry.log("command", "initialize_copy_complete", {
-      copiedCount,
-      skippedCount,
-    });
 
     // Apply markdown preview CSS
     await applyMarkdownStyles();
@@ -268,19 +234,10 @@ async function performInitialization(
     const persona =
       personaResult?.persona ?? PERSONAS.find((p) => p.id === "developer")!;
 
-    if (personaResult) {
-      telemetry.log("command", "initialize_persona_detected", {
-        persona: personaResult.persona.id,
-        skill: personaResult.persona.skill,
-        confidence: personaResult.confidence,
-      });
-    }
-
     // Offer Global Knowledge setup
     await offerGlobalKnowledgeSetup(rootPath, persona, personaResult);
 
     // Offer environment setup (non-blocking)
-    telemetry.log("command", "initialize_offering_setup");
     await offerEnvironmentSetup();
 
     // Show success and offer next steps
@@ -292,13 +249,9 @@ async function performInitialization(
     } catch (migrationErr) {
       console.warn("[Alex] Failed to migrate secrets:", migrationErr);
     }
-
-    done(true, { copiedCount, skippedCount });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     console.error("Initialize failed:", error);
-    telemetry.logError("initialize_failed", error);
-    done(false, error instanceof Error ? error : new Error(errorMessage));
     vscode.window.showErrorMessage(
       `Failed to initialize Alex: ${errorMessage || "Unknown error"}\n\nTry closing VS Code, deleting the .github folder, and running initialize again.`,
       { modal: true },
@@ -331,18 +284,15 @@ async function deployArchitectureFiles(
   );
 
   // Test write permissions
-  telemetry.log("command", "initialize_testing_permissions");
   const testDir = path.join(rootPath, ".github");
   await fs.ensureDir(testDir);
   const testFile = path.join(testDir, ".write-test");
   try {
     await fs.writeFile(testFile, "test");
     await fs.remove(testFile);
-    telemetry.log("command", "initialize_permissions_ok");
   } catch (permError: any) {
     const permErrorMessage =
       permError instanceof Error ? permError.message : String(permError);
-    telemetry.logError("initialize_permission_denied", permError);
     throw new Error(
       `Cannot write to workspace - check folder permissions: ${permErrorMessage || "Permission denied"}`,
     );
@@ -364,20 +314,11 @@ async function deployArchitectureFiles(
           try {
             await fs.copy(item.src, item.dest, { overwrite });
             copiedCount++;
-            telemetry.log("command", "initialize_copied", {
-              item: path.basename(item.dest),
-            });
           } catch (copyErr) {
-            telemetry.logError("initialize_copy_failed", copyErr, {
-              item: path.basename(item.dest),
-            });
             throw copyErr;
           }
         } else {
           skippedCount++;
-          telemetry.log("command", "initialize_source_missing", {
-            item: path.basename(item.src),
-          });
           console.warn(`Source not found: ${item.src}`);
         }
       }
@@ -389,9 +330,7 @@ async function deployArchitectureFiles(
       progress.report({ message: "Creating manifest..." });
       try {
         await createInitialManifest(context, rootPath);
-        telemetry.log("command", "initialize_manifest_created");
       } catch (manifestErr) {
-        telemetry.logError("initialize_manifest_failed", manifestErr);
         throw manifestErr;
       }
     },
@@ -418,7 +357,6 @@ async function offerGlobalKnowledgeSetup(
     const { ensureGlobalKnowledgeSetup } = await import("./setupGlobalKnowledge");
     await ensureGlobalKnowledgeSetup();
   } catch (globalErr) {
-    telemetry.logError("initialize_global_knowledge_failed", globalErr);
     console.warn("[Alex] Failed to setup AI-Memory:", globalErr);
   }
 }
@@ -446,10 +384,6 @@ async function showInitSuccessAndGettingStarted(
   } else if (result === "Open Chat") {
     vscode.commands.executeCommand("workbench.action.chat.open");
   }
-
-  telemetry.log("command", "initialize_user_choice", {
-    choice: result || "dismissed",
-  });
 }
 
 /**

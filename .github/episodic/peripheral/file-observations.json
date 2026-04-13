@@ -3,18 +3,26 @@
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
     "platforms/vscode-extension/package.json",
-    "platforms/vscode-extension/src/commands/setupEnvironment.settings.ts",
-    "platforms/vscode-extension/src/commands/setupEnvironment.ts",
-    "platforms/vscode-extension/src/views/settingsTabHtml.ts",
-    "platforms/vscode-extension/src/views/welcomeView.ts",
-    "platforms/vscode-extension/src/views/welcomeViewData.ts"
+    "platforms/vscode-extension/src/commands/initialize.ts",
+    "platforms/vscode-extension/src/commands/statusQuickPick.ts",
+    "platforms/vscode-extension/src/commandsConvert.ts",
+    "platforms/vscode-extension/src/commandsCore.ts",
+    "platforms/vscode-extension/src/commandsDeveloper.ts",
+    "platforms/vscode-extension/src/commandsDeveloperHandlers.ts",
+    "platforms/vscode-extension/src/commandsGamma.ts",
+    "platforms/vscode-extension/src/commandsPresentation.ts"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/vscode-extension/src/commands/setupEnvironment.settings.ts",
-      "todoCount": 1,
-      "scannedAt": 1776045909826
+      "file": "CHANGELOG.md",
+      "todoCount": 10,
+      "scannedAt": 1776048485528
+    },
+    {
+      "file": "platforms/vscode-extension/CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1776048485528
     }
   ],
-  "lastUpdated": 1776045909826
+  "lastUpdated": 1776048485528
 }

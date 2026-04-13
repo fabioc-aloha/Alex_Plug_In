@@ -6,20 +6,17 @@
  */
 import * as vscode from "vscode";
 import * as path from "path";
-import * as telemetry from "./shared/telemetry";
 import { resolveMuscleScript } from "./shared/utils";
 
 export function registerWordCommands(context: vscode.ExtensionContext): void {
   const convertToWordDisposable = vscode.commands.registerCommand(
     "alex.convertToWord",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "convert_to_word");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage(
             "Please right-click a markdown (.md) file.",
           );
-          endLog(true);
           return;
         }
 
@@ -28,7 +25,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           vscode.window.showWarningMessage(
             "File must be in a workspace folder.",
           );
-          endLog(true);
           return;
         }
 
@@ -43,7 +39,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           vscode.window.showErrorMessage(
             "md-to-word.cjs not found. Please ensure Alex architecture is initialized.",
           );
-          endLog(false);
           return;
         }
 
@@ -56,13 +51,7 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         terminal.sendText(
           `node "${nodeScript}" "${uri.fsPath}" "${outputPath}"`,
         );
-
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
         vscode.window.showErrorMessage(
           `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`,
         );
@@ -74,16 +63,11 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
   const convertToWordWithOptionsDisposable = vscode.commands.registerCommand(
     "alex.convertToWordWithOptions",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed(
-        "command",
-        "convert_to_word_with_options",
-      );
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage(
             "Please right-click a markdown (.md) file.",
           );
-          endLog(true);
           return;
         }
 
@@ -92,7 +76,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           vscode.window.showWarningMessage(
             "File must be in a workspace folder.",
           );
-          endLog(true);
           return;
         }
 
@@ -106,7 +89,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           vscode.window.showErrorMessage(
             "md-to-word.cjs not found. Please ensure Alex architecture is initialized.",
           );
-          endLog(false);
           return;
         }
 
@@ -145,7 +127,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         );
 
         if (!options) {
-          endLog(true);
           return;
         }
 
@@ -168,7 +149,6 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
           });
 
           if (!customPath) {
-            endLog(true);
             return;
           }
 
@@ -189,13 +169,7 @@ export function registerWordCommands(context: vscode.ExtensionContext): void {
         const command =
           `node "${nodeScript}" "${uri.fsPath}" "${outputPath}" ${flags}`.trim();
         terminal.sendText(command);
-
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
         vscode.window.showErrorMessage(
           `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`,
         );

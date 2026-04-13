@@ -85,7 +85,7 @@ export async function openHealthDashboard(
           vscode.commands.executeCommand("alex.runAudit");
           break;
         case "viewDiagnostics":
-          vscode.commands.executeCommand("alex.viewBetaTelemetry");
+          vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/issues/new"));
           break;
         case "openFile":
           if (message.filePath) {
@@ -654,7 +654,7 @@ async function getWebviewContent(
                     🧠 Self-Actualize
                 </button>
                 <button class="btn btn-secondary" data-cmd="viewDiagnostics">
-                    🐛 Diagnostics
+                    🐛 Report Issue
                 </button>
             </div>
         </div>

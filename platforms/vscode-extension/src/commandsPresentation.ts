@@ -7,7 +7,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { openChatPanel, getLanguageIdFromPath } from './shared/utils';
-import * as telemetry from './shared/telemetry';
 import { registerWordCommands } from './commandsWord';
 import { registerGammaCommands } from './commandsGamma';
 import { registerConvertCommands } from './commandsConvert';
@@ -16,7 +15,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
   const generateDiagramDisposable = vscode.commands.registerCommand(
     "alex.generateDiagram",
     async (uri?: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "generate_diagram");
       try {
         const diagramTypes = [
           { label: "$(type-hierarchy) Class Diagram", description: "UML class relationships", value: "classDiagram" },
@@ -33,7 +31,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
         });
 
         if (!selected) {
-          endLog(true);
           return;
         }
 
@@ -50,7 +47,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
             contextDescription = `Based on ${path.basename(uri.fsPath)} (${languageId}):\n`;
           } catch (err) {
             vscode.window.showErrorMessage(`Failed to read file: ${err}`);
-            endLog(false);
             return;
           }
         } else {
@@ -72,7 +68,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
             ignoreFocusOut: true,
           });
           if (!input) {
-            endLog(true);
             return;
           }
           userDescription = input;
@@ -86,10 +81,7 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
         const prompt = `Generate a Mermaid ${diagramType} (${selected.value}).${contextDescription ? `\n${contextDescription}` : ''}${codeBlock}${description}\n\nCreate the diagram in a new markdown file with the Mermaid code block. Make the diagram comprehensive and well-labeled.`;
 
         await openChatPanel(prompt);
-        
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
       }
     },
   );
@@ -98,7 +90,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
   const generatePptxDisposable = vscode.commands.registerCommand(
     "alex.generatePptx",
     async () => {
-      const endLog = telemetry.logTimed("command", "generate_pptx");
       try {
         const sourceOptions = [
           { label: "$(markdown) From Structured Markdown", description: "Convert .md with layout hints to PPTX", value: "markdown" },
@@ -114,7 +105,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
         });
 
         if (!selected) {
-          endLog(true);
           return;
         }
 
@@ -126,7 +116,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           const mdFiles = await vscode.workspace.findFiles("**/*.md", "**/node_modules/**", 50);
           if (mdFiles.length === 0) {
             vscode.window.showWarningMessage("No markdown files found in workspace.");
-            endLog(true);
             return;
           }
 
@@ -140,7 +129,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           });
 
           if (!selectedFile) {
-            endLog(true);
             return;
           }
 
@@ -157,10 +145,8 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
             if (choice === "Use AI Transformation") {
               // Redirect to AI-assisted flow
               vscode.commands.executeCommand("alex.generatePptx");
-              endLog(true);
               return;
             } else if (!choice) {
-              endLog(true);
               return;
             }
           }
@@ -169,7 +155,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           
           if (slides.length === 0) {
             vscode.window.showWarningMessage("No slides parsed from markdown. Use # for titles, - for bullets.");
-            endLog(true);
             return;
           }
           
@@ -182,7 +167,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
               "Cancel"
             );
             if (improve === "Cancel") {
-              endLog(true);
               return;
             }
           }
@@ -216,7 +200,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
             });
             
             if (!userInput) {
-              endLog(true);
               return;
             }
             selectedText = userInput;
@@ -233,10 +216,8 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
             if (choice === "Use AI Transformation") {
               // Redirect to AI-assisted flow - the selection is already there
               vscode.commands.executeCommand("alex.generatePptx");
-              endLog(true);
               return;
             } else if (!choice) {
-              endLog(true);
               return;
             }
           }
@@ -245,7 +226,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
 
           if (slides.length === 0) {
             vscode.window.showWarningMessage("No slides parsed. Use # for titles, - for bullets, --- for slide breaks.");
-            endLog(true);
             return;
           }
 
@@ -256,14 +236,12 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           });
 
           if (!outputName) {
-            endLog(true);
             return;
           }
 
           const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
           if (!workspaceFolder) {
             vscode.window.showWarningMessage("Open a workspace folder first.");
-            endLog(true);
             return;
           }
 
@@ -333,7 +311,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           const textFiles = await vscode.workspace.findFiles("**/*.{txt,md}", "**/node_modules/**", 50);
           if (textFiles.length === 0) {
             vscode.window.showWarningMessage("No text files found in workspace.");
-            endLog(true);
             return;
           }
 
@@ -347,7 +324,6 @@ export function registerPresentationCommands(context: vscode.ExtensionContext): 
           });
 
           if (!selectedFile) {
-            endLog(true);
             return;
           }
 
@@ -440,7 +416,6 @@ Reply with your feedback, or say "Generate slides" to proceed with this concept.
             });
             
             if (!userInput) {
-              endLog(true);
               return;
             }
             selectedText = userInput;
@@ -507,10 +482,7 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
             }
           });
         }
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(`PPTX generation failed: ${error instanceof Error ? error.message : String(error)}`);
       }
     },
@@ -520,11 +492,9 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
   const generatePptxFromFileDisposable = vscode.commands.registerCommand(
     "alex.generatePptxFromFile",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "generate_pptx_from_file");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
-          endLog(true);
           return;
         }
 
@@ -535,7 +505,6 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
         
         if (slides.length === 0) {
           vscode.window.showWarningMessage("No slides parsed from markdown. Use # for titles, - for bullets, --- for slide breaks.");
-          endLog(true);
           return;
         }
 
@@ -554,10 +523,7 @@ Reply with your answers, OR type **"Generate slides"** to proceed with this stru
         } else {
           vscode.window.showErrorMessage(`Failed to generate: ${result.error}`);
         }
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(`PPTX generation failed: ${error instanceof Error ? error.message : String(error)}`);
       }
     },

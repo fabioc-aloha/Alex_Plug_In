@@ -117,8 +117,8 @@ function getQuickPickItems(): vscode.QuickPickItem[] {
     // --- Diagnostics ---
     { label: "", kind: vscode.QuickPickItemKind.Separator },
     {
-      label: "$(bug) Report Issue / View Diagnostics",
-      description: "View local telemetry for bug reports",
+      label: "$(bug) Report Issue",
+      description: "Open GitHub Issues to report a bug",
     },
   ];
 }
@@ -150,7 +150,6 @@ function getDispatchMap(): Array<[string, string]> {
     ["Generate Diagram", "alex.generateDiagram"],
     ["Generate Tests", "alex.generateTests"],
     ["Generate Presentation", "alex.generatePptx"],
-    ["Report Issue", "alex.viewBetaTelemetry"],
   ];
 }
 
@@ -175,5 +174,10 @@ export async function showStatusQuickPick(): Promise<void> {
       vscode.commands.executeCommand(command);
       return;
     }
+  }
+
+  // Non-command actions
+  if (selected.label.includes("Report Issue")) {
+    vscode.env.openExternal(vscode.Uri.parse("https://github.com/fabioc-aloha/Alex_Plug_In/issues/new"));
   }
 }

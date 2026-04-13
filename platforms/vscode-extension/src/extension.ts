@@ -27,7 +27,6 @@ import { registerHealthDashboard } from "./views/healthDashboard";
 import { logInfo, disposeLog } from './shared/logger';
 
 import { CognitiveTaskProvider } from "./tasks/cognitiveTaskProvider";
-import * as telemetry from "./shared/telemetry";
 import {
   isOperationInProgress,
 } from "./shared/operationLock";
@@ -43,7 +42,7 @@ export { isOperationInProgress };
 let statusBarItem: vscode.StatusBarItem;
 
 export async function activate(context: vscode.ExtensionContext) {
-  // Get extension version for telemetry
+  // Get extension version
   const extensionVersion = context.extension.packageJSON.version || "unknown";
 
   // Create status bar immediately with loading indicator
@@ -76,12 +75,6 @@ export async function activate(context: vscode.ExtensionContext) {
 async function activateInternal(context: vscode.ExtensionContext, extensionVersion: string) {
 
   // Phase 1: Initialize services and tools
-  telemetry.initTelemetry(context, extensionVersion);
-  telemetry.log("lifecycle", "extension_activate", {
-    extensionVersion,
-    vscodeVersion: vscode.version,
-  });
-
   setExtensionPathForCss(context.extensionPath);
 
   checkVersionUpgrade(context).catch(err =>
@@ -206,12 +199,6 @@ async function activateInternal(context: vscode.ExtensionContext, extensionVersi
  * Note: Background sync timer cleanup is handled via context.subscriptions
  */
 export function deactivate() {
-  // Save beta telemetry session
-  telemetry.log("lifecycle", "extension_deactivate");
-  telemetry.saveSession().catch((err) => {
-    console.warn("Failed to save telemetry session:", err);
-  });
-
   logInfo('Alex Cognitive Architecture deactivated');
   disposeLog();
 }

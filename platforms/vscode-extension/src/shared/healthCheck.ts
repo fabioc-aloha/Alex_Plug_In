@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as path from "path";
-import { updateAlexInstalledStatus } from "./telemetry";
 import { createSynapseRegex } from "./utils";
 
 /**
@@ -249,8 +248,6 @@ export async function checkHealth(
     summary,
   };
   lastCheckTime = Date.now();
-
-  updateAlexInstalledStatus(initialized);
 
   return cachedResult;
 }

@@ -6,7 +6,6 @@
  */
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as telemetry from './shared/telemetry';
 import { resolveMuscleScript } from './shared/utils';
 
 /**
@@ -42,17 +41,14 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
   const generateGammaPresentationDisposable = vscode.commands.registerCommand(
     "alex.generateGammaPresentation",
     async () => {
-      const endLog = telemetry.logTimed("command", "generate_gamma_presentation");
       try {
         if (!await ensureGammaApiKey()) {
-          endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("Please open a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -62,7 +58,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           vscode.window.showErrorMessage(
             "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -79,7 +74,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         });
 
         if (!topic) {
-          endLog(true);
           return;
         }
 
@@ -91,10 +85,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         });
         terminal.show();
         terminal.sendText(`node "${gammaScript}" --topic "${topic}" --export pptx --open`);
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `Gamma generation failed: ${error instanceof Error ? error.message : String(error)}`
         );
@@ -106,23 +97,19 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
   const generateGammaFromFileDisposable = vscode.commands.registerCommand(
     "alex.generateGammaFromFile",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "generate_gamma_from_file");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
-          endLog(true);
           return;
         }
 
         if (!await ensureGammaApiKey()) {
-          endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("File must be in a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -132,7 +119,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           vscode.window.showErrorMessage(
             "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -144,10 +130,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         });
         terminal.show();
         terminal.sendText(`node "${gammaScript}" --file "${uri.fsPath}" --export pptx --open`);
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `Gamma generation failed: ${error instanceof Error ? error.message : String(error)}`
         );
@@ -159,23 +142,19 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
   const generateGammaWithOptionsDisposable = vscode.commands.registerCommand(
     "alex.generateGammaWithOptions",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "generate_gamma_with_options");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
-          endLog(true);
           return;
         }
 
         if (!await ensureGammaApiKey()) {
-          endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("File must be in a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -185,7 +164,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
           vscode.window.showErrorMessage(
             "gamma-generator.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -220,7 +198,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         );
 
         if (!formatOption) {
-          endLog(true);
           return;
         }
 
@@ -239,7 +216,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         });
 
         if (!slidesInput) {
-          endLog(true);
           return;
         }
 
@@ -284,7 +260,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         );
 
         if (!imageModelOption) {
-          endLog(true);
           return;
         }
 
@@ -314,7 +289,6 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         );
 
         if (!exportOption) {
-          endLog(true);
           return;
         }
 
@@ -335,10 +309,7 @@ export function registerGammaCommands(context: vscode.ExtensionContext): void {
         command += ` --open`;
         
         terminal.sendText(command);
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `Gamma generation failed: ${error instanceof Error ? error.message : String(error)}`
         );

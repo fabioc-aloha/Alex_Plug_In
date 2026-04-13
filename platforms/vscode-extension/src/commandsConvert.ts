@@ -11,7 +11,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as telemetry from './shared/telemetry';
 import { resolveMuscleScript } from './shared/utils';
 
 export function registerConvertCommands(context: vscode.ExtensionContext): void {
@@ -21,18 +20,15 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
   const convertToEmailDisposable = vscode.commands.registerCommand(
     "alex.convertToEmail",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "convert_to_email");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
-          endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("File must be in a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -46,7 +42,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           vscode.window.showErrorMessage(
             "md-to-eml.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -60,7 +55,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         );
 
         if (testMode === undefined) {
-          endLog(true);
           return;
         }
 
@@ -73,10 +67,7 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
 
         const flags = testMode.value ? "--test" : "";
         terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" ${flags}`.trim());
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `Email conversion failed: ${error instanceof Error ? error.message : String(error)}`
         );
@@ -90,7 +81,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
   const scaffoldMarkdownDisposable = vscode.commands.registerCommand(
     "alex.scaffoldMarkdown",
     async (uri?: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "scaffold_markdown");
       try {
         // Determine target directory
         let targetDir: string;
@@ -103,7 +93,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           const workspaceFolders = vscode.workspace.workspaceFolders;
           if (!workspaceFolders || workspaceFolders.length === 0) {
             vscode.window.showWarningMessage("No workspace folder open.");
-            endLog(true);
             return;
           }
           targetDir = workspaceFolders[0].uri.fsPath;
@@ -112,7 +101,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(targetDir));
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("Target must be in a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -126,7 +114,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           vscode.window.showErrorMessage(
             "md-scaffold.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -143,7 +130,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         );
 
         if (!templateType) {
-          endLog(true);
           return;
         }
 
@@ -160,7 +146,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         });
 
         if (!title) {
-          endLog(true);
           return;
         }
 
@@ -177,7 +162,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
             "Yes", "No"
           );
           if (overwrite !== "Yes") {
-            endLog(true);
             return;
           }
         }
@@ -199,10 +183,7 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
             // File may not exist yet if script is slow
           }
         }, 2000);
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `Scaffold failed: ${error instanceof Error ? error.message : String(error)}`
         );
@@ -216,18 +197,15 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
   const injectNavigationDisposable = vscode.commands.registerCommand(
     "alex.injectNavigation",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "inject_navigation");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
-          endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("File must be in a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -241,7 +219,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           vscode.window.showErrorMessage(
             "nav-inject.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -268,7 +245,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
             "Create nav.json", "Cancel"
           );
           if (createNav !== "Create nav.json") {
-            endLog(true);
             return;
           }
 
@@ -284,7 +260,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           vscode.window.showInformationMessage(
             "Created nav.json. Edit it, then run Inject Navigation again."
           );
-          endLog(true);
           return;
         }
 
@@ -298,7 +273,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         );
 
         if (action === undefined) {
-          endLog(true);
           return;
         }
 
@@ -309,10 +283,7 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         });
         terminal.show();
         terminal.sendText(`node "${nodeScript}" "${navJsonPath}" ${action.value}`.trim());
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `Navigation injection failed: ${error instanceof Error ? error.message : String(error)}`
         );
@@ -326,18 +297,15 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
   const convertToHtmlDisposable = vscode.commands.registerCommand(
     "alex.convertToHtml",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "convert_to_html");
       try {
         if (!uri || !uri.fsPath.endsWith(".md")) {
           vscode.window.showWarningMessage("Please right-click a markdown (.md) file.");
-          endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("File must be in a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -351,7 +319,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           vscode.window.showErrorMessage(
             "md-to-html.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -366,7 +333,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         );
 
         if (styleChoice === undefined) {
-          endLog(true);
           return;
         }
 
@@ -377,10 +343,7 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         });
         terminal.show();
         terminal.sendText(`node "${nodeScript}" "${uri.fsPath}" --style ${styleChoice.value}`);
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `HTML conversion failed: ${error instanceof Error ? error.message : String(error)}`
         );
@@ -394,18 +357,15 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
   const convertDocxToMarkdownDisposable = vscode.commands.registerCommand(
     "alex.convertDocxToMarkdown",
     async (uri: vscode.Uri) => {
-      const endLog = telemetry.logTimed("command", "convert_docx_to_md");
       try {
         if (!uri || !uri.fsPath.toLowerCase().endsWith(".docx")) {
           vscode.window.showWarningMessage("Please right-click a Word (.docx) file.");
-          endLog(true);
           return;
         }
 
         const workspaceFolder = vscode.workspace.getWorkspaceFolder(uri);
         if (!workspaceFolder) {
           vscode.window.showWarningMessage("File must be in a workspace folder.");
-          endLog(true);
           return;
         }
 
@@ -419,7 +379,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
           vscode.window.showErrorMessage(
             "docx-to-md.cjs not found. Please ensure Alex architecture is initialized."
           );
-          endLog(false);
           return;
         }
 
@@ -434,7 +393,6 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
         );
 
         if (optionChoice === undefined) {
-          endLog(true);
           return;
         }
 
@@ -461,10 +419,7 @@ export function registerConvertCommands(context: vscode.ExtensionContext): void 
             // Script may still be running
           }
         }, 3000);
-
-        endLog(true);
       } catch (error) {
-        endLog(false, error instanceof Error ? error : new Error(String(error)));
         vscode.window.showErrorMessage(
           `Word conversion failed: ${error instanceof Error ? error.message : String(error)}`
         );

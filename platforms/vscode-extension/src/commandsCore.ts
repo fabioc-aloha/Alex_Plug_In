@@ -43,7 +43,6 @@ import {
   isOperationInProgress,
   setOperationInProgress,
 } from "./shared/operationLock";
-import * as telemetry from "./shared/telemetry";
 import {
   updateStatusBar,
   setCommandContextKeys,
@@ -78,16 +77,13 @@ export function registerCoreCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.initialize", async () => {
-      const done = telemetry.logTimed("command", "initialize");
       await withOperationLock("Initialize", async () => {
         try {
           await initializeArchitecture(context);
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
           await setCommandContextKeys();
-          done(true);
         } catch (err) {
-          done(false, err instanceof Error ? err : new Error(String(err)));
           throw err;
         }
       });
@@ -96,16 +92,13 @@ export function registerCoreCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.reset", async () => {
-      const done = telemetry.logTimed("command", "reset");
       await withOperationLock("Reset", async () => {
         try {
           await resetArchitecture(context);
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
           await setCommandContextKeys();
-          done(true);
         } catch (err) {
-          done(false, err instanceof Error ? err : new Error(String(err)));
           throw err;
         }
       });
@@ -117,16 +110,12 @@ export function registerCoreCommands(
       if (!(await requireCognitiveLevel("alex.dream"))) {
         return;
       }
-      const done = telemetry.logTimed("command", "dream");
       await withOperationLock("Dream Protocol", async () => {
         try {
           await runDreamProtocol(context);
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
-
-          done(true);
         } catch (err) {
-          done(false, err instanceof Error ? err : new Error(String(err)));
           throw err;
         }
       });
@@ -136,7 +125,6 @@ export function registerCoreCommands(
   // Deep Brain QA - comprehensive health check, GK sync, and synapse healing
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.deepBrainQA", async () => {
-      const done = telemetry.logTimed("command", "deepBrainQA");
       await withOperationLock("Deep Brain QA", async () => {
         try {
           await vscode.window.withProgress(
@@ -194,9 +182,7 @@ export function registerCoreCommands(
               }
             },
           );
-          done(true);
         } catch (err) {
-          done(false, err instanceof Error ? err : new Error(String(err)));
           vscode.window.showErrorMessage(`Deep Brain QA failed: ${err}`);
           throw err;
         }
@@ -206,15 +192,12 @@ export function registerCoreCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.upgrade", async () => {
-      const done = telemetry.logTimed("command", "upgrade");
       await withOperationLock("Upgrade", async () => {
         try {
           await upgradeArchitecture(context);
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
-          done(true);
         } catch (err) {
-          done(false, err instanceof Error ? err : new Error(String(err)));
           throw err;
         }
       });
@@ -223,15 +206,12 @@ export function registerCoreCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.completeMigration", async () => {
-      const done = telemetry.logTimed("command", "complete_migration");
       await withOperationLock("Migration", async () => {
         try {
           await completeMigration(context);
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
-          done(true);
         } catch (err) {
-          done(false, err instanceof Error ? err : new Error(String(err)));
           throw err;
         }
       });
@@ -242,7 +222,6 @@ export function registerCoreCommands(
     vscode.commands.registerCommand(
       "alex.showMigrationCandidates",
       async () => {
-        telemetry.log("command", "show_migration_candidates");
         await showMigrationCandidates();
       },
     ),
@@ -253,16 +232,12 @@ export function registerCoreCommands(
       if (!(await requireCognitiveLevel("alex.selfActualize"))) {
         return;
       }
-      const done = telemetry.logTimed("command", "self_actualize");
       await withOperationLock("Self-Actualization", async () => {
         try {
           await runSelfActualization(context);
           clearHealthCache();
           await updateStatusBar(statusBarItem, true);
-
-          done(true);
         } catch (err) {
-          done(false, err instanceof Error ? err : new Error(String(err)));
           throw err;
         }
       });
@@ -287,7 +262,6 @@ export function registerCoreCommands(
       if (!(await requireCognitiveLevel("alex.northStar"))) {
         return;
       }
-      telemetry.log("command", "north_star");
       await openChatPanel("/northstar");
     }),
   );
@@ -356,60 +330,40 @@ export function registerCoreCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.setupEnvironment", async () => {
-      const endLog = telemetry.logTimed("command", "setup_environment");
       try {
         await setupEnvironment();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.optimizeSettings", async () => {
-      const endLog = telemetry.logTimed("command", "optimize_settings");
       try {
         await optimizeSettings();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.manageExtensions", async () => {
-      const endLog = telemetry.logTimed("command", "manage_extensions");
       try {
         await manageExtensions();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.setupMcpServers", async () => {
-      const endLog = telemetry.logTimed("command", "setup_mcp_servers");
       try {
         await setupMcpServers();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
@@ -418,49 +372,34 @@ export function registerCoreCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.manageSecrets", async () => {
-      const endLog = telemetry.logTimed("command", "manage_secrets");
       try {
         await showTokenManagementPalette();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.detectEnvSecrets", async () => {
-      const endLog = telemetry.logTimed("command", "detect_env_secrets");
       try {
         const { showEnvSecretsMigrationUI } =
           await import("./services/secretsManager");
         await showEnvSecretsMigrationUI();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.exportSecretsToEnv", async () => {
-      const endLog = telemetry.logTimed("command", "export_secrets_to_env");
       try {
         const { showExportSecretsUI } =
           await import("./services/secretsManager");
         await showExportSecretsUI();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
@@ -472,7 +411,6 @@ export function registerCoreCommands(
       if (!(await requireCognitiveLevel("alex.runAudit"))) {
         return;
       }
-      const endLog = telemetry.logTimed("command", "run_audit");
       try {
         const auditOptions = [
           {
@@ -558,19 +496,12 @@ export function registerCoreCommands(
         });
 
         if (!selected) {
-          endLog(true);
           return;
         }
 
         const auditType = selected.label.replace(/\$\([^)]+\)\s*/, "");
         await openChatPanel(`Run ${auditType.toLowerCase()} on this project`);
-
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
         vscode.window.showErrorMessage(
           `Audit failed: ${error instanceof Error ? error.message : String(error)}`,
         );
@@ -583,7 +514,6 @@ export function registerCoreCommands(
       if (!(await requireCognitiveLevel("alex.releasePreflight"))) {
         return;
       }
-      const endLog = telemetry.logTimed("command", "release_preflight");
       try {
         const preflightChecks = [
           {
@@ -649,19 +579,13 @@ export function registerCoreCommands(
         });
 
         if (!selected) {
-          endLog(true);
           return;
         }
 
         const checkType = selected.label.replace(/\$\([^)]+\)\s*/, "");
         await openChatPanel(`Run ${checkType.toLowerCase()} check for release`);
-
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
@@ -670,15 +594,10 @@ export function registerCoreCommands(
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.generateSkillCatalog", async () => {
-      const endLog = telemetry.logTimed("command", "generate_skill_catalog");
       try {
         await generateSkillCatalog();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
@@ -688,15 +607,10 @@ export function registerCoreCommands(
       if (!(await requireCognitiveLevel("alex.inheritSkillFromGlobal"))) {
         return;
       }
-      const endLog = telemetry.logTimed("command", "inherit_skill_from_global");
       try {
         await inheritSkillFromGlobal();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
@@ -706,30 +620,20 @@ export function registerCoreCommands(
       if (!(await requireCognitiveLevel("alex.proposeSkillToGlobal"))) {
         return;
       }
-      const endLog = telemetry.logTimed("command", "propose_skill_to_global");
       try {
         await proposeSkillToGlobal();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
 
   context.subscriptions.push(
     vscode.commands.registerCommand("alex.setupGlobalKnowledge", async () => {
-      const endLog = telemetry.logTimed("command", "setup_global_knowledge");
       try {
         await setupGlobalKnowledgeCommand();
-        endLog(true);
       } catch (error) {
-        endLog(
-          false,
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        // error handled internally
       }
     }),
   );
