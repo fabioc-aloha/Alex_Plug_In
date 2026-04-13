@@ -7,6 +7,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.7.2] - 2026-04-12
+
+### Fixed
+
+- **5 broken Quick Settings toggles**: Removed non-existent setting keys (`chat.requestQueuing.enabled`, `github.copilot.chat.agent.thinkingTool`, `chat.tools.autoRun`, `chat.tools.fileSystem.autoApprove`, `chat.hooks.enabled`) that errored on toggle in VS Code 1.115.0
+- **8 invalid setting keys** in Environment Setup wizard: replaced with correct VS Code 1.115.0 equivalents (`chat.agent.thinkingStyle`, `chat.tools.edits.autoApprove`, `chat.tools.todos.showWidget`, etc.)
+- **Dead webview routing**: Cleaned stale command handlers in sidebar
+
+### Added
+
+- **Extension pack**: All 15 recommended extensions now auto-install via `extensionPack` (Copilot Chat, ESLint, PowerShell, DotENV, YAML, Mermaid, Markdown All-in-One, MarkdownLint, Python, Pylance, Jupyter, Azure MCP Server, Bicep, Docker, ShellCheck)
+- **6 new verified settings**: `chat.newSession.defaultMode`, `github.copilot.chat.anthropic.thinking.budgetTokens` (32K max), `github.copilot.chat.agent.autoFix`, `chat.subagents.allowInvocationsFromSubagents`, `chat.tools.terminal.backgroundNotifications`, `chat.tools.terminal.detachBackgroundProcesses`
+- **Export to .env button**: Write stored API keys to a `.env` file for scripts and external tools
+
+### Changed
+
+- **Unified Environment Setup**: Merged "Optimize Settings" categories (Chat-Centric, Formatters, Cross-Platform) into the main settings category picker — one flow with 6 categories instead of two separate commands
+- **Removed Manage Extensions button** from sidebar — extension pack handles auto-install; command still available via palette
+- **Simplified Full Setup wizard**: Settings → MCP servers → account check → bootstrap (no more extension-check phase)
+
+---
+
+## [7.7.1] - 2026-04-12
+
+### Fixed
+
+- **brain-qa.cjs heir false positives**: Phase 3 skill index regex simplified to `\|\s*SKILL\s*\|` (was brittle `.includes()`), Phase 15 removed `user-profile.json` from master-only list (heirs have it legitimately), Phase 30 expected muscles list corrected for heir context
+- **Dangling synapse references**: 9 synapse files referenced 6 master-only instruction files removed in v7.7.0 — cleaned
+- **Brain anatomy accuracy**: M1/Premotor shifted anterior to Central Sulcus (correct precentral gyrus), Corpus Callosum reshaped to proper C-arch (genu→body→splenium), cerebellar folia lines added
+- **Dead UI item**: "Review Pull Request" Quick Actions palette entry had no dispatch handler — removed
+
+### Added
+
+- **Phase 35 self-containment validation** in brain-qa.cjs — detects heir synapse files referencing master-only instruction paths
+- **3 new brain regions** in interactive brain anatomy: Corpus Callosum (Agents x7), Spinal Cord (Hooks x22), Hypothalamus (Config x14) — with SVG, JS details, Mermaid diagrams, and mapping/pathology tables
+- docs/index.html and docs/alex-brain-anatomy.html updated with current architecture stats (161 skills, 85 instructions, 33 muscles, 63 prompts, 111 episodic, 7 agents, 22 hooks, 14 config)
+
+### Removed
+
+- **GitHub PR review / issue fetch feature** (`githubIntegration.ts`) — unused, `repo` scope auth prompt removed. Cognitive tier gate, welcome view, status quick pick, and context menu entries cleaned
+
+---
+
+## [7.7.0] - 2026-04-12
+
+### Changed
+
+- **Agent-only mode**: Removed participant mode (@alex mentions, /command slash commands) — agent mode exclusively
+- Dead code cascade cleanup from participant removal (73 files in initial sweep, 10 in follow-up)
+- Token waste audit: added `applyTo` scoping to 19 instructions, trimmed 10 oversized instruction-skill overlaps (-396 lines)
+- Init/upgrade audit: removed dead `UpgradeResult` type, cleaned sweep findings
+
+### Removed
+
+- Chat participant registration and all slash command handlers
+- `@alex` mention support — use agent mode instead
+- Participant-specific menu items, converters, and documentation references
+
+---
+
 ## [7.6.0] - 2026-04-11
 
 ### Changed
