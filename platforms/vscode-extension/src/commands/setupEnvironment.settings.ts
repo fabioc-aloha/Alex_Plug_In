@@ -41,8 +41,6 @@ export const ESSENTIAL_SETTINGS: Record<string, unknown> = {
   "github.copilot.chat.copilotMemory.enabled": true,
   // Memory tool access in chat
   "github.copilot.chat.tools.memory.enabled": true,
-  // Hooks: custom agent hooks for skill/tool loading
-  "chat.hooks.enabled": true,
   // Custom agent hooks in workspace
   "chat.useCustomAgentHooks": true,
   // Agent mode: custom agents in chat dropdown
@@ -54,8 +52,8 @@ export const ESSENTIAL_SETTINGS: Record<string, unknown> = {
 // ============================================================================
 
 export const RECOMMENDED_SETTINGS: Record<string, unknown> = {
-  // Thinking tool for agents
-  "github.copilot.chat.agent.thinkingTool": true,
+  // Thinking style for agents
+  "chat.agent.thinkingStyle": "auto",
   // Max agent requests (default 25)
   "chat.agent.maxRequests": 100,
   // Participant detection (helps route to Alex agent)
@@ -63,16 +61,12 @@ export const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   // Locale override
   "github.copilot.chat.localeOverride": "en",
   // Command center in title bar
-  "chat.commandCenter.enabled": true,
+  "window.commandCenter": true,
   // Agent session history
   "chat.viewSessions.enabled": true,
   // MCP gallery: Model Context Protocol tools
   "chat.mcp.gallery.enabled": true,
-  // Follow-up suggestions
-  "github.copilot.chat.followUps": "always",
-  // Request queueing: sequential processing
-  "chat.requestQueuing.enabled": true,
-  // Auto-queue by default
+  // Request queueing: auto-queue by default
   "chat.requestQueuing.defaultAction": "queue",
   // Search subagent: web search in agent mode
   "github.copilot.chat.searchSubagent.enabled": true,
@@ -98,8 +92,16 @@ export const RECOMMENDED_SETTINGS: Record<string, unknown> = {
   "chat.mcp.assisted.nuget.enabled": true,
   // Autopilot: autonomous agent mode
   "chat.autopilot.enabled": true,
-  // Agent todo list panel position
-  "chat.agent.todoList": { position: "panel" },
+  // Agent todo list widget
+  "chat.tools.todos.showWidget": true,
+  // Default chat mode: always start in agent mode
+  "chat.newSession.defaultMode": "agent",
+  // Thinking budget: max out for deeper reasoning (default 16000)
+  "github.copilot.chat.anthropic.thinking.budgetTokens": 32000,
+  // Auto-fix: automatically fix compilation/lint errors after agent edits
+  "github.copilot.chat.agent.autoFix": true,
+  // Nested subagents: allow subagents to invoke other subagents
+  "chat.subagents.allowInvocationsFromSubagents": true,
   // Alex thinking phrases: personality-driven progress messages
   "chat.agent.thinking.phrases": [
     "Meditating on this...",
@@ -127,12 +129,10 @@ export const RECOMMENDED_SETTINGS: Record<string, unknown> = {
 // ============================================================================
 
 export const AUTO_APPROVAL_SETTINGS: Record<string, unknown> = {
-  // Auto-run tools: reduces manual approval prompts
-  "chat.tools.autoRun": true,
-  // Auto-approve file system operations
-  "chat.tools.fileSystem.autoApprove": true,
-  // Auto-approve global tools
+  // Auto-approve global tools (includes auto-run)
   "chat.tools.global.autoApprove": true,
+  // Auto-approve file edit operations
+  "chat.tools.edits.autoApprove": true,
   // Terminal command auto-approval patterns (v1.102)
   "chat.tools.terminal.autoApprove": {},
   // Use custom auto-approve rules only (ignore defaults)
@@ -143,11 +143,66 @@ export const AUTO_APPROVAL_SETTINGS: Record<string, unknown> = {
   "chat.tools.terminal.preventShellHistory": false,
   // URL auto-approval patterns
   "chat.tools.urls.autoApprove": {},
+  // Notify when background terminal tasks complete
+  "chat.tools.terminal.backgroundNotifications": true,
+  // Detach long-running processes from terminal sessions
+  "chat.tools.terminal.detachBackgroundProcesses": true,
 };
 
 // Note: Mermaid/markdown preview settings are configured via the markdown-mermaid
 // skill's "Polish Mermaid Setup" prompt, not here, because they vary by VS Code
 // version and installed extensions.
+
+// ============================================================================
+// CHAT-CENTRIC — Disable inline completions, all code via Chat/agents
+// ============================================================================
+
+export const CHAT_CENTRIC_SETTINGS: Record<string, unknown> = {
+  // No inline ghost text — all code authoring via Chat/agents
+  "editor.inlineSuggest.enabled": false,
+  "github.copilot.editor.enableAutoCompletions": false,
+};
+
+// ============================================================================
+// FORMATTER RESOLUTION — Prettier formats, ESLint lints, no conflicts
+// ============================================================================
+
+export const FORMATTER_SETTINGS: Record<string, unknown> = {
+  // Formatting pipeline: Prettier formats, ESLint lints
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
+  "eslint.format.enable": false,
+  "prettier.resolveGlobalModules": false,
+  // Language-specific formatters (no ambiguity)
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": { comments: "off", strings: "off", other: "off" },
+    "files.trimTrailingWhitespace": true,
+  },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[yaml]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[dockercompose]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[github-actions-workflow]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[python]": { "editor.defaultFormatter": "ms-python.python", "editor.formatOnSave": true },
+  // LaTeX safety: don't interfere with Markdown files
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.latex.rootFile.doNotPrompt": true,
+};
+
+// ============================================================================
+// CROSS-PLATFORM — Platform-safe paths for Windows + macOS
+// ============================================================================
+
+export const CROSS_PLATFORM_SETTINGS: Record<string, unknown> = {
+  // Cross-platform Python: auto-discover .venv on both platforms
+  "python.defaultInterpreterPath": "python",
+  // Remove stale absolute paths
+  "markdown.styles": [],
+};
 
 // ============================================================================
 // CATEGORY REGISTRY — Used by the setup wizard UI
@@ -178,5 +233,23 @@ export const SETTING_CATEGORIES: SettingCategory[] = [
     description: "Auto-run tools and file operations for better workflow",
     settings: AUTO_APPROVAL_SETTINGS,
     icon: "\uD83D\uDFE0", // 🟠
+  },
+  {
+    name: "Chat-Centric",
+    description: "Disable inline completions — all code via Chat/agents",
+    settings: CHAT_CENTRIC_SETTINGS,
+    icon: "\uD83C\uDFAF", // 🎯
+  },
+  {
+    name: "Formatters",
+    description: "Prettier formats, ESLint lints, YAML uses Red Hat — no conflicts",
+    settings: FORMATTER_SETTINGS,
+    icon: "\u2696\uFE0F", // ⚖️
+  },
+  {
+    name: "Cross-Platform",
+    description: "Platform-safe Python paths and markdown styles (Windows + macOS)",
+    settings: CROSS_PLATFORM_SETTINGS,
+    icon: "\uD83C\uDF10", // 🌐
   },
 ];

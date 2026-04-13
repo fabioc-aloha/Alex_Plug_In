@@ -277,53 +277,43 @@ async function confirmAndApply(
 }
 
 /**
- * Main command: Setup Alex Environment
+ * Main command: Full Alex Environment Setup Wizard
+ * Applies settings, sets up MCP servers, checks account, offers bootstrap.
+ * Extensions are handled automatically via the extension pack.
  */
 export async function setupEnvironment(): Promise<void> {
-  // Phase 1: Check for missing extensions FIRST
-  const { missing: missingExts } = checkRecommendedExtensions();
-  if (missingExts.length > 0) {
-    const copilotMissing = missingExts.some(
-      (e) => e.id === "github.copilot-chat",
-    );
-    const extNames = missingExts.map((e) => e.name).join(", ");
-    const severity = copilotMissing ? "⚠️" : "💡";
-    const msg = copilotMissing
-      ? `${severity} GitHub Copilot is not installed — AI features (Levels 2-4) are unavailable.\n\nMissing: ${extNames}`
-      : `${severity} Optional extension${missingExts.length > 1 ? "s" : ""} not found: ${extNames}`;
-
-    const choice = await vscode.window.showInformationMessage(
-      msg,
-      "Install Extensions",
-      "Skip",
-    );
-    if (choice === "Install Extensions") {
-      await offerExtensionInstall();
-    }
-  }
-
-  // Phase 2: Build category items and show selection
+  // Phase 1: Build category items and show selection
   const items = buildSettingsCategoryItems();
   const selected = await vscode.window.showQuickPick(items, {
     canPickMany: true,
     placeHolder:
       "Select categories to apply (will re-apply even if already configured)",
-    title: "Alex Environment Setup",
+    title: "🔧 Full Alex Setup — Settings",
   });
 
   if (!selected || selected.length === 0) {
     return;
   }
 
-  // Phase 3: Collect settings from selected categories
+  // Phase 2: Collect settings from selected categories
   const settingsToApply: Record<string, unknown> = {};
   for (const item of selected) {
     Object.assign(settingsToApply, item.category.settings);
   }
 
-  // Phase 4: Confirm and apply
+  // Phase 3: Confirm and apply
   const categoryNames = selected.map((s) => s.category.name).join(", ");
   await confirmAndApply(settingsToApply, categoryNames);
+
+  // Phase 4: Offer MCP server setup
+  const mcpChoice = await vscode.window.showInformationMessage(
+    "🔌 Set up recommended MCP servers (MarkItDown, GitHub)?",
+    "Setup MCP Servers",
+    "Skip",
+  );
+  if (mcpChoice === "Setup MCP Servers") {
+    await setupMcpServers();
+  }
 
   // Phase 5: Offer Bootstrap if eligible
   await offerBootstrapProject();
@@ -407,101 +397,64 @@ async function offerBootstrapProject(): Promise<void> {
 /**
  * Quick setup that applies essential and recommended settings with minimal prompts.
  * Used during initialization/upgrade flow.
+ * Extensions are handled automatically via the extension pack.
  *
- * Flow: Check extensions → Apply settings → Done
+ * Flow: Check account → Apply settings → Offer bootstrap
  */
 export async function offerEnvironmentSetup(): Promise<boolean> {
-  // Phase 1: Check for missing Copilot extensions and offer install
-  const { missing: missingExts } = checkRecommendedExtensions();
-  const copilotMissing = missingExts.some(
-    (e) => e.id === "github.copilot-chat",
-  );
+  // Phase 1: Check GitHub account & frontier model access
+  try {
+    const cogResult = await detectCognitiveLevel(true);
+    const account = cogResult.gitHubAccount;
 
-  if (copilotMissing) {
-    const extChoice = await vscode.window.showInformationMessage(
-      "🧩 GitHub Copilot is not installed.\n\n" +
-        "Alex works at Level 1 (free) without it, but installing Copilot unlocks:\n" +
-        "• AI chat, code review, debugging\n" +
-        "• Agent mode with tools & skills\n" +
-        "• Meditation, Dream, Self-Actualization\n\n" +
-        "Install now?",
-      "Install Copilot",
-      "Skip (Level 1 Only)",
-    );
-    if (extChoice === "Install Copilot") {
-      await offerExtensionInstall();
-    }
-  } else if (missingExts.length > 0) {
-    // Only non-Copilot extensions missing — quick mention
-    const names = missingExts.map((e) => e.name).join(", ");
-    const extChoice = await vscode.window.showInformationMessage(
-      `💡 Optional: ${names} can enhance your experience.`,
-      "Install",
-      "Skip",
-    );
-    if (extChoice === "Install") {
-      await offerExtensionInstall();
-    }
-  }
+    if (
+      account.signedIn &&
+      cogResult.hasModels &&
+      cogResult.bestModelTier !== "frontier"
+    ) {
+      const accountMsg =
+        account.sessionCount > 1
+          ? `Signed in as "${account.label}" (${account.sessionCount} accounts detected). ` +
+            `Current plan provides ${cogResult.bestModelTier}-tier models. ` +
+            `Frontier models (Level 4) need Copilot Pro or Business. ` +
+            `Your other account may have a higher plan — switch via the Accounts menu (bottom-left).`
+          : `Signed in as "${account.label}" with ${cogResult.bestModelTier}-tier models. ` +
+            `Frontier models (Level 4) require Copilot Pro or Business. ` +
+            `If you have another GitHub account with a higher plan, add it via the Accounts menu (bottom-left).`;
 
-  // Phase 1.5: Check GitHub account & frontier model access
-  // Only relevant when Copilot is installed
-  if (!copilotMissing) {
-    try {
-      const cogResult = await detectCognitiveLevel(true);
-      const account = cogResult.gitHubAccount;
+      const acctChoice = await vscode.window.showInformationMessage(
+        `🔑 ${accountMsg}`,
+        "Open Accounts",
+        "Check Plans",
+        "OK",
+      );
 
-      if (
-        account.signedIn &&
-        cogResult.hasModels &&
-        cogResult.bestModelTier !== "frontier"
-      ) {
-        // Signed in with models but no frontier — account might be on a lower plan
-        const accountMsg =
-          account.sessionCount > 1
-            ? `Signed in as "${account.label}" (${account.sessionCount} accounts detected). ` +
-              `Current plan provides ${cogResult.bestModelTier}-tier models. ` +
-              `Frontier models (Level 4) need Copilot Pro or Business. ` +
-              `Your other account may have a higher plan — switch via the Accounts menu (bottom-left).`
-            : `Signed in as "${account.label}" with ${cogResult.bestModelTier}-tier models. ` +
-              `Frontier models (Level 4) require Copilot Pro or Business. ` +
-              `If you have another GitHub account with a higher plan, add it via the Accounts menu (bottom-left).`;
-
-        const acctChoice = await vscode.window.showInformationMessage(
-          `🔑 ${accountMsg}`,
-          "Open Accounts",
-          "Check Plans",
-          "OK",
+      if (acctChoice === "Open Accounts") {
+        vscode.commands.executeCommand("workbench.action.accounts");
+      } else if (acctChoice === "Check Plans") {
+        vscode.env.openExternal(
+          vscode.Uri.parse("https://github.com/settings/copilot"),
         );
-
-        if (acctChoice === "Open Accounts") {
-          vscode.commands.executeCommand("workbench.action.accounts");
-        } else if (acctChoice === "Check Plans") {
-          vscode.env.openExternal(
-            vscode.Uri.parse("https://github.com/settings/copilot"),
-          );
-        }
-      } else if (
-        !account.signedIn &&
-        cogResult.copilotInstalled &&
-        !cogResult.hasModels
-      ) {
-        // Copilot installed but not signed in
-        const signInChoice = await vscode.window.showInformationMessage(
-          "🔑 GitHub Copilot is installed but you're not signed in.\n\n" +
-            "Sign in to activate AI models. If you have multiple GitHub accounts " +
-            "(personal + work), choose the one with Copilot Pro or Business for best results.",
-          "Sign In",
-          "Skip",
-        );
-
-        if (signInChoice === "Sign In") {
-          vscode.commands.executeCommand("workbench.action.accounts");
-        }
       }
-    } catch {
-      // Cognitive detection unavailable — skip account check
+    } else if (
+      !account.signedIn &&
+      cogResult.copilotInstalled &&
+      !cogResult.hasModels
+    ) {
+      const signInChoice = await vscode.window.showInformationMessage(
+        "🔑 GitHub Copilot is installed but you're not signed in.\n\n" +
+          "Sign in to activate AI models. If you have multiple GitHub accounts " +
+          "(personal + work), choose the one with Copilot Pro or Business for best results.",
+        "Sign In",
+        "Skip",
+      );
+
+      if (signInChoice === "Sign In") {
+        vscode.commands.executeCommand("workbench.action.accounts");
+      }
     }
+  } catch {
+    // Cognitive detection unavailable — skip account check
   }
 
   // Phase 2: Check and apply settings
@@ -561,93 +514,19 @@ export async function offerEnvironmentSetup(): Promise<boolean> {
 // OPTIMIZE SETTINGS — Chat-centric, cross-platform optimized settings
 // ============================================================================
 
-/** Optimized settings for chat-centric development (no inline completions). */
-const CHAT_CENTRIC_SETTINGS: Record<string, unknown> = {
-  // Chat-centric: no inline ghost text — all code via Chat/agents
-  "editor.inlineSuggest.enabled": false,
-  "github.copilot.editor.enableAutoCompletions": false,
-};
-
-/** Cross-platform compatible settings. */
-const CROSS_PLATFORM_SETTINGS: Record<string, unknown> = {
-  // Cross-platform Python: auto-discover .venv on both platforms
-  "python.defaultInterpreterPath": "python",
-  // Remove stale absolute paths
-  "markdown.styles": [],
-};
-
-/** Formatter conflict resolution settings. */
-const FORMATTER_SETTINGS: Record<string, unknown> = {
-  // Formatting pipeline: Prettier formats, ESLint lints
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
-  "eslint.format.enable": false,
-  "prettier.resolveGlobalModules": false,
-  // Language-specific formatters (no ambiguity)
-  "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
-    "editor.wordWrap": "on",
-    "editor.quickSuggestions": { comments: "off", strings: "off", other: "off" },
-    "files.trimTrailingWhitespace": true,
-  },
-  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[yaml]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
-  "[dockercompose]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
-  "[github-actions-workflow]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
-  "[python]": { "editor.defaultFormatter": "ms-python.python", "editor.formatOnSave": true },
-  // LaTeX safety: don't interfere with Markdown files
-  "latex-workshop.latex.autoBuild.run": "onSave",
-  "latex-workshop.latex.rootFile.doNotPrompt": true,
-};
-
-interface OptimizePickItem extends vscode.QuickPickItem {
-  settingsGroup: string;
-  settings: Record<string, unknown>;
-  count: number;
-}
-
 /**
- * Optimize VS Code settings for chat-centric, cross-platform development.
- * Resolves formatter conflicts, disables inline completions, sets cross-platform paths.
+ * Unified settings command: apply any combination of Alex setting categories.
+ * Replaces the old separate optimizeSettings and setupEnvironment settings flows.
+ * Shows all 6 categories in one QuickPick with current status.
  */
 export async function optimizeSettings(): Promise<void> {
-  const groups: OptimizePickItem[] = [
-    {
-      label: "🎯 Chat-Centric Workflow",
-      description: `${Object.keys(CHAT_CENTRIC_SETTINGS).length} settings`,
-      detail: "Disable inline suggest — all code authoring via Chat/agents",
-      settingsGroup: "chat-centric",
-      settings: CHAT_CENTRIC_SETTINGS,
-      count: Object.keys(CHAT_CENTRIC_SETTINGS).length,
-      picked: true,
-    },
-    {
-      label: "⚖️ Formatter Conflict Resolution",
-      description: `${Object.keys(FORMATTER_SETTINGS).length} settings`,
-      detail: "Prettier formats, ESLint lints, YAML uses Red Hat — no double-formatting",
-      settingsGroup: "formatters",
-      settings: FORMATTER_SETTINGS,
-      count: Object.keys(FORMATTER_SETTINGS).length,
-      picked: true,
-    },
-    {
-      label: "🌐 Cross-Platform Compatibility",
-      description: `${Object.keys(CROSS_PLATFORM_SETTINGS).length} settings`,
-      detail: "Platform-safe paths for Python, markdown styles (Windows + macOS)",
-      settingsGroup: "cross-platform",
-      settings: CROSS_PLATFORM_SETTINGS,
-      count: Object.keys(CROSS_PLATFORM_SETTINGS).length,
-      picked: true,
-    },
-  ];
+  const items = buildSettingsCategoryItems();
 
-  const selected = await vscode.window.showQuickPick(groups, {
+  const selected = await vscode.window.showQuickPick(items, {
     canPickMany: true,
-    title: "⚙️ Optimize Settings",
-    placeHolder: "Select optimization groups to apply",
+    placeHolder:
+      "Select categories to apply (already-configured settings will be re-applied)",
+    title: "⚙️ Apply Alex Settings",
   });
 
   if (!selected || selected.length === 0) {
@@ -656,12 +535,11 @@ export async function optimizeSettings(): Promise<void> {
 
   const settingsToApply: Record<string, unknown> = {};
   for (const item of selected) {
-    Object.assign(settingsToApply, item.settings);
+    Object.assign(settingsToApply, item.category.settings);
   }
 
-  const names = selected.map((s) => s.label.replace(/^[^ ]+ /, "")).join(", ");
-
-  await confirmAndApply(settingsToApply, names);
+  const categoryNames = selected.map((s) => s.category.name).join(", ");
+  await confirmAndApply(settingsToApply, categoryNames);
 }
 
 // ============================================================================

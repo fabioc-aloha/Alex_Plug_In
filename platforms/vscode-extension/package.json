@@ -38,7 +38,21 @@
   },
   "extensionDependencies": [],
   "extensionPack": [
-    "github.copilot-chat"
+    "github.copilot-chat",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.powershell",
+    "mikestead.dotenv",
+    "redhat.vscode-yaml",
+    "bierner.markdown-mermaid",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-toolsai.jupyter",
+    "ms-azuretools.vscode-azure-mcp-server",
+    "ms-azuretools.vscode-bicep",
+    "ms-azuretools.vscode-docker",
+    "timonwong.shellcheck"
   ],
   "categories": [
     "AI",

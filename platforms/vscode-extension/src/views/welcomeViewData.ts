@@ -324,22 +324,6 @@ export function collectSettingsToggles(): SettingsToggle[] {
         "Allow agents to spawn a fast search subagent for codebase exploration",
     },
     {
-      key: "chat.requestQueuing.enabled",
-      label: "Request Queuing",
-      enabled: chatCfg.get<boolean>("requestQueuing.enabled", false),
-      group: "Copilot Power",
-      tooltip:
-        "Queue multiple chat requests instead of waiting for each to finish",
-    },
-    {
-      key: "github.copilot.chat.agent.thinkingTool",
-      label: "Thinking Tool",
-      enabled: copilotChatCfg.get<boolean>("agent.thinkingTool", false),
-      group: "Copilot Power",
-      tooltip:
-        "Give agents a dedicated tool for structured reasoning before acting",
-    },
-    {
       key: "chat.customAgentInSubagent.enabled",
       label: "Agents in Subagents",
       enabled: chatCfg.get<boolean>("customAgentInSubagent.enabled", false),
@@ -348,28 +332,6 @@ export function collectSettingsToggles(): SettingsToggle[] {
         "Allow custom agents (like Alex) to be invoked inside subagent calls",
     },
     // Agent Capabilities
-    {
-      key: "chat.tools.autoRun",
-      label: "Auto-Run Tools",
-      enabled: chatCfg.get<boolean>("tools.autoRun", false),
-      group: "Agent Capabilities",
-      tooltip: "Automatically execute tools without confirmation prompts",
-    },
-    {
-      key: "chat.tools.fileSystem.autoApprove",
-      label: "Auto-Approve Files",
-      enabled: chatCfg.get<boolean>("tools.fileSystem.autoApprove", false),
-      group: "Agent Capabilities",
-      tooltip: "Skip confirmation when agents create or edit files",
-    },
-    {
-      key: "chat.hooks.enabled",
-      label: "Agent Hooks",
-      enabled: chatCfg.get<boolean>("hooks.enabled", false),
-      group: "Agent Capabilities",
-      tooltip:
-        "Run pre/post scripts around agent actions (e.g., lint after edit)",
-    },
     {
       key: "chat.useCustomAgentHooks",
       label: "Agent-Scoped Hooks",

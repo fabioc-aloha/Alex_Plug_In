@@ -27,11 +27,10 @@ export function getSettingsTabHtml(ctx: SettingsTabContext): string {
 
           <div class="dashboard-card">
               <div class="dashboard-card-title">Environment Setup</div>
-              <p class="card-description">Configure VS Code for optimal chat-centric development on Windows and macOS.</p>
-              ${actionButton("optimizeSettings", "⚙️", "Optimize Settings", "Chat-centric workflow, formatter conflict resolution, cross-platform paths")}
-              ${actionButton("manageExtensions", "🧩", "Manage Extensions", "Install recommended extensions and remove unused ones")}
-              ${actionButton("setupMcpServers", "🔌", "Setup MCP Servers", "Install MarkItDown, GitHub MCP, and other recommended servers")}
-              ${actionButton("setupEnvironment", "🔧", "Full Alex Setup…", "Run the complete Alex environment wizard (settings + extensions + bootstrap)")}
+              <p class="card-description">Configure VS Code for optimal Alex development. Extensions install automatically via the extension pack.</p>
+              ${actionButton("setupEnvironment", "🔧", "Full Setup\u2026", "Settings, MCP servers, account check, and project bootstrap")}
+              ${actionButton("optimizeSettings", "⚙️", "Apply Settings", "Essential, recommended, auto-approval, formatters, and cross-platform")}
+              ${actionButton("setupMcpServers", "🔌", "Setup MCP Servers", "MarkItDown, GitHub, and other recommended MCP servers")}
           </div>
 
           ${
