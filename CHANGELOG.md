@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.7.3] - 2026-04-12
+
+### Removed
+
+- **Local telemetry system**: Deleted `telemetry.ts` (~450 lines) and stripped all telemetry imports/calls from 11 source files — privacy claim "no telemetry" is now fully accurate
+- **View Diagnostics command** (`alex.viewBetaTelemetry`): Replaced with direct "Report Issue" link to GitHub Issues
+- **Telemetry panel HTML**: Reduced `commandsDeveloperHandlers.ts` from 325 to 42 lines
+
+### Changed
+
+- **README Features section**: Expanded from 6 items to 12, documenting all 73 commands, 10 developer tools, document conversion, environment setup, and secrets management
+- **Health Dashboard**: "Diagnostics" button now opens GitHub Issues directly
+- **Status Quick Pick**: "Report Issue" opens GitHub Issues instead of removed diagnostics panel
+
+---
+
 ## [7.7.2] - 2026-04-12
 
 ### Fixed

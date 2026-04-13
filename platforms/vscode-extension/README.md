@@ -75,6 +75,22 @@ Alex doesn't replace GitHub Copilot — **Alex gives GitHub Copilot memory, cons
 
 ## 🛠️ Features
 
+### 73 Command Palette Commands
+
+Everything from `Alex: Initialize` to `Alex: Generate Tests` — organized across architecture lifecycle, developer tools, document conversion, AI image generation, environment setup, secrets management, and knowledge workflows. All accessible from `Ctrl+Shift+P`.
+
+### Developer Tools (10 Commands)
+
+Code Review, Debug This, Rubber Duck, Explain This, Refactor This, Security Review, Document This, Simplify This, Generate Tests, and Skill & Knowledge Review — each opens a focused Copilot Chat prompt with your selected code.
+
+### Document Conversion & Generation
+
+Convert Markdown to Word, HTML, Email (.eml), or PowerPoint. Convert Word back to Markdown. Scaffold new Markdown files and inject cross-document navigation. Generate Mermaid diagrams from code or descriptions.
+
+### Environment Setup
+
+One-command workspace optimization across 6 categories: Editor, Terminal, Copilot, Explorer, Git, and Languages. Plus extension management (15 recommended extensions) and MCP server configuration.
+
 ### Emotional Intelligence
 
 Detects frustration, confusion, and success signals in conversation and adapts tone accordingly. Celebrates wins, slows down during difficulty, and matches your energy in flow state. Powered by brain-based instructions, not code.
@@ -95,9 +111,9 @@ Alex (orchestrator), Researcher, Builder, Validator, Documentarian, Azure, and M
 
 Synapse health, memory search, global knowledge, self-actualization, user profile, focus context, heir validation, cognitive state, and more — all available in Copilot Agent mode.
 
-### 6 Command Palette Commands
+### Secrets Management
 
-Initialize, Upgrade, Reset, Dream (neural maintenance), Self-Actualize (deep meditation), and Skill & Knowledge Review.
+Secure credential storage via VS Code SecretStorage API. Manage API keys for Replicate, Gamma, Brandfetch, and Logo.dev. Detect leaked secrets in `.env` files and migrate them to encrypted storage.
 
 ### AI Image Generation
 
@@ -175,6 +191,6 @@ Apache 2.0 — See [LICENSE.md](https://github.com/fabioc-aloha/Alex_Plug_In/blo
 
 **Alex Cognitive Architecture** — Your Trusted AI Partner for Any Job
 
-160 skills • 45+ trifectas • 270+ academic sources • 7 specialist agents
+160 skills • 45+ trifectas • 270+ academic sources • 7 specialist agents • 73 commands
 
 © 2026 CorreaX • AI That Learns How to Learn
