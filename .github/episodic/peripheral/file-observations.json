@@ -1,14 +1,24 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/config/cognitive-config.json",
-    "package.json",
-    "platforms/vscode-extension/src/views/settingsTabHtml.ts",
-    "platforms/vscode-extension/src/views/welcomeView.ts",
-    "platforms/vscode-extension/src/views/welcomeViewData.ts",
-    "scripts/release-preflight.ps1",
-    "scripts/release-vscode.ps1"
+    "github/episodic/peripheral/file-observations.json"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1776041058600
+  "todoHotspots": [
+    {
+      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
+      "todoCount": 2,
+      "scannedAt": 1776042745708
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
+      "todoCount": 1,
+      "scannedAt": 1776042745708
+    },
+    {
+      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
+      "todoCount": 1,
+      "scannedAt": 1776042745708
+    }
+  ],
+  "lastUpdated": 1776042745708
 }

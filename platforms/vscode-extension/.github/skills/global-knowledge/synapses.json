@@ -29,22 +29,6 @@
       "yields": "bootstrap learning acceleration techniques"
     },
     {
-      "target": ".github/instructions/heir-skill-promotion.instructions.md",
-      "type": "feeds",
-      "strength": 0.9,
-      "reason": "Promotion candidates in global-knowledge.md guide skill evolution",
-      "when": "When task involves .github/instructions/heir skill promotion.instructions.md",
-      "yields": "heir skill promotion contextual assessment"
-    },
-    {
-      "target": ".github/instructions/global-knowledge-curation.instructions.md",
-      "type": "feeds",
-      "strength": 0.85,
-      "reason": "Curation protocol reviews AI-Memory/global-knowledge.md",
-      "when": "When task involves .github/instructions/global knowledge curation.instructions.md",
-      "yields": "global knowledge curation contextual assessment"
-    },
-    {
       "target": ".github/prompts/meditate.prompt.md",
       "type": "activates",
       "strength": 0.8,
