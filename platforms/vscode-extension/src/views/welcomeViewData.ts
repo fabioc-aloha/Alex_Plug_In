@@ -8,7 +8,14 @@ import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
 import { HealthCheckResult } from "../shared/healthCheck";
-import { MindTabData, SkillInfo, Nudge } from "./welcomeViewHtml";
+import {
+  MindTabData,
+  SkillInfo,
+  Nudge,
+  TokenStatusInfo,
+  SettingsToggle,
+} from "./welcomeViewHtml";
+import { getTokenStatuses, TOKEN_CONFIGS } from "../services/secretsManager";
 
 /**
  * Collect Mind tab data from workspace.
@@ -256,4 +263,126 @@ export function generateNudges(
 
   // Sort by priority and return top 3 (mission + up to 2 contextual)
   return nudges.sort((a, b) => a.priority - b.priority).slice(0, 3);
+}
+
+/**
+ * Collect token status information for the Settings tab.
+ */
+export function collectTokenStatuses(): TokenStatusInfo[] {
+  try {
+    const statuses = getTokenStatuses();
+    return Object.entries(TOKEN_CONFIGS).map(([name, config]) => ({
+      name,
+      displayName: config.displayName,
+      isSet: !!statuses[name],
+    }));
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Collect current VS Code settings toggles snapshot for the Settings tab.
+ */
+export function collectSettingsToggles(): SettingsToggle[] {
+  const chatCfg = vscode.workspace.getConfiguration("chat");
+  const copilotChatCfg = vscode.workspace.getConfiguration(
+    "github.copilot.chat",
+  );
+  return [
+    // Copilot Power Settings
+    {
+      key: "chat.autopilot.enabled",
+      label: "Autopilot Mode",
+      enabled: chatCfg.get<boolean>("autopilot.enabled", false),
+      group: "Copilot Power",
+      tooltip:
+        "Let Copilot run tools and make edits without asking for approval each time",
+    },
+    {
+      key: "github.copilot.chat.copilotMemory.enabled",
+      label: "Copilot Memory",
+      enabled: copilotChatCfg.get<boolean>("copilotMemory.enabled", false),
+      group: "Copilot Power",
+      tooltip:
+        "Persist conversation context and preferences across sessions",
+    },
+    {
+      key: "chat.mcp.gallery.enabled",
+      label: "MCP Gallery",
+      enabled: chatCfg.get<boolean>("mcp.gallery.enabled", false),
+      group: "Copilot Power",
+      tooltip:
+        "Browse and install Model Context Protocol servers from the gallery",
+    },
+    {
+      key: "github.copilot.chat.searchSubagent.enabled",
+      label: "Search Subagent",
+      enabled: copilotChatCfg.get<boolean>("searchSubagent.enabled", false),
+      group: "Copilot Power",
+      tooltip:
+        "Allow agents to spawn a fast search subagent for codebase exploration",
+    },
+    {
+      key: "chat.requestQueuing.enabled",
+      label: "Request Queuing",
+      enabled: chatCfg.get<boolean>("requestQueuing.enabled", false),
+      group: "Copilot Power",
+      tooltip:
+        "Queue multiple chat requests instead of waiting for each to finish",
+    },
+    {
+      key: "github.copilot.chat.agent.thinkingTool",
+      label: "Thinking Tool",
+      enabled: copilotChatCfg.get<boolean>("agent.thinkingTool", false),
+      group: "Copilot Power",
+      tooltip:
+        "Give agents a dedicated tool for structured reasoning before acting",
+    },
+    {
+      key: "chat.customAgentInSubagent.enabled",
+      label: "Agents in Subagents",
+      enabled: chatCfg.get<boolean>("customAgentInSubagent.enabled", false),
+      group: "Copilot Power",
+      tooltip:
+        "Allow custom agents (like Alex) to be invoked inside subagent calls",
+    },
+    // Agent Capabilities
+    {
+      key: "chat.tools.autoRun",
+      label: "Auto-Run Tools",
+      enabled: chatCfg.get<boolean>("tools.autoRun", false),
+      group: "Agent Capabilities",
+      tooltip: "Automatically execute tools without confirmation prompts",
+    },
+    {
+      key: "chat.tools.fileSystem.autoApprove",
+      label: "Auto-Approve Files",
+      enabled: chatCfg.get<boolean>("tools.fileSystem.autoApprove", false),
+      group: "Agent Capabilities",
+      tooltip: "Skip confirmation when agents create or edit files",
+    },
+    {
+      key: "chat.hooks.enabled",
+      label: "Agent Hooks",
+      enabled: chatCfg.get<boolean>("hooks.enabled", false),
+      group: "Agent Capabilities",
+      tooltip:
+        "Run pre/post scripts around agent actions (e.g., lint after edit)",
+    },
+    {
+      key: "chat.useCustomAgentHooks",
+      label: "Agent-Scoped Hooks",
+      enabled: chatCfg.get<boolean>("useCustomAgentHooks", false),
+      group: "Agent Capabilities",
+      tooltip: "Use project-level hooks defined in .github/hooks.json",
+    },
+    {
+      key: "chat.restoreLastPanelSession",
+      label: "Restore Last Session",
+      enabled: chatCfg.get<boolean>("restoreLastPanelSession", false),
+      group: "Agent Capabilities",
+      tooltip: "Reopen the last chat session when VS Code starts",
+    },
+  ];
 }

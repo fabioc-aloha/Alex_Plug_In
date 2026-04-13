@@ -16,19 +16,18 @@ import { isOperationInProgress } from "../shared/operationLock";
 import { trackRecommendationFeedback } from "../chat/skillRecommendations";
 import { nasaAssert } from "../shared/nasaAssert";
 import {
-  TokenStatusInfo,
-  SettingsToggle,
   getLoadingHtml,
   getErrorHtml,
   getWelcomeHtmlContent,
 } from "./welcomeViewHtml";
-import { getTokenStatuses, TOKEN_CONFIGS } from "../services/secretsManager";
 import {
   collectMindData,
   countAgents,
   collectSkills,
   getLastDreamDate,
   generateNudges,
+  collectTokenStatuses,
+  collectSettingsToggles,
 } from "./welcomeViewData";
 
 export class WelcomeViewProvider implements vscode.WebviewViewProvider {
@@ -151,60 +150,34 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
     }
 
     // Command map for simple vscode.commands.executeCommand calls
+    // Only includes commands triggered by data-cmd attributes in the sidebar HTML
     const commandMap: Record<string, string> = {
-      dream: "alex.dream",
-      selfActualize: "alex.selfActualize",
       northStar: "alex.northStar",
-      openDocs: "alex.openDocs",
-
       upgrade: "alex.upgrade",
-      showStatus: "alex.showStatus",
       setupEnvironment: "alex.setupEnvironment",
       optimizeSettings: "alex.optimizeSettings",
       manageExtensions: "alex.manageExtensions",
       setupMcpServers: "alex.setupMcpServers",
       manageSecrets: "alex.manageSecrets",
       detectEnvSecrets: "alex.detectEnvSecrets",
-      viewDiagnostics: "alex.viewBetaTelemetry",
-      generateSkillCatalog: "alex.generateSkillCatalog",
-      knowledgeQuickPick: "alex.knowledgeQuickPick",
-      healthDashboard: "alex.openHealthDashboard",
-      runAudit: "alex.runAudit",
-      releasePreflight: "alex.releasePreflight",
-      debugThis: "alex.debugThis",
-      rubberDuck: "alex.rubberDuck",
-      codeReview: "alex.codeReview",
-      generateTests: "alex.generateTests",
+      exportSecretsToEnv: "alex.exportSecretsToEnv",
       generateDiagram: "alex.generateDiagram",
       generatePptx: "alex.generatePptx",
       generateGammaPresentation: "alex.generateGammaPresentation",
       generateAIImage: "alex.generateAIImage",
       editImageAI: "alex.editImageWithPrompt",
-      askAboutSelection: "alex.askAboutSelection",
       saveSelectionAsInsight: "alex.saveSelectionAsInsight",
-      searchRelatedKnowledge: "alex.searchRelatedKnowledge",
       skillReview: "alex.skillReview",
       workingWithAlex: "alex.workingWithAlex",
-      cognitiveLevels: "alex.cognitiveLevels",
       quickReference: "alex.cognitiveLevels",
       // meditate handled as special case below to set cognitive state
     };
 
-    // External URL map
+    // External URL map — only includes URLs triggered by data-cmd in sidebar HTML
     const externalUrlMap: Record<string, string> = {
-      openMarketplace:
-        "https://marketplace.visualstudio.com/items?itemName=fabioc-aloha.alex-cognitive-architecture",
-      openGitHub: "https://github.com/fabioc-aloha/Alex_Plug_In",
       openBrainAnatomy:
         "https://fabioc-aloha.github.io/Alex_Plug_In/alex-brain-anatomy.html",
-      provideFeedback: "https://github.com/fabioc-aloha/Alex_Plug_In/issues",
       learnAlex: "https://learnai.correax.com/",
-      learnAlexSessionPlan: "https://learnai.correax.com/session-plan",
-      learnAlexSlides: "https://learnai.correax.com/slides",
-      learnAlexDemoScripts: "https://learnai.correax.com/demo-scripts",
-      learnAlexHandout: "https://learnai.correax.com/handout",
-      learnAlexPreRead: "https://learnai.correax.com/pre-read",
-      learnAlexGitHubGuide: "https://learnai.correax.com/github-guide",
       learnAlexResponsibleAI: "https://learnai.correax.com/responsible-ai",
       learnAlexPromptEngineering:
         "https://learnai.correax.com/prompt-engineering",
@@ -416,24 +389,26 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
           return;
         }
         if (allowedSettings.includes(settingKey)) {
-          const [section, ...rest] = settingKey.split(".");
-          const configKey = rest.join(".");
-          if (!configKey) {
-            vscode.window.showWarningMessage(
-              `Alex: Invalid config key for ${settingKey}`,
+          try {
+            await vscode.workspace
+              .getConfiguration()
+              .update(
+                settingKey,
+                !!(payload as any).value,
+                vscode.ConfigurationTarget.Global,
+              );
+            logInfo(
+              `[Alex] Setting ${settingKey} toggled to: ${(payload as any).value}`,
             );
-            return;
+          } catch (err) {
+            console.error(
+              `[Alex][WelcomeView] Failed to update setting ${settingKey}:`,
+              err,
+            );
+            vscode.window.showErrorMessage(
+              `Alex: Failed to save ${settingKey}. Check Output for details.`,
+            );
           }
-          await vscode.workspace
-            .getConfiguration(section)
-            .update(
-              configKey,
-              !!(payload as any).value,
-              vscode.ConfigurationTarget.Global,
-            );
-          logInfo(
-            `[Alex] Setting ${settingKey} toggled to: ${(payload as any).value}`,
-          );
         } else {
           vscode.window.showWarningMessage(
             `Alex: Unsupported setting ${settingKey}`,
@@ -737,120 +712,10 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
       );
 
       // 7.13: Token statuses for Secret Manager inline dashboard
-      const tokenStatuses: TokenStatusInfo[] = (() => {
-        try {
-          const statuses = getTokenStatuses();
-          return Object.entries(TOKEN_CONFIGS).map(([name, config]) => ({
-            name,
-            displayName: config.displayName,
-            isSet: !!statuses[name],
-          }));
-        } catch {
-          return [];
-        }
-      })();
+      const tokenStatuses = collectTokenStatuses();
 
       // 7.14: Settings snapshot for inline toggles
-      const chatCfg = vscode.workspace.getConfiguration("chat");
-      const copilotChatCfg = vscode.workspace.getConfiguration(
-        "github.copilot.chat",
-      );
-      const settingsToggles: SettingsToggle[] = [
-        // Copilot Power Settings
-        {
-          key: "chat.autopilot.enabled",
-          label: "Autopilot Mode",
-          enabled: chatCfg.get<boolean>("autopilot.enabled", false),
-          group: "Copilot Power",
-          tooltip:
-            "Let Copilot run tools and make edits without asking for approval each time",
-        },
-        {
-          key: "github.copilot.chat.copilotMemory.enabled",
-          label: "Copilot Memory",
-          enabled: copilotChatCfg.get<boolean>("copilotMemory.enabled", false),
-          group: "Copilot Power",
-          tooltip:
-            "Persist conversation context and preferences across sessions",
-        },
-        {
-          key: "chat.mcp.gallery.enabled",
-          label: "MCP Gallery",
-          enabled: chatCfg.get<boolean>("mcp.gallery.enabled", false),
-          group: "Copilot Power",
-          tooltip:
-            "Browse and install Model Context Protocol servers from the gallery",
-        },
-        {
-          key: "github.copilot.chat.searchSubagent.enabled",
-          label: "Search Subagent",
-          enabled: copilotChatCfg.get<boolean>("searchSubagent.enabled", false),
-          group: "Copilot Power",
-          tooltip:
-            "Allow agents to spawn a fast search subagent for codebase exploration",
-        },
-        {
-          key: "chat.requestQueuing.enabled",
-          label: "Request Queuing",
-          enabled: chatCfg.get<boolean>("requestQueuing.enabled", false),
-          group: "Copilot Power",
-          tooltip:
-            "Queue multiple chat requests instead of waiting for each to finish",
-        },
-        {
-          key: "github.copilot.chat.agent.thinkingTool",
-          label: "Thinking Tool",
-          enabled: copilotChatCfg.get<boolean>("agent.thinkingTool", false),
-          group: "Copilot Power",
-          tooltip:
-            "Give agents a dedicated tool for structured reasoning before acting",
-        },
-        {
-          key: "chat.customAgentInSubagent.enabled",
-          label: "Agents in Subagents",
-          enabled: chatCfg.get<boolean>("customAgentInSubagent.enabled", false),
-          group: "Copilot Power",
-          tooltip:
-            "Allow custom agents (like Alex) to be invoked inside subagent calls",
-        },
-        // Agent Capabilities
-        {
-          key: "chat.tools.autoRun",
-          label: "Auto-Run Tools",
-          enabled: chatCfg.get<boolean>("tools.autoRun", false),
-          group: "Agent Capabilities",
-          tooltip: "Automatically execute tools without confirmation prompts",
-        },
-        {
-          key: "chat.tools.fileSystem.autoApprove",
-          label: "Auto-Approve Files",
-          enabled: chatCfg.get<boolean>("tools.fileSystem.autoApprove", false),
-          group: "Agent Capabilities",
-          tooltip: "Skip confirmation when agents create or edit files",
-        },
-        {
-          key: "chat.hooks.enabled",
-          label: "Agent Hooks",
-          enabled: chatCfg.get<boolean>("hooks.enabled", false),
-          group: "Agent Capabilities",
-          tooltip:
-            "Run pre/post scripts around agent actions (e.g., lint after edit)",
-        },
-        {
-          key: "chat.useCustomAgentHooks",
-          label: "Agent-Scoped Hooks",
-          enabled: chatCfg.get<boolean>("useCustomAgentHooks", false),
-          group: "Agent Capabilities",
-          tooltip: "Use project-level hooks defined in .github/hooks.json",
-        },
-        {
-          key: "chat.restoreLastPanelSession",
-          label: "Restore Last Session",
-          enabled: chatCfg.get<boolean>("restoreLastPanelSession", false),
-          group: "Agent Capabilities",
-          tooltip: "Reopen the last chat session when VS Code starts",
-        },
-      ];
+      const settingsToggles = collectSettingsToggles();
 
       logInfo(
         `[Alex][WelcomeView] Tab data: agents=${agentCount}, skills=${skills.length}, mindData.skillCount=${mindData.skillCount}, mindData.synapseHealthPct=${mindData.synapseHealthPct}`,

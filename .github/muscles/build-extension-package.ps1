@@ -6,9 +6,10 @@
 #   1. Version synchronization check
 #   2. Architecture sync via sync-architecture.cjs (canonical sync logic)
 #   3. Manifest generation
-#   4. TypeScript compilation
-#   5. Version verification
-#   6. Personal data scan (defense-in-depth beyond sync-architecture.cjs)
+#   4. Version verification
+#   5. Personal data scan (defense-in-depth beyond sync-architecture.cjs)
+#   6. VSIX package creation (via vsce, triggers vscode:prepublish pipeline)
+#   7. VSIX output verification
 #
 # The actual file copy, inheritance, exclusions, and heir decontamination
 # are handled by sync-architecture.cjs (DRY -- single source of truth).
@@ -70,7 +71,7 @@ $ForbiddenPatterns = @(
 # ------------------------------------------------------------
 # Step 1: Version Synchronization Check
 # ------------------------------------------------------------
-Write-Host "[1/6] Validating versions..." -ForegroundColor Yellow
+Write-Host "[1/7] Validating versions..." -ForegroundColor Yellow
 if (-not (Test-Path $SourceGithub)) {
     Write-Error "Source .github/ not found at $SourceGithub"
     exit 1
@@ -119,7 +120,7 @@ else {
 # ------------------------------------------------------------
 # Step 2: Sync Architecture (delegates to sync-architecture.cjs)
 # ------------------------------------------------------------
-Write-Host "[2/6] Syncing architecture (via sync-architecture.cjs)..." -ForegroundColor Yellow
+Write-Host "[2/7] Syncing architecture (via sync-architecture.cjs)..." -ForegroundColor Yellow
 if (-not $DryRun) {
     $syncScript = Join-Path $PSScriptRoot "sync-architecture.cjs"
     if (-not (Test-Path $syncScript)) {
@@ -147,7 +148,7 @@ else {
 # ------------------------------------------------------------
 # Step 3: Generate Manifest
 # ------------------------------------------------------------
-Write-Host "[3/6] Generating manifest..." -ForegroundColor Yellow
+Write-Host "[3/7] Generating manifest..." -ForegroundColor Yellow
 
 # Count files for manifest
 $copiedCount = if (Test-Path $TargetGithub) {
@@ -170,35 +171,9 @@ if (-not $DryRun) {
 }
 
 # ------------------------------------------------------------
-# Step 4: Compile Extension
+# Step 4: Final Version Verification
 # ------------------------------------------------------------
-Write-Host "[4/6] Building extension..." -ForegroundColor Yellow
-if ($SkipCompile) {
-    Write-Host "  Skipped (--SkipCompile flag)" -ForegroundColor DarkGray
-}
-elseif ($DryRun) {
-    Write-Host "  Skipped (--DryRun flag)" -ForegroundColor DarkGray
-}
-else {
-    Push-Location $ExtensionPath
-    try {
-        Write-Host "  Running: npm run compile"
-        npm run compile 2>&1 | ForEach-Object { Write-Host "    $_" }
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Compilation failed"
-            exit 1
-        }
-        Write-Host "  [OK] Compilation successful" -ForegroundColor Green
-    }
-    finally {
-        Pop-Location
-    }
-}
-
-# ------------------------------------------------------------
-# Step 5: Final Version Verification
-# ------------------------------------------------------------
-Write-Host "[5/6] Verifying heir version..." -ForegroundColor Yellow
+Write-Host "[4/7] Verifying heir version..." -ForegroundColor Yellow
 $heirInstructionsPath = Join-Path $TargetGithub "copilot-instructions.md"
 if (Test-Path $heirInstructionsPath) {
     $heirContent = Get-Content $heirInstructionsPath -Raw
@@ -215,9 +190,9 @@ if (Test-Path $heirInstructionsPath) {
 }
 
 # ------------------------------------------------------------
-# Step 6: Personal Data Scan (Defense-in-Depth)
+# Step 5: Personal Data Scan (Defense-in-Depth)
 # ------------------------------------------------------------
-Write-Host "[6/6] Scanning for personal data leakage..." -ForegroundColor Yellow
+Write-Host "[5/7] Scanning for personal data leakage..." -ForegroundColor Yellow
 $violations = @()
 $scannedFiles = 0
 
@@ -272,6 +247,65 @@ else {
 }
 
 # ------------------------------------------------------------
+# Step 6: Create VSIX Package
+# ------------------------------------------------------------
+Write-Host "[6/7] Creating VSIX package..." -ForegroundColor Yellow
+if ($SkipCompile) {
+    Write-Host "  Skipped (--SkipCompile flag)" -ForegroundColor DarkGray
+}
+elseif ($DryRun) {
+    Write-Host "  Skipped (--DryRun flag)" -ForegroundColor DarkGray
+}
+else {
+    Push-Location $ExtensionPath
+    try {
+        # Remove stale VSIX files to avoid version confusion
+        Get-ChildItem "*.vsix" -ErrorAction SilentlyContinue | Remove-Item -Force
+
+        Write-Host "  Running: npx vsce package --no-dependencies"
+        Write-Host "  (triggers vscode:prepublish: sync + clean + quality-gate + esbuild)" -ForegroundColor DarkGray
+        npx vsce package --no-dependencies 2>&1 | ForEach-Object { Write-Host "    $_" }
+        if ($LASTEXITCODE -ne 0) {
+            Write-Error "VSIX packaging failed"
+            exit 1
+        }
+        Write-Host "  [OK] VSIX created" -ForegroundColor Green
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+# ------------------------------------------------------------
+# Step 7: Verify VSIX Output
+# ------------------------------------------------------------
+Write-Host "[7/7] Verifying VSIX..." -ForegroundColor Yellow
+if ($SkipCompile -or $DryRun) {
+    Write-Host "  Skipped (no VSIX to verify)" -ForegroundColor DarkGray
+}
+else {
+    $vsixFile = Get-ChildItem "$ExtensionPath\*.vsix" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $vsixFile) {
+        Write-Error "VSIX file not found after packaging"
+        exit 1
+    }
+
+    $vsixSizeMB = [math]::Round($vsixFile.Length / 1MB, 2)
+    Write-Host "  File: $($vsixFile.Name)" -ForegroundColor Gray
+    Write-Host "  Size: $vsixSizeMB MB" -ForegroundColor Gray
+
+    # Verify version in filename matches package.json
+    if ($vsixFile.Name -match '(\d+\.\d+\.\d+)') {
+        $vsixVersion = $matches[1]
+        if ($vsixVersion -ne $pkgVersion) {
+            Write-Error "VSIX version ($vsixVersion) != package.json ($pkgVersion)"
+            exit 1
+        }
+        Write-Host "  [OK] Version verified: $vsixVersion" -ForegroundColor Green
+    }
+}
+
+# ------------------------------------------------------------
 # Summary
 # ------------------------------------------------------------
 Write-Host ""
@@ -282,6 +316,14 @@ Write-Host ""
 Write-Host "Files in heir: $copiedCount"
 Write-Host "Target:        $TargetGithub"
 Write-Host "Version:       $pkgVersion [OK]"
+
+if (-not $SkipCompile -and -not $DryRun) {
+    $vsixOut = Get-ChildItem "$ExtensionPath\*.vsix" -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($vsixOut) {
+        Write-Host "VSIX:          $($vsixOut.Name)"
+    }
+}
+
 Write-Host ""
 
 if ($DryRun) {
@@ -290,6 +332,6 @@ if ($DryRun) {
 else {
     Write-Host "Next steps:" -ForegroundColor Cyan
     Write-Host "  1. Run .\scripts\release-preflight.ps1 to verify release readiness" -ForegroundColor Gray
-    Write-Host "  2. Run 'Alex: Validate Heir (LLM Curation Check)' in VS Code for semantic validation" -ForegroundColor Gray
+    Write-Host "  2. Run .\scripts\release-vscode.ps1 to publish" -ForegroundColor Gray
     Write-Host ""
 }

@@ -49,24 +49,25 @@ try {
         throw "VSCE_PAT not set. Set environment variable or add VSCE_PAT to root .env"
     }
 
-    # 1a. Sync Master Alex to extension (ensures .github/ is fresh)
-    Write-Host "`n[SYNC] Syncing Master Alex to extension package..." -ForegroundColor Yellow
-    & "$repoRoot\.github\muscles\build-extension-package.ps1" -SkipCompile
-    if ($LASTEXITCODE -ne 0) { throw "Build/sync failed!" }
-    Write-Host "   [OK] Extension .github/ synced from Master Alex" -ForegroundColor Green
-
-    # 1b. Run preflight (from extension folder)
-    Write-Host "`n[LIST] Gate 1-4: Running preflight checks..." -ForegroundColor Yellow
-    & "$scriptDir\release-preflight.ps1" -Package -SkipTests
+    # 1. Run preflight (read-only validation — build script already created the VSIX)
+    Write-Host "`n[LIST] Running preflight checks..." -ForegroundColor Yellow
+    & "$scriptDir\release-preflight.ps1"
     if ($LASTEXITCODE -ne 0) { throw "Preflight failed!" }
 
-    # 2. Read current version from package.json
+    # 2. Read current version and find pre-built VSIX
     Push-Location $extensionPath
     $pkg = Get-Content package.json | ConvertFrom-Json
     $newVersion = $pkg.version
     $publisher = $pkg.publisher
     $extName = $pkg.name
     Write-Host "`n[VERSION] Publishing version: $newVersion" -ForegroundColor Green
+
+    $vsix = Get-ChildItem "*.vsix" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $vsix) {
+        Pop-Location
+        throw "No .vsix file found in $extensionPath. Run build-extension-package.ps1 first."
+    }
+    Write-Host "   VSIX: $($vsix.Name)" -ForegroundColor Gray
     Pop-Location
 
     if ($DryRun) {
@@ -93,15 +94,22 @@ try {
     git push
     git push --tags
 
-    # 7. Publish (from extension folder)
+    # 7. Publish pre-built VSIX (from extension folder)
     Write-Host "`n[PUBLISH] Publishing to marketplace..." -ForegroundColor Yellow
     Push-Location $extensionPath
     
+    $vsixPath = (Get-ChildItem "*.vsix" | Sort-Object LastWriteTime -Descending | Select-Object -First 1).FullName
+    if (-not $vsixPath) {
+        Pop-Location
+        throw "VSIX file disappeared. Re-run build-extension-package.ps1."
+    }
+    Write-Host "   Using: $vsixPath" -ForegroundColor Gray
+
     if ($PreRelease) {
-        npx vsce publish --pre-release
+        npx vsce publish --pre-release --no-dependencies --packagePath $vsixPath
     }
     else {
-        npx vsce publish
+        npx vsce publish --no-dependencies --packagePath $vsixPath
     }
     
     Pop-Location

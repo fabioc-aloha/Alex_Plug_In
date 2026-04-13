@@ -53,6 +53,7 @@ export function getSettingsTabHtml(ctx: SettingsTabContext): string {
               </div>
               ${actionButton("manageSecrets", "🔑", "Manage Keys", "Manage tokens for Gamma, Replicate, OpenAI")}
               ${actionButton("detectEnvSecrets", "🔍", "Detect .env Secrets", "Scan .env files and migrate to secure storage")}
+              ${actionButton("exportSecretsToEnv", "📄", "Export to .env", "Write stored API keys to a .env file for scripts and external tools")}
           </div>`
               : ""
           }
