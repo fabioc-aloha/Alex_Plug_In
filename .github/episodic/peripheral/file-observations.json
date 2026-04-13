@@ -1,14 +1,6 @@
 {
   "hotFiles": [],
-  "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "CHANGELOG.md",
-    "ROADMAP.md",
-    "platforms/vscode-extension/CHANGELOG.md",
-    "platforms/vscode-extension/README.md",
-    "platforms/vscode-extension/package-lock.json",
-    "platforms/vscode-extension/package.json"
-  ],
+  "stalledFiles": [],
   "todoHotspots": [],
-  "lastUpdated": 1776049092815
+  "lastUpdated": 1776049224719
 }
