@@ -1,9 +1,8 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "platforms/m365-copilot/package.json"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [],
-  "lastUpdated": 1776137935992
+  "lastUpdated": 1776138057423
 }
