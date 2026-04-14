@@ -7,10 +7,10 @@
 
 These are installed in `%APPDATA%\Code\User\mcp.json` and available in every workspace.
 
-| Server                   | Type                                | Transport                                   | Description                                         |
-| ------------------------ | ----------------------------------- | ------------------------------------------- | --------------------------------------------------- |
-| **MarkItDown**           | `microsoft/markitdown`              | stdio (`uvx markitdown-mcp@0.0.1a4`)        | Convert PDF, Word, Excel, images, audio to Markdown |
-| **Microsoft Enterprise** | `io.github.microsoft/EnterpriseMCP` | HTTP (`mcp.svc.cloud.microsoft/enterprise`) | Query Microsoft Entra data using natural language   |
+| Server                   | Type                                  | Transport                                     | Description                                         |
+| ------------------------ | ------------------------------------- | --------------------------------------------- | --------------------------------------------------- |
+| **MarkItDown**           | `microsoft/markitdown`                | stdio (`uvx markitdown-mcp@0.0.1a4`)          | Convert PDF, Word, Excel, images, audio to Markdown |
+| **Microsoft Enterprise** | `io.github.microsoft/enterprise-mcp`  | HTTP (`mcp.svc.cloud.microsoft/enterprise`)    | Query Microsoft Entra data using natural language   |
 
 ### Azure MCP Server (Extension-Provided)
 

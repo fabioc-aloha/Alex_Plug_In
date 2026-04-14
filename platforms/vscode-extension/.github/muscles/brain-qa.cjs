@@ -195,7 +195,7 @@ if (runPhases.includes(3)) {
   if (fs.existsSync(indexPath)) {
     const indexContent = fs.readFileSync(indexPath, "utf8");
     const notIndexed = skillDirs.filter(
-      (s) => s !== "memory-activation" && !new RegExp(`\\|\\s*${s}\\s*\\|`).test(indexContent),
+      (s) => s !== "memory-activation" && !new RegExp(`\\|[^|]*${s}\\s*\\|`).test(indexContent),
     );
     if (notIndexed.length === 0) pass(`All ${skillDirs.length} skills indexed`);
     else fail(`Not indexed: ${notIndexed.join(", ")}`);
