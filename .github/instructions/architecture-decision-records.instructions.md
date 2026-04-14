@@ -141,7 +141,7 @@ project/
 ```
 ADR-{number}-{short-title}.md
 ADR-001-use-typescript-for-extension.md
-ADR-002-embedded-synapse-notation.md
+ADR-002-skill-relationship-format.md
 ADR-003-scripts-over-cicd.md
 ```
 
@@ -155,19 +155,19 @@ ADR-003-scripts-over-cicd.md
 | ADR | Title | Status | Date |
 |-----|-------|--------|------|
 | [ADR-001](ADR-001-use-typescript.md) | Use TypeScript for Extension | Accepted | 2025-06-15 |
-| [ADR-002](ADR-002-embedded-synapses.md) | Embedded Synapse Notation | Accepted | 2025-08-20 |
+| [ADR-002](ADR-002-skill-relationships.md) | Skill Relationship Format | Superseded | 2025-08-20 |
 | [ADR-003](ADR-003-scripts-over-cicd.md) | Deployment Scripts over CI/CD | Accepted | 2026-01-23 |
 
 ## By Status
 
 ### Accepted
-- ADR-001, ADR-002, ADR-003
+- ADR-001, ADR-003
 
 ### Proposed
 - (none)
 
-### Deprecated
-- (none)
+### Superseded
+- ADR-002 (embedded markdown synapses → synapses.json files)
 ```
 
 ---
