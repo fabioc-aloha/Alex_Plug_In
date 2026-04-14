@@ -1,34 +1,9 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "github/episodic/peripheral/file-observations.json",
+    "platforms/m365-copilot/package.json"
   ],
-  "todoHotspots": [
-    {
-      "file": "CHANGELOG.md",
-      "todoCount": 10,
-      "scannedAt": 1776135573868
-    },
-    {
-      "file": "platforms/vscode-extension/CHANGELOG.md",
-      "todoCount": 9,
-      "scannedAt": 1776135573868
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1776135573868
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1776135573868
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1776135573868
-    }
-  ],
-  "lastUpdated": 1776135573868
+  "todoHotspots": [],
+  "lastUpdated": 1776137935992
 }

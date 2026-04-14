@@ -35,6 +35,14 @@
       "reason": "Feature requests in feedback may lead to new skill creation",
       "when": "When feedback type is feature request",
       "yields": "Skill creation triggers from heir needs"
+    },
+    {
+      "target": ".github/skills/brain-qa/SKILL.md",
+      "type": "feeds",
+      "strength": 0.8,
+      "reason": "Heir bug reports frequently surface brain-qa validation gaps",
+      "when": "When feedback type is bug and affects brain-qa phases",
+      "yields": "Brain-qa regression fixes and regex hardening"
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "summary": "Heir feedback triage + bug fixes + version bump 7.7.4",
+  "newPatterns": [
+    "no-decoration-in-machine-consumed-files"
+  ],
+  "patternsReinforced": [
+    "universal-audit-pattern",
+    "docs-decay-proportional-to-velocity"
+  ],
+  "version": "7.7.4",
+  "filesChanged": [
+    ".github/muscles/brain-qa-heir.cjs",
+    ".github/skills/memory-activation/SKILL.md",
+    "platforms/vscode-extension/.github/muscles/brain-qa.cjs",
+    "platforms/vscode-extension/.github/skills/memory-activation/SKILL.md",
+    "MCP-SERVERS.md"
+  ],
+  "type": "meditation",
+  "sessionDate": "2026-04-13",
+  "timestamp": 1776136000683,
+  "insights": [
+    "Star emoji in LLM-consumed tables breaks regex tooling",
+    "Heir feedback loop via AI-Memory/feedback working end-to-end",
+    "brain-qa-heir.cjs regex needed same hardening as master brain-qa.cjs"
+  ]
+}
