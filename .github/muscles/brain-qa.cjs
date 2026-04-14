@@ -448,13 +448,16 @@ function generateGrid() {
   lines.push("|:---:|---------|---|---|");
   lines.push("| **inh** | Inheritance | Master-only | Synced to heirs |");
   lines.push("| **stale** | Staleness | Needs regular review | Stable |");
+  lines.push("| **sem** | Semantic Review | Reviewed post-synapse-cleanup | Pending review |");
+  lines.push("");
+  lines.push("> **Semantic Review (sem)**: One-time audit to verify each brain file is clear, coherent, and not damaged by synapse removal. Files marked 0 need manual review for: broken references, orphaned content, outdated patterns, or content that should be renewed/removed.");
   lines.push("");
 
   // Skills table
   lines.push("## Skills");
   lines.push("");
-  lines.push("| Skill | Tier | Lines | fm | struct | code | bounds | tri | muscle | Type | Score | Pass |");
-  lines.push("|-------|:----:|------:|:--:|:------:|:----:|:------:|:---:|:------:|:----:|------:|:----:|");
+  lines.push("| Skill | Tier | Lines | fm | struct | code | bounds | tri | muscle | Type | Score | Pass | sem |");
+  lines.push("|-------|:----:|------:|:--:|:------:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|");
 
   for (const s of skills) {
     const f = s.flags;
@@ -462,7 +465,7 @@ function generateGrid() {
     const passIcon = s.pass ? "✓" : "✗";
     // Type: A = Agentic (tri+muscle), I = Intellectual (tri only), - = incomplete
     const typeIcon = s.agentic ? "A" : (f.tri === 1 ? "I" : "-");
-    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.struct} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} |`);
+    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.struct} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} | 0 |`);
   }
 
   // Skills summary - now using tier-based pass/fail
@@ -541,13 +544,13 @@ function generateGrid() {
   lines.push("");
   lines.push("**Pass criteria**: fm=1 (gate) AND score ≥4/6");
   lines.push("");
-  lines.push("| Instruction | Lines | fm | spec | depth | sect | code | skill | Score | Pass |");
-  lines.push("|-------------|------:|:--:|:----:|:-----:|:----:|:----:|:-----:|------:|:----:|");
+  lines.push("| Instruction | Lines | fm | spec | depth | sect | code | skill | Score | Pass | sem |");
+  lines.push("|-------------|------:|:--:|:----:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|");
 
   for (const i of instructions) {
     const f = i.flags;
     const passIcon = i.pass ? "✓" : "✗";
-    lines.push(`| ${i.name} | ${i.lines} | ${f.fm} | ${f.spec} | ${f.depth} | ${f.sect} | ${f.code} | ${f.skill} | ${i.score}/6 | ${passIcon} |`);
+    lines.push(`| ${i.name} | ${i.lines} | ${f.fm} | ${f.spec} | ${f.depth} | ${f.sect} | ${f.code} | ${f.skill} | ${i.score}/6 | ${passIcon} | 0 |`);
   }
 
   // Instructions summary
