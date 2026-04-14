@@ -270,6 +270,74 @@ The architecture is **theoretically sound** because:
 
 The concepts don't just "make sense" — they formalize established patterns into a testable framework.
 
+## Empirical Validation
+
+To validate the scoring model, we examined representative skills across the score distribution:
+
+### Sample Analysis (April 2026)
+
+| Skill | Tier | Score | fm | struct | code | bounds | tri | muscle | Type | Human Assessment |
+|-------|------|------:|:--:|:------:|:----:|:------:|:---:|:------:|:----:|------------------|
+| dissertation-defense | exte | 1/4 | 1 | 0 | 0 | 0 | 0 | 0 | - | Good domain content, actionable checklists |
+| career-development | exte | 2/4 | 1 | 0 | 0 | 1 | 0 | 0 | - | Excellent tables, complete resume guidance |
+| code-review | core | 3/6 | 1 | 0 | 1 | 1 | 0 | 0 | - | High-quality methodology, 3-pass framework |
+| image-handling | stan | 4/5 | 1 | 0 | 1 | 1 | 1 | 0 | I | Clear format selection, code examples |
+| brain-qa | stan | 5/5 | 1 | 0 | 1 | 1 | 1 | 1 | A | Complete with automation script |
+| md-to-word | stan | 5/5 | 1 | 0 | 1 | 1 | 1 | 1 | A | Full conversion pipeline |
+
+### Criterion Validity Findings
+
+| Dimension | Pass Rate | Issue Identified | Validity |
+|-----------|----------:|------------------|----------|
+| **fm** | 168/168 | None | ✓ Valid |
+| **struct** | 2/168 | Requires `## Troubleshooting` AND `## Activation` sections — only 2 skills use this template | ✗ Invalid |
+| **code** | 128/168 | Correctly identifies code examples | ✓ Valid |
+| **bounds** | 152/168 | Correctly flags outliers | ✓ Valid |
+| **tri** | 97/168 | Misses renamed instructions (e.g., `code-review` vs `code-review-guidelines`) | ⚠ Partial |
+| **muscle** | 9/168 | Correctly identifies automation scripts | ✓ Valid |
+
+### Detailed Analysis
+
+**struct (2/168 pass) — INVALID CRITERION**
+
+The `struct` dimension requires BOTH of these exact section headers:
+- `## Troubleshooting`
+- `## Activation` (or `## Activation Patterns`)
+
+Only `research-first-development` and `skill-building` have both. This doesn't measure structural quality — it measures adherence to an arbitrary template that 98.8% of skills don't use.
+
+**Example**: `code-review` has excellent structure (Review Priority, 3-Pass Review, Comment Prefixes, Checklist, Anti-Patterns) but scores struct=0 because it lacks these specific headers.
+
+**tri (97/168 pass) — PARTIAL VALIDITY**
+
+The trifecta check (`hasMatchingInstruction`) looks for `{skill-name}.instructions.md`. This misses:
+- `code-review` → instruction is `code-review-guidelines.instructions.md` (tri=0, should be 1)
+- Skills with hyphenated variants or merged instructions
+
+**muscle (9/168 pass) — VALID BUT OVERSTATED**
+
+The muscle criterion correctly identifies agentic skills, but the 159/168 "defect" count is misleading — most skills are legitimately intellectual and don't need automation.
+
+### Proposed Refinements
+
+| Dimension | Current | Proposed |
+|-----------|---------|----------|
+| **struct** | Troubleshooting + Activation sections | ≥3 level-2 headers (`##`) indicating organized structure |
+| **tri** | Exact name match only | Pattern match: `{skill-name}*.instructions.md` |
+| **muscle** | Counted as defect if missing | Only count as defect for skills with `actionable: true` in frontmatter |
+
+### Type Classification Validity
+
+The Intellectual/Agentic/Incomplete classification **is valid**:
+
+| Type | Count | Description | Validates |
+|------|------:|-------------|-----------|
+| Agentic (A) | 7 | Skills with muscle scripts | ✓ All have working automation |
+| Intellectual (I) | 90 | Skills with trifecta, no muscle | ✓ Guide reasoning, don't execute |
+| Incomplete (-) | 71 | Missing trifecta alignment | ✓ Need matching instructions |
+
+The type system correctly distinguishes capabilities. The scoring model's weakness is in the merit dimensions (struct), not the capability dimensions (tri, muscle).
+
 ## See Also
 
 - [TRIFECTA-CATALOG.md](TRIFECTA-CATALOG.md) — Complete trifecta inventory
