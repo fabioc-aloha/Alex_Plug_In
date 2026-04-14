@@ -7,9 +7,7 @@ applyTo: "**/PLAN*,**/*plan*,**/*spec*,**/*design*,**/*ux*"
 
 > Do not jump into doing. Plan the actions first.
 
-**Synapse**: [.github/instructions/research-first-workflow.instructions.md] (Critical, Extends, Forward) - "research provides knowledge; planning provides strategy and structure"
-**Synapse**: [.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "planning identifies which skills need activation for each phase"
-**Synapse**: [.github/instructions/ui-ux-design.instructions.md] (High, Integrates, Bidirectional) - "UX vision and UI specs follow design principles"
+**Related**: research-first-workflow (research before planning), skill-selection-optimization (planning identifies skills), ui-ux-design (UX vision follows design principles)
 
 ---
 

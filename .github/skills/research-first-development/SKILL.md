@@ -231,7 +231,9 @@ Synapses wired **at creation time** are 10x more valuable than synapses discover
 | Run Dream before major phases | Catch broken connections early | Use the dream prompt or `node .github/muscles/brain-qa.cjs` |
 | Strength reflects reality | Don't over-connect | Critical = always co-activate; Low = rarely |
 
-### Connection Strategy
+### Connection Strategy (Legacy Format)
+
+> Note: The `(Strength, Type)` notation below is deprecated. Use `synapses.json` for skill relationships.
 
 ```
 project-context.instructions.md  (hub)
