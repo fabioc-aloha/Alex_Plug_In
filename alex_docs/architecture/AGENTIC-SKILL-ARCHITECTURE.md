@@ -386,6 +386,66 @@ Only 3 agents (alex-builder, alex-researcher, alex-validator) have hooks. The ot
 | **persona** | Match specific header names | Match `## Core` OR `## Mental` OR `## Persona` OR `## Identity` |
 | **hooks** | Scored as defect if missing | Only score if agent performs file operations (Builder, Validator) |
 
+### Instruction Scoring Validation (April 2026)
+
+Instructions have 6 scoring dimensions: **fm** (frontmatter), **spec** (specificity), **depth**, **sect** (sections), **code**, **skill** (trifecta).
+
+| Instruction | Score | fm | spec | depth | sect | code | skill | Human Assessment |
+|-------------|------:|:--:|:----:|:-----:|:----:|:----:|:-----:|------------------|
+| alex-core | 3/6 | 0 | 0 | 1 | 1 | 1 | 0 | 524 lines, core architecture — CRITICAL instruction! |
+| emotional-intelligence | 3/6 | 1 | 0 | 1 | 1 | 0 | 0 | Always-on behavior, `applyTo: "**"` is CORRECT |
+| terminal-command-safety | 4/6 | 1 | 0 | 1 | 1 | 1 | 0 | Safety rules, `applyTo: "**"` is CORRECT |
+| code-review-guidelines | 5/6 | 1 | 1 | 1 | 1 | 1 | 0 | Matching skill exists as `code-review` — naming mismatch |
+| ai-character-reference-generation | 6/6 | 1 | 1 | 1 | 1 | 1 | 1 | Perfect trifecta alignment |
+
+**Distribution**: 83 instructions | Passing: 69 | Failing: 14 | Perfect (6/6): 11
+
+#### Instruction Criterion Validity
+
+| Dimension | Pass Rate | Issue Identified | Validity |
+|-----------|----------:|------------------|----------|
+| **fm** | 69/83 | Requires `applyTo` but some use `excludeAgent` or rely on semantic matching | ⚠ Partial |
+| **spec** | 69/83 | Penalizes `applyTo: "**"` but some instructions ARE always-on by design | ✗ Invalid |
+| **depth** | 62/83 | Correctly identifies substantive content | ✓ Valid |
+| **sect** | 72/83 | Correctly identifies structured content | ✓ Valid |
+| **code** | 50/83 | Correctly identifies examples | ✓ Valid |
+| **skill** | 46/83 | Assumes all instructions need trifecta; ignores naming mismatches | ⚠ Partial |
+
+#### Analysis
+
+**fm (69/83 pass) — PARTIAL VALIDITY**
+
+The criterion requires BOTH `description` AND `applyTo`. But:
+- `alex-core` uses `excludeAgent` (applies to all EXCEPT coding-agent) — no `applyTo`
+- `ai-writing-avoidance` relies on Copilot's semantic matching — no `applyTo`
+
+Both are important instructions that fail fm=0 despite being well-designed.
+
+**spec (69/83 pass) — INVALID CRITERION**
+
+Penalizes `applyTo: "**"` as "too broad," but some instructions ARE legitimately always-on:
+- `emotional-intelligence` — unconscious behavior for ALL conversations
+- `terminal-command-safety` — safety rules for ALL terminal operations
+
+Scoring spec=0 for these is incorrect — they're correctly scoped.
+
+**skill (46/83 pass) — PARTIAL VALIDITY**
+
+Two issues:
+1. **Naming mismatch**: `code-review-guidelines.instructions.md` doesn't match `code-review` skill (skill=0, should be 1)
+2. **Standalone instructions**: Architecture permits instructions without matching skills:
+   - `emotional-intelligence` — behavioral pattern, no skill needed
+   - `terminal-command-safety` — safety rules, no skill needed
+   - `adversarial-oversight` — review protocol, no skill needed
+
+**Proposed Instruction Refinements**
+
+| Dimension | Current | Proposed |
+|-----------|---------|----------|
+| **fm** | Requires `applyTo` | Requires `description` AND (`applyTo` OR `excludeAgent`) |
+| **spec** | Penalizes `applyTo: "**"` | Skip specificity check; Copilot's semantic matching handles routing |
+| **skill** | Exact name match | Pattern match: `{instr-name}*.skills/` OR instruction has `standalone: true` frontmatter |
+
 ## See Also
 
 - [TRIFECTA-CATALOG.md](TRIFECTA-CATALOG.md) — Complete trifecta inventory
