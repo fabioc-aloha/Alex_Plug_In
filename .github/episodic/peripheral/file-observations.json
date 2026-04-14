@@ -1,25 +1,39 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "MCP-SERVERS.md"
+    "github/config/cognitive-config.json",
+    "CHANGELOG.md",
+    "package.json",
+    "platforms/vscode-extension/CHANGELOG.md",
+    "platforms/vscode-extension/package-lock.json",
+    "platforms/vscode-extension/package.json"
   ],
   "todoHotspots": [
     {
+      "file": "CHANGELOG.md",
+      "todoCount": 10,
+      "scannedAt": 1776135385876
+    },
+    {
+      "file": "platforms/vscode-extension/CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1776135385876
+    },
+    {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1776135021595
+      "scannedAt": 1776135385876
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1776135021595
+      "scannedAt": 1776135385876
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1776135021595
+      "scannedAt": 1776135385876
     }
   ],
-  "lastUpdated": 1776135021595
+  "lastUpdated": 1776135385876
 }

@@ -5,7 +5,7 @@
     "fs-extra": "^11.3.3",
     "replicate": "^1.4.0"
   },
-  "version": "7.7.2",
+  "version": "7.7.4",
   "devDependencies": {
     "js-yaml": "^4.1.1",
     "markdownlint": "^0.34.0"

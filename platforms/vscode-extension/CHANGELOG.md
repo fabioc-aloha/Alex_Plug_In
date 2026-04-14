@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.7.4] - 2026-04-13
+
+### Fixed
+
+- **Star emoji breaking skill index matching**: Removed `\u2b50` prefix from 9 entries in memory-activation index that caused brain-qa Phase 3 false errors
+- **Brain-qa heir regex**: Hardened Phase 3 skill-index regex to tolerate optional prefixes before skill names
+- **MCP server name**: Corrected `EnterpriseMCP` to `enterprise-mcp` (kebab-case) in docs
+
+---
+
 ## [7.7.3] - 2026-04-12
 
 ### Removed
