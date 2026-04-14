@@ -326,7 +326,6 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | debugging-patterns | 80 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ |
 | dependency-management | 314 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ |
 | dream-state-automation | 504 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ |
-| embedded-synapse | 156 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ |
 | extension-audit-methodology | 58 | 1 | 1 | 1 | 0 | 1 | 1 | 5/6 | ✓ |
 | gamma-presentation | 180 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ |
 | global-knowledge-curation | 148 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ |

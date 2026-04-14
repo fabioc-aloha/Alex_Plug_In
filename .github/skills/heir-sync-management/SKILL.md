@@ -418,14 +418,15 @@ After any skill rename:
 3. Run brain-qa Phase 1 to confirm clean
 4. Run brain-qa Phase 7 sync check to update heir copies
 
-> **Key insight**: If a skill is being *consolidated* (merged into another), also check that the consuming skill's synapse targets are updated to full `.github/skills/X/SKILL.md` paths — bare skill names ("markdown-mermaid") pass directory existence checks but fail Phase 33 pre-sync validation.
+> **Key insight**: If a skill is being *consolidated* (merged into another), verify the consuming skill's synapses.json is updated with correct paths.
 
 ---
 
-- [build-extension-package.ps1] (Critical, Implements, Bidirectional) - "Build script reads inheritance values"
-- [release-management.instructions.md] (High, Triggers, Forward) - "Release process includes heir curation"
-- [brain-qa/SKILL.md] (High, Validates, Forward) - "Health checks verify synapse integrity"
-- [.github/skills/persona-detection/SKILL.md] (High, Integrates, Backward) - "Persona detection ships to heir via inheritance model"
+**Related Files:**
+- `build-extension-package.ps1` - Build script reads inheritance values
+- `release-management.instructions.md` - Release process includes heir curation
+- `brain-qa/SKILL.md` - Health checks verify architecture integrity
+- `.github/skills/persona-detection/SKILL.md` - Persona detection ships to heir via inheritance model
 
 ---
 

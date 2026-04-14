@@ -60,7 +60,7 @@ During audit, verify that active scripts are _referenced by_ their trifecta file
 **NOT a trifecta candidate** — A file that:
 
 - Is a pure utility (e.g., `language-detection-patterns` — just pattern matching rules)
-- Is a reference document (e.g., `SYNAPSE-SCHEMA.md` — just a format spec)
+- Is a reference document (e.g., `coupling-metrics.instructions.md` — just technical patterns)
 - Is a policy document (e.g., `worldview-constitutional-ai` — ethical principles, not a workflow)
 - Has no user-facing invocation pattern
 
