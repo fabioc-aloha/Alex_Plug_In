@@ -338,6 +338,54 @@ The Intellectual/Agentic/Incomplete classification **is valid**:
 
 The type system correctly distinguishes capabilities. The scoring model's weakness is in the merit dimensions (struct), not the capability dimensions (tri, muscle).
 
+### Agent Scoring Validation (April 2026)
+
+Agents have 6 scoring dimensions: **fm** (frontmatter), **handoffs**, **hooks**, **bounds**, **persona**, **code**.
+
+| Agent | Score | fm | handoffs | hooks | bounds | persona | code | Human Assessment |
+|-------|------:|:--:|:--------:|:-----:|:------:|:-------:|:----:|------------------|
+| alex-azure | 3/6 | 1 | 1 | 0 | 1 | 0 | 0 | Good tool tables, clear guidance — works fine |
+| alex | 3/6 | 1 | 1 | 0 | 1 | 0 | 0 | Full cognitive architecture, commands — core agent! |
+| alex-backend | 5/6 | 1 | 1 | 0 | 1 | 1 | 1 | Has `## Mental Model`, code examples |
+| alex-builder | 6/6 | 1 | 1 | 1 | 1 | 1 | 1 | Has hooks, mental model, mermaid |
+
+**Distribution**: 12 agents | 3 failing (3/6) | 6 passing (5/6) | 3 perfect (6/6)
+
+#### Agent Criterion Validity
+
+| Dimension | Pass Rate | Issue Identified | Validity |
+|-----------|----------:|------------------|----------|
+| **fm** | 12/12 | None | ✓ Valid |
+| **handoffs** | 12/12 | None | ✓ Valid |
+| **hooks** | 3/12 | Legitimate — most agents don't need PostToolUse hooks | ⚠ Misleading |
+| **bounds** | 12/12 | All within 50-400 lines | ✓ Valid |
+| **persona** | 9/12 | Requires specific headers (`## Mental Model`, `## Mindset`, etc.) | ⚠ Partial |
+| **code** | 9/12 | Correctly identifies code examples | ✓ Valid |
+
+#### Analysis
+
+**persona (9/12 pass) — PARTIAL VALIDITY**
+
+The criterion checks for headers matching:
+- `## Mental Model`
+- `## When to Use`
+- `## Persona`
+- `## Mindset`
+- `## Core Directive`
+
+The main `alex` agent has `## Core Identity` which serves the same purpose but doesn't match the pattern. This is a naming convention issue, not a quality issue.
+
+**hooks (3/12 pass) — MISLEADING CRITERION**
+
+Only 3 agents (alex-builder, alex-researcher, alex-validator) have hooks. The other 9 score 0, but this isn't a defect — most agents don't need `PostToolUse` automation. The criterion confuses "capability present" with "capability needed."
+
+**Proposed Agent Refinements**
+
+| Dimension | Current | Proposed |
+|-----------|---------|----------|
+| **persona** | Match specific header names | Match `## Core` OR `## Mental` OR `## Persona` OR `## Identity` |
+| **hooks** | Scored as defect if missing | Only score if agent performs file operations (Builder, Validator) |
+
 ## See Also
 
 - [TRIFECTA-CATALOG.md](TRIFECTA-CATALOG.md) — Complete trifecta inventory
