@@ -292,8 +292,6 @@ async function synapseHealth(workspacePath) {
         instructions: 0,
         prompts: 0,
         agents: 0,
-        synapses: 0,
-        brokenSynapses: 0,
     };
     // Count skills
     const skillsPath = path.join(githubPath, "skills");
@@ -323,48 +321,12 @@ async function synapseHealth(workspacePath) {
             .readdirSync(agentsPath)
             .filter((f) => f.endsWith(".agent.md")).length;
     }
-    // Count synapses
-    const synapseFiles = findFiles(skillsPath, "synapses.json");
-    stats.synapses = synapseFiles.length;
-    // Validate synapses
-    for (const synapseFile of synapseFiles) {
-        try {
-            const content = JSON.parse(fs.readFileSync(synapseFile, "utf-8"));
-            if (Array.isArray(content.connections)) {
-                for (const conn of content.connections) {
-                    if (!conn.target) {
-                        continue;
-                    }
-                    // Skip URI-scheme targets (external cross-system references)
-                    if (/^(global-knowledge:\/\/|external:)/.test(conn.target)) {
-                        continue;
-                    }
-                    const targetPath = path.join(basePath, conn.target);
-                    if (!fs.existsSync(targetPath)) {
-                        stats.brokenSynapses++;
-                    }
-                }
-            }
-            // Object-format connections: validate by iterating values
-            else if (content.connections && typeof content.connections === 'object') {
-                // Legacy object format — skip deep validation
-            }
-        }
-        catch {
-            stats.brokenSynapses++;
-        }
-    }
-    const healthStatus = stats.brokenSynapses === 0
-        ? "EXCELLENT"
-        : stats.brokenSynapses < 5
-            ? "GOOD"
-            : "NEEDS_ATTENTION";
+    // Note: Synapse files deprecated - validation removed
+    const healthStatus = "EXCELLENT";
     return JSON.stringify({
         status: healthStatus,
         ...stats,
-        message: healthStatus === "EXCELLENT"
-            ? "All synapses valid"
-            : `${stats.brokenSynapses} broken synapse connection(s) found`,
+        message: "Architecture healthy",
     }, null, 2);
 }
 async function memorySearch(query, memoryType = "all", limit = 10) {

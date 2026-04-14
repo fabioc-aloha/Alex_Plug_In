@@ -2,6 +2,7 @@
 name: "markdown-mermaid"
 description: "Clear documentation through visual excellence"
 tier: standard
+applyTo: '**/*.md,**/*mermaid*,**/*diagram*'
 ---
 
 # Markdown & Mermaid

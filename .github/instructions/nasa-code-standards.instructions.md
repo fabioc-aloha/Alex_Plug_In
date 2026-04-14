@@ -12,15 +12,6 @@ When the user's project is **mission-critical**, apply these standards rigorousl
 
 ---
 
-## Synapses
-
-- [.github/agents/alex-builder.agent.md] → (Critical, Implements, Bidirectional) - "Builder applies NASA rules during code generation"
-- [.github/instructions/code-review-guidelines.instructions.md] → (High, Informs, Forward) - "Reviews check NASA compliance for mission-critical code"
-- [.github/instructions/heir-project-improvement.instructions.md] → (High, Informs, Forward) - "Heir projects inherit NASA checklist for mission-critical work"
-- [.github/instructions/testing-strategies.instructions.md] → (Medium, Complements, Forward) - "Testing validates rule compliance"
-
----
-
 ## The Rules
 
 ### Rule 1: Bounded Control Flow

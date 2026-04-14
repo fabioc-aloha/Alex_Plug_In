@@ -11,16 +11,6 @@ applyTo: "**/quality-gate*,**/scripts/quality*,**/*prepublish*,**/package.json"
 
 ---
 
-## Synapses
-
-- [.github/instructions/release-management.instructions.md] (Critical, Implements, Bidirectional) - "Quality gates enforce release management rules automatically"
-- [.github/instructions/testing-strategies.instructions.md] (High, Extends, Bidirectional) - "Quality gates are the static analysis complement to behavioral tests"
-- [.github/instructions/vscode-extension-patterns.instructions.md] (High, Validates, Forward) - "Ensures extension packaging follows VS Code patterns"
-- [.github/instructions/extension-audit-methodology.instructions.md] (Medium, Complements, Forward) - "Audit findings become new quality gates"
-- [.github/instructions/cognitive-health-validation.instructions.md] (High, Validates, Bidirectional) - "Brain-QA 35-phase validation as pre-publish deep audit gate (v5.9.10 meditation insight)"
-
----
-
 ## Purpose
 
 Prevent regressions by encoding quality checks into the build pipeline so packaging **fails automatically** when invariants are violated. Manual checklists supplement but never replace automated gates.

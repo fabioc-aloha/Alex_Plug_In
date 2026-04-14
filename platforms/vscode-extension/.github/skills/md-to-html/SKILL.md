@@ -2,7 +2,8 @@
 name: "md-to-html"
 description: "Convert Markdown to standalone HTML pages with embedded CSS, images, and Mermaid diagrams"
 tier: standard
-version: "1.0.0"
+applyTo: '**/*md-to-html*,**/*convert*html*'
+muscle: .github/muscles/md-to-html.cjs
 ---
 
 # Markdown to HTML Conversion

@@ -63,9 +63,3 @@
 ## Health Status: EXCELLENT
 
 Architecture is in optimal condition. All systems functioning well.
-
-## Synapses
-- [.github/instructions/self-actualization.instructions.md] - Protocol source
-- [.github/instructions/dream-state-automation.instructions.md] - Dream integration
-- [.github/skills/architecture-health/SKILL.md] - Health assessment patterns
-- [alex_docs/alex3/states/STATE-DREAM.png] - New dream state asset

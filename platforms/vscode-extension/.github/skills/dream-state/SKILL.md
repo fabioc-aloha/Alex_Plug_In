@@ -2,6 +2,7 @@
 name: "dream-state"
 description: "Neural maintenance, synapse validation, automated health diagnostics, and unconscious processing"
 tier: standard
+applyTo: '**/*dream*,**/*synapse*,**/*maintenance*'
 disable-model-invocation: true
 ---
 

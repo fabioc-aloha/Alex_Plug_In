@@ -67,13 +67,6 @@ export async function createGlobalPattern(
 ---
 
 ${content}
-
----
-
-## Synapses
-
-*Add cross-references to related knowledge files here*
-
 `;
 
   await fs.writeFile(filePath, fileContent, "utf-8");
@@ -133,13 +126,6 @@ export async function updateGlobalPattern(
 ---
 
 ${newContent}
-
----
-
-## Synapses
-
-*Add cross-references to related knowledge files here*
-
 `;
 
   await fs.writeFile(filePath, fileContent, "utf-8");
@@ -481,14 +467,7 @@ export async function evaluateDKFile(
     ? titleMatch[1]
     : filename.replace(/^DK-/, "").replace(/-/g, " ");
 
-  // Check for synapses section with actual connections
-  const { SYNAPSE_REGEX } = await import("../shared/constants");
-  const synapseRegex = new RegExp(SYNAPSE_REGEX.source, SYNAPSE_REGEX.flags);
-  const synapseMatches = content.match(synapseRegex);
-  if (synapseMatches && synapseMatches.length > 0) {
-    score += 3;
-    reasons.push(`Has ${synapseMatches.length} synapse connection(s)`);
-  }
+  // Note: Synapse scoring removed in v7.8 — embedded synapses deprecated
 
   // Check for clear structure (multiple H2 sections)
   const h2Sections = content.match(/^##\s+.+$/gm);

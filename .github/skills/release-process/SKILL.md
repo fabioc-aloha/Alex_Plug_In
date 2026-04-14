@@ -2,6 +2,7 @@
 name: release-process
 description: Complete release automation for VS Code Marketplace publishing
 tier: standard
+applyTo: '**/*release*,**/*publish*,**/*.vsix,**/CHANGELOG*'
 disable-model-invocation: true
 ---
 

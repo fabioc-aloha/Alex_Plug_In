@@ -11,7 +11,6 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import {
-  SYNAPSE_REGEX,
   VERSION_EXTRACT_REGEX,
   VERSION_NUMBER_REGEX,
 } from "./constants";
@@ -567,16 +566,8 @@ export function getLanguageIdFromPath(filePath: string): string {
   return extMap[ext] || "text";
 }
 
-/**
- * Create a fresh RegExp instance from SYNAPSE_REGEX for scanning.
- *
- * Because RegExp with the `g` flag is stateful (tracks lastIndex),
- * each scan site must use its own instance to avoid cross-contamination.
- * Import this instead of re-declaring the pattern.
- */
-export function createSynapseRegex(): RegExp {
-  return new RegExp(SYNAPSE_REGEX.source, SYNAPSE_REGEX.flags);
-}
+// Note: createSynapseRegex removed in v7.8 - embedded synapse sections have been deprecated
+// The cognitive architecture no longer uses markdown synapse declarations
 
 /**
  * Open the Copilot Agent/Chat panel with fallback.

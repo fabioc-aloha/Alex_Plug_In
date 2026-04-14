@@ -278,70 +278,16 @@ export class CrossDomainSynthesisTool implements vscode.LanguageModelTool<ICross
 
   /**
    * Build adjacency matrix of existing synapse connections between skill domains.
-   * Reads all synapses.json files and maps source->target skill domains.
+   * Note: Synapse connections removed - now returns empty matrix.
+   * Cross-domain synthesis now based purely on episodic memory overlap.
    */
   private async buildSynapseMatrix(
-    rootPath: string,
-    token: vscode.CancellationToken,
+    _rootPath: string,
+    _token: vscode.CancellationToken,
   ): Promise<Map<string, number>> {
-    const matrix = new Map<string, number>();
-    const skillsDir = path.join(rootPath, ".github", "skills");
-    if (!(await workspaceFs.pathExists(skillsDir))) {
-      return matrix;
-    }
-
-    const skillDirs = await workspaceFs.readDirectory(skillsDir);
-    for (const [dirName, type] of skillDirs) {
-      if (token.isCancellationRequested) {
-        break;
-      }
-      if (type !== vscode.FileType.Directory) {
-        continue;
-      }
-
-      const synapsePath = path.join(skillsDir, dirName, "synapses.json");
-      if (!(await workspaceFs.pathExists(synapsePath))) {
-        continue;
-      }
-
-      try {
-        const content = await workspaceFs.readFile(synapsePath);
-        const data = JSON.parse(content);
-        if (!Array.isArray(data.connections)) {
-          continue;
-        }
-
-        // Classify source skill domain from the skill name
-        const sourceDomains = this.classifyDomains(dirName.replace(/-/g, " "));
-
-        for (const conn of data.connections) {
-          if (!conn.target || typeof conn.target !== "string") {
-            continue;
-          }
-          // Extract target skill name from path
-          const targetMatch = conn.target.match(/skills\/([^/]+)\//);
-          if (!targetMatch) {
-            continue;
-          }
-          const targetDomains = this.classifyDomains(
-            targetMatch[1].replace(/-/g, " "),
-          );
-
-          // Record cross-domain connections
-          for (const sd of sourceDomains) {
-            for (const td of targetDomains) {
-              if (sd !== td) {
-                const key = [sd, td].sort().join("|");
-                matrix.set(key, (matrix.get(key) || 0) + 1);
-              }
-            }
-          }
-        }
-      } catch {
-        // Skip invalid JSON
-      }
-    }
-    return matrix;
+    // Synapse connections removed - return empty matrix
+    // Cross-domain synthesis now relies on episodic memory analysis
+    return new Map<string, number>();
   }
 
   /**

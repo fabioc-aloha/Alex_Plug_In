@@ -9,7 +9,6 @@ import * as vscode from "vscode";
 import * as fs from "fs-extra";
 import * as path from "path";
 import { getAlexWorkspaceFolder } from "../shared/utils";
-import { normalizeAllSynapses } from "./upgradeSynapseNormalization";
 import type { MigrationCandidate, LegacyDetection } from "./upgrade";
 
 /**
@@ -181,29 +180,6 @@ async function executeMigrationItems(
         await fs.ensureDir(path.dirname(dest));
         await fs.copy(src, dest, { overwrite: true });
 
-        // For DK → skill migration, create a minimal synapses.json if it doesn't exist
-        if (
-          arrowMatch &&
-          dest.endsWith("SKILL.md") &&
-          dest.replace(/\\/g, "/").includes(".github/skills/")
-        ) {
-          const skillDir = path.dirname(dest);
-          const synapsesPath = path.join(skillDir, "synapses.json");
-          if (!(await fs.pathExists(synapsesPath))) {
-            const skillName = path.basename(skillDir);
-            const minimalSynapses = {
-              $schema: "../SYNAPSE-SCHEMA.json",
-              skillId: skillName,
-              version: "1.0.0",
-              lastUpdated: new Date().toISOString().split("T")[0],
-              connections: [],
-              activationContexts: [],
-              notes: `Migrated from DK file: ${path.basename(arrowMatch[1].trim())}`,
-            };
-            await fs.writeJson(synapsesPath, minimalSynapses, { spaces: 2 });
-          }
-        }
-
         migrated.push(item);
       } else {
         errors.push(`Not found: ${item}`);
@@ -212,16 +188,6 @@ async function executeMigrationItems(
       errors.push(
         `${item}: ${err instanceof Error ? err.message : String(err)}`,
       );
-    }
-  }
-
-  // Normalize synapses for all migrated skills
-  progress.report({ message: "Normalizing synapses..." });
-  const skillsDir = path.join(rootPath, ".github", "skills");
-  if (await fs.pathExists(skillsDir)) {
-    const synapseResult = await normalizeAllSynapses(skillsDir);
-    if (synapseResult.normalized > 0) {
-      migrated.push(`(${synapseResult.normalized} synapse files normalized)`);
     }
   }
 

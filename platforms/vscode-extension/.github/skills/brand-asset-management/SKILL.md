@@ -2,6 +2,7 @@
 name: "brand-asset-management"
 description: "Brand hierarchy, visual identity, asset deployment, platform-specific branding guidelines"
 tier: standard
+applyTo: '**/*brand*,**/*asset*,**/*logo*,**/*identity*'
 ---
 
 # Brand Asset Management Skill

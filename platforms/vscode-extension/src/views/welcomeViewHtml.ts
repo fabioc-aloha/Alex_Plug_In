@@ -62,7 +62,6 @@ export interface SkillInfo {
   displayName: string;
   description: string;
   category: string;
-  hasSynapses: boolean;
 }
 
 /**

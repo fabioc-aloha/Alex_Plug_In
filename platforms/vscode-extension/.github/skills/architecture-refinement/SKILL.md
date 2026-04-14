@@ -1,9 +1,8 @@
 ---
 name: architecture-refinement
-description: >-
+description: "Meta-skill for maintaining and evolving Alex's cognitive architecture through deliberate documentation and pattern extraction."
 tier: standard
-  Meta-skill for maintaining and evolving Alex's cognitive architecture through deliberate documentation and pattern
-  extraction.
+applyTo: '**/*refine*,**/*evolve*,**/*architecture*,**/*meta*'
 ---
 
 # Architecture Refinement Skill

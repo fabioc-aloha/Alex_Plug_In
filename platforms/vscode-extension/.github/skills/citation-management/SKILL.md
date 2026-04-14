@@ -2,6 +2,7 @@
 name: citation-management
 description: APA 7th formatting, citation integration, reference validation, and bibliography generation
 tier: extended
+applyTo: '**/*citation*,**/*apa*,**/*reference*,**/*bibliography*'
 ---
 
 # Skill: Citation Management

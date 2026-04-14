@@ -2,6 +2,7 @@
 name: ai-agent-design
 description: '**Domain**: AI/ML Architecture'
 tier: standard
+applyTo: '**/*agent*,**/*ai-agent*,**/*orchestrat*,**/*multi-agent*'
 ---
 
 # AI Agent Design Skill

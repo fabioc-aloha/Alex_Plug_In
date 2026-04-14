@@ -167,19 +167,22 @@ export function collectSkills(wsRoot: string | undefined): SkillInfo[] {
     });
 
     for (const dir of dirs) {
-      const synapsePath = path.join(skillsDir, dir, "synapses.json");
+      const skillMdPath = path.join(skillsDir, dir, "SKILL.md");
       let description = "";
-      let category = "general";
+      const category = "general";
 
-      // Read description from synapses.json if available
-      if (fs.existsSync(synapsePath)) {
-        try {
-          const synapses = JSON.parse(fs.readFileSync(synapsePath, "utf8"));
-          description = synapses.description || "";
-          category = synapses.category || "general";
-        } catch {
-          /* skip */
+      // Read description from SKILL.md frontmatter
+      try {
+        const skillContent = fs.readFileSync(skillMdPath, "utf8");
+        const fmMatch = skillContent.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        if (fmMatch) {
+          const descMatch = fmMatch[1].match(/^description:\s*["']?(.+?)["']?\s*$/m);
+          if (descMatch) {
+            description = descMatch[1];
+          }
         }
+      } catch {
+        /* skip */
       }
 
       skills.push({
@@ -190,7 +193,6 @@ export function collectSkills(wsRoot: string | undefined): SkillInfo[] {
           .join(" "),
         description,
         category,
-        hasSynapses: fs.existsSync(synapsePath),
       });
     }
   } catch (err) {

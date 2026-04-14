@@ -2,6 +2,7 @@
 name: research-project-scaffold
 description: Scaffolding academic research projects and refactoring existing ones for Alex-assisted workflows
 tier: extended
+applyTo: '**/*research*,**/*academic*,**/*scaffold*'
 ---
 
 # Research Project Scaffold Skill

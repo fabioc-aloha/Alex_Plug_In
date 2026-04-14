@@ -5,14 +5,6 @@ applyTo: "**/*package*.json,**/requirements*.txt,**/Cargo.toml,**/go.mod,**/pom.
 
 # Dependency Management Procedural Memory
 
-
----
-
-## Synapses
-
-- [.github/instructions/technical-debt-tracking.instructions.md] → (Medium, Feeds, Forward) - "Outdated deps are technical debt"
-- [CHANGELOG.md] → (Medium, Documents, Forward) - "Dependency changes should be logged"
-
 ---
 
 ## Regular Audit Schedule

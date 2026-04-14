@@ -2,7 +2,8 @@
 name: "docx-to-md"
 description: "Convert Word documents (.docx) to clean Markdown with image extraction and pandoc cleanup"
 tier: extended
-version: "1.0.0"
+applyTo: '**/*.docx,**/*word*,**/*docx*'
+muscle: .github/muscles/docx-to-md.cjs
 ---
 
 # Word to Markdown Conversion

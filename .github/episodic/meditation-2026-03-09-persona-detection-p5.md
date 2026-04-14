@@ -29,13 +29,6 @@ Added `copilot-instructions.md` `Persona:` field as Priority 5 in the persona de
 | .github/prompts/northstar.prompt.md | Modified | Step 4 includes Persona: setting |
 | .github/instructions/north-star.instructions.md | Modified | Persona field definition added, step 5 updated |
 
-## Synapses
-
-- [.github/skills/persona-detection/SKILL.md] (Critical, Implements, Bidirectional) — "P5 copilot-instructions detection added to chain"
-- [.github/skills/north-star/SKILL.md] (High, Enriches, Forward) — "North Star protocol now includes Persona: in setup"
-- [.github/instructions/north-star.instructions.md] (High, Updates, Forward) — "Persona field definition added to Active Context fields"
-- [.github/instructions/meditation.instructions.md] (Critical, Implements, Bidirectional) — "Standard meditation protocol"
-
 ## Validation
 
 ✓ Memory File: .github/episodic/meditation-2026-03-09-persona-detection-p5.md — created

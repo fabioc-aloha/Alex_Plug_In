@@ -2,6 +2,7 @@
 name: "status-reporting"
 description: "Create stakeholder-friendly project status updates and progress reports"
 tier: standard
+applyTo: '**/*status*,**/*report*,**/*update*'
 ---
 
 # Status Reporting Skill

@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as workspaceFs from "../../shared/workspaceFs";
-import { createSynapseRegex } from "../../shared/utils";
 import { ISelfActualizationParams } from "./types";
 
 /**
@@ -26,7 +25,7 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
         message: new vscode.MarkdownString(
           `Run comprehensive self-assessment of Alex cognitive architecture?\n\n` +
             `This will:\n` +
-            `- Validate all synaptic connections\n` +
+            `- Validate architecture file counts\n` +
             `- Check version consistency across memory files\n` +
             `- Assess memory architecture balance\n` +
             `- Generate improvement recommendations\n` +
@@ -80,8 +79,8 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
       timestamp: new Date().toISOString(),
       synapseHealth: {
         totalFiles: 0,
-        totalSynapses: 0,
-        brokenConnections: 0,
+        totalSynapses: 0, // Deprecated
+        brokenConnections: 0, // Deprecated
         healthStatus: "UNKNOWN",
       },
       versionConsistency: {
@@ -97,134 +96,36 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
       recommendations: [] as string[],
     };
 
-    // Phase 1: Scan synapse health
-    const synapsePatterns = [
-      ".github/copilot-instructions.md",
+    // Phase 1: Count architecture files
+    const archPatterns = [
       ".github/instructions/*.md",
       ".github/prompts/*.md",
       ".github/episodic/*.md",
       ".github/skills/*/SKILL.md",
-      ".github/domain-knowledge/*.md", // Legacy
     ];
 
-    // Create fresh regex instance to avoid state leakage
-    const synapseRegex = createSynapseRegex();
-
-    for (const pattern of synapsePatterns) {
-      // Check for cancellation
-      if (token.isCancellationRequested) {
-        return new vscode.LanguageModelToolResult([
-          new vscode.LanguageModelTextPart("Self-actualization cancelled."),
-        ]);
-      }
-
-      const relativePattern = new vscode.RelativePattern(
-        workspaceFolders[0],
-        pattern,
-      );
-      const files = await vscode.workspace.findFiles(relativePattern);
-
-      for (const file of files) {
-        // Check for cancellation before processing each file
-        if (token.isCancellationRequested) {
-          return new vscode.LanguageModelToolResult([
-            new vscode.LanguageModelTextPart("Self-actualization cancelled."),
-          ]);
-        }
-        report.synapseHealth.totalFiles++;
-        try {
-          const content = await workspaceFs.readFile(file.fsPath);
-          const lines = content.replace(/\r\n/g, "\n").split("\n");
-
-          let inCodeBlock = false;
-          for (const line of lines) {
-            if (line.trim().startsWith("```")) {
-              inCodeBlock = !inCodeBlock;
-              continue;
-            }
-            if (inCodeBlock) {
-              continue;
-            }
-
-            let match;
-            while ((match = synapseRegex.exec(line)) !== null) {
-              report.synapseHealth.totalSynapses++;
-              const targetName = match[1].trim();
-
-              const found = await vscode.workspace.findFiles(
-                new vscode.RelativePattern(
-                  workspaceFolders[0],
-                  `**/${targetName}`,
-                ),
-              );
-
-              if (found.length === 0) {
-                report.synapseHealth.brokenConnections++;
-              }
-            }
-          }
-        } catch {
-          // Skip unreadable files
-        }
-      }
+    // Check for cancellation
+    if (token.isCancellationRequested) {
+      return new vscode.LanguageModelToolResult([
+        new vscode.LanguageModelTextPart("Self-actualization cancelled."),
+      ]);
     }
 
-    // Determine health status
-    report.synapseHealth.healthStatus =
-      report.synapseHealth.brokenConnections === 0
-        ? "EXCELLENT"
-        : report.synapseHealth.brokenConnections < 5
-          ? "GOOD"
-          : report.synapseHealth.brokenConnections < 10
-            ? "NEEDS ATTENTION"
-            : "CRITICAL";
-
-    // Phase 1b: Validate synapses.json connection targets
-    const synapseJsonFiles = await vscode.workspace.findFiles(
-      new vscode.RelativePattern(
-        workspaceFolders[0],
-        ".github/skills/*/synapses.json",
-      ),
-      null,
-      500,
-    );
-    for (const sjFile of synapseJsonFiles) {
-      if (token.isCancellationRequested) {
-        break;
-      }
-      try {
-        const sjContent = await workspaceFs.readFile(sjFile.fsPath);
-        const sjData = JSON.parse(sjContent);
-        if (Array.isArray(sjData.connections)) {
-          for (const conn of sjData.connections) {
-            if (!conn.target) {
-              continue;
-            }
-            // Skip URI-scheme targets (cross-system references)
-            if (/^(global-knowledge:\/\/|external:)/.test(conn.target)) {
-              continue;
-            }
-            report.synapseHealth.totalSynapses++;
-            const targetFullPath = path.join(rootPath, conn.target);
-            if (!(await workspaceFs.pathExists(targetFullPath))) {
-              report.synapseHealth.brokenConnections++;
-            }
-          }
-        }
-      } catch {
-        // Invalid JSON — already counted by other checks
-      }
+    let totalArchFiles = 0;
+    for (const pattern of archPatterns) {
+      const relativePattern = new vscode.RelativePattern(workspaceFolders[0], pattern);
+      const files = await vscode.workspace.findFiles(relativePattern, null, 500);
+      totalArchFiles += files.length;
     }
+    report.synapseHealth.totalFiles = totalArchFiles;
 
-    // Re-evaluate health after JSON synapse scan
+    // Determine health status based on file count
     report.synapseHealth.healthStatus =
-      report.synapseHealth.brokenConnections === 0
-        ? "EXCELLENT"
-        : report.synapseHealth.brokenConnections < 5
-          ? "GOOD"
-          : report.synapseHealth.brokenConnections < 10
-            ? "NEEDS ATTENTION"
-            : "CRITICAL";
+      totalArchFiles >= 50 ? "EXCELLENT" :
+      totalArchFiles >= 20 ? "GOOD" :
+      totalArchFiles >= 5 ? "NEEDS ATTENTION" : "MINIMAL";
+
+    // Note: synapse scanning removed in v7.8 — embedded synapses deprecated
 
     // Phase 2: Count memory files
     const instructionFiles = await vscode.workspace.findFiles(
@@ -259,12 +160,6 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
     report.memoryArchitecture.skillCount = skillFiles.length;
 
     // Phase 3: Generate recommendations
-    if (report.synapseHealth.brokenConnections > 0) {
-      report.recommendations.push(
-        `Run \`Alex: Dream (Neural Maintenance)\` to repair ${report.synapseHealth.brokenConnections} broken synapse(s)`,
-      );
-    }
-
     if (report.memoryArchitecture.skillCount < 3) {
       report.recommendations.push(
         `Consider building more skills - only ${report.memoryArchitecture.skillCount} skill(s) present`,
@@ -305,13 +200,11 @@ export class SelfActualizationTool implements vscode.LanguageModelTool<ISelfActu
 
 ---
 
-## 🧠 Synapse Health
+## 🧠 Architecture Health
 
 | Metric | Value |
 |--------|-------|
-| Memory Files | ${report.synapseHealth.totalFiles} |
-| Total Synapses | ${report.synapseHealth.totalSynapses} |
-| Broken Connections | ${report.synapseHealth.brokenConnections} |
+| Architecture Files | ${report.synapseHealth.totalFiles} |
 | Health Status | ${healthEmoji} ${report.synapseHealth.healthStatus} |
 
 ## 📊 Memory Architecture
@@ -346,13 +239,11 @@ ${report.recommendations.length > 0 ? report.recommendations.map((r) => `- ${r}`
 
     let result = `## Self-Actualization Report
 
-### Synapse Health ${healthEmoji}
+### Architecture Health ${healthEmoji}
 
 | Metric | Value |
 |--------|-------|
-| Memory Files | ${report.synapseHealth.totalFiles} |
-| Total Synapses | ${report.synapseHealth.totalSynapses} |
-| Broken Connections | ${report.synapseHealth.brokenConnections} |
+| Architecture Files | ${report.synapseHealth.totalFiles} |
 | Health Status | ${report.synapseHealth.healthStatus} |
 
 ### Memory Architecture

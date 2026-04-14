@@ -11,19 +11,6 @@ inheritance: master-only
 
 ---
 
-## Synapses
-
-- [.github/instructions/self-actualization.instructions.md] (High, Integrates, Bidirectional) - "Self-actualization triggers trifecta audit for architecture assessment"
-- [.github/instructions/meditation.instructions.md] (High, Uses, Forward) - "Meditation may create missing trifecta components"
-- [.github/instructions/dream-state-automation.instructions.md] (Medium, Validates, Forward) - "Dream validates synapse health of trifecta components"
-- [.github/instructions/skill-selection-optimization.instructions.md] (Medium, Enables, Forward) - "SSO depends on complete trifecta for accurate dependency analysis"
-- [.github/skills/brain-qa/SKILL.md] (High, Extends, Bidirectional) - "Trifecta audit extends architecture health beyond synapse validation"
-- [.github/skills/brain-qa/SKILL.md] (High, Extends, Bidirectional) - "Brain QA validates structure; trifecta audit validates purpose"
-- [.github/instructions/heir-project-improvement.instructions.md] (High, Implements, Forward) - "Heir improvement applies trifecta audit to heir-specific capabilities"
-- [.github/skills/brain-qa/SKILL.md] (Critical, Generates, Forward) - "Audit results validated via brain-qa"
-
----
-
 ## The Trifecta Model
 
 A capability is **architecturally complete** when it exists in all three memory systems:

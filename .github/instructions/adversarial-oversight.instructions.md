@@ -5,19 +5,6 @@ applyTo: "**/*review*,**/*audit*,**/*release*,**/*qa*,**/*validation*"
 
 # Adversarial Oversight Protocol
 
-
----
-
-## Synapses
-
-- [.github/agents/alex-validator.agent.md] → (Critical, Executes, Required) - "Validator agent performs adversarial review"
-- [.github/instructions/code-review-guidelines.instructions.md] → (High, Implements, Forward) - "Code review follows adversarial checklist"
-- [.github/instructions/release-management.instructions.md] → (Critical, Gates, Bidirectional) - "Releases require validation gate"
-- [.github/instructions/heir-skill-promotion.instructions.md] → (High, Gates, Bidirectional) - "Skills require promotion readiness validation"
-- [.github/instructions/architecture-decision-records.instructions.md] → (Medium, Triggers, Forward) - "Major changes need ADR + validation"
-- [.github/instructions/empirical-validation.instructions.md] → (High, Strengthens, Bidirectional) - "Evidence-based validation methodology"
-- [.github/agents/alex-builder.agent.md] → (High, Handoff, Bidirectional) - "Builder → Validator workflow"
-
 ---
 
 ## Core Principle

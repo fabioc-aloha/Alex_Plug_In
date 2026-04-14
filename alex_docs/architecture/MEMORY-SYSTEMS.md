@@ -139,22 +139,6 @@ When to use this procedure
 2. Second step
 3. ...
 
-## Synapses
-- [related-file.md] (Strength, Type, Direction) - "Description"
-```
-
-### Examples
-
-**Table 2:** *Procedural Memory Examples*
-
-| File                                     | Purpose                       |
-| ---------------------------------------- | ----------------------------- |
-| `dream-state-automation.instructions.md` | Neural maintenance protocol   |
-| `release-management.instructions.md`     | How to publish releases       |
-| `bootstrap-learning.instructions.md`     | Knowledge acquisition process |
-
----
-
 ## Episodic Memory
 
 ### Purpose
@@ -189,40 +173,6 @@ Details of what happened
 
 ## Insights
 Key learnings from this session
-
-## Synapses
-- [related-file.md] (Strength, Type, Direction) - "Description"
-```
-
-### Examples
-
-**Table 3:** *Episodic Memory Examples*
-
-| File                                     | Purpose                    |
-| ---------------------------------------- | -------------------------- |
-| `unified-meditation-protocols.prompt.md` | How to run meditation      |
-| `meditation-2026-01-24.prompt.md`        | Record of a meditation     |
-| `dream-report-*.md`                      | Neural maintenance reports |
-
-### Session Records (v7.2.0+)
-
-The extension also maintains session-aware episodic records at `~/.alex/episodic/sessions.json`. Each `EpisodicRecord` contains:
-
-| Field            | Type       | Purpose                                             |
-| ---------------- | ---------- | --------------------------------------------------- |
-| `id`             | `string`   | Unique record identifier                            |
-| `timestamp`      | `string`   | ISO date of the session                             |
-| `type`           | `string`   | Session type (meditation, dream, chat, etc.)        |
-| `summary`        | `string`   | Brief description of what happened                  |
-| `chatSessionId`  | `string?`  | VS Code chat session ID for cross-referencing       |
-| `sessionName`    | `string?`  | Auto-generated name from topic and inferred tags    |
-| `referencedUrls` | `string[]` | URLs tracked via browser context during the session |
-| `tags`           | `string[]` | Categorization tags                                 |
-| `synapseWeight`  | `number`   | Relevance score for retrieval                       |
-
-The `chatSessionId` enables lookup across sessions. `referencedUrls` links browser context (web pages viewed during the session) to the episodic record for future recall.
-
----
 
 ## Skills (Domain Knowledge)
 
@@ -270,24 +220,6 @@ Details...
 ## Best Practices
 - Practice 1
 - Practice 2
-
-## Synapses
-- [related-file.md] (Strength, Type, Direction) - "Description"
-```
-
-**synapses.json** - Machine-readable connections (optional)
-
-### Naming Convention
-
-Folders use kebab-case: `skill-topic-name/`
-
-Examples:
-
-- `api-design/SKILL.md`
-- `react-hooks/SKILL.md`
-- `testing-strategies/SKILL.md`
-
----
 
 ## Visual Memory (Embedded Media)
 
@@ -477,29 +409,6 @@ Memory files are connected via synapses:
 ### Synapse Format
 
 ```markdown
-## Synapses
-
-- [target-file.md] (Strength, Type, Direction) - "Description"
-```
-
-**Strength levels:** Critical, High, Medium, Low
-
-**Relationship types:** Defines, Enables, References, Validates, Implements
-
-**Directions:** Bidirectional, Forward, Backward
-
-### Example
-
-```markdown
-## Synapses
-
-- [bootstrap-learning.instructions.md] (Critical, Enables, Bidirectional) - "Learning protocol"
-- [meditation/SKILL.md] (High, References, Forward) - "Consolidation theory"
-- [meditation-session.prompt.md] (Medium, Validates, Backward) - "Session record"
-```
-
----
-
 ## Memory Capacity Guidelines
 
 | Memory Type      | Recommended Max   | Reason              |

@@ -87,32 +87,6 @@ How to implement this pattern.
 
 Code examples showing the pattern.
 
-## Synapses
-
-*Cross-references to related knowledge*
-```
-
-### Insights (GI-*)
-
-**Specific learnings** captured at a moment in time:
-
-- Timestamped
-- Often from debugging or problem-solving
-- Example: "React useEffect runs cleanup before next effect"
-
-Insight file structure:
-
-```markdown
-# Insight Title
-
-**ID**: GI-insight-slug-date
-**Category**: category-name
-**Tags**: tag1, tag2, tag3
-**Source Project**: project-name
-**Date**: ISO timestamp
-
----
-
 ## Context
 
 What problem you were solving.

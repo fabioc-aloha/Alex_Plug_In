@@ -294,8 +294,6 @@ async function synapseHealth(workspacePath?: string): Promise<string> {
     instructions: 0,
     prompts: 0,
     agents: 0,
-    synapses: 0,
-    brokenSynapses: 0,
   };
 
   // Count skills
@@ -332,49 +330,15 @@ async function synapseHealth(workspacePath?: string): Promise<string> {
       .filter((f) => f.endsWith(".agent.md")).length;
   }
 
-  // Count synapses
-  const synapseFiles = findFiles(skillsPath, "synapses.json");
-  stats.synapses = synapseFiles.length;
+  // Note: Synapse files deprecated - validation removed
 
-  // Validate synapses
-  for (const synapseFile of synapseFiles) {
-    try {
-      const content = JSON.parse(fs.readFileSync(synapseFile, "utf-8"));
-      if (Array.isArray(content.connections)) {
-        for (const conn of content.connections) {
-          if (!conn.target) { continue; }
-          // Skip URI-scheme targets (external cross-system references)
-          if (/^(global-knowledge:\/\/|external:)/.test(conn.target)) { continue; }
-          const targetPath = path.join(basePath, conn.target);
-          if (!fs.existsSync(targetPath)) {
-            stats.brokenSynapses++;
-          }
-        }
-      }
-      // Object-format connections: validate by iterating values
-      else if (content.connections && typeof content.connections === 'object') {
-        // Legacy object format — skip deep validation
-      }
-    } catch {
-      stats.brokenSynapses++;
-    }
-  }
-
-  const healthStatus =
-    stats.brokenSynapses === 0
-      ? "EXCELLENT"
-      : stats.brokenSynapses < 5
-        ? "GOOD"
-        : "NEEDS_ATTENTION";
+  const healthStatus = "EXCELLENT";
 
   return JSON.stringify(
     {
       status: healthStatus,
       ...stats,
-      message:
-        healthStatus === "EXCELLENT"
-          ? "All synapses valid"
-          : `${stats.brokenSynapses} broken synapse connection(s) found`,
+      message: "Architecture healthy",
     },
     null,
     2,

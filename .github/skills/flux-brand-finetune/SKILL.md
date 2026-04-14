@@ -2,6 +2,7 @@
 name: "flux-brand-finetune"
 description: "Train and manage custom FLUX LoRA fine-tunes on Replicate for consistent brand character imagery"
 tier: extended
+applyTo: '**/*lora*,**/*finetune*,**/*fine-tune*,**/*flux*'
 metadata:
   inheritance: inheritable
 ---

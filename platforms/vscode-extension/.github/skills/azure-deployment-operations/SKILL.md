@@ -2,6 +2,7 @@
 name: "azure-deployment-operations"
 description: "Production deployment patterns for Azure Static Web Apps, Container Apps, App Service, and infrastructure"
 tier: standard
+applyTo: '**/*deploy*,**/*azure*,**/*swa*,**/*container-app*'
 user-invokable: false
 metadata:
   inheritance: inheritable

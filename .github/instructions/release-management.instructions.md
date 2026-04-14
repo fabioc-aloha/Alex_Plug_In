@@ -8,26 +8,6 @@ inheritance: master-only
 
 ---
 
-## Synapses
-
-- [CHANGELOG.md] → (High, Documentation, Required) - "Version history must be updated"
-- [package.json] → (Critical, Metadata, Source-of-Truth) - "Version number authority"
-- [.github/muscles/build-extension-package.ps1] → (High, Enables, Forward) - "Heir sync with fresh template generation"
-- [.github/muscles/sync-architecture.cjs] → (Critical, Enables, Forward) - "Master-to-heir sync runs during vsce package - validates skill inheritance"
-- [scripts/release-preflight.ps1] → (High, Validates, Forward) - "Preflight gate before publish"
-- [.github/instructions/automated-quality-gates.instructions.md] → (Critical, Automates, Bidirectional) - "Build-pipeline quality gates replace manual checklist items (v5.9.10 RCA)"
-- [ROADMAP.md] → (Medium, References, Bidirectional) - "Forward-pull pattern sources items from roadmap"
-- [.github/instructions/roadmap-maintenance.instructions.md] → (High, Coordinates, Bidirectional) - "Roadmap status updates when version ships"
-- [.github/instructions/self-actualization.instructions.md] → (Medium, Integrates, Bidirectional) - "Post-release meditation validates architecture integrity"
-- [.github/instructions/vscode-marketplace-publishing.instructions.md] → (Critical, Coordinates, Bidirectional) - "Marketplace publishing subprocess this parent workflow orchestrates"
-- [.github/instructions/adversarial-oversight.instructions.md] → (Critical, Gates, Required) - "Validator agent review required before release"
-- [.github/instructions/azure-enterprise-deployment.instructions.md] → (Medium, Patterns, Bidirectional) - "Similar pre-release validation checklists for deployment readiness"
-- [.github/instructions/cognitive-health-validation.instructions.md] → (Critical, Gates, Bidirectional) - "Pre-release validation requires clean brain-qa run (0 critical issues)"
-- [platforms/m365-copilot/package.json] → (High, Metadata, Parallel) - "M365 version must align with VS Code extension version"
-- [platforms/m365-copilot/appPackage/manifest.json] → (High, Metadata, Parallel) - "M365 manifest version tracks extension releases"
-
----
-
 ## MANDATORY Pre-Release Assessment
 
 **⚠️ CRITICAL**: Before ANY release action, Alex MUST automatically perform these assessments:

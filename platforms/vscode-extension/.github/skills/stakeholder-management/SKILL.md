@@ -2,6 +2,7 @@
 name: "stakeholder-management"
 description: "Influence mapping, communication strategies, and expectation management for complex organizations"
 tier: standard
+applyTo: '**/*stakeholder*,**/*influence*,**/*expectation*'
 ---
 
 # Skill: Stakeholder Management

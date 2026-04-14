@@ -2,6 +2,7 @@
 name: graphic-design
 description: Patterns for visual design, SVG creation, layout composition, typography, and brand identity.
 tier: extended
+applyTo: '**/*design*,**/*svg*,**/*visual*,**/*typography*'
 ---
 
 # Graphic Design Skill

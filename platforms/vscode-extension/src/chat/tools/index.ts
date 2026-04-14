@@ -3,7 +3,6 @@ import { logInfo } from "../../shared/logger";
 
 // Re-export types
 export type {
-  ISynapseHealthParams,
   IMemorySearchParams,
   IArchitectureStatusParams,
   IMcpRecommendationParams,
@@ -16,7 +15,6 @@ export type {
 } from "./types";
 
 // Re-export tool classes
-export { SynapseHealthTool } from "./synapseHealthTool";
 export { MemorySearchTool } from "./memorySearchTool";
 export { ArchitectureStatusTool } from "./architectureStatusTool";
 export { McpRecommendationTool } from "./mcpRecommendationTool";
@@ -31,7 +29,6 @@ export { CognitiveStateUpdateTool } from "./cognitiveStateUpdateTool";
 export { CrossDomainSynthesisTool } from "./crossDomainSynthesisTool";
 
 // Import tool classes for registration
-import { SynapseHealthTool } from "./synapseHealthTool";
 import { MemorySearchTool } from "./memorySearchTool";
 import { ArchitectureStatusTool } from "./architectureStatusTool";
 import { McpRecommendationTool } from "./mcpRecommendationTool";
@@ -47,14 +44,6 @@ import { CrossDomainSynthesisTool } from "./crossDomainSynthesisTool";
 export function registerLanguageModelTools(
   context: vscode.ExtensionContext,
 ): void {
-  // Register Synapse Health Tool
-  context.subscriptions.push(
-    vscode.lm.registerTool(
-      "alex_cognitive_synapse_health",
-      new SynapseHealthTool(),
-    ),
-  );
-
   // Register Memory Search Tool
   context.subscriptions.push(
     vscode.lm.registerTool(

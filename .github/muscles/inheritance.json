@@ -99,6 +99,13 @@
                 "pptx-generation"
             ]
         },
+        "session-name.cjs": {
+            "inheritance": "inheritable",
+            "description": "Generate descriptive session names from conversation context",
+            "referencedBy": [
+                "episodic-memory"
+            ]
+        },
         "sync-architecture.cjs": {
             "inheritance": "master-only",
             "description": "Syncs master architecture to heir (CommonJS variant)",
@@ -246,6 +253,216 @@
             "referencedBy": [
                 "md-to-word"
             ]
+        },
+        "analyze-assignments.cjs": {
+            "inheritance": "inheritable",
+            "description": "Delegation pattern analysis from assignment-log.json",
+            "referencedBy": [
+                "multi-agent-orchestration"
+            ]
+        },
+        "audit-master-alex.cjs": {
+            "inheritance": "master-only",
+            "description": "22-check comprehensive audit (cross-platform CJS variant)",
+            "referencedBy": [
+                "architecture-audit",
+                "dream-state-automation"
+            ]
+        },
+        "audit-token-waste.cjs": {
+            "inheritance": "inheritable",
+            "description": "Token waste detection and auto-fix for cognitive architecture files",
+            "referencedBy": [
+                "token-waste-elimination"
+            ]
+        },
+        "chart-recommend.cjs": {
+            "inheritance": "inheritable",
+            "description": "Story-intent chart advisor with audience filtering",
+            "referencedBy": [
+                "data-visualization"
+            ]
+        },
+        "dashboard-scaffold.cjs": {
+            "inheritance": "inheritable",
+            "description": "JSON-spec to self-contained HTML dashboard generator",
+            "referencedBy": [
+                "dashboard-design"
+            ]
+        },
+        "data-ingest.cjs": {
+            "inheritance": "inheritable",
+            "description": "Universal data ingestion (CSV, JSON, JSONL, Excel, URLs)",
+            "referencedBy": [
+                "data-analysis",
+                "data-storytelling"
+            ]
+        },
+        "data-profile.cjs": {
+            "inheritance": "inheritable",
+            "description": "Statistical profiler with quality scoring and cleaning suggestions",
+            "referencedBy": [
+                "data-analysis"
+            ]
+        },
+        "docx-to-md.cjs": {
+            "inheritance": "inheritable",
+            "description": "Word document to Markdown conversion with image extraction",
+            "referencedBy": [
+                "docx-to-md"
+            ]
+        },
+        "install-hooks.cjs": {
+            "inheritance": "inheritable",
+            "description": "Install chat hooks configuration (cross-platform CJS variant)",
+            "referencedBy": []
+        },
+        "md-to-html.cjs": {
+            "inheritance": "inheritable",
+            "description": "Markdown to standalone HTML page with embedded CSS and Mermaid",
+            "referencedBy": [
+                "md-to-html"
+            ]
+        },
+        "new-skill.cjs": {
+            "inheritance": "inheritable",
+            "description": "Scaffold new skill trifecta (cross-platform CJS variant)",
+            "referencedBy": [
+                "skill-building"
+            ]
+        },
+        "validate-skills.cjs": {
+            "inheritance": "inheritable",
+            "description": "Skill frontmatter and structure validation (cross-platform CJS variant)",
+            "referencedBy": [
+                "brain-qa",
+                "dream-state-automation"
+            ]
+        },
+        "validate-synapses.cjs": {
+            "inheritance": "inheritable",
+            "description": "Synapse connection validation (cross-platform CJS variant)",
+            "referencedBy": [
+                "brain-qa",
+                "dream-state-automation"
+            ]
+        },
+        "ralph-loop.cjs": {
+            "inheritance": "inheritable",
+            "description": "Iterative quality improvement loop — generate, evaluate, feedback, re-generate until threshold",
+            "referencedBy": [
+                "ralph-loop"
+            ]
+        },
+        "hooks/session-start.cjs": {
+            "inheritance": "inheritable",
+            "description": "Session initialization hook — context bootstrap, profile loading",
+            "referencedBy": []
+        },
+        "hooks/stop.cjs": {
+            "inheritance": "inheritable",
+            "description": "Session end hook — cleanup, summary, final saves",
+            "referencedBy": []
+        },
+        "hooks/pre-tool-use.cjs": {
+            "inheritance": "inheritable",
+            "description": "Pre-tool execution hook — validation, safety checks",
+            "referencedBy": []
+        },
+        "hooks/post-tool-use.cjs": {
+            "inheritance": "inheritable",
+            "description": "Post-tool execution hook — logging, outcome tracking",
+            "referencedBy": []
+        },
+        "hooks/pre-compact.cjs": {
+            "inheritance": "inheritable",
+            "description": "Pre-compaction hook — state preservation before context shrink",
+            "referencedBy": []
+        },
+        "hooks/subagent-context.cjs": {
+            "inheritance": "inheritable",
+            "description": "Subagent launch hook — context injection for delegation",
+            "referencedBy": []
+        },
+        "hooks/subagent-stop.cjs": {
+            "inheritance": "inheritable",
+            "description": "Subagent completion hook — result capture, return routing",
+            "referencedBy": []
+        },
+        "hooks/auto-commit-suggest.cjs": {
+            "inheritance": "inheritable",
+            "description": "Suggest git commits after significant file changes",
+            "referencedBy": []
+        },
+        "hooks/breaking-change-detector.cjs": {
+            "inheritance": "inheritable",
+            "description": "Detect breaking API/interface changes in code modifications",
+            "referencedBy": []
+        },
+        "hooks/builder-post-tool-use.cjs": {
+            "inheritance": "inheritable",
+            "description": "Builder agent post-tool hook — implementation tracking",
+            "referencedBy": []
+        },
+        "hooks/decision-journal.cjs": {
+            "inheritance": "inheritable",
+            "description": "Log architectural decisions for retrospective analysis",
+            "referencedBy": []
+        },
+        "hooks/documentarian-post-tool-use.cjs": {
+            "inheritance": "inheritable",
+            "description": "Documentarian agent post-tool hook — doc sync tracking",
+            "referencedBy": []
+        },
+        "hooks/output-secret-scan.cjs": {
+            "inheritance": "inheritable",
+            "description": "Scan output for accidentally leaked secrets/credentials",
+            "referencedBy": []
+        },
+        "hooks/prompt-safety-gate.cjs": {
+            "inheritance": "inheritable",
+            "description": "Pre-response safety validation for RAI compliance",
+            "referencedBy": []
+        },
+        "hooks/rai-response-audit.cjs": {
+            "inheritance": "inheritable",
+            "description": "Post-response RAI audit for harmful content detection",
+            "referencedBy": []
+        },
+        "hooks/rai-session-safety.cjs": {
+            "inheritance": "inheritable",
+            "description": "Session-level RAI monitoring and escalation",
+            "referencedBy": []
+        },
+        "hooks/researcher-session-start.cjs": {
+            "inheritance": "inheritable",
+            "description": "Researcher agent session hook — research context setup",
+            "referencedBy": []
+        },
+        "hooks/researcher-stop.cjs": {
+            "inheritance": "inheritable",
+            "description": "Researcher agent end hook — findings consolidation",
+            "referencedBy": []
+        },
+        "hooks/synapse-weight-update.cjs": {
+            "inheritance": "inheritable",
+            "description": "Update synapse weights based on usage patterns",
+            "referencedBy": []
+        },
+        "hooks/targeted-test-runner.cjs": {
+            "inheritance": "inheritable",
+            "description": "Run tests related to changed files after edits",
+            "referencedBy": []
+        },
+        "hooks/validator-pre-tool-use.cjs": {
+            "inheritance": "inheritable",
+            "description": "Validator agent pre-tool hook — adversarial checks",
+            "referencedBy": []
+        },
+        "hooks/validator-session-start.cjs": {
+            "inheritance": "inheritable",
+            "description": "Validator agent session hook — QA context setup",
+            "referencedBy": []
         }
     }
 }

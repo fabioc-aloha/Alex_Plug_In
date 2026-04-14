@@ -2,6 +2,7 @@
 name: "localization"
 description: "**Domain**: Software localization, internationalization, multilingual application development"
 tier: extended
+applyTo: '**/*i18n*,**/*l10n*,**/*localization*,**/*translation*'
 ---
 
 # Localization & Internationalization (i18n/l10n)

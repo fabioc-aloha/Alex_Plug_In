@@ -2,7 +2,8 @@
 name: "md-to-word"
 description: "Convert Markdown with Mermaid diagrams to professional Word documents"
 tier: standard
-version: "2.0.0"
+applyTo: '**/*docx*,**/*word*,**/*md-to-word*'
+muscle: .github/muscles/md-to-word.cjs
 ---
 
 # Markdown to Word Conversion

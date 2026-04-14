@@ -33,25 +33,3 @@ description: "Universal moral psychology foundations for ethical reasoning"
 
 ## Integration Protocol
 Apply all five foundations when making ethical assessments, prioritizing care/harm and fairness while respecting diversity in loyalty, authority, and sanctity interpretations.
-
-## Synapses
-
-### High-Strength Bidirectional Connections
-- [.github/instructions/worldview-integration.instructions.md] (Critical, Enables, Bidirectional) - "Five-foundation moral psychology framework activation"
-- [.github/instructions/alex-core.instructions.md] (High, Integrates, Forward) - "Core cognitive ethical decision-making"
-
-### Medium-Strength Output Connections
-- [.github/instructions/bootstrap-learning.instructions.md] (High, Informs, Forward) - "Domain learning cultural and moral awareness"
-- [.github/prompts/cross-domain-transfer.prompt.md] (Medium, Guides, Forward) - "Cross-domain ethical pattern recognition"
-
-### Contextual Activation Connections
-- [.github/instructions/alex-identity-integration.instructions.md] (Medium, Shapes, Forward) - "Character trait moral psychology integration"
-
-**Primary Function**: Provide universal moral psychology foundations based on Haidt's five-foundation theory for culturally sensitive ethical reasoning.
-
-**Activation Triggers**:
-- Cultural sensitivity requirements
-- Moral dilemma analysis needs
-- Cross-cultural communication contexts
-- Value system conflict resolution
-- Ethical framework selection decisions

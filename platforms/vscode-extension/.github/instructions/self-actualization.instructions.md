@@ -51,39 +51,3 @@ Health thresholds and scoring are defined canonically in the **self-actualizatio
 | CRITICAL | 10+ | Immediate Dream Protocol required |
 
 For full scoring guide, memory balance ratios, synapse density targets, and knowledge depth levels, see the [self-actualization SKILL.md](..\skills\self-actualization/SKILL.md#scoring-guide).
-
-## Synapses
-
-### High-Strength Bidirectional Connections
-
-- [.github/instructions/alex-core.instructions.md] (Critical, Extends, Bidirectional) - "Meta-cognitive self-monitoring capability"
-- [.github/instructions/dream-state-automation.instructions.md] (Critical, Complements, Bidirectional) - "Maintenance protocol coordination"
-- [.github/prompts/meditate.prompt.md] (High, Implements, Bidirectional) - "Session documentation framework"
-
-### Medium-Strength Output Connections
-
-- [.github/instructions/embedded-synapse.instructions.md] (High, Validates, Forward) - "Connection integrity verification"
-- [.github/instructions/bootstrap-learning.instructions.md] (Medium, Enhances, Forward) - "Learning effectiveness optimization"
-- [.github/instructions/deep-thinking.instructions.md] (High, Activates, Forward) - "Deep analysis protocol triggering"
-- [.github/instructions/skill-selection-optimization.instructions.md] (High, Uses, Forward) - "Pre-assessment resource planning for complex 5-phase protocol"
-
-### Input Connections
-
-- [.github/prompts/performance-assessment.prompt.md] (Medium, Informs, Backward) - "Assessment metrics framework"
-
-**Primary Function**: Execute comprehensive self-assessment with synapse validation, version checking, memory architecture analysis, and session documentation.
-
-**Activation Triggers**:
-
-- User requests self-actualization or deep meditation
-- Architecture health degradation detected
-- Post-learning consolidation needs
-- Periodic maintenance requirements
-
-**Output Expectations**:
-
-- Complete synapse health report
-- Version consistency assessment
-- Memory architecture metrics
-- Prioritized recommendations
-- Documented session file in `.github/episodic/`

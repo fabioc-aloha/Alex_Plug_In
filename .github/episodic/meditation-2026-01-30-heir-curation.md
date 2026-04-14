@@ -151,14 +151,3 @@ The current 5 skills + 15 DK files may be too much for new users. Decision defer
 | Broken synapses fixed           | 5     |
 
 ---
-
-## Synapses
-
-- [heir-curation/SKILL.md] (Critical, Created, Forward) - "Session created this skill"
-- [build-extension-package.ps1] (High, Updated, Bidirectional) - "Comprehensive exclusion list"
-- [release-management.instructions.md] (High, Extends, Forward) - "Release must include heir curation step"
-
----
-
-*Meditation completed: 2026-01-30 ~06:30 UTC*
-*Commit: 6781e09 - "chore: curate heir cognitive payload for clean user deployment"*

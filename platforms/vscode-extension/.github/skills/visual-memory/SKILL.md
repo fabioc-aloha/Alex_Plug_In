@@ -2,6 +2,7 @@
 name: "visual-memory"
 description: "Embed reference media (photos, voice, video templates) as base64 data URIs in skills for self-sufficient, portable, consistent generation"
 tier: extended
+applyTo: '**/*visual*,**/*reference*,**/*portrait*,**/*base64*'
 metadata:
   inheritance: inheritable
 ---

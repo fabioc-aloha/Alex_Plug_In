@@ -2,6 +2,7 @@
 name: fabric-notebook-publish
 description: Seamless notebook publishing from VS Code to Microsoft Fabric via Azure DevOps Git integration
 tier: extended
+applyTo: '**/*fabric*,**/*notebook*,**/*publish*'
 user-invokable: false
 ---
 

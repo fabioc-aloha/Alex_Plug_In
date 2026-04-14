@@ -72,7 +72,6 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
                 break;
             case 'skills':
                 patterns.push('skills/*/SKILL.md');
-                patterns.push('skills/*/synapses.json');
                 break;
             case 'config':
                 patterns.push('config/*.json');
@@ -83,7 +82,6 @@ export class HeirValidationTool implements vscode.LanguageModelTool<IHeirValidat
                 patterns.push('instructions/*.md');
                 patterns.push('prompts/*.md');
                 patterns.push('skills/*/SKILL.md');
-                patterns.push('skills/*/synapses.json');
                 patterns.push('config/*.json');
                 patterns.push('config/*.md');
                 patterns.push('episodic/*.md');

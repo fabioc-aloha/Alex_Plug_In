@@ -2,6 +2,7 @@
 name: awareness
 description: Proactive detection, self-correction, and epistemic vigilance
 tier: core
+applyTo: '**/*'
 user-invokable: false
 ---
 

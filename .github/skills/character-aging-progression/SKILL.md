@@ -2,6 +2,7 @@
 name: "character-aging-progression"
 description: "Generate visually consistent character images across different life stages using nano-banana-pro with age-specific prompts"
 tier: extended
+applyTo: '**/*aging*,**/*age-progression*,**/*life-stage*,**/*character-ages*'
 ---
 
 # Character Aging Progression

@@ -2,6 +2,7 @@
 name: "foundry-agent-platform"
 description: "Microsoft Foundry agent deployment, orchestration, and cloud-native AI service patterns"
 tier: extended
+applyTo: '**/*foundry*,**/*agent*platform*,**/*orchestrat*'
 user-invokable: false
 ---
 

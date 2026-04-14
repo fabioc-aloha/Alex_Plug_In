@@ -2,6 +2,7 @@
 name: azure-architecture-patterns
 description: Well-Architected Framework principles, reference architectures, and best practices for cloud-native solutions
 tier: standard
+applyTo: '**/*azure*,**/*cloud*,**/*waf*,**/*architecture*'
 user-invokable: false
 ---
 

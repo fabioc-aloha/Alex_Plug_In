@@ -9,15 +9,17 @@ Complete inventory of Alex's superpowers — what each skill does, who inherits 
 
 ---
 
-## Skill Count: 161
+## Skill Count: 168
 
 | Inheritance | Count |
 | ----------- | ----- |
-| Inheritable | 147   |
+| Inheritable | 154   |
 | Master-Only | 5     |
 | Heir:vscode | 7     |
 | Heir:m365   | 2     |
 
+> 🆕 **+7 skills imported from Microsoft Skills** (2026-04-14): `copilot-sdk`, `mcp-builder`, `skill-creator`, `cloud-solution-architect`, `frontend-design-review`, `entra-agent-id`, `ralph-loop`
+>
 > 🆕 **+2 skills** (2026-03-04): `agent-debug-panel` (VS Code Agent Debug Panel usage), `terminal-image-rendering` (Kitty graphics protocol for inline terminal images)
 >
 > 🆕 **+10 trifectas completed + skill discoverability enriched** (2026-02-26): chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, markdown-mermaid, testing-strategies, knowledge-synthesis, north-star now full trifectas (23 total). skill-activation index enriched with ~3× keywords across 20 skills. 16 staleness-prone skills tracked.

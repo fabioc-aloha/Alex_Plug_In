@@ -2,6 +2,7 @@
 name: infrastructure-as-code
 description: '**Domain**: DevOps & Cloud Engineering'
 tier: standard
+applyTo: '**/*iac*,**/*.bicep,**/*.tf,**/*terraform*,**/*pulumi*'
 ---
 
 # Infrastructure as Code Skill

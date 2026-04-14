@@ -5,13 +5,6 @@ applyTo: "**/*knowledge*,**/*insight*,**/*synthesis*,**/*pattern*"
 
 # Knowledge Synthesis — Auto-Loaded Rules
 
-## Synapses
-
-- [.github/prompts/cross-domain-transfer.prompt.md] (High, Implements, Forward) - "Cross-domain synthesis during meditation Phase 3"
-- [.github/instructions/meditation.instructions.md] (Critical, Coordinates, Bidirectional) - "Synthesis is Phase 3 and Phase 4 of meditation"
-
-Abstraction protocol, GI/GK storage formats, promotion criteria, quality gates → see knowledge-synthesis skill.
-
 ## Cross-Domain Synthesis Tool
 
 During meditation Phase 3, analyze episodic memories for cross-domain synthesis to identify domain coverage and under-connected pairs. Apply the Transfer Test (structural, actionable, independent) before creating connections. See the knowledge-synthesis skill for connection types and output format.

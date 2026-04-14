@@ -104,11 +104,3 @@ Get-ChildItem ".github" -Recurse -Filter "*.md" | ForEach-Object {
 - VSIX packages without secret scanner warnings
 
 ---
-
-## Synapses
-
-- [.github/instructions/meditation.instructions.md] (Critical, Implements, Bidirectional) - "Meditation protocol source"
-- [platforms/vscode-extension/src/chat/avatarMappings.ts] (Critical, Documents, Forward) - "Primary file modified — avatar system architecture"
-- [platforms/vscode-extension/src/commands/session.ts] (High, Documents, Forward) - "Session lifecycle refresh hooks"
-- [platforms/vscode-extension/src/services/secretsManager.ts] (Medium, Documents, Forward) - "Secret placeholder pattern"
-- [.github/episodic/meditation-2026-02-20-stabilization.md] (High, Follows, Backward) - "Earlier session this day"

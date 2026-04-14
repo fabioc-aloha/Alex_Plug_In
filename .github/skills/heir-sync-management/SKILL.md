@@ -2,6 +2,7 @@
 name: "heir-sync-management"
 description: "Master-Heir synchronization, inheritance model, contamination prevention, and promotion workflows"
 tier: standard
+applyTo: '**/*heir*,**/*sync*,**/*inheritance*,**/*promotion*'
 metadata:
   inheritance: master-only
 ---

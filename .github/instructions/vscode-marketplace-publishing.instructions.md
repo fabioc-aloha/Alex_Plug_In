@@ -8,15 +8,6 @@ applyTo: "**/*.vsix,**/*publish*,**/vsce*"
 
 ---
 
-## Synapses
-
-- [.github/instructions/release-management.instructions.md] (Critical, Coordinates, Bidirectional) - "Parent release workflow this publishing step supports"
-- [.github/instructions/brand-asset-management.instructions.md] (High, Constrains, Forward) - "Image format selection affected by marketplace constraints"
-- [.github/skills/vscode-extension-patterns/SKILL.md] (Critical, Implements, Bidirectional) - "Extension development patterns this deployment workflow serves"
-- [.github/instructions/ui-ux-design.instructions.md] (Medium, Follows, Bidirectional) - "UI polish often immediately precedes marketplace publishing"
-
----
-
 ## Marketplace Constraints (Non-Negotiable)
 
 | Constraint         | Requirement                       | Validation                             |

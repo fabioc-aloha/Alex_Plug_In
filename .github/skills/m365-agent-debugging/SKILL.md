@@ -2,6 +2,7 @@
 name: m365-agent-debugging
 description: Debug non-functional M365 Copilot declarative agents.
 tier: standard
+applyTo: '**/*m365*,**/*copilot*,**/*declarative*agent*'
 user-invokable: false
 ---
 

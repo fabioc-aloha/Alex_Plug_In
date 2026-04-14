@@ -25,21 +25,6 @@ interface SkillRegistry {
   skills: SkillRegistryEntry[];
 }
 
-interface InheritedFromMetadata {
-  source: "global-knowledge" | "gk-pattern";
-  registryId?: string;
-  patternFile?: string;
-  version: string;
-  inheritedAt: string;
-}
-
-interface SynapsesJson {
-  skillId: string;
-  inheritedFrom?: InheritedFromMetadata;
-  connections: unknown[];
-  metadata?: Record<string, unknown>;
-}
-
 const GLOBAL_KNOWLEDGE_PATH = resolveAIMemoryRoot();
 const SKILL_REGISTRY_PATH = path.join(
   GLOBAL_KNOWLEDGE_PATH,
@@ -284,39 +269,4 @@ async function inheritSkill(
   // Copy skill folder
   await fs.copy(sourcePath, destPath, { overwrite: false });
   outputChannel.appendLine(`  📋 Copied ${skill.folder}/`);
-
-  // Add inheritance tracking to synapses.json
-  const synapsesPath = path.join(destPath, "synapses.json");
-
-  if (await fs.pathExists(synapsesPath)) {
-    const synapses: SynapsesJson = await fs.readJson(synapsesPath);
-
-    // Add inheritedFrom metadata
-    synapses.inheritedFrom = {
-      source: "global-knowledge",
-      registryId: skill.id,
-      version: skill.version,
-      inheritedAt: new Date().toISOString(),
-    };
-
-    await fs.writeJson(synapsesPath, synapses, { spaces: 2 });
-    outputChannel.appendLine(`  🔗 Added inheritance tracking`);
-  } else {
-    // Create minimal synapses.json with inheritance info
-    const synapses: SynapsesJson = {
-      skillId: skill.id,
-      inheritedFrom: {
-        source: "global-knowledge",
-        registryId: skill.id,
-        version: skill.version,
-        inheritedAt: new Date().toISOString(),
-      },
-      connections: [],
-    };
-
-    await fs.writeJson(synapsesPath, synapses, { spaces: 2 });
-    outputChannel.appendLine(
-      `  🔗 Created synapses.json with inheritance tracking`,
-    );
-  }
 }

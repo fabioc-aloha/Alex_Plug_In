@@ -11,13 +11,6 @@ applyTo: "**/quality-gate*,**/scripts/quality*,**/*prepublish*,**/package.json"
 
 ---
 
-## Synapses
-
-- [.github/instructions/testing-strategies.instructions.md] (High, Extends, Bidirectional) - "Quality gates are the static analysis complement to behavioral tests"
-- [.github/instructions/vscode-extension-patterns.instructions.md] (High, Validates, Forward) - "Ensures extension packaging follows VS Code patterns"
-
----
-
 ## Purpose
 
 Prevent regressions by encoding quality checks into the build pipeline so packaging **fails automatically** when invariants are violated. Manual checklists supplement but never replace automated gates.

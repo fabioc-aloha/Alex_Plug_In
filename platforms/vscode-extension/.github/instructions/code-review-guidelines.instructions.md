@@ -7,14 +7,6 @@ applyTo: "**/*.{ts,js,tsx,jsx,py,ps1,cs,java,go,rs,rb}"
 
 ---
 
-## Synapses
-
-- [.github/instructions/technical-debt-tracking.instructions.md] → (Medium, Detects, Forward) - "Reviews catch new debt"
-- [.github/instructions/architecture-decision-records.instructions.md] → (Medium, Triggers, Forward) - "Significant changes may need ADR"
-- [.github/instructions/adversarial-oversight.instructions.md] → (Critical, Implements, Bidirectional) - "Defines Validator agent integration for critical reviews"
-
----
-
 ## Review Philosophy
 
 ### Compilation Check Discipline

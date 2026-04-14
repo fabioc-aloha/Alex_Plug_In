@@ -109,7 +109,6 @@ async function gatherKeyFiles(heirGithubPath: string): Promise<{ path: string; c
         'instructions/*.md',                 // All instruction files
         'prompts/*.md',                      // All prompt files
         'skills/*/SKILL.md',                 // All skill definitions
-        'skills/*/synapses.json',            // Synapse files with metadata
         'episodic/*.md'                      // Any episodic content
     ];
     

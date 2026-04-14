@@ -6,7 +6,7 @@ import {
 } from "../chat/emotionalMemory";
 import { getCalibrationSummary } from "../chat/honestUncertainty";
 import { getDecayReport } from "../chat/forgettingCurve";
-import { getAlexWorkspaceFolder, createSynapseRegex } from "../shared/utils";
+import { getAlexWorkspaceFolder } from "../shared/utils";
 import * as workspaceFs from "../shared/workspaceFs";
 
 /**
@@ -121,12 +121,12 @@ export async function runSelfActualization(
       cancellable: false,
     },
     async (progress) => {
-      // Phase 1: Synapse Health Validation
+      // Phase 1: Architecture Health Check
       progress.report({
-        message: "Phase 1: Validating synaptic connections...",
+        message: "Phase 1: Validating architecture files...",
         increment: 0,
       });
-      await scanSynapseHealth(workspaceFolder, report);
+      await countArchitectureFiles(workspaceFolder, report);
 
       // Phase 2: Version Consistency Check
       progress.report({
@@ -226,14 +226,10 @@ export async function runSelfActualization(
   const message =
     `Self-Actualization Complete ${healthEmoji}\n\n` +
     `🧠 ${ageLabel} • ` +
-    `📊 ${report.synapseHealth.totalSynapses} synapses • ${totalFiles} memory files` +
-    `${report.synapseHealth.brokenConnections > 0 ? ` • ${report.synapseHealth.brokenConnections} need attention` : ""}` +
+    `📊 ${report.synapseHealth.totalFiles} architecture files • ${totalFiles} memory files` +
     `${report.recommendations.length > 0 ? `\n💡 ${report.recommendations.length} recommendations` : ""}`;
 
-  if (
-    report.recommendations.length > 0 ||
-    report.synapseHealth.brokenConnections > 0
-  ) {
+  if (report.recommendations.length > 0) {
     // Has actionable items - offer to discuss
     const action = await vscode.window.showInformationMessage(
       message,
@@ -262,96 +258,37 @@ export async function runSelfActualization(
 }
 
 /**
- * Scan all memory files for synapse health
- * Performance optimized: Pre-builds file index to avoid per-synapse findFiles calls
+ * Count architecture files for health assessment
+ * Simplified from synapse scanning - just counts files in key directories
  */
-async function scanSynapseHealth(
+async function countArchitectureFiles(
   workspaceFolder: vscode.WorkspaceFolder,
   report: SelfActualizationReport,
 ): Promise<void> {
   const patterns = [
-    ".github/copilot-instructions.md",
-    ".github/instructions/*.md",
-    ".github/prompts/*.md",
-    ".github/episodic/*.md",
-    ".github/skills/*/SKILL.md",
-    ".github/domain-knowledge/*.md", // Legacy - kept for backward compatibility
+    { pattern: ".github/instructions/*.md", weight: 1 },
+    { pattern: ".github/prompts/*.md", weight: 1 },
+    { pattern: ".github/episodic/*.md", weight: 1 },
+    { pattern: ".github/skills/*/SKILL.md", weight: 1 },
   ];
 
-  const synapseRegex = createSynapseRegex();
+  let totalFiles = 0;
 
-  // Pre-build a set of all known markdown files for fast lookup
-  // This avoids calling findFiles for each synapse (major performance fix)
-  // Use targeted patterns to avoid hitting limits on large workspaces (2000+ files)
-  const targetPatterns = [
-    ".github/**/*.md", // Memory files, config
-    "alex_docs/**/*.md", // Documentation
-    "platforms/**/.github/**/*.md", // Heir memory files
-    "*.md", // Root-level files
-  ];
-
-  const knownFiles = new Set<string>();
-  for (const targetPattern of targetPatterns) {
-    const files = await vscode.workspace.findFiles(
-      new vscode.RelativePattern(workspaceFolder, targetPattern),
-      "**/node_modules/**",
-      1000, // Per-pattern limit
-    );
-    for (const file of files) {
-      knownFiles.add(path.basename(file.fsPath).toLowerCase());
-    }
+  for (const { pattern } of patterns) {
+    const relativePattern = new vscode.RelativePattern(workspaceFolder, pattern);
+    const files = await vscode.workspace.findFiles(relativePattern, null, 500);
+    totalFiles += files.length;
   }
 
-  for (const pattern of patterns) {
-    const relativePattern = new vscode.RelativePattern(
-      workspaceFolder,
-      pattern,
-    );
-    const files = await vscode.workspace.findFiles(relativePattern, null, 100);
+  report.synapseHealth.totalFiles = totalFiles;
+  report.synapseHealth.totalSynapses = 0; // Deprecated
+  report.synapseHealth.brokenConnections = 0; // Deprecated
 
-    for (const file of files) {
-      report.synapseHealth.totalFiles++;
-      try {
-        const content = await workspaceFs.readFile(file.fsPath);
-        const lines = content.replace(/\r\n/g, "\n").split("\n");
-
-        let inCodeBlock = false;
-        for (const line of lines) {
-          if (line.trim().startsWith("```")) {
-            inCodeBlock = !inCodeBlock;
-            continue;
-          }
-          if (inCodeBlock) {
-            continue;
-          }
-
-          let match;
-          while ((match = synapseRegex.exec(line)) !== null) {
-            report.synapseHealth.totalSynapses++;
-            const targetName = match[1].trim();
-            const targetBasename = path.basename(targetName).toLowerCase();
-
-            // Fast lookup in pre-built file index instead of findFiles per synapse
-            if (!knownFiles.has(targetBasename)) {
-              report.synapseHealth.brokenConnections++;
-            }
-          }
-        }
-      } catch {
-        // Skip unreadable files
-      }
-    }
-  }
-
-  // Determine health status
+  // Determine health status based on file count
   report.synapseHealth.healthStatus =
-    report.synapseHealth.brokenConnections === 0
-      ? "EXCELLENT"
-      : report.synapseHealth.brokenConnections < 5
-        ? "GOOD"
-        : report.synapseHealth.brokenConnections < 10
-          ? "NEEDS ATTENTION"
-          : "CRITICAL";
+    totalFiles >= 50 ? "EXCELLENT" :
+    totalFiles >= 20 ? "GOOD" :
+    totalFiles >= 5 ? "NEEDS ATTENTION" : "MINIMAL";
 }
 
 /**
@@ -788,23 +725,6 @@ ${report.globalKnowledgePromotion.updated.map((title) => `- 🔄 **${title}**`).
 `
       : ""
   }${report.globalKnowledgePromotion.promoted.length === 0 && report.globalKnowledgePromotion.updated.length === 0 ? "*No new knowledge promoted or updated this session.*" : ""}
-
----
-
-## Synapses
-
-### High-Strength Bidirectional Connections
-
-- [copilot-instructions.md] (Critical, Validates, Bidirectional) - "Core architecture assessment"
-- [alex-core.instructions.md] (Critical, Integrates, Bidirectional) - "Meta-cognitive health monitoring"
-- [dream-state-automation.instructions.md] (High, Complements, Bidirectional) - "Maintenance protocol coordination"
-
-### Medium-Strength Output Connections
-
-- [unified-meditation-protocols.prompt.md] (High, Documents, Forward) - "Session recording protocol"
-- [embedded-synapse.instructions.md] (Medium, Validates, Forward) - "Connection integrity verification"
-
-**Primary Function**: Document automated self-actualization session with comprehensive architecture assessment.
 
 ---
 

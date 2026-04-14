@@ -2,8 +2,8 @@
 name: content-safety-implementation
 description: Azure Content Safety API integration, multi-layer defense pipeline, output validation, and operational safety controls
 tier: standard
+applyTo: '**/*safety*,**/*content-filter*,**/*guardrail*,**/*kill-switch*'
 metadata:
-  version: 1.0.0
   category: security
   tags: [content-safety, guardrails, input-defense, output-validation, kill-switch, content-filter, azure-ai]
   activation:

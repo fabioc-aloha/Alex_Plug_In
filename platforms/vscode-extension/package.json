@@ -808,6 +808,9 @@
         "path": "./.github/skills/citation-management/SKILL.md"
       },
       {
+        "path": "./.github/skills/cloud-solution-architect/SKILL.md"
+      },
+      {
         "path": "./.github/skills/coaching-techniques/SKILL.md"
       },
       {
@@ -827,6 +830,9 @@
       },
       {
         "path": "./.github/skills/converter-qa/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/copilot-sdk/SKILL.md"
       },
       {
         "path": "./.github/skills/correax-brand/SKILL.md"
@@ -889,6 +895,9 @@
         "path": "./.github/skills/enterprise-integration/SKILL.md"
       },
       {
+        "path": "./.github/skills/entra-agent-id/SKILL.md"
+      },
+      {
         "path": "./.github/skills/error-recovery-patterns/SKILL.md"
       },
       {
@@ -905,6 +914,9 @@
       },
       {
         "path": "./.github/skills/foundry-agent-platform/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/frontend-design-review/SKILL.md"
       },
       {
         "path": "./.github/skills/frustration-recognition/SKILL.md"
@@ -977,6 +989,9 @@
       },
       {
         "path": "./.github/skills/markdown-mermaid/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/mcp-builder/SKILL.md"
       },
       {
         "path": "./.github/skills/mcp-development/SKILL.md"
@@ -1078,6 +1093,9 @@
         "path": "./.github/skills/rag-architecture/SKILL.md"
       },
       {
+        "path": "./.github/skills/ralph-loop/SKILL.md"
+      },
+      {
         "path": "./.github/skills/react-vite-performance/SKILL.md"
       },
       {
@@ -1118,6 +1136,9 @@
       },
       {
         "path": "./.github/skills/skill-building/SKILL.md"
+      },
+      {
+        "path": "./.github/skills/skill-creator/SKILL.md"
       },
       {
         "path": "./.github/skills/skill-development/SKILL.md"

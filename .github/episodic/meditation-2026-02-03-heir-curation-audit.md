@@ -94,19 +94,3 @@ Users apply via `Alex: Setup Environment`.
 3. Version bump for marketplace release when ready
 
 ---
-
-## Synapses
-
-### Strengthened Connections
-- [heir-curation/SKILL.md] ←→ [BUILD-MANIFEST.json] - Curation policy documented in both
-- [markdown-mermaid/SKILL.md] ←→ [setupEnvironment.ts] - CSS and theming integration
-- [package.json] ←→ [markdown-light.css] - Contribution point relationship
-
-### New Patterns Discovered
-- CSS contribution points > runtime copying for reliability
-- Mermaid theming is JavaScript-based, not CSS-based
-- Skill curation should optimize for USER value, not Master exclusivity
-
----
-
-*Meditation complete. Architecture enhanced. Insights preserved.*

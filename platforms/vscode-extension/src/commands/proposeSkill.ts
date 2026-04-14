@@ -316,15 +316,6 @@ async function getHeirSkills(skillsPath: string): Promise<HeirSkill[]> {
       continue;
     }
 
-    // Check if inherited from GK
-    const synapsesPath = path.join(skillPath, "synapses.json");
-    let inheritedFromGK = false;
-
-    if (await fs.pathExists(synapsesPath)) {
-      const synapses = await fs.readJson(synapsesPath);
-      inheritedFromGK = synapses.inheritedFrom?.source === "global-knowledge";
-    }
-
     // Parse skill metadata
     const content = await fs.readFile(skillFile, "utf-8");
     const metadata = parseSkillMetadata(content);
@@ -337,7 +328,7 @@ async function getHeirSkills(skillsPath: string): Promise<HeirSkill[]> {
       metadata,
       category,
       validationScore,
-      inheritedFromGK,
+      inheritedFromGK: false, // synapses.json removed - all skills proposable
       content,
     });
   }
@@ -454,10 +445,7 @@ function calculateValidationScore(
     score += 2;
   }
 
-  // Has Synapses section
-  if (content.includes("## Synapses") || content.includes("**Synapse**:")) {
-    score += 3;
-  }
+  // Note: Synapse section scoring removed in v7.8 — embedded synapses deprecated
 
   // Has Troubleshooting section
   if (

@@ -287,20 +287,6 @@ What this process accomplishes.
 2. Second step
 3. ...
 
-## Synapses
-
-- [related-file.instructions.md] (Strength, Type, Direction) - "relationship"
-```
-
-Save as: `.github/instructions/process-name.instructions.md`
-
-### New Skill
-
-```markdown
-# Skill Name
-
-> Brief description
-
 ## Overview
 
 What this skill covers.
@@ -313,60 +299,11 @@ What this skill covers.
 ### Concept 2
 ...
 
-## Synapses
-
-- [related-file.md] (Strength, Type, Direction) - "relationship"
-```
-
-Save as: `.github/skills/skill-name/SKILL.md`
-
-### New Custom Agent
-
-```markdown
----
-name: "Agent Name"
-description: "What this agent specializes in"
-tools:
-  - tool_name_1
-  - tool_name_2
----
-
-# Agent Name
-
-Instructions for the agent's behavior and capabilities.
-```
-
-Save as: `.github/agents/agent-name.agent.md`
-
----
-
 ## Synapses Explained
 
 Every memory file ends with a **Synapses** section mapping connections:
 
 ```markdown
-## Synapses
-
-### High-Strength Connections
-- [file.md] (Critical, Defines, Bidirectional) - "Core relationship"
-
-### Medium-Strength Connections
-- [file.md] (High, References, Forward) - "Supporting relationship"
-
-### Low-Strength Connections
-- [file.md] (Low, Mentions, Forward) - "Tangential relationship"
-```
-
-**Table 18:** *Synapse Component Values*
-
-| Component | Values                                                         |
-| --------- | -------------------------------------------------------------- |
-| Strength  | Critical, High, Medium, Low                                    |
-| Type      | Defines, Implements, References, Validates, Triggers, Mentions |
-| Direction | Bidirectional, Forward, Backward                               |
-
----
-
 ## Maintenance Commands
 
 **Table 19:** *Architecture Maintenance Commands*

@@ -2,6 +2,7 @@
 name: "code-review"
 description: "Systematic code review for correctness, security, and growth — not just style enforcement"
 tier: core
+applyTo: '**/*review*,**/*pr*,**/*pull-request*'
 ---
 
 # Code Review Skill

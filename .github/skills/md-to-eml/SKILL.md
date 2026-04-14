@@ -2,7 +2,8 @@
 name: "md-to-eml"
 description: "Convert Markdown to RFC 5322 email (.eml) with inline CSS and CID images"
 tier: extended
-version: "1.0.0"
+applyTo: '**/*.eml,**/*email*,**/*newsletter*'
+muscle: .github/muscles/md-to-eml.cjs
 ---
 
 # Markdown to Email Conversion

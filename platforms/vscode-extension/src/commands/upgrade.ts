@@ -32,7 +32,6 @@ import { offerEnvironmentSetup } from "./setupEnvironment";
 import { initializeArchitecture } from "./initialize";
 import { detectAndUpdateProjectPersona } from "../chat/personaDetection";
 import { migrateSecretsFromEnvironment } from "../services/secretsManager";
-import { normalizeAllSynapses } from "./upgradeSynapseNormalization";
 import { generateMigrationCandidates } from "./upgradeMigration";
 import { runGapAnalysis } from "./upgradeGapAnalysis";
 
@@ -709,15 +708,9 @@ async function executeUpgradePhases(
         }
 
         progress.report({
-          message: "Normalizing synapses to current schema...",
+          message: "Processing migration candidates...",
           increment: 5,
         });
-        const skillsDir = path.join(rootPath, ".github", "skills");
-        let synapseNormalized = 0;
-        if (await fs.pathExists(skillsDir)) {
-          const synapseResult = await normalizeAllSynapses(skillsDir);
-          synapseNormalized = synapseResult.normalized;
-        }
 
         const staleItems = candidates.filter((c) => c.stale);
         if (staleItems.length > 0) {
@@ -732,14 +725,9 @@ async function executeUpgradePhases(
 
         stats = {
           restoredCount: restoredItems.length,
-          normalizedCount: synapseNormalized,
+          normalizedCount: 0,
           staleCount: staleItems.length,
         };
-      } else {
-        const skillsDir = path.join(rootPath, ".github", "skills");
-        if (await fs.pathExists(skillsDir)) {
-          await normalizeAllSynapses(skillsDir);
-        }
       }
     },
   );

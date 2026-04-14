@@ -128,13 +128,6 @@ if (result.confidence < CONFIDENCE_THRESHOLD) {
 
 ---
 
-## Synapses
-
-- [.github/skills/text-to-speech/SKILL.md] (High, Enables, Bidirectional) - "Primary consumer of detection"
-- [.github/skills/localization/SKILL.md] (Medium, Enables, Forward) - "i18n accessibility features"
-
----
-
 ## References
 
 - Unicode Standard: https://unicode.org/charts/

@@ -2,6 +2,7 @@
 name: "secrets-management"
 description: "Secure token storage, VS Code SecretStorage API, credential management, environment variable migration"
 tier: standard
+applyTo: '**/*secret*,**/*credential*,**/*token*,**/*auth*'
 ---
 
 # Secrets Management Skill

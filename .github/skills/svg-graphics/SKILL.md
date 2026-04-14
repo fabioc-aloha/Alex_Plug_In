@@ -2,6 +2,7 @@
 name: "svg-graphics"
 description: "Scalable, accessible, theme-aware visuals."
 tier: standard
+applyTo: '**/*.svg,**/*icon*,**/*graphic*'
 ---
 
 # SVG Graphics Skill

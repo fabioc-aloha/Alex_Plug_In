@@ -2,6 +2,7 @@
 name: "persona-detection"
 description: "Intelligent project persona identification using priority chain detection with LLM and heuristic fallback"
 tier: core
+applyTo: '**/*persona*,**/*detection*,**/*project-type*'
 ---
 
 # Persona Detection Skill

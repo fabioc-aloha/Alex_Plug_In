@@ -17,15 +17,25 @@ Memory files define *what* and *how*; muscles *do*.
 
 | Script                        | Language   | Purpose                                   | Inheritance |
 | ----------------------------- | ---------- | ----------------------------------------- | ----------- |
+| `analyze-assignments.cjs`     | JavaScript | Delegation pattern analysis               | inheritable |
+| `audit-master-alex.cjs`       | JavaScript | 22-point pre-release audit (CJS)          | master-only |
 | `audit-master-alex.ps1`       | PowerShell | 22-point pre-release audit                | master-only |
+| `audit-token-waste.cjs`       | JavaScript | Token waste detection and auto-fix        | inheritable |
+| `brain-qa.cjs`                | JavaScript | 32-phase deep validation (CJS)            | master-only |
 | `brain-qa.ps1`                | PowerShell | 32-phase deep validation                  | master-only |
+| `brain-qa-heir.cjs`           | JavaScript | 25-phase heir validation (CJS)            | inheritable |
 | `brain-qa-heir.ps1`           | PowerShell | 25-phase heir validation                  | inheritable |
 | `build-extension-package.ps1` | PowerShell | VSIX packaging                            | master-only |
+| `chart-recommend.cjs`         | JavaScript | Story-intent chart advisor                | inheritable |
 | `converter-qa.cjs`            | JavaScript | 284-assertion converter test harness      | master-only |
+| `dashboard-scaffold.cjs`      | JavaScript | JSON-spec to HTML dashboard               | inheritable |
+| `data-ingest.cjs`             | JavaScript | Universal data ingestion                  | inheritable |
+| `data-profile.cjs`            | JavaScript | Statistical data profiler                 | inheritable |
 | `docx-to-md.cjs`              | JavaScript | Word document to Markdown conversion      | inheritable |
 | `dream-cli.ts`                | TypeScript | Neural maintenance CLI                    | inheritable |
 | `fix-fence-bug.ps1`           | PowerShell | Detect/fix VS Code fence bug              | inheritable |
 | `gamma-generator.cjs`         | JavaScript | Markdown to Gamma slides                  | inheritable |
+| `install-hooks.cjs`           | JavaScript | Install hooks config (CJS)                | inheritable |
 | `install-hooks.ps1`           | PowerShell | Install hooks config                      | inheritable |
 | `markdown-lint.cjs`           | JavaScript | 19-rule pre-conversion markdown validator | inheritable |
 | `md-scaffold.cjs`             | JavaScript | Markdown template scaffolder              | inheritable |
@@ -33,12 +43,15 @@ Memory files define *what* and *how*; muscles *do*.
 | `md-to-html.cjs`              | JavaScript | Markdown to standalone HTML page          | inheritable |
 | `md-to-word.cjs`              | JavaScript | Markdown to Word conversion               | inheritable |
 | `nav-inject.cjs`              | JavaScript | Cross-document navigation injection       | inheritable |
+| `new-skill.cjs`               | JavaScript | Scaffold new skill trifecta (CJS)         | inheritable |
 | `new-skill.ps1`               | PowerShell | Scaffold new skill trifecta               | inheritable |
 | `normalize-paths.ps1`         | PowerShell | Path consistency fixes                    | inheritable |
 | `pptxgen-cli.ts`              | TypeScript | PowerPoint generation                     | inheritable |
+| `session-name.cjs`            | JavaScript | Generate session names from context       | inheritable |
 | `sync-architecture.cjs`       | JavaScript | Master to Heir sync                       | master-only |
+| `validate-skills.cjs`         | JavaScript | Skill file validation (CJS)               | inheritable |
 | `validate-skills.ps1`         | PowerShell | Skill file validation                     | inheritable |
-| `audit-token-waste.cjs`       | JavaScript | Token waste detection and auto-fix        | inheritable |
+| `validate-synapses.cjs`       | JavaScript | Synapse target validation (CJS)           | inheritable |
 | `validate-synapses.ps1`       | PowerShell | Synapse target validation                 | inheritable |
 
 ### Shared Modules (`shared/`)
@@ -68,7 +81,32 @@ Pandoc Lua filters applied during Word/PDF conversion.
 
 ### Hook Muscles (`hooks/`)
 
-Pre/post action hooks for chat agent lifecycle (18 scripts). See `.github/hooks.json` for registry.
+Pre/post action hooks for chat agent lifecycle (22 scripts). See `.github/hooks.json` for registry.
+
+| Hook                            | Trigger        | Purpose                                     |
+| ------------------------------- | -------------- | ------------------------------------------- |
+| `session-start.cjs`             | session.start  | Context bootstrap, profile loading          |
+| `stop.cjs`                      | session.stop   | Cleanup, summary, final saves               |
+| `pre-tool-use.cjs`              | pre.tool       | Validation, safety checks                   |
+| `post-tool-use.cjs`             | post.tool      | Logging, outcome tracking                   |
+| `pre-compact.cjs`               | pre.compact    | State preservation before context shrink    |
+| `subagent-context.cjs`          | subagent.start | Context injection for delegation            |
+| `subagent-stop.cjs`             | subagent.stop  | Result capture, return routing              |
+| `auto-commit-suggest.cjs`       | post.tool      | Suggest git commits after file changes      |
+| `breaking-change-detector.cjs`  | post.tool      | Detect breaking API/interface changes       |
+| `builder-post-tool-use.cjs`     | post.tool      | Builder agent implementation tracking       |
+| `decision-journal.cjs`          | post.tool      | Log architectural decisions                 |
+| `documentarian-post-tool-use.cjs` | post.tool    | Documentarian agent doc sync tracking       |
+| `output-secret-scan.cjs`        | post.response  | Scan output for leaked secrets              |
+| `prompt-safety-gate.cjs`        | pre.response   | Pre-response safety validation              |
+| `rai-response-audit.cjs`        | post.response  | Post-response RAI audit                     |
+| `rai-session-safety.cjs`        | session.start  | Session-level RAI monitoring                |
+| `researcher-session-start.cjs`  | session.start  | Researcher agent research context setup     |
+| `researcher-stop.cjs`           | session.stop   | Researcher agent findings consolidation     |
+| `synapse-weight-update.cjs`     | post.tool      | Update synapse weights from usage           |
+| `targeted-test-runner.cjs`      | post.tool      | Run tests related to changed files          |
+| `validator-pre-tool-use.cjs`    | pre.tool       | Validator agent adversarial checks          |
+| `validator-session-start.cjs`   | session.start  | Validator agent QA context setup            |
 
 ## Language Selection
 

@@ -1,10 +1,6 @@
 /**
  * Tool input parameters interfaces
  */
-export interface ISynapseHealthParams {
-  detailed?: boolean;
-}
-
 export interface IMemorySearchParams {
   query: string;
   memoryType?: "procedural" | "episodic" | "domain" | "all";

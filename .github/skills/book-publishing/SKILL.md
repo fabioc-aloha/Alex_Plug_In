@@ -2,6 +2,7 @@
 name: "book-publishing"
 description: "Markdown-to-PDF pipeline via Pandoc and LuaLaTeX with emoji rendering, dual output, and print-ready formatting"
 tier: extended
+applyTo: '**/*book*,**/*publish*,**/*pdf*,**/*pandoc*'
 metadata:
   inheritance: inheritable
 ---

@@ -2,7 +2,8 @@
 name: "nav-inject"
 description: "Inject cross-document navigation tables into multi-file Markdown documentation suites"
 tier: extended
-version: "1.0.0"
+applyTo: '**/*nav*,**/*navigation*,**/nav.json'
+muscle: .github/muscles/nav-inject.cjs
 ---
 
 # Navigation Injector

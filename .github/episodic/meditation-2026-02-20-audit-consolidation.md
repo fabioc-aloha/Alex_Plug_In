@@ -81,9 +81,3 @@ Related skills naturally share activation keywords:
 - Schema validation: Passed
 
 ---
-
-## Synapses
-
-- [.github/instructions/meditation.instructions.md] (Critical, Implements, Bidirectional) - "Meditation protocol source"
-- [.github/skills/brain-qa/SKILL.md] (High, Documents, Forward) - "Audit tool used"
-- [.github/episodic/meditation-2026-02-20-avatar-system-completion.md] (Medium, Follows, Backward) - "Earlier meditation same day"

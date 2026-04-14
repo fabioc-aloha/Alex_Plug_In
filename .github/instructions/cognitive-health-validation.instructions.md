@@ -9,17 +9,6 @@ inheritance: master-only
 **Purpose**: Systematic validation of cognitive architecture integrity, master-heir synchronization, and knowledge base consistency  
 **Implementation**: brain-qa.ps1 (33-phase automated audit) + manual interpretation
 
-## Synapses
-
-- [.github/skills/brain-qa/SKILL.md] (Critical, Implements, Bidirectional) - "Domain knowledge for cognitive architecture validation"
-- [.github/instructions/meditation.instructions.md] (High, Integrates, Bidirectional) - "Post-meditation validation includes brain-qa for master-heir sync"
-- [.github/instructions/dream-state-automation.instructions.md] (High, Complements, Bidirectional) - "Dream validates synapses, brain-qa validates structure and sync"
-- [.github/instructions/semantic-audit.instructions.md] (Medium, Complements, Bidirectional) - "Semantic audit checks meaning, brain-qa checks structure"
-- [.github/instructions/release-management.instructions.md] (Critical, Gates, Bidirectional) - "Pre-release validation requires clean brain-qa run"
-- [.github/instructions/self-actualization.instructions.md] (High, Triggers, Forward) - "Self-actualization may trigger comprehensive health validation"
-
----
-
 ## When to Run brain-qa
 
 | Trigger                  | Mode          | Expected Outcome    | Action on Failure                        |

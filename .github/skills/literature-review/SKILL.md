@@ -2,6 +2,7 @@
 name: literature-review
 description: Systematic literature search, synthesis, gap identification, and narrative construction for academic research
 tier: extended
+applyTo: '**/*research*,**/*literature*,**/*review*,**/*synthesis*'
 ---
 
 # Skill: Literature Review

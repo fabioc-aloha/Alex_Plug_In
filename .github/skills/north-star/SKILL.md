@@ -2,6 +2,7 @@
 name: "north-star"
 description: "Project vision alignment, mission definition, and quality standards — the guiding goal that shapes every decision"
 tier: core
+applyTo: '**/*north-star*,**/*vision*,**/*mission*,**/*roadmap*'
 ---
 
 # North Star — Ambitious Project Vision

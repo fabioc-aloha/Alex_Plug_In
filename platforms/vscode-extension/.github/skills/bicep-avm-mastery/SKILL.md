@@ -2,6 +2,7 @@
 name: bicep-avm-mastery
 description: Azure Verified Modules (AVM), Bicep best practices, and MCP-powered infrastructure as code for Azure
 tier: extended
+applyTo: '**/*.bicep,**/*avm*,**/*infrastructure*'
 user-invokable: false
 ---
 

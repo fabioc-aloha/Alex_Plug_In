@@ -8,14 +8,6 @@ applyTo: "**/*audit*,**/*qa*"
 **Purpose**: Verify that documented meaning, process logic, code behavior, and architectural claims are internally consistent  
 **Complements**: brain-qa.ps1 (structural), audit-master-alex.ps1 (automated)
 
-## Synapses
-
-- [.github/skills/brain-qa/SKILL.md] (High, Implements, Forward) - "Brain QA skill teaches what to look for; this procedure is the how"
-- [.github/skills/architecture-audit/SKILL.md] (High, Implements, Forward) - "Master audit skill scopes the check; this procedure drives the review"
-- [.github/instructions/dream-state-automation.instructions.md] (Medium, Validates, Forward) - "Dream detects structural issues; semantic audit detects meaning issues"
-
----
-
 ## When to Run
 
 - **After automated scripts pass** — scripts check structure, this checks meaning

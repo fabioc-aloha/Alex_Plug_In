@@ -114,19 +114,3 @@ This meditation consolidates learnings from the **Phoenix crisis recovery** — 
 - [ ] Commit changes before proceeding with v3.6.0 work
 
 ---
-
-## Synapses
-
-### Connection Mapping
-
-- **External Reference**: `alex_docs/PHOENIX-RECOVERY.md` — Crisis recovery documentation
-- [unified-meditation-protocols.prompt.md] (High, Follows, Forward) - "Protocol compliance"
-- [RISKS.md] (Medium, Integrates, Bidirectional) - "Session addresses documented risks"
-
-### Activation Patterns
-- Phoenix-like symptoms → Reference alex_docs/PHOENIX-RECOVERY.md
-- Post-crisis meditation → Follow this session as template
-
----
-
-*Meditation session complete — Phoenix recovery patterns consolidated into permanent memory*

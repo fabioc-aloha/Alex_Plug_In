@@ -10,9 +10,9 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as workspaceFs from "./workspaceFs";
-import { SYNAPSE_REGEX } from "./constants";
 import { assertDefined, assertBounded, assertAbsolutePath } from "./assertions";
 
+// Legacy interface - kept for backward compatibility
 export interface Synapse {
   sourceFile: string;
   targetFile: string;
@@ -29,9 +29,9 @@ export interface Synapse {
 export interface DreamReport {
   timestamp: string;
   totalFiles: number;
-  totalSynapses: number;
-  brokenSynapses: Synapse[];
-  repairedSynapses: Synapse[];
+  totalSynapses: number; // Deprecated: always 0 since v7.8
+  brokenSynapses: Synapse[]; // Deprecated: always [] since v7.8
+  repairedSynapses: Synapse[]; // Deprecated: always [] since v7.8
   orphanedFiles: string[];
   docCountValidation?: DocCountValidation;
   inheritanceLineage?: InheritanceLineage;
@@ -167,16 +167,8 @@ export const defaultDocCounts: DocCountConfig[] = [
  */
 export const ignoredTargetFiles = ["target-file.md", "CHANGELOG.md"];
 
-/**
- * Regex to match synapse notation:
- * [file.md] (strength, type, direction) - "condition"
- */
-/**
- * Re-export the canonical synapse regex from constants.
- * Each usage should create a fresh instance via `new RegExp(synapseRegex.source, synapseRegex.flags)`
- * because the `g` flag makes RegExp stateful.
- */
-export const synapseRegex = SYNAPSE_REGEX;
+// Note: synapseRegex export removed in v7.8 - embedded synapse sections have been deprecated
+// The cognitive architecture no longer uses markdown synapse declarations
 
 /**
  * Match a file against a glob-like pattern
@@ -357,7 +349,8 @@ export async function validateDocCounts(
 }
 
 /**
- * Scan skills for inheritance lineage from Global Knowledge
+ * Scan skills folder to count local skills
+ * Note: Inheritance tracking removed - skills are now managed via SKILL.md frontmatter
  */
 export async function scanInheritanceLineage(
   rootPath: string,
@@ -379,33 +372,8 @@ export async function scanInheritanceLineage(
         continue;
       }
 
-      const synapsesPath = path.join(skillsPath, dirName, "synapses.json");
-
-      if (await workspaceFs.pathExists(synapsesPath)) {
-        try {
-          const synapsesContent = await workspaceFs.readFile(synapsesPath);
-          const synapses = JSON.parse(synapsesContent);
-
-          if (synapses.inheritedFrom) {
-            const inherited = synapses.inheritedFrom;
-            inheritedSkills.push({
-              skillId: synapses.skillId || dirName,
-              source: inherited.source || "global-knowledge",
-              registryId: inherited.registryId,
-              version: inherited.version || "unknown",
-              inheritedAt: inherited.inheritedAt || "unknown",
-            });
-
-            // Check for version drift (placeholder - would need GK access)
-            // In future: compare inherited.version to current GK version
-          } else {
-            localSkills++;
-          }
-        } catch {
-          // Invalid JSON or missing file
-          localSkills++;
-        }
-      } else {
+      const skillMdPath = path.join(skillsPath, dirName, "SKILL.md");
+      if (await workspaceFs.pathExists(skillMdPath)) {
         localSkills++;
       }
     }
@@ -416,157 +384,8 @@ export async function scanInheritanceLineage(
   return { inheritedSkills, localSkills, versionDriftWarnings };
 }
 
-/**
- * Check if a synapse target file exists
- */
-export async function validateSynapseTarget(
-  targetName: string,
-  sourceFile: string,
-  rootPath: string,
-  knownFileBasenames: Set<string>,
-  memoryFileSet: Set<string>,
-): Promise<boolean> {
-  // 1. Check ignored files first
-  if (ignoredTargetFiles.includes(targetName)) {
-    return true;
-  }
-
-  const targetBasename = path.basename(targetName).toLowerCase();
-
-  // 2. Check if in memory files list
-  const normalizedTarget = path.normalize(targetName).toLowerCase();
-  if (Array.from(memoryFileSet).some((f) => f.endsWith(normalizedTarget))) {
-    return true;
-  }
-
-  // 3. Check pre-built index
-  if (knownFileBasenames.has(targetBasename)) {
-    return true;
-  }
-
-  // 4. Check direct path from root
-  const absolutePath = path.join(rootPath, targetName);
-  if (await workspaceFs.pathExists(absolutePath)) {
-    return true;
-  }
-
-  // 5. Check relative to source file
-  const sourceDir = path.dirname(sourceFile);
-  const relativePath = path.join(sourceDir, targetName);
-  if (await workspaceFs.pathExists(relativePath)) {
-    return true;
-  }
-
-  return false;
-}
-
-/**
- * Parse synapses from a single file
- */
-export async function parseSynapsesFromFile(
-  filePath: string,
-  rootPath: string,
-  knownFileBasenames: Set<string>,
-  memoryFileSet: Set<string>,
-): Promise<Synapse[]> {
-  const synapses: Synapse[] = [];
-
-  let content: string;
-  try {
-    content = await workspaceFs.readFile(filePath);
-  } catch (error) {
-    console.error(`Failed to read file ${filePath}:`, error);
-    return synapses;
-  }
-
-  const lines = content.replace(/\r\n/g, "\n").split("\n");
-  let inCodeBlock = false;
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-
-    // Track code block state to skip false positives
-    if (line.trim().startsWith("```")) {
-      inCodeBlock = !inCodeBlock;
-      continue;
-    }
-    if (inCodeBlock) {
-      continue;
-    }
-
-    // Reset regex state
-    const regex = new RegExp(synapseRegex.source, synapseRegex.flags);
-    let match;
-
-    while ((match = regex.exec(line)) !== null) {
-      const targetName = match[1].trim();
-      const isValid = await validateSynapseTarget(
-        targetName,
-        filePath,
-        rootPath,
-        knownFileBasenames,
-        memoryFileSet,
-      );
-
-      synapses.push({
-        sourceFile: filePath,
-        targetFile: targetName,
-        strength: match[2].trim(),
-        type: match[3]?.trim() || "association",
-        direction: match[4]?.trim() || "unidirectional",
-        condition: match[5]?.trim() || "",
-        line: i + 1,
-        isValid,
-      });
-    }
-  }
-
-  return synapses;
-}
-
-/**
- * Attempt to repair a broken synapse using consolidated mappings
- */
-/**
- * Repair a broken synapse by updating the file reference
- * NASA R5: Assertions for input validation
- */
-export async function repairSynapse(synapse: Synapse): Promise<boolean> {
-  // NASA R5: Validate synapse object
-  assertDefined(synapse, "synapse object is required");
-  assertDefined(synapse.sourceFile, "synapse.sourceFile is required");
-  assertDefined(synapse.targetFile, "synapse.targetFile is required");
-
-  const targetName = path.basename(synapse.targetFile);
-  const newTarget = consolidatedMappings[targetName];
-
-  if (!newTarget) {
-    return false;
-  }
-
-  try {
-    const fileContent = await workspaceFs.readFile(synapse.sourceFile);
-    const escapedTarget = synapse.targetFile.replace(
-      /[.*+?^${}()|[\]\\]/g,
-      "\\$&",
-    );
-    const regex = new RegExp(`\\[${escapedTarget}\\]`, "g");
-
-    if (!regex.test(fileContent)) {
-      return false;
-    }
-
-    const newContent = fileContent.replace(regex, `[${newTarget}]`);
-    await workspaceFs.writeFile(synapse.sourceFile, newContent);
-
-    synapse.repaired = true;
-    synapse.newTarget = newTarget;
-    return true;
-  } catch (error) {
-    console.error(`Failed to repair synapse in ${synapse.sourceFile}:`, error);
-    return false;
-  }
-}
+// Note: validateSynapseTarget, parseSynapsesFromFile, repairSynapse removed in v7.8
+// Embedded synapse sections have been deprecated — use SKILL.md frontmatter instead
 
 /**
  * Run the full dream protocol - core logic
@@ -582,7 +401,7 @@ export async function runDreamCore(
 
   const progress = onProgress || (() => {});
 
-  progress("Scanning neural network...");
+  progress("Scanning architecture...");
 
   // 1. Find all memory files
   const allFiles = await findMemoryFiles(rootPath);
@@ -601,67 +420,28 @@ export async function runDreamCore(
     };
   }
 
-  // 2. Build file index for fast lookups
-  progress("Building file index...");
-  const knownFileBasenames = await buildFileIndex(rootPath);
-  const memoryFileSet = new Set(
-    allFiles.map((f) => path.normalize(f).toLowerCase()),
-  );
-
-  // 3. Parse all synapses
-  progress("Scanning synapses...");
-  const allSynapses: Synapse[] = [];
-
-  for (const file of allFiles) {
-    const fileSynapses = await parseSynapsesFromFile(
-      file,
-      rootPath,
-      knownFileBasenames,
-      memoryFileSet,
-    );
-    allSynapses.push(...fileSynapses);
-  }
-
-  // 4. Identify broken synapses
-  let brokenSynapses = allSynapses.filter((s) => !s.isValid);
-
-  // 5. Attempt repairs
-  progress("Repairing broken connections...");
-  const repairedSynapses: Synapse[] = [];
-  const remainingBrokenSynapses: Synapse[] = [];
-
-  for (const synapse of brokenSynapses) {
-    const repaired = await repairSynapse(synapse);
-    if (repaired) {
-      repairedSynapses.push(synapse);
-    } else {
-      remainingBrokenSynapses.push(synapse);
-    }
-  }
-
-  brokenSynapses = remainingBrokenSynapses;
-
-  // 6. Validate documentation counts
+  // 2. Validate documentation counts
   progress("Validating documentation counts...");
   const docCountValidation = await validateDocCounts(rootPath);
 
-  // 7. Scan for inherited skills
+  // 3. Scan for inherited skills
   progress("Checking inheritance lineage...");
   const inheritanceLineage = await scanInheritanceLineage(rootPath);
 
-  // 8. Generate report
+  // 4. Generate report
+  // Note: Synapse scanning removed in v7.8 — embedded synapses deprecated
   const report: DreamReport = {
     timestamp: new Date().toISOString(),
     totalFiles: allFiles.length,
-    totalSynapses: allSynapses.length,
-    brokenSynapses,
-    repairedSynapses,
+    totalSynapses: 0, // Deprecated
+    brokenSynapses: [],
+    repairedSynapses: [],
     orphanedFiles: [],
     docCountValidation,
     inheritanceLineage,
   };
 
-  return { report, synapses: allSynapses };
+  return { report, synapses: [] };
 }
 
 /**

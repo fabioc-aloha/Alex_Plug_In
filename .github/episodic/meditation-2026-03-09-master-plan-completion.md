@@ -30,11 +30,6 @@ Adding platform-specific technology patterns (Zendesk, Workday, Salesforce, etc.
 ### 5. Master Plan Document Lifecycle
 Completed priorities should be archived to appendix (not deleted), backlog elevated to main section. This keeps the document useful as both active tracker and historical record.
 
-## Synapses
-- [.github/instructions/refactoring-patterns.instructions.md] (High, Validates, Forward) - "Cohesive extraction pattern validated"
-- [.github/skills/vscode-extension-patterns/SKILL.md] (Medium, Enriches, Forward) - "Extension lifecycle extraction as reusable pattern"
-- [.github/instructions/meditation.instructions.md] (Critical, Implements, Bidirectional) - "Standard meditation protocol"
-
 ## Artifacts
 - Created: `platforms/vscode-extension/src/chat/globalKnowledgeBanner.ts` (223L)
 - Created: `platforms/vscode-extension/src/services/extensionLifecycle.ts` (162L)

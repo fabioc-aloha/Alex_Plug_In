@@ -2,6 +2,7 @@
 name: "text-to-speech"
 description: "Cloud TTS via Replicate for narration, audiobooks, voice cloning, and content creation"
 tier: extended
+applyTo: '**/*tts*,**/*speech*,**/*audio*,**/*narration*'
 $schema: ../SKILL-SCHEMA.json
 ---
 
@@ -102,11 +103,6 @@ node .github/muscles/brain-qa.cjs --mode quick && say "Brain QA complete"
 | **Learning**         | Auditory reinforcement of reading       |
 | **Proofreading**     | Catch errors by hearing text            |
 | **Content creation** | Generate narration for videos, podcasts |
-
-## Synapses
-
-- [.github/skills/image-handling/SKILL.md] (High, Complements, Bidirectional) - "Shared Replicate TTS model catalog"
-- [.github/instructions/language-detection-patterns.instructions.md] (Medium, Enables, Forward) - "Language detection for multi-language TTS"
 
 ## Version History
 

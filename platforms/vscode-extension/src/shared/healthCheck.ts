@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as path from "path";
-import { createSynapseRegex } from "./utils";
 
 /**
  * Health status levels
@@ -14,6 +13,8 @@ export enum HealthStatus {
 
 /**
  * Health check result
+ * Note: totalSynapses and brokenSynapses kept for API compatibility but always 0
+ * Embedded synapse sections were deprecated in v7.8
  */
 export interface HealthCheckResult {
   status: HealthStatus;
@@ -32,49 +33,14 @@ let lastCheckTime: number = 0;
 const CACHE_DURATION_MS = 60000; // 1 minute cache
 
 /**
- * Build a set of known markdown file basenames for fast synapse target lookup
+ * Count architecture files (simplified from synapse scanning)
+ * Note: Synapse scanning removed in v7.8 - embedded synapse sections deprecated
  */
-async function buildMarkdownFileIndex(
-  workspaceFolders: readonly vscode.WorkspaceFolder[],
-): Promise<Set<string>> {
-  const targetPatterns = [
-    ".github/**/*.md",
-    "alex_docs/**/*.md",
-    "platforms/**/.github/**/*.md",
-    "*.md",
-  ];
-
-  const allResults = await Promise.all(
-    targetPatterns.map((targetPattern) =>
-      vscode.workspace.findFiles(
-        new vscode.RelativePattern(workspaceFolders[0], targetPattern),
-        "**/node_modules/**",
-        1000,
-      ),
-    ),
-  );
-  const allMdFiles = allResults.flat();
-  return new Set(allMdFiles.map((f) => path.basename(f.fsPath).toLowerCase()));
-}
-
-/**
- * Scan architecture files for synapse references and check for broken links
- */
-async function scanFilesAndSynapses(
+async function countArchitectureFiles(
   workspaceFolders: readonly vscode.WorkspaceFolder[],
   patterns: string[],
-  knownFileBasenames: Set<string>,
-): Promise<{
-  totalFiles: number;
-  totalSynapses: number;
-  brokenSynapses: number;
-  issues: string[];
-}> {
+): Promise<number> {
   let totalFiles = 0;
-  let totalSynapses = 0;
-  let brokenSynapses = 0;
-  const issues: string[] = [];
-  const synapseRegex = createSynapseRegex();
 
   for (const pattern of patterns) {
     try {
@@ -87,79 +53,32 @@ async function scanFilesAndSynapses(
         null,
         100,
       );
-
-      for (const file of files) {
-        totalFiles++;
-        try {
-          const content = new TextDecoder().decode(
-            await vscode.workspace.fs.readFile(file),
-          );
-          let inCodeBlock = false;
-          const lines = content.replace(/\r\n/g, "\n").split("\n");
-
-          for (const line of lines) {
-            if (line.trim().startsWith("```")) {
-              inCodeBlock = !inCodeBlock;
-              continue;
-            }
-            if (inCodeBlock) {
-              continue;
-            }
-
-            synapseRegex.lastIndex = 0;
-            let match;
-            while ((match = synapseRegex.exec(line)) !== null) {
-              totalSynapses++;
-              const targetName = match[1].trim();
-              const targetBasename = path.basename(targetName).toLowerCase();
-
-              if (!knownFileBasenames.has(targetBasename)) {
-                brokenSynapses++;
-                if (issues.length < 5) {
-                  issues.push(
-                    `Broken: ${targetName} (from ${path.basename(file.fsPath)})`,
-                  );
-                }
-              }
-            }
-          }
-        } catch (err) {
-          // File read error - continue
-        }
-      }
-    } catch (err) {
+      totalFiles += files.length;
+    } catch {
       // Pattern search error - continue
     }
   }
 
-  return { totalFiles, totalSynapses, brokenSynapses, issues };
+  return totalFiles;
 }
 
 /**
- * Classify health status from scan results
+ * Classify health status from file count
  */
-function classifyHealthStatus(
-  totalFiles: number,
-  totalSynapses: number,
-  brokenSynapses: number,
-): { status: HealthStatus; summary: string } {
-  if (brokenSynapses === 0 && totalFiles > 0) {
+function classifyHealthStatus(totalFiles: number): {
+  status: HealthStatus;
+  summary: string;
+} {
+  if (totalFiles > 0) {
     return {
       status: HealthStatus.Healthy,
-      summary: `${totalFiles} files, ${totalSynapses} synapses - all healthy`,
-    };
-  } else if (brokenSynapses > 0 && brokenSynapses < totalSynapses * 0.1) {
-    return {
-      status: HealthStatus.Warning,
-      summary: `${brokenSynapses} broken synapses of ${totalSynapses}`,
-    };
-  } else if (brokenSynapses > 0) {
-    return {
-      status: HealthStatus.Error,
-      summary: `${brokenSynapses} broken synapses - run Dream to repair`,
+      summary: `${totalFiles} memory files ready`,
     };
   }
-  return { status: HealthStatus.Healthy, summary: `${totalFiles} files ready` };
+  return {
+    status: HealthStatus.Warning,
+    summary: "No memory files found",
+  };
 }
 
 /**
@@ -225,25 +144,16 @@ export async function checkHealth(
     ".github/domain-knowledge/*.md",
   ];
 
-  const knownFileBasenames = await buildMarkdownFileIndex(workspaceFolders);
-  const scanResult = await scanFilesAndSynapses(
-    workspaceFolders,
-    patterns,
-    knownFileBasenames,
-  );
-  const { status, summary } = classifyHealthStatus(
-    scanResult.totalFiles,
-    scanResult.totalSynapses,
-    scanResult.brokenSynapses,
-  );
+  const totalFiles = await countArchitectureFiles(workspaceFolders, patterns);
+  const { status, summary } = classifyHealthStatus(totalFiles);
 
   cachedResult = {
     status,
     initialized,
-    totalFiles: scanResult.totalFiles,
-    totalSynapses: scanResult.totalSynapses,
-    brokenSynapses: scanResult.brokenSynapses,
-    issues: scanResult.issues,
+    totalFiles,
+    totalSynapses: 0, // Deprecated - always 0
+    brokenSynapses: 0, // Deprecated - always 0
+    issues: [],
     lastChecked: new Date(),
     summary,
   };

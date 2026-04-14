@@ -281,23 +281,6 @@ What this skill covers.
 ### Concept 1
 ...
 
-## Synapses
-
-- [related-file.md] (Medium, References, Forward) - "relationship"
-```
-
-### Consolidating Knowledge
-
-After a productive session:
-
-```text
-@alex /meditate I learned about [topic] today
-```
-
-Alex will guide you through consolidating insights into permanent memory.
-
----
-
 ## Knowledge Sharing
 
 ### Global Knowledge Base

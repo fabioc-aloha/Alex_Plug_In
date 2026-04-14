@@ -1,9 +1,8 @@
 ---
 name: project-management
-description: >-
+description: "Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work, and safety-first release gates."
 tier: standard
-  Alex project management patterns: rapid AI-assisted iteration, meditation-based retrospectives, session-focused work,
-  and safety-first release gates.
+applyTo: '**/*project*,**/*tracker*,**/*sprint*,**/*iteration*'
 ---
 
 # Project Management Skill

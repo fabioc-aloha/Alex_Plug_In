@@ -5,20 +5,8 @@
  * Prevents duplication and ensures consistency.
  */
 
-/**
- * Regex pattern for parsing synapse connections in markdown files
- *
- * Format: [target-file.md] (Strength, Type, Direction) - "condition"
- *
- * Capture groups:
- * 1. Target filename (e.g., "target-file.md")
- * 2. Strength (e.g., "Critical", "High", "Medium", "Low")
- * 3. Type (optional, e.g., "Validates", "Enables", "Documents")
- * 4. Direction (optional, e.g., "Bidirectional", "Forward")
- * 5. Condition/description (e.g., "Trigger description")
- */
-export const SYNAPSE_REGEX =
-  /\[([^\]]+\.md)\]\s*\(([^,)]+)(?:,\s*([^,)]+))?(?:,\s*([^)]+))?\)\s*-\s*"([^"]*)"/g;
+// Note: SYNAPSE_REGEX removed in v7.8 - embedded synapse sections have been deprecated
+// The cognitive architecture no longer uses markdown synapse declarations
 
 /**
  * Regex to extract version from copilot-instructions.md

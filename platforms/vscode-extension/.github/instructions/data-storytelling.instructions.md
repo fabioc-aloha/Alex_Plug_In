@@ -7,13 +7,6 @@ applyTo: "**/*story*,**/*narrative*,**/*datastory*"
 
 Deep reference: `.github/skills/data-storytelling/SKILL.md`
 
-## Synapses
-
-- [.github/skills/data-storytelling/SKILL.md] (Critical, Enables, Bidirectional) - "Skill provides three-act structure, Knaflic/Duarte methodology, orchestration protocol"
-- [.github/instructions/data-analysis.instructions.md] (Critical, Activates, Phase 1) - "Analysis discovers the findings that become narrative points"
-- [.github/instructions/data-visualization.instructions.md] (Critical, Activates, Phase 2) - "Visualization renders findings as story-intent-matched charts"
-- [.github/instructions/dashboard-design.instructions.md] (High, Activates, Phase 3) - "Dashboard design arranges visuals into reading-order layout"
-
 ## When This Activates
 
 This procedure auto-loads when:

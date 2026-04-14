@@ -2,6 +2,7 @@
 name: "ascii-art-alignment"
 description: "Create perfectly aligned ASCII diagrams using the hybrid character strategy."
 tier: extended
+applyTo: '**/*ascii*,**/*diagram*,**/*box-drawing*'
 ---
 
 # ASCII Art Alignment Skill

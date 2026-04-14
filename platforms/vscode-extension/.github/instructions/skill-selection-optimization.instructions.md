@@ -207,19 +207,3 @@ After completing a complex task:
 3. **Were gaps properly flagged?** If unexpected difficulty → gap detection failed
 
 These signals should inform future skill selection accuracy — no formal logging required, just meta-cognitive awareness.
-
-## Synapses
-
-- ↔ `.github/skills/memory-activation/SKILL.md` — WHEN: complex task detected | YIELDS: action-keyword index for skill survey
-- ↔ `.github/instructions/deep-thinking.instructions.md` — WHEN: complex task needs both planning and analysis | YIELDS: episodic memory scan coordination
-- → `.github/instructions/alex-core.instructions.md` — WHEN: meta-cognitive planning | YIELDS: working memory slot management
-- → `.github/skills/cognitive-load/SKILL.md` — WHEN: many skills matched | YIELDS: prioritization and chunking
-- → `.github/skills/alex-effort-estimation/SKILL.md` — WHEN: assessing task complexity | YIELDS: effort estimates for planning
-- ← `.github/instructions/bootstrap-learning.instructions.md` — WHEN: unfamiliar domain detected in survey | YIELDS: learning acquisition protocols
-- ← `.github/skills/brain-qa/SKILL.md` — WHEN: brain-qa validates skill index integrity | YIELDS: confidence that SSO data sources are accurate
-- ← `.github/skills/meditation/SKILL.md` — WHEN: complex consolidation session | YIELDS: pre-meditation resource planning
-- ← `.github/instructions/dream-state-automation.instructions.md` — WHEN: dream validates synapse network | YIELDS: healthy dependency graph for SSO analysis
-- ← `.github/instructions/self-actualization.instructions.md` — WHEN: deep assessment needs resource planning | YIELDS: pre-assessment skill survey
-- ← `.github/skills/research-first-development/SKILL.md` — WHEN: gap analysis creates skills | YIELDS: enriched skill pool for SSO selection
-- ⊙ `.github/instructions/dream-state-automation.instructions.md` — INHIBITS: suppress SSO during dream state (unconscious processing doesn't need task planning)
-- ⊙ `.github/prompts/meditate.prompt.md` — INHIBITS: suppress SSO for simple meditation (only activate for complex multi-phase consolidation)

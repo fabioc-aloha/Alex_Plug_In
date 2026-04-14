@@ -2,6 +2,7 @@
 name: slide-design
 description: Visual hierarchy, data visualization, and minimal text patterns for impactful presentations
 tier: extended
+applyTo: '**/*slide*,**/*presentation*,**/*deck*'
 ---
 
 # Skill: Slide Design Principles

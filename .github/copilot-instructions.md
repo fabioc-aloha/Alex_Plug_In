@@ -59,7 +59,7 @@ Recovery: git checkout HEAD -- .github/
 
 <!-- brain-qa validates trifecta completeness and skill counts against disk - do not hardcode counts here -->
 
-Complete trifectas (45): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, architecture-audit, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance, memory-export, token-waste-elimination, data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation
+Complete trifectas (46): meditation, dream-state, self-actualization, release-process, brand-asset-management, ai-character-reference-generation, ai-generated-readme-banners, extension-audit-methodology, research-first-development, brain-qa, architecture-audit, bootstrap-learning, vscode-configuration-validation, ui-ux-design, md-to-word, gamma-presentations, secrets-management, chat-participant-patterns, vscode-extension-patterns, mcp-development, microsoft-graph-api, teams-app-patterns, m365-agent-debugging, testing-strategies, knowledge-synthesis, north-star, image-handling, character-aging-progression, visual-memory, code-review, root-cause-analysis, refactoring-patterns, debugging-patterns, security-review, skill-building, global-knowledge, flux-brand-finetune, ai-writing-avoidance, memory-export, token-waste-elimination, data-visualization, data-analysis, dashboard-design, data-storytelling, chart-interpretation, markdown-mermaid
 Run `node .github/muscles/brain-qa.cjs` or scan `.github/skills/` for full skill inventory and trifecta status.
 
 Meta-routing:
@@ -82,7 +82,7 @@ Kill switch: .github/config/MASTER-ALEX-PROTECTED.json
 
 <!-- brain-qa validates: agent list matches .github/agents/*.agent.md on disk -->
 
-Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Azure, M365
+Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Azure, M365, Backend (Python/FastAPI), Frontend (React/TypeScript), Infrastructure (Bicep/Azure), Planner (task decomposition), Presenter (demos/docs)
 
 ## Copilot Memory
 

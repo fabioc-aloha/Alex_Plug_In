@@ -2,7 +2,8 @@
 name: "md-scaffold"
 description: "Scaffold properly structured Markdown files from templates for clean first-pass conversion"
 tier: extended
-version: "1.0.0"
+applyTo: '**/*scaffold*,**/*template*,**/*.md'
+muscle: .github/muscles/md-scaffold.cjs
 ---
 
 # Markdown Scaffolder

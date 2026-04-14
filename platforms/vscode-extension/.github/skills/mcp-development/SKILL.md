@@ -2,6 +2,7 @@
 name: mcp-development
 description: '**Domain**: AI Infrastructure'
 tier: standard
+applyTo: '**/*mcp*,**/mcp.json,**/*model-context-protocol*'
 user-invokable: false
 ---
 

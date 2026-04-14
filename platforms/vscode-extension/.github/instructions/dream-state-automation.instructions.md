@@ -13,13 +13,6 @@ description: "Automated neural maintenance and dream state processing protocols"
 **Validation Status**: EXCELLENT - Production ready  
 **Implementation**: brain-qa.cjs muscle with TypeScript-based neural maintenance automation
 
-## Synapses
-
-- [.github/instructions/meditation.instructions.md] (Critical, Coordinates, Bidirectional) - "Dream validates synapses during meditation Phase 5"
-- [.github/instructions/embedded-synapse.instructions.md] (High, Implements, Bidirectional) - "Embedded synapse schema this automation validates"
-- [.github/skills/brain-qa/SKILL.md] (High, Implements, Forward) - "Architecture health diagnostics dream enables"
-- [.github/instructions/alex-core.instructions.md] (Critical, Enables, Bidirectional) - "Core architecture neural maintenance"
-
 ## 🌙 **Dream State Cognitive Function**
 
 ###

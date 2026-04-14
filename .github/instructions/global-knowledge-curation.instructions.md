@@ -134,14 +134,6 @@ Since `global-knowledge.md` is shared via OneDrive:
 - Edits from any platform are visible everywhere after sync
 - During curation, verify the file is consistent across access methods
 
-## Synapses
-
-- Connects to: `heir-skill-promotion.instructions.md` (for skill promotion)
-- Connects to: `global-knowledge/SKILL.md` (for knowledge management)
-- Connects to: `meditate.prompt.md` (may surface curation needs)
-- Connects to: `dream-state-automation.instructions.md` (AI-Memory sync in Phase 4)
-- Connects to: `knowledge-synthesis.instructions.md` (writes entries to global-knowledge.md)
-
 ## Migration Note
 
 > **Legacy system deprecated (April 2026)**: The `~/.alex/global-knowledge/` folder, `Alex-Global-Knowledge` GitHub repo, GK-\*/GI-\* file format, index.json schema, and skill-registry.json are all superseded by `AI-Memory/global-knowledge.md`. All cross-project knowledge now lives in the single OneDrive-synced file.
