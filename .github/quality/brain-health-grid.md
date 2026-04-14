@@ -232,6 +232,8 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 **Skill Types**: Agentic(A): 7 | Intellectual(I): 90 | Incomplete(-): 71
 
+**Semantic Review**: 0/168 reviewed | 168 pending
+
 **Defects by dimension**:
 | fm | struct | code | bounds | tri | muscle |
 |:--:|:------:|:----:|:------:|:---:|:------:|
@@ -369,6 +371,8 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | vscode-configuration-validation | 96 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
 
 **Summary**: 83 instructions | Passing: 69 | Failing: 14 | Perfect(6/6): 11
+
+**Semantic Review**: 0/83 reviewed | 83 pending
 
 ## Prompts
 

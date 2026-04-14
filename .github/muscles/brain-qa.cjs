@@ -72,6 +72,44 @@ if (!fs.existsSync(QUALITY_DIR)) {
   fs.mkdirSync(QUALITY_DIR, { recursive: true });
 }
 
+// --- Read existing semantic review (sem) values from previous grid ---
+// Preserves sem=1 when regenerating the grid, so manual reviews aren't lost
+function readExistingSemValues() {
+  const gridPath = path.join(QUALITY_DIR, "brain-health-grid.md");
+  if (!fs.existsSync(gridPath)) return { skills: {}, instructions: {} };
+
+  const content = fs.readFileSync(gridPath, "utf-8");
+  const semValues = { skills: {}, instructions: {} };
+
+  // Parse Skills table: | skill-name | ... | sem |
+  // Table format: | name | tier | lines | fm | struct | code | bounds | tri | muscle | Type | Score | Pass | sem |
+  const skillsSection = content.match(/## Skills[\s\S]*?(?=## Agents|## Instructions|$)/);
+  if (skillsSection) {
+    const skillRows = skillsSection[0].matchAll(/^\| ([\w-]+) \| \w+ \| \d+ \|.*\| (\d) \|$/gm);
+    for (const match of skillRows) {
+      const name = match[1];
+      const sem = parseInt(match[2], 10);
+      semValues.skills[name] = sem;
+    }
+  }
+
+  // Parse Instructions table: | instruction-name | lines | ... | sem |
+  const instrSection = content.match(/## Instructions[\s\S]*?(?=## Prompts|## Overall|$)/);
+  if (instrSection) {
+    const instrRows = instrSection[0].matchAll(/^\| ([\w-]+) \| \d+ \|.*\| (\d) \|$/gm);
+    for (const match of instrRows) {
+      const name = match[1];
+      const sem = parseInt(match[2], 10);
+      semValues.instructions[name] = sem;
+    }
+  }
+
+  return semValues;
+}
+
+// Load existing sem values before generating new grid
+const EXISTING_SEM = readExistingSemValues();
+
 // --- Load master-only skills from sync-architecture.cjs ---
 function getMasterOnlySkills() {
   const syncPath = path.join(GH, "muscles", "sync-architecture.cjs");
@@ -465,7 +503,9 @@ function generateGrid() {
     const passIcon = s.pass ? "✓" : "✗";
     // Type: A = Agentic (tri+muscle), I = Intellectual (tri only), - = incomplete
     const typeIcon = s.agentic ? "A" : (f.tri === 1 ? "I" : "-");
-    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.struct} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} | 0 |`);
+    // Preserve existing sem value if available, otherwise 0 (pending review)
+    const sem = EXISTING_SEM.skills[s.name] ?? 0;
+    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.struct} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} | ${sem} |`);
   }
 
   // Skills summary - now using tier-based pass/fail
@@ -489,6 +529,11 @@ function generateGrid() {
   lines.push(`**Summary**: ${skills.length} skills | Passing: ${passing} | Failing: ${failing} | Perfect(6/6): ${perfect}`);
   lines.push("");
   lines.push(`**Skill Types**: Agentic(A): ${agenticCount} | Intellectual(I): ${intellectualCount} | Incomplete(-): ${skills.length - agenticCount - intellectualCount}`);
+  lines.push("");
+  // Semantic review progress
+  const skillsReviewed = skills.filter(s => (EXISTING_SEM.skills[s.name] ?? 0) === 1).length;
+  const skillsPending = skills.length - skillsReviewed;
+  lines.push(`**Semantic Review**: ${skillsReviewed}/${skills.length} reviewed | ${skillsPending} pending`);
   lines.push("");
   lines.push("**Defects by dimension**:");
   lines.push(`| fm | struct | code | bounds | tri | muscle |`);
@@ -550,15 +595,21 @@ function generateGrid() {
   for (const i of instructions) {
     const f = i.flags;
     const passIcon = i.pass ? "✓" : "✗";
-    lines.push(`| ${i.name} | ${i.lines} | ${f.fm} | ${f.spec} | ${f.depth} | ${f.sect} | ${f.code} | ${f.skill} | ${i.score}/6 | ${passIcon} | 0 |`);
+    // Preserve existing sem value if available, otherwise 0 (pending review)
+    const sem = EXISTING_SEM.instructions[i.name] ?? 0;
+    lines.push(`| ${i.name} | ${i.lines} | ${f.fm} | ${f.spec} | ${f.depth} | ${f.sect} | ${f.code} | ${f.skill} | ${i.score}/6 | ${passIcon} | ${sem} |`);
   }
 
   // Instructions summary
   const instrPassing = instructions.filter(i => i.pass).length;
   const instrFailing = instructions.filter(i => !i.pass).length;
   const instrPerfect = instructions.filter(i => i.score === 6).length;
+  const instrReviewed = instructions.filter(i => (EXISTING_SEM.instructions[i.name] ?? 0) === 1).length;
+  const instrPending = instructions.length - instrReviewed;
   lines.push("");
   lines.push(`**Summary**: ${instructions.length} instructions | Passing: ${instrPassing} | Failing: ${instrFailing} | Perfect(6/6): ${instrPerfect}`);
+  lines.push("");
+  lines.push(`**Semantic Review**: ${instrReviewed}/${instructions.length} reviewed | ${instrPending} pending`);
 
   lines.push("");
 
