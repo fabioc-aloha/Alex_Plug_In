@@ -1,5 +1,6 @@
 ---
 description: Promote a skill or pattern from an heir project to Master Alex
+application: "When building, assessing, or promoting cognitive skills"
 agent: Alex
 inheritance: master-only
 ---

@@ -1,5 +1,6 @@
 ---
 description: Investigate a bug or failure using systematic root cause analysis
+application: "When debugging issues, investigating failures, or root cause analysis"
 agent: Alex
 ---
 

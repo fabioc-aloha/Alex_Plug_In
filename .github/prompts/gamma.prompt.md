@@ -1,5 +1,6 @@
 ---
 description: Generate AI-powered presentations using the Gamma API with Duarte methodology consulting and PPTX/PDF export
+application: "When designing APIs, integrations, or service interfaces"
 ---
 
 # Generate Gamma Presentation

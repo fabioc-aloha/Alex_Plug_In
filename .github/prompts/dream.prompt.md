@@ -1,5 +1,6 @@
 ---
 description: Run neural maintenance to validate and repair synaptic connections
+application: "When maintaining cognitive architecture or neural systems"
 agent: Alex
 ---
 

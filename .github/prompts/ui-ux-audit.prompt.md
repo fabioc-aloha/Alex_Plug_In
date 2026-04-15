@@ -1,5 +1,6 @@
 ---
 description: Systematic WCAG AA accessibility and UI/UX audit covering typography, keyboard navigation, screen reader support, and design tokens
+application: "When requesting architecture health checks, quality audits, or validation"
 ---
 
 # UI/UX Accessibility Audit

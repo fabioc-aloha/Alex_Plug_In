@@ -1,5 +1,6 @@
 ---
 description: "Run brain QA — structural script + semantic/logic/code/architectural review"
+application: "When requesting code reviews, PR feedback, or quality assessment"
 agent: Alex
 ---
 

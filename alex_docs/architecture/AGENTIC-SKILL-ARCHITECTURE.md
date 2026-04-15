@@ -453,54 +453,60 @@ Standalone is valid. The "standalone instruction" defect label is informational,
 
 ### Prompt Scoring Validation (April 2026)
 
-Prompts have 3 scoring dimensions: **desc** (description), **agent** (routes to agent), **>20L** (substantive content).
+Prompts have 4 scoring dimensions: **desc** (description), **app** (application), **agent** (routes to agent), **>20L** (substantive content).
 
-#### Why Prompts Don't Need `application`
+#### Why Prompts Need `application`
 
 | Aspect | Instructions | Prompts |
 |--------|--------------|----------|
-| **Activation** | Auto-loaded by Copilot | User-invoked (`/prompt-name`) |
-| **Discovery** | LLM decides relevance | User browses picker list |
-| **Intent** | Unknown — must declare routing hints | Clear — user picked it |
-| **Frontmatter** | `description` + `application` | `description` only |
+| **Activation** | Auto-loaded by Copilot | Agent-loaded on user request |
+| **Discovery** | Copilot decides relevance | Alex matches name/description |
+| **User Request** | Implicit (Copilot decides) | Explicit ("run brain-qa") |
+| **Frontmatter** | `description` + `application` | `description` + `application` |
 
-Instructions need `application` because Copilot must decide "should I load this?" without asking the user. The LLM needs routing hints.
+Both instructions and prompts need `application` because **an agent decides when to load them**:
+- Instructions: Copilot loads based on file patterns + semantic matching
+- Prompts: Alex loads when user says "let's meditate" or "run brain-qa"
 
-Prompts don't need `application` because the user explicitly invokes them. When someone runs `/meditate`, they already know WHEN — that's why they opened the prompt picker.
+The `application` field answers "WHEN should this be suggested?" — helping the agent proactively offer relevant workflows. When a user says "let's do neural maintenance," Alex can match that to the `application: "When requesting knowledge consolidation, neural maintenance..."` in the meditation prompt.
 
-| Prompt | Score | desc | agent | >20L | Lines | Human Assessment |
-|--------|------:|:----:|:-----:|:----:|------:|------------------|
-| alex | 2/3 | 1 | 1 | 0 | 7 | Agent routing stub — works correctly |
-| ai-character-reference-generation | 2/3 | 1 | 0 | 1 | 379 | Full workflow — works correctly |
-| meditate | 3/3 | 1 | 1 | 1 | 36 | Agent + content — complete prompt |
-| brainqa | 3/3 | 1 | 1 | 1 | 45 | Agent + content — complete prompt |
+**Note**: The VS Code prompt picker (`/meditate`) still works — `application` is additive, not exclusive. Agent mode users get proactive suggestions; picker users browse manually.
 
-**Distribution**: 66 prompts | Passing: 66 | Failing: 0 | Perfect (3/3): 39
+| Prompt | Score | desc | app | agent | >20L | Lines | Human Assessment |
+|--------|------:|:----:|:---:|:-----:|:----:|------:|------------------|
+| meditate | 4/4 | 1 | 1 | 1 | 1 | 36 | Complete — all dimensions |
+| brainqa | 4/4 | 1 | 1 | 1 | 1 | 45 | Complete — all dimensions |
+| ai-character-reference-generation | 3/4 | 1 | 1 | 0 | 1 | 379 | Full workflow — no agent routing |
+| alex | 3/4 | 1 | 1 | 1 | 0 | 7 | Agent routing stub — short but valid |
+
+**Pass criteria**: desc=1 AND app=1 (gates) AND score ≥3/4
 
 #### Prompt Criterion Validity
 
 | Dimension | Pass Rate | Issue Identified | Validity |
 |-----------|----------:|------------------|----------|
-| **desc** | 66/66 | None | ✓ Valid |
+| **desc** | 66/66 | None | ✓ Valid — required for discoverability |
+| **app** | TBD | Migration in progress | ✓ Valid — tells agent WHEN to suggest |
 | **agent** | 39/66 | Correctly identifies agent routing prompts | ✓ Valid |
 | **>20L** | 53/66 | Correctly identifies substantive content | ✓ Valid |
 
 #### Analysis
 
-**All criteria valid** — Prompts have the simplest and most correct scoring model:
+**Unified activation model** — Instructions and prompts share the same frontmatter pattern:
 
-1. **desc** (gate) — Required for discoverability. All prompts have it.
-2. **agent** — Identifies routing prompts (short stubs that switch modes)
-3. **>20L** — Identifies workflow prompts (full content with steps)
+```yaml
+---
+description: "WHAT this does"
+application: "WHEN to load/suggest this"
+---
+```
 
-The OR logic works: a prompt needs EITHER agent routing OR substantive content (or both). This correctly allows:
-- **Agent routing prompts** (7-16 lines): `/azure`, `/builder`, `/validator` — just switch modes
-- **Workflow prompts** (100-500+ lines): `/ai-character-reference-generation`, `/extension-audit-methodology` — full guided workflows
-- **Complete prompts** (20-100 lines): `/meditate`, `/brainqa` — agent mode with embedded content
+This consistency enables:
+1. **Agent proactive suggestion** — "Looks like you're doing X, want to run Y workflow?"
+2. **Semantic matching** — Both `description` and `application` are searchable
+3. **Cross-memory routing** — Same discovery pattern across all memory types
 
-**Trifecta alignment NOT required** — Prompts are a separate entry point, orthogonal to skill-instruction trifectas. Only 6/66 prompts have matching skills+instructions (e.g., `ai-character-reference-generation`), and that's architecturally correct.
-
-**No proposed refinements** — Prompt scoring is valid as-is.
+**Trifecta alignment NOT required** — Prompts are a separate entry point, orthogonal to skill-instruction trifectas.
 
 ## See Also
 

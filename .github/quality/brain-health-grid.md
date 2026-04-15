@@ -382,93 +382,95 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 ## Prompts
 
-> **Design**: Prompts are **user-invoked workflows** — the user explicitly picks from the prompt list. No `application` field needed because user intent is already clear.
+> **Design**: Prompts are **agent-loaded workflows** — user says "run brain-qa" and the agent matches by name/description. `application` declares WHEN to suggest this workflow.
 
 **Scoring Criteria**:
 | Dim | Name | 1 (good) | 0 (defect) |
 |:---:|------|----------|------------|
 | **desc** | Description | Has `description:` in frontmatter | Missing description |
+| **app** | Application | Has `application:` with WHEN hint | Missing application |
 | **agent** | Agent Routing | Has `agent:` field | No agent routing |
 | **>20L** | Content | >20 lines | ≤20 lines (stub) |
 
-**Pass criteria**: desc=1 (gate) AND score ≥2/3
+**Pass criteria**: desc=1 AND app=1 (gates) AND score ≥3/4
 
-| Prompt | Lines | desc | agent | >20L | Score | Pass |
-|--------|------:|:----:|:-----:|:----:|------:|:----:|
-| ai-character-reference-generation | 379 | 1 | 0 | 1 | 2/3 | ✓ |
-| ai-generated-readme-banners | 502 | 1 | 0 | 1 | 2/3 | ✓ |
-| alex | 7 | 1 | 1 | 0 | 2/3 | ✓ |
-| audit-writing | 36 | 1 | 0 | 1 | 2/3 | ✓ |
-| azure | 15 | 1 | 1 | 0 | 2/3 | ✓ |
-| builder | 16 | 1 | 1 | 0 | 2/3 | ✓ |
-| character-aging-progression | 166 | 1 | 0 | 1 | 2/3 | ✓ |
-| chat-participant | 195 | 1 | 0 | 1 | 2/3 | ✓ |
-| documentarian | 16 | 1 | 1 | 0 | 2/3 | ✓ |
-| extension-audit-methodology | 513 | 1 | 0 | 1 | 2/3 | ✓ |
-| flux-brand-finetune | 90 | 1 | 0 | 1 | 2/3 | ✓ |
-| gamma | 217 | 1 | 0 | 1 | 2/3 | ✓ |
-| graph-api | 209 | 1 | 0 | 1 | 2/3 | ✓ |
-| image-handling | 131 | 1 | 0 | 1 | 2/3 | ✓ |
-| journey | 230 | 1 | 0 | 1 | 2/3 | ✓ |
-| m365-agent-debug | 183 | 1 | 0 | 1 | 2/3 | ✓ |
-| m365 | 15 | 1 | 1 | 0 | 2/3 | ✓ |
-| marp | 193 | 1 | 0 | 1 | 2/3 | ✓ |
-| mcp-server | 192 | 1 | 0 | 1 | 2/3 | ✓ |
-| presentation | 104 | 1 | 0 | 1 | 2/3 | ✓ |
-| researcher | 16 | 1 | 1 | 0 | 2/3 | ✓ |
-| teams-app | 199 | 1 | 0 | 1 | 2/3 | ✓ |
-| ui-ux-audit | 685 | 1 | 0 | 1 | 2/3 | ✓ |
-| validate-config | 69 | 1 | 0 | 1 | 2/3 | ✓ |
-| validator | 16 | 1 | 1 | 0 | 2/3 | ✓ |
-| visual-memory | 220 | 1 | 0 | 1 | 2/3 | ✓ |
-| vscode-extension-audit | 163 | 1 | 0 | 1 | 2/3 | ✓ |
-| add-endpoint | 116 | 1 | 1 | 1 | 3/3 | ✓ |
-| alex-initialization | 44 | 1 | 1 | 1 | 3/3 | ✓ |
-| analyze | 40 | 1 | 1 | 1 | 3/3 | ✓ |
-| brainqa | 45 | 1 | 1 | 1 | 3/3 | ✓ |
-| brand | 31 | 1 | 1 | 1 | 3/3 | ✓ |
-| code-review-checklist | 83 | 1 | 1 | 1 | 3/3 | ✓ |
-| create-store | 110 | 1 | 1 | 1 | 3/3 | ✓ |
-| cross-domain-transfer | 51 | 1 | 1 | 1 | 3/3 | ✓ |
-| dashboard | 41 | 1 | 1 | 1 | 3/3 | ✓ |
-| datastory | 39 | 1 | 1 | 1 | 3/3 | ✓ |
-| debug | 24 | 1 | 1 | 1 | 3/3 | ✓ |
-| diagramming | 40 | 1 | 1 | 1 | 3/3 | ✓ |
-| domain-learning | 42 | 1 | 1 | 1 | 3/3 | ✓ |
-| dream | 37 | 1 | 1 | 1 | 3/3 | ✓ |
-| export-memory | 43 | 1 | 1 | 1 | 3/3 | ✓ |
-| gapanalysis | 43 | 1 | 1 | 1 | 3/3 | ✓ |
-| improve | 86 | 1 | 1 | 1 | 3/3 | ✓ |
-| interpret | 45 | 1 | 1 | 1 | 3/3 | ✓ |
-| knowledge | 32 | 1 | 1 | 1 | 3/3 | ✓ |
-| learn | 28 | 1 | 1 | 1 | 3/3 | ✓ |
-| masteraudit | 43 | 1 | 1 | 1 | 3/3 | ✓ |
-| meditate | 36 | 1 | 1 | 1 | 3/3 | ✓ |
-| memory-audit | 35 | 1 | 1 | 1 | 3/3 | ✓ |
-| northstar | 103 | 1 | 1 | 1 | 3/3 | ✓ |
-| performance-assessment | 43 | 1 | 1 | 1 | 3/3 | ✓ |
-| plan | 100 | 1 | 1 | 1 | 3/3 | ✓ |
-| promotetomaster | 39 | 1 | 1 | 1 | 3/3 | ✓ |
-| refactor | 32 | 1 | 1 | 1 | 3/3 | ✓ |
-| release | 51 | 1 | 1 | 1 | 3/3 | ✓ |
-| review | 54 | 1 | 1 | 1 | 3/3 | ✓ |
-| root-cause-analysis | 27 | 1 | 1 | 1 | 3/3 | ✓ |
-| secrets | 90 | 1 | 1 | 1 | 3/3 | ✓ |
-| security-review | 25 | 1 | 1 | 1 | 3/3 | ✓ |
-| selfactualize | 37 | 1 | 1 | 1 | 3/3 | ✓ |
-| skill-building | 36 | 1 | 1 | 1 | 3/3 | ✓ |
-| tdd | 61 | 1 | 1 | 1 | 3/3 | ✓ |
-| token-audit | 33 | 1 | 1 | 1 | 3/3 | ✓ |
-| visualize | 40 | 1 | 1 | 1 | 3/3 | ✓ |
-| word | 62 | 1 | 1 | 1 | 3/3 | ✓ |
+| Prompt | Lines | desc | app | agent | >20L | Score | Pass |
+|--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|
+| ai-character-reference-generation | 380 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| ai-generated-readme-banners | 503 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| alex | 8 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| audit-writing | 37 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| azure | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| builder | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| character-aging-progression | 167 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| chat-participant | 196 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| documentarian | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| extension-audit-methodology | 514 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| flux-brand-finetune | 91 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| gamma | 218 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| graph-api | 210 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| image-handling | 132 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| journey | 231 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| m365-agent-debug | 184 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| m365 | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| marp | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| mcp-server | 193 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| presentation | 105 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| researcher | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| teams-app | 200 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| ui-ux-audit | 686 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| validate-config | 70 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| validator | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| visual-memory | 221 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| vscode-extension-audit | 164 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| add-endpoint | 117 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-initialization | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| analyze | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| brainqa | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| brand | 32 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| code-review-checklist | 84 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| create-store | 111 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| cross-domain-transfer | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| dashboard | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| datastory | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| debug | 25 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| diagramming | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| domain-learning | 43 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| dream | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| export-memory | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| gapanalysis | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| improve | 87 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| interpret | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| knowledge | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| learn | 29 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| masteraudit | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| meditate | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| memory-audit | 36 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| northstar | 104 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| performance-assessment | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| plan | 101 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| promotetomaster | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| refactor | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| release | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| review | 55 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| root-cause-analysis | 28 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| secrets | 91 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| security-review | 26 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| selfactualize | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| skill-building | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| tdd | 62 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| token-audit | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| visualize | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| word | 63 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 
-**Summary**: 66 prompts | Passing: 66 | Failing: 0 | Perfect(3/3): 39
+**Summary**: 66 prompts | Passing: 66 | Failing: 0 | Perfect(4/4): 39
 
 ### Criterion Validity
 
 | Criterion | Pass | Rate | Validity |
 |-----------|-----:|-----:|----------|
 | desc | 66/66 | 100% | ✓ Valid — required for discoverability |
+| app | 66/66 | 100% | ✓ Valid — tells agent WHEN to suggest |
 | agent | 46/66 | 70% | ✓ Valid — identifies routing prompts |
 | >20L | 59/66 | 89% | ✓ Valid — identifies workflow content |
 ## Overall

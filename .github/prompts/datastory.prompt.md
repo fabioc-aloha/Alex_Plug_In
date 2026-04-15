@@ -1,5 +1,6 @@
 ---
 description: End-to-end data story -- from raw data to narrated dashboard with three-act structure
+application: "When analyzing data, creating visualizations, or building reports"
 agent: Alex
 ---
 

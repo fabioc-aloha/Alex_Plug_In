@@ -1,5 +1,6 @@
 ---
 description: Search and manage cross-project global knowledge
+application: "When working with GitHub PRs, issues, or repository operations"
 agent: Alex
 ---
 

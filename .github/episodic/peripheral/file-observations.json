@@ -2,29 +2,35 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "alex_docs/architecture/AGENTIC-SKILL-ARCHITECTURE.md"
+    "alex_docs/architecture/AGENTIC-SKILL-ARCHITECTURE.md",
+    "scripts/add-prompt-application.cjs"
   ],
   "todoHotspots": [
     {
+      "file": "scripts/add-instruction-application.cjs",
+      "todoCount": 2,
+      "scannedAt": 1776217261727
+    },
+    {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1776214204838
+      "scannedAt": 1776217261727
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1776214204838
+      "scannedAt": 1776217261727
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1776214204838
+      "scannedAt": 1776217261727
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1776214204838
+      "scannedAt": 1776217261727
     }
   ],
-  "lastUpdated": 1776214204838
+  "lastUpdated": 1776217261727
 }

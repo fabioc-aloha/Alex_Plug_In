@@ -1,5 +1,6 @@
 ---
 description: Recommend and generate the right chart for your data story
+application: "When analyzing data, creating visualizations, or building reports"
 agent: Alex
 ---
 

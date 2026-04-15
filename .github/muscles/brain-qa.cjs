@@ -405,16 +405,18 @@ function scanPrompts() {
     const name = file.replace(".prompt.md", "");
 
     const hasDesc = /^description:/m.test(content);
+    const hasApp = /^application:/m.test(content);
     const flags = {
       desc: hasDesc ? 1 : 0,
+      app: hasApp ? 1 : 0,
       agent: /^agent:/m.test(content) ? 1 : 0,
       over20: lines > 20 ? 1 : 0,
     };
 
-    const score = flags.desc + flags.agent + flags.over20;
-    // desc is a GATE - prompts without description won't be discoverable
-    const pass = hasDesc && (score >= 2);
-    results.push({ name, lines, flags, score, maxScore: 3, pass });
+    const score = flags.desc + flags.app + flags.agent + flags.over20;
+    // desc + app are GATES - prompts need both for discoverability and routing
+    const pass = hasDesc && hasApp && (score >= 3);
+    results.push({ name, lines, flags, score, maxScore: 4, pass });
   }
 
   return results.sort((a, b) => a.score - b.score);
@@ -620,35 +622,37 @@ function generateGrid() {
   // Prompts table
   lines.push("## Prompts");
   lines.push("");
-  lines.push("> **Design**: Prompts are **user-invoked workflows** — the user explicitly picks from the prompt list. No `application` field needed because user intent is already clear.");
+  lines.push("> **Design**: Prompts are **agent-loaded workflows** — user says \"run brain-qa\" and the agent matches by name/description. `application` declares WHEN to suggest this workflow.");
   lines.push("");
-  lines.push("**Scoring Criteria**:");;
+  lines.push("**Scoring Criteria**:");
   lines.push("| Dim | Name | 1 (good) | 0 (defect) |");
   lines.push("|:---:|------|----------|------------|");
   lines.push("| **desc** | Description | Has `description:` in frontmatter | Missing description |");
+  lines.push("| **app** | Application | Has `application:` with WHEN hint | Missing application |");
   lines.push("| **agent** | Agent Routing | Has `agent:` field | No agent routing |");
   lines.push("| **>20L** | Content | >20 lines | ≤20 lines (stub) |");
   lines.push("");
-  lines.push("**Pass criteria**: desc=1 (gate) AND score ≥2/3");
+  lines.push("**Pass criteria**: desc=1 AND app=1 (gates) AND score ≥3/4");
   lines.push("");
-  lines.push("| Prompt | Lines | desc | agent | >20L | Score | Pass |");
-  lines.push("|--------|------:|:----:|:-----:|:----:|------:|:----:|");
+  lines.push("| Prompt | Lines | desc | app | agent | >20L | Score | Pass |");
+  lines.push("|--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|");
 
   for (const p of prompts) {
     const f = p.flags;
     const passIcon = p.pass ? "✓" : "✗";
-    lines.push(`| ${p.name} | ${p.lines} | ${f.desc} | ${f.agent} | ${f.over20} | ${p.score}/3 | ${passIcon} |`);
+    lines.push(`| ${p.name} | ${p.lines} | ${f.desc} | ${f.app} | ${f.agent} | ${f.over20} | ${p.score}/4 | ${passIcon} |`);
   }
 
   // Prompts summary
   const promptsPassing = prompts.filter(p => p.pass).length;
   const promptsFailing = prompts.filter(p => !p.pass).length;
-  const promptsPerfect = prompts.filter(p => p.score === 3).length;
+  const promptsPerfect = prompts.filter(p => p.score === 4).length;
   lines.push("");
-  lines.push(`**Summary**: ${prompts.length} prompts | Passing: ${promptsPassing} | Failing: ${promptsFailing} | Perfect(3/3): ${promptsPerfect}`);
+  lines.push(`**Summary**: ${prompts.length} prompts | Passing: ${promptsPassing} | Failing: ${promptsFailing} | Perfect(4/4): ${promptsPerfect}`);
 
   // Prompts criterion validity
   const promptDescPass = prompts.filter(p => p.flags.desc === 1).length;
+  const promptAppPass = prompts.filter(p => p.flags.app === 1).length;
   const promptAgentPass = prompts.filter(p => p.flags.agent === 1).length;
   const promptOver20Pass = prompts.filter(p => p.flags.over20 === 1).length;
   lines.push("");
@@ -657,6 +661,7 @@ function generateGrid() {
   lines.push("| Criterion | Pass | Rate | Validity |");
   lines.push("|-----------|-----:|-----:|----------|");
   lines.push(`| desc | ${promptDescPass}/${prompts.length} | ${Math.round(promptDescPass/prompts.length*100)}% | ✓ Valid — required for discoverability |`);
+  lines.push(`| app | ${promptAppPass}/${prompts.length} | ${Math.round(promptAppPass/prompts.length*100)}% | ✓ Valid — tells agent WHEN to suggest |`);
   lines.push(`| agent | ${promptAgentPass}/${prompts.length} | ${Math.round(promptAgentPass/prompts.length*100)}% | ✓ Valid — identifies routing prompts |`);
   lines.push(`| >20L | ${promptOver20Pass}/${prompts.length} | ${Math.round(promptOver20Pass/prompts.length*100)}% | ✓ Valid — identifies workflow content |`);
 

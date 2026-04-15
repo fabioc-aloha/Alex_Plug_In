@@ -1,6 +1,7 @@
 ---
 agent: Alex
 description: Learning effectiveness evaluation and performance assessment
+application: "When starting research sessions or learning new domains"
 ---
 
 # Performance Assessment Protocol

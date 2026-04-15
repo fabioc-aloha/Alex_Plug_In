@@ -1,5 +1,6 @@
 ---
 description: "Run Master Alex audit — 22 automated sections + semantic/logic/code/architectural review"
+application: "When requesting architecture health checks, quality audits, or validation"
 agent: Alex
 inheritance: master-only
 ---

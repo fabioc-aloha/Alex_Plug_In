@@ -1,5 +1,6 @@
 ---
 description: Start a structured learning session on a topic
+application: "When starting research sessions or learning new domains"
 agent: Alex
 ---
 

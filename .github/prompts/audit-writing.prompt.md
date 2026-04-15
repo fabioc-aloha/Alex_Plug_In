@@ -1,6 +1,7 @@
 ---
 mode: agent
 description: Check documents and policies for AI writing tells and suggest improvements for authentic voice
+application: "When generating documentation, READMEs, or technical writing"
 tools: []
 ---
 

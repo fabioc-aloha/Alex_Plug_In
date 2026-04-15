@@ -1,5 +1,6 @@
 ---
 description: Systematically diagnose and fix a non-functional M365 Copilot declarative agent across 6 diagnostic layers
+application: "When developing prompts, instructions, or agent configurations"
 inheritance: heir:m365
 ---
 

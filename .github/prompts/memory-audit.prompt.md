@@ -1,5 +1,6 @@
 ---
 description: "Audit /memories/ user memory for scope violations, waste, and budget usage"
+application: "When requesting architecture health checks, quality audits, or validation"
 agent: Alex
 ---
 

@@ -1,6 +1,7 @@
 ---
 mode: agent
 description: Create Marp presentation slides from content with Alex branding
+application: "When scaffolding new projects, files, or architecture components"
 ---
 
 # Marp Presentation Generator
