@@ -76,7 +76,7 @@ Every skill aspires to structural merit plus capability completeness:
 ```
 Quality = Visibility + Merit + Capability
 
-Visibility:  fm (frontmatter with applyTo, description)
+Visibility:  fm (frontmatter with description + application)
 Merit:       code + bounds
 Capability:  tri (trifecta) + muscle (automation)
 ```
@@ -407,49 +407,49 @@ Instructions have 6 scoring dimensions: **fm** (frontmatter), **spec** (specific
 
 #### Instruction Criterion Validity
 
-| Dimension | Pass Rate | Issue Identified | Validity |
-|-----------|----------:|------------------|----------|
-| **fm** | 69/83 | Requires `applyTo` but some use `excludeAgent` or rely on semantic matching | ⚠ Partial |
-| **spec** | 69/83 | Penalizes `applyTo: "**"` but some instructions ARE always-on by design | ✗ Invalid |
-| **depth** | 62/83 | Correctly identifies substantive content | ✓ Valid |
-| **sect** | 72/83 | Correctly identifies structured content | ✓ Valid |
-| **code** | 50/83 | Correctly identifies examples | ✓ Valid |
-| **skill** | 46/83 | Assumes all instructions need trifecta; ignores naming mismatches | ⚠ Partial |
+**Update (April 2026)**: Instructions are now **discoverable knowledge modules** that can serve multiple skills.
+
+| Dimension | Description | 1 (good) | 0 (defect) |
+|-----------|-------------|----------|------------|
+| **fm** | Frontmatter | Has `description` AND `application` | Missing either |
+| **depth** | Depth | >50 lines | ≤50 lines |
+| **sect** | Sections | ≥2 `##` headers | Flat structure |
+| **code** | Code | Has code block | No examples |
+| **skill** | Trifecta | Has matching skill | Standalone instruction |
+
+**Frontmatter fields**:
+- `description` — WHAT it does
+- `application` — WHEN/WHY to use it (enables routing without reading full doc)
+- `applyTo` — Optional Copilot file-pattern activation
+
+**Pass criteria**: fm=1 (gate) AND score ≥3/5
+
+**Result**: 79/83 passing | 4 failing (short worldview/teams docs)
 
 #### Analysis
 
-**fm (69/83 pass) — PARTIAL VALIDITY**
+**fm (79/83 pass) — VALID**
 
-The criterion requires BOTH `description` AND `applyTo`. But:
-- `alex-core` uses `excludeAgent` (applies to all EXCEPT coding-agent) — no `applyTo`
-- `ai-writing-avoidance` relies on Copilot's semantic matching — no `applyTo`
+The new model requires `description` AND `application`:
+- `description` — What the instruction does
+- `application` — When/why to use it (enables agent/skill routing)
 
-Both are important instructions that fail fm=0 despite being well-designed.
+This replaces the `applyTo` requirement. `applyTo` is now optional (Copilot file-pattern activation).
 
-**spec (69/83 pass) — INVALID CRITERION**
+**spec REMOVED**
 
-Penalizes `applyTo: "**"` as "too broad," but some instructions ARE legitimately always-on:
-- `emotional-intelligence` — unconscious behavior for ALL conversations
-- `terminal-command-safety` — safety rules for ALL terminal operations
-
-Scoring spec=0 for these is incorrect — they're correctly scoped.
+The `spec` dimension (applyTo specificity) was removed entirely. `applyTo` is Copilot activation, not quality. Instructions can:
+- Have specific `applyTo` patterns (e.g., `**/*.ts`)
+- Have broad `applyTo: "**"` (always-on behavior)
+- Omit `applyTo` entirely (rely on semantic matching)
 
 **skill (46/83 pass) — PARTIAL VALIDITY**
 
-Two issues:
-1. **Naming mismatch**: `code-review-guidelines.instructions.md` doesn't match `code-review` skill (skill=0, should be 1)
-2. **Standalone instructions**: Architecture permits instructions without matching skills:
-   - `emotional-intelligence` — behavioral pattern, no skill needed
-   - `terminal-command-safety` — safety rules, no skill needed
-   - `adversarial-oversight` — review protocol, no skill needed
+Instructions can be:
+1. **Trifecta partners** — linked to a matching skill
+2. **Standalone modules** — reusable across multiple skills
 
-**Instruction Refinements — PENDING**
-
-| Dimension | Current | Proposed | Status |
-|-----------|---------|----------|--------|
-| **fm** | Requires `applyTo` | Requires `description` AND (`applyTo` OR `excludeAgent`) | Review needed |
-| **spec** | Penalizes `applyTo: "**"` | Skip specificity check; Copilot's semantic matching handles routing | Review needed |
-| **skill** | Exact name match | Pattern match: `{instr-name}*.skills/` OR instruction has `standalone: true` frontmatter | Review needed |
+Standalone is valid. The "standalone instruction" defect label is informational, not a quality issue.
 
 ### Prompt Scoring Validation (April 2026)
 
