@@ -116,46 +116,90 @@ PBI has only 5 real VS Code commands. Everything else is `openChat` with a promp
 
 ---
 
-## Core Insight: Journey-Oriented Design
+## Core Insight: The Universal Creative Loop
 
 **PBI's groups aren't feature categories — they're user journeys.**
 
-Each PBI group answers: *"What am I trying to accomplish right now?"*
+But we can go further. All creative work follows the same loop:
 
-| PBI Group | Journey Question |
-| --------- | ---------------- |
-| CONNECT | "I need to link to my data" |
-| ANALYZE | "I need to understand my data" |
-| AUDIENCE | "I need to tailor for stakeholders" |
-| DESIGN | "I need to build my report" |
-| GOVERN | "I need to maintain quality" |
+```
+    ┌──────────┐
+    │  IDEATE  │ ← "I have an idea"
+    └────┬─────┘
+         ▼
+    ┌──────────┐
+    │   PLAN   │ ← "I need to structure it"
+    └────┬─────┘
+         ▼
+    ┌──────────┐
+    │  BUILD   │ ← "I'm creating it"
+    └────┬─────┘
+         ▼
+    ┌──────────┐
+    │   TEST   │ ← "I need to validate it"
+    └────┬─────┘
+         ▼
+    ┌──────────┐
+    │ RELEASE  │ ← "I'm shipping it"
+    └────┬─────┘
+         ▼
+    ┌──────────┐
+    │ IMPROVE  │ ← "I need to iterate"
+    └────┬─────┘
+         │
+         └──────► back to IDEATE
+```
 
-### Alex User Journeys
+This loop applies to **any domain**:
 
-| Journey | Question | Sidebar Expression |
-| ------- | -------- | ------------------ |
-| **CHECK** | "Is everything okay?" | Health Pulse card (status at a glance) |
-| **DO** | "I need to work" | Quick Actions (chat prompts, not commands) |
-| **CARE** | "Alex needs maintenance" | Dream, Meditate, Self-Actualize buttons |
-| **GROW** | "I want Alex to learn" | Propose Skill, Submit Feedback |
-| **LEARN** | "I need to understand" | Links to Wiki, Guides, Architecture |
+| Stage | Software | Book | Dissertation | Business |
+| ----- | -------- | ---- | ------------ | -------- |
+| **IDEATE** | Feature concept | Story premise | Research question | Product idea |
+| **PLAN** | Architecture | Outline | Methodology | Business plan |
+| **BUILD** | Write code | Write draft | Conduct research | Execute |
+| **TEST** | QA, review | Beta readers | Peer review | User testing |
+| **RELEASE** | Deploy | Publish | Defend/submit | Launch |
+| **IMPROVE** | Iterate | Revised edition | Future work | Scale |
 
-### Simplified Tab Structure
+### Alex Capabilities by Stage
 
-Based on journeys, the three tabs become:
+| Stage | User Question | Alex Actions |
+| ----- | ------------- | ------------ |
+| **IDEATE** | "I have an idea, help me explore" | Research, Bootstrap Learning, Brainstorm |
+| **PLAN** | "I need to structure my approach" | Planner agent, North Star, Architecture |
+| **BUILD** | "I'm creating something" | Builder, Code gen, Writing, Skill building |
+| **TEST** | "I need to validate this" | Validator, Code review, QA, Editing |
+| **RELEASE** | "I'm ready to ship" | Release process, Quality gates, Publishing |
+| **IMPROVE** | "I need to get better" | Meditation, Self-Actualize, Feedback, Dream |
 
-| Tab | Journey Focus | Content |
-| --- | ------------- | ------- |
-| **Home** | CHECK + DO | Health Pulse + Quick Actions |
-| **Tools** | CARE + GROW | Maintenance actions + Settings |
-| **Learn** | LEARN | External links (Wiki, learnai, docs) |
+### Agent Mapping
 
-The sidebar answers three questions:
-1. **Am I ready to work?** (Home → Health Pulse)
-2. **What should I do next?** (Home → Quick Actions)
-3. **Where do I find help?** (Learn → external resources)
+| Stage | Primary Agents |
+| ----- | -------------- |
+| IDEATE | Researcher, Alex (brainstorm) |
+| PLAN | Planner, Documentarian |
+| BUILD | Builder, Frontend, Backend, Infrastructure |
+| TEST | Validator, Alex (code review) |
+| RELEASE | Brain-Ops, Presenter |
+| IMPROVE | Alex (meditation, self-actualize, dream) |
 
-Settings and maintenance are quiet utilities in Tools — important but not primary.
+### Key Insight: IMPROVE Normalizes Maintenance
+
+Alex's cognitive care (Dream, Meditate, Self-Actualize) isn't a separate "care for the AI" task — it's the **IMPROVE stage** of the creative loop. Just as a writer does post-publish reflection, or a developer does post-release retrospectives, Alex does meditation.
+
+This frames maintenance as **part of the workflow**, not a chore.
+
+### Sidebar Expression
+
+The sidebar helps users **locate themselves in the loop**:
+
+| Tab | Loop Stages | Content |
+| --- | ----------- | ------- |
+| **Home** | All stages | Health Pulse + Quick Actions (stage-aware) |
+| **Tools** | BUILD + IMPROVE | Settings, Maintenance actions |
+| **Learn** | IDEATE + PLAN | External resources, Documentation |
+
+The sidebar answers: **"Where am I in the loop, and what's next?"**
 
 ---
 
