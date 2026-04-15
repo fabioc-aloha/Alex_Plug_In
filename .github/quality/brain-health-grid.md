@@ -56,176 +56,176 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 ## Skills
 
-| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | sem |
-|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|
-| dissertation-defense | exte | 552 | 1 | 0 | 0 | 0 | 0 | - | 1/3 | ✗ | 0 |
-| agent-debug-panel | stan | 121 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 |
-| ai-agent-design | stan | 595 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 |
-| api-design | stan | 655 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 |
-| appropriate-reliance | core | 458 | 1 | 0 | 1 | 0 | 0 | - | 2/5 | ✗ | 0 |
-| awareness | core | 306 | 1 | 0 | 1 | 0 | 0 | - | 2/5 | ✗ | 0 |
-| azure-architecture-patterns | stan | 575 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 |
-| career-development | exte | 199 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| citation-management | exte | 314 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| comedy-writing | exte | 135 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| correax-brand | exte | 124 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| counseling-psychology | exte | 179 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| cross-cultural-collaboration | exte | 318 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| deep-work-optimization | exte | 351 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| dream-state | stan | 96 | 1 | 0 | 0 | 1 | 0 | I | 2/4 | ✗ | 0 |
-| game-design | exte | 165 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| grant-writing | exte | 172 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| healthcare-informatics | exte | 142 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| hr-people-operations | exte | 155 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| journalism | exte | 154 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| legal-compliance | exte | 129 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| memory-curation | stan | 191 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 |
-| refactoring-patterns | core | 61 | 1 | 0 | 0 | 1 | 0 | I | 2/5 | ✗ | 0 |
-| research-project-scaffold | exte | 515 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| sales-enablement | exte | 164 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| skill-catalog-generator | exte | 567 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 0 |
-| svg-graphics | stan | 555 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 |
-| token-waste-elimination | stan | 69 | 1 | 0 | 0 | 1 | 0 | I | 2/4 | ✗ | 0 |
-| academic-research | exte | 482 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| ai-generated-readme-banners | stan | 618 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| ai-writing-avoidance | stan | 333 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| alex-effort-estimation | exte | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| anti-hallucination | core | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 |
-| ascii-art-alignment | exte | 325 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| bicep-avm-mastery | exte | 423 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| book-publishing | exte | 293 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| bootstrap-learning | stan | 114 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| business-analysis | stan | 273 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| chart-interpretation | stan | 185 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| coaching-techniques | exte | 326 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| code-review | core | 193 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 |
-| cognitive-load | core | 68 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| cognitive-symbiosis | exte | 244 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| copilot-sdk | stan | 484 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| data-analysis | stan | 220 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| data-storytelling | stan | 169 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| database-design | stan | 417 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| dialog-engineering | core | 101 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| doc-hygiene | core | 101 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| documentation-quality-assurance | stan | 374 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| entra-agent-id | stan | 277 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| error-recovery-patterns | core | 75 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| executive-storytelling | stan | 463 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| fabric-notebook-publish | exte | 177 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| financial-analysis | exte | 158 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| frustration-recognition | core | 387 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 |
-| git-workflow | core | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 |
-| global-knowledge | stan | 250 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| global-knowledge-sync | stan | 132 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| graphic-design | exte | 452 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| heir-bootstrap | stan | 178 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| heir-feedback | stan | 193 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| heir-sync-management | stan | 485 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| incident-response | stan | 117 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| infrastructure-as-code | stan | 842 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| learning-psychology | stan | 203 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| lint-clean-markdown | core | 108 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 |
-| literature-review | exte | 346 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| localization | exte | 952 | 1 | 1 | 0 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| markdown-mermaid | stan | 1528 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| mcp-builder | stan | 317 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| mcp-development | stan | 740 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| md-scaffold | exte | 52 | 1 | 1 | 0 | 0 | 1 | - | 3/3 | ✓ | 0 |
-| meeting-efficiency | stan | 357 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| memory-activation | core | 317 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| memory-export | exte | 104 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| microsoft-fabric | stan | 333 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| microsoft-graph-api | stan | 520 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| multi-agent-orchestration | stan | 321 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| observability-monitoring | stan | 350 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| performance-profiling | stan | 439 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| post-mortem | exte | 167 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| practitioner-research | exte | 302 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 |
-| privacy-responsible-ai | stan | 278 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| project-deployment | stan | 305 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| project-scaffolding | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| prompt-engineering | stan | 356 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| rag-architecture | stan | 390 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| release-process | stan | 299 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| research-first-development | stan | 396 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| root-cause-analysis | core | 108 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| rubber-duck-debugging | exte | 171 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| scope-management | stan | 267 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| silence-as-signal | core | 188 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| skill-building | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| skill-creator | stan | 410 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| skill-development | stan | 339 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| slide-design | exte | 351 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| socratic-questioning | exte | 169 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 |
-| stakeholder-management | stan | 292 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| status-reporting | stan | 265 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 |
-| ui-ux-design | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 |
-| vscode-extension-patterns | core | 965 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 |
-| ai-character-reference-generation | stan | 322 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| airs-appropriate-reliance | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| api-documentation | stan | 312 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| architecture-audit | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| architecture-health | stan | 102 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| architecture-refinement | stan | 120 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| azure-deployment-operations | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| azure-devops-automation | stan | 456 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| azure-openai-patterns | stan | 244 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| brand-asset-management | stan | 131 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| change-management | stan | 235 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| character-aging-progression | exte | 225 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| chat-participant-patterns | stan | 189 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| cloud-solution-architect | stan | 275 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| content-safety-implementation | stan | 228 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| converter-qa | exte | 67 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 |
-| creative-writing | stan | 465 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| dashboard-design | stan | 207 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| data-quality-monitoring | stan | 211 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| data-visualization | stan | 295 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| debugging-patterns | core | 118 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 |
-| distribution-security | stan | 221 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| docx-to-md | exte | 76 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 |
-| enterprise-integration | stan | 240 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| extension-audit-methodology | stan | 190 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| flux-brand-finetune | exte | 392 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| foundry-agent-platform | exte | 281 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| frontend-design-review | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| gamma-presentations | stan | 359 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| image-handling | stan | 372 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| knowledge-synthesis | stan | 134 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| llm-model-selection | stan | 215 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| m365-agent-debugging | stan | 164 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| md-to-eml | exte | 69 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 |
-| md-to-html | stan | 78 | 1 | 1 | 0 | 1 | 1 | A | 4/4 | ✓ | 0 |
-| meditation | stan | 171 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| msal-authentication | stan | 264 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| muscle-memory-recognition | stan | 206 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| nav-inject | exte | 74 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 |
-| north-star | core | 321 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 |
-| persona-detection | core | 112 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 |
-| pii-privacy-regulations | exte | 359 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| pptx-generation | exte | 157 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| presentation-tool-selection | stan | 227 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| proactive-assistance | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 |
-| project-management | stan | 248 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| prompt-evolution-system | stan | 188 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| ralph-loop | adva | 239 | 1 | 1 | 1 | 0 | 1 | - | 4/4 | ✓ | 0 |
-| react-vite-performance | stan | 302 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| release-preflight | stan | 105 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| secrets-management | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| security-review | core | 333 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 |
-| self-actualization | stan | 201 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| service-worker-offline-first | exte | 252 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| sse-streaming | exte | 289 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| teams-app-patterns | stan | 195 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| terminal-image-rendering | exte | 113 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| testing-strategies | core | 156 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 |
-| text-to-speech | exte | 122 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| visual-memory | exte | 343 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| vscode-configuration-validation | stan | 232 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| vscode-environment | stan | 110 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 |
-| work-life-balance | exte | 119 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 |
-| brain-qa | stan | 268 | 1 | 1 | 1 | 1 | 1 | A | 5/4 | ✓ | 0 |
-| md-to-word | stan | 233 | 1 | 1 | 1 | 1 | 1 | A | 5/4 | ✓ | 0 |
+| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |
+|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:---:|
+| dissertation-defense | exte | 552 | 1 | 0 | 0 | 0 | 0 | - | 1/3 | ✗ | 0 | 0 | 0 |
+| agent-debug-panel | stan | 121 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
+| ai-agent-design | stan | 595 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
+| api-design | stan | 655 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
+| appropriate-reliance | core | 458 | 1 | 0 | 1 | 0 | 0 | - | 2/5 | ✗ | 0 | 0 | 0 |
+| awareness | core | 306 | 1 | 0 | 1 | 0 | 0 | - | 2/5 | ✗ | 0 | 0 | 0 |
+| azure-architecture-patterns | stan | 575 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
+| career-development | exte | 199 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| citation-management | exte | 314 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| comedy-writing | exte | 135 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| correax-brand | exte | 124 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| counseling-psychology | exte | 179 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| cross-cultural-collaboration | exte | 318 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| deep-work-optimization | exte | 351 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| dream-state | stan | 96 | 1 | 0 | 0 | 1 | 0 | I | 2/4 | ✗ | 0 | 0 | 0 |
+| game-design | exte | 165 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| grant-writing | exte | 172 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| healthcare-informatics | exte | 142 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| hr-people-operations | exte | 155 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| journalism | exte | 154 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| legal-compliance | exte | 129 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| memory-curation | stan | 191 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
+| refactoring-patterns | core | 61 | 1 | 0 | 0 | 1 | 0 | I | 2/5 | ✗ | 0 | 0 | 0 |
+| research-project-scaffold | exte | 515 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| sales-enablement | exte | 164 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| skill-catalog-generator | exte | 567 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 1 | 0 | 0 |
+| svg-graphics | stan | 555 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
+| token-waste-elimination | stan | 69 | 1 | 0 | 0 | 1 | 0 | I | 2/4 | ✗ | 0 | 0 | 0 |
+| academic-research | exte | 482 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| ai-generated-readme-banners | stan | 618 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| ai-writing-avoidance | stan | 333 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| alex-effort-estimation | exte | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| anti-hallucination | core | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
+| ascii-art-alignment | exte | 325 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| bicep-avm-mastery | exte | 423 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| book-publishing | exte | 293 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| bootstrap-learning | stan | 114 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| business-analysis | stan | 273 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| chart-interpretation | stan | 185 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| coaching-techniques | exte | 326 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| code-review | core | 193 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
+| cognitive-load | core | 68 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
+| cognitive-symbiosis | exte | 244 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| copilot-sdk | stan | 484 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| data-analysis | stan | 220 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| data-storytelling | stan | 169 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| database-design | stan | 417 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| dialog-engineering | core | 101 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
+| doc-hygiene | core | 101 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
+| documentation-quality-assurance | stan | 374 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| entra-agent-id | stan | 277 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| error-recovery-patterns | core | 75 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
+| executive-storytelling | stan | 463 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| fabric-notebook-publish | exte | 177 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| financial-analysis | exte | 158 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| frustration-recognition | core | 387 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
+| git-workflow | core | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 1 | 0 |
+| global-knowledge | stan | 250 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| global-knowledge-sync | stan | 132 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| graphic-design | exte | 452 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| heir-bootstrap | stan | 178 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| heir-feedback | stan | 193 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| heir-sync-management | stan | 485 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 1 | 0 | 0 |
+| incident-response | stan | 117 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| infrastructure-as-code | stan | 842 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| learning-psychology | stan | 203 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| lint-clean-markdown | core | 108 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
+| literature-review | exte | 346 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| localization | exte | 952 | 1 | 1 | 0 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| markdown-mermaid | stan | 1528 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| mcp-builder | stan | 317 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| mcp-development | stan | 740 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| md-scaffold | exte | 52 | 1 | 1 | 0 | 0 | 1 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| meeting-efficiency | stan | 357 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| memory-activation | core | 317 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
+| memory-export | exte | 104 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| microsoft-fabric | stan | 333 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| microsoft-graph-api | stan | 520 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| multi-agent-orchestration | stan | 321 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| observability-monitoring | stan | 350 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| performance-profiling | stan | 439 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| post-mortem | exte | 167 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| practitioner-research | exte | 302 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| privacy-responsible-ai | stan | 278 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 1 | 0 |
+| project-deployment | stan | 305 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| project-scaffolding | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| prompt-engineering | stan | 356 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| rag-architecture | stan | 390 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| release-process | stan | 299 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 1 | 0 | 0 |
+| research-first-development | stan | 396 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| root-cause-analysis | core | 108 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
+| rubber-duck-debugging | exte | 171 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| scope-management | stan | 267 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| silence-as-signal | core | 188 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
+| skill-building | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| skill-creator | stan | 410 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| skill-development | stan | 339 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| slide-design | exte | 351 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| socratic-questioning | exte | 169 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
+| stakeholder-management | stan | 292 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| status-reporting | stan | 265 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
+| ui-ux-design | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
+| vscode-extension-patterns | core | 965 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 | 1 | 0 |
+| ai-character-reference-generation | stan | 322 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| airs-appropriate-reliance | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| api-documentation | stan | 312 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| architecture-audit | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| architecture-health | stan | 102 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| architecture-refinement | stan | 120 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| azure-deployment-operations | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| azure-devops-automation | stan | 456 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| azure-openai-patterns | stan | 244 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| brand-asset-management | stan | 131 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| change-management | stan | 235 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| character-aging-progression | exte | 225 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| chat-participant-patterns | stan | 189 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
+| cloud-solution-architect | stan | 275 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| content-safety-implementation | stan | 228 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| converter-qa | exte | 67 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
+| creative-writing | stan | 465 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| dashboard-design | stan | 207 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| data-quality-monitoring | stan | 211 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| data-visualization | stan | 295 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| debugging-patterns | core | 118 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
+| distribution-security | stan | 221 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| docx-to-md | exte | 76 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
+| enterprise-integration | stan | 240 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| extension-audit-methodology | stan | 190 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 1 | 0 | 0 |
+| flux-brand-finetune | exte | 392 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| foundry-agent-platform | exte | 281 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| frontend-design-review | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| gamma-presentations | stan | 359 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| image-handling | stan | 372 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| knowledge-synthesis | stan | 134 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| llm-model-selection | stan | 215 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
+| m365-agent-debugging | stan | 164 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
+| md-to-eml | exte | 69 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
+| md-to-html | stan | 78 | 1 | 1 | 0 | 1 | 1 | A | 4/4 | ✓ | 0 | 0 | 0 |
+| meditation | stan | 171 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| msal-authentication | stan | 264 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| muscle-memory-recognition | stan | 206 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| nav-inject | exte | 74 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
+| north-star | core | 321 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
+| persona-detection | core | 112 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
+| pii-privacy-regulations | exte | 359 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| pptx-generation | exte | 157 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| presentation-tool-selection | stan | 227 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| proactive-assistance | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
+| project-management | stan | 248 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| prompt-evolution-system | stan | 188 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| ralph-loop | adva | 239 | 1 | 1 | 1 | 0 | 1 | - | 4/4 | ✓ | 0 | 0 | 0 |
+| react-vite-performance | stan | 302 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| release-preflight | stan | 105 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 1 | 0 | 0 |
+| secrets-management | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| security-review | core | 333 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
+| self-actualization | stan | 201 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| service-worker-offline-first | exte | 252 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| sse-streaming | exte | 289 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| teams-app-patterns | stan | 195 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
+| terminal-image-rendering | exte | 113 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| testing-strategies | core | 156 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
+| text-to-speech | exte | 122 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| visual-memory | exte | 343 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| vscode-configuration-validation | stan | 232 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| vscode-environment | stan | 110 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| work-life-balance | exte | 119 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| brain-qa | stan | 268 | 1 | 1 | 1 | 1 | 1 | A | 5/4 | ✓ | 0 | 0 | 0 |
+| md-to-word | stan | 233 | 1 | 1 | 1 | 1 | 1 | A | 5/4 | ✓ | 0 | 0 | 0 |
 
 **Summary**: 168 skills | Passing: 78 | Failing: 90 | Perfect(5/5): 2
 
