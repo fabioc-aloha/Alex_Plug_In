@@ -80,8 +80,8 @@ function readExistingSemValues() {
   const content = fs.readFileSync(gridPath, "utf-8");
   const semValues = { skills: {}, instructions: {} };
 
-  // Parse Skills table: | skill-name | ... | sem |
-  // Table format: | name | tier | lines | fm | code | bounds | tri | muscle | Type | Score | Pass | sem |
+  // Parse Skills table: | skill-name | ... | inh | stale | sem |
+  // Table format: | name | tier | lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |
   const skillsSection = content.match(/## Skills[\s\S]*?(?=## Agents|## Instructions|$)/);
   if (skillsSection) {
     const skillRows = skillsSection[0].matchAll(/^\| ([\w-]+) \| \w+ \| \d+ \|.*\| (\d) \|$/gm);
@@ -486,8 +486,8 @@ function generateGrid() {
   // Skills table
   lines.push("## Skills");
   lines.push("");
-  lines.push("| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | sem |");
-  lines.push("|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|");
+  lines.push("| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |");
+  lines.push("|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:---:|");
 
   for (const s of skills) {
     const f = s.flags;
@@ -497,7 +497,7 @@ function generateGrid() {
     const typeIcon = s.agentic ? "A" : (f.tri === 1 ? "I" : "-");
     // Preserve existing sem value if available, otherwise 0 (pending review)
     const sem = EXISTING_SEM.skills[s.name] ?? 0;
-    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} | ${sem} |`);
+    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} | ${f.inh} | ${f.stale} | ${sem} |`);
   }
 
   // Skills summary - now using tier-based pass/fail
