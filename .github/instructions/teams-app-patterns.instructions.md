@@ -31,3 +31,57 @@ Every Teams app package must contain:
 - [ ] `color.png` — 192×192 solid background
 - [ ] `outline.png` — 32×32 white-on-transparent
 - [ ] All icons referenced in `manifest.json` present in zip
+
+## Manifest Schema Patterns
+
+### DA v1.6 Required Fields
+
+```json
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.6/schema.json",
+  "version": "v1.6",
+  "name": "Agent Name",
+  "description": "Agent description for users",
+  "instructions": "$[file('instructions.md')]"
+}
+```
+
+### Conversation Starters
+
+```json
+{
+  "conversation_starters": [
+    { "text": "What can you help me with?", "title": "Get started" },
+    { "text": "Show me recent documents", "title": "Recent docs" }
+  ]
+}
+```
+
+## Icon Requirements
+
+| Icon | Size | Background | Format |
+|------|------|------------|--------|
+| color.png | 192×192 | Solid color | PNG |
+| outline.png | 32×32 | Transparent | PNG (white only) |
+
+Icons must be included in the Teams app zip at root level.
+
+## CLI Workflow
+
+```bash
+# Validate manifest
+npx @m365agents/toolkit validate
+
+# Package for deployment
+npx @m365agents/toolkit package --output ./dist
+
+# Sideload for testing
+npx @m365agents/toolkit sideload --tenant $TENANT_ID
+```
+
+## Troubleshooting Checklist
+
+1. **No conversation starters** → Check `conversation_starters` array in DA manifest
+2. **Agent not responding** → Verify `instructions` file path is correct
+3. **Icon missing** → Ensure icons are at zip root, not in subfolders
+4. **Sideload fails** → Check tenant admin consent and app permissions

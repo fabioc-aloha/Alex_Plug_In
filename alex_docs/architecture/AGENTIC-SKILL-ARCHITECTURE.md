@@ -4,7 +4,7 @@
 |---|---|
 | **Document Type** | Architecture Specification |
 | **Status** | Living Document |
-| **Version** | 2.0 |
+| **Version** | 3.3 |
 | **Last Updated** | April 2026 |
 | **Authors** | Alex Cognitive Architecture Team |
 | **Related Documents** | [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md), [Trifecta Catalog](./TRIFECTA-CATALOG.md) |
@@ -13,9 +13,16 @@
 
 ## Abstract
 
-This document defines the architecture for organizing, measuring, and evolving cognitive capabilities within Alex. It introduces a formal distinction between **intellectual skills** (capabilities that provide analysis and recommendations) and **agentic skills** (capabilities that execute autonomously to produce artifacts). The architecture includes a quality scoring model, a three-part alignment system called the "trifecta," and an automation layer called "muscles."
+This document defines the architecture for organizing, measuring, evolving, and maintaining cognitive capabilities within Alex. It introduces:
 
-The design addresses a fundamental challenge in AI assistant architecture: how to organize hundreds of capabilities so they can be discovered, measured, improved, and composed. The solution draws on established industry patterns (ReAct, OpenAI's agentic definitions, Microsoft Foundry) while contributing novel elements including explicit type classification, measurable quality criteria, and the script/pseudocode muscle distinction.
+- A formal distinction between **intellectual skills** (capabilities that provide analysis and recommendations) and **agentic skills** (capabilities that execute autonomously to produce artifacts)
+- A **quality scoring model** with tiered pass criteria and automated measurement
+- The **trifecta** — a three-part alignment system connecting domain knowledge, procedures, and workflows
+- **Muscles** — an automation layer with script vs. pseudocode philosophy
+- **Brain Ops** — an autonomous maintenance agent that enforces quality standards, manages the agent fleet, and learns from delegation patterns
+- A **skill evolution pathway** from stub through agentic, with graduation criteria for skills that mature into full agents
+
+The design addresses a fundamental challenge in AI assistant architecture: how to organize hundreds of capabilities so they can be discovered, measured, improved, composed, and eventually graduate to coordinating agents. The solution draws on established industry patterns (ReAct, OpenAI's agentic definitions, Microsoft Foundry, AFCP) while contributing novel elements including explicit type classification, measurable quality criteria, the script/pseudocode muscle distinction, and formalized skill-to-agent graduation.
 
 ---
 
@@ -52,10 +59,12 @@ This document covers:
 - The trifecta alignment system
 - The muscle automation layer
 - Memory activation via frontmatter
+- Brain Ops autonomous maintenance and fleet management
+- Skill evolution and agent graduation criteria
 
 It does not cover:
-- Agent architecture (see [AGENT-CATALOG.md](./AGENT-CATALOG.md))
-- Memory persistence (see [MEMORY-SYSTEMS.md](./MEMORY-SYSTEMS.md))
+- Detailed agent specifications (see [AGENT-CATALOG.md](./AGENT-CATALOG.md))
+- Memory persistence mechanisms (see [MEMORY-SYSTEMS.md](./MEMORY-SYSTEMS.md))
 - VS Code extension integration (see [VSCODE-BRAIN-INTEGRATION.md](./VSCODE-BRAIN-INTEGRATION.md))
 
 ---
@@ -508,35 +517,533 @@ Version is useful but not essential for muscle function. Many utility scripts do
 
 ---
 
-## 6. Skill Evolution
+## 6. Autonomous Maintenance: Brain Ops
 
-Skills progress through defined stages:
+### 6.1 Purpose
+
+Brain Ops is an autonomous agent that maintains cognitive architecture health. It acts as the operational layer that enforces the quality model defined in Section 3, coordinates diagnostic scripts, implements routine fixes, and manages the agent fleet.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#57606a', 'primaryColor': '#ddf4ff', 'primaryBorderColor': '#0969da', 'primaryTextColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+flowchart TB
+    subgraph DIAGNOSE["1. Diagnose"]
+        BQ["brain-qa.cjs"]
+        AA["audit-architecture.cjs"]
+        AH["audit-heir-sync-drift.cjs"]
+    end
+    
+    subgraph ANALYZE["2. Analyze"]
+        GRID["Parse Health Grid"]
+        DEFECTS["Classify Defects"]
+        PRIORITY["Prioritize by Tier"]
+    end
+    
+    subgraph TRIAGE["3. Triage"]
+        AUTO["Auto-Fixable"]
+        MANUAL["Needs Review"]
+        FLEET["Fleet Issues"]
+    end
+    
+    subgraph ACT["4. Act"]
+        FIX["Apply Fixes"]
+        PROPOSE["Propose Changes"]
+        CREATE["Create Agents"]
+    end
+    
+    subgraph REPORT["5. Report"]
+        SUMMARY["Fix Summary"]
+        REVIEW["Review Queue"]
+        TRENDS["Health Trends"]
+    end
+    
+    DIAGNOSE --> ANALYZE
+    ANALYZE --> TRIAGE
+    TRIAGE --> ACT
+    ACT --> REPORT
+    REPORT -->|"Next cycle"| DIAGNOSE
+    
+    classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    classDef green fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    classDef gold fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    classDef purple fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
+    classDef neutral fill:#eaeef2,color:#24292f,stroke:#d0d7de
+    
+    class DIAGNOSE blue
+    class ANALYZE green
+    class TRIAGE gold
+    class ACT purple
+    class REPORT neutral
+    
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Figure 1:** *Brain Ops maintenance cycle — diagnose, analyze, triage, act, report*
+
+### 6.2 Diagnostic Operations
+
+Brain Ops coordinates multiple diagnostic scripts to build a comprehensive health picture:
+
+| Script | Purpose | Output |
+|--------|---------|--------|
+| `brain-qa.cjs` | Quality scoring for skills, instructions, prompts, muscles, agents | `brain-health-grid.md` |
+| `audit-architecture.cjs` | Structural consistency, orphan detection | Architecture report |
+| `audit-skill-activation-index.cjs` | Activation keyword coverage | Routing completeness |
+| `audit-heir-sync-drift.cjs` | Master-to-heir synchronization | Drift report |
+| `audit-tools-hooks.cjs` | MCP tool and hook configuration | Integration health |
+
+#### Diagnostic Sequence
+
+```bash
+# Full diagnostic sweep (run in order due to dependencies)
+node .github/muscles/brain-qa.cjs              # Primary quality grid
+node .github/scripts/audit-architecture.cjs    # Structural health
+```
+
+### 6.3 Triage Protocol
+
+Defects are prioritized by severity and fixability:
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#57606a', 'primaryColor': '#ddf4ff', 'primaryBorderColor': '#0969da', 'primaryTextColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+flowchart TB
+    DEFECT["Defect Detected"] --> GATE{"Gate Failure?"}
+    
+    GATE -->|"fm=0 or err=0"| P1["P1: CRITICAL<br/>Invisible or fragile"]
+    GATE -->|"No"| TIER{"Core Tier?"}
+    
+    TIER -->|"Yes"| P2["P2: HIGH<br/>Core defect"]
+    TIER -->|"No"| AUTO{"Auto-fixable?"}
+    
+    AUTO -->|"Yes"| P3["P3: MEDIUM<br/>Queue for auto-fix"]
+    AUTO -->|"No"| P4["P4: LOW<br/>Manual review queue"]
+    
+    classDef red fill:#ffebe9,color:#cf222e,stroke:#f5a3a3
+    classDef gold fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    classDef neutral fill:#eaeef2,color:#24292f,stroke:#d0d7de
+    
+    class P1 red
+    class P2 gold
+    class P3 blue
+    class P4 neutral
+    
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Figure 2:** *Triage decision tree — gate failures take priority*
+
+| Priority | Criteria | Response | SLA |
+|:--------:|----------|----------|-----|
+| **P1** | Gate failure (fm=0, err=0) | Immediate fix | Same session |
+| **P2** | Core tier defect | High priority fix | Within 24h |
+| **P3** | Auto-fixable defect | Queue for batch fix | Within 1 week |
+| **P4** | Needs human judgment | Add to review queue | Next maintenance |
+
+### 6.4 Auto-Fix Capabilities
+
+Brain Ops can automatically fix certain defect classes without human approval:
+
+| Defect Type | Auto-Fix Action | Example |
+|-------------|-----------------|---------|
+| **Missing frontmatter** | Add template frontmatter | `description: "TODO"` |
+| **Missing `application`** | Infer from content | Extract from first paragraph |
+| **Bounds warning (>500)** | Suggest split points | "Consider splitting at ## Section X" |
+| **Orphan instruction** | Create stub skill | Match naming convention |
+| **Broken synapse** | Add bidirectional link | Update `synapses.json` |
+| **Header format** | Standardize structure | Add muscle metadata tags |
+
+#### Auto-Fix Boundaries
+
+**Will auto-fix:**
+- Structural issues (frontmatter, headers, metadata)
+- Mechanical defects (broken links, missing files)
+- Convention violations (naming, location)
+
+**Will NOT auto-fix (requires human review):**
+- Content quality (accuracy, completeness)
+- Architectural decisions (tier assignment, skill splits)
+- Semantic issues (misleading descriptions)
+
+#### Structured Unknowns (AFCP Integration)
+
+When Brain Ops encounters issues it cannot resolve, it creates a **Structured Unknown** — a formalized uncertainty record that persists until resolved. This concept from AFCP transforms "I don't know" from a dead end into a trackable workflow:
+
+| Category | Description | Example |
+|----------|-------------|---------|
+| **Information** | Missing data needed to proceed | "No test coverage data for this skill" |
+| **Interpretation** | Ambiguous diagnostic results | "Bound violation: is 405 lines too long?" |
+| **Decision** | Requires human judgment | "Should these 3 skills merge?" |
+| **Authority** | Needs owner approval | "Retire deprecated agent?" |
+| **Capability** | Beyond current tooling | "No script to validate cross-references" |
+
+**Unknown lifecycle:**
+```
+Open → Consult → Assess → Resolve
+```
+
+- **Open**: Issue detected, unknown created
+- **Consult**: Surfaces in Review Queue, awaits human input
+- **Assess**: Human provides guidance, Brain Ops validates
+- **Resolve**: Fix applied or decision documented
+
+**Persistence**: Unresolved unknowns carry across sessions. During meditation, accumulated unknowns become research candidates — if the same interpretation question recurs 3+ times, it signals a need for clearer documentation or tooling.
+
+### 6.5 Fleet Maintenance
+
+Fleet maintenance treats the agent collection as a managed system. Brain Ops cross-checks agents for consistency, identifies coverage gaps, and proposes new agents when patterns emerge.
+
+#### Agent Health Scoring
+
+Each agent is scored on structural completeness:
+
+| Dimension | Checks | Weight |
+|-----------|--------|:------:|
+| **Frontmatter (fm)** | name, description, model, tools | Gate |
+| **Handoffs** | Explicit handoff section with targets | 1 |
+| **Bounds** | 80-400 lines (smaller than skills — agents coordinate, not contain) | 1 |
+| **Persona** | Consistent voice, clear identity | 1 |
+| **Code** | Examples demonstrating agent behavior | 1 |
+
+**Pass criteria:** `fm=1` AND score ≥4/5
+
+#### Expertise Tracking (AFCP Integration)
+
+Beyond structural health, Brain Ops tracks **runtime performance** using concepts from the Agent Fleets Coordination Protocol (AFCP). Each agent accumulates expertise metrics that inform future routing decisions:
+
+| Metric | Source | Use |
+|--------|--------|-----|
+| **Success rate** | Assignment outcomes (H17 hook) | Tier 2 routing preference |
+| **Skill affinity** | Completed task types | Auto-routing without explicit agent |
+| **Error patterns** | Failed assignments | Identify capability gaps |
+| **Handoff frequency** | Cross-agent transitions | Detect routing inefficiencies |
+
+**Expertise accumulation formula:**
+
+```
+expertise[agent][skill] = (successes / attempts) × recency_weight
+```
+
+Where `recency_weight` decays older outcomes (λ = 0.95 per session).
+
+**Routing tiers (AFCP model):**
+1. **Explicit**: User specifies agent → use specified
+2. **Skill match**: Task type matches agent capability → highest expertise score wins
+3. **Fallback**: No match → route to Orchestrator (Alex) for decomposition
+
+This transforms Brain Ops from structural validator to **expertise curator** — it not only checks that agents are well-formed but that they're effective at what they claim to do.
+
+#### Fleet Cross-Check Protocol
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#57606a', 'primaryColor': '#ddf4ff', 'primaryBorderColor': '#0969da', 'primaryTextColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+flowchart TD
+    subgraph INVENTORY["1. Inventory"]
+        LIST["List all agents"]
+        COUNT["Count vs expected"]
+    end
+    
+    subgraph VALIDATE["2. Validate"]
+        STRUCT["Structure check"]
+        HANDOFF["Handoff targets exist"]
+        OVERLAP["Detect overlap"]
+    end
+    
+    subgraph GAPS["3. Gap Analysis"]
+        COVERAGE["Domain coverage"]
+        PATTERNS["Usage patterns"]
+        REQUESTS["User requests"]
+    end
+    
+    subgraph PROPOSE["4. Propose"]
+        NEW["New agent specs"]
+        MERGE["Merge candidates"]
+        RETIRE["Retirement candidates"]
+    end
+    
+    INVENTORY --> VALIDATE --> GAPS --> PROPOSE
+    
+    classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    class INVENTORY,VALIDATE,GAPS,PROPOSE blue
+    
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Figure 3:** *Fleet maintenance cycle — inventory, validate, analyze gaps, propose changes*
+
+#### Gap Detection Triggers
+
+Brain Ops proposes new agents when:
+
+| Trigger | Signal | Example |
+|---------|--------|---------|
+| **Repeated skill cluster** | 3+ skills with no coordinating agent | Data skills → Data Agent |
+| **Handoff dead-end** | Agent hands off to non-existent target | "→ Security Agent" but none exists |
+| **User request pattern** | Repeated requests for missing capability | "Can you help with GraphQL?" |
+| **Platform expansion** | New platform added to ecosystem | GCX Coworker → new agent |
+
+#### New Agent Proposal Template
+
+When Brain Ops identifies a gap, it generates a proposal:
+
+```markdown
+## Proposed Agent: alex-{name}
+
+### Justification
+- **Trigger**: [What triggered this proposal]
+- **Coverage gap**: [What's currently missing]
+- **Skill cluster**: [Related skills that would benefit]
+
+### Draft Specification
+- **Name**: alex-{name}
+- **Description**: [One-line purpose]
+- **Model**: [Recommended model]
+- **Tools**: [Required tools]
+
+### Handoff Integration
+- **Receives from**: [Which agents would hand off to this one]
+- **Hands off to**: [Which agents this would hand off to]
+
+### Risk Assessment
+- **Overlap with**: [Existing agents that might overlap]
+- **Recommendation**: [Create / Defer / Merge into existing]
+```
+
+### 6.6 Coordination Layer
+
+Brain Ops orchestrates maintenance without duplicating script functionality:
+
+| Task | Coordination Pattern |
+|------|---------------------|
+| **Quality check** | Run brain-qa.cjs → parse grid → triage |
+| **Architecture audit** | Run audit-architecture.cjs → compare to previous |
+| **Fleet review** | Scan `.github/agents/` → score each → gap analysis |
+| **Heir sync** | Run audit-heir-sync-drift.cjs → flag drift |
+
+#### Maintenance Schedule
+
+| Frequency | Tasks |
+|-----------|-------|
+| **Per-session** | Quick health check (brain-qa only) |
+| **Daily** | Full diagnostic sweep (all scripts) |
+| **Weekly** | Fleet review, gap analysis |
+| **Pre-release** | Comprehensive audit, no regressions |
+
+#### Maintenance Directive Sets (AFCP Integration)
+
+AFCP's directive sets formalize behavioral modes. Brain Ops operates in named modes with distinct behaviors:
+
+| Mode | Directive | Behavior |
+|------|-----------|----------|
+| **`quick-check`** | Per-session default | Run brain-qa only, report summary, no fixes |
+| **`full-sweep`** | Daily maintenance | All scripts, auto-fix enabled, full reporting |
+| **`fleet-review`** | Weekly analysis | Add gap detection, expertise review, propose changes |
+| **`release-gate`** | Pre-release | Zero tolerance, all gates must pass, block on unknowns |
+| **`incident-mode`** | Triggered by P1 | Focus on single issue, trace correlation, suspend other work |
+
+Modes can be activated explicitly:
+```
+/brain-ops --mode release-gate
+```
+
+Or auto-detected from context:
+- Version bump detected → `release-gate`
+- `URGENT_PATCH.md` present → `incident-mode`
+- Normal session start → `quick-check`
+
+This replaces ad-hoc behavioral variation with predictable, named profiles that users can invoke and understand.
+
+### 6.7 Reporting Format
+
+Brain Ops produces structured reports for transparency:
+
+#### Session Summary Template
+
+```markdown
+## Brain Ops Maintenance Report
+**Date**: YYYY-MM-DD
+**Duration**: Xm
+
+### Diagnostics Run
+- [x] brain-qa.cjs — 168 skills, 12 agents
+
+### Fixes Applied (Auto)
+| Component | Issue | Fix |
+|-----------|-------|-----|
+| skill-x | fm=0 | Added frontmatter template |
+| muscle-y | err=0 | Wrapped in try/catch |
+
+### Review Queue (Manual)
+| Component | Issue | Recommendation |
+|-----------|-------|----------------|
+| skill-z | bounds=0 (647 lines) | Split at ## Section 4 |
+
+### Fleet Status
+- Agents: 12/12 passing
+- New agent proposed: None
+- Retirement candidates: None
+
+### Health Trend
+Previous: 94.2% → Current: 95.1% (+0.9%)
+```
+
+### 6.8 Design Rationale
+
+**Why a dedicated agent instead of manual maintenance?**
+
+Manual maintenance is inconsistent. Quality degrades between audits, gate failures accumulate, and fleet drift goes unnoticed. An autonomous agent ensures:
+- Consistent enforcement of quality standards
+- Proactive gap detection
+- Trend tracking over time
+
+**Why separate Brain Ops from brain-qa.cjs?**
+
+`brain-qa.cjs` is a diagnostic tool — it measures and reports. Brain Ops is an agent — it interprets results, decides actions, and coordinates multiple tools. This separation follows the principle that muscles execute, agents decide.
+
+**Why include fleet maintenance?**
+
+Individual skill/muscle quality is necessary but not sufficient. The agent fleet is a system — agents should coordinate, not overlap. Fleet maintenance treats agents as managed resources with lifecycle (create, maintain, retire) and ensures the ecosystem remains coherent as it grows.
+
+**Alternative considered**: Per-script agents (QA Agent, Synapse Agent, Fleet Agent). Rejected because:
+1. Fragmentation creates coordination overhead
+2. Maintenance decisions often span multiple concerns
+3. A unified agent has full context for triage decisions
+
+### 6.9 AFCP Integration Summary
+
+Brain Ops incorporates three key concepts from the [Agent Fleets Coordination Protocol](../AFCP-LEVERAGE-ANALYSIS.md) (AFCP) that transform it from structural validator to adaptive coordinator:
+
+| AFCP Concept | Brain Ops Application | Benefit |
+|--------------|----------------------|---------|
+| **Expertise Tracking** | Success rates per agent per skill type | Skill-based routing improves over time |
+| **Structured Unknowns** | Formalized uncertainty with lifecycle | "I don't know" becomes trackable workflow |
+| **Directive Sets** | Named maintenance modes | Predictable, context-aware behavior |
+
+### 6.10 Promotion & Lifecycle Management
+
+Brain files evolve through a promotion ladder. Brain Ops detects when components are ready for promotion and manages their lifecycle:
+
+```
+Insight → Instruction → Skill → Prompt → Muscle → Agent
+   ↑          ↑           ↑        ↑         ↑        ↑
+ pattern   repeated    complex  workflow  automation  domain
+ emerges    need       enough    needed     heavy    cluster
+```
+
+#### Promotion Triggers
+
+| From | To | Trigger | Example |
+|------|----|---------|---------|
+| Pattern | Instruction | Same guidance 3+ times | "Always validate paths" → `path-validation.instructions.md` |
+| Instruction | Skill | Complex domain needs structure | `api-design.instructions.md` → `api-design/SKILL.md` |
+| Skill | Trifecta | Skill exists without prompt | Add `api-design.prompt.md` workflow |
+| Repeated task | Muscle | Manual steps 5+ times | Create `validate-api.cjs` script |
+| Skill cluster | Agent | 3+ related skills | Data skills → Data Agent proposal |
+
+#### Lifecycle States
+
+```
+┌─────────┐    ┌──────────┐    ┌─────────┐    ┌──────────┐
+│ Active  │───►│ Dormant  │───►│ Warning │───►│ Archived │
+└─────────┘    └──────────┘    └──────────┘    └──────────┘
+    30 days        60 days        90 days
+     unused        unused         unused
+```
+
+- **Active**: Used within 30 days
+- **Dormant**: 30-60 days without activation
+- **Warning**: 60-90 days, candidate for review
+- **Archived**: Moved to `alex_archive/`, still searchable
+
+**Exception**: Core tier components never retire regardless of dormancy.
+
+#### Token Waste Remediation
+
+Brain Ops actively reduces token waste detected by `brain-qa.cjs`:
+
+| Waste Type | Detection | Remediation |
+|------------|-----------|-------------|
+| Mermaid diagrams | `mermaid` code blocks | Replace with prose ("A → B → C") |
+| Content overlap | >30% similarity | Merge files or add cross-reference |
+| Oversized instructions | >50 lines with matching skill | Move detail to skill |
+| Stale episodic memories | >90 days, unreferenced | Archive or prune |
+
+#### Design Rationale
+
+**Why automated promotion?** Manual promotion is forgotten. Patterns emerge, get documented ad-hoc, and remain scattered. Automated detection ensures knowledge consolidates at the right level.
+
+**Why lifecycle management?** Cognitive architectures accumulate cruft. Without active curation, skills become stale, instructions drift, and the system grows heavier without growing smarter. Lifecycle management keeps the architecture lean.
+
+**Why AFCP alignment matters:**
+
+AFCP solves multi-agent coordination at scale. While Alex is currently a single-user system with ephemeral subagents, adopting AFCP's coordination primitives positions Brain Ops to:
+
+1. **Learn from delegation** — Track which agent handles which task type best
+2. **Surface uncertainty systematically** — Unknowns persist until resolved, feed meditation
+3. **Behave predictably** — Named modes replace ad-hoc behavioral variation
+
+**Not adopted from AFCP:**
+- Fleet composition (Alex heirs are build-time clones, not runtime participants)
+- Center-mediated communication (single-agent UX, subagents are ephemeral)
+- JWT authentication (all agents run in-process)
+
+These may become relevant if Alex evolves toward multi-workspace or multi-user scenarios.
+
+---
+
+## 7. Skill Evolution
+
+Skills progress through defined stages, potentially graduating to agents:
 
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f6"}}}%%
-flowchart LR
+flowchart TD
     STUB["Stub"] -->|"+frontmatter"| VISIBLE["Visible"]
     VISIBLE -->|"+code, bounds"| QUALITY["Quality"]
     QUALITY -->|"+instruction"| INTELLECT["Intellectual"]
     INTELLECT -->|"+muscle"| AGENTIC["Agentic"]
     INTELLECT -.->|"Complete"| DONE["Done"]
+    AGENTIC -->|"+cluster,<br/>handoffs,<br/>persona"| AGENT["Agent"]
     
     style STUB fill:#f5f5f5
     style VISIBLE fill:#fff3e0
     style QUALITY fill:#e3f2fd
     style INTELLECT fill:#e8f5e9
     style AGENTIC fill:#d4edda
+    style AGENT fill:#ffd700
 ```
 
-| Stage | Score | Characteristics |
-|-------|-------|-----------------|
+| Stage | Quality Score | Characteristics |
+|-------|:-------------:|----------------|
 | **Stub** | 0-1 | New idea; minimal structure |
 | **Visible** | 1-2 | Discoverable; needs content |
 | **Quality** | 2-3 | Structured; needs alignment |
 | **Intellectual** | 3-4 | Complete for advisory use |
 | **Agentic** | 4-5 | Complete with automation |
+| **Agent** | N/A | Graduated — no longer scored as skill |
 
-### Design Rationale
+### 7.1 Agent Graduation Criteria
+
+An agentic skill (or skill cluster) graduates to an agent when:
+
+| Criterion | Signal | Example |
+|-----------|--------|---------|
+| **Cluster formation** | 3+ agentic skills that coordinate | data-analysis + data-visualization + dashboard-design → Data Agent |
+| **Handoff emergence** | Other agents reference it in handoffs | "→ hand off to Security skill" appearing in 2+ agents |
+| **Persona need** | Capability requires consistent voice/approach | Research skills need skeptical, source-citing persona |
+| **Complexity ceiling** | Skill exceeds bounds, needs decomposition | 500+ line skill that can't be meaningfully split |
+| **Autonomy requirement** | Task requires multi-step orchestration | Build → Test → Fix cycle needs coordination |
+
+**Graduation process:**
+
+1. Brain Ops detects trigger (gap detection or explicit proposal)
+2. Draft agent spec generated using proposal template (§6.5)
+3. Human reviews and approves
+4. Agent file created in `.github/agents/`
+5. Original skill(s) remain but reference the agent for orchestrated use
+
+**Key insight:** Skills don't disappear when they graduate — the agent *coordinates* the skills. The `alex-data.agent.md` would invoke `data-analysis`, `data-visualization`, and `dashboard-design` skills rather than duplicating their content.
+
+### 7.2 Design Rationale
 
 **Why model evolution explicitly?**
 
@@ -550,9 +1057,18 @@ Not all skills benefit from automation. Code review provides methodology — the
 
 The model explicitly allows skills to be "complete" at the Intellectual stage when automation isn't appropriate.
 
+**Why can skills graduate to agents?**
+
+Skills and agents serve different purposes: skills encapsulate domain knowledge, agents coordinate and orchestrate. But as skill clusters mature, they often need:
+- A consistent persona (voice, approach)
+- Handoff relationships with other agents
+- Multi-step orchestration beyond single-skill invocation
+
+Rather than bloating skills with coordination logic, graduation extracts the orchestration concern into an agent while preserving the skills as reusable components. The agent becomes a "coordinator of skills" rather than a replacement for them.
+
 ---
 
-## 7. Industry Alignment
+## 8. Industry Alignment
 
 | Framework | Key Concept | Alex Implementation |
 |-----------|-------------|---------------------|
@@ -576,9 +1092,9 @@ This architecture contributes beyond prior art:
 
 ---
 
-## 8. Future Considerations
+## 9. Future Considerations
 
-### 8.1 Planned Enhancements
+### 9.1 Planned Enhancements
 
 | Enhancement | Status | Description |
 |-------------|--------|-------------|
@@ -586,7 +1102,7 @@ This architecture contributes beyond prior art:
 | **Staleness detection** | Planned | Flag skills with external API dependencies |
 | **Inheritance tracking** | Planned | Track Master-to-heir skill propagation |
 
-### 8.2 Open Questions
+### 9.2 Open Questions
 
 1. **Should prompts be required for trifecta completion?** Currently optional, but most complete skills have them.
 2. ~~**Should muscles have their own quality scoring?**~~ **Resolved**: Muscles now have a 4-dimension quality model (comments, err, bounds, compat) with `err` as a gate. See Section 5.3-5.6.
@@ -594,7 +1110,7 @@ This architecture contributes beyond prior art:
 
 ---
 
-## 9. Quick Reference
+## 10. Quick Reference
 
 ### Type Icons
 
@@ -636,10 +1152,14 @@ This architecture contributes beyond prior art:
 
 ---
 
-## 10. Revision History
+## 11. Revision History
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 3.3 | April 2026 | Comprehensive abstract; scope updated to reflect agent coverage; See Also expanded; bounds alignment |
+| 3.2 | April 2026 | Skill → Agent graduation path (7.1); evolution diagram extended |
+| 3.1 | April 2026 | AFCP integration: expertise tracking, structured unknowns, directive sets (6.4-6.9) |
+| 3.0 | April 2026 | Brain Ops autonomous maintenance agent (Section 6); fleet maintenance protocol |
 | 2.3 | April 2026 | Added visual-memory to agentic skill examples |
 | 2.2 | April 2026 | Standard muscle header format (5.8); metadata tag specification |
 | 2.1 | April 2026 | Muscle quality model added (5.3-5.7); 4-dimension scoring |
@@ -651,8 +1171,10 @@ This architecture contributes beyond prior art:
 
 ## See Also
 
+- [AGENT-CATALOG.md](./AGENT-CATALOG.md) — Agent specifications and fleet inventory
 - [TRIFECTA-CATALOG.md](./TRIFECTA-CATALOG.md) — Complete trifecta inventory
 - [COGNITIVE-ARCHITECTURE.md](./COGNITIVE-ARCHITECTURE.md) — Overall brain structure
+- [AFCP-LEVERAGE-ANALYSIS.md](../../AFCP-LEVERAGE-ANALYSIS.md) — Agent coordination protocol integration
 - [brain-qa.cjs](../../.github/muscles/brain-qa.cjs) — Quality grid generator
 - [brain-health-grid.md](../../.github/quality/brain-health-grid.md) — Current scores
 

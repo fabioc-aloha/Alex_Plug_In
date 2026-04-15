@@ -23,14 +23,14 @@ Combined, these three features move Alex from "orchestrator that dispatches suba
 
 ## Implementation Tracker
 
-| #   | Opportunity                       | Effort | Impact | Status      | Target |
-| --- | --------------------------------- | ------ | ------ | ----------- | ------ |
-| 1   | Structured Unknowns               | Low    | High   | Not Started |        |
-| 2   | Assignment Lifecycle (H17)        | Medium | High   | Not Started |        |
-| 3   | Skill-Based Task Routing          | Medium | High   | Not Started |        |
-| 4   | Scoped Knowledge Artifacts        | Medium | Medium | Not Started |        |
-| 5   | Correlation Vectors               | Low    | Medium | Not Started |        |
-| 6   | Directive Sets (Mission Profiles) | Low    | Medium | Not Started |        |
+| #   | Opportunity                       | Effort | Impact | Status      | Target        |
+| --- | --------------------------------- | ------ | ------ | ----------- | ------------- |
+| 1   | Structured Unknowns               | Low    | High   | Designed    | Brain Ops 6.4 |
+| 2   | Assignment Lifecycle (H17)        | Medium | High   | Designed    | Brain Ops 6.5 |
+| 3   | Skill-Based Task Routing          | Medium | High   | Designed    | Brain Ops 6.5 |
+| 4   | Scoped Knowledge Artifacts        | Medium | Medium | Not Started |               |
+| 5   | Correlation Vectors               | Low    | Medium | Not Started |               |
+| 6   | Directive Sets (Mission Profiles) | Low    | Medium | Designed    | Brain Ops 6.6 |
 
 ## What AFCP Is
 

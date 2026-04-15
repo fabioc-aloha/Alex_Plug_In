@@ -2,6 +2,7 @@
 sem: 1
 mode: agent
 description: "Convert Word documents (.docx) to clean Markdown with image extraction"
+application: "When user has a .docx file to convert to Markdown or needs to migrate Word content to version control"
 ---
 
 # Word to Markdown Conversion

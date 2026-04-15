@@ -219,4 +219,10 @@ function main() {
   console.log(`\n\u2705 ${dryRun ? 'Would update' : 'Updated'} ${updated}/${files.length} files`);
 }
 
-main();
+// Main entry point with error handling
+try {
+  main();
+} catch (err) {
+  console.error('[ERROR] Nav injection failed:', err.message);
+  process.exit(1);
+}

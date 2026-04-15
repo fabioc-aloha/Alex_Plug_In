@@ -120,16 +120,9 @@ High-level architecture decisions
 
 ### 5. Dependency Graph
 
-```mermaid
-graph TD
-    A[Research: Auth Libraries] --> B[Setup: Entra App Registration]
-    B --> C[Implement: Login Flow]
-    B --> D[Implement: Token Validation]
-    C --> E[Test: Integration Tests]
-    D --> E
-    E --> F[Deploy: Staging]
-    F --> G[Review: Security Audit]
-    G --> H[Deploy: Production]
+Example dependency chain:
+```
+Research → Setup → Implement (parallel) → Test → Deploy Staging → Security Review → Deploy Prod
 ```
 
 ## Planning Artifacts

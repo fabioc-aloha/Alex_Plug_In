@@ -20,17 +20,20 @@ import * as path from 'path';
 import * as fs from 'fs/promises';
 import { parseMarkdownToSlides, generateAndSavePresentation, SlideContent, PresentationOptions } from '../../platforms/vscode-extension/src/generators/pptxGenerator';
 
-// Simple argument parser
+// Simple argument parser - extracts key-value pairs from CLI args
 function parseArgs(): Record<string, string> {
     const args: Record<string, string> = {};
+    // Skip node and script path, start from actual arguments
     const argv = process.argv.slice(2);
     
     for (let i = 0; i < argv.length; i++) {
         if (argv[i].startsWith('--')) {
+            // Extract key name after '--' prefix
             const key = argv[i].substring(2);
+            // Lookahead for value, default to 'true' for flags
             const value = argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : 'true';
             args[key] = value;
-            if (value !== 'true') i++;
+            if (value !== 'true') i++;  // Skip value on next iteration
         }
     }
     return args;
@@ -79,10 +82,10 @@ async function main(): Promise<void> {
     let slides: SlideContent[] = [];
 
     if (inputFile) {
-        // Parse markdown file
-        const mdPath = path.resolve(inputFile);
+        // Parse markdown file into slide content structures
+        const mdPath = path.resolve(inputFile);  // Resolve to absolute path for fs operations
         try {
-            await fs.access(mdPath);
+            await fs.access(mdPath);  // Verify file exists before reading
         } catch {
             console.error(`Error: File not found: ${mdPath}`);
             process.exit(1);

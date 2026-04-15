@@ -1,14 +1,20 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json"
+    "github/agents/alex-azure.agent.md",
+    "AFCP-LEVERAGE-ANALYSIS.md",
+    "alex_docs/architecture/AGENTIC-SKILL-ARCHITECTURE.md",
+    "alex_docs/guides/USER-MANUAL.md",
+    "alex_docs/safety/RAI-SAFETY-TEST-GUIDE.md",
+    "scripts/audit-architecture.cjs",
+    "scripts/audit-synapses.cjs"
   ],
   "todoHotspots": [
     {
-      "file": "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md",
+      "file": "platforms/m365-copilot/appPackage/knowledge/code-quality.txt",
       "todoCount": 1,
-      "scannedAt": 1776254924363
+      "scannedAt": 1776261311809
     }
   ],
-  "lastUpdated": 1776254924363
+  "lastUpdated": 1776261311809
 }

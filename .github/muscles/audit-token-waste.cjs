@@ -64,6 +64,8 @@ function extractFrontmatter(content) {
 }
 
 // -- Phase 1: Baseline Measurement -----------------------------
+// Main entry point wrapped in try/catch for error handling
+try {
 if (!JSON_MODE) {
   console.log("\n=== TOKEN WASTE AUDIT ===\n");
 }
@@ -455,3 +457,7 @@ if (JSON_MODE) {
 }
 
 process.exit(bugs > 0 ? 1 : 0);
+} catch (err) {
+  console.error('[ERROR] Token waste audit failed:', err.message);
+  process.exit(1);
+}

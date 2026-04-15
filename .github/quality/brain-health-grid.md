@@ -256,21 +256,22 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | sem |
 |-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:---:|
-| [alex-azure](../agents/alex-azure.agent.md) | 104 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 1 |
-| [alex-m365](../agents/alex-m365.agent.md) | 101 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 1 |
 | [alex-documentarian](../agents/alex-documentarian.agent.md) | 212 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [alex](../agents/alex.agent.md) | 263 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [alex](../agents/alex.agent.md) | 267 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [alex-azure](../agents/alex-azure.agent.md) | 195 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [alex-backend](../agents/alex-backend.agent.md) | 233 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-builder](../agents/alex-builder.agent.md) | 237 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-brain-ops](../agents/alex-brain-ops.agent.md) | 339 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [alex-builder](../agents/alex-builder.agent.md) | 201 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [alex-frontend](../agents/alex-frontend.agent.md) | 276 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [alex-infrastructure](../agents/alex-infrastructure.agent.md) | 340 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-planner](../agents/alex-planner.agent.md) | 230 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-m365](../agents/alex-m365.agent.md) | 206 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-planner](../agents/alex-planner.agent.md) | 223 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [alex-presenter](../agents/alex-presenter.agent.md) | 252 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [alex-researcher](../agents/alex-researcher.agent.md) | 248 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-validator](../agents/alex-validator.agent.md) | 258 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-validator](../agents/alex-validator.agent.md) | 242 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 
-**Summary**: 12 agents | Passing: 10 | Failing: 2 | Perfect(5/5): 8
-**Semantic Review**: 12/12 reviewed | 0 pending
+**Summary**: 13 agents | Passing: 13 | Failing: 0 | Perfect(5/5): 11
+**Semantic Review**: 12/13 reviewed | 1 pending
 
 ## Instructions
 
@@ -291,10 +292,6 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | sem |
 |-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|
-| [__test-exclusion](../instructions/__test-exclusion.instructions.md) | 7 | 1 | 0 | 0 | 0 | 0 | 1/5 | ✗ | 1 |
-| [teams-app-patterns](../instructions/teams-app-patterns.instructions.md) | 34 | 1 | 0 | 0 | 0 | 1 | 2/5 | ✗ | 1 |
-| [worldview-constitutional-ai](../instructions/worldview-constitutional-ai.instructions.md) | 40 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 1 |
-| [worldview-moral-psychology](../instructions/worldview-moral-psychology.instructions.md) | 37 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 1 |
 | [ai-agent-design](../instructions/ai-agent-design.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
 | [ai-generated-readme-banners](../instructions/ai-generated-readme-banners.instructions.md) | 42 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 1 |
 | [ai-writing-avoidance](../instructions/ai-writing-avoidance.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
@@ -346,7 +343,9 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [status-reporting](../instructions/status-reporting.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
 | [synapse-notebook-patterns](../instructions/synapse-notebook-patterns.instructions.md) | 95 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
 | [trifecta-audit](../instructions/trifecta-audit.instructions.md) | 304 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [worldview-constitutional-ai](../instructions/worldview-constitutional-ai.instructions.md) | 69 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
 | [worldview-integration](../instructions/worldview-integration.instructions.md) | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [worldview-moral-psychology](../instructions/worldview-moral-psychology.instructions.md) | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
 | [adversarial-oversight](../instructions/adversarial-oversight.instructions.md) | 338 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
 | [agent-debug-panel](../instructions/agent-debug-panel.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
 | [alex-core](../instructions/alex-core.instructions.md) | 525 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
@@ -417,12 +416,13 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [self-actualization](../instructions/self-actualization.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [service-worker-offline-first](../instructions/service-worker-offline-first.instructions.md) | 92 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [skill-creator](../instructions/skill-creator.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [teams-app-patterns](../instructions/teams-app-patterns.instructions.md) | 88 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [visual-memory](../instructions/visual-memory.instructions.md) | 121 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [vscode-configuration-validation](../instructions/vscode-configuration-validation.instructions.md) | 97 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 
-**Summary**: 128 instructions | Passing: 124 | Failing: 4 | Perfect(5/5): 19
+**Summary**: 127 instructions | Passing: 127 | Failing: 0 | Perfect(5/5): 20
 
-**Semantic Review**: 128/128 reviewed | 0 pending
+**Semantic Review**: 127/127 reviewed | 0 pending
 
 ## Prompts
 
@@ -440,11 +440,6 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Prompt | Lines | desc | app | agent | >20L | Score | Pass |
 |--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|
-| [docx-to-md](../prompts/docx-to-md.prompt.md) | 130 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-scaffold](../prompts/md-scaffold.prompt.md) | 129 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-to-eml](../prompts/md-to-eml.prompt.md) | 123 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-to-html](../prompts/md-to-html.prompt.md) | 101 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-to-word](../prompts/md-to-word.prompt.md) | 124 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
 | [ai-character-reference-generation](../prompts/ai-character-reference-generation.prompt.md) | 381 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [ai-generated-readme-banners](../prompts/ai-generated-readme-banners.prompt.md) | 504 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [alex](../prompts/alex.prompt.md) | 9 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
@@ -454,6 +449,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [character-aging-progression](../prompts/character-aging-progression.prompt.md) | 168 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [chat-participant](../prompts/chat-participant.prompt.md) | 197 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [documentarian](../prompts/documentarian.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [docx-to-md](../prompts/docx-to-md.prompt.md) | 131 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [extension-audit-methodology](../prompts/extension-audit-methodology.prompt.md) | 515 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [flux-brand-finetune](../prompts/flux-brand-finetune.prompt.md) | 92 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [gamma](../prompts/gamma.prompt.md) | 219 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
@@ -464,6 +460,10 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [m365](../prompts/m365.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
 | [marp](../prompts/marp.prompt.md) | 195 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [mcp-server](../prompts/mcp-server.prompt.md) | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [md-scaffold](../prompts/md-scaffold.prompt.md) | 130 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [md-to-eml](../prompts/md-to-eml.prompt.md) | 124 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [md-to-html](../prompts/md-to-html.prompt.md) | 102 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [md-to-word](../prompts/md-to-word.prompt.md) | 125 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [presentation](../prompts/presentation.prompt.md) | 106 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
 | [researcher](../prompts/researcher.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
 | [teams-app](../prompts/teams-app.prompt.md) | 201 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
@@ -512,14 +512,14 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [visualize](../prompts/visualize.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 | [word](../prompts/word.prompt.md) | 64 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 
-**Summary**: 71 prompts | Passing: 66 | Failing: 5 | Perfect(4/4): 39
+**Summary**: 71 prompts | Passing: 71 | Failing: 0 | Perfect(4/4): 39
 
 ### Criterion Validity
 
 | Criterion | Pass | Rate | Validity |
 |-----------|-----:|-----:|----------|
 | desc | 71/71 | 100% | ✓ Valid — required for discoverability |
-| app | 66/71 | 93% | ✓ Valid — tells agent WHEN to suggest |
+| app | 71/71 | 100% | ✓ Valid — tells agent WHEN to suggest |
 | agent | 46/71 | 65% | ✓ Valid — identifies routing prompts |
 | >20L | 64/71 | 90% | ✓ Valid — identifies workflow content |
 
@@ -568,54 +568,75 @@ Muscles SHOULD use the standard header format for discoverability:
 
 | Muscle | Lines | Lang | Category | comments | err | bounds | compat | Score | Pass | inh | Reviewed |
 |--------|------:|:----:|----------|:--------:|:---:|:------:|:------:|------:|:----:|:---:|----------|
-| [install-hooks.cjs](../muscles/install-hooks.cjs) | 64 | js | build | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
-| [validate-skills.cjs](../muscles/validate-skills.cjs) | 108 | js | validation | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
-| [audit-master-alex.cjs](../muscles/audit-master-alex.cjs) | 539 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
-| [audit-token-waste.cjs](../muscles/audit-token-waste.cjs) | 450 | js | validation | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [brain-qa-heir.cjs](../muscles/brain-qa-heir.cjs) | 964 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 339 | ps | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
-| [chart-recommend.cjs](../muscles/chart-recommend.cjs) | 242 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [converter-qa.cjs](../muscles/converter-qa.cjs) | 1269 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | — |
-| [dashboard-scaffold.cjs](../muscles/dashboard-scaffold.cjs) | 317 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [data-profile.cjs](../muscles/data-profile.cjs) | 287 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [fix-fence-bug.ps1](../muscles/fix-fence-bug.ps1) | 190 | ps | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [brain-qa.cjs](../muscles/brain-qa.cjs) | 1051 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
+| [converter-qa.cjs](../muscles/converter-qa.cjs) | 1275 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
 | [md-to-word.cjs](../muscles/md-to-word.cjs) | 1187 | js | converter | 1 | 1 | 0 | 1 | 3/4 | ✓ | 0 | 2026-04-15 |
-| [nav-inject.cjs](../muscles/nav-inject.cjs) | 216 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [new-skill.cjs](../muscles/new-skill.cjs) | 145 | js | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [pptxgen-cli.ts](../muscles/pptxgen-cli.ts) | 138 | ts | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
 | [sync-architecture.cjs](../muscles/sync-architecture.cjs) | 1649 | js | build | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
-| [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 141 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [brain-qa.cjs](../muscles/brain-qa.cjs) | 938 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
-| [data-ingest.cjs](../muscles/data-ingest.cjs) | 368 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [docx-to-md.cjs](../muscles/docx-to-md.cjs) | 380 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [dream-cli.ts](../muscles/dream-cli.ts) | 118 | ts | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [fix-fence-bug.cjs](../muscles/fix-fence-bug.cjs) | 226 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [gamma-generator.cjs](../muscles/gamma-generator.cjs) | 915 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [markdown-lint.cjs](../muscles/markdown-lint.cjs) | 445 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [md-scaffold.cjs](../muscles/md-scaffold.cjs) | 543 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [md-to-eml.cjs](../muscles/md-to-eml.cjs) | 444 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [md-to-html.cjs](../muscles/md-to-html.cjs) | 438 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [normalize-paths.cjs](../muscles/normalize-paths.cjs) | 248 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [normalize-paths.ps1](../muscles/normalize-paths.ps1) | 195 | ps | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [ralph-loop.cjs](../muscles/ralph-loop.cjs) | 742 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [session-name.cjs](../muscles/session-name.cjs) | 239 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 151 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [audit-master-alex.cjs](../muscles/audit-master-alex.cjs) | 553 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
+| [audit-token-waste.cjs](../muscles/audit-token-waste.cjs) | 464 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [brain-qa-heir.cjs](../muscles/brain-qa-heir.cjs) | 978 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 353 | ps | build | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [chart-recommend.cjs](../muscles/chart-recommend.cjs) | 254 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [dashboard-scaffold.cjs](../muscles/dashboard-scaffold.cjs) | 329 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [data-ingest.cjs](../muscles/data-ingest.cjs) | 375 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [data-profile.cjs](../muscles/data-profile.cjs) | 297 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [docx-to-md.cjs](../muscles/docx-to-md.cjs) | 387 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [dream-cli.ts](../muscles/dream-cli.ts) | 123 | ts | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [fix-fence-bug.cjs](../muscles/fix-fence-bug.cjs) | 235 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [gamma-generator.cjs](../muscles/gamma-generator.cjs) | 921 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [install-hooks.cjs](../muscles/install-hooks.cjs) | 89 | js | build | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [markdown-lint.cjs](../muscles/markdown-lint.cjs) | 451 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [md-scaffold.cjs](../muscles/md-scaffold.cjs) | 549 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [md-to-eml.cjs](../muscles/md-to-eml.cjs) | 451 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [md-to-html.cjs](../muscles/md-to-html.cjs) | 445 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [nav-inject.cjs](../muscles/nav-inject.cjs) | 229 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [new-skill.cjs](../muscles/new-skill.cjs) | 163 | js | build | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [normalize-paths.cjs](../muscles/normalize-paths.cjs) | 257 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [pptxgen-cli.ts](../muscles/pptxgen-cli.ts) | 148 | ts | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [ralph-loop.cjs](../muscles/ralph-loop.cjs) | 749 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [session-name.cjs](../muscles/session-name.cjs) | 246 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
+| [validate-skills.cjs](../muscles/validate-skills.cjs) | 154 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
 | [visual-memory.cjs](../muscles/visual-memory.cjs) | 598 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
 
-**Summary**: 32 muscles | Passing: 25 | Failing: 7 | Perfect(4/4): 16
+**Summary**: 30 muscles | Passing: 30 | Failing: 0 | Perfect(4/4): 26
 
-**Inheritance**: Master-only(1): 5 | Inheritable(0): 27
+**Inheritance**: Master-only(1): 4 | Inheritable(0): 26
 
-**Metadata Adoption**: 4/32 have standard header | 3/32 linked to skills | 4/32 have review dates
+**Metadata Adoption**: 29/30 have standard header | 28/30 linked to skills | 29/30 have review dates
 
-**Categories**: build: 4 | validation: 7 | analysis: 4 | converter: 7 | utility: 10
+**Categories**: validation: 7 | converter: 7 | build: 4 | analysis: 4 | utility: 8
 
 ## Overall
 
 | Category | Count |
 |----------|------:|
 | Skills | 165 |
-| Agents | 12 |
-| Instructions | 128 |
+| Agents | 13 |
+| Instructions | 127 |
 | Prompts | 71 |
-| Muscles | 32 |
-| **Total** | **408** |
+| Muscles | 30 |
+| **Total** | **406** |
+
+## Token Waste
+
+> **Philosophy**: Brain files are LLM-consumed. Mermaid diagrams render for humans but waste tokens for LLMs (who see raw syntax like `flowchart LR` and `style X fill:#...`). Use concise prose descriptions instead.
+
+**Status**: ⚠️ Found 15 Mermaid blocks across 10 files (~244 lines of waste)
+
+| File | Type | Mermaid | Lines | Style | Score | Fix |
+|------|:----:|--------:|------:|------:|------:|-----|
+| [adversarial-oversight](../instructions/adversarial-oversight.instructions.md) | instruction | 2 | 52 | 20 | 30 | Replace with prose |
+| [markdown-mermaid](../skills/markdown-mermaid/SKILL.md) | skill | 3 | 35 | 9 | 24 | Replace with prose |
+| [practitioner-research](../skills/practitioner-research/SKILL.md) | skill | 2 | 35 | 8 | 18 | Replace with prose |
+| [microsoft-fabric](../skills/microsoft-fabric/SKILL.md) | skill | 1 | 19 | 8 | 13 | Replace with prose |
+| [secrets-management](../skills/secrets-management/SKILL.md) | skill | 2 | 23 | 0 | 10 | Replace with prose |
+| [frustration-recognition](../skills/frustration-recognition/SKILL.md) | skill | 1 | 36 | 4 | 9 | Replace with prose |
+| [fabric-notebook-publish](../skills/fabric-notebook-publish/SKILL.md) | skill | 1 | 26 | 3 | 8 | Replace with prose |
+| [architecture-audit](../skills/architecture-audit/SKILL.md) | skill | 1 | 1 | 0 | 5 | Replace with prose |
+| [lint-clean-markdown](../skills/lint-clean-markdown/SKILL.md) | skill | 1 | 13 | 0 | 5 | Replace with prose |
+| [alex-core](../instructions/alex-core.instructions.md) | instruction | 1 | 4 | 0 | 5 | Replace with prose |
+
+**Fix**: Replace Mermaid diagrams with concise prose, e.g.:
+- `flowchart LR: A --> B --> C` → `**A → B → C**`
+- Complex workflows → Numbered steps or bullet list

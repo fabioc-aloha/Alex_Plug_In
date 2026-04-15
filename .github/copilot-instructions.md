@@ -82,7 +82,7 @@ Kill switch: .github/config/MASTER-ALEX-PROTECTED.json
 
 <!-- brain-qa validates: agent list matches .github/agents/*.agent.md on disk -->
 
-Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Azure, M365, Backend (Python/FastAPI), Frontend (React/TypeScript), Infrastructure (Bicep/Azure), Planner (task decomposition), Presenter (demos/docs)
+Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Brain Ops (maintenance), Azure, M365, Backend (Python/FastAPI), Frontend (React/TypeScript), Infrastructure (Bicep/Azure), Planner (task decomposition), Presenter (demos/docs)
 
 ## Copilot Memory
 

@@ -280,6 +280,7 @@ What this skill covers.
 
 ### Concept 1
 ...
+```
 
 ## Knowledge Sharing
 

@@ -2,6 +2,7 @@
 sem: 1
 mode: agent
 description: "Convert Markdown to standalone HTML with professional styling"
+application: "When user needs to convert Markdown to self-contained HTML for sharing or publishing"
 ---
 
 # Markdown to HTML Conversion

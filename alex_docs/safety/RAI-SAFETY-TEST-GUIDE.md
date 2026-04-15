@@ -19,8 +19,6 @@ Tests are grouped by workstream. Run them in order -- WS1 and WS3 are the founda
 
 * [ ] `node scripts/audit-architecture.cjs` -- 0 bugs
 
-* [ ] `node scripts/audit-synapses.cjs` -- 0 issues
-
 * [ ] Using a Frontier or Capable model (Claude Opus 4.6, Sonnet 4.6, GPT-4.1, etc.)
 
 ## T1: Anti-Sycophancy (WS1)

@@ -1,6 +1,7 @@
 ---
 sem: 1
 description: "Convert Markdown documents to professional Word files with Mermaid diagrams and SVG images"
+application: "When user needs to convert Markdown to Word document for professional sharing or printing"
 mode: "agent"
 tools: ["run_in_terminal", "read_file", "list_dir"]
 ---

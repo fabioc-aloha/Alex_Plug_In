@@ -77,6 +77,40 @@ const GH = path.join(ROOT, ".github");
 const QUALITY_DIR = path.join(GH, "quality");
 const STDOUT_MODE = process.argv.includes("--stdout");
 
+// --- Token Waste Detection ---
+// Brain files are LLM-consumed. Mermaid diagrams render for humans, not LLMs.
+// LLMs see raw syntax like "flowchart LR" and "style X fill:#..." which waste tokens.
+// Better: Use concise prose descriptions (e.g., "A → B → C").
+//
+// EXCEPTION: Skills that TEACH Mermaid (markdown-mermaid) may legitimately have examples.
+// These should be minimal and clearly labeled as "example output" not workflow docs.
+
+/**
+ * Detect token waste patterns in brain files
+ * @param {string} content - File content
+ * @returns {{mermaidBlocks: number, mermaidLines: number, styleLines: number, wasteScore: number}}
+ */
+function detectTokenWaste(content) {
+  // Count Mermaid blocks
+  const mermaidMatches = content.match(/```mermaid[\s\S]*?```/g) || [];
+  const mermaidBlocks = mermaidMatches.length;
+  
+  // Count lines inside Mermaid blocks
+  const mermaidLines = mermaidMatches.reduce((sum, block) => {
+    return sum + block.split('\n').length;
+  }, 0);
+  
+  // Count style/linkStyle lines (pure visual, zero value to LLM)
+  const styleLines = (content.match(/^\s*(style|linkStyle)\s+/gm) || []).length;
+  
+  // Calculate waste score (0 = clean, higher = more waste)
+  // Each Mermaid block = 5 points (significant waste)
+  // Each style line = 1 point (minor waste)
+  const wasteScore = (mermaidBlocks * 5) + styleLines;
+  
+  return { mermaidBlocks, mermaidLines, styleLines, wasteScore };
+}
+
 // --- Ensure quality folder exists ---
 if (!fs.existsSync(QUALITY_DIR)) {
   fs.mkdirSync(QUALITY_DIR, { recursive: true });
@@ -292,7 +326,10 @@ function scanSkills() {
     const threshold = maxScore - allowedDefects;
     const pass = fmComplete && (adjustedScore >= threshold);
 
-    results.push({ name, lines, flags, score: adjustedScore, tier, threshold, pass, isWorkflow, agentic, maxScore });
+    // Token waste detection (Mermaid diagrams, style lines)
+    const waste = detectTokenWaste(content);
+
+    results.push({ name, lines, flags, score: adjustedScore, tier, threshold, pass, isWorkflow, agentic, maxScore, waste });
   }
 
   return results.sort((a, b) => a.score - b.score);
@@ -339,6 +376,9 @@ function scanAgents() {
     // Semantic review flag (preserved from previous grid, default 0)
     const sem = EXISTING_SEM.agents[name] ?? 0;
 
+    // Token waste detection (Mermaid diagrams, style lines)
+    const waste = detectTokenWaste(content);
+
     const flags = {
       fm: fmComplete ? 1 : 0,
       handoffs: hasHandoffs ? 1 : 0,
@@ -350,7 +390,7 @@ function scanAgents() {
     const score = flags.fm + flags.handoffs + flags.bounds + flags.persona + flags.code;
     // fm is a GATE - agents without frontmatter are broken
     const pass = fmComplete && (score >= 4);
-    results.push({ name, lines, flags, score, maxScore: 5, pass, sem });
+    results.push({ name, lines, flags, score, maxScore: 5, pass, sem, waste });
   }
 
   return results.sort((a, b) => a.score - b.score);
@@ -407,7 +447,11 @@ function scanInstructions() {
     const score = flags.fm + flags.depth + flags.sect + flags.code + flags.skill;
     // fm is a GATE - instructions without frontmatter won't be discoverable
     const pass = fmComplete && (score >= 3);
-    results.push({ name, lines, flags, score, maxScore: 5, pass });
+
+    // Token waste detection (Mermaid diagrams, style lines)
+    const waste = detectTokenWaste(content);
+
+    results.push({ name, lines, flags, score, maxScore: 5, pass, waste });
   }
 
   return results.sort((a, b) => a.score - b.score);
@@ -921,6 +965,75 @@ function generateGrid() {
   lines.push(`| Prompts | ${prompts.length} |`);
   lines.push(`| Muscles | ${muscles.length} |`);
   lines.push(`| **Total** | **${totalItems}** |`);
+
+  // Token Waste Report
+  lines.push("");
+  lines.push("## Token Waste");
+  lines.push("");
+  lines.push("> **Philosophy**: Brain files are LLM-consumed. Mermaid diagrams render for humans but waste tokens for LLMs (who see raw syntax like `flowchart LR` and `style X fill:#...`). Use concise prose descriptions instead.");
+  lines.push("");
+  
+  // Collect all waste findings
+  const wasteFindings = [];
+  
+  for (const s of skills) {
+    if (s.waste && s.waste.mermaidBlocks > 0) {
+      wasteFindings.push({
+        type: 'skill',
+        name: s.name,
+        path: `../skills/${s.name}/SKILL.md`,
+        ...s.waste
+      });
+    }
+  }
+  
+  for (const a of agents) {
+    if (a.waste && a.waste.mermaidBlocks > 0) {
+      wasteFindings.push({
+        type: 'agent',
+        name: a.name,
+        path: `../agents/${a.name}.agent.md`,
+        ...a.waste
+      });
+    }
+  }
+  
+  for (const i of instructions) {
+    if (i.waste && i.waste.mermaidBlocks > 0) {
+      wasteFindings.push({
+        type: 'instruction',
+        name: i.name,
+        path: `../instructions/${i.name}.instructions.md`,
+        ...i.waste
+      });
+    }
+  }
+  
+  if (wasteFindings.length === 0) {
+    lines.push("**Status**: ✅ No Mermaid blocks found in brain files");
+  } else {
+    // Sort by waste score (highest first)
+    wasteFindings.sort((a, b) => b.wasteScore - a.wasteScore);
+    
+    const totalMermaid = wasteFindings.reduce((sum, f) => sum + f.mermaidBlocks, 0);
+    const totalMermaidLines = wasteFindings.reduce((sum, f) => sum + f.mermaidLines, 0);
+    const totalStyleLines = wasteFindings.reduce((sum, f) => sum + f.styleLines, 0);
+    
+    lines.push(`**Status**: ⚠️ Found ${totalMermaid} Mermaid blocks across ${wasteFindings.length} files (~${totalMermaidLines} lines of waste)`);
+    lines.push("");
+    lines.push("| File | Type | Mermaid | Lines | Style | Score | Fix |");
+    lines.push("|------|:----:|--------:|------:|------:|------:|-----|");
+    
+    for (const f of wasteFindings) {
+      const nameLink = `[${f.name}](${f.path})`;
+      lines.push(`| ${nameLink} | ${f.type} | ${f.mermaidBlocks} | ${f.mermaidLines} | ${f.styleLines} | ${f.wasteScore} | Replace with prose |`);
+    }
+    
+    lines.push("");
+    lines.push("**Fix**: Replace Mermaid diagrams with concise prose, e.g.:");
+    lines.push("- `flowchart LR: A --> B --> C` → `**A → B → C**`");
+    lines.push("- Complex workflows → Numbered steps or bullet list");
+  }
 
   return lines.join("\n");
 }

@@ -317,6 +317,12 @@ Usage:
   console.log(`Dashboard generated: ${outputPath}`);
 }
 
-main();
+// Main entry point with error handling
+try {
+  main();
+} catch (err) {
+  console.error('[ERROR] Dashboard generation failed:', err.message);
+  process.exit(1);
+}
 
 module.exports = { generate, THEMES, EXAMPLE_SPEC };

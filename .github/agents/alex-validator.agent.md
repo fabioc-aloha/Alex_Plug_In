@@ -174,25 +174,9 @@ When Alex specifies a review lens, restrict your review to that dimension only:
 
 ## Validation Workflow
 
-```mermaid
-flowchart TD
-    RECEIVE["Receive Code  from Builder"] --> SCAN["Static  Analysis"]
-    SCAN --> SECURITY["Security  Review"]
-    SECURITY --> EDGE["Edge Case  Exploration"]
-    EDGE --> REPORT["Generate  Report"]
-    REPORT -->|Critical Issues| BLOCK["🔴 Block  with Notes"]
-    REPORT -->|No Blockers| APPROVE["✅ Approve  with Notes"]
-
-    style RECEIVE fill:#cce5ff,stroke:#4a90d9,color:#333
-    style SCAN fill:#cce5ff,stroke:#4a90d9,color:#333
-    style SECURITY fill:#e6d5f2,stroke:#8b6eb3,color:#333
-    style EDGE fill:#cce5ff,stroke:#4a90d9,color:#333
-    style REPORT fill:#b3d9ff,stroke:#4a90d9,color:#333
-    style BLOCK fill:#ffd6d6,stroke:#d73a49,color:#333
-    style APPROVE fill:#c2f0d8,stroke:#4db37d,color:#333
-
-    linkStyle default stroke:#57606a,stroke-width:1.5px
-```
+**Receive Code → Static Analysis → Security Review → Edge Case Exploration → Generate Report**
+- Critical issues? → 🔴 Block with notes
+- No blockers? → ✅ Approve with notes
 
 ## Report Format
 

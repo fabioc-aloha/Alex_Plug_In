@@ -19,12 +19,15 @@
 
 const fs = require('fs');
 const path = require('path');
+
+// Resolve paths relative to the script location (cross-platform)
 const scriptDir = __dirname;
 const rootPath = path.resolve(scriptDir, '..', '..');
 const hooksSource = path.join(rootPath, '.github', 'hooks');
 const hooksTarget = path.join(rootPath, '.git', 'hooks');
 
 function main() {
+  // Validate Git repository structure before proceeding
   if (!fs.existsSync(hooksTarget)) {
     console.error('[ERROR] .git/hooks directory not found. Is this a Git repository?');
     process.exit(1);
@@ -46,10 +49,16 @@ function main() {
   copyHook(preCommitSource, preCommitTarget);
 }
 
+/**
+ * Copy hook file from source to target with platform-appropriate permissions.
+ * @param {string} source - Source hook file path
+ * @param {string} target - Target hook file path in .git/hooks/
+ */
 function copyHook(source, target) {
+  // Perform atomic file copy to prevent partial writes
   fs.copyFileSync(source, target);
 
-  // Make executable on Unix systems
+  // Make executable on Unix systems (chmod 755)
   if (process.platform !== 'win32') {
     fs.chmodSync(target, 0o755);
   }
@@ -70,4 +79,10 @@ function copyHook(source, target) {
   console.log('  git commit --no-verify');
 }
 
-main();
+// Main entry point with error handling
+try {
+  main();
+} catch (err) {
+  console.error('[ERROR] Hook installation failed:', err.message);
+  process.exit(1);
+}

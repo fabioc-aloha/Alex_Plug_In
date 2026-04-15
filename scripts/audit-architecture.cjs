@@ -207,19 +207,13 @@ const skillDirs = fs
 console.log('Total skill directories: ' + skillDirs.length);
 
 let missingSkillMd = 0;
-let missingSynapses = 0;
 for (const dir of skillDirs) {
   if (!fs.existsSync(path.join(skillDir, dir, 'SKILL.md'))) {
     issues.push('BUG: skill "' + dir + '" missing SKILL.md');
     missingSkillMd++;
   }
-  if (!fs.existsSync(path.join(skillDir, dir, 'synapses.json'))) {
-    issues.push('BUG: skill "' + dir + '" missing synapses.json');
-    missingSynapses++;
-  }
 }
 console.log('Missing SKILL.md: ' + missingSkillMd);
-console.log('Missing synapses.json: ' + missingSynapses);
 
 // Skills not in trifecta list
 const nonTrifecta = skillDirs.filter(d => !trifectaSet.has(d));

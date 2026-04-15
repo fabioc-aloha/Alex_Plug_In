@@ -242,6 +242,12 @@ Audience: executive, manager, analyst, general
   console.log(JSON.stringify(result, null, 2));
 }
 
-main();
+// Main entry point with error handling
+try {
+  main();
+} catch (err) {
+  console.error('[ERROR] Chart recommendation failed:', err.message);
+  process.exit(1);
+}
 
 module.exports = { recommend, inferIntent, CHART_MATRIX };

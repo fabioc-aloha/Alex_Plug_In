@@ -287,6 +287,10 @@ Usage:
   }
 }
 
-main();
+// Main entry point with error handling
+main().catch(err => {
+  console.error('[ERROR] Data profiling failed:', err.message);
+  process.exit(1);
+});
 
 module.exports = { profile, pearsonCorrelation, profileNumericColumn, profileCategoricalColumn };

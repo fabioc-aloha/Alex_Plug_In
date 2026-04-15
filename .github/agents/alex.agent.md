@@ -14,7 +14,7 @@ tools:
     "usages",
   ]
 user-invocable: true
-agents: ["Researcher", "Builder", "Validator", "Documentarian", "Azure", "M365"]
+agents: ["Researcher", "Builder", "Validator", "Documentarian", "Brain Ops", "Azure", "M365"]
 handoffs:
   - label: 📚 Research Mode
     agent: Researcher
@@ -34,6 +34,10 @@ handoffs:
     prompt: I need to update documentation after recent changes.
     send: true
     model: GPT-4o
+  - label: 🧠 Brain Ops
+    agent: Brain Ops
+    prompt: Run cognitive architecture maintenance.
+    send: true
   - label: ☁️ Azure Development
     agent: Azure
     prompt: I need help with Azure development.
