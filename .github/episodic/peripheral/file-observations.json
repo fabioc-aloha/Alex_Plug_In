@@ -1,23 +1,14 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/episodic/peripheral/file-observations.json",
-    "alex_docs/vscode/PROMPT-OVERHAUL-PLAN.md -> alex_archive/alex_docs/PROMPT-OVERHAUL-PLAN.md",
-    "alex_docs/skills/SKILL-ARCHITECTURE.md -> alex_archive/alex_docs/SKILL-ARCHITECTURE.md",
-    "alex_docs/vscode/WHATS-NEW-1.114.md -> alex_archive/alex_docs/WHATS-NEW-1.114.md",
-    "alex_docs/gcx-coworker/DEPLOYMENT-PLAN.md -> alex_archive/alex_docs/gcx-coworker/DEPLOYMENT-PLAN.md",
-    "alex_docs/gcx-coworker/color.png -> alex_archive/alex_docs/gcx-coworker/color.png",
-    "alex_docs/gcx-coworker/getsitelogo.png -> alex_archive/alex_docs/gcx-coworker/getsitelogo.png",
-    "alex_docs/gcx-coworker/icon-variants/variant-01.png -> alex_archive/alex_docs/gcx-coworker/icon-variants/variant-01.png",
-    "alex_docs/gcx-coworker/icon-variants/variant-02.png -> alex_archive/alex_docs/gcx-coworker/icon-variants/variant-02.png",
-    "alex_docs/gcx-coworker/icon-variants/variant-03.png -> alex_archive/alex_docs/gcx-coworker/icon-variants/variant-03.png"
+    "github/episodic/peripheral/file-observations.json"
   ],
   "todoHotspots": [
     {
       "file": "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md",
       "todoCount": 1,
-      "scannedAt": 1776232328500
+      "scannedAt": 1776232354180
     }
   ],
-  "lastUpdated": 1776232328500
+  "lastUpdated": 1776232354180
 }
