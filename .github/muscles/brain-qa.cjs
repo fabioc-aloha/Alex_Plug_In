@@ -616,6 +616,13 @@ function generateGrid() {
   // Prompts table
   lines.push("## Prompts");
   lines.push("");
+  lines.push("**Scoring Criteria**:");
+  lines.push("| Dim | Name | 1 (good) | 0 (defect) |");
+  lines.push("|:---:|------|----------|------------|");
+  lines.push("| **desc** | Description | Has `description:` in frontmatter | Missing description |");
+  lines.push("| **agent** | Agent Routing | Has `agent:` field | No agent routing |");
+  lines.push("| **>20L** | Content | >20 lines | ≤20 lines (stub) |");
+  lines.push("");
   lines.push("**Pass criteria**: desc=1 (gate) AND score ≥2/3");
   lines.push("");
   lines.push("| Prompt | Lines | desc | agent | >20L | Score | Pass |");
