@@ -79,6 +79,7 @@ flowchart LR
         A1["md-to-word"]
         A2["brain-qa"]
         A3["docx-to-md"]
+        A4["visual-memory"]
     end
     
     USER((User)) -->|"Review this PR"| INTELLECTUAL
@@ -639,6 +640,7 @@ This architecture contributes beyond prior art:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 2.3 | April 2026 | Added visual-memory to agentic skill examples |
 | 2.2 | April 2026 | Standard muscle header format (5.8); metadata tag specification |
 | 2.1 | April 2026 | Muscle quality model added (5.3-5.7); 4-dimension scoring |
 | 2.0 | April 2026 | Formal architecture document; design rationale added |

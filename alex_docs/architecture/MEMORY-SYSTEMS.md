@@ -289,6 +289,20 @@ When providing reference photos: **NEVER describe physical appearance** (hair co
 }
 ```
 
+### Automation
+
+The `visual-memory.cjs` muscle automates the complete workflow:
+
+| Command | Description |
+| ------- | ----------- |
+| `status` | List subjects with photo counts and encoding status |
+| `add-subject` | Initialize a new subject folder |
+| `prepare-photos` | Resize photos to 512px JPEG at 85% quality |
+| `encode-photos` | Generate base64-encoded visual-memory.json |
+| `verify` | Validate visual-memory.json structure and data URIs |
+
+This promotes visual-memory from an **Intellectual** skill (analysis only) to an **Agentic** skill (executes autonomously to produce artifacts).
+
 ---
 
 ## Global Knowledge (AI-Memory)

@@ -1,17 +1,17 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/README.md",
-    "AFCP-LEVERAGE-ANALYSIS.md",
-    "README.md",
-    "alex_docs/architecture/AGENT-CATALOG.md",
-    "alex_docs/architecture/COMMAND-MEMORY-EFFECTS.md",
-    "alex_docs/architecture/TRIFECTA-CATALOG.md",
-    "alex_docs/decisions/ADR-010-copilot-instructions-as-prefrontal-cortex.md",
-    "alex_docs/research/VSCODE-CHAT-CONFIGURATIONS.md",
-    "alex_docs/skills/SKILLS-CATALOG.md",
-    "packages/mcp-cognitive-tools/README.md"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/architecture/AGENTIC-SKILL-ARCHITECTURE.md",
+    "alex_docs/architecture/MEMORY-SYSTEMS.md",
+    "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md"
   ],
-  "todoHotspots": [],
-  "lastUpdated": 1776231435316
+  "todoHotspots": [
+    {
+      "file": "alex_docs/architecture/NEUROANATOMICAL-MAPPING.md",
+      "todoCount": 1,
+      "scannedAt": 1776232191057
+    }
+  ],
+  "lastUpdated": 1776232191057
 }

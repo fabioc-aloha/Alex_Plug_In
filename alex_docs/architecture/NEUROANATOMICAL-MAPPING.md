@@ -660,6 +660,7 @@ This is exactly what the dlPFC + vlPFC do in the biological brain — suppress t
 | Medial PFC + DMN     | 10, 25, 32         | Meta-cognition, self-reference   | Self-monitoring (P1)     | alex-core.instructions.md                    |
 | Hippocampus          | —                  | Episodic memory                  | Session records          | .prompt.md, .github/episodic/                |
 | Neocortex            | Distributed        | Declarative knowledge, expertise | Skills (100+)            | skills/*/SKILL.md                            |
+| Fusiform Face Area   | 37 (ventral temp.) | Face/object recognition          | Visual Memory            | skills/*/visual-memory/visual-memory.json    |
 | Basal Ganglia        | —                  | Procedural memory, habits        | Auto-loaded instructions | .instructions.md (25+)                       |
 | Thalamus             | —                  | Sensory relay                    | VS Code interface        | Chat, commands, file context                 |
 | Innate Subcortical   | —                  | Instincts, fixed action patterns | Agent Hooks              | .github/hooks.json, .github/muscles/hooks/   |
