@@ -455,6 +455,19 @@ Standalone is valid. The "standalone instruction" defect label is informational,
 
 Prompts have 3 scoring dimensions: **desc** (description), **agent** (routes to agent), **>20L** (substantive content).
 
+#### Why Prompts Don't Need `application`
+
+| Aspect | Instructions | Prompts |
+|--------|--------------|----------|
+| **Activation** | Auto-loaded by Copilot | User-invoked (`/prompt-name`) |
+| **Discovery** | LLM decides relevance | User browses picker list |
+| **Intent** | Unknown — must declare routing hints | Clear — user picked it |
+| **Frontmatter** | `description` + `application` | `description` only |
+
+Instructions need `application` because Copilot must decide "should I load this?" without asking the user. The LLM needs routing hints.
+
+Prompts don't need `application` because the user explicitly invokes them. When someone runs `/meditate`, they already know WHEN — that's why they opened the prompt picker.
+
 | Prompt | Score | desc | agent | >20L | Lines | Human Assessment |
 |--------|------:|:----:|:-----:|:----:|------:|------------------|
 | alex | 2/3 | 1 | 1 | 0 | 7 | Agent routing stub — works correctly |

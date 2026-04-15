@@ -275,109 +275,114 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 ## Instructions
 
+> **Design**: Instructions are **discoverable knowledge modules** that can serve multiple skills. Frontmatter enables routing without reading the full document.
+
 **Scoring Criteria**:
 | Dim | Name | 1 (good) | 0 (defect) |
 |:---:|------|----------|------------|
-| **fm** | Frontmatter | Has `description` AND `applyTo` | Missing either |
-| **spec** | Specificity | applyTo has specific glob (not just `**`) | Too broad or missing |
+| **fm** | Frontmatter | Has `description` AND `application` | Missing either |
 | **depth** | Depth | >50 lines | ≤50 lines |
 | **sect** | Sections | ≥2 `##` headers | Flat structure |
 | **code** | Code | Has code block | No examples |
-| **skill** | Trifecta | Has matching skill | Orphan instruction |
+| **skill** | Trifecta | Has matching skill | Standalone instruction |
 
-**Pass criteria**: fm=1 (gate) AND score ≥4/6
+> **Frontmatter fields**: `description` (what it does) + `application` (when/why to use). Optional: `applyTo` (Copilot file-pattern activation).
 
-| Instruction | Lines | fm | spec | depth | sect | code | skill | Score | Pass | sem |
-|-------------|------:|:--:|:----:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|
-| __test-exclusion | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0/6 | ✗ | 0 |
-| worldview-constitutional-ai | 39 | 0 | 0 | 0 | 1 | 0 | 0 | 1/6 | ✗ | 0 |
-| worldview-moral-psychology | 36 | 0 | 0 | 0 | 1 | 0 | 0 | 1/6 | ✗ | 0 |
-| ai-writing-avoidance | 40 | 0 | 0 | 0 | 1 | 0 | 1 | 2/6 | ✗ | 0 |
-| alex-identity-integration | 160 | 0 | 0 | 1 | 1 | 0 | 0 | 2/6 | ✗ | 0 |
-| markdown-mermaid | 30 | 0 | 0 | 0 | 1 | 0 | 1 | 2/6 | ✗ | 0 |
-| md-to-word | 23 | 0 | 0 | 0 | 0 | 1 | 1 | 2/6 | ✗ | 0 |
-| memory-export | 24 | 0 | 0 | 0 | 1 | 0 | 1 | 2/6 | ✗ | 0 |
-| skill-selection-optimization | 210 | 0 | 0 | 1 | 1 | 0 | 0 | 2/6 | ✗ | 0 |
-| worldview-integration | 82 | 0 | 0 | 1 | 1 | 0 | 0 | 2/6 | ✗ | 0 |
-| alex-core | 524 | 0 | 0 | 1 | 1 | 1 | 0 | 3/6 | ✗ | 0 |
-| deep-thinking | 135 | 0 | 0 | 1 | 1 | 1 | 0 | 3/6 | ✗ | 0 |
-| emotional-intelligence | 91 | 1 | 0 | 1 | 1 | 0 | 0 | 3/6 | ✗ | 0 |
-| teams-app-patterns | 33 | 1 | 1 | 0 | 0 | 0 | 1 | 3/6 | ✗ | 0 |
-| ai-generated-readme-banners | 41 | 1 | 1 | 0 | 0 | 1 | 1 | 4/6 | ✓ | 0 |
-| bootstrap-learning | 44 | 1 | 1 | 0 | 1 | 0 | 1 | 4/6 | ✓ | 0 |
-| empirical-validation | 78 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| flux-brand-finetune | 43 | 1 | 1 | 0 | 1 | 0 | 1 | 4/6 | ✓ | 0 |
-| image-generation-guidelines | 184 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| knowledge-synthesis | 47 | 1 | 1 | 0 | 1 | 0 | 1 | 4/6 | ✓ | 0 |
-| lucid-dream-integration | 67 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| m365-agent-debugging | 49 | 1 | 1 | 0 | 1 | 0 | 1 | 4/6 | ✓ | 0 |
-| planning-first-development | 166 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| protocol-triggers | 219 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| repository-readiness-eval | 97 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| synapse-notebook-patterns | 94 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| terminal-command-safety | 120 | 1 | 0 | 1 | 1 | 1 | 0 | 4/6 | ✓ | 0 |
-| trifecta-audit | 303 | 1 | 1 | 1 | 1 | 0 | 0 | 4/6 | ✓ | 0 |
-| ui-ux-design | 50 | 1 | 1 | 0 | 1 | 0 | 1 | 4/6 | ✓ | 0 |
-| adversarial-oversight | 337 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| architecture-decision-records | 278 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| automated-quality-gates | 106 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| azure-enterprise-deployment | 368 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| chart-interpretation | 117 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| code-review-guidelines | 305 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| cognitive-benchmarking | 149 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| cognitive-health-validation | 416 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| content-safety-implementation | 133 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| copilot-chat-buttons | 91 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| coupling-metrics | 78 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| dashboard-design | 112 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| data-analysis | 109 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| data-storytelling | 94 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| debugging-patterns | 80 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| dependency-management | 305 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| dream-state-automation | 481 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| extension-audit-methodology | 58 | 1 | 1 | 1 | 0 | 1 | 1 | 5/6 | ✓ | 0 |
-| gamma-presentation | 180 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| global-knowledge-curation | 140 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| heir-project-improvement | 374 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| heir-skill-promotion | 288 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| image-handling | 87 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| language-detection-patterns | 136 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| log-pattern-analyzer | 95 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| meditation | 130 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| nasa-code-standards | 412 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| north-star | 58 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| refactoring-patterns | 97 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| release-management | 929 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| research-first-workflow | 379 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| roadmap-maintenance | 235 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| root-cause-analysis | 58 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| secrets-management | 59 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| security-review | 61 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| semantic-audit | 143 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| skill-building | 66 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| skill-telemetry | 103 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| technical-debt-tracking | 221 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| testing-strategies | 69 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| token-waste-elimination | 82 | 1 | 1 | 1 | 1 | 0 | 1 | 5/6 | ✓ | 0 |
-| vscode-extension-patterns | 46 | 1 | 1 | 0 | 1 | 1 | 1 | 5/6 | ✓ | 0 |
-| vscode-marketplace-publishing | 347 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ | 0 |
-| ai-character-reference-generation | 86 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| brand-asset-management | 60 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| character-aging-progression | 118 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| chat-participant-patterns | 182 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| data-visualization | 121 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| mcp-development | 110 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| microsoft-graph-api | 123 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| self-actualization | 54 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| service-worker-offline-first | 91 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| visual-memory | 120 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
-| vscode-configuration-validation | 96 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ | 0 |
+**Pass criteria**: fm=1 (gate) AND score ≥3/5
 
-**Summary**: 83 instructions | Passing: 69 | Failing: 14 | Perfect(6/6): 11
+| Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | sem |
+|-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|
+| __test-exclusion | 7 | 1 | 0 | 0 | 0 | 0 | 1/5 | ✗ | 0 |
+| teams-app-patterns | 34 | 1 | 0 | 0 | 0 | 1 | 2/5 | ✗ | 0 |
+| worldview-constitutional-ai | 40 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
+| worldview-moral-psychology | 37 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
+| ai-generated-readme-banners | 42 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 0 |
+| ai-writing-avoidance | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
+| alex-identity-integration | 161 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| bootstrap-learning | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
+| emotional-intelligence | 92 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| empirical-validation | 79 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| flux-brand-finetune | 44 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
+| image-generation-guidelines | 185 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| knowledge-synthesis | 48 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
+| lucid-dream-integration | 68 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| m365-agent-debugging | 50 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
+| markdown-mermaid | 31 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
+| md-to-word | 24 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 0 |
+| memory-export | 25 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
+| planning-first-development | 167 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| protocol-triggers | 220 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| repository-readiness-eval | 98 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| skill-selection-optimization | 211 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| synapse-notebook-patterns | 95 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| trifecta-audit | 304 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| worldview-integration | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
+| adversarial-oversight | 338 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| alex-core | 525 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| architecture-decision-records | 279 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| automated-quality-gates | 107 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| azure-enterprise-deployment | 369 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| chart-interpretation | 118 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| code-review-guidelines | 306 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| cognitive-benchmarking | 150 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| cognitive-health-validation | 417 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| content-safety-implementation | 134 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| copilot-chat-buttons | 92 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| coupling-metrics | 79 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| dashboard-design | 113 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| data-analysis | 110 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| data-storytelling | 95 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| debugging-patterns | 81 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| deep-thinking | 136 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| dependency-management | 306 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| dream-state-automation | 482 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| extension-audit-methodology | 59 | 1 | 1 | 0 | 1 | 1 | 4/5 | ✓ | 0 |
+| gamma-presentation | 181 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| global-knowledge-curation | 141 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| heir-project-improvement | 375 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| heir-skill-promotion | 289 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| image-handling | 88 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| language-detection-patterns | 137 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| log-pattern-analyzer | 96 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| meditation | 131 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| nasa-code-standards | 413 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| north-star | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| refactoring-patterns | 98 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| release-management | 930 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| research-first-workflow | 380 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| roadmap-maintenance | 236 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| root-cause-analysis | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| secrets-management | 60 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| security-review | 62 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| semantic-audit | 144 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| skill-building | 67 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| skill-telemetry | 104 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| technical-debt-tracking | 222 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| terminal-command-safety | 121 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| testing-strategies | 70 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| token-waste-elimination | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| ui-ux-design | 51 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| vscode-extension-patterns | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 0 |
+| vscode-marketplace-publishing | 348 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
+| ai-character-reference-generation | 87 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| brand-asset-management | 61 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| character-aging-progression | 119 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| chat-participant-patterns | 183 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| data-visualization | 122 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| mcp-development | 111 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| microsoft-graph-api | 124 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| self-actualization | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| service-worker-offline-first | 92 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| visual-memory | 121 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| vscode-configuration-validation | 97 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+
+**Summary**: 83 instructions | Passing: 79 | Failing: 4 | Perfect(5/5): 11
 
 **Semantic Review**: 0/83 reviewed | 83 pending
 
 ## Prompts
+
+> **Design**: Prompts are **user-invoked workflows** — the user explicitly picks from the prompt list. No `application` field needed because user intent is already clear.
 
 **Scoring Criteria**:
 | Dim | Name | 1 (good) | 0 (defect) |

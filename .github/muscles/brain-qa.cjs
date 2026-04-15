@@ -620,7 +620,9 @@ function generateGrid() {
   // Prompts table
   lines.push("## Prompts");
   lines.push("");
-  lines.push("**Scoring Criteria**:");
+  lines.push("> **Design**: Prompts are **user-invoked workflows** — the user explicitly picks from the prompt list. No `application` field needed because user intent is already clear.");
+  lines.push("");
+  lines.push("**Scoring Criteria**:");;
   lines.push("| Dim | Name | 1 (good) | 0 (defect) |");
   lines.push("|:---:|------|----------|------------|");
   lines.push("| **desc** | Description | Has `description:` in frontmatter | Missing description |");
