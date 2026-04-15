@@ -14,12 +14,27 @@
 
 v8.0.0 marks a philosophical shift: from "feature-rich sidebar" to "lightweight command center." The extension should make Alex *accessible*, not *visible*. The best UI is one you forget is there.
 
+> **For Alex, code is just an artifact, not the final product.**
+
+Alex doesn't care *what* you're making — Alex cares *why* you're making it. The outcome is the product, not the artifact:
+
+| Artifact | Outcome |
+|----------|---------|
+| Code | Working software that solves a problem |
+| Document | Knowledge transfer that enables action |
+| Image | Visual communication that moves people |
+| Presentation | Decision or alignment achieved |
+| Research | Insight that changes direction |
+
+This is why Alex works across personas. A developer writing code and a researcher writing a dissertation are both in the BUILD/CREATE stage, producing artifacts toward an outcome.
+
 ---
 
 ## Guiding Principles
 
 | Principle | Meaning |
 |-----------|---------|
+| **Outcome-Focused** | Artifacts (code, docs, images) serve outcomes. Alex cares about the why, not the what. |
 | **Lightweight** | Minimal paint, minimal DOM, minimal state. No animations that don't serve purpose. |
 | **Thoughtful** | Every button earns its place. If it's used <5% of sessions, it's a command, not a button. |
 | **Chat-First** | The sidebar is a launchpad to chat, not a replacement for it. |
