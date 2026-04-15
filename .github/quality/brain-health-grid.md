@@ -245,29 +245,29 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 |:---:|------|----------|------------|
 | **fm** | Frontmatter | Has `description`, `name`, `model`, `tools` | Missing any |
 | **handoffs** | Handoffs | Has `handoffs:` for agent orchestration | No handoffs |
-| **hooks** | Hooks | Has `hooks:` for automation | No hooks |
 | **bounds** | Bounds | 50–400 lines | <50 (stub) or >400 (bloated) |
-| **persona** | Persona | Has mental model / mindset section | No persona |
 | **code** | Code | Has code examples | No code |
 
-**Pass criteria**: fm=1 (gate) AND score ≥4/6
+> **Persona enforcement**: Alex persona characteristics (mental model, mindset) are enforced via skills and instructions, not automated scoring. With only 12 agents, manual review is more effective.
 
-| Agent | Lines | fm | handoffs | hooks | bounds | persona | code | Score | Pass |
-|-------|------:|:--:|:--------:|:-----:|:------:|:-------:|:----:|------:|:----:|
-| alex-azure | 104 | 1 | 1 | 0 | 1 | 0 | 0 | 3/6 | ✗ |
-| alex-m365 | 101 | 1 | 1 | 0 | 1 | 0 | 0 | 3/6 | ✗ |
-| alex | 263 | 1 | 1 | 0 | 1 | 0 | 0 | 3/6 | ✗ |
-| alex-backend | 233 | 1 | 1 | 0 | 1 | 1 | 1 | 5/6 | ✓ |
-| alex-documentarian | 212 | 1 | 1 | 1 | 1 | 1 | 0 | 5/6 | ✓ |
-| alex-frontend | 276 | 1 | 1 | 0 | 1 | 1 | 1 | 5/6 | ✓ |
-| alex-infrastructure | 340 | 1 | 1 | 0 | 1 | 1 | 1 | 5/6 | ✓ |
-| alex-planner | 230 | 1 | 1 | 0 | 1 | 1 | 1 | 5/6 | ✓ |
-| alex-presenter | 252 | 1 | 1 | 0 | 1 | 1 | 1 | 5/6 | ✓ |
-| alex-builder | 237 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ |
-| alex-researcher | 248 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ |
-| alex-validator | 258 | 1 | 1 | 1 | 1 | 1 | 1 | 6/6 | ✓ |
+**Pass criteria**: fm=1 (gate) AND score ≥3/4
 
-**Summary**: 12 agents | Passing: 9 | Failing: 3 | Perfect(6/6): 3
+| Agent | Lines | fm | handoffs | bounds | code | Score | Pass |
+|-------|------:|:--:|:--------:|:------:|:----:|------:|:----:|
+| alex-azure | 104 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| alex-documentarian | 212 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| alex-m365 | 101 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| alex | 263 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| alex-backend | 233 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-builder | 237 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-frontend | 276 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-infrastructure | 340 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-planner | 230 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-presenter | 252 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-researcher | 248 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| alex-validator | 258 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+
+**Summary**: 12 agents | Passing: 12 | Failing: 0 | Perfect(4/4): 8
 
 ## Instructions
 

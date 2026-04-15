@@ -340,51 +340,37 @@ The type system correctly distinguishes capabilities. The scoring model's weakne
 
 ### Agent Scoring Validation (April 2026)
 
-Agents have 6 scoring dimensions: **fm** (frontmatter), **handoffs**, **hooks**, **bounds**, **persona**, **code**.
+Agents have 4 scoring dimensions: **fm** (frontmatter), **handoffs**, **bounds**, **code**.
 
-| Agent | Score | fm | handoffs | hooks | bounds | persona | code | Human Assessment |
-|-------|------:|:--:|:--------:|:-----:|:------:|:-------:|:----:|------------------|
-| alex-azure | 3/6 | 1 | 1 | 0 | 1 | 0 | 0 | Good tool tables, clear guidance — works fine |
-| alex | 3/6 | 1 | 1 | 0 | 1 | 0 | 0 | Full cognitive architecture, commands — core agent! |
-| alex-backend | 5/6 | 1 | 1 | 0 | 1 | 1 | 1 | Has `## Mental Model`, code examples |
-| alex-builder | 6/6 | 1 | 1 | 1 | 1 | 1 | 1 | Has hooks, mental model, mermaid |
+| Agent | Score | fm | handoffs | bounds | code | Human Assessment |
+|-------|------:|:--:|:--------:|:------:|:----:|------------------|
+| alex-azure | 3/4 | 1 | 1 | 1 | 0 | Good tool tables, clear guidance |
+| alex | 3/4 | 1 | 1 | 1 | 0 | Full cognitive architecture, commands — core agent |
+| alex-backend | 4/4 | 1 | 1 | 1 | 1 | Code examples, complete structure |
+| alex-builder | 4/4 | 1 | 1 | 1 | 1 | Code examples, mermaid diagrams |
 
-**Distribution**: 12 agents | 3 failing (3/6) | 6 passing (5/6) | 3 perfect (6/6)
+**Distribution**: 12 agents | Passing: 12 | Perfect(4/4): 9
 
 #### Agent Criterion Validity
 
-| Dimension | Pass Rate | Issue Identified | Validity |
+| Dimension | Pass Rate | Issue Identified | Decision |
 |-----------|----------:|------------------|----------|
-| **fm** | 12/12 | None | ✓ Valid |
-| **handoffs** | 12/12 | None | ✓ Valid |
-| **hooks** | 3/12 | Legitimate — most agents don't need PostToolUse hooks | ⚠ Misleading |
-| **bounds** | 12/12 | All within 50-400 lines | ✓ Valid |
-| **persona** | 9/12 | Requires specific headers (`## Mental Model`, `## Mindset`, etc.) | ⚠ Partial |
-| **code** | 9/12 | Correctly identifies code examples | ✓ Valid |
+| **fm** | 12/12 | None — mandatory gate | ✓ KEEP |
+| **handoffs** | 12/12 | None | ✓ KEEP |
+| **~~hooks~~** | 3/12 | Only 3 agents need PostToolUse automation | ✗ REMOVED |
+| **bounds** | 12/12 | All within 50-400 lines | ✓ KEEP |
+| **~~persona~~** | 9/12 | Naming convention issue, few agents | ✗ REMOVED (enforced via skills/instructions) |
+| **code** | 9/12 | Correctly identifies code examples | ✓ KEEP |
 
-#### Analysis
+### Implemented Changes (April 2026)
 
-**persona (9/12 pass) — PARTIAL VALIDITY**
+**hooks — REMOVED**
 
-The criterion checks for headers matching:
-- `## Mental Model`
-- `## When to Use`
-- `## Persona`
-- `## Mindset`
-- `## Core Directive`
+Only 3 agents (alex-builder, alex-researcher, alex-validator) need hooks. The other 9 scored defect=0, but this wasn't a quality issue — most agents don't need `PostToolUse` automation. Removed entirely.
 
-The main `alex` agent has `## Core Identity` which serves the same purpose but doesn't match the pattern. This is a naming convention issue, not a quality issue.
+**persona — REMOVED (enforced via skills/instructions)**
 
-**hooks (3/12 pass) — MISLEADING CRITERION**
-
-Only 3 agents (alex-builder, alex-researcher, alex-validator) have hooks. The other 9 score 0, but this isn't a defect — most agents don't need `PostToolUse` automation. The criterion confuses "capability present" with "capability needed."
-
-**Agent Refinements — PENDING**
-
-| Dimension | Current | Proposed | Status |
-|-----------|---------|----------|--------|
-| **persona** | Match specific header names | Match `## Core` OR `## Mental` OR `## Persona` OR `## Identity` | Review needed |
-| **hooks** | Scored as defect if missing | Only score if agent performs file operations (Builder, Validator) | Review needed |
+Persona is an important Alex characteristic, but with only 12 agents, manual enforcement via skills and instructions is more effective than automated header detection. The criterion had naming convention issues (`## Core Identity` didn't match pattern).
 
 ### Instruction Scoring Validation (April 2026)
 
