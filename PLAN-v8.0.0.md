@@ -28,6 +28,93 @@ v8.0.0 marks a philosophical shift: from "feature-rich sidebar" to "lightweight 
 
 ---
 
+## Design Inspiration: PBI Visual Assistant
+
+The PBI Visual Assistant extension (C:\Development\pbi) embodies the "cockpit not cargo" philosophy:
+
+### Pattern 1: Chat-First Buttons
+
+```typescript
+// Most buttons just open chat with a pre-filled prompt
+{ icon: "heart", label: "Score Model Health", command: "openChat", 
+  prompt: "Score the AI readiness of this model" }
+```
+
+**Alex adoption**: Quick Actions should be chat prompts, not commands:
+| Button | Opens Chat With |
+| ------ | --------------- |
+| North Star | "Let's review the project North Star" |
+| Meditate | "Let's do a meditation session" |
+| Self-Actualize | "Run a self-actualization assessment" |
+
+### Pattern 2: Connection Status as Hero
+
+PBI shows a single card with color-coded status dot at the top:
+```
+┌─────────────────────────────────┐
+│ ● Connection: TMDL (Contoso)   │
+└─────────────────────────────────┘
+```
+
+**Alex adoption**: Health Pulse card with status indicator:
+```
+┌─────────────────────────────────┐
+│ ✅ Alex: Healthy               │
+│    247 synapses · Dream 2d ago │
+└─────────────────────────────────┘
+```
+
+### Pattern 3: Type Hints on Buttons
+
+Every button shows what it does BEFORE clicking:
+- 💬 → opens chat
+- 🔗 → opens external URL
+- ⚡ → runs command
+
+**Alex adoption**: Add type hints to Quick Actions so users know outcomes.
+
+### Pattern 4: Purpose-Driven Groups with Accent Colors
+
+| Group | Purpose | Accent |
+| ----- | ------- | ------ |
+| CONNECT | Link to data | Green |
+| ANALYZE | Understand data | Teal |
+| DESIGN | Build report | Orange |
+| GOVERN | Maintain | Magenta |
+
+**Alex adoption**: If keeping groups, use persona accent colors:
+| Group | Purpose | Accent |
+| ----- | ------- | ------ |
+| HEALTH | Cognitive status | Teal |
+| ACTIONS | Quick actions | Blue |
+| SETUP | Initialize/Bootstrap | Orange |
+
+### Pattern 5: Wiki for Docs
+
+PBI Docs tab is just links to GitHub Wiki. No docs embedded in extension.
+
+**Alex adoption**: Learn tab links to:
+- GitHub Wiki (user guide)
+- learnai.correax.com (playbooks)
+- alex-docs site (architecture)
+
+### Pattern 6: Minimal Actual Commands
+
+PBI has only 5 real VS Code commands. Everything else is `openChat` with a prompt.
+
+**Alex adoption**: Reduce command surface:
+| Keep as Command | Convert to Chat Prompt |
+| --------------- | ---------------------- |
+| `alex.dream` | — (needs progress UI) |
+| `alex.initialize` | — (needs file ops) |
+| `alex.upgrade` | — (needs file ops) |
+| `alex.openChat` | — (meta) |
+| `alex.selfActualize` | "Run self-actualization" |
+| `alex.meditate` | "Let's meditate" |
+| `alex.northStar` | "Review North Star" |
+
+---
+
 ## Current State Assessment
 
 ### Welcome View (Sidebar)
