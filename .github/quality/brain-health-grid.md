@@ -1,6 +1,6 @@
 # Brain Health Grid
 
-Generated: 2026-04-14
+Generated: 2026-04-15
 
 ## Scoring Criteria
 
@@ -376,6 +376,13 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 ## Prompts
 
+**Scoring Criteria**:
+| Dim | Name | 1 (good) | 0 (defect) |
+|:---:|------|----------|------------|
+| **desc** | Description | Has `description:` in frontmatter | Missing description |
+| **agent** | Agent Routing | Has `agent:` field | No agent routing |
+| **>20L** | Content | >20 lines | ≤20 lines (stub) |
+
 **Pass criteria**: desc=1 (gate) AND score ≥2/3
 
 | Prompt | Lines | desc | agent | >20L | Score | Pass |
@@ -448,6 +455,14 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | word | 62 | 1 | 1 | 1 | 3/3 | ✓ |
 
 **Summary**: 66 prompts | Passing: 66 | Failing: 0 | Perfect(3/3): 39
+
+### Criterion Validity
+
+| Criterion | Pass | Rate | Validity |
+|-----------|-----:|-----:|----------|
+| desc | 66/66 | 100% | ✓ Valid — required for discoverability |
+| agent | 46/66 | 70% | ✓ Valid — identifies routing prompts |
+| >20L | 59/66 | 89% | ✓ Valid — identifies workflow content |
 ## Overall
 
 | Category | Count |
