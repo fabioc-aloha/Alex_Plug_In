@@ -446,6 +446,44 @@ Two issues:
 | **spec** | Penalizes `applyTo: "**"` | Skip specificity check; Copilot's semantic matching handles routing |
 | **skill** | Exact name match | Pattern match: `{instr-name}*.skills/` OR instruction has `standalone: true` frontmatter |
 
+### Prompt Scoring Validation (April 2026)
+
+Prompts have 3 scoring dimensions: **desc** (description), **agent** (routes to agent), **>20L** (substantive content).
+
+| Prompt | Score | desc | agent | >20L | Lines | Human Assessment |
+|--------|------:|:----:|:-----:|:----:|------:|------------------|
+| alex | 2/3 | 1 | 1 | 0 | 7 | Agent routing stub — works correctly |
+| ai-character-reference-generation | 2/3 | 1 | 0 | 1 | 379 | Full workflow — works correctly |
+| meditate | 3/3 | 1 | 1 | 1 | 36 | Agent + content — complete prompt |
+| brainqa | 3/3 | 1 | 1 | 1 | 45 | Agent + content — complete prompt |
+
+**Distribution**: 66 prompts | Passing: 66 | Failing: 0 | Perfect (3/3): 39
+
+#### Prompt Criterion Validity
+
+| Dimension | Pass Rate | Issue Identified | Validity |
+|-----------|----------:|------------------|----------|
+| **desc** | 66/66 | None | ✓ Valid |
+| **agent** | 39/66 | Correctly identifies agent routing prompts | ✓ Valid |
+| **>20L** | 53/66 | Correctly identifies substantive content | ✓ Valid |
+
+#### Analysis
+
+**All criteria valid** — Prompts have the simplest and most correct scoring model:
+
+1. **desc** (gate) — Required for discoverability. All prompts have it.
+2. **agent** — Identifies routing prompts (short stubs that switch modes)
+3. **>20L** — Identifies workflow prompts (full content with steps)
+
+The OR logic works: a prompt needs EITHER agent routing OR substantive content (or both). This correctly allows:
+- **Agent routing prompts** (7-16 lines): `/azure`, `/builder`, `/validator` — just switch modes
+- **Workflow prompts** (100-500+ lines): `/ai-character-reference-generation`, `/extension-audit-methodology` — full guided workflows
+- **Complete prompts** (20-100 lines): `/meditate`, `/brainqa` — agent mode with embedded content
+
+**Trifecta alignment NOT required** — Prompts are a separate entry point, orthogonal to skill-instruction trifectas. Only 6/66 prompts have matching skills+instructions (e.g., `ai-character-reference-generation`), and that's architecturally correct.
+
+**No proposed refinements** — Prompt scoring is valid as-is.
+
 ## See Also
 
 - [TRIFECTA-CATALOG.md](TRIFECTA-CATALOG.md) — Complete trifecta inventory
