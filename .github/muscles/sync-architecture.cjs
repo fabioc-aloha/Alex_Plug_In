@@ -75,6 +75,10 @@ const SKILL_EXCLUSIONS = {
   "release-preflight": "master-only", // platforms/vscode-extension paths, ROADMAP
   "extension-audit-methodology": "master-only", // master audit methodology, alex_docs/audits
   "skill-catalog-generator": "master-only", // master catalog generation
+  "airs-appropriate-reliance": "master-only", // Fabio's doctoral research instrument
+  "dissertation-defense": "master-only", // Fabio's DBA defense prep
+  "correax-brand": "master-only", // Personal brand design system
+  "practitioner-research": "master-only", // Fabio's research methodology
 
   // heir:m365: skill targets the M365 Copilot heir, not VS Code extension
   "m365-agent-debugging": "heir:m365",

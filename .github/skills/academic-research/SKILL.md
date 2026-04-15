@@ -1,11 +1,8 @@
 ---
 name: academic-research
-description: >-
+description: Patterns for thesis writing, dissertations, research papers, literature reviews, scholarly work, and venue-specific publication drafting
 tier: extended
-  Patterns for thesis writing, dissertations, research papers, literature reviews, scholarly work, and venue-specific
-  publication drafting
-applyTo: >-
-  **/*paper*,**/*manuscript*,**/*journal*,**/*conference*,**/*CHI*,**/*HBR*,**/*publication*,**/*thesis*,**/*dissertation*
+applyTo: '**/*paper*,**/*manuscript*,**/*journal*,**/*conference*,**/*CHI*,**/*HBR*,**/*publication*,**/*thesis*,**/*dissertation*'
 ---
 
 # Academic Research Skill

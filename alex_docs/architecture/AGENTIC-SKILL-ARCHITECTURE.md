@@ -1,515 +1,529 @@
 # Agentic Skill Architecture
 
-## Overview
+| | |
+|---|---|
+| **Document Type** | Architecture Specification |
+| **Status** | Living Document |
+| **Version** | 2.0 |
+| **Last Updated** | April 2026 |
+| **Authors** | Alex Cognitive Architecture Team |
+| **Related Documents** | [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md), [Trifecta Catalog](./TRIFECTA-CATALOG.md) |
 
-Skills in Alex's cognitive architecture fall into two fundamental types based on their execution capability:
+---
 
-| Type | Components | Nature |
-|------|------------|--------|
-| **Intellectual** | Trifecta only | Reasoning, analysis, judgment — no action needed |
-| **Agentic** | Trifecta + Muscle | Autonomous execution — knows AND does |
+## Abstract
 
-## Industry Alignment
+This document defines the architecture for organizing, measuring, and evolving cognitive capabilities within Alex. It introduces a formal distinction between **intellectual skills** (capabilities that provide analysis and recommendations) and **agentic skills** (capabilities that execute autonomously to produce artifacts). The architecture includes a quality scoring model, a three-part alignment system called the "trifecta," and an automation layer called "muscles."
 
-This architecture aligns with established research and industry patterns:
+The design addresses a fundamental challenge in AI assistant architecture: how to organize hundreds of capabilities so they can be discovered, measured, improved, and composed. The solution draws on established industry patterns (ReAct, OpenAI's agentic definitions, Microsoft Foundry) while contributing novel elements including explicit type classification, measurable quality criteria, and the script/pseudocode muscle distinction.
 
-### ReAct: Reasoning + Acting (Yao et al., ICLR 2023)
+---
 
-The seminal ReAct paper established the paradigm of **synergizing reasoning and acting** in LLMs:
+## 1. Introduction
 
-> "Reasoning traces help the model induce, track, and update action plans... while actions allow it to interface with external sources."
+### 1.1 Problem Statement
 
-Our Intellectual vs Agentic distinction mirrors this exactly:
-- **Intellectual skills** = pure reasoning (chain-of-thought, analysis)
-- **Agentic skills** = reasoning + action (tool use, execution)
+As Alex's capabilities grew from dozens to hundreds, several problems emerged:
 
-**Citation**: [arXiv:2210.03629](https://arxiv.org/abs/2210.03629)
+1. **Discovery**: How does Alex know which capability to activate for a given request?
+2. **Completeness**: How do we know if a capability is "production ready" or needs more work?
+3. **Composition**: How do related capabilities (domain knowledge, procedures, workflows) connect?
+4. **Evolution**: What's the path from a new capability idea to a polished, deployable skill?
 
-### OpenAI: Agentic AI Definition
+Ad-hoc organization led to inconsistent quality, activation failures, and difficulty prioritizing improvement work. We needed a formal architecture.
 
-OpenAI's governance framework defines agentic AI systems as:
+### 1.2 Design Goals
 
-> "AI systems that can pursue complex goals with limited direct supervision."
+The architecture was designed to satisfy these requirements:
 
-This maps directly to our `tri=1, muscle=1` classification — skills that can act autonomously.
+| Goal | Description |
+|------|-------------|
+| **Measurability** | Quality must be quantifiable, not subjective |
+| **Discoverability** | Capabilities must be findable via metadata, not just naming |
+| **Composability** | Related artifacts must align through convention |
+| **Evolvability** | Clear progression from stub to complete capability |
+| **Industry Alignment** | Patterns should match established research where applicable |
 
-**Citation**: [Practices for Governing Agentic AI Systems](https://openai.com/index/practices-for-governing-agentic-ai-systems/)
+### 1.3 Scope
 
-### Microsoft Foundry Agent Service
+This document covers:
+- The intellectual/agentic skill distinction
+- The quality scoring model and pass criteria
+- The trifecta alignment system
+- The muscle automation layer
+- Memory activation via frontmatter
 
-Microsoft's agent platform defines agents as three components:
+It does not cover:
+- Agent architecture (see [AGENT-CATALOG.md](./AGENT-CATALOG.md))
+- Memory persistence (see [MEMORY-SYSTEMS.md](./MEMORY-SYSTEMS.md))
+- VS Code extension integration (see [VSCODE-BRAIN-INTEGRATION.md](./VSCODE-BRAIN-INTEGRATION.md))
 
-| Component | Description | Alex Equivalent |
-|-----------|-------------|-----------------|
-| **Model (LLM)** | Reasoning and language | Copilot context |
-| **Instructions** | Goals, constraints, behavior | `.instructions.md` |
-| **Tools** | Access to data or actions | Muscle scripts |
+---
 
-Our trifecta (skill + instruction + prompt) + muscle architecture provides the same pattern with explicit separation of concerns.
+## 2. Foundational Concepts
 
-**Citation**: [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
+### 2.1 The Intellectual/Agentic Distinction
 
-### Anthropic: Agentic Coding Evaluation
+The most fundamental design decision in this architecture is the separation of capabilities into two types based on their output.
 
-Anthropic distinguishes between models that:
-- Generate text (reasoning, advice)
-- Take autonomous actions (fix bugs, add functionality)
-
-Their "agentic coding evaluation" tests "the model's ability to fix a bug or add functionality... independently write, edit, and execute code."
-
-This validates our separation: intellectual skills advise, agentic skills execute.
-
-**Citation**: [Claude 3.5 Sonnet Announcement](https://www.anthropic.com/news/claude-3-5-sonnet)
-
-### Microsoft AutoGen
-
-AutoGen's multi-agent framework emphasizes:
-
-> "Agents have native support for LLM-driven code/function execution"
-
-The pattern: agents that can reason AND execute. Our muscle layer provides this execution capability.
-
-## The Quality Equation
-
-Every skill aspires to structural merit plus capability completeness:
-
-```
-Quality = Visibility + Merit + Capability
-
-Visibility:  fm (frontmatter with description + application)
-Merit:       code + bounds
-Capability:  tri (trifecta) + muscle (automation)
-```
-
-## Skill Types
-
-### Intellectual Skills (tri=1, muscle=0)
-
-Skills that require thinking but no automated action:
-
-- **Code Review** — evaluates code quality, security, patterns
-- **Root Cause Analysis** — systematic debugging methodology
-- **Security Review** — OWASP, STRIDE, threat modeling
-- **Architecture Audit** — consistency, coupling, design review
-
-These skills are complete WITHOUT a muscle. The "action" is human judgment informed by the skill's knowledge.
-
-### Agentic Skills (tri=1, muscle=1)
-
-Skills with autonomous execution capability:
-
-- **md-to-word** — converts markdown to Word documents
-- **brain-qa** — generates quality grid reports
-- **docx-to-md** — converts Word to markdown
-- **converter-qa** — validates converter outputs
-
-These skills can ACT, not just advise.
-
-## The Trifecta Foundation
-
-Both skill types require trifecta alignment:
-
-```
-skill-name/
-├── SKILL.md              # Domain knowledge
-└── (muscle)              # Optional automation
-
-.github/instructions/
-└── skill-name.instructions.md   # Procedural guidance
-
-.github/prompts/
-└── skill-name.prompt.md         # Reusable workflow (optional)
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#e8f5e9", "secondaryColor": "#e3f2fd"}}}%%
+flowchart LR
+    subgraph INTELLECTUAL["Intellectual Skills"]
+        I1["Code Review"]
+        I2["Security Analysis"]
+        I3["Root Cause Analysis"]
+    end
+    
+    subgraph AGENTIC["Agentic Skills"]
+        A1["md-to-word"]
+        A2["brain-qa"]
+        A3["docx-to-md"]
+    end
+    
+    USER((User)) -->|"Review this PR"| INTELLECTUAL
+    USER -->|"Convert to Word"| AGENTIC
+    
+    INTELLECTUAL -->|"Analysis"| FEEDBACK["Recommendations"]
+    AGENTIC -->|"Execution"| OUTPUT["Artifacts"]
+    
+    style INTELLECTUAL fill:#e3f2fd,stroke:#1565c0
+    style AGENTIC fill:#e8f5e9,stroke:#2e7d32
 ```
 
-The trifecta links:
-- **SKILL.md** — what to know (domain expertise)
-- **instruction** — how to apply it (procedural rules)
-- **prompt** — when to use it (workflow template)
+| Type | Components | Output | Example |
+|------|------------|--------|---------|
+| **Intellectual** | Trifecta only | Recommendations, analysis | "Here are the security issues I found" |
+| **Agentic** | Trifecta + Muscle | Artifacts, files | "I've created report.docx" |
 
-## The Muscle Layer
+#### Design Rationale
 
-Muscles are automation components in `.github/muscles/`:
+**Why separate intellectual from agentic?**
 
-### Script Muscles (Preferred)
+The initial design treated all capabilities uniformly, but this created problems:
 
-For cross-platform execution (Node.js):
+1. **Automation pressure**: Every capability was expected to have automation, even when the output was inherently advisory
+2. **Quality confusion**: A brilliant code review methodology scored poorly because it lacked a "muscle"
+3. **User expectations**: Users expected different interaction patterns for advice vs. execution
 
-```
-.github/muscles/
-├── brain-qa.cjs          # Quality grid generator
-├── md-to-word.cjs        # Document converter
-├── converter-qa.cjs      # Converter test harness
-└── docx-to-md.cjs        # Reverse converter
-```
+The separation acknowledges that some capabilities are complete without automation. A code review skill that provides expert methodology is production-ready even without a script that automatically applies fixes. The value is in the analysis, not the execution.
 
-### Pseudocode Muscles
+**Industry validation**: This distinction mirrors the ReAct framework (Yao et al., ICLR 2023), which demonstrated that LLMs perform best when reasoning and acting are both available but explicitly separated. OpenAI's governance framework similarly distinguishes between AI that advises and AI that acts autonomously.
 
-For cross-platform challenges (platform-specific implementation):
+**Alternative considered**: A continuous spectrum from "pure analysis" to "full automation." Rejected because binary classification is easier to measure and communicate. A skill is either complete as intellectual or needs a muscle — no ambiguity.
 
-```
-.github/muscles/
-├── visual-export.md      # Describes PNG export steps
-└── audio-render.md       # Platform-specific TTS workflow
-```
+### 2.2 The Trifecta System
 
-Pseudocode muscles document WHAT to do when a universal script isn't feasible.
+A capability requires more than domain knowledge. It needs procedural guidance (how to apply the knowledge) and invocation patterns (when to use it). The **trifecta** formalizes this three-part alignment.
 
-## Quality Dimensions
-
-| Dimension | What it measures | Required for |
-|-----------|------------------|--------------|
-| **fm** | Visibility to the brain | All (gate) |
-| **code** | Code examples | Pass threshold |
-| **bounds** | Size limits (100-500 lines) | Pass threshold |
-| **tri** | Trifecta alignment | Skill type |
-| **muscle** | Automation component | Agentic status |
-| **inh** | Inheritance (informational) | Heir sync planning |
-| **stale** | Staleness (informational) | Semantic review trigger |
-| **sem** | Semantic review complete | Quality tracking |
-
-## Scoring Model
-
-```
-Score = fm + code + bounds + tri + muscle (max 5)
-
-Pass thresholds by tier:
-  core:       5/5 (must be perfect)
-  standard:   4/5 (one defect allowed)
-  extended:   3/5 (two defects allowed)
-  specialist: 2/5 (three defects allowed)
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f6"}}}%%
+flowchart TB
+    subgraph TRIFECTA["Trifecta: code-review"]
+        SKILL["SKILL.md<br/><i>Domain knowledge</i>"]
+        INSTR[".instructions.md<br/><i>Procedures</i>"]
+        PROMPT[".prompt.md<br/><i>Workflows</i>"]
+    end
+    
+    subgraph OPTIONAL["Optional"]
+        MUSCLE["Muscle<br/><i>Automation</i>"]
+    end
+    
+    SKILL --- INSTR
+    INSTR --- PROMPT
+    PROMPT -.-> MUSCLE
+    
+    style TRIFECTA fill:#e8f5e9,stroke:#2e7d32
+    style OPTIONAL fill:#fff3e0,stroke:#ef6c00
 ```
 
-**Gate requirement**: fm=1 is mandatory. Without frontmatter, the skill is invisible to activation.
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| **Skill** | `.github/skills/{name}/SKILL.md` | Domain expertise, reference material |
+| **Instruction** | `.github/instructions/{name}.instructions.md` | Step-by-step procedures |
+| **Prompt** | `.github/prompts/{name}.prompt.md` | Reusable workflow templates |
+| **Muscle** | `.github/muscles/{name}.cjs` | Automation (optional) |
 
-**Informational columns** (not scored):
-- **inh**: Inheritance status — 1=master-only (excluded from heir sync), 0=synced
-- **stale**: Staleness signal — 1=needs research refresh (external API churn), 0=stable
-- **sem**: Semantic review — 1=reviewed and updated, 0=pending review
+#### Design Rationale
 
-## Type Classification
+**Why three parts instead of one monolithic skill?**
 
-| Type | tri | muscle | Icon | Meaning |
-|------|:---:|:------:|:----:|---------|
-| Agentic | 1 | 1 | A | Can execute autonomously |
-| Intellectual | 1 | 0 | I | Requires human judgment |
-| Incomplete | 0 | * | - | Missing trifecta alignment |
+The original design had everything in a single SKILL.md file. This failed because:
 
-## Evolution Path
+1. **Loading efficiency**: Large files consume tokens even when only procedures are needed
+2. **Activation patterns**: Instructions need file-pattern activation (`applyTo`); skills don't
+3. **Reusability**: One instruction can serve multiple skills; one prompt can orchestrate multiple capabilities
 
+Separating concerns allows each component to evolve independently and be loaded selectively.
+
+**Why naming conventions instead of explicit linking?**
+
+Early versions used explicit references (`related: code-review.instructions.md`). This was abandoned because:
+
+1. **Maintenance burden**: Every rename required updating references
+2. **Drift**: References fell out of sync when files were added or removed
+3. **Convention simplicity**: `code-review` → `code-review.instructions.md` is automatic
+
+The trade-off is that naming mismatches break alignment silently. The brain-qa quality tool detects these mismatches and reports them as `tri=0` defects.
+
+**Alternative considered**: A manifest file listing all trifecta relationships. Rejected because manifests drift from reality and require synchronization. Convention-over-configuration is more robust.
+
+---
+
+## 3. The Quality Model
+
+### 3.1 Design Philosophy
+
+Quality measurement must be:
+- **Automatic**: No human judgment required for basic scoring
+- **Binary**: Each dimension is pass/fail, no gradients
+- **Gated**: Certain dimensions are prerequisites for others
+
+This enables automated quality reports via `brain-qa.cjs` that can track improvement over time.
+
+### 3.2 Scoring Dimensions
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f6"}}}%%
+flowchart TB
+    subgraph VISIBILITY["Visibility (Gate)"]
+        FM["fm: Frontmatter"]
+    end
+    
+    subgraph MERIT["Merit"]
+        CODE["code: Examples"]
+        BOUNDS["bounds: Size"]
+    end
+    
+    subgraph CAPABILITY["Capability"]
+        TRI["tri: Trifecta"]
+        MUSCLE["muscle: Automation"]
+    end
+    
+    FM --> CODE
+    FM --> BOUNDS
+    CODE --> TRI
+    BOUNDS --> TRI
+    TRI --> MUSCLE
+    
+    MUSCLE -->|"tri=1, muscle=1"| AGENTIC["Agentic (A)"]
+    TRI -->|"tri=1, muscle=0"| INTELLECTUAL["Intellectual (I)"]
+    
+    style VISIBILITY fill:#fff3e0,stroke:#ef6c00
+    style MERIT fill:#e3f2fd,stroke:#1565c0
+    style CAPABILITY fill:#e8f5e9,stroke:#2e7d32
 ```
-Stub Skill (new)
-    ↓ add frontmatter
-Visible Skill (fm=1)
-    ↓ add structure, code, bounds
-Quality Skill (merit complete)
-    ↓ add matching instruction
-Intellectual Skill (tri=1)
-    ↓ add muscle (if actionable)
-Agentic Skill (tri=1, muscle=1)
-```
 
-Not all skills should become agentic. Intellectual skills that guide human reasoning are complete as-is.
+| Dimension | Measures | Pass Criteria | Rationale |
+|-----------|----------|---------------|-----------|
+| **fm** | Visibility | `description` AND `application` present | Invisible skills cannot be activated |
+| **code** | Practicality | At least one code block | Skills without examples lack concreteness |
+| **bounds** | Size | 100-500 lines | <100 is stub; >500 needs splitting |
+| **tri** | Alignment | Matching instruction exists | Orphan skills lack procedural context |
+| **muscle** | Automation | Script in `.github/muscles/` | Required for agentic classification |
 
-## Muscle Philosophy
+#### Design Rationale
 
-1. **Every skill should aspire to automation** — but some legitimately have none
-2. **Cross-platform possible** → Node.js script (`.cjs`/`.js`)
-3. **Cross-platform challenging** → Pseudocode markdown (`.md`)
-4. **Intellectual skills** → No muscle needed (the action is thinking)
+**Why binary scoring instead of weighted?**
 
-## Examples
+Weighted scores (e.g., "80% complete") obscure what's actually missing. Binary dimensions make defects explicit: "This skill needs code examples (code=0)."
 
-### Agentic Skill: md-to-word
+**Why is `fm` a hard gate?**
 
-```
-.github/skills/md-to-word/SKILL.md          # Conversion knowledge
-.github/instructions/md-to-word.instructions.md  # When to convert
-.github/muscles/md-to-word.cjs              # The converter script
-```
+A skill with brilliant content but no frontmatter cannot be discovered by activation systems. It's invisible. This is worse than having defects — it's having zero value. The gate ensures visibility before measuring anything else.
 
-Invocation: "Convert this document to Word"
-Result: Autonomous execution produces `.docx` file
+**Why 100-500 line bounds?**
 
-### Intellectual Skill: code-review
+- **<100 lines**: In empirical review, skills under 100 lines lacked substance. They were placeholders, not capabilities.
+- **>500 lines**: Large skills are candidates for splitting. They often combine multiple concerns that should be separate trifectas.
 
-```
-.github/skills/code-review/SKILL.md         # Review methodology
-.github/instructions/code-review-guidelines.instructions.md
-```
+These thresholds were calibrated by reviewing 168 skills and identifying the boundaries where quality correlated with size.
 
-Invocation: "Review this PR"
-Result: Structured feedback using the skill's framework
+### 3.3 Tier System
 
-No muscle needed — the output is analysis, not automation.
+| Tier | Min Score | Population | Rationale |
+|------|:---------:|:----------:|-----------|
+| **core** | 5/5 | ~15 skills | Foundation capabilities; defects propagate |
+| **standard** | 4/5 | ~50 skills | Daily-use capabilities; high quality expected |
+| **extended** | 3/5 | ~60 skills | Domain specializations; some flexibility |
+| **specialist** | 2/5 | ~40 skills | Niche capabilities; narrow use cases |
 
-## Relationship to Modern Synapses
+#### Design Rationale
 
-Static `synapses.json` files are deprecated. Modern activation uses:
+**Why tiered instead of uniform?**
 
-| Mechanism | Where | Purpose |
-|-----------|-------|---------|
-| `applyTo` | Frontmatter | Pattern-based activation |
-| `description` | Frontmatter | Semantic matching |
-| Trifecta naming | Convention | skill → instruction linking |
-| `handoffs` | Agents | Explicit routing |
+A uniform pass threshold would either:
+- Be too strict (rejecting useful niche skills)
+- Be too lax (allowing defects in critical skills)
 
-## Novel Contributions
+Tiering acknowledges that `debugging-patterns` (used daily) matters more than `game-design` (niche domain). Core skills have zero tolerance; specialist skills have more flexibility.
 
-While our architecture aligns with industry research, it contributes unique elements:
+---
 
-| Prior Art | Our Contribution |
-|-----------|------------------|
-| ReAct's reasoning+acting | Explicit typing system (I/A/-) with quality scoring |
-| OpenAI's agentic definition | Measurable criteria via trifecta + muscle |
-| Microsoft's Model+Instructions+Tools | Trifecta separation (skill/instruction/prompt) with muscle layer |
-| Tool-use patterns | Muscle philosophy: script vs pseudocode distinction |
+## 4. Memory Activation
 
-**Key innovation**: The quality equation combines visibility, merit, and capability into a single scoring model that can be measured, tracked, and improved over time.
+### 4.1 The Unified Frontmatter Model
 
-## Theoretical Validity
-
-The architecture is **theoretically sound** because:
-
-1. **Aligns with ReAct** — The reasoning/acting distinction is empirically validated
-2. **Matches industry patterns** — Microsoft, OpenAI, Anthropic all use similar agent definitions
-3. **Provides measurability** — Unlike abstract definitions, our model can score skill completeness
-4. **Enables evolution** — Clear path from stub → visible → quality → intellectual → agentic
-
-The concepts don't just "make sense" — they formalize established patterns into a testable framework.
-
-## Empirical Validation
-
-To validate the scoring model, we examined representative skills across the score distribution:
-
-### Sample Analysis (April 2026)
-
-| Skill | Tier | Score | fm | code | bounds | tri | muscle | Type | Human Assessment |
-|-------|------|------:|:--:|:----:|:------:|:---:|:------:|:----:|------------------|
-| dissertation-defense | exte | 1/3 | 1 | 0 | 0 | 0 | 0 | - | Good domain content, actionable checklists |
-| career-development | exte | 2/3 | 1 | 0 | 1 | 0 | 0 | - | Excellent tables, complete resume guidance |
-| code-review | core | 3/5 | 1 | 1 | 1 | 0 | 0 | - | High-quality methodology, 3-pass framework |
-| image-handling | stan | 4/4 | 1 | 1 | 1 | 1 | 0 | I | Clear format selection, code examples |
-| brain-qa | stan | 5/4 | 1 | 1 | 1 | 1 | 1 | A | Complete with automation script |
-| md-to-word | stan | 5/4 | 1 | 1 | 1 | 1 | 1 | A | Full conversion pipeline |
-
-### Criterion Validity Findings
-
-| Dimension | Pass Rate | Issue Identified | Decision |
-|-----------|----------:|------------------|----------|
-| **fm** | 168/168 | None — mandatory gate | ✓ KEEP |
-| **~~struct~~** | 2/168 | Required arbitrary `## Troubleshooting` + `## Activation` headers | ✗ REMOVED |
-| **code** | 128/168 | Correctly identifies code examples | ✓ KEEP |
-| **bounds** | 152/168 | 50 lines too lenient for stubs | ✓ KEEP (raised to 100-500) |
-| **tri** | 97/168 | Naming mismatches can be fixed manually | ✓ KEEP (semantic review needed) |
-| **muscle** | 9/168 | Correctly identifies agentic capability | ✓ KEEP |
-
-### Implemented Changes (April 2026)
-
-**struct — REMOVED**
-
-The `struct` dimension required BOTH of these exact section headers:
-- `## Troubleshooting`
-- `## Activation` (or `## Activation Patterns`)
-
-Only 2/168 skills used this template. Removed entirely — doesn't measure structural quality.
-
-**bounds — RAISED TO 100-500**
-
-Minimum raised from 50 to 100 lines. Skills under 100 lines are stubs that lack substance.
-
-**tri — KEEP (semantic review handles mismatches)**
-
-The exact-match criterion correctly flags missing instructions. Naming mismatches (e.g., `code-review` vs `code-review-guidelines.instructions.md`) are valid findings — the semantic review process (`stale` signal, `sem` completion) handles research and updates.
-
-**Informational columns added:**
-- **inh**: Read from `sync-architecture.cjs` SKILL_EXCLUSIONS — helps plan heir sync upgrades
-- **stale**: Hardcoded set of skills with external API dependencies — signals "research needed"
-- **sem**: Preserved across grid regenerations — tracks semantic review completion
-
-### Type Classification Validity
-
-The Intellectual/Agentic/Incomplete classification **is valid**:
-
-| Type | Count | Description | Validates |
-|------|------:|-------------|-----------|
-| Agentic (A) | 7 | Skills with muscle scripts | ✓ All have working automation |
-| Intellectual (I) | 90 | Skills with trifecta, no muscle | ✓ Guide reasoning, don't execute |
-| Incomplete (-) | 71 | Missing trifecta alignment | ✓ Need matching instructions |
-
-The type system correctly distinguishes capabilities. The scoring model's weakness is in the merit dimensions (struct), not the capability dimensions (tri, muscle).
-
-### Agent Scoring Validation (April 2026)
-
-Agents have 5 scoring dimensions: **fm** (frontmatter), **handoffs**, **bounds**, **persona**, **code**.
-
-| Agent | Score | fm | handoffs | bounds | persona | code | Human Assessment |
-|-------|------:|:--:|:--------:|:------:|:-------:|:----:|------------------|
-| alex-azure | 3/5 | 1 | 1 | 1 | 0 | 0 | Good tool tables, needs Mental Model |
-| alex-m365 | 3/5 | 1 | 1 | 1 | 0 | 0 | Good tool tables, needs Mental Model |
-| alex | 4/5 | 1 | 1 | 1 | 1 | 0 | Full cognitive architecture, Core Identity |
-| alex-backend | 5/5 | 1 | 1 | 1 | 1 | 1 | Complete structure with code examples |
-| alex-builder | 5/5 | 1 | 1 | 1 | 1 | 1 | Code examples, mermaid diagrams |
-
-**Distribution**: 12 agents | Passing: 10 | Failing: 2 | Perfect(5/5): 8
-
-#### Agent Criterion Validity
-
-| Dimension | Pass Rate | Issue Identified | Decision |
-|-----------|----------:|------------------|----------|
-| **fm** | 12/12 | None — mandatory gate | ✓ KEEP |
-| **handoffs** | 12/12 | None | ✓ KEEP |
-| **~~hooks~~** | 3/12 | Only 3 agents need PostToolUse automation | ✗ REMOVED |
-| **bounds** | 12/12 | All within 50-400 lines | ✓ KEEP |
-| **persona** | 10/12 | Expanded regex to catch `## Core Identity` | ✓ KEEP |
-| **code** | 9/12 | Correctly identifies examples | ✓ KEEP |
-
-### Implemented Changes (April 2026)
-
-**hooks — REMOVED**
-
-Only 3 agents (alex-builder, alex-researcher, alex-validator) need hooks. The other 9 scored defect=0, but this wasn't a quality issue — most agents don't need `PostToolUse` automation. Removed entirely.
-
-**persona — KEEP (expanded pattern matching)**
-
-Persona is an important Alex characteristic. Pattern expanded to match:
-- `## Mental Model`
-- `## Core Identity`
-- `## When to Use`
-- `## Mindset`
-- `## Core Directive`
-- `## Persona`
-
-**code — PSEUDOCODE POLICY**
-
-Agent examples should use **pseudocode** (language-agnostic patterns), **templates** (markdown output formats), or **diagrams** (Mermaid). Avoid language-specific syntax — agents teach patterns, not syntax.
-
-| Code Type | Example Agent | Purpose |
-|-----------|---------------|---------|
-| **Pseudocode** | Backend, Frontend, Infrastructure | Pattern communication without language debt |
-| **Templates** | Planner, Validator, Presenter | Output format consistency |
-| **Diagrams** | Builder | Visual decision flows |
-
-This policy enables semantic review (`sem` column) to audit and convert language-specific snippets to pseudocode.
-
-### Instruction Scoring Validation (April 2026)
-
-Instructions have 6 scoring dimensions: **fm** (frontmatter), **spec** (specificity), **depth**, **sect** (sections), **code**, **skill** (trifecta).
-
-| Instruction | Score | fm | spec | depth | sect | code | skill | Human Assessment |
-|-------------|------:|:--:|:----:|:-----:|:----:|:----:|:-----:|------------------|
-| alex-core | 3/6 | 0 | 0 | 1 | 1 | 1 | 0 | 524 lines, core architecture — CRITICAL instruction! |
-| emotional-intelligence | 3/6 | 1 | 0 | 1 | 1 | 0 | 0 | Always-on behavior, `applyTo: "**"` is CORRECT |
-| terminal-command-safety | 4/6 | 1 | 0 | 1 | 1 | 1 | 0 | Safety rules, `applyTo: "**"` is CORRECT |
-| code-review-guidelines | 5/6 | 1 | 1 | 1 | 1 | 1 | 0 | Matching skill exists as `code-review` — naming mismatch |
-| ai-character-reference-generation | 6/6 | 1 | 1 | 1 | 1 | 1 | 1 | Perfect trifecta alignment |
-
-**Distribution**: 83 instructions | Passing: 69 | Failing: 14 | Perfect (6/6): 11
-
-#### Instruction Criterion Validity
-
-**Update (April 2026)**: Instructions are now **discoverable knowledge modules** that can serve multiple skills.
-
-| Dimension | Description | 1 (good) | 0 (defect) |
-|-----------|-------------|----------|------------|
-| **fm** | Frontmatter | Has `description` AND `application` | Missing either |
-| **depth** | Depth | >50 lines | ≤50 lines |
-| **sect** | Sections | ≥2 `##` headers | Flat structure |
-| **code** | Code | Has code block | No examples |
-| **skill** | Trifecta | Has matching skill | Standalone instruction |
-
-**Frontmatter fields**:
-- `description` — WHAT it does
-- `application` — WHEN/WHY to use it (enables routing without reading full doc)
-- `applyTo` — Optional Copilot file-pattern activation
-
-**Pass criteria**: fm=1 (gate) AND score ≥3/5
-
-**Result**: 79/83 passing | 4 failing (short worldview/teams docs)
-
-#### Analysis
-
-**fm (79/83 pass) — VALID**
-
-The new model requires `description` AND `application`:
-- `description` — What the instruction does
-- `application` — When/why to use it (enables agent/skill routing)
-
-This replaces the `applyTo` requirement. `applyTo` is now optional (Copilot file-pattern activation).
-
-**spec REMOVED**
-
-The `spec` dimension (applyTo specificity) was removed entirely. `applyTo` is Copilot activation, not quality. Instructions can:
-- Have specific `applyTo` patterns (e.g., `**/*.ts`)
-- Have broad `applyTo: "**"` (always-on behavior)
-- Omit `applyTo` entirely (rely on semantic matching)
-
-**skill (46/83 pass) — PARTIAL VALIDITY**
-
-Instructions can be:
-1. **Trifecta partners** — linked to a matching skill
-2. **Standalone modules** — reusable across multiple skills
-
-Standalone is valid. The "standalone instruction" defect label is informational, not a quality issue.
-
-### Prompt Scoring Validation (April 2026)
-
-Prompts have 4 scoring dimensions: **desc** (description), **app** (application), **agent** (routes to agent), **>20L** (substantive content).
-
-#### Why Prompts Need `application`
-
-| Aspect | Instructions | Prompts |
-|--------|--------------|----------|
-| **Activation** | Auto-loaded by Copilot | Agent-loaded on user request |
-| **Discovery** | Copilot decides relevance | Alex matches name/description |
-| **User Request** | Implicit (Copilot decides) | Explicit ("run brain-qa") |
-| **Frontmatter** | `description` + `application` | `description` + `application` |
-
-Both instructions and prompts need `application` because **an agent decides when to load them**:
-- Instructions: Copilot loads based on file patterns + semantic matching
-- Prompts: Alex loads when user says "let's meditate" or "run brain-qa"
-
-The `application` field answers "WHEN should this be suggested?" — helping the agent proactively offer relevant workflows. When a user says "let's do neural maintenance," Alex can match that to the `application: "When requesting knowledge consolidation, neural maintenance..."` in the meditation prompt.
-
-**Note**: The VS Code prompt picker (`/meditate`) still works — `application` is additive, not exclusive. Agent mode users get proactive suggestions; picker users browse manually.
-
-| Prompt | Score | desc | app | agent | >20L | Lines | Human Assessment |
-|--------|------:|:----:|:---:|:-----:|:----:|------:|------------------|
-| meditate | 4/4 | 1 | 1 | 1 | 1 | 36 | Complete — all dimensions |
-| brainqa | 4/4 | 1 | 1 | 1 | 1 | 45 | Complete — all dimensions |
-| ai-character-reference-generation | 3/4 | 1 | 1 | 0 | 1 | 379 | Full workflow — no agent routing |
-| alex | 3/4 | 1 | 1 | 1 | 0 | 7 | Agent routing stub — short but valid |
-
-**Pass criteria**: desc=1 AND app=1 (gates) AND score ≥3/4
-
-#### Prompt Criterion Validity
-
-| Dimension | Pass Rate | Issue Identified | Validity |
-|-----------|----------:|------------------|----------|
-| **desc** | 66/66 | None | ✓ Valid — required for discoverability |
-| **app** | TBD | Migration in progress | ✓ Valid — tells agent WHEN to suggest |
-| **agent** | 39/66 | Correctly identifies agent routing prompts | ✓ Valid |
-| **>20L** | 53/66 | Correctly identifies substantive content | ✓ Valid |
-
-#### Analysis
-
-**Unified activation model** — Instructions and prompts share the same frontmatter pattern:
+Both instructions and prompts use identical frontmatter fields:
 
 ```yaml
 ---
-description: "WHAT this does"
-application: "WHEN to load/suggest this"
+description: "WHAT this does"           # Required
+application: "WHEN to use it"           # Required
+applyTo: "**/*.ts"                      # Optional (Copilot only)
 ---
 ```
 
-This consistency enables:
-1. **Agent proactive suggestion** — "Looks like you're doing X, want to run Y workflow?"
-2. **Semantic matching** — Both `description` and `application` are searchable
-3. **Cross-memory routing** — Same discovery pattern across all memory types
+| Field | Purpose | Consumer |
+|-------|---------|----------|
+| `description` | Semantic identity | Picker UI, search, matching |
+| `application` | Activation hints | Agent routing, suggestions |
+| `applyTo` | File patterns | Copilot auto-loading |
 
-**Trifecta alignment NOT required** — Prompts are a separate entry point, orthogonal to skill-instruction trifectas.
+#### Design Rationale
+
+**Why unified frontmatter for instructions AND prompts?**
+
+Original design had different metadata for each type. This caused problems:
+
+1. **Inconsistent routing**: Different fields meant different matching logic
+2. **Migration burden**: Adding a field to one type didn't benefit the other
+3. **Mental model**: Users had to remember which fields applied where
+
+Unification means the same brain-qa checks apply to both types, and the same routing logic works everywhere.
+
+**Why `application` in addition to `description`?**
+
+Description answers "what" — it appears in UIs and enables search. But activation requires "when" — should this skill be suggested right now? The `application` field provides routing hints: "Use when debugging race conditions" helps Alex proactively suggest the skill when you're clearly stuck on a race condition.
+
+**Why is `applyTo` optional?**
+
+`applyTo` is Copilot-specific file-pattern matching. Not all memory types need it (prompts are invoked explicitly), and some instructions apply regardless of file context (emotional-intelligence, terminal-safety). Making it optional prevents false defects.
+
+---
+
+## 5. The Muscle Layer
+
+### 5.1 Script vs. Pseudocode
+
+| Type | Format | When to Use | Example |
+|------|--------|-------------|---------|
+| **Script** | `.cjs`/`.js` | Cross-platform workflows | `md-to-word.cjs` |
+| **Pseudocode** | `.md` | Platform-specific workflows | `visual-export.md` |
+
+#### Design Rationale
+
+**Why Node.js for scripts?**
+
+- **Cross-platform**: Same code runs on Windows, macOS, Linux
+- **VS Code native**: Extension host runs Node; no external dependencies
+- **Ecosystem**: npm packages for any task (pandoc wrappers, image processing)
+
+Alternative considered: Python scripts. Rejected because Python requires runtime installation and PATH configuration, creating friction for users who don't have Python environments.
+
+**Why allow pseudocode muscles?**
+
+Some workflows can't be universalized:
+- Visual export requires platform-specific screenshot APIs
+- Audio rendering depends on local TTS engines
+- GPU-accelerated tasks need platform-specific libraries
+
+Pseudocode muscles document *what* to do without implementing *how*. Alex follows the steps using available tools. This maintains the "agentic" classification while acknowledging platform constraints.
+
+### 5.2 Muscle Philosophy
+
+1. **Aspire to automation**: Every skill should be evaluated for muscle potential
+2. **Accept limitations**: Some skills legitimately have no automation path
+3. **Cross-platform first**: If it can be a Node.js script, it should be
+4. **Pseudocode fallback**: If it can't be cross-platform, document the steps
+5. **Intellectual exception**: Analysis skills don't need muscles
+
+---
+
+## 6. Skill Evolution
+
+Skills progress through defined stages:
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f6"}}}%%
+flowchart LR
+    STUB["Stub"] -->|"+frontmatter"| VISIBLE["Visible"]
+    VISIBLE -->|"+code, bounds"| QUALITY["Quality"]
+    QUALITY -->|"+instruction"| INTELLECT["Intellectual"]
+    INTELLECT -->|"+muscle"| AGENTIC["Agentic"]
+    INTELLECT -.->|"Complete"| DONE["Done"]
+    
+    style STUB fill:#f5f5f5
+    style VISIBLE fill:#fff3e0
+    style QUALITY fill:#e3f2fd
+    style INTELLECT fill:#e8f5e9
+    style AGENTIC fill:#d4edda
+```
+
+| Stage | Score | Characteristics |
+|-------|-------|-----------------|
+| **Stub** | 0-1 | New idea; minimal structure |
+| **Visible** | 1-2 | Discoverable; needs content |
+| **Quality** | 2-3 | Structured; needs alignment |
+| **Intellectual** | 3-4 | Complete for advisory use |
+| **Agentic** | 4-5 | Complete with automation |
+
+### Design Rationale
+
+**Why model evolution explicitly?**
+
+Without a model, improvement work is ad-hoc. "This skill needs work" — but what work? The stage model makes it concrete: "This skill is at Quality stage; next step is adding a matching instruction."
+
+**Why allow termination at Intellectual?**
+
+Not all skills benefit from automation. Code review provides methodology — the human applies judgment. Forcing a muscle would mean either:
+- Automated code changes (too risky without human approval)
+- A muscle that does nothing (meaningless complexity)
+
+The model explicitly allows skills to be "complete" at the Intellectual stage when automation isn't appropriate.
+
+---
+
+## 7. Industry Alignment
+
+| Framework | Key Concept | Alex Implementation |
+|-----------|-------------|---------------------|
+| **ReAct** (Yao et al., 2023) | Reasoning + Acting | Intellectual / Agentic split |
+| **OpenAI Agentic AI** | Autonomous goal pursuit | `tri=1, muscle=1` criteria |
+| **Microsoft Foundry** | Model + Instructions + Tools | Trifecta + Muscle |
+| **Anthropic Coding** | Generate vs Execute | Advise vs Automate |
+
+### Novel Contributions
+
+This architecture contributes beyond prior art:
+
+| Contribution | Description |
+|--------------|-------------|
+| **Explicit typing** | Binary I/A/- classification vs. spectrum |
+| **Measurable quality** | Automated scoring via brain-qa.cjs |
+| **Trifecta convention** | Name-based alignment without manifests |
+| **Muscle philosophy** | Script vs. pseudocode distinction |
+| **Tier system** | Pass thresholds by skill importance |
+
+---
+
+## 8. Future Considerations
+
+### 8.1 Planned Enhancements
+
+| Enhancement | Status | Description |
+|-------------|--------|-------------|
+| **Semantic review tracking** | In progress | `sem` column for human review status |
+| **Staleness detection** | Planned | Flag skills with external API dependencies |
+| **Inheritance tracking** | Planned | Track Master-to-heir skill propagation |
+
+### 8.2 Open Questions
+
+1. **Should prompts be required for trifecta completion?** Currently optional, but most complete skills have them.
+2. **Should muscles have their own quality scoring?** Currently binary (exists/doesn't); could measure test coverage, error handling.
+3. **Should tier assignment be automatic?** Currently manual; could be inferred from usage patterns.
+
+---
+
+## 9. Quick Reference
+
+### Type Icons
+
+| Icon | Type | Meaning |
+|:----:|------|---------|
+| A | Agentic | Executes autonomously |
+| I | Intellectual | Provides analysis |
+| - | Incomplete | Missing trifecta |
+
+### File Locations
+
+```
+.github/
+├── skills/{name}/SKILL.md          # Domain knowledge
+├── instructions/{name}.instructions.md  # Procedures
+├── prompts/{name}.prompt.md        # Workflows
+├── muscles/{name}.cjs              # Automation
+└── quality/brain-health-grid.md    # Current scores
+```
+
+### Pass Criteria Summary
+
+| Tier | Min Score | Gate |
+|------|:---------:|------|
+| core | 5/5 | fm=1 |
+| standard | 4/5 | fm=1 |
+| extended | 3/5 | fm=1 |
+| specialist | 2/5 | fm=1 |
+
+---
+
+## 10. Revision History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 2.0 | April 2026 | Formal architecture document; design rationale added |
+| 1.5 | March 2026 | Unified frontmatter model; application field added |
+| 1.0 | February 2026 | Initial specification |
+
+---
 
 ## See Also
 
-- [TRIFECTA-CATALOG.md](TRIFECTA-CATALOG.md) — Complete trifecta inventory
-- [COGNITIVE-ARCHITECTURE.md](COGNITIVE-ARCHITECTURE.md) — Overall brain structure
+- [TRIFECTA-CATALOG.md](./TRIFECTA-CATALOG.md) — Complete trifecta inventory
+- [COGNITIVE-ARCHITECTURE.md](./COGNITIVE-ARCHITECTURE.md) — Overall brain structure
 - [brain-qa.cjs](../../.github/muscles/brain-qa.cjs) — Quality grid generator
+- [brain-health-grid.md](../../.github/quality/brain-health-grid.md) — Current scores
+
+---
+
+## References
+
+### Academic Papers
+
+1. **Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y.** (2023). ReAct: Synergizing Reasoning and Acting in Language Models. *International Conference on Learning Representations (ICLR)*. <https://arxiv.org/abs/2210.03629>
+   - Foundational work demonstrating that LLMs perform better when reasoning and acting are explicitly combined. Directly influenced the intellectual/agentic distinction.
+
+2. **Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., & Zhou, D.** (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. *Advances in Neural Information Processing Systems (NeurIPS)*. <https://arxiv.org/abs/2201.11903>
+   - Established that explicit reasoning steps improve LLM performance. Influenced the trifecta separation of knowledge (skill) from procedure (instruction).
+
+3. **Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., Cancedda, N., & Scialom, T.** (2023). Toolformer: Language Models Can Teach Themselves to Use Tools. *Advances in Neural Information Processing Systems (NeurIPS)*. <https://arxiv.org/abs/2302.04761>
+   - Demonstrated autonomous tool use in LLMs. Informed the muscle layer design where skills invoke external tools.
+
+4. **Sumers, T. R., Yao, S., Narasimhan, K., & Griffiths, T. L.** (2024). Cognitive Architectures for Language Agents. *Transactions on Machine Learning Research (TMLR)*. <https://arxiv.org/abs/2309.02427>
+   - Survey of cognitive architectures for AI agents. Validated the memory/skill/action separation pattern.
+
+### Industry Documentation
+
+1. **OpenAI.** (2024). Building Agentic AI Applications. *OpenAI Developer Documentation*. <https://platform.openai.com/docs/guides/agents>
+   - Defines agentic AI as systems that "pursue complex goals with limited direct supervision." Influenced the `tri=1, muscle=1` criteria for agentic classification.
+
+2. **OpenAI.** (2024). Function Calling and Tool Use. *OpenAI API Documentation*. <https://platform.openai.com/docs/guides/function-calling>
+   - Patterns for LLM-tool integration. Informed the muscle invocation design.
+
+3. **Microsoft.** (2024). Build Custom Copilots with Azure AI Foundry. *Microsoft Learn*. <https://learn.microsoft.com/en-us/azure/ai-studio/>
+   - Documents the Model + Instructions + Tools pattern. Directly influenced trifecta design (domain knowledge + procedures + automation).
+
+4. **Microsoft.** (2024). Copilot Extensibility: Skills and Actions. *Microsoft 365 Developer Documentation*. <https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/>
+   - Enterprise patterns for skill organization. Validated the metadata-driven activation model.
+
+5. **Anthropic.** (2024). Claude's Computer Use. *Anthropic Documentation*. <https://docs.anthropic.com/en/docs/build-with-claude/computer-use>
+   - Patterns for agentic execution with human oversight. Influenced the intellectual/agentic boundary decision (when to advise vs. act).
+
+6. **GitHub.** (2024). Copilot Extensions and Custom Instructions. *GitHub Documentation*. <https://docs.github.com/en/copilot/customizing-copilot>
+   - VS Code integration patterns. Informed the `applyTo` file-pattern activation design.
+
+### Design Patterns
+
+1. **Fowler, M.** (2002). *Patterns of Enterprise Application Architecture*. Addison-Wesley.
+   - Convention-over-configuration pattern (Chapter 10). Applied to trifecta naming alignment.
+
+2. **Gamma, E., Helm, R., Johnson, R., & Vlissides, J.** (1994). *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley.
+   - Strategy pattern (pp. 315-323). Applied to the script vs. pseudocode muscle distinction.
+
+### Quality Engineering
+
+1. **Martin, R. C.** (2008). *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall.
+   - Single Responsibility Principle (Chapter 10). Applied to trifecta component separation.
+
+2. **Forsgren, N., Humble, J., & Kim, G.** (2018). *Accelerate: The Science of Lean Software and DevOps*. IT Revolution Press.
+   - Metrics-driven quality (Chapter 2). Influenced the automated scoring model via brain-qa.cjs.

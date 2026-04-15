@@ -58,7 +58,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |
 |-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:---:|
-| dissertation-defense | exte | 552 | 1 | 0 | 0 | 0 | 0 | - | 1/3 | ✗ | 0 | 0 | 0 |
+| dissertation-defense | exte | 551 | 1 | 0 | 0 | 0 | 0 | - | 1/3 | ✗ | 1 | 0 | 0 |
 | agent-debug-panel | stan | 121 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
 | ai-agent-design | stan | 595 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
 | api-design | stan | 655 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
@@ -68,7 +68,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | career-development | exte | 199 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | citation-management | exte | 314 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | comedy-writing | exte | 135 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| correax-brand | exte | 124 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
+| correax-brand | exte | 110 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 1 | 0 | 0 |
 | counseling-psychology | exte | 179 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | cross-cultural-collaboration | exte | 318 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | deep-work-optimization | exte | 351 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
@@ -80,13 +80,12 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | journalism | exte | 154 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | legal-compliance | exte | 129 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | memory-curation | stan | 191 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
-| refactoring-patterns | core | 61 | 1 | 0 | 0 | 1 | 0 | I | 2/5 | ✗ | 0 | 0 | 0 |
 | research-project-scaffold | exte | 515 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | sales-enablement | exte | 164 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
 | skill-catalog-generator | exte | 567 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 1 | 0 | 0 |
 | svg-graphics | stan | 555 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
 | token-waste-elimination | stan | 69 | 1 | 0 | 0 | 1 | 0 | I | 2/4 | ✗ | 0 | 0 | 0 |
-| academic-research | exte | 482 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| academic-research | exte | 479 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
 | ai-generated-readme-banners | stan | 618 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
 | ai-writing-avoidance | stan | 333 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
 | alex-effort-estimation | exte | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
@@ -99,7 +98,6 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | chart-interpretation | stan | 185 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
 | coaching-techniques | exte | 326 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
 | code-review | core | 193 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
-| cognitive-load | core | 68 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
 | cognitive-symbiosis | exte | 244 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
 | copilot-sdk | stan | 484 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
 | data-analysis | stan | 220 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
@@ -140,7 +138,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | observability-monitoring | stan | 350 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
 | performance-profiling | stan | 439 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
 | post-mortem | exte | 167 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| practitioner-research | exte | 302 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
+| practitioner-research | exte | 303 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 1 | 0 | 0 |
 | privacy-responsible-ai | stan | 278 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 1 | 0 |
 | project-deployment | stan | 305 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
 | project-scaffolding | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
@@ -162,7 +160,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | ui-ux-design | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
 | vscode-extension-patterns | core | 965 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 | 1 | 0 |
 | ai-character-reference-generation | stan | 322 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| airs-appropriate-reliance | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
+| airs-appropriate-reliance | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 1 | 0 | 0 |
 | api-documentation | stan | 312 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
 | architecture-audit | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
 | architecture-health | stan | 102 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
@@ -175,6 +173,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | character-aging-progression | exte | 225 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
 | chat-participant-patterns | stan | 189 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
 | cloud-solution-architect | stan | 275 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| cognitive-load | core | 202 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
 | content-safety-implementation | stan | 228 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
 | converter-qa | exte | 67 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
 | creative-writing | stan | 465 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
@@ -210,6 +209,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | prompt-evolution-system | stan | 188 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
 | ralph-loop | adva | 239 | 1 | 1 | 1 | 0 | 1 | - | 4/4 | ✓ | 0 | 0 | 0 |
 | react-vite-performance | stan | 302 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
+| refactoring-patterns | core | 234 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
 | release-preflight | stan | 105 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 1 | 0 | 0 |
 | secrets-management | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
 | security-review | core | 333 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
@@ -236,7 +236,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 **Defects by dimension**:
 | fm | code | bounds | tri | muscle |
 |:--:|:----:|:------:|:---:|:------:|
-| 0 | 40 | 28 | 71 | 159 |
+| 0 | 39 | 26 | 71 | 159 |
 
 ## Agents
 

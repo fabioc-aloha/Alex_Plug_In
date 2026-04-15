@@ -3,6 +3,7 @@ name: practitioner-research
 description: "Practitioner methodology for longitudinal case study research, evidence-based documentation, and publication-ready academic writing in AI-assisted development."
 tier: extended
 applyTo: '**/*research*,**/*case-study*,**/*practitioner*'
+inheritance: master-only
 ---
 
 # Practitioner Research Skill
