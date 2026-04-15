@@ -1,6 +1,7 @@
 ---
 agent: Alex
 description: Guided domain learning and knowledge acquisition workflow
+application: "When starting research sessions or learning new domains"
 ---
 
 # Domain Learning Excellence Protocol

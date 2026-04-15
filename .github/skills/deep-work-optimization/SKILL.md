@@ -85,7 +85,7 @@ When you switch tasks, attention doesn't fully transfer—residue from the previ
 
 Assign every minute of your day to a block:
 
-```
+```text
 6:00 - 6:30  | Morning routine
 6:30 - 10:00 | DEEP WORK: Dissertation writing
 10:00 - 10:30| Break, shallow batch
@@ -93,6 +93,21 @@ Assign every minute of your day to a block:
 12:00 - 13:00| Lunch, walk
 13:00 - 17:00| Work meetings, shallow work
 17:00 - 17:30| Daily shutdown ritual
+```
+
+### Focus Session Tracking
+
+```json
+{
+  "date": "2026-04-14",
+  "sessions": [
+    { "start": "06:30", "end": "10:00", "type": "deep", "task": "Chapter 3 draft", "quality": 4 },
+    { "start": "10:30", "end": "12:00", "type": "deep", "task": "UTAUT analysis", "quality": 3 }
+  ],
+  "deep_hours": 5.0,
+  "interruptions": 2,
+  "notes": "Morning block productive; afternoon meeting overran"
+}
 ```
 
 ### The Shutdown Ritual

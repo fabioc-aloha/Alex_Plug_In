@@ -1,5 +1,6 @@
 ---
 description: Convert Markdown with Mermaid diagrams to professional Word document
+application: "When generating documentation, READMEs, or technical writing"
 agent: Alex
 ---
 

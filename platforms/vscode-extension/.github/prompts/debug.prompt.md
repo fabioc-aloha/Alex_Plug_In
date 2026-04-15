@@ -1,5 +1,6 @@
 ---
 description: Systematic debugging session — from error to fix
+application: "When debugging issues, investigating failures, or root cause analysis"
 agent: Alex
 ---
 

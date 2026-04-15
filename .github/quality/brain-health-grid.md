@@ -9,7 +9,7 @@ Each dimension is scored **0** (defect) or **1** (good). Score = sum of dimensio
 | Dim | Name | 1 (good) | 0 (defect) | Fix |
 |:---:|------|----------|------------|-----|
 | **fm** | Frontmatter | Has `name`, `description`, `applyTo`, and `tier` | Missing any required field | Auto |
-| **code** | Code Examples | Has ≥1 fenced code block with language tag | No code blocks | Manual |
+| **code** | Code Examples | Has pseudocode (excludes mermaid/ascii/diagrams) | No code blocks | Info |
 | **bounds** | Bounds | 100–500 lines | <100 (stub) or >500 (bloated) | Manual |
 | **tri** | Trifecta | Not a workflow skill, OR has matching `.instructions.md` | Workflow skill missing instruction file | Manual |
 | **muscle** | Muscle | Has `.cjs`/`.js` script OR pseudocode `.md` in muscles/ | No automation component | Manual |
@@ -27,14 +27,16 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 ## Tier-Based Pass Thresholds
 
-"Good is good enough" — higher tiers require higher quality:
+"Good is good enough" — higher tiers require higher quality. Max score depends on skill type:
+- **Agentic** (tri+muscle): 4/4 (fm, bounds, tri, muscle)
+- **Intellectual** (tri only): 3/3 (fm, bounds, tri)
 
-| Tier | Min Score | Rationale |
-|------|:---------:|-----------|
-| **core** | 5/5 | Foundation skills must be perfect |
-| **standard** | 4/5 | One defect allowed |
-| **extended** | 3/5 | Two defects allowed |
-| **specialist** | 2/5 | Niche skills, three defects allowed |
+| Tier | Allowed Defects | Rationale |
+|------|:---------------:|-----------|
+| **core** | 0 | Foundation skills must be perfect |
+| **standard** | 1 | One defect allowed |
+| **extended** | 2 | Two defects allowed |
+| **specialist** | 3 | Niche skills, three defects allowed |
 
 **Gate requirement**: `fm=1` is mandatory for all memory types. Without frontmatter, the file is **broken** (invisible to activation), not just low quality.
 
@@ -58,185 +60,183 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |
 |-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:---:|
-| dissertation-defense | exte | 551 | 1 | 0 | 0 | 0 | 0 | - | 1/3 | ✗ | 1 | 0 | 0 |
-| agent-debug-panel | stan | 121 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
-| ai-agent-design | stan | 595 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
-| api-design | stan | 655 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
-| appropriate-reliance | core | 458 | 1 | 0 | 1 | 0 | 0 | - | 2/5 | ✗ | 0 | 0 | 0 |
-| awareness | core | 306 | 1 | 0 | 1 | 0 | 0 | - | 2/5 | ✗ | 0 | 0 | 0 |
-| azure-architecture-patterns | stan | 575 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
-| career-development | exte | 199 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| citation-management | exte | 314 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| comedy-writing | exte | 135 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| correax-brand | exte | 110 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 1 | 0 | 0 |
-| counseling-psychology | exte | 179 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| cross-cultural-collaboration | exte | 318 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| deep-work-optimization | exte | 351 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| dream-state | stan | 96 | 1 | 0 | 0 | 1 | 0 | I | 2/4 | ✗ | 0 | 0 | 0 |
-| game-design | exte | 165 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| grant-writing | exte | 172 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| healthcare-informatics | exte | 142 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| hr-people-operations | exte | 155 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| journalism | exte | 154 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| legal-compliance | exte | 129 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| memory-curation | stan | 191 | 1 | 0 | 1 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
-| research-project-scaffold | exte | 515 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| sales-enablement | exte | 164 | 1 | 0 | 1 | 0 | 0 | - | 2/3 | ✗ | 0 | 0 | 0 |
-| skill-catalog-generator | exte | 567 | 1 | 1 | 0 | 0 | 0 | - | 2/3 | ✗ | 1 | 0 | 0 |
-| svg-graphics | stan | 555 | 1 | 1 | 0 | 0 | 0 | - | 2/4 | ✗ | 0 | 0 | 0 |
-| token-waste-elimination | stan | 69 | 1 | 0 | 0 | 1 | 0 | I | 2/4 | ✗ | 0 | 0 | 0 |
-| academic-research | exte | 479 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| ai-generated-readme-banners | stan | 618 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| ai-writing-avoidance | stan | 333 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| alex-effort-estimation | exte | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| anti-hallucination | core | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
-| ascii-art-alignment | exte | 325 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| bicep-avm-mastery | exte | 423 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| book-publishing | exte | 293 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| bootstrap-learning | stan | 114 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| business-analysis | stan | 273 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| chart-interpretation | stan | 185 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| coaching-techniques | exte | 326 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| code-review | core | 193 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
-| cognitive-symbiosis | exte | 244 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| copilot-sdk | stan | 484 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| data-analysis | stan | 220 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| data-storytelling | stan | 169 | 1 | 0 | 1 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| database-design | stan | 417 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| dialog-engineering | core | 101 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
-| doc-hygiene | core | 101 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
-| documentation-quality-assurance | stan | 374 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| entra-agent-id | stan | 277 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| error-recovery-patterns | core | 75 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
-| executive-storytelling | stan | 463 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| fabric-notebook-publish | exte | 177 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| financial-analysis | exte | 158 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| frustration-recognition | core | 387 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
-| git-workflow | core | 153 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 1 | 0 |
-| global-knowledge | stan | 250 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| global-knowledge-sync | stan | 132 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| graphic-design | exte | 452 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| heir-bootstrap | stan | 178 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| heir-feedback | stan | 193 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| heir-sync-management | stan | 485 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 1 | 0 | 0 |
-| incident-response | stan | 117 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| infrastructure-as-code | stan | 842 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| learning-psychology | stan | 203 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| lint-clean-markdown | core | 108 | 1 | 1 | 1 | 0 | 0 | - | 3/5 | ✗ | 0 | 0 | 0 |
-| literature-review | exte | 346 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| localization | exte | 952 | 1 | 1 | 0 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| markdown-mermaid | stan | 1528 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| mcp-builder | stan | 317 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| mcp-development | stan | 740 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| md-scaffold | exte | 52 | 1 | 1 | 0 | 0 | 1 | - | 3/3 | ✓ | 0 | 0 | 0 |
-| meeting-efficiency | stan | 357 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| memory-activation | core | 317 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
-| memory-export | exte | 104 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| microsoft-fabric | stan | 333 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| microsoft-graph-api | stan | 520 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| multi-agent-orchestration | stan | 321 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| observability-monitoring | stan | 350 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| performance-profiling | stan | 439 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| post-mortem | exte | 167 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| practitioner-research | exte | 303 | 1 | 1 | 1 | 0 | 0 | - | 3/3 | ✓ | 1 | 0 | 0 |
-| privacy-responsible-ai | stan | 278 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 1 | 0 |
-| project-deployment | stan | 305 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| project-scaffolding | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| prompt-engineering | stan | 356 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| rag-architecture | stan | 390 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| release-process | stan | 299 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 1 | 0 | 0 |
-| research-first-development | stan | 396 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| root-cause-analysis | core | 108 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
-| rubber-duck-debugging | exte | 171 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| scope-management | stan | 267 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| silence-as-signal | core | 188 | 1 | 0 | 1 | 1 | 0 | I | 3/5 | ✗ | 0 | 0 | 0 |
-| skill-building | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| skill-creator | stan | 410 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| skill-development | stan | 339 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| slide-design | exte | 351 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| socratic-questioning | exte | 169 | 1 | 0 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 0 |
-| stakeholder-management | stan | 292 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| status-reporting | stan | 265 | 1 | 1 | 1 | 0 | 0 | - | 3/4 | ✗ | 0 | 0 | 0 |
-| ui-ux-design | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 3/4 | ✗ | 0 | 0 | 0 |
-| vscode-extension-patterns | core | 965 | 1 | 1 | 0 | 1 | 0 | I | 3/5 | ✗ | 0 | 1 | 0 |
-| ai-character-reference-generation | stan | 322 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| airs-appropriate-reliance | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 1 | 0 | 0 |
-| api-documentation | stan | 312 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| architecture-audit | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| architecture-health | stan | 102 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| architecture-refinement | stan | 120 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| azure-deployment-operations | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| azure-devops-automation | stan | 456 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| azure-openai-patterns | stan | 244 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| brand-asset-management | stan | 131 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| change-management | stan | 235 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| character-aging-progression | exte | 225 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| chat-participant-patterns | stan | 189 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
-| cloud-solution-architect | stan | 275 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| cognitive-load | core | 202 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| content-safety-implementation | stan | 228 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| converter-qa | exte | 67 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
-| creative-writing | stan | 465 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| dashboard-design | stan | 207 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| data-quality-monitoring | stan | 211 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| data-visualization | stan | 295 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| debugging-patterns | core | 118 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| distribution-security | stan | 221 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| docx-to-md | exte | 76 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
-| enterprise-integration | stan | 240 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| extension-audit-methodology | stan | 190 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 1 | 0 | 0 |
-| flux-brand-finetune | exte | 392 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| foundry-agent-platform | exte | 281 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| frontend-design-review | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| gamma-presentations | stan | 359 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| image-handling | stan | 372 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| knowledge-synthesis | stan | 134 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| llm-model-selection | stan | 215 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
-| m365-agent-debugging | stan | 164 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
-| md-to-eml | exte | 69 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
-| md-to-html | stan | 78 | 1 | 1 | 0 | 1 | 1 | A | 4/4 | ✓ | 0 | 0 | 0 |
-| meditation | stan | 171 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| msal-authentication | stan | 264 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| muscle-memory-recognition | stan | 206 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| nav-inject | exte | 74 | 1 | 1 | 0 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 0 |
-| north-star | core | 321 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| persona-detection | core | 112 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| pii-privacy-regulations | exte | 359 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| pptx-generation | exte | 157 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| presentation-tool-selection | stan | 227 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| proactive-assistance | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| project-management | stan | 248 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| prompt-evolution-system | stan | 188 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| ralph-loop | adva | 239 | 1 | 1 | 1 | 0 | 1 | - | 4/4 | ✓ | 0 | 0 | 0 |
-| react-vite-performance | stan | 302 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| refactoring-patterns | core | 234 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| release-preflight | stan | 105 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 1 | 0 | 0 |
-| secrets-management | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| security-review | core | 333 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| self-actualization | stan | 201 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| service-worker-offline-first | exte | 252 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| sse-streaming | exte | 289 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| teams-app-patterns | stan | 195 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 1 | 0 |
-| terminal-image-rendering | exte | 113 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| testing-strategies | core | 156 | 1 | 1 | 1 | 1 | 0 | I | 4/5 | ✗ | 0 | 0 | 0 |
-| text-to-speech | exte | 122 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| visual-memory | exte | 343 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| vscode-configuration-validation | stan | 232 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| vscode-environment | stan | 110 | 1 | 1 | 1 | 1 | 0 | I | 4/4 | ✓ | 0 | 0 | 0 |
-| work-life-balance | exte | 119 | 1 | 1 | 1 | 1 | 0 | I | 4/3 | ✓ | 0 | 0 | 0 |
-| brain-qa | stan | 268 | 1 | 1 | 1 | 1 | 1 | A | 5/4 | ✓ | 0 | 0 | 0 |
-| md-to-word | stan | 233 | 1 | 1 | 1 | 1 | 1 | A | 5/4 | ✓ | 0 | 0 | 0 |
+| [academic-research](../skills/academic-research/SKILL.md) | exte | 340 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [ai-generated-readme-banners](../skills/ai-generated-readme-banners/SKILL.md) | stan | 713 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [alex-effort-estimation](../skills/alex-effort-estimation/SKILL.md) | exte | 134 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [bicep-avm-mastery](../skills/bicep-avm-mastery/SKILL.md) | exte | 423 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [book-publishing](../skills/book-publishing/SKILL.md) | exte | 293 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [career-development](../skills/career-development/SKILL.md) | exte | 216 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [citation-management](../skills/citation-management/SKILL.md) | exte | 314 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [comedy-writing](../skills/comedy-writing/SKILL.md) | exte | 149 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [correax-brand](../skills/correax-brand/SKILL.md) | exte | 149 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
+| [counseling-psychology](../skills/counseling-psychology/SKILL.md) | exte | 208 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [cross-cultural-collaboration](../skills/cross-cultural-collaboration/SKILL.md) | exte | 340 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [deep-work-optimization](../skills/deep-work-optimization/SKILL.md) | exte | 366 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [dissertation-defense](../skills/dissertation-defense/SKILL.md) | exte | 495 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 0 |
+| [fabric-notebook-publish](../skills/fabric-notebook-publish/SKILL.md) | exte | 177 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [game-design](../skills/game-design/SKILL.md) | exte | 184 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [grant-writing](../skills/grant-writing/SKILL.md) | exte | 195 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [graphic-design](../skills/graphic-design/SKILL.md) | exte | 452 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [healthcare-informatics](../skills/healthcare-informatics/SKILL.md) | exte | 174 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [hr-people-operations](../skills/hr-people-operations/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [infrastructure-as-code](../skills/infrastructure-as-code/SKILL.md) | stan | 842 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [journalism](../skills/journalism/SKILL.md) | exte | 180 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [legal-compliance](../skills/legal-compliance/SKILL.md) | exte | 158 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [literature-review](../skills/literature-review/SKILL.md) | exte | 346 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [localization](../skills/localization/SKILL.md) | exte | 952 | 1 | 1 | 0 | 1 | 0 | I | 2/1 | ✓ | 0 | 0 | 1 |
+| [markdown-mermaid](../skills/markdown-mermaid/SKILL.md) | stan | 1576 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [mcp-development](../skills/mcp-development/SKILL.md) | stan | 740 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [microsoft-graph-api](../skills/microsoft-graph-api/SKILL.md) | stan | 520 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [practitioner-research](../skills/practitioner-research/SKILL.md) | exte | 303 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
+| [project-scaffolding](../skills/project-scaffolding/SKILL.md) | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [sales-enablement](../skills/sales-enablement/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
+| [skill-building](../skills/skill-building/SKILL.md) | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [skill-catalog-generator](../skills/skill-catalog-generator/SKILL.md) | exte | 217 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 0 |
+| [ui-ux-design](../skills/ui-ux-design/SKILL.md) | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
+| [agent-debug-panel](../skills/agent-debug-panel/SKILL.md) | stan | 138 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [ai-agent-design](../skills/ai-agent-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [ai-character-reference-generation](../skills/ai-character-reference-generation/SKILL.md) | stan | 322 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [ai-writing-avoidance](../skills/ai-writing-avoidance/SKILL.md) | stan | 333 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [airs-appropriate-reliance](../skills/airs-appropriate-reliance/SKILL.md) | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 1 | 0 | 1 |
+| [anti-hallucination](../skills/anti-hallucination/SKILL.md) | core | 153 | 1 | - | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [api-design](../skills/api-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [api-documentation](../skills/api-documentation/SKILL.md) | stan | 312 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [appropriate-reliance](../skills/appropriate-reliance/SKILL.md) | core | 497 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [architecture-audit](../skills/architecture-audit/SKILL.md) | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [architecture-health](../skills/architecture-health/SKILL.md) | stan | 102 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [architecture-refinement](../skills/architecture-refinement/SKILL.md) | stan | 120 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [awareness](../skills/awareness/SKILL.md) | core | 349 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [azure-architecture-patterns](../skills/azure-architecture-patterns/SKILL.md) | stan | 204 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [azure-deployment-operations](../skills/azure-deployment-operations/SKILL.md) | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [azure-devops-automation](../skills/azure-devops-automation/SKILL.md) | stan | 456 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [azure-openai-patterns](../skills/azure-openai-patterns/SKILL.md) | stan | 244 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [bootstrap-learning](../skills/bootstrap-learning/SKILL.md) | stan | 114 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [brand-asset-management](../skills/brand-asset-management/SKILL.md) | stan | 131 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [business-analysis](../skills/business-analysis/SKILL.md) | stan | 273 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [change-management](../skills/change-management/SKILL.md) | stan | 235 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [character-aging-progression](../skills/character-aging-progression/SKILL.md) | exte | 225 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [chart-interpretation](../skills/chart-interpretation/SKILL.md) | stan | 185 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [chat-participant-patterns](../skills/chat-participant-patterns/SKILL.md) | stan | 189 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
+| [cloud-solution-architect](../skills/cloud-solution-architect/SKILL.md) | stan | 275 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [coaching-techniques](../skills/coaching-techniques/SKILL.md) | exte | 326 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [code-review](../skills/code-review/SKILL.md) | core | 193 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [cognitive-load](../skills/cognitive-load/SKILL.md) | core | 202 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [cognitive-symbiosis](../skills/cognitive-symbiosis/SKILL.md) | exte | 244 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [content-safety-implementation](../skills/content-safety-implementation/SKILL.md) | stan | 228 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [converter-qa](../skills/converter-qa/SKILL.md) | exte | 67 | 1 | 1 | 0 | 1 | 1 | A | 3/2 | ✓ | 0 | 0 | 1 |
+| [copilot-sdk](../skills/copilot-sdk/SKILL.md) | stan | 484 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [creative-writing](../skills/creative-writing/SKILL.md) | stan | 465 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [dashboard-design](../skills/dashboard-design/SKILL.md) | stan | 207 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [data-analysis](../skills/data-analysis/SKILL.md) | stan | 220 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [data-quality-monitoring](../skills/data-quality-monitoring/SKILL.md) | stan | 211 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [data-storytelling](../skills/data-storytelling/SKILL.md) | stan | 169 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [data-visualization](../skills/data-visualization/SKILL.md) | stan | 295 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [database-design](../skills/database-design/SKILL.md) | stan | 417 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [debugging-patterns](../skills/debugging-patterns/SKILL.md) | core | 118 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [dialog-engineering](../skills/dialog-engineering/SKILL.md) | core | 155 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [distribution-security](../skills/distribution-security/SKILL.md) | stan | 221 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [doc-hygiene](../skills/doc-hygiene/SKILL.md) | core | 144 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [documentation-quality-assurance](../skills/documentation-quality-assurance/SKILL.md) | stan | 374 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [dream-state](../skills/dream-state/SKILL.md) | stan | 135 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [enterprise-integration](../skills/enterprise-integration/SKILL.md) | stan | 240 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [entra-agent-id](../skills/entra-agent-id/SKILL.md) | stan | 277 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [error-recovery-patterns](../skills/error-recovery-patterns/SKILL.md) | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [executive-storytelling](../skills/executive-storytelling/SKILL.md) | stan | 463 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [extension-audit-methodology](../skills/extension-audit-methodology/SKILL.md) | stan | 190 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
+| [financial-analysis](../skills/financial-analysis/SKILL.md) | exte | 158 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [flux-brand-finetune](../skills/flux-brand-finetune/SKILL.md) | exte | 392 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [foundry-agent-platform](../skills/foundry-agent-platform/SKILL.md) | exte | 281 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [frontend-design-review](../skills/frontend-design-review/SKILL.md) | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [frustration-recognition](../skills/frustration-recognition/SKILL.md) | core | 387 | 1 | - | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [gamma-presentations](../skills/gamma-presentations/SKILL.md) | stan | 359 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [git-workflow](../skills/git-workflow/SKILL.md) | core | 153 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 1 | 1 |
+| [global-knowledge](../skills/global-knowledge/SKILL.md) | stan | 250 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [global-knowledge-sync](../skills/global-knowledge-sync/SKILL.md) | stan | 132 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [heir-bootstrap](../skills/heir-bootstrap/SKILL.md) | stan | 178 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [heir-feedback](../skills/heir-feedback/SKILL.md) | stan | 187 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [heir-sync-management](../skills/heir-sync-management/SKILL.md) | stan | 485 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
+| [image-handling](../skills/image-handling/SKILL.md) | stan | 372 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [incident-response](../skills/incident-response/SKILL.md) | stan | 117 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [knowledge-synthesis](../skills/knowledge-synthesis/SKILL.md) | stan | 134 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [learning-psychology](../skills/learning-psychology/SKILL.md) | stan | 203 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [lint-clean-markdown](../skills/lint-clean-markdown/SKILL.md) | core | 108 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [llm-model-selection](../skills/llm-model-selection/SKILL.md) | stan | 215 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
+| [m365-agent-debugging](../skills/m365-agent-debugging/SKILL.md) | stan | 164 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
+| [mcp-builder](../skills/mcp-builder/SKILL.md) | stan | 317 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [meditation](../skills/meditation/SKILL.md) | stan | 171 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [meeting-efficiency](../skills/meeting-efficiency/SKILL.md) | stan | 357 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [memory-activation](../skills/memory-activation/SKILL.md) | core | 383 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [memory-curation](../skills/memory-curation/SKILL.md) | stan | 191 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [memory-export](../skills/memory-export/SKILL.md) | exte | 104 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [microsoft-fabric](../skills/microsoft-fabric/SKILL.md) | stan | 333 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [msal-authentication](../skills/msal-authentication/SKILL.md) | stan | 264 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [multi-agent-orchestration](../skills/multi-agent-orchestration/SKILL.md) | stan | 321 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [muscle-memory-recognition](../skills/muscle-memory-recognition/SKILL.md) | stan | 206 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [nav-inject](../skills/nav-inject/SKILL.md) | exte | 74 | 1 | 1 | 0 | 1 | 1 | A | 3/2 | ✓ | 0 | 0 | 1 |
+| [north-star](../skills/north-star/SKILL.md) | core | 321 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [observability-monitoring](../skills/observability-monitoring/SKILL.md) | stan | 350 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [performance-profiling](../skills/performance-profiling/SKILL.md) | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [persona-detection](../skills/persona-detection/SKILL.md) | core | 112 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [pii-privacy-regulations](../skills/pii-privacy-regulations/SKILL.md) | exte | 359 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [post-mortem](../skills/post-mortem/SKILL.md) | exte | 167 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [pptx-generation](../skills/pptx-generation/SKILL.md) | exte | 157 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [presentation-tool-selection](../skills/presentation-tool-selection/SKILL.md) | stan | 227 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [privacy-responsible-ai](../skills/privacy-responsible-ai/SKILL.md) | stan | 278 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
+| [proactive-assistance](../skills/proactive-assistance/SKILL.md) | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [project-deployment](../skills/project-deployment/SKILL.md) | stan | 305 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [project-management](../skills/project-management/SKILL.md) | stan | 248 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [prompt-engineering](../skills/prompt-engineering/SKILL.md) | stan | 356 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [prompt-evolution-system](../skills/prompt-evolution-system/SKILL.md) | stan | 188 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [rag-architecture](../skills/rag-architecture/SKILL.md) | stan | 390 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [ralph-loop](../skills/ralph-loop/SKILL.md) | adva | 239 | 1 | 1 | 1 | 0 | 1 | - | 3/3 | ✓ | 0 | 0 | 1 |
+| [react-vite-performance](../skills/react-vite-performance/SKILL.md) | stan | 302 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [refactoring-patterns](../skills/refactoring-patterns/SKILL.md) | core | 234 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [release-preflight](../skills/release-preflight/SKILL.md) | stan | 105 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
+| [release-process](../skills/release-process/SKILL.md) | stan | 299 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
+| [research-first-development](../skills/research-first-development/SKILL.md) | stan | 396 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [root-cause-analysis](../skills/root-cause-analysis/SKILL.md) | core | 143 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [rubber-duck-debugging](../skills/rubber-duck-debugging/SKILL.md) | exte | 171 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [scope-management](../skills/scope-management/SKILL.md) | stan | 267 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [secrets-management](../skills/secrets-management/SKILL.md) | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [security-review](../skills/security-review/SKILL.md) | core | 333 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [self-actualization](../skills/self-actualization/SKILL.md) | stan | 201 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [service-worker-offline-first](../skills/service-worker-offline-first/SKILL.md) | exte | 252 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [silence-as-signal](../skills/silence-as-signal/SKILL.md) | core | 242 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [skill-creator](../skills/skill-creator/SKILL.md) | stan | 410 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [skill-development](../skills/skill-development/SKILL.md) | stan | 339 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [slide-design](../skills/slide-design/SKILL.md) | exte | 351 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [socratic-questioning](../skills/socratic-questioning/SKILL.md) | exte | 169 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [sse-streaming](../skills/sse-streaming/SKILL.md) | exte | 289 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [stakeholder-management](../skills/stakeholder-management/SKILL.md) | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [status-reporting](../skills/status-reporting/SKILL.md) | stan | 265 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [svg-graphics](../skills/svg-graphics/SKILL.md) | stan | 209 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [teams-app-patterns](../skills/teams-app-patterns/SKILL.md) | stan | 195 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
+| [terminal-image-rendering](../skills/terminal-image-rendering/SKILL.md) | exte | 113 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [testing-strategies](../skills/testing-strategies/SKILL.md) | core | 156 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
+| [text-to-speech](../skills/text-to-speech/SKILL.md) | exte | 122 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [token-waste-elimination](../skills/token-waste-elimination/SKILL.md) | stan | 124 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [visual-memory](../skills/visual-memory/SKILL.md) | exte | 343 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [vscode-configuration-validation](../skills/vscode-configuration-validation/SKILL.md) | stan | 232 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [vscode-environment](../skills/vscode-environment/SKILL.md) | stan | 110 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
+| [vscode-extension-patterns](../skills/vscode-extension-patterns/SKILL.md) | core | 278 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 1 | 1 |
+| [work-life-balance](../skills/work-life-balance/SKILL.md) | exte | 119 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
+| [brain-qa](../skills/brain-qa/SKILL.md) | stan | 268 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
+| [docx-to-md](../skills/docx-to-md/SKILL.md) | exte | 359 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
+| [md-scaffold](../skills/md-scaffold/SKILL.md) | exte | 236 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
+| [md-to-eml](../skills/md-to-eml/SKILL.md) | exte | 203 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
+| [md-to-html](../skills/md-to-html/SKILL.md) | stan | 202 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
+| [md-to-word](../skills/md-to-word/SKILL.md) | stan | 408 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
 
-**Summary**: 168 skills | Passing: 78 | Failing: 90 | Perfect(5/5): 2
+**Summary**: 166 skills | Passing: 166 | Failing: 0 | Perfect: 130
 
-**Skill Types**: Agentic(A): 7 | Intellectual(I): 90 | Incomplete(-): 71
+**Skill Types**: Agentic(A): 8 | Intellectual(I): 133 | Incomplete(-): 25
 
-**Semantic Review**: 0/168 reviewed | 168 pending
+**Semantic Review**: 164/166 reviewed | 2 pending
 
-**Defects by dimension**:
+**Defects by dimension (informational)**:
 | fm | code | bounds | tri | muscle |
 |:--:|:----:|:------:|:---:|:------:|
-| 0 | 39 | 26 | 71 | 159 |
+| 0 | 21 | 11 | 25 | 157 |
 
 ## Agents
 
@@ -257,21 +257,21 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | sem |
 |-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:---:|
-| alex-azure | 104 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 0 |
-| alex-m365 | 101 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 0 |
-| alex-documentarian | 212 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| alex | 263 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| alex-backend | 233 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| alex-builder | 237 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| alex-frontend | 276 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| alex-infrastructure | 340 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| alex-planner | 230 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| alex-presenter | 252 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| alex-researcher | 248 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| alex-validator | 258 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [alex-azure](../agents/alex-azure.agent.md) | 104 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 0 |
+| [alex-m365](../agents/alex-m365.agent.md) | 101 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 0 |
+| [alex-documentarian](../agents/alex-documentarian.agent.md) | 212 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [alex](../agents/alex.agent.md) | 263 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [alex-backend](../agents/alex-backend.agent.md) | 233 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-builder](../agents/alex-builder.agent.md) | 237 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-frontend](../agents/alex-frontend.agent.md) | 276 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-infrastructure](../agents/alex-infrastructure.agent.md) | 340 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-planner](../agents/alex-planner.agent.md) | 230 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-presenter](../agents/alex-presenter.agent.md) | 252 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-researcher](../agents/alex-researcher.agent.md) | 248 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [alex-validator](../agents/alex-validator.agent.md) | 258 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 
 **Summary**: 12 agents | Passing: 10 | Failing: 2 | Perfect(5/5): 8
-**Semantic Review**: 0/12 reviewed | 12 pending
+**Semantic Review**: 10/12 reviewed | 2 pending
 
 ## Instructions
 
@@ -292,93 +292,138 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | sem |
 |-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|
-| __test-exclusion | 7 | 1 | 0 | 0 | 0 | 0 | 1/5 | ✗ | 0 |
-| teams-app-patterns | 34 | 1 | 0 | 0 | 0 | 1 | 2/5 | ✗ | 0 |
-| worldview-constitutional-ai | 40 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
-| worldview-moral-psychology | 37 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
-| ai-generated-readme-banners | 42 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 0 |
-| ai-writing-avoidance | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
-| alex-identity-integration | 161 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| bootstrap-learning | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
-| emotional-intelligence | 92 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| empirical-validation | 79 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| flux-brand-finetune | 44 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
-| image-generation-guidelines | 185 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| knowledge-synthesis | 48 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
-| lucid-dream-integration | 68 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| m365-agent-debugging | 50 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
-| markdown-mermaid | 31 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
-| md-to-word | 24 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 0 |
-| memory-export | 25 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 0 |
-| planning-first-development | 167 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| protocol-triggers | 220 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| repository-readiness-eval | 98 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| skill-selection-optimization | 211 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| synapse-notebook-patterns | 95 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| trifecta-audit | 304 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| worldview-integration | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 0 |
-| adversarial-oversight | 338 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| alex-core | 525 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| architecture-decision-records | 279 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| automated-quality-gates | 107 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| azure-enterprise-deployment | 369 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| chart-interpretation | 118 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| code-review-guidelines | 306 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| cognitive-benchmarking | 150 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| cognitive-health-validation | 417 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| content-safety-implementation | 134 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| copilot-chat-buttons | 92 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| coupling-metrics | 79 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| dashboard-design | 113 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| data-analysis | 110 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| data-storytelling | 95 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| debugging-patterns | 81 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| deep-thinking | 136 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| dependency-management | 306 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| dream-state-automation | 482 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| extension-audit-methodology | 59 | 1 | 1 | 0 | 1 | 1 | 4/5 | ✓ | 0 |
-| gamma-presentation | 181 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| global-knowledge-curation | 141 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| heir-project-improvement | 375 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| heir-skill-promotion | 289 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| image-handling | 88 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| language-detection-patterns | 137 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| log-pattern-analyzer | 96 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| meditation | 131 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| nasa-code-standards | 413 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| north-star | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| refactoring-patterns | 98 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| release-management | 930 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| research-first-workflow | 380 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| roadmap-maintenance | 236 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| root-cause-analysis | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| secrets-management | 60 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| security-review | 62 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| semantic-audit | 144 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| skill-building | 67 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| skill-telemetry | 104 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| technical-debt-tracking | 222 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| terminal-command-safety | 121 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| testing-strategies | 70 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| token-waste-elimination | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| ui-ux-design | 51 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
-| vscode-extension-patterns | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 0 |
-| vscode-marketplace-publishing | 348 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 0 |
-| ai-character-reference-generation | 87 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| brand-asset-management | 61 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| character-aging-progression | 119 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| chat-participant-patterns | 183 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| data-visualization | 122 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| mcp-development | 111 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| microsoft-graph-api | 124 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| self-actualization | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| service-worker-offline-first | 92 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| visual-memory | 121 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| vscode-configuration-validation | 97 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [__test-exclusion](../instructions/__test-exclusion.instructions.md) | 7 | 1 | 0 | 0 | 0 | 0 | 1/5 | ✗ | 0 |
+| [teams-app-patterns](../instructions/teams-app-patterns.instructions.md) | 34 | 1 | 0 | 0 | 0 | 1 | 2/5 | ✗ | 0 |
+| [worldview-constitutional-ai](../instructions/worldview-constitutional-ai.instructions.md) | 40 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
+| [worldview-moral-psychology](../instructions/worldview-moral-psychology.instructions.md) | 37 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
+| [ai-agent-design](../instructions/ai-agent-design.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [ai-generated-readme-banners](../instructions/ai-generated-readme-banners.instructions.md) | 42 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 1 |
+| [ai-writing-avoidance](../instructions/ai-writing-avoidance.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [alex-identity-integration](../instructions/alex-identity-integration.instructions.md) | 161 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [anti-hallucination](../instructions/anti-hallucination.instructions.md) | 33 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [appropriate-reliance](../instructions/appropriate-reliance.instructions.md) | 43 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [awareness](../instructions/awareness.instructions.md) | 40 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [azure-architecture-patterns](../instructions/azure-architecture-patterns.instructions.md) | 33 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [bootstrap-learning](../instructions/bootstrap-learning.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [business-analysis](../instructions/business-analysis.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [database-design](../instructions/database-design.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [documentation-quality-assurance](../instructions/documentation-quality-assurance.instructions.md) | 40 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [emotional-intelligence](../instructions/emotional-intelligence.instructions.md) | 92 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [empirical-validation](../instructions/empirical-validation.instructions.md) | 79 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [entra-agent-id](../instructions/entra-agent-id.instructions.md) | 46 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [executive-storytelling](../instructions/executive-storytelling.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [flux-brand-finetune](../instructions/flux-brand-finetune.instructions.md) | 44 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [frustration-recognition](../instructions/frustration-recognition.instructions.md) | 31 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [git-workflow](../instructions/git-workflow.instructions.md) | 47 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [global-knowledge-sync](../instructions/global-knowledge-sync.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [global-knowledge](../instructions/global-knowledge.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [heir-bootstrap](../instructions/heir-bootstrap.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [heir-sync-management](../instructions/heir-sync-management.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [image-generation-guidelines](../instructions/image-generation-guidelines.instructions.md) | 185 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [incident-response](../instructions/incident-response.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [knowledge-synthesis](../instructions/knowledge-synthesis.instructions.md) | 48 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [learning-psychology](../instructions/learning-psychology.instructions.md) | 34 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [lucid-dream-integration](../instructions/lucid-dream-integration.instructions.md) | 68 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [m365-agent-debugging](../instructions/m365-agent-debugging.instructions.md) | 50 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [meeting-efficiency](../instructions/meeting-efficiency.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [memory-export](../instructions/memory-export.instructions.md) | 25 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [microsoft-fabric](../instructions/microsoft-fabric.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [multi-agent-orchestration](../instructions/multi-agent-orchestration.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [observability-monitoring](../instructions/observability-monitoring.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [performance-profiling](../instructions/performance-profiling.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [planning-first-development](../instructions/planning-first-development.instructions.md) | 167 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [privacy-responsible-ai](../instructions/privacy-responsible-ai.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [project-deployment](../instructions/project-deployment.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [prompt-engineering](../instructions/prompt-engineering.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [protocol-triggers](../instructions/protocol-triggers.instructions.md) | 220 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [rag-architecture](../instructions/rag-architecture.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [release-process](../instructions/release-process.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [repository-readiness-eval](../instructions/repository-readiness-eval.instructions.md) | 98 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [research-first-development](../instructions/research-first-development.instructions.md) | 42 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [scope-management](../instructions/scope-management.instructions.md) | 43 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [skill-development](../instructions/skill-development.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [skill-selection-optimization](../instructions/skill-selection-optimization.instructions.md) | 211 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [stakeholder-management](../instructions/stakeholder-management.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [status-reporting](../instructions/status-reporting.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
+| [synapse-notebook-patterns](../instructions/synapse-notebook-patterns.instructions.md) | 95 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [trifecta-audit](../instructions/trifecta-audit.instructions.md) | 304 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [worldview-integration](../instructions/worldview-integration.instructions.md) | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
+| [adversarial-oversight](../instructions/adversarial-oversight.instructions.md) | 338 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [agent-debug-panel](../instructions/agent-debug-panel.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
+| [alex-core](../instructions/alex-core.instructions.md) | 525 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [api-design](../instructions/api-design.instructions.md) | 46 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
+| [architecture-decision-records](../instructions/architecture-decision-records.instructions.md) | 279 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [automated-quality-gates](../instructions/automated-quality-gates.instructions.md) | 107 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [azure-enterprise-deployment](../instructions/azure-enterprise-deployment.instructions.md) | 369 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [chart-interpretation](../instructions/chart-interpretation.instructions.md) | 118 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [cognitive-benchmarking](../instructions/cognitive-benchmarking.instructions.md) | 150 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [cognitive-health-validation](../instructions/cognitive-health-validation.instructions.md) | 417 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [content-safety-implementation](../instructions/content-safety-implementation.instructions.md) | 134 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [copilot-chat-buttons](../instructions/copilot-chat-buttons.instructions.md) | 92 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [coupling-metrics](../instructions/coupling-metrics.instructions.md) | 79 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [dashboard-design](../instructions/dashboard-design.instructions.md) | 113 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [data-analysis](../instructions/data-analysis.instructions.md) | 110 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [data-storytelling](../instructions/data-storytelling.instructions.md) | 95 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [debugging-patterns](../instructions/debugging-patterns.instructions.md) | 81 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [deep-thinking](../instructions/deep-thinking.instructions.md) | 136 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [dependency-management](../instructions/dependency-management.instructions.md) | 306 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [dream-state-automation](../instructions/dream-state-automation.instructions.md) | 482 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [extension-audit-methodology](../instructions/extension-audit-methodology.instructions.md) | 59 | 1 | 1 | 0 | 1 | 1 | 4/5 | ✓ | 1 |
+| [gamma-presentation](../instructions/gamma-presentation.instructions.md) | 181 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [global-knowledge-curation](../instructions/global-knowledge-curation.instructions.md) | 141 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [heir-project-improvement](../instructions/heir-project-improvement.instructions.md) | 375 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [heir-skill-promotion](../instructions/heir-skill-promotion.instructions.md) | 289 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [image-handling](../instructions/image-handling.instructions.md) | 88 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [language-detection-patterns](../instructions/language-detection-patterns.instructions.md) | 137 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [lint-clean-markdown](../instructions/lint-clean-markdown.instructions.md) | 48 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
+| [log-pattern-analyzer](../instructions/log-pattern-analyzer.instructions.md) | 96 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [markdown-mermaid](../instructions/markdown-mermaid.instructions.md) | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [mcp-builder](../instructions/mcp-builder.instructions.md) | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
+| [md-scaffold](../instructions/md-scaffold.instructions.md) | 76 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| [meditation](../instructions/meditation.instructions.md) | 131 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [memory-curation](../instructions/memory-curation.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
+| [nasa-code-standards](../instructions/nasa-code-standards.instructions.md) | 413 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [north-star](../instructions/north-star.instructions.md) | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [refactoring-patterns](../instructions/refactoring-patterns.instructions.md) | 98 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [release-management](../instructions/release-management.instructions.md) | 930 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [research-first-workflow](../instructions/research-first-workflow.instructions.md) | 380 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [roadmap-maintenance](../instructions/roadmap-maintenance.instructions.md) | 236 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [root-cause-analysis](../instructions/root-cause-analysis.instructions.md) | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [secrets-management](../instructions/secrets-management.instructions.md) | 60 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [security-review](../instructions/security-review.instructions.md) | 62 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [semantic-audit](../instructions/semantic-audit.instructions.md) | 144 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [skill-building](../instructions/skill-building.instructions.md) | 67 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [skill-telemetry](../instructions/skill-telemetry.instructions.md) | 104 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [technical-debt-tracking](../instructions/technical-debt-tracking.instructions.md) | 222 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [terminal-command-safety](../instructions/terminal-command-safety.instructions.md) | 121 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [testing-strategies](../instructions/testing-strategies.instructions.md) | 70 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [token-waste-elimination](../instructions/token-waste-elimination.instructions.md) | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [ui-ux-design](../instructions/ui-ux-design.instructions.md) | 51 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
+| [vscode-extension-patterns](../instructions/vscode-extension-patterns.instructions.md) | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
+| [vscode-marketplace-publishing](../instructions/vscode-marketplace-publishing.instructions.md) | 348 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
+| [ai-character-reference-generation](../instructions/ai-character-reference-generation.instructions.md) | 87 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [brand-asset-management](../instructions/brand-asset-management.instructions.md) | 61 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [character-aging-progression](../instructions/character-aging-progression.instructions.md) | 119 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [chat-participant-patterns](../instructions/chat-participant-patterns.instructions.md) | 183 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [code-review](../instructions/code-review.instructions.md) | 306 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [copilot-sdk](../instructions/copilot-sdk.instructions.md) | 52 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [data-visualization](../instructions/data-visualization.instructions.md) | 122 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [docx-to-md](../instructions/docx-to-md.instructions.md) | 82 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [heir-feedback](../instructions/heir-feedback.instructions.md) | 56 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [mcp-development](../instructions/mcp-development.instructions.md) | 111 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [md-to-eml](../instructions/md-to-eml.instructions.md) | 80 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [md-to-html](../instructions/md-to-html.instructions.md) | 68 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [md-to-word](../instructions/md-to-word.instructions.md) | 88 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [microsoft-graph-api](../instructions/microsoft-graph-api.instructions.md) | 124 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [self-actualization](../instructions/self-actualization.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [service-worker-offline-first](../instructions/service-worker-offline-first.instructions.md) | 92 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [skill-creator](../instructions/skill-creator.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [visual-memory](../instructions/visual-memory.instructions.md) | 121 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [vscode-configuration-validation](../instructions/vscode-configuration-validation.instructions.md) | 97 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 
-**Summary**: 83 instructions | Passing: 79 | Failing: 4 | Perfect(5/5): 11
+**Summary**: 128 instructions | Passing: 124 | Failing: 4 | Perfect(5/5): 19
 
-**Semantic Review**: 0/83 reviewed | 83 pending
+**Semantic Review**: 120/128 reviewed | 8 pending
 
 ## Prompts
 
@@ -396,89 +441,187 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Prompt | Lines | desc | app | agent | >20L | Score | Pass |
 |--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|
-| ai-character-reference-generation | 380 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| ai-generated-readme-banners | 503 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| alex | 8 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| audit-writing | 37 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| azure | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| builder | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| character-aging-progression | 167 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| chat-participant | 196 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| documentarian | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| extension-audit-methodology | 514 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| flux-brand-finetune | 91 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| gamma | 218 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| graph-api | 210 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| image-handling | 132 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| journey | 231 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| m365-agent-debug | 184 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| m365 | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| marp | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| mcp-server | 193 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| presentation | 105 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| researcher | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| teams-app | 200 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| ui-ux-audit | 686 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| validate-config | 70 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| validator | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| visual-memory | 221 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| vscode-extension-audit | 164 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| add-endpoint | 117 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| alex-initialization | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| analyze | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| brainqa | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| brand | 32 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| code-review-checklist | 84 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| create-store | 111 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| cross-domain-transfer | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| dashboard | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| datastory | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| debug | 25 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| diagramming | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| domain-learning | 43 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| dream | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| export-memory | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| gapanalysis | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| improve | 87 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| interpret | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| knowledge | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| learn | 29 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| masteraudit | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| meditate | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| memory-audit | 36 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| northstar | 104 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| performance-assessment | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| plan | 101 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| promotetomaster | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| refactor | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| release | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| review | 55 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| root-cause-analysis | 28 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| secrets | 91 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| security-review | 26 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| selfactualize | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| skill-building | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| tdd | 62 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| token-audit | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| visualize | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| word | 63 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [docx-to-md](../prompts/docx-to-md.prompt.md) | 129 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-scaffold](../prompts/md-scaffold.prompt.md) | 128 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-to-eml](../prompts/md-to-eml.prompt.md) | 122 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-to-html](../prompts/md-to-html.prompt.md) | 100 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-to-word](../prompts/md-to-word.prompt.md) | 123 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [ai-character-reference-generation](../prompts/ai-character-reference-generation.prompt.md) | 380 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [ai-generated-readme-banners](../prompts/ai-generated-readme-banners.prompt.md) | 503 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [alex](../prompts/alex.prompt.md) | 8 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [audit-writing](../prompts/audit-writing.prompt.md) | 37 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [azure](../prompts/azure.prompt.md) | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [builder](../prompts/builder.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [character-aging-progression](../prompts/character-aging-progression.prompt.md) | 167 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [chat-participant](../prompts/chat-participant.prompt.md) | 196 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [documentarian](../prompts/documentarian.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [extension-audit-methodology](../prompts/extension-audit-methodology.prompt.md) | 514 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [flux-brand-finetune](../prompts/flux-brand-finetune.prompt.md) | 91 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [gamma](../prompts/gamma.prompt.md) | 218 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [graph-api](../prompts/graph-api.prompt.md) | 210 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [image-handling](../prompts/image-handling.prompt.md) | 132 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [journey](../prompts/journey.prompt.md) | 231 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [m365-agent-debug](../prompts/m365-agent-debug.prompt.md) | 184 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [m365](../prompts/m365.prompt.md) | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [marp](../prompts/marp.prompt.md) | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [mcp-server](../prompts/mcp-server.prompt.md) | 193 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [presentation](../prompts/presentation.prompt.md) | 105 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [researcher](../prompts/researcher.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [teams-app](../prompts/teams-app.prompt.md) | 200 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [ui-ux-audit](../prompts/ui-ux-audit.prompt.md) | 686 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [validate-config](../prompts/validate-config.prompt.md) | 70 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [validator](../prompts/validator.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [visual-memory](../prompts/visual-memory.prompt.md) | 221 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [vscode-extension-audit](../prompts/vscode-extension-audit.prompt.md) | 164 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [add-endpoint](../prompts/add-endpoint.prompt.md) | 117 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [alex-initialization](../prompts/alex-initialization.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [analyze](../prompts/analyze.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [brainqa](../prompts/brainqa.prompt.md) | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [brand](../prompts/brand.prompt.md) | 32 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [code-review-checklist](../prompts/code-review-checklist.prompt.md) | 84 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [create-store](../prompts/create-store.prompt.md) | 111 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [cross-domain-transfer](../prompts/cross-domain-transfer.prompt.md) | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [dashboard](../prompts/dashboard.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [datastory](../prompts/datastory.prompt.md) | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [debug](../prompts/debug.prompt.md) | 25 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [diagramming](../prompts/diagramming.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [domain-learning](../prompts/domain-learning.prompt.md) | 43 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [dream](../prompts/dream.prompt.md) | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [export-memory](../prompts/export-memory.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [gapanalysis](../prompts/gapanalysis.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [improve](../prompts/improve.prompt.md) | 87 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [interpret](../prompts/interpret.prompt.md) | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [knowledge](../prompts/knowledge.prompt.md) | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [learn](../prompts/learn.prompt.md) | 29 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [masteraudit](../prompts/masteraudit.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [meditate](../prompts/meditate.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [memory-audit](../prompts/memory-audit.prompt.md) | 36 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [northstar](../prompts/northstar.prompt.md) | 104 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [performance-assessment](../prompts/performance-assessment.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [plan](../prompts/plan.prompt.md) | 101 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [promotetomaster](../prompts/promotetomaster.prompt.md) | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [refactor](../prompts/refactor.prompt.md) | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [release](../prompts/release.prompt.md) | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [review](../prompts/review.prompt.md) | 55 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [root-cause-analysis](../prompts/root-cause-analysis.prompt.md) | 28 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [secrets](../prompts/secrets.prompt.md) | 91 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [security-review](../prompts/security-review.prompt.md) | 26 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [selfactualize](../prompts/selfactualize.prompt.md) | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [skill-building](../prompts/skill-building.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [tdd](../prompts/tdd.prompt.md) | 62 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [token-audit](../prompts/token-audit.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [visualize](../prompts/visualize.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [word](../prompts/word.prompt.md) | 63 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 
-**Summary**: 66 prompts | Passing: 66 | Failing: 0 | Perfect(4/4): 39
+**Summary**: 71 prompts | Passing: 66 | Failing: 5 | Perfect(4/4): 39
 
 ### Criterion Validity
 
 | Criterion | Pass | Rate | Validity |
 |-----------|-----:|-----:|----------|
-| desc | 66/66 | 100% | ✓ Valid — required for discoverability |
-| app | 66/66 | 100% | ✓ Valid — tells agent WHEN to suggest |
-| agent | 46/66 | 70% | ✓ Valid — identifies routing prompts |
-| >20L | 59/66 | 89% | ✓ Valid — identifies workflow content |
+| desc | 71/71 | 100% | ✓ Valid — required for discoverability |
+| app | 66/71 | 93% | ✓ Valid — tells agent WHEN to suggest |
+| agent | 46/71 | 65% | ✓ Valid — identifies routing prompts |
+| >20L | 64/71 | 90% | ✓ Valid — identifies workflow content |
+
+## Muscles
+
+> **Design**: Muscles are **execution scripts** that convert cognitive decisions into real-world output. Memory files define *what* and *how*; muscles *do*.
+
+**Scoring Criteria**:
+| Dim | Name | 1 (good) | 0 (defect) |
+|:---:|------|----------|------------|
+| **comments** | Well Documented | Header block + ≥5 inline comments | Missing header or insufficient comments |
+| **err** | Error Handling | try/catch, .catch(), $ErrorActionPreference | No error handling (fragile) |
+| **bounds** | Bounds | 50–1000 lines | <50 (stub) or >1000 (bloated) |
+| **compat** | Cross-Platform | path.join/Join-Path, no hardcoded separators | Hardcoded path separators |
+
+**Pass criteria**: err=1 (gate) AND score ≥3/4
+
+**Review Date**: Add `@reviewed: YYYY-MM-DD` comment to track code review currency.
+
+### Standard Muscle Header
+
+Muscles SHOULD use the standard header format for discoverability:
+
+```javascript
+#!/usr/bin/env node
+/**
+ * @muscle muscle-name
+ * @description What this muscle does
+ * @version 1.0.0
+ * @skill linked-skill-name
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires pandoc, mermaid-cli
+ */
+```
+
+| Tag | Required | Purpose |
+|-----|:--------:|---------|
+| `@muscle` | ✓ | Canonical muscle name |
+| `@description` | ✓ | What it does (for search/display) |
+| `@version` | | Semantic version |
+| `@skill` | | Linked skill name for trifecta binding |
+| `@reviewed` | | Code review date (YYYY-MM-DD) |
+| `@platform` | | Supported platforms (windows,macos,linux) |
+| `@requires` | | External dependencies |
+
+| Muscle | Lines | Lang | Category | comments | err | bounds | compat | Score | Pass | inh | Reviewed |
+|--------|------:|:----:|----------|:--------:|:---:|:------:|:------:|------:|:----:|:---:|----------|
+| [install-hooks.ps1](../muscles/install-hooks.ps1) | 48 | ps | build | 0 | 1 | 0 | 0 | 1/4 | ✗ | 0 | — |
+| [brain-qa.ps1](../muscles/brain-qa.ps1) | 1812 | ps | validation | 0 | 1 | 0 | 1 | 2/4 | ✗ | 1 | — |
+| [install-hooks.cjs](../muscles/install-hooks.cjs) | 62 | js | build | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
+| [validate-skills.cjs](../muscles/validate-skills.cjs) | 106 | js | validation | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
+| [audit-master-alex.cjs](../muscles/audit-master-alex.cjs) | 537 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
+| [audit-master-alex.ps1](../muscles/audit-master-alex.ps1) | 441 | ps | validation | 1 | 1 | 1 | 0 | 3/4 | ✓ | 1 | — |
+| [audit-token-waste.cjs](../muscles/audit-token-waste.cjs) | 449 | js | validation | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [brain-qa-heir.cjs](../muscles/brain-qa-heir.cjs) | 962 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [brain-qa-heir.ps1](../muscles/brain-qa-heir.ps1) | 934 | ps | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 338 | ps | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
+| [chart-recommend.cjs](../muscles/chart-recommend.cjs) | 241 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [converter-qa.cjs](../muscles/converter-qa.cjs) | 1268 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | — |
+| [dashboard-scaffold.cjs](../muscles/dashboard-scaffold.cjs) | 316 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [data-profile.cjs](../muscles/data-profile.cjs) | 286 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [fix-fence-bug.ps1](../muscles/fix-fence-bug.ps1) | 189 | ps | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [md-to-word.cjs](../muscles/md-to-word.cjs) | 1186 | js | converter | 1 | 1 | 0 | 1 | 3/4 | ✓ | 0 | 2026-04-15 |
+| [nav-inject.cjs](../muscles/nav-inject.cjs) | 215 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [new-skill.cjs](../muscles/new-skill.cjs) | 143 | js | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [new-skill.ps1](../muscles/new-skill.ps1) | 130 | ps | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [pptxgen-cli.ts](../muscles/pptxgen-cli.ts) | 136 | ts | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [sync-architecture.cjs](../muscles/sync-architecture.cjs) | 1655 | js | build | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
+| [validate-synapses.cjs](../muscles/validate-synapses.cjs) | 138 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [validate-synapses.ps1](../muscles/validate-synapses.ps1) | 144 | ps | validation | 1 | 1 | 1 | 0 | 3/4 | ✓ | 0 | — |
+| [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 140 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [brain-qa.cjs](../muscles/brain-qa.cjs) | 937 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
+| [data-ingest.cjs](../muscles/data-ingest.cjs) | 367 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [docx-to-md.cjs](../muscles/docx-to-md.cjs) | 379 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [dream-cli.ts](../muscles/dream-cli.ts) | 116 | ts | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [gamma-generator.cjs](../muscles/gamma-generator.cjs) | 913 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [markdown-lint.cjs](../muscles/markdown-lint.cjs) | 444 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [md-scaffold.cjs](../muscles/md-scaffold.cjs) | 542 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [md-to-eml.cjs](../muscles/md-to-eml.cjs) | 443 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [md-to-html.cjs](../muscles/md-to-html.cjs) | 437 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [normalize-paths.ps1](../muscles/normalize-paths.ps1) | 194 | ps | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [ralph-loop.cjs](../muscles/ralph-loop.cjs) | 740 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [session-name.cjs](../muscles/session-name.cjs) | 237 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [validate-skills.ps1](../muscles/validate-skills.ps1) | 113 | ps | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+
+**Summary**: 37 muscles | Passing: 28 | Failing: 9 | Perfect(4/4): 14
+
+**Inheritance**: Master-only(1): 7 | Inheritable(0): 30
+
+**Metadata Adoption**: 3/37 have standard header | 2/37 linked to skills | 3/37 have review dates
+
+**Categories**: build: 6 | validation: 13 | analysis: 4 | converter: 7 | utility: 7
+
 ## Overall
 
 | Category | Count |
 |----------|------:|
-| Skills | 168 |
+| Skills | 166 |
 | Agents | 12 |
-| Instructions | 83 |
-| Prompts | 66 |
-| **Total** | **329** |
+| Instructions | 128 |
+| Prompts | 71 |
+| Muscles | 37 |
+| **Total** | **414** |

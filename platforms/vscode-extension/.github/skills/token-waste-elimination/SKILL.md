@@ -66,3 +66,58 @@ Memory files are LLM context, not human documentation. Every line costs tokens. 
 - Before a release (clean context = better responses)
 - When response quality degrades (context bloat is often the cause)
 - Quarterly maintenance (drift accumulates silently)
+
+## Audit Script Example
+
+```javascript
+// .github/muscles/audit-token-waste.cjs
+const fs = require('fs');
+const path = require('path');
+
+function auditInstructions(dir) {
+  const files = fs.readdirSync(dir);
+  const oversize = [];
+  
+  for (const file of files) {
+    if (!file.endsWith('.instructions.md')) continue;
+    const content = fs.readFileSync(path.join(dir, file), 'utf8');
+    const lines = content.split('\n').length;
+    
+    // Check for matching skill
+    const skillPath = `.github/skills/${file.replace('.instructions.md', '')}/SKILL.md`;
+    const hasSkill = fs.existsSync(skillPath);
+    const threshold = hasSkill ? 50 : 200;
+    
+    if (lines > threshold) {
+      oversize.push({ file, lines, threshold, hasSkill });
+    }
+  }
+  return oversize;
+}
+
+const results = auditInstructions('.github/instructions');
+console.log(`Found ${results.length} oversize instructions`);
+results.forEach(r => console.log(`  ${r.file}: ${r.lines} lines (max: ${r.threshold})`));
+```
+
+## Optimization Before/After Example
+
+```markdown
+## Before (45 tokens, wastes context)
+When generating visualizations, use the chart-interpretation skill.
+This skill provides patterns for reading charts and extracting insights.
+The skill covers various chart types including bar charts, line charts, pie charts.
+
+## After (12 tokens, same information)
+Chart generation → chart-interpretation skill.
+```
+
+## Quality Metrics
+
+| Metric | Target | Measure |
+|--------|--------|---------|
+| Instruction avg lines | <40 | `dir .github/instructions/ \| measure-object` |
+| Instructions with applyTo | >80% | Grep frontmatter |
+| Skill body avg lines | <250 | Brain-qa bounds dimension |
+| Total always-on cost | <2000 tokens | Manual count of descriptions |
+| Waste patterns found | 0 | Muscle `--check` mode |

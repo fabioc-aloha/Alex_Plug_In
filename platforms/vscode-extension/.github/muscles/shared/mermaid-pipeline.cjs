@@ -26,14 +26,18 @@ const FORMAT_SCALES = {
   email: { scale: 2, width: 600 },
 };
 
-// Alex brand pastel palette (from user preferences)
+// GitHub Pastel v2 palette (aligned with markdown-mermaid skill)
 const BRAND_PALETTE = {
-  blue: '#dbe9f6',
-  teal: '#d4f5f7',
-  green: '#d4edda',
-  purple: '#e6d5f0',
-  orange: '#fce4e0',
-  textDark: '#1f2328',
+  blue: '#ddf4ff',       // Primary - trust, reliability
+  green: '#d3f5db',      // Success, growth
+  purple: '#d8b9ff',     // Consciousness, identity
+  gold: '#fff8c5',       // Warnings, attention
+  bronze: '#fff1e5',     // Connection, memory
+  red: '#ffebe9',        // Errors, critical
+  neutral: '#eaeef2',    // Muted, secondary
+  textDark: '#1f2328',   // Primary text
+  lineColor: '#57606a',  // Arrows, edges
+  edgeLabelBg: '#ffffff' // CRITICAL: white background for edge labels
 };
 
 /**
@@ -62,10 +66,11 @@ function injectPalette(mmdContent, options = {}) {
 
   const initDirective = `%%{init: {'theme': '${theme}', 'themeVariables': {` +
     `'primaryColor': '${palette.blue}', ` +
-    `'secondaryColor': '${palette.teal}', ` +
-    `'tertiaryColor': '${palette.green}', ` +
+    `'secondaryColor': '${palette.green}', ` +
+    `'tertiaryColor': '${palette.purple || palette.green}', ` +
     `'primaryTextColor': '${palette.textDark}', ` +
-    `'lineColor': '${palette.textDark}'` +
+    `'lineColor': '${palette.lineColor || palette.textDark}', ` +
+    `'edgeLabelBackground': '${palette.edgeLabelBg || '#ffffff'}'` +
     `}}}%%\n`;
 
   return initDirective + mmdContent;

@@ -2,6 +2,7 @@
 name: "markdown-mermaid"
 description: "Clear documentation through visual excellence"
 tier: standard
+inheritance: inheritable
 applyTo: '**/*.md,**/*mermaid*,**/*diagram*'
 ---
 
@@ -444,11 +445,16 @@ web_server.style.fill: "#f3e5f5"
 
 ### ⚡ Quick Start — Pastel v2 Template
 
-Copy this template for every new diagram. It sets the GitHub Pastel v2 palette defaults:
+Copy this template for every new diagram. It includes the init directive, classDef colors, and arrow styling:
 
 ```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#ddf4ff',
+  'lineColor': '#57606a',
+  'edgeLabelBackground': '#ffffff'
+}}}%%
 flowchart LR
-    A[Source]:::blue --> B[Process]:::gold --> C[Output]:::green
+    A[Source]:::blue -->|transform| B[Process]:::gold --> C[Output]:::green
 
     classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
     classDef green fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
@@ -457,9 +463,12 @@ flowchart LR
     linkStyle default stroke:#57606a,stroke-width:1.5px
 ```
 
-**Three things every diagram needs:**
+**Four things every diagram needs:**
+
+1. `%%{init}%%` directive with `edgeLabelBackground: '#ffffff'`
 2. `classDef` or `style` for node colors
-3. `linkStyle default` for arrow color
+3. `linkStyle default stroke:#57606a` for arrow color
+4. Edge labels `|text|` with white background (from init)
 
 > 💡 For color theory and design principles, see the **graphic-design** skill. The palette values here come from that skill's color system, optimized for GitHub rendering.
 
@@ -576,6 +585,15 @@ flowchart LR
 **Init directive (Fishbowl):**
 
 ```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#cce5ff',
+  'primaryBorderColor': '#4a90d9',
+  'primaryTextColor': '#333',
+  'secondaryColor': '#e6d5f2',
+  'tertiaryColor': '#c2f0d8',
+  'lineColor': '#666',
+  'edgeLabelBackground': '#ffffff'
+}}}%%
 ```
 
 **When to choose Fishbowl over GitHub Pastel v2**: Use Fishbowl when all nodes need equal visual weight (e.g., governance structures, compliance flows). Use GitHub Pastel v2 when nodes carry semantic meaning that should be color-coded by category.
@@ -587,16 +605,38 @@ Add as FIRST line inside mermaid block:
 **Default init directive (GitHub Pastel v2):**
 
 ```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#ddf4ff',
+  'primaryBorderColor': '#0969da',
+  'primaryTextColor': '#1f2328',
+  'lineColor': '#57606a',
+  'edgeLabelBackground': '#ffffff'
+}}}%%
 ```
 
 **Standard GitHub-compatible theme (legacy):**
 
 ```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#f6f8fa',
+  'primaryBorderColor': '#d1d9e0',
+  'primaryTextColor': '#1f2328',
+  'lineColor': '#656d76',
+  'edgeLabelBackground': '#ffffff'
+}}}%%
 ```
 
 **Quadrant chart theme:**
 
 ```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'quadrant1Fill': '#d3f5db',
+  'quadrant2Fill': '#fff8c5',
+  'quadrant3Fill': '#ffebe9',
+  'quadrant4Fill': '#ddf4ff',
+  'quadrantPointFill': '#1f2328',
+  'quadrantTitleFill': '#1f2328'
+}}}%%
 ```
 
 ### classDef Reusable Styles
@@ -800,9 +840,17 @@ Get-ChildItem -Recurse -Filter "*.md" | Select-String -Pattern '\\u[0-9a-fA-F]{4
 
 **Root cause**: Missing or incorrect `edgeLabelBackground` settings.
 
-**Fix**: Always use `#ffffff` for clean white label backgrounds:
+**Fix**: Always include `edgeLabelBackground: '#ffffff'` in your init directive:
 
 ```text
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#ddf4ff',
+  'lineColor': '#57606a',
+  'edgeLabelBackground': '#ffffff'
+}}}%%
+
+flowchart LR
+    A -->|label text| B
 ```
 
 This provides a clean white background for edge labels, ensuring readability on any rendering surface.

@@ -153,27 +153,21 @@ When reviewing feedback in Master Alex:
 2. **Triage** by severity (critical first)
 3. **Investigate** the reported issue in the master `.github/` architecture
 4. **Fix** the issue in Master Alex
-5. **Update** the feedback file status to `resolved` with a resolution note
-6. **Sync** fixes to heirs via `sync-architecture.cjs`
+5. **Sync** fixes to heirs via `sync-architecture.cjs`
+6. **Delete** the feedback file after resolution is complete
 
 ### Status Lifecycle
 
 ```
-new → investigating → resolved | wont-fix | duplicate
+new → investigating → fixed → deleted
 ```
 
-Update the frontmatter `status` field and add a resolution section:
+After fixing the issue, **delete the feedback file**. The fix is documented in:
+- CHANGELOG.md (for the release that includes the fix)
+- Git commit history
+- The fixed skill/instruction files themselves
 
-```markdown
----
-status: resolved
-resolved-date: 2026-04-12
----
-
-## Resolution
-
-{What was fixed, which files changed, which version includes the fix}
-```
+Keeping resolved feedback files creates clutter and risks re-processing the same issue.
 
 ---
 

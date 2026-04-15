@@ -1,5 +1,6 @@
 ---
 description: Audit cognitive architecture for token waste and fix issues
+application: "When requesting architecture health checks, quality audits, or validation"
 agent: Alex
 ---
 

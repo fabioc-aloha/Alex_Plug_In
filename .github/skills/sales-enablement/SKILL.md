@@ -55,6 +55,29 @@ Selling is structured problem-solving. You diagnose a customer's pain, match it 
 
 ## Pipeline Management
 
+### Deal Tracker (MEDDPICC)
+
+```json
+{
+  "deal": "Acme Corp - Platform Expansion",
+  "value": 250000,
+  "stage": "negotiation",
+  "close_date": "2026-06-30",
+  "meddpicc": {
+    "metrics": { "score": 3, "note": "10% efficiency gain target confirmed" },
+    "economic_buyer": { "score": 3, "contact": "CFO Jane Smith" },
+    "decision_criteria": { "score": 2, "note": "Waiting on technical eval results" },
+    "decision_process": { "score": 3, "note": "Procurement involved, legal review next" },
+    "paper_process": { "score": 2, "note": "MSA required, 2-week legal cycle" },
+    "implicate_pain": { "score": 3, "note": "$500K annual loss without solution" },
+    "champion": { "score": 3, "contact": "VP Ops Mike Chen" },
+    "competition": { "score": 2, "note": "Competitor X shortlisted" }
+  },
+  "total_score": 21,
+  "next_step": "Send ROI calculator to CFO before 4/20"
+}
+```
+
 ### Pipeline Stages
 
 | Stage | Definition | Exit Criteria |

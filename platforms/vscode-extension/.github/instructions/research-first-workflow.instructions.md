@@ -1,5 +1,6 @@
 ---
 description: "Research-first development workflow — pre-project knowledge encoding and 4-dimension gap analysis"
+application: "When analyzing data, building visualizations, or creating reports"
 applyTo: "**/research/**,**/*research*,**/*gap-analysis*"
 ---
 
@@ -7,12 +8,7 @@ applyTo: "**/research/**,**/*research*,**/*gap-analysis*"
 
 > Procedural memory for the Research → Teach → Plan → Execute paradigm
 
-**Synapse**: [.github/skills/research-first-development/SKILL.md] (Critical, Implements, Bidirectional) - "skill provides patterns; instruction provides procedures"
-**Synapse**: [.github/instructions/planning-first-development.instructions.md] (Critical, Extends, Forward) - "research provides knowledge; planning provides strategy before encoding"
-**Synapse**: [.github/instructions/skill-selection-optimization.instructions.md] (High, Feeds, Forward) - "gap analysis creates skills that SSO selects from"
-**Synapse**: [.github/instructions/bootstrap-learning.instructions.md] (High, Extends, Forward) - "research phase uses bootstrap learning for unknown domains"
-**Synapse**: [.github/instructions/heir-project-improvement.instructions.md] (High, Extends, Forward) - "heir improvement teaches heirs to apply research-first"
-**Synapse**: [.github/instructions/azure-enterprise-deployment.instructions.md] (High, Applies, Bidirectional) - "pre-deployment validation is research phase for infrastructure work"
+**Related**: research-first-development skill (patterns), planning-first-development (strategy after research), skill-selection-optimization (gap analysis feeds SSO), bootstrap-learning (unknown domains), heir-skill-promotion (heir workflow), heir-project-improvement (teaches heirs), azure-enterprise-deployment (pre-deployment validation)
 
 ---
 

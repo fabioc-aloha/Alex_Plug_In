@@ -100,9 +100,26 @@ Run these checks before opening the debug panel:
 | `chat.plugins.enabled` | `true` | Plugin loading |
 | `chat.useSkillAdherencePrompt` | `true` | Forces LLM to read SKILL.md |
 
+## Settings JSON
+
+Add these to `.vscode/settings.json`:
+
+```json
+{
+  "chat.agentSkillsLocations": [".github/skills"],
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
+  "chat.useAgentsMdFile": true,
+  "chat.useNestedAgentsMdFiles": true,
+  "chat.hooks.enabled": true,
+  "chat.useSkillAdherencePrompt": true
+}
+```
+
 ## Workflow: Systematic Debug
 
-```
+```text
 1. Reproduce the issue in chat
 2. Open Debug Panel (Developer: Open Agent Debug Panel)
 3. Check loading → matching → execution → output

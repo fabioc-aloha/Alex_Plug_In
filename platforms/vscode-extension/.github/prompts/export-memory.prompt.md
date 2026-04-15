@@ -1,5 +1,6 @@
 ---
 description: Export all stored memories and context to a portable file
+application: "When converting between formats or exporting content"
 agent: Alex
 ---
 

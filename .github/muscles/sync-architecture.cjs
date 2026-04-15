@@ -1,4 +1,11 @@
 /**
+ * @muscle sync-architecture
+ * @description Synchronize cognitive architecture from Master Alex to VS Code heir
+ * @version 1.0.0
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
  * Sync Architecture Script
  *
  * Copies inheritable cognitive architecture files from Master Alex (root .github/)

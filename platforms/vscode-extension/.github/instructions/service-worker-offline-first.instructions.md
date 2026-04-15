@@ -1,5 +1,6 @@
 ---
 description: "Service Worker offline-first patterns — caching strategies, lifecycle management, and PWA resilience"
+application: "When implementing service worker offline first or reviewing code that uses these patterns"
 applyTo: "**/*service-worker*,**/*sw.*,**/*offline*,**/*pwa*,**/manifest.json"
 ---
 

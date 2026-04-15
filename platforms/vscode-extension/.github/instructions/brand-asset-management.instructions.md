@@ -1,5 +1,6 @@
 ---
 description: "Brand asset deployment, visual identity guidelines, and logo management"
+application: "During deployment, release preparation, or publishing workflows"
 applyTo: "**/assets/**,**/*.svg,**/*.png,**/*.ico"
 ---
 

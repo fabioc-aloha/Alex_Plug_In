@@ -1,5 +1,6 @@
 ---
 description: Generate Zustand stores with TypeScript, devtools, and persistence patterns
+application: "When building MCP servers or AI tool integrations"
 agent: Frontend
 ---
 

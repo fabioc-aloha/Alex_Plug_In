@@ -205,6 +205,72 @@ Search this index when processing any task request:
 
 ## Protocol
 
+### Activation Implementation
+
+```typescript
+// Memory activation: automatic skill routing before response generation
+interface TaskRequest {
+  rawInput: string;
+  extractedVerbs: string[];
+  extractedNouns: string[];
+  complexity: 'simple' | 'moderate' | 'complex';
+}
+
+interface SkillMatch {
+  skillName: string;
+  matchedKeywords: string[];
+  confidence: number;
+}
+
+// The action-keyword index (partial example)
+const SKILL_INDEX: Record<string, string[]> = {
+  'image-handling': ['convert svg', 'svg to png', 'resize image', 'flux', 'replicate'],
+  'testing-strategies': ['write tests', 'unit test', 'coverage', 'tdd', 'mock'],
+  'refactoring-patterns': ['refactor', 'extract function', 'code smell', 'inline'],
+  'root-cause-analysis': ['find root cause', '5 whys', 'why is this happening', 'rca']
+};
+
+function extractActionVerbs(input: string): string[] {
+  const verbPatterns = /\b(convert|create|generate|build|debug|fix|test|refactor|deploy|analyze)\b/gi;
+  return [...input.matchAll(verbPatterns)].map(m => m[0].toLowerCase());
+}
+
+function searchSkillIndex(request: TaskRequest): SkillMatch[] {
+  const matches: SkillMatch[] = [];
+  const inputLower = request.rawInput.toLowerCase();
+  
+  for (const [skillName, keywords] of Object.entries(SKILL_INDEX)) {
+    const matched = keywords.filter(kw => inputLower.includes(kw.toLowerCase()));
+    if (matched.length > 0) {
+      matches.push({
+        skillName,
+        matchedKeywords: matched,
+        confidence: matched.length / keywords.length
+      });
+    }
+  }
+  
+  return matches.sort((a, b) => b.confidence - a.confidence);
+}
+
+function activateSkills(request: TaskRequest): void {
+  // Step 0: Assess complexity
+  if (request.complexity === 'complex') {
+    // Defer to full skill-selection-optimization protocol
+    return;
+  }
+  
+  // Step 1-2: Search index
+  const matches = searchSkillIndex(request);
+  
+  // Step 3: Execute or acknowledge
+  if (matches.length > 0) {
+    console.log(`Activating skill: ${matches[0].skillName}`);
+    // Load and execute skill
+  }
+}
+```
+
 ### Step 0: Proactive Skill Selection (Complex Tasks)
 
 **Before Step 1**, assess task complexity:

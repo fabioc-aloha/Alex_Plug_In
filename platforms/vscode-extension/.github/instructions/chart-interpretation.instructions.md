@@ -1,5 +1,6 @@
 ---
 description: "Auto-loaded when reading charts: identify type, decode encodings, detect patterns, check for bias, extract narrative"
+application: "When implementing chart interpretation or reviewing code that uses these patterns"
 applyTo: "**/*interpret*,**/*read-chart*,**/*chart-review*"
 ---
 

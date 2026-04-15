@@ -1,5 +1,6 @@
 ---
 description: "Safe refactoring procedure — same behavior, better structure"
+application: "When following refactoring patterns workflows or troubleshooting related issues"
 applyTo: "**/*refactor*,**/*extract*,**/*rename*,**/*inline*,**/*monolith*"
 ---
 

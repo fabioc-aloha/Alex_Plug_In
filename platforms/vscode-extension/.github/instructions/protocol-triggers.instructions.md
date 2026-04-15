@@ -1,6 +1,7 @@
 ---
 applyTo: "**/*dream*,**/*meditation*,**/*consolidation*"
 description: "Detailed protocol triggers for dream, meditation, and synaptic enhancement"
+application: "When following protocol triggers workflows or troubleshooting related issues"
 ---
 
 # Protocol Triggers Reference

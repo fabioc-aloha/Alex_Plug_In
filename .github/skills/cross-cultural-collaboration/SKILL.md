@@ -68,6 +68,28 @@ disableModelInvocation: true
 
 ### Decoding High-Context Responses
 
+### Team Cultural Profile
+
+```json
+{
+  "team_name": "Platform Engineering",
+  "members": [
+    { "name": "Alex", "location": "US", "hofstede": { "power_distance": 40, "individualism": 91, "uncertainty_avoidance": 46 } },
+    { "name": "Priya", "location": "India", "hofstede": { "power_distance": 77, "individualism": 48, "uncertainty_avoidance": 40 } },
+    { "name": "Carlos", "location": "Colombia", "hofstede": { "power_distance": 67, "individualism": 13, "uncertainty_avoidance": 80 } }
+  ],
+  "cultural_gaps": {
+    "individualism": { "range": 78, "risk": "high", "mitigation": "Balance individual recognition with team celebrations" },
+    "power_distance": { "range": 37, "risk": "medium", "mitigation": "Explicitly invite input from high-PD members in meetings" }
+  },
+  "meeting_norms": [
+    "Allow 3-second pause after questions for high-context members to respond",
+    "Use chat/written follow-up for disagreements",
+    "Avoid putting anyone on the spot without prior notice"
+  ]
+}
+```
+
 When team members from high-context cultures say:
 - **"We'll try"** → May already know it won't happen
 - **"It's almost done"** → Could mean 20% or 80% complete

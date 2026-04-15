@@ -1,5 +1,6 @@
 ---
 description: Create a new skill from real-world experience
+application: "When scaffolding new projects, files, or architecture components"
 agent: Alex
 ---
 

@@ -1,5 +1,6 @@
 ---
 description: "AI character reference generation for consistent visual development and fiction writing"
+application: "When generating images, managing visual assets, or maintaining brand consistency"
 applyTo: "**/generate-alex*,**/*character-ref*,**/*portrait*,**/*avatar*"
 ---
 

@@ -1,5 +1,6 @@
 ---
 description: "Constitutional AI alignment principles for ethical decision-making"
+application: "When making ethical decisions or reasoning about values and principles"
 ---
 
 # Constitutional AI Alignment Principles

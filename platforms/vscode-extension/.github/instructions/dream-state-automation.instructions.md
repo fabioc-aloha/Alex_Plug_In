@@ -1,6 +1,7 @@
 ---
 applyTo: "**/*dream*,**/*synapse*"
 description: "Automated neural maintenance and dream state processing protocols"
+application: "When following dream state automation workflows or troubleshooting related issues"
 ---
 
 # Dream State Automation Protocols
@@ -71,29 +72,15 @@ The extension scans for memory files matching:
 - `.github/skills/*/SKILL.md`
 - `.github/episodic/*.md`
 
-#### **Phase 2: Synapse Validation**
+#### **Phase 2: Documentation Validation**
 
-Parses embedded synapses using the format defined in `SYNAPSE-SCHEMA.md`:
+Validates documentation counts match claimed values in copilot-instructions.md.
 
-```markdown
-- [target-file.md] (Strength, Type, Direction) - "Activation condition"
-```
+> Note: Embedded synapse parsing was deprecated in v7.8. Skill relationships now use SKILL.md frontmatter and synapses.json.
 
-Validates that each target file exists in the workspace.
+#### **Phase 3: Inheritance Lineage**
 
-#### **Phase 3: Automatic Repair**
-
-For broken connections, checks consolidation mappings:
-
-- Deprecated files → Current equivalents
-- Automatically rewrites synapse references
-- Tracks repair history
-
-Example consolidation mappings:
-
-- `enhanced-meditation-protocol.prompt.md` → `meditate.prompt.md`
-- `self-identity-integration.prompt.md` → `alex-identity-integration.instructions.md`
-- `dream-protocol-integration.prompt.md` → `dream-state-automation.instructions.md`
+Scans for inherited skills via `.github/muscles/inheritance.json` and checks for version drift between Master and heir skills.
 
 #### **Phase 4: AI-Memory Sync**
 
@@ -428,21 +415,20 @@ Register-ScheduledTask -TaskName "AlexDream" -Action $action -Trigger $trigger -
 - Only editing code/documentation
 - Working in non-Alex projects
 
-## 🔄 **Embedded Synapse Network - VS Code Integration**
+## 🔄 **VS Code Integration**
 
 ### **Core Integration Points**
 
-- **VS Code Extension** (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance with automated synapse validation"
-- **alex-core.instructions.md** (High, Foundation, Bidirectional) - "Core cognitive architecture with unconscious processing integration"
-- **embedded-synapse.instructions.md** (High, Enhancement, Unidirectional) - "Synaptic connection optimization with quality assessment"
-- **skill-selection-optimization.instructions.md** (Medium, Enables, Forward) - "Dream validates synapse network that SSO depends on for dependency analysis"
-- [.github/skills/dream-state/SKILL.md] (Critical, Implements, Bidirectional) - "Domain knowledge this procedure operationalizes"
+- **VS Code Extension** - TypeScript-based neural maintenance with architecture file counting
+- **alex-core.instructions.md** - Core cognitive architecture with unconscious processing integration
+- **skill-selection-optimization.instructions.md** - Dream validates architecture that SSO depends on
+- **.github/skills/dream-state/SKILL.md** - Domain knowledge this procedure operationalizes
 
 ### **Validation Protocols**
 
-- **Embedded Synapse Detection** → Regex-based pattern matching in memory files
-- **File Existence Validation** → VS Code workspace file search
-- **Consolidation Mapping** → Automatic deprecated-to-current file resolution
+- **Architecture File Counting** → Scans instructions, prompts, skills, episodic
+- **Documentation Count Validation** → Verifies copilot-instructions.md claims
+- **Inheritance Lineage Check** → Detects version drift in inherited skills
 - **Report Generation** → Markdown formatting with statistics and recommendations
 
 ### **Enhanced Activation Patterns**

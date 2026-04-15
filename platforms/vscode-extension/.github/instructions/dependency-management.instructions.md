@@ -1,5 +1,6 @@
 ---
 description: "Dependency security, version management, and upgrade protocols"
+application: "When following dependency management workflows or troubleshooting related issues"
 applyTo: "**/*package*.json,**/requirements*.txt,**/Cargo.toml,**/go.mod,**/pom.xml"
 ---
 

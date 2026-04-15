@@ -59,6 +59,32 @@ The reader should get the essential story from the first paragraph alone.
 - Independent = not derived from the same original source
 - Exceptions: official documents, on-record statements, direct observation
 
+### Fact-Check Tracker
+
+```yaml
+story: "City council approves budget"
+deadline: "2026-04-14 18:00"
+claims:
+  - claim: "Budget is $4.2 billion"
+    sources:
+      - type: "Primary document"
+        ref: "Budget proposal PDF"
+        verified: true
+      - type: "Official statement"
+        ref: "Finance director quote"
+        verified: true
+    status: "confirmed"
+  - claim: "Largest increase in 10 years"
+    sources:
+      - type: "City records"
+        ref: "Historical budget data"
+        verified: true
+      - type: "Secondary"
+        ref: "2016 Observer article"
+        verified: false
+    status: "pending verification"
+```
+
 ### Source Attribution
 | Attribution | Use When |
 |------------|----------|

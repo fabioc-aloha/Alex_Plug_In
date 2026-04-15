@@ -1,5 +1,6 @@
 ---
 description: "MCP server development, tool integration, and Model Context Protocol patterns for AI assistants"
+application: "When following mcp development workflows or troubleshooting related issues"
 applyTo: "**/*mcp*,**/mcp.json,**/mcp-*.json"
 ---
 

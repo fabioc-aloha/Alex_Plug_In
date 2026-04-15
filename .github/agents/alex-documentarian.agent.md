@@ -116,9 +116,9 @@ Apply the **Mermaid-first principle**: architecture, flow, and relationship diag
 | Diagram contradicts current architecture?    | Fix the diagram, not just prose                                  |
 | SVG lacks `role="img"` or `<title>`?         | Add accessibility attributes                                     |
 
-**Skills to load**: `markdown-mermaid` for Mermaid ATACCU workflow, `svg-graphics` for SVG templates, `ascii-art-alignment` for format selection decision table.
+**Skills to load**: `markdown-mermaid` for Mermaid ATACCU workflow and format selection, `svg-graphics` for SVG templates.
 
-**Key rule**: If the diagram shows _structure or flow_ → Mermaid. If it shows _visual design_ → SVG. If it's _embedded in code/terminal_ → ASCII.
+**Key rule**: If the diagram shows _structure or flow_ → Mermaid. If it shows _visual design_ → SVG. ASCII only for code comments or terminal output (no skill needed).
 
 ### Phase 7: Audience Awareness
 

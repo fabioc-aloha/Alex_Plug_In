@@ -93,6 +93,49 @@ Documentation in a cognitive architecture IS architecture. Apply the same engine
 | Archived docs removed from active indexes | Don't link to `archive/` from living docs |
 | Use relative paths within doc trees | `./architecture/FILE.md` not absolute paths |
 
+### Link Integrity Checker
+
+```bash
+# Find all markdown links and verify they resolve
+find . -name "*.md" -exec grep -oP '\[.*?\]\((?!http)[^)]+\)' {} + | while read match; do
+  file=$(echo "$match" | sed -E 's/.*\(([^)]+)\).*/\1/')
+  dir=$(dirname "$match" | cut -d: -f1)
+  target="$dir/$file"
+  if [ ! -f "$target" ] && [ ! -d "$target" ]; then
+    echo "BROKEN: $match"
+  fi
+done
+```
+
+```typescript
+// Programmatic link integrity check
+import { glob } from 'glob';
+import { readFile } from 'fs/promises';
+import { dirname, resolve, existsSync } from 'path';
+
+async function checkLinkIntegrity(docsRoot: string): Promise<string[]> {
+  const broken: string[] = [];
+  const mdFiles = await glob(`${docsRoot}/**/*.md`);
+  
+  for (const file of mdFiles) {
+    const content = await readFile(file, 'utf-8');
+    const linkRegex = /\[.*?\]\((?!http)([^)]+)\)/g;
+    let match;
+    
+    while ((match = linkRegex.exec(content)) !== null) {
+      const linkPath = match[1].split('#')[0]; // Remove anchors
+      const absolutePath = resolve(dirname(file), linkPath);
+      
+      if (!existsSync(absolutePath)) {
+        broken.push(`${file}: ${match[0]} -> ${absolutePath}`);
+      }
+    }
+  }
+  
+  return broken;
+}
+```
+
 ### Orphan Detection
 
 A file is orphaned if it exists in a doc folder but is not referenced by any index or parent document. Orphans are either:

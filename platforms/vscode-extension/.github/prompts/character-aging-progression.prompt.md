@@ -1,6 +1,7 @@
 ---
 name: "generate-age-progression"
 description: "Generate a complete character age progression series using nano-banana-pro"
+application: "When generating images, banners, or visual assets"
 ---
 
 # Generate Character Age Progression

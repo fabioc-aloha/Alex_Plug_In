@@ -1,5 +1,6 @@
 ---
 description: Generate ultra-wide 3:1 README banners with professional typography and photorealistic visuals using Ideogram v2
+application: "When generating documentation, READMEs, or technical writing"
 ---
 
 # AI-Generated README Banner Workflow

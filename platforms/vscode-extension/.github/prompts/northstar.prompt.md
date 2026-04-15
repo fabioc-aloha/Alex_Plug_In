@@ -1,6 +1,7 @@
 ---
 agent: Alex
 description: Define or review project North Star vision
+application: "When requesting code reviews, PR feedback, or quality assessment"
 ---
 
 # /northstar

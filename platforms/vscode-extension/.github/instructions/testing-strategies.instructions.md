@@ -1,5 +1,6 @@
 ---
 description: "Testing strategy selection, test coverage review, and test failure triage"
+application: "During code reviews, quality audits, or when assessing testing strategies"
 applyTo: "**/*.test.*,**/*.spec.*,**/test/**,**/__tests__/**"
 ---
 

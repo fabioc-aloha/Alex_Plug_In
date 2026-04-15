@@ -1,5 +1,6 @@
 ---
 description: "Interactive project improvement — identify trifecta candidates and run research-first gap analysis"
+application: "When starting research sessions or learning new domains"
 agent: "Alex"
 ---
 

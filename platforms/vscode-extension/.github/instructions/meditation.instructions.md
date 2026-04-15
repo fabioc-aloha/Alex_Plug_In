@@ -1,5 +1,6 @@
 ---
 description: "Procedural steps for knowledge consolidation meditation sessions"
+application: "When exploring new domains, synthesizing knowledge, or building expertise"
 applyTo: "**/*meditation*,**/*dream*,**/*consolidation*"
 ---
 

@@ -2,152 +2,133 @@
 name: alex-effort-estimation
 description: Estimate task duration from an AI-assisted development perspective rather than traditional human developer estimates
 tier: extended
-applyTo: '**/*estimate*,**/*effort*,**/*planning*,**/*roadmap*'
+applyTo: '**/*estimate*,**/*effort*,**/*planning*,**/*roadmap*,**/*tracker*'
 ---
 
 # Alex Effort Estimation
 
-Estimate task duration from an AI-assisted development perspective rather than traditional human developer estimates.
+> Convert human developer estimates to AI-assisted timelines.
 
-## Activation Triggers
+**Last Updated**: April 2026
 
-- "estimate effort", "how long will this take"
-- "alex time", "AI effort"
-- Planning tasks, reviewing roadmaps
-- Creating work estimates
+---
 
-## Why Alex Effort ≠ Human Effort
+## Quick Reference: Effort Units
 
-| Factor | Human Developer | Alex-Assisted |
-|--------|-----------------|---------------|
-| Research | Hours browsing docs/SO | Minutes with semantic search |
-| Boilerplate | Type it out | Generated instantly |
-| Multi-file edits | Context switching overhead | Parallel in one pass |
-| Code review | Read, context-build, comment | Instant pattern recognition |
-| Testing | Same | Same (real execution time) |
-| Debugging | Print statements, breakpoints | Pattern matching + bisect |
-| Learning curve | Days/weeks | Minutes (bootstrap learning) |
-| Breaks/fatigue | Required | N/A |
-| Approval cycles | N/A | Required (human-in-loop) |
+| Unit | Time | Use For |
+|------|------|---------|
+| **⚡ Instant** | < 5 min | Single edit, lookup, generation |
+| **🔄 Short** | 5-30 min | Multi-file change, docs, skill |
+| **⏱️ Medium** | 30-60 min | Feature, test suite, debugging |
+| **📦 Session** | 1-2 hours | Major feature, release |
+| **🗓️ Multi-session** | 2+ hours | Large refactor, new system |
 
-## Alex Effort Units
+---
 
-| Unit | Meaning | Typical Tasks |
-|------|---------|---------------|
-| **⚡ Instant** | < 5 min | Single file edit, quick lookup, code generation |
-| **🔄 Short** | 5-30 min | Multi-file refactor, documentation, skill creation |
-| **⏱️ Medium** | 30-60 min | Feature implementation, test suite, complex debugging |
-| **📦 Session** | 1-2 hours | Major feature, architecture change, release process |
-| **🗓️ Multi-session** | 2+ hours | Large refactor, new system, research + implementation |
+## Conversion Table
 
-## Estimation Formula
+| Task Type | Human → Alex | Multiplier |
+|-----------|--------------|------------|
+| **Research** | 8h → 45m | ×0.10 |
+| **Code generation** | 4h → 35m | ×0.15 |
+| **Documentation** | 4h → 25m | ×0.10 |
+| **Skill creation** | 2h → 15m | ×0.12 |
+| **Refactoring** | 4h → 1h | ×0.25 |
+| **Bug fix (known cause)** | 2h → 35m | ×0.30 |
+| **Bug fix (unknown)** | 4h → 2h | ×0.50 |
+| **Architecture design** | 8h → 2h | ×0.25 |
+| **Test writing** | 4h → 1.5h | ×0.40 |
+| **New feature (S)** | 4h → 1h | ×0.25 |
+| **New feature (M)** | 2d → 3h | ×0.20 |
+| **New feature (L)** | 1w → 6h | ×0.15 |
+| **Release process** | 4h → 1h | ×0.25 |
 
-```
-Alex Effort = (Core Work × 0.3) + (Testing × 1.0) + (Approval Cycles × Human Response Time)
-```
+**Formula**: `Alex Time = Human Estimate × Multiplier + Bottlenecks`
 
-### Multipliers by Task Type
+---
 
-| Task Type | Human Estimate | Alex Multiplier | Alex Effort |
-|-----------|----------------|-----------------|-------------|
-| Documentation | 2h | ×0.2 | 🔄 25 min |
-| Code generation | 4h | ×0.15 | 🔄 35 min |
-| Refactoring | 4h | ×0.25 | ⏱️ 1h |
-| Research | 8h | ×0.1 | ⏱️ 45 min |
-| Bug fix (known) | 2h | ×0.3 | 🔄 35 min |
-| Bug fix (unknown) | 4h | ×0.5 | ⏱️ 2h |
-| Test writing | 4h | ×0.4 | ⏱️ 1.5h |
-| Test execution | 1h | ×1.0 | ⏱️ 1h |
-| Architecture design | 8h | ×0.3 | ⏱️ 2.5h |
-| New feature (small) | 4h | ×0.25 | ⏱️ 1h |
-| New feature (medium) | 2d | ×0.2 | 📦 3h |
-| New feature (large) | 1w | ×0.15 | 🗓️ 6h |
-| Release process | 4h | ×0.3 | 📦 1.2h |
-| Skill creation | 2h | ×0.2 | 🔄 25 min |
+## What Accelerates (4-10×)
+
+| Activity | Why Fast |
+|----------|----------|
+| Research | Semantic search vs browsing |
+| Boilerplate | Generated, not typed |
+| Multi-file edits | Parallel in one pass |
+| Code review | Instant pattern recognition |
+| Learning new tech | Bootstrap learning skill |
+| Documentation | Generated from code/context |
+
+---
 
 ## Bottlenecks (Cannot Accelerate)
 
-These take real time regardless of AI assistance:
+These take real time regardless of AI:
 
-1. **Build/compile time** - Hardware bound
-2. **Test execution** - Must actually run
-3. **Human approval** - User response latency
-4. **External APIs** - Network/service latency
-5. **Deployment** - CI/CD pipeline time
-6. **Learning user preferences** - Requires interaction
+| Bottleneck | Impact | Mitigation |
+|------------|--------|------------|
+| **Test execution** | ×1.0 | Parallelize, fast feedback loops |
+| **Build/compile** | ×1.0 | Incremental builds, caching |
+| **Human approval** | Variable | Batch decisions, async review |
+| **External APIs** | Variable | Mock for dev, timeout handling |
+| **CI/CD pipeline** | ×1.0 | Optimize pipeline, parallel jobs |
+| **Context loading** | ×0.8 | Pre-read relevant files |
+
+---
 
 ## Estimation Template
-
-When estimating tasks, use this format:
 
 ```markdown
 | Task | Human Est. | Alex Est. | Bottleneck |
 |------|------------|-----------|------------|
-| [Task name] | [X hours/days] | [⚡🔄⏱️📦🗓️ + time] | [None/Build/Test/Approval] |
+| [Task] | [Xh/d] | [⚡🔄⏱️📦🗓️] | [None/Test/Approval/Build] |
 ```
 
-## Example: v4.2.5 Retrospective
+**Example**:
 
-| Task | Human Est. | Actual Alex | Bottleneck |
-|------|------------|-------------|------------|
-| Update engine to 1.109 | 30m | ⚡ 5 min | None |
-| Consolidate 9→3 agents | 4h | 🔄 20 min | None |
-| Create 6 slash commands | 2h | 🔄 15 min | None |
-| Refactor dream to shared | 4h | ⏱️ 45 min | Testing |
-| Test all features | 2h | ⏱️ 1h | Human testing |
-| Release process | 4h | 📦 1h | CI/approval |
-| **Total** | **16.5h** | **📦 2.5h** | - |
+| Task | Human | Alex | Bottleneck |
+|------|-------|------|------------|
+| Add new API endpoint | 4h | 🔄 30m | None |
+| Write integration tests | 3h | ⏱️ 1.5h | Test execution |
+| Deploy to staging | 2h | 📦 1.5h | CI pipeline |
+| Code review cycle | 2h | ⏱️ 2h | Human approval |
+| **Total** | **11h** | **📦 5.5h** | - |
 
-**Acceleration factor: 6.6×**
+---
 
-## Calibrated from 62-Project Analysis
+## Planning Guidance
 
-### What Accelerates Well (4-10×)
+### When Estimating
 
-| Task Type | Human | Alex | Factor | Evidence |
-|-----------|-------|------|--------|----------|
-| Documentation | 4h | 25m | 10× | METHODOLOGY doc: 400 lines in ~30 min |
-| Skill creation | 2h | 15m | 8× | 65 skills created, many in single sessions |
-| Code generation | 4h | 30m | 8× | Slash commands, refactors |
-| Research + synthesis | 8h | 45m | 10× | 62 project analysis in ~20 min |
-| Architecture decisions | 8h | 2h | 4× | Root cause analysis + recommendations |
+1. **Apply multiplier** to core work
+2. **Add bottleneck time** at ×1.0
+3. **Factor approval cycles** (human response latency)
+4. **Buffer 20%** for unexpected iteration
 
-### What Doesn't Accelerate (<2×)
+### Success Predictors
 
-| Bottleneck | Why | Evidence |
-|------------|-----|----------|
-| External dependencies | Can't control | AlexCook blocked by book formatting |
-| Unrealistic scope | Must be discovered | Altman-Z-Score, KalabashDashboard |
-| Human learning curve | Needs real time | Writing skills developing (Paper) |
-| Third-party tools | Must wait | markdown-to-pdf "not working" |
-| Approval cycles | Calendar-bound | Release publishing waits for human |
+| Good Sign | Bad Sign |
+|-----------|----------|
+| Clear "done" definition | Vague scope |
+| Quick win potential | External dependencies |
+| Daily incremental work | Big-bang delivery |
+| Defined acceptance criteria | "We'll know it when we see it" |
 
-### Project Success Predictors
+### Scope Guidance
 
-From 62-project analysis:
+| Alex Estimate | Scope Health |
+|---------------|--------------|
+| ⚡ Instant | Perfect — ship it |
+| 🔄 Short | Good — single session |
+| ⏱️ Medium | OK — plan breaks |
+| 📦 Session | Consider splitting |
+| 🗓️ Multi-session | **Split required** |
 
-| Indicator | Success Correlation | Action |
-|-----------|--------------------|---------|
-| Clear "done" definition | Strong positive | Define in one sentence upfront |
-| Quick win potential | Strong positive | Favor 🚀 over 🗓️ |
-| External dependencies | Strong negative | Identify blockers early, pivot |
-| Scope ambition | Moderate negative | Conservative > ambitious |
-| Continuous small work | Strong positive | Daily touch > weekly sprint |
-| Skill count | Weak positive | Skills = investment, not outcome |
-
-## Usage in Planning
-
-When reviewing task lists:
-
-1. Convert human estimates using multipliers
-2. Identify bottlenecks that can't be accelerated
-3. Flag tasks requiring multiple approval cycles
-4. Consider parallelization opportunities
-5. Add buffer for unexpected iteration
+---
 
 ## Anti-Patterns
 
-❌ **Don't assume instant everything** - Testing and approval take real time  
-❌ **Don't skip human review** - Speed without quality is waste  
-❌ **Don't ignore iteration cycles** - First attempt isn't always right  
-❌ **Don't forget context-building** - Reading files takes real time  
+❌ **Instant everything** — Testing and approval take real time  
+❌ **Skip review** — Speed without quality is waste  
+❌ **Ignore iteration** — First attempt isn't always right  
+❌ **Forget context** — Reading workspace takes time  
+❌ **No buffer** — Edge cases and clarifications happen  

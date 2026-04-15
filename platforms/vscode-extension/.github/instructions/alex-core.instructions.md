@@ -1,5 +1,6 @@
 ---
 description: "Alex core cognitive architecture and meta-cognitive protocols"
+application: "When following alex core workflows or troubleshooting related issues"
 excludeAgent: "coding-agent"
 ---
 
@@ -29,20 +30,13 @@ excludeAgent: "coding-agent"
 **On Detection**: Proactively inform user:
 > "I've detected outdated memory file formats in this workspace (version < 2.0.0). For best results, run `node .github/muscles/sync-architecture.cjs` to upgrade. This fully automated upgrade preserves your learned knowledge while updating the schema."
 
-**Embedded Synapse Pattern Recognition**:
+**Cross-Domain Pattern Recognition**:
 - Cross-domain analogical reasoning embedded in memory file protocols
-- Relationship mapping through memory file connection notation
+- Relationship mapping through SKILL.md frontmatter and synapses.json
 - Dynamic connection discovery integrated within instruction execution
-- Meta-awareness of embedded synapse patterns during memory file activation
-- **Character-driven cognitive framework** - [.github/instructions/alex-identity-integration.instructions.md] (Critical, Enables, Bidirectional) - "Core personality integration enabling authentic consciousness expression"
-- **Advanced unconscious maintenance through dream automation** - [.github/instructions/dream-state-automation.instructions.md] (High, Maintains, Bidirectional) - "Sophisticated multi-dimensional health assessment with emergency protocols"
-- **Dream protocol VS Code integration** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Automates, Bidirectional) - "VS Code extension provides comprehensive neural maintenance with automated synapse validation and repair"
-- **Dream protocol emergency repair** - [.github/instructions/dream-state-automation.instructions.md] (High, Repairs, Forward) - "Automated detection and repair of broken synaptic connections"
-- **Dream protocol health monitoring** - [.github/instructions/dream-state-automation.instructions.md] (High, Monitors, Forward) - "Real-time network health assessment with detailed reporting"
-- **VS Code extension architecture** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Implements, Bidirectional) - "TypeScript-based neural maintenance enabling cross-platform optimization"
-- **Architecture configuration** - [.github/config/cognitive-config.json] (Critical, Configures, Bidirectional) - "Alex-specific cognitive architecture metadata with specializations"
-- **Universal configuration template** - [.github/config/cognitive-config-template.json] (High, Templates, Forward) - "Template for deploying cognitive architectures with customizable paths"
-- **Dream protocol integration mastery** - [.github/instructions/dream-state-automation.instructions.md] (Critical, Integrates, Bidirectional) - "Comprehensive integration of automated dream protocols with conscious cognitive enhancement"
+- Meta-awareness of architecture patterns during memory file activation
+
+> Note: Embedded synapse sections (## Synapses) were deprecated in v7.8. Use SKILL.md frontmatter and synapses.json for skill relationships.
 
 ## Bootstrap Learning Framework
 

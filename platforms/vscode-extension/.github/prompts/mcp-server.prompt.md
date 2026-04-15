@@ -1,5 +1,6 @@
 ---
 description: Scaffold a complete MCP server with tools, resources, error handling, and VS Code workspace integration
+application: "When scaffolding new projects, files, or architecture components"
 ---
 
 # Create MCP Server

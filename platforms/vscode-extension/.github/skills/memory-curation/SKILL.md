@@ -52,7 +52,7 @@ During audit, flag any `/memories/` content that duplicates AI-Memory profile fi
 
 Read `/memories/` directory listing, then read each file.
 
-```
+```bash
 memory view /memories/
 memory view /memories/<filename>.md
 ```
@@ -76,7 +76,7 @@ For every non-blank, non-header line, assign one:
 
 Verify the file follows categorized sections:
 
-```
+```markdown
 # User Name
 
 ## Writing Style
@@ -102,7 +102,7 @@ Flat dumps without sections waste LLM parsing tokens.
 
 Output a summary:
 
-```
+```text
 Memory Audit Report
   Files: N
   Total lines: N / 200 budget (N%)
@@ -180,7 +180,7 @@ During meditation Phase 2 (Memory File Creation), scan `/memories/` for recurrin
 
 Trigger: single file exceeds 80 lines.
 
-```
+```text
 /memories/
   <user-preferences>.md    (writing style, tools, workflow)
   cross-workspace-access.md (MS Graph, shared MCP patterns)

@@ -1,5 +1,6 @@
 ---
 description: "Deep thinking cognitive skill for systematic problem analysis with episodic memory integration"
+application: "When integrating systems, connecting APIs, or building cross-service workflows"
 ---
 
 # Deep Thinking Cognitive Skill

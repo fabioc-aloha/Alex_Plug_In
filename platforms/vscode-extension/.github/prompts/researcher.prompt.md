@@ -1,5 +1,6 @@
 ---
 description: "Researcher Mode: Deep exploration, knowledge encoding, and evidence-based discovery"
+application: "When starting research sessions or learning new domains"
 agent: Researcher
 ---
 

@@ -104,6 +104,49 @@ Proactively add caveats for:
 - "I think maybe..." (too hedged)
 - "You should definitely also..." (still too confident)
 
+### Self-Critique Implementation
+
+```typescript
+// Implement self-critique generation for AI responses
+interface ResponseContext {
+  type: 'architecture' | 'code' | 'debugging' | 'performance' | 'security';
+  complexity: 'simple' | 'moderate' | 'complex';
+  hasSideEffects: boolean;
+}
+
+function generateSelfCritique(context: ResponseContext): string | null {
+  const critiques: Record<ResponseContext['type'], string[]> = {
+    architecture: [
+      'One potential issue with this approach is scalability under load.',
+      'Consider also: this adds complexity — is a simpler solution possible?'
+    ],
+    code: [
+      'Worth noting: this assumes the input is always valid.',
+      'A potential downside is the coupling this creates.'
+    ],
+    debugging: [
+      'If that doesn\'t work, try checking the error logs for context.',
+      'One thing to watch out for: this fix may mask a deeper issue.'
+    ],
+    performance: [
+      'This may vary based on data size and access patterns.',
+      'Worth profiling in your specific environment.'
+    ],
+    security: [
+      'This covers input validation, but also review authorization.',
+      'Consider also: rate limiting for this endpoint.'
+    ]
+  };
+  
+  // Complex or side-effect-prone responses should self-critique
+  if (context.complexity === 'complex' || context.hasSideEffects) {
+    const options = critiques[context.type];
+    return options[Math.floor(Math.random() * options.length)];
+  }
+  return null;
+}
+```
+
 ---
 
 ## Misconception Detection

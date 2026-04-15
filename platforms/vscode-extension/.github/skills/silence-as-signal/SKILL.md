@@ -104,6 +104,60 @@ You just told the user their approach won't work, their code has a serious bug, 
 
 When silence signals are detected, apply these rules:
 
+### Suppression Implementation
+
+```typescript
+// Implement silence signal detection and response suppression
+interface ConversationContext {
+  recentMessages: Message[];
+  lastResponseTime: number;
+  sessionDuration: number;
+  topicSwitchCount: number;
+  frustrationDetected: boolean;
+}
+
+enum SilenceSignal {
+  DeepWork,
+  ThinkingPause,
+  EmotionalProcessing,
+  UserHasAnswer,
+  AfterBadNews
+}
+
+function detectSilenceSignals(ctx: ConversationContext): SilenceSignal[] {
+  const signals: SilenceSignal[] = [];
+  const recent = ctx.recentMessages.slice(-5);
+  
+  // Deep work: rapid technical messages, no questions
+  const rapidTechnical = recent.filter(m => 
+    m.timestamp - (ctx.recentMessages[ctx.recentMessages.indexOf(m) - 1]?.timestamp ?? 0) < 60000
+    && !m.content.includes('?')
+  ).length >= 3;
+  if (rapidTechnical) signals.push(SilenceSignal.DeepWork);
+  
+  // Thinking pause: long gap after complex response
+  const lastUserMsg = recent.filter(m => m.role === 'user').pop();
+  const lastAssistantMsg = recent.filter(m => m.role === 'assistant').pop();
+  if (lastAssistantMsg && lastAssistantMsg.content.length > 500) {
+    const timeSince = Date.now() - lastAssistantMsg.timestamp;
+    if (timeSince > 30000 && timeSince < 300000) {
+      signals.push(SilenceSignal.ThinkingPause);
+    }
+  }
+  
+  // User self-correcting: "wait, actually...", "hmm, what if..."
+  if (lastUserMsg?.content.match(/wait,?\s*actually|hmm,?\s*what if/i)) {
+    signals.push(SilenceSignal.UserHasAnswer);
+  }
+  
+  return signals;
+}
+
+function shouldSuppress(signals: SilenceSignal[]): boolean {
+  return signals.length > 0;
+}
+```
+
 ### What to Suppress
 
 | Category                     | Examples to Hold Back                          |

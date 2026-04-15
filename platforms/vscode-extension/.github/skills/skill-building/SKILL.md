@@ -193,7 +193,9 @@ applyTo: "**/*"
 | **Medium** (0.6-0.79) | Sometimes co-activate | Contextual connections |
 | **Low** (0.4-0.59) | Rarely co-activate | Weak associations |
 
-### Direction Types
+### Direction Types (Deprecated)
+
+> **Note**: Embedded `## Synapses` sections were deprecated in v7.8. Use `synapses.json` files instead.
 
 | Direction | Meaning | Symbol |
 |-----------|---------|--------|
@@ -201,10 +203,12 @@ applyTo: "**/*"
 | **Bidirectional** | Mutual benefit | ↔ |
 | **Backward** | They help me | ← |
 
-**Format:**
+**Legacy Format (deprecated):**
 ```markdown
 - [.github/skills/{skill}/SKILL.md] (High, Enables, Bidirectional) - "When X happens"
 ```
+
+**Current Format**: Use `synapses.json` in skill directory.
 
 ---
 

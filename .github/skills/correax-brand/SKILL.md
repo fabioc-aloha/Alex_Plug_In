@@ -68,6 +68,45 @@ The CorreaX design language defines the visual identity for all CorreaX products
 | **AIRS**             | Azure Blue `#0078D4` ← enterprise      |
 | **Alex Extension**   | Persona-driven (indigo default)        |
 
+### CSS Design Tokens
+
+```css
+:root {
+  /* Backgrounds */
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  
+  /* Accents (primary) */
+  --accent-indigo: #6366f1;
+  --accent-indigo-light: #818cf8; /* WCAG AA on dark */
+  
+  /* Accents (secondary) */
+  --accent-teal: #0d9488;
+  --accent-teal-light: #2dd4bf;
+  
+  /* Accents (tertiary) */
+  --accent-rose: #f43f5e;
+  --accent-coral: #f97316;
+  
+  /* Typography */
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  
+  /* Banner pattern */
+  --banner-bar-height: 4px;
+  --banner-watermark-opacity: 0.15;
+}
+
+.series-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+```
+
 ### Persona → CorreaX Accent Alignment (27 personas, fully aligned as of v5.9.13)
 
 All 27 Alex personas use CorreaX tokens. Three intentional exceptions preserve platform/domain identity.

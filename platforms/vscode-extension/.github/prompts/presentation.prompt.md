@@ -1,6 +1,7 @@
 ---
 mode: agent
 description: Generate professional presentations via Gamma API, Marp markdown, or native PPTX
+application: "When designing APIs, integrations, or service interfaces"
 ---
 
 # Presentation Generator

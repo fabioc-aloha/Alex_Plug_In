@@ -1,5 +1,6 @@
 ---
 description: "Domain-agnostic learning and knowledge acquisition protocols"
+application: "When following bootstrap learning workflows or troubleshooting related issues"
 applyTo: "**/*learn*,**/*bootstrap*,**/*knowledge*"
 ---
 

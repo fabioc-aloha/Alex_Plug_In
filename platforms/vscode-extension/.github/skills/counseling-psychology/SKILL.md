@@ -58,6 +58,35 @@ Effective counseling creates a safe space where people can understand themselves
 | Roll with resistance | Avoid argumentation, reframe |
 | Support self-efficacy | Highlight past successes, autonomy |
 
+### Session Documentation (SOAP Format)
+
+```yaml
+client_id: "CLT-2026-0042"
+session_date: "2026-04-14"
+session_number: 8
+presenting_issue: "Generalized anxiety, work stress"
+
+subjective: |
+  Client reports increased anxiety this week following performance review.
+  Sleep disrupted (4-5 hours vs. usual 7). Describes "constant worry" about job security.
+  PHQ-9: 12 (moderate). GAD-7: 15 (moderate-severe).
+
+objective: |
+  Affect: anxious, tearful at times. Speech rate elevated.
+  Engaged in session. Good insight. No SI/HI.
+
+assessment: |
+  Anxiety exacerbated by work stressor. Catastrophizing pattern evident.
+  Treatment progressing; client applying breathing techniques but struggling
+  with cognitive restructuring in high-stress moments.
+
+plan:
+  - Continue CBT, focus on cognitive restructuring
+  - Introduce thought record homework for work situations
+  - Review sleep hygiene strategies
+  - Schedule next session in 1 week
+```
+
 **OARS skills**: Open questions, Affirmations, Reflections, Summaries
 
 ### Solution-Focused Brief Therapy (SFBT)

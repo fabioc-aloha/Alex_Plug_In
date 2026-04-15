@@ -1,5 +1,6 @@
 ---
 description: "Procedural guide for implementing AI content safety defense-in-depth systems"
+application: "When implementing security controls, reviewing for vulnerabilities, or handling sensitive data"
 applyTo: "**/*safety*,**/*content-filter*,**/*guardrail*,**/*kill-switch*,**/*injection*"
 ---
 

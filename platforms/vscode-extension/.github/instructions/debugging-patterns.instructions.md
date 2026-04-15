@@ -1,5 +1,6 @@
 ---
 description: "Systematic debugging procedure — reproduce, isolate, hypothesize, fix"
+application: "When following debugging patterns workflows or troubleshooting related issues"
 applyTo: "**/*debug*,**/*error*,**/*fix*,**/*issue*,**/*bug*"
 ---
 

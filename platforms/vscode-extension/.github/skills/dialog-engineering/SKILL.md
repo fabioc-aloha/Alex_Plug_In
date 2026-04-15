@@ -92,6 +92,60 @@ This catches blind spots and creates a record for future sessions.
 | Complex (architecture) | 3-5 turns | Written summary | 3-5+ | Adversarial review |
 | Research | 5+ exploratory turns | Multiple pivots | Iterative | Cross-validate sources |
 
+### CSAR Implementation
+
+```typescript
+// Implement CSAR loop tracking in conversation
+enum CSARPhase {
+  Clarify = 'clarify',
+  Summarize = 'summarize', 
+  Act = 'act',
+  Reflect = 'reflect'
+}
+
+interface DialogState {
+  currentPhase: CSARPhase;
+  cycleCount: number;
+  contextGathered: Map<string, string>;
+  goalStatement: string | null;
+  lastAction: string | null;
+}
+
+function detectPhaseFromMessage(message: string): CSARPhase {
+  // Clarify signals: providing context
+  if (message.match(/I'm building|current stack|constraint is|using/i)) {
+    return CSARPhase.Clarify;
+  }
+  // Summarize signals: stating goal
+  if (message.match(/show me|I need|the goal is|help me/i)) {
+    return CSARPhase.Summarize;
+  }
+  // Reflect signals: evaluation/iteration
+  if (message.match(/what did|go deeper|what if|why did you/i)) {
+    return CSARPhase.Reflect;
+  }
+  // Default: Act phase (generation expected)
+  return CSARPhase.Act;
+}
+
+function suggestNextMove(state: DialogState): string {
+  switch (state.currentPhase) {
+    case CSARPhase.Clarify:
+      return state.goalStatement 
+        ? 'Ready to act on your goal.'
+        : 'What specifically do you want to accomplish?';
+    case CSARPhase.Act:
+      return 'Shall I go deeper on any aspect?';
+    case CSARPhase.Reflect:
+      return state.cycleCount < 3 
+        ? 'Want to refine further, or ready to proceed?'
+        : 'We\'ve iterated well. Ready to finalize?';
+    default:
+      return '';
+  }
+}
+```
+
 ## Integration with Alex Skills
 
 - **Meditation**: The Reflect phase maps to meditation's "what did I learn?" step

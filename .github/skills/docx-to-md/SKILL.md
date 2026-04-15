@@ -2,15 +2,18 @@
 name: "docx-to-md"
 description: "Convert Word documents (.docx) to clean Markdown with image extraction and pandoc cleanup"
 tier: extended
+inheritance: inheritable
 applyTo: '**/*.docx,**/*word*,**/*docx*'
 muscle: .github/muscles/docx-to-md.cjs
 ---
 
 # Word to Markdown Conversion
 
-> Ingest Word documents into your Markdown workflow
+> Ingest Word documents into your Markdown workflow — clean, linted, version-control ready
 
-Convert .docx files into clean, linted Markdown with extracted images, normalized headings, and cleaned table formatting. Reverse converter for ingesting external documents.
+Convert .docx files into clean, linted Markdown with extracted images, normalized headings, and cleaned table formatting. The reverse converter for ingesting external documents into a Markdown-based workflow.
+
+---
 
 ## When to Use
 
@@ -18,6 +21,28 @@ Convert .docx files into clean, linted Markdown with extracted images, normalize
 - Converting legacy documentation to Markdown for version control
 - Extracting content from .docx for further processing (presentations, email, web)
 - Onboarding external resources (SOWs, RFPs, specs) into project repositories
+- Migrating from Word-based documentation to docs-as-code
+- Preparing content for static site generators (VitePress, Docusaurus, etc.)
+
+---
+
+## Supported Content
+
+| Content Type | Status | Notes |
+|--------------|--------|-------|
+| **Headings** | ✅ | Hierarchy normalized to start at H1 |
+| **Bold/Italic** | ✅ | Converted to Markdown syntax |
+| **Links** | ✅ | Preserved as Markdown links |
+| **Images** | ✅ | Extracted to images/ folder |
+| **Tables** | ✅ | Cleaned and aligned |
+| **Lists** | ✅ | Ordered, unordered, nested |
+| **Code blocks** | ⚠️ | Detected if styled as code |
+| **Footnotes** | ✅ | Converted to Markdown footnotes |
+| **Comments** | ⚠️ | Stripped with `--strip-comments` |
+| **Track changes** | ❌ | Accept/reject before converting |
+| **Embedded objects** | ❌ | Extract manually |
+
+---
 
 ## Key Features
 
@@ -29,6 +54,8 @@ Convert .docx files into clean, linted Markdown with extracted images, normalize
 | Heading fix | Normalizes hierarchy to start at H1 |
 | Frontmatter | Optional YAML frontmatter with title and date |
 | Comment stripping | Removes Word review comments |
+
+---
 
 ## Usage
 
@@ -47,29 +74,285 @@ node .github/muscles/docx-to-md.cjs input.docx output/document.md
 
 # Debug mode (keeps raw pandoc output)
 node .github/muscles/docx-to-md.cjs input.docx --debug
+
+# Full cleanup pipeline
+node .github/muscles/docx-to-md.cjs spec.docx --add-frontmatter --fix-headings --strip-comments --clean-tables
 ```
+
+---
+
+## Options Reference
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--extract-images` | true | Extract images to images/ folder |
+| `--no-extract-images` | - | Keep images as raw base64 in markdown |
+| `--add-frontmatter` | off | Generate YAML frontmatter with title/date |
+| `--clean-tables` | true | Normalize table column widths |
+| `--no-clean-tables` | - | Keep pandoc raw table output |
+| `--fix-headings` | off | Normalize heading hierarchy to start at H1 |
+| `--wrap N` | 0 | Wrap lines at N characters (0 = no wrap) |
+| `--strip-comments` | off | Remove Word comment annotations |
+| `--debug` | off | Keep intermediate pandoc output |
+
+---
 
 ## Post-Processing Pipeline
 
-1. pandoc converts .docx to raw Markdown
-2. Pandoc quirks cleaned (escaped brackets, attributes, etc.)
-3. Word comments stripped (optional)
-4. Heading hierarchy normalized (optional)
-5. Table formatting cleaned
-6. Images extracted to `images/` folder
-7. YAML frontmatter generated (optional)
+The conversion follows a multi-stage cleanup:
+
+```
+.docx → pandoc → raw MD → cleanup → clean MD
+                            ↓
+                    1. Escaped brackets removed
+                    2. Trailing backslashes removed
+                    3. Span classes stripped
+                    4. Image attributes cleaned
+                    5. Comments stripped (optional)
+                    6. Headings normalized (optional)
+                    7. Tables reformatted
+                    8. Images extracted
+                    9. Frontmatter added (optional)
+```
+
+---
+
+## Pandoc Cleanup Details
+
+| Pandoc Quirk | Before | After |
+|--------------|--------|-------|
+| Escaped brackets | `\[text\]` | `[text]` |
+| Trailing backslashes | `line\` | `line` |
+| Span classes | `{.underline}` | (removed) |
+| Image attributes | `{width="5in"}` | (removed) |
+| Heading anchors | `{#section-1}` | (removed) |
+| Excessive blank lines | `\n\n\n\n` | `\n\n` |
+
+---
+
+## Image Extraction
+
+Embedded images are extracted to a sibling `images/` folder:
+
+```
+input/
+├── document.docx
+└── document.md (output)
+    └── images/
+        ├── image1.png
+        ├── image2.png
+        └── image3.jpg
+```
+
+Image references in markdown are updated automatically:
+
+```markdown
+![](images/image1.png)
+```
+
+---
+
+## Common Workflows
+
+### Stakeholder Document Ingestion
+
+```bash
+# Convert with full cleanup
+node .github/muscles/docx-to-md.cjs stakeholder-spec.docx \
+  --add-frontmatter --fix-headings --strip-comments
+
+# Validate output
+node .github/muscles/markdown-lint.cjs stakeholder-spec.md
+
+# Review and commit
+git add stakeholder-spec.md images/
+git commit -m "docs: ingest stakeholder specification"
+```
+
+### Legacy Documentation Migration
+
+```bash
+# Batch convert all Word docs
+Get-ChildItem *.docx | ForEach-Object {
+  node .github/muscles/docx-to-md.cjs $_.FullName --add-frontmatter --fix-headings
+}
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| "pandoc not found" | pandoc not installed | `winget install pandoc` |
+| Images missing | Extraction failed | Check images/ folder, re-run |
+| Tables misaligned | Complex table structure | Manual cleanup may be needed |
+| Headings start at H3 | Original doc structure | Use `--fix-headings` |
+| Comments in output | Track changes not stripped | Use `--strip-comments` |
+| Encoding issues | Non-UTF8 content | Re-save .docx as UTF-8 |
+
+---
+
+## Limitations
+
+- **Track changes**: Accept or reject all changes in Word before converting
+- **Embedded objects**: Charts, SmartArt, etc. must be extracted manually
+- **Complex tables**: Merged cells may not convert cleanly
+- **Styles**: Word styles are lost (only structural elements preserved)
+- **Headers/footers**: Not extracted (document body only)
+
+---
 
 ## Requirements
 
 - Node.js 18+
 - pandoc (`winget install pandoc`)
 
+---
+
 ## Muscle Script
 
-`.github/muscles/docx-to-md.cjs`
+`.github/muscles/docx-to-md.cjs` (v1.0.0)
+
+---
 
 ## Related Skills
 
-- **md-to-word** -- Reverse direction (Markdown to Word)
-- **lint-clean-markdown** -- Post-validate converted Markdown
-- **md-scaffold** -- Template for structuring imported content
+- **md-to-word** — Reverse direction (Markdown to Word)
+- **lint-clean-markdown** — Post-validate converted Markdown
+- **md-scaffold** — Template for structuring imported content
+- **md-to-html** — Convert result to HTML for web
+- **md-to-eml** — Convert result to email
+
+---
+
+*Skill version: 2.0.0 | Last updated: 2026-04-14 | Category: document-conversion*
+
+The conversion follows a multi-stage cleanup:
+
+```
+.docx → pandoc → raw MD → cleanup → clean MD
+                            ↓
+                    1. Escaped brackets removed
+                    2. Trailing backslashes removed
+                    3. Span classes stripped
+                    4. Image attributes cleaned
+                    5. Comments stripped (optional)
+                    6. Headings normalized (optional)
+                    7. Tables reformatted
+                    8. Images extracted
+                    9. Frontmatter added (optional)
+```
+
+---
+
+## Pandoc Cleanup Details
+
+| Pandoc Quirk | Before | After |
+|--------------|--------|-------|
+| Escaped brackets | `\[text\]` | `[text]` |
+| Trailing backslashes | `line\` | `line` |
+| Span classes | `{.underline}` | (removed) |
+| Image attributes | `{width="5in"}` | (removed) |
+| Heading anchors | `{#section-1}` | (removed) |
+| Excessive blank lines | `\n\n\n\n` | `\n\n` |
+
+---
+
+## Image Extraction
+
+Embedded images are extracted to a sibling `images/` folder:
+
+```
+input/
+├── document.docx
+└── document.md (output)
+    └── images/
+        ├── image1.png
+        ├── image2.png
+        └── image3.jpg
+```
+
+Image references in markdown are updated automatically:
+
+```markdown
+![](images/image1.png)
+```
+
+---
+
+## Common Workflows
+
+### Stakeholder Document Ingestion
+
+```bash
+# Convert with full cleanup
+node .github/muscles/docx-to-md.cjs stakeholder-spec.docx \
+  --add-frontmatter --fix-headings --strip-comments
+
+# Validate output
+node .github/muscles/markdown-lint.cjs stakeholder-spec.md
+
+# Review and commit
+git add stakeholder-spec.md images/
+git commit -m "docs: ingest stakeholder specification"
+```
+
+### Legacy Documentation Migration
+
+```bash
+# Batch convert all Word docs
+Get-ChildItem *.docx | ForEach-Object {
+  node .github/muscles/docx-to-md.cjs $_.FullName --add-frontmatter --fix-headings
+}
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| "pandoc not found" | pandoc not installed | `winget install pandoc` |
+| Images missing | Extraction failed | Check images/ folder, re-run |
+| Tables misaligned | Complex table structure | Manual cleanup may be needed |
+| Headings start at H3 | Original doc structure | Use `--fix-headings` |
+| Comments in output | Track changes not stripped | Use `--strip-comments` |
+| Encoding issues | Non-UTF8 content | Re-save .docx as UTF-8 |
+
+---
+
+## Limitations
+
+- **Track changes**: Accept or reject all changes in Word before converting
+- **Embedded objects**: Charts, SmartArt, etc. must be extracted manually
+- **Complex tables**: Merged cells may not convert cleanly
+- **Styles**: Word styles are lost (only structural elements preserved)
+- **Headers/footers**: Not extracted (document body only)
+
+---
+
+## Requirements
+
+- Node.js 18+
+- pandoc (`winget install pandoc`)
+
+---
+
+## Muscle Script
+
+`.github/muscles/docx-to-md.cjs` (v1.0.0)
+
+---
+
+## Related Skills
+
+- **md-to-word** — Reverse direction (Markdown to Word)
+- **lint-clean-markdown** — Post-validate converted Markdown
+- **md-scaffold** — Template for structuring imported content
+- **md-to-html** — Convert result to HTML for web
+- **md-to-eml** — Convert result to email
+
+---
+
+*Skill version: 2.0.0 | Last updated: 2026-04-14 | Category: document-conversion*

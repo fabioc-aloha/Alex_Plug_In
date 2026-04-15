@@ -338,6 +338,173 @@ Pseudocode muscles document *what* to do without implementing *how*. Alex follow
 4. **Pseudocode fallback**: If it can't be cross-platform, document the steps
 5. **Intellectual exception**: Analysis skills don't need muscles
 
+### 5.3 Muscle Quality Model
+
+Unlike skills which are discovered via frontmatter, muscles are **execution artifacts** discovered by scanning `.github/muscles/`. They have their own quality model independent of the trifecta system.
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#dbe9f6"}}}%%
+flowchart TB
+    subgraph GATE["Gate (Required)"]
+        ERR["err: Error Handling"]
+    end
+    
+    subgraph QUALITY["Quality"]
+        COMMENTS["comments: Documentation"]
+        BOUNDS["bounds: Size"]
+        COMPAT["compat: Cross-Platform"]
+    end
+    
+    subgraph INFO["Informational"]
+        INH["inh: Inheritance"]
+        REVIEW["reviewDate: Last Review"]
+    end
+    
+    ERR --> COMMENTS
+    ERR --> BOUNDS
+    ERR --> COMPAT
+    
+    style GATE fill:#fff3e0,stroke:#ef6c00
+    style QUALITY fill:#e3f2fd,stroke:#1565c0
+    style INFO fill:#f5f5f5,stroke:#9e9e9e
+```
+
+### 5.4 Muscle Scoring Dimensions
+
+| Dimension | Measures | Pass Criteria | Rationale |
+|-----------|----------|---------------|----------|
+| **comments** | Documentation | Header block + ≥5 inline comments | Well-documented code is maintainable |
+| **err** | Resilience | try/catch, .catch(), $ErrorActionPreference | Scripts without error handling are fragile |
+| **bounds** | Size | 50–1000 lines | <50 is stub; >1000 needs splitting |
+| **compat** | Portability | path.join/Join-Path, no hardcoded separators | Cross-platform compatibility |
+
+#### Design Rationale
+
+**Why is `err` the gate?**
+
+Muscles execute real-world operations — file writes, API calls, process spawning. A muscle without error handling will fail silently or crash ungracefully. Error handling is non-negotiable for production scripts.
+
+**Why track comments instead of external documentation?**
+
+README documentation drifts from code. Inline comments stay with the code they describe. A well-commented muscle is self-documenting and maintainable without consulting external files.
+
+**Why require cross-platform compatibility?**
+
+Alex runs on Windows, macOS, and Linux. Hardcoded path separators (`\` or `/`) break on other platforms. Using `path.join()` (Node.js) or `Join-Path` (PowerShell) ensures scripts work everywhere.
+
+### 5.5 Muscle Pass Criteria
+
+**Pass**: `err=1` (gate) AND score ≥3/4
+
+A muscle passes if it has error handling AND at least 3 of 4 quality dimensions.
+
+| Score | Status | Action |
+|:-----:|--------|--------|
+| 4/4 | Perfect | No action needed |
+| 3/4 | Passing | Acceptable; improve when convenient |
+| 2/4 | Failing | Fix before relying on in production |
+| 1/4 | Critical | Needs immediate attention |
+| 0/4 | Broken | Should not exist in this state |
+
+### 5.6 Informational Columns
+
+These columns track metadata but don't affect pass/fail:
+
+| Column | Values | Purpose |
+|--------|--------|--------|
+| **inh** | 0 (inheritable), 1 (master-only) | Tracks which muscles sync to heir projects |
+| **reviewDate** | YYYY-MM-DD or — | Last code review date; add `@reviewed: YYYY-MM-DD` comment |
+
+### 5.7 Muscle Discovery
+
+Muscles are NOT discovered by Copilot's semantic search. They are:
+
+1. **Linked by naming convention**: `md-to-word` skill → looks for `md-to-word.cjs`
+2. **Referenced in procedures**: Instructions say "Run `brain-qa.cjs`"
+3. **Orphan-capable**: Muscles can exist without a matching skill (e.g., `sync-architecture.cjs`)
+
+| Discovery Type | Example | Use Case |
+|----------------|---------|----------|
+| **Linked** | `md-to-word.cjs` ↔ `md-to-word` skill | Agentic skill automation |
+| **Referenced** | instruction says "run brain-qa.cjs" | Procedure automation |
+| **Orphan** | `sync-architecture.cjs` | Build/tooling scripts |
+
+### 5.8 Standard Muscle Header
+
+Muscles SHOULD use a standard header format for discoverability and metadata extraction. This enables:
+- Auto-discovery of muscle→skill linkage
+- Rich muscle metadata in the health grid  
+- Skills to scaffold new muscles with proper headers
+
+#### Header Format
+
+```javascript
+#!/usr/bin/env node
+/**
+ * @muscle muscle-name
+ * @description What this muscle does (one line)
+ * @version 1.0.0
+ * @skill linked-skill-name
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires pandoc, mermaid-cli
+ *
+ * Extended description and usage examples...
+ */
+```
+
+#### Metadata Tags
+
+| Tag | Required | Purpose | Example |
+|-----|:--------:|---------|---------|
+| `@muscle` | ✓ | Canonical muscle name | `md-to-word` |
+| `@description` | ✓ | What it does (for search/display) | `Convert Markdown to Word documents` |
+| `@version` | | Semantic version | `5.3.0` |
+| `@skill` | | Linked skill name for trifecta binding | `md-to-word` |
+| `@reviewed` | ✓ | Code review date (YYYY-MM-DD) | `2026-04-15` |
+| `@platform` | ✓ | Supported platforms (comma-separated) | `windows,macos,linux` |
+| `@requires` | ✓ | External dependencies (or `node` if none) | `pandoc, mermaid-cli` |
+
+#### Design Rationale
+
+**Why require `@muscle`, `@description`, `@reviewed`, `@platform`, and `@requires`?**
+
+Five tags are required for a complete, production-ready muscle:
+
+| Tag | Rationale |
+|-----|-----------|
+| `@muscle` | Canonical name independent of filename (supports renames) |
+| `@description` | Enables search and display in UIs without parsing full file |
+| `@reviewed` | Code ownership accountability; staleness detection |
+| `@platform` | Explicit platform support prevents "works on my machine" failures |
+| `@requires` | Pre-execution dependency checks; setup guidance (use `node` if no external deps) |
+
+**Why is `@skill` optional?**
+
+Some muscles are orphans — utility scripts that don't belong to any skill (e.g., `sync-architecture.cjs`). Requiring `@skill` would force artificial linkages.
+
+**Why is `@version` optional?**
+
+Version is useful but not essential for muscle function. Many utility scripts don't follow semver.
+
+#### PowerShell Equivalent
+
+```powershell
+<#
+.SYNOPSIS
+    @muscle release-preflight
+    @description Pre-release quality checks for VS Code extension
+    @version 1.2.0
+    @skill release-process
+    @reviewed 2026-04-15
+    @platform windows
+    @requires PowerShell 5.1+
+
+.DESCRIPTION
+    Extended description...
+#>
+```
+
 ---
 
 ## 6. Skill Evolution
@@ -403,6 +570,7 @@ This architecture contributes beyond prior art:
 | **Measurable quality** | Automated scoring via brain-qa.cjs |
 | **Trifecta convention** | Name-based alignment without manifests |
 | **Muscle philosophy** | Script vs. pseudocode distinction |
+| **Muscle quality model** | 4-dimension scoring (comments, err, bounds, compat) with gate |
 | **Tier system** | Pass thresholds by skill importance |
 
 ---
@@ -420,7 +588,7 @@ This architecture contributes beyond prior art:
 ### 8.2 Open Questions
 
 1. **Should prompts be required for trifecta completion?** Currently optional, but most complete skills have them.
-2. **Should muscles have their own quality scoring?** Currently binary (exists/doesn't); could measure test coverage, error handling.
+2. ~~**Should muscles have their own quality scoring?**~~ **Resolved**: Muscles now have a 4-dimension quality model (comments, err, bounds, compat) with `err` as a gate. See Section 5.3-5.6.
 3. **Should tier assignment be automatic?** Currently manual; could be inferred from usage patterns.
 
 ---
@@ -448,6 +616,8 @@ This architecture contributes beyond prior art:
 
 ### Pass Criteria Summary
 
+**Skills** (by tier):
+
 | Tier | Min Score | Gate |
 |------|:---------:|------|
 | core | 5/5 | fm=1 |
@@ -455,12 +625,22 @@ This architecture contributes beyond prior art:
 | extended | 3/5 | fm=1 |
 | specialist | 2/5 | fm=1 |
 
+**Muscles**:
+
+| Requirement | Criteria |
+|-------------|----------|
+| Gate | err=1 (error handling required) |
+| Pass | score ≥3/4 |
+| Dimensions | comments, err, bounds, compat |
+
 ---
 
 ## 10. Revision History
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 2.2 | April 2026 | Standard muscle header format (5.8); metadata tag specification |
+| 2.1 | April 2026 | Muscle quality model added (5.3-5.7); 4-dimension scoring |
 | 2.0 | April 2026 | Formal architecture document; design rationale added |
 | 1.5 | March 2026 | Unified frontmatter model; application field added |
 | 1.0 | February 2026 | Initial specification |

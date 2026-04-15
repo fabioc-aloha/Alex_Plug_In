@@ -59,6 +59,35 @@ Regulation: Volume C.F.R. § Section (Year)
 | Non-compete > 2 years | Enforceability risk | Reduce duration |
 | Unilateral amendment rights | Loss of control | Require mutual consent |
 
+### Contract Review Tracker
+
+```json
+{
+  "contract": "SaaS Agreement v2.1",
+  "counterparty": "Vendor Inc.",
+  "effective_date": "2026-05-01",
+  "review_status": "in_progress",
+  "issues": [
+    {
+      "section": "7.2",
+      "clause": "Limitation of Liability",
+      "finding": "Cap excludes gross negligence carve-out",
+      "severity": "high",
+      "recommendation": "Add carve-out for gross negligence and willful misconduct",
+      "resolved": false
+    },
+    {
+      "section": "12.1",
+      "clause": "Auto-renewal",
+      "finding": "30-day notice period too short",
+      "severity": "medium",
+      "recommendation": "Negotiate to 90 days",
+      "resolved": true
+    }
+  ]
+}
+```
+
 ## Regulatory Compliance Frameworks
 
 ### Cross-Industry

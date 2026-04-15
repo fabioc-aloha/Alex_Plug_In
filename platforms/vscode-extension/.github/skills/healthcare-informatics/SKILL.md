@@ -59,6 +59,38 @@ PHI is any individually identifiable health information. The 18 HIPAA identifier
 | Audit trail | All access to electronic PHI must be logged |
 | Encryption safe harbor | Encrypted data breach = not a reportable breach |
 
+### FHIR Patient Resource Example
+
+```json
+{
+  "resourceType": "Patient",
+  "id": "example",
+  "identifier": [
+    {
+      "system": "http://hospital.org/mrn",
+      "value": "12345"
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "family": "Doe",
+      "given": ["John"]
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1968-03-07",
+  "address": [
+    {
+      "use": "home",
+      "city": "Charlotte",
+      "state": "NC",
+      "postalCode": "28278"
+    }
+  ]
+}
+```
+
 ## Clinical Terminology Standards
 
 ### Key Coding Systems

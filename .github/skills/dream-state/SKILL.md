@@ -82,6 +82,45 @@ Deprecated-to-current file resolution for automatic repair:
 - "Are my synapses healthy?"
 - "Dream — validate connections"
 
+## Synapse Format
+
+Synapses are embedded YAML blocks linking memory files:
+
+```yaml
+---
+synapses:
+  - target: "skills/research-first-development/SKILL.md"
+    relation: "applies-to"
+    strength: 0.9
+  - target: "instructions/debugging-patterns.instructions.md"
+    relation: "extends"
+    strength: 0.7
+---
+```
+
+Valid relations: `applies-to`, `extends`, `requires`, `contradicts`, `supersedes`
+
+## Dream Report Template
+
+```markdown
+# Dream Report — 2026-04-14
+
+## Summary
+- **Files Scanned**: 168
+- **Synapses Validated**: 412
+- **Broken Connections**: 0
+- **Auto-Repaired**: 2
+- **Status**: HEALTHY ✓
+
+## Repairs Applied
+| File | Broken Target | Repaired To |
+|------|---------------|-------------|
+| skills/api-design/SKILL.md | old-path.md | new-path.md |
+
+## Recommendations
+None — architecture is healthy.
+```
+
 ## Input Expectations
 
 - No input required (zero-configuration)

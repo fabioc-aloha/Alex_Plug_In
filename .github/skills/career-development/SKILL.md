@@ -129,6 +129,23 @@ Track every application with:
 - Follow-up dates
 - Notes from each interaction
 
+```json
+{
+  "applications": [
+    {
+      "company": "Acme Corp",
+      "role": "Senior Engineer",
+      "applied": "2026-04-01",
+      "source": "referral",
+      "contact": "Jane Smith (jane@acme.com)",
+      "stage": "phone-screen",
+      "followUp": "2026-04-08",
+      "notes": "Strong culture fit, team uses similar stack"
+    }
+  ]
+}
+```
+
 ### Networking Without Being Awkward
 
 - **Give before you ask**: Share an article, make an introduction, congratulate achievements

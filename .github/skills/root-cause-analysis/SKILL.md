@@ -57,6 +57,41 @@ When you don't know where the bug is, halve the search space:
 3. Each step: does the bug exist? Yes → go earlier. No → go later.
 4. Result: the exact commit that introduced the bug.
 
+```bash
+# Binary search with git bisect
+git bisect start
+git bisect bad HEAD          # Current commit is broken
+git bisect good v2.3.0       # This tag was working
+
+# Git checks out middle commit, you test
+# Repeat: git bisect good/bad until found
+git bisect reset             # Return to HEAD when done
+```
+
+```typescript
+// Binary search debugging in code
+async function findBreakingChange(
+  commits: string[],
+  testFn: (commit: string) => Promise<boolean>
+): Promise<string | null> {
+  let left = 0;
+  let right = commits.length - 1;
+  
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+    const works = await testFn(commits[mid]);
+    
+    if (works) {
+      left = mid + 1;  // Bug introduced after this commit
+    } else {
+      right = mid;     // Bug exists at or before this commit
+    }
+  }
+  
+  return commits[left] ?? null;
+}
+```
+
 ### Timeline Reconstruction
 
 | Time | Event | Source |

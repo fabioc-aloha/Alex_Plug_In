@@ -1,5 +1,6 @@
 ---
 description: "Azure Mode: Azure development guidance with MCP tools and best practices"
+application: "When working with GitHub PRs, issues, or repository operations"
 agent: Azure
 ---
 

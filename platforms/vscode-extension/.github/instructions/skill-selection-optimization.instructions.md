@@ -1,5 +1,6 @@
 ---
 description: "Proactive skill selection and resource planning before complex task execution"
+application: "When building, auditing, or promoting cognitive architecture skills"
 ---
 
 # Skill Selection Optimization Protocol
@@ -76,7 +77,7 @@ After surveying matching skills, **filter the cognitive context** to create a fo
 
 1. **Rate loaded instructions** by relevance to the current task (High/Medium/Low/None)
 2. **Suppress irrelevant protocols**: If task is "fix a CSS bug," meditation, release-management, and brand-asset protocols are noise — mentally deprioritize them
-3. **Promote relevant context**: If task involves architecture changes, elevate alex-core, embedded-synapse, and brain-qa to primary attention
+3. **Promote relevant context**: If task involves architecture changes, elevate alex-core, cognitive-health-validation, and brain-qa to primary attention
 4. **Context budget**: Identify the top 5-7 most relevant knowledge sources — this mirrors the biological dlPFC filtering ~80% of sensory input to prevent cognitive overload
 
 **Attention Gating Heuristics**:

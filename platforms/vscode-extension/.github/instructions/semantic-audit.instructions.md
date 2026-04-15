@@ -1,5 +1,6 @@
 ---
 description: "Semantic, logic, code, and architectural consistency audit procedure — the mental layer on top of automated scripts"
+application: "When following semantic audit workflows or troubleshooting related issues"
 applyTo: "**/*audit*,**/*qa*"
 ---
 

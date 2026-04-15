@@ -762,6 +762,238 @@
                 gap: 24px;
             }
         }
+
+        /* === MUSCLES TAB === */
+
+        .muscles-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        .muscles-intro {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .muscles-intro h2 {
+            font-size: 22px;
+            color: #f0f6fc;
+            margin-bottom: 8px;
+        }
+
+        .muscles-intro p {
+            color: #8b949e;
+            font-size: 14px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .muscle-filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .muscle-filter-btn {
+            padding: 6px 14px;
+            border: 1px solid #30363d;
+            background: #21262d;
+            color: #c9d1d9;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .muscle-filter-btn:hover {
+            background: #30363d;
+            border-color: #484f58;
+        }
+
+        .muscle-filter-btn.active {
+            background: #1f6feb;
+            border-color: #1f6feb;
+            color: #fff;
+        }
+
+        .muscle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .muscle-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+
+        .muscle-card:hover {
+            border-color: #484f58;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .muscle-card.hidden {
+            display: none;
+        }
+
+        .muscle-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .muscle-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .muscle-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .muscle-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #f0f6fc;
+            font-family: 'SF Mono', 'Cascadia Code', monospace;
+            word-break: break-all;
+        }
+
+        .muscle-purpose {
+            font-size: 12px;
+            color: #8b949e;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+
+        .muscle-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .muscle-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .badge-lang-js {
+            background: rgba(247, 223, 30, 0.15);
+            color: #f7df1e;
+            border: 1px solid rgba(247, 223, 30, 0.3);
+        }
+
+        .badge-lang-ts {
+            background: rgba(49, 120, 198, 0.15);
+            color: #3178c6;
+            border: 1px solid rgba(49, 120, 198, 0.3);
+        }
+
+        .badge-lang-ps {
+            background: rgba(1, 36, 86, 0.3);
+            color: #5391fe;
+            border: 1px solid rgba(83, 145, 254, 0.3);
+        }
+
+        .badge-inheritable {
+            background: rgba(63, 185, 80, 0.15);
+            color: #3fb950;
+            border: 1px solid rgba(63, 185, 80, 0.3);
+        }
+
+        .badge-master-only {
+            background: rgba(248, 81, 73, 0.15);
+            color: #f85149;
+            border: 1px solid rgba(248, 81, 73, 0.3);
+        }
+
+        .badge-hook {
+            background: rgba(136, 87, 44, 0.3);
+            color: #f0883e;
+            border: 1px solid rgba(240, 136, 62, 0.3);
+        }
+
+        .badge-shared {
+            background: rgba(136, 46, 224, 0.15);
+            color: #bc8cff;
+            border: 1px solid rgba(188, 140, 255, 0.3);
+        }
+
+        .badge-converter {
+            background: rgba(88, 166, 255, 0.15);
+            color: #58a6ff;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        .badge-validation {
+            background: rgba(210, 168, 255, 0.15);
+            color: #d2a8ff;
+            border: 1px solid rgba(210, 168, 255, 0.3);
+        }
+
+        .muscle-quality {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #21262d;
+        }
+
+        .quality-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #8b949e;
+        }
+
+        .quality-indicator.pass {
+            color: #3fb950;
+        }
+
+        .quality-indicator.fail {
+            color: #6e7681;
+        }
+
+        .muscle-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+        }
+
+        .muscle-stat {
+            text-align: center;
+        }
+
+        .muscle-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f0f6fc;
+        }
+
+        .muscle-stat-label {
+            font-size: 11px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 
@@ -776,6 +1008,8 @@
                     class="stat-label">Skills</span></div>
             <div class="stat"><span class="stat-value" style="color:#f0883e;">85</span><span
                     class="stat-label">Procedures</span></div>
+            <div class="stat"><span class="stat-value" style="color:#bc8cff;">33</span><span
+                    class="stat-label">Muscles</span></div>
             <div class="stat"><span class="stat-value" style="color:#d2a8ff;">111</span><span
                     class="stat-label">Episodic
                     Files</span></div>
@@ -786,6 +1020,7 @@
         <button class="tab-btn active" onclick="switchTab('anatomy')">🧠 Brain Anatomy</button>
         <button class="tab-btn" onclick="switchTab('diagrams')">📊 Architecture Diagrams</button>
         <button class="tab-btn" onclick="switchTab('comparison')">🔀 Signal Comparison</button>
+        <button class="tab-btn" onclick="switchTab('muscles')">💪 Muscles</button>
     </div>
 
     <div id="tab-anatomy" class="tab-content active">
@@ -1974,6 +2209,205 @@
             </table>
         </div>
     </div><!-- end tab-comparison -->
+
+    <div id="tab-muscles" class="tab-content">
+        <div class="muscles-container">
+            <div class="muscles-intro">
+                <h2>💪 Motor Cortex — Muscle Scripts</h2>
+                <p>Muscles are execution scripts that convert cognitive decisions into real-world output. Memory files define <em>what</em> and <em>how</em>; muscles <em>do</em>.</p>
+            </div>
+
+            <div class="muscle-stats">
+                <div class="muscle-stat">
+                    <div class="muscle-stat-value" style="color:#f0883e;">33</div>
+                    <div class="muscle-stat-label">Main Muscles</div>
+                </div>
+                <div class="muscle-stat">
+                    <div class="muscle-stat-value" style="color:#bc8cff;">8</div>
+                    <div class="muscle-stat-label">Shared Modules</div>
+                </div>
+                <div class="muscle-stat">
+                    <div class="muscle-stat-value" style="color:#f0883e;">22</div>
+                    <div class="muscle-stat-label">Hook Scripts</div>
+                </div>
+                <div class="muscle-stat">
+                    <div class="muscle-stat-value" style="color:#3fb950;">24</div>
+                    <div class="muscle-stat-label">Inheritable</div>
+                </div>
+            </div>
+
+            <div class="muscle-filter-bar">
+                <button class="muscle-filter-btn active" onclick="filterMuscles('all')">All</button>
+                <button class="muscle-filter-btn" onclick="filterMuscles('converter')">📄 Converters</button>
+                <button class="muscle-filter-btn" onclick="filterMuscles('validation')">✓ Validation</button>
+                <button class="muscle-filter-btn" onclick="filterMuscles('hook')">⚡ Hooks</button>
+                <button class="muscle-filter-btn" onclick="filterMuscles('shared')">📦 Shared</button>
+                <button class="muscle-filter-btn" onclick="filterMuscles('inheritable')">🌱 Inheritable</button>
+                <button class="muscle-filter-btn" onclick="filterMuscles('master-only')">🔒 Master Only</button>
+            </div>
+
+            <div class="muscle-grid" id="muscle-grid">
+                <!-- Muscles will be populated by JavaScript -->
+            </div>
+        </div>
+    </div><!-- end tab-muscles -->
+
+    <script>
+        // Muscles data
+        const musclesData = [
+            // Main Muscles
+            { name: 'analyze-assignments.cjs', purpose: 'Delegation pattern analysis', lang: 'js', inheritance: 'inheritable', category: 'analysis', hasTests: false, hasDocs: true },
+            { name: 'audit-master-alex.cjs', purpose: '22-point pre-release audit', lang: 'js', inheritance: 'master-only', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'audit-master-alex.ps1', purpose: '22-point pre-release audit', lang: 'ps', inheritance: 'master-only', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'audit-token-waste.cjs', purpose: 'Token waste detection and auto-fix', lang: 'js', inheritance: 'inheritable', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'brain-qa.cjs', purpose: '32-phase deep validation', lang: 'js', inheritance: 'master-only', category: 'validation', hasTests: true, hasDocs: true },
+            { name: 'brain-qa.ps1', purpose: '32-phase deep validation', lang: 'ps', inheritance: 'master-only', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'brain-qa-heir.cjs', purpose: '25-phase heir validation', lang: 'js', inheritance: 'inheritable', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'brain-qa-heir.ps1', purpose: '25-phase heir validation', lang: 'ps', inheritance: 'inheritable', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'build-extension-package.ps1', purpose: 'VSIX packaging', lang: 'ps', inheritance: 'master-only', category: 'build', hasTests: false, hasDocs: true },
+            { name: 'chart-recommend.cjs', purpose: 'Story-intent chart advisor', lang: 'js', inheritance: 'inheritable', category: 'analysis', hasTests: false, hasDocs: true },
+            { name: 'converter-qa.cjs', purpose: '284-assertion converter test harness', lang: 'js', inheritance: 'master-only', category: 'validation', hasTests: true, hasDocs: true },
+            { name: 'dashboard-scaffold.cjs', purpose: 'JSON-spec to HTML dashboard', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: false, hasDocs: true },
+            { name: 'data-ingest.cjs', purpose: 'Universal data ingestion', lang: 'js', inheritance: 'inheritable', category: 'analysis', hasTests: false, hasDocs: true },
+            { name: 'data-profile.cjs', purpose: 'Statistical data profiler', lang: 'js', inheritance: 'inheritable', category: 'analysis', hasTests: false, hasDocs: true },
+            { name: 'docx-to-md.cjs', purpose: 'Word document to Markdown conversion', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: true, hasDocs: true },
+            { name: 'dream-cli.ts', purpose: 'Neural maintenance CLI', lang: 'ts', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: true },
+            { name: 'fix-fence-bug.ps1', purpose: 'Detect/fix VS Code fence bug', lang: 'ps', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: false },
+            { name: 'gamma-generator.cjs', purpose: 'Markdown to Gamma slides', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: false, hasDocs: true },
+            { name: 'install-hooks.cjs', purpose: 'Install hooks config', lang: 'js', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: true },
+            { name: 'install-hooks.ps1', purpose: 'Install hooks config', lang: 'ps', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: true },
+            { name: 'markdown-lint.cjs', purpose: '19-rule pre-conversion markdown validator', lang: 'js', inheritance: 'inheritable', category: 'validation', hasTests: true, hasDocs: true },
+            { name: 'md-scaffold.cjs', purpose: 'Markdown template scaffolder', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: false, hasDocs: true },
+            { name: 'md-to-eml.cjs', purpose: 'Markdown to RFC 5322 email (.eml)', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: true, hasDocs: true },
+            { name: 'md-to-html.cjs', purpose: 'Markdown to standalone HTML page', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: true, hasDocs: true },
+            { name: 'md-to-word.cjs', purpose: 'Markdown to Word conversion', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: true, hasDocs: true },
+            { name: 'nav-inject.cjs', purpose: 'Cross-document navigation injection', lang: 'js', inheritance: 'inheritable', category: 'converter', hasTests: false, hasDocs: true },
+            { name: 'new-skill.cjs', purpose: 'Scaffold new skill trifecta', lang: 'js', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: true },
+            { name: 'new-skill.ps1', purpose: 'Scaffold new skill trifecta', lang: 'ps', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: true },
+            { name: 'normalize-paths.ps1', purpose: 'Path consistency fixes', lang: 'ps', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: false },
+            { name: 'pptxgen-cli.ts', purpose: 'PowerPoint generation', lang: 'ts', inheritance: 'inheritable', category: 'converter', hasTests: false, hasDocs: true },
+            { name: 'session-name.cjs', purpose: 'Generate session names from context', lang: 'js', inheritance: 'inheritable', category: 'maintenance', hasTests: false, hasDocs: true },
+            { name: 'sync-architecture.cjs', purpose: 'Master to Heir sync', lang: 'js', inheritance: 'master-only', category: 'maintenance', hasTests: false, hasDocs: true },
+            { name: 'validate-skills.cjs', purpose: 'Skill file validation', lang: 'js', inheritance: 'inheritable', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'validate-skills.ps1', purpose: 'Skill file validation', lang: 'ps', inheritance: 'inheritable', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'validate-synapses.cjs', purpose: 'Synapse target validation', lang: 'js', inheritance: 'inheritable', category: 'validation', hasTests: false, hasDocs: true },
+            { name: 'validate-synapses.ps1', purpose: 'Synapse target validation', lang: 'ps', inheritance: 'inheritable', category: 'validation', hasTests: false, hasDocs: true },
+            // Shared Modules
+            { name: 'shared/index.mjs', purpose: 'ESM bridge re-exporting all CJS modules', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: false, hasDocs: true },
+            { name: 'shared/converter-config.cjs', purpose: 'Config loader with .converter.json walk-up', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: false, hasDocs: true },
+            { name: 'shared/data-uri.cjs', purpose: 'Base64 data URI encode/decode, file download', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: false, hasDocs: true },
+            { name: 'shared/markdown-preprocessor.cjs', purpose: 'LaTeX to Unicode, callouts, checkboxes, validation', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: true, hasDocs: true },
+            { name: 'shared/mermaid-pipeline.cjs', purpose: 'Mermaid render, validate, create, brand palette', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: true, hasDocs: true },
+            { name: 'shared/prompt-preprocessor.cjs', purpose: 'Replicate prompt processing, trait injection', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: false, hasDocs: true },
+            { name: 'shared/replicate-core.cjs', purpose: 'Replicate API init, batch exec, cost, model registry', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: false, hasDocs: true },
+            { name: 'shared/svg-pipeline.cjs', purpose: 'SVG creation, validation, PNG conversion', lang: 'js', inheritance: 'inheritable', category: 'shared', hasTests: false, hasDocs: true },
+            // Hooks (sample - there are 22 total)
+            { name: 'hooks/session-start.cjs', purpose: 'Context bootstrap, profile loading', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/stop.cjs', purpose: 'Cleanup, summary, final saves', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/pre-tool-use.cjs', purpose: 'Validation, safety checks', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/post-tool-use.cjs', purpose: 'Logging, outcome tracking', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/pre-compact.cjs', purpose: 'State preservation before context shrink', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/subagent-context.cjs', purpose: 'Context injection for delegation', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/subagent-stop.cjs', purpose: 'Result capture, return routing', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/auto-commit-suggest.cjs', purpose: 'Suggest git commits after file changes', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/breaking-change-detector.cjs', purpose: 'Detect breaking API/interface changes', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/builder-post-tool-use.cjs', purpose: 'Builder agent implementation tracking', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/decision-journal.cjs', purpose: 'Log architectural decisions', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/documentarian-post-tool-use.cjs', purpose: 'Documentarian agent doc sync tracking', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/output-secret-scan.cjs', purpose: 'Scan output for leaked secrets', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/prompt-safety-gate.cjs', purpose: 'Pre-response safety validation', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/rai-response-audit.cjs', purpose: 'Post-response RAI audit', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/rai-session-safety.cjs', purpose: 'Session-level RAI monitoring', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/researcher-session-start.cjs', purpose: 'Researcher agent research context setup', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/researcher-stop.cjs', purpose: 'Researcher agent findings consolidation', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/synapse-weight-update.cjs', purpose: 'Update synapse weights from usage', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/targeted-test-runner.cjs', purpose: 'Run tests related to changed files', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/validator-pre-tool-use.cjs', purpose: 'Validator agent adversarial checks', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true },
+            { name: 'hooks/validator-session-start.cjs', purpose: 'Validator agent QA context setup', lang: 'js', inheritance: 'inheritable', category: 'hook', hasTests: false, hasDocs: true }
+        ];
+
+        function renderMuscleCard(m) {
+            const langLabel = { js: 'JavaScript', ts: 'TypeScript', ps: 'PowerShell' }[m.lang];
+            const langClass = { js: 'badge-lang-js', ts: 'badge-lang-ts', ps: 'badge-lang-ps' }[m.lang];
+            const inheritClass = m.inheritance === 'inheritable' ? 'badge-inheritable' : 'badge-master-only';
+            const inheritLabel = m.inheritance === 'inheritable' ? '🌱 Inheritable' : '🔒 Master Only';
+            const categoryBadge = {
+                converter: '<span class="muscle-badge badge-converter">📄 Converter</span>',
+                validation: '<span class="muscle-badge badge-validation">✓ Validation</span>',
+                hook: '<span class="muscle-badge badge-hook">⚡ Hook</span>',
+                shared: '<span class="muscle-badge badge-shared">📦 Shared</span>',
+                analysis: '<span class="muscle-badge badge-converter">📊 Analysis</span>',
+                maintenance: '<span class="muscle-badge badge-validation">🔧 Maintenance</span>',
+                build: '<span class="muscle-badge badge-validation">📦 Build</span>'
+            }[m.category] || '';
+
+            const icon = {
+                converter: '📄',
+                validation: '✓',
+                hook: '⚡',
+                shared: '📦',
+                analysis: '📊',
+                maintenance: '🔧',
+                build: '📦'
+            }[m.category] || '💪';
+
+            return `
+                <div class="muscle-card" data-lang="${m.lang}" data-inheritance="${m.inheritance}" data-category="${m.category}">
+                    <div class="muscle-header">
+                        <div class="muscle-icon">${icon}</div>
+                        <div class="muscle-info">
+                            <div class="muscle-name">${m.name}</div>
+                            <div class="muscle-purpose">${m.purpose}</div>
+                        </div>
+                    </div>
+                    <div class="muscle-badges">
+                        <span class="muscle-badge ${langClass}">${langLabel}</span>
+                        <span class="muscle-badge ${inheritClass}">${inheritLabel}</span>
+                        ${categoryBadge}
+                    </div>
+                    <div class="muscle-quality">
+                        <div class="quality-indicator ${m.hasTests ? 'pass' : 'fail'}">
+                            ${m.hasTests ? '✓' : '○'} Tests
+                        </div>
+                        <div class="quality-indicator ${m.hasDocs ? 'pass' : 'fail'}">
+                            ${m.hasDocs ? '✓' : '○'} Docs
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderMuscleGrid() {
+            const grid = document.getElementById('muscle-grid');
+            grid.innerHTML = musclesData.map(renderMuscleCard).join('');
+        }
+
+        function filterMuscles(filter) {
+            document.querySelectorAll('.muscle-filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.muscle-card');
+            cards.forEach(card => {
+                const lang = card.dataset.lang;
+                const inheritance = card.dataset.inheritance;
+                const category = card.dataset.category;
+
+                let show = false;
+                if (filter === 'all') show = true;
+                else if (filter === 'converter') show = category === 'converter';
+                else if (filter === 'validation') show = category === 'validation';
+                else if (filter === 'hook') show = category === 'hook';
+                else if (filter === 'shared') show = category === 'shared';
+                else if (filter === 'inheritable') show = inheritance === 'inheritable';
+                else if (filter === 'master-only') show = inheritance === 'master-only';
+
+                card.classList.toggle('hidden', !show);
+            });
+        }
+
+        // Render grid on page load
+        document.addEventListener('DOMContentLoaded', renderMuscleGrid);
+    </script>
 
     <script>
         const details = {

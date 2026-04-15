@@ -1,5 +1,6 @@
 ---
 description: Systematic code review using 3-Pass methodology with confidence calibration
+application: "When requesting code reviews, PR feedback, or quality assessment"
 agent: Alex
 ---
 

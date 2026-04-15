@@ -2,8 +2,8 @@
 name: dissertation-defense
 description: Comprehensive preparation for doctoral dissertation defense including timeline management, presentation design, Q&A practice, mock sessions, and committee dynamics.
 tier: extended
-applyTo: '**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*,**/*mock*,**/*q&a*'
-inheritance: master-only
+applyTo: '**/*defense*,**/*dissertation*,**/*thesis*,**/*viva*,**/*doctoral*'
+inheritance: inheritable
 ---
 
 # Dissertation Defense Skill
@@ -220,13 +220,11 @@ Some academics may challenge practitioner research validity:
 
 **Response**: "Practitioner research embraces insider perspective as a strength, not flaw. I've been transparent about my position and used [techniques: member checking, reflexive journaling, triangulation] to ensure rigor. My proximity enabled access and insights that an outside researcher couldn't achieve."
 
-## Psychometric/Quantitative Defense Specialization
+## Quantitative Defense Considerations
 
-### AIRS-Style Scale Development Defense
+### Scale Development / Psychometric Defenses
 
-For dissertations involving scale development (like AIRS):
-
-**Key questions to prepare**:
+For dissertations involving scale or instrument development:
 
 1. **Construct Validity**
    - "How did you establish content validity?"
@@ -245,9 +243,8 @@ For dissertations involving scale development (like AIRS):
    - "Explain your model fit indices choices"
 
 4. **Theoretical Framework**
-   - "How does this extend [UTAUT2/TAM/etc.]?"
+   - "How does this extend [base theory]?"
    - "What theoretical contribution does the scale make?"
-   - "How did existing theory inform item generation?"
 
 ### Statistical Defense Talking Points
 
@@ -256,8 +253,7 @@ For dissertations involving scale development (like AIRS):
 | **CFI/TLI** | "Why is .95 acceptable?" | Know cutoff debates, cite Hu & Bentler |
 | **RMSEA** | "Your CI is wide..." | Explain sample size impact, interpret honestly |
 | **Factor loadings** | "This item loads at .42..." | Know threshold justification, discuss retention decision |
-| **R²** | "Only 85% variance explained?" | Context matters — compare to prior studies |
-| **Invariance** | "Is your scale invariant?" | Know MGCFA, explain what you tested |
+| **R²** | "Only X% variance explained?" | Compare to prior studies |
 
 ## Anxiety Management
 
@@ -308,11 +304,10 @@ For dissertations involving scale development (like AIRS):
 
 ## Related Skills
 
-- [gamma-presentations](..\gamma-presentations/SKILL.md) — AI-powered presentation generation
-- [academic-research](..\academic-research/SKILL.md) — Research methodology
-- [practitioner-research](..\practitioner-research/SKILL.md) — DBA/practitioner methodology
-- [socratic-questioning](..\socratic-questioning/SKILL.md) — Question handling techniques
-- [academic-research](..\academic-research/SKILL.md) — Writing and publication
+- [academic-research](../academic-research/SKILL.md) — Research methodology
+- [practitioner-research](../practitioner-research/SKILL.md) — DBA/practitioner methodology
+- [socratic-questioning](../socratic-questioning/SKILL.md) — Question handling techniques
+- [gamma-presentations](../gamma-presentations/SKILL.md) — AI-powered presentation generation
 
 ---
 
@@ -353,100 +348,49 @@ For dissertations involving scale development (like AIRS):
 | 13 | "The Takeaway" | One sentence synthesis |
 | 14 | Questions | — |
 
-### Template C: AIRS/Scale Development Defense
+### Template C: Scale Development Defense
 
 | Slide # | Content | Purpose |
 |---------|---------|---------|
 | 1 | Title | — |
-| 2 | The AI Adoption Challenge | Problem hook |
-| 3 | Research Questions | What drives AI readiness? |
-| 4 | Theoretical Foundation (UTAUT2) | Base model |
-| 5 | Scale Development Process | 10-phase visual |
-| 6 | Sample & Demographics | N=523, characteristics |
-| 7 | EFA Results | Factor structure emergence |
-| 8 | CFA Results | Model fit, factor loadings |
-| 9 | SEM: The Full Model | Paths with β coefficients |
-| 10 | Key Finding: Price Value Dominance | β=.505 headline |
-| 11 | Invariance Testing | Generalizability evidence |
-| 12 | Theoretical Contributions | UTAUT2 extension |
-| 13 | Practical Contributions | AIRS instrument |
-| 14 | Limitations & Future Research | Honest assessment |
-| 15 | Conclusion | Instrument as diagnostic tool |
-| 16 | Questions / Try Instrument | Assessment link |
+| 2 | Problem Statement | Why this scale is needed |
+| 3 | Research Questions | What the scale measures |
+| 4 | Theoretical Foundation | Base model/theory |
+| 5 | Scale Development Process | Multi-phase visual |
+| 6 | Sample & Demographics | N, characteristics |
+| 7-8 | Factor Analysis Results | EFA/CFA structure |
+| 9 | Full Model with Results | Paths with coefficients |
+| 10 | Key Findings | Headline results |
+| 11 | Contributions | Theory + practice |
+| 12 | Limitations & Future | Honest assessment |
+| 13 | Questions | — |
 
 ---
 
-## Universal Q&A Question Bank
+## Key Q&A Questions
 
-### Opening Questions (Warm-Up)
+### Must-Prepare Questions
 
-| # | Question | Purpose | Prep Level |
-|---|----------|---------|------------|
-| 1 | "Please summarize your research in 3-5 minutes." | Assess communication | Must nail |
-| 2 | "What motivated this research?" | Check authenticity | Must nail |
-| 3 | "What is your primary contribution?" | Clarity of contribution | Must nail |
-| 4 | "Walk us through your research journey." | Narrative ability | Should practice |
-| 5 | "What surprised you most in this research?" | Reflection | Should practice |
+| Question | Purpose |
+|----------|---------|
+| "Summarize your research in 3-5 minutes." | Communication |
+| "What motivated this research?" | Authenticity |
+| "What is your primary contribution?" | Clarity |
+| "What surprised you most?" | Reflection |
 
-### Theoretical Framework Questions
+### STAR-D Framework for Defense Answers
 
-| # | Question | What They're Probing | Response Strategy |
-|---|----------|---------------------|-------------------|
-| 1 | "Why did you choose [framework] over alternatives?" | Deliberate choice | Name 2-3 alternatives, explain fit |
-| 2 | "How does your work extend [framework]?" | Novel contribution | Be specific about extension |
-| 3 | "What are the limitations of [framework]?" | Critical awareness | Acknowledge, explain mitigation |
-| 4 | "How does [other theory] relate to your findings?" | Breadth of knowledge | Connect or honestly acknowledge gap |
+| Element | Purpose |
+|---------|---------|
+| **S**ituation | Set context |
+| **T**ask | What was the challenge |
+| **A**ction | What you did |
+| **R**esult | What you found |
+| **D**iscussion | Interpret/connect |
 
-### Methodology Questions
+### Acknowledge-Bridge-Commit (ABC) Framework
 
-| # | Question | What They're Probing | Response Strategy |
-|---|----------|---------------------|-------------------|
-| 1 | "Justify your research design." | Deliberate methodology | Align design with RQs |
-| 2 | "Why [qualitative/quantitative/mixed]?" | Paradigm awareness | Explain epistemological fit |
-| 3 | "How did you ensure validity/reliability?" | Rigor | Name specific techniques |
-| 4 | "What's your sample size rationale?" | Power/saturation | Cite power analysis or saturation |
-| 5 | "How did you handle [bias/reflexivity/ethics]?" | Integrity | Describe specific steps |
-| 6 | "What would you do differently?" | Learning | Honest reflection, future direction |
-
-### Curveball Questions
-
-| # | Question | What They're Probing | Response Strategy |
-|---|----------|---------------------|-------------------|
-| 1 | "I disagree with your premise..." | Composure | Stay calm, engage with evidence |
-| 2 | "Have you considered [obscure theory]?" | Humility | Connect if possible, admit gap if not |
-| 3 | "This seems like common sense..." | Defense | Articulate empirical contribution |
-| 4 | "Isn't this just [simple thing]?" | Depth | Reveal complexity beneath surface |
-
----
-
-## Response Frameworks
-
-### The STAR-D Framework for Defense Answers
-
-| Element | Purpose | Example |
-|---------|---------|---------|
-| **S**ituation | Set context | "In the context of enterprise AI adoption..." |
-| **T**ask | What was the challenge | "I needed to understand what drives readiness..." |
-| **A**ction | What you did | "I developed a 16-item scale using..." |
-| **R**esult | What you found | "The analysis revealed that Price Value..." |
-| **D**iscussion | Interpret/connect | "This challenges 30 years of UTAUT research because..." |
-
-### The Acknowledge-Bridge-Commit (ABC) Framework
-
-For challenging or hostile questions:
-
-| Step | Purpose | Example |
-|------|---------|---------|
-| **A**cknowledge | Show you heard | "That's an important concern..." |
-| **B**ridge | Connect to your evidence | "My data suggests..." |
-| **C**ommit | Stand your ground | "Based on this, I maintain that..." |
-
-### The Limitation Sandwich
-
-1. **Acknowledge** the limitation honestly
-2. **Contextualize** its impact (scope, not invalidate)
-3. **Mitigate** with what you did to address it
-4. **Future** direction to fully address it
+For challenging questions: **A**cknowledge the concern, **B**ridge to your evidence, **C**ommit to your position.
 
 ---
 

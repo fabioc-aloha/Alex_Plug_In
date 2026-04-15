@@ -1,7 +1,13 @@
 /**
- * md-to-word.cjs v5.3.0 - Convert Markdown to production-quality Word documents
+ * @muscle md-to-word
+ * @description Convert Markdown to production-quality Word documents
+ * @version 5.3.0
+ * @skill md-to-word
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires pandoc, mermaid-cli, svgexport (optional)
  *
- * Produces professional, visually complete Word output on the first run.
+ * md-to-word.cjs - Produces professional, visually complete Word output on the first run.
  * Harvests proven fixes from AlexBooks, VT_AIPOWERBI, AlexVideos,
  * FishbowlGovernance, and AIRS_Data_Analysis projects.
  *
@@ -32,12 +38,6 @@
  *   node md-to-word.cjs thesis.md --page-size a4 --style academic --debug
  *   node md-to-word.cjs report.md --reference-doc corporate-template.docx
  *   node md-to-word.cjs draft.md --watch
- *
- * Requirements:
- *   - pandoc  (Windows: winget install pandoc | macOS: brew install pandoc | Linux: apt install pandoc)
- *   - mermaid-cli (npm install -g @mermaid-js/mermaid-cli)
- *   - jszip   (npm dependency -- resolved from extension node_modules)
- *   - svgexport (npm install -g svgexport) [optional, for SVG banners]
  */
 
 const fs = require('fs');

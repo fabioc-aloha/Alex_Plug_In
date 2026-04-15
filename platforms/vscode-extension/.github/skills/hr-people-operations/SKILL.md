@@ -58,6 +58,38 @@ People operations exists to build and sustain a high-performing, engaged workfor
 6. **Compensation Review** — Merit increases, promotions, equity adjustments
 
 ### Performance Improvement Plan (PIP)
+
+### Job Requisition Template
+
+```yaml
+requisition_id: "REQ-2026-0142"
+title: "Senior Software Engineer"
+department: "Engineering"
+hiring_manager: "Jane Smith"
+level: "L5"
+compensation:
+  salary_min: 145000
+  salary_max: 185000
+  equity: "Standard L5 band"
+  bonus_target: "10%"
+requirements:
+  must_have:
+    - "5+ years software engineering experience"
+    - "Strong TypeScript/React proficiency"
+  nice_to_have:
+    - "Azure cloud experience"
+    - "Team lead experience"
+interview_process:
+  - stage: "Recruiter screen"
+    duration: 30
+  - stage: "Hiring manager call"
+    duration: 45
+  - stage: "Technical panel"
+    duration: 180
+  - stage: "Executive chat"
+    duration: 30
+target_start_date: "2026-07-01"
+```
 | Element | Detail |
 |---------|--------|
 | Specific deficiencies | Measurable, observable behaviors |
