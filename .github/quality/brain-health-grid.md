@@ -91,7 +91,6 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [project-scaffolding](../skills/project-scaffolding/SKILL.md) | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
 | [sales-enablement](../skills/sales-enablement/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
 | [skill-building](../skills/skill-building/SKILL.md) | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [skill-catalog-generator](../skills/skill-catalog-generator/SKILL.md) | exte | 217 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
 | [ui-ux-design](../skills/ui-ux-design/SKILL.md) | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
 | [agent-debug-panel](../skills/agent-debug-panel/SKILL.md) | stan | 138 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
 | [ai-agent-design](../skills/ai-agent-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
@@ -227,16 +226,16 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [md-to-html](../skills/md-to-html/SKILL.md) | stan | 202 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
 | [md-to-word](../skills/md-to-word/SKILL.md) | stan | 408 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
 
-**Summary**: 166 skills | Passing: 166 | Failing: 0 | Perfect: 130
+**Summary**: 165 skills | Passing: 165 | Failing: 0 | Perfect: 130
 
-**Skill Types**: Agentic(A): 8 | Intellectual(I): 133 | Incomplete(-): 25
+**Skill Types**: Agentic(A): 8 | Intellectual(I): 133 | Incomplete(-): 24
 
-**Semantic Review**: 166/166 reviewed | 0 pending
+**Semantic Review**: 165/165 reviewed | 0 pending
 
 **Defects by dimension (informational)**:
 | fm | code | bounds | tri | muscle |
 |:--:|:----:|:------:|:---:|:------:|
-| 0 | 21 | 11 | 25 | 157 |
+| 0 | 21 | 11 | 24 | 156 |
 
 ## Agents
 
@@ -619,9 +618,9 @@ Muscles SHOULD use the standard header format for discoverability:
 
 | Category | Count |
 |----------|------:|
-| Skills | 166 |
+| Skills | 165 |
 | Agents | 12 |
 | Instructions | 128 |
 | Prompts | 71 |
 | Muscles | 37 |
-| **Total** | **414** |
+| **Total** | **413** |
