@@ -8,9 +8,8 @@
  * 
  * Dimensions (0 = defect, 1 = good):
  *   fm     - Frontmatter (applyTo, description) makes it visible to the brain
- *   struct - Has Troubleshooting AND Activation sections (structure merit)
  *   code   - Has ≥1 fenced code block with language tag (code merit)
- *   bounds - Within line bounds (skills: 50-500, agents: 50-400)
+ *   bounds - Within line bounds (skills: 100-500, agents: 50-400)
  *   tri    - Trifecta complete (if workflow skill, has .instructions.md)
  *   muscle - Has automation component (script or pseudocode.md)
  *   inh    - Inheritance (1 = master-only, 0 = synced to heirs) [informational]
@@ -18,7 +17,7 @@
  * 
  * Quality Philosophy:
  *   fm      → Visibility to the brain (discoverable via applyTo/description)
- *   struct, code, bounds → Memory has structural merit
+ *   code, bounds → Memory has structural merit
  *   tri + muscle → Goal for ANY skill (trifecta alignment + automation)
  * 
  * Skill Types:
@@ -46,10 +45,10 @@
  * Copilot's semantic search + applyTo patterns replace static connection graphs.
  * 
  * Tier-based pass thresholds (good is good enough):
- *   core      - 6/6 required (must be perfect)
- *   standard  - 5/6 required (one defect allowed)
- *   extended  - 4/6 required (two defects allowed)
- *   specialist- 3/6 required (three defects allowed)
+ *   core      - 5/5 required (must be perfect)
+ *   standard  - 4/5 required (one defect allowed)
+ *   extended  - 3/5 required (two defects allowed)
+ *   specialist- 2/5 required (three defects allowed)
  * 
  * Usage:
  *   node brain-qa.cjs              # Generate grid to .github/quality/
@@ -82,7 +81,7 @@ function readExistingSemValues() {
   const semValues = { skills: {}, instructions: {} };
 
   // Parse Skills table: | skill-name | ... | sem |
-  // Table format: | name | tier | lines | fm | struct | code | bounds | tri | muscle | Type | Score | Pass | sem |
+  // Table format: | name | tier | lines | fm | code | bounds | tri | muscle | Type | Score | Pass | sem |
   const skillsSection = content.match(/## Skills[\s\S]*?(?=## Agents|## Instructions|$)/);
   if (skillsSection) {
     const skillRows = skillsSection[0].matchAll(/^\| ([\w-]+) \| \w+ \| \d+ \|.*\| (\d) \|$/gm);
@@ -141,12 +140,12 @@ const STALE_PRONE = new Set([
 
 // --- Tier-based pass thresholds ---
 // "Good is good enough" - higher tiers require higher quality
-// Max score is 6 (fm, struct, code, bounds, tri, muscle)
+// Max score is 5 (fm, code, bounds, tri, muscle)
 const TIER_THRESHOLDS = {
-  core: 6,       // Must be perfect
-  standard: 5,   // One defect allowed
-  extended: 4,   // Two defects allowed
-  specialist: 3, // Three defects allowed
+  core: 5,       // Must be perfect
+  standard: 4,   // One defect allowed
+  extended: 3,   // Two defects allowed
+  specialist: 2, // Three defects allowed
 };
 const DEFAULT_TIER = 'standard';
 
@@ -215,11 +214,6 @@ function scanSkills() {
     const tierMatch = content.match(/^tier:\s*(\w+)/m);
     const tier = tierMatch ? tierMatch[1].toLowerCase() : DEFAULT_TIER;
 
-    // Check structure (both troubleshooting AND activation)
-    const hasTroubleshoot = /(?:^|\n)##?\s*troubleshoot/i.test(content);
-    const hasActivation = /(?:^|\n)##?\s*activation/i.test(content);
-    const structComplete = hasTroubleshoot && hasActivation;
-
     // Check code blocks
     const hasCode = /```\w+/.test(content);
 
@@ -242,11 +236,10 @@ function scanSkills() {
     const isStaleProne = STALE_PRONE.has(name);
 
     // Quality flags (0 = defect, 1 = good)
-    // Scored: fm, struct, code, bounds, tri, muscle (max 6)
+    // Scored: fm, code, bounds, tri, muscle (max 5)
     // Informational: inh, stale
     const flags = {
       fm: fmComplete ? 1 : 0,
-      struct: structComplete ? 1 : 0,
       code: hasCode ? 1 : 0,
       bounds: withinBounds ? 1 : 0,
       tri: triComplete ? 1 : 0,
@@ -255,8 +248,8 @@ function scanSkills() {
       stale: isStaleProne ? 1 : 0, // 1 = needs regular review, 0 = stable
     };
 
-    // Score: sum of scored flags (max 6)
-    const score = flags.fm + flags.struct + flags.code + flags.bounds + flags.tri + flags.muscle;
+    // Score: sum of scored flags (max 5)
+    const score = flags.fm + flags.code + flags.bounds + flags.tri + flags.muscle;
 
     // Tier-based pass/fail - fm is a GATE (broken without frontmatter)
     const threshold = getPassThreshold(tier);
@@ -273,7 +266,7 @@ function scanSkills() {
 }
 
 // Line bounds: minimum to justify existence, maximum for token efficiency
-const MIN_SKILL_LINES = 50;
+const MIN_SKILL_LINES = 100;
 const MAX_SKILL_LINES = 500;
 const MIN_AGENT_LINES = 50;
 const MAX_AGENT_LINES = 400;
@@ -444,7 +437,6 @@ function generateGrid() {
   lines.push("| Dim | Name | 1 (good) | 0 (defect) | Fix |");
   lines.push("|:---:|------|----------|------------|-----|");
   lines.push("| **fm** | Frontmatter | Has `name`, `description`, `applyTo`, and `tier` | Missing any required field | Auto |");
-  lines.push("| **struct** | Structure | Has `## Troubleshooting` AND `## Activation Patterns` | Missing either section | Template |");
   lines.push("| **code** | Code Examples | Has ≥1 fenced code block with language tag | No code blocks | Manual |");
   lines.push(`| **bounds** | Bounds | ${MIN_SKILL_LINES}–${MAX_SKILL_LINES} lines | <${MIN_SKILL_LINES} (stub) or >${MAX_SKILL_LINES} (bloated) | Manual |`);
   lines.push("| **tri** | Trifecta | Not a workflow skill, OR has matching `.instructions.md` | Workflow skill missing instruction file | Manual |");
@@ -467,10 +459,10 @@ function generateGrid() {
   lines.push("");
   lines.push("| Tier | Min Score | Rationale |");
   lines.push("|------|:---------:|-----------|");
-  lines.push("| **core** | 6/6 | Foundation skills must be perfect |");
-  lines.push("| **standard** | 5/6 | One defect allowed |");
-  lines.push("| **extended** | 4/6 | Two defects allowed |");
-  lines.push("| **specialist** | 3/6 | Niche skills, three defects allowed |");
+  lines.push("| **core** | 5/5 | Foundation skills must be perfect |");
+  lines.push("| **standard** | 4/5 | One defect allowed |");
+  lines.push("| **extended** | 3/5 | Two defects allowed |");
+  lines.push("| **specialist** | 2/5 | Niche skills, three defects allowed |");
   lines.push("");
   lines.push("**Gate requirement**: `fm=1` is mandatory for all memory types. Without frontmatter, the file is **broken** (invisible to activation), not just low quality.");
   lines.push("");
@@ -494,8 +486,8 @@ function generateGrid() {
   // Skills table
   lines.push("## Skills");
   lines.push("");
-  lines.push("| Skill | Tier | Lines | fm | struct | code | bounds | tri | muscle | Type | Score | Pass | sem |");
-  lines.push("|-------|:----:|------:|:--:|:------:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|");
+  lines.push("| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | sem |");
+  lines.push("|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|");
 
   for (const s of skills) {
     const f = s.flags;
@@ -505,20 +497,19 @@ function generateGrid() {
     const typeIcon = s.agentic ? "A" : (f.tri === 1 ? "I" : "-");
     // Preserve existing sem value if available, otherwise 0 (pending review)
     const sem = EXISTING_SEM.skills[s.name] ?? 0;
-    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.struct} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} | ${sem} |`);
+    lines.push(`| ${s.name} | ${tierAbbr} | ${s.lines} | ${f.fm} | ${f.code} | ${f.bounds} | ${f.tri} | ${f.muscle} | ${typeIcon} | ${s.score}/${s.threshold} | ${passIcon} | ${sem} |`);
   }
 
   // Skills summary - now using tier-based pass/fail
   const passing = skills.filter(s => s.pass).length;
   const failing = skills.filter(s => !s.pass).length;
-  const perfect = skills.filter(s => s.score === 6).length;
+  const perfect = skills.filter(s => s.score === 5).length;
   const agenticCount = skills.filter(s => s.agentic).length;
   const intellectualCount = skills.filter(s => s.flags.tri === 1 && s.flags.muscle === 0).length;
 
   // Defect counts per dimension
   const defects = {
     fm: skills.filter(s => s.flags.fm === 0).length,
-    struct: skills.filter(s => s.flags.struct === 0).length,
     code: skills.filter(s => s.flags.code === 0).length,
     bounds: skills.filter(s => s.flags.bounds === 0).length,
     tri: skills.filter(s => s.flags.tri === 0).length,
@@ -526,7 +517,7 @@ function generateGrid() {
   };
 
   lines.push("");
-  lines.push(`**Summary**: ${skills.length} skills | Passing: ${passing} | Failing: ${failing} | Perfect(6/6): ${perfect}`);
+  lines.push(`**Summary**: ${skills.length} skills | Passing: ${passing} | Failing: ${failing} | Perfect(5/5): ${perfect}`);
   lines.push("");
   lines.push(`**Skill Types**: Agentic(A): ${agenticCount} | Intellectual(I): ${intellectualCount} | Incomplete(-): ${skills.length - agenticCount - intellectualCount}`);
   lines.push("");
@@ -536,9 +527,9 @@ function generateGrid() {
   lines.push(`**Semantic Review**: ${skillsReviewed}/${skills.length} reviewed | ${skillsPending} pending`);
   lines.push("");
   lines.push("**Defects by dimension**:");
-  lines.push(`| fm | struct | code | bounds | tri | muscle |`);
-  lines.push(`|:--:|:------:|:----:|:------:|:---:|:------:|`);
-  lines.push(`| ${defects.fm} | ${defects.struct} | ${defects.code} | ${defects.bounds} | ${defects.tri} | ${defects.muscle} |`);
+  lines.push(`| fm | code | bounds | tri | muscle |`);
+  lines.push(`|:--:|:----:|:------:|:---:|:------:|`);
+  lines.push(`| ${defects.fm} | ${defects.code} | ${defects.bounds} | ${defects.tri} | ${defects.muscle} |`);
   lines.push("");
 
   // Agents table
