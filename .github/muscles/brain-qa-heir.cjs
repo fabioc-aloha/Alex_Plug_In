@@ -1,15 +1,29 @@
 #!/usr/bin/env node
-// @inheritance inheritable
-// Brain QA (Heir) - Semantic validation for deployed Alex heir instances
-// Location: .github/muscles/brain-qa-heir.cjs (ir instances
-// Location: .github/muscles/brain-qa-heir.cjs (renamed to brain-qa.cjs in heir)
-// Skill: brain-qa
-//
-// This is the heir-specific version. It omits master-only phases:
-//   5 (Master-Heir Skill Sync), 7 (Synapse File Sync), 8 (Index Sync),
-//   13 (Instructions/Prompts Sync), 26 (alex_docs/), 27 (M365 Heir),
-//   28 (Codespaces Heir), 29 (GK Sync)
-// Phase numbers are preserved for cross-reference consistency with master.
+/**
+ * @muscle brain-qa-heir
+ * @inheritance inheritable
+ * @description Semantic validation for deployed Alex heir instances (25 phases)
+ * @version 1.0.0
+ * @skill brain-qa
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
+ * Brain QA (Heir) - Semantic validation for deployed Alex heir instances
+ * Location: .github/muscles/brain-qa-heir.cjs (renamed to brain-qa.cjs in heir)
+ *
+ * This is the heir-specific version. It omits master-only phases:
+ *   5 (Master-Heir Skill Sync), 7 (Synapse File Sync), 8 (Index Sync),
+ *   13 (Instructions/Prompts Sync), 26 (alex_docs/), 27 (M365 Heir),
+ *   28 (Codespaces Heir), 29 (GK Sync)
+ * Phase numbers are preserved for cross-reference consistency with master.
+ *
+ * Usage:
+ *   node .github/muscles/brain-qa-heir.cjs              # Run all heir phases
+ *   node .github/muscles/brain-qa-heir.cjs --fix        # Auto-fix issues
+ *   node .github/muscles/brain-qa-heir.cjs --phase 10   # Run specific phase
+ *   node .github/muscles/brain-qa-heir.cjs --quiet      # Suppress output
+ */
 
 "use strict";
 

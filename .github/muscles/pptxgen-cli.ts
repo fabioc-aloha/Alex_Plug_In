@@ -1,9 +1,16 @@
 #!/usr/bin/env node
 /**
+ * @muscle pptxgen-cli
  * @inheritance inheritable
- * @inheritance inheritable
- * Alex PPTX Generator CLI
- * 
+ * @description PowerPoint generation CLI from markdown or content strings
+ * @version 1.0.0
+ * @skill pptx-generation
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node,ts-node
+ *
+ * Alex PPTX Generator CLI.
+ *
  * Usage:
  *   npx ts-node scripts/pptxgen-cli.ts --input slides.md --output deck.pptx
  *   npx ts-node scripts/pptxgen-cli.ts --content "Title Slide|Bullet 1|Bullet 2" --output deck.pptx

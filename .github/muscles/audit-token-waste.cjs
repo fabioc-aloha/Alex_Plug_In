@@ -1,17 +1,25 @@
 #!/usr/bin/env node
 /**
+ * @muscle audit-token-waste
  * @inheritance inheritable
+ * @description Scan cognitive architecture for token waste patterns with auto-fix
+ * @version 1.0.0
+ * @skill token-waste-elimination
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
  * Token Waste Audit Muscle
  *
  * Scans .github/ cognitive architecture files for token waste patterns
  * and optionally auto-fixes safe patterns.
  *
+ * Trifecta: token-waste-elimination (skill + instruction + prompt + this muscle)
+ *
  * Usage:
  *   node .github/muscles/audit-token-waste.cjs           # Report only
- *   node .github/muscles/audit-token-waste.cjs --fix      # Auto-fix safe patterns
- *   node .github/muscles/audit-token-waste.cjs --json      # Machine-readable output
- *
- * Trifecta: token-waste-elimination (skill + instruction + prompt + this muscle)
+ *   node .github/muscles/audit-token-waste.cjs --fix     # Auto-fix safe patterns
+ *   node .github/muscles/audit-token-waste.cjs --json    # Machine-readable output
  */
 const fs = require("fs");
 const path = require("path");

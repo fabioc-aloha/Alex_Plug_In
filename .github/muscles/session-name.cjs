@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /**
+ * @muscle session-name
  * @inheritance inheritable
- * @inheritance inheritable
+ * @description Generate descriptive session names from conversation context
+ * @version 1.0.0
+ * @skill episodic-memory
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
  * Session Name Generator Muscle
  * Location: .github/muscles/session-name.cjs
  *

@@ -1,11 +1,21 @@
 #!/usr/bin/env node
 /**
+ * @muscle analyze-assignments
  * @inheritance inheritable
+ * @description Analyze assignment-log.json for delegation patterns
+ * @version 1.0.0
+ * @skill multi-agent-orchestration
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
  * Analyze assignment-log.json for delegation patterns.
  * Run during meditation or on-demand to surface routing intelligence.
  *
  * Output: JSON summary of agent success rates, task frequency, and recommendations.
- * Usage: node .github/muscles/analyze-assignments.cjs
+ *
+ * Usage:
+ *   node .github/muscles/analyze-assignments.cjs
  */
 
 "use strict";

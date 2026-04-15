@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /**
+ * @muscle ralph-loop
  * @inheritance inheritable
- * @inheritance inheritable
+ * @description Iterative content improvement via quality feedback loops
+ * @version 1.0.0
+ * @skill prompt-evolution-system
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
  * Ralph Loop Muscle
  * Location: .github/muscles/ralph-loop.cjs
  *

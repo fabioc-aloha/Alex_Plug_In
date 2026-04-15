@@ -1,10 +1,19 @@
 #!/usr/bin/env node
 /**
+ * @muscle fix-fence-bug
  * @inheritance inheritable
- * Detects and fixes the VS Code create_file wrapping fence bug
- * Cross-platform port of fix-fence-bug.ps1
- * 
- * Usage: node fix-fence-bug.cjs [--fix] [--full-repo] [--path <file>]
+ * @description Detect and fix VS Code create_file wrapping fence bug
+ * @version 1.0.0
+ * @skill debugging-patterns
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
+ * Detects and fixes the VS Code create_file wrapping fence bug.
+ * Cross-platform port of fix-fence-bug.ps1.
+ *
+ * Usage:
+ *   node fix-fence-bug.cjs [--fix] [--full-repo] [--path <file>]
  */
 
 'use strict';

@@ -1,9 +1,23 @@
 #!/usr/bin/env node
-// @inheritance master-only
-// @inheritance master-only
-// Comprehensive Master Alex audit with 22 automated checks
-// Location: .github/muscles/audit-master-alex.cjs
-// Cross-platform port of audit-master-alex.ps1
+/**
+ * @muscle audit-master-alex
+ * @inheritance master-only
+ * @description Comprehensive Master Alex audit with 22 automated checks
+ * @version 1.0.0
+ * @skill architecture-audit
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
+ * Location: .github/muscles/audit-master-alex.cjs
+ * Cross-platform port of audit-master-alex.ps1
+ *
+ * Usage:
+ *   node .github/muscles/audit-master-alex.cjs           # Run all 22 checks
+ *   node .github/muscles/audit-master-alex.cjs quick     # Run first 9 checks
+ *   node .github/muscles/audit-master-alex.cjs 1 5 12    # Run specific checks
+ *   node .github/muscles/audit-master-alex.cjs --quiet   # Suppress output
+ */
 
 'use strict';
 

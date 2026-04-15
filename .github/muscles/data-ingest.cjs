@@ -1,21 +1,18 @@
+#!/usr/bin/env node
 /**
+ * @muscle data-ingest
  * @inheritance inheritable
- * data-ingest.cjs -- Universal data ingestion muscle
- * Version: 1.0.0
+ * @description Universal data ingestion from CSV, Excel, JSON, URLs
+ * @version 1.0.0
+ * @skill data-analysis
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node (xlsx package optional for Excel)
  *
  * Normalizes data from any supported source into a common JSON structure.
  * Detects format, parses, infers column types, handles encoding, and cleans
  * null variants. Output is columnar metadata + rows suitable for analysis
  * and visualization pipelines.
- *
- * Usage:
- *   node data-ingest.cjs <path>                    # Auto-detect format from file
- *   node data-ingest.cjs <url>                     # Fetch + auto-detect
- *   node data-ingest.cjs --stdin                   # Read piped/clipboard data
- *   node data-ingest.cjs <path> --sheet "Sheet2"   # Select Excel sheet
- *   node data-ingest.cjs <path> --limit 5000       # Limit output rows
- *   node data-ingest.cjs <path> --preview          # Show first 5 rows only
- *   node data-ingest.cjs <path> --output out.json  # Write to file instead of stdout
  *
  * Supported formats:
  *   .csv, .tsv    -- Delimiter detection + streaming parse
@@ -27,6 +24,16 @@
  *   { metadata: { source, format, encoding, rowCount, columnCount, parseWarnings },
  *     columns: [{ name, type, nullCount, uniqueCount, min?, max? }],
  *     rows: [...] }
+ *
+ * Usage:
+ *   node data-ingest.cjs <path>                    # Auto-detect format from file
+ *   node data-ingest.cjs <url>                     # Fetch + auto-detect
+ *   node data-ingest.cjs --stdin                   # Read piped/clipboard data
+ *   node data-ingest.cjs <path> --sheet "Sheet2"   # Select Excel sheet
+ *   node data-ingest.cjs <path> --limit 5000       # Limit output rows
+ *   node data-ingest.cjs <path> --preview          # Show first 5 rows only
+ *   node data-ingest.cjs <path> --output out.json  # Write to file instead of stdout
+ */
  */
 'use strict';
 

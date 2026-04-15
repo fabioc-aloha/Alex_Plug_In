@@ -1,13 +1,22 @@
 #!/usr/bin/env node
 /**
+ * @muscle normalize-paths
  * @inheritance inheritable
+ * @description Unified path normalization for Alex memory file references
+ * @version 1.0.0
+ * @skill refactoring-patterns
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
  * Unified path normalization for all Alex memory file types.
- * Cross-platform port of normalize-paths.ps1
- * 
+ * Cross-platform port of normalize-paths.ps1.
+ *
  * Consolidates path normalization into a single script.
  * Ensures all references use canonical .github/ prefixed paths.
- * 
- * Usage: node normalize-paths.cjs [--target <all|instructions|skills|synapses>]
+ *
+ * Usage:
+ *   node normalize-paths.cjs [--target <all|instructions|skills|synapses>]
  */
 
 'use strict';

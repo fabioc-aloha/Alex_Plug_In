@@ -1,7 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle chart-recommend
  * @inheritance inheritable
- * chart-recommend.cjs -- Story-intent chart advisor
- * Version: 1.0.0
+ * @description Story-intent chart advisor for data visualization
+ * @version 1.0.0
+ * @skill data-visualization
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
  *
  * Given a story intent, data shape, and audience, returns the best chart type
  * with configuration and rationale. Uses story intent as the primary axis

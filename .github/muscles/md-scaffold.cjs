@@ -1,7 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle md-scaffold
  * @inheritance inheritable
- * md-scaffold.cjs -- Markdown file scaffolder
- * Version: 1.0.0
+ * @description Markdown file scaffolder with converter-ready templates
+ * @version 1.0.0
+ * @skill md-scaffold
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
  *
  * Generates properly structured markdown files that convert cleanly on first pass.
  * Templates include correct frontmatter, extended syntax examples, converter
@@ -9,11 +15,11 @@
  *
  * Usage:
  *   node md-scaffold.cjs report "Quarterly Review"              # Create report template
- *   node md-scaffold.cjs tutorial "Getting Started with APIs"    # Create tutorial template
- *   node md-scaffold.cjs reference "CLI Reference"               # Create reference template
- *   node md-scaffold.cjs slides "Sprint Demo"                    # Create Gamma-ready slides
- *   node md-scaffold.cjs email "Team Update"                     # Create email template
- *   node md-scaffold.cjs --list                                  # List available templates
+ *   node md-scaffold.cjs tutorial "Getting Started with APIs"   # Create tutorial template
+ *   node md-scaffold.cjs reference "CLI Reference"              # Create reference template
+ *   node md-scaffold.cjs slides "Sprint Demo"                   # Create Gamma-ready slides
+ *   node md-scaffold.cjs email "Team Update"                    # Create email template
+ *   node md-scaffold.cjs --list                                 # List available templates
  *   node md-scaffold.cjs --output path/to/file.md report "Title" # Custom output path
  */
 'use strict';

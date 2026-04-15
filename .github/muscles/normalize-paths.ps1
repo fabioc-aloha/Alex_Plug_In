@@ -10,12 +10,19 @@
 .PARAMETER RepoRoot
     Repository root path. Defaults to parent of scripts/ directory.
 .EXAMPLE
-    .\normalize-paths.ps1                     # Normalize everything
+    .\normalize-paths.ps1                      # Normalize everything
     .\normalize-paths.ps1 -Target instructions # Only instruction/prompt files
     .\normalize-paths.ps1 -Target synapses     # Only synapses.json files
     .\normalize-paths.ps1 -Target skills       # Only SKILL.md files
+.NOTES
+    Muscle: normalize-paths
+    Inheritance: inheritable
+    Version: 1.0.0
+    Skill: refactoring-patterns
+    Reviewed: 2026-04-15
+    Platform: windows
+    Requires: powershell5
 #>
-# @inheritance inheritable
 param(
     [ValidateSet('all', 'instructions', 'skills', 'synapses')]
     [string]$Target = 'all',

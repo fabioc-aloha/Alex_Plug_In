@@ -1,9 +1,22 @@
 #!/usr/bin/env node
-// @inheritance inheritable
-// @inheritance inheritable
-// Validate Alex skills for VS Code Agent Skills compliance
-// Location: .github/muscles/validate-skills.cjs
-// Cross-platform port of validate-skills.ps1
+/**
+ * @muscle validate-skills
+ * @inheritance inheritable
+ * @description Validate Alex skills for VS Code Agent Skills compliance
+ * @version 1.0.0
+ * @skill skill-building
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
+ * Validate Alex skills for VS Code Agent Skills compliance.
+ * Cross-platform port of validate-skills.ps1.
+ *
+ * Location: .github/muscles/validate-skills.cjs
+ *
+ * Usage:
+ *   node validate-skills.cjs [skills-path] [--fix]
+ */
 
 'use strict';
 

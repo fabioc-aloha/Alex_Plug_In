@@ -1,7 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle dashboard-scaffold
  * @inheritance inheritable
- * dashboard-scaffold.cjs -- Self-contained HTML dashboard generator
- * Version: 1.0.0
+ * @description Self-contained HTML dashboard generator from JSON specs
+ * @version 1.0.0
+ * @skill dashboard-design
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
  *
  * Takes a JSON dashboard specification and generates a complete, self-contained
  * HTML file with Chart.js charts, KPI cards, filters, data tables, and drill-down

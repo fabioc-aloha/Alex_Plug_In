@@ -1,7 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle markdown-lint
  * @inheritance inheritable
- * markdown-lint.cjs -- Pre-conversion markdown validator
- * Version: 1.0.0
+ * @description Pre-conversion markdown validator for converters
+ * @version 1.0.0
+ * @skill lint-clean-markdown
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
  *
  * Catches issues that cause conversion failures or degraded output BEFORE
  * running converters. Validates markdown, Mermaid, SVG, and frontmatter

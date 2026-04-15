@@ -1,7 +1,29 @@
-# fix-fence-bug.ps1
-# Detects and fixes the VS Code create_file wrapping fence bug
-# Usage: pwsh -File fix-fence-bug.ps1 [-Fix] [-FullRepo] [-Path <specific-file>]
-# @inheritance inheritable
+<#
+.SYNOPSIS
+    Detect and fix the VS Code create_file wrapping fence bug
+.DESCRIPTION
+    Scans files for the VS Code agent create_file bug that wraps
+    file content in code fences. Can report only or auto-fix.
+.PARAMETER Fix
+    Actually fix the files (default: report only)
+.PARAMETER FullRepo
+    Scan entire repo, not just .github/
+.PARAMETER Path
+    Specific file to check (default: scan .github/)
+.PARAMETER Verbose
+    Show detailed output
+.EXAMPLE
+    .\fix-fence-bug.ps1
+    .\fix-fence-bug.ps1 -Fix -FullRepo
+.NOTES
+    Muscle: fix-fence-bug
+    Inheritance: inheritable
+    Version: 1.0.0
+    Skill: debugging-patterns
+    Reviewed: 2026-04-15
+    Platform: windows
+    Requires: powershell5
+#>
 
 param(
     [switch]$Fix,           # Actually fix the files (default: report only)

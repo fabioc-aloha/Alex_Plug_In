@@ -1,7 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle gamma-generator
  * @inheritance inheritable
- * @inheritance inheritable
- * Gamma Presentation Generator
+ * @description Gamma API presentation, document, and social content generator
+ * @version 1.0.0
+ * @skill gamma-presentations
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node (GAMMA_API_KEY env var)
  *
  * A robust Node.js script for generating presentations, documents,
  * and social content using the Gamma API.

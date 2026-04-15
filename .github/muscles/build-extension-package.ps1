@@ -1,21 +1,35 @@
 #Requires -Version 7.0
-# build-extension-package.ps1
-# Builds Alex VS Code Extension package from Master Alex source
-#
-# This script orchestrates a full extension build:
-#   1. Version synchronization check
-#   2. Architecture sync via sync-architecture.cjs (canonical sync logic)
-#   3. Manifest generation
-#   4. Version verification
-#   5. Personal data scan (defense-in-depth beyond sync-architecture.cjs)
-#   6. VSIX package creation (via vsce, triggers vscode:prepublish pipeline)
-#   7. VSIX output verification
-#
-# The actual file copy, inheritance, exclusions, and heir decontamination
-# are handled by sync-architecture.cjs (DRY -- single source of truth).
-#
-# Usage: .\scripts\build-extension-package.ps1 [-SkipCompile] [-DryRun]
-# @inheritance master-only
+<#
+.SYNOPSIS
+    Builds Alex VS Code Extension package from Master Alex source
+.DESCRIPTION
+    Orchestrates a full extension build:
+      1. Version synchronization check
+      2. Architecture sync via sync-architecture.cjs (canonical sync logic)
+      3. Manifest generation
+      4. Version verification
+      5. Personal data scan (defense-in-depth beyond sync-architecture.cjs)
+      6. VSIX package creation (via vsce, triggers vscode:prepublish pipeline)
+      7. VSIX output verification
+
+    The actual file copy, inheritance, exclusions, and heir decontamination
+    are handled by sync-architecture.cjs (DRY -- single source of truth).
+.PARAMETER SkipCompile
+    Skip TypeScript compilation step
+.PARAMETER DryRun
+    Preview changes without actually building
+.EXAMPLE
+    .\build-extension-package.ps1
+    .\build-extension-package.ps1 -SkipCompile -DryRun
+.NOTES
+    Muscle: build-extension-package
+    Inheritance: master-only
+    Version: 1.0.0
+    Skill: vscode-extension-patterns
+    Reviewed: 2026-04-15
+    Platform: windows
+    Requires: powershell7, node, vsce
+#>
 
 param(
     [switch]$SkipCompile,

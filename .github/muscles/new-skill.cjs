@@ -1,9 +1,27 @@
 #!/usr/bin/env node
-// @inheritance inheritable
-// @inheritance inheritable
-// New Skill Scaffold - Create properly structured skill with frontmatter
-// Location: .github/muscles/new-skill.cjs
-// Cross-platform port of new-skill.ps1
+/**
+ * @muscle new-skill
+ * @inheritance inheritable
+ * @description Create properly structured skill scaffolds with frontmatter
+ * @version 1.0.0
+ * @skill skill-building
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
+ *
+ * New Skill Scaffold - Create properly structured skill with frontmatter.
+ * Cross-platform port of new-skill.ps1.
+ *
+ * Location: .github/muscles/new-skill.cjs
+ *
+ * Usage:
+ *   node new-skill.cjs <skill-name> [options]
+ *
+ * Options:
+ *   --inheritance TYPE   Inheritance: inheritable (default), universal, master-only, heir:vscode, heir:m365
+ *   --description DESC   Skill description
+ *   --domain DOMAIN      Skill domain
+ */
 
 'use strict';
 

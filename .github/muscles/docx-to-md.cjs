@@ -1,6 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle docx-to-md
  * @inheritance inheritable
- * docx-to-md.cjs v1.0.0 - Convert Word documents to clean Markdown
+ * @description Convert Word documents to clean Markdown with image extraction
+ * @version 1.0.0
+ * @skill docx-to-md
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node,pandoc
  *
  * Uses pandoc to convert .docx to .md with intelligent post-processing:
  * - Extracts embedded images to a sibling images/ folder

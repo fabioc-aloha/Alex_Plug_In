@@ -1,6 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle md-to-html
  * @inheritance inheritable
- * md-to-html.cjs v1.0.0 - Convert Markdown to standalone HTML pages
+ * @description Convert Markdown to standalone HTML with embedded assets
+ * @version 1.0.0
+ * @skill md-to-html
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node,pandoc (mermaid-cli optional for --mermaid-png)
  *
  * Produces self-contained HTML files with embedded CSS, Mermaid diagram PNGs,
  * and local images as base64 data URIs. Designed for quick-share distribution

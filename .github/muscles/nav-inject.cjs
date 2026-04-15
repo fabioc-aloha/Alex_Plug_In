@@ -1,6 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle nav-inject
  * @inheritance inheritable
- * nav-inject.cjs v1.0.0 - Cross-document navigation injector
+ * @description Cross-document navigation table injector for doc suites
+ * @version 1.0.0
+ * @skill nav-inject
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
  *
  * Reads a nav.json config and stamps a navigation table into every .md file
  * in a document suite. Eliminates manual navigation maintenance across
@@ -8,8 +15,8 @@
  *
  * Usage:
  *   node nav-inject.cjs [nav.json]      # Default: looks for nav.json in cwd
- *   node nav-inject.cjs --init           # Create starter nav.json
- *   node nav-inject.cjs --dry-run        # Preview changes without writing
+ *   node nav-inject.cjs --init          # Create starter nav.json
+ *   node nav-inject.cjs --dry-run       # Preview changes without writing
  *
  * nav.json format:
  *   {

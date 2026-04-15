@@ -1,15 +1,20 @@
 #!/usr/bin/env npx ts-node
 /**
+ * @muscle dream-cli
  * @inheritance inheritable
- * Dream Protocol CLI
- * 
- * Runs neural maintenance
+ * @description Dream Protocol CLI for neural maintenance from command line
+ * @version 1.0.0
+ * @skill dream-state
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node,ts-node
+ *
  * Runs neural maintenance from command line.
  * Uses the same core logic as VS Code extension's Dream command.
- * 
+ *
  * Usage:
  *   cd platforms/vscode-extension && npm run dream [workspace-path]
- * 
+ *
  * If no path provided, uses current directory.
  */
 

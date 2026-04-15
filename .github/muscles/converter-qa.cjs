@@ -1,7 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle converter-qa
  * @inheritance master-only
- * converter-qa.cjs -- Converter Quality Assurance Framework
- * Version: 1.2.0
+ * @description Converter quality assurance framework with 284+ assertions
+ * @version 1.2.0
+ * @skill converter-qa
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node,pandoc,mermaid-cli
  *
  * Test harness for validating converter outputs:
  * - md-to-word.cjs regression tests

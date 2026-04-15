@@ -1,6 +1,13 @@
+#!/usr/bin/env node
 /**
+ * @muscle md-to-eml
  * @inheritance inheritable
- * md-to-eml.cjs v1.0.0 - Convert Markdown to email-safe .eml files
+ * @description Convert Markdown to RFC 5322 email-safe .eml files
+ * @version 1.0.0
+ * @skill md-to-eml
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node,pandoc
  *
  * Produces RFC 5322-compliant .eml files from Markdown with YAML frontmatter.
  * Designed for newsletter/governance communication workflows.

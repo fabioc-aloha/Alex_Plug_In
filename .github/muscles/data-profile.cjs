@@ -1,17 +1,23 @@
+#!/usr/bin/env node
 /**
+ * @muscle data-profile
  * @inheritance inheritable
- * data-profile.cjs -- Quick data profiler
- * Version: 1.0.0
+ * @description Quick data profiler for comprehensive dataset analysis
+ * @version 1.0.0
+ * @skill data-analysis
+ * @reviewed 2026-04-15
+ * @platform windows,macos,linux
+ * @requires node
  *
  * Produces a comprehensive profile report for any dataset: column types, nulls,
  * distributions, correlations, anomalies, quality score, and cleaning suggestions.
  * Accepts output from data-ingest.cjs or a direct file path (auto-ingests first).
  *
  * Usage:
- *   node data-profile.cjs <path>                # Profile a file (auto-ingest)
- *   node data-profile.cjs --json <ingest.json>  # Profile pre-ingested JSON
- *   node data-profile.cjs <path> --format json   # Output as JSON (default: text)
- *   node data-profile.cjs <path> --output report.md  # Write to file
+ *   node data-profile.cjs <path>                   # Profile a file (auto-ingest)
+ *   node data-profile.cjs --json <ingest.json>     # Profile pre-ingested JSON
+ *   node data-profile.cjs <path> --format json     # Output as JSON (default: text)
+ *   node data-profile.cjs <path> --output report.md # Write to file
  */
 'use strict';
 
