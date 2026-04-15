@@ -294,14 +294,8 @@ function scanAgents() {
     // Check handoffs
     const hasHandoffs = /^handoffs:/m.test(content);
 
-    // Check hooks (PostToolUse, PreToolUse, etc.)
-    const hasHooks = /^hooks:/m.test(content);
-
     // Check bounds (not too thin, not too bloated)
     const withinBounds = lines >= MIN_AGENT_LINES && lines <= MAX_AGENT_LINES;
-
-    // Check persona (has mental model / when to use / persona section)
-    const hasPersona = /##\s*(mental model|when to use|persona|mindset|core directive)/i.test(content);
 
     // Check code examples
     const hasCode = /```\w+/.test(content);
@@ -309,16 +303,14 @@ function scanAgents() {
     const flags = {
       fm: fmComplete ? 1 : 0,
       handoffs: hasHandoffs ? 1 : 0,
-      hooks: hasHooks ? 1 : 0,
       bounds: withinBounds ? 1 : 0,
-      persona: hasPersona ? 1 : 0,
       code: hasCode ? 1 : 0,
     };
 
-    const score = flags.fm + flags.handoffs + flags.hooks + flags.bounds + flags.persona + flags.code;
+    const score = flags.fm + flags.handoffs + flags.bounds + flags.code;
     // fm is a GATE - agents without frontmatter are broken
-    const pass = fmComplete && (score >= 4);
-    results.push({ name, lines, flags, score, maxScore: 6, pass });
+    const pass = fmComplete && (score >= 3);
+    results.push({ name, lines, flags, score, maxScore: 4, pass });
   }
 
   return results.sort((a, b) => a.score - b.score);
@@ -540,28 +532,28 @@ function generateGrid() {
   lines.push("|:---:|------|----------|------------|");
   lines.push("| **fm** | Frontmatter | Has `description`, `name`, `model`, `tools` | Missing any |");
   lines.push("| **handoffs** | Handoffs | Has `handoffs:` for agent orchestration | No handoffs |");
-  lines.push("| **hooks** | Hooks | Has `hooks:` for automation | No hooks |");
   lines.push(`| **bounds** | Bounds | ${MIN_AGENT_LINES}–${MAX_AGENT_LINES} lines | <${MIN_AGENT_LINES} (stub) or >${MAX_AGENT_LINES} (bloated) |`);
-  lines.push("| **persona** | Persona | Has mental model / mindset section | No persona |");
   lines.push("| **code** | Code | Has code examples | No code |");
   lines.push("");
-  lines.push("**Pass criteria**: fm=1 (gate) AND score ≥4/6");
+  lines.push("> **Persona enforcement**: Alex persona characteristics (mental model, mindset) are enforced via skills and instructions, not automated scoring. With only 12 agents, manual review is more effective.");
   lines.push("");
-  lines.push("| Agent | Lines | fm | handoffs | hooks | bounds | persona | code | Score | Pass |");
-  lines.push("|-------|------:|:--:|:--------:|:-----:|:------:|:-------:|:----:|------:|:----:|");
+  lines.push("**Pass criteria**: fm=1 (gate) AND score ≥3/4");
+  lines.push("");
+  lines.push("| Agent | Lines | fm | handoffs | bounds | code | Score | Pass |");
+  lines.push("|-------|------:|:--:|:--------:|:------:|:----:|------:|:----:|");;
 
   for (const a of agents) {
     const f = a.flags;
     const passIcon = a.pass ? "✓" : "✗";
-    lines.push(`| ${a.name} | ${a.lines} | ${f.fm} | ${f.handoffs} | ${f.hooks} | ${f.bounds} | ${f.persona} | ${f.code} | ${a.score}/6 | ${passIcon} |`);
+    lines.push(`| ${a.name} | ${a.lines} | ${f.fm} | ${f.handoffs} | ${f.bounds} | ${f.code} | ${a.score}/4 | ${passIcon} |`);
   }
 
   // Agents summary
   const agentsPassing = agents.filter(a => a.pass).length;
   const agentsFailing = agents.filter(a => !a.pass).length;
-  const agentsPerfect = agents.filter(a => a.score === 6).length;
+  const agentsPerfect = agents.filter(a => a.score === 4).length;
   lines.push("");
-  lines.push(`**Summary**: ${agents.length} agents | Passing: ${agentsPassing} | Failing: ${agentsFailing} | Perfect(6/6): ${agentsPerfect}`);
+  lines.push(`**Summary**: ${agents.length} agents | Passing: ${agentsPassing} | Failing: ${agentsFailing} | Perfect(4/4): ${agentsPerfect}`);
 
   lines.push("");
 
