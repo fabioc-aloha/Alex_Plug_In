@@ -12,15 +12,84 @@
 
 ## Tracker
 
-| Phase | Version Range | Tasks | Done | Progress |
-| ----- | ------------- | ----- | ---- | -------- |
-| 🏗️ Foundation | 7.10 – 7.14 | 5 | 0 | ░░░░░░░░░░ 0% |
-| 🎨 UI Restructure | 7.15 – 7.19 | 5 | 0 | ░░░░░░░░░░ 0% |
-| 🔄 Process Integration | 7.20 – 7.24 | 5 | 0 | ░░░░░░░░░░ 0% |
-| 🌐 Cross-Heir Intelligence | 7.25 – 7.29 | 5 | 0 | ░░░░░░░░░░ 0% |
-| 🧹 Polish & Release | 7.30 – 7.50 | 6 | 0 | ░░░░░░░░░░ 0% |
-| 🎉 Stabilization | 7.51 – 7.99 | — | — | reserved |
-| **TOTAL** | **7.10 – 8.0.0** | **26** | **0** | **░░░░░░░░░░ 0%** |
+### Parallel Lanes to v8.0.0
+
+```
+     🧠 BRAIN          🔄 HEIR SYNC       ⚙️ EXTENSION       🎨 UI/UX
+   Skills, Synapses   Architecture      TypeScript Code    Sidebar Design
+   ─────────────────  ─────────────────  ─────────────────  ─────────────────
+   ░░░░░░░░░░  0%     ░░░░░░░░░░  0%     ░░░░░░░░░░  0%     ░░░░░░░░░░  0%
+```
+
+| Lane | Focus | Tasks | Done | Progress |
+| ---- | ----- | ----- | ---- | -------- |
+| 🧠 **Brain** | Skills, instructions, prompts, synapses, meditation | 12 | 0 | ░░░░░░░░░░ 0% |
+| 🔄 **Heir Sync** | Architecture sync, inheritance, heir bootstrap | 8 | 0 | ░░░░░░░░░░ 0% |
+| ⚙️ **Extension** | TypeScript code, commands, views, Health Pulse | 10 | 0 | ░░░░░░░░░░ 0% |
+| 🎨 **UI/UX** | Sidebar design, tabs, buttons, visual feedback | 10 | 0 | ░░░░░░░░░░ 0% |
+| **TOTAL** | **All lanes** | **40** | **0** | **░░░░░░░░░░ 0%** |
+
+### Lane Backlogs
+
+#### 🧠 Brain (0/12)
+
+| ID | Task | Status | Blocks |
+|----|------|--------|--------|
+| B1 | Health status rules in skill format | ⬜ | — |
+| B2 | Meditation history parsing | ⬜ | — |
+| B3 | Dream state markers | ⬜ | — |
+| B4 | Synapse health scoring algorithm | ⬜ | — |
+| B5 | Chat memory audit thresholds | ⬜ | — |
+| B6 | Frecency ranking synapse pattern | ⬜ | UI1 |
+| B7 | Context-aware nudge rules | ⬜ | UI2 |
+| B8 | Insight generation pipeline | ⬜ | — |
+| B9 | Dream creativity score metric | ⬜ | B8 |
+| B10 | Generative meditation enhancement | ⬜ | B8, B9 |
+| B11 | Silence as Signal refinement | ⬜ | — |
+| B12 | Cross-heir insight aggregation | ⬜ | H5 |
+
+#### 🔄 Heir Sync (0/8)
+
+| ID | Task | Status | Blocks |
+|----|------|--------|--------|
+| H1 | Sync staleness detection | ⬜ | — |
+| H2 | Architecture version comparison | ⬜ | — |
+| H3 | Heir-master timestamp tracking | ⬜ | — |
+| H4 | Selective sync (skills only, full) | ⬜ | H2 |
+| H5 | Cross-heir intelligence aggregation | ⬜ | H3 |
+| H6 | Heir health dashboard data | ⬜ | E4 |
+| H7 | Inheritance audit automation | ⬜ | — |
+| H8 | Heir feedback loop integration | ⬜ | — |
+
+#### ⚙️ Extension (0/10)
+
+| ID | Task | Status | Blocks |
+|----|------|--------|--------|
+| E1 | Create `healthPulse.ts` | ⬜ | — |
+| E2 | `HealthPulse` interface | ⬜ | E1 |
+| E3 | `HealthStatus` type | ⬜ | E1 |
+| E4 | `computeHealthStatus()` function | ⬜ | E2, E3 |
+| E5 | Synapse stats collection | ⬜ | E1 |
+| E6 | Episodic stats collection | ⬜ | E1 |
+| E7 | Chat memory stats collection | ⬜ | E1 |
+| E8 | Health Pulse unit tests | ⬜ | E4 |
+| E9 | Nudge Engine core | ⬜ | B7 |
+| E10 | Quick Actions frecency | ⬜ | B6 |
+
+#### 🎨 UI/UX (0/10)
+
+| ID | Task | Status | Blocks |
+|----|------|--------|--------|
+| UI1 | Health Pulse hero card design | ⬜ | E4 |
+| UI2 | Context-aware nudge display | ⬜ | E9 |
+| UI3 | Tab rename: Mission→Home | ⬜ | — |
+| UI4 | Tab rename: Settings→Tools | ⬜ | — |
+| UI5 | Tab rename: Docs→Learn | ⬜ | — |
+| UI6 | Quick Actions by loop stage | ⬜ | — |
+| UI7 | Dream/Meditate/Self-Actualize buttons | ⬜ | UI1 |
+| UI8 | Chat-first button hints (💬/🔗/⚡) | ⬜ | — |
+| UI9 | Heir status indicator | ⬜ | H6 |
+| UI10 | Visual progress feedback | ⬜ | — |
 
 ### Current Sprint
 
