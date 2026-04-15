@@ -103,6 +103,7 @@ PBI Docs tab is just links to GitHub Wiki. No docs embedded in extension.
 PBI has only 5 real VS Code commands. Everything else is `openChat` with a prompt.
 
 **Alex adoption**: Reduce command surface:
+
 | Keep as Command | Convert to Chat Prompt |
 | --------------- | ---------------------- |
 | `alex.dream` | — (needs progress UI) |
@@ -112,6 +113,49 @@ PBI has only 5 real VS Code commands. Everything else is `openChat` with a promp
 | `alex.selfActualize` | "Run self-actualization" |
 | `alex.meditate` | "Let's meditate" |
 | `alex.northStar` | "Review North Star" |
+
+---
+
+## Core Insight: Journey-Oriented Design
+
+**PBI's groups aren't feature categories — they're user journeys.**
+
+Each PBI group answers: *"What am I trying to accomplish right now?"*
+
+| PBI Group | Journey Question |
+| --------- | ---------------- |
+| CONNECT | "I need to link to my data" |
+| ANALYZE | "I need to understand my data" |
+| AUDIENCE | "I need to tailor for stakeholders" |
+| DESIGN | "I need to build my report" |
+| GOVERN | "I need to maintain quality" |
+
+### Alex User Journeys
+
+| Journey | Question | Sidebar Expression |
+| ------- | -------- | ------------------ |
+| **CHECK** | "Is everything okay?" | Health Pulse card (status at a glance) |
+| **DO** | "I need to work" | Quick Actions (chat prompts, not commands) |
+| **CARE** | "Alex needs maintenance" | Dream, Meditate, Self-Actualize buttons |
+| **GROW** | "I want Alex to learn" | Propose Skill, Submit Feedback |
+| **LEARN** | "I need to understand" | Links to Wiki, Guides, Architecture |
+
+### Simplified Tab Structure
+
+Based on journeys, the three tabs become:
+
+| Tab | Journey Focus | Content |
+| --- | ------------- | ------- |
+| **Home** | CHECK + DO | Health Pulse + Quick Actions |
+| **Tools** | CARE + GROW | Maintenance actions + Settings |
+| **Learn** | LEARN | External links (Wiki, learnai, docs) |
+
+The sidebar answers three questions:
+1. **Am I ready to work?** (Home → Health Pulse)
+2. **What should I do next?** (Home → Quick Actions)
+3. **Where do I find help?** (Learn → external resources)
+
+Settings and maintenance are quiet utilities in Tools — important but not primary.
 
 ---
 
