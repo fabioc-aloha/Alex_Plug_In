@@ -19,6 +19,11 @@
    Skills, Synapses   Architecture      TypeScript Code    Sidebar Design
    ─────────────────  ─────────────────  ─────────────────  ─────────────────
    ░░░░░░░░░░  0%     ░░░░░░░░░░  0%     ░░░░░░░░░░  0%     ░░░░░░░░░░  0%
+
+     📚 DOCS           🧪 QA              🛡️ RAI
+   Wiki, README       Tests, Platform    Security, Ethics
+   ─────────────────  ─────────────────  ─────────────────
+   ░░░░░░░░░░  0%     ░░░░░░░░░░  0%     ░░░░░░░░░░  0%
 ```
 
 | Lane | Focus | Tasks | Done | Progress |
@@ -27,7 +32,10 @@
 | 🔄 **Heir Sync** | Architecture sync, inheritance, heir bootstrap | 8 | 0 | ░░░░░░░░░░ 0% |
 | ⚙️ **Extension** | TypeScript code, commands, views, Health Pulse | 10 | 0 | ░░░░░░░░░░ 0% |
 | 🎨 **UI/UX** | Sidebar design, tabs, buttons, visual feedback | 10 | 0 | ░░░░░░░░░░ 0% |
-| **TOTAL** | **All lanes** | **40** | **0** | **░░░░░░░░░░ 0%** |
+| 📚 **Docs** | Wiki, README, Marketplace, alex_docs, CHANGELOG | 8 | 0 | ░░░░░░░░░░ 0% |
+| 🧪 **QA** | Tests, cross-platform, regression, accessibility | 6 | 0 | ░░░░░░░░░░ 0% |
+| 🛡️ **RAI** | Security, responsible AI, ethics, content safety | 6 | 0 | ░░░░░░░░░░ 0% |
+| **TOTAL** | **All lanes** | **60** | **0** | **░░░░░░░░░░ 0%** |
 
 ### Lane Backlogs
 
@@ -90,6 +98,41 @@
 | UI8 | Chat-first button hints (💬/🔗/⚡) | ⬜ | — |
 | UI9 | Heir status indicator | ⬜ | H6 |
 | UI10 | Visual progress feedback | ⬜ | — |
+
+#### 📚 Docs (0/8)
+
+| ID | Task | Status | Blocks |
+|----|------|--------|--------|
+| D1 | Create GitHub Wiki structure | ⬜ | — |
+| D2 | Wiki: Getting Started guide | ⬜ | D1 |
+| D3 | Wiki: User Manual (commands, UI) | ⬜ | D1, UI3-5 |
+| D4 | Wiki: Heir Project Setup | ⬜ | D1, H4 |
+| D5 | README.md v8.0.0 refresh | ⬜ | UI1 |
+| D6 | Marketplace listing update | ⬜ | D5 |
+| D7 | CHANGELOG v8.0.0 section | ⬜ | — |
+| D8 | Migration guide (v7→v8) | ⬜ | — |
+
+#### 🧪 QA (0/6)
+
+| ID | Task | Status | Blocks |
+|----|------|--------|--------|
+| Q1 | Health Pulse unit test coverage | ⬜ | E8 |
+| Q2 | Cross-platform test (Win/macOS) | ⬜ | E4 |
+| Q3 | Heir sync regression tests | ⬜ | H4 |
+| Q4 | UI accessibility audit (WCAG) | ⬜ | UI10 |
+| Q5 | Performance baseline (activation) | ⬜ | — |
+| Q6 | Manual QA checklist for v8.0.0 | ⬜ | — |
+
+#### 🛡️ RAI (0/6)
+
+| ID | Task | Status | Blocks |
+|----|------|--------|--------|
+| R1 | Secret scan audit (no creds in VSIX) | ⬜ | — |
+| R2 | Content safety review (hooks) | ⬜ | — |
+| R3 | Dependency vulnerability audit | ⬜ | — |
+| R4 | PII review (no personal data exposed) | ⬜ | — |
+| R5 | Ethical AI guidelines compliance | ⬜ | — |
+| R6 | Transparency documentation | ⬜ | D1 |
 
 ### Current Sprint
 
