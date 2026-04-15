@@ -132,7 +132,7 @@ But we can go further. All creative work follows the same loop:
     └────┬─────┘
          ▼
     ┌──────────┐
-    │  BUILD   │ ← "I'm creating it"
+    │  BUILD   │ ← "I'm building/creating it"
     └────┬─────┘
          ▼
     ┌──────────┐
@@ -156,7 +156,7 @@ This loop applies to **any domain**:
 | ----- | -------- | ---- | ------------ | -------- |
 | **IDEATE** | Feature concept | Story premise | Research question | Product idea |
 | **PLAN** | Architecture | Outline | Methodology | Business plan |
-| **BUILD** | Write code | Write draft | Conduct research | Execute |
+| **BUILD/CREATE** | Write code | Write draft | Conduct research | Execute |
 | **TEST** | QA, review | Beta readers | Peer review | User testing |
 | **RELEASE** | Deploy | Publish | Defend/submit | Launch |
 | **IMPROVE** | Iterate | Revised edition | Future work | Scale |
@@ -167,7 +167,7 @@ This loop applies to **any domain**:
 | ----- | ------------- | ------------ |
 | **IDEATE** | "I have an idea, help me explore" | Research, Bootstrap Learning, Brainstorm |
 | **PLAN** | "I need to structure my approach" | Planner agent, North Star, Architecture |
-| **BUILD** | "I'm creating something" | Builder, Code gen, Writing, Skill building |
+| **BUILD/CREATE** | "I'm building or creating something" | Builder, Code gen, Writing, Design, Skill building |
 | **TEST** | "I need to validate this" | Validator, Code review, QA, Editing |
 | **RELEASE** | "I'm ready to ship" | Release process, Quality gates, Publishing |
 | **IMPROVE** | "I need to get better" | Meditation, Self-Actualize, Feedback, Dream |
@@ -178,7 +178,7 @@ This loop applies to **any domain**:
 | ----- | -------------- |
 | IDEATE | Researcher, Alex (brainstorm) |
 | PLAN | Planner, Documentarian |
-| BUILD | Builder, Frontend, Backend, Infrastructure |
+| BUILD/CREATE | Builder, Frontend, Backend, Infrastructure, Image Studio, Audio Studio, Presenter |
 | TEST | Validator, Alex (code review) |
 | RELEASE | Brain-Ops, Presenter |
 | IMPROVE | Alex (meditation, self-actualize, dream) |
@@ -196,7 +196,7 @@ The sidebar helps users **locate themselves in the loop**:
 | Tab | Loop Stages | Content |
 | --- | ----------- | ------- |
 | **Home** | All stages | Health Pulse + Quick Actions (stage-aware) |
-| **Tools** | BUILD + IMPROVE | Settings, Maintenance actions |
+| **Tools** | BUILD/CREATE + IMPROVE | Settings, Maintenance actions |
 | **Learn** | IDEATE + PLAN | External resources, Documentation |
 
 The sidebar answers: **"Where am I in the loop, and what's next?"**
