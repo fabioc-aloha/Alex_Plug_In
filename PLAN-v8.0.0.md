@@ -24,12 +24,59 @@
 
 ### Current Sprint
 
-**v7.10.0 — Health Pulse Data Model** 🏗️
+**v7.10.0 — Health Pulse Data Model** 🏗️ `0/37` ░░░░░░░░░░
+
+#### File Setup (0/2)
 
 - [ ] Create `src/views/healthPulse.ts`
-- [ ] Define `HealthPulse` interface
-- [ ] Implement `computeHealthStatus()` function
-- [ ] Add unit tests for status computation
+- [ ] Add exports to `src/views/index.ts`
+
+#### Interface Definition (0/15)
+
+- [ ] Define `HealthStatus` type: `'healthy' | 'attention' | 'critical'`
+- [ ] Define `HealthPulse` interface with:
+  - [ ] `status: HealthStatus`
+  - [ ] `synapseCount: number`
+  - [ ] `synapseHealth: number` (percentage 0-100)
+  - [ ] `lastDreamDate: Date | null`
+  - [ ] `dreamNeeded: boolean`
+  - [ ] `episodicCount: number`
+  - [ ] `meditationCount: number`
+  - [ ] `lastMeditationDate: Date | null`
+  - [ ] `architectureVersion: string`
+  - [ ] `extensionVersion: string`
+  - [ ] `syncStale: boolean`
+  - [ ] `chatMemoryLines: number`
+  - [ ] `chatMemoryWarning: boolean`
+
+#### Data Collection Functions (0/7)
+
+- [ ] `getSynapseStats()` — read from `.github/synapses/`
+- [ ] `getEpisodicStats()` — read from `.github/episodic/`
+- [ ] `getMeditationHistory()` — parse meditation records
+- [ ] `getDreamHistory()` — read dream state markers
+- [ ] `getArchitectureVersion()` — parse from package.json or marker file
+- [ ] `getChatMemoryStats()` — count lines in Copilot Chat memory folder
+- [ ] `checkSyncStaleness()` — compare heir vs master timestamps
+
+#### Status Computation (0/7)
+
+- [ ] Implement `computeHealthStatus(pulse: HealthPulse): HealthStatus`
+- [ ] Rule: `critical` if `dreamNeeded && daysSinceLastDream > 7`
+- [ ] Rule: `critical` if `synapseHealth < 50%`
+- [ ] Rule: `attention` if `dreamNeeded`
+- [ ] Rule: `attention` if `chatMemoryWarning`
+- [ ] Rule: `attention` if `syncStale`
+- [ ] Rule: `healthy` otherwise
+
+#### Unit Tests (0/6)
+
+- [ ] Test: healthy state (all green)
+- [ ] Test: critical from dream overdue
+- [ ] Test: critical from synapse health low
+- [ ] Test: attention from chat memory warning
+- [ ] Test: attention from sync stale
+- [ ] Test: edge cases (null dates, zero counts)
 
 ---
 
