@@ -634,6 +634,19 @@ function generateGrid() {
   lines.push("");
   lines.push(`**Summary**: ${prompts.length} prompts | Passing: ${promptsPassing} | Failing: ${promptsFailing} | Perfect(3/3): ${promptsPerfect}`);
 
+  // Prompts criterion validity
+  const promptDescPass = prompts.filter(p => p.flags.desc === 1).length;
+  const promptAgentPass = prompts.filter(p => p.flags.agent === 1).length;
+  const promptOver20Pass = prompts.filter(p => p.flags.over20 === 1).length;
+  lines.push("");
+  lines.push("### Criterion Validity");
+  lines.push("");
+  lines.push("| Criterion | Pass | Rate | Validity |");
+  lines.push("|-----------|-----:|-----:|----------|");
+  lines.push(`| desc | ${promptDescPass}/${prompts.length} | ${Math.round(promptDescPass/prompts.length*100)}% | ✓ Valid — required for discoverability |`);
+  lines.push(`| agent | ${promptAgentPass}/${prompts.length} | ${Math.round(promptAgentPass/prompts.length*100)}% | ✓ Valid — identifies routing prompts |`);
+  lines.push(`| >20L | ${promptOver20Pass}/${prompts.length} | ${Math.round(promptOver20Pass/prompts.length*100)}% | ✓ Valid — identifies workflow content |`);
+
   // Overall summary
   const totalItems = skills.length + agents.length + instructions.length + prompts.length;
   lines.push("## Overall");
