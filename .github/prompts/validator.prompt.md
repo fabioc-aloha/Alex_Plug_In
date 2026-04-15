@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: "Validator Mode: Adversarial QA with skeptical analysis and evidence-backed findings"
 application: "When analyzing data, creating visualizations, or building reports"
 agent: Validator

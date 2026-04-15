@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Systematic VS Code extension review for API correctness, security, resource management, and 1.109+ agent platform readiness
 application: "When requesting code reviews, PR feedback, or quality assessment"
 ---

@@ -1,4 +1,5 @@
 ---
+sem: 1
 agent: Alex
 description: Deploy Alex cognitive architecture initialization protocol
 application: "When preparing releases, publishing artifacts, or deployment workflows"

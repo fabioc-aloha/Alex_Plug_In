@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: "Train a custom FLUX LoRA fine-tune for consistent brand character imagery, or generate images with an existing trained model"
 application: "When generating images, banners, or visual assets"
 ---

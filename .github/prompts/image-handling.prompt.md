@@ -1,4 +1,5 @@
 ---
+sem: 1
 name: "generate-image"
 description: "Generate an image, video, or audio using Replicate AI models"
 application: "When generating images, banners, or visual assets"

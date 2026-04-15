@@ -1,4 +1,5 @@
 ---
+sem: 1
 mode: agent
 description: "Convert Word documents (.docx) to clean Markdown with image extraction"
 ---

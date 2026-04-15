@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: "Documentarian Mode: Accurate, current, drift-free documentation"
 application: "When generating documentation, READMEs, or technical writing"
 agent: Documentarian

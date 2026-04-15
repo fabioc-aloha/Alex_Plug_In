@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Promote a skill or pattern from an heir project to Master Alex
 application: "When building, assessing, or promoting cognitive skills"
 agent: Alex
@@ -23,8 +24,8 @@ Promote a skill, pattern, or insight developed in an heir project back to Master
 1. **Identify** — What skill/pattern from this heir deserves promotion?
 2. **Evaluate** — Does it already exist in Master? Is it general-purpose?
 3. **Generalize** — Remove project-specific details, extract the reusable pattern
-4. **Create** — Build SKILL.md + synapses.json in Master `.github/skills/`
-5. **Connect** — Add synapses to related skills and instructions
+4. **Create** — Build SKILL.md in Master `.github/skills/`
+5. **Connect** — Add trifecta components (instructions + prompt if needed)
 6. **Sync** — Run `npm run sync-architecture` to propagate to all heirs
 
 ## Validator Gate

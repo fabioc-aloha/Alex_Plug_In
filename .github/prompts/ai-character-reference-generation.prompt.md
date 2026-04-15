@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Generate 15+ visually consistent character reference images using Nano-Banana Pro (face refs) or Flux 1.1 Pro
 application: "When analyzing data, creating visualizations, or building reports"
 ---

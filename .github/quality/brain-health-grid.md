@@ -568,15 +568,11 @@ Muscles SHOULD use the standard header format for discoverability:
 
 | Muscle | Lines | Lang | Category | comments | err | bounds | compat | Score | Pass | inh | Reviewed |
 |--------|------:|:----:|----------|:--------:|:---:|:------:|:------:|------:|:----:|:---:|----------|
-| [install-hooks.ps1](../muscles/install-hooks.ps1) | 48 | ps | build | 0 | 1 | 0 | 0 | 1/4 | ✗ | 0 | — |
-| [brain-qa.ps1](../muscles/brain-qa.ps1) | 1812 | ps | validation | 0 | 1 | 0 | 1 | 2/4 | ✗ | 1 | — |
 | [install-hooks.cjs](../muscles/install-hooks.cjs) | 62 | js | build | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
 | [validate-skills.cjs](../muscles/validate-skills.cjs) | 106 | js | validation | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
 | [audit-master-alex.cjs](../muscles/audit-master-alex.cjs) | 537 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
-| [audit-master-alex.ps1](../muscles/audit-master-alex.ps1) | 441 | ps | validation | 1 | 1 | 1 | 0 | 3/4 | ✓ | 1 | — |
 | [audit-token-waste.cjs](../muscles/audit-token-waste.cjs) | 449 | js | validation | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
 | [brain-qa-heir.cjs](../muscles/brain-qa-heir.cjs) | 962 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [brain-qa-heir.ps1](../muscles/brain-qa-heir.ps1) | 934 | ps | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
 | [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 338 | ps | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
 | [chart-recommend.cjs](../muscles/chart-recommend.cjs) | 241 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
 | [converter-qa.cjs](../muscles/converter-qa.cjs) | 1268 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | — |
@@ -586,11 +582,8 @@ Muscles SHOULD use the standard header format for discoverability:
 | [md-to-word.cjs](../muscles/md-to-word.cjs) | 1186 | js | converter | 1 | 1 | 0 | 1 | 3/4 | ✓ | 0 | 2026-04-15 |
 | [nav-inject.cjs](../muscles/nav-inject.cjs) | 215 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
 | [new-skill.cjs](../muscles/new-skill.cjs) | 143 | js | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [new-skill.ps1](../muscles/new-skill.ps1) | 130 | ps | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
 | [pptxgen-cli.ts](../muscles/pptxgen-cli.ts) | 136 | ts | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
 | [sync-architecture.cjs](../muscles/sync-architecture.cjs) | 1655 | js | build | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
-| [validate-synapses.cjs](../muscles/validate-synapses.cjs) | 138 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [validate-synapses.ps1](../muscles/validate-synapses.ps1) | 144 | ps | validation | 1 | 1 | 1 | 0 | 3/4 | ✓ | 0 | — |
 | [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 140 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [brain-qa.cjs](../muscles/brain-qa.cjs) | 937 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
 | [data-ingest.cjs](../muscles/data-ingest.cjs) | 367 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
@@ -604,15 +597,14 @@ Muscles SHOULD use the standard header format for discoverability:
 | [normalize-paths.ps1](../muscles/normalize-paths.ps1) | 194 | ps | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [ralph-loop.cjs](../muscles/ralph-loop.cjs) | 740 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [session-name.cjs](../muscles/session-name.cjs) | 237 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [validate-skills.ps1](../muscles/validate-skills.ps1) | 113 | ps | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 
-**Summary**: 37 muscles | Passing: 28 | Failing: 9 | Perfect(4/4): 14
+**Summary**: 29 muscles | Passing: 22 | Failing: 7 | Perfect(4/4): 13
 
-**Inheritance**: Master-only(1): 7 | Inheritable(0): 30
+**Inheritance**: Master-only(1): 5 | Inheritable(0): 24
 
-**Metadata Adoption**: 3/37 have standard header | 2/37 linked to skills | 3/37 have review dates
+**Metadata Adoption**: 3/29 have standard header | 2/29 linked to skills | 3/29 have review dates
 
-**Categories**: build: 6 | validation: 13 | analysis: 4 | converter: 7 | utility: 7
+**Categories**: build: 4 | validation: 7 | analysis: 4 | converter: 7 | utility: 7
 
 ## Overall
 
@@ -622,5 +614,5 @@ Muscles SHOULD use the standard header format for discoverability:
 | Agents | 12 |
 | Instructions | 128 |
 | Prompts | 71 |
-| Muscles | 37 |
-| **Total** | **413** |
+| Muscles | 29 |
+| **Total** | **405** |

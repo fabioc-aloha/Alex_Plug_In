@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Create a new skill from real-world experience
 application: "When scaffolding new projects, files, or architecture components"
 agent: Alex
@@ -26,8 +27,7 @@ Before creating a skill, confirm:
    - `heir:m365` — targets M365 heir only (Teams/M365-specific)
    - `heir:vscode` — heir maintains its own version
 4. **Create SKILL.md**: Domain knowledge with tables, thresholds, examples
-5. **Add synapses.json**: 2-5 connections to related skills
-6. **Assess trifecta need**: Does it need an instruction and/or prompt?
+5. **Assess trifecta need**: Does it need an instruction and/or prompt?
    - If non-inheritable, add matching `inheritance:` frontmatter to siblings
 7. **Register**: Add to memory-activation index
 

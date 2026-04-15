@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Security review — OWASP, STRIDE, dependency audit
 application: "When requesting architecture health checks, quality audits, or validation"
 agent: Alex

@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Manage brand assets, visual identity, and platform-specific branding
 application: "When generating tests, test plans, or validation strategies"
 agent: Alex

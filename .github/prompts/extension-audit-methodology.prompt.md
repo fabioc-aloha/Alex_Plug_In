@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Systematic 5-dimension quality audit for VS Code extensions: debug cleanliness, dead code, performance, menus, and dependencies
 application: "When requesting architecture health checks, quality audits, or validation"
 inheritance: master-only

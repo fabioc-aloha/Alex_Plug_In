@@ -1,4 +1,5 @@
 ---
+sem: 1
 mode: agent
 description: "Scaffold properly structured Markdown files from templates"
 ---

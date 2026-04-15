@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Deep self-assessment and architecture optimization
 application: "When performing self-assessment or actualization workflows"
 agent: Alex

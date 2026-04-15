@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Execute release management workflow for version bumping, changelog, and publishing
 application: "When preparing releases, publishing artifacts, or deployment workflows"
 agent: Alex
@@ -11,8 +12,7 @@ Execute the full release workflow with quality gates at every step.
 ## Phase 0: Pre-Release Assessment
 
 1. Run Brain QA (`/brainqa`) and block if broken connections or count drift detected
-2. Run `node scripts/audit-synapses.cjs` and verify zero errors
-3. Create a TODO list tracking each phase below
+2. Create a TODO list tracking each phase below
 
 ## Phase 1: Version Bump
 

@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Scaffold a production-ready VS Code Chat Participant with streaming, error handling, and follow-up provider support
 application: "When scaffolding new projects, files, or architecture components"
 ---

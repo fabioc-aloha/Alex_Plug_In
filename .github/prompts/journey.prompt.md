@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Start a curated learning journey for your role
 application: "When starting research sessions or learning new domains"
 mode: agent

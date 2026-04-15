@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Run a structured 4-phase implementation plan using the VS Code Plan Agent
 application: "When developing prompts, instructions, or agent configurations"
 agent: Alex
@@ -70,7 +71,7 @@ Before executing, validate the plan:
 
 ### Architecture Refactoring Plan
 ```
-Discovery:  Read all affected .md + synapses.json + SYNAPSE-SCHEMA.json
+Discovery:  Read all affected .md files, check inheritance rules
 Alignment:  Confirm scope, check for master-only restrictions
 Design:     Edit → validate → sync to heir → brain-qa
 Refinement: Identify brain-qa phases impacted, changelog entry needed
@@ -78,10 +79,10 @@ Refinement: Identify brain-qa phases impacted, changelog entry needed
 
 ### New Skill Plan
 ```
-Discovery:  Check SKILLS-CATALOG for existing coverage; read skill-building trifecta
-Alignment:  Confirm trifecta scope (SKILL.md + instructions + prompt + synapses)
+Discovery:  Check existing skills for coverage; read skill-building trifecta
+Alignment:  Confirm trifecta scope (SKILL.md + instructions + prompt)
 Design:     Create files in order → add to memory-activation index → run brain-qa
-Refinement: Verify synapse schema compliance, heir sync, catalog count update
+Refinement: Verify heir sync, catalog count update
 ```
 
 ### Release Preparation Plan

@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Run neural maintenance to validate and repair synaptic connections
 application: "When maintaining cognitive architecture or neural systems"
 agent: Alex
@@ -11,17 +12,15 @@ Run unconscious processing and architecture health checks.
 
 ## Process
 
-1. Run `brain-qa.ps1` for comprehensive architecture validation
-2. Use `alex_synapse_health` to validate connections
-3. Use `alex_architecture_status` to check overall health
-4. **FIX** all issues found (don't just report them)
-5. Sync any drifted files between Master and Heir
-6. Update counts, timestamps, and stale references
+1. Run `brain-qa.cjs` for comprehensive architecture validation
+2. Use `alex_architecture_status` to check overall health
+3. **FIX** all issues found (don't just report them)
+4. Sync any drifted files between Master and Heir
+5. Update counts, timestamps, and stale references
 
 ## Behavior
 
 - **DO NOT ASK** for permission — automatically fix everything fixable
-- Sync synapse files if out of sync
 - Update GK counts if drifted
 - Repair broken file references
 - Only report issues that require human decision

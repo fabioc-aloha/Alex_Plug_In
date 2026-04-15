@@ -1,4 +1,5 @@
 ---
+sem: 1
 mode: agent
 description: "Convert Markdown to RFC 5322 email (.eml) for newsletters and communication"
 ---

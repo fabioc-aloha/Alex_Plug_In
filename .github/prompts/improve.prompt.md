@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: "Interactive project improvement — identify trifecta candidates and run research-first gap analysis"
 application: "When starting research sessions or learning new domains"
 agent: "Alex"
@@ -36,8 +37,7 @@ For each trifecta candidate:
 1. **Check what exists**: Skill? Instruction? Prompt?
 2. **Create missing instruction** if needed (procedural steps, auto-loaded)
 3. **Create missing prompt** if needed (interactive `/command`)
-4. **Wire synapses** — each component references the other two + related files
-5. **Validate purpose** — can you justify why each file exists?
+4. **Validate purpose** — can you justify why each file exists?
 
 ### Phase 3: Research-First Gap Analysis (30 min)
 
@@ -52,7 +52,7 @@ Run the 4-dimension gap analysis:
 
 ### Phase 4: Validation (5 min)
 
-1. Run Dream (Neural Maintenance) — 0 broken synapses
+1. Run Dream (Neural Maintenance) — brain-qa passes
 2. Verify counts updated in `copilot-instructions.md`
 3. Verify new trifectas are justified (pass the Why Test)
 

@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Scaffold or troubleshoot a Microsoft Teams app or M365 Copilot declarative agent with correct schema, icons, and packaging
 application: "When debugging issues, investigating failures, or root cause analysis"
 ---

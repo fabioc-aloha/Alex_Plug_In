@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Validate VS Code extension manifest consistency: command registration, configuration keys, and graceful degradation patterns
 application: "When developing or maintaining VS Code extensions"
 ---

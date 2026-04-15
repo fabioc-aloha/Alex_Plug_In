@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: "Add visual memory (reference photos, voice samples, or video styles) to a skill for self-sufficient face-consistent generation"
 application: "When analyzing data, creating visualizations, or building reports"
 ---

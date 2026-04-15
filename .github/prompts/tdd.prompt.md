@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Start a testing workflow — TDD, test strategy, coverage analysis, or flaky test triage
 application: "When generating tests, test plans, or validation strategies"
 agent: Alex

@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Systematic code review with comprehensive checklist and severity classification
 application: "When requesting code reviews, PR feedback, or quality assessment"
 agent: Alex

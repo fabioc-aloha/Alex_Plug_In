@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Begin a guided meditation session for knowledge consolidation
 application: "When requesting knowledge consolidation, neural maintenance, or reflective sessions"
 agent: Alex

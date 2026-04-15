@@ -1,4 +1,5 @@
 ---
+sem: 1
 agent: Alex
 description: Cross-domain knowledge transfer and pattern application
 application: "When requesting cross domain transfer workflows"

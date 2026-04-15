@@ -1,4 +1,5 @@
 ---
+sem: 1
 mode: agent
 description: "Convert Markdown to standalone HTML with professional styling"
 ---

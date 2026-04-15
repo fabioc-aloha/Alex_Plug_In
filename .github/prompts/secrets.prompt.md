@@ -1,4 +1,5 @@
 ---
+sem: 1
 description: Manage API keys and secrets with VS Code SecretStorage
 application: "When designing APIs, integrations, or service interfaces"
 agent: Alex
