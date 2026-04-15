@@ -77,7 +77,7 @@ Every skill aspires to structural merit plus capability completeness:
 Quality = Visibility + Merit + Capability
 
 Visibility:  fm (frontmatter with applyTo, description)
-Merit:       struct + code + bounds
+Merit:       code + bounds
 Capability:  tri (trifecta) + muscle (automation)
 ```
 
@@ -159,25 +159,32 @@ Pseudocode muscles document WHAT to do when a universal script isn't feasible.
 | Dimension | What it measures | Required for |
 |-----------|------------------|--------------|
 | **fm** | Visibility to the brain | All (gate) |
-| **struct** | Structural merit | Pass threshold |
 | **code** | Code examples | Pass threshold |
-| **bounds** | Size limits | Pass threshold |
+| **bounds** | Size limits (100-500 lines) | Pass threshold |
 | **tri** | Trifecta alignment | Skill type |
 | **muscle** | Automation component | Agentic status |
+| **inh** | Inheritance (informational) | Heir sync planning |
+| **stale** | Staleness (informational) | Semantic review trigger |
+| **sem** | Semantic review complete | Quality tracking |
 
 ## Scoring Model
 
 ```
-Score = fm + struct + code + bounds + tri + muscle (max 6)
+Score = fm + code + bounds + tri + muscle (max 5)
 
 Pass thresholds by tier:
-  core:       6/6 (must be perfect)
-  standard:   5/6 (one defect allowed)
-  extended:   4/6 (two defects allowed)
-  specialist: 3/6 (three defects allowed)
+  core:       5/5 (must be perfect)
+  standard:   4/5 (one defect allowed)
+  extended:   3/5 (two defects allowed)
+  specialist: 2/5 (three defects allowed)
 ```
 
 **Gate requirement**: fm=1 is mandatory. Without frontmatter, the skill is invisible to activation.
+
+**Informational columns** (not scored):
+- **inh**: Inheritance status — 1=master-only (excluded from heir sync), 0=synced
+- **stale**: Staleness signal — 1=needs research refresh (external API churn), 0=stable
+- **sem**: Semantic review — 1=reviewed and updated, 0=pending review
 
 ## Type Classification
 
@@ -276,55 +283,48 @@ To validate the scoring model, we examined representative skills across the scor
 
 ### Sample Analysis (April 2026)
 
-| Skill | Tier | Score | fm | struct | code | bounds | tri | muscle | Type | Human Assessment |
-|-------|------|------:|:--:|:------:|:----:|:------:|:---:|:------:|:----:|------------------|
-| dissertation-defense | exte | 1/4 | 1 | 0 | 0 | 0 | 0 | 0 | - | Good domain content, actionable checklists |
-| career-development | exte | 2/4 | 1 | 0 | 0 | 1 | 0 | 0 | - | Excellent tables, complete resume guidance |
-| code-review | core | 3/6 | 1 | 0 | 1 | 1 | 0 | 0 | - | High-quality methodology, 3-pass framework |
-| image-handling | stan | 4/5 | 1 | 0 | 1 | 1 | 1 | 0 | I | Clear format selection, code examples |
-| brain-qa | stan | 5/5 | 1 | 0 | 1 | 1 | 1 | 1 | A | Complete with automation script |
-| md-to-word | stan | 5/5 | 1 | 0 | 1 | 1 | 1 | 1 | A | Full conversion pipeline |
+| Skill | Tier | Score | fm | code | bounds | tri | muscle | Type | Human Assessment |
+|-------|------|------:|:--:|:----:|:------:|:---:|:------:|:----:|------------------|
+| dissertation-defense | exte | 1/3 | 1 | 0 | 0 | 0 | 0 | - | Good domain content, actionable checklists |
+| career-development | exte | 2/3 | 1 | 0 | 1 | 0 | 0 | - | Excellent tables, complete resume guidance |
+| code-review | core | 3/5 | 1 | 1 | 1 | 0 | 0 | - | High-quality methodology, 3-pass framework |
+| image-handling | stan | 4/4 | 1 | 1 | 1 | 1 | 0 | I | Clear format selection, code examples |
+| brain-qa | stan | 5/4 | 1 | 1 | 1 | 1 | 1 | A | Complete with automation script |
+| md-to-word | stan | 5/4 | 1 | 1 | 1 | 1 | 1 | A | Full conversion pipeline |
 
 ### Criterion Validity Findings
 
-| Dimension | Pass Rate | Issue Identified | Validity |
+| Dimension | Pass Rate | Issue Identified | Decision |
 |-----------|----------:|------------------|----------|
-| **fm** | 168/168 | None | ✓ Valid |
-| **struct** | 2/168 | Requires `## Troubleshooting` AND `## Activation` sections — only 2 skills use this template | ✗ Invalid |
-| **code** | 128/168 | Correctly identifies code examples | ✓ Valid |
-| **bounds** | 152/168 | Correctly flags outliers | ✓ Valid |
-| **tri** | 97/168 | Misses renamed instructions (e.g., `code-review` vs `code-review-guidelines`) | ⚠ Partial |
-| **muscle** | 9/168 | Correctly identifies automation scripts | ✓ Valid |
+| **fm** | 168/168 | None — mandatory gate | ✓ KEEP |
+| **~~struct~~** | 2/168 | Required arbitrary `## Troubleshooting` + `## Activation` headers | ✗ REMOVED |
+| **code** | 128/168 | Correctly identifies code examples | ✓ KEEP |
+| **bounds** | 152/168 | 50 lines too lenient for stubs | ✓ KEEP (raised to 100-500) |
+| **tri** | 97/168 | Naming mismatches can be fixed manually | ✓ KEEP (semantic review needed) |
+| **muscle** | 9/168 | Correctly identifies agentic capability | ✓ KEEP |
 
-### Detailed Analysis
+### Implemented Changes (April 2026)
 
-**struct (2/168 pass) — INVALID CRITERION**
+**struct — REMOVED**
 
-The `struct` dimension requires BOTH of these exact section headers:
+The `struct` dimension required BOTH of these exact section headers:
 - `## Troubleshooting`
 - `## Activation` (or `## Activation Patterns`)
 
-Only `research-first-development` and `skill-building` have both. This doesn't measure structural quality — it measures adherence to an arbitrary template that 98.8% of skills don't use.
+Only 2/168 skills used this template. Removed entirely — doesn't measure structural quality.
 
-**Example**: `code-review` has excellent structure (Review Priority, 3-Pass Review, Comment Prefixes, Checklist, Anti-Patterns) but scores struct=0 because it lacks these specific headers.
+**bounds — RAISED TO 100-500**
 
-**tri (97/168 pass) — PARTIAL VALIDITY**
+Minimum raised from 50 to 100 lines. Skills under 100 lines are stubs that lack substance.
 
-The trifecta check (`hasMatchingInstruction`) looks for `{skill-name}.instructions.md`. This misses:
-- `code-review` → instruction is `code-review-guidelines.instructions.md` (tri=0, should be 1)
-- Skills with hyphenated variants or merged instructions
+**tri — KEEP (semantic review handles mismatches)**
 
-**muscle (9/168 pass) — VALID BUT OVERSTATED**
+The exact-match criterion correctly flags missing instructions. Naming mismatches (e.g., `code-review` vs `code-review-guidelines.instructions.md`) are valid findings — the semantic review process (`stale` signal, `sem` completion) handles research and updates.
 
-The muscle criterion correctly identifies agentic skills, but the 159/168 "defect" count is misleading — most skills are legitimately intellectual and don't need automation.
-
-### Proposed Refinements
-
-| Dimension | Current | Proposed |
-|-----------|---------|----------|
-| **struct** | Troubleshooting + Activation sections | ≥3 level-2 headers (`##`) indicating organized structure |
-| **tri** | Exact name match only | Pattern match: `{skill-name}*.instructions.md` |
-| **muscle** | Counted as defect if missing | Only count as defect for skills with `actionable: true` in frontmatter |
+**Informational columns added:**
+- **inh**: Read from `sync-architecture.cjs` SKILL_EXCLUSIONS — helps plan heir sync upgrades
+- **stale**: Hardcoded set of skills with external API dependencies — signals "research needed"
+- **sem**: Preserved across grid regenerations — tracks semantic review completion
 
 ### Type Classification Validity
 
@@ -379,12 +379,12 @@ The main `alex` agent has `## Core Identity` which serves the same purpose but d
 
 Only 3 agents (alex-builder, alex-researcher, alex-validator) have hooks. The other 9 score 0, but this isn't a defect — most agents don't need `PostToolUse` automation. The criterion confuses "capability present" with "capability needed."
 
-**Proposed Agent Refinements**
+**Agent Refinements — PENDING**
 
-| Dimension | Current | Proposed |
-|-----------|---------|----------|
-| **persona** | Match specific header names | Match `## Core` OR `## Mental` OR `## Persona` OR `## Identity` |
-| **hooks** | Scored as defect if missing | Only score if agent performs file operations (Builder, Validator) |
+| Dimension | Current | Proposed | Status |
+|-----------|---------|----------|--------|
+| **persona** | Match specific header names | Match `## Core` OR `## Mental` OR `## Persona` OR `## Identity` | Review needed |
+| **hooks** | Scored as defect if missing | Only score if agent performs file operations (Builder, Validator) | Review needed |
 
 ### Instruction Scoring Validation (April 2026)
 
@@ -438,13 +438,13 @@ Two issues:
    - `terminal-command-safety` — safety rules, no skill needed
    - `adversarial-oversight` — review protocol, no skill needed
 
-**Proposed Instruction Refinements**
+**Instruction Refinements — PENDING**
 
-| Dimension | Current | Proposed |
-|-----------|---------|----------|
-| **fm** | Requires `applyTo` | Requires `description` AND (`applyTo` OR `excludeAgent`) |
-| **spec** | Penalizes `applyTo: "**"` | Skip specificity check; Copilot's semantic matching handles routing |
-| **skill** | Exact name match | Pattern match: `{instr-name}*.skills/` OR instruction has `standalone: true` frontmatter |
+| Dimension | Current | Proposed | Status |
+|-----------|---------|----------|--------|
+| **fm** | Requires `applyTo` | Requires `description` AND (`applyTo` OR `excludeAgent`) | Review needed |
+| **spec** | Penalizes `applyTo: "**"` | Skip specificity check; Copilot's semantic matching handles routing | Review needed |
+| **skill** | Exact name match | Pattern match: `{instr-name}*.skills/` OR instruction has `standalone: true` frontmatter | Review needed |
 
 ### Prompt Scoring Validation (April 2026)
 
