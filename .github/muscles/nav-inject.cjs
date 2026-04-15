@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * nav-inject.cjs v1.0.0 - Cross-document navigation injector
  *
  * Reads a nav.json config and stamps a navigation table into every .md file

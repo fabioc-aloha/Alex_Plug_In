@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /**
+ * @inheritance inheritable
+ * @inheritance inheritable
  * Session Name Generator Muscle
  * Location: .github/muscles/session-name.cjs
  *

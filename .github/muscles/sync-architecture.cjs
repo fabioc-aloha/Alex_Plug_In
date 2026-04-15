@@ -1,5 +1,6 @@
 /**
  * @muscle sync-architecture
+ * @inheritance master-only
  * @description Synchronize cognitive architecture from Master Alex to VS Code heir
  * @version 1.0.0
  * @reviewed 2026-04-15
@@ -237,40 +238,33 @@ const SKILL_PII_SUBPATHS = {
   ],
 };
 
-// Get excluded muscles from inheritance.json (master-only scripts)
+// Get excluded muscles by reading @inheritance tags from file headers
 function getExcludedMuscles() {
-  const inheritancePath = path.join(
-    MASTER_GITHUB,
-    "muscles",
-    "inheritance.json",
+  const musclesDir = path.join(MASTER_GITHUB, "muscles");
+  const excluded = [];
+  
+  // Scan all muscle files for @inheritance tags
+  const muscleFiles = fs.readdirSync(musclesDir).filter(f => 
+    (f.endsWith('.cjs') || f.endsWith('.ts') || f.endsWith('.ps1')) &&
+    !f.startsWith('_') // Skip helper scripts like _add-inheritance-tags.cjs
   );
-  if (!fs.existsSync(inheritancePath)) {
-    console.warn("  [WARN] muscles/inheritance.json not found, using defaults");
-    return [
-      "sync-architecture.cjs",
-      "build-extension-package.ps1",
-      "audit-master-alex.ps1",
-      "inheritance.json",
-    ];
-  }
-  try {
-    const inheritance = JSON.parse(fs.readFileSync(inheritancePath, "utf8"));
-    const excluded = ["inheritance.json"]; // Always exclude the inheritance file itself
-    for (const [muscle, config] of Object.entries(inheritance.muscles || {})) {
-      if (config.inheritance === "master-only") {
-        excluded.push(muscle);
+  
+  for (const filename of muscleFiles) {
+    const filepath = path.join(musclesDir, filename);
+    try {
+      // Read first 50 lines to find @inheritance tag
+      const content = fs.readFileSync(filepath, 'utf8');
+      const header = content.slice(0, 2000); // ~50 lines should be enough
+      const match = header.match(/@inheritance\s+(master-only|inheritable)/);
+      if (match && match[1] === 'master-only') {
+        excluded.push(filename);
       }
+    } catch (e) {
+      console.warn(`  [WARN] Could not read ${filename}: ${e.message}`);
     }
-    return excluded;
-  } catch (e) {
-    console.warn(`  [WARN] Could not read inheritance.json: ${e.message}`);
-    return [
-      "sync-architecture.cjs",
-      "build-extension-package.ps1",
-      "audit-master-alex.ps1",
-      "inheritance.json",
-    ];
   }
+  
+  return excluded;
 }
 
 // Synapses in instruction files that reference master-only files.

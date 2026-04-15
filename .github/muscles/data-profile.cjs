@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * data-profile.cjs -- Quick data profiler
  * Version: 1.0.0
  *

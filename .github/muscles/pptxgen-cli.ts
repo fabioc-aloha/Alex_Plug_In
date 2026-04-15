@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /**
+ * @inheritance inheritable
+ * @inheritance inheritable
  * Alex PPTX Generator CLI
  * 
  * Usage:

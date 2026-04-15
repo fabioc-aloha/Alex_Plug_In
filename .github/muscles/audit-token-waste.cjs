@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /**
+ * @inheritance inheritable
  * Token Waste Audit Muscle
  *
  * Scans .github/ cognitive architecture files for token waste patterns

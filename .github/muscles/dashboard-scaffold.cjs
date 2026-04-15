@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * dashboard-scaffold.cjs -- Self-contained HTML dashboard generator
  * Version: 1.0.0
  *

@@ -1,5 +1,6 @@
 /**
  * @muscle md-to-word
+ * @inheritance inheritable
  * @description Convert Markdown to production-quality Word documents
  * @version 5.3.0
  * @skill md-to-word

@@ -15,6 +15,7 @@
     .\normalize-paths.ps1 -Target synapses     # Only synapses.json files
     .\normalize-paths.ps1 -Target skills       # Only SKILL.md files
 #>
+# @inheritance inheritable
 param(
     [ValidateSet('all', 'instructions', 'skills', 'synapses')]
     [string]$Target = 'all',

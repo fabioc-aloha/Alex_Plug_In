@@ -440,77 +440,77 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Prompt | Lines | desc | app | agent | >20L | Score | Pass |
 |--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|
-| [docx-to-md](../prompts/docx-to-md.prompt.md) | 129 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-scaffold](../prompts/md-scaffold.prompt.md) | 128 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-to-eml](../prompts/md-to-eml.prompt.md) | 122 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-to-html](../prompts/md-to-html.prompt.md) | 100 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [md-to-word](../prompts/md-to-word.prompt.md) | 123 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
-| [ai-character-reference-generation](../prompts/ai-character-reference-generation.prompt.md) | 380 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [ai-generated-readme-banners](../prompts/ai-generated-readme-banners.prompt.md) | 503 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [alex](../prompts/alex.prompt.md) | 8 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [audit-writing](../prompts/audit-writing.prompt.md) | 37 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [azure](../prompts/azure.prompt.md) | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [builder](../prompts/builder.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [character-aging-progression](../prompts/character-aging-progression.prompt.md) | 167 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [chat-participant](../prompts/chat-participant.prompt.md) | 196 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [documentarian](../prompts/documentarian.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [extension-audit-methodology](../prompts/extension-audit-methodology.prompt.md) | 514 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [flux-brand-finetune](../prompts/flux-brand-finetune.prompt.md) | 91 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [gamma](../prompts/gamma.prompt.md) | 218 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [graph-api](../prompts/graph-api.prompt.md) | 210 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [image-handling](../prompts/image-handling.prompt.md) | 132 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [journey](../prompts/journey.prompt.md) | 231 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [m365-agent-debug](../prompts/m365-agent-debug.prompt.md) | 184 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [m365](../prompts/m365.prompt.md) | 16 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [marp](../prompts/marp.prompt.md) | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [mcp-server](../prompts/mcp-server.prompt.md) | 193 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [presentation](../prompts/presentation.prompt.md) | 105 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [researcher](../prompts/researcher.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [teams-app](../prompts/teams-app.prompt.md) | 200 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [ui-ux-audit](../prompts/ui-ux-audit.prompt.md) | 686 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [validate-config](../prompts/validate-config.prompt.md) | 70 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [validator](../prompts/validator.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [visual-memory](../prompts/visual-memory.prompt.md) | 221 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [vscode-extension-audit](../prompts/vscode-extension-audit.prompt.md) | 164 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [add-endpoint](../prompts/add-endpoint.prompt.md) | 117 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [alex-initialization](../prompts/alex-initialization.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [analyze](../prompts/analyze.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [brainqa](../prompts/brainqa.prompt.md) | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [brand](../prompts/brand.prompt.md) | 32 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [code-review-checklist](../prompts/code-review-checklist.prompt.md) | 84 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [create-store](../prompts/create-store.prompt.md) | 111 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [cross-domain-transfer](../prompts/cross-domain-transfer.prompt.md) | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [dashboard](../prompts/dashboard.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [datastory](../prompts/datastory.prompt.md) | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [debug](../prompts/debug.prompt.md) | 25 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [diagramming](../prompts/diagramming.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [domain-learning](../prompts/domain-learning.prompt.md) | 43 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [dream](../prompts/dream.prompt.md) | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [export-memory](../prompts/export-memory.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [gapanalysis](../prompts/gapanalysis.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [docx-to-md](../prompts/docx-to-md.prompt.md) | 130 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-scaffold](../prompts/md-scaffold.prompt.md) | 129 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-to-eml](../prompts/md-to-eml.prompt.md) | 123 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-to-html](../prompts/md-to-html.prompt.md) | 101 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [md-to-word](../prompts/md-to-word.prompt.md) | 124 | 1 | 0 | 0 | 1 | 2/4 | ✗ |
+| [ai-character-reference-generation](../prompts/ai-character-reference-generation.prompt.md) | 381 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [ai-generated-readme-banners](../prompts/ai-generated-readme-banners.prompt.md) | 504 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [alex](../prompts/alex.prompt.md) | 9 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [audit-writing](../prompts/audit-writing.prompt.md) | 38 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [azure](../prompts/azure.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [builder](../prompts/builder.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [character-aging-progression](../prompts/character-aging-progression.prompt.md) | 168 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [chat-participant](../prompts/chat-participant.prompt.md) | 197 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [documentarian](../prompts/documentarian.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [extension-audit-methodology](../prompts/extension-audit-methodology.prompt.md) | 515 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [flux-brand-finetune](../prompts/flux-brand-finetune.prompt.md) | 92 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [gamma](../prompts/gamma.prompt.md) | 219 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [graph-api](../prompts/graph-api.prompt.md) | 211 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [image-handling](../prompts/image-handling.prompt.md) | 133 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [journey](../prompts/journey.prompt.md) | 232 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [m365-agent-debug](../prompts/m365-agent-debug.prompt.md) | 185 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [m365](../prompts/m365.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [marp](../prompts/marp.prompt.md) | 195 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [mcp-server](../prompts/mcp-server.prompt.md) | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [presentation](../prompts/presentation.prompt.md) | 106 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [researcher](../prompts/researcher.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [teams-app](../prompts/teams-app.prompt.md) | 201 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [ui-ux-audit](../prompts/ui-ux-audit.prompt.md) | 687 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [validate-config](../prompts/validate-config.prompt.md) | 71 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [validator](../prompts/validator.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
+| [visual-memory](../prompts/visual-memory.prompt.md) | 222 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [vscode-extension-audit](../prompts/vscode-extension-audit.prompt.md) | 165 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
+| [add-endpoint](../prompts/add-endpoint.prompt.md) | 118 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [alex-initialization](../prompts/alex-initialization.prompt.md) | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [analyze](../prompts/analyze.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [brainqa](../prompts/brainqa.prompt.md) | 47 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [brand](../prompts/brand.prompt.md) | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [code-review-checklist](../prompts/code-review-checklist.prompt.md) | 85 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [create-store](../prompts/create-store.prompt.md) | 112 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [cross-domain-transfer](../prompts/cross-domain-transfer.prompt.md) | 53 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [dashboard](../prompts/dashboard.prompt.md) | 43 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [datastory](../prompts/datastory.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [debug](../prompts/debug.prompt.md) | 26 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [diagramming](../prompts/diagramming.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [domain-learning](../prompts/domain-learning.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [dream](../prompts/dream.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [export-memory](../prompts/export-memory.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [gapanalysis](../prompts/gapanalysis.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 | [improve](../prompts/improve.prompt.md) | 87 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [interpret](../prompts/interpret.prompt.md) | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [knowledge](../prompts/knowledge.prompt.md) | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [learn](../prompts/learn.prompt.md) | 29 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [masteraudit](../prompts/masteraudit.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [meditate](../prompts/meditate.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [memory-audit](../prompts/memory-audit.prompt.md) | 36 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [northstar](../prompts/northstar.prompt.md) | 104 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [performance-assessment](../prompts/performance-assessment.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [plan](../prompts/plan.prompt.md) | 101 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [promotetomaster](../prompts/promotetomaster.prompt.md) | 40 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [refactor](../prompts/refactor.prompt.md) | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [interpret](../prompts/interpret.prompt.md) | 47 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [knowledge](../prompts/knowledge.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [learn](../prompts/learn.prompt.md) | 30 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [masteraudit](../prompts/masteraudit.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [meditate](../prompts/meditate.prompt.md) | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [memory-audit](../prompts/memory-audit.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [northstar](../prompts/northstar.prompt.md) | 105 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [performance-assessment](../prompts/performance-assessment.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [plan](../prompts/plan.prompt.md) | 102 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [promotetomaster](../prompts/promotetomaster.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [refactor](../prompts/refactor.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 | [release](../prompts/release.prompt.md) | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [review](../prompts/review.prompt.md) | 55 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [root-cause-analysis](../prompts/root-cause-analysis.prompt.md) | 28 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [secrets](../prompts/secrets.prompt.md) | 91 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [security-review](../prompts/security-review.prompt.md) | 26 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [selfactualize](../prompts/selfactualize.prompt.md) | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [review](../prompts/review.prompt.md) | 56 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [root-cause-analysis](../prompts/root-cause-analysis.prompt.md) | 29 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [secrets](../prompts/secrets.prompt.md) | 92 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [security-review](../prompts/security-review.prompt.md) | 27 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [selfactualize](../prompts/selfactualize.prompt.md) | 39 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 | [skill-building](../prompts/skill-building.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [tdd](../prompts/tdd.prompt.md) | 62 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [token-audit](../prompts/token-audit.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [visualize](../prompts/visualize.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [word](../prompts/word.prompt.md) | 63 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [tdd](../prompts/tdd.prompt.md) | 63 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [token-audit](../prompts/token-audit.prompt.md) | 35 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [visualize](../prompts/visualize.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| [word](../prompts/word.prompt.md) | 64 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
 
 **Summary**: 71 prompts | Passing: 66 | Failing: 5 | Perfect(4/4): 39
 
@@ -568,43 +568,44 @@ Muscles SHOULD use the standard header format for discoverability:
 
 | Muscle | Lines | Lang | Category | comments | err | bounds | compat | Score | Pass | inh | Reviewed |
 |--------|------:|:----:|----------|:--------:|:---:|:------:|:------:|------:|:----:|:---:|----------|
-| [install-hooks.cjs](../muscles/install-hooks.cjs) | 62 | js | build | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
-| [validate-skills.cjs](../muscles/validate-skills.cjs) | 106 | js | validation | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
-| [audit-master-alex.cjs](../muscles/audit-master-alex.cjs) | 537 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
-| [audit-token-waste.cjs](../muscles/audit-token-waste.cjs) | 449 | js | validation | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [brain-qa-heir.cjs](../muscles/brain-qa-heir.cjs) | 962 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 338 | ps | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
-| [chart-recommend.cjs](../muscles/chart-recommend.cjs) | 241 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [converter-qa.cjs](../muscles/converter-qa.cjs) | 1268 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | — |
-| [dashboard-scaffold.cjs](../muscles/dashboard-scaffold.cjs) | 316 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [data-profile.cjs](../muscles/data-profile.cjs) | 286 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [fix-fence-bug.ps1](../muscles/fix-fence-bug.ps1) | 189 | ps | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [md-to-word.cjs](../muscles/md-to-word.cjs) | 1186 | js | converter | 1 | 1 | 0 | 1 | 3/4 | ✓ | 0 | 2026-04-15 |
-| [nav-inject.cjs](../muscles/nav-inject.cjs) | 215 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
-| [new-skill.cjs](../muscles/new-skill.cjs) | 143 | js | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [pptxgen-cli.ts](../muscles/pptxgen-cli.ts) | 136 | ts | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
-| [sync-architecture.cjs](../muscles/sync-architecture.cjs) | 1655 | js | build | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
-| [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 140 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [brain-qa.cjs](../muscles/brain-qa.cjs) | 937 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
-| [data-ingest.cjs](../muscles/data-ingest.cjs) | 367 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [docx-to-md.cjs](../muscles/docx-to-md.cjs) | 379 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [dream-cli.ts](../muscles/dream-cli.ts) | 116 | ts | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [gamma-generator.cjs](../muscles/gamma-generator.cjs) | 913 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [markdown-lint.cjs](../muscles/markdown-lint.cjs) | 444 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [md-scaffold.cjs](../muscles/md-scaffold.cjs) | 542 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [md-to-eml.cjs](../muscles/md-to-eml.cjs) | 443 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [md-to-html.cjs](../muscles/md-to-html.cjs) | 437 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [normalize-paths.ps1](../muscles/normalize-paths.ps1) | 194 | ps | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [ralph-loop.cjs](../muscles/ralph-loop.cjs) | 740 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
-| [session-name.cjs](../muscles/session-name.cjs) | 237 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [install-hooks.cjs](../muscles/install-hooks.cjs) | 64 | js | build | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
+| [validate-skills.cjs](../muscles/validate-skills.cjs) | 108 | js | validation | 0 | 0 | 1 | 1 | 2/4 | ✗ | 0 | — |
+| [audit-master-alex.cjs](../muscles/audit-master-alex.cjs) | 539 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
+| [audit-token-waste.cjs](../muscles/audit-token-waste.cjs) | 450 | js | validation | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [brain-qa-heir.cjs](../muscles/brain-qa-heir.cjs) | 964 | js | validation | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 339 | ps | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 1 | — |
+| [chart-recommend.cjs](../muscles/chart-recommend.cjs) | 242 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [converter-qa.cjs](../muscles/converter-qa.cjs) | 1269 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | — |
+| [dashboard-scaffold.cjs](../muscles/dashboard-scaffold.cjs) | 317 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [data-profile.cjs](../muscles/data-profile.cjs) | 287 | js | analysis | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [fix-fence-bug.ps1](../muscles/fix-fence-bug.ps1) | 190 | ps | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [md-to-word.cjs](../muscles/md-to-word.cjs) | 1187 | js | converter | 1 | 1 | 0 | 1 | 3/4 | ✓ | 0 | 2026-04-15 |
+| [nav-inject.cjs](../muscles/nav-inject.cjs) | 216 | js | converter | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [new-skill.cjs](../muscles/new-skill.cjs) | 145 | js | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [pptxgen-cli.ts](../muscles/pptxgen-cli.ts) | 138 | ts | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
+| [sync-architecture.cjs](../muscles/sync-architecture.cjs) | 1649 | js | build | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
+| [_add-inheritance-tags.cjs](../muscles/_add-inheritance-tags.cjs) | 81 | js | utility | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
+| [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 141 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [brain-qa.cjs](../muscles/brain-qa.cjs) | 938 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
+| [data-ingest.cjs](../muscles/data-ingest.cjs) | 368 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [docx-to-md.cjs](../muscles/docx-to-md.cjs) | 380 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [dream-cli.ts](../muscles/dream-cli.ts) | 118 | ts | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [gamma-generator.cjs](../muscles/gamma-generator.cjs) | 915 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [markdown-lint.cjs](../muscles/markdown-lint.cjs) | 445 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [md-scaffold.cjs](../muscles/md-scaffold.cjs) | 543 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [md-to-eml.cjs](../muscles/md-to-eml.cjs) | 444 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [md-to-html.cjs](../muscles/md-to-html.cjs) | 438 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [normalize-paths.ps1](../muscles/normalize-paths.ps1) | 195 | ps | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [ralph-loop.cjs](../muscles/ralph-loop.cjs) | 742 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [session-name.cjs](../muscles/session-name.cjs) | 239 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 
-**Summary**: 29 muscles | Passing: 22 | Failing: 7 | Perfect(4/4): 13
+**Summary**: 30 muscles | Passing: 22 | Failing: 8 | Perfect(4/4): 13
 
-**Inheritance**: Master-only(1): 5 | Inheritable(0): 24
+**Inheritance**: Master-only(1): 5 | Inheritable(0): 25
 
-**Metadata Adoption**: 3/29 have standard header | 2/29 linked to skills | 3/29 have review dates
+**Metadata Adoption**: 3/30 have standard header | 2/30 linked to skills | 3/30 have review dates
 
-**Categories**: build: 4 | validation: 7 | analysis: 4 | converter: 7 | utility: 7
+**Categories**: build: 4 | validation: 7 | analysis: 4 | converter: 7 | utility: 8
 
 ## Overall
 
@@ -614,5 +615,5 @@ Muscles SHOULD use the standard header format for discoverability:
 | Agents | 12 |
 | Instructions | 128 |
 | Prompts | 71 |
-| Muscles | 29 |
-| **Total** | **405** |
+| Muscles | 30 |
+| **Total** | **406** |

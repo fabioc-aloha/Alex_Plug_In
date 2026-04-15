@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * docx-to-md.cjs v1.0.0 - Convert Word documents to clean Markdown
  *
  * Uses pandoc to convert .docx to .md with intelligent post-processing:

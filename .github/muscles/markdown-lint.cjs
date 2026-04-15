@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * markdown-lint.cjs -- Pre-conversion markdown validator
  * Version: 1.0.0
  *

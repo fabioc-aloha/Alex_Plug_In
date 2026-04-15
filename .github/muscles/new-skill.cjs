@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// @inheritance inheritable
+// @inheritance inheritable
 // New Skill Scaffold - Create properly structured skill with frontmatter
 // Location: .github/muscles/new-skill.cjs
 // Cross-platform port of new-skill.ps1

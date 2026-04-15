@@ -15,6 +15,7 @@
 # are handled by sync-architecture.cjs (DRY -- single source of truth).
 #
 # Usage: .\scripts\build-extension-package.ps1 [-SkipCompile] [-DryRun]
+# @inheritance master-only
 
 param(
     [switch]$SkipCompile,

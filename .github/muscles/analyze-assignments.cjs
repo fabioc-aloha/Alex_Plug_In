@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 /**
+ * @inheritance inheritable
  * Analyze assignment-log.json for delegation patterns.
  * Run during meditation or on-demand to surface routing intelligence.
  *

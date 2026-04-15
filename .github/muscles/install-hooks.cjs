@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// @inheritance inheritable
+// @inheritance inheritable
 // Install Git Hooks - Set up quality gate automation
 // Location: .github/muscles/install-hooks.cjs
 // Cross-platform port of install-hooks.ps1

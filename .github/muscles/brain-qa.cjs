@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * @muscle brain-qa
+ * @inheritance master-only
  * @description Generate brain health quality grid for cognitive architecture
  * @version 1.0.0
  * @skill brain-qa
@@ -448,11 +449,12 @@ function scanMuscles() {
   const musclesDir = path.join(GH, "muscles");
   if (!fs.existsSync(musclesDir)) return [];
 
-  // Load inheritance info
-  const inheritancePath = path.join(musclesDir, "inheritance.json");
-  const inheritance = fs.existsSync(inheritancePath)
-    ? JSON.parse(fs.readFileSync(inheritancePath, "utf-8")).muscles || {}
-    : {};
+  // Helper to read @inheritance from file header
+  function getInheritanceFromHeader(content) {
+    const header = content.slice(0, 2000); // ~50 lines
+    const match = header.match(/@inheritance\s+(master-only|inheritable)/);
+    return match ? match[1] : 'inheritable'; // default
+  }
 
   // Categorize muscles by pattern
   const CONVERTERS = ['md-to-word', 'md-to-html', 'md-to-eml', 'docx-to-md', 'md-scaffold', 'dashboard-scaffold', 'nav-inject'];
@@ -485,9 +487,8 @@ function scanMuscles() {
     const ext = path.extname(file);
     const lang = ext === '.ps1' ? 'ps' : ext === '.ts' ? 'ts' : 'js';
 
-    // Get inheritance info
-    const info = inheritance[file] || {};
-    const inh = info.inheritance === 'master-only' ? 1 : 0;
+    // Get inheritance from @inheritance tag in file header
+    const inh = getInheritanceFromHeader(content) === 'master-only' ? 1 : 0;
 
     // Check for well-documented code (header + inline comments)
     // Header: JSDoc block or PowerShell comment block

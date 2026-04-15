@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * md-to-html.cjs v1.0.0 - Convert Markdown to standalone HTML pages
  *
  * Produces self-contained HTML files with embedded CSS, Mermaid diagram PNGs,

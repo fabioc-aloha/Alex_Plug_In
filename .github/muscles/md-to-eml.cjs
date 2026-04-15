@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * md-to-eml.cjs v1.0.0 - Convert Markdown to email-safe .eml files
  *
  * Produces RFC 5322-compliant .eml files from Markdown with YAML frontmatter.

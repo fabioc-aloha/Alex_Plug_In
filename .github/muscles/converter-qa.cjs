@@ -1,4 +1,5 @@
 /**
+ * @inheritance master-only
  * converter-qa.cjs -- Converter Quality Assurance Framework
  * Version: 1.2.0
  *

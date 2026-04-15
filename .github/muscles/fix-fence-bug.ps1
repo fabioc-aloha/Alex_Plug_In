@@ -1,6 +1,7 @@
 # fix-fence-bug.ps1
 # Detects and fixes the VS Code create_file wrapping fence bug
 # Usage: pwsh -File fix-fence-bug.ps1 [-Fix] [-FullRepo] [-Path <specific-file>]
+# @inheritance inheritable
 
 param(
     [switch]$Fix,           # Actually fix the files (default: report only)

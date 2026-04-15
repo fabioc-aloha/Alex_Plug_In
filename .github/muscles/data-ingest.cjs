@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * data-ingest.cjs -- Universal data ingestion muscle
  * Version: 1.0.0
  *

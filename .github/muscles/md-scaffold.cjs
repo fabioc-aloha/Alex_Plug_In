@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * md-scaffold.cjs -- Markdown file scaffolder
  * Version: 1.0.0
  *

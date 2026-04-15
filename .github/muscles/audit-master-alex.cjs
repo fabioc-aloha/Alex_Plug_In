@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// @inheritance master-only
+// @inheritance master-only
 // Comprehensive Master Alex audit with 22 automated checks
 // Location: .github/muscles/audit-master-alex.cjs
 // Cross-platform port of audit-master-alex.ps1

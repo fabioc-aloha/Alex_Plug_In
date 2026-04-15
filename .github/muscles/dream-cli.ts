@@ -1,8 +1,10 @@
 #!/usr/bin/env npx ts-node
 /**
+ * @inheritance inheritable
  * Dream Protocol CLI
  * 
- * Runs neural maintenance and synapse validation from command line.
+ * Runs neural maintenance
+ * Runs neural maintenance from command line.
  * Uses the same core logic as VS Code extension's Dream command.
  * 
  * Usage:

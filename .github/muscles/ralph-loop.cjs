@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /**
+ * @inheritance inheritable
+ * @inheritance inheritable
  * Ralph Loop Muscle
  * Location: .github/muscles/ralph-loop.cjs
  *

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
+// @inheritance inheritable
 // Brain QA (Heir) - Semantic validation for deployed Alex heir instances
-// Location: .github/muscles/brain-qa-heir.cjs (inheritable, renamed to brain-qa.cjs in heir)
+// Location: .github/muscles/brain-qa-heir.cjs (ir instances
+// Location: .github/muscles/brain-qa-heir.cjs (renamed to brain-qa.cjs in heir)
 // Skill: brain-qa
 //
 // This is the heir-specific version. It omits master-only phases:

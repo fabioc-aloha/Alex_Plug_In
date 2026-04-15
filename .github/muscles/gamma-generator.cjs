@@ -1,4 +1,6 @@
 /**
+ * @inheritance inheritable
+ * @inheritance inheritable
  * Gamma Presentation Generator
  *
  * A robust Node.js script for generating presentations, documents,

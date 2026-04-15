@@ -1,4 +1,5 @@
 /**
+ * @inheritance inheritable
  * chart-recommend.cjs -- Story-intent chart advisor
  * Version: 1.0.0
  *
