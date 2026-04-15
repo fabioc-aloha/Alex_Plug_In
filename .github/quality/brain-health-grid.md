@@ -72,7 +72,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [counseling-psychology](../skills/counseling-psychology/SKILL.md) | exte | 208 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
 | [cross-cultural-collaboration](../skills/cross-cultural-collaboration/SKILL.md) | exte | 340 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
 | [deep-work-optimization](../skills/deep-work-optimization/SKILL.md) | exte | 366 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [dissertation-defense](../skills/dissertation-defense/SKILL.md) | exte | 495 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 0 |
+| [dissertation-defense](../skills/dissertation-defense/SKILL.md) | exte | 495 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
 | [fabric-notebook-publish](../skills/fabric-notebook-publish/SKILL.md) | exte | 177 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
 | [game-design](../skills/game-design/SKILL.md) | exte | 184 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
 | [grant-writing](../skills/grant-writing/SKILL.md) | exte | 195 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
@@ -91,7 +91,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [project-scaffolding](../skills/project-scaffolding/SKILL.md) | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
 | [sales-enablement](../skills/sales-enablement/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
 | [skill-building](../skills/skill-building/SKILL.md) | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [skill-catalog-generator](../skills/skill-catalog-generator/SKILL.md) | exte | 217 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 0 |
+| [skill-catalog-generator](../skills/skill-catalog-generator/SKILL.md) | exte | 217 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
 | [ui-ux-design](../skills/ui-ux-design/SKILL.md) | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
 | [agent-debug-panel](../skills/agent-debug-panel/SKILL.md) | stan | 138 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
 | [ai-agent-design](../skills/ai-agent-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
@@ -231,7 +231,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 **Skill Types**: Agentic(A): 8 | Intellectual(I): 133 | Incomplete(-): 25
 
-**Semantic Review**: 164/166 reviewed | 2 pending
+**Semantic Review**: 166/166 reviewed | 0 pending
 
 **Defects by dimension (informational)**:
 | fm | code | bounds | tri | muscle |
@@ -257,8 +257,8 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | sem |
 |-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:---:|
-| [alex-azure](../agents/alex-azure.agent.md) | 104 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 0 |
-| [alex-m365](../agents/alex-m365.agent.md) | 101 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 0 |
+| [alex-azure](../agents/alex-azure.agent.md) | 104 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 1 |
+| [alex-m365](../agents/alex-m365.agent.md) | 101 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✗ | 1 |
 | [alex-documentarian](../agents/alex-documentarian.agent.md) | 212 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
 | [alex](../agents/alex.agent.md) | 263 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
 | [alex-backend](../agents/alex-backend.agent.md) | 233 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
@@ -271,7 +271,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [alex-validator](../agents/alex-validator.agent.md) | 258 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 
 **Summary**: 12 agents | Passing: 10 | Failing: 2 | Perfect(5/5): 8
-**Semantic Review**: 10/12 reviewed | 2 pending
+**Semantic Review**: 12/12 reviewed | 0 pending
 
 ## Instructions
 
@@ -292,10 +292,10 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 | Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | sem |
 |-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|
-| [__test-exclusion](../instructions/__test-exclusion.instructions.md) | 7 | 1 | 0 | 0 | 0 | 0 | 1/5 | ✗ | 0 |
-| [teams-app-patterns](../instructions/teams-app-patterns.instructions.md) | 34 | 1 | 0 | 0 | 0 | 1 | 2/5 | ✗ | 0 |
-| [worldview-constitutional-ai](../instructions/worldview-constitutional-ai.instructions.md) | 40 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
-| [worldview-moral-psychology](../instructions/worldview-moral-psychology.instructions.md) | 37 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 0 |
+| [__test-exclusion](../instructions/__test-exclusion.instructions.md) | 7 | 1 | 0 | 0 | 0 | 0 | 1/5 | ✗ | 1 |
+| [teams-app-patterns](../instructions/teams-app-patterns.instructions.md) | 34 | 1 | 0 | 0 | 0 | 1 | 2/5 | ✗ | 1 |
+| [worldview-constitutional-ai](../instructions/worldview-constitutional-ai.instructions.md) | 40 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 1 |
+| [worldview-moral-psychology](../instructions/worldview-moral-psychology.instructions.md) | 37 | 1 | 0 | 1 | 0 | 0 | 2/5 | ✗ | 1 |
 | [ai-agent-design](../instructions/ai-agent-design.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
 | [ai-generated-readme-banners](../instructions/ai-generated-readme-banners.instructions.md) | 42 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 1 |
 | [ai-writing-avoidance](../instructions/ai-writing-avoidance.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
@@ -379,7 +379,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [log-pattern-analyzer](../instructions/log-pattern-analyzer.instructions.md) | 96 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
 | [markdown-mermaid](../instructions/markdown-mermaid.instructions.md) | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
 | [mcp-builder](../instructions/mcp-builder.instructions.md) | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
-| [md-scaffold](../instructions/md-scaffold.instructions.md) | 76 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 0 |
+| [md-scaffold](../instructions/md-scaffold.instructions.md) | 76 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
 | [meditation](../instructions/meditation.instructions.md) | 131 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
 | [memory-curation](../instructions/memory-curation.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
 | [nasa-code-standards](../instructions/nasa-code-standards.instructions.md) | 413 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
@@ -408,11 +408,11 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [code-review](../instructions/code-review.instructions.md) | 306 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [copilot-sdk](../instructions/copilot-sdk.instructions.md) | 52 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [data-visualization](../instructions/data-visualization.instructions.md) | 122 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [docx-to-md](../instructions/docx-to-md.instructions.md) | 82 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [docx-to-md](../instructions/docx-to-md.instructions.md) | 82 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [heir-feedback](../instructions/heir-feedback.instructions.md) | 56 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [mcp-development](../instructions/mcp-development.instructions.md) | 111 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [md-to-eml](../instructions/md-to-eml.instructions.md) | 80 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| [md-to-html](../instructions/md-to-html.instructions.md) | 68 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
+| [md-to-eml](../instructions/md-to-eml.instructions.md) | 80 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| [md-to-html](../instructions/md-to-html.instructions.md) | 68 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [md-to-word](../instructions/md-to-word.instructions.md) | 88 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [microsoft-graph-api](../instructions/microsoft-graph-api.instructions.md) | 124 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
 | [self-actualization](../instructions/self-actualization.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
@@ -423,7 +423,7 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 **Summary**: 128 instructions | Passing: 124 | Failing: 4 | Perfect(5/5): 19
 
-**Semantic Review**: 120/128 reviewed | 8 pending
+**Semantic Review**: 128/128 reviewed | 0 pending
 
 ## Prompts
 
