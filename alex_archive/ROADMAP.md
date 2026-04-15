@@ -1,8 +1,10 @@
-# Alex Cognitive Architecture — Roadmap
+# Alex Cognitive Architecture — Roadmap (Archived)
 
-![The path from partnership to trust](assets/banner-roadmap.svg)
+> ⚠️ **SUPERSEDED** — This file has been archived. See [PLAN-v8.0.0.md](../PLAN-v8.0.0.md) for the current planning document.
 
-**Last Updated**: April 15, 2026
+![The path from partnership to trust](../assets/banner-roadmap.svg)
+
+**Archived**: April 15, 2026
 
 ---
 

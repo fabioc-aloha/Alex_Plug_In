@@ -2,29 +2,29 @@
   "hotFiles": [],
   "stalledFiles": [
     "github/episodic/peripheral/file-observations.json",
-    "ROADMAP.md -> alex_archive/ROADMAP.md"
+    "alex_archive/ROADMAP.md"
   ],
   "todoHotspots": [
     {
       "file": "CHANGELOG.md",
       "todoCount": 10,
-      "scannedAt": 1776274891951
+      "scannedAt": 1776274918912
     },
     {
       "file": "platforms/vscode-extension/CHANGELOG.md",
       "todoCount": 9,
-      "scannedAt": 1776274891951
+      "scannedAt": 1776274918912
     },
     {
       "file": "alex_docs/research/ROUNDTABLE-SPEAKER-DIARIZATION.docx",
       "todoCount": 1,
-      "scannedAt": 1776274891951
+      "scannedAt": 1776274918912
     },
     {
       "file": "alex_docs/research/images/diagram-1.png",
       "todoCount": 1,
-      "scannedAt": 1776274891951
+      "scannedAt": 1776274918912
     }
   ],
-  "lastUpdated": 1776274891951
+  "lastUpdated": 1776274918912
 }
