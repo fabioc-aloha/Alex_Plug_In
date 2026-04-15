@@ -1,6 +1,7 @@
 ---
 applyTo: "**/*lora*,**/*finetune*,**/*fine-tune*,**/*train*image*,**/*brand*train*"
 description: "FLUX LoRA fine-tuning on Replicate — training data prep, trigger words, model creation, and inference with trained models"
+application: "When analyzing data, building visualizations, or creating reports"
 ---
 
 # FLUX Brand Fine-Tune Instructions

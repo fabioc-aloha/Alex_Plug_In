@@ -1,5 +1,6 @@
 ---
 description: "Trifecta audit protocol — systematic assessment of capability completeness across all three memory systems"
+application: "When following trifecta audit workflows or troubleshooting related issues"
 applyTo: "**/*trifecta*,**/*audit*"
 inheritance: master-only
 ---

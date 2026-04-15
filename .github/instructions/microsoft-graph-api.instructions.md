@@ -1,5 +1,6 @@
 ---
 description: "Microsoft Graph API integration — endpoint calls, MSAL/OAuth authentication, and M365 service patterns"
+application: "When implementing microsoft graph api or reviewing code that uses these patterns"
 applyTo: "**/*graph*,**/*msal*,**/*oauth*,**/*entra*"
 ---
 

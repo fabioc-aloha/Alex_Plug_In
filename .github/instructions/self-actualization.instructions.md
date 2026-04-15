@@ -1,5 +1,6 @@
 ---
 description: "Self-actualization cognitive skill for comprehensive architecture assessment and deep meditation"
+application: "When designing systems, planning architecture, or making structural decisions"
 applyTo: "**/*actuali*,**/*assessment*,**/*self-assess*"
 ---
 

@@ -1,5 +1,6 @@
 ---
 description: "VS Code extension audit methodology for code quality reviews and technical debt cleanup"
+application: "During code reviews, quality audits, or when assessing extension audit methodology"
 inheritance: master-only
 applyTo: "**/*audit*,**/scripts/audit*"
 ---

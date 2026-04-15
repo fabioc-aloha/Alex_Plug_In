@@ -356,15 +356,10 @@ function scanInstructions() {
     const lines = content.split("\n").length;
     const name = file.replace(".instructions.md", "");
 
-    // Check frontmatter completeness
+    // Check frontmatter completeness (description + application for discoverability)
     const hasDesc = /^description:/m.test(content);
-    const hasApplyTo = /^applyTo:/m.test(content);
-    const fmComplete = hasDesc && hasApplyTo;
-
-    // Check applyTo specificity (not just "**" alone)
-    const applyToMatch = content.match(/^applyTo:\s*["']?([^"'\n]+)/m);
-    const applyToValue = applyToMatch ? applyToMatch[1].trim() : "";
-    const isSpecific = applyToValue && applyToValue !== "**" && applyToValue !== '"**"';
+    const hasApplication = /^application:/m.test(content);
+    const fmComplete = hasDesc && hasApplication;
 
     // Check depth (>50 lines for substantive content)
     const hasDepth = lines > 50;
@@ -381,17 +376,16 @@ function scanInstructions() {
 
     const flags = {
       fm: fmComplete ? 1 : 0,
-      spec: isSpecific ? 1 : 0,
       depth: hasDepth ? 1 : 0,
       sect: hasStructure ? 1 : 0,
       code: hasCode ? 1 : 0,
       skill: hasSkill ? 1 : 0,
     };
 
-    const score = flags.fm + flags.spec + flags.depth + flags.sect + flags.code + flags.skill;
-    // fm is a GATE - instructions without frontmatter won't attach
-    const pass = fmComplete && (score >= 4);
-    results.push({ name, lines, flags, score, maxScore: 6, pass });
+    const score = flags.fm + flags.depth + flags.sect + flags.code + flags.skill;
+    // fm is a GATE - instructions without frontmatter won't be discoverable
+    const pass = fmComplete && (score >= 3);
+    results.push({ name, lines, flags, score, maxScore: 5, pass });
   }
 
   return results.sort((a, b) => a.score - b.score);
@@ -584,37 +578,40 @@ function generateGrid() {
   // Instructions table
   lines.push("## Instructions");
   lines.push("");
+  lines.push("> **Design**: Instructions are **discoverable knowledge modules** that can serve multiple skills. Frontmatter enables routing without reading the full document.");
+  lines.push("");
   lines.push("**Scoring Criteria**:");
   lines.push("| Dim | Name | 1 (good) | 0 (defect) |");
   lines.push("|:---:|------|----------|------------|");
-  lines.push("| **fm** | Frontmatter | Has `description` AND `applyTo` | Missing either |");
-  lines.push("| **spec** | Specificity | applyTo has specific glob (not just `**`) | Too broad or missing |");
+  lines.push("| **fm** | Frontmatter | Has `description` AND `application` | Missing either |");
   lines.push("| **depth** | Depth | >50 lines | ≤50 lines |");
   lines.push("| **sect** | Sections | ≥2 `##` headers | Flat structure |");
   lines.push("| **code** | Code | Has code block | No examples |");
-  lines.push("| **skill** | Trifecta | Has matching skill | Orphan instruction |");
+  lines.push("| **skill** | Trifecta | Has matching skill | Standalone instruction |");
   lines.push("");
-  lines.push("**Pass criteria**: fm=1 (gate) AND score ≥4/6");
+  lines.push("> **Frontmatter fields**: `description` (what it does) + `application` (when/why to use). Optional: `applyTo` (Copilot file-pattern activation).");
   lines.push("");
-  lines.push("| Instruction | Lines | fm | spec | depth | sect | code | skill | Score | Pass | sem |");
-  lines.push("|-------------|------:|:--:|:----:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|");
+  lines.push("**Pass criteria**: fm=1 (gate) AND score ≥3/5");
+  lines.push("");
+  lines.push("| Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | sem |");
+  lines.push("|-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|");
 
   for (const i of instructions) {
     const f = i.flags;
     const passIcon = i.pass ? "✓" : "✗";
     // Preserve existing sem value if available, otherwise 0 (pending review)
     const sem = EXISTING_SEM.instructions[i.name] ?? 0;
-    lines.push(`| ${i.name} | ${i.lines} | ${f.fm} | ${f.spec} | ${f.depth} | ${f.sect} | ${f.code} | ${f.skill} | ${i.score}/6 | ${passIcon} | ${sem} |`);
+    lines.push(`| ${i.name} | ${i.lines} | ${f.fm} | ${f.depth} | ${f.sect} | ${f.code} | ${f.skill} | ${i.score}/5 | ${passIcon} | ${sem} |`);
   }
 
   // Instructions summary
   const instrPassing = instructions.filter(i => i.pass).length;
   const instrFailing = instructions.filter(i => !i.pass).length;
-  const instrPerfect = instructions.filter(i => i.score === 6).length;
+  const instrPerfect = instructions.filter(i => i.score === 5).length;
   const instrReviewed = instructions.filter(i => (EXISTING_SEM.instructions[i.name] ?? 0) === 1).length;
   const instrPending = instructions.length - instrReviewed;
   lines.push("");
-  lines.push(`**Summary**: ${instructions.length} instructions | Passing: ${instrPassing} | Failing: ${instrFailing} | Perfect(6/6): ${instrPerfect}`);
+  lines.push(`**Summary**: ${instructions.length} instructions | Passing: ${instrPassing} | Failing: ${instrFailing} | Perfect(5/5): ${instrPerfect}`);
   lines.push("");
   lines.push(`**Semantic Review**: ${instrReviewed}/${instructions.length} reviewed | ${instrPending} pending`);
 

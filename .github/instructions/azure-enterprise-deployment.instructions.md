@@ -1,5 +1,6 @@
 ---
 description: "Enterprise Azure deployment patterns - pre-deployment validation, permission blockers, phased rollout strategies"
+application: "When implementing azure enterprise deployment or reviewing code that uses these patterns"
 applyTo: "**/azure/**,**/infrastructure/**,**/*deploy*.{ps1,sh,md}"
 ---
 

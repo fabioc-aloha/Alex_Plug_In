@@ -1,5 +1,6 @@
 ---
 description: "Global knowledge curation, review cycles, and cross-project insight management"
+application: "During code reviews, quality audits, or when assessing global knowledge curation"
 applyTo: "**/AI-Memory/**,**/*global-knowledge*,**/*knowledge*"
 inheritance: master-only
 ---

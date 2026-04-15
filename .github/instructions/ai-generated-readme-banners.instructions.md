@@ -1,5 +1,6 @@
 ---
 description: "AI-generated README banner creation for project branding and marketing assets"
+application: "When generating images, managing visual assets, or maintaining brand consistency"
 applyTo: "**/generate-readme*,**/*banner*"
 ---
 

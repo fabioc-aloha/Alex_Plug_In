@@ -1,5 +1,6 @@
 ---
 description: "M365 Copilot declarative agent debugging — manifest validation, capability diagnosis, sideloading issues"
+application: "When writing tests, validating implementations, or ensuring quality gates pass"
 applyTo: "**/*m365*,**/*teams*,**/*declarative*agent*"
 inheritance: heir:m365
 ---

@@ -1,5 +1,6 @@
 ---
 description: "Systematic root cause investigation — 5 Whys, binary search, timeline reconstruction"
+application: "When investigating production issues or performing post-incident analysis"
 applyTo: "**/*debug*,**/*error*,**/*bug*,**/*issue*,**/*problem*,**/*incident*"
 ---
 

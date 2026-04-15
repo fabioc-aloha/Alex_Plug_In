@@ -1,6 +1,7 @@
 ---
 applyTo: "**/*lucid*,**/*dual-mode*"
 description: "Lucid dream hybrid processing and unconscious-conscious bridge protocols"
+application: "When following lucid dream integration workflows or troubleshooting related issues"
 ---
 
 # Lucid Dream Integration - Hybrid Processing Excellence

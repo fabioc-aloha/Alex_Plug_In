@@ -1,5 +1,6 @@
 ---
 description: "VS Code extension configuration validation — package.json manifest and runtime config error diagnosis"
+application: "When writing tests, validating implementations, or ensuring quality gates pass"
 applyTo: "**/package.json,**/.vscode/**,**/tsconfig*"
 ---
 

@@ -1,5 +1,6 @@
 ---
 description: "Secure credential storage, VS Code SecretStorage API, token management, environment variable migration"
+application: "During migration projects, version upgrades, or modernization efforts"
 applyTo: "**/secrets*.ts,**/credentials*.ts,**/tokens*.ts,**/*Secret*.ts"
 ---
 

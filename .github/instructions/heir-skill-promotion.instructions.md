@@ -1,5 +1,6 @@
 ---
 description: "Skill promotion workflow from heir projects to Master Alex"
+application: "When building, auditing, or promoting cognitive architecture skills"
 applyTo: "**/*promotion*,**/*heir*,**/.github/skills/**"
 excludeAgent: "coding-agent"
 inheritance: master-only

@@ -1,5 +1,6 @@
 ---
 description: "Architecture Decision Record (ADR) templates and documentation protocols"
+application: "When following architecture decision records workflows or troubleshooting related issues"
 applyTo: "**/decisions/**,**/*ADR*,**/*adr*"
 ---
 

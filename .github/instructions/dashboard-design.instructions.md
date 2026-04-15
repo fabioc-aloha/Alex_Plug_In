@@ -1,5 +1,6 @@
 ---
 description: "Auto-loaded for dashboards: define audience, pick KPIs, arrange panels, wire interactions, validate story flow"
+application: "When interpreting charts, building dashboards, or visualizing data"
 applyTo: "**/*dashboard*,**/*kpi*,**/*panel*"
 ---
 

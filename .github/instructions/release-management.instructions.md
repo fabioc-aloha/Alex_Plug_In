@@ -1,5 +1,6 @@
 ---
 description: "Release and publish workflows for versioning, changelogs, and marketplace deployment"
+application: "During deployment, release preparation, or publishing workflows"
 applyTo: "**/*{CHANGELOG,package,version}*,**/*.vsix"
 inheritance: master-only
 ---

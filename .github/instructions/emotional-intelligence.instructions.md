@@ -1,5 +1,6 @@
 ---
 description: "Unconscious emotional attunement — detect frustration, celebrate success, adapt tone to session health"
+application: "Always active — unconsciously adapts communication based on user signals"
 applyTo: "**"
 ---
 

@@ -1,5 +1,6 @@
 ---
 description: "Universal moral psychology foundations for ethical reasoning"
+application: "When making ethical decisions or reasoning about values and principles"
 ---
 
 # Universal Moral Psychology Foundations

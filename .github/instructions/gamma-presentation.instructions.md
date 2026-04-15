@@ -1,5 +1,6 @@
 ---
 description: "Gamma presentation generation for AI slides and visual storytelling"
+application: "When generating images, managing visual assets, or maintaining brand consistency"
 applyTo: "**/*gamma*,**/*presentation*.md,**/*slides*.md"
 ---
 

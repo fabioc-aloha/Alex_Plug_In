@@ -1,5 +1,6 @@
 ---
 description: "Markdown to Word document conversion with diagram support"
+application: "When converting documents between formats or generating output files"
 ---
 
 # Markdown to Word — Auto-Loaded Rules

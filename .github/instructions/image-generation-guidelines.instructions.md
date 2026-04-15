@@ -1,6 +1,7 @@
 ---
 applyTo: "**/generate-*.js,**/generate-*.ts,**/*replicate*,**/*converter*,**/*pipeline*"
 description: Image generation guidelines, Replicate workflow documentation, and converter pipeline patterns
+application: "When implementing image generation guidelines or reviewing code that uses these patterns"
 ---
 
 # Image Generation and Converter Pipeline Guidelines

@@ -1,5 +1,6 @@
 ---
 description: "Self-sufficient skills with embedded reference media — visual, audio, and video memory management for face-consistent generation"
+application: "When generating images, managing visual assets, or maintaining brand consistency"
 applyTo: "**/visual-memory*,**/reference-portrait*,**/face-consistent*"
 ---
 

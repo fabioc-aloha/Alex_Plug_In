@@ -1,5 +1,6 @@
 ---
 description: "UI/UX accessibility compliance and design system consistency for UI code"
+application: "When designing systems, planning architecture, or making structural decisions"
 applyTo: "**/*.{html,jsx,tsx,vue,svelte,css,scss}"
 ---
 

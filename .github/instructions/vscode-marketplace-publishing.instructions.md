@@ -1,5 +1,6 @@
 ---
 description: "VS Code Marketplace publishing workflow, constraints, and best practices for extension deployment"
+application: "During deployment, release preparation, or publishing workflows"
 inheritance: master-only
 applyTo: "**/*.vsix,**/*publish*,**/vsce*"
 ---

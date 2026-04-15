@@ -1,5 +1,6 @@
 ---
 description: "VS Code Chat API patterns for registering participants, routing LLM requests, and handling chat commands"
+application: "When implementing chat participant patterns or reviewing code that uses these patterns"
 applyTo: "**/chat/**/*.ts,**/*participant*.ts"
 ---
 

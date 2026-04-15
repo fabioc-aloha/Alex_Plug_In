@@ -1,5 +1,6 @@
 ---
 description: "Mermaid diagram creation, technical documentation visuals, diagram type selection, and rendering troubleshooting"
+application: "When writing or reviewing documentation, or ensuring docs stay current"
 ---
 
 # Markdown & Mermaid — Auto-Loaded Rules

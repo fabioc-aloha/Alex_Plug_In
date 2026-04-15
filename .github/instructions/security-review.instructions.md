@@ -1,5 +1,6 @@
 ---
 description: "Security review procedure — OWASP Top 10, STRIDE, dependency audit"
+application: "When following security review workflows or troubleshooting related issues"
 applyTo: "**/*security*,**/*auth*,**/*password*,**/*token*,**/*credential*,**/*vulnerability*"
 ---
 

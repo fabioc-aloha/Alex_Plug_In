@@ -1,6 +1,7 @@
 ---
 applyTo: "**/*aging*,**/*age-progression*,**/*life-stage*,**/*character-ages*,**/*avatar-ages*,**/generate-alex-age*.js"
 description: "Age progression generation — life-stage accuracy, identity consistency, and API parameter rules"
+application: "When working with APIs, designing endpoints, or integrating external services"
 ---
 
 # Character Aging Progression Instructions

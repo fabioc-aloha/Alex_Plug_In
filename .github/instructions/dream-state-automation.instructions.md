@@ -1,6 +1,7 @@
 ---
 applyTo: "**/*dream*,**/*synapse*"
 description: "Automated neural maintenance and dream state processing protocols"
+application: "When following dream state automation workflows or troubleshooting related issues"
 ---
 
 # Dream State Automation Protocols

@@ -1,5 +1,6 @@
 ---
 description: "Roadmap hygiene, backlog curation, and Research Findings deduplication protocols"
+application: "When following roadmap maintenance workflows or troubleshooting related issues"
 applyTo: "**/ROADMAP*.md"
 inheritance: master-only
 ---

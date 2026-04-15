@@ -1,5 +1,6 @@
 ---
 description: "Comprehensive cognitive architecture health validation using brain-qa integration with meditation and release workflows"
+application: "When designing systems, planning architecture, or making structural decisions"
 applyTo: "**/*brain-qa*,**/*audit*,**/*health*"
 inheritance: master-only
 ---
