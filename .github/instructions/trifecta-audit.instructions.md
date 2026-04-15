@@ -70,7 +70,7 @@ During audit, verify that active scripts are _referenced by_ their trifecta file
 For each instruction file, classify:
 
 ```
-┌─ [.github/instructions/{skill-name}.instructions.md]
+┌─ [.github/instructions/.github/instructions/{skill-name}.instructions.md]
 │  WHY does this exist?  → [one-sentence purpose]
 │  WHO invokes it?       → [user / system / auto-loaded]
 │  WHAT domain knowledge does it encode? → [concepts / none]

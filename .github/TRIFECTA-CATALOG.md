@@ -4,7 +4,7 @@
 > **Protocol**: `.github/instructions/trifecta-audit.instructions.md`
 > **Principle**: Completeness with purpose, not completeness for its own sake.
 
-**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Skills Catalog](../skills/SKILLS-CATALOG.md) · [Agent Catalog](./AGENT-CATALOG.md)
+**Related**: [Skills Catalog](./SKILLS-CATALOG.md) · [Agent Catalog](./AGENT-CATALOG.md)
 
 The trifecta pattern encodes architecturally significant capabilities across all three memory systems. **Not every file needs a trifecta.** This catalog tracks which capabilities have earned one — and why.
 
@@ -45,16 +45,15 @@ Script:     .github/muscles/normalize-paths.ps1 (the muscle that does the work)
 
 | Script                                        | Referenced By                                     |
 | --------------------------------------------- | ------------------------------------------------- |
-| `.github/muscles/audit-master-alex.ps1`       | dream-state-automation, architecture-audit        |
-| `.github/muscles/brain-qa.ps1`                | brain-qa (31-phase validation)                    |
+| `.github/muscles/audit-master-alex.cjs`       | dream-state-automation, architecture-audit        |
+| `.github/muscles/brain-qa.cjs`                | brain-qa (31-phase validation)                    |
 | `.github/muscles/build-extension-package.ps1` | heir-sync-management, release-management          |
 | `.github/muscles/dream-cli.ts`                | dream-state-automation (CLI alternative)          |
 | `.github/muscles/gamma-generator.cjs`         | gamma-presentations (CLI generation)              |
 | `.github/muscles/normalize-paths.ps1`         | dream-state-automation (path normalization)       |
 | `.github/muscles/pptxgen-cli.ts`              | pptx-generation (offline PPTX)                    |
 | `.github/muscles/sync-architecture.cjs`       | heir-sync-management, build-extension-package.ps1 |
-| `.github/muscles/validate-skills.ps1`         | brain-qa, dream-state-automation                  |
-| `.github/muscles/validate-synapses.ps1`       | brain-qa, dream-state-automation                  |
+| `.github/muscles/validate-skills.cjs`         | brain-qa, dream-state-automation                  |
 | `scripts/release-preflight.ps1`               | release-management, release-preflight             |
 
 ---

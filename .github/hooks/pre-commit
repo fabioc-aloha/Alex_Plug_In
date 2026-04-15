@@ -1,13 +1,19 @@
 #!/bin/sh
-# Git pre-commit hook wrapper
-# Calls the PowerShell validation script
+# Git pre-commit hook wrapper (cross-platform)
+# Prefers Node.js (cross-platform), falls back to PowerShell on Windows
 
-# Check if PowerShell 7+ is available
+# Check if Node.js is available (preferred - cross-platform)
+if command -v node > /dev/null 2>&1; then
+    node ".github/hooks/pre-commit.cjs"
+    exit $?
+fi
+
+# Fallback: PowerShell (Windows)
 if command -v pwsh > /dev/null 2>&1; then
     pwsh -NoProfile -ExecutionPolicy Bypass -File ".github/hooks/pre-commit.ps1"
     exit $?
-else
-    echo "⚠️  PowerShell 7+ not found - skipping quality gates"
-    echo "   Install: https://github.com/PowerShell/PowerShell"
-    exit 0
 fi
+
+echo "⚠️  Neither Node.js nor PowerShell found - skipping quality gates"
+echo "   Install Node.js: https://nodejs.org/"
+exit 0

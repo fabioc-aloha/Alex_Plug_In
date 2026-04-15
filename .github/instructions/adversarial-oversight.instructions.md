@@ -162,7 +162,7 @@ Domain-specific checklist based on operation type:
 - [ ] Examples include code
 
 **Code Review:**
-- [ ] See [code-review-guidelines.instructions.md] checklist
+- [ ] See [.github/instructions/code-review-guidelines.instructions.md] checklist
 
 ---
 
@@ -216,7 +216,7 @@ Reusable self-improvement protocols applicable to any generation task (code, doc
 ## Integration Points
 
 ### Release Management
-From [release-management.instructions.md]:
+From [.github/instructions/release-management.instructions.md]:
 
 **Add to Step 4.5** (after present findings to user, before version bump):
 ```text
@@ -230,7 +230,7 @@ Blocker: If Validator blocks (🔴), resolve issues before version bump.
 ```
 
 ### Skill Promotion
-From [heir-skill-promotion.instructions.md]:
+From [.github/instructions/heir-skill-promotion.instructions.md]:
 
 **Add to Step 4.5** (after quality gate score):
 ```text
@@ -242,7 +242,7 @@ If score ≥ 12 AND trifecta complete:
 ```
 
 ### Code Review
-From [code-review-guidelines.instructions.md]:
+From [.github/instructions/code-review-guidelines.instructions.md]:
 
 **Add to High Priority reviews**:
 ```text

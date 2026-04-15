@@ -435,8 +435,8 @@ export class WelcomeViewProvider implements vscode.WebviewViewProvider {
               "alex_docs/architecture/COGNITIVE-ARCHITECTURE.md",
             "MEMORY-SYSTEMS": "alex_docs/architecture/MEMORY-SYSTEMS.md",
             "CONSCIOUS-MIND": "alex_docs/architecture/CONSCIOUS-MIND.md",
-            "AGENT-CATALOG": "alex_docs/architecture/AGENT-CATALOG.md",
-            "TRIFECTA-CATALOG": "alex_docs/architecture/TRIFECTA-CATALOG.md",
+            "AGENT-CATALOG": ".github/AGENT-CATALOG.md",
+            "TRIFECTA-CATALOG": ".github/TRIFECTA-CATALOG.md",
             "MASTER-ALEX-PROTECTED":
               ".github/config/MASTER-ALEX-PROTECTED.json",
             "HEIR-ARCHITECTURE":

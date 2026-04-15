@@ -241,7 +241,7 @@ function getArchitectureResources(): Resource[] {
       description: "Complete cognitive architecture documentation",
     },
     {
-      relPath: "alex_docs/skills/SKILLS-CATALOG.md",
+      relPath: ".github/SKILLS-CATALOG.md",
       name: "Skills Catalog",
       description: "Full inventory of Alex's skills and trifecta status",
     },

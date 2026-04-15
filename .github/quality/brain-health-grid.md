@@ -214,7 +214,6 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [testing-strategies](../skills/testing-strategies/SKILL.md) | core | 156 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
 | [text-to-speech](../skills/text-to-speech/SKILL.md) | exte | 122 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
 | [token-waste-elimination](../skills/token-waste-elimination/SKILL.md) | stan | 124 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [visual-memory](../skills/visual-memory/SKILL.md) | exte | 343 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
 | [vscode-configuration-validation](../skills/vscode-configuration-validation/SKILL.md) | stan | 232 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
 | [vscode-environment](../skills/vscode-environment/SKILL.md) | stan | 110 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
 | [vscode-extension-patterns](../skills/vscode-extension-patterns/SKILL.md) | core | 278 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 1 | 1 |
@@ -225,17 +224,18 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 | [md-to-eml](../skills/md-to-eml/SKILL.md) | exte | 203 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
 | [md-to-html](../skills/md-to-html/SKILL.md) | stan | 202 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
 | [md-to-word](../skills/md-to-word/SKILL.md) | stan | 408 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
+| [visual-memory](../skills/visual-memory/SKILL.md) | exte | 344 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
 
 **Summary**: 165 skills | Passing: 165 | Failing: 0 | Perfect: 130
 
-**Skill Types**: Agentic(A): 8 | Intellectual(I): 133 | Incomplete(-): 24
+**Skill Types**: Agentic(A): 9 | Intellectual(I): 132 | Incomplete(-): 24
 
 **Semantic Review**: 165/165 reviewed | 0 pending
 
 **Defects by dimension (informational)**:
 | fm | code | bounds | tri | muscle |
 |:--:|:----:|:------:|:---:|:------:|
-| 0 | 21 | 11 | 24 | 156 |
+| 0 | 21 | 11 | 24 | 155 |
 
 ## Agents
 
@@ -584,28 +584,30 @@ Muscles SHOULD use the standard header format for discoverability:
 | [new-skill.cjs](../muscles/new-skill.cjs) | 145 | js | build | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
 | [pptxgen-cli.ts](../muscles/pptxgen-cli.ts) | 138 | ts | utility | 0 | 1 | 1 | 1 | 3/4 | ✓ | 0 | — |
 | [sync-architecture.cjs](../muscles/sync-architecture.cjs) | 1649 | js | build | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
-| [_add-inheritance-tags.cjs](../muscles/_add-inheritance-tags.cjs) | 81 | js | utility | 1 | 0 | 1 | 1 | 3/4 | ✗ | 0 | — |
 | [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 141 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [brain-qa.cjs](../muscles/brain-qa.cjs) | 938 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
 | [data-ingest.cjs](../muscles/data-ingest.cjs) | 368 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [docx-to-md.cjs](../muscles/docx-to-md.cjs) | 380 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [dream-cli.ts](../muscles/dream-cli.ts) | 118 | ts | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [fix-fence-bug.cjs](../muscles/fix-fence-bug.cjs) | 226 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [gamma-generator.cjs](../muscles/gamma-generator.cjs) | 915 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [markdown-lint.cjs](../muscles/markdown-lint.cjs) | 445 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [md-scaffold.cjs](../muscles/md-scaffold.cjs) | 543 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [md-to-eml.cjs](../muscles/md-to-eml.cjs) | 444 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [md-to-html.cjs](../muscles/md-to-html.cjs) | 438 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [normalize-paths.cjs](../muscles/normalize-paths.cjs) | 248 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [normalize-paths.ps1](../muscles/normalize-paths.ps1) | 195 | ps | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [ralph-loop.cjs](../muscles/ralph-loop.cjs) | 742 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [session-name.cjs](../muscles/session-name.cjs) | 239 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
+| [visual-memory.cjs](../muscles/visual-memory.cjs) | 598 | js | utility | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
 
-**Summary**: 30 muscles | Passing: 22 | Failing: 8 | Perfect(4/4): 13
+**Summary**: 32 muscles | Passing: 25 | Failing: 7 | Perfect(4/4): 16
 
-**Inheritance**: Master-only(1): 5 | Inheritable(0): 25
+**Inheritance**: Master-only(1): 5 | Inheritable(0): 27
 
-**Metadata Adoption**: 3/30 have standard header | 2/30 linked to skills | 3/30 have review dates
+**Metadata Adoption**: 4/32 have standard header | 3/32 linked to skills | 4/32 have review dates
 
-**Categories**: build: 4 | validation: 7 | analysis: 4 | converter: 7 | utility: 8
+**Categories**: build: 4 | validation: 7 | analysis: 4 | converter: 7 | utility: 10
 
 ## Overall
 
@@ -615,5 +617,5 @@ Muscles SHOULD use the standard header format for discoverability:
 | Agents | 12 |
 | Instructions | 128 |
 | Prompts | 71 |
-| Muscles | 30 |
-| **Total** | **406** |
+| Muscles | 32 |
+| **Total** | **408** |

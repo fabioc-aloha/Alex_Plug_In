@@ -172,7 +172,7 @@ Architecture documents are exposed as browseable MCP resources. Attach them to c
 | --------------------------- | --------------------------------------------------------- | ----------------------------------- |
 | North Star                  | `alex://alex_docs/NORTH-STAR.md`                          | Project vision and mission          |
 | Cognitive Architecture      | `alex://alex_docs/architecture/COGNITIVE-ARCHITECTURE.md` | Full architecture docs              |
-| Skills Catalog              | `alex://alex_docs/skills/SKILLS-CATALOG.md`               | Skill inventory and trifecta status |
+| Skills Catalog              | `alex://.github/SKILLS-CATALOG.md`                        | Skill inventory and trifecta status |
 | Conscious Mind              | `alex://.github/copilot-instructions.md`                  | Always-on instructions              |
 | Conscious Mind Architecture | `alex://alex_docs/architecture/CONSCIOUS-MIND.md`         | How the conscious mind works        |
 | What is Alex                | `alex://alex_docs/WHAT-IS-ALEX.md`                        | Architecture overview               |

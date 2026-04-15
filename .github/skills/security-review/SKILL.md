@@ -328,6 +328,6 @@ When vulnerability found:
 4. **Verify**: Confirm fix works
 5. **Learn**: Update review checklist
 
-See [incident-response](../incident-response/SKILL.md) for full IR workflow.
+See [incident-response](.github/skills/incident-response/SKILL.md) for full IR workflow.
 
 ---

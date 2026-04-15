@@ -7,8 +7,11 @@ Pre-commit quality gates to catch issues before they enter the repository.
 ### Automatic (Recommended)
 
 ```bash
-# Install pre-commit hook
-.\.github\muscles\install-hooks.ps1
+# Cross-platform: uses Node.js
+node .github/muscles/install-hooks.cjs
+
+# Windows-only alternative
+pwsh -File .github/muscles/install-hooks.ps1
 ```
 
 ### Manual
@@ -16,8 +19,21 @@ Pre-commit quality gates to catch issues before they enter the repository.
 ```bash
 # Copy pre-commit hook to .git/hooks/
 cp .github/hooks/pre-commit .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit  # Unix only
 ```
+
+## Cross-Platform Support
+
+The hooks are designed to work on Windows, macOS, and Linux:
+
+| Component | Implementation | Platform |
+|-----------|---------------|----------|
+| `pre-commit` | Shell wrapper | All (routes to Node.js or PowerShell) |
+| `pre-commit.cjs` | Node.js | All (primary) |
+| `pre-commit.ps1` | PowerShell | Windows fallback |
+
+The shell wrapper (`pre-commit`) prefers Node.js for cross-platform compatibility,
+falling back to PowerShell on Windows if Node.js is unavailable.
 
 ## What It Validates
 

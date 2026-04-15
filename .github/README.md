@@ -9,7 +9,7 @@ This folder contains Alex's complete cognitive architecture. Modifying or deleti
 This is **Alex's brain** — a meta-cognitive AI architecture that transforms your AI assistant into a learning partner with:
 
 - **Persistent memory** across sessions
-- **Domain expertise** via 100+ skills
+- **Domain expertise** via 165+ skills
 - **Self-maintenance** through dream protocols
 - **Ethical reasoning** via constitutional AI principles
 
@@ -53,4 +53,4 @@ Instead of editing files directly:
 
 ---
 
-*Alex Cognitive Architecture v7.4.2*
+*Alex Cognitive Architecture*

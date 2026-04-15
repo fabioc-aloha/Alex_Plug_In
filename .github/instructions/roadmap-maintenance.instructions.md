@@ -193,7 +193,7 @@ For extension-specific roadmaps, "Implemented" means `extension.ts` has real com
 3. **Post-Release**: Current State section updated with new capabilities
 4. **Next Cycle**: Backlog audit to plan next version
 
-**See Also**: [release-management.instructions.md] for full release workflow
+**See Also**: [.github/instructions/release-management.instructions.md] for full release workflow
 
 ---
 

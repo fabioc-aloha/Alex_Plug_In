@@ -69,18 +69,18 @@
 
 ## ✨ Features
 
-| Feature Area               | What You Get                                                     |
-| -------------------------- | ---------------------------------------------------------------- |
-| **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support |
-| **Global Knowledge Base**  | Cloud-synced cross-project patterns and insights via AI-Memory   |
-| **User Profiles**          | Personalized tone, detail level, and tech stack awareness        |
-| **160 Skills**             | Portable domain expertise — from coding to research to Azure     |
-| **7 Custom Agents**        | Alex, Researcher, Builder, Validator, Documentarian, Azure, M365 |
-| **13 LM Tools**            | Memory search, synapse health, knowledge save/promote, and more  |
-| **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API      |
-| **AI Image Generation**    | Flux, SDXL, and nano-banana-pro via Replicate API                |
-| **MCP Integrations**       | 50+ Azure tools, M365 tools, and Alex's own MCP cognitive server |
-| **Memory Architecture**    | 6 memory types across `.github/` cognitive framework             |
+| Feature Area               | What You Get                                                       |
+| -------------------------- | ------------------------------------------------------------------ |
+| **Emotional Intelligence** | Frustration recognition, success celebration, empathetic support   |
+| **Global Knowledge Base**  | Cloud-synced cross-project patterns and insights via AI-Memory     |
+| **User Profiles**          | Personalized tone, detail level, and tech stack awareness          |
+| **Skills Library**         | 165+ portable domain expertise — from coding to research to Azure  |
+| **Agent Ecosystem**        | 12 specialized agents for research, building, validation, and more |
+| **LM Tools**               | Memory search, knowledge save/promote, architecture status         |
+| **Gamma Presentations**    | AI-generated slides, docs, and social content via Gamma API        |
+| **AI Image Generation**    | Flux, SDXL, and nano-banana-pro via Replicate API                  |
+| **MCP Integrations**       | 50+ Azure tools, M365 tools, and Alex's own MCP cognitive server   |
+| **Memory Architecture**    | Multi-type memory across `.github/` cognitive framework            |
 
 ## 📖 Documentation & Support
 

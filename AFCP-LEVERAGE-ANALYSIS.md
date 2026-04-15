@@ -40,9 +40,9 @@ A coordination protocol for multi-agent AI systems. Sits above MCP (tool transpo
 
 | AFCP Concept                               | Alex Equivalent                                                                         | Gap                                                                                  |
 | ------------------------------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Agent identity (name, capabilities, state) | `.github/agents/*.agent.md` (7 agents with model fallback, tools, slash commands)       | Alex agents lack runtime state (idle/busy/error/offline)                             |
+| Agent identity (name, capabilities, state) | `.github/agents/*.agent.md` (12 agents with model fallback, tools, slash commands)       | Alex agents lack runtime state (idle/busy/error/offline)                             |
 | Task assignment lifecycle                  | `runSubagent` tool dispatches to named agents                                           | No assignment tracking, phase lifecycle, or skill-based routing                      |
-| Knowledge persistence                      | `.github/episodic/`, synapses.json, skills, instructions                                | Alex has richer memory (episodic, procedural, semantic) but no scoped artifact model |
+| Knowledge persistence                      | `.github/episodic/`, skills, instructions, global knowledge                             | Alex has richer memory (episodic, procedural, semantic) but no scoped artifact model |
 | Uncertainty handling                       | `anti-hallucination` skill, Unknown surfacing                                           | No structured Unknown lifecycle (open/consult/assess/resolve)                        |
 | Fleet composition                          | Heirs (vscode-extension, m365-copilot)                                                  | Heirs are code clones, not runtime fleet participants                                |
 | Behavioral control                         | 5-layer prompt assembly (copilot-instructions → instructions → skills → agents → hooks) | Similar to AFCP's autonomy stack but more granular                                   |
@@ -79,7 +79,7 @@ AFCP uses 3-tier routing: skill match → learned expertise → fallback. Expert
 
 AFCP defines 4 context scopes: agent (persists across missions), mission (within a goal), team (shared domain), global (cross-fleet). Artifacts have provenance (assertedBy, assertedAt), confidence scores, confirmation tracking, and supersession chains.
 
-**Alex today**: Knowledge lives in multiple systems (episodic memory, skills, instructions, synapses, global knowledge) but scope is implicit. No confidence scoring on stored knowledge. No supersession tracking.
+**Alex today**: Knowledge lives in multiple systems (episodic memory, skills, instructions, global knowledge) but scope is implicit. No confidence scoring on stored knowledge. No supersession tracking.
 
 **Leverage**: Add `confidence` and `assertedAt` fields to episodic records. Add `supersededBy` to global knowledge insights (GI-*) so newer findings formally replace older ones instead of accumulating. This improves meditation's knowledge curation quality.
 

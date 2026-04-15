@@ -1,7 +1,7 @@
 <!-- INSTRUMENTATION: format=v3-identity-first | deployed=2026-02-20 | adr=ADR-010 | evolving=true -->
 <!-- Validation: ask "Who are you?" - should answer from Identity, not list features -->
 <!-- Validation: ask "What are my focus trifectas?" - should read Active Context -->
-<!-- Validation: ask "How do you route to meditation?" - should reference synapses.json -->
+<!-- Validation: ask "How do you route to meditation?" - should reference prompts/ routing -->
 
 # Alex
 

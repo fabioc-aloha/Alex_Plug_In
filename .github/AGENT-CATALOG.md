@@ -2,27 +2,32 @@
 
 > Complete reference for the Alex Agent Ecosystem. All agents live in `.github/agents/`.
 
-**Related**: [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md) · [Trifecta Catalog](./TRIFECTA-CATALOG.md) · [Skills Catalog](../skills/SKILLS-CATALOG.md)
+**Related**: [Trifecta Catalog](./TRIFECTA-CATALOG.md) · [Skills Catalog](./SKILLS-CATALOG.md)
 
-|             |                 |
-| ----------- | --------------- |
-| **Created** | 2026-02-13      |
-| **Status**  | Living Document |
-| **Agents**  | 7               |
+|             |                                                       |
+| ----------- | ----------------------------------------------------- |
+| **Created** | 2026-02-13                                            |
+| **Status**  | Living Document                                       |
+| **Agents**  | Run `brain-qa.cjs` or scan `.github/agents/` for count |
 
 ---
 
 ## Agent Index
 
-| Agent             | File                          | Purpose              | Model Fallback                           | User-Invokable |
-| ----------------- | ----------------------------- | -------------------- | ---------------------------------------- | -------------- |
-| **Alex**          | `alex.agent.md`               | Unified orchestrator | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
-| **Researcher**    | `alex-researcher.agent.md`    | Deep domain research | Claude Opus 4 → GPT-4o → Claude Sonnet 4 | ✅              |
-| **Builder**       | `alex-builder.agent.md`       | Implementation mode  | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
-| **Validator**     | `alex-validator.agent.md`     | Adversarial QA       | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
-| **Documentarian** | `alex-documentarian.agent.md` | Doc accuracy & drift | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
-| **Azure**         | `alex-azure.agent.md`         | Azure development    | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
-| **M365**          | `alex-m365.agent.md`          | Microsoft 365 dev    | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| Agent             | File                            | Purpose                      | Model Fallback                           | User-Invokable |
+| ----------------- | ------------------------------- | ---------------------------- | ---------------------------------------- | -------------- |
+| **Alex**          | `alex.agent.md`                 | Unified orchestrator         | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Researcher**    | `alex-researcher.agent.md`      | Deep domain research         | Claude Opus 4 → GPT-4o → Claude Sonnet 4 | ✅              |
+| **Builder**       | `alex-builder.agent.md`         | Implementation mode          | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Validator**     | `alex-validator.agent.md`       | Adversarial QA               | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Documentarian** | `alex-documentarian.agent.md`   | Doc accuracy & drift         | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Azure**         | `alex-azure.agent.md`           | Azure development            | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **M365**          | `alex-m365.agent.md`            | Microsoft 365 dev            | Claude Sonnet 4 → GPT-4o → Claude Opus 4 | ✅              |
+| **Backend**       | `alex-backend.agent.md`         | Python API / FastAPI         | Claude Sonnet 4 → GPT-4o                 | ✅              |
+| **Frontend**      | `alex-frontend.agent.md`        | React / TypeScript UI        | Claude Sonnet 4 → GPT-4o                 | ✅              |
+| **Infrastructure**| `alex-infrastructure.agent.md`  | Azure IaC / Bicep            | Claude Sonnet 4 → GPT-4o                 | ✅              |
+| **Planner**       | `alex-planner.agent.md`         | Task decomposition           | Claude Sonnet 4 → GPT-4o                 | ✅              |
+| **Presenter**     | `alex-presenter.agent.md`       | Demos & stakeholder docs     | Claude Sonnet 4 → GPT-4o                 | ✅              |
 
 ---
 

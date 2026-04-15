@@ -59,9 +59,10 @@ $linkPattern = '\[([^\]]*)\]\(([^)]+)\)'
 foreach ($f in $mdFiles) {
     $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
     if (-not $content) { continue }
-    # Ignore links inside code fences
-    $stripped = $content -replace '(?ms)```[^`]*```', ''
-    $stripped = $stripped -replace '(?ms)`[^`]+`', ''
+    # Ignore links inside code fences (use .*? to allow backticks inside blocks)
+    $stripped = $content -replace '(?ms)```.*?```', ''
+    # Ignore inline code spans
+    $stripped = $stripped -replace '`[^`]+`', ''
     $matches = [regex]::Matches($stripped, $linkPattern)
     foreach ($m in $matches) {
         $href = $m.Groups[2].Value

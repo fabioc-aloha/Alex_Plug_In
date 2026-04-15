@@ -1,32 +1,17 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/agents/alex-documentarian.agent.md",
-    "alex_docs/architecture/AGENTIC-SKILL-ARCHITECTURE.md",
-    "docs/alex-brain-anatomy.html",
-    "platforms/vscode-extension/package.json"
+    "github/README.md",
+    "AFCP-LEVERAGE-ANALYSIS.md",
+    "README.md",
+    "alex_docs/architecture/AGENT-CATALOG.md",
+    "alex_docs/architecture/COMMAND-MEMORY-EFFECTS.md",
+    "alex_docs/architecture/TRIFECTA-CATALOG.md",
+    "alex_docs/decisions/ADR-010-copilot-instructions-as-prefrontal-cortex.md",
+    "alex_docs/research/VSCODE-CHAT-CONFIGURATIONS.md",
+    "alex_docs/skills/SKILLS-CATALOG.md",
+    "packages/mcp-cognitive-tools/README.md"
   ],
-  "todoHotspots": [
-    {
-      "file": "docs/alex-brain-anatomy.html",
-      "todoCount": 2,
-      "scannedAt": 1776229307916
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
-      "todoCount": 2,
-      "scannedAt": 1776229307916
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
-      "todoCount": 1,
-      "scannedAt": 1776229307916
-    },
-    {
-      "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
-      "todoCount": 1,
-      "scannedAt": 1776229307916
-    }
-  ],
-  "lastUpdated": 1776229307916
+  "todoHotspots": [],
+  "lastUpdated": 1776231435316
 }

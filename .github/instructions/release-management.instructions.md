@@ -129,7 +129,7 @@ Blocker: If Validator blocks (🔴 Critical or 🟠 High issues), resolve before
 - Post-merge full validation scheduled
 - Override documented in commit/CHANGELOG
 
-See [adversarial-oversight.instructions.md] for complete Validator integration protocol.
+See [.github/instructions/adversarial-oversight.instructions.md] for complete Validator integration protocol.
 
 ---
 

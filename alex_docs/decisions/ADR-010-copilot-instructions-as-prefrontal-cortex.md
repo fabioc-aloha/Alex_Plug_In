@@ -523,6 +523,6 @@ All scripts that parse the `# Alex vX.Y.Z` header were unified to the same regex
 - [VS Code Agent Skills](https://code.visualstudio.com/docs/copilot/customization/agent-skills) — 3-level progressive disclosure
 - [VS Code Troubleshooting](https://code.visualstudio.com/docs/copilot/troubleshooting) — Chat Debug View, Diagnostics
 - [VS Code Copilot Issues Wiki](https://github.com/microsoft/vscode/wiki/Copilot-Issues) — InstructionsContextComputer trace logging
-- [alex_docs/architecture/TRIFECTA-CATALOG.md](../architecture/TRIFECTA-CATALOG.md) — 9 complete trifectas
+- [.github/TRIFECTA-CATALOG.md](../../.github/TRIFECTA-CATALOG.md) — trifecta catalog
 - [alex_docs/architecture/NEUROANATOMICAL-MAPPING.md](../architecture/NEUROANATOMICAL-MAPPING.md) — full brain anatomy reference (617 lines)
 - ADR-007 through ADR-009 — previous architecture decisions

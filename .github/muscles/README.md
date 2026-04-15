@@ -30,7 +30,8 @@ Memory files define *what* and *how*; muscles *do*.
 | `data-profile.cjs`            | JavaScript | Statistical data profiler                 | inheritable |
 | `docx-to-md.cjs`              | JavaScript | Word document to Markdown conversion      | inheritable |
 | `dream-cli.ts`                | TypeScript | Neural maintenance CLI                    | inheritable |
-| `fix-fence-bug.ps1`           | PowerShell | Detect/fix VS Code fence bug              | inheritable |
+| `fix-fence-bug.cjs`           | JavaScript | Detect/fix VS Code fence bug              | inheritable |
+| `fix-fence-bug.ps1`           | PowerShell | Detect/fix VS Code fence bug (Windows)    | inheritable |
 | `gamma-generator.cjs`         | JavaScript | Markdown to Gamma slides                  | inheritable |
 | `install-hooks.cjs`           | JavaScript | Install hooks config                      | inheritable |
 | `markdown-lint.cjs`           | JavaScript | 19-rule pre-conversion markdown validator | inheritable |
@@ -40,12 +41,14 @@ Memory files define *what* and *how*; muscles *do*.
 | `md-to-word.cjs`              | JavaScript | Markdown to Word conversion               | inheritable |
 | `nav-inject.cjs`              | JavaScript | Cross-document navigation injection       | inheritable |
 | `new-skill.cjs`               | JavaScript | Scaffold new skill trifecta               | inheritable |
-| `normalize-paths.ps1`         | PowerShell | Path consistency fixes                    | inheritable |
+| `normalize-paths.cjs`         | JavaScript | Path consistency fixes                    | inheritable |
+| `normalize-paths.ps1`         | PowerShell | Path consistency fixes (Windows)          | inheritable |
 | `pptxgen-cli.ts`              | TypeScript | PowerPoint generation                     | inheritable |
 | `ralph-loop.cjs`              | JavaScript | Iterative quality improvement loop        | inheritable |
 | `session-name.cjs`            | JavaScript | Generate session names from context       | inheritable |
 | `sync-architecture.cjs`       | JavaScript | Master to Heir sync                       | master-only |
 | `validate-skills.cjs`         | JavaScript | Skill file validation                     | inheritable |
+| `visual-memory.cjs`           | JavaScript | Visual memory management (photos, voices) | inheritable |
 
 ### Shared Modules (`shared/`)
 
