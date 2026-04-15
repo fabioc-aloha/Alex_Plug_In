@@ -8,6 +8,29 @@
 
 ---
 
+## Tracker
+
+| Phase | Version Range | Tasks | Done | Progress |
+| ----- | ------------- | ----- | ---- | -------- |
+| 🏗️ Foundation | 7.10 – 7.14 | 5 | 0 | ░░░░░░░░░░ 0% |
+| 🎨 UI Restructure | 7.15 – 7.19 | 5 | 0 | ░░░░░░░░░░ 0% |
+| 🔄 Process Integration | 7.20 – 7.24 | 5 | 0 | ░░░░░░░░░░ 0% |
+| 🌐 Cross-Heir Intelligence | 7.25 – 7.29 | 5 | 0 | ░░░░░░░░░░ 0% |
+| 🧹 Polish & Release | 7.30 – 7.50 | 6 | 0 | ░░░░░░░░░░ 0% |
+| 🎉 Stabilization | 7.51 – 7.99 | — | — | reserved |
+| **TOTAL** | **7.10 – 8.0.0** | **26** | **0** | **░░░░░░░░░░ 0%** |
+
+### Current Sprint
+
+**v7.10.0 — Health Pulse Data Model** 🏗️
+
+- [ ] Create `src/views/healthPulse.ts`
+- [ ] Define `HealthPulse` interface
+- [ ] Implement `computeHealthStatus()` function
+- [ ] Add unit tests for status computation
+
+---
+
 ## Vision
 
 > **The extension is Alex's delivery vehicle. The UI is the cockpit, not the cargo.**
@@ -19,7 +42,7 @@ v8.0.0 marks a philosophical shift: from "feature-rich sidebar" to "lightweight 
 Alex doesn't care *what* you're making — Alex cares *why* you're making it. The outcome is the product, not the artifact:
 
 | Artifact | Outcome |
-|----------|---------|
+| -------- | ------- |
 | Code | Working software that solves a problem |
 | Document | Knowledge transfer that enables action |
 | Image | Visual communication that moves people |
@@ -30,112 +53,9 @@ This is why Alex works across personas. A developer writing code and a researche
 
 ---
 
-## Guiding Principles
+## The Universal Creative Loop
 
-| Principle | Meaning |
-|-----------|---------|
-| **Outcome-Focused** | Artifacts (code, docs, images) serve outcomes. Alex cares about the why, not the what. |
-| **Lightweight** | Minimal paint, minimal DOM, minimal state. No animations that don't serve purpose. |
-| **Thoughtful** | Every button earns its place. If it's used <5% of sessions, it's a command, not a button. |
-| **Chat-First** | The sidebar is a launchpad to chat, not a replacement for it. |
-| **Process-Aware** | UI surfaces *process health*, not raw counts. "Dream needed" > "47 synapses" |
-| **Heir-Safe** | Nothing in the UI assumes Master context. Heir deployments are first-class. |
-
----
-
-## Design Inspiration: PBI Visual Assistant
-
-The PBI Visual Assistant extension (C:\Development\pbi) embodies the "cockpit not cargo" philosophy:
-
-### Pattern 1: Chat-First Buttons
-
-```typescript
-// Most buttons just open chat with a pre-filled prompt
-{ icon: "heart", label: "Score Model Health", command: "openChat", 
-  prompt: "Score the AI readiness of this model" }
-```
-
-**Alex adoption**: Quick Actions should be chat prompts, not commands:
-| Button | Opens Chat With |
-| ------ | --------------- |
-| North Star | "Let's review the project North Star" |
-| Meditate | "Let's do a meditation session" |
-| Self-Actualize | "Run a self-actualization assessment" |
-
-### Pattern 2: Connection Status as Hero
-
-PBI shows a single card with color-coded status dot at the top:
-```
-┌─────────────────────────────────┐
-│ ● Connection: TMDL (Contoso)   │
-└─────────────────────────────────┘
-```
-
-**Alex adoption**: Health Pulse card with status indicator:
-```
-┌─────────────────────────────────┐
-│ ✅ Alex: Healthy               │
-│    247 synapses · Dream 2d ago │
-└─────────────────────────────────┘
-```
-
-### Pattern 3: Type Hints on Buttons
-
-Every button shows what it does BEFORE clicking:
-- 💬 → opens chat
-- 🔗 → opens external URL
-- ⚡ → runs command
-
-**Alex adoption**: Add type hints to Quick Actions so users know outcomes.
-
-### Pattern 4: Purpose-Driven Groups with Accent Colors
-
-| Group | Purpose | Accent |
-| ----- | ------- | ------ |
-| CONNECT | Link to data | Green |
-| ANALYZE | Understand data | Teal |
-| DESIGN | Build report | Orange |
-| GOVERN | Maintain | Magenta |
-
-**Alex adoption**: If keeping groups, use persona accent colors:
-| Group | Purpose | Accent |
-| ----- | ------- | ------ |
-| HEALTH | Cognitive status | Teal |
-| ACTIONS | Quick actions | Blue |
-| SETUP | Initialize/Bootstrap | Orange |
-
-### Pattern 5: Wiki for Docs
-
-PBI Docs tab is just links to GitHub Wiki. No docs embedded in extension.
-
-**Alex adoption**: Learn tab links to:
-- GitHub Wiki (user guide)
-- learnai.correax.com (playbooks)
-- alex-docs site (architecture)
-
-### Pattern 6: Minimal Actual Commands
-
-PBI has only 5 real VS Code commands. Everything else is `openChat` with a prompt.
-
-**Alex adoption**: Reduce command surface:
-
-| Keep as Command | Convert to Chat Prompt |
-| --------------- | ---------------------- |
-| `alex.dream` | — (needs progress UI) |
-| `alex.initialize` | — (needs file ops) |
-| `alex.upgrade` | — (needs file ops) |
-| `alex.openChat` | — (meta) |
-| `alex.selfActualize` | "Run self-actualization" |
-| `alex.meditate` | "Let's meditate" |
-| `alex.northStar` | "Review North Star" |
-
----
-
-## Core Insight: The Universal Creative Loop
-
-**PBI's groups aren't feature categories — they're user journeys.**
-
-But we can go further. All creative work follows the same loop:
+All creative work — software, books, dissertations, businesses — follows the same loop:
 
 ```
     ┌──────────┐
@@ -147,7 +67,8 @@ But we can go further. All creative work follows the same loop:
     └────┬─────┘
          ▼
     ┌──────────┐
-    │  BUILD   │ ← "I'm building/creating it"
+    │ BUILD /  │ ← "I'm building/creating it"
+    │ CREATE   │
     └────┬─────┘
          ▼
     ┌──────────┐
@@ -165,7 +86,7 @@ But we can go further. All creative work follows the same loop:
          └──────► back to IDEATE
 ```
 
-This loop applies to **any domain**:
+### The Loop Across Domains
 
 | Stage | Software | Book | Dissertation | Business |
 | ----- | -------- | ---- | ------------ | -------- |
@@ -176,45 +97,64 @@ This loop applies to **any domain**:
 | **RELEASE** | Deploy | Publish | Defend/submit | Launch |
 | **IMPROVE** | Iterate | Revised edition | Future work | Scale |
 
-### Alex Capabilities by Stage
+### Alex Agents by Stage
 
-| Stage | User Question | Alex Actions |
-| ----- | ------------- | ------------ |
-| **IDEATE** | "I have an idea, help me explore" | Research, Bootstrap Learning, Brainstorm |
-| **PLAN** | "I need to structure my approach" | Planner agent, North Star, Architecture |
-| **BUILD/CREATE** | "I'm building or creating something" | Builder, Code gen, Writing, Design, Skill building |
-| **TEST** | "I need to validate this" | Validator, Code review, QA, Editing |
-| **RELEASE** | "I'm ready to ship" | Release process, Quality gates, Publishing |
-| **IMPROVE** | "I need to get better" | Meditation, Self-Actualize, Feedback, Dream |
-
-### Agent Mapping
-
-| Stage | Primary Agents |
-| ----- | -------------- |
-| IDEATE | Researcher, Alex (brainstorm) |
-| PLAN | Planner, Documentarian |
-| BUILD/CREATE | Builder, Frontend, Backend, Infrastructure, Image Studio, Audio Studio, Presenter |
-| TEST | Validator, Alex (code review) |
-| RELEASE | Brain-Ops, Presenter |
-| IMPROVE | Alex (meditation, self-actualize, dream) |
+| Stage | User Question | Primary Agents |
+| ----- | ------------- | -------------- |
+| **IDEATE** | "I have an idea, help me explore" | Researcher, Alex (brainstorm) |
+| **PLAN** | "I need to structure my approach" | Planner, Documentarian |
+| **BUILD/CREATE** | "I'm building or creating something" | Builder, Frontend, Backend, Infrastructure, Image Studio, Audio Studio |
+| **TEST** | "I need to validate this" | Validator, Alex (code review) |
+| **RELEASE** | "I'm ready to ship" | Brain-Ops, Presenter |
+| **IMPROVE** | "I need to get better" | Alex (meditation, self-actualize, dream) |
 
 ### Key Insight: IMPROVE Normalizes Maintenance
 
-Alex's cognitive care (Dream, Meditate, Self-Actualize) isn't a separate "care for the AI" task — it's the **IMPROVE stage** of the creative loop. Just as a writer does post-publish reflection, or a developer does post-release retrospectives, Alex does meditation.
+Alex's cognitive care (Dream, Meditate, Self-Actualize) isn't a separate "care for the AI" task — it's the **IMPROVE stage** of the creative loop. Just as a writer does post-publish reflection, Alex does meditation.
 
 This frames maintenance as **part of the workflow**, not a chore.
 
-### Sidebar Expression
+---
 
-The sidebar helps users **locate themselves in the loop**:
+## Guiding Principles
 
-| Tab | Loop Stages | Content |
-| --- | ----------- | ------- |
-| **Home** | All stages | Health Pulse + Quick Actions (stage-aware) |
-| **Tools** | BUILD/CREATE + IMPROVE | Settings, Maintenance actions |
-| **Learn** | IDEATE + PLAN | External resources, Documentation |
+| Principle | Meaning |
+| --------- | ------- |
+| **Outcome-Focused** | Artifacts (code, docs, images) serve outcomes. Alex cares about the why, not the what. |
+| **Loop-Aware** | UI helps users locate themselves in the creative loop: "Where am I? What's next?" |
+| **Lightweight** | Minimal paint, minimal DOM, minimal state. No animations that don't serve purpose. |
+| **Chat-First** | The sidebar is a launchpad to chat, not a replacement for it. Most buttons → chat prompts. |
+| **Process-Aware** | UI surfaces *process health*, not raw counts. "Dream needed" > "47 synapses" |
+| **Heir-Safe** | Nothing in the UI assumes Master context. Heir deployments are first-class. |
 
-The sidebar answers: **"Where am I in the loop, and what's next?"**
+---
+
+## Design Inspiration: PBI Visual Assistant
+
+The PBI Visual Assistant extension embodies the "cockpit not cargo" philosophy:
+
+### Key Patterns Adopted
+
+| Pattern | PBI | Alex Adoption |
+| ------- | --- | ------------- |
+| **Chat-First Buttons** | Buttons open chat with prompts | Quick Actions → chat prompts |
+| **Status as Hero** | Connection status card | Health Pulse card at top |
+| **Type Hints** | Icons show button outcome | 💬 chat / 🔗 link / ⚡ command |
+| **Purpose Groups** | CONNECT/ANALYZE/DESIGN/GOVERN | IDEATE→PLAN→BUILD→TEST→RELEASE→IMPROVE |
+| **Wiki for Docs** | Links to GitHub Wiki | Learn tab → external resources |
+| **Minimal Commands** | 5 real commands, rest are prompts | Reduce to essential commands |
+
+### Command Surface Reduction
+
+| Keep as Command | Convert to Chat Prompt |
+| --------------- | ---------------------- |
+| `alex.dream` | — (needs progress UI) |
+| `alex.initialize` | — (needs file ops) |
+| `alex.upgrade` | — (needs file ops) |
+| `alex.openChat` | — (meta) |
+| `alex.selfActualize` | "Run self-actualization" |
+| `alex.meditate` | "Let's meditate" |
+| `alex.northStar` | "Review North Star" |
 
 ---
 
