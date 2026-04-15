@@ -1,11 +1,11 @@
 ---
 sem: 1
 name: "generate-image"
-description: "Generate an image, video, or audio using Replicate AI models"
+description: "Generate an image or video using Replicate AI models"
 application: "When generating images, banners, or visual assets"
 ---
 
-# Generate Image / Video / Audio with Replicate
+# Generate Image / Video with Replicate
 
 Use this prompt to generate AI media content via the Replicate API.
 
@@ -16,7 +16,8 @@ Use this prompt to generate AI media content via the Replicate API.
 Ask (or infer from context):
 - **Image** — static image generation or editing
 - **Video** — animated clip from text or image
-- **Audio/TTS** — voice narration, voice cloning
+
+> **For Audio/TTS**: See [/tts](text-to-speech.prompt.md) prompt and [text-to-speech/SKILL.md](../skills/text-to-speech/SKILL.md)
 
 ### 2. Select the Right Model
 
@@ -66,13 +67,6 @@ Params: duration=6 (ONLY 4/6/8 accepted), prompt='...'
 ```
 Model: xai/grok-imagine-video ($0.05/sec)
 Params: prompt='...', duration=10
-```
-
-**Voice narration (TTS):**
-```
-Model: resemble-ai/chatterbox-turbo (voice cloning, $0.025/1k chars)
-      qwen/qwen3-tts (voice design from description)
-      minimax/speech-2.8-turbo (40+ languages, emotion control)
 ```
 
 ### 3. Write the Generation Script

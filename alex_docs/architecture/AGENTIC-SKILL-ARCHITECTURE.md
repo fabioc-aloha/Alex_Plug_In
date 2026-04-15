@@ -4,7 +4,7 @@
 |---|---|
 | **Document Type** | Architecture Specification |
 | **Status** | Living Document |
-| **Version** | 3.3 |
+| **Version** | 3.5 |
 | **Last Updated** | April 2026 |
 | **Authors** | Alex Cognitive Architecture Team |
 | **Related Documents** | [Cognitive Architecture](./COGNITIVE-ARCHITECTURE.md), [Trifecta Catalog](./TRIFECTA-CATALOG.md) |
@@ -706,6 +706,41 @@ Each agent is scored on structural completeness:
 
 **Pass criteria:** `fm=1` AND score ≥4/5
 
+#### Request Recognition Patterns
+
+Agents document **natural language trigger phrases** instead of slash commands. This design choice reflects how the VS Code extension operates — through Copilot's agent mode rather than custom chat participants. Slash commands (`/meditate`, `/brain-ops`) are not registered as VS Code chat commands; they exist only as documentation. Natural language triggers serve the LLM better for pattern recognition.
+
+**Pattern format:**
+
+```markdown
+## Request Recognition
+
+### [Mode Name]
+**Triggers**: "phrase one", "phrase two", "natural language pattern"
+
+Description of what this mode does...
+```
+
+**Example triggers by agent:**
+
+| Agent | Mode | Triggers |
+|-------|------|----------|
+| **Alex** | Meditation | "let's meditate", "knowledge consolidation", "time for reflection" |
+| **Alex** | Learning | "teach me about [topic]", "I want to learn", "bootstrap learning" |
+| **Brain Ops** | Full Sweep | "full sweep", "deep maintenance", "run all diagnostics" |
+| **Brain Ops** | Fleet Review | "fleet review", "check all agents", "agent health audit" |
+| **Researcher** | Gap Analysis | "gap analysis", "what's missing?", "identify gaps" |
+| **Researcher** | Knowledge Search | "search knowledge for [topic]", "do we know about [topic]?" |
+
+**Design rationale:**
+
+1. **LLM consumption**: Natural language patterns are what the LLM actually matches against user input
+2. **No registration overhead**: Slash commands would require VS Code `chatParticipants` registration
+3. **Flexibility**: Users can phrase requests naturally; exact syntax isn't required
+4. **Discoverability**: Trigger tables in agent files serve as both documentation and activation hints
+
+**Anti-pattern**: Documenting slash commands (e.g., `/brain-ops --mode full-sweep`) that aren't actually registered. This confuses users who try to type them literally.
+
 #### Expertise Tracking (AFCP Integration)
 
 Beyond structural health, Brain Ops tracks **runtime performance** using concepts from the Agent Fleets Coordination Protocol (AFCP). Each agent accumulates expertise metrics that inform future routing decisions:
@@ -832,25 +867,22 @@ Brain Ops orchestrates maintenance without duplicating script functionality:
 
 AFCP's directive sets formalize behavioral modes. Brain Ops operates in named modes with distinct behaviors:
 
-| Mode | Directive | Behavior |
-|------|-----------|----------|
+| Mode | Trigger | Behavior |
+|------|---------|----------|
 | **`quick-check`** | Per-session default | Run brain-qa only, report summary, no fixes |
-| **`full-sweep`** | Daily maintenance | All scripts, auto-fix enabled, full reporting |
-| **`fleet-review`** | Weekly analysis | Add gap detection, expertise review, propose changes |
-| **`release-gate`** | Pre-release | Zero tolerance, all gates must pass, block on unknowns |
-| **`incident-mode`** | Triggered by P1 | Focus on single issue, trace correlation, suspend other work |
+| **`full-sweep`** | "full sweep", "deep maintenance" | All scripts, auto-fix enabled, full reporting |
+| **`fleet-review`** | "fleet review", "check all agents" | Add gap detection, expertise review, propose changes |
+| **`release-gate`** | Version bump detected | Zero tolerance, all gates must pass, block on unknowns |
+| **`incident-mode`** | P1 detected or URGENT_PATCH.md | Focus on single issue, trace correlation, suspend other work |
 
-Modes can be activated explicitly:
-```
-/brain-ops --mode release-gate
-```
-
-Or auto-detected from context:
-- Version bump detected → `release-gate`
+Modes activate via natural language triggers or auto-detection:
+- "run a full sweep" → `full-sweep`
+- "check all agents" → `fleet-review`
+- Version bump in package.json → `release-gate`
 - `URGENT_PATCH.md` present → `incident-mode`
 - Normal session start → `quick-check`
 
-This replaces ad-hoc behavioral variation with predictable, named profiles that users can invoke and understand.
+This replaces ad-hoc behavioral variation with predictable, named profiles that users can invoke naturally.
 
 ### 6.7 Reporting Format
 
@@ -1043,7 +1075,94 @@ An agentic skill (or skill cluster) graduates to an agent when:
 
 **Key insight:** Skills don't disappear when they graduate — the agent *coordinates* the skills. The `alex-data.agent.md` would invoke `data-analysis`, `data-visualization`, and `dashboard-design` skills rather than duplicating their content.
 
-### 7.2 Design Rationale
+### 7.2 Agent Trifectas
+
+While skills have trifectas (skill + instruction + prompt), agents can also have **supporting trifectas** — aligned files that enhance the agent's capabilities:
+
+```
+.github/
+├── agents/alex-{name}.agent.md        # Agent definition (required)
+├── prompts/{name}.prompt.md           # Quick routing prompt (optional)
+├── instructions/{name}.instructions.md # Domain procedures (optional)
+└── skills/{name}/SKILL.md             # Domain knowledge (optional)
+```
+
+**Example: alex-file-converter**
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| Agent | `alex-file-converter.agent.md` | Orchestrates conversion workflow |
+| Prompt | — | Routes via skill prompts instead |
+| Instruction | — | Each converter has own instruction |
+| Skill | — | Coordinates existing skill cluster |
+
+The agent doesn't need its own trifecta because it **coordinates** existing complete trifectas:
+
+| Skill Cluster | Trifecta Status |
+|---------------|-----------------|
+| md-to-word | ✓ skill + ✓ instruction + ✓ prompt + ✓ muscle |
+| md-to-html | ✓ skill + ✓ instruction + ✓ prompt + ✓ muscle |
+| md-to-eml | ✓ skill + ✓ instruction + ✓ prompt + ✓ muscle |
+| docx-to-md | ✓ skill + ✓ instruction + ✓ prompt + ✓ muscle |
+| md-scaffold | ✓ skill + ✓ instruction + ✓ prompt + ✓ muscle |
+
+**Example: alex-image-studio**
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| Agent | `alex-image-studio.agent.md` | Orchestrates visual workflows |
+| Prompt | — | Routes via skill prompts |
+| Instruction | — | Each skill has own instruction |
+| Skill | — | Coordinates existing skill cluster |
+
+Coordinates image generation and visual memory management:
+
+| Skill Cluster | Trifecta Status |
+|---------------|-----------------|
+| visual-memory | ✓ skill + ✓ instruction + ✓ prompt + ✓ muscle |
+| ai-character-reference-generation | ✓ skill + ✓ instruction + ✓ prompt |
+| ai-generated-readme-banners | ✓ skill + ✓ instruction + ✓ prompt |
+| character-aging-progression | ✓ skill + ✓ instruction + ✓ prompt |
+| image-handling | ✓ skill + ✓ instruction + ✓ prompt |
+
+**Example: alex-audio-studio**
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| Agent | `alex-audio-studio.agent.md` | Orchestrates audio workflows |
+| Prompt | — | Routes via skill prompts |
+| Instruction | — | Each skill has own instruction |
+| Skill | — | Coordinates existing skill cluster |
+
+Coordinates voice generation and audio content creation:
+
+| Skill Cluster | Trifecta Status |
+|---------------|-----------------|
+| text-to-speech | ✓ skill + ✓ instruction + ✓ prompt |
+| music-generation | ✓ skill + ✓ instruction + ✓ prompt |
+| audio-memory | ✓ skill + ✓ instruction + ✓ prompt |
+
+**When agents need their own trifecta:**
+
+| Scenario | Agent Trifecta Needed? | Rationale |
+|----------|:----------------------:|-----------|
+| Coordinator of existing skills | No | Skills provide domain knowledge |
+| Domain specialist without skills | Yes | Agent needs domain instruction/skill |
+| Persona with unique methodology | Yes | Methodology deserves its own skill |
+| Simple routing agent | No | Handoffs suffice |
+
+**Examples in practice:**
+
+| Agent | Has Own Trifecta | Reason |
+|-------|:----------------:|--------|
+| alex-file-converter | No | Coordinates 5 converter trifectas |
+| alex-image-studio | No | Coordinates 5 visual/image trifectas |
+| alex-audio-studio | No | Coordinates 3 audio/voice trifectas |
+| alex-researcher | Yes | `research-first-development` instruction |
+| alex-brain-ops | Partial | `brainqa.prompt.md` + `brain-qa` skill |
+| alex-builder | Partial | `builder.prompt.md` only |
+
+### 7.3 Design Rationale
 
 **Why model evolution explicitly?**
 
@@ -1156,6 +1275,8 @@ This architecture contributes beyond prior art:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 3.5 | April 2026 | Added alex-audio-studio example (7.2); multi-modal studio pattern documented |
+| 3.4 | April 2026 | Request Recognition patterns (6.5.1); natural language triggers replace slash commands |
 | 3.3 | April 2026 | Comprehensive abstract; scope updated to reflect agent coverage; See Also expanded; bounds alignment |
 | 3.2 | April 2026 | Skill → Agent graduation path (7.1); evolution diagram extended |
 | 3.1 | April 2026 | AFCP integration: expertise tracking, structured unknowns, directive sets (6.4-6.9) |

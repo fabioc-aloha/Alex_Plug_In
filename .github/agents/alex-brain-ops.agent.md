@@ -50,8 +50,8 @@ Brain Ops operates in named modes with distinct behaviors:
 | Mode | Trigger | Behavior |
 |------|---------|----------|
 | **`quick-check`** | Default per-session | Run brain-qa only, report summary, no fixes |
-| **`full-sweep`** | `/brain-ops --mode full-sweep` | All scripts, auto-fix enabled, full reporting |
-| **`fleet-review`** | `/brain-ops --mode fleet-review` | Add gap detection, expertise review, propose changes |
+| **`full-sweep`** | "full sweep", "deep maintenance" | All scripts, auto-fix enabled, full reporting |
+| **`fleet-review`** | "fleet review", "check all agents" | Add gap detection, expertise review, propose changes |
 | **`release-gate`** | Version bump detected | Zero tolerance, all gates must pass, block on unknowns |
 | **`incident-mode`** | P1 detected or URGENT_PATCH.md | Focus on single issue, trace correlation, suspend other work |
 
@@ -255,36 +255,34 @@ Skills/instructions without activation become candidates for retirement:
 
 **Exception**: Core tier components are never retired regardless of dormancy.
 
-## Commands
+## Request Recognition
 
-### /brain-ops - Run Maintenance
+Recognize these natural language patterns and map to maintenance operations:
 
-Run maintenance in specified mode:
+### Maintenance Requests → Run Diagnostics
 
-```
-/brain-ops                          # Default: quick-check
-/brain-ops --mode full-sweep        # All scripts, auto-fix enabled
-/brain-ops --mode fleet-review      # Add gap detection
-/brain-ops --mode release-gate      # Pre-release, zero tolerance
-```
+| User says | Mode | Action |
+|-----------|------|--------|
+| "check brain health" / "run brain qa" / "maintenance check" | quick-check | Run brain-qa.cjs, report summary |
+| "full brain sweep" / "deep maintenance" / "run all audits" | full-sweep | All scripts, auto-fix enabled |
+| "fleet review" / "check all agents" / "gap analysis" | fleet-review | Add gap detection, propose changes |
+| "release gate" / "pre-release check" / "ready to publish?" | release-gate | Zero tolerance, all gates must pass |
 
-### /brain-health - Quick Status
+### Status Requests → Read Health Grid
 
-Show current health without running diagnostics:
+| User says | Action |
+|-----------|--------|
+| "brain status" / "health report" / "how's the architecture?" | Read brain-health-grid.md, report pass rate, top issues |
+| "what needs fixing?" / "show problems" | List P1-P2 issues from last diagnostic |
 
-1. Read `brain-health-grid.md` summary
-2. Report pass rate and top issues
-3. Suggest next action
+### Targeted Fix Requests → Fix Specific Component
 
-### /brain-fix [component] - Targeted Fix
-
-Fix a specific component:
-
-```
-/brain-fix skill:code-review        # Fix code-review skill defects
-/brain-fix muscle:md-to-word        # Fix md-to-word muscle defects
-/brain-fix agent:Validator          # Fix Validator agent defects
-```
+| User says | Action |
+|-----------|--------|
+| "fix the [skill-name] skill" | Run diagnostics on skill, apply auto-fixes, report |
+| "fix [muscle-name] muscle" | Validate muscle, fix structural issues |
+| "fix [agent-name] agent" | Check agent frontmatter, handoffs, bounds |
+| "fix all skills" / "batch fix" | Run auto-fix on all auto-fixable issues |
 
 ## Expertise Tracking
 

@@ -1,6 +1,6 @@
 ---
 applyTo: "**/*.png,**/*.jpg,**/*.jpeg,**/*.webp,**/*.svg,**/*.ico,**/*image*,**/*banner*,**/*icon*,**/*avatar*,**/*photo*,**/generate-*.js,**/generate-*.ts"
-description: "Image format selection, conversion rules, and Replicate model selection for AI image/video/audio generation"
+description: "Image format selection, conversion rules, and Replicate model selection for AI image/video generation"
 application: "When generating images, managing visual assets, or maintaining brand consistency"
 ---
 
@@ -49,12 +49,9 @@ For compact UI icons, do not assume SVG generation is the best fit. `recraft-ai/
 4. **Realistic home-video quality** → `openai/sora-2`
 5. **Budget/open-source** → `wan-video/wan-2.5-t2v-fast`
 
-### Audio / TTS Priority
+### Audio / TTS
 
-1. **Voice cloning from sample** → `resemble-ai/chatterbox-turbo` ($0.025/1k chars)
-2. **Voice design from description** → `qwen/qwen3-tts` (3 modes: Voice, Clone, Design)
-3. **Many languages + emotion** → `minimax/speech-2.8-turbo` ($0.06/1k tokens, 40+ languages)
-4. **Studio-grade fidelity** → `minimax/speech-2.8-hd` (higher cost, highest quality)
+> **Moved to dedicated skill**: See [text-to-speech/SKILL.md](../skills/text-to-speech/SKILL.md) for TTS generation and [audio-memory/SKILL.md](../skills/audio-memory/SKILL.md) for voice sample storage.
 
 ## Parameters to Always Verify
 

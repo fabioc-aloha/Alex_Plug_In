@@ -117,45 +117,58 @@ if (!fs.existsSync(QUALITY_DIR)) {
 }
 
 // --- Read existing semantic review (sem) values from previous grid ---
-// Preserves sem=1 when regenerating the grid, so manual reviews aren't lost
+// Preserves semantic review dates when regenerating the grid, so manual reviews aren't lost
+// Values are either YYYY-MM-DD dates or '-' for pending review
 function readExistingSemValues() {
   const gridPath = path.join(QUALITY_DIR, "brain-health-grid.md");
-  if (!fs.existsSync(gridPath)) return { skills: {}, instructions: {}, agents: {} };
+  if (!fs.existsSync(gridPath)) return { skills: {}, instructions: {}, agents: {}, prompts: {} };
 
   const content = fs.readFileSync(gridPath, "utf-8");
-  const semValues = { skills: {}, instructions: {}, agents: {} };
+  const semValues = { skills: {}, instructions: {}, agents: {}, prompts: {} };
 
-  // Parse Skills table: | [skill-name](path) | ... | inh | stale | sem |
-  // Table format: | [name](path) | tier | lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |
+  // Parse Skills table: | [skill-name](path) | ... | inh | stale | Sem Review |
+  // Table format: | [name](path) | tier | lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | Sem Review |
+  // Sem Review is YYYY-MM-DD or -
   const skillsSection = content.match(/## Skills[\s\S]*?(?=## Agents|## Instructions|$)/);
   if (skillsSection) {
-    const skillRows = skillsSection[0].matchAll(/^\| \[([\w-]+)\]\([^)]+\) \| \w+ \| \d+ \|.*\| (\d) \|$/gm);
+    const skillRows = skillsSection[0].matchAll(/^\| \[([\w-]+)\]\([^)]+\) \| \w+ \| \d+ \|.*\| (\d{4}-\d{2}-\d{2}|-) \|$/gm);
     for (const match of skillRows) {
       const name = match[1];
-      const sem = parseInt(match[2], 10);
+      const sem = match[2]; // Keep as string (date or '-')
       semValues.skills[name] = sem;
     }
   }
 
-  // Parse Agents table: | [agent-name](path) | lines | ... | sem |
+  // Parse Agents table: | [agent-name](path) | lines | ... | Sem Review |
   const agentsSection = content.match(/## Agents[\s\S]*?(?=## Instructions|## Prompts|## Overall|$)/);
   if (agentsSection) {
-    const agentRows = agentsSection[0].matchAll(/^\| \[([\w-]+)\]\([^)]+\) \| \d+ \|.*\| (\d) \|$/gm);
+    const agentRows = agentsSection[0].matchAll(/^\| \[([\w-]+)\]\([^)]+\) \| \d+ \|.*\| (\d{4}-\d{2}-\d{2}|-) \|$/gm);
     for (const match of agentRows) {
       const name = match[1];
-      const sem = parseInt(match[2], 10);
+      const sem = match[2];
       semValues.agents[name] = sem;
     }
   }
 
-  // Parse Instructions table: | [instruction-name](path) | lines | ... | sem |
+  // Parse Instructions table: | [instruction-name](path) | lines | ... | Sem Review |
   const instrSection = content.match(/## Instructions[\s\S]*?(?=## Prompts|## Overall|$)/);
   if (instrSection) {
-    const instrRows = instrSection[0].matchAll(/^\| \[([\w-]+)\]\([^)]+\) \| \d+ \|.*\| (\d) \|$/gm);
+    const instrRows = instrSection[0].matchAll(/^\| \[([\w-]+)\]\([^)]+\) \| \d+ \|.*\| (\d{4}-\d{2}-\d{2}|-) \|$/gm);
     for (const match of instrRows) {
       const name = match[1];
-      const sem = parseInt(match[2], 10);
+      const sem = match[2];
       semValues.instructions[name] = sem;
+    }
+  }
+
+  // Parse Prompts table: | [prompt-name](path) | lines | ... | Sem Review |
+  const promptsSection = content.match(/## Prompts[\s\S]*?(?=## Muscles|## Overall|$)/);
+  if (promptsSection) {
+    const promptRows = promptsSection[0].matchAll(/^\| \[([\w-]+)\]\([^)]+\) \| \d+ \|.*\| (\d{4}-\d{2}-\d{2}|-) \|$/gm);
+    for (const match of promptRows) {
+      const name = match[1];
+      const sem = match[2];
+      semValues.prompts[name] = sem;
     }
   }
 
@@ -332,7 +345,15 @@ function scanSkills() {
     results.push({ name, lines, flags, score: adjustedScore, tier, threshold, pass, isWorkflow, agentic, maxScore, waste });
   }
 
-  return results.sort((a, b) => a.score - b.score);
+  // Sort: worst score first, then unreviewed first, then alphabetically
+  return results.sort((a, b) => {
+    if (a.score !== b.score) return a.score - b.score;
+    const aSem = EXISTING_SEM.skills[a.name] ?? '-';
+    const bSem = EXISTING_SEM.skills[b.name] ?? '-';
+    if (aSem === '-' && bSem !== '-') return -1;
+    if (aSem !== '-' && bSem === '-') return 1;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 // Line bounds: minimum to justify existence, maximum for token efficiency
@@ -374,7 +395,7 @@ function scanAgents() {
     const hasCode = /```(?!mermaid|ascii|text|txt|diagram|plantuml|graphviz|dot|chart|diff)\w+/i.test(content);
 
     // Semantic review flag (preserved from previous grid, default 0)
-    const sem = EXISTING_SEM.agents[name] ?? 0;
+    const sem = EXISTING_SEM.agents[name] ?? '-';
 
     // Token waste detection (Mermaid diagrams, style lines)
     const waste = detectTokenWaste(content);
@@ -393,7 +414,13 @@ function scanAgents() {
     results.push({ name, lines, flags, score, maxScore: 5, pass, sem, waste });
   }
 
-  return results.sort((a, b) => a.score - b.score);
+  // Sort: worst score first, then unreviewed first, then alphabetically
+  return results.sort((a, b) => {
+    if (a.score !== b.score) return a.score - b.score;
+    if (a.sem === '-' && b.sem !== '-') return -1;
+    if (a.sem !== '-' && b.sem === '-') return 1;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 // --- Instruction Scanner ---
@@ -454,7 +481,15 @@ function scanInstructions() {
     results.push({ name, lines, flags, score, maxScore: 5, pass, waste });
   }
 
-  return results.sort((a, b) => a.score - b.score);
+  // Sort: worst score first, then unreviewed first, then alphabetically
+  return results.sort((a, b) => {
+    if (a.score !== b.score) return a.score - b.score;
+    const aSem = EXISTING_SEM.instructions[a.name] ?? '-';
+    const bSem = EXISTING_SEM.instructions[b.name] ?? '-';
+    if (aSem === '-' && bSem !== '-') return -1;
+    if (aSem !== '-' && bSem === '-') return 1;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 // --- Prompt Scanner ---
@@ -485,7 +520,15 @@ function scanPrompts() {
     results.push({ name, lines, flags, score, maxScore: 4, pass });
   }
 
-  return results.sort((a, b) => a.score - b.score);
+  // Sort: worst score first, then unreviewed first, then alphabetically
+  return results.sort((a, b) => {
+    if (a.score !== b.score) return a.score - b.score;
+    const aSem = EXISTING_SEM.prompts[a.name] ?? '-';
+    const bSem = EXISTING_SEM.prompts[b.name] ?? '-';
+    if (aSem === '-' && bSem !== '-') return -1;
+    if (aSem !== '-' && bSem === '-') return 1;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 // --- Muscle Scanner ---
@@ -611,7 +654,13 @@ function scanMuscles() {
     results.push({ name, lines: lineCount, lang, category, inh, flags, score, maxScore: 4, pass, reviewDate, meta, hasStandardHeader });
   }
 
-  return results.sort((a, b) => a.score - b.score);
+  // Sort: worst score first, then unreviewed first, then alphabetically
+  return results.sort((a, b) => {
+    if (a.score !== b.score) return a.score - b.score;
+    if (!a.reviewDate && b.reviewDate) return -1;
+    if (a.reviewDate && !b.reviewDate) return 1;
+    return a.name.localeCompare(b.name);
+  });
 }
 
 // --- Generate Grid ---
@@ -679,16 +728,131 @@ function generateGrid() {
   lines.push("|:---:|---------|---|---|");
   lines.push("| **inh** | Inheritance | Master-only | Synced to heirs |");
   lines.push("| **stale** | Staleness | Needs regular review | Stable |");
-  lines.push("| **sem** | Semantic Review | Reviewed post-synapse-cleanup | Pending review |");
+  lines.push("| **Sem Review** | Semantic Review Date | YYYY-MM-DD | - (pending) |");
   lines.push("");
-  lines.push("> **Semantic Review (sem)**: One-time audit to verify each brain file is clear, coherent, and not damaged by synapse removal. Files marked 0 need manual review for: broken references, orphaned content, outdated patterns, or content that should be renewed/removed.");
+  lines.push("> **Semantic Review**: Audit date when the brain file was verified for clarity, coherence, correctness, completeness, and conciseness. Files marked `-` are pending review.");
+  lines.push("");
+
+  // Semantic Review Process section
+  lines.push("## Semantic Review Process");
+  lines.push("");
+  lines.push("A semantic review validates brain file quality beyond automated checks. Perform before marking with a review date:");
+  lines.push("");
+  lines.push("| Criterion | Question | Fix |");
+  lines.push("|-----------|----------|-----|");
+  lines.push("| **Clarity** | Can a reader understand intent without external context? | Rewrite ambiguous sections |");
+  lines.push("| **Coherence** | Do sections flow logically? No contradictions? | Restructure, resolve conflicts |");
+  lines.push("| **Correctness** | Are facts, patterns, and examples still accurate? | Update outdated content |");
+  lines.push("| **Completeness** | Missing edge cases or common scenarios? | Add missing coverage |");
+  lines.push("| **Conciseness** | Can any section be shortened without losing value? | Eliminate redundancy |");
+  lines.push("");
+  lines.push("**After review**: Edit the `Sem Review` column from `-` to `YYYY-MM-DD`. Date is preserved on grid regeneration.");
+  lines.push("");
+
+  // Priority Queue section
+  lines.push("## Priority Queue");
+  lines.push("");
+  lines.push("> **Sorted by urgency**: Failing items first, then unreviewed, then lowest score. Work top-to-bottom.");
+  lines.push("");
+
+  // Collect all items with priority metadata
+  const priorityItems = [];
+  
+  for (const s of skills) {
+    const sem = EXISTING_SEM.skills[s.name] ?? '-';
+    priorityItems.push({
+      type: 'skill',
+      name: s.name,
+      path: `../skills/${s.name}/SKILL.md`,
+      score: s.score,
+      maxScore: s.maxScore,
+      pass: s.pass,
+      sem: sem,
+    });
+  }
+  
+  for (const a of agents) {
+    priorityItems.push({
+      type: 'agent',
+      name: a.name,
+      path: `../agents/${a.name}.agent.md`,
+      score: a.score,
+      maxScore: 5,
+      pass: a.pass,
+      sem: a.sem,
+    });
+  }
+  
+  for (const i of instructions) {
+    const sem = EXISTING_SEM.instructions[i.name] ?? '-';
+    priorityItems.push({
+      type: 'instruction',
+      name: i.name,
+      path: `../instructions/${i.name}.instructions.md`,
+      score: i.score,
+      maxScore: 5,
+      pass: i.pass,
+      sem: sem,
+    });
+  }
+  
+  for (const p of prompts) {
+    const sem = EXISTING_SEM.prompts[p.name] ?? '-';
+    priorityItems.push({
+      type: 'prompt',
+      name: p.name,
+      path: `../prompts/${p.name}.prompt.md`,
+      score: p.score,
+      maxScore: 4,
+      pass: p.pass,
+      sem: sem,
+    });
+  }
+
+  // Sort: failing first, then unreviewed, then by score
+  priorityItems.sort((a, b) => {
+    // Failing items first
+    if (!a.pass && b.pass) return -1;
+    if (a.pass && !b.pass) return 1;
+    // Then unreviewed items
+    if (a.sem === '-' && b.sem !== '-') return -1;
+    if (a.sem !== '-' && b.sem === '-') return 1;
+    // Then by score (lower = higher priority)
+    const aRatio = a.score / a.maxScore;
+    const bRatio = b.score / b.maxScore;
+    if (aRatio !== bRatio) return aRatio - bRatio;
+    // Finally alphabetical
+    return a.name.localeCompare(b.name);
+  });
+
+  // Show top 15 items
+  const topItems = priorityItems.slice(0, 15);
+  
+  if (topItems.length > 0) {
+    lines.push("| # | Type | File | Score | Pass | Sem Review | Action |");
+    lines.push("|--:|:----:|------|------:|:----:|:----------:|--------|");
+    
+    topItems.forEach((item, idx) => {
+      const nameLink = `[${item.name}](${item.path})`;
+      const passIcon = item.pass ? "✓" : "✗";
+      const action = !item.pass ? "Fix defects" : (item.sem === '-' ? "Semantic review" : "Re-review");
+      lines.push(`| ${idx + 1} | ${item.type} | ${nameLink} | ${item.score}/${item.maxScore} | ${passIcon} | ${item.sem} | ${action} |`);
+    });
+    
+    const totalFailing = priorityItems.filter(i => !i.pass).length;
+    const totalUnreviewed = priorityItems.filter(i => i.pass && i.sem === '-').length;
+    lines.push("");
+    lines.push(`**Queue depth**: ${totalFailing} failing | ${totalUnreviewed} passing but unreviewed | ${priorityItems.length} total`);
+  } else {
+    lines.push("**Status**: ✅ All brain files passing and reviewed");
+  }
   lines.push("");
 
   // Skills table
   lines.push("## Skills");
   lines.push("");
-  lines.push("| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |");
-  lines.push("|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:---:|");
+  lines.push("| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | Sem Review |");
+  lines.push("|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:----------:|");
 
   for (const s of skills) {
     const f = s.flags;
@@ -696,8 +860,8 @@ function generateGrid() {
     const passIcon = s.pass ? "✓" : "✗";
     // Type: A = Agentic (tri+muscle), I = Intellectual (tri only), - = incomplete
     const typeIcon = s.agentic ? "A" : (f.tri === 1 ? "I" : "-");
-    // Preserve existing sem value if available, otherwise 0 (pending review)
-    const sem = EXISTING_SEM.skills[s.name] ?? 0;
+    // Preserve existing sem date if available, otherwise '-' (pending review)
+    const sem = EXISTING_SEM.skills[s.name] ?? '-';
     // Link to SKILL.md file
     const nameLink = `[${s.name}](../skills/${s.name}/SKILL.md)`;
     const codeIcon = f.code ? '1' : '-';
@@ -726,7 +890,7 @@ function generateGrid() {
   lines.push(`**Skill Types**: Agentic(A): ${agenticCount} | Intellectual(I): ${intellectualCount} | Incomplete(-): ${skills.length - agenticCount - intellectualCount}`);
   lines.push("");
   // Semantic review progress
-  const skillsReviewed = skills.filter(s => (EXISTING_SEM.skills[s.name] ?? 0) === 1).length;
+  const skillsReviewed = skills.filter(s => (EXISTING_SEM.skills[s.name] ?? '-') !== '-').length;
   const skillsPending = skills.length - skillsReviewed;
   lines.push(`**Semantic Review**: ${skillsReviewed}/${skills.length} reviewed | ${skillsPending} pending`);
   lines.push("");
@@ -750,12 +914,10 @@ function generateGrid() {
   lines.push("");
   lines.push("> **Code policy**: Agent examples should use **pseudocode** (language-agnostic patterns), **templates** (markdown output formats), or **diagrams** (Mermaid). Avoid language-specific syntax — agents teach patterns, not syntax.");
   lines.push("");
-  lines.push("> **Semantic Review (sem)**: Audit each agent for: clear persona, appropriate examples (pseudocode not language-specific), coherent structure. Files marked 0 need optimization.");
-  lines.push("");
   lines.push("**Pass criteria**: fm=1 (gate) AND score ≥4/5");
   lines.push("");
-  lines.push("| Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | sem |");
-  lines.push("|-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:---:|");
+  lines.push("| Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | Sem Review |");
+  lines.push("|-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:----------:|");
 
   for (const a of agents) {
     const f = a.flags;
@@ -769,7 +931,7 @@ function generateGrid() {
   const agentsPassing = agents.filter(a => a.pass).length;
   const agentsFailing = agents.filter(a => !a.pass).length;
   const agentsPerfect = agents.filter(a => a.score === 5).length;
-  const agentsReviewed = agents.filter(a => a.sem === 1).length;
+  const agentsReviewed = agents.filter(a => a.sem !== '-').length;
   const agentsPending = agents.length - agentsReviewed;
   lines.push("");
   lines.push(`**Summary**: ${agents.length} agents | Passing: ${agentsPassing} | Failing: ${agentsFailing} | Perfect(5/5): ${agentsPerfect}`);
@@ -795,14 +957,14 @@ function generateGrid() {
   lines.push("");
   lines.push("**Pass criteria**: fm=1 (gate) AND score ≥3/5");
   lines.push("");
-  lines.push("| Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | sem |");
-  lines.push("|-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|");
+  lines.push("| Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | Sem Review |");
+  lines.push("|-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:----------:|");
 
   for (const i of instructions) {
     const f = i.flags;
     const passIcon = i.pass ? "✓" : "✗";
-    // Preserve existing sem value if available, otherwise 0 (pending review)
-    const sem = EXISTING_SEM.instructions[i.name] ?? 0;
+    // Preserve existing sem date if available, otherwise '-' (pending review)
+    const sem = EXISTING_SEM.instructions[i.name] ?? '-';
     // Link to instruction file
     const nameLink = `[${i.name}](../instructions/${i.name}.instructions.md)`;
     lines.push(`| ${nameLink} | ${i.lines} | ${f.fm} | ${f.depth} | ${f.sect} | ${f.code} | ${f.skill} | ${i.score}/5 | ${passIcon} | ${sem} |`);
@@ -812,7 +974,7 @@ function generateGrid() {
   const instrPassing = instructions.filter(i => i.pass).length;
   const instrFailing = instructions.filter(i => !i.pass).length;
   const instrPerfect = instructions.filter(i => i.score === 5).length;
-  const instrReviewed = instructions.filter(i => (EXISTING_SEM.instructions[i.name] ?? 0) === 1).length;
+  const instrReviewed = instructions.filter(i => (EXISTING_SEM.instructions[i.name] ?? '-') !== '-').length;
   const instrPending = instructions.length - instrReviewed;
   lines.push("");
   lines.push(`**Summary**: ${instructions.length} instructions | Passing: ${instrPassing} | Failing: ${instrFailing} | Perfect(5/5): ${instrPerfect}`);
@@ -836,23 +998,28 @@ function generateGrid() {
   lines.push("");
   lines.push("**Pass criteria**: desc=1 AND app=1 (gates) AND score ≥3/4");
   lines.push("");
-  lines.push("| Prompt | Lines | desc | app | agent | >20L | Score | Pass |");
-  lines.push("|--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|");
+  lines.push("| Prompt | Lines | desc | app | agent | >20L | Score | Pass | Sem Review |");
+  lines.push("|--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|:----------:|");
 
   for (const p of prompts) {
     const f = p.flags;
     const passIcon = p.pass ? "✓" : "✗";
+    // Preserve existing sem date if available, otherwise '-' (pending review)
+    const sem = EXISTING_SEM.prompts[p.name] ?? '-';
     // Link to prompt file
     const nameLink = `[${p.name}](../prompts/${p.name}.prompt.md)`;
-    lines.push(`| ${nameLink} | ${p.lines} | ${f.desc} | ${f.app} | ${f.agent} | ${f.over20} | ${p.score}/4 | ${passIcon} |`);
+    lines.push(`| ${nameLink} | ${p.lines} | ${f.desc} | ${f.app} | ${f.agent} | ${f.over20} | ${p.score}/4 | ${passIcon} | ${sem} |`);
   }
 
   // Prompts summary
   const promptsPassing = prompts.filter(p => p.pass).length;
   const promptsFailing = prompts.filter(p => !p.pass).length;
   const promptsPerfect = prompts.filter(p => p.score === 4).length;
+  const promptsReviewed = prompts.filter(p => (EXISTING_SEM.prompts[p.name] ?? '-') !== '-').length;
+  const promptsPending = prompts.length - promptsReviewed;
   lines.push("");
   lines.push(`**Summary**: ${prompts.length} prompts | Passing: ${promptsPassing} | Failing: ${promptsFailing} | Perfect(4/4): ${promptsPerfect}`);
+  lines.push(`**Semantic Review**: ${promptsReviewed}/${prompts.length} reviewed | ${promptsPending} pending`);
 
   // Prompts criterion validity
   const promptDescPass = prompts.filter(p => p.flags.desc === 1).length;

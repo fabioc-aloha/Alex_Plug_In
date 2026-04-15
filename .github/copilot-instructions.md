@@ -27,10 +27,10 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: north-star, research-first-development, vscode-extension-patterns
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code, Plan-Before-Build
-Recent: brain-qa heir bug fixes (Phase 3/15/30), Phase 35 self-containment validation, brain anatomy accuracy fixes (M1/premotor, corpus callosum, cerebellar folia), 3 new brain regions, docs site updated, GitHub PR review feature removed, dead code cleanup.
+Recent: v7.9.0 architecture modernization — Skill Builder agent, brain-health-grid quality tracking, 23 core skills reviewed, Priority Queue cleared, project-scaffolding enhanced. Preparing for v8.0.0.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Read NORTH-STAR.md -- defines what "most advanced and trusted AI partner" means in practice. Cardinal rule: Architecture MUST NOT depend on the Extension (I8).
-Last Assessed: 2026-04-11
+Last Assessed: 2026-04-15
 
 ## User Profile
 
@@ -82,7 +82,7 @@ Kill switch: .github/config/MASTER-ALEX-PROTECTED.json
 
 <!-- brain-qa validates: agent list matches .github/agents/*.agent.md on disk -->
 
-Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Brain Ops (maintenance), Azure, M365, Backend (Python/FastAPI), Frontend (React/TypeScript), Infrastructure (Bicep/Azure), Planner (task decomposition), Presenter (demos/docs)
+Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Brain-Ops (maintenance), Skill Builder (trifectas/muscles), Azure, M365, Backend (Python/FastAPI), Frontend (React/TypeScript), Infrastructure (Bicep/Azure), Planner (task decomposition), Presenter (demos/docs)
 
 ## Copilot Memory
 

@@ -26,16 +26,7 @@ This skill captures the practitioner research approach: **practitioner-first, ev
 
 ### Phase 1: Practice First (3-18 months)
 
-```mermaid
-flowchart LR
-    P1["🚀 Ship Projects"] --> P2["📝 Capture Insights"] --> P3["🔍 Notice Patterns"]
-    P3 --> P4["💡 Publication Potential"]
-    
-    style P1 fill:#e8f5e9,stroke:#2e7d32
-    style P2 fill:#e3f2fd,stroke:#1565c0
-    style P3 fill:#fff3e0,stroke:#ef6c00
-    style P4 fill:#f3e5f5,stroke:#7b1fa2
-```
+🚀 **Ship Projects** → 📝 **Capture Insights** → 🔍 **Notice Patterns** → 💡 **Publication Potential**
 
 - Work extensively in the domain (62 projects, 148 insights)
 - Let patterns emerge through doing
@@ -210,31 +201,13 @@ Always distinguish:
 
 ## Publication Pipeline
 
-```mermaid
-flowchart TB
-    subgraph Practice["Phase 1: Practice"]
-        A["Projects"] --> B["Insights"] --> C["Patterns"]
-    end
-    
-    subgraph Document["Phase 2: Document"]
-        D["Draft"] --> E["Diagrams"] --> F["Evidence Tables"]
-    end
-    
-    subgraph Polish["Phase 3: Polish"]
-        G["Literature Review"] --> H["Fact-Check"] --> I["Academic Structure"]
-    end
-    
-    subgraph Publish["Phase 4: Publish"]
-        J["Peer Review"] --> K["Revise"] --> L["Submit"]
-    end
-    
-    Practice --> Document --> Polish --> Publish
-    
-    style Practice fill:#e3f2fd,stroke:#1565c0
-    style Document fill:#fff3e0,stroke:#ef6c00
-    style Polish fill:#f3e5f5,stroke:#7b1fa2
-    style Publish fill:#e8f5e9,stroke:#2e7d32
-```
+**Phase 1: Practice** → Projects → Insights → Patterns
+
+**Phase 2: Document** → Draft → Diagrams → Evidence Tables
+
+**Phase 3: Polish** → Literature Review → Fact-Check → Academic Structure
+
+**Phase 4: Publish** → Peer Review → Revise → Submit
 
 ## Session Types for Research
 

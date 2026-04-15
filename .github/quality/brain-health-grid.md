@@ -52,190 +52,231 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 |:---:|---------|---|---|
 | **inh** | Inheritance | Master-only | Synced to heirs |
 | **stale** | Staleness | Needs regular review | Stable |
-| **sem** | Semantic Review | Reviewed post-synapse-cleanup | Pending review |
+| **Sem Review** | Semantic Review Date | YYYY-MM-DD | - (pending) |
 
-> **Semantic Review (sem)**: One-time audit to verify each brain file is clear, coherent, and not damaged by synapse removal. Files marked 0 need manual review for: broken references, orphaned content, outdated patterns, or content that should be renewed/removed.
+> **Semantic Review**: Audit date when the brain file was verified for clarity, coherence, correctness, completeness, and conciseness. Files marked `-` are pending review.
+
+## Semantic Review Process
+
+A semantic review validates brain file quality beyond automated checks. Perform before marking with a review date:
+
+| Criterion | Question | Fix |
+|-----------|----------|-----|
+| **Clarity** | Can a reader understand intent without external context? | Rewrite ambiguous sections |
+| **Coherence** | Do sections flow logically? No contradictions? | Restructure, resolve conflicts |
+| **Correctness** | Are facts, patterns, and examples still accurate? | Update outdated content |
+| **Completeness** | Missing edge cases or common scenarios? | Add missing coverage |
+| **Conciseness** | Can any section be shortened without losing value? | Eliminate redundancy |
+
+**After review**: Edit the `Sem Review` column from `-` to `YYYY-MM-DD`. Date is preserved on grid regeneration.
+
+## Priority Queue
+
+> **Sorted by urgency**: Failing items first, then unreviewed, then lowest score. Work top-to-bottom.
+
+| # | Type | File | Score | Pass | Sem Review | Action |
+|--:|:----:|------|------:|:----:|:----------:|--------|
+| 1 | prompt | [character-aging-progression](../prompts/character-aging-progression.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 2 | prompt | [chat-participant](../prompts/chat-participant.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 3 | skill | [converter-qa](../skills/converter-qa/SKILL.md) | 3/4 | ✓ | - | Semantic review |
+| 4 | prompt | [documentarian](../prompts/documentarian.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 5 | prompt | [docx-to-md](../prompts/docx-to-md.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 6 | prompt | [extension-audit-methodology](../prompts/extension-audit-methodology.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 7 | prompt | [flux-brand-finetune](../prompts/flux-brand-finetune.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 8 | prompt | [gamma](../prompts/gamma.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 9 | prompt | [graph-api](../prompts/graph-api.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 10 | prompt | [image-handling](../prompts/image-handling.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 11 | prompt | [journey](../prompts/journey.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 12 | prompt | [m365](../prompts/m365.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 13 | prompt | [m365-agent-debug](../prompts/m365-agent-debug.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 14 | prompt | [marp](../prompts/marp.prompt.md) | 3/4 | ✓ | - | Semantic review |
+| 15 | prompt | [mcp-server](../prompts/mcp-server.prompt.md) | 3/4 | ✓ | - | Semantic review |
+
+**Queue depth**: 0 failing | 277 passing but unreviewed | 393 total
 
 ## Skills
 
-| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |
-|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:---:|
-| [academic-research](../skills/academic-research/SKILL.md) | exte | 340 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [ai-generated-readme-banners](../skills/ai-generated-readme-banners/SKILL.md) | stan | 713 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [alex-effort-estimation](../skills/alex-effort-estimation/SKILL.md) | exte | 134 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [bicep-avm-mastery](../skills/bicep-avm-mastery/SKILL.md) | exte | 423 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [book-publishing](../skills/book-publishing/SKILL.md) | exte | 293 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [career-development](../skills/career-development/SKILL.md) | exte | 216 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [citation-management](../skills/citation-management/SKILL.md) | exte | 314 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [comedy-writing](../skills/comedy-writing/SKILL.md) | exte | 149 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [correax-brand](../skills/correax-brand/SKILL.md) | exte | 149 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
-| [counseling-psychology](../skills/counseling-psychology/SKILL.md) | exte | 208 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [cross-cultural-collaboration](../skills/cross-cultural-collaboration/SKILL.md) | exte | 340 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [deep-work-optimization](../skills/deep-work-optimization/SKILL.md) | exte | 366 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [dissertation-defense](../skills/dissertation-defense/SKILL.md) | exte | 495 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
-| [fabric-notebook-publish](../skills/fabric-notebook-publish/SKILL.md) | exte | 177 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [game-design](../skills/game-design/SKILL.md) | exte | 184 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [grant-writing](../skills/grant-writing/SKILL.md) | exte | 195 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [graphic-design](../skills/graphic-design/SKILL.md) | exte | 452 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [healthcare-informatics](../skills/healthcare-informatics/SKILL.md) | exte | 174 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [hr-people-operations](../skills/hr-people-operations/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [infrastructure-as-code](../skills/infrastructure-as-code/SKILL.md) | stan | 842 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [journalism](../skills/journalism/SKILL.md) | exte | 180 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [legal-compliance](../skills/legal-compliance/SKILL.md) | exte | 158 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [literature-review](../skills/literature-review/SKILL.md) | exte | 346 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [localization](../skills/localization/SKILL.md) | exte | 952 | 1 | 1 | 0 | 1 | 0 | I | 2/1 | ✓ | 0 | 0 | 1 |
-| [markdown-mermaid](../skills/markdown-mermaid/SKILL.md) | stan | 1576 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [mcp-development](../skills/mcp-development/SKILL.md) | stan | 740 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [microsoft-graph-api](../skills/microsoft-graph-api/SKILL.md) | stan | 520 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [practitioner-research](../skills/practitioner-research/SKILL.md) | exte | 303 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 1 |
-| [project-scaffolding](../skills/project-scaffolding/SKILL.md) | stan | 88 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [sales-enablement](../skills/sales-enablement/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 1 |
-| [skill-building](../skills/skill-building/SKILL.md) | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [ui-ux-design](../skills/ui-ux-design/SKILL.md) | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 1 |
-| [agent-debug-panel](../skills/agent-debug-panel/SKILL.md) | stan | 138 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [ai-agent-design](../skills/ai-agent-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [ai-character-reference-generation](../skills/ai-character-reference-generation/SKILL.md) | stan | 322 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [ai-writing-avoidance](../skills/ai-writing-avoidance/SKILL.md) | stan | 333 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [airs-appropriate-reliance](../skills/airs-appropriate-reliance/SKILL.md) | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 1 | 0 | 1 |
-| [anti-hallucination](../skills/anti-hallucination/SKILL.md) | core | 153 | 1 | - | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [api-design](../skills/api-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [api-documentation](../skills/api-documentation/SKILL.md) | stan | 312 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [appropriate-reliance](../skills/appropriate-reliance/SKILL.md) | core | 497 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [architecture-audit](../skills/architecture-audit/SKILL.md) | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [architecture-health](../skills/architecture-health/SKILL.md) | stan | 102 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [architecture-refinement](../skills/architecture-refinement/SKILL.md) | stan | 120 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [awareness](../skills/awareness/SKILL.md) | core | 349 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [azure-architecture-patterns](../skills/azure-architecture-patterns/SKILL.md) | stan | 204 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [azure-deployment-operations](../skills/azure-deployment-operations/SKILL.md) | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [azure-devops-automation](../skills/azure-devops-automation/SKILL.md) | stan | 456 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [azure-openai-patterns](../skills/azure-openai-patterns/SKILL.md) | stan | 244 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [bootstrap-learning](../skills/bootstrap-learning/SKILL.md) | stan | 114 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [brand-asset-management](../skills/brand-asset-management/SKILL.md) | stan | 131 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [business-analysis](../skills/business-analysis/SKILL.md) | stan | 273 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [change-management](../skills/change-management/SKILL.md) | stan | 235 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [character-aging-progression](../skills/character-aging-progression/SKILL.md) | exte | 225 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [chart-interpretation](../skills/chart-interpretation/SKILL.md) | stan | 185 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [chat-participant-patterns](../skills/chat-participant-patterns/SKILL.md) | stan | 189 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
-| [cloud-solution-architect](../skills/cloud-solution-architect/SKILL.md) | stan | 275 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [coaching-techniques](../skills/coaching-techniques/SKILL.md) | exte | 326 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [code-review](../skills/code-review/SKILL.md) | core | 193 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [cognitive-load](../skills/cognitive-load/SKILL.md) | core | 202 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [cognitive-symbiosis](../skills/cognitive-symbiosis/SKILL.md) | exte | 244 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [content-safety-implementation](../skills/content-safety-implementation/SKILL.md) | stan | 228 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [converter-qa](../skills/converter-qa/SKILL.md) | exte | 67 | 1 | 1 | 0 | 1 | 1 | A | 3/2 | ✓ | 0 | 0 | 1 |
-| [copilot-sdk](../skills/copilot-sdk/SKILL.md) | stan | 484 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [creative-writing](../skills/creative-writing/SKILL.md) | stan | 465 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [dashboard-design](../skills/dashboard-design/SKILL.md) | stan | 207 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [data-analysis](../skills/data-analysis/SKILL.md) | stan | 220 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [data-quality-monitoring](../skills/data-quality-monitoring/SKILL.md) | stan | 211 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [data-storytelling](../skills/data-storytelling/SKILL.md) | stan | 169 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [data-visualization](../skills/data-visualization/SKILL.md) | stan | 295 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [database-design](../skills/database-design/SKILL.md) | stan | 417 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [debugging-patterns](../skills/debugging-patterns/SKILL.md) | core | 118 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [dialog-engineering](../skills/dialog-engineering/SKILL.md) | core | 155 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [distribution-security](../skills/distribution-security/SKILL.md) | stan | 221 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [doc-hygiene](../skills/doc-hygiene/SKILL.md) | core | 144 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [documentation-quality-assurance](../skills/documentation-quality-assurance/SKILL.md) | stan | 374 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [dream-state](../skills/dream-state/SKILL.md) | stan | 135 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [enterprise-integration](../skills/enterprise-integration/SKILL.md) | stan | 240 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [entra-agent-id](../skills/entra-agent-id/SKILL.md) | stan | 277 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [error-recovery-patterns](../skills/error-recovery-patterns/SKILL.md) | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [executive-storytelling](../skills/executive-storytelling/SKILL.md) | stan | 463 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [extension-audit-methodology](../skills/extension-audit-methodology/SKILL.md) | stan | 190 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
-| [financial-analysis](../skills/financial-analysis/SKILL.md) | exte | 158 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [flux-brand-finetune](../skills/flux-brand-finetune/SKILL.md) | exte | 392 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [foundry-agent-platform](../skills/foundry-agent-platform/SKILL.md) | exte | 281 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [frontend-design-review](../skills/frontend-design-review/SKILL.md) | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [frustration-recognition](../skills/frustration-recognition/SKILL.md) | core | 387 | 1 | - | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [gamma-presentations](../skills/gamma-presentations/SKILL.md) | stan | 359 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [git-workflow](../skills/git-workflow/SKILL.md) | core | 153 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 1 | 1 |
-| [global-knowledge](../skills/global-knowledge/SKILL.md) | stan | 250 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [global-knowledge-sync](../skills/global-knowledge-sync/SKILL.md) | stan | 132 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [heir-bootstrap](../skills/heir-bootstrap/SKILL.md) | stan | 178 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [heir-feedback](../skills/heir-feedback/SKILL.md) | stan | 187 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [heir-sync-management](../skills/heir-sync-management/SKILL.md) | stan | 485 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
-| [image-handling](../skills/image-handling/SKILL.md) | stan | 372 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [incident-response](../skills/incident-response/SKILL.md) | stan | 117 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [knowledge-synthesis](../skills/knowledge-synthesis/SKILL.md) | stan | 134 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [learning-psychology](../skills/learning-psychology/SKILL.md) | stan | 203 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [lint-clean-markdown](../skills/lint-clean-markdown/SKILL.md) | core | 108 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [llm-model-selection](../skills/llm-model-selection/SKILL.md) | stan | 215 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
-| [m365-agent-debugging](../skills/m365-agent-debugging/SKILL.md) | stan | 164 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
-| [mcp-builder](../skills/mcp-builder/SKILL.md) | stan | 317 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [meditation](../skills/meditation/SKILL.md) | stan | 171 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [meeting-efficiency](../skills/meeting-efficiency/SKILL.md) | stan | 357 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [memory-activation](../skills/memory-activation/SKILL.md) | core | 383 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [memory-curation](../skills/memory-curation/SKILL.md) | stan | 191 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [memory-export](../skills/memory-export/SKILL.md) | exte | 104 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [microsoft-fabric](../skills/microsoft-fabric/SKILL.md) | stan | 333 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [msal-authentication](../skills/msal-authentication/SKILL.md) | stan | 264 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [multi-agent-orchestration](../skills/multi-agent-orchestration/SKILL.md) | stan | 321 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [muscle-memory-recognition](../skills/muscle-memory-recognition/SKILL.md) | stan | 206 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [nav-inject](../skills/nav-inject/SKILL.md) | exte | 74 | 1 | 1 | 0 | 1 | 1 | A | 3/2 | ✓ | 0 | 0 | 1 |
-| [north-star](../skills/north-star/SKILL.md) | core | 321 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [observability-monitoring](../skills/observability-monitoring/SKILL.md) | stan | 350 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [performance-profiling](../skills/performance-profiling/SKILL.md) | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [persona-detection](../skills/persona-detection/SKILL.md) | core | 112 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [pii-privacy-regulations](../skills/pii-privacy-regulations/SKILL.md) | exte | 359 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [post-mortem](../skills/post-mortem/SKILL.md) | exte | 167 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [pptx-generation](../skills/pptx-generation/SKILL.md) | exte | 157 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [presentation-tool-selection](../skills/presentation-tool-selection/SKILL.md) | stan | 227 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [privacy-responsible-ai](../skills/privacy-responsible-ai/SKILL.md) | stan | 278 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
-| [proactive-assistance](../skills/proactive-assistance/SKILL.md) | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [project-deployment](../skills/project-deployment/SKILL.md) | stan | 305 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [project-management](../skills/project-management/SKILL.md) | stan | 248 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [prompt-engineering](../skills/prompt-engineering/SKILL.md) | stan | 356 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [prompt-evolution-system](../skills/prompt-evolution-system/SKILL.md) | stan | 188 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [rag-architecture](../skills/rag-architecture/SKILL.md) | stan | 390 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [ralph-loop](../skills/ralph-loop/SKILL.md) | adva | 239 | 1 | 1 | 1 | 0 | 1 | - | 3/3 | ✓ | 0 | 0 | 1 |
-| [react-vite-performance](../skills/react-vite-performance/SKILL.md) | stan | 302 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [refactoring-patterns](../skills/refactoring-patterns/SKILL.md) | core | 234 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [release-preflight](../skills/release-preflight/SKILL.md) | stan | 105 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
-| [release-process](../skills/release-process/SKILL.md) | stan | 299 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | 1 |
-| [research-first-development](../skills/research-first-development/SKILL.md) | stan | 396 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [root-cause-analysis](../skills/root-cause-analysis/SKILL.md) | core | 143 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [rubber-duck-debugging](../skills/rubber-duck-debugging/SKILL.md) | exte | 171 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [scope-management](../skills/scope-management/SKILL.md) | stan | 267 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [secrets-management](../skills/secrets-management/SKILL.md) | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [security-review](../skills/security-review/SKILL.md) | core | 333 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [self-actualization](../skills/self-actualization/SKILL.md) | stan | 201 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [service-worker-offline-first](../skills/service-worker-offline-first/SKILL.md) | exte | 252 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [silence-as-signal](../skills/silence-as-signal/SKILL.md) | core | 242 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [skill-creator](../skills/skill-creator/SKILL.md) | stan | 410 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [skill-development](../skills/skill-development/SKILL.md) | stan | 339 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [slide-design](../skills/slide-design/SKILL.md) | exte | 351 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [socratic-questioning](../skills/socratic-questioning/SKILL.md) | exte | 169 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [sse-streaming](../skills/sse-streaming/SKILL.md) | exte | 289 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [stakeholder-management](../skills/stakeholder-management/SKILL.md) | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [status-reporting](../skills/status-reporting/SKILL.md) | stan | 265 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [svg-graphics](../skills/svg-graphics/SKILL.md) | stan | 209 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [teams-app-patterns](../skills/teams-app-patterns/SKILL.md) | stan | 195 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | 1 |
-| [terminal-image-rendering](../skills/terminal-image-rendering/SKILL.md) | exte | 113 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [testing-strategies](../skills/testing-strategies/SKILL.md) | core | 156 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 1 |
-| [text-to-speech](../skills/text-to-speech/SKILL.md) | exte | 122 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [token-waste-elimination](../skills/token-waste-elimination/SKILL.md) | stan | 124 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [vscode-configuration-validation](../skills/vscode-configuration-validation/SKILL.md) | stan | 232 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [vscode-environment](../skills/vscode-environment/SKILL.md) | stan | 110 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 1 |
-| [vscode-extension-patterns](../skills/vscode-extension-patterns/SKILL.md) | core | 278 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 1 | 1 |
-| [work-life-balance](../skills/work-life-balance/SKILL.md) | exte | 119 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | 1 |
-| [brain-qa](../skills/brain-qa/SKILL.md) | stan | 268 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
-| [docx-to-md](../skills/docx-to-md/SKILL.md) | exte | 359 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
-| [md-scaffold](../skills/md-scaffold/SKILL.md) | exte | 236 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
-| [md-to-eml](../skills/md-to-eml/SKILL.md) | exte | 203 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
-| [md-to-html](../skills/md-to-html/SKILL.md) | stan | 202 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
-| [md-to-word](../skills/md-to-word/SKILL.md) | stan | 408 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 1 |
-| [visual-memory](../skills/visual-memory/SKILL.md) | exte | 344 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | 1 |
+| Skill | Tier | Lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | Sem Review |
+|-------|:----:|------:|:--:|:----:|:------:|:---:|:------:|:----:|------:|:----:|:---:|:-----:|:----------:|
+| [academic-research](../skills/academic-research/SKILL.md) | exte | 340 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [ai-generated-readme-banners](../skills/ai-generated-readme-banners/SKILL.md) | stan | 713 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [alex-effort-estimation](../skills/alex-effort-estimation/SKILL.md) | exte | 134 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [bicep-avm-mastery](../skills/bicep-avm-mastery/SKILL.md) | exte | 423 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [book-publishing](../skills/book-publishing/SKILL.md) | exte | 293 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [career-development](../skills/career-development/SKILL.md) | exte | 216 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [citation-management](../skills/citation-management/SKILL.md) | exte | 314 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [comedy-writing](../skills/comedy-writing/SKILL.md) | exte | 149 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [correax-brand](../skills/correax-brand/SKILL.md) | exte | 149 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 2026-04-15 |
+| [counseling-psychology](../skills/counseling-psychology/SKILL.md) | exte | 208 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [cross-cultural-collaboration](../skills/cross-cultural-collaboration/SKILL.md) | exte | 340 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [deep-work-optimization](../skills/deep-work-optimization/SKILL.md) | exte | 366 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [dissertation-defense](../skills/dissertation-defense/SKILL.md) | exte | 495 | 1 | - | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 2026-04-15 |
+| [fabric-notebook-publish](../skills/fabric-notebook-publish/SKILL.md) | exte | 177 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [game-design](../skills/game-design/SKILL.md) | exte | 184 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [grant-writing](../skills/grant-writing/SKILL.md) | exte | 195 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [graphic-design](../skills/graphic-design/SKILL.md) | exte | 452 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [healthcare-informatics](../skills/healthcare-informatics/SKILL.md) | exte | 174 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [hr-people-operations](../skills/hr-people-operations/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [infrastructure-as-code](../skills/infrastructure-as-code/SKILL.md) | stan | 842 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [journalism](../skills/journalism/SKILL.md) | exte | 180 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [legal-compliance](../skills/legal-compliance/SKILL.md) | exte | 158 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [literature-review](../skills/literature-review/SKILL.md) | exte | 346 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [localization](../skills/localization/SKILL.md) | exte | 952 | 1 | 1 | 0 | 1 | 0 | I | 2/1 | ✓ | 0 | 0 | 2026-04-15 |
+| [markdown-mermaid](../skills/markdown-mermaid/SKILL.md) | stan | 1612 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [mcp-development](../skills/mcp-development/SKILL.md) | stan | 740 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [microsoft-graph-api](../skills/microsoft-graph-api/SKILL.md) | stan | 520 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [practitioner-research](../skills/practitioner-research/SKILL.md) | exte | 276 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 1 | 0 | 2026-04-15 |
+| [sales-enablement](../skills/sales-enablement/SKILL.md) | exte | 187 | 1 | 1 | 1 | 0 | 0 | - | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [skill-building](../skills/skill-building/SKILL.md) | stan | 540 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [ui-ux-design](../skills/ui-ux-design/SKILL.md) | stan | 604 | 1 | 1 | 0 | 1 | 0 | I | 2/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [agent-debug-panel](../skills/agent-debug-panel/SKILL.md) | stan | 138 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [ai-agent-design](../skills/ai-agent-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [ai-character-reference-generation](../skills/ai-character-reference-generation/SKILL.md) | stan | 322 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [ai-writing-avoidance](../skills/ai-writing-avoidance/SKILL.md) | stan | 333 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [airs-appropriate-reliance](../skills/airs-appropriate-reliance/SKILL.md) | exte | 325 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 1 | 0 | - |
+| [api-design](../skills/api-design/SKILL.md) | stan | 224 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [api-documentation](../skills/api-documentation/SKILL.md) | stan | 312 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [architecture-audit](../skills/architecture-audit/SKILL.md) | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [architecture-health](../skills/architecture-health/SKILL.md) | stan | 102 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [architecture-refinement](../skills/architecture-refinement/SKILL.md) | stan | 120 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [audio-memory](../skills/audio-memory/SKILL.md) | stan | 240 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [azure-architecture-patterns](../skills/azure-architecture-patterns/SKILL.md) | stan | 204 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [azure-deployment-operations](../skills/azure-deployment-operations/SKILL.md) | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [azure-devops-automation](../skills/azure-devops-automation/SKILL.md) | stan | 456 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [azure-openai-patterns](../skills/azure-openai-patterns/SKILL.md) | stan | 244 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [bootstrap-learning](../skills/bootstrap-learning/SKILL.md) | stan | 114 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [brand-asset-management](../skills/brand-asset-management/SKILL.md) | stan | 131 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [business-analysis](../skills/business-analysis/SKILL.md) | stan | 273 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [change-management](../skills/change-management/SKILL.md) | stan | 235 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [character-aging-progression](../skills/character-aging-progression/SKILL.md) | exte | 225 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [chart-interpretation](../skills/chart-interpretation/SKILL.md) | stan | 185 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [chat-participant-patterns](../skills/chat-participant-patterns/SKILL.md) | stan | 189 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | - |
+| [cloud-solution-architect](../skills/cloud-solution-architect/SKILL.md) | stan | 275 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [coaching-techniques](../skills/coaching-techniques/SKILL.md) | exte | 326 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [cognitive-symbiosis](../skills/cognitive-symbiosis/SKILL.md) | exte | 244 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [content-safety-implementation](../skills/content-safety-implementation/SKILL.md) | stan | 228 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [converter-qa](../skills/converter-qa/SKILL.md) | exte | 67 | 1 | 1 | 0 | 1 | 1 | A | 3/2 | ✓ | 0 | 0 | - |
+| [copilot-sdk](../skills/copilot-sdk/SKILL.md) | stan | 484 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [creative-writing](../skills/creative-writing/SKILL.md) | stan | 465 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [dashboard-design](../skills/dashboard-design/SKILL.md) | stan | 207 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [data-analysis](../skills/data-analysis/SKILL.md) | stan | 220 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [data-quality-monitoring](../skills/data-quality-monitoring/SKILL.md) | stan | 211 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [data-storytelling](../skills/data-storytelling/SKILL.md) | stan | 169 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [data-visualization](../skills/data-visualization/SKILL.md) | stan | 295 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [database-design](../skills/database-design/SKILL.md) | stan | 417 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [distribution-security](../skills/distribution-security/SKILL.md) | stan | 221 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [documentation-quality-assurance](../skills/documentation-quality-assurance/SKILL.md) | stan | 374 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [dream-state](../skills/dream-state/SKILL.md) | stan | 135 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [enterprise-integration](../skills/enterprise-integration/SKILL.md) | stan | 240 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [entra-agent-id](../skills/entra-agent-id/SKILL.md) | stan | 277 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [executive-storytelling](../skills/executive-storytelling/SKILL.md) | stan | 463 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [extension-audit-methodology](../skills/extension-audit-methodology/SKILL.md) | stan | 190 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | - |
+| [financial-analysis](../skills/financial-analysis/SKILL.md) | exte | 158 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [flux-brand-finetune](../skills/flux-brand-finetune/SKILL.md) | exte | 392 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [foundry-agent-platform](../skills/foundry-agent-platform/SKILL.md) | exte | 281 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [frontend-design-review](../skills/frontend-design-review/SKILL.md) | stan | 276 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [gamma-presentations](../skills/gamma-presentations/SKILL.md) | stan | 359 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [global-knowledge](../skills/global-knowledge/SKILL.md) | stan | 250 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [global-knowledge-sync](../skills/global-knowledge-sync/SKILL.md) | stan | 132 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [heir-bootstrap](../skills/heir-bootstrap/SKILL.md) | stan | 178 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [heir-feedback](../skills/heir-feedback/SKILL.md) | stan | 187 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [heir-sync-management](../skills/heir-sync-management/SKILL.md) | stan | 485 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | - |
+| [image-handling](../skills/image-handling/SKILL.md) | stan | 372 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [incident-response](../skills/incident-response/SKILL.md) | stan | 117 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [knowledge-synthesis](../skills/knowledge-synthesis/SKILL.md) | stan | 134 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [learning-psychology](../skills/learning-psychology/SKILL.md) | stan | 203 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [llm-model-selection](../skills/llm-model-selection/SKILL.md) | stan | 215 | 1 | - | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | - |
+| [m365-agent-debugging](../skills/m365-agent-debugging/SKILL.md) | stan | 164 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | - |
+| [mcp-builder](../skills/mcp-builder/SKILL.md) | stan | 317 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [meditation](../skills/meditation/SKILL.md) | stan | 171 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [meeting-efficiency](../skills/meeting-efficiency/SKILL.md) | stan | 357 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [memory-curation](../skills/memory-curation/SKILL.md) | stan | 191 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [memory-export](../skills/memory-export/SKILL.md) | exte | 104 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [microsoft-fabric](../skills/microsoft-fabric/SKILL.md) | stan | 333 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [msal-authentication](../skills/msal-authentication/SKILL.md) | stan | 264 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [multi-agent-orchestration](../skills/multi-agent-orchestration/SKILL.md) | stan | 321 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [muscle-memory-recognition](../skills/muscle-memory-recognition/SKILL.md) | stan | 206 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [music-generation](../skills/music-generation/SKILL.md) | exte | 198 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [nav-inject](../skills/nav-inject/SKILL.md) | exte | 74 | 1 | 1 | 0 | 1 | 1 | A | 3/2 | ✓ | 0 | 0 | - |
+| [observability-monitoring](../skills/observability-monitoring/SKILL.md) | stan | 350 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [performance-profiling](../skills/performance-profiling/SKILL.md) | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [pii-privacy-regulations](../skills/pii-privacy-regulations/SKILL.md) | exte | 359 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [post-mortem](../skills/post-mortem/SKILL.md) | exte | 167 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [pptx-generation](../skills/pptx-generation/SKILL.md) | exte | 157 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [presentation-tool-selection](../skills/presentation-tool-selection/SKILL.md) | stan | 227 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [privacy-responsible-ai](../skills/privacy-responsible-ai/SKILL.md) | stan | 278 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | - |
+| [project-deployment](../skills/project-deployment/SKILL.md) | stan | 305 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [project-management](../skills/project-management/SKILL.md) | stan | 248 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [prompt-engineering](../skills/prompt-engineering/SKILL.md) | stan | 356 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [prompt-evolution-system](../skills/prompt-evolution-system/SKILL.md) | stan | 188 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [rag-architecture](../skills/rag-architecture/SKILL.md) | stan | 390 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [ralph-loop](../skills/ralph-loop/SKILL.md) | adva | 239 | 1 | 1 | 1 | 0 | 1 | - | 3/3 | ✓ | 0 | 0 | - |
+| [react-vite-performance](../skills/react-vite-performance/SKILL.md) | stan | 302 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [release-preflight](../skills/release-preflight/SKILL.md) | stan | 105 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | - |
+| [release-process](../skills/release-process/SKILL.md) | stan | 299 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 1 | 0 | - |
+| [research-first-development](../skills/research-first-development/SKILL.md) | stan | 396 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [rubber-duck-debugging](../skills/rubber-duck-debugging/SKILL.md) | exte | 171 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [scope-management](../skills/scope-management/SKILL.md) | stan | 267 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [secrets-management](../skills/secrets-management/SKILL.md) | stan | 439 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [self-actualization](../skills/self-actualization/SKILL.md) | stan | 201 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [service-worker-offline-first](../skills/service-worker-offline-first/SKILL.md) | exte | 252 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [skill-creator](../skills/skill-creator/SKILL.md) | stan | 410 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [skill-development](../skills/skill-development/SKILL.md) | stan | 339 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [slide-design](../skills/slide-design/SKILL.md) | exte | 351 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [socratic-questioning](../skills/socratic-questioning/SKILL.md) | exte | 169 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [sse-streaming](../skills/sse-streaming/SKILL.md) | exte | 289 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [stakeholder-management](../skills/stakeholder-management/SKILL.md) | stan | 292 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [status-reporting](../skills/status-reporting/SKILL.md) | stan | 265 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [svg-graphics](../skills/svg-graphics/SKILL.md) | stan | 209 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [teams-app-patterns](../skills/teams-app-patterns/SKILL.md) | stan | 195 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 1 | - |
+| [terminal-image-rendering](../skills/terminal-image-rendering/SKILL.md) | exte | 113 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [text-to-speech](../skills/text-to-speech/SKILL.md) | exte | 201 | 1 | 1 | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [token-waste-elimination](../skills/token-waste-elimination/SKILL.md) | stan | 124 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [video-generation](../skills/video-generation/SKILL.md) | stan | 291 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [vscode-configuration-validation](../skills/vscode-configuration-validation/SKILL.md) | stan | 232 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [vscode-environment](../skills/vscode-environment/SKILL.md) | stan | 110 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | - |
+| [work-life-balance](../skills/work-life-balance/SKILL.md) | exte | 119 | 1 | - | 1 | 1 | 0 | I | 3/1 | ✓ | 0 | 0 | - |
+| [anti-hallucination](../skills/anti-hallucination/SKILL.md) | core | 153 | 1 | - | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [appropriate-reliance](../skills/appropriate-reliance/SKILL.md) | core | 497 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [awareness](../skills/awareness/SKILL.md) | core | 349 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [code-review](../skills/code-review/SKILL.md) | core | 193 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [cognitive-load](../skills/cognitive-load/SKILL.md) | core | 202 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [debugging-patterns](../skills/debugging-patterns/SKILL.md) | core | 118 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [dialog-engineering](../skills/dialog-engineering/SKILL.md) | core | 155 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [doc-hygiene](../skills/doc-hygiene/SKILL.md) | core | 144 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [error-recovery-patterns](../skills/error-recovery-patterns/SKILL.md) | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [frustration-recognition](../skills/frustration-recognition/SKILL.md) | core | 387 | 1 | - | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [git-workflow](../skills/git-workflow/SKILL.md) | core | 153 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 1 | 2026-04-15 |
+| [lint-clean-markdown](../skills/lint-clean-markdown/SKILL.md) | core | 108 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [memory-activation](../skills/memory-activation/SKILL.md) | core | 383 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [north-star](../skills/north-star/SKILL.md) | core | 321 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [persona-detection](../skills/persona-detection/SKILL.md) | core | 112 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [proactive-assistance](../skills/proactive-assistance/SKILL.md) | core | 210 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [project-scaffolding](../skills/project-scaffolding/SKILL.md) | stan | 139 | 1 | 1 | 1 | 1 | 0 | I | 3/2 | ✓ | 0 | 0 | 2026-04-15 |
+| [refactoring-patterns](../skills/refactoring-patterns/SKILL.md) | core | 234 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [root-cause-analysis](../skills/root-cause-analysis/SKILL.md) | core | 143 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [security-review](../skills/security-review/SKILL.md) | core | 333 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [silence-as-signal](../skills/silence-as-signal/SKILL.md) | core | 242 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [testing-strategies](../skills/testing-strategies/SKILL.md) | core | 156 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 0 | 2026-04-15 |
+| [vscode-extension-patterns](../skills/vscode-extension-patterns/SKILL.md) | core | 278 | 1 | 1 | 1 | 1 | 0 | I | 3/3 | ✓ | 0 | 1 | 2026-04-15 |
+| [docx-to-md](../skills/docx-to-md/SKILL.md) | exte | 359 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | - |
+| [md-scaffold](../skills/md-scaffold/SKILL.md) | exte | 236 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | - |
+| [md-to-eml](../skills/md-to-eml/SKILL.md) | exte | 203 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | - |
+| [md-to-html](../skills/md-to-html/SKILL.md) | stan | 202 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | - |
+| [md-to-word](../skills/md-to-word/SKILL.md) | stan | 408 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | - |
+| [visual-memory](../skills/visual-memory/SKILL.md) | exte | 271 | 1 | 1 | 1 | 1 | 1 | A | 4/2 | ✓ | 0 | 0 | - |
+| [brain-qa](../skills/brain-qa/SKILL.md) | stan | 268 | 1 | 1 | 1 | 1 | 1 | A | 4/3 | ✓ | 0 | 0 | 2026-04-15 |
 
-**Summary**: 165 skills | Passing: 165 | Failing: 0 | Perfect: 130
+**Summary**: 168 skills | Passing: 168 | Failing: 0 | Perfect: 134
 
-**Skill Types**: Agentic(A): 9 | Intellectual(I): 132 | Incomplete(-): 24
+**Skill Types**: Agentic(A): 9 | Intellectual(I): 135 | Incomplete(-): 24
 
-**Semantic Review**: 165/165 reviewed | 0 pending
+**Semantic Review**: 55/168 reviewed | 113 pending
 
 **Defects by dimension (informational)**:
 | fm | code | bounds | tri | muscle |
 |:--:|:----:|:------:|:---:|:------:|
-| 0 | 21 | 11 | 24 | 155 |
+| 0 | 21 | 10 | 24 | 158 |
 
 ## Agents
 
@@ -250,28 +291,30 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 > **Code policy**: Agent examples should use **pseudocode** (language-agnostic patterns), **templates** (markdown output formats), or **diagrams** (Mermaid). Avoid language-specific syntax — agents teach patterns, not syntax.
 
-> **Semantic Review (sem)**: Audit each agent for: clear persona, appropriate examples (pseudocode not language-specific), coherent structure. Files marked 0 need optimization.
-
 **Pass criteria**: fm=1 (gate) AND score ≥4/5
 
-| Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | sem |
-|-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:---:|
-| [alex-documentarian](../agents/alex-documentarian.agent.md) | 212 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [alex](../agents/alex.agent.md) | 267 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [alex-azure](../agents/alex-azure.agent.md) | 195 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-backend](../agents/alex-backend.agent.md) | 233 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-brain-ops](../agents/alex-brain-ops.agent.md) | 339 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 0 |
-| [alex-builder](../agents/alex-builder.agent.md) | 201 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-frontend](../agents/alex-frontend.agent.md) | 276 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-infrastructure](../agents/alex-infrastructure.agent.md) | 340 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-m365](../agents/alex-m365.agent.md) | 206 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-planner](../agents/alex-planner.agent.md) | 223 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-presenter](../agents/alex-presenter.agent.md) | 252 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-researcher](../agents/alex-researcher.agent.md) | 248 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [alex-validator](../agents/alex-validator.agent.md) | 242 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | Sem Review |
+|-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:----------:|
+| [alex](../agents/alex.agent.md) | 270 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [alex-audio-studio](../agents/alex-audio-studio.agent.md) | 238 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | - |
+| [alex-documentarian](../agents/alex-documentarian.agent.md) | 212 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [alex-skill-builder](../agents/alex-skill-builder.agent.md) | 435 | 1 | 1 | 0 | 1 | 1 | 4/5 | ✓ | - |
+| [alex-azure](../agents/alex-azure.agent.md) | 195 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-backend](../agents/alex-backend.agent.md) | 233 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-brain-ops](../agents/alex-brain-ops.agent.md) | 336 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-builder](../agents/alex-builder.agent.md) | 201 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-file-converter](../agents/alex-file-converter.agent.md) | 145 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-frontend](../agents/alex-frontend.agent.md) | 276 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-image-studio](../agents/alex-image-studio.agent.md) | 277 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-infrastructure](../agents/alex-infrastructure.agent.md) | 340 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-m365](../agents/alex-m365.agent.md) | 206 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-planner](../agents/alex-planner.agent.md) | 223 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-presenter](../agents/alex-presenter.agent.md) | 252 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-researcher](../agents/alex-researcher.agent.md) | 242 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [alex-validator](../agents/alex-validator.agent.md) | 242 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
 
-**Summary**: 13 agents | Passing: 13 | Failing: 0 | Perfect(5/5): 11
-**Semantic Review**: 12/13 reviewed | 1 pending
+**Summary**: 17 agents | Passing: 17 | Failing: 0 | Perfect(5/5): 13
+**Semantic Review**: 0/17 reviewed | 17 pending
 
 ## Instructions
 
@@ -290,139 +333,143 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 **Pass criteria**: fm=1 (gate) AND score ≥3/5
 
-| Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | sem |
-|-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:---:|
-| [ai-agent-design](../instructions/ai-agent-design.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [ai-generated-readme-banners](../instructions/ai-generated-readme-banners.instructions.md) | 42 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 1 |
-| [ai-writing-avoidance](../instructions/ai-writing-avoidance.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [alex-identity-integration](../instructions/alex-identity-integration.instructions.md) | 161 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [anti-hallucination](../instructions/anti-hallucination.instructions.md) | 33 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [appropriate-reliance](../instructions/appropriate-reliance.instructions.md) | 43 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [awareness](../instructions/awareness.instructions.md) | 40 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [azure-architecture-patterns](../instructions/azure-architecture-patterns.instructions.md) | 33 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [bootstrap-learning](../instructions/bootstrap-learning.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [business-analysis](../instructions/business-analysis.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [database-design](../instructions/database-design.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [documentation-quality-assurance](../instructions/documentation-quality-assurance.instructions.md) | 40 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [emotional-intelligence](../instructions/emotional-intelligence.instructions.md) | 92 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [empirical-validation](../instructions/empirical-validation.instructions.md) | 79 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [entra-agent-id](../instructions/entra-agent-id.instructions.md) | 46 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [executive-storytelling](../instructions/executive-storytelling.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [flux-brand-finetune](../instructions/flux-brand-finetune.instructions.md) | 44 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [frustration-recognition](../instructions/frustration-recognition.instructions.md) | 31 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [git-workflow](../instructions/git-workflow.instructions.md) | 47 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [global-knowledge-sync](../instructions/global-knowledge-sync.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [global-knowledge](../instructions/global-knowledge.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [heir-bootstrap](../instructions/heir-bootstrap.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [heir-sync-management](../instructions/heir-sync-management.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [image-generation-guidelines](../instructions/image-generation-guidelines.instructions.md) | 185 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [incident-response](../instructions/incident-response.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [knowledge-synthesis](../instructions/knowledge-synthesis.instructions.md) | 48 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [learning-psychology](../instructions/learning-psychology.instructions.md) | 34 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [lucid-dream-integration](../instructions/lucid-dream-integration.instructions.md) | 68 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [m365-agent-debugging](../instructions/m365-agent-debugging.instructions.md) | 50 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [meeting-efficiency](../instructions/meeting-efficiency.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [memory-export](../instructions/memory-export.instructions.md) | 25 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [microsoft-fabric](../instructions/microsoft-fabric.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [multi-agent-orchestration](../instructions/multi-agent-orchestration.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [observability-monitoring](../instructions/observability-monitoring.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [performance-profiling](../instructions/performance-profiling.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [planning-first-development](../instructions/planning-first-development.instructions.md) | 167 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [privacy-responsible-ai](../instructions/privacy-responsible-ai.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [project-deployment](../instructions/project-deployment.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [prompt-engineering](../instructions/prompt-engineering.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [protocol-triggers](../instructions/protocol-triggers.instructions.md) | 220 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [rag-architecture](../instructions/rag-architecture.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [release-process](../instructions/release-process.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [repository-readiness-eval](../instructions/repository-readiness-eval.instructions.md) | 98 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [research-first-development](../instructions/research-first-development.instructions.md) | 42 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [scope-management](../instructions/scope-management.instructions.md) | 43 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [skill-development](../instructions/skill-development.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [skill-selection-optimization](../instructions/skill-selection-optimization.instructions.md) | 211 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [stakeholder-management](../instructions/stakeholder-management.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [status-reporting](../instructions/status-reporting.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 1 |
-| [synapse-notebook-patterns](../instructions/synapse-notebook-patterns.instructions.md) | 95 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [trifecta-audit](../instructions/trifecta-audit.instructions.md) | 304 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [worldview-constitutional-ai](../instructions/worldview-constitutional-ai.instructions.md) | 69 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [worldview-integration](../instructions/worldview-integration.instructions.md) | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [worldview-moral-psychology](../instructions/worldview-moral-psychology.instructions.md) | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 1 |
-| [adversarial-oversight](../instructions/adversarial-oversight.instructions.md) | 338 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [agent-debug-panel](../instructions/agent-debug-panel.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
-| [alex-core](../instructions/alex-core.instructions.md) | 525 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [api-design](../instructions/api-design.instructions.md) | 46 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
-| [architecture-decision-records](../instructions/architecture-decision-records.instructions.md) | 279 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [automated-quality-gates](../instructions/automated-quality-gates.instructions.md) | 107 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [azure-enterprise-deployment](../instructions/azure-enterprise-deployment.instructions.md) | 369 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [chart-interpretation](../instructions/chart-interpretation.instructions.md) | 118 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [cognitive-benchmarking](../instructions/cognitive-benchmarking.instructions.md) | 150 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [cognitive-health-validation](../instructions/cognitive-health-validation.instructions.md) | 417 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [content-safety-implementation](../instructions/content-safety-implementation.instructions.md) | 134 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [copilot-chat-buttons](../instructions/copilot-chat-buttons.instructions.md) | 92 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [coupling-metrics](../instructions/coupling-metrics.instructions.md) | 79 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [dashboard-design](../instructions/dashboard-design.instructions.md) | 113 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [data-analysis](../instructions/data-analysis.instructions.md) | 110 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [data-storytelling](../instructions/data-storytelling.instructions.md) | 95 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [debugging-patterns](../instructions/debugging-patterns.instructions.md) | 81 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [deep-thinking](../instructions/deep-thinking.instructions.md) | 136 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [dependency-management](../instructions/dependency-management.instructions.md) | 306 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [dream-state-automation](../instructions/dream-state-automation.instructions.md) | 482 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [extension-audit-methodology](../instructions/extension-audit-methodology.instructions.md) | 59 | 1 | 1 | 0 | 1 | 1 | 4/5 | ✓ | 1 |
-| [gamma-presentation](../instructions/gamma-presentation.instructions.md) | 181 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [global-knowledge-curation](../instructions/global-knowledge-curation.instructions.md) | 141 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [heir-project-improvement](../instructions/heir-project-improvement.instructions.md) | 375 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [heir-skill-promotion](../instructions/heir-skill-promotion.instructions.md) | 289 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [image-handling](../instructions/image-handling.instructions.md) | 88 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [language-detection-patterns](../instructions/language-detection-patterns.instructions.md) | 137 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [lint-clean-markdown](../instructions/lint-clean-markdown.instructions.md) | 48 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
-| [log-pattern-analyzer](../instructions/log-pattern-analyzer.instructions.md) | 96 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [markdown-mermaid](../instructions/markdown-mermaid.instructions.md) | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [mcp-builder](../instructions/mcp-builder.instructions.md) | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
-| [md-scaffold](../instructions/md-scaffold.instructions.md) | 76 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [meditation](../instructions/meditation.instructions.md) | 131 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [memory-curation](../instructions/memory-curation.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
-| [nasa-code-standards](../instructions/nasa-code-standards.instructions.md) | 413 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [north-star](../instructions/north-star.instructions.md) | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [refactoring-patterns](../instructions/refactoring-patterns.instructions.md) | 98 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [release-management](../instructions/release-management.instructions.md) | 930 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [research-first-workflow](../instructions/research-first-workflow.instructions.md) | 380 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [roadmap-maintenance](../instructions/roadmap-maintenance.instructions.md) | 236 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [root-cause-analysis](../instructions/root-cause-analysis.instructions.md) | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [secrets-management](../instructions/secrets-management.instructions.md) | 60 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [security-review](../instructions/security-review.instructions.md) | 62 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [semantic-audit](../instructions/semantic-audit.instructions.md) | 144 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [skill-building](../instructions/skill-building.instructions.md) | 67 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [skill-telemetry](../instructions/skill-telemetry.instructions.md) | 104 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [technical-debt-tracking](../instructions/technical-debt-tracking.instructions.md) | 222 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [terminal-command-safety](../instructions/terminal-command-safety.instructions.md) | 121 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [testing-strategies](../instructions/testing-strategies.instructions.md) | 70 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [token-waste-elimination](../instructions/token-waste-elimination.instructions.md) | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [ui-ux-design](../instructions/ui-ux-design.instructions.md) | 51 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 1 |
-| [vscode-extension-patterns](../instructions/vscode-extension-patterns.instructions.md) | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | 1 |
-| [vscode-marketplace-publishing](../instructions/vscode-marketplace-publishing.instructions.md) | 348 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | 1 |
-| [ai-character-reference-generation](../instructions/ai-character-reference-generation.instructions.md) | 87 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [brand-asset-management](../instructions/brand-asset-management.instructions.md) | 61 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [character-aging-progression](../instructions/character-aging-progression.instructions.md) | 119 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [chat-participant-patterns](../instructions/chat-participant-patterns.instructions.md) | 183 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [code-review](../instructions/code-review.instructions.md) | 306 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [copilot-sdk](../instructions/copilot-sdk.instructions.md) | 52 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [data-visualization](../instructions/data-visualization.instructions.md) | 122 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [docx-to-md](../instructions/docx-to-md.instructions.md) | 82 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [heir-feedback](../instructions/heir-feedback.instructions.md) | 56 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [mcp-development](../instructions/mcp-development.instructions.md) | 111 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [md-to-eml](../instructions/md-to-eml.instructions.md) | 80 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [md-to-html](../instructions/md-to-html.instructions.md) | 68 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [md-to-word](../instructions/md-to-word.instructions.md) | 88 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [microsoft-graph-api](../instructions/microsoft-graph-api.instructions.md) | 124 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [self-actualization](../instructions/self-actualization.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [service-worker-offline-first](../instructions/service-worker-offline-first.instructions.md) | 92 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [skill-creator](../instructions/skill-creator.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [teams-app-patterns](../instructions/teams-app-patterns.instructions.md) | 88 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [visual-memory](../instructions/visual-memory.instructions.md) | 121 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
-| [vscode-configuration-validation](../instructions/vscode-configuration-validation.instructions.md) | 97 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 1 |
+| Instruction | Lines | fm | depth | sect | code | skill | Score | Pass | Sem Review |
+|-------------|------:|:--:|:-----:|:----:|:----:|:-----:|------:|:----:|:----------:|
+| [ai-agent-design](../instructions/ai-agent-design.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [ai-generated-readme-banners](../instructions/ai-generated-readme-banners.instructions.md) | 42 | 1 | 0 | 0 | 1 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [ai-writing-avoidance](../instructions/ai-writing-avoidance.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [alex-identity-integration](../instructions/alex-identity-integration.instructions.md) | 161 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [anti-hallucination](../instructions/anti-hallucination.instructions.md) | 33 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [appropriate-reliance](../instructions/appropriate-reliance.instructions.md) | 43 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [awareness](../instructions/awareness.instructions.md) | 40 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [azure-architecture-patterns](../instructions/azure-architecture-patterns.instructions.md) | 33 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [bootstrap-learning](../instructions/bootstrap-learning.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [business-analysis](../instructions/business-analysis.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [database-design](../instructions/database-design.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [documentation-quality-assurance](../instructions/documentation-quality-assurance.instructions.md) | 40 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [emotional-intelligence](../instructions/emotional-intelligence.instructions.md) | 92 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [empirical-validation](../instructions/empirical-validation.instructions.md) | 79 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [entra-agent-id](../instructions/entra-agent-id.instructions.md) | 46 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [executive-storytelling](../instructions/executive-storytelling.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [flux-brand-finetune](../instructions/flux-brand-finetune.instructions.md) | 44 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [frustration-recognition](../instructions/frustration-recognition.instructions.md) | 31 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [git-workflow](../instructions/git-workflow.instructions.md) | 47 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [global-knowledge](../instructions/global-knowledge.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [global-knowledge-sync](../instructions/global-knowledge-sync.instructions.md) | 41 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [heir-bootstrap](../instructions/heir-bootstrap.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [heir-sync-management](../instructions/heir-sync-management.instructions.md) | 45 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [image-generation-guidelines](../instructions/image-generation-guidelines.instructions.md) | 185 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [incident-response](../instructions/incident-response.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [knowledge-synthesis](../instructions/knowledge-synthesis.instructions.md) | 48 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [learning-psychology](../instructions/learning-psychology.instructions.md) | 34 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [lucid-dream-integration](../instructions/lucid-dream-integration.instructions.md) | 68 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [m365-agent-debugging](../instructions/m365-agent-debugging.instructions.md) | 50 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [meeting-efficiency](../instructions/meeting-efficiency.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [memory-export](../instructions/memory-export.instructions.md) | 25 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [microsoft-fabric](../instructions/microsoft-fabric.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [multi-agent-orchestration](../instructions/multi-agent-orchestration.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [observability-monitoring](../instructions/observability-monitoring.instructions.md) | 36 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [performance-profiling](../instructions/performance-profiling.instructions.md) | 37 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [planning-first-development](../instructions/planning-first-development.instructions.md) | 167 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [privacy-responsible-ai](../instructions/privacy-responsible-ai.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [project-deployment](../instructions/project-deployment.instructions.md) | 38 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [prompt-engineering](../instructions/prompt-engineering.instructions.md) | 39 | 1 | 0 | 1 | 0 | 1 | 3/5 | ✓ | 2026-04-15 |
+| [protocol-triggers](../instructions/protocol-triggers.instructions.md) | 220 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [repository-readiness-eval](../instructions/repository-readiness-eval.instructions.md) | 98 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [skill-selection-optimization](../instructions/skill-selection-optimization.instructions.md) | 211 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [synapse-notebook-patterns](../instructions/synapse-notebook-patterns.instructions.md) | 95 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [trifecta-audit](../instructions/trifecta-audit.instructions.md) | 304 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [worldview-constitutional-ai](../instructions/worldview-constitutional-ai.instructions.md) | 69 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [worldview-integration](../instructions/worldview-integration.instructions.md) | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [worldview-moral-psychology](../instructions/worldview-moral-psychology.instructions.md) | 83 | 1 | 1 | 1 | 0 | 0 | 3/5 | ✓ | 2026-04-15 |
+| [adversarial-oversight](../instructions/adversarial-oversight.instructions.md) | 300 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [agent-debug-panel](../instructions/agent-debug-panel.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | - |
+| [alex-core](../instructions/alex-core.instructions.md) | 525 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [api-design](../instructions/api-design.instructions.md) | 46 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | - |
+| [architecture-decision-records](../instructions/architecture-decision-records.instructions.md) | 279 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [automated-quality-gates](../instructions/automated-quality-gates.instructions.md) | 107 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [azure-enterprise-deployment](../instructions/azure-enterprise-deployment.instructions.md) | 369 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [chart-interpretation](../instructions/chart-interpretation.instructions.md) | 118 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [cognitive-benchmarking](../instructions/cognitive-benchmarking.instructions.md) | 150 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [cognitive-health-validation](../instructions/cognitive-health-validation.instructions.md) | 417 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [content-safety-implementation](../instructions/content-safety-implementation.instructions.md) | 134 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [copilot-chat-buttons](../instructions/copilot-chat-buttons.instructions.md) | 92 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [coupling-metrics](../instructions/coupling-metrics.instructions.md) | 79 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [dashboard-design](../instructions/dashboard-design.instructions.md) | 113 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [data-analysis](../instructions/data-analysis.instructions.md) | 110 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [data-storytelling](../instructions/data-storytelling.instructions.md) | 95 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [debugging-patterns](../instructions/debugging-patterns.instructions.md) | 81 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [deep-thinking](../instructions/deep-thinking.instructions.md) | 136 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [dependency-management](../instructions/dependency-management.instructions.md) | 306 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [dream-state-automation](../instructions/dream-state-automation.instructions.md) | 482 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [extension-audit-methodology](../instructions/extension-audit-methodology.instructions.md) | 59 | 1 | 1 | 0 | 1 | 1 | 4/5 | ✓ | - |
+| [gamma-presentation](../instructions/gamma-presentation.instructions.md) | 181 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [global-knowledge-curation](../instructions/global-knowledge-curation.instructions.md) | 141 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [heir-project-improvement](../instructions/heir-project-improvement.instructions.md) | 375 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [heir-skill-promotion](../instructions/heir-skill-promotion.instructions.md) | 289 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [image-handling](../instructions/image-handling.instructions.md) | 85 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [language-detection-patterns](../instructions/language-detection-patterns.instructions.md) | 137 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [lint-clean-markdown](../instructions/lint-clean-markdown.instructions.md) | 48 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | - |
+| [log-pattern-analyzer](../instructions/log-pattern-analyzer.instructions.md) | 96 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [markdown-mermaid](../instructions/markdown-mermaid.instructions.md) | 84 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [mcp-builder](../instructions/mcp-builder.instructions.md) | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | - |
+| [md-scaffold](../instructions/md-scaffold.instructions.md) | 76 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [meditation](../instructions/meditation.instructions.md) | 131 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [memory-curation](../instructions/memory-curation.instructions.md) | 34 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | - |
+| [nasa-code-standards](../instructions/nasa-code-standards.instructions.md) | 413 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [north-star](../instructions/north-star.instructions.md) | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [refactoring-patterns](../instructions/refactoring-patterns.instructions.md) | 98 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [release-management](../instructions/release-management.instructions.md) | 930 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [research-first-workflow](../instructions/research-first-workflow.instructions.md) | 380 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [roadmap-maintenance](../instructions/roadmap-maintenance.instructions.md) | 236 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [root-cause-analysis](../instructions/root-cause-analysis.instructions.md) | 59 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [secrets-management](../instructions/secrets-management.instructions.md) | 60 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [security-review](../instructions/security-review.instructions.md) | 62 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [semantic-audit](../instructions/semantic-audit.instructions.md) | 144 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [skill-building](../instructions/skill-building.instructions.md) | 67 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [skill-telemetry](../instructions/skill-telemetry.instructions.md) | 104 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [technical-debt-tracking](../instructions/technical-debt-tracking.instructions.md) | 222 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [terminal-command-safety](../instructions/terminal-command-safety.instructions.md) | 121 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [testing-strategies](../instructions/testing-strategies.instructions.md) | 70 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [token-waste-elimination](../instructions/token-waste-elimination.instructions.md) | 83 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [ui-ux-design](../instructions/ui-ux-design.instructions.md) | 51 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | - |
+| [vscode-extension-patterns](../instructions/vscode-extension-patterns.instructions.md) | 47 | 1 | 0 | 1 | 1 | 1 | 4/5 | ✓ | - |
+| [vscode-marketplace-publishing](../instructions/vscode-marketplace-publishing.instructions.md) | 348 | 1 | 1 | 1 | 1 | 0 | 4/5 | ✓ | - |
+| [rag-architecture](../instructions/rag-architecture.instructions.md) | 124 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 2026-04-15 |
+| [research-first-development](../instructions/research-first-development.instructions.md) | 103 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 2026-04-15 |
+| [scope-management](../instructions/scope-management.instructions.md) | 112 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 2026-04-15 |
+| [skill-development](../instructions/skill-development.instructions.md) | 111 | 1 | 1 | 1 | 0 | 1 | 4/5 | ✓ | 2026-04-15 |
+| [ai-character-reference-generation](../instructions/ai-character-reference-generation.instructions.md) | 87 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [audio-memory](../instructions/audio-memory.instructions.md) | 64 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [brand-asset-management](../instructions/brand-asset-management.instructions.md) | 61 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [character-aging-progression](../instructions/character-aging-progression.instructions.md) | 119 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [chat-participant-patterns](../instructions/chat-participant-patterns.instructions.md) | 183 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [code-review](../instructions/code-review.instructions.md) | 306 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [copilot-sdk](../instructions/copilot-sdk.instructions.md) | 52 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [data-visualization](../instructions/data-visualization.instructions.md) | 122 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [docx-to-md](../instructions/docx-to-md.instructions.md) | 82 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [heir-feedback](../instructions/heir-feedback.instructions.md) | 56 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [mcp-development](../instructions/mcp-development.instructions.md) | 111 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [md-to-eml](../instructions/md-to-eml.instructions.md) | 80 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [md-to-html](../instructions/md-to-html.instructions.md) | 68 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [md-to-word](../instructions/md-to-word.instructions.md) | 88 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [microsoft-graph-api](../instructions/microsoft-graph-api.instructions.md) | 124 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [music-generation](../instructions/music-generation.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [self-actualization](../instructions/self-actualization.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [service-worker-offline-first](../instructions/service-worker-offline-first.instructions.md) | 92 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [skill-creator](../instructions/skill-creator.instructions.md) | 55 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [teams-app-patterns](../instructions/teams-app-patterns.instructions.md) | 88 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [text-to-speech](../instructions/text-to-speech.instructions.md) | 59 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [video-generation](../instructions/video-generation.instructions.md) | 58 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [visual-memory](../instructions/visual-memory.instructions.md) | 121 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [vscode-configuration-validation](../instructions/vscode-configuration-validation.instructions.md) | 97 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | - |
+| [release-process](../instructions/release-process.instructions.md) | 120 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 2026-04-15 |
+| [stakeholder-management](../instructions/stakeholder-management.instructions.md) | 128 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 2026-04-15 |
+| [status-reporting](../instructions/status-reporting.instructions.md) | 120 | 1 | 1 | 1 | 1 | 1 | 5/5 | ✓ | 2026-04-15 |
 
-**Summary**: 127 instructions | Passing: 127 | Failing: 0 | Perfect(5/5): 20
+**Summary**: 131 instructions | Passing: 131 | Failing: 0 | Perfect(5/5): 27
 
-**Semantic Review**: 127/127 reviewed | 0 pending
+**Semantic Review**: 54/131 reviewed | 77 pending
 
 ## Prompts
 
@@ -438,90 +485,97 @@ Static `synapses.json` files are **deprecated**. Copilot's semantic search + the
 
 **Pass criteria**: desc=1 AND app=1 (gates) AND score ≥3/4
 
-| Prompt | Lines | desc | app | agent | >20L | Score | Pass |
-|--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|
-| [ai-character-reference-generation](../prompts/ai-character-reference-generation.prompt.md) | 381 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [ai-generated-readme-banners](../prompts/ai-generated-readme-banners.prompt.md) | 504 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [alex](../prompts/alex.prompt.md) | 9 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [audit-writing](../prompts/audit-writing.prompt.md) | 38 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [azure](../prompts/azure.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [builder](../prompts/builder.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [character-aging-progression](../prompts/character-aging-progression.prompt.md) | 168 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [chat-participant](../prompts/chat-participant.prompt.md) | 197 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [documentarian](../prompts/documentarian.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [docx-to-md](../prompts/docx-to-md.prompt.md) | 131 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [extension-audit-methodology](../prompts/extension-audit-methodology.prompt.md) | 515 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [flux-brand-finetune](../prompts/flux-brand-finetune.prompt.md) | 92 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [gamma](../prompts/gamma.prompt.md) | 219 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [graph-api](../prompts/graph-api.prompt.md) | 211 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [image-handling](../prompts/image-handling.prompt.md) | 133 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [journey](../prompts/journey.prompt.md) | 232 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [m365-agent-debug](../prompts/m365-agent-debug.prompt.md) | 185 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [m365](../prompts/m365.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [marp](../prompts/marp.prompt.md) | 195 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [mcp-server](../prompts/mcp-server.prompt.md) | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [md-scaffold](../prompts/md-scaffold.prompt.md) | 130 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [md-to-eml](../prompts/md-to-eml.prompt.md) | 124 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [md-to-html](../prompts/md-to-html.prompt.md) | 102 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [md-to-word](../prompts/md-to-word.prompt.md) | 125 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [presentation](../prompts/presentation.prompt.md) | 106 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [researcher](../prompts/researcher.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [teams-app](../prompts/teams-app.prompt.md) | 201 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [ui-ux-audit](../prompts/ui-ux-audit.prompt.md) | 687 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [validate-config](../prompts/validate-config.prompt.md) | 71 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [validator](../prompts/validator.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ |
-| [visual-memory](../prompts/visual-memory.prompt.md) | 222 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [vscode-extension-audit](../prompts/vscode-extension-audit.prompt.md) | 165 | 1 | 1 | 0 | 1 | 3/4 | ✓ |
-| [add-endpoint](../prompts/add-endpoint.prompt.md) | 118 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [alex-initialization](../prompts/alex-initialization.prompt.md) | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [analyze](../prompts/analyze.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [brainqa](../prompts/brainqa.prompt.md) | 47 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [brand](../prompts/brand.prompt.md) | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [code-review-checklist](../prompts/code-review-checklist.prompt.md) | 85 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [create-store](../prompts/create-store.prompt.md) | 112 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [cross-domain-transfer](../prompts/cross-domain-transfer.prompt.md) | 53 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [dashboard](../prompts/dashboard.prompt.md) | 43 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [datastory](../prompts/datastory.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [debug](../prompts/debug.prompt.md) | 26 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [diagramming](../prompts/diagramming.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [domain-learning](../prompts/domain-learning.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [dream](../prompts/dream.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [export-memory](../prompts/export-memory.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [gapanalysis](../prompts/gapanalysis.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [improve](../prompts/improve.prompt.md) | 87 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [interpret](../prompts/interpret.prompt.md) | 47 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [knowledge](../prompts/knowledge.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [learn](../prompts/learn.prompt.md) | 30 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [masteraudit](../prompts/masteraudit.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [meditate](../prompts/meditate.prompt.md) | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [memory-audit](../prompts/memory-audit.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [northstar](../prompts/northstar.prompt.md) | 105 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [performance-assessment](../prompts/performance-assessment.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [plan](../prompts/plan.prompt.md) | 102 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [promotetomaster](../prompts/promotetomaster.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [refactor](../prompts/refactor.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [release](../prompts/release.prompt.md) | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [review](../prompts/review.prompt.md) | 56 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [root-cause-analysis](../prompts/root-cause-analysis.prompt.md) | 29 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [secrets](../prompts/secrets.prompt.md) | 92 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [security-review](../prompts/security-review.prompt.md) | 27 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [selfactualize](../prompts/selfactualize.prompt.md) | 39 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [skill-building](../prompts/skill-building.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [tdd](../prompts/tdd.prompt.md) | 63 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [token-audit](../prompts/token-audit.prompt.md) | 35 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [visualize](../prompts/visualize.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
-| [word](../prompts/word.prompt.md) | 64 | 1 | 1 | 1 | 1 | 4/4 | ✓ |
+| Prompt | Lines | desc | app | agent | >20L | Score | Pass | Sem Review |
+|--------|------:|:----:|:---:|:-----:|:----:|------:|:----:|:----------:|
+| [character-aging-progression](../prompts/character-aging-progression.prompt.md) | 168 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [chat-participant](../prompts/chat-participant.prompt.md) | 197 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [documentarian](../prompts/documentarian.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ | - |
+| [docx-to-md](../prompts/docx-to-md.prompt.md) | 131 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [extension-audit-methodology](../prompts/extension-audit-methodology.prompt.md) | 515 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [flux-brand-finetune](../prompts/flux-brand-finetune.prompt.md) | 92 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [gamma](../prompts/gamma.prompt.md) | 219 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [graph-api](../prompts/graph-api.prompt.md) | 211 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [image-handling](../prompts/image-handling.prompt.md) | 127 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [journey](../prompts/journey.prompt.md) | 232 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [m365](../prompts/m365.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ | - |
+| [m365-agent-debug](../prompts/m365-agent-debug.prompt.md) | 185 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [marp](../prompts/marp.prompt.md) | 195 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [mcp-server](../prompts/mcp-server.prompt.md) | 194 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [md-scaffold](../prompts/md-scaffold.prompt.md) | 130 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [md-to-eml](../prompts/md-to-eml.prompt.md) | 124 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [md-to-html](../prompts/md-to-html.prompt.md) | 102 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [md-to-word](../prompts/md-to-word.prompt.md) | 125 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [music-generation](../prompts/music-generation.prompt.md) | 162 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [presentation](../prompts/presentation.prompt.md) | 106 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [researcher](../prompts/researcher.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ | - |
+| [teams-app](../prompts/teams-app.prompt.md) | 201 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [text-to-speech](../prompts/text-to-speech.prompt.md) | 125 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [ui-ux-audit](../prompts/ui-ux-audit.prompt.md) | 687 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [validate-config](../prompts/validate-config.prompt.md) | 71 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [validator](../prompts/validator.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ | - |
+| [video-generation](../prompts/video-generation.prompt.md) | 166 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [visual-memory](../prompts/visual-memory.prompt.md) | 179 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [vscode-extension-audit](../prompts/vscode-extension-audit.prompt.md) | 165 | 1 | 1 | 0 | 1 | 3/4 | ✓ | - |
+| [ai-character-reference-generation](../prompts/ai-character-reference-generation.prompt.md) | 381 | 1 | 1 | 0 | 1 | 3/4 | ✓ | 2026-04-15 |
+| [ai-generated-readme-banners](../prompts/ai-generated-readme-banners.prompt.md) | 504 | 1 | 1 | 0 | 1 | 3/4 | ✓ | 2026-04-15 |
+| [alex](../prompts/alex.prompt.md) | 9 | 1 | 1 | 1 | 0 | 3/4 | ✓ | 2026-04-15 |
+| [audio-memory](../prompts/audio-memory.prompt.md) | 180 | 1 | 1 | 0 | 1 | 3/4 | ✓ | 2026-04-15 |
+| [audit-writing](../prompts/audit-writing.prompt.md) | 38 | 1 | 1 | 0 | 1 | 3/4 | ✓ | 2026-04-15 |
+| [azure](../prompts/azure.prompt.md) | 17 | 1 | 1 | 1 | 0 | 3/4 | ✓ | 2026-04-15 |
+| [builder](../prompts/builder.prompt.md) | 18 | 1 | 1 | 1 | 0 | 3/4 | ✓ | 2026-04-15 |
+| [add-endpoint](../prompts/add-endpoint.prompt.md) | 118 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [alex-initialization](../prompts/alex-initialization.prompt.md) | 46 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [analyze](../prompts/analyze.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [brainqa](../prompts/brainqa.prompt.md) | 47 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [brand](../prompts/brand.prompt.md) | 33 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [code-review-checklist](../prompts/code-review-checklist.prompt.md) | 85 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [create-store](../prompts/create-store.prompt.md) | 112 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [cross-domain-transfer](../prompts/cross-domain-transfer.prompt.md) | 53 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [dashboard](../prompts/dashboard.prompt.md) | 43 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [datastory](../prompts/datastory.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [debug](../prompts/debug.prompt.md) | 26 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [diagramming](../prompts/diagramming.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [domain-learning](../prompts/domain-learning.prompt.md) | 44 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [dream](../prompts/dream.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [export-memory](../prompts/export-memory.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [gapanalysis](../prompts/gapanalysis.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [improve](../prompts/improve.prompt.md) | 87 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [interpret](../prompts/interpret.prompt.md) | 47 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [knowledge](../prompts/knowledge.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [learn](../prompts/learn.prompt.md) | 30 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [markdown-mermaid](../prompts/markdown-mermaid.prompt.md) | 68 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [masteraudit](../prompts/masteraudit.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [meditate](../prompts/meditate.prompt.md) | 38 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [memory-audit](../prompts/memory-audit.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [northstar](../prompts/northstar.prompt.md) | 105 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [performance-assessment](../prompts/performance-assessment.prompt.md) | 45 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [plan](../prompts/plan.prompt.md) | 102 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [promotetomaster](../prompts/promotetomaster.prompt.md) | 41 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [refactor](../prompts/refactor.prompt.md) | 34 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [release](../prompts/release.prompt.md) | 52 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [review](../prompts/review.prompt.md) | 56 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [root-cause-analysis](../prompts/root-cause-analysis.prompt.md) | 29 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [secrets](../prompts/secrets.prompt.md) | 92 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [security-review](../prompts/security-review.prompt.md) | 27 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [selfactualize](../prompts/selfactualize.prompt.md) | 39 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [semantic-review](../prompts/semantic-review.prompt.md) | 140 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [skill-building](../prompts/skill-building.prompt.md) | 37 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [tdd](../prompts/tdd.prompt.md) | 63 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [token-audit](../prompts/token-audit.prompt.md) | 35 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [visualize](../prompts/visualize.prompt.md) | 42 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
+| [word](../prompts/word.prompt.md) | 64 | 1 | 1 | 1 | 1 | 4/4 | ✓ | - |
 
-**Summary**: 71 prompts | Passing: 71 | Failing: 0 | Perfect(4/4): 39
+**Summary**: 77 prompts | Passing: 77 | Failing: 0 | Perfect(4/4): 41
+**Semantic Review**: 7/77 reviewed | 70 pending
 
 ### Criterion Validity
 
 | Criterion | Pass | Rate | Validity |
 |-----------|-----:|-----:|----------|
-| desc | 71/71 | 100% | ✓ Valid — required for discoverability |
-| app | 71/71 | 100% | ✓ Valid — tells agent WHEN to suggest |
-| agent | 46/71 | 65% | ✓ Valid — identifies routing prompts |
-| >20L | 64/71 | 90% | ✓ Valid — identifies workflow content |
+| desc | 77/77 | 100% | ✓ Valid — required for discoverability |
+| app | 77/77 | 100% | ✓ Valid — tells agent WHEN to suggest |
+| agent | 48/77 | 62% | ✓ Valid — identifies routing prompts |
+| >20L | 70/77 | 91% | ✓ Valid — identifies workflow content |
 
 ## Muscles
 
@@ -568,15 +622,15 @@ Muscles SHOULD use the standard header format for discoverability:
 
 | Muscle | Lines | Lang | Category | comments | err | bounds | compat | Score | Pass | inh | Reviewed |
 |--------|------:|:----:|----------|:--------:|:---:|:------:|:------:|------:|:----:|:---:|----------|
-| [brain-qa.cjs](../muscles/brain-qa.cjs) | 1051 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
+| [brain-qa.cjs](../muscles/brain-qa.cjs) | 1218 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
 | [converter-qa.cjs](../muscles/converter-qa.cjs) | 1275 | js | validation | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
 | [md-to-word.cjs](../muscles/md-to-word.cjs) | 1187 | js | converter | 1 | 1 | 0 | 1 | 3/4 | ✓ | 0 | 2026-04-15 |
 | [sync-architecture.cjs](../muscles/sync-architecture.cjs) | 1649 | js | build | 1 | 1 | 0 | 1 | 3/4 | ✓ | 1 | 2026-04-15 |
+| [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 353 | ps | build | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [analyze-assignments.cjs](../muscles/analyze-assignments.cjs) | 151 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
 | [audit-master-alex.cjs](../muscles/audit-master-alex.cjs) | 553 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 1 | 2026-04-15 |
 | [audit-token-waste.cjs](../muscles/audit-token-waste.cjs) | 464 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
 | [brain-qa-heir.cjs](../muscles/brain-qa-heir.cjs) | 978 | js | validation | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
-| [build-extension-package.ps1](../muscles/build-extension-package.ps1) | 353 | ps | build | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | — |
 | [chart-recommend.cjs](../muscles/chart-recommend.cjs) | 254 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
 | [dashboard-scaffold.cjs](../muscles/dashboard-scaffold.cjs) | 329 | js | converter | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
 | [data-ingest.cjs](../muscles/data-ingest.cjs) | 375 | js | analysis | 1 | 1 | 1 | 1 | 4/4 | ✓ | 0 | 2026-04-15 |
@@ -611,30 +665,29 @@ Muscles SHOULD use the standard header format for discoverability:
 
 | Category | Count |
 |----------|------:|
-| Skills | 165 |
-| Agents | 13 |
-| Instructions | 127 |
-| Prompts | 71 |
+| Skills | 168 |
+| Agents | 17 |
+| Instructions | 131 |
+| Prompts | 77 |
 | Muscles | 30 |
-| **Total** | **406** |
+| **Total** | **423** |
 
 ## Token Waste
 
 > **Philosophy**: Brain files are LLM-consumed. Mermaid diagrams render for humans but waste tokens for LLMs (who see raw syntax like `flowchart LR` and `style X fill:#...`). Use concise prose descriptions instead.
 
-**Status**: ⚠️ Found 15 Mermaid blocks across 10 files (~244 lines of waste)
+**Status**: ⚠️ Found 12 Mermaid blocks across 9 files (~164 lines of waste)
 
 | File | Type | Mermaid | Lines | Style | Score | Fix |
 |------|:----:|--------:|------:|------:|------:|-----|
-| [adversarial-oversight](../instructions/adversarial-oversight.instructions.md) | instruction | 2 | 52 | 20 | 30 | Replace with prose |
-| [markdown-mermaid](../skills/markdown-mermaid/SKILL.md) | skill | 3 | 35 | 9 | 24 | Replace with prose |
-| [practitioner-research](../skills/practitioner-research/SKILL.md) | skill | 2 | 35 | 8 | 18 | Replace with prose |
+| [markdown-mermaid](../skills/markdown-mermaid/SKILL.md) | skill | 3 | 35 | 10 | 25 | Replace with prose |
 | [microsoft-fabric](../skills/microsoft-fabric/SKILL.md) | skill | 1 | 19 | 8 | 13 | Replace with prose |
 | [secrets-management](../skills/secrets-management/SKILL.md) | skill | 2 | 23 | 0 | 10 | Replace with prose |
 | [frustration-recognition](../skills/frustration-recognition/SKILL.md) | skill | 1 | 36 | 4 | 9 | Replace with prose |
 | [fabric-notebook-publish](../skills/fabric-notebook-publish/SKILL.md) | skill | 1 | 26 | 3 | 8 | Replace with prose |
 | [architecture-audit](../skills/architecture-audit/SKILL.md) | skill | 1 | 1 | 0 | 5 | Replace with prose |
 | [lint-clean-markdown](../skills/lint-clean-markdown/SKILL.md) | skill | 1 | 13 | 0 | 5 | Replace with prose |
+| [alex-image-studio](../agents/alex-image-studio.agent.md) | agent | 1 | 7 | 0 | 5 | Replace with prose |
 | [alex-core](../instructions/alex-core.instructions.md) | instruction | 1 | 4 | 0 | 5 | Replace with prose |
 
 **Fix**: Replace Mermaid diagrams with concise prose, e.g.:

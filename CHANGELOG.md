@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.9.0] - 2026-04-15
+
+### Added
+
+- **Skill Builder agent** (`alex-skill-builder.agent.md`): New specialized agent for creating high-quality trifectas (skill + instruction + prompt) and automation muscles — includes quality dimension matrices, 7-phase workflow, inheritance rules, and validation commands
+- **Brain Health Grid** (`.github/quality/brain-health-grid.md`): Comprehensive quality tracking dashboard with instruction/skill/prompt scoring matrices, semantic review dates, and priority queue management
+- **project-scaffolding anti-patterns**: 7 anti-pattern rows (empty README, 10+ quick start steps, no license, hardcoded paths, stale screenshots, nested labyrinths, copy-paste) plus 3 troubleshooting sections
+
+### Changed
+
+- **Cognitive architecture quality audit**: 23 core tier skills semantically reviewed and validated (anti-hallucination, appropriate-reliance, awareness, code-review, cognitive-load, debugging-patterns, dialog-engineering, doc-hygiene, error-recovery-patterns, frustration-recognition, git-workflow, lint-clean-markdown, memory-activation, north-star, persona-detection, proactive-assistance, refactoring-patterns, root-cause-analysis, security-review, silence-as-signal, testing-strategies, vscode-extension-patterns, brain-qa)
+- **Priority Queue cleared**: 15 urgent review items processed and resolved
+- **Agents registry**: Skill Builder added to copilot-instructions.md agent list (now 17 agents)
+
+### Documentation
+
+- **brain-health-grid.md**: Quality tracking with 5 Cs semantic review criteria (Clarity, Coherence, Correctness, Completeness, Conciseness), pass thresholds by tier (core 3/3, standard 2/3, extended 2/2)
+- **Skill scoring metrics**: fm (frontmatter), code (examples), bounds (when NOT to use), tri (trifecta), muscle (automation)
+- **Instruction scoring metrics**: fm, depth (>100 lines), sect (sections), code, skill (matching trifecta)
+
+---
+
 ## [7.7.4] - 2026-04-13
 
 ### Fixed

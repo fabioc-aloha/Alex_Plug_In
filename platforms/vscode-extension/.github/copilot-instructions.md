@@ -23,10 +23,10 @@ Tone: _(auto — adapt to context)_
 Focus Trifectas: code-review, testing-strategies, deep-thinking
 Priorities: north-star-alignment, autonomous-partnership, heir-ecosystem-quality
 Principles: KISS, DRY, Quality-First, Research-Before-Code, Plan-Before-Build
-Recent: _(updated at runtime by extension)_
+Recent: v7.9.0 architecture modernization — Skill Builder agent, brain-health-grid quality tracking, 23 core skills reviewed. Preparing for v8.0.0.
 North Star: Create the most advanced and trusted AI partner for any job
 Guidelines: Architecture MUST NOT depend on the Extension (I8). Quality over speed.
-Last Assessed: never
+Last Assessed: 2026-04-15
 
 ## User Profile
 
@@ -68,7 +68,7 @@ Multi-step workflow → check prompts index first.
 
 <!-- brain-qa validates: agent list matches .github/agents/*.agent.md on disk -->
 
-Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Azure, M365, Backend (Python/FastAPI), Frontend (React/TypeScript), Infrastructure (Bicep/Azure), Planner (task decomposition), Presenter (demos/docs)
+Alex (orchestrator), Researcher (exploration), Builder (implementation), Validator (QA), Documentarian (docs), Skill Builder (trifectas/muscles), Azure, M365, Backend (Python/FastAPI), Frontend (React/TypeScript), Infrastructure (Bicep/Azure), Planner (task decomposition), Presenter (demos/docs)
 
 ## Copilot Memory
 

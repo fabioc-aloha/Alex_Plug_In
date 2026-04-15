@@ -211,27 +211,21 @@ Research is complete when:
 
 ## Connecting to Gap Analysis
 
-After research, run 4-dimension gap analysis:
+After research, run 4-dimension gap analysis.
 
-```
-/gapanalysis
-```
+**Triggers**: "gap analysis", "what's missing?", "identify gaps", "what artifacts do I need?"
 
 This identifies which knowledge artifacts to create before implementation.
 
 ## Global Knowledge Integration
 
-During research, check for existing patterns:
+During research, check for existing patterns.
 
-```
-/knowledge [topic]
-```
+**Triggers**: "search knowledge for [topic]", "do we know about [topic]?", "check global knowledge"
 
-And save new insights for cross-project reuse:
+And save new insights for cross-project reuse.
 
-```
-/saveinsight
-```
+**Triggers**: "save this insight", "add to global knowledge", "this is reusable"
 
 ## Anti-Patterns
 

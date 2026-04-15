@@ -24,6 +24,42 @@ A skill for markdown authoring, Mermaid diagramming, multi-tool visualization, V
 
 ---
 
+## ⚠️ MANDATORY: Start Every Diagram With This Template
+
+**Do NOT write Mermaid code without this template.** Copy-paste first, then customize:
+
+```text
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#57606a', 'primaryColor': '#ddf4ff', 'primaryBorderColor': '#0969da', 'primaryTextColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
+flowchart LR
+    A[Input]:::blue --> B[Process]:::purple --> C[Output]:::green
+
+    classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
+    classDef green fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    classDef purple fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
+    classDef gold fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    classDef red fill:#ffebe9,color:#cf222e,stroke:#f5a3a3
+    classDef neutral fill:#eaeef2,color:#24292f,stroke:#d0d7de
+
+    linkStyle default stroke:#57606a,stroke-width:1.5px
+```
+
+**Three required components:**
+
+1. **Init directive** (line 1) — Sets theme, colors, white edge label background
+2. **classDef** — Semantic colors for all node types
+3. **linkStyle default** — Gray arrows at 1.5px width
+
+| Color Class | Use For | Example |
+| ----------- | ------- | ------- |
+| `:::blue` | Input, source, start | `A[Audio]:::blue` |
+| `:::green` | Output, result, data | `C[Transcript]:::green` |
+| `:::purple` | Processing, model | `B[WhisperX]:::purple` |
+| `:::gold` | Decision, condition | `D{Valid?}:::gold` |
+| `:::red` | Error, warning | `E[Failed]:::red` |
+| `:::neutral` | Context, optional | `F[Cache]:::neutral` |
+
+---
+
 ## Mandatory Workflow: ATACCU
 
 **Every Mermaid diagram MUST follow this 6-step protocol.** No exceptions — this prevents forgotten palettes, broken layouts, and inconsistent styling.
@@ -32,7 +68,8 @@ A skill for markdown authoring, Mermaid diagramming, multi-tool visualization, V
 | ---- | ------ | ---------- |
 | **A** | **Analyze** | What data/process am I visualizing? Who is the audience? What diagram type fits? |
 | **T** | **Think** | Which layout pattern? (Medallion/Lineage/Pipeline) How many nodes? Will it be too wide/tall? |
-| **C** | **Create** | Write the Mermaid code. Every node gets a style. Every flowchart gets `linkStyle default`. |
+| **A** | **Apply** | **COPY THE TEMPLATE ABOVE** — init directive + classDef + linkStyle. No exceptions. |
+| **C** | **Create** | Write the Mermaid code. Every node gets `:::className`. Every flowchart gets `linkStyle default`. |
 | **C** | **Check** | Render the diagram. Verify: pastels (not saturated), layout (not lopsided), labels (readable), arrows (gray #57606a). |
 | **U** | **Update** | Write the final diagram into the target `.md` file. Add `**Figure N:** *description*` label. |
 
@@ -445,20 +482,19 @@ web_server.style.fill: "#f3e5f5"
 
 ### ⚡ Quick Start — Pastel v2 Template
 
-Copy this template for every new diagram. It includes the init directive, classDef colors, and arrow styling:
+**See the MANDATORY template at the top of this skill.** That template is authoritative. This section is a quick reminder:
 
 ```text
-%%{init: {'theme': 'base', 'themeVariables': {
-  'primaryColor': '#ddf4ff',
-  'lineColor': '#57606a',
-  'edgeLabelBackground': '#ffffff'
-}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'lineColor': '#57606a', 'primaryColor': '#ddf4ff', 'primaryBorderColor': '#0969da', 'primaryTextColor': '#1f2328', 'edgeLabelBackground': '#ffffff'}}}%%
 flowchart LR
-    A[Source]:::blue -->|transform| B[Process]:::gold --> C[Output]:::green
+    A[Source]:::blue -->|transform| B[Process]:::purple --> C[Output]:::green
 
     classDef blue fill:#ddf4ff,color:#0550ae,stroke:#80ccff
     classDef green fill:#d3f5db,color:#1a7f37,stroke:#6fdd8b
+    classDef purple fill:#d8b9ff,color:#6639ba,stroke:#bf8aff
     classDef gold fill:#fff8c5,color:#9a6700,stroke:#d4a72c
+    classDef red fill:#ffebe9,color:#cf222e,stroke:#f5a3a3
+    classDef neutral fill:#eaeef2,color:#24292f,stroke:#d0d7de
 
     linkStyle default stroke:#57606a,stroke-width:1.5px
 ```

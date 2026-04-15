@@ -2,13 +2,20 @@
 
 ![The path from partnership to trust](assets/banner-roadmap.svg)
 
-**Last Updated**: April 14, 2026
+**Last Updated**: April 15, 2026
 
 ---
 
-## 📝 Next Release (v7.x.x)
+## 📝 Current Release (v7.9.0) — v8.0.0 Preparation
 
-Items completed since last release — copy to CHANGELOG.md when publishing:
+Architecture modernization and quality infrastructure for the v8.0.0 major release:
+
+### Architecture Quality (v7.9.0)
+
+- **Skill Builder agent** (`alex-skill-builder.agent.md`): Specialized agent for creating trifectas and muscles with quality dimension matrices, 7-phase workflow, inheritance rules
+- **Brain Health Grid** (`.github/quality/brain-health-grid.md`): Quality tracking dashboard with scoring matrices, semantic review dates, priority queue
+- **23 core tier skills reviewed**: All highest-value skills (3/3 score) semantically validated with 5 Cs criteria
+- **Priority Queue cleared**: 15 urgent items processed — architecture health restored
 
 ### Skills (microsoft/skills leverage)
 

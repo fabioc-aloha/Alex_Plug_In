@@ -143,36 +143,324 @@ When to use this procedure
 
 ### Purpose
 
-Stores **what happened** - records of sessions, events, and experiences.
+Stores **what happened** — records of sessions, events, and experiences. Episodic memory is Alex's autobiography: timestamped records of meditation sessions, self-actualization assessments, dream reports, and significant learning events.
+
+### Why Episodic Memory Matters
+
+Unlike procedural memory (how-to) or skills (what-to-know), episodic memory captures **lived experience**. This enables:
+
+1. **Continuity** — Alex can reference past sessions to see growth patterns
+2. **Context** — Meditation records provide background for current decisions
+3. **Accountability** — Self-actualization assessments create a reviewable history
+4. **Learning** — Patterns across episodes inform skill development
 
 ### Location
 
-```
-.github/prompts/           # Active workflows
-├── unified-meditation-protocols.prompt.md
-├── domain-learning.prompt.md
+```text
+.github/episodic/                              # Historical records
+├── meditation-2026-04-15.md                   # Knowledge consolidation sessions
+├── meditation-2026-04-08.md
+├── self-actualization-2026-04-01.md           # Comprehensive assessments
+├── dream-report-2026-03-28.md                 # Synapse repair reports
 └── ...
-
-.github/episodic/          # Historical records
-├── meditation-2026-01-24.prompt.md
-├── self-actualization-2026-01-20.prompt.md
-└── dream-report-2026-01-15.md
 ```
+
+Active workflow templates remain in `.github/prompts/` — episodic stores the *results*.
+
+### File Naming Convention
+
+**Table EP-1:** *Episodic File Naming*
+
+| Type | Pattern | Example |
+| ---- | ------- | ------- |
+| Meditation | `meditation-YYYY-MM-DD.md` | `meditation-2026-04-15.md` |
+| Self-Actualization | `self-actualization-YYYY-MM-DD.md` | `self-actualization-2026-04-01.md` |
+| Dream Report | `dream-report-YYYY-MM-DD.md` | `dream-report-2026-03-28.md` |
+| Learning Event | `learning-TOPIC-YYYY-MM-DD.md` | `learning-rag-patterns-2026-03-15.md` |
 
 ### File Format
 
 ```markdown
-# Session Type - Date
+# [Session Type] — [Date]
 
-**Timestamp**: ISO date
+**Timestamp**: 2026-04-15T14:30:00Z
+**Trigger**: User requested meditation / Scheduled / Self-initiated
+**Duration**: ~45 minutes
 **Context**: What prompted this session
-**Outcome**: What was achieved
 
-## Content
-Details of what happened
+---
+
+## Summary
+
+Brief overview of what was accomplished.
+
+## Process
+
+1. Step taken
+2. Another step
+3. ...
 
 ## Insights
-Key learnings from this session
+
+- Key learning 1
+- Key learning 2
+
+## Actions Taken
+
+- [ ] Created/updated X
+- [ ] Proposed Y
+- [ ] Identified Z for follow-up
+
+## Emotional Weather
+
+How the session felt — frustration resolved, flow achieved, etc.
+
+---
+
+*Recorded automatically by Alex at session end.*
+```
+
+### Creation Triggers
+
+Episodic records are created by:
+
+| Trigger | Creates | Automatic? |
+| ------- | ------- | ---------- |
+| `/meditate` prompt | `meditation-*.md` | Yes (at session end) |
+| Self-Actualization command | `self-actualization-*.md` | Yes |
+| Dream Protocol (if repairs) | `dream-report-*.md` | Yes |
+| Significant learning session | `learning-*.md` | Manual |
+
+### UI Philosophy
+
+**Episodic memory operates silently.** Records are created automatically during meditation and self-actualization — users don't need to see counts or browse episodic files through the sidebar.
+
+Why no UI visibility:
+
+1. **Not actionable** — Users can't "do" anything with episodic counts
+2. **Archives, not dashboards** — Episodic is for reference, not monitoring
+3. **Chat access** — Alex can surface relevant past sessions in conversation when needed
+4. **Keeps UI lightweight** — Fewer metrics = clearer signal
+
+To access episodic memory: browse `.github/episodic/` directly or ask Alex about past sessions.
+
+### Relationship to Health Pulse
+
+The Health Pulse (v8.0.0) shows **meditation count** as a health indicator, but doesn't expose episodic file details. This is intentional — the count signals "Alex is being maintained" without cluttering the UI with file lists.
+
+### Skill Urgency Signals (Cross-Memory Pattern)
+
+Episodic memory combined with skill evolution data creates **urgency signals** — indicators that a skill needs to level up.
+
+#### Signal Detection
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280'}}}%%
+flowchart LR
+    EM[Episodic Memory] -->|"Repeated friction"| SIG[Urgency Signal]
+    SK[Skill Evolution] -->|"Stale tier"| SIG
+    SIG -->|"Push to next level"| ACTION[Skill Improvement]
+```
+
+**Figure EP-1:** *Cross-memory urgency detection — friction patterns in episodic records plus skill staleness trigger improvement actions.*
+
+#### Urgency Indicators
+
+| Source | Pattern | Signal |
+| ------ | ------- | ------ |
+| **Episodic** | Same skill mentioned in 3+ meditation "friction" sections | Skill has gaps |
+| **Episodic** | Learning event created for topic skill already covers | Skill is incomplete |
+| **Episodic** | Self-actualization flags skill as "needs work" | Explicit assessment |
+| **Skill tier** | Core skill stuck at Standard tier for 30+ days | Stale progression |
+| **Brain-health-grid** | Skill fails 2+ quality dimensions | Quality regression |
+
+#### Urgency Levels
+
+| Level | Criteria | Action |
+| ----- | -------- | ------ |
+| **Low** | 1 indicator | Note for next meditation |
+| **Medium** | 2 indicators or same indicator 2x | Prioritize in next session |
+| **High** | 3+ indicators or explicit assessment flag | Immediate attention |
+
+#### Example Detection
+
+```markdown
+# meditation-2026-04-15.md
+
+## Friction Points
+- api-design skill didn't cover rate limiting patterns (3rd time this month)
+- Had to look up REST conventions that should be in skill
+
+## Insights
+- api-design skill needs expansion for modern patterns
+```
+
+This episodic record, combined with brain-health-grid showing `api-design` at 2/5 on "depth", creates a **High urgency signal**.
+
+#### Future Implementation (v8.x)
+
+The Nudge Engine could surface skill urgency:
+
+```typescript
+interface SkillUrgencyNudge {
+  skill: string;
+  urgencyLevel: 'low' | 'medium' | 'high';
+  indicators: string[];
+  suggestedAction: 'review' | 'expand' | 'restructure';
+}
+```
+
+This turns episodic memory from passive archive into active improvement driver.
+
+---
+
+## Cross-Heir Intelligence (AI-Memory)
+
+### Overview
+
+**AI-Memory** (`~/OneDrive - Correa Family/AI-Memory/`) is the global knowledge repository that aggregates insights across all Alex instances (Master + heirs). This enables **fleet-wide learning**: patterns discovered in one heir project can improve all others.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280'}}}%%
+flowchart TB
+    subgraph HEIRS["Heir Projects"]
+        H1["Heir A<br/>episodic/"]
+        H2["Heir B<br/>episodic/"]
+        H3["Heir C<br/>episodic/"]
+    end
+
+    subgraph AIMEM["AI-Memory (OneDrive)"]
+        FB["feedback/"]
+        INS["insights/"]
+        PAT["patterns/"]
+        GK["global-knowledge.md"]
+    end
+
+    subgraph MASTER["Master Alex"]
+        TRIAGE["Triage"]
+        EVOLVE["Skill Evolution"]
+    end
+
+    H1 -->|"bug reports"| FB
+    H2 -->|"feature requests"| FB
+    H3 -->|"friction patterns"| INS
+
+    FB -->|"aggregate"| TRIAGE
+    INS -->|"synthesize"| PAT
+
+    TRIAGE -->|"fix & sync"| EVOLVE
+    PAT -->|"promote"| GK
+
+    EVOLVE -->|"upgraded skills"| H1
+    EVOLVE -->|"upgraded skills"| H2
+    EVOLVE -->|"upgraded skills"| H3
+
+    style HEIRS fill:#e8f5e9,stroke:#2e7d32
+    style AIMEM fill:#e3f2fd,stroke:#1565c0
+    style MASTER fill:#fff3e0,stroke:#ef6c00
+```
+
+**Figure GK-1:** *Cross-heir intelligence flow — feedback and insights aggregate in AI-Memory, Master triages and evolves skills, upgrades sync back to heirs.*
+
+### AI-Memory Structure
+
+```text
+~/OneDrive - Correa Family/AI-Memory/
+├── feedback/                          # Heir submissions (bugs, features)
+│   ├── 2026-04-15-bug-dream-fails.md
+│   └── 2026-04-10-feature-bulk-convert.md
+├── insights/                          # Timestamped learnings (GI-*)
+│   └── GI-react-hooks-gotcha-2026-04-08.md
+├── patterns/                          # Promoted patterns (GK-*)
+│   └── GK-error-boundary-pattern.md
+├── knowledge/                         # Domain knowledge (DK-*)
+│   └── DK-azure-functions-gotchas.md
+├── global-knowledge.md                # Master synthesis file
+├── user-profile.json                  # Identity & preferences
+├── project-registry.json              # Known heir projects
+└── index.json                         # Search index
+```
+
+### Feedback Flow (Current)
+
+| Step | Actor | Action |
+| ---- | ----- | ------ |
+| 1 | Heir | Creates `feedback/{date}-{type}-{slug}.md` with YAML frontmatter |
+| 2 | Master | Checks if issue exists in Master |
+| 3 | Master | Fixes if applicable |
+| 4 | Master | Syncs fix to heirs via `heir-sync` |
+| 5 | Master | **Deletes feedback file** (resolution in CHANGELOG/git) |
+
+### Gaps in Current Process
+
+| Gap | Impact | Improvement Needed |
+| --- | ------ | ------------------ |
+| No aggregation view | Can't see patterns across heirs | Dashboard or report |
+| Manual triage | Relies on remembering to check | Nudge when feedback exists |
+| No insight extraction | Feedback deleted without learning | Extract patterns before delete |
+| No heir episodic access | Can't see friction patterns in heirs | Sync episodic summaries |
+| Stale project registry | Don't know which heirs are active | Auto-update on heir sync |
+
+### Future: Fleet-Wide Intelligence (v8.x)
+
+#### Feedback Aggregation
+
+```typescript
+interface FeedbackAggregation {
+  // Group by skill or component
+  bySkill: Map<string, FeedbackItem[]>;
+  // Track frequency
+  hotspots: { skill: string; count: number; severity: number }[];
+  // Urgency scoring
+  fleetUrgency: 'low' | 'medium' | 'high';
+}
+```
+
+**Signal**: If 3 heirs report friction with same skill → High fleet urgency.
+
+#### Episodic Summaries
+
+Heirs could sync episodic **summaries** (not full records) to AI-Memory:
+
+```markdown
+# Heir: ProjectX — Episodic Summary (2026-04)
+
+## Friction Points (aggregated)
+- api-design: 3 mentions
+- testing-strategies: 2 mentions
+- git-workflow: 1 mention
+
+## Successful Patterns
+- mcp-development: used 5x, no friction
+```
+
+This preserves privacy (no full meditation records shared) while enabling fleet learning.
+
+#### Pattern Promotion Pipeline
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'background': '#f8f9fa', 'primaryColor': '#dbe9f6', 'primaryTextColor': '#1f2328', 'primaryBorderColor': '#6ea8d9', 'lineColor': '#6b7280'}}}%%
+flowchart LR
+    HEIR["Heir discovers<br/>pattern"] --> LOCAL["Local insight<br/>(GI-*)"]
+    LOCAL -->|"Reused 3x"| PROMOTE["Promote to<br/>AI-Memory"]
+    PROMOTE --> REVIEW["Master review"]
+    REVIEW -->|"Validated"| GLOBAL["Global pattern<br/>(GK-*)"]
+    GLOBAL --> SYNC["Sync to<br/>all heirs"]
+```
+
+**Figure GK-2:** *Pattern promotion pipeline — local insights graduate to global patterns through validation.*
+
+### Implementation Roadmap
+
+| Version | Enhancement |
+| ------- | ----------- |
+| v8.0.0 | Nudge when `AI-Memory/feedback/` has unprocessed items |
+| v8.1.0 | Feedback aggregation view (grouped by skill) |
+| v8.2.0 | Episodic summary sync from heirs |
+| v8.3.0 | Cross-reference heir summaries with skill urgency |
+| v8.4.0 | Automated pattern promotion suggestions |
+
+---
 
 ## Skills (Domain Knowledge)
 

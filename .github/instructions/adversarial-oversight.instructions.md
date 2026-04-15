@@ -62,26 +62,10 @@ These operations **MUST** trigger Validator agent review:
 
 ### Standard Pattern: Builder → Validator → Merge
 
-```mermaid
-flowchart TD
-    BUILD["Builder  creates/implements"] --> REQUEST["Request  Validation"]
-    REQUEST --> VALIDATOR["Validator  reviews adversarially"]
-    VALIDATOR -->|Critical Issues| BLOCK["🔴 Block  with detailed notes"]
-    VALIDATOR -->|No Blockers| APPROVE["✅ Approve  with observations"]
-    BLOCK --> FIX["Builder  addresses issues"]
-    FIX --> VALIDATOR
-    APPROVE --> MERGE["Merge/Release/Promote"]
-    
-    style BUILD fill:#cce5ff,stroke:#4a90d9,color:#333
-    style REQUEST fill:#b3d9ff,stroke:#4a90d9,color:#333
-    style VALIDATOR fill:#e6d5f2,stroke:#8b6eb3,color:#333
-    style BLOCK fill:#ffd6d6,stroke:#d73a49,color:#333
-    style APPROVE fill:#c2f0d8,stroke:#4db37d,color:#333
-    style FIX fill:#cce5ff,stroke:#4a90d9,color:#333
-    style MERGE fill:#c2f0d8,stroke:#4db37d,color:#333
-    
-    linkStyle default stroke:#57606a,stroke-width:1.5px
-```
+**Builder** creates/implements → **Request Validation** → **Validator** reviews adversarially
+
+- If critical issues → 🔴 **Block** with detailed notes → **Builder** addresses issues → back to Validator
+- If no blockers → ✅ **Approve** with observations → **Merge/Release/Promote**
 
 ### How to Trigger Validator
 
@@ -299,38 +283,16 @@ Adversarial oversight succeeds when:
 
 ## Quick Reference: When to Invoke Validator
 
-```mermaid
-flowchart TD
-    TASK["Task or Change"] --> CRITICAL{"Critical operation?"}
-    CRITICAL -->|Yes| MANDATORY["🔴 MANDATORY  Validator Review"]
-    CRITICAL -->|No| HIGH{"High risk?"}
-    HIGH -->|Yes| RECOMMENDED["🟠 RECOMMENDED  Validator Review"]
-    HIGH -->|No| OPTIONAL["🟡 Optional  Consider for complex work"]
-    
-    MANDATORY --> REVIEW["Validation Gate"]
-    RECOMMENDED --> REVIEW
-    OPTIONAL --> REVIEW
-    
-    REVIEW --> REPORT["Validator Delivers Report"]
-    REPORT --> BLOCKED{"Blocked?"}
-    BLOCKED -->|Yes| FIX["Fix Issues"]
-    BLOCKED -->|No| PROCEED["Proceed with Confidence"]
-    FIX --> REVIEW
-    
-    style TASK fill:#b3d9ff,stroke:#4a90d9,color:#333
-    style CRITICAL fill:#e6d5f2,stroke:#8b6eb3,color:#333
-    style HIGH fill:#e6d5f2,stroke:#8b6eb3,color:#333
-    style MANDATORY fill:#ffd6d6,stroke:#d73a49,color:#333
-    style RECOMMENDED fill:#ffe8cc,stroke:#d9822b,color:#333
-    style OPTIONAL fill:#fff8dc,stroke:#9a6700,color:#333
-    style REVIEW fill:#e6d5f2,stroke:#8b6eb3,color:#333
-    style REPORT fill:#cce5ff,stroke:#4a90d9,color:#333
-    style BLOCKED fill:#e6d5f2,stroke:#8b6eb3,color:#333
-    style FIX fill:#ffe8cc,stroke:#d9822b,color:#333
-    style PROCEED fill:#c2f0d8,stroke:#4db37d,color:#333
-    
-    linkStyle default stroke:#57606a,stroke-width:1.5px
-```
+**Task or Change** → Is it critical? → 🔴 **MANDATORY** Validator Review
+
+If not critical → Is it high risk? → 🟠 **RECOMMENDED** Validator Review
+
+If not high risk → 🟡 **Optional** (consider for complex work)
+
+All paths → **Validation Gate** → **Validator Delivers Report**
+
+- If blocked → **Fix Issues** → back to Validation Gate
+- If approved → **Proceed with Confidence**
 
 ---
 

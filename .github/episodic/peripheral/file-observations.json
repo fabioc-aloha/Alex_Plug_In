@@ -1,20 +1,38 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/agents/alex-azure.agent.md",
-    "AFCP-LEVERAGE-ANALYSIS.md",
+    "github/agents/alex-brain-ops.agent.md",
+    "CHANGELOG.md",
+    "ROADMAP.md",
     "alex_docs/architecture/AGENTIC-SKILL-ARCHITECTURE.md",
-    "alex_docs/guides/USER-MANUAL.md",
-    "alex_docs/safety/RAI-SAFETY-TEST-GUIDE.md",
-    "scripts/audit-architecture.cjs",
-    "scripts/audit-synapses.cjs"
+    "alex_docs/architecture/MEMORY-SYSTEMS.md",
+    "platforms/vscode-extension/CHANGELOG.md",
+    "platforms/vscode-extension/package.json",
+    "PLAN-v8.0.0.md",
+    "alex_docs/research/OPENCLAW-ALEX-INTEGRATION.md",
+    "alex_docs/research/ROUNDTABLE-SPEAKER-DIARIZATION.docx"
   ],
   "todoHotspots": [
     {
-      "file": "platforms/m365-copilot/appPackage/knowledge/code-quality.txt",
+      "file": "CHANGELOG.md",
+      "todoCount": 10,
+      "scannedAt": 1776273858664
+    },
+    {
+      "file": "platforms/vscode-extension/CHANGELOG.md",
+      "todoCount": 9,
+      "scannedAt": 1776273858664
+    },
+    {
+      "file": "alex_docs/research/ROUNDTABLE-SPEAKER-DIARIZATION.docx",
       "todoCount": 1,
-      "scannedAt": 1776261311809
+      "scannedAt": 1776273858664
+    },
+    {
+      "file": "alex_docs/research/images/diagram-1.png",
+      "todoCount": 1,
+      "scannedAt": 1776273858664
     }
   ],
-  "lastUpdated": 1776261311809
+  "lastUpdated": 1776273858664
 }
