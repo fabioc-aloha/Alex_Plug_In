@@ -23,7 +23,7 @@
      📚 DOCS           🧪 QA              🛡️ RAI
    Wiki, README       Tests, Platform    Security, Ethics
    ─────────────────  ─────────────────  ─────────────────
-   ░░░░░░░░░░  0%     ░░░░░░░░░░  0%     ░░░░░░░░░░  0%
+   ▓▓▓▓▓░░░░░ 50%     ░░░░░░░░░░  0%     ░░░░░░░░░░  0%
 ```
 
 | Lane | Focus | Tasks | Done | Progress |
@@ -32,10 +32,10 @@
 | 🔄 **Heir Sync** | Architecture sync, inheritance, heir bootstrap | 8 | 0 | ░░░░░░░░░░ 0% |
 | ⚙️ **Extension** | TypeScript code, commands, views, Health Pulse | 10 | 0 | ░░░░░░░░░░ 0% |
 | 🎨 **UI/UX** | Sidebar design, tabs, buttons, visual feedback | 10 | 0 | ░░░░░░░░░░ 0% |
-| 📚 **Docs** | Wiki, README, Marketplace, alex_docs, CHANGELOG | 8 | 0 | ░░░░░░░░░░ 0% |
+| 📚 **Docs** | Wiki, README, Marketplace, alex_docs, CHANGELOG | 8 | 4 | ▓▓▓▓▓░░░░░ 50% |
 | 🧪 **QA** | Tests, cross-platform, regression, accessibility | 6 | 0 | ░░░░░░░░░░ 0% |
 | 🛡️ **RAI** | Security, responsible AI, ethics, content safety | 6 | 0 | ░░░░░░░░░░ 0% |
-| **TOTAL** | **All lanes** | **60** | **0** | **░░░░░░░░░░ 0%** |
+| **TOTAL** | **All lanes** | **60** | **4** | **▓░░░░░░░░░ 7%** |
 
 ### Lane Backlogs
 
@@ -99,14 +99,14 @@
 | UI9 | Heir status indicator | ⬜ | H6 |
 | UI10 | Visual progress feedback | ⬜ | — |
 
-#### 📚 Docs (0/8)
+#### 📚 Docs (4/8)
 
 | ID | Task | Status | Blocks |
 |----|------|--------|--------|
-| D1 | Create GitHub Wiki structure | ⬜ | — |
-| D2 | Wiki: Getting Started guide | ⬜ | D1 |
-| D3 | Wiki: User Manual (commands, UI) | ⬜ | D1, UI3-5 |
-| D4 | Wiki: Heir Project Setup | ⬜ | D1, H4 |
+| D1 | Create GitHub Wiki structure | ✅ | — |
+| D2 | Wiki: Getting Started guide | ✅ | D1 |
+| D3 | Wiki: User Manual (commands, UI) | ✅ | D1, UI3-5 |
+| D4 | Wiki: Heir Project Setup | ✅ | D1, H4 |
 | D5 | README.md v8.0.0 refresh | ⬜ | UI1 |
 | D6 | Marketplace listing update | ⬜ | D5 |
 | D7 | CHANGELOG v8.0.0 section | ⬜ | — |
