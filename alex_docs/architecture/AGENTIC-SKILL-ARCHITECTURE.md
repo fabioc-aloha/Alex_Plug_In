@@ -340,16 +340,17 @@ The type system correctly distinguishes capabilities. The scoring model's weakne
 
 ### Agent Scoring Validation (April 2026)
 
-Agents have 4 scoring dimensions: **fm** (frontmatter), **handoffs**, **bounds**, **code**.
+Agents have 5 scoring dimensions: **fm** (frontmatter), **handoffs**, **bounds**, **persona**, **code**.
 
-| Agent | Score | fm | handoffs | bounds | code | Human Assessment |
-|-------|------:|:--:|:--------:|:------:|:----:|------------------|
-| alex-azure | 3/4 | 1 | 1 | 1 | 0 | Good tool tables, clear guidance |
-| alex | 3/4 | 1 | 1 | 1 | 0 | Full cognitive architecture, commands — core agent |
-| alex-backend | 4/4 | 1 | 1 | 1 | 1 | Code examples, complete structure |
-| alex-builder | 4/4 | 1 | 1 | 1 | 1 | Code examples, mermaid diagrams |
+| Agent | Score | fm | handoffs | bounds | persona | code | Human Assessment |
+|-------|------:|:--:|:--------:|:------:|:-------:|:----:|------------------|
+| alex-azure | 3/5 | 1 | 1 | 1 | 0 | 0 | Good tool tables, needs Mental Model |
+| alex-m365 | 3/5 | 1 | 1 | 1 | 0 | 0 | Good tool tables, needs Mental Model |
+| alex | 4/5 | 1 | 1 | 1 | 1 | 0 | Full cognitive architecture, Core Identity |
+| alex-backend | 5/5 | 1 | 1 | 1 | 1 | 1 | Complete structure with code examples |
+| alex-builder | 5/5 | 1 | 1 | 1 | 1 | 1 | Code examples, mermaid diagrams |
 
-**Distribution**: 12 agents | Passing: 12 | Perfect(4/4): 9
+**Distribution**: 12 agents | Passing: 10 | Failing: 2 | Perfect(5/5): 8
 
 #### Agent Criterion Validity
 
@@ -359,8 +360,8 @@ Agents have 4 scoring dimensions: **fm** (frontmatter), **handoffs**, **bounds**
 | **handoffs** | 12/12 | None | ✓ KEEP |
 | **~~hooks~~** | 3/12 | Only 3 agents need PostToolUse automation | ✗ REMOVED |
 | **bounds** | 12/12 | All within 50-400 lines | ✓ KEEP |
-| **~~persona~~** | 9/12 | Naming convention issue, few agents | ✗ REMOVED (enforced via skills/instructions) |
-| **code** | 9/12 | Correctly identifies code examples | ✓ KEEP |
+| **persona** | 10/12 | Expanded regex to catch `## Core Identity` | ✓ KEEP |
+| **code** | 9/12 | Correctly identifies examples | ✓ KEEP |
 
 ### Implemented Changes (April 2026)
 
@@ -368,9 +369,27 @@ Agents have 4 scoring dimensions: **fm** (frontmatter), **handoffs**, **bounds**
 
 Only 3 agents (alex-builder, alex-researcher, alex-validator) need hooks. The other 9 scored defect=0, but this wasn't a quality issue — most agents don't need `PostToolUse` automation. Removed entirely.
 
-**persona — REMOVED (enforced via skills/instructions)**
+**persona — KEEP (expanded pattern matching)**
 
-Persona is an important Alex characteristic, but with only 12 agents, manual enforcement via skills and instructions is more effective than automated header detection. The criterion had naming convention issues (`## Core Identity` didn't match pattern).
+Persona is an important Alex characteristic. Pattern expanded to match:
+- `## Mental Model`
+- `## Core Identity`
+- `## When to Use`
+- `## Mindset`
+- `## Core Directive`
+- `## Persona`
+
+**code — PSEUDOCODE POLICY**
+
+Agent examples should use **pseudocode** (language-agnostic patterns), **templates** (markdown output formats), or **diagrams** (Mermaid). Avoid language-specific syntax — agents teach patterns, not syntax.
+
+| Code Type | Example Agent | Purpose |
+|-----------|---------------|---------|
+| **Pseudocode** | Backend, Frontend, Infrastructure | Pattern communication without language debt |
+| **Templates** | Planner, Validator, Presenter | Output format consistency |
+| **Diagrams** | Builder | Visual decision flows |
+
+This policy enables semantic review (`sem` column) to audit and convert language-specific snippets to pseudocode.
 
 ### Instruction Scoring Validation (April 2026)
 

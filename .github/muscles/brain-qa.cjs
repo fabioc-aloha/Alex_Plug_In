@@ -75,10 +75,10 @@ if (!fs.existsSync(QUALITY_DIR)) {
 // Preserves sem=1 when regenerating the grid, so manual reviews aren't lost
 function readExistingSemValues() {
   const gridPath = path.join(QUALITY_DIR, "brain-health-grid.md");
-  if (!fs.existsSync(gridPath)) return { skills: {}, instructions: {} };
+  if (!fs.existsSync(gridPath)) return { skills: {}, instructions: {}, agents: {} };
 
   const content = fs.readFileSync(gridPath, "utf-8");
-  const semValues = { skills: {}, instructions: {} };
+  const semValues = { skills: {}, instructions: {}, agents: {} };
 
   // Parse Skills table: | skill-name | ... | inh | stale | sem |
   // Table format: | name | tier | lines | fm | code | bounds | tri | muscle | Type | Score | Pass | inh | stale | sem |
@@ -89,6 +89,17 @@ function readExistingSemValues() {
       const name = match[1];
       const sem = parseInt(match[2], 10);
       semValues.skills[name] = sem;
+    }
+  }
+
+  // Parse Agents table: | agent-name | lines | ... | sem |
+  const agentsSection = content.match(/## Agents[\s\S]*?(?=## Instructions|## Prompts|## Overall|$)/);
+  if (agentsSection) {
+    const agentRows = agentsSection[0].matchAll(/^\| ([\w-]+) \| \d+ \|.*\| (\d) \|$/gm);
+    for (const match of agentRows) {
+      const name = match[1];
+      const sem = parseInt(match[2], 10);
+      semValues.agents[name] = sem;
     }
   }
 
@@ -297,20 +308,27 @@ function scanAgents() {
     // Check bounds (not too thin, not too bloated)
     const withinBounds = lines >= MIN_AGENT_LINES && lines <= MAX_AGENT_LINES;
 
+    // Check persona (has mental model / when to use / persona section)
+    const hasPersona = /##\s*(mental model|when to use|persona|mindset|core directive|core identity)/i.test(content);
+
     // Check code examples
     const hasCode = /```\w+/.test(content);
+
+    // Semantic review flag (preserved from previous grid, default 0)
+    const sem = EXISTING_SEM.agents[name] ?? 0;
 
     const flags = {
       fm: fmComplete ? 1 : 0,
       handoffs: hasHandoffs ? 1 : 0,
       bounds: withinBounds ? 1 : 0,
+      persona: hasPersona ? 1 : 0,
       code: hasCode ? 1 : 0,
     };
 
-    const score = flags.fm + flags.handoffs + flags.bounds + flags.code;
+    const score = flags.fm + flags.handoffs + flags.bounds + flags.persona + flags.code;
     // fm is a GATE - agents without frontmatter are broken
-    const pass = fmComplete && (score >= 3);
-    results.push({ name, lines, flags, score, maxScore: 4, pass });
+    const pass = fmComplete && (score >= 4);
+    results.push({ name, lines, flags, score, maxScore: 5, pass, sem });
   }
 
   return results.sort((a, b) => a.score - b.score);
@@ -533,27 +551,33 @@ function generateGrid() {
   lines.push("| **fm** | Frontmatter | Has `description`, `name`, `model`, `tools` | Missing any |");
   lines.push("| **handoffs** | Handoffs | Has `handoffs:` for agent orchestration | No handoffs |");
   lines.push(`| **bounds** | Bounds | ${MIN_AGENT_LINES}–${MAX_AGENT_LINES} lines | <${MIN_AGENT_LINES} (stub) or >${MAX_AGENT_LINES} (bloated) |`);
-  lines.push("| **code** | Code | Has code examples | No code |");
+  lines.push("| **persona** | Persona | Has `## Mental Model`, `## Core Identity`, or similar | No persona section |");
+  lines.push("| **code** | Examples | Has pseudocode, templates, or diagrams | No examples |");
   lines.push("");
-  lines.push("> **Persona enforcement**: Alex persona characteristics (mental model, mindset) are enforced via skills and instructions, not automated scoring. With only 12 agents, manual review is more effective.");
+  lines.push("> **Code policy**: Agent examples should use **pseudocode** (language-agnostic patterns), **templates** (markdown output formats), or **diagrams** (Mermaid). Avoid language-specific syntax — agents teach patterns, not syntax.");
   lines.push("");
-  lines.push("**Pass criteria**: fm=1 (gate) AND score ≥3/4");
+  lines.push("> **Semantic Review (sem)**: Audit each agent for: clear persona, appropriate examples (pseudocode not language-specific), coherent structure. Files marked 0 need optimization.");
   lines.push("");
-  lines.push("| Agent | Lines | fm | handoffs | bounds | code | Score | Pass |");
-  lines.push("|-------|------:|:--:|:--------:|:------:|:----:|------:|:----:|");;
+  lines.push("**Pass criteria**: fm=1 (gate) AND score ≥4/5");
+  lines.push("");
+  lines.push("| Agent | Lines | fm | handoffs | bounds | persona | code | Score | Pass | sem |");
+  lines.push("|-------|------:|:--:|:--------:|:------:|:-------:|:----:|------:|:----:|:---:|");
 
   for (const a of agents) {
     const f = a.flags;
     const passIcon = a.pass ? "✓" : "✗";
-    lines.push(`| ${a.name} | ${a.lines} | ${f.fm} | ${f.handoffs} | ${f.bounds} | ${f.code} | ${a.score}/4 | ${passIcon} |`);
+    lines.push(`| ${a.name} | ${a.lines} | ${f.fm} | ${f.handoffs} | ${f.bounds} | ${f.persona} | ${f.code} | ${a.score}/5 | ${passIcon} | ${a.sem} |`);
   }
 
   // Agents summary
   const agentsPassing = agents.filter(a => a.pass).length;
   const agentsFailing = agents.filter(a => !a.pass).length;
-  const agentsPerfect = agents.filter(a => a.score === 4).length;
+  const agentsPerfect = agents.filter(a => a.score === 5).length;
+  const agentsReviewed = agents.filter(a => a.sem === 1).length;
+  const agentsPending = agents.length - agentsReviewed;
   lines.push("");
-  lines.push(`**Summary**: ${agents.length} agents | Passing: ${agentsPassing} | Failing: ${agentsFailing} | Perfect(4/4): ${agentsPerfect}`);
+  lines.push(`**Summary**: ${agents.length} agents | Passing: ${agentsPassing} | Failing: ${agentsFailing} | Perfect(5/5): ${agentsPerfect}`);
+  lines.push(`**Semantic Review**: ${agentsReviewed}/${agents.length} reviewed | ${agentsPending} pending`);
 
   lines.push("");
 

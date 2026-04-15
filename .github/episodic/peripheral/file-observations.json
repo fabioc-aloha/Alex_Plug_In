@@ -1,38 +1,30 @@
 {
   "hotFiles": [],
   "stalledFiles": [
-    "github/copilot-instructions.md",
-    "ROADMAP.md",
-    "alex_docs/architecture/GLOBAL-KNOWLEDGE.md",
-    "alex_docs/architecture/MEMORY-SYSTEMS.md",
-    "alex_docs/guides/PROJECT-STRUCTURE.md",
-    "alex_docs/guides/USER-MANUAL.md",
-    "alex_docs/research/chart-gallery.html",
-    "alex_docs/research/population.html",
-    "alex_docs/research/visuals.html",
-    "alex_docs/skills/SKILLS-CATALOG.md"
+    "github/episodic/peripheral/file-observations.json",
+    "alex_docs/architecture/AGENTIC-SKILL-ARCHITECTURE.md"
   ],
   "todoHotspots": [
     {
       "file": "platforms/vscode-extension/src/commands/proposeSkill.ts",
       "todoCount": 2,
-      "scannedAt": 1776204799631
+      "scannedAt": 1776214204838
     },
     {
       "file": "platforms/vscode-extension/alex_docs/guides/AGENT-VS-CHAT-COMPARISON.md",
       "todoCount": 2,
-      "scannedAt": 1776204799631
+      "scannedAt": 1776214204838
     },
     {
       "file": "platforms/vscode-extension/alex_docs/WORKING-WITH-ALEX.md",
       "todoCount": 1,
-      "scannedAt": 1776204799631
+      "scannedAt": 1776214204838
     },
     {
       "file": "platforms/vscode-extension/alex_docs/architecture/VSCODE-BRAIN-INTEGRATION.md",
       "todoCount": 1,
-      "scannedAt": 1776204799631
+      "scannedAt": 1776214204838
     }
   ],
-  "lastUpdated": 1776204799631
+  "lastUpdated": 1776214204838
 }
