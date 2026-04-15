@@ -1,5 +1,7 @@
 # Alex v8.0.0 Modernization Plan
 
+![The path from partnership to trust](assets/banner-roadmap.svg)
+
 **Author**: Fabio Correa + Alex  
 **Created**: 2026-04-15  
 **Current Version**: v7.9.0  
@@ -967,6 +969,33 @@ The extension is Alex's delivery vehicle. The UI is the cockpit, not the cargo.
 2. **Health Dashboard**: ✅ **Integrate into sidebar** — no separate panel. Health Pulse in Home tab replaces it.
 3. **Create tools** (PPTX, Gamma, Image): ✅ **Remove from sidebar** — right-click context menu already provides these actions. Reduces button bloat.
 4. **Episodic memory**: ✅ **Keep working, no UI** — serves us well for meditation records, but doesn't need sidebar visibility. Documented in architecture docs.
+
+---
+
+## Carryover from ROADMAP.md
+
+Items from the main roadmap that align with v8.0.0 goals:
+
+### UX & Discoverability (incorporated)
+
+| Item | Effort | v8.0.0 Integration |
+| ---- | ------ | ------------------ |
+| **Frecency command ranking** | 2d | Incorporated into Quick Actions — surface most-used at top |
+| **Context-aware nudges** | 1d | Core feature of Nudge Engine — workspace type detection |
+
+### Intelligence & Insight (stretch goals)
+
+| Item | Effort | Status |
+| ---- | ------ | ------ |
+| **Insight generation pipeline** | 2d | Stretch — "what if" proposals from synapse analysis |
+| **Dream creativity score** | 1d | Stretch — measure % of novel cross-domain connections |
+
+### Alex's Aspirations (philosophical alignment)
+
+| Aspiration | Status | v8.0.0 Relevance |
+| ---------- | ------ | ---------------- |
+| **Generative Meditation** | 🟡 In progress | Cross-Heir Intelligence phase supports this |
+| **Silence as Signal** | 🟢 Complete | Nudge Engine respects — show only highest priority |
 
 ---
 
